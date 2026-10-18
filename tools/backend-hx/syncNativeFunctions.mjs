@@ -53,6 +53,7 @@ const publicFunctions = new Map(
     package_.functions.map((declaration) => [`flight.${declaration.holder}.${declaration.name}`, declaration]),
   ),
 );
+const nativeFacadeTypes = new Set(manifest.extensions.flatMap(({ publicTypes }) => publicTypes));
 
 const expected = new Map();
 const manifestEntries = [];
@@ -95,7 +96,10 @@ for (const module of manifest.modules) {
   });
   const directBindings = bindings.filter(({ plan }) => plan.transport === 'direct');
   const adapterBindings = bindings.filter(({ plan }) => plan.transport === 'adapter');
-  expected.set(path.join(root, 'src-cpp', 'flight', `${holder}.hx`), emitFacade(holder, bindings));
+  expected.set(
+    path.join(root, 'src-cpp', 'flight', `${holder}.hx`),
+    emitFacade(holder, bindings, nativeFacadeTypes.has(module.module)),
+  );
   expected.set(path.join(root, 'src', 'flight', '_cpp', '_fn', `${holder}.hx`), emitExtern(holder, bindings));
   if (directBindings.length > 0) {
     expected.set(
@@ -122,6 +126,7 @@ const duplicatePublicNames = manifestPublicNames.filter((name, index) => manifes
 if (duplicatePublicNames.length > 0) {
   throw new Error(`Native manifest repeats public functions: ${[...new Set(duplicatePublicNames)].sort(compareText).join(', ')}`);
 }
+validateScalarOverrideRefusals(new Set(manifestPublicNames));
 const promotablePublicNames = planning.declarations
   .filter(
     ({ kind, transport, headerStatus }) =>
@@ -167,12 +172,15 @@ process.stdout.write(
     `${String(manifestEntries.filter(({ provenance }) => provenance === scalarOverrideProvenance).length)} downstream scalar override).\n`,
 );
 
-function emitFacade(holder, bindings) {
+function emitFacade(holder, bindings, includeNativeTypeAlias) {
   const lines = [
     '// Generated from src-cpp/manifest.json and flight-compiler native-planning.json. Do not edit.',
     'package flight;',
     '',
   ];
+  if (includeNativeTypeAlias) {
+    lines.push(`typedef ${holder} = flight._cpp.${holder};`, '');
+  }
   for (const { declaration, parsed } of bindings) {
     lines.push(`inline ${declaration.signature} {`);
     const call = `flight._cpp._fn.${holder}.${declaration.name}(${parsed.parameters.map(({ name }) => name).join(', ')})`;
@@ -248,6 +256,32 @@ function validateScalarOverride(publicName, binding, declaration, parsed) {
   const expectedSignature = `inline ${cppType(parsed.result)} ${cppName}(${parameters})`;
   if (!readFileSync(headerPath, 'utf8').includes(expectedSignature)) {
     throw new Error(`${publicName} override header does not contain ${expectedSignature}`);
+  }
+}
+
+function validateScalarOverrideRefusals(boundPublicNames) {
+  const seen = new Set();
+  for (const refusal of manifest.scalarOverrideRefusals ?? []) {
+    if (seen.has(refusal.publicName)) throw new Error(`Duplicate scalar override refusal ${refusal.publicName}`);
+    seen.add(refusal.publicName);
+    if (refusal.code !== 'flight-cpp-header-compile-failed') {
+      throw new Error(`${refusal.publicName} has unknown scalar override refusal ${String(refusal.code)}`);
+    }
+    if (!publicFunctions.has(refusal.publicName)) {
+      throw new Error(`Scalar override refusal is absent from the default web API: ${refusal.publicName}`);
+    }
+    if (planned.has(refusal.publicName)) {
+      throw new Error(`${refusal.publicName} is now compiler-planned; remove its scalar override refusal`);
+    }
+    if (boundPublicNames.has(refusal.publicName)) {
+      throw new Error(`${refusal.publicName} is both bound and recorded as a scalar override refusal`);
+    }
+    if (flightCppHeaderStatuses.get(refusal.header) !== 'emitted') {
+      throw new Error(`${refusal.publicName} refusal header status drifted: ${refusal.header}`);
+    }
+    if (typeof refusal.detail !== 'string' || refusal.detail.length === 0) {
+      throw new Error(`${refusal.publicName} scalar override refusal has no diagnostic detail`);
+    }
   }
 }
 

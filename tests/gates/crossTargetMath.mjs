@@ -156,6 +156,9 @@ function validateNativeManifest(flightCpp) {
     if (!existsSync(selector) || !existsSync(implementation)) {
       fail(`native public Scene2D type selector or implementation is missing: ${typeName}`);
     }
+    if (!readFileSync(selector, 'utf8').includes(`typedef ${holder} = flight._cpp.${holder};`)) {
+      fail(`native public Scene2D type selector lost its ${typeName} alias`);
+    }
   }
 
   const generatedManifest = JSON.parse(

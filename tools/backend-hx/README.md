@@ -25,6 +25,8 @@ downstream scalar overrides only when a dependency-complete flight-cpp header co
 required-primitive signature and the compiler plan does not yet contain that function. Schema,
 compiler revision, locator, carrier, emitted adapter body, header status, provenance, and web
 signature drift all fail loudly.
+Failed compile probes remain manifest-recorded scalar override refusals; an emitted or
+dependency-complete inventory status never silently becomes Haxe support.
 `reconcileNativeSurface.mjs` then compares it with flight-cpp's best-effort/refusal inventories and
 the manifest-pinned native Haxe partition. Its `src-cpp/reconciliation.json` output distinguishes
 dependency-complete headers, dependency-incomplete headers, hard refusals, compile-proven bindings,

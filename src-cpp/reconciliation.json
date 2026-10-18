@@ -47,6 +47,16 @@
       }
     ]
   },
+  "nativeOverrides": {
+    "refusals": [
+      {
+        "publicName": "flight.Skeleton2dFormats.clampUnit",
+        "header": "flight/skeleton2d_formats/spine_parse_helpers.hpp",
+        "code": "flight-cpp-header-compile-failed",
+        "detail": "Unrelated generated functions in the header contain unresolved flight::Any conversions, comparisons, and indexing."
+      }
+    ]
+  },
   "packages": [
     {
       "compilerPlan": {
@@ -558,7 +568,7 @@
         },
         {
           "code": "native-function-gap",
-          "count": 18
+          "count": 17
         },
         {
           "code": "non-scalar-signature-review",
@@ -566,7 +576,7 @@
         },
         {
           "code": "header-confirmed-scalar-probe-candidates",
-          "count": 3
+          "count": 2
         },
         {
           "code": "compiler-haxe-cpp-refused-bindings",
@@ -574,7 +584,14 @@
         }
       ],
       "nativeDefault": {
-        "functions": [],
+        "functions": [
+          {
+            "header": "flight/bitmapfont/bitmap_font.hpp",
+            "holder": "Bitmapfont",
+            "name": "packBitmapFontKerningKey",
+            "native": "flight::bitmapfont::pack_bitmap_font_kerning_key"
+          }
+        ],
         "types": [],
         "values": []
       },
@@ -603,21 +620,9 @@
           "holder": "Bitmapfont",
           "name": "enableBitmapFontGuards",
           "signature": "function enableBitmapFontGuards():Void"
-        },
-        {
-          "cppName": "pack_bitmap_font_kerning_key",
-          "headers": [
-            {
-              "path": "flight/bitmapfont/bitmap_font.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Bitmapfont",
-          "name": "packBitmapFontKerningKey",
-          "signature": "function packBitmapFontKerningKey(left:Float, right:Float):Float"
         }
       ],
-      "status": "emitted-unbound",
+      "status": "partial-native",
       "webDefault": {
         "functions": 18,
         "types": 0,
@@ -1188,7 +1193,7 @@
         },
         {
           "code": "native-function-gap",
-          "count": 140
+          "count": 139
         },
         {
           "code": "native-value-gap",
@@ -1199,35 +1204,25 @@
           "count": 129
         },
         {
-          "code": "header-confirmed-scalar-probe-candidates",
-          "count": 1
-        },
-        {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 141
         }
       ],
       "nativeDefault": {
-        "functions": [],
+        "functions": [
+          {
+            "header": "flight/collision/contact_feature_id.hpp",
+            "holder": "Collision",
+            "name": "packContactFeatureId",
+            "native": "flight::collision::pack_contact_feature_id"
+          }
+        ],
         "types": [],
         "values": []
       },
       "package": "@flighthq/collision",
-      "scalarProbeCandidates": [
-        {
-          "cppName": "pack_contact_feature_id",
-          "headers": [
-            {
-              "path": "flight/collision/contact_feature_id.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Collision",
-          "name": "packContactFeatureId",
-          "signature": "function packContactFeatureId(referenceIsA:Bool, referenceEdge:Float, incidentEdge:Float, secondPoint:Bool):Float"
-        }
-      ],
-      "status": "emitted-unbound",
+      "scalarProbeCandidates": [],
+      "status": "partial-native",
       "webDefault": {
         "functions": 140,
         "types": 0,
@@ -2520,7 +2515,7 @@
         },
         {
           "code": "native-function-gap",
-          "count": 47
+          "count": 44
         },
         {
           "code": "native-value-gap",
@@ -2535,59 +2530,37 @@
           "count": 42
         },
         {
-          "code": "header-confirmed-scalar-probe-candidates",
-          "count": 3
-        },
-        {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 58
         }
       ],
       "nativeDefault": {
-        "functions": [],
+        "functions": [
+          {
+            "header": "flight/font_formats/woff2_glyf_transform.hpp",
+            "holder": "FontFormats",
+            "name": "getWoff2BboxBitmapByteLength",
+            "native": "flight::font_formats::get_woff2_bbox_bitmap_byte_length"
+          },
+          {
+            "header": "flight/font_formats/woff2_glyf_transform.hpp",
+            "holder": "FontFormats",
+            "name": "isWoff2PointOnCurve",
+            "native": "flight::font_formats::is_woff2_point_on_curve"
+          },
+          {
+            "header": "flight/font_formats/open_type_cmap.hpp",
+            "holder": "FontFormats",
+            "name": "rankOpenTypeUnicodeEncoding",
+            "native": "flight::font_formats::rank_open_type_unicode_encoding"
+          }
+        ],
         "types": [],
         "values": []
       },
       "package": "@flighthq/font-formats",
-      "scalarProbeCandidates": [
-        {
-          "cppName": "get_woff2_bbox_bitmap_byte_length",
-          "headers": [
-            {
-              "path": "flight/font_formats/woff2_glyf_transform.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "FontFormats",
-          "name": "getWoff2BboxBitmapByteLength",
-          "signature": "function getWoff2BboxBitmapByteLength(glyphCount:Float):Float"
-        },
-        {
-          "cppName": "is_woff2_point_on_curve",
-          "headers": [
-            {
-              "path": "flight/font_formats/woff2_glyf_transform.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "FontFormats",
-          "name": "isWoff2PointOnCurve",
-          "signature": "function isWoff2PointOnCurve(flag:Float):Bool"
-        },
-        {
-          "cppName": "rank_open_type_unicode_encoding",
-          "headers": [
-            {
-              "path": "flight/font_formats/open_type_cmap.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "FontFormats",
-          "name": "rankOpenTypeUnicodeEncoding",
-          "signature": "function rankOpenTypeUnicodeEncoding(platform:Float, encoding:Float):Float"
-        }
-      ],
-      "status": "emitted-unbound",
+      "scalarProbeCandidates": [],
+      "status": "partial-native",
       "webDefault": {
         "functions": 47,
         "types": 3,
@@ -3783,15 +3756,11 @@
         },
         {
           "code": "native-function-gap",
-          "count": 49
+          "count": 48
         },
         {
           "code": "non-scalar-signature-review",
           "count": 48
-        },
-        {
-          "code": "header-confirmed-scalar-probe-candidates",
-          "count": 1
         },
         {
           "code": "compiler-haxe-cpp-refused-bindings",
@@ -3799,26 +3768,20 @@
         }
       ],
       "nativeDefault": {
-        "functions": [],
+        "functions": [
+          {
+            "header": "flight/lighting/light_intensity.hpp",
+            "holder": "Lighting",
+            "name": "applyLightExposure",
+            "native": "flight::lighting::apply_light_exposure"
+          }
+        ],
         "types": [],
         "values": []
       },
       "package": "@flighthq/lighting",
-      "scalarProbeCandidates": [
-        {
-          "cppName": "apply_light_exposure",
-          "headers": [
-            {
-              "path": "flight/lighting/light_intensity.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Lighting",
-          "name": "applyLightExposure",
-          "signature": "function applyLightExposure(intensity:Float, ev:Float):Float"
-        }
-      ],
-      "status": "emitted-unbound",
+      "scalarProbeCandidates": [],
+      "status": "partial-native",
       "webDefault": {
         "functions": 49,
         "types": 0,
@@ -3983,7 +3946,7 @@
         },
         {
           "code": "native-function-gap",
-          "count": 95
+          "count": 87
         },
         {
           "code": "non-scalar-signature-review",
@@ -3991,7 +3954,7 @@
         },
         {
           "code": "header-confirmed-scalar-probe-candidates",
-          "count": 10
+          "count": 2
         },
         {
           "code": "compiler-haxe-cpp-refused-bindings",
@@ -3999,7 +3962,56 @@
         }
       ],
       "nativeDefault": {
-        "functions": [],
+        "functions": [
+          {
+            "header": "flight/materials/phong_to_pbr.hpp",
+            "holder": "Materials",
+            "name": "getPbrMetallicFromPhongSpecular",
+            "native": "flight::materials::get_pbr_metallic_from_phong_specular"
+          },
+          {
+            "header": "flight/materials/phong_to_pbr.hpp",
+            "holder": "Materials",
+            "name": "getPbrRoughnessFromPhongShininess",
+            "native": "flight::materials::get_pbr_roughness_from_phong_shininess"
+          },
+          {
+            "header": "flight/materials/phong_to_pbr.hpp",
+            "holder": "Materials",
+            "name": "getPhongToPbrLightExposure",
+            "native": "flight::materials::get_phong_to_pbr_light_exposure"
+          },
+          {
+            "header": "flight/materials/material_validation.hpp",
+            "holder": "Materials",
+            "name": "isValidMaterialClearcoat",
+            "native": "flight::materials::is_valid_material_clearcoat"
+          },
+          {
+            "header": "flight/materials/material_validation.hpp",
+            "holder": "Materials",
+            "name": "isValidMaterialIor",
+            "native": "flight::materials::is_valid_material_ior"
+          },
+          {
+            "header": "flight/materials/material_validation.hpp",
+            "holder": "Materials",
+            "name": "isValidMaterialIridescenceThickness",
+            "native": "flight::materials::is_valid_material_iridescence_thickness"
+          },
+          {
+            "header": "flight/materials/material_validation.hpp",
+            "holder": "Materials",
+            "name": "isValidMaterialWeight",
+            "native": "flight::materials::is_valid_material_weight"
+          },
+          {
+            "header": "flight/materials/pbr_extension.hpp",
+            "holder": "Materials",
+            "name": "isValidPbrUvSet",
+            "native": "flight::materials::is_valid_pbr_uv_set"
+          }
+        ],
         "types": [],
         "values": []
       },
@@ -4028,105 +4040,9 @@
           "holder": "Materials",
           "name": "enableMaterialConversionGuards",
           "signature": "function enableMaterialConversionGuards():Void"
-        },
-        {
-          "cppName": "get_pbr_metallic_from_phong_specular",
-          "headers": [
-            {
-              "path": "flight/materials/phong_to_pbr.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Materials",
-          "name": "getPbrMetallicFromPhongSpecular",
-          "signature": "function getPbrMetallicFromPhongSpecular(specular:Float, diffuse:Float):Float"
-        },
-        {
-          "cppName": "get_pbr_roughness_from_phong_shininess",
-          "headers": [
-            {
-              "path": "flight/materials/phong_to_pbr.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Materials",
-          "name": "getPbrRoughnessFromPhongShininess",
-          "signature": "function getPbrRoughnessFromPhongShininess(shininess:Float):Float"
-        },
-        {
-          "cppName": "get_phong_to_pbr_light_exposure",
-          "headers": [
-            {
-              "path": "flight/materials/phong_to_pbr.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Materials",
-          "name": "getPhongToPbrLightExposure",
-          "signature": "function getPhongToPbrLightExposure():Float"
-        },
-        {
-          "cppName": "is_valid_material_clearcoat",
-          "headers": [
-            {
-              "path": "flight/materials/material_validation.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Materials",
-          "name": "isValidMaterialClearcoat",
-          "signature": "function isValidMaterialClearcoat(value:Float):Bool"
-        },
-        {
-          "cppName": "is_valid_material_ior",
-          "headers": [
-            {
-              "path": "flight/materials/material_validation.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Materials",
-          "name": "isValidMaterialIor",
-          "signature": "function isValidMaterialIor(value:Float):Bool"
-        },
-        {
-          "cppName": "is_valid_material_iridescence_thickness",
-          "headers": [
-            {
-              "path": "flight/materials/material_validation.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Materials",
-          "name": "isValidMaterialIridescenceThickness",
-          "signature": "function isValidMaterialIridescenceThickness(value:Float):Bool"
-        },
-        {
-          "cppName": "is_valid_material_weight",
-          "headers": [
-            {
-              "path": "flight/materials/material_validation.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Materials",
-          "name": "isValidMaterialWeight",
-          "signature": "function isValidMaterialWeight(value:Float):Bool"
-        },
-        {
-          "cppName": "is_valid_pbr_uv_set",
-          "headers": [
-            {
-              "path": "flight/materials/pbr_extension.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Materials",
-          "name": "isValidPbrUvSet",
-          "signature": "function isValidPbrUvSet(value:Float):Bool"
         }
       ],
-      "status": "emitted-unbound",
+      "status": "partial-native",
       "webDefault": {
         "functions": 95,
         "types": 0,
@@ -6956,7 +6872,7 @@
         },
         {
           "code": "native-function-gap",
-          "count": 203
+          "count": 201
         },
         {
           "code": "native-value-gap",
@@ -6967,47 +6883,31 @@
           "count": 199
         },
         {
-          "code": "header-confirmed-scalar-probe-candidates",
-          "count": 2
-        },
-        {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 215
         }
       ],
       "nativeDefault": {
-        "functions": [],
+        "functions": [
+          {
+            "header": "flight/scene2d_formats/rive_core_properties.hpp",
+            "holder": "Scene2dFormats",
+            "name": "isRiveCoreBytesProperty",
+            "native": "flight::scene2d_formats::is_rive_core_bytes_property"
+          },
+          {
+            "header": "flight/scene2d_formats/rive_core_types.hpp",
+            "holder": "Scene2dFormats",
+            "name": "isRiveCoreTypeDerivedFrom",
+            "native": "flight::scene2d_formats::is_rive_core_type_derived_from"
+          }
+        ],
         "types": [],
         "values": []
       },
       "package": "@flighthq/scene2d-formats",
-      "scalarProbeCandidates": [
-        {
-          "cppName": "is_rive_core_bytes_property",
-          "headers": [
-            {
-              "path": "flight/scene2d_formats/rive_core_properties.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Scene2dFormats",
-          "name": "isRiveCoreBytesProperty",
-          "signature": "function isRiveCoreBytesProperty(key:Float):Bool"
-        },
-        {
-          "cppName": "is_rive_core_type_derived_from",
-          "headers": [
-            {
-              "path": "flight/scene2d_formats/rive_core_types.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Scene2dFormats",
-          "name": "isRiveCoreTypeDerivedFrom",
-          "signature": "function isRiveCoreTypeDerivedFrom(typeKey:Float, ancestorTypeKey:Float):Bool"
-        }
-      ],
-      "status": "emitted-unbound",
+      "scalarProbeCandidates": [],
+      "status": "partial-native",
       "webDefault": {
         "functions": 203,
         "types": 0,
@@ -7879,7 +7779,7 @@
         },
         {
           "code": "native-function-gap",
-          "count": 85
+          "count": 84
         },
         {
           "code": "native-value-gap",
@@ -7895,7 +7795,7 @@
         },
         {
           "code": "header-confirmed-scalar-probe-candidates",
-          "count": 7
+          "count": 6
         },
         {
           "code": "compiler-haxe-cpp-refused-bindings",
@@ -7903,7 +7803,14 @@
         }
       ],
       "nativeDefault": {
-        "functions": [],
+        "functions": [
+          {
+            "header": "flight/shape/shape_fill.hpp",
+            "holder": "Shape",
+            "name": "getPathCommandOperandCount",
+            "native": "flight::shape::get_path_command_operand_count"
+          }
+        ],
         "types": [],
         "values": []
       },
@@ -7958,18 +7865,6 @@
           "signature": "function enableShapeBoundsGuards():Void"
         },
         {
-          "cppName": "get_path_command_operand_count",
-          "headers": [
-            {
-              "path": "flight/shape/shape_fill.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Shape",
-          "name": "getPathCommandOperandCount",
-          "signature": "function getPathCommandOperandCount(verb:Float):Float"
-        },
-        {
           "cppName": "get_shape_bounds_command_registry_revision",
           "headers": [
             {
@@ -7994,7 +7889,7 @@
           "signature": "function registerDefaultShapeBoundsCommands():Void"
         }
       ],
-      "status": "emitted-unbound",
+      "status": "partial-native",
       "webDefault": {
         "functions": 85,
         "types": 3,
@@ -8398,7 +8293,7 @@
         },
         {
           "code": "native-function-gap",
-          "count": 149
+          "count": 148
         },
         {
           "code": "native-value-gap",
@@ -8410,7 +8305,7 @@
         },
         {
           "code": "header-confirmed-scalar-probe-candidates",
-          "count": 2
+          "count": 1
         },
         {
           "code": "compiler-haxe-cpp-refused-bindings",
@@ -8418,24 +8313,19 @@
         }
       ],
       "nativeDefault": {
-        "functions": [],
+        "functions": [
+          {
+            "header": "flight/skeleton2d_formats/spine_binary_parse_helpers.hpp",
+            "holder": "Skeleton2dFormats",
+            "name": "clampSpineBinaryUnit",
+            "native": "flight::skeleton2d_formats::clamp_spine_binary_unit"
+          }
+        ],
         "types": [],
         "values": []
       },
       "package": "@flighthq/skeleton2d-formats",
       "scalarProbeCandidates": [
-        {
-          "cppName": "clamp_spine_binary_unit",
-          "headers": [
-            {
-              "path": "flight/skeleton2d_formats/spine_binary_parse_helpers.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Skeleton2dFormats",
-          "name": "clampSpineBinaryUnit",
-          "signature": "function clampSpineBinaryUnit(value:Float):Float"
-        },
         {
           "cppName": "clamp_unit",
           "headers": [
@@ -8449,7 +8339,7 @@
           "signature": "function clampUnit(value:Float):Float"
         }
       ],
-      "status": "emitted-unbound",
+      "status": "partial-native",
       "webDefault": {
         "functions": 149,
         "types": 0,
@@ -9126,7 +9016,7 @@
         },
         {
           "code": "native-function-gap",
-          "count": 71
+          "count": 70
         },
         {
           "code": "native-value-gap",
@@ -9142,7 +9032,7 @@
         },
         {
           "code": "header-confirmed-scalar-probe-candidates",
-          "count": 4
+          "count": 3
         },
         {
           "code": "compiler-haxe-cpp-refused-bindings",
@@ -9150,7 +9040,14 @@
         }
       ],
       "nativeDefault": {
-        "functions": [],
+        "functions": [
+          {
+            "header": "flight/swf/swf_known_tags.hpp",
+            "holder": "Swf",
+            "name": "isKnownSwfTag",
+            "native": "flight::swf::is_known_swf_tag"
+          }
+        ],
         "types": [],
         "values": []
       },
@@ -9191,21 +9088,9 @@
           "holder": "Swf",
           "name": "enableSwfGuards",
           "signature": "function enableSwfGuards():Void"
-        },
-        {
-          "cppName": "is_known_swf_tag",
-          "headers": [
-            {
-              "path": "flight/swf/swf_known_tags.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Swf",
-          "name": "isKnownSwfTag",
-          "signature": "function isKnownSwfTag(code:Float):Bool"
         }
       ],
-      "status": "emitted-unbound",
+      "status": "partial-native",
       "webDefault": {
         "functions": 71,
         "types": 1,
@@ -10858,10 +10743,11 @@
       "sourceModules": 3151
     },
     "nativeDefault": {
-      "boundHeaderConfirmedScalarFunctions": 74,
+      "boundHeaderConfirmedScalarFunctions": 93,
       "extensionTypes": 1,
-      "functions": 82,
-      "packages": 10,
+      "functions": 101,
+      "packages": 19,
+      "scalarOverrideRefusals": 1,
       "types": 3,
       "values": 0
     },
@@ -10895,15 +10781,15 @@
       "unboundFunctionCandidates": 0
     },
     "packageStatus": {
-      "emitted-unbound": 142,
+      "emitted-unbound": 133,
       "empty-web-contract": 1,
-      "partial-native": 10
+      "partial-native": 19
     },
     "scalarExpansion": {
       "headerConfirmedFunctions": 183,
       "packages": 45,
-      "unboundProbeCandidates": 109,
-      "unboundProbePackages": 39
+      "unboundProbeCandidates": 90,
+      "unboundProbePackages": 35
     },
     "webDefault": {
       "functions": 6906,

@@ -1,12 +1,21 @@
 import flight.Audio;
+import flight.Bitmapfont;
 import flight.Color;
+import flight.Collision;
 import flight.Entity;
 import flight.Effects;
+import flight.FontFormats;
 import flight.Input;
+import flight.Lighting;
+import flight.Materials;
 import flight.Math;
 import flight.Path;
 import flight.Power;
 import flight.Protocol;
+import flight.Scene2dFormats;
+import flight.Shape;
+import flight.Skeleton2dFormats;
+import flight.Swf;
 
 // One source file exercises the generated Flight ESM externs on web and every compile-proven
 // flight-cpp function binding on hxcpp. Keeping this host-free isolates binding from host setup.
@@ -74,6 +83,37 @@ class CrossTargetMath {
     assertFinite('colorFromKelvin', colorFromKelvin(6500.0));
     assertString('computeRgbHexString', computeRgbHexString(16711680.0), '#ff0000');
     assertString('computeRgbaCssString', computeRgbaCssString(4278190335.0), 'rgba(255,0,0,1)');
+
+    assertClose('packBitmapFontKerningKey', packBitmapFontKerningKey(65.0, 86.0), 72417366.0);
+    assertTrue(
+      'packContactFeatureId',
+      packContactFeatureId(true, 3.0, 7.0, false) != packContactFeatureId(true, 3.0, 7.0, true)
+    );
+    assertClose('getWoff2BboxBitmapByteLength', getWoff2BboxBitmapByteLength(33.0), 8.0);
+    assertTrue('isWoff2PointOnCurve true', isWoff2PointOnCurve(0.0));
+    assertTrue('isWoff2PointOnCurve false', !isWoff2PointOnCurve(128.0));
+    assertClose('rankOpenTypeUnicodeEncoding full', rankOpenTypeUnicodeEncoding(3.0, 10.0), 2.0);
+    assertClose('rankOpenTypeUnicodeEncoding invalid', rankOpenTypeUnicodeEncoding(1.0, 0.0), -1.0);
+    assertClose('applyLightExposure', applyLightExposure(2.0, 2.0), 8.0);
+
+    assertClose('getPbrMetallicFromPhongSpecular', getPbrMetallicFromPhongSpecular(4294967295.0, 255.0), 1.0);
+    assertClose('getPbrRoughnessFromPhongShininess', getPbrRoughnessFromPhongShininess(32.0), 0.24253562503633297);
+    assertClose('getPhongToPbrLightExposure', getPhongToPbrLightExposure(), Math.log(Math.PI) / Math.log(2.0));
+    assertTrue('isValidMaterialClearcoat', isValidMaterialClearcoat(0.5) && !isValidMaterialClearcoat(-1.0));
+    assertTrue('isValidMaterialIor', isValidMaterialIor(1.5) && !isValidMaterialIor(0.0));
+    assertTrue(
+      'isValidMaterialIridescenceThickness',
+      isValidMaterialIridescenceThickness(100.0) && !isValidMaterialIridescenceThickness(-1.0)
+    );
+    assertTrue('isValidMaterialWeight', isValidMaterialWeight(0.5) && !isValidMaterialWeight(2.0));
+    assertTrue('isValidPbrUvSet', isValidPbrUvSet(1.0) && !isValidPbrUvSet(2.0));
+
+    assertTrue('isRiveCoreBytesProperty', isRiveCoreBytesProperty(212.0) && !isRiveCoreBytesProperty(4.0));
+    assertTrue('isRiveCoreTypeDerivedFrom', isRiveCoreTypeDerivedFrom(4.0, 2.0) && !isRiveCoreTypeDerivedFrom(2.0, 4.0));
+    assertClose('getPathCommandOperandCount', getPathCommandOperandCount(6.0), 6.0);
+    assertClose('clampSpineBinaryUnit low', clampSpineBinaryUnit(-1.0), 0.0);
+    assertClose('clampSpineBinaryUnit high', clampSpineBinaryUnit(2.0), 1.0);
+    assertTrue('isKnownSwfTag', isKnownSwfTag(1.0) && !isKnownSwfTag(3.0));
 
     assertFinite('computeAcesToneMap', computeAcesToneMap(1.0));
     assertFinite('computeBoxBlurPassRadius', computeBoxBlurPassRadius(4.0, 3.0, 0.0));

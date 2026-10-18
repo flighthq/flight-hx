@@ -18,6 +18,14 @@
     "flight-hx-hxcpp-flight-namespace-isolation/1",
     "flight-hx-hxcpp-cpp11-override/1"
   ],
+  "scalarOverrideRefusals": [
+    {
+      "publicName": "flight.Skeleton2dFormats.clampUnit",
+      "header": "flight/skeleton2d_formats/spine_parse_helpers.hpp",
+      "code": "flight-cpp-header-compile-failed",
+      "detail": "Unrelated generated functions in the header contain unresolved flight::Any conversions, comparisons, and indexing."
+    }
+  ],
   "hosts": [
     {
       "module": "flight.HostSdlGl",
@@ -256,6 +264,165 @@
           "name": "getLinearSampledGaussianTapCount",
           "native": "flight::effects::get_linear_sampled_gaussian_tap_count",
           "header": "flight/effects/linear_sampled_gaussian.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        }
+      ]
+    },
+    {
+      "module": "flight.Bitmapfont",
+      "functions": [
+        {
+          "name": "packBitmapFontKerningKey",
+          "native": "flight::bitmapfont::pack_bitmap_font_kerning_key",
+          "header": "flight/bitmapfont/bitmap_font.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        }
+      ]
+    },
+    {
+      "module": "flight.Collision",
+      "functions": [
+        {
+          "name": "packContactFeatureId",
+          "native": "flight::collision::pack_contact_feature_id",
+          "header": "flight/collision/contact_feature_id.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        }
+      ]
+    },
+    {
+      "module": "flight.FontFormats",
+      "functions": [
+        {
+          "name": "getWoff2BboxBitmapByteLength",
+          "native": "flight::font_formats::get_woff2_bbox_bitmap_byte_length",
+          "header": "flight/font_formats/woff2_glyf_transform.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        },
+        {
+          "name": "isWoff2PointOnCurve",
+          "native": "flight::font_formats::is_woff2_point_on_curve",
+          "header": "flight/font_formats/woff2_glyf_transform.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        },
+        {
+          "name": "rankOpenTypeUnicodeEncoding",
+          "native": "flight::font_formats::rank_open_type_unicode_encoding",
+          "header": "flight/font_formats/open_type_cmap.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        }
+      ]
+    },
+    {
+      "module": "flight.Lighting",
+      "functions": [
+        {
+          "name": "applyLightExposure",
+          "native": "flight::lighting::apply_light_exposure",
+          "header": "flight/lighting/light_intensity.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        }
+      ]
+    },
+    {
+      "module": "flight.Materials",
+      "functions": [
+        {
+          "name": "getPbrMetallicFromPhongSpecular",
+          "native": "flight::materials::get_pbr_metallic_from_phong_specular",
+          "header": "flight/materials/phong_to_pbr.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        },
+        {
+          "name": "getPbrRoughnessFromPhongShininess",
+          "native": "flight::materials::get_pbr_roughness_from_phong_shininess",
+          "header": "flight/materials/phong_to_pbr.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        },
+        {
+          "name": "getPhongToPbrLightExposure",
+          "native": "flight::materials::get_phong_to_pbr_light_exposure",
+          "header": "flight/materials/phong_to_pbr.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        },
+        {
+          "name": "isValidMaterialClearcoat",
+          "native": "flight::materials::is_valid_material_clearcoat",
+          "header": "flight/materials/material_validation.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        },
+        {
+          "name": "isValidMaterialIor",
+          "native": "flight::materials::is_valid_material_ior",
+          "header": "flight/materials/material_validation.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        },
+        {
+          "name": "isValidMaterialIridescenceThickness",
+          "native": "flight::materials::is_valid_material_iridescence_thickness",
+          "header": "flight/materials/material_validation.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        },
+        {
+          "name": "isValidMaterialWeight",
+          "native": "flight::materials::is_valid_material_weight",
+          "header": "flight/materials/material_validation.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        },
+        {
+          "name": "isValidPbrUvSet",
+          "native": "flight::materials::is_valid_pbr_uv_set",
+          "header": "flight/materials/pbr_extension.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        }
+      ]
+    },
+    {
+      "module": "flight.Scene2dFormats",
+      "functions": [
+        {
+          "name": "isRiveCoreBytesProperty",
+          "native": "flight::scene2d_formats::is_rive_core_bytes_property",
+          "header": "flight/scene2d_formats/rive_core_properties.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        },
+        {
+          "name": "isRiveCoreTypeDerivedFrom",
+          "native": "flight::scene2d_formats::is_rive_core_type_derived_from",
+          "header": "flight/scene2d_formats/rive_core_types.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        }
+      ]
+    },
+    {
+      "module": "flight.Shape",
+      "functions": [
+        {
+          "name": "getPathCommandOperandCount",
+          "native": "flight::shape::get_path_command_operand_count",
+          "header": "flight/shape/shape_fill.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        }
+      ]
+    },
+    {
+      "module": "flight.Skeleton2dFormats",
+      "functions": [
+        {
+          "name": "clampSpineBinaryUnit",
+          "native": "flight::skeleton2d_formats::clamp_spine_binary_unit",
+          "header": "flight/skeleton2d_formats/spine_binary_parse_helpers.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        }
+      ]
+    },
+    {
+      "module": "flight.Swf",
+      "functions": [
+        {
+          "name": "isKnownSwfTag",
+          "native": "flight::swf::is_known_swf_tag",
+          "header": "flight/swf/swf_known_tags.hpp",
           "provenance": "flight-hx/header-confirmed-scalar/1"
         }
       ]

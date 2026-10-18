@@ -196,6 +196,9 @@ const report = {
     })),
     hosts: nativeManifest.hosts,
   },
+  nativeOverrides: {
+    refusals: nativeManifest.scalarOverrideRefusals ?? [],
+  },
   packages,
   pins: {
     flight: flight.commit,
@@ -217,6 +220,7 @@ const report = {
       extensionTypes: extensionTypeNames.length,
       functions: nativeFunctions.length,
       packages: new Set([...nativeFunctionIndex.keys(), ...nativeTypeIndex.keys()]).size,
+      scalarOverrideRefusals: (nativeManifest.scalarOverrideRefusals ?? []).length,
       types: nativeUpstreamTypes.size,
       values: 0,
     },

@@ -81,15 +81,15 @@ The complete 7,224-file transpiled tree compiles and executes on JavaScript usin
 
 Native integration starts from what the pinned current flight-cpp SDK actually provides, rather than waiting
 for full TS-to-Haxe transpilation or claiming parity it has not earned. `src-cpp/manifest.json` records
-82 compile-proven bindings across Audio, Color, Effects, Entity, Input, Math, Path, Power, and
-Protocol: 62 compiler-planned direct calls, four compiler-emitted UTF-8 String adapters, and 16
-pure numeric Effects overrides from dependency-complete flight-cpp headers. It also records the generated SDK's
+101 compile-proven bindings across 18 public modules: 62 compiler-planned direct calls, four
+compiler-emitted UTF-8 String adapters, and 35 required-primitive overrides from dependency-complete
+flight-cpp headers. It also records the generated SDK's
 distinct source/compiler revisions, C++20, and the two downstream hxcpp/flight-cpp corrections. The current generated native
 SDK reports 2,567 emitted modules; Haxe exposes only the smaller exact partition it actually proves.
 The checked `src-cpp/reconciliation.json` splits that total into 1,895 dependency-complete and 672
 dependency-incomplete modules, alongside 584 refused modules. It reconciles every web package with
-the 82 bound functions, three upstream Scene2D handle types, one integration-only handle, and the
-remaining gaps. It also identifies 109 unbound scalar functions across 39 packages whose signatures
+the 101 bound functions, three upstream Scene2D handle types, one integration-only handle, and the
+remaining gaps. It also identifies 90 unbound scalar functions across 35 packages whose signatures
 and inline generated C++ definitions make them the next compile-probe candidates; header presence
 does not promote them to support.
 The compiler-owned dual plan covers all 11,247 public rows and emits 2,245 Haxe-C++ declarations.
@@ -97,10 +97,12 @@ All 66 header-passing function candidates are promoted: 62 directly and four thr
 exact adapter emissions (`Audio.getAudioMimeTypeEssence`, `Color.computeRgbHexString`,
 `Color.computeRgbaCssString`, and `Protocol.isValidProtocolScheme`). Those adapters copy through
 UTF-8 in isolated translation units, keeping Flight headers outside hxcpp-generated namespaces.
-The 16 Effects functions are an explicit flight-hx golden-reference override for functions that the
-current compiler plan omits despite dependency-complete scalar definitions in flight-cpp. Generation
-requires their exact primitive signatures and fails once the compiler begins planning them, making
-future upstream support replace rather than coexist with the downstream override.
+The 35 scalar functions are explicit flight-hx golden-reference overrides for functions that the
+current compiler plan omits despite dependency-complete definitions in flight-cpp. Generation
+requires exact primitive signatures and fails once the compiler begins planning them, making future
+upstream support replace rather than coexist with the downstream override. Compile probing also
+records `Skeleton2dFormats.clampUnit` as unavailable: its generated header contains unrelated,
+ill-typed `flight::Any` operations, demonstrating why an emitted header is not itself support proof.
 `examples/cross-target-math/` compiles and runs the same installed-package consumer against those
 headers on desktop and the current complete ESM externs on web. `examples/window-native/` additionally
 links `Flight::HostSdlGl` and uses the real SDL3 window, OpenGL context, clear, and presentation path.
