@@ -20,8 +20,8 @@ Analysis, TypeScript parsing, IR, lowering, and primary Haxe emission must remai
 For extern mode it also asks flight-compiler for its target-neutral dual-binding and Haxe-C++ extern
 plans, folds in flight-cpp's real refusal/header ledgers, and writes the compact checked
 `generated/js/native-planning.json`. `syncNativeFunctions.mjs` only materializes manifest-approved
-direct functions found in that plan; schema, compiler revision, locator, carrier, header status, and
-web signature drift all fail loudly.
+direct functions and exact compiler-emitted adapters found in that plan; schema, compiler revision,
+locator, carrier, emitted adapter body, header status, and web signature drift all fail loudly.
 `reconcileNativeSurface.mjs` then compares it with flight-cpp's best-effort/refusal inventories and
 the manifest-pinned native Haxe partition. Its `src-cpp/reconciliation.json` output distinguishes
 dependency-complete headers, dependency-incomplete headers, hard refusals, compile-proven bindings,
@@ -32,7 +32,7 @@ The checked-in extern tree is the downstream golden reference: all 3,144 modules
 153-package SDK graph compile after two exact, manifest-recorded compatibility corrections. Those
 corrections belong here until the compiler owns the missing ambient WebGPU binding and public
 resolver naming itself. The transpiled fallback is independently useful, but its completeness is
-not a prerequisite for the complete web extern package or direct flight-cpp native bindings.
+not a prerequisite for the complete web extern package or flight-cpp native bindings.
 
 `refreshTranspiledSurface.mjs` is the deliberate seam between those timelines. It does not parse
 TypeScript or lower implementations: it intersects the checked-in compiler-emitted Haxe

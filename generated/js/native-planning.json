@@ -127,6 +127,21 @@
       "transport": "direct"
     },
     {
+      "adapter": {
+        "emittedFile": {
+          "contents": "#pragma once\n#include <hxcpp.h>\n#include <optional>\n#include <string>\n#include <flight/protocol/contract.hpp>\n\nnamespace flight::haxe::_cpp {\n// String values are copied through UTF-8 in both directions; neither runtime borrows the other string storage.\ninline bool isValidProtocolScheme_74b6ecee(::String argument_0) {\n  const flight::String flight_argument_0 = flight::String::from_utf8(argument_0.utf8_str());\n  return flight::protocol::is_valid_protocol_scheme(flight_argument_0);\n}\n} // namespace flight::haxe::_cpp\n",
+          "dependencies": [
+            "flight/protocol/contract.hpp"
+          ],
+          "path": "flight/_cpp/adapters/isValidProtocolScheme_74b6ecee.hpp"
+        },
+        "headerPath": "flight/_cpp/adapters/isValidProtocolScheme_74b6ecee.hpp",
+        "nativeName": "flight::haxe::_cpp::isValidProtocolScheme_74b6ecee",
+        "semantics": [
+          "copy-string-utf8"
+        ],
+        "targetNativeName": "flight::protocol::is_valid_protocol_scheme"
+      },
       "headerStatus": "pass",
       "include": "flight/protocol/contract.hpp",
       "kind": "function",
@@ -325,6 +340,21 @@
       "transport": "direct"
     },
     {
+      "adapter": {
+        "emittedFile": {
+          "contents": "#pragma once\n#include <hxcpp.h>\n#include <optional>\n#include <string>\n#include <flight/audio/contract.hpp>\n\nnamespace flight::haxe::_cpp {\n// String values are copied through UTF-8 in both directions; neither runtime borrows the other string storage.\ninline ::String getAudioMimeTypeEssence_3829c80c(::String argument_0) {\n  const flight::String flight_argument_0 = flight::String::from_utf8(argument_0.utf8_str());\n  const flight::String flight_result = flight::audio::get_audio_mime_type_essence(flight_argument_0);\n  const std::string haxe_result_utf8 = flight_result.to_utf8();\n  return ::String(haxe_result_utf8.data(), haxe_result_utf8.size());\n}\n} // namespace flight::haxe::_cpp\n",
+          "dependencies": [
+            "flight/audio/contract.hpp"
+          ],
+          "path": "flight/_cpp/adapters/getAudioMimeTypeEssence_3829c80c.hpp"
+        },
+        "headerPath": "flight/_cpp/adapters/getAudioMimeTypeEssence_3829c80c.hpp",
+        "nativeName": "flight::haxe::_cpp::getAudioMimeTypeEssence_3829c80c",
+        "semantics": [
+          "copy-string-utf8"
+        ],
+        "targetNativeName": "flight::audio::get_audio_mime_type_essence"
+      },
       "headerStatus": "pass",
       "include": "flight/audio/contract.hpp",
       "kind": "function",
@@ -361,6 +391,21 @@
       "transport": "direct"
     },
     {
+      "adapter": {
+        "emittedFile": {
+          "contents": "#pragma once\n#include <hxcpp.h>\n#include <optional>\n#include <string>\n#include <flight/color/contract.hpp>\n\nnamespace flight::haxe::_cpp {\n// String values are copied through UTF-8 in both directions; neither runtime borrows the other string storage.\ninline ::String computeRgbHexString_a25cbb35(double argument_0) {\n  const flight::String flight_result = flight::color::compute_rgb_hex_string(argument_0);\n  const std::string haxe_result_utf8 = flight_result.to_utf8();\n  return ::String(haxe_result_utf8.data(), haxe_result_utf8.size());\n}\n} // namespace flight::haxe::_cpp\n",
+          "dependencies": [
+            "flight/color/contract.hpp"
+          ],
+          "path": "flight/_cpp/adapters/computeRgbHexString_a25cbb35.hpp"
+        },
+        "headerPath": "flight/_cpp/adapters/computeRgbHexString_a25cbb35.hpp",
+        "nativeName": "flight::haxe::_cpp::computeRgbHexString_a25cbb35",
+        "semantics": [
+          "copy-string-utf8"
+        ],
+        "targetNativeName": "flight::color::compute_rgb_hex_string"
+      },
       "headerStatus": "pass",
       "include": "flight/color/contract.hpp",
       "kind": "function",
@@ -496,6 +541,21 @@
       "transport": "direct"
     },
     {
+      "adapter": {
+        "emittedFile": {
+          "contents": "#pragma once\n#include <hxcpp.h>\n#include <optional>\n#include <string>\n#include <flight/color/contract.hpp>\n\nnamespace flight::haxe::_cpp {\n// String values are copied through UTF-8 in both directions; neither runtime borrows the other string storage.\ninline ::String computeRgbaCssString_9aeb1c03(double argument_0) {\n  const flight::String flight_result = flight::color::compute_rgba_css_string(argument_0);\n  const std::string haxe_result_utf8 = flight_result.to_utf8();\n  return ::String(haxe_result_utf8.data(), haxe_result_utf8.size());\n}\n} // namespace flight::haxe::_cpp\n",
+          "dependencies": [
+            "flight/color/contract.hpp"
+          ],
+          "path": "flight/_cpp/adapters/computeRgbaCssString_9aeb1c03.hpp"
+        },
+        "headerPath": "flight/_cpp/adapters/computeRgbaCssString_9aeb1c03.hpp",
+        "nativeName": "flight::haxe::_cpp::computeRgbaCssString_9aeb1c03",
+        "semantics": [
+          "copy-string-utf8"
+        ],
+        "targetNativeName": "flight::color::compute_rgba_css_string"
+      },
       "headerStatus": "pass",
       "include": "flight/color/contract.hpp",
       "kind": "function",

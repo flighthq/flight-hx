@@ -8,6 +8,8 @@ package flight._cpp._fn;
 <set name="NO_PRECOMPILED_HEADERS" value="1" />
 <files id="haxe">
   <file name="${removeQuotes:flight_hx_root}/src-cpp/src/color.cpp" />
+  <file name="${removeQuotes:flight_hx_root}/src-cpp/src/adapters/computeRgbHexString_a25cbb35.cpp" />
+  <file name="${removeQuotes:flight_hx_root}/src-cpp/src/adapters/computeRgbaCssString_9aeb1c03.cpp" />
   <compilerflag value="/std:c++20" if="windows" />
   <compilerflag value="-std=c++20" unless="windows" />
   <compilerflag value="/I${removeQuotes:flight_cpp_root}/include" if="windows" />
@@ -21,9 +23,17 @@ package flight._cpp._fn;
 </files>
 ')
 @:include("flight_hx/color.hpp")
+@:include("flight_hx/adapters/computeRgbHexString_a25cbb35.hpp")
+@:include("flight_hx/adapters/computeRgbaCssString_9aeb1c03.hpp")
 extern class Color {
   @:native("flight_hx::color::color_from_kelvin")
   static function colorFromKelvin(kelvin:Float):Float;
+
+  @:native("flight_hx::haxe::_cpp::computeRgbHexString_a25cbb35")
+  static function computeRgbHexString(color:Float):String;
+
+  @:native("flight_hx::haxe::_cpp::computeRgbaCssString_9aeb1c03")
+  static function computeRgbaCssString(color:Float):String;
 
   @:native("flight_hx::color::get_color_alpha")
   static function getColorAlpha(color:Float):Float;

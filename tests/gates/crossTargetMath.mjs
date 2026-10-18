@@ -1,6 +1,7 @@
 // Installed consumers must cross both production backends: the complete Flight ESM extern surface
-// on web and the manifest-recorded direct flight-cpp subset/extensions on hxcpp. Scalar behavior,
-// host creation, and a Scene2D GL framebuffer each have an explicit oracle here.
+// on web and the manifest-recorded flight-cpp subset/extensions on hxcpp. Direct scalars,
+// compiler-emitted String adapters, host creation, and a Scene2D GL framebuffer each have an
+// explicit oracle here.
 import { spawnSync } from 'node:child_process';
 import { existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
@@ -14,9 +15,17 @@ import { bundleFlightJs } from '../../tools/esm/bundle.mjs';
 const repoRoot = path.join(import.meta.dirname, '..', '..');
 const marker = 'CROSS_TARGET_MATH_OK';
 const nativePlanning = JSON.parse(readFileSync(path.join(repoRoot, 'generated', 'js', 'native-planning.json'), 'utf8'));
+const plannedFunctions = new Map(
+  nativePlanning.declarations
+    .filter(({ kind }) => kind === 'function')
+    .map((declaration) => [declaration.publicName, declaration]),
+);
 const expectedFunctionsByModule = new Map();
-for (const declaration of nativePlanning.declarations) {
-  if (declaration.kind !== 'function' || declaration.transport !== 'direct' || declaration.headerStatus !== 'pass') {
+for (const declaration of plannedFunctions.values()) {
+  if (
+    (declaration.transport !== 'direct' && declaration.transport !== 'adapter') ||
+    declaration.headerStatus !== 'pass'
+  ) {
     continue;
   }
   const separator = declaration.publicName.lastIndexOf('.');
@@ -63,7 +72,7 @@ try {
   await buildWebCamera2d(nativeExtension, consumer);
   process.stdout.write(
     `cross-target gate: an isolated -lib flight consumer ran ${String(bindings.length)} ` +
-      `manifest-recorded functions on Flight ESM and direct flight-cpp; the optional legacy-pinned ` +
+      `manifest-recorded functions on Flight ESM and flight-cpp; the optional legacy-pinned ` +
       `pure-Haxe backend passed its focused facade proof; the packaged native extensions also created and ` +
       `presented a real flight-cpp SDL3/GL surface, and the Haxe-authored Camera2D scene passed ` +
       `the upstream-control and native framebuffer oracles while linking against current Flight ESM.\n`,
@@ -182,18 +191,27 @@ function validateNativeManifest(flightCpp) {
       path.join(repoRoot, 'generated', 'js', 'flight', '_js', '_fn', `${holder}.hx`),
       'utf8',
     );
-    const bridge = [
-      path.join(repoRoot, 'src-cpp', 'include', 'flight_hx', `${holder.toLowerCase()}.hpp`),
-      path.join(repoRoot, 'src-cpp', 'src', `${holder.toLowerCase()}.cpp`),
-    ]
-      .map((filename) => readFileSync(filename, 'utf8'))
-      .join('\n');
+    const directBindings = module.functions.filter(
+      ({ name }) => plannedFunctions.get(`${module.module}.${name}`)?.transport === 'direct',
+    );
+    const directBridge =
+      directBindings.length === 0
+        ? ''
+        : [
+            path.join(repoRoot, 'src-cpp', 'include', 'flight_hx', `${holder.toLowerCase()}.hpp`),
+            path.join(repoRoot, 'src-cpp', 'src', `${holder.toLowerCase()}.cpp`),
+          ]
+            .map((filename) => readFileSync(filename, 'utf8'))
+            .join('\n');
     const facadeMembers = byName(parseModuleMembers(facade).functions);
     const nativeMembers = byName(
       parseModuleMembers(nativeExtern.replace(/^  @:/gmu, '@:').replace(/^  static /gmu, '')).functions,
     );
     const jsMembers = byName(parseModuleMembers(jsExtern, '  static ').functions);
     for (const binding of module.functions) {
+      const publicName = `${module.module}.${binding.name}`;
+      const plan = plannedFunctions.get(publicName);
+      if (!plan) fail(`${publicName} is absent from the compiler native plan`);
       const header = path.join(flightCpp.directory, 'generated', 'include', binding.header);
       if (!existsSync(header)) fail(`${binding.name} header is missing from pinned flight-cpp: ${binding.header}`);
       const jsMember = jsMembers.get(binding.name);
@@ -212,10 +230,34 @@ function validateNativeManifest(flightCpp) {
       if (nativeMember.sourceName !== adapter) {
         fail(`${module.module}.${binding.name} binds ${nativeMember.sourceName}, expected ${adapter}`);
       }
-      if (!bridge.includes(`${binding.native}(`)) {
-        fail(`${module.module}.${binding.name} bridge does not call ${binding.native}`);
+      if (plan.transport === 'direct') {
+        if (!directBridge.includes(`${binding.native}(`)) {
+          fail(`${publicName} direct bridge does not call ${binding.native}`);
+        }
+      } else if (plan.transport === 'adapter') {
+        const identity = binding.native.slice(binding.native.lastIndexOf('::') + 2);
+        const adapterHeader = readFileSync(
+          path.join(repoRoot, 'src-cpp', 'include', 'flight_hx', 'adapters', `${identity}.hpp`),
+          'utf8',
+        );
+        const adapterSource = readFileSync(
+          path.join(repoRoot, 'src-cpp', 'src', 'adapters', `${identity}.cpp`),
+          'utf8',
+        );
+        if (!adapterHeader.includes(`${identity}(`) || !adapterHeader.includes('namespace flight_hx::haxe::_cpp')) {
+          fail(`${publicName} has no declaration-only isolated adapter boundary`);
+        }
+        if (
+          !adapterSource.includes(`${identity}(`) ||
+          !adapterSource.includes(`${plan.adapter?.targetNativeName}(`) ||
+          !adapterSource.includes('namespace flight_hx::haxe::_cpp')
+        ) {
+          fail(`${publicName} adapter does not preserve the compiler-emitted target call`);
+        }
+      } else {
+        fail(`${publicName} uses unsupported compiler transport ${String(plan.transport)}`);
       }
-      bindings.push({ ...binding, adapter, module: module.module });
+      bindings.push({ ...binding, adapter, module: module.module, transport: plan.transport });
     }
   }
   return {
@@ -306,7 +348,7 @@ function runNative(flightCpp, bindings, consumer) {
     .join('\n');
   for (const binding of bindings) {
     if (!generated.includes(`${binding.adapter}(`)) {
-      fail(`generated C++ has no direct ${binding.module}.${binding.name} call`);
+      fail(`generated C++ has no ${binding.transport} ${binding.module}.${binding.name} call`);
     }
   }
 }
@@ -329,7 +371,7 @@ function rejectUnsupportedNative(flightCpp, consumer) {
     { cwd: consumer.work, encoding: 'utf8', env: consumer.environment },
   );
   const transcript = `${compile.stdout ?? ''}${compile.stderr ?? ''}`;
-  if (compile.status === 0 || !transcript.includes('computeRgbHexString')) {
+  if (compile.status === 0 || !transcript.includes('approxEqual')) {
     fail(`unbound native API did not fail loudly at the exact public facade:\n${transcript}`);
   }
 }

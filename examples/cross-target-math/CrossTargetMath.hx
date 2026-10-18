@@ -1,14 +1,18 @@
+import flight.Audio;
 import flight.Color;
 import flight.Entity;
 import flight.Input;
 import flight.Math;
 import flight.Path;
 import flight.Power;
+import flight.Protocol;
 
-// One source file exercises the generated Flight ESM externs on web and every compile-proven scalar
-// flight-cpp binding on hxcpp. Keeping this host-free isolates binding from the window/render gap.
+// One source file exercises the generated Flight ESM externs on web and every compile-proven
+// flight-cpp function binding on hxcpp. Keeping this host-free isolates binding from host setup.
 class CrossTargetMath {
   static function main():Void {
+    assertString('audio MIME essence', getAudioMimeTypeEssence('  AUDIO/MPEG  '), 'audio/mpeg');
+
     assertClose('clamp', clamp(4.0, -1.0, 2.0), 2.0);
     assertTrue('inRange', inRange(0.5, 0.0, 1.0));
     assertClose('inverseLerp', inverseLerp(10.0, 20.0, 12.5), 0.25);
@@ -67,6 +71,8 @@ class CrossTargetMath {
     assertFinite('setColorAlpha', setColorAlpha(packed, 0.5));
     assertFinite('unpremultiplyColorAlpha', unpremultiplyColorAlpha(premultiplyColorAlpha(packed)));
     assertFinite('colorFromKelvin', colorFromKelvin(6500.0));
+    assertString('computeRgbHexString', computeRgbHexString(16711680.0), '#ff0000');
+    assertString('computeRgbaCssString', computeRgbaCssString(4278190335.0), 'rgba(255,0,0,1)');
 
     assertClose('applyGamepadAxisDeadZone low', applyGamepadAxisDeadZone(0.05, 0.1), 0.0);
     assertFinite('quadratic curvature', getQuadraticBezierCurvature(0, 0, 1, 1, 2, 0, 0.5));
@@ -81,6 +87,9 @@ class CrossTargetMath {
     setPowerIdlePollingIntervalMs(250.0);
     assertClose('power polling interval', getPowerIdlePollingIntervalMs(), 250.0);
     setPowerIdlePollingIntervalMs(previousPowerInterval);
+
+    assertTrue('custom protocol scheme', isValidProtocolScheme('flight+desktop'));
+    assertTrue('reserved protocol scheme', !isValidProtocolScheme('https'));
     report('CROSS_TARGET_MATH_OK');
   }
 
@@ -94,6 +103,10 @@ class CrossTargetMath {
 
   static function assertFinite(name:String, actual:Float):Void {
     if (!Math.isFinite(actual)) throw '$name: expected a finite value, received $actual';
+  }
+
+  static function assertString(name:String, actual:String, expected:String):Void {
+    if (actual != expected) throw '$name: expected $expected, received $actual';
   }
 
   static inline function report(message:String):Void {

@@ -377,15 +377,7 @@
         "cppAvailable": 35,
         "cppExternDeclarations": 1,
         "cppExternRefusals": 34,
-        "functionCandidates": [
-          {
-            "header": "flight/audio/contract.hpp",
-            "holder": "Audio",
-            "name": "getAudioMimeTypeEssence",
-            "native": "flight::haxe::_cpp::getAudioMimeTypeEssence_3829c80c",
-            "transport": "adapter"
-          }
-        ],
+        "functionCandidates": [],
         "headerPassingDeclarations": 1
       },
       "flightCpp": {
@@ -398,15 +390,11 @@
       "issues": [
         {
           "code": "native-function-gap",
-          "count": 35
+          "count": 34
         },
         {
           "code": "non-scalar-signature-review",
           "count": 35
-        },
-        {
-          "code": "compiler-haxe-cpp-function-candidates",
-          "count": 1
         },
         {
           "code": "compiler-haxe-cpp-refused-bindings",
@@ -414,13 +402,20 @@
         }
       ],
       "nativeDefault": {
-        "functions": [],
+        "functions": [
+          {
+            "header": "flight/audio/contract.hpp",
+            "holder": "Audio",
+            "name": "getAudioMimeTypeEssence",
+            "native": "flight::haxe::_cpp::getAudioMimeTypeEssence_3829c80c"
+          }
+        ],
         "types": [],
         "values": []
       },
       "package": "@flighthq/audio",
       "scalarProbeCandidates": [],
-      "status": "emitted-unbound",
+      "status": "partial-native",
       "webDefault": {
         "functions": 35,
         "types": 0,
@@ -1245,22 +1240,7 @@
         "cppAvailable": 31,
         "cppExternDeclarations": 15,
         "cppExternRefusals": 16,
-        "functionCandidates": [
-          {
-            "header": "flight/color/contract.hpp",
-            "holder": "Color",
-            "name": "computeRgbHexString",
-            "native": "flight::haxe::_cpp::computeRgbHexString_a25cbb35",
-            "transport": "adapter"
-          },
-          {
-            "header": "flight/color/contract.hpp",
-            "holder": "Color",
-            "name": "computeRgbaCssString",
-            "native": "flight::haxe::_cpp::computeRgbaCssString_9aeb1c03",
-            "transport": "adapter"
-          }
-        ],
+        "functionCandidates": [],
         "headerPassingDeclarations": 15
       },
       "flightCpp": {
@@ -1273,15 +1253,11 @@
       "issues": [
         {
           "code": "native-function-gap",
-          "count": 18
+          "count": 16
         },
         {
           "code": "non-scalar-signature-review",
           "count": 18
-        },
-        {
-          "code": "compiler-haxe-cpp-function-candidates",
-          "count": 2
         },
         {
           "code": "compiler-haxe-cpp-refused-bindings",
@@ -1295,6 +1271,18 @@
             "holder": "Color",
             "name": "colorFromKelvin",
             "native": "flight::color::color_from_kelvin"
+          },
+          {
+            "header": "flight/color/contract.hpp",
+            "holder": "Color",
+            "name": "computeRgbHexString",
+            "native": "flight::haxe::_cpp::computeRgbHexString_a25cbb35"
+          },
+          {
+            "header": "flight/color/contract.hpp",
+            "holder": "Color",
+            "name": "computeRgbaCssString",
+            "native": "flight::haxe::_cpp::computeRgbaCssString_9aeb1c03"
           },
           {
             "header": "flight/color/contract.hpp",
@@ -6211,15 +6199,7 @@
         "cppAvailable": 18,
         "cppExternDeclarations": 1,
         "cppExternRefusals": 17,
-        "functionCandidates": [
-          {
-            "header": "flight/protocol/contract.hpp",
-            "holder": "Protocol",
-            "name": "isValidProtocolScheme",
-            "native": "flight::haxe::_cpp::isValidProtocolScheme_74b6ecee",
-            "transport": "adapter"
-          }
-        ],
+        "functionCandidates": [],
         "headerPassingDeclarations": 1
       },
       "flightCpp": {
@@ -6232,15 +6212,11 @@
       "issues": [
         {
           "code": "native-function-gap",
-          "count": 18
+          "count": 17
         },
         {
           "code": "non-scalar-signature-review",
           "count": 18
-        },
-        {
-          "code": "compiler-haxe-cpp-function-candidates",
-          "count": 1
         },
         {
           "code": "compiler-haxe-cpp-refused-bindings",
@@ -6248,13 +6224,20 @@
         }
       ],
       "nativeDefault": {
-        "functions": [],
+        "functions": [
+          {
+            "header": "flight/protocol/contract.hpp",
+            "holder": "Protocol",
+            "name": "isValidProtocolScheme",
+            "native": "flight::haxe::_cpp::isValidProtocolScheme_74b6ecee"
+          }
+        ],
         "types": [],
         "values": []
       },
       "package": "@flighthq/protocol",
       "scalarProbeCandidates": [],
-      "status": "emitted-unbound",
+      "status": "partial-native",
       "webDefault": {
         "functions": 18,
         "types": 0,
@@ -10977,8 +10960,8 @@
     "nativeDefault": {
       "boundHeaderConfirmedScalarFunctions": 58,
       "extensionTypes": 1,
-      "functions": 62,
-      "packages": 7,
+      "functions": 66,
+      "packages": 9,
       "types": 3,
       "values": 0
     },
@@ -11007,14 +10990,14 @@
         "unsupported-carrier": 787,
         "unsupported-declaration": 1236
       },
-      "boundFunctions": 62,
+      "boundFunctions": 66,
       "functionCandidates": 66,
-      "unboundFunctionCandidates": 4
+      "unboundFunctionCandidates": 0
     },
     "packageStatus": {
-      "emitted-unbound": 145,
+      "emitted-unbound": 143,
       "empty-web-contract": 1,
-      "partial-native": 7
+      "partial-native": 9
     },
     "scalarExpansion": {
       "headerConfirmedFunctions": 183,

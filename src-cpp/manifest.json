@@ -10,7 +10,7 @@
     "schema": "flight-haxe-cpp-extern-plan/1",
     "compilerRevision": "804435ad89716bd3ddb8144e435adb0be6c9477b",
     "candidateArtifact": "generated/js/native-planning.json",
-    "promotion": "direct-header-pass-compile-run"
+    "promotion": "compiler-emitted-header-pass-compile-run"
   },
   "cppStandard": 20,
   "corrections": [
@@ -49,11 +49,31 @@
   ],
   "modules": [
     {
+      "module": "flight.Audio",
+      "functions": [
+        {
+          "name": "getAudioMimeTypeEssence",
+          "native": "flight::haxe::_cpp::getAudioMimeTypeEssence_3829c80c",
+          "header": "flight/audio/contract.hpp"
+        }
+      ]
+    },
+    {
       "module": "flight.Color",
       "functions": [
         {
           "name": "colorFromKelvin",
           "native": "flight::color::color_from_kelvin",
+          "header": "flight/color/contract.hpp"
+        },
+        {
+          "name": "computeRgbHexString",
+          "native": "flight::haxe::_cpp::computeRgbHexString_a25cbb35",
+          "header": "flight/color/contract.hpp"
+        },
+        {
+          "name": "computeRgbaCssString",
+          "native": "flight::haxe::_cpp::computeRgbaCssString_9aeb1c03",
           "header": "flight/color/contract.hpp"
         },
         {
@@ -385,6 +405,16 @@
           "name": "setPowerIdlePollingIntervalMs",
           "native": "flight::power::set_power_idle_polling_interval_ms",
           "header": "flight/power/contract.hpp"
+        }
+      ]
+    },
+    {
+      "module": "flight.Protocol",
+      "functions": [
+        {
+          "name": "isValidProtocolScheme",
+          "native": "flight::haxe::_cpp::isValidProtocolScheme_74b6ecee",
+          "header": "flight/protocol/contract.hpp"
         }
       ]
     }

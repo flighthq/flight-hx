@@ -75,25 +75,27 @@ A current-source transpile was also attempted with compiler `804435a`. Its all-m
 upstream lowering gaps after two initial inference errors: missing type re-exports, generic-call
 arity, structural controller inheritance, numeric carriers, and map fallback typing. The atomic
 generator therefore preserved the known-good fallback instead of publishing a partially compiling
-tree. These fallback gaps do not reduce the complete current ESM extern surface or direct C++ plan.
+tree. These fallback gaps do not reduce the complete current ESM extern surface or C++ binding plan.
 
 The complete 7,224-file transpiled tree compiles and executes on JavaScript using the native ECMAScript implementation of `flight-runtime-contract/2`. A host-free public Math/Effects slice plus compiler-emitted easing and Rive table code also runs on Haxe eval through the maintained portable Float32, map, set, symbol, and task shims. Browser-specific modules remain JavaScript-target APIs rather than pretending to be portable DOM implementations.
 
 Native integration starts from what the pinned current flight-cpp SDK actually provides, rather than waiting
 for full TS-to-Haxe transpilation or claiming parity it has not earned. `src-cpp/manifest.json` records
-62 compile-proven direct bindings across Color, Entity, Input, Math, Path, and Power, the generated SDK's distinct source/compiler
-revisions, C++20, and the two downstream hxcpp/flight-cpp corrections. The current generated native
+66 compile-proven bindings across Audio, Color, Entity, Input, Math, Path, Power, and Protocol: 62
+direct calls and four compiler-emitted UTF-8 String adapters. It also records the generated SDK's
+distinct source/compiler revisions, C++20, and the two downstream hxcpp/flight-cpp corrections. The current generated native
 SDK reports 2,567 emitted modules; Haxe exposes only the smaller exact partition it actually proves.
 The checked `src-cpp/reconciliation.json` splits that total into 1,895 dependency-complete and 672
 dependency-incomplete modules, alongside 584 refused modules. It reconciles every web package with
-the 62 bound functions, three upstream Scene2D handle types, one integration-only handle, and the
+the 66 bound functions, three upstream Scene2D handle types, one integration-only handle, and the
 remaining gaps. It also identifies 125 unbound scalar functions across 45 packages whose signatures
 and inline generated C++ definitions make them the next compile-probe candidates; header presence
 does not promote them to support.
 The compiler-owned dual plan covers all 11,247 public rows and emits 2,245 Haxe-C++ declarations.
-Sixty-six are function candidates: the 62 direct, header-passing functions are promoted, while four
-string-carrier APIs remain explicit adapter work (`Audio.getAudioMimeTypeEssence`,
-`Color.computeRgbHexString`, `Color.computeRgbaCssString`, and `Protocol.isValidProtocolScheme`).
+All 66 header-passing function candidates are promoted: 62 directly and four through the compiler's
+exact adapter emissions (`Audio.getAudioMimeTypeEssence`, `Color.computeRgbHexString`,
+`Color.computeRgbaCssString`, and `Protocol.isValidProtocolScheme`). Those adapters copy through
+UTF-8 in isolated translation units, keeping Flight headers outside hxcpp-generated namespaces.
 `examples/cross-target-math/` compiles and runs the same installed-package consumer against those
 headers on desktop and the current complete ESM externs on web. `examples/window-native/` additionally
 links `Flight::HostSdlGl` and uses the real SDL3 window, OpenGL context, clear, and presentation path.

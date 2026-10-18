@@ -612,21 +612,41 @@ function createNativeBindingPlanningReport(
 ) {
   const headerStatuses = new Map(headerStatusArtifact.headers.map(({ header, status }) => [header, status]));
   const bindingsByKey = new Map(plan.bindings.map((binding) => [binding.key, binding]));
-  const declarations = cppExternPlan.declarations.map((declaration) => ({
-    headerStatus: headerStatuses.get(declaration.include) ?? 'missing',
-    include: declaration.include,
-    kind: declaration.kind,
-    nativeName:
-      declaration.kind === 'type' ? declaration.nativeName : declaration.adapter?.nativeName ?? declaration.targetNativeName,
-    package: bindingsByKey.get(declaration.key)?.identity.packageName,
-    publicName: bindingsByKey.get(declaration.key)?.publicHaxe.qualifiedName,
-    transport:
-      declaration.kind === 'function'
-        ? declaration.adapter
-          ? 'adapter'
-          : 'direct'
-        : declaration.ownership,
-  }));
+  const emittedFilesByPath = new Map(cppExternEmission.files.map((file) => [file.path, file]));
+  const declarations = cppExternPlan.declarations.map((declaration) => {
+    let adapter;
+    if (declaration.kind === 'function' && declaration.adapter) {
+      const emittedFile = emittedFilesByPath.get(declaration.adapter.headerPath);
+      if (!emittedFile) {
+        throw new Error(`Compiler Haxe-C++ adapter emission is missing ${declaration.adapter.headerPath}`);
+      }
+      adapter = {
+        emittedFile,
+        headerPath: declaration.adapter.headerPath,
+        nativeName: declaration.adapter.nativeName,
+        semantics: declaration.adapter.semantics,
+        targetNativeName: declaration.targetNativeName,
+      };
+    }
+    return {
+      ...(adapter ? { adapter } : {}),
+      headerStatus: headerStatuses.get(declaration.include) ?? 'missing',
+      include: declaration.include,
+      kind: declaration.kind,
+      nativeName:
+        declaration.kind === 'type'
+          ? declaration.nativeName
+          : declaration.adapter?.nativeName ?? declaration.targetNativeName,
+      package: bindingsByKey.get(declaration.key)?.identity.packageName,
+      publicName: bindingsByKey.get(declaration.key)?.publicHaxe.qualifiedName,
+      transport:
+        declaration.kind === 'function'
+          ? declaration.adapter
+            ? 'adapter'
+            : 'direct'
+          : declaration.ownership,
+    };
+  });
   const cppAvailability = countBy(plan.bindings, ({ cpp }) => cpp.availability);
   const javascriptAvailability = countBy(plan.bindings, ({ javascript }) => javascript.availability);
   const declarationKinds = countBy(cppExternPlan.declarations, ({ kind }) => kind);

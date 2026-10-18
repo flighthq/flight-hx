@@ -5,6 +5,14 @@ inline function colorFromKelvin(kelvin:Float):Float {
   return flight._cpp._fn.Color.colorFromKelvin(kelvin);
 }
 
+inline function computeRgbHexString(color:Float):String {
+  return flight._cpp._fn.Color.computeRgbHexString(color);
+}
+
+inline function computeRgbaCssString(color:Float):String {
+  return flight._cpp._fn.Color.computeRgbaCssString(color);
+}
+
 inline function getColorAlpha(color:Float):Float {
   return flight._cpp._fn.Color.getColorAlpha(color);
 }
