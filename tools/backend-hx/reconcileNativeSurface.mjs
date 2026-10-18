@@ -149,6 +149,9 @@ const bestEffortStatus = countBy(bestEffort.modules, ({ status }) => status);
 const statusCounts = countBy(packages, ({ status }) => status);
 const boundScalarKeys = new Set(nativeFunctions.map(({ holder, name }) => `${holder}\0${name}`));
 const boundScalarCandidates = allScalarCandidates.filter(({ holder, name }) => boundScalarKeys.has(`${holder}\0${name}`));
+const unboundScalarCandidates = allScalarCandidates.filter(
+  ({ holder, name }) => !boundScalarKeys.has(`${holder}\0${name}`),
+);
 const report = {
   limitations: [
     {
@@ -232,7 +235,8 @@ const report = {
     scalarExpansion: {
       headerConfirmedFunctions: allScalarCandidates.length,
       packages: new Set(allScalarCandidates.map(({ package: packageName }) => packageName)).size,
-      unboundProbeCandidates: allScalarCandidates.length - boundScalarCandidates.length,
+      unboundProbeCandidates: unboundScalarCandidates.length,
+      unboundProbePackages: new Set(unboundScalarCandidates.map(({ package: packageName }) => packageName)).size,
     },
     webDefault: {
       functions: defaultApi.summary.functions,
@@ -347,6 +351,11 @@ function validatePins() {
     'native manifest Haxe-plan artifact',
     nativeManifest.haxeBindingPlan.candidateArtifact,
     'generated/js/native-planning.json',
+  );
+  equal(
+    'native manifest override promotion',
+    nativeManifest.haxeBindingPlan.overridePromotion,
+    'dependency-complete-required-scalar-compile-run',
   );
   equal(
     'native-plan manifest summary',

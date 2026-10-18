@@ -14,6 +14,7 @@ import { bundleFlightJs } from '../../tools/esm/bundle.mjs';
 
 const repoRoot = path.join(import.meta.dirname, '..', '..');
 const marker = 'CROSS_TARGET_MATH_OK';
+const scalarOverrideProvenance = 'flight-hx/header-confirmed-scalar/1';
 const nativePlanning = JSON.parse(readFileSync(path.join(repoRoot, 'generated', 'js', 'native-planning.json'), 'utf8'));
 const plannedFunctions = new Map(
   nativePlanning.declarations
@@ -168,7 +169,10 @@ function validateNativeManifest(flightCpp) {
     if (actual !== expected) fail(`native generated-SDK ${field} is ${String(actual)}, expected ${String(expected)}`);
   }
 
-  const moduleNames = manifest.modules.map(({ module }) => module).sort();
+  const moduleNames = manifest.modules
+    .filter(({ functions }) => functions.some(({ provenance }) => provenance === undefined))
+    .map(({ module }) => module)
+    .sort();
   const expectedModuleNames = [...expectedFunctionsByModule.keys()].sort();
   if (JSON.stringify(moduleNames) !== JSON.stringify(expectedModuleNames)) {
     fail(`native manifest modules drifted: ${moduleNames.join(', ')}`);
@@ -177,8 +181,8 @@ function validateNativeManifest(flightCpp) {
   const bindings = [];
   for (const module of manifest.modules) {
     const holder = module.module.replace(/^flight\./u, '');
-    const expectedFunctions = expectedFunctionsByModule.get(module.module);
-    const names = module.functions.map(({ name }) => name).sort();
+    const expectedFunctions = expectedFunctionsByModule.get(module.module) ?? [];
+    const names = module.functions.filter(({ provenance }) => provenance === undefined).map(({ name }) => name).sort();
     if (JSON.stringify(names) !== JSON.stringify(expectedFunctions)) {
       fail(`${module.module} native functions drifted: ${names.join(', ')}`);
     }
@@ -192,7 +196,9 @@ function validateNativeManifest(flightCpp) {
       'utf8',
     );
     const directBindings = module.functions.filter(
-      ({ name }) => plannedFunctions.get(`${module.module}.${name}`)?.transport === 'direct',
+      ({ name, provenance }) =>
+        provenance === scalarOverrideProvenance ||
+        plannedFunctions.get(`${module.module}.${name}`)?.transport === 'direct',
     );
     const directBridge =
       directBindings.length === 0
@@ -210,8 +216,15 @@ function validateNativeManifest(flightCpp) {
     const jsMembers = byName(parseModuleMembers(jsExtern, '  static ').functions);
     for (const binding of module.functions) {
       const publicName = `${module.module}.${binding.name}`;
-      const plan = plannedFunctions.get(publicName);
-      if (!plan) fail(`${publicName} is absent from the compiler native plan`);
+      let plan = plannedFunctions.get(publicName);
+      if (binding.provenance === scalarOverrideProvenance) {
+        if (plan) fail(`${publicName} downstream override now overlaps the compiler native plan`);
+        plan = { transport: 'override' };
+      } else if (binding.provenance !== undefined) {
+        fail(`${publicName} has unknown native provenance ${String(binding.provenance)}`);
+      } else if (!plan) {
+        fail(`${publicName} is absent from the compiler native plan`);
+      }
       const header = path.join(flightCpp.directory, 'generated', 'include', binding.header);
       if (!existsSync(header)) fail(`${binding.name} header is missing from pinned flight-cpp: ${binding.header}`);
       const jsMember = jsMembers.get(binding.name);
@@ -230,7 +243,7 @@ function validateNativeManifest(flightCpp) {
       if (nativeMember.sourceName !== adapter) {
         fail(`${module.module}.${binding.name} binds ${nativeMember.sourceName}, expected ${adapter}`);
       }
-      if (plan.transport === 'direct') {
+      if (plan.transport === 'direct' || plan.transport === 'override') {
         if (!directBridge.includes(`${binding.native}(`)) {
           fail(`${publicName} direct bridge does not call ${binding.native}`);
         }

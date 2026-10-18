@@ -1,10 +1,11 @@
 // Materialize the manifest-approved Haxe/hxcpp function partition from compiler-owned public
-// signatures, native locators, and exact adapter emissions. Direct calls and compiler-emitted
-// adapters use declaration-only hxcpp headers plus isolated C++ translation units so flight::*
+// signatures, native locators, exact adapter emissions, and explicit downstream scalar overrides.
+// Every path uses declaration-only hxcpp headers plus isolated C++ translation units so flight::*
 // names never enter hxcpp-generated namespace flight.
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
+import { resolveDependency } from '../../scripts/dependencyLock.mjs';
 
 const root = path.resolve(import.meta.dirname, '..', '..');
 const check = process.argv.includes('--check');
@@ -17,6 +18,13 @@ if (unknown.length > 0) {
 const manifest = readJson(path.join(root, 'src-cpp', 'manifest.json'));
 const defaultApi = readJson(path.join(root, 'generated', 'js', 'default-api.json'));
 const planning = readJson(path.join(root, 'generated', 'js', 'native-planning.json'));
+const flightCpp = resolveDependency(root, 'flight-cpp');
+const flightCppBestEffort = readJson(path.join(flightCpp.directory, 'generated', 'best-effort.json'));
+const compilerPlanProvenance = 'flight-compiler/haxe-cpp-plan/1';
+const scalarOverrideProvenance = 'flight-hx/header-confirmed-scalar/1';
+const flightCppHeaderStatuses = new Map(
+  flightCppBestEffort.modules.map(({ path: header, status }) => [header, status]),
+);
 if (planning.schema !== 'flight-hx-native-binding-plan/1') {
   throw new Error(`Unknown native binding plan schema ${String(planning.schema)}`);
 }
@@ -32,6 +40,9 @@ if (manifest.haxeBindingPlan?.candidateArtifact !== 'generated/js/native-plannin
 if (manifest.haxeBindingPlan?.promotion !== 'compiler-emitted-header-pass-compile-run') {
   throw new Error(`Unknown native promotion policy ${String(manifest.haxeBindingPlan?.promotion)}`);
 }
+if (manifest.haxeBindingPlan?.overridePromotion !== 'dependency-complete-required-scalar-compile-run') {
+  throw new Error(`Unknown native override policy ${String(manifest.haxeBindingPlan?.overridePromotion)}`);
+}
 const planned = new Map(
   planning.declarations
     .filter(({ kind }) => kind === 'function')
@@ -44,14 +55,33 @@ const publicFunctions = new Map(
 );
 
 const expected = new Map();
-const manifestPublicNames = [];
+const manifestEntries = [];
 for (const module of manifest.modules) {
   const holder = module.module.replace(/^flight\./u, '');
   const bindings = module.functions.map((binding) => {
     const publicName = `${module.module}.${binding.name}`;
-    manifestPublicNames.push(publicName);
-    const plan = planned.get(publicName);
+    const provenance = binding.provenance ?? compilerPlanProvenance;
+    manifestEntries.push({ provenance, publicName });
+    let plan = planned.get(publicName);
     const declaration = publicFunctions.get(publicName);
+    if (!declaration) throw new Error(`${publicName} is absent from the complete default web API`);
+    const parsed = parseSignature(declaration.signature);
+    if (provenance === scalarOverrideProvenance) {
+      if (plan) {
+        throw new Error(`${publicName} is now compiler-planned; remove its downstream scalar override`);
+      }
+      validateScalarOverride(publicName, binding, declaration, parsed);
+      plan = {
+        headerStatus: 'pass',
+        include: binding.header,
+        kind: 'function',
+        nativeName: binding.native,
+        publicName,
+        transport: 'direct',
+      };
+    } else if (provenance !== compilerPlanProvenance) {
+      throw new Error(`${publicName} has unknown provenance ${String(provenance)}`);
+    }
     if (!plan) throw new Error(`${publicName} is absent from flight-compiler's Haxe-C++ function plan`);
     if (plan.transport !== 'direct' && plan.transport !== 'adapter') {
       throw new Error(`${publicName} uses unknown compiler transport ${String(plan.transport)}`);
@@ -60,9 +90,8 @@ for (const module of manifest.modules) {
     if (plan.nativeName !== binding.native) {
       throw new Error(`${publicName} native locator drifted: ${binding.native} != ${plan.nativeName}`);
     }
-    if (!declaration) throw new Error(`${publicName} is absent from the complete default web API`);
     if (plan.transport === 'adapter') validateCompilerAdapter(publicName, binding, plan);
-    return { ...binding, declaration, parsed: parseSignature(declaration.signature), plan };
+    return { ...binding, declaration, parsed, plan, provenance };
   });
   const directBindings = bindings.filter(({ plan }) => plan.transport === 'direct');
   const adapterBindings = bindings.filter(({ plan }) => plan.transport === 'adapter');
@@ -88,6 +117,7 @@ for (const module of manifest.modules) {
   }
 }
 
+const manifestPublicNames = manifestEntries.map(({ publicName }) => publicName);
 const duplicatePublicNames = manifestPublicNames.filter((name, index) => manifestPublicNames.indexOf(name) !== index);
 if (duplicatePublicNames.length > 0) {
   throw new Error(`Native manifest repeats public functions: ${[...new Set(duplicatePublicNames)].sort(compareText).join(', ')}`);
@@ -99,14 +129,17 @@ const promotablePublicNames = planning.declarations
   )
   .map(({ publicName }) => publicName)
   .sort(compareText);
-const recordedPublicNames = [...manifestPublicNames].sort(compareText);
+const recordedPublicNames = manifestEntries
+  .filter(({ provenance }) => provenance === compilerPlanProvenance)
+  .map(({ publicName }) => publicName)
+  .sort(compareText);
 if (JSON.stringify(recordedPublicNames) !== JSON.stringify(promotablePublicNames)) {
   const recorded = new Set(recordedPublicNames);
   const promotable = new Set(promotablePublicNames);
   const missing = promotablePublicNames.filter((name) => !recorded.has(name));
   const extra = recordedPublicNames.filter((name) => !promotable.has(name));
   throw new Error(
-    `Native manifest does not exactly implement compiler-emitted/header-pass candidates; ` +
+    `Native manifest's compiler-owned partition does not exactly implement compiler-emitted/header-pass candidates; ` +
       `missing=${missing.join(', ') || 'none'}; extra=${extra.join(', ') || 'none'}`,
   );
 }
@@ -130,7 +163,8 @@ process.stdout.write(
   `Native function bindings ${check ? 'are current' : 'updated'}: ${String(manifest.modules.length)} holder(s), ` +
     `${String(manifestPublicNames.length)} function(s) ` +
     `(${String(planning.declarations.filter(({ kind, transport, headerStatus }) => kind === 'function' && transport === 'direct' && headerStatus === 'pass').length)} direct, ` +
-    `${String(planning.declarations.filter(({ kind, transport, headerStatus }) => kind === 'function' && transport === 'adapter' && headerStatus === 'pass').length)} compiler adapter).\n`,
+    `${String(planning.declarations.filter(({ kind, transport, headerStatus }) => kind === 'function' && transport === 'adapter' && headerStatus === 'pass').length)} compiler adapter, ` +
+    `${String(manifestEntries.filter(({ provenance }) => provenance === scalarOverrideProvenance).length)} downstream scalar override).\n`,
 );
 
 function emitFacade(holder, bindings) {
@@ -192,6 +226,28 @@ function validateCompilerAdapter(publicName, binding, plan) {
     !adapter.emittedFile?.contents?.includes(`${adapter.targetNativeName}(`)
   ) {
     throw new Error(`${publicName} compiler adapter emission does not match its plan`);
+  }
+}
+
+function validateScalarOverride(publicName, binding, declaration, parsed) {
+  if (flightCppHeaderStatuses.get(binding.header) !== 'emitted') {
+    throw new Error(`${publicName} override header is not dependency-complete: ${binding.header}`);
+  }
+  if (parsed.parameters.some(({ optional, type }) => optional || type === 'String') || parsed.result === 'String') {
+    throw new Error(`${publicName} override is not a required primitive scalar signature`);
+  }
+  const cppName = camelToSnake(declaration.sourceName);
+  if (!binding.native.endsWith(`::${cppName}`)) {
+    throw new Error(`${publicName} override native locator does not end in ${cppName}`);
+  }
+  const headerPath = path.join(flightCpp.directory, 'generated', 'include', binding.header);
+  if (!existsSync(headerPath)) throw new Error(`${publicName} override header is missing: ${binding.header}`);
+  const parameters = parsed.parameters
+    .map(({ name, type }) => `${cppType(type)} ${safeCppName(camelToSnake(name))}`)
+    .join(', ');
+  const expectedSignature = `inline ${cppType(parsed.result)} ${cppName}(${parameters})`;
+  if (!readFileSync(headerPath, 'utf8').includes(expectedSignature)) {
+    throw new Error(`${publicName} override header does not contain ${expectedSignature}`);
   }
 }
 
@@ -342,4 +398,11 @@ function compareText(left, right) {
 
 function escapeRegExp(value) {
   return value.replace(/[.*+?^${}()|[\]\\]/gu, '\\$&');
+}
+
+function camelToSnake(value) {
+  return value
+    .replace(/([A-Z]+)([A-Z][a-z])/gu, '$1_$2')
+    .replace(/([a-z0-9])([A-Z])/gu, '$1_$2')
+    .toLowerCase();
 }

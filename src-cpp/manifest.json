@@ -10,7 +10,8 @@
     "schema": "flight-haxe-cpp-extern-plan/1",
     "compilerRevision": "804435ad89716bd3ddb8144e435adb0be6c9477b",
     "candidateArtifact": "generated/js/native-planning.json",
-    "promotion": "compiler-emitted-header-pass-compile-run"
+    "promotion": "compiler-emitted-header-pass-compile-run",
+    "overridePromotion": "dependency-complete-required-scalar-compile-run"
   },
   "cppStandard": 20,
   "corrections": [
@@ -155,6 +156,107 @@
           "name": "setEntityRuntimeGuardMode",
           "native": "flight::entity::set_entity_runtime_guard_mode",
           "header": "flight/entity/contract.hpp"
+        }
+      ]
+    },
+    {
+      "module": "flight.Effects",
+      "functions": [
+        {
+          "name": "computeAcesToneMap",
+          "native": "flight::effects::compute_aces_tone_map",
+          "header": "flight/effects/tone_map_math.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        },
+        {
+          "name": "computeBoxBlurPassRadius",
+          "native": "flight::effects::compute_box_blur_pass_radius",
+          "header": "flight/effects/box_blur_math.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        },
+        {
+          "name": "computeBoxBlurRadius",
+          "native": "flight::effects::compute_box_blur_radius",
+          "header": "flight/effects/box_blur_math.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        },
+        {
+          "name": "computeDepthOfFieldCoc",
+          "native": "flight::effects::compute_depth_of_field_coc",
+          "header": "flight/effects/depth_math.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        },
+        {
+          "name": "computeExposureScale",
+          "native": "flight::effects::compute_exposure_scale",
+          "header": "flight/effects/tone_map_math.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        },
+        {
+          "name": "computeGaussianRadiusFromSigma",
+          "native": "flight::effects::compute_gaussian_radius_from_sigma",
+          "header": "flight/effects/gaussian_math.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        },
+        {
+          "name": "computeGaussianSigmaForBlurRadius",
+          "native": "flight::effects::compute_gaussian_sigma_for_blur_radius",
+          "header": "flight/effects/box_blur_math.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        },
+        {
+          "name": "computeGaussianSigmaFromRadius",
+          "native": "flight::effects::compute_gaussian_sigma_from_radius",
+          "header": "flight/effects/gaussian_math.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        },
+        {
+          "name": "computeLinearDepthFromNonlinear",
+          "native": "flight::effects::compute_linear_depth_from_nonlinear",
+          "header": "flight/effects/depth_math.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        },
+        {
+          "name": "computeReinhardExtendedToneMap",
+          "native": "flight::effects::compute_reinhard_extended_tone_map",
+          "header": "flight/effects/tone_map_math.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        },
+        {
+          "name": "computeReinhardToneMap",
+          "native": "flight::effects::compute_reinhard_tone_map",
+          "header": "flight/effects/tone_map_math.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        },
+        {
+          "name": "computeUncharted2ToneMap",
+          "native": "flight::effects::compute_uncharted2_tone_map",
+          "header": "flight/effects/tone_map_math.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        },
+        {
+          "name": "getBlurDownsampleLevel",
+          "native": "flight::effects::get_blur_downsample_level",
+          "header": "flight/effects/blur_downsample.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        },
+        {
+          "name": "getBlurResidualSigma",
+          "native": "flight::effects::get_blur_residual_sigma",
+          "header": "flight/effects/blur_downsample.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        },
+        {
+          "name": "getGaussianKernelSize",
+          "native": "flight::effects::get_gaussian_kernel_size",
+          "header": "flight/effects/gaussian_kernel.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        },
+        {
+          "name": "getLinearSampledGaussianTapCount",
+          "native": "flight::effects::get_linear_sampled_gaussian_tap_count",
+          "header": "flight/effects/linear_sampled_gaussian.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
         }
       ]
     },

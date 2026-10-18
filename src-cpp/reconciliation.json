@@ -1835,7 +1835,7 @@
         },
         {
           "code": "native-function-gap",
-          "count": 211
+          "count": 195
         },
         {
           "code": "native-value-gap",
@@ -1846,215 +1846,115 @@
           "count": 195
         },
         {
-          "code": "header-confirmed-scalar-probe-candidates",
-          "count": 16
-        },
-        {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 213
         }
       ],
       "nativeDefault": {
-        "functions": [],
+        "functions": [
+          {
+            "header": "flight/effects/tone_map_math.hpp",
+            "holder": "Effects",
+            "name": "computeAcesToneMap",
+            "native": "flight::effects::compute_aces_tone_map"
+          },
+          {
+            "header": "flight/effects/box_blur_math.hpp",
+            "holder": "Effects",
+            "name": "computeBoxBlurPassRadius",
+            "native": "flight::effects::compute_box_blur_pass_radius"
+          },
+          {
+            "header": "flight/effects/box_blur_math.hpp",
+            "holder": "Effects",
+            "name": "computeBoxBlurRadius",
+            "native": "flight::effects::compute_box_blur_radius"
+          },
+          {
+            "header": "flight/effects/depth_math.hpp",
+            "holder": "Effects",
+            "name": "computeDepthOfFieldCoc",
+            "native": "flight::effects::compute_depth_of_field_coc"
+          },
+          {
+            "header": "flight/effects/tone_map_math.hpp",
+            "holder": "Effects",
+            "name": "computeExposureScale",
+            "native": "flight::effects::compute_exposure_scale"
+          },
+          {
+            "header": "flight/effects/gaussian_math.hpp",
+            "holder": "Effects",
+            "name": "computeGaussianRadiusFromSigma",
+            "native": "flight::effects::compute_gaussian_radius_from_sigma"
+          },
+          {
+            "header": "flight/effects/box_blur_math.hpp",
+            "holder": "Effects",
+            "name": "computeGaussianSigmaForBlurRadius",
+            "native": "flight::effects::compute_gaussian_sigma_for_blur_radius"
+          },
+          {
+            "header": "flight/effects/gaussian_math.hpp",
+            "holder": "Effects",
+            "name": "computeGaussianSigmaFromRadius",
+            "native": "flight::effects::compute_gaussian_sigma_from_radius"
+          },
+          {
+            "header": "flight/effects/depth_math.hpp",
+            "holder": "Effects",
+            "name": "computeLinearDepthFromNonlinear",
+            "native": "flight::effects::compute_linear_depth_from_nonlinear"
+          },
+          {
+            "header": "flight/effects/tone_map_math.hpp",
+            "holder": "Effects",
+            "name": "computeReinhardExtendedToneMap",
+            "native": "flight::effects::compute_reinhard_extended_tone_map"
+          },
+          {
+            "header": "flight/effects/tone_map_math.hpp",
+            "holder": "Effects",
+            "name": "computeReinhardToneMap",
+            "native": "flight::effects::compute_reinhard_tone_map"
+          },
+          {
+            "header": "flight/effects/tone_map_math.hpp",
+            "holder": "Effects",
+            "name": "computeUncharted2ToneMap",
+            "native": "flight::effects::compute_uncharted2_tone_map"
+          },
+          {
+            "header": "flight/effects/blur_downsample.hpp",
+            "holder": "Effects",
+            "name": "getBlurDownsampleLevel",
+            "native": "flight::effects::get_blur_downsample_level"
+          },
+          {
+            "header": "flight/effects/blur_downsample.hpp",
+            "holder": "Effects",
+            "name": "getBlurResidualSigma",
+            "native": "flight::effects::get_blur_residual_sigma"
+          },
+          {
+            "header": "flight/effects/gaussian_kernel.hpp",
+            "holder": "Effects",
+            "name": "getGaussianKernelSize",
+            "native": "flight::effects::get_gaussian_kernel_size"
+          },
+          {
+            "header": "flight/effects/linear_sampled_gaussian.hpp",
+            "holder": "Effects",
+            "name": "getLinearSampledGaussianTapCount",
+            "native": "flight::effects::get_linear_sampled_gaussian_tap_count"
+          }
+        ],
         "types": [],
         "values": []
       },
       "package": "@flighthq/effects",
-      "scalarProbeCandidates": [
-        {
-          "cppName": "compute_aces_tone_map",
-          "headers": [
-            {
-              "path": "flight/effects/tone_map_math.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Effects",
-          "name": "computeAcesToneMap",
-          "signature": "function computeAcesToneMap(x:Float):Float"
-        },
-        {
-          "cppName": "compute_box_blur_pass_radius",
-          "headers": [
-            {
-              "path": "flight/effects/box_blur_math.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Effects",
-          "name": "computeBoxBlurPassRadius",
-          "signature": "function computeBoxBlurPassRadius(sigma:Float, passes:Float, pass:Float):Float"
-        },
-        {
-          "cppName": "compute_box_blur_radius",
-          "headers": [
-            {
-              "path": "flight/effects/box_blur_math.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Effects",
-          "name": "computeBoxBlurRadius",
-          "signature": "function computeBoxBlurRadius(sigma:Float, passes:Float):Float"
-        },
-        {
-          "cppName": "compute_depth_of_field_coc",
-          "headers": [
-            {
-              "path": "flight/effects/depth_math.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Effects",
-          "name": "computeDepthOfFieldCoc",
-          "signature": "function computeDepthOfFieldCoc(depth:Float, focusDistance:Float, aperture:Float, focalLength:Float):Float"
-        },
-        {
-          "cppName": "compute_exposure_scale",
-          "headers": [
-            {
-              "path": "flight/effects/tone_map_math.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Effects",
-          "name": "computeExposureScale",
-          "signature": "function computeExposureScale(exposure:Float):Float"
-        },
-        {
-          "cppName": "compute_gaussian_radius_from_sigma",
-          "headers": [
-            {
-              "path": "flight/effects/gaussian_math.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Effects",
-          "name": "computeGaussianRadiusFromSigma",
-          "signature": "function computeGaussianRadiusFromSigma(sigma:Float):Float"
-        },
-        {
-          "cppName": "compute_gaussian_sigma_for_blur_radius",
-          "headers": [
-            {
-              "path": "flight/effects/box_blur_math.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Effects",
-          "name": "computeGaussianSigmaForBlurRadius",
-          "signature": "function computeGaussianSigmaForBlurRadius(radius:Float, passes:Float):Float"
-        },
-        {
-          "cppName": "compute_gaussian_sigma_from_radius",
-          "headers": [
-            {
-              "path": "flight/effects/gaussian_math.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Effects",
-          "name": "computeGaussianSigmaFromRadius",
-          "signature": "function computeGaussianSigmaFromRadius(radius:Float):Float"
-        },
-        {
-          "cppName": "compute_linear_depth_from_nonlinear",
-          "headers": [
-            {
-              "path": "flight/effects/depth_math.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Effects",
-          "name": "computeLinearDepthFromNonlinear",
-          "signature": "function computeLinearDepthFromNonlinear(depth:Float, near:Float, far:Float):Float"
-        },
-        {
-          "cppName": "compute_reinhard_extended_tone_map",
-          "headers": [
-            {
-              "path": "flight/effects/tone_map_math.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Effects",
-          "name": "computeReinhardExtendedToneMap",
-          "signature": "function computeReinhardExtendedToneMap(x:Float, white:Float):Float"
-        },
-        {
-          "cppName": "compute_reinhard_tone_map",
-          "headers": [
-            {
-              "path": "flight/effects/tone_map_math.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Effects",
-          "name": "computeReinhardToneMap",
-          "signature": "function computeReinhardToneMap(x:Float):Float"
-        },
-        {
-          "cppName": "compute_uncharted2_tone_map",
-          "headers": [
-            {
-              "path": "flight/effects/tone_map_math.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Effects",
-          "name": "computeUncharted2ToneMap",
-          "signature": "function computeUncharted2ToneMap(x:Float):Float"
-        },
-        {
-          "cppName": "get_blur_downsample_level",
-          "headers": [
-            {
-              "path": "flight/effects/blur_downsample.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Effects",
-          "name": "getBlurDownsampleLevel",
-          "signature": "function getBlurDownsampleLevel(sigma:Float):Float"
-        },
-        {
-          "cppName": "get_blur_residual_sigma",
-          "headers": [
-            {
-              "path": "flight/effects/blur_downsample.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Effects",
-          "name": "getBlurResidualSigma",
-          "signature": "function getBlurResidualSigma(sigma:Float, level:Float):Float"
-        },
-        {
-          "cppName": "get_gaussian_kernel_size",
-          "headers": [
-            {
-              "path": "flight/effects/gaussian_kernel.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Effects",
-          "name": "getGaussianKernelSize",
-          "signature": "function getGaussianKernelSize(sigma:Float):Float"
-        },
-        {
-          "cppName": "get_linear_sampled_gaussian_tap_count",
-          "headers": [
-            {
-              "path": "flight/effects/linear_sampled_gaussian.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Effects",
-          "name": "getLinearSampledGaussianTapCount",
-          "signature": "function getLinearSampledGaussianTapCount(sigma:Float):Float"
-        }
-      ],
-      "status": "emitted-unbound",
+      "scalarProbeCandidates": [],
+      "status": "partial-native",
       "webDefault": {
         "functions": 211,
         "types": 0,
@@ -10958,10 +10858,10 @@
       "sourceModules": 3151
     },
     "nativeDefault": {
-      "boundHeaderConfirmedScalarFunctions": 58,
+      "boundHeaderConfirmedScalarFunctions": 74,
       "extensionTypes": 1,
-      "functions": 66,
-      "packages": 9,
+      "functions": 82,
+      "packages": 10,
       "types": 3,
       "values": 0
     },
@@ -10995,14 +10895,15 @@
       "unboundFunctionCandidates": 0
     },
     "packageStatus": {
-      "emitted-unbound": 143,
+      "emitted-unbound": 142,
       "empty-web-contract": 1,
-      "partial-native": 9
+      "partial-native": 10
     },
     "scalarExpansion": {
       "headerConfirmedFunctions": 183,
       "packages": 45,
-      "unboundProbeCandidates": 125
+      "unboundProbeCandidates": 109,
+      "unboundProbePackages": 39
     },
     "webDefault": {
       "functions": 6906,

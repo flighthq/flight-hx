@@ -4,9 +4,9 @@
 from an isolated `-lib flight` consumer:
 
 - web uses the complete generated Flight ESM extern surface and the static-import bundler pipeline;
-- desktop uses hxcpp for all 66 compiler-planned, compile-proven functions across Audio, Color,
-  Entity, Input, Math, Path, Power, and Protocol: 62 direct calls plus four compiler-emitted UTF-8
-  String adapters;
+- desktop uses hxcpp for all 82 manifest-recorded, compile-proven functions across Audio, Color,
+  Effects, Entity, Input, Math, Path, Power, and Protocol: 62 compiler-planned direct calls, four
+  compiler-emitted UTF-8 String adapters, and 16 explicit dependency-complete Effects overrides;
 - `CrossTargetFallback.hx` separately keeps the legacy-pinned compiler-emitted Haxe subset honest
   on ordinary Haxe-to-JS without adding target branches to the production sample.
 

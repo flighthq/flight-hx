@@ -1,6 +1,7 @@
 import flight.Audio;
 import flight.Color;
 import flight.Entity;
+import flight.Effects;
 import flight.Input;
 import flight.Math;
 import flight.Path;
@@ -73,6 +74,23 @@ class CrossTargetMath {
     assertFinite('colorFromKelvin', colorFromKelvin(6500.0));
     assertString('computeRgbHexString', computeRgbHexString(16711680.0), '#ff0000');
     assertString('computeRgbaCssString', computeRgbaCssString(4278190335.0), 'rgba(255,0,0,1)');
+
+    assertFinite('computeAcesToneMap', computeAcesToneMap(1.0));
+    assertFinite('computeBoxBlurPassRadius', computeBoxBlurPassRadius(4.0, 3.0, 0.0));
+    assertFinite('computeBoxBlurRadius', computeBoxBlurRadius(4.0, 3.0));
+    assertClose('computeDepthOfFieldCoc', computeDepthOfFieldCoc(5.0, 5.0, 1.8, 50.0), 0.0);
+    assertClose('computeExposureScale', computeExposureScale(1.0), 2.0);
+    assertClose('computeGaussianRadiusFromSigma', computeGaussianRadiusFromSigma(2.0), 6.0);
+    assertFinite('computeGaussianSigmaForBlurRadius', computeGaussianSigmaForBlurRadius(4.0, 3.0));
+    assertFinite('computeGaussianSigmaFromRadius', computeGaussianSigmaFromRadius(6.0));
+    assertFinite('computeLinearDepthFromNonlinear', computeLinearDepthFromNonlinear(0.5, 0.1, 100.0));
+    assertFinite('computeReinhardExtendedToneMap', computeReinhardExtendedToneMap(1.0, 4.0));
+    assertClose('computeReinhardToneMap', computeReinhardToneMap(1.0), 0.5);
+    assertFinite('computeUncharted2ToneMap', computeUncharted2ToneMap(1.0));
+    assertClose('getBlurDownsampleLevel', getBlurDownsampleLevel(8.0), 1.0);
+    assertClose('getBlurResidualSigma', getBlurResidualSigma(8.0, 1.0), 4.0);
+    assertClose('getGaussianKernelSize', getGaussianKernelSize(2.0), 13.0);
+    assertClose('getLinearSampledGaussianTapCount', getLinearSampledGaussianTapCount(2.0), 7.0);
 
     assertClose('applyGamepadAxisDeadZone low', applyGamepadAxisDeadZone(0.05, 0.1), 0.0);
     assertFinite('quadratic curvature', getQuadraticBezierCurvature(0, 0, 1, 1, 2, 0, 0.5));

@@ -20,8 +20,11 @@ Analysis, TypeScript parsing, IR, lowering, and primary Haxe emission must remai
 For extern mode it also asks flight-compiler for its target-neutral dual-binding and Haxe-C++ extern
 plans, folds in flight-cpp's real refusal/header ledgers, and writes the compact checked
 `generated/js/native-planning.json`. `syncNativeFunctions.mjs` only materializes manifest-approved
-direct functions and exact compiler-emitted adapters found in that plan; schema, compiler revision,
-locator, carrier, emitted adapter body, header status, and web signature drift all fail loudly.
+direct functions and exact compiler-emitted adapters found in that plan. It also permits explicit
+downstream scalar overrides only when a dependency-complete flight-cpp header contains the exact
+required-primitive signature and the compiler plan does not yet contain that function. Schema,
+compiler revision, locator, carrier, emitted adapter body, header status, provenance, and web
+signature drift all fail loudly.
 `reconcileNativeSurface.mjs` then compares it with flight-cpp's best-effort/refusal inventories and
 the manifest-pinned native Haxe partition. Its `src-cpp/reconciliation.json` output distinguishes
 dependency-complete headers, dependency-incomplete headers, hard refusals, compile-proven bindings,
