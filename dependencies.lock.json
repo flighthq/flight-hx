@@ -12,13 +12,13 @@
       "name": "flight-compiler",
       "repository": "https://github.com/flighthq/flight-compiler",
       "branch": "main",
-      "commit": "806d257d2f4100de745cc97340e61c2f301b0f24"
+      "commit": "804435ad89716bd3ddb8144e435adb0be6c9477b"
     },
     {
       "name": "flight-cpp",
       "repository": "https://github.com/flighthq/flight-cpp",
       "branch": "main",
-      "commit": "f4821bd28f92d6b617e8fed30c4d088b4e3dcc72"
+      "commit": "eb4021fafee3b829e7065c99f081c32ce8117d72"
     }
   ]
 }

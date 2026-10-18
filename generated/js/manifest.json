@@ -37,7 +37,7 @@
     ],
     "emissionMode": "extern",
     "repository": "https://github.com/flighthq/flight-compiler",
-    "revision": "806d257d2f4100de745cc97340e61c2f301b0f24",
+    "revision": "804435ad89716bd3ddb8144e435adb0be6c9477b",
     "target": "haxe"
   },
   "packages": [
@@ -5759,6 +5759,32 @@
       "missingDeclarations": 0,
       "packages": 153,
       "unexpectedDeclarations": 0
+    },
+    "nativePlanning": {
+      "bindings": 11247,
+      "cppAvailability": {
+        "available": 4268,
+        "refused": 6979
+      },
+      "cppExternDeclarations": 2245,
+      "cppExternEmissionFiles": 2191,
+      "cppExternRefusals": 9002,
+      "declarationKinds": {
+        "function": 66,
+        "type": 2179
+      },
+      "headerStatuses": {
+        "pass": 2245
+      },
+      "javascriptAvailability": {
+        "available": 11247
+      },
+      "namingDivergences": 32,
+      "refusalCodes": {
+        "cpp-binding-unavailable/cpp-module-refused": 6979,
+        "unsupported-carrier": 787,
+        "unsupported-declaration": 1236
+      }
     }
   }
 }

@@ -13,6 +13,10 @@
       "reason": "The current compile-proven native partition binds functions and Scene2D handles but no mutable/default runtime value exports."
     },
     {
+      "code": "split-compiler-provenance",
+      "reason": "flight-hx web/dual planning uses flight-compiler 804435ad89716bd3ddb8144e435adb0be6c9477b, while the pinned flight-cpp generated SDK was committed with 806d257d2f4100de745cc97340e61c2f301b0f24. Both revisions are recorded; shared Flight source identity and exact locators are reconciled without claiming compiler-revision equality."
+    },
+    {
       "code": "host-specific-extensions",
       "reason": "SDL3/OpenGL hosting and the Scene2D ownership session are manifest-recorded flight-hx extensions, not claims of package-wide portable API parity."
     }
@@ -45,6 +49,14 @@
   },
   "packages": [
     {
+      "compilerPlan": {
+        "bindings": 2,
+        "cppAvailable": 2,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 2,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 4,
         "dependencyIncompleteModules": 0,
@@ -59,6 +71,10 @@
         },
         {
           "code": "non-scalar-signature-review",
+          "count": 2
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
           "count": 2
         }
       ],
@@ -77,6 +93,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 6,
+        "cppAvailable": 6,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 6,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 3,
         "dependencyIncompleteModules": 0,
@@ -91,6 +115,10 @@
         },
         {
           "code": "non-scalar-signature-review",
+          "count": 6
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
           "count": 6
         }
       ],
@@ -109,6 +137,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 69,
+        "cppAvailable": 69,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 69,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 22,
         "dependencyIncompleteModules": 0,
@@ -128,6 +164,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 64
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 69
         }
       ],
       "nativeDefault": {
@@ -145,6 +185,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 67,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 67,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 4,
         "dependencyIncompleteModules": 8,
@@ -177,6 +225,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 67
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 67
         }
       ],
       "nativeDefault": {
@@ -194,6 +246,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 127,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 127,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 2,
         "dependencyIncompleteModules": 2,
@@ -226,6 +286,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 127
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 127
         }
       ],
       "nativeDefault": {
@@ -243,6 +307,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 19,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 19,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 1,
         "dependencyIncompleteModules": 2,
@@ -279,6 +351,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 19
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 19
         }
       ],
       "nativeDefault": {
@@ -296,6 +372,22 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 35,
+        "cppAvailable": 35,
+        "cppExternDeclarations": 1,
+        "cppExternRefusals": 34,
+        "functionCandidates": [
+          {
+            "header": "flight/audio/contract.hpp",
+            "holder": "Audio",
+            "name": "getAudioMimeTypeEssence",
+            "native": "flight::haxe::_cpp::getAudioMimeTypeEssence_3829c80c",
+            "transport": "adapter"
+          }
+        ],
+        "headerPassingDeclarations": 1
+      },
       "flightCpp": {
         "completeModules": 8,
         "dependencyIncompleteModules": 0,
@@ -311,6 +403,14 @@
         {
           "code": "non-scalar-signature-review",
           "count": 35
+        },
+        {
+          "code": "compiler-haxe-cpp-function-candidates",
+          "count": 1
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 34
         }
       ],
       "nativeDefault": {
@@ -328,6 +428,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 4,
+        "cppAvailable": 4,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 4,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 4,
         "dependencyIncompleteModules": 0,
@@ -347,6 +455,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 3
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 4
         }
       ],
       "nativeDefault": {
@@ -364,6 +476,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 113,
+        "cppAvailable": 113,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 113,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 44,
         "dependencyIncompleteModules": 0,
@@ -387,6 +507,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 106
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 113
         }
       ],
       "nativeDefault": {
@@ -404,6 +528,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 18,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 18,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 4,
         "dependencyIncompleteModules": 3,
@@ -440,6 +572,10 @@
         {
           "code": "header-confirmed-scalar-probe-candidates",
           "count": 3
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 18
         }
       ],
       "nativeDefault": {
@@ -494,6 +630,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 22,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 22,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 6,
         "dependencyIncompleteModules": 2,
@@ -530,6 +674,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 16
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 22
         }
       ],
       "nativeDefault": {
@@ -547,6 +695,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 26,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 26,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 0,
         "dependencyIncompleteModules": 3,
@@ -583,6 +739,10 @@
         {
           "code": "header-confirmed-scalar-probe-candidates",
           "count": 2
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 26
         }
       ],
       "nativeDefault": {
@@ -625,6 +785,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 55,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 55,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 18,
         "dependencyIncompleteModules": 3,
@@ -653,6 +821,10 @@
         {
           "code": "header-confirmed-scalar-probe-candidates",
           "count": 3
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 55
         }
       ],
       "nativeDefault": {
@@ -707,6 +879,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 31,
+        "cppAvailable": 31,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 31,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 7,
         "dependencyIncompleteModules": 0,
@@ -721,6 +901,10 @@
         },
         {
           "code": "non-scalar-signature-review",
+          "count": 31
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
           "count": 31
         }
       ],
@@ -739,6 +923,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 12,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 12,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 1,
         "dependencyIncompleteModules": 2,
@@ -775,6 +967,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 10
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 12
         }
       ],
       "nativeDefault": {
@@ -792,6 +988,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 36,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 36,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 1,
         "dependencyIncompleteModules": 3,
@@ -820,6 +1024,10 @@
         {
           "code": "header-confirmed-scalar-probe-candidates",
           "count": 2
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 36
         }
       ],
       "nativeDefault": {
@@ -862,6 +1070,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 27,
+        "cppAvailable": 27,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 27,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 3,
         "dependencyIncompleteModules": 0,
@@ -876,6 +1092,10 @@
         },
         {
           "code": "non-scalar-signature-review",
+          "count": 27
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
           "count": 27
         }
       ],
@@ -894,6 +1114,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 15,
+        "cppAvailable": 15,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 15,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 4,
         "dependencyIncompleteModules": 0,
@@ -908,6 +1136,10 @@
         },
         {
           "code": "non-scalar-signature-review",
+          "count": 15
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
           "count": 15
         }
       ],
@@ -926,6 +1158,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 141,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 141,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 17,
         "dependencyIncompleteModules": 15,
@@ -966,6 +1206,10 @@
         {
           "code": "header-confirmed-scalar-probe-candidates",
           "count": 1
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 141
         }
       ],
       "nativeDefault": {
@@ -996,6 +1240,29 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 31,
+        "cppAvailable": 31,
+        "cppExternDeclarations": 15,
+        "cppExternRefusals": 16,
+        "functionCandidates": [
+          {
+            "header": "flight/color/contract.hpp",
+            "holder": "Color",
+            "name": "computeRgbHexString",
+            "native": "flight::haxe::_cpp::computeRgbHexString_a25cbb35",
+            "transport": "adapter"
+          },
+          {
+            "header": "flight/color/contract.hpp",
+            "holder": "Color",
+            "name": "computeRgbaCssString",
+            "native": "flight::haxe::_cpp::computeRgbaCssString_9aeb1c03",
+            "transport": "adapter"
+          }
+        ],
+        "headerPassingDeclarations": 15
+      },
       "flightCpp": {
         "completeModules": 11,
         "dependencyIncompleteModules": 0,
@@ -1006,170 +1273,107 @@
       "issues": [
         {
           "code": "native-function-gap",
-          "count": 29
+          "count": 18
         },
         {
           "code": "non-scalar-signature-review",
           "count": 18
         },
         {
-          "code": "header-confirmed-scalar-probe-candidates",
-          "count": 11
+          "code": "compiler-haxe-cpp-function-candidates",
+          "count": 2
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 16
         }
       ],
       "nativeDefault": {
         "functions": [
           {
-            "header": "flight/color/srgb_transfer.hpp",
+            "header": "flight/color/contract.hpp",
+            "holder": "Color",
+            "name": "colorFromKelvin",
+            "native": "flight::color::color_from_kelvin"
+          },
+          {
+            "header": "flight/color/contract.hpp",
+            "holder": "Color",
+            "name": "getColorAlpha",
+            "native": "flight::color::get_color_alpha"
+          },
+          {
+            "header": "flight/color/contract.hpp",
+            "holder": "Color",
+            "name": "getColorContrastRatio",
+            "native": "flight::color::get_color_contrast_ratio"
+          },
+          {
+            "header": "flight/color/contract.hpp",
+            "holder": "Color",
+            "name": "getColorLuminance",
+            "native": "flight::color::get_color_luminance"
+          },
+          {
+            "header": "flight/color/contract.hpp",
+            "holder": "Color",
+            "name": "getColorRgb",
+            "native": "flight::color::get_color_rgb"
+          },
+          {
+            "header": "flight/color/contract.hpp",
+            "holder": "Color",
+            "name": "lerpColor",
+            "native": "flight::color::lerp_color"
+          },
+          {
+            "header": "flight/color/contract.hpp",
             "holder": "Color",
             "name": "linearChannelToSrgb",
             "native": "flight::color::linear_channel_to_srgb"
           },
           {
-            "header": "flight/color/srgb_transfer.hpp",
+            "header": "flight/color/contract.hpp",
+            "holder": "Color",
+            "name": "packColor",
+            "native": "flight::color::pack_color"
+          },
+          {
+            "header": "flight/color/contract.hpp",
+            "holder": "Color",
+            "name": "packOpaqueColor",
+            "native": "flight::color::pack_opaque_color"
+          },
+          {
+            "header": "flight/color/contract.hpp",
+            "holder": "Color",
+            "name": "premultiplyColorAlpha",
+            "native": "flight::color::premultiply_color_alpha"
+          },
+          {
+            "header": "flight/color/contract.hpp",
+            "holder": "Color",
+            "name": "setColorAlpha",
+            "native": "flight::color::set_color_alpha"
+          },
+          {
+            "header": "flight/color/contract.hpp",
             "holder": "Color",
             "name": "srgbChannelToLinear",
             "native": "flight::color::srgb_channel_to_linear"
+          },
+          {
+            "header": "flight/color/contract.hpp",
+            "holder": "Color",
+            "name": "unpremultiplyColorAlpha",
+            "native": "flight::color::unpremultiply_color_alpha"
           }
         ],
         "types": [],
         "values": []
       },
       "package": "@flighthq/color",
-      "scalarProbeCandidates": [
-        {
-          "cppName": "color_from_kelvin",
-          "headers": [
-            {
-              "path": "flight/color/color_from_kelvin.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Color",
-          "name": "colorFromKelvin",
-          "signature": "function colorFromKelvin(kelvin:Float):Float"
-        },
-        {
-          "cppName": "get_color_alpha",
-          "headers": [
-            {
-              "path": "flight/color/pack_color.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Color",
-          "name": "getColorAlpha",
-          "signature": "function getColorAlpha(color:Float):Float"
-        },
-        {
-          "cppName": "get_color_contrast_ratio",
-          "headers": [
-            {
-              "path": "flight/color/luminance.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Color",
-          "name": "getColorContrastRatio",
-          "signature": "function getColorContrastRatio(a:Float, b:Float):Float"
-        },
-        {
-          "cppName": "get_color_luminance",
-          "headers": [
-            {
-              "path": "flight/color/luminance.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Color",
-          "name": "getColorLuminance",
-          "signature": "function getColorLuminance(color:Float):Float"
-        },
-        {
-          "cppName": "get_color_rgb",
-          "headers": [
-            {
-              "path": "flight/color/pack_color.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Color",
-          "name": "getColorRgb",
-          "signature": "function getColorRgb(color:Float):Float"
-        },
-        {
-          "cppName": "lerp_color",
-          "headers": [
-            {
-              "path": "flight/color/lerp_color.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Color",
-          "name": "lerpColor",
-          "signature": "function lerpColor(start:Float, end:Float, t:Float):Float"
-        },
-        {
-          "cppName": "pack_color",
-          "headers": [
-            {
-              "path": "flight/color/pack_color.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Color",
-          "name": "packColor",
-          "signature": "function packColor(r:Float, g:Float, b:Float, a:Float):Float"
-        },
-        {
-          "cppName": "pack_opaque_color",
-          "headers": [
-            {
-              "path": "flight/color/pack_color.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Color",
-          "name": "packOpaqueColor",
-          "signature": "function packOpaqueColor(rgb:Float):Float"
-        },
-        {
-          "cppName": "premultiply_color_alpha",
-          "headers": [
-            {
-              "path": "flight/color/premultiply_color_alpha.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Color",
-          "name": "premultiplyColorAlpha",
-          "signature": "function premultiplyColorAlpha(color:Float):Float"
-        },
-        {
-          "cppName": "set_color_alpha",
-          "headers": [
-            {
-              "path": "flight/color/pack_color.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Color",
-          "name": "setColorAlpha",
-          "signature": "function setColorAlpha(color:Float, alpha:Float):Float"
-        },
-        {
-          "cppName": "unpremultiply_color_alpha",
-          "headers": [
-            {
-              "path": "flight/color/premultiply_color_alpha.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Color",
-          "name": "unpremultiplyColorAlpha",
-          "signature": "function unpremultiplyColorAlpha(color:Float):Float"
-        }
-      ],
+      "scalarProbeCandidates": [],
       "status": "partial-native",
       "webDefault": {
         "functions": 31,
@@ -1178,6 +1382,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 36,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 36,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 1,
         "dependencyIncompleteModules": 5,
@@ -1210,6 +1422,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 36
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 36
         }
       ],
       "nativeDefault": {
@@ -1227,6 +1443,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 14,
+        "cppAvailable": 14,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 14,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 7,
         "dependencyIncompleteModules": 0,
@@ -1246,6 +1470,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 4
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 14
         }
       ],
       "nativeDefault": {
@@ -1263,6 +1491,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 12,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 12,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 0,
         "dependencyIncompleteModules": 2,
@@ -1295,6 +1531,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 12
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 12
         }
       ],
       "nativeDefault": {
@@ -1312,6 +1552,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 10,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 10,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 0,
         "dependencyIncompleteModules": 3,
@@ -1344,6 +1592,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 8
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 10
         }
       ],
       "nativeDefault": {
@@ -1361,6 +1613,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 10,
+        "cppAvailable": 10,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 10,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 3,
         "dependencyIncompleteModules": 0,
@@ -1375,6 +1635,10 @@
         },
         {
           "code": "non-scalar-signature-review",
+          "count": 10
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
           "count": 10
         }
       ],
@@ -1393,6 +1657,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 16,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 16,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 2,
         "dependencyIncompleteModules": 2,
@@ -1425,6 +1697,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 16
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 16
         }
       ],
       "nativeDefault": {
@@ -1442,6 +1718,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 54,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 54,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 19,
         "dependencyIncompleteModules": 3,
@@ -1482,6 +1766,10 @@
         {
           "code": "header-confirmed-scalar-probe-candidates",
           "count": 2
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 54
         }
       ],
       "nativeDefault": {
@@ -1524,6 +1812,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 213,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 213,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 54,
         "dependencyIncompleteModules": 3,
@@ -1564,6 +1860,10 @@
         {
           "code": "header-confirmed-scalar-probe-candidates",
           "count": 16
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 213
         }
       ],
       "nativeDefault": {
@@ -1774,6 +2074,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 88,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 88,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 6,
         "dependencyIncompleteModules": 5,
@@ -1810,6 +2118,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 70
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 88
         }
       ],
       "nativeDefault": {
@@ -1827,6 +2139,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 187,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 187,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 1,
         "dependencyIncompleteModules": 6,
@@ -1863,6 +2183,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 136
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 187
         }
       ],
       "nativeDefault": {
@@ -1880,6 +2204,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 187,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 187,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 1,
         "dependencyIncompleteModules": 11,
@@ -1920,6 +2252,10 @@
         {
           "code": "header-confirmed-scalar-probe-candidates",
           "count": 1
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 187
         }
       ],
       "nativeDefault": {
@@ -1950,6 +2286,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 2,
+        "cppAvailable": 2,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 2,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 3,
         "dependencyIncompleteModules": 0,
@@ -1964,6 +2308,10 @@
         },
         {
           "code": "non-scalar-signature-review",
+          "count": 2
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
           "count": 2
         }
       ],
@@ -1982,6 +2330,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 22,
+        "cppAvailable": 22,
+        "cppExternDeclarations": 3,
+        "cppExternRefusals": 19,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 3
+      },
       "flightCpp": {
         "completeModules": 10,
         "dependencyIncompleteModules": 0,
@@ -1992,62 +2348,44 @@
       "issues": [
         {
           "code": "native-function-gap",
-          "count": 22
+          "count": 19
         },
         {
           "code": "non-scalar-signature-review",
           "count": 19
         },
         {
-          "code": "header-confirmed-scalar-probe-candidates",
-          "count": 3
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 19
         }
       ],
       "nativeDefault": {
-        "functions": [],
+        "functions": [
+          {
+            "header": "flight/entity/contract.hpp",
+            "holder": "Entity",
+            "name": "areEntityRuntimeGuardsEnabled",
+            "native": "flight::entity::are_entity_runtime_guards_enabled"
+          },
+          {
+            "header": "flight/entity/contract.hpp",
+            "holder": "Entity",
+            "name": "disableEntityRuntimeGuards",
+            "native": "flight::entity::disable_entity_runtime_guards"
+          },
+          {
+            "header": "flight/entity/contract.hpp",
+            "holder": "Entity",
+            "name": "setEntityRuntimeGuardMode",
+            "native": "flight::entity::set_entity_runtime_guard_mode"
+          }
+        ],
         "types": [],
         "values": []
       },
       "package": "@flighthq/entity",
-      "scalarProbeCandidates": [
-        {
-          "cppName": "are_entity_runtime_guards_enabled",
-          "headers": [
-            {
-              "path": "flight/entity/guards.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Entity",
-          "name": "areEntityRuntimeGuardsEnabled",
-          "signature": "function areEntityRuntimeGuardsEnabled():Bool"
-        },
-        {
-          "cppName": "disable_entity_runtime_guards",
-          "headers": [
-            {
-              "path": "flight/entity/enable_entity_runtime_guards.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Entity",
-          "name": "disableEntityRuntimeGuards",
-          "signature": "function disableEntityRuntimeGuards():Void"
-        },
-        {
-          "cppName": "set_entity_runtime_guard_mode",
-          "headers": [
-            {
-              "path": "flight/entity/guards.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Entity",
-          "name": "setEntityRuntimeGuardMode",
-          "signature": "function setEntityRuntimeGuardMode(enabled:Bool):Void"
-        }
-      ],
-      "status": "emitted-unbound",
+      "scalarProbeCandidates": [],
+      "status": "partial-native",
       "webDefault": {
         "functions": 22,
         "types": 0,
@@ -2055,6 +2393,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 40,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 40,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 0,
         "dependencyIncompleteModules": 2,
@@ -2087,6 +2433,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 40
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 40
         }
       ],
       "nativeDefault": {
@@ -2104,6 +2454,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 13,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 13,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 0,
         "dependencyIncompleteModules": 4,
@@ -2132,6 +2490,10 @@
         {
           "code": "header-confirmed-scalar-probe-candidates",
           "count": 2
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 13
         }
       ],
       "nativeDefault": {
@@ -2174,6 +2536,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 17,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 17,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 4,
         "dependencyIncompleteModules": 4,
@@ -2206,6 +2576,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 17
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 17
         }
       ],
       "nativeDefault": {
@@ -2223,6 +2597,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 58,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 58,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 12,
         "dependencyIncompleteModules": 3,
@@ -2267,6 +2649,10 @@
         {
           "code": "header-confirmed-scalar-probe-candidates",
           "count": 3
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 58
         }
       ],
       "nativeDefault": {
@@ -2321,6 +2707,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 8,
+        "cppAvailable": 8,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 8,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 4,
         "dependencyIncompleteModules": 0,
@@ -2335,6 +2729,10 @@
         },
         {
           "code": "non-scalar-signature-review",
+          "count": 8
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
           "count": 8
         }
       ],
@@ -2353,6 +2751,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 408,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 408,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 27,
         "dependencyIncompleteModules": 3,
@@ -2385,6 +2791,10 @@
         {
           "code": "header-confirmed-scalar-probe-candidates",
           "count": 11
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 408
         }
       ],
       "nativeDefault": {
@@ -2535,6 +2945,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 18,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 18,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 2,
         "dependencyIncompleteModules": 2,
@@ -2567,6 +2985,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 18
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 18
         }
       ],
       "nativeDefault": {
@@ -2584,6 +3006,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 19,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 19,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 5,
         "dependencyIncompleteModules": 3,
@@ -2620,6 +3050,10 @@
         {
           "code": "header-confirmed-scalar-probe-candidates",
           "count": 2
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 19
         }
       ],
       "nativeDefault": {
@@ -2662,6 +3096,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 106,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 106,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 0,
         "dependencyIncompleteModules": 18,
@@ -2694,6 +3136,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 105
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 106
         }
       ],
       "nativeDefault": {
@@ -2711,6 +3157,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 10,
+        "cppAvailable": 10,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 10,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 3,
         "dependencyIncompleteModules": 0,
@@ -2725,6 +3179,10 @@
         },
         {
           "code": "non-scalar-signature-review",
+          "count": 10
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
           "count": 10
         }
       ],
@@ -2743,6 +3201,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 67,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 67,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 3,
         "dependencyIncompleteModules": 3,
@@ -2767,6 +3233,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 67
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 67
         }
       ],
       "nativeDefault": {
@@ -2784,6 +3254,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 28,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 28,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 2,
         "dependencyIncompleteModules": 2,
@@ -2824,6 +3302,10 @@
         {
           "code": "header-confirmed-scalar-probe-candidates",
           "count": 2
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 28
         }
       ],
       "nativeDefault": {
@@ -2866,6 +3348,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 4,
+        "cppAvailable": 4,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 4,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 5,
         "dependencyIncompleteModules": 0,
@@ -2880,6 +3370,10 @@
         },
         {
           "code": "non-scalar-signature-review",
+          "count": 4
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
           "count": 4
         }
       ],
@@ -2898,6 +3392,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 3,
+        "cppAvailable": 3,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 3,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 4,
         "dependencyIncompleteModules": 0,
@@ -2912,6 +3414,10 @@
         },
         {
           "code": "non-scalar-signature-review",
+          "count": 3
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
           "count": 3
         }
       ],
@@ -2930,6 +3436,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 34,
+        "cppAvailable": 34,
+        "cppExternDeclarations": 1,
+        "cppExternRefusals": 33,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 1
+      },
       "flightCpp": {
         "completeModules": 3,
         "dependencyIncompleteModules": 0,
@@ -2940,38 +3454,32 @@
       "issues": [
         {
           "code": "native-function-gap",
-          "count": 34
+          "count": 33
         },
         {
           "code": "non-scalar-signature-review",
           "count": 33
         },
         {
-          "code": "header-confirmed-scalar-probe-candidates",
-          "count": 1
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 33
         }
       ],
       "nativeDefault": {
-        "functions": [],
+        "functions": [
+          {
+            "header": "flight/input/contract.hpp",
+            "holder": "Input",
+            "name": "applyGamepadAxisDeadZone",
+            "native": "flight::input::apply_gamepad_axis_dead_zone"
+          }
+        ],
         "types": [],
         "values": []
       },
       "package": "@flighthq/input",
-      "scalarProbeCandidates": [
-        {
-          "cppName": "apply_gamepad_axis_dead_zone",
-          "headers": [
-            {
-              "path": "flight/input/input_manager.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Input",
-          "name": "applyGamepadAxisDeadZone",
-          "signature": "function applyGamepadAxisDeadZone(value:Float, deadZone:Float):Float"
-        }
-      ],
-      "status": "emitted-unbound",
+      "scalarProbeCandidates": [],
+      "status": "partial-native",
       "webDefault": {
         "functions": 34,
         "types": 0,
@@ -2979,6 +3487,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 92,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 92,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 2,
         "dependencyIncompleteModules": 6,
@@ -3015,6 +3531,10 @@
         {
           "code": "header-confirmed-scalar-probe-candidates",
           "count": 3
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 92
         }
       ],
       "nativeDefault": {
@@ -3069,6 +3589,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 16,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 16,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 0,
         "dependencyIncompleteModules": 2,
@@ -3101,6 +3629,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 16
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 16
         }
       ],
       "nativeDefault": {
@@ -3118,6 +3650,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 6,
+        "cppAvailable": 6,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 6,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 3,
         "dependencyIncompleteModules": 0,
@@ -3132,6 +3672,10 @@
         },
         {
           "code": "non-scalar-signature-review",
+          "count": 6
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
           "count": 6
         }
       ],
@@ -3150,6 +3694,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 14,
+        "cppAvailable": 14,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 14,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 3,
         "dependencyIncompleteModules": 0,
@@ -3164,6 +3716,10 @@
         },
         {
           "code": "non-scalar-signature-review",
+          "count": 14
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
           "count": 14
         }
       ],
@@ -3182,6 +3738,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 9,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 9,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 3,
         "dependencyIncompleteModules": 2,
@@ -3214,6 +3778,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 9
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 9
         }
       ],
       "nativeDefault": {
@@ -3231,6 +3799,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 13,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 13,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 0,
         "dependencyIncompleteModules": 2,
@@ -3263,6 +3839,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 13
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 13
         }
       ],
       "nativeDefault": {
@@ -3280,6 +3860,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 49,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 49,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 10,
         "dependencyIncompleteModules": 3,
@@ -3316,6 +3904,10 @@
         {
           "code": "header-confirmed-scalar-probe-candidates",
           "count": 1
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 49
         }
       ],
       "nativeDefault": {
@@ -3346,6 +3938,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 18,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 18,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 1,
         "dependencyIncompleteModules": 2,
@@ -3378,6 +3978,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 18
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 18
         }
       ],
       "nativeDefault": {
@@ -3395,6 +3999,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 61,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 61,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 0,
         "dependencyIncompleteModules": 2,
@@ -3427,6 +4039,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 55
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 61
         }
       ],
       "nativeDefault": {
@@ -3444,6 +4060,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 95,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 95,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 20,
         "dependencyIncompleteModules": 3,
@@ -3480,6 +4104,10 @@
         {
           "code": "header-confirmed-scalar-probe-candidates",
           "count": 10
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 95
         }
       ],
       "nativeDefault": {
@@ -3618,6 +4246,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 74,
+        "cppAvailable": 74,
+        "cppExternDeclarations": 41,
+        "cppExternRefusals": 33,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 41
+      },
       "flightCpp": {
         "completeModules": 17,
         "dependencyIncompleteModules": 0,
@@ -3628,7 +4264,7 @@
       "issues": [
         {
           "code": "native-function-gap",
-          "count": 59
+          "count": 26
         },
         {
           "code": "native-value-gap",
@@ -3644,55 +4280,257 @@
         },
         {
           "code": "header-confirmed-scalar-probe-candidates",
-          "count": 32
+          "count": 3
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 33
         }
       ],
       "nativeDefault": {
         "functions": [
           {
-            "header": "flight/math/clamp.hpp",
+            "header": "flight/math/contract.hpp",
+            "holder": "Math",
+            "name": "ceilPowerOfTwo",
+            "native": "flight::math::ceil_power_of_two"
+          },
+          {
+            "header": "flight/math/contract.hpp",
+            "holder": "Math",
+            "name": "ceilTo",
+            "native": "flight::math::ceil_to"
+          },
+          {
+            "header": "flight/math/contract.hpp",
             "holder": "Math",
             "name": "clamp",
             "native": "flight::math::clamp"
           },
           {
-            "header": "flight/math/clamp.hpp",
+            "header": "flight/math/contract.hpp",
+            "holder": "Math",
+            "name": "damp",
+            "native": "flight::math::damp"
+          },
+          {
+            "header": "flight/math/contract.hpp",
+            "holder": "Math",
+            "name": "degToRad",
+            "native": "flight::math::deg_to_rad_flight_value_function_deg_u000054_o_u000052_ad_flight_source_59eefa411bb2f66d"
+          },
+          {
+            "header": "flight/math/contract.hpp",
+            "holder": "Math",
+            "name": "deltaAngle",
+            "native": "flight::math::delta_angle"
+          },
+          {
+            "header": "flight/math/contract.hpp",
+            "holder": "Math",
+            "name": "euclideanMod",
+            "native": "flight::math::euclidean_mod"
+          },
+          {
+            "header": "flight/math/contract.hpp",
+            "holder": "Math",
+            "name": "factorial",
+            "native": "flight::math::factorial"
+          },
+          {
+            "header": "flight/math/contract.hpp",
+            "holder": "Math",
+            "name": "floorPowerOfTwo",
+            "native": "flight::math::floor_power_of_two"
+          },
+          {
+            "header": "flight/math/contract.hpp",
+            "holder": "Math",
+            "name": "floorTo",
+            "native": "flight::math::floor_to"
+          },
+          {
+            "header": "flight/math/contract.hpp",
+            "holder": "Math",
+            "name": "fract",
+            "native": "flight::math::fract"
+          },
+          {
+            "header": "flight/math/contract.hpp",
+            "holder": "Math",
+            "name": "gcd",
+            "native": "flight::math::gcd"
+          },
+          {
+            "header": "flight/math/contract.hpp",
+            "holder": "Math",
+            "name": "hash2D",
+            "native": "flight::math::hash_2d"
+          },
+          {
+            "header": "flight/math/contract.hpp",
+            "holder": "Math",
+            "name": "hash3D",
+            "native": "flight::math::hash_3d"
+          },
+          {
+            "header": "flight/math/contract.hpp",
+            "holder": "Math",
+            "name": "hashCombine",
+            "native": "flight::math::hash_combine"
+          },
+          {
+            "header": "flight/math/contract.hpp",
+            "holder": "Math",
+            "name": "hashUint32",
+            "native": "flight::math::hash_uint32"
+          },
+          {
+            "header": "flight/math/contract.hpp",
+            "holder": "Math",
+            "name": "hypot2",
+            "native": "flight::math::hypot2"
+          },
+          {
+            "header": "flight/math/contract.hpp",
             "holder": "Math",
             "name": "inRange",
             "native": "flight::math::in_range"
           },
           {
-            "header": "flight/math/interpolation.hpp",
+            "header": "flight/math/contract.hpp",
             "holder": "Math",
             "name": "inverseLerp",
             "native": "flight::math::inverse_lerp"
           },
           {
-            "header": "flight/math/interpolation.hpp",
+            "header": "flight/math/contract.hpp",
+            "holder": "Math",
+            "name": "isEven",
+            "native": "flight::math::is_even"
+          },
+          {
+            "header": "flight/math/contract.hpp",
+            "holder": "Math",
+            "name": "isOdd",
+            "native": "flight::math::is_odd"
+          },
+          {
+            "header": "flight/math/contract.hpp",
+            "holder": "Math",
+            "name": "isPowerOfTwo",
+            "native": "flight::math::is_power_of_two"
+          },
+          {
+            "header": "flight/math/contract.hpp",
+            "holder": "Math",
+            "name": "lcm",
+            "native": "flight::math::lcm"
+          },
+          {
+            "header": "flight/math/contract.hpp",
             "holder": "Math",
             "name": "lerp",
             "native": "flight::math::lerp"
           },
           {
-            "header": "flight/math/interpolation.hpp",
+            "header": "flight/math/contract.hpp",
+            "holder": "Math",
+            "name": "lerpAngle",
+            "native": "flight::math::lerp_angle"
+          },
+          {
+            "header": "flight/math/contract.hpp",
+            "holder": "Math",
+            "name": "moveTowards",
+            "native": "flight::math::move_towards"
+          },
+          {
+            "header": "flight/math/contract.hpp",
+            "holder": "Math",
+            "name": "nextMultipleOf",
+            "native": "flight::math::next_multiple_of"
+          },
+          {
+            "header": "flight/math/contract.hpp",
+            "holder": "Math",
+            "name": "nextPowerOfTwo",
+            "native": "flight::math::next_power_of_two"
+          },
+          {
+            "header": "flight/math/contract.hpp",
+            "holder": "Math",
+            "name": "normalizeAngle",
+            "native": "flight::math::normalize_angle"
+          },
+          {
+            "header": "flight/math/contract.hpp",
+            "holder": "Math",
+            "name": "pingPong",
+            "native": "flight::math::ping_pong"
+          },
+          {
+            "header": "flight/math/contract.hpp",
+            "holder": "Math",
+            "name": "previousPowerOfTwo",
+            "native": "flight::math::previous_power_of_two"
+          },
+          {
+            "header": "flight/math/contract.hpp",
+            "holder": "Math",
+            "name": "quantize",
+            "native": "flight::math::quantize"
+          },
+          {
+            "header": "flight/math/contract.hpp",
+            "holder": "Math",
+            "name": "radToDeg",
+            "native": "flight::math::rad_to_deg_flight_value_function_rad_u000054_o_u000044_eg_flight_source_59eefa411bb2f66d"
+          },
+          {
+            "header": "flight/math/contract.hpp",
             "holder": "Math",
             "name": "remap",
             "native": "flight::math::remap"
           },
           {
-            "header": "flight/math/clamp.hpp",
+            "header": "flight/math/contract.hpp",
+            "holder": "Math",
+            "name": "repeat",
+            "native": "flight::math::repeat"
+          },
+          {
+            "header": "flight/math/contract.hpp",
+            "holder": "Math",
+            "name": "roundTo",
+            "native": "flight::math::round_to"
+          },
+          {
+            "header": "flight/math/contract.hpp",
             "holder": "Math",
             "name": "saturate",
             "native": "flight::math::saturate"
           },
           {
-            "header": "flight/math/interpolation.hpp",
+            "header": "flight/math/contract.hpp",
+            "holder": "Math",
+            "name": "sign",
+            "native": "flight::math::sign"
+          },
+          {
+            "header": "flight/math/contract.hpp",
             "holder": "Math",
             "name": "smoothStep",
             "native": "flight::math::smooth_step"
           },
           {
-            "header": "flight/math/interpolation.hpp",
+            "header": "flight/math/contract.hpp",
+            "holder": "Math",
+            "name": "smootherStep",
+            "native": "flight::math::smoother_step"
+          },
+          {
+            "header": "flight/math/contract.hpp",
             "holder": "Math",
             "name": "step",
             "native": "flight::math::step"
@@ -3738,354 +4576,6 @@
           "holder": "Math",
           "name": "approxZero",
           "signature": "function approxZero(value:Float, ?epsilon:Float):Bool"
-        },
-        {
-          "cppName": "ceil_power_of_two",
-          "headers": [
-            {
-              "path": "flight/math/scalar.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Math",
-          "name": "ceilPowerOfTwo",
-          "signature": "function ceilPowerOfTwo(n:Float):Float"
-        },
-        {
-          "cppName": "ceil_to",
-          "headers": [
-            {
-              "path": "flight/math/rounding.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Math",
-          "name": "ceilTo",
-          "signature": "function ceilTo(value:Float, step:Float):Float"
-        },
-        {
-          "cppName": "damp",
-          "headers": [
-            {
-              "path": "flight/math/interpolation_advanced.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Math",
-          "name": "damp",
-          "signature": "function damp(current:Float, target:Float, lambda:Float, deltaTime:Float):Float"
-        },
-        {
-          "cppName": "delta_angle",
-          "headers": [
-            {
-              "path": "flight/math/angle.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Math",
-          "name": "deltaAngle",
-          "signature": "function deltaAngle(from:Float, to:Float):Float"
-        },
-        {
-          "cppName": "euclidean_mod",
-          "headers": [
-            {
-              "path": "flight/math/rounding.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Math",
-          "name": "euclideanMod",
-          "signature": "function euclideanMod(value:Float, divisor:Float):Float"
-        },
-        {
-          "cppName": "factorial",
-          "headers": [
-            {
-              "path": "flight/math/number_theory.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Math",
-          "name": "factorial",
-          "signature": "function factorial(n:Float):Float"
-        },
-        {
-          "cppName": "floor_power_of_two",
-          "headers": [
-            {
-              "path": "flight/math/scalar.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Math",
-          "name": "floorPowerOfTwo",
-          "signature": "function floorPowerOfTwo(n:Float):Float"
-        },
-        {
-          "cppName": "floor_to",
-          "headers": [
-            {
-              "path": "flight/math/rounding.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Math",
-          "name": "floorTo",
-          "signature": "function floorTo(value:Float, step:Float):Float"
-        },
-        {
-          "cppName": "fract",
-          "headers": [
-            {
-              "path": "flight/math/rounding.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Math",
-          "name": "fract",
-          "signature": "function fract(value:Float):Float"
-        },
-        {
-          "cppName": "gcd",
-          "headers": [
-            {
-              "path": "flight/math/number_theory.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Math",
-          "name": "gcd",
-          "signature": "function gcd(a:Float, b:Float):Float"
-        },
-        {
-          "cppName": "hash_combine",
-          "headers": [
-            {
-              "path": "flight/math/hash.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Math",
-          "name": "hashCombine",
-          "signature": "function hashCombine(seed:Float, value:Float):Float"
-        },
-        {
-          "cppName": "hash_uint32",
-          "headers": [
-            {
-              "path": "flight/math/hash.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Math",
-          "name": "hashUint32",
-          "signature": "function hashUint32(value:Float):Float"
-        },
-        {
-          "cppName": "hypot2",
-          "headers": [
-            {
-              "path": "flight/math/number_theory.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Math",
-          "name": "hypot2",
-          "signature": "function hypot2(x:Float, y:Float):Float"
-        },
-        {
-          "cppName": "is_even",
-          "headers": [
-            {
-              "path": "flight/math/number_theory.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Math",
-          "name": "isEven",
-          "signature": "function isEven(n:Float):Bool"
-        },
-        {
-          "cppName": "is_odd",
-          "headers": [
-            {
-              "path": "flight/math/number_theory.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Math",
-          "name": "isOdd",
-          "signature": "function isOdd(n:Float):Bool"
-        },
-        {
-          "cppName": "is_power_of_two",
-          "headers": [
-            {
-              "path": "flight/math/next_power_of_two.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Math",
-          "name": "isPowerOfTwo",
-          "signature": "function isPowerOfTwo(n:Float):Bool"
-        },
-        {
-          "cppName": "lcm",
-          "headers": [
-            {
-              "path": "flight/math/number_theory.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Math",
-          "name": "lcm",
-          "signature": "function lcm(a:Float, b:Float):Float"
-        },
-        {
-          "cppName": "lerp_angle",
-          "headers": [
-            {
-              "path": "flight/math/interpolation_advanced.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Math",
-          "name": "lerpAngle",
-          "signature": "function lerpAngle(a:Float, b:Float, t:Float):Float"
-        },
-        {
-          "cppName": "move_towards",
-          "headers": [
-            {
-              "path": "flight/math/interpolation_advanced.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Math",
-          "name": "moveTowards",
-          "signature": "function moveTowards(current:Float, target:Float, maxDelta:Float):Float"
-        },
-        {
-          "cppName": "next_multiple_of",
-          "headers": [
-            {
-              "path": "flight/math/next_power_of_two.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Math",
-          "name": "nextMultipleOf",
-          "signature": "function nextMultipleOf(value:Float, multiple:Float):Float"
-        },
-        {
-          "cppName": "next_power_of_two",
-          "headers": [
-            {
-              "path": "flight/math/next_power_of_two.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Math",
-          "name": "nextPowerOfTwo",
-          "signature": "function nextPowerOfTwo(n:Float):Float"
-        },
-        {
-          "cppName": "normalize_angle",
-          "headers": [
-            {
-              "path": "flight/math/angle.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Math",
-          "name": "normalizeAngle",
-          "signature": "function normalizeAngle(radians:Float):Float"
-        },
-        {
-          "cppName": "ping_pong",
-          "headers": [
-            {
-              "path": "flight/math/interpolation_advanced.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Math",
-          "name": "pingPong",
-          "signature": "function pingPong(t:Float, length:Float):Float"
-        },
-        {
-          "cppName": "previous_power_of_two",
-          "headers": [
-            {
-              "path": "flight/math/next_power_of_two.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Math",
-          "name": "previousPowerOfTwo",
-          "signature": "function previousPowerOfTwo(n:Float):Float"
-        },
-        {
-          "cppName": "quantize",
-          "headers": [
-            {
-              "path": "flight/math/scalar.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Math",
-          "name": "quantize",
-          "signature": "function quantize(value:Float, steps:Float, min:Float, max:Float):Float"
-        },
-        {
-          "cppName": "repeat",
-          "headers": [
-            {
-              "path": "flight/math/interpolation_advanced.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Math",
-          "name": "repeat",
-          "signature": "function repeat(t:Float, length:Float):Float"
-        },
-        {
-          "cppName": "round_to",
-          "headers": [
-            {
-              "path": "flight/math/rounding.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Math",
-          "name": "roundTo",
-          "signature": "function roundTo(value:Float, step:Float):Float"
-        },
-        {
-          "cppName": "sign",
-          "headers": [
-            {
-              "path": "flight/math/scalar.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Math",
-          "name": "sign",
-          "signature": "function sign(value:Float):Float"
-        },
-        {
-          "cppName": "smoother_step",
-          "headers": [
-            {
-              "path": "flight/math/interpolation_advanced.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Math",
-          "name": "smootherStep",
-          "signature": "function smootherStep(edge0:Float, edge1:Float, x:Float):Float"
         }
       ],
       "status": "partial-native",
@@ -4096,6 +4586,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 59,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 59,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 2,
         "dependencyIncompleteModules": 3,
@@ -4132,6 +4630,10 @@
         {
           "code": "header-confirmed-scalar-probe-candidates",
           "count": 2
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 59
         }
       ],
       "nativeDefault": {
@@ -4174,6 +4676,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 11,
+        "cppAvailable": 11,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 11,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 3,
         "dependencyIncompleteModules": 0,
@@ -4188,6 +4698,10 @@
         },
         {
           "code": "non-scalar-signature-review",
+          "count": 11
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
           "count": 11
         }
       ],
@@ -4206,6 +4720,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 24,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 24,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 1,
         "dependencyIncompleteModules": 2,
@@ -4238,6 +4760,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 24
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 24
         }
       ],
       "nativeDefault": {
@@ -4255,6 +4781,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 89,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 89,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 5,
         "dependencyIncompleteModules": 10,
@@ -4291,6 +4825,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 87
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 89
         }
       ],
       "nativeDefault": {
@@ -4308,6 +4846,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 37,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 37,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 2,
         "dependencyIncompleteModules": 3,
@@ -4340,6 +4886,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 37
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 37
         }
       ],
       "nativeDefault": {
@@ -4357,6 +4907,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 10,
+        "cppAvailable": 10,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 10,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 3,
         "dependencyIncompleteModules": 0,
@@ -4371,6 +4929,10 @@
         },
         {
           "code": "non-scalar-signature-review",
+          "count": 10
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
           "count": 10
         }
       ],
@@ -4389,6 +4951,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 30,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 30,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 0,
         "dependencyIncompleteModules": 4,
@@ -4425,6 +4995,10 @@
         {
           "code": "header-confirmed-scalar-probe-candidates",
           "count": 3
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 30
         }
       ],
       "nativeDefault": {
@@ -4479,6 +5053,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 8,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 8,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 2,
         "dependencyIncompleteModules": 3,
@@ -4511,6 +5093,10 @@
         {
           "code": "header-confirmed-scalar-probe-candidates",
           "count": 3
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 8
         }
       ],
       "nativeDefault": {
@@ -4565,6 +5151,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 134,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 134,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 18,
         "dependencyIncompleteModules": 3,
@@ -4593,6 +5187,10 @@
         {
           "code": "header-confirmed-scalar-probe-candidates",
           "count": 3
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 134
         }
       ],
       "nativeDefault": {
@@ -4647,6 +5245,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 36,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 36,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 0,
         "dependencyIncompleteModules": 2,
@@ -4679,6 +5285,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 36
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 36
         }
       ],
       "nativeDefault": {
@@ -4696,6 +5306,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 53,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 53,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 0,
         "dependencyIncompleteModules": 9,
@@ -4736,6 +5354,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 50
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 53
         }
       ],
       "nativeDefault": {
@@ -4753,6 +5375,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 32,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 32,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 10,
         "dependencyIncompleteModules": 2,
@@ -4789,6 +5419,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 31
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 32
         }
       ],
       "nativeDefault": {
@@ -4806,6 +5440,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 41,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 41,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 13,
         "dependencyIncompleteModules": 2,
@@ -4842,6 +5484,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 32
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 41
         }
       ],
       "nativeDefault": {
@@ -4859,6 +5505,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 83,
+        "cppAvailable": 83,
+        "cppExternDeclarations": 6,
+        "cppExternRefusals": 77,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 6
+      },
       "flightCpp": {
         "completeModules": 31,
         "dependencyIncompleteModules": 0,
@@ -4869,7 +5523,7 @@
       "issues": [
         {
           "code": "native-function-gap",
-          "count": 66
+          "count": 64
         },
         {
           "code": "native-value-gap",
@@ -4884,43 +5538,31 @@
           "count": 64
         },
         {
-          "code": "header-confirmed-scalar-probe-candidates",
-          "count": 2
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 77
         }
       ],
       "nativeDefault": {
-        "functions": [],
+        "functions": [
+          {
+            "header": "flight/path/contract.hpp",
+            "holder": "Path",
+            "name": "getCubicBezierCurvature",
+            "native": "flight::path::get_cubic_bezier_curvature"
+          },
+          {
+            "header": "flight/path/contract.hpp",
+            "holder": "Path",
+            "name": "getQuadraticBezierCurvature",
+            "native": "flight::path::get_quadratic_bezier_curvature"
+          }
+        ],
         "types": [],
         "values": []
       },
       "package": "@flighthq/path",
-      "scalarProbeCandidates": [
-        {
-          "cppName": "get_cubic_bezier_curvature",
-          "headers": [
-            {
-              "path": "flight/path/get_path_segment_at_parameter.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Path",
-          "name": "getCubicBezierCurvature",
-          "signature": "function getCubicBezierCurvature(x0:Float, y0:Float, c1x:Float, c1y:Float, c2x:Float, c2y:Float, x1:Float, y1:Float, t:Float):Float"
-        },
-        {
-          "cppName": "get_quadratic_bezier_curvature",
-          "headers": [
-            {
-              "path": "flight/path/get_path_segment_at_parameter.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Path",
-          "name": "getQuadraticBezierCurvature",
-          "signature": "function getQuadraticBezierCurvature(x0:Float, y0:Float, cx:Float, cy:Float, x1:Float, y1:Float, t:Float):Float"
-        }
-      ],
-      "status": "emitted-unbound",
+      "scalarProbeCandidates": [],
+      "status": "partial-native",
       "webDefault": {
         "functions": 66,
         "types": 6,
@@ -4928,6 +5570,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 15,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 15,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 7,
         "dependencyIncompleteModules": 2,
@@ -4964,6 +5614,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 14
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 15
         }
       ],
       "nativeDefault": {
@@ -4981,6 +5635,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 4,
+        "cppAvailable": 4,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 4,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 3,
         "dependencyIncompleteModules": 0,
@@ -4995,6 +5657,10 @@
         },
         {
           "code": "non-scalar-signature-review",
+          "count": 4
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
           "count": 4
         }
       ],
@@ -5013,6 +5679,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 3,
+        "cppAvailable": 3,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 3,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 3,
         "dependencyIncompleteModules": 0,
@@ -5027,6 +5701,10 @@
         },
         {
           "code": "non-scalar-signature-review",
+          "count": 3
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
           "count": 3
         }
       ],
@@ -5045,6 +5723,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 140,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 140,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 10,
         "dependencyIncompleteModules": 12,
@@ -5081,6 +5767,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 111
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 140
         }
       ],
       "nativeDefault": {
@@ -5098,6 +5788,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 82,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 82,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 3,
         "dependencyIncompleteModules": 3,
@@ -5134,6 +5832,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 44
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 82
         }
       ],
       "nativeDefault": {
@@ -5151,6 +5853,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 233,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 233,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 14,
         "dependencyIncompleteModules": 18,
@@ -5187,6 +5897,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 193
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 233
         }
       ],
       "nativeDefault": {
@@ -5204,6 +5918,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 78,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 78,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 3,
         "dependencyIncompleteModules": 3,
@@ -5240,6 +5962,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 44
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 78
         }
       ],
       "nativeDefault": {
@@ -5257,6 +5983,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 12,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 12,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 0,
         "dependencyIncompleteModules": 2,
@@ -5289,6 +6023,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 12
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 12
         }
       ],
       "nativeDefault": {
@@ -5306,6 +6044,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 14,
+        "cppAvailable": 14,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 14,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 3,
         "dependencyIncompleteModules": 0,
@@ -5320,6 +6066,10 @@
         },
         {
           "code": "non-scalar-signature-review",
+          "count": 14
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
           "count": 14
         }
       ],
@@ -5338,6 +6088,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 19,
+        "cppAvailable": 19,
+        "cppExternDeclarations": 2,
+        "cppExternRefusals": 17,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 2
+      },
       "flightCpp": {
         "completeModules": 3,
         "dependencyIncompleteModules": 0,
@@ -5348,50 +6106,38 @@
       "issues": [
         {
           "code": "native-function-gap",
-          "count": 19
+          "count": 17
         },
         {
           "code": "non-scalar-signature-review",
           "count": 17
         },
         {
-          "code": "header-confirmed-scalar-probe-candidates",
-          "count": 2
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 17
         }
       ],
       "nativeDefault": {
-        "functions": [],
+        "functions": [
+          {
+            "header": "flight/power/contract.hpp",
+            "holder": "Power",
+            "name": "getPowerIdlePollingIntervalMs",
+            "native": "flight::power::get_power_idle_polling_interval_ms"
+          },
+          {
+            "header": "flight/power/contract.hpp",
+            "holder": "Power",
+            "name": "setPowerIdlePollingIntervalMs",
+            "native": "flight::power::set_power_idle_polling_interval_ms"
+          }
+        ],
         "types": [],
         "values": []
       },
       "package": "@flighthq/power",
-      "scalarProbeCandidates": [
-        {
-          "cppName": "get_power_idle_polling_interval_ms",
-          "headers": [
-            {
-              "path": "flight/power/power.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Power",
-          "name": "getPowerIdlePollingIntervalMs",
-          "signature": "function getPowerIdlePollingIntervalMs():Float"
-        },
-        {
-          "cppName": "set_power_idle_polling_interval_ms",
-          "headers": [
-            {
-              "path": "flight/power/power.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Power",
-          "name": "setPowerIdlePollingIntervalMs",
-          "signature": "function setPowerIdlePollingIntervalMs(intervalMs:Float):Void"
-        }
-      ],
-      "status": "emitted-unbound",
+      "scalarProbeCandidates": [],
+      "status": "partial-native",
       "webDefault": {
         "functions": 19,
         "types": 0,
@@ -5399,6 +6145,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 39,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 39,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 1,
         "dependencyIncompleteModules": 2,
@@ -5431,6 +6185,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 39
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 39
         }
       ],
       "nativeDefault": {
@@ -5448,6 +6206,22 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 18,
+        "cppAvailable": 18,
+        "cppExternDeclarations": 1,
+        "cppExternRefusals": 17,
+        "functionCandidates": [
+          {
+            "header": "flight/protocol/contract.hpp",
+            "holder": "Protocol",
+            "name": "isValidProtocolScheme",
+            "native": "flight::haxe::_cpp::isValidProtocolScheme_74b6ecee",
+            "transport": "adapter"
+          }
+        ],
+        "headerPassingDeclarations": 1
+      },
       "flightCpp": {
         "completeModules": 3,
         "dependencyIncompleteModules": 0,
@@ -5463,6 +6237,14 @@
         {
           "code": "non-scalar-signature-review",
           "count": 18
+        },
+        {
+          "code": "compiler-haxe-cpp-function-candidates",
+          "count": 1
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 17
         }
       ],
       "nativeDefault": {
@@ -5480,6 +6262,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 33,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 33,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 0,
         "dependencyIncompleteModules": 2,
@@ -5516,6 +6306,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 32
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 33
         }
       ],
       "nativeDefault": {
@@ -5533,6 +6327,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 6,
+        "cppAvailable": 6,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 6,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 3,
         "dependencyIncompleteModules": 0,
@@ -5547,6 +6349,10 @@
         },
         {
           "code": "non-scalar-signature-review",
+          "count": 6
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
           "count": 6
         }
       ],
@@ -5565,6 +6371,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 84,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 84,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 11,
         "dependencyIncompleteModules": 5,
@@ -5609,6 +6423,10 @@
         {
           "code": "header-confirmed-scalar-probe-candidates",
           "count": 2
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 84
         }
       ],
       "nativeDefault": {
@@ -5651,6 +6469,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 144,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 144,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 4,
         "dependencyIncompleteModules": 14,
@@ -5687,6 +6513,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 141
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 144
         }
       ],
       "nativeDefault": {
@@ -5704,6 +6534,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 156,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 156,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 1,
         "dependencyIncompleteModules": 13,
@@ -5744,6 +6582,10 @@
         {
           "code": "header-confirmed-scalar-probe-candidates",
           "count": 1
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 156
         }
       ],
       "nativeDefault": {
@@ -5774,6 +6616,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 6,
+        "cppAvailable": 6,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 6,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 4,
         "dependencyIncompleteModules": 0,
@@ -5788,6 +6638,10 @@
         },
         {
           "code": "non-scalar-signature-review",
+          "count": 6
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
           "count": 6
         }
       ],
@@ -5806,6 +6660,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 9,
+        "cppAvailable": 9,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 9,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 4,
         "dependencyIncompleteModules": 0,
@@ -5825,6 +6687,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 5
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 9
         }
       ],
       "nativeDefault": {
@@ -5842,6 +6708,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 2,
+        "cppAvailable": 2,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 2,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 3,
         "dependencyIncompleteModules": 0,
@@ -5856,6 +6730,10 @@
         },
         {
           "code": "non-scalar-signature-review",
+          "count": 2
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
           "count": 2
         }
       ],
@@ -5874,6 +6752,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 36,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 36,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 1,
         "dependencyIncompleteModules": 2,
@@ -5906,6 +6792,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 36
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 36
         }
       ],
       "nativeDefault": {
@@ -5923,6 +6813,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 44,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 44,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 1,
         "dependencyIncompleteModules": 3,
@@ -5955,6 +6853,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 44
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 44
         }
       ],
       "nativeDefault": {
@@ -5972,30 +6874,38 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 146,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 146,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 8,
-        "dependencyIncompleteModules": 24,
+        "dependencyIncompleteModules": 25,
         "refusalCodes": [
           {
-            "count": 24,
+            "count": 25,
             "name": "dependency-refused"
           },
           {
-            "count": 19,
+            "count": 18,
             "name": "unsupported-ir"
           }
         ],
-        "refusedModules": 19,
+        "refusedModules": 18,
         "sourceModules": 51
       },
       "issues": [
         {
           "code": "flight-cpp-refused-modules",
-          "count": 19
+          "count": 18
         },
         {
           "code": "flight-cpp-dependency-incomplete-modules",
-          "count": 24
+          "count": 25
         },
         {
           "code": "native-function-gap",
@@ -6012,6 +6922,10 @@
         {
           "code": "header-confirmed-scalar-probe-candidates",
           "count": 1
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 146
         }
       ],
       "nativeDefault": {
@@ -6042,6 +6956,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 87,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 87,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 8,
         "dependencyIncompleteModules": 10,
@@ -6082,6 +7004,10 @@
         {
           "code": "header-confirmed-scalar-probe-candidates",
           "count": 1
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 87
         }
       ],
       "nativeDefault": {
@@ -6112,6 +7038,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 215,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 215,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 17,
         "dependencyIncompleteModules": 31,
@@ -6152,6 +7086,10 @@
         {
           "code": "header-confirmed-scalar-probe-candidates",
           "count": 2
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 215
         }
       ],
       "nativeDefault": {
@@ -6194,30 +7132,38 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 93,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 93,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 1,
-        "dependencyIncompleteModules": 11,
+        "dependencyIncompleteModules": 12,
         "refusalCodes": [
           {
-            "count": 11,
+            "count": 12,
             "name": "dependency-refused"
           },
           {
-            "count": 21,
+            "count": 20,
             "name": "unsupported-ir"
           }
         ],
-        "refusedModules": 21,
+        "refusedModules": 20,
         "sourceModules": 33
       },
       "issues": [
         {
           "code": "flight-cpp-refused-modules",
-          "count": 21
+          "count": 20
         },
         {
           "code": "flight-cpp-dependency-incomplete-modules",
-          "count": 11
+          "count": 12
         },
         {
           "code": "native-function-gap",
@@ -6234,6 +7180,10 @@
         {
           "code": "header-confirmed-scalar-probe-candidates",
           "count": 1
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 93
         }
       ],
       "nativeDefault": {
@@ -6264,6 +7214,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 22,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 22,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 7,
         "dependencyIncompleteModules": 5,
@@ -6288,6 +7246,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 19
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 22
         }
       ],
       "nativeDefault": {
@@ -6305,6 +7267,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 91,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 91,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 2,
         "dependencyIncompleteModules": 10,
@@ -6345,6 +7315,10 @@
         {
           "code": "header-confirmed-scalar-probe-candidates",
           "count": 1
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 91
         }
       ],
       "nativeDefault": {
@@ -6375,6 +7349,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 70,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 70,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 9,
         "dependencyIncompleteModules": 10,
@@ -6411,6 +7393,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 63
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 70
         }
       ],
       "nativeDefault": {
@@ -6428,8 +7414,16 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 344,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 344,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
-        "completeModules": 28,
+        "completeModules": 30,
         "dependencyIncompleteModules": 45,
         "refusalCodes": [
           {
@@ -6437,17 +7431,17 @@
             "name": "dependency-refused"
           },
           {
-            "count": 38,
+            "count": 36,
             "name": "unsupported-ir"
           }
         ],
-        "refusedModules": 38,
+        "refusedModules": 36,
         "sourceModules": 111
       },
       "issues": [
         {
           "code": "flight-cpp-refused-modules",
-          "count": 38
+          "count": 36
         },
         {
           "code": "flight-cpp-dependency-incomplete-modules",
@@ -6468,6 +7462,10 @@
         {
           "code": "header-confirmed-scalar-probe-candidates",
           "count": 5
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 344
         }
       ],
       "nativeDefault": {
@@ -6546,6 +7544,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 205,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 205,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 3,
         "dependencyIncompleteModules": 61,
@@ -6586,6 +7592,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 154
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 205
         }
       ],
       "nativeDefault": {
@@ -6603,6 +7613,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 54,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 54,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 1,
         "dependencyIncompleteModules": 11,
@@ -6639,6 +7657,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 54
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 54
         }
       ],
       "nativeDefault": {
@@ -6656,6 +7678,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 170,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 170,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 4,
         "dependencyIncompleteModules": 13,
@@ -6696,6 +7726,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 136
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 170
         }
       ],
       "nativeDefault": {
@@ -6713,6 +7747,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 31,
+        "cppAvailable": 31,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 31,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 3,
         "dependencyIncompleteModules": 0,
@@ -6727,6 +7769,10 @@
         },
         {
           "code": "non-scalar-signature-review",
+          "count": 31
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
           "count": 31
         }
       ],
@@ -6745,6 +7791,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 28,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 28,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 0,
         "dependencyIncompleteModules": 3,
@@ -6777,6 +7831,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 28
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 28
         }
       ],
       "nativeDefault": {
@@ -6794,6 +7852,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 37,
+        "cppAvailable": 37,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 37,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 3,
         "dependencyIncompleteModules": 0,
@@ -6808,6 +7874,10 @@
         },
         {
           "code": "non-scalar-signature-review",
+          "count": 37
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
           "count": 37
         }
       ],
@@ -6826,6 +7896,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 36,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 36,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 16,
         "dependencyIncompleteModules": 2,
@@ -6862,6 +7940,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 28
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 36
         }
       ],
       "nativeDefault": {
@@ -6879,6 +7961,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 101,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 101,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 11,
         "dependencyIncompleteModules": 5,
@@ -6923,6 +8013,10 @@
         {
           "code": "header-confirmed-scalar-probe-candidates",
           "count": 7
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 101
         }
       ],
       "nativeDefault": {
@@ -7025,6 +8119,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 3,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 3,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 1,
         "dependencyIncompleteModules": 2,
@@ -7061,6 +8163,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 2
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 3
         }
       ],
       "nativeDefault": {
@@ -7078,6 +8184,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 14,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 14,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 0,
         "dependencyIncompleteModules": 2,
@@ -7110,6 +8224,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 14
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 14
         }
       ],
       "nativeDefault": {
@@ -7127,6 +8245,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 10,
+        "cppAvailable": 10,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 10,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 3,
         "dependencyIncompleteModules": 0,
@@ -7141,6 +8267,10 @@
         },
         {
           "code": "non-scalar-signature-review",
+          "count": 10
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
           "count": 10
         }
       ],
@@ -7159,6 +8289,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 21,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 21,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 1,
         "dependencyIncompleteModules": 2,
@@ -7191,6 +8329,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 21
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 21
         }
       ],
       "nativeDefault": {
@@ -7208,6 +8350,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 21,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 21,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 5,
         "dependencyIncompleteModules": 3,
@@ -7244,6 +8394,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 20
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 21
         }
       ],
       "nativeDefault": {
@@ -7261,6 +8415,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 64,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 64,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 15,
         "dependencyIncompleteModules": 4,
@@ -7297,6 +8459,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 55
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 64
         }
       ],
       "nativeDefault": {
@@ -7314,6 +8480,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 209,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 209,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 19,
         "dependencyIncompleteModules": 24,
@@ -7354,6 +8528,10 @@
         {
           "code": "header-confirmed-scalar-probe-candidates",
           "count": 2
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 209
         }
       ],
       "nativeDefault": {
@@ -7396,6 +8574,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 27,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 27,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 3,
         "dependencyIncompleteModules": 6,
@@ -7428,6 +8614,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 24
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 27
         }
       ],
       "nativeDefault": {
@@ -7445,6 +8635,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 7,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 7,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 0,
         "dependencyIncompleteModules": 2,
@@ -7477,6 +8675,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 5
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 7
         }
       ],
       "nativeDefault": {
@@ -7494,6 +8696,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 14,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 14,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 2,
         "dependencyIncompleteModules": 3,
@@ -7522,6 +8732,10 @@
         {
           "code": "header-confirmed-scalar-probe-candidates",
           "count": 3
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 14
         }
       ],
       "nativeDefault": {
@@ -7576,6 +8790,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 34,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 34,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 8,
         "dependencyIncompleteModules": 2,
@@ -7612,6 +8834,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 33
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 34
         }
       ],
       "nativeDefault": {
@@ -7629,6 +8855,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 24,
+        "cppAvailable": 24,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 24,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 6,
         "dependencyIncompleteModules": 0,
@@ -7648,6 +8882,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 21
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 24
         }
       ],
       "nativeDefault": {
@@ -7665,6 +8903,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 38,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 38,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 5,
         "dependencyIncompleteModules": 2,
@@ -7701,6 +8947,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 35
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 38
         }
       ],
       "nativeDefault": {
@@ -7718,6 +8968,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 27,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 27,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 6,
         "dependencyIncompleteModules": 5,
@@ -7754,6 +9012,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 21
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 27
         }
       ],
       "nativeDefault": {
@@ -7771,6 +9033,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 17,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 17,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 2,
         "dependencyIncompleteModules": 3,
@@ -7795,6 +9065,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 17
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 17
         }
       ],
       "nativeDefault": {
@@ -7812,6 +9086,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 18,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 18,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 0,
         "dependencyIncompleteModules": 2,
@@ -7844,6 +9126,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 18
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 18
         }
       ],
       "nativeDefault": {
@@ -7861,6 +9147,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 14,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 14,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 1,
         "dependencyIncompleteModules": 5,
@@ -7893,6 +9187,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 14
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 14
         }
       ],
       "nativeDefault": {
@@ -7910,6 +9208,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 114,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 114,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 21,
         "dependencyIncompleteModules": 25,
@@ -7954,6 +9260,10 @@
         {
           "code": "header-confirmed-scalar-probe-candidates",
           "count": 4
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 114
         }
       ],
       "nativeDefault": {
@@ -8020,6 +9330,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 93,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 93,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 1,
         "dependencyIncompleteModules": 3,
@@ -8056,6 +9374,10 @@
         {
           "code": "header-confirmed-scalar-probe-candidates",
           "count": 2
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 93
         }
       ],
       "nativeDefault": {
@@ -8098,6 +9420,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 13,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 13,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 4,
         "dependencyIncompleteModules": 3,
@@ -8134,6 +9464,10 @@
         {
           "code": "header-confirmed-scalar-probe-candidates",
           "count": 2
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 13
         }
       ],
       "nativeDefault": {
@@ -8176,6 +9510,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 11,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 11,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 3,
         "dependencyIncompleteModules": 4,
@@ -8216,6 +9558,10 @@
         {
           "code": "header-confirmed-scalar-probe-candidates",
           "count": 3
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 11
         }
       ],
       "nativeDefault": {
@@ -8270,6 +9616,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 57,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 57,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 0,
         "dependencyIncompleteModules": 5,
@@ -8302,6 +9656,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 57
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 57
         }
       ],
       "nativeDefault": {
@@ -8319,6 +9677,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 52,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 52,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 5,
         "dependencyIncompleteModules": 7,
@@ -8355,6 +9721,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 50
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 52
         }
       ],
       "nativeDefault": {
@@ -8372,6 +9742,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 16,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 16,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 2,
         "dependencyIncompleteModules": 3,
@@ -8412,6 +9790,10 @@
         {
           "code": "header-confirmed-scalar-probe-candidates",
           "count": 3
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 16
         }
       ],
       "nativeDefault": {
@@ -8466,6 +9848,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 36,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 36,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 6,
         "dependencyIncompleteModules": 3,
@@ -8502,6 +9892,10 @@
         {
           "code": "header-confirmed-scalar-probe-candidates",
           "count": 3
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 36
         }
       ],
       "nativeDefault": {
@@ -8556,6 +9950,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 59,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 59,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 4,
         "dependencyIncompleteModules": 2,
@@ -8588,6 +9990,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 59
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 59
         }
       ],
       "nativeDefault": {
@@ -8605,6 +10011,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 23,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 23,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 7,
         "dependencyIncompleteModules": 3,
@@ -8637,6 +10051,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 23
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 23
         }
       ],
       "nativeDefault": {
@@ -8654,6 +10072,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 36,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 36,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 1,
         "dependencyIncompleteModules": 4,
@@ -8686,6 +10112,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 33
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 36
         }
       ],
       "nativeDefault": {
@@ -8703,6 +10133,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 20,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 20,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 1,
         "dependencyIncompleteModules": 7,
@@ -8731,6 +10169,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 15
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 20
         }
       ],
       "nativeDefault": {
@@ -8748,6 +10190,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 24,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 24,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 0,
         "dependencyIncompleteModules": 2,
@@ -8780,6 +10230,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 24
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 24
         }
       ],
       "nativeDefault": {
@@ -8797,6 +10251,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 38,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 38,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 7,
         "dependencyIncompleteModules": 4,
@@ -8837,6 +10299,10 @@
         {
           "code": "header-confirmed-scalar-probe-candidates",
           "count": 2
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 38
         }
       ],
       "nativeDefault": {
@@ -8879,6 +10345,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 21,
+        "cppAvailable": 21,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 21,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 3,
         "dependencyIncompleteModules": 0,
@@ -8893,6 +10367,10 @@
         },
         {
           "code": "non-scalar-signature-review",
+          "count": 21
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
           "count": 21
         }
       ],
@@ -8911,6 +10389,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 10,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 10,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 0,
         "dependencyIncompleteModules": 2,
@@ -8947,6 +10433,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 9
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 10
         }
       ],
       "nativeDefault": {
@@ -8964,6 +10454,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 30,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 30,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 0,
         "dependencyIncompleteModules": 3,
@@ -9000,6 +10498,10 @@
         {
           "code": "header-confirmed-scalar-probe-candidates",
           "count": 2
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 30
         }
       ],
       "nativeDefault": {
@@ -9042,6 +10544,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 33,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 33,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 6,
         "dependencyIncompleteModules": 2,
@@ -9078,6 +10588,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 32
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 33
         }
       ],
       "nativeDefault": {
@@ -9095,6 +10609,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 3398,
+        "cppAvailable": 3398,
+        "cppExternDeclarations": 2175,
+        "cppExternRefusals": 1223,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 2175
+      },
       "flightCpp": {
         "completeModules": 1032,
         "dependencyIncompleteModules": 0,
@@ -9110,6 +10632,10 @@
         {
           "code": "native-type-gap",
           "count": 3062
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 1223
         }
       ],
       "nativeDefault": {
@@ -9131,6 +10657,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 3,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 3,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 0,
         "dependencyIncompleteModules": 2,
@@ -9163,6 +10697,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 3
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 3
         }
       ],
       "nativeDefault": {
@@ -9180,6 +10718,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 12,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 12,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 0,
         "dependencyIncompleteModules": 3,
@@ -9212,6 +10758,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 12
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 12
         }
       ],
       "nativeDefault": {
@@ -9229,6 +10779,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 22,
+        "cppAvailable": 22,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 22,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 5,
         "dependencyIncompleteModules": 0,
@@ -9243,6 +10801,10 @@
         },
         {
           "code": "non-scalar-signature-review",
+          "count": 22
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
           "count": 22
         }
       ],
@@ -9261,6 +10823,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 17,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 17,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 2,
         "dependencyIncompleteModules": 2,
@@ -9293,6 +10863,10 @@
         {
           "code": "non-scalar-signature-review",
           "count": 17
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 17
         }
       ],
       "nativeDefault": {
@@ -9310,6 +10884,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 0,
+        "cppAvailable": 0,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 0,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 2,
         "dependencyIncompleteModules": 0,
@@ -9333,6 +10915,14 @@
       }
     },
     {
+      "compilerPlan": {
+        "bindings": 6,
+        "cppAvailable": 6,
+        "cppExternDeclarations": 0,
+        "cppExternRefusals": 6,
+        "functionCandidates": [],
+        "headerPassingDeclarations": 0
+      },
       "flightCpp": {
         "completeModules": 4,
         "dependencyIncompleteModules": 0,
@@ -9347,6 +10937,10 @@
         },
         {
           "code": "non-scalar-signature-review",
+          "count": 6
+        },
+        {
+          "code": "compiler-haxe-cpp-refused-bindings",
           "count": 6
         }
       ],
@@ -9367,35 +10961,65 @@
   ],
   "pins": {
     "flight": "a62784923f3be814463286c9fb28edfe6ab15789",
-    "flightCompiler": "806d257d2f4100de745cc97340e61c2f301b0f24",
-    "flightCpp": "f4821bd28f92d6b617e8fed30c4d088b4e3dcc72"
+    "flightCompiler": "804435ad89716bd3ddb8144e435adb0be6c9477b",
+    "flightCpp": "eb4021fafee3b829e7065c99f081c32ce8117d72",
+    "flightCppCompiler": "806d257d2f4100de745cc97340e61c2f301b0f24"
   },
   "schema": "flight-hx-native-public-api-reconciliation/1",
   "summary": {
     "flightCpp": {
-      "completeModules": 1893,
-      "dependencyIncompleteModules": 670,
-      "refusalDiagnostics": 1260,
-      "refusedModules": 588,
+      "completeModules": 1895,
+      "dependencyIncompleteModules": 672,
+      "refusalDiagnostics": 1258,
+      "refusedModules": 584,
       "sourceModules": 3151
     },
     "nativeDefault": {
-      "boundHeaderConfirmedScalarFunctions": 10,
+      "boundHeaderConfirmedScalarFunctions": 58,
       "extensionTypes": 1,
-      "functions": 10,
-      "packages": 3,
+      "functions": 62,
+      "packages": 7,
       "types": 3,
       "values": 0
     },
+    "compilerPlan": {
+      "bindings": 11247,
+      "cppAvailability": {
+        "available": 4268,
+        "refused": 6979
+      },
+      "cppExternDeclarations": 2245,
+      "cppExternEmissionFiles": 2191,
+      "cppExternRefusals": 9002,
+      "declarationKinds": {
+        "function": 66,
+        "type": 2179
+      },
+      "headerStatuses": {
+        "pass": 2245
+      },
+      "javascriptAvailability": {
+        "available": 11247
+      },
+      "namingDivergences": 32,
+      "refusalCodes": {
+        "cpp-binding-unavailable/cpp-module-refused": 6979,
+        "unsupported-carrier": 787,
+        "unsupported-declaration": 1236
+      },
+      "boundFunctions": 62,
+      "functionCandidates": 66,
+      "unboundFunctionCandidates": 4
+    },
     "packageStatus": {
-      "emitted-unbound": 149,
+      "emitted-unbound": 145,
       "empty-web-contract": 1,
-      "partial-native": 3
+      "partial-native": 7
     },
     "scalarExpansion": {
       "headerConfirmedFunctions": 183,
       "packages": 45,
-      "unboundProbeCandidates": 173
+      "unboundProbeCandidates": 125
     },
     "webDefault": {
       "functions": 6906,

@@ -7,28 +7,31 @@ headers. Public facade overrides deliberately expose nothing outside that manife
 
 ## Current compile audit
 
-The current pin's generated SDK uses the same Flight and flight-compiler revisions as this repo. It
-reports 2,563 emitted and 588 refused modules from 3,151 profile inputs across 153 packages. The
-exact general-purpose Haxe-callable partition remains intentionally smaller: ten scalar functions
-from `flight/math/clamp.hpp`, `flight/math/interpolation.hpp`, and
-`flight/color/srgb_transfer.hpp`. They are compared with the current web extern signatures and
-compiled and executed from one Haxe source in the cross-target gate. Expanding that partition must
-remain manifest-first and compile-proven; the much larger generated C++ inventory is not silently
-claimed as Haxe support.
+The current pin's generated SDK uses the same Flight revision as this repo and records its distinct
+flight-compiler revision (`806d257` versus flight-hx planning at `804435a`). It reports 2,567 emitted
+and 584 refused modules from 3,151 profile inputs across 153 packages. The exact general-purpose
+Haxe-callable partition remains intentionally smaller: 62 direct functions across Color, Entity,
+Input, Math, Path, and Power. They are derived from the compiler's Haxe-C++ plan, compared with the
+current web signatures, then compiled and executed from one Haxe source in the cross-target gate.
+Expanding that partition remains manifest-first and compile-proven; the larger generated C++
+inventory is not silently claimed as Haxe support.
 
 `reconciliation.json` is the checked package-by-package difference between that exact partition and
-the complete default web API. It records 1,893 dependency-complete modules, 670
-dependency-incomplete modules, 588 refused modules, and all associated refusal codes. It also finds
-183 public scalar signatures with matching inline definitions in generated C++ headers. Ten are the
-current manifest bindings; the remaining 173 across 45 packages are concrete compile-probe
-candidates, not promised support. Complex signatures stay classified for identity, lifetime,
-nullable/union, callback, and structural-owner review.
+the complete default web API. It records 1,895 dependency-complete modules, 672
+dependency-incomplete modules, 584 refused modules, and all associated refusal codes. The compiler
+dual plan covers all 11,247 public rows and emits 2,245 Haxe-C++ declarations. Its 66 function
+candidates split into 62 promoted direct calls and four adapter-carrier gaps. The older header scan
+also finds 183 public scalar signatures with matching inline definitions; 58 overlap the promoted
+partition and the remaining 125 across 45 packages are probe candidates, not promised support.
+Complex signatures stay classified for identity, lifetime, nullable/union, callback, and
+structural-owner review.
 
-The bridges do not reimplement Flight. They include the generated headers and forward directly to
-their functions. Their only semantic correction renames flight-cpp's `flight::null` helper while the
-headers are parsed, because hxcpp generates unqualified `null()` calls inside namespace `flight`.
-The haxelib initialization macro also suppresses hxcpp's trailing C++11 flag so flight-cpp remains a
-C++20 build.
+The bridges do not reimplement Flight. Generated declaration-only headers expose primitive ABI
+prototypes to hxcpp; separate C++ translation units include flight-cpp's `include`,
+`overrides/include`, and `generated/include` roots in that order and forward directly to the real
+functions. This isolates flight-cpp's `flight::null` and `flight::Array` names from hxcpp-generated
+code. The haxelib initialization macro also suppresses hxcpp's trailing C++11 flag so flight-cpp
+remains a C++20 build.
 
 ## Window/render status
 

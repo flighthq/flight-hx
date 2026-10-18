@@ -23,8 +23,9 @@ builds additionally define `flight_esm` and use the bundled static ESM generator
 `-D flight_cpp_root=/path/to/flight-cpp` and link the pinned-compatible flight-cpp SDK. The optional
 SDL3/GL host extension also receives `-D flight_cpp_build=/path/to/flight-cpp/build`. Defining
 `flight_hx` elects the optional pure-Haxe fallback. The cross-target gate registers a clean isolated
-haxelib repository, builds and installs the deterministic consumer archive, proves one Haxe source
-on all three forms, and separately creates and presents a real flight-cpp SDL3/GL surface.
+haxelib repository, builds and installs the deterministic consumer archive, proves one branch-free
+Haxe source on current ESM and flight-cpp, runs a focused proof for the independently pinned fallback,
+and separately creates and presents a real flight-cpp SDL3/GL surface.
 
 ## Develop
 
@@ -50,8 +51,10 @@ npm run refresh:transpile-surface:check # reject fallback facade/partition drift
 npm run check               # run every production gate, including web behavior/DCE and drift
 ```
 
-The pins now move together for the production SDK: Flight `a627849`, flight-compiler `806d257`, and
-flight-cpp `f4821b`. The compiler scans the complete current 153-package Flight SDK graph. Extern
+The production pins are Flight `a627849`, flight-compiler `804435a`, and flight-cpp `eb4021f`.
+The flight-cpp snapshot was generated from the same Flight source with compiler `806d257`; both
+compiler revisions are recorded rather than incorrectly treated as equal. The compiler scans the
+complete current 153-package Flight SDK graph. Extern
 generation accepts all 3,144 production modules and emits 3,224 compiler files plus 3,197 complete
 default-public-API modules. The generated `flight.*` web surface contains 3,071 types, 6,906
 functions, and 1,254 values across all 153 package contracts. All 8,167 runtime declarations are
@@ -68,19 +71,29 @@ skip instead of claiming that its older surface matches the current web SDK. Its
 still contains 3,012 type identities, 237 functions, and 382 values; unsupported source modules
 remain explicit in `generated/hx/refusals.json`, never silent stubs.
 
+A current-source transpile was also attempted with compiler `804435a`. Its all-module smoke exposed
+upstream lowering gaps after two initial inference errors: missing type re-exports, generic-call
+arity, structural controller inheritance, numeric carriers, and map fallback typing. The atomic
+generator therefore preserved the known-good fallback instead of publishing a partially compiling
+tree. These fallback gaps do not reduce the complete current ESM extern surface or direct C++ plan.
+
 The complete 7,224-file transpiled tree compiles and executes on JavaScript using the native ECMAScript implementation of `flight-runtime-contract/2`. A host-free public Math/Effects slice plus compiler-emitted easing and Rive table code also runs on Haxe eval through the maintained portable Float32, map, set, symbol, and task shims. Browser-specific modules remain JavaScript-target APIs rather than pretending to be portable DOM implementations.
 
 Native integration starts from what the pinned current flight-cpp SDK actually provides, rather than waiting
 for full TS-to-Haxe transpilation or claiming parity it has not earned. `src-cpp/manifest.json` records
-ten compile-proven scalar bindings across Math and Color, the generated SDK's distinct source/compiler
+62 compile-proven direct bindings across Color, Entity, Input, Math, Path, and Power, the generated SDK's distinct source/compiler
 revisions, C++20, and the two downstream hxcpp/flight-cpp corrections. The current generated native
-SDK reports 2,563 emitted modules; Haxe exposes only the smaller exact partition it actually proves.
-The checked `src-cpp/reconciliation.json` splits that total into 1,893 dependency-complete and 670
-dependency-incomplete modules, alongside 588 refused modules. It reconciles every web package with
-the ten bound functions, three upstream Scene2D handle types, one integration-only handle, and the
-remaining gaps. It also identifies 173 unbound scalar functions across 45 packages whose signatures
+SDK reports 2,567 emitted modules; Haxe exposes only the smaller exact partition it actually proves.
+The checked `src-cpp/reconciliation.json` splits that total into 1,895 dependency-complete and 672
+dependency-incomplete modules, alongside 584 refused modules. It reconciles every web package with
+the 62 bound functions, three upstream Scene2D handle types, one integration-only handle, and the
+remaining gaps. It also identifies 125 unbound scalar functions across 45 packages whose signatures
 and inline generated C++ definitions make them the next compile-probe candidates; header presence
 does not promote them to support.
+The compiler-owned dual plan covers all 11,247 public rows and emits 2,245 Haxe-C++ declarations.
+Sixty-six are function candidates: the 62 direct, header-passing functions are promoted, while four
+string-carrier APIs remain explicit adapter work (`Audio.getAudioMimeTypeEssence`,
+`Color.computeRgbHexString`, `Color.computeRgbaCssString`, and `Protocol.isValidProtocolScheme`).
 `examples/cross-target-math/` compiles and runs the same installed-package consumer against those
 headers on desktop and the current complete ESM externs on web. `examples/window-native/` additionally
 links `Flight::HostSdlGl` and uses the real SDL3 window, OpenGL context, clear, and presentation path.

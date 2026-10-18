@@ -10,7 +10,7 @@ integrations that consume flight-hx as a `haxelib`.
 
 | tier | host | pipeline | status |
 |---|---|---|---|
-| [`cross-target-math/`](cross-target-math/) | none | isolated `-lib flight`: ESM, flight-cpp, and pure Haxe | ✅ same Haxe source runs all three backends (`gate:cross-target`) |
+| [`cross-target-math/`](cross-target-math/) | none | isolated `-lib flight`: current ESM + flight-cpp, focused legacy Haxe proof | ✅ one branch-free production source plus a separate fallback proof (`gate:cross-target`) |
 | [`headless/`](headless/) | none | any backend | ✅ runnable now (`flight_hx`) |
 | [`fallback-hx/`](fallback-hx/) | none | `js` + `flight_hx` | ✅ covered by the proof gate |
 | [`web-geometry/`](web-geometry/) | none | `js` + `flight_esm` → `_js` | ✅ **generated** bindings on **real** `@flighthq/geometry`, tree-shaken (`gate:web`, `gate:dce`) |

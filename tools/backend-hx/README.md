@@ -17,6 +17,11 @@ The integration also owns the boundaries that only a consumer repository can ver
 Analysis, TypeScript parsing, IR, lowering, and primary Haxe emission must remain compiler-owned. Do not add a second frontend or general-purpose transpiler here.
 
 `generate.mjs` writes `generated/js/default-api.json` as the exact per-package public contract.
+For extern mode it also asks flight-compiler for its target-neutral dual-binding and Haxe-C++ extern
+plans, folds in flight-cpp's real refusal/header ledgers, and writes the compact checked
+`generated/js/native-planning.json`. `syncNativeFunctions.mjs` only materializes manifest-approved
+direct functions found in that plan; schema, compiler revision, locator, carrier, header status, and
+web signature drift all fail loudly.
 `reconcileNativeSurface.mjs` then compares it with flight-cpp's best-effort/refusal inventories and
 the manifest-pinned native Haxe partition. Its `src-cpp/reconciliation.json` output distinguishes
 dependency-complete headers, dependency-incomplete headers, hard refusals, compile-proven bindings,

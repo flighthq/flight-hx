@@ -13,12 +13,21 @@ import { bundleFlightJs } from '../../tools/esm/bundle.mjs';
 
 const repoRoot = path.join(import.meta.dirname, '..', '..');
 const marker = 'CROSS_TARGET_MATH_OK';
-const expectedFunctionsByModule = new Map([
-  ['flight.Color', ['linearChannelToSrgb', 'srgbChannelToLinear']],
-  ['flight.Math', ['clamp', 'inRange', 'inverseLerp', 'lerp', 'remap', 'saturate', 'smoothStep', 'step']],
-]);
+const nativePlanning = JSON.parse(readFileSync(path.join(repoRoot, 'generated', 'js', 'native-planning.json'), 'utf8'));
+const expectedFunctionsByModule = new Map();
+for (const declaration of nativePlanning.declarations) {
+  if (declaration.kind !== 'function' || declaration.transport !== 'direct' || declaration.headerStatus !== 'pass') {
+    continue;
+  }
+  const separator = declaration.publicName.lastIndexOf('.');
+  const module = declaration.publicName.slice(0, separator);
+  const functions = expectedFunctionsByModule.get(module) ?? [];
+  functions.push(declaration.publicName.slice(separator + 1));
+  expectedFunctionsByModule.set(module, functions);
+}
+for (const functions of expectedFunctionsByModule.values()) functions.sort();
 const expectedCorrections = [
-  'flight-hx-flight-cpp-null-namespace-collision/1',
+  'flight-hx-hxcpp-flight-namespace-isolation/1',
   'flight-hx-hxcpp-cpp11-override/1',
 ];
 const expectedNativeHost = {
@@ -54,8 +63,8 @@ try {
   await buildWebCamera2d(nativeExtension, consumer);
   process.stdout.write(
     `cross-target gate: an isolated -lib flight consumer ran ${String(bindings.length)} ` +
-      `manifest-recorded Color/Math functions on Flight ESM and direct flight-cpp; the optional ` +
-      `pure-Haxe backend ran the same source; the packaged native extensions also created and ` +
+      `manifest-recorded functions on Flight ESM and direct flight-cpp; the optional legacy-pinned ` +
+      `pure-Haxe backend passed its focused facade proof; the packaged native extensions also created and ` +
       `presented a real flight-cpp SDL3/GL surface, and the Haxe-authored Camera2D scene passed ` +
       `the upstream-control and native framebuffer oracles while linking against current Flight ESM.\n`,
   );
@@ -173,10 +182,12 @@ function validateNativeManifest(flightCpp) {
       path.join(repoRoot, 'generated', 'js', 'flight', '_js', '_fn', `${holder}.hx`),
       'utf8',
     );
-    const bridge = readFileSync(
+    const bridge = [
       path.join(repoRoot, 'src-cpp', 'include', 'flight_hx', `${holder.toLowerCase()}.hpp`),
-      'utf8',
-    );
+      path.join(repoRoot, 'src-cpp', 'src', `${holder.toLowerCase()}.cpp`),
+    ]
+      .map((filename) => readFileSync(filename, 'utf8'))
+      .join('\n');
     const facadeMembers = byName(parseModuleMembers(facade).functions);
     const nativeMembers = byName(
       parseModuleMembers(nativeExtern.replace(/^  @:/gmu, '@:').replace(/^  static /gmu, '')).functions,
@@ -318,7 +329,7 @@ function rejectUnsupportedNative(flightCpp, consumer) {
     { cwd: consumer.work, encoding: 'utf8', env: consumer.environment },
   );
   const transcript = `${compile.stdout ?? ''}${compile.stderr ?? ''}`;
-  if (compile.status === 0 || !transcript.includes('colorFromKelvin')) {
+  if (compile.status === 0 || !transcript.includes('computeRgbHexString')) {
     fail(`unbound native API did not fail loudly at the exact public facade:\n${transcript}`);
   }
 }
@@ -453,6 +464,7 @@ function runNativeCamera2d(flightCpp, nativeExtension, consumer) {
 
 function runFallback(consumer) {
   const output = path.join(temporaryRoot, 'fallback.js');
+  const fallbackMarker = 'CROSS_TARGET_FALLBACK_OK';
   const compile = spawnSync(
     consumer.haxe,
     [
@@ -461,7 +473,7 @@ function runFallback(consumer) {
       '-cp',
       path.join(repoRoot, 'examples', 'cross-target-math'),
       '--main',
-      'CrossTargetMath',
+      'CrossTargetFallback',
       '-D',
       'flight_hx',
       '-dce',
@@ -474,8 +486,8 @@ function runFallback(consumer) {
   if (compile.status !== 0) fail(`packaged pure-Haxe compile failed:\n${compile.stdout}${compile.stderr}`);
   const run = spawnSync(process.execPath, [output], { encoding: 'utf8' });
   const transcript = `${run.stdout ?? ''}${run.stderr ?? ''}`;
-  if (run.status !== 0 || !transcript.includes(marker)) {
-    fail(`packaged pure-Haxe run did not reach ${marker}:\n${transcript}`);
+  if (run.status !== 0 || !transcript.includes(fallbackMarker)) {
+    fail(`packaged pure-Haxe run did not reach ${fallbackMarker}:\n${transcript}`);
   }
 }
 

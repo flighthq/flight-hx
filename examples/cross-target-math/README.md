@@ -1,12 +1,13 @@
 # Cross-target scalar SDK slice
 
-`CrossTargetMath.hx` is one host-free Haxe program compiled three ways from an isolated `-lib flight`
-consumer:
+`CrossTargetMath.hx` is one host-free Haxe program compiled for the two current production backends
+from an isolated `-lib flight` consumer:
 
 - web uses the complete generated Flight ESM extern surface and the static-import bundler pipeline;
-- desktop uses hxcpp and direct C++ calls into every compile-proven scalar Math/Color function in
-  the pinned flight-cpp generated headers;
-- fallback uses the compiler-emitted pure-Haxe implementation subset on ordinary Haxe-to-JS.
+- desktop uses hxcpp and direct C++ calls into all 62 compiler-planned, compile-proven functions
+  across Color, Entity, Input, Math, Path, and Power;
+- `CrossTargetFallback.hx` separately keeps the legacy-pinned compiler-emitted Haxe subset honest
+  on ordinary Haxe-to-JS without adding target branches to the production sample.
 
 Run the reproducible compile, link, and behavioral proof for both targets:
 

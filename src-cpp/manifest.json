@@ -1,14 +1,20 @@
 {
   "schema": "flight-hx-cpp-bindings/1",
-  "flightCppRevision": "f4821bd28f92d6b617e8fed30c4d088b4e3dcc72",
+  "flightCppRevision": "eb4021fafee3b829e7065c99f081c32ce8117d72",
   "generatedSdk": {
     "compilerRevision": "806d257d2f4100de745cc97340e61c2f301b0f24",
     "sourceRevision": "a62784923f3be814463286c9fb28edfe6ab15789",
-    "emittedModules": 2563
+    "emittedModules": 2567
+  },
+  "haxeBindingPlan": {
+    "schema": "flight-haxe-cpp-extern-plan/1",
+    "compilerRevision": "804435ad89716bd3ddb8144e435adb0be6c9477b",
+    "candidateArtifact": "generated/js/native-planning.json",
+    "promotion": "direct-header-pass-compile-run"
   },
   "cppStandard": 20,
   "corrections": [
-    "flight-hx-flight-cpp-null-namespace-collision/1",
+    "flight-hx-hxcpp-flight-namespace-isolation/1",
     "flight-hx-hxcpp-cpp11-override/1"
   ],
   "hosts": [
@@ -33,7 +39,11 @@
       "profile": "scene2d-gl",
       "target": "Flight::HostSdlGl+Flight::SdkPreview",
       "requiresBuildDefine": "flight_cpp_build",
-      "includeRoots": ["include", "overrides/include", "generated/include"],
+      "includeRoots": [
+        "include",
+        "overrides/include",
+        "generated/include"
+      ],
       "example": "examples/camera2d"
     }
   ],
@@ -42,14 +52,99 @@
       "module": "flight.Color",
       "functions": [
         {
+          "name": "colorFromKelvin",
+          "native": "flight::color::color_from_kelvin",
+          "header": "flight/color/contract.hpp"
+        },
+        {
+          "name": "getColorAlpha",
+          "native": "flight::color::get_color_alpha",
+          "header": "flight/color/contract.hpp"
+        },
+        {
+          "name": "getColorContrastRatio",
+          "native": "flight::color::get_color_contrast_ratio",
+          "header": "flight/color/contract.hpp"
+        },
+        {
+          "name": "getColorLuminance",
+          "native": "flight::color::get_color_luminance",
+          "header": "flight/color/contract.hpp"
+        },
+        {
+          "name": "getColorRgb",
+          "native": "flight::color::get_color_rgb",
+          "header": "flight/color/contract.hpp"
+        },
+        {
+          "name": "lerpColor",
+          "native": "flight::color::lerp_color",
+          "header": "flight/color/contract.hpp"
+        },
+        {
           "name": "linearChannelToSrgb",
           "native": "flight::color::linear_channel_to_srgb",
-          "header": "flight/color/srgb_transfer.hpp"
+          "header": "flight/color/contract.hpp"
+        },
+        {
+          "name": "packColor",
+          "native": "flight::color::pack_color",
+          "header": "flight/color/contract.hpp"
+        },
+        {
+          "name": "packOpaqueColor",
+          "native": "flight::color::pack_opaque_color",
+          "header": "flight/color/contract.hpp"
+        },
+        {
+          "name": "premultiplyColorAlpha",
+          "native": "flight::color::premultiply_color_alpha",
+          "header": "flight/color/contract.hpp"
+        },
+        {
+          "name": "setColorAlpha",
+          "native": "flight::color::set_color_alpha",
+          "header": "flight/color/contract.hpp"
         },
         {
           "name": "srgbChannelToLinear",
           "native": "flight::color::srgb_channel_to_linear",
-          "header": "flight/color/srgb_transfer.hpp"
+          "header": "flight/color/contract.hpp"
+        },
+        {
+          "name": "unpremultiplyColorAlpha",
+          "native": "flight::color::unpremultiply_color_alpha",
+          "header": "flight/color/contract.hpp"
+        }
+      ]
+    },
+    {
+      "module": "flight.Entity",
+      "functions": [
+        {
+          "name": "areEntityRuntimeGuardsEnabled",
+          "native": "flight::entity::are_entity_runtime_guards_enabled",
+          "header": "flight/entity/contract.hpp"
+        },
+        {
+          "name": "disableEntityRuntimeGuards",
+          "native": "flight::entity::disable_entity_runtime_guards",
+          "header": "flight/entity/contract.hpp"
+        },
+        {
+          "name": "setEntityRuntimeGuardMode",
+          "native": "flight::entity::set_entity_runtime_guard_mode",
+          "header": "flight/entity/contract.hpp"
+        }
+      ]
+    },
+    {
+      "module": "flight.Input",
+      "functions": [
+        {
+          "name": "applyGamepadAxisDeadZone",
+          "native": "flight::input::apply_gamepad_axis_dead_zone",
+          "header": "flight/input/contract.hpp"
         }
       ]
     },
@@ -57,44 +152,239 @@
       "module": "flight.Math",
       "functions": [
         {
+          "name": "ceilPowerOfTwo",
+          "native": "flight::math::ceil_power_of_two",
+          "header": "flight/math/contract.hpp"
+        },
+        {
+          "name": "ceilTo",
+          "native": "flight::math::ceil_to",
+          "header": "flight/math/contract.hpp"
+        },
+        {
           "name": "clamp",
           "native": "flight::math::clamp",
-          "header": "flight/math/clamp.hpp"
+          "header": "flight/math/contract.hpp"
+        },
+        {
+          "name": "damp",
+          "native": "flight::math::damp",
+          "header": "flight/math/contract.hpp"
+        },
+        {
+          "name": "degToRad",
+          "native": "flight::math::deg_to_rad_flight_value_function_deg_u000054_o_u000052_ad_flight_source_59eefa411bb2f66d",
+          "header": "flight/math/contract.hpp"
+        },
+        {
+          "name": "deltaAngle",
+          "native": "flight::math::delta_angle",
+          "header": "flight/math/contract.hpp"
+        },
+        {
+          "name": "euclideanMod",
+          "native": "flight::math::euclidean_mod",
+          "header": "flight/math/contract.hpp"
+        },
+        {
+          "name": "factorial",
+          "native": "flight::math::factorial",
+          "header": "flight/math/contract.hpp"
+        },
+        {
+          "name": "floorPowerOfTwo",
+          "native": "flight::math::floor_power_of_two",
+          "header": "flight/math/contract.hpp"
+        },
+        {
+          "name": "floorTo",
+          "native": "flight::math::floor_to",
+          "header": "flight/math/contract.hpp"
+        },
+        {
+          "name": "fract",
+          "native": "flight::math::fract",
+          "header": "flight/math/contract.hpp"
+        },
+        {
+          "name": "gcd",
+          "native": "flight::math::gcd",
+          "header": "flight/math/contract.hpp"
+        },
+        {
+          "name": "hash2D",
+          "native": "flight::math::hash_2d",
+          "header": "flight/math/contract.hpp"
+        },
+        {
+          "name": "hash3D",
+          "native": "flight::math::hash_3d",
+          "header": "flight/math/contract.hpp"
+        },
+        {
+          "name": "hashCombine",
+          "native": "flight::math::hash_combine",
+          "header": "flight/math/contract.hpp"
+        },
+        {
+          "name": "hashUint32",
+          "native": "flight::math::hash_uint32",
+          "header": "flight/math/contract.hpp"
+        },
+        {
+          "name": "hypot2",
+          "native": "flight::math::hypot2",
+          "header": "flight/math/contract.hpp"
         },
         {
           "name": "inRange",
           "native": "flight::math::in_range",
-          "header": "flight/math/clamp.hpp"
+          "header": "flight/math/contract.hpp"
         },
         {
           "name": "inverseLerp",
           "native": "flight::math::inverse_lerp",
-          "header": "flight/math/interpolation.hpp"
+          "header": "flight/math/contract.hpp"
+        },
+        {
+          "name": "isEven",
+          "native": "flight::math::is_even",
+          "header": "flight/math/contract.hpp"
+        },
+        {
+          "name": "isOdd",
+          "native": "flight::math::is_odd",
+          "header": "flight/math/contract.hpp"
+        },
+        {
+          "name": "isPowerOfTwo",
+          "native": "flight::math::is_power_of_two",
+          "header": "flight/math/contract.hpp"
+        },
+        {
+          "name": "lcm",
+          "native": "flight::math::lcm",
+          "header": "flight/math/contract.hpp"
         },
         {
           "name": "lerp",
           "native": "flight::math::lerp",
-          "header": "flight/math/interpolation.hpp"
+          "header": "flight/math/contract.hpp"
+        },
+        {
+          "name": "lerpAngle",
+          "native": "flight::math::lerp_angle",
+          "header": "flight/math/contract.hpp"
+        },
+        {
+          "name": "moveTowards",
+          "native": "flight::math::move_towards",
+          "header": "flight/math/contract.hpp"
+        },
+        {
+          "name": "nextMultipleOf",
+          "native": "flight::math::next_multiple_of",
+          "header": "flight/math/contract.hpp"
+        },
+        {
+          "name": "nextPowerOfTwo",
+          "native": "flight::math::next_power_of_two",
+          "header": "flight/math/contract.hpp"
+        },
+        {
+          "name": "normalizeAngle",
+          "native": "flight::math::normalize_angle",
+          "header": "flight/math/contract.hpp"
+        },
+        {
+          "name": "pingPong",
+          "native": "flight::math::ping_pong",
+          "header": "flight/math/contract.hpp"
+        },
+        {
+          "name": "previousPowerOfTwo",
+          "native": "flight::math::previous_power_of_two",
+          "header": "flight/math/contract.hpp"
+        },
+        {
+          "name": "quantize",
+          "native": "flight::math::quantize",
+          "header": "flight/math/contract.hpp"
+        },
+        {
+          "name": "radToDeg",
+          "native": "flight::math::rad_to_deg_flight_value_function_rad_u000054_o_u000044_eg_flight_source_59eefa411bb2f66d",
+          "header": "flight/math/contract.hpp"
         },
         {
           "name": "remap",
           "native": "flight::math::remap",
-          "header": "flight/math/interpolation.hpp"
+          "header": "flight/math/contract.hpp"
+        },
+        {
+          "name": "repeat",
+          "native": "flight::math::repeat",
+          "header": "flight/math/contract.hpp"
+        },
+        {
+          "name": "roundTo",
+          "native": "flight::math::round_to",
+          "header": "flight/math/contract.hpp"
         },
         {
           "name": "saturate",
           "native": "flight::math::saturate",
-          "header": "flight/math/clamp.hpp"
+          "header": "flight/math/contract.hpp"
+        },
+        {
+          "name": "sign",
+          "native": "flight::math::sign",
+          "header": "flight/math/contract.hpp"
+        },
+        {
+          "name": "smootherStep",
+          "native": "flight::math::smoother_step",
+          "header": "flight/math/contract.hpp"
         },
         {
           "name": "smoothStep",
           "native": "flight::math::smooth_step",
-          "header": "flight/math/interpolation.hpp"
+          "header": "flight/math/contract.hpp"
         },
         {
           "name": "step",
           "native": "flight::math::step",
-          "header": "flight/math/interpolation.hpp"
+          "header": "flight/math/contract.hpp"
+        }
+      ]
+    },
+    {
+      "module": "flight.Path",
+      "functions": [
+        {
+          "name": "getCubicBezierCurvature",
+          "native": "flight::path::get_cubic_bezier_curvature",
+          "header": "flight/path/contract.hpp"
+        },
+        {
+          "name": "getQuadraticBezierCurvature",
+          "native": "flight::path::get_quadratic_bezier_curvature",
+          "header": "flight/path/contract.hpp"
+        }
+      ]
+    },
+    {
+      "module": "flight.Power",
+      "functions": [
+        {
+          "name": "getPowerIdlePollingIntervalMs",
+          "native": "flight::power::get_power_idle_polling_interval_ms",
+          "header": "flight/power/contract.hpp"
+        },
+        {
+          "name": "setPowerIdlePollingIntervalMs",
+          "native": "flight::power::set_power_idle_polling_interval_ms",
+          "header": "flight/power/contract.hpp"
         }
       ]
     }

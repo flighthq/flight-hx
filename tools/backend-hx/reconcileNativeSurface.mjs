@@ -21,6 +21,7 @@ const compiler = resolveDependency(root, 'flight-compiler');
 const flightCpp = resolveDependency(root, 'flight-cpp');
 const defaultApi = readJson(path.join(root, 'generated', 'js', 'default-api.json'));
 const webManifest = readJson(path.join(root, 'generated', 'js', 'manifest.json'));
+const nativePlanning = readJson(path.join(root, 'generated', 'js', 'native-planning.json'));
 const nativeManifest = readJson(path.join(root, 'src-cpp', 'manifest.json'));
 const cppManifest = readJson(path.join(flightCpp.directory, 'generated', 'manifest.json'));
 const bestEffort = readJson(path.join(flightCpp.directory, 'generated', 'best-effort.json'));
@@ -34,7 +35,13 @@ const refusalsByPackage = groupBy(refusalLedger.refusals, ({ package: packageNam
 const cppHeaderIndex = buildCppHeaderIndex(bestEffort.modules);
 const nativeFunctionIndex = buildNativeFunctionIndex();
 const nativeTypeIndex = buildNativeTypeIndex();
+const compilerPlanPackages = new Map(nativePlanning.packages.map((package_) => [package_.package, package_]));
+const compilerFunctionCandidatesByPackage = groupBy(
+  nativePlanning.declarations.filter(({ kind }) => kind === 'function'),
+  ({ package: packageName }) => packageName,
+);
 const allScalarCandidates = [];
+const allCompilerFunctionCandidates = [];
 
 const packages = defaultApi.packages.map((package_) => {
   const cppModules = cppModulesByPackage.get(package_.package) ?? [];
@@ -49,6 +56,29 @@ const packages = defaultApi.packages.map((package_) => {
   allScalarCandidates.push(...scalarCandidates.map((entry) => ({ ...entry, package: package_.package })));
   const boundKeys = new Set(nativeFunctions.map(({ holder, name }) => `${holder}\0${name}`));
   const unboundScalarCandidates = scalarCandidates.filter(({ holder, name }) => !boundKeys.has(`${holder}\0${name}`));
+  const compilerPackage = compilerPlanPackages.get(package_.package) ?? {
+    bindings: 0,
+    cppAvailable: 0,
+    cppExternDeclarations: 0,
+    cppExternRefusals: 0,
+    headerPassingDeclarations: 0,
+    package: package_.package,
+  };
+  const compilerFunctionCandidates = (compilerFunctionCandidatesByPackage.get(package_.package) ?? [])
+    .map((candidate) => ({
+      header: candidate.include,
+      holder: candidate.publicName.split('.')[1],
+      name: candidate.publicName.split('.')[2],
+      native: candidate.nativeName,
+      transport: candidate.transport,
+    }))
+    .sort(compareApiEntry);
+  allCompilerFunctionCandidates.push(
+    ...compilerFunctionCandidates.map((candidate) => ({ ...candidate, package: package_.package })),
+  );
+  const unboundCompilerFunctionCandidates = compilerFunctionCandidates.filter(
+    ({ holder, name }) => !boundKeys.has(`${holder}\0${name}`),
+  );
   const statusCounts = countBy(cppModules, ({ status }) => status);
   const refusalCodes = countBy(refusals, ({ code }) => code);
   const complexFunctions = package_.functions.length - package_.functions.filter(({ signature }) => isDirectScalarSignature(signature)).length;
@@ -60,6 +90,8 @@ const packages = defaultApi.packages.map((package_) => {
     issue('native-type-gap', package_.types.filter((name) => !nativeTypes.includes(name)).length),
     issue('non-scalar-signature-review', complexFunctions),
     issue('header-confirmed-scalar-probe-candidates', unboundScalarCandidates.length),
+    issue('compiler-haxe-cpp-function-candidates', unboundCompilerFunctionCandidates.length),
+    issue('compiler-haxe-cpp-refused-bindings', compilerPackage.cppExternRefusals),
   ].filter(({ count }) => count > 0);
   const webDeclarations = package_.functions.length + package_.types.length + package_.values.length;
   const nativeDeclarations = nativeFunctions.length + nativeTypes.length;
@@ -74,6 +106,14 @@ const packages = defaultApi.packages.map((package_) => {
           ? 'emitted-unbound'
           : 'compiler-blocked';
   return {
+    compilerPlan: {
+      bindings: compilerPackage.bindings,
+      cppAvailable: compilerPackage.cppAvailable,
+      cppExternDeclarations: compilerPackage.cppExternDeclarations,
+      cppExternRefusals: compilerPackage.cppExternRefusals,
+      functionCandidates: unboundCompilerFunctionCandidates,
+      headerPassingDeclarations: compilerPackage.headerPassingDeclarations,
+    },
     flightCpp: {
       completeModules: completeCppModules,
       dependencyIncompleteModules: dependencyIncompleteCppModules,
@@ -127,6 +167,11 @@ const report = {
         'The current compile-proven native partition binds functions and Scene2D handles but no mutable/default runtime value exports.',
     },
     {
+      code: 'split-compiler-provenance',
+      reason:
+        `flight-hx web/dual planning uses flight-compiler ${compiler.commit}, while the pinned flight-cpp generated SDK was committed with ${cppManifest.compiler.revision}. Both revisions are recorded; shared Flight source identity and exact locators are reconciled without claiming compiler-revision equality.`,
+    },
+    {
       code: 'host-specific-extensions',
       reason:
         'SDL3/OpenGL hosting and the Scene2D ownership session are manifest-recorded flight-hx extensions, not claims of package-wide portable API parity.',
@@ -153,6 +198,7 @@ const report = {
     flight: flight.commit,
     flightCompiler: compiler.commit,
     flightCpp: flightCpp.commit,
+    flightCppCompiler: cppManifest.compiler.revision,
   },
   schema: 'flight-hx-native-public-api-reconciliation/1',
   summary: {
@@ -170,6 +216,17 @@ const report = {
       packages: new Set([...nativeFunctionIndex.keys(), ...nativeTypeIndex.keys()]).size,
       types: nativeUpstreamTypes.size,
       values: 0,
+    },
+    compilerPlan: {
+      ...nativePlanning.summary,
+      boundFunctions: allCompilerFunctionCandidates.length -
+        allCompilerFunctionCandidates.filter(({ holder, name }) =>
+          !boundScalarKeys.has(`${holder}\0${name}`),
+        ).length,
+      functionCandidates: allCompilerFunctionCandidates.length,
+      unboundFunctionCandidates: allCompilerFunctionCandidates.filter(
+        ({ holder, name }) => !boundScalarKeys.has(`${holder}\0${name}`),
+      ).length,
     },
     packageStatus: Object.fromEntries(sortedCounts(statusCounts).map(({ count, name }) => [name, count])),
     scalarExpansion: {
@@ -280,7 +337,22 @@ function validatePins() {
   equal('native generated Flight pin', nativeManifest.generatedSdk.sourceRevision, cppManifest.source.revision);
   equal('native generated compiler pin', nativeManifest.generatedSdk.compilerRevision, cppManifest.compiler.revision);
   equal('web/native Flight source pin', cppManifest.source.revision, webManifest.source.revision);
-  equal('web/native compiler pin', cppManifest.compiler.revision, webManifest.compiler.revision);
+  equal('native-plan flight-cpp pin', nativePlanning.pins.flightCpp, flightCpp.commit);
+  equal('native-plan flight-compiler pin', nativePlanning.pins.flightCompiler, compiler.commit);
+  equal('native-plan generated Flight pin', nativePlanning.pins.flightCppSource, cppManifest.source.revision);
+  equal('native-plan generated compiler pin', nativePlanning.pins.flightCppCompiler, cppManifest.compiler.revision);
+  equal('native manifest Haxe-plan schema', nativeManifest.haxeBindingPlan.schema, nativePlanning.schemas.cppExternPlan);
+  equal('native manifest Haxe-plan compiler pin', nativeManifest.haxeBindingPlan.compilerRevision, compiler.commit);
+  equal(
+    'native manifest Haxe-plan artifact',
+    nativeManifest.haxeBindingPlan.candidateArtifact,
+    'generated/js/native-planning.json',
+  );
+  equal(
+    'native-plan manifest summary',
+    JSON.stringify(nativePlanning.summary),
+    JSON.stringify(webManifest.summary.nativePlanning),
+  );
 }
 
 function validateCppInventory() {

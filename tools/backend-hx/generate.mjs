@@ -81,7 +81,8 @@ const modes =
       : ['extern', 'transpile'];
 const flight = resolveDependency(root, 'flight');
 const compiler = resolveDependency(root, 'flight-compiler');
-const inputFailure = validateInput(flight, compiler);
+const flightCpp = resolveDependency(root, 'flight-cpp');
+const inputFailure = validateInput(flight, compiler, flightCpp);
 if (inputFailure !== undefined) {
   const message = `${inputFailure} Run \`npm run rehydrate\` and \`npm install --prefix .dependencies/flight-compiler\`.\n`;
   if (check) {
@@ -108,9 +109,15 @@ if (!existsSync(compilerEntry)) {
   process.exit(1);
 }
 
-const { compileTypeScriptPackageGraph, createHaxeCompilerBackend, parseTypeScriptSource } = await import(
-  pathToFileURL(compilerEntry)
-);
+const {
+  compileTypeScriptPackageGraph,
+  createCompilerHaxeCppExternPlan,
+  createCompilerHaxeDualBindingPlan,
+  createCppCompilerPublicBindingPlan,
+  createHaxeCompilerBackend,
+  emitCompilerHaxeCppExternPlan,
+  parseTypeScriptSource,
+} = await import(pathToFileURL(compilerEntry));
 for (const mode of modes) {
   const input = createSdkInput(flight, parseTypeScriptSource, mode);
   const temporaryRoot = mkdtempSync(path.join(tmpdir(), `flight-hx-${mode}-generation-`));
@@ -118,9 +125,13 @@ for (const mode of modes) {
   const generatedRoot = path.join(root, 'generated', mode === 'extern' ? 'js' : 'hx');
   let preserveTemporaryRoot = false;
   try {
-    const generation = generateMode(candidateRoot, mode, input, flight, compiler, {
+    const generation = generateMode(candidateRoot, mode, input, flight, compiler, flightCpp, {
       compileTypeScriptPackageGraph,
+      createCompilerHaxeCppExternPlan,
+      createCompilerHaxeDualBindingPlan,
+      createCppCompilerPublicBindingPlan,
       createHaxeCompilerBackend,
+      emitCompilerHaxeCppExternPlan,
     });
     const { summary } = generation;
     if (mode === 'extern') {
@@ -306,11 +317,25 @@ function collectCompilerContractExports(facade, packages, report) {
   return { typeNames, typesByPackage, valuesByPackage };
 }
 
-function generateMode(outputRoot, mode, input, flightDependency, compilerDependency, compilerApi) {
+function generateMode(
+  outputRoot,
+  mode,
+  input,
+  flightDependency,
+  compilerDependency,
+  flightCppDependency,
+  compilerApi,
+) {
   const correctionApplications = new Map();
-  const backend = createNormalizedHaxeBackend(compilerApi.createHaxeCompilerBackend(), (contents, filename) =>
-    applyCompatibilityCorrections(contents, filename, mode, correctionApplications),
+  const normalizedBackend = createNormalizedHaxeBackend(
+    compilerApi.createHaxeCompilerBackend(),
+    (contents, filename) => applyCompatibilityCorrections(contents, filename, mode, correctionApplications),
   );
+  const nativePlanning =
+    mode === 'extern'
+      ? createNativeBindingPlanner(normalizedBackend, input, flightCppDependency, compilerDependency, compilerApi)
+      : undefined;
+  const backend = nativePlanning?.backend ?? normalizedBackend;
   const compilation = compilerApi.compileTypeScriptPackageGraph({
     backend,
     backendOptions: {
@@ -328,6 +353,7 @@ function generateMode(outputRoot, mode, input, flightDependency, compilerDepende
   if (!compilation.report.runtimeAbi) {
     throw new Error('Pinned flight-compiler did not publish its Haxe runtime ABI manifest');
   }
+  const nativeBindingArtifacts = nativePlanning?.finish(compilation.report.publicBindings);
   const compatibilityCorrectionApplications = input.sourceCompatibilityCorrectionApplications.concat(
     validateCompatibilityCorrections(
       mode,
@@ -356,6 +382,7 @@ function generateMode(outputRoot, mode, input, flightDependency, compilerDepende
         )
       : undefined;
   if (externDefaultPublicApi) {
+    reconcileNativePlanningWithDefaultApi(nativeBindingArtifacts, externDefaultPublicApi.report);
     for (const file of externDefaultPublicApi.files) {
       const target = path.join(outputRoot, file.path);
       mkdirSync(path.dirname(target), { recursive: true });
@@ -364,6 +391,10 @@ function generateMode(outputRoot, mode, input, flightDependency, compilerDepende
     writeFileSync(
       path.join(outputRoot, 'default-api.json'),
       `${JSON.stringify(externDefaultPublicApi.report, undefined, 2)}\n`,
+    );
+    writeFileSync(
+      path.join(outputRoot, 'native-planning.json'),
+      `${JSON.stringify(nativeBindingArtifacts.report, undefined, 2)}\n`,
     );
   }
   const transpiledPublicBackend =
@@ -408,6 +439,7 @@ function generateMode(outputRoot, mode, input, flightDependency, compilerDepende
     summary.filteredContractValues = contractFiltered.removedValues;
     const publicSurface = externContractCoverage(contractFiltered.files, publicExports);
     summary.publicRuntimeSurface = publicSurface.summary;
+    summary.nativePlanning = nativeBindingArtifacts.report.summary;
     writeFileSync(path.join(outputRoot, 'public-surface.json'), `${JSON.stringify(publicSurface, undefined, 2)}\n`);
   } else {
     summary.publicRuntimeSurface = transpiledPublicBackend.summary;
@@ -479,6 +511,218 @@ function generateMode(outputRoot, mode, input, flightDependency, compilerDepende
   return {
     compilerFiles: mode === 'extern' ? compilation.compilation.files : [],
     summary,
+  };
+}
+
+// Ask the compiler's target-neutral facade and target-owned planners for the same source graph the
+// JavaScript extern run just lowered. The callback is deliberately attached to the Haxe backend:
+// orchestration supplies it the canonical IR modules, final public facade, and exact refusal set,
+// avoiding a second parser or a flight-hx-owned identity join. flight-cpp's committed refusal ledger
+// is folded in because a syntactically valid C++ locator is not evidence that its owning module was
+// emitted successfully at the pinned native SDK revision.
+function createNativeBindingPlanner(backend, input, flightCppDependency, compilerDependency, compilerApi) {
+  const refusalArtifact = JSON.parse(
+    readFileSync(path.join(flightCppDependency.directory, 'generated', 'refusals.json'), 'utf8'),
+  );
+  const headerStatusArtifact = JSON.parse(
+    readFileSync(path.join(flightCppDependency.directory, 'generated', 'header-status.json'), 'utf8'),
+  );
+  if (refusalArtifact.schema !== 'flight-generated-sdk-refusals/2' || !Array.isArray(refusalArtifact.refusals)) {
+    throw new Error('Pinned flight-cpp refusal ledger is not flight-generated-sdk-refusals/2');
+  }
+  if (headerStatusArtifact.schema !== 'flight-cpp-header-status/1' || !Array.isArray(headerStatusArtifact.headers)) {
+    throw new Error('Pinned flight-cpp header status is not flight-cpp-header-status/1');
+  }
+
+  let artifacts;
+  const plannedBackend = {
+    ...backend,
+    createPublicBindingPlan(request) {
+      const facade = {
+        ...request.facade,
+        modules: request.facade.modules.filter(({ module }) => /(?:^|\/)contract\.[cm]?tsx?$/u.test(module.source)),
+      };
+      const modulesBySource = new Map(
+        request.modules.map((module) => [`${module.packageName}\0${portable(module.source)}`, module]),
+      );
+      const cppRefusals = refusalArtifact.refusals.flatMap((refusal) => {
+        const module = modulesBySource.get(`${refusal.package}\0${portable(refusal.module)}`);
+        return module ? [{ code: refusal.code, message: refusal.reason, module }] : [];
+      });
+      const packageTargets = Object.fromEntries(
+        input.packages.map(({ name }) => {
+          const targetName = name.slice('@flighthq/'.length).replaceAll('-', '_');
+          return [name, { includePrefix: `flight/${targetName}`, namespace: `flight::${targetName}` }];
+        }),
+      );
+      const cpp = compilerApi.createCppCompilerPublicBindingPlan({
+        facade,
+        modules: request.modules,
+        options: { packageTargets, runtimeProfile: 'flight-cpp' },
+        refusals: cppRefusals,
+      });
+      const plan = compilerApi.createCompilerHaxeDualBindingPlan({
+        cpp,
+        facade,
+        javascriptRefusals: request.refusals,
+        modules: request.modules,
+        options: { emissionMode: 'extern', rootPackage: 'flight', runtimeModule: 'flight._internal' },
+        packageSpecifiers: Object.fromEntries(
+          input.packages.map(({ name }) => [name, `${name}/contract`]),
+        ),
+      });
+      const cppExternPlan = compilerApi.createCompilerHaxeCppExternPlan({ bindings: plan, modules: request.modules });
+      const cppExternEmission = compilerApi.emitCompilerHaxeCppExternPlan(cppExternPlan);
+      artifacts = {
+        cppExternEmission,
+        cppExternPlan,
+        plan,
+        report: createNativeBindingPlanningReport(
+          plan,
+          cppExternPlan,
+          cppExternEmission,
+          headerStatusArtifact,
+          refusalArtifact,
+          flightCppDependency,
+          compilerDependency,
+        ),
+      };
+      return plan;
+    },
+  };
+  return {
+    backend: plannedBackend,
+    finish(publicBindings) {
+      if (!artifacts || publicBindings?.schema !== 'flight-haxe-dual-binding-plan/1') {
+        throw new Error('Pinned flight-compiler did not publish its Haxe dual-binding plan');
+      }
+      return artifacts;
+    },
+  };
+}
+
+function createNativeBindingPlanningReport(
+  plan,
+  cppExternPlan,
+  cppExternEmission,
+  headerStatusArtifact,
+  refusalArtifact,
+  flightCppDependency,
+  compilerDependency,
+) {
+  const headerStatuses = new Map(headerStatusArtifact.headers.map(({ header, status }) => [header, status]));
+  const bindingsByKey = new Map(plan.bindings.map((binding) => [binding.key, binding]));
+  const declarations = cppExternPlan.declarations.map((declaration) => ({
+    headerStatus: headerStatuses.get(declaration.include) ?? 'missing',
+    include: declaration.include,
+    kind: declaration.kind,
+    nativeName:
+      declaration.kind === 'type' ? declaration.nativeName : declaration.adapter?.nativeName ?? declaration.targetNativeName,
+    package: bindingsByKey.get(declaration.key)?.identity.packageName,
+    publicName: bindingsByKey.get(declaration.key)?.publicHaxe.qualifiedName,
+    transport:
+      declaration.kind === 'function'
+        ? declaration.adapter
+          ? 'adapter'
+          : 'direct'
+        : declaration.ownership,
+  }));
+  const cppAvailability = countBy(plan.bindings, ({ cpp }) => cpp.availability);
+  const javascriptAvailability = countBy(plan.bindings, ({ javascript }) => javascript.availability);
+  const declarationKinds = countBy(cppExternPlan.declarations, ({ kind }) => kind);
+  const headerStatusesByDeclaration = countBy(declarations, ({ headerStatus }) => headerStatus);
+  const externRefusalsByKey = new Map(cppExternPlan.refusals.map((refusal) => [refusal.key, refusal]));
+  const refusalCodes = countBy(cppExternPlan.refusals, ({ code, detailCode }) => `${code}${detailCode ? `/${detailCode}` : ''}`);
+  const namingDivergences = plan.bindings
+    .filter(
+      ({ javascript, publicHaxe }) =>
+        javascript.availability === 'available' && javascript.locator.exportedName !== publicHaxe.name,
+    )
+    .map(({ identity, javascript, publicHaxe }) => ({
+      exportedName: javascript.locator.exportedName,
+      package: identity.packageName,
+      publicName: publicHaxe.qualifiedName,
+      source: identity.source,
+    }));
+  const packages = [...new Set(plan.bindings.map(({ identity }) => identity.packageName))]
+    .sort(compareText)
+    .map((packageName) => {
+      const bindings = plan.bindings.filter(({ identity }) => identity.packageName === packageName);
+      const keys = new Set(bindings.map(({ key }) => key));
+      const packageDeclarations = declarations.filter(({ package: declarationPackage }) => declarationPackage === packageName);
+      return {
+        bindings: bindings.length,
+        cppAvailable: bindings.filter(({ cpp }) => cpp.availability === 'available').length,
+        cppExternDeclarations: packageDeclarations.length,
+        cppExternRefusals: [...keys].filter((key) => externRefusalsByKey.has(key)).length,
+        headerPassingDeclarations: packageDeclarations.filter(({ headerStatus }) => headerStatus === 'pass').length,
+        package: packageName,
+      };
+    });
+  return {
+    declarations,
+    namingDivergences,
+    packages,
+    pins: {
+      flightCompiler: compilerDependency.commit,
+      flightCpp: flightCppDependency.commit,
+      flightCppCompiler: headerStatusArtifact.compiler?.revision,
+      flightCppSource: headerStatusArtifact.sourceRevision,
+    },
+    refusalLedger: {
+      diagnostics: refusalArtifact.refusals.length,
+      schema: refusalArtifact.schema,
+    },
+    schemas: {
+      cppExternEmission: cppExternEmission.schema,
+      cppExternPlan: cppExternPlan.schema,
+      dualBindingPlan: plan.schema,
+    },
+    schema: 'flight-hx-native-binding-plan/1',
+    summary: {
+      bindings: plan.bindings.length,
+      cppAvailability: Object.fromEntries(sortedCounts(cppAvailability).map(({ count, name }) => [name, count])),
+      cppExternDeclarations: cppExternPlan.declarations.length,
+      cppExternEmissionFiles: cppExternEmission.files.length,
+      cppExternRefusals: cppExternEmission.refusals.length,
+      declarationKinds: Object.fromEntries(sortedCounts(declarationKinds).map(({ count, name }) => [name, count])),
+      headerStatuses: Object.fromEntries(
+        sortedCounts(headerStatusesByDeclaration).map(({ count, name }) => [name, count]),
+      ),
+      javascriptAvailability: Object.fromEntries(
+        sortedCounts(javascriptAvailability).map(({ count, name }) => [name, count]),
+      ),
+      namingDivergences: namingDivergences.length,
+      refusalCodes: Object.fromEntries(sortedCounts(refusalCodes).map(({ count, name }) => [name, count])),
+    },
+  };
+}
+
+function reconcileNativePlanningWithDefaultApi(nativeBindingArtifacts, defaultApi) {
+  const rows = defaultApi.packages.reduce(
+    (total, package_) => total + package_.functions.length + package_.types.length + package_.values.length,
+    0,
+  );
+  if (nativeBindingArtifacts.plan.bindings.length !== rows) {
+    throw new Error(
+      `Compiler dual-binding plan has ${String(nativeBindingArtifacts.plan.bindings.length)} contract bindings; ` +
+        `the generated default API has ${String(rows)} rows`,
+    );
+  }
+  const typePackages = new Map();
+  for (const package_ of defaultApi.packages) {
+    for (const type of package_.types) {
+      typePackages.set(type, [...(typePackages.get(type) ?? []), package_.package]);
+    }
+  }
+  const typeNameCollisions = [...typePackages]
+    .filter(([, packages]) => packages.length > 1)
+    .map(([name, packages]) => ({ name, packages }))
+    .sort((left, right) => compareText(left.name, right.name));
+  nativeBindingArtifacts.report.publicContract = {
+    bindings: rows,
+    typeNameCollisions,
+    uniqueDefaultTypes: defaultApi.summary.types,
   };
 }
 
@@ -830,13 +1074,13 @@ function generatedReadme(manifest) {
     : '';
   const publicSurface =
     manifest.compiler.emissionMode === 'extern'
-      ? ` Public runtime-export coverage and the compiler-emitted type inventory are recorded in \`public-surface.json\`; the exact default \`flight.*\` facade is recorded in \`default-api.json\`.`
+      ? ` Public runtime-export coverage and the compiler-emitted type inventory are recorded in \`public-surface.json\`; the exact default \`flight.*\` facade is recorded in \`default-api.json\`. The compiler-owned JS/C++ identity fold, Haxe-C++ carrier candidates, refusals, and flight-cpp header status are recorded in \`native-planning.json\`.`
       : ` The exact supported and unavailable public \`flight.*\` partitions are recorded in \`public-surface.json\`.`;
   return `# Generated ${backend} SDK\n\nThis tree is generated from \`${manifest.source.package}\` ${manifest.source.version} at\n\`${manifest.source.revision}\` by \`flight-compiler\` at \`${manifest.compiler.revision}\`.\nDo not edit it by hand.\n\nThe compiler emitted ${manifest.summary.emittedModules} of ${manifest.summary.sourceModules} dependency-closed source modules\nfrom ${manifest.summary.packages} SDK packages into ${manifest.summary.emittedFiles} Haxe files.${compatibility}${filtered} It refused\n${manifest.summary.refusedModules} modules; every refusal is recorded in \`refusals.json\`.${publicSurface}\n\nRegenerate this mode from the flight-hx repository root:\n\n\`\`\`sh\nnpm run generate -- --${manifest.compiler.emissionMode}\nnpm run generate:check -- --${manifest.compiler.emissionMode}\n\`\`\`\n`;
 }
 
-function validateInput(flightDependency, compilerDependency) {
-  for (const dependency of [flightDependency, compilerDependency]) {
+function validateInput(flightDependency, compilerDependency, flightCppDependency) {
+  for (const dependency of [flightDependency, compilerDependency, flightCppDependency]) {
     if (!existsSync(path.join(dependency.directory, '.git'))) return `${dependency.name} is not rehydrated.`;
     const head = spawnSync('git', ['rev-parse', 'HEAD'], { cwd: dependency.directory, encoding: 'utf8' });
     if (head.status !== 0 || head.stdout.trim() !== dependency.commit) {
@@ -853,6 +1097,11 @@ function validateInput(flightDependency, compilerDependency) {
   }
   if (!existsSync(path.join(flightDependency.directory, 'packages', 'sdk', 'package.json'))) {
     return 'the pinned Flight checkout has no @flighthq/sdk package.';
+  }
+  for (const artifact of ['generated/refusals.json', 'generated/header-status.json']) {
+    if (!existsSync(path.join(flightCppDependency.directory, artifact))) {
+      return `the pinned flight-cpp checkout has no ${artifact}.`;
+    }
   }
   return undefined;
 }
@@ -906,6 +1155,19 @@ function portable(filename) {
 
 function compareText(left, right) {
   return left < right ? -1 : left > right ? 1 : 0;
+}
+
+function countBy(values, select) {
+  const result = new Map();
+  for (const value of values) {
+    const key = select(value);
+    result.set(key, (result.get(key) ?? 0) + 1);
+  }
+  return result;
+}
+
+function sortedCounts(counts) {
+  return [...counts].map(([name, count]) => ({ count, name })).sort((left, right) => compareText(left.name, right.name));
 }
 
 function label(mode) {
