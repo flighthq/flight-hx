@@ -51,7 +51,7 @@ inline function initializeAssetLibrary(out:flight.EntityConstruction<flight.Asse
 }
 
 inline function loadAssetGroup(library:flight.AssetLibrary, name:String, ?options:flight.AssetGroupLoadOptions):flight._internal._Promise<Dynamic> {
-  return flight._js._fn.Assets.loadAssetGroup(library, name, options);
+  return flight._js._fn.Assets.loadAssetGroup(library, name, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function registerAssetDescriptor(library:flight.AssetLibrary, descriptor:flight.AssetDescriptor):Void {

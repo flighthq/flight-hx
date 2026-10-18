@@ -5,7 +5,7 @@ package flight;
 typedef Tween<T:Dynamic> = flight._js.Tween<T>;
 
 inline function addTweenToManager<T:Dynamic>(manager:flight.TweenManager, tween:flight.Tween<T>, overwrite:Bool, ?registrationTarget:Dynamic, ?registrationPropertyKeys:Array<String>):Void {
-  flight._js._fn.Tween.addTweenToManager(manager, tween, overwrite, registrationTarget, registrationPropertyKeys);
+  flight._js._fn.Tween.addTweenToManager(manager, tween, overwrite, (registrationTarget == null ? js.Syntax.code("undefined") : registrationTarget), (registrationPropertyKeys == null ? js.Syntax.code("undefined") : registrationPropertyKeys));
 }
 
 inline function applyTween<T:Dynamic>(manager:flight.TweenManager, target:T, propertyMap:flight.NumericProps<T>):Void {
@@ -17,23 +17,23 @@ inline function completeTween<T:Dynamic>(tween:flight.Tween<T>):Void {
 }
 
 inline function createColorTween(manager:flight.TweenManager, target:haxe.DynamicAccess<Float>, property:String, duration:Float, toColor:Float, ?options:flight.TweenOptions):flight.Tween<{ b:Float, g:Float, r:Float }> {
-  return flight._js._fn.Tween.createColorTween(manager, target, property, duration, toColor, options);
+  return flight._js._fn.Tween.createColorTween(manager, target, property, duration, toColor, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createTween<T:Dynamic>(managerOrTarget:Dynamic, targetOrDuration:Dynamic, durationOrProps:Dynamic, ?propsOrOptions:Dynamic, ?maybeOptions:flight.TweenOptions):flight.Tween<T> {
-  return flight._js._fn.Tween.createTween(managerOrTarget, targetOrDuration, durationOrProps, propsOrOptions, maybeOptions);
+  return flight._js._fn.Tween.createTween(managerOrTarget, targetOrDuration, durationOrProps, (propsOrOptions == null ? js.Syntax.code("undefined") : propsOrOptions), (maybeOptions == null ? js.Syntax.code("undefined") : maybeOptions));
 }
 
 inline function createTweenManager(?options:flight.TweenManagerOptions):flight.TweenManager {
-  return flight._js._fn.Tween.createTweenManager(options);
+  return flight._js._fn.Tween.createTweenManager((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createTweenStagger<T:Dynamic>(manager:flight.TweenManager, targets:Array<T>, duration:Float, propertyMap:flight.NumericProps<T>, ?stagger:flight.TweenStaggerOptions, ?options:flight.TweenOptions):Array<flight.Tween<T>> {
-  return flight._js._fn.Tween.createTweenStagger(manager, targets, duration, propertyMap, stagger, options);
+  return flight._js._fn.Tween.createTweenStagger(manager, targets, duration, propertyMap, (stagger == null ? js.Syntax.code("undefined") : stagger), (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createTweenTimer(manager:flight.TweenManager, duration:Float, ?options:flight.TweenOptions):flight.Tween<Dynamic> {
-  return flight._js._fn.Tween.createTweenTimer(manager, duration, options);
+  return flight._js._fn.Tween.createTweenTimer(manager, duration, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function getActiveTweenCount(manager:flight.TweenManager):Float {
@@ -61,7 +61,7 @@ inline function initializeTween<T:Dynamic>(tween:flight.Tween<T>):Void {
 }
 
 inline function initializeTweenManager(out:flight.EntityConstruction<flight.TweenManager>, ?options:flight.TweenManagerOptions):Void {
-  flight._js._fn.Tween.initializeTweenManager(out, options);
+  flight._js._fn.Tween.initializeTweenManager(out, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function invalidateTween(tween:flight.Tween<Dynamic>):Void {
@@ -93,7 +93,7 @@ inline function resetAllTweens(manager:flight.TweenManager):Void {
 }
 
 inline function restartTween(tween:flight.Tween<Dynamic>, ?includeDelay:Bool):Void {
-  flight._js._fn.Tween.restartTween(tween, includeDelay);
+  flight._js._fn.Tween.restartTween(tween, (includeDelay == null ? js.Syntax.code("undefined") : includeDelay));
 }
 
 inline function resumeAllTweens(manager:flight.TweenManager):Void {
@@ -117,15 +117,15 @@ inline function setTweenProgress(tween:flight.Tween<Dynamic>, progress:Float):Vo
 }
 
 inline function stopAllTweens(manager:flight.TweenManager, ?options:flight.StopTweenOptions):Void {
-  flight._js._fn.Tween.stopAllTweens(manager, options);
+  flight._js._fn.Tween.stopAllTweens(manager, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function stopTween(tween:flight.Tween<Dynamic>, ?options:flight.StopTweenOptions):Void {
-  flight._js._fn.Tween.stopTween(tween, options);
+  flight._js._fn.Tween.stopTween(tween, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function stopTweens(manager:flight.TweenManager, target:Dynamic, ?propertyMap:flight.NumericProps<Dynamic>, ?options:flight.StopTweenOptions):Void {
-  flight._js._fn.Tween.stopTweens(manager, target, propertyMap, options);
+  flight._js._fn.Tween.stopTweens(manager, target, (propertyMap == null ? js.Syntax.code("undefined") : propertyMap), (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function updateTweens(manager:flight.TweenManager, deltaTime:Float):Void {

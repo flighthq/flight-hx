@@ -7,7 +7,7 @@ inline function detectEndianness():flight.PlatformEndianness {
 }
 
 inline function parseUserAgentArch(ua:String, ?uadPlatform:String):String {
-  return flight._js._fn.Useragent.parseUserAgentArch(ua, uadPlatform);
+  return flight._js._fn.Useragent.parseUserAgentArch(ua, (uadPlatform == null ? js.Syntax.code("undefined") : uadPlatform));
 }
 
 inline function parseUserAgentEngine(ua:String):flight.PlatformEngine {

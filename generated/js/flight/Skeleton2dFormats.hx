@@ -11,11 +11,11 @@ inline function buildDragonBonesSegmentEasings(frames:Array<haxe.DynamicAccess<D
 }
 
 inline function buildSpineBinarySegmentEasings(timeline:{ curves:Array<Null<Array<Float>>>, times:Array<Float>, values:Array<Float> }, values:Float, ?diagnostics:Array<flight.ImportDiagnostic>):Null<Array<Null<flight.EasingFunction>>> {
-  return flight._js._fn.Skeleton2dFormats.buildSpineBinarySegmentEasings(timeline, values, diagnostics);
+  return flight._js._fn.Skeleton2dFormats.buildSpineBinarySegmentEasings(timeline, values, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function buildSpineSegmentEasings(keys:Array<haxe.DynamicAccess<Dynamic>>, times:Array<Float>, values:Array<Float>, components:Float, ?diagnostics:Array<flight.ImportDiagnostic>):Null<Array<Null<flight.EasingFunction>>> {
-  return flight._js._fn.Skeleton2dFormats.buildSpineSegmentEasings(keys, times, values, components, diagnostics);
+  return flight._js._fn.Skeleton2dFormats.buildSpineSegmentEasings(keys, times, values, components, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function clampSpineBinaryUnit(value:Float):Float {
@@ -75,7 +75,7 @@ inline function dragonBonesFrameTimes(frames:Array<haxe.DynamicAccess<Dynamic>>,
 }
 
 inline function dragonBonesFrames(raw:Dynamic, ?diagnostics:Array<flight.ImportDiagnostic>):Array<haxe.DynamicAccess<Dynamic>> {
-  return flight._js._fn.Skeleton2dFormats.dragonBonesFrames(raw, diagnostics);
+  return flight._js._fn.Skeleton2dFormats.dragonBonesFrames(raw, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function dragonBonesIkConstraintsSectionHandler(context:flight.DragonBonesSectionContext):Void {
@@ -87,7 +87,7 @@ inline function dragonBonesIkTimelineHandler(context:flight.DragonBonesTimelineC
 }
 
 inline function dragonBonesInterpolation(frames:Array<haxe.DynamicAccess<Dynamic>>, ?diagnostics:Array<flight.ImportDiagnostic>):flight.AnimationInterpolation {
-  return flight._js._fn.Skeleton2dFormats.dragonBonesInterpolation(frames, diagnostics);
+  return flight._js._fn.Skeleton2dFormats.dragonBonesInterpolation(frames, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function dragonBonesSkinsSectionHandler(context:flight.DragonBonesSectionContext):Void {
@@ -183,15 +183,15 @@ inline function parseDragonBonesRequirements(json:String):flight.RequirementSet 
 }
 
 inline function parseDragonBonesSkeleton(json:String, ?diagnostics:Array<flight.ImportDiagnostic>):Null<flight.Skeleton2DImport> {
-  return flight._js._fn.Skeleton2dFormats.parseDragonBonesSkeleton(json, diagnostics);
+  return flight._js._fn.Skeleton2dFormats.parseDragonBonesSkeleton(json, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function parseDragonBonesSkeletonWithRegistry(json:String, registry:flight.DragonBonesRegistry, ?diagnostics:Array<flight.ImportDiagnostic>):Null<flight.Skeleton2DImport> {
-  return flight._js._fn.Skeleton2dFormats.parseDragonBonesSkeletonWithRegistry(json, registry, diagnostics);
+  return flight._js._fn.Skeleton2dFormats.parseDragonBonesSkeletonWithRegistry(json, registry, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function parseSkeleton2D(text:String, ?diagnostics:Array<flight.ImportDiagnostic>):Null<flight.Skeleton2DImport> {
-  return flight._js._fn.Skeleton2dFormats.parseSkeleton2D(text, diagnostics);
+  return flight._js._fn.Skeleton2dFormats.parseSkeleton2D(text, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function parseSpineBinaryRequirements(source:flight._internal._UInt8Array):flight.RequirementSet {
@@ -203,7 +203,7 @@ inline function parseSpineColor(value:Dynamic):Float {
 }
 
 inline function parseSpineDrawOrderTimeline(raw:Dynamic, slots:Array<flight.Slot2D>, ?diagnostics:Array<flight.ImportDiagnostic>):Null<flight.Skeleton2DDrawOrderTimeline> {
-  return flight._js._fn.Skeleton2dFormats.parseSpineDrawOrderTimeline(raw, slots, diagnostics);
+  return flight._js._fn.Skeleton2dFormats.parseSpineDrawOrderTimeline(raw, slots, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function parseSpineJsonRequirements(json:String):flight.RequirementSet {
@@ -211,23 +211,23 @@ inline function parseSpineJsonRequirements(json:String):flight.RequirementSet {
 }
 
 inline function parseSpineSkeleton(json:String, ?diagnostics:Array<flight.ImportDiagnostic>):Null<flight.Skeleton2DImport> {
-  return flight._js._fn.Skeleton2dFormats.parseSpineSkeleton(json, diagnostics);
+  return flight._js._fn.Skeleton2dFormats.parseSpineSkeleton(json, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function parseSpineSkeletonBinary(bytes:flight._internal._UInt8Array, ?diagnostics:Array<flight.ImportDiagnostic>):Null<flight.Skeleton2DImport> {
-  return flight._js._fn.Skeleton2dFormats.parseSpineSkeletonBinary(bytes, diagnostics);
+  return flight._js._fn.Skeleton2dFormats.parseSpineSkeletonBinary(bytes, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function parseSpineSkeletonBinaryVersioned(bytes:flight._internal._UInt8Array, ?diagnostics:Array<flight.ImportDiagnostic>):Null<flight.Skeleton2DImport> {
-  return flight._js._fn.Skeleton2dFormats.parseSpineSkeletonBinaryVersioned(bytes, diagnostics);
+  return flight._js._fn.Skeleton2dFormats.parseSpineSkeletonBinaryVersioned(bytes, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function parseSpineSkeletonBinaryWithRegistry(bytes:flight._internal._UInt8Array, registry:flight.SpineBinaryRegistry, ?diagnostics:Array<flight.ImportDiagnostic>):Null<flight.Skeleton2DImport> {
-  return flight._js._fn.Skeleton2dFormats.parseSpineSkeletonBinaryWithRegistry(bytes, registry, diagnostics);
+  return flight._js._fn.Skeleton2dFormats.parseSpineSkeletonBinaryWithRegistry(bytes, registry, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function parseSpineSkeletonWithRegistry(json:String, registry:flight.SpineJsonRegistry, ?diagnostics:Array<flight.ImportDiagnostic>):Null<flight.Skeleton2DImport> {
-  return flight._js._fn.Skeleton2dFormats.parseSpineSkeletonWithRegistry(json, registry, diagnostics);
+  return flight._js._fn.Skeleton2dFormats.parseSpineSkeletonWithRegistry(json, registry, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function readSpineBinaryBoolean(reader:flight.ByteReader):Bool {

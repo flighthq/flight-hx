@@ -9,11 +9,11 @@ inline function applyBitmapColorScaleBias(dest:flight.BitmapRegion, source:fligh
 }
 
 inline function applyBitmapCurve(out:flight.BitmapRegion, source:flight.BitmapRegion, redLut:Dynamic, greenLut:Dynamic, blueLut:Dynamic, ?alphaLut:Dynamic):Void {
-  flight._js._fn.Bitmap.applyBitmapCurve(out, source, redLut, greenLut, blueLut, alphaLut);
+  flight._js._fn.Bitmap.applyBitmapCurve(out, source, redLut, greenLut, blueLut, (alphaLut == null ? js.Syntax.code("undefined") : alphaLut));
 }
 
 inline function applyBitmapLevels(out:flight.BitmapRegion, source:flight.BitmapRegion, ?blackPoint:Float, ?whitePoint:Float, ?gamma:Float):Void {
-  flight._js._fn.Bitmap.applyBitmapLevels(out, source, blackPoint, whitePoint, gamma);
+  flight._js._fn.Bitmap.applyBitmapLevels(out, source, (blackPoint == null ? js.Syntax.code("undefined") : blackPoint), (whitePoint == null ? js.Syntax.code("undefined") : whitePoint), (gamma == null ? js.Syntax.code("undefined") : gamma));
 }
 
 inline function applyBitmapPaletteMap(dest:flight.BitmapRegion, source:flight.BitmapRegion, redMap:Null<Array<Float>>, greenMap:Null<Array<Float>>, blueMap:Null<Array<Float>>, alphaMap:Null<Array<Float>>):Void {
@@ -21,11 +21,11 @@ inline function applyBitmapPaletteMap(dest:flight.BitmapRegion, source:flight.Bi
 }
 
 inline function applyBitmapThreshold(dest:flight.BitmapRegion, source:flight.BitmapRegion, operation:flight.ThresholdOperation, thresholdValue:Float, ?color:Float, ?mask:Float, ?copySource:Bool):Float {
-  return flight._js._fn.Bitmap.applyBitmapThreshold(dest, source, operation, thresholdValue, color, mask, copySource);
+  return flight._js._fn.Bitmap.applyBitmapThreshold(dest, source, operation, thresholdValue, (color == null ? js.Syntax.code("undefined") : color), (mask == null ? js.Syntax.code("undefined") : mask), (copySource == null ? js.Syntax.code("undefined") : copySource));
 }
 
 inline function bevelBitmap(out:flight._internal._UInt8ClampedArray, scratch:flight._internal._UInt8ClampedArray, source:flight.BitmapRegion, ?options:flight.BitmapBevelOptions):Void {
-  flight._js._fn.Bitmap.bevelBitmap(out, scratch, source, options);
+  flight._js._fn.Bitmap.bevelBitmap(out, scratch, source, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function blurBitmapPixelsHorizontal(out:flight._internal._UInt8ClampedArray, source:flight._internal._UInt8ClampedArray, width:Float, height:Float, radius:Float):Void {
@@ -45,7 +45,7 @@ inline function blurBitmapPixelsVerticalWeighted(out:flight._internal._UInt8Clam
 }
 
 inline function boxBlurBitmap(out:flight._internal._UInt8ClampedArray, scratch:flight._internal._UInt8ClampedArray, source:flight.BitmapRegion, ?options:flight.BitmapBoxBlurOptions):Void {
-  flight._js._fn.Bitmap.boxBlurBitmap(out, scratch, source, options);
+  flight._js._fn.Bitmap.boxBlurBitmap(out, scratch, source, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function buildBitmapBrightnessColorMatrix(out:Array<Float>, amount:Float):Void {
@@ -101,11 +101,11 @@ inline function compareBitmapFingerprints(a:flight.BitmapFingerprint, b:flight.B
 }
 
 inline function compositeBitmapPixels(dest:flight.BitmapRegion, pixels:flight._internal._UInt8ClampedArray, ?mode:flight.BitmapCompositeMode):Void {
-  flight._js._fn.Bitmap.compositeBitmapPixels(dest, pixels, mode);
+  flight._js._fn.Bitmap.compositeBitmapPixels(dest, pixels, (mode == null ? js.Syntax.code("undefined") : mode));
 }
 
 inline function compositeBitmapRegion(dest:flight.BitmapRegion, source:flight.BitmapRegion, ?mode:flight.BitmapCompositeMode):Void {
-  flight._js._fn.Bitmap.compositeBitmapRegion(dest, source, mode);
+  flight._js._fn.Bitmap.compositeBitmapRegion(dest, source, (mode == null ? js.Syntax.code("undefined") : mode));
 }
 
 inline function computeGaussianKernel(out:flight._internal._Float32Array, radius:Float, sigma:Float):Void {
@@ -137,15 +137,15 @@ inline function copyBitmapChannel(dest:flight.BitmapRegion, destChannel:flight.I
 }
 
 inline function copyBitmapPixels(dest:flight.BitmapRegion, source:flight.BitmapRegion, ?composite:Bool):Void {
-  flight._js._fn.Bitmap.copyBitmapPixels(dest, source, composite);
+  flight._js._fn.Bitmap.copyBitmapPixels(dest, source, (composite == null ? js.Syntax.code("undefined") : composite));
 }
 
 inline function createBitmap(width:Float, height:Float, ?color:Float):flight.Bitmap {
-  return flight._js._fn.Bitmap.createBitmap(width, height, color);
+  return flight._js._fn.Bitmap.createBitmap(width, height, (color == null ? js.Syntax.code("undefined") : color));
 }
 
 inline function createBitmapFingerprint(source:flight.Bitmap, ?gridSize:Float):flight.BitmapFingerprint {
-  return flight._js._fn.Bitmap.createBitmapFingerprint(source, gridSize);
+  return flight._js._fn.Bitmap.createBitmapFingerprint(source, (gridSize == null ? js.Syntax.code("undefined") : gridSize));
 }
 
 inline function createBitmapFromImageSource(hostBitmapReadback:flight.HostBitmapReadbackCapability, source:flight.HostImageSource, width:Float, height:Float):Null<flight.Bitmap> {
@@ -153,7 +153,7 @@ inline function createBitmapFromImageSource(hostBitmapReadback:flight.HostBitmap
 }
 
 inline function createBitmapRegion(bitmap:flight.Bitmap, ?x:Float, ?y:Float, ?width:Float, ?height:Float):flight.BitmapRegion {
-  return flight._js._fn.Bitmap.createBitmapRegion(bitmap, x, y, width, height);
+  return flight._js._fn.Bitmap.createBitmapRegion(bitmap, (x == null ? js.Syntax.code("undefined") : x), (y == null ? js.Syntax.code("undefined") : y), (width == null ? js.Syntax.code("undefined") : width), (height == null ? js.Syntax.code("undefined") : height));
 }
 
 inline function cropBitmap(source:flight.Bitmap, rect:flight.RectangleLike):flight.Bitmap {
@@ -169,15 +169,15 @@ inline function displaceBitmap(out:flight._internal._UInt8ClampedArray, source:f
 }
 
 inline function dissolveBitmapPixels(dest:flight.BitmapRegion, source:flight.BitmapRegion, seed:Float, pixelCount:Float, ?fillColor:Float):Float {
-  return flight._js._fn.Bitmap.dissolveBitmapPixels(dest, source, seed, pixelCount, fillColor);
+  return flight._js._fn.Bitmap.dissolveBitmapPixels(dest, source, seed, pixelCount, (fillColor == null ? js.Syntax.code("undefined") : fillColor));
 }
 
 inline function dropShadowBitmap(out:flight._internal._UInt8ClampedArray, scratch:flight._internal._UInt8ClampedArray, source:flight.BitmapRegion, ?options:flight.BitmapDropShadowOptions):Void {
-  flight._js._fn.Bitmap.dropShadowBitmap(out, scratch, source, options);
+  flight._js._fn.Bitmap.dropShadowBitmap(out, scratch, source, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function encodeBitmap(hostBitmapEncode:flight.HostBitmapEncodeCapability, source:flight.Bitmap, ?format:flight.ImageFormat, ?quality:Float):Null<flight._internal._UInt8Array> {
-  return flight._js._fn.Bitmap.encodeBitmap(hostBitmapEncode, source, format, quality);
+  return flight._js._fn.Bitmap.encodeBitmap(hostBitmapEncode, source, (format == null ? js.Syntax.code("undefined") : format), (quality == null ? js.Syntax.code("undefined") : quality));
 }
 
 inline function equalizeBitmapHistogram(dest:flight.BitmapRegion, source:flight.BitmapRegion):Void {
@@ -197,7 +197,7 @@ inline function explainBitmapReadback(hostBitmapReadback:flight.HostBitmapReadba
 }
 
 inline function extendBitmap(source:flight.Bitmap, left:Float, top:Float, right:Float, bottom:Float, ?edgeMode:flight.BitmapEdgeMode, ?fillColor:Float):flight.Bitmap {
-  return flight._js._fn.Bitmap.extendBitmap(source, left, top, right, bottom, edgeMode, fillColor);
+  return flight._js._fn.Bitmap.extendBitmap(source, left, top, right, bottom, (edgeMode == null ? js.Syntax.code("undefined") : edgeMode), (fillColor == null ? js.Syntax.code("undefined") : fillColor));
 }
 
 inline function extractBitmapPixels(out:flight._internal._UInt8ClampedArray, source:flight.BitmapRegion):Void {
@@ -209,19 +209,19 @@ inline function extractBitmapPixels32(out:flight._internal._UInt32Array, source:
 }
 
 inline function fillBitmapLinearGradient(dest:flight.BitmapRegion, ramp:flight._internal._UInt8ClampedArray, x0:Float, y0:Float, x1:Float, y1:Float, ?spread:flight.GradientSpread):Void {
-  flight._js._fn.Bitmap.fillBitmapLinearGradient(dest, ramp, x0, y0, x1, y1, spread);
+  flight._js._fn.Bitmap.fillBitmapLinearGradient(dest, ramp, x0, y0, x1, y1, (spread == null ? js.Syntax.code("undefined") : spread));
 }
 
 inline function fillBitmapNoise(dest:flight.BitmapRegion, seed:Float, ?low:Float, ?high:Float, ?grayScale:Bool):Void {
-  flight._js._fn.Bitmap.fillBitmapNoise(dest, seed, low, high, grayScale);
+  flight._js._fn.Bitmap.fillBitmapNoise(dest, seed, (low == null ? js.Syntax.code("undefined") : low), (high == null ? js.Syntax.code("undefined") : high), (grayScale == null ? js.Syntax.code("undefined") : grayScale));
 }
 
 inline function fillBitmapPerlinNoise(dest:flight.BitmapRegion, baseX:Float, baseY:Float, octaves:Float, seed:Float, ?grayScale:Bool, ?stitch:Bool, ?channelOptions:Float):Void {
-  flight._js._fn.Bitmap.fillBitmapPerlinNoise(dest, baseX, baseY, octaves, seed, grayScale, stitch, channelOptions);
+  flight._js._fn.Bitmap.fillBitmapPerlinNoise(dest, baseX, baseY, octaves, seed, (grayScale == null ? js.Syntax.code("undefined") : grayScale), (stitch == null ? js.Syntax.code("undefined") : stitch), (channelOptions == null ? js.Syntax.code("undefined") : channelOptions));
 }
 
 inline function fillBitmapRadialGradient(dest:flight.BitmapRegion, ramp:flight._internal._UInt8ClampedArray, cx:Float, cy:Float, radius:Float, ?focalX:Float, ?focalY:Float, ?spread:flight.GradientSpread):Void {
-  flight._js._fn.Bitmap.fillBitmapRadialGradient(dest, ramp, cx, cy, radius, focalX, focalY, spread);
+  flight._js._fn.Bitmap.fillBitmapRadialGradient(dest, ramp, cx, cy, radius, (focalX == null ? js.Syntax.code("undefined") : focalX), (focalY == null ? js.Syntax.code("undefined") : focalY), (spread == null ? js.Syntax.code("undefined") : spread));
 }
 
 inline function fillBitmapRectangle(dest:flight.BitmapRegion, color:Float):Void {
@@ -229,7 +229,7 @@ inline function fillBitmapRectangle(dest:flight.BitmapRegion, color:Float):Void 
 }
 
 inline function fillBitmapTurbulence(dest:flight.BitmapRegion, baseX:Float, baseY:Float, octaves:Float, seed:Float, ?grayScale:Bool, ?stitch:Bool, ?channelOptions:Float):Void {
-  flight._js._fn.Bitmap.fillBitmapTurbulence(dest, baseX, baseY, octaves, seed, grayScale, stitch, channelOptions);
+  flight._js._fn.Bitmap.fillBitmapTurbulence(dest, baseX, baseY, octaves, seed, (grayScale == null ? js.Syntax.code("undefined") : grayScale), (stitch == null ? js.Syntax.code("undefined") : stitch), (channelOptions == null ? js.Syntax.code("undefined") : channelOptions));
 }
 
 inline function flipBitmapHorizontal(dest:flight.BitmapRegion, source:flight.BitmapRegion):Void {
@@ -249,15 +249,15 @@ inline function formatBitmapFingerprint(fingerprint:flight.BitmapFingerprint):St
 }
 
 inline function gaussianBlurBitmap(out:flight._internal._UInt8ClampedArray, scratch:flight._internal._UInt8ClampedArray, source:flight.BitmapRegion, sigmaX:Float, ?sigmaY:Float, ?passes:Float):Void {
-  flight._js._fn.Bitmap.gaussianBlurBitmap(out, scratch, source, sigmaX, sigmaY, passes);
+  flight._js._fn.Bitmap.gaussianBlurBitmap(out, scratch, source, sigmaX, (sigmaY == null ? js.Syntax.code("undefined") : sigmaY), (passes == null ? js.Syntax.code("undefined") : passes));
 }
 
 inline function getBitmapColorBoundsRectangle(source:flight.BitmapRegion, mask:Float, color:Float, ?findColor:Bool):Null<flight.RectangleLike> {
-  return flight._js._fn.Bitmap.getBitmapColorBoundsRectangle(source, mask, color, findColor);
+  return flight._js._fn.Bitmap.getBitmapColorBoundsRectangle(source, mask, color, (findColor == null ? js.Syntax.code("undefined") : findColor));
 }
 
 inline function getBitmapCoverage(source:flight.Bitmap, backgroundColor:Float, ?channelTolerance:Float):Float {
-  return flight._js._fn.Bitmap.getBitmapCoverage(source, backgroundColor, channelTolerance);
+  return flight._js._fn.Bitmap.getBitmapCoverage(source, backgroundColor, (channelTolerance == null ? js.Syntax.code("undefined") : channelTolerance));
 }
 
 inline function getBitmapHistogram(source:flight.BitmapRegion):flight.BitmapHistogram {
@@ -265,7 +265,7 @@ inline function getBitmapHistogram(source:flight.BitmapRegion):flight.BitmapHist
 }
 
 inline function getBitmapMismatch(source:{ width:Float, height:Float, data:Dynamic }, other:{ width:Float, height:Float, data:Dynamic }, ?channelTolerance:Float):flight.BitmapMismatch {
-  return flight._js._fn.Bitmap.getBitmapMismatch(source, other, channelTolerance);
+  return flight._js._fn.Bitmap.getBitmapMismatch(source, other, (channelTolerance == null ? js.Syntax.code("undefined") : channelTolerance));
 }
 
 inline function getBitmapPixel(source:flight.Bitmap, x:Float, y:Float):Float {
@@ -285,15 +285,15 @@ inline function getBitmapPixelRgb(source:flight.Bitmap, x:Float, y:Float):Float 
 }
 
 inline function glowBitmap(out:flight._internal._UInt8ClampedArray, scratch:flight._internal._UInt8ClampedArray, source:flight.BitmapRegion, ?options:flight.BitmapGlowOptions):Void {
-  flight._js._fn.Bitmap.glowBitmap(out, scratch, source, options);
+  flight._js._fn.Bitmap.glowBitmap(out, scratch, source, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function gradientBevelBitmap(out:flight._internal._UInt8ClampedArray, scratch:flight._internal._UInt8ClampedArray, source:flight.BitmapRegion, ramp:flight._internal._UInt8ClampedArray, ?options:flight.BitmapGradientBevelOptions):Void {
-  flight._js._fn.Bitmap.gradientBevelBitmap(out, scratch, source, ramp, options);
+  flight._js._fn.Bitmap.gradientBevelBitmap(out, scratch, source, ramp, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function gradientGlowBitmap(out:flight._internal._UInt8ClampedArray, scratch:flight._internal._UInt8ClampedArray, source:flight.BitmapRegion, ramp:flight._internal._UInt8ClampedArray, ?options:flight.BitmapGradientGlowOptions):Void {
-  flight._js._fn.Bitmap.gradientGlowBitmap(out, scratch, source, ramp, options);
+  flight._js._fn.Bitmap.gradientGlowBitmap(out, scratch, source, ramp, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function initializeBitmap(out:flight.EntityConstruction<flight.Bitmap>, alphaType:flight.AlphaType, data:flight._internal._UInt8ClampedArray<flight._internal._ArrayBuffer>, format:flight.PixelFormat, gamut:Dynamic, height:Float, width:Float):Void {
@@ -305,11 +305,11 @@ inline function initializeBitmapFingerprint(out:flight.EntityConstruction<flight
 }
 
 inline function innerGlowBitmap(out:flight._internal._UInt8ClampedArray, scratch:flight._internal._UInt8ClampedArray, source:flight.BitmapRegion, ?options:flight.BitmapInnerGlowOptions):Void {
-  flight._js._fn.Bitmap.innerGlowBitmap(out, scratch, source, options);
+  flight._js._fn.Bitmap.innerGlowBitmap(out, scratch, source, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function innerShadowBitmap(out:flight._internal._UInt8ClampedArray, scratch:flight._internal._UInt8ClampedArray, source:flight.BitmapRegion, ?options:flight.BitmapInnerShadowOptions):Void {
-  flight._js._fn.Bitmap.innerShadowBitmap(out, scratch, source, options);
+  flight._js._fn.Bitmap.innerShadowBitmap(out, scratch, source, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function invalidateBitmap(bitmap:flight.Bitmap):Void {
@@ -345,7 +345,7 @@ inline function premultiplyBitmapPixels(out:flight._internal._UInt8ClampedArray,
 }
 
 inline function resizeBitmap(dest:flight.BitmapRegion, source:flight.BitmapRegion, ?options:Dynamic):Void {
-  flight._js._fn.Bitmap.resizeBitmap(dest, source, options);
+  flight._js._fn.Bitmap.resizeBitmap(dest, source, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function resolveBitmapReadback(hostBitmapReadback:flight.HostBitmapReadbackCapability, source:flight.HostImageSource, width:Float, height:Float, mode:flight.BitmapReadbackMode):{ bitmap:Null<flight.Bitmap>, reason:flight.BitmapReadbackBlockReason } {
@@ -353,7 +353,7 @@ inline function resolveBitmapReadback(hostBitmapReadback:flight.HostBitmapReadba
 }
 
 inline function rotateBitmap(dest:flight.BitmapRegion, source:flight.BitmapRegion, angle:Float, ?pivotX:Float, ?pivotY:Float, ?edgeMode:flight.BitmapEdgeMode, ?sampleMode:flight.BitmapResizeMode):Void {
-  flight._js._fn.Bitmap.rotateBitmap(dest, source, angle, pivotX, pivotY, edgeMode, sampleMode);
+  flight._js._fn.Bitmap.rotateBitmap(dest, source, angle, (pivotX == null ? js.Syntax.code("undefined") : pivotX), (pivotY == null ? js.Syntax.code("undefined") : pivotY), (edgeMode == null ? js.Syntax.code("undefined") : edgeMode), (sampleMode == null ? js.Syntax.code("undefined") : sampleMode));
 }
 
 inline function rotateBitmap180(dest:flight.BitmapRegion, source:flight.BitmapRegion):Void {
@@ -389,11 +389,11 @@ inline function setBitmapPixelRgb(out:flight.Bitmap, x:Float, y:Float, color:Flo
 }
 
 inline function setBitmapRegion(out:flight.BitmapRegion, bitmap:flight.Bitmap, ?x:Float, ?y:Float, ?width:Float, ?height:Float):flight.BitmapRegion {
-  return flight._js._fn.Bitmap.setBitmapRegion(out, bitmap, x, y, width, height);
+  return flight._js._fn.Bitmap.setBitmapRegion(out, bitmap, (x == null ? js.Syntax.code("undefined") : x), (y == null ? js.Syntax.code("undefined") : y), (width == null ? js.Syntax.code("undefined") : width), (height == null ? js.Syntax.code("undefined") : height));
 }
 
 inline function sharpenBitmap(out:flight._internal._UInt8ClampedArray, scratch:flight._internal._UInt8ClampedArray, source:flight.BitmapRegion, ?options:flight.BitmapSharpenOptions):Void {
-  flight._js._fn.Bitmap.sharpenBitmap(out, scratch, source, options);
+  flight._js._fn.Bitmap.sharpenBitmap(out, scratch, source, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function splitBitmapChannels(source:flight.Bitmap):Array<flight.Bitmap> {
@@ -401,7 +401,7 @@ inline function splitBitmapChannels(source:flight.Bitmap):Array<flight.Bitmap> {
 }
 
 inline function transformBitmap(dest:flight.BitmapRegion, source:flight.BitmapRegion, matrix:Array<Float>, ?edgeMode:flight.BitmapEdgeMode, ?sampleMode:flight.BitmapResizeMode):Void {
-  flight._js._fn.Bitmap.transformBitmap(dest, source, matrix, edgeMode, sampleMode);
+  flight._js._fn.Bitmap.transformBitmap(dest, source, matrix, (edgeMode == null ? js.Syntax.code("undefined") : edgeMode), (sampleMode == null ? js.Syntax.code("undefined") : sampleMode));
 }
 
 inline function trimBitmap(source:flight.Bitmap):flight.Bitmap {
@@ -413,11 +413,11 @@ inline function unpremultiplyBitmapPixels(out:flight._internal._UInt8ClampedArra
 }
 
 inline function warpBitmap(dest:flight.BitmapRegion, source:flight.BitmapRegion, matrix:Array<Float>, ?edgeMode:flight.BitmapEdgeMode, ?sampleMode:flight.BitmapResizeMode):Void {
-  flight._js._fn.Bitmap.warpBitmap(dest, source, matrix, edgeMode, sampleMode);
+  flight._js._fn.Bitmap.warpBitmap(dest, source, matrix, (edgeMode == null ? js.Syntax.code("undefined") : edgeMode), (sampleMode == null ? js.Syntax.code("undefined") : sampleMode));
 }
 
 inline function warpBitmapQuad(dest:flight.BitmapRegion, source:flight.BitmapRegion, dstQuad:Array<Float>, ?edgeMode:flight.BitmapEdgeMode, ?sampleMode:flight.BitmapResizeMode):Void {
-  flight._js._fn.Bitmap.warpBitmapQuad(dest, source, dstQuad, edgeMode, sampleMode);
+  flight._js._fn.Bitmap.warpBitmapQuad(dest, source, dstQuad, (edgeMode == null ? js.Syntax.code("undefined") : edgeMode), (sampleMode == null ? js.Syntax.code("undefined") : sampleMode));
 }
 
 inline function writeBitmapPixels(dest:flight.BitmapRegion, pixels:flight._internal._UInt8ClampedArray):Void {

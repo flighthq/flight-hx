@@ -8,7 +8,8 @@ The integration also owns the boundaries that only a consumer repository can ver
 
 - compiler-emitted JS externs receive a complete public `flight.*` facade (types, functions, and
   values) and are filtered to declarations actually exported from each package's `/contract`
-  source graph;
+  source graph; optional arguments are forwarded as JavaScript `undefined` when Haxe represents
+  omission as `null`, preserving upstream default parameters;
 - narrow Haxe compatibility corrections remain named in each manifest, include exact per-file
   application counts, and fail generation when their expected inputs drift;
 - all emitted transpiled files must pass a compiler callback using pinned Haxe 4.3.7 before output is accepted;
@@ -22,7 +23,9 @@ plans, folds in flight-cpp's real refusal/header ledgers, and writes the compact
 `generated/js/native-planning.json`. `syncNativeFunctions.mjs` only materializes manifest-approved
 direct functions and exact compiler-emitted adapters found in that plan. It also permits explicit
 downstream scalar overrides only when a dependency-complete flight-cpp header contains the exact
-required-primitive signature and the compiler plan does not yet contain that function. Schema,
+required-primitive signature, plus separately proven optional-scalar adapters that reconstruct
+`std::optional` from a primitive presence bit, when the compiler plan does not yet contain that
+function. Schema,
 compiler revision, locator, carrier, emitted adapter body, header status, provenance, and web
 signature drift all fail loudly.
 Failed compile probes remain manifest-recorded scalar override refusals; an emitted or

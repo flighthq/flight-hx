@@ -3,7 +3,7 @@
 package flight;
 
 inline function decodeUTF8(bytes:flight._internal._UInt8Array, ?offset:Float, ?length:Float):String {
-  return flight._js._fn.Encoding.decodeUTF8(bytes, offset, length);
+  return flight._js._fn.Encoding.decodeUTF8(bytes, (offset == null ? js.Syntax.code("undefined") : offset), (length == null ? js.Syntax.code("undefined") : length));
 }
 
 inline function encodeUTF8(text:String):flight._internal._UInt8Array {

@@ -35,11 +35,11 @@ inline function createDocumentRefusal(reason:flight.FlightDocumentRefusalReason,
 }
 
 inline function createFlightDocumentFromScene2D(source:flight.Scene2D, schemas:flight.FlightDocumentSchemaRegistry, ?interactiveStateBindings:Array<flight.FlightDocumentInteractiveStateBinding<flight.Node2D>>, ?layoutBindings:Array<flight.FlightDocumentLayoutBinding<flight.Node2D>>):Dynamic {
-  return flight._js._fn.SceneDocument.createFlightDocumentFromScene2D(source, schemas, interactiveStateBindings, layoutBindings);
+  return flight._js._fn.SceneDocument.createFlightDocumentFromScene2D(source, schemas, (interactiveStateBindings == null ? js.Syntax.code("undefined") : interactiveStateBindings), (layoutBindings == null ? js.Syntax.code("undefined") : layoutBindings));
 }
 
 inline function createFlightDocumentFromScene3D(source:flight.Scene3D, cameras:Array<flight.Scene3DDocumentCamera>, lights:Array<flight.Scene3DDocumentLight>, schemas:flight.FlightDocumentSchemaRegistry, ?interactiveStateBindings:Array<flight.FlightDocumentInteractiveStateBinding<flight.Node3D>>, ?layoutBindings:Array<flight.FlightDocumentLayoutBinding<flight.Node3D>>):Dynamic {
-  return flight._js._fn.SceneDocument.createFlightDocumentFromScene3D(source, cameras, lights, schemas, interactiveStateBindings, layoutBindings);
+  return flight._js._fn.SceneDocument.createFlightDocumentFromScene3D(source, cameras, lights, schemas, (interactiveStateBindings == null ? js.Syntax.code("undefined") : interactiveStateBindings), (layoutBindings == null ? js.Syntax.code("undefined") : layoutBindings));
 }
 
 inline function createFlightDocumentLayoutBindings<N:flight.NodeAny>(layouts:Array<flight.FlightDocumentLayoutDescriptor>, root:flight.FlightDocumentNode, materializedNodes:flight._internal._Map<flight.FlightDocumentNode, N>):Null<Array<flight.FlightDocumentLayoutBinding<N>>> {
@@ -47,19 +47,19 @@ inline function createFlightDocumentLayoutBindings<N:flight.NodeAny>(layouts:Arr
 }
 
 inline function createFlightDocumentScene2DMaterialization(document:flight.FlightDocument, schemas:flight.FlightDocumentSchemaRegistry, ?resolvers:flight.FlightDocumentResourceResolverRegistry, ?sceneIndex:Float):Null<flight.FlightDocumentScene2DMaterialization> {
-  return flight._js._fn.SceneDocument.createFlightDocumentScene2DMaterialization(document, schemas, resolvers, sceneIndex);
+  return flight._js._fn.SceneDocument.createFlightDocumentScene2DMaterialization(document, schemas, (resolvers == null ? js.Syntax.code("undefined") : resolvers), (sceneIndex == null ? js.Syntax.code("undefined") : sceneIndex));
 }
 
 inline function createFlightDocumentScene2DMaterializationFromText(text:String, schemas:flight.FlightDocumentSchemaRegistry, ?resolvers:flight.FlightDocumentResourceResolverRegistry, ?sceneIndex:Float):Null<flight.FlightDocumentScene2DMaterialization> {
-  return flight._js._fn.SceneDocument.createFlightDocumentScene2DMaterializationFromText(text, schemas, resolvers, sceneIndex);
+  return flight._js._fn.SceneDocument.createFlightDocumentScene2DMaterializationFromText(text, schemas, (resolvers == null ? js.Syntax.code("undefined") : resolvers), (sceneIndex == null ? js.Syntax.code("undefined") : sceneIndex));
 }
 
 inline function createFlightDocumentScene3DMaterialization(document:flight.FlightDocument, schemas:flight.FlightDocumentSchemaRegistry, ?resolvers:flight.FlightDocumentResourceResolverRegistry, ?sceneIndex:Float):Null<flight.FlightDocumentScene3DMaterialization> {
-  return flight._js._fn.SceneDocument.createFlightDocumentScene3DMaterialization(document, schemas, resolvers, sceneIndex);
+  return flight._js._fn.SceneDocument.createFlightDocumentScene3DMaterialization(document, schemas, (resolvers == null ? js.Syntax.code("undefined") : resolvers), (sceneIndex == null ? js.Syntax.code("undefined") : sceneIndex));
 }
 
 inline function createFlightDocumentScene3DMaterializationFromText(text:String, schemas:flight.FlightDocumentSchemaRegistry, ?resolvers:flight.FlightDocumentResourceResolverRegistry, ?sceneIndex:Float):Null<flight.FlightDocumentScene3DMaterialization> {
-  return flight._js._fn.SceneDocument.createFlightDocumentScene3DMaterializationFromText(text, schemas, resolvers, sceneIndex);
+  return flight._js._fn.SceneDocument.createFlightDocumentScene3DMaterializationFromText(text, schemas, (resolvers == null ? js.Syntax.code("undefined") : resolvers), (sceneIndex == null ? js.Syntax.code("undefined") : sceneIndex));
 }
 
 inline function createInteractiveStateBindingLookup<N:flight.NodeAny>(bindings:Array<flight.FlightDocumentInteractiveStateBinding<N>>):flight._internal._Map<flight.NodeAny, flight.FlightDocumentInteractiveStateBinding<N>> {
@@ -71,19 +71,19 @@ inline function createSceneRefusal(reason:flight.FlightDocumentRefusalReason, sc
 }
 
 inline function explainFlightDocumentRefusal(document:flight.FlightDocument, dimension:Dynamic, schemas:flight.FlightDocumentSchemaRegistry, ?sceneIndex:Float):Null<flight.FlightDocumentRefusalExplanation> {
-  return flight._js._fn.SceneDocument.explainFlightDocumentRefusal(document, dimension, schemas, sceneIndex);
+  return flight._js._fn.SceneDocument.explainFlightDocumentRefusal(document, dimension, schemas, (sceneIndex == null ? js.Syntax.code("undefined") : sceneIndex));
 }
 
 inline function explainFlightDocumentRefusalFromText(text:String, dimension:Dynamic, schemas:flight.FlightDocumentSchemaRegistry, ?sceneIndex:Float):Null<flight.FlightDocumentRefusalExplanation> {
-  return flight._js._fn.SceneDocument.explainFlightDocumentRefusalFromText(text, dimension, schemas, sceneIndex);
+  return flight._js._fn.SceneDocument.explainFlightDocumentRefusalFromText(text, dimension, schemas, (sceneIndex == null ? js.Syntax.code("undefined") : sceneIndex));
 }
 
 inline function explainFlightDocumentScene3DRefusal(document:flight.FlightDocument, schemas:flight.FlightDocumentSchemaRegistry, ?sceneIndex:Float):Null<flight.FlightDocumentRefusalExplanation> {
-  return flight._js._fn.SceneDocument.explainFlightDocumentScene3DRefusal(document, schemas, sceneIndex);
+  return flight._js._fn.SceneDocument.explainFlightDocumentScene3DRefusal(document, schemas, (sceneIndex == null ? js.Syntax.code("undefined") : sceneIndex));
 }
 
 inline function explainFlightDocumentScene3DRefusalFromText(text:String, schemas:flight.FlightDocumentSchemaRegistry, ?sceneIndex:Float):Null<flight.FlightDocumentRefusalExplanation> {
-  return flight._js._fn.SceneDocument.explainFlightDocumentScene3DRefusalFromText(text, schemas, sceneIndex);
+  return flight._js._fn.SceneDocument.explainFlightDocumentScene3DRefusalFromText(text, schemas, (sceneIndex == null ? js.Syntax.code("undefined") : sceneIndex));
 }
 
 inline function explainFlightDocumentText(text:flight.FlightDocumentText):Null<flight.FlightDocumentRefusalExplanation> {
@@ -139,7 +139,7 @@ inline function readInteractiveStateBindingMetadata(node:flight.NodeAny, binding
 }
 
 inline function selectFlightDocumentScene(document:flight.FlightDocument, dimension:Dynamic, ?requestedSceneIndex:Float):Dynamic {
-  return flight._js._fn.SceneDocument.selectFlightDocumentScene(document, dimension, requestedSceneIndex);
+  return flight._js._fn.SceneDocument.selectFlightDocumentScene(document, dimension, (requestedSceneIndex == null ? js.Syntax.code("undefined") : requestedSceneIndex));
 }
 
 inline function writeFlightDocumentLayoutBindings<N:flight.NodeAny>(bindings:Array<flight.FlightDocumentLayoutBinding<N>>, root:N, writtenNodes:flight._internal._Map<flight.NodeAny, flight.FlightDocumentNode>):Array<flight.FlightDocumentLayoutDescriptor> {

@@ -39,15 +39,15 @@ inline function createGuiController<Controller, Runtime:{ binding:Null<Dynamic>,
 }
 
 inline function createGuiControllerRuntime<Runtime:Dynamic>(fields:Runtime, ?transition:flight.GuiTransitionDescriptor):Dynamic {
-  return flight._js._fn.Gui.createGuiControllerRuntime(fields, transition);
+  return flight._js._fn.Gui.createGuiControllerRuntime(fields, (transition == null ? js.Syntax.code("undefined") : transition));
 }
 
 inline function createGuiDialog(?options:flight.GuiDialogOptions):flight.GuiDialog {
-  return flight._js._fn.Gui.createGuiDialog(options);
+  return flight._js._fn.Gui.createGuiDialog((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createGuiTestNode(?width:Float, ?height:Float):flight.Node2D {
-  return flight._js._fn.Gui.createGuiTestNode(width, height);
+  return flight._js._fn.Gui.createGuiTestNode((width == null ? js.Syntax.code("undefined") : width), (height == null ? js.Syntax.code("undefined") : height));
 }
 
 inline function createListController(options:flight.ListControllerOptions):flight.ListController {
@@ -183,7 +183,7 @@ inline function emitGuiKeyboard(target:flight.Node2D, name:flight.InteractionSig
 }
 
 inline function emitGuiPointer(target:flight.Node2D, name:flight.InteractionSignalName, ?fields:Dynamic):Void {
-  flight._js._fn.Gui.emitGuiPointer(target, name, fields);
+  flight._js._fn.Gui.emitGuiPointer(target, name, (fields == null ? js.Syntax.code("undefined") : fields));
 }
 
 inline function enqueueGuiDialog(dialog:flight.GuiDialog, entry:flight.GuiDialogEntry):Bool {
@@ -211,7 +211,7 @@ inline function getGuiControllerRuntime<Runtime:Dynamic>(controller:flight.Entit
 }
 
 inline function getGuiDialogEntries(dialog:flight.GuiDialog, ?out:Array<flight.GuiDialogEntry>):Array<flight.GuiDialogEntry> {
-  return flight._js._fn.Gui.getGuiDialogEntries(dialog, out);
+  return flight._js._fn.Gui.getGuiDialogEntries(dialog, (out == null ? js.Syntax.code("undefined") : out));
 }
 
 inline function getGuiDialogSignals(dialog:flight.GuiDialog):flight.GuiDialogSignals {

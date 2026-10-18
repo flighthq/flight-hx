@@ -5,7 +5,7 @@ package flight;
 typedef Host = flight._js.Host;
 
 inline function createHost<Capabilities:Dynamic>(?capabilities:Capabilities):Dynamic {
-  return flight._js._fn.Host.createHost(capabilities);
+  return flight._js._fn.Host.createHost((capabilities == null ? js.Syntax.code("undefined") : capabilities));
 }
 
 inline function enableHostGuards(host:flight.Host):Void {

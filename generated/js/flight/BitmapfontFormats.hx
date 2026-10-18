@@ -7,7 +7,7 @@ inline function applyBitmapFontImportOptions(options:flight.BitmapFontImportOpti
 }
 
 inline function buildBitmapFontFromRecord(record:flight.BitmapFontRecord, ?options:flight.BitmapFontParseOptions):Null<flight.BitmapFont> {
-  return flight._js._fn.BitmapfontFormats.buildBitmapFontFromRecord(record, options);
+  return flight._js._fn.BitmapfontFormats.buildBitmapFontFromRecord(record, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function detectBitmapFontFormat(bytes:flight._internal._UInt8Array):Null<flight.BitmapFontFormatKind> {
@@ -15,7 +15,7 @@ inline function detectBitmapFontFormat(bytes:flight._internal._UInt8Array):Null<
 }
 
 inline function explainBitmapFontParse(text:String, ?options:flight.BitmapFontParseOptions):flight.BitmapFontParseExplanation {
-  return flight._js._fn.BitmapfontFormats.explainBitmapFontParse(text, options);
+  return flight._js._fn.BitmapfontFormats.explainBitmapFontParse(text, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function formatBitmapFontFnt(font:flight.BitmapFont):String {
@@ -31,23 +31,23 @@ inline function getBitmapFontFormatKinds():Array<flight.BitmapFontFormatKind> {
 }
 
 inline function parseBitmapFont(bytes:flight._internal._UInt8Array, ?formatKind:flight.BitmapFontFormatKind, ?options:flight.BitmapFontParseOptions, ?diagnostics:Array<flight.ImportDiagnostic>):Null<flight.BitmapFont> {
-  return flight._js._fn.BitmapfontFormats.parseBitmapFont(bytes, formatKind, options, diagnostics);
+  return flight._js._fn.BitmapfontFormats.parseBitmapFont(bytes, (formatKind == null ? js.Syntax.code("undefined") : formatKind), (options == null ? js.Syntax.code("undefined") : options), (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function parseBitmapFontBinary(bytes:flight._internal._UInt8Array, ?options:flight.BitmapFontParseOptions, ?diagnostics:Array<flight.ImportDiagnostic>):Null<flight.BitmapFont> {
-  return flight._js._fn.BitmapfontFormats.parseBitmapFontBinary(bytes, options, diagnostics);
+  return flight._js._fn.BitmapfontFormats.parseBitmapFontBinary(bytes, (options == null ? js.Syntax.code("undefined") : options), (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function parseBitmapFontFnt(text:String, ?options:flight.BitmapFontParseOptions, ?diagnostics:Array<flight.ImportDiagnostic>):Null<flight.BitmapFont> {
-  return flight._js._fn.BitmapfontFormats.parseBitmapFontFnt(text, options, diagnostics);
+  return flight._js._fn.BitmapfontFormats.parseBitmapFontFnt(text, (options == null ? js.Syntax.code("undefined") : options), (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function parseBitmapFontJson(text:String, ?options:flight.BitmapFontParseOptions, ?diagnostics:Array<flight.ImportDiagnostic>):Null<flight.BitmapFont> {
-  return flight._js._fn.BitmapfontFormats.parseBitmapFontJson(text, options, diagnostics);
+  return flight._js._fn.BitmapfontFormats.parseBitmapFontJson(text, (options == null ? js.Syntax.code("undefined") : options), (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function parseBitmapFontXml(text:String, ?options:flight.BitmapFontParseOptions, ?diagnostics:Array<flight.ImportDiagnostic>):Null<flight.BitmapFont> {
-  return flight._js._fn.BitmapfontFormats.parseBitmapFontXml(text, options, diagnostics);
+  return flight._js._fn.BitmapfontFormats.parseBitmapFontXml(text, (options == null ? js.Syntax.code("undefined") : options), (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function readBitmapFontFormatKind(bytes:flight._internal._UInt8Array):Null<flight.BitmapFontFormatKind> {

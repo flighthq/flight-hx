@@ -3,7 +3,7 @@
 package flight;
 
 inline function beginDebugSpan(name:String, ?channel:Null<String>):Null<flight.LogTimer> {
-  return flight._js._fn.Debug.beginDebugSpan(name, channel);
+  return flight._js._fn.Debug.beginDebugSpan(name, (channel == null ? js.Syntax.code("undefined") : channel));
 }
 
 inline function disableDebug():Void {
@@ -11,7 +11,7 @@ inline function disableDebug():Void {
 }
 
 inline function enableDebug(?options:flight.DebugOptions):Void {
-  flight._js._fn.Debug.enableDebug(options);
+  flight._js._fn.Debug.enableDebug((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function enableFlightDiagnostics(state:flight.RenderState):Void {
@@ -27,11 +27,11 @@ inline function isDebugEnabled():Bool {
 }
 
 inline function markDebugFrame(?label:String, ?channel:Null<String>):Void {
-  flight._js._fn.Debug.markDebugFrame(label, channel);
+  flight._js._fn.Debug.markDebugFrame((label == null ? js.Syntax.code("undefined") : label), (channel == null ? js.Syntax.code("undefined") : channel));
 }
 
 inline function measureDebugSpan<T>(name:String, fn:()->T, ?channel:Null<String>):T {
-  return flight._js._fn.Debug.measureDebugSpan(name, fn, channel);
+  return flight._js._fn.Debug.measureDebugSpan(name, fn, (channel == null ? js.Syntax.code("undefined") : channel));
 }
 
 inline function registerDebugSubsystem(name:flight.DebugSubsystemName, hooks:flight.DebugSubsystemHooks):Void {

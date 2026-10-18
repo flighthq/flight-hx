@@ -23,7 +23,7 @@ inline function formatNetFormBody(fields:haxe.DynamicAccess<String>):String {
 }
 
 inline function sendNetRequest(hostNet:flight.HostNetCapability, request:flight.NetRequest, ?options:flight.NetRequestOptions):flight._internal._Promise<flight.NetResponse> {
-  return flight._js._fn.Net.sendNetRequest(hostNet, request, options);
+  return flight._js._fn.Net.sendNetRequest(hostNet, request, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function setNetGuard(guard:Null<flight.NetGuard>):Void {

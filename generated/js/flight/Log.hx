@@ -7,7 +7,7 @@ inline function addLogSink(sink:flight.LogSink):Void {
 }
 
 inline function beginLogGroup(label:String, ?channel:Null<String>):Void {
-  flight._js._fn.Log.beginLogGroup(label, channel);
+  flight._js._fn.Log.beginLogGroup(label, (channel == null ? js.Syntax.code("undefined") : channel));
 }
 
 inline function clearLogChannelLevel(channel:String):Void {
@@ -43,19 +43,19 @@ inline function clearMemoryLogSink(handle:flight.MemoryLogSink):Void {
 }
 
 inline function createBufferedLogSink(target:flight.LogSink, ?options:{ ?size:Float, ?intervalMs:Float }):flight.BufferedLogSink {
-  return flight._js._fn.Log.createBufferedLogSink(target, options);
+  return flight._js._fn.Log.createBufferedLogSink(target, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createChildLogContext(parent:flight.LogContext, fields:haxe.DynamicAccess<Dynamic>, ?channel:Null<String>):flight.LogContext {
-  return flight._js._fn.Log.createChildLogContext(parent, fields, channel);
+  return flight._js._fn.Log.createChildLogContext(parent, fields, (channel == null ? js.Syntax.code("undefined") : channel));
 }
 
 inline function createConsoleCaptureSink(?options:{ ?formatter:flight.LogFormatter }):flight.LogSink {
-  return flight._js._fn.Log.createConsoleCaptureSink(options);
+  return flight._js._fn.Log.createConsoleCaptureSink((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createConsoleLogSink(?options:{ ?formatter:flight.LogFormatter }):flight.LogSink {
-  return flight._js._fn.Log.createConsoleLogSink(options);
+  return flight._js._fn.Log.createConsoleLogSink((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createFanoutLogSink(...sinks:flight.LogSink):flight.LogSink {
@@ -63,7 +63,7 @@ inline function createFanoutLogSink(...sinks:flight.LogSink):flight.LogSink {
 }
 
 inline function createFileLogSink(transport:flight.LogTransport, ?options:{ ?formatter:flight.LogFormatter }):flight.FileLogSink {
-  return flight._js._fn.Log.createFileLogSink(transport, options);
+  return flight._js._fn.Log.createFileLogSink(transport, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createFilterLogSink(target:flight.LogSink, predicate:(flight.LogEntry)->Bool):flight.LogSink {
@@ -75,11 +75,11 @@ inline function createJsonLogFormatter():flight.LogFormatter {
 }
 
 inline function createLogContext(channel:Null<String>, ?fields:haxe.DynamicAccess<Dynamic>):flight.LogContext {
-  return flight._js._fn.Log.createLogContext(channel, fields);
+  return flight._js._fn.Log.createLogContext(channel, (fields == null ? js.Syntax.code("undefined") : fields));
 }
 
 inline function createLogSpan(name:String, ?fields:haxe.DynamicAccess<Dynamic>, ?channel:Null<String>):flight.LogSpan {
-  return flight._js._fn.Log.createLogSpan(name, fields, channel);
+  return flight._js._fn.Log.createLogSpan(name, (fields == null ? js.Syntax.code("undefined") : fields), (channel == null ? js.Syntax.code("undefined") : channel));
 }
 
 inline function createMemoryLogSink(capacity:Float):flight.MemoryLogSink {
@@ -95,7 +95,7 @@ inline function createSampledLogSink(target:flight.LogSink, rate:Float):flight.L
 }
 
 inline function createTextLogFormatter(?options:{ ?indentGroups:Bool, ?levelPrefix:Bool, ?timestamp:Bool }):flight.LogFormatter {
-  return flight._js._fn.Log.createTextLogFormatter(options);
+  return flight._js._fn.Log.createTextLogFormatter((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function destroyFileLogSink(handle:flight.FileLogSink):flight._internal._Promise<flight.FileLogSinkDestroyOutcome> {
@@ -111,7 +111,7 @@ inline function enableLogSignals():flight.LogSignals {
 }
 
 inline function endLogGroup(?channel:Null<String>):Void {
-  flight._js._fn.Log.endLogGroup(channel);
+  flight._js._fn.Log.endLogGroup((channel == null ? js.Syntax.code("undefined") : channel));
 }
 
 inline function endLogTimer(timer:flight.LogTimer):Float {
@@ -151,15 +151,15 @@ inline function getMemoryLogSinkEntries(handle:flight.MemoryLogSink):Array<fligh
 }
 
 inline function log(level:flight.LogLevel, data:Dynamic, ?channel:Null<String>):Void {
-  flight._js._fn.Log.log(level, data, channel);
+  flight._js._fn.Log.log(level, data, (channel == null ? js.Syntax.code("undefined") : channel));
 }
 
 inline function logAssert(condition:Bool, data:Dynamic, ?channel:Null<String>):Void {
-  flight._js._fn.Log.logAssert(condition, data, channel);
+  flight._js._fn.Log.logAssert(condition, data, (channel == null ? js.Syntax.code("undefined") : channel));
 }
 
 inline function logDebug(data:Dynamic, ?channel:Null<String>):Void {
-  flight._js._fn.Log.logDebug(data, channel);
+  flight._js._fn.Log.logDebug(data, (channel == null ? js.Syntax.code("undefined") : channel));
 }
 
 inline function logDebugWith(context:flight.LogContext, data:Dynamic):Void {
@@ -167,7 +167,7 @@ inline function logDebugWith(context:flight.LogContext, data:Dynamic):Void {
 }
 
 inline function logError(data:Dynamic, ?channel:Null<String>):Void {
-  flight._js._fn.Log.logError(data, channel);
+  flight._js._fn.Log.logError(data, (channel == null ? js.Syntax.code("undefined") : channel));
 }
 
 inline function logErrorWith(context:flight.LogContext, data:Dynamic):Void {
@@ -175,7 +175,7 @@ inline function logErrorWith(context:flight.LogContext, data:Dynamic):Void {
 }
 
 inline function logInfo(data:Dynamic, ?channel:Null<String>):Void {
-  flight._js._fn.Log.logInfo(data, channel);
+  flight._js._fn.Log.logInfo(data, (channel == null ? js.Syntax.code("undefined") : channel));
 }
 
 inline function logInfoWith(context:flight.LogContext, data:Dynamic):Void {
@@ -183,11 +183,11 @@ inline function logInfoWith(context:flight.LogContext, data:Dynamic):Void {
 }
 
 inline function logOnce(key:String, level:flight.LogLevel, data:Dynamic, ?channel:Null<String>):Bool {
-  return flight._js._fn.Log.logOnce(key, level, data, channel);
+  return flight._js._fn.Log.logOnce(key, level, data, (channel == null ? js.Syntax.code("undefined") : channel));
 }
 
 inline function logVerbose(data:Dynamic, ?channel:Null<String>):Void {
-  flight._js._fn.Log.logVerbose(data, channel);
+  flight._js._fn.Log.logVerbose(data, (channel == null ? js.Syntax.code("undefined") : channel));
 }
 
 inline function logVerboseWith(context:flight.LogContext, data:Dynamic):Void {
@@ -195,7 +195,7 @@ inline function logVerboseWith(context:flight.LogContext, data:Dynamic):Void {
 }
 
 inline function logWarn(data:Dynamic, ?channel:Null<String>):Void {
-  flight._js._fn.Log.logWarn(data, channel);
+  flight._js._fn.Log.logWarn(data, (channel == null ? js.Syntax.code("undefined") : channel));
 }
 
 inline function logWarnWith(context:flight.LogContext, data:Dynamic):Void {
@@ -243,6 +243,6 @@ inline function setLogSink(sink:Null<flight.LogSink>):Void {
 }
 
 inline function startLogTimer(label:String, ?channel:Null<String>):flight.LogTimer {
-  return flight._js._fn.Log.startLogTimer(label, channel);
+  return flight._js._fn.Log.startLogTimer(label, (channel == null ? js.Syntax.code("undefined") : channel));
 }
 #end

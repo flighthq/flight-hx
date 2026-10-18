@@ -331,7 +331,7 @@ inline function notifyWindowClosed(win:flight.AppWindow):Void {
 }
 
 inline function openWindow(hostWindowLifecycle:flight.HostWindowLifecycleCapability, hostWindowGeometry:flight.HostWindowGeometryCapability, win:flight.AppWindow, ?options:flight.WindowOptions):Bool {
-  return flight._js._fn.App.openWindow(hostWindowLifecycle, hostWindowGeometry, win, options);
+  return flight._js._fn.App.openWindow(hostWindowLifecycle, hostWindowGeometry, win, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function pauseAppLoop(app:flight.AppLoop):Void {
@@ -491,11 +491,11 @@ inline function showWindow(hostWindowVisibility:flight.HostWindowVisibilityCapab
 }
 
 inline function startAppLoop(hostAppLoop:flight.HostAppLoopCapability, hostLifecycle:flight.HostLifecycleCapability, app:flight.AppLoop, ?options:flight.AppLoopOptions):Void {
-  flight._js._fn.App.startAppLoop(hostAppLoop, hostLifecycle, app, options);
+  flight._js._fn.App.startAppLoop(hostAppLoop, hostLifecycle, app, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function stepAppLoop(app:flight.AppLoop, deltaTime:Float, ?options:flight.AppStepOptions):Void {
-  flight._js._fn.App.stepAppLoop(app, deltaTime, options);
+  flight._js._fn.App.stepAppLoop(app, deltaTime, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function stopAppLoop(app:flight.AppLoop):Void {

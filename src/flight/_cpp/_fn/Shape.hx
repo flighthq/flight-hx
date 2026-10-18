@@ -22,7 +22,13 @@ package flight._cpp._fn;
 ')
 @:include("flight_hx/shape.hpp")
 extern class Shape {
+  @:native("flight_hx::shape::clear_shape_bounds_commands")
+  static function clearShapeBoundsCommands():Void;
+
   @:native("flight_hx::shape::get_path_command_operand_count")
   static function getPathCommandOperandCount(verb:Float):Float;
+
+  @:native("flight_hx::shape::get_shape_bounds_command_registry_revision")
+  static function getShapeBoundsCommandRegistryRevision():Float;
 }
 #end

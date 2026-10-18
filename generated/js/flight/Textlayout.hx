@@ -19,7 +19,7 @@ inline function computeRichTextCharIndexAtPoint(layout:flight.TextLayoutResult, 
 }
 
 inline function computeRichTextContent(out:flight.RichTextContent, data:flight.RichTextData, ?passwordCharacter:Null<String>):Void {
-  flight._js._fn.Textlayout.computeRichTextContent(out, data, passwordCharacter);
+  flight._js._fn.Textlayout.computeRichTextContent(out, data, (passwordCharacter == null ? js.Syntax.code("undefined") : passwordCharacter));
 }
 
 inline function computeRichTextLineCount(layout:flight.TextLayoutResult):Float {
@@ -151,7 +151,7 @@ inline function getTextFormatLeading(format:flight.TextFormat):Float {
 }
 
 inline function getTextLayoutMeasureProvider(?hostTextShaper:flight.HostTextShaperCapability):Null<flight.TextMeasureFunction> {
-  return flight._js._fn.Textlayout.getTextLayoutMeasureProvider(hostTextShaper);
+  return flight._js._fn.Textlayout.getTextLayoutMeasureProvider((hostTextShaper == null ? js.Syntax.code("undefined") : hostTextShaper));
 }
 
 inline function getTextLayoutResult(runtime:flight.TextLabelRuntime):flight.TextLayoutResult {
@@ -159,7 +159,7 @@ inline function getTextLayoutResult(runtime:flight.TextLabelRuntime):flight.Text
 }
 
 inline function getTextLineBreakIndex(lineBreaks:Array<Float>, ?startIndex:Float):Float {
-  return flight._js._fn.Textlayout.getTextLineBreakIndex(lineBreaks, startIndex);
+  return flight._js._fn.Textlayout.getTextLineBreakIndex(lineBreaks, (startIndex == null ? js.Syntax.code("undefined") : startIndex));
 }
 
 inline function getTextLineBreaks(out:Array<Float>, text:String):Void {

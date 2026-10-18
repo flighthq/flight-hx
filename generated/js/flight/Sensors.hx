@@ -73,7 +73,7 @@ inline function disposeSensors(sensors:flight.Sensors):Void {
 }
 
 inline function getSensorsPermissionState(hostSensors:flight.HostSensorsCapability, ?sensor:Dynamic):flight._internal._Promise<flight.SensorsPermissionState> {
-  return flight._js._fn.Sensors.getSensorsPermissionState(hostSensors, sensor);
+  return flight._js._fn.Sensors.getSensorsPermissionState(hostSensors, (sensor == null ? js.Syntax.code("undefined") : sensor));
 }
 
 inline function hasAccelerometer(hostSensors:flight.HostSensorsCapability):Bool {

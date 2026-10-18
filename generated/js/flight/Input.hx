@@ -11,27 +11,27 @@ inline function applyGamepadStickDeadZone(out:{ x:Float, y:Float }, x:Float, y:F
 }
 
 inline function attachGamepadInput(hostInputIngress:flight.HostInputIngressCapability, manager:flight.InputManager, source:flight.InputIngressSource, ?options:flight.AttachInputOptions):Void {
-  flight._js._fn.Input.attachGamepadInput(hostInputIngress, manager, source, options);
+  flight._js._fn.Input.attachGamepadInput(hostInputIngress, manager, source, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function attachKeyboardInput(hostInputIngress:flight.HostInputIngressCapability, manager:flight.InputManager, source:flight.InputIngressSource, ?options:flight.AttachInputOptions):Void {
-  flight._js._fn.Input.attachKeyboardInput(hostInputIngress, manager, source, options);
+  flight._js._fn.Input.attachKeyboardInput(hostInputIngress, manager, source, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function attachPointerInput(hostInputIngress:flight.HostInputIngressCapability, manager:flight.InputManager, source:flight.InputIngressSource, ?options:flight.AttachInputOptions):Void {
-  flight._js._fn.Input.attachPointerInput(hostInputIngress, manager, source, options);
+  flight._js._fn.Input.attachPointerInput(hostInputIngress, manager, source, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function attachRelativePointerInput(hostInputIngress:flight.HostInputIngressCapability, manager:flight.InputManager, source:flight.InputIngressSource, ?options:flight.AttachInputOptions):Void {
-  flight._js._fn.Input.attachRelativePointerInput(hostInputIngress, manager, source, options);
+  flight._js._fn.Input.attachRelativePointerInput(hostInputIngress, manager, source, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function attachTextInput(hostInputIngress:flight.HostInputIngressCapability, manager:flight.InputManager, source:flight.InputIngressSource, ?options:flight.AttachInputOptions):Void {
-  flight._js._fn.Input.attachTextInput(hostInputIngress, manager, source, options);
+  flight._js._fn.Input.attachTextInput(hostInputIngress, manager, source, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function attachWheelInput(hostInputIngress:flight.HostInputIngressCapability, manager:flight.InputManager, source:flight.InputIngressSource, ?options:flight.AttachInputOptions):Void {
-  flight._js._fn.Input.attachWheelInput(hostInputIngress, manager, source, options);
+  flight._js._fn.Input.attachWheelInput(hostInputIngress, manager, source, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function connectInputStateToInputManager(state:flight.InputState, manager:flight.InputManager):()->Void {

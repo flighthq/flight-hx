@@ -11,11 +11,11 @@ inline function areMovieClipGuardsEnabled():Bool {
 }
 
 inline function createMovieClip(?obj:flight.PartialNode<flight.MovieClip>):flight.MovieClip {
-  return flight._js._fn.Movieclip.createMovieClip(obj);
+  return flight._js._fn.Movieclip.createMovieClip((obj == null ? js.Syntax.code("undefined") : obj));
 }
 
 inline function createMovieClipData(?data:Dynamic):flight.MovieClipData {
-  return flight._js._fn.Movieclip.createMovieClipData(data);
+  return flight._js._fn.Movieclip.createMovieClipData((data == null ? js.Syntax.code("undefined") : data));
 }
 
 inline function createMovieClipRuntime():flight.MovieClipRuntime {
@@ -79,7 +79,7 @@ inline function gotoAndStopMovieClip(clip:flight.MovieClip, frame:Dynamic):Void 
 }
 
 inline function initializeMovieClipData(out:flight.EntityConstruction<flight.MovieClipData>, ?data:Dynamic):Void {
-  flight._js._fn.Movieclip.initializeMovieClipData(out, data);
+  flight._js._fn.Movieclip.initializeMovieClipData(out, (data == null ? js.Syntax.code("undefined") : data));
 }
 
 inline function initializeSpritesheetTimelineSource(out:flight.EntityConstruction<flight.TimelineSource>, spritesheet:flight.Spritesheet, animation:flight.SpritesheetAnimation):Void {

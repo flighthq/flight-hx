@@ -13,11 +13,11 @@ inline function advanceClock(clock:flight.Clock, deltaTime:Float):Void {
 }
 
 inline function createChildClock(parent:flight.Clock, ?options:flight.ClockOptions):flight.Clock {
-  return flight._js._fn.Clock.createChildClock(parent, options);
+  return flight._js._fn.Clock.createChildClock(parent, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createClock(?options:flight.ClockOptions):flight.Clock {
-  return flight._js._fn.Clock.createClock(options);
+  return flight._js._fn.Clock.createClock((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function disposeClock(clock:flight.Clock):Void {
@@ -37,7 +37,7 @@ inline function getClockParent(clock:flight.Clock):Null<flight.Clock> {
 }
 
 inline function initializeClock(out:flight.EntityConstruction<flight.Clock>, ?options:flight.ClockOptions):Void {
-  flight._js._fn.Clock.initializeClock(out, options);
+  flight._js._fn.Clock.initializeClock(out, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function isClockEffectivelyPaused(clock:flight.Clock):Bool {

@@ -3,7 +3,7 @@
 package flight;
 
 inline function booleanPaths(pathBooleanKernel:flight.PathBooleanKernel, subject:flight.Path, clip:flight.Path, operation:flight.PathBooleanOperation, ?out:flight.Path, ?options:flight.PathBooleanOptions):flight.Path {
-  return flight._js._fn.PathBoolean.booleanPaths(pathBooleanKernel, subject, clip, operation, out, options);
+  return flight._js._fn.PathBoolean.booleanPaths(pathBooleanKernel, subject, clip, operation, (out == null ? js.Syntax.code("undefined") : out), (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createMartinezPathBooleanKernel():flight.PathBooleanKernel {
@@ -11,15 +11,15 @@ inline function createMartinezPathBooleanKernel():flight.PathBooleanKernel {
 }
 
 inline function differencePaths(pathBooleanKernel:flight.PathBooleanKernel, a:flight.Path, b:flight.Path, ?out:flight.Path, ?options:flight.PathBooleanOptions):flight.Path {
-  return flight._js._fn.PathBoolean.differencePaths(pathBooleanKernel, a, b, out, options);
+  return flight._js._fn.PathBoolean.differencePaths(pathBooleanKernel, a, b, (out == null ? js.Syntax.code("undefined") : out), (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function explainOffsetPath(pathBooleanKernel:flight.PathBooleanKernel, path:flight.Path, delta:Float, ?options:flight.PathOffsetOptions):Null<flight.PathBooleanExplanation> {
-  return flight._js._fn.PathBoolean.explainOffsetPath(pathBooleanKernel, path, delta, options);
+  return flight._js._fn.PathBoolean.explainOffsetPath(pathBooleanKernel, path, delta, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function explainSimplifyPath(pathBooleanKernel:flight.PathBooleanKernel, path:flight.Path, ?options:flight.PathBooleanOptions):Null<flight.PathBooleanExplanation> {
-  return flight._js._fn.PathBoolean.explainSimplifyPath(pathBooleanKernel, path, options);
+  return flight._js._fn.PathBoolean.explainSimplifyPath(pathBooleanKernel, path, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function initializeMartinezPathBooleanKernel(out:flight.EntityConstruction<flight.PathBooleanKernel>):Void {
@@ -27,35 +27,35 @@ inline function initializeMartinezPathBooleanKernel(out:flight.EntityConstructio
 }
 
 inline function intersectPaths(pathBooleanKernel:flight.PathBooleanKernel, a:flight.Path, b:flight.Path, ?out:flight.Path, ?options:flight.PathBooleanOptions):flight.Path {
-  return flight._js._fn.PathBoolean.intersectPaths(pathBooleanKernel, a, b, out, options);
+  return flight._js._fn.PathBoolean.intersectPaths(pathBooleanKernel, a, b, (out == null ? js.Syntax.code("undefined") : out), (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function offsetPath(pathBooleanKernel:flight.PathBooleanKernel, path:flight.Path, delta:Float, ?options:flight.PathOffsetOptions, ?out:flight.Path):flight.Path {
-  return flight._js._fn.PathBoolean.offsetPath(pathBooleanKernel, path, delta, options, out);
+  return flight._js._fn.PathBoolean.offsetPath(pathBooleanKernel, path, delta, (options == null ? js.Syntax.code("undefined") : options), (out == null ? js.Syntax.code("undefined") : out));
 }
 
 inline function resolvePathRegions(pathBooleanKernel:flight.PathBooleanKernel, rings:Array<flight.PathBooleanContour>, fillRule:flight.PathBooleanFillRule, ?out:flight.Path):flight.Path {
-  return flight._js._fn.PathBoolean.resolvePathRegions(pathBooleanKernel, rings, fillRule, out);
+  return flight._js._fn.PathBoolean.resolvePathRegions(pathBooleanKernel, rings, fillRule, (out == null ? js.Syntax.code("undefined") : out));
 }
 
 inline function simplifyPath(pathBooleanKernel:flight.PathBooleanKernel, path:flight.Path, ?options:flight.PathBooleanOptions, ?out:flight.Path):flight.Path {
-  return flight._js._fn.PathBoolean.simplifyPath(pathBooleanKernel, path, options, out);
+  return flight._js._fn.PathBoolean.simplifyPath(pathBooleanKernel, path, (options == null ? js.Syntax.code("undefined") : options), (out == null ? js.Syntax.code("undefined") : out));
 }
 
 inline function unionAllPaths(pathBooleanKernel:flight.PathBooleanKernel, paths:Array<flight.Path>, ?out:flight.Path, ?options:flight.PathBooleanOptions):flight.Path {
-  return flight._js._fn.PathBoolean.unionAllPaths(pathBooleanKernel, paths, out, options);
+  return flight._js._fn.PathBoolean.unionAllPaths(pathBooleanKernel, paths, (out == null ? js.Syntax.code("undefined") : out), (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function unionPaths(pathBooleanKernel:flight.PathBooleanKernel, a:flight.Path, b:flight.Path, ?out:flight.Path, ?options:flight.PathBooleanOptions):flight.Path {
-  return flight._js._fn.PathBoolean.unionPaths(pathBooleanKernel, a, b, out, options);
+  return flight._js._fn.PathBoolean.unionPaths(pathBooleanKernel, a, b, (out == null ? js.Syntax.code("undefined") : out), (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function writePathBooleanContours(contours:Array<flight.PathBooleanContour>, ?out:flight.Path):flight.Path {
-  return flight._js._fn.PathBoolean.writePathBooleanContours(contours, out);
+  return flight._js._fn.PathBoolean.writePathBooleanContours(contours, (out == null ? js.Syntax.code("undefined") : out));
 }
 
 inline function xorPaths(pathBooleanKernel:flight.PathBooleanKernel, a:flight.Path, b:flight.Path, ?out:flight.Path, ?options:flight.PathBooleanOptions):flight.Path {
-  return flight._js._fn.PathBoolean.xorPaths(pathBooleanKernel, a, b, out, options);
+  return flight._js._fn.PathBoolean.xorPaths(pathBooleanKernel, a, b, (out == null ? js.Syntax.code("undefined") : out), (options == null ? js.Syntax.code("undefined") : options));
 }
 
 var martinezPathBooleanKernel(get, set):flight.PathBooleanKernel;

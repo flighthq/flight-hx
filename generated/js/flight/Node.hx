@@ -45,7 +45,7 @@ inline function computeNodeRootLocalBoundsRectangle<Traits:Dynamic>(out:flight.R
 }
 
 inline function computeNodeWorldTransformRevision<Traits:Dynamic>(runtime:flight.NodeRuntime<Traits>, ?parentRuntime:flight.NodeRuntime<Traits>):Void {
-  flight._js._fn.Node.computeNodeWorldTransformRevision(runtime, parentRuntime);
+  flight._js._fn.Node.computeNodeWorldTransformRevision(runtime, (parentRuntime == null ? js.Syntax.code("undefined") : parentRuntime));
 }
 
 inline function computeScene2DFitAlignX(scaledContentWidth:Float, viewWidth:Float, align:flight.ViewportAlign):Float {
@@ -89,7 +89,7 @@ inline function convertNodeVector3LocalToGlobal<Traits:Dynamic>(out:flight.Vecto
 }
 
 inline function createNode<Traits:Dynamic, Data:flight.NodeData, Runtime:flight.NodeRuntime<Traits>>(nodeKind:flight.Kind, ?obj:flight.PartialNode<flight.Node<Traits>>, ?createData:flight.NodeDataFactory<Data>, ?createNodeRuntimeFactory:flight.NodeRuntimeFactory<Runtime>):Dynamic {
-  return flight._js._fn.Node.createNode(nodeKind, obj, createData, createNodeRuntimeFactory);
+  return flight._js._fn.Node.createNode(nodeKind, (obj == null ? js.Syntax.code("undefined") : obj), (createData == null ? js.Syntax.code("undefined") : createData), (createNodeRuntimeFactory == null ? js.Syntax.code("undefined") : createNodeRuntimeFactory));
 }
 
 inline function createNodeOrderList<Traits:Dynamic>():flight.NodeOrderList<Traits> {
@@ -97,7 +97,7 @@ inline function createNodeOrderList<Traits:Dynamic>():flight.NodeOrderList<Trait
 }
 
 inline function createNodeRuntime<Traits:Dynamic>(?methods:Dynamic):flight.NodeRuntime<Traits> {
-  return flight._js._fn.Node.createNodeRuntime(methods);
+  return flight._js._fn.Node.createNodeRuntime((methods == null ? js.Syntax.code("undefined") : methods));
 }
 
 inline function createNodeSignals():flight.NodeSignals {
@@ -105,7 +105,7 @@ inline function createNodeSignals():flight.NodeSignals {
 }
 
 inline function createViewport(?obj:flight.ViewportLike):flight.Viewport {
-  return flight._js._fn.Node.createViewport(obj);
+  return flight._js._fn.Node.createViewport((obj == null ? js.Syntax.code("undefined") : obj));
 }
 
 inline function defaultComputeLocalBoundsRectangle<Traits:Dynamic>(_out:flight.Rectangle, _source:flight.BoundsNode<Traits>):Void {
@@ -337,35 +337,35 @@ inline function initAppearanceRuntimeTrait(target:flight.HasAppearanceRuntime):V
 }
 
 inline function initAppearanceTrait(target:flight.HasAppearance, ?obj:Dynamic):Void {
-  flight._js._fn.Node.initAppearanceTrait(target, obj);
+  flight._js._fn.Node.initAppearanceTrait(target, (obj == null ? js.Syntax.code("undefined") : obj));
 }
 
 inline function initBlendModeTrait(target:flight.HasBlendMode, ?obj:Dynamic):Void {
-  flight._js._fn.Node.initBlendModeTrait(target, obj);
+  flight._js._fn.Node.initBlendModeTrait(target, (obj == null ? js.Syntax.code("undefined") : obj));
 }
 
 inline function initBoundsRectangleRuntimeTrait<Traits:Dynamic>(target:flight.HasBoundsRectangleRuntime<Traits>, ?methods:Dynamic):Void {
-  flight._js._fn.Node.initBoundsRectangleRuntimeTrait(target, methods);
+  flight._js._fn.Node.initBoundsRectangleRuntimeTrait(target, (methods == null ? js.Syntax.code("undefined") : methods));
 }
 
 inline function initBoundsRectangleTrait(_target:flight.HasBoundsRectangle, ?_obj:Dynamic):Void {
-  flight._js._fn.Node.initBoundsRectangleTrait(_target, _obj);
+  flight._js._fn.Node.initBoundsRectangleTrait(_target, (_obj == null ? js.Syntax.code("undefined") : _obj));
 }
 
 inline function initClipTrait(target:flight.HasClip, ?obj:Dynamic):Void {
-  flight._js._fn.Node.initClipTrait(target, obj);
+  flight._js._fn.Node.initClipTrait(target, (obj == null ? js.Syntax.code("undefined") : obj));
 }
 
 inline function initMaterialTrait(target:flight.HasMaterial, ?obj:Dynamic):Void {
-  flight._js._fn.Node.initMaterialTrait(target, obj);
+  flight._js._fn.Node.initMaterialTrait(target, (obj == null ? js.Syntax.code("undefined") : obj));
 }
 
 inline function initTransform2DRuntimeTrait(target:flight.HasTransform2DRuntime, ?_methods:Dynamic):Void {
-  flight._js._fn.Node.initTransform2DRuntimeTrait(target, _methods);
+  flight._js._fn.Node.initTransform2DRuntimeTrait(target, (_methods == null ? js.Syntax.code("undefined") : _methods));
 }
 
 inline function initTransform2DTrait(target:flight.HasTransform2D, ?obj:Dynamic):Void {
-  flight._js._fn.Node.initTransform2DTrait(target, obj);
+  flight._js._fn.Node.initTransform2DTrait(target, (obj == null ? js.Syntax.code("undefined") : obj));
 }
 
 inline function initTransform3DRuntimeTrait(target:flight.HasTransform3DRuntime):Void {
@@ -373,11 +373,11 @@ inline function initTransform3DRuntimeTrait(target:flight.HasTransform3DRuntime)
 }
 
 inline function initTransform3DTrait(target:flight.HasTransform3D, ?obj:Dynamic):Void {
-  flight._js._fn.Node.initTransform3DTrait(target, obj);
+  flight._js._fn.Node.initTransform3DTrait(target, (obj == null ? js.Syntax.code("undefined") : obj));
 }
 
 inline function initializeNode<Traits:Dynamic, Data:flight.NodeData, Runtime:flight.NodeRuntime<Traits>>(out:flight.EntityConstruction<Dynamic>, nodeKind:flight.Kind, ?obj:flight.PartialNode<flight.Node<Traits>>, ?createData:flight.NodeDataFactory<Data>, ?createNodeRuntimeFactory:flight.NodeRuntimeFactory<Runtime>):Void {
-  flight._js._fn.Node.initializeNode(out, nodeKind, obj, createData, createNodeRuntimeFactory);
+  flight._js._fn.Node.initializeNode(out, nodeKind, (obj == null ? js.Syntax.code("undefined") : obj), (createData == null ? js.Syntax.code("undefined") : createData), (createNodeRuntimeFactory == null ? js.Syntax.code("undefined") : createNodeRuntimeFactory));
 }
 
 inline function initializeNodeOrderList<Traits:Dynamic>(out:flight.EntityConstruction<flight.NodeOrderList<Traits>>):Void {
@@ -389,7 +389,7 @@ inline function initializeNodeSignals(out:flight.EntityConstruction<flight.NodeS
 }
 
 inline function initializeViewport(out:flight.EntityConstruction<flight.Viewport>, ?obj:flight.ViewportLike):Void {
-  flight._js._fn.Node.initializeViewport(out, obj);
+  flight._js._fn.Node.initializeViewport(out, (obj == null ? js.Syntax.code("undefined") : obj));
 }
 
 inline function invalidateContent<Traits:Dynamic>(target:flight.Node<Traits>):Void {
@@ -445,7 +445,7 @@ inline function removeNodeChildAt<Traits:Dynamic>(target:flight.Node<Traits>, in
 }
 
 inline function removeNodeChildren<Traits:Dynamic>(target:flight.Node<Traits>, ?beginIndex:Float, ?endIndex:Float):Void {
-  flight._js._fn.Node.removeNodeChildren(target, beginIndex, endIndex);
+  flight._js._fn.Node.removeNodeChildren(target, (beginIndex == null ? js.Syntax.code("undefined") : beginIndex), (endIndex == null ? js.Syntax.code("undefined") : endIndex));
 }
 
 inline function removeNodeOrderListEntry<Traits:Dynamic>(list:flight.NodeOrderList<Traits>, node:flight.Node<Traits>):Bool {

@@ -3,7 +3,7 @@
 package flight;
 
 inline function createEasingSamples(ease:flight.EasingFunction, count:Float, ?out:flight._internal._Float32Array):flight._internal._Float32Array {
-  return flight._js._fn.Easing.createEasingSamples(ease, count, out);
+  return flight._js._fn.Easing.createEasingSamples(ease, count, (out == null ? js.Syntax.code("undefined") : out));
 }
 
 inline function disableEasingGuards():Void {
@@ -71,7 +71,7 @@ inline function easeSmoothstepRange(edge0:Float, edge1:Float):flight.ScalarRemap
 }
 
 inline function easeSteps(count:Float, ?position:flight.StepPosition):flight.EasingFunction {
-  return flight._js._fn.Easing.easeSteps(count, position);
+  return flight._js._fn.Easing.easeSteps(count, (position == null ? js.Syntax.code("undefined") : position));
 }
 
 inline function enableEasingGuards():Void {
@@ -79,7 +79,7 @@ inline function enableEasingGuards():Void {
 }
 
 inline function getEasingDerivative(ease:flight.EasingFunction, t:Float, ?epsilon:Float):Float {
-  return flight._js._fn.Easing.getEasingDerivative(ease, t, epsilon);
+  return flight._js._fn.Easing.getEasingDerivative(ease, t, (epsilon == null ? js.Syntax.code("undefined") : epsilon));
 }
 
 inline function setEasingStepsGuard(guard:Null<flight.EasingStepsGuard>):Void {

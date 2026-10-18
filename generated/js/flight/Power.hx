@@ -5,11 +5,11 @@ package flight;
 typedef Power = flight._js.Power;
 
 inline function acquirePowerKeepAwake(hostPowerKeepAwake:flight.HostPowerKeepAwakeCapability, ?mode:flight.PowerKeepAwakeMode):flight._internal._Promise<flight.PowerKeepAwakeAcquireResult> {
-  return flight._js._fn.Power.acquirePowerKeepAwake(hostPowerKeepAwake, mode);
+  return flight._js._fn.Power.acquirePowerKeepAwake(hostPowerKeepAwake, (mode == null ? js.Syntax.code("undefined") : mode));
 }
 
 inline function attachPower(hostPowerStatus:Null<flight.HostPowerStatusCapability>, hostPowerChange:Null<flight.HostPowerChangeCapability>, hostPowerSessionLock:Null<flight.HostPowerSessionLockCapability>, hostPowerSuspension:Null<flight.HostPowerSuspensionCapability>, hostPowerThermal:Null<flight.HostPowerThermalCapability>, hostPowerIdle:Null<flight.HostPowerIdleCapability>, power:flight.Power, ?idleThresholdSeconds:Float):Void {
-  flight._js._fn.Power.attachPower(hostPowerStatus, hostPowerChange, hostPowerSessionLock, hostPowerSuspension, hostPowerThermal, hostPowerIdle, power, idleThresholdSeconds);
+  flight._js._fn.Power.attachPower(hostPowerStatus, hostPowerChange, hostPowerSessionLock, hostPowerSuspension, hostPowerThermal, hostPowerIdle, power, (idleThresholdSeconds == null ? js.Syntax.code("undefined") : idleThresholdSeconds));
 }
 
 inline function createPower():flight.Power {

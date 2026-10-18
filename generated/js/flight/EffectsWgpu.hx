@@ -231,7 +231,7 @@ inline function areWgpuEffectGuardsEnabled(state:flight.WgpuRenderState):Bool {
 }
 
 inline function beginWgpuEffectPass(pass:flight.WgpuRenderPass, pipeline:flight.WgpuEffectState, ?clear:flight.RenderTargetClear, ?colorSpace:flight.RenderTargetColorSpace):flight.WgpuRenderPass {
-  return flight._js._fn.EffectsWgpu.beginWgpuEffectPass(pass, pipeline, clear, colorSpace);
+  return flight._js._fn.EffectsWgpu.beginWgpuEffectPass(pass, pipeline, (clear == null ? js.Syntax.code("undefined") : clear), (colorSpace == null ? js.Syntax.code("undefined") : colorSpace));
 }
 
 inline function clearWgpuEffectTarget(state:flight.WgpuRenderState, target:flight.WgpuTextureRenderTarget):Void {
@@ -239,15 +239,15 @@ inline function clearWgpuEffectTarget(state:flight.WgpuRenderState, target:fligh
 }
 
 inline function createWgpuDualSourceEffectPipeline(state:flight.WgpuRenderState, fragmentWGSL:String, ?blend:flight.WgpuEffectBlendMode):flight.WgpuDualSourceEffectPipeline {
-  return flight._js._fn.EffectsWgpu.createWgpuDualSourceEffectPipeline(state, fragmentWGSL, blend);
+  return flight._js._fn.EffectsWgpu.createWgpuDualSourceEffectPipeline(state, fragmentWGSL, (blend == null ? js.Syntax.code("undefined") : blend));
 }
 
 inline function createWgpuEffectPipeline(state:flight.WgpuRenderState, fragmentWGSL:String, ?blend:flight.WgpuEffectBlendMode):flight.WgpuEffectPipeline {
-  return flight._js._fn.EffectsWgpu.createWgpuEffectPipeline(state, fragmentWGSL, blend);
+  return flight._js._fn.EffectsWgpu.createWgpuEffectPipeline(state, fragmentWGSL, (blend == null ? js.Syntax.code("undefined") : blend));
 }
 
 inline function createWgpuEffectState(state:flight.WgpuRenderState, ?options:flight.EffectStateOptions):flight.WgpuEffectState {
-  return flight._js._fn.EffectsWgpu.createWgpuEffectState(state, options);
+  return flight._js._fn.EffectsWgpu.createWgpuEffectState(state, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function destroyWgpuEffectState(state:flight.WgpuRenderState, pipeline:flight.WgpuEffectState):Void {
@@ -307,7 +307,7 @@ inline function getWgpuEffectPassState(state:flight.WgpuRenderState):{ uniformBG
 }
 
 inline function getWgpuEffectPipeline(state:flight.WgpuRenderState, key:String, fragmentWGSL:String, ?blend:Dynamic):flight.WgpuEffectPipeline {
-  return flight._js._fn.EffectsWgpu.getWgpuEffectPipeline(state, key, fragmentWGSL, blend);
+  return flight._js._fn.EffectsWgpu.getWgpuEffectPipeline(state, key, fragmentWGSL, (blend == null ? js.Syntax.code("undefined") : blend));
 }
 
 inline function getWgpuEffectRunner(state:flight.WgpuRenderState, kind:String):Null<flight.WgpuEffectRunner> {
@@ -323,7 +323,7 @@ inline function hasWgpuEffectRunner(state:flight.WgpuRenderState, kind:String):B
 }
 
 inline function initializeWgpuDualSourceEffectPipeline(out:flight.EntityConstruction<flight.WgpuEffectPipeline>, state:flight.WgpuRenderState, fragmentWGSL:String, ?blend:flight.WgpuEffectBlendMode):Void {
-  flight._js._fn.EffectsWgpu.initializeWgpuDualSourceEffectPipeline(out, state, fragmentWGSL, blend);
+  flight._js._fn.EffectsWgpu.initializeWgpuDualSourceEffectPipeline(out, state, fragmentWGSL, (blend == null ? js.Syntax.code("undefined") : blend));
 }
 
 inline function initializeWgpuEffectPipeline(out:flight.EntityConstruction<flight.WgpuEffectPipeline>, blendMode:flight.WgpuEffectBlendMode, pipeline:Dynamic):Void {
@@ -403,7 +403,7 @@ inline function registerWgpuDropShadowEffect(state:flight.WgpuRenderState):Void 
 }
 
 inline function registerWgpuEffect(state:flight.WgpuRenderState, kind:String, runner:flight.WgpuEffectRunner, ?isResolvable:flight.WgpuEffectResolver):Void {
-  flight._js._fn.EffectsWgpu.registerWgpuEffect(state, kind, runner, isResolvable);
+  flight._js._fn.EffectsWgpu.registerWgpuEffect(state, kind, runner, (isResolvable == null ? js.Syntax.code("undefined") : isResolvable));
 }
 
 inline function registerWgpuFilmGrainEffect(state:flight.WgpuRenderState):Void {

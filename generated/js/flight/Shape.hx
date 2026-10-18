@@ -9,43 +9,43 @@ inline function appendMorphShapeBeginFill(shape:flight.MorphShape, start:flight.
 }
 
 inline function appendMorphShapeBeginGradientFill(shape:flight.MorphShape, gradientType:flight.GradientType, start:flight.MorphShapeGradientEndpoint, end:flight.MorphShapeGradientEndpoint, ?spreadMethod:flight.SpreadMethod, ?interpolationMethod:flight.InterpolationMethod):Bool {
-  return flight._js._fn.Shape.appendMorphShapeBeginGradientFill(shape, gradientType, start, end, spreadMethod, interpolationMethod);
+  return flight._js._fn.Shape.appendMorphShapeBeginGradientFill(shape, gradientType, start, end, (spreadMethod == null ? js.Syntax.code("undefined") : spreadMethod), (interpolationMethod == null ? js.Syntax.code("undefined") : interpolationMethod));
 }
 
 inline function appendMorphShapeBeginTextureFill(shape:flight.MorphShape, texture:flight.Texture, ?startMatrix:Null<flight.Matrix>, ?endMatrix:Null<flight.Matrix>):Void {
-  flight._js._fn.Shape.appendMorphShapeBeginTextureFill(shape, texture, startMatrix, endMatrix);
+  flight._js._fn.Shape.appendMorphShapeBeginTextureFill(shape, texture, (startMatrix == null ? js.Syntax.code("undefined") : startMatrix), (endMatrix == null ? js.Syntax.code("undefined") : endMatrix));
 }
 
 inline function appendMorphShapeLineGradientStyle(shape:flight.MorphShape, gradientType:flight.GradientType, start:flight.MorphShapeGradientEndpoint, end:flight.MorphShapeGradientEndpoint, ?spreadMethod:flight.SpreadMethod, ?interpolationMethod:flight.InterpolationMethod):Bool {
-  return flight._js._fn.Shape.appendMorphShapeLineGradientStyle(shape, gradientType, start, end, spreadMethod, interpolationMethod);
+  return flight._js._fn.Shape.appendMorphShapeLineGradientStyle(shape, gradientType, start, end, (spreadMethod == null ? js.Syntax.code("undefined") : spreadMethod), (interpolationMethod == null ? js.Syntax.code("undefined") : interpolationMethod));
 }
 
 inline function appendMorphShapeLineStyle(shape:flight.MorphShape, start:flight.MorphShapeLineEndpoint, end:flight.MorphShapeLineEndpoint, ?pixelHinting:Bool, ?scaleMode:flight.LineScaleMode, ?caps:flight.CapsStyle, ?joints:flight.JointStyle, ?miterLimit:Float):Void {
-  flight._js._fn.Shape.appendMorphShapeLineStyle(shape, start, end, pixelHinting, scaleMode, caps, joints, miterLimit);
+  flight._js._fn.Shape.appendMorphShapeLineStyle(shape, start, end, (pixelHinting == null ? js.Syntax.code("undefined") : pixelHinting), (scaleMode == null ? js.Syntax.code("undefined") : scaleMode), (caps == null ? js.Syntax.code("undefined") : caps), (joints == null ? js.Syntax.code("undefined") : joints), (miterLimit == null ? js.Syntax.code("undefined") : miterLimit));
 }
 
 inline function appendMorphShapeLineTextureStyle(shape:flight.MorphShape, texture:flight.Texture, ?startMatrix:Null<flight.Matrix>, ?endMatrix:Null<flight.Matrix>):Void {
-  flight._js._fn.Shape.appendMorphShapeLineTextureStyle(shape, texture, startMatrix, endMatrix);
+  flight._js._fn.Shape.appendMorphShapeLineTextureStyle(shape, texture, (startMatrix == null ? js.Syntax.code("undefined") : startMatrix), (endMatrix == null ? js.Syntax.code("undefined") : endMatrix));
 }
 
 inline function appendMorphShapePath(shape:flight.MorphShape, ?morph:flight.PathMorph):flight.Path {
-  return flight._js._fn.Shape.appendMorphShapePath(shape, morph);
+  return flight._js._fn.Shape.appendMorphShapePath(shape, (morph == null ? js.Syntax.code("undefined") : morph));
 }
 
 inline function appendShapeArc(shape:flight.Shape, centerX:Float, centerY:Float, radius:Float, startAngle:Float, endAngle:Float, ?anticlockwise:Bool):Void {
-  flight._js._fn.Shape.appendShapeArc(shape, centerX, centerY, radius, startAngle, endAngle, anticlockwise);
+  flight._js._fn.Shape.appendShapeArc(shape, centerX, centerY, radius, startAngle, endAngle, (anticlockwise == null ? js.Syntax.code("undefined") : anticlockwise));
 }
 
 inline function appendShapeBeginFill(shape:flight.Shape, color:Float, ?alpha:Float):Void {
-  flight._js._fn.Shape.appendShapeBeginFill(shape, color, alpha);
+  flight._js._fn.Shape.appendShapeBeginFill(shape, color, (alpha == null ? js.Syntax.code("undefined") : alpha));
 }
 
 inline function appendShapeBeginGradientFill(shape:flight.Shape, gradientType:flight.GradientType, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>, ?matrix:Null<flight.Matrix>, ?spreadMethod:flight.SpreadMethod, ?interpolationMethod:flight.InterpolationMethod, ?focalPointRatio:Float):Void {
-  flight._js._fn.Shape.appendShapeBeginGradientFill(shape, gradientType, colors, alphas, ratios, matrix, spreadMethod, interpolationMethod, focalPointRatio);
+  flight._js._fn.Shape.appendShapeBeginGradientFill(shape, gradientType, colors, alphas, ratios, (matrix == null ? js.Syntax.code("undefined") : matrix), (spreadMethod == null ? js.Syntax.code("undefined") : spreadMethod), (interpolationMethod == null ? js.Syntax.code("undefined") : interpolationMethod), (focalPointRatio == null ? js.Syntax.code("undefined") : focalPointRatio));
 }
 
 inline function appendShapeBeginTextureFill(shape:flight.Shape, texture:flight.Texture, ?matrix:Null<flight.Matrix>):Void {
-  flight._js._fn.Shape.appendShapeBeginTextureFill(shape, texture, matrix);
+  flight._js._fn.Shape.appendShapeBeginTextureFill(shape, texture, (matrix == null ? js.Syntax.code("undefined") : matrix));
 }
 
 inline function appendShapeCircle(shape:flight.Shape, centerX:Float, centerY:Float, radius:Float):Void {
@@ -57,7 +57,7 @@ inline function appendShapeCubicCurveTo(shape:flight.Shape, controlX1:Float, con
 }
 
 inline function appendShapeDrawTriangles(shape:flight.Shape, vertices:Array<Float>, ?indices:Null<Array<Float>>, ?uvtData:Null<Array<Float>>, ?culling:flight.TriangleCulling):Void {
-  flight._js._fn.Shape.appendShapeDrawTriangles(shape, vertices, indices, uvtData, culling);
+  flight._js._fn.Shape.appendShapeDrawTriangles(shape, vertices, (indices == null ? js.Syntax.code("undefined") : indices), (uvtData == null ? js.Syntax.code("undefined") : uvtData), (culling == null ? js.Syntax.code("undefined") : culling));
 }
 
 inline function appendShapeEllipse(shape:flight.Shape, centerX:Float, centerY:Float, radiusX:Float, radiusY:Float):Void {
@@ -77,15 +77,15 @@ inline function appendShapeGeometryCommand(path:flight.Path, name:String, comman
 }
 
 inline function appendShapeLineGradientStyle(shape:flight.Shape, gradientType:flight.GradientType, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>, ?matrix:Null<flight.Matrix>, ?spreadMethod:flight.SpreadMethod, ?interpolationMethod:flight.InterpolationMethod, ?focalPointRatio:Float):Void {
-  flight._js._fn.Shape.appendShapeLineGradientStyle(shape, gradientType, colors, alphas, ratios, matrix, spreadMethod, interpolationMethod, focalPointRatio);
+  flight._js._fn.Shape.appendShapeLineGradientStyle(shape, gradientType, colors, alphas, ratios, (matrix == null ? js.Syntax.code("undefined") : matrix), (spreadMethod == null ? js.Syntax.code("undefined") : spreadMethod), (interpolationMethod == null ? js.Syntax.code("undefined") : interpolationMethod), (focalPointRatio == null ? js.Syntax.code("undefined") : focalPointRatio));
 }
 
 inline function appendShapeLineStyle(shape:flight.Shape, ?thickness:Float, color:Float, ?alpha:Float, ?pixelHinting:Bool, ?scaleMode:flight.LineScaleMode, ?caps:flight.CapsStyle, ?joints:flight.JointStyle, ?miterLimit:Float):Void {
-  flight._js._fn.Shape.appendShapeLineStyle(shape, thickness, color, alpha, pixelHinting, scaleMode, caps, joints, miterLimit);
+  flight._js._fn.Shape.appendShapeLineStyle(shape, (thickness == null ? js.Syntax.code("undefined") : thickness), color, (alpha == null ? js.Syntax.code("undefined") : alpha), (pixelHinting == null ? js.Syntax.code("undefined") : pixelHinting), (scaleMode == null ? js.Syntax.code("undefined") : scaleMode), (caps == null ? js.Syntax.code("undefined") : caps), (joints == null ? js.Syntax.code("undefined") : joints), (miterLimit == null ? js.Syntax.code("undefined") : miterLimit));
 }
 
 inline function appendShapeLineTextureStyle(shape:flight.Shape, texture:flight.Texture, ?matrix:Null<flight.Matrix>):Void {
-  flight._js._fn.Shape.appendShapeLineTextureStyle(shape, texture, matrix);
+  flight._js._fn.Shape.appendShapeLineTextureStyle(shape, texture, (matrix == null ? js.Syntax.code("undefined") : matrix));
 }
 
 inline function appendShapeLineTo(shape:flight.Shape, x:Float, y:Float):Void {
@@ -97,7 +97,7 @@ inline function appendShapeMoveTo(shape:flight.Shape, x:Float, y:Float):Void {
 }
 
 inline function appendShapePath(shape:flight.Shape, commands:Array<Float>, pathData:Array<Float>, ?winding:flight.PathWinding):Void {
-  flight._js._fn.Shape.appendShapePath(shape, commands, pathData, winding);
+  flight._js._fn.Shape.appendShapePath(shape, commands, pathData, (winding == null ? js.Syntax.code("undefined") : winding));
 }
 
 inline function appendShapePolygon(shape:flight.Shape, points:Array<Float>):Void {
@@ -149,11 +149,11 @@ inline function clearShapeCommands(shape:flight.Shape):Void {
 }
 
 inline function compactStrokePath(path:flight.Path, style:flight.StrokeStyle, ?tolerance:Float):flight.Path {
-  return flight._js._fn.Shape.compactStrokePath(path, style, tolerance);
+  return flight._js._fn.Shape.compactStrokePath(path, style, (tolerance == null ? js.Syntax.code("undefined") : tolerance));
 }
 
 inline function computeShapeBoundsRectangle(out:flight.Rectangle, source:flight.Shape, ?mode:flight.ShapeBoundsMode):Bool {
-  return flight._js._fn.Shape.computeShapeBoundsRectangle(out, source, mode);
+  return flight._js._fn.Shape.computeShapeBoundsRectangle(out, source, (mode == null ? js.Syntax.code("undefined") : mode));
 }
 
 inline function computeShapeLocalBoundsRectangle(out:flight.Rectangle, source:flight.BoundsNode<flight.Node2DTraits>):Void {
@@ -165,7 +165,7 @@ inline function copyShapeCommands(out:flight.Shape, source:flight.Shape):Void {
 }
 
 inline function createMorphShape(morph:flight.PathMorph, ?obj:flight.PartialNode<flight.MorphShape>):flight.MorphShape {
-  return flight._js._fn.Shape.createMorphShape(morph, obj);
+  return flight._js._fn.Shape.createMorphShape(morph, (obj == null ? js.Syntax.code("undefined") : obj));
 }
 
 inline function createMorphShapeAnimationTarget(shape:flight.MorphShape):flight.MorphShapeAnimationTarget {
@@ -173,7 +173,7 @@ inline function createMorphShapeAnimationTarget(shape:flight.MorphShape):flight.
 }
 
 inline function createMorphShapeData(morph:flight.PathMorph, ?data:Dynamic):flight.MorphShapeData {
-  return flight._js._fn.Shape.createMorphShapeData(morph, data);
+  return flight._js._fn.Shape.createMorphShapeData(morph, (data == null ? js.Syntax.code("undefined") : data));
 }
 
 inline function createMorphShapeRuntime():flight.MorphShapeRuntime {
@@ -181,11 +181,11 @@ inline function createMorphShapeRuntime():flight.MorphShapeRuntime {
 }
 
 inline function createScale9Shape(scale9Grid:flight.RectangleLike, ?obj:flight.PartialNode<flight.Scale9Shape>):flight.Scale9Shape {
-  return flight._js._fn.Shape.createScale9Shape(scale9Grid, obj);
+  return flight._js._fn.Shape.createScale9Shape(scale9Grid, (obj == null ? js.Syntax.code("undefined") : obj));
 }
 
 inline function createScale9ShapeData(scale9Grid:flight.RectangleLike, ?data:Dynamic):flight.Scale9ShapeData {
-  return flight._js._fn.Shape.createScale9ShapeData(scale9Grid, data);
+  return flight._js._fn.Shape.createScale9ShapeData(scale9Grid, (data == null ? js.Syntax.code("undefined") : data));
 }
 
 inline function createScale9ShapeRuntime():flight.Scale9ShapeRuntime {
@@ -193,11 +193,11 @@ inline function createScale9ShapeRuntime():flight.Scale9ShapeRuntime {
 }
 
 inline function createShape(?obj:flight.PartialNode<flight.Shape>):flight.Shape {
-  return flight._js._fn.Shape.createShape(obj);
+  return flight._js._fn.Shape.createShape((obj == null ? js.Syntax.code("undefined") : obj));
 }
 
 inline function createShapeData(?data:Dynamic):flight.ShapeData {
-  return flight._js._fn.Shape.createShapeData(data);
+  return flight._js._fn.Shape.createShapeData((data == null ? js.Syntax.code("undefined") : data));
 }
 
 inline function createShapeRuntime():flight.ShapeRuntime {
@@ -217,11 +217,11 @@ inline function explainMorphShapeGradientEndpoints(start:flight.MorphShapeGradie
 }
 
 inline function explainShapeBounds(source:flight.Shape, ?mode:flight.ShapeBoundsMode):flight.ShapeBoundsExplanation {
-  return flight._js._fn.Shape.explainShapeBounds(source, mode);
+  return flight._js._fn.Shape.explainShapeBounds(source, (mode == null ? js.Syntax.code("undefined") : mode));
 }
 
 inline function explainShapeTessellation(commands:Array<flight.ShapeCommandToken>, ?strokePathTessellationEnabled:Bool):flight.ShapeTessellationExplanation {
-  return flight._js._fn.Shape.explainShapeTessellation(commands, strokePathTessellationEnabled);
+  return flight._js._fn.Shape.explainShapeTessellation(commands, (strokePathTessellationEnabled == null ? js.Syntax.code("undefined") : strokePathTessellationEnabled));
 }
 
 inline function getMorphShapeGradientEndpointIssue(start:flight.MorphShapeGradientEndpoint, end:flight.MorphShapeGradientEndpoint):Float {
@@ -241,7 +241,7 @@ inline function getScale9ShapeRuntime(source:flight.Scale9Shape):flight.Scale9Sh
 }
 
 inline function getShapeBounds(out:flight.Rectangle, source:flight.Shape, ?mode:flight.ShapeBoundsMode):Bool {
-  return flight._js._fn.Shape.getShapeBounds(out, source, mode);
+  return flight._js._fn.Shape.getShapeBounds(out, source, (mode == null ? js.Syntax.code("undefined") : mode));
 }
 
 inline function getShapeBoundsCommand(key:String):Null<flight.ShapeBoundsCommand> {
@@ -289,15 +289,15 @@ inline function initializeMorphShapeAnimationTarget(out:flight.EntityConstructio
 }
 
 inline function initializeMorphShapeData(out:flight.EntityConstruction<flight.MorphShapeData>, morph:flight.PathMorph, ?data:Dynamic):Void {
-  flight._js._fn.Shape.initializeMorphShapeData(out, morph, data);
+  flight._js._fn.Shape.initializeMorphShapeData(out, morph, (data == null ? js.Syntax.code("undefined") : data));
 }
 
 inline function initializeScale9ShapeData(out:flight.EntityConstruction<flight.Scale9ShapeData>, scale9Grid:flight.RectangleLike, ?data:Dynamic):Void {
-  flight._js._fn.Shape.initializeScale9ShapeData(out, scale9Grid, data);
+  flight._js._fn.Shape.initializeScale9ShapeData(out, scale9Grid, (data == null ? js.Syntax.code("undefined") : data));
 }
 
 inline function initializeShapeData(out:flight.EntityConstruction<flight.ShapeData>, ?data:Dynamic):Void {
-  flight._js._fn.Shape.initializeShapeData(out, data);
+  flight._js._fn.Shape.initializeShapeData(out, (data == null ? js.Syntax.code("undefined") : data));
 }
 
 inline function isShapeEmpty(source:flight.Shape):Bool {

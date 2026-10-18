@@ -23,7 +23,7 @@ inline function copyOrbitCameraController(out:flight.OrbitCameraController, sour
 }
 
 inline function createCameraShake(?options:flight.CameraShakeOptions):flight.CameraShake {
-  return flight._js._fn.CameraControls.createCameraShake(options);
+  return flight._js._fn.CameraControls.createCameraShake((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createCameraShakeOffset():flight.CameraShakeOffset {
@@ -31,11 +31,11 @@ inline function createCameraShakeOffset():flight.CameraShakeOffset {
 }
 
 inline function createFlyCameraController(?options:flight.FlyCameraControllerOptions):flight.FlyCameraController {
-  return flight._js._fn.CameraControls.createFlyCameraController(options);
+  return flight._js._fn.CameraControls.createFlyCameraController((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createOrbitCameraController(?options:flight.OrbitCameraControllerOptions):flight.OrbitCameraController {
-  return flight._js._fn.CameraControls.createOrbitCameraController(options);
+  return flight._js._fn.CameraControls.createOrbitCameraController((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function dollyOrbitCameraController(controller:flight.OrbitCameraController, deltaDistance:Float):Void {
@@ -43,15 +43,15 @@ inline function dollyOrbitCameraController(controller:flight.OrbitCameraControll
 }
 
 inline function frameOrbitCameraControllerToSphere(controller:flight.OrbitCameraController, projection:flight.Projection, sphere:flight.BoundingSphereLike, aspect:Float, ?padding:Float):Bool {
-  return flight._js._fn.CameraControls.frameOrbitCameraControllerToSphere(controller, projection, sphere, aspect, padding);
+  return flight._js._fn.CameraControls.frameOrbitCameraControllerToSphere(controller, projection, sphere, aspect, (padding == null ? js.Syntax.code("undefined") : padding));
 }
 
 inline function getPerspectiveProjectionFrameDistanceToSphere(projection:flight.PerspectiveProjection, radius:Float, aspect:Float, ?padding:Float):Float {
-  return flight._js._fn.CameraControls.getPerspectiveProjectionFrameDistanceToSphere(projection, radius, aspect, padding);
+  return flight._js._fn.CameraControls.getPerspectiveProjectionFrameDistanceToSphere(projection, radius, aspect, (padding == null ? js.Syntax.code("undefined") : padding));
 }
 
 inline function initializeCameraShake(out:flight.EntityConstruction<flight.CameraShake>, ?options:flight.CameraShakeOptions):Void {
-  flight._js._fn.CameraControls.initializeCameraShake(out, options);
+  flight._js._fn.CameraControls.initializeCameraShake(out, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function initializeCameraShakeOffset(out:flight.EntityConstruction<flight.CameraShakeOffset>):Void {
@@ -59,11 +59,11 @@ inline function initializeCameraShakeOffset(out:flight.EntityConstruction<flight
 }
 
 inline function initializeFlyCameraController(out:flight.EntityConstruction<flight.FlyCameraController>, ?options:flight.FlyCameraControllerOptions):Void {
-  flight._js._fn.CameraControls.initializeFlyCameraController(out, options);
+  flight._js._fn.CameraControls.initializeFlyCameraController(out, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function initializeOrbitCameraController(out:flight.EntityConstruction<flight.OrbitCameraController>, ?options:flight.OrbitCameraControllerOptions):Void {
-  flight._js._fn.CameraControls.initializeOrbitCameraController(out, options);
+  flight._js._fn.CameraControls.initializeOrbitCameraController(out, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function lookFlyCameraController(controller:flight.FlyCameraController, deltaYaw:Float, deltaPitch:Float):Void {
@@ -87,11 +87,11 @@ inline function resetCameraShake(shake:flight.CameraShake):Void {
 }
 
 inline function resetFlyCameraController(controller:flight.FlyCameraController, ?options:flight.FlyCameraControllerOptions):Void {
-  flight._js._fn.CameraControls.resetFlyCameraController(controller, options);
+  flight._js._fn.CameraControls.resetFlyCameraController(controller, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function resetOrbitCameraController(controller:flight.OrbitCameraController, ?options:flight.OrbitCameraControllerOptions):Void {
-  flight._js._fn.CameraControls.resetOrbitCameraController(controller, options);
+  flight._js._fn.CameraControls.resetOrbitCameraController(controller, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function rotateOrbitCameraController(controller:flight.OrbitCameraController, deltaAzimuth:Float, deltaPolar:Float):Void {
@@ -99,7 +99,7 @@ inline function rotateOrbitCameraController(controller:flight.OrbitCameraControl
 }
 
 inline function setOrthographicProjectionFrameToSphere(projection:flight.OrthographicProjection, radius:Float, aspect:Float, ?padding:Float):Void {
-  flight._js._fn.CameraControls.setOrthographicProjectionFrameToSphere(projection, radius, aspect, padding);
+  flight._js._fn.CameraControls.setOrthographicProjectionFrameToSphere(projection, radius, aspect, (padding == null ? js.Syntax.code("undefined") : padding));
 }
 
 inline function snapFlyCameraController(controller:flight.FlyCameraController):Void {
@@ -111,7 +111,7 @@ inline function snapOrbitCameraController(controller:flight.OrbitCameraControlle
 }
 
 inline function updateCamera2DFollow(camera:flight.Camera2D, viewportWidth:Float, viewportHeight:Float, targetX:Float, targetY:Float, deltaTime:Float, ?options:flight.Camera2DFollowOptions):Void {
-  flight._js._fn.CameraControls.updateCamera2DFollow(camera, viewportWidth, viewportHeight, targetX, targetY, deltaTime, options);
+  flight._js._fn.CameraControls.updateCamera2DFollow(camera, viewportWidth, viewportHeight, targetX, targetY, deltaTime, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function updateCameraShake(shake:flight.CameraShake, dt:Float, out:flight.CameraShakeOffset):Void {

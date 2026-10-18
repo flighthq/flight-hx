@@ -23,27 +23,27 @@ inline function getRegisteredParticleFormats():Array<String> {
 }
 
 inline function parseLibgdxParticle(text:String, ?options:flight.LibgdxParseOptions):flight.ParticleEmitterConfig {
-  return flight._js._fn.ParticlesFormats.parseLibgdxParticle(text, options);
+  return flight._js._fn.ParticlesFormats.parseLibgdxParticle(text, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function parseLibgdxParticleDocument(text:String, ?options:flight.LibgdxParseOptions):flight.LibgdxParseResult {
-  return flight._js._fn.ParticlesFormats.parseLibgdxParticleDocument(text, options);
+  return flight._js._fn.ParticlesFormats.parseLibgdxParticleDocument(text, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function parseParticleConfig(text:String, ?options:flight.ParseParticleConfigOptions):flight.ParticleEmitterConfig {
-  return flight._js._fn.ParticlesFormats.parseParticleConfig(text, options);
+  return flight._js._fn.ParticlesFormats.parseParticleConfig(text, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function parseParticleConfigDocument(text:String, ?options:flight.ParseParticleConfigOptions):flight.ParticleConfigParseResult {
-  return flight._js._fn.ParticlesFormats.parseParticleConfigDocument(text, options);
+  return flight._js._fn.ParticlesFormats.parseParticleConfigDocument(text, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function parseParticleDesignerPlist(plistXml:String, ?options:flight.ParticleDesignerParseOptions):flight.ParticleEmitterConfig {
-  return flight._js._fn.ParticlesFormats.parseParticleDesignerPlist(plistXml, options);
+  return flight._js._fn.ParticlesFormats.parseParticleDesignerPlist(plistXml, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function parseParticleDesignerPlistDocument(plistXml:String, ?options:flight.ParticleDesignerParseOptions):flight.ParticleDesignerParseResult {
-  return flight._js._fn.ParticlesFormats.parseParticleDesignerPlistDocument(plistXml, options);
+  return flight._js._fn.ParticlesFormats.parseParticleDesignerPlistDocument(plistXml, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function parsePixiParticle(json:String):flight.ParticleEmitterConfig {
@@ -55,7 +55,7 @@ inline function parsePixiParticleDocument(json:String):flight.PixiParseResult {
 }
 
 inline function parseRegisteredParticleFormat(text:String, kind:String, ?options:flight.ParseParticleConfigOptions):flight.ParticleConfigParseResult {
-  return flight._js._fn.ParticlesFormats.parseRegisteredParticleFormat(text, kind, options);
+  return flight._js._fn.ParticlesFormats.parseRegisteredParticleFormat(text, kind, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function parseSpineParticle(json:String):flight.ParticleEmitterConfig {
@@ -67,19 +67,19 @@ inline function parseSpineParticleDocument(json:String):flight.SpineParseResult 
 }
 
 inline function parseStarlingPex(xml:String, ?options:flight.StarlingPexParseOptions):flight.ParticleEmitterConfig {
-  return flight._js._fn.ParticlesFormats.parseStarlingPex(xml, options);
+  return flight._js._fn.ParticlesFormats.parseStarlingPex(xml, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function parseStarlingPexDocument(xml:String, ?options:flight.StarlingPexParseOptions):flight.StarlingPexParseResult {
-  return flight._js._fn.ParticlesFormats.parseStarlingPexDocument(xml, options);
+  return flight._js._fn.ParticlesFormats.parseStarlingPexDocument(xml, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function parseUnityParticle(json:String, ?options:flight.UnityParseOptions):flight.ParticleEmitterConfig {
-  return flight._js._fn.ParticlesFormats.parseUnityParticle(json, options);
+  return flight._js._fn.ParticlesFormats.parseUnityParticle(json, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function parseUnityParticleDocument(json:String, ?options:flight.UnityParseOptions):flight.UnityParseResult {
-  return flight._js._fn.ParticlesFormats.parseUnityParticleDocument(json, options);
+  return flight._js._fn.ParticlesFormats.parseUnityParticleDocument(json, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function registerBuiltInParticleFormats():Void {
@@ -91,43 +91,43 @@ inline function registerParticleFormat(kind:flight.ParticleFormatKind, codec:fli
 }
 
 inline function serializeLibgdxParticle(config:flight.ParticleEmitterConfig, ?existing:Dynamic, ?options:flight.LibgdxSerializeOptions):String {
-  return flight._js._fn.ParticlesFormats.serializeLibgdxParticle(config, existing, options);
+  return flight._js._fn.ParticlesFormats.serializeLibgdxParticle(config, (existing == null ? js.Syntax.code("undefined") : existing), (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function serializeLibgdxParticleDocument(config:flight.ParticleEmitterConfig, ?existing:Dynamic, ?options:flight.LibgdxSerializeOptions):flight.ParticleSerializeResult {
-  return flight._js._fn.ParticlesFormats.serializeLibgdxParticleDocument(config, existing, options);
+  return flight._js._fn.ParticlesFormats.serializeLibgdxParticleDocument(config, (existing == null ? js.Syntax.code("undefined") : existing), (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function serializeParticleDesignerPlist(config:flight.ParticleEmitterConfig, ?existing:Dynamic, ?options:flight.ParticleDesignerSerializeOptions):String {
-  return flight._js._fn.ParticlesFormats.serializeParticleDesignerPlist(config, existing, options);
+  return flight._js._fn.ParticlesFormats.serializeParticleDesignerPlist(config, (existing == null ? js.Syntax.code("undefined") : existing), (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function serializeParticleDesignerPlistDocument(config:flight.ParticleEmitterConfig, ?existing:Dynamic, ?options:flight.ParticleDesignerSerializeOptions):flight.ParticleSerializeResult {
-  return flight._js._fn.ParticlesFormats.serializeParticleDesignerPlistDocument(config, existing, options);
+  return flight._js._fn.ParticlesFormats.serializeParticleDesignerPlistDocument(config, (existing == null ? js.Syntax.code("undefined") : existing), (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function serializeSpineParticle(config:flight.ParticleEmitterConfig, ?existing:Dynamic):String {
-  return flight._js._fn.ParticlesFormats.serializeSpineParticle(config, existing);
+  return flight._js._fn.ParticlesFormats.serializeSpineParticle(config, (existing == null ? js.Syntax.code("undefined") : existing));
 }
 
 inline function serializeSpineParticleDocument(config:flight.ParticleEmitterConfig, ?existing:Dynamic):flight.ParticleSerializeResult {
-  return flight._js._fn.ParticlesFormats.serializeSpineParticleDocument(config, existing);
+  return flight._js._fn.ParticlesFormats.serializeSpineParticleDocument(config, (existing == null ? js.Syntax.code("undefined") : existing));
 }
 
 inline function serializeStarlingPex(config:flight.ParticleEmitterConfig, ?existing:Dynamic, ?options:flight.StarlingPexSerializeOptions):String {
-  return flight._js._fn.ParticlesFormats.serializeStarlingPex(config, existing, options);
+  return flight._js._fn.ParticlesFormats.serializeStarlingPex(config, (existing == null ? js.Syntax.code("undefined") : existing), (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function serializeStarlingPexDocument(config:flight.ParticleEmitterConfig, ?existing:Dynamic, ?options:flight.StarlingPexSerializeOptions):flight.ParticleSerializeResult {
-  return flight._js._fn.ParticlesFormats.serializeStarlingPexDocument(config, existing, options);
+  return flight._js._fn.ParticlesFormats.serializeStarlingPexDocument(config, (existing == null ? js.Syntax.code("undefined") : existing), (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function serializeUnityParticle(config:flight.ParticleEmitterConfig, ?existing:Dynamic, ?options:flight.UnitySerializeOptions):String {
-  return flight._js._fn.ParticlesFormats.serializeUnityParticle(config, existing, options);
+  return flight._js._fn.ParticlesFormats.serializeUnityParticle(config, (existing == null ? js.Syntax.code("undefined") : existing), (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function serializeUnityParticleDocument(config:flight.ParticleEmitterConfig, ?existing:Dynamic, ?options:flight.UnitySerializeOptions):flight.ParticleSerializeResult {
-  return flight._js._fn.ParticlesFormats.serializeUnityParticleDocument(config, existing, options);
+  return flight._js._fn.ParticlesFormats.serializeUnityParticleDocument(config, (existing == null ? js.Syntax.code("undefined") : existing), (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function unregisterParticleFormat(kind:flight.ParticleFormatKind):Bool {

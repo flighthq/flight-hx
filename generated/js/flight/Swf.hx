@@ -23,7 +23,7 @@ inline function areSwfGuardsEnabled():Bool {
 }
 
 inline function buildFrameScriptAbc(?handlerNameIndex:Float):flight._internal._UInt8Array {
-  return flight._js._fn.Swf.buildFrameScriptAbc(handlerNameIndex);
+  return flight._js._fn.Swf.buildFrameScriptAbc((handlerNameIndex == null ? js.Syntax.code("undefined") : handlerNameIndex));
 }
 
 inline function collectSwfContentCapabilities(source:flight._internal._UInt8Array, deflate:Null<flight.HostDecompressDeflateCapability>, lzma:Null<flight.HostDecompressLzmaCapability>):Null<flight.SwfContentCapabilities> {
@@ -43,19 +43,19 @@ inline function countSwfSignedBits(values:Array<Float>):Float {
 }
 
 inline function createGlyphOutlineSourcesFromSwf(source:flight._internal._UInt8Array, options:flight.SwfParseOptions, ?diagnostics:Array<flight.ImportDiagnostic>):Null<flight._internal._Map<Float, flight.GlyphOutlineSource>> {
-  return flight._js._fn.Swf.createGlyphOutlineSourcesFromSwf(source, options, diagnostics);
+  return flight._js._fn.Swf.createGlyphOutlineSourcesFromSwf(source, options, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function createScene2DFromSwf(source:flight._internal._UInt8Array, options:flight.SwfParseOptions, ?diagnostics:Array<flight.ImportDiagnostic>):Null<flight.Scene2DDocument> {
-  return flight._js._fn.Swf.createScene2DFromSwf(source, options, diagnostics);
+  return flight._js._fn.Swf.createScene2DFromSwf(source, options, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function createScene2DImportFromSwf(source:flight._internal._UInt8Array, options:flight.SwfParseOptions, ?diagnostics:Array<flight.ImportDiagnostic>):Null<flight.SwfDocumentImport> {
-  return flight._js._fn.Swf.createScene2DImportFromSwf(source, options, diagnostics);
+  return flight._js._fn.Swf.createScene2DImportFromSwf(source, options, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function createScene2DSymbolFromSwf(source:flight._internal._UInt8Array, linkageName:String, options:flight.SwfParseOptions, ?diagnostics:Array<flight.ImportDiagnostic>):Null<flight.Scene2DDocument> {
-  return flight._js._fn.Swf.createScene2DSymbolFromSwf(source, linkageName, options, diagnostics);
+  return flight._js._fn.Swf.createScene2DSymbolFromSwf(source, linkageName, options, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function createSwfDisplayObject(bounds:Null<flight.SwfTagRectangle>):flight.DisplayObject {
@@ -83,7 +83,7 @@ inline function createSwfMatrixRecord(a:Float, b:Float, c:Float, d:Float, tx:Flo
 }
 
 inline function createSwfMorphShape(reader:flight._js.SwfReader, version:Float, ?resolveBitmapFill:Null<(Float, Bool, Bool)->Null<flight.Texture2D>>, ?diagnostics:Array<flight.ImportDiagnostic>):Null<flight.MorphShape> {
-  return flight._js._fn.Swf.createSwfMorphShape(reader, version, resolveBitmapFill, diagnostics);
+  return flight._js._fn.Swf.createSwfMorphShape(reader, version, (resolveBitmapFill == null ? js.Syntax.code("undefined") : resolveBitmapFill), (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function createSwfMorphShapeTarget(decode:()->Null<flight.MorphShape>, bounds:Null<flight.SwfTagRectangle>, morphBounds:Null<{ end:flight.SwfTagRectangle, start:flight.SwfTagRectangle }>):flight.Node2D {
@@ -99,15 +99,15 @@ inline function createSwfRectangleRecord(xMin:Float, xMax:Float, yMin:Float, yMa
 }
 
 inline function createSwfShape(reader:flight._js.SwfReader, version:Float, ?resolveBitmapFill:Null<(Float, Bool, Bool)->Null<flight.Texture2D>>, ?diagnostics:Array<flight.ImportDiagnostic>):Null<flight.Shape> {
-  return flight._js._fn.Swf.createSwfShape(reader, version, resolveBitmapFill, diagnostics);
+  return flight._js._fn.Swf.createSwfShape(reader, version, (resolveBitmapFill == null ? js.Syntax.code("undefined") : resolveBitmapFill), (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function createSwfTagRecord(code:Float, ?body:flight._internal._UInt8Array):flight._internal._UInt8Array {
-  return flight._js._fn.Swf.createSwfTagRecord(code, body);
+  return flight._js._fn.Swf.createSwfTagRecord(code, (body == null ? js.Syntax.code("undefined") : body));
 }
 
 inline function createSwfTestParseState(?dispatch:flight.SwfTagHandlerDispatch):flight.SwfTagParseState {
-  return flight._js._fn.Swf.createSwfTestParseState(dispatch);
+  return flight._js._fn.Swf.createSwfTestParseState((dispatch == null ? js.Syntax.code("undefined") : dispatch));
 }
 
 inline function createSwfTextShape(reader:flight._js.SwfReader, version:Float, fonts:flight._internal._Map<Float, flight.GlyphOutlineSource>):Null<flight.Shape> {
@@ -119,7 +119,7 @@ inline function createSwfTexturedSprite(texture:flight.Texture2D, bounds:Null<fl
 }
 
 inline function decodeSwfImage(bytes:flight._internal._UInt8Array, mimeType:String, deflate:flight.HostDecompressDeflateCapability, ?options:flight.ImageDecodeOptions):flight._internal._Promise<Null<flight.DecodedImage>> {
-  return flight._js._fn.Swf.decodeSwfImage(bytes, mimeType, deflate, options);
+  return flight._js._fn.Swf.decodeSwfImage(bytes, mimeType, deflate, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function disableSwfGuards():Void {
@@ -187,7 +187,7 @@ inline function readBigEndianUint32(source:flight._internal._UInt8Array, offset:
 }
 
 inline function readSwfAbcFrameScripts(source:flight._internal._UInt8Array, ?diagnostics:Array<flight.ImportDiagnostic>):Null<flight._internal._Map<String, flight._internal._Map<Float, flight.FrameScript>>> {
-  return flight._js._fn.Swf.readSwfAbcFrameScripts(source, diagnostics);
+  return flight._js._fn.Swf.readSwfAbcFrameScripts(source, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function readSwfBoundedDefinitionHeader(body:flight.SwfTagReader, state:flight.SwfTagParseState, hasEndBounds:Bool):Float {
@@ -195,7 +195,7 @@ inline function readSwfBoundedDefinitionHeader(body:flight.SwfTagReader, state:f
 }
 
 inline function readSwfColorTransform(reader:flight.SwfTagReader, ?channelCount:Float):{ alpha:Float, colorAdjustments:Null<Array<flight.Adjustment>> } {
-  return flight._js._fn.Swf.readSwfColorTransform(reader, channelCount);
+  return flight._js._fn.Swf.readSwfColorTransform(reader, (channelCount == null ? js.Syntax.code("undefined") : channelCount));
 }
 
 inline function readSwfEditTextFactory(reader:flight._js.SwfReader, width:Float, height:Float):Null<((Float)->String)->flight.RichText> {
@@ -207,11 +207,11 @@ inline function readSwfExportedSymbolNames(source:flight._internal._UInt8Array, 
 }
 
 inline function readSwfFilterList(reader:flight._js.SwfReader, outEffects:Array<flight.Effect>, outAdjustments:Array<flight.Adjustment>, ?diagnostics:Array<flight.ImportDiagnostic>):Bool {
-  return flight._js._fn.Swf.readSwfFilterList(reader, outEffects, outAdjustments, diagnostics);
+  return flight._js._fn.Swf.readSwfFilterList(reader, outEffects, outAdjustments, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function readSwfFontGlyphOutlineSource(reader:flight._js.SwfReader, version:Float, ?diagnostics:Array<flight.ImportDiagnostic>, ?characterId:Float):Null<flight.GlyphOutlineSource> {
-  return flight._js._fn.Swf.readSwfFontGlyphOutlineSource(reader, version, diagnostics, characterId);
+  return flight._js._fn.Swf.readSwfFontGlyphOutlineSource(reader, version, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics), (characterId == null ? js.Syntax.code("undefined") : characterId));
 }
 
 inline function readSwfFontGlyphs(reader:flight._js.SwfReader, version:Float):Null<Array<Null<flight.Shape>>> {
@@ -283,7 +283,7 @@ inline function transformSwfRectangle(bounds:flight.SwfTagRectangle, matrix:flig
 }
 
 inline function uncompressSwfSource(source:flight._internal._UInt8Array, deflate:Null<flight.HostDecompressDeflateCapability>, lzma:Null<flight.HostDecompressLzmaCapability>, ?diagnostics:Array<flight.ImportDiagnostic>):Null<flight._internal._UInt8Array> {
-  return flight._js._fn.Swf.uncompressSwfSource(source, deflate, lzma, diagnostics);
+  return flight._js._fn.Swf.uncompressSwfSource(source, deflate, lzma, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 var EMPTY_ADJUSTMENTS(get, set):Array<flight.Adjustment>;

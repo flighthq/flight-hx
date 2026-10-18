@@ -48,6 +48,11 @@
     ]
   },
   "nativeOverrides": {
+    "optionalScalarAdapters": [
+      "flight.Math.approxEqual",
+      "flight.Math.approxEqualRelative",
+      "flight.Math.approxZero"
+    ],
     "refusals": [
       {
         "publicName": "flight.Skeleton2dFormats.clampUnit",
@@ -55,6 +60,60 @@
         "code": "flight-cpp-header-compile-failed",
         "detail": "Unrelated generated functions in the header contain unresolved flight::Any conversions, comparisons, and indexing."
       }
+    ],
+    "requiredScalarFunctions": [
+      "flight.Effects.computeAcesToneMap",
+      "flight.Effects.computeBoxBlurPassRadius",
+      "flight.Effects.computeBoxBlurRadius",
+      "flight.Effects.computeDepthOfFieldCoc",
+      "flight.Effects.computeExposureScale",
+      "flight.Effects.computeGaussianRadiusFromSigma",
+      "flight.Effects.computeGaussianSigmaForBlurRadius",
+      "flight.Effects.computeGaussianSigmaFromRadius",
+      "flight.Effects.computeLinearDepthFromNonlinear",
+      "flight.Effects.computeReinhardExtendedToneMap",
+      "flight.Effects.computeReinhardToneMap",
+      "flight.Effects.computeUncharted2ToneMap",
+      "flight.Effects.getBlurDownsampleLevel",
+      "flight.Effects.getBlurResidualSigma",
+      "flight.Effects.getGaussianKernelSize",
+      "flight.Effects.getLinearSampledGaussianTapCount",
+      "flight.Bitmapfont.packBitmapFontKerningKey",
+      "flight.Collision.packContactFeatureId",
+      "flight.FontFormats.getWoff2BboxBitmapByteLength",
+      "flight.FontFormats.isWoff2PointOnCurve",
+      "flight.FontFormats.rankOpenTypeUnicodeEncoding",
+      "flight.Geometry.clearMatrix3Pool",
+      "flight.Geometry.clearMatrix4Pool",
+      "flight.Geometry.clearMatrixPool",
+      "flight.Geometry.clearQuaternionPool",
+      "flight.Geometry.clearRectanglePool",
+      "flight.Geometry.clearVector2Pool",
+      "flight.Geometry.clearVector3Pool",
+      "flight.Geometry.clearVector4Pool",
+      "flight.Image.hasHostImageDimensionResolver",
+      "flight.Image.unregisterHostImageDimensionResolver",
+      "flight.Lighting.applyLightExposure",
+      "flight.Materials.getPbrMetallicFromPhongSpecular",
+      "flight.Materials.getPbrRoughnessFromPhongShininess",
+      "flight.Materials.getPhongToPbrLightExposure",
+      "flight.Materials.isValidMaterialClearcoat",
+      "flight.Materials.isValidMaterialIor",
+      "flight.Materials.isValidMaterialIridescenceThickness",
+      "flight.Materials.isValidMaterialWeight",
+      "flight.Materials.isValidPbrUvSet",
+      "flight.Scene2dFormats.isRiveCoreBytesProperty",
+      "flight.Scene2dFormats.isRiveCoreTypeDerivedFrom",
+      "flight.Scene3dFormats.hasGltfDracoDecoder",
+      "flight.Scene3dFormats.unregisterGltfDracoDecoder",
+      "flight.Shape.clearShapeBoundsCommands",
+      "flight.Shape.getPathCommandOperandCount",
+      "flight.Shape.getShapeBoundsCommandRegistryRevision",
+      "flight.Skeleton2dFormats.clampSpineBinaryUnit",
+      "flight.Swf.isKnownSwfTag",
+      "flight.Textbidi.reportTextBidiCompactTableMiss",
+      "flight.Textsegment.reportTextSegmenterUnavailable",
+      "flight.Textshaper.disposeTextShaperSignals"
     ]
   },
   "packages": [
@@ -2639,7 +2698,7 @@
         },
         {
           "code": "native-function-gap",
-          "count": 398
+          "count": 390
         },
         {
           "code": "native-value-gap",
@@ -2651,7 +2710,7 @@
         },
         {
           "code": "header-confirmed-scalar-probe-candidates",
-          "count": 11
+          "count": 3
         },
         {
           "code": "compiler-haxe-cpp-refused-bindings",
@@ -2659,7 +2718,56 @@
         }
       ],
       "nativeDefault": {
-        "functions": [],
+        "functions": [
+          {
+            "header": "flight/geometry/matrix3_pool.hpp",
+            "holder": "Geometry",
+            "name": "clearMatrix3Pool",
+            "native": "flight::geometry::clear_matrix3_pool"
+          },
+          {
+            "header": "flight/geometry/matrix4_pool.hpp",
+            "holder": "Geometry",
+            "name": "clearMatrix4Pool",
+            "native": "flight::geometry::clear_matrix4_pool"
+          },
+          {
+            "header": "flight/geometry/matrix_pool.hpp",
+            "holder": "Geometry",
+            "name": "clearMatrixPool",
+            "native": "flight::geometry::clear_matrix_pool"
+          },
+          {
+            "header": "flight/geometry/quaternion_pool.hpp",
+            "holder": "Geometry",
+            "name": "clearQuaternionPool",
+            "native": "flight::geometry::clear_quaternion_pool"
+          },
+          {
+            "header": "flight/geometry/rectangle_pool.hpp",
+            "holder": "Geometry",
+            "name": "clearRectanglePool",
+            "native": "flight::geometry::clear_rectangle_pool"
+          },
+          {
+            "header": "flight/geometry/vector2_pool.hpp",
+            "holder": "Geometry",
+            "name": "clearVector2Pool",
+            "native": "flight::geometry::clear_vector2_pool"
+          },
+          {
+            "header": "flight/geometry/vector3_pool.hpp",
+            "holder": "Geometry",
+            "name": "clearVector3Pool",
+            "native": "flight::geometry::clear_vector3_pool"
+          },
+          {
+            "header": "flight/geometry/vector4_pool.hpp",
+            "holder": "Geometry",
+            "name": "clearVector4Pool",
+            "native": "flight::geometry::clear_vector4_pool"
+          }
+        ],
         "types": [],
         "values": []
       },
@@ -2676,102 +2784,6 @@
           "holder": "Geometry",
           "name": "areGeometryPoolGuardsEnabled",
           "signature": "function areGeometryPoolGuardsEnabled():Bool"
-        },
-        {
-          "cppName": "clear_matrix3_pool",
-          "headers": [
-            {
-              "path": "flight/geometry/matrix3_pool.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Geometry",
-          "name": "clearMatrix3Pool",
-          "signature": "function clearMatrix3Pool():Void"
-        },
-        {
-          "cppName": "clear_matrix4_pool",
-          "headers": [
-            {
-              "path": "flight/geometry/matrix4_pool.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Geometry",
-          "name": "clearMatrix4Pool",
-          "signature": "function clearMatrix4Pool():Void"
-        },
-        {
-          "cppName": "clear_matrix_pool",
-          "headers": [
-            {
-              "path": "flight/geometry/matrix_pool.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Geometry",
-          "name": "clearMatrixPool",
-          "signature": "function clearMatrixPool():Void"
-        },
-        {
-          "cppName": "clear_quaternion_pool",
-          "headers": [
-            {
-              "path": "flight/geometry/quaternion_pool.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Geometry",
-          "name": "clearQuaternionPool",
-          "signature": "function clearQuaternionPool():Void"
-        },
-        {
-          "cppName": "clear_rectangle_pool",
-          "headers": [
-            {
-              "path": "flight/geometry/rectangle_pool.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Geometry",
-          "name": "clearRectanglePool",
-          "signature": "function clearRectanglePool():Void"
-        },
-        {
-          "cppName": "clear_vector2_pool",
-          "headers": [
-            {
-              "path": "flight/geometry/vector2_pool.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Geometry",
-          "name": "clearVector2Pool",
-          "signature": "function clearVector2Pool():Void"
-        },
-        {
-          "cppName": "clear_vector3_pool",
-          "headers": [
-            {
-              "path": "flight/geometry/vector3_pool.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Geometry",
-          "name": "clearVector3Pool",
-          "signature": "function clearVector3Pool():Void"
-        },
-        {
-          "cppName": "clear_vector4_pool",
-          "headers": [
-            {
-              "path": "flight/geometry/vector4_pool.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Geometry",
-          "name": "clearVector4Pool",
-          "signature": "function clearVector4Pool():Void"
         },
         {
           "cppName": "disable_geometry_pool_guards",
@@ -2798,7 +2810,7 @@
           "signature": "function enableGeometryPoolGuards():Void"
         }
       ],
-      "status": "emitted-unbound",
+      "status": "partial-native",
       "webDefault": {
         "functions": 398,
         "types": 0,
@@ -3150,7 +3162,7 @@
         },
         {
           "code": "native-function-gap",
-          "count": 27
+          "count": 25
         },
         {
           "code": "native-value-gap",
@@ -3161,47 +3173,31 @@
           "count": 23
         },
         {
-          "code": "header-confirmed-scalar-probe-candidates",
-          "count": 2
-        },
-        {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 28
         }
       ],
       "nativeDefault": {
-        "functions": [],
+        "functions": [
+          {
+            "header": "flight/image/image_source_dimensions.hpp",
+            "holder": "Image",
+            "name": "hasHostImageDimensionResolver",
+            "native": "flight::image::has_host_image_dimension_resolver"
+          },
+          {
+            "header": "flight/image/image_source_dimensions.hpp",
+            "holder": "Image",
+            "name": "unregisterHostImageDimensionResolver",
+            "native": "flight::image::unregister_host_image_dimension_resolver"
+          }
+        ],
         "types": [],
         "values": []
       },
       "package": "@flighthq/image",
-      "scalarProbeCandidates": [
-        {
-          "cppName": "has_host_image_dimension_resolver",
-          "headers": [
-            {
-              "path": "flight/image/image_source_dimensions.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Image",
-          "name": "hasHostImageDimensionResolver",
-          "signature": "function hasHostImageDimensionResolver():Bool"
-        },
-        {
-          "cppName": "unregister_host_image_dimension_resolver",
-          "headers": [
-            {
-              "path": "flight/image/image_source_dimensions.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Image",
-          "name": "unregisterHostImageDimensionResolver",
-          "signature": "function unregisterHostImageDimensionResolver():Void"
-        }
-      ],
-      "status": "emitted-unbound",
+      "scalarProbeCandidates": [],
+      "status": "partial-native",
       "webDefault": {
         "functions": 27,
         "types": 0,
@@ -4068,7 +4064,7 @@
       "issues": [
         {
           "code": "native-function-gap",
-          "count": 26
+          "count": 23
         },
         {
           "code": "native-value-gap",
@@ -4083,16 +4079,30 @@
           "count": 23
         },
         {
-          "code": "header-confirmed-scalar-probe-candidates",
-          "count": 3
-        },
-        {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 33
         }
       ],
       "nativeDefault": {
         "functions": [
+          {
+            "header": "flight/math/comparison.hpp",
+            "holder": "Math",
+            "name": "approxEqual",
+            "native": "flight::math::approx_equal"
+          },
+          {
+            "header": "flight/math/comparison.hpp",
+            "holder": "Math",
+            "name": "approxEqualRelative",
+            "native": "flight::math::approx_equal_relative"
+          },
+          {
+            "header": "flight/math/comparison.hpp",
+            "holder": "Math",
+            "name": "approxZero",
+            "native": "flight::math::approx_zero"
+          },
           {
             "header": "flight/math/contract.hpp",
             "holder": "Math",
@@ -4344,44 +4354,7 @@
         "values": []
       },
       "package": "@flighthq/math",
-      "scalarProbeCandidates": [
-        {
-          "cppName": "approx_equal",
-          "headers": [
-            {
-              "path": "flight/math/comparison.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Math",
-          "name": "approxEqual",
-          "signature": "function approxEqual(a:Float, b:Float, ?epsilon:Float):Bool"
-        },
-        {
-          "cppName": "approx_equal_relative",
-          "headers": [
-            {
-              "path": "flight/math/comparison.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Math",
-          "name": "approxEqualRelative",
-          "signature": "function approxEqualRelative(a:Float, b:Float, ?relativeEpsilon:Float):Bool"
-        },
-        {
-          "cppName": "approx_zero",
-          "headers": [
-            {
-              "path": "flight/math/comparison.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Math",
-          "name": "approxZero",
-          "signature": "function approxZero(value:Float, ?epsilon:Float):Bool"
-        }
-      ],
+      "scalarProbeCandidates": [],
       "status": "partial-native",
       "webDefault": {
         "functions": 67,
@@ -7232,7 +7205,7 @@
         },
         {
           "code": "native-function-gap",
-          "count": 146
+          "count": 144
         },
         {
           "code": "native-value-gap",
@@ -7244,7 +7217,7 @@
         },
         {
           "code": "header-confirmed-scalar-probe-candidates",
-          "count": 5
+          "count": 3
         },
         {
           "code": "compiler-haxe-cpp-refused-bindings",
@@ -7252,7 +7225,20 @@
         }
       ],
       "nativeDefault": {
-        "functions": [],
+        "functions": [
+          {
+            "header": "flight/scene3d_formats/gltf_draco.hpp",
+            "holder": "Scene3dFormats",
+            "name": "hasGltfDracoDecoder",
+            "native": "flight::scene3d_formats::has_gltf_draco_decoder"
+          },
+          {
+            "header": "flight/scene3d_formats/gltf_draco.hpp",
+            "holder": "Scene3dFormats",
+            "name": "unregisterGltfDracoDecoder",
+            "native": "flight::scene3d_formats::unregister_gltf_draco_decoder"
+          }
+        ],
         "types": [],
         "values": []
       },
@@ -7283,18 +7269,6 @@
           "signature": "function clampChannel(value:Float):Float"
         },
         {
-          "cppName": "has_gltf_draco_decoder",
-          "headers": [
-            {
-              "path": "flight/scene3d_formats/gltf_draco.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Scene3dFormats",
-          "name": "hasGltfDracoDecoder",
-          "signature": "function hasGltfDracoDecoder():Bool"
-        },
-        {
           "cppName": "has_non_unit_scale",
           "headers": [
             {
@@ -7305,21 +7279,9 @@
           "holder": "Scene3dFormats",
           "name": "hasNonUnitScale",
           "signature": "function hasNonUnitScale(sx:Float, sy:Float, sz:Float):Bool"
-        },
-        {
-          "cppName": "unregister_gltf_draco_decoder",
-          "headers": [
-            {
-              "path": "flight/scene3d_formats/gltf_draco.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Scene3dFormats",
-          "name": "unregisterGltfDracoDecoder",
-          "signature": "function unregisterGltfDracoDecoder():Void"
         }
       ],
-      "status": "emitted-unbound",
+      "status": "partial-native",
       "webDefault": {
         "functions": 146,
         "types": 0,
@@ -7779,7 +7741,7 @@
         },
         {
           "code": "native-function-gap",
-          "count": 84
+          "count": 82
         },
         {
           "code": "native-value-gap",
@@ -7795,7 +7757,7 @@
         },
         {
           "code": "header-confirmed-scalar-probe-candidates",
-          "count": 6
+          "count": 4
         },
         {
           "code": "compiler-haxe-cpp-refused-bindings",
@@ -7805,10 +7767,22 @@
       "nativeDefault": {
         "functions": [
           {
+            "header": "flight/shape/shape_bounds_registry.hpp",
+            "holder": "Shape",
+            "name": "clearShapeBoundsCommands",
+            "native": "flight::shape::clear_shape_bounds_commands"
+          },
+          {
             "header": "flight/shape/shape_fill.hpp",
             "holder": "Shape",
             "name": "getPathCommandOperandCount",
             "native": "flight::shape::get_path_command_operand_count"
+          },
+          {
+            "header": "flight/shape/shape_bounds_registry.hpp",
+            "holder": "Shape",
+            "name": "getShapeBoundsCommandRegistryRevision",
+            "native": "flight::shape::get_shape_bounds_command_registry_revision"
           }
         ],
         "types": [],
@@ -7827,18 +7801,6 @@
           "holder": "Shape",
           "name": "areShapeBoundsGuardsEnabled",
           "signature": "function areShapeBoundsGuardsEnabled():Bool"
-        },
-        {
-          "cppName": "clear_shape_bounds_commands",
-          "headers": [
-            {
-              "path": "flight/shape/shape_bounds_registry.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Shape",
-          "name": "clearShapeBoundsCommands",
-          "signature": "function clearShapeBoundsCommands():Void"
         },
         {
           "cppName": "disable_shape_bounds_guards",
@@ -7863,18 +7825,6 @@
           "holder": "Shape",
           "name": "enableShapeBoundsGuards",
           "signature": "function enableShapeBoundsGuards():Void"
-        },
-        {
-          "cppName": "get_shape_bounds_command_registry_revision",
-          "headers": [
-            {
-              "path": "flight/shape/shape_bounds_registry.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Shape",
-          "name": "getShapeBoundsCommandRegistryRevision",
-          "signature": "function getShapeBoundsCommandRegistryRevision():Float"
         },
         {
           "cppName": "register_default_shape_bounds_commands",
@@ -9313,7 +9263,7 @@
         },
         {
           "code": "native-function-gap",
-          "count": 10
+          "count": 9
         },
         {
           "code": "native-value-gap",
@@ -9325,7 +9275,7 @@
         },
         {
           "code": "header-confirmed-scalar-probe-candidates",
-          "count": 3
+          "count": 2
         },
         {
           "code": "compiler-haxe-cpp-refused-bindings",
@@ -9333,7 +9283,14 @@
         }
       ],
       "nativeDefault": {
-        "functions": [],
+        "functions": [
+          {
+            "header": "flight/textbidi/text_bidi_guards.hpp",
+            "holder": "Textbidi",
+            "name": "reportTextBidiCompactTableMiss",
+            "native": "flight::textbidi::report_text_bidi_compact_table_miss"
+          }
+        ],
         "types": [],
         "values": []
       },
@@ -9362,21 +9319,9 @@
           "holder": "Textbidi",
           "name": "enableTextBidiGuards",
           "signature": "function enableTextBidiGuards():Void"
-        },
-        {
-          "cppName": "report_text_bidi_compact_table_miss",
-          "headers": [
-            {
-              "path": "flight/textbidi/text_bidi_guards.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Textbidi",
-          "name": "reportTextBidiCompactTableMiss",
-          "signature": "function reportTextBidiCompactTableMiss(codepoint:Float):Void"
         }
       ],
-      "status": "emitted-unbound",
+      "status": "partial-native",
       "webDefault": {
         "functions": 10,
         "types": 0,
@@ -9545,7 +9490,7 @@
         },
         {
           "code": "native-function-gap",
-          "count": 15
+          "count": 14
         },
         {
           "code": "native-value-gap",
@@ -9557,7 +9502,7 @@
         },
         {
           "code": "header-confirmed-scalar-probe-candidates",
-          "count": 3
+          "count": 2
         },
         {
           "code": "compiler-haxe-cpp-refused-bindings",
@@ -9565,7 +9510,14 @@
         }
       ],
       "nativeDefault": {
-        "functions": [],
+        "functions": [
+          {
+            "header": "flight/textsegment/text_segment_guards.hpp",
+            "holder": "Textsegment",
+            "name": "reportTextSegmenterUnavailable",
+            "native": "flight::textsegment::report_text_segmenter_unavailable"
+          }
+        ],
         "types": [],
         "values": []
       },
@@ -9594,21 +9546,9 @@
           "holder": "Textsegment",
           "name": "enableTextSegmentGuards",
           "signature": "function enableTextSegmentGuards():Void"
-        },
-        {
-          "cppName": "report_text_segmenter_unavailable",
-          "headers": [
-            {
-              "path": "flight/textsegment/text_segment_guards.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Textsegment",
-          "name": "reportTextSegmenterUnavailable",
-          "signature": "function reportTextSegmenterUnavailable():Void"
         }
       ],
-      "status": "emitted-unbound",
+      "status": "partial-native",
       "webDefault": {
         "functions": 15,
         "types": 0,
@@ -9651,7 +9591,7 @@
         },
         {
           "code": "native-function-gap",
-          "count": 36
+          "count": 35
         },
         {
           "code": "non-scalar-signature-review",
@@ -9659,7 +9599,7 @@
         },
         {
           "code": "header-confirmed-scalar-probe-candidates",
-          "count": 3
+          "count": 2
         },
         {
           "code": "compiler-haxe-cpp-refused-bindings",
@@ -9667,7 +9607,14 @@
         }
       ],
       "nativeDefault": {
-        "functions": [],
+        "functions": [
+          {
+            "header": "flight/textshaper/text_shaper_signals.hpp",
+            "holder": "Textshaper",
+            "name": "disposeTextShaperSignals",
+            "native": "flight::textshaper::dispose_text_shaper_signals"
+          }
+        ],
         "types": [],
         "values": []
       },
@@ -9686,18 +9633,6 @@
           "signature": "function disableTextShaperGuards():Void"
         },
         {
-          "cppName": "dispose_text_shaper_signals",
-          "headers": [
-            {
-              "path": "flight/textshaper/text_shaper_signals.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Textshaper",
-          "name": "disposeTextShaperSignals",
-          "signature": "function disposeTextShaperSignals():Void"
-        },
-        {
           "cppName": "enable_text_shaper_guards",
           "headers": [
             {
@@ -9710,7 +9645,7 @@
           "signature": "function enableTextShaperGuards():Void"
         }
       ],
-      "status": "emitted-unbound",
+      "status": "partial-native",
       "webDefault": {
         "functions": 36,
         "types": 0,
@@ -10743,10 +10678,12 @@
       "sourceModules": 3151
     },
     "nativeDefault": {
-      "boundHeaderConfirmedScalarFunctions": 93,
+      "boundHeaderConfirmedScalarFunctions": 113,
       "extensionTypes": 1,
-      "functions": 101,
-      "packages": 19,
+      "functions": 121,
+      "packages": 25,
+      "optionalScalarAdapters": 3,
+      "requiredScalarOverrides": 52,
       "scalarOverrideRefusals": 1,
       "types": 3,
       "values": 0
@@ -10781,15 +10718,15 @@
       "unboundFunctionCandidates": 0
     },
     "packageStatus": {
-      "emitted-unbound": 133,
+      "emitted-unbound": 127,
       "empty-web-contract": 1,
-      "partial-native": 19
+      "partial-native": 25
     },
     "scalarExpansion": {
       "headerConfirmedFunctions": 183,
       "packages": 45,
-      "unboundProbeCandidates": 90,
-      "unboundProbePackages": 35
+      "unboundProbeCandidates": 70,
+      "unboundProbePackages": 33
     },
     "webDefault": {
       "functions": 6906,

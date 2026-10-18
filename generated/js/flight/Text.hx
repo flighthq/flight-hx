@@ -35,11 +35,11 @@ inline function computeTextLabelLocalBoundsRectangle(out:flight.Rectangle, sourc
 }
 
 inline function createNativeText(?obj:flight.PartialNode<flight.NativeText>):flight.NativeText {
-  return flight._js._fn.Text.createNativeText(obj);
+  return flight._js._fn.Text.createNativeText((obj == null ? js.Syntax.code("undefined") : obj));
 }
 
 inline function createNativeTextData(?data:Dynamic):flight.NativeTextData {
-  return flight._js._fn.Text.createNativeTextData(data);
+  return flight._js._fn.Text.createNativeTextData((data == null ? js.Syntax.code("undefined") : data));
 }
 
 inline function createNativeTextRuntime():flight.NativeTextRuntime {
@@ -47,11 +47,11 @@ inline function createNativeTextRuntime():flight.NativeTextRuntime {
 }
 
 inline function createRichText(?obj:flight.PartialNode<flight.RichText>):flight.RichText {
-  return flight._js._fn.Text.createRichText(obj);
+  return flight._js._fn.Text.createRichText((obj == null ? js.Syntax.code("undefined") : obj));
 }
 
 inline function createRichTextData(?data:Dynamic):flight.RichTextData {
-  return flight._js._fn.Text.createRichTextData(data);
+  return flight._js._fn.Text.createRichTextData((data == null ? js.Syntax.code("undefined") : data));
 }
 
 inline function createRichTextRuntime():flight.RichTextRuntime {
@@ -63,11 +63,11 @@ inline function createTextFieldSignals():flight.TextFieldSignals {
 }
 
 inline function createTextLabel(?obj:flight.PartialNode<flight.TextLabel>):flight.TextLabel {
-  return flight._js._fn.Text.createTextLabel(obj);
+  return flight._js._fn.Text.createTextLabel((obj == null ? js.Syntax.code("undefined") : obj));
 }
 
 inline function createTextLabelData(?data:Dynamic):flight.TextLabelData {
-  return flight._js._fn.Text.createTextLabelData(data);
+  return flight._js._fn.Text.createTextLabelData((data == null ? js.Syntax.code("undefined") : data));
 }
 
 inline function createTextLabelRuntime():flight.TextLabelRuntime {
@@ -83,7 +83,7 @@ inline function dispatchRichTextLinkAtPoint(source:flight.RichText, x:Float, y:F
 }
 
 inline function dispatchRichTextWheel(source:flight.RichText, deltaLines:Float, ?layout:flight.TextLayoutResult):Void {
-  flight._js._fn.Text.dispatchRichTextWheel(source, deltaLines, layout);
+  flight._js._fn.Text.dispatchRichTextWheel(source, deltaLines, (layout == null ? js.Syntax.code("undefined") : layout));
 }
 
 inline function enableTextFieldSignals(source:flight.RichText):flight.TextFieldSignals {
@@ -215,7 +215,7 @@ inline function getTextLayoutMetrics(out:flight.TextMetrics, source:flight.TextL
 }
 
 inline function initializeNativeTextData(out:flight.EntityConstruction<flight.NativeTextData>, ?data:Dynamic):Void {
-  flight._js._fn.Text.initializeNativeTextData(out, data);
+  flight._js._fn.Text.initializeNativeTextData(out, (data == null ? js.Syntax.code("undefined") : data));
 }
 
 inline function initializeTextFieldSignals(out:flight.EntityConstruction<flight.TextFieldSignals>):Void {
@@ -223,7 +223,7 @@ inline function initializeTextFieldSignals(out:flight.EntityConstruction<flight.
 }
 
 inline function initializeTextLabelData(out:flight.EntityConstruction<flight.TextLabelData>, ?data:Dynamic):Void {
-  flight._js._fn.Text.initializeTextLabelData(out, data);
+  flight._js._fn.Text.initializeTextLabelData(out, (data == null ? js.Syntax.code("undefined") : data));
 }
 
 inline function insertRichTextString(source:flight.RichText, index:Float, value:String):Void {
@@ -295,7 +295,7 @@ inline function setRichTextDefaultTextFormat(source:flight.RichText, value:fligh
 }
 
 inline function setRichTextFormatRange(source:flight.RichText, format:flight.TextFormat, ?start:Float, ?end:Float):Void {
-  flight._js._fn.Text.setRichTextFormatRange(source, format, start, end);
+  flight._js._fn.Text.setRichTextFormatRange(source, format, (start == null ? js.Syntax.code("undefined") : start), (end == null ? js.Syntax.code("undefined") : end));
 }
 
 inline function setRichTextHeight(source:flight.RichText, value:Float):Void {
@@ -315,11 +315,11 @@ inline function setRichTextMultiline(source:flight.RichText, value:Bool):Void {
 }
 
 inline function setRichTextScrollH(source:flight.RichText, value:Float, ?layout:flight.TextLayoutResult):Void {
-  flight._js._fn.Text.setRichTextScrollH(source, value, layout);
+  flight._js._fn.Text.setRichTextScrollH(source, value, (layout == null ? js.Syntax.code("undefined") : layout));
 }
 
 inline function setRichTextScrollV(source:flight.RichText, value:Float, ?layout:flight.TextLayoutResult):Void {
-  flight._js._fn.Text.setRichTextScrollV(source, value, layout);
+  flight._js._fn.Text.setRichTextScrollV(source, value, (layout == null ? js.Syntax.code("undefined") : layout));
 }
 
 inline function setRichTextSelectable(source:flight.RichText, value:Bool):Void {

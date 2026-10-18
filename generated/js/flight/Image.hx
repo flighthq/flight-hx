@@ -11,11 +11,11 @@ inline function createCompressedImageResource(compressed:flight.CompressedImageD
 }
 
 inline function createEmbeddedImageResourceReference(bytes:flight._internal._UInt8Array, ?mimeType:Null<String>, ?alphaType:flight.AlphaType):flight.EmbeddedImageResourceReference {
-  return flight._js._fn.Image.createEmbeddedImageResourceReference(bytes, mimeType, alphaType);
+  return flight._js._fn.Image.createEmbeddedImageResourceReference(bytes, (mimeType == null ? js.Syntax.code("undefined") : mimeType), (alphaType == null ? js.Syntax.code("undefined") : alphaType));
 }
 
 inline function createExternalImageResourceReference(uri:String, ?basePath:Null<String>):flight.ExternalImageResourceReference {
-  return flight._js._fn.Image.createExternalImageResourceReference(uri, basePath);
+  return flight._js._fn.Image.createExternalImageResourceReference(uri, (basePath == null ? js.Syntax.code("undefined") : basePath));
 }
 
 inline function createImageResource(image:flight.HostImageSource):flight.ImageResource {
@@ -47,11 +47,11 @@ inline function initializeCompressedImageResource(out:flight.EntityConstruction<
 }
 
 inline function initializeEmbeddedImageResourceReference(out:flight.EntityConstruction<flight.EmbeddedImageResourceReference>, bytes:flight._internal._UInt8Array, ?mimeType:Null<String>, ?alphaType:flight.AlphaType):Void {
-  flight._js._fn.Image.initializeEmbeddedImageResourceReference(out, bytes, mimeType, alphaType);
+  flight._js._fn.Image.initializeEmbeddedImageResourceReference(out, bytes, (mimeType == null ? js.Syntax.code("undefined") : mimeType), (alphaType == null ? js.Syntax.code("undefined") : alphaType));
 }
 
 inline function initializeExternalImageResourceReference(out:flight.EntityConstruction<flight.ExternalImageResourceReference>, uri:String, ?basePath:Null<String>):Void {
-  flight._js._fn.Image.initializeExternalImageResourceReference(out, uri, basePath);
+  flight._js._fn.Image.initializeExternalImageResourceReference(out, uri, (basePath == null ? js.Syntax.code("undefined") : basePath));
 }
 
 inline function invalidateImageResource(resource:flight.ImageResource):Void {
@@ -67,19 +67,19 @@ inline function isImageUrlSameOrigin(url:String):Bool {
 }
 
 inline function loadImageResourceFromBase64(hostImage:flight.HostImageCapability, base64:String, mimeType:String, ?signal:js.html.AbortSignal):flight._internal._Promise<flight.ImageResource> {
-  return flight._js._fn.Image.loadImageResourceFromBase64(hostImage, base64, mimeType, signal);
+  return flight._js._fn.Image.loadImageResourceFromBase64(hostImage, base64, mimeType, (signal == null ? js.Syntax.code("undefined") : signal));
 }
 
 inline function loadImageResourceFromBlob(hostImage:flight.HostImageCapability, blob:js.html.Blob, ?signal:js.html.AbortSignal):flight._internal._Promise<flight.ImageResource> {
-  return flight._js._fn.Image.loadImageResourceFromBlob(hostImage, blob, signal);
+  return flight._js._fn.Image.loadImageResourceFromBlob(hostImage, blob, (signal == null ? js.Syntax.code("undefined") : signal));
 }
 
 inline function loadImageResourceFromBytes(hostImage:flight.HostImageCapability, bytes:flight._internal._UInt8Array, ?mimeType:String, ?signal:js.html.AbortSignal):flight._internal._Promise<flight.ImageResource> {
-  return flight._js._fn.Image.loadImageResourceFromBytes(hostImage, bytes, mimeType, signal);
+  return flight._js._fn.Image.loadImageResourceFromBytes(hostImage, bytes, (mimeType == null ? js.Syntax.code("undefined") : mimeType), (signal == null ? js.Syntax.code("undefined") : signal));
 }
 
 inline function loadImageResourceFromUrl(hostImage:flight.HostImageCapability, url:String, ?crossOrigin:Dynamic, ?signal:js.html.AbortSignal):flight._internal._Promise<flight.ImageResource> {
-  return flight._js._fn.Image.loadImageResourceFromUrl(hostImage, url, crossOrigin, signal);
+  return flight._js._fn.Image.loadImageResourceFromUrl(hostImage, url, (crossOrigin == null ? js.Syntax.code("undefined") : crossOrigin), (signal == null ? js.Syntax.code("undefined") : signal));
 }
 
 inline function registerHostImageDimensionResolver(resolver:flight.HostImageDimensionResolver):Void {
@@ -99,7 +99,7 @@ inline function resetFailedImageResourceReference(ref:flight.ImageResourceRefere
 }
 
 inline function resolveImageResourceReference(imageDecode:flight.HostImageDecodeCapabilities, ref:flight.ImageResourceReference, fetch:flight.ImageResourceFetch, signal:js.html.AbortSignal, ?fallbackDecode:flight.ImageDecodeFallback):flight._internal._Promise<Null<flight.TextureSource>> {
-  return flight._js._fn.Image.resolveImageResourceReference(imageDecode, ref, fetch, signal, fallbackDecode);
+  return flight._js._fn.Image.resolveImageResourceReference(imageDecode, ref, fetch, signal, (fallbackDecode == null ? js.Syntax.code("undefined") : fallbackDecode));
 }
 
 inline function unregisterHostImageDimensionResolver():Void {

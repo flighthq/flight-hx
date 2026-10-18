@@ -15,7 +15,7 @@ inline function createEmissiveModifier(options:flight.EmissiveModifierOptions):f
 }
 
 inline function createEnvReflectModifier(?options:flight.EnvReflectModifierOptions):flight.EnvReflectModifier {
-  return flight._js._fn.Shading.createEnvReflectModifier(options);
+  return flight._js._fn.Shading.createEnvReflectModifier((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createFogModifier(options:flight.FogModifierOptions):flight.FogModifier {
@@ -31,7 +31,7 @@ inline function createRimModifier(options:flight.RimModifierOptions):flight.RimM
 }
 
 inline function createShadedMaterial(?options:flight.ShadedMaterialOptions):flight.ShadedMaterial {
-  return flight._js._fn.Shading.createShadedMaterial(options);
+  return flight._js._fn.Shading.createShadedMaterial((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createToonModifier(options:flight.ToonModifierOptions):flight.ToonModifier {
@@ -43,7 +43,7 @@ inline function createVertexDisplaceModifier(options:flight.VertexDisplaceModifi
 }
 
 inline function getModifierDefineKey(stack:Array<flight.Modifier>, ?registry:flight.ModifierRegistry):String {
-  return flight._js._fn.Shading.getModifierDefineKey(stack, registry);
+  return flight._js._fn.Shading.getModifierDefineKey(stack, (registry == null ? js.Syntax.code("undefined") : registry));
 }
 
 inline function getUnregisteredModifierKinds(registry:flight.ModifierRegistry, stack:Array<flight.Modifier>):Array<flight.ModifierKind> {
@@ -63,7 +63,7 @@ inline function initializeEmissiveModifier(out:flight.EntityConstruction<flight.
 }
 
 inline function initializeEnvReflectModifier(out:flight.EntityConstruction<flight.EnvReflectModifier>, ?options:flight.EnvReflectModifierOptions):Void {
-  flight._js._fn.Shading.initializeEnvReflectModifier(out, options);
+  flight._js._fn.Shading.initializeEnvReflectModifier(out, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function initializeFogModifier(out:flight.EntityConstruction<flight.FogModifier>, options:flight.FogModifierOptions):Void {

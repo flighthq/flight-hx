@@ -11,11 +11,11 @@ inline function createCaptureBaseline():flight.CaptureBaseline {
 }
 
 inline function evaluateCaptureParity(a:String, b:String, ?tolerance:Float):flight.CaptureCheckResult {
-  return flight._js._fn.Capture.evaluateCaptureParity(a, b, tolerance);
+  return flight._js._fn.Capture.evaluateCaptureParity(a, b, (tolerance == null ? js.Syntax.code("undefined") : tolerance));
 }
 
 inline function evaluateCaptureRegression(fingerprint:String, baselineFingerprint:String, ?tolerance:Float):flight.CaptureCheckResult {
-  return flight._js._fn.Capture.evaluateCaptureRegression(fingerprint, baselineFingerprint, tolerance);
+  return flight._js._fn.Capture.evaluateCaptureRegression(fingerprint, baselineFingerprint, (tolerance == null ? js.Syntax.code("undefined") : tolerance));
 }
 
 inline function formatCaptureBaseline(baseline:flight.CaptureBaseline):String {

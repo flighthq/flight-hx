@@ -119,7 +119,7 @@ inline function createCollisionDistance3D():flight.CollisionDistance3D {
 }
 
 inline function createCollisionHeightfield3D(columns:Float, rows:Float, heights:Array<Float>, ?cellSizeX:Float, ?cellSizeZ:Float):flight.CollisionHeightfield3D {
-  return flight._js._fn.Collision.createCollisionHeightfield3D(columns, rows, heights, cellSizeX, cellSizeZ);
+  return flight._js._fn.Collision.createCollisionHeightfield3D(columns, rows, heights, (cellSizeX == null ? js.Syntax.code("undefined") : cellSizeX), (cellSizeZ == null ? js.Syntax.code("undefined") : cellSizeZ));
 }
 
 inline function createCollisionManifold2D():flight.CollisionManifold2D {
@@ -231,7 +231,7 @@ inline function initializeCollisionDistance3D(out:flight.EntityConstruction<flig
 }
 
 inline function initializeCollisionHeightfield3D(out:flight.EntityConstruction<flight.CollisionHeightfield3D>, columns:Float, rows:Float, heights:Array<Float>, ?cellSizeX:Float, ?cellSizeZ:Float):Void {
-  flight._js._fn.Collision.initializeCollisionHeightfield3D(out, columns, rows, heights, cellSizeX, cellSizeZ);
+  flight._js._fn.Collision.initializeCollisionHeightfield3D(out, columns, rows, heights, (cellSizeX == null ? js.Syntax.code("undefined") : cellSizeX), (cellSizeZ == null ? js.Syntax.code("undefined") : cellSizeZ));
 }
 
 inline function initializeCollisionManifold2D(out:flight.EntityConstruction<flight.CollisionManifold2D>):Void {
@@ -291,19 +291,19 @@ inline function queryCollisionConvexFace3D(shape:flight.CollisionShape3D, dirX:F
 }
 
 inline function raycastCollisionHeightfield3D(heightfield:flight.CollisionHeightfield3D, originX:Float, originY:Float, originZ:Float, directionX:Float, directionY:Float, directionZ:Float, out:flight.CollisionRaycastHit3D, ?maxFraction:Float):Bool {
-  return flight._js._fn.Collision.raycastCollisionHeightfield3D(heightfield, originX, originY, originZ, directionX, directionY, directionZ, out, maxFraction);
+  return flight._js._fn.Collision.raycastCollisionHeightfield3D(heightfield, originX, originY, originZ, directionX, directionY, directionZ, out, (maxFraction == null ? js.Syntax.code("undefined") : maxFraction));
 }
 
 inline function raycastCollisionShape2D(shape:flight.CollisionBuiltInShape2D, originX:Float, originY:Float, directionX:Float, directionY:Float, out:flight.CollisionRaycastHit2D, ?maxFraction:Float):Bool {
-  return flight._js._fn.Collision.raycastCollisionShape2D(shape, originX, originY, directionX, directionY, out, maxFraction);
+  return flight._js._fn.Collision.raycastCollisionShape2D(shape, originX, originY, directionX, directionY, out, (maxFraction == null ? js.Syntax.code("undefined") : maxFraction));
 }
 
 inline function raycastCollisionShape3D(shape:flight.CollisionBuiltInShape3D, originX:Float, originY:Float, originZ:Float, directionX:Float, directionY:Float, directionZ:Float, out:flight.CollisionRaycastHit3D, ?maxFraction:Float):Bool {
-  return flight._js._fn.Collision.raycastCollisionShape3D(shape, originX, originY, originZ, directionX, directionY, directionZ, out, maxFraction);
+  return flight._js._fn.Collision.raycastCollisionShape3D(shape, originX, originY, originZ, directionX, directionY, directionZ, out, (maxFraction == null ? js.Syntax.code("undefined") : maxFraction));
 }
 
 inline function raycastCollisionTriangleMesh3D(mesh:flight.CollisionTriangleMesh3D, originX:Float, originY:Float, originZ:Float, directionX:Float, directionY:Float, directionZ:Float, out:flight.CollisionRaycastHit3D, ?maxFraction:Float):Bool {
-  return flight._js._fn.Collision.raycastCollisionTriangleMesh3D(mesh, originX, originY, originZ, directionX, directionY, directionZ, out, maxFraction);
+  return flight._js._fn.Collision.raycastCollisionTriangleMesh3D(mesh, originX, originY, originZ, directionX, directionY, directionZ, out, (maxFraction == null ? js.Syntax.code("undefined") : maxFraction));
 }
 
 inline function registerBuiltInCollisionFaceQueries3D():Void {
@@ -399,19 +399,19 @@ inline function supportCollisionSphere3D(shape:flight.CollisionShape3D, dirX:Flo
 }
 
 inline function sweepCollisionHeightfield3D(convex:flight.CollisionShape3D, deltaX:Float, deltaY:Float, deltaZ:Float, heightfield:flight.CollisionHeightfield3D, out:flight.CollisionTimeOfImpact3D, ?maxFraction:Float):Bool {
-  return flight._js._fn.Collision.sweepCollisionHeightfield3D(convex, deltaX, deltaY, deltaZ, heightfield, out, maxFraction);
+  return flight._js._fn.Collision.sweepCollisionHeightfield3D(convex, deltaX, deltaY, deltaZ, heightfield, out, (maxFraction == null ? js.Syntax.code("undefined") : maxFraction));
 }
 
 inline function sweepCollisionShape2D(shapeA:flight.CollisionBuiltInShape2D, translationAX:Float, translationAY:Float, shapeB:flight.CollisionBuiltInShape2D, translationBX:Float, translationBY:Float, out:flight.CollisionTimeOfImpact2D, ?maxFraction:Float):Bool {
-  return flight._js._fn.Collision.sweepCollisionShape2D(shapeA, translationAX, translationAY, shapeB, translationBX, translationBY, out, maxFraction);
+  return flight._js._fn.Collision.sweepCollisionShape2D(shapeA, translationAX, translationAY, shapeB, translationBX, translationBY, out, (maxFraction == null ? js.Syntax.code("undefined") : maxFraction));
 }
 
 inline function sweepCollisionShape3D(shapeA:flight.CollisionShape3D, translationAX:Float, translationAY:Float, translationAZ:Float, shapeB:flight.CollisionShape3D, translationBX:Float, translationBY:Float, translationBZ:Float, out:flight.CollisionTimeOfImpact3D, ?maxFraction:Float):Bool {
-  return flight._js._fn.Collision.sweepCollisionShape3D(shapeA, translationAX, translationAY, translationAZ, shapeB, translationBX, translationBY, translationBZ, out, maxFraction);
+  return flight._js._fn.Collision.sweepCollisionShape3D(shapeA, translationAX, translationAY, translationAZ, shapeB, translationBX, translationBY, translationBZ, out, (maxFraction == null ? js.Syntax.code("undefined") : maxFraction));
 }
 
 inline function sweepCollisionTriangleMesh3D(convex:flight.CollisionShape3D, deltaX:Float, deltaY:Float, deltaZ:Float, mesh:flight.CollisionTriangleMesh3D, out:flight.CollisionTimeOfImpact3D, ?maxFraction:Float):Bool {
-  return flight._js._fn.Collision.sweepCollisionTriangleMesh3D(convex, deltaX, deltaY, deltaZ, mesh, out, maxFraction);
+  return flight._js._fn.Collision.sweepCollisionTriangleMesh3D(convex, deltaX, deltaY, deltaZ, mesh, out, (maxFraction == null ? js.Syntax.code("undefined") : maxFraction));
 }
 
 inline function testAabbAabbCollision2D(a:flight.CollisionAabb2D, b:flight.CollisionAabb2D, out:flight.CollisionManifold2D):Bool {
@@ -539,7 +539,7 @@ inline function writeCollisionConvexHullFaces3D(points:Array<Float>, out:Array<F
 }
 
 inline function writeCollisionDistance3D(a:flight.CollisionShape3D, b:flight.CollisionShape3D, out:flight.CollisionDistance3D, ?offsetX:Float, ?offsetY:Float, ?offsetZ:Float):Bool {
-  return flight._js._fn.Collision.writeCollisionDistance3D(a, b, out, offsetX, offsetY, offsetZ);
+  return flight._js._fn.Collision.writeCollisionDistance3D(a, b, out, (offsetX == null ? js.Syntax.code("undefined") : offsetX), (offsetY == null ? js.Syntax.code("undefined") : offsetY), (offsetZ == null ? js.Syntax.code("undefined") : offsetZ));
 }
 
 inline function writeCollisionHeightfieldBounds3D(heightfield:flight.CollisionHeightfield3D, out:flight.CollisionAabb3D):Void {

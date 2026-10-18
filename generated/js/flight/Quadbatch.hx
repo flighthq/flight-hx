@@ -23,11 +23,11 @@ inline function computeQuadBatchLocalBoundsRectangle(out:flight.Rectangle, sourc
 }
 
 inline function createQuadBatch(?obj:flight.PartialNode<flight.QuadBatch>):flight.QuadBatch {
-  return flight._js._fn.Quadbatch.createQuadBatch(obj);
+  return flight._js._fn.Quadbatch.createQuadBatch((obj == null ? js.Syntax.code("undefined") : obj));
 }
 
 inline function createQuadBatchData(?data:Dynamic):flight.QuadBatchData {
-  return flight._js._fn.Quadbatch.createQuadBatchData(data);
+  return flight._js._fn.Quadbatch.createQuadBatchData((data == null ? js.Syntax.code("undefined") : data));
 }
 
 inline function createQuadBatchRuntime():flight.QuadBatchRuntime {
@@ -83,7 +83,7 @@ inline function hitTestQuadBatchPointXY(source:flight.QuadBatch, x:Float, y:Floa
 }
 
 inline function initializeQuadBatchData(out:flight.EntityConstruction<flight.QuadBatchData>, ?data:Dynamic):Void {
-  flight._js._fn.Quadbatch.initializeQuadBatchData(out, data);
+  flight._js._fn.Quadbatch.initializeQuadBatchData(out, (data == null ? js.Syntax.code("undefined") : data));
 }
 
 inline function initializeQuadBatchSignals(out:flight.EntityConstruction<flight.QuadBatchSignals>):Void {

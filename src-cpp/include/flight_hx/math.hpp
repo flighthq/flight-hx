@@ -4,6 +4,9 @@
 // Declaration-only boundary: no flight::* type enters hxcpp-generated namespace flight.
 namespace flight_hx::math {
 
+bool approx_equal(double a, double b, bool epsilonPresent, double epsilon);
+bool approx_equal_relative(double a, double b, bool relativeEpsilonPresent, double relativeEpsilon);
+bool approx_zero(double value, bool epsilonPresent, double epsilon);
 double ceil_power_of_two(double n);
 double ceil_to(double value, double step);
 double clamp(double value, double min, double max);

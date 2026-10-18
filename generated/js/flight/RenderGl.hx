@@ -11,7 +11,7 @@ inline function acquireGlRenderTexture(state:flight.GlRenderState, pool:flight.G
 }
 
 inline function acquireGlTextureRenderTarget(state:flight.GlRenderState, pool:flight.GlTextureRenderTargetPool, descriptor:flight.RenderTargetDescriptor, ?formatPolicy:flight.RenderTargetFormatPolicy):Null<flight.GlTextureRenderTarget> {
-  return flight._js._fn.RenderGl.acquireGlTextureRenderTarget(state, pool, descriptor, formatPolicy);
+  return flight._js._fn.RenderGl.acquireGlTextureRenderTarget(state, pool, descriptor, (formatPolicy == null ? js.Syntax.code("undefined") : formatPolicy));
 }
 
 inline function applyGlBlendMode(state:flight.GlRenderState, blendMode:Null<flight.BlendMode>):Void {
@@ -19,7 +19,7 @@ inline function applyGlBlendMode(state:flight.GlRenderState, blendMode:Null<flig
 }
 
 inline function applyGlSamplerState(state:flight.GlRenderState, runtime:flight.GlRenderStateRuntime, texture:js.html.webgl.Texture, sampler:Null<flight.SamplerLike>, ?smoothingOverride:Null<Bool>):Void {
-  flight._js._fn.RenderGl.applyGlSamplerState(state, runtime, texture, sampler, smoothingOverride);
+  flight._js._fn.RenderGl.applyGlSamplerState(state, runtime, texture, sampler, (smoothingOverride == null ? js.Syntax.code("undefined") : smoothingOverride));
 }
 
 inline function areGlRenderStateGuardsEnabled(state:flight.GlRenderState):Bool {
@@ -39,27 +39,27 @@ inline function beginGlCubeRenderFace(state:flight.GlRenderState, target:flight.
 }
 
 inline function beginGlRenderPass(state:flight.GlRenderState, target:flight.GlRenderTarget, ?clear:flight.RenderTargetClear, ?viewport:flight.Viewport):flight.GlRenderPass {
-  return flight._js._fn.RenderGl.beginGlRenderPass(state, target, clear, viewport);
+  return flight._js._fn.RenderGl.beginGlRenderPass(state, target, (clear == null ? js.Syntax.code("undefined") : clear), (viewport == null ? js.Syntax.code("undefined") : viewport));
 }
 
 inline function bindGlBitmapTexture(state:flight.GlRenderState, bitmap:flight.Bitmap, ?sampler:Null<flight.SamplerLike>, ?smoothingOverride:Null<Bool>, ?premultiply:Bool, ?colorSpace:flight.TextureColorSpace):js.html.webgl.Texture {
-  return flight._js._fn.RenderGl.bindGlBitmapTexture(state, bitmap, sampler, smoothingOverride, premultiply, colorSpace);
+  return flight._js._fn.RenderGl.bindGlBitmapTexture(state, bitmap, (sampler == null ? js.Syntax.code("undefined") : sampler), (smoothingOverride == null ? js.Syntax.code("undefined") : smoothingOverride), (premultiply == null ? js.Syntax.code("undefined") : premultiply), (colorSpace == null ? js.Syntax.code("undefined") : colorSpace));
 }
 
 inline function bindGlCompressedImageTexture(state:flight.GlRenderState, image:flight.CompressedImageResource, ?sampler:Null<flight.SamplerLike>, ?smoothingOverride:Null<Bool>, ?colorSpace:flight.TextureColorSpace):js.html.webgl.Texture {
-  return flight._js._fn.RenderGl.bindGlCompressedImageTexture(state, image, sampler, smoothingOverride, colorSpace);
+  return flight._js._fn.RenderGl.bindGlCompressedImageTexture(state, image, (sampler == null ? js.Syntax.code("undefined") : sampler), (smoothingOverride == null ? js.Syntax.code("undefined") : smoothingOverride), (colorSpace == null ? js.Syntax.code("undefined") : colorSpace));
 }
 
 inline function bindGlImageResourceTexture(state:flight.GlRenderState, image:flight.ImageResource, ?sampler:Null<flight.SamplerLike>, ?smoothingOverride:Null<Bool>, ?premultiply:Bool, ?colorSpace:flight.TextureColorSpace):js.html.webgl.Texture {
-  return flight._js._fn.RenderGl.bindGlImageResourceTexture(state, image, sampler, smoothingOverride, premultiply, colorSpace);
+  return flight._js._fn.RenderGl.bindGlImageResourceTexture(state, image, (sampler == null ? js.Syntax.code("undefined") : sampler), (smoothingOverride == null ? js.Syntax.code("undefined") : smoothingOverride), (premultiply == null ? js.Syntax.code("undefined") : premultiply), (colorSpace == null ? js.Syntax.code("undefined") : colorSpace));
 }
 
 inline function bindGlRenderTexture(state:flight.GlRenderState, renderTexture:flight.RenderTexture, ?sampler:Null<flight.SamplerLike>):Null<js.html.webgl.Texture> {
-  return flight._js._fn.RenderGl.bindGlRenderTexture(state, renderTexture, sampler);
+  return flight._js._fn.RenderGl.bindGlRenderTexture(state, renderTexture, (sampler == null ? js.Syntax.code("undefined") : sampler));
 }
 
 inline function bindGlTexture(state:flight.GlRenderState, imageSource:Dynamic, ?sampler:Null<flight.SamplerLike>):js.html.webgl.Texture {
-  return flight._js._fn.RenderGl.bindGlTexture(state, imageSource, sampler);
+  return flight._js._fn.RenderGl.bindGlTexture(state, imageSource, (sampler == null ? js.Syntax.code("undefined") : sampler));
 }
 
 inline function bindGlTextureRealization(state:flight.GlRenderState, realization:Null<flight.GlTextureRealization>):Null<js.html.webgl.Texture> {
@@ -67,7 +67,7 @@ inline function bindGlTextureRealization(state:flight.GlRenderState, realization
 }
 
 inline function bindGlVideoTexture(state:flight.GlRenderState, texture:flight.TextureLike, ?sampler:Null<flight.SamplerLike>):js.html.webgl.Texture {
-  return flight._js._fn.RenderGl.bindGlVideoTexture(state, texture, sampler);
+  return flight._js._fn.RenderGl.bindGlVideoTexture(state, texture, (sampler == null ? js.Syntax.code("undefined") : sampler));
 }
 
 inline function buildGlRenderRegistries(options:flight.GlRenderStateOptions):flight.GlRenderRegistries {
@@ -91,7 +91,7 @@ inline function compileDefaultGlProgram(gl:flight.GlContext):flight.GlShaderLoca
 }
 
 inline function compileGlBitmapProgram(gl:flight.GlContext, ?fragmentSrc:String):flight.GlShaderLocations {
-  return flight._js._fn.RenderGl.compileGlBitmapProgram(gl, fragmentSrc);
+  return flight._js._fn.RenderGl.compileGlBitmapProgram(gl, (fragmentSrc == null ? js.Syntax.code("undefined") : fragmentSrc));
 }
 
 inline function compileGlFullscreenProgram(gl:flight.GlContext, fragmentSource:String):flight.GlFullscreenProgram {
@@ -99,7 +99,7 @@ inline function compileGlFullscreenProgram(gl:flight.GlContext, fragmentSource:S
 }
 
 inline function compileGlShader(gl:flight.GlContext, type:Float, source:String, ?label:String):js.html.webgl.Shader {
-  return flight._js._fn.RenderGl.compileGlShader(gl, type, source, label);
+  return flight._js._fn.RenderGl.compileGlShader(gl, type, source, (label == null ? js.Syntax.code("undefined") : label));
 }
 
 inline function createDefaultGlBitmapShader(shaderLoc:flight.GlShaderLocations, matrixArray:flight._internal._Float32Array):flight.GlBitmapShader {
@@ -111,7 +111,7 @@ inline function createExternalGlTexture(state:flight.GlRenderState, handle:js.ht
 }
 
 inline function createGlBitmapShader(gl:flight.GlContext, fragmentSrc:String, ?onBind:(flight.GlContext, flight.GlShaderLocations, flight.RenderProxy2D)->Void):flight.GlBitmapShader {
-  return flight._js._fn.RenderGl.createGlBitmapShader(gl, fragmentSrc, onBind);
+  return flight._js._fn.RenderGl.createGlBitmapShader(gl, fragmentSrc, (onBind == null ? js.Syntax.code("undefined") : onBind));
 }
 
 inline function createGlContextState(gl:flight.GlContext):flight.GlContextState {
@@ -119,15 +119,15 @@ inline function createGlContextState(gl:flight.GlContext):flight.GlContextState 
 }
 
 inline function createGlCubeRenderTarget(state:flight.GlRenderState, size:Float, ?options:flight.GlCubeRenderTargetOptions):flight.GlCubeRenderTarget {
-  return flight._js._fn.RenderGl.createGlCubeRenderTarget(state, size, options);
+  return flight._js._fn.RenderGl.createGlCubeRenderTarget(state, size, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createGlProgram(gl:flight.GlContext, vertexSource:String, fragmentSource:String, ?label:String):js.html.webgl.Program {
-  return flight._js._fn.RenderGl.createGlProgram(gl, vertexSource, fragmentSource, label);
+  return flight._js._fn.RenderGl.createGlProgram(gl, vertexSource, fragmentSource, (label == null ? js.Syntax.code("undefined") : label));
 }
 
 inline function createGlRenderState(gl:flight.GlContext, ?options:flight.GlRenderStateOptions):flight.GlRenderState {
-  return flight._js._fn.RenderGl.createGlRenderState(gl, options);
+  return flight._js._fn.RenderGl.createGlRenderState(gl, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createGlRenderStateRuntime(contextState:flight.GlContextState, options:flight.GlRenderStateOptions):flight.GlRenderStateRuntime {
@@ -139,7 +139,7 @@ inline function createGlRenderTexturePool():flight.GlRenderTexturePool {
 }
 
 inline function createGlRenderViewResources(context:flight.GlContext, width:Float, height:Float, devicePixelRatio:Float, ?options:flight.GlRenderStateOptions, ?target:flight.AppRenderViewTargetOptions):flight.GlRenderViewResources {
-  return flight._js._fn.RenderGl.createGlRenderViewResources(context, width, height, devicePixelRatio, options, target);
+  return flight._js._fn.RenderGl.createGlRenderViewResources(context, width, height, devicePixelRatio, (options == null ? js.Syntax.code("undefined") : options), (target == null ? js.Syntax.code("undefined") : target));
 }
 
 inline function createGlScreenRenderTarget(gl:flight.GlContext):flight.GlScreenRenderTarget {
@@ -155,7 +155,7 @@ inline function createGlTexture(state:flight.GlRenderState):js.html.webgl.Textur
 }
 
 inline function createGlTextureRenderTarget(state:flight.GlRenderState, descriptor:flight.RenderTargetDescriptor, ?formatPolicy:flight.RenderTargetFormatPolicy):Null<flight.GlTextureRenderTarget> {
-  return flight._js._fn.RenderGl.createGlTextureRenderTarget(state, descriptor, formatPolicy);
+  return flight._js._fn.RenderGl.createGlTextureRenderTarget(state, descriptor, (formatPolicy == null ? js.Syntax.code("undefined") : formatPolicy));
 }
 
 inline function createGlTextureRenderTargetPool():flight.GlTextureRenderTargetPool {
@@ -263,7 +263,7 @@ inline function explainGlTextureResolution(state:flight.GlRenderState, texture:f
 }
 
 inline function fillGlRect(pass:flight.GlRenderPass, color:Float, ?rect:flight.RectangleLike):Void {
-  flight._js._fn.RenderGl.fillGlRect(pass, color, rect);
+  flight._js._fn.RenderGl.fillGlRect(pass, color, (rect == null ? js.Syntax.code("undefined") : rect));
 }
 
 inline function getGlColorAdjustmentMaterialFeature(state:flight.GlRenderState):Null<flight.GlColorAdjustmentMaterialFeature> {
@@ -323,7 +323,7 @@ inline function initializeExternalGlTextureSource(out:flight.EntityConstruction<
 }
 
 inline function initializeGlBitmapShader(out:flight.EntityConstruction<flight.GlBitmapShader>, gl:flight.GlContext, fragmentSrc:String, ?onBind:(flight.GlContext, flight.GlShaderLocations, flight.RenderProxy2D)->Void):Void {
-  flight._js._fn.RenderGl.initializeGlBitmapShader(out, gl, fragmentSrc, onBind);
+  flight._js._fn.RenderGl.initializeGlBitmapShader(out, gl, fragmentSrc, (onBind == null ? js.Syntax.code("undefined") : onBind));
 }
 
 inline function initializeGlContextState(state:flight.EntityConstruction<flight.GlContextState>, gl:flight.GlContext):Void {
@@ -355,7 +355,7 @@ inline function invalidateGlRenderStateCache(state:flight.GlRenderState):Void {
 }
 
 inline function invalidateGlRenderTexture(state:flight.GlRenderState, renderTexture:flight.RenderTexture, ?status:Dynamic):Void {
-  flight._js._fn.RenderGl.invalidateGlRenderTexture(state, renderTexture, status);
+  flight._js._fn.RenderGl.invalidateGlRenderTexture(state, renderTexture, (status == null ? js.Syntax.code("undefined") : status));
 }
 
 inline function isBlendModeSupported(state:flight.GlRenderState, blendMode:flight.BlendMode):Bool {
@@ -371,7 +371,7 @@ inline function isGlRenderTextureReady(state:flight.GlRenderState, renderTexture
 }
 
 inline function linkGlProgram(gl:flight.GlContext, program:js.html.webgl.Program, ?label:String):Void {
-  flight._js._fn.RenderGl.linkGlProgram(gl, program, label);
+  flight._js._fn.RenderGl.linkGlProgram(gl, program, (label == null ? js.Syntax.code("undefined") : label));
 }
 
 inline function popGlRenderState(state:flight.GlRenderState):Void {
@@ -379,7 +379,7 @@ inline function popGlRenderState(state:flight.GlRenderState):Void {
 }
 
 inline function presentGlRenderTarget(state:flight.GlRenderState, target:flight.GlTextureRenderTarget, ?dest:Null<flight.GlRenderTarget>):Void {
-  flight._js._fn.RenderGl.presentGlRenderTarget(state, target, dest);
+  flight._js._fn.RenderGl.presentGlRenderTarget(state, target, (dest == null ? js.Syntax.code("undefined") : dest));
 }
 
 inline function pushGlRenderState(state:flight.GlRenderState):Void {
@@ -415,7 +415,7 @@ inline function registerGlCompressedTextureDecoder(state:flight.GlRenderState, d
 }
 
 inline function registerGlCompressedTextureUpload(state:flight.GlRenderState, ?uploader:Dynamic):Void {
-  flight._js._fn.RenderGl.registerGlCompressedTextureUpload(state, uploader);
+  flight._js._fn.RenderGl.registerGlCompressedTextureUpload(state, (uploader == null ? js.Syntax.code("undefined") : uploader));
 }
 
 inline function registerGlContextTeardown(contextState:flight.GlContextState, teardown:(flight.GlContext)->Void):Void {
@@ -479,7 +479,7 @@ inline function resolveGlQuadMaterialRenderer(state:flight.GlRenderState, materi
 }
 
 inline function resolveGlRenderTargetAxes(state:flight.GlRenderState, descriptor:flight.RenderTargetDescriptor, ?formatPolicy:flight.RenderTargetFormatPolicy):Null<flight.RenderTargetAxes> {
-  return flight._js._fn.RenderGl.resolveGlRenderTargetAxes(state, descriptor, formatPolicy);
+  return flight._js._fn.RenderGl.resolveGlRenderTargetAxes(state, descriptor, (formatPolicy == null ? js.Syntax.code("undefined") : formatPolicy));
 }
 
 inline function resolveGlShader(state:flight.GlRenderState, renderProxy:flight.RenderProxy2D):flight.GlBitmapShader {
@@ -487,7 +487,7 @@ inline function resolveGlShader(state:flight.GlRenderState, renderProxy:flight.R
 }
 
 inline function resolveGlTexture(state:flight.GlRenderState, texture:flight.TextureLike, ?premultiply:Bool, ?workingColorSpace:flight.RenderTargetColorSpace):Null<js.html.webgl.Texture> {
-  return flight._js._fn.RenderGl.resolveGlTexture(state, texture, premultiply, workingColorSpace);
+  return flight._js._fn.RenderGl.resolveGlTexture(state, texture, (premultiply == null ? js.Syntax.code("undefined") : premultiply), (workingColorSpace == null ? js.Syntax.code("undefined") : workingColorSpace));
 }
 
 inline function resolveGlTextureRenderTarget(state:flight.GlRenderState, target:flight.GlTextureRenderTarget):Void {
@@ -527,31 +527,31 @@ inline function updateGlTexture(state:flight.GlRenderState, texture:js.html.webg
 }
 
 inline function uploadGlCompressedTextureContainer(gl:flight.GlContext, container:flight.TextureContainer, payload:flight._internal._UInt8Array, ?decode:flight.GlCompressedTextureDecoder, ?colorSpace:flight.TextureColorSpace):Bool {
-  return flight._js._fn.RenderGl.uploadGlCompressedTextureContainer(gl, container, payload, decode, colorSpace);
+  return flight._js._fn.RenderGl.uploadGlCompressedTextureContainer(gl, container, payload, (decode == null ? js.Syntax.code("undefined") : decode), (colorSpace == null ? js.Syntax.code("undefined") : colorSpace));
 }
 
 inline function uploadGlSkinPaletteTexture(gl:flight.GlContext, palette:flight.GlSkinPaletteTexture, jointMatrices:flight._internal._Float32Array, jointCount:Float, ?texelsPerJoint:Float):Void {
-  flight._js._fn.RenderGl.uploadGlSkinPaletteTexture(gl, palette, jointMatrices, jointCount, texelsPerJoint);
+  flight._js._fn.RenderGl.uploadGlSkinPaletteTexture(gl, palette, jointMatrices, jointCount, (texelsPerJoint == null ? js.Syntax.code("undefined") : texelsPerJoint));
 }
 
 inline function uploadGlTextureData(gl:flight.GlContext, target:Float, width:Float, height:Float, data:flight._internal._UInt8ClampedArray<flight._internal._ArrayBuffer>, ?internalFormat:Float):Void {
-  flight._js._fn.RenderGl.uploadGlTextureData(gl, target, width, height, data, internalFormat);
+  flight._js._fn.RenderGl.uploadGlTextureData(gl, target, width, height, data, (internalFormat == null ? js.Syntax.code("undefined") : internalFormat));
 }
 
 inline function uploadGlTextureElement(gl:flight.GlContext, target:Float, source:Dynamic, ?internalFormat:Float):Void {
-  flight._js._fn.RenderGl.uploadGlTextureElement(gl, target, source, internalFormat);
+  flight._js._fn.RenderGl.uploadGlTextureElement(gl, target, source, (internalFormat == null ? js.Syntax.code("undefined") : internalFormat));
 }
 
 inline function uploadGlTextureImageResource(gl:flight.GlContext, target:Float, image:flight.ImageResource, ?internalFormat:Float):Void {
-  flight._js._fn.RenderGl.uploadGlTextureImageResource(gl, target, image, internalFormat);
+  flight._js._fn.RenderGl.uploadGlTextureImageResource(gl, target, image, (internalFormat == null ? js.Syntax.code("undefined") : internalFormat));
 }
 
 inline function uploadGlTextureVideoFrame(gl:flight.GlContext, image:flight.ImageResource, uploadedVersion:Float, ?internalFormat:Float):Float {
-  return flight._js._fn.RenderGl.uploadGlTextureVideoFrame(gl, image, uploadedVersion, internalFormat);
+  return flight._js._fn.RenderGl.uploadGlTextureVideoFrame(gl, image, uploadedVersion, (internalFormat == null ? js.Syntax.code("undefined") : internalFormat));
 }
 
 inline function useGlProgram(state:flight.GlRenderState, ?shader:flight.GlBitmapShader):Void {
-  flight._js._fn.RenderGl.useGlProgram(state, shader);
+  flight._js._fn.RenderGl.useGlProgram(state, (shader == null ? js.Syntax.code("undefined") : shader));
 }
 
 inline function withGlRenderState<T>(state:flight.GlRenderState, callback:()->T):T {

@@ -31,7 +31,7 @@ inline function detectFontFormat(bytes:Dynamic):Null<String> {
 }
 
 inline function getFontShorthand(family:String, ?style:String):String {
-  return flight._js._fn.Font.getFontShorthand(family, style);
+  return flight._js._fn.Font.getFontShorthand(family, (style == null ? js.Syntax.code("undefined") : style));
 }
 
 inline function inferFontFormatFromUrl(url:String):Null<String> {
@@ -47,7 +47,7 @@ inline function initializeGlyphRasterizerBackendFromGlyphOutlineSource(out:fligh
 }
 
 inline function isFontLoaded(backend:flight.HostFontLoadingCapability, family:String, ?style:String):Bool {
-  return flight._js._fn.Font.isFontLoaded(backend, family, style);
+  return flight._js._fn.Font.isFontLoaded(backend, family, (style == null ? js.Syntax.code("undefined") : style));
 }
 
 inline function loadFontResourceFromBytes(hostFontLoading:flight.HostFontLoadingCapability, out:flight.FontResource, bytes:flight._internal._UInt8Array):flight._internal._Promise<flight.FontResource> {

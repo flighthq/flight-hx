@@ -11,7 +11,7 @@ inline function explainSvgPathData(d:String):Null<{ position:Float, reason:Strin
 }
 
 inline function formatSvgPathData(path:flight.Path, ?options:flight.SvgPathDataFormatOptions):String {
-  return flight._js._fn.PathFormats.formatSvgPathData(path, options);
+  return flight._js._fn.PathFormats.formatSvgPathData(path, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function parseSvgPathData(d:String):Null<flight.Path> {

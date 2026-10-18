@@ -4,6 +4,6 @@ import flight.Math;
 // installed-package gate expects typing this consumer for cpp to fail at the public facade.
 class NativeUnsupportedApi {
   static function main():Void {
-    approxEqual(1.0, 1.0);
+    mean([1.0]);
   }
 }

@@ -61,6 +61,9 @@ functions, and 1,254 values across all 153 package contracts. All 8,167 runtime 
 accounted for, every non-empty package contract is fully covered, and nothing is missing or
 unexpected. (`@flighthq/webcam` currently has an empty contract.) Two narrow downstream
 compatibility corrections are manifest-recorded with exact application counts and fail on drift.
+Public web forwarding also converts Haxe's omitted-argument `null` sentinel to JavaScript
+`undefined` for every optional parameter, preserving upstream default-parameter behavior; the
+complete default-API gate checks every such forwarding site.
 
 The optional transpilation corpus intentionally remains at Flight `65889a` and accepts 1,110 of
 2,866 non-test modules, producing 1,110
@@ -81,15 +84,16 @@ The complete 7,224-file transpiled tree compiles and executes on JavaScript usin
 
 Native integration starts from what the pinned current flight-cpp SDK actually provides, rather than waiting
 for full TS-to-Haxe transpilation or claiming parity it has not earned. `src-cpp/manifest.json` records
-101 compile-proven bindings across 18 public modules: 62 compiler-planned direct calls, four
-compiler-emitted UTF-8 String adapters, and 35 required-primitive overrides from dependency-complete
+121 compile-proven bindings across 24 public modules: 62 compiler-planned direct calls, four
+compiler-emitted UTF-8 String adapters, 52 required-primitive overrides, and three optional-scalar
+adapters from dependency-complete
 flight-cpp headers. It also records the generated SDK's
 distinct source/compiler revisions, C++20, and the two downstream hxcpp/flight-cpp corrections. The current generated native
 SDK reports 2,567 emitted modules; Haxe exposes only the smaller exact partition it actually proves.
 The checked `src-cpp/reconciliation.json` splits that total into 1,895 dependency-complete and 672
 dependency-incomplete modules, alongside 584 refused modules. It reconciles every web package with
-the 101 bound functions, three upstream Scene2D handle types, one integration-only handle, and the
-remaining gaps. It also identifies 90 unbound scalar functions across 35 packages whose signatures
+the 121 bound functions, three upstream Scene2D handle types, one integration-only handle, and the
+remaining gaps. It also identifies 70 unbound scalar functions across 33 packages whose signatures
 and inline generated C++ definitions make them the next compile-probe candidates; header presence
 does not promote them to support.
 The compiler-owned dual plan covers all 11,247 public rows and emits 2,245 Haxe-C++ declarations.
@@ -97,10 +101,13 @@ All 66 header-passing function candidates are promoted: 62 directly and four thr
 exact adapter emissions (`Audio.getAudioMimeTypeEssence`, `Color.computeRgbHexString`,
 `Color.computeRgbaCssString`, and `Protocol.isValidProtocolScheme`). Those adapters copy through
 UTF-8 in isolated translation units, keeping Flight headers outside hxcpp-generated namespaces.
-The 35 scalar functions are explicit flight-hx golden-reference overrides for functions that the
-current compiler plan omits despite dependency-complete definitions in flight-cpp. Generation
-requires exact primitive signatures and fails once the compiler begins planning them, making future
-upstream support replace rather than coexist with the downstream override. Compile probing also
+The 52 required-scalar functions and three optional-scalar adapters are explicit flight-hx
+golden-reference overrides for functions that the current compiler plan omits despite
+dependency-complete definitions in flight-cpp. Optional adapters carry an explicit presence bit and
+reconstruct `std::optional`, preserving omitted and supplied arguments without exposing that
+transport publicly. Generation requires exact primitive signatures and fails once the compiler
+begins planning them, making future upstream support replace rather than coexist with the downstream
+override. Compile probing also
 records `Skeleton2dFormats.clampUnit` as unavailable: its generated header contains unrelated,
 ill-typed `flight::Any` operations, demonstrating why an emitted header is not itself support proof.
 `examples/cross-target-math/` compiles and runs the same installed-package consumer against those

@@ -49,7 +49,7 @@ inline function computeMeshGeometryFlatNormals(out:flight.MeshGeometry, geometry
 }
 
 inline function computeMeshGeometryNormals(out:flight.MeshGeometry, geometry:flight.MeshGeometry, ?positionGroups:Null<flight._internal._UInt32Array<flight._internal._ArrayBuffer>>):Void {
-  flight._js._fn.Mesh.computeMeshGeometryNormals(out, geometry, positionGroups);
+  flight._js._fn.Mesh.computeMeshGeometryNormals(out, geometry, (positionGroups == null ? js.Syntax.code("undefined") : positionGroups));
 }
 
 inline function computeMeshGeometryPositionGroups(geometry:flight.MeshGeometry):flight._internal._UInt32Array<flight._internal._ArrayBuffer> {
@@ -57,7 +57,7 @@ inline function computeMeshGeometryPositionGroups(geometry:flight.MeshGeometry):
 }
 
 inline function computeMeshGeometryTangents(out:flight.MeshGeometry, geometry:flight.MeshGeometry, ?positionGroups:Null<flight._internal._UInt32Array<flight._internal._ArrayBuffer>>):Void {
-  flight._js._fn.Mesh.computeMeshGeometryTangents(out, geometry, positionGroups);
+  flight._js._fn.Mesh.computeMeshGeometryTangents(out, geometry, (positionGroups == null ? js.Syntax.code("undefined") : positionGroups));
 }
 
 inline function computeMeshGeometryWireframeIndices(geometry:flight.MeshGeometry):Dynamic {
@@ -69,35 +69,35 @@ inline function convertMeshGeometryLayout(source:flight.MeshGeometry, targetLayo
 }
 
 inline function createBoxMeshGeometry(?width:Float, ?height:Float, ?depth:Float):flight.MeshGeometry {
-  return flight._js._fn.Mesh.createBoxMeshGeometry(width, height, depth);
+  return flight._js._fn.Mesh.createBoxMeshGeometry((width == null ? js.Syntax.code("undefined") : width), (height == null ? js.Syntax.code("undefined") : height), (depth == null ? js.Syntax.code("undefined") : depth));
 }
 
 inline function createCapsuleMeshGeometry(?radius:Float, ?height:Float, ?radialSegments:Float, ?capSegments:Float):flight.MeshGeometry {
-  return flight._js._fn.Mesh.createCapsuleMeshGeometry(radius, height, radialSegments, capSegments);
+  return flight._js._fn.Mesh.createCapsuleMeshGeometry((radius == null ? js.Syntax.code("undefined") : radius), (height == null ? js.Syntax.code("undefined") : height), (radialSegments == null ? js.Syntax.code("undefined") : radialSegments), (capSegments == null ? js.Syntax.code("undefined") : capSegments));
 }
 
 inline function createCircleMeshGeometry(?radius:Float, ?segments:Float):flight.MeshGeometry {
-  return flight._js._fn.Mesh.createCircleMeshGeometry(radius, segments);
+  return flight._js._fn.Mesh.createCircleMeshGeometry((radius == null ? js.Syntax.code("undefined") : radius), (segments == null ? js.Syntax.code("undefined") : segments));
 }
 
 inline function createConeMeshGeometry(?radius:Float, ?height:Float, ?radialSegments:Float, ?capped:Bool):flight.MeshGeometry {
-  return flight._js._fn.Mesh.createConeMeshGeometry(radius, height, radialSegments, capped);
+  return flight._js._fn.Mesh.createConeMeshGeometry((radius == null ? js.Syntax.code("undefined") : radius), (height == null ? js.Syntax.code("undefined") : height), (radialSegments == null ? js.Syntax.code("undefined") : radialSegments), (capped == null ? js.Syntax.code("undefined") : capped));
 }
 
 inline function createCylinderMeshGeometry(?topRadius:Float, ?bottomRadius:Float, ?height:Float, ?radialSegments:Float, ?capped:Bool):flight.MeshGeometry {
-  return flight._js._fn.Mesh.createCylinderMeshGeometry(topRadius, bottomRadius, height, radialSegments, capped);
+  return flight._js._fn.Mesh.createCylinderMeshGeometry((topRadius == null ? js.Syntax.code("undefined") : topRadius), (bottomRadius == null ? js.Syntax.code("undefined") : bottomRadius), (height == null ? js.Syntax.code("undefined") : height), (radialSegments == null ? js.Syntax.code("undefined") : radialSegments), (capped == null ? js.Syntax.code("undefined") : capped));
 }
 
 inline function createDodecahedronMeshGeometry(?radius:Float, ?detail:Float):flight.MeshGeometry {
-  return flight._js._fn.Mesh.createDodecahedronMeshGeometry(radius, detail);
+  return flight._js._fn.Mesh.createDodecahedronMeshGeometry((radius == null ? js.Syntax.code("undefined") : radius), (detail == null ? js.Syntax.code("undefined") : detail));
 }
 
 inline function createIcosahedronMeshGeometry(?radius:Float, ?detail:Float):flight.MeshGeometry {
-  return flight._js._fn.Mesh.createIcosahedronMeshGeometry(radius, detail);
+  return flight._js._fn.Mesh.createIcosahedronMeshGeometry((radius == null ? js.Syntax.code("undefined") : radius), (detail == null ? js.Syntax.code("undefined") : detail));
 }
 
 inline function createIcosphereMeshGeometry(?radius:Float, ?subdivisions:Float):flight.MeshGeometry {
-  return flight._js._fn.Mesh.createIcosphereMeshGeometry(radius, subdivisions);
+  return flight._js._fn.Mesh.createIcosphereMeshGeometry((radius == null ? js.Syntax.code("undefined") : radius), (subdivisions == null ? js.Syntax.code("undefined") : subdivisions));
 }
 
 inline function createMeshGeometry(options:flight.MeshGeometryOptions):flight.MeshGeometry {
@@ -109,39 +109,39 @@ inline function createMeshGeometryFromAttributes(options:flight.MeshGeometryFrom
 }
 
 inline function createOctahedronMeshGeometry(?radius:Float, ?detail:Float):flight.MeshGeometry {
-  return flight._js._fn.Mesh.createOctahedronMeshGeometry(radius, detail);
+  return flight._js._fn.Mesh.createOctahedronMeshGeometry((radius == null ? js.Syntax.code("undefined") : radius), (detail == null ? js.Syntax.code("undefined") : detail));
 }
 
 inline function createPlaneMeshGeometry(?width:Float, ?depth:Float, ?widthSegments:Float, ?depthSegments:Float):flight.MeshGeometry {
-  return flight._js._fn.Mesh.createPlaneMeshGeometry(width, depth, widthSegments, depthSegments);
+  return flight._js._fn.Mesh.createPlaneMeshGeometry((width == null ? js.Syntax.code("undefined") : width), (depth == null ? js.Syntax.code("undefined") : depth), (widthSegments == null ? js.Syntax.code("undefined") : widthSegments), (depthSegments == null ? js.Syntax.code("undefined") : depthSegments));
 }
 
 inline function createPolyhedronMeshGeometry(vertexPositions:Array<Array<Float>>, faceIndices:Array<Array<Float>>, ?radius:Float, ?detail:Float):flight.MeshGeometry {
-  return flight._js._fn.Mesh.createPolyhedronMeshGeometry(vertexPositions, faceIndices, radius, detail);
+  return flight._js._fn.Mesh.createPolyhedronMeshGeometry(vertexPositions, faceIndices, (radius == null ? js.Syntax.code("undefined") : radius), (detail == null ? js.Syntax.code("undefined") : detail));
 }
 
 inline function createQuadMeshGeometry(?width:Float, ?height:Float):flight.MeshGeometry {
-  return flight._js._fn.Mesh.createQuadMeshGeometry(width, height);
+  return flight._js._fn.Mesh.createQuadMeshGeometry((width == null ? js.Syntax.code("undefined") : width), (height == null ? js.Syntax.code("undefined") : height));
 }
 
 inline function createRingMeshGeometry(?innerRadius:Float, ?outerRadius:Float, ?segments:Float):flight.MeshGeometry {
-  return flight._js._fn.Mesh.createRingMeshGeometry(innerRadius, outerRadius, segments);
+  return flight._js._fn.Mesh.createRingMeshGeometry((innerRadius == null ? js.Syntax.code("undefined") : innerRadius), (outerRadius == null ? js.Syntax.code("undefined") : outerRadius), (segments == null ? js.Syntax.code("undefined") : segments));
 }
 
 inline function createSphereMeshGeometry(?radius:Float, ?widthSegments:Float, ?heightSegments:Float):flight.MeshGeometry {
-  return flight._js._fn.Mesh.createSphereMeshGeometry(radius, widthSegments, heightSegments);
+  return flight._js._fn.Mesh.createSphereMeshGeometry((radius == null ? js.Syntax.code("undefined") : radius), (widthSegments == null ? js.Syntax.code("undefined") : widthSegments), (heightSegments == null ? js.Syntax.code("undefined") : heightSegments));
 }
 
 inline function createTetrahedronMeshGeometry(?radius:Float, ?detail:Float):flight.MeshGeometry {
-  return flight._js._fn.Mesh.createTetrahedronMeshGeometry(radius, detail);
+  return flight._js._fn.Mesh.createTetrahedronMeshGeometry((radius == null ? js.Syntax.code("undefined") : radius), (detail == null ? js.Syntax.code("undefined") : detail));
 }
 
 inline function createTorusKnotMeshGeometry(?radius:Float, ?tube:Float, ?tubularSegments:Float, ?radialSegments:Float, ?p:Float, ?q:Float):flight.MeshGeometry {
-  return flight._js._fn.Mesh.createTorusKnotMeshGeometry(radius, tube, tubularSegments, radialSegments, p, q);
+  return flight._js._fn.Mesh.createTorusKnotMeshGeometry((radius == null ? js.Syntax.code("undefined") : radius), (tube == null ? js.Syntax.code("undefined") : tube), (tubularSegments == null ? js.Syntax.code("undefined") : tubularSegments), (radialSegments == null ? js.Syntax.code("undefined") : radialSegments), (p == null ? js.Syntax.code("undefined") : p), (q == null ? js.Syntax.code("undefined") : q));
 }
 
 inline function createTorusMeshGeometry(?radius:Float, ?tube:Float, ?radialSegments:Float, ?tubularSegments:Float):flight.MeshGeometry {
-  return flight._js._fn.Mesh.createTorusMeshGeometry(radius, tube, radialSegments, tubularSegments);
+  return flight._js._fn.Mesh.createTorusMeshGeometry((radius == null ? js.Syntax.code("undefined") : radius), (tube == null ? js.Syntax.code("undefined") : tube), (radialSegments == null ? js.Syntax.code("undefined") : radialSegments), (tubularSegments == null ? js.Syntax.code("undefined") : tubularSegments));
 }
 
 inline function destroyMeshGeometryGlData(geometry:flight.MeshGeometry):Void {

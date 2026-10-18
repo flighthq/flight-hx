@@ -7,7 +7,7 @@ inline function acquireCanvasRenderTarget(pool:flight.CanvasRenderTargetPool, wi
 }
 
 inline function applyBevelEffectToCanvas(source:flight.CanvasTextureRenderTarget, dest:flight.CanvasTextureRenderTarget, poolOrEffect:Dynamic, ?maybeEffect:flight.BevelEffect):Void {
-  flight._js._fn.EffectsCanvas.applyBevelEffectToCanvas(source, dest, poolOrEffect, maybeEffect);
+  flight._js._fn.EffectsCanvas.applyBevelEffectToCanvas(source, dest, poolOrEffect, (maybeEffect == null ? js.Syntax.code("undefined") : maybeEffect));
 }
 
 inline function applyBlendEffectToCanvas(state:flight.CanvasRenderState, source:flight.CanvasTextureRenderTarget, dest:flight.CanvasTextureRenderTarget, effect:flight.BlendEffect):Void {
@@ -27,7 +27,7 @@ inline function applyCanvasEffectsToRenderTexture(ownerState:flight.CanvasRender
 }
 
 inline function applyCanvasGradientRampLookup(dest:flight.CanvasTextureRenderTarget, source:flight.CanvasTextureRenderTarget, ramp:flight._internal._UInt8ClampedArray, ?bias:Float, ?scale:Float):Void {
-  flight._js._fn.EffectsCanvas.applyCanvasGradientRampLookup(dest, source, ramp, bias, scale);
+  flight._js._fn.EffectsCanvas.applyCanvasGradientRampLookup(dest, source, ramp, (bias == null ? js.Syntax.code("undefined") : bias), (scale == null ? js.Syntax.code("undefined") : scale));
 }
 
 inline function applyColorLutPassToCanvas(source:flight.CanvasTextureRenderTarget, dest:flight.CanvasTextureRenderTarget, lut:flight.ColorLut):Void {
@@ -47,7 +47,7 @@ inline function applyCompositeEffectToCanvas(state:flight.CanvasRenderState, sou
 }
 
 inline function applyDropShadowEffectToCanvas(source:flight.CanvasTextureRenderTarget, dest:flight.CanvasTextureRenderTarget, poolOrEffect:Dynamic, ?maybeEffect:flight.DropShadowEffect):Void {
-  flight._js._fn.EffectsCanvas.applyDropShadowEffectToCanvas(source, dest, poolOrEffect, maybeEffect);
+  flight._js._fn.EffectsCanvas.applyDropShadowEffectToCanvas(source, dest, poolOrEffect, (maybeEffect == null ? js.Syntax.code("undefined") : maybeEffect));
 }
 
 inline function applyFilmGrainEffectToCanvas(source:flight.CanvasTextureRenderTarget, dest:flight.CanvasTextureRenderTarget, pool:flight.CanvasRenderTargetPool, effect:flight.FilmGrainEffect):Void {
@@ -55,19 +55,19 @@ inline function applyFilmGrainEffectToCanvas(source:flight.CanvasTextureRenderTa
 }
 
 inline function applyGradientBevelEffectToCanvas(source:flight.CanvasTextureRenderTarget, dest:flight.CanvasTextureRenderTarget, poolOrEffect:Dynamic, ?maybeEffect:flight.GradientBevelEffect):Void {
-  flight._js._fn.EffectsCanvas.applyGradientBevelEffectToCanvas(source, dest, poolOrEffect, maybeEffect);
+  flight._js._fn.EffectsCanvas.applyGradientBevelEffectToCanvas(source, dest, poolOrEffect, (maybeEffect == null ? js.Syntax.code("undefined") : maybeEffect));
 }
 
 inline function applyGradientGlowEffectToCanvas(source:flight.CanvasTextureRenderTarget, dest:flight.CanvasTextureRenderTarget, poolOrEffect:Dynamic, ?maybeEffect:flight.GradientGlowEffect):Void {
-  flight._js._fn.EffectsCanvas.applyGradientGlowEffectToCanvas(source, dest, poolOrEffect, maybeEffect);
+  flight._js._fn.EffectsCanvas.applyGradientGlowEffectToCanvas(source, dest, poolOrEffect, (maybeEffect == null ? js.Syntax.code("undefined") : maybeEffect));
 }
 
 inline function applyInnerGlowEffectToCanvas(source:flight.CanvasTextureRenderTarget, dest:flight.CanvasTextureRenderTarget, poolOrEffect:Dynamic, ?maybeEffect:flight.InnerGlowEffect):Void {
-  flight._js._fn.EffectsCanvas.applyInnerGlowEffectToCanvas(source, dest, poolOrEffect, maybeEffect);
+  flight._js._fn.EffectsCanvas.applyInnerGlowEffectToCanvas(source, dest, poolOrEffect, (maybeEffect == null ? js.Syntax.code("undefined") : maybeEffect));
 }
 
 inline function applyInnerShadowEffectToCanvas(source:flight.CanvasTextureRenderTarget, dest:flight.CanvasTextureRenderTarget, poolOrEffect:Dynamic, ?maybeEffect:flight.InnerShadowEffect):Void {
-  flight._js._fn.EffectsCanvas.applyInnerShadowEffectToCanvas(source, dest, poolOrEffect, maybeEffect);
+  flight._js._fn.EffectsCanvas.applyInnerShadowEffectToCanvas(source, dest, poolOrEffect, (maybeEffect == null ? js.Syntax.code("undefined") : maybeEffect));
 }
 
 inline function applyLensDistortionEffectToCanvas(source:flight.CanvasTextureRenderTarget, dest:flight.CanvasTextureRenderTarget, effect:flight.LensDistortionEffect):Void {
@@ -75,7 +75,7 @@ inline function applyLensDistortionEffectToCanvas(source:flight.CanvasTextureRen
 }
 
 inline function applyOuterGlowEffectToCanvas(source:flight.CanvasTextureRenderTarget, dest:flight.CanvasTextureRenderTarget, poolOrEffect:Dynamic, ?maybeEffect:flight.OuterGlowEffect):Void {
-  flight._js._fn.EffectsCanvas.applyOuterGlowEffectToCanvas(source, dest, poolOrEffect, maybeEffect);
+  flight._js._fn.EffectsCanvas.applyOuterGlowEffectToCanvas(source, dest, poolOrEffect, (maybeEffect == null ? js.Syntax.code("undefined") : maybeEffect));
 }
 
 inline function applyPixelateEffectToCanvas(source:flight.CanvasTextureRenderTarget, dest:flight.CanvasTextureRenderTarget, pool:flight.CanvasRenderTargetPool, effect:flight.PixelateEffect):Void {
@@ -99,7 +99,7 @@ inline function applyVignetteEffectToCanvas(source:flight.CanvasTextureRenderTar
 }
 
 inline function beginCanvasEffectPass(pass:flight.CanvasRenderPass, pipeline:flight.CanvasEffectState, ?clear:flight.RenderTargetClear):flight.CanvasRenderPass {
-  return flight._js._fn.EffectsCanvas.beginCanvasEffectPass(pass, pipeline, clear);
+  return flight._js._fn.EffectsCanvas.beginCanvasEffectPass(pass, pipeline, (clear == null ? js.Syntax.code("undefined") : clear));
 }
 
 inline function buildCanvasGradientRamp(colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>):flight._internal._UInt8ClampedArray {
@@ -115,7 +115,7 @@ inline function clipCanvasBevelBand(band:flight.CanvasTextureRenderTarget, sourc
 }
 
 inline function compositeCanvasImage(dest:flight.CanvasTextureRenderTarget, source:flight.CanvasTextureRenderTarget, ?dx:Float, ?dy:Float, ?compositeOperation:js.html.CompositeOperation):Void {
-  flight._js._fn.EffectsCanvas.compositeCanvasImage(dest, source, dx, dy, compositeOperation);
+  flight._js._fn.EffectsCanvas.compositeCanvasImage(dest, source, (dx == null ? js.Syntax.code("undefined") : dx), (dy == null ? js.Syntax.code("undefined") : dy), (compositeOperation == null ? js.Syntax.code("undefined") : compositeOperation));
 }
 
 inline function compositeCanvasSourceMode(dest:flight.CanvasTextureRenderTarget, source:flight.CanvasTextureRenderTarget, sourceMode:flight.CanvasEffectSourceMode):Void {
@@ -131,7 +131,7 @@ inline function computeOuterGlowEffectCss(effect:flight.OuterGlowEffect):Null<St
 }
 
 inline function createCanvasEffectState(state:flight.CanvasRenderState, ?options:flight.EffectStateOptions):flight.CanvasEffectState {
-  return flight._js._fn.EffectsCanvas.createCanvasEffectState(state, options);
+  return flight._js._fn.EffectsCanvas.createCanvasEffectState(state, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createCanvasTextureRenderTargetPool(canvasHost:flight.HostCanvasCapability):flight.CanvasRenderTargetPool {
@@ -147,7 +147,7 @@ inline function drawCanvasAccumulationPass(dest:flight.CanvasTextureRenderTarget
 }
 
 inline function drawCanvasEffectPass(dest:flight.CanvasTextureRenderTarget, source:flight.CanvasTextureRenderTarget, filter:String, ?compositeOperation:js.html.CompositeOperation):Void {
-  flight._js._fn.EffectsCanvas.drawCanvasEffectPass(dest, source, filter, compositeOperation);
+  flight._js._fn.EffectsCanvas.drawCanvasEffectPass(dest, source, filter, (compositeOperation == null ? js.Syntax.code("undefined") : compositeOperation));
 }
 
 inline function drawCanvasImageDataPass(dest:flight.CanvasTextureRenderTarget, source:flight.CanvasTextureRenderTarget, transform:(flight._internal._UInt8ClampedArray, Float)->Void):Void {
@@ -155,7 +155,7 @@ inline function drawCanvasImageDataPass(dest:flight.CanvasTextureRenderTarget, s
 }
 
 inline function drawCanvasInvertedTintedAlphaMask(dest:flight.CanvasTextureRenderTarget, source:flight.CanvasTextureRenderTarget, color:Float, alpha:Float, strength:Float, ?offsetX:Float, ?offsetY:Float):Void {
-  flight._js._fn.EffectsCanvas.drawCanvasInvertedTintedAlphaMask(dest, source, color, alpha, strength, offsetX, offsetY);
+  flight._js._fn.EffectsCanvas.drawCanvasInvertedTintedAlphaMask(dest, source, color, alpha, strength, (offsetX == null ? js.Syntax.code("undefined") : offsetX), (offsetY == null ? js.Syntax.code("undefined") : offsetY));
 }
 
 inline function drawCanvasTintedAlphaMask(dest:flight.CanvasTextureRenderTarget, source:flight.CanvasTextureRenderTarget, color:Float, alpha:Float, strength:Float):Void {

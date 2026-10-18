@@ -17,11 +17,11 @@ inline function computeTilemapLocalBoundsRectangle(out:flight.Rectangle, source:
 }
 
 inline function createTilemap(?obj:flight.PartialNode<flight.Tilemap>):flight.Tilemap {
-  return flight._js._fn.Tilemap.createTilemap(obj);
+  return flight._js._fn.Tilemap.createTilemap((obj == null ? js.Syntax.code("undefined") : obj));
 }
 
 inline function createTilemapData(?data:Dynamic):flight.TilemapData {
-  return flight._js._fn.Tilemap.createTilemapData(data);
+  return flight._js._fn.Tilemap.createTilemapData((data == null ? js.Syntax.code("undefined") : data));
 }
 
 inline function createTilemapRuntime():flight.TilemapRuntime {
@@ -77,7 +77,7 @@ inline function getTilemapTileRect(out:flight.Rectangle, source:flight.Tilemap, 
 }
 
 inline function initializeTilemapData(out:flight.EntityConstruction<flight.TilemapData>, ?data:Dynamic):Void {
-  flight._js._fn.Tilemap.initializeTilemapData(out, data);
+  flight._js._fn.Tilemap.initializeTilemapData(out, (data == null ? js.Syntax.code("undefined") : data));
 }
 
 inline function initializeTilemapSignals(out:flight.EntityConstruction<flight.TilemapSignals>):Void {

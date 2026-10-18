@@ -7,7 +7,7 @@ inline function areScene3DResourceFailureGuardsEnabled(resolver:flight.Scene3DRe
 }
 
 inline function createBuiltInScene3DResourceResolver(hostImage:flight.HostImageCapability, ?options:flight.Scene3DResourceResolverOptions):flight.Scene3DResourceResolverWithRuntime {
-  return flight._js._fn.Scene3dResources.createBuiltInScene3DResourceResolver(hostImage, options);
+  return flight._js._fn.Scene3dResources.createBuiltInScene3DResourceResolver(hostImage, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createScene3DMaterialTextureRegistry():flight.Scene3DMaterialTextureRegistry {
@@ -15,7 +15,7 @@ inline function createScene3DMaterialTextureRegistry():flight.Scene3DMaterialTex
 }
 
 inline function createScene3DResourceResolver(hostImage:flight.HostImageCapability, ?options:flight.Scene3DResourceResolverOptions):flight.Scene3DResourceResolverWithRuntime {
-  return flight._js._fn.Scene3dResources.createScene3DResourceResolver(hostImage, options);
+  return flight._js._fn.Scene3dResources.createScene3DResourceResolver(hostImage, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createScene3DResourceSignals():flight.Scene3DResourceSignals {
@@ -79,7 +79,7 @@ inline function initializeImageResourceFailure(out:flight.EntityConstruction<fli
 }
 
 inline function initializeScene3DResourceResolver(out:flight.EntityConstruction<flight.Scene3DResourceResolverWithRuntime>, hostImage:flight.HostImageCapability, ?options:flight.Scene3DResourceResolverOptions):Void {
-  flight._js._fn.Scene3dResources.initializeScene3DResourceResolver(out, hostImage, options);
+  flight._js._fn.Scene3dResources.initializeScene3DResourceResolver(out, hostImage, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function initializeScene3DResourceSignals(out:flight.EntityConstruction<flight.Scene3DResourceSignals>):Void {
@@ -87,51 +87,51 @@ inline function initializeScene3DResourceSignals(out:flight.EntityConstruction<f
 }
 
 inline function loadScene3DDocumentBytesFromUrl(hostNet:flight.HostNetCapability, url:String, ?options:flight.Scene3DDocumentLoadOptions):flight._internal._Promise<Null<flight._internal._UInt8Array>> {
-  return flight._js._fn.Scene3dResources.loadScene3DDocumentBytesFromUrl(hostNet, url, options);
+  return flight._js._fn.Scene3dResources.loadScene3DDocumentBytesFromUrl(hostNet, url, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function loadScene3DDocumentFrom3dsUrl(hostNet:flight.HostNetCapability, url:String, ?options:flight.Scene3DDocumentLoadOptions):flight._internal._Promise<Null<flight.Scene3DDocument>> {
-  return flight._js._fn.Scene3dResources.loadScene3DDocumentFrom3dsUrl(hostNet, url, options);
+  return flight._js._fn.Scene3dResources.loadScene3DDocumentFrom3dsUrl(hostNet, url, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function loadScene3DDocumentFromAwd2Url(hostNet:flight.HostNetCapability, url:String, parse:flight.Awd2ParseOptions, ?options:flight.Scene3DDocumentLoadOptions):flight._internal._Promise<Null<flight.Scene3DDocument>> {
-  return flight._js._fn.Scene3dResources.loadScene3DDocumentFromAwd2Url(hostNet, url, parse, options);
+  return flight._js._fn.Scene3dResources.loadScene3DDocumentFromAwd2Url(hostNet, url, parse, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function loadScene3DDocumentFromGlbUrl(hostNet:flight.HostNetCapability, url:String, ?options:flight.GltfScene3DDocumentLoadOptions):flight._internal._Promise<Null<flight.Scene3DDocument>> {
-  return flight._js._fn.Scene3dResources.loadScene3DDocumentFromGlbUrl(hostNet, url, options);
+  return flight._js._fn.Scene3dResources.loadScene3DDocumentFromGlbUrl(hostNet, url, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function loadScene3DDocumentFromGlbUrlWithCoreFeatureHandlers(hostNet:flight.HostNetCapability, url:String, coreFeatureHandlers:Array<flight.GltfCoreFeatureHandler>, ?options:flight.GltfScene3DDocumentLoadOptions):flight._internal._Promise<Null<flight.Scene3DDocument>> {
-  return flight._js._fn.Scene3dResources.loadScene3DDocumentFromGlbUrlWithCoreFeatureHandlers(hostNet, url, coreFeatureHandlers, options);
+  return flight._js._fn.Scene3dResources.loadScene3DDocumentFromGlbUrlWithCoreFeatureHandlers(hostNet, url, coreFeatureHandlers, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function loadScene3DDocumentFromGltfUrl(hostNet:flight.HostNetCapability, url:String, ?options:flight.GltfScene3DDocumentLoadOptions):flight._internal._Promise<Null<flight.Scene3DDocument>> {
-  return flight._js._fn.Scene3dResources.loadScene3DDocumentFromGltfUrl(hostNet, url, options);
+  return flight._js._fn.Scene3dResources.loadScene3DDocumentFromGltfUrl(hostNet, url, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function loadScene3DDocumentFromGltfUrlWithCoreFeatureHandlers(hostNet:flight.HostNetCapability, url:String, coreFeatureHandlers:Array<flight.GltfCoreFeatureHandler>, ?options:flight.GltfScene3DDocumentLoadOptions):flight._internal._Promise<Null<flight.Scene3DDocument>> {
-  return flight._js._fn.Scene3dResources.loadScene3DDocumentFromGltfUrlWithCoreFeatureHandlers(hostNet, url, coreFeatureHandlers, options);
+  return flight._js._fn.Scene3dResources.loadScene3DDocumentFromGltfUrlWithCoreFeatureHandlers(hostNet, url, coreFeatureHandlers, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function loadScene3DDocumentFromMd2Url(hostNet:flight.HostNetCapability, url:String, ?options:flight.Scene3DDocumentLoadOptions):flight._internal._Promise<Null<flight.Scene3DDocument>> {
-  return flight._js._fn.Scene3dResources.loadScene3DDocumentFromMd2Url(hostNet, url, options);
+  return flight._js._fn.Scene3dResources.loadScene3DDocumentFromMd2Url(hostNet, url, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function loadScene3DDocumentFromMd5MeshUrl(hostNet:flight.HostNetCapability, url:String, ?options:flight.Scene3DDocumentLoadOptions):flight._internal._Promise<Null<flight.Scene3DDocument>> {
-  return flight._js._fn.Scene3dResources.loadScene3DDocumentFromMd5MeshUrl(hostNet, url, options);
+  return flight._js._fn.Scene3dResources.loadScene3DDocumentFromMd5MeshUrl(hostNet, url, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function loadScene3DDocumentFromObjUrl(hostNet:flight.HostNetCapability, url:String, ?materials:flight.ObjMaterialLibrary, ?options:flight.Scene3DDocumentLoadOptions):flight._internal._Promise<Null<flight.Scene3DDocument>> {
-  return flight._js._fn.Scene3dResources.loadScene3DDocumentFromObjUrl(hostNet, url, materials, options);
+  return flight._js._fn.Scene3dResources.loadScene3DDocumentFromObjUrl(hostNet, url, (materials == null ? js.Syntax.code("undefined") : materials), (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function loadScene3DDocumentTextFromUrl(hostNet:flight.HostNetCapability, url:String, ?options:flight.Scene3DDocumentLoadOptions):flight._internal._Promise<Null<String>> {
-  return flight._js._fn.Scene3dResources.loadScene3DDocumentTextFromUrl(hostNet, url, options);
+  return flight._js._fn.Scene3dResources.loadScene3DDocumentTextFromUrl(hostNet, url, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function loadScene3DResources(scene:flight.Scene3D, resolver:flight.Scene3DResourceResolverWithRuntime, ?options:flight.LoadScene3DResourcesOptions):flight._internal._Promise<Dynamic> {
-  return flight._js._fn.Scene3dResources.loadScene3DResources(scene, resolver, options);
+  return flight._js._fn.Scene3dResources.loadScene3DResources(scene, resolver, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function registerAnisotropyPbrScene3DMaterialTextures(registry:flight.Scene3DMaterialTextureRegistry):Void {
@@ -195,15 +195,15 @@ inline function resolveOneScene3DResourceTexture(resolver:flight.Scene3DResource
 }
 
 inline function resolveScene3DResources(scene:flight.Scene3D, resolver:flight.Scene3DResourceResolverWithRuntime, ?options:flight.ResolveScene3DResourcesOptions):flight.Scene3DResources {
-  return flight._js._fn.Scene3dResources.resolveScene3DResources(scene, resolver, options);
+  return flight._js._fn.Scene3dResources.resolveScene3DResources(scene, resolver, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function retryFailedScene3DResources(scene:flight.Scene3D, resolver:flight.Scene3DResourceResolverWithRuntime, ?options:flight.UpdateScene3DResourceStreamingOptions):Float {
-  return flight._js._fn.Scene3dResources.retryFailedScene3DResources(scene, resolver, options);
+  return flight._js._fn.Scene3dResources.retryFailedScene3DResources(scene, resolver, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function revealScene3DResourcesOnResolve(resolver:flight.Scene3DResourceResolverWithRuntime, scene:flight.Scene3D, tweenManager:flight.TweenManager, ?options:flight.Scene3DResourceRevealOptions):()->Void {
-  return flight._js._fn.Scene3dResources.revealScene3DResourcesOnResolve(resolver, scene, tweenManager, options);
+  return flight._js._fn.Scene3dResources.revealScene3DResourcesOnResolve(resolver, scene, tweenManager, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function setScene3DDocumentResourceBasePathFromUrl(document:flight.Scene3DDocument, url:String):Void {
@@ -211,7 +211,7 @@ inline function setScene3DDocumentResourceBasePathFromUrl(document:flight.Scene3
 }
 
 inline function updateScene3DResourceStreaming(scene:flight.Scene3D, resolver:flight.Scene3DResourceResolverWithRuntime, ?options:flight.UpdateScene3DResourceStreamingOptions):flight.Scene3DResources {
-  return flight._js._fn.Scene3dResources.updateScene3DResourceStreaming(scene, resolver, options);
+  return flight._js._fn.Scene3dResources.updateScene3DResourceStreaming(scene, resolver, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function waitForScene3DResourceResolver(resolver:flight.Scene3DResourceResolverWithRuntime):flight._internal._Promise<Dynamic> {

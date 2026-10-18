@@ -7,7 +7,7 @@ inline function accumulateAnimationSample(accumulator:flight.AnimationSampleAccu
 }
 
 inline function addAnimationSample(out:Dynamic, base:Dynamic, delta:Dynamic, weight:Float, ?quaternion:Bool):Void {
-  flight._js._fn.Animation.addAnimationSample(out, base, delta, weight, quaternion);
+  flight._js._fn.Animation.addAnimationSample(out, base, delta, weight, (quaternion == null ? js.Syntax.code("undefined") : quaternion));
 }
 
 inline function advanceAnimationBlendTree(tree:flight.AnimationBlendTree, dt:Float):Void {
@@ -39,7 +39,7 @@ inline function advanceAnimationStateMachineWithScratch(machine:flight.Animation
 }
 
 inline function blendAnimationSamples(out:Dynamic, a:Dynamic, b:Dynamic, alpha:Float, ?quaternion:Bool):Void {
-  flight._js._fn.Animation.blendAnimationSamples(out, a, b, alpha, quaternion);
+  flight._js._fn.Animation.blendAnimationSamples(out, a, b, alpha, (quaternion == null ? js.Syntax.code("undefined") : quaternion));
 }
 
 inline function cloneAnimationClip(clip:flight.AnimationClip):flight.AnimationClip {
@@ -59,11 +59,11 @@ inline function createAnimationBlendTree(inputs:Array<flight.AnimationBlendTreeI
 }
 
 inline function createAnimationBlendTreeInput(player:flight.AnimationPlayer, ?weight:Float, ?additive:Bool):flight.AnimationBlendTreeInput {
-  return flight._js._fn.Animation.createAnimationBlendTreeInput(player, weight, additive);
+  return flight._js._fn.Animation.createAnimationBlendTreeInput(player, (weight == null ? js.Syntax.code("undefined") : weight), (additive == null ? js.Syntax.code("undefined") : additive));
 }
 
 inline function createAnimationBlendTreeLayer(blendTree:flight.AnimationBlendTree, ?options:flight.AnimationLayerOptions):flight.AnimationLayer {
-  return flight._js._fn.Animation.createAnimationBlendTreeLayer(blendTree, options);
+  return flight._js._fn.Animation.createAnimationBlendTreeLayer(blendTree, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createAnimationChannel(track:flight.AnimationTrack, targetRef:Dynamic):flight.AnimationChannel {
@@ -71,15 +71,15 @@ inline function createAnimationChannel(track:flight.AnimationTrack, targetRef:Dy
 }
 
 inline function createAnimationClip(channels:Array<flight.AnimationChannel>, ?duration:Float, ?events:Array<flight.AnimationClipEvent>):flight.AnimationClip {
-  return flight._js._fn.Animation.createAnimationClip(channels, duration, events);
+  return flight._js._fn.Animation.createAnimationClip(channels, (duration == null ? js.Syntax.code("undefined") : duration), (events == null ? js.Syntax.code("undefined") : events));
 }
 
 inline function createAnimationClipEvent(time:Float, name:String, ?payload:Dynamic):flight.AnimationClipEvent {
-  return flight._js._fn.Animation.createAnimationClipEvent(time, name, payload);
+  return flight._js._fn.Animation.createAnimationClipEvent(time, name, (payload == null ? js.Syntax.code("undefined") : payload));
 }
 
 inline function createAnimationCrossfade(from:flight.AnimationPlayer, to:flight.AnimationPlayer, duration:Float, ?opts:flight.AnimationCrossfadeOptions):flight.AnimationCrossfade {
-  return flight._js._fn.Animation.createAnimationCrossfade(from, to, duration, opts);
+  return flight._js._fn.Animation.createAnimationCrossfade(from, to, duration, (opts == null ? js.Syntax.code("undefined") : opts));
 }
 
 inline function createAnimationLayerStack(layers:Array<flight.AnimationLayer>):flight.AnimationLayerStack {
@@ -87,7 +87,7 @@ inline function createAnimationLayerStack(layers:Array<flight.AnimationLayer>):f
 }
 
 inline function createAnimationPlayer(clip:flight.AnimationClip, ?opts:{ ?loop:Bool, ?loopMode:flight.AnimationLoopMode, ?playing:Bool, ?repeatCount:Float, ?speed:Float, ?time:Float }):flight.AnimationPlayer {
-  return flight._js._fn.Animation.createAnimationPlayer(clip, opts);
+  return flight._js._fn.Animation.createAnimationPlayer(clip, (opts == null ? js.Syntax.code("undefined") : opts));
 }
 
 inline function createAnimationRootMotionExtractor(clip:flight.AnimationClip, channelIndex:Float):flight.AnimationRootMotionExtractor {
@@ -95,15 +95,15 @@ inline function createAnimationRootMotionExtractor(clip:flight.AnimationClip, ch
 }
 
 inline function createAnimationSampleAccumulator(components:Float, ?quaternion:Bool):flight.AnimationSampleAccumulator {
-  return flight._js._fn.Animation.createAnimationSampleAccumulator(components, quaternion);
+  return flight._js._fn.Animation.createAnimationSampleAccumulator(components, (quaternion == null ? js.Syntax.code("undefined") : quaternion));
 }
 
 inline function createAnimationStateMachine(states:Array<flight.AnimationStateMachineState>, ?initialState:Dynamic):flight.AnimationStateMachine {
-  return flight._js._fn.Animation.createAnimationStateMachine(states, initialState);
+  return flight._js._fn.Animation.createAnimationStateMachine(states, (initialState == null ? js.Syntax.code("undefined") : initialState));
 }
 
 inline function createAnimationStateMachineLayer(stateMachine:flight.AnimationStateMachine, ?options:flight.AnimationLayerOptions):flight.AnimationLayer {
-  return flight._js._fn.Animation.createAnimationStateMachineLayer(stateMachine, options);
+  return flight._js._fn.Animation.createAnimationStateMachineLayer(stateMachine, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createAnimationStateMachineState(name:String, blendTree:flight.AnimationBlendTree):flight.AnimationStateMachineState {
@@ -143,7 +143,7 @@ inline function initializeAnimationBlendTree(out:flight.EntityConstruction<fligh
 }
 
 inline function initializeAnimationBlendTreeInput(out:flight.EntityConstruction<flight.AnimationBlendTreeInput>, player:flight.AnimationPlayer, ?weight:Float, ?additive:Bool):Void {
-  flight._js._fn.Animation.initializeAnimationBlendTreeInput(out, player, weight, additive);
+  flight._js._fn.Animation.initializeAnimationBlendTreeInput(out, player, (weight == null ? js.Syntax.code("undefined") : weight), (additive == null ? js.Syntax.code("undefined") : additive));
 }
 
 inline function initializeAnimationChannel(out:flight.EntityConstruction<flight.AnimationChannel>, track:flight.AnimationTrack, targetRef:Dynamic):Void {
@@ -151,15 +151,15 @@ inline function initializeAnimationChannel(out:flight.EntityConstruction<flight.
 }
 
 inline function initializeAnimationClip(out:flight.EntityConstruction<flight.AnimationClip>, channels:Array<flight.AnimationChannel>, ?duration:Float, ?events:Array<flight.AnimationClipEvent>):Void {
-  flight._js._fn.Animation.initializeAnimationClip(out, channels, duration, events);
+  flight._js._fn.Animation.initializeAnimationClip(out, channels, (duration == null ? js.Syntax.code("undefined") : duration), (events == null ? js.Syntax.code("undefined") : events));
 }
 
 inline function initializeAnimationClipEvent(out:flight.EntityConstruction<flight.AnimationClipEvent>, time:Float, name:String, ?payload:Dynamic):Void {
-  flight._js._fn.Animation.initializeAnimationClipEvent(out, time, name, payload);
+  flight._js._fn.Animation.initializeAnimationClipEvent(out, time, name, (payload == null ? js.Syntax.code("undefined") : payload));
 }
 
 inline function initializeAnimationCrossfade(out:flight.EntityConstruction<flight.AnimationCrossfade>, from:flight.AnimationPlayer, to:flight.AnimationPlayer, duration:Float, ?opts:flight.AnimationCrossfadeOptions):Void {
-  flight._js._fn.Animation.initializeAnimationCrossfade(out, from, to, duration, opts);
+  flight._js._fn.Animation.initializeAnimationCrossfade(out, from, to, duration, (opts == null ? js.Syntax.code("undefined") : opts));
 }
 
 inline function initializeAnimationLayerStack(out:flight.EntityConstruction<flight.AnimationLayerStack>, layers:Array<flight.AnimationLayer>):Void {
@@ -167,7 +167,7 @@ inline function initializeAnimationLayerStack(out:flight.EntityConstruction<flig
 }
 
 inline function initializeAnimationPlayer(out:flight.EntityConstruction<flight.AnimationPlayer>, clip:flight.AnimationClip, ?opts:{ ?loop:Bool, ?loopMode:flight.AnimationLoopMode, ?playing:Bool, ?repeatCount:Float, ?speed:Float, ?time:Float }):Void {
-  flight._js._fn.Animation.initializeAnimationPlayer(out, clip, opts);
+  flight._js._fn.Animation.initializeAnimationPlayer(out, clip, (opts == null ? js.Syntax.code("undefined") : opts));
 }
 
 inline function initializeAnimationRootMotionExtractor(extractor:flight.EntityConstruction<flight.AnimationRootMotionExtractor>, clip:flight.AnimationClip, channelIndex:Float):Void {
@@ -179,7 +179,7 @@ inline function initializeAnimationSampleAccumulator(out:flight.EntityConstructi
 }
 
 inline function initializeAnimationStateMachine(out:flight.EntityConstruction<flight.AnimationStateMachine>, states:Array<flight.AnimationStateMachineState>, ?initialState:Dynamic):Void {
-  flight._js._fn.Animation.initializeAnimationStateMachine(out, states, initialState);
+  flight._js._fn.Animation.initializeAnimationStateMachine(out, states, (initialState == null ? js.Syntax.code("undefined") : initialState));
 }
 
 inline function initializeAnimationStateMachineState(out:flight.EntityConstruction<flight.AnimationStateMachineState>, name:String, blendTree:flight.AnimationBlendTree):Void {
@@ -259,7 +259,7 @@ inline function stopAnimationPlayer(player:flight.AnimationPlayer):Void {
 }
 
 inline function transitionAnimationStateMachine(machine:flight.AnimationStateMachine, toState:Dynamic, duration:Float, ?curve:flight.EasingFunction):Bool {
-  return flight._js._fn.Animation.transitionAnimationStateMachine(machine, toState, duration, curve);
+  return flight._js._fn.Animation.transitionAnimationStateMachine(machine, toState, duration, (curve == null ? js.Syntax.code("undefined") : curve));
 }
 
 inline function trimAnimationTrack(track:flight.AnimationTrack, startTime:Float, endTime:Float):flight.AnimationTrack {

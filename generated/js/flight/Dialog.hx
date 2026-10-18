@@ -3,7 +3,7 @@
 package flight;
 
 inline function createFileDialogHandle(kind:Dynamic, name:String, path:Null<String>, ?operations:Null<flight.FileDialogHandleOperations>):flight.FileDialogHandle {
-  return flight._js._fn.Dialog.createFileDialogHandle(kind, name, path, operations);
+  return flight._js._fn.Dialog.createFileDialogHandle(kind, name, path, (operations == null ? js.Syntax.code("undefined") : operations));
 }
 
 inline function getFileDialogHandleOperations(handle:flight.FileDialogHandle):Null<flight.FileDialogHandleOperations> {
@@ -11,15 +11,15 @@ inline function getFileDialogHandleOperations(handle:flight.FileDialogHandle):Nu
 }
 
 inline function initializeFileDialogHandle(handle:flight.EntityConstruction<flight.FileDialogHandle>, kind:Dynamic, name:String, path:Null<String>, ?operations:Null<flight.FileDialogHandleOperations>):Void {
-  flight._js._fn.Dialog.initializeFileDialogHandle(handle, kind, name, path, operations);
+  flight._js._fn.Dialog.initializeFileDialogHandle(handle, kind, name, path, (operations == null ? js.Syntax.code("undefined") : operations));
 }
 
 inline function showCapturePhotoDialog(hostPhotoCaptureDialog:flight.HostPhotoCaptureDialogCapability, ?options:flight.CapturePhotoDialogOptions):flight._internal._Promise<flight.PhotoCaptureDialogResult> {
-  return flight._js._fn.Dialog.showCapturePhotoDialog(hostPhotoCaptureDialog, options);
+  return flight._js._fn.Dialog.showCapturePhotoDialog(hostPhotoCaptureDialog, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function showCaptureVideoDialog(hostVideoCaptureDialog:flight.HostVideoCaptureDialogCapability, ?options:flight.CaptureVideoDialogOptions):flight._internal._Promise<flight.VideoCaptureDialogResult> {
-  return flight._js._fn.Dialog.showCaptureVideoDialog(hostVideoCaptureDialog, options);
+  return flight._js._fn.Dialog.showCaptureVideoDialog(hostVideoCaptureDialog, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function showConfirmDialog(hostMessageDialog:flight.HostMessageDialogCapability, options:flight.MessageDialogOptions):flight._internal._Promise<Bool> {
@@ -27,7 +27,7 @@ inline function showConfirmDialog(hostMessageDialog:flight.HostMessageDialogCapa
 }
 
 inline function showErrorBox(hostMessageDialog:flight.HostMessageDialogCapability, title:String, content:String, ?signal:Null<js.html.AbortSignal>):flight._internal._Promise<flight.MessageDialogResult> {
-  return flight._js._fn.Dialog.showErrorBox(hostMessageDialog, title, content, signal);
+  return flight._js._fn.Dialog.showErrorBox(hostMessageDialog, title, content, (signal == null ? js.Syntax.code("undefined") : signal));
 }
 
 inline function showErrorDialog(hostMessageDialog:flight.HostMessageDialogCapability, options:flight.MessageDialogOptions):flight._internal._Promise<flight.MessageDialogResult> {
@@ -43,7 +43,7 @@ inline function showMessageDialog(hostMessageDialog:flight.HostMessageDialogCapa
 }
 
 inline function showOpenDirectoryDialog(hostDirectoryOpenDialog:flight.HostDirectoryOpenDialogCapability, ?options:flight.OpenDirectoryDialogOptions):flight._internal._Promise<flight.DirectoryOpenDialogResult> {
-  return flight._js._fn.Dialog.showOpenDirectoryDialog(hostDirectoryOpenDialog, options);
+  return flight._js._fn.Dialog.showOpenDirectoryDialog(hostDirectoryOpenDialog, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function showOpenFileDialog(hostFileOpenDialog:flight.HostFileOpenDialogCapability, options:flight.OpenFileDialogOptions):flight._internal._Promise<flight.FileOpenDialogResult> {
@@ -51,7 +51,7 @@ inline function showOpenFileDialog(hostFileOpenDialog:flight.HostFileOpenDialogC
 }
 
 inline function showOpenImageDialog(hostImageOpenDialog:flight.HostImageOpenDialogCapability, ?options:flight.OpenImageDialogOptions):flight._internal._Promise<flight.ImageOpenDialogResult> {
-  return flight._js._fn.Dialog.showOpenImageDialog(hostImageOpenDialog, options);
+  return flight._js._fn.Dialog.showOpenImageDialog(hostImageOpenDialog, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function showPromptDialog(hostPromptDialog:flight.HostPromptDialogCapability, options:flight.PromptDialogOptions):flight._internal._Promise<Null<String>> {

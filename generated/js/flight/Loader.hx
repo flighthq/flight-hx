@@ -7,7 +7,7 @@ inline function cancelResourceLoad(loader:flight.ResourceLoader):Void {
 }
 
 inline function createResourceLoader(?options:flight.ResourceLoaderOptions):flight.ResourceLoader {
-  return flight._js._fn.Loader.createResourceLoader(options);
+  return flight._js._fn.Loader.createResourceLoader((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function disposeResourceLoader(loader:flight.ResourceLoader):Void {
@@ -31,19 +31,19 @@ inline function getResourceLoadItemStatus(loader:flight.ResourceLoader, key:Stri
 }
 
 inline function getResourceLoadProgress(loader:flight.ResourceLoader, ?group:String):Float {
-  return flight._js._fn.Loader.getResourceLoadProgress(loader, group);
+  return flight._js._fn.Loader.getResourceLoadProgress(loader, (group == null ? js.Syntax.code("undefined") : group));
 }
 
 inline function initializeResourceLoader(out:flight.EntityConstruction<{ EntityRuntimeKey:Null<flight.EntityRuntime>, onCancel:flight.Signal<()->Void>, onComplete:flight.Signal<(Array<flight.ResourceLoadReport>)->Void>, onError:flight.Signal<(Dynamic, String)->Void>, onPause:flight.Signal<()->Void>, onProgress:flight.Signal<(Float)->Void>, onResume:flight.Signal<()->Void>, cancelled:Bool, dedupeMap:flight._internal._Map<String, flight.ResourceLoadHandle<Dynamic>>, errorPolicy:Dynamic, generation:Float, inFlight:flight._internal._Set<{ abortController:js.html.AbortController, bytesHint:Float, bytesLoaded:Float, generation:Float, group:Null<String>, key:String, onBytesProgress:Null<(Float, Float)->Void>, priority:Float, reject:(Dynamic)->Void, resolve:(Dynamic)->Void, retries:Float, startedAt:Float, timeoutMs:Float, weight:Float, wrappedLoad:(js.html.AbortSignal, flight.ResourceLoadBytesReporter)->flight._internal._Promise<Dynamic> }>, itemCounter:Float, itemSignals:Null<flight.ResourceLoaderItemSignals>, loaded:Float, maxConcurrent:Float, options:flight.ResourceLoaderOptions, paused:Bool, pending:Array<{ abortController:js.html.AbortController, bytesHint:Float, bytesLoaded:Float, generation:Float, group:Null<String>, key:String, onBytesProgress:Null<(Float, Float)->Void>, priority:Float, reject:(Dynamic)->Void, resolve:(Dynamic)->Void, retries:Float, startedAt:Float, timeoutMs:Float, weight:Float, wrappedLoad:(js.html.AbortSignal, flight.ResourceLoadBytesReporter)->flight._internal._Promise<Dynamic> }>, reports:Array<flight.ResourceLoadReport>, started:Bool, streaming:Bool, throttle:Null<{ lastRefillMs:Float, maxBytesPerSecond:Float, tokens:Float }>, total:Float, totalWeight:Float, weightLoaded:Float }>, ?options:flight.ResourceLoaderOptions):Void {
-  flight._js._fn.Loader.initializeResourceLoader(out, options);
+  flight._js._fn.Loader.initializeResourceLoader(out, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function loadBytes(hostNet:flight.HostNetCapability, url:String, ?input:flight.LoadOptions):flight._internal._Promise<Null<flight._internal._UInt8Array>> {
-  return flight._js._fn.Loader.loadBytes(hostNet, url, input);
+  return flight._js._fn.Loader.loadBytes(hostNet, url, (input == null ? js.Syntax.code("undefined") : input));
 }
 
 inline function loadText(hostNet:flight.HostNetCapability, url:String, ?input:flight.LoadOptions):flight._internal._Promise<Null<String>> {
-  return flight._js._fn.Loader.loadText(hostNet, url, input);
+  return flight._js._fn.Loader.loadText(hostNet, url, (input == null ? js.Syntax.code("undefined") : input));
 }
 
 inline function pauseResourceLoad(loader:flight.ResourceLoader):Void {

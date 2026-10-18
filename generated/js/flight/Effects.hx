@@ -15,7 +15,7 @@ inline function computeAcesToneMap(x:Float):Float {
 }
 
 inline function computeAgxToneMap(x:Float, ?options:flight.AgxToneMapOptions):Float {
-  return flight._js._fn.Effects.computeAgxToneMap(x, options);
+  return flight._js._fn.Effects.computeAgxToneMap(x, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function computeBloomBlurRadius(effect:flight.BloomEffect):Float {
@@ -55,7 +55,7 @@ inline function computeEffectCaptureGeometry(out:flight.EffectCaptureGeometry, s
 }
 
 inline function computeEffectPadding(state:flight.RenderState, effects:Dynamic, ?out:flight.EffectPadding):flight.EffectPadding {
-  return flight._js._fn.Effects.computeEffectPadding(state, effects, out);
+  return flight._js._fn.Effects.computeEffectPadding(state, effects, (out == null ? js.Syntax.code("undefined") : out));
 }
 
 inline function computeExposureScale(exposure:Float):Float {
@@ -63,7 +63,7 @@ inline function computeExposureScale(exposure:Float):Float {
 }
 
 inline function computeFilmicToneMap(x:Float, ?options:flight.FilmicToneMapOptions):Float {
-  return flight._js._fn.Effects.computeFilmicToneMap(x, options);
+  return flight._js._fn.Effects.computeFilmicToneMap(x, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function computeGaussianKernelWeights(sigma:Float, out:Array<Float>):Array<Float> {
@@ -167,11 +167,11 @@ inline function computeWhiteBalanceMultipliers(temperature:Float, tint:Float, ou
 }
 
 inline function createAutoExposureEffect(?options:{ ?adaptationSpeed:Float, ?exposureCompensation:Float, ?maxExposure:Float, ?minExposure:Float }):flight.AutoExposureEffect {
-  return flight._js._fn.Effects.createAutoExposureEffect(options);
+  return flight._js._fn.Effects.createAutoExposureEffect((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createBarrelDistortionEffect(?options:{ ?amount:Float, ?scale:Float }):flight.BarrelDistortionEffect {
-  return flight._js._fn.Effects.createBarrelDistortionEffect(options);
+  return flight._js._fn.Effects.createBarrelDistortionEffect((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createBayerMatrix(order:Float, out:flight._internal._Float32Array):Float {
@@ -179,43 +179,43 @@ inline function createBayerMatrix(order:Float, out:flight._internal._Float32Arra
 }
 
 inline function createBevelEffect(?options:{ ?strength:Float, ?angle:Float, ?distance:Float, ?highlightColor:Float, ?shadowColor:Float, ?bevelType:Dynamic, ?blurX:Float, ?blurY:Float, ?highlightAlpha:Float, ?quality:Float, ?shadowAlpha:Float, ?sourceMode:flight.EffectSourceMode }):flight.BevelEffect {
-  return flight._js._fn.Effects.createBevelEffect(options);
+  return flight._js._fn.Effects.createBevelEffect((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createBitmapDisplacementEffect(map:Null<flight.Texture2D>, ?options:{ ?componentX:flight.ImageChannel, ?componentY:flight.ImageChannel, ?scaleX:Float, ?scaleY:Float, ?edgeMode:Dynamic }):flight.BitmapDisplacementEffect {
-  return flight._js._fn.Effects.createBitmapDisplacementEffect(map, options);
+  return flight._js._fn.Effects.createBitmapDisplacementEffect(map, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createBlendEffect(mode:flight.AdvancedBlendMode, ?options:{ ?opacity:Float, ?backdropKey:String }):flight.BlendEffect {
-  return flight._js._fn.Effects.createBlendEffect(mode, options);
+  return flight._js._fn.Effects.createBlendEffect(mode, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createBloomEffect(?options:{ ?intensity:Float, ?passes:Float, ?radius:Float, ?threshold:Float }):flight.BloomEffect {
-  return flight._js._fn.Effects.createBloomEffect(options);
+  return flight._js._fn.Effects.createBloomEffect((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createBlurEffect(?options:{ ?blurX:Float, ?blurY:Float }):flight.BlurEffect {
-  return flight._js._fn.Effects.createBlurEffect(options);
+  return flight._js._fn.Effects.createBlurEffect((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createBokehDepthOfFieldEffect(?options:{ ?focusDistance:Float, ?focusRange:Float, ?maxBlur:Float }):flight.BokehDepthOfFieldEffect {
-  return flight._js._fn.Effects.createBokehDepthOfFieldEffect(options);
+  return flight._js._fn.Effects.createBokehDepthOfFieldEffect((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createCameraMotionBlurEffect(?options:{ ?samples:Float, ?intensity:Float }):flight.CameraMotionBlurEffect {
-  return flight._js._fn.Effects.createCameraMotionBlurEffect(options);
+  return flight._js._fn.Effects.createCameraMotionBlurEffect((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createChromaticAberrationEffect(?options:{ ?intensity:Float, ?radial:Bool }):flight.ChromaticAberrationEffect {
-  return flight._js._fn.Effects.createChromaticAberrationEffect(options);
+  return flight._js._fn.Effects.createChromaticAberrationEffect((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createCompositeEffect(operator_:flight.CompositeOperator, ?options:{ ?backdropKey:String }):flight.CompositeEffect {
-  return flight._js._fn.Effects.createCompositeEffect(operator_, options);
+  return flight._js._fn.Effects.createCompositeEffect(operator_, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createContactShadowsEffect(?options:{ ?samples:Float, ?opacity:Float, ?distance:Float, ?smoothness:Float }):flight.ContactShadowsEffect {
-  return flight._js._fn.Effects.createContactShadowsEffect(options);
+  return flight._js._fn.Effects.createContactShadowsEffect((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createConvolutionEffect(options:{ matrix:Array<Float>, ?clamp:Bool, ?bias:Float, ?divisor:Float, matrixX:Float, matrixY:Float, ?preserveAlpha:Bool, ?color:Float }):flight.ConvolutionEffect {
@@ -223,7 +223,7 @@ inline function createConvolutionEffect(options:{ matrix:Array<Float>, ?clamp:Bo
 }
 
 inline function createCrtEffect(?options:{ ?curvature:Float, ?scanlineIntensity:Float, ?vignette:Float, ?aberration:Float }):flight.CrtEffect {
-  return flight._js._fn.Effects.createCrtEffect(options);
+  return flight._js._fn.Effects.createCrtEffect((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createCustomShaderEffect(options:{ shaderKey:String, ?uniforms:haxe.DynamicAccess<Dynamic> }):flight.CustomShaderEffect {
@@ -231,31 +231,31 @@ inline function createCustomShaderEffect(options:{ shaderKey:String, ?uniforms:h
 }
 
 inline function createDirectionalBlurEffect(?options:{ ?length:Float, ?samples:Float, ?angle:Float }):flight.DirectionalBlurEffect {
-  return flight._js._fn.Effects.createDirectionalBlurEffect(options);
+  return flight._js._fn.Effects.createDirectionalBlurEffect((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createDisplacementEffect(?options:{ ?intensity:Float, ?frequency:Float, ?seed:Float }):flight.DisplacementEffect {
-  return flight._js._fn.Effects.createDisplacementEffect(options);
+  return flight._js._fn.Effects.createDisplacementEffect((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createDitherEffect(?options:{ ?levels:Float }):flight.DitherEffect {
-  return flight._js._fn.Effects.createDitherEffect(options);
+  return flight._js._fn.Effects.createDitherEffect((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createDropShadowEffect(?options:{ ?strength:Float, ?angle:Float, ?distance:Float, ?color:Float, ?alpha:Float, ?blurX:Float, ?blurY:Float, ?quality:Float, ?sourceMode:flight.EffectSourceMode }):flight.DropShadowEffect {
-  return flight._js._fn.Effects.createDropShadowEffect(options);
+  return flight._js._fn.Effects.createDropShadowEffect((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createFilmEmulationEffect(?options:{ ?gateWeave:Float, ?grainIntensity:Float, ?halationRadius:Float, ?halationStrength:Float }):flight.FilmEmulationEffect {
-  return flight._js._fn.Effects.createFilmEmulationEffect(options);
+  return flight._js._fn.Effects.createFilmEmulationEffect((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createFilmGrainEffect(?options:{ ?size:Float, ?intensity:Float, ?seed:Float }):flight.FilmGrainEffect {
-  return flight._js._fn.Effects.createFilmGrainEffect(options);
+  return flight._js._fn.Effects.createFilmGrainEffect((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createFxaaEffect(?options:{ ?edgeThreshold:Float, ?subpixel:Float }):flight.FxaaEffect {
-  return flight._js._fn.Effects.createFxaaEffect(options);
+  return flight._js._fn.Effects.createFxaaEffect((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createGaussianKernelWeights(radius:Float, sigma:Float, out:flight._internal._Float32Array):Float {
@@ -263,11 +263,11 @@ inline function createGaussianKernelWeights(radius:Float, sigma:Float, out:fligh
 }
 
 inline function createGlitchEffect(?options:{ ?intensity:Float, ?seed:Float, ?blockSize:Float, ?colorShift:Float }):flight.GlitchEffect {
-  return flight._js._fn.Effects.createGlitchEffect(options);
+  return flight._js._fn.Effects.createGlitchEffect((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createGodRaysEffect(?options:{ ?exposure:Float, ?samples:Float, ?weight:Float, ?decay:Float, ?centerX:Float, ?centerY:Float, ?density:Float }):flight.GodRaysEffect {
-  return flight._js._fn.Effects.createGodRaysEffect(options);
+  return flight._js._fn.Effects.createGodRaysEffect((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createGradientBevelEffect(options:{ ?strength:Float, ?angle:Float, ?distance:Float, ?bevelType:Dynamic, ?blurX:Float, ?blurY:Float, ?quality:Float, ?sourceMode:flight.EffectSourceMode, alphas:Array<Float>, colors:Array<Float>, ratios:Array<Float> }):flight.GradientBevelEffect {
@@ -279,115 +279,115 @@ inline function createGradientGlowEffect(options:{ ?strength:Float, ?blurX:Float
 }
 
 inline function createHalftoneEffect(?options:{ ?angle:Float, ?scale:Float }):flight.HalftoneEffect {
-  return flight._js._fn.Effects.createHalftoneEffect(options);
+  return flight._js._fn.Effects.createHalftoneEffect((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createInnerGlowEffect(?options:{ ?strength:Float, ?color:Float, ?alpha:Float, ?blurX:Float, ?blurY:Float, ?quality:Float, ?sourceMode:flight.InnerEffectSourceMode }):flight.InnerGlowEffect {
-  return flight._js._fn.Effects.createInnerGlowEffect(options);
+  return flight._js._fn.Effects.createInnerGlowEffect((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createInnerShadowEffect(?options:{ ?strength:Float, ?angle:Float, ?distance:Float, ?color:Float, ?alpha:Float, ?blurX:Float, ?blurY:Float, ?quality:Float, ?sourceMode:flight.InnerEffectSourceMode }):flight.InnerShadowEffect {
-  return flight._js._fn.Effects.createInnerShadowEffect(options);
+  return flight._js._fn.Effects.createInnerShadowEffect((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createKuwaharaEffect(?options:{ ?radius:Float }):flight.KuwaharaEffect {
-  return flight._js._fn.Effects.createKuwaharaEffect(options);
+  return flight._js._fn.Effects.createKuwaharaEffect((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createLensDirtEffect(?options:{ ?intensity:Float, ?threshold:Float, ?seed:Float }):flight.LensDirtEffect {
-  return flight._js._fn.Effects.createLensDirtEffect(options);
+  return flight._js._fn.Effects.createLensDirtEffect((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createLensDistortionEffect(?options:{ ?amount:Float, ?scale:Float }):flight.LensDistortionEffect {
-  return flight._js._fn.Effects.createLensDistortionEffect(options);
+  return flight._js._fn.Effects.createLensDistortionEffect((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createLensFlareEffect(?options:{ ?intensity:Float, ?threshold:Float, ?ghosts:Float, ?halo:Float }):flight.LensFlareEffect {
-  return flight._js._fn.Effects.createLensFlareEffect(options);
+  return flight._js._fn.Effects.createLensFlareEffect((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createMedianEffect(?options:{ ?radius:Float }):flight.MedianEffect {
-  return flight._js._fn.Effects.createMedianEffect(options);
+  return flight._js._fn.Effects.createMedianEffect((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createMotionBlurEffect(?options:{ ?samples:Float, ?intensity:Float }):flight.MotionBlurEffect {
-  return flight._js._fn.Effects.createMotionBlurEffect(options);
+  return flight._js._fn.Effects.createMotionBlurEffect((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createOuterGlowEffect(?options:{ ?strength:Float, ?color:Float, ?alpha:Float, ?blurX:Float, ?blurY:Float, ?quality:Float, ?sourceMode:flight.EffectSourceMode }):flight.OuterGlowEffect {
-  return flight._js._fn.Effects.createOuterGlowEffect(options);
+  return flight._js._fn.Effects.createOuterGlowEffect((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createOutlineEffect(?options:{ ?color:Float, ?threshold:Float, ?thickness:Float }):flight.OutlineEffect {
-  return flight._js._fn.Effects.createOutlineEffect(options);
+  return flight._js._fn.Effects.createOutlineEffect((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createPanniniProjectionEffect(?options:{ ?compression:Float, ?crop:Float }):flight.PanniniProjectionEffect {
-  return flight._js._fn.Effects.createPanniniProjectionEffect(options);
+  return flight._js._fn.Effects.createPanniniProjectionEffect((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createPixelateEffect(?options:{ ?size:Float }):flight.PixelateEffect {
-  return flight._js._fn.Effects.createPixelateEffect(options);
+  return flight._js._fn.Effects.createPixelateEffect((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createPosterizeEffect(?options:{ ?levels:Float }):flight.PosterizeEffect {
-  return flight._js._fn.Effects.createPosterizeEffect(options);
+  return flight._js._fn.Effects.createPosterizeEffect((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createRadialBlurEffect(?options:{ ?samples:Float, ?strength:Float, ?centerX:Float, ?centerY:Float }):flight.RadialBlurEffect {
-  return flight._js._fn.Effects.createRadialBlurEffect(options);
+  return flight._js._fn.Effects.createRadialBlurEffect((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createScanlinesEffect(?options:{ ?intensity:Float, ?count:Float }):flight.ScanlinesEffect {
-  return flight._js._fn.Effects.createScanlinesEffect(options);
+  return flight._js._fn.Effects.createScanlinesEffect((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createScreenSpaceFogEffect(?options:{ ?color:Float, ?far:Float, ?near:Float, ?density:Float }):flight.ScreenSpaceFogEffect {
-  return flight._js._fn.Effects.createScreenSpaceFogEffect(options);
+  return flight._js._fn.Effects.createScreenSpaceFogEffect((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createSharpenEffect(?options:{ ?amount:Float }):flight.SharpenEffect {
-  return flight._js._fn.Effects.createSharpenEffect(options);
+  return flight._js._fn.Effects.createSharpenEffect((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createSketchEffect(?options:{ ?strength:Float }):flight.SketchEffect {
-  return flight._js._fn.Effects.createSketchEffect(options);
+  return flight._js._fn.Effects.createSketchEffect((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createSmaaEffect(?options:{ ?threshold:Float }):flight.SmaaEffect {
-  return flight._js._fn.Effects.createSmaaEffect(options);
+  return flight._js._fn.Effects.createSmaaEffect((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createSsaoEffect(?options:{ ?samples:Float, ?intensity:Float, ?bias:Float, ?radius:Float }):flight.SsaoEffect {
-  return flight._js._fn.Effects.createSsaoEffect(options);
+  return flight._js._fn.Effects.createSsaoEffect((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createSsrEffect(?options:{ ?maxDistance:Float, ?resolution:Float, ?steps:Float }):flight.SsrEffect {
-  return flight._js._fn.Effects.createSsrEffect(options);
+  return flight._js._fn.Effects.createSsrEffect((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createTaaEffect(?options:{ ?feedback:Float }):flight.TaaEffect {
-  return flight._js._fn.Effects.createTaaEffect(options);
+  return flight._js._fn.Effects.createTaaEffect((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createTiltShiftEffect(?options:{ ?center:Float, ?width:Float, ?blur:Float }):flight.TiltShiftEffect {
-  return flight._js._fn.Effects.createTiltShiftEffect(options);
+  return flight._js._fn.Effects.createTiltShiftEffect((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createToneMapEffect(?options:{ ?exposure:Float, ?operator_:Dynamic, ?white:Float }):flight.ToneMapEffect {
-  return flight._js._fn.Effects.createToneMapEffect(options);
+  return flight._js._fn.Effects.createToneMapEffect((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createVignetteEffect(?options:{ ?intensity:Float, ?color:Float, ?radius:Float, ?softness:Float }):flight.VignetteEffect {
-  return flight._js._fn.Effects.createVignetteEffect(options);
+  return flight._js._fn.Effects.createVignetteEffect((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createVolumetricLightEffect(?options:{ ?samples:Float, ?density:Float, ?lightColor:Float, ?lightX:Float, ?lightY:Float, ?scattering:Float }):flight.VolumetricLightEffect {
-  return flight._js._fn.Effects.createVolumetricLightEffect(options);
+  return flight._js._fn.Effects.createVolumetricLightEffect((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createWhiteBalanceEffect(?options:{ ?temperature:Float, ?tint:Float }):flight.WhiteBalanceEffect {
-  return flight._js._fn.Effects.createWhiteBalanceEffect(options);
+  return flight._js._fn.Effects.createWhiteBalanceEffect((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function explainEffectPadding(state:flight.RenderState, effects:Dynamic):flight.EffectPaddingExplanation {
@@ -755,7 +755,7 @@ inline function isNonSeparableBlendMode(mode:flight.AdvancedBlendMode):Bool {
 }
 
 inline function lerpEffect(a:flight.Effect, b:flight.Effect, t:Float, out:flight.Effect, ?roles:flight.EffectFieldRoles):Bool {
-  return flight._js._fn.Effects.lerpEffect(a, b, t, out, roles);
+  return flight._js._fn.Effects.lerpEffect(a, b, t, out, (roles == null ? js.Syntax.code("undefined") : roles));
 }
 
 inline function normalizeEffect(effect:flight.Effect, out:flight.Effect):Bool {

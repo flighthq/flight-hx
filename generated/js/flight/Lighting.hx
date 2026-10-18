@@ -39,27 +39,27 @@ inline function convertLightIntensity(fromUnit:flight.LightUnit, toUnit:flight.L
 }
 
 inline function createAmbientLight(?options:flight.AmbientLightOptions):flight.AmbientLight {
-  return flight._js._fn.Lighting.createAmbientLight(options);
+  return flight._js._fn.Lighting.createAmbientLight((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createAreaLight(?options:flight.AreaLightOptions):flight.AreaLight {
-  return flight._js._fn.Lighting.createAreaLight(options);
+  return flight._js._fn.Lighting.createAreaLight((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createDirectionalLight(?options:flight.DirectionalLightOptions):flight.DirectionalLight {
-  return flight._js._fn.Lighting.createDirectionalLight(options);
+  return flight._js._fn.Lighting.createDirectionalLight((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createEnvironment(?options:flight.EnvironmentOptions):flight.Environment {
-  return flight._js._fn.Lighting.createEnvironment(options);
+  return flight._js._fn.Lighting.createEnvironment((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createHemisphereLight(?options:flight.HemisphereLightOptions):flight.HemisphereLight {
-  return flight._js._fn.Lighting.createHemisphereLight(options);
+  return flight._js._fn.Lighting.createHemisphereLight((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createLightProbe(position:flight.Vector3Like, ?shCoefficients:flight._internal._Float32Array):flight.LightProbe {
-  return flight._js._fn.Lighting.createLightProbe(position, shCoefficients);
+  return flight._js._fn.Lighting.createLightProbe(position, (shCoefficients == null ? js.Syntax.code("undefined") : shCoefficients));
 }
 
 inline function createLightProbeGrid(probes:Array<flight.LightProbe>, bounds:flight.AabbLike, resolution:flight.Vector3Like):flight.LightProbeGrid {
@@ -67,15 +67,15 @@ inline function createLightProbeGrid(probes:Array<flight.LightProbe>, bounds:fli
 }
 
 inline function createPointLight(?options:flight.PointLightOptions):flight.PointLight {
-  return flight._js._fn.Lighting.createPointLight(options);
+  return flight._js._fn.Lighting.createPointLight((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createScene3DLights(?options:Dynamic):flight.Scene3DLights {
-  return flight._js._fn.Lighting.createScene3DLights(options);
+  return flight._js._fn.Lighting.createScene3DLights((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createSpotLight(?options:flight.SpotLightOptions):flight.SpotLight {
-  return flight._js._fn.Lighting.createSpotLight(options);
+  return flight._js._fn.Lighting.createSpotLight((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function evaluateLightProbeSh(out:flight._internal._Float32Array, normal:flight.Vector3Like, shCoefficients:flight._internal._Float32Array):Void {
@@ -111,27 +111,27 @@ inline function hasLightInfluenceOnBounds(light:flight.Light, bounds:flight.Boun
 }
 
 inline function initializeAmbientLight(out:flight.EntityConstruction<flight.AmbientLight>, ?options:flight.AmbientLightOptions):Void {
-  flight._js._fn.Lighting.initializeAmbientLight(out, options);
+  flight._js._fn.Lighting.initializeAmbientLight(out, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function initializeAreaLight(out:flight.EntityConstruction<flight.AreaLight>, ?options:flight.AreaLightOptions):Void {
-  flight._js._fn.Lighting.initializeAreaLight(out, options);
+  flight._js._fn.Lighting.initializeAreaLight(out, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function initializeDirectionalLight(light:flight.EntityConstruction<flight.DirectionalLight>, ?options:flight.DirectionalLightOptions):Void {
-  flight._js._fn.Lighting.initializeDirectionalLight(light, options);
+  flight._js._fn.Lighting.initializeDirectionalLight(light, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function initializeEnvironment(out:flight.EntityConstruction<flight.Environment>, ?options:flight.EnvironmentOptions):Void {
-  flight._js._fn.Lighting.initializeEnvironment(out, options);
+  flight._js._fn.Lighting.initializeEnvironment(out, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function initializeHemisphereLight(out:flight.EntityConstruction<flight.HemisphereLight>, ?options:flight.HemisphereLightOptions):Void {
-  flight._js._fn.Lighting.initializeHemisphereLight(out, options);
+  flight._js._fn.Lighting.initializeHemisphereLight(out, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function initializeLightProbe(out:flight.EntityConstruction<flight.LightProbe>, position:flight.Vector3Like, ?shCoefficients:flight._internal._Float32Array):Void {
-  flight._js._fn.Lighting.initializeLightProbe(out, position, shCoefficients);
+  flight._js._fn.Lighting.initializeLightProbe(out, position, (shCoefficients == null ? js.Syntax.code("undefined") : shCoefficients));
 }
 
 inline function initializeLightProbeGrid(out:flight.EntityConstruction<flight.LightProbeGrid>, probes:Array<flight.LightProbe>, bounds:flight.AabbLike, resolution:flight.Vector3Like):Void {
@@ -139,15 +139,15 @@ inline function initializeLightProbeGrid(out:flight.EntityConstruction<flight.Li
 }
 
 inline function initializePointLight(out:flight.EntityConstruction<flight.PointLight>, ?options:flight.PointLightOptions):Void {
-  flight._js._fn.Lighting.initializePointLight(out, options);
+  flight._js._fn.Lighting.initializePointLight(out, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function initializeScene3DLights(out:flight.EntityConstruction<flight.Scene3DLights>, ?options:Dynamic):Void {
-  flight._js._fn.Lighting.initializeScene3DLights(out, options);
+  flight._js._fn.Lighting.initializeScene3DLights(out, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function initializeSpotLight(light:flight.EntityConstruction<flight.SpotLight>, ?options:flight.SpotLightOptions):Void {
-  flight._js._fn.Lighting.initializeSpotLight(light, options);
+  flight._js._fn.Lighting.initializeSpotLight(light, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function isLightCastingShadow(light:flight.Light):Bool {
@@ -159,7 +159,7 @@ inline function sampleLightProbeGrid(out:flight._internal._Float32Array, positio
 }
 
 inline function selectScene3DForwardLights(out:flight.Scene3DForwardLightSelection, lights:flight.Scene3DLightsLike, bounds:flight.BoundingSphereLike, ?receiverLayerMask:Float):Void {
-  flight._js._fn.Lighting.selectScene3DForwardLights(out, lights, bounds, receiverLayerMask);
+  flight._js._fn.Lighting.selectScene3DForwardLights(out, lights, bounds, (receiverLayerMask == null ? js.Syntax.code("undefined") : receiverLayerMask));
 }
 
 inline function setAreaLightOrientation(out:flight.AreaLight, direction:flight.Vector3Like, right:flight.Vector3Like, up:flight.Vector3Like):Void {

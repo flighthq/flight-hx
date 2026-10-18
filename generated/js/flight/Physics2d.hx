@@ -59,7 +59,7 @@ inline function computePhysics2DColliderMassData(collider:flight.Physics2DCollid
 }
 
 inline function createPhysics2DCollider(local:flight.CollisionBuiltInShape2D, material:flight.Physics2DMaterial, ?sensor:Bool, ?filter:flight.Physics2DCollisionFilter):flight.Physics2DCollider {
-  return flight._js._fn.Physics2d.createPhysics2DCollider(local, material, sensor, filter);
+  return flight._js._fn.Physics2d.createPhysics2DCollider(local, material, (sensor == null ? js.Syntax.code("undefined") : sensor), (filter == null ? js.Syntax.code("undefined") : filter));
 }
 
 inline function createPhysics2DColliderWorldShape(local:flight.CollisionBuiltInShape2D):Dynamic {
@@ -131,11 +131,11 @@ inline function createPhysics2DWheelJoint(options:flight.Physics2DWheelJointOpti
 }
 
 inline function createPhysics2DWorld(?gravityX:Float, ?gravityY:Float, ?index:flight.SpatialIndexBackend2D):flight.Physics2DWorld {
-  return flight._js._fn.Physics2d.createPhysics2DWorld(gravityX, gravityY, index);
+  return flight._js._fn.Physics2d.createPhysics2DWorld((gravityX == null ? js.Syntax.code("undefined") : gravityX), (gravityY == null ? js.Syntax.code("undefined") : gravityY), (index == null ? js.Syntax.code("undefined") : index));
 }
 
 inline function createRigidBody2D(type:flight.Physics2DBodyType, x:Float, y:Float, ?angle:Float):flight.RigidBody2D {
-  return flight._js._fn.Physics2d.createRigidBody2D(type, x, y, angle);
+  return flight._js._fn.Physics2d.createRigidBody2D(type, x, y, (angle == null ? js.Syntax.code("undefined") : angle));
 }
 
 inline function disablePhysics2DGuards():Void {
@@ -323,23 +323,23 @@ inline function mixPhysics2DRestitution(first:Float, second:Float):Float {
 }
 
 inline function queryPhysics2DPoint(world:flight.Physics2DWorld, x:Float, y:Float, out:flight.Physics2DQueryResult, ?filter:flight.Physics2DQueryFilter):Void {
-  flight._js._fn.Physics2d.queryPhysics2DPoint(world, x, y, out, filter);
+  flight._js._fn.Physics2d.queryPhysics2DPoint(world, x, y, out, (filter == null ? js.Syntax.code("undefined") : filter));
 }
 
 inline function queryPhysics2DRay(world:flight.Physics2DWorld, originX:Float, originY:Float, directionX:Float, directionY:Float, out:flight.Physics2DRayResult, ?maxFraction:Float, ?filter:flight.Physics2DQueryFilter):Void {
-  flight._js._fn.Physics2d.queryPhysics2DRay(world, originX, originY, directionX, directionY, out, maxFraction, filter);
+  flight._js._fn.Physics2d.queryPhysics2DRay(world, originX, originY, directionX, directionY, out, (maxFraction == null ? js.Syntax.code("undefined") : maxFraction), (filter == null ? js.Syntax.code("undefined") : filter));
 }
 
 inline function queryPhysics2DRayClosest(world:flight.Physics2DWorld, originX:Float, originY:Float, directionX:Float, directionY:Float, out:flight.Physics2DRayResult, ?maxFraction:Float, ?filter:flight.Physics2DQueryFilter):Void {
-  flight._js._fn.Physics2d.queryPhysics2DRayClosest(world, originX, originY, directionX, directionY, out, maxFraction, filter);
+  flight._js._fn.Physics2d.queryPhysics2DRayClosest(world, originX, originY, directionX, directionY, out, (maxFraction == null ? js.Syntax.code("undefined") : maxFraction), (filter == null ? js.Syntax.code("undefined") : filter));
 }
 
 inline function queryPhysics2DRegion(world:flight.Physics2DWorld, region:flight.SpatialAabb2D, out:flight.Physics2DQueryResult, ?filter:flight.Physics2DQueryFilter):Void {
-  flight._js._fn.Physics2d.queryPhysics2DRegion(world, region, out, filter);
+  flight._js._fn.Physics2d.queryPhysics2DRegion(world, region, out, (filter == null ? js.Syntax.code("undefined") : filter));
 }
 
 inline function queryPhysics2DShapeCast(world:flight.Physics2DWorld, shape:flight.CollisionBuiltInShape2D, dx:Float, dy:Float, out:flight.Physics2DShapeCastResult, ?maxFraction:Float, ?filter:flight.Physics2DQueryFilter):Void {
-  flight._js._fn.Physics2d.queryPhysics2DShapeCast(world, shape, dx, dy, out, maxFraction, filter);
+  flight._js._fn.Physics2d.queryPhysics2DShapeCast(world, shape, dx, dy, out, (maxFraction == null ? js.Syntax.code("undefined") : maxFraction), (filter == null ? js.Syntax.code("undefined") : filter));
 }
 
 inline function rebuildPhysics2DJointCollisionSuppressions(world:flight.Physics2DWorld):Void {
@@ -459,7 +459,7 @@ inline function writePhysics2DColliderBounds(collider:flight.Physics2DCollider, 
 }
 
 inline function writePhysics2DDebugGeometry(world:flight.Physics2DWorld, out:flight.Physics2DDebugGeometry, ?options:Dynamic):Void {
-  flight._js._fn.Physics2d.writePhysics2DDebugGeometry(world, out, options);
+  flight._js._fn.Physics2d.writePhysics2DDebugGeometry(world, out, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function writePhysics2DJointReaction(world:flight.Physics2DWorld, joint:flight.Physics2DJoint, dt:Float, out:flight.Physics2DJointReaction):Bool {

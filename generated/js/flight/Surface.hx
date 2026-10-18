@@ -9,27 +9,27 @@ inline function allocateSurface<T:flight.Surface>(handle:flight.NativeSurfaceHan
 }
 
 inline function createCanvasSurface(capability:flight.HostCanvasCapability, window:flight.AppWindow, width:Float, height:Float, ?options:Dynamic):Null<flight.CanvasSurface> {
-  return flight._js._fn.Surface.createCanvasSurface(capability, window, width, height, options);
+  return flight._js._fn.Surface.createCanvasSurface(capability, window, width, height, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createCanvasSurfaceFromNativeHandle(capability:flight.HostCanvasCapability, handle:flight.NativeSurfaceHandle, ?options:Dynamic):Null<flight.CanvasSurface> {
-  return flight._js._fn.Surface.createCanvasSurfaceFromNativeHandle(capability, handle, options);
+  return flight._js._fn.Surface.createCanvasSurfaceFromNativeHandle(capability, handle, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createGlSurface(capability:flight.HostGlCapability, window:flight.AppWindow, width:Float, height:Float, ?options:flight.GlContextOptions):Null<flight.GlSurface> {
-  return flight._js._fn.Surface.createGlSurface(capability, window, width, height, options);
+  return flight._js._fn.Surface.createGlSurface(capability, window, width, height, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createGlSurfaceFromNativeHandle(capability:flight.HostGlCapability, handle:flight.NativeSurfaceHandle, ?options:flight.GlContextOptions):Null<flight.GlSurface> {
-  return flight._js._fn.Surface.createGlSurfaceFromNativeHandle(capability, handle, options);
+  return flight._js._fn.Surface.createGlSurfaceFromNativeHandle(capability, handle, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createWgpuSurface(capability:flight.HostWgpuCapability, window:flight.AppWindow, width:Float, height:Float, ?options:flight.WgpuHostAcquisitionOptions):flight._internal._Promise<Null<flight.WgpuSurface>> {
-  return flight._js._fn.Surface.createWgpuSurface(capability, window, width, height, options);
+  return flight._js._fn.Surface.createWgpuSurface(capability, window, width, height, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createWgpuSurfaceFromNativeHandle(capability:flight.HostWgpuCapability, handle:flight.NativeSurfaceHandle, ?options:flight.WgpuHostAcquisitionOptions):flight._internal._Promise<Null<flight.WgpuSurface>> {
-  return flight._js._fn.Surface.createWgpuSurfaceFromNativeHandle(capability, handle, options);
+  return flight._js._fn.Surface.createWgpuSurfaceFromNativeHandle(capability, handle, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function destroyCanvasSurface(capability:flight.HostCanvasCapability, surface:flight.CanvasSurface):Void {

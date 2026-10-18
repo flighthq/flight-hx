@@ -22,6 +22,15 @@ package flight._cpp._fn;
 ')
 @:include("flight_hx/math.hpp")
 extern class Math {
+  @:native("flight_hx::math::approx_equal")
+  static function approxEqual(a:Float, b:Float, epsilonPresent:Bool, epsilon:Float):Bool;
+
+  @:native("flight_hx::math::approx_equal_relative")
+  static function approxEqualRelative(a:Float, b:Float, relativeEpsilonPresent:Bool, relativeEpsilon:Float):Bool;
+
+  @:native("flight_hx::math::approx_zero")
+  static function approxZero(value:Float, epsilonPresent:Bool, epsilon:Float):Bool;
+
   @:native("flight_hx::math::ceil_power_of_two")
   static function ceilPowerOfTwo(n:Float):Float;
 

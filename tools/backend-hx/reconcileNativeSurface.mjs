@@ -26,6 +26,8 @@ const nativeManifest = readJson(path.join(root, 'src-cpp', 'manifest.json'));
 const cppManifest = readJson(path.join(flightCpp.directory, 'generated', 'manifest.json'));
 const bestEffort = readJson(path.join(flightCpp.directory, 'generated', 'best-effort.json'));
 const refusalLedger = readJson(path.join(flightCpp.directory, 'generated', 'refusals.json'));
+const requiredScalarOverrideProvenance = 'flight-hx/header-confirmed-scalar/1';
+const optionalScalarOverrideProvenance = 'flight-hx/header-confirmed-optional-scalar/1';
 
 validatePins();
 validateCppInventory();
@@ -145,6 +147,15 @@ const extensionTypeNames = nativeManifest.extensions
   .map(shortPublicName)
   .filter((name) => !defaultApi.packages.some((package_) => package_.types.includes(name)))
   .sort(compareText);
+const nativeOverrideFunctions = nativeManifest.modules.flatMap(({ module, functions }) =>
+  functions.map(({ name, provenance }) => ({ provenance, publicName: `${module}.${name}` })),
+);
+const requiredScalarOverrides = nativeOverrideFunctions.filter(
+  ({ provenance }) => provenance === requiredScalarOverrideProvenance,
+);
+const optionalScalarOverrides = nativeOverrideFunctions.filter(
+  ({ provenance }) => provenance === optionalScalarOverrideProvenance,
+);
 const bestEffortStatus = countBy(bestEffort.modules, ({ status }) => status);
 const statusCounts = countBy(packages, ({ status }) => status);
 const boundScalarKeys = new Set(nativeFunctions.map(({ holder, name }) => `${holder}\0${name}`));
@@ -197,7 +208,9 @@ const report = {
     hosts: nativeManifest.hosts,
   },
   nativeOverrides: {
+    optionalScalarAdapters: optionalScalarOverrides.map(({ publicName }) => publicName),
     refusals: nativeManifest.scalarOverrideRefusals ?? [],
+    requiredScalarFunctions: requiredScalarOverrides.map(({ publicName }) => publicName),
   },
   packages,
   pins: {
@@ -220,6 +233,8 @@ const report = {
       extensionTypes: extensionTypeNames.length,
       functions: nativeFunctions.length,
       packages: new Set([...nativeFunctionIndex.keys(), ...nativeTypeIndex.keys()]).size,
+      optionalScalarAdapters: optionalScalarOverrides.length,
+      requiredScalarOverrides: requiredScalarOverrides.length,
       scalarOverrideRefusals: (nativeManifest.scalarOverrideRefusals ?? []).length,
       types: nativeUpstreamTypes.size,
       values: 0,

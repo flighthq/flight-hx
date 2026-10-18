@@ -3,11 +3,11 @@
 package flight;
 
 inline function decodeImage(imageDecode:flight.HostImageDecodeCapabilities, bytes:flight._internal._UInt8Array, ?mimeType:String):flight._internal._Promise<Null<flight.DecodedImage>> {
-  return flight._js._fn.ImageCodec.decodeImage(imageDecode, bytes, mimeType);
+  return flight._js._fn.ImageCodec.decodeImage(imageDecode, bytes, (mimeType == null ? js.Syntax.code("undefined") : mimeType));
 }
 
 inline function decodeImagePremultiplied(imageDecode:flight.HostImageDecodeCapabilities, bytes:flight._internal._UInt8Array, ?mimeType:String):flight._internal._Promise<Null<flight.DecodedImage>> {
-  return flight._js._fn.ImageCodec.decodeImagePremultiplied(imageDecode, bytes, mimeType);
+  return flight._js._fn.ImageCodec.decodeImagePremultiplied(imageDecode, bytes, (mimeType == null ? js.Syntax.code("undefined") : mimeType));
 }
 
 inline function detectImageMimeType(data:Dynamic):Null<String> {
@@ -15,6 +15,6 @@ inline function detectImageMimeType(data:Dynamic):Null<String> {
 }
 
 inline function encodeImage(imageEncode:flight.HostImageEncodeCapabilities, image:flight.DecodedImage, mimeType:String, ?options:flight.ImageEncodeOptions):flight._internal._Promise<Null<flight._internal._UInt8Array>> {
-  return flight._js._fn.ImageCodec.encodeImage(imageEncode, image, mimeType, options);
+  return flight._js._fn.ImageCodec.encodeImage(imageEncode, image, mimeType, (options == null ? js.Syntax.code("undefined") : options));
 }
 #end

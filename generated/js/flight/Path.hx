@@ -5,15 +5,15 @@ package flight;
 typedef Path = flight._js.Path;
 
 inline function acquirePathMesh(path:flight.Path, ?tolerance:Float):flight.PathMesh {
-  return flight._js._fn.Path.acquirePathMesh(path, tolerance);
+  return flight._js._fn.Path.acquirePathMesh(path, (tolerance == null ? js.Syntax.code("undefined") : tolerance));
 }
 
 inline function acquirePathMeshTyped(path:flight.Path, ?tolerance:Float):flight.PathMeshTyped {
-  return flight._js._fn.Path.acquirePathMeshTyped(path, tolerance);
+  return flight._js._fn.Path.acquirePathMeshTyped(path, (tolerance == null ? js.Syntax.code("undefined") : tolerance));
 }
 
 inline function appendPathArc(path:flight.Path, centerX:Float, centerY:Float, radius:Float, startAngle:Float, endAngle:Float, ?anticlockwise:Bool, ?connectToCurrent:Bool):Void {
-  flight._js._fn.Path.appendPathArc(path, centerX, centerY, radius, startAngle, endAngle, anticlockwise, connectToCurrent);
+  flight._js._fn.Path.appendPathArc(path, centerX, centerY, radius, startAngle, endAngle, (anticlockwise == null ? js.Syntax.code("undefined") : anticlockwise), (connectToCurrent == null ? js.Syntax.code("undefined") : connectToCurrent));
 }
 
 inline function appendPathCircle(path:flight.Path, centerX:Float, centerY:Float, radius:Float):Void {
@@ -81,7 +81,7 @@ inline function buildStrokePathGeometry(path:flight.Path, style:flight.StrokeSty
 }
 
 inline function cleanPath(source:flight.Path, tolerance:Float, out:flight.Path, ?flattenTolerance:Float):Void {
-  flight._js._fn.Path.cleanPath(source, tolerance, out, flattenTolerance);
+  flight._js._fn.Path.cleanPath(source, tolerance, out, (flattenTolerance == null ? js.Syntax.code("undefined") : flattenTolerance));
 }
 
 inline function clonePath(source:flight.Path):flight.Path {
@@ -89,15 +89,15 @@ inline function clonePath(source:flight.Path):flight.Path {
 }
 
 inline function containsPathPoint(path:flight.Path, px:Float, py:Float, ?tolerance:Float):Bool {
-  return flight._js._fn.Path.containsPathPoint(path, px, py, tolerance);
+  return flight._js._fn.Path.containsPathPoint(path, px, py, (tolerance == null ? js.Syntax.code("undefined") : tolerance));
 }
 
 inline function copyPath(source:flight.Path, ?out:flight.Path):flight.Path {
-  return flight._js._fn.Path.copyPath(source, out);
+  return flight._js._fn.Path.copyPath(source, (out == null ? js.Syntax.code("undefined") : out));
 }
 
 inline function createPath(?winding:flight.PathWinding):flight.Path {
-  return flight._js._fn.Path.createPath(winding);
+  return flight._js._fn.Path.createPath((winding == null ? js.Syntax.code("undefined") : winding));
 }
 
 inline function createPathMorph(start:flight.Path, end:flight.Path):Null<flight.PathMorph> {
@@ -105,11 +105,11 @@ inline function createPathMorph(start:flight.Path, end:flight.Path):Null<flight.
 }
 
 inline function dashPath(source:flight.Path, dash:Array<Float>, dashOffset:Float, out:flight.Path, ?tolerance:Float):Void {
-  flight._js._fn.Path.dashPath(source, dash, dashOffset, out, tolerance);
+  flight._js._fn.Path.dashPath(source, dash, dashOffset, out, (tolerance == null ? js.Syntax.code("undefined") : tolerance));
 }
 
 inline function decimatePath(source:flight.Path, tolerance:Float, out:flight.Path, ?flattenTolerance:Float):Void {
-  flight._js._fn.Path.decimatePath(source, tolerance, out, flattenTolerance);
+  flight._js._fn.Path.decimatePath(source, tolerance, out, (flattenTolerance == null ? js.Syntax.code("undefined") : flattenTolerance));
 }
 
 inline function explainPathMorphCreation(start:flight.Path, end:flight.Path):flight.PathMorphCreationExplanation {
@@ -117,15 +117,15 @@ inline function explainPathMorphCreation(start:flight.Path, end:flight.Path):fli
 }
 
 inline function explainStrokePathTessellation(path:flight.Path, style:flight.StrokeStyle, ?tolerance:Float):flight.StrokePathTessellationExplanation {
-  return flight._js._fn.Path.explainStrokePathTessellation(path, style, tolerance);
+  return flight._js._fn.Path.explainStrokePathTessellation(path, style, (tolerance == null ? js.Syntax.code("undefined") : tolerance));
 }
 
 inline function fitPathCurves(source:flight.Path, tolerance:Float, out:flight.Path, ?flattenTolerance:Float):Void {
-  flight._js._fn.Path.fitPathCurves(source, tolerance, out, flattenTolerance);
+  flight._js._fn.Path.fitPathCurves(source, tolerance, out, (flattenTolerance == null ? js.Syntax.code("undefined") : flattenTolerance));
 }
 
 inline function flattenPath(path:flight.Path, ?tolerance:Float):Array<Array<Float>> {
-  return flight._js._fn.Path.flattenPath(path, tolerance);
+  return flight._js._fn.Path.flattenPath(path, (tolerance == null ? js.Syntax.code("undefined") : tolerance));
 }
 
 inline function forEachPathSegment(path:flight.Path, visitor:(flight.PathSegment)->Void):Void {
@@ -149,15 +149,15 @@ inline function getPathBounds(path:flight.Path, out:flight.RectangleLike):Bool {
 }
 
 inline function getPathContourLengths(path:flight.Path, ?tolerance:Float):Array<Float> {
-  return flight._js._fn.Path.getPathContourLengths(path, tolerance);
+  return flight._js._fn.Path.getPathContourLengths(path, (tolerance == null ? js.Syntax.code("undefined") : tolerance));
 }
 
 inline function getPathContourOrientation(path:flight.Path, ?tolerance:Float):Dynamic {
-  return flight._js._fn.Path.getPathContourOrientation(path, tolerance);
+  return flight._js._fn.Path.getPathContourOrientation(path, (tolerance == null ? js.Syntax.code("undefined") : tolerance));
 }
 
 inline function getPathCurvatureAtDistance(path:flight.Path, distance:Float, ?tolerance:Float):Float {
-  return flight._js._fn.Path.getPathCurvatureAtDistance(path, distance, tolerance);
+  return flight._js._fn.Path.getPathCurvatureAtDistance(path, distance, (tolerance == null ? js.Syntax.code("undefined") : tolerance));
 }
 
 inline function getPathLastPoint(path:flight.Path):Null<Array<Float>> {
@@ -165,19 +165,19 @@ inline function getPathLastPoint(path:flight.Path):Null<Array<Float>> {
 }
 
 inline function getPathLength(path:flight.Path, ?tolerance:Float):Float {
-  return flight._js._fn.Path.getPathLength(path, tolerance);
+  return flight._js._fn.Path.getPathLength(path, (tolerance == null ? js.Syntax.code("undefined") : tolerance));
 }
 
 inline function getPathNearestPoint(path:flight.Path, px:Float, py:Float, out:flight.Vector2Like, ?tolerance:Float):Float {
-  return flight._js._fn.Path.getPathNearestPoint(path, px, py, out, tolerance);
+  return flight._js._fn.Path.getPathNearestPoint(path, px, py, out, (tolerance == null ? js.Syntax.code("undefined") : tolerance));
 }
 
 inline function getPathPointAtDistance(path:flight.Path, distance:Float, out:flight.Vector2Like, ?tolerance:Float):Bool {
-  return flight._js._fn.Path.getPathPointAtDistance(path, distance, out, tolerance);
+  return flight._js._fn.Path.getPathPointAtDistance(path, distance, out, (tolerance == null ? js.Syntax.code("undefined") : tolerance));
 }
 
 inline function getPathPositionAtDistance(path:flight.Path, distance:Float, pointOut:flight.Vector2Like, tangentOut:flight.Vector2Like, ?tolerance:Float):Bool {
-  return flight._js._fn.Path.getPathPositionAtDistance(path, distance, pointOut, tangentOut, tolerance);
+  return flight._js._fn.Path.getPathPositionAtDistance(path, distance, pointOut, tangentOut, (tolerance == null ? js.Syntax.code("undefined") : tolerance));
 }
 
 inline function getPathSegmentCurvatureAtParameter(path:flight.Path, segmentIndex:Float, t:Float):Null<Float> {
@@ -193,11 +193,11 @@ inline function getPathSegmentTangentAtParameter(path:flight.Path, segmentIndex:
 }
 
 inline function getPathSignedArea(path:flight.Path, ?tolerance:Float):Float {
-  return flight._js._fn.Path.getPathSignedArea(path, tolerance);
+  return flight._js._fn.Path.getPathSignedArea(path, (tolerance == null ? js.Syntax.code("undefined") : tolerance));
 }
 
 inline function getPathTangentAtDistance(path:flight.Path, distance:Float, out:flight.Vector2Like, ?tolerance:Float):Bool {
-  return flight._js._fn.Path.getPathTangentAtDistance(path, distance, out, tolerance);
+  return flight._js._fn.Path.getPathTangentAtDistance(path, distance, out, (tolerance == null ? js.Syntax.code("undefined") : tolerance));
 }
 
 inline function getQuadraticBezierCurvature(x0:Float, y0:Float, cx:Float, cy:Float, x1:Float, y1:Float, t:Float):Float {
@@ -213,7 +213,7 @@ inline function getQuadraticBezierTangent(x0:Float, y0:Float, cx:Float, cy:Float
 }
 
 inline function initializePath(out:flight.EntityConstruction<flight.Path>, ?winding:flight.PathWinding):Void {
-  flight._js._fn.Path.initializePath(out, winding);
+  flight._js._fn.Path.initializePath(out, (winding == null ? js.Syntax.code("undefined") : winding));
 }
 
 inline function initializePathMorph(out:flight.EntityConstruction<flight.PathMorph>, commands:Array<Float>, endData:Array<Float>, startData:Array<Float>, winding:flight.PathWinding):Void {
@@ -237,27 +237,27 @@ inline function samplePathMorph(out:flight.Path, morph:flight.PathMorph, progres
 }
 
 inline function strokePath(path:flight.Path, style:flight.StrokeStyle, ?tolerance:Float):flight.Path {
-  return flight._js._fn.Path.strokePath(path, style, tolerance);
+  return flight._js._fn.Path.strokePath(path, style, (tolerance == null ? js.Syntax.code("undefined") : tolerance));
 }
 
 inline function tessellatePath(path:flight.Path, ?tolerance:Float):flight.PathMesh {
-  return flight._js._fn.Path.tessellatePath(path, tolerance);
+  return flight._js._fn.Path.tessellatePath(path, (tolerance == null ? js.Syntax.code("undefined") : tolerance));
 }
 
 inline function tessellatePathInto(path:flight.Path, out:flight.PathMesh, ?tolerance:Float):Void {
-  flight._js._fn.Path.tessellatePathInto(path, out, tolerance);
+  flight._js._fn.Path.tessellatePathInto(path, out, (tolerance == null ? js.Syntax.code("undefined") : tolerance));
 }
 
 inline function tessellatePathTyped(path:flight.Path, ?tolerance:Float):flight.PathMeshTyped {
-  return flight._js._fn.Path.tessellatePathTyped(path, tolerance);
+  return flight._js._fn.Path.tessellatePathTyped(path, (tolerance == null ? js.Syntax.code("undefined") : tolerance));
 }
 
 inline function tessellatePathTypedInto(path:flight.Path, out:flight.PathMeshTyped, ?tolerance:Float):Void {
-  flight._js._fn.Path.tessellatePathTypedInto(path, out, tolerance);
+  flight._js._fn.Path.tessellatePathTypedInto(path, out, (tolerance == null ? js.Syntax.code("undefined") : tolerance));
 }
 
 inline function tessellateStrokePath(path:flight.Path, style:flight.StrokeStyle, ?tolerance:Float):Null<flight.PathMesh> {
-  return flight._js._fn.Path.tessellateStrokePath(path, style, tolerance);
+  return flight._js._fn.Path.tessellateStrokePath(path, style, (tolerance == null ? js.Syntax.code("undefined") : tolerance));
 }
 
 inline function transformPath(source:flight.Path, matrix:flight.MatrixLike, out:flight.Path):Void {

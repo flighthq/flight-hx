@@ -31,11 +31,11 @@ inline function buildDomScale9Mapper(bounds:flight.RectangleLike, scale9Grid:fli
 }
 
 inline function createDomRenderState(element:js.html.Element, ?options:Dynamic):flight.DomRenderState {
-  return flight._js._fn.Scene2dDom.createDomRenderState(element, options);
+  return flight._js._fn.Scene2dDom.createDomRenderState(element, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createDomRenderStateRuntime(?options:Dynamic):flight.DomRenderStateRuntime {
-  return flight._js._fn.Scene2dDom.createDomRenderStateRuntime(options);
+  return flight._js._fn.Scene2dDom.createDomRenderStateRuntime((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createDomScale9ShapeData(_state:flight.RenderState, _source:flight.NodeAny):{ EntityRuntimeKey:Null<flight.EntityRuntime>, canvas:Null<js.html.CanvasElement>, context:Null<js.html.CanvasRenderingContext2D> } {
@@ -219,7 +219,7 @@ inline function prepareDomElement(element:js.html.Element):Void {
 }
 
 inline function processDomNode(runtime:flight.DomRenderStateRuntime, data:flight.RenderProxy2D, currentFrameId:Float, drawFn:()->Void, newLength:Float, ?forceDraw:Bool):{ newLength:Float, needsReconcile:Bool } {
-  return flight._js._fn.Scene2dDom.processDomNode(runtime, data, currentFrameId, drawFn, newLength, forceDraw);
+  return flight._js._fn.Scene2dDom.processDomNode(runtime, data, currentFrameId, drawFn, newLength, (forceDraw == null ? js.Syntax.code("undefined") : forceDraw));
 }
 
 inline function pushDomClipContours(stack:{ push:(flight.DomClipContourEntry)->Void }, contours:Array<Array<Float>>, winding:flight.PathWinding, transform:flight.Matrix):Void {
@@ -263,7 +263,7 @@ inline function removeDomSvgFilterFromNode(state:flight.DomRenderState, node:fli
 }
 
 inline function renderDomScene2D(state:flight.DomRenderState, source:flight.Node2D, ?renderTransform:Null<flight.Matrix>):Void {
-  flight._js._fn.Scene2dDom.renderDomScene2D(state, source, renderTransform);
+  flight._js._fn.Scene2dDom.renderDomScene2D(state, source, (renderTransform == null ? js.Syntax.code("undefined") : renderTransform));
 }
 
 inline function resolveDomTexture(state:flight.DomRenderState, texture:flight.Texture):Null<Dynamic> {

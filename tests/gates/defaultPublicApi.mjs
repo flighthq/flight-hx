@@ -33,6 +33,21 @@ compareDeclarations(
 );
 
 const publicFiles = files.filter(({ path: filename }) => /^flight\/[^/]+\.hx$/u.test(filename));
+const publicFilesByPath = new Map(publicFiles.map((file) => [file.path, file.contents]));
+for (const declaration of extern.functions) {
+  const optionalParameters = declaration.parameters.filter(({ optional }) => optional);
+  if (optionalParameters.length === 0) continue;
+  const contents = publicFilesByPath.get(`flight/${declaration.holder}.hx`);
+  const body = publicFunctionBody(contents, declaration.signature);
+  for (const { name } of optionalParameters) {
+    const normalization = `${name} == null ? js.Syntax.code("undefined") : ${name}`;
+    if (!body.includes(normalization)) {
+      failures.push(
+        `function ${declaration.holder}.${declaration.publicName} does not preserve omitted ${name} as JavaScript undefined`,
+      );
+    }
+  }
+}
 const holderCount = new Set([...extern.functions, ...extern.values].map(({ holder }) => holder)).size;
 const packageNames = manifest.packages.map(({ package: packageName }) => packageName);
 equal('summary files', report.summary.files, publicFiles.length);
@@ -100,6 +115,14 @@ function compareDeclarations(label, expected, actual, key, value) {
   for (const name of actualIndex.keys()) {
     if (!expectedIndex.has(name)) failures.push(`${label} ${displayKey(name)} is unexpected`);
   }
+}
+
+function publicFunctionBody(contents, signature) {
+  const marker = `inline ${signature} {`;
+  const start = contents?.indexOf(marker) ?? -1;
+  if (start < 0) return '';
+  const end = contents.indexOf('\n}', start + marker.length);
+  return end < 0 ? '' : contents.slice(start, end);
 }
 
 function indexDeclarations(label, declarations, key, value) {

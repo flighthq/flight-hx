@@ -5,7 +5,7 @@ package flight;
 typedef RequirementCatalog = flight._js.RequirementCatalog;
 
 inline function createRequirementCatalog(?entries:Array<flight.RequirementCatalogEntry>, ?translations:Array<flight.RequirementTranslation>, ?dispositions:Array<flight.RequirementDisposition>):flight.RequirementCatalog {
-  return flight._js._fn.RequirementCatalog.createRequirementCatalog(entries, translations, dispositions);
+  return flight._js._fn.RequirementCatalog.createRequirementCatalog((entries == null ? js.Syntax.code("undefined") : entries), (translations == null ? js.Syntax.code("undefined") : translations), (dispositions == null ? js.Syntax.code("undefined") : dispositions));
 }
 
 inline function findRequirementCatalogEntries(catalog:flight.RequirementCatalog, backend:String, facet:flight.RequirementFacet, kind:flight.Kind):Array<flight.RequirementCatalogEntry> {

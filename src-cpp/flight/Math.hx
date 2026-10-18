@@ -1,6 +1,18 @@
 // Generated from src-cpp/manifest.json and flight-compiler native-planning.json. Do not edit.
 package flight;
 
+inline function approxEqual(a:Float, b:Float, ?epsilon:Float):Bool {
+  return flight._cpp._fn.Math.approxEqual(a, b, epsilon != null, epsilon == null ? 0.0 : epsilon);
+}
+
+inline function approxEqualRelative(a:Float, b:Float, ?relativeEpsilon:Float):Bool {
+  return flight._cpp._fn.Math.approxEqualRelative(a, b, relativeEpsilon != null, relativeEpsilon == null ? 0.0 : relativeEpsilon);
+}
+
+inline function approxZero(value:Float, ?epsilon:Float):Bool {
+  return flight._cpp._fn.Math.approxZero(value, epsilon != null, epsilon == null ? 0.0 : epsilon);
+}
+
 inline function ceilPowerOfTwo(n:Float):Float {
   return flight._cpp._fn.Math.ceilPowerOfTwo(n);
 }

@@ -15,11 +15,11 @@ inline function configureDirectionalShadowCamera3D(camera:flight.Camera3D, light
 }
 
 inline function configureDirectionalShadowCamera3DTightFit(camera:flight.Camera3D, lightDirection:flight.Vector3Like, worldBounds:flight.AabbLike, ?padding:Float):Void {
-  flight._js._fn.Camera.configureDirectionalShadowCamera3DTightFit(camera, lightDirection, worldBounds, padding);
+  flight._js._fn.Camera.configureDirectionalShadowCamera3DTightFit(camera, lightDirection, worldBounds, (padding == null ? js.Syntax.code("undefined") : padding));
 }
 
 inline function createCamera2D(?options:flight.Camera2DOptions):flight.Camera2D {
-  return flight._js._fn.Camera.createCamera2D(options);
+  return flight._js._fn.Camera.createCamera2D((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createCamera3D(opts:flight.Camera3DOptions):flight.Camera3D {
@@ -123,7 +123,7 @@ inline function getOrthographicProjectionTexelSize(projection:flight.Orthographi
 }
 
 inline function initializeCamera2D(out:flight.EntityConstruction<flight.Camera2D>, ?options:flight.Camera2DOptions):Void {
-  flight._js._fn.Camera.initializeCamera2D(out, options);
+  flight._js._fn.Camera.initializeCamera2D(out, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function initializeCamera3D(out:flight.EntityConstruction<flight.Camera3D>, opts:flight.Camera3DOptions):Void {

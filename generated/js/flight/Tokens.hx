@@ -7,7 +7,7 @@ inline function createFlightDocumentTokenResolverRegistry():flight.FlightDocumen
 }
 
 inline function explainFlightDocumentSceneTokenResolution(scene:flight.FlightDocumentScene, mode:String, ?resolvers:flight.FlightDocumentTokenResolverRegistry):Null<flight.FlightDocumentRefusalExplanation> {
-  return flight._js._fn.Tokens.explainFlightDocumentSceneTokenResolution(scene, mode, resolvers);
+  return flight._js._fn.Tokens.explainFlightDocumentSceneTokenResolution(scene, mode, (resolvers == null ? js.Syntax.code("undefined") : resolvers));
 }
 
 inline function explainFlightDocumentSceneTokenSubstitution(scene:flight.FlightDocumentScene, resolution:flight.FlightDocumentTokenResolution):Null<flight.FlightDocumentRefusalExplanation> {
@@ -27,7 +27,7 @@ inline function readFlightDocumentTokenReferenceKey(value:String):Null<String> {
 }
 
 inline function resolveFlightDocumentSceneTokens(scene:flight.FlightDocumentScene, mode:String, ?resolvers:flight.FlightDocumentTokenResolverRegistry):Null<flight.FlightDocumentTokenResolution> {
-  return flight._js._fn.Tokens.resolveFlightDocumentSceneTokens(scene, mode, resolvers);
+  return flight._js._fn.Tokens.resolveFlightDocumentSceneTokens(scene, mode, (resolvers == null ? js.Syntax.code("undefined") : resolvers));
 }
 
 inline function substituteFlightDocumentSceneTokens<T:flight.FlightDocumentScene>(scene:T, resolution:flight.FlightDocumentTokenResolution):Null<T> {

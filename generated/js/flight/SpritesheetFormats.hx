@@ -23,43 +23,43 @@ inline function getSpritesheetFormatKinds():Array<flight.SpritesheetFormatKind> 
 }
 
 inline function parseAsepriteSpritesheet(json:String, ?diagnostics:Array<flight.ImportDiagnostic>):flight.SpritesheetData {
-  return flight._js._fn.SpritesheetFormats.parseAsepriteSpritesheet(json, diagnostics);
+  return flight._js._fn.SpritesheetFormats.parseAsepriteSpritesheet(json, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function parseAsepriteSpritesheetDocument(json:String, ?diagnostics:Array<flight.ImportDiagnostic>):flight.AsepriteParsed {
-  return flight._js._fn.SpritesheetFormats.parseAsepriteSpritesheetDocument(json, diagnostics);
+  return flight._js._fn.SpritesheetFormats.parseAsepriteSpritesheetDocument(json, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function parseCocosPlistSpritesheet(xml:String, ?diagnostics:Array<flight.ImportDiagnostic>):flight.SpritesheetData {
-  return flight._js._fn.SpritesheetFormats.parseCocosPlistSpritesheet(xml, diagnostics);
+  return flight._js._fn.SpritesheetFormats.parseCocosPlistSpritesheet(xml, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function parseCocosPlistSpritesheetDocument(xml:String, ?diagnostics:Array<flight.ImportDiagnostic>):flight.CocosPlistParsed {
-  return flight._js._fn.SpritesheetFormats.parseCocosPlistSpritesheetDocument(xml, diagnostics);
+  return flight._js._fn.SpritesheetFormats.parseCocosPlistSpritesheetDocument(xml, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function parseLibgdxAtlasSpritesheet(text:String, ?options:flight.LibgdxAtlasParseOptions, ?diagnostics:Array<flight.ImportDiagnostic>):flight.SpritesheetData {
-  return flight._js._fn.SpritesheetFormats.parseLibgdxAtlasSpritesheet(text, options, diagnostics);
+  return flight._js._fn.SpritesheetFormats.parseLibgdxAtlasSpritesheet(text, (options == null ? js.Syntax.code("undefined") : options), (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function parseSpritesheet(text:String, ?formatKind:flight.SpritesheetFormatKind, ?options:flight.SpritesheetParseOptions):Null<flight.SpritesheetData> {
-  return flight._js._fn.SpritesheetFormats.parseSpritesheet(text, formatKind, options);
+  return flight._js._fn.SpritesheetFormats.parseSpritesheet(text, (formatKind == null ? js.Syntax.code("undefined") : formatKind), (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function parseStarlingSpritesheet(xml:String, ?options:flight.StarlingParseOptions, ?diagnostics:Array<flight.ImportDiagnostic>):flight.SpritesheetData {
-  return flight._js._fn.SpritesheetFormats.parseStarlingSpritesheet(xml, options, diagnostics);
+  return flight._js._fn.SpritesheetFormats.parseStarlingSpritesheet(xml, (options == null ? js.Syntax.code("undefined") : options), (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function parseStarlingSpritesheetDocument(xml:String, ?options:flight.StarlingParseOptions, ?diagnostics:Array<flight.ImportDiagnostic>):flight.StarlingParsed {
-  return flight._js._fn.SpritesheetFormats.parseStarlingSpritesheetDocument(xml, options, diagnostics);
+  return flight._js._fn.SpritesheetFormats.parseStarlingSpritesheetDocument(xml, (options == null ? js.Syntax.code("undefined") : options), (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function parseTexturePackerSpritesheet(json:String, ?diagnostics:Array<flight.ImportDiagnostic>):flight.SpritesheetData {
-  return flight._js._fn.SpritesheetFormats.parseTexturePackerSpritesheet(json, diagnostics);
+  return flight._js._fn.SpritesheetFormats.parseTexturePackerSpritesheet(json, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function parseTexturePackerSpritesheetDocument(json:String, ?diagnostics:Array<flight.ImportDiagnostic>):flight.TexturePackerParsed {
-  return flight._js._fn.SpritesheetFormats.parseTexturePackerSpritesheetDocument(json, diagnostics);
+  return flight._js._fn.SpritesheetFormats.parseTexturePackerSpritesheetDocument(json, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function registerSpritesheetFormat(kind:flight.SpritesheetFormatKind, entry:{ detect:(String)->Bool, parse:(String, flight.SpritesheetParseOptions)->flight.SpritesheetData }):Void {
@@ -67,19 +67,19 @@ inline function registerSpritesheetFormat(kind:flight.SpritesheetFormatKind, ent
 }
 
 inline function serializeAsepriteSpritesheet(data:flight.SpritesheetData, ?existing:Dynamic, ?options:flight.AsepriteSerializeOptions):String {
-  return flight._js._fn.SpritesheetFormats.serializeAsepriteSpritesheet(data, existing, options);
+  return flight._js._fn.SpritesheetFormats.serializeAsepriteSpritesheet(data, (existing == null ? js.Syntax.code("undefined") : existing), (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function serializeCocosPlistSpritesheet(data:flight.SpritesheetData, ?existing:Dynamic):String {
-  return flight._js._fn.SpritesheetFormats.serializeCocosPlistSpritesheet(data, existing);
+  return flight._js._fn.SpritesheetFormats.serializeCocosPlistSpritesheet(data, (existing == null ? js.Syntax.code("undefined") : existing));
 }
 
 inline function serializeStarlingSpritesheet(data:flight.SpritesheetData, ?existing:Dynamic):String {
-  return flight._js._fn.SpritesheetFormats.serializeStarlingSpritesheet(data, existing);
+  return flight._js._fn.SpritesheetFormats.serializeStarlingSpritesheet(data, (existing == null ? js.Syntax.code("undefined") : existing));
 }
 
 inline function serializeTexturePackerSpritesheet(data:flight.SpritesheetData, ?existing:Dynamic, ?options:flight.TexturePackerSerializeOptions):String {
-  return flight._js._fn.SpritesheetFormats.serializeTexturePackerSpritesheet(data, existing, options);
+  return flight._js._fn.SpritesheetFormats.serializeTexturePackerSpritesheet(data, (existing == null ? js.Syntax.code("undefined") : existing), (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function unregisterSpritesheetFormat(kind:flight.SpritesheetFormatKind):Void {

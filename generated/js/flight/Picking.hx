@@ -35,18 +35,18 @@ inline function isScene3DHitFrontFacing(hit:flight.Scene3DHit, ray:flight.Ray3D)
 }
 
 inline function pickScene3D(scene:flight.Node3D, camera:flight.Camera3D, screenX:Float, screenY:Float, out:flight.Scene3DHit, ?options:flight.Scene3DPickOptions):Null<flight.Scene3DHit> {
-  return flight._js._fn.Picking.pickScene3D(scene, camera, screenX, screenY, out, options);
+  return flight._js._fn.Picking.pickScene3D(scene, camera, screenX, screenY, out, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function pickScene3DAll(scene:flight.Node3D, camera:flight.Camera3D, screenX:Float, screenY:Float, outArray:Array<flight.Scene3DHit>, ?options:flight.Scene3DPickOptions):Array<flight.Scene3DHit> {
-  return flight._js._fn.Picking.pickScene3DAll(scene, camera, screenX, screenY, outArray, options);
+  return flight._js._fn.Picking.pickScene3DAll(scene, camera, screenX, screenY, outArray, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function pickScene3DAllWithRay3D(scene:flight.Node3D, ray:flight.Ray3D, outArray:Array<flight.Scene3DHit>, ?options:flight.Scene3DPickOptions):Array<flight.Scene3DHit> {
-  return flight._js._fn.Picking.pickScene3DAllWithRay3D(scene, ray, outArray, options);
+  return flight._js._fn.Picking.pickScene3DAllWithRay3D(scene, ray, outArray, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function pickScene3DWithRay3D(scene:flight.Node3D, ray:flight.Ray3D, out:flight.Scene3DHit, ?options:flight.Scene3DPickOptions):Null<flight.Scene3DHit> {
-  return flight._js._fn.Picking.pickScene3DWithRay3D(scene, ray, out, options);
+  return flight._js._fn.Picking.pickScene3DWithRay3D(scene, ray, out, (options == null ? js.Syntax.code("undefined") : options));
 }
 #end

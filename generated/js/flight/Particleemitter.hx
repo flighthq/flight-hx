@@ -43,7 +43,7 @@ inline function computeParticleEmitter3DLocalBoundsAabb(out:flight.AabbLike, sou
 }
 
 inline function createParticleEmitter2D(?obj:flight.PartialNode<flight.ParticleEmitter2D>):flight.ParticleEmitter2D {
-  return flight._js._fn.Particleemitter.createParticleEmitter2D(obj);
+  return flight._js._fn.Particleemitter.createParticleEmitter2D((obj == null ? js.Syntax.code("undefined") : obj));
 }
 
 inline function createParticleEmitter2DRuntime():flight.ParticleEmitter2DRuntime {
@@ -51,19 +51,19 @@ inline function createParticleEmitter2DRuntime():flight.ParticleEmitter2DRuntime
 }
 
 inline function createParticleEmitter3D(?obj:flight.PartialNode<flight.ParticleEmitter3D>):flight.ParticleEmitter3D {
-  return flight._js._fn.Particleemitter.createParticleEmitter3D(obj);
+  return flight._js._fn.Particleemitter.createParticleEmitter3D((obj == null ? js.Syntax.code("undefined") : obj));
 }
 
 inline function createParticleEmitterData(?data:Dynamic):flight.ParticleEmitterData {
-  return flight._js._fn.Particleemitter.createParticleEmitterData(data);
+  return flight._js._fn.Particleemitter.createParticleEmitterData((data == null ? js.Syntax.code("undefined") : data));
 }
 
 inline function emitParticleBurst2D(emitter:flight.ParticleEmitter2D, state:flight.ParticleEmitterState, config:flight.ParticleEmitterConfig, count:Float, x:Float, y:Float, ?tint:Float):Float {
-  return flight._js._fn.Particleemitter.emitParticleBurst2D(emitter, state, config, count, x, y, tint);
+  return flight._js._fn.Particleemitter.emitParticleBurst2D(emitter, state, config, count, x, y, (tint == null ? js.Syntax.code("undefined") : tint));
 }
 
 inline function emitParticleBurst3D(emitter:flight.ParticleEmitter3D, state:flight.ParticleEmitterState, config:flight.ParticleEmitterConfig, count:Float, x:Float, y:Float, z:Float, ?tint:Float):Float {
-  return flight._js._fn.Particleemitter.emitParticleBurst3D(emitter, state, config, count, x, y, z, tint);
+  return flight._js._fn.Particleemitter.emitParticleBurst3D(emitter, state, config, count, x, y, z, (tint == null ? js.Syntax.code("undefined") : tint));
 }
 
 inline function getParticleEmitter2DCapacity(source:flight.ParticleEmitter2D):Float {
@@ -107,7 +107,7 @@ inline function getParticleEmitter3DRuntime(source:flight.ParticleEmitter3D):fli
 }
 
 inline function initializeParticleEmitterData(out:flight.EntityConstruction<flight.ParticleEmitterData>, ?data:Dynamic):Void {
-  flight._js._fn.Particleemitter.initializeParticleEmitterData(out, data);
+  flight._js._fn.Particleemitter.initializeParticleEmitterData(out, (data == null ? js.Syntax.code("undefined") : data));
 }
 
 inline function isParticleEmitter2DComplete(emitter:flight.ParticleEmitter2D, state:flight.ParticleEmitterState, config:flight.ParticleEmitterConfig):Bool {
@@ -123,11 +123,11 @@ inline function isParticleEmitter3DComplete(emitter:flight.ParticleEmitter3D, st
 }
 
 inline function prewarmParticleEmitter2D(emitter:flight.ParticleEmitter2D, state:flight.ParticleEmitterState, config:flight.ParticleEmitterConfig, duration:Float, ?stepDeltaTime:Float, ?callbacks:flight.ParticleEmitterCallbacks):Void {
-  flight._js._fn.Particleemitter.prewarmParticleEmitter2D(emitter, state, config, duration, stepDeltaTime, callbacks);
+  flight._js._fn.Particleemitter.prewarmParticleEmitter2D(emitter, state, config, duration, (stepDeltaTime == null ? js.Syntax.code("undefined") : stepDeltaTime), (callbacks == null ? js.Syntax.code("undefined") : callbacks));
 }
 
 inline function prewarmParticleEmitter3D(emitter:flight.ParticleEmitter3D, state:flight.ParticleEmitterState, config:flight.ParticleEmitterConfig, duration:Float, ?stepDeltaTime:Float, ?callbacks:flight.ParticleEmitterCallbacks):Void {
-  flight._js._fn.Particleemitter.prewarmParticleEmitter3D(emitter, state, config, duration, stepDeltaTime, callbacks);
+  flight._js._fn.Particleemitter.prewarmParticleEmitter3D(emitter, state, config, duration, (stepDeltaTime == null ? js.Syntax.code("undefined") : stepDeltaTime), (callbacks == null ? js.Syntax.code("undefined") : callbacks));
 }
 
 inline function removeParticleEmitter2DParticle(target:flight.ParticleEmitter2D, index:Float):Void {
@@ -187,19 +187,19 @@ inline function sortParticleEmitter3DIndicesByViewDepth(outIndices:flight._inter
 }
 
 inline function stepParticleEmitter2D(emitter:flight.ParticleEmitter2D, state:flight.ParticleEmitterState, config:flight.ParticleEmitterConfig, deltaTime:Float, ?forces:Array<flight.ParticleForce>, ?colliders:Array<flight.ParticleCollider>, ?callbacks:flight.ParticleEmitterCallbacks):Void {
-  flight._js._fn.Particleemitter.stepParticleEmitter2D(emitter, state, config, deltaTime, forces, colliders, callbacks);
+  flight._js._fn.Particleemitter.stepParticleEmitter2D(emitter, state, config, deltaTime, (forces == null ? js.Syntax.code("undefined") : forces), (colliders == null ? js.Syntax.code("undefined") : colliders), (callbacks == null ? js.Syntax.code("undefined") : callbacks));
 }
 
 inline function stepParticleEmitter3D(emitter:flight.ParticleEmitter3D, state:flight.ParticleEmitterState, config:flight.ParticleEmitterConfig, deltaTime:Float, ?forces:Array<flight.ParticleForce>, ?colliders:Array<flight.ParticleCollider>, ?callbacks:flight.ParticleEmitterCallbacks):Void {
-  flight._js._fn.Particleemitter.stepParticleEmitter3D(emitter, state, config, deltaTime, forces, colliders, callbacks);
+  flight._js._fn.Particleemitter.stepParticleEmitter3D(emitter, state, config, deltaTime, (forces == null ? js.Syntax.code("undefined") : forces), (colliders == null ? js.Syntax.code("undefined") : colliders), (callbacks == null ? js.Syntax.code("undefined") : callbacks));
 }
 
 inline function updateParticleEmitter2D(emitter:flight.ParticleEmitter2D, state:flight.ParticleEmitterState, config:flight.ParticleEmitterConfig, deltaTime:Float, ?callbacks:flight.ParticleEmitterCallbacks):Void {
-  flight._js._fn.Particleemitter.updateParticleEmitter2D(emitter, state, config, deltaTime, callbacks);
+  flight._js._fn.Particleemitter.updateParticleEmitter2D(emitter, state, config, deltaTime, (callbacks == null ? js.Syntax.code("undefined") : callbacks));
 }
 
 inline function updateParticleEmitter3D(emitter:flight.ParticleEmitter3D, state:flight.ParticleEmitterState, config:flight.ParticleEmitterConfig, deltaTime:Float, ?callbacks:flight.ParticleEmitterCallbacks):Void {
-  flight._js._fn.Particleemitter.updateParticleEmitter3D(emitter, state, config, deltaTime, callbacks);
+  flight._js._fn.Particleemitter.updateParticleEmitter3D(emitter, state, config, deltaTime, (callbacks == null ? js.Syntax.code("undefined") : callbacks));
 }
 
 var PARTICLE_EMITTER_3D_DELETED_ID(get, set):Float;

@@ -47,7 +47,7 @@ inline function bindWgpuUnlitVideoSurface(state:flight.WgpuRenderState, pipeline
 }
 
 inline function bindWgpuWireframeColor(state:flight.WgpuRenderState, pipeline:flight.WgpuWireframePipeline, materialKey:Dynamic, color:flight.LinearColor, ?alphaCutoff:Float):Dynamic {
-  return flight._js._fn.Scene3dWgpu.bindWgpuWireframeColor(state, pipeline, materialKey, color, alphaCutoff);
+  return flight._js._fn.Scene3dWgpu.bindWgpuWireframeColor(state, pipeline, materialKey, color, (alphaCutoff == null ? js.Syntax.code("undefined") : alphaCutoff));
 }
 
 inline function buildWgpuClassicDefineKey(key:flight.WgpuClassicDefineKey):String {
@@ -83,7 +83,7 @@ inline function buildWgpuPerMapMaterialBindGroup(state:flight.WgpuRenderState, l
 }
 
 inline function buildWgpuShadedCacheKey(material:flight.ShadedMaterial, ?registry:Dynamic):String {
-  return flight._js._fn.Scene3dWgpu.buildWgpuShadedCacheKey(material, registry);
+  return flight._js._fn.Scene3dWgpu.buildWgpuShadedCacheKey(material, (registry == null ? js.Syntax.code("undefined") : registry));
 }
 
 inline function buildWgpuToonDefineKey(key:flight.WgpuToonDefineKey):String {
@@ -95,31 +95,31 @@ inline function buildWgpuUnlitDefineKey(key:flight.WgpuUnlitDefineKey):String {
 }
 
 inline function compileWgpuClassicPipeline(state:flight.WgpuRenderState, key:flight.WgpuClassicDefineKey, format:String, ?blended:Bool, ?skinned:Bool, ?colorAdjustmentFeature:Null<flight.WgpuColorAdjustmentMaterialFeature>):flight.WgpuClassicPipeline {
-  return flight._js._fn.Scene3dWgpu.compileWgpuClassicPipeline(state, key, format, blended, skinned, colorAdjustmentFeature);
+  return flight._js._fn.Scene3dWgpu.compileWgpuClassicPipeline(state, key, format, (blended == null ? js.Syntax.code("undefined") : blended), (skinned == null ? js.Syntax.code("undefined") : skinned), (colorAdjustmentFeature == null ? js.Syntax.code("undefined") : colorAdjustmentFeature));
 }
 
 inline function compileWgpuDebugPipeline(state:flight.WgpuRenderState, key:flight.WgpuDebugDefineKey, format:String, ?blended:Bool, ?doubleSided:Bool, ?skinned:Bool):flight.WgpuDebugPipeline {
-  return flight._js._fn.Scene3dWgpu.compileWgpuDebugPipeline(state, key, format, blended, doubleSided, skinned);
+  return flight._js._fn.Scene3dWgpu.compileWgpuDebugPipeline(state, key, format, (blended == null ? js.Syntax.code("undefined") : blended), (doubleSided == null ? js.Syntax.code("undefined") : doubleSided), (skinned == null ? js.Syntax.code("undefined") : skinned));
 }
 
 inline function compileWgpuMatcapPipeline(state:flight.WgpuRenderState, key:flight.WgpuMatcapDefineKey, format:String, ?blended:Bool, ?skinned:Bool):flight.WgpuMatcapPipeline {
-  return flight._js._fn.Scene3dWgpu.compileWgpuMatcapPipeline(state, key, format, blended, skinned);
+  return flight._js._fn.Scene3dWgpu.compileWgpuMatcapPipeline(state, key, format, (blended == null ? js.Syntax.code("undefined") : blended), (skinned == null ? js.Syntax.code("undefined") : skinned));
 }
 
 inline function compileWgpuPbrPipeline(state:flight.WgpuRenderState, key:flight.WgpuPbrDefineKey, format:String, ?blended:Bool, ?skinned:Bool, ?colorAdjustmentFeature:Null<flight.WgpuColorAdjustmentMaterialFeature>):flight.WgpuPbrPipeline {
-  return flight._js._fn.Scene3dWgpu.compileWgpuPbrPipeline(state, key, format, blended, skinned, colorAdjustmentFeature);
+  return flight._js._fn.Scene3dWgpu.compileWgpuPbrPipeline(state, key, format, (blended == null ? js.Syntax.code("undefined") : blended), (skinned == null ? js.Syntax.code("undefined") : skinned), (colorAdjustmentFeature == null ? js.Syntax.code("undefined") : colorAdjustmentFeature));
 }
 
 inline function compileWgpuToonPipeline(state:flight.WgpuRenderState, key:flight.WgpuToonDefineKey, format:String, ?blended:Bool, ?skinned:Bool):flight.WgpuToonPipeline {
-  return flight._js._fn.Scene3dWgpu.compileWgpuToonPipeline(state, key, format, blended, skinned);
+  return flight._js._fn.Scene3dWgpu.compileWgpuToonPipeline(state, key, format, (blended == null ? js.Syntax.code("undefined") : blended), (skinned == null ? js.Syntax.code("undefined") : skinned));
 }
 
 inline function compileWgpuUnlitPipeline(state:flight.WgpuRenderState, key:flight.WgpuUnlitDefineKey, format:String, ?blended:Bool, ?skinned:Bool):flight.WgpuUnlitPipeline {
-  return flight._js._fn.Scene3dWgpu.compileWgpuUnlitPipeline(state, key, format, blended, skinned);
+  return flight._js._fn.Scene3dWgpu.compileWgpuUnlitPipeline(state, key, format, (blended == null ? js.Syntax.code("undefined") : blended), (skinned == null ? js.Syntax.code("undefined") : skinned));
 }
 
 inline function compileWgpuWireframePipeline(state:flight.WgpuRenderState, format:String, ?blended:Bool, ?alphaMaskEnabled:Bool, ?skinned:Bool):flight.WgpuWireframePipeline {
-  return flight._js._fn.Scene3dWgpu.compileWgpuWireframePipeline(state, format, blended, alphaMaskEnabled, skinned);
+  return flight._js._fn.Scene3dWgpu.compileWgpuWireframePipeline(state, format, (blended == null ? js.Syntax.code("undefined") : blended), (alphaMaskEnabled == null ? js.Syntax.code("undefined") : alphaMaskEnabled), (skinned == null ? js.Syntax.code("undefined") : skinned));
 }
 
 inline function createWgpuMeshPipeline(state:flight.WgpuRenderState, options:{ ?blended:Bool, doubleSided:Bool, ?extraBindGroupLayout:Dynamic, format:String, ?iblBindGroupLayout:Dynamic, materialBindGroupLayout:Dynamic, module:Dynamic, ?pbrSampleBindGroupLayout:Dynamic, ?shadowBindGroupLayout:Dynamic, ?skinned:Bool, ?topology:String }):flight.WgpuMeshPipeline {
@@ -163,7 +163,7 @@ inline function ensureWgpuClassicPipeline(state:flight.WgpuRenderState, key:flig
 }
 
 inline function ensureWgpuDebugPipeline(state:flight.WgpuRenderState, key:flight.WgpuDebugDefineKey, format:String, ?doubleSided:Bool):flight.WgpuDebugPipeline {
-  return flight._js._fn.Scene3dWgpu.ensureWgpuDebugPipeline(state, key, format, doubleSided);
+  return flight._js._fn.Scene3dWgpu.ensureWgpuDebugPipeline(state, key, format, (doubleSided == null ? js.Syntax.code("undefined") : doubleSided));
 }
 
 inline function ensureWgpuEnvironmentSourceCube(state:flight.WgpuRenderState, environment:flight.Environment):Null<Dynamic> {
@@ -195,7 +195,7 @@ inline function ensureWgpuMaterialBinding(state:flight.WgpuRenderState, key:Dyna
 }
 
 inline function ensureWgpuMeshUpload(state:flight.WgpuRenderState, geometry:flight.MeshGeometry, ?gpuSkinned:Bool):flight.WgpuMeshUpload {
-  return flight._js._fn.Scene3dWgpu.ensureWgpuMeshUpload(state, geometry, gpuSkinned);
+  return flight._js._fn.Scene3dWgpu.ensureWgpuMeshUpload(state, geometry, (gpuSkinned == null ? js.Syntax.code("undefined") : gpuSkinned));
 }
 
 inline function ensureWgpuPbrMaterialBindGroup(state:flight.WgpuRenderState, pipeline:flight.WgpuPbrPipeline, key:Dynamic, standard:Null<flight.StandardPbrMaterialProperties>):flight.WgpuMaterialBinding {
@@ -267,11 +267,11 @@ inline function ensureWgpuUnlitPipeline(state:flight.WgpuRenderState, key:flight
 }
 
 inline function ensureWgpuWireframePipeline(state:flight.WgpuRenderState, format:String, ?alphaMaskEnabled:Bool):flight.WgpuWireframePipeline {
-  return flight._js._fn.Scene3dWgpu.ensureWgpuWireframePipeline(state, format, alphaMaskEnabled);
+  return flight._js._fn.Scene3dWgpu.ensureWgpuWireframePipeline(state, format, (alphaMaskEnabled == null ? js.Syntax.code("undefined") : alphaMaskEnabled));
 }
 
 inline function ensureWgpuWireframeUpload(state:flight.WgpuRenderState, geometry:flight.MeshGeometry, ?gpuSkinned:Bool):Null<flight.WgpuWireframeUpload> {
-  return flight._js._fn.Scene3dWgpu.ensureWgpuWireframeUpload(state, geometry, gpuSkinned);
+  return flight._js._fn.Scene3dWgpu.ensureWgpuWireframeUpload(state, geometry, (gpuSkinned == null ? js.Syntax.code("undefined") : gpuSkinned));
 }
 
 inline function explainWgpuScene3DCoverage(out:Array<flight.SceneCoverageEntry>, state:flight.WgpuRenderState, usage:flight.Scene3DKindUsage, catalog:flight.SceneCoverageCatalog):Void {
@@ -279,15 +279,15 @@ inline function explainWgpuScene3DCoverage(out:Array<flight.SceneCoverageEntry>,
 }
 
 inline function explainWgpuScene3DForwardLightSelection(lights:flight.Scene3DLightsLike, ?selection:flight.WgpuScene3DForwardLightList):flight.Scene3DForwardLightSelectionExplanation {
-  return flight._js._fn.Scene3dWgpu.explainWgpuScene3DForwardLightSelection(lights, selection);
+  return flight._js._fn.Scene3dWgpu.explainWgpuScene3DForwardLightSelection(lights, (selection == null ? js.Syntax.code("undefined") : selection));
 }
 
 inline function getWgpuClassicModuleSourceForKey(key:flight.WgpuClassicDefineKey, ?skinned:Bool, ?skinning:Null<flight.WgpuSkinningAdapter>, ?colorAdjustmentFeature:Null<flight.WgpuColorAdjustmentMaterialFeature>):String {
-  return flight._js._fn.Scene3dWgpu.getWgpuClassicModuleSourceForKey(key, skinned, skinning, colorAdjustmentFeature);
+  return flight._js._fn.Scene3dWgpu.getWgpuClassicModuleSourceForKey(key, (skinned == null ? js.Syntax.code("undefined") : skinned), (skinning == null ? js.Syntax.code("undefined") : skinning), (colorAdjustmentFeature == null ? js.Syntax.code("undefined") : colorAdjustmentFeature));
 }
 
 inline function getWgpuClassicSharedSamplerModuleSourceForKey(key:flight.WgpuClassicDefineKey, ?skinned:Bool, ?skinning:Null<flight.WgpuSkinningAdapter>):String {
-  return flight._js._fn.Scene3dWgpu.getWgpuClassicSharedSamplerModuleSourceForKey(key, skinned, skinning);
+  return flight._js._fn.Scene3dWgpu.getWgpuClassicSharedSamplerModuleSourceForKey(key, (skinned == null ? js.Syntax.code("undefined") : skinned), (skinning == null ? js.Syntax.code("undefined") : skinning));
 }
 
 inline function getWgpuCustomMaterialShaderSource(state:flight.WgpuRenderState, shaderKey:String):Null<flight.WgpuCustomMaterialShaderSource> {
@@ -295,11 +295,11 @@ inline function getWgpuCustomMaterialShaderSource(state:flight.WgpuRenderState, 
 }
 
 inline function getWgpuDebugModuleSourceForKey(key:flight.WgpuDebugDefineKey, ?skinned:Bool, ?skinning:Null<flight.WgpuSkinningAdapter>):String {
-  return flight._js._fn.Scene3dWgpu.getWgpuDebugModuleSourceForKey(key, skinned, skinning);
+  return flight._js._fn.Scene3dWgpu.getWgpuDebugModuleSourceForKey(key, (skinned == null ? js.Syntax.code("undefined") : skinned), (skinning == null ? js.Syntax.code("undefined") : skinning));
 }
 
 inline function getWgpuMatcapModuleSourceForKey(key:flight.WgpuMatcapDefineKey, ?skinned:Bool, ?skinning:Null<flight.WgpuSkinningAdapter>):String {
-  return flight._js._fn.Scene3dWgpu.getWgpuMatcapModuleSourceForKey(key, skinned, skinning);
+  return flight._js._fn.Scene3dWgpu.getWgpuMatcapModuleSourceForKey(key, (skinned == null ? js.Syntax.code("undefined") : skinned), (skinning == null ? js.Syntax.code("undefined") : skinning));
 }
 
 inline function getWgpuMaterialSampler(state:flight.WgpuRenderState, texture:Null<flight.Texture>):Dynamic {
@@ -311,7 +311,7 @@ inline function getWgpuMeshMaterialRenderer(state:flight.WgpuRenderState, kind:f
 }
 
 inline function getWgpuMeshPreludeWgsl(skinned:Bool, ?skinning:Null<flight.WgpuSkinningAdapter>):String {
-  return flight._js._fn.Scene3dWgpu.getWgpuMeshPreludeWgsl(skinned, skinning);
+  return flight._js._fn.Scene3dWgpu.getWgpuMeshPreludeWgsl(skinned, (skinning == null ? js.Syntax.code("undefined") : skinning));
 }
 
 inline function getWgpuPbrMaterialScratch():flight._internal._Float32Array {
@@ -323,7 +323,7 @@ inline function getWgpuPbrModuleBody():String {
 }
 
 inline function getWgpuPbrModuleSourceForKey(key:flight.WgpuPbrDefineKey, ?skinned:Bool, ?skinning:Null<flight.WgpuSkinningAdapter>, ?colorAdjustmentFeature:Null<flight.WgpuColorAdjustmentMaterialFeature>):String {
-  return flight._js._fn.Scene3dWgpu.getWgpuPbrModuleSourceForKey(key, skinned, skinning, colorAdjustmentFeature);
+  return flight._js._fn.Scene3dWgpu.getWgpuPbrModuleSourceForKey(key, (skinned == null ? js.Syntax.code("undefined") : skinned), (skinning == null ? js.Syntax.code("undefined") : skinning), (colorAdjustmentFeature == null ? js.Syntax.code("undefined") : colorAdjustmentFeature));
 }
 
 inline function getWgpuScene3DRuntime(state:flight.WgpuRenderState):flight.WgpuScene3DRuntime {
@@ -339,7 +339,7 @@ inline function getWgpuShadedBaseFlags(material:flight.ShadedMaterial):{ alphaMa
 }
 
 inline function getWgpuShadedModuleSource(material:flight.ShadedMaterial, ?registry:Dynamic, ?skinned:Bool, ?skinning:Null<flight.WgpuSkinningAdapter>, ?colorAdjustmentFeature:Null<flight.WgpuColorAdjustmentMaterialFeature>, ?colorMatrix:Bool):String {
-  return flight._js._fn.Scene3dWgpu.getWgpuShadedModuleSource(material, registry, skinned, skinning, colorAdjustmentFeature, colorMatrix);
+  return flight._js._fn.Scene3dWgpu.getWgpuShadedModuleSource(material, (registry == null ? js.Syntax.code("undefined") : registry), (skinned == null ? js.Syntax.code("undefined") : skinned), (skinning == null ? js.Syntax.code("undefined") : skinning), (colorAdjustmentFeature == null ? js.Syntax.code("undefined") : colorAdjustmentFeature), (colorMatrix == null ? js.Syntax.code("undefined") : colorMatrix));
 }
 
 inline function getWgpuSkinningAdapter(state:flight.WgpuRenderState):Null<flight.WgpuSkinningAdapter> {
@@ -347,15 +347,15 @@ inline function getWgpuSkinningAdapter(state:flight.WgpuRenderState):Null<flight
 }
 
 inline function getWgpuToonModuleSourceForKey(key:flight.WgpuToonDefineKey, ?skinned:Bool, ?skinning:Null<flight.WgpuSkinningAdapter>):String {
-  return flight._js._fn.Scene3dWgpu.getWgpuToonModuleSourceForKey(key, skinned, skinning);
+  return flight._js._fn.Scene3dWgpu.getWgpuToonModuleSourceForKey(key, (skinned == null ? js.Syntax.code("undefined") : skinned), (skinning == null ? js.Syntax.code("undefined") : skinning));
 }
 
 inline function getWgpuUnlitModuleSourceForKey(key:flight.WgpuUnlitDefineKey, ?skinned:Bool, ?skinning:Null<flight.WgpuSkinningAdapter>):String {
-  return flight._js._fn.Scene3dWgpu.getWgpuUnlitModuleSourceForKey(key, skinned, skinning);
+  return flight._js._fn.Scene3dWgpu.getWgpuUnlitModuleSourceForKey(key, (skinned == null ? js.Syntax.code("undefined") : skinned), (skinning == null ? js.Syntax.code("undefined") : skinning));
 }
 
 inline function getWgpuWireframeModuleSource(?alphaMaskEnabled:Bool, ?skinned:Bool, ?skinning:Null<flight.WgpuSkinningAdapter>):String {
-  return flight._js._fn.Scene3dWgpu.getWgpuWireframeModuleSource(alphaMaskEnabled, skinned, skinning);
+  return flight._js._fn.Scene3dWgpu.getWgpuWireframeModuleSource((alphaMaskEnabled == null ? js.Syntax.code("undefined") : alphaMaskEnabled), (skinned == null ? js.Syntax.code("undefined") : skinned), (skinning == null ? js.Syntax.code("undefined") : skinning));
 }
 
 inline function hasWgpuScene3DCoverage(state:flight.WgpuRenderState, usage:flight.Scene3DKindUsage):Bool {
@@ -379,7 +379,7 @@ inline function isWgpuTextureReady(texture:Null<flight.Texture>):Bool {
 }
 
 inline function makeWgpuScene3DState(?registry:flight.WgpuRenderStateOptions):{ fake:flight.FakeWgpu, pass:flight.WgpuRenderPass, state:flight.WgpuRenderState } {
-  return flight._js._fn.Scene3dWgpu.makeWgpuScene3DState(registry);
+  return flight._js._fn.Scene3dWgpu.makeWgpuScene3DState((registry == null ? js.Syntax.code("undefined") : registry));
 }
 
 inline function makeWgpuSkinningAdapter():flight.WgpuSkinningAdapter {
@@ -479,7 +479,7 @@ inline function renderWgpuEnvironmentSkybox(renderPass:flight.WgpuRenderPass, en
 }
 
 inline function renderWgpuScene3D(pass:flight.WgpuRenderPass, scene:flight.Node3D, camera:flight.Camera3D, lights:flight.Scene3DLightsLike, ?forwardLights:flight.WgpuScene3DForwardLightList):Void {
-  flight._js._fn.Scene3dWgpu.renderWgpuScene3D(pass, scene, camera, lights, forwardLights);
+  flight._js._fn.Scene3dWgpu.renderWgpuScene3D(pass, scene, camera, lights, (forwardLights == null ? js.Syntax.code("undefined") : forwardLights));
 }
 
 inline function renderWgpuScene3DShadowMap(state:flight.WgpuRenderState, scene:flight.Node3D, shadowCamera:flight.Camera3D, directionalLight:Null<flight.DirectionalLight>):Void {
@@ -507,7 +507,7 @@ inline function setWgpuScene3DTime(state:flight.WgpuRenderState, seconds:Float):
 }
 
 inline function spliceWgpuColorAdjustmentPrelude(source:String, feature:flight.WgpuColorAdjustmentMaterialFeature, ?matrix:Bool):String {
-  return flight._js._fn.Scene3dWgpu.spliceWgpuColorAdjustmentPrelude(source, feature, matrix);
+  return flight._js._fn.Scene3dWgpu.spliceWgpuColorAdjustmentPrelude(source, feature, (matrix == null ? js.Syntax.code("undefined") : matrix));
 }
 
 inline function stashWgpuUvTransform(state:flight.WgpuRenderState, texture:Null<flight.TextureLike>):Void {

@@ -3,7 +3,7 @@
 package flight;
 
 inline function createTrayIcon(hostTrayLifecycle:flight.HostTrayLifecycleCapability, ?options:flight.TrayIconOptions):flight._internal._Promise<flight.TrayCreateResult> {
-  return flight._js._fn.Tray.createTrayIcon(hostTrayLifecycle, options);
+  return flight._js._fn.Tray.createTrayIcon(hostTrayLifecycle, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function destroyTrayIcon(tray:flight.TrayIcon):flight._internal._Promise<flight.TrayDestroyResult> {
@@ -75,7 +75,7 @@ inline function onTrayMenuSelection(hostTrayMenuSelectionEvents:flight.HostTrayM
 }
 
 inline function popupTrayContextMenu(hostTrayPopupMenu:flight.HostTrayPopupMenuCapability, tray:flight.TrayIcon, ?position:flight.Vector2Like):flight._internal._Promise<flight.TrayPopupMenuResult> {
-  return flight._js._fn.Tray.popupTrayContextMenu(hostTrayPopupMenu, tray, position);
+  return flight._js._fn.Tray.popupTrayContextMenu(hostTrayPopupMenu, tray, (position == null ? js.Syntax.code("undefined") : position));
 }
 
 inline function removeTrayBalloon(hostTrayBalloon:flight.HostTrayBalloonCapability, tray:flight.TrayIcon):flight._internal._Promise<flight.TrayBalloonRemoveResult> {

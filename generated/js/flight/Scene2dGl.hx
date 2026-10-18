@@ -23,7 +23,7 @@ inline function buildGlScale9Mapper(bounds:flight.RectangleLike, scale9Grid:flig
 }
 
 inline function createGlCacheState(ownerState:flight.GlRenderState, ?options:flight.GlRenderStateOptions):flight.GlRenderState {
-  return flight._js._fn.Scene2dGl.createGlCacheState(ownerState, options);
+  return flight._js._fn.Scene2dGl.createGlCacheState(ownerState, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createGlRichTextData(_state:flight.GlRenderState, _source:flight.NodeAny):flight.RendererData {
@@ -71,7 +71,7 @@ inline function drawGlRichText(state:flight.GlRenderState, renderProxy:flight.Re
 }
 
 inline function drawGlRichTextWithOverlay(state:flight.GlRenderState, renderProxy:flight.RenderProxy2D, ?overlay:flight.GlRichTextOverlay):Void {
-  flight._js._fn.Scene2dGl.drawGlRichTextWithOverlay(state, renderProxy, overlay);
+  flight._js._fn.Scene2dGl.drawGlRichTextWithOverlay(state, renderProxy, (overlay == null ? js.Syntax.code("undefined") : overlay));
 }
 
 inline function drawGlScale9Shape(state:flight.GlRenderState, renderProxy:flight.RenderProxy2D):Void {
@@ -95,7 +95,7 @@ inline function drawGlShape(state:flight.GlRenderState, renderProxy:flight.Rende
 }
 
 inline function drawGlShapeMeshBatch(state:flight.GlRenderState, renderProxy:flight.RenderProxy2D, meshes:Array<flight.GlShapeMesh>, binding:flight.GlShapeMeshBinding, ?onProgramBound:(flight.GlRenderState)->Void):Void {
-  flight._js._fn.Scene2dGl.drawGlShapeMeshBatch(state, renderProxy, meshes, binding, onProgramBound);
+  flight._js._fn.Scene2dGl.drawGlShapeMeshBatch(state, renderProxy, meshes, binding, (onProgramBound == null ? js.Syntax.code("undefined") : onProgramBound));
 }
 
 inline function drawGlShapeMeshes(state:flight.GlRenderState, renderProxy:flight.RenderProxy2D, meshes:Array<flight.GlShapeMesh>):Void {
@@ -211,7 +211,7 @@ inline function popGlClipRectangle(state:flight.GlRenderState):Void {
 }
 
 inline function prepareGlQuadBatchWrite(state:flight.GlRenderState, texture:js.html.webgl.Texture, straightAlpha:Bool, sampler:Null<flight.SamplerLike>, blendMode:Null<flight.BlendMode>, material:Null<flight.Material>, materialRenderer:flight.GlQuadMaterialRenderer, maxInstances:Float, ?smoothing:Null<Bool>):Float {
-  return flight._js._fn.Scene2dGl.prepareGlQuadBatchWrite(state, texture, straightAlpha, sampler, blendMode, material, materialRenderer, maxInstances, smoothing);
+  return flight._js._fn.Scene2dGl.prepareGlQuadBatchWrite(state, texture, straightAlpha, sampler, blendMode, material, materialRenderer, maxInstances, (smoothing == null ? js.Syntax.code("undefined") : smoothing));
 }
 
 inline function pushGlClipContours(state:flight.GlRenderState, contours:Array<Array<Float>>, winding:flight.PathWinding, worldTransform:flight.Matrix):Void {
@@ -227,7 +227,7 @@ inline function recordGlQuadBatchColorScaleBias(state:flight.GlRenderState, colo
 }
 
 inline function refreshGlRenderCache(ownerState:flight.GlRenderState, cacheState:flight.GlRenderState, cache:flight.RenderCache, source:flight.Node2D, ?options:flight.RenderCacheRefreshOptions):Bool {
-  return flight._js._fn.Scene2dGl.refreshGlRenderCache(ownerState, cacheState, cache, source, options);
+  return flight._js._fn.Scene2dGl.refreshGlRenderCache(ownerState, cacheState, cache, source, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function registerGlColorAdjustmentMaterialFeature(state:flight.GlRenderState):Void {
@@ -255,7 +255,7 @@ inline function releaseGlRenderCache(ownerState:flight.GlRenderState, cache:flig
 }
 
 inline function renderGlScene2D(pass:flight.GlRenderPass, source:flight.Node2D, ?renderTransform:Null<flight.Matrix>):Void {
-  flight._js._fn.Scene2dGl.renderGlScene2D(pass, source, renderTransform);
+  flight._js._fn.Scene2dGl.renderGlScene2D(pass, source, (renderTransform == null ? js.Syntax.code("undefined") : renderTransform));
 }
 
 inline function renderGlVelocity<Traits:Dynamic>(state:flight.GlRenderState, root:flight.Transform2DNode<Traits>, field:flight.VelocityField, target:flight.GlTextureRenderTarget):Void {
@@ -263,7 +263,7 @@ inline function renderGlVelocity<Traits:Dynamic>(state:flight.GlRenderState, roo
 }
 
 inline function setGlQuadBatchWorldAndTexture(state:flight.GlRenderState, locWorldMatrix:js.html.webgl.UniformLocation, locTexture:js.html.webgl.UniformLocation, ?locStraightTextureAlpha:js.html.webgl.UniformLocation):Void {
-  flight._js._fn.Scene2dGl.setGlQuadBatchWorldAndTexture(state, locWorldMatrix, locTexture, locStraightTextureAlpha);
+  flight._js._fn.Scene2dGl.setGlQuadBatchWorldAndTexture(state, locWorldMatrix, locTexture, (locStraightTextureAlpha == null ? js.Syntax.code("undefined") : locStraightTextureAlpha));
 }
 
 inline function toGlShapeRendererData(data:flight.GlShapeRendererData):flight.RendererData {

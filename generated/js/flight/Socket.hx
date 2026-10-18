@@ -13,7 +13,7 @@ inline function attachSocket(socket:flight.Socket):Void {
 }
 
 inline function closeSocket(socket:flight.Socket, ?code:Float, ?reason:String):Void {
-  flight._js._fn.Socket.closeSocket(socket, code, reason);
+  flight._js._fn.Socket.closeSocket(socket, (code == null ? js.Syntax.code("undefined") : code), (reason == null ? js.Syntax.code("undefined") : reason));
 }
 
 inline function createSocket(hostSocket:flight.HostSocketCapability, options:flight.SocketOptions):flight.Socket {

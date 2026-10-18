@@ -59,7 +59,7 @@ inline function initializeVelocityField(out:flight.EntityConstruction<flight.Vel
 }
 
 inline function isVelocityZero(velocity:flight.Velocity2D, ?epsilon:Float):Bool {
-  return flight._js._fn.Velocity.isVelocityZero(velocity, epsilon);
+  return flight._js._fn.Velocity.isVelocityZero(velocity, (epsilon == null ? js.Syntax.code("undefined") : epsilon));
 }
 
 inline function lengthOfVelocity(velocity:flight.Velocity2D):Float {

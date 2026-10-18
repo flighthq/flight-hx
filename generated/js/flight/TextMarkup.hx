@@ -15,7 +15,7 @@ inline function enableTextMarkupGuards():Void {
 }
 
 inline function explainTextMarkup(html:String, ?registry:flight.MarkupTagRegistry):flight.TextMarkupExplanation {
-  return flight._js._fn.TextMarkup.explainTextMarkup(html, registry);
+  return flight._js._fn.TextMarkup.explainTextMarkup(html, (registry == null ? js.Syntax.code("undefined") : registry));
 }
 
 inline function formatTextMarkup(content:flight.RichTextContent):String {
@@ -23,7 +23,7 @@ inline function formatTextMarkup(content:flight.RichTextContent):String {
 }
 
 inline function parseTextMarkup(html:String, ?registry:flight.MarkupTagRegistry):flight.RichTextContent {
-  return flight._js._fn.TextMarkup.parseTextMarkup(html, registry);
+  return flight._js._fn.TextMarkup.parseTextMarkup(html, (registry == null ? js.Syntax.code("undefined") : registry));
 }
 
 inline function registerMarkupClassStyles(registry:flight.MarkupTagRegistry, styles:haxe.DynamicAccess<Dynamic>):Void {

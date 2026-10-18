@@ -19,7 +19,7 @@ inline function buildWgpuScale9Mapper(bounds:flight.RectangleLike, scale9Grid:fl
 }
 
 inline function createWgpuCacheState(ownerState:flight.WgpuRenderState, deviceState:flight.WgpuDeviceState, ?options:flight.WgpuRenderStateOptions):flight.WgpuRenderState {
-  return flight._js._fn.Scene2dWgpu.createWgpuCacheState(ownerState, deviceState, options);
+  return flight._js._fn.Scene2dWgpu.createWgpuCacheState(ownerState, deviceState, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createWgpuRendererData<T:Dynamic>(data:T):Dynamic {
@@ -71,7 +71,7 @@ inline function drawWgpuRichText(state:flight.WgpuRenderState, renderProxy:fligh
 }
 
 inline function drawWgpuRichTextWithOverlay(state:flight.WgpuRenderState, renderProxy:flight.RenderProxy2D, ?overlay:flight.WgpuRichTextOverlay):Void {
-  flight._js._fn.Scene2dWgpu.drawWgpuRichTextWithOverlay(state, renderProxy, overlay);
+  flight._js._fn.Scene2dWgpu.drawWgpuRichTextWithOverlay(state, renderProxy, (overlay == null ? js.Syntax.code("undefined") : overlay));
 }
 
 inline function drawWgpuScale9Shape(state:flight.WgpuRenderState, renderProxy:flight.RenderProxy2D):Void {
@@ -203,7 +203,7 @@ inline function popWgpuClipRectangle(state:flight.WgpuRenderState):Void {
 }
 
 inline function prepareWgpuQuadBatchWrite(state:flight.WgpuRenderState, texture:flight.WgpuTextureEntry, sampler:Null<flight.SamplerLike>, blendMode:Null<flight.BlendMode>, material:Null<flight.Material>, materialRenderer:flight.WgpuQuadMaterialRenderer, maxInstances:Float, ?smoothing:Null<Bool>):Float {
-  return flight._js._fn.Scene2dWgpu.prepareWgpuQuadBatchWrite(state, texture, sampler, blendMode, material, materialRenderer, maxInstances, smoothing);
+  return flight._js._fn.Scene2dWgpu.prepareWgpuQuadBatchWrite(state, texture, sampler, blendMode, material, materialRenderer, maxInstances, (smoothing == null ? js.Syntax.code("undefined") : smoothing));
 }
 
 inline function pushWgpuClipContours(state:flight.WgpuRenderState, contours:Array<Array<Float>>, winding:flight.PathWinding, worldTransform:flight.Matrix):Void {
@@ -227,7 +227,7 @@ inline function recordWgpuTextureUpload(state:flight.WgpuRenderState):Void {
 }
 
 inline function refreshWgpuRenderCache(ownerState:flight.WgpuRenderState, cacheState:flight.WgpuRenderState, cache:flight.RenderCache, source:flight.Node2D, ?options:flight.RenderCacheRefreshOptions):Bool {
-  return flight._js._fn.Scene2dWgpu.refreshWgpuRenderCache(ownerState, cacheState, cache, source, options);
+  return flight._js._fn.Scene2dWgpu.refreshWgpuRenderCache(ownerState, cacheState, cache, source, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function registerWgpuColorAdjustmentMaterialFeature(state:flight.WgpuRenderState):Void {
@@ -255,7 +255,7 @@ inline function releaseWgpuRenderCache(state:flight.WgpuRenderState, cache:fligh
 }
 
 inline function renderWgpuScene2D(pass:flight.WgpuRenderPass, source:flight.Node2D, ?renderTransform:Null<flight.Matrix>):Void {
-  flight._js._fn.Scene2dWgpu.renderWgpuScene2D(pass, source, renderTransform);
+  flight._js._fn.Scene2dWgpu.renderWgpuScene2D(pass, source, (renderTransform == null ? js.Syntax.code("undefined") : renderTransform));
 }
 
 inline function renderWgpuVelocity<Traits:Dynamic>(state:flight.WgpuRenderState, root:flight.Transform2DNode<Traits>, field:flight.VelocityField, target:flight.WgpuTextureRenderTarget):Void {

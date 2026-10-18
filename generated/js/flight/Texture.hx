@@ -49,7 +49,7 @@ inline function createClampLinearSampler():flight.Sampler {
 }
 
 inline function createCubeTexture(?opts:flight.CreateCubeTextureOptions):flight.CubeTexture {
-  return flight._js._fn.Texture.createCubeTexture(opts);
+  return flight._js._fn.Texture.createCubeTexture((opts == null ? js.Syntax.code("undefined") : opts));
 }
 
 inline function createPixelArtSampler():flight.Sampler {
@@ -61,15 +61,15 @@ inline function createRenderTexture(options:flight.CreateRenderTextureOptions):f
 }
 
 inline function createSampler(?opts:Dynamic):flight.Sampler {
-  return flight._js._fn.Texture.createSampler(opts);
+  return flight._js._fn.Texture.createSampler((opts == null ? js.Syntax.code("undefined") : opts));
 }
 
 inline function createTexture(?opts:flight.CreateTextureOptions):flight.Texture {
-  return flight._js._fn.Texture.createTexture(opts);
+  return flight._js._fn.Texture.createTexture((opts == null ? js.Syntax.code("undefined") : opts));
 }
 
 inline function createTexture2D(?opts:flight.CreateTexture2DOptions):flight.Texture2D {
-  return flight._js._fn.Texture.createTexture2D(opts);
+  return flight._js._fn.Texture.createTexture2D((opts == null ? js.Syntax.code("undefined") : opts));
 }
 
 inline function createTilingSampler():flight.Sampler {
@@ -77,7 +77,7 @@ inline function createTilingSampler():flight.Sampler {
 }
 
 inline function createVideoTexture(hostVideo:flight.HostVideoCapability, source:flight.VideoResource, ?opts:Dynamic):flight.Texture2D {
-  return flight._js._fn.Texture.createVideoTexture(hostVideo, source, opts);
+  return flight._js._fn.Texture.createVideoTexture(hostVideo, source, (opts == null ? js.Syntax.code("undefined") : opts));
 }
 
 inline function destroyVideoTexture(texture:flight.Texture2D):Void {
@@ -161,11 +161,11 @@ inline function initializeRenderTextureTarget(out:flight.EntityConstruction<flig
 }
 
 inline function initializeSampler(out:flight.EntityConstruction<flight.Sampler>, ?opts:Dynamic):Void {
-  flight._js._fn.Texture.initializeSampler(out, opts);
+  flight._js._fn.Texture.initializeSampler(out, (opts == null ? js.Syntax.code("undefined") : opts));
 }
 
 inline function initializeTexture2D(out:flight.EntityConstruction<flight.Texture2D>, ?opts:flight.CreateTexture2DOptions):Void {
-  flight._js._fn.Texture.initializeTexture2D(out, opts);
+  flight._js._fn.Texture.initializeTexture2D(out, (opts == null ? js.Syntax.code("undefined") : opts));
 }
 
 inline function initializeVideoImageResource(out:flight.EntityConstruction<flight.ImageResource>, source:flight.HostImageSource, version:Float):Void {

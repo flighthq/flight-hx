@@ -11,11 +11,11 @@ inline function clearAudioChannelLoopRegion(channel:flight.AudioChannel):Void {
 }
 
 inline function createAudioBus(?options:flight.AudioBusOptions):flight.AudioBus {
-  return flight._js._fn.Media.createAudioBus(options);
+  return flight._js._fn.Media.createAudioBus((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createAudioMixer(hostAudioMixer:flight.HostAudioMixerCapability, device:flight.AudioDeviceHandle, ?options:flight.AudioMixerOptions):flight.AudioMixer {
-  return flight._js._fn.Media.createAudioMixer(hostAudioMixer, device, options);
+  return flight._js._fn.Media.createAudioMixer(hostAudioMixer, device, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function destroyAudioChannel(channel:flight.AudioChannel):Void {
@@ -99,7 +99,7 @@ inline function hasAudioChannelFade(hostAudioDevice:flight.HostAudioDeviceCapabi
 }
 
 inline function initializeAudioBus(out:flight.EntityConstruction<flight.AudioBus>, ?options:flight.AudioBusOptions):Void {
-  flight._js._fn.Media.initializeAudioBus(out, options);
+  flight._js._fn.Media.initializeAudioBus(out, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function isAudioChannelMuted(channel:flight.AudioChannel):Bool {
@@ -131,11 +131,11 @@ inline function pauseVideoChannel(hostVideo:flight.HostVideoCapability, channel:
 }
 
 inline function playAudioResource(backend:flight.HostAudioDeviceCapability, device:flight.AudioDeviceHandle, source:flight.AudioResource, ?options:flight.AudioPlayOptions):Null<flight.AudioChannel> {
-  return flight._js._fn.Media.playAudioResource(backend, device, source, options);
+  return flight._js._fn.Media.playAudioResource(backend, device, source, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function playVideoResource(hostVideo:flight.HostVideoCapability, source:flight.VideoResource, ?options:flight.VideoPlayOptions):Null<flight.VideoChannel> {
-  return flight._js._fn.Media.playVideoResource(hostVideo, source, options);
+  return flight._js._fn.Media.playVideoResource(hostVideo, source, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function resumeAllAudioMixerChannels(mixer:flight.AudioMixer):Void {

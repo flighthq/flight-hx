@@ -3,19 +3,19 @@
 package flight;
 
 inline function addTextureAtlasRegion(target:flight.TextureAtlas, x:Float, y:Float, width:Float, height:Float, ?pivotX:Float, ?pivotY:Float, ?name:String):Void {
-  flight._js._fn.Textureatlas.addTextureAtlasRegion(target, x, y, width, height, pivotX, pivotY, name);
+  flight._js._fn.Textureatlas.addTextureAtlasRegion(target, x, y, width, height, (pivotX == null ? js.Syntax.code("undefined") : pivotX), (pivotY == null ? js.Syntax.code("undefined") : pivotY), (name == null ? js.Syntax.code("undefined") : name));
 }
 
 inline function addTextureAtlasRegionCorners(target:flight.TextureAtlas, ax:Float, ay:Float, bx:Float, by:Float, ?pivotX:Float, ?pivotY:Float, ?name:String):Void {
-  flight._js._fn.Textureatlas.addTextureAtlasRegionCorners(target, ax, ay, bx, by, pivotX, pivotY, name);
+  flight._js._fn.Textureatlas.addTextureAtlasRegionCorners(target, ax, ay, bx, by, (pivotX == null ? js.Syntax.code("undefined") : pivotX), (pivotY == null ? js.Syntax.code("undefined") : pivotY), (name == null ? js.Syntax.code("undefined") : name));
 }
 
 inline function addTextureAtlasRegionRectangle(target:flight.TextureAtlas, rect:flight.RectangleLike, ?pivot:flight.Vector2Like, ?name:String):Void {
-  flight._js._fn.Textureatlas.addTextureAtlasRegionRectangle(target, rect, pivot, name);
+  flight._js._fn.Textureatlas.addTextureAtlasRegionRectangle(target, rect, (pivot == null ? js.Syntax.code("undefined") : pivot), (name == null ? js.Syntax.code("undefined") : name));
 }
 
 inline function addTextureAtlasRegionVector2(target:flight.TextureAtlas, a:flight.Vector2Like, b:flight.Vector2Like, ?pivot:flight.Vector2Like, ?name:String):Void {
-  flight._js._fn.Textureatlas.addTextureAtlasRegionVector2(target, a, b, pivot, name);
+  flight._js._fn.Textureatlas.addTextureAtlasRegionVector2(target, a, b, (pivot == null ? js.Syntax.code("undefined") : pivot), (name == null ? js.Syntax.code("undefined") : name));
 }
 
 inline function areTextureAtlasGuardsEnabled():Bool {
@@ -31,11 +31,11 @@ inline function clearTextureAtlasRegions(target:flight.TextureAtlas):Void {
 }
 
 inline function createTextureAtlas(?obj:Dynamic):flight.TextureAtlas {
-  return flight._js._fn.Textureatlas.createTextureAtlas(obj);
+  return flight._js._fn.Textureatlas.createTextureAtlas((obj == null ? js.Syntax.code("undefined") : obj));
 }
 
 inline function createTextureAtlasFromGrid(options:flight.GridSliceOptions, ?texture:Null<flight.Texture2D>):flight.TextureAtlas {
-  return flight._js._fn.Textureatlas.createTextureAtlasFromGrid(options, texture);
+  return flight._js._fn.Textureatlas.createTextureAtlasFromGrid(options, (texture == null ? js.Syntax.code("undefined") : texture));
 }
 
 inline function createTextureAtlasFromImageResource(resource:flight.ImageResource):flight.TextureAtlas {
@@ -43,7 +43,7 @@ inline function createTextureAtlasFromImageResource(resource:flight.ImageResourc
 }
 
 inline function createTextureAtlasRegion(?obj:Dynamic):flight.TextureAtlasRegion {
-  return flight._js._fn.Textureatlas.createTextureAtlasRegion(obj);
+  return flight._js._fn.Textureatlas.createTextureAtlasRegion((obj == null ? js.Syntax.code("undefined") : obj));
 }
 
 inline function disableTextureAtlasGuards():Void {
@@ -111,27 +111,27 @@ inline function hasTextureAtlasRegion(atlas:flight.TextureAtlas, name:String):Bo
 }
 
 inline function initializeTextureAtlas(out:flight.EntityConstruction<flight.TextureAtlas>, ?obj:Dynamic):Void {
-  flight._js._fn.Textureatlas.initializeTextureAtlas(out, obj);
+  flight._js._fn.Textureatlas.initializeTextureAtlas(out, (obj == null ? js.Syntax.code("undefined") : obj));
 }
 
 inline function initializeTextureAtlasRegion(out:flight.EntityConstruction<flight.TextureAtlasRegion>, ?obj:Dynamic):Void {
-  flight._js._fn.Textureatlas.initializeTextureAtlasRegion(out, obj);
+  flight._js._fn.Textureatlas.initializeTextureAtlasRegion(out, (obj == null ? js.Syntax.code("undefined") : obj));
 }
 
 inline function loadTextureAtlasFromBase64(hostImage:flight.HostImageCapability, base64:String, mimeType:String, ?signal:js.html.AbortSignal):flight._internal._Promise<flight.TextureAtlas> {
-  return flight._js._fn.Textureatlas.loadTextureAtlasFromBase64(hostImage, base64, mimeType, signal);
+  return flight._js._fn.Textureatlas.loadTextureAtlasFromBase64(hostImage, base64, mimeType, (signal == null ? js.Syntax.code("undefined") : signal));
 }
 
 inline function loadTextureAtlasFromBlob(hostImage:flight.HostImageCapability, blob:js.html.Blob, ?signal:js.html.AbortSignal):flight._internal._Promise<flight.TextureAtlas> {
-  return flight._js._fn.Textureatlas.loadTextureAtlasFromBlob(hostImage, blob, signal);
+  return flight._js._fn.Textureatlas.loadTextureAtlasFromBlob(hostImage, blob, (signal == null ? js.Syntax.code("undefined") : signal));
 }
 
 inline function loadTextureAtlasFromBytes(hostImage:flight.HostImageCapability, bytes:flight._internal._UInt8Array, ?mimeType:String, ?signal:js.html.AbortSignal):flight._internal._Promise<flight.TextureAtlas> {
-  return flight._js._fn.Textureatlas.loadTextureAtlasFromBytes(hostImage, bytes, mimeType, signal);
+  return flight._js._fn.Textureatlas.loadTextureAtlasFromBytes(hostImage, bytes, (mimeType == null ? js.Syntax.code("undefined") : mimeType), (signal == null ? js.Syntax.code("undefined") : signal));
 }
 
 inline function loadTextureAtlasFromUrl(hostImage:flight.HostImageCapability, url:String, ?crossOrigin:Dynamic, ?signal:js.html.AbortSignal):flight._internal._Promise<flight.TextureAtlas> {
-  return flight._js._fn.Textureatlas.loadTextureAtlasFromUrl(hostImage, url, crossOrigin, signal);
+  return flight._js._fn.Textureatlas.loadTextureAtlasFromUrl(hostImage, url, (crossOrigin == null ? js.Syntax.code("undefined") : crossOrigin), (signal == null ? js.Syntax.code("undefined") : signal));
 }
 
 inline function removeTextureAtlasRegion(target:flight.TextureAtlas, id:Float):Bool {

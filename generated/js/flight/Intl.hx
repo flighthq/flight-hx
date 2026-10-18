@@ -3,47 +3,47 @@
 package flight;
 
 inline function compareStrings(a:String, b:String, locale:flight.LocaleInput, ?options:flight._internal._IntlCollatorOptions):Float {
-  return flight._js._fn.Intl.compareStrings(a, b, locale, options);
+  return flight._js._fn.Intl.compareStrings(a, b, locale, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function formatCompactNumber(value:Float, locale:flight.LocaleInput, ?options:flight._internal._IntlNumberFormatOptions):String {
-  return flight._js._fn.Intl.formatCompactNumber(value, locale, options);
+  return flight._js._fn.Intl.formatCompactNumber(value, locale, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function formatCurrency(value:Float, currency:String, locale:flight.LocaleInput, ?options:flight._internal._IntlNumberFormatOptions):String {
-  return flight._js._fn.Intl.formatCurrency(value, currency, locale, options);
+  return flight._js._fn.Intl.formatCurrency(value, currency, locale, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function formatDate(date:Dynamic, locale:flight.LocaleInput, ?options:flight._internal._IntlDateTimeFormatOptions):String {
-  return flight._js._fn.Intl.formatDate(date, locale, options);
+  return flight._js._fn.Intl.formatDate(date, locale, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function formatDateTime(date:Dynamic, locale:flight.LocaleInput, ?options:flight._internal._IntlDateTimeFormatOptions):String {
-  return flight._js._fn.Intl.formatDateTime(date, locale, options);
+  return flight._js._fn.Intl.formatDateTime(date, locale, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function formatList(items:Array<String>, locale:flight.LocaleInput, ?options:flight._internal._IntlListFormatOptions):String {
-  return flight._js._fn.Intl.formatList(items, locale, options);
+  return flight._js._fn.Intl.formatList(items, locale, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function formatNumber(value:Float, locale:flight.LocaleInput, ?options:flight._internal._IntlNumberFormatOptions):String {
-  return flight._js._fn.Intl.formatNumber(value, locale, options);
+  return flight._js._fn.Intl.formatNumber(value, locale, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function formatPercent(value:Float, locale:flight.LocaleInput, ?options:flight._internal._IntlNumberFormatOptions):String {
-  return flight._js._fn.Intl.formatPercent(value, locale, options);
+  return flight._js._fn.Intl.formatPercent(value, locale, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function formatRelativeTime(value:Float, unit:flight._internal._IntlRelativeTimeFormatUnit, locale:flight.LocaleInput, ?options:flight._internal._IntlRelativeTimeFormatOptions):String {
-  return flight._js._fn.Intl.formatRelativeTime(value, unit, locale, options);
+  return flight._js._fn.Intl.formatRelativeTime(value, unit, locale, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function formatTime(date:Dynamic, locale:flight.LocaleInput, ?options:flight._internal._IntlDateTimeFormatOptions):String {
-  return flight._js._fn.Intl.formatTime(date, locale, options);
+  return flight._js._fn.Intl.formatTime(date, locale, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function formatUnit(value:Float, unit:String, locale:flight.LocaleInput, ?options:flight._internal._IntlNumberFormatOptions):String {
-  return flight._js._fn.Intl.formatUnit(value, unit, locale, options);
+  return flight._js._fn.Intl.formatUnit(value, unit, locale, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function getCacheKey(kind:String, locale:flight.LocaleInput, options:Null<Dynamic>):String {
@@ -55,14 +55,14 @@ inline function getCached<T>(key:String, build:()->T):T {
 }
 
 inline function selectOrdinalCategory(value:Float, locale:flight.LocaleInput, ?options:flight._internal._IntlPluralRulesOptions):flight._internal._IntlPluralRule {
-  return flight._js._fn.Intl.selectOrdinalCategory(value, locale, options);
+  return flight._js._fn.Intl.selectOrdinalCategory(value, locale, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function selectPluralCategory(value:Float, locale:flight.LocaleInput, ?options:flight._internal._IntlPluralRulesOptions):flight._internal._IntlPluralRule {
-  return flight._js._fn.Intl.selectPluralCategory(value, locale, options);
+  return flight._js._fn.Intl.selectPluralCategory(value, locale, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function sortStrings(items:Array<String>, locale:flight.LocaleInput, ?options:flight._internal._IntlCollatorOptions):Array<String> {
-  return flight._js._fn.Intl.sortStrings(items, locale, options);
+  return flight._js._fn.Intl.sortStrings(items, locale, (options == null ? js.Syntax.code("undefined") : options));
 }
 #end

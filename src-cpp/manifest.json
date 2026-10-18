@@ -11,7 +11,8 @@
     "compilerRevision": "804435ad89716bd3ddb8144e435adb0be6c9477b",
     "candidateArtifact": "generated/js/native-planning.json",
     "promotion": "compiler-emitted-header-pass-compile-run",
-    "overridePromotion": "dependency-complete-required-scalar-compile-run"
+    "overridePromotion": "dependency-complete-required-scalar-compile-run",
+    "optionalOverridePromotion": "dependency-complete-optional-scalar-adapter-compile-run"
   },
   "cppStandard": 20,
   "corrections": [
@@ -314,6 +315,76 @@
       ]
     },
     {
+      "module": "flight.Geometry",
+      "functions": [
+        {
+          "name": "clearMatrix3Pool",
+          "native": "flight::geometry::clear_matrix3_pool",
+          "header": "flight/geometry/matrix3_pool.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        },
+        {
+          "name": "clearMatrix4Pool",
+          "native": "flight::geometry::clear_matrix4_pool",
+          "header": "flight/geometry/matrix4_pool.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        },
+        {
+          "name": "clearMatrixPool",
+          "native": "flight::geometry::clear_matrix_pool",
+          "header": "flight/geometry/matrix_pool.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        },
+        {
+          "name": "clearQuaternionPool",
+          "native": "flight::geometry::clear_quaternion_pool",
+          "header": "flight/geometry/quaternion_pool.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        },
+        {
+          "name": "clearRectanglePool",
+          "native": "flight::geometry::clear_rectangle_pool",
+          "header": "flight/geometry/rectangle_pool.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        },
+        {
+          "name": "clearVector2Pool",
+          "native": "flight::geometry::clear_vector2_pool",
+          "header": "flight/geometry/vector2_pool.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        },
+        {
+          "name": "clearVector3Pool",
+          "native": "flight::geometry::clear_vector3_pool",
+          "header": "flight/geometry/vector3_pool.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        },
+        {
+          "name": "clearVector4Pool",
+          "native": "flight::geometry::clear_vector4_pool",
+          "header": "flight/geometry/vector4_pool.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        }
+      ]
+    },
+    {
+      "module": "flight.Image",
+      "functions": [
+        {
+          "name": "hasHostImageDimensionResolver",
+          "native": "flight::image::has_host_image_dimension_resolver",
+          "header": "flight/image/image_source_dimensions.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        },
+        {
+          "name": "unregisterHostImageDimensionResolver",
+          "native": "flight::image::unregister_host_image_dimension_resolver",
+          "header": "flight/image/image_source_dimensions.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        }
+      ]
+    },
+    {
       "module": "flight.Lighting",
       "functions": [
         {
@@ -395,12 +466,41 @@
       ]
     },
     {
+      "module": "flight.Scene3dFormats",
+      "functions": [
+        {
+          "name": "hasGltfDracoDecoder",
+          "native": "flight::scene3d_formats::has_gltf_draco_decoder",
+          "header": "flight/scene3d_formats/gltf_draco.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        },
+        {
+          "name": "unregisterGltfDracoDecoder",
+          "native": "flight::scene3d_formats::unregister_gltf_draco_decoder",
+          "header": "flight/scene3d_formats/gltf_draco.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        }
+      ]
+    },
+    {
       "module": "flight.Shape",
       "functions": [
+        {
+          "name": "clearShapeBoundsCommands",
+          "native": "flight::shape::clear_shape_bounds_commands",
+          "header": "flight/shape/shape_bounds_registry.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        },
         {
           "name": "getPathCommandOperandCount",
           "native": "flight::shape::get_path_command_operand_count",
           "header": "flight/shape/shape_fill.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        },
+        {
+          "name": "getShapeBoundsCommandRegistryRevision",
+          "native": "flight::shape::get_shape_bounds_command_registry_revision",
+          "header": "flight/shape/shape_bounds_registry.hpp",
           "provenance": "flight-hx/header-confirmed-scalar/1"
         }
       ]
@@ -428,6 +528,39 @@
       ]
     },
     {
+      "module": "flight.Textbidi",
+      "functions": [
+        {
+          "name": "reportTextBidiCompactTableMiss",
+          "native": "flight::textbidi::report_text_bidi_compact_table_miss",
+          "header": "flight/textbidi/text_bidi_guards.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        }
+      ]
+    },
+    {
+      "module": "flight.Textsegment",
+      "functions": [
+        {
+          "name": "reportTextSegmenterUnavailable",
+          "native": "flight::textsegment::report_text_segmenter_unavailable",
+          "header": "flight/textsegment/text_segment_guards.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        }
+      ]
+    },
+    {
+      "module": "flight.Textshaper",
+      "functions": [
+        {
+          "name": "disposeTextShaperSignals",
+          "native": "flight::textshaper::dispose_text_shaper_signals",
+          "header": "flight/textshaper/text_shaper_signals.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        }
+      ]
+    },
+    {
       "module": "flight.Input",
       "functions": [
         {
@@ -440,6 +573,24 @@
     {
       "module": "flight.Math",
       "functions": [
+        {
+          "name": "approxEqual",
+          "native": "flight::math::approx_equal",
+          "header": "flight/math/comparison.hpp",
+          "provenance": "flight-hx/header-confirmed-optional-scalar/1"
+        },
+        {
+          "name": "approxEqualRelative",
+          "native": "flight::math::approx_equal_relative",
+          "header": "flight/math/comparison.hpp",
+          "provenance": "flight-hx/header-confirmed-optional-scalar/1"
+        },
+        {
+          "name": "approxZero",
+          "native": "flight::math::approx_zero",
+          "header": "flight/math/comparison.hpp",
+          "provenance": "flight-hx/header-confirmed-optional-scalar/1"
+        },
         {
           "name": "ceilPowerOfTwo",
           "native": "flight::math::ceil_power_of_two",

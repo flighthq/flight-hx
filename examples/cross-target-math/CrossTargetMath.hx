@@ -5,6 +5,8 @@ import flight.Collision;
 import flight.Entity;
 import flight.Effects;
 import flight.FontFormats;
+import flight.Geometry;
+import flight.Image;
 import flight.Input;
 import flight.Lighting;
 import flight.Materials;
@@ -13,9 +15,13 @@ import flight.Path;
 import flight.Power;
 import flight.Protocol;
 import flight.Scene2dFormats;
+import flight.Scene3dFormats;
 import flight.Shape;
 import flight.Skeleton2dFormats;
 import flight.Swf;
+import flight.Textbidi;
+import flight.Textsegment;
+import flight.Textshaper;
 
 // One source file exercises the generated Flight ESM externs on web and every compile-proven
 // flight-cpp function binding on hxcpp. Keeping this host-free isolates binding from host setup.
@@ -31,6 +37,15 @@ class CrossTargetMath {
     assertClose('saturate', saturate(-0.5), 0.0);
     assertClose('smoothStep', smoothStep(0.0, 1.0, 0.5), 0.5);
     assertClose('step', step(0.5, 0.49), 0.0);
+    assertTrue('approxEqual default', approxEqual(1.0, 1.0 + 1e-7) && !approxEqual(1.0, 1.0 + 1e-5));
+    assertTrue('approxEqual custom', approxEqual(1.0, 1.1, 0.2) && !approxEqual(1.0, 1.3, 0.2));
+    assertTrue(
+      'approxEqualRelative default',
+      approxEqualRelative(1e8, 1e8 + 1.0) && !approxEqualRelative(1e8, 2e8)
+    );
+    assertTrue('approxEqualRelative custom', approxEqualRelative(100.0, 101.0, 0.02));
+    assertTrue('approxZero default', approxZero(1e-7) && !approxZero(1e-4));
+    assertTrue('approxZero custom', approxZero(0.01, 0.1) && !approxZero(0.2, 0.1));
     assertClose('sRGB round trip', srgbChannelToLinear(linearChannelToSrgb(0.25)), 0.25);
 
     assertClose('ceilPowerOfTwo', ceilPowerOfTwo(9.0), 16.0);
@@ -110,10 +125,32 @@ class CrossTargetMath {
 
     assertTrue('isRiveCoreBytesProperty', isRiveCoreBytesProperty(212.0) && !isRiveCoreBytesProperty(4.0));
     assertTrue('isRiveCoreTypeDerivedFrom', isRiveCoreTypeDerivedFrom(4.0, 2.0) && !isRiveCoreTypeDerivedFrom(2.0, 4.0));
+
+    clearMatrix3Pool();
+    clearMatrix4Pool();
+    clearMatrixPool();
+    clearQuaternionPool();
+    clearRectanglePool();
+    clearVector2Pool();
+    clearVector3Pool();
+    clearVector4Pool();
+
+    unregisterHostImageDimensionResolver();
+    assertTrue('hasHostImageDimensionResolver', !hasHostImageDimensionResolver());
+    unregisterGltfDracoDecoder();
+    assertTrue('hasGltfDracoDecoder', !hasGltfDracoDecoder());
+
+    final shapeBoundsRevision = getShapeBoundsCommandRegistryRevision();
+    clearShapeBoundsCommands();
+    assertClose('getShapeBoundsCommandRegistryRevision', getShapeBoundsCommandRegistryRevision(), shapeBoundsRevision + 1.0);
     assertClose('getPathCommandOperandCount', getPathCommandOperandCount(6.0), 6.0);
     assertClose('clampSpineBinaryUnit low', clampSpineBinaryUnit(-1.0), 0.0);
     assertClose('clampSpineBinaryUnit high', clampSpineBinaryUnit(2.0), 1.0);
     assertTrue('isKnownSwfTag', isKnownSwfTag(1.0) && !isKnownSwfTag(3.0));
+
+    reportTextBidiCompactTableMiss(0x4e2d);
+    reportTextSegmenterUnavailable();
+    disposeTextShaperSignals();
 
     assertFinite('computeAcesToneMap', computeAcesToneMap(1.0));
     assertFinite('computeBoxBlurPassRadius', computeBoxBlurPassRadius(4.0, 3.0, 0.0));

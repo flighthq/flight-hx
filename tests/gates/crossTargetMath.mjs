@@ -1,7 +1,7 @@
 // Installed consumers must cross both production backends: the complete Flight ESM extern surface
 // on web and the manifest-recorded flight-cpp subset/extensions on hxcpp. Direct scalars,
-// compiler-emitted String adapters, host creation, and a Scene2D GL framebuffer each have an
-// explicit oracle here.
+// compiler-emitted String adapters, optional-scalar adapters, host creation, and a Scene2D GL
+// framebuffer each have an explicit oracle here.
 import { spawnSync } from 'node:child_process';
 import { existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
@@ -15,6 +15,7 @@ import { bundleFlightJs } from '../../tools/esm/bundle.mjs';
 const repoRoot = path.join(import.meta.dirname, '..', '..');
 const marker = 'CROSS_TARGET_MATH_OK';
 const scalarOverrideProvenance = 'flight-hx/header-confirmed-scalar/1';
+const optionalScalarOverrideProvenance = 'flight-hx/header-confirmed-optional-scalar/1';
 const nativePlanning = JSON.parse(readFileSync(path.join(repoRoot, 'generated', 'js', 'native-planning.json'), 'utf8'));
 const plannedFunctions = new Map(
   nativePlanning.declarations
@@ -201,6 +202,7 @@ function validateNativeManifest(flightCpp) {
     const directBindings = module.functions.filter(
       ({ name, provenance }) =>
         provenance === scalarOverrideProvenance ||
+        provenance === optionalScalarOverrideProvenance ||
         plannedFunctions.get(`${module.module}.${name}`)?.transport === 'direct',
     );
     const directBridge =
@@ -223,6 +225,9 @@ function validateNativeManifest(flightCpp) {
       if (binding.provenance === scalarOverrideProvenance) {
         if (plan) fail(`${publicName} downstream override now overlaps the compiler native plan`);
         plan = { transport: 'override' };
+      } else if (binding.provenance === optionalScalarOverrideProvenance) {
+        if (plan) fail(`${publicName} downstream optional override now overlaps the compiler native plan`);
+        plan = { transport: 'optional-override' };
       } else if (binding.provenance !== undefined) {
         fail(`${publicName} has unknown native provenance ${String(binding.provenance)}`);
       } else if (!plan) {
@@ -236,17 +241,26 @@ function validateNativeManifest(flightCpp) {
       if (!jsMember) fail(`${module.module}.${binding.name} is absent from the current JS extern surface`);
       if (!facadeMember) fail(`${module.module}.${binding.name} is absent from the native public facade`);
       if (!nativeMember) fail(`${module.module}.${binding.name} is absent from the hxcpp extern`);
-      if (facadeMember.signature !== jsMember.signature || nativeMember.signature !== jsMember.signature) {
+      const expectedNativeSignature =
+        plan.transport === 'optional-override'
+          ? optionalBridgeSignature(jsMember.signature)
+          : jsMember.signature;
+      if (facadeMember.signature !== jsMember.signature || nativeMember.signature !== expectedNativeSignature) {
         fail(
           `${module.module}.${binding.name} signature differs: JS=${jsMember.signature}, ` +
-            `facade=${facadeMember.signature}, native=${nativeMember.signature}`,
+            `facade=${facadeMember.signature}, native=${nativeMember.signature}, ` +
+            `expected native=${expectedNativeSignature}`,
         );
       }
       const adapter = binding.native.replace(/^flight::/u, 'flight_hx::');
       if (nativeMember.sourceName !== adapter) {
         fail(`${module.module}.${binding.name} binds ${nativeMember.sourceName}, expected ${adapter}`);
       }
-      if (plan.transport === 'direct' || plan.transport === 'override') {
+      if (
+        plan.transport === 'direct' ||
+        plan.transport === 'override' ||
+        plan.transport === 'optional-override'
+      ) {
         if (!directBridge.includes(`${binding.native}(`)) {
           fail(`${publicName} direct bridge does not call ${binding.native}`);
         }
@@ -387,9 +401,22 @@ function rejectUnsupportedNative(flightCpp, consumer) {
     { cwd: consumer.work, encoding: 'utf8', env: consumer.environment },
   );
   const transcript = `${compile.stdout ?? ''}${compile.stderr ?? ''}`;
-  if (compile.status === 0 || !transcript.includes('approxEqual')) {
+  if (compile.status === 0 || !transcript.includes('mean')) {
     fail(`unbound native API did not fail loudly at the exact public facade:\n${transcript}`);
   }
+}
+
+function optionalBridgeSignature(signature) {
+  const match = /^function ([A-Za-z_][A-Za-z0-9_]*)\((.*)\):([A-Za-z_][A-Za-z0-9_]*)$/u.exec(signature);
+  if (!match) fail(`optional scalar signature is not recognized: ${signature}`);
+  const parameters = match[2]
+    ? match[2].split(', ').flatMap((parameter) => {
+        const parsed = /^(\??)([A-Za-z_][A-Za-z0-9_]*):([A-Za-z_][A-Za-z0-9_]*)$/u.exec(parameter);
+        if (!parsed) fail(`optional scalar parameter is not recognized: ${parameter}`);
+        return parsed[1] === '?' ? [`${parsed[2]}Present:Bool`, `${parsed[2]}:${parsed[3]}`] : [parameter];
+      })
+    : [];
+  return `function ${match[1]}(${parameters.join(', ')}):${match[3]}`;
 }
 
 function runNativeHost(flightCpp, nativeHost, consumer) {

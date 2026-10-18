@@ -7,11 +7,11 @@ inline function applyTilemapImportOptions(options:flight.TilemapImportOptions):V
 }
 
 inline function buildTilemapLayersFromTiled(map:flight.TiledMap, layerIndex:Float, resolveTileset:flight.TiledTilesetResolver, ?diagnostics:Array<flight.ImportDiagnostic>):Null<Array<flight.TilemapData>> {
-  return flight._js._fn.TilemapFormats.buildTilemapLayersFromTiled(map, layerIndex, resolveTileset, diagnostics);
+  return flight._js._fn.TilemapFormats.buildTilemapLayersFromTiled(map, layerIndex, resolveTileset, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function decodeTiledBase64Layer(text:String, compression:Null<flight.TiledCompression>, ?inflate:flight.TiledInflate):Null<flight._internal._UInt32Array> {
-  return flight._js._fn.TilemapFormats.decodeTiledBase64Layer(text, compression, inflate);
+  return flight._js._fn.TilemapFormats.decodeTiledBase64Layer(text, compression, (inflate == null ? js.Syntax.code("undefined") : inflate));
 }
 
 inline function decodeTiledCsvLayer(text:String):flight._internal._UInt32Array {
@@ -35,7 +35,7 @@ inline function enableTilemapFormatsGuards():Void {
 }
 
 inline function explainTiledLayerData(text:String, compression:Null<flight.TiledCompression>, ?inflate:flight.TiledInflate):flight.TiledLayerDataExplanation {
-  return flight._js._fn.TilemapFormats.explainTiledLayerData(text, compression, inflate);
+  return flight._js._fn.TilemapFormats.explainTiledLayerData(text, compression, (inflate == null ? js.Syntax.code("undefined") : inflate));
 }
 
 inline function formatTiledColor(packed:Float):String {
@@ -83,27 +83,27 @@ inline function parseTiledColor(text:String):Null<Float> {
 }
 
 inline function parseTiledTileset(text:String, ?_options:flight.TiledParseOptions, ?diagnostics:Array<flight.ImportDiagnostic>):Null<flight.TiledTileset> {
-  return flight._js._fn.TilemapFormats.parseTiledTileset(text, _options, diagnostics);
+  return flight._js._fn.TilemapFormats.parseTiledTileset(text, (_options == null ? js.Syntax.code("undefined") : _options), (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function parseTiledTilesetJson(text:String, ?_options:flight.TiledParseOptions, ?diagnostics:Array<flight.ImportDiagnostic>):Null<flight.TiledTileset> {
-  return flight._js._fn.TilemapFormats.parseTiledTilesetJson(text, _options, diagnostics);
+  return flight._js._fn.TilemapFormats.parseTiledTilesetJson(text, (_options == null ? js.Syntax.code("undefined") : _options), (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function parseTiledTmj(text:String, ?options:flight.TiledParseOptions, ?diagnostics:Array<flight.ImportDiagnostic>):Null<flight.TiledMap> {
-  return flight._js._fn.TilemapFormats.parseTiledTmj(text, options, diagnostics);
+  return flight._js._fn.TilemapFormats.parseTiledTmj(text, (options == null ? js.Syntax.code("undefined") : options), (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function parseTiledTmx(text:String, ?options:flight.TiledParseOptions, ?diagnostics:Array<flight.ImportDiagnostic>):Null<flight.TiledMap> {
-  return flight._js._fn.TilemapFormats.parseTiledTmx(text, options, diagnostics);
+  return flight._js._fn.TilemapFormats.parseTiledTmx(text, (options == null ? js.Syntax.code("undefined") : options), (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function parseTilemap(text:String, ?formatKind:flight.TilemapFormatKind, ?options:flight.TiledParseOptions, ?diagnostics:Array<flight.ImportDiagnostic>):Null<flight.TiledMap> {
-  return flight._js._fn.TilemapFormats.parseTilemap(text, formatKind, options, diagnostics);
+  return flight._js._fn.TilemapFormats.parseTilemap(text, (formatKind == null ? js.Syntax.code("undefined") : formatKind), (options == null ? js.Syntax.code("undefined") : options), (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function parseTileset(text:String, ?formatKind:flight.TilemapFormatKind, ?options:flight.TiledParseOptions, ?diagnostics:Array<flight.ImportDiagnostic>):Null<flight.TiledTileset> {
-  return flight._js._fn.TilemapFormats.parseTileset(text, formatKind, options, diagnostics);
+  return flight._js._fn.TilemapFormats.parseTileset(text, (formatKind == null ? js.Syntax.code("undefined") : formatKind), (options == null ? js.Syntax.code("undefined") : options), (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function registerTilemapFormat(kind:flight.TilemapFormatKind, entry:flight.TilemapFormatEntry):Void {

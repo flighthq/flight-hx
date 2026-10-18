@@ -11,6 +11,6 @@ inline function formatImportDiagnostic(diagnostic:flight.ImportDiagnostic):Strin
 }
 
 inline function reportImportDiagnostic(sink:Null<Array<flight.ImportDiagnostic>>, severity:flight.ImportDiagnosticSeverity, kind:String, origin:String, ?detail:haxe.DynamicAccess<Dynamic>):Void {
-  flight._js._fn.Importdiagnostics.reportImportDiagnostic(sink, severity, kind, origin, detail);
+  flight._js._fn.Importdiagnostics.reportImportDiagnostic(sink, severity, kind, origin, (detail == null ? js.Syntax.code("undefined") : detail));
 }
 #end

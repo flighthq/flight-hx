@@ -7,7 +7,7 @@ inline function appendTextInput(source:flight.RichText, text:String):Void {
 }
 
 inline function applyTextInputRestriction(source:flight.RichText, text:String, ?replaceLength:Float):String {
-  return flight._js._fn.Textinput.applyTextInputRestriction(source, text, replaceLength);
+  return flight._js._fn.Textinput.applyTextInputRestriction(source, text, (replaceLength == null ? js.Syntax.code("undefined") : replaceLength));
 }
 
 inline function blurSelectableRichText(manager:flight.SelectableRichTextManager):Void {
@@ -63,11 +63,11 @@ inline function disableTextInput(node:flight.RichText):Void {
 }
 
 inline function dispatchSelectableRichTextKeyDown(manager:flight.SelectableRichTextManager, data:flight.InputKeyboardData, ?onCopy:(String)->Void):Bool {
-  return flight._js._fn.Textinput.dispatchSelectableRichTextKeyDown(manager, data, onCopy);
+  return flight._js._fn.Textinput.dispatchSelectableRichTextKeyDown(manager, data, (onCopy == null ? js.Syntax.code("undefined") : onCopy));
 }
 
 inline function dispatchSelectableRichTextPointerDown(manager:flight.SelectableRichTextManager, target:flight.RichText, x:Float, y:Float, ?extend:Bool):Void {
-  flight._js._fn.Textinput.dispatchSelectableRichTextPointerDown(manager, target, x, y, extend);
+  flight._js._fn.Textinput.dispatchSelectableRichTextPointerDown(manager, target, x, y, (extend == null ? js.Syntax.code("undefined") : extend));
 }
 
 inline function dispatchSelectableRichTextPointerMove(manager:flight.SelectableRichTextManager, x:Float, y:Float):Void {
@@ -83,11 +83,11 @@ inline function dispatchTextInput(manager:flight.TextInputManager, text:String):
 }
 
 inline function dispatchTextInputKeyDown(manager:flight.TextInputManager, data:flight.InputKeyboardData, ?clipboardText:String, ?onCopy:(String)->Void):Bool {
-  return flight._js._fn.Textinput.dispatchTextInputKeyDown(manager, data, clipboardText, onCopy);
+  return flight._js._fn.Textinput.dispatchTextInputKeyDown(manager, data, (clipboardText == null ? js.Syntax.code("undefined") : clipboardText), (onCopy == null ? js.Syntax.code("undefined") : onCopy));
 }
 
 inline function dispatchTextInputPointerDown(manager:flight.TextInputManager, target:flight.RichText, x:Float, y:Float, ?extend:Bool, ?clickCount:Float):Void {
-  flight._js._fn.Textinput.dispatchTextInputPointerDown(manager, target, x, y, extend, clickCount);
+  flight._js._fn.Textinput.dispatchTextInputPointerDown(manager, target, x, y, (extend == null ? js.Syntax.code("undefined") : extend), (clickCount == null ? js.Syntax.code("undefined") : clickCount));
 }
 
 inline function dispatchTextInputPointerMove(manager:flight.TextInputManager, x:Float, y:Float):Void {
@@ -99,7 +99,7 @@ inline function dispatchTextInputWheel(manager:flight.TextInputManager, deltaLin
 }
 
 inline function enableTextInput(node:flight.RichText, ?options:flight.TextInputOptions):flight.TextInputState {
-  return flight._js._fn.Textinput.enableTextInput(node, options);
+  return flight._js._fn.Textinput.enableTextInput(node, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function focusSelectableRichText(manager:flight.SelectableRichTextManager, target:flight.RichText):Void {
@@ -151,7 +151,7 @@ inline function getTextInputState(node:flight.RichText):Null<flight.TextInputSta
 }
 
 inline function handleTextInputKeyboard(source:flight.RichText, data:flight.KeyboardEventData, ?options:flight.HandleTextInputKeyboardOptions):Bool {
-  return flight._js._fn.Textinput.handleTextInputKeyboard(source, data, options);
+  return flight._js._fn.Textinput.handleTextInputKeyboard(source, data, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function hasTextInput(node:flight.RichText):Bool {
@@ -171,27 +171,27 @@ inline function insertTextInput(source:flight.RichText, text:String):Void {
 }
 
 inline function moveTextInputCaret(source:flight.RichText, index:Float, ?extendSelection:Bool):Void {
-  flight._js._fn.Textinput.moveTextInputCaret(source, index, extendSelection);
+  flight._js._fn.Textinput.moveTextInputCaret(source, index, (extendSelection == null ? js.Syntax.code("undefined") : extendSelection));
 }
 
 inline function moveTextInputCaretByWord(source:flight.RichText, direction:Float, ?extendSelection:Bool):Void {
-  flight._js._fn.Textinput.moveTextInputCaretByWord(source, direction, extendSelection);
+  flight._js._fn.Textinput.moveTextInputCaretByWord(source, direction, (extendSelection == null ? js.Syntax.code("undefined") : extendSelection));
 }
 
 inline function moveTextInputCaretDown(source:flight.RichText, layout:Dynamic, ?extendSelection:Bool):Void {
-  flight._js._fn.Textinput.moveTextInputCaretDown(source, layout, extendSelection);
+  flight._js._fn.Textinput.moveTextInputCaretDown(source, layout, (extendSelection == null ? js.Syntax.code("undefined") : extendSelection));
 }
 
 inline function moveTextInputCaretToLineEnd(source:flight.RichText, layout:Dynamic, ?extendSelection:Bool):Void {
-  flight._js._fn.Textinput.moveTextInputCaretToLineEnd(source, layout, extendSelection);
+  flight._js._fn.Textinput.moveTextInputCaretToLineEnd(source, layout, (extendSelection == null ? js.Syntax.code("undefined") : extendSelection));
 }
 
 inline function moveTextInputCaretToLineStart(source:flight.RichText, layout:Dynamic, ?extendSelection:Bool):Void {
-  flight._js._fn.Textinput.moveTextInputCaretToLineStart(source, layout, extendSelection);
+  flight._js._fn.Textinput.moveTextInputCaretToLineStart(source, layout, (extendSelection == null ? js.Syntax.code("undefined") : extendSelection));
 }
 
 inline function moveTextInputCaretUp(source:flight.RichText, layout:Dynamic, ?extendSelection:Bool):Void {
-  flight._js._fn.Textinput.moveTextInputCaretUp(source, layout, extendSelection);
+  flight._js._fn.Textinput.moveTextInputCaretUp(source, layout, (extendSelection == null ? js.Syntax.code("undefined") : extendSelection));
 }
 
 inline function redoTextInput(source:flight.RichText):Void {
@@ -199,11 +199,11 @@ inline function redoTextInput(source:flight.RichText):Void {
 }
 
 inline function replaceSelectedTextInput(source:flight.RichText, text:String, ?options:flight.ReplaceTextInputOptions):Void {
-  flight._js._fn.Textinput.replaceSelectedTextInput(source, text, options);
+  flight._js._fn.Textinput.replaceSelectedTextInput(source, text, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function replaceTextInput(source:flight.RichText, beginIndex:Float, endIndex:Float, text:String, ?options:flight.ReplaceTextInputOptions):Void {
-  flight._js._fn.Textinput.replaceTextInput(source, beginIndex, endIndex, text, options);
+  flight._js._fn.Textinput.replaceTextInput(source, beginIndex, endIndex, text, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function scrollTextInputCaretIntoView(source:flight.RichText, layout:flight.TextLayoutResult, viewportWidth:Float, viewportHeight:Float):Void {

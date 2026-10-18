@@ -43,7 +43,7 @@ inline function createMenuHighlight():flight.MenuHighlight {
 }
 
 inline function createMenuItemTemplate(?template:Dynamic):flight.MenuItemTemplate {
-  return flight._js._fn.Menu.createMenuItemTemplate(template);
+  return flight._js._fn.Menu.createMenuItemTemplate((template == null ? js.Syntax.code("undefined") : template));
 }
 
 inline function createMenuSelect():flight.MenuSelect {

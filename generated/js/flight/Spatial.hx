@@ -11,15 +11,15 @@ inline function clearSpatialIndex3D(index:flight.SpatialIndex3D):Void {
 }
 
 inline function createBvhSpatialBackend3D(?margin:Float):Dynamic {
-  return flight._js._fn.Spatial.createBvhSpatialBackend3D(margin);
+  return flight._js._fn.Spatial.createBvhSpatialBackend3D((margin == null ? js.Syntax.code("undefined") : margin));
 }
 
 inline function createSpatialIndex2D(?backend:flight.SpatialIndexBackend2D):flight.SpatialIndex2D {
-  return flight._js._fn.Spatial.createSpatialIndex2D(backend);
+  return flight._js._fn.Spatial.createSpatialIndex2D((backend == null ? js.Syntax.code("undefined") : backend));
 }
 
 inline function createSpatialIndex3D(?backend:flight.SpatialIndexBackend3D):flight.SpatialIndex3D {
-  return flight._js._fn.Spatial.createSpatialIndex3D(backend);
+  return flight._js._fn.Spatial.createSpatialIndex3D((backend == null ? js.Syntax.code("undefined") : backend));
 }
 
 inline function createUniformGridSpatialBackend2D(cellSize:Float):Dynamic {
@@ -43,15 +43,15 @@ inline function formatSpatialIndexingNotice(notice:flight.SpatialIndexingNotice)
 }
 
 inline function initializeBvhSpatialBackend3D(out:flight.EntityConstruction<Dynamic>, ?margin:Float):Void {
-  flight._js._fn.Spatial.initializeBvhSpatialBackend3D(out, margin);
+  flight._js._fn.Spatial.initializeBvhSpatialBackend3D(out, (margin == null ? js.Syntax.code("undefined") : margin));
 }
 
 inline function initializeSpatialIndex2D(out:flight.EntityConstruction<flight.SpatialIndex2D>, ?backend:flight.SpatialIndexBackend2D):Void {
-  flight._js._fn.Spatial.initializeSpatialIndex2D(out, backend);
+  flight._js._fn.Spatial.initializeSpatialIndex2D(out, (backend == null ? js.Syntax.code("undefined") : backend));
 }
 
 inline function initializeSpatialIndex3D(out:flight.EntityConstruction<flight.SpatialIndex3D>, ?backend:flight.SpatialIndexBackend3D):Void {
-  flight._js._fn.Spatial.initializeSpatialIndex3D(out, backend);
+  flight._js._fn.Spatial.initializeSpatialIndex3D(out, (backend == null ? js.Syntax.code("undefined") : backend));
 }
 
 inline function initializeUniformGridSpatialBackend2D(out:flight.EntityConstruction<Dynamic>, grid:{ cellSize:Float, cells:flight._internal._Map<String, { cx:Float, cy:Float, ids:flight._internal._Set<flight.SpatialObjectId> }>, bounds:flight._internal._Map<flight.SpatialObjectId, flight.SpatialAabb2D>, overflow:flight._internal._Set<flight.SpatialObjectId>, declined:flight._internal._Map<flight.SpatialObjectId, flight.SpatialDeclineReason>, minCellX:Float, minCellY:Float, maxCellX:Float, maxCellY:Float, seen:flight._internal._Set<flight.SpatialObjectId>, pairIds:Array<flight.SpatialObjectId> }):Void {
@@ -71,7 +71,7 @@ inline function insertSpatialObject3D(index:flight.SpatialIndex3D, id:flight.Spa
 }
 
 inline function querySpatialFrustum3D(index:flight.SpatialIndex3D, frustum:flight.SpatialFrustum3D, out:Array<flight.SpatialObjectId>, ?slices:Float):Void {
-  flight._js._fn.Spatial.querySpatialFrustum3D(index, frustum, out, slices);
+  flight._js._fn.Spatial.querySpatialFrustum3D(index, frustum, out, (slices == null ? js.Syntax.code("undefined") : slices));
 }
 
 inline function querySpatialPairs2D(index:flight.SpatialIndex2D, out:Array<flight.SpatialPair>):Void {

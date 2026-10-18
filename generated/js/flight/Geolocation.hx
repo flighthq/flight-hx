@@ -11,11 +11,11 @@ inline function createGeolocationPosition():flight.GeolocationPosition {
 }
 
 inline function getCurrentGeolocationPosition(hostGeolocation:flight.HostGeolocationCapability, ?options:flight.GeolocationRequestOptions):flight._internal._Promise<Null<flight.GeolocationPosition>> {
-  return flight._js._fn.Geolocation.getCurrentGeolocationPosition(hostGeolocation, options);
+  return flight._js._fn.Geolocation.getCurrentGeolocationPosition(hostGeolocation, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function getCurrentGeolocationPositionResult(hostGeolocation:flight.HostGeolocationCapability, ?options:flight.GeolocationRequestOptions):flight._internal._Promise<flight.GeolocationPositionResult> {
-  return flight._js._fn.Geolocation.getCurrentGeolocationPositionResult(hostGeolocation, options);
+  return flight._js._fn.Geolocation.getCurrentGeolocationPositionResult(hostGeolocation, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function initializeGeolocationPosition(out:flight.EntityConstruction<flight.GeolocationPosition>):Void {
@@ -31,6 +31,6 @@ inline function promptForGeolocationAccess(hostGeolocation:Null<flight.HostGeolo
 }
 
 inline function watchGeolocationPosition(hostGeolocation:flight.HostGeolocationCapability, handler:(flight.GeolocationPosition)->Void, ?options:flight.GeolocationRequestOptions, ?onError:(flight.GeolocationErrorReason)->Void):Float {
-  return flight._js._fn.Geolocation.watchGeolocationPosition(hostGeolocation, handler, options, onError);
+  return flight._js._fn.Geolocation.watchGeolocationPosition(hostGeolocation, handler, (options == null ? js.Syntax.code("undefined") : options), (onError == null ? js.Syntax.code("undefined") : onError));
 }
 #end

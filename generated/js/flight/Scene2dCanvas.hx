@@ -31,7 +31,7 @@ inline function areCanvasTextureResolverGuardsEnabled(state:flight.CanvasRenderS
 }
 
 inline function beginCanvasRenderPass(state:flight.CanvasRenderState, target:flight.CanvasRenderTarget, ?clear:flight.RenderTargetClear):flight.CanvasRenderPass {
-  return flight._js._fn.Scene2dCanvas.beginCanvasRenderPass(state, target, clear);
+  return flight._js._fn.Scene2dCanvas.beginCanvasRenderPass(state, target, (clear == null ? js.Syntax.code("undefined") : clear));
 }
 
 inline function bindCanvasRenderTexture(state:flight.CanvasRenderState, renderTexture:flight.RenderTexture):Null<js.html.CanvasElement> {
@@ -51,23 +51,23 @@ inline function connectCanvasTextureResolverMisses(resolvers:flight.CanvasTextur
 }
 
 inline function createBitmapPattern(context:js.html.CanvasRenderingContext2D, texture:flight.Texture, resolvers:flight.CanvasTextureResolvers, ?allowSmoothing:Bool):Null<js.html.CanvasPattern> {
-  return flight._js._fn.Scene2dCanvas.createBitmapPattern(context, texture, resolvers, allowSmoothing);
+  return flight._js._fn.Scene2dCanvas.createBitmapPattern(context, texture, resolvers, (allowSmoothing == null ? js.Syntax.code("undefined") : allowSmoothing));
 }
 
 inline function createCanvasCacheState(ownerState:flight.CanvasRenderState, registry:flight.CanvasRenderRegistries, canvasTextureResolvers:flight.CanvasTextureResolvers, ?options:Dynamic):flight.CanvasRenderState {
-  return flight._js._fn.Scene2dCanvas.createCanvasCacheState(ownerState, registry, canvasTextureResolvers, options);
+  return flight._js._fn.Scene2dCanvas.createCanvasCacheState(ownerState, registry, canvasTextureResolvers, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createCanvasElement(canvasHost:flight.HostCanvasCapability, width:Float, height:Float, ?pixelRatio:Float):flight.CanvasSurface {
-  return flight._js._fn.Scene2dCanvas.createCanvasElement(canvasHost, width, height, pixelRatio);
+  return flight._js._fn.Scene2dCanvas.createCanvasElement(canvasHost, width, height, (pixelRatio == null ? js.Syntax.code("undefined") : pixelRatio));
 }
 
 inline function createCanvasOffscreenRenderState(registry:flight.CanvasRenderRegistries, canvasTextureResolvers:flight.CanvasTextureResolvers, ?options:Dynamic):flight.CanvasRenderState {
-  return flight._js._fn.Scene2dCanvas.createCanvasOffscreenRenderState(registry, canvasTextureResolvers, options);
+  return flight._js._fn.Scene2dCanvas.createCanvasOffscreenRenderState(registry, canvasTextureResolvers, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createCanvasRenderState(?options:flight.CanvasRenderStateOptions):flight.CanvasRenderState {
-  return flight._js._fn.Scene2dCanvas.createCanvasRenderState(options);
+  return flight._js._fn.Scene2dCanvas.createCanvasRenderState((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createCanvasRenderStateRuntime(registries:flight.CanvasRenderRegistries, canvasTextureResolvers:flight.CanvasTextureResolvers):flight.CanvasRenderStateRuntime {
@@ -311,7 +311,7 @@ inline function initializeEmptyCanvasRenderRegistries(out:flight.CanvasRenderReg
 }
 
 inline function invalidateCanvasRenderTexture(state:flight.CanvasRenderState, renderTexture:flight.RenderTexture, ?status:Dynamic):Void {
-  flight._js._fn.Scene2dCanvas.invalidateCanvasRenderTexture(state, renderTexture, status);
+  flight._js._fn.Scene2dCanvas.invalidateCanvasRenderTexture(state, renderTexture, (status == null ? js.Syntax.code("undefined") : status));
 }
 
 inline function isCanvasRenderTextureReady(state:flight.CanvasRenderState, renderTexture:flight.RenderTexture):Bool {
@@ -335,7 +335,7 @@ inline function pushCanvasClipRectangle(state:flight.CanvasRenderState, rect:fli
 }
 
 inline function refreshCanvasRenderCache(ownerState:flight.CanvasRenderState, cacheState:flight.CanvasRenderState, cache:flight.RenderCache, source:flight.Node2D, ?options:flight.RenderCacheRefreshOptions):Bool {
-  return flight._js._fn.Scene2dCanvas.refreshCanvasRenderCache(ownerState, cacheState, cache, source, options);
+  return flight._js._fn.Scene2dCanvas.refreshCanvasRenderCache(ownerState, cacheState, cache, source, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function registerCanvasBitmapTextureResolver(hostImage:flight.HostImageCapability, resolvers:flight.CanvasTextureResolvers):Void {
@@ -387,7 +387,7 @@ inline function releaseCanvasRenderTexture(state:flight.CanvasRenderState, pool:
 }
 
 inline function renderCanvasScene2D(pass:flight.CanvasRenderPass, source:flight.Node2D, ?renderTransform:Null<flight.Matrix>):Void {
-  flight._js._fn.Scene2dCanvas.renderCanvasScene2D(pass, source, renderTransform);
+  flight._js._fn.Scene2dCanvas.renderCanvasScene2D(pass, source, (renderTransform == null ? js.Syntax.code("undefined") : renderTransform));
 }
 
 inline function renderCanvasShapeCommands(context:js.html.CanvasRenderingContext2D, state:flight.RenderState, commands:Array<Dynamic>, resolvers:flight.CanvasTextureResolvers):Void {

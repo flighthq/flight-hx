@@ -22,6 +22,7 @@ const flightCpp = resolveDependency(root, 'flight-cpp');
 const flightCppBestEffort = readJson(path.join(flightCpp.directory, 'generated', 'best-effort.json'));
 const compilerPlanProvenance = 'flight-compiler/haxe-cpp-plan/1';
 const scalarOverrideProvenance = 'flight-hx/header-confirmed-scalar/1';
+const optionalScalarOverrideProvenance = 'flight-hx/header-confirmed-optional-scalar/1';
 const flightCppHeaderStatuses = new Map(
   flightCppBestEffort.modules.map(({ path: header, status }) => [header, status]),
 );
@@ -42,6 +43,14 @@ if (manifest.haxeBindingPlan?.promotion !== 'compiler-emitted-header-pass-compil
 }
 if (manifest.haxeBindingPlan?.overridePromotion !== 'dependency-complete-required-scalar-compile-run') {
   throw new Error(`Unknown native override policy ${String(manifest.haxeBindingPlan?.overridePromotion)}`);
+}
+if (
+  manifest.haxeBindingPlan?.optionalOverridePromotion !==
+  'dependency-complete-optional-scalar-adapter-compile-run'
+) {
+  throw new Error(
+    `Unknown native optional override policy ${String(manifest.haxeBindingPlan?.optionalOverridePromotion)}`,
+  );
 }
 const planned = new Map(
   planning.declarations
@@ -72,6 +81,19 @@ for (const module of manifest.modules) {
         throw new Error(`${publicName} is now compiler-planned; remove its downstream scalar override`);
       }
       validateScalarOverride(publicName, binding, declaration, parsed);
+      plan = {
+        headerStatus: 'pass',
+        include: binding.header,
+        kind: 'function',
+        nativeName: binding.native,
+        publicName,
+        transport: 'direct',
+      };
+    } else if (provenance === optionalScalarOverrideProvenance) {
+      if (plan) {
+        throw new Error(`${publicName} is now compiler-planned; remove its downstream optional scalar override`);
+      }
+      validateOptionalScalarOverride(publicName, binding, declaration, parsed);
       plan = {
         headerStatus: 'pass',
         include: binding.header,
@@ -169,7 +191,8 @@ process.stdout.write(
     `${String(manifestPublicNames.length)} function(s) ` +
     `(${String(planning.declarations.filter(({ kind, transport, headerStatus }) => kind === 'function' && transport === 'direct' && headerStatus === 'pass').length)} direct, ` +
     `${String(planning.declarations.filter(({ kind, transport, headerStatus }) => kind === 'function' && transport === 'adapter' && headerStatus === 'pass').length)} compiler adapter, ` +
-    `${String(manifestEntries.filter(({ provenance }) => provenance === scalarOverrideProvenance).length)} downstream scalar override).\n`,
+    `${String(manifestEntries.filter(({ provenance }) => provenance === scalarOverrideProvenance).length)} required scalar override, ` +
+    `${String(manifestEntries.filter(({ provenance }) => provenance === optionalScalarOverrideProvenance).length)} optional scalar adapter).\n`,
 );
 
 function emitFacade(holder, bindings, includeNativeTypeAlias) {
@@ -181,9 +204,10 @@ function emitFacade(holder, bindings, includeNativeTypeAlias) {
   if (includeNativeTypeAlias) {
     lines.push(`typedef ${holder} = flight._cpp.${holder};`, '');
   }
-  for (const { declaration, parsed } of bindings) {
+  for (const binding of bindings) {
+    const { declaration, parsed } = binding;
     lines.push(`inline ${declaration.signature} {`);
-    const call = `flight._cpp._fn.${holder}.${declaration.name}(${parsed.parameters.map(({ name }) => name).join(', ')})`;
+    const call = `flight._cpp._fn.${holder}.${declaration.name}(${facadeArguments(binding).join(', ')})`;
     lines.push(parsed.result === 'Void' ? `  ${call};` : `  return ${call};`);
     lines.push('}', '');
   }
@@ -213,9 +237,10 @@ function emitExtern(holder, bindings) {
     ...includes.map((include) => `@:include(${JSON.stringify(include)})`),
     `extern class ${holder} {`,
   ];
-  for (const { declaration, native } of bindings) {
+  for (const binding of bindings) {
+    const { declaration, native } = binding;
     lines.push(`  @:native(${JSON.stringify(native.replace(/^flight::/u, 'flight_hx::'))})`);
-    lines.push(`  static ${declaration.signature};`, '');
+    lines.push(`  static ${emitInternalSignature(binding)};`, '');
   }
   if (lines.at(-1) === '') lines.pop();
   lines.push('}', '#end', '');
@@ -256,6 +281,43 @@ function validateScalarOverride(publicName, binding, declaration, parsed) {
   const expectedSignature = `inline ${cppType(parsed.result)} ${cppName}(${parameters})`;
   if (!readFileSync(headerPath, 'utf8').includes(expectedSignature)) {
     throw new Error(`${publicName} override header does not contain ${expectedSignature}`);
+  }
+}
+
+function validateOptionalScalarOverride(publicName, binding, declaration, parsed) {
+  if (flightCppHeaderStatuses.get(binding.header) !== 'emitted') {
+    throw new Error(`${publicName} optional override header is not dependency-complete: ${binding.header}`);
+  }
+  if (
+    !parsed.parameters.some(({ optional }) => optional) ||
+    parsed.parameters.some(({ type }) => type === 'String') ||
+    parsed.result === 'String'
+  ) {
+    throw new Error(`${publicName} optional override is not an optional primitive scalar signature`);
+  }
+  const firstOptional = parsed.parameters.findIndex(({ optional }) => optional);
+  if (parsed.parameters.slice(firstOptional).some(({ optional }) => !optional)) {
+    throw new Error(`${publicName} optional override has a required parameter after an optional parameter`);
+  }
+  const cppName = camelToSnake(declaration.sourceName);
+  if (!binding.native.endsWith(`::${cppName}`)) {
+    throw new Error(`${publicName} optional override native locator does not end in ${cppName}`);
+  }
+  const headerPath = path.join(flightCpp.directory, 'generated', 'include', binding.header);
+  if (!existsSync(headerPath)) throw new Error(`${publicName} optional override header is missing: ${binding.header}`);
+  const parameterPattern = parsed.parameters
+    .map(({ optional, type }) => {
+      const typePattern = optional ? `std::optional<${cppType(type)}>` : cppType(type);
+      const defaultPattern = optional ? '\\s*=\\s*std::nullopt' : '';
+      return `${escapeRegExp(typePattern)}\\s+[A-Za-z_][A-Za-z0-9_]*${defaultPattern}`;
+    })
+    .join('\\s*,\\s*');
+  const signaturePattern = new RegExp(
+    `\\binline\\s+${escapeRegExp(cppType(parsed.result))}\\s+${escapeRegExp(cppName)}\\s*\\(${parameterPattern}\\)`,
+    'u',
+  );
+  if (!signaturePattern.test(readFileSync(headerPath, 'utf8'))) {
+    throw new Error(`${publicName} optional override header does not contain the exact optional scalar signature`);
   }
 }
 
@@ -359,9 +421,10 @@ function emitBridgeHeader(module, bindings) {
     `namespace flight_hx::${namespace} {`,
     '',
   ];
-  for (const { native, parsed } of bindings) {
+  for (const binding of bindings) {
+    const { native, parsed } = binding;
     const functionName = native.slice(native.lastIndexOf('::') + 2);
-    const parameters = parsed.parameters
+    const parameters = bridgeParameters(binding)
       .map(({ name, type }) => `${cppType(type)} ${safeCppName(name)}`)
       .join(', ');
     lines.push(`${cppType(parsed.result)} ${functionName}(${parameters});`);
@@ -381,12 +444,13 @@ function emitBridgeSource(module, bindings) {
     `namespace flight_hx::${namespace} {`,
     '',
   ];
-  for (const { native, parsed } of bindings) {
+  for (const binding of bindings) {
+    const { native, parsed } = binding;
     const functionName = native.slice(native.lastIndexOf('::') + 2);
-    const parameters = parsed.parameters
+    const parameters = bridgeParameters(binding)
       .map(({ name, type }) => `${cppType(type)} ${safeCppName(name)}`)
       .join(', ');
-    const arguments_ = parsed.parameters.map(({ name }) => safeCppName(name)).join(', ');
+    const arguments_ = nativeArguments(binding).join(', ');
     lines.push(`${cppType(parsed.result)} ${functionName}(${parameters}) {`);
     const call = `${native}(${arguments_})`;
     lines.push(parsed.result === 'Void' ? `  ${call};` : `  return ${call};`);
@@ -394,6 +458,50 @@ function emitBridgeSource(module, bindings) {
   }
   lines.push(`} // namespace flight_hx::${namespace}`, '');
   return lines.join('\n');
+}
+
+function bridgeParameters(binding) {
+  if (binding.provenance !== optionalScalarOverrideProvenance) return binding.parsed.parameters;
+  return binding.parsed.parameters.flatMap((parameter) =>
+    parameter.optional
+      ? [
+          { name: `${parameter.name}Present`, optional: false, type: 'Bool' },
+          { ...parameter, optional: false },
+        ]
+      : [parameter],
+  );
+}
+
+function facadeArguments(binding) {
+  if (binding.provenance !== optionalScalarOverrideProvenance) {
+    return binding.parsed.parameters.map(({ name }) => name);
+  }
+  return binding.parsed.parameters.flatMap(({ name, optional, type }) =>
+    optional ? [`${name} != null`, `${name} == null ? ${haxeZero(type)} : ${name}`] : [name],
+  );
+}
+
+function nativeArguments(binding) {
+  if (binding.provenance !== optionalScalarOverrideProvenance) {
+    return binding.parsed.parameters.map(({ name }) => safeCppName(name));
+  }
+  return binding.parsed.parameters.map(({ name, optional, type }) => {
+    if (!optional) return safeCppName(name);
+    return `(${safeCppName(`${name}Present`)} ? std::optional<${cppType(type)}>{${safeCppName(name)}} : std::nullopt)`;
+  });
+}
+
+function emitInternalSignature(binding) {
+  const parameters = bridgeParameters(binding)
+    .map(({ name, type }) => `${name}:${type}`)
+    .join(', ');
+  return `function ${binding.declaration.name}(${parameters}):${binding.parsed.result}`;
+}
+
+function haxeZero(type) {
+  if (type === 'Bool') return 'false';
+  if (type === 'Float') return '0.0';
+  throw new Error(`Unsupported optional native Haxe carrier ${type}`);
 }
 
 function parseSignature(signature) {

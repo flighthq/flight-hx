@@ -91,7 +91,7 @@ inline function getGlyphName(hostTextShaper:flight.HostTextShaperCapability, gly
 }
 
 inline function getIndexRangeForCluster(run:flight.ShapedRun, cluster:Float, ?stringLength:Float):Null<Array<Float>> {
-  return flight._js._fn.Textshaper.getIndexRangeForCluster(run, cluster, stringLength);
+  return flight._js._fn.Textshaper.getIndexRangeForCluster(run, cluster, (stringLength == null ? js.Syntax.code("undefined") : stringLength));
 }
 
 inline function getTextShaperSignals():Null<flight.TextShaperSignals> {
@@ -115,7 +115,7 @@ inline function initializeTextShaperSignals(out:flight.EntityConstruction<flight
 }
 
 inline function itemizeText(text:String, _format:flight.TextFormat, ?options:flight.TextShaperOptions):Array<flight.TextItem> {
-  return flight._js._fn.Textshaper.itemizeText(text, _format, options);
+  return flight._js._fn.Textshaper.itemizeText(text, _format, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function measureText(hostTextShaper:flight.HostTextShaperCapability, text:String, format:flight.TextFormat):Float {
@@ -131,18 +131,18 @@ inline function setShapedRunReleaseGuard(guard:Null<(flight.ShapedRun)->Void>):V
 }
 
 inline function shapeTextRun(hostTextShaper:flight.HostTextShaperCapability, text:String, format:flight.TextFormat, ?options:flight.ShapeRunOptions):Null<flight.ShapedRun> {
-  return flight._js._fn.Textshaper.shapeTextRun(hostTextShaper, text, format, options);
+  return flight._js._fn.Textshaper.shapeTextRun(hostTextShaper, text, format, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function shapeTextRunCached(hostTextShaper:flight.HostTextShaperCapability, cache:flight.TextShaperCache, text:String, format:flight.TextFormat, ?options:flight.ShapeRunOptions):Null<flight.ShapedRun> {
-  return flight._js._fn.Textshaper.shapeTextRunCached(hostTextShaper, cache, text, format, options);
+  return flight._js._fn.Textshaper.shapeTextRunCached(hostTextShaper, cache, text, format, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function shapeTextRunInto(hostTextShaper:flight.HostTextShaperCapability, text:String, format:flight.TextFormat, out:flight.ShapedRun, ?options:flight.ShapeRunOptions):Bool {
-  return flight._js._fn.Textshaper.shapeTextRunInto(hostTextShaper, text, format, out, options);
+  return flight._js._fn.Textshaper.shapeTextRunInto(hostTextShaper, text, format, out, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function shapeTextRuns(hostTextShaper:flight.HostTextShaperCapability, text:String, format:flight.TextFormat, ?options:flight.TextShaperOptions):Array<flight.ShapedRun> {
-  return flight._js._fn.Textshaper.shapeTextRuns(hostTextShaper, text, format, options);
+  return flight._js._fn.Textshaper.shapeTextRuns(hostTextShaper, text, format, (options == null ? js.Syntax.code("undefined") : options));
 }
 #end

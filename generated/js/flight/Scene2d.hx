@@ -19,7 +19,7 @@ inline function computeSpriteLocalBoundsRectangle(out:flight.Rectangle, source:f
 }
 
 inline function createDisplayObject(?obj:flight.PartialNode<flight.DisplayObject>):flight.DisplayObject {
-  return flight._js._fn.Scene2d.createDisplayObject(obj);
+  return flight._js._fn.Scene2d.createDisplayObject((obj == null ? js.Syntax.code("undefined") : obj));
 }
 
 inline function createDisplayObjectRuntime():flight.DisplayObjectRuntime {
@@ -27,11 +27,11 @@ inline function createDisplayObjectRuntime():flight.DisplayObjectRuntime {
 }
 
 inline function createHtmlView(?obj:flight.PartialNode<flight.HtmlView>):flight.HtmlView {
-  return flight._js._fn.Scene2d.createHtmlView(obj);
+  return flight._js._fn.Scene2d.createHtmlView((obj == null ? js.Syntax.code("undefined") : obj));
 }
 
 inline function createHtmlViewData(?data:Dynamic):flight.HtmlViewData {
-  return flight._js._fn.Scene2d.createHtmlViewData(data);
+  return flight._js._fn.Scene2d.createHtmlViewData((data == null ? js.Syntax.code("undefined") : data));
 }
 
 inline function createHtmlViewRuntime():flight.HtmlViewRuntime {
@@ -39,19 +39,19 @@ inline function createHtmlViewRuntime():flight.HtmlViewRuntime {
 }
 
 inline function createNode2D<R:flight.Node2DRuntime>(kind:flight.Kind, ?obj:flight.PartialNode<flight.Node2D>, ?createData:flight.Node2DDataFactory, ?createNode2DRuntimeFactory:flight.Node2DRuntimeFactory<R>):flight.Node2D {
-  return flight._js._fn.Scene2d.createNode2D(kind, obj, createData, createNode2DRuntimeFactory);
+  return flight._js._fn.Scene2d.createNode2D(kind, (obj == null ? js.Syntax.code("undefined") : obj), (createData == null ? js.Syntax.code("undefined") : createData), (createNode2DRuntimeFactory == null ? js.Syntax.code("undefined") : createNode2DRuntimeFactory));
 }
 
 inline function createNode2DRuntime(?methods:Dynamic):flight.Node2DRuntime {
-  return flight._js._fn.Scene2d.createNode2DRuntime(methods);
+  return flight._js._fn.Scene2d.createNode2DRuntime((methods == null ? js.Syntax.code("undefined") : methods));
 }
 
 inline function createScale9Sprite(scale9Grid:flight.RectangleLike, ?obj:flight.PartialNode<flight.Scale9Sprite>):flight.Scale9Sprite {
-  return flight._js._fn.Scene2d.createScale9Sprite(scale9Grid, obj);
+  return flight._js._fn.Scene2d.createScale9Sprite(scale9Grid, (obj == null ? js.Syntax.code("undefined") : obj));
 }
 
 inline function createScale9SpriteData(scale9Grid:flight.RectangleLike, ?data:Dynamic):flight.Scale9SpriteData {
-  return flight._js._fn.Scene2d.createScale9SpriteData(scale9Grid, data);
+  return flight._js._fn.Scene2d.createScale9SpriteData(scale9Grid, (data == null ? js.Syntax.code("undefined") : data));
 }
 
 inline function createScale9SpriteRuntime():flight.Scale9SpriteRuntime {
@@ -59,7 +59,7 @@ inline function createScale9SpriteRuntime():flight.Scale9SpriteRuntime {
 }
 
 inline function createScene2D(?obj:Dynamic):flight.Scene2D {
-  return flight._js._fn.Scene2d.createScene2D(obj);
+  return flight._js._fn.Scene2d.createScene2D((obj == null ? js.Syntax.code("undefined") : obj));
 }
 
 inline function createScene2DKindUsage():Dynamic {
@@ -75,11 +75,11 @@ inline function createScene2DSignals():flight.Scene2DSignals {
 }
 
 inline function createSprite(?obj:flight.PartialNode<flight.Sprite>):flight.Sprite {
-  return flight._js._fn.Scene2d.createSprite(obj);
+  return flight._js._fn.Scene2d.createSprite((obj == null ? js.Syntax.code("undefined") : obj));
 }
 
 inline function createSpriteData(?data:Dynamic):flight.SpriteData {
-  return flight._js._fn.Scene2d.createSpriteData(data);
+  return flight._js._fn.Scene2d.createSpriteData((data == null ? js.Syntax.code("undefined") : data));
 }
 
 inline function createSpriteRendererData(_state:flight.RenderState, source:flight.NodeAny):flight.SpriteIdentityRendererData {
@@ -131,15 +131,15 @@ inline function getSpriteRuntime(source:flight.Sprite):flight.SpriteRuntime {
 }
 
 inline function initializeHtmlViewData(out:flight.EntityConstruction<flight.HtmlViewData>, ?data:Dynamic):Void {
-  flight._js._fn.Scene2d.initializeHtmlViewData(out, data);
+  flight._js._fn.Scene2d.initializeHtmlViewData(out, (data == null ? js.Syntax.code("undefined") : data));
 }
 
 inline function initializeScale9SpriteData(out:flight.EntityConstruction<flight.Scale9SpriteData>, scale9Grid:flight.RectangleLike, ?data:Dynamic):Void {
-  flight._js._fn.Scene2d.initializeScale9SpriteData(out, scale9Grid, data);
+  flight._js._fn.Scene2d.initializeScale9SpriteData(out, scale9Grid, (data == null ? js.Syntax.code("undefined") : data));
 }
 
 inline function initializeScene2D(out:flight.EntityConstruction<flight.Scene2D>, root:flight.Node2D, ?obj:Dynamic):Void {
-  flight._js._fn.Scene2d.initializeScene2D(out, root, obj);
+  flight._js._fn.Scene2d.initializeScene2D(out, root, (obj == null ? js.Syntax.code("undefined") : obj));
 }
 
 inline function initializeScene2DKindUsage(out:flight.EntityConstruction<Dynamic>):Void {
@@ -151,7 +151,7 @@ inline function initializeScene2DSignals(out:flight.EntityConstruction<flight.Sc
 }
 
 inline function initializeSpriteData(out:flight.EntityConstruction<flight.SpriteData>, ?data:Dynamic):Void {
-  flight._js._fn.Scene2d.initializeSpriteData(out, data);
+  flight._js._fn.Scene2d.initializeSpriteData(out, (data == null ? js.Syntax.code("undefined") : data));
 }
 
 inline function initializeSpriteRendererData(out:flight.EntityConstruction<flight.SpriteIdentityRendererData>, _state:flight.RenderState, source:flight.NodeAny):Void {

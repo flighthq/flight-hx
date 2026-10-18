@@ -7,11 +7,11 @@ inline function applyColorMatrixToColor(matrix:Array<Float>, packedRgba:Float):F
 }
 
 inline function bakeColorLut(transforms:Array<flight.ColorTransformFunction>, ?size:Float):flight.ColorLut {
-  return flight._js._fn.Adjustments.bakeColorLut(transforms, size);
+  return flight._js._fn.Adjustments.bakeColorLut(transforms, (size == null ? js.Syntax.code("undefined") : size));
 }
 
 inline function bakeColorLutForRun(cache:flight.ColorLutCache, run:Array<{ kind:String }>, ?size:Float):flight.ColorLut {
-  return flight._js._fn.Adjustments.bakeColorLutForRun(cache, run, size);
+  return flight._js._fn.Adjustments.bakeColorLutForRun(cache, run, (size == null ? js.Syntax.code("undefined") : size));
 }
 
 inline function concatColorMatrix(target:Array<Float>, source:Array<Float>):Void {
@@ -23,11 +23,11 @@ inline function createBrightnessColorMatrix(amount:Float):Array<Float> {
 }
 
 inline function createBrightnessContrastAdjustment(?options:Dynamic):flight.BrightnessContrastAdjustment {
-  return flight._js._fn.Adjustments.createBrightnessContrastAdjustment(options);
+  return flight._js._fn.Adjustments.createBrightnessContrastAdjustment((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createChannelMixerAdjustment(?options:Dynamic):flight.ChannelMixerAdjustment {
-  return flight._js._fn.Adjustments.createChannelMixerAdjustment(options);
+  return flight._js._fn.Adjustments.createChannelMixerAdjustment((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createChannelMixerColorMatrix(redOut:Array<Float>, greenOut:Array<Float>, blueOut:Array<Float>):Array<Float> {
@@ -39,11 +39,11 @@ inline function createColorBalanceColorMatrix(shadows:Array<Float>, midtones:Arr
 }
 
 inline function createColorBlindSimulationAdjustment(?options:Dynamic):flight.ColorBlindSimulationAdjustment {
-  return flight._js._fn.Adjustments.createColorBlindSimulationAdjustment(options);
+  return flight._js._fn.Adjustments.createColorBlindSimulationAdjustment((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createColorGradeAdjustment(?options:Dynamic):flight.ColorGradeAdjustment {
-  return flight._js._fn.Adjustments.createColorGradeAdjustment(options);
+  return flight._js._fn.Adjustments.createColorGradeAdjustment((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createColorLutCache():flight.ColorLutCache {
@@ -71,11 +71,11 @@ inline function createDesaturateColorMatrix(amount:Float):Array<Float> {
 }
 
 inline function createExposureAdjustment(?options:Dynamic):flight.ExposureAdjustment {
-  return flight._js._fn.Adjustments.createExposureAdjustment(options);
+  return flight._js._fn.Adjustments.createExposureAdjustment((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createGrayscaleAdjustment(?options:Dynamic):flight.GrayscaleAdjustment {
-  return flight._js._fn.Adjustments.createGrayscaleAdjustment(options);
+  return flight._js._fn.Adjustments.createGrayscaleAdjustment((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createGrayscaleColorMatrix():Array<Float> {
@@ -87,7 +87,7 @@ inline function createHueRotateColorMatrix(degrees:Float):Array<Float> {
 }
 
 inline function createHueSaturationAdjustment(?options:Dynamic):flight.HueSaturationAdjustment {
-  return flight._js._fn.Adjustments.createHueSaturationAdjustment(options);
+  return flight._js._fn.Adjustments.createHueSaturationAdjustment((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createIdentityColorMatrix():Array<Float> {
@@ -95,7 +95,7 @@ inline function createIdentityColorMatrix():Array<Float> {
 }
 
 inline function createInvertAdjustment(?options:Dynamic):flight.InvertAdjustment {
-  return flight._js._fn.Adjustments.createInvertAdjustment(options);
+  return flight._js._fn.Adjustments.createInvertAdjustment((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createInvertColorMatrix():Array<Float> {
@@ -103,15 +103,15 @@ inline function createInvertColorMatrix():Array<Float> {
 }
 
 inline function createLevelsColorMatrix(inBlack:Float, inWhite:Float, outBlack:Float, outWhite:Float, ?gamma:Float):Array<Float> {
-  return flight._js._fn.Adjustments.createLevelsColorMatrix(inBlack, inWhite, outBlack, outWhite, gamma);
+  return flight._js._fn.Adjustments.createLevelsColorMatrix(inBlack, inWhite, outBlack, outWhite, (gamma == null ? js.Syntax.code("undefined") : gamma));
 }
 
 inline function createLiftGammaGainAdjustment(?options:Dynamic):flight.LiftGammaGainAdjustment {
-  return flight._js._fn.Adjustments.createLiftGammaGainAdjustment(options);
+  return flight._js._fn.Adjustments.createLiftGammaGainAdjustment((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createLookupTableGradeAdjustment(?options:Dynamic):flight.LookupTableGradeAdjustment {
-  return flight._js._fn.Adjustments.createLookupTableGradeAdjustment(options);
+  return flight._js._fn.Adjustments.createLookupTableGradeAdjustment((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createOpacityColorMatrix(alpha:Float):Array<Float> {
@@ -127,7 +127,7 @@ inline function createSaturationColorMatrix(amount:Float):Array<Float> {
 }
 
 inline function createSepiaAdjustment(?options:Dynamic):flight.SepiaAdjustment {
-  return flight._js._fn.Adjustments.createSepiaAdjustment(options);
+  return flight._js._fn.Adjustments.createSepiaAdjustment((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createSepiaColorMatrix():Array<Float> {
@@ -167,19 +167,19 @@ inline function initializeAdjustment<T:flight.Adjustment>(out:flight.EntityConst
 }
 
 inline function initializeBrightnessContrastAdjustment(out:flight.EntityConstruction<flight.BrightnessContrastAdjustment>, ?options:Dynamic):Void {
-  flight._js._fn.Adjustments.initializeBrightnessContrastAdjustment(out, options);
+  flight._js._fn.Adjustments.initializeBrightnessContrastAdjustment(out, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function initializeChannelMixerAdjustment(out:flight.EntityConstruction<flight.ChannelMixerAdjustment>, ?options:Dynamic):Void {
-  flight._js._fn.Adjustments.initializeChannelMixerAdjustment(out, options);
+  flight._js._fn.Adjustments.initializeChannelMixerAdjustment(out, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function initializeColorBlindSimulationAdjustment(out:flight.EntityConstruction<flight.ColorBlindSimulationAdjustment>, ?options:Dynamic):Void {
-  flight._js._fn.Adjustments.initializeColorBlindSimulationAdjustment(out, options);
+  flight._js._fn.Adjustments.initializeColorBlindSimulationAdjustment(out, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function initializeColorGradeAdjustment(out:flight.EntityConstruction<flight.ColorGradeAdjustment>, ?options:Dynamic):Void {
-  flight._js._fn.Adjustments.initializeColorGradeAdjustment(out, options);
+  flight._js._fn.Adjustments.initializeColorGradeAdjustment(out, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function initializeColorLutAdjustment<T:flight.ColorLutAdjustment>(out:flight.EntityConstruction<T>, kind:flight.AdjustmentKind, transform:flight.ColorTransformFunction):Void {
@@ -199,31 +199,31 @@ inline function initializeColorScaleBiasAdjustment(out:flight.EntityConstruction
 }
 
 inline function initializeExposureAdjustment(out:flight.EntityConstruction<flight.ExposureAdjustment>, ?options:Dynamic):Void {
-  flight._js._fn.Adjustments.initializeExposureAdjustment(out, options);
+  flight._js._fn.Adjustments.initializeExposureAdjustment(out, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function initializeGrayscaleAdjustment(out:flight.EntityConstruction<flight.GrayscaleAdjustment>, ?options:Dynamic):Void {
-  flight._js._fn.Adjustments.initializeGrayscaleAdjustment(out, options);
+  flight._js._fn.Adjustments.initializeGrayscaleAdjustment(out, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function initializeHueSaturationAdjustment(out:flight.EntityConstruction<flight.HueSaturationAdjustment>, ?options:Dynamic):Void {
-  flight._js._fn.Adjustments.initializeHueSaturationAdjustment(out, options);
+  flight._js._fn.Adjustments.initializeHueSaturationAdjustment(out, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function initializeInvertAdjustment(out:flight.EntityConstruction<flight.InvertAdjustment>, ?options:Dynamic):Void {
-  flight._js._fn.Adjustments.initializeInvertAdjustment(out, options);
+  flight._js._fn.Adjustments.initializeInvertAdjustment(out, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function initializeLiftGammaGainAdjustment(out:flight.EntityConstruction<flight.LiftGammaGainAdjustment>, ?options:Dynamic):Void {
-  flight._js._fn.Adjustments.initializeLiftGammaGainAdjustment(out, options);
+  flight._js._fn.Adjustments.initializeLiftGammaGainAdjustment(out, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function initializeLookupTableGradeAdjustment(out:flight.EntityConstruction<flight.LookupTableGradeAdjustment>, ?options:Dynamic):Void {
-  flight._js._fn.Adjustments.initializeLookupTableGradeAdjustment(out, options);
+  flight._js._fn.Adjustments.initializeLookupTableGradeAdjustment(out, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function initializeSepiaAdjustment(out:flight.EntityConstruction<flight.SepiaAdjustment>, ?options:Dynamic):Void {
-  flight._js._fn.Adjustments.initializeSepiaAdjustment(out, options);
+  flight._js._fn.Adjustments.initializeSepiaAdjustment(out, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function initializeTintAdjustment(out:flight.EntityConstruction<flight.TintAdjustment>, rgba:Float):Void {
@@ -243,7 +243,7 @@ inline function isColorMatrixAdjustment(operation:{ kind:String }):Bool {
 }
 
 inline function multiplyColorMatrix(a:Array<Float>, b:Array<Float>, ?out:Array<Float>):Array<Float> {
-  return flight._js._fn.Adjustments.multiplyColorMatrix(a, b, out);
+  return flight._js._fn.Adjustments.multiplyColorMatrix(a, b, (out == null ? js.Syntax.code("undefined") : out));
 }
 
 inline function resolveColorAdjustmentsColorMatrix(adjustments:Null<Array<flight.Adjustment>>):Null<Array<Float>> {

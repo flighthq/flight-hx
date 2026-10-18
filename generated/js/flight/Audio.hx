@@ -11,7 +11,7 @@ inline function cloneAudioResource(resource:flight.AudioResource):flight.AudioRe
 }
 
 inline function createAudioResource(?buffer:js.html.audio.AudioBuffer):flight.AudioResource {
-  return flight._js._fn.Audio.createAudioResource(buffer);
+  return flight._js._fn.Audio.createAudioResource((buffer == null ? js.Syntax.code("undefined") : buffer));
 }
 
 inline function createAudioResourceFailure(cause:Dynamic):flight.AudioResourceFailure {
@@ -23,15 +23,15 @@ inline function createAudioResourceFromSamples(channels:Array<flight._internal._
 }
 
 inline function createEmbeddedAudioResourceReference(bytes:flight._internal._UInt8Array, ?mimeType:Null<String>, ?name:Null<String>):flight.EmbeddedAudioResourceReference {
-  return flight._js._fn.Audio.createEmbeddedAudioResourceReference(bytes, mimeType, name);
+  return flight._js._fn.Audio.createEmbeddedAudioResourceReference(bytes, (mimeType == null ? js.Syntax.code("undefined") : mimeType), (name == null ? js.Syntax.code("undefined") : name));
 }
 
 inline function createExternalAudioResourceReference(uri:String, ?basePath:Null<String>, ?mimeType:Null<String>, ?name:Null<String>):flight.ExternalAudioResourceReference {
-  return flight._js._fn.Audio.createExternalAudioResourceReference(uri, basePath, mimeType, name);
+  return flight._js._fn.Audio.createExternalAudioResourceReference(uri, (basePath == null ? js.Syntax.code("undefined") : basePath), (mimeType == null ? js.Syntax.code("undefined") : mimeType), (name == null ? js.Syntax.code("undefined") : name));
 }
 
 inline function decodeAudioResourceBytes(audioDecode:flight.HostAudioDecodeCapabilities, bytes:flight._internal._UInt8Array, mimeType:Null<String>, signal:js.html.AbortSignal, ?decoders:flight.AudioDecoderRegistry):flight._internal._Promise<Null<flight.AudioResource>> {
-  return flight._js._fn.Audio.decodeAudioResourceBytes(audioDecode, bytes, mimeType, signal, decoders);
+  return flight._js._fn.Audio.decodeAudioResourceBytes(audioDecode, bytes, mimeType, signal, (decoders == null ? js.Syntax.code("undefined") : decoders));
 }
 
 inline function detectAudioMimeType(data:Dynamic):Null<String> {
@@ -95,15 +95,15 @@ inline function inferAudioMimeType(url:String):Null<String> {
 }
 
 inline function initializeAudioResource(out:flight.EntityConstruction<flight.AudioResource>, ?buffer:js.html.audio.AudioBuffer):Void {
-  flight._js._fn.Audio.initializeAudioResource(out, buffer);
+  flight._js._fn.Audio.initializeAudioResource(out, (buffer == null ? js.Syntax.code("undefined") : buffer));
 }
 
 inline function initializeEmbeddedAudioResourceReference(out:flight.EntityConstruction<flight.EmbeddedAudioResourceReference>, bytes:flight._internal._UInt8Array, ?mimeType:Null<String>, ?name:Null<String>):Void {
-  flight._js._fn.Audio.initializeEmbeddedAudioResourceReference(out, bytes, mimeType, name);
+  flight._js._fn.Audio.initializeEmbeddedAudioResourceReference(out, bytes, (mimeType == null ? js.Syntax.code("undefined") : mimeType), (name == null ? js.Syntax.code("undefined") : name));
 }
 
 inline function initializeExternalAudioResourceReference(out:flight.EntityConstruction<flight.ExternalAudioResourceReference>, uri:String, ?basePath:Null<String>, ?mimeType:Null<String>, ?name:Null<String>):Void {
-  flight._js._fn.Audio.initializeExternalAudioResourceReference(out, uri, basePath, mimeType, name);
+  flight._js._fn.Audio.initializeExternalAudioResourceReference(out, uri, (basePath == null ? js.Syntax.code("undefined") : basePath), (mimeType == null ? js.Syntax.code("undefined") : mimeType), (name == null ? js.Syntax.code("undefined") : name));
 }
 
 inline function isAudioResourceEmpty(resource:flight.AudioResource):Bool {
@@ -111,23 +111,23 @@ inline function isAudioResourceEmpty(resource:flight.AudioResource):Bool {
 }
 
 inline function loadAudioResourceFromBase64(audioDecode:flight.HostAudioDecodeCapabilities, base64:String, mimeType:String, ?signal:js.html.AbortSignal, ?decoders:flight.AudioDecoderRegistry):flight._internal._Promise<flight.AudioResource> {
-  return flight._js._fn.Audio.loadAudioResourceFromBase64(audioDecode, base64, mimeType, signal, decoders);
+  return flight._js._fn.Audio.loadAudioResourceFromBase64(audioDecode, base64, mimeType, (signal == null ? js.Syntax.code("undefined") : signal), (decoders == null ? js.Syntax.code("undefined") : decoders));
 }
 
 inline function loadAudioResourceFromBlob(audioDecode:flight.HostAudioDecodeCapabilities, blob:js.html.Blob, ?signal:js.html.AbortSignal, ?decoders:flight.AudioDecoderRegistry):flight._internal._Promise<flight.AudioResource> {
-  return flight._js._fn.Audio.loadAudioResourceFromBlob(audioDecode, blob, signal, decoders);
+  return flight._js._fn.Audio.loadAudioResourceFromBlob(audioDecode, blob, (signal == null ? js.Syntax.code("undefined") : signal), (decoders == null ? js.Syntax.code("undefined") : decoders));
 }
 
 inline function loadAudioResourceFromBytes(audioDecode:flight.HostAudioDecodeCapabilities, bytes:flight._internal._UInt8Array, ?mimeType:String, ?signal:js.html.AbortSignal, ?decoders:flight.AudioDecoderRegistry):flight._internal._Promise<flight.AudioResource> {
-  return flight._js._fn.Audio.loadAudioResourceFromBytes(audioDecode, bytes, mimeType, signal, decoders);
+  return flight._js._fn.Audio.loadAudioResourceFromBytes(audioDecode, bytes, (mimeType == null ? js.Syntax.code("undefined") : mimeType), (signal == null ? js.Syntax.code("undefined") : signal), (decoders == null ? js.Syntax.code("undefined") : decoders));
 }
 
 inline function loadAudioResourceFromUrl(hostNet:flight.HostNetCapability, audioDecode:flight.HostAudioDecodeCapabilities, url:String, ?signal:js.html.AbortSignal, ?decoders:flight.AudioDecoderRegistry):flight._internal._Promise<flight.AudioResource> {
-  return flight._js._fn.Audio.loadAudioResourceFromUrl(hostNet, audioDecode, url, signal, decoders);
+  return flight._js._fn.Audio.loadAudioResourceFromUrl(hostNet, audioDecode, url, (signal == null ? js.Syntax.code("undefined") : signal), (decoders == null ? js.Syntax.code("undefined") : decoders));
 }
 
 inline function loadAudioResourceFromUrls(hostNet:flight.HostNetCapability, hostAudioCodec:flight.HostAudioCodecCapability, audioDecode:flight.HostAudioDecodeCapabilities, sources:Array<flight.AudioResourceUrl>, ?signal:js.html.AbortSignal, ?decoders:flight.AudioDecoderRegistry):flight._internal._Promise<flight.AudioResource> {
-  return flight._js._fn.Audio.loadAudioResourceFromUrls(hostNet, hostAudioCodec, audioDecode, sources, signal, decoders);
+  return flight._js._fn.Audio.loadAudioResourceFromUrls(hostNet, hostAudioCodec, audioDecode, sources, (signal == null ? js.Syntax.code("undefined") : signal), (decoders == null ? js.Syntax.code("undefined") : decoders));
 }
 
 inline function resetFailedAudioResourceReference(ref:flight.AudioResourceReference):Bool {
@@ -135,10 +135,10 @@ inline function resetFailedAudioResourceReference(ref:flight.AudioResourceRefere
 }
 
 inline function resolveAudioResourceReference(ref:flight.AudioResourceReference, audioDecode:flight.HostAudioDecodeCapabilities, fetch:flight.AudioResourceFetch, signal:js.html.AbortSignal, ?decoders:flight.AudioDecoderRegistry):flight._internal._Promise<Null<flight.AudioResource>> {
-  return flight._js._fn.Audio.resolveAudioResourceReference(ref, audioDecode, fetch, signal, decoders);
+  return flight._js._fn.Audio.resolveAudioResourceReference(ref, audioDecode, fetch, signal, (decoders == null ? js.Syntax.code("undefined") : decoders));
 }
 
 inline function selectAudioResourceUrl(hostAudioCodec:flight.HostAudioCodecCapability, sources:Array<flight.AudioResourceUrl>, ?decoders:flight.AudioDecoderRegistry):Null<String> {
-  return flight._js._fn.Audio.selectAudioResourceUrl(hostAudioCodec, sources, decoders);
+  return flight._js._fn.Audio.selectAudioResourceUrl(hostAudioCodec, sources, (decoders == null ? js.Syntax.code("undefined") : decoders));
 }
 #end

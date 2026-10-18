@@ -23,7 +23,7 @@ inline function computeSkeleton3DJointMatrices(skeleton:flight.Skeleton3D):Void 
 }
 
 inline function createSkeleton3D(joints:Array<flight.Node3D>, ?inverseBindMatrices:flight._internal._Float32Array, ?names:Null<Array<String>>):flight.Skeleton3D {
-  return flight._js._fn.Skeleton3d.createSkeleton3D(joints, inverseBindMatrices, names);
+  return flight._js._fn.Skeleton3d.createSkeleton3D(joints, (inverseBindMatrices == null ? js.Syntax.code("undefined") : inverseBindMatrices), (names == null ? js.Syntax.code("undefined") : names));
 }
 
 inline function disableSkeleton3DGuards():Void {

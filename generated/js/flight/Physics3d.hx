@@ -143,7 +143,7 @@ inline function createPhysics3DBallAndSocketJoint(options:flight.Physics3DBallAn
 }
 
 inline function createPhysics3DCollider(local:flight.CollisionColliderShape3D, ?material:flight.Physics3DMaterial, ?filter:flight.Physics3DCollisionFilter, ?sensor:Bool):flight.Physics3DCollider {
-  return flight._js._fn.Physics3d.createPhysics3DCollider(local, material, filter, sensor);
+  return flight._js._fn.Physics3d.createPhysics3DCollider(local, (material == null ? js.Syntax.code("undefined") : material), (filter == null ? js.Syntax.code("undefined") : filter), (sensor == null ? js.Syntax.code("undefined") : sensor));
 }
 
 inline function createPhysics3DColliderWorldShape(local:flight.CollisionColliderShape3D):Dynamic {
@@ -155,7 +155,7 @@ inline function createPhysics3DConeTwistJoint(options:flight.Physics3DConeTwistJ
 }
 
 inline function createPhysics3DContact(bodyA:Float, bodyB:Float, ?colliderA:Float, ?colliderB:Float):flight.Physics3DContact {
-  return flight._js._fn.Physics3d.createPhysics3DContact(bodyA, bodyB, colliderA, colliderB);
+  return flight._js._fn.Physics3d.createPhysics3DContact(bodyA, bodyB, (colliderA == null ? js.Syntax.code("undefined") : colliderA), (colliderB == null ? js.Syntax.code("undefined") : colliderB));
 }
 
 inline function createPhysics3DContactConstraint():flight.Physics3DContactConstraint {
@@ -227,11 +227,11 @@ inline function createPhysics3DSolverConfig():flight.Physics3DSolverConfig {
 }
 
 inline function createPhysics3DWorld(?index:flight.SpatialIndexBackend3D):flight.Physics3DWorld {
-  return flight._js._fn.Physics3d.createPhysics3DWorld(index);
+  return flight._js._fn.Physics3d.createPhysics3DWorld((index == null ? js.Syntax.code("undefined") : index));
 }
 
 inline function createRigidBody3D(?type:flight.Physics3DBodyType):flight.RigidBody3D {
-  return flight._js._fn.Physics3d.createRigidBody3D(type);
+  return flight._js._fn.Physics3d.createRigidBody3D((type == null ? js.Syntax.code("undefined") : type));
 }
 
 inline function disablePhysics3DGuards():Void {
@@ -343,7 +343,7 @@ inline function initializePhysics3DConeTwistJoint(out:flight.EntityConstruction<
 }
 
 inline function initializePhysics3DContact(out:flight.EntityConstruction<flight.Physics3DContact>, bodyA:Float, bodyB:Float, ?colliderA:Float, ?colliderB:Float):Void {
-  flight._js._fn.Physics3d.initializePhysics3DContact(out, bodyA, bodyB, colliderA, colliderB);
+  flight._js._fn.Physics3d.initializePhysics3DContact(out, bodyA, bodyB, (colliderA == null ? js.Syntax.code("undefined") : colliderA), (colliderB == null ? js.Syntax.code("undefined") : colliderB));
 }
 
 inline function initializePhysics3DContactConstraint(out:flight.EntityConstruction<flight.Physics3DContactConstraint>):Void {
@@ -515,27 +515,27 @@ inline function preparePointBlock(bodyA:flight.RigidBody3D, bodyB:flight.RigidBo
 }
 
 inline function publishPhysics3DBroadphaseBody(world:flight.Physics3DWorld, bodyIndex:Float, bounds:flight.SpatialAabb3D, ?bodyIndices:flight._internal._Set<Float>):Void {
-  flight._js._fn.Physics3d.publishPhysics3DBroadphaseBody(world, bodyIndex, bounds, bodyIndices);
+  flight._js._fn.Physics3d.publishPhysics3DBroadphaseBody(world, bodyIndex, bounds, (bodyIndices == null ? js.Syntax.code("undefined") : bodyIndices));
 }
 
 inline function queryPhysics3DPoint(world:flight.Physics3DWorld, x:Float, y:Float, z:Float, out:flight.Physics3DQueryResult, ?filter:flight.Physics3DQueryFilter):Void {
-  flight._js._fn.Physics3d.queryPhysics3DPoint(world, x, y, z, out, filter);
+  flight._js._fn.Physics3d.queryPhysics3DPoint(world, x, y, z, out, (filter == null ? js.Syntax.code("undefined") : filter));
 }
 
 inline function queryPhysics3DRay(world:flight.Physics3DWorld, originX:Float, originY:Float, originZ:Float, directionX:Float, directionY:Float, directionZ:Float, out:flight.Physics3DRayResult, ?maxFraction:Float, ?filter:flight.Physics3DQueryFilter):Void {
-  flight._js._fn.Physics3d.queryPhysics3DRay(world, originX, originY, originZ, directionX, directionY, directionZ, out, maxFraction, filter);
+  flight._js._fn.Physics3d.queryPhysics3DRay(world, originX, originY, originZ, directionX, directionY, directionZ, out, (maxFraction == null ? js.Syntax.code("undefined") : maxFraction), (filter == null ? js.Syntax.code("undefined") : filter));
 }
 
 inline function queryPhysics3DRayClosest(world:flight.Physics3DWorld, originX:Float, originY:Float, originZ:Float, directionX:Float, directionY:Float, directionZ:Float, out:flight.Physics3DRayResult, ?maxFraction:Float, ?filter:flight.Physics3DQueryFilter):Void {
-  flight._js._fn.Physics3d.queryPhysics3DRayClosest(world, originX, originY, originZ, directionX, directionY, directionZ, out, maxFraction, filter);
+  flight._js._fn.Physics3d.queryPhysics3DRayClosest(world, originX, originY, originZ, directionX, directionY, directionZ, out, (maxFraction == null ? js.Syntax.code("undefined") : maxFraction), (filter == null ? js.Syntax.code("undefined") : filter));
 }
 
 inline function queryPhysics3DRegion(world:flight.Physics3DWorld, region:flight.SpatialAabb3D, out:flight.Physics3DQueryResult, ?filter:flight.Physics3DQueryFilter):Void {
-  flight._js._fn.Physics3d.queryPhysics3DRegion(world, region, out, filter);
+  flight._js._fn.Physics3d.queryPhysics3DRegion(world, region, out, (filter == null ? js.Syntax.code("undefined") : filter));
 }
 
 inline function queryPhysics3DShapeCast(world:flight.Physics3DWorld, shape:flight.CollisionBuiltInShape3D, dx:Float, dy:Float, dz:Float, out:flight.Physics3DShapeCastResult, ?maxFraction:Float, ?filter:flight.Physics3DQueryFilter):Void {
-  flight._js._fn.Physics3d.queryPhysics3DShapeCast(world, shape, dx, dy, dz, out, maxFraction, filter);
+  flight._js._fn.Physics3d.queryPhysics3DShapeCast(world, shape, dx, dy, dz, out, (maxFraction == null ? js.Syntax.code("undefined") : maxFraction), (filter == null ? js.Syntax.code("undefined") : filter));
 }
 
 inline function raycastPhysics3DColliderShape(shape:flight.CollisionColliderShape3D, originX:Float, originY:Float, originZ:Float, directionX:Float, directionY:Float, directionZ:Float, out:flight.CollisionRaycastHit3D, maxFraction:Float):Bool {
@@ -643,7 +643,7 @@ inline function solveEqualityRow(bodyA:flight.RigidBody3D, bodyB:flight.RigidBod
 }
 
 inline function solveLowerLimitRow(bodyA:flight.RigidBody3D, bodyB:flight.RigidBody3D, state:Array<Float>, offset:Float, mass:Float, error:Float, biasFactor:Float, accumulatorSlot:Float, ?gamma:Float):Void {
-  flight._js._fn.Physics3d.solveLowerLimitRow(bodyA, bodyB, state, offset, mass, error, biasFactor, accumulatorSlot, gamma);
+  flight._js._fn.Physics3d.solveLowerLimitRow(bodyA, bodyB, state, offset, mass, error, biasFactor, accumulatorSlot, (gamma == null ? js.Syntax.code("undefined") : gamma));
 }
 
 inline function solveMotorRow(bodyA:flight.RigidBody3D, bodyB:flight.RigidBody3D, state:Array<Float>, offset:Float, mass:Float, speed:Float, maxImpulse:Float, previous:Float):Float {
@@ -663,7 +663,7 @@ inline function solvePointBlock(bodyA:flight.RigidBody3D, bodyB:flight.RigidBody
 }
 
 inline function solveUpperLimitRow(bodyA:flight.RigidBody3D, bodyB:flight.RigidBody3D, state:Array<Float>, offset:Float, mass:Float, error:Float, biasFactor:Float, accumulatorSlot:Float, ?gamma:Float):Void {
-  flight._js._fn.Physics3d.solveUpperLimitRow(bodyA, bodyB, state, offset, mass, error, biasFactor, accumulatorSlot, gamma);
+  flight._js._fn.Physics3d.solveUpperLimitRow(bodyA, bodyB, state, offset, mass, error, biasFactor, accumulatorSlot, (gamma == null ? js.Syntax.code("undefined") : gamma));
 }
 
 inline function stepPhysics3D(world:flight.Physics3DWorld, dt:Float):Void {
@@ -727,7 +727,7 @@ inline function warmStartPointBlock(bodyA:flight.RigidBody3D, bodyB:flight.Rigid
 }
 
 inline function withdrawPhysics3DBroadphaseBody(world:flight.Physics3DWorld, bodyIndex:Float, ?bodyIndices:flight._internal._Set<Float>):Void {
-  flight._js._fn.Physics3d.withdrawPhysics3DBroadphaseBody(world, bodyIndex, bodyIndices);
+  flight._js._fn.Physics3d.withdrawPhysics3DBroadphaseBody(world, bodyIndex, (bodyIndices == null ? js.Syntax.code("undefined") : bodyIndices));
 }
 
 inline function writeAngularRow(state:Array<Float>, offset:Float, axisX:Float, axisY:Float, axisZ:Float):Void {
@@ -743,7 +743,7 @@ inline function writePhysics3DColliderBounds(collider:flight.Physics3DCollider, 
 }
 
 inline function writePhysics3DDebugGeometry(world:flight.Physics3DWorld, out:flight.Physics3DDebugGeometry, ?options:Dynamic):Void {
-  flight._js._fn.Physics3d.writePhysics3DDebugGeometry(world, out, options);
+  flight._js._fn.Physics3d.writePhysics3DDebugGeometry(world, out, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function writePhysics3DJointAnchorVelocity(bodyA:flight.RigidBody3D, bodyB:flight.RigidBody3D, joint:flight.Physics3DJoint, out:Array<Float>):Void {

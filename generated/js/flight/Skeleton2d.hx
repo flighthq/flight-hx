@@ -19,11 +19,11 @@ inline function computeSkeleton2DBoneWorldTransform(skeleton:flight.Skeleton2D, 
 }
 
 inline function computeSkeleton2DBoundingBoxAttachmentVertices(out:flight._internal._Float32Array, attachment:flight.BoundingBoxAttachment2D, skeleton:flight.Skeleton2D, boneIndex:Float, ?deform:Null<flight._internal._Float32Array>):Void {
-  flight._js._fn.Skeleton2d.computeSkeleton2DBoundingBoxAttachmentVertices(out, attachment, skeleton, boneIndex, deform);
+  flight._js._fn.Skeleton2d.computeSkeleton2DBoundingBoxAttachmentVertices(out, attachment, skeleton, boneIndex, (deform == null ? js.Syntax.code("undefined") : deform));
 }
 
 inline function computeSkeleton2DClippingAttachmentVertices(out:flight._internal._Float32Array, attachment:flight.ClippingAttachment2D, skeleton:flight.Skeleton2D, boneIndex:Float, ?deform:Null<flight._internal._Float32Array>):Void {
-  flight._js._fn.Skeleton2d.computeSkeleton2DClippingAttachmentVertices(out, attachment, skeleton, boneIndex, deform);
+  flight._js._fn.Skeleton2d.computeSkeleton2DClippingAttachmentVertices(out, attachment, skeleton, boneIndex, (deform == null ? js.Syntax.code("undefined") : deform));
 }
 
 inline function computeSkeleton2DPointAttachmentPosition(out:flight.Vector2Like, attachment:flight.PointAttachment2D, skeleton:flight.Skeleton2D, boneIndex:Float):Void {
@@ -43,7 +43,7 @@ inline function computeSkeleton2DWorldTransforms(skeleton:flight.Skeleton2D):Voi
 }
 
 inline function createSkeleton2D(bones:Array<flight.Bone2D>, ?slots:Dynamic):flight.Skeleton2D {
-  return flight._js._fn.Skeleton2d.createSkeleton2D(bones, slots);
+  return flight._js._fn.Skeleton2d.createSkeleton2D(bones, (slots == null ? js.Syntax.code("undefined") : slots));
 }
 
 inline function createSkeleton2DBoneAnimationTarget(boneIndex:Float, path:flight.Skeleton2DAnimationPath):flight.Skeleton2DAnimationTarget {
@@ -59,7 +59,7 @@ inline function createSkeleton2DDrawOrderChannel<Traits:Dynamic>(timeline:flight
 }
 
 inline function createSkeleton2DSlotAnimationTarget(slotIndex:Float, path:flight.Skeleton2DSlotAnimationPath, ?attachments:Null<Array<Null<flight.Attachment2D>>>):flight.Skeleton2DSlotAnimationTarget {
-  return flight._js._fn.Skeleton2d.createSkeleton2DSlotAnimationTarget(slotIndex, path, attachments);
+  return flight._js._fn.Skeleton2d.createSkeleton2DSlotAnimationTarget(slotIndex, path, (attachments == null ? js.Syntax.code("undefined") : attachments));
 }
 
 inline function createSkin2D(influenceCounts:flight._internal._UInt16Array, influences:flight._internal._Float32Array):flight.Skin2D {
@@ -67,11 +67,11 @@ inline function createSkin2D(influenceCounts:flight._internal._UInt16Array, infl
 }
 
 inline function deformSkeleton2DMeshAttachment(out:flight._internal._Float32Array, attachment:flight.MeshAttachment2D, skeleton:flight.Skeleton2D, boneIndex:Float, ?deform:Null<flight._internal._Float32Array>):Void {
-  flight._js._fn.Skeleton2d.deformSkeleton2DMeshAttachment(out, attachment, skeleton, boneIndex, deform);
+  flight._js._fn.Skeleton2d.deformSkeleton2DMeshAttachment(out, attachment, skeleton, boneIndex, (deform == null ? js.Syntax.code("undefined") : deform));
 }
 
 inline function deformSkeleton2DPathAttachment(out:flight.Path, attachment:flight.PathAttachment2D, skeleton:flight.Skeleton2D, boneIndex:Float, ?deform:Null<flight._internal._Float32Array>):Void {
-  flight._js._fn.Skeleton2d.deformSkeleton2DPathAttachment(out, attachment, skeleton, boneIndex, deform);
+  flight._js._fn.Skeleton2d.deformSkeleton2DPathAttachment(out, attachment, skeleton, boneIndex, (deform == null ? js.Syntax.code("undefined") : deform));
 }
 
 inline function disableSkeleton2DGuards():Void {
@@ -147,7 +147,7 @@ inline function initializeSkeleton2DDrawOrderAnimationTarget<Traits:Dynamic>(out
 }
 
 inline function initializeSkeleton2DSlotAnimationTarget(out:flight.EntityConstruction<flight.Skeleton2DSlotAnimationTarget>, slotIndex:Float, path:flight.Skeleton2DSlotAnimationPath, ?attachments:Null<Array<Null<flight.Attachment2D>>>):Void {
-  flight._js._fn.Skeleton2d.initializeSkeleton2DSlotAnimationTarget(out, slotIndex, path, attachments);
+  flight._js._fn.Skeleton2d.initializeSkeleton2DSlotAnimationTarget(out, slotIndex, path, (attachments == null ? js.Syntax.code("undefined") : attachments));
 }
 
 inline function initializeSkin2D(out:flight.EntityConstruction<flight.Skin2D>, influenceCounts:flight._internal._UInt16Array, influences:flight._internal._Float32Array):Void {

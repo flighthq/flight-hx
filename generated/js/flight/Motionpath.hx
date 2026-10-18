@@ -3,7 +3,7 @@
 package flight;
 
 inline function createMotionPath(path:flight.Path, ?speed:Float, ?loopMode:flight.MotionPathLoopMode, ?tolerance:Float):flight.MotionPath {
-  return flight._js._fn.Motionpath.createMotionPath(path, speed, loopMode, tolerance);
+  return flight._js._fn.Motionpath.createMotionPath(path, (speed == null ? js.Syntax.code("undefined") : speed), (loopMode == null ? js.Syntax.code("undefined") : loopMode), (tolerance == null ? js.Syntax.code("undefined") : tolerance));
 }
 
 inline function getMotionPathHeading(mp:flight.MotionPath):Float {
@@ -19,7 +19,7 @@ inline function getMotionPathProgress(mp:flight.MotionPath):Float {
 }
 
 inline function initializeMotionPath(out:flight.EntityConstruction<flight.MotionPath>, path:flight.Path, ?speed:Float, ?loopMode:flight.MotionPathLoopMode, ?tolerance:Float):Void {
-  flight._js._fn.Motionpath.initializeMotionPath(out, path, speed, loopMode, tolerance);
+  flight._js._fn.Motionpath.initializeMotionPath(out, path, (speed == null ? js.Syntax.code("undefined") : speed), (loopMode == null ? js.Syntax.code("undefined") : loopMode), (tolerance == null ? js.Syntax.code("undefined") : tolerance));
 }
 
 inline function isMotionPathAtEnd(mp:flight.MotionPath):Bool {

@@ -27,7 +27,7 @@ inline function areGlScene3DForwardLightSelectionGuardsEnabled(state:flight.GlRe
 }
 
 inline function bakeGlEnvironmentCaptureIbl(state:flight.GlRenderState, target:flight.GlCubeRenderTarget, ?intensity:Float):Void {
-  flight._js._fn.Scene3dGl.bakeGlEnvironmentCaptureIbl(state, target, intensity);
+  flight._js._fn.Scene3dGl.bakeGlEnvironmentCaptureIbl(state, target, (intensity == null ? js.Syntax.code("undefined") : intensity));
 }
 
 inline function bakeGlEnvironmentIbl(state:flight.GlRenderState, environment:flight.Environment):Void {
@@ -131,19 +131,19 @@ inline function buildGlUnlitDefineKey(key:flight.GlUnlitDefineKey):String {
 }
 
 inline function compileGlClassicProgram(gl:flight.GlContext, key:flight.GlClassicDefineKey, ?colorAdjustmentFeature:Null<flight.GlColorAdjustmentMaterialFeature>, ?skinDeclarationsGlsl:String):flight.GlClassicProgram {
-  return flight._js._fn.Scene3dGl.compileGlClassicProgram(gl, key, colorAdjustmentFeature, skinDeclarationsGlsl);
+  return flight._js._fn.Scene3dGl.compileGlClassicProgram(gl, key, (colorAdjustmentFeature == null ? js.Syntax.code("undefined") : colorAdjustmentFeature), (skinDeclarationsGlsl == null ? js.Syntax.code("undefined") : skinDeclarationsGlsl));
 }
 
 inline function compileGlDebugProgram(gl:flight.GlContext, key:flight.GlDebugDefineKey, ?skinDeclarationsGlsl:String):flight.GlDebugProgram {
-  return flight._js._fn.Scene3dGl.compileGlDebugProgram(gl, key, skinDeclarationsGlsl);
+  return flight._js._fn.Scene3dGl.compileGlDebugProgram(gl, key, (skinDeclarationsGlsl == null ? js.Syntax.code("undefined") : skinDeclarationsGlsl));
 }
 
 inline function compileGlMatcapProgram(gl:flight.GlContext, key:flight.GlMatcapDefineKey, ?skinDeclarationsGlsl:String):flight.GlMatcapProgram {
-  return flight._js._fn.Scene3dGl.compileGlMatcapProgram(gl, key, skinDeclarationsGlsl);
+  return flight._js._fn.Scene3dGl.compileGlMatcapProgram(gl, key, (skinDeclarationsGlsl == null ? js.Syntax.code("undefined") : skinDeclarationsGlsl));
 }
 
 inline function compileGlPbrProgram(gl:flight.GlContext, key:flight.GlPbrDefineKey, ?contributions:Array<flight.GlPbrExtensionShaderContribution>, ?colorAdjustmentFeature:Null<flight.GlColorAdjustmentMaterialFeature>, ?skinDeclarationsGlsl:String):flight.GlPbrProgram {
-  return flight._js._fn.Scene3dGl.compileGlPbrProgram(gl, key, contributions, colorAdjustmentFeature, skinDeclarationsGlsl);
+  return flight._js._fn.Scene3dGl.compileGlPbrProgram(gl, key, (contributions == null ? js.Syntax.code("undefined") : contributions), (colorAdjustmentFeature == null ? js.Syntax.code("undefined") : colorAdjustmentFeature), (skinDeclarationsGlsl == null ? js.Syntax.code("undefined") : skinDeclarationsGlsl));
 }
 
 inline function compileGlProgram(gl:flight.GlContext, vertexSource:String, fragmentSource:String):js.html.webgl.Program {
@@ -151,19 +151,19 @@ inline function compileGlProgram(gl:flight.GlContext, vertexSource:String, fragm
 }
 
 inline function compileGlShadedProgram(gl:flight.GlContext, key:flight.GlShadedDefineKey, orderedModifiers:Array<flight.Modifier>, registry:Dynamic, ?colorAdjustmentFeature:Null<flight.GlColorAdjustmentMaterialFeature>, ?skinDeclarationsGlsl:String):flight.GlShadedProgram {
-  return flight._js._fn.Scene3dGl.compileGlShadedProgram(gl, key, orderedModifiers, registry, colorAdjustmentFeature, skinDeclarationsGlsl);
+  return flight._js._fn.Scene3dGl.compileGlShadedProgram(gl, key, orderedModifiers, registry, (colorAdjustmentFeature == null ? js.Syntax.code("undefined") : colorAdjustmentFeature), (skinDeclarationsGlsl == null ? js.Syntax.code("undefined") : skinDeclarationsGlsl));
 }
 
 inline function compileGlToonProgram(gl:flight.GlContext, key:flight.GlToonDefineKey, ?skinDeclarationsGlsl:String):flight.GlToonProgram {
-  return flight._js._fn.Scene3dGl.compileGlToonProgram(gl, key, skinDeclarationsGlsl);
+  return flight._js._fn.Scene3dGl.compileGlToonProgram(gl, key, (skinDeclarationsGlsl == null ? js.Syntax.code("undefined") : skinDeclarationsGlsl));
 }
 
 inline function compileGlUnlitProgram(gl:flight.GlContext, key:flight.GlUnlitDefineKey, ?skinDeclarationsGlsl:String):flight.GlUnlitProgram {
-  return flight._js._fn.Scene3dGl.compileGlUnlitProgram(gl, key, skinDeclarationsGlsl);
+  return flight._js._fn.Scene3dGl.compileGlUnlitProgram(gl, key, (skinDeclarationsGlsl == null ? js.Syntax.code("undefined") : skinDeclarationsGlsl));
 }
 
 inline function compileGlWireframeProgram(gl:flight.GlContext, ?alphaMaskEnabled:Bool, ?skinned:Bool, ?skinDeclarationsGlsl:String):flight.GlWireframeProgram {
-  return flight._js._fn.Scene3dGl.compileGlWireframeProgram(gl, alphaMaskEnabled, skinned, skinDeclarationsGlsl);
+  return flight._js._fn.Scene3dGl.compileGlWireframeProgram(gl, (alphaMaskEnabled == null ? js.Syntax.code("undefined") : alphaMaskEnabled), (skinned == null ? js.Syntax.code("undefined") : skinned), (skinDeclarationsGlsl == null ? js.Syntax.code("undefined") : skinDeclarationsGlsl));
 }
 
 inline function destroyGlEnvironmentIblBakePrograms(state:flight.GlRenderState):Void {
@@ -251,11 +251,11 @@ inline function ensureGlMatcapProgram(state:flight.GlRenderState, key:flight.GlM
 }
 
 inline function ensureGlMeshUpload(state:flight.GlRenderState, geometry:flight.MeshGeometry, ?gpuSkinned:Bool):flight.GlMeshUpload {
-  return flight._js._fn.Scene3dGl.ensureGlMeshUpload(state, geometry, gpuSkinned);
+  return flight._js._fn.Scene3dGl.ensureGlMeshUpload(state, geometry, (gpuSkinned == null ? js.Syntax.code("undefined") : gpuSkinned));
 }
 
 inline function ensureGlPbrProgram(state:flight.GlRenderState, key:flight.GlPbrDefineKey, ?contributions:Array<flight.GlPbrExtensionShaderContribution>):flight.GlPbrProgram {
-  return flight._js._fn.Scene3dGl.ensureGlPbrProgram(state, key, contributions);
+  return flight._js._fn.Scene3dGl.ensureGlPbrProgram(state, key, (contributions == null ? js.Syntax.code("undefined") : contributions));
 }
 
 inline function ensureGlScene3DProgram<T:flight.GlMeshProgram>(state:flight.GlRenderState, key:String, compile:(flight.GlContext)->T):T {
@@ -283,11 +283,11 @@ inline function ensureGlUnlitProgram(state:flight.GlRenderState, key:flight.GlUn
 }
 
 inline function ensureGlWireframeProgram(state:flight.GlRenderState, ?alphaMaskEnabled:Bool):flight.GlWireframeProgram {
-  return flight._js._fn.Scene3dGl.ensureGlWireframeProgram(state, alphaMaskEnabled);
+  return flight._js._fn.Scene3dGl.ensureGlWireframeProgram(state, (alphaMaskEnabled == null ? js.Syntax.code("undefined") : alphaMaskEnabled));
 }
 
 inline function ensureGlWireframeUpload(state:flight.GlRenderState, geometry:flight.MeshGeometry, ?gpuSkinned:Bool):flight.GlWireframeUpload {
-  return flight._js._fn.Scene3dGl.ensureGlWireframeUpload(state, geometry, gpuSkinned);
+  return flight._js._fn.Scene3dGl.ensureGlWireframeUpload(state, geometry, (gpuSkinned == null ? js.Syntax.code("undefined") : gpuSkinned));
 }
 
 inline function explainGlMeshGeometryUvSets(geometry:flight.MeshGeometry, requestedUvSets:Array<flight.PbrUvSet>):flight.MeshGeometryUvSetExplanation {
@@ -303,7 +303,7 @@ inline function explainGlScene3DCoverage(out:Array<flight.SceneCoverageEntry>, s
 }
 
 inline function explainGlScene3DForwardLightSelection(lights:flight.Scene3DLightsLike, ?selection:flight.GlScene3DForwardLightList):flight.Scene3DForwardLightSelectionExplanation {
-  return flight._js._fn.Scene3dGl.explainGlScene3DForwardLightSelection(lights, selection);
+  return flight._js._fn.Scene3dGl.explainGlScene3DForwardLightSelection(lights, (selection == null ? js.Syntax.code("undefined") : selection));
 }
 
 inline function getGlClassicFragmentSource():String {
@@ -311,7 +311,7 @@ inline function getGlClassicFragmentSource():String {
 }
 
 inline function getGlClassicFragmentSourceForKey(key:flight.GlClassicDefineKey, ?colorAdjustmentFeature:Null<flight.GlColorAdjustmentMaterialFeature>):String {
-  return flight._js._fn.Scene3dGl.getGlClassicFragmentSourceForKey(key, colorAdjustmentFeature);
+  return flight._js._fn.Scene3dGl.getGlClassicFragmentSourceForKey(key, (colorAdjustmentFeature == null ? js.Syntax.code("undefined") : colorAdjustmentFeature));
 }
 
 inline function getGlClassicVertexSource():String {
@@ -319,7 +319,7 @@ inline function getGlClassicVertexSource():String {
 }
 
 inline function getGlClassicVertexSourceForKey(key:flight.GlClassicDefineKey, ?skinDeclarationsGlsl:String):String {
-  return flight._js._fn.Scene3dGl.getGlClassicVertexSourceForKey(key, skinDeclarationsGlsl);
+  return flight._js._fn.Scene3dGl.getGlClassicVertexSourceForKey(key, (skinDeclarationsGlsl == null ? js.Syntax.code("undefined") : skinDeclarationsGlsl));
 }
 
 inline function getGlCubeFaceTarget(gl:flight.GlContext, face:Float):Float {
@@ -335,7 +335,7 @@ inline function getGlDebugFragmentSourceForKey(key:flight.GlDebugDefineKey):Stri
 }
 
 inline function getGlDebugVertexSourceForKey(key:flight.GlDebugDefineKey, ?skinDeclarationsGlsl:String):String {
-  return flight._js._fn.Scene3dGl.getGlDebugVertexSourceForKey(key, skinDeclarationsGlsl);
+  return flight._js._fn.Scene3dGl.getGlDebugVertexSourceForKey(key, (skinDeclarationsGlsl == null ? js.Syntax.code("undefined") : skinDeclarationsGlsl));
 }
 
 inline function getGlEnvironmentCaptureTexture(target:flight.GlCubeRenderTarget):js.html.webgl.Texture {
@@ -347,7 +347,7 @@ inline function getGlMatcapFragmentSourceForKey(key:flight.GlMatcapDefineKey):St
 }
 
 inline function getGlMatcapVertexSourceForKey(key:flight.GlMatcapDefineKey, ?skinDeclarationsGlsl:String):String {
-  return flight._js._fn.Scene3dGl.getGlMatcapVertexSourceForKey(key, skinDeclarationsGlsl);
+  return flight._js._fn.Scene3dGl.getGlMatcapVertexSourceForKey(key, (skinDeclarationsGlsl == null ? js.Syntax.code("undefined") : skinDeclarationsGlsl));
 }
 
 inline function getGlMeshMaterialRenderer(state:flight.GlRenderState, kind:flight.Kind):Null<flight.GlMeshMaterialRenderer> {
@@ -367,7 +367,7 @@ inline function getGlPbrFragmentSource():String {
 }
 
 inline function getGlPbrFragmentSourceForKey(key:flight.GlPbrDefineKey, ?contributions:Array<flight.GlPbrExtensionShaderContribution>, ?colorAdjustmentFeature:Null<flight.GlColorAdjustmentMaterialFeature>):String {
-  return flight._js._fn.Scene3dGl.getGlPbrFragmentSourceForKey(key, contributions, colorAdjustmentFeature);
+  return flight._js._fn.Scene3dGl.getGlPbrFragmentSourceForKey(key, (contributions == null ? js.Syntax.code("undefined") : contributions), (colorAdjustmentFeature == null ? js.Syntax.code("undefined") : colorAdjustmentFeature));
 }
 
 inline function getGlPbrVertexSource():String {
@@ -375,7 +375,7 @@ inline function getGlPbrVertexSource():String {
 }
 
 inline function getGlPbrVertexSourceForKey(key:flight.GlPbrDefineKey, ?skinDeclarationsGlsl:String):String {
-  return flight._js._fn.Scene3dGl.getGlPbrVertexSourceForKey(key, skinDeclarationsGlsl);
+  return flight._js._fn.Scene3dGl.getGlPbrVertexSourceForKey(key, (skinDeclarationsGlsl == null ? js.Syntax.code("undefined") : skinDeclarationsGlsl));
 }
 
 inline function getGlScene3DRuntime(state:flight.GlRenderState):flight.GlScene3DRuntime {
@@ -395,7 +395,7 @@ inline function getGlToonFragmentSourceForKey(key:flight.GlToonDefineKey):String
 }
 
 inline function getGlToonVertexSourceForKey(key:flight.GlToonDefineKey, ?skinDeclarationsGlsl:String):String {
-  return flight._js._fn.Scene3dGl.getGlToonVertexSourceForKey(key, skinDeclarationsGlsl);
+  return flight._js._fn.Scene3dGl.getGlToonVertexSourceForKey(key, (skinDeclarationsGlsl == null ? js.Syntax.code("undefined") : skinDeclarationsGlsl));
 }
 
 inline function getGlUnlitFragmentSourceForKey(key:flight.GlUnlitDefineKey):String {
@@ -403,15 +403,15 @@ inline function getGlUnlitFragmentSourceForKey(key:flight.GlUnlitDefineKey):Stri
 }
 
 inline function getGlUnlitVertexSourceForKey(key:flight.GlUnlitDefineKey, ?skinDeclarationsGlsl:String):String {
-  return flight._js._fn.Scene3dGl.getGlUnlitVertexSourceForKey(key, skinDeclarationsGlsl);
+  return flight._js._fn.Scene3dGl.getGlUnlitVertexSourceForKey(key, (skinDeclarationsGlsl == null ? js.Syntax.code("undefined") : skinDeclarationsGlsl));
 }
 
 inline function getGlWireframeFragmentSource(?alphaMaskEnabled:Bool):String {
-  return flight._js._fn.Scene3dGl.getGlWireframeFragmentSource(alphaMaskEnabled);
+  return flight._js._fn.Scene3dGl.getGlWireframeFragmentSource((alphaMaskEnabled == null ? js.Syntax.code("undefined") : alphaMaskEnabled));
 }
 
 inline function getGlWireframeVertexSource(?skinned:Bool, ?skinDeclarationsGlsl:String):String {
-  return flight._js._fn.Scene3dGl.getGlWireframeVertexSource(skinned, skinDeclarationsGlsl);
+  return flight._js._fn.Scene3dGl.getGlWireframeVertexSource((skinned == null ? js.Syntax.code("undefined") : skinned), (skinDeclarationsGlsl == null ? js.Syntax.code("undefined") : skinDeclarationsGlsl));
 }
 
 inline function hasGlScene3DCoverage(state:flight.GlRenderState, usage:flight.Scene3DKindUsage):Bool {
@@ -427,11 +427,11 @@ inline function isGlTextureReady(state:flight.GlRenderState, texture:Null<flight
 }
 
 inline function makeFakeGl2(?options:{ ?activeUniforms:Array<{ name:String, type:Float }>, ?compileOk:Bool, ?linkOk:Bool }):flight.FakeGl2 {
-  return flight._js._fn.Scene3dGl.makeFakeGl2(options);
+  return flight._js._fn.Scene3dGl.makeFakeGl2((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function makeGlScene3DState(?gl:flight.FakeGl2, ?registry:flight.GlRenderStateOptions):{ state:flight.GlRenderState, gl:flight.FakeGl2 } {
-  return flight._js._fn.Scene3dGl.makeGlScene3DState(gl, registry);
+  return flight._js._fn.Scene3dGl.makeGlScene3DState((gl == null ? js.Syntax.code("undefined") : gl), (registry == null ? js.Syntax.code("undefined") : registry));
 }
 
 inline function prepareGlScene3DForwardLights(state:flight.GlRenderState, sceneRenderList:flight.Scene3DRenderList, lights:flight.Scene3DLightsLike):flight.GlScene3DForwardLightList {
@@ -563,7 +563,7 @@ inline function registerGlWrappedDiffusePbrExtension(state:flight.GlRenderState)
 }
 
 inline function renderGlEnvironmentCapture(state:flight.GlRenderState, position:flight.Vector3Like, scene:flight.Node3D, lights:flight.Scene3DLightsLike, cubeTarget:flight.GlCubeRenderTarget, ?options:flight.GlEnvironmentCaptureOptions):Void {
-  flight._js._fn.Scene3dGl.renderGlEnvironmentCapture(state, position, scene, lights, cubeTarget, options);
+  flight._js._fn.Scene3dGl.renderGlEnvironmentCapture(state, position, scene, lights, cubeTarget, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function renderGlEnvironmentSkybox(state:flight.GlRenderState, environment:flight.Environment, camera:flight.Camera3D, aspect:Float):Void {
@@ -571,7 +571,7 @@ inline function renderGlEnvironmentSkybox(state:flight.GlRenderState, environmen
 }
 
 inline function renderGlScene3D(pass:flight.GlRenderPass, scene:flight.Node3D, camera:flight.Camera3D, lights:flight.Scene3DLightsLike, ?forwardLights:flight.GlScene3DForwardLightList):Void {
-  flight._js._fn.Scene3dGl.renderGlScene3D(pass, scene, camera, lights, forwardLights);
+  flight._js._fn.Scene3dGl.renderGlScene3D(pass, scene, camera, lights, (forwardLights == null ? js.Syntax.code("undefined") : forwardLights));
 }
 
 inline function renderGlScene3DShadowMap(state:flight.GlRenderState, scene:flight.Node3D, shadowCamera:flight.Camera3D, directionalLight:Null<flight.DirectionalLight>):Void {

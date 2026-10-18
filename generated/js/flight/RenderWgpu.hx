@@ -27,23 +27,23 @@ inline function beginWgpuFrame(state:flight.WgpuRenderState):Void {
 }
 
 inline function beginWgpuRenderPass(state:flight.WgpuRenderState, target:flight.WgpuRenderTarget, ?clear:flight.RenderTargetClear):flight.WgpuRenderPass {
-  return flight._js._fn.RenderWgpu.beginWgpuRenderPass(state, target, clear);
+  return flight._js._fn.RenderWgpu.beginWgpuRenderPass(state, target, (clear == null ? js.Syntax.code("undefined") : clear));
 }
 
 inline function beginWgpuScreenRenderPassForTest(state:flight.WgpuRenderState, ?clear:flight.RenderTargetClear, ?options:Dynamic):flight.WgpuRenderPass {
-  return flight._js._fn.RenderWgpu.beginWgpuScreenRenderPassForTest(state, clear, options);
+  return flight._js._fn.RenderWgpu.beginWgpuScreenRenderPassForTest(state, (clear == null ? js.Syntax.code("undefined") : clear), (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function bindWgpuBitmapTexture(state:flight.WgpuRenderState, bitmap:flight.Bitmap, ?generateMips:Bool, ?premultiply:Bool, ?colorSpace:flight.TextureColorSpace):flight.WgpuTextureEntry {
-  return flight._js._fn.RenderWgpu.bindWgpuBitmapTexture(state, bitmap, generateMips, premultiply, colorSpace);
+  return flight._js._fn.RenderWgpu.bindWgpuBitmapTexture(state, bitmap, (generateMips == null ? js.Syntax.code("undefined") : generateMips), (premultiply == null ? js.Syntax.code("undefined") : premultiply), (colorSpace == null ? js.Syntax.code("undefined") : colorSpace));
 }
 
 inline function bindWgpuCompressedImageTexture(state:flight.WgpuRenderState, image:flight.CompressedImageResource, ?colorSpace:flight.TextureColorSpace):Null<flight.WgpuTextureEntry> {
-  return flight._js._fn.RenderWgpu.bindWgpuCompressedImageTexture(state, image, colorSpace);
+  return flight._js._fn.RenderWgpu.bindWgpuCompressedImageTexture(state, image, (colorSpace == null ? js.Syntax.code("undefined") : colorSpace));
 }
 
 inline function bindWgpuImageResourceTexture(state:flight.WgpuRenderState, image:flight.ImageResource, ?generateMips:Bool, ?premultiply:Bool, ?colorSpace:flight.TextureColorSpace):Null<flight.WgpuTextureEntry> {
-  return flight._js._fn.RenderWgpu.bindWgpuImageResourceTexture(state, image, generateMips, premultiply, colorSpace);
+  return flight._js._fn.RenderWgpu.bindWgpuImageResourceTexture(state, image, (generateMips == null ? js.Syntax.code("undefined") : generateMips), (premultiply == null ? js.Syntax.code("undefined") : premultiply), (colorSpace == null ? js.Syntax.code("undefined") : colorSpace));
 }
 
 inline function bindWgpuRenderTexture(state:flight.WgpuRenderState, renderTexture:flight.RenderTexture):Null<flight.WgpuTextureEntry> {
@@ -55,7 +55,7 @@ inline function bindWgpuScreenRenderTarget(state:flight.WgpuRenderState, target:
 }
 
 inline function bindWgpuTexture(state:flight.WgpuRenderState, imageSource:Dynamic, ?generateMips:Bool):Null<flight.WgpuTextureEntry> {
-  return flight._js._fn.RenderWgpu.bindWgpuTexture(state, imageSource, generateMips);
+  return flight._js._fn.RenderWgpu.bindWgpuTexture(state, imageSource, (generateMips == null ? js.Syntax.code("undefined") : generateMips));
 }
 
 inline function bindWgpuVideoTexture(state:flight.WgpuRenderState, videoTexture:flight.Texture):Null<flight.WgpuVideoTextureEntry> {
@@ -67,7 +67,7 @@ inline function buildWgpuRenderRegistries(options:flight.WgpuRenderStateOptions)
 }
 
 inline function createBitmapFromWgpuScreenRenderTarget(target:flight.WgpuScreenRenderTarget, ?timeoutMs:Float):flight._internal._Promise<flight.Bitmap> {
-  return flight._js._fn.RenderWgpu.createBitmapFromWgpuScreenRenderTarget(target, timeoutMs);
+  return flight._js._fn.RenderWgpu.createBitmapFromWgpuScreenRenderTarget(target, (timeoutMs == null ? js.Syntax.code("undefined") : timeoutMs));
 }
 
 inline function createExternalWgpuTexture(state:flight.WgpuRenderState, handle:Dynamic, options:flight.CreateExternalTextureOptions):flight.Texture {
@@ -75,7 +75,7 @@ inline function createExternalWgpuTexture(state:flight.WgpuRenderState, handle:D
 }
 
 inline function createReadyImageElementForTest(?width:Float, ?height:Float):js.html.ImageElement {
-  return flight._js._fn.RenderWgpu.createReadyImageElementForTest(width, height);
+  return flight._js._fn.RenderWgpu.createReadyImageElementForTest((width == null ? js.Syntax.code("undefined") : width), (height == null ? js.Syntax.code("undefined") : height));
 }
 
 inline function createTestWgpuSurface(canvas:js.html.CanvasElement):flight.Surface {
@@ -83,7 +83,7 @@ inline function createTestWgpuSurface(canvas:js.html.CanvasElement):flight.Surfa
 }
 
 inline function createWgpuAcquisition(hostWgpu:flight.HostWgpuCapability, surface:flight.Surface, ?options:flight.WgpuHostAcquisitionOptions):flight._internal._Promise<Null<flight.WgpuHostAcquisition>> {
-  return flight._js._fn.RenderWgpu.createWgpuAcquisition(hostWgpu, surface, options);
+  return flight._js._fn.RenderWgpu.createWgpuAcquisition(hostWgpu, surface, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createWgpuBindGroupLayouts(device:Dynamic):flight.WgpuBindGroupLayouts {
@@ -95,11 +95,11 @@ inline function createWgpuDeviceState(device:Dynamic):flight.WgpuDeviceState {
 }
 
 inline function createWgpuFullscreenPipeline(state:flight.WgpuRenderState, fragmentWgsl:String, ?textureInputCount:Float, ?format:String):flight.WgpuFullscreenPipeline {
-  return flight._js._fn.RenderWgpu.createWgpuFullscreenPipeline(state, fragmentWgsl, textureInputCount, format);
+  return flight._js._fn.RenderWgpu.createWgpuFullscreenPipeline(state, fragmentWgsl, (textureInputCount == null ? js.Syntax.code("undefined") : textureInputCount), (format == null ? js.Syntax.code("undefined") : format));
 }
 
 inline function createWgpuOffscreenRenderState(sourceOrDeviceState:Dynamic, ?options:flight.WgpuRenderStateOptions):Dynamic {
-  return flight._js._fn.RenderWgpu.createWgpuOffscreenRenderState(sourceOrDeviceState, options);
+  return flight._js._fn.RenderWgpu.createWgpuOffscreenRenderState(sourceOrDeviceState, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createWgpuPipelineLayout(device:Dynamic, uniformBindGroupLayout:Dynamic, textureBindGroupLayout:Dynamic):Dynamic {
@@ -107,15 +107,15 @@ inline function createWgpuPipelineLayout(device:Dynamic, uniformBindGroupLayout:
 }
 
 inline function createWgpuRenderState(device:Dynamic, ?options:flight.WgpuRenderStateOptions):flight.WgpuRenderState {
-  return flight._js._fn.RenderWgpu.createWgpuRenderState(device, options);
+  return flight._js._fn.RenderWgpu.createWgpuRenderState(device, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createWgpuRenderStateForTest(?options:flight.WgpuRenderStateOptions):flight._internal._Promise<flight.WgpuRenderState> {
-  return flight._js._fn.RenderWgpu.createWgpuRenderStateForTest(options);
+  return flight._js._fn.RenderWgpu.createWgpuRenderStateForTest((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createWgpuRenderStateRuntime(deviceStateOrRuntime:Dynamic, ?options:flight.WgpuRenderStateOptions):flight.WgpuRenderStateRuntime {
-  return flight._js._fn.RenderWgpu.createWgpuRenderStateRuntime(deviceStateOrRuntime, options);
+  return flight._js._fn.RenderWgpu.createWgpuRenderStateRuntime(deviceStateOrRuntime, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createWgpuRenderTargetPool():flight.WgpuRenderTargetPool {
@@ -127,11 +127,11 @@ inline function createWgpuRenderTexturePool():flight.WgpuRenderTexturePool {
 }
 
 inline function createWgpuScreenRenderTarget(wgpuHost:flight.HostWgpuCapability, device:Dynamic, drawable:flight.Surface, ?options:flight.WgpuScreenRenderTargetOptions):flight.WgpuScreenRenderTarget {
-  return flight._js._fn.RenderWgpu.createWgpuScreenRenderTarget(wgpuHost, device, drawable, options);
+  return flight._js._fn.RenderWgpu.createWgpuScreenRenderTarget(wgpuHost, device, drawable, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createWgpuScreenRenderTargetForTest(state:flight.WgpuRenderState, ?options:Dynamic, ?width:Float, ?height:Float):flight.WgpuScreenRenderTarget {
-  return flight._js._fn.RenderWgpu.createWgpuScreenRenderTargetForTest(state, options, width, height);
+  return flight._js._fn.RenderWgpu.createWgpuScreenRenderTargetForTest(state, (options == null ? js.Syntax.code("undefined") : options), (width == null ? js.Syntax.code("undefined") : width), (height == null ? js.Syntax.code("undefined") : height));
 }
 
 inline function createWgpuTextureEntry(state:flight.WgpuRenderState, width:Float, height:Float, canvas:js.html.CanvasElement):Null<flight.WgpuTextureEntry> {
@@ -139,7 +139,7 @@ inline function createWgpuTextureEntry(state:flight.WgpuRenderState, width:Float
 }
 
 inline function createWgpuTextureRenderTarget(state:flight.WgpuRenderState, width:Float, height:Float, ?format:String, ?colorSpace:flight.RenderTargetColorSpace, ?sampleCount:Float):flight.WgpuTextureRenderTarget {
-  return flight._js._fn.RenderWgpu.createWgpuTextureRenderTarget(state, width, height, format, colorSpace, sampleCount);
+  return flight._js._fn.RenderWgpu.createWgpuTextureRenderTarget(state, width, height, (format == null ? js.Syntax.code("undefined") : format), (colorSpace == null ? js.Syntax.code("undefined") : colorSpace), (sampleCount == null ? js.Syntax.code("undefined") : sampleCount));
 }
 
 inline function declareWgpuRenderTargetColorSpace(state:flight.WgpuRenderState, colorSpace:flight.RenderTargetColorSpace):Bool {
@@ -327,7 +327,7 @@ inline function getWgpuRenderTextureTarget(state:flight.WgpuRenderState, renderT
 }
 
 inline function getWgpuSampler(state:flight.WgpuRenderState, minFilter:Dynamic, magFilter:Dynamic, wrapU:flight.TextureWrap, wrapV:flight.TextureWrap, ?mipmapFilter:Dynamic, ?maxAnisotropy:Float):Dynamic {
-  return flight._js._fn.RenderWgpu.getWgpuSampler(state, minFilter, magFilter, wrapU, wrapV, mipmapFilter, maxAnisotropy);
+  return flight._js._fn.RenderWgpu.getWgpuSampler(state, minFilter, magFilter, wrapU, wrapV, (mipmapFilter == null ? js.Syntax.code("undefined") : mipmapFilter), (maxAnisotropy == null ? js.Syntax.code("undefined") : maxAnisotropy));
 }
 
 inline function getWgpuShader(renderProxy:flight.RenderProxy2D):Null<flight.WgpuBitmapShader> {
@@ -355,7 +355,7 @@ inline function initializeWgpuDeviceState(out:flight.EntityConstruction<flight.W
 }
 
 inline function initializeWgpuFullscreenPipeline(out:flight.EntityConstruction<flight.WgpuFullscreenPipeline>, state:flight.WgpuRenderState, fragmentWgsl:String, ?textureInputCount:Float, ?format:String):Void {
-  flight._js._fn.RenderWgpu.initializeWgpuFullscreenPipeline(out, state, fragmentWgsl, textureInputCount, format);
+  flight._js._fn.RenderWgpu.initializeWgpuFullscreenPipeline(out, state, fragmentWgsl, (textureInputCount == null ? js.Syntax.code("undefined") : textureInputCount), (format == null ? js.Syntax.code("undefined") : format));
 }
 
 inline function initializeWgpuHostAcquisition(out:flight.EntityConstruction<flight.WgpuHostAcquisition>, acquired:Dynamic, ownership:Dynamic):Void {
@@ -379,7 +379,7 @@ inline function initializeWgpuRenderTexturePool(out:flight.EntityConstruction<fl
 }
 
 inline function initializeWgpuScreenRenderTarget(out:flight.EntityConstruction<flight.WgpuScreenRenderTarget>, wgpuHost:flight.HostWgpuCapability, device:Dynamic, drawable:flight.Surface, ?options:flight.WgpuScreenRenderTargetOptions):Void {
-  flight._js._fn.RenderWgpu.initializeWgpuScreenRenderTarget(out, wgpuHost, device, drawable, options);
+  flight._js._fn.RenderWgpu.initializeWgpuScreenRenderTarget(out, wgpuHost, device, drawable, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function initializeWgpuTextureEntry(out:flight.EntityConstruction<flight.WgpuTextureEntry>, texture:Dynamic, view:Dynamic):Void {
@@ -387,7 +387,7 @@ inline function initializeWgpuTextureEntry(out:flight.EntityConstruction<flight.
 }
 
 inline function initializeWgpuTextureRenderTarget(out:flight.EntityConstruction<flight.WgpuTextureRenderTarget>, state:flight.WgpuRenderState, width:Float, height:Float, ?format:String, ?colorSpace:flight.RenderTargetColorSpace, ?sampleCount:Float):Void {
-  flight._js._fn.RenderWgpu.initializeWgpuTextureRenderTarget(out, state, width, height, format, colorSpace, sampleCount);
+  flight._js._fn.RenderWgpu.initializeWgpuTextureRenderTarget(out, state, width, height, (format == null ? js.Syntax.code("undefined") : format), (colorSpace == null ? js.Syntax.code("undefined") : colorSpace), (sampleCount == null ? js.Syntax.code("undefined") : sampleCount));
 }
 
 inline function installWgpuMock():Void {
@@ -395,7 +395,7 @@ inline function installWgpuMock():Void {
 }
 
 inline function invalidateWgpuRenderTexture(state:flight.WgpuRenderState, renderTexture:flight.RenderTexture, ?status:Dynamic):Void {
-  flight._js._fn.RenderWgpu.invalidateWgpuRenderTexture(state, renderTexture, status);
+  flight._js._fn.RenderWgpu.invalidateWgpuRenderTexture(state, renderTexture, (status == null ? js.Syntax.code("undefined") : status));
 }
 
 inline function isWgpuDeviceLost(state:flight.WgpuRenderState):Bool {
@@ -451,7 +451,7 @@ inline function registerWgpuCompressedTextureDecoder(state:flight.WgpuRenderStat
 }
 
 inline function registerWgpuCompressedTextureUpload(state:flight.WgpuRenderState, ?uploader:Dynamic):Void {
-  flight._js._fn.RenderWgpu.registerWgpuCompressedTextureUpload(state, uploader);
+  flight._js._fn.RenderWgpu.registerWgpuCompressedTextureUpload(state, (uploader == null ? js.Syntax.code("undefined") : uploader));
 }
 
 inline function registerWgpuDeviceTeardown(state:flight.WgpuRenderState, teardown:(Dynamic)->Void):Void {
@@ -499,7 +499,7 @@ inline function renderIntoWgpuRenderTexture(state:flight.WgpuRenderState, render
 }
 
 inline function resizeWgpuTextureRenderTarget(state:flight.WgpuRenderState, target:flight.WgpuTextureRenderTarget, width:Float, height:Float, ?sampleCount:Float):Void {
-  flight._js._fn.RenderWgpu.resizeWgpuTextureRenderTarget(state, target, width, height, sampleCount);
+  flight._js._fn.RenderWgpu.resizeWgpuTextureRenderTarget(state, target, width, height, (sampleCount == null ? js.Syntax.code("undefined") : sampleCount));
 }
 
 inline function resolveWgpuApplyBlendMode(state:flight.WgpuRenderState):Null<(flight.WgpuRenderState, Null<String>)->Void> {
@@ -519,7 +519,7 @@ inline function resolveWgpuSmoothingBindGroup(state:flight.WgpuRenderState, entr
 }
 
 inline function resolveWgpuTexture(state:flight.WgpuRenderState, texture:flight.TextureLike, ?premultiply:Bool, ?workingColorSpace:flight.RenderTargetColorSpace):Null<flight.WgpuTextureEntry> {
-  return flight._js._fn.RenderWgpu.resolveWgpuTexture(state, texture, premultiply, workingColorSpace);
+  return flight._js._fn.RenderWgpu.resolveWgpuTexture(state, texture, (premultiply == null ? js.Syntax.code("undefined") : premultiply), (workingColorSpace == null ? js.Syntax.code("undefined") : workingColorSpace));
 }
 
 inline function resumeWgpuRenderPass(pass:flight.WgpuRenderPass):Void {
@@ -575,7 +575,7 @@ inline function updateWgpuTextureEntry(state:flight.WgpuRenderState, entry:fligh
 }
 
 inline function uploadWgpuCompressedTextureContainer(state:flight.WgpuRenderState, container:flight.TextureContainer, payload:flight._internal._UInt8Array, ?decode:flight.WgpuCompressedTextureDecoder, ?colorSpace:flight.TextureColorSpace):Null<Dynamic> {
-  return flight._js._fn.RenderWgpu.uploadWgpuCompressedTextureContainer(state, container, payload, decode, colorSpace);
+  return flight._js._fn.RenderWgpu.uploadWgpuCompressedTextureContainer(state, container, payload, (decode == null ? js.Syntax.code("undefined") : decode), (colorSpace == null ? js.Syntax.code("undefined") : colorSpace));
 }
 
 inline function uploadWgpuTextureData(device:Dynamic, texture:Dynamic, origin:Dynamic, width:Float, height:Float, data:flight._internal._UInt8ClampedArray<flight._internal._ArrayBuffer>):Void {
@@ -607,7 +607,7 @@ inline function writeWgpuMatrixOnlyUniforms(state:flight.WgpuRenderState, render
 }
 
 inline function writeWgpuQuadUniforms(state:flight.WgpuRenderState, renderProxy:{ alpha:Float, transform2D:{ a:Float, b:Float, c:Float, d:Float, tx:Float, ty:Float } }, colorScaleBias:Null<flight.ColorScaleBias>, x0:Float, y0:Float, x1:Float, y1:Float, u0:Float, v0:Float, u1:Float, v1:Float, ?straightTextureAlpha:Bool):Float {
-  return flight._js._fn.RenderWgpu.writeWgpuQuadUniforms(state, renderProxy, colorScaleBias, x0, y0, x1, y1, u0, v0, u1, v1, straightTextureAlpha);
+  return flight._js._fn.RenderWgpu.writeWgpuQuadUniforms(state, renderProxy, colorScaleBias, x0, y0, x1, y1, u0, v0, u1, v1, (straightTextureAlpha == null ? js.Syntax.code("undefined") : straightTextureAlpha));
 }
 
 inline function writeWgpuRenderTextureTarget<T>(state:flight.WgpuRenderState, renderTexture:flight.RenderTexture, callback:(flight.WgpuTextureRenderTarget)->T):T {

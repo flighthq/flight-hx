@@ -7,11 +7,11 @@ inline function attachStorage(hostPreferencesChange:flight.HostPreferencesChange
 }
 
 inline function clearStorage(hostPreferences:flight.HostPreferencesCapability, ?signals:Null<flight.StorageSignals>):flight.StorageClearResult {
-  return flight._js._fn.Preferences.clearStorage(hostPreferences, signals);
+  return flight._js._fn.Preferences.clearStorage(hostPreferences, (signals == null ? js.Syntax.code("undefined") : signals));
 }
 
 inline function clearStorageNamespace(hostPreferences:flight.HostPreferencesCapability, namespace:flight.StorageNamespace, ?signals:Null<flight.StorageSignals>):flight.StorageClearNamespaceResult {
-  return flight._js._fn.Preferences.clearStorageNamespace(hostPreferences, namespace, signals);
+  return flight._js._fn.Preferences.clearStorageNamespace(hostPreferences, namespace, (signals == null ? js.Syntax.code("undefined") : signals));
 }
 
 inline function createStorageSignals():flight.StorageSignals {
@@ -115,19 +115,19 @@ inline function initializeStorageSignals(out:flight.EntityConstruction<flight.St
 }
 
 inline function migrateStorage(hostPreferences:flight.HostPreferencesCapability, namespace:Null<flight.StorageNamespace>, migrations:Array<flight.StorageMigration>, ?signals:Null<flight.StorageSignals>):flight.StorageMigrationOutcome {
-  return flight._js._fn.Preferences.migrateStorage(hostPreferences, namespace, migrations, signals);
+  return flight._js._fn.Preferences.migrateStorage(hostPreferences, namespace, migrations, (signals == null ? js.Syntax.code("undefined") : signals));
 }
 
 inline function removeNamespacedStorageItem(hostPreferences:flight.HostPreferencesCapability, namespace:flight.StorageNamespace, key:String, ?signals:Null<flight.StorageSignals>):flight.StorageRemoveItemResult {
-  return flight._js._fn.Preferences.removeNamespacedStorageItem(hostPreferences, namespace, key, signals);
+  return flight._js._fn.Preferences.removeNamespacedStorageItem(hostPreferences, namespace, key, (signals == null ? js.Syntax.code("undefined") : signals));
 }
 
 inline function removeStorageItem(hostPreferences:flight.HostPreferencesCapability, key:String, ?signals:Null<flight.StorageSignals>):flight.StorageRemoveItemResult {
-  return flight._js._fn.Preferences.removeStorageItem(hostPreferences, key, signals);
+  return flight._js._fn.Preferences.removeStorageItem(hostPreferences, key, (signals == null ? js.Syntax.code("undefined") : signals));
 }
 
 inline function removeStorageItems(hostPreferences:flight.HostPreferencesCapability, keys:Array<String>, ?signals:Null<flight.StorageSignals>):flight.StorageRemoveItemsResult {
-  return flight._js._fn.Preferences.removeStorageItems(hostPreferences, keys, signals);
+  return flight._js._fn.Preferences.removeStorageItems(hostPreferences, keys, (signals == null ? js.Syntax.code("undefined") : signals));
 }
 
 inline function requestStoragePersistence(hostPreferencesPersistenceRequest:flight.HostPreferencesPersistenceRequestCapability):flight._internal._Promise<flight.StoragePersistenceOutcome> {
@@ -135,26 +135,26 @@ inline function requestStoragePersistence(hostPreferencesPersistenceRequest:flig
 }
 
 inline function setNamespacedStorageItem(hostPreferences:flight.HostPreferencesCapability, namespace:flight.StorageNamespace, key:String, value:String, ?signals:Null<flight.StorageSignals>):flight.StorageSetItemResult {
-  return flight._js._fn.Preferences.setNamespacedStorageItem(hostPreferences, namespace, key, value, signals);
+  return flight._js._fn.Preferences.setNamespacedStorageItem(hostPreferences, namespace, key, value, (signals == null ? js.Syntax.code("undefined") : signals));
 }
 
 inline function setStorageBoolean(hostPreferences:flight.HostPreferencesCapability, key:String, value:Bool, ?signals:Null<flight.StorageSignals>):flight.StorageSetItemResult {
-  return flight._js._fn.Preferences.setStorageBoolean(hostPreferences, key, value, signals);
+  return flight._js._fn.Preferences.setStorageBoolean(hostPreferences, key, value, (signals == null ? js.Syntax.code("undefined") : signals));
 }
 
 inline function setStorageItem(hostPreferences:flight.HostPreferencesCapability, key:String, value:String, ?signals:Null<flight.StorageSignals>):flight.StorageSetItemResult {
-  return flight._js._fn.Preferences.setStorageItem(hostPreferences, key, value, signals);
+  return flight._js._fn.Preferences.setStorageItem(hostPreferences, key, value, (signals == null ? js.Syntax.code("undefined") : signals));
 }
 
 inline function setStorageItems(hostPreferences:flight.HostPreferencesCapability, record:haxe.DynamicAccess<String>, ?signals:Null<flight.StorageSignals>):flight.StorageSetItemsResult {
-  return flight._js._fn.Preferences.setStorageItems(hostPreferences, record, signals);
+  return flight._js._fn.Preferences.setStorageItems(hostPreferences, record, (signals == null ? js.Syntax.code("undefined") : signals));
 }
 
 inline function setStorageJSON<Value>(hostPreferences:flight.HostPreferencesCapability, key:String, value:Value, ?signals:Null<flight.StorageSignals>):flight.StorageJsonWriteResult {
-  return flight._js._fn.Preferences.setStorageJSON(hostPreferences, key, value, signals);
+  return flight._js._fn.Preferences.setStorageJSON(hostPreferences, key, value, (signals == null ? js.Syntax.code("undefined") : signals));
 }
 
 inline function setStorageNumber(hostPreferences:flight.HostPreferencesCapability, key:String, value:Float, ?signals:Null<flight.StorageSignals>):flight.StorageSetItemResult {
-  return flight._js._fn.Preferences.setStorageNumber(hostPreferences, key, value, signals);
+  return flight._js._fn.Preferences.setStorageNumber(hostPreferences, key, value, (signals == null ? js.Syntax.code("undefined") : signals));
 }
 #end

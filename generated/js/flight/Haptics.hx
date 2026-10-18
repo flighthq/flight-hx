@@ -19,7 +19,7 @@ inline function prepareHaptics(hostHaptics:flight.HostHapticsCapability):Void {
 }
 
 inline function triggerHapticImpact(hostHaptics:flight.HostHapticsCapability, style:flight.HapticImpactStyle, ?intensity:Float):Bool {
-  return flight._js._fn.Haptics.triggerHapticImpact(hostHaptics, style, intensity);
+  return flight._js._fn.Haptics.triggerHapticImpact(hostHaptics, style, (intensity == null ? js.Syntax.code("undefined") : intensity));
 }
 
 inline function triggerHapticNotification(hostHaptics:flight.HostHapticsCapability, type:flight.HapticNotificationType):Bool {
@@ -39,6 +39,6 @@ inline function vibrateDevicePattern(hostHaptics:flight.HostHapticsCapability, p
 }
 
 inline function vibrateDeviceWaveform(hostHaptics:flight.HostHapticsCapability, timings:Array<Float>, amplitudes:Array<Float>, ?repeat:Float):Bool {
-  return flight._js._fn.Haptics.vibrateDeviceWaveform(hostHaptics, timings, amplitudes, repeat);
+  return flight._js._fn.Haptics.vibrateDeviceWaveform(hostHaptics, timings, amplitudes, (repeat == null ? js.Syntax.code("undefined") : repeat));
 }
 #end

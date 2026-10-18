@@ -3,11 +3,11 @@
 package flight;
 
 inline function formatShapeJson(shape:flight.Shape, ?options:flight.ShapeJsonFormatOptions):String {
-  return flight._js._fn.ShapeFormats.formatShapeJson(shape, options);
+  return flight._js._fn.ShapeFormats.formatShapeJson(shape, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function parseShapeJson(text:String, ?options:flight.ShapeJsonParseOptions):Null<flight.Shape> {
-  return flight._js._fn.ShapeFormats.parseShapeJson(text, options);
+  return flight._js._fn.ShapeFormats.parseShapeJson(text, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 var defaultShapeCommandSchemas(get, set):flight._internal._Map<flight.Kind, flight.ShapeCommandSchema>;

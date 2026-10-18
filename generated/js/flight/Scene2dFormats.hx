@@ -7,7 +7,7 @@ inline function animatedLottieTestScalar(start:Float, end:Float):{ a:Float, k:Ar
 }
 
 inline function animatedLottieTestVector(start:Array<Float>, end:Array<Float>, ?ox:Array<Float>, ?oy:Array<Float>, ?ix:Array<Float>, ?iy:Array<Float>):Dynamic {
-  return flight._js._fn.Scene2dFormats.animatedLottieTestVector(start, end, ox, oy, ix, iy);
+  return flight._js._fn.Scene2dFormats.animatedLottieTestVector(start, end, (ox == null ? js.Syntax.code("undefined") : ox), (oy == null ? js.Syntax.code("undefined") : oy), (ix == null ? js.Syntax.code("undefined") : ix), (iy == null ? js.Syntax.code("undefined") : iy));
 }
 
 inline function appendLottieDashedShapePaths(paths:Array<flight.Path>, shape:flight.Shape, winding:Dynamic, dash:Array<Float>, dashOffset:Float):Void {
@@ -31,7 +31,7 @@ inline function appendRiveShapeGeometry(shape:flight.Shape, paths:Array<flight.R
 }
 
 inline function appendRiveShapePaint(shape:flight.Shape, artboard:flight.RiveArtboardGraph, shapeIndex:Float, paths:Array<flight.RivePathRecord>, ?diagnostics:Null<Array<flight.ImportDiagnostic>>):Void {
-  flight._js._fn.Scene2dFormats.appendRiveShapePaint(shape, artboard, shapeIndex, paths, diagnostics);
+  flight._js._fn.Scene2dFormats.appendRiveShapePaint(shape, artboard, shapeIndex, paths, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function appendSvgChildren(parent:flight.DisplayObject, element:flight.XmlElement, parentStyle:flight.SvgStyle, context:flight.SvgImportContext):Void {
@@ -55,7 +55,7 @@ inline function applyLottieShapeDirection(path:flight.Path, direction:Dynamic):f
 }
 
 inline function applyLottieTransform(target:flight.Node2D, transform:Null<flight.LottieTransform>, context:flight.LottieImportContext, ?includeOpacity:Bool, ?autoOrient:Bool):Void {
-  flight._js._fn.Scene2dFormats.applyLottieTransform(target, transform, context, includeOpacity, autoOrient);
+  flight._js._fn.Scene2dFormats.applyLottieTransform(target, transform, context, (includeOpacity == null ? js.Syntax.code("undefined") : includeOpacity), (autoOrient == null ? js.Syntax.code("undefined") : autoOrient));
 }
 
 inline function applyRiveArtboardHandlers(context:flight.RiveArtboardImportContext):Void {
@@ -71,7 +71,7 @@ inline function applyRiveDocumentHandlers(context:flight.RiveDocumentImportConte
 }
 
 inline function applyRiveDrawOrder(nodes:Array<Null<flight.Node2D>>, artboard:flight.RiveArtboardGraph, root:flight.DisplayObject, ?diagnostics:Array<flight.ImportDiagnostic>):Void {
-  flight._js._fn.Scene2dFormats.applyRiveDrawOrder(nodes, artboard, root, diagnostics);
+  flight._js._fn.Scene2dFormats.applyRiveDrawOrder(nodes, artboard, root, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function applyRiveImportOptions(options:flight.RiveImportOptions, pathBooleanKernel:flight.PathBooleanKernel, registry:flight.RiveImportRegistry):Void {
@@ -79,11 +79,11 @@ inline function applyRiveImportOptions(options:flight.RiveImportOptions, pathBoo
 }
 
 inline function applyRiveSolo(nodes:Array<Null<flight.Node2D>>, artboard:flight.RiveArtboardGraph, ?diagnostics:Array<flight.ImportDiagnostic>):Void {
-  flight._js._fn.Scene2dFormats.applyRiveSolo(nodes, artboard, diagnostics);
+  flight._js._fn.Scene2dFormats.applyRiveSolo(nodes, artboard, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function applySvgElementAppearance(target:flight.Node2D, element:flight.XmlElement, parentStyle:flight.SvgStyle, context:flight.SvgImportContext, ?geometryTransform:Null<flight.Matrix>, ?hasVisualDescendants:Bool):flight.SvgStyle {
-  return flight._js._fn.Scene2dFormats.applySvgElementAppearance(target, element, parentStyle, context, geometryTransform, hasVisualDescendants);
+  return flight._js._fn.Scene2dFormats.applySvgElementAppearance(target, element, parentStyle, context, (geometryTransform == null ? js.Syntax.code("undefined") : geometryTransform), (hasVisualDescendants == null ? js.Syntax.code("undefined") : hasVisualDescendants));
 }
 
 inline function applySvgElementClipFamily(target:flight.Node2D, element:flight.XmlElement, context:flight.SvgImportContext):Void {
@@ -111,7 +111,7 @@ inline function collectLottieCounts(json:String):Null<flight._internal._Map<Stri
 }
 
 inline function collectRiveCoreTypeCounts(source:flight._internal._UInt8Array, ?diagnostics:Array<flight.ImportDiagnostic>):Null<flight._internal._Map<Float, Float>> {
-  return flight._js._fn.Scene2dFormats.collectRiveCoreTypeCounts(source, diagnostics);
+  return flight._js._fn.Scene2dFormats.collectRiveCoreTypeCounts(source, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function collectSvgCounts(source:String):Null<flight._internal._Map<String, Float>> {
@@ -135,31 +135,31 @@ inline function createLottieTestDocument(layers:Array<flight.LottieLayer>):fligh
 }
 
 inline function createLottieTrack<T>(keyframes:Array<flight.LottieKeyframe<T>>, components:Float, context:flight.LottieImportContext, valueOf:(Null<T>, Float)->Array<Float>, easingComponent:Float, ?spatialTangents:Bool, ?tangentOf:(Float, Float)->Float):flight.AnimationTrack {
-  return flight._js._fn.Scene2dFormats.createLottieTrack(keyframes, components, context, valueOf, easingComponent, spatialTangents, tangentOf);
+  return flight._js._fn.Scene2dFormats.createLottieTrack(keyframes, components, context, valueOf, easingComponent, (spatialTangents == null ? js.Syntax.code("undefined") : spatialTangents), (tangentOf == null ? js.Syntax.code("undefined") : tangentOf));
 }
 
 inline function createReadyImageResourceForTest(?width:Float, ?height:Float):flight.ImageResource {
-  return flight._js._fn.Scene2dFormats.createReadyImageResourceForTest(width, height);
+  return flight._js._fn.Scene2dFormats.createReadyImageResourceForTest((width == null ? js.Syntax.code("undefined") : width), (height == null ? js.Syntax.code("undefined") : height));
 }
 
 inline function createRiveAnimationClips(objects:Array<flight.RiveCoreObject>, range:{ end:Float, start:Float }, nodes:Array<Null<flight.DisplayObject>>, artboard:flight.RiveArtboardGraph, rebuilds:flight._internal._Map<Float, ()->Void>, ?skeleton:Null<flight.RiveSkeleton2DImport>, ?diagnostics:Array<flight.ImportDiagnostic>):Array<flight.RiveAnimationClip> {
-  return flight._js._fn.Scene2dFormats.createRiveAnimationClips(objects, range, nodes, artboard, rebuilds, skeleton, diagnostics);
+  return flight._js._fn.Scene2dFormats.createRiveAnimationClips(objects, range, nodes, artboard, rebuilds, (skeleton == null ? js.Syntax.code("undefined") : skeleton), (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function createRiveArtboardImportContext(registry:flight.RiveImportRegistry, artboard:flight.RiveArtboardGraph, objects:Array<flight.RiveCoreObject>, root:flight.DisplayObject, fontNames:Array<String>, ?diagnostics:Array<flight.ImportDiagnostic>):flight.RiveArtboardImportContext {
-  return flight._js._fn.Scene2dFormats.createRiveArtboardImportContext(registry, artboard, objects, root, fontNames, diagnostics);
+  return flight._js._fn.Scene2dFormats.createRiveArtboardImportContext(registry, artboard, objects, root, fontNames, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function createRiveDocumentImportContext(registry:flight.RiveImportRegistry, objects:Array<flight.RiveCoreObject>, ?diagnostics:Array<flight.ImportDiagnostic>):flight.RiveDocumentImportContext {
-  return flight._js._fn.Scene2dFormats.createRiveDocumentImportContext(registry, objects, diagnostics);
+  return flight._js._fn.Scene2dFormats.createRiveDocumentImportContext(registry, objects, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function createRiveDocumentImportResult(registry:flight.RiveImportRegistry, source:flight._internal._UInt8Array, ?diagnostics:Array<flight.ImportDiagnostic>):flight.RiveDocumentImportResult {
-  return flight._js._fn.Scene2dFormats.createRiveDocumentImportResult(registry, source, diagnostics);
+  return flight._js._fn.Scene2dFormats.createRiveDocumentImportResult(registry, source, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function createRiveFileAssets(objects:Array<flight.RiveCoreObject>, ?diagnostics:Array<flight.ImportDiagnostic>):Array<flight.RiveFileAsset> {
-  return flight._js._fn.Scene2dFormats.createRiveFileAssets(objects, diagnostics);
+  return flight._js._fn.Scene2dFormats.createRiveFileAssets(objects, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function createRiveImageSprite(name:String, assetIndex:Float):flight.DisplayObject {
@@ -175,23 +175,23 @@ inline function createRiveImportRegistryFromOptions(options:flight.RiveImportOpt
 }
 
 inline function createRiveLayoutImports(artboard:flight.RiveArtboardGraph, nodes:Array<Null<flight.DisplayObject>>, ?diagnostics:Array<flight.ImportDiagnostic>):Array<flight.RiveLayoutImport> {
-  return flight._js._fn.Scene2dFormats.createRiveLayoutImports(artboard, nodes, diagnostics);
+  return flight._js._fn.Scene2dFormats.createRiveLayoutImports(artboard, nodes, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function createRiveObjectGraph(document:flight.RiveDocument, ?diagnostics:Array<flight.ImportDiagnostic>):flight.RiveObjectGraph {
-  return flight._js._fn.Scene2dFormats.createRiveObjectGraph(document, diagnostics);
+  return flight._js._fn.Scene2dFormats.createRiveObjectGraph(document, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function createRivePath(path:flight.RiveCoreObject, artboard:flight.RiveArtboardGraph, index:Float, ?diagnostics:Array<flight.ImportDiagnostic>):Null<flight.Path> {
-  return flight._js._fn.Scene2dFormats.createRivePath(path, artboard, index, diagnostics);
+  return flight._js._fn.Scene2dFormats.createRivePath(path, artboard, index, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function createRivePathRecord(artboard:flight.RiveArtboardGraph, index:Float, ?diagnostics:Array<flight.ImportDiagnostic>):Null<flight.RivePathRecord> {
-  return flight._js._fn.Scene2dFormats.createRivePathRecord(artboard, index, diagnostics);
+  return flight._js._fn.Scene2dFormats.createRivePathRecord(artboard, index, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function createRiveRichText(artboard:flight.RiveArtboardGraph, index:Float, fontNames:Array<String>, ?diagnostics:Array<flight.ImportDiagnostic>):flight.RichText {
-  return flight._js._fn.Scene2dFormats.createRiveRichText(artboard, index, fontNames, diagnostics);
+  return flight._js._fn.Scene2dFormats.createRiveRichText(artboard, index, fontNames, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function createRiveSkeleton2D(artboard:flight.RiveArtboardGraph):Null<flight.RiveSkeleton2DImport> {
@@ -199,35 +199,35 @@ inline function createRiveSkeleton2D(artboard:flight.RiveArtboardGraph):Null<fli
 }
 
 inline function createRiveSkin2D(artboard:flight.RiveArtboardGraph, skinnableIndex:Float, boneIndices:Array<Float>, points:Array<flight.RiveWeightedPoint>, ?diagnostics:Array<flight.ImportDiagnostic>):Null<flight.Skin2D> {
-  return flight._js._fn.Scene2dFormats.createRiveSkin2D(artboard, skinnableIndex, boneIndices, points, diagnostics);
+  return flight._js._fn.Scene2dFormats.createRiveSkin2D(artboard, skinnableIndex, boneIndices, points, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function createRiveStateMachines(objects:Array<flight.RiveCoreObject>, range:{ end:Float, start:Float }, ?diagnostics:Array<flight.ImportDiagnostic>):Array<flight.RiveStateMachineDescriptor> {
-  return flight._js._fn.Scene2dFormats.createRiveStateMachines(objects, range, diagnostics);
+  return flight._js._fn.Scene2dFormats.createRiveStateMachines(objects, range, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function createScene2DDocumentFromRiveDocument(pathBooleanKernel:flight.PathBooleanKernel, source:flight._internal._UInt8Array, ?diagnostics:Array<flight.ImportDiagnostic>):Null<flight.RiveScene2DDocumentResult> {
-  return flight._js._fn.Scene2dFormats.createScene2DDocumentFromRiveDocument(pathBooleanKernel, source, diagnostics);
+  return flight._js._fn.Scene2dFormats.createScene2DDocumentFromRiveDocument(pathBooleanKernel, source, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function createScene2DFromLottieDocument(source:Dynamic, ?diagnostics:Array<flight.ImportDiagnostic>, ?options:flight.LottieDocumentImportOptions):flight.LottieDocumentImportResult {
-  return flight._js._fn.Scene2dFormats.createScene2DFromLottieDocument(source, diagnostics, options);
+  return flight._js._fn.Scene2dFormats.createScene2DFromLottieDocument(source, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics), (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createScene2DFromLottieDocumentWithRegistry(source:Dynamic, registry:flight.LottieRegistry, ?diagnostics:Array<flight.ImportDiagnostic>, ?options:flight.LottieDocumentImportOptions):flight.LottieDocumentImportResult {
-  return flight._js._fn.Scene2dFormats.createScene2DFromLottieDocumentWithRegistry(source, registry, diagnostics, options);
+  return flight._js._fn.Scene2dFormats.createScene2DFromLottieDocumentWithRegistry(source, registry, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics), (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createScene2DFromRiveDocument(pathBooleanKernel:flight.PathBooleanKernel, source:flight._internal._UInt8Array, ?diagnostics:Array<flight.ImportDiagnostic>):flight.RiveDocumentImportResult {
-  return flight._js._fn.Scene2dFormats.createScene2DFromRiveDocument(pathBooleanKernel, source, diagnostics);
+  return flight._js._fn.Scene2dFormats.createScene2DFromRiveDocument(pathBooleanKernel, source, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function createScene2DFromSvgDocument(source:String, ?diagnostics:Array<flight.ImportDiagnostic>, ?options:flight.SvgDocumentImportOptions):flight.DisplayObject {
-  return flight._js._fn.Scene2dFormats.createScene2DFromSvgDocument(source, diagnostics, options);
+  return flight._js._fn.Scene2dFormats.createScene2DFromSvgDocument(source, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics), (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createScene2DFromSvgDocumentWithRegistry(source:String, registry:flight.SvgRegistry, ?diagnostics:Array<flight.ImportDiagnostic>, ?options:flight.SvgDocumentImportOptions):flight.DisplayObject {
-  return flight._js._fn.Scene2dFormats.createScene2DFromSvgDocumentWithRegistry(source, registry, diagnostics, options);
+  return flight._js._fn.Scene2dFormats.createScene2DFromSvgDocumentWithRegistry(source, registry, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics), (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createSvgElementNode(element:flight.XmlElement, parentStyle:flight.SvgStyle, context:flight.SvgImportContext):Null<flight.Node2D> {
@@ -255,7 +255,7 @@ inline function createSvgViewBoxMatrix(viewBox:Array<Float>, viewport:{ height:F
 }
 
 inline function createSvgViewportMatrix(element:flight.XmlElement, ?viewport:{ ?height:Float, ?width:Float, ?x:Float, ?y:Float }):Null<flight.Matrix> {
-  return flight._js._fn.Scene2dFormats.createSvgViewportMatrix(element, viewport);
+  return flight._js._fn.Scene2dFormats.createSvgViewportMatrix(element, (viewport == null ? js.Syntax.code("undefined") : viewport));
 }
 
 inline function findLottieTestNodeByKind(root:flight.Node2D, kind:String):Null<flight.Node2D> {
@@ -379,11 +379,11 @@ inline function initializeLottieDocumentImportResult(out:flight.EntityConstructi
 }
 
 inline function initializeRiveArtboardImportContext(out:flight.EntityConstruction<flight.RiveArtboardImportContext>, registry:flight.RiveImportRegistry, artboard:flight.RiveArtboardGraph, objects:Array<flight.RiveCoreObject>, root:flight.DisplayObject, fontNames:Array<String>, ?diagnostics:Array<flight.ImportDiagnostic>):Void {
-  flight._js._fn.Scene2dFormats.initializeRiveArtboardImportContext(out, registry, artboard, objects, root, fontNames, diagnostics);
+  flight._js._fn.Scene2dFormats.initializeRiveArtboardImportContext(out, registry, artboard, objects, root, fontNames, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function initializeRiveDocumentImportContext(out:flight.EntityConstruction<flight.RiveDocumentImportContext>, registry:flight.RiveImportRegistry, objects:Array<flight.RiveCoreObject>, ?diagnostics:Array<flight.ImportDiagnostic>):Void {
-  flight._js._fn.Scene2dFormats.initializeRiveDocumentImportContext(out, registry, objects, diagnostics);
+  flight._js._fn.Scene2dFormats.initializeRiveDocumentImportContext(out, registry, objects, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function initializeRiveDocumentImportResult(out:flight.EntityConstruction<flight.RiveDocumentImportResult>, artboards:Array<flight.RiveArtboardImport>, assets:Array<flight.RiveFileAsset>):Void {
@@ -391,7 +391,7 @@ inline function initializeRiveDocumentImportResult(out:flight.EntityConstruction
 }
 
 inline function initializeRiveObjectGraph(out:flight.EntityConstruction<flight.RiveObjectGraph>, document:flight.RiveDocument, ?diagnostics:Array<flight.ImportDiagnostic>):Void {
-  flight._js._fn.Scene2dFormats.initializeRiveObjectGraph(out, document, diagnostics);
+  flight._js._fn.Scene2dFormats.initializeRiveObjectGraph(out, document, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function initializeRiveScene2DDocumentResult(out:flight.EntityConstruction<flight.RiveScene2DDocumentResult>, root:flight.DisplayObject, imported:flight.RiveDocumentImportResult, imageResources:Array<flight.ImageResourceReference>, slots:Array<flight.Scene2DSlotReference>):Void {
@@ -543,11 +543,11 @@ inline function parseLottieRequirements(json:String):flight.RequirementSet {
 }
 
 inline function parseRiveDocument(source:flight._internal._UInt8Array, ?diagnostics:Array<flight.ImportDiagnostic>):Null<flight.RiveDocument> {
-  return flight._js._fn.Scene2dFormats.parseRiveDocument(source, diagnostics);
+  return flight._js._fn.Scene2dFormats.parseRiveDocument(source, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function parseRiveRequirements(source:flight._internal._UInt8Array, ?diagnostics:Array<flight.ImportDiagnostic>):flight.RequirementSet {
-  return flight._js._fn.Scene2dFormats.parseRiveRequirements(source, diagnostics);
+  return flight._js._fn.Scene2dFormats.parseRiveRequirements(source, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function parseStyleDeclarations(value:String):haxe.DynamicAccess<String> {
@@ -699,7 +699,7 @@ inline function registerSvgElementHandlers(registry:flight.SvgRegistry):Void {
 }
 
 inline function reportLottieDrop(context:flight.LottieImportContext, kind:String, origin:String, ?detail:haxe.DynamicAccess<Dynamic>):Void {
-  flight._js._fn.Scene2dFormats.reportLottieDrop(context, kind, origin, detail);
+  flight._js._fn.Scene2dFormats.reportLottieDrop(context, kind, origin, (detail == null ? js.Syntax.code("undefined") : detail));
 }
 
 inline function reportLottieExpression(value:Dynamic, context:flight.LottieImportContext):Void {
@@ -707,11 +707,11 @@ inline function reportLottieExpression(value:Dynamic, context:flight.LottieImpor
 }
 
 inline function reportLottieSkip(context:flight.LottieImportContext, kind:String, origin:String, ?detail:haxe.DynamicAccess<Dynamic>):Void {
-  flight._js._fn.Scene2dFormats.reportLottieSkip(context, kind, origin, detail);
+  flight._js._fn.Scene2dFormats.reportLottieSkip(context, kind, origin, (detail == null ? js.Syntax.code("undefined") : detail));
 }
 
 inline function reportRemainingUnsupportedSvgElements(element:flight.XmlElement, context:flight.SvgImportContext, ?insideDefinitions:Bool):Void {
-  flight._js._fn.Scene2dFormats.reportRemainingUnsupportedSvgElements(element, context, insideDefinitions);
+  flight._js._fn.Scene2dFormats.reportRemainingUnsupportedSvgElements(element, context, (insideDefinitions == null ? js.Syntax.code("undefined") : insideDefinitions));
 }
 
 inline function resolveSvgColor(value:String, currentColor:String):Null<flight.SvgColor> {

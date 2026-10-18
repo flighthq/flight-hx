@@ -17,31 +17,31 @@ inline function cloneSpritesheetPlayer(player:flight.SpritesheetPlayer):flight.S
 }
 
 inline function createSpritesheet(?obj:Dynamic):flight.Spritesheet {
-  return flight._js._fn.Spritesheet.createSpritesheet(obj);
+  return flight._js._fn.Spritesheet.createSpritesheet((obj == null ? js.Syntax.code("undefined") : obj));
 }
 
 inline function createSpritesheetAnimation(?obj:Dynamic):flight.SpritesheetAnimation {
-  return flight._js._fn.Spritesheet.createSpritesheetAnimation(obj);
+  return flight._js._fn.Spritesheet.createSpritesheetAnimation((obj == null ? js.Syntax.code("undefined") : obj));
 }
 
 inline function createSpritesheetAnimationData(?obj:Dynamic):flight.SpritesheetAnimationData {
-  return flight._js._fn.Spritesheet.createSpritesheetAnimationData(obj);
+  return flight._js._fn.Spritesheet.createSpritesheetAnimationData((obj == null ? js.Syntax.code("undefined") : obj));
 }
 
 inline function createSpritesheetAnimationFromFrameNames(spritesheet:flight.Spritesheet, pattern:Dynamic, ?options:Dynamic):Null<flight.SpritesheetAnimation> {
-  return flight._js._fn.Spritesheet.createSpritesheetAnimationFromFrameNames(spritesheet, pattern, options);
+  return flight._js._fn.Spritesheet.createSpritesheetAnimationFromFrameNames(spritesheet, pattern, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createSpritesheetData(?obj:Dynamic):flight.SpritesheetData {
-  return flight._js._fn.Spritesheet.createSpritesheetData(obj);
+  return flight._js._fn.Spritesheet.createSpritesheetData((obj == null ? js.Syntax.code("undefined") : obj));
 }
 
 inline function createSpritesheetFrame(?obj:Dynamic):flight.SpritesheetFrame {
-  return flight._js._fn.Spritesheet.createSpritesheetFrame(obj);
+  return flight._js._fn.Spritesheet.createSpritesheetFrame((obj == null ? js.Syntax.code("undefined") : obj));
 }
 
 inline function createSpritesheetFrameData(?obj:Dynamic):flight.SpritesheetFrameData {
-  return flight._js._fn.Spritesheet.createSpritesheetFrameData(obj);
+  return flight._js._fn.Spritesheet.createSpritesheetFrameData((obj == null ? js.Syntax.code("undefined") : obj));
 }
 
 inline function createSpritesheetFromData(data:flight.SpritesheetData, atlas:flight.TextureAtlas):flight.Spritesheet {
@@ -53,7 +53,7 @@ inline function createSpritesheetFromGrid(options:flight.GridSliceOptions):fligh
 }
 
 inline function createSpritesheetPlayer(?obj:Dynamic):flight.SpritesheetPlayer {
-  return flight._js._fn.Spritesheet.createSpritesheetPlayer(obj);
+  return flight._js._fn.Spritesheet.createSpritesheetPlayer((obj == null ? js.Syntax.code("undefined") : obj));
 }
 
 inline function disposeSpritesheetPlayer(player:flight.SpritesheetPlayer):Void {
@@ -73,31 +73,31 @@ inline function getSpritesheetPlayerFrameAt(player:flight.SpritesheetPlayer, spr
 }
 
 inline function initializeSpritesheet(out:flight.EntityConstruction<flight.Spritesheet>, ?obj:Dynamic):Void {
-  flight._js._fn.Spritesheet.initializeSpritesheet(out, obj);
+  flight._js._fn.Spritesheet.initializeSpritesheet(out, (obj == null ? js.Syntax.code("undefined") : obj));
 }
 
 inline function initializeSpritesheetAnimation(out:flight.EntityConstruction<flight.SpritesheetAnimation>, ?obj:Dynamic):Void {
-  flight._js._fn.Spritesheet.initializeSpritesheetAnimation(out, obj);
+  flight._js._fn.Spritesheet.initializeSpritesheetAnimation(out, (obj == null ? js.Syntax.code("undefined") : obj));
 }
 
 inline function initializeSpritesheetAnimationData(out:flight.EntityConstruction<flight.SpritesheetAnimationData>, ?obj:Dynamic):Void {
-  flight._js._fn.Spritesheet.initializeSpritesheetAnimationData(out, obj);
+  flight._js._fn.Spritesheet.initializeSpritesheetAnimationData(out, (obj == null ? js.Syntax.code("undefined") : obj));
 }
 
 inline function initializeSpritesheetData(out:flight.EntityConstruction<flight.SpritesheetData>, ?obj:Dynamic):Void {
-  flight._js._fn.Spritesheet.initializeSpritesheetData(out, obj);
+  flight._js._fn.Spritesheet.initializeSpritesheetData(out, (obj == null ? js.Syntax.code("undefined") : obj));
 }
 
 inline function initializeSpritesheetFrame(out:flight.EntityConstruction<flight.SpritesheetFrame>, ?obj:Dynamic):Void {
-  flight._js._fn.Spritesheet.initializeSpritesheetFrame(out, obj);
+  flight._js._fn.Spritesheet.initializeSpritesheetFrame(out, (obj == null ? js.Syntax.code("undefined") : obj));
 }
 
 inline function initializeSpritesheetFrameData(out:flight.EntityConstruction<flight.SpritesheetFrameData>, ?obj:Dynamic):Void {
-  flight._js._fn.Spritesheet.initializeSpritesheetFrameData(out, obj);
+  flight._js._fn.Spritesheet.initializeSpritesheetFrameData(out, (obj == null ? js.Syntax.code("undefined") : obj));
 }
 
 inline function initializeSpritesheetPlayer(out:flight.EntityConstruction<flight.SpritesheetPlayer>, ?obj:Dynamic):Void {
-  flight._js._fn.Spritesheet.initializeSpritesheetPlayer(out, obj);
+  flight._js._fn.Spritesheet.initializeSpritesheetPlayer(out, (obj == null ? js.Syntax.code("undefined") : obj));
 }
 
 inline function pauseSpritesheetPlayer(player:flight.SpritesheetPlayer):Void {
@@ -105,7 +105,7 @@ inline function pauseSpritesheetPlayer(player:flight.SpritesheetPlayer):Void {
 }
 
 inline function playSpritesheetAnimation(player:flight.SpritesheetPlayer, animation:Null<flight.SpritesheetAnimation>, ?restart:Bool):Void {
-  flight._js._fn.Spritesheet.playSpritesheetAnimation(player, animation, restart);
+  flight._js._fn.Spritesheet.playSpritesheetAnimation(player, animation, (restart == null ? js.Syntax.code("undefined") : restart));
 }
 
 inline function queueSpritesheetAnimation(player:flight.SpritesheetPlayer, animation:flight.SpritesheetAnimation):Void {

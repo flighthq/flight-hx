@@ -19,7 +19,7 @@ inline function getTextureAtlasFormatKinds():Array<flight.TextureAtlasFormatKind
 }
 
 inline function parseTextureAtlas(content:String, atlas:flight.TextureAtlas, ?formatKind:flight.TextureAtlasFormatKind, ?options:flight.TextureAtlasParseOptions):Null<flight.TextureAtlas> {
-  return flight._js._fn.TextureatlasFormats.parseTextureAtlas(content, atlas, formatKind, options);
+  return flight._js._fn.TextureatlasFormats.parseTextureAtlas(content, atlas, (formatKind == null ? js.Syntax.code("undefined") : formatKind), (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function parseTextureAtlasAsepriteDocument(doc:flight.TextureAtlasAsepriteDocument, atlas:flight.TextureAtlas):flight.TextureAtlas {
@@ -39,11 +39,11 @@ inline function parseTextureAtlasStarlingXml(xml:String, atlas:flight.TextureAtl
 }
 
 inline function parseTexturePackerAtlasDocument(doc:flight.TexturePackerAtlasDocument, atlas:flight.TextureAtlas, ?options:flight.TexturePackerAtlasParseOptions):flight.TextureAtlas {
-  return flight._js._fn.TextureatlasFormats.parseTexturePackerAtlasDocument(doc, atlas, options);
+  return flight._js._fn.TextureatlasFormats.parseTexturePackerAtlasDocument(doc, atlas, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function parseTexturePackerAtlasJson(json:String, atlas:flight.TextureAtlas, ?options:flight.TexturePackerAtlasParseOptions):flight.TextureAtlas {
-  return flight._js._fn.TextureatlasFormats.parseTexturePackerAtlasJson(json, atlas, options);
+  return flight._js._fn.TextureatlasFormats.parseTexturePackerAtlasJson(json, atlas, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function readTextureAtlasScale(scale:Dynamic):Float {

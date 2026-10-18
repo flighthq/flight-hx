@@ -31,7 +31,7 @@ inline function compareRenderQueueEntries(a:flight.RenderQueueEntry, b:flight.Re
 }
 
 inline function computeRenderCacheTransform(outCacheTransform:flight.MatrixLike, bounds:flight.RectangleLike, ?contentX:Float, ?contentY:Float):Void {
-  flight._js._fn.Render.computeRenderCacheTransform(outCacheTransform, bounds, contentX, contentY);
+  flight._js._fn.Render.computeRenderCacheTransform(outCacheTransform, bounds, (contentX == null ? js.Syntax.code("undefined") : contentX), (contentY == null ? js.Syntax.code("undefined") : contentY));
 }
 
 inline function computeRenderProxyWorldBounds(out:Dynamic, source:flight.Node2D):Void {
@@ -39,11 +39,11 @@ inline function computeRenderProxyWorldBounds(out:Dynamic, source:flight.Node2D)
 }
 
 inline function computeRenderTargetSize(out:{ width:Float, height:Float }, bounds:flight.RectangleLike, ?padding:Dynamic, ?minWidth:Float, ?minHeight:Float):{ width:Float, height:Float } {
-  return flight._js._fn.Render.computeRenderTargetSize(out, bounds, padding, minWidth, minHeight);
+  return flight._js._fn.Render.computeRenderTargetSize(out, bounds, (padding == null ? js.Syntax.code("undefined") : padding), (minWidth == null ? js.Syntax.code("undefined") : minWidth), (minHeight == null ? js.Syntax.code("undefined") : minHeight));
 }
 
 inline function computeScene2DRenderTargetTransform(outRenderTransform:flight.MatrixLike, source:flight.Node2D, bounds:flight.RectangleLike, ?contentX:Float, ?contentY:Float):Void {
-  flight._js._fn.Render.computeScene2DRenderTargetTransform(outRenderTransform, source, bounds, contentX, contentY);
+  flight._js._fn.Render.computeScene2DRenderTargetTransform(outRenderTransform, source, bounds, (contentX == null ? js.Syntax.code("undefined") : contentX), (contentY == null ? js.Syntax.code("undefined") : contentY));
 }
 
 inline function copyAllRenderersFromRenderState(target:flight.RenderState, source:flight.RenderState):Void {
@@ -67,7 +67,7 @@ inline function createRenderCache():flight.RenderCache {
 }
 
 inline function createRenderCacheAdapter(?cache:Null<flight.RenderCache>):flight.RenderCacheAdapter {
-  return flight._js._fn.Render.createRenderCacheAdapter(cache);
+  return flight._js._fn.Render.createRenderCacheAdapter((cache == null ? js.Syntax.code("undefined") : cache));
 }
 
 inline function createRenderProxy(state:flight.RenderState, source:flight.NodeAny):flight.RenderProxy {
@@ -83,7 +83,7 @@ inline function createRenderQueue():flight.RenderQueue {
 }
 
 inline function createRenderState(?obj:Dynamic):flight.RenderState {
-  return flight._js._fn.Render.createRenderState(obj);
+  return flight._js._fn.Render.createRenderState((obj == null ? js.Syntax.code("undefined") : obj));
 }
 
 inline function createRenderStateRuntime():flight.RenderStateRuntime {
@@ -195,7 +195,7 @@ inline function initializeRenderCache(out:flight.EntityConstruction<flight.Rende
 }
 
 inline function initializeRenderCacheAdapter(adapter:flight.EntityConstruction<flight.RenderCacheAdapter>, ?cache:Null<flight.RenderCache>):Void {
-  flight._js._fn.Render.initializeRenderCacheAdapter(adapter, cache);
+  flight._js._fn.Render.initializeRenderCacheAdapter(adapter, (cache == null ? js.Syntax.code("undefined") : cache));
 }
 
 inline function initializeRenderProxy(out:flight.EntityConstruction<flight.RenderProxy>, state:flight.RenderState, source:flight.NodeAny):Void {
@@ -207,7 +207,7 @@ inline function initializeRenderQueue(out:flight.EntityConstruction<flight.Rende
 }
 
 inline function initializeRenderState(state:flight.EntityConstruction<flight.RenderState>, ?obj:Dynamic):Void {
-  flight._js._fn.Render.initializeRenderState(state, obj);
+  flight._js._fn.Render.initializeRenderState(state, (obj == null ? js.Syntax.code("undefined") : obj));
 }
 
 inline function installRenderAdaptHook(state:flight.RenderState, fn:(flight.RenderState, flight.NodeAny, flight.RenderProxy2D)->Void):Void {
@@ -223,11 +223,11 @@ inline function isRenderCacheAdapter(value:Dynamic):Bool {
 }
 
 inline function isRenderProxyDirty(state:flight.RenderState, source:flight.NodeAny, data:flight.RenderProxy, ?parentData:flight.RenderProxy):Bool {
-  return flight._js._fn.Render.isRenderProxyDirty(state, source, data, parentData);
+  return flight._js._fn.Render.isRenderProxyDirty(state, source, data, (parentData == null ? js.Syntax.code("undefined") : parentData));
 }
 
 inline function isRenderProxyInViewport(proxy:flight.RenderProxy2D, viewport:flight.Viewport, ?renderTransform2D:Null<flight.Matrix>):Bool {
-  return flight._js._fn.Render.isRenderProxyInViewport(proxy, viewport, renderTransform2D);
+  return flight._js._fn.Render.isRenderProxyInViewport(proxy, viewport, (renderTransform2D == null ? js.Syntax.code("undefined") : renderTransform2D));
 }
 
 inline function isRenderProxyVisible(data:flight.RenderProxy2D):Bool {
@@ -235,7 +235,7 @@ inline function isRenderProxyVisible(data:flight.RenderProxy2D):Bool {
 }
 
 inline function isRenderableInViewport(source:flight.Node2D, viewport:flight.Viewport, ?renderTransform2D:Null<flight.Matrix>):Bool {
-  return flight._js._fn.Render.isRenderableInViewport(source, viewport, renderTransform2D);
+  return flight._js._fn.Render.isRenderableInViewport(source, viewport, (renderTransform2D == null ? js.Syntax.code("undefined") : renderTransform2D));
 }
 
 inline function mergeRenderOptions(...options:flight.RenderStateOptions):flight.RenderStateOptions {
@@ -259,7 +259,7 @@ inline function prepareScene2DRender(state:flight.RenderState, source:flight.Nod
 }
 
 inline function prepareScene3DRender(state:flight.RenderState, scene:flight.Node3D, camera:flight.Camera3D, lights:flight.Scene3DLightsLike, ?viewportAspect:Float):flight.Scene3DRenderList {
-  return flight._js._fn.Render.prepareScene3DRender(state, scene, camera, lights, viewportAspect);
+  return flight._js._fn.Render.prepareScene3DRender(state, scene, camera, lights, (viewportAspect == null ? js.Syntax.code("undefined") : viewportAspect));
 }
 
 inline function pushRenderQueueEntry(queue:flight.RenderQueue, proxy:flight.RenderProxy, sortKey:flight.RenderSortKey):Void {
@@ -291,7 +291,7 @@ inline function setSkinnedMeshBoundsGuard(guard:Null<(flight.Mesh)->Void>):Void 
 }
 
 inline function sortRenderQueue(queue:flight.RenderQueue, ?compare:(flight.RenderQueueEntry, flight.RenderQueueEntry)->Float):Void {
-  flight._js._fn.Render.sortRenderQueue(queue, compare);
+  flight._js._fn.Render.sortRenderQueue(queue, (compare == null ? js.Syntax.code("undefined") : compare));
 }
 
 inline function updateNodeClip(_state:flight.RenderState, source:flight.NodeAny, data:flight.RenderProxy2D, parentData:Null<flight.RenderProxy2D>):Void {
@@ -303,15 +303,15 @@ inline function updateRenderProxy2D(state:flight.RenderState, source:flight.Node
 }
 
 inline function updateRenderProxy2DTransform(state:flight.RenderState, data:flight.RenderProxy2D, ?parentData:flight.RenderProxy2D):Bool {
-  return flight._js._fn.Render.updateRenderProxy2DTransform(state, data, parentData);
+  return flight._js._fn.Render.updateRenderProxy2DTransform(state, data, (parentData == null ? js.Syntax.code("undefined") : parentData));
 }
 
 inline function updateRenderProxyAppearance(state:flight.RenderState, data:flight.RenderProxy, ?parentData:flight.RenderProxy):Bool {
-  return flight._js._fn.Render.updateRenderProxyAppearance(state, data, parentData);
+  return flight._js._fn.Render.updateRenderProxyAppearance(state, data, (parentData == null ? js.Syntax.code("undefined") : parentData));
 }
 
 inline function updateRenderProxyMaterial(state:flight.RenderState, data:flight.RenderProxy, ?_parentData:flight.RenderProxy):Void {
-  flight._js._fn.Render.updateRenderProxyMaterial(state, data, _parentData);
+  flight._js._fn.Render.updateRenderProxyMaterial(state, data, (_parentData == null ? js.Syntax.code("undefined") : _parentData));
 }
 
 inline function updateRenderProxyRenderer(state:flight.RenderState, node:flight.RenderProxy):Void {

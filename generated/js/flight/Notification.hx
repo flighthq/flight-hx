@@ -65,7 +65,7 @@ inline function createNotificationReplySubscription():flight.NotificationReplySu
 }
 
 inline function createNotificationResource(id:String, title:String, ?tag:String):flight.Notification {
-  return flight._js._fn.Notification.createNotificationResource(id, title, tag);
+  return flight._js._fn.Notification.createNotificationResource(id, title, (tag == null ? js.Syntax.code("undefined") : tag));
 }
 
 inline function createScheduledNotificationResource(id:String, request:flight.NotificationRequest, schedule:flight.NotificationSchedule):flight.ScheduledNotification {
@@ -129,7 +129,7 @@ inline function getPendingNotifications(hostNotificationScheduling:flight.HostNo
 }
 
 inline function initializeNotificationResource(out:flight.EntityConstruction<flight.Notification>, id:String, title:String, ?tag:String):Void {
-  flight._js._fn.Notification.initializeNotificationResource(out, id, title, tag);
+  flight._js._fn.Notification.initializeNotificationResource(out, id, title, (tag == null ? js.Syntax.code("undefined") : tag));
 }
 
 inline function initializeScheduledNotificationResource(out:flight.EntityConstruction<flight.ScheduledNotification>, id:String, request:flight.NotificationRequest, schedule:flight.NotificationSchedule):Void {

@@ -19,7 +19,7 @@ inline function concatColorScaleBias(out:flight.ColorScaleBiasLike, source:fligh
 }
 
 inline function convertPhongToStandardPbrMaterial(phong:flight.PhongMaterial, ?opts:Dynamic):flight.StandardPbrMaterial {
-  return flight._js._fn.Materials.convertPhongToStandardPbrMaterial(phong, opts);
+  return flight._js._fn.Materials.convertPhongToStandardPbrMaterial(phong, (opts == null ? js.Syntax.code("undefined") : opts));
 }
 
 inline function convertSpecularGlossinessToStandardPbr(out:flight.StandardPbrMaterialProperties, source:flight.SpecularGlossinessPbrMaterial):Void {
@@ -39,71 +39,71 @@ inline function copyMaterial(out:flight.Material, source:flight.Material):Void {
 }
 
 inline function createAluminumStandardPbrMaterial(?opts:Dynamic):flight.StandardPbrMaterial {
-  return flight._js._fn.Materials.createAluminumStandardPbrMaterial(opts);
+  return flight._js._fn.Materials.createAluminumStandardPbrMaterial((opts == null ? js.Syntax.code("undefined") : opts));
 }
 
 inline function createAnisotropyPbrExtension(?opts:Dynamic):flight.AnisotropyPbrExtension {
-  return flight._js._fn.Materials.createAnisotropyPbrExtension(opts);
+  return flight._js._fn.Materials.createAnisotropyPbrExtension((opts == null ? js.Syntax.code("undefined") : opts));
 }
 
 inline function createBlinnPhongMaterial(?opts:Dynamic):flight.BlinnPhongMaterial {
-  return flight._js._fn.Materials.createBlinnPhongMaterial(opts);
+  return flight._js._fn.Materials.createBlinnPhongMaterial((opts == null ? js.Syntax.code("undefined") : opts));
 }
 
 inline function createCarbonStandardPbrMaterial(?opts:Dynamic):flight.StandardPbrMaterial {
-  return flight._js._fn.Materials.createCarbonStandardPbrMaterial(opts);
+  return flight._js._fn.Materials.createCarbonStandardPbrMaterial((opts == null ? js.Syntax.code("undefined") : opts));
 }
 
 inline function createClearcoatPbrExtension(?opts:Dynamic):flight.ClearcoatPbrExtension {
-  return flight._js._fn.Materials.createClearcoatPbrExtension(opts);
+  return flight._js._fn.Materials.createClearcoatPbrExtension((opts == null ? js.Syntax.code("undefined") : opts));
 }
 
 inline function createColorScaleBias(?opts:Dynamic):flight.ColorScaleBias {
-  return flight._js._fn.Materials.createColorScaleBias(opts);
+  return flight._js._fn.Materials.createColorScaleBias((opts == null ? js.Syntax.code("undefined") : opts));
 }
 
 inline function createCustomShaderMaterial(?opts:Dynamic):flight.CustomShaderMaterial {
-  return flight._js._fn.Materials.createCustomShaderMaterial(opts);
+  return flight._js._fn.Materials.createCustomShaderMaterial((opts == null ? js.Syntax.code("undefined") : opts));
 }
 
 inline function createDepthMaterial(?opts:Dynamic):flight.DepthMaterial {
-  return flight._js._fn.Materials.createDepthMaterial(opts);
+  return flight._js._fn.Materials.createDepthMaterial((opts == null ? js.Syntax.code("undefined") : opts));
 }
 
 inline function createEmissiveMaterial(?opts:Dynamic):flight.EmissiveMaterial {
-  return flight._js._fn.Materials.createEmissiveMaterial(opts);
+  return flight._js._fn.Materials.createEmissiveMaterial((opts == null ? js.Syntax.code("undefined") : opts));
 }
 
 inline function createExtendedPbrMaterial(?opts:Dynamic):flight.ExtendedPbrMaterial {
-  return flight._js._fn.Materials.createExtendedPbrMaterial(opts);
+  return flight._js._fn.Materials.createExtendedPbrMaterial((opts == null ? js.Syntax.code("undefined") : opts));
 }
 
 inline function createGlassExtendedPbrMaterial(?opts:flight.GlassExtendedPbrMaterialOptions):flight.ExtendedPbrMaterial {
-  return flight._js._fn.Materials.createGlassExtendedPbrMaterial(opts);
+  return flight._js._fn.Materials.createGlassExtendedPbrMaterial((opts == null ? js.Syntax.code("undefined") : opts));
 }
 
 inline function createGoldStandardPbrMaterial(?opts:Dynamic):flight.StandardPbrMaterial {
-  return flight._js._fn.Materials.createGoldStandardPbrMaterial(opts);
+  return flight._js._fn.Materials.createGoldStandardPbrMaterial((opts == null ? js.Syntax.code("undefined") : opts));
 }
 
 inline function createIridescencePbrExtension(?opts:Dynamic):flight.IridescencePbrExtension {
-  return flight._js._fn.Materials.createIridescencePbrExtension(opts);
+  return flight._js._fn.Materials.createIridescencePbrExtension((opts == null ? js.Syntax.code("undefined") : opts));
 }
 
 inline function createIronStandardPbrMaterial(?opts:Dynamic):flight.StandardPbrMaterial {
-  return flight._js._fn.Materials.createIronStandardPbrMaterial(opts);
+  return flight._js._fn.Materials.createIronStandardPbrMaterial((opts == null ? js.Syntax.code("undefined") : opts));
 }
 
 inline function createLambertMaterial(?opts:Dynamic):flight.LambertMaterial {
-  return flight._js._fn.Materials.createLambertMaterial(opts);
+  return flight._js._fn.Materials.createLambertMaterial((opts == null ? js.Syntax.code("undefined") : opts));
 }
 
 inline function createMarbleStandardPbrMaterial(?opts:Dynamic):flight.StandardPbrMaterial {
-  return flight._js._fn.Materials.createMarbleStandardPbrMaterial(opts);
+  return flight._js._fn.Materials.createMarbleStandardPbrMaterial((opts == null ? js.Syntax.code("undefined") : opts));
 }
 
 inline function createMatcapMaterial(?opts:Dynamic):flight.MatcapMaterial {
-  return flight._js._fn.Materials.createMatcapMaterial(opts);
+  return flight._js._fn.Materials.createMatcapMaterial((opts == null ? js.Syntax.code("undefined") : opts));
 }
 
 inline function createMaterial(kind:flight.Kind):flight.Material {
@@ -111,83 +111,83 @@ inline function createMaterial(kind:flight.Kind):flight.Material {
 }
 
 inline function createMaterial3D(kind:flight.Kind, ?opts:flight.Material3DOptions):flight.Material3D {
-  return flight._js._fn.Materials.createMaterial3D(kind, opts);
+  return flight._js._fn.Materials.createMaterial3D(kind, (opts == null ? js.Syntax.code("undefined") : opts));
 }
 
 inline function createNormalMaterial(?opts:Dynamic):flight.NormalMaterial {
-  return flight._js._fn.Materials.createNormalMaterial(opts);
+  return flight._js._fn.Materials.createNormalMaterial((opts == null ? js.Syntax.code("undefined") : opts));
 }
 
 inline function createPhongMaterial(?opts:Dynamic):flight.PhongMaterial {
-  return flight._js._fn.Materials.createPhongMaterial(opts);
+  return flight._js._fn.Materials.createPhongMaterial((opts == null ? js.Syntax.code("undefined") : opts));
 }
 
 inline function createPlasticStandardPbrMaterial(?opts:Dynamic):flight.StandardPbrMaterial {
-  return flight._js._fn.Materials.createPlasticStandardPbrMaterial(opts);
+  return flight._js._fn.Materials.createPlasticStandardPbrMaterial((opts == null ? js.Syntax.code("undefined") : opts));
 }
 
 inline function createRubberStandardPbrMaterial(?opts:Dynamic):flight.StandardPbrMaterial {
-  return flight._js._fn.Materials.createRubberStandardPbrMaterial(opts);
+  return flight._js._fn.Materials.createRubberStandardPbrMaterial((opts == null ? js.Syntax.code("undefined") : opts));
 }
 
 inline function createSheenPbrExtension(?opts:Dynamic):flight.SheenPbrExtension {
-  return flight._js._fn.Materials.createSheenPbrExtension(opts);
+  return flight._js._fn.Materials.createSheenPbrExtension((opts == null ? js.Syntax.code("undefined") : opts));
 }
 
 inline function createSilverStandardPbrMaterial(?opts:Dynamic):flight.StandardPbrMaterial {
-  return flight._js._fn.Materials.createSilverStandardPbrMaterial(opts);
+  return flight._js._fn.Materials.createSilverStandardPbrMaterial((opts == null ? js.Syntax.code("undefined") : opts));
 }
 
 inline function createSkinStandardPbrMaterial(?opts:Dynamic):flight.StandardPbrMaterial {
-  return flight._js._fn.Materials.createSkinStandardPbrMaterial(opts);
+  return flight._js._fn.Materials.createSkinStandardPbrMaterial((opts == null ? js.Syntax.code("undefined") : opts));
 }
 
 inline function createSpecularGlossinessPbrMaterial(?opts:Dynamic):flight.SpecularGlossinessPbrMaterial {
-  return flight._js._fn.Materials.createSpecularGlossinessPbrMaterial(opts);
+  return flight._js._fn.Materials.createSpecularGlossinessPbrMaterial((opts == null ? js.Syntax.code("undefined") : opts));
 }
 
 inline function createSpecularPbrExtension(?opts:Dynamic):flight.SpecularPbrExtension {
-  return flight._js._fn.Materials.createSpecularPbrExtension(opts);
+  return flight._js._fn.Materials.createSpecularPbrExtension((opts == null ? js.Syntax.code("undefined") : opts));
 }
 
 inline function createStandardMaterial(?options:Dynamic):flight.StandardMaterial {
-  return flight._js._fn.Materials.createStandardMaterial(options);
+  return flight._js._fn.Materials.createStandardMaterial((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createStandardPbrMaterial(?opts:Dynamic):flight.StandardPbrMaterial {
-  return flight._js._fn.Materials.createStandardPbrMaterial(opts);
+  return flight._js._fn.Materials.createStandardPbrMaterial((opts == null ? js.Syntax.code("undefined") : opts));
 }
 
 inline function createStandardPbrMaterialProperties(?opts:Dynamic):flight.StandardPbrMaterialProperties {
-  return flight._js._fn.Materials.createStandardPbrMaterialProperties(opts);
+  return flight._js._fn.Materials.createStandardPbrMaterialProperties((opts == null ? js.Syntax.code("undefined") : opts));
 }
 
 inline function createToonMaterial(?opts:Dynamic):flight.ToonMaterial {
-  return flight._js._fn.Materials.createToonMaterial(opts);
+  return flight._js._fn.Materials.createToonMaterial((opts == null ? js.Syntax.code("undefined") : opts));
 }
 
 inline function createTransmissionVolumePbrExtension(?opts:Dynamic):flight.TransmissionVolumePbrExtension {
-  return flight._js._fn.Materials.createTransmissionVolumePbrExtension(opts);
+  return flight._js._fn.Materials.createTransmissionVolumePbrExtension((opts == null ? js.Syntax.code("undefined") : opts));
 }
 
 inline function createUnlitMaterial(?opts:Dynamic):flight.UnlitMaterial {
-  return flight._js._fn.Materials.createUnlitMaterial(opts);
+  return flight._js._fn.Materials.createUnlitMaterial((opts == null ? js.Syntax.code("undefined") : opts));
 }
 
 inline function createVertexColorMaterial(?opts:Dynamic):flight.VertexColorMaterial {
-  return flight._js._fn.Materials.createVertexColorMaterial(opts);
+  return flight._js._fn.Materials.createVertexColorMaterial((opts == null ? js.Syntax.code("undefined") : opts));
 }
 
 inline function createWireframeMaterial(?opts:Dynamic):flight.WireframeMaterial {
-  return flight._js._fn.Materials.createWireframeMaterial(opts);
+  return flight._js._fn.Materials.createWireframeMaterial((opts == null ? js.Syntax.code("undefined") : opts));
 }
 
 inline function createWoodStandardPbrMaterial(?opts:Dynamic):flight.StandardPbrMaterial {
-  return flight._js._fn.Materials.createWoodStandardPbrMaterial(opts);
+  return flight._js._fn.Materials.createWoodStandardPbrMaterial((opts == null ? js.Syntax.code("undefined") : opts));
 }
 
 inline function createWrappedDiffusePbrExtension(?opts:Dynamic):flight.WrappedDiffusePbrExtension {
-  return flight._js._fn.Materials.createWrappedDiffusePbrExtension(opts);
+  return flight._js._fn.Materials.createWrappedDiffusePbrExtension((opts == null ? js.Syntax.code("undefined") : opts));
 }
 
 inline function disableMaterialConversionGuards():Void {
@@ -203,11 +203,11 @@ inline function equalsColorScaleBias(a:flight.ColorScaleBiasLike, b:flight.Color
 }
 
 inline function equalsColorScaleBiasBiases(a:flight.ColorScaleBiasLike, b:flight.ColorScaleBiasLike, ?compareAlpha:Bool):Bool {
-  return flight._js._fn.Materials.equalsColorScaleBiasBiases(a, b, compareAlpha);
+  return flight._js._fn.Materials.equalsColorScaleBiasBiases(a, b, (compareAlpha == null ? js.Syntax.code("undefined") : compareAlpha));
 }
 
 inline function equalsColorScaleBiasScales(a:flight.ColorScaleBiasLike, b:flight.ColorScaleBiasLike, ?compareAlpha:Bool):Bool {
-  return flight._js._fn.Materials.equalsColorScaleBiasScales(a, b, compareAlpha);
+  return flight._js._fn.Materials.equalsColorScaleBiasScales(a, b, (compareAlpha == null ? js.Syntax.code("undefined") : compareAlpha));
 }
 
 inline function equalsMaterial(a:flight.Material, b:flight.Material):Bool {
@@ -251,19 +251,19 @@ inline function getPhongToPbrLightExposure():Float {
 }
 
 inline function initializeAnisotropyPbrExtension(out:flight.EntityConstruction<flight.AnisotropyPbrExtension>, ?opts:Dynamic):Void {
-  flight._js._fn.Materials.initializeAnisotropyPbrExtension(out, opts);
+  flight._js._fn.Materials.initializeAnisotropyPbrExtension(out, (opts == null ? js.Syntax.code("undefined") : opts));
 }
 
 inline function initializeClearcoatPbrExtension(out:flight.EntityConstruction<flight.ClearcoatPbrExtension>, ?opts:Dynamic):Void {
-  flight._js._fn.Materials.initializeClearcoatPbrExtension(out, opts);
+  flight._js._fn.Materials.initializeClearcoatPbrExtension(out, (opts == null ? js.Syntax.code("undefined") : opts));
 }
 
 inline function initializeColorScaleBias(out:flight.EntityConstruction<flight.ColorScaleBias>, ?opts:Dynamic):Void {
-  flight._js._fn.Materials.initializeColorScaleBias(out, opts);
+  flight._js._fn.Materials.initializeColorScaleBias(out, (opts == null ? js.Syntax.code("undefined") : opts));
 }
 
 inline function initializeIridescencePbrExtension(out:flight.EntityConstruction<flight.IridescencePbrExtension>, ?opts:Dynamic):Void {
-  flight._js._fn.Materials.initializeIridescencePbrExtension(out, opts);
+  flight._js._fn.Materials.initializeIridescencePbrExtension(out, (opts == null ? js.Syntax.code("undefined") : opts));
 }
 
 inline function initializeMaterial(material:flight.EntityConstruction<flight.Material>, kind:flight.Kind):Void {
@@ -271,23 +271,23 @@ inline function initializeMaterial(material:flight.EntityConstruction<flight.Mat
 }
 
 inline function initializeSheenPbrExtension(out:flight.EntityConstruction<flight.SheenPbrExtension>, ?opts:Dynamic):Void {
-  flight._js._fn.Materials.initializeSheenPbrExtension(out, opts);
+  flight._js._fn.Materials.initializeSheenPbrExtension(out, (opts == null ? js.Syntax.code("undefined") : opts));
 }
 
 inline function initializeSpecularPbrExtension(out:flight.EntityConstruction<flight.SpecularPbrExtension>, ?opts:Dynamic):Void {
-  flight._js._fn.Materials.initializeSpecularPbrExtension(out, opts);
+  flight._js._fn.Materials.initializeSpecularPbrExtension(out, (opts == null ? js.Syntax.code("undefined") : opts));
 }
 
 inline function initializeStandardMaterial(out:flight.EntityConstruction<flight.StandardMaterial>, ?options:Dynamic):Void {
-  flight._js._fn.Materials.initializeStandardMaterial(out, options);
+  flight._js._fn.Materials.initializeStandardMaterial(out, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function initializeTransmissionVolumePbrExtension(out:flight.EntityConstruction<flight.TransmissionVolumePbrExtension>, ?opts:Dynamic):Void {
-  flight._js._fn.Materials.initializeTransmissionVolumePbrExtension(out, opts);
+  flight._js._fn.Materials.initializeTransmissionVolumePbrExtension(out, (opts == null ? js.Syntax.code("undefined") : opts));
 }
 
 inline function initializeWrappedDiffusePbrExtension(out:flight.EntityConstruction<flight.WrappedDiffusePbrExtension>, ?opts:Dynamic):Void {
-  flight._js._fn.Materials.initializeWrappedDiffusePbrExtension(out, opts);
+  flight._js._fn.Materials.initializeWrappedDiffusePbrExtension(out, (opts == null ? js.Syntax.code("undefined") : opts));
 }
 
 inline function invertColorScaleBias(out:flight.ColorScaleBiasLike, source:flight.ColorScaleBiasLike):Void {
@@ -295,7 +295,7 @@ inline function invertColorScaleBias(out:flight.ColorScaleBiasLike, source:fligh
 }
 
 inline function isIdentityColorScaleBias(source:flight.ColorScaleBiasLike, ?compareAlphaScale:Bool):Bool {
-  return flight._js._fn.Materials.isIdentityColorScaleBias(source, compareAlphaScale);
+  return flight._js._fn.Materials.isIdentityColorScaleBias(source, (compareAlphaScale == null ? js.Syntax.code("undefined") : compareAlphaScale));
 }
 
 inline function isMaterial3DBlended(source:flight.Material3D):Bool {

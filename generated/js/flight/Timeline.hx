@@ -13,7 +13,7 @@ inline function clearTimelineFrameScripts(timeline:flight.Timeline):Void {
 }
 
 inline function createTimeline(?obj:Dynamic):flight.Timeline {
-  return flight._js._fn.Timeline.createTimeline(obj);
+  return flight._js._fn.Timeline.createTimeline((obj == null ? js.Syntax.code("undefined") : obj));
 }
 
 inline function createTimelineSource(obj:{ ?totalFrames:Float, ?frameRate:Null<Float>, ?labels:Array<flight.TimelineLabel>, ?cues:Array<flight.TimelineCue>, ?constructFrame:(flight.Node2D, Float)->Void }):flight.TimelineSource {
@@ -57,7 +57,7 @@ inline function gotoAndStopTimeline(timeline:flight.Timeline, frame:Dynamic):Voi
 }
 
 inline function initializeTimeline(out:flight.EntityConstruction<flight.Timeline>, ?obj:Dynamic):Void {
-  flight._js._fn.Timeline.initializeTimeline(out, obj);
+  flight._js._fn.Timeline.initializeTimeline(out, (obj == null ? js.Syntax.code("undefined") : obj));
 }
 
 inline function initializeTimelineSource(out:flight.EntityConstruction<flight.TimelineSource>, obj:{ ?totalFrames:Float, ?frameRate:Null<Float>, ?labels:Array<flight.TimelineLabel>, ?cues:Array<flight.TimelineCue>, ?constructFrame:(flight.Node2D, Float)->Void }):Void {

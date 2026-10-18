@@ -10,10 +10,11 @@ headers. Public facade overrides deliberately expose nothing outside that manife
 The current pin's generated SDK uses the same Flight revision as this repo and records its distinct
 flight-compiler revision (`806d257` versus flight-hx planning at `804435a`). It reports 2,567 emitted
 and 584 refused modules from 3,151 profile inputs across 153 packages. The exact general-purpose
-Haxe-callable partition remains intentionally smaller: 101 functions across 18 public modules. They
+Haxe-callable partition remains intentionally smaller: 121 functions across 24 public modules. They
 are compared with current web signatures, then compiled and executed from one Haxe source in the
 cross-target gate. Sixty-two bind directly from the compiler plan, four use compiler-emitted UTF-8
-String adapters, and 35 required-primitive functions are explicit flight-hx overrides from
+String adapters, 52 required-primitive functions, and three optional-scalar adapters are explicit
+flight-hx overrides from
 dependency-complete flight-cpp headers.
 Expanding that partition remains manifest-first and compile-proven; the larger generated C++
 inventory is not silently claimed as Haxe support.
@@ -24,8 +25,8 @@ dependency-incomplete modules, 584 refused modules, and all associated refusal c
 dual plan covers all 11,247 public rows and emits 2,245 Haxe-C++ declarations. All 66 function
 candidates are promoted: 62 as direct calls and four through exact compiler-emitted adapters. The
 older header scan
-also finds 183 public scalar signatures with matching inline definitions; 93 overlap the promoted
-partition and the remaining 90 across 35 packages are probe candidates, not promised support.
+also finds 183 public scalar signatures with matching inline definitions; 113 overlap the promoted
+partition and the remaining 70 across 33 packages are probe candidates, not promised support.
 Complex signatures stay classified for identity, lifetime, nullable/union, callback, and
 structural-owner review.
 
@@ -41,6 +42,9 @@ The downstream scalar override provenance is deliberately temporary and fail-lou
 exact required-primitive signature in a dependency-complete generated header, and generation fails
 if flight-compiler begins planning the same public function. Compiler support therefore replaces the
 override instead of leaving two competing sources of truth.
+Optional-scalar overrides have distinct provenance and require the exact generated
+`std::optional` signature. Their internal ABI carries a presence bit plus the primitive value, while
+the public Haxe signature remains identical to the web API.
 `manifest.json` also records failed override probes. The current refusal is
 `Skeleton2dFormats.clampUnit`: its otherwise emitted header contains unrelated generated functions
 with invalid `flight::Any` conversions, comparisons, and indexing, so the module cannot cross a C++

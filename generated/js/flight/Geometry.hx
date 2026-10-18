@@ -83,7 +83,7 @@ inline function appendMatrix4(out:flight.Matrix4Like, source:flight.Matrix4Like,
 }
 
 inline function appendRotationMatrix4(out:flight.Matrix4Like, source:flight.Matrix4Like, radians:Float, axis:flight.Vector4Like, ?pivotPoint:flight.Vector4Like):Void {
-  flight._js._fn.Geometry.appendRotationMatrix4(out, source, radians, axis, pivotPoint);
+  flight._js._fn.Geometry.appendRotationMatrix4(out, source, radians, axis, (pivotPoint == null ? js.Syntax.code("undefined") : pivotPoint));
 }
 
 inline function appendScaleMatrix4(out:flight.Matrix4Like, source:flight.Matrix4Like, xScale:Float, yScale:Float, zScale:Float):Void {
@@ -311,11 +311,11 @@ inline function copyVector4(out:flight.Vector4Like, source:flight.Vector4Like):V
 }
 
 inline function createAabb(?minX:Float, ?minY:Float, ?minZ:Float, ?maxX:Float, ?maxY:Float, ?maxZ:Float):flight.Aabb {
-  return flight._js._fn.Geometry.createAabb(minX, minY, minZ, maxX, maxY, maxZ);
+  return flight._js._fn.Geometry.createAabb((minX == null ? js.Syntax.code("undefined") : minX), (minY == null ? js.Syntax.code("undefined") : minY), (minZ == null ? js.Syntax.code("undefined") : minZ), (maxX == null ? js.Syntax.code("undefined") : maxX), (maxY == null ? js.Syntax.code("undefined") : maxY), (maxZ == null ? js.Syntax.code("undefined") : maxZ));
 }
 
 inline function createBoundingSphere(?centerX:Float, ?centerY:Float, ?centerZ:Float, ?radius:Float):flight.BoundingSphere {
-  return flight._js._fn.Geometry.createBoundingSphere(centerX, centerY, centerZ, radius);
+  return flight._js._fn.Geometry.createBoundingSphere((centerX == null ? js.Syntax.code("undefined") : centerX), (centerY == null ? js.Syntax.code("undefined") : centerY), (centerZ == null ? js.Syntax.code("undefined") : centerZ), (radius == null ? js.Syntax.code("undefined") : radius));
 }
 
 inline function createCapsule(startX:Float, startY:Float, startZ:Float, endX:Float, endY:Float, endZ:Float, radius:Float):flight.Capsule {
@@ -327,23 +327,23 @@ inline function createFrustum():flight.Frustum {
 }
 
 inline function createGradientTransformMatrix(width:Float, height:Float, ?rotation:Float, ?tx:Float, ?ty:Float):flight.Matrix {
-  return flight._js._fn.Geometry.createGradientTransformMatrix(width, height, rotation, tx, ty);
+  return flight._js._fn.Geometry.createGradientTransformMatrix(width, height, (rotation == null ? js.Syntax.code("undefined") : rotation), (tx == null ? js.Syntax.code("undefined") : tx), (ty == null ? js.Syntax.code("undefined") : ty));
 }
 
 inline function createMatrix(?a:Float, ?b:Float, ?c:Float, ?d:Float, ?tx:Float, ?ty:Float):flight.Matrix {
-  return flight._js._fn.Geometry.createMatrix(a, b, c, d, tx, ty);
+  return flight._js._fn.Geometry.createMatrix((a == null ? js.Syntax.code("undefined") : a), (b == null ? js.Syntax.code("undefined") : b), (c == null ? js.Syntax.code("undefined") : c), (d == null ? js.Syntax.code("undefined") : d), (tx == null ? js.Syntax.code("undefined") : tx), (ty == null ? js.Syntax.code("undefined") : ty));
 }
 
 inline function createMatrix3(?m00:Float, ?m01:Float, ?m02:Float, ?m10:Float, ?m11:Float, ?m12:Float, ?m20:Float, ?m21:Float, ?m22:Float):flight.Matrix3 {
-  return flight._js._fn.Geometry.createMatrix3(m00, m01, m02, m10, m11, m12, m20, m21, m22);
+  return flight._js._fn.Geometry.createMatrix3((m00 == null ? js.Syntax.code("undefined") : m00), (m01 == null ? js.Syntax.code("undefined") : m01), (m02 == null ? js.Syntax.code("undefined") : m02), (m10 == null ? js.Syntax.code("undefined") : m10), (m11 == null ? js.Syntax.code("undefined") : m11), (m12 == null ? js.Syntax.code("undefined") : m12), (m20 == null ? js.Syntax.code("undefined") : m20), (m21 == null ? js.Syntax.code("undefined") : m21), (m22 == null ? js.Syntax.code("undefined") : m22));
 }
 
 inline function createMatrix4(?m00:Float, ?m01:Float, ?m02:Float, ?m03:Float, ?m10:Float, ?m11:Float, ?m12:Float, ?m13:Float, ?m20:Float, ?m21:Float, ?m22:Float, ?m23:Float, ?m30:Float, ?m31:Float, ?m32:Float, ?m33:Float):flight.Matrix4 {
-  return flight._js._fn.Geometry.createMatrix4(m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23, m30, m31, m32, m33);
+  return flight._js._fn.Geometry.createMatrix4((m00 == null ? js.Syntax.code("undefined") : m00), (m01 == null ? js.Syntax.code("undefined") : m01), (m02 == null ? js.Syntax.code("undefined") : m02), (m03 == null ? js.Syntax.code("undefined") : m03), (m10 == null ? js.Syntax.code("undefined") : m10), (m11 == null ? js.Syntax.code("undefined") : m11), (m12 == null ? js.Syntax.code("undefined") : m12), (m13 == null ? js.Syntax.code("undefined") : m13), (m20 == null ? js.Syntax.code("undefined") : m20), (m21 == null ? js.Syntax.code("undefined") : m21), (m22 == null ? js.Syntax.code("undefined") : m22), (m23 == null ? js.Syntax.code("undefined") : m23), (m30 == null ? js.Syntax.code("undefined") : m30), (m31 == null ? js.Syntax.code("undefined") : m31), (m32 == null ? js.Syntax.code("undefined") : m32), (m33 == null ? js.Syntax.code("undefined") : m33));
 }
 
 inline function createMatrix4From2D(a:Float, b:Float, c:Float, d:Float, ?tx:Float, ?ty:Float):flight.Matrix4 {
-  return flight._js._fn.Geometry.createMatrix4From2D(a, b, c, d, tx, ty);
+  return flight._js._fn.Geometry.createMatrix4From2D(a, b, c, d, (tx == null ? js.Syntax.code("undefined") : tx), (ty == null ? js.Syntax.code("undefined") : ty));
 }
 
 inline function createObb(centerX:Float, centerY:Float, centerZ:Float, halfExtentX:Float, halfExtentY:Float, halfExtentZ:Float, orientationX:Float, orientationY:Float, orientationZ:Float, orientationW:Float):flight.Obb {
@@ -359,23 +359,23 @@ inline function createPerspectiveMatrix4(tanHalfFovY:Float, aspect:Float, zNear:
 }
 
 inline function createPlane(?a:Float, ?b:Float, ?c:Float, ?d:Float):flight.Plane {
-  return flight._js._fn.Geometry.createPlane(a, b, c, d);
+  return flight._js._fn.Geometry.createPlane((a == null ? js.Syntax.code("undefined") : a), (b == null ? js.Syntax.code("undefined") : b), (c == null ? js.Syntax.code("undefined") : c), (d == null ? js.Syntax.code("undefined") : d));
 }
 
 inline function createQuaternion(?x:Float, ?y:Float, ?z:Float, ?w:Float):flight.Quaternion {
-  return flight._js._fn.Geometry.createQuaternion(x, y, z, w);
+  return flight._js._fn.Geometry.createQuaternion((x == null ? js.Syntax.code("undefined") : x), (y == null ? js.Syntax.code("undefined") : y), (z == null ? js.Syntax.code("undefined") : z), (w == null ? js.Syntax.code("undefined") : w));
 }
 
 inline function createRay3D(?originX:Float, ?originY:Float, ?originZ:Float, ?directionX:Float, ?directionY:Float, ?directionZ:Float):flight.Ray3D {
-  return flight._js._fn.Geometry.createRay3D(originX, originY, originZ, directionX, directionY, directionZ);
+  return flight._js._fn.Geometry.createRay3D((originX == null ? js.Syntax.code("undefined") : originX), (originY == null ? js.Syntax.code("undefined") : originY), (originZ == null ? js.Syntax.code("undefined") : originZ), (directionX == null ? js.Syntax.code("undefined") : directionX), (directionY == null ? js.Syntax.code("undefined") : directionY), (directionZ == null ? js.Syntax.code("undefined") : directionZ));
 }
 
 inline function createRectangle(?x:Float, ?y:Float, ?width:Float, ?height:Float):flight.Rectangle {
-  return flight._js._fn.Geometry.createRectangle(x, y, width, height);
+  return flight._js._fn.Geometry.createRectangle((x == null ? js.Syntax.code("undefined") : x), (y == null ? js.Syntax.code("undefined") : y), (width == null ? js.Syntax.code("undefined") : width), (height == null ? js.Syntax.code("undefined") : height));
 }
 
 inline function createTransform2D(?x:Float, ?y:Float, ?rotation:Float, ?scaleX:Float, ?scaleY:Float, ?skewX:Float, ?skewY:Float, ?pivotX:Float, ?pivotY:Float):flight.Transform2D {
-  return flight._js._fn.Geometry.createTransform2D(x, y, rotation, scaleX, scaleY, skewX, skewY, pivotX, pivotY);
+  return flight._js._fn.Geometry.createTransform2D((x == null ? js.Syntax.code("undefined") : x), (y == null ? js.Syntax.code("undefined") : y), (rotation == null ? js.Syntax.code("undefined") : rotation), (scaleX == null ? js.Syntax.code("undefined") : scaleX), (scaleY == null ? js.Syntax.code("undefined") : scaleY), (skewX == null ? js.Syntax.code("undefined") : skewX), (skewY == null ? js.Syntax.code("undefined") : skewY), (pivotX == null ? js.Syntax.code("undefined") : pivotX), (pivotY == null ? js.Syntax.code("undefined") : pivotY));
 }
 
 inline function createTransform3D():flight.Transform3D {
@@ -383,11 +383,11 @@ inline function createTransform3D():flight.Transform3D {
 }
 
 inline function createTransformMatrix(scaleX:Float, scaleY:Float, ?rotation:Float, ?tx:Float, ?ty:Float):flight.Matrix {
-  return flight._js._fn.Geometry.createTransformMatrix(scaleX, scaleY, rotation, tx, ty);
+  return flight._js._fn.Geometry.createTransformMatrix(scaleX, scaleY, (rotation == null ? js.Syntax.code("undefined") : rotation), (tx == null ? js.Syntax.code("undefined") : tx), (ty == null ? js.Syntax.code("undefined") : ty));
 }
 
 inline function createVector2(?x:Float, ?y:Float):flight.Vector2 {
-  return flight._js._fn.Geometry.createVector2(x, y);
+  return flight._js._fn.Geometry.createVector2((x == null ? js.Syntax.code("undefined") : x), (y == null ? js.Syntax.code("undefined") : y));
 }
 
 inline function createVector2FromPolar(length:Float, angle:Float):flight.Vector2 {
@@ -395,7 +395,7 @@ inline function createVector2FromPolar(length:Float, angle:Float):flight.Vector2
 }
 
 inline function createVector3(?x:Float, ?y:Float, ?z:Float):flight.Vector3 {
-  return flight._js._fn.Geometry.createVector3(x, y, z);
+  return flight._js._fn.Geometry.createVector3((x == null ? js.Syntax.code("undefined") : x), (y == null ? js.Syntax.code("undefined") : y), (z == null ? js.Syntax.code("undefined") : z));
 }
 
 inline function createVector3FromSpherical(radius:Float, theta:Float, phi:Float):flight.Vector3 {
@@ -403,7 +403,7 @@ inline function createVector3FromSpherical(radius:Float, theta:Float, phi:Float)
 }
 
 inline function createVector4(?x:Float, ?y:Float, ?z:Float, ?w:Float):flight.Vector4 {
-  return flight._js._fn.Geometry.createVector4(x, y, z, w);
+  return flight._js._fn.Geometry.createVector4((x == null ? js.Syntax.code("undefined") : x), (y == null ? js.Syntax.code("undefined") : y), (z == null ? js.Syntax.code("undefined") : z), (w == null ? js.Syntax.code("undefined") : w));
 }
 
 inline function crossVector2(a:flight.Vector2Like, b:flight.Vector2Like):Float {
@@ -451,7 +451,7 @@ inline function enclosesRectangle(source:flight.RectangleLike, other:flight.Rect
 }
 
 inline function equalsMatrix(a:Dynamic, b:Dynamic, ?compareTranslation:Bool):Bool {
-  return flight._js._fn.Geometry.equalsMatrix(a, b, compareTranslation);
+  return flight._js._fn.Geometry.equalsMatrix(a, b, (compareTranslation == null ? js.Syntax.code("undefined") : compareTranslation));
 }
 
 inline function equalsMatrix3(a:Dynamic, b:Dynamic):Bool {
@@ -579,7 +579,7 @@ inline function getQuaternionDot(a:flight.QuaternionLike, b:flight.QuaternionLik
 }
 
 inline function getQuaternionEuler(out:flight.Vector3Like, source:flight.QuaternionLike, ?order:flight.EulerOrder):Void {
-  flight._js._fn.Geometry.getQuaternionEuler(out, source, order);
+  flight._js._fn.Geometry.getQuaternionEuler(out, source, (order == null ? js.Syntax.code("undefined") : order));
 }
 
 inline function getRay3DPointAt(out:flight.Vector3Like, ray:flight.Ray3DLike, t:Float):Void {
@@ -1043,15 +1043,15 @@ inline function multiplyVector4(out:flight.Vector4Like, a:flight.Vector4Like, b:
 }
 
 inline function nearEqualsVector2(a:flight.Vector2Like, b:flight.Vector2Like, ?tolerance:Float):Bool {
-  return flight._js._fn.Geometry.nearEqualsVector2(a, b, tolerance);
+  return flight._js._fn.Geometry.nearEqualsVector2(a, b, (tolerance == null ? js.Syntax.code("undefined") : tolerance));
 }
 
 inline function nearEqualsVector3(a:flight.Vector3Like, b:flight.Vector3Like, ?tolerance:Float):Bool {
-  return flight._js._fn.Geometry.nearEqualsVector3(a, b, tolerance);
+  return flight._js._fn.Geometry.nearEqualsVector3(a, b, (tolerance == null ? js.Syntax.code("undefined") : tolerance));
 }
 
 inline function nearEqualsVector4(a:flight.Vector4Like, b:flight.Vector4Like, ?tolerance:Float):Bool {
-  return flight._js._fn.Geometry.nearEqualsVector4(a, b, tolerance);
+  return flight._js._fn.Geometry.nearEqualsVector4(a, b, (tolerance == null ? js.Syntax.code("undefined") : tolerance));
 }
 
 inline function negateVector2(out:flight.Vector2Like, source:flight.Vector2Like):Void {
@@ -1115,7 +1115,7 @@ inline function prependMatrix4(out:flight.Matrix4Like, source:flight.Matrix4Like
 }
 
 inline function prependRotationMatrix4(out:flight.Matrix4Like, source:flight.Matrix4Like, radians:Float, axis:flight.Vector4Like, ?pivotPoint:flight.Vector4Like):Void {
-  flight._js._fn.Geometry.prependRotationMatrix4(out, source, radians, axis, pivotPoint);
+  flight._js._fn.Geometry.prependRotationMatrix4(out, source, radians, axis, (pivotPoint == null ? js.Syntax.code("undefined") : pivotPoint));
 }
 
 inline function prependScaleMatrix4(out:flight.Matrix4Like, source:flight.Matrix4Like, xScale:Float, yScale:Float, zScale:Float):Void {
@@ -1275,7 +1275,7 @@ inline function setGeometryPoolReleaseGuard(guard:Null<(Dynamic)->Void>):Void {
 }
 
 inline function setGradientTransformMatrix(out:flight.MatrixLike, width:Float, height:Float, ?rotation:Float, ?tx:Float, ?ty:Float):Void {
-  flight._js._fn.Geometry.setGradientTransformMatrix(out, width, height, rotation, tx, ty);
+  flight._js._fn.Geometry.setGradientTransformMatrix(out, width, height, (rotation == null ? js.Syntax.code("undefined") : rotation), (tx == null ? js.Syntax.code("undefined") : tx), (ty == null ? js.Syntax.code("undefined") : ty));
 }
 
 inline function setMatrix(out:flight.MatrixLike, a:Float, b:Float, c:Float, d:Float, tx:Float, ty:Float):Void {
@@ -1319,7 +1319,7 @@ inline function setMatrix4Element(out:flight.Matrix4Like, row:Float, column:Floa
 }
 
 inline function setMatrix4From2D(out:flight.Matrix4Like, a:Float, b:Float, c:Float, d:Float, ?tx:Float, ?ty:Float):Void {
-  flight._js._fn.Geometry.setMatrix4From2D(out, a, b, c, d, tx, ty);
+  flight._js._fn.Geometry.setMatrix4From2D(out, a, b, c, d, (tx == null ? js.Syntax.code("undefined") : tx), (ty == null ? js.Syntax.code("undefined") : ty));
 }
 
 inline function setMatrix4FromFloat32Array(out:flight.Matrix4Like, offset:Float, source:flight._internal._Float32Array):Void {
@@ -1399,7 +1399,7 @@ inline function setQuaternionFromAxisAngle(out:flight.QuaternionLike, axis:fligh
 }
 
 inline function setQuaternionFromEuler(out:flight.QuaternionLike, x:Float, y:Float, z:Float, ?order:flight.EulerOrder):Void {
-  flight._js._fn.Geometry.setQuaternionFromEuler(out, x, y, z, order);
+  flight._js._fn.Geometry.setQuaternionFromEuler(out, x, y, z, (order == null ? js.Syntax.code("undefined") : order));
 }
 
 inline function setQuaternionFromMatrix4(out:flight.QuaternionLike, source:flight.Matrix4Like):Void {
@@ -1455,7 +1455,7 @@ inline function setRectangleTopLeft(out:flight.RectangleLike, point:flight.Vecto
 }
 
 inline function setTransformMatrix(out:flight.MatrixLike, scaleX:Float, scaleY:Float, ?rotation:Float, ?tx:Float, ?ty:Float):Void {
-  flight._js._fn.Geometry.setTransformMatrix(out, scaleX, scaleY, rotation, tx, ty);
+  flight._js._fn.Geometry.setTransformMatrix(out, scaleX, scaleY, (rotation == null ? js.Syntax.code("undefined") : rotation), (tx == null ? js.Syntax.code("undefined") : tx), (ty == null ? js.Syntax.code("undefined") : ty));
 }
 
 inline function setVector2(out:flight.Vector2Like, x:Float, y:Float):Void {
@@ -1499,7 +1499,7 @@ inline function setVector4FromFloat32Array(out:flight.Vector4Like, offset:Float,
 }
 
 inline function setVector4FromVector3(out:flight.Vector4Like, source:flight.Vector3Like, ?w:Float):Void {
-  flight._js._fn.Geometry.setVector4FromVector3(out, source, w);
+  flight._js._fn.Geometry.setVector4FromVector3(out, source, (w == null ? js.Syntax.code("undefined") : w));
 }
 
 inline function slerpQuaternion(out:flight.QuaternionLike, a:flight.QuaternionLike, b:flight.QuaternionLike, t:Float):Void {

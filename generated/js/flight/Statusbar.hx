@@ -59,7 +59,7 @@ inline function pushStatusBarStyleEntry(hostStatusBarColor:flight.HostStatusBarC
 }
 
 inline function setStatusBarColor(hostStatusBarColor:flight.HostStatusBarColorCapability, color:Float, ?animated:Bool):Void {
-  flight._js._fn.Statusbar.setStatusBarColor(hostStatusBarColor, color, animated);
+  flight._js._fn.Statusbar.setStatusBarColor(hostStatusBarColor, color, (animated == null ? js.Syntax.code("undefined") : animated));
 }
 
 inline function setStatusBarOverlaysContent(hostStatusBarOverlays:flight.HostStatusBarOverlaysCapability, overlay:Bool):Void {
@@ -71,6 +71,6 @@ inline function setStatusBarStyle(hostStatusBarStyle:flight.HostStatusBarStyleCa
 }
 
 inline function setStatusBarVisible(hostStatusBarVisibility:flight.HostStatusBarVisibilityCapability, visible:Bool, ?animation:flight.StatusBarAnimation):Void {
-  flight._js._fn.Statusbar.setStatusBarVisible(hostStatusBarVisibility, visible, animation);
+  flight._js._fn.Statusbar.setStatusBarVisible(hostStatusBarVisibility, visible, (animation == null ? js.Syntax.code("undefined") : animation));
 }
 #end

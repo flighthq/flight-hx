@@ -7,7 +7,7 @@ inline function canPlayVideoType(backend:flight.HostVideoCapability, mimeType:St
 }
 
 inline function createVideoResource(?element:flight.HostImageSource, ?objectUrl:String, ?ownsElement:Bool):flight.VideoResource {
-  return flight._js._fn.Video.createVideoResource(element, objectUrl, ownsElement);
+  return flight._js._fn.Video.createVideoResource((element == null ? js.Syntax.code("undefined") : element), (objectUrl == null ? js.Syntax.code("undefined") : objectUrl), (ownsElement == null ? js.Syntax.code("undefined") : ownsElement));
 }
 
 inline function destroyVideoResource(hostVideo:flight.HostVideoCapability, resource:flight.VideoResource):Void {
@@ -43,7 +43,7 @@ inline function inferVideoMimeType(url:String):Null<String> {
 }
 
 inline function initializeVideoResource(out:flight.EntityConstruction<flight.VideoResource>, ?element:flight.HostImageSource, ?objectUrl:String, ?ownsElement:Bool):Void {
-  flight._js._fn.Video.initializeVideoResource(out, element, objectUrl, ownsElement);
+  flight._js._fn.Video.initializeVideoResource(out, (element == null ? js.Syntax.code("undefined") : element), (objectUrl == null ? js.Syntax.code("undefined") : objectUrl), (ownsElement == null ? js.Syntax.code("undefined") : ownsElement));
 }
 
 inline function isVideoResourceEmpty(hostVideo:flight.HostVideoCapability, resource:flight.VideoResource):Bool {
@@ -55,15 +55,15 @@ inline function isVideoResourceReady(hostVideo:flight.HostVideoCapability, resou
 }
 
 inline function loadVideoResourceFromBlob(hostVideo:flight.HostVideoCapability, blob:js.html.Blob, ?options:flight.VideoResourceLoadOptions, ?signal:js.html.AbortSignal):flight._internal._Promise<flight.VideoResource> {
-  return flight._js._fn.Video.loadVideoResourceFromBlob(hostVideo, blob, options, signal);
+  return flight._js._fn.Video.loadVideoResourceFromBlob(hostVideo, blob, (options == null ? js.Syntax.code("undefined") : options), (signal == null ? js.Syntax.code("undefined") : signal));
 }
 
 inline function loadVideoResourceFromUrl(hostVideo:flight.HostVideoCapability, url:String, ?options:flight.VideoResourceLoadOptions, ?signal:js.html.AbortSignal):flight._internal._Promise<flight.VideoResource> {
-  return flight._js._fn.Video.loadVideoResourceFromUrl(hostVideo, url, options, signal);
+  return flight._js._fn.Video.loadVideoResourceFromUrl(hostVideo, url, (options == null ? js.Syntax.code("undefined") : options), (signal == null ? js.Syntax.code("undefined") : signal));
 }
 
 inline function loadVideoResourceFromUrls(hostVideo:flight.HostVideoCapability, sources:Array<flight.VideoResourceUrl>, ?options:flight.VideoResourceLoadOptions, ?signal:js.html.AbortSignal):flight._internal._Promise<flight.VideoResource> {
-  return flight._js._fn.Video.loadVideoResourceFromUrls(hostVideo, sources, options, signal);
+  return flight._js._fn.Video.loadVideoResourceFromUrls(hostVideo, sources, (options == null ? js.Syntax.code("undefined") : options), (signal == null ? js.Syntax.code("undefined") : signal));
 }
 
 inline function selectVideoResourceUrl(backend:flight.HostVideoCapability, sources:Array<flight.VideoResourceUrl>):Null<flight.VideoResourceUrl> {

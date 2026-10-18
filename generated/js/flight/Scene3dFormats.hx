@@ -3,7 +3,7 @@
 package flight;
 
 inline function appendColladaMaterials(root:flight.XmlElement, materials:Array<flight.MaterialLike>, resources:Array<flight.ImageResourceReference>, materialIndices:flight._internal._Map<String, Float>, ?baseUrl:Null<String>, ?diagnostics:Array<flight.ImportDiagnostic>):Void {
-  flight._js._fn.Scene3dFormats.appendColladaMaterials(root, materials, resources, materialIndices, baseUrl, diagnostics);
+  flight._js._fn.Scene3dFormats.appendColladaMaterials(root, materials, resources, materialIndices, (baseUrl == null ? js.Syntax.code("undefined") : baseUrl), (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function applyColladaBindMaterial(document:flight.Scene3DDocument, meshIndex:Float, instanceElement:flight.XmlElement, primitiveSymbols:Null<Array<String>>, materialIndices:flight._internal._Map<String, Float>):Float {
@@ -31,11 +31,11 @@ inline function awdTransformToTransform3D(transform:flight._internal._Float64Arr
 }
 
 inline function buildAsciiStl(facets:Array<{ normal:Array<Float>, vertices:Array<Array<Float>> }>, ?name:String):String {
-  return flight._js._fn.Scene3dFormats.buildAsciiStl(facets, name);
+  return flight._js._fn.Scene3dFormats.buildAsciiStl(facets, (name == null ? js.Syntax.code("undefined") : name));
 }
 
 inline function buildBinaryStl(facets:Array<{ normal:Array<Float>, vertices:Array<Array<Float>> }>, ?header:String):flight._internal._UInt8Array {
-  return flight._js._fn.Scene3dFormats.buildBinaryStl(facets, header);
+  return flight._js._fn.Scene3dFormats.buildBinaryStl(facets, (header == null ? js.Syntax.code("undefined") : header));
 }
 
 inline function buildColladaNodeWorldMatrices(nodes:Array<flight.Scene3DDocumentNode>, rootNodeIndices:Array<Float>):Array<Null<flight.Matrix4Like>> {
@@ -143,11 +143,11 @@ inline function collectThreeDsPivots(view:flight._internal._DataView, offset:Flo
 }
 
 inline function convertPositionsZUpToYUp(values:flight.MutableNumberArray, ?stride:Float, ?offset:Float):Void {
-  flight._js._fn.Scene3dFormats.convertPositionsZUpToYUp(values, stride, offset);
+  flight._js._fn.Scene3dFormats.convertPositionsZUpToYUp(values, (stride == null ? js.Syntax.code("undefined") : stride), (offset == null ? js.Syntax.code("undefined") : offset));
 }
 
 inline function convertQuaternionsZUpToYUp(values:flight.MutableNumberArray, ?stride:Float, ?offset:Float):Void {
-  flight._js._fn.Scene3dFormats.convertQuaternionsZUpToYUp(values, stride, offset);
+  flight._js._fn.Scene3dFormats.convertQuaternionsZUpToYUp(values, (stride == null ? js.Syntax.code("undefined") : stride), (offset == null ? js.Syntax.code("undefined") : offset));
 }
 
 inline function convertTransformLhToRh(transform:flight._internal._Float64Array):Void {
@@ -163,67 +163,67 @@ inline function createAwd2ParseState(document:flight.Scene3DDocument, source:fli
 }
 
 inline function createEmbeddedTextureRef(bytes:flight._internal._UInt8Array, mimeType:Null<String>, ?resources:Array<flight.ImageResourceReference>):flight.Texture {
-  return flight._js._fn.Scene3dFormats.createEmbeddedTextureRef(bytes, mimeType, resources);
+  return flight._js._fn.Scene3dFormats.createEmbeddedTextureRef(bytes, mimeType, (resources == null ? js.Syntax.code("undefined") : resources));
 }
 
 inline function createExternalTextureRef(uri:String, ?basePath:Null<String>, ?resources:Array<flight.ImageResourceReference>):flight.Texture {
-  return flight._js._fn.Scene3dFormats.createExternalTextureRef(uri, basePath, resources);
+  return flight._js._fn.Scene3dFormats.createExternalTextureRef(uri, (basePath == null ? js.Syntax.code("undefined") : basePath), (resources == null ? js.Syntax.code("undefined") : resources));
 }
 
 inline function createScene3DFrom3ds(bytes:flight._internal._UInt8Array, ?diagnostics:Array<flight.ImportDiagnostic>, ?options:flight.ThreeDsImportOptions):flight.Scene3D {
-  return flight._js._fn.Scene3dFormats.createScene3DFrom3ds(bytes, diagnostics, options);
+  return flight._js._fn.Scene3dFormats.createScene3DFrom3ds(bytes, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics), (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createScene3DFromAwd2(bytes:flight._internal._UInt8Array, options:flight.Awd2ParseOptions, ?diagnostics:Array<flight.ImportDiagnostic>):flight.Scene3D {
-  return flight._js._fn.Scene3dFormats.createScene3DFromAwd2(bytes, options, diagnostics);
+  return flight._js._fn.Scene3dFormats.createScene3DFromAwd2(bytes, options, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function createScene3DFromGlb(bytes:flight._internal._UInt8Array, ?diagnostics:Array<flight.ImportDiagnostic>, ?options:flight.GltfImportOptions):flight.Scene3D {
-  return flight._js._fn.Scene3dFormats.createScene3DFromGlb(bytes, diagnostics, options);
+  return flight._js._fn.Scene3dFormats.createScene3DFromGlb(bytes, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics), (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createScene3DFromGlbWithCoreFeatureHandlers(bytes:flight._internal._UInt8Array, coreFeatureHandlers:Array<flight.GltfCoreFeatureHandler>, ?diagnostics:Array<flight.ImportDiagnostic>, ?options:flight.GltfImportOptions):flight.Scene3D {
-  return flight._js._fn.Scene3dFormats.createScene3DFromGlbWithCoreFeatureHandlers(bytes, coreFeatureHandlers, diagnostics, options);
+  return flight._js._fn.Scene3dFormats.createScene3DFromGlbWithCoreFeatureHandlers(bytes, coreFeatureHandlers, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics), (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createScene3DFromGltf(source:Dynamic, ?diagnostics:Array<flight.ImportDiagnostic>, ?options:flight.GltfImportOptions):flight.Scene3D {
-  return flight._js._fn.Scene3dFormats.createScene3DFromGltf(source, diagnostics, options);
+  return flight._js._fn.Scene3dFormats.createScene3DFromGltf(source, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics), (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createScene3DFromGltfWithCoreFeatureHandlers(source:Dynamic, coreFeatureHandlers:Array<flight.GltfCoreFeatureHandler>, ?diagnostics:Array<flight.ImportDiagnostic>, ?options:flight.GltfImportOptions):flight.Scene3D {
-  return flight._js._fn.Scene3dFormats.createScene3DFromGltfWithCoreFeatureHandlers(source, coreFeatureHandlers, diagnostics, options);
+  return flight._js._fn.Scene3dFormats.createScene3DFromGltfWithCoreFeatureHandlers(source, coreFeatureHandlers, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics), (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createScene3DFromMd2(bytes:flight._internal._UInt8Array, ?diagnostics:Array<flight.ImportDiagnostic>, ?options:flight.Md2ImportOptions):flight.Scene3D {
-  return flight._js._fn.Scene3dFormats.createScene3DFromMd2(bytes, diagnostics, options);
+  return flight._js._fn.Scene3dFormats.createScene3DFromMd2(bytes, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics), (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createScene3DFromMd5Mesh(source:String, ?diagnostics:Array<flight.ImportDiagnostic>, ?options:flight.Md5ImportOptions):flight.Scene3D {
-  return flight._js._fn.Scene3dFormats.createScene3DFromMd5Mesh(source, diagnostics, options);
+  return flight._js._fn.Scene3dFormats.createScene3DFromMd5Mesh(source, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics), (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createScene3DFromObj(source:String, ?materials:flight.ObjMaterialLibrary, ?diagnostics:Array<flight.ImportDiagnostic>, ?options:flight.ObjImportOptions):flight.Scene3D {
-  return flight._js._fn.Scene3dFormats.createScene3DFromObj(source, materials, diagnostics, options);
+  return flight._js._fn.Scene3dFormats.createScene3DFromObj(source, (materials == null ? js.Syntax.code("undefined") : materials), (diagnostics == null ? js.Syntax.code("undefined") : diagnostics), (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createScene3DsFromGlb(bytes:flight._internal._UInt8Array, ?diagnostics:Array<flight.ImportDiagnostic>, ?options:flight.GltfImportOptions):Array<flight.Scene3D> {
-  return flight._js._fn.Scene3dFormats.createScene3DsFromGlb(bytes, diagnostics, options);
+  return flight._js._fn.Scene3dFormats.createScene3DsFromGlb(bytes, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics), (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createScene3DsFromGltf(source:Dynamic, ?diagnostics:Array<flight.ImportDiagnostic>, ?options:flight.GltfImportOptions):Array<flight.Scene3D> {
-  return flight._js._fn.Scene3dFormats.createScene3DsFromGltf(source, diagnostics, options);
+  return flight._js._fn.Scene3dFormats.createScene3DsFromGltf(source, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics), (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function decodeColladaAnimations(xml:String, ?diagnostics:Array<flight.ImportDiagnostic>):Array<flight.ColladaDecodedAnimationChannel> {
-  return flight._js._fn.Scene3dFormats.decodeColladaAnimations(xml, diagnostics);
+  return flight._js._fn.Scene3dFormats.decodeColladaAnimations(xml, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function decodeColladaControllers(xml:String, ?diagnostics:Array<flight.ImportDiagnostic>):Array<flight.ColladaDecodedSkin> {
-  return flight._js._fn.Scene3dFormats.decodeColladaControllers(xml, diagnostics);
+  return flight._js._fn.Scene3dFormats.decodeColladaControllers(xml, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function decodeColladaMorphs(xml:String, ?diagnostics:Array<flight.ImportDiagnostic>):Array<flight.ColladaDecodedMorph> {
-  return flight._js._fn.Scene3dFormats.decodeColladaMorphs(xml, diagnostics);
+  return flight._js._fn.Scene3dFormats.decodeColladaMorphs(xml, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function expandAwd2BlockDispatch(blocks:Array<flight.Awd2BlockHandler>):flight.Awd2BlockDispatch {
@@ -283,7 +283,7 @@ inline function hasObjPbrDirectives(material:flight.ObjMaterial):Bool {
 }
 
 inline function importMd5Mesh(meshSource:String, ?animSource:Null<String>, ?diagnostics:Array<flight.ImportDiagnostic>, ?options:flight.Md5ImportOptions):flight.Scene3D {
-  return flight._js._fn.Scene3dFormats.importMd5Mesh(meshSource, animSource, diagnostics, options);
+  return flight._js._fn.Scene3dFormats.importMd5Mesh(meshSource, (animSource == null ? js.Syntax.code("undefined") : animSource), (diagnostics == null ? js.Syntax.code("undefined") : diagnostics), (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function initializeAwd2ParseState(out:flight.EntityConstruction<flight.Awd2ParseState>, document:flight.Scene3DDocument, source:flight._internal._UInt8Array, view:flight._internal._DataView, diagnostics:Null<Array<flight.ImportDiagnostic>>):Void {
@@ -319,15 +319,15 @@ inline function packSkinInfluences(influences:Array<flight.SkinInfluence>, outJo
 }
 
 inline function packThreeDsColor(rgb:Array<Float>, ?alpha:Float):Float {
-  return flight._js._fn.Scene3dFormats.packThreeDsColor(rgb, alpha);
+  return flight._js._fn.Scene3dFormats.packThreeDsColor(rgb, (alpha == null ? js.Syntax.code("undefined") : alpha));
 }
 
 inline function parse3ds(bytes:flight._internal._UInt8Array, ?diagnostics:Array<flight.ImportDiagnostic>, ?options:flight.ThreeDsImportOptions):flight.Scene3DDocument {
-  return flight._js._fn.Scene3dFormats.parse3ds(bytes, diagnostics, options);
+  return flight._js._fn.Scene3dFormats.parse3ds(bytes, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics), (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function parseAwd2(bytes:flight._internal._UInt8Array, options:flight.Awd2ParseOptions, ?diagnostics:Array<flight.ImportDiagnostic>):flight.Scene3DDocument {
-  return flight._js._fn.Scene3dFormats.parseAwd2(bytes, options, diagnostics);
+  return flight._js._fn.Scene3dFormats.parseAwd2(bytes, options, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function parseAwd2Header(source:flight._internal._UInt8Array, _deflate:Null<flight.HostDecompressDeflateCapability>, _lzma:Null<flight.HostDecompressLzmaCapability>):Null<flight.Awd2Header> {
@@ -339,7 +339,7 @@ inline function parseAwd2Requirements(source:flight._internal._UInt8Array, defla
 }
 
 inline function parseCollada(xml:String, ?options:flight.ColladaImportOptions):flight.ColladaParseResult {
-  return flight._js._fn.Scene3dFormats.parseCollada(xml, options);
+  return flight._js._fn.Scene3dFormats.parseCollada(xml, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function parseColladaBindMaterial(instanceElement:flight.XmlElement, materialIndices:flight._internal._Map<String, Float>):flight._internal._Map<String, Float> {
@@ -355,7 +355,7 @@ inline function parseColladaRequirements(xml:String):flight.RequirementSet {
 }
 
 inline function parseColladaWithDecoders(xml:String, decoders:Array<flight.ColladaElementDecoder>, ?options:flight.ColladaImportOptions):flight.ColladaParseResult {
-  return flight._js._fn.Scene3dFormats.parseColladaWithDecoders(xml, decoders, options);
+  return flight._js._fn.Scene3dFormats.parseColladaWithDecoders(xml, decoders, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function parseColorChunk(view:flight._internal._DataView, offset:Float, end:Float):Null<Array<Float>> {
@@ -363,7 +363,7 @@ inline function parseColorChunk(view:flight._internal._DataView, offset:Float, e
 }
 
 inline function parseGlb(bytes:flight._internal._UInt8Array, ?diagnostics:Array<flight.ImportDiagnostic>, ?options:flight.GltfImportOptions):flight.Scene3DDocument {
-  return flight._js._fn.Scene3dFormats.parseGlb(bytes, diagnostics, options);
+  return flight._js._fn.Scene3dFormats.parseGlb(bytes, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics), (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function parseGlbRequirements(source:flight._internal._UInt8Array):flight.RequirementSet {
@@ -371,11 +371,11 @@ inline function parseGlbRequirements(source:flight._internal._UInt8Array):flight
 }
 
 inline function parseGlbWithCoreFeatureHandlers(bytes:flight._internal._UInt8Array, coreFeatureHandlers:Array<flight.GltfCoreFeatureHandler>, ?diagnostics:Array<flight.ImportDiagnostic>, ?options:flight.GltfImportOptions):flight.Scene3DDocument {
-  return flight._js._fn.Scene3dFormats.parseGlbWithCoreFeatureHandlers(bytes, coreFeatureHandlers, diagnostics, options);
+  return flight._js._fn.Scene3dFormats.parseGlbWithCoreFeatureHandlers(bytes, coreFeatureHandlers, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics), (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function parseGltf(source:Dynamic, ?diagnostics:Array<flight.ImportDiagnostic>, ?options:flight.GltfImportOptions):flight.Scene3DDocument {
-  return flight._js._fn.Scene3dFormats.parseGltf(source, diagnostics, options);
+  return flight._js._fn.Scene3dFormats.parseGltf(source, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics), (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function parseGltfRequirements(source:Dynamic):flight.RequirementSet {
@@ -383,11 +383,11 @@ inline function parseGltfRequirements(source:Dynamic):flight.RequirementSet {
 }
 
 inline function parseGltfWithCoreFeatureHandlers(source:Dynamic, coreFeatureHandlers:Array<flight.GltfCoreFeatureHandler>, ?diagnostics:Array<flight.ImportDiagnostic>, ?options:flight.GltfImportOptions):flight.Scene3DDocument {
-  return flight._js._fn.Scene3dFormats.parseGltfWithCoreFeatureHandlers(source, coreFeatureHandlers, diagnostics, options);
+  return flight._js._fn.Scene3dFormats.parseGltfWithCoreFeatureHandlers(source, coreFeatureHandlers, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics), (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function parseMd2(bytes:flight._internal._UInt8Array, ?diagnostics:Array<flight.ImportDiagnostic>, ?options:flight.Md2ImportOptions):flight.Scene3DDocument {
-  return flight._js._fn.Scene3dFormats.parseMd2(bytes, diagnostics, options);
+  return flight._js._fn.Scene3dFormats.parseMd2(bytes, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics), (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function parseMd2Requirements(source:flight._internal._UInt8Array):flight.RequirementSet {
@@ -399,7 +399,7 @@ inline function parseMd2WithSectionHandlers(bytes:flight._internal._UInt8Array, 
 }
 
 inline function parseMd5Anim(source:String, joints:Array<flight.Node3D>, ?diagnostics:Array<flight.ImportDiagnostic>):Null<flight.AnimationClip> {
-  return flight._js._fn.Scene3dFormats.parseMd5Anim(source, joints, diagnostics);
+  return flight._js._fn.Scene3dFormats.parseMd5Anim(source, joints, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function parseMd5AnimRequirements(source:String):flight.RequirementSet {
@@ -407,7 +407,7 @@ inline function parseMd5AnimRequirements(source:String):flight.RequirementSet {
 }
 
 inline function parseMd5Mesh(source:String, ?diagnostics:Array<flight.ImportDiagnostic>, ?options:flight.Md5ImportOptions):flight.Scene3DDocument {
-  return flight._js._fn.Scene3dFormats.parseMd5Mesh(source, diagnostics, options);
+  return flight._js._fn.Scene3dFormats.parseMd5Mesh(source, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics), (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function parseMd5MeshRequirements(source:String):flight.RequirementSet {
@@ -419,15 +419,15 @@ inline function parseMd5MeshWithSectionHandlers(source:String, diagnostics:Null<
 }
 
 inline function parseObj(source:String, ?materials:flight.ObjMaterialLibrary, ?diagnostics:Array<flight.ImportDiagnostic>, ?options:flight.ObjImportOptions):flight.Scene3DDocument {
-  return flight._js._fn.Scene3dFormats.parseObj(source, materials, diagnostics, options);
+  return flight._js._fn.Scene3dFormats.parseObj(source, (materials == null ? js.Syntax.code("undefined") : materials), (diagnostics == null ? js.Syntax.code("undefined") : diagnostics), (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function parseObjMaterialLibrary(source:String, ?diagnostics:Array<flight.ImportDiagnostic>):flight.ObjMaterialLibrary {
-  return flight._js._fn.Scene3dFormats.parseObjMaterialLibrary(source, diagnostics);
+  return flight._js._fn.Scene3dFormats.parseObjMaterialLibrary(source, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function parseObjRequirements(source:String, ?materialLibraries:Array<String>):flight.RequirementSet {
-  return flight._js._fn.Scene3dFormats.parseObjRequirements(source, materialLibraries);
+  return flight._js._fn.Scene3dFormats.parseObjRequirements(source, (materialLibraries == null ? js.Syntax.code("undefined") : materialLibraries));
 }
 
 inline function parseObjWithMaterialHandlers(source:String, materials:Null<flight.ObjMaterialLibrary>, diagnostics:Null<Array<flight.ImportDiagnostic>>, materialHandlers:Array<flight.ObjMaterialHandler>):flight.Scene3DDocument {
@@ -435,7 +435,7 @@ inline function parseObjWithMaterialHandlers(source:String, materials:Null<fligh
 }
 
 inline function parseStl(bytes:flight._internal._UInt8Array, ?options:flight.StlImportOptions):Null<flight.MeshGeometry> {
-  return flight._js._fn.Scene3dFormats.parseStl(bytes, options);
+  return flight._js._fn.Scene3dFormats.parseStl(bytes, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function parseStlRequirements(bytes:flight._internal._UInt8Array):flight.RequirementSet {
@@ -551,7 +551,7 @@ inline function registerGltfSkinHandlers(handlers:Array<flight.GltfCoreFeatureHa
 }
 
 inline function rehydrateAwd2Body(input:flight._internal._UInt8Array, deflate:Null<flight.HostDecompressDeflateCapability>, lzma:Null<flight.HostDecompressLzmaCapability>, ?diagnostics:Array<flight.ImportDiagnostic>):Null<{ source:flight._internal._UInt8Array, view:flight._internal._DataView }> {
-  return flight._js._fn.Scene3dFormats.rehydrateAwd2Body(input, deflate, lzma, diagnostics);
+  return flight._js._fn.Scene3dFormats.rehydrateAwd2Body(input, deflate, lzma, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function resolveColladaPrimitiveSymbols(symbols:Null<Array<String>>, symbolToIndex:flight._internal._Map<String, Float>):Array<Float> {

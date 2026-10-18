@@ -3,7 +3,7 @@
 package flight;
 
 inline function explainUnpackedRectangles(rectangles:Array<flight.PackableRectangle>, ?options:flight.BinPackOptions):Array<flight.UnpackedRectangleExplanation> {
-  return flight._js._fn.Binpack.explainUnpackedRectangles(rectangles, options);
+  return flight._js._fn.Binpack.explainUnpackedRectangles(rectangles, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function getPackResultOccupancy(result:flight.PackResult):Float {
@@ -11,7 +11,7 @@ inline function getPackResultOccupancy(result:flight.PackResult):Float {
 }
 
 inline function packRectangles(rects:Array<flight.PackableRectangle>, ?options:flight.BinPackOptions):flight.PackResult {
-  return flight._js._fn.Binpack.packRectangles(rects, options);
+  return flight._js._fn.Binpack.packRectangles(rects, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 var BIN_PACK_DEFAULT_MAX_EXTENT(get, set):Float;

@@ -114,7 +114,12 @@ function emitExternPublicType(entry) {
 }
 
 function emitExternPublicFunction(entry) {
-  const arguments_ = entry.parameters.map(({ name, rest }) => `${rest ? '...' : ''}${name}`).join(', ');
+  const arguments_ = entry.parameters
+    .map(({ name, optional, rest }) => {
+      const value = optional ? `(${name} == null ? js.Syntax.code("undefined") : ${name})` : name;
+      return `${rest ? '...' : ''}${value}`;
+    })
+    .join(', ');
   const call = `flight._js._fn.${entry.holder}.${entry.publicName}(${arguments_})`;
   return `inline ${entry.signature} {\n  ${entry.returnType === 'Void' ? '' : 'return '}${call};\n}`;
 }
@@ -510,9 +515,10 @@ function parseParameter(parameter) {
   const colon = topLevelIndex(parameter, ':');
   const rawName = (colon === -1 ? parameter : parameter.slice(0, colon)).trim();
   const rest = rawName.startsWith('...');
+  const optional = rawName.startsWith('?');
   const name = rawName.replace(/^\.\.\./u, '').replace(/^\?/u, '').trim();
   if (!/^[A-Za-z_][A-Za-z0-9_]*$/u.test(name)) throw new Error(`Unsupported Haxe parameter: ${parameter}`);
-  return { name, rest };
+  return { name, optional, rest };
 }
 
 function typeArguments(parameters) {

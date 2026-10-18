@@ -25,7 +25,7 @@ inline function clearCommandHistory(history:flight.CommandHistory):Void {
 }
 
 inline function createAddNodeChildCommand(label:String, parent:flight.NodeAny, child:flight.NodeAny, ?index:Float):flight.AddNodeChildCommand {
-  return flight._js._fn.Command.createAddNodeChildCommand(label, parent, child, index);
+  return flight._js._fn.Command.createAddNodeChildCommand(label, parent, child, (index == null ? js.Syntax.code("undefined") : index));
 }
 
 inline function createCommandBindingTable():flight.CommandBindingTable {
@@ -33,7 +33,7 @@ inline function createCommandBindingTable():flight.CommandBindingTable {
 }
 
 inline function createCommandHistory(?maxSize:Float):flight.CommandHistory {
-  return flight._js._fn.Command.createCommandHistory(maxSize);
+  return flight._js._fn.Command.createCommandHistory((maxSize == null ? js.Syntax.code("undefined") : maxSize));
 }
 
 inline function createCompositeCommand(label:String, children:Array<flight.Command>):flight.CompositeCommand {
@@ -49,11 +49,11 @@ inline function createReorderNodeChildCommand(label:String, parent:flight.NodeAn
 }
 
 inline function createSetNodePropertyCommand(label:String, target:flight.NodeAny, property:String, value:Dynamic, ?mergeWindow:Float, ?time:Float):flight.SetNodePropertyCommand {
-  return flight._js._fn.Command.createSetNodePropertyCommand(label, target, property, value, mergeWindow, time);
+  return flight._js._fn.Command.createSetNodePropertyCommand(label, target, property, value, (mergeWindow == null ? js.Syntax.code("undefined") : mergeWindow), (time == null ? js.Syntax.code("undefined") : time));
 }
 
 inline function createSetNodePropertyCommandBatch(label:String, entries:Array<{ property:String, target:flight.NodeAny, value:Dynamic }>, ?mergeWindow:Float, ?time:Float):flight.SetNodePropertyCommand {
-  return flight._js._fn.Command.createSetNodePropertyCommandBatch(label, entries, mergeWindow, time);
+  return flight._js._fn.Command.createSetNodePropertyCommandBatch(label, entries, (mergeWindow == null ? js.Syntax.code("undefined") : mergeWindow), (time == null ? js.Syntax.code("undefined") : time));
 }
 
 inline function enableCommandHistorySignals(history:flight.CommandHistory):flight.Signal<()->Void> {
@@ -105,7 +105,7 @@ inline function initializeAddNodeChildCommand(out:flight.EntityConstruction<flig
 }
 
 inline function initializeCommandHistory(out:flight.EntityConstruction<flight.CommandHistory>, ?maxSize:Float):Void {
-  flight._js._fn.Command.initializeCommandHistory(out, maxSize);
+  flight._js._fn.Command.initializeCommandHistory(out, (maxSize == null ? js.Syntax.code("undefined") : maxSize));
 }
 
 inline function initializeCompositeCommand(out:flight.EntityConstruction<flight.CompositeCommand>, label:String, children:Array<flight.Command>):Void {

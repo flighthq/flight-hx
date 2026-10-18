@@ -35,7 +35,7 @@ inline function copyClipRegion(out:flight.ClipRegion, source:flight.ClipRegion):
 }
 
 inline function createClipRegionFromCircle(x:Float, y:Float, radius:Float, ?tolerance:Float):flight.ClipRegion {
-  return flight._js._fn.Clip.createClipRegionFromCircle(x, y, radius, tolerance);
+  return flight._js._fn.Clip.createClipRegionFromCircle(x, y, radius, (tolerance == null ? js.Syntax.code("undefined") : tolerance));
 }
 
 inline function createClipRegionFromContours(contours:Array<Array<Float>>, winding:flight.PathWinding):flight.ClipRegion {
@@ -43,11 +43,11 @@ inline function createClipRegionFromContours(contours:Array<Array<Float>>, windi
 }
 
 inline function createClipRegionFromEllipse(rectangle:flight.RectangleLike, ?tolerance:Float):flight.ClipRegion {
-  return flight._js._fn.Clip.createClipRegionFromEllipse(rectangle, tolerance);
+  return flight._js._fn.Clip.createClipRegionFromEllipse(rectangle, (tolerance == null ? js.Syntax.code("undefined") : tolerance));
 }
 
 inline function createClipRegionFromPath(path:flight.Path, ?tolerance:Float):flight.ClipRegion {
-  return flight._js._fn.Clip.createClipRegionFromPath(path, tolerance);
+  return flight._js._fn.Clip.createClipRegionFromPath(path, (tolerance == null ? js.Syntax.code("undefined") : tolerance));
 }
 
 inline function createClipRegionFromRectangle(rectangle:flight.RectangleLike):flight.ClipRegion {
@@ -55,7 +55,7 @@ inline function createClipRegionFromRectangle(rectangle:flight.RectangleLike):fl
 }
 
 inline function createClipRegionFromRoundedRectangle(rectangle:flight.RectangleLike, radius:Float, ?tolerance:Float):flight.ClipRegion {
-  return flight._js._fn.Clip.createClipRegionFromRoundedRectangle(rectangle, radius, tolerance);
+  return flight._js._fn.Clip.createClipRegionFromRoundedRectangle(rectangle, radius, (tolerance == null ? js.Syntax.code("undefined") : tolerance));
 }
 
 inline function disableClipGuards():Void {
@@ -87,7 +87,7 @@ inline function initializeClipRegionFromContours(out:flight.EntityConstruction<f
 }
 
 inline function initializeClipRegionFromPath(out:flight.EntityConstruction<flight.ClipRegion>, path:flight.Path, ?tolerance:Float):Void {
-  flight._js._fn.Clip.initializeClipRegionFromPath(out, path, tolerance);
+  flight._js._fn.Clip.initializeClipRegionFromPath(out, path, (tolerance == null ? js.Syntax.code("undefined") : tolerance));
 }
 
 inline function initializeClipRegionFromRectangle(out:flight.EntityConstruction<flight.ClipRegion>, rectangle:flight.RectangleLike):Void {

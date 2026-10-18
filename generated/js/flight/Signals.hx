@@ -11,7 +11,7 @@ inline function clearSignal<T>(signal:flight.Signal<T>):Void {
 }
 
 inline function connectSignal<T>(signal:flight.Signal<T>, slot:T, ?options:flight.SignalConnectOptions):Void {
-  flight._js._fn.Signals.connectSignal(signal, slot, options);
+  flight._js._fn.Signals.connectSignal(signal, slot, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function connectSignalAtFrameRate(source:flight.Signal<(Float)->Void>, fps:Float, slot:(Float)->Void):()->Void {
@@ -19,15 +19,15 @@ inline function connectSignalAtFrameRate(source:flight.Signal<(Float)->Void>, fp
 }
 
 inline function connectSignalDebounced<T>(source:flight.Signal<T>, delayMs:Float, slot:T, ?options:flight.SignalThrottleOptions):()->Void {
-  return flight._js._fn.Signals.connectSignalDebounced(source, delayMs, slot, options);
+  return flight._js._fn.Signals.connectSignalDebounced(source, delayMs, slot, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function connectSignalThrottled<T>(source:flight.Signal<T>, intervalMs:Float, slot:T, ?options:flight.SignalThrottleOptions):()->Void {
-  return flight._js._fn.Signals.connectSignalThrottled(source, intervalMs, slot, options);
+  return flight._js._fn.Signals.connectSignalThrottled(source, intervalMs, slot, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function connectSignalTracked<T>(signal:flight.Signal<T>, slot:T, ?options:flight.SignalTrackedConnectOptions):flight.SignalConnection<T> {
-  return flight._js._fn.Signals.connectSignalTracked(signal, slot, options);
+  return flight._js._fn.Signals.connectSignalTracked(signal, slot, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createSignal<T>():flight.Signal<T> {

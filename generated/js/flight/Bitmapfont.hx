@@ -39,7 +39,7 @@ inline function getBitmapFontMetrics(font:flight.BitmapFont):flight.GlyphMetrics
 }
 
 inline function getBitmapFontPage(font:flight.BitmapFont, ?page:Float):Null<flight.TextureAtlas> {
-  return flight._js._fn.Bitmapfont.getBitmapFontPage(font, page);
+  return flight._js._fn.Bitmapfont.getBitmapFontPage(font, (page == null ? js.Syntax.code("undefined") : page));
 }
 
 inline function getBitmapFontPages(font:flight.BitmapFont):Array<flight.TextureAtlas> {

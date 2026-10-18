@@ -3,7 +3,7 @@
 package flight;
 
 inline function announceAccessibility(hostAccessibility:flight.HostAccessibilityCapability, message:String, ?liveness:flight.AccessibilityLiveness):flight.AccessibilityOperationOutcome<Dynamic> {
-  return flight._js._fn.Accessibility.announceAccessibility(hostAccessibility, message, liveness);
+  return flight._js._fn.Accessibility.announceAccessibility(hostAccessibility, message, (liveness == null ? js.Syntax.code("undefined") : liveness));
 }
 
 inline function clearAccessibilityTree(hostAccessibility:flight.HostAccessibilityCapability):flight.AccessibilityOperationOutcome<Dynamic> {

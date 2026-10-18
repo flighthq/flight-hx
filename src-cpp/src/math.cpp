@@ -1,8 +1,21 @@
 // Generated from src-cpp/manifest.json and flight-compiler native-planning.json. Do not edit.
+#include <flight/math/comparison.hpp>
 #include <flight/math/contract.hpp>
 #include <flight_hx/math.hpp>
 
 namespace flight_hx::math {
+
+bool approx_equal(double a, double b, bool epsilonPresent, double epsilon) {
+  return flight::math::approx_equal(a, b, (epsilonPresent ? std::optional<double>{epsilon} : std::nullopt));
+}
+
+bool approx_equal_relative(double a, double b, bool relativeEpsilonPresent, double relativeEpsilon) {
+  return flight::math::approx_equal_relative(a, b, (relativeEpsilonPresent ? std::optional<double>{relativeEpsilon} : std::nullopt));
+}
+
+bool approx_zero(double value, bool epsilonPresent, double epsilon) {
+  return flight::math::approx_zero(value, (epsilonPresent ? std::optional<double>{epsilon} : std::nullopt));
+}
 
 double ceil_power_of_two(double n) {
   return flight::math::ceil_power_of_two(n);

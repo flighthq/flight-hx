@@ -17,15 +17,15 @@ inline function addSpringImpulse3D(spring3D:flight.Spring3D, velocityX:Float, ve
 }
 
 inline function createSpring(?value:Float, ?velocity:Float):flight.Spring {
-  return flight._js._fn.Spring.createSpring(value, velocity);
+  return flight._js._fn.Spring.createSpring((value == null ? js.Syntax.code("undefined") : value), (velocity == null ? js.Syntax.code("undefined") : velocity));
 }
 
 inline function createSpring2D(?valueX:Float, ?valueY:Float, ?velocityX:Float, ?velocityY:Float):flight.Spring2D {
-  return flight._js._fn.Spring.createSpring2D(valueX, valueY, velocityX, velocityY);
+  return flight._js._fn.Spring.createSpring2D((valueX == null ? js.Syntax.code("undefined") : valueX), (valueY == null ? js.Syntax.code("undefined") : valueY), (velocityX == null ? js.Syntax.code("undefined") : velocityX), (velocityY == null ? js.Syntax.code("undefined") : velocityY));
 }
 
 inline function createSpring3D(?valueX:Float, ?valueY:Float, ?valueZ:Float, ?velocityX:Float, ?velocityY:Float, ?velocityZ:Float):flight.Spring3D {
-  return flight._js._fn.Spring.createSpring3D(valueX, valueY, valueZ, velocityX, velocityY, velocityZ);
+  return flight._js._fn.Spring.createSpring3D((valueX == null ? js.Syntax.code("undefined") : valueX), (valueY == null ? js.Syntax.code("undefined") : valueY), (valueZ == null ? js.Syntax.code("undefined") : valueZ), (velocityX == null ? js.Syntax.code("undefined") : velocityX), (velocityY == null ? js.Syntax.code("undefined") : velocityY), (velocityZ == null ? js.Syntax.code("undefined") : velocityZ));
 }
 
 inline function createSpringConfig(frequency:Float, dampingRatio:Float):flight.SpringConfig {
@@ -37,39 +37,39 @@ inline function createSpringConfigFromPhysical(stiffness:Float, damping:Float, m
 }
 
 inline function initializeSpring(out:flight.EntityConstruction<flight.Spring>, ?value:Float, ?velocity:Float):Void {
-  flight._js._fn.Spring.initializeSpring(out, value, velocity);
+  flight._js._fn.Spring.initializeSpring(out, (value == null ? js.Syntax.code("undefined") : value), (velocity == null ? js.Syntax.code("undefined") : velocity));
 }
 
 inline function initializeSpring2D(out:flight.EntityConstruction<flight.Spring2D>, ?valueX:Float, ?valueY:Float, ?velocityX:Float, ?velocityY:Float):Void {
-  flight._js._fn.Spring.initializeSpring2D(out, valueX, valueY, velocityX, velocityY);
+  flight._js._fn.Spring.initializeSpring2D(out, (valueX == null ? js.Syntax.code("undefined") : valueX), (valueY == null ? js.Syntax.code("undefined") : valueY), (velocityX == null ? js.Syntax.code("undefined") : velocityX), (velocityY == null ? js.Syntax.code("undefined") : velocityY));
 }
 
 inline function initializeSpring3D(out:flight.EntityConstruction<flight.Spring3D>, ?valueX:Float, ?valueY:Float, ?valueZ:Float, ?velocityX:Float, ?velocityY:Float, ?velocityZ:Float):Void {
-  flight._js._fn.Spring.initializeSpring3D(out, valueX, valueY, valueZ, velocityX, velocityY, velocityZ);
+  flight._js._fn.Spring.initializeSpring3D(out, (valueX == null ? js.Syntax.code("undefined") : valueX), (valueY == null ? js.Syntax.code("undefined") : valueY), (valueZ == null ? js.Syntax.code("undefined") : valueZ), (velocityX == null ? js.Syntax.code("undefined") : velocityX), (velocityY == null ? js.Syntax.code("undefined") : velocityY), (velocityZ == null ? js.Syntax.code("undefined") : velocityZ));
 }
 
 inline function isSpring2DSettled(spring2D:flight.Spring2D, targetX:Float, targetY:Float, ?positionEpsilon:Float, ?velocityEpsilon:Float):Bool {
-  return flight._js._fn.Spring.isSpring2DSettled(spring2D, targetX, targetY, positionEpsilon, velocityEpsilon);
+  return flight._js._fn.Spring.isSpring2DSettled(spring2D, targetX, targetY, (positionEpsilon == null ? js.Syntax.code("undefined") : positionEpsilon), (velocityEpsilon == null ? js.Syntax.code("undefined") : velocityEpsilon));
 }
 
 inline function isSpring3DSettled(spring3D:flight.Spring3D, targetX:Float, targetY:Float, targetZ:Float, ?positionEpsilon:Float, ?velocityEpsilon:Float):Bool {
-  return flight._js._fn.Spring.isSpring3DSettled(spring3D, targetX, targetY, targetZ, positionEpsilon, velocityEpsilon);
+  return flight._js._fn.Spring.isSpring3DSettled(spring3D, targetX, targetY, targetZ, (positionEpsilon == null ? js.Syntax.code("undefined") : positionEpsilon), (velocityEpsilon == null ? js.Syntax.code("undefined") : velocityEpsilon));
 }
 
 inline function isSpringSettled(spring:flight.Spring, target:Float, ?positionEpsilon:Float, ?velocityEpsilon:Float):Bool {
-  return flight._js._fn.Spring.isSpringSettled(spring, target, positionEpsilon, velocityEpsilon);
+  return flight._js._fn.Spring.isSpringSettled(spring, target, (positionEpsilon == null ? js.Syntax.code("undefined") : positionEpsilon), (velocityEpsilon == null ? js.Syntax.code("undefined") : velocityEpsilon));
 }
 
 inline function resetSpring(spring:flight.Spring, value:Float, ?velocity:Float):Void {
-  flight._js._fn.Spring.resetSpring(spring, value, velocity);
+  flight._js._fn.Spring.resetSpring(spring, value, (velocity == null ? js.Syntax.code("undefined") : velocity));
 }
 
 inline function resetSpring2D(spring2D:flight.Spring2D, valueX:Float, valueY:Float, ?velocityX:Float, ?velocityY:Float):Void {
-  flight._js._fn.Spring.resetSpring2D(spring2D, valueX, valueY, velocityX, velocityY);
+  flight._js._fn.Spring.resetSpring2D(spring2D, valueX, valueY, (velocityX == null ? js.Syntax.code("undefined") : velocityX), (velocityY == null ? js.Syntax.code("undefined") : velocityY));
 }
 
 inline function resetSpring3D(spring3D:flight.Spring3D, valueX:Float, valueY:Float, valueZ:Float, ?velocityX:Float, ?velocityY:Float, ?velocityZ:Float):Void {
-  flight._js._fn.Spring.resetSpring3D(spring3D, valueX, valueY, valueZ, velocityX, velocityY, velocityZ);
+  flight._js._fn.Spring.resetSpring3D(spring3D, valueX, valueY, valueZ, (velocityX == null ? js.Syntax.code("undefined") : velocityX), (velocityY == null ? js.Syntax.code("undefined") : velocityY), (velocityZ == null ? js.Syntax.code("undefined") : velocityZ));
 }
 
 inline function updateSpring(spring:flight.Spring, target:Float, config:flight.SpringConfig, deltaTime:Float):Void {

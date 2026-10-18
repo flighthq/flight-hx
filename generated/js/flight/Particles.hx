@@ -19,15 +19,15 @@ inline function applyParticleObjectForces(objects:Array<flight.ParticleObject>, 
 }
 
 inline function buildParticleColorCurve(f:(Float)->Array<Float>, ?samples:Float):Array<Float> {
-  return flight._js._fn.Particles.buildParticleColorCurve(f, samples);
+  return flight._js._fn.Particles.buildParticleColorCurve(f, (samples == null ? js.Syntax.code("undefined") : samples));
 }
 
 inline function buildParticleCurve(f:(Float)->Float, ?samples:Float):Array<Float> {
-  return flight._js._fn.Particles.buildParticleCurve(f, samples);
+  return flight._js._fn.Particles.buildParticleCurve(f, (samples == null ? js.Syntax.code("undefined") : samples));
 }
 
 inline function createParticleEmitterConfig(?config:Dynamic):flight.ParticleEmitterConfig {
-  return flight._js._fn.Particles.createParticleEmitterConfig(config);
+  return flight._js._fn.Particles.createParticleEmitterConfig((config == null ? js.Syntax.code("undefined") : config));
 }
 
 inline function createParticleEmitterSignals():flight.ParticleEmitterSignals {
@@ -35,11 +35,11 @@ inline function createParticleEmitterSignals():flight.ParticleEmitterSignals {
 }
 
 inline function createParticleEmitterState(?random:flight.RandomSource):flight.ParticleEmitterState {
-  return flight._js._fn.Particles.createParticleEmitterState(random);
+  return flight._js._fn.Particles.createParticleEmitterState((random == null ? js.Syntax.code("undefined") : random));
 }
 
 inline function createParticleObjectsState(capacity:Float, ?random:flight.RandomSource):flight.ParticleObjectsState {
-  return flight._js._fn.Particles.createParticleObjectsState(capacity, random);
+  return flight._js._fn.Particles.createParticleObjectsState(capacity, (random == null ? js.Syntax.code("undefined") : random));
 }
 
 inline function enableParticleEmitterSignals(state:Dynamic):flight.ParticleEmitterSignals {
@@ -63,11 +63,11 @@ inline function initializeParticleEmitterSignals(out:flight.EntityConstruction<f
 }
 
 inline function initializeParticleEmitterState(out:flight.EntityConstruction<flight.ParticleEmitterState>, ?random:flight.RandomSource):Void {
-  flight._js._fn.Particles.initializeParticleEmitterState(out, random);
+  flight._js._fn.Particles.initializeParticleEmitterState(out, (random == null ? js.Syntax.code("undefined") : random));
 }
 
 inline function initializeParticleObjectsState(out:flight.EntityConstruction<flight.ParticleObjectsState>, capacity:Float, ?random:flight.RandomSource):Void {
-  flight._js._fn.Particles.initializeParticleObjectsState(out, capacity, random);
+  flight._js._fn.Particles.initializeParticleObjectsState(out, capacity, (random == null ? js.Syntax.code("undefined") : random));
 }
 
 inline function isParticleObjectsComplete(objects:Array<flight.ParticleObject>, state:flight.ParticleObjectsState, config:flight.ParticleEmitterConfig):Bool {
@@ -83,11 +83,11 @@ inline function lerpHsvInPlace(colorsOut:Dynamic, offset:Float, birth:flight._in
 }
 
 inline function normalizeParticleEmitterConfig(?config:Dynamic):flight.ParticleEmitterConfig {
-  return flight._js._fn.Particles.normalizeParticleEmitterConfig(config);
+  return flight._js._fn.Particles.normalizeParticleEmitterConfig((config == null ? js.Syntax.code("undefined") : config));
 }
 
 inline function particleColorCurveFromKeyframes(keys:Array<flight.ColorKeyframe>, ?samples:Float):Array<Float> {
-  return flight._js._fn.Particles.particleColorCurveFromKeyframes(keys, samples);
+  return flight._js._fn.Particles.particleColorCurveFromKeyframes(keys, (samples == null ? js.Syntax.code("undefined") : samples));
 }
 
 inline function particleColorCurveToKeyframes(lut:flight.ParticleCurve):Array<flight.ColorKeyframe> {
@@ -95,7 +95,7 @@ inline function particleColorCurveToKeyframes(lut:flight.ParticleCurve):Array<fl
 }
 
 inline function particleCurveFromKeyframes(keys:Array<flight.CurveKeyframe>, ?samples:Float):Array<Float> {
-  return flight._js._fn.Particles.particleCurveFromKeyframes(keys, samples);
+  return flight._js._fn.Particles.particleCurveFromKeyframes(keys, (samples == null ? js.Syntax.code("undefined") : samples));
 }
 
 inline function particleCurveToKeyframes(lut:flight.ParticleCurve):Array<flight.CurveKeyframe> {
@@ -111,11 +111,11 @@ inline function sampleParticleCurve(lut:flight.ParticleCurve, t:Float):Float {
 }
 
 inline function stepParticleObjects(objects:Array<flight.ParticleObject>, state:flight.ParticleObjectsState, config:flight.ParticleEmitterConfig, deltaTime:Float, ?forces:Array<flight.ParticleForce>, ?colliders:Array<flight.ParticleCollider>, ?updateOptions:flight.ParticleObjectsUpdateOptions):Void {
-  flight._js._fn.Particles.stepParticleObjects(objects, state, config, deltaTime, forces, colliders, updateOptions);
+  flight._js._fn.Particles.stepParticleObjects(objects, state, config, deltaTime, (forces == null ? js.Syntax.code("undefined") : forces), (colliders == null ? js.Syntax.code("undefined") : colliders), (updateOptions == null ? js.Syntax.code("undefined") : updateOptions));
 }
 
 inline function updateParticleObjects(objects:Array<flight.ParticleObject>, state:flight.ParticleObjectsState, config:flight.ParticleEmitterConfig, deltaTime:Float, ?options:flight.ParticleObjectsUpdateOptions):Void {
-  flight._js._fn.Particles.updateParticleObjects(objects, state, config, deltaTime, options);
+  flight._js._fn.Particles.updateParticleObjects(objects, state, config, deltaTime, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function validateParticleEmitterConfig(config:flight.ParticleEmitterConfig):Array<flight.ParticleConfigIssue> {

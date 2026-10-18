@@ -31,7 +31,7 @@ inline function cloneMesh(source:flight.Mesh):flight.Mesh {
 }
 
 inline function cloneNode3DSubtree(source:flight.Node3D, ?materialOverride:Null<(Null<flight.Material3D>)->Null<flight.Material3D>>):flight.Node3D {
-  return flight._js._fn.Scene3d.cloneNode3DSubtree(source, materialOverride);
+  return flight._js._fn.Scene3d.cloneNode3DSubtree(source, (materialOverride == null ? js.Syntax.code("undefined") : materialOverride));
 }
 
 inline function computeInstancedMeshLocalBoundsAabb(out:flight.Aabb, source:flight.InstancedMesh):Void {
@@ -39,11 +39,11 @@ inline function computeInstancedMeshLocalBoundsAabb(out:flight.Aabb, source:flig
 }
 
 inline function createBillboard(geometry:flight.MeshGeometry, materials:Array<Null<flight.Material3D>>, ?mode:flight.BillboardMode, ?kind:flight.Kind, ?obj:Dynamic):flight.Billboard {
-  return flight._js._fn.Scene3d.createBillboard(geometry, materials, mode, kind, obj);
+  return flight._js._fn.Scene3d.createBillboard(geometry, materials, (mode == null ? js.Syntax.code("undefined") : mode), (kind == null ? js.Syntax.code("undefined") : kind), (obj == null ? js.Syntax.code("undefined") : obj));
 }
 
 inline function createInstancedMesh(geometry:flight.MeshGeometry, materials:Array<Null<flight.Material3D>>, ?capacity:Float, ?kind:flight.Kind):flight.InstancedMesh {
-  return flight._js._fn.Scene3d.createInstancedMesh(geometry, materials, capacity, kind);
+  return flight._js._fn.Scene3d.createInstancedMesh(geometry, materials, (capacity == null ? js.Syntax.code("undefined") : capacity), (kind == null ? js.Syntax.code("undefined") : kind));
 }
 
 inline function createInstancedMeshSignals():flight.InstancedMeshSignals {
@@ -51,11 +51,11 @@ inline function createInstancedMeshSignals():flight.InstancedMeshSignals {
 }
 
 inline function createMesh(geometry:flight.MeshGeometry, materials:Array<Null<flight.Material3D>>, ?kind:flight.Kind, ?obj:Dynamic):flight.Mesh {
-  return flight._js._fn.Scene3d.createMesh(geometry, materials, kind, obj);
+  return flight._js._fn.Scene3d.createMesh(geometry, materials, (kind == null ? js.Syntax.code("undefined") : kind), (obj == null ? js.Syntax.code("undefined") : obj));
 }
 
 inline function createNode3D(?kind:flight.Kind, ?obj:Dynamic):flight.Node3D {
-  return flight._js._fn.Scene3d.createNode3D(kind, obj);
+  return flight._js._fn.Scene3d.createNode3D((kind == null ? js.Syntax.code("undefined") : kind), (obj == null ? js.Syntax.code("undefined") : obj));
 }
 
 inline function createNode3DRuntime():flight.Node3DRuntime {
@@ -63,11 +63,11 @@ inline function createNode3DRuntime():flight.Node3DRuntime {
 }
 
 inline function createScene3D(?obj:Dynamic):flight.Scene3D {
-  return flight._js._fn.Scene3d.createScene3D(obj);
+  return flight._js._fn.Scene3d.createScene3D((obj == null ? js.Syntax.code("undefined") : obj));
 }
 
 inline function createScene3DFromDocument(document:flight.Scene3DDocument, ?sceneIndex:Float):flight.Scene3D {
-  return flight._js._fn.Scene3d.createScene3DFromDocument(document, sceneIndex);
+  return flight._js._fn.Scene3d.createScene3DFromDocument(document, (sceneIndex == null ? js.Syntax.code("undefined") : sceneIndex));
 }
 
 inline function createScene3DKindUsage():flight.Scene3DKindUsage {
@@ -187,7 +187,7 @@ inline function initializeInstancedMeshSignals(out:flight.EntityConstruction<fli
 }
 
 inline function initializeScene3D(out:flight.EntityConstruction<flight.Scene3D>, ?obj:Dynamic):Void {
-  flight._js._fn.Scene3d.initializeScene3D(out, obj);
+  flight._js._fn.Scene3d.initializeScene3D(out, (obj == null ? js.Syntax.code("undefined") : obj));
 }
 
 inline function initializeScene3DKindUsage(out:flight.EntityConstruction<flight.Scene3DKindUsage>):Void {

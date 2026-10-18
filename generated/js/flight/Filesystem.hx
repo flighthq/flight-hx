@@ -3,7 +3,7 @@
 package flight;
 
 inline function appendTextFile(hostFileSystem:flight.HostFileSystemCapability, path:String, data:String, ?signal:js.html.AbortSignal):flight._internal._Promise<Bool> {
-  return flight._js._fn.Filesystem.appendTextFile(hostFileSystem, path, data, signal);
+  return flight._js._fn.Filesystem.appendTextFile(hostFileSystem, path, data, (signal == null ? js.Syntax.code("undefined") : signal));
 }
 
 inline function canAccessFile(hostFileSystem:flight.HostFileSystemCapability, path:String, mode:Dynamic):flight._internal._Promise<Bool> {
@@ -27,7 +27,7 @@ inline function fileExists(hostFileSystem:flight.HostFileSystemCapability, path:
 }
 
 inline function findFiles(hostFileSystem:flight.HostFileSystemCapability, rootPath:String, pattern:String, ?options:flight.FileWalkOptions):flight._internal._Promise<Array<flight.FileEntry>> {
-  return flight._js._fn.Filesystem.findFiles(hostFileSystem, rootPath, pattern, options);
+  return flight._js._fn.Filesystem.findFiles(hostFileSystem, rootPath, pattern, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function getFileBaseName(path:String):String {
@@ -75,35 +75,35 @@ inline function normalizeFilePath(path:String):String {
 }
 
 inline function openFileReadStream(hostFileSystem:flight.HostFileSystemCapability, path:String, ?signal:js.html.AbortSignal):flight._internal._Promise<Null<Dynamic>> {
-  return flight._js._fn.Filesystem.openFileReadStream(hostFileSystem, path, signal);
+  return flight._js._fn.Filesystem.openFileReadStream(hostFileSystem, path, (signal == null ? js.Syntax.code("undefined") : signal));
 }
 
 inline function openFileWriteStream(hostFileSystem:flight.HostFileSystemCapability, path:String, ?signal:js.html.AbortSignal):flight._internal._Promise<Null<Dynamic>> {
-  return flight._js._fn.Filesystem.openFileWriteStream(hostFileSystem, path, signal);
+  return flight._js._fn.Filesystem.openFileWriteStream(hostFileSystem, path, (signal == null ? js.Syntax.code("undefined") : signal));
 }
 
 inline function readBinaryFile(hostFileSystem:flight.HostFileSystemCapability, path:String, ?signal:js.html.AbortSignal):flight._internal._Promise<Null<flight._internal._UInt8Array>> {
-  return flight._js._fn.Filesystem.readBinaryFile(hostFileSystem, path, signal);
+  return flight._js._fn.Filesystem.readBinaryFile(hostFileSystem, path, (signal == null ? js.Syntax.code("undefined") : signal));
 }
 
 inline function readBinaryFileRange(hostFileSystem:flight.HostFileSystemCapability, path:String, offset:Float, length:Float, ?signal:js.html.AbortSignal):flight._internal._Promise<Null<flight._internal._UInt8Array>> {
-  return flight._js._fn.Filesystem.readBinaryFileRange(hostFileSystem, path, offset, length, signal);
+  return flight._js._fn.Filesystem.readBinaryFileRange(hostFileSystem, path, offset, length, (signal == null ? js.Syntax.code("undefined") : signal));
 }
 
 inline function readDialogHandleBinaryFile(hostFileSystem:flight.HostFileSystemCapability, handle:flight.FileDialogHandle, ?signal:js.html.AbortSignal):flight._internal._Promise<Null<flight._internal._UInt8Array>> {
-  return flight._js._fn.Filesystem.readDialogHandleBinaryFile(hostFileSystem, handle, signal);
+  return flight._js._fn.Filesystem.readDialogHandleBinaryFile(hostFileSystem, handle, (signal == null ? js.Syntax.code("undefined") : signal));
 }
 
 inline function readDialogHandleTextFile(hostFileSystem:flight.HostFileSystemCapability, handle:flight.FileDialogHandle, ?signal:js.html.AbortSignal):flight._internal._Promise<Null<String>> {
-  return flight._js._fn.Filesystem.readDialogHandleTextFile(hostFileSystem, handle, signal);
+  return flight._js._fn.Filesystem.readDialogHandleTextFile(hostFileSystem, handle, (signal == null ? js.Syntax.code("undefined") : signal));
 }
 
 inline function readDirectory(hostFileSystem:flight.HostFileSystemCapability, path:String, ?signal:js.html.AbortSignal):flight._internal._Promise<Array<flight.FileEntry>> {
-  return flight._js._fn.Filesystem.readDirectory(hostFileSystem, path, signal);
+  return flight._js._fn.Filesystem.readDirectory(hostFileSystem, path, (signal == null ? js.Syntax.code("undefined") : signal));
 }
 
 inline function readDirectoryRecursive(hostFileSystem:flight.HostFileSystemCapability, path:String, ?options:flight.FileWalkOptions):flight._internal._Promise<Array<flight.FileEntry>> {
-  return flight._js._fn.Filesystem.readDirectoryRecursive(hostFileSystem, path, options);
+  return flight._js._fn.Filesystem.readDirectoryRecursive(hostFileSystem, path, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function readFileSymlink(_path:String):flight._internal._Promise<Null<String>> {
@@ -111,11 +111,11 @@ inline function readFileSymlink(_path:String):flight._internal._Promise<Null<Str
 }
 
 inline function readTextFile(hostFileSystem:flight.HostFileSystemCapability, path:String, ?signal:js.html.AbortSignal):flight._internal._Promise<Null<String>> {
-  return flight._js._fn.Filesystem.readTextFile(hostFileSystem, path, signal);
+  return flight._js._fn.Filesystem.readTextFile(hostFileSystem, path, (signal == null ? js.Syntax.code("undefined") : signal));
 }
 
 inline function removeDirectory(hostFileSystem:flight.HostFileSystemCapability, path:String, ?recursive:Bool):flight._internal._Promise<Bool> {
-  return flight._js._fn.Filesystem.removeDirectory(hostFileSystem, path, recursive);
+  return flight._js._fn.Filesystem.removeDirectory(hostFileSystem, path, (recursive == null ? js.Syntax.code("undefined") : recursive));
 }
 
 inline function removeFile(hostFileSystem:flight.HostFileSystemCapability, path:String):flight._internal._Promise<Bool> {
@@ -139,26 +139,26 @@ inline function watchPath(_path:String, _listener:(flight.FileWatchEvent)->Void)
 }
 
 inline function writeBinaryFile(hostFileSystem:flight.HostFileSystemCapability, path:String, data:flight._internal._UInt8Array, ?signal:js.html.AbortSignal):flight._internal._Promise<Bool> {
-  return flight._js._fn.Filesystem.writeBinaryFile(hostFileSystem, path, data, signal);
+  return flight._js._fn.Filesystem.writeBinaryFile(hostFileSystem, path, data, (signal == null ? js.Syntax.code("undefined") : signal));
 }
 
 inline function writeBinaryFileChunks(hostFileSystem:flight.HostFileSystemCapability, path:String, chunks:flight._internal._AsyncIterable<flight._internal._UInt8Array>, ?signal:js.html.AbortSignal):flight._internal._Promise<Bool> {
-  return flight._js._fn.Filesystem.writeBinaryFileChunks(hostFileSystem, path, chunks, signal);
+  return flight._js._fn.Filesystem.writeBinaryFileChunks(hostFileSystem, path, chunks, (signal == null ? js.Syntax.code("undefined") : signal));
 }
 
 inline function writeDialogHandleBinaryFile(hostFileSystem:flight.HostFileSystemCapability, handle:flight.FileDialogHandle, data:flight._internal._UInt8Array, ?signal:js.html.AbortSignal):flight._internal._Promise<Bool> {
-  return flight._js._fn.Filesystem.writeDialogHandleBinaryFile(hostFileSystem, handle, data, signal);
+  return flight._js._fn.Filesystem.writeDialogHandleBinaryFile(hostFileSystem, handle, data, (signal == null ? js.Syntax.code("undefined") : signal));
 }
 
 inline function writeDialogHandleTextFile(hostFileSystem:flight.HostFileSystemCapability, handle:flight.FileDialogHandle, data:String, ?signal:js.html.AbortSignal):flight._internal._Promise<Bool> {
-  return flight._js._fn.Filesystem.writeDialogHandleTextFile(hostFileSystem, handle, data, signal);
+  return flight._js._fn.Filesystem.writeDialogHandleTextFile(hostFileSystem, handle, data, (signal == null ? js.Syntax.code("undefined") : signal));
 }
 
 inline function writeFileAtomic(hostFileSystem:flight.HostFileSystemCapability, path:String, data:Dynamic, ?signal:js.html.AbortSignal):flight._internal._Promise<Bool> {
-  return flight._js._fn.Filesystem.writeFileAtomic(hostFileSystem, path, data, signal);
+  return flight._js._fn.Filesystem.writeFileAtomic(hostFileSystem, path, data, (signal == null ? js.Syntax.code("undefined") : signal));
 }
 
 inline function writeTextFile(hostFileSystem:flight.HostFileSystemCapability, path:String, data:String, ?signal:js.html.AbortSignal):flight._internal._Promise<Bool> {
-  return flight._js._fn.Filesystem.writeTextFile(hostFileSystem, path, data, signal);
+  return flight._js._fn.Filesystem.writeTextFile(hostFileSystem, path, data, (signal == null ? js.Syntax.code("undefined") : signal));
 }
 #end

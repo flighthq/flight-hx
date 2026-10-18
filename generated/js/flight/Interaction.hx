@@ -19,19 +19,19 @@ inline function clearFocus<N:flight.NodeAny>(manager:flight.FocusManager<N>):Voi
 }
 
 inline function connectFocusNavigation<N:flight.NodeAny>(input:flight.FocusNavigationInput, manager:flight.FocusManager<N>, ?options:flight.FocusNavigationOptions):()->Void {
-  return flight._js._fn.Interaction.connectFocusNavigation(input, manager, options);
+  return flight._js._fn.Interaction.connectFocusNavigation(input, manager, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function connectInputToInteraction<N:flight.NodeAny>(input:flight.InteractionInputSource, manager:flight.InteractionManager<N>, ?coordScale:Float):()->Void {
-  return flight._js._fn.Interaction.connectInputToInteraction(input, manager, coordScale);
+  return flight._js._fn.Interaction.connectInputToInteraction(input, manager, (coordScale == null ? js.Syntax.code("undefined") : coordScale));
 }
 
 inline function connectInteractionDispatchLayer<N:flight.NodeAny>(manager:flight.InteractionManager<N>, layer:flight.InteractionDispatchLayer<N>, ?options:flight.InteractionDispatchLayerOptions):()->Void {
-  return flight._js._fn.Interaction.connectInteractionDispatchLayer(manager, layer, options);
+  return flight._js._fn.Interaction.connectInteractionDispatchLayer(manager, layer, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function connectInteractionSignal<N:flight.NodeAny, Name:flight.InteractionSignalName>(manager:flight.InteractionManager<N>, target:N, name:Name, slot:(Dynamic)->Void, ?options:flight.SignalConnectOptions):Void {
-  flight._js._fn.Interaction.connectInteractionSignal(manager, target, name, slot, options);
+  flight._js._fn.Interaction.connectInteractionSignal(manager, target, name, slot, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function containsNode2D(outer:flight.Node2D, inner:flight.Node2D):Bool {
@@ -39,11 +39,11 @@ inline function containsNode2D(outer:flight.Node2D, inner:flight.Node2D):Bool {
 }
 
 inline function createFocusManager<N:flight.NodeAny>(root:N, ?options:flight.FocusManagerOptions):flight.FocusManager<N> {
-  return flight._js._fn.Interaction.createFocusManager(root, options);
+  return flight._js._fn.Interaction.createFocusManager(root, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createInteractionManager<N:flight.NodeAny>(root:N, ?options:flight.InteractionManagerOptions):flight.InteractionManager<N> {
-  return flight._js._fn.Interaction.createInteractionManager(root, options);
+  return flight._js._fn.Interaction.createInteractionManager(root, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createInteractionSignals():flight.InteractionSignals {
@@ -55,7 +55,7 @@ inline function createNodeInteractionState():flight.NodeInteractionState {
 }
 
 inline function createNodeInteractiveStateBinding(node:flight.NodeAny, interactiveStates:flight.FlightDocumentInteractiveStates, schemas:flight.FlightDocumentSchemaRegistry, ?transition:Null<flight.FlightDocumentInteractiveStateTransitionDescriptor>):Null<flight.NodeInteractiveStateBinding> {
-  return flight._js._fn.Interaction.createNodeInteractiveStateBinding(node, interactiveStates, schemas, transition);
+  return flight._js._fn.Interaction.createNodeInteractiveStateBinding(node, interactiveStates, schemas, (transition == null ? js.Syntax.code("undefined") : transition));
 }
 
 inline function defaultHtmlViewHitTestHandler(_source:flight.NodeAny, _x:Float, _y:Float):Bool {
@@ -107,35 +107,35 @@ inline function disconnectInteractionSignal<N:flight.NodeAny, Name:flight.Intera
 }
 
 inline function dispatchInteractionContextMenu<N:flight.NodeAny>(manager:flight.InteractionManager<N>, x:Float, y:Float, ?button:Float, ?options:flight.InteractionPointerOptions):Void {
-  flight._js._fn.Interaction.dispatchInteractionContextMenu(manager, x, y, button, options);
+  flight._js._fn.Interaction.dispatchInteractionContextMenu(manager, x, y, (button == null ? js.Syntax.code("undefined") : button), (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function dispatchInteractionKeyDown<N:flight.NodeAny>(manager:flight.InteractionManager<N>, key:String, ?keyCode:Float, ?modifiers:Dynamic):Void {
-  flight._js._fn.Interaction.dispatchInteractionKeyDown(manager, key, keyCode, modifiers);
+  flight._js._fn.Interaction.dispatchInteractionKeyDown(manager, key, (keyCode == null ? js.Syntax.code("undefined") : keyCode), (modifiers == null ? js.Syntax.code("undefined") : modifiers));
 }
 
 inline function dispatchInteractionKeyUp<N:flight.NodeAny>(manager:flight.InteractionManager<N>, key:String, ?keyCode:Float, ?modifiers:Dynamic):Void {
-  flight._js._fn.Interaction.dispatchInteractionKeyUp(manager, key, keyCode, modifiers);
+  flight._js._fn.Interaction.dispatchInteractionKeyUp(manager, key, (keyCode == null ? js.Syntax.code("undefined") : keyCode), (modifiers == null ? js.Syntax.code("undefined") : modifiers));
 }
 
 inline function dispatchInteractionPointerCancel<N:flight.NodeAny>(manager:flight.InteractionManager<N>, x:Float, y:Float, ?options:flight.InteractionPointerOptions):Void {
-  flight._js._fn.Interaction.dispatchInteractionPointerCancel(manager, x, y, options);
+  flight._js._fn.Interaction.dispatchInteractionPointerCancel(manager, x, y, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function dispatchInteractionPointerDown<N:flight.NodeAny>(manager:flight.InteractionManager<N>, x:Float, y:Float, ?button:Float, ?options:flight.InteractionPointerOptions):Void {
-  flight._js._fn.Interaction.dispatchInteractionPointerDown(manager, x, y, button, options);
+  flight._js._fn.Interaction.dispatchInteractionPointerDown(manager, x, y, (button == null ? js.Syntax.code("undefined") : button), (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function dispatchInteractionPointerMove<N:flight.NodeAny>(manager:flight.InteractionManager<N>, x:Float, y:Float, ?button:Float, ?options:flight.InteractionPointerOptions):Void {
-  flight._js._fn.Interaction.dispatchInteractionPointerMove(manager, x, y, button, options);
+  flight._js._fn.Interaction.dispatchInteractionPointerMove(manager, x, y, (button == null ? js.Syntax.code("undefined") : button), (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function dispatchInteractionPointerUp<N:flight.NodeAny>(manager:flight.InteractionManager<N>, x:Float, y:Float, ?button:Float, ?time:Float, ?options:flight.InteractionPointerOptions):Void {
-  flight._js._fn.Interaction.dispatchInteractionPointerUp(manager, x, y, button, time, options);
+  flight._js._fn.Interaction.dispatchInteractionPointerUp(manager, x, y, (button == null ? js.Syntax.code("undefined") : button), (time == null ? js.Syntax.code("undefined") : time), (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function dispatchInteractionWheel<N:flight.NodeAny>(manager:flight.InteractionManager<N>, x:Float, y:Float, ?deltaX:Float, ?deltaY:Float, ?options:flight.InteractionPointerOptions):Void {
-  flight._js._fn.Interaction.dispatchInteractionWheel(manager, x, y, deltaX, deltaY, options);
+  flight._js._fn.Interaction.dispatchInteractionWheel(manager, x, y, (deltaX == null ? js.Syntax.code("undefined") : deltaX), (deltaY == null ? js.Syntax.code("undefined") : deltaY), (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function disposeNodeInteractiveStateBinding(binding:flight.NodeInteractiveStateBinding):Void {
@@ -159,7 +159,7 @@ inline function explainInteractionHitEligibility(node:flight.NodeAny):flight.Int
 }
 
 inline function explainNodeInteractiveStateBinding(node:flight.NodeAny, interactiveStates:flight.FlightDocumentInteractiveStates, schemas:flight.FlightDocumentSchemaRegistry, ?transition:Null<flight.FlightDocumentInteractiveStateTransitionDescriptor>):Null<flight.NodeInteractiveStateExplanation> {
-  return flight._js._fn.Interaction.explainNodeInteractiveStateBinding(node, interactiveStates, schemas, transition);
+  return flight._js._fn.Interaction.explainNodeInteractiveStateBinding(node, interactiveStates, schemas, (transition == null ? js.Syntax.code("undefined") : transition));
 }
 
 inline function findGraphHitTarget<Traits:Dynamic>(source:flight.Node<Traits>, x:Float, y:Float):Null<flight.Node<Traits>> {
@@ -171,15 +171,15 @@ inline function findGraphHitTargetPrecise<Traits:Dynamic>(source:flight.Node<Tra
 }
 
 inline function findGraphHitTargets<Traits:Dynamic>(source:flight.Node<Traits>, x:Float, y:Float, ?out:Array<flight.Node<Traits>>):Array<flight.Node<Traits>> {
-  return flight._js._fn.Interaction.findGraphHitTargets(source, x, y, out);
+  return flight._js._fn.Interaction.findGraphHitTargets(source, x, y, (out == null ? js.Syntax.code("undefined") : out));
 }
 
 inline function findGraphHitTargetsPrecise<Traits:Dynamic>(source:flight.Node<Traits>, x:Float, y:Float, ?out:Array<flight.Node<Traits>>):Array<flight.Node<Traits>> {
-  return flight._js._fn.Interaction.findGraphHitTargetsPrecise(source, x, y, out);
+  return flight._js._fn.Interaction.findGraphHitTargetsPrecise(source, x, y, (out == null ? js.Syntax.code("undefined") : out));
 }
 
 inline function findSpatialInteractionTarget<N:flight.NodeAny>(manager:flight.InteractionManager<N>, x:Float, y:Float, ?precise:Bool):Null<N> {
-  return flight._js._fn.Interaction.findSpatialInteractionTarget(manager, x, y, precise);
+  return flight._js._fn.Interaction.findSpatialInteractionTarget(manager, x, y, (precise == null ? js.Syntax.code("undefined") : precise));
 }
 
 inline function focusNextNode<N:flight.NodeAny>(manager:flight.FocusManager<N>):Null<N> {
@@ -195,7 +195,7 @@ inline function focusPreviousNode<N:flight.NodeAny>(manager:flight.FocusManager<
 }
 
 inline function getFocusOrder<N:flight.NodeAny>(manager:flight.FocusManager<N>, ?out:Array<N>):Array<N> {
-  return flight._js._fn.Interaction.getFocusOrder(manager, out);
+  return flight._js._fn.Interaction.getFocusOrder(manager, (out == null ? js.Syntax.code("undefined") : out));
 }
 
 inline function getFocusedNode<N:flight.NodeAny>(manager:flight.FocusManager<N>):Null<N> {
@@ -227,11 +227,11 @@ inline function getNodeTabIndex(source:flight.NodeAny):Float {
 }
 
 inline function hitTestAreaQuery(root:flight.Node2D, rect:flight.Rectangle, ?out:Array<flight.Node2D>):Array<flight.Node2D> {
-  return flight._js._fn.Interaction.hitTestAreaQuery(root, rect, out);
+  return flight._js._fn.Interaction.hitTestAreaQuery(root, rect, (out == null ? js.Syntax.code("undefined") : out));
 }
 
 inline function hitTestAreaQueryCircle(root:flight.Node2D, cx:Float, cy:Float, radius:Float, ?out:Array<flight.Node2D>):Array<flight.Node2D> {
-  return flight._js._fn.Interaction.hitTestAreaQueryCircle(root, cx, cy, radius, out);
+  return flight._js._fn.Interaction.hitTestAreaQueryCircle(root, cx, cy, radius, (out == null ? js.Syntax.code("undefined") : out));
 }
 
 inline function hitTestGraphLocalBounds<Traits:Dynamic>(source:flight.Node<Traits>, x:Float, y:Float):Bool {
@@ -255,15 +255,15 @@ inline function hitTestNode2DsShape(source:flight.Node2D, other:flight.Node2D):B
 }
 
 inline function hitTestNodeRegion(source:flight.NodeAny, x:Float, y:Float, ?precise:Bool):Bool {
-  return flight._js._fn.Interaction.hitTestNodeRegion(source, x, y, precise);
+  return flight._js._fn.Interaction.hitTestNodeRegion(source, x, y, (precise == null ? js.Syntax.code("undefined") : precise));
 }
 
 inline function initializeFocusManager<N:flight.NodeAny>(out:flight.EntityConstruction<flight.FocusManager<N>>, root:N, ?options:flight.FocusManagerOptions):Void {
-  flight._js._fn.Interaction.initializeFocusManager(out, root, options);
+  flight._js._fn.Interaction.initializeFocusManager(out, root, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function initializeInteractionManager<N:flight.NodeAny>(out:flight.EntityConstruction<flight.InteractionManager<N>>, root:N, ?options:flight.InteractionManagerOptions):Void {
-  flight._js._fn.Interaction.initializeInteractionManager(out, root, options);
+  flight._js._fn.Interaction.initializeInteractionManager(out, root, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function initializeInteractionSignals(out:flight.EntityConstruction<flight.InteractionSignals>):Void {
@@ -319,7 +319,7 @@ inline function registerShapeHitTest():Void {
 }
 
 inline function registerSpriteHitTest(hostBitmapReadback:flight.HostBitmapReadbackCapability, ?alphaThreshold:Float):Void {
-  flight._js._fn.Interaction.registerSpriteHitTest(hostBitmapReadback, alphaThreshold);
+  flight._js._fn.Interaction.registerSpriteHitTest(hostBitmapReadback, (alphaThreshold == null ? js.Syntax.code("undefined") : alphaThreshold));
 }
 
 inline function registerTextHitTest():Void {

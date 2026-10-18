@@ -7,7 +7,7 @@ inline function computeTextureContainerLevels(format:flight.TextureContainerForm
 }
 
 inline function createByteReader(bytes:flight._internal._UInt8Array, ?offset:Float):flight.ByteReader {
-  return flight._js._fn.TextureFormats.createByteReader(bytes, offset);
+  return flight._js._fn.TextureFormats.createByteReader(bytes, (offset == null ? js.Syntax.code("undefined") : offset));
 }
 
 inline function detectTextureContainer(bytes:flight._internal._UInt8Array):Null<flight.TextureContainerKind> {

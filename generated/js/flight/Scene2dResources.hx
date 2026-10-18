@@ -7,11 +7,11 @@ inline function areScene2DResourceFailureGuardsEnabled():Bool {
 }
 
 inline function createScene2DDocument(root:flight.Node2D, ?slots:Array<flight.Scene2DSlotReference>, ?sourceKind:Null<String>, ?backgroundColor:Null<Float>, ?imageResources:Array<flight.ImageResourceReference>, ?audioResources:Array<flight.AudioResourceReference>):flight.Scene2DDocument {
-  return flight._js._fn.Scene2dResources.createScene2DDocument(root, slots, sourceKind, backgroundColor, imageResources, audioResources);
+  return flight._js._fn.Scene2dResources.createScene2DDocument(root, (slots == null ? js.Syntax.code("undefined") : slots), (sourceKind == null ? js.Syntax.code("undefined") : sourceKind), (backgroundColor == null ? js.Syntax.code("undefined") : backgroundColor), (imageResources == null ? js.Syntax.code("undefined") : imageResources), (audioResources == null ? js.Syntax.code("undefined") : audioResources));
 }
 
 inline function createScene2DDocumentFromBytes(source:flight._internal._UInt8Array, registry:flight.Scene2DDocumentImporterRegistry, ?context:flight.Scene2DDocumentImportContext):Null<flight.Scene2DDocument> {
-  return flight._js._fn.Scene2dResources.createScene2DDocumentFromBytes(source, registry, context);
+  return flight._js._fn.Scene2dResources.createScene2DDocumentFromBytes(source, registry, (context == null ? js.Syntax.code("undefined") : context));
 }
 
 inline function createScene2DDocumentImporterRegistry():flight.Scene2DDocumentImporterRegistry {
@@ -19,7 +19,7 @@ inline function createScene2DDocumentImporterRegistry():flight.Scene2DDocumentIm
 }
 
 inline function createScene2DSlotReference(name:String, target:flight.Node2D, ?linkage:Null<String>, ?required:Bool):flight.Scene2DSlotReference {
-  return flight._js._fn.Scene2dResources.createScene2DSlotReference(name, target, linkage, required);
+  return flight._js._fn.Scene2dResources.createScene2DSlotReference(name, target, (linkage == null ? js.Syntax.code("undefined") : linkage), (required == null ? js.Syntax.code("undefined") : required));
 }
 
 inline function disableScene2DResourceFailureGuards():Void {
@@ -35,23 +35,23 @@ inline function explainScene2DResourceCoverage(document:flight.Scene2DDocument):
 }
 
 inline function initializeScene2DDocument(out:flight.EntityConstruction<flight.Scene2DDocument>, root:flight.Node2D, ?slots:Array<flight.Scene2DSlotReference>, ?sourceKind:Null<String>, ?backgroundColor:Null<Float>, ?imageResources:Array<flight.ImageResourceReference>, ?audioResources:Array<flight.AudioResourceReference>):Void {
-  flight._js._fn.Scene2dResources.initializeScene2DDocument(out, root, slots, sourceKind, backgroundColor, imageResources, audioResources);
+  flight._js._fn.Scene2dResources.initializeScene2DDocument(out, root, (slots == null ? js.Syntax.code("undefined") : slots), (sourceKind == null ? js.Syntax.code("undefined") : sourceKind), (backgroundColor == null ? js.Syntax.code("undefined") : backgroundColor), (imageResources == null ? js.Syntax.code("undefined") : imageResources), (audioResources == null ? js.Syntax.code("undefined") : audioResources));
 }
 
 inline function initializeScene2DSlotReference(out:flight.EntityConstruction<flight.Scene2DSlotReference>, name:String, target:flight.Node2D, ?linkage:Null<String>, ?required:Bool):Void {
-  flight._js._fn.Scene2dResources.initializeScene2DSlotReference(out, name, target, linkage, required);
+  flight._js._fn.Scene2dResources.initializeScene2DSlotReference(out, name, target, (linkage == null ? js.Syntax.code("undefined") : linkage), (required == null ? js.Syntax.code("undefined") : required));
 }
 
 inline function loadScene2DAudioResources(document:flight.Scene2DDocument, ?options:flight.LoadScene2DAudioResourcesOptions):flight._internal._Promise<flight.Scene2DAudioResources> {
-  return flight._js._fn.Scene2dResources.loadScene2DAudioResources(document, options);
+  return flight._js._fn.Scene2dResources.loadScene2DAudioResources(document, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function loadScene2DDocumentFromUrl(url:String, registry:flight.Scene2DDocumentImporterRegistry, fetchDocument:flight.Scene2DDocumentFetcher, ?options:flight.Scene2DDocumentLoadOptions):flight._internal._Promise<Null<flight.Scene2DDocument>> {
-  return flight._js._fn.Scene2dResources.loadScene2DDocumentFromUrl(url, registry, fetchDocument, options);
+  return flight._js._fn.Scene2dResources.loadScene2DDocumentFromUrl(url, registry, fetchDocument, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function loadScene2DImageResources(imageDecode:flight.HostImageDecodeCapabilities, document:flight.Scene2DDocument, ?options:flight.LoadScene2DImageResourcesOptions):flight._internal._Promise<flight.Scene2DImageResources> {
-  return flight._js._fn.Scene2dResources.loadScene2DImageResources(imageDecode, document, options);
+  return flight._js._fn.Scene2dResources.loadScene2DImageResources(imageDecode, document, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function registerLottieScene2DDocumentImporter(registry:flight.Scene2DDocumentImporterRegistry):Void {
@@ -75,7 +75,7 @@ inline function reportScene2DResourceFailure(notice:flight.Scene2DResourceFailur
 }
 
 inline function resolveScene2DResources(document:flight.Scene2DDocument, ?options:flight.ResolveScene2DResourcesOptions):flight.Scene2DResources {
-  return flight._js._fn.Scene2dResources.resolveScene2DResources(document, options);
+  return flight._js._fn.Scene2dResources.resolveScene2DResources(document, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function setScene2DResourceFailureGuard(guard:Null<flight.Scene2DResourceFailureGuard>):Void {

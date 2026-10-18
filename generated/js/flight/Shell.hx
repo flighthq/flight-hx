@@ -35,7 +35,7 @@ inline function shellBeep(hostShellBeep:flight.HostShellBeepCapability):Void {
 }
 
 inline function spawnShellProcess(hostShellProcess:flight.HostShellProcessCapability, command:String, args:Array<String>, ?options:flight.ShellProcessOptions):flight.ShellProcess {
-  return flight._js._fn.Shell.spawnShellProcess(hostShellProcess, command, args, options);
+  return flight._js._fn.Shell.spawnShellProcess(hostShellProcess, command, args, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function writeShellShortcutLink(hostShellShortcutLink:flight.HostShellShortcutLinkCapability, shortcutPath:String, link:flight.ShellShortcutLink, operation:flight.ShellShortcutWriteOperation):flight._internal._Promise<flight.ShellShortcutLinkWriteOutcome> {

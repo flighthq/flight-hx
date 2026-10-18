@@ -15,15 +15,15 @@ inline function cffSubroutineBias(count:Float):Float {
 }
 
 inline function computeSfntTableChecksum(data:flight._internal._UInt8Array, ?isHeadTable:Bool):Float {
-  return flight._js._fn.FontFormats.computeSfntTableChecksum(data, isHeadTable);
+  return flight._js._fn.FontFormats.computeSfntTableChecksum(data, (isHeadTable == null ? js.Syntax.code("undefined") : isHeadTable));
 }
 
 inline function createGlyphOutlineSourceFromOpenTypeFont(source:flight._internal._UInt8Array, deflate:flight.HostDecompressDeflateCapability, ?diagnostics:Array<flight.ImportDiagnostic>):Null<Dynamic> {
-  return flight._js._fn.FontFormats.createGlyphOutlineSourceFromOpenTypeFont(source, deflate, diagnostics);
+  return flight._js._fn.FontFormats.createGlyphOutlineSourceFromOpenTypeFont(source, deflate, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function createSyntheticFont(?options:flight.SyntheticFontOptions):flight._internal._UInt8Array {
-  return flight._js._fn.FontFormats.createSyntheticFont(options);
+  return flight._js._fn.FontFormats.createSyntheticFont((options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createWoff2TransformReverser():(String, flight._internal._UInt8Array, flight._internal._Map<String, flight._internal._UInt8Array>)->Null<flight._internal._UInt8Array> {
@@ -51,15 +51,15 @@ inline function encodeSfntSimpleGlyph(endPtsOfContours:Array<Float>, xs:Array<Fl
 }
 
 inline function encodeSyntheticCff(charstrings:Array<flight._internal._UInt8Array>, ?cid:flight.SyntheticCidOptions):flight._internal._UInt8Array {
-  return flight._js._fn.FontFormats.encodeSyntheticCff(charstrings, cid);
+  return flight._js._fn.FontFormats.encodeSyntheticCff(charstrings, (cid == null ? js.Syntax.code("undefined") : cid));
 }
 
 inline function encodeSyntheticWoff(sfnt:flight._internal._UInt8Array, ?reverseTableOrder:Bool):flight._internal._UInt8Array {
-  return flight._js._fn.FontFormats.encodeSyntheticWoff(sfnt, reverseTableOrder);
+  return flight._js._fn.FontFormats.encodeSyntheticWoff(sfnt, (reverseTableOrder == null ? js.Syntax.code("undefined") : reverseTableOrder));
 }
 
 inline function encodeSyntheticWoff2(sfnt:flight._internal._UInt8Array, ?transformTags:Array<String>):flight._internal._UInt8Array {
-  return flight._js._fn.FontFormats.encodeSyntheticWoff2(sfnt, transformTags);
+  return flight._js._fn.FontFormats.encodeSyntheticWoff2(sfnt, (transformTags == null ? js.Syntax.code("undefined") : transformTags));
 }
 
 inline function explainOpenTypeFont(bytes:flight._internal._UInt8Array, deflate:flight.HostDecompressDeflateCapability):flight.OpenTypeFontExplanation {
@@ -171,7 +171,7 @@ inline function readWoffChecksumMismatches(bytes:flight._internal._UInt8Array, d
 }
 
 inline function readWoffFont(bytes:flight._internal._UInt8Array, decompress:flight.Decompressor, ?diagnostics:Array<flight.ImportDiagnostic>):Null<flight._internal._UInt8Array> {
-  return flight._js._fn.FontFormats.readWoffFont(bytes, decompress, diagnostics);
+  return flight._js._fn.FontFormats.readWoffFont(bytes, decompress, (diagnostics == null ? js.Syntax.code("undefined") : diagnostics));
 }
 
 inline function reverseWoff2GlyfTransform(streams:flight.Woff2GlyfStreams):Null<{ glyf:flight._internal._UInt8Array, loca:flight._internal._UInt8Array }> {
@@ -179,7 +179,7 @@ inline function reverseWoff2GlyfTransform(streams:flight.Woff2GlyfStreams):Null<
 }
 
 inline function ringSyntheticGlyph(?reverseCounter:Bool, ?flipBoth:Bool):flight.SyntheticGlyph {
-  return flight._js._fn.FontFormats.ringSyntheticGlyph(reverseCounter, flipBoth);
+  return flight._js._fn.FontFormats.ringSyntheticGlyph((reverseCounter == null ? js.Syntax.code("undefined") : reverseCounter), (flipBoth == null ? js.Syntax.code("undefined") : flipBoth));
 }
 
 inline function runCffCharstring(out:flight.Path, bytes:flight._internal._UInt8Array, charstring:{ end:Float, start:Float }, localSubrs:Array<{ end:Float, start:Float }>, globalSubrs:Array<{ end:Float, start:Float }>):Bool {

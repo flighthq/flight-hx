@@ -21,7 +21,7 @@ inline function equalsSnapshot<T>(a:flight.Snapshot<T>, b:flight.Snapshot<T>):Bo
 }
 
 inline function interpolateSnapshots<T>(a:flight.Snapshot<T>, b:flight.Snapshot<T>, t:Float, out:T, ?schema:flight.SnapshotSchema):Void {
-  flight._js._fn.Snapshot.interpolateSnapshots(a, b, t, out, schema);
+  flight._js._fn.Snapshot.interpolateSnapshots(a, b, t, out, (schema == null ? js.Syntax.code("undefined") : schema));
 }
 
 inline function restoreSnapshot<T>(snapshot:flight.Snapshot<T>, target:T):Void {

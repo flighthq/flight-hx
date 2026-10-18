@@ -3,15 +3,15 @@
 package flight;
 
 inline function approxEqual(a:Float, b:Float, ?epsilon:Float):Bool {
-  return flight._js._fn.Math.approxEqual(a, b, epsilon);
+  return flight._js._fn.Math.approxEqual(a, b, (epsilon == null ? js.Syntax.code("undefined") : epsilon));
 }
 
 inline function approxEqualRelative(a:Float, b:Float, ?relativeEpsilon:Float):Bool {
-  return flight._js._fn.Math.approxEqualRelative(a, b, relativeEpsilon);
+  return flight._js._fn.Math.approxEqualRelative(a, b, (relativeEpsilon == null ? js.Syntax.code("undefined") : relativeEpsilon));
 }
 
 inline function approxZero(value:Float, ?epsilon:Float):Bool {
-  return flight._js._fn.Math.approxZero(value, epsilon);
+  return flight._js._fn.Math.approxZero(value, (epsilon == null ? js.Syntax.code("undefined") : epsilon));
 }
 
 inline function ceilPowerOfTwo(n:Float):Float {
@@ -167,19 +167,19 @@ inline function radToDeg(radians:Float):Float {
 }
 
 inline function randomBool(random:flight.RandomSource, ?probability:Float):Bool {
-  return flight._js._fn.Math.randomBool(random, probability);
+  return flight._js._fn.Math.randomBool(random, (probability == null ? js.Syntax.code("undefined") : probability));
 }
 
 inline function randomExponential(random:flight.RandomSource, ?rate:Float):Float {
-  return flight._js._fn.Math.randomExponential(random, rate);
+  return flight._js._fn.Math.randomExponential(random, (rate == null ? js.Syntax.code("undefined") : rate));
 }
 
 inline function randomGaussian(random:flight.RandomSource, ?mean:Float, ?standardDeviation:Float):Float {
-  return flight._js._fn.Math.randomGaussian(random, mean, standardDeviation);
+  return flight._js._fn.Math.randomGaussian(random, (mean == null ? js.Syntax.code("undefined") : mean), (standardDeviation == null ? js.Syntax.code("undefined") : standardDeviation));
 }
 
 inline function randomGaussianPair(random:flight.RandomSource, ?mean:Float, ?standardDeviation:Float):Array<Float> {
-  return flight._js._fn.Math.randomGaussianPair(random, mean, standardDeviation);
+  return flight._js._fn.Math.randomGaussianPair(random, (mean == null ? js.Syntax.code("undefined") : mean), (standardDeviation == null ? js.Syntax.code("undefined") : standardDeviation));
 }
 
 inline function randomInsideUnitDisc(random:flight.RandomSource, out:flight.Vector2Like):Void {
@@ -203,7 +203,7 @@ inline function randomOnUnitSphere(random:flight.RandomSource, out:flight.Vector
 }
 
 inline function randomPoisson(random:flight.RandomSource, ?lambda:Float):Float {
-  return flight._js._fn.Math.randomPoisson(random, lambda);
+  return flight._js._fn.Math.randomPoisson(random, (lambda == null ? js.Syntax.code("undefined") : lambda));
 }
 
 inline function randomRange(random:flight.RandomSource, min:Float, max:Float):Float {

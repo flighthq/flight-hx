@@ -15,31 +15,31 @@ inline function explainTextSegmenterBackend(textSegmenter:flight.HostTextSegment
 }
 
 inline function getNextGraphemeBoundary(textSegmenter:flight.HostTextSegmenterCapability, text:String, index:Float, ?locale:String):Float {
-  return flight._js._fn.Textsegment.getNextGraphemeBoundary(textSegmenter, text, index, locale);
+  return flight._js._fn.Textsegment.getNextGraphemeBoundary(textSegmenter, text, index, (locale == null ? js.Syntax.code("undefined") : locale));
 }
 
 inline function getNextSentenceBoundary(textSegmenter:flight.HostTextSegmenterCapability, text:String, index:Float, ?locale:String):Float {
-  return flight._js._fn.Textsegment.getNextSentenceBoundary(textSegmenter, text, index, locale);
+  return flight._js._fn.Textsegment.getNextSentenceBoundary(textSegmenter, text, index, (locale == null ? js.Syntax.code("undefined") : locale));
 }
 
 inline function getNextWordBoundary(textSegmenter:flight.HostTextSegmenterCapability, text:String, index:Float, ?locale:String):Float {
-  return flight._js._fn.Textsegment.getNextWordBoundary(textSegmenter, text, index, locale);
+  return flight._js._fn.Textsegment.getNextWordBoundary(textSegmenter, text, index, (locale == null ? js.Syntax.code("undefined") : locale));
 }
 
 inline function getPreviousGraphemeBoundary(textSegmenter:flight.HostTextSegmenterCapability, text:String, index:Float, ?locale:String):Float {
-  return flight._js._fn.Textsegment.getPreviousGraphemeBoundary(textSegmenter, text, index, locale);
+  return flight._js._fn.Textsegment.getPreviousGraphemeBoundary(textSegmenter, text, index, (locale == null ? js.Syntax.code("undefined") : locale));
 }
 
 inline function getPreviousSentenceBoundary(textSegmenter:flight.HostTextSegmenterCapability, text:String, index:Float, ?locale:String):Float {
-  return flight._js._fn.Textsegment.getPreviousSentenceBoundary(textSegmenter, text, index, locale);
+  return flight._js._fn.Textsegment.getPreviousSentenceBoundary(textSegmenter, text, index, (locale == null ? js.Syntax.code("undefined") : locale));
 }
 
 inline function getPreviousWordBoundary(textSegmenter:flight.HostTextSegmenterCapability, text:String, index:Float, ?locale:String):Float {
-  return flight._js._fn.Textsegment.getPreviousWordBoundary(textSegmenter, text, index, locale);
+  return flight._js._fn.Textsegment.getPreviousWordBoundary(textSegmenter, text, index, (locale == null ? js.Syntax.code("undefined") : locale));
 }
 
 inline function getWordRangeAt(textSegmenter:flight.HostTextSegmenterCapability, text:String, index:Float, ?locale:String):Null<flight.TextSegmentRange> {
-  return flight._js._fn.Textsegment.getWordRangeAt(textSegmenter, text, index, locale);
+  return flight._js._fn.Textsegment.getWordRangeAt(textSegmenter, text, index, (locale == null ? js.Syntax.code("undefined") : locale));
 }
 
 inline function reportTextSegmenterUnavailable():Void {
@@ -47,15 +47,15 @@ inline function reportTextSegmenterUnavailable():Void {
 }
 
 inline function segmentGraphemes(hostTextSegmenter:flight.HostTextSegmenterCapability, text:String, ?locale:String):Array<flight.TextSegment> {
-  return flight._js._fn.Textsegment.segmentGraphemes(hostTextSegmenter, text, locale);
+  return flight._js._fn.Textsegment.segmentGraphemes(hostTextSegmenter, text, (locale == null ? js.Syntax.code("undefined") : locale));
 }
 
 inline function segmentSentences(hostTextSegmenter:flight.HostTextSegmenterCapability, text:String, ?locale:String):Array<flight.TextSegment> {
-  return flight._js._fn.Textsegment.segmentSentences(hostTextSegmenter, text, locale);
+  return flight._js._fn.Textsegment.segmentSentences(hostTextSegmenter, text, (locale == null ? js.Syntax.code("undefined") : locale));
 }
 
 inline function segmentWords(hostTextSegmenter:flight.HostTextSegmenterCapability, text:String, ?locale:String):Array<flight.TextSegment> {
-  return flight._js._fn.Textsegment.segmentWords(hostTextSegmenter, text, locale);
+  return flight._js._fn.Textsegment.segmentWords(hostTextSegmenter, text, (locale == null ? js.Syntax.code("undefined") : locale));
 }
 
 inline function setTextSegmentGuard(guard:Null<flight.TextSegmentGuard>):Void {

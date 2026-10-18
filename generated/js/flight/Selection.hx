@@ -55,7 +55,7 @@ inline function findNodesInLassoSelection<NodeType:flight.BoundsNodeAny>(selecti
 }
 
 inline function findNodesInMarqueeSelection<NodeType:flight.BoundsNodeAny>(selection:flight.MarqueeSelection, candidates:Array<NodeType>, ?mode:flight.MarqueeSelectionMode):Array<NodeType> {
-  return flight._js._fn.Selection.findNodesInMarqueeSelection(selection, candidates, mode);
+  return flight._js._fn.Selection.findNodesInMarqueeSelection(selection, candidates, (mode == null ? js.Syntax.code("undefined") : mode));
 }
 
 inline function getActiveNode<NodeType:flight.HierarchyNodeAny>(state:flight.SelectionState<NodeType>):Null<NodeType> {

@@ -7,11 +7,11 @@ inline function computeBitmapTextLocalBoundsRectangle(out:flight.Rectangle, sour
 }
 
 inline function createBitmapText(glyphSource:Null<flight.GlyphSource>, ?options:flight.BitmapTextOptions):flight.BitmapText {
-  return flight._js._fn.Bitmaptext.createBitmapText(glyphSource, options);
+  return flight._js._fn.Bitmaptext.createBitmapText(glyphSource, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function createBitmapTextData(?data:Dynamic):flight.BitmapTextData {
-  return flight._js._fn.Bitmaptext.createBitmapTextData(data);
+  return flight._js._fn.Bitmaptext.createBitmapTextData((data == null ? js.Syntax.code("undefined") : data));
 }
 
 inline function createBitmapTextRuntime():flight.BitmapTextRuntime {
@@ -43,7 +43,7 @@ inline function getBitmapTextPages(source:flight.BitmapText):Array<flight.Bitmap
 }
 
 inline function initializeBitmapTextData(out:flight.EntityConstruction<flight.BitmapTextData>, ?data:Dynamic):Void {
-  flight._js._fn.Bitmaptext.initializeBitmapTextData(out, data);
+  flight._js._fn.Bitmaptext.initializeBitmapTextData(out, (data == null ? js.Syntax.code("undefined") : data));
 }
 
 inline function isBitmapTextGlyphLayoutStale(source:flight.BitmapText):Bool {

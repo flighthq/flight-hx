@@ -15,7 +15,7 @@ inline function createPhysics3DAbiBodyBuffer(capacity:Float):flight.Physics3DAbi
 }
 
 inline function createPhysics3DAbiCommandBuffer(?byteCapacity:Float):flight.Physics3DAbiCommandBuffer {
-  return flight._js._fn.Physics3dAbi.createPhysics3DAbiCommandBuffer(byteCapacity);
+  return flight._js._fn.Physics3dAbi.createPhysics3DAbiCommandBuffer((byteCapacity == null ? js.Syntax.code("undefined") : byteCapacity));
 }
 
 inline function createPhysics3DAbiContactBuffer(contactCapacity:Float, pointCapacity:Float):flight.Physics3DAbiContactBuffer {
@@ -87,23 +87,23 @@ inline function initializeReferencePhysics3DAbi(out:flight.EntityConstruction<fl
 }
 
 inline function queryPhysics3DAbiPoint(abi:flight.Physics3DAbi, world:flight.Physics3DAbiWorldHandle, x:Float, y:Float, z:Float, out:flight.Physics3DAbiQueryBuffer, ?filter:Null<flight.Physics3DQueryFilter>):Bool {
-  return flight._js._fn.Physics3dAbi.queryPhysics3DAbiPoint(abi, world, x, y, z, out, filter);
+  return flight._js._fn.Physics3dAbi.queryPhysics3DAbiPoint(abi, world, x, y, z, out, (filter == null ? js.Syntax.code("undefined") : filter));
 }
 
 inline function queryPhysics3DAbiRay(abi:flight.Physics3DAbi, world:flight.Physics3DAbiWorldHandle, originX:Float, originY:Float, originZ:Float, directionX:Float, directionY:Float, directionZ:Float, out:flight.Physics3DAbiQueryBuffer, ?maxFraction:Float, ?filter:Null<flight.Physics3DQueryFilter>):Bool {
-  return flight._js._fn.Physics3dAbi.queryPhysics3DAbiRay(abi, world, originX, originY, originZ, directionX, directionY, directionZ, out, maxFraction, filter);
+  return flight._js._fn.Physics3dAbi.queryPhysics3DAbiRay(abi, world, originX, originY, originZ, directionX, directionY, directionZ, out, (maxFraction == null ? js.Syntax.code("undefined") : maxFraction), (filter == null ? js.Syntax.code("undefined") : filter));
 }
 
 inline function queryPhysics3DAbiRayClosest(abi:flight.Physics3DAbi, world:flight.Physics3DAbiWorldHandle, originX:Float, originY:Float, originZ:Float, directionX:Float, directionY:Float, directionZ:Float, out:flight.Physics3DAbiQueryBuffer, ?maxFraction:Float, ?filter:Null<flight.Physics3DQueryFilter>):Bool {
-  return flight._js._fn.Physics3dAbi.queryPhysics3DAbiRayClosest(abi, world, originX, originY, originZ, directionX, directionY, directionZ, out, maxFraction, filter);
+  return flight._js._fn.Physics3dAbi.queryPhysics3DAbiRayClosest(abi, world, originX, originY, originZ, directionX, directionY, directionZ, out, (maxFraction == null ? js.Syntax.code("undefined") : maxFraction), (filter == null ? js.Syntax.code("undefined") : filter));
 }
 
 inline function queryPhysics3DAbiRegion(abi:flight.Physics3DAbi, world:flight.Physics3DAbiWorldHandle, region:flight.SpatialAabb3D, out:flight.Physics3DAbiQueryBuffer, ?filter:Null<flight.Physics3DQueryFilter>):Bool {
-  return flight._js._fn.Physics3dAbi.queryPhysics3DAbiRegion(abi, world, region, out, filter);
+  return flight._js._fn.Physics3dAbi.queryPhysics3DAbiRegion(abi, world, region, out, (filter == null ? js.Syntax.code("undefined") : filter));
 }
 
 inline function queryPhysics3DAbiShapeCast(abi:flight.Physics3DAbi, world:flight.Physics3DAbiWorldHandle, shape:flight.CollisionBuiltInShape3D, dx:Float, dy:Float, dz:Float, out:flight.Physics3DAbiQueryBuffer, ?maxFraction:Float, ?filter:Null<flight.Physics3DQueryFilter>):Bool {
-  return flight._js._fn.Physics3dAbi.queryPhysics3DAbiShapeCast(abi, world, shape, dx, dy, dz, out, maxFraction, filter);
+  return flight._js._fn.Physics3dAbi.queryPhysics3DAbiShapeCast(abi, world, shape, dx, dy, dz, out, (maxFraction == null ? js.Syntax.code("undefined") : maxFraction), (filter == null ? js.Syntax.code("undefined") : filter));
 }
 
 inline function readPhysics3DAbiBodies(abi:flight.Physics3DAbi, world:flight.Physics3DAbiWorldHandle, bodyIds:Null<flight._internal._UInt32Array<flight._internal._ArrayBuffer>>, out:flight.Physics3DAbiBodyBuffer):Bool {
@@ -119,7 +119,7 @@ inline function readPhysics3DAbiJoints(abi:flight.Physics3DAbi, world:flight.Phy
 }
 
 inline function stepPhysics3DAbiWorld(abi:flight.Physics3DAbi, world:flight.Physics3DAbiWorldHandle, dt:Float, ?hooks:Null<flight.Physics3DAbiContactHooks>):flight.Physics3DAbiStepStatus {
-  return flight._js._fn.Physics3dAbi.stepPhysics3DAbiWorld(abi, world, dt, hooks);
+  return flight._js._fn.Physics3dAbi.stepPhysics3DAbiWorld(abi, world, dt, (hooks == null ? js.Syntax.code("undefined") : hooks));
 }
 
 inline function writePhysics3DAbiApplyForceAtPointCommand(out:flight.Physics3DAbiCommandBuffer, bodyId:flight.Physics3DAbiObjectId, x:Float, y:Float, z:Float, pointX:Float, pointY:Float, pointZ:Float):Bool {

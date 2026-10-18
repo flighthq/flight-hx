@@ -243,7 +243,7 @@ inline function areGlEffectGuardsEnabled(state:flight.GlRenderState):Bool {
 }
 
 inline function beginGlEffectPass(state:flight.GlRenderState, pipeline:flight.GlEffectState, ?clear:flight.RenderTargetClear, ?colorSpace:flight.RenderTargetColorSpace):flight.GlRenderPass {
-  return flight._js._fn.EffectsGl.beginGlEffectPass(state, pipeline, clear, colorSpace);
+  return flight._js._fn.EffectsGl.beginGlEffectPass(state, pipeline, (clear == null ? js.Syntax.code("undefined") : clear), (colorSpace == null ? js.Syntax.code("undefined") : colorSpace));
 }
 
 inline function createGlEffectGradientRampTexture(gl:flight.GlContext, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>):js.html.webgl.Texture {
@@ -251,7 +251,7 @@ inline function createGlEffectGradientRampTexture(gl:flight.GlContext, colors:Ar
 }
 
 inline function createGlEffectState(_state:flight.GlRenderState, ?options:flight.EffectStateOptions):flight.GlEffectState {
-  return flight._js._fn.EffectsGl.createGlEffectState(_state, options);
+  return flight._js._fn.EffectsGl.createGlEffectState(_state, (options == null ? js.Syntax.code("undefined") : options));
 }
 
 inline function destroyGlEffectState(state:flight.GlRenderState, pipeline:flight.GlEffectState):Void {
@@ -275,7 +275,7 @@ inline function evaluateGlslScalarExpression(expression:String, bindings:haxe.Dy
 }
 
 inline function explainGlEffectApplication(state:flight.GlRenderState, effects:Array<flight.Effect>, sourceAvailable:Bool, ?destinationAvailable:Bool):flight.GlEffectApplicationExplanation {
-  return flight._js._fn.EffectsGl.explainGlEffectApplication(state, effects, sourceAvailable, destinationAvailable);
+  return flight._js._fn.EffectsGl.explainGlEffectApplication(state, effects, sourceAvailable, (destinationAvailable == null ? js.Syntax.code("undefined") : destinationAvailable));
 }
 
 inline function extractGlslExpression(source:String, pattern:flight._internal._RegExp):String {
@@ -403,7 +403,7 @@ inline function registerGlDropShadowEffect(state:flight.GlRenderState):Void {
 }
 
 inline function registerGlEffect(state:flight.GlRenderState, kind:String, runner:flight.GlEffectRunner, ?isResolvable:flight.GlEffectResolver):Void {
-  flight._js._fn.EffectsGl.registerGlEffect(state, kind, runner, isResolvable);
+  flight._js._fn.EffectsGl.registerGlEffect(state, kind, runner, (isResolvable == null ? js.Syntax.code("undefined") : isResolvable));
 }
 
 inline function registerGlFilmGrainEffect(state:flight.GlRenderState):Void {

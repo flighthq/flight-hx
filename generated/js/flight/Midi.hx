@@ -147,6 +147,6 @@ inline function retainMidiOutputPortResourceState(port:flight.MidiOutputPort, op
 }
 
 inline function sendMidiMessage(port:flight.MidiOutputPort, data:flight._internal._UInt8Array, ?timestamp:Float):flight.MidiMessageSendOutcome {
-  return flight._js._fn.Midi.sendMidiMessage(port, data, timestamp);
+  return flight._js._fn.Midi.sendMidiMessage(port, data, (timestamp == null ? js.Syntax.code("undefined") : timestamp));
 }
 #end
