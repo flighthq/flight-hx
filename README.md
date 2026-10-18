@@ -51,10 +51,12 @@ npm run refresh:transpile-surface:check # reject fallback facade/partition drift
 npm run check               # run every production gate, including web behavior/DCE and drift
 ```
 
-The production pins are Flight `a627849`, flight-compiler `804435a`, and flight-cpp `eb4021f`.
+The production pins are Flight `a627849`, flight-compiler `804435a`, and flight-cpp `a2fdb53`.
 The flight-cpp snapshot was generated from the same Flight source with compiler `806d257`; both
-compiler revisions are recorded rather than incorrectly treated as equal. The compiler scans the
-complete current 153-package Flight SDK graph. Extern
+compiler revisions are recorded rather than incorrectly treated as equal. A later tested flight-cpp
+head (`4a7dbfd`) is intentionally not pinned: its own Camera2D target fails because
+`shape_stroke.hpp` initializes an inherited `ShapeStrokeRegion.path` as a direct designated member.
+The compiler scans the complete current 153-package Flight SDK graph. Extern
 generation accepts all 3,144 production modules and emits 3,224 compiler files plus 3,197 complete
 default-public-API modules. The generated `flight.*` web surface contains 3,071 types, 6,906
 functions, and 1,254 values across all 153 package contracts. All 8,167 runtime declarations are
@@ -84,16 +86,16 @@ The complete 7,224-file transpiled tree compiles and executes on JavaScript usin
 
 Native integration starts from what the pinned current flight-cpp SDK actually provides, rather than waiting
 for full TS-to-Haxe transpilation or claiming parity it has not earned. `src-cpp/manifest.json` records
-121 compile-proven bindings across 24 public modules: 62 compiler-planned direct calls, four
-compiler-emitted UTF-8 String adapters, 52 required-primitive overrides, and three optional-scalar
+122 compile-proven bindings across 24 public modules: 62 compiler-planned direct calls, four
+compiler-emitted UTF-8 String adapters, 53 required-primitive overrides, and three optional-scalar
 adapters from dependency-complete
 flight-cpp headers. It also records the generated SDK's
 distinct source/compiler revisions, C++20, and the two downstream hxcpp/flight-cpp corrections. The current generated native
-SDK reports 2,567 emitted modules; Haxe exposes only the smaller exact partition it actually proves.
-The checked `src-cpp/reconciliation.json` splits that total into 1,895 dependency-complete and 672
-dependency-incomplete modules, alongside 584 refused modules. It reconciles every web package with
-the 121 bound functions, three upstream Scene2D handle types, one integration-only handle, and the
-remaining gaps. It also identifies 70 unbound scalar functions across 33 packages whose signatures
+SDK reports 2,574 emitted modules; Haxe exposes only the smaller exact partition it actually proves.
+The checked `src-cpp/reconciliation.json` splits that total into 1,902 dependency-complete and 672
+dependency-incomplete modules, alongside 577 refused modules. It reconciles every web package with
+the 122 bound functions, three upstream Scene2D handle types, one integration-only handle, and the
+remaining gaps. It also identifies 69 unbound scalar functions across 32 packages whose signatures
 and inline generated C++ definitions make them the next compile-probe candidates; header presence
 does not promote them to support.
 The compiler-owned dual plan covers all 11,247 public rows and emits 2,245 Haxe-C++ declarations.
@@ -101,15 +103,15 @@ All 66 header-passing function candidates are promoted: 62 directly and four thr
 exact adapter emissions (`Audio.getAudioMimeTypeEssence`, `Color.computeRgbHexString`,
 `Color.computeRgbaCssString`, and `Protocol.isValidProtocolScheme`). Those adapters copy through
 UTF-8 in isolated translation units, keeping Flight headers outside hxcpp-generated namespaces.
-The 52 required-scalar functions and three optional-scalar adapters are explicit flight-hx
+The 53 required-scalar functions and three optional-scalar adapters are explicit flight-hx
 golden-reference overrides for functions that the current compiler plan omits despite
 dependency-complete definitions in flight-cpp. Optional adapters carry an explicit presence bit and
 reconstruct `std::optional`, preserving omitted and supplied arguments without exposing that
 transport publicly. Generation requires exact primitive signatures and fails once the compiler
 begins planning them, making future upstream support replace rather than coexist with the downstream
-override. Compile probing also
-records `Skeleton2dFormats.clampUnit` as unavailable: its generated header contains unrelated,
-ill-typed `flight::Any` operations, demonstrating why an emitted header is not itself support proof.
+override. The newer flight-cpp Spine helper override makes the formerly refused
+`Skeleton2dFormats.clampUnit` header compile cleanly, so that function now joins the same
+compile-and-run-proven native partition.
 `examples/cross-target-math/` compiles and runs the same installed-package consumer against those
 headers on desktop and the current complete ESM externs on web. `examples/window-native/` additionally
 links `Flight::HostSdlGl` and uses the real SDL3 window, OpenGL context, clear, and presentation path.

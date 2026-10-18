@@ -21680,12 +21680,12 @@
   ],
   "pins": {
     "flightCompiler": "804435ad89716bd3ddb8144e435adb0be6c9477b",
-    "flightCpp": "eb4021fafee3b829e7065c99f081c32ce8117d72",
+    "flightCpp": "a2fdb530b5ab462246f47af3d8c1939d606b8bbd",
     "flightCppCompiler": "806d257d2f4100de745cc97340e61c2f301b0f24",
     "flightCppSource": "a62784923f3be814463286c9fb28edfe6ab15789"
   },
   "refusalLedger": {
-    "diagnostics": 1258,
+    "diagnostics": 1251,
     "schema": "flight-generated-sdk-refusals/2"
   },
   "schemas": {

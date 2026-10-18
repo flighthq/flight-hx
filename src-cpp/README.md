@@ -8,25 +8,24 @@ headers. Public facade overrides deliberately expose nothing outside that manife
 ## Current compile audit
 
 The current pin's generated SDK uses the same Flight revision as this repo and records its distinct
-flight-compiler revision (`806d257` versus flight-hx planning at `804435a`). It reports 2,567 emitted
-and 584 refused modules from 3,151 profile inputs across 153 packages. The exact general-purpose
-Haxe-callable partition remains intentionally smaller: 121 functions across 24 public modules. They
+flight-compiler revision (`806d257` versus flight-hx planning at `804435a`). It reports 2,574 emitted
+and 577 refused modules from 3,151 profile inputs across 153 packages. The exact general-purpose
+Haxe-callable partition remains intentionally smaller: 122 functions across 24 public modules. They
 are compared with current web signatures, then compiled and executed from one Haxe source in the
 cross-target gate. Sixty-two bind directly from the compiler plan, four use compiler-emitted UTF-8
-String adapters, 52 required-primitive functions, and three optional-scalar adapters are explicit
+String adapters, 53 required-primitive functions, and three optional-scalar adapters are explicit
 flight-hx overrides from
 dependency-complete flight-cpp headers.
 Expanding that partition remains manifest-first and compile-proven; the larger generated C++
 inventory is not silently claimed as Haxe support.
 
 `reconciliation.json` is the checked package-by-package difference between that exact partition and
-the complete default web API. It records 1,895 dependency-complete modules, 672
-dependency-incomplete modules, 584 refused modules, and all associated refusal codes. The compiler
+the complete default web API. It records 1,902 dependency-complete modules, 672
+dependency-incomplete modules, 577 refused modules, and all associated refusal codes. The compiler
 dual plan covers all 11,247 public rows and emits 2,245 Haxe-C++ declarations. All 66 function
 candidates are promoted: 62 as direct calls and four through exact compiler-emitted adapters. The
-older header scan
-also finds 183 public scalar signatures with matching inline definitions; 113 overlap the promoted
-partition and the remaining 70 across 33 packages are probe candidates, not promised support.
+header scan also finds 183 public scalar signatures with matching inline definitions; 114 overlap
+the promoted partition and the remaining 69 across 32 packages are probe candidates, not promised support.
 Complex signatures stay classified for identity, lifetime, nullable/union, callback, and
 structural-owner review.
 
@@ -45,10 +44,10 @@ override instead of leaving two competing sources of truth.
 Optional-scalar overrides have distinct provenance and require the exact generated
 `std::optional` signature. Their internal ABI carries a presence bit plus the primitive value, while
 the public Haxe signature remains identical to the web API.
-`manifest.json` also records failed override probes. The current refusal is
-`Skeleton2dFormats.clampUnit`: its otherwise emitted header contains unrelated generated functions
-with invalid `flight::Any` conversions, comparisons, and indexing, so the module cannot cross a C++
-compile and remains unavailable.
+`manifest.json` also records failed override probes. The current inventory is empty: flight-cpp's
+Spine helper override repaired the last recorded header failure, and
+`Skeleton2dFormats.clampUnit` now crosses the same compile-and-run gate as the other required-scalar
+overrides.
 
 ## Window/render status
 

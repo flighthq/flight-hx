@@ -354,15 +354,18 @@ function isDirectScalarSignature(signature) {
 }
 
 function validatePins() {
+  const cppSourceRevisions = Array.isArray(cppManifest.source.revisions)
+    ? cppManifest.source.revisions
+    : [cppManifest.source.revision].filter(Boolean);
   equal('web Flight pin', webManifest.source.revision, flight.commit);
   equal('web compiler pin', webManifest.compiler.revision, compiler.commit);
   equal('native flight-cpp pin', nativeManifest.flightCppRevision, flightCpp.commit);
-  equal('native generated Flight pin', nativeManifest.generatedSdk.sourceRevision, cppManifest.source.revision);
+  includes('native generated Flight pin', cppSourceRevisions, nativeManifest.generatedSdk.sourceRevision);
   equal('native generated compiler pin', nativeManifest.generatedSdk.compilerRevision, cppManifest.compiler.revision);
-  equal('web/native Flight source pin', cppManifest.source.revision, webManifest.source.revision);
+  includes('web/native Flight source pin', cppSourceRevisions, webManifest.source.revision);
   equal('native-plan flight-cpp pin', nativePlanning.pins.flightCpp, flightCpp.commit);
   equal('native-plan flight-compiler pin', nativePlanning.pins.flightCompiler, compiler.commit);
-  equal('native-plan generated Flight pin', nativePlanning.pins.flightCppSource, cppManifest.source.revision);
+  includes('native-plan generated Flight pin', cppSourceRevisions, nativePlanning.pins.flightCppSource);
   equal('native-plan generated compiler pin', nativePlanning.pins.flightCppCompiler, cppManifest.compiler.revision);
   equal('native manifest Haxe-plan schema', nativeManifest.haxeBindingPlan.schema, nativePlanning.schemas.cppExternPlan);
   equal('native manifest Haxe-plan compiler pin', nativeManifest.haxeBindingPlan.compilerRevision, compiler.commit);
@@ -456,6 +459,10 @@ function readJson(filename) {
 
 function equal(label, actual, expected) {
   if (actual !== expected) throw new Error(`${label}: ${String(actual)} != ${String(expected)}`);
+}
+
+function includes(label, actual, expected) {
+  if (!actual.includes(expected)) throw new Error(`${label}: ${String(expected)} is not in ${actual.join(', ')}`);
 }
 
 function formatSummary(prefix) {

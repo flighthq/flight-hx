@@ -4,6 +4,7 @@
 // Declaration-only boundary: no flight::* type enters hxcpp-generated namespace flight.
 namespace flight_hx::skeleton2d_formats {
 
+double clamp_unit(double value);
 double clamp_spine_binary_unit(double value);
 
 } // namespace flight_hx::skeleton2d_formats

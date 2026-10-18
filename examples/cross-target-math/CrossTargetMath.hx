@@ -144,6 +144,8 @@ class CrossTargetMath {
     clearShapeBoundsCommands();
     assertClose('getShapeBoundsCommandRegistryRevision', getShapeBoundsCommandRegistryRevision(), shapeBoundsRevision + 1.0);
     assertClose('getPathCommandOperandCount', getPathCommandOperandCount(6.0), 6.0);
+    assertClose('clampUnit low', clampUnit(-1.0), 0.0);
+    assertClose('clampUnit high', clampUnit(2.0), 1.0);
     assertClose('clampSpineBinaryUnit low', clampSpineBinaryUnit(-1.0), 0.0);
     assertClose('clampSpineBinaryUnit high', clampSpineBinaryUnit(2.0), 1.0);
     assertTrue('isKnownSwfTag', isKnownSwfTag(1.0) && !isKnownSwfTag(3.0));

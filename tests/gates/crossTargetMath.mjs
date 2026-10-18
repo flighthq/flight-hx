@@ -165,9 +165,17 @@ function validateNativeManifest(flightCpp) {
   const generatedManifest = JSON.parse(
     readFileSync(path.join(flightCpp.directory, 'generated', 'manifest.json'), 'utf8'),
   );
+  const generatedSourceRevisions = Array.isArray(generatedManifest.source?.revisions)
+    ? generatedManifest.source.revisions
+    : [generatedManifest.source?.revision].filter(Boolean);
+  if (!generatedSourceRevisions.includes(manifest.generatedSdk?.sourceRevision)) {
+    fail(
+      `native generated-SDK source revision is ${String(manifest.generatedSdk?.sourceRevision)}, ` +
+        `expected one of ${generatedSourceRevisions.join(', ')}`,
+    );
+  }
   for (const [field, actual, expected] of [
     ['compiler revision', manifest.generatedSdk?.compilerRevision, generatedManifest.compiler?.revision],
-    ['source revision', manifest.generatedSdk?.sourceRevision, generatedManifest.source?.revision],
     ['emitted module count', manifest.generatedSdk?.emittedModules, generatedManifest.summary?.emittedModules],
   ]) {
     if (actual !== expected) fail(`native generated-SDK ${field} is ${String(actual)}, expected ${String(expected)}`);

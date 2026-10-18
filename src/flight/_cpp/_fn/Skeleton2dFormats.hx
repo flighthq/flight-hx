@@ -22,6 +22,9 @@ package flight._cpp._fn;
 ')
 @:include("flight_hx/skeleton2dformats.hpp")
 extern class Skeleton2dFormats {
+  @:native("flight_hx::skeleton2d_formats::clamp_unit")
+  static function clampUnit(value:Float):Float;
+
   @:native("flight_hx::skeleton2d_formats::clamp_spine_binary_unit")
   static function clampSpineBinaryUnit(value:Float):Float;
 }

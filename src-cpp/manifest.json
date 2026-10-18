@@ -1,10 +1,10 @@
 {
   "schema": "flight-hx-cpp-bindings/1",
-  "flightCppRevision": "eb4021fafee3b829e7065c99f081c32ce8117d72",
+  "flightCppRevision": "a2fdb530b5ab462246f47af3d8c1939d606b8bbd",
   "generatedSdk": {
     "compilerRevision": "806d257d2f4100de745cc97340e61c2f301b0f24",
     "sourceRevision": "a62784923f3be814463286c9fb28edfe6ab15789",
-    "emittedModules": 2567
+    "emittedModules": 2574
   },
   "haxeBindingPlan": {
     "schema": "flight-haxe-cpp-extern-plan/1",
@@ -19,14 +19,7 @@
     "flight-hx-hxcpp-flight-namespace-isolation/1",
     "flight-hx-hxcpp-cpp11-override/1"
   ],
-  "scalarOverrideRefusals": [
-    {
-      "publicName": "flight.Skeleton2dFormats.clampUnit",
-      "header": "flight/skeleton2d_formats/spine_parse_helpers.hpp",
-      "code": "flight-cpp-header-compile-failed",
-      "detail": "Unrelated generated functions in the header contain unresolved flight::Any conversions, comparisons, and indexing."
-    }
-  ],
+  "scalarOverrideRefusals": [],
   "hosts": [
     {
       "module": "flight.HostSdlGl",
@@ -508,6 +501,12 @@
     {
       "module": "flight.Skeleton2dFormats",
       "functions": [
+        {
+          "name": "clampUnit",
+          "native": "flight::skeleton2d_formats::clamp_unit",
+          "header": "flight/skeleton2d_formats/spine_parse_helpers.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        },
         {
           "name": "clampSpineBinaryUnit",
           "native": "flight::skeleton2d_formats::clamp_spine_binary_unit",

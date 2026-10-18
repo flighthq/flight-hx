@@ -527,11 +527,25 @@ function createNativeBindingPlanner(backend, input, flightCppDependency, compile
   const headerStatusArtifact = JSON.parse(
     readFileSync(path.join(flightCppDependency.directory, 'generated', 'header-status.json'), 'utf8'),
   );
-  if (refusalArtifact.schema !== 'flight-generated-sdk-refusals/2' || !Array.isArray(refusalArtifact.refusals)) {
-    throw new Error('Pinned flight-cpp refusal ledger is not flight-generated-sdk-refusals/2');
+  if (
+    !['flight-generated-sdk-refusals/2', 'flight-generated-sdk-refusals/3'].includes(refusalArtifact.schema) ||
+    !Array.isArray(refusalArtifact.refusals)
+  ) {
+    throw new Error('Pinned flight-cpp refusal ledger is not a supported flight-generated-sdk-refusals artifact');
   }
   if (headerStatusArtifact.schema !== 'flight-cpp-header-status/1' || !Array.isArray(headerStatusArtifact.headers)) {
     throw new Error('Pinned flight-cpp header status is not flight-cpp-header-status/1');
+  }
+  const refusalSourceRevisions =
+    refusalArtifact.schema === 'flight-generated-sdk-refusals/3'
+      ? refusalArtifact.sourceRevisions
+      : [refusalArtifact.sourceRevision];
+  if (
+    refusalArtifact.compilerRevision !== headerStatusArtifact.compiler?.revision ||
+    !Array.isArray(refusalSourceRevisions) ||
+    !refusalSourceRevisions.includes(headerStatusArtifact.sourceRevision)
+  ) {
+    throw new Error('Pinned flight-cpp refusal ledger does not describe the pinned generated SDK');
   }
 
   let artifacts;

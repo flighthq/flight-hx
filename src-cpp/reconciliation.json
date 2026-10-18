@@ -53,14 +53,7 @@
       "flight.Math.approxEqualRelative",
       "flight.Math.approxZero"
     ],
-    "refusals": [
-      {
-        "publicName": "flight.Skeleton2dFormats.clampUnit",
-        "header": "flight/skeleton2d_formats/spine_parse_helpers.hpp",
-        "code": "flight-cpp-header-compile-failed",
-        "detail": "Unrelated generated functions in the header contain unresolved flight::Any conversions, comparisons, and indexing."
-      }
-    ],
+    "refusals": [],
     "requiredScalarFunctions": [
       "flight.Effects.computeAcesToneMap",
       "flight.Effects.computeBoxBlurPassRadius",
@@ -109,6 +102,7 @@
       "flight.Shape.clearShapeBoundsCommands",
       "flight.Shape.getPathCommandOperandCount",
       "flight.Shape.getShapeBoundsCommandRegistryRevision",
+      "flight.Skeleton2dFormats.clampUnit",
       "flight.Skeleton2dFormats.clampSpineBinaryUnit",
       "flight.Swf.isKnownSwfTag",
       "flight.Textbidi.reportTextBidiCompactTableMiss",
@@ -8217,7 +8211,7 @@
         "headerPassingDeclarations": 0
       },
       "flightCpp": {
-        "completeModules": 19,
+        "completeModules": 26,
         "dependencyIncompleteModules": 24,
         "refusalCodes": [
           {
@@ -8225,17 +8219,17 @@
             "name": "dependency-refused"
           },
           {
-            "count": 16,
+            "count": 9,
             "name": "unsupported-ir"
           }
         ],
-        "refusedModules": 16,
+        "refusedModules": 9,
         "sourceModules": 59
       },
       "issues": [
         {
           "code": "flight-cpp-refused-modules",
-          "count": 16
+          "count": 9
         },
         {
           "code": "flight-cpp-dependency-incomplete-modules",
@@ -8243,7 +8237,7 @@
         },
         {
           "code": "native-function-gap",
-          "count": 148
+          "count": 147
         },
         {
           "code": "native-value-gap",
@@ -8252,10 +8246,6 @@
         {
           "code": "non-scalar-signature-review",
           "count": 147
-        },
-        {
-          "code": "header-confirmed-scalar-probe-candidates",
-          "count": 1
         },
         {
           "code": "compiler-haxe-cpp-refused-bindings",
@@ -8269,26 +8259,19 @@
             "holder": "Skeleton2dFormats",
             "name": "clampSpineBinaryUnit",
             "native": "flight::skeleton2d_formats::clamp_spine_binary_unit"
+          },
+          {
+            "header": "flight/skeleton2d_formats/spine_parse_helpers.hpp",
+            "holder": "Skeleton2dFormats",
+            "name": "clampUnit",
+            "native": "flight::skeleton2d_formats::clamp_unit"
           }
         ],
         "types": [],
         "values": []
       },
       "package": "@flighthq/skeleton2d-formats",
-      "scalarProbeCandidates": [
-        {
-          "cppName": "clamp_unit",
-          "headers": [
-            {
-              "path": "flight/skeleton2d_formats/spine_parse_helpers.hpp",
-              "status": "emitted"
-            }
-          ],
-          "holder": "Skeleton2dFormats",
-          "name": "clampUnit",
-          "signature": "function clampUnit(value:Float):Float"
-        }
-      ],
+      "scalarProbeCandidates": [],
       "status": "partial-native",
       "webDefault": {
         "functions": 149,
@@ -10665,26 +10648,26 @@
   "pins": {
     "flight": "a62784923f3be814463286c9fb28edfe6ab15789",
     "flightCompiler": "804435ad89716bd3ddb8144e435adb0be6c9477b",
-    "flightCpp": "eb4021fafee3b829e7065c99f081c32ce8117d72",
+    "flightCpp": "a2fdb530b5ab462246f47af3d8c1939d606b8bbd",
     "flightCppCompiler": "806d257d2f4100de745cc97340e61c2f301b0f24"
   },
   "schema": "flight-hx-native-public-api-reconciliation/1",
   "summary": {
     "flightCpp": {
-      "completeModules": 1895,
+      "completeModules": 1902,
       "dependencyIncompleteModules": 672,
-      "refusalDiagnostics": 1258,
-      "refusedModules": 584,
+      "refusalDiagnostics": 1251,
+      "refusedModules": 577,
       "sourceModules": 3151
     },
     "nativeDefault": {
-      "boundHeaderConfirmedScalarFunctions": 113,
+      "boundHeaderConfirmedScalarFunctions": 114,
       "extensionTypes": 1,
-      "functions": 121,
+      "functions": 122,
       "packages": 25,
       "optionalScalarAdapters": 3,
-      "requiredScalarOverrides": 52,
-      "scalarOverrideRefusals": 1,
+      "requiredScalarOverrides": 53,
+      "scalarOverrideRefusals": 0,
       "types": 3,
       "values": 0
     },
@@ -10725,8 +10708,8 @@
     "scalarExpansion": {
       "headerConfirmedFunctions": 183,
       "packages": 45,
-      "unboundProbeCandidates": 70,
-      "unboundProbePackages": 33
+      "unboundProbeCandidates": 69,
+      "unboundProbePackages": 32
     },
     "webDefault": {
       "functions": 6906,
