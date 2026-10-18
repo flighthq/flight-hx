@@ -37,7 +37,8 @@ conditionals would let one unsupported native type poison otherwise usable decla
   compile/run-proven flight-cpp partition. Alongside it, generated native facades materialize every
   declaration for which flight-cpp exposes a symbol, including compiler-refused experiments; their
   separate attempt ledgers prevent Haxe type-check success from being mistaken for ABI proof.
-  Declarations with no flight-cpp symbol remain fail-loud and are recorded rather than invented.
+  Declarations with no compiler/flight-cpp plan locator remain fail-loud and are recorded rather
+  than invented; this does not preclude later manual header discovery and promotion.
 
 The selector **fails loud** on an unsupported target (`#error`), never silently resolves to nothing. It keys on the **packaging pipeline, not the raw target** (see the host-axis section) — precedence:
 
@@ -173,8 +174,8 @@ the 4,268 declarations for which flight-cpp provides a locator: 3,073 types, 747
 functions, 379 still-unproven values, and 69 already-proven functions are materialized; 44 nested
 generic reference types use generated alias-template adapters. Every unproven function/value has a
 per-symbol hidden `extern inline` boundary, preventing an imported proven holder from compiling all
-of its experimental siblings. The other 6,979 public rows have no flight-cpp symbol and remain
-explicitly unavailable. All attempts type-check on the Haxe C++ target, while an actual hxcpp probe
+of its experimental siblings. The other 6,979 public rows have no compiler/flight-cpp plan locator
+and remain explicitly unavailable through the generated path. All attempts type-check on the Haxe C++ target, while an actual hxcpp probe
 records the first concrete ABI seam—`flight::Array<double>` cannot become hxcpp `Array<double>`
 without an adapter. The 69 remaining header-confirmed scalar candidates and every complex carrier
 remain unpromoted until compile/run evidence exists.

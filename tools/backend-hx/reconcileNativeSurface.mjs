@@ -108,7 +108,7 @@ const packages = defaultApi.packages.map((package_) => {
     issue('native-materialized-unproven-types', packageTypeAttempts.length),
     issue('native-materialized-unproven-functions', packageBindingAttempts.filter(({ kind }) => kind === 'function').length),
     issue('native-materialized-unproven-values', packageBindingAttempts.filter(({ kind }) => kind === 'value').length),
-    issue('flight-cpp-symbol-unavailable', packageUnavailableAttempts.length),
+    issue('native-plan-locator-unavailable', packageUnavailableAttempts.length),
   ].filter(({ count }) => count > 0);
   const webDeclarations = package_.functions.length + package_.types.length + package_.values.length;
   const nativeDeclarations = nativeFunctions.length + nativeTypes.length;
@@ -515,7 +515,7 @@ function formatSummary(prefix) {
     `${String(report.summary.nativeDefault.types)} upstream types are compile-proven; ` +
     `${String(report.summary.nativeAttempts.types)} types, ${String(report.summary.nativeAttempts.functions)} functions, and ` +
     `${String(report.summary.nativeAttempts.values)} values are materialized as unproven attempts; ` +
-    `${String(report.summary.nativeAttempts.cppUnavailable)} declarations have no flight-cpp symbol; ` +
+    `${String(report.summary.nativeAttempts.cppUnavailable)} declarations have no compiler/flight-cpp plan locator; ` +
     `${String(report.summary.scalarExpansion.unboundProbeCandidates)} header-confirmed scalar candidates remain.\n`
   );
 }

@@ -108,8 +108,10 @@ partition plus 747 unproven function attempts and 379 unproven value attempts ac
 Each attempt forwards through its own hidden `extern inline` class, so importing one proven holder
 does not compile all of its experimental siblings; selecting an attempt still reaches its real
 Flight header and symbol.
-The other 6,979 rows remain explicit `flight-cpp-symbol-unavailable` entries:
-there is no native symbol to bind yet.
+The other 6,979 rows remain explicit `native-plan-locator-unavailable` entries: the current
+compiler/flight-cpp planning pipeline provides no locator to bind. This does not claim that manual
+header investigation could never find another candidate—the existing downstream scalar overrides
+demonstrate why locator availability and literal symbol existence must remain distinct.
 
 The attempt gates prove that this entire tree resolves and type-checks as Haxe for the C++ target;
 they deliberately do not relabel it ABI-safe. An actual hxcpp probe of
