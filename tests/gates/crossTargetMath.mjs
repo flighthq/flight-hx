@@ -278,7 +278,7 @@ function validateNativeManifest(flightCpp) {
         plan.transport === 'optional-override' ||
         (plan.transport === 'array-float-adapter' && jsMember.signature.includes('?')) ||
         (plan.transport === 'reference-carrier' &&
-          /\\?[A-Za-z_][A-Za-z0-9_]*:(?:Bool|Float)(?:,|\\))/u.test(jsMember.signature))
+          /\?[A-Za-z_][A-Za-z0-9_]*:(?:Bool|Float)(?:,|\))/u.test(jsMember.signature))
           ? optionalBridgeSignature(jsMember.signature)
           : jsMember.signature;
       if (facadeMember.signature !== jsMember.signature || nativeMember.signature !== expectedNativeSignature) {
