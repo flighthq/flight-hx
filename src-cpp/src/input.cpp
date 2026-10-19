@@ -56,4 +56,8 @@ bool was_input_key_released(flight::Ref<flight::types::InputState> state, double
   return flight::input::was_input_key_released(state, keyCode);
 }
 
+flight::Ref<flight::types::InputKeyRepeatTimer> create_input_key_repeat_timer(flight::Ref<flight::types::InputKeyRepeatOptions> options) {
+  return flight::input::create_input_key_repeat_timer(options);
+}
+
 } // namespace flight_hx::input

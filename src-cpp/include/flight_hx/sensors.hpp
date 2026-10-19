@@ -20,5 +20,16 @@ flight::Ref<flight::types::RotationRateReading> create_rotation_rate_reading();
 flight::Ref<flight::types::Sensors> create_sensors();
 void detach_sensors(flight::Ref<flight::types::Sensors> sensors);
 void dispose_sensors(flight::Ref<flight::types::Sensors> sensors);
+void attach_sensors(flight::Ref<flight::types::HostSensorsCapability> hostSensors, flight::Ref<flight::types::Sensors> sensors);
+bool has_accelerometer(flight::Ref<flight::types::HostSensorsCapability> hostSensors);
+bool has_ambient_light_sensor(flight::Ref<flight::types::HostSensorsCapability> hostSensors);
+bool has_barometer(flight::Ref<flight::types::HostSensorsCapability> hostSensors);
+bool has_gravity_sensor(flight::Ref<flight::types::HostSensorsCapability> hostSensors);
+bool has_gyroscope(flight::Ref<flight::types::HostSensorsCapability> hostSensors);
+bool has_linear_acceleration_sensor(flight::Ref<flight::types::HostSensorsCapability> hostSensors);
+bool has_magnetometer(flight::Ref<flight::types::HostSensorsCapability> hostSensors);
+bool has_orientation_sensor(flight::Ref<flight::types::HostSensorsCapability> hostSensors);
+bool has_proximity_sensor(flight::Ref<flight::types::HostSensorsCapability> hostSensors);
+bool is_sensors_supported(flight::Ref<flight::types::HostSensorsCapability> hostSensors);
 
 } // namespace flight_hx::sensors

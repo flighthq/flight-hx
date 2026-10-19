@@ -27,5 +27,26 @@ import flight.*;
 extern class Platform {
   @:native("flight_hx::platform::create_platform_info")
   static function createPlatformInfo():flight.PlatformInfo;
+
+  @:native("flight_hx::platform::get_platform_info")
+  static function getPlatformInfo(hostPlatform:flight.HostPlatformCapability, out:flight.PlatformInfo):flight.PlatformInfo;
+
+  @:native("flight_hx::platform::is_platform_desktop")
+  static function isPlatformDesktop(hostPlatform:flight.HostPlatformCapability):Bool;
+
+  @:native("flight_hx::platform::is_platform_mobile")
+  static function isPlatformMobile(hostPlatform:flight.HostPlatformCapability):Bool;
+
+  @:native("flight_hx::platform::is_platform_native")
+  static function isPlatformNative(hostPlatform:flight.HostPlatformCapability):Bool;
+
+  @:native("flight_hx::platform::is_platform_touch")
+  static function isPlatformTouch(hostPlatform:flight.HostPlatformCapability):Bool;
+
+  @:native("flight_hx::platform::is_platform_version_at_least")
+  static function isPlatformVersionAtLeast(hostPlatform:flight.HostPlatformCapability, minimum:String):Bool;
+
+  @:native("flight_hx::platform::is_platform_web")
+  static function isPlatformWeb(hostPlatform:flight.HostPlatformCapability):Bool;
 }
 #end

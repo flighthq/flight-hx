@@ -36,5 +36,23 @@ extern class Device {
 
   @:native("flight_hx::device::create_safe_area_insets")
   static function createSafeAreaInsets():flight.SafeAreaInsets;
+
+  @:native("flight_hx::device::get_device_capabilities")
+  static function getDeviceCapabilities(hostDevice:flight.HostDeviceCapability, out:flight.DeviceCapabilities):flight.DeviceCapabilities;
+
+  @:native("flight_hx::device::get_device_display_metrics")
+  static function getDeviceDisplayMetrics(hostDevice:flight.HostDeviceCapability, out:flight.DeviceDisplayMetrics):flight.DeviceDisplayMetrics;
+
+  @:native("flight_hx::device::get_device_id")
+  static function getDeviceId(hostDevice:flight.HostDeviceCapability):String;
+
+  @:native("flight_hx::device::get_device_info")
+  static function getDeviceInfo(hostDevice:flight.HostDeviceCapability, out:flight.DeviceInfo):flight.DeviceInfo;
+
+  @:native("flight_hx::device::get_safe_area_insets")
+  static function getSafeAreaInsets(hostDevice:flight.HostDeviceCapability, out:flight.SafeAreaInsets):flight.SafeAreaInsets;
+
+  @:native("flight_hx::device::refresh_device_info")
+  static function refreshDeviceInfo(hostDevice:flight.HostDeviceCapability):Void;
 }
 #end

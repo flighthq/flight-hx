@@ -18,25 +18,25 @@ extern inline function createSafeAreaInsets():flight.SafeAreaInsets {
 }
 
 extern inline function getDeviceCapabilities(hostDevice:flight.HostDeviceCapability, out:flight.DeviceCapabilities):flight.DeviceCapabilities {
-  return flight._cpp._attempt.Attempt_Device_getDeviceCapabilities.getDeviceCapabilities(hostDevice, out);
+  return flight._cpp._fn.Device.getDeviceCapabilities(hostDevice, out);
 }
 
 extern inline function getDeviceDisplayMetrics(hostDevice:flight.HostDeviceCapability, out:flight.DeviceDisplayMetrics):flight.DeviceDisplayMetrics {
-  return flight._cpp._attempt.Attempt_Device_getDeviceDisplayMetrics.getDeviceDisplayMetrics(hostDevice, out);
+  return flight._cpp._fn.Device.getDeviceDisplayMetrics(hostDevice, out);
 }
 
 extern inline function getDeviceId(hostDevice:flight.HostDeviceCapability):String {
-  return flight._cpp._attempt.Attempt_Device_getDeviceId.getDeviceId(hostDevice);
+  return flight._cpp._fn.Device.getDeviceId(hostDevice);
 }
 
 extern inline function getDeviceInfo(hostDevice:flight.HostDeviceCapability, out:flight.DeviceInfo):flight.DeviceInfo {
-  return flight._cpp._attempt.Attempt_Device_getDeviceInfo.getDeviceInfo(hostDevice, out);
+  return flight._cpp._fn.Device.getDeviceInfo(hostDevice, out);
 }
 
 extern inline function getSafeAreaInsets(hostDevice:flight.HostDeviceCapability, out:flight.SafeAreaInsets):flight.SafeAreaInsets {
-  return flight._cpp._attempt.Attempt_Device_getSafeAreaInsets.getSafeAreaInsets(hostDevice, out);
+  return flight._cpp._fn.Device.getSafeAreaInsets(hostDevice, out);
 }
 
 extern inline function refreshDeviceInfo(hostDevice:flight.HostDeviceCapability):Void {
-  flight._cpp._attempt.Attempt_Device_refreshDeviceInfo.refreshDeviceInfo(hostDevice);
+  flight._cpp._fn.Device.refreshDeviceInfo(hostDevice);
 }

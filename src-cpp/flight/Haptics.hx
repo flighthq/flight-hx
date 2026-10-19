@@ -2,19 +2,27 @@
 package flight;
 
 extern inline function cancelDeviceVibration(hostHaptics:flight.HostHapticsCapability):Bool {
-  return flight._cpp._attempt.Attempt_Haptics_cancelDeviceVibration.cancelDeviceVibration(hostHaptics);
+  return flight._cpp._fn.Haptics.cancelDeviceVibration(hostHaptics);
 }
 
 extern inline function getHapticsCapabilities(hostHaptics:flight.HostHapticsCapability, out:flight.HapticsCapabilities):flight.HapticsCapabilities {
-  return flight._cpp._attempt.Attempt_Haptics_getHapticsCapabilities.getHapticsCapabilities(hostHaptics, out);
+  return flight._cpp._fn.Haptics.getHapticsCapabilities(hostHaptics, out);
 }
 
 extern inline function isHapticsSupported(hostHaptics:flight.HostHapticsCapability):Bool {
-  return flight._cpp._attempt.Attempt_Haptics_isHapticsSupported.isHapticsSupported(hostHaptics);
+  return flight._cpp._fn.Haptics.isHapticsSupported(hostHaptics);
 }
 
 extern inline function prepareHaptics(hostHaptics:flight.HostHapticsCapability):Void {
-  flight._cpp._attempt.Attempt_Haptics_prepareHaptics.prepareHaptics(hostHaptics);
+  flight._cpp._fn.Haptics.prepareHaptics(hostHaptics);
+}
+
+extern inline function triggerHapticSelection(hostHaptics:flight.HostHapticsCapability):Bool {
+  return flight._cpp._fn.Haptics.triggerHapticSelection(hostHaptics);
+}
+
+extern inline function vibrateDevice(hostHaptics:flight.HostHapticsCapability, durationMs:Float):Bool {
+  return flight._cpp._fn.Haptics.vibrateDevice(hostHaptics, durationMs);
 }
 
 extern inline function triggerHapticImpact(hostHaptics:flight.HostHapticsCapability, style:flight.HapticImpactStyle, ?intensity:Float):Bool {
@@ -23,14 +31,6 @@ extern inline function triggerHapticImpact(hostHaptics:flight.HostHapticsCapabil
 
 extern inline function triggerHapticNotification(hostHaptics:flight.HostHapticsCapability, type:flight.HapticNotificationType):Bool {
   return flight._cpp._attempt.Attempt_Haptics_triggerHapticNotification.triggerHapticNotification(hostHaptics, type);
-}
-
-extern inline function triggerHapticSelection(hostHaptics:flight.HostHapticsCapability):Bool {
-  return flight._cpp._attempt.Attempt_Haptics_triggerHapticSelection.triggerHapticSelection(hostHaptics);
-}
-
-extern inline function vibrateDevice(hostHaptics:flight.HostHapticsCapability, durationMs:Float):Bool {
-  return flight._cpp._attempt.Attempt_Haptics_vibrateDevice.vibrateDevice(hostHaptics, durationMs);
 }
 
 extern inline function vibrateDevicePattern(hostHaptics:flight.HostHapticsCapability, pattern:Array<Float>):Bool {

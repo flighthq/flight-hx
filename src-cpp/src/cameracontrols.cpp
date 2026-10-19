@@ -88,4 +88,24 @@ void update_camera_shake(flight::Ref<flight::types::CameraShake> shake, double d
   flight::camera_controls::update_camera_shake(shake, dt, out);
 }
 
+double get_perspective_projection_frame_distance_to_sphere(flight::Ref<flight::types::PerspectiveProjection> projection, double radius, double aspect, bool paddingPresent, double padding) {
+  return flight::camera_controls::get_perspective_projection_frame_distance_to_sphere(projection, radius, aspect, (paddingPresent ? std::optional<double>{padding} : std::nullopt));
+}
+
+void set_orthographic_projection_frame_to_sphere(flight::Ref<flight::types::OrthographicProjection> projection, double radius, double aspect, bool paddingPresent, double padding) {
+  flight::camera_controls::set_orthographic_projection_frame_to_sphere(projection, radius, aspect, (paddingPresent ? std::optional<double>{padding} : std::nullopt));
+}
+
+void update_camera_2d_follow(flight::Ref<flight::types::Camera2D> camera, double viewportWidth, double viewportHeight, double targetX, double targetY, double deltaTime, flight::Ref<flight::types::Camera2DFollowOptions> options) {
+  flight::camera_controls::update_camera_2d_follow(camera, viewportWidth, viewportHeight, targetX, targetY, deltaTime, (options ? std::optional<flight::Ref<flight::types::Camera2DFollowOptions>>{options} : std::nullopt));
+}
+
+void update_fly_camera_controller(flight::Ref<flight::types::FlyCameraController> controller, flight::Ref<flight::types::Camera3D> camera, double deltaTime) {
+  flight::camera_controls::update_fly_camera_controller(controller, camera, deltaTime);
+}
+
+void update_orbit_camera_controller(flight::Ref<flight::types::OrbitCameraController> controller, flight::Ref<flight::types::Camera3D> camera, double deltaTime) {
+  flight::camera_controls::update_orbit_camera_controller(controller, camera, deltaTime);
+}
+
 } // namespace flight_hx::camera_controls

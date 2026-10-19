@@ -48,5 +48,26 @@ extern class Screen {
 
   @:native("flight_hx::screen::dispose_screen_signals")
   static function disposeScreenSignals(signals:flight.ScreenSignals):Void;
+
+  @:native("flight_hx::screen::attach_screen_permission_change")
+  static function attachScreenPermissionChange(hostScreenPermissionChange:flight.HostScreenPermissionChangeCapability, permissionChange:flight.ScreenPermissionChange):Void;
+
+  @:native("flight_hx::screen::attach_screen_signals")
+  static function attachScreenSignals(hostScreenChange:flight.HostScreenChangeCapability, signals:flight.ScreenSignals):Void;
+
+  @:native("flight_hx::screen::get_primary_screen")
+  static function getPrimaryScreen(hostScreenQuery:flight.HostScreenQueryCapability, out:flight.ScreenInfo):flight.ScreenInfo;
+
+  @:native("flight_hx::screen::get_screen_by_id")
+  static function getScreenById(hostScreenQuery:flight.HostScreenQueryCapability, id:Float, out:flight.ScreenInfo):Null<flight.ScreenInfo>;
+
+  @:native("flight_hx::screen::get_screen_current_mode")
+  static function getScreenCurrentMode(screen:flight.ScreenInfo, out:flight.ScreenMode):flight.ScreenMode;
+
+  @:native("flight_hx::screen::get_screen_cursor_screen")
+  static function getScreenCursorScreen(hostScreenQuery:flight.HostScreenQueryCapability, out:flight.ScreenInfo):flight.ScreenInfo;
+
+  @:native("flight_hx::screen::get_screens")
+  static function getScreens(hostScreenQuery:flight.HostScreenQueryCapability, out:Array<flight.ScreenInfo>):Array<flight.ScreenInfo>;
 }
 #end

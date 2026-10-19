@@ -147,6 +147,7 @@ for (const module of manifest.modules) {
     const declaration = publicFunctions.get(publicName);
     if (!declaration) throw new Error(`${publicName} is absent from the complete default web API`);
     const parsed = parseSignature(declaration.signature);
+    let structuralReferenceResult = false;
     if (provenance === scalarOverrideProvenance) {
       if (plan) {
         throw new Error(`${publicName} is now compiler-planned; remove its downstream scalar override`);
@@ -203,7 +204,7 @@ for (const module of manifest.modules) {
       if (plan) {
         throw new Error(`${publicName} is now compiler-planned; remove its downstream reference carrier`);
       }
-      validateReferenceCarrier(publicName, binding, declaration, parsed);
+      structuralReferenceResult = validateReferenceCarrier(publicName, binding, declaration, parsed);
       plan = {
         headerStatus: 'pass',
         include: binding.header,
@@ -224,7 +225,7 @@ for (const module of manifest.modules) {
       throw new Error(`${publicName} native locator drifted: ${binding.native} != ${plan.nativeName}`);
     }
     if (plan.transport === 'adapter') validateCompilerAdapter(publicName, binding, plan);
-    return { ...binding, declaration, parsed, plan, provenance };
+    return { ...binding, declaration, parsed, plan, provenance, structuralReferenceResult };
   });
   const directBindings = bindings.filter(({ plan }) => plan.transport === 'direct');
   const adapterBindings = bindings.filter(({ plan }) => plan.transport === 'adapter');
@@ -657,6 +658,15 @@ function validateReferenceCarrier(publicName, binding, declaration, parsed) {
   }
   const parameterPattern = parsed.parameters
     .map(({ optional, type }) => {
+      if (referenceArrayInner(type)) {
+        const nativeType = flightCppType(type);
+        const structuralElement = structuralReadonlyReferenceType(referenceArrayInner(type));
+        const sequenceType = `flight::SequenceView<${structuralElement}>`;
+        const typePattern = `(?:${escapeRegExp(nativeType)}|${escapeRegExp(sequenceType)})`;
+        const optionalPattern = optional ? `std::optional<${typePattern}>` : typePattern;
+        const defaultPattern = optional ? '\\s*=\\s*std::nullopt' : '';
+        return `${optionalPattern}\\s+[A-Za-z_][A-Za-z0-9_]*${defaultPattern}`;
+      }
       if (nativeReferenceTypes.has(type)) {
         const nativeType = cppType(type);
         const structuralReadonly =
@@ -679,9 +689,16 @@ function validateReferenceCarrier(publicName, binding, declaration, parsed) {
     .filter((filename) => filename.endsWith('.hpp'))
     .map((filename) => readFileSync(filename, 'utf8'))
     .join('\n');
-  if (!signaturePattern.test(packageHeaders)) {
-    throw new Error(`${publicName} reference carrier cannot find its exact native signature`);
+  if (signaturePattern.test(packageHeaders)) return false;
+  const structuralResult = structuralReadonlyReferenceType(parsed.result);
+  if (structuralResult) {
+    const structuralSignaturePattern = new RegExp(
+      signaturePattern.source.replace(nativeResultPattern(parsed.result), escapeRegExp(structuralResult)),
+      'u',
+    );
+    if (structuralSignaturePattern.test(packageHeaders)) return true;
   }
+  throw new Error(`${publicName} reference carrier cannot find its exact native signature`);
 }
 
 function validateScalarOverrideRefusals(boundPublicNames) {
@@ -1044,6 +1061,9 @@ function emitBridgeSource(module, bindings) {
       lines.push(`  const auto result = ${call};`);
       lines.push('  const std::string result_utf8 = result.to_utf8();');
       lines.push(...haxeStringCopyLines('result_utf8'));
+    } else if (binding.structuralReferenceResult) {
+      lines.push(`  const auto result = ${call};`);
+      lines.push('  return result.shared_object();');
     } else {
       lines.push(parsed.result === 'Void' ? `  ${call};` : `  return ${call};`);
     }
@@ -1142,6 +1162,12 @@ function nativeResultPattern(type) {
   if (type === 'Null<Float>') return escapeRegExp('std::optional<double>');
   if (type === 'Null<String>') return escapeRegExp('std::optional<flight::String>');
   return escapeRegExp(flightCppType(type));
+}
+
+function structuralReadonlyReferenceType(type) {
+  if (!nativeReferenceTypes.has(type)) return undefined;
+  const nativeType = cppType(type);
+  return `flight::StructuralRef<flight::RowReadonly<flight::RowOf<${nativeType}>>>`;
 }
 
 function isArrayFloatType(type) {

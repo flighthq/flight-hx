@@ -34,11 +34,31 @@ extern inline function disposeScreenSignals(signals:flight.ScreenSignals):Void {
 }
 
 extern inline function attachScreenPermissionChange(hostScreenPermissionChange:flight.HostScreenPermissionChangeCapability, permissionChange:flight.ScreenPermissionChange):Void {
-  flight._cpp._attempt.Attempt_Screen_attachScreenPermissionChange.attachScreenPermissionChange(hostScreenPermissionChange, permissionChange);
+  flight._cpp._fn.Screen.attachScreenPermissionChange(hostScreenPermissionChange, permissionChange);
 }
 
 extern inline function attachScreenSignals(hostScreenChange:flight.HostScreenChangeCapability, signals:flight.ScreenSignals):Void {
-  flight._cpp._attempt.Attempt_Screen_attachScreenSignals.attachScreenSignals(hostScreenChange, signals);
+  flight._cpp._fn.Screen.attachScreenSignals(hostScreenChange, signals);
+}
+
+extern inline function getPrimaryScreen(hostScreenQuery:flight.HostScreenQueryCapability, out:flight.ScreenInfo):flight.ScreenInfo {
+  return flight._cpp._fn.Screen.getPrimaryScreen(hostScreenQuery, out);
+}
+
+extern inline function getScreenById(hostScreenQuery:flight.HostScreenQueryCapability, id:Float, out:flight.ScreenInfo):Null<flight.ScreenInfo> {
+  return flight._cpp._fn.Screen.getScreenById(hostScreenQuery, id, out);
+}
+
+extern inline function getScreenCurrentMode(screen:flight.ScreenInfo, out:flight.ScreenMode):flight.ScreenMode {
+  return flight._cpp._fn.Screen.getScreenCurrentMode(screen, out);
+}
+
+extern inline function getScreenCursorScreen(hostScreenQuery:flight.HostScreenQueryCapability, out:flight.ScreenInfo):flight.ScreenInfo {
+  return flight._cpp._fn.Screen.getScreenCursorScreen(hostScreenQuery, out);
+}
+
+extern inline function getScreens(hostScreenQuery:flight.HostScreenQueryCapability, out:Array<flight.ScreenInfo>):Array<flight.ScreenInfo> {
+  return flight._cpp._fn.Screen.getScreens(hostScreenQuery, out);
 }
 
 extern inline function dipToScreenPoint(screen:flight.ScreenInfo, point:flight.Vector2Like, out:{ x:Float, y:Float }):{ x:Float, y:Float } {
@@ -49,32 +69,16 @@ extern inline function dipToScreenRect(screen:flight.ScreenInfo, rect:flight.Rec
   return flight._cpp._attempt.Attempt_Screen_dipToScreenRect.dipToScreenRect(screen, rect, out);
 }
 
-extern inline function getPrimaryScreen(hostScreenQuery:flight.HostScreenQueryCapability, out:flight.ScreenInfo):flight.ScreenInfo {
-  return flight._cpp._attempt.Attempt_Screen_getPrimaryScreen.getPrimaryScreen(hostScreenQuery, out);
-}
-
 extern inline function getScreenBounds(screen:flight.ScreenInfo, out:{ x:Float, y:Float, width:Float, height:Float }):{ x:Float, y:Float, width:Float, height:Float } {
   return flight._cpp._attempt.Attempt_Screen_getScreenBounds.getScreenBounds(screen, out);
-}
-
-extern inline function getScreenById(hostScreenQuery:flight.HostScreenQueryCapability, id:Float, out:flight.ScreenInfo):Null<flight.ScreenInfo> {
-  return flight._cpp._attempt.Attempt_Screen_getScreenById.getScreenById(hostScreenQuery, id, out);
 }
 
 extern inline function getScreenContainingRect(hostScreenQuery:flight.HostScreenQueryCapability, rect:flight.RectangleLike, out:flight.ScreenInfo):flight.ScreenInfo {
   return flight._cpp._attempt.Attempt_Screen_getScreenContainingRect.getScreenContainingRect(hostScreenQuery, rect, out);
 }
 
-extern inline function getScreenCurrentMode(screen:flight.ScreenInfo, out:flight.ScreenMode):flight.ScreenMode {
-  return flight._cpp._attempt.Attempt_Screen_getScreenCurrentMode.getScreenCurrentMode(screen, out);
-}
-
 extern inline function getScreenCursorPosition(hostScreenQuery:flight.HostScreenQueryCapability, out:{ x:Float, y:Float }):{ x:Float, y:Float } {
   return flight._cpp._attempt.Attempt_Screen_getScreenCursorPosition.getScreenCursorPosition(hostScreenQuery, out);
-}
-
-extern inline function getScreenCursorScreen(hostScreenQuery:flight.HostScreenQueryCapability, out:flight.ScreenInfo):flight.ScreenInfo {
-  return flight._cpp._attempt.Attempt_Screen_getScreenCursorScreen.getScreenCursorScreen(hostScreenQuery, out);
 }
 
 extern inline function getScreenDetailPermission(hostScreenDetails:flight.HostScreenDetailsCapability):flight._internal._Promise<flight.ScreenPermissionState> {
@@ -91,10 +95,6 @@ extern inline function getScreenNearestRect(hostScreenQuery:flight.HostScreenQue
 
 extern inline function getScreenWorkArea(screen:flight.ScreenInfo, out:{ x:Float, y:Float, width:Float, height:Float }):{ x:Float, y:Float, width:Float, height:Float } {
   return flight._cpp._attempt.Attempt_Screen_getScreenWorkArea.getScreenWorkArea(screen, out);
-}
-
-extern inline function getScreens(hostScreenQuery:flight.HostScreenQueryCapability, out:Array<flight.ScreenInfo>):Array<flight.ScreenInfo> {
-  return flight._cpp._attempt.Attempt_Screen_getScreens.getScreens(hostScreenQuery, out);
 }
 
 extern inline function initializeScreenInfo(out:flight.EntityConstruction<flight.ScreenInfo>):Void {

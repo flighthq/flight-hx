@@ -64,4 +64,48 @@ void dispose_sensors(flight::Ref<flight::types::Sensors> sensors) {
   flight::sensors::dispose_sensors(sensors);
 }
 
+void attach_sensors(flight::Ref<flight::types::HostSensorsCapability> hostSensors, flight::Ref<flight::types::Sensors> sensors) {
+  flight::sensors::attach_sensors(hostSensors, sensors);
+}
+
+bool has_accelerometer(flight::Ref<flight::types::HostSensorsCapability> hostSensors) {
+  return flight::sensors::has_accelerometer(hostSensors);
+}
+
+bool has_ambient_light_sensor(flight::Ref<flight::types::HostSensorsCapability> hostSensors) {
+  return flight::sensors::has_ambient_light_sensor(hostSensors);
+}
+
+bool has_barometer(flight::Ref<flight::types::HostSensorsCapability> hostSensors) {
+  return flight::sensors::has_barometer(hostSensors);
+}
+
+bool has_gravity_sensor(flight::Ref<flight::types::HostSensorsCapability> hostSensors) {
+  return flight::sensors::has_gravity_sensor(hostSensors);
+}
+
+bool has_gyroscope(flight::Ref<flight::types::HostSensorsCapability> hostSensors) {
+  return flight::sensors::has_gyroscope(hostSensors);
+}
+
+bool has_linear_acceleration_sensor(flight::Ref<flight::types::HostSensorsCapability> hostSensors) {
+  return flight::sensors::has_linear_acceleration_sensor(hostSensors);
+}
+
+bool has_magnetometer(flight::Ref<flight::types::HostSensorsCapability> hostSensors) {
+  return flight::sensors::has_magnetometer(hostSensors);
+}
+
+bool has_orientation_sensor(flight::Ref<flight::types::HostSensorsCapability> hostSensors) {
+  return flight::sensors::has_orientation_sensor(hostSensors);
+}
+
+bool has_proximity_sensor(flight::Ref<flight::types::HostSensorsCapability> hostSensors) {
+  return flight::sensors::has_proximity_sensor(hostSensors);
+}
+
+bool is_sensors_supported(flight::Ref<flight::types::HostSensorsCapability> hostSensors) {
+  return flight::sensors::is_sensors_supported(hostSensors);
+}
+
 } // namespace flight_hx::sensors

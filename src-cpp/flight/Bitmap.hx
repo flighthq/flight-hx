@@ -191,6 +191,14 @@ extern inline function parseBitmapFingerprint(text:String):Null<flight.BitmapFin
   return flight._cpp._fn.Bitmap.parseBitmapFingerprint(text);
 }
 
+extern inline function captureBitmapFromImageResource(hostBitmapReadback:flight.HostBitmapReadbackCapability, resource:flight.ImageResource):Null<flight.Bitmap> {
+  return flight._cpp._fn.Bitmap.captureBitmapFromImageResource(hostBitmapReadback, resource);
+}
+
+extern inline function splitBitmapChannels(source:flight.Bitmap):Array<flight.Bitmap> {
+  return flight._cpp._fn.Bitmap.splitBitmapChannels(source);
+}
+
 var BITMAP_FINGERPRINT_COMPUTATION_ID(get, set):String;
 
 private extern inline function get_BITMAP_FINGERPRINT_COMPUTATION_ID():String return flight._cpp._attempt.Attempt_Bitmap_BITMAP_FINGERPRINT_COMPUTATION_ID.BITMAP_FINGERPRINT_COMPUTATION_ID;
@@ -269,10 +277,6 @@ extern inline function boxBlurBitmap(out:flight._internal._UInt8ClampedArray, sc
 
 extern inline function buildBitmapGradientRamp(out:flight._internal._UInt8ClampedArray, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>):Void {
   flight._cpp._attempt.Attempt_Bitmap_buildBitmapGradientRamp.buildBitmapGradientRamp(out, colors, alphas, ratios);
-}
-
-extern inline function captureBitmapFromImageResource(hostBitmapReadback:flight.HostBitmapReadbackCapability, resource:flight.ImageResource):Null<flight.Bitmap> {
-  return flight._cpp._attempt.Attempt_Bitmap_captureBitmapFromImageResource.captureBitmapFromImageResource(hostBitmapReadback, resource);
 }
 
 extern inline function colorMatrixBitmap(out:flight._internal._UInt8ClampedArray, source:flight.BitmapRegion, matrix:Array<Float>):Void {
@@ -433,10 +437,6 @@ extern inline function rotateBitmap(dest:flight.BitmapRegion, source:flight.Bitm
 
 extern inline function sharpenBitmap(out:flight._internal._UInt8ClampedArray, scratch:flight._internal._UInt8ClampedArray, source:flight.BitmapRegion, ?options:flight.BitmapSharpenOptions):Void {
   flight._cpp._attempt.Attempt_Bitmap_sharpenBitmap.sharpenBitmap(out, scratch, source, options);
-}
-
-extern inline function splitBitmapChannels(source:flight.Bitmap):Array<flight.Bitmap> {
-  return flight._cpp._attempt.Attempt_Bitmap_splitBitmapChannels.splitBitmapChannels(source);
 }
 
 extern inline function transformBitmap(dest:flight.BitmapRegion, source:flight.BitmapRegion, matrix:Array<Float>, ?edgeMode:flight.BitmapEdgeMode, ?sampleMode:flight.BitmapResizeMode):Void {

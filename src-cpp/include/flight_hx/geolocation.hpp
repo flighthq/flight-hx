@@ -6,5 +6,7 @@
 namespace flight_hx::geolocation {
 
 flight::Ref<flight::types::GeolocationPosition> create_geolocation_position();
+void clear_geolocation_watch(flight::Ref<flight::types::HostGeolocationCapability> hostGeolocation, double id);
+bool is_geolocation_available(flight::Ref<flight::types::HostGeolocationCapability> hostGeolocation);
 
 } // namespace flight_hx::geolocation

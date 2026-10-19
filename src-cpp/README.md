@@ -10,7 +10,7 @@ headers. Public facade overrides deliberately expose nothing outside that manife
 The current pin's generated SDK uses the same Flight revision as this repo and records its distinct
 flight-compiler revision (`806d257` versus flight-hx planning at `804435a`). It reports 2,574 emitted
 and 577 refused modules from 3,151 profile inputs across 153 packages. The exact general-purpose
-Haxe-callable partition remains intentionally smaller: 359 functions across 38 public modules. They
+Haxe-callable partition remains intentionally smaller: 487 functions across 49 public modules. They
 are compared with current web signatures, then all compiled and linked from one Haxe source in the
 cross-target gate; its constructible host-free slice is also executed on both targets. Sixty-two bind
 directly from the compiler plan, four use compiler-emitted UTF-8
@@ -19,14 +19,17 @@ flight-hx overrides from dependency-complete flight-cpp headers. Forty-five addi
 use the generated flat/recursive `Array<Float>` adapter, which copies between hxcpp and
 `flight::Array<double>`, preserves argument aliases and optional-output identity, and copies native
 mutations back. Two Audio functions copy required UTF-8 strings and map optional native results to
-Haxe `Null<String>`. Another 190 functions across 19 public modules pass `flight::Ref<T>` carriers through
+Haxe `Null<String>`. Another 318 functions across 31 public modules pass `flight::Ref<T>` carriers through
 without ownership loss, reconstruct optional primitive parameters from presence bits, preserve
 optional reference omission with a thin owning wrapper, map nullable reference results to Haxe
 `Null<T>`, copy string inputs and required/nullable UTF-8 results at the isolated bridge, map optional
 native numbers to Haxe `Null<Float>`, copy `Array<Ref<T>>` handle collections across the ABI, and
-accept readonly structural-reference inputs where the native signature requires them. The newest
-batch covers `Path` and `PathFormats`: SVG parse/format, path construction and transforms, geometry
-queries, cloning, cleanup/fitting, and regular/typed mesh tessellation and pooling.
+accept readonly structural-reference inputs where the native signature requires them. Readonly
+structural results project their exact retained object, while native `SequenceView` inputs consume
+the owning-reference array copy. The newest batches cover `Path` and `PathFormats`; audio, bitmap,
+camera, entity, input, protocol, screen, timeline, velocity, and requirement helpers; and the
+accessibility, device, geolocation, haptics, keyboard, media-session, platform, power, sensor, and
+shell host-capability surfaces.
 Expanding that partition remains manifest-first and compile-proven; the larger generated C++
 inventory is not silently claimed as Haxe support.
 

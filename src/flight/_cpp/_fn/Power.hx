@@ -48,5 +48,17 @@ extern class Power {
 
   @:native("flight_hx::power::make_power_status")
   static function makePowerStatus():flight.PowerStatus;
+
+  @:native("flight_hx::power::get_power_battery_health")
+  static function getPowerBatteryHealth(hostPowerBatteryHealth:flight.HostPowerBatteryHealthCapability, out:flight.PowerBatteryHealth):flight.PowerBatteryHealth;
+
+  @:native("flight_hx::power::get_power_status")
+  static function getPowerStatus(hostPowerStatus:flight.HostPowerStatusCapability, out:flight.PowerStatus):flight.PowerStatus;
+
+  @:native("flight_hx::power::get_power_system_idle_time")
+  static function getPowerSystemIdleTime(hostPowerIdle:flight.HostPowerIdleCapability):Float;
+
+  @:native("flight_hx::power::is_power_keep_awake_active")
+  static function isPowerKeepAwakeActive(hostPowerKeepAwake:flight.HostPowerKeepAwakeCapability):Bool;
 }
 #end

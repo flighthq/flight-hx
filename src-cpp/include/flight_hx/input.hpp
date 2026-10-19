@@ -18,5 +18,6 @@ bool was_input_gamepad_button_pressed(flight::Ref<flight::types::InputState> sta
 bool was_input_gamepad_button_released(flight::Ref<flight::types::InputState> state, double gamepad, double button);
 bool was_input_key_pressed(flight::Ref<flight::types::InputState> state, double keyCode);
 bool was_input_key_released(flight::Ref<flight::types::InputState> state, double keyCode);
+flight::Ref<flight::types::InputKeyRepeatTimer> create_input_key_repeat_timer(flight::Ref<flight::types::InputKeyRepeatOptions> options);
 
 } // namespace flight_hx::input

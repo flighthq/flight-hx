@@ -64,7 +64,47 @@ extern inline function disposeSensors(sensors:flight.Sensors):Void {
 }
 
 extern inline function attachSensors(hostSensors:flight.HostSensorsCapability, sensors:flight.Sensors):Void {
-  flight._cpp._attempt.Attempt_Sensors_attachSensors.attachSensors(hostSensors, sensors);
+  flight._cpp._fn.Sensors.attachSensors(hostSensors, sensors);
+}
+
+extern inline function hasAccelerometer(hostSensors:flight.HostSensorsCapability):Bool {
+  return flight._cpp._fn.Sensors.hasAccelerometer(hostSensors);
+}
+
+extern inline function hasAmbientLightSensor(hostSensors:flight.HostSensorsCapability):Bool {
+  return flight._cpp._fn.Sensors.hasAmbientLightSensor(hostSensors);
+}
+
+extern inline function hasBarometer(hostSensors:flight.HostSensorsCapability):Bool {
+  return flight._cpp._fn.Sensors.hasBarometer(hostSensors);
+}
+
+extern inline function hasGravitySensor(hostSensors:flight.HostSensorsCapability):Bool {
+  return flight._cpp._fn.Sensors.hasGravitySensor(hostSensors);
+}
+
+extern inline function hasGyroscope(hostSensors:flight.HostSensorsCapability):Bool {
+  return flight._cpp._fn.Sensors.hasGyroscope(hostSensors);
+}
+
+extern inline function hasLinearAccelerationSensor(hostSensors:flight.HostSensorsCapability):Bool {
+  return flight._cpp._fn.Sensors.hasLinearAccelerationSensor(hostSensors);
+}
+
+extern inline function hasMagnetometer(hostSensors:flight.HostSensorsCapability):Bool {
+  return flight._cpp._fn.Sensors.hasMagnetometer(hostSensors);
+}
+
+extern inline function hasOrientationSensor(hostSensors:flight.HostSensorsCapability):Bool {
+  return flight._cpp._fn.Sensors.hasOrientationSensor(hostSensors);
+}
+
+extern inline function hasProximitySensor(hostSensors:flight.HostSensorsCapability):Bool {
+  return flight._cpp._fn.Sensors.hasProximitySensor(hostSensors);
+}
+
+extern inline function isSensorsSupported(hostSensors:flight.HostSensorsCapability):Bool {
+  return flight._cpp._fn.Sensors.isSensorsSupported(hostSensors);
 }
 
 extern inline function computeRotationMatrixFromQuaternion(out:Array<Float>, quaternion:flight.QuaternionReading):Void {
@@ -73,42 +113,6 @@ extern inline function computeRotationMatrixFromQuaternion(out:Array<Float>, qua
 
 extern inline function getSensorsPermissionState(hostSensors:flight.HostSensorsCapability, ?sensor:Dynamic):flight._internal._Promise<flight.SensorsPermissionState> {
   return flight._cpp._attempt.Attempt_Sensors_getSensorsPermissionState.getSensorsPermissionState(hostSensors, sensor);
-}
-
-extern inline function hasAccelerometer(hostSensors:flight.HostSensorsCapability):Bool {
-  return flight._cpp._attempt.Attempt_Sensors_hasAccelerometer.hasAccelerometer(hostSensors);
-}
-
-extern inline function hasAmbientLightSensor(hostSensors:flight.HostSensorsCapability):Bool {
-  return flight._cpp._attempt.Attempt_Sensors_hasAmbientLightSensor.hasAmbientLightSensor(hostSensors);
-}
-
-extern inline function hasBarometer(hostSensors:flight.HostSensorsCapability):Bool {
-  return flight._cpp._attempt.Attempt_Sensors_hasBarometer.hasBarometer(hostSensors);
-}
-
-extern inline function hasGravitySensor(hostSensors:flight.HostSensorsCapability):Bool {
-  return flight._cpp._attempt.Attempt_Sensors_hasGravitySensor.hasGravitySensor(hostSensors);
-}
-
-extern inline function hasGyroscope(hostSensors:flight.HostSensorsCapability):Bool {
-  return flight._cpp._attempt.Attempt_Sensors_hasGyroscope.hasGyroscope(hostSensors);
-}
-
-extern inline function hasLinearAccelerationSensor(hostSensors:flight.HostSensorsCapability):Bool {
-  return flight._cpp._attempt.Attempt_Sensors_hasLinearAccelerationSensor.hasLinearAccelerationSensor(hostSensors);
-}
-
-extern inline function hasMagnetometer(hostSensors:flight.HostSensorsCapability):Bool {
-  return flight._cpp._attempt.Attempt_Sensors_hasMagnetometer.hasMagnetometer(hostSensors);
-}
-
-extern inline function hasOrientationSensor(hostSensors:flight.HostSensorsCapability):Bool {
-  return flight._cpp._attempt.Attempt_Sensors_hasOrientationSensor.hasOrientationSensor(hostSensors);
-}
-
-extern inline function hasProximitySensor(hostSensors:flight.HostSensorsCapability):Bool {
-  return flight._cpp._attempt.Attempt_Sensors_hasProximitySensor.hasProximitySensor(hostSensors);
 }
 
 extern inline function initializeAmbientLightReading(out:flight.EntityConstruction<flight.AmbientLightReading>):Void {
@@ -141,10 +145,6 @@ extern inline function initializeRotationRateReading(out:flight.EntityConstructi
 
 extern inline function initializeSensors(out:flight.EntityConstruction<flight.Sensors>):Void {
   flight._cpp._attempt.Attempt_Sensors_initializeSensors.initializeSensors(out);
-}
-
-extern inline function isSensorsSupported(hostSensors:flight.HostSensorsCapability):Bool {
-  return flight._cpp._attempt.Attempt_Sensors_isSensorsSupported.isSensorsSupported(hostSensors);
 }
 
 extern inline function requestSensorsPermission(hostSensors:flight.HostSensorsCapability):flight._internal._Promise<Bool> {

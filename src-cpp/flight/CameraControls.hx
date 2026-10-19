@@ -85,12 +85,28 @@ extern inline function updateCameraShake(shake:flight.CameraShake, dt:Float, out
   flight._cpp._fn.CameraControls.updateCameraShake(shake, dt, out);
 }
 
-extern inline function frameOrbitCameraControllerToSphere(controller:flight.OrbitCameraController, projection:flight.Projection, sphere:flight.BoundingSphereLike, aspect:Float, ?padding:Float):Bool {
-  return flight._cpp._attempt.Attempt_CameraControls_frameOrbitCameraControllerToSphere.frameOrbitCameraControllerToSphere(controller, projection, sphere, aspect, padding);
+extern inline function getPerspectiveProjectionFrameDistanceToSphere(projection:flight.PerspectiveProjection, radius:Float, aspect:Float, ?padding:Float):Float {
+  return flight._cpp._fn.CameraControls.getPerspectiveProjectionFrameDistanceToSphere(projection, radius, aspect, padding != null, padding == null ? 0.0 : padding);
 }
 
-extern inline function getPerspectiveProjectionFrameDistanceToSphere(projection:flight.PerspectiveProjection, radius:Float, aspect:Float, ?padding:Float):Float {
-  return flight._cpp._attempt.Attempt_CameraControls_getPerspectiveProjectionFrameDistanceToSphere.getPerspectiveProjectionFrameDistanceToSphere(projection, radius, aspect, padding);
+extern inline function setOrthographicProjectionFrameToSphere(projection:flight.OrthographicProjection, radius:Float, aspect:Float, ?padding:Float):Void {
+  flight._cpp._fn.CameraControls.setOrthographicProjectionFrameToSphere(projection, radius, aspect, padding != null, padding == null ? 0.0 : padding);
+}
+
+extern inline function updateCamera2DFollow(camera:flight.Camera2D, viewportWidth:Float, viewportHeight:Float, targetX:Float, targetY:Float, deltaTime:Float, ?options:flight.Camera2DFollowOptions):Void {
+  flight._cpp._fn.CameraControls.updateCamera2DFollow(camera, viewportWidth, viewportHeight, targetX, targetY, deltaTime, options);
+}
+
+extern inline function updateFlyCameraController(controller:flight.FlyCameraController, camera:flight.Camera3D, deltaTime:Float):Void {
+  flight._cpp._fn.CameraControls.updateFlyCameraController(controller, camera, deltaTime);
+}
+
+extern inline function updateOrbitCameraController(controller:flight.OrbitCameraController, camera:flight.Camera3D, deltaTime:Float):Void {
+  flight._cpp._fn.CameraControls.updateOrbitCameraController(controller, camera, deltaTime);
+}
+
+extern inline function frameOrbitCameraControllerToSphere(controller:flight.OrbitCameraController, projection:flight.Projection, sphere:flight.BoundingSphereLike, aspect:Float, ?padding:Float):Bool {
+  return flight._cpp._attempt.Attempt_CameraControls_frameOrbitCameraControllerToSphere.frameOrbitCameraControllerToSphere(controller, projection, sphere, aspect, padding);
 }
 
 extern inline function initializeCameraShake(out:flight.EntityConstruction<flight.CameraShake>, ?options:flight.CameraShakeOptions):Void {
@@ -107,20 +123,4 @@ extern inline function initializeFlyCameraController(out:flight.EntityConstructi
 
 extern inline function initializeOrbitCameraController(out:flight.EntityConstruction<flight.OrbitCameraController>, ?options:flight.OrbitCameraControllerOptions):Void {
   flight._cpp._attempt.Attempt_CameraControls_initializeOrbitCameraController.initializeOrbitCameraController(out, options);
-}
-
-extern inline function setOrthographicProjectionFrameToSphere(projection:flight.OrthographicProjection, radius:Float, aspect:Float, ?padding:Float):Void {
-  flight._cpp._attempt.Attempt_CameraControls_setOrthographicProjectionFrameToSphere.setOrthographicProjectionFrameToSphere(projection, radius, aspect, padding);
-}
-
-extern inline function updateCamera2DFollow(camera:flight.Camera2D, viewportWidth:Float, viewportHeight:Float, targetX:Float, targetY:Float, deltaTime:Float, ?options:flight.Camera2DFollowOptions):Void {
-  flight._cpp._attempt.Attempt_CameraControls_updateCamera2DFollow.updateCamera2DFollow(camera, viewportWidth, viewportHeight, targetX, targetY, deltaTime, options);
-}
-
-extern inline function updateFlyCameraController(controller:flight.FlyCameraController, camera:flight.Camera3D, deltaTime:Float):Void {
-  flight._cpp._attempt.Attempt_CameraControls_updateFlyCameraController.updateFlyCameraController(controller, camera, deltaTime);
-}
-
-extern inline function updateOrbitCameraController(controller:flight.OrbitCameraController, camera:flight.Camera3D, deltaTime:Float):Void {
-  flight._cpp._attempt.Attempt_CameraControls_updateOrbitCameraController.updateOrbitCameraController(controller, camera, deltaTime);
 }

@@ -86,25 +86,6 @@
     },
     {
       "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Accessibility_destroyAccessibility",
-      "header": "flight/accessibility/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::accessibility::destroy_accessibility",
-      "package": "@flighthq/accessibility",
-      "publicName": "flight.Accessibility.destroyAccessibility",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/accessibility/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
         "dynamic",
         "named"
       ],
@@ -1042,44 +1023,6 @@
       "carrierFamilies": [
         "named"
       ],
-      "externClass": "flight._cpp._attempt.Attempt_Audio_canPlayAudioType",
-      "header": "flight/audio/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::audio::can_play_audio_type",
-      "package": "@flighthq/audio",
-      "publicName": "flight.Audio.canPlayAudioType",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/audio/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Audio_cloneAudioResource",
-      "header": "flight/audio/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::audio::clone_audio_resource",
-      "package": "@flighthq/audio",
-      "publicName": "flight.Audio.cloneAudioResource",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/audio/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
       "externClass": "flight._cpp._attempt.Attempt_Audio_createAudioResource",
       "header": "flight/audio/contract.hpp",
       "kind": "function",
@@ -1222,25 +1165,6 @@
       "carrierFamilies": [
         "named"
       ],
-      "externClass": "flight._cpp._attempt.Attempt_Audio_disposeAudioResource",
-      "header": "flight/audio/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::audio::dispose_audio_resource",
-      "package": "@flighthq/audio",
-      "publicName": "flight.Audio.disposeAudioResource",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier AudioResource has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/audio/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
       "externClass": "flight._cpp._attempt.Attempt_Audio_explainAudioResourceReferenceResolution",
       "header": "flight/audio/contract.hpp",
       "kind": "function",
@@ -1280,64 +1204,6 @@
     {
       "carrierFamilies": [
         "named",
-        "nullable"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Audio_getAudioDecodeSlot",
-      "header": "flight/audio/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::audio::get_audio_decode_slot",
-      "package": "@flighthq/audio",
-      "publicName": "flight.Audio.getAudioDecodeSlot",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/audio/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Audio_getAudioResourceByteSize",
-      "header": "flight/audio/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::audio::get_audio_resource_byte_size",
-      "package": "@flighthq/audio",
-      "publicName": "flight.Audio.getAudioResourceByteSize",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/audio/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Audio_getAudioResourceChannelCount",
-      "header": "flight/audio/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::audio::get_audio_resource_channel_count",
-      "package": "@flighthq/audio",
-      "publicName": "flight.Audio.getAudioResourceChannelCount",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/audio/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named",
         "nullable",
         "typed-array"
       ],
@@ -1347,82 +1213,6 @@
       "nativeName": "flight::audio::get_audio_resource_channel_data",
       "package": "@flighthq/audio",
       "publicName": "flight.Audio.getAudioResourceChannelData",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/audio/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Audio_getAudioResourceDuration",
-      "header": "flight/audio/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::audio::get_audio_resource_duration",
-      "package": "@flighthq/audio",
-      "publicName": "flight.Audio.getAudioResourceDuration",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/audio/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Audio_getAudioResourceSampleRate",
-      "header": "flight/audio/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::audio::get_audio_resource_sample_rate",
-      "package": "@flighthq/audio",
-      "publicName": "flight.Audio.getAudioResourceSampleRate",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/audio/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Audio_hasAudioDecodeSlot",
-      "header": "flight/audio/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::audio::has_audio_decode_slot",
-      "package": "@flighthq/audio",
-      "publicName": "flight.Audio.hasAudioDecodeSlot",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/audio/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Audio_hasAudioResourceBuffer",
-      "header": "flight/audio/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::audio::has_audio_resource_buffer",
-      "package": "@flighthq/audio",
-      "publicName": "flight.Audio.hasAudioResourceBuffer",
       "refusal": {
         "code": "unsupported-carrier",
         "message": "type family named is outside the Haxe C++ extern vertical slice",
@@ -1486,25 +1276,6 @@
       "refusal": {
         "code": "unsupported-carrier",
         "message": "generic named carriers are not supported",
-        "phase": "planning"
-      },
-      "source": "packages/audio/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Audio_isAudioResourceEmpty",
-      "header": "flight/audio/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::audio::is_audio_resource_empty",
-      "package": "@flighthq/audio",
-      "publicName": "flight.Audio.isAudioResourceEmpty",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
         "phase": "planning"
       },
       "source": "packages/audio/src/contract.ts",
@@ -1681,65 +1452,6 @@
       "refusal": {
         "code": "unsupported-declaration",
         "message": "Haxe C++ extern vertical slice does not emit variable value bindings",
-        "phase": "planning"
-      },
-      "source": "packages/binpack/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "array",
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Binpack_explainUnpackedRectangles",
-      "header": "flight/binpack/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::binpack::explain_unpacked_rectangles",
-      "package": "@flighthq/binpack",
-      "publicName": "flight.Binpack.explainUnpackedRectangles",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family array is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/binpack/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Binpack_getPackResultOccupancy",
-      "header": "flight/binpack/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::binpack::get_pack_result_occupancy",
-      "package": "@flighthq/binpack",
-      "publicName": "flight.Binpack.getPackResultOccupancy",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/binpack/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "array",
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Binpack_packRectangles",
-      "header": "flight/binpack/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::binpack::pack_rectangles",
-      "package": "@flighthq/binpack",
-      "publicName": "flight.Binpack.packRectangles",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family array is outside the Haxe C++ extern vertical slice",
         "phase": "planning"
       },
       "source": "packages/binpack/src/contract.ts",
@@ -2067,26 +1779,6 @@
       "nativeName": "flight::bitmap::build_bitmap_gradient_ramp",
       "package": "@flighthq/bitmap",
       "publicName": "flight.Bitmap.buildBitmapGradientRamp",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/bitmap/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named",
-        "nullable"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Bitmap_captureBitmapFromImageResource",
-      "header": "flight/bitmap/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::bitmap::capture_bitmap_from_image_resource",
-      "package": "@flighthq/bitmap",
-      "publicName": "flight.Bitmap.captureBitmapFromImageResource",
       "refusal": {
         "code": "unsupported-carrier",
         "message": "type family named is outside the Haxe C++ extern vertical slice",
@@ -2897,26 +2589,6 @@
         "array",
         "named"
       ],
-      "externClass": "flight._cpp._attempt.Attempt_Bitmap_splitBitmapChannels",
-      "header": "flight/bitmap/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::bitmap::split_bitmap_channels",
-      "package": "@flighthq/bitmap",
-      "publicName": "flight.Bitmap.splitBitmapChannels",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/bitmap/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "array",
-        "named"
-      ],
       "externClass": "flight._cpp._attempt.Attempt_Bitmap_transformBitmap",
       "header": "flight/bitmap/contract.hpp",
       "kind": "function",
@@ -3054,25 +2726,6 @@
       "carrierFamilies": [
         "named"
       ],
-      "externClass": "flight._cpp._attempt.Attempt_CameraControls_getPerspectiveProjectionFrameDistanceToSphere",
-      "header": "flight/camera_controls/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::camera_controls::get_perspective_projection_frame_distance_to_sphere",
-      "package": "@flighthq/camera-controls",
-      "publicName": "flight.CameraControls.getPerspectiveProjectionFrameDistanceToSphere",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/camera-controls/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
       "externClass": "flight._cpp._attempt.Attempt_CameraControls_initializeCameraShake",
       "header": "flight/camera_controls/contract.hpp",
       "kind": "function",
@@ -3139,82 +2792,6 @@
       "refusal": {
         "code": "unsupported-carrier",
         "message": "generic named carriers are not supported",
-        "phase": "planning"
-      },
-      "source": "packages/camera-controls/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_CameraControls_setOrthographicProjectionFrameToSphere",
-      "header": "flight/camera_controls/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::camera_controls::set_orthographic_projection_frame_to_sphere",
-      "package": "@flighthq/camera-controls",
-      "publicName": "flight.CameraControls.setOrthographicProjectionFrameToSphere",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier OrthographicProjection has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/camera-controls/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_CameraControls_updateCamera2DFollow",
-      "header": "flight/camera_controls/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::camera_controls::update_camera_2d_follow",
-      "package": "@flighthq/camera-controls",
-      "publicName": "flight.CameraControls.updateCamera2DFollow",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Camera2D has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/camera-controls/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_CameraControls_updateFlyCameraController",
-      "header": "flight/camera_controls/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::camera_controls::update_fly_camera_controller",
-      "package": "@flighthq/camera-controls",
-      "publicName": "flight.CameraControls.updateFlyCameraController",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier FlyCameraController has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/camera-controls/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_CameraControls_updateOrbitCameraController",
-      "header": "flight/camera_controls/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::camera_controls::update_orbit_camera_controller",
-      "package": "@flighthq/camera-controls",
-      "publicName": "flight.CameraControls.updateOrbitCameraController",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier OrbitCameraController has no unique published C++ type locator",
         "phase": "planning"
       },
       "source": "packages/camera-controls/src/contract.ts",
@@ -4143,120 +3720,6 @@
     },
     {
       "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Device_getDeviceCapabilities",
-      "header": "flight/device/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::device::get_device_capabilities",
-      "package": "@flighthq/device",
-      "publicName": "flight.Device.getDeviceCapabilities",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/device/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Device_getDeviceDisplayMetrics",
-      "header": "flight/device/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::device::get_device_display_metrics",
-      "package": "@flighthq/device",
-      "publicName": "flight.Device.getDeviceDisplayMetrics",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/device/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Device_getDeviceId",
-      "header": "flight/device/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::device::get_device_id",
-      "package": "@flighthq/device",
-      "publicName": "flight.Device.getDeviceId",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/device/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Device_getDeviceInfo",
-      "header": "flight/device/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::device::get_device_info",
-      "package": "@flighthq/device",
-      "publicName": "flight.Device.getDeviceInfo",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/device/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Device_getSafeAreaInsets",
-      "header": "flight/device/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::device::get_safe_area_insets",
-      "package": "@flighthq/device",
-      "publicName": "flight.Device.getSafeAreaInsets",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/device/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Device_refreshDeviceInfo",
-      "header": "flight/device/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::device::refresh_device_info",
-      "package": "@flighthq/device",
-      "publicName": "flight.Device.refreshDeviceInfo",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/device/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
         "typed-array"
       ],
       "externClass": "flight._cpp._attempt.Attempt_Encoding_decodeUTF8",
@@ -4378,25 +3841,6 @@
       "carrierFamilies": [
         "named"
       ],
-      "externClass": "flight._cpp._attempt.Attempt_Entity_detachEntityBinding",
-      "header": "flight/entity/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::entity::detach_entity_binding",
-      "package": "@flighthq/entity",
-      "publicName": "flight.Entity.detachEntityBinding",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Entity has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/entity/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
       "externClass": "flight._cpp._attempt.Attempt_Entity_enableEntityRuntimeGuards",
       "header": "flight/entity/contract.hpp",
       "kind": "function",
@@ -4495,82 +3939,6 @@
     },
     {
       "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Entity_getEntityRuntime",
-      "header": "flight/entity/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::entity::get_entity_runtime",
-      "package": "@flighthq/entity",
-      "publicName": "flight.Entity.getEntityRuntime",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/entity/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Entity_getEntityUid",
-      "header": "flight/entity/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::entity::get_entity_uid",
-      "package": "@flighthq/entity",
-      "publicName": "flight.Entity.getEntityUid",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Entity has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/entity/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Entity_hasEntityBinding",
-      "header": "flight/entity/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::entity::has_entity_binding",
-      "package": "@flighthq/entity",
-      "publicName": "flight.Entity.hasEntityBinding",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/entity/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Entity_hasEntityRuntime",
-      "header": "flight/entity/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::entity::has_entity_runtime",
-      "package": "@flighthq/entity",
-      "publicName": "flight.Entity.hasEntityRuntime",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/entity/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
         "named",
         "nullable"
       ],
@@ -4583,25 +3951,6 @@
       "refusal": {
         "code": "unsupported-carrier",
         "message": "only optional Float is supported by this Haxe C++ extern slice",
-        "phase": "planning"
-      },
-      "source": "packages/entity/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Entity_setEntityUid",
-      "header": "flight/entity/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::entity::set_entity_uid",
-      "package": "@flighthq/entity",
-      "publicName": "flight.Entity.setEntityUid",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Entity has no unique published C++ type locator",
         "phase": "planning"
       },
       "source": "packages/entity/src/contract.ts",
@@ -4625,25 +3974,6 @@
         "phase": "planning"
       },
       "source": "packages/entity/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Geolocation_clearGeolocationWatch",
-      "header": "flight/geolocation/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::geolocation::clear_geolocation_watch",
-      "package": "@flighthq/geolocation",
-      "publicName": "flight.Geolocation.clearGeolocationWatch",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/geolocation/src/contract.ts",
       "status": "materialized-unproven",
       "transport": "isolated-extern-inline"
     },
@@ -4707,25 +4037,6 @@
     },
     {
       "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Geolocation_isGeolocationAvailable",
-      "header": "flight/geolocation/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::geolocation::is_geolocation_available",
-      "package": "@flighthq/geolocation",
-      "publicName": "flight.Geolocation.isGeolocationAvailable",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/geolocation/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
         "named",
         "nullable"
       ],
@@ -4768,82 +4079,6 @@
       "carrierFamilies": [
         "named"
       ],
-      "externClass": "flight._cpp._attempt.Attempt_Haptics_cancelDeviceVibration",
-      "header": "flight/haptics/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::haptics::cancel_device_vibration",
-      "package": "@flighthq/haptics",
-      "publicName": "flight.Haptics.cancelDeviceVibration",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/haptics/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Haptics_getHapticsCapabilities",
-      "header": "flight/haptics/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::haptics::get_haptics_capabilities",
-      "package": "@flighthq/haptics",
-      "publicName": "flight.Haptics.getHapticsCapabilities",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/haptics/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Haptics_isHapticsSupported",
-      "header": "flight/haptics/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::haptics::is_haptics_supported",
-      "package": "@flighthq/haptics",
-      "publicName": "flight.Haptics.isHapticsSupported",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/haptics/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Haptics_prepareHaptics",
-      "header": "flight/haptics/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::haptics::prepare_haptics",
-      "package": "@flighthq/haptics",
-      "publicName": "flight.Haptics.prepareHaptics",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/haptics/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
       "externClass": "flight._cpp._attempt.Attempt_Haptics_triggerHapticImpact",
       "header": "flight/haptics/contract.hpp",
       "kind": "function",
@@ -4869,44 +4104,6 @@
       "nativeName": "flight::haptics::trigger_haptic_notification",
       "package": "@flighthq/haptics",
       "publicName": "flight.Haptics.triggerHapticNotification",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/haptics/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Haptics_triggerHapticSelection",
-      "header": "flight/haptics/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::haptics::trigger_haptic_selection",
-      "package": "@flighthq/haptics",
-      "publicName": "flight.Haptics.triggerHapticSelection",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/haptics/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Haptics_vibrateDevice",
-      "header": "flight/haptics/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::haptics::vibrate_device",
-      "package": "@flighthq/haptics",
-      "publicName": "flight.Haptics.vibrateDevice",
       "refusal": {
         "code": "unsupported-carrier",
         "message": "type family named is outside the Haxe C++ extern vertical slice",
@@ -5054,25 +4251,6 @@
       "refusal": {
         "code": "unsupported-carrier",
         "message": "type family function is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/importdiagnostics/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Importdiagnostics_formatImportDiagnostic",
-      "header": "flight/importdiagnostics/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::importdiagnostics::format_import_diagnostic",
-      "package": "@flighthq/importdiagnostics",
-      "publicName": "flight.Importdiagnostics.formatImportDiagnostic",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
         "phase": "planning"
       },
       "source": "packages/importdiagnostics/src/contract.ts",
@@ -5248,25 +4426,6 @@
       "refusal": {
         "code": "unsupported-carrier",
         "message": "named carrier InputState has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/input/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Input_createInputKeyRepeatTimer",
-      "header": "flight/input/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::input::create_input_key_repeat_timer",
-      "package": "@flighthq/input",
-      "publicName": "flight.Input.createInputKeyRepeatTimer",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
         "phase": "planning"
       },
       "source": "packages/input/src/contract.ts",
@@ -5672,82 +4831,6 @@
       "carrierFamilies": [
         "named"
       ],
-      "externClass": "flight._cpp._attempt.Attempt_Keyboard_detachSoftKeyboard",
-      "header": "flight/keyboard/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::keyboard::detach_soft_keyboard",
-      "package": "@flighthq/keyboard",
-      "publicName": "flight.Keyboard.detachSoftKeyboard",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier SoftKeyboard has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/keyboard/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Keyboard_disposeSoftKeyboard",
-      "header": "flight/keyboard/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::keyboard::dispose_soft_keyboard",
-      "package": "@flighthq/keyboard",
-      "publicName": "flight.Keyboard.disposeSoftKeyboard",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier SoftKeyboard has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/keyboard/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Keyboard_getSoftKeyboardHeight",
-      "header": "flight/keyboard/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::keyboard::get_soft_keyboard_height",
-      "package": "@flighthq/keyboard",
-      "publicName": "flight.Keyboard.getSoftKeyboardHeight",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/keyboard/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Keyboard_getSoftKeyboardInfo",
-      "header": "flight/keyboard/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::keyboard::get_soft_keyboard_info",
-      "package": "@flighthq/keyboard",
-      "publicName": "flight.Keyboard.getSoftKeyboardInfo",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/keyboard/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
       "externClass": "flight._cpp._attempt.Attempt_Keyboard_hideSoftKeyboard",
       "header": "flight/keyboard/contract.hpp",
       "kind": "function",
@@ -5777,25 +4860,6 @@
       "refusal": {
         "code": "unsupported-carrier",
         "message": "generic named carriers are not supported",
-        "phase": "planning"
-      },
-      "source": "packages/keyboard/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Keyboard_isSoftKeyboardVisible",
-      "header": "flight/keyboard/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::keyboard::is_soft_keyboard_visible",
-      "package": "@flighthq/keyboard",
-      "publicName": "flight.Keyboard.isSoftKeyboardVisible",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
         "phase": "planning"
       },
       "source": "packages/keyboard/src/contract.ts",
@@ -6366,25 +5430,6 @@
       "carrierFamilies": [
         "named"
       ],
-      "externClass": "flight._cpp._attempt.Attempt_Mediasession_attachMediaSessionAction",
-      "header": "flight/mediasession/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::mediasession::attach_media_session_action",
-      "package": "@flighthq/mediasession",
-      "publicName": "flight.Mediasession.attachMediaSessionAction",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/mediasession/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
       "externClass": "flight._cpp._attempt.Attempt_Mediasession_clearMediaSessionMetadata",
       "header": "flight/mediasession/contract.hpp",
       "kind": "function",
@@ -6432,63 +5477,6 @@
       "refusal": {
         "code": "unsupported-carrier",
         "message": "named carrier MediaSessionAction has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/mediasession/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Mediasession_destroyMediaSession",
-      "header": "flight/mediasession/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::mediasession::destroy_media_session",
-      "package": "@flighthq/mediasession",
-      "publicName": "flight.Mediasession.destroyMediaSession",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/mediasession/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Mediasession_detachMediaSessionAction",
-      "header": "flight/mediasession/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::mediasession::detach_media_session_action",
-      "package": "@flighthq/mediasession",
-      "publicName": "flight.Mediasession.detachMediaSessionAction",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier MediaSessionActionSignal has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/mediasession/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Mediasession_disposeMediaSessionActionSignal",
-      "header": "flight/mediasession/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::mediasession::dispose_media_session_action_signal",
-      "package": "@flighthq/mediasession",
-      "publicName": "flight.Mediasession.disposeMediaSessionActionSignal",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier MediaSessionActionSignal has no unique published C++ type locator",
         "phase": "planning"
       },
       "source": "packages/mediasession/src/contract.ts",
@@ -6594,50 +5582,12 @@
       "carrierFamilies": [
         "named"
       ],
-      "externClass": "flight._cpp._attempt.Attempt_Motionpath_getMotionPathHeading",
-      "header": "flight/motionpath/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::motionpath::get_motion_path_heading",
-      "package": "@flighthq/motionpath",
-      "publicName": "flight.Motionpath.getMotionPathHeading",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/motionpath/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
       "externClass": "flight._cpp._attempt.Attempt_Motionpath_getMotionPathPosition",
       "header": "flight/motionpath/contract.hpp",
       "kind": "function",
       "nativeName": "flight::motionpath::get_motion_path_position",
       "package": "@flighthq/motionpath",
       "publicName": "flight.Motionpath.getMotionPathPosition",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/motionpath/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Motionpath_getMotionPathProgress",
-      "header": "flight/motionpath/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::motionpath::get_motion_path_progress",
-      "package": "@flighthq/motionpath",
-      "publicName": "flight.Motionpath.getMotionPathProgress",
       "refusal": {
         "code": "unsupported-carrier",
         "message": "type family named is outside the Haxe C++ extern vertical slice",
@@ -6668,25 +5618,6 @@
     },
     {
       "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Motionpath_isMotionPathAtEnd",
-      "header": "flight/motionpath/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::motionpath::is_motion_path_at_end",
-      "package": "@flighthq/motionpath",
-      "publicName": "flight.Motionpath.isMotionPathAtEnd",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/motionpath/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
         "dynamic",
         "named"
       ],
@@ -6696,63 +5627,6 @@
       "nativeName": "flight::motionpath::set_motion_path_direction",
       "package": "@flighthq/motionpath",
       "publicName": "flight.Motionpath.setMotionPathDirection",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier MotionPath has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/motionpath/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Motionpath_setMotionPathDistance",
-      "header": "flight/motionpath/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::motionpath::set_motion_path_distance",
-      "package": "@flighthq/motionpath",
-      "publicName": "flight.Motionpath.setMotionPathDistance",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier MotionPath has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/motionpath/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Motionpath_setMotionPathProgress",
-      "header": "flight/motionpath/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::motionpath::set_motion_path_progress",
-      "package": "@flighthq/motionpath",
-      "publicName": "flight.Motionpath.setMotionPathProgress",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier MotionPath has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/motionpath/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Motionpath_updateMotionPath",
-      "header": "flight/motionpath/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::motionpath::update_motion_path",
-      "package": "@flighthq/motionpath",
-      "publicName": "flight.Motionpath.updateMotionPath",
       "refusal": {
         "code": "unsupported-carrier",
         "message": "named carrier MotionPath has no unique published C++ type locator",
@@ -7701,25 +6575,6 @@
       "carrierFamilies": [
         "named"
       ],
-      "externClass": "flight._cpp._attempt.Attempt_Platform_getPlatformInfo",
-      "header": "flight/platform/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::platform::get_platform_info",
-      "package": "@flighthq/platform",
-      "publicName": "flight.Platform.getPlatformInfo",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/platform/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
       "externClass": "flight._cpp._attempt.Attempt_Platform_getPlatformKind",
       "header": "flight/platform/contract.hpp",
       "kind": "function",
@@ -7796,120 +6651,6 @@
       "carrierFamilies": [
         "named"
       ],
-      "externClass": "flight._cpp._attempt.Attempt_Platform_isPlatformDesktop",
-      "header": "flight/platform/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::platform::is_platform_desktop",
-      "package": "@flighthq/platform",
-      "publicName": "flight.Platform.isPlatformDesktop",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/platform/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Platform_isPlatformMobile",
-      "header": "flight/platform/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::platform::is_platform_mobile",
-      "package": "@flighthq/platform",
-      "publicName": "flight.Platform.isPlatformMobile",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/platform/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Platform_isPlatformNative",
-      "header": "flight/platform/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::platform::is_platform_native",
-      "package": "@flighthq/platform",
-      "publicName": "flight.Platform.isPlatformNative",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/platform/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Platform_isPlatformTouch",
-      "header": "flight/platform/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::platform::is_platform_touch",
-      "package": "@flighthq/platform",
-      "publicName": "flight.Platform.isPlatformTouch",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/platform/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Platform_isPlatformVersionAtLeast",
-      "header": "flight/platform/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::platform::is_platform_version_at_least",
-      "package": "@flighthq/platform",
-      "publicName": "flight.Platform.isPlatformVersionAtLeast",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/platform/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Platform_isPlatformWeb",
-      "header": "flight/platform/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::platform::is_platform_web",
-      "package": "@flighthq/platform",
-      "publicName": "flight.Platform.isPlatformWeb",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/platform/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
       "externClass": "flight._cpp._attempt.Attempt_Power_acquirePowerKeepAwake",
       "header": "flight/power/contract.hpp",
       "kind": "function",
@@ -7968,69 +6709,12 @@
       "carrierFamilies": [
         "named"
       ],
-      "externClass": "flight._cpp._attempt.Attempt_Power_getPowerBatteryHealth",
-      "header": "flight/power/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::power::get_power_battery_health",
-      "package": "@flighthq/power",
-      "publicName": "flight.Power.getPowerBatteryHealth",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/power/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Power_getPowerStatus",
-      "header": "flight/power/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::power::get_power_status",
-      "package": "@flighthq/power",
-      "publicName": "flight.Power.getPowerStatus",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/power/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
       "externClass": "flight._cpp._attempt.Attempt_Power_getPowerSystemIdleState",
       "header": "flight/power/contract.hpp",
       "kind": "function",
       "nativeName": "flight::power::get_power_system_idle_state",
       "package": "@flighthq/power",
       "publicName": "flight.Power.getPowerSystemIdleState",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/power/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Power_getPowerSystemIdleTime",
-      "header": "flight/power/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::power::get_power_system_idle_time",
-      "package": "@flighthq/power",
-      "publicName": "flight.Power.getPowerSystemIdleTime",
       "refusal": {
         "code": "unsupported-carrier",
         "message": "type family named is outside the Haxe C++ extern vertical slice",
@@ -8082,25 +6766,6 @@
       "carrierFamilies": [
         "named"
       ],
-      "externClass": "flight._cpp._attempt.Attempt_Power_isPowerKeepAwakeActive",
-      "header": "flight/power/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::power::is_power_keep_awake_active",
-      "package": "@flighthq/power",
-      "publicName": "flight.Power.isPowerKeepAwakeActive",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/power/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
       "externClass": "flight._cpp._attempt.Attempt_Power_releasePowerKeepAwake",
       "header": "flight/power/contract.hpp",
       "kind": "function",
@@ -8118,25 +6783,6 @@
     },
     {
       "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Protocol_attachProtocolHandler",
-      "header": "flight/protocol/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::protocol::attach_protocol_handler",
-      "package": "@flighthq/protocol",
-      "publicName": "flight.Protocol.attachProtocolHandler",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/protocol/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
         "dynamic"
       ],
       "externClass": "flight._cpp._attempt.Attempt_Protocol_createProtocolUrl",
@@ -8145,26 +6791,6 @@
       "nativeName": "flight::protocol::create_protocol_url",
       "package": "@flighthq/protocol",
       "publicName": "flight.Protocol.createProtocolUrl",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/protocol/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named",
-        "nullable"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Protocol_getProtocolLaunchUrl",
-      "header": "flight/protocol/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::protocol::get_protocol_launch_url",
-      "package": "@flighthq/protocol",
-      "publicName": "flight.Protocol.getProtocolLaunchUrl",
       "refusal": {
         "code": "unsupported-carrier",
         "message": "type family named is outside the Haxe C++ extern vertical slice",
@@ -8215,83 +6841,6 @@
     },
     {
       "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Protocol_isProtocolSchemeDefault",
-      "header": "flight/protocol/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::protocol::is_protocol_scheme_default",
-      "package": "@flighthq/protocol",
-      "publicName": "flight.Protocol.isProtocolSchemeDefault",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/protocol/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Protocol_isProtocolSchemeRegistered",
-      "header": "flight/protocol/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::protocol::is_protocol_scheme_registered",
-      "package": "@flighthq/protocol",
-      "publicName": "flight.Protocol.isProtocolSchemeRegistered",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/protocol/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named",
-        "nullable"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Protocol_parseProtocolUrl",
-      "header": "flight/protocol/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::protocol::parse_protocol_url",
-      "package": "@flighthq/protocol",
-      "publicName": "flight.Protocol.parseProtocolUrl",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "only optional Float is supported by this Haxe C++ extern slice",
-        "phase": "planning"
-      },
-      "source": "packages/protocol/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Protocol_registerProtocolScheme",
-      "header": "flight/protocol/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::protocol::register_protocol_scheme",
-      "package": "@flighthq/protocol",
-      "publicName": "flight.Protocol.registerProtocolScheme",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/protocol/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
         "array",
         "named"
       ],
@@ -8301,63 +6850,6 @@
       "nativeName": "flight::protocol::register_protocol_schemes",
       "package": "@flighthq/protocol",
       "publicName": "flight.Protocol.registerProtocolSchemes",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/protocol/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Protocol_removeProtocolSchemeAsDefault",
-      "header": "flight/protocol/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::protocol::remove_protocol_scheme_as_default",
-      "package": "@flighthq/protocol",
-      "publicName": "flight.Protocol.removeProtocolSchemeAsDefault",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/protocol/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Protocol_setProtocolSchemeAsDefault",
-      "header": "flight/protocol/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::protocol::set_protocol_scheme_as_default",
-      "package": "@flighthq/protocol",
-      "publicName": "flight.Protocol.setProtocolSchemeAsDefault",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/protocol/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Protocol_unregisterProtocolScheme",
-      "header": "flight/protocol/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::protocol::unregister_protocol_scheme",
-      "package": "@flighthq/protocol",
-      "publicName": "flight.Protocol.unregisterProtocolScheme",
       "refusal": {
         "code": "unsupported-carrier",
         "message": "type family named is outside the Haxe C++ extern vertical slice",
@@ -8553,25 +7045,6 @@
     },
     {
       "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Requirement_diffRequirementSets",
-      "header": "flight/requirement/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::requirement::diff_requirement_sets",
-      "package": "@flighthq/requirement",
-      "publicName": "flight.Requirement.diffRequirementSets",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/requirement/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
         "array",
         "named"
       ],
@@ -8584,26 +7057,6 @@
       "refusal": {
         "code": "unsupported-carrier",
         "message": "generic named carriers are not supported",
-        "phase": "planning"
-      },
-      "source": "packages/requirement/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "array",
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Requirement_mergeRequirementSets",
-      "header": "flight/requirement/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::requirement::merge_requirement_sets",
-      "package": "@flighthq/requirement",
-      "publicName": "flight.Requirement.mergeRequirementSets",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family array is outside the Haxe C++ extern vertical slice",
         "phase": "planning"
       },
       "source": "packages/requirement/src/contract.ts",
@@ -8716,26 +7169,6 @@
         "array",
         "named"
       ],
-      "externClass": "flight._cpp._attempt.Attempt_RequirementCatalog_createRequirementCatalog",
-      "header": "flight/requirement_catalog/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::requirement_catalog::create_requirement_catalog",
-      "package": "@flighthq/requirement-catalog",
-      "publicName": "flight.RequirementCatalog.createRequirementCatalog",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "defaulted parameters need an exact C++ default-argument contract",
-        "phase": "planning"
-      },
-      "source": "packages/requirement-catalog/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "array",
-        "named"
-      ],
       "externClass": "flight._cpp._attempt.Attempt_RequirementCatalog_findRequirementCatalogEntries",
       "header": "flight/requirement_catalog/contract.hpp",
       "kind": "function",
@@ -8745,64 +7178,6 @@
       "refusal": {
         "code": "unsupported-carrier",
         "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/requirement-catalog/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "array",
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_RequirementCatalog_getRequirementCatalogEntries",
-      "header": "flight/requirement_catalog/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::requirement_catalog::get_requirement_catalog_entries",
-      "package": "@flighthq/requirement-catalog",
-      "publicName": "flight.RequirementCatalog.getRequirementCatalogEntries",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/requirement-catalog/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_RequirementCatalog_registerRequirementCatalogEntry",
-      "header": "flight/requirement_catalog/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::requirement_catalog::register_requirement_catalog_entry",
-      "package": "@flighthq/requirement-catalog",
-      "publicName": "flight.RequirementCatalog.registerRequirementCatalogEntry",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier RequirementCatalog has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/requirement-catalog/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_RequirementCatalog_unregisterRequirementCatalogEntry",
-      "header": "flight/requirement_catalog/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::requirement_catalog::unregister_requirement_catalog_entry",
-      "package": "@flighthq/requirement-catalog",
-      "publicName": "flight.RequirementCatalog.unregisterRequirementCatalogEntry",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier RequirementCatalog has no unique published C++ type locator",
         "phase": "planning"
       },
       "source": "packages/requirement-catalog/src/contract.ts",
@@ -8851,44 +7226,6 @@
     },
     {
       "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Screen_attachScreenPermissionChange",
-      "header": "flight/screen/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::screen::attach_screen_permission_change",
-      "package": "@flighthq/screen",
-      "publicName": "flight.Screen.attachScreenPermissionChange",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/screen/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Screen_attachScreenSignals",
-      "header": "flight/screen/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::screen::attach_screen_signals",
-      "package": "@flighthq/screen",
-      "publicName": "flight.Screen.attachScreenSignals",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/screen/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
         "anonymous-structure",
         "named"
       ],
@@ -8929,25 +7266,6 @@
     },
     {
       "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Screen_getPrimaryScreen",
-      "header": "flight/screen/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::screen::get_primary_screen",
-      "package": "@flighthq/screen",
-      "publicName": "flight.Screen.getPrimaryScreen",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/screen/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
         "anonymous-structure",
         "named"
       ],
@@ -8957,26 +7275,6 @@
       "nativeName": "flight::screen::get_screen_bounds",
       "package": "@flighthq/screen",
       "publicName": "flight.Screen.getScreenBounds",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/screen/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named",
-        "nullable"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Screen_getScreenById",
-      "header": "flight/screen/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::screen::get_screen_by_id",
-      "package": "@flighthq/screen",
-      "publicName": "flight.Screen.getScreenById",
       "refusal": {
         "code": "unsupported-carrier",
         "message": "type family named is outside the Haxe C++ extern vertical slice",
@@ -9007,25 +7305,6 @@
     },
     {
       "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Screen_getScreenCurrentMode",
-      "header": "flight/screen/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::screen::get_screen_current_mode",
-      "package": "@flighthq/screen",
-      "publicName": "flight.Screen.getScreenCurrentMode",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/screen/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
         "anonymous-structure",
         "named"
       ],
@@ -9035,25 +7314,6 @@
       "nativeName": "flight::screen::get_screen_cursor_position",
       "package": "@flighthq/screen",
       "publicName": "flight.Screen.getScreenCursorPosition",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/screen/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Screen_getScreenCursorScreen",
-      "header": "flight/screen/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::screen::get_screen_cursor_screen",
-      "package": "@flighthq/screen",
-      "publicName": "flight.Screen.getScreenCursorScreen",
       "refusal": {
         "code": "unsupported-carrier",
         "message": "type family named is outside the Haxe C++ extern vertical slice",
@@ -9131,26 +7391,6 @@
       "nativeName": "flight::screen::get_screen_work_area",
       "package": "@flighthq/screen",
       "publicName": "flight.Screen.getScreenWorkArea",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/screen/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "array",
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Screen_getScreens",
-      "header": "flight/screen/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::screen::get_screens",
-      "package": "@flighthq/screen",
-      "publicName": "flight.Screen.getScreens",
       "refusal": {
         "code": "unsupported-carrier",
         "message": "type family named is outside the Haxe C++ extern vertical slice",
@@ -9297,25 +7537,6 @@
     },
     {
       "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Sensors_attachSensors",
-      "header": "flight/sensors/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::sensors::attach_sensors",
-      "package": "@flighthq/sensors",
-      "publicName": "flight.Sensors.attachSensors",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/sensors/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
         "array",
         "named"
       ],
@@ -9345,177 +7566,6 @@
       "nativeName": "flight::sensors::get_sensors_permission_state",
       "package": "@flighthq/sensors",
       "publicName": "flight.Sensors.getSensorsPermissionState",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/sensors/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Sensors_hasAccelerometer",
-      "header": "flight/sensors/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::sensors::has_accelerometer",
-      "package": "@flighthq/sensors",
-      "publicName": "flight.Sensors.hasAccelerometer",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/sensors/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Sensors_hasAmbientLightSensor",
-      "header": "flight/sensors/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::sensors::has_ambient_light_sensor",
-      "package": "@flighthq/sensors",
-      "publicName": "flight.Sensors.hasAmbientLightSensor",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/sensors/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Sensors_hasBarometer",
-      "header": "flight/sensors/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::sensors::has_barometer",
-      "package": "@flighthq/sensors",
-      "publicName": "flight.Sensors.hasBarometer",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/sensors/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Sensors_hasGravitySensor",
-      "header": "flight/sensors/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::sensors::has_gravity_sensor",
-      "package": "@flighthq/sensors",
-      "publicName": "flight.Sensors.hasGravitySensor",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/sensors/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Sensors_hasGyroscope",
-      "header": "flight/sensors/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::sensors::has_gyroscope",
-      "package": "@flighthq/sensors",
-      "publicName": "flight.Sensors.hasGyroscope",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/sensors/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Sensors_hasLinearAccelerationSensor",
-      "header": "flight/sensors/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::sensors::has_linear_acceleration_sensor",
-      "package": "@flighthq/sensors",
-      "publicName": "flight.Sensors.hasLinearAccelerationSensor",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/sensors/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Sensors_hasMagnetometer",
-      "header": "flight/sensors/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::sensors::has_magnetometer",
-      "package": "@flighthq/sensors",
-      "publicName": "flight.Sensors.hasMagnetometer",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/sensors/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Sensors_hasOrientationSensor",
-      "header": "flight/sensors/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::sensors::has_orientation_sensor",
-      "package": "@flighthq/sensors",
-      "publicName": "flight.Sensors.hasOrientationSensor",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/sensors/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Sensors_hasProximitySensor",
-      "header": "flight/sensors/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::sensors::has_proximity_sensor",
-      "package": "@flighthq/sensors",
-      "publicName": "flight.Sensors.hasProximitySensor",
       "refusal": {
         "code": "unsupported-carrier",
         "message": "type family named is outside the Haxe C++ extern vertical slice",
@@ -9681,25 +7731,6 @@
       "carrierFamilies": [
         "named"
       ],
-      "externClass": "flight._cpp._attempt.Attempt_Sensors_isSensorsSupported",
-      "header": "flight/sensors/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::sensors::is_sensors_supported",
-      "package": "@flighthq/sensors",
-      "publicName": "flight.Sensors.isSensorsSupported",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/sensors/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
       "externClass": "flight._cpp._attempt.Attempt_Sensors_requestSensorsPermission",
       "header": "flight/sensors/contract.hpp",
       "kind": "function",
@@ -9712,25 +7743,6 @@
         "phase": "planning"
       },
       "source": "packages/sensors/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Shell_isShellUrlAllowed",
-      "header": "flight/shell/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::shell::is_shell_url_allowed",
-      "package": "@flighthq/shell",
-      "publicName": "flight.Shell.isShellUrlAllowed",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/shell/src/contract.ts",
       "status": "materialized-unproven",
       "transport": "isolated-extern-inline"
     },
@@ -9840,25 +7852,6 @@
       "nativeName": "flight::shell::reveal_shell_path",
       "package": "@flighthq/shell",
       "publicName": "flight.Shell.revealShellPath",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/shell/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Shell_shellBeep",
-      "header": "flight/shell/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::shell::shell_beep",
-      "package": "@flighthq/shell",
-      "publicName": "flight.Shell.shellBeep",
       "refusal": {
         "code": "unsupported-carrier",
         "message": "type family named is outside the Haxe C++ extern vertical slice",
@@ -10043,25 +8036,6 @@
     },
     {
       "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Timeline_clearTimelineFrameScripts",
-      "header": "flight/timeline/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::timeline::clear_timeline_frame_scripts",
-      "package": "@flighthq/timeline",
-      "publicName": "flight.Timeline.clearTimelineFrameScripts",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Timeline has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/timeline/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
         "dynamic",
         "named"
       ],
@@ -10105,84 +8079,6 @@
     },
     {
       "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Timeline_disposeTimelineSignals",
-      "header": "flight/timeline/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::timeline::dispose_timeline_signals",
-      "package": "@flighthq/timeline",
-      "publicName": "flight.Timeline.disposeTimelineSignals",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Timeline has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/timeline/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Timeline_enableTimelineSignals",
-      "header": "flight/timeline/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::timeline::enable_timeline_signals",
-      "package": "@flighthq/timeline",
-      "publicName": "flight.Timeline.enableTimelineSignals",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Timeline has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/timeline/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named",
-        "nullable"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Timeline_findTimelineLabel",
-      "header": "flight/timeline/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::timeline::find_timeline_label",
-      "package": "@flighthq/timeline",
-      "publicName": "flight.Timeline.findTimelineLabel",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/timeline/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named",
-        "nullable"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Timeline_getTimelineCurrentLabel",
-      "header": "flight/timeline/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::timeline::get_timeline_current_label",
-      "package": "@flighthq/timeline",
-      "publicName": "flight.Timeline.getTimelineCurrentLabel",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/timeline/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
         "dynamic",
         "named",
         "nullable"
@@ -10213,26 +8109,6 @@
       "nativeName": "flight::timeline::get_timeline_frame_script_frames",
       "package": "@flighthq/timeline",
       "publicName": "flight.Timeline.getTimelineFrameScriptFrames",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/timeline/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "array",
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Timeline_getTimelineLabels",
-      "header": "flight/timeline/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::timeline::get_timeline_labels",
-      "package": "@flighthq/timeline",
-      "publicName": "flight.Timeline.getTimelineLabels",
       "refusal": {
         "code": "unsupported-carrier",
         "message": "type family named is outside the Haxe C++ extern vertical slice",
@@ -10327,63 +8203,6 @@
     },
     {
       "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Timeline_nextFrameTimeline",
-      "header": "flight/timeline/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::timeline::next_frame_timeline",
-      "package": "@flighthq/timeline",
-      "publicName": "flight.Timeline.nextFrameTimeline",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Timeline has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/timeline/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Timeline_playTimeline",
-      "header": "flight/timeline/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::timeline::play_timeline",
-      "package": "@flighthq/timeline",
-      "publicName": "flight.Timeline.playTimeline",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Timeline has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/timeline/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Timeline_prevFrameTimeline",
-      "header": "flight/timeline/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::timeline::prev_frame_timeline",
-      "package": "@flighthq/timeline",
-      "publicName": "flight.Timeline.prevFrameTimeline",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Timeline has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/timeline/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
         "dynamic",
         "named"
       ],
@@ -10393,44 +8212,6 @@
       "nativeName": "flight::timeline::remove_timeline_frame_script",
       "package": "@flighthq/timeline",
       "publicName": "flight.Timeline.removeTimelineFrameScript",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Timeline has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/timeline/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Timeline_stopTimeline",
-      "header": "flight/timeline/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::timeline::stop_timeline",
-      "package": "@flighthq/timeline",
-      "publicName": "flight.Timeline.stopTimeline",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Timeline has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/timeline/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Timeline_updateTimeline",
-      "header": "flight/timeline/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::timeline::update_timeline",
-      "package": "@flighthq/timeline",
-      "publicName": "flight.Timeline.updateTimeline",
       "refusal": {
         "code": "unsupported-carrier",
         "message": "named carrier Timeline has no unique published C++ type locator",
@@ -16826,44 +14607,6 @@
     },
     {
       "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Velocity_addVelocity",
-      "header": "flight/velocity/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::velocity::add_velocity",
-      "package": "@flighthq/velocity",
-      "publicName": "flight.Velocity.addVelocity",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Velocity2D has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/velocity/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Velocity_clampVelocity",
-      "header": "flight/velocity/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::velocity::clamp_velocity",
-      "package": "@flighthq/velocity",
-      "publicName": "flight.Velocity.clampVelocity",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Velocity2D has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/velocity/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
         "dynamic",
         "generic-function",
         "named"
@@ -16897,44 +14640,6 @@
       "refusal": {
         "code": "unsupported-carrier",
         "message": "named carrier VelocityField has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/velocity/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Velocity_copyVelocity",
-      "header": "flight/velocity/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::velocity::copy_velocity",
-      "package": "@flighthq/velocity",
-      "publicName": "flight.Velocity.copyVelocity",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Velocity2D has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/velocity/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Velocity_dampVelocity",
-      "header": "flight/velocity/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::velocity::damp_velocity",
-      "package": "@flighthq/velocity",
-      "publicName": "flight.Velocity.dampVelocity",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Velocity2D has no unique published C++ type locator",
         "phase": "planning"
       },
       "source": "packages/velocity/src/contract.ts",
@@ -17003,25 +14708,6 @@
     },
     {
       "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Velocity_getVelocitySampleAt",
-      "header": "flight/velocity/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::velocity::get_velocity_sample_at",
-      "package": "@flighthq/velocity",
-      "publicName": "flight.Velocity.getVelocitySampleAt",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/velocity/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
         "dynamic",
         "named"
       ],
@@ -17061,120 +14747,6 @@
     },
     {
       "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Velocity_isVelocityZero",
-      "header": "flight/velocity/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::velocity::is_velocity_zero",
-      "package": "@flighthq/velocity",
-      "publicName": "flight.Velocity.isVelocityZero",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/velocity/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Velocity_lengthOfVelocity",
-      "header": "flight/velocity/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::velocity::length_of_velocity",
-      "package": "@flighthq/velocity",
-      "publicName": "flight.Velocity.lengthOfVelocity",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/velocity/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Velocity_lerpVelocity",
-      "header": "flight/velocity/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::velocity::lerp_velocity",
-      "package": "@flighthq/velocity",
-      "publicName": "flight.Velocity.lerpVelocity",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Velocity2D has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/velocity/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Velocity_normalizeVelocity",
-      "header": "flight/velocity/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::velocity::normalize_velocity",
-      "package": "@flighthq/velocity",
-      "publicName": "flight.Velocity.normalizeVelocity",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Velocity2D has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/velocity/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Velocity_scaleVelocity",
-      "header": "flight/velocity/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::velocity::scale_velocity",
-      "package": "@flighthq/velocity",
-      "publicName": "flight.Velocity.scaleVelocity",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Velocity2D has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/velocity/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Velocity_subtractVelocity",
-      "header": "flight/velocity/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::velocity::subtract_velocity",
-      "package": "@flighthq/velocity",
-      "publicName": "flight.Velocity.subtractVelocity",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Velocity2D has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/velocity/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
         "dynamic",
         "named"
       ],
@@ -17187,25 +14759,6 @@
       "refusal": {
         "code": "unsupported-carrier",
         "message": "named carrier VelocityField has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/velocity/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Velocity_zeroVelocity",
-      "header": "flight/velocity/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::velocity::zero_velocity",
-      "package": "@flighthq/velocity",
-      "publicName": "flight.Velocity.zeroVelocity",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Velocity2D has no unique published C++ type locator",
         "phase": "planning"
       },
       "source": "packages/velocity/src/contract.ts",
@@ -17241,14 +14794,14 @@
   },
   "schema": "flight-hx-native-binding-attempts/1",
   "summary": {
-    "functions": 510,
+    "functions": 382,
     "carrierFamilies": [
       {
         "count": 80,
         "name": "anonymous-structure"
       },
       {
-        "count": 76,
+        "count": 68,
         "name": "array"
       },
       {
@@ -17264,11 +14817,11 @@
         "name": "generic-function"
       },
       {
-        "count": 557,
+        "count": 429,
         "name": "named"
       },
       {
-        "count": 58,
+        "count": 51,
         "name": "nullable"
       },
       {
@@ -17280,9 +14833,9 @@
         "name": "typed-array"
       }
     ],
-    "holders": 42,
-    "isolatedExterns": 889,
-    "total": 889,
+    "holders": 41,
+    "isolatedExterns": 761,
+    "total": 761,
     "values": 379
   }
 }

@@ -2,7 +2,11 @@
 package flight;
 
 extern inline function isShellUrlAllowed(url:String, policy:flight.ShellExternalUrlPolicy):Bool {
-  return flight._cpp._attempt.Attempt_Shell_isShellUrlAllowed.isShellUrlAllowed(url, policy);
+  return flight._cpp._fn.Shell.isShellUrlAllowed(url, policy);
+}
+
+extern inline function shellBeep(hostShellBeep:flight.HostShellBeepCapability):Void {
+  flight._cpp._fn.Shell.shellBeep(hostShellBeep);
 }
 
 extern inline function moveShellItemToTrash(hostShellTrash:flight.HostShellTrashCapability, path:String):flight._internal._Promise<flight.ShellTrashOutcome> {
@@ -27,10 +31,6 @@ extern inline function readShellShortcutLink(hostShellShortcutLink:flight.HostSh
 
 extern inline function revealShellPath(hostShellPathReveal:flight.HostShellPathRevealCapability, path:String):flight._internal._Promise<flight.ShellPathRevealOutcome> {
   return flight._cpp._attempt.Attempt_Shell_revealShellPath.revealShellPath(hostShellPathReveal, path);
-}
-
-extern inline function shellBeep(hostShellBeep:flight.HostShellBeepCapability):Void {
-  flight._cpp._attempt.Attempt_Shell_shellBeep.shellBeep(hostShellBeep);
 }
 
 extern inline function spawnShellProcess(hostShellProcess:flight.HostShellProcessCapability, command:String, args:Array<String>, ?options:flight.ShellProcessOptions):flight.ShellProcess {

@@ -36,4 +36,20 @@ flight::Ref<flight::types::PowerStatus> make_power_status() {
   return flight::power::make_power_status();
 }
 
+flight::Ref<flight::types::PowerBatteryHealth> get_power_battery_health(flight::Ref<flight::types::HostPowerBatteryHealthCapability> hostPowerBatteryHealth, flight::Ref<flight::types::PowerBatteryHealth> out) {
+  return flight::power::get_power_battery_health(hostPowerBatteryHealth, out);
+}
+
+flight::Ref<flight::types::PowerStatus> get_power_status(flight::Ref<flight::types::HostPowerStatusCapability> hostPowerStatus, flight::Ref<flight::types::PowerStatus> out) {
+  return flight::power::get_power_status(hostPowerStatus, out);
+}
+
+double get_power_system_idle_time(flight::Ref<flight::types::HostPowerIdleCapability> hostPowerIdle) {
+  return flight::power::get_power_system_idle_time(hostPowerIdle);
+}
+
+bool is_power_keep_awake_active(flight::Ref<flight::types::HostPowerKeepAwakeCapability> hostPowerKeepAwake) {
+  return flight::power::is_power_keep_awake_active(hostPowerKeepAwake);
+}
+
 } // namespace flight_hx::power

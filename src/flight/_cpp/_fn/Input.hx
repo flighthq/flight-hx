@@ -63,5 +63,8 @@ extern class Input {
 
   @:native("flight_hx::input::was_input_key_released")
   static function wasInputKeyReleased(state:flight.InputState, keyCode:Float):Bool;
+
+  @:native("flight_hx::input::create_input_key_repeat_timer")
+  static function createInputKeyRepeatTimer(options:flight.InputKeyRepeatOptions):flight.InputKeyRepeatTimer;
 }
 #end

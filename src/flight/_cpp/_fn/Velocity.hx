@@ -30,5 +30,41 @@ extern class Velocity {
 
   @:native("flight_hx::velocity::create_velocity_field")
   static function createVelocityField():flight.VelocityField;
+
+  @:native("flight_hx::velocity::add_velocity")
+  static function addVelocity(out:flight.Velocity2D, a:flight.Velocity2D, b:flight.Velocity2D):flight.Velocity2D;
+
+  @:native("flight_hx::velocity::clamp_velocity")
+  static function clampVelocity(out:flight.Velocity2D, velocity:flight.Velocity2D, maxLength:Float):flight.Velocity2D;
+
+  @:native("flight_hx::velocity::copy_velocity")
+  static function copyVelocity(out:flight.Velocity2D, source:flight.Velocity2D):flight.Velocity2D;
+
+  @:native("flight_hx::velocity::damp_velocity")
+  static function dampVelocity(out:flight.Velocity2D, current:flight.Velocity2D, previous:flight.Velocity2D, factor:Float):flight.Velocity2D;
+
+  @:native("flight_hx::velocity::get_velocity_sample_at")
+  static function getVelocitySampleAt(sample:flight.VelocitySample, currentWorldTransform:flight.Matrix, pointX:Float, pointY:Float, out:flight.Velocity2D):flight.Velocity2D;
+
+  @:native("flight_hx::velocity::is_velocity_zero")
+  static function isVelocityZero(velocity:flight.Velocity2D, epsilonPresent:Bool, epsilon:Float):Bool;
+
+  @:native("flight_hx::velocity::length_of_velocity")
+  static function lengthOfVelocity(velocity:flight.Velocity2D):Float;
+
+  @:native("flight_hx::velocity::lerp_velocity")
+  static function lerpVelocity(out:flight.Velocity2D, a:flight.Velocity2D, b:flight.Velocity2D, t:Float):flight.Velocity2D;
+
+  @:native("flight_hx::velocity::normalize_velocity")
+  static function normalizeVelocity(out:flight.Velocity2D, source:flight.Velocity2D):flight.Velocity2D;
+
+  @:native("flight_hx::velocity::scale_velocity")
+  static function scaleVelocity(out:flight.Velocity2D, velocity:flight.Velocity2D, scale:Float):flight.Velocity2D;
+
+  @:native("flight_hx::velocity::subtract_velocity")
+  static function subtractVelocity(out:flight.Velocity2D, a:flight.Velocity2D, b:flight.Velocity2D):flight.Velocity2D;
+
+  @:native("flight_hx::velocity::zero_velocity")
+  static function zeroVelocity(out:flight.Velocity2D):flight.Velocity2D;
 }
 #end

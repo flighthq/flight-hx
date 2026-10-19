@@ -3,6 +3,22 @@ package flight;
 
 typedef RequirementCatalog = flight._cpp.RequirementCatalog;
 
+extern inline function createRequirementCatalog(?entries:Array<flight.RequirementCatalogEntry>, ?translations:Array<flight.RequirementTranslation>, ?dispositions:Array<flight.RequirementDisposition>):flight.RequirementCatalog {
+  return flight._cpp._fn.RequirementCatalog.createRequirementCatalog(entries != null, entries == null ? ([] : Array<flight.RequirementCatalogEntry>) : entries, translations != null, translations == null ? ([] : Array<flight.RequirementTranslation>) : translations, dispositions != null, dispositions == null ? ([] : Array<flight.RequirementDisposition>) : dispositions);
+}
+
+extern inline function getRequirementCatalogEntries(catalog:flight.RequirementCatalog):Array<flight.RequirementCatalogEntry> {
+  return flight._cpp._fn.RequirementCatalog.getRequirementCatalogEntries(catalog);
+}
+
+extern inline function registerRequirementCatalogEntry(catalog:flight.RequirementCatalog, entry:flight.RequirementCatalogEntry):Void {
+  flight._cpp._fn.RequirementCatalog.registerRequirementCatalogEntry(catalog, entry);
+}
+
+extern inline function unregisterRequirementCatalogEntry(catalog:flight.RequirementCatalog, entry:flight.RequirementCatalogEntry):Bool {
+  return flight._cpp._fn.RequirementCatalog.unregisterRequirementCatalogEntry(catalog, entry);
+}
+
 var BUILT_IN_REQUIREMENT_BACKENDS(get, set):Array<RequirementBackend>;
 
 private extern inline function get_BUILT_IN_REQUIREMENT_BACKENDS():Array<RequirementBackend> return flight._cpp._attempt.Attempt_RequirementCatalog_BUILT_IN_REQUIREMENT_BACKENDS.BUILT_IN_REQUIREMENT_BACKENDS;
@@ -27,22 +43,6 @@ private extern inline function get_BUILT_IN_REQUIREMENT_TRANSLATIONS():Array<Req
 
 private extern inline function set_BUILT_IN_REQUIREMENT_TRANSLATIONS(value:Array<RequirementTranslation>):Array<RequirementTranslation> return flight._cpp._attempt.Attempt_RequirementCatalog_BUILT_IN_REQUIREMENT_TRANSLATIONS.BUILT_IN_REQUIREMENT_TRANSLATIONS = value;
 
-extern inline function createRequirementCatalog(?entries:Array<flight.RequirementCatalogEntry>, ?translations:Array<flight.RequirementTranslation>, ?dispositions:Array<flight.RequirementDisposition>):flight.RequirementCatalog {
-  return flight._cpp._attempt.Attempt_RequirementCatalog_createRequirementCatalog.createRequirementCatalog(entries, translations, dispositions);
-}
-
 extern inline function findRequirementCatalogEntries(catalog:flight.RequirementCatalog, backend:String, facet:flight.RequirementFacet, kind:flight.Kind):Array<flight.RequirementCatalogEntry> {
   return flight._cpp._attempt.Attempt_RequirementCatalog_findRequirementCatalogEntries.findRequirementCatalogEntries(catalog, backend, facet, kind);
-}
-
-extern inline function getRequirementCatalogEntries(catalog:flight.RequirementCatalog):Array<flight.RequirementCatalogEntry> {
-  return flight._cpp._attempt.Attempt_RequirementCatalog_getRequirementCatalogEntries.getRequirementCatalogEntries(catalog);
-}
-
-extern inline function registerRequirementCatalogEntry(catalog:flight.RequirementCatalog, entry:flight.RequirementCatalogEntry):Void {
-  flight._cpp._attempt.Attempt_RequirementCatalog_registerRequirementCatalogEntry.registerRequirementCatalogEntry(catalog, entry);
-}
-
-extern inline function unregisterRequirementCatalogEntry(catalog:flight.RequirementCatalog, entry:flight.RequirementCatalogEntry):Bool {
-  return flight._cpp._attempt.Attempt_RequirementCatalog_unregisterRequirementCatalogEntry.unregisterRequirementCatalogEntry(catalog, entry);
 }

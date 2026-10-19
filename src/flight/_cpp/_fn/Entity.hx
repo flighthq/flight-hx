@@ -39,5 +39,23 @@ extern class Entity {
 
   @:native("flight_hx::entity::set_entity_runtime_guard_mode")
   static function setEntityRuntimeGuardMode(enabled:Bool):Void;
+
+  @:native("flight_hx::entity::detach_entity_binding")
+  static function detachEntityBinding(entity:flight.Entity):Void;
+
+  @:native("flight_hx::entity::get_entity_runtime")
+  static function getEntityRuntime(source:flight.Entity):flight.EntityRuntime;
+
+  @:native("flight_hx::entity::get_entity_uid")
+  static function getEntityUid(source:flight.Entity):String;
+
+  @:native("flight_hx::entity::has_entity_binding")
+  static function hasEntityBinding(source:flight.Entity):Bool;
+
+  @:native("flight_hx::entity::has_entity_runtime")
+  static function hasEntityRuntime(source:flight.Entity):Bool;
+
+  @:native("flight_hx::entity::set_entity_uid")
+  static function setEntityUid(source:flight.Entity, uid:String):Void;
 }
 #end

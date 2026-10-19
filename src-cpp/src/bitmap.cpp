@@ -36,6 +36,41 @@ void replace_haxe_array(::Array<double> destination, const flight::Array<double>
 
 } // namespace
 
+namespace {
+
+template <typename T>
+flight::Array<flight::Ref<T>> to_flight_reference_array(const ::Array<::Dynamic>& source) {
+  flight::Array<flight::Ref<T>> result;
+  for (int index = 0; index < source->length; ++index) {
+    const ::Dynamic value = source[index];
+    result.push(value.GetPtr() ? static_cast<flight::Ref<T>>(value.StaticCast<flight_hx::Ref<T>>()) : flight::Ref<T>{});
+  }
+  return result;
+}
+
+template <typename T>
+::Array<::Dynamic> to_haxe_reference_array(const flight::Array<flight::Ref<T>>& source) {
+  if (source.size() > static_cast<std::size_t>(std::numeric_limits<int>::max())) {
+    throw std::length_error("Flight reference Array exceeds the hxcpp Array length limit");
+  }
+  ::Array<::Dynamic> result = ::Array_obj<::Dynamic>::__new(static_cast<int>(source.size()));
+  int index = 0;
+  for (const flight::Ref<T>& value : source) result[index++] = flight_hx::Ref<T>(value);
+  return result;
+}
+
+template <typename T>
+void replace_haxe_reference_array(::Array<::Dynamic> destination, const flight::Array<flight::Ref<T>>& source) {
+  if (source.size() > static_cast<std::size_t>(std::numeric_limits<int>::max())) {
+    throw std::length_error("Flight reference Array exceeds the hxcpp Array length limit");
+  }
+  destination->resize(static_cast<int>(source.size()));
+  int index = 0;
+  for (const flight::Ref<T>& value : source) destination[index++] = flight_hx::Ref<T>(value);
+}
+
+} // namespace
+
 void build_bitmap_brightness_color_matrix(::Array<double> out, double amount) {
   auto flight_out = to_flight_array(out);
   flight::bitmap::build_bitmap_brightness_color_matrix(flight_out, amount);
@@ -251,6 +286,16 @@ flight_hx::Ref<flight::types::Bitmap> compare_bitmap(flight::Ref<flight::types::
 flight_hx::Ref<flight::types::BitmapFingerprint> parse_bitmap_fingerprint(::String text) {
   const auto result = flight::bitmap::parse_bitmap_fingerprint(flight::String::from_utf8(text.utf8_str()));
   return result.has_value() ? flight_hx::Ref<flight::types::BitmapFingerprint>{result.value()} : flight_hx::Ref<flight::types::BitmapFingerprint>{};
+}
+
+flight_hx::Ref<flight::types::Bitmap> capture_bitmap_from_image_resource(flight::Ref<flight::types::HostBitmapReadbackCapability> hostBitmapReadback, flight::Ref<flight::types::ImageResource> resource) {
+  const auto result = flight::bitmap::capture_bitmap_from_image_resource(hostBitmapReadback, resource);
+  return result.has_value() ? flight_hx::Ref<flight::types::Bitmap>{result.value()} : flight_hx::Ref<flight::types::Bitmap>{};
+}
+
+::Array<::Dynamic> split_bitmap_channels(flight::Ref<flight::types::Bitmap> source) {
+  const auto result = flight::bitmap::split_bitmap_channels(source);
+  return to_haxe_reference_array<flight::types::Bitmap>(result);
 }
 
 } // namespace flight_hx::bitmap

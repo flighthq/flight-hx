@@ -14,11 +14,47 @@ inline function getAudioMimeTypeEssence(mimeType:String):String {
 }
 
 extern inline function canPlayAudioType(hostAudioCodec:flight.HostAudioCodecCapability, mimeType:String):Bool {
-  return flight._cpp._attempt.Attempt_Audio_canPlayAudioType.canPlayAudioType(hostAudioCodec, mimeType);
+  return flight._cpp._fn.Audio.canPlayAudioType(hostAudioCodec, mimeType);
 }
 
 extern inline function cloneAudioResource(resource:flight.AudioResource):flight.AudioResource {
-  return flight._cpp._attempt.Attempt_Audio_cloneAudioResource.cloneAudioResource(resource);
+  return flight._cpp._fn.Audio.cloneAudioResource(resource);
+}
+
+extern inline function disposeAudioResource(resource:flight.AudioResource):Void {
+  flight._cpp._fn.Audio.disposeAudioResource(resource);
+}
+
+extern inline function getAudioDecodeSlot(audioDecode:flight.HostAudioDecodeCapabilities, mimeType:String):Null<flight.HostAudioDecodeFormatCapability> {
+  return flight._cpp._fn.Audio.getAudioDecodeSlot(audioDecode, mimeType);
+}
+
+extern inline function getAudioResourceByteSize(resource:flight.AudioResource):Float {
+  return flight._cpp._fn.Audio.getAudioResourceByteSize(resource);
+}
+
+extern inline function getAudioResourceChannelCount(resource:flight.AudioResource):Float {
+  return flight._cpp._fn.Audio.getAudioResourceChannelCount(resource);
+}
+
+extern inline function getAudioResourceDuration(resource:flight.AudioResource):Float {
+  return flight._cpp._fn.Audio.getAudioResourceDuration(resource);
+}
+
+extern inline function getAudioResourceSampleRate(resource:flight.AudioResource):Float {
+  return flight._cpp._fn.Audio.getAudioResourceSampleRate(resource);
+}
+
+extern inline function hasAudioDecodeSlot(audioDecode:flight.HostAudioDecodeCapabilities, mimeType:String):Bool {
+  return flight._cpp._fn.Audio.hasAudioDecodeSlot(audioDecode, mimeType);
+}
+
+extern inline function hasAudioResourceBuffer(resource:flight.AudioResource):Bool {
+  return flight._cpp._fn.Audio.hasAudioResourceBuffer(resource);
+}
+
+extern inline function isAudioResourceEmpty(resource:flight.AudioResource):Bool {
+  return flight._cpp._fn.Audio.isAudioResourceEmpty(resource);
 }
 
 extern inline function createAudioResource(?buffer:flight.AudioBuffer):flight.AudioResource {
@@ -49,10 +85,6 @@ extern inline function detectAudioMimeType(data:Dynamic):Null<String> {
   return flight._cpp._attempt.Attempt_Audio_detectAudioMimeType.detectAudioMimeType(data);
 }
 
-extern inline function disposeAudioResource(resource:flight.AudioResource):Void {
-  flight._cpp._attempt.Attempt_Audio_disposeAudioResource.disposeAudioResource(resource);
-}
-
 extern inline function explainAudioResourceReferenceResolution(ref:flight.AudioResourceReference):flight.AudioResourceReferenceResolutionExplanation {
   return flight._cpp._attempt.Attempt_Audio_explainAudioResourceReferenceResolution.explainAudioResourceReferenceResolution(ref);
 }
@@ -61,36 +93,8 @@ extern inline function findAudioResourceReferenceByName(references:Array<flight.
   return flight._cpp._attempt.Attempt_Audio_findAudioResourceReferenceByName.findAudioResourceReferenceByName(references, name);
 }
 
-extern inline function getAudioDecodeSlot(audioDecode:flight.HostAudioDecodeCapabilities, mimeType:String):Null<flight.HostAudioDecodeFormatCapability> {
-  return flight._cpp._attempt.Attempt_Audio_getAudioDecodeSlot.getAudioDecodeSlot(audioDecode, mimeType);
-}
-
-extern inline function getAudioResourceByteSize(resource:flight.AudioResource):Float {
-  return flight._cpp._attempt.Attempt_Audio_getAudioResourceByteSize.getAudioResourceByteSize(resource);
-}
-
-extern inline function getAudioResourceChannelCount(resource:flight.AudioResource):Float {
-  return flight._cpp._attempt.Attempt_Audio_getAudioResourceChannelCount.getAudioResourceChannelCount(resource);
-}
-
 extern inline function getAudioResourceChannelData(resource:flight.AudioResource, channel:Float):Null<flight._internal._Float32Array> {
   return flight._cpp._attempt.Attempt_Audio_getAudioResourceChannelData.getAudioResourceChannelData(resource, channel);
-}
-
-extern inline function getAudioResourceDuration(resource:flight.AudioResource):Float {
-  return flight._cpp._attempt.Attempt_Audio_getAudioResourceDuration.getAudioResourceDuration(resource);
-}
-
-extern inline function getAudioResourceSampleRate(resource:flight.AudioResource):Float {
-  return flight._cpp._attempt.Attempt_Audio_getAudioResourceSampleRate.getAudioResourceSampleRate(resource);
-}
-
-extern inline function hasAudioDecodeSlot(audioDecode:flight.HostAudioDecodeCapabilities, mimeType:String):Bool {
-  return flight._cpp._attempt.Attempt_Audio_hasAudioDecodeSlot.hasAudioDecodeSlot(audioDecode, mimeType);
-}
-
-extern inline function hasAudioResourceBuffer(resource:flight.AudioResource):Bool {
-  return flight._cpp._attempt.Attempt_Audio_hasAudioResourceBuffer.hasAudioResourceBuffer(resource);
 }
 
 extern inline function initializeAudioResource(out:flight.EntityConstruction<flight.AudioResource>, ?buffer:flight.AudioBuffer):Void {
@@ -103,10 +107,6 @@ extern inline function initializeEmbeddedAudioResourceReference(out:flight.Entit
 
 extern inline function initializeExternalAudioResourceReference(out:flight.EntityConstruction<flight.ExternalAudioResourceReference>, uri:String, ?basePath:Null<String>, ?mimeType:Null<String>, ?name:Null<String>):Void {
   flight._cpp._attempt.Attempt_Audio_initializeExternalAudioResourceReference.initializeExternalAudioResourceReference(out, uri, basePath, mimeType, name);
-}
-
-extern inline function isAudioResourceEmpty(resource:flight.AudioResource):Bool {
-  return flight._cpp._attempt.Attempt_Audio_isAudioResourceEmpty.isAudioResourceEmpty(resource);
 }
 
 extern inline function loadAudioResourceFromBase64(audioDecode:flight.HostAudioDecodeCapabilities, base64:String, mimeType:String, ?signal:flight.AbortSignal, ?decoders:flight.AudioDecoderRegistry):flight._internal._Promise<flight.AudioResource> {

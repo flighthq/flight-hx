@@ -35,6 +35,22 @@ extern inline function makePowerStatus():flight.PowerStatus {
   return flight._cpp._fn.Power.makePowerStatus();
 }
 
+extern inline function getPowerBatteryHealth(hostPowerBatteryHealth:flight.HostPowerBatteryHealthCapability, out:flight.PowerBatteryHealth):flight.PowerBatteryHealth {
+  return flight._cpp._fn.Power.getPowerBatteryHealth(hostPowerBatteryHealth, out);
+}
+
+extern inline function getPowerStatus(hostPowerStatus:flight.HostPowerStatusCapability, out:flight.PowerStatus):flight.PowerStatus {
+  return flight._cpp._fn.Power.getPowerStatus(hostPowerStatus, out);
+}
+
+extern inline function getPowerSystemIdleTime(hostPowerIdle:flight.HostPowerIdleCapability):Float {
+  return flight._cpp._fn.Power.getPowerSystemIdleTime(hostPowerIdle);
+}
+
+extern inline function isPowerKeepAwakeActive(hostPowerKeepAwake:flight.HostPowerKeepAwakeCapability):Bool {
+  return flight._cpp._fn.Power.isPowerKeepAwakeActive(hostPowerKeepAwake);
+}
+
 extern inline function acquirePowerKeepAwake(hostPowerKeepAwake:flight.HostPowerKeepAwakeCapability, ?mode:flight.PowerKeepAwakeMode):flight._internal._Promise<flight.PowerKeepAwakeAcquireResult> {
   return flight._cpp._attempt.Attempt_Power_acquirePowerKeepAwake.acquirePowerKeepAwake(hostPowerKeepAwake, mode);
 }
@@ -47,20 +63,8 @@ extern inline function destroyPowerKeepAwake(...hostPowerKeepAwake:flight.HostPo
   flight._cpp._attempt.Attempt_Power_destroyPowerKeepAwake.destroyPowerKeepAwake(...hostPowerKeepAwake);
 }
 
-extern inline function getPowerBatteryHealth(hostPowerBatteryHealth:flight.HostPowerBatteryHealthCapability, out:flight.PowerBatteryHealth):flight.PowerBatteryHealth {
-  return flight._cpp._attempt.Attempt_Power_getPowerBatteryHealth.getPowerBatteryHealth(hostPowerBatteryHealth, out);
-}
-
-extern inline function getPowerStatus(hostPowerStatus:flight.HostPowerStatusCapability, out:flight.PowerStatus):flight.PowerStatus {
-  return flight._cpp._attempt.Attempt_Power_getPowerStatus.getPowerStatus(hostPowerStatus, out);
-}
-
 extern inline function getPowerSystemIdleState(hostPowerIdle:flight.HostPowerIdleCapability, thresholdSeconds:Float):flight.PowerIdleState {
   return flight._cpp._attempt.Attempt_Power_getPowerSystemIdleState.getPowerSystemIdleState(hostPowerIdle, thresholdSeconds);
-}
-
-extern inline function getPowerSystemIdleTime(hostPowerIdle:flight.HostPowerIdleCapability):Float {
-  return flight._cpp._attempt.Attempt_Power_getPowerSystemIdleTime.getPowerSystemIdleTime(hostPowerIdle);
 }
 
 extern inline function getPowerThermalState(hostPowerThermal:flight.HostPowerThermalCapability):flight.PowerThermalState {
@@ -69,10 +73,6 @@ extern inline function getPowerThermalState(hostPowerThermal:flight.HostPowerThe
 
 extern inline function initializePower(out:flight.EntityConstruction<flight.Power>):Void {
   flight._cpp._attempt.Attempt_Power_initializePower.initializePower(out);
-}
-
-extern inline function isPowerKeepAwakeActive(hostPowerKeepAwake:flight.HostPowerKeepAwakeCapability):Bool {
-  return flight._cpp._attempt.Attempt_Power_isPowerKeepAwakeActive.isPowerKeepAwakeActive(hostPowerKeepAwake);
 }
 
 extern inline function releasePowerKeepAwake(hostPowerKeepAwake:flight.HostPowerKeepAwakeCapability):flight._internal._Promise<flight.PowerKeepAwakeReleaseResult> {

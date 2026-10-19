@@ -27,5 +27,11 @@ import flight.*;
 extern class Geolocation {
   @:native("flight_hx::geolocation::create_geolocation_position")
   static function createGeolocationPosition():flight.GeolocationPosition;
+
+  @:native("flight_hx::geolocation::clear_geolocation_watch")
+  static function clearGeolocationWatch(hostGeolocation:flight.HostGeolocationCapability, id:Float):Void;
+
+  @:native("flight_hx::geolocation::is_geolocation_available")
+  static function isGeolocationAvailable(hostGeolocation:flight.HostGeolocationCapability):Bool;
 }
 #end

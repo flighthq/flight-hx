@@ -53,6 +53,10 @@ extern inline function wasInputKeyReleased(state:flight.InputState, keyCode:Floa
   return flight._cpp._fn.Input.wasInputKeyReleased(state, keyCode);
 }
 
+extern inline function createInputKeyRepeatTimer(options:flight.InputKeyRepeatOptions):flight.InputKeyRepeatTimer {
+  return flight._cpp._fn.Input.createInputKeyRepeatTimer(options);
+}
+
 extern inline function applyGamepadStickDeadZone(out:{ x:Float, y:Float }, x:Float, y:Float, deadZone:Float):Void {
   flight._cpp._attempt.Attempt_Input_applyGamepadStickDeadZone.applyGamepadStickDeadZone(out, x, y, deadZone);
 }
@@ -83,10 +87,6 @@ extern inline function attachWheelInput(hostInputIngress:flight.HostInputIngress
 
 extern inline function connectInputStateToInputManager(state:flight.InputState, manager:flight.InputManager):()->Void {
   return flight._cpp._attempt.Attempt_Input_connectInputStateToInputManager.connectInputStateToInputManager(state, manager);
-}
-
-extern inline function createInputKeyRepeatTimer(options:flight.InputKeyRepeatOptions):flight.InputKeyRepeatTimer {
-  return flight._cpp._attempt.Attempt_Input_createInputKeyRepeatTimer.createInputKeyRepeatTimer(options);
 }
 
 extern inline function detachGamepadInput(manager:flight.InputManager, source:flight.InputIngressSource):Void {

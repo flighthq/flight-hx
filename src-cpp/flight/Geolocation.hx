@@ -6,7 +6,11 @@ extern inline function createGeolocationPosition():flight.GeolocationPosition {
 }
 
 extern inline function clearGeolocationWatch(hostGeolocation:flight.HostGeolocationCapability, id:Float):Void {
-  flight._cpp._attempt.Attempt_Geolocation_clearGeolocationWatch.clearGeolocationWatch(hostGeolocation, id);
+  flight._cpp._fn.Geolocation.clearGeolocationWatch(hostGeolocation, id);
+}
+
+extern inline function isGeolocationAvailable(hostGeolocation:flight.HostGeolocationCapability):Bool {
+  return flight._cpp._fn.Geolocation.isGeolocationAvailable(hostGeolocation);
 }
 
 extern inline function getCurrentGeolocationPosition(hostGeolocation:flight.HostGeolocationCapability, ?options:flight.GeolocationRequestOptions):flight._internal._Promise<Null<flight.GeolocationPosition>> {
@@ -19,10 +23,6 @@ extern inline function getCurrentGeolocationPositionResult(hostGeolocation:fligh
 
 extern inline function initializeGeolocationPosition(out:flight.EntityConstruction<flight.GeolocationPosition>):Void {
   flight._cpp._attempt.Attempt_Geolocation_initializeGeolocationPosition.initializeGeolocationPosition(out);
-}
-
-extern inline function isGeolocationAvailable(hostGeolocation:flight.HostGeolocationCapability):Bool {
-  return flight._cpp._attempt.Attempt_Geolocation_isGeolocationAvailable.isGeolocationAvailable(hostGeolocation);
 }
 
 extern inline function promptForGeolocationAccess(hostGeolocation:Null<flight.HostGeolocationCapability>):flight._internal._Promise<flight.GeolocationAccessOutcome> {

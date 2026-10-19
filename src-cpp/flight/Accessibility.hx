@@ -1,16 +1,16 @@
 // Generated from src-cpp/manifest.json and flight-compiler native-planning.json. Do not edit.
 package flight;
 
+extern inline function destroyAccessibility(hostAccessibility:flight.HostAccessibilityCapability):Void {
+  flight._cpp._fn.Accessibility.destroyAccessibility(hostAccessibility);
+}
+
 extern inline function announceAccessibility(hostAccessibility:flight.HostAccessibilityCapability, message:String, ?liveness:flight.AccessibilityLiveness):flight.AccessibilityOperationOutcome<Dynamic> {
   return flight._cpp._attempt.Attempt_Accessibility_announceAccessibility.announceAccessibility(hostAccessibility, message, liveness);
 }
 
 extern inline function clearAccessibilityTree(hostAccessibility:flight.HostAccessibilityCapability):flight.AccessibilityOperationOutcome<Dynamic> {
   return flight._cpp._attempt.Attempt_Accessibility_clearAccessibilityTree.clearAccessibilityTree(hostAccessibility);
-}
-
-extern inline function destroyAccessibility(hostAccessibility:flight.HostAccessibilityCapability):Void {
-  flight._cpp._attempt.Attempt_Accessibility_destroyAccessibility.destroyAccessibility(hostAccessibility);
 }
 
 extern inline function removeAccessibilityNode(hostAccessibility:flight.HostAccessibilityCapability, id:String):flight.AccessibilityOperationOutcome<Dynamic> {

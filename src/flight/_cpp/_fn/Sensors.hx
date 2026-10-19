@@ -69,5 +69,38 @@ extern class Sensors {
 
   @:native("flight_hx::sensors::dispose_sensors")
   static function disposeSensors(sensors:flight.Sensors):Void;
+
+  @:native("flight_hx::sensors::attach_sensors")
+  static function attachSensors(hostSensors:flight.HostSensorsCapability, sensors:flight.Sensors):Void;
+
+  @:native("flight_hx::sensors::has_accelerometer")
+  static function hasAccelerometer(hostSensors:flight.HostSensorsCapability):Bool;
+
+  @:native("flight_hx::sensors::has_ambient_light_sensor")
+  static function hasAmbientLightSensor(hostSensors:flight.HostSensorsCapability):Bool;
+
+  @:native("flight_hx::sensors::has_barometer")
+  static function hasBarometer(hostSensors:flight.HostSensorsCapability):Bool;
+
+  @:native("flight_hx::sensors::has_gravity_sensor")
+  static function hasGravitySensor(hostSensors:flight.HostSensorsCapability):Bool;
+
+  @:native("flight_hx::sensors::has_gyroscope")
+  static function hasGyroscope(hostSensors:flight.HostSensorsCapability):Bool;
+
+  @:native("flight_hx::sensors::has_linear_acceleration_sensor")
+  static function hasLinearAccelerationSensor(hostSensors:flight.HostSensorsCapability):Bool;
+
+  @:native("flight_hx::sensors::has_magnetometer")
+  static function hasMagnetometer(hostSensors:flight.HostSensorsCapability):Bool;
+
+  @:native("flight_hx::sensors::has_orientation_sensor")
+  static function hasOrientationSensor(hostSensors:flight.HostSensorsCapability):Bool;
+
+  @:native("flight_hx::sensors::has_proximity_sensor")
+  static function hasProximitySensor(hostSensors:flight.HostSensorsCapability):Bool;
+
+  @:native("flight_hx::sensors::is_sensors_supported")
+  static function isSensorsSupported(hostSensors:flight.HostSensorsCapability):Bool;
 }
 #end

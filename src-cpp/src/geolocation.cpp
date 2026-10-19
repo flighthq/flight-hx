@@ -8,4 +8,12 @@ flight::Ref<flight::types::GeolocationPosition> create_geolocation_position() {
   return flight::geolocation::create_geolocation_position();
 }
 
+void clear_geolocation_watch(flight::Ref<flight::types::HostGeolocationCapability> hostGeolocation, double id) {
+  flight::geolocation::clear_geolocation_watch(hostGeolocation, id);
+}
+
+bool is_geolocation_available(flight::Ref<flight::types::HostGeolocationCapability> hostGeolocation) {
+  return flight::geolocation::is_geolocation_available(hostGeolocation);
+}
+
 } // namespace flight_hx::geolocation

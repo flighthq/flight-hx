@@ -26,5 +26,10 @@ void rotate_orbit_camera_controller(flight::Ref<flight::types::OrbitCameraContro
 void snap_fly_camera_controller(flight::Ref<flight::types::FlyCameraController> controller);
 void snap_orbit_camera_controller(flight::Ref<flight::types::OrbitCameraController> controller);
 void update_camera_shake(flight::Ref<flight::types::CameraShake> shake, double dt, flight::Ref<flight::types::CameraShakeOffset> out);
+double get_perspective_projection_frame_distance_to_sphere(flight::Ref<flight::types::PerspectiveProjection> projection, double radius, double aspect, bool paddingPresent, double padding);
+void set_orthographic_projection_frame_to_sphere(flight::Ref<flight::types::OrthographicProjection> projection, double radius, double aspect, bool paddingPresent, double padding);
+void update_camera_2d_follow(flight::Ref<flight::types::Camera2D> camera, double viewportWidth, double viewportHeight, double targetX, double targetY, double deltaTime, flight::Ref<flight::types::Camera2DFollowOptions> options);
+void update_fly_camera_controller(flight::Ref<flight::types::FlyCameraController> controller, flight::Ref<flight::types::Camera3D> camera, double deltaTime);
+void update_orbit_camera_controller(flight::Ref<flight::types::OrbitCameraController> controller, flight::Ref<flight::types::Camera3D> camera, double deltaTime);
 
 } // namespace flight_hx::camera_controls

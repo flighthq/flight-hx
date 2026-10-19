@@ -236,6 +236,72 @@
           "name": "getAudioMimeTypeEssence",
           "native": "flight::haxe::_cpp::getAudioMimeTypeEssence_3829c80c",
           "header": "flight/audio/contract.hpp"
+        },
+        {
+          "name": "canPlayAudioType",
+          "native": "flight::audio::can_play_audio_type",
+          "header": "flight/audio/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "cloneAudioResource",
+          "native": "flight::audio::clone_audio_resource",
+          "header": "flight/audio/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "disposeAudioResource",
+          "native": "flight::audio::dispose_audio_resource",
+          "header": "flight/audio/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "getAudioDecodeSlot",
+          "native": "flight::audio::get_audio_decode_slot",
+          "header": "flight/audio/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "getAudioResourceByteSize",
+          "native": "flight::audio::get_audio_resource_byte_size",
+          "header": "flight/audio/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "getAudioResourceChannelCount",
+          "native": "flight::audio::get_audio_resource_channel_count",
+          "header": "flight/audio/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "getAudioResourceDuration",
+          "native": "flight::audio::get_audio_resource_duration",
+          "header": "flight/audio/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "getAudioResourceSampleRate",
+          "native": "flight::audio::get_audio_resource_sample_rate",
+          "header": "flight/audio/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "hasAudioDecodeSlot",
+          "native": "flight::audio::has_audio_decode_slot",
+          "header": "flight/audio/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "hasAudioResourceBuffer",
+          "native": "flight::audio::has_audio_resource_buffer",
+          "header": "flight/audio/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "isAudioResourceEmpty",
+          "native": "flight::audio::is_audio_resource_empty",
+          "header": "flight/audio/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
         }
       ]
     },
@@ -523,6 +589,18 @@
           "native": "flight::bitmap::parse_bitmap_fingerprint",
           "header": "flight/bitmap/contract.hpp",
           "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "captureBitmapFromImageResource",
+          "native": "flight::bitmap::capture_bitmap_from_image_resource",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "splitBitmapChannels",
+          "native": "flight::bitmap::split_bitmap_channels",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
         }
       ]
     },
@@ -786,6 +864,42 @@
           "native": "flight::device::create_safe_area_insets",
           "header": "flight/device/contract.hpp",
           "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "getDeviceCapabilities",
+          "native": "flight::device::get_device_capabilities",
+          "header": "flight/device/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "getDeviceDisplayMetrics",
+          "native": "flight::device::get_device_display_metrics",
+          "header": "flight/device/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "getDeviceId",
+          "native": "flight::device::get_device_id",
+          "header": "flight/device/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "getDeviceInfo",
+          "native": "flight::device::get_device_info",
+          "header": "flight/device/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "getSafeAreaInsets",
+          "native": "flight::device::get_safe_area_insets",
+          "header": "flight/device/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "refreshDeviceInfo",
+          "native": "flight::device::refresh_device_info",
+          "header": "flight/device/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
         }
       ]
     },
@@ -818,6 +932,42 @@
           "name": "setEntityRuntimeGuardMode",
           "native": "flight::entity::set_entity_runtime_guard_mode",
           "header": "flight/entity/contract.hpp"
+        },
+        {
+          "name": "detachEntityBinding",
+          "native": "flight::entity::detach_entity_binding",
+          "header": "flight/entity/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "getEntityRuntime",
+          "native": "flight::entity::get_entity_runtime",
+          "header": "flight/entity/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "getEntityUid",
+          "native": "flight::entity::get_entity_uid",
+          "header": "flight/entity/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "hasEntityBinding",
+          "native": "flight::entity::has_entity_binding",
+          "header": "flight/entity/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "hasEntityRuntime",
+          "native": "flight::entity::has_entity_runtime",
+          "header": "flight/entity/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "setEntityUid",
+          "native": "flight::entity::set_entity_uid",
+          "header": "flight/entity/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
         }
       ]
     },
@@ -1296,6 +1446,12 @@
         {
           "name": "wasInputKeyReleased",
           "native": "flight::input::was_input_key_released",
+          "header": "flight/input/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "createInputKeyRepeatTimer",
+          "native": "flight::input::create_input_key_repeat_timer",
           "header": "flight/input/contract.hpp",
           "provenance": "flight-hx/reference-carrier/1"
         }
@@ -1843,6 +1999,30 @@
           "native": "flight::power::make_power_status",
           "header": "flight/power/contract.hpp",
           "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "getPowerBatteryHealth",
+          "native": "flight::power::get_power_battery_health",
+          "header": "flight/power/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "getPowerStatus",
+          "native": "flight::power::get_power_status",
+          "header": "flight/power/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "getPowerSystemIdleTime",
+          "native": "flight::power::get_power_system_idle_time",
+          "header": "flight/power/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "isPowerKeepAwakeActive",
+          "native": "flight::power::is_power_keep_awake_active",
+          "header": "flight/power/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
         }
       ]
     },
@@ -1869,6 +2049,60 @@
         {
           "name": "disposeProtocolHandler",
           "native": "flight::protocol::dispose_protocol_handler",
+          "header": "flight/protocol/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "attachProtocolHandler",
+          "native": "flight::protocol::attach_protocol_handler",
+          "header": "flight/protocol/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "getProtocolLaunchUrl",
+          "native": "flight::protocol::get_protocol_launch_url",
+          "header": "flight/protocol/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "isProtocolSchemeDefault",
+          "native": "flight::protocol::is_protocol_scheme_default",
+          "header": "flight/protocol/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "isProtocolSchemeRegistered",
+          "native": "flight::protocol::is_protocol_scheme_registered",
+          "header": "flight/protocol/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "parseProtocolUrl",
+          "native": "flight::protocol::parse_protocol_url",
+          "header": "flight/protocol/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "registerProtocolScheme",
+          "native": "flight::protocol::register_protocol_scheme",
+          "header": "flight/protocol/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "removeProtocolSchemeAsDefault",
+          "native": "flight::protocol::remove_protocol_scheme_as_default",
+          "header": "flight/protocol/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "setProtocolSchemeAsDefault",
+          "native": "flight::protocol::set_protocol_scheme_as_default",
+          "header": "flight/protocol/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "unregisterProtocolScheme",
+          "native": "flight::protocol::unregister_protocol_scheme",
           "header": "flight/protocol/contract.hpp",
           "provenance": "flight-hx/reference-carrier/1"
         }
@@ -1922,6 +2156,48 @@
         {
           "name": "disposeScreenSignals",
           "native": "flight::screen::dispose_screen_signals",
+          "header": "flight/screen/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "attachScreenPermissionChange",
+          "native": "flight::screen::attach_screen_permission_change",
+          "header": "flight/screen/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "attachScreenSignals",
+          "native": "flight::screen::attach_screen_signals",
+          "header": "flight/screen/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "getPrimaryScreen",
+          "native": "flight::screen::get_primary_screen",
+          "header": "flight/screen/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "getScreenById",
+          "native": "flight::screen::get_screen_by_id",
+          "header": "flight/screen/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "getScreenCurrentMode",
+          "native": "flight::screen::get_screen_current_mode",
+          "header": "flight/screen/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "getScreenCursorScreen",
+          "native": "flight::screen::get_screen_cursor_screen",
+          "header": "flight/screen/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "getScreens",
+          "native": "flight::screen::get_screens",
           "header": "flight/screen/contract.hpp",
           "provenance": "flight-hx/reference-carrier/1"
         }
@@ -2017,6 +2293,72 @@
         {
           "name": "disposeSensors",
           "native": "flight::sensors::dispose_sensors",
+          "header": "flight/sensors/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "attachSensors",
+          "native": "flight::sensors::attach_sensors",
+          "header": "flight/sensors/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "hasAccelerometer",
+          "native": "flight::sensors::has_accelerometer",
+          "header": "flight/sensors/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "hasAmbientLightSensor",
+          "native": "flight::sensors::has_ambient_light_sensor",
+          "header": "flight/sensors/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "hasBarometer",
+          "native": "flight::sensors::has_barometer",
+          "header": "flight/sensors/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "hasGravitySensor",
+          "native": "flight::sensors::has_gravity_sensor",
+          "header": "flight/sensors/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "hasGyroscope",
+          "native": "flight::sensors::has_gyroscope",
+          "header": "flight/sensors/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "hasLinearAccelerationSensor",
+          "native": "flight::sensors::has_linear_acceleration_sensor",
+          "header": "flight/sensors/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "hasMagnetometer",
+          "native": "flight::sensors::has_magnetometer",
+          "header": "flight/sensors/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "hasOrientationSensor",
+          "native": "flight::sensors::has_orientation_sensor",
+          "header": "flight/sensors/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "hasProximitySensor",
+          "native": "flight::sensors::has_proximity_sensor",
+          "header": "flight/sensors/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "isSensorsSupported",
+          "native": "flight::sensors::is_sensors_supported",
           "header": "flight/sensors/contract.hpp",
           "provenance": "flight-hx/reference-carrier/1"
         }
@@ -2150,6 +2492,36 @@
           "native": "flight::camera_controls::update_camera_shake",
           "header": "flight/camera_controls/contract.hpp",
           "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "getPerspectiveProjectionFrameDistanceToSphere",
+          "native": "flight::camera_controls::get_perspective_projection_frame_distance_to_sphere",
+          "header": "flight/camera_controls/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "setOrthographicProjectionFrameToSphere",
+          "native": "flight::camera_controls::set_orthographic_projection_frame_to_sphere",
+          "header": "flight/camera_controls/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "updateCamera2DFollow",
+          "native": "flight::camera_controls::update_camera_2d_follow",
+          "header": "flight/camera_controls/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "updateFlyCameraController",
+          "native": "flight::camera_controls::update_fly_camera_controller",
+          "header": "flight/camera_controls/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "updateOrbitCameraController",
+          "native": "flight::camera_controls::update_orbit_camera_controller",
+          "header": "flight/camera_controls/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
         }
       ]
     },
@@ -2161,6 +2533,18 @@
           "native": "flight::geolocation::create_geolocation_position",
           "header": "flight/geolocation/contract.hpp",
           "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "clearGeolocationWatch",
+          "native": "flight::geolocation::clear_geolocation_watch",
+          "header": "flight/geolocation/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "isGeolocationAvailable",
+          "native": "flight::geolocation::is_geolocation_available",
+          "header": "flight/geolocation/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
         }
       ]
     },
@@ -2170,6 +2554,48 @@
         {
           "name": "createPlatformInfo",
           "native": "flight::platform::create_platform_info",
+          "header": "flight/platform/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "getPlatformInfo",
+          "native": "flight::platform::get_platform_info",
+          "header": "flight/platform/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "isPlatformDesktop",
+          "native": "flight::platform::is_platform_desktop",
+          "header": "flight/platform/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "isPlatformMobile",
+          "native": "flight::platform::is_platform_mobile",
+          "header": "flight/platform/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "isPlatformNative",
+          "native": "flight::platform::is_platform_native",
+          "header": "flight/platform/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "isPlatformTouch",
+          "native": "flight::platform::is_platform_touch",
+          "header": "flight/platform/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "isPlatformVersionAtLeast",
+          "native": "flight::platform::is_platform_version_at_least",
+          "header": "flight/platform/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "isPlatformWeb",
+          "native": "flight::platform::is_platform_web",
           "header": "flight/platform/contract.hpp",
           "provenance": "flight-hx/reference-carrier/1"
         }
@@ -2187,6 +2613,78 @@
         {
           "name": "createVelocityField",
           "native": "flight::velocity::create_velocity_field",
+          "header": "flight/velocity/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "addVelocity",
+          "native": "flight::velocity::add_velocity",
+          "header": "flight/velocity/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "clampVelocity",
+          "native": "flight::velocity::clamp_velocity",
+          "header": "flight/velocity/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "copyVelocity",
+          "native": "flight::velocity::copy_velocity",
+          "header": "flight/velocity/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "dampVelocity",
+          "native": "flight::velocity::damp_velocity",
+          "header": "flight/velocity/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "getVelocitySampleAt",
+          "native": "flight::velocity::get_velocity_sample_at",
+          "header": "flight/velocity/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "isVelocityZero",
+          "native": "flight::velocity::is_velocity_zero",
+          "header": "flight/velocity/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "lengthOfVelocity",
+          "native": "flight::velocity::length_of_velocity",
+          "header": "flight/velocity/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "lerpVelocity",
+          "native": "flight::velocity::lerp_velocity",
+          "header": "flight/velocity/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "normalizeVelocity",
+          "native": "flight::velocity::normalize_velocity",
+          "header": "flight/velocity/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "scaleVelocity",
+          "native": "flight::velocity::scale_velocity",
+          "header": "flight/velocity/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "subtractVelocity",
+          "native": "flight::velocity::subtract_velocity",
+          "header": "flight/velocity/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "zeroVelocity",
+          "native": "flight::velocity::zero_velocity",
           "header": "flight/velocity/contract.hpp",
           "provenance": "flight-hx/reference-carrier/1"
         }
@@ -2336,6 +2834,331 @@
           "name": "getXmlElementChildrenByName",
           "native": "flight::xml::get_xml_element_children_by_name",
           "header": "flight/xml/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        }
+      ]
+    },
+    {
+      "module": "flight.Accessibility",
+      "functions": [
+        {
+          "name": "destroyAccessibility",
+          "native": "flight::accessibility::destroy_accessibility",
+          "header": "flight/accessibility/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        }
+      ]
+    },
+    {
+      "module": "flight.Binpack",
+      "functions": [
+        {
+          "name": "explainUnpackedRectangles",
+          "native": "flight::binpack::explain_unpacked_rectangles",
+          "header": "flight/binpack/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "getPackResultOccupancy",
+          "native": "flight::binpack::get_pack_result_occupancy",
+          "header": "flight/binpack/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "packRectangles",
+          "native": "flight::binpack::pack_rectangles",
+          "header": "flight/binpack/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        }
+      ]
+    },
+    {
+      "module": "flight.Haptics",
+      "functions": [
+        {
+          "name": "cancelDeviceVibration",
+          "native": "flight::haptics::cancel_device_vibration",
+          "header": "flight/haptics/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "getHapticsCapabilities",
+          "native": "flight::haptics::get_haptics_capabilities",
+          "header": "flight/haptics/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "isHapticsSupported",
+          "native": "flight::haptics::is_haptics_supported",
+          "header": "flight/haptics/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "prepareHaptics",
+          "native": "flight::haptics::prepare_haptics",
+          "header": "flight/haptics/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "triggerHapticSelection",
+          "native": "flight::haptics::trigger_haptic_selection",
+          "header": "flight/haptics/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "vibrateDevice",
+          "native": "flight::haptics::vibrate_device",
+          "header": "flight/haptics/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        }
+      ]
+    },
+    {
+      "module": "flight.Importdiagnostics",
+      "functions": [
+        {
+          "name": "formatImportDiagnostic",
+          "native": "flight::importdiagnostics::format_import_diagnostic",
+          "header": "flight/importdiagnostics/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        }
+      ]
+    },
+    {
+      "module": "flight.Keyboard",
+      "functions": [
+        {
+          "name": "detachSoftKeyboard",
+          "native": "flight::keyboard::detach_soft_keyboard",
+          "header": "flight/keyboard/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "disposeSoftKeyboard",
+          "native": "flight::keyboard::dispose_soft_keyboard",
+          "header": "flight/keyboard/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "getSoftKeyboardHeight",
+          "native": "flight::keyboard::get_soft_keyboard_height",
+          "header": "flight/keyboard/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "getSoftKeyboardInfo",
+          "native": "flight::keyboard::get_soft_keyboard_info",
+          "header": "flight/keyboard/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "isSoftKeyboardVisible",
+          "native": "flight::keyboard::is_soft_keyboard_visible",
+          "header": "flight/keyboard/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        }
+      ]
+    },
+    {
+      "module": "flight.Mediasession",
+      "functions": [
+        {
+          "name": "attachMediaSessionAction",
+          "native": "flight::mediasession::attach_media_session_action",
+          "header": "flight/mediasession/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "destroyMediaSession",
+          "native": "flight::mediasession::destroy_media_session",
+          "header": "flight/mediasession/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "detachMediaSessionAction",
+          "native": "flight::mediasession::detach_media_session_action",
+          "header": "flight/mediasession/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "disposeMediaSessionActionSignal",
+          "native": "flight::mediasession::dispose_media_session_action_signal",
+          "header": "flight/mediasession/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        }
+      ]
+    },
+    {
+      "module": "flight.Motionpath",
+      "functions": [
+        {
+          "name": "getMotionPathHeading",
+          "native": "flight::motionpath::get_motion_path_heading",
+          "header": "flight/motionpath/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "getMotionPathProgress",
+          "native": "flight::motionpath::get_motion_path_progress",
+          "header": "flight/motionpath/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "isMotionPathAtEnd",
+          "native": "flight::motionpath::is_motion_path_at_end",
+          "header": "flight/motionpath/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "setMotionPathDistance",
+          "native": "flight::motionpath::set_motion_path_distance",
+          "header": "flight/motionpath/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "setMotionPathProgress",
+          "native": "flight::motionpath::set_motion_path_progress",
+          "header": "flight/motionpath/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "updateMotionPath",
+          "native": "flight::motionpath::update_motion_path",
+          "header": "flight/motionpath/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        }
+      ]
+    },
+    {
+      "module": "flight.Requirement",
+      "functions": [
+        {
+          "name": "diffRequirementSets",
+          "native": "flight::requirement::diff_requirement_sets",
+          "header": "flight/requirement/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "mergeRequirementSets",
+          "native": "flight::requirement::merge_requirement_sets",
+          "header": "flight/requirement/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        }
+      ]
+    },
+    {
+      "module": "flight.RequirementCatalog",
+      "functions": [
+        {
+          "name": "createRequirementCatalog",
+          "native": "flight::requirement_catalog::create_requirement_catalog",
+          "header": "flight/requirement_catalog/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "getRequirementCatalogEntries",
+          "native": "flight::requirement_catalog::get_requirement_catalog_entries",
+          "header": "flight/requirement_catalog/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "registerRequirementCatalogEntry",
+          "native": "flight::requirement_catalog::register_requirement_catalog_entry",
+          "header": "flight/requirement_catalog/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "unregisterRequirementCatalogEntry",
+          "native": "flight::requirement_catalog::unregister_requirement_catalog_entry",
+          "header": "flight/requirement_catalog/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        }
+      ]
+    },
+    {
+      "module": "flight.Shell",
+      "functions": [
+        {
+          "name": "isShellUrlAllowed",
+          "native": "flight::shell::is_shell_url_allowed",
+          "header": "flight/shell/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "shellBeep",
+          "native": "flight::shell::shell_beep",
+          "header": "flight/shell/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        }
+      ]
+    },
+    {
+      "module": "flight.Timeline",
+      "functions": [
+        {
+          "name": "clearTimelineFrameScripts",
+          "native": "flight::timeline::clear_timeline_frame_scripts",
+          "header": "flight/timeline/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "disposeTimelineSignals",
+          "native": "flight::timeline::dispose_timeline_signals",
+          "header": "flight/timeline/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "enableTimelineSignals",
+          "native": "flight::timeline::enable_timeline_signals",
+          "header": "flight/timeline/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "findTimelineLabel",
+          "native": "flight::timeline::find_timeline_label",
+          "header": "flight/timeline/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "getTimelineCurrentLabel",
+          "native": "flight::timeline::get_timeline_current_label",
+          "header": "flight/timeline/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "getTimelineLabels",
+          "native": "flight::timeline::get_timeline_labels",
+          "header": "flight/timeline/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "nextFrameTimeline",
+          "native": "flight::timeline::next_frame_timeline",
+          "header": "flight/timeline/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "playTimeline",
+          "native": "flight::timeline::play_timeline",
+          "header": "flight/timeline/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "prevFrameTimeline",
+          "native": "flight::timeline::prev_frame_timeline",
+          "header": "flight/timeline/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "stopTimeline",
+          "native": "flight::timeline::stop_timeline",
+          "header": "flight/timeline/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "updateTimeline",
+          "native": "flight::timeline::update_timeline",
+          "header": "flight/timeline/contract.hpp",
           "provenance": "flight-hx/reference-carrier/1"
         }
       ]

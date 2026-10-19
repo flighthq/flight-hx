@@ -165,5 +165,11 @@ extern class Bitmap {
 
   @:native("flight_hx::bitmap::parse_bitmap_fingerprint")
   static function parseBitmapFingerprint(text:String):Null<flight.BitmapFingerprint>;
+
+  @:native("flight_hx::bitmap::capture_bitmap_from_image_resource")
+  static function captureBitmapFromImageResource(hostBitmapReadback:flight.HostBitmapReadbackCapability, resource:flight.ImageResource):Null<flight.Bitmap>;
+
+  @:native("flight_hx::bitmap::split_bitmap_channels")
+  static function splitBitmapChannels(source:flight.Bitmap):Array<flight.Bitmap>;
 }
 #end

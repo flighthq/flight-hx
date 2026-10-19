@@ -87,5 +87,20 @@ extern class CameraControls {
 
   @:native("flight_hx::camera_controls::update_camera_shake")
   static function updateCameraShake(shake:flight.CameraShake, dt:Float, out:flight.CameraShakeOffset):Void;
+
+  @:native("flight_hx::camera_controls::get_perspective_projection_frame_distance_to_sphere")
+  static function getPerspectiveProjectionFrameDistanceToSphere(projection:flight.PerspectiveProjection, radius:Float, aspect:Float, paddingPresent:Bool, padding:Float):Float;
+
+  @:native("flight_hx::camera_controls::set_orthographic_projection_frame_to_sphere")
+  static function setOrthographicProjectionFrameToSphere(projection:flight.OrthographicProjection, radius:Float, aspect:Float, paddingPresent:Bool, padding:Float):Void;
+
+  @:native("flight_hx::camera_controls::update_camera_2d_follow")
+  static function updateCamera2DFollow(camera:flight.Camera2D, viewportWidth:Float, viewportHeight:Float, targetX:Float, targetY:Float, deltaTime:Float, options:flight.Camera2DFollowOptions):Void;
+
+  @:native("flight_hx::camera_controls::update_fly_camera_controller")
+  static function updateFlyCameraController(controller:flight.FlyCameraController, camera:flight.Camera3D, deltaTime:Float):Void;
+
+  @:native("flight_hx::camera_controls::update_orbit_camera_controller")
+  static function updateOrbitCameraController(controller:flight.OrbitCameraController, camera:flight.Camera3D, deltaTime:Float):Void;
 }
 #end
