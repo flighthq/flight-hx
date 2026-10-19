@@ -197,6 +197,18 @@
       "flight.Bitmap.setBitmapPixelRgb",
       "flight.Bitmap.setBitmapRegion",
       "flight.Bitmap.trimBitmap",
+      "flight.Input.createInputManager",
+      "flight.Input.createInputSignals",
+      "flight.Input.createInputState",
+      "flight.Input.endInputStateFrame",
+      "flight.Input.getInputGamepadAxis",
+      "flight.Input.isInputGamepadButtonDown",
+      "flight.Input.isInputKeyDown",
+      "flight.Input.isInputPointerButtonDown",
+      "flight.Input.wasInputGamepadButtonPressed",
+      "flight.Input.wasInputGamepadButtonReleased",
+      "flight.Input.wasInputKeyPressed",
+      "flight.Input.wasInputKeyReleased",
       "flight.Spring.addSpringImpulse",
       "flight.Spring.addSpringImpulse2D",
       "flight.Spring.addSpringImpulse3D",
@@ -4348,7 +4360,7 @@
       "issues": [
         {
           "code": "native-function-gap",
-          "count": 33
+          "count": 21
         },
         {
           "code": "non-scalar-signature-review",
@@ -4360,7 +4372,7 @@
         },
         {
           "code": "native-materialized-unproven-functions",
-          "count": 33
+          "count": 21
         }
       ],
       "nativeDefault": {
@@ -4370,13 +4382,85 @@
             "holder": "Input",
             "name": "applyGamepadAxisDeadZone",
             "native": "flight::input::apply_gamepad_axis_dead_zone"
+          },
+          {
+            "header": "flight/input/contract.hpp",
+            "holder": "Input",
+            "name": "createInputManager",
+            "native": "flight::input::create_input_manager"
+          },
+          {
+            "header": "flight/input/contract.hpp",
+            "holder": "Input",
+            "name": "createInputSignals",
+            "native": "flight::input::create_input_signals"
+          },
+          {
+            "header": "flight/input/contract.hpp",
+            "holder": "Input",
+            "name": "createInputState",
+            "native": "flight::input::create_input_state"
+          },
+          {
+            "header": "flight/input/contract.hpp",
+            "holder": "Input",
+            "name": "endInputStateFrame",
+            "native": "flight::input::end_input_state_frame"
+          },
+          {
+            "header": "flight/input/contract.hpp",
+            "holder": "Input",
+            "name": "getInputGamepadAxis",
+            "native": "flight::input::get_input_gamepad_axis"
+          },
+          {
+            "header": "flight/input/contract.hpp",
+            "holder": "Input",
+            "name": "isInputGamepadButtonDown",
+            "native": "flight::input::is_input_gamepad_button_down"
+          },
+          {
+            "header": "flight/input/contract.hpp",
+            "holder": "Input",
+            "name": "isInputKeyDown",
+            "native": "flight::input::is_input_key_down"
+          },
+          {
+            "header": "flight/input/contract.hpp",
+            "holder": "Input",
+            "name": "isInputPointerButtonDown",
+            "native": "flight::input::is_input_pointer_button_down"
+          },
+          {
+            "header": "flight/input/contract.hpp",
+            "holder": "Input",
+            "name": "wasInputGamepadButtonPressed",
+            "native": "flight::input::was_input_gamepad_button_pressed"
+          },
+          {
+            "header": "flight/input/contract.hpp",
+            "holder": "Input",
+            "name": "wasInputGamepadButtonReleased",
+            "native": "flight::input::was_input_gamepad_button_released"
+          },
+          {
+            "header": "flight/input/contract.hpp",
+            "holder": "Input",
+            "name": "wasInputKeyPressed",
+            "native": "flight::input::was_input_key_pressed"
+          },
+          {
+            "header": "flight/input/contract.hpp",
+            "holder": "Input",
+            "name": "wasInputKeyReleased",
+            "native": "flight::input::was_input_key_released"
           }
         ],
         "types": [],
         "values": []
       },
       "nativeAttempts": {
-        "functions": 33,
+        "functions": 21,
         "types": 0,
         "unavailableUpstream": 0,
         "values": 0
@@ -12930,11 +13014,11 @@
       "arrayFloatAdapters": 45,
       "boundHeaderConfirmedScalarFunctions": 114,
       "extensionTypes": 1,
-      "functions": 219,
+      "functions": 231,
       "nullableStringAdapters": 2,
       "packages": 28,
       "optionalScalarAdapters": 3,
-      "referenceCarriers": 50,
+      "referenceCarriers": 62,
       "requiredScalarOverrides": 53,
       "scalarOverrideRefusals": 0,
       "types": 3,
@@ -12963,7 +13047,7 @@
           "name": "generic-function"
         },
         {
-          "count": 697,
+          "count": 685,
           "name": "named"
         },
         {
@@ -12982,10 +13066,10 @@
       "compileProbes": 0,
       "cppAvailable": 4268,
       "cppUnavailable": 6979,
-      "functions": 650,
+      "functions": 638,
       "genericReferenceTemplateAdapters": 44,
       "haxeTypecheck": "pass",
-      "isolatedFunctionValueExterns": 1029,
+      "isolatedFunctionValueExterns": 1017,
       "types": 3073,
       "values": 379
     },

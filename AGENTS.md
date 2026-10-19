@@ -114,7 +114,7 @@ TS-to-Haxe transpilation is useful optional reach, not a prerequisite for the we
 - **Native-surface reconciliation gate** — reconcile all 153 web package contracts with
   flight-cpp's complete/dependency-incomplete/refused module inventory and the exact
   `src-cpp/manifest.json` partition plus the symbol-backed type/function/value attempt ledgers.
-  The attempt gates load all 3,073 types and all 1,029 unproven function/value declarations on the
+  The attempt gates load all 3,073 types and all 1,017 unproven function/value declarations on the
   C++ target. Header-confirmed or Haxe-type-checking declarations remain probe candidates, never
   silently promoted to compile-proven support.
 - **Compiler-coverage gate** — reconcile manifests, initialization plans, refusal ledgers, public runtime export partitions, and public type aliases in both directions; ratchet the pinned corpus so support may improve but cannot silently shrink.
@@ -130,7 +130,7 @@ Because the Haxe surface is generated from the same flight-compiler IR that prod
 
 Tiers (host per the host-axis rule — core examples use no host or Flight's own; never Lime/Clay):
 
-- `examples/cross-target-math/` — one installed-package source file compiled and executed through the complete web externs, all 219 manifest-proven flight-cpp bindings, and the optional pure-Haxe fallback.
+- `examples/cross-target-math/` — one installed-package source file compiled and executed through the complete web externs, all 231 manifest-proven flight-cpp bindings, and the optional pure-Haxe fallback.
 - `examples/headless/` — no host; `flight.*` calls under all backends. The bulk lives here.
 - `examples/fallback-hx/` — the `_hx` fallback compiling+running on a `js` target (the Lime/Clay-web scenario) via a define flip, **without** a real Lime dependency.
 - `examples/window-native/` — Flight's own host, `cpp` → `_cpp`; an executable manifest-recorded platform extension that creates a real SDL3/OpenGL surface, clears it through flight-cpp's adapter, and presents it. This proves the native host seam without claiming the entire generated renderer contract.
@@ -160,7 +160,7 @@ The remaining 1,756 source modules stay explicit upstream compiler refusals, nev
 The ESM path consumes compiler-emitted `@:jsImport` externs through the vendored static-module
 generator. Extern generation (`generate:check:extern`) remains deterministic and part of the
 production check; a full new TS-to-Haxe transpile remains an explicit optional compiler-maintenance
-task. The compile-proven `_cpp` slice exposes 219 functions across 27 holders. An isolated `-lib flight` consumer compiles and runs the same Haxe source against
+task. The compile-proven `_cpp` slice exposes 231 functions across 27 holders. An isolated `-lib flight` consumer compiles and runs the same Haxe source against
 current flight-cpp on hxcpp and current Flight ESM on web. The same gate builds the current
 `Flight::HostSdlGl`, then compiles and runs the packaged Haxe native sample through a real SDL3 window,
 OpenGL context, clear, and present. The portable generated renderer surface remains future work; the
@@ -168,18 +168,18 @@ native platform extension does not overstate it.
 
 `src-cpp/reconciliation.json` makes the remaining native work concrete: flight-cpp currently has
 1,902 dependency-complete modules, 672 dependency-incomplete modules, and 577 refused modules. The
-compile/run-proven native surface has 219 functions and three upstream Scene2D types (plus the
+compile/run-proven native surface has 231 functions and three upstream Scene2D types (plus the
 maintained `Scene2dNode` integration handle). The broader default native root attempts every one of
-the 4,268 declarations for which flight-cpp provides a locator: 3,073 types, 650 still-unproven
-functions, 379 still-unproven values, and 166 already-proven functions are materialized; 44 nested
+the 4,268 declarations for which flight-cpp provides a locator: 3,073 types, 638 still-unproven
+functions, 379 still-unproven values, and 178 already-proven functions are materialized; 44 nested
 generic reference types use generated alias-template adapters. Every unproven function/value has a
 per-symbol hidden `extern inline` boundary, preventing an imported proven holder from compiling all
 of its experimental siblings. The other 6,979 public rows have no compiler/flight-cpp plan locator
 and remain explicitly unavailable through the generated path. All attempts type-check on the Haxe
 C++ target. The first concrete ABI seams are now covered by 45 compile/run-proven flat/recursive
 `Array<Float>` adapters with alias preservation, optional-output identity, and mutation copy-back,
-two nullable UTF-8 String adapters, and 50 shared-ownership reference-carrier bindings across
-Bitmap and Spring. Optional
+two nullable UTF-8 String adapters, and 62 shared-ownership reference-carrier bindings across
+Bitmap, Spring, and Input. Optional
 reference-family scalars cross the bridge with explicit presence bits; public native wrappers are
 call-site-only `extern inline` functions to avoid hxcpp's reflected-wrapper arity ceiling. The 69 remaining
 header-confirmed scalar candidates and every other complex carrier remain unpromoted until

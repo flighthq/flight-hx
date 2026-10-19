@@ -1027,6 +1027,78 @@
           "name": "applyGamepadAxisDeadZone",
           "native": "flight::input::apply_gamepad_axis_dead_zone",
           "header": "flight/input/contract.hpp"
+        },
+        {
+          "name": "createInputManager",
+          "native": "flight::input::create_input_manager",
+          "header": "flight/input/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "createInputSignals",
+          "native": "flight::input::create_input_signals",
+          "header": "flight/input/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "createInputState",
+          "native": "flight::input::create_input_state",
+          "header": "flight/input/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "endInputStateFrame",
+          "native": "flight::input::end_input_state_frame",
+          "header": "flight/input/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "getInputGamepadAxis",
+          "native": "flight::input::get_input_gamepad_axis",
+          "header": "flight/input/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "isInputGamepadButtonDown",
+          "native": "flight::input::is_input_gamepad_button_down",
+          "header": "flight/input/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "isInputKeyDown",
+          "native": "flight::input::is_input_key_down",
+          "header": "flight/input/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "isInputPointerButtonDown",
+          "native": "flight::input::is_input_pointer_button_down",
+          "header": "flight/input/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "wasInputGamepadButtonPressed",
+          "native": "flight::input::was_input_gamepad_button_pressed",
+          "header": "flight/input/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "wasInputGamepadButtonReleased",
+          "native": "flight::input::was_input_gamepad_button_released",
+          "header": "flight/input/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "wasInputKeyPressed",
+          "native": "flight::input::was_input_key_pressed",
+          "header": "flight/input/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "wasInputKeyReleased",
+          "native": "flight::input::was_input_key_released",
+          "header": "flight/input/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
         }
       ]
     },

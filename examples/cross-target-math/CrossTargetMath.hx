@@ -168,6 +168,19 @@ class CrossTargetMath {
     resetSpring2D(spring2D, 0.0, 0.0);
     resetSpring3D(spring3D, 0.0, 0.0, 0.0);
 
+    createInputManager();
+    createInputSignals();
+    final inputState = createInputState();
+    assertFinite('empty gamepad axis', getInputGamepadAxis(inputState, 0.0, 0.0));
+    assertTrue('empty gamepad button', !isInputGamepadButtonDown(inputState, 0.0, 0.0));
+    assertTrue('empty input key', !isInputKeyDown(inputState, 0.0));
+    assertTrue('empty pointer button', !isInputPointerButtonDown(inputState, 0.0, 0.0));
+    assertTrue('empty gamepad press', !wasInputGamepadButtonPressed(inputState, 0.0, 0.0));
+    assertTrue('empty gamepad release', !wasInputGamepadButtonReleased(inputState, 0.0, 0.0));
+    assertTrue('empty key press', !wasInputKeyPressed(inputState, 0.0));
+    assertTrue('empty key release', !wasInputKeyReleased(inputState, 0.0));
+    endInputStateFrame(inputState);
+
     final colorOut = zeroes(4);
     clampLinearRgb(colorOut, -1.0, 0.5, 2.0);
     assertClose('clamped linear RGB low', colorOut[0], 0.0);

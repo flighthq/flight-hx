@@ -6268,63 +6268,6 @@
       "carrierFamilies": [
         "named"
       ],
-      "externClass": "flight._cpp._attempt.Attempt_Input_createInputManager",
-      "header": "flight/input/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::input::create_input_manager",
-      "package": "@flighthq/input",
-      "publicName": "flight.Input.createInputManager",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier InputManager has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/input/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Input_createInputSignals",
-      "header": "flight/input/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::input::create_input_signals",
-      "package": "@flighthq/input",
-      "publicName": "flight.Input.createInputSignals",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier InputSignals has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/input/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Input_createInputState",
-      "header": "flight/input/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::input::create_input_state",
-      "package": "@flighthq/input",
-      "publicName": "flight.Input.createInputState",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier InputState has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/input/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
       "externClass": "flight._cpp._attempt.Attempt_Input_detachGamepadInput",
       "header": "flight/input/contract.hpp",
       "kind": "function",
@@ -6437,25 +6380,6 @@
     },
     {
       "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Input_endInputStateFrame",
-      "header": "flight/input/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::input::end_input_state_frame",
-      "package": "@flighthq/input",
-      "publicName": "flight.Input.endInputStateFrame",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier InputState has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/input/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
         "named",
         "nullable"
       ],
@@ -6488,25 +6412,6 @@
       "refusal": {
         "code": "unsupported-carrier",
         "message": "named carrier GamepadMappingKind has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/input/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Input_getInputGamepadAxis",
-      "header": "flight/input/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::input::get_input_gamepad_axis",
-      "package": "@flighthq/input",
-      "publicName": "flight.Input.getInputGamepadAxis",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
         "phase": "planning"
       },
       "source": "packages/input/src/contract.ts",
@@ -6583,139 +6488,6 @@
       "refusal": {
         "code": "unsupported-carrier",
         "message": "generic named carriers are not supported",
-        "phase": "planning"
-      },
-      "source": "packages/input/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Input_isInputGamepadButtonDown",
-      "header": "flight/input/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::input::is_input_gamepad_button_down",
-      "package": "@flighthq/input",
-      "publicName": "flight.Input.isInputGamepadButtonDown",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/input/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Input_isInputKeyDown",
-      "header": "flight/input/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::input::is_input_key_down",
-      "package": "@flighthq/input",
-      "publicName": "flight.Input.isInputKeyDown",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/input/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Input_isInputPointerButtonDown",
-      "header": "flight/input/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::input::is_input_pointer_button_down",
-      "package": "@flighthq/input",
-      "publicName": "flight.Input.isInputPointerButtonDown",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/input/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Input_wasInputGamepadButtonPressed",
-      "header": "flight/input/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::input::was_input_gamepad_button_pressed",
-      "package": "@flighthq/input",
-      "publicName": "flight.Input.wasInputGamepadButtonPressed",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/input/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Input_wasInputGamepadButtonReleased",
-      "header": "flight/input/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::input::was_input_gamepad_button_released",
-      "package": "@flighthq/input",
-      "publicName": "flight.Input.wasInputGamepadButtonReleased",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/input/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Input_wasInputKeyPressed",
-      "header": "flight/input/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::input::was_input_key_pressed",
-      "package": "@flighthq/input",
-      "publicName": "flight.Input.wasInputKeyPressed",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/input/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Input_wasInputKeyReleased",
-      "header": "flight/input/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::input::was_input_key_released",
-      "package": "@flighthq/input",
-      "publicName": "flight.Input.wasInputKeyReleased",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
         "phase": "planning"
       },
       "source": "packages/input/src/contract.ts",
@@ -19911,7 +19683,7 @@
   },
   "schema": "flight-hx-native-binding-attempts/1",
   "summary": {
-    "functions": 650,
+    "functions": 638,
     "carrierFamilies": [
       {
         "count": 80,
@@ -19934,7 +19706,7 @@
         "name": "generic-function"
       },
       {
-        "count": 697,
+        "count": 685,
         "name": "named"
       },
       {
@@ -19951,8 +19723,8 @@
       }
     ],
     "holders": 42,
-    "isolatedExterns": 1029,
-    "total": 1029,
+    "isolatedExterns": 1017,
+    "total": 1017,
     "values": 379
   }
 }
