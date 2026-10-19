@@ -202,6 +202,9 @@
       "flight.Bitmap.compareBitmapFingerprints",
       "flight.Bitmap.createBitmapFingerprint",
       "flight.Bitmap.getBitmapHistogram",
+      "flight.Bitmap.compareBitmap",
+      "flight.Bitmap.formatBitmapFingerprint",
+      "flight.Bitmap.parseBitmapFingerprint",
       "flight.Clipboard.createClipboardWatch",
       "flight.Clipboard.detachClipboardWatch",
       "flight.Clipboard.disposeClipboardWatch",
@@ -310,7 +313,10 @@
       "flight.Spring.updateSpring",
       "flight.Spring.updateSpring2D",
       "flight.Spring.updateSpring3D",
-      "flight.Spring.updateSpringAngle"
+      "flight.Spring.updateSpringAngle",
+      "flight.Xml.parseXmlDocument",
+      "flight.Xml.getXmlElementChildByName",
+      "flight.Xml.getXmlElementAttribute"
     ]
   },
   "packages": [
@@ -1006,7 +1012,7 @@
       "issues": [
         {
           "code": "native-function-gap",
-          "count": 62
+          "count": 59
         },
         {
           "code": "native-value-gap",
@@ -1030,7 +1036,7 @@
         },
         {
           "code": "native-materialized-unproven-functions",
-          "count": 62
+          "count": 59
         },
         {
           "code": "native-materialized-unproven-values",
@@ -1092,6 +1098,12 @@
             "holder": "Bitmap",
             "name": "cloneBitmap",
             "native": "flight::bitmap::clone_bitmap"
+          },
+          {
+            "header": "flight/bitmap/contract.hpp",
+            "holder": "Bitmap",
+            "name": "compareBitmap",
+            "native": "flight::bitmap::compare_bitmap"
           },
           {
             "header": "flight/bitmap/contract.hpp",
@@ -1192,6 +1204,12 @@
           {
             "header": "flight/bitmap/contract.hpp",
             "holder": "Bitmap",
+            "name": "formatBitmapFingerprint",
+            "native": "flight::bitmap::format_bitmap_fingerprint"
+          },
+          {
+            "header": "flight/bitmap/contract.hpp",
+            "holder": "Bitmap",
             "name": "getBitmapCoverage",
             "native": "flight::bitmap::get_bitmap_coverage"
           },
@@ -1242,6 +1260,12 @@
             "holder": "Bitmap",
             "name": "multiplyBitmapAlpha",
             "native": "flight::bitmap::multiply_bitmap_alpha"
+          },
+          {
+            "header": "flight/bitmap/contract.hpp",
+            "holder": "Bitmap",
+            "name": "parseBitmapFingerprint",
+            "native": "flight::bitmap::parse_bitmap_fingerprint"
           },
           {
             "header": "flight/bitmap/contract.hpp",
@@ -1308,7 +1332,7 @@
         "values": []
       },
       "nativeAttempts": {
-        "functions": 62,
+        "functions": 59,
         "types": 1,
         "unavailableUpstream": 0,
         "values": 6
@@ -13556,7 +13580,7 @@
       "issues": [
         {
           "code": "native-function-gap",
-          "count": 6
+          "count": 3
         },
         {
           "code": "non-scalar-signature-review",
@@ -13568,23 +13592,42 @@
         },
         {
           "code": "native-materialized-unproven-functions",
-          "count": 6
+          "count": 3
         }
       ],
       "nativeDefault": {
-        "functions": [],
+        "functions": [
+          {
+            "header": "flight/xml/contract.hpp",
+            "holder": "Xml",
+            "name": "getXmlElementAttribute",
+            "native": "flight::xml::get_xml_element_attribute"
+          },
+          {
+            "header": "flight/xml/contract.hpp",
+            "holder": "Xml",
+            "name": "getXmlElementChildByName",
+            "native": "flight::xml::get_xml_element_child_by_name"
+          },
+          {
+            "header": "flight/xml/contract.hpp",
+            "holder": "Xml",
+            "name": "parseXmlDocument",
+            "native": "flight::xml::parse_xml_document"
+          }
+        ],
         "types": [],
         "values": []
       },
       "nativeAttempts": {
-        "functions": 6,
+        "functions": 3,
         "types": 0,
         "unavailableUpstream": 0,
         "values": 0
       },
       "package": "@flighthq/xml",
       "scalarProbeCandidates": [],
-      "status": "emitted-unbound",
+      "status": "partial-native",
       "webDefault": {
         "functions": 6,
         "types": 0,
@@ -13611,11 +13654,11 @@
       "arrayFloatAdapters": 45,
       "boundHeaderConfirmedScalarFunctions": 114,
       "extensionTypes": 1,
-      "functions": 315,
+      "functions": 321,
       "nullableStringAdapters": 2,
-      "packages": 37,
+      "packages": 38,
       "optionalScalarAdapters": 3,
-      "referenceCarriers": 146,
+      "referenceCarriers": 152,
       "requiredScalarOverrides": 53,
       "scalarOverrideRefusals": 0,
       "types": 3,
@@ -13644,11 +13687,11 @@
           "name": "generic-function"
         },
         {
-          "count": 601,
+          "count": 595,
           "name": "named"
         },
         {
-          "count": 66,
+          "count": 61,
           "name": "nullable"
         },
         {
@@ -13663,10 +13706,10 @@
       "compileProbes": 0,
       "cppAvailable": 4268,
       "cppUnavailable": 6979,
-      "functions": 554,
+      "functions": 548,
       "genericReferenceTemplateAdapters": 44,
       "haxeTypecheck": "pass",
-      "isolatedFunctionValueExterns": 933,
+      "isolatedFunctionValueExterns": 927,
       "types": 3073,
       "values": 379
     },
@@ -13700,9 +13743,9 @@
       "unboundFunctionCandidates": 0
     },
     "packageStatus": {
-      "emitted-unbound": 115,
+      "emitted-unbound": 114,
       "empty-web-contract": 1,
-      "partial-native": 37
+      "partial-native": 38
     },
     "scalarExpansion": {
       "headerConfirmedFunctions": 183,

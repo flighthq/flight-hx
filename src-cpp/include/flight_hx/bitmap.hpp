@@ -50,5 +50,8 @@ flight::Ref<flight::types::Bitmap> trim_bitmap(flight::Ref<flight::types::Bitmap
 double compare_bitmap_fingerprints(flight::Ref<flight::types::BitmapFingerprint> a, flight::Ref<flight::types::BitmapFingerprint> b);
 flight::Ref<flight::types::BitmapFingerprint> create_bitmap_fingerprint(flight::Ref<flight::types::Bitmap> source, bool gridSizePresent, double gridSize);
 flight::Ref<flight::types::BitmapHistogram> get_bitmap_histogram(flight::Ref<flight::types::BitmapRegion> source);
+flight_hx::Ref<flight::types::Bitmap> compare_bitmap(flight::Ref<flight::types::Bitmap> source, flight::Ref<flight::types::Bitmap> other);
+::String format_bitmap_fingerprint(flight::Ref<flight::types::BitmapFingerprint> fingerprint);
+flight_hx::Ref<flight::types::BitmapFingerprint> parse_bitmap_fingerprint(::String text);
 
 } // namespace flight_hx::bitmap

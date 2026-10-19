@@ -25,7 +25,8 @@
     "flight-hx-hxcpp-array-float-copy-adapter/1",
     "flight-hx-hxcpp-nullable-string-copy-adapter/1",
     "flight-hx-hxcpp-reference-carrier/1",
-    "flight-hx-hxcpp-nullable-reference-wrapper/1"
+    "flight-hx-hxcpp-nullable-reference-wrapper/1",
+    "flight-hx-hxcpp-owned-string-copy/1"
   ],
   "scalarOverrideRefusals": [],
   "hosts": [
@@ -500,6 +501,24 @@
         {
           "name": "getBitmapHistogram",
           "native": "flight::bitmap::get_bitmap_histogram",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "compareBitmap",
+          "native": "flight::bitmap::compare_bitmap",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "formatBitmapFingerprint",
+          "native": "flight::bitmap::format_bitmap_fingerprint",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "parseBitmapFingerprint",
+          "native": "flight::bitmap::parse_bitmap_fingerprint",
           "header": "flight/bitmap/contract.hpp",
           "provenance": "flight-hx/reference-carrier/1"
         }
@@ -2059,6 +2078,29 @@
           "name": "updateSpringAngle",
           "native": "flight::spring::update_spring_angle",
           "header": "flight/spring/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        }
+      ]
+    },
+    {
+      "module": "flight.Xml",
+      "functions": [
+        {
+          "name": "parseXmlDocument",
+          "native": "flight::xml::parse_xml_document",
+          "header": "flight/xml/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "getXmlElementChildByName",
+          "native": "flight::xml::get_xml_element_child_by_name",
+          "header": "flight/xml/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "getXmlElementAttribute",
+          "native": "flight::xml::get_xml_element_attribute",
+          "header": "flight/xml/contract.hpp",
           "provenance": "flight-hx/reference-carrier/1"
         }
       ]

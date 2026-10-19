@@ -2120,26 +2120,6 @@
     {
       "carrierFamilies": [
         "named",
-        "nullable"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Bitmap_compareBitmap",
-      "header": "flight/bitmap/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::bitmap::compare_bitmap",
-      "package": "@flighthq/bitmap",
-      "publicName": "flight.Bitmap.compareBitmap",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/bitmap/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named",
         "typed-array"
       ],
       "externClass": "flight._cpp._attempt.Attempt_Bitmap_compositeBitmapPixels",
@@ -2553,25 +2533,6 @@
     },
     {
       "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Bitmap_formatBitmapFingerprint",
-      "header": "flight/bitmap/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::bitmap::format_bitmap_fingerprint",
-      "package": "@flighthq/bitmap",
-      "publicName": "flight.Bitmap.formatBitmapFingerprint",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/bitmap/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
         "named",
         "typed-array"
       ],
@@ -2806,26 +2767,6 @@
       "refusal": {
         "code": "unsupported-carrier",
         "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/bitmap/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named",
-        "nullable"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Bitmap_parseBitmapFingerprint",
-      "header": "flight/bitmap/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::bitmap::parse_bitmap_fingerprint",
-      "package": "@flighthq/bitmap",
-      "publicName": "flight.Bitmap.parseBitmapFingerprint",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "only optional Float is supported by this Haxe C++ extern slice",
         "phase": "planning"
       },
       "source": "packages/bitmap/src/contract.ts",
@@ -17962,52 +17903,12 @@
         "named",
         "nullable"
       ],
-      "externClass": "flight._cpp._attempt.Attempt_Xml_getXmlElementAttribute",
-      "header": "flight/xml/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::xml::get_xml_element_attribute",
-      "package": "@flighthq/xml",
-      "publicName": "flight.Xml.getXmlElementAttribute",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/xml/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named",
-        "nullable"
-      ],
       "externClass": "flight._cpp._attempt.Attempt_Xml_getXmlElementAttributeNumber",
       "header": "flight/xml/contract.hpp",
       "kind": "function",
       "nativeName": "flight::xml::get_xml_element_attribute_number",
       "package": "@flighthq/xml",
       "publicName": "flight.Xml.getXmlElementAttributeNumber",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/xml/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named",
-        "nullable"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Xml_getXmlElementChildByName",
-      "header": "flight/xml/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::xml::get_xml_element_child_by_name",
-      "package": "@flighthq/xml",
-      "publicName": "flight.Xml.getXmlElementChildByName",
       "refusal": {
         "code": "unsupported-carrier",
         "message": "type family named is outside the Haxe C++ extern vertical slice",
@@ -18056,26 +17957,6 @@
       "source": "packages/xml/src/contract.ts",
       "status": "materialized-unproven",
       "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named",
-        "nullable"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Xml_parseXmlDocument",
-      "header": "flight/xml/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::xml::parse_xml_document",
-      "package": "@flighthq/xml",
-      "publicName": "flight.Xml.parseXmlDocument",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "only optional Float is supported by this Haxe C++ extern slice",
-        "phase": "planning"
-      },
-      "source": "packages/xml/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
     }
   ],
   "pins": {
@@ -18086,7 +17967,7 @@
   },
   "schema": "flight-hx-native-binding-attempts/1",
   "summary": {
-    "functions": 554,
+    "functions": 548,
     "carrierFamilies": [
       {
         "count": 80,
@@ -18109,11 +17990,11 @@
         "name": "generic-function"
       },
       {
-        "count": 601,
+        "count": 595,
         "name": "named"
       },
       {
-        "count": 66,
+        "count": 61,
         "name": "nullable"
       },
       {
@@ -18126,8 +18007,8 @@
       }
     ],
     "holders": 42,
-    "isolatedExterns": 933,
-    "total": 933,
+    "isolatedExterns": 927,
+    "total": 927,
     "values": 379
   }
 }

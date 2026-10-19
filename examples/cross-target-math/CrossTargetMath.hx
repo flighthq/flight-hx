@@ -34,6 +34,7 @@ import flight.Textbidi;
 import flight.Textsegment;
 import flight.Textshaper;
 import flight.Velocity;
+import flight.Xml;
 
 // One source file exercises the generated Flight ESM externs on web and every compile-proven
 // flight-cpp function binding on hxcpp. Keeping this host-free isolates binding from host setup.
@@ -130,6 +131,12 @@ class CrossTargetMath {
     final firstFingerprint = createBitmapFingerprint(firstBitmap, 4.0);
     final secondFingerprint = createBitmapFingerprint(secondBitmap, 4.0);
     assertFinite('bitmap fingerprint comparison', compareBitmapFingerprints(firstFingerprint, secondFingerprint));
+    final fingerprintText = formatBitmapFingerprint(firstFingerprint);
+    assertTrue('bitmap fingerprint format', fingerprintText.length > 2);
+    assertTrue('bitmap fingerprint parse', parseBitmapFingerprint(fingerprintText) != null);
+    assertTrue('invalid bitmap fingerprint', parseBitmapFingerprint('invalid') == null);
+    assertTrue('identical bitmap comparison', compareBitmap(firstBitmap, firstBitmap) == null);
+    assertTrue('different bitmap comparison', compareBitmap(firstBitmap, secondBitmap) != null);
     getBitmapHistogram(firstRegion);
     applyBitmapLevels(outRegion, firstRegion);
     final clonedBitmap = cloneBitmap(firstBitmap);
@@ -164,6 +171,13 @@ class CrossTargetMath {
     invalidateBitmap(clonedBitmap);
     invalidateBitmap(trimBitmap(firstBitmap));
 
+    final xmlRoot = parseXmlDocument('<root answer="42"><child /></root>');
+    assertTrue('XML parse', xmlRoot != null);
+    if (xmlRoot != null) {
+      assertString('XML attribute', getXmlElementAttribute(xmlRoot, 'answer'), '42');
+      assertTrue('XML child lookup', getXmlElementChildByName(xmlRoot, 'child') != null);
+      assertTrue('XML missing child', getXmlElementChildByName(xmlRoot, 'missing') == null);
+    }
     final spring = createSpring();
     final spring2D = createSpring2D();
     final spring3D = createSpring3D();

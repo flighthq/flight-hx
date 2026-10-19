@@ -156,5 +156,14 @@ extern class Bitmap {
 
   @:native("flight_hx::bitmap::get_bitmap_histogram")
   static function getBitmapHistogram(source:flight.BitmapRegion):flight.BitmapHistogram;
+
+  @:native("flight_hx::bitmap::compare_bitmap")
+  static function compareBitmap(source:flight.Bitmap, other:flight.Bitmap):Null<flight.Bitmap>;
+
+  @:native("flight_hx::bitmap::format_bitmap_fingerprint")
+  static function formatBitmapFingerprint(fingerprint:flight.BitmapFingerprint):String;
+
+  @:native("flight_hx::bitmap::parse_bitmap_fingerprint")
+  static function parseBitmapFingerprint(text:String):Null<flight.BitmapFingerprint>;
 }
 #end

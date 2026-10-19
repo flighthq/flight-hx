@@ -1,6 +1,7 @@
 // Generated from src-cpp/manifest.json and flight-compiler native-planning.json. Do not edit.
 #include <limits>
 #include <stdexcept>
+#include <string>
 #include <flight/bitmap/contract.hpp>
 #include <flight_hx/bitmap.hpp>
 
@@ -231,6 +232,25 @@ flight::Ref<flight::types::BitmapFingerprint> create_bitmap_fingerprint(flight::
 
 flight::Ref<flight::types::BitmapHistogram> get_bitmap_histogram(flight::Ref<flight::types::BitmapRegion> source) {
   return flight::bitmap::get_bitmap_histogram(source);
+}
+
+flight_hx::Ref<flight::types::Bitmap> compare_bitmap(flight::Ref<flight::types::Bitmap> source, flight::Ref<flight::types::Bitmap> other) {
+  const auto result = flight::bitmap::compare_bitmap(source, other);
+  return result.has_value() ? flight_hx::Ref<flight::types::Bitmap>{result.value()} : flight_hx::Ref<flight::types::Bitmap>{};
+}
+
+::String format_bitmap_fingerprint(flight::Ref<flight::types::BitmapFingerprint> fingerprint) {
+  const auto result = flight::bitmap::format_bitmap_fingerprint(fingerprint);
+  const std::string result_utf8 = result.to_utf8();
+  if (result_utf8.size() > static_cast<std::size_t>(std::numeric_limits<int>::max())) {
+    throw std::length_error("Flight String exceeds the hxcpp String length limit");
+  }
+  return ::String::create(result_utf8.data(), static_cast<int>(result_utf8.size()));
+}
+
+flight_hx::Ref<flight::types::BitmapFingerprint> parse_bitmap_fingerprint(::String text) {
+  const auto result = flight::bitmap::parse_bitmap_fingerprint(flight::String::from_utf8(text.utf8_str()));
+  return result.has_value() ? flight_hx::Ref<flight::types::BitmapFingerprint>{result.value()} : flight_hx::Ref<flight::types::BitmapFingerprint>{};
 }
 
 } // namespace flight_hx::bitmap

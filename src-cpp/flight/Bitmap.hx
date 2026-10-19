@@ -179,6 +179,18 @@ extern inline function getBitmapHistogram(source:flight.BitmapRegion):flight.Bit
   return flight._cpp._fn.Bitmap.getBitmapHistogram(source);
 }
 
+extern inline function compareBitmap(source:flight.Bitmap, other:flight.Bitmap):Null<flight.Bitmap> {
+  return flight._cpp._fn.Bitmap.compareBitmap(source, other);
+}
+
+extern inline function formatBitmapFingerprint(fingerprint:flight.BitmapFingerprint):String {
+  return flight._cpp._fn.Bitmap.formatBitmapFingerprint(fingerprint);
+}
+
+extern inline function parseBitmapFingerprint(text:String):Null<flight.BitmapFingerprint> {
+  return flight._cpp._fn.Bitmap.parseBitmapFingerprint(text);
+}
+
 var BITMAP_FINGERPRINT_COMPUTATION_ID(get, set):String;
 
 private extern inline function get_BITMAP_FINGERPRINT_COMPUTATION_ID():String return flight._cpp._attempt.Attempt_Bitmap_BITMAP_FINGERPRINT_COMPUTATION_ID.BITMAP_FINGERPRINT_COMPUTATION_ID;
@@ -267,10 +279,6 @@ extern inline function colorMatrixBitmap(out:flight._internal._UInt8ClampedArray
   flight._cpp._attempt.Attempt_Bitmap_colorMatrixBitmap.colorMatrixBitmap(out, source, matrix);
 }
 
-extern inline function compareBitmap(source:flight.Bitmap, other:flight.Bitmap):Null<flight.Bitmap> {
-  return flight._cpp._attempt.Attempt_Bitmap_compareBitmap.compareBitmap(source, other);
-}
-
 extern inline function compositeBitmapPixels(dest:flight.BitmapRegion, pixels:flight._internal._UInt8ClampedArray, ?mode:flight.BitmapCompositeMode):Void {
   flight._cpp._attempt.Attempt_Bitmap_compositeBitmapPixels.compositeBitmapPixels(dest, pixels, mode);
 }
@@ -355,10 +363,6 @@ extern inline function fillBitmapRadialGradient(dest:flight.BitmapRegion, ramp:f
   flight._cpp._attempt.Attempt_Bitmap_fillBitmapRadialGradient.fillBitmapRadialGradient(dest, ramp, cx, cy, radius, focalX, focalY, spread);
 }
 
-extern inline function formatBitmapFingerprint(fingerprint:flight.BitmapFingerprint):String {
-  return flight._cpp._attempt.Attempt_Bitmap_formatBitmapFingerprint.formatBitmapFingerprint(fingerprint);
-}
-
 extern inline function gaussianBlurBitmap(out:flight._internal._UInt8ClampedArray, scratch:flight._internal._UInt8ClampedArray, source:flight.BitmapRegion, sigmaX:Float, ?sigmaY:Float, ?passes:Float):Void {
   flight._cpp._attempt.Attempt_Bitmap_gaussianBlurBitmap.gaussianBlurBitmap(out, scratch, source, sigmaX, sigmaY, passes);
 }
@@ -405,10 +409,6 @@ extern inline function innerShadowBitmap(out:flight._internal._UInt8ClampedArray
 
 extern inline function medianBitmap(out:flight._internal._UInt8ClampedArray, source:flight.BitmapRegion, radius:Float):Void {
   flight._cpp._attempt.Attempt_Bitmap_medianBitmap.medianBitmap(out, source, radius);
-}
-
-extern inline function parseBitmapFingerprint(text:String):Null<flight.BitmapFingerprint> {
-  return flight._cpp._attempt.Attempt_Bitmap_parseBitmapFingerprint.parseBitmapFingerprint(text);
 }
 
 extern inline function pixelateBitmap(out:flight._internal._UInt8ClampedArray, source:flight.BitmapRegion, blockSize:Float):Void {

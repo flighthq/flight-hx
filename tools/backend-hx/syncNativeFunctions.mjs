@@ -616,7 +616,9 @@ function validateReferenceCarrier(publicName, binding, declaration, parsed) {
   const referenceTypes = types.filter((type) => isReferenceCarrierType(type));
   if (
     referenceTypes.length === 0 ||
-    types.some((type) => !new Set(['Bool', 'Float', 'Void']).has(type) && !isReferenceCarrierType(type)) ||
+    types.some(
+      (type) => !new Set(['Bool', 'Float', 'String', 'Null<String>', 'Void']).has(type) && !isReferenceCarrierType(type),
+    ) ||
     parsed.parameters.some(({ type }) => nullableReferenceInner(type))
   ) {
     throw new Error(`${publicName} is not a reference carrier plus primitive signature`);
@@ -653,13 +655,13 @@ function validateReferenceCarrier(publicName, binding, declaration, parsed) {
         const defaultPattern = optional ? '\\s*=\\s*std::nullopt' : '';
         return `${optionalPattern}\\s+[A-Za-z_][A-Za-z0-9_]*${defaultPattern}`;
       }
-      const typePattern = optional ? `std::optional<${cppType(type)}>` : cppType(type);
+      const typePattern = optional ? `std::optional<${flightCppType(type)}>` : flightCppType(type);
       const defaultPattern = optional ? '\\s*=\\s*std::nullopt' : '';
       return `${escapeRegExp(typePattern)}\\s+[A-Za-z_][A-Za-z0-9_]*${defaultPattern}`;
     })
     .join('\\s*,\\s*');
   const signaturePattern = new RegExp(
-    `\\binline\\s+${nativeReferenceResultPattern(parsed.result)}\\s+${escapeRegExp(cppName)}\\s*\\(${parameterPattern}\\)`,
+    `\\binline\\s+${nativeResultPattern(parsed.result)}\\s+${escapeRegExp(cppName)}\\s*\\(${parameterPattern}\\)`,
     'u',
   );
   const packageHeaders = filesUnder(path.dirname(headerPath))
@@ -729,6 +731,15 @@ function emitAdapterSource(binding) {
   const { contents, name, signature } = adapterIdentity(binding);
   let source = contents;
   source = replaceExactly(source, '#pragma once\n', '// Generated from flight-compiler native-planning.json. Do not edit.\n');
+  const borrowedStringReturn = '  return ::String(haxe_result_utf8.data(), haxe_result_utf8.size());';
+  if (source.includes(borrowedStringReturn)) {
+    source = replaceExactly(
+      source,
+      '#include <hxcpp.h>\n',
+      '#include <hxcpp.h>\n#include <limits>\n#include <stdexcept>\n',
+    );
+    source = replaceExactly(source, borrowedStringReturn, haxeStringCopyLines('haxe_result_utf8').join('\n'));
+  }
   source = replaceExactly(source, 'namespace flight::haxe::_cpp {', 'namespace flight_hx::haxe::_cpp {');
   source = replaceExactly(source, `inline ${signature} {`, `${signature} {`);
   source = replaceExactly(
@@ -766,7 +777,7 @@ function emitBridgeHeader(module, bindings) {
   const referenceTypeNames = [...new Set(
     bindings
       .flatMap(({ parsed }) => [...parsed.parameters.map(({ type }) => type), parsed.result])
-      .map((type) => nativeReferenceTypes.get(type)?.nativeName)
+      .map((type) => nativeReferenceTypes.get(nullableReferenceInner(type) ?? type)?.nativeName)
       .filter(Boolean)
       .map((nativeName) => {
         const match = /^flight::Ref<flight::types::([A-Za-z_][A-Za-z0-9_]*)>$/u.exec(nativeName);
@@ -777,7 +788,14 @@ function emitBridgeHeader(module, bindings) {
   const lines = [
     '// Generated from src-cpp/manifest.json and flight-compiler native-planning.json. Do not edit.',
     '#pragma once',
-    ...(bindings.some((binding) => isArrayFloatAdapter(binding) || isNullableStringAdapter(binding))
+    ...(bindings.some(
+      (binding) =>
+        isArrayFloatAdapter(binding) ||
+        isNullableStringAdapter(binding) ||
+        [...binding.parsed.parameters.map(({ type }) => type), binding.parsed.result].some(
+          (type) => type === 'String' || type === 'Null<String>',
+        ),
+    )
       ? ['#include <hxcpp.h>']
       : []),
     ...(referenceTypeNames.length > 0 ? ['#include <flight_hx/types/reference_fwd.hpp>'] : []),
@@ -801,6 +819,14 @@ function emitBridgeHeader(module, bindings) {
 function emitBridgeSource(module, bindings) {
   const namespace = nativeNamespace(module, bindings);
   const holder = module.module.replace(/^flight\./u, '').toLowerCase();
+  const needsArrayFloatAdapter = bindings.some(isArrayFloatAdapter);
+  const needsStringCopy = bindings.some(
+    (binding) =>
+      isNullableStringAdapter(binding) ||
+      [...binding.parsed.parameters.map(({ type }) => type), binding.parsed.result].some(
+        (type) => type === 'String' || type === 'Null<String>',
+      ),
+  );
   const needsNestedArrayAdapter = bindings.some(
     (binding) =>
       isArrayFloatAdapter(binding) &&
@@ -809,15 +835,17 @@ function emitBridgeSource(module, bindings) {
   );
   const lines = [
     '// Generated from src-cpp/manifest.json and flight-compiler native-planning.json. Do not edit.',
-    ...(bindings.some(isArrayFloatAdapter) ? ['#include <limits>', '#include <stdexcept>'] : []),
-    ...(bindings.some(isNullableStringAdapter) ? ['#include <string>'] : []),
+    ...(needsArrayFloatAdapter ? ['#include <limits>', '#include <stdexcept>'] : []),
+    ...(needsStringCopy
+      ? [...(needsArrayFloatAdapter ? [] : ['#include <limits>', '#include <stdexcept>']), '#include <string>']
+      : []),
     ...[...new Set(bindings.map(({ header }) => header))].sort(compareText).map((header) => `#include <${header}>`),
     `#include <flight_hx/${holder}.hpp>`,
     '',
     `namespace flight_hx::${namespace} {`,
     '',
   ];
-  if (bindings.some(isArrayFloatAdapter)) {
+  if (needsArrayFloatAdapter) {
     lines.push(
       'namespace {',
       '',
@@ -931,6 +959,15 @@ function emitBridgeSource(module, bindings) {
     if (nullableReferenceInner(parsed.result)) {
       lines.push(`  const auto result = ${call};`);
       lines.push(`  return result.has_value() ? ${cppType(parsed.result)}{result.value()} : ${cppType(parsed.result)}{};`);
+    } else if (parsed.result === 'Null<String>') {
+      lines.push(`  const auto result = ${call};`);
+      lines.push('  if (!result.has_value()) return null();');
+      lines.push('  const std::string result_utf8 = result->to_utf8();');
+      lines.push(...haxeStringCopyLines('result_utf8'));
+    } else if (parsed.result === 'String') {
+      lines.push(`  const auto result = ${call};`);
+      lines.push('  const std::string result_utf8 = result.to_utf8();');
+      lines.push(...haxeStringCopyLines('result_utf8'));
     } else {
       lines.push(parsed.result === 'Void' ? `  ${call};` : `  return ${call};`);
     }
@@ -965,14 +1002,21 @@ function nativeArguments(binding) {
   if (!usesExpandedOptionalParameters(binding)) {
     return binding.parsed.parameters.map(({ name, optional, type }) => {
       const nativeName = safeCppName(name);
-      if (!optional || !nativeReferenceTypes.has(type)) return nativeName;
+      if (!optional) return nativeArgumentValue(nativeName, type);
+      if (!nativeReferenceTypes.has(type)) return nativeArgumentValue(nativeName, type);
       return `(${nativeName} ? std::optional<${cppType(type)}>{${nativeName}} : std::nullopt)`;
     });
   }
   return binding.parsed.parameters.map(({ name, optional, type }) => {
-    if (!optional) return safeCppName(name);
-    return `(${safeCppName(`${name}Present`)} ? std::optional<${cppType(type)}>{${safeCppName(name)}} : std::nullopt)`;
+    const nativeName = safeCppName(name);
+    const value = nativeArgumentValue(nativeName, type);
+    if (!optional) return value;
+    return `(${safeCppName(`${name}Present`)} ? std::optional<${flightCppType(type)}>{${value}} : std::nullopt)`;
   });
+}
+
+function nativeArgumentValue(name, type) {
+  return type === 'String' ? `flight::String::from_utf8(${name}.utf8_str())` : name;
 }
 
 function usesExpandedOptionalParameters(binding) {
@@ -1001,11 +1045,11 @@ function isReferenceCarrierType(type) {
   return nativeReferenceTypes.has(type) || nullableReferenceInner(type) !== undefined;
 }
 
-function nativeReferenceResultPattern(type) {
+function nativeResultPattern(type) {
   const inner = nullableReferenceInner(type);
-  return inner
-    ? escapeRegExp(`std::optional<${cppType(inner)}>`)
-    : escapeRegExp(cppType(type));
+  if (inner) return escapeRegExp(`std::optional<${cppType(inner)}>`);
+  if (type === 'Null<String>') return escapeRegExp('std::optional<flight::String>');
+  return escapeRegExp(flightCppType(type));
 }
 
 function isArrayFloatType(type) {
@@ -1077,8 +1121,17 @@ function emitNullableStringBridgeBody(lines, binding, functionName, parameters) 
   lines.push(`  const auto result = ${binding.native}(${arguments_.join(', ')});`);
   lines.push('  if (!result.has_value()) return null();');
   lines.push('  const std::string result_utf8 = result->to_utf8();');
-  lines.push('  return ::String(result_utf8.data(), result_utf8.size());');
+  lines.push(...haxeStringCopyLines('result_utf8'));
   lines.push('}', '');
+}
+
+function haxeStringCopyLines(name) {
+  return [
+    `  if (${name}.size() > static_cast<std::size_t>(std::numeric_limits<int>::max())) {`,
+    '    throw std::length_error("Flight String exceeds the hxcpp String length limit");',
+    '  }',
+    `  return ::String::create(${name}.data(), static_cast<int>(${name}.size()));`,
+  ];
 }
 
 function emitInternalSignature(binding) {
@@ -1260,6 +1313,7 @@ function cppType(type) {
 function flightCppType(type) {
   if (type === 'Array<Array<Float>>') return 'flight::Array<flight::Array<double>>';
   if (type === 'Array<Float>') return 'flight::Array<double>';
+  if (type === 'String') return 'flight::String';
   return cppType(type);
 }
 
