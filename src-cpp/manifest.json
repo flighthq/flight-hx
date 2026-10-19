@@ -475,6 +475,29 @@
       ]
     },
     {
+      "module": "flight.Clipboard",
+      "functions": [
+        {
+          "name": "createClipboardWatch",
+          "native": "flight::clipboard::create_clipboard_watch",
+          "header": "flight/clipboard/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "detachClipboardWatch",
+          "native": "flight::clipboard::detach_clipboard_watch",
+          "header": "flight/clipboard/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "disposeClipboardWatch",
+          "native": "flight::clipboard::dispose_clipboard_watch",
+          "header": "flight/clipboard/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        }
+      ]
+    },
+    {
       "module": "flight.Color",
       "functions": [
         {
@@ -603,12 +626,53 @@
       ]
     },
     {
+      "module": "flight.Device",
+      "functions": [
+        {
+          "name": "createDeviceCapabilities",
+          "native": "flight::device::create_device_capabilities",
+          "header": "flight/device/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "createDeviceDisplayMetrics",
+          "native": "flight::device::create_device_display_metrics",
+          "header": "flight/device/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "createDeviceInfo",
+          "native": "flight::device::create_device_info",
+          "header": "flight/device/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "createSafeAreaInsets",
+          "native": "flight::device::create_safe_area_insets",
+          "header": "flight/device/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        }
+      ]
+    },
+    {
       "module": "flight.Entity",
       "functions": [
         {
           "name": "areEntityRuntimeGuardsEnabled",
           "native": "flight::entity::are_entity_runtime_guards_enabled",
           "header": "flight/entity/contract.hpp"
+        },
+        {
+          "name": "createEntityRuntime",
+          "native": "flight::entity::create_entity_runtime",
+          "header": "flight/entity/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "createGuardedEntityRuntime",
+          "native": "flight::entity::create_guarded_entity_runtime",
+          "header": "flight/entity/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
         },
         {
           "name": "disableEntityRuntimeGuards",
@@ -1387,6 +1451,42 @@
           "name": "setPowerIdlePollingIntervalMs",
           "native": "flight::power::set_power_idle_polling_interval_ms",
           "header": "flight/power/contract.hpp"
+        },
+        {
+          "name": "createPower",
+          "native": "flight::power::create_power",
+          "header": "flight/power/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "detachPower",
+          "native": "flight::power::detach_power",
+          "header": "flight/power/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "disposePower",
+          "native": "flight::power::dispose_power",
+          "header": "flight/power/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "enablePowerSignals",
+          "native": "flight::power::enable_power_signals",
+          "header": "flight/power/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "makePowerBatteryHealth",
+          "native": "flight::power::make_power_battery_health",
+          "header": "flight/power/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "makePowerStatus",
+          "native": "flight::power::make_power_status",
+          "header": "flight/power/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
         }
       ]
     },
@@ -1397,6 +1497,172 @@
           "name": "isValidProtocolScheme",
           "native": "flight::haxe::_cpp::isValidProtocolScheme_74b6ecee",
           "header": "flight/protocol/contract.hpp"
+        },
+        {
+          "name": "createProtocolHandler",
+          "native": "flight::protocol::create_protocol_handler",
+          "header": "flight/protocol/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "detachProtocolHandler",
+          "native": "flight::protocol::detach_protocol_handler",
+          "header": "flight/protocol/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "disposeProtocolHandler",
+          "native": "flight::protocol::dispose_protocol_handler",
+          "header": "flight/protocol/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        }
+      ]
+    },
+    {
+      "module": "flight.Screen",
+      "functions": [
+        {
+          "name": "createScreenInfo",
+          "native": "flight::screen::create_screen_info",
+          "header": "flight/screen/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "createScreenMode",
+          "native": "flight::screen::create_screen_mode",
+          "header": "flight/screen/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "createScreenPermissionChange",
+          "native": "flight::screen::create_screen_permission_change",
+          "header": "flight/screen/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "createScreenSignals",
+          "native": "flight::screen::create_screen_signals",
+          "header": "flight/screen/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "detachScreenPermissionChange",
+          "native": "flight::screen::detach_screen_permission_change",
+          "header": "flight/screen/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "detachScreenSignals",
+          "native": "flight::screen::detach_screen_signals",
+          "header": "flight/screen/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "disposeScreenPermissionChange",
+          "native": "flight::screen::dispose_screen_permission_change",
+          "header": "flight/screen/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "disposeScreenSignals",
+          "native": "flight::screen::dispose_screen_signals",
+          "header": "flight/screen/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        }
+      ]
+    },
+    {
+      "module": "flight.Sensors",
+      "functions": [
+        {
+          "name": "computeEulerFromQuaternion",
+          "native": "flight::sensors::compute_euler_from_quaternion",
+          "header": "flight/sensors/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "computeGravityFromOrientation",
+          "native": "flight::sensors::compute_gravity_from_orientation",
+          "header": "flight/sensors/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "computeQuaternionFromOrientationReading",
+          "native": "flight::sensors::compute_quaternion_from_orientation_reading",
+          "header": "flight/sensors/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "computeScreenRelativeOrientation",
+          "native": "flight::sensors::compute_screen_relative_orientation",
+          "header": "flight/sensors/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "computeWorldAccelerationFromDeviceAcceleration",
+          "native": "flight::sensors::compute_world_acceleration_from_device_acceleration",
+          "header": "flight/sensors/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "createAmbientLightReading",
+          "native": "flight::sensors::create_ambient_light_reading",
+          "header": "flight/sensors/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "createMotionReading",
+          "native": "flight::sensors::create_motion_reading",
+          "header": "flight/sensors/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "createOrientationReading",
+          "native": "flight::sensors::create_orientation_reading",
+          "header": "flight/sensors/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "createPressureReading",
+          "native": "flight::sensors::create_pressure_reading",
+          "header": "flight/sensors/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "createProximityReading",
+          "native": "flight::sensors::create_proximity_reading",
+          "header": "flight/sensors/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "createQuaternionReading",
+          "native": "flight::sensors::create_quaternion_reading",
+          "header": "flight/sensors/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "createRotationRateReading",
+          "native": "flight::sensors::create_rotation_rate_reading",
+          "header": "flight/sensors/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "createSensors",
+          "native": "flight::sensors::create_sensors",
+          "header": "flight/sensors/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "detachSensors",
+          "native": "flight::sensors::detach_sensors",
+          "header": "flight/sensors/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "disposeSensors",
+          "native": "flight::sensors::dispose_sensors",
+          "header": "flight/sensors/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
         }
       ]
     },

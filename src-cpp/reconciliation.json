@@ -197,6 +197,15 @@
       "flight.Bitmap.setBitmapPixelRgb",
       "flight.Bitmap.setBitmapRegion",
       "flight.Bitmap.trimBitmap",
+      "flight.Clipboard.createClipboardWatch",
+      "flight.Clipboard.detachClipboardWatch",
+      "flight.Clipboard.disposeClipboardWatch",
+      "flight.Device.createDeviceCapabilities",
+      "flight.Device.createDeviceDisplayMetrics",
+      "flight.Device.createDeviceInfo",
+      "flight.Device.createSafeAreaInsets",
+      "flight.Entity.createEntityRuntime",
+      "flight.Entity.createGuardedEntityRuntime",
       "flight.Input.createInputManager",
       "flight.Input.createInputSignals",
       "flight.Input.createInputState",
@@ -209,6 +218,38 @@
       "flight.Input.wasInputGamepadButtonReleased",
       "flight.Input.wasInputKeyPressed",
       "flight.Input.wasInputKeyReleased",
+      "flight.Power.createPower",
+      "flight.Power.detachPower",
+      "flight.Power.disposePower",
+      "flight.Power.enablePowerSignals",
+      "flight.Power.makePowerBatteryHealth",
+      "flight.Power.makePowerStatus",
+      "flight.Protocol.createProtocolHandler",
+      "flight.Protocol.detachProtocolHandler",
+      "flight.Protocol.disposeProtocolHandler",
+      "flight.Screen.createScreenInfo",
+      "flight.Screen.createScreenMode",
+      "flight.Screen.createScreenPermissionChange",
+      "flight.Screen.createScreenSignals",
+      "flight.Screen.detachScreenPermissionChange",
+      "flight.Screen.detachScreenSignals",
+      "flight.Screen.disposeScreenPermissionChange",
+      "flight.Screen.disposeScreenSignals",
+      "flight.Sensors.computeEulerFromQuaternion",
+      "flight.Sensors.computeGravityFromOrientation",
+      "flight.Sensors.computeQuaternionFromOrientationReading",
+      "flight.Sensors.computeScreenRelativeOrientation",
+      "flight.Sensors.computeWorldAccelerationFromDeviceAcceleration",
+      "flight.Sensors.createAmbientLightReading",
+      "flight.Sensors.createMotionReading",
+      "flight.Sensors.createOrientationReading",
+      "flight.Sensors.createPressureReading",
+      "flight.Sensors.createProximityReading",
+      "flight.Sensors.createQuaternionReading",
+      "flight.Sensors.createRotationRateReading",
+      "flight.Sensors.createSensors",
+      "flight.Sensors.detachSensors",
+      "flight.Sensors.disposeSensors",
       "flight.Spring.addSpringImpulse",
       "flight.Spring.addSpringImpulse2D",
       "flight.Spring.addSpringImpulse3D",
@@ -1834,7 +1875,7 @@
       "issues": [
         {
           "code": "native-function-gap",
-          "count": 27
+          "count": 24
         },
         {
           "code": "non-scalar-signature-review",
@@ -1846,23 +1887,42 @@
         },
         {
           "code": "native-materialized-unproven-functions",
-          "count": 27
+          "count": 24
         }
       ],
       "nativeDefault": {
-        "functions": [],
+        "functions": [
+          {
+            "header": "flight/clipboard/contract.hpp",
+            "holder": "Clipboard",
+            "name": "createClipboardWatch",
+            "native": "flight::clipboard::create_clipboard_watch"
+          },
+          {
+            "header": "flight/clipboard/contract.hpp",
+            "holder": "Clipboard",
+            "name": "detachClipboardWatch",
+            "native": "flight::clipboard::detach_clipboard_watch"
+          },
+          {
+            "header": "flight/clipboard/contract.hpp",
+            "holder": "Clipboard",
+            "name": "disposeClipboardWatch",
+            "native": "flight::clipboard::dispose_clipboard_watch"
+          }
+        ],
         "types": [],
         "values": []
       },
       "nativeAttempts": {
-        "functions": 27,
+        "functions": 24,
         "types": 0,
         "unavailableUpstream": 0,
         "values": 0
       },
       "package": "@flighthq/clipboard",
       "scalarProbeCandidates": [],
-      "status": "emitted-unbound",
+      "status": "partial-native",
       "webDefault": {
         "functions": 27,
         "types": 0,
@@ -2492,7 +2552,7 @@
       "issues": [
         {
           "code": "native-function-gap",
-          "count": 10
+          "count": 6
         },
         {
           "code": "non-scalar-signature-review",
@@ -2504,23 +2564,48 @@
         },
         {
           "code": "native-materialized-unproven-functions",
-          "count": 10
+          "count": 6
         }
       ],
       "nativeDefault": {
-        "functions": [],
+        "functions": [
+          {
+            "header": "flight/device/contract.hpp",
+            "holder": "Device",
+            "name": "createDeviceCapabilities",
+            "native": "flight::device::create_device_capabilities"
+          },
+          {
+            "header": "flight/device/contract.hpp",
+            "holder": "Device",
+            "name": "createDeviceDisplayMetrics",
+            "native": "flight::device::create_device_display_metrics"
+          },
+          {
+            "header": "flight/device/contract.hpp",
+            "holder": "Device",
+            "name": "createDeviceInfo",
+            "native": "flight::device::create_device_info"
+          },
+          {
+            "header": "flight/device/contract.hpp",
+            "holder": "Device",
+            "name": "createSafeAreaInsets",
+            "native": "flight::device::create_safe_area_insets"
+          }
+        ],
         "types": [],
         "values": []
       },
       "nativeAttempts": {
-        "functions": 10,
+        "functions": 6,
         "types": 0,
         "unavailableUpstream": 0,
         "values": 0
       },
       "package": "@flighthq/device",
       "scalarProbeCandidates": [],
-      "status": "emitted-unbound",
+      "status": "partial-native",
       "webDefault": {
         "functions": 10,
         "types": 0,
@@ -3189,7 +3274,7 @@
       "issues": [
         {
           "code": "native-function-gap",
-          "count": 19
+          "count": 17
         },
         {
           "code": "non-scalar-signature-review",
@@ -3201,7 +3286,7 @@
         },
         {
           "code": "native-materialized-unproven-functions",
-          "count": 19
+          "count": 17
         }
       ],
       "nativeDefault": {
@@ -3211,6 +3296,18 @@
             "holder": "Entity",
             "name": "areEntityRuntimeGuardsEnabled",
             "native": "flight::entity::are_entity_runtime_guards_enabled"
+          },
+          {
+            "header": "flight/entity/contract.hpp",
+            "holder": "Entity",
+            "name": "createEntityRuntime",
+            "native": "flight::entity::create_entity_runtime"
+          },
+          {
+            "header": "flight/entity/contract.hpp",
+            "holder": "Entity",
+            "name": "createGuardedEntityRuntime",
+            "native": "flight::entity::create_guarded_entity_runtime"
           },
           {
             "header": "flight/entity/contract.hpp",
@@ -3229,7 +3326,7 @@
         "values": []
       },
       "nativeAttempts": {
-        "functions": 19,
+        "functions": 17,
         "types": 0,
         "unavailableUpstream": 0,
         "values": 0
@@ -7400,7 +7497,7 @@
       "issues": [
         {
           "code": "native-function-gap",
-          "count": 17
+          "count": 11
         },
         {
           "code": "non-scalar-signature-review",
@@ -7412,7 +7509,7 @@
         },
         {
           "code": "native-materialized-unproven-functions",
-          "count": 17
+          "count": 11
         }
       ],
       "nativeDefault": {
@@ -7420,8 +7517,44 @@
           {
             "header": "flight/power/contract.hpp",
             "holder": "Power",
+            "name": "createPower",
+            "native": "flight::power::create_power"
+          },
+          {
+            "header": "flight/power/contract.hpp",
+            "holder": "Power",
+            "name": "detachPower",
+            "native": "flight::power::detach_power"
+          },
+          {
+            "header": "flight/power/contract.hpp",
+            "holder": "Power",
+            "name": "disposePower",
+            "native": "flight::power::dispose_power"
+          },
+          {
+            "header": "flight/power/contract.hpp",
+            "holder": "Power",
+            "name": "enablePowerSignals",
+            "native": "flight::power::enable_power_signals"
+          },
+          {
+            "header": "flight/power/contract.hpp",
+            "holder": "Power",
             "name": "getPowerIdlePollingIntervalMs",
             "native": "flight::power::get_power_idle_polling_interval_ms"
+          },
+          {
+            "header": "flight/power/contract.hpp",
+            "holder": "Power",
+            "name": "makePowerBatteryHealth",
+            "native": "flight::power::make_power_battery_health"
+          },
+          {
+            "header": "flight/power/contract.hpp",
+            "holder": "Power",
+            "name": "makePowerStatus",
+            "native": "flight::power::make_power_status"
           },
           {
             "header": "flight/power/contract.hpp",
@@ -7434,7 +7567,7 @@
         "values": []
       },
       "nativeAttempts": {
-        "functions": 17,
+        "functions": 11,
         "types": 0,
         "unavailableUpstream": 0,
         "values": 0
@@ -7538,7 +7671,7 @@
       "issues": [
         {
           "code": "native-function-gap",
-          "count": 17
+          "count": 14
         },
         {
           "code": "non-scalar-signature-review",
@@ -7550,11 +7683,29 @@
         },
         {
           "code": "native-materialized-unproven-functions",
-          "count": 17
+          "count": 14
         }
       ],
       "nativeDefault": {
         "functions": [
+          {
+            "header": "flight/protocol/contract.hpp",
+            "holder": "Protocol",
+            "name": "createProtocolHandler",
+            "native": "flight::protocol::create_protocol_handler"
+          },
+          {
+            "header": "flight/protocol/contract.hpp",
+            "holder": "Protocol",
+            "name": "detachProtocolHandler",
+            "native": "flight::protocol::detach_protocol_handler"
+          },
+          {
+            "header": "flight/protocol/contract.hpp",
+            "holder": "Protocol",
+            "name": "disposeProtocolHandler",
+            "native": "flight::protocol::dispose_protocol_handler"
+          },
           {
             "header": "flight/protocol/contract.hpp",
             "holder": "Protocol",
@@ -7566,7 +7717,7 @@
         "values": []
       },
       "nativeAttempts": {
-        "functions": 17,
+        "functions": 14,
         "types": 0,
         "unavailableUpstream": 0,
         "values": 0
@@ -9271,7 +9422,7 @@
       "issues": [
         {
           "code": "native-function-gap",
-          "count": 31
+          "count": 23
         },
         {
           "code": "non-scalar-signature-review",
@@ -9283,23 +9434,72 @@
         },
         {
           "code": "native-materialized-unproven-functions",
-          "count": 31
+          "count": 23
         }
       ],
       "nativeDefault": {
-        "functions": [],
+        "functions": [
+          {
+            "header": "flight/screen/contract.hpp",
+            "holder": "Screen",
+            "name": "createScreenInfo",
+            "native": "flight::screen::create_screen_info"
+          },
+          {
+            "header": "flight/screen/contract.hpp",
+            "holder": "Screen",
+            "name": "createScreenMode",
+            "native": "flight::screen::create_screen_mode"
+          },
+          {
+            "header": "flight/screen/contract.hpp",
+            "holder": "Screen",
+            "name": "createScreenPermissionChange",
+            "native": "flight::screen::create_screen_permission_change"
+          },
+          {
+            "header": "flight/screen/contract.hpp",
+            "holder": "Screen",
+            "name": "createScreenSignals",
+            "native": "flight::screen::create_screen_signals"
+          },
+          {
+            "header": "flight/screen/contract.hpp",
+            "holder": "Screen",
+            "name": "detachScreenPermissionChange",
+            "native": "flight::screen::detach_screen_permission_change"
+          },
+          {
+            "header": "flight/screen/contract.hpp",
+            "holder": "Screen",
+            "name": "detachScreenSignals",
+            "native": "flight::screen::detach_screen_signals"
+          },
+          {
+            "header": "flight/screen/contract.hpp",
+            "holder": "Screen",
+            "name": "disposeScreenPermissionChange",
+            "native": "flight::screen::dispose_screen_permission_change"
+          },
+          {
+            "header": "flight/screen/contract.hpp",
+            "holder": "Screen",
+            "name": "disposeScreenSignals",
+            "native": "flight::screen::dispose_screen_signals"
+          }
+        ],
         "types": [],
         "values": []
       },
       "nativeAttempts": {
-        "functions": 31,
+        "functions": 23,
         "types": 0,
         "unavailableUpstream": 0,
         "values": 0
       },
       "package": "@flighthq/screen",
       "scalarProbeCandidates": [],
-      "status": "emitted-unbound",
+      "status": "partial-native",
       "webDefault": {
         "functions": 31,
         "types": 0,
@@ -9396,7 +9596,7 @@
       "issues": [
         {
           "code": "native-function-gap",
-          "count": 37
+          "count": 22
         },
         {
           "code": "non-scalar-signature-review",
@@ -9408,23 +9608,114 @@
         },
         {
           "code": "native-materialized-unproven-functions",
-          "count": 37
+          "count": 22
         }
       ],
       "nativeDefault": {
-        "functions": [],
+        "functions": [
+          {
+            "header": "flight/sensors/contract.hpp",
+            "holder": "Sensors",
+            "name": "computeEulerFromQuaternion",
+            "native": "flight::sensors::compute_euler_from_quaternion"
+          },
+          {
+            "header": "flight/sensors/contract.hpp",
+            "holder": "Sensors",
+            "name": "computeGravityFromOrientation",
+            "native": "flight::sensors::compute_gravity_from_orientation"
+          },
+          {
+            "header": "flight/sensors/contract.hpp",
+            "holder": "Sensors",
+            "name": "computeQuaternionFromOrientationReading",
+            "native": "flight::sensors::compute_quaternion_from_orientation_reading"
+          },
+          {
+            "header": "flight/sensors/contract.hpp",
+            "holder": "Sensors",
+            "name": "computeScreenRelativeOrientation",
+            "native": "flight::sensors::compute_screen_relative_orientation"
+          },
+          {
+            "header": "flight/sensors/contract.hpp",
+            "holder": "Sensors",
+            "name": "computeWorldAccelerationFromDeviceAcceleration",
+            "native": "flight::sensors::compute_world_acceleration_from_device_acceleration"
+          },
+          {
+            "header": "flight/sensors/contract.hpp",
+            "holder": "Sensors",
+            "name": "createAmbientLightReading",
+            "native": "flight::sensors::create_ambient_light_reading"
+          },
+          {
+            "header": "flight/sensors/contract.hpp",
+            "holder": "Sensors",
+            "name": "createMotionReading",
+            "native": "flight::sensors::create_motion_reading"
+          },
+          {
+            "header": "flight/sensors/contract.hpp",
+            "holder": "Sensors",
+            "name": "createOrientationReading",
+            "native": "flight::sensors::create_orientation_reading"
+          },
+          {
+            "header": "flight/sensors/contract.hpp",
+            "holder": "Sensors",
+            "name": "createPressureReading",
+            "native": "flight::sensors::create_pressure_reading"
+          },
+          {
+            "header": "flight/sensors/contract.hpp",
+            "holder": "Sensors",
+            "name": "createProximityReading",
+            "native": "flight::sensors::create_proximity_reading"
+          },
+          {
+            "header": "flight/sensors/contract.hpp",
+            "holder": "Sensors",
+            "name": "createQuaternionReading",
+            "native": "flight::sensors::create_quaternion_reading"
+          },
+          {
+            "header": "flight/sensors/contract.hpp",
+            "holder": "Sensors",
+            "name": "createRotationRateReading",
+            "native": "flight::sensors::create_rotation_rate_reading"
+          },
+          {
+            "header": "flight/sensors/contract.hpp",
+            "holder": "Sensors",
+            "name": "createSensors",
+            "native": "flight::sensors::create_sensors"
+          },
+          {
+            "header": "flight/sensors/contract.hpp",
+            "holder": "Sensors",
+            "name": "detachSensors",
+            "native": "flight::sensors::detach_sensors"
+          },
+          {
+            "header": "flight/sensors/contract.hpp",
+            "holder": "Sensors",
+            "name": "disposeSensors",
+            "native": "flight::sensors::dispose_sensors"
+          }
+        ],
         "types": [],
         "values": []
       },
       "nativeAttempts": {
-        "functions": 37,
+        "functions": 22,
         "types": 0,
         "unavailableUpstream": 0,
         "values": 0
       },
       "package": "@flighthq/sensors",
       "scalarProbeCandidates": [],
-      "status": "emitted-unbound",
+      "status": "partial-native",
       "webDefault": {
         "functions": 37,
         "types": 0,
@@ -13014,11 +13305,11 @@
       "arrayFloatAdapters": 45,
       "boundHeaderConfirmedScalarFunctions": 114,
       "extensionTypes": 1,
-      "functions": 231,
+      "functions": 272,
       "nullableStringAdapters": 2,
-      "packages": 28,
+      "packages": 32,
       "optionalScalarAdapters": 3,
-      "referenceCarriers": 62,
+      "referenceCarriers": 103,
       "requiredScalarOverrides": 53,
       "scalarOverrideRefusals": 0,
       "types": 3,
@@ -13047,7 +13338,7 @@
           "name": "generic-function"
         },
         {
-          "count": 685,
+          "count": 644,
           "name": "named"
         },
         {
@@ -13066,10 +13357,10 @@
       "compileProbes": 0,
       "cppAvailable": 4268,
       "cppUnavailable": 6979,
-      "functions": 638,
+      "functions": 597,
       "genericReferenceTemplateAdapters": 44,
       "haxeTypecheck": "pass",
-      "isolatedFunctionValueExterns": 1017,
+      "isolatedFunctionValueExterns": 976,
       "types": 3073,
       "values": 379
     },
@@ -13103,9 +13394,9 @@
       "unboundFunctionCandidates": 0
     },
     "packageStatus": {
-      "emitted-unbound": 124,
+      "emitted-unbound": 120,
       "empty-web-contract": 1,
-      "partial-native": 28
+      "partial-native": 32
     },
     "scalarExpansion": {
       "headerConfirmedFunctions": 183,

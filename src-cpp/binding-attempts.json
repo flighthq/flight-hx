@@ -3816,63 +3816,6 @@
     },
     {
       "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Clipboard_createClipboardWatch",
-      "header": "flight/clipboard/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::clipboard::create_clipboard_watch",
-      "package": "@flighthq/clipboard",
-      "publicName": "flight.Clipboard.createClipboardWatch",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier ClipboardWatch has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/clipboard/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Clipboard_detachClipboardWatch",
-      "header": "flight/clipboard/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::clipboard::detach_clipboard_watch",
-      "package": "@flighthq/clipboard",
-      "publicName": "flight.Clipboard.detachClipboardWatch",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier ClipboardWatch has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/clipboard/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Clipboard_disposeClipboardWatch",
-      "header": "flight/clipboard/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::clipboard::dispose_clipboard_watch",
-      "package": "@flighthq/clipboard",
-      "publicName": "flight.Clipboard.disposeClipboardWatch",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier ClipboardWatch has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/clipboard/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
         "array",
         "named"
       ],
@@ -5003,82 +4946,6 @@
       "carrierFamilies": [
         "named"
       ],
-      "externClass": "flight._cpp._attempt.Attempt_Device_createDeviceCapabilities",
-      "header": "flight/device/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::device::create_device_capabilities",
-      "package": "@flighthq/device",
-      "publicName": "flight.Device.createDeviceCapabilities",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier DeviceCapabilities has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/device/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Device_createDeviceDisplayMetrics",
-      "header": "flight/device/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::device::create_device_display_metrics",
-      "package": "@flighthq/device",
-      "publicName": "flight.Device.createDeviceDisplayMetrics",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier DeviceDisplayMetrics has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/device/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Device_createDeviceInfo",
-      "header": "flight/device/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::device::create_device_info",
-      "package": "@flighthq/device",
-      "publicName": "flight.Device.createDeviceInfo",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier DeviceInfo has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/device/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Device_createSafeAreaInsets",
-      "header": "flight/device/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::device::create_safe_area_insets",
-      "package": "@flighthq/device",
-      "publicName": "flight.Device.createSafeAreaInsets",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier SafeAreaInsets has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/device/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
       "externClass": "flight._cpp._attempt.Attempt_Device_getDeviceCapabilities",
       "header": "flight/device/contract.hpp",
       "kind": "function",
@@ -5289,25 +5156,6 @@
     },
     {
       "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Entity_createEntityRuntime",
-      "header": "flight/entity/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::entity::create_entity_runtime",
-      "package": "@flighthq/entity",
-      "publicName": "flight.Entity.createEntityRuntime",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier EntityRuntime has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/entity/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
         "dynamic",
         "generic-function",
         "named"
@@ -5321,25 +5169,6 @@
       "refusal": {
         "code": "unsupported-carrier",
         "message": "generic functions are not supported",
-        "phase": "planning"
-      },
-      "source": "packages/entity/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Entity_createGuardedEntityRuntime",
-      "header": "flight/entity/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::entity::create_guarded_entity_runtime",
-      "package": "@flighthq/entity",
-      "publicName": "flight.Entity.createGuardedEntityRuntime",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier EntityRuntime has no unique published C++ type locator",
         "phase": "planning"
       },
       "source": "packages/entity/src/contract.ts",
@@ -9645,25 +9474,6 @@
       "carrierFamilies": [
         "named"
       ],
-      "externClass": "flight._cpp._attempt.Attempt_Power_createPower",
-      "header": "flight/power/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::power::create_power",
-      "package": "@flighthq/power",
-      "publicName": "flight.Power.createPower",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Power has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/power/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
       "externClass": "flight._cpp._attempt.Attempt_Power_destroyPowerKeepAwake",
       "header": "flight/power/contract.hpp",
       "kind": "function",
@@ -9673,63 +9483,6 @@
       "refusal": {
         "code": "unsupported-carrier",
         "message": "rest parameters require the later Array carrier",
-        "phase": "planning"
-      },
-      "source": "packages/power/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Power_detachPower",
-      "header": "flight/power/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::power::detach_power",
-      "package": "@flighthq/power",
-      "publicName": "flight.Power.detachPower",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Power has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/power/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Power_disposePower",
-      "header": "flight/power/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::power::dispose_power",
-      "package": "@flighthq/power",
-      "publicName": "flight.Power.disposePower",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Power has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/power/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Power_enablePowerSignals",
-      "header": "flight/power/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::power::enable_power_signals",
-      "package": "@flighthq/power",
-      "publicName": "flight.Power.enablePowerSignals",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Power has no unique published C++ type locator",
         "phase": "planning"
       },
       "source": "packages/power/src/contract.ts",
@@ -9873,44 +9626,6 @@
       "carrierFamilies": [
         "named"
       ],
-      "externClass": "flight._cpp._attempt.Attempt_Power_makePowerBatteryHealth",
-      "header": "flight/power/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::power::make_power_battery_health",
-      "package": "@flighthq/power",
-      "publicName": "flight.Power.makePowerBatteryHealth",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier PowerBatteryHealth has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/power/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Power_makePowerStatus",
-      "header": "flight/power/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::power::make_power_status",
-      "package": "@flighthq/power",
-      "publicName": "flight.Power.makePowerStatus",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier PowerStatus has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/power/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
       "externClass": "flight._cpp._attempt.Attempt_Power_releasePowerKeepAwake",
       "header": "flight/power/contract.hpp",
       "kind": "function",
@@ -9947,25 +9662,6 @@
     },
     {
       "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Protocol_createProtocolHandler",
-      "header": "flight/protocol/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::protocol::create_protocol_handler",
-      "package": "@flighthq/protocol",
-      "publicName": "flight.Protocol.createProtocolHandler",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier ProtocolHandler has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/protocol/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
         "dynamic"
       ],
       "externClass": "flight._cpp._attempt.Attempt_Protocol_createProtocolUrl",
@@ -9977,44 +9673,6 @@
       "refusal": {
         "code": "unsupported-carrier",
         "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/protocol/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Protocol_detachProtocolHandler",
-      "header": "flight/protocol/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::protocol::detach_protocol_handler",
-      "package": "@flighthq/protocol",
-      "publicName": "flight.Protocol.detachProtocolHandler",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier ProtocolHandler has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/protocol/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Protocol_disposeProtocolHandler",
-      "header": "flight/protocol/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::protocol::dispose_protocol_handler",
-      "package": "@flighthq/protocol",
-      "publicName": "flight.Protocol.disposeProtocolHandler",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier ProtocolHandler has no unique published C++ type locator",
         "phase": "planning"
       },
       "source": "packages/protocol/src/contract.ts",
@@ -10756,120 +10414,6 @@
     },
     {
       "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Screen_createScreenInfo",
-      "header": "flight/screen/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::screen::create_screen_info",
-      "package": "@flighthq/screen",
-      "publicName": "flight.Screen.createScreenInfo",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier ScreenInfo has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/screen/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Screen_createScreenMode",
-      "header": "flight/screen/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::screen::create_screen_mode",
-      "package": "@flighthq/screen",
-      "publicName": "flight.Screen.createScreenMode",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier ScreenMode has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/screen/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Screen_createScreenPermissionChange",
-      "header": "flight/screen/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::screen::create_screen_permission_change",
-      "package": "@flighthq/screen",
-      "publicName": "flight.Screen.createScreenPermissionChange",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier ScreenPermissionChange has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/screen/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Screen_createScreenSignals",
-      "header": "flight/screen/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::screen::create_screen_signals",
-      "package": "@flighthq/screen",
-      "publicName": "flight.Screen.createScreenSignals",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier ScreenSignals has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/screen/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Screen_detachScreenPermissionChange",
-      "header": "flight/screen/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::screen::detach_screen_permission_change",
-      "package": "@flighthq/screen",
-      "publicName": "flight.Screen.detachScreenPermissionChange",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier ScreenPermissionChange has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/screen/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Screen_detachScreenSignals",
-      "header": "flight/screen/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::screen::detach_screen_signals",
-      "package": "@flighthq/screen",
-      "publicName": "flight.Screen.detachScreenSignals",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier ScreenSignals has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/screen/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
         "anonymous-structure",
         "named"
       ],
@@ -10902,44 +10446,6 @@
       "refusal": {
         "code": "unsupported-carrier",
         "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/screen/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Screen_disposeScreenPermissionChange",
-      "header": "flight/screen/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::screen::dispose_screen_permission_change",
-      "package": "@flighthq/screen",
-      "publicName": "flight.Screen.disposeScreenPermissionChange",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier ScreenPermissionChange has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/screen/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Screen_disposeScreenSignals",
-      "header": "flight/screen/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::screen::dispose_screen_signals",
-      "package": "@flighthq/screen",
-      "publicName": "flight.Screen.disposeScreenSignals",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier ScreenSignals has no unique published C++ type locator",
         "phase": "planning"
       },
       "source": "packages/screen/src/contract.ts",
@@ -11335,63 +10841,6 @@
     },
     {
       "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Sensors_computeEulerFromQuaternion",
-      "header": "flight/sensors/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::sensors::compute_euler_from_quaternion",
-      "package": "@flighthq/sensors",
-      "publicName": "flight.Sensors.computeEulerFromQuaternion",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier OrientationReading has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/sensors/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Sensors_computeGravityFromOrientation",
-      "header": "flight/sensors/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::sensors::compute_gravity_from_orientation",
-      "package": "@flighthq/sensors",
-      "publicName": "flight.Sensors.computeGravityFromOrientation",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier MotionReading has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/sensors/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Sensors_computeQuaternionFromOrientationReading",
-      "header": "flight/sensors/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::sensors::compute_quaternion_from_orientation_reading",
-      "package": "@flighthq/sensors",
-      "publicName": "flight.Sensors.computeQuaternionFromOrientationReading",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier QuaternionReading has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/sensors/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
         "array",
         "named"
       ],
@@ -11404,234 +10853,6 @@
       "refusal": {
         "code": "unsupported-carrier",
         "message": "type family array is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/sensors/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Sensors_computeScreenRelativeOrientation",
-      "header": "flight/sensors/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::sensors::compute_screen_relative_orientation",
-      "package": "@flighthq/sensors",
-      "publicName": "flight.Sensors.computeScreenRelativeOrientation",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier OrientationReading has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/sensors/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Sensors_computeWorldAccelerationFromDeviceAcceleration",
-      "header": "flight/sensors/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::sensors::compute_world_acceleration_from_device_acceleration",
-      "package": "@flighthq/sensors",
-      "publicName": "flight.Sensors.computeWorldAccelerationFromDeviceAcceleration",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier MotionReading has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/sensors/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Sensors_createAmbientLightReading",
-      "header": "flight/sensors/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::sensors::create_ambient_light_reading",
-      "package": "@flighthq/sensors",
-      "publicName": "flight.Sensors.createAmbientLightReading",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier AmbientLightReading has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/sensors/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Sensors_createMotionReading",
-      "header": "flight/sensors/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::sensors::create_motion_reading",
-      "package": "@flighthq/sensors",
-      "publicName": "flight.Sensors.createMotionReading",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier MotionReading has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/sensors/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Sensors_createOrientationReading",
-      "header": "flight/sensors/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::sensors::create_orientation_reading",
-      "package": "@flighthq/sensors",
-      "publicName": "flight.Sensors.createOrientationReading",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier OrientationReading has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/sensors/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Sensors_createPressureReading",
-      "header": "flight/sensors/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::sensors::create_pressure_reading",
-      "package": "@flighthq/sensors",
-      "publicName": "flight.Sensors.createPressureReading",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier PressureReading has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/sensors/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Sensors_createProximityReading",
-      "header": "flight/sensors/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::sensors::create_proximity_reading",
-      "package": "@flighthq/sensors",
-      "publicName": "flight.Sensors.createProximityReading",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier ProximityReading has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/sensors/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Sensors_createQuaternionReading",
-      "header": "flight/sensors/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::sensors::create_quaternion_reading",
-      "package": "@flighthq/sensors",
-      "publicName": "flight.Sensors.createQuaternionReading",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier QuaternionReading has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/sensors/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Sensors_createRotationRateReading",
-      "header": "flight/sensors/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::sensors::create_rotation_rate_reading",
-      "package": "@flighthq/sensors",
-      "publicName": "flight.Sensors.createRotationRateReading",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier RotationRateReading has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/sensors/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Sensors_createSensors",
-      "header": "flight/sensors/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::sensors::create_sensors",
-      "package": "@flighthq/sensors",
-      "publicName": "flight.Sensors.createSensors",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Sensors has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/sensors/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Sensors_detachSensors",
-      "header": "flight/sensors/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::sensors::detach_sensors",
-      "package": "@flighthq/sensors",
-      "publicName": "flight.Sensors.detachSensors",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Sensors has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/sensors/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Sensors_disposeSensors",
-      "header": "flight/sensors/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::sensors::dispose_sensors",
-      "package": "@flighthq/sensors",
-      "publicName": "flight.Sensors.disposeSensors",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Sensors has no unique published C++ type locator",
         "phase": "planning"
       },
       "source": "packages/sensors/src/contract.ts",
@@ -19683,7 +18904,7 @@
   },
   "schema": "flight-hx-native-binding-attempts/1",
   "summary": {
-    "functions": 638,
+    "functions": 597,
     "carrierFamilies": [
       {
         "count": 80,
@@ -19706,7 +18927,7 @@
         "name": "generic-function"
       },
       {
-        "count": 685,
+        "count": 644,
         "name": "named"
       },
       {
@@ -19723,8 +18944,8 @@
       }
     ],
     "holders": 42,
-    "isolatedExterns": 1017,
-    "total": 1017,
+    "isolatedExterns": 976,
+    "total": 976,
     "values": 379
   }
 }

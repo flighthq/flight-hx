@@ -7,6 +7,14 @@ inline function areEntityRuntimeGuardsEnabled():Bool {
   return flight._cpp._fn.Entity.areEntityRuntimeGuardsEnabled();
 }
 
+extern inline function createEntityRuntime():flight.EntityRuntime {
+  return flight._cpp._fn.Entity.createEntityRuntime();
+}
+
+extern inline function createGuardedEntityRuntime(runtime:flight.EntityRuntime):flight.EntityRuntime {
+  return flight._cpp._fn.Entity.createGuardedEntityRuntime(runtime);
+}
+
 inline function disableEntityRuntimeGuards():Void {
   flight._cpp._fn.Entity.disableEntityRuntimeGuards();
 }
@@ -27,16 +35,8 @@ extern inline function cloneEntity<Type>(source:Type):Type {
   return flight._cpp._attempt.Attempt_Entity_cloneEntity.cloneEntity(source);
 }
 
-extern inline function createEntityRuntime():flight.EntityRuntime {
-  return flight._cpp._attempt.Attempt_Entity_createEntityRuntime.createEntityRuntime();
-}
-
 extern inline function createGuardedEntity<Type:Dynamic>(entity:Dynamic):Dynamic {
   return flight._cpp._attempt.Attempt_Entity_createGuardedEntity.createGuardedEntity(entity);
-}
-
-extern inline function createGuardedEntityRuntime(runtime:flight.EntityRuntime):flight.EntityRuntime {
-  return flight._cpp._attempt.Attempt_Entity_createGuardedEntityRuntime.createGuardedEntityRuntime(runtime);
 }
 
 extern inline function detachEntityBinding(entity:flight.Entity):Void {

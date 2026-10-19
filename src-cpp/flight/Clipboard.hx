@@ -1,24 +1,24 @@
 // Generated from src-cpp/manifest.json and flight-compiler native-planning.json. Do not edit.
 package flight;
 
+extern inline function createClipboardWatch():flight.ClipboardWatch {
+  return flight._cpp._fn.Clipboard.createClipboardWatch();
+}
+
+extern inline function detachClipboardWatch(watch:flight.ClipboardWatch):Void {
+  flight._cpp._fn.Clipboard.detachClipboardWatch(watch);
+}
+
+extern inline function disposeClipboardWatch(watch:flight.ClipboardWatch):Void {
+  flight._cpp._fn.Clipboard.disposeClipboardWatch(watch);
+}
+
 extern inline function attachClipboardWatch(hostClipboardChange:{ ?subscribe:(()->Void)->(()->Void) }, watch:flight.ClipboardWatch):Void {
   flight._cpp._attempt.Attempt_Clipboard_attachClipboardWatch.attachClipboardWatch(hostClipboardChange, watch);
 }
 
 extern inline function clearClipboard(hostClipboardText:flight.HostClipboardTextCapability):flight._internal._Promise<Bool> {
   return flight._cpp._attempt.Attempt_Clipboard_clearClipboard.clearClipboard(hostClipboardText);
-}
-
-extern inline function createClipboardWatch():flight.ClipboardWatch {
-  return flight._cpp._attempt.Attempt_Clipboard_createClipboardWatch.createClipboardWatch();
-}
-
-extern inline function detachClipboardWatch(watch:flight.ClipboardWatch):Void {
-  flight._cpp._attempt.Attempt_Clipboard_detachClipboardWatch.detachClipboardWatch(watch);
-}
-
-extern inline function disposeClipboardWatch(watch:flight.ClipboardWatch):Void {
-  flight._cpp._attempt.Attempt_Clipboard_disposeClipboardWatch.disposeClipboardWatch(watch);
 }
 
 extern inline function getClipboardFormats(hostClipboardFormats:flight.HostClipboardFormatsCapability):flight._internal._Promise<Array<String>> {

@@ -5,24 +5,24 @@ inline function isValidProtocolScheme(scheme:String):Bool {
   return flight._cpp._fn.Protocol.isValidProtocolScheme(scheme);
 }
 
+extern inline function createProtocolHandler():flight.ProtocolHandler {
+  return flight._cpp._fn.Protocol.createProtocolHandler();
+}
+
+extern inline function detachProtocolHandler(handler:flight.ProtocolHandler):Void {
+  flight._cpp._fn.Protocol.detachProtocolHandler(handler);
+}
+
+extern inline function disposeProtocolHandler(handler:flight.ProtocolHandler):Void {
+  flight._cpp._fn.Protocol.disposeProtocolHandler(handler);
+}
+
 extern inline function attachProtocolHandler(hostProtocolOpen:flight.HostProtocolOpenCapability, handler:flight.ProtocolHandler):Void {
   flight._cpp._attempt.Attempt_Protocol_attachProtocolHandler.attachProtocolHandler(hostProtocolOpen, handler);
 }
 
-extern inline function createProtocolHandler():flight.ProtocolHandler {
-  return flight._cpp._attempt.Attempt_Protocol_createProtocolHandler.createProtocolHandler();
-}
-
 extern inline function createProtocolUrl(parts:Dynamic):String {
   return flight._cpp._attempt.Attempt_Protocol_createProtocolUrl.createProtocolUrl(parts);
-}
-
-extern inline function detachProtocolHandler(handler:flight.ProtocolHandler):Void {
-  flight._cpp._attempt.Attempt_Protocol_detachProtocolHandler.detachProtocolHandler(handler);
-}
-
-extern inline function disposeProtocolHandler(handler:flight.ProtocolHandler):Void {
-  flight._cpp._attempt.Attempt_Protocol_disposeProtocolHandler.disposeProtocolHandler(handler);
 }
 
 extern inline function getProtocolLaunchUrl(hostProtocolLaunch:flight.HostProtocolLaunchCapability):Null<String> {

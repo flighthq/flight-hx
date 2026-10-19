@@ -2,8 +2,10 @@ import flight.Audio;
 import flight.Adjustments;
 import flight.Bitmap;
 import flight.Bitmapfont;
+import flight.Clipboard;
 import flight.Color;
 import flight.Collision;
+import flight.Device;
 import flight.Entity;
 import flight.Effects;
 import flight.FontFormats;
@@ -16,10 +18,12 @@ import flight.Math;
 import flight.Path;
 import flight.Power;
 import flight.Protocol;
+import flight.Screen;
 import flight.Scene2dFormats;
 import flight.Scene3dFormats;
 import flight.Shape;
 import flight.Skeleton2dFormats;
+import flight.Sensors;
 import flight.Spring;
 import flight.Swf;
 import flight.Textbidi;
@@ -180,6 +184,56 @@ class CrossTargetMath {
     assertTrue('empty key press', !wasInputKeyPressed(inputState, 0.0));
     assertTrue('empty key release', !wasInputKeyReleased(inputState, 0.0));
     endInputStateFrame(inputState);
+
+    final clipboardWatch = createClipboardWatch();
+    detachClipboardWatch(clipboardWatch);
+    disposeClipboardWatch(clipboardWatch);
+
+    createDeviceCapabilities();
+    createDeviceDisplayMetrics();
+    createDeviceInfo();
+    createSafeAreaInsets();
+
+    final entityRuntime = createEntityRuntime();
+    createGuardedEntityRuntime(entityRuntime);
+
+    final power = createPower();
+    enablePowerSignals(power);
+    makePowerBatteryHealth();
+    makePowerStatus();
+    detachPower(power);
+    disposePower(power);
+
+    final protocolHandler = createProtocolHandler();
+    detachProtocolHandler(protocolHandler);
+    disposeProtocolHandler(protocolHandler);
+
+    createScreenInfo();
+    createScreenMode();
+    final screenPermissionChange = createScreenPermissionChange();
+    final screenSignals = createScreenSignals();
+    detachScreenPermissionChange(screenPermissionChange);
+    detachScreenSignals(screenSignals);
+    disposeScreenPermissionChange(screenPermissionChange);
+    disposeScreenSignals(screenSignals);
+
+    createAmbientLightReading();
+    createPressureReading();
+    createProximityReading();
+    createRotationRateReading();
+    final motionOut = createMotionReading();
+    final motionInput = createMotionReading();
+    final orientationOut = createOrientationReading();
+    final orientationInput = createOrientationReading();
+    final quaternion = createQuaternionReading();
+    computeQuaternionFromOrientationReading(quaternion, orientationInput);
+    computeEulerFromQuaternion(orientationOut, quaternion);
+    computeGravityFromOrientation(motionOut, orientationInput);
+    computeScreenRelativeOrientation(orientationOut, orientationInput, 0.0);
+    computeWorldAccelerationFromDeviceAcceleration(motionOut, motionInput, quaternion);
+    final sensors = createSensors();
+    detachSensors(sensors);
+    disposeSensors(sensors);
 
     final colorOut = zeroes(4);
     clampLinearRgb(colorOut, -1.0, 0.5, 2.0);

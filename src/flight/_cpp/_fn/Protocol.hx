@@ -10,6 +10,7 @@ import flight.*;
 <set name="HXCPP_NO_CPP11" value="1" />
 <unset name="HXCPP_CPP11" />
 <files id="haxe">
+  <file name="${removeQuotes:flight_hx_root}/src-cpp/src/protocol.cpp" />
   <file name="${removeQuotes:flight_hx_root}/src-cpp/src/adapters/isValidProtocolScheme_74b6ecee.cpp" />
   <compilerflag value="/std:c++20" if="windows" />
   <compilerflag value="-std=c++20" unless="windows" />
@@ -24,8 +25,18 @@ import flight.*;
 </files>
 ')
 @:include("flight_hx/adapters/isValidProtocolScheme_74b6ecee.hpp")
+@:include("flight_hx/protocol.hpp")
 extern class Protocol {
   @:native("flight_hx::haxe::_cpp::isValidProtocolScheme_74b6ecee")
   static function isValidProtocolScheme(scheme:String):Bool;
+
+  @:native("flight_hx::protocol::create_protocol_handler")
+  static function createProtocolHandler():flight.ProtocolHandler;
+
+  @:native("flight_hx::protocol::detach_protocol_handler")
+  static function detachProtocolHandler(handler:flight.ProtocolHandler):Void;
+
+  @:native("flight_hx::protocol::dispose_protocol_handler")
+  static function disposeProtocolHandler(handler:flight.ProtocolHandler):Void;
 }
 #end

@@ -2,19 +2,19 @@
 package flight;
 
 extern inline function createDeviceCapabilities():flight.DeviceCapabilities {
-  return flight._cpp._attempt.Attempt_Device_createDeviceCapabilities.createDeviceCapabilities();
+  return flight._cpp._fn.Device.createDeviceCapabilities();
 }
 
 extern inline function createDeviceDisplayMetrics():flight.DeviceDisplayMetrics {
-  return flight._cpp._attempt.Attempt_Device_createDeviceDisplayMetrics.createDeviceDisplayMetrics();
+  return flight._cpp._fn.Device.createDeviceDisplayMetrics();
 }
 
 extern inline function createDeviceInfo():flight.DeviceInfo {
-  return flight._cpp._attempt.Attempt_Device_createDeviceInfo.createDeviceInfo();
+  return flight._cpp._fn.Device.createDeviceInfo();
 }
 
 extern inline function createSafeAreaInsets():flight.SafeAreaInsets {
-  return flight._cpp._attempt.Attempt_Device_createSafeAreaInsets.createSafeAreaInsets();
+  return flight._cpp._fn.Device.createSafeAreaInsets();
 }
 
 extern inline function getDeviceCapabilities(hostDevice:flight.HostDeviceCapability, out:flight.DeviceCapabilities):flight.DeviceCapabilities {

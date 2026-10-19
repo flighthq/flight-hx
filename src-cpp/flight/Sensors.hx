@@ -3,72 +3,72 @@ package flight;
 
 typedef Sensors = flight._cpp.Sensors;
 
+extern inline function computeEulerFromQuaternion(out:flight.OrientationReading, quaternion:flight.QuaternionReading):Void {
+  flight._cpp._fn.Sensors.computeEulerFromQuaternion(out, quaternion);
+}
+
+extern inline function computeGravityFromOrientation(out:flight.MotionReading, orientation:flight.OrientationReading):Void {
+  flight._cpp._fn.Sensors.computeGravityFromOrientation(out, orientation);
+}
+
+extern inline function computeQuaternionFromOrientationReading(out:flight.QuaternionReading, orientation:flight.OrientationReading):Void {
+  flight._cpp._fn.Sensors.computeQuaternionFromOrientationReading(out, orientation);
+}
+
+extern inline function computeScreenRelativeOrientation(out:flight.OrientationReading, orientation:flight.OrientationReading, screenAngle:Float):Void {
+  flight._cpp._fn.Sensors.computeScreenRelativeOrientation(out, orientation, screenAngle);
+}
+
+extern inline function computeWorldAccelerationFromDeviceAcceleration(out:flight.MotionReading, acceleration:flight.MotionReading, quaternion:flight.QuaternionReading):Void {
+  flight._cpp._fn.Sensors.computeWorldAccelerationFromDeviceAcceleration(out, acceleration, quaternion);
+}
+
+extern inline function createAmbientLightReading():flight.AmbientLightReading {
+  return flight._cpp._fn.Sensors.createAmbientLightReading();
+}
+
+extern inline function createMotionReading():flight.MotionReading {
+  return flight._cpp._fn.Sensors.createMotionReading();
+}
+
+extern inline function createOrientationReading():flight.OrientationReading {
+  return flight._cpp._fn.Sensors.createOrientationReading();
+}
+
+extern inline function createPressureReading():flight.PressureReading {
+  return flight._cpp._fn.Sensors.createPressureReading();
+}
+
+extern inline function createProximityReading():flight.ProximityReading {
+  return flight._cpp._fn.Sensors.createProximityReading();
+}
+
+extern inline function createQuaternionReading():flight.QuaternionReading {
+  return flight._cpp._fn.Sensors.createQuaternionReading();
+}
+
+extern inline function createRotationRateReading():flight.RotationRateReading {
+  return flight._cpp._fn.Sensors.createRotationRateReading();
+}
+
+extern inline function createSensors():flight.Sensors {
+  return flight._cpp._fn.Sensors.createSensors();
+}
+
+extern inline function detachSensors(sensors:flight.Sensors):Void {
+  flight._cpp._fn.Sensors.detachSensors(sensors);
+}
+
+extern inline function disposeSensors(sensors:flight.Sensors):Void {
+  flight._cpp._fn.Sensors.disposeSensors(sensors);
+}
+
 extern inline function attachSensors(hostSensors:flight.HostSensorsCapability, sensors:flight.Sensors):Void {
   flight._cpp._attempt.Attempt_Sensors_attachSensors.attachSensors(hostSensors, sensors);
 }
 
-extern inline function computeEulerFromQuaternion(out:flight.OrientationReading, quaternion:flight.QuaternionReading):Void {
-  flight._cpp._attempt.Attempt_Sensors_computeEulerFromQuaternion.computeEulerFromQuaternion(out, quaternion);
-}
-
-extern inline function computeGravityFromOrientation(out:flight.MotionReading, orientation:flight.OrientationReading):Void {
-  flight._cpp._attempt.Attempt_Sensors_computeGravityFromOrientation.computeGravityFromOrientation(out, orientation);
-}
-
-extern inline function computeQuaternionFromOrientationReading(out:flight.QuaternionReading, orientation:flight.OrientationReading):Void {
-  flight._cpp._attempt.Attempt_Sensors_computeQuaternionFromOrientationReading.computeQuaternionFromOrientationReading(out, orientation);
-}
-
 extern inline function computeRotationMatrixFromQuaternion(out:Array<Float>, quaternion:flight.QuaternionReading):Void {
   flight._cpp._attempt.Attempt_Sensors_computeRotationMatrixFromQuaternion.computeRotationMatrixFromQuaternion(out, quaternion);
-}
-
-extern inline function computeScreenRelativeOrientation(out:flight.OrientationReading, orientation:flight.OrientationReading, screenAngle:Float):Void {
-  flight._cpp._attempt.Attempt_Sensors_computeScreenRelativeOrientation.computeScreenRelativeOrientation(out, orientation, screenAngle);
-}
-
-extern inline function computeWorldAccelerationFromDeviceAcceleration(out:flight.MotionReading, acceleration:flight.MotionReading, quaternion:flight.QuaternionReading):Void {
-  flight._cpp._attempt.Attempt_Sensors_computeWorldAccelerationFromDeviceAcceleration.computeWorldAccelerationFromDeviceAcceleration(out, acceleration, quaternion);
-}
-
-extern inline function createAmbientLightReading():flight.AmbientLightReading {
-  return flight._cpp._attempt.Attempt_Sensors_createAmbientLightReading.createAmbientLightReading();
-}
-
-extern inline function createMotionReading():flight.MotionReading {
-  return flight._cpp._attempt.Attempt_Sensors_createMotionReading.createMotionReading();
-}
-
-extern inline function createOrientationReading():flight.OrientationReading {
-  return flight._cpp._attempt.Attempt_Sensors_createOrientationReading.createOrientationReading();
-}
-
-extern inline function createPressureReading():flight.PressureReading {
-  return flight._cpp._attempt.Attempt_Sensors_createPressureReading.createPressureReading();
-}
-
-extern inline function createProximityReading():flight.ProximityReading {
-  return flight._cpp._attempt.Attempt_Sensors_createProximityReading.createProximityReading();
-}
-
-extern inline function createQuaternionReading():flight.QuaternionReading {
-  return flight._cpp._attempt.Attempt_Sensors_createQuaternionReading.createQuaternionReading();
-}
-
-extern inline function createRotationRateReading():flight.RotationRateReading {
-  return flight._cpp._attempt.Attempt_Sensors_createRotationRateReading.createRotationRateReading();
-}
-
-extern inline function createSensors():flight.Sensors {
-  return flight._cpp._attempt.Attempt_Sensors_createSensors.createSensors();
-}
-
-extern inline function detachSensors(sensors:flight.Sensors):Void {
-  flight._cpp._attempt.Attempt_Sensors_detachSensors.detachSensors(sensors);
-}
-
-extern inline function disposeSensors(sensors:flight.Sensors):Void {
-  flight._cpp._attempt.Attempt_Sensors_disposeSensors.disposeSensors(sensors);
 }
 
 extern inline function getSensorsPermissionState(hostSensors:flight.HostSensorsCapability, ?sensor:Dynamic):flight._internal._Promise<flight.SensorsPermissionState> {

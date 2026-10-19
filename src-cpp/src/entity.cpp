@@ -8,6 +8,14 @@ bool are_entity_runtime_guards_enabled() {
   return flight::entity::are_entity_runtime_guards_enabled();
 }
 
+flight::Ref<flight::types::EntityRuntime> create_entity_runtime() {
+  return flight::entity::create_entity_runtime();
+}
+
+flight::Ref<flight::types::EntityRuntime> create_guarded_entity_runtime(flight::Ref<flight::types::EntityRuntime> runtime) {
+  return flight::entity::create_guarded_entity_runtime(runtime);
+}
+
 void disable_entity_runtime_guards() {
   flight::entity::disable_entity_runtime_guards();
 }

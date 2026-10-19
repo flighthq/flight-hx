@@ -30,5 +30,23 @@ extern class Power {
 
   @:native("flight_hx::power::set_power_idle_polling_interval_ms")
   static function setPowerIdlePollingIntervalMs(intervalMs:Float):Void;
+
+  @:native("flight_hx::power::create_power")
+  static function createPower():flight.Power;
+
+  @:native("flight_hx::power::detach_power")
+  static function detachPower(power:flight.Power):Void;
+
+  @:native("flight_hx::power::dispose_power")
+  static function disposePower(power:flight.Power):Void;
+
+  @:native("flight_hx::power::enable_power_signals")
+  static function enablePowerSignals(power:flight.Power):Void;
+
+  @:native("flight_hx::power::make_power_battery_health")
+  static function makePowerBatteryHealth():flight.PowerBatteryHealth;
+
+  @:native("flight_hx::power::make_power_status")
+  static function makePowerStatus():flight.PowerStatus;
 }
 #end

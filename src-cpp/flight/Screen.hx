@@ -1,6 +1,38 @@
 // Generated from src-cpp/manifest.json and flight-compiler native-planning.json. Do not edit.
 package flight;
 
+extern inline function createScreenInfo():flight.ScreenInfo {
+  return flight._cpp._fn.Screen.createScreenInfo();
+}
+
+extern inline function createScreenMode():flight.ScreenMode {
+  return flight._cpp._fn.Screen.createScreenMode();
+}
+
+extern inline function createScreenPermissionChange():flight.ScreenPermissionChange {
+  return flight._cpp._fn.Screen.createScreenPermissionChange();
+}
+
+extern inline function createScreenSignals():flight.ScreenSignals {
+  return flight._cpp._fn.Screen.createScreenSignals();
+}
+
+extern inline function detachScreenPermissionChange(permissionChange:flight.ScreenPermissionChange):Void {
+  flight._cpp._fn.Screen.detachScreenPermissionChange(permissionChange);
+}
+
+extern inline function detachScreenSignals(signals:flight.ScreenSignals):Void {
+  flight._cpp._fn.Screen.detachScreenSignals(signals);
+}
+
+extern inline function disposeScreenPermissionChange(permissionChange:flight.ScreenPermissionChange):Void {
+  flight._cpp._fn.Screen.disposeScreenPermissionChange(permissionChange);
+}
+
+extern inline function disposeScreenSignals(signals:flight.ScreenSignals):Void {
+  flight._cpp._fn.Screen.disposeScreenSignals(signals);
+}
+
 extern inline function attachScreenPermissionChange(hostScreenPermissionChange:flight.HostScreenPermissionChangeCapability, permissionChange:flight.ScreenPermissionChange):Void {
   flight._cpp._attempt.Attempt_Screen_attachScreenPermissionChange.attachScreenPermissionChange(hostScreenPermissionChange, permissionChange);
 }
@@ -9,44 +41,12 @@ extern inline function attachScreenSignals(hostScreenChange:flight.HostScreenCha
   flight._cpp._attempt.Attempt_Screen_attachScreenSignals.attachScreenSignals(hostScreenChange, signals);
 }
 
-extern inline function createScreenInfo():flight.ScreenInfo {
-  return flight._cpp._attempt.Attempt_Screen_createScreenInfo.createScreenInfo();
-}
-
-extern inline function createScreenMode():flight.ScreenMode {
-  return flight._cpp._attempt.Attempt_Screen_createScreenMode.createScreenMode();
-}
-
-extern inline function createScreenPermissionChange():flight.ScreenPermissionChange {
-  return flight._cpp._attempt.Attempt_Screen_createScreenPermissionChange.createScreenPermissionChange();
-}
-
-extern inline function createScreenSignals():flight.ScreenSignals {
-  return flight._cpp._attempt.Attempt_Screen_createScreenSignals.createScreenSignals();
-}
-
-extern inline function detachScreenPermissionChange(permissionChange:flight.ScreenPermissionChange):Void {
-  flight._cpp._attempt.Attempt_Screen_detachScreenPermissionChange.detachScreenPermissionChange(permissionChange);
-}
-
-extern inline function detachScreenSignals(signals:flight.ScreenSignals):Void {
-  flight._cpp._attempt.Attempt_Screen_detachScreenSignals.detachScreenSignals(signals);
-}
-
 extern inline function dipToScreenPoint(screen:flight.ScreenInfo, point:flight.Vector2Like, out:{ x:Float, y:Float }):{ x:Float, y:Float } {
   return flight._cpp._attempt.Attempt_Screen_dipToScreenPoint.dipToScreenPoint(screen, point, out);
 }
 
 extern inline function dipToScreenRect(screen:flight.ScreenInfo, rect:flight.RectangleLike, out:{ x:Float, y:Float, width:Float, height:Float }):{ x:Float, y:Float, width:Float, height:Float } {
   return flight._cpp._attempt.Attempt_Screen_dipToScreenRect.dipToScreenRect(screen, rect, out);
-}
-
-extern inline function disposeScreenPermissionChange(permissionChange:flight.ScreenPermissionChange):Void {
-  flight._cpp._attempt.Attempt_Screen_disposeScreenPermissionChange.disposeScreenPermissionChange(permissionChange);
-}
-
-extern inline function disposeScreenSignals(signals:flight.ScreenSignals):Void {
-  flight._cpp._attempt.Attempt_Screen_disposeScreenSignals.disposeScreenSignals(signals);
 }
 
 extern inline function getPrimaryScreen(hostScreenQuery:flight.HostScreenQueryCapability, out:flight.ScreenInfo):flight.ScreenInfo {

@@ -28,6 +28,12 @@ extern class Entity {
   @:native("flight_hx::entity::are_entity_runtime_guards_enabled")
   static function areEntityRuntimeGuardsEnabled():Bool;
 
+  @:native("flight_hx::entity::create_entity_runtime")
+  static function createEntityRuntime():flight.EntityRuntime;
+
+  @:native("flight_hx::entity::create_guarded_entity_runtime")
+  static function createGuardedEntityRuntime(runtime:flight.EntityRuntime):flight.EntityRuntime;
+
   @:native("flight_hx::entity::disable_entity_runtime_guards")
   static function disableEntityRuntimeGuards():Void;
 
