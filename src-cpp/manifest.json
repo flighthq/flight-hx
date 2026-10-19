@@ -15,14 +15,16 @@
     "overridePromotion": "dependency-complete-required-scalar-compile-run",
     "optionalOverridePromotion": "dependency-complete-optional-scalar-adapter-compile-run",
     "arrayFloatAdapterPromotion": "dependency-complete-array-float-copy-adapter-compile-run",
-    "nullableStringAdapterPromotion": "dependency-complete-nullable-string-copy-adapter-compile-run"
+    "nullableStringAdapterPromotion": "dependency-complete-nullable-string-copy-adapter-compile-run",
+    "referenceCarrierPromotion": "dependency-complete-reference-carrier-compile-run"
   },
   "cppStandard": 20,
   "corrections": [
     "flight-hx-hxcpp-flight-namespace-isolation/1",
     "flight-hx-hxcpp-cpp11-override/1",
     "flight-hx-hxcpp-array-float-copy-adapter/1",
-    "flight-hx-hxcpp-nullable-string-copy-adapter/1"
+    "flight-hx-hxcpp-nullable-string-copy-adapter/1",
+    "flight-hx-hxcpp-reference-carrier/1"
   ],
   "scalarOverrideRefusals": [],
   "hosts": [
@@ -277,6 +279,198 @@
           "native": "flight::bitmap::set_bitmap_color_matrix_identity",
           "header": "flight/bitmap/contract.hpp",
           "provenance": "flight-hx/array-float-copy-adapter/1"
+        },
+        {
+          "name": "applyBitmapLevels",
+          "native": "flight::bitmap::apply_bitmap_levels",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "cloneBitmap",
+          "native": "flight::bitmap::clone_bitmap",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "copyBitmapAlpha",
+          "native": "flight::bitmap::copy_bitmap_alpha",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "copyBitmapPixels",
+          "native": "flight::bitmap::copy_bitmap_pixels",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "createBitmap",
+          "native": "flight::bitmap::create_bitmap",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "createBitmapRegion",
+          "native": "flight::bitmap::create_bitmap_region",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "dissolveBitmapPixels",
+          "native": "flight::bitmap::dissolve_bitmap_pixels",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "equalizeBitmapHistogram",
+          "native": "flight::bitmap::equalize_bitmap_histogram",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "fillBitmapNoise",
+          "native": "flight::bitmap::fill_bitmap_noise",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "fillBitmapPerlinNoise",
+          "native": "flight::bitmap::fill_bitmap_perlin_noise",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "fillBitmapRectangle",
+          "native": "flight::bitmap::fill_bitmap_rectangle",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "fillBitmapTurbulence",
+          "native": "flight::bitmap::fill_bitmap_turbulence",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "flipBitmapHorizontal",
+          "native": "flight::bitmap::flip_bitmap_horizontal",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "flipBitmapVertical",
+          "native": "flight::bitmap::flip_bitmap_vertical",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "floodFillBitmap",
+          "native": "flight::bitmap::flood_fill_bitmap",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "getBitmapCoverage",
+          "native": "flight::bitmap::get_bitmap_coverage",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "getBitmapPixel",
+          "native": "flight::bitmap::get_bitmap_pixel",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "getBitmapPixelLuminance",
+          "native": "flight::bitmap::get_bitmap_pixel_luminance",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "getBitmapPixelRgb",
+          "native": "flight::bitmap::get_bitmap_pixel_rgb",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "invalidateBitmap",
+          "native": "flight::bitmap::invalidate_bitmap",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "mergeBitmap",
+          "native": "flight::bitmap::merge_bitmap",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "mergeBitmapChannels",
+          "native": "flight::bitmap::merge_bitmap_channels",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "multiplyBitmapAlpha",
+          "native": "flight::bitmap::multiply_bitmap_alpha",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "rotateBitmap180",
+          "native": "flight::bitmap::rotate_bitmap180",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "rotateBitmapClockwise",
+          "native": "flight::bitmap::rotate_bitmap_clockwise",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "rotateBitmapCounterClockwise",
+          "native": "flight::bitmap::rotate_bitmap_counter_clockwise",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "scrollBitmap",
+          "native": "flight::bitmap::scroll_bitmap",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "setBitmapAlpha",
+          "native": "flight::bitmap::set_bitmap_alpha",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "setBitmapPixel",
+          "native": "flight::bitmap::set_bitmap_pixel",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "setBitmapPixelRgb",
+          "native": "flight::bitmap::set_bitmap_pixel_rgb",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "setBitmapRegion",
+          "native": "flight::bitmap::set_bitmap_region",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "trimBitmap",
+          "native": "flight::bitmap::trim_bitmap",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
         }
       ]
     },

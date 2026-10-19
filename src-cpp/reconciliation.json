@@ -163,6 +163,40 @@
       "flight.Textbidi.reportTextBidiCompactTableMiss",
       "flight.Textsegment.reportTextSegmenterUnavailable",
       "flight.Textshaper.disposeTextShaperSignals"
+    ],
+    "referenceCarriers": [
+      "flight.Bitmap.applyBitmapLevels",
+      "flight.Bitmap.cloneBitmap",
+      "flight.Bitmap.copyBitmapAlpha",
+      "flight.Bitmap.copyBitmapPixels",
+      "flight.Bitmap.createBitmap",
+      "flight.Bitmap.createBitmapRegion",
+      "flight.Bitmap.dissolveBitmapPixels",
+      "flight.Bitmap.equalizeBitmapHistogram",
+      "flight.Bitmap.fillBitmapNoise",
+      "flight.Bitmap.fillBitmapPerlinNoise",
+      "flight.Bitmap.fillBitmapRectangle",
+      "flight.Bitmap.fillBitmapTurbulence",
+      "flight.Bitmap.flipBitmapHorizontal",
+      "flight.Bitmap.flipBitmapVertical",
+      "flight.Bitmap.floodFillBitmap",
+      "flight.Bitmap.getBitmapCoverage",
+      "flight.Bitmap.getBitmapPixel",
+      "flight.Bitmap.getBitmapPixelLuminance",
+      "flight.Bitmap.getBitmapPixelRgb",
+      "flight.Bitmap.invalidateBitmap",
+      "flight.Bitmap.mergeBitmap",
+      "flight.Bitmap.mergeBitmapChannels",
+      "flight.Bitmap.multiplyBitmapAlpha",
+      "flight.Bitmap.rotateBitmap180",
+      "flight.Bitmap.rotateBitmapClockwise",
+      "flight.Bitmap.rotateBitmapCounterClockwise",
+      "flight.Bitmap.scrollBitmap",
+      "flight.Bitmap.setBitmapAlpha",
+      "flight.Bitmap.setBitmapPixel",
+      "flight.Bitmap.setBitmapPixelRgb",
+      "flight.Bitmap.setBitmapRegion",
+      "flight.Bitmap.trimBitmap"
     ]
   },
   "packages": [
@@ -846,7 +880,7 @@
       "issues": [
         {
           "code": "native-function-gap",
-          "count": 97
+          "count": 65
         },
         {
           "code": "native-value-gap",
@@ -870,7 +904,7 @@
         },
         {
           "code": "native-materialized-unproven-functions",
-          "count": 97
+          "count": 65
         },
         {
           "code": "native-materialized-unproven-values",
@@ -879,6 +913,12 @@
       ],
       "nativeDefault": {
         "functions": [
+          {
+            "header": "flight/bitmap/contract.hpp",
+            "holder": "Bitmap",
+            "name": "applyBitmapLevels",
+            "native": "flight::bitmap::apply_bitmap_levels"
+          },
           {
             "header": "flight/bitmap/contract.hpp",
             "holder": "Bitmap",
@@ -924,21 +964,207 @@
           {
             "header": "flight/bitmap/contract.hpp",
             "holder": "Bitmap",
+            "name": "cloneBitmap",
+            "native": "flight::bitmap::clone_bitmap"
+          },
+          {
+            "header": "flight/bitmap/contract.hpp",
+            "holder": "Bitmap",
             "name": "concatBitmapColorMatrix",
             "native": "flight::bitmap::concat_bitmap_color_matrix"
           },
           {
             "header": "flight/bitmap/contract.hpp",
             "holder": "Bitmap",
+            "name": "copyBitmapAlpha",
+            "native": "flight::bitmap::copy_bitmap_alpha"
+          },
+          {
+            "header": "flight/bitmap/contract.hpp",
+            "holder": "Bitmap",
+            "name": "copyBitmapPixels",
+            "native": "flight::bitmap::copy_bitmap_pixels"
+          },
+          {
+            "header": "flight/bitmap/contract.hpp",
+            "holder": "Bitmap",
+            "name": "createBitmap",
+            "native": "flight::bitmap::create_bitmap"
+          },
+          {
+            "header": "flight/bitmap/contract.hpp",
+            "holder": "Bitmap",
+            "name": "createBitmapRegion",
+            "native": "flight::bitmap::create_bitmap_region"
+          },
+          {
+            "header": "flight/bitmap/contract.hpp",
+            "holder": "Bitmap",
+            "name": "dissolveBitmapPixels",
+            "native": "flight::bitmap::dissolve_bitmap_pixels"
+          },
+          {
+            "header": "flight/bitmap/contract.hpp",
+            "holder": "Bitmap",
+            "name": "equalizeBitmapHistogram",
+            "native": "flight::bitmap::equalize_bitmap_histogram"
+          },
+          {
+            "header": "flight/bitmap/contract.hpp",
+            "holder": "Bitmap",
+            "name": "fillBitmapNoise",
+            "native": "flight::bitmap::fill_bitmap_noise"
+          },
+          {
+            "header": "flight/bitmap/contract.hpp",
+            "holder": "Bitmap",
+            "name": "fillBitmapPerlinNoise",
+            "native": "flight::bitmap::fill_bitmap_perlin_noise"
+          },
+          {
+            "header": "flight/bitmap/contract.hpp",
+            "holder": "Bitmap",
+            "name": "fillBitmapRectangle",
+            "native": "flight::bitmap::fill_bitmap_rectangle"
+          },
+          {
+            "header": "flight/bitmap/contract.hpp",
+            "holder": "Bitmap",
+            "name": "fillBitmapTurbulence",
+            "native": "flight::bitmap::fill_bitmap_turbulence"
+          },
+          {
+            "header": "flight/bitmap/contract.hpp",
+            "holder": "Bitmap",
+            "name": "flipBitmapHorizontal",
+            "native": "flight::bitmap::flip_bitmap_horizontal"
+          },
+          {
+            "header": "flight/bitmap/contract.hpp",
+            "holder": "Bitmap",
+            "name": "flipBitmapVertical",
+            "native": "flight::bitmap::flip_bitmap_vertical"
+          },
+          {
+            "header": "flight/bitmap/contract.hpp",
+            "holder": "Bitmap",
+            "name": "floodFillBitmap",
+            "native": "flight::bitmap::flood_fill_bitmap"
+          },
+          {
+            "header": "flight/bitmap/contract.hpp",
+            "holder": "Bitmap",
+            "name": "getBitmapCoverage",
+            "native": "flight::bitmap::get_bitmap_coverage"
+          },
+          {
+            "header": "flight/bitmap/contract.hpp",
+            "holder": "Bitmap",
+            "name": "getBitmapPixel",
+            "native": "flight::bitmap::get_bitmap_pixel"
+          },
+          {
+            "header": "flight/bitmap/contract.hpp",
+            "holder": "Bitmap",
+            "name": "getBitmapPixelLuminance",
+            "native": "flight::bitmap::get_bitmap_pixel_luminance"
+          },
+          {
+            "header": "flight/bitmap/contract.hpp",
+            "holder": "Bitmap",
+            "name": "getBitmapPixelRgb",
+            "native": "flight::bitmap::get_bitmap_pixel_rgb"
+          },
+          {
+            "header": "flight/bitmap/contract.hpp",
+            "holder": "Bitmap",
+            "name": "invalidateBitmap",
+            "native": "flight::bitmap::invalidate_bitmap"
+          },
+          {
+            "header": "flight/bitmap/contract.hpp",
+            "holder": "Bitmap",
+            "name": "mergeBitmap",
+            "native": "flight::bitmap::merge_bitmap"
+          },
+          {
+            "header": "flight/bitmap/contract.hpp",
+            "holder": "Bitmap",
+            "name": "mergeBitmapChannels",
+            "native": "flight::bitmap::merge_bitmap_channels"
+          },
+          {
+            "header": "flight/bitmap/contract.hpp",
+            "holder": "Bitmap",
+            "name": "multiplyBitmapAlpha",
+            "native": "flight::bitmap::multiply_bitmap_alpha"
+          },
+          {
+            "header": "flight/bitmap/contract.hpp",
+            "holder": "Bitmap",
+            "name": "rotateBitmap180",
+            "native": "flight::bitmap::rotate_bitmap180"
+          },
+          {
+            "header": "flight/bitmap/contract.hpp",
+            "holder": "Bitmap",
+            "name": "rotateBitmapClockwise",
+            "native": "flight::bitmap::rotate_bitmap_clockwise"
+          },
+          {
+            "header": "flight/bitmap/contract.hpp",
+            "holder": "Bitmap",
+            "name": "rotateBitmapCounterClockwise",
+            "native": "flight::bitmap::rotate_bitmap_counter_clockwise"
+          },
+          {
+            "header": "flight/bitmap/contract.hpp",
+            "holder": "Bitmap",
+            "name": "scrollBitmap",
+            "native": "flight::bitmap::scroll_bitmap"
+          },
+          {
+            "header": "flight/bitmap/contract.hpp",
+            "holder": "Bitmap",
+            "name": "setBitmapAlpha",
+            "native": "flight::bitmap::set_bitmap_alpha"
+          },
+          {
+            "header": "flight/bitmap/contract.hpp",
+            "holder": "Bitmap",
             "name": "setBitmapColorMatrixIdentity",
             "native": "flight::bitmap::set_bitmap_color_matrix_identity"
+          },
+          {
+            "header": "flight/bitmap/contract.hpp",
+            "holder": "Bitmap",
+            "name": "setBitmapPixel",
+            "native": "flight::bitmap::set_bitmap_pixel"
+          },
+          {
+            "header": "flight/bitmap/contract.hpp",
+            "holder": "Bitmap",
+            "name": "setBitmapPixelRgb",
+            "native": "flight::bitmap::set_bitmap_pixel_rgb"
+          },
+          {
+            "header": "flight/bitmap/contract.hpp",
+            "holder": "Bitmap",
+            "name": "setBitmapRegion",
+            "native": "flight::bitmap::set_bitmap_region"
+          },
+          {
+            "header": "flight/bitmap/contract.hpp",
+            "holder": "Bitmap",
+            "name": "trimBitmap",
+            "native": "flight::bitmap::trim_bitmap"
           }
         ],
         "types": [],
         "values": []
       },
       "nativeAttempts": {
-        "functions": 97,
+        "functions": 65,
         "types": 1,
         "unavailableUpstream": 0,
         "values": 6
@@ -12577,10 +12803,11 @@
       "arrayFloatAdapters": 45,
       "boundHeaderConfirmedScalarFunctions": 114,
       "extensionTypes": 1,
-      "functions": 169,
+      "functions": 201,
       "nullableStringAdapters": 2,
       "packages": 27,
       "optionalScalarAdapters": 3,
+      "referenceCarriers": 32,
       "requiredScalarOverrides": 53,
       "scalarOverrideRefusals": 0,
       "types": 3,
@@ -12609,7 +12836,7 @@
           "name": "generic-function"
         },
         {
-          "count": 747,
+          "count": 715,
           "name": "named"
         },
         {
@@ -12628,10 +12855,10 @@
       "compileProbes": 0,
       "cppAvailable": 4268,
       "cppUnavailable": 6979,
-      "functions": 700,
+      "functions": 668,
       "genericReferenceTemplateAdapters": 44,
       "haxeTypecheck": "pass",
-      "isolatedFunctionValueExterns": 1079,
+      "isolatedFunctionValueExterns": 1047,
       "types": 3073,
       "values": 379
     },

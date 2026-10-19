@@ -19,6 +19,7 @@ const scalarOverrideProvenance = 'flight-hx/header-confirmed-scalar/1';
 const optionalScalarOverrideProvenance = 'flight-hx/header-confirmed-optional-scalar/1';
 const arrayFloatAdapterProvenance = 'flight-hx/array-float-copy-adapter/1';
 const nullableStringAdapterProvenance = 'flight-hx/nullable-string-copy-adapter/1';
+const referenceCarrierProvenance = 'flight-hx/reference-carrier/1';
 const nativePlanning = JSON.parse(readFileSync(path.join(repoRoot, 'generated', 'js', 'native-planning.json'), 'utf8'));
 const plannedFunctions = new Map(
   nativePlanning.declarations
@@ -45,6 +46,7 @@ const expectedCorrections = [
   'flight-hx-hxcpp-cpp11-override/1',
   'flight-hx-hxcpp-array-float-copy-adapter/1',
   'flight-hx-hxcpp-nullable-string-copy-adapter/1',
+  'flight-hx-hxcpp-reference-carrier/1',
 ];
 const expectedNativeHost = {
   module: 'flight.HostSdlGl',
@@ -218,6 +220,7 @@ function validateNativeManifest(flightCpp) {
         provenance === optionalScalarOverrideProvenance ||
         provenance === arrayFloatAdapterProvenance ||
         provenance === nullableStringAdapterProvenance ||
+        provenance === referenceCarrierProvenance ||
         plannedFunctions.get(`${module.module}.${name}`)?.transport === 'direct',
     );
     const directBridge =
@@ -229,7 +232,12 @@ function validateNativeManifest(flightCpp) {
           ]
             .map((filename) => readFileSync(filename, 'utf8'))
             .join('\n');
-    const facadeMembers = byName(parseModuleMembers(facade).functions);
+    // Reference-carrier facades are `extern inline`: this keeps hxcpp from
+    // materializing reflected wrappers (which top out at five arguments) while
+    // retaining the exact public signature at each call site. Normalize that
+    // modifier only for structural validation; the shared surface collector
+    // intentionally ignores unproven extern-inline attempts elsewhere.
+    const facadeMembers = byName(parseModuleMembers(facade.replace(/^extern inline /gmu, 'inline ')).functions);
     const nativeMembers = byName(
       parseModuleMembers(nativeExtern.replace(/^  @:/gmu, '@:').replace(/^  static /gmu, '')).functions,
     );
@@ -249,6 +257,9 @@ function validateNativeManifest(flightCpp) {
       } else if (binding.provenance === nullableStringAdapterProvenance) {
         if (plan) fail(`${publicName} downstream Null<String> adapter now overlaps the compiler native plan`);
         plan = { transport: 'nullable-string-adapter' };
+      } else if (binding.provenance === referenceCarrierProvenance) {
+        if (plan) fail(`${publicName} downstream reference carrier now overlaps the compiler native plan`);
+        plan = { transport: 'reference-carrier' };
       } else if (binding.provenance !== undefined) {
         fail(`${publicName} has unknown native provenance ${String(binding.provenance)}`);
       } else if (!plan) {
@@ -264,7 +275,8 @@ function validateNativeManifest(flightCpp) {
       if (!nativeMember) fail(`${module.module}.${binding.name} is absent from the hxcpp extern`);
       const expectedNativeSignature =
         plan.transport === 'optional-override' ||
-        (plan.transport === 'array-float-adapter' && jsMember.signature.includes('?'))
+        ((plan.transport === 'array-float-adapter' || plan.transport === 'reference-carrier') &&
+          jsMember.signature.includes('?'))
           ? optionalBridgeSignature(jsMember.signature)
           : jsMember.signature;
       if (facadeMember.signature !== jsMember.signature || nativeMember.signature !== expectedNativeSignature) {
@@ -283,7 +295,8 @@ function validateNativeManifest(flightCpp) {
         plan.transport === 'override' ||
         plan.transport === 'optional-override' ||
         plan.transport === 'array-float-adapter' ||
-        plan.transport === 'nullable-string-adapter'
+        plan.transport === 'nullable-string-adapter' ||
+        plan.transport === 'reference-carrier'
       ) {
         if (!directBridge.includes(`${binding.native}(`)) {
           fail(`${publicName} direct bridge does not call ${binding.native}`);

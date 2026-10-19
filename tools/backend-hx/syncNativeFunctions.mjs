@@ -26,6 +26,7 @@ const scalarOverrideProvenance = 'flight-hx/header-confirmed-scalar/1';
 const optionalScalarOverrideProvenance = 'flight-hx/header-confirmed-optional-scalar/1';
 const arrayFloatAdapterProvenance = 'flight-hx/array-float-copy-adapter/1';
 const nullableStringAdapterProvenance = 'flight-hx/nullable-string-copy-adapter/1';
+const referenceCarrierProvenance = 'flight-hx/reference-carrier/1';
 const flightCppHeaderStatuses = new Map(
   flightCppBestEffort.modules.map(({ path: header, status }) => [header, status]),
 );
@@ -71,9 +72,23 @@ if (
     `Unknown native Null<String> adapter policy ${String(manifest.haxeBindingPlan?.nullableStringAdapterPromotion)}`,
   );
 }
+if (
+  manifest.haxeBindingPlan?.referenceCarrierPromotion !==
+  'dependency-complete-reference-carrier-compile-run'
+) {
+  throw new Error(
+    `Unknown native reference carrier policy ${String(manifest.haxeBindingPlan?.referenceCarrierPromotion)}`,
+  );
+}
 const planned = new Map(
   planning.declarations
     .filter(({ kind }) => kind === 'function')
+    .map((declaration) => [declaration.publicName, declaration]),
+);
+const nativeReferenceTypes = new Map(
+  planning.declarations
+    .filter(({ headerStatus, kind, transport }) =>
+      kind === 'type' && transport === 'reference' && headerStatus === 'pass')
     .map((declaration) => [declaration.publicName, declaration]),
 );
 const publicFunctions = new Map(
@@ -170,6 +185,19 @@ for (const module of manifest.modules) {
         throw new Error(`${publicName} is now compiler-planned; remove its downstream Null<String> adapter`);
       }
       validateNullableStringAdapter(publicName, binding, declaration, parsed);
+      plan = {
+        headerStatus: 'pass',
+        include: binding.header,
+        kind: 'function',
+        nativeName: binding.native,
+        publicName,
+        transport: 'direct',
+      };
+    } else if (provenance === referenceCarrierProvenance) {
+      if (plan) {
+        throw new Error(`${publicName} is now compiler-planned; remove its downstream reference carrier`);
+      }
+      validateReferenceCarrier(publicName, binding, declaration, parsed);
       plan = {
         headerStatus: 'pass',
         include: binding.header,
@@ -310,7 +338,8 @@ process.stdout.write(
     `${String(manifestEntries.filter(({ provenance }) => provenance === scalarOverrideProvenance).length)} required scalar override, ` +
     `${String(manifestEntries.filter(({ provenance }) => provenance === optionalScalarOverrideProvenance).length)} optional scalar adapter, ` +
     `${String(manifestEntries.filter(({ provenance }) => provenance === arrayFloatAdapterProvenance).length)} array carrier adapter, ` +
-    `${String(manifestEntries.filter(({ provenance }) => provenance === nullableStringAdapterProvenance).length)} Null<String> adapter); ` +
+    `${String(manifestEntries.filter(({ provenance }) => provenance === nullableStringAdapterProvenance).length)} Null<String> adapter, ` +
+    `${String(manifestEntries.filter(({ provenance }) => provenance === referenceCarrierProvenance).length)} reference carrier); ` +
     `${String(unprovenAttempts.filter(({ publicHaxe }) => publicHaxe.kind === 'function').length)} unproven function attempt(s) and ` +
     `${String(unprovenAttempts.filter(({ publicHaxe }) => publicHaxe.kind === 'value').length)} unproven value attempt(s) across ` +
     `${String(new Set(unprovenAttempts.map(({ publicHaxe }) => publicHaxe.owner)).size)} holder(s).\n`,
@@ -328,7 +357,8 @@ function emitFacade(holder, bindings, nativeType, attempts = []) {
   }
   for (const binding of bindings) {
     const { declaration, parsed } = binding;
-    lines.push(`inline ${declaration.signature} {`);
+    const inlineKind = binding.provenance === referenceCarrierProvenance ? 'extern inline' : 'inline';
+    lines.push(`${inlineKind} ${declaration.signature} {`);
     const call = `flight._cpp._fn.${holder}.${declaration.name}(${facadeArguments(binding).join(', ')})`;
     lines.push(parsed.result === 'Void' ? `  ${call};` : `  return ${call};`);
     lines.push('}', '');
@@ -573,6 +603,57 @@ function validateNullableStringAdapter(publicName, binding, declaration, parsed)
   }
 }
 
+function validateReferenceCarrier(publicName, binding, declaration, parsed) {
+  if (flightCppHeaderStatuses.get(binding.header) !== 'emitted') {
+    throw new Error(`${publicName} reference carrier header is not dependency-complete: ${binding.header}`);
+  }
+  const types = [...parsed.parameters.map(({ type }) => type), parsed.result];
+  const referenceTypes = types.filter((type) => nativeReferenceTypes.has(type));
+  if (
+    referenceTypes.length === 0 ||
+    types.some((type) => !new Set(['Bool', 'Float', 'Void']).has(type) && !nativeReferenceTypes.has(type)) ||
+    parsed.parameters.some(({ optional, type }) => optional && nativeReferenceTypes.has(type))
+  ) {
+    throw new Error(`${publicName} is not a reference carrier plus primitive signature`);
+  }
+  const firstOptional = parsed.parameters.findIndex(({ optional }) => optional);
+  if (firstOptional >= 0 && parsed.parameters.slice(firstOptional).some(({ optional }) => !optional)) {
+    throw new Error(`${publicName} reference carrier has a required parameter after an optional parameter`);
+  }
+  const cppName = camelToSnake(declaration.sourceName);
+  if (!binding.native.endsWith(`::${cppName}`)) {
+    throw new Error(`${publicName} reference carrier native locator does not end in ${cppName}`);
+  }
+  const headerPath = path.join(flightCpp.directory, 'generated', 'include', binding.header);
+  if (!existsSync(headerPath)) {
+    throw new Error(`${publicName} reference carrier header is missing: ${binding.header}`);
+  }
+  const parameterPattern = parsed.parameters
+    .map(({ optional, type }) => {
+      if (nativeReferenceTypes.has(type)) {
+        const nativeType = cppType(type);
+        const structuralReadonly =
+          `flight::StructuralRef<flight::RowReadonly<flight::RowOf<${nativeType}>>>`;
+        return `(?:${escapeRegExp(nativeType)}|${escapeRegExp(structuralReadonly)})\\s+[A-Za-z_][A-Za-z0-9_]*`;
+      }
+      const typePattern = optional ? `std::optional<${cppType(type)}>` : cppType(type);
+      const defaultPattern = optional ? '\\s*=\\s*std::nullopt' : '';
+      return `${escapeRegExp(typePattern)}\\s+[A-Za-z_][A-Za-z0-9_]*${defaultPattern}`;
+    })
+    .join('\\s*,\\s*');
+  const signaturePattern = new RegExp(
+    `\\binline\\s+${escapeRegExp(cppType(parsed.result))}\\s+${escapeRegExp(cppName)}\\s*\\(${parameterPattern}\\)`,
+    'u',
+  );
+  const packageHeaders = filesUnder(path.dirname(headerPath))
+    .filter((filename) => filename.endsWith('.hpp'))
+    .map((filename) => readFileSync(filename, 'utf8'))
+    .join('\n');
+  if (!signaturePattern.test(packageHeaders)) {
+    throw new Error(`${publicName} reference carrier cannot find its exact native signature`);
+  }
+}
+
 function validateScalarOverrideRefusals(boundPublicNames) {
   const seen = new Set();
   for (const refusal of manifest.scalarOverrideRefusals ?? []) {
@@ -665,12 +746,24 @@ function nativeNamespace(module, bindings) {
 
 function emitBridgeHeader(module, bindings) {
   const namespace = nativeNamespace(module, bindings);
+  const referenceTypeNames = [...new Set(
+    bindings
+      .flatMap(({ parsed }) => [...parsed.parameters.map(({ type }) => type), parsed.result])
+      .map((type) => nativeReferenceTypes.get(type)?.nativeName)
+      .filter(Boolean)
+      .map((nativeName) => {
+        const match = /^flight::Ref<flight::types::([A-Za-z_][A-Za-z0-9_]*)>$/u.exec(nativeName);
+        if (!match) throw new Error(`Reference carrier cannot be forward-declared: ${nativeName}`);
+        return match[1];
+      }),
+  )].sort(compareText);
   const lines = [
     '// Generated from src-cpp/manifest.json and flight-compiler native-planning.json. Do not edit.',
     '#pragma once',
     ...(bindings.some((binding) => isArrayFloatAdapter(binding) || isNullableStringAdapter(binding))
       ? ['#include <hxcpp.h>']
       : []),
+    ...(referenceTypeNames.length > 0 ? ['#include <flight_hx/types/reference_fwd.hpp>'] : []),
     '',
     '// Declaration-only boundary: no flight::* type enters hxcpp-generated namespace flight.',
     `namespace flight_hx::${namespace} {`,
@@ -859,7 +952,8 @@ function nativeArguments(binding) {
 function usesExpandedOptionalParameters(binding) {
   return (
     binding.provenance === optionalScalarOverrideProvenance ||
-    (binding.provenance === arrayFloatAdapterProvenance && binding.parsed.parameters.some(({ optional }) => optional))
+    (binding.provenance === arrayFloatAdapterProvenance && binding.parsed.parameters.some(({ optional }) => optional)) ||
+    (binding.provenance === referenceCarrierProvenance && binding.parsed.parameters.some(({ optional }) => optional))
   );
 }
 
@@ -1093,11 +1187,12 @@ function haxeZero(type) {
 }
 
 function parseSignature(signature) {
-  const match = /^function ([A-Za-z_][A-Za-z0-9_]*)\((.*)\):(Array<Array<Float>>|Array<Float>|Null<String>|Bool|Float|String|Void)$/u.exec(signature);
+  const typePattern = '(?:Array<Array<Float>>|Array<Float>|Null<String>|Bool|Float|String|Void|flight\\.[A-Z][A-Za-z0-9_]*)';
+  const match = new RegExp(`^function ([A-Za-z_][A-Za-z0-9_]*)\\((.*)\\):(${typePattern})$`, 'u').exec(signature);
   if (!match) throw new Error(`Native function has unsupported Haxe signature: ${signature}`);
   const parameters = match[2]
     ? match[2].split(', ').map((parameter) => {
-        const parsed = /^(\??)([A-Za-z_][A-Za-z0-9_]*):(Array<Array<Float>>|Array<Float>|Bool|Float|String)$/u.exec(parameter);
+        const parsed = new RegExp(`^(\\??)([A-Za-z_][A-Za-z0-9_]*):(${typePattern})$`, 'u').exec(parameter);
         if (!parsed) throw new Error(`Native function has unsupported parameter: ${parameter}`);
         return { name: parsed[2], optional: parsed[1] === '?', type: parsed[3] };
       })
@@ -1112,6 +1207,7 @@ function cppType(type) {
   if (type === 'Float') return 'double';
   if (type === 'Null<String>' || type === 'String') return '::String';
   if (type === 'Void') return 'void';
+  if (nativeReferenceTypes.has(type)) return nativeReferenceTypes.get(type).nativeName;
   throw new Error(`Unsupported native C++ carrier ${type}`);
 }
 

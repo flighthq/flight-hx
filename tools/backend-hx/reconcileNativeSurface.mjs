@@ -32,6 +32,7 @@ const requiredScalarOverrideProvenance = 'flight-hx/header-confirmed-scalar/1';
 const optionalScalarOverrideProvenance = 'flight-hx/header-confirmed-optional-scalar/1';
 const arrayFloatAdapterProvenance = 'flight-hx/array-float-copy-adapter/1';
 const nullableStringAdapterProvenance = 'flight-hx/nullable-string-copy-adapter/1';
+const referenceCarrierProvenance = 'flight-hx/reference-carrier/1';
 
 validatePins();
 validateCppInventory();
@@ -185,6 +186,9 @@ const arrayFloatAdapters = nativeOverrideFunctions.filter(
 const nullableStringAdapters = nativeOverrideFunctions.filter(
   ({ provenance }) => provenance === nullableStringAdapterProvenance,
 );
+const referenceCarriers = nativeOverrideFunctions.filter(
+  ({ provenance }) => provenance === referenceCarrierProvenance,
+);
 const bestEffortStatus = countBy(bestEffort.modules, ({ status }) => status);
 const statusCounts = countBy(packages, ({ status }) => status);
 const boundScalarKeys = new Set(nativeFunctions.map(({ holder, name }) => `${holder}\0${name}`));
@@ -247,6 +251,7 @@ const report = {
     optionalScalarAdapters: optionalScalarOverrides.map(({ publicName }) => publicName),
     refusals: nativeManifest.scalarOverrideRefusals ?? [],
     requiredScalarFunctions: requiredScalarOverrides.map(({ publicName }) => publicName),
+    referenceCarriers: referenceCarriers.map(({ publicName }) => publicName),
   },
   packages,
   pins: {
@@ -272,6 +277,7 @@ const report = {
       nullableStringAdapters: nullableStringAdapters.length,
       packages: new Set([...nativeFunctionIndex.keys(), ...nativeTypeIndex.keys()]).size,
       optionalScalarAdapters: optionalScalarOverrides.length,
+      referenceCarriers: referenceCarriers.length,
       requiredScalarOverrides: requiredScalarOverrides.length,
       scalarOverrideRefusals: (nativeManifest.scalarOverrideRefusals ?? []).length,
       types: nativeUpstreamTypes.size,

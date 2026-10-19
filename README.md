@@ -89,22 +89,23 @@ The complete 7,224-file transpiled tree compiles and executes on JavaScript usin
 
 Native integration starts from what the pinned current flight-cpp SDK actually provides, rather than waiting
 for full TS-to-Haxe transpilation or claiming parity it has not earned. `src-cpp/manifest.json` records
-169 compile-proven bindings across 26 public modules: 62 compiler-planned direct calls, four
+201 compile-proven bindings across 26 public modules: 62 compiler-planned direct calls, four
 compiler-emitted UTF-8 String adapters, 53 required-primitive overrides, and three optional-scalar
 adapters plus 45 flat/recursive `Array<Float>` copy adapters and two nullable-String adapters from
-dependency-complete flight-cpp headers. It also records the generated SDK's distinct
-source/compiler revisions, C++20, and the four downstream hxcpp/flight-cpp corrections. The current generated native
+dependency-complete flight-cpp headers, plus 32 reference-carrier bindings that retain
+`flight::Ref<T>` ownership. It also records the generated SDK's distinct source/compiler revisions,
+C++20, and the five downstream hxcpp/flight-cpp corrections. The current generated native
 SDK reports 2,574 emitted modules. The manifest remains the exact compile/run-proven partition; the
 default native Haxe root now also exposes a separately recorded attempt tier instead of hiding
 unproven declarations.
 The checked `src-cpp/reconciliation.json` splits that total into 1,902 dependency-complete and 672
 dependency-incomplete modules, alongside 577 refused modules. It reconciles every web package with
-the 169 bound functions, three upstream Scene2D handle types, one integration-only handle, and the
+the 201 bound functions, three upstream Scene2D handle types, one integration-only handle, and the
 remaining gaps. Of 11,247 public SDK rows, flight-cpp provides a locator for 4,268. All 3,073
 symbol-backed type attempts are materialized, including 894 declarations previously refused by the
 Haxe/C++ planner; 44 nested generic reference carriers use generated C++ alias templates. The same
-default `flight.*` root now contains the 116 locator-backed functions already in the proven
-partition plus 700 unproven function attempts and 379 unproven value attempts across 42 holders.
+default `flight.*` root now contains the 148 locator-backed functions already in the proven
+partition plus 668 unproven function attempts and 379 unproven value attempts across 42 holders.
 Each attempt forwards through its own hidden `extern inline` class, so importing one proven holder
 does not compile all of its experimental siblings; selecting an attempt still reaches its real
 Flight header and symbol.
@@ -119,7 +120,13 @@ they deliberately do not relabel it ABI-safe. The first concrete carrier seams a
 `flight::Array<double>`, preserve aliased arguments and optional-output identity, copy native
 mutations back into Haxe arrays, and execute through the installed-package gate on both C++ and
 ESM. Two more copy required strings into `flight::String` and map optional native results back to
-Haxe `Null<String>`. Carrier-family counts in
+Haxe `Null<String>`. Thirty-two Bitmap operations now pass `flight::Ref<T>` carriers without raw
+pointers or ownership loss; optional primitive arguments use explicit presence bits, and readonly
+structural views are accepted where flight-cpp does. These public native functions are
+`extern inline` because hxcpp's reflected static-function wrappers stop at five arguments, while
+call-site inlining preserves the complete Flight signatures. The handles are pass-through values;
+direct Haxe `== null` comparison remains unsupported by hxcpp's native shared-reference trait.
+Carrier-family counts in
 `src-cpp/binding-attempts.json` make the next adapter work concrete. The reconciliation still identifies 69 unpromoted scalar functions across 32 packages;
 header presence or type-check success never silently promotes an attempt to compile-proven support.
 The compiler-owned dual plan covers all 11,247 public rows and emits 2,245 Haxe-C++ declarations.

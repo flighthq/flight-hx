@@ -28,7 +28,11 @@ required-primitive signature, plus separately proven optional-scalar adapters th
 function. The same manifest-first boundary generates proven flat and recursive `Array<Float>` copy
 adapters with argument-alias preservation, optional-output identity, and mutation copy-back. It
 also copies required Haxe strings into `flight::String` and maps nullable native string results back
-to `Null<String>`. Schema, compiler revision, locator, carrier, emitted adapter body, header status,
+to `Null<String>`. Reference-carrier bindings retain `flight::Ref<T>` ownership, encode optional
+primitive presence explicitly, accept exact or readonly structural-reference inputs, and use a
+struct-only forward-declaration header so C++ aliases and the full Flight type contract never leak
+into hxcpp-generated namespaces. Their public facade is call-site-only `extern inline` to support
+signatures beyond hxcpp's reflected-wrapper arity. Schema, compiler revision, locator, carrier, emitted adapter body, header status,
 provenance, and web signature drift all fail loudly.
 Failed compile probes remain manifest-recorded scalar override refusals; an emitted or
 dependency-complete inventory status never silently becomes Haxe support.

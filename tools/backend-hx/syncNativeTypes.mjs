@@ -100,6 +100,16 @@ const hostCarriers = [
 ];
 
 const expected = new Map();
+const forwardReferenceTypeNames = [...new Set(
+  declarations.flatMap((declaration) => {
+    const match = referenceForwardName(declaration);
+    return match ? [match] : [];
+  }),
+)].sort(compareText);
+expected.set(
+  path.join(root, 'src-cpp', 'include', 'flight_hx', 'types', 'reference_fwd.hpp'),
+  emitReferenceForwardHeader(forwardReferenceTypeNames),
+);
 for (const declaration of declarations) {
   const match = /^flight\.([A-Za-z_][A-Za-z0-9_]*)$/u.exec(declaration.publicName);
   if (!match) throw new Error(`Native type has unsupported public name ${declaration.publicName}`);
@@ -244,11 +254,33 @@ function emitHiddenType(name, declaration) {
     '',
     '#if cpp',
     ownership,
-    `@:include(${JSON.stringify(declaration.templateAdapter?.include ?? declaration.include)})`,
+    `@:include(${JSON.stringify(referenceForwardName(declaration) ? 'flight_hx/types/reference_fwd.hpp' : declaration.templateAdapter?.include ?? declaration.include)})`,
     `@:native(${JSON.stringify(declaration.nativeName)})`,
     '@:structAccess',
     `extern class ${name}${declaration.typeShape.externParameters} {}`,
     '#end',
+    '',
+  ].join('\n');
+}
+
+function referenceForwardName(declaration) {
+  if (declaration.transport !== 'reference' || declaration.templateAdapter) return undefined;
+  const name = /^flight::Ref<flight::types::([A-Za-z_][A-Za-z0-9_]*)>$/u.exec(declaration.nativeName)?.[1];
+  // A C++ alias cannot be redeclared as a struct. Keep aliases on their defining
+  // header until they receive a purpose-built thin adapter; only real structs can
+  // safely share the dependency-light forward-declaration header.
+  return name && cppDefinitions.structs.has(name) ? name : undefined;
+}
+
+function emitReferenceForwardHeader(names) {
+  return [
+    generatedMarker.trimEnd(),
+    '#pragma once',
+    '#include <flight/reference.hpp>',
+    '',
+    'namespace flight::types {',
+    ...names.map((name) => `struct ${name};`),
+    '} // namespace flight::types',
     '',
   ].join('\n');
 }

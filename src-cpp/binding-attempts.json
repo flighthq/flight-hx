@@ -1940,25 +1940,6 @@
     },
     {
       "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Bitmap_applyBitmapLevels",
-      "header": "flight/bitmap/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::bitmap::apply_bitmap_levels",
-      "package": "@flighthq/bitmap",
-      "publicName": "flight.Bitmap.applyBitmapLevels",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/bitmap/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
         "array",
         "named",
         "nullable"
@@ -2155,25 +2136,6 @@
     },
     {
       "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Bitmap_cloneBitmap",
-      "header": "flight/bitmap/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::bitmap::clone_bitmap",
-      "package": "@flighthq/bitmap",
-      "publicName": "flight.Bitmap.cloneBitmap",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/bitmap/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
         "array",
         "named",
         "typed-array"
@@ -2353,25 +2315,6 @@
       "carrierFamilies": [
         "named"
       ],
-      "externClass": "flight._cpp._attempt.Attempt_Bitmap_copyBitmapAlpha",
-      "header": "flight/bitmap/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::bitmap::copy_bitmap_alpha",
-      "package": "@flighthq/bitmap",
-      "publicName": "flight.Bitmap.copyBitmapAlpha",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/bitmap/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
       "externClass": "flight._cpp._attempt.Attempt_Bitmap_copyBitmapChannel",
       "header": "flight/bitmap/contract.hpp",
       "kind": "function",
@@ -2381,44 +2324,6 @@
       "refusal": {
         "code": "unsupported-carrier",
         "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/bitmap/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Bitmap_copyBitmapPixels",
-      "header": "flight/bitmap/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::bitmap::copy_bitmap_pixels",
-      "package": "@flighthq/bitmap",
-      "publicName": "flight.Bitmap.copyBitmapPixels",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/bitmap/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Bitmap_createBitmap",
-      "header": "flight/bitmap/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::bitmap::create_bitmap",
-      "package": "@flighthq/bitmap",
-      "publicName": "flight.Bitmap.createBitmap",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "defaulted parameters need an exact C++ default-argument contract",
         "phase": "planning"
       },
       "source": "packages/bitmap/src/contract.ts",
@@ -2458,25 +2363,6 @@
       "refusal": {
         "code": "unsupported-carrier",
         "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/bitmap/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Bitmap_createBitmapRegion",
-      "header": "flight/bitmap/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::bitmap::create_bitmap_region",
-      "package": "@flighthq/bitmap",
-      "publicName": "flight.Bitmap.createBitmapRegion",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Bitmap has no unique published C++ type locator",
         "phase": "planning"
       },
       "source": "packages/bitmap/src/contract.ts",
@@ -2544,25 +2430,6 @@
     },
     {
       "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Bitmap_dissolveBitmapPixels",
-      "header": "flight/bitmap/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::bitmap::dissolve_bitmap_pixels",
-      "package": "@flighthq/bitmap",
-      "publicName": "flight.Bitmap.dissolveBitmapPixels",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/bitmap/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
         "named",
         "typed-array"
       ],
@@ -2593,25 +2460,6 @@
       "nativeName": "flight::bitmap::encode_bitmap",
       "package": "@flighthq/bitmap",
       "publicName": "flight.Bitmap.encodeBitmap",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/bitmap/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Bitmap_equalizeBitmapHistogram",
-      "header": "flight/bitmap/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::bitmap::equalize_bitmap_histogram",
-      "package": "@flighthq/bitmap",
-      "publicName": "flight.Bitmap.equalizeBitmapHistogram",
       "refusal": {
         "code": "unsupported-carrier",
         "message": "type family named is outside the Haxe C++ extern vertical slice",
@@ -2761,44 +2609,6 @@
     },
     {
       "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Bitmap_fillBitmapNoise",
-      "header": "flight/bitmap/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::bitmap::fill_bitmap_noise",
-      "package": "@flighthq/bitmap",
-      "publicName": "flight.Bitmap.fillBitmapNoise",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/bitmap/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Bitmap_fillBitmapPerlinNoise",
-      "header": "flight/bitmap/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::bitmap::fill_bitmap_perlin_noise",
-      "package": "@flighthq/bitmap",
-      "publicName": "flight.Bitmap.fillBitmapPerlinNoise",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/bitmap/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
         "named",
         "typed-array"
       ],
@@ -2811,101 +2621,6 @@
       "refusal": {
         "code": "unsupported-carrier",
         "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/bitmap/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Bitmap_fillBitmapRectangle",
-      "header": "flight/bitmap/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::bitmap::fill_bitmap_rectangle",
-      "package": "@flighthq/bitmap",
-      "publicName": "flight.Bitmap.fillBitmapRectangle",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/bitmap/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Bitmap_fillBitmapTurbulence",
-      "header": "flight/bitmap/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::bitmap::fill_bitmap_turbulence",
-      "package": "@flighthq/bitmap",
-      "publicName": "flight.Bitmap.fillBitmapTurbulence",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/bitmap/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Bitmap_flipBitmapHorizontal",
-      "header": "flight/bitmap/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::bitmap::flip_bitmap_horizontal",
-      "package": "@flighthq/bitmap",
-      "publicName": "flight.Bitmap.flipBitmapHorizontal",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/bitmap/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Bitmap_flipBitmapVertical",
-      "header": "flight/bitmap/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::bitmap::flip_bitmap_vertical",
-      "package": "@flighthq/bitmap",
-      "publicName": "flight.Bitmap.flipBitmapVertical",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/bitmap/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Bitmap_floodFillBitmap",
-      "header": "flight/bitmap/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::bitmap::flood_fill_bitmap",
-      "package": "@flighthq/bitmap",
-      "publicName": "flight.Bitmap.floodFillBitmap",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Bitmap has no unique published C++ type locator",
         "phase": "planning"
       },
       "source": "packages/bitmap/src/contract.ts",
@@ -2975,25 +2690,6 @@
       "carrierFamilies": [
         "named"
       ],
-      "externClass": "flight._cpp._attempt.Attempt_Bitmap_getBitmapCoverage",
-      "header": "flight/bitmap/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::bitmap::get_bitmap_coverage",
-      "package": "@flighthq/bitmap",
-      "publicName": "flight.Bitmap.getBitmapCoverage",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/bitmap/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
       "externClass": "flight._cpp._attempt.Attempt_Bitmap_getBitmapHistogram",
       "header": "flight/bitmap/contract.hpp",
       "kind": "function",
@@ -3034,69 +2730,12 @@
       "carrierFamilies": [
         "named"
       ],
-      "externClass": "flight._cpp._attempt.Attempt_Bitmap_getBitmapPixel",
-      "header": "flight/bitmap/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::bitmap::get_bitmap_pixel",
-      "package": "@flighthq/bitmap",
-      "publicName": "flight.Bitmap.getBitmapPixel",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/bitmap/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
       "externClass": "flight._cpp._attempt.Attempt_Bitmap_getBitmapPixelChannel",
       "header": "flight/bitmap/contract.hpp",
       "kind": "function",
       "nativeName": "flight::bitmap::get_bitmap_pixel_channel",
       "package": "@flighthq/bitmap",
       "publicName": "flight.Bitmap.getBitmapPixelChannel",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/bitmap/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Bitmap_getBitmapPixelLuminance",
-      "header": "flight/bitmap/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::bitmap::get_bitmap_pixel_luminance",
-      "package": "@flighthq/bitmap",
-      "publicName": "flight.Bitmap.getBitmapPixelLuminance",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/bitmap/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Bitmap_getBitmapPixelRgb",
-      "header": "flight/bitmap/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::bitmap::get_bitmap_pixel_rgb",
-      "package": "@flighthq/bitmap",
-      "publicName": "flight.Bitmap.getBitmapPixelRgb",
       "refusal": {
         "code": "unsupported-carrier",
         "message": "type family named is outside the Haxe C++ extern vertical slice",
@@ -3250,25 +2889,6 @@
     },
     {
       "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Bitmap_invalidateBitmap",
-      "header": "flight/bitmap/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::bitmap::invalidate_bitmap",
-      "package": "@flighthq/bitmap",
-      "publicName": "flight.Bitmap.invalidateBitmap",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Bitmap has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/bitmap/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
         "named",
         "typed-array"
       ],
@@ -3278,63 +2898,6 @@
       "nativeName": "flight::bitmap::median_bitmap",
       "package": "@flighthq/bitmap",
       "publicName": "flight.Bitmap.medianBitmap",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/bitmap/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Bitmap_mergeBitmap",
-      "header": "flight/bitmap/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::bitmap::merge_bitmap",
-      "package": "@flighthq/bitmap",
-      "publicName": "flight.Bitmap.mergeBitmap",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/bitmap/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Bitmap_mergeBitmapChannels",
-      "header": "flight/bitmap/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::bitmap::merge_bitmap_channels",
-      "package": "@flighthq/bitmap",
-      "publicName": "flight.Bitmap.mergeBitmapChannels",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/bitmap/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Bitmap_multiplyBitmapAlpha",
-      "header": "flight/bitmap/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::bitmap::multiply_bitmap_alpha",
-      "package": "@flighthq/bitmap",
-      "publicName": "flight.Bitmap.multiplyBitmapAlpha",
       "refusal": {
         "code": "unsupported-carrier",
         "message": "type family named is outside the Haxe C++ extern vertical slice",
@@ -3465,158 +3028,6 @@
     },
     {
       "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Bitmap_rotateBitmap180",
-      "header": "flight/bitmap/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::bitmap::rotate_bitmap180",
-      "package": "@flighthq/bitmap",
-      "publicName": "flight.Bitmap.rotateBitmap180",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/bitmap/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Bitmap_rotateBitmapClockwise",
-      "header": "flight/bitmap/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::bitmap::rotate_bitmap_clockwise",
-      "package": "@flighthq/bitmap",
-      "publicName": "flight.Bitmap.rotateBitmapClockwise",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/bitmap/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Bitmap_rotateBitmapCounterClockwise",
-      "header": "flight/bitmap/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::bitmap::rotate_bitmap_counter_clockwise",
-      "package": "@flighthq/bitmap",
-      "publicName": "flight.Bitmap.rotateBitmapCounterClockwise",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/bitmap/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Bitmap_scrollBitmap",
-      "header": "flight/bitmap/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::bitmap::scroll_bitmap",
-      "package": "@flighthq/bitmap",
-      "publicName": "flight.Bitmap.scrollBitmap",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Bitmap has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/bitmap/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Bitmap_setBitmapAlpha",
-      "header": "flight/bitmap/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::bitmap::set_bitmap_alpha",
-      "package": "@flighthq/bitmap",
-      "publicName": "flight.Bitmap.setBitmapAlpha",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/bitmap/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Bitmap_setBitmapPixel",
-      "header": "flight/bitmap/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::bitmap::set_bitmap_pixel",
-      "package": "@flighthq/bitmap",
-      "publicName": "flight.Bitmap.setBitmapPixel",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Bitmap has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/bitmap/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Bitmap_setBitmapPixelRgb",
-      "header": "flight/bitmap/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::bitmap::set_bitmap_pixel_rgb",
-      "package": "@flighthq/bitmap",
-      "publicName": "flight.Bitmap.setBitmapPixelRgb",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Bitmap has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/bitmap/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Bitmap_setBitmapRegion",
-      "header": "flight/bitmap/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::bitmap::set_bitmap_region",
-      "package": "@flighthq/bitmap",
-      "publicName": "flight.Bitmap.setBitmapRegion",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier BitmapRegion has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/bitmap/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
         "named",
         "typed-array"
       ],
@@ -3666,25 +3077,6 @@
       "nativeName": "flight::bitmap::transform_bitmap",
       "package": "@flighthq/bitmap",
       "publicName": "flight.Bitmap.transformBitmap",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/bitmap/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Bitmap_trimBitmap",
-      "header": "flight/bitmap/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::bitmap::trim_bitmap",
-      "package": "@flighthq/bitmap",
-      "publicName": "flight.Bitmap.trimBitmap",
       "refusal": {
         "code": "unsupported-carrier",
         "message": "type family named is outside the Haxe C++ extern vertical slice",
@@ -20861,7 +20253,7 @@
   },
   "schema": "flight-hx-native-binding-attempts/1",
   "summary": {
-    "functions": 700,
+    "functions": 668,
     "carrierFamilies": [
       {
         "count": 80,
@@ -20884,7 +20276,7 @@
         "name": "generic-function"
       },
       {
-        "count": 747,
+        "count": 715,
         "name": "named"
       },
       {
@@ -20901,8 +20293,8 @@
       }
     ],
     "holders": 42,
-    "isolatedExterns": 1079,
-    "total": 1079,
+    "isolatedExterns": 1047,
+    "total": 1047,
     "values": 379
   }
 }
