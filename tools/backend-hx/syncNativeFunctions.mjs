@@ -617,9 +617,13 @@ function validateReferenceCarrier(publicName, binding, declaration, parsed) {
   if (
     referenceTypes.length === 0 ||
     types.some(
-      (type) => !new Set(['Bool', 'Float', 'String', 'Null<String>', 'Void']).has(type) && !isReferenceCarrierType(type),
+      (type) =>
+        !new Set(['Bool', 'Float', 'String', 'Null<Float>', 'Null<String>', 'Void']).has(type) &&
+        !isReferenceCarrierType(type),
     ) ||
-    parsed.parameters.some(({ type }) => nullableReferenceInner(type))
+    parsed.parameters.some(
+      ({ type }) => nullableReferenceInner(type) || type === 'Null<Float>' || type === 'Null<String>',
+    )
   ) {
     throw new Error(`${publicName} is not a reference carrier plus primitive signature`);
   }
@@ -793,7 +797,7 @@ function emitBridgeHeader(module, bindings) {
         isArrayFloatAdapter(binding) ||
         isNullableStringAdapter(binding) ||
         [...binding.parsed.parameters.map(({ type }) => type), binding.parsed.result].some(
-          (type) => type === 'String' || type === 'Null<String>',
+          (type) => type === 'Null<Float>' || type === 'String' || type === 'Null<String>',
         ),
     )
       ? ['#include <hxcpp.h>']
@@ -959,6 +963,9 @@ function emitBridgeSource(module, bindings) {
     if (nullableReferenceInner(parsed.result)) {
       lines.push(`  const auto result = ${call};`);
       lines.push(`  return result.has_value() ? ${cppType(parsed.result)}{result.value()} : ${cppType(parsed.result)}{};`);
+    } else if (parsed.result === 'Null<Float>') {
+      lines.push(`  const auto result = ${call};`);
+      lines.push(`  return result.has_value() ? ${cppType(parsed.result)}{result.value()} : ${cppType(parsed.result)}{};`);
     } else if (parsed.result === 'Null<String>') {
       lines.push(`  const auto result = ${call};`);
       lines.push('  if (!result.has_value()) return null();');
@@ -1048,6 +1055,7 @@ function isReferenceCarrierType(type) {
 function nativeResultPattern(type) {
   const inner = nullableReferenceInner(type);
   if (inner) return escapeRegExp(`std::optional<${cppType(inner)}>`);
+  if (type === 'Null<Float>') return escapeRegExp('std::optional<double>');
   if (type === 'Null<String>') return escapeRegExp('std::optional<flight::String>');
   return escapeRegExp(flightCppType(type));
 }
@@ -1283,7 +1291,7 @@ function haxeZero(type) {
 }
 
 function parseSignature(signature) {
-  const typePattern = '(?:Array<Array<Float>>|Array<Float>|Null<String>|Null<flight\\.[A-Z][A-Za-z0-9_]*>|Bool|Float|String|Void|flight\\.[A-Z][A-Za-z0-9_]*)';
+  const typePattern = '(?:Array<Array<Float>>|Array<Float>|Null<Float>|Null<String>|Null<flight\\.[A-Z][A-Za-z0-9_]*>|Bool|Float|String|Void|flight\\.[A-Z][A-Za-z0-9_]*)';
   const match = new RegExp(`^function ([A-Za-z_][A-Za-z0-9_]*)\\((.*)\\):(${typePattern})$`, 'u').exec(signature);
   if (!match) throw new Error(`Native function has unsupported Haxe signature: ${signature}`);
   const parameters = match[2]
@@ -1301,6 +1309,7 @@ function cppType(type) {
   if (type === 'Array<Float>') return '::Array<double>';
   if (type === 'Bool') return 'bool';
   if (type === 'Float') return 'double';
+  if (type === 'Null<Float>') return '::hx::Null<double>';
   if (type === 'Null<String>' || type === 'String') return '::String';
   if (type === 'Void') return 'void';
   if (nullableReferenceInner(type)) {

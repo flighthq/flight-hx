@@ -316,7 +316,8 @@
       "flight.Spring.updateSpringAngle",
       "flight.Xml.parseXmlDocument",
       "flight.Xml.getXmlElementChildByName",
-      "flight.Xml.getXmlElementAttribute"
+      "flight.Xml.getXmlElementAttribute",
+      "flight.Xml.getXmlElementAttributeNumber"
     ]
   },
   "packages": [
@@ -13580,7 +13581,7 @@
       "issues": [
         {
           "code": "native-function-gap",
-          "count": 3
+          "count": 2
         },
         {
           "code": "non-scalar-signature-review",
@@ -13592,7 +13593,7 @@
         },
         {
           "code": "native-materialized-unproven-functions",
-          "count": 3
+          "count": 2
         }
       ],
       "nativeDefault": {
@@ -13602,6 +13603,12 @@
             "holder": "Xml",
             "name": "getXmlElementAttribute",
             "native": "flight::xml::get_xml_element_attribute"
+          },
+          {
+            "header": "flight/xml/contract.hpp",
+            "holder": "Xml",
+            "name": "getXmlElementAttributeNumber",
+            "native": "flight::xml::get_xml_element_attribute_number"
           },
           {
             "header": "flight/xml/contract.hpp",
@@ -13620,7 +13627,7 @@
         "values": []
       },
       "nativeAttempts": {
-        "functions": 3,
+        "functions": 2,
         "types": 0,
         "unavailableUpstream": 0,
         "values": 0
@@ -13654,11 +13661,11 @@
       "arrayFloatAdapters": 45,
       "boundHeaderConfirmedScalarFunctions": 114,
       "extensionTypes": 1,
-      "functions": 321,
+      "functions": 322,
       "nullableStringAdapters": 2,
       "packages": 38,
       "optionalScalarAdapters": 3,
-      "referenceCarriers": 152,
+      "referenceCarriers": 153,
       "requiredScalarOverrides": 53,
       "scalarOverrideRefusals": 0,
       "types": 3,
@@ -13687,11 +13694,11 @@
           "name": "generic-function"
         },
         {
-          "count": 595,
+          "count": 594,
           "name": "named"
         },
         {
-          "count": 61,
+          "count": 60,
           "name": "nullable"
         },
         {
@@ -13706,10 +13713,10 @@
       "compileProbes": 0,
       "cppAvailable": 4268,
       "cppUnavailable": 6979,
-      "functions": 548,
+      "functions": 547,
       "genericReferenceTemplateAdapters": 44,
       "haxeTypecheck": "pass",
-      "isolatedFunctionValueExterns": 927,
+      "isolatedFunctionValueExterns": 926,
       "types": 3073,
       "values": 379
     },

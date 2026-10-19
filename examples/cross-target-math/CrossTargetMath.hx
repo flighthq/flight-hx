@@ -175,6 +175,10 @@ class CrossTargetMath {
     assertTrue('XML parse', xmlRoot != null);
     if (xmlRoot != null) {
       assertString('XML attribute', getXmlElementAttribute(xmlRoot, 'answer'), '42');
+      final attributeNumber = getXmlElementAttributeNumber(xmlRoot, 'answer');
+      assertTrue('XML numeric attribute', attributeNumber != null);
+      if (attributeNumber != null) assertClose('XML numeric attribute value', attributeNumber, 42.0);
+      assertTrue('XML missing numeric attribute', getXmlElementAttributeNumber(xmlRoot, 'missing') == null);
       assertTrue('XML child lookup', getXmlElementChildByName(xmlRoot, 'child') != null);
       assertTrue('XML missing child', getXmlElementChildByName(xmlRoot, 'missing') == null);
     }

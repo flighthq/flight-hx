@@ -27,4 +27,9 @@ flight_hx::Ref<flight::types::XmlElement> get_xml_element_child_by_name(flight::
   return ::String::create(result_utf8.data(), static_cast<int>(result_utf8.size()));
 }
 
+::hx::Null<double> get_xml_element_attribute_number(flight::Ref<flight::types::XmlElement> element, ::String name) {
+  const auto result = flight::xml::get_xml_element_attribute_number(element, flight::String::from_utf8(name.utf8_str()));
+  return result.has_value() ? ::hx::Null<double>{result.value()} : ::hx::Null<double>{};
+}
+
 } // namespace flight_hx::xml

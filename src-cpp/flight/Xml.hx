@@ -14,7 +14,7 @@ extern inline function getXmlElementAttribute(element:flight.XmlElement, name:St
 }
 
 extern inline function getXmlElementAttributeNumber(element:flight.XmlElement, name:String):Null<Float> {
-  return flight._cpp._attempt.Attempt_Xml_getXmlElementAttributeNumber.getXmlElementAttributeNumber(element, name);
+  return flight._cpp._fn.Xml.getXmlElementAttributeNumber(element, name);
 }
 
 extern inline function getXmlElementChildrenByName(element:flight.XmlElement, name:String):Array<flight.XmlElement> {

@@ -2239,5 +2239,9 @@ template <typename T>
 struct CompareTraits<flight_hx::Ref<T>> {
   inline static bool isNull(const flight_hx::Ref<T>& value) noexcept { return !static_cast<bool>(value); }
 };
+template <typename T>
+struct CompareTraits<::hx::Null<T>> {
+  inline static bool isNull(const ::hx::Null<T>& value) noexcept { return value.isNull; }
+};
 } // namespace hx
 #endif

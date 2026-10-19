@@ -10,7 +10,7 @@ headers. Public facade overrides deliberately expose nothing outside that manife
 The current pin's generated SDK uses the same Flight revision as this repo and records its distinct
 flight-compiler revision (`806d257` versus flight-hx planning at `804435a`). It reports 2,574 emitted
 and 577 refused modules from 3,151 profile inputs across 153 packages. The exact general-purpose
-Haxe-callable partition remains intentionally smaller: 321 functions across 37 public modules. They
+Haxe-callable partition remains intentionally smaller: 322 functions across 37 public modules. They
 are compared with current web signatures, then compiled and executed from one Haxe source in the
 cross-target gate. Sixty-two bind directly from the compiler plan, four use compiler-emitted UTF-8
 String adapters, 53 required-primitive functions, and three optional-scalar adapters are explicit
@@ -18,11 +18,12 @@ flight-hx overrides from dependency-complete flight-cpp headers. Forty-five addi
 use the generated flat/recursive `Array<Float>` adapter, which copies between hxcpp and
 `flight::Array<double>`, preserves argument aliases and optional-output identity, and copies native
 mutations back. Two Audio functions copy required UTF-8 strings and map optional native results to
-Haxe `Null<String>`. Another 152 functions across 17 packages pass `flight::Ref<T>` carriers through
+Haxe `Null<String>`. Another 153 functions across 17 packages pass `flight::Ref<T>` carriers through
 without ownership loss, reconstruct optional primitive parameters from presence bits, preserve
 optional reference omission with a thin owning wrapper, map nullable reference results to Haxe
-`Null<T>`, copy string inputs and required/nullable UTF-8 results at the isolated bridge, and accept
-readonly structural-reference inputs where the native signature requires them.
+`Null<T>`, copy string inputs and required/nullable UTF-8 results at the isolated bridge, map optional
+native numbers to Haxe `Null<Float>`, and accept readonly structural-reference inputs where the native
+signature requires them.
 Expanding that partition remains manifest-first and compile-proven; the larger generated C++
 inventory is not silently claimed as Haxe support.
 
