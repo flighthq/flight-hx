@@ -4,6 +4,6 @@ import flight.Adjustments;
 // installed-package gate expects typing this consumer for cpp to fail at the public facade.
 class NativeUnsupportedApi {
   static function main():Void {
-    fuseColorMatrices([[1.0]]);
+    resolveColorAdjustmentsColorMatrix(null);
   }
 }

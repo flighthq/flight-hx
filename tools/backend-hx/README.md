@@ -25,10 +25,11 @@ direct functions and exact compiler-emitted adapters found in that plan. It also
 downstream scalar overrides only when a dependency-complete flight-cpp header contains the exact
 required-primitive signature, plus separately proven optional-scalar adapters that reconstruct
 `std::optional` from a primitive presence bit, when the compiler plan does not yet contain that
-function. The same manifest-first boundary generates proven `Array<Float>` copy adapters with
-argument-alias preservation, optional-output identity, and mutation copy-back. Schema,
-compiler revision, locator, carrier, emitted adapter body, header status, provenance, and web
-signature drift all fail loudly.
+function. The same manifest-first boundary generates proven flat and recursive `Array<Float>` copy
+adapters with argument-alias preservation, optional-output identity, and mutation copy-back. It
+also copies required Haxe strings into `flight::String` and maps nullable native string results back
+to `Null<String>`. Schema, compiler revision, locator, carrier, emitted adapter body, header status,
+provenance, and web signature drift all fail loudly.
 Failed compile probes remain manifest-recorded scalar override refusals; an emitted or
 dependency-complete inventory status never silently becomes Haxe support.
 `reconcileNativeSurface.mjs` then compares it with flight-cpp's best-effort/refusal inventories and

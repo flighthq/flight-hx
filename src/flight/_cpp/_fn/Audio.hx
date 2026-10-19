@@ -10,6 +10,7 @@ import flight.*;
 <set name="HXCPP_NO_CPP11" value="1" />
 <unset name="HXCPP_CPP11" />
 <files id="haxe">
+  <file name="${removeQuotes:flight_hx_root}/src-cpp/src/audio.cpp" />
   <file name="${removeQuotes:flight_hx_root}/src-cpp/src/adapters/getAudioMimeTypeEssence_3829c80c.cpp" />
   <compilerflag value="/std:c++20" if="windows" />
   <compilerflag value="-std=c++20" unless="windows" />
@@ -24,7 +25,14 @@ import flight.*;
 </files>
 ')
 @:include("flight_hx/adapters/getAudioMimeTypeEssence_3829c80c.hpp")
+@:include("flight_hx/audio.hpp")
 extern class Audio {
+  @:native("flight_hx::audio::get_audio_mime_type_parameter")
+  static function getAudioMimeTypeParameter(mimeType:String, name:String):Null<String>;
+
+  @:native("flight_hx::audio::infer_audio_mime_type")
+  static function inferAudioMimeType(url:String):Null<String>;
+
   @:native("flight_hx::haxe::_cpp::getAudioMimeTypeEssence_3829c80c")
   static function getAudioMimeTypeEssence(mimeType:String):String;
 }

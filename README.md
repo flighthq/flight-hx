@@ -89,22 +89,22 @@ The complete 7,224-file transpiled tree compiles and executes on JavaScript usin
 
 Native integration starts from what the pinned current flight-cpp SDK actually provides, rather than waiting
 for full TS-to-Haxe transpilation or claiming parity it has not earned. `src-cpp/manifest.json` records
-166 compile-proven bindings across 26 public modules: 62 compiler-planned direct calls, four
+169 compile-proven bindings across 26 public modules: 62 compiler-planned direct calls, four
 compiler-emitted UTF-8 String adapters, 53 required-primitive overrides, and three optional-scalar
-adapters plus 44 `Array<Float>` copy adapters from dependency-complete
-flight-cpp headers. It also records the generated SDK's
-distinct source/compiler revisions, C++20, and the three downstream hxcpp/flight-cpp corrections. The current generated native
+adapters plus 45 flat/recursive `Array<Float>` copy adapters and two nullable-String adapters from
+dependency-complete flight-cpp headers. It also records the generated SDK's distinct
+source/compiler revisions, C++20, and the four downstream hxcpp/flight-cpp corrections. The current generated native
 SDK reports 2,574 emitted modules. The manifest remains the exact compile/run-proven partition; the
 default native Haxe root now also exposes a separately recorded attempt tier instead of hiding
 unproven declarations.
 The checked `src-cpp/reconciliation.json` splits that total into 1,902 dependency-complete and 672
 dependency-incomplete modules, alongside 577 refused modules. It reconciles every web package with
-the 166 bound functions, three upstream Scene2D handle types, one integration-only handle, and the
+the 169 bound functions, three upstream Scene2D handle types, one integration-only handle, and the
 remaining gaps. Of 11,247 public SDK rows, flight-cpp provides a locator for 4,268. All 3,073
 symbol-backed type attempts are materialized, including 894 declarations previously refused by the
 Haxe/C++ planner; 44 nested generic reference carriers use generated C++ alias templates. The same
-default `flight.*` root now contains the 113 locator-backed functions already in the proven
-partition plus 703 unproven function attempts and 379 unproven value attempts across 42 holders.
+default `flight.*` root now contains the 116 locator-backed functions already in the proven
+partition plus 700 unproven function attempts and 379 unproven value attempts across 42 holders.
 Each attempt forwards through its own hidden `extern inline` class, so importing one proven holder
 does not compile all of its experimental siblings; selecting an attempt still reaches its real
 Flight header and symbol.
@@ -114,10 +114,12 @@ header investigation could never find another candidate—the existing downstrea
 demonstrate why locator availability and literal symbol existence must remain distinct.
 
 The attempt gates prove that this entire tree resolves and type-checks as Haxe for the C++ target;
-they deliberately do not relabel it ABI-safe. The first concrete carrier seam is now bridged:
-44 `Array<Float>` functions copy between hxcpp and `flight::Array<double>`, preserve aliased
-arguments and optional-output identity, copy native mutations back into Haxe arrays, and execute
-through the installed-package gate on both C++ and ESM. Carrier-family counts in
+they deliberately do not relabel it ABI-safe. The first concrete carrier seams are now bridged:
+45 functions copy flat or recursively nested `Array<Float>` values between hxcpp and
+`flight::Array<double>`, preserve aliased arguments and optional-output identity, copy native
+mutations back into Haxe arrays, and execute through the installed-package gate on both C++ and
+ESM. Two more copy required strings into `flight::String` and map optional native results back to
+Haxe `Null<String>`. Carrier-family counts in
 `src-cpp/binding-attempts.json` make the next adapter work concrete. The reconciliation still identifies 69 unpromoted scalar functions across 32 packages;
 header presence or type-check success never silently promotes an attempt to compile-proven support.
 The compiler-owned dual plan covers all 11,247 public rows and emits 2,245 Haxe-C++ declarations.

@@ -14,13 +14,15 @@
     "typeAttempt": "compiler-emitted-unproven-materialization",
     "overridePromotion": "dependency-complete-required-scalar-compile-run",
     "optionalOverridePromotion": "dependency-complete-optional-scalar-adapter-compile-run",
-    "arrayFloatAdapterPromotion": "dependency-complete-array-float-copy-adapter-compile-run"
+    "arrayFloatAdapterPromotion": "dependency-complete-array-float-copy-adapter-compile-run",
+    "nullableStringAdapterPromotion": "dependency-complete-nullable-string-copy-adapter-compile-run"
   },
   "cppStandard": 20,
   "corrections": [
     "flight-hx-hxcpp-flight-namespace-isolation/1",
     "flight-hx-hxcpp-cpp11-override/1",
-    "flight-hx-hxcpp-array-float-copy-adapter/1"
+    "flight-hx-hxcpp-array-float-copy-adapter/1",
+    "flight-hx-hxcpp-nullable-string-copy-adapter/1"
   ],
   "scalarOverrideRefusals": [],
   "hosts": [
@@ -66,6 +68,12 @@
         {
           "name": "concatColorMatrix",
           "native": "flight::adjustments::concat_color_matrix",
+          "header": "flight/adjustments/contract.hpp",
+          "provenance": "flight-hx/array-float-copy-adapter/1"
+        },
+        {
+          "name": "fuseColorMatrices",
+          "native": "flight::adjustments::fuse_color_matrices",
           "header": "flight/adjustments/contract.hpp",
           "provenance": "flight-hx/array-float-copy-adapter/1"
         },
@@ -194,6 +202,18 @@
     {
       "module": "flight.Audio",
       "functions": [
+        {
+          "name": "getAudioMimeTypeParameter",
+          "native": "flight::audio::get_audio_mime_type_parameter",
+          "header": "flight/audio/contract.hpp",
+          "provenance": "flight-hx/nullable-string-copy-adapter/1"
+        },
+        {
+          "name": "inferAudioMimeType",
+          "native": "flight::audio::infer_audio_mime_type",
+          "header": "flight/audio/contract.hpp",
+          "provenance": "flight-hx/nullable-string-copy-adapter/1"
+        },
         {
           "name": "getAudioMimeTypeEssence",
           "native": "flight::haxe::_cpp::getAudioMimeTypeEssence_3829c80c",

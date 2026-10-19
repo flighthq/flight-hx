@@ -7,6 +7,7 @@ namespace flight_hx::adjustments {
 
 double apply_color_matrix_to_color(::Array<double> matrix, double packedRgba);
 void concat_color_matrix(::Array<double> target, ::Array<double> source);
+::Array<double> fuse_color_matrices(::Array<::Array<double>> matrices);
 ::Array<double> create_brightness_color_matrix(double amount);
 ::Array<double> create_channel_mixer_color_matrix(::Array<double> redOut, ::Array<double> greenOut, ::Array<double> blueOut);
 ::Array<double> create_color_balance_color_matrix(::Array<double> shadows, ::Array<double> midtones, ::Array<double> highlights);

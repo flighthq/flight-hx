@@ -33,6 +33,63 @@ void replace_haxe_array(::Array<double> destination, const flight::Array<double>
   for (const double value : source) destination[index++] = value;
 }
 
+flight::Array<flight::Array<double>> to_flight_nested_array(const ::Array<::Array<double>>& source) {
+  flight::Array<flight::Array<double>> result;
+  for (int index = 0; index < source->length; ++index) {
+    bool reused = false;
+    for (int previous = 0; previous < index; ++previous) {
+      if (source[index].GetPtr() == source[previous].GetPtr()) {
+        result.push(result[static_cast<std::size_t>(previous)]);
+        reused = true;
+        break;
+      }
+    }
+    if (!reused) result.push(to_flight_array(source[index]));
+  }
+  return result;
+}
+
+::Array<::Array<double>> to_haxe_nested_array(const flight::Array<flight::Array<double>>& source) {
+  if (source.size() > static_cast<std::size_t>(std::numeric_limits<int>::max())) {
+    throw std::length_error("Flight Array exceeds the hxcpp Array length limit");
+  }
+  ::Array<::Array<double>> result = ::Array_obj<::Array<double>>::__new(static_cast<int>(source.size()));
+  for (std::size_t index = 0; index < source.size(); ++index) {
+    bool reused = false;
+    for (std::size_t previous = 0; previous < index; ++previous) {
+      if (source[index].identity() == source[previous].identity()) {
+        result[static_cast<int>(index)] = result[static_cast<int>(previous)];
+        reused = true;
+        break;
+      }
+    }
+    if (!reused) result[static_cast<int>(index)] = to_haxe_array(source[index]);
+  }
+  return result;
+}
+
+void replace_haxe_nested_array(::Array<::Array<double>> destination, const flight::Array<flight::Array<double>>& source) {
+  if (source.size() > static_cast<std::size_t>(std::numeric_limits<int>::max())) {
+    throw std::length_error("Flight Array exceeds the hxcpp Array length limit");
+  }
+  destination->resize(static_cast<int>(source.size()));
+  for (std::size_t index = 0; index < source.size(); ++index) {
+    bool reused = false;
+    for (std::size_t previous = 0; previous < index; ++previous) {
+      if (source[index].identity() == source[previous].identity()) {
+        destination[static_cast<int>(index)] = destination[static_cast<int>(previous)];
+        reused = true;
+        break;
+      }
+    }
+    if (reused) continue;
+    ::Array<double> item = destination[static_cast<int>(index)];
+    if (!item.GetPtr()) item = ::Array_obj<double>::__new();
+    replace_haxe_array(item, source[index]);
+    destination[static_cast<int>(index)] = item;
+  }
+}
+
 } // namespace
 
 double apply_color_matrix_to_color(::Array<double> matrix, double packedRgba) {
@@ -48,6 +105,13 @@ void concat_color_matrix(::Array<double> target, ::Array<double> source) {
   flight::adjustments::concat_color_matrix(flight_target, flight_source);
   replace_haxe_array(target, flight_target);
   replace_haxe_array(source, flight_source);
+}
+
+::Array<double> fuse_color_matrices(::Array<::Array<double>> matrices) {
+  auto flight_matrices = to_flight_nested_array(matrices);
+  auto result = flight::adjustments::fuse_color_matrices(flight_matrices);
+  replace_haxe_nested_array(matrices, flight_matrices);
+  return to_haxe_array(result);
 }
 
 ::Array<double> create_brightness_color_matrix(double amount) {

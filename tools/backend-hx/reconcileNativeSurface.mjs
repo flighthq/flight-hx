@@ -31,6 +31,7 @@ const refusalLedger = readJson(path.join(flightCpp.directory, 'generated', 'refu
 const requiredScalarOverrideProvenance = 'flight-hx/header-confirmed-scalar/1';
 const optionalScalarOverrideProvenance = 'flight-hx/header-confirmed-optional-scalar/1';
 const arrayFloatAdapterProvenance = 'flight-hx/array-float-copy-adapter/1';
+const nullableStringAdapterProvenance = 'flight-hx/nullable-string-copy-adapter/1';
 
 validatePins();
 validateCppInventory();
@@ -181,6 +182,9 @@ const optionalScalarOverrides = nativeOverrideFunctions.filter(
 const arrayFloatAdapters = nativeOverrideFunctions.filter(
   ({ provenance }) => provenance === arrayFloatAdapterProvenance,
 );
+const nullableStringAdapters = nativeOverrideFunctions.filter(
+  ({ provenance }) => provenance === nullableStringAdapterProvenance,
+);
 const bestEffortStatus = countBy(bestEffort.modules, ({ status }) => status);
 const statusCounts = countBy(packages, ({ status }) => status);
 const boundScalarKeys = new Set(nativeFunctions.map(({ holder, name }) => `${holder}\0${name}`));
@@ -239,6 +243,7 @@ const report = {
   },
   nativeOverrides: {
     arrayFloatAdapters: arrayFloatAdapters.map(({ publicName }) => publicName),
+    nullableStringAdapters: nullableStringAdapters.map(({ publicName }) => publicName),
     optionalScalarAdapters: optionalScalarOverrides.map(({ publicName }) => publicName),
     refusals: nativeManifest.scalarOverrideRefusals ?? [],
     requiredScalarFunctions: requiredScalarOverrides.map(({ publicName }) => publicName),
@@ -264,6 +269,7 @@ const report = {
       boundHeaderConfirmedScalarFunctions: boundScalarCandidates.length,
       extensionTypes: extensionTypeNames.length,
       functions: nativeFunctions.length,
+      nullableStringAdapters: nullableStringAdapters.length,
       packages: new Set([...nativeFunctionIndex.keys(), ...nativeTypeIndex.keys()]).size,
       optionalScalarAdapters: optionalScalarOverrides.length,
       requiredScalarOverrides: requiredScalarOverrides.length,

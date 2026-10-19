@@ -55,6 +55,7 @@
     "arrayFloatAdapters": [
       "flight.Adjustments.applyColorMatrixToColor",
       "flight.Adjustments.concatColorMatrix",
+      "flight.Adjustments.fuseColorMatrices",
       "flight.Adjustments.createBrightnessColorMatrix",
       "flight.Adjustments.createChannelMixerColorMatrix",
       "flight.Adjustments.createColorBalanceColorMatrix",
@@ -97,6 +98,10 @@
       "flight.Math.standardDeviation",
       "flight.Math.variance",
       "flight.Math.weightedAverage"
+    ],
+    "nullableStringAdapters": [
+      "flight.Audio.getAudioMimeTypeParameter",
+      "flight.Audio.inferAudioMimeType"
     ],
     "optionalScalarAdapters": [
       "flight.Math.approxEqual",
@@ -288,7 +293,7 @@
       "issues": [
         {
           "code": "native-function-gap",
-          "count": 42
+          "count": 41
         },
         {
           "code": "native-value-gap",
@@ -304,7 +309,7 @@
         },
         {
           "code": "native-materialized-unproven-functions",
-          "count": 42
+          "count": 41
         },
         {
           "code": "native-materialized-unproven-values",
@@ -436,6 +441,12 @@
           {
             "header": "flight/adjustments/contract.hpp",
             "holder": "Adjustments",
+            "name": "fuseColorMatrices",
+            "native": "flight::adjustments::fuse_color_matrices"
+          },
+          {
+            "header": "flight/adjustments/contract.hpp",
+            "holder": "Adjustments",
             "name": "isAffineColorMatrix",
             "native": "flight::adjustments::is_affine_color_matrix"
           },
@@ -450,7 +461,7 @@
         "values": []
       },
       "nativeAttempts": {
-        "functions": 42,
+        "functions": 41,
         "types": 0,
         "unavailableUpstream": 0,
         "values": 5
@@ -700,7 +711,7 @@
       "issues": [
         {
           "code": "native-function-gap",
-          "count": 34
+          "count": 32
         },
         {
           "code": "non-scalar-signature-review",
@@ -712,7 +723,7 @@
         },
         {
           "code": "native-materialized-unproven-functions",
-          "count": 34
+          "count": 32
         }
       ],
       "nativeDefault": {
@@ -722,13 +733,25 @@
             "holder": "Audio",
             "name": "getAudioMimeTypeEssence",
             "native": "flight::haxe::_cpp::getAudioMimeTypeEssence_3829c80c"
+          },
+          {
+            "header": "flight/audio/contract.hpp",
+            "holder": "Audio",
+            "name": "getAudioMimeTypeParameter",
+            "native": "flight::audio::get_audio_mime_type_parameter"
+          },
+          {
+            "header": "flight/audio/contract.hpp",
+            "holder": "Audio",
+            "name": "inferAudioMimeType",
+            "native": "flight::audio::infer_audio_mime_type"
           }
         ],
         "types": [],
         "values": []
       },
       "nativeAttempts": {
-        "functions": 34,
+        "functions": 32,
         "types": 0,
         "unavailableUpstream": 0,
         "values": 0
@@ -12551,10 +12574,11 @@
       "sourceModules": 3151
     },
     "nativeDefault": {
-      "arrayFloatAdapters": 44,
+      "arrayFloatAdapters": 45,
       "boundHeaderConfirmedScalarFunctions": 114,
       "extensionTypes": 1,
-      "functions": 166,
+      "functions": 169,
+      "nullableStringAdapters": 2,
       "packages": 27,
       "optionalScalarAdapters": 3,
       "requiredScalarOverrides": 53,
@@ -12569,7 +12593,7 @@
           "name": "anonymous-structure"
         },
         {
-          "count": 78,
+          "count": 77,
           "name": "array"
         },
         {
@@ -12589,7 +12613,7 @@
           "name": "named"
         },
         {
-          "count": 69,
+          "count": 67,
           "name": "nullable"
         },
         {
@@ -12604,10 +12628,10 @@
       "compileProbes": 0,
       "cppAvailable": 4268,
       "cppUnavailable": 6979,
-      "functions": 703,
+      "functions": 700,
       "genericReferenceTemplateAdapters": 44,
       "haxeTypecheck": "pass",
-      "isolatedFunctionValueExterns": 1082,
+      "isolatedFunctionValueExterns": 1079,
       "types": 3073,
       "values": 379
     },

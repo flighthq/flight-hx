@@ -9,6 +9,10 @@ inline function concatColorMatrix(target:Array<Float>, source:Array<Float>):Void
   flight._cpp._fn.Adjustments.concatColorMatrix(target, source);
 }
 
+inline function fuseColorMatrices(matrices:Array<Array<Float>>):Array<Float> {
+  return flight._cpp._fn.Adjustments.fuseColorMatrices(matrices);
+}
+
 inline function createBrightnessColorMatrix(amount:Float):Array<Float> {
   return flight._cpp._fn.Adjustments.createBrightnessColorMatrix(amount);
 }
@@ -185,10 +189,6 @@ extern inline function createSepiaAdjustment(?options:Dynamic):flight.SepiaAdjus
 
 extern inline function createTintAdjustment(rgba:Float):flight.TintAdjustment {
   return flight._cpp._attempt.Attempt_Adjustments_createTintAdjustment.createTintAdjustment(rgba);
-}
-
-extern inline function fuseColorMatrices(matrices:Array<Array<Float>>):Array<Float> {
-  return flight._cpp._attempt.Attempt_Adjustments_fuseColorMatrices.fuseColorMatrices(matrices);
 }
 
 extern inline function getAdjustmentColorMatrix(operation:{ kind:String }):Null<Array<Float>> {

@@ -25,6 +25,7 @@ const compilerPlanProvenance = 'flight-compiler/haxe-cpp-plan/1';
 const scalarOverrideProvenance = 'flight-hx/header-confirmed-scalar/1';
 const optionalScalarOverrideProvenance = 'flight-hx/header-confirmed-optional-scalar/1';
 const arrayFloatAdapterProvenance = 'flight-hx/array-float-copy-adapter/1';
+const nullableStringAdapterProvenance = 'flight-hx/nullable-string-copy-adapter/1';
 const flightCppHeaderStatuses = new Map(
   flightCppBestEffort.modules.map(({ path: header, status }) => [header, status]),
 );
@@ -60,6 +61,14 @@ if (
 ) {
   throw new Error(
     `Unknown native Array<Float> adapter policy ${String(manifest.haxeBindingPlan?.arrayFloatAdapterPromotion)}`,
+  );
+}
+if (
+  manifest.haxeBindingPlan?.nullableStringAdapterPromotion !==
+  'dependency-complete-nullable-string-copy-adapter-compile-run'
+) {
+  throw new Error(
+    `Unknown native Null<String> adapter policy ${String(manifest.haxeBindingPlan?.nullableStringAdapterPromotion)}`,
   );
 }
 const planned = new Map(
@@ -148,6 +157,19 @@ for (const module of manifest.modules) {
         throw new Error(`${publicName} is now compiler-planned; remove its downstream Array<Float> adapter`);
       }
       validateArrayFloatAdapter(publicName, binding, declaration, parsed);
+      plan = {
+        headerStatus: 'pass',
+        include: binding.header,
+        kind: 'function',
+        nativeName: binding.native,
+        publicName,
+        transport: 'direct',
+      };
+    } else if (provenance === nullableStringAdapterProvenance) {
+      if (plan) {
+        throw new Error(`${publicName} is now compiler-planned; remove its downstream Null<String> adapter`);
+      }
+      validateNullableStringAdapter(publicName, binding, declaration, parsed);
       plan = {
         headerStatus: 'pass',
         include: binding.header,
@@ -287,7 +309,8 @@ process.stdout.write(
     `${String(planning.declarations.filter(({ kind, transport, headerStatus }) => kind === 'function' && transport === 'adapter' && headerStatus === 'pass').length)} compiler adapter, ` +
     `${String(manifestEntries.filter(({ provenance }) => provenance === scalarOverrideProvenance).length)} required scalar override, ` +
     `${String(manifestEntries.filter(({ provenance }) => provenance === optionalScalarOverrideProvenance).length)} optional scalar adapter, ` +
-    `${String(manifestEntries.filter(({ provenance }) => provenance === arrayFloatAdapterProvenance).length)} Array<Float> adapter); ` +
+    `${String(manifestEntries.filter(({ provenance }) => provenance === arrayFloatAdapterProvenance).length)} array carrier adapter, ` +
+    `${String(manifestEntries.filter(({ provenance }) => provenance === nullableStringAdapterProvenance).length)} Null<String> adapter); ` +
     `${String(unprovenAttempts.filter(({ publicHaxe }) => publicHaxe.kind === 'function').length)} unproven function attempt(s) and ` +
     `${String(unprovenAttempts.filter(({ publicHaxe }) => publicHaxe.kind === 'value').length)} unproven value attempt(s) across ` +
     `${String(new Set(unprovenAttempts.map(({ publicHaxe }) => publicHaxe.owner)).size)} holder(s).\n`,
@@ -486,10 +509,10 @@ function validateArrayFloatAdapter(publicName, binding, declaration, parsed) {
   if (flightCppHeaderStatuses.get(binding.header) !== 'emitted') {
     throw new Error(`${publicName} Array<Float> adapter header is not dependency-complete: ${binding.header}`);
   }
-  const allowed = new Set(['Array<Float>', 'Bool', 'Float', 'Void']);
+  const allowed = new Set(['Array<Array<Float>>', 'Array<Float>', 'Bool', 'Float', 'Void']);
   const types = [...parsed.parameters.map(({ type }) => type), parsed.result];
-  if (!types.includes('Array<Float>') || types.some((type) => !allowed.has(type))) {
-    throw new Error(`${publicName} is not an Array<Float> plus primitive signature`);
+  if (!types.some((type) => isArrayFloatType(type)) || types.some((type) => !allowed.has(type))) {
+    throw new Error(`${publicName} is not an Array<Float> carrier plus primitive signature`);
   }
   const firstOptional = parsed.parameters.findIndex(({ optional }) => optional);
   if (firstOptional >= 0 && parsed.parameters.slice(firstOptional).some(({ optional }) => !optional)) {
@@ -518,6 +541,35 @@ function validateArrayFloatAdapter(publicName, binding, declaration, parsed) {
     .join('\n');
   if (!signaturePattern.test(packageHeaders)) {
     throw new Error(`${publicName} Array<Float> adapter cannot find its exact native signature`);
+  }
+}
+
+function validateNullableStringAdapter(publicName, binding, declaration, parsed) {
+  if (flightCppHeaderStatuses.get(binding.header) !== 'emitted') {
+    throw new Error(`${publicName} Null<String> adapter header is not dependency-complete: ${binding.header}`);
+  }
+  if (
+    parsed.result !== 'Null<String>' ||
+    parsed.parameters.some(({ optional, type }) => optional || type !== 'String')
+  ) {
+    throw new Error(`${publicName} is not a required String to Null<String> signature`);
+  }
+  const cppName = camelToSnake(declaration.sourceName);
+  if (!binding.native.endsWith(`::${cppName}`)) {
+    throw new Error(`${publicName} Null<String> adapter native locator does not end in ${cppName}`);
+  }
+  const headerPath = path.join(flightCpp.directory, 'generated', 'include', binding.header);
+  const parameterPattern = parsed.parameters.map(() => 'flight::String\\s+[A-Za-z_][A-Za-z0-9_]*').join('\\s*,\\s*');
+  const signaturePattern = new RegExp(
+    `\\binline\\s+std::optional<flight::String>\\s+${escapeRegExp(cppName)}\\s*\\(${parameterPattern}\\)`,
+    'u',
+  );
+  const packageHeaders = filesUnder(path.dirname(headerPath))
+    .filter((filename) => filename.endsWith('.hpp'))
+    .map((filename) => readFileSync(filename, 'utf8'))
+    .join('\n');
+  if (!signaturePattern.test(packageHeaders)) {
+    throw new Error(`${publicName} Null<String> adapter cannot find its exact native signature`);
   }
 }
 
@@ -616,7 +668,9 @@ function emitBridgeHeader(module, bindings) {
   const lines = [
     '// Generated from src-cpp/manifest.json and flight-compiler native-planning.json. Do not edit.',
     '#pragma once',
-    ...(bindings.some(isArrayFloatAdapter) ? ['#include <hxcpp.h>'] : []),
+    ...(bindings.some((binding) => isArrayFloatAdapter(binding) || isNullableStringAdapter(binding))
+      ? ['#include <hxcpp.h>']
+      : []),
     '',
     '// Declaration-only boundary: no flight::* type enters hxcpp-generated namespace flight.',
     `namespace flight_hx::${namespace} {`,
@@ -637,9 +691,16 @@ function emitBridgeHeader(module, bindings) {
 function emitBridgeSource(module, bindings) {
   const namespace = nativeNamespace(module, bindings);
   const holder = module.module.replace(/^flight\./u, '').toLowerCase();
+  const needsNestedArrayAdapter = bindings.some(
+    (binding) =>
+      isArrayFloatAdapter(binding) &&
+      (binding.parsed.result === 'Array<Array<Float>>' ||
+        binding.parsed.parameters.some(({ type }) => type === 'Array<Array<Float>>')),
+  );
   const lines = [
     '// Generated from src-cpp/manifest.json and flight-compiler native-planning.json. Do not edit.',
     ...(bindings.some(isArrayFloatAdapter) ? ['#include <limits>', '#include <stdexcept>'] : []),
+    ...(bindings.some(isNullableStringAdapter) ? ['#include <string>'] : []),
     ...[...new Set(bindings.map(({ header }) => header))].sort(compareText).map((header) => `#include <${header}>`),
     `#include <flight_hx/${holder}.hpp>`,
     '',
@@ -675,6 +736,67 @@ function emitBridgeSource(module, bindings) {
       '  for (const double value : source) destination[index++] = value;',
       '}',
       '',
+      ...(needsNestedArrayAdapter
+        ? [
+      'flight::Array<flight::Array<double>> to_flight_nested_array(const ::Array<::Array<double>>& source) {',
+      '  flight::Array<flight::Array<double>> result;',
+      '  for (int index = 0; index < source->length; ++index) {',
+      '    bool reused = false;',
+      '    for (int previous = 0; previous < index; ++previous) {',
+      '      if (source[index].GetPtr() == source[previous].GetPtr()) {',
+      '        result.push(result[static_cast<std::size_t>(previous)]);',
+      '        reused = true;',
+      '        break;',
+      '      }',
+      '    }',
+      '    if (!reused) result.push(to_flight_array(source[index]));',
+      '  }',
+      '  return result;',
+      '}',
+      '',
+      '::Array<::Array<double>> to_haxe_nested_array(const flight::Array<flight::Array<double>>& source) {',
+      '  if (source.size() > static_cast<std::size_t>(std::numeric_limits<int>::max())) {',
+      '    throw std::length_error("Flight Array exceeds the hxcpp Array length limit");',
+      '  }',
+      '  ::Array<::Array<double>> result = ::Array_obj<::Array<double>>::__new(static_cast<int>(source.size()));',
+      '  for (std::size_t index = 0; index < source.size(); ++index) {',
+      '    bool reused = false;',
+      '    for (std::size_t previous = 0; previous < index; ++previous) {',
+      '      if (source[index].identity() == source[previous].identity()) {',
+      '        result[static_cast<int>(index)] = result[static_cast<int>(previous)];',
+      '        reused = true;',
+      '        break;',
+      '      }',
+      '    }',
+      '    if (!reused) result[static_cast<int>(index)] = to_haxe_array(source[index]);',
+      '  }',
+      '  return result;',
+      '}',
+      '',
+      'void replace_haxe_nested_array(::Array<::Array<double>> destination, const flight::Array<flight::Array<double>>& source) {',
+      '  if (source.size() > static_cast<std::size_t>(std::numeric_limits<int>::max())) {',
+      '    throw std::length_error("Flight Array exceeds the hxcpp Array length limit");',
+      '  }',
+      '  destination->resize(static_cast<int>(source.size()));',
+      '  for (std::size_t index = 0; index < source.size(); ++index) {',
+      '    bool reused = false;',
+      '    for (std::size_t previous = 0; previous < index; ++previous) {',
+      '      if (source[index].identity() == source[previous].identity()) {',
+      '        destination[static_cast<int>(index)] = destination[static_cast<int>(previous)];',
+      '        reused = true;',
+      '        break;',
+      '      }',
+      '    }',
+      '    if (reused) continue;',
+      '    ::Array<double> item = destination[static_cast<int>(index)];',
+      '    if (!item.GetPtr()) item = ::Array_obj<double>::__new();',
+      '    replace_haxe_array(item, source[index]);',
+      '    destination[static_cast<int>(index)] = item;',
+      '  }',
+      '}',
+      '',
+          ]
+        : []),
       '} // namespace',
       '',
     );
@@ -687,6 +809,10 @@ function emitBridgeSource(module, bindings) {
       .join(', ');
     if (isArrayFloatAdapter(binding)) {
       emitArrayFloatBridgeBody(lines, binding, functionName, parameters);
+      continue;
+    }
+    if (isNullableStringAdapter(binding)) {
+      emitNullableStringBridgeBody(lines, binding, functionName, parameters);
       continue;
     }
     const arguments_ = nativeArguments(binding).join(', ');
@@ -741,25 +867,34 @@ function isArrayFloatAdapter(binding) {
   return binding.provenance === arrayFloatAdapterProvenance;
 }
 
+function isNullableStringAdapter(binding) {
+  return binding.provenance === nullableStringAdapterProvenance;
+}
+
+function isArrayFloatType(type) {
+  return type === 'Array<Float>' || type === 'Array<Array<Float>>';
+}
+
 function emitArrayFloatBridgeBody(lines, binding, functionName, parameters) {
-  const arrayParameters = binding.parsed.parameters.filter(({ type }) => type === 'Array<Float>');
+  const arrayParameters = binding.parsed.parameters.filter(({ type }) => isArrayFloatType(type));
   lines.push(`${cppType(binding.parsed.result)} ${functionName}(${parameters}) {`);
   for (let index = 0; index < arrayParameters.length; index += 1) {
     const parameter = arrayParameters[index];
     const name = safeCppName(parameter.name);
-    const earlier = arrayParameters.slice(0, index);
+    const earlier = arrayParameters.slice(0, index).filter(({ type }) => type === parameter.type);
+    const converter = parameter.type === 'Array<Float>' ? 'to_flight_array' : 'to_flight_nested_array';
     const conversion = earlier.reduceRight(
       (fallback, previous) => {
         const previousName = safeCppName(previous.name);
         return `${name}.GetPtr() == ${previousName}.GetPtr() ? flight_${previousName} : (${fallback})`;
       },
-      `to_flight_array(${name})`,
+      `${converter}(${name})`,
     );
     lines.push(`  auto flight_${name} = ${conversion};`);
   }
   const arguments_ = binding.parsed.parameters.map(({ name, optional, type }) => {
     const cppName = safeCppName(name);
-    const value = type === 'Array<Float>' ? `flight_${cppName}` : cppName;
+    const value = isArrayFloatType(type) ? `flight_${cppName}` : cppName;
     if (!optional) return value;
     return `(${safeCppName(`${name}Present`)} ? std::optional<${flightCppType(type)}>{${value}} : std::nullopt)`;
   });
@@ -768,19 +903,44 @@ function emitArrayFloatBridgeBody(lines, binding, functionName, parameters) {
   else lines.push(`  auto result = ${call};`);
   for (const parameter of arrayParameters) {
     const name = safeCppName(parameter.name);
-    const statement = `replace_haxe_array(${name}, flight_${name});`;
+    const replacer = parameter.type === 'Array<Float>' ? 'replace_haxe_array' : 'replace_haxe_nested_array';
+    const statement = `${replacer}(${name}, flight_${name});`;
     lines.push(parameter.optional ? `  if (${safeCppName(`${parameter.name}Present`)}) ${statement}` : `  ${statement}`);
   }
-  if (binding.parsed.result === 'Array<Float>') {
+  if (isArrayFloatType(binding.parsed.result)) {
     for (const parameter of arrayParameters) {
+      if (parameter.type !== binding.parsed.result) continue;
       const name = safeCppName(parameter.name);
       const condition = `result.identity() == flight_${name}.identity()`;
       lines.push(parameter.optional ? `  if (${safeCppName(`${parameter.name}Present`)} && ${condition}) return ${name};` : `  if (${condition}) return ${name};`);
     }
-    lines.push('  return to_haxe_array(result);');
+    lines.push(
+      binding.parsed.result === 'Array<Float>'
+        ? '  return to_haxe_array(result);'
+        : '  return to_haxe_nested_array(result);',
+    );
   } else if (binding.parsed.result !== 'Void') {
     lines.push('  return result;');
   }
+  lines.push('}', '');
+}
+
+function emitNullableStringBridgeBody(lines, binding, functionName, parameters) {
+  lines.push(`${cppType(binding.parsed.result)} ${functionName}(${parameters}) {`);
+  for (const parameter of binding.parsed.parameters) {
+    const name = safeCppName(parameter.name);
+    if (parameter.type === 'String') {
+      lines.push(`  const flight::String flight_${name} = flight::String::from_utf8(${name}.utf8_str());`);
+    }
+  }
+  const arguments_ = binding.parsed.parameters.map(({ name, type }) => {
+    const cppName = safeCppName(name);
+    return type === 'String' ? `flight_${cppName}` : cppName;
+  });
+  lines.push(`  const auto result = ${binding.native}(${arguments_.join(', ')});`);
+  lines.push('  if (!result.has_value()) return null();');
+  lines.push('  const std::string result_utf8 = result->to_utf8();');
+  lines.push('  return ::String(result_utf8.data(), result_utf8.size());');
   lines.push('}', '');
 }
 
@@ -928,15 +1088,16 @@ function haxeZero(type) {
   if (type === 'Bool') return 'false';
   if (type === 'Float') return '0.0';
   if (type === 'Array<Float>') return '([] : Array<Float>)';
+  if (type === 'Array<Array<Float>>') return '([] : Array<Array<Float>>)';
   throw new Error(`Unsupported optional native Haxe carrier ${type}`);
 }
 
 function parseSignature(signature) {
-  const match = /^function ([A-Za-z_][A-Za-z0-9_]*)\((.*)\):(Array<Float>|Bool|Float|String|Void)$/u.exec(signature);
+  const match = /^function ([A-Za-z_][A-Za-z0-9_]*)\((.*)\):(Array<Array<Float>>|Array<Float>|Null<String>|Bool|Float|String|Void)$/u.exec(signature);
   if (!match) throw new Error(`Native function has unsupported Haxe signature: ${signature}`);
   const parameters = match[2]
     ? match[2].split(', ').map((parameter) => {
-        const parsed = /^(\??)([A-Za-z_][A-Za-z0-9_]*):(Array<Float>|Bool|Float|String)$/u.exec(parameter);
+        const parsed = /^(\??)([A-Za-z_][A-Za-z0-9_]*):(Array<Array<Float>>|Array<Float>|Bool|Float|String)$/u.exec(parameter);
         if (!parsed) throw new Error(`Native function has unsupported parameter: ${parameter}`);
         return { name: parsed[2], optional: parsed[1] === '?', type: parsed[3] };
       })
@@ -945,14 +1106,17 @@ function parseSignature(signature) {
 }
 
 function cppType(type) {
+  if (type === 'Array<Array<Float>>') return '::Array<::Array<double>>';
   if (type === 'Array<Float>') return '::Array<double>';
   if (type === 'Bool') return 'bool';
   if (type === 'Float') return 'double';
+  if (type === 'Null<String>' || type === 'String') return '::String';
   if (type === 'Void') return 'void';
   throw new Error(`Unsupported native C++ carrier ${type}`);
 }
 
 function flightCppType(type) {
+  if (type === 'Array<Array<Float>>') return 'flight::Array<flight::Array<double>>';
   if (type === 'Array<Float>') return 'flight::Array<double>';
   return cppType(type);
 }

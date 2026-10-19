@@ -1,8 +1,8 @@
 // Installed consumers must cross both production backends: the complete Flight ESM extern surface
 // on web and the manifest-recorded flight-cpp subset/extensions on hxcpp. Direct scalars,
-// compiler-emitted String adapters, optional-scalar adapters, host creation, and a Scene2D GL
-// Array<Float> copy adapters, host creation, and a Scene2D GL framebuffer each have an explicit
-// oracle here.
+// compiler-emitted String adapters, optional-scalar adapters, recursive Array<Float> copy
+// adapters, nullable String adapters, host creation, and a Scene2D GL framebuffer each have an
+// explicit oracle here.
 import { spawnSync } from 'node:child_process';
 import { existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
@@ -18,6 +18,7 @@ const marker = 'CROSS_TARGET_MATH_OK';
 const scalarOverrideProvenance = 'flight-hx/header-confirmed-scalar/1';
 const optionalScalarOverrideProvenance = 'flight-hx/header-confirmed-optional-scalar/1';
 const arrayFloatAdapterProvenance = 'flight-hx/array-float-copy-adapter/1';
+const nullableStringAdapterProvenance = 'flight-hx/nullable-string-copy-adapter/1';
 const nativePlanning = JSON.parse(readFileSync(path.join(repoRoot, 'generated', 'js', 'native-planning.json'), 'utf8'));
 const plannedFunctions = new Map(
   nativePlanning.declarations
@@ -43,6 +44,7 @@ const expectedCorrections = [
   'flight-hx-hxcpp-flight-namespace-isolation/1',
   'flight-hx-hxcpp-cpp11-override/1',
   'flight-hx-hxcpp-array-float-copy-adapter/1',
+  'flight-hx-hxcpp-nullable-string-copy-adapter/1',
 ];
 const expectedNativeHost = {
   module: 'flight.HostSdlGl',
@@ -215,6 +217,7 @@ function validateNativeManifest(flightCpp) {
         provenance === scalarOverrideProvenance ||
         provenance === optionalScalarOverrideProvenance ||
         provenance === arrayFloatAdapterProvenance ||
+        provenance === nullableStringAdapterProvenance ||
         plannedFunctions.get(`${module.module}.${name}`)?.transport === 'direct',
     );
     const directBridge =
@@ -243,6 +246,9 @@ function validateNativeManifest(flightCpp) {
       } else if (binding.provenance === arrayFloatAdapterProvenance) {
         if (plan) fail(`${publicName} downstream Array<Float> adapter now overlaps the compiler native plan`);
         plan = { transport: 'array-float-adapter' };
+      } else if (binding.provenance === nullableStringAdapterProvenance) {
+        if (plan) fail(`${publicName} downstream Null<String> adapter now overlaps the compiler native plan`);
+        plan = { transport: 'nullable-string-adapter' };
       } else if (binding.provenance !== undefined) {
         fail(`${publicName} has unknown native provenance ${String(binding.provenance)}`);
       } else if (!plan) {
@@ -276,7 +282,8 @@ function validateNativeManifest(flightCpp) {
         plan.transport === 'direct' ||
         plan.transport === 'override' ||
         plan.transport === 'optional-override' ||
-        plan.transport === 'array-float-adapter'
+        plan.transport === 'array-float-adapter' ||
+        plan.transport === 'nullable-string-adapter'
       ) {
         if (!directBridge.includes(`${binding.native}(`)) {
           fail(`${publicName} direct bridge does not call ${binding.native}`);
@@ -418,7 +425,7 @@ function rejectUnsupportedNative(flightCpp, consumer) {
     { cwd: consumer.work, encoding: 'utf8', env: consumer.environment },
   );
   const transcript = `${compile.stdout ?? ''}${compile.stderr ?? ''}`;
-  if (compile.status === 0 || !transcript.includes('fuse_color_matrices')) {
+  if (compile.status === 0 || !transcript.includes('resolve_color_adjustments_color_matrix')) {
     fail(`unbound native API did not fail loudly at the exact public facade:\n${transcript}`);
   }
 }

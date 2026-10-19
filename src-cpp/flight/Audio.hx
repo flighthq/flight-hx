@@ -1,6 +1,14 @@
 // Generated from src-cpp/manifest.json and flight-compiler native-planning.json. Do not edit.
 package flight;
 
+inline function getAudioMimeTypeParameter(mimeType:String, name:String):Null<String> {
+  return flight._cpp._fn.Audio.getAudioMimeTypeParameter(mimeType, name);
+}
+
+inline function inferAudioMimeType(url:String):Null<String> {
+  return flight._cpp._fn.Audio.inferAudioMimeType(url);
+}
+
 inline function getAudioMimeTypeEssence(mimeType:String):String {
   return flight._cpp._fn.Audio.getAudioMimeTypeEssence(mimeType);
 }
@@ -57,10 +65,6 @@ extern inline function getAudioDecodeSlot(audioDecode:flight.HostAudioDecodeCapa
   return flight._cpp._attempt.Attempt_Audio_getAudioDecodeSlot.getAudioDecodeSlot(audioDecode, mimeType);
 }
 
-extern inline function getAudioMimeTypeParameter(mimeType:String, name:String):Null<String> {
-  return flight._cpp._attempt.Attempt_Audio_getAudioMimeTypeParameter.getAudioMimeTypeParameter(mimeType, name);
-}
-
 extern inline function getAudioResourceByteSize(resource:flight.AudioResource):Float {
   return flight._cpp._attempt.Attempt_Audio_getAudioResourceByteSize.getAudioResourceByteSize(resource);
 }
@@ -87,10 +91,6 @@ extern inline function hasAudioDecodeSlot(audioDecode:flight.HostAudioDecodeCapa
 
 extern inline function hasAudioResourceBuffer(resource:flight.AudioResource):Bool {
   return flight._cpp._attempt.Attempt_Audio_hasAudioResourceBuffer.hasAudioResourceBuffer(resource);
-}
-
-extern inline function inferAudioMimeType(url:String):Null<String> {
-  return flight._cpp._attempt.Attempt_Audio_inferAudioMimeType.inferAudioMimeType(url);
 }
 
 extern inline function initializeAudioResource(out:flight.EntityConstruction<flight.AudioResource>, ?buffer:flight.AudioBuffer):Void {

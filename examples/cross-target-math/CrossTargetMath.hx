@@ -30,6 +30,14 @@ import flight.Textshaper;
 class CrossTargetMath {
   static function main():Void {
     assertString('audio MIME essence', getAudioMimeTypeEssence('  AUDIO/MPEG  '), 'audio/mpeg');
+    assertString(
+      'audio MIME parameter',
+      getAudioMimeTypeParameter('audio/wav; rate=22050; channels=2', 'rate'),
+      '22050'
+    );
+    assertTrue('audio MIME parameter absent', getAudioMimeTypeParameter('audio/mpeg', 'rate') == null);
+    assertString('inferred audio MIME', inferAudioMimeType('track.mp3?cache=1'), 'audio/mpeg');
+    assertTrue('inferred audio MIME absent', inferAudioMimeType('track.mid') == null);
 
     assertClose('clamp', clamp(4.0, -1.0, 2.0), 2.0);
     assertTrue('inRange', inRange(0.5, 0.0, 1.0));
@@ -87,6 +95,7 @@ class CrossTargetMath {
     final multipliedOut = zeroes(20);
     final multiplied = multiplyColorMatrix(identity, brightness, multipliedOut);
     assertTrue('multiplied color matrix preserves out identity', multiplied == multipliedOut);
+    assertTrue('fused color matrices', fuseColorMatrices([identity, brightness]).length == 20);
 
     final bitmapMatrix = zeroes(20);
     buildBitmapBrightnessColorMatrix(bitmapMatrix, 0.25);

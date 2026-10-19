@@ -598,25 +598,6 @@
     },
     {
       "carrierFamilies": [
-        "array"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Adjustments_fuseColorMatrices",
-      "header": "flight/adjustments/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::adjustments::fuse_color_matrices",
-      "package": "@flighthq/adjustments",
-      "publicName": "flight.Adjustments.fuseColorMatrices",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family array is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/adjustments/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
         "anonymous-structure",
         "array",
         "nullable"
@@ -1356,25 +1337,6 @@
     },
     {
       "carrierFamilies": [
-        "nullable"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Audio_getAudioMimeTypeParameter",
-      "header": "flight/audio/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::audio::get_audio_mime_type_parameter",
-      "package": "@flighthq/audio",
-      "publicName": "flight.Audio.getAudioMimeTypeParameter",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "only optional Float is supported by this Haxe C++ extern slice",
-        "phase": "planning"
-      },
-      "source": "packages/audio/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
         "named"
       ],
       "externClass": "flight._cpp._attempt.Attempt_Audio_getAudioResourceByteSize",
@@ -1502,25 +1464,6 @@
       "refusal": {
         "code": "unsupported-carrier",
         "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/audio/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "nullable"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Audio_inferAudioMimeType",
-      "header": "flight/audio/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::audio::infer_audio_mime_type",
-      "package": "@flighthq/audio",
-      "publicName": "flight.Audio.inferAudioMimeType",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "only optional Float is supported by this Haxe C++ extern slice",
         "phase": "planning"
       },
       "source": "packages/audio/src/contract.ts",
@@ -20918,14 +20861,14 @@
   },
   "schema": "flight-hx-native-binding-attempts/1",
   "summary": {
-    "functions": 703,
+    "functions": 700,
     "carrierFamilies": [
       {
         "count": 80,
         "name": "anonymous-structure"
       },
       {
-        "count": 78,
+        "count": 77,
         "name": "array"
       },
       {
@@ -20945,7 +20888,7 @@
         "name": "named"
       },
       {
-        "count": 69,
+        "count": 67,
         "name": "nullable"
       },
       {
@@ -20958,8 +20901,8 @@
       }
     ],
     "holders": 42,
-    "isolatedExterns": 1082,
-    "total": 1082,
+    "isolatedExterns": 1079,
+    "total": 1079,
     "values": 379
   }
 }

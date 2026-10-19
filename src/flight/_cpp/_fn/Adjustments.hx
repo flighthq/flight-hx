@@ -31,6 +31,9 @@ extern class Adjustments {
   @:native("flight_hx::adjustments::concat_color_matrix")
   static function concatColorMatrix(target:Array<Float>, source:Array<Float>):Void;
 
+  @:native("flight_hx::adjustments::fuse_color_matrices")
+  static function fuseColorMatrices(matrices:Array<Array<Float>>):Array<Float>;
+
   @:native("flight_hx::adjustments::create_brightness_color_matrix")
   static function createBrightnessColorMatrix(amount:Float):Array<Float>;
 
