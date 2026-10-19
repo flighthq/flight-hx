@@ -4,10 +4,10 @@
 from an isolated `-lib flight` consumer:
 
 - web uses the complete generated Flight ESM extern surface and the static-import bundler pipeline;
-- desktop uses hxcpp for all 323 manifest-recorded, compile-proven functions across 37 public
+- desktop uses hxcpp for all 359 manifest-recorded, compile-and-link-proven functions across 38 public
   modules: 62 compiler-planned direct calls, four compiler-emitted UTF-8 String adapters, 53
   required-scalar overrides, three optional-scalar adapters, 45 array adapters, two nullable-String
-  adapters, and 154 shared-reference carriers, including required/nullable UTF-8, nullable-number,
+  adapters, and 190 shared-reference carriers, including required/nullable UTF-8, nullable-number,
   and reference-array conversion;
 - `CrossTargetFallback.hx` separately keeps the legacy-pinned compiler-emitted Haxe subset honest
   on ordinary Haxe-to-JS without adding target branches to the production sample.
@@ -19,6 +19,11 @@ npm run setup
 npm run rehydrate
 npm run gate:cross-target
 ```
+
+The sample contains a generated, opaque compile/link probe for every manifest function plus an
+executed host-free behavioral slice. This avoids pretending that host-dependent APIs can be safely
+called with fabricated handles while still catching missing symbols and ABI/signature failures on
+both production targets.
 
 That gate also compiles and runs [`../window-native/`](../window-native/) from the same isolated
 Haxelib install against the current flight-cpp SDL3/OpenGL host. The scalar program is the unchanged

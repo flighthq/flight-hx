@@ -1,8 +1,7 @@
 // Installed consumers must cross both production backends: the complete Flight ESM extern surface
-// on web and the manifest-recorded flight-cpp subset/extensions on hxcpp. Direct scalars,
-// compiler-emitted String adapters, optional-scalar adapters, recursive Array<Float> copy
-// adapters, nullable String adapters, host creation, and a Scene2D GL framebuffer each have an
-// explicit oracle here.
+// on web and the manifest-recorded flight-cpp subset/extensions on hxcpp. Every manifest function
+// is retained in generated target code so both backends compile and link it. A representative
+// host-free slice plus host creation and a Scene2D GL framebuffer have runtime oracles here.
 import { spawnSync } from 'node:child_process';
 import { existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
@@ -84,9 +83,10 @@ try {
   await runWeb(bindings, consumer);
   await buildWebCamera2d(nativeExtension, consumer);
   process.stdout.write(
-    `cross-target gate: an isolated -lib flight consumer ran ${String(bindings.length)} ` +
-      `manifest-recorded functions on Flight ESM and flight-cpp; the optional legacy-pinned ` +
-      `pure-Haxe backend passed its focused facade proof; the packaged native extensions also created and ` +
+    `cross-target gate: an isolated -lib flight consumer compiled and linked ${String(bindings.length)} ` +
+      `manifest-recorded functions on Flight ESM and flight-cpp, and ran its representative host-free ` +
+      `behavioral slice on both; the optional legacy-pinned pure-Haxe backend passed its focused facade ` +
+      `proof; the packaged native extensions also created and ` +
       `presented a real flight-cpp SDL3/GL surface, and the Haxe-authored Camera2D scene passed ` +
       `the upstream-control and native framebuffer oracles while linking against current Flight ESM.\n`,
   );

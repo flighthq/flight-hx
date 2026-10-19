@@ -134,6 +134,7 @@ const attemptsByOwner = Map.groupBy(unprovenAttempts, ({ publicHaxe }) => public
 
 const expected = new Map();
 const manifestEntries = [];
+const compileProbeBindings = [];
 for (const module of manifest.modules) {
   const holder = module.module.replace(/^flight\./u, '');
   const holderAttempts = attemptsByOwner.get(module.module) ?? [];
@@ -227,6 +228,7 @@ for (const module of manifest.modules) {
   });
   const directBindings = bindings.filter(({ plan }) => plan.transport === 'direct');
   const adapterBindings = bindings.filter(({ plan }) => plan.transport === 'adapter');
+  compileProbeBindings.push(...bindings.map((binding) => ({ ...binding, module: module.module })));
   expected.set(
     path.join(root, 'src-cpp', 'flight', `${holder}.hx`),
     emitFacade(holder, bindings, nativeFacadeTypes.get(module.module), holderAttempts),
@@ -254,6 +256,11 @@ for (const module of manifest.modules) {
     expected.set(path.join(root, 'src-cpp', 'src', 'adapters', `${name}.cpp`), emitAdapterSource(binding));
   }
 }
+
+expected.set(
+  path.join(root, 'examples', 'cross-target-math', 'NativeBindingCompileProbe.hx'),
+  emitNativeBindingCompileProbe(compileProbeBindings),
+);
 
 for (const [owner, holderAttempts] of [...attemptsByOwner].sort(([left], [right]) => compareText(left, right))) {
   const holder = owner.replace(/^flight\./u, '');
@@ -1264,6 +1271,34 @@ function haxeStringCopyLines(name) {
     '  }',
     `  return ::String::create(${name}.data(), static_cast<int>(${name}.size()));`,
   ];
+}
+
+function emitNativeBindingCompileProbe(bindings) {
+  const lines = [
+    '// Generated from src-cpp/manifest.json and flight-compiler native-planning.json. Do not edit.',
+    '',
+    '// This method is compiled and linked on both production targets but intentionally not executed.',
+    '// It keeps the complete proven wrapper partition honest even when a host-free runtime sample',
+    '// cannot construct the platform capability required by a particular API.',
+    'class NativeBindingCompileProbe {',
+    '  public static function exercise():Void {',
+  ];
+  for (const binding of bindings) {
+    const arguments_ = binding.parsed.parameters.map(({ type }) => haxeCompileProbeValue(type)).join(', ');
+    lines.push(`    ${binding.module}.${binding.declaration.name}(${arguments_});`);
+  }
+  lines.push('  }', '}', '');
+  return lines.join('\n');
+}
+
+function haxeCompileProbeValue(type) {
+  if (type === 'Bool') return 'false';
+  if (type === 'Float') return '0.0';
+  if (type === 'String') return "''";
+  if (type.startsWith('Null<')) return 'null';
+  if (type.startsWith('Array<')) return `([] : ${type})`;
+  if (nativeReferenceTypes.has(type)) return `(cast null : ${type})`;
+  throw new Error(`Unsupported native compile-probe carrier ${type}`);
 }
 
 function emitInternalSignature(binding) {

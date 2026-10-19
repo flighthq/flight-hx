@@ -6973,196 +6973,6 @@
     },
     {
       "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Path_acquirePathMesh",
-      "header": "flight/path/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::path::acquire_path_mesh",
-      "package": "@flighthq/path",
-      "publicName": "flight.Path.acquirePathMesh",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/path/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Path_acquirePathMeshTyped",
-      "header": "flight/path/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::path::acquire_path_mesh_typed",
-      "package": "@flighthq/path",
-      "publicName": "flight.Path.acquirePathMeshTyped",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/path/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Path_appendPathArc",
-      "header": "flight/path/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::path::append_path_arc",
-      "package": "@flighthq/path",
-      "publicName": "flight.Path.appendPathArc",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Path has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/path/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Path_appendPathCircle",
-      "header": "flight/path/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::path::append_path_circle",
-      "package": "@flighthq/path",
-      "publicName": "flight.Path.appendPathCircle",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Path has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/path/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Path_appendPathClose",
-      "header": "flight/path/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::path::append_path_close",
-      "package": "@flighthq/path",
-      "publicName": "flight.Path.appendPathClose",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Path has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/path/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Path_appendPathCubicCurveTo",
-      "header": "flight/path/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::path::append_path_cubic_curve_to",
-      "package": "@flighthq/path",
-      "publicName": "flight.Path.appendPathCubicCurveTo",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Path has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/path/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Path_appendPathEllipse",
-      "header": "flight/path/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::path::append_path_ellipse",
-      "package": "@flighthq/path",
-      "publicName": "flight.Path.appendPathEllipse",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Path has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/path/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Path_appendPathEllipticalArcTo",
-      "header": "flight/path/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::path::append_path_elliptical_arc_to",
-      "package": "@flighthq/path",
-      "publicName": "flight.Path.appendPathEllipticalArcTo",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Path has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/path/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Path_appendPathLineTo",
-      "header": "flight/path/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::path::append_path_line_to",
-      "package": "@flighthq/path",
-      "publicName": "flight.Path.appendPathLineTo",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Path has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/path/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Path_appendPathMoveTo",
-      "header": "flight/path/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::path::append_path_move_to",
-      "package": "@flighthq/path",
-      "publicName": "flight.Path.appendPathMoveTo",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Path has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/path/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
         "array",
         "named"
       ],
@@ -7192,101 +7002,6 @@
       "nativeName": "flight::path::append_path_polyline",
       "package": "@flighthq/path",
       "publicName": "flight.Path.appendPathPolyline",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Path has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/path/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Path_appendPathQuadraticCurveTo",
-      "header": "flight/path/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::path::append_path_quadratic_curve_to",
-      "package": "@flighthq/path",
-      "publicName": "flight.Path.appendPathQuadraticCurveTo",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Path has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/path/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Path_appendPathRectangle",
-      "header": "flight/path/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::path::append_path_rectangle",
-      "package": "@flighthq/path",
-      "publicName": "flight.Path.appendPathRectangle",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Path has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/path/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Path_appendPathRoundedRectangle",
-      "header": "flight/path/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::path::append_path_rounded_rectangle",
-      "package": "@flighthq/path",
-      "publicName": "flight.Path.appendPathRoundedRectangle",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Path has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/path/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Path_appendPathRoundedRectangleWithCornerRadii",
-      "header": "flight/path/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::path::append_path_rounded_rectangle_with_corner_radii",
-      "package": "@flighthq/path",
-      "publicName": "flight.Path.appendPathRoundedRectangleWithCornerRadii",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Path has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/path/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Path_appendPathTangentArcTo",
-      "header": "flight/path/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::path::append_path_tangent_arc_to",
-      "package": "@flighthq/path",
-      "publicName": "flight.Path.appendPathTangentArcTo",
       "refusal": {
         "code": "unsupported-carrier",
         "message": "named carrier Path has no unique published C++ type locator",
@@ -7331,82 +7046,6 @@
       "nativeName": "flight::path::build_stroke_path_geometry",
       "package": "@flighthq/path",
       "publicName": "flight.Path.buildStrokePathGeometry",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/path/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Path_cleanPath",
-      "header": "flight/path/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::path::clean_path",
-      "package": "@flighthq/path",
-      "publicName": "flight.Path.cleanPath",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/path/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Path_clonePath",
-      "header": "flight/path/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::path::clone_path",
-      "package": "@flighthq/path",
-      "publicName": "flight.Path.clonePath",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/path/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Path_containsPathPoint",
-      "header": "flight/path/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::path::contains_path_point",
-      "package": "@flighthq/path",
-      "publicName": "flight.Path.containsPathPoint",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/path/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Path_copyPath",
-      "header": "flight/path/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::path::copy_path",
-      "package": "@flighthq/path",
-      "publicName": "flight.Path.copyPath",
       "refusal": {
         "code": "unsupported-carrier",
         "message": "type family named is outside the Haxe C++ extern vertical slice",
@@ -7479,25 +7118,6 @@
       "carrierFamilies": [
         "named"
       ],
-      "externClass": "flight._cpp._attempt.Attempt_Path_decimatePath",
-      "header": "flight/path/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::path::decimate_path",
-      "package": "@flighthq/path",
-      "publicName": "flight.Path.decimatePath",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/path/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
       "externClass": "flight._cpp._attempt.Attempt_Path_explainPathMorphCreation",
       "header": "flight/path/contract.hpp",
       "kind": "function",
@@ -7523,25 +7143,6 @@
       "nativeName": "flight::path::explain_stroke_path_tessellation",
       "package": "@flighthq/path",
       "publicName": "flight.Path.explainStrokePathTessellation",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/path/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Path_fitPathCurves",
-      "header": "flight/path/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::path::fit_path_curves",
-      "package": "@flighthq/path",
-      "publicName": "flight.Path.fitPathCurves",
       "refusal": {
         "code": "unsupported-carrier",
         "message": "type family named is outside the Haxe C++ extern vertical slice",
@@ -7690,25 +7291,6 @@
     },
     {
       "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Path_getPathCurvatureAtDistance",
-      "header": "flight/path/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::path::get_path_curvature_at_distance",
-      "package": "@flighthq/path",
-      "publicName": "flight.Path.getPathCurvatureAtDistance",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/path/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
         "array",
         "named",
         "nullable"
@@ -7719,25 +7301,6 @@
       "nativeName": "flight::path::get_path_last_point",
       "package": "@flighthq/path",
       "publicName": "flight.Path.getPathLastPoint",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/path/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Path_getPathLength",
-      "header": "flight/path/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::path::get_path_length",
-      "package": "@flighthq/path",
-      "publicName": "flight.Path.getPathLength",
       "refusal": {
         "code": "unsupported-carrier",
         "message": "type family named is outside the Haxe C++ extern vertical slice",
@@ -7806,26 +7369,6 @@
     },
     {
       "carrierFamilies": [
-        "named",
-        "nullable"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Path_getPathSegmentCurvatureAtParameter",
-      "header": "flight/path/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::path::get_path_segment_curvature_at_parameter",
-      "package": "@flighthq/path",
-      "publicName": "flight.Path.getPathSegmentCurvatureAtParameter",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/path/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
         "named"
       ],
       "externClass": "flight._cpp._attempt.Attempt_Path_getPathSegmentPointAtParameter",
@@ -7853,25 +7396,6 @@
       "nativeName": "flight::path::get_path_segment_tangent_at_parameter",
       "package": "@flighthq/path",
       "publicName": "flight.Path.getPathSegmentTangentAtParameter",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/path/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Path_getPathSignedArea",
-      "header": "flight/path/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::path::get_path_signed_area",
-      "package": "@flighthq/path",
-      "publicName": "flight.Path.getPathSignedArea",
       "refusal": {
         "code": "unsupported-carrier",
         "message": "type family named is outside the Haxe C++ extern vertical slice",
@@ -7981,63 +7505,6 @@
       "carrierFamilies": [
         "named"
       ],
-      "externClass": "flight._cpp._attempt.Attempt_Path_releasePathMesh",
-      "header": "flight/path/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::path::release_path_mesh",
-      "package": "@flighthq/path",
-      "publicName": "flight.Path.releasePathMesh",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier PathMesh has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/path/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Path_releasePathMeshTyped",
-      "header": "flight/path/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::path::release_path_mesh_typed",
-      "package": "@flighthq/path",
-      "publicName": "flight.Path.releasePathMeshTyped",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier PathMeshTyped has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/path/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Path_reversePath",
-      "header": "flight/path/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::path::reverse_path",
-      "package": "@flighthq/path",
-      "publicName": "flight.Path.reversePath",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/path/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
       "externClass": "flight._cpp._attempt.Attempt_Path_samplePathMorph",
       "header": "flight/path/contract.hpp",
       "kind": "function",
@@ -8063,82 +7530,6 @@
       "nativeName": "flight::path::stroke_path",
       "package": "@flighthq/path",
       "publicName": "flight.Path.strokePath",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/path/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Path_tessellatePath",
-      "header": "flight/path/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::path::tessellate_path",
-      "package": "@flighthq/path",
-      "publicName": "flight.Path.tessellatePath",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/path/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Path_tessellatePathInto",
-      "header": "flight/path/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::path::tessellate_path_into",
-      "package": "@flighthq/path",
-      "publicName": "flight.Path.tessellatePathInto",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/path/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Path_tessellatePathTyped",
-      "header": "flight/path/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::path::tessellate_path_typed",
-      "package": "@flighthq/path",
-      "publicName": "flight.Path.tessellatePathTyped",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/path/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Path_tessellatePathTypedInto",
-      "header": "flight/path/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::path::tessellate_path_typed_into",
-      "package": "@flighthq/path",
-      "publicName": "flight.Path.tessellatePathTypedInto",
       "refusal": {
         "code": "unsupported-carrier",
         "message": "type family named is outside the Haxe C++ extern vertical slice",
@@ -8189,44 +7580,6 @@
     },
     {
       "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Path_translatePath",
-      "header": "flight/path/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::path::translate_path",
-      "package": "@flighthq/path",
-      "publicName": "flight.Path.translatePath",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/path/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_PathFormats_appendSvgPathData",
-      "header": "flight/path_formats/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::path_formats::append_svg_path_data",
-      "package": "@flighthq/path-formats",
-      "publicName": "flight.PathFormats.appendSvgPathData",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Path has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/path-formats/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
         "anonymous-structure",
         "nullable"
       ],
@@ -8236,45 +7589,6 @@
       "nativeName": "flight::path_formats::explain_svg_path_data",
       "package": "@flighthq/path-formats",
       "publicName": "flight.PathFormats.explainSvgPathData",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "only optional Float is supported by this Haxe C++ extern slice",
-        "phase": "planning"
-      },
-      "source": "packages/path-formats/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_PathFormats_formatSvgPathData",
-      "header": "flight/path_formats/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::path_formats::format_svg_path_data",
-      "package": "@flighthq/path-formats",
-      "publicName": "flight.PathFormats.formatSvgPathData",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/path-formats/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named",
-        "nullable"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_PathFormats_parseSvgPathData",
-      "header": "flight/path_formats/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::path_formats::parse_svg_path_data",
-      "package": "@flighthq/path-formats",
-      "publicName": "flight.PathFormats.parseSvgPathData",
       "refusal": {
         "code": "unsupported-carrier",
         "message": "only optional Float is supported by this Haxe C++ extern slice",
@@ -17927,7 +17241,7 @@
   },
   "schema": "flight-hx-native-binding-attempts/1",
   "summary": {
-    "functions": 546,
+    "functions": 510,
     "carrierFamilies": [
       {
         "count": 80,
@@ -17950,11 +17264,11 @@
         "name": "generic-function"
       },
       {
-        "count": 593,
+        "count": 557,
         "name": "named"
       },
       {
-        "count": 60,
+        "count": 58,
         "name": "nullable"
       },
       {
@@ -17967,8 +17281,8 @@
       }
     ],
     "holders": 42,
-    "isolatedExterns": 925,
-    "total": 925,
+    "isolatedExterns": 889,
+    "total": 889,
     "values": 379
   }
 }

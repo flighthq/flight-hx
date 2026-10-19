@@ -239,6 +239,42 @@
       "flight.Input.wasInputGamepadButtonReleased",
       "flight.Input.wasInputKeyPressed",
       "flight.Input.wasInputKeyReleased",
+      "flight.Path.acquirePathMesh",
+      "flight.Path.acquirePathMeshTyped",
+      "flight.Path.appendPathArc",
+      "flight.Path.appendPathCircle",
+      "flight.Path.appendPathClose",
+      "flight.Path.appendPathCubicCurveTo",
+      "flight.Path.appendPathEllipse",
+      "flight.Path.appendPathEllipticalArcTo",
+      "flight.Path.appendPathLineTo",
+      "flight.Path.appendPathMoveTo",
+      "flight.Path.appendPathQuadraticCurveTo",
+      "flight.Path.appendPathRectangle",
+      "flight.Path.appendPathRoundedRectangle",
+      "flight.Path.appendPathRoundedRectangleWithCornerRadii",
+      "flight.Path.appendPathTangentArcTo",
+      "flight.Path.cleanPath",
+      "flight.Path.clonePath",
+      "flight.Path.containsPathPoint",
+      "flight.Path.copyPath",
+      "flight.Path.decimatePath",
+      "flight.Path.fitPathCurves",
+      "flight.Path.getPathCurvatureAtDistance",
+      "flight.Path.getPathLength",
+      "flight.Path.getPathSegmentCurvatureAtParameter",
+      "flight.Path.getPathSignedArea",
+      "flight.Path.releasePathMesh",
+      "flight.Path.releasePathMeshTyped",
+      "flight.Path.reversePath",
+      "flight.Path.tessellatePath",
+      "flight.Path.tessellatePathInto",
+      "flight.Path.tessellatePathTyped",
+      "flight.Path.tessellatePathTypedInto",
+      "flight.Path.translatePath",
+      "flight.PathFormats.appendSvgPathData",
+      "flight.PathFormats.formatSvgPathData",
+      "flight.PathFormats.parseSvgPathData",
       "flight.Power.createPower",
       "flight.Power.detachPower",
       "flight.Power.disposePower",
@@ -7118,7 +7154,7 @@
       "issues": [
         {
           "code": "native-function-gap",
-          "count": 64
+          "count": 31
         },
         {
           "code": "native-value-gap",
@@ -7142,7 +7178,7 @@
         },
         {
           "code": "native-materialized-unproven-functions",
-          "count": 64
+          "count": 31
         },
         {
           "code": "native-materialized-unproven-values",
@@ -7154,21 +7190,219 @@
           {
             "header": "flight/path/contract.hpp",
             "holder": "Path",
+            "name": "acquirePathMesh",
+            "native": "flight::path::acquire_path_mesh"
+          },
+          {
+            "header": "flight/path/contract.hpp",
+            "holder": "Path",
+            "name": "acquirePathMeshTyped",
+            "native": "flight::path::acquire_path_mesh_typed"
+          },
+          {
+            "header": "flight/path/contract.hpp",
+            "holder": "Path",
+            "name": "appendPathArc",
+            "native": "flight::path::append_path_arc"
+          },
+          {
+            "header": "flight/path/contract.hpp",
+            "holder": "Path",
+            "name": "appendPathCircle",
+            "native": "flight::path::append_path_circle"
+          },
+          {
+            "header": "flight/path/contract.hpp",
+            "holder": "Path",
+            "name": "appendPathClose",
+            "native": "flight::path::append_path_close"
+          },
+          {
+            "header": "flight/path/contract.hpp",
+            "holder": "Path",
+            "name": "appendPathCubicCurveTo",
+            "native": "flight::path::append_path_cubic_curve_to"
+          },
+          {
+            "header": "flight/path/contract.hpp",
+            "holder": "Path",
+            "name": "appendPathEllipse",
+            "native": "flight::path::append_path_ellipse"
+          },
+          {
+            "header": "flight/path/contract.hpp",
+            "holder": "Path",
+            "name": "appendPathEllipticalArcTo",
+            "native": "flight::path::append_path_elliptical_arc_to"
+          },
+          {
+            "header": "flight/path/contract.hpp",
+            "holder": "Path",
+            "name": "appendPathLineTo",
+            "native": "flight::path::append_path_line_to"
+          },
+          {
+            "header": "flight/path/contract.hpp",
+            "holder": "Path",
+            "name": "appendPathMoveTo",
+            "native": "flight::path::append_path_move_to"
+          },
+          {
+            "header": "flight/path/contract.hpp",
+            "holder": "Path",
+            "name": "appendPathQuadraticCurveTo",
+            "native": "flight::path::append_path_quadratic_curve_to"
+          },
+          {
+            "header": "flight/path/contract.hpp",
+            "holder": "Path",
+            "name": "appendPathRectangle",
+            "native": "flight::path::append_path_rectangle"
+          },
+          {
+            "header": "flight/path/contract.hpp",
+            "holder": "Path",
+            "name": "appendPathRoundedRectangle",
+            "native": "flight::path::append_path_rounded_rectangle"
+          },
+          {
+            "header": "flight/path/contract.hpp",
+            "holder": "Path",
+            "name": "appendPathRoundedRectangleWithCornerRadii",
+            "native": "flight::path::append_path_rounded_rectangle_with_corner_radii"
+          },
+          {
+            "header": "flight/path/contract.hpp",
+            "holder": "Path",
+            "name": "appendPathTangentArcTo",
+            "native": "flight::path::append_path_tangent_arc_to"
+          },
+          {
+            "header": "flight/path/contract.hpp",
+            "holder": "Path",
+            "name": "cleanPath",
+            "native": "flight::path::clean_path"
+          },
+          {
+            "header": "flight/path/contract.hpp",
+            "holder": "Path",
+            "name": "clonePath",
+            "native": "flight::path::clone_path"
+          },
+          {
+            "header": "flight/path/contract.hpp",
+            "holder": "Path",
+            "name": "containsPathPoint",
+            "native": "flight::path::contains_path_point"
+          },
+          {
+            "header": "flight/path/contract.hpp",
+            "holder": "Path",
+            "name": "copyPath",
+            "native": "flight::path::copy_path"
+          },
+          {
+            "header": "flight/path/contract.hpp",
+            "holder": "Path",
+            "name": "decimatePath",
+            "native": "flight::path::decimate_path"
+          },
+          {
+            "header": "flight/path/contract.hpp",
+            "holder": "Path",
+            "name": "fitPathCurves",
+            "native": "flight::path::fit_path_curves"
+          },
+          {
+            "header": "flight/path/contract.hpp",
+            "holder": "Path",
             "name": "getCubicBezierCurvature",
             "native": "flight::path::get_cubic_bezier_curvature"
           },
           {
             "header": "flight/path/contract.hpp",
             "holder": "Path",
+            "name": "getPathCurvatureAtDistance",
+            "native": "flight::path::get_path_curvature_at_distance"
+          },
+          {
+            "header": "flight/path/contract.hpp",
+            "holder": "Path",
+            "name": "getPathLength",
+            "native": "flight::path::get_path_length"
+          },
+          {
+            "header": "flight/path/contract.hpp",
+            "holder": "Path",
+            "name": "getPathSegmentCurvatureAtParameter",
+            "native": "flight::path::get_path_segment_curvature_at_parameter"
+          },
+          {
+            "header": "flight/path/contract.hpp",
+            "holder": "Path",
+            "name": "getPathSignedArea",
+            "native": "flight::path::get_path_signed_area"
+          },
+          {
+            "header": "flight/path/contract.hpp",
+            "holder": "Path",
             "name": "getQuadraticBezierCurvature",
             "native": "flight::path::get_quadratic_bezier_curvature"
+          },
+          {
+            "header": "flight/path/contract.hpp",
+            "holder": "Path",
+            "name": "releasePathMesh",
+            "native": "flight::path::release_path_mesh"
+          },
+          {
+            "header": "flight/path/contract.hpp",
+            "holder": "Path",
+            "name": "releasePathMeshTyped",
+            "native": "flight::path::release_path_mesh_typed"
+          },
+          {
+            "header": "flight/path/contract.hpp",
+            "holder": "Path",
+            "name": "reversePath",
+            "native": "flight::path::reverse_path"
+          },
+          {
+            "header": "flight/path/contract.hpp",
+            "holder": "Path",
+            "name": "tessellatePath",
+            "native": "flight::path::tessellate_path"
+          },
+          {
+            "header": "flight/path/contract.hpp",
+            "holder": "Path",
+            "name": "tessellatePathInto",
+            "native": "flight::path::tessellate_path_into"
+          },
+          {
+            "header": "flight/path/contract.hpp",
+            "holder": "Path",
+            "name": "tessellatePathTyped",
+            "native": "flight::path::tessellate_path_typed"
+          },
+          {
+            "header": "flight/path/contract.hpp",
+            "holder": "Path",
+            "name": "tessellatePathTypedInto",
+            "native": "flight::path::tessellate_path_typed_into"
+          },
+          {
+            "header": "flight/path/contract.hpp",
+            "holder": "Path",
+            "name": "translatePath",
+            "native": "flight::path::translate_path"
           }
         ],
         "types": [],
         "values": []
       },
       "nativeAttempts": {
-        "functions": 64,
+        "functions": 31,
         "types": 6,
         "unavailableUpstream": 0,
         "values": 11
@@ -7276,7 +7510,7 @@
       "issues": [
         {
           "code": "native-function-gap",
-          "count": 4
+          "count": 1
         },
         {
           "code": "non-scalar-signature-review",
@@ -7288,23 +7522,42 @@
         },
         {
           "code": "native-materialized-unproven-functions",
-          "count": 4
+          "count": 1
         }
       ],
       "nativeDefault": {
-        "functions": [],
+        "functions": [
+          {
+            "header": "flight/path_formats/contract.hpp",
+            "holder": "PathFormats",
+            "name": "appendSvgPathData",
+            "native": "flight::path_formats::append_svg_path_data"
+          },
+          {
+            "header": "flight/path_formats/contract.hpp",
+            "holder": "PathFormats",
+            "name": "formatSvgPathData",
+            "native": "flight::path_formats::format_svg_path_data"
+          },
+          {
+            "header": "flight/path_formats/contract.hpp",
+            "holder": "PathFormats",
+            "name": "parseSvgPathData",
+            "native": "flight::path_formats::parse_svg_path_data"
+          }
+        ],
         "types": [],
         "values": []
       },
       "nativeAttempts": {
-        "functions": 4,
+        "functions": 1,
         "types": 0,
         "unavailableUpstream": 0,
         "values": 0
       },
       "package": "@flighthq/path-formats",
       "scalarProbeCandidates": [],
-      "status": "emitted-unbound",
+      "status": "partial-native",
       "webDefault": {
         "functions": 4,
         "types": 0,
@@ -13668,11 +13921,11 @@
       "arrayFloatAdapters": 45,
       "boundHeaderConfirmedScalarFunctions": 114,
       "extensionTypes": 1,
-      "functions": 323,
+      "functions": 359,
       "nullableStringAdapters": 2,
-      "packages": 38,
+      "packages": 39,
       "optionalScalarAdapters": 3,
-      "referenceCarriers": 154,
+      "referenceCarriers": 190,
       "requiredScalarOverrides": 53,
       "scalarOverrideRefusals": 0,
       "types": 3,
@@ -13701,11 +13954,11 @@
           "name": "generic-function"
         },
         {
-          "count": 593,
+          "count": 557,
           "name": "named"
         },
         {
-          "count": 60,
+          "count": 58,
           "name": "nullable"
         },
         {
@@ -13720,10 +13973,10 @@
       "compileProbes": 0,
       "cppAvailable": 4268,
       "cppUnavailable": 6979,
-      "functions": 546,
+      "functions": 510,
       "genericReferenceTemplateAdapters": 44,
       "haxeTypecheck": "pass",
-      "isolatedFunctionValueExterns": 925,
+      "isolatedFunctionValueExterns": 889,
       "types": 3073,
       "values": 379
     },
@@ -13757,9 +14010,9 @@
       "unboundFunctionCandidates": 0
     },
     "packageStatus": {
-      "emitted-unbound": 114,
+      "emitted-unbound": 113,
       "empty-web-contract": 1,
-      "partial-native": 38
+      "partial-native": 39
     },
     "scalarExpansion": {
       "headerConfirmedFunctions": 183,

@@ -1571,6 +1571,227 @@
           "name": "getQuadraticBezierCurvature",
           "native": "flight::path::get_quadratic_bezier_curvature",
           "header": "flight/path/contract.hpp"
+        },
+        {
+          "name": "acquirePathMesh",
+          "native": "flight::path::acquire_path_mesh",
+          "header": "flight/path/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "acquirePathMeshTyped",
+          "native": "flight::path::acquire_path_mesh_typed",
+          "header": "flight/path/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "appendPathArc",
+          "native": "flight::path::append_path_arc",
+          "header": "flight/path/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "appendPathCircle",
+          "native": "flight::path::append_path_circle",
+          "header": "flight/path/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "appendPathClose",
+          "native": "flight::path::append_path_close",
+          "header": "flight/path/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "appendPathCubicCurveTo",
+          "native": "flight::path::append_path_cubic_curve_to",
+          "header": "flight/path/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "appendPathEllipse",
+          "native": "flight::path::append_path_ellipse",
+          "header": "flight/path/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "appendPathEllipticalArcTo",
+          "native": "flight::path::append_path_elliptical_arc_to",
+          "header": "flight/path/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "appendPathLineTo",
+          "native": "flight::path::append_path_line_to",
+          "header": "flight/path/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "appendPathMoveTo",
+          "native": "flight::path::append_path_move_to",
+          "header": "flight/path/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "appendPathQuadraticCurveTo",
+          "native": "flight::path::append_path_quadratic_curve_to",
+          "header": "flight/path/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "appendPathRectangle",
+          "native": "flight::path::append_path_rectangle",
+          "header": "flight/path/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "appendPathRoundedRectangle",
+          "native": "flight::path::append_path_rounded_rectangle",
+          "header": "flight/path/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "appendPathRoundedRectangleWithCornerRadii",
+          "native": "flight::path::append_path_rounded_rectangle_with_corner_radii",
+          "header": "flight/path/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "appendPathTangentArcTo",
+          "native": "flight::path::append_path_tangent_arc_to",
+          "header": "flight/path/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "cleanPath",
+          "native": "flight::path::clean_path",
+          "header": "flight/path/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "clonePath",
+          "native": "flight::path::clone_path",
+          "header": "flight/path/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "containsPathPoint",
+          "native": "flight::path::contains_path_point",
+          "header": "flight/path/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "copyPath",
+          "native": "flight::path::copy_path",
+          "header": "flight/path/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "decimatePath",
+          "native": "flight::path::decimate_path",
+          "header": "flight/path/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "fitPathCurves",
+          "native": "flight::path::fit_path_curves",
+          "header": "flight/path/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "getPathCurvatureAtDistance",
+          "native": "flight::path::get_path_curvature_at_distance",
+          "header": "flight/path/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "getPathLength",
+          "native": "flight::path::get_path_length",
+          "header": "flight/path/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "getPathSegmentCurvatureAtParameter",
+          "native": "flight::path::get_path_segment_curvature_at_parameter",
+          "header": "flight/path/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "getPathSignedArea",
+          "native": "flight::path::get_path_signed_area",
+          "header": "flight/path/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "releasePathMesh",
+          "native": "flight::path::release_path_mesh",
+          "header": "flight/path/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "releasePathMeshTyped",
+          "native": "flight::path::release_path_mesh_typed",
+          "header": "flight/path/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "reversePath",
+          "native": "flight::path::reverse_path",
+          "header": "flight/path/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "tessellatePath",
+          "native": "flight::path::tessellate_path",
+          "header": "flight/path/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "tessellatePathInto",
+          "native": "flight::path::tessellate_path_into",
+          "header": "flight/path/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "tessellatePathTyped",
+          "native": "flight::path::tessellate_path_typed",
+          "header": "flight/path/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "tessellatePathTypedInto",
+          "native": "flight::path::tessellate_path_typed_into",
+          "header": "flight/path/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "translatePath",
+          "native": "flight::path::translate_path",
+          "header": "flight/path/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        }
+      ]
+    },
+    {
+      "module": "flight.PathFormats",
+      "functions": [
+        {
+          "name": "appendSvgPathData",
+          "native": "flight::path_formats::append_svg_path_data",
+          "header": "flight/path_formats/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "formatSvgPathData",
+          "native": "flight::path_formats::format_svg_path_data",
+          "header": "flight/path_formats/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "parseSvgPathData",
+          "native": "flight::path_formats::parse_svg_path_data",
+          "header": "flight/path_formats/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
         }
       ]
     },

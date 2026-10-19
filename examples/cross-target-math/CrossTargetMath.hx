@@ -19,6 +19,7 @@ import flight.Lighting;
 import flight.Materials;
 import flight.Math;
 import flight.Path;
+import flight.PathFormats;
 import flight.Platform;
 import flight.Power;
 import flight.Protocol;
@@ -36,10 +37,12 @@ import flight.Textshaper;
 import flight.Velocity;
 import flight.Xml;
 
-// One source file exercises the generated Flight ESM externs on web and every compile-proven
-// flight-cpp function binding on hxcpp. Keeping this host-free isolates binding from host setup.
+// One source file executes a host-free representative slice through both production targets. The
+// generated probe below also compiles and links every proven wrapper without requiring fake host
+// capability objects at runtime.
 class CrossTargetMath {
   static function main():Void {
+    if (Date.now().getTime() < 0.0) NativeBindingCompileProbe.exercise();
     assertString('audio MIME essence', getAudioMimeTypeEssence('  AUDIO/MPEG  '), 'audio/mpeg');
     assertString(
       'audio MIME parameter',
@@ -184,6 +187,54 @@ class CrossTargetMath {
       final xmlChildren = getXmlElementChildrenByName(xmlRoot, 'child');
       assertTrue('XML child list', xmlChildren.length == 1 && xmlChildren[0] != null);
       assertString('XML child list item', getXmlElementAttribute(xmlChildren[0], 'name'), 'first');
+    }
+
+    final parsedPath = parseSvgPathData('M 0 0 L 10 0 L 10 10 Z');
+    assertTrue('SVG path parse', parsedPath != null);
+    assertTrue('invalid SVG path parse', parseSvgPathData('M nope') == null);
+    if (parsedPath != null) {
+      assertFinite('path length', getPathLength(parsedPath));
+      assertFinite('path signed area', getPathSignedArea(parsedPath));
+      assertFinite('path curvature at distance', getPathCurvatureAtDistance(parsedPath, 1.0));
+      final segmentCurvature = getPathSegmentCurvatureAtParameter(parsedPath, 1.0, 0.5);
+      assertTrue('path segment curvature', segmentCurvature == null || Math.isFinite(segmentCurvature));
+      containsPathPoint(parsedPath, 5.0, 2.0);
+      assertTrue('SVG path format', formatSvgPathData(parsedPath).length > 0);
+      assertTrue('SVG path append', appendSvgPathData(parsedPath, 'M 20 20 L 24 20'));
+
+      final mutablePath = clonePath(parsedPath);
+      appendPathMoveTo(mutablePath, 30.0, 30.0);
+      appendPathLineTo(mutablePath, 32.0, 30.0);
+      appendPathQuadraticCurveTo(mutablePath, 33.0, 31.0, 34.0, 30.0);
+      appendPathCubicCurveTo(mutablePath, 35.0, 29.0, 36.0, 31.0, 37.0, 30.0);
+      appendPathArc(mutablePath, 40.0, 40.0, 2.0, 0.0, Math.PI);
+      appendPathTangentArcTo(mutablePath, 42.0, 40.0, 42.0, 42.0, 1.0);
+      appendPathEllipticalArcTo(mutablePath, 2.0, 1.0, 0.0, false, true, 44.0, 42.0);
+      appendPathCircle(mutablePath, 50.0, 50.0, 2.0);
+      appendPathEllipse(mutablePath, 55.0, 50.0, 2.0, 1.0);
+      appendPathRectangle(mutablePath, 60.0, 50.0, 3.0, 2.0);
+      appendPathRoundedRectangle(mutablePath, 65.0, 50.0, 4.0, 3.0, 0.5);
+      appendPathRoundedRectangleWithCornerRadii(mutablePath, 70.0, 50.0, 4.0, 3.0, 0.25, 0.5, 0.75, 1.0);
+      appendPathClose(mutablePath);
+
+      final outPath = copyPath(parsedPath);
+      copyPath(mutablePath, outPath);
+      reversePath(mutablePath, outPath);
+      translatePath(mutablePath, 1.0, -1.0, outPath);
+      cleanPath(mutablePath, 0.1, outPath);
+      decimatePath(mutablePath, 0.1, outPath);
+      fitPathCurves(mutablePath, 0.1, outPath);
+
+      final pathMesh = acquirePathMesh(mutablePath);
+      tessellatePathInto(mutablePath, pathMesh);
+      releasePathMesh(pathMesh);
+      final directPathMesh = tessellatePath(mutablePath);
+      releasePathMesh(directPathMesh);
+      final typedPathMesh = acquirePathMeshTyped(mutablePath);
+      tessellatePathTypedInto(mutablePath, typedPathMesh);
+      releasePathMeshTyped(typedPathMesh);
+      final directTypedPathMesh = tessellatePathTyped(mutablePath);
+      releasePathMeshTyped(directTypedPathMesh);
     }
     final spring = createSpring();
     final spring2D = createSpring2D();
