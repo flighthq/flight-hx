@@ -2,6 +2,8 @@
 #pragma once
 #include <flight/reference.hpp>
 
+class null;
+
 namespace flight::types {
 struct Aabb;
 struct AabbLike;
@@ -2210,3 +2212,32 @@ struct WoffChecksumMismatch;
 struct WrappedDiffusePbrExtension;
 struct XmlElement;
 } // namespace flight::types
+
+// hxcpp spells an omitted optional class argument as its global null sentinel. A native
+// std::shared_ptr cannot consume that sentinel, so Haxe-facing references use this thin
+// owning wrapper. It remains implicitly convertible to and from Flight's exact Ref<T>.
+namespace flight_hx {
+template <typename T>
+class Ref : public flight::Ref<T> {
+ public:
+  using Base = flight::Ref<T>;
+  Ref() noexcept = default;
+  Ref(const ::null&) noexcept : Base() {}
+  Ref(std::nullptr_t) noexcept : Base(nullptr) {}
+  Ref(const Base& value) noexcept : Base(value) {}
+  Ref(Base&& value) noexcept : Base(std::move(value)) {}
+  bool operator==(const ::null&) const noexcept { return !static_cast<bool>(*this); }
+  bool operator!=(const ::null&) const noexcept { return static_cast<bool>(*this); }
+  friend bool operator==(const ::null&, const Ref& value) noexcept { return !static_cast<bool>(value); }
+  friend bool operator!=(const ::null&, const Ref& value) noexcept { return static_cast<bool>(value); }
+};
+} // namespace flight_hx
+
+#ifdef HXCPP_H
+namespace hx {
+template <typename T>
+struct CompareTraits<flight_hx::Ref<T>> {
+  inline static bool isNull(const flight_hx::Ref<T>& value) noexcept { return !static_cast<bool>(value); }
+};
+} // namespace hx
+#endif

@@ -24,7 +24,8 @@
     "flight-hx-hxcpp-cpp11-override/1",
     "flight-hx-hxcpp-array-float-copy-adapter/1",
     "flight-hx-hxcpp-nullable-string-copy-adapter/1",
-    "flight-hx-hxcpp-reference-carrier/1"
+    "flight-hx-hxcpp-reference-carrier/1",
+    "flight-hx-hxcpp-nullable-reference-wrapper/1"
   ],
   "scalarOverrideRefusals": [],
   "hosts": [
@@ -523,6 +524,89 @@
           "name": "disposeClipboardWatch",
           "native": "flight::clipboard::dispose_clipboard_watch",
           "header": "flight/clipboard/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        }
+      ]
+    },
+    {
+      "module": "flight.Clock",
+      "functions": [
+        {
+          "name": "addClockChild",
+          "native": "flight::clock::add_clock_child",
+          "header": "flight/clock/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "advanceClock",
+          "native": "flight::clock::advance_clock",
+          "header": "flight/clock/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "createChildClock",
+          "native": "flight::clock::create_child_clock",
+          "header": "flight/clock/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "createClock",
+          "native": "flight::clock::create_clock",
+          "header": "flight/clock/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "disposeClock",
+          "native": "flight::clock::dispose_clock",
+          "header": "flight/clock/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "getClockEffectiveScale",
+          "native": "flight::clock::get_clock_effective_scale",
+          "header": "flight/clock/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "getClockParent",
+          "native": "flight::clock::get_clock_parent",
+          "header": "flight/clock/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "isClockEffectivelyPaused",
+          "native": "flight::clock::is_clock_effectively_paused",
+          "header": "flight/clock/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "pauseClock",
+          "native": "flight::clock::pause_clock",
+          "header": "flight/clock/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "removeClockChild",
+          "native": "flight::clock::remove_clock_child",
+          "header": "flight/clock/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "resetClock",
+          "native": "flight::clock::reset_clock",
+          "header": "flight/clock/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "resumeClock",
+          "native": "flight::clock::resume_clock",
+          "header": "flight/clock/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "setClockScale",
+          "native": "flight::clock::set_clock_scale",
+          "header": "flight/clock/contract.hpp",
           "provenance": "flight-hx/reference-carrier/1"
         }
       ]
@@ -1700,8 +1784,128 @@
       "module": "flight.CameraControls",
       "functions": [
         {
+          "name": "addCameraShakeTrauma",
+          "native": "flight::camera_controls::add_camera_shake_trauma",
+          "header": "flight/camera_controls/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "cloneFlyCameraController",
+          "native": "flight::camera_controls::clone_fly_camera_controller",
+          "header": "flight/camera_controls/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "cloneOrbitCameraController",
+          "native": "flight::camera_controls::clone_orbit_camera_controller",
+          "header": "flight/camera_controls/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "copyFlyCameraController",
+          "native": "flight::camera_controls::copy_fly_camera_controller",
+          "header": "flight/camera_controls/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "copyOrbitCameraController",
+          "native": "flight::camera_controls::copy_orbit_camera_controller",
+          "header": "flight/camera_controls/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "createCameraShake",
+          "native": "flight::camera_controls::create_camera_shake",
+          "header": "flight/camera_controls/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
           "name": "createCameraShakeOffset",
           "native": "flight::camera_controls::create_camera_shake_offset",
+          "header": "flight/camera_controls/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "createFlyCameraController",
+          "native": "flight::camera_controls::create_fly_camera_controller",
+          "header": "flight/camera_controls/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "createOrbitCameraController",
+          "native": "flight::camera_controls::create_orbit_camera_controller",
+          "header": "flight/camera_controls/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "dollyOrbitCameraController",
+          "native": "flight::camera_controls::dolly_orbit_camera_controller",
+          "header": "flight/camera_controls/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "lookFlyCameraController",
+          "native": "flight::camera_controls::look_fly_camera_controller",
+          "header": "flight/camera_controls/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "moveFlyCameraController",
+          "native": "flight::camera_controls::move_fly_camera_controller",
+          "header": "flight/camera_controls/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "panOrbitCameraController",
+          "native": "flight::camera_controls::pan_orbit_camera_controller",
+          "header": "flight/camera_controls/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "panOrbitCameraControllerInViewPlane",
+          "native": "flight::camera_controls::pan_orbit_camera_controller_in_view_plane",
+          "header": "flight/camera_controls/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "resetCameraShake",
+          "native": "flight::camera_controls::reset_camera_shake",
+          "header": "flight/camera_controls/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "resetFlyCameraController",
+          "native": "flight::camera_controls::reset_fly_camera_controller",
+          "header": "flight/camera_controls/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "resetOrbitCameraController",
+          "native": "flight::camera_controls::reset_orbit_camera_controller",
+          "header": "flight/camera_controls/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "rotateOrbitCameraController",
+          "native": "flight::camera_controls::rotate_orbit_camera_controller",
+          "header": "flight/camera_controls/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "snapFlyCameraController",
+          "native": "flight::camera_controls::snap_fly_camera_controller",
+          "header": "flight/camera_controls/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "snapOrbitCameraController",
+          "native": "flight::camera_controls::snap_orbit_camera_controller",
+          "header": "flight/camera_controls/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "updateCameraShake",
+          "native": "flight::camera_controls::update_camera_shake",
           "header": "flight/camera_controls/contract.hpp",
           "provenance": "flight-hx/reference-carrier/1"
         }

@@ -4,7 +4,7 @@ package flight._cpp;
 #if cpp
 // The carrier is flight::Ref<T>; copying this value retains shared ownership and never exposes a raw pointer.
 @:include("flight_hx/types/reference_fwd.hpp")
-@:native("flight::Ref<flight::types::DomScene2DRectangle>")
+@:native("flight_hx::Ref<flight::types::DomScene2DRectangle>")
 @:structAccess
 extern class DomScene2DRectangle {}
 #end

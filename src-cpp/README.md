@@ -10,7 +10,7 @@ headers. Public facade overrides deliberately expose nothing outside that manife
 The current pin's generated SDK uses the same Flight revision as this repo and records its distinct
 flight-compiler revision (`806d257` versus flight-hx planning at `804435a`). It reports 2,574 emitted
 and 577 refused modules from 3,151 profile inputs across 153 packages. The exact general-purpose
-Haxe-callable partition remains intentionally smaller: 282 functions across 35 public modules. They
+Haxe-callable partition remains intentionally smaller: 315 functions across 36 public modules. They
 are compared with current web signatures, then compiled and executed from one Haxe source in the
 cross-target gate. Sixty-two bind directly from the compiler plan, four use compiler-emitted UTF-8
 String adapters, 53 required-primitive functions, and three optional-scalar adapters are explicit
@@ -18,9 +18,10 @@ flight-hx overrides from dependency-complete flight-cpp headers. Forty-five addi
 use the generated flat/recursive `Array<Float>` adapter, which copies between hxcpp and
 `flight::Array<double>`, preserves argument aliases and optional-output identity, and copies native
 mutations back. Two Audio functions copy required UTF-8 strings and map optional native results to
-Haxe `Null<String>`. Another 113 functions across 15 packages pass `flight::Ref<T>` carriers through
-unchanged, retain shared ownership, reconstruct optional primitive parameters from presence bits,
-and accept readonly structural-reference inputs where the native signature requires them.
+Haxe `Null<String>`. Another 146 functions across 16 packages pass `flight::Ref<T>` carriers through
+without ownership loss, reconstruct optional primitive parameters from presence bits, preserve
+optional reference omission with a thin owning wrapper, map nullable reference results to Haxe
+`Null<T>`, and accept readonly structural-reference inputs where the native signature requires them.
 Expanding that partition remains manifest-first and compile-proven; the larger generated C++
 inventory is not silently claimed as Haxe support.
 
@@ -55,12 +56,14 @@ exact dependency-complete native signatures. Nullable-String adapters require an
 remain generated from the manifest rather than handwritten per function, and every promoted call
 executes on both native and web through the installed consumer.
 Reference-carrier adapters require dependency-complete headers, exact native names and signatures,
-non-optional reference parameters, and either exact `flight::Ref<T>` inputs or flight-cpp's readonly
-`StructuralRef` view. A generated dependency-light header forward-declares only real structs, never
+and either exact `flight::Ref<T>` inputs or flight-cpp's readonly `StructuralRef` view. A generated
+dependency-light header forward-declares only real structs, never
 C++ aliases, which keeps the full type contract and its `flight::null` helper outside hxcpp's
 generated namespace. Their public wrappers are `extern inline`: hxcpp reflected static wrappers are
-limited to five arguments, while inlined calls preserve Flight's larger signatures. Reference
-handles can be passed and returned but cannot currently be compared directly with Haxe `null`.
+limited to five arguments, while inlined calls preserve Flight's larger signatures. Its
+`flight_hx::Ref<T>` wrapper derives from the exact Flight shared reference, accepts hxcpp's omitted
+argument sentinel, and supplies the comparison trait needed for Haxe `null` checks; bridges unwrap
+it back to `flight::Ref<T>` and `std::optional` at the C++ boundary.
 `manifest.json` also records failed override probes. The current inventory is empty: flight-cpp's
 Spine helper override repaired the last recorded header failure, and
 `Skeleton2dFormats.clampUnit` now crosses the same compile-and-run gate as the other required-scalar

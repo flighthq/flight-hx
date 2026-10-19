@@ -47,6 +47,7 @@ const expectedCorrections = [
   'flight-hx-hxcpp-array-float-copy-adapter/1',
   'flight-hx-hxcpp-nullable-string-copy-adapter/1',
   'flight-hx-hxcpp-reference-carrier/1',
+  'flight-hx-hxcpp-nullable-reference-wrapper/1',
 ];
 const expectedNativeHost = {
   module: 'flight.HostSdlGl',
@@ -275,8 +276,9 @@ function validateNativeManifest(flightCpp) {
       if (!nativeMember) fail(`${module.module}.${binding.name} is absent from the hxcpp extern`);
       const expectedNativeSignature =
         plan.transport === 'optional-override' ||
-        ((plan.transport === 'array-float-adapter' || plan.transport === 'reference-carrier') &&
-          jsMember.signature.includes('?'))
+        (plan.transport === 'array-float-adapter' && jsMember.signature.includes('?')) ||
+        (plan.transport === 'reference-carrier' &&
+          /\\?[A-Za-z_][A-Za-z0-9_]*:(?:Bool|Float)(?:,|\\))/u.test(jsMember.signature))
           ? optionalBridgeSignature(jsMember.signature)
           : jsMember.signature;
       if (facadeMember.signature !== jsMember.signature || nativeMember.signature !== expectedNativeSignature) {

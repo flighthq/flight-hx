@@ -1,12 +1,13 @@
-# Cross-target scalar SDK slice
+# Cross-target SDK binding slice
 
 `CrossTargetMath.hx` is one host-free Haxe program compiled for the two current production backends
 from an isolated `-lib flight` consumer:
 
 - web uses the complete generated Flight ESM extern surface and the static-import bundler pipeline;
-- desktop uses hxcpp for all 121 manifest-recorded, compile-proven functions across 24 public
-  modules: 62 compiler-planned direct calls, four compiler-emitted UTF-8 String adapters, 52
-  required-scalar overrides, and three optional-scalar adapters;
+- desktop uses hxcpp for all 315 manifest-recorded, compile-proven functions across 36 public
+  modules: 62 compiler-planned direct calls, four compiler-emitted UTF-8 String adapters, 53
+  required-scalar overrides, three optional-scalar adapters, 45 array adapters, two nullable-String
+  adapters, and 146 shared-reference carriers;
 - `CrossTargetFallback.hx` separately keeps the legacy-pinned compiler-emitted Haxe subset honest
   on ordinary Haxe-to-JS without adding target branches to the production sample.
 

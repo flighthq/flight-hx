@@ -3094,177 +3094,6 @@
       "carrierFamilies": [
         "named"
       ],
-      "externClass": "flight._cpp._attempt.Attempt_CameraControls_addCameraShakeTrauma",
-      "header": "flight/camera_controls/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::camera_controls::add_camera_shake_trauma",
-      "package": "@flighthq/camera-controls",
-      "publicName": "flight.CameraControls.addCameraShakeTrauma",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier CameraShake has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/camera-controls/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_CameraControls_cloneFlyCameraController",
-      "header": "flight/camera_controls/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::camera_controls::clone_fly_camera_controller",
-      "package": "@flighthq/camera-controls",
-      "publicName": "flight.CameraControls.cloneFlyCameraController",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/camera-controls/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_CameraControls_cloneOrbitCameraController",
-      "header": "flight/camera_controls/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::camera_controls::clone_orbit_camera_controller",
-      "package": "@flighthq/camera-controls",
-      "publicName": "flight.CameraControls.cloneOrbitCameraController",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/camera-controls/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_CameraControls_copyFlyCameraController",
-      "header": "flight/camera_controls/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::camera_controls::copy_fly_camera_controller",
-      "package": "@flighthq/camera-controls",
-      "publicName": "flight.CameraControls.copyFlyCameraController",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier FlyCameraController has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/camera-controls/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_CameraControls_copyOrbitCameraController",
-      "header": "flight/camera_controls/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::camera_controls::copy_orbit_camera_controller",
-      "package": "@flighthq/camera-controls",
-      "publicName": "flight.CameraControls.copyOrbitCameraController",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier OrbitCameraController has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/camera-controls/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_CameraControls_createCameraShake",
-      "header": "flight/camera_controls/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::camera_controls::create_camera_shake",
-      "package": "@flighthq/camera-controls",
-      "publicName": "flight.CameraControls.createCameraShake",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "only optional Float is supported by this Haxe C++ extern slice",
-        "phase": "planning"
-      },
-      "source": "packages/camera-controls/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_CameraControls_createFlyCameraController",
-      "header": "flight/camera_controls/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::camera_controls::create_fly_camera_controller",
-      "package": "@flighthq/camera-controls",
-      "publicName": "flight.CameraControls.createFlyCameraController",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "only optional Float is supported by this Haxe C++ extern slice",
-        "phase": "planning"
-      },
-      "source": "packages/camera-controls/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_CameraControls_createOrbitCameraController",
-      "header": "flight/camera_controls/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::camera_controls::create_orbit_camera_controller",
-      "package": "@flighthq/camera-controls",
-      "publicName": "flight.CameraControls.createOrbitCameraController",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "only optional Float is supported by this Haxe C++ extern slice",
-        "phase": "planning"
-      },
-      "source": "packages/camera-controls/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_CameraControls_dollyOrbitCameraController",
-      "header": "flight/camera_controls/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::camera_controls::dolly_orbit_camera_controller",
-      "package": "@flighthq/camera-controls",
-      "publicName": "flight.CameraControls.dollyOrbitCameraController",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier OrbitCameraController has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/camera-controls/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
       "externClass": "flight._cpp._attempt.Attempt_CameraControls_frameOrbitCameraControllerToSphere",
       "header": "flight/camera_controls/contract.hpp",
       "kind": "function",
@@ -3379,158 +3208,6 @@
       "carrierFamilies": [
         "named"
       ],
-      "externClass": "flight._cpp._attempt.Attempt_CameraControls_lookFlyCameraController",
-      "header": "flight/camera_controls/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::camera_controls::look_fly_camera_controller",
-      "package": "@flighthq/camera-controls",
-      "publicName": "flight.CameraControls.lookFlyCameraController",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier FlyCameraController has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/camera-controls/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_CameraControls_moveFlyCameraController",
-      "header": "flight/camera_controls/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::camera_controls::move_fly_camera_controller",
-      "package": "@flighthq/camera-controls",
-      "publicName": "flight.CameraControls.moveFlyCameraController",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier FlyCameraController has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/camera-controls/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_CameraControls_panOrbitCameraController",
-      "header": "flight/camera_controls/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::camera_controls::pan_orbit_camera_controller",
-      "package": "@flighthq/camera-controls",
-      "publicName": "flight.CameraControls.panOrbitCameraController",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier OrbitCameraController has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/camera-controls/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_CameraControls_panOrbitCameraControllerInViewPlane",
-      "header": "flight/camera_controls/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::camera_controls::pan_orbit_camera_controller_in_view_plane",
-      "package": "@flighthq/camera-controls",
-      "publicName": "flight.CameraControls.panOrbitCameraControllerInViewPlane",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier OrbitCameraController has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/camera-controls/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_CameraControls_resetCameraShake",
-      "header": "flight/camera_controls/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::camera_controls::reset_camera_shake",
-      "package": "@flighthq/camera-controls",
-      "publicName": "flight.CameraControls.resetCameraShake",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier CameraShake has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/camera-controls/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_CameraControls_resetFlyCameraController",
-      "header": "flight/camera_controls/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::camera_controls::reset_fly_camera_controller",
-      "package": "@flighthq/camera-controls",
-      "publicName": "flight.CameraControls.resetFlyCameraController",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier FlyCameraController has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/camera-controls/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_CameraControls_resetOrbitCameraController",
-      "header": "flight/camera_controls/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::camera_controls::reset_orbit_camera_controller",
-      "package": "@flighthq/camera-controls",
-      "publicName": "flight.CameraControls.resetOrbitCameraController",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier OrbitCameraController has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/camera-controls/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_CameraControls_rotateOrbitCameraController",
-      "header": "flight/camera_controls/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::camera_controls::rotate_orbit_camera_controller",
-      "package": "@flighthq/camera-controls",
-      "publicName": "flight.CameraControls.rotateOrbitCameraController",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier OrbitCameraController has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/camera-controls/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
       "externClass": "flight._cpp._attempt.Attempt_CameraControls_setOrthographicProjectionFrameToSphere",
       "header": "flight/camera_controls/contract.hpp",
       "kind": "function",
@@ -3550,44 +3227,6 @@
       "carrierFamilies": [
         "named"
       ],
-      "externClass": "flight._cpp._attempt.Attempt_CameraControls_snapFlyCameraController",
-      "header": "flight/camera_controls/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::camera_controls::snap_fly_camera_controller",
-      "package": "@flighthq/camera-controls",
-      "publicName": "flight.CameraControls.snapFlyCameraController",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier FlyCameraController has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/camera-controls/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_CameraControls_snapOrbitCameraController",
-      "header": "flight/camera_controls/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::camera_controls::snap_orbit_camera_controller",
-      "package": "@flighthq/camera-controls",
-      "publicName": "flight.CameraControls.snapOrbitCameraController",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier OrbitCameraController has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/camera-controls/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
       "externClass": "flight._cpp._attempt.Attempt_CameraControls_updateCamera2DFollow",
       "header": "flight/camera_controls/contract.hpp",
       "kind": "function",
@@ -3597,25 +3236,6 @@
       "refusal": {
         "code": "unsupported-carrier",
         "message": "named carrier Camera2D has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/camera-controls/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_CameraControls_updateCameraShake",
-      "header": "flight/camera_controls/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::camera_controls::update_camera_shake",
-      "package": "@flighthq/camera-controls",
-      "publicName": "flight.CameraControls.updateCameraShake",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier CameraShake has no unique published C++ type locator",
         "phase": "planning"
       },
       "source": "packages/camera-controls/src/contract.ts",
@@ -4125,101 +3745,6 @@
     },
     {
       "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Clock_addClockChild",
-      "header": "flight/clock/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::clock::add_clock_child",
-      "package": "@flighthq/clock",
-      "publicName": "flight.Clock.addClockChild",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Clock has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/clock/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Clock_advanceClock",
-      "header": "flight/clock/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::clock::advance_clock",
-      "package": "@flighthq/clock",
-      "publicName": "flight.Clock.advanceClock",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Clock has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/clock/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Clock_createChildClock",
-      "header": "flight/clock/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::clock::create_child_clock",
-      "package": "@flighthq/clock",
-      "publicName": "flight.Clock.createChildClock",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Clock has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/clock/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Clock_createClock",
-      "header": "flight/clock/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::clock::create_clock",
-      "package": "@flighthq/clock",
-      "publicName": "flight.Clock.createClock",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "only optional Float is supported by this Haxe C++ extern slice",
-        "phase": "planning"
-      },
-      "source": "packages/clock/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Clock_disposeClock",
-      "header": "flight/clock/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::clock::dispose_clock",
-      "package": "@flighthq/clock",
-      "publicName": "flight.Clock.disposeClock",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Clock has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/clock/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
         "callback",
         "named"
       ],
@@ -4242,45 +3767,6 @@
       "carrierFamilies": [
         "named"
       ],
-      "externClass": "flight._cpp._attempt.Attempt_Clock_getClockEffectiveScale",
-      "header": "flight/clock/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::clock::get_clock_effective_scale",
-      "package": "@flighthq/clock",
-      "publicName": "flight.Clock.getClockEffectiveScale",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/clock/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named",
-        "nullable"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Clock_getClockParent",
-      "header": "flight/clock/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::clock::get_clock_parent",
-      "package": "@flighthq/clock",
-      "publicName": "flight.Clock.getClockParent",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/clock/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
       "externClass": "flight._cpp._attempt.Attempt_Clock_initializeClock",
       "header": "flight/clock/contract.hpp",
       "kind": "function",
@@ -4290,120 +3776,6 @@
       "refusal": {
         "code": "unsupported-carrier",
         "message": "generic named carriers are not supported",
-        "phase": "planning"
-      },
-      "source": "packages/clock/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Clock_isClockEffectivelyPaused",
-      "header": "flight/clock/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::clock::is_clock_effectively_paused",
-      "package": "@flighthq/clock",
-      "publicName": "flight.Clock.isClockEffectivelyPaused",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/clock/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Clock_pauseClock",
-      "header": "flight/clock/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::clock::pause_clock",
-      "package": "@flighthq/clock",
-      "publicName": "flight.Clock.pauseClock",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Clock has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/clock/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Clock_removeClockChild",
-      "header": "flight/clock/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::clock::remove_clock_child",
-      "package": "@flighthq/clock",
-      "publicName": "flight.Clock.removeClockChild",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Clock has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/clock/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Clock_resetClock",
-      "header": "flight/clock/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::clock::reset_clock",
-      "package": "@flighthq/clock",
-      "publicName": "flight.Clock.resetClock",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Clock has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/clock/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Clock_resumeClock",
-      "header": "flight/clock/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::clock::resume_clock",
-      "package": "@flighthq/clock",
-      "publicName": "flight.Clock.resumeClock",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Clock has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/clock/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Clock_setClockScale",
-      "header": "flight/clock/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::clock::set_clock_scale",
-      "package": "@flighthq/clock",
-      "publicName": "flight.Clock.setClockScale",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Clock has no unique published C++ type locator",
         "phase": "planning"
       },
       "source": "packages/clock/src/contract.ts",
@@ -18714,7 +18086,7 @@
   },
   "schema": "flight-hx-native-binding-attempts/1",
   "summary": {
-    "functions": 587,
+    "functions": 554,
     "carrierFamilies": [
       {
         "count": 80,
@@ -18737,11 +18109,11 @@
         "name": "generic-function"
       },
       {
-        "count": 634,
+        "count": 601,
         "name": "named"
       },
       {
-        "count": 67,
+        "count": 66,
         "name": "nullable"
       },
       {
@@ -18754,8 +18126,8 @@
       }
     ],
     "holders": 42,
-    "isolatedExterns": 966,
-    "total": 966,
+    "isolatedExterns": 933,
+    "total": 933,
     "values": 379
   }
 }

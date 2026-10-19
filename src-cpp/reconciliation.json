@@ -205,6 +205,19 @@
       "flight.Clipboard.createClipboardWatch",
       "flight.Clipboard.detachClipboardWatch",
       "flight.Clipboard.disposeClipboardWatch",
+      "flight.Clock.addClockChild",
+      "flight.Clock.advanceClock",
+      "flight.Clock.createChildClock",
+      "flight.Clock.createClock",
+      "flight.Clock.disposeClock",
+      "flight.Clock.getClockEffectiveScale",
+      "flight.Clock.getClockParent",
+      "flight.Clock.isClockEffectivelyPaused",
+      "flight.Clock.pauseClock",
+      "flight.Clock.removeClockChild",
+      "flight.Clock.resetClock",
+      "flight.Clock.resumeClock",
+      "flight.Clock.setClockScale",
       "flight.Device.createDeviceCapabilities",
       "flight.Device.createDeviceDisplayMetrics",
       "flight.Device.createDeviceInfo",
@@ -255,7 +268,27 @@
       "flight.Sensors.createSensors",
       "flight.Sensors.detachSensors",
       "flight.Sensors.disposeSensors",
+      "flight.CameraControls.addCameraShakeTrauma",
+      "flight.CameraControls.cloneFlyCameraController",
+      "flight.CameraControls.cloneOrbitCameraController",
+      "flight.CameraControls.copyFlyCameraController",
+      "flight.CameraControls.copyOrbitCameraController",
+      "flight.CameraControls.createCameraShake",
       "flight.CameraControls.createCameraShakeOffset",
+      "flight.CameraControls.createFlyCameraController",
+      "flight.CameraControls.createOrbitCameraController",
+      "flight.CameraControls.dollyOrbitCameraController",
+      "flight.CameraControls.lookFlyCameraController",
+      "flight.CameraControls.moveFlyCameraController",
+      "flight.CameraControls.panOrbitCameraController",
+      "flight.CameraControls.panOrbitCameraControllerInViewPlane",
+      "flight.CameraControls.resetCameraShake",
+      "flight.CameraControls.resetFlyCameraController",
+      "flight.CameraControls.resetOrbitCameraController",
+      "flight.CameraControls.rotateOrbitCameraController",
+      "flight.CameraControls.snapFlyCameraController",
+      "flight.CameraControls.snapOrbitCameraController",
+      "flight.CameraControls.updateCameraShake",
       "flight.Geolocation.createGeolocationPosition",
       "flight.Platform.createPlatformInfo",
       "flight.Velocity.beginVelocityFrame",
@@ -1694,7 +1727,7 @@
       "issues": [
         {
           "code": "native-function-gap",
-          "count": 30
+          "count": 10
         },
         {
           "code": "non-scalar-signature-review",
@@ -1706,7 +1739,7 @@
         },
         {
           "code": "native-materialized-unproven-functions",
-          "count": 30
+          "count": 10
         }
       ],
       "nativeDefault": {
@@ -1714,15 +1747,135 @@
           {
             "header": "flight/camera_controls/contract.hpp",
             "holder": "CameraControls",
+            "name": "addCameraShakeTrauma",
+            "native": "flight::camera_controls::add_camera_shake_trauma"
+          },
+          {
+            "header": "flight/camera_controls/contract.hpp",
+            "holder": "CameraControls",
+            "name": "cloneFlyCameraController",
+            "native": "flight::camera_controls::clone_fly_camera_controller"
+          },
+          {
+            "header": "flight/camera_controls/contract.hpp",
+            "holder": "CameraControls",
+            "name": "cloneOrbitCameraController",
+            "native": "flight::camera_controls::clone_orbit_camera_controller"
+          },
+          {
+            "header": "flight/camera_controls/contract.hpp",
+            "holder": "CameraControls",
+            "name": "copyFlyCameraController",
+            "native": "flight::camera_controls::copy_fly_camera_controller"
+          },
+          {
+            "header": "flight/camera_controls/contract.hpp",
+            "holder": "CameraControls",
+            "name": "copyOrbitCameraController",
+            "native": "flight::camera_controls::copy_orbit_camera_controller"
+          },
+          {
+            "header": "flight/camera_controls/contract.hpp",
+            "holder": "CameraControls",
+            "name": "createCameraShake",
+            "native": "flight::camera_controls::create_camera_shake"
+          },
+          {
+            "header": "flight/camera_controls/contract.hpp",
+            "holder": "CameraControls",
             "name": "createCameraShakeOffset",
             "native": "flight::camera_controls::create_camera_shake_offset"
+          },
+          {
+            "header": "flight/camera_controls/contract.hpp",
+            "holder": "CameraControls",
+            "name": "createFlyCameraController",
+            "native": "flight::camera_controls::create_fly_camera_controller"
+          },
+          {
+            "header": "flight/camera_controls/contract.hpp",
+            "holder": "CameraControls",
+            "name": "createOrbitCameraController",
+            "native": "flight::camera_controls::create_orbit_camera_controller"
+          },
+          {
+            "header": "flight/camera_controls/contract.hpp",
+            "holder": "CameraControls",
+            "name": "dollyOrbitCameraController",
+            "native": "flight::camera_controls::dolly_orbit_camera_controller"
+          },
+          {
+            "header": "flight/camera_controls/contract.hpp",
+            "holder": "CameraControls",
+            "name": "lookFlyCameraController",
+            "native": "flight::camera_controls::look_fly_camera_controller"
+          },
+          {
+            "header": "flight/camera_controls/contract.hpp",
+            "holder": "CameraControls",
+            "name": "moveFlyCameraController",
+            "native": "flight::camera_controls::move_fly_camera_controller"
+          },
+          {
+            "header": "flight/camera_controls/contract.hpp",
+            "holder": "CameraControls",
+            "name": "panOrbitCameraController",
+            "native": "flight::camera_controls::pan_orbit_camera_controller"
+          },
+          {
+            "header": "flight/camera_controls/contract.hpp",
+            "holder": "CameraControls",
+            "name": "panOrbitCameraControllerInViewPlane",
+            "native": "flight::camera_controls::pan_orbit_camera_controller_in_view_plane"
+          },
+          {
+            "header": "flight/camera_controls/contract.hpp",
+            "holder": "CameraControls",
+            "name": "resetCameraShake",
+            "native": "flight::camera_controls::reset_camera_shake"
+          },
+          {
+            "header": "flight/camera_controls/contract.hpp",
+            "holder": "CameraControls",
+            "name": "resetFlyCameraController",
+            "native": "flight::camera_controls::reset_fly_camera_controller"
+          },
+          {
+            "header": "flight/camera_controls/contract.hpp",
+            "holder": "CameraControls",
+            "name": "resetOrbitCameraController",
+            "native": "flight::camera_controls::reset_orbit_camera_controller"
+          },
+          {
+            "header": "flight/camera_controls/contract.hpp",
+            "holder": "CameraControls",
+            "name": "rotateOrbitCameraController",
+            "native": "flight::camera_controls::rotate_orbit_camera_controller"
+          },
+          {
+            "header": "flight/camera_controls/contract.hpp",
+            "holder": "CameraControls",
+            "name": "snapFlyCameraController",
+            "native": "flight::camera_controls::snap_fly_camera_controller"
+          },
+          {
+            "header": "flight/camera_controls/contract.hpp",
+            "holder": "CameraControls",
+            "name": "snapOrbitCameraController",
+            "native": "flight::camera_controls::snap_orbit_camera_controller"
+          },
+          {
+            "header": "flight/camera_controls/contract.hpp",
+            "holder": "CameraControls",
+            "name": "updateCameraShake",
+            "native": "flight::camera_controls::update_camera_shake"
           }
         ],
         "types": [],
         "values": []
       },
       "nativeAttempts": {
-        "functions": 30,
+        "functions": 10,
         "types": 0,
         "unavailableUpstream": 0,
         "values": 0
@@ -1995,7 +2148,7 @@
       "issues": [
         {
           "code": "native-function-gap",
-          "count": 15
+          "count": 2
         },
         {
           "code": "non-scalar-signature-review",
@@ -2007,23 +2160,102 @@
         },
         {
           "code": "native-materialized-unproven-functions",
-          "count": 15
+          "count": 2
         }
       ],
       "nativeDefault": {
-        "functions": [],
+        "functions": [
+          {
+            "header": "flight/clock/contract.hpp",
+            "holder": "Clock",
+            "name": "addClockChild",
+            "native": "flight::clock::add_clock_child"
+          },
+          {
+            "header": "flight/clock/contract.hpp",
+            "holder": "Clock",
+            "name": "advanceClock",
+            "native": "flight::clock::advance_clock"
+          },
+          {
+            "header": "flight/clock/contract.hpp",
+            "holder": "Clock",
+            "name": "createChildClock",
+            "native": "flight::clock::create_child_clock"
+          },
+          {
+            "header": "flight/clock/contract.hpp",
+            "holder": "Clock",
+            "name": "createClock",
+            "native": "flight::clock::create_clock"
+          },
+          {
+            "header": "flight/clock/contract.hpp",
+            "holder": "Clock",
+            "name": "disposeClock",
+            "native": "flight::clock::dispose_clock"
+          },
+          {
+            "header": "flight/clock/contract.hpp",
+            "holder": "Clock",
+            "name": "getClockEffectiveScale",
+            "native": "flight::clock::get_clock_effective_scale"
+          },
+          {
+            "header": "flight/clock/contract.hpp",
+            "holder": "Clock",
+            "name": "getClockParent",
+            "native": "flight::clock::get_clock_parent"
+          },
+          {
+            "header": "flight/clock/contract.hpp",
+            "holder": "Clock",
+            "name": "isClockEffectivelyPaused",
+            "native": "flight::clock::is_clock_effectively_paused"
+          },
+          {
+            "header": "flight/clock/contract.hpp",
+            "holder": "Clock",
+            "name": "pauseClock",
+            "native": "flight::clock::pause_clock"
+          },
+          {
+            "header": "flight/clock/contract.hpp",
+            "holder": "Clock",
+            "name": "removeClockChild",
+            "native": "flight::clock::remove_clock_child"
+          },
+          {
+            "header": "flight/clock/contract.hpp",
+            "holder": "Clock",
+            "name": "resetClock",
+            "native": "flight::clock::reset_clock"
+          },
+          {
+            "header": "flight/clock/contract.hpp",
+            "holder": "Clock",
+            "name": "resumeClock",
+            "native": "flight::clock::resume_clock"
+          },
+          {
+            "header": "flight/clock/contract.hpp",
+            "holder": "Clock",
+            "name": "setClockScale",
+            "native": "flight::clock::set_clock_scale"
+          }
+        ],
         "types": [],
         "values": []
       },
       "nativeAttempts": {
-        "functions": 15,
+        "functions": 2,
         "types": 0,
         "unavailableUpstream": 0,
         "values": 0
       },
       "package": "@flighthq/clock",
       "scalarProbeCandidates": [],
-      "status": "emitted-unbound",
+      "status": "partial-native",
       "webDefault": {
         "functions": 15,
         "types": 0,
@@ -13379,11 +13611,11 @@
       "arrayFloatAdapters": 45,
       "boundHeaderConfirmedScalarFunctions": 114,
       "extensionTypes": 1,
-      "functions": 282,
+      "functions": 315,
       "nullableStringAdapters": 2,
-      "packages": 36,
+      "packages": 37,
       "optionalScalarAdapters": 3,
-      "referenceCarriers": 113,
+      "referenceCarriers": 146,
       "requiredScalarOverrides": 53,
       "scalarOverrideRefusals": 0,
       "types": 3,
@@ -13412,11 +13644,11 @@
           "name": "generic-function"
         },
         {
-          "count": 634,
+          "count": 601,
           "name": "named"
         },
         {
-          "count": 67,
+          "count": 66,
           "name": "nullable"
         },
         {
@@ -13431,10 +13663,10 @@
       "compileProbes": 0,
       "cppAvailable": 4268,
       "cppUnavailable": 6979,
-      "functions": 587,
+      "functions": 554,
       "genericReferenceTemplateAdapters": 44,
       "haxeTypecheck": "pass",
-      "isolatedFunctionValueExterns": 966,
+      "isolatedFunctionValueExterns": 933,
       "types": 3073,
       "values": 379
     },
@@ -13468,9 +13700,9 @@
       "unboundFunctionCandidates": 0
     },
     "packageStatus": {
-      "emitted-unbound": 116,
+      "emitted-unbound": 115,
       "empty-web-contract": 1,
-      "partial-native": 36
+      "partial-native": 37
     },
     "scalarExpansion": {
       "headerConfirmedFunctions": 183,
