@@ -85,6 +85,11 @@ const planned = new Map(
     .filter(({ kind }) => kind === 'function')
     .map((declaration) => [declaration.publicName, declaration]),
 );
+const attemptedFunctions = new Map(
+  planning.bindingAttempts
+    .filter(({ publicHaxe }) => publicHaxe.kind === 'function')
+    .map((attempt) => [attempt.publicHaxe.qualifiedName, attempt]),
+);
 const nativeReferenceTypes = new Map(
   planning.declarations
     .filter(({ headerStatus, kind, transport }) =>
@@ -620,10 +625,19 @@ function validateReferenceCarrier(publicName, binding, declaration, parsed) {
   if (firstOptional >= 0 && parsed.parameters.slice(firstOptional).some(({ optional }) => !optional)) {
     throw new Error(`${publicName} reference carrier has a required parameter after an optional parameter`);
   }
-  const cppName = camelToSnake(declaration.sourceName);
-  if (!binding.native.endsWith(`::${cppName}`)) {
-    throw new Error(`${publicName} reference carrier native locator does not end in ${cppName}`);
+  const attempt = attemptedFunctions.get(publicName);
+  const locator = attempt?.cpp?.availability === 'available' ? attempt.cpp.locator : undefined;
+  if (!locator) {
+    throw new Error(`${publicName} reference carrier has no compiler/flight-cpp function locator`);
   }
+  const expectedNativeName = `${locator.namespace}::${locator.spelling}`;
+  if (binding.native !== expectedNativeName || binding.header !== locator.include) {
+    throw new Error(
+      `${publicName} reference carrier locator drifted: ` +
+        `${binding.native} in ${binding.header} != ${expectedNativeName} in ${locator.include}`,
+    );
+  }
+  const cppName = locator.spelling;
   const headerPath = path.join(flightCpp.directory, 'generated', 'include', binding.header);
   if (!existsSync(headerPath)) {
     throw new Error(`${publicName} reference carrier header is missing: ${binding.header}`);

@@ -1327,6 +1327,119 @@
           "header": "flight/protocol/contract.hpp"
         }
       ]
+    },
+    {
+      "module": "flight.Spring",
+      "functions": [
+        {
+          "name": "addSpringImpulse",
+          "native": "flight::spring::add_spring_impulse",
+          "header": "flight/spring/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "addSpringImpulse2D",
+          "native": "flight::spring::add_spring_impulse_2d",
+          "header": "flight/spring/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "addSpringImpulse3D",
+          "native": "flight::spring::add_spring_impulse_3d",
+          "header": "flight/spring/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "createSpring",
+          "native": "flight::spring::create_spring",
+          "header": "flight/spring/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "createSpring2D",
+          "native": "flight::spring::create_spring_2d",
+          "header": "flight/spring/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "createSpring3D",
+          "native": "flight::spring::create_spring_3d",
+          "header": "flight/spring/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "createSpringConfig",
+          "native": "flight::spring::create_spring_config",
+          "header": "flight/spring/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "createSpringConfigFromPhysical",
+          "native": "flight::spring::create_spring_config_from_physical",
+          "header": "flight/spring/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "isSpring2DSettled",
+          "native": "flight::spring::is_spring_2d_settled",
+          "header": "flight/spring/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "isSpring3DSettled",
+          "native": "flight::spring::is_spring_3d_settled",
+          "header": "flight/spring/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "isSpringSettled",
+          "native": "flight::spring::is_spring_settled",
+          "header": "flight/spring/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "resetSpring",
+          "native": "flight::spring::reset_spring",
+          "header": "flight/spring/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "resetSpring2D",
+          "native": "flight::spring::reset_spring_2d",
+          "header": "flight/spring/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "resetSpring3D",
+          "native": "flight::spring::reset_spring_3d",
+          "header": "flight/spring/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "updateSpring",
+          "native": "flight::spring::update_spring",
+          "header": "flight/spring/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "updateSpring2D",
+          "native": "flight::spring::update_spring_2d",
+          "header": "flight/spring/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "updateSpring3D",
+          "native": "flight::spring::update_spring_3d",
+          "header": "flight/spring/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "updateSpringAngle",
+          "native": "flight::spring::update_spring_angle",
+          "header": "flight/spring/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        }
+      ]
     }
   ]
 }

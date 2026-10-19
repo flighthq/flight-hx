@@ -12500,158 +12500,6 @@
       "carrierFamilies": [
         "named"
       ],
-      "externClass": "flight._cpp._attempt.Attempt_Spring_addSpringImpulse",
-      "header": "flight/spring/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::spring::add_spring_impulse",
-      "package": "@flighthq/spring",
-      "publicName": "flight.Spring.addSpringImpulse",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Spring has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/spring/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Spring_addSpringImpulse2D",
-      "header": "flight/spring/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::spring::add_spring_impulse_2d",
-      "package": "@flighthq/spring",
-      "publicName": "flight.Spring.addSpringImpulse2D",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Spring2D has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/spring/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Spring_addSpringImpulse3D",
-      "header": "flight/spring/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::spring::add_spring_impulse_3d",
-      "package": "@flighthq/spring",
-      "publicName": "flight.Spring.addSpringImpulse3D",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Spring3D has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/spring/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Spring_createSpring",
-      "header": "flight/spring/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::spring::create_spring",
-      "package": "@flighthq/spring",
-      "publicName": "flight.Spring.createSpring",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "defaulted parameters need an exact C++ default-argument contract",
-        "phase": "planning"
-      },
-      "source": "packages/spring/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Spring_createSpring2D",
-      "header": "flight/spring/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::spring::create_spring_2d",
-      "package": "@flighthq/spring",
-      "publicName": "flight.Spring.createSpring2D",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "defaulted parameters need an exact C++ default-argument contract",
-        "phase": "planning"
-      },
-      "source": "packages/spring/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Spring_createSpring3D",
-      "header": "flight/spring/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::spring::create_spring_3d",
-      "package": "@flighthq/spring",
-      "publicName": "flight.Spring.createSpring3D",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "defaulted parameters need an exact C++ default-argument contract",
-        "phase": "planning"
-      },
-      "source": "packages/spring/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Spring_createSpringConfig",
-      "header": "flight/spring/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::spring::create_spring_config",
-      "package": "@flighthq/spring",
-      "publicName": "flight.Spring.createSpringConfig",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier SpringConfig has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/spring/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Spring_createSpringConfigFromPhysical",
-      "header": "flight/spring/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::spring::create_spring_config_from_physical",
-      "package": "@flighthq/spring",
-      "publicName": "flight.Spring.createSpringConfigFromPhysical",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier SpringConfig has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/spring/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
       "externClass": "flight._cpp._attempt.Attempt_Spring_initializeSpring",
       "header": "flight/spring/contract.hpp",
       "kind": "function",
@@ -12699,196 +12547,6 @@
       "refusal": {
         "code": "unsupported-carrier",
         "message": "generic named carriers are not supported",
-        "phase": "planning"
-      },
-      "source": "packages/spring/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Spring_isSpring2DSettled",
-      "header": "flight/spring/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::spring::is_spring_2d_settled",
-      "package": "@flighthq/spring",
-      "publicName": "flight.Spring.isSpring2DSettled",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/spring/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Spring_isSpring3DSettled",
-      "header": "flight/spring/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::spring::is_spring_3d_settled",
-      "package": "@flighthq/spring",
-      "publicName": "flight.Spring.isSpring3DSettled",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/spring/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Spring_isSpringSettled",
-      "header": "flight/spring/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::spring::is_spring_settled",
-      "package": "@flighthq/spring",
-      "publicName": "flight.Spring.isSpringSettled",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/spring/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Spring_resetSpring",
-      "header": "flight/spring/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::spring::reset_spring",
-      "package": "@flighthq/spring",
-      "publicName": "flight.Spring.resetSpring",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Spring has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/spring/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Spring_resetSpring2D",
-      "header": "flight/spring/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::spring::reset_spring_2d",
-      "package": "@flighthq/spring",
-      "publicName": "flight.Spring.resetSpring2D",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Spring2D has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/spring/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Spring_resetSpring3D",
-      "header": "flight/spring/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::spring::reset_spring_3d",
-      "package": "@flighthq/spring",
-      "publicName": "flight.Spring.resetSpring3D",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Spring3D has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/spring/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Spring_updateSpring",
-      "header": "flight/spring/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::spring::update_spring",
-      "package": "@flighthq/spring",
-      "publicName": "flight.Spring.updateSpring",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Spring has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/spring/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Spring_updateSpring2D",
-      "header": "flight/spring/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::spring::update_spring_2d",
-      "package": "@flighthq/spring",
-      "publicName": "flight.Spring.updateSpring2D",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Spring2D has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/spring/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Spring_updateSpring3D",
-      "header": "flight/spring/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::spring::update_spring_3d",
-      "package": "@flighthq/spring",
-      "publicName": "flight.Spring.updateSpring3D",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Spring3D has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/spring/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Spring_updateSpringAngle",
-      "header": "flight/spring/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::spring::update_spring_angle",
-      "package": "@flighthq/spring",
-      "publicName": "flight.Spring.updateSpringAngle",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier Spring has no unique published C++ type locator",
         "phase": "planning"
       },
       "source": "packages/spring/src/contract.ts",
@@ -20253,7 +19911,7 @@
   },
   "schema": "flight-hx-native-binding-attempts/1",
   "summary": {
-    "functions": 668,
+    "functions": 650,
     "carrierFamilies": [
       {
         "count": 80,
@@ -20276,7 +19934,7 @@
         "name": "generic-function"
       },
       {
-        "count": 715,
+        "count": 697,
         "name": "named"
       },
       {
@@ -20293,8 +19951,8 @@
       }
     ],
     "holders": 42,
-    "isolatedExterns": 1047,
-    "total": 1047,
+    "isolatedExterns": 1029,
+    "total": 1029,
     "values": 379
   }
 }

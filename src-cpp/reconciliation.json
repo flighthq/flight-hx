@@ -196,7 +196,25 @@
       "flight.Bitmap.setBitmapPixel",
       "flight.Bitmap.setBitmapPixelRgb",
       "flight.Bitmap.setBitmapRegion",
-      "flight.Bitmap.trimBitmap"
+      "flight.Bitmap.trimBitmap",
+      "flight.Spring.addSpringImpulse",
+      "flight.Spring.addSpringImpulse2D",
+      "flight.Spring.addSpringImpulse3D",
+      "flight.Spring.createSpring",
+      "flight.Spring.createSpring2D",
+      "flight.Spring.createSpring3D",
+      "flight.Spring.createSpringConfig",
+      "flight.Spring.createSpringConfigFromPhysical",
+      "flight.Spring.isSpring2DSettled",
+      "flight.Spring.isSpring3DSettled",
+      "flight.Spring.isSpringSettled",
+      "flight.Spring.resetSpring",
+      "flight.Spring.resetSpring2D",
+      "flight.Spring.resetSpring3D",
+      "flight.Spring.updateSpring",
+      "flight.Spring.updateSpring2D",
+      "flight.Spring.updateSpring3D",
+      "flight.Spring.updateSpringAngle"
     ]
   },
   "packages": [
@@ -10404,7 +10422,7 @@
       "issues": [
         {
           "code": "native-function-gap",
-          "count": 21
+          "count": 3
         },
         {
           "code": "native-value-gap",
@@ -10420,7 +10438,7 @@
         },
         {
           "code": "native-materialized-unproven-functions",
-          "count": 21
+          "count": 3
         },
         {
           "code": "native-materialized-unproven-values",
@@ -10428,19 +10446,128 @@
         }
       ],
       "nativeDefault": {
-        "functions": [],
+        "functions": [
+          {
+            "header": "flight/spring/contract.hpp",
+            "holder": "Spring",
+            "name": "addSpringImpulse",
+            "native": "flight::spring::add_spring_impulse"
+          },
+          {
+            "header": "flight/spring/contract.hpp",
+            "holder": "Spring",
+            "name": "addSpringImpulse2D",
+            "native": "flight::spring::add_spring_impulse_2d"
+          },
+          {
+            "header": "flight/spring/contract.hpp",
+            "holder": "Spring",
+            "name": "addSpringImpulse3D",
+            "native": "flight::spring::add_spring_impulse_3d"
+          },
+          {
+            "header": "flight/spring/contract.hpp",
+            "holder": "Spring",
+            "name": "createSpring",
+            "native": "flight::spring::create_spring"
+          },
+          {
+            "header": "flight/spring/contract.hpp",
+            "holder": "Spring",
+            "name": "createSpring2D",
+            "native": "flight::spring::create_spring_2d"
+          },
+          {
+            "header": "flight/spring/contract.hpp",
+            "holder": "Spring",
+            "name": "createSpring3D",
+            "native": "flight::spring::create_spring_3d"
+          },
+          {
+            "header": "flight/spring/contract.hpp",
+            "holder": "Spring",
+            "name": "createSpringConfig",
+            "native": "flight::spring::create_spring_config"
+          },
+          {
+            "header": "flight/spring/contract.hpp",
+            "holder": "Spring",
+            "name": "createSpringConfigFromPhysical",
+            "native": "flight::spring::create_spring_config_from_physical"
+          },
+          {
+            "header": "flight/spring/contract.hpp",
+            "holder": "Spring",
+            "name": "isSpring2DSettled",
+            "native": "flight::spring::is_spring_2d_settled"
+          },
+          {
+            "header": "flight/spring/contract.hpp",
+            "holder": "Spring",
+            "name": "isSpring3DSettled",
+            "native": "flight::spring::is_spring_3d_settled"
+          },
+          {
+            "header": "flight/spring/contract.hpp",
+            "holder": "Spring",
+            "name": "isSpringSettled",
+            "native": "flight::spring::is_spring_settled"
+          },
+          {
+            "header": "flight/spring/contract.hpp",
+            "holder": "Spring",
+            "name": "resetSpring",
+            "native": "flight::spring::reset_spring"
+          },
+          {
+            "header": "flight/spring/contract.hpp",
+            "holder": "Spring",
+            "name": "resetSpring2D",
+            "native": "flight::spring::reset_spring_2d"
+          },
+          {
+            "header": "flight/spring/contract.hpp",
+            "holder": "Spring",
+            "name": "resetSpring3D",
+            "native": "flight::spring::reset_spring_3d"
+          },
+          {
+            "header": "flight/spring/contract.hpp",
+            "holder": "Spring",
+            "name": "updateSpring",
+            "native": "flight::spring::update_spring"
+          },
+          {
+            "header": "flight/spring/contract.hpp",
+            "holder": "Spring",
+            "name": "updateSpring2D",
+            "native": "flight::spring::update_spring_2d"
+          },
+          {
+            "header": "flight/spring/contract.hpp",
+            "holder": "Spring",
+            "name": "updateSpring3D",
+            "native": "flight::spring::update_spring_3d"
+          },
+          {
+            "header": "flight/spring/contract.hpp",
+            "holder": "Spring",
+            "name": "updateSpringAngle",
+            "native": "flight::spring::update_spring_angle"
+          }
+        ],
         "types": [],
         "values": []
       },
       "nativeAttempts": {
-        "functions": 21,
+        "functions": 3,
         "types": 0,
         "unavailableUpstream": 0,
         "values": 3
       },
       "package": "@flighthq/spring",
       "scalarProbeCandidates": [],
-      "status": "emitted-unbound",
+      "status": "partial-native",
       "webDefault": {
         "functions": 21,
         "types": 0,
@@ -12803,11 +12930,11 @@
       "arrayFloatAdapters": 45,
       "boundHeaderConfirmedScalarFunctions": 114,
       "extensionTypes": 1,
-      "functions": 201,
+      "functions": 219,
       "nullableStringAdapters": 2,
-      "packages": 27,
+      "packages": 28,
       "optionalScalarAdapters": 3,
-      "referenceCarriers": 32,
+      "referenceCarriers": 50,
       "requiredScalarOverrides": 53,
       "scalarOverrideRefusals": 0,
       "types": 3,
@@ -12836,7 +12963,7 @@
           "name": "generic-function"
         },
         {
-          "count": 715,
+          "count": 697,
           "name": "named"
         },
         {
@@ -12855,10 +12982,10 @@
       "compileProbes": 0,
       "cppAvailable": 4268,
       "cppUnavailable": 6979,
-      "functions": 668,
+      "functions": 650,
       "genericReferenceTemplateAdapters": 44,
       "haxeTypecheck": "pass",
-      "isolatedFunctionValueExterns": 1047,
+      "isolatedFunctionValueExterns": 1029,
       "types": 3073,
       "values": 379
     },
@@ -12892,9 +13019,9 @@
       "unboundFunctionCandidates": 0
     },
     "packageStatus": {
-      "emitted-unbound": 125,
+      "emitted-unbound": 124,
       "empty-web-contract": 1,
-      "partial-native": 27
+      "partial-native": 28
     },
     "scalarExpansion": {
       "headerConfirmedFunctions": 183,

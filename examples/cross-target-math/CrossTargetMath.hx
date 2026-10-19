@@ -20,6 +20,7 @@ import flight.Scene2dFormats;
 import flight.Scene3dFormats;
 import flight.Shape;
 import flight.Skeleton2dFormats;
+import flight.Spring;
 import flight.Swf;
 import flight.Textbidi;
 import flight.Textsegment;
@@ -147,6 +148,25 @@ class CrossTargetMath {
     fillBitmapRectangle(resetRegion, 0.0);
     invalidateBitmap(clonedBitmap);
     invalidateBitmap(trimBitmap(firstBitmap));
+
+    final spring = createSpring();
+    final spring2D = createSpring2D();
+    final spring3D = createSpring3D();
+    final springConfig = createSpringConfig(2.0, 0.75);
+    final physicalSpringConfig = createSpringConfigFromPhysical(100.0, 10.0, 1.0);
+    addSpringImpulse(spring, 1.0);
+    addSpringImpulse2D(spring2D, 1.0, -1.0);
+    addSpringImpulse3D(spring3D, 1.0, -1.0, 0.5);
+    updateSpring(spring, 1.0, springConfig, 1.0 / 60.0);
+    updateSpring2D(spring2D, 1.0, -1.0, springConfig, 1.0 / 60.0);
+    updateSpring3D(spring3D, 1.0, -1.0, 0.5, physicalSpringConfig, 1.0 / 60.0);
+    updateSpringAngle(spring, 180.0, 360.0, springConfig, 1.0 / 60.0);
+    isSpringSettled(spring, 1.0);
+    isSpring2DSettled(spring2D, 1.0, -1.0);
+    isSpring3DSettled(spring3D, 1.0, -1.0, 0.5);
+    resetSpring(spring, 0.0);
+    resetSpring2D(spring2D, 0.0, 0.0);
+    resetSpring3D(spring3D, 0.0, 0.0, 0.0);
 
     final colorOut = zeroes(4);
     clampLinearRgb(colorOut, -1.0, 0.5, 2.0);
