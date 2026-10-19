@@ -1,4 +1,6 @@
 import flight.Audio;
+import flight.Adjustments;
+import flight.Bitmap;
 import flight.Bitmapfont;
 import flight.Color;
 import flight.Collision;
@@ -47,6 +49,77 @@ class CrossTargetMath {
     assertTrue('approxZero default', approxZero(1e-7) && !approxZero(1e-4));
     assertTrue('approxZero custom', approxZero(0.01, 0.1) && !approxZero(0.2, 0.1));
     assertClose('sRGB round trip', srgbChannelToLinear(linearChannelToSrgb(0.25)), 0.25);
+
+    final identity = createIdentityColorMatrix();
+    assertTrue('identity color matrix length', identity.length == 20);
+    assertTrue('identity color matrix affine', isAffineColorMatrix(identity));
+    final brightness = createBrightnessColorMatrix(0.25);
+    assertClose('brightness color matrix', brightness[4], 0.25);
+    assertFinite('apply identity color matrix', applyColorMatrixToColor(identity, 4286595327.0));
+    assertTrue(
+      'channel mixer color matrix',
+      createChannelMixerColorMatrix([1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]).length == 20
+    );
+    assertTrue(
+      'color balance color matrix',
+      createColorBalanceColorMatrix([1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]).length == 20
+    );
+    assertTrue('tint color matrix', createColorMatrixFromTint(4286595327.0, 0.5).length == 20);
+    assertTrue('contrast color matrix', createContrastColorMatrix(1.25).length == 20);
+    assertTrue('desaturate color matrix', createDesaturateColorMatrix(0.5).length == 20);
+    assertTrue('grayscale color matrix', createGrayscaleColorMatrix().length == 20);
+    assertTrue('hue color matrix', createHueRotateColorMatrix(90.0).length == 20);
+    assertTrue('invert color matrix', createInvertColorMatrix().length == 20);
+    assertTrue('levels color matrix default', createLevelsColorMatrix(0.0, 1.0, 0.0, 1.0).length == 20);
+    assertTrue('levels color matrix gamma', createLevelsColorMatrix(0.0, 1.0, 0.0, 1.0, 2.2).length == 20);
+    assertTrue('opacity color matrix', createOpacityColorMatrix(0.5).length == 20);
+    assertTrue('polaroid color matrix', createPolaroidColorMatrix().length == 20);
+    assertTrue('saturation color matrix', createSaturationColorMatrix(0.5).length == 20);
+    assertTrue('sepia color matrix', createSepiaColorMatrix().length == 20);
+    assertTrue('technicolor color matrix', createTechnicolorColorMatrix().length == 20);
+    assertTrue('vintage color matrix', createVintageColorMatrix().length == 20);
+    assertTrue('white balance color matrix', createWhiteBalanceColorMatrix(20.0, -10.0).length == 20);
+    final concatenated = identity.copy();
+    concatColorMatrix(concatenated, brightness);
+    assertTrue('concatenated color matrix', concatenated.length == 20);
+    final multipliedDefault = multiplyColorMatrix(identity, brightness);
+    assertTrue('multiplied color matrix default', multipliedDefault.length == 20);
+    final multipliedOut = zeroes(20);
+    final multiplied = multiplyColorMatrix(identity, brightness, multipliedOut);
+    assertTrue('multiplied color matrix preserves out identity', multiplied == multipliedOut);
+
+    final bitmapMatrix = zeroes(20);
+    buildBitmapBrightnessColorMatrix(bitmapMatrix, 0.25);
+    buildBitmapContrastColorMatrix(bitmapMatrix, 1.25);
+    buildBitmapGrayscaleColorMatrix(bitmapMatrix);
+    buildBitmapHueRotationColorMatrix(bitmapMatrix, 90.0);
+    buildBitmapInvertColorMatrix(bitmapMatrix);
+    buildBitmapSaturationColorMatrix(bitmapMatrix, 0.5);
+    buildBitmapSepiaColorMatrix(bitmapMatrix);
+    setBitmapColorMatrixIdentity(bitmapMatrix);
+    concatBitmapColorMatrix(bitmapMatrix, identity, brightness);
+    assertTrue('bitmap color matrix mutation', bitmapMatrix.length == 20);
+
+    final colorOut = zeroes(4);
+    clampLinearRgb(colorOut, -1.0, 0.5, 2.0);
+    assertClose('clamped linear RGB low', colorOut[0], 0.0);
+    assertClose('clamped linear RGB middle', colorOut[1], 0.5);
+    assertClose('clamped linear RGB high', colorOut[2], 1.0);
+    getRec2020LuminanceWeights(colorOut);
+    getRec709LuminanceWeights(colorOut);
+    hslToRgb(colorOut, 0.5, 0.75, 0.25);
+    hsvToRgb(colorOut, 0.5, 0.75, 0.25);
+    linearRgbToOklab(colorOut, 0.25, 0.5, 0.75);
+    oklabToLinearRgb(colorOut, colorOut[0], colorOut[1], colorOut[2]);
+    unpackColorRgba(colorOut, 4286595327.0);
+    assertTrue('color output mutation', colorOut.length == 4);
+
+    final samples = [1.0, 2.0, 3.0];
+    assertClose('mean', mean(samples), 2.0);
+    assertClose('median', median(samples), 2.0);
+    assertFinite('standard deviation', standardDeviation(samples));
+    assertFinite('variance', variance(samples));
+    assertClose('weighted average', weightedAverage(samples, [1.0, 1.0, 2.0]), 2.25);
 
     assertClose('ceilPowerOfTwo', ceilPowerOfTwo(9.0), 16.0);
     assertClose('ceilTo', ceilTo(4.2, 0.5), 4.5);
@@ -204,6 +277,10 @@ class CrossTargetMath {
 
   static function assertString(name:String, actual:String, expected:String):Void {
     if (actual != expected) throw '$name: expected $expected, received $actual';
+  }
+
+  static function zeroes(length:Int):Array<Float> {
+    return [for (_ in 0...length) 0.0];
   }
 
   static inline function report(message:String):Void {

@@ -25,6 +25,21 @@ import flight.*;
 ')
 @:include("flight_hx/math.hpp")
 extern class Math {
+  @:native("flight_hx::math::mean")
+  static function mean(values:Array<Float>):Float;
+
+  @:native("flight_hx::math::median")
+  static function median(values:Array<Float>):Float;
+
+  @:native("flight_hx::math::standard_deviation")
+  static function standardDeviation(values:Array<Float>):Float;
+
+  @:native("flight_hx::math::variance")
+  static function variance(values:Array<Float>):Float;
+
+  @:native("flight_hx::math::weighted_average")
+  static function weightedAverage(values:Array<Float>, weights:Array<Float>):Float;
+
   @:native("flight_hx::math::approx_equal")
   static function approxEqual(a:Float, b:Float, epsilonPresent:Bool, epsilon:Float):Bool;
 

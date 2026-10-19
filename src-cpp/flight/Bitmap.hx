@@ -3,6 +3,42 @@ package flight;
 
 typedef Bitmap = flight._cpp.Bitmap;
 
+inline function buildBitmapBrightnessColorMatrix(out:Array<Float>, amount:Float):Void {
+  flight._cpp._fn.Bitmap.buildBitmapBrightnessColorMatrix(out, amount);
+}
+
+inline function buildBitmapContrastColorMatrix(out:Array<Float>, amount:Float):Void {
+  flight._cpp._fn.Bitmap.buildBitmapContrastColorMatrix(out, amount);
+}
+
+inline function buildBitmapGrayscaleColorMatrix(out:Array<Float>):Void {
+  flight._cpp._fn.Bitmap.buildBitmapGrayscaleColorMatrix(out);
+}
+
+inline function buildBitmapHueRotationColorMatrix(out:Array<Float>, degrees:Float):Void {
+  flight._cpp._fn.Bitmap.buildBitmapHueRotationColorMatrix(out, degrees);
+}
+
+inline function buildBitmapInvertColorMatrix(out:Array<Float>):Void {
+  flight._cpp._fn.Bitmap.buildBitmapInvertColorMatrix(out);
+}
+
+inline function buildBitmapSaturationColorMatrix(out:Array<Float>, amount:Float):Void {
+  flight._cpp._fn.Bitmap.buildBitmapSaturationColorMatrix(out, amount);
+}
+
+inline function buildBitmapSepiaColorMatrix(out:Array<Float>):Void {
+  flight._cpp._fn.Bitmap.buildBitmapSepiaColorMatrix(out);
+}
+
+inline function concatBitmapColorMatrix(out:Array<Float>, first:Array<Float>, second:Array<Float>):Void {
+  flight._cpp._fn.Bitmap.concatBitmapColorMatrix(out, first, second);
+}
+
+inline function setBitmapColorMatrixIdentity(out:Array<Float>):Void {
+  flight._cpp._fn.Bitmap.setBitmapColorMatrixIdentity(out);
+}
+
 var BITMAP_FINGERPRINT_COMPUTATION_ID(get, set):String;
 
 private extern inline function get_BITMAP_FINGERPRINT_COMPUTATION_ID():String return flight._cpp._attempt.Attempt_Bitmap_BITMAP_FINGERPRINT_COMPUTATION_ID.BITMAP_FINGERPRINT_COMPUTATION_ID;
@@ -83,36 +119,8 @@ extern inline function boxBlurBitmap(out:flight._internal._UInt8ClampedArray, sc
   flight._cpp._attempt.Attempt_Bitmap_boxBlurBitmap.boxBlurBitmap(out, scratch, source, options);
 }
 
-extern inline function buildBitmapBrightnessColorMatrix(out:Array<Float>, amount:Float):Void {
-  flight._cpp._attempt.Attempt_Bitmap_buildBitmapBrightnessColorMatrix.buildBitmapBrightnessColorMatrix(out, amount);
-}
-
-extern inline function buildBitmapContrastColorMatrix(out:Array<Float>, amount:Float):Void {
-  flight._cpp._attempt.Attempt_Bitmap_buildBitmapContrastColorMatrix.buildBitmapContrastColorMatrix(out, amount);
-}
-
 extern inline function buildBitmapGradientRamp(out:flight._internal._UInt8ClampedArray, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>):Void {
   flight._cpp._attempt.Attempt_Bitmap_buildBitmapGradientRamp.buildBitmapGradientRamp(out, colors, alphas, ratios);
-}
-
-extern inline function buildBitmapGrayscaleColorMatrix(out:Array<Float>):Void {
-  flight._cpp._attempt.Attempt_Bitmap_buildBitmapGrayscaleColorMatrix.buildBitmapGrayscaleColorMatrix(out);
-}
-
-extern inline function buildBitmapHueRotationColorMatrix(out:Array<Float>, degrees:Float):Void {
-  flight._cpp._attempt.Attempt_Bitmap_buildBitmapHueRotationColorMatrix.buildBitmapHueRotationColorMatrix(out, degrees);
-}
-
-extern inline function buildBitmapInvertColorMatrix(out:Array<Float>):Void {
-  flight._cpp._attempt.Attempt_Bitmap_buildBitmapInvertColorMatrix.buildBitmapInvertColorMatrix(out);
-}
-
-extern inline function buildBitmapSaturationColorMatrix(out:Array<Float>, amount:Float):Void {
-  flight._cpp._attempt.Attempt_Bitmap_buildBitmapSaturationColorMatrix.buildBitmapSaturationColorMatrix(out, amount);
-}
-
-extern inline function buildBitmapSepiaColorMatrix(out:Array<Float>):Void {
-  flight._cpp._attempt.Attempt_Bitmap_buildBitmapSepiaColorMatrix.buildBitmapSepiaColorMatrix(out);
 }
 
 extern inline function captureBitmapFromImageResource(hostBitmapReadback:flight.HostBitmapReadbackCapability, resource:flight.ImageResource):Null<flight.Bitmap> {
@@ -145,10 +153,6 @@ extern inline function compositeBitmapRegion(dest:flight.BitmapRegion, source:fl
 
 extern inline function computeGaussianKernel(out:flight._internal._Float32Array, radius:Float, sigma:Float):Void {
   flight._cpp._attempt.Attempt_Bitmap_computeGaussianKernel.computeGaussianKernel(out, radius, sigma);
-}
-
-extern inline function concatBitmapColorMatrix(out:Array<Float>, first:Array<Float>, second:Array<Float>):Void {
-  flight._cpp._attempt.Attempt_Bitmap_concatBitmapColorMatrix.concatBitmapColorMatrix(out, first, second);
 }
 
 extern inline function convertBitmapAlphaType(out:flight.Bitmap, target:flight.AlphaType):Void {
@@ -409,10 +413,6 @@ extern inline function scrollBitmap(out:flight.Bitmap, dx:Float, dy:Float):Void 
 
 extern inline function setBitmapAlpha(out:flight.BitmapRegion, alpha:Float):Void {
   flight._cpp._attempt.Attempt_Bitmap_setBitmapAlpha.setBitmapAlpha(out, alpha);
-}
-
-extern inline function setBitmapColorMatrixIdentity(out:Array<Float>):Void {
-  flight._cpp._attempt.Attempt_Bitmap_setBitmapColorMatrixIdentity.setBitmapColorMatrixIdentity(out);
 }
 
 extern inline function setBitmapPixel(out:flight.Bitmap, x:Float, y:Float, color:Float):Void {

@@ -10,18 +10,11 @@ import { spawnSync } from 'node:child_process';
 const root = path.join(import.meta.dirname, '..', '..');
 const report = JSON.parse(readFileSync(path.join(root, 'src-cpp', 'binding-attempts.json'), 'utf8'));
 if (report.schema !== 'flight-hx-native-binding-attempts/1') fail(`unknown report schema ${String(report.schema)}`);
-const arrayProbe = report.compileProbes?.find(
-  ({ publicName }) => publicName === 'flight.Adjustments.createBrightnessColorMatrix',
-);
 if (
-  !arrayProbe ||
-  arrayProbe.haxeCodeGeneration !== 'pass' ||
-  arrayProbe.cppCompilation !== 'failed-as-classified' ||
-  arrayProbe.requiredAdapter !== 'flight-array-to-hxcpp-array' ||
-  !arrayProbe.diagnostic.includes("flight::Array<double>") ||
-  !readFileSync(path.join(root, arrayProbe.fixture), 'utf8').includes('createBrightnessColorMatrix(0.5)')
+  report.declarations.some(({ publicName }) => publicName === 'flight.Adjustments.createBrightnessColorMatrix') ||
+  report.compileProbes?.some(({ publicName }) => publicName === 'flight.Adjustments.createBrightnessColorMatrix')
 ) {
-  fail('native Array carrier compile-probe classification is missing or stale');
+  fail('the compile-proven brightness Array adapter remains in the unproven attempt ledger');
 }
 if (!Array.isArray(report.summary.carrierFamilies) || report.summary.carrierFamilies.length === 0) {
   fail('native binding attempts do not classify their carrier families');
@@ -87,7 +80,7 @@ try {
     `native-binding-attempt gate: ${String(report.summary.functions)} function and ` +
       `${String(report.summary.values)} value attempts across ${String(report.summary.holders)} holders type-check ` +
       `on the C++ target through ${String(report.summary.isolatedExterns)} per-symbol externs; ` +
-      `${String(report.compileProbes.length)} actual hxcpp probe(s) retain classified adapter failures.\n`,
+      `${String(report.compileProbes.length)} unresolved hxcpp compile probe(s) remain.\n`,
   );
 } finally {
   rmSync(temporaryRoot, { force: true, recursive: true });

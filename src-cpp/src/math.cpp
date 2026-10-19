@@ -1,9 +1,77 @@
 // Generated from src-cpp/manifest.json and flight-compiler native-planning.json. Do not edit.
+#include <limits>
+#include <stdexcept>
 #include <flight/math/comparison.hpp>
 #include <flight/math/contract.hpp>
 #include <flight_hx/math.hpp>
 
 namespace flight_hx::math {
+
+namespace {
+
+flight::Array<double> to_flight_array(const ::Array<double>& source) {
+  flight::Array<double> result;
+  for (int index = 0; index < source->length; ++index) result.push(source[index]);
+  return result;
+}
+
+::Array<double> to_haxe_array(const flight::Array<double>& source) {
+  if (source.size() > static_cast<std::size_t>(std::numeric_limits<int>::max())) {
+    throw std::length_error("Flight Array exceeds the hxcpp Array length limit");
+  }
+  ::Array<double> result = ::Array_obj<double>::__new(static_cast<int>(source.size()));
+  int index = 0;
+  for (const double value : source) result[index++] = value;
+  return result;
+}
+
+void replace_haxe_array(::Array<double> destination, const flight::Array<double>& source) {
+  if (source.size() > static_cast<std::size_t>(std::numeric_limits<int>::max())) {
+    throw std::length_error("Flight Array exceeds the hxcpp Array length limit");
+  }
+  destination->resize(static_cast<int>(source.size()));
+  int index = 0;
+  for (const double value : source) destination[index++] = value;
+}
+
+} // namespace
+
+double mean(::Array<double> values) {
+  auto flight_values = to_flight_array(values);
+  auto result = flight::math::mean(flight_values);
+  replace_haxe_array(values, flight_values);
+  return result;
+}
+
+double median(::Array<double> values) {
+  auto flight_values = to_flight_array(values);
+  auto result = flight::math::median(flight_values);
+  replace_haxe_array(values, flight_values);
+  return result;
+}
+
+double standard_deviation(::Array<double> values) {
+  auto flight_values = to_flight_array(values);
+  auto result = flight::math::standard_deviation(flight_values);
+  replace_haxe_array(values, flight_values);
+  return result;
+}
+
+double variance(::Array<double> values) {
+  auto flight_values = to_flight_array(values);
+  auto result = flight::math::variance(flight_values);
+  replace_haxe_array(values, flight_values);
+  return result;
+}
+
+double weighted_average(::Array<double> values, ::Array<double> weights) {
+  auto flight_values = to_flight_array(values);
+  auto flight_weights = weights.GetPtr() == values.GetPtr() ? flight_values : (to_flight_array(weights));
+  auto result = flight::math::weighted_average(flight_values, flight_weights);
+  replace_haxe_array(values, flight_values);
+  replace_haxe_array(weights, flight_weights);
+  return result;
+}
 
 bool approx_equal(double a, double b, bool epsilonPresent, double epsilon) {
   return flight::math::approx_equal(a, b, (epsilonPresent ? std::optional<double>{epsilon} : std::nullopt));

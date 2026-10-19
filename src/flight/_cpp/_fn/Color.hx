@@ -29,6 +29,30 @@ import flight.*;
 @:include("flight_hx/adapters/computeRgbaCssString_9aeb1c03.hpp")
 @:include("flight_hx/color.hpp")
 extern class Color {
+  @:native("flight_hx::color::clamp_linear_rgb")
+  static function clampLinearRgb(out:Array<Float>, r:Float, g:Float, b:Float):Void;
+
+  @:native("flight_hx::color::get_rec2020_luminance_weights")
+  static function getRec2020LuminanceWeights(out:Array<Float>):Void;
+
+  @:native("flight_hx::color::get_rec709_luminance_weights")
+  static function getRec709LuminanceWeights(out:Array<Float>):Void;
+
+  @:native("flight_hx::color::hsl_to_rgb")
+  static function hslToRgb(out:Array<Float>, h:Float, s:Float, l:Float):Void;
+
+  @:native("flight_hx::color::hsv_to_rgb")
+  static function hsvToRgb(out:Array<Float>, h:Float, s:Float, v:Float):Void;
+
+  @:native("flight_hx::color::linear_rgb_to_oklab")
+  static function linearRgbToOklab(out:Array<Float>, r:Float, g:Float, b:Float):Void;
+
+  @:native("flight_hx::color::oklab_to_linear_rgb")
+  static function oklabToLinearRgb(out:Array<Float>, L:Float, a:Float, b:Float):Void;
+
+  @:native("flight_hx::color::unpack_color_rgba")
+  static function unpackColorRgba(out:Array<Float>, color:Float):Void;
+
   @:native("flight_hx::color::color_from_kelvin")
   static function colorFromKelvin(kelvin:Float):Float;
 

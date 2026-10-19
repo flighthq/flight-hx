@@ -52,6 +52,52 @@
     ]
   },
   "nativeOverrides": {
+    "arrayFloatAdapters": [
+      "flight.Adjustments.applyColorMatrixToColor",
+      "flight.Adjustments.concatColorMatrix",
+      "flight.Adjustments.createBrightnessColorMatrix",
+      "flight.Adjustments.createChannelMixerColorMatrix",
+      "flight.Adjustments.createColorBalanceColorMatrix",
+      "flight.Adjustments.createColorMatrixFromTint",
+      "flight.Adjustments.createContrastColorMatrix",
+      "flight.Adjustments.createDesaturateColorMatrix",
+      "flight.Adjustments.createGrayscaleColorMatrix",
+      "flight.Adjustments.createHueRotateColorMatrix",
+      "flight.Adjustments.createIdentityColorMatrix",
+      "flight.Adjustments.createInvertColorMatrix",
+      "flight.Adjustments.createLevelsColorMatrix",
+      "flight.Adjustments.createOpacityColorMatrix",
+      "flight.Adjustments.createPolaroidColorMatrix",
+      "flight.Adjustments.createSaturationColorMatrix",
+      "flight.Adjustments.createSepiaColorMatrix",
+      "flight.Adjustments.createTechnicolorColorMatrix",
+      "flight.Adjustments.createVintageColorMatrix",
+      "flight.Adjustments.createWhiteBalanceColorMatrix",
+      "flight.Adjustments.isAffineColorMatrix",
+      "flight.Adjustments.multiplyColorMatrix",
+      "flight.Bitmap.buildBitmapBrightnessColorMatrix",
+      "flight.Bitmap.buildBitmapContrastColorMatrix",
+      "flight.Bitmap.buildBitmapGrayscaleColorMatrix",
+      "flight.Bitmap.buildBitmapHueRotationColorMatrix",
+      "flight.Bitmap.buildBitmapInvertColorMatrix",
+      "flight.Bitmap.buildBitmapSaturationColorMatrix",
+      "flight.Bitmap.buildBitmapSepiaColorMatrix",
+      "flight.Bitmap.concatBitmapColorMatrix",
+      "flight.Bitmap.setBitmapColorMatrixIdentity",
+      "flight.Color.clampLinearRgb",
+      "flight.Color.getRec2020LuminanceWeights",
+      "flight.Color.getRec709LuminanceWeights",
+      "flight.Color.hslToRgb",
+      "flight.Color.hsvToRgb",
+      "flight.Color.linearRgbToOklab",
+      "flight.Color.oklabToLinearRgb",
+      "flight.Color.unpackColorRgba",
+      "flight.Math.mean",
+      "flight.Math.median",
+      "flight.Math.standardDeviation",
+      "flight.Math.variance",
+      "flight.Math.weightedAverage"
+    ],
     "optionalScalarAdapters": [
       "flight.Math.approxEqual",
       "flight.Math.approxEqualRelative",
@@ -242,7 +288,7 @@
       "issues": [
         {
           "code": "native-function-gap",
-          "count": 64
+          "count": 42
         },
         {
           "code": "native-value-gap",
@@ -258,7 +304,7 @@
         },
         {
           "code": "native-materialized-unproven-functions",
-          "count": 64
+          "count": 42
         },
         {
           "code": "native-materialized-unproven-values",
@@ -266,19 +312,152 @@
         }
       ],
       "nativeDefault": {
-        "functions": [],
+        "functions": [
+          {
+            "header": "flight/adjustments/contract.hpp",
+            "holder": "Adjustments",
+            "name": "applyColorMatrixToColor",
+            "native": "flight::adjustments::apply_color_matrix_to_color"
+          },
+          {
+            "header": "flight/adjustments/contract.hpp",
+            "holder": "Adjustments",
+            "name": "concatColorMatrix",
+            "native": "flight::adjustments::concat_color_matrix"
+          },
+          {
+            "header": "flight/adjustments/contract.hpp",
+            "holder": "Adjustments",
+            "name": "createBrightnessColorMatrix",
+            "native": "flight::adjustments::create_brightness_color_matrix"
+          },
+          {
+            "header": "flight/adjustments/contract.hpp",
+            "holder": "Adjustments",
+            "name": "createChannelMixerColorMatrix",
+            "native": "flight::adjustments::create_channel_mixer_color_matrix"
+          },
+          {
+            "header": "flight/adjustments/contract.hpp",
+            "holder": "Adjustments",
+            "name": "createColorBalanceColorMatrix",
+            "native": "flight::adjustments::create_color_balance_color_matrix"
+          },
+          {
+            "header": "flight/adjustments/contract.hpp",
+            "holder": "Adjustments",
+            "name": "createColorMatrixFromTint",
+            "native": "flight::adjustments::create_color_matrix_from_tint"
+          },
+          {
+            "header": "flight/adjustments/contract.hpp",
+            "holder": "Adjustments",
+            "name": "createContrastColorMatrix",
+            "native": "flight::adjustments::create_contrast_color_matrix"
+          },
+          {
+            "header": "flight/adjustments/contract.hpp",
+            "holder": "Adjustments",
+            "name": "createDesaturateColorMatrix",
+            "native": "flight::adjustments::create_desaturate_color_matrix"
+          },
+          {
+            "header": "flight/adjustments/contract.hpp",
+            "holder": "Adjustments",
+            "name": "createGrayscaleColorMatrix",
+            "native": "flight::adjustments::create_grayscale_color_matrix"
+          },
+          {
+            "header": "flight/adjustments/contract.hpp",
+            "holder": "Adjustments",
+            "name": "createHueRotateColorMatrix",
+            "native": "flight::adjustments::create_hue_rotate_color_matrix"
+          },
+          {
+            "header": "flight/adjustments/contract.hpp",
+            "holder": "Adjustments",
+            "name": "createIdentityColorMatrix",
+            "native": "flight::adjustments::create_identity_color_matrix"
+          },
+          {
+            "header": "flight/adjustments/contract.hpp",
+            "holder": "Adjustments",
+            "name": "createInvertColorMatrix",
+            "native": "flight::adjustments::create_invert_color_matrix"
+          },
+          {
+            "header": "flight/adjustments/contract.hpp",
+            "holder": "Adjustments",
+            "name": "createLevelsColorMatrix",
+            "native": "flight::adjustments::create_levels_color_matrix"
+          },
+          {
+            "header": "flight/adjustments/contract.hpp",
+            "holder": "Adjustments",
+            "name": "createOpacityColorMatrix",
+            "native": "flight::adjustments::create_opacity_color_matrix"
+          },
+          {
+            "header": "flight/adjustments/contract.hpp",
+            "holder": "Adjustments",
+            "name": "createPolaroidColorMatrix",
+            "native": "flight::adjustments::create_polaroid_color_matrix"
+          },
+          {
+            "header": "flight/adjustments/contract.hpp",
+            "holder": "Adjustments",
+            "name": "createSaturationColorMatrix",
+            "native": "flight::adjustments::create_saturation_color_matrix"
+          },
+          {
+            "header": "flight/adjustments/contract.hpp",
+            "holder": "Adjustments",
+            "name": "createSepiaColorMatrix",
+            "native": "flight::adjustments::create_sepia_color_matrix"
+          },
+          {
+            "header": "flight/adjustments/contract.hpp",
+            "holder": "Adjustments",
+            "name": "createTechnicolorColorMatrix",
+            "native": "flight::adjustments::create_technicolor_color_matrix"
+          },
+          {
+            "header": "flight/adjustments/contract.hpp",
+            "holder": "Adjustments",
+            "name": "createVintageColorMatrix",
+            "native": "flight::adjustments::create_vintage_color_matrix"
+          },
+          {
+            "header": "flight/adjustments/contract.hpp",
+            "holder": "Adjustments",
+            "name": "createWhiteBalanceColorMatrix",
+            "native": "flight::adjustments::create_white_balance_color_matrix"
+          },
+          {
+            "header": "flight/adjustments/contract.hpp",
+            "holder": "Adjustments",
+            "name": "isAffineColorMatrix",
+            "native": "flight::adjustments::is_affine_color_matrix"
+          },
+          {
+            "header": "flight/adjustments/contract.hpp",
+            "holder": "Adjustments",
+            "name": "multiplyColorMatrix",
+            "native": "flight::adjustments::multiply_color_matrix"
+          }
+        ],
         "types": [],
         "values": []
       },
       "nativeAttempts": {
-        "functions": 64,
+        "functions": 42,
         "types": 0,
         "unavailableUpstream": 0,
         "values": 5
       },
       "package": "@flighthq/adjustments",
       "scalarProbeCandidates": [],
-      "status": "emitted-unbound",
+      "status": "partial-native",
       "webDefault": {
         "functions": 64,
         "types": 0,
@@ -644,7 +823,7 @@
       "issues": [
         {
           "code": "native-function-gap",
-          "count": 106
+          "count": 97
         },
         {
           "code": "native-value-gap",
@@ -668,7 +847,7 @@
         },
         {
           "code": "native-materialized-unproven-functions",
-          "count": 106
+          "count": 97
         },
         {
           "code": "native-materialized-unproven-values",
@@ -676,19 +855,74 @@
         }
       ],
       "nativeDefault": {
-        "functions": [],
+        "functions": [
+          {
+            "header": "flight/bitmap/contract.hpp",
+            "holder": "Bitmap",
+            "name": "buildBitmapBrightnessColorMatrix",
+            "native": "flight::bitmap::build_bitmap_brightness_color_matrix"
+          },
+          {
+            "header": "flight/bitmap/contract.hpp",
+            "holder": "Bitmap",
+            "name": "buildBitmapContrastColorMatrix",
+            "native": "flight::bitmap::build_bitmap_contrast_color_matrix"
+          },
+          {
+            "header": "flight/bitmap/contract.hpp",
+            "holder": "Bitmap",
+            "name": "buildBitmapGrayscaleColorMatrix",
+            "native": "flight::bitmap::build_bitmap_grayscale_color_matrix"
+          },
+          {
+            "header": "flight/bitmap/contract.hpp",
+            "holder": "Bitmap",
+            "name": "buildBitmapHueRotationColorMatrix",
+            "native": "flight::bitmap::build_bitmap_hue_rotation_color_matrix"
+          },
+          {
+            "header": "flight/bitmap/contract.hpp",
+            "holder": "Bitmap",
+            "name": "buildBitmapInvertColorMatrix",
+            "native": "flight::bitmap::build_bitmap_invert_color_matrix"
+          },
+          {
+            "header": "flight/bitmap/contract.hpp",
+            "holder": "Bitmap",
+            "name": "buildBitmapSaturationColorMatrix",
+            "native": "flight::bitmap::build_bitmap_saturation_color_matrix"
+          },
+          {
+            "header": "flight/bitmap/contract.hpp",
+            "holder": "Bitmap",
+            "name": "buildBitmapSepiaColorMatrix",
+            "native": "flight::bitmap::build_bitmap_sepia_color_matrix"
+          },
+          {
+            "header": "flight/bitmap/contract.hpp",
+            "holder": "Bitmap",
+            "name": "concatBitmapColorMatrix",
+            "native": "flight::bitmap::concat_bitmap_color_matrix"
+          },
+          {
+            "header": "flight/bitmap/contract.hpp",
+            "holder": "Bitmap",
+            "name": "setBitmapColorMatrixIdentity",
+            "native": "flight::bitmap::set_bitmap_color_matrix_identity"
+          }
+        ],
         "types": [],
         "values": []
       },
       "nativeAttempts": {
-        "functions": 106,
+        "functions": 97,
         "types": 1,
         "unavailableUpstream": 0,
         "values": 6
       },
       "package": "@flighthq/bitmap",
       "scalarProbeCandidates": [],
-      "status": "emitted-unbound",
+      "status": "partial-native",
       "webDefault": {
         "functions": 106,
         "types": 1,
@@ -1511,7 +1745,7 @@
       "issues": [
         {
           "code": "native-function-gap",
-          "count": 16
+          "count": 8
         },
         {
           "code": "non-scalar-signature-review",
@@ -1523,11 +1757,17 @@
         },
         {
           "code": "native-materialized-unproven-functions",
-          "count": 16
+          "count": 8
         }
       ],
       "nativeDefault": {
         "functions": [
+          {
+            "header": "flight/color/contract.hpp",
+            "holder": "Color",
+            "name": "clampLinearRgb",
+            "native": "flight::color::clamp_linear_rgb"
+          },
           {
             "header": "flight/color/contract.hpp",
             "holder": "Color",
@@ -1573,6 +1813,30 @@
           {
             "header": "flight/color/contract.hpp",
             "holder": "Color",
+            "name": "getRec2020LuminanceWeights",
+            "native": "flight::color::get_rec2020_luminance_weights"
+          },
+          {
+            "header": "flight/color/contract.hpp",
+            "holder": "Color",
+            "name": "getRec709LuminanceWeights",
+            "native": "flight::color::get_rec709_luminance_weights"
+          },
+          {
+            "header": "flight/color/contract.hpp",
+            "holder": "Color",
+            "name": "hslToRgb",
+            "native": "flight::color::hsl_to_rgb"
+          },
+          {
+            "header": "flight/color/contract.hpp",
+            "holder": "Color",
+            "name": "hsvToRgb",
+            "native": "flight::color::hsv_to_rgb"
+          },
+          {
+            "header": "flight/color/contract.hpp",
+            "holder": "Color",
             "name": "lerpColor",
             "native": "flight::color::lerp_color"
           },
@@ -1581,6 +1845,18 @@
             "holder": "Color",
             "name": "linearChannelToSrgb",
             "native": "flight::color::linear_channel_to_srgb"
+          },
+          {
+            "header": "flight/color/contract.hpp",
+            "holder": "Color",
+            "name": "linearRgbToOklab",
+            "native": "flight::color::linear_rgb_to_oklab"
+          },
+          {
+            "header": "flight/color/contract.hpp",
+            "holder": "Color",
+            "name": "oklabToLinearRgb",
+            "native": "flight::color::oklab_to_linear_rgb"
           },
           {
             "header": "flight/color/contract.hpp",
@@ -1615,6 +1891,12 @@
           {
             "header": "flight/color/contract.hpp",
             "holder": "Color",
+            "name": "unpackColorRgba",
+            "native": "flight::color::unpack_color_rgba"
+          },
+          {
+            "header": "flight/color/contract.hpp",
+            "holder": "Color",
             "name": "unpremultiplyColorAlpha",
             "native": "flight::color::unpremultiply_color_alpha"
           }
@@ -1623,7 +1905,7 @@
         "values": []
       },
       "nativeAttempts": {
-        "functions": 16,
+        "functions": 8,
         "types": 0,
         "unavailableUpstream": 0,
         "values": 0
@@ -4662,7 +4944,7 @@
       "issues": [
         {
           "code": "native-function-gap",
-          "count": 23
+          "count": 18
         },
         {
           "code": "native-value-gap",
@@ -4686,7 +4968,7 @@
         },
         {
           "code": "native-materialized-unproven-functions",
-          "count": 23
+          "count": 18
         },
         {
           "code": "native-materialized-unproven-values",
@@ -4866,6 +5148,18 @@
           {
             "header": "flight/math/contract.hpp",
             "holder": "Math",
+            "name": "mean",
+            "native": "flight::math::mean"
+          },
+          {
+            "header": "flight/math/contract.hpp",
+            "holder": "Math",
+            "name": "median",
+            "native": "flight::math::median"
+          },
+          {
+            "header": "flight/math/contract.hpp",
+            "holder": "Math",
             "name": "moveTowards",
             "native": "flight::math::move_towards"
           },
@@ -4956,15 +5250,33 @@
           {
             "header": "flight/math/contract.hpp",
             "holder": "Math",
+            "name": "standardDeviation",
+            "native": "flight::math::standard_deviation"
+          },
+          {
+            "header": "flight/math/contract.hpp",
+            "holder": "Math",
             "name": "step",
             "native": "flight::math::step"
+          },
+          {
+            "header": "flight/math/contract.hpp",
+            "holder": "Math",
+            "name": "variance",
+            "native": "flight::math::variance"
+          },
+          {
+            "header": "flight/math/contract.hpp",
+            "holder": "Math",
+            "name": "weightedAverage",
+            "native": "flight::math::weighted_average"
           }
         ],
         "types": [],
         "values": []
       },
       "nativeAttempts": {
-        "functions": 23,
+        "functions": 18,
         "types": 1,
         "unavailableUpstream": 0,
         "values": 6
@@ -12239,10 +12551,11 @@
       "sourceModules": 3151
     },
     "nativeDefault": {
+      "arrayFloatAdapters": 44,
       "boundHeaderConfirmedScalarFunctions": 114,
       "extensionTypes": 1,
-      "functions": 122,
-      "packages": 25,
+      "functions": 166,
+      "packages": 27,
       "optionalScalarAdapters": 3,
       "requiredScalarOverrides": 53,
       "scalarOverrideRefusals": 0,
@@ -12256,7 +12569,7 @@
           "name": "anonymous-structure"
         },
         {
-          "count": 122,
+          "count": 78,
           "name": "array"
         },
         {
@@ -12272,7 +12585,7 @@
           "name": "generic-function"
         },
         {
-          "count": 748,
+          "count": 747,
           "name": "named"
         },
         {
@@ -12288,13 +12601,13 @@
           "name": "typed-array"
         }
       ],
-      "compileProbes": 1,
+      "compileProbes": 0,
       "cppAvailable": 4268,
       "cppUnavailable": 6979,
-      "functions": 747,
+      "functions": 703,
       "genericReferenceTemplateAdapters": 44,
       "haxeTypecheck": "pass",
-      "isolatedFunctionValueExterns": 1126,
+      "isolatedFunctionValueExterns": 1082,
       "types": 3073,
       "values": 379
     },
@@ -12328,9 +12641,9 @@
       "unboundFunctionCandidates": 0
     },
     "packageStatus": {
-      "emitted-unbound": 127,
+      "emitted-unbound": 125,
       "empty-web-contract": 1,
-      "partial-native": 25
+      "partial-native": 27
     },
     "scalarExpansion": {
       "headerConfirmedFunctions": 183,

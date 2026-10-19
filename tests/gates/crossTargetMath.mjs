@@ -1,7 +1,8 @@
 // Installed consumers must cross both production backends: the complete Flight ESM extern surface
 // on web and the manifest-recorded flight-cpp subset/extensions on hxcpp. Direct scalars,
 // compiler-emitted String adapters, optional-scalar adapters, host creation, and a Scene2D GL
-// framebuffer each have an explicit oracle here.
+// Array<Float> copy adapters, host creation, and a Scene2D GL framebuffer each have an explicit
+// oracle here.
 import { spawnSync } from 'node:child_process';
 import { existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
@@ -16,6 +17,7 @@ const repoRoot = path.join(import.meta.dirname, '..', '..');
 const marker = 'CROSS_TARGET_MATH_OK';
 const scalarOverrideProvenance = 'flight-hx/header-confirmed-scalar/1';
 const optionalScalarOverrideProvenance = 'flight-hx/header-confirmed-optional-scalar/1';
+const arrayFloatAdapterProvenance = 'flight-hx/array-float-copy-adapter/1';
 const nativePlanning = JSON.parse(readFileSync(path.join(repoRoot, 'generated', 'js', 'native-planning.json'), 'utf8'));
 const plannedFunctions = new Map(
   nativePlanning.declarations
@@ -40,6 +42,7 @@ for (const functions of expectedFunctionsByModule.values()) functions.sort();
 const expectedCorrections = [
   'flight-hx-hxcpp-flight-namespace-isolation/1',
   'flight-hx-hxcpp-cpp11-override/1',
+  'flight-hx-hxcpp-array-float-copy-adapter/1',
 ];
 const expectedNativeHost = {
   module: 'flight.HostSdlGl',
@@ -211,6 +214,7 @@ function validateNativeManifest(flightCpp) {
       ({ name, provenance }) =>
         provenance === scalarOverrideProvenance ||
         provenance === optionalScalarOverrideProvenance ||
+        provenance === arrayFloatAdapterProvenance ||
         plannedFunctions.get(`${module.module}.${name}`)?.transport === 'direct',
     );
     const directBridge =
@@ -236,6 +240,9 @@ function validateNativeManifest(flightCpp) {
       } else if (binding.provenance === optionalScalarOverrideProvenance) {
         if (plan) fail(`${publicName} downstream optional override now overlaps the compiler native plan`);
         plan = { transport: 'optional-override' };
+      } else if (binding.provenance === arrayFloatAdapterProvenance) {
+        if (plan) fail(`${publicName} downstream Array<Float> adapter now overlaps the compiler native plan`);
+        plan = { transport: 'array-float-adapter' };
       } else if (binding.provenance !== undefined) {
         fail(`${publicName} has unknown native provenance ${String(binding.provenance)}`);
       } else if (!plan) {
@@ -250,7 +257,8 @@ function validateNativeManifest(flightCpp) {
       if (!facadeMember) fail(`${module.module}.${binding.name} is absent from the native public facade`);
       if (!nativeMember) fail(`${module.module}.${binding.name} is absent from the hxcpp extern`);
       const expectedNativeSignature =
-        plan.transport === 'optional-override'
+        plan.transport === 'optional-override' ||
+        (plan.transport === 'array-float-adapter' && jsMember.signature.includes('?'))
           ? optionalBridgeSignature(jsMember.signature)
           : jsMember.signature;
       if (facadeMember.signature !== jsMember.signature || nativeMember.signature !== expectedNativeSignature) {
@@ -267,7 +275,8 @@ function validateNativeManifest(flightCpp) {
       if (
         plan.transport === 'direct' ||
         plan.transport === 'override' ||
-        plan.transport === 'optional-override'
+        plan.transport === 'optional-override' ||
+        plan.transport === 'array-float-adapter'
       ) {
         if (!directBridge.includes(`${binding.native}(`)) {
           fail(`${publicName} direct bridge does not call ${binding.native}`);
@@ -409,17 +418,17 @@ function rejectUnsupportedNative(flightCpp, consumer) {
     { cwd: consumer.work, encoding: 'utf8', env: consumer.environment },
   );
   const transcript = `${compile.stdout ?? ''}${compile.stderr ?? ''}`;
-  if (compile.status === 0 || !transcript.includes('mean')) {
+  if (compile.status === 0 || !transcript.includes('fuse_color_matrices')) {
     fail(`unbound native API did not fail loudly at the exact public facade:\n${transcript}`);
   }
 }
 
 function optionalBridgeSignature(signature) {
-  const match = /^function ([A-Za-z_][A-Za-z0-9_]*)\((.*)\):([A-Za-z_][A-Za-z0-9_]*)$/u.exec(signature);
+  const match = /^function ([A-Za-z_][A-Za-z0-9_]*)\((.*)\):(.+)$/u.exec(signature);
   if (!match) fail(`optional scalar signature is not recognized: ${signature}`);
   const parameters = match[2]
     ? match[2].split(', ').flatMap((parameter) => {
-        const parsed = /^(\??)([A-Za-z_][A-Za-z0-9_]*):([A-Za-z_][A-Za-z0-9_]*)$/u.exec(parameter);
+        const parsed = /^(\??)([A-Za-z_][A-Za-z0-9_]*):(.+)$/u.exec(parameter);
         if (!parsed) fail(`optional scalar parameter is not recognized: ${parameter}`);
         return parsed[1] === '?' ? [`${parsed[2]}Present:Bool`, `${parsed[2]}:${parsed[3]}`] : [parameter];
       })

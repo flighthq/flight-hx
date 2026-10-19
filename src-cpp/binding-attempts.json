@@ -1,15 +1,5 @@
 {
-  "compileProbes": [
-    {
-      "cppCompilation": "failed-as-classified",
-      "diagnostic": "conversion from 'flight::Array<double>' to non-scalar type 'Array<double>' requested",
-      "fixture": "tests/haxe/NativeAttemptCompile.hx",
-      "haxeCodeGeneration": "pass",
-      "publicName": "flight.Adjustments.createBrightnessColorMatrix",
-      "requiredAdapter": "flight-array-to-hxcpp-array",
-      "status": "adapter-required"
-    }
-  ],
+  "compileProbes": [],
   "declarations": [
     {
       "carrierFamilies": [
@@ -270,25 +260,6 @@
     },
     {
       "carrierFamilies": [
-        "array"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Adjustments_applyColorMatrixToColor",
-      "header": "flight/adjustments/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::adjustments::apply_color_matrix_to_color",
-      "package": "@flighthq/adjustments",
-      "publicName": "flight.Adjustments.applyColorMatrixToColor",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/adjustments/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
         "array",
         "named"
       ],
@@ -330,44 +301,6 @@
     },
     {
       "carrierFamilies": [
-        "array"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Adjustments_concatColorMatrix",
-      "header": "flight/adjustments/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::adjustments::concat_color_matrix",
-      "package": "@flighthq/adjustments",
-      "publicName": "flight.Adjustments.concatColorMatrix",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family array is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/adjustments/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "array"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Adjustments_createBrightnessColorMatrix",
-      "header": "flight/adjustments/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::adjustments::create_brightness_color_matrix",
-      "package": "@flighthq/adjustments",
-      "publicName": "flight.Adjustments.createBrightnessColorMatrix",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family array is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/adjustments/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
         "dynamic",
         "named"
       ],
@@ -400,44 +333,6 @@
       "refusal": {
         "code": "unsupported-carrier",
         "message": "defaulted parameters need an exact C++ default-argument contract",
-        "phase": "planning"
-      },
-      "source": "packages/adjustments/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "array"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Adjustments_createChannelMixerColorMatrix",
-      "header": "flight/adjustments/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::adjustments::create_channel_mixer_color_matrix",
-      "package": "@flighthq/adjustments",
-      "publicName": "flight.Adjustments.createChannelMixerColorMatrix",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/adjustments/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "array"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Adjustments_createColorBalanceColorMatrix",
-      "header": "flight/adjustments/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::adjustments::create_color_balance_color_matrix",
-      "package": "@flighthq/adjustments",
-      "publicName": "flight.Adjustments.createColorBalanceColorMatrix",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
         "phase": "planning"
       },
       "source": "packages/adjustments/src/contract.ts",
@@ -525,25 +420,6 @@
     },
     {
       "carrierFamilies": [
-        "array"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Adjustments_createColorMatrixFromTint",
-      "header": "flight/adjustments/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::adjustments::create_color_matrix_from_tint",
-      "package": "@flighthq/adjustments",
-      "publicName": "flight.Adjustments.createColorMatrixFromTint",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family array is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/adjustments/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
         "named"
       ],
       "externClass": "flight._cpp._attempt.Attempt_Adjustments_createColorScaleBiasAdjustment",
@@ -555,44 +431,6 @@
       "refusal": {
         "code": "unsupported-carrier",
         "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/adjustments/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "array"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Adjustments_createContrastColorMatrix",
-      "header": "flight/adjustments/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::adjustments::create_contrast_color_matrix",
-      "package": "@flighthq/adjustments",
-      "publicName": "flight.Adjustments.createContrastColorMatrix",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family array is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/adjustments/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "array"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Adjustments_createDesaturateColorMatrix",
-      "header": "flight/adjustments/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::adjustments::create_desaturate_color_matrix",
-      "package": "@flighthq/adjustments",
-      "publicName": "flight.Adjustments.createDesaturateColorMatrix",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family array is outside the Haxe C++ extern vertical slice",
         "phase": "planning"
       },
       "source": "packages/adjustments/src/contract.ts",
@@ -641,44 +479,6 @@
     },
     {
       "carrierFamilies": [
-        "array"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Adjustments_createGrayscaleColorMatrix",
-      "header": "flight/adjustments/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::adjustments::create_grayscale_color_matrix",
-      "package": "@flighthq/adjustments",
-      "publicName": "flight.Adjustments.createGrayscaleColorMatrix",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family array is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/adjustments/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "array"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Adjustments_createHueRotateColorMatrix",
-      "header": "flight/adjustments/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::adjustments::create_hue_rotate_color_matrix",
-      "package": "@flighthq/adjustments",
-      "publicName": "flight.Adjustments.createHueRotateColorMatrix",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family array is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/adjustments/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
         "dynamic",
         "named"
       ],
@@ -699,25 +499,6 @@
     },
     {
       "carrierFamilies": [
-        "array"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Adjustments_createIdentityColorMatrix",
-      "header": "flight/adjustments/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::adjustments::create_identity_color_matrix",
-      "package": "@flighthq/adjustments",
-      "publicName": "flight.Adjustments.createIdentityColorMatrix",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family array is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/adjustments/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
         "dynamic",
         "named"
       ],
@@ -727,44 +508,6 @@
       "nativeName": "flight::adjustments::create_invert_adjustment",
       "package": "@flighthq/adjustments",
       "publicName": "flight.Adjustments.createInvertAdjustment",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "defaulted parameters need an exact C++ default-argument contract",
-        "phase": "planning"
-      },
-      "source": "packages/adjustments/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "array"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Adjustments_createInvertColorMatrix",
-      "header": "flight/adjustments/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::adjustments::create_invert_color_matrix",
-      "package": "@flighthq/adjustments",
-      "publicName": "flight.Adjustments.createInvertColorMatrix",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family array is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/adjustments/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "array"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Adjustments_createLevelsColorMatrix",
-      "header": "flight/adjustments/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::adjustments::create_levels_color_matrix",
-      "package": "@flighthq/adjustments",
-      "publicName": "flight.Adjustments.createLevelsColorMatrix",
       "refusal": {
         "code": "unsupported-carrier",
         "message": "defaulted parameters need an exact C++ default-argument contract",
@@ -816,63 +559,6 @@
     },
     {
       "carrierFamilies": [
-        "array"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Adjustments_createOpacityColorMatrix",
-      "header": "flight/adjustments/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::adjustments::create_opacity_color_matrix",
-      "package": "@flighthq/adjustments",
-      "publicName": "flight.Adjustments.createOpacityColorMatrix",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family array is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/adjustments/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "array"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Adjustments_createPolaroidColorMatrix",
-      "header": "flight/adjustments/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::adjustments::create_polaroid_color_matrix",
-      "package": "@flighthq/adjustments",
-      "publicName": "flight.Adjustments.createPolaroidColorMatrix",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family array is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/adjustments/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "array"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Adjustments_createSaturationColorMatrix",
-      "header": "flight/adjustments/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::adjustments::create_saturation_color_matrix",
-      "package": "@flighthq/adjustments",
-      "publicName": "flight.Adjustments.createSaturationColorMatrix",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family array is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/adjustments/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
         "dynamic",
         "named"
       ],
@@ -893,44 +579,6 @@
     },
     {
       "carrierFamilies": [
-        "array"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Adjustments_createSepiaColorMatrix",
-      "header": "flight/adjustments/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::adjustments::create_sepia_color_matrix",
-      "package": "@flighthq/adjustments",
-      "publicName": "flight.Adjustments.createSepiaColorMatrix",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family array is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/adjustments/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "array"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Adjustments_createTechnicolorColorMatrix",
-      "header": "flight/adjustments/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::adjustments::create_technicolor_color_matrix",
-      "package": "@flighthq/adjustments",
-      "publicName": "flight.Adjustments.createTechnicolorColorMatrix",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family array is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/adjustments/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
         "named"
       ],
       "externClass": "flight._cpp._attempt.Attempt_Adjustments_createTintAdjustment",
@@ -942,44 +590,6 @@
       "refusal": {
         "code": "unsupported-carrier",
         "message": "named carrier TintAdjustment has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/adjustments/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "array"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Adjustments_createVintageColorMatrix",
-      "header": "flight/adjustments/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::adjustments::create_vintage_color_matrix",
-      "package": "@flighthq/adjustments",
-      "publicName": "flight.Adjustments.createVintageColorMatrix",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family array is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/adjustments/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "array"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Adjustments_createWhiteBalanceColorMatrix",
-      "header": "flight/adjustments/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::adjustments::create_white_balance_color_matrix",
-      "package": "@flighthq/adjustments",
-      "publicName": "flight.Adjustments.createWhiteBalanceColorMatrix",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family array is outside the Haxe C++ extern vertical slice",
         "phase": "planning"
       },
       "source": "packages/adjustments/src/contract.ts",
@@ -1387,25 +997,6 @@
     },
     {
       "carrierFamilies": [
-        "array"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Adjustments_isAffineColorMatrix",
-      "header": "flight/adjustments/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::adjustments::is_affine_color_matrix",
-      "package": "@flighthq/adjustments",
-      "publicName": "flight.Adjustments.isAffineColorMatrix",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/adjustments/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
         "anonymous-structure"
       ],
       "externClass": "flight._cpp._attempt.Attempt_Adjustments_isColorLutAdjustment",
@@ -1433,25 +1024,6 @@
       "nativeName": "flight::adjustments::is_color_matrix_adjustment",
       "package": "@flighthq/adjustments",
       "publicName": "flight.Adjustments.isColorMatrixAdjustment",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/adjustments/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "array"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Adjustments_multiplyColorMatrix",
-      "header": "flight/adjustments/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::adjustments::multiply_color_matrix",
-      "package": "@flighthq/adjustments",
-      "publicName": "flight.Adjustments.multiplyColorMatrix",
       "refusal": {
         "code": "unsupported-carrier",
         "message": "type family named is outside the Haxe C++ extern vertical slice",
@@ -2600,44 +2172,6 @@
     },
     {
       "carrierFamilies": [
-        "array"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Bitmap_buildBitmapBrightnessColorMatrix",
-      "header": "flight/bitmap/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::bitmap::build_bitmap_brightness_color_matrix",
-      "package": "@flighthq/bitmap",
-      "publicName": "flight.Bitmap.buildBitmapBrightnessColorMatrix",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family array is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/bitmap/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "array"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Bitmap_buildBitmapContrastColorMatrix",
-      "header": "flight/bitmap/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::bitmap::build_bitmap_contrast_color_matrix",
-      "package": "@flighthq/bitmap",
-      "publicName": "flight.Bitmap.buildBitmapContrastColorMatrix",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family array is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/bitmap/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
         "array",
         "typed-array"
       ],
@@ -2650,101 +2184,6 @@
       "refusal": {
         "code": "unsupported-carrier",
         "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/bitmap/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "array"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Bitmap_buildBitmapGrayscaleColorMatrix",
-      "header": "flight/bitmap/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::bitmap::build_bitmap_grayscale_color_matrix",
-      "package": "@flighthq/bitmap",
-      "publicName": "flight.Bitmap.buildBitmapGrayscaleColorMatrix",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family array is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/bitmap/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "array"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Bitmap_buildBitmapHueRotationColorMatrix",
-      "header": "flight/bitmap/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::bitmap::build_bitmap_hue_rotation_color_matrix",
-      "package": "@flighthq/bitmap",
-      "publicName": "flight.Bitmap.buildBitmapHueRotationColorMatrix",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family array is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/bitmap/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "array"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Bitmap_buildBitmapInvertColorMatrix",
-      "header": "flight/bitmap/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::bitmap::build_bitmap_invert_color_matrix",
-      "package": "@flighthq/bitmap",
-      "publicName": "flight.Bitmap.buildBitmapInvertColorMatrix",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family array is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/bitmap/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "array"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Bitmap_buildBitmapSaturationColorMatrix",
-      "header": "flight/bitmap/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::bitmap::build_bitmap_saturation_color_matrix",
-      "package": "@flighthq/bitmap",
-      "publicName": "flight.Bitmap.buildBitmapSaturationColorMatrix",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family array is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/bitmap/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "array"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Bitmap_buildBitmapSepiaColorMatrix",
-      "header": "flight/bitmap/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::bitmap::build_bitmap_sepia_color_matrix",
-      "package": "@flighthq/bitmap",
-      "publicName": "flight.Bitmap.buildBitmapSepiaColorMatrix",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family array is outside the Haxe C++ extern vertical slice",
         "phase": "planning"
       },
       "source": "packages/bitmap/src/contract.ts",
@@ -2902,25 +2341,6 @@
       "refusal": {
         "code": "unsupported-carrier",
         "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/bitmap/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "array"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Bitmap_concatBitmapColorMatrix",
-      "header": "flight/bitmap/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::bitmap::concat_bitmap_color_matrix",
-      "package": "@flighthq/bitmap",
-      "publicName": "flight.Bitmap.concatBitmapColorMatrix",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family array is outside the Haxe C++ extern vertical slice",
         "phase": "planning"
       },
       "source": "packages/bitmap/src/contract.ts",
@@ -4189,25 +3609,6 @@
       "refusal": {
         "code": "unsupported-carrier",
         "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/bitmap/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "array"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Bitmap_setBitmapColorMatrixIdentity",
-      "header": "flight/bitmap/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::bitmap::set_bitmap_color_matrix_identity",
-      "package": "@flighthq/bitmap",
-      "publicName": "flight.Bitmap.setBitmapColorMatrixIdentity",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family array is outside the Haxe C++ extern vertical slice",
         "phase": "planning"
       },
       "source": "packages/bitmap/src/contract.ts",
@@ -5904,101 +5305,6 @@
     },
     {
       "carrierFamilies": [
-        "array"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Color_clampLinearRgb",
-      "header": "flight/color/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::color::clamp_linear_rgb",
-      "package": "@flighthq/color",
-      "publicName": "flight.Color.clampLinearRgb",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family tuple is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/color/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "array"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Color_getRec2020LuminanceWeights",
-      "header": "flight/color/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::color::get_rec2020_luminance_weights",
-      "package": "@flighthq/color",
-      "publicName": "flight.Color.getRec2020LuminanceWeights",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family tuple is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/color/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "array"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Color_getRec709LuminanceWeights",
-      "header": "flight/color/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::color::get_rec709_luminance_weights",
-      "package": "@flighthq/color",
-      "publicName": "flight.Color.getRec709LuminanceWeights",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family tuple is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/color/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "array"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Color_hslToRgb",
-      "header": "flight/color/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::color::hsl_to_rgb",
-      "package": "@flighthq/color",
-      "publicName": "flight.Color.hslToRgb",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family tuple is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/color/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "array"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Color_hsvToRgb",
-      "header": "flight/color/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::color::hsv_to_rgb",
-      "package": "@flighthq/color",
-      "publicName": "flight.Color.hsvToRgb",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family tuple is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/color/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
         "named"
       ],
       "externClass": "flight._cpp._attempt.Attempt_Color_lerpLinearColor",
@@ -6010,45 +5316,6 @@
       "refusal": {
         "code": "unsupported-carrier",
         "message": "named carrier LinearColor has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/color/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "array"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Color_linearRgbToOklab",
-      "header": "flight/color/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::color::linear_rgb_to_oklab",
-      "package": "@flighthq/color",
-      "publicName": "flight.Color.linearRgbToOklab",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family tuple is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/color/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "array",
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Color_oklabToLinearRgb",
-      "header": "flight/color/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::color::oklab_to_linear_rgb",
-      "package": "@flighthq/color",
-      "publicName": "flight.Color.oklabToLinearRgb",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family tuple is outside the Haxe C++ extern vertical slice",
         "phase": "planning"
       },
       "source": "packages/color/src/contract.ts",
@@ -6106,25 +5373,6 @@
       "refusal": {
         "code": "unsupported-carrier",
         "message": "named carrier HsvColor has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/color/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "array"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Color_unpackColorRgba",
-      "header": "flight/color/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::color::unpack_color_rgba",
-      "package": "@flighthq/color",
-      "publicName": "flight.Color.unpackColorRgba",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family tuple is outside the Haxe C++ extern vertical slice",
         "phase": "planning"
       },
       "source": "packages/color/src/contract.ts",
@@ -8687,44 +7935,6 @@
     },
     {
       "carrierFamilies": [
-        "array"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Math_mean",
-      "header": "flight/math/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::math::mean",
-      "package": "@flighthq/math",
-      "publicName": "flight.Math.mean",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/math/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "array"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Math_median",
-      "header": "flight/math/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::math::median",
-      "package": "@flighthq/math",
-      "publicName": "flight.Math.median",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/math/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
         "array",
         "generic-function",
         "named",
@@ -9030,63 +8240,6 @@
       "refusal": {
         "code": "unsupported-carrier",
         "message": "generic functions are not supported",
-        "phase": "planning"
-      },
-      "source": "packages/math/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "array"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Math_standardDeviation",
-      "header": "flight/math/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::math::standard_deviation",
-      "package": "@flighthq/math",
-      "publicName": "flight.Math.standardDeviation",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/math/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "array"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Math_variance",
-      "header": "flight/math/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::math::variance",
-      "package": "@flighthq/math",
-      "publicName": "flight.Math.variance",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/math/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "array"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Math_weightedAverage",
-      "header": "flight/math/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::math::weighted_average",
-      "package": "@flighthq/math",
-      "publicName": "flight.Math.weightedAverage",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
         "phase": "planning"
       },
       "source": "packages/math/src/contract.ts",
@@ -21765,14 +20918,14 @@
   },
   "schema": "flight-hx-native-binding-attempts/1",
   "summary": {
-    "functions": 747,
+    "functions": 703,
     "carrierFamilies": [
       {
         "count": 80,
         "name": "anonymous-structure"
       },
       {
-        "count": 122,
+        "count": 78,
         "name": "array"
       },
       {
@@ -21788,7 +20941,7 @@
         "name": "generic-function"
       },
       {
-        "count": 748,
+        "count": 747,
         "name": "named"
       },
       {
@@ -21805,8 +20958,8 @@
       }
     ],
     "holders": 42,
-    "isolatedExterns": 1126,
-    "total": 1126,
+    "isolatedExterns": 1082,
+    "total": 1082,
     "values": 379
   }
 }

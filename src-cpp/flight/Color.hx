@@ -1,6 +1,38 @@
 // Generated from src-cpp/manifest.json and flight-compiler native-planning.json. Do not edit.
 package flight;
 
+inline function clampLinearRgb(out:Array<Float>, r:Float, g:Float, b:Float):Void {
+  flight._cpp._fn.Color.clampLinearRgb(out, r, g, b);
+}
+
+inline function getRec2020LuminanceWeights(out:Array<Float>):Void {
+  flight._cpp._fn.Color.getRec2020LuminanceWeights(out);
+}
+
+inline function getRec709LuminanceWeights(out:Array<Float>):Void {
+  flight._cpp._fn.Color.getRec709LuminanceWeights(out);
+}
+
+inline function hslToRgb(out:Array<Float>, h:Float, s:Float, l:Float):Void {
+  flight._cpp._fn.Color.hslToRgb(out, h, s, l);
+}
+
+inline function hsvToRgb(out:Array<Float>, h:Float, s:Float, v:Float):Void {
+  flight._cpp._fn.Color.hsvToRgb(out, h, s, v);
+}
+
+inline function linearRgbToOklab(out:Array<Float>, r:Float, g:Float, b:Float):Void {
+  flight._cpp._fn.Color.linearRgbToOklab(out, r, g, b);
+}
+
+inline function oklabToLinearRgb(out:Array<Float>, L:Float, a:Float, b:Float):Void {
+  flight._cpp._fn.Color.oklabToLinearRgb(out, L, a, b);
+}
+
+inline function unpackColorRgba(out:Array<Float>, color:Float):Void {
+  flight._cpp._fn.Color.unpackColorRgba(out, color);
+}
+
 inline function colorFromKelvin(kelvin:Float):Float {
   return flight._cpp._fn.Color.colorFromKelvin(kelvin);
 }
@@ -73,36 +105,8 @@ extern inline function allocateLinearColor():flight.LinearColor {
   return flight._cpp._attempt.Attempt_Color_allocateLinearColor.allocateLinearColor();
 }
 
-extern inline function clampLinearRgb(out:Array<Float>, r:Float, g:Float, b:Float):Void {
-  flight._cpp._attempt.Attempt_Color_clampLinearRgb.clampLinearRgb(out, r, g, b);
-}
-
-extern inline function getRec2020LuminanceWeights(out:Array<Float>):Void {
-  flight._cpp._attempt.Attempt_Color_getRec2020LuminanceWeights.getRec2020LuminanceWeights(out);
-}
-
-extern inline function getRec709LuminanceWeights(out:Array<Float>):Void {
-  flight._cpp._attempt.Attempt_Color_getRec709LuminanceWeights.getRec709LuminanceWeights(out);
-}
-
-extern inline function hslToRgb(out:Array<Float>, h:Float, s:Float, l:Float):Void {
-  flight._cpp._attempt.Attempt_Color_hslToRgb.hslToRgb(out, h, s, l);
-}
-
-extern inline function hsvToRgb(out:Array<Float>, h:Float, s:Float, v:Float):Void {
-  flight._cpp._attempt.Attempt_Color_hsvToRgb.hsvToRgb(out, h, s, v);
-}
-
 extern inline function lerpLinearColor(out:flight.LinearColor, start:flight.LinearColor, end:flight.LinearColor, t:Float):flight.LinearColor {
   return flight._cpp._attempt.Attempt_Color_lerpLinearColor.lerpLinearColor(out, start, end, t);
-}
-
-extern inline function linearRgbToOklab(out:Array<Float>, r:Float, g:Float, b:Float):Void {
-  flight._cpp._attempt.Attempt_Color_linearRgbToOklab.linearRgbToOklab(out, r, g, b);
-}
-
-extern inline function oklabToLinearRgb(out:Array<Float>, L:Float, a:Float, b:Float):Void {
-  flight._cpp._attempt.Attempt_Color_oklabToLinearRgb.oklabToLinearRgb(out, L, a, b);
 }
 
 extern inline function packLinearToColor(color:flight.LinearColor):Float {
@@ -115,10 +119,6 @@ extern inline function rgbToHsl(out:flight.HslColor, color:Float):flight.HslColo
 
 extern inline function rgbToHsv(out:flight.HsvColor, color:Float):flight.HsvColor {
   return flight._cpp._attempt.Attempt_Color_rgbToHsv.rgbToHsv(out, color);
-}
-
-extern inline function unpackColorRgba(out:Array<Float>, color:Float):Void {
-  flight._cpp._attempt.Attempt_Color_unpackColorRgba.unpackColorRgba(out, color);
 }
 
 extern inline function unpackColorToLinear(out:flight.LinearColor, color:Float):flight.LinearColor {

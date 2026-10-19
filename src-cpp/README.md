@@ -10,12 +10,13 @@ headers. Public facade overrides deliberately expose nothing outside that manife
 The current pin's generated SDK uses the same Flight revision as this repo and records its distinct
 flight-compiler revision (`806d257` versus flight-hx planning at `804435a`). It reports 2,574 emitted
 and 577 refused modules from 3,151 profile inputs across 153 packages. The exact general-purpose
-Haxe-callable partition remains intentionally smaller: 122 functions across 24 public modules. They
+Haxe-callable partition remains intentionally smaller: 166 functions across 26 public modules. They
 are compared with current web signatures, then compiled and executed from one Haxe source in the
 cross-target gate. Sixty-two bind directly from the compiler plan, four use compiler-emitted UTF-8
 String adapters, 53 required-primitive functions, and three optional-scalar adapters are explicit
-flight-hx overrides from
-dependency-complete flight-cpp headers.
+flight-hx overrides from dependency-complete flight-cpp headers. Forty-four additional functions
+use the generated `Array<Float>` adapter, which copies between hxcpp and `flight::Array<double>`,
+preserves argument aliases and optional-output identity, and copies native mutations back.
 Expanding that partition remains manifest-first and compile-proven; the larger generated C++
 inventory is not silently claimed as Haxe support.
 
@@ -44,6 +45,9 @@ override instead of leaving two competing sources of truth.
 Optional-scalar overrides have distinct provenance and require the exact generated
 `std::optional` signature. Their internal ABI carries a presence bit plus the primitive value, while
 the public Haxe signature remains identical to the web API.
+`Array<Float>` adapters likewise have distinct provenance and require exact dependency-complete
+native signatures. They remain generated from the manifest rather than handwritten per function,
+and every promoted call executes on both native and web through the installed consumer.
 `manifest.json` also records failed override probes. The current inventory is empty: flight-cpp's
 Spine helper override repaired the last recorded header failure, and
 `Skeleton2dFormats.clampUnit` now crosses the same compile-and-run gate as the other required-scalar

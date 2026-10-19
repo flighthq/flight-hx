@@ -1,6 +1,94 @@
 // Generated from src-cpp/manifest.json and flight-compiler native-planning.json. Do not edit.
 package flight;
 
+inline function applyColorMatrixToColor(matrix:Array<Float>, packedRgba:Float):Float {
+  return flight._cpp._fn.Adjustments.applyColorMatrixToColor(matrix, packedRgba);
+}
+
+inline function concatColorMatrix(target:Array<Float>, source:Array<Float>):Void {
+  flight._cpp._fn.Adjustments.concatColorMatrix(target, source);
+}
+
+inline function createBrightnessColorMatrix(amount:Float):Array<Float> {
+  return flight._cpp._fn.Adjustments.createBrightnessColorMatrix(amount);
+}
+
+inline function createChannelMixerColorMatrix(redOut:Array<Float>, greenOut:Array<Float>, blueOut:Array<Float>):Array<Float> {
+  return flight._cpp._fn.Adjustments.createChannelMixerColorMatrix(redOut, greenOut, blueOut);
+}
+
+inline function createColorBalanceColorMatrix(shadows:Array<Float>, midtones:Array<Float>, highlights:Array<Float>):Array<Float> {
+  return flight._cpp._fn.Adjustments.createColorBalanceColorMatrix(shadows, midtones, highlights);
+}
+
+inline function createColorMatrixFromTint(packedRgba:Float, amount:Float):Array<Float> {
+  return flight._cpp._fn.Adjustments.createColorMatrixFromTint(packedRgba, amount);
+}
+
+inline function createContrastColorMatrix(amount:Float):Array<Float> {
+  return flight._cpp._fn.Adjustments.createContrastColorMatrix(amount);
+}
+
+inline function createDesaturateColorMatrix(amount:Float):Array<Float> {
+  return flight._cpp._fn.Adjustments.createDesaturateColorMatrix(amount);
+}
+
+inline function createGrayscaleColorMatrix():Array<Float> {
+  return flight._cpp._fn.Adjustments.createGrayscaleColorMatrix();
+}
+
+inline function createHueRotateColorMatrix(degrees:Float):Array<Float> {
+  return flight._cpp._fn.Adjustments.createHueRotateColorMatrix(degrees);
+}
+
+inline function createIdentityColorMatrix():Array<Float> {
+  return flight._cpp._fn.Adjustments.createIdentityColorMatrix();
+}
+
+inline function createInvertColorMatrix():Array<Float> {
+  return flight._cpp._fn.Adjustments.createInvertColorMatrix();
+}
+
+inline function createLevelsColorMatrix(inBlack:Float, inWhite:Float, outBlack:Float, outWhite:Float, ?gamma:Float):Array<Float> {
+  return flight._cpp._fn.Adjustments.createLevelsColorMatrix(inBlack, inWhite, outBlack, outWhite, gamma != null, gamma == null ? 0.0 : gamma);
+}
+
+inline function createOpacityColorMatrix(alpha:Float):Array<Float> {
+  return flight._cpp._fn.Adjustments.createOpacityColorMatrix(alpha);
+}
+
+inline function createPolaroidColorMatrix():Array<Float> {
+  return flight._cpp._fn.Adjustments.createPolaroidColorMatrix();
+}
+
+inline function createSaturationColorMatrix(amount:Float):Array<Float> {
+  return flight._cpp._fn.Adjustments.createSaturationColorMatrix(amount);
+}
+
+inline function createSepiaColorMatrix():Array<Float> {
+  return flight._cpp._fn.Adjustments.createSepiaColorMatrix();
+}
+
+inline function createTechnicolorColorMatrix():Array<Float> {
+  return flight._cpp._fn.Adjustments.createTechnicolorColorMatrix();
+}
+
+inline function createVintageColorMatrix():Array<Float> {
+  return flight._cpp._fn.Adjustments.createVintageColorMatrix();
+}
+
+inline function createWhiteBalanceColorMatrix(temperature:Float, tint:Float):Array<Float> {
+  return flight._cpp._fn.Adjustments.createWhiteBalanceColorMatrix(temperature, tint);
+}
+
+inline function isAffineColorMatrix(matrix:Array<Float>):Bool {
+  return flight._cpp._fn.Adjustments.isAffineColorMatrix(matrix);
+}
+
+inline function multiplyColorMatrix(a:Array<Float>, b:Array<Float>, ?out:Array<Float>):Array<Float> {
+  return flight._cpp._fn.Adjustments.multiplyColorMatrix(a, b, out != null, out == null ? ([] : Array<Float>) : out);
+}
+
 var COLOR_ADJUSTMENT_AFFINE(get, set):Float;
 
 private extern inline function get_COLOR_ADJUSTMENT_AFFINE():Float return flight._cpp._attempt.Attempt_Adjustments_COLOR_ADJUSTMENT_AFFINE.COLOR_ADJUSTMENT_AFFINE;
@@ -31,10 +119,6 @@ private extern inline function get_COLOR_MATRIX_LENGTH():Float return flight._cp
 
 private extern inline function set_COLOR_MATRIX_LENGTH(value:Float):Float return flight._cpp._attempt.Attempt_Adjustments_COLOR_MATRIX_LENGTH.COLOR_MATRIX_LENGTH = value;
 
-extern inline function applyColorMatrixToColor(matrix:Array<Float>, packedRgba:Float):Float {
-  return flight._cpp._attempt.Attempt_Adjustments_applyColorMatrixToColor.applyColorMatrixToColor(matrix, packedRgba);
-}
-
 extern inline function bakeColorLut(transforms:Array<flight.ColorTransformFunction>, ?size:Float):flight.ColorLut {
   return flight._cpp._attempt.Attempt_Adjustments_bakeColorLut.bakeColorLut(transforms, size);
 }
@@ -43,28 +127,12 @@ extern inline function bakeColorLutForRun(cache:flight.ColorLutCache, run:Array<
   return flight._cpp._attempt.Attempt_Adjustments_bakeColorLutForRun.bakeColorLutForRun(cache, run, size);
 }
 
-extern inline function concatColorMatrix(target:Array<Float>, source:Array<Float>):Void {
-  flight._cpp._attempt.Attempt_Adjustments_concatColorMatrix.concatColorMatrix(target, source);
-}
-
-extern inline function createBrightnessColorMatrix(amount:Float):Array<Float> {
-  return flight._cpp._attempt.Attempt_Adjustments_createBrightnessColorMatrix.createBrightnessColorMatrix(amount);
-}
-
 extern inline function createBrightnessContrastAdjustment(?options:Dynamic):flight.BrightnessContrastAdjustment {
   return flight._cpp._attempt.Attempt_Adjustments_createBrightnessContrastAdjustment.createBrightnessContrastAdjustment(options);
 }
 
 extern inline function createChannelMixerAdjustment(?options:Dynamic):flight.ChannelMixerAdjustment {
   return flight._cpp._attempt.Attempt_Adjustments_createChannelMixerAdjustment.createChannelMixerAdjustment(options);
-}
-
-extern inline function createChannelMixerColorMatrix(redOut:Array<Float>, greenOut:Array<Float>, blueOut:Array<Float>):Array<Float> {
-  return flight._cpp._attempt.Attempt_Adjustments_createChannelMixerColorMatrix.createChannelMixerColorMatrix(redOut, greenOut, blueOut);
-}
-
-extern inline function createColorBalanceColorMatrix(shadows:Array<Float>, midtones:Array<Float>, highlights:Array<Float>):Array<Float> {
-  return flight._cpp._attempt.Attempt_Adjustments_createColorBalanceColorMatrix.createColorBalanceColorMatrix(shadows, midtones, highlights);
 }
 
 extern inline function createColorBlindSimulationAdjustment(?options:Dynamic):flight.ColorBlindSimulationAdjustment {
@@ -83,20 +151,8 @@ extern inline function createColorMatrixAdjustment(colorMatrix:Array<Float>):fli
   return flight._cpp._attempt.Attempt_Adjustments_createColorMatrixAdjustment.createColorMatrixAdjustment(colorMatrix);
 }
 
-extern inline function createColorMatrixFromTint(packedRgba:Float, amount:Float):Array<Float> {
-  return flight._cpp._attempt.Attempt_Adjustments_createColorMatrixFromTint.createColorMatrixFromTint(packedRgba, amount);
-}
-
 extern inline function createColorScaleBiasAdjustment(colorScaleBias:flight.ColorScaleBiasLike):flight.ColorScaleBiasAdjustment {
   return flight._cpp._attempt.Attempt_Adjustments_createColorScaleBiasAdjustment.createColorScaleBiasAdjustment(colorScaleBias);
-}
-
-extern inline function createContrastColorMatrix(amount:Float):Array<Float> {
-  return flight._cpp._attempt.Attempt_Adjustments_createContrastColorMatrix.createContrastColorMatrix(amount);
-}
-
-extern inline function createDesaturateColorMatrix(amount:Float):Array<Float> {
-  return flight._cpp._attempt.Attempt_Adjustments_createDesaturateColorMatrix.createDesaturateColorMatrix(amount);
 }
 
 extern inline function createExposureAdjustment(?options:Dynamic):flight.ExposureAdjustment {
@@ -107,32 +163,12 @@ extern inline function createGrayscaleAdjustment(?options:Dynamic):flight.Graysc
   return flight._cpp._attempt.Attempt_Adjustments_createGrayscaleAdjustment.createGrayscaleAdjustment(options);
 }
 
-extern inline function createGrayscaleColorMatrix():Array<Float> {
-  return flight._cpp._attempt.Attempt_Adjustments_createGrayscaleColorMatrix.createGrayscaleColorMatrix();
-}
-
-extern inline function createHueRotateColorMatrix(degrees:Float):Array<Float> {
-  return flight._cpp._attempt.Attempt_Adjustments_createHueRotateColorMatrix.createHueRotateColorMatrix(degrees);
-}
-
 extern inline function createHueSaturationAdjustment(?options:Dynamic):flight.HueSaturationAdjustment {
   return flight._cpp._attempt.Attempt_Adjustments_createHueSaturationAdjustment.createHueSaturationAdjustment(options);
 }
 
-extern inline function createIdentityColorMatrix():Array<Float> {
-  return flight._cpp._attempt.Attempt_Adjustments_createIdentityColorMatrix.createIdentityColorMatrix();
-}
-
 extern inline function createInvertAdjustment(?options:Dynamic):flight.InvertAdjustment {
   return flight._cpp._attempt.Attempt_Adjustments_createInvertAdjustment.createInvertAdjustment(options);
-}
-
-extern inline function createInvertColorMatrix():Array<Float> {
-  return flight._cpp._attempt.Attempt_Adjustments_createInvertColorMatrix.createInvertColorMatrix();
-}
-
-extern inline function createLevelsColorMatrix(inBlack:Float, inWhite:Float, outBlack:Float, outWhite:Float, ?gamma:Float):Array<Float> {
-  return flight._cpp._attempt.Attempt_Adjustments_createLevelsColorMatrix.createLevelsColorMatrix(inBlack, inWhite, outBlack, outWhite, gamma);
 }
 
 extern inline function createLiftGammaGainAdjustment(?options:Dynamic):flight.LiftGammaGainAdjustment {
@@ -143,40 +179,12 @@ extern inline function createLookupTableGradeAdjustment(?options:Dynamic):flight
   return flight._cpp._attempt.Attempt_Adjustments_createLookupTableGradeAdjustment.createLookupTableGradeAdjustment(options);
 }
 
-extern inline function createOpacityColorMatrix(alpha:Float):Array<Float> {
-  return flight._cpp._attempt.Attempt_Adjustments_createOpacityColorMatrix.createOpacityColorMatrix(alpha);
-}
-
-extern inline function createPolaroidColorMatrix():Array<Float> {
-  return flight._cpp._attempt.Attempt_Adjustments_createPolaroidColorMatrix.createPolaroidColorMatrix();
-}
-
-extern inline function createSaturationColorMatrix(amount:Float):Array<Float> {
-  return flight._cpp._attempt.Attempt_Adjustments_createSaturationColorMatrix.createSaturationColorMatrix(amount);
-}
-
 extern inline function createSepiaAdjustment(?options:Dynamic):flight.SepiaAdjustment {
   return flight._cpp._attempt.Attempt_Adjustments_createSepiaAdjustment.createSepiaAdjustment(options);
 }
 
-extern inline function createSepiaColorMatrix():Array<Float> {
-  return flight._cpp._attempt.Attempt_Adjustments_createSepiaColorMatrix.createSepiaColorMatrix();
-}
-
-extern inline function createTechnicolorColorMatrix():Array<Float> {
-  return flight._cpp._attempt.Attempt_Adjustments_createTechnicolorColorMatrix.createTechnicolorColorMatrix();
-}
-
 extern inline function createTintAdjustment(rgba:Float):flight.TintAdjustment {
   return flight._cpp._attempt.Attempt_Adjustments_createTintAdjustment.createTintAdjustment(rgba);
-}
-
-extern inline function createVintageColorMatrix():Array<Float> {
-  return flight._cpp._attempt.Attempt_Adjustments_createVintageColorMatrix.createVintageColorMatrix();
-}
-
-extern inline function createWhiteBalanceColorMatrix(temperature:Float, tint:Float):Array<Float> {
-  return flight._cpp._attempt.Attempt_Adjustments_createWhiteBalanceColorMatrix.createWhiteBalanceColorMatrix(temperature, tint);
 }
 
 extern inline function fuseColorMatrices(matrices:Array<Array<Float>>):Array<Float> {
@@ -259,20 +267,12 @@ extern inline function initializeTintAdjustment(out:flight.EntityConstruction<fl
   flight._cpp._attempt.Attempt_Adjustments_initializeTintAdjustment.initializeTintAdjustment(out, rgba);
 }
 
-extern inline function isAffineColorMatrix(matrix:Array<Float>):Bool {
-  return flight._cpp._attempt.Attempt_Adjustments_isAffineColorMatrix.isAffineColorMatrix(matrix);
-}
-
 extern inline function isColorLutAdjustment(operation:{ kind:String }):Bool {
   return flight._cpp._attempt.Attempt_Adjustments_isColorLutAdjustment.isColorLutAdjustment(operation);
 }
 
 extern inline function isColorMatrixAdjustment(operation:{ kind:String }):Bool {
   return flight._cpp._attempt.Attempt_Adjustments_isColorMatrixAdjustment.isColorMatrixAdjustment(operation);
-}
-
-extern inline function multiplyColorMatrix(a:Array<Float>, b:Array<Float>, ?out:Array<Float>):Array<Float> {
-  return flight._cpp._attempt.Attempt_Adjustments_multiplyColorMatrix.multiplyColorMatrix(a, b, out);
 }
 
 extern inline function resolveColorAdjustmentsColorMatrix(adjustments:Null<Array<flight.Adjustment>>):Null<Array<Float>> {

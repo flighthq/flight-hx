@@ -1,6 +1,26 @@
 // Generated from src-cpp/manifest.json and flight-compiler native-planning.json. Do not edit.
 package flight;
 
+inline function mean(values:Array<Float>):Float {
+  return flight._cpp._fn.Math.mean(values);
+}
+
+inline function median(values:Array<Float>):Float {
+  return flight._cpp._fn.Math.median(values);
+}
+
+inline function standardDeviation(values:Array<Float>):Float {
+  return flight._cpp._fn.Math.standardDeviation(values);
+}
+
+inline function variance(values:Array<Float>):Float {
+  return flight._cpp._fn.Math.variance(values);
+}
+
+inline function weightedAverage(values:Array<Float>, weights:Array<Float>):Float {
+  return flight._cpp._fn.Math.weightedAverage(values, weights);
+}
+
 inline function approxEqual(a:Float, b:Float, ?epsilon:Float):Bool {
   return flight._cpp._fn.Math.approxEqual(a, b, epsilon != null, epsilon == null ? 0.0 : epsilon);
 }
@@ -221,14 +241,6 @@ extern inline function createRandomSourceFromHash(x:Float, y:Float):flight.Rando
   return flight._cpp._attempt.Attempt_Math_createRandomSourceFromHash.createRandomSourceFromHash(x, y);
 }
 
-extern inline function mean(values:Array<Float>):Float {
-  return flight._cpp._attempt.Attempt_Math_mean.mean(values);
-}
-
-extern inline function median(values:Array<Float>):Float {
-  return flight._cpp._attempt.Attempt_Math_median.median(values);
-}
-
 extern inline function pick<T>(random:flight.RandomSource, items:Array<T>):Null<T> {
   return flight._cpp._attempt.Attempt_Math_pick.pick(random, items);
 }
@@ -291,16 +303,4 @@ extern inline function shuffle<T>(random:flight.RandomSource, items:Array<T>):Ar
 
 extern inline function shuffleInPlace<T>(random:flight.RandomSource, items:Array<T>):Void {
   flight._cpp._attempt.Attempt_Math_shuffleInPlace.shuffleInPlace(random, items);
-}
-
-extern inline function standardDeviation(values:Array<Float>):Float {
-  return flight._cpp._attempt.Attempt_Math_standardDeviation.standardDeviation(values);
-}
-
-extern inline function variance(values:Array<Float>):Float {
-  return flight._cpp._attempt.Attempt_Math_variance.variance(values);
-}
-
-extern inline function weightedAverage(values:Array<Float>, weights:Array<Float>):Float {
-  return flight._cpp._attempt.Attempt_Math_weightedAverage.weightedAverage(values, weights);
 }

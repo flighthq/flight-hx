@@ -13,12 +13,14 @@
     "promotion": "compiler-emitted-header-pass-compile-run",
     "typeAttempt": "compiler-emitted-unproven-materialization",
     "overridePromotion": "dependency-complete-required-scalar-compile-run",
-    "optionalOverridePromotion": "dependency-complete-optional-scalar-adapter-compile-run"
+    "optionalOverridePromotion": "dependency-complete-optional-scalar-adapter-compile-run",
+    "arrayFloatAdapterPromotion": "dependency-complete-array-float-copy-adapter-compile-run"
   },
   "cppStandard": 20,
   "corrections": [
     "flight-hx-hxcpp-flight-namespace-isolation/1",
-    "flight-hx-hxcpp-cpp11-override/1"
+    "flight-hx-hxcpp-cpp11-override/1",
+    "flight-hx-hxcpp-array-float-copy-adapter/1"
   ],
   "scalarOverrideRefusals": [],
   "hosts": [
@@ -53,6 +55,143 @@
   ],
   "modules": [
     {
+      "module": "flight.Adjustments",
+      "functions": [
+        {
+          "name": "applyColorMatrixToColor",
+          "native": "flight::adjustments::apply_color_matrix_to_color",
+          "header": "flight/adjustments/contract.hpp",
+          "provenance": "flight-hx/array-float-copy-adapter/1"
+        },
+        {
+          "name": "concatColorMatrix",
+          "native": "flight::adjustments::concat_color_matrix",
+          "header": "flight/adjustments/contract.hpp",
+          "provenance": "flight-hx/array-float-copy-adapter/1"
+        },
+        {
+          "name": "createBrightnessColorMatrix",
+          "native": "flight::adjustments::create_brightness_color_matrix",
+          "header": "flight/adjustments/contract.hpp",
+          "provenance": "flight-hx/array-float-copy-adapter/1"
+        },
+        {
+          "name": "createChannelMixerColorMatrix",
+          "native": "flight::adjustments::create_channel_mixer_color_matrix",
+          "header": "flight/adjustments/contract.hpp",
+          "provenance": "flight-hx/array-float-copy-adapter/1"
+        },
+        {
+          "name": "createColorBalanceColorMatrix",
+          "native": "flight::adjustments::create_color_balance_color_matrix",
+          "header": "flight/adjustments/contract.hpp",
+          "provenance": "flight-hx/array-float-copy-adapter/1"
+        },
+        {
+          "name": "createColorMatrixFromTint",
+          "native": "flight::adjustments::create_color_matrix_from_tint",
+          "header": "flight/adjustments/contract.hpp",
+          "provenance": "flight-hx/array-float-copy-adapter/1"
+        },
+        {
+          "name": "createContrastColorMatrix",
+          "native": "flight::adjustments::create_contrast_color_matrix",
+          "header": "flight/adjustments/contract.hpp",
+          "provenance": "flight-hx/array-float-copy-adapter/1"
+        },
+        {
+          "name": "createDesaturateColorMatrix",
+          "native": "flight::adjustments::create_desaturate_color_matrix",
+          "header": "flight/adjustments/contract.hpp",
+          "provenance": "flight-hx/array-float-copy-adapter/1"
+        },
+        {
+          "name": "createGrayscaleColorMatrix",
+          "native": "flight::adjustments::create_grayscale_color_matrix",
+          "header": "flight/adjustments/contract.hpp",
+          "provenance": "flight-hx/array-float-copy-adapter/1"
+        },
+        {
+          "name": "createHueRotateColorMatrix",
+          "native": "flight::adjustments::create_hue_rotate_color_matrix",
+          "header": "flight/adjustments/contract.hpp",
+          "provenance": "flight-hx/array-float-copy-adapter/1"
+        },
+        {
+          "name": "createIdentityColorMatrix",
+          "native": "flight::adjustments::create_identity_color_matrix",
+          "header": "flight/adjustments/contract.hpp",
+          "provenance": "flight-hx/array-float-copy-adapter/1"
+        },
+        {
+          "name": "createInvertColorMatrix",
+          "native": "flight::adjustments::create_invert_color_matrix",
+          "header": "flight/adjustments/contract.hpp",
+          "provenance": "flight-hx/array-float-copy-adapter/1"
+        },
+        {
+          "name": "createLevelsColorMatrix",
+          "native": "flight::adjustments::create_levels_color_matrix",
+          "header": "flight/adjustments/contract.hpp",
+          "provenance": "flight-hx/array-float-copy-adapter/1"
+        },
+        {
+          "name": "createOpacityColorMatrix",
+          "native": "flight::adjustments::create_opacity_color_matrix",
+          "header": "flight/adjustments/contract.hpp",
+          "provenance": "flight-hx/array-float-copy-adapter/1"
+        },
+        {
+          "name": "createPolaroidColorMatrix",
+          "native": "flight::adjustments::create_polaroid_color_matrix",
+          "header": "flight/adjustments/contract.hpp",
+          "provenance": "flight-hx/array-float-copy-adapter/1"
+        },
+        {
+          "name": "createSaturationColorMatrix",
+          "native": "flight::adjustments::create_saturation_color_matrix",
+          "header": "flight/adjustments/contract.hpp",
+          "provenance": "flight-hx/array-float-copy-adapter/1"
+        },
+        {
+          "name": "createSepiaColorMatrix",
+          "native": "flight::adjustments::create_sepia_color_matrix",
+          "header": "flight/adjustments/contract.hpp",
+          "provenance": "flight-hx/array-float-copy-adapter/1"
+        },
+        {
+          "name": "createTechnicolorColorMatrix",
+          "native": "flight::adjustments::create_technicolor_color_matrix",
+          "header": "flight/adjustments/contract.hpp",
+          "provenance": "flight-hx/array-float-copy-adapter/1"
+        },
+        {
+          "name": "createVintageColorMatrix",
+          "native": "flight::adjustments::create_vintage_color_matrix",
+          "header": "flight/adjustments/contract.hpp",
+          "provenance": "flight-hx/array-float-copy-adapter/1"
+        },
+        {
+          "name": "createWhiteBalanceColorMatrix",
+          "native": "flight::adjustments::create_white_balance_color_matrix",
+          "header": "flight/adjustments/contract.hpp",
+          "provenance": "flight-hx/array-float-copy-adapter/1"
+        },
+        {
+          "name": "isAffineColorMatrix",
+          "native": "flight::adjustments::is_affine_color_matrix",
+          "header": "flight/adjustments/contract.hpp",
+          "provenance": "flight-hx/array-float-copy-adapter/1"
+        },
+        {
+          "name": "multiplyColorMatrix",
+          "native": "flight::adjustments::multiply_color_matrix",
+          "header": "flight/adjustments/contract.hpp",
+          "provenance": "flight-hx/array-float-copy-adapter/1"
+        }
+      ]
+    },
+    {
       "module": "flight.Audio",
       "functions": [
         {
@@ -63,8 +202,115 @@
       ]
     },
     {
+      "module": "flight.Bitmap",
+      "functions": [
+        {
+          "name": "buildBitmapBrightnessColorMatrix",
+          "native": "flight::bitmap::build_bitmap_brightness_color_matrix",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/array-float-copy-adapter/1"
+        },
+        {
+          "name": "buildBitmapContrastColorMatrix",
+          "native": "flight::bitmap::build_bitmap_contrast_color_matrix",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/array-float-copy-adapter/1"
+        },
+        {
+          "name": "buildBitmapGrayscaleColorMatrix",
+          "native": "flight::bitmap::build_bitmap_grayscale_color_matrix",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/array-float-copy-adapter/1"
+        },
+        {
+          "name": "buildBitmapHueRotationColorMatrix",
+          "native": "flight::bitmap::build_bitmap_hue_rotation_color_matrix",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/array-float-copy-adapter/1"
+        },
+        {
+          "name": "buildBitmapInvertColorMatrix",
+          "native": "flight::bitmap::build_bitmap_invert_color_matrix",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/array-float-copy-adapter/1"
+        },
+        {
+          "name": "buildBitmapSaturationColorMatrix",
+          "native": "flight::bitmap::build_bitmap_saturation_color_matrix",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/array-float-copy-adapter/1"
+        },
+        {
+          "name": "buildBitmapSepiaColorMatrix",
+          "native": "flight::bitmap::build_bitmap_sepia_color_matrix",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/array-float-copy-adapter/1"
+        },
+        {
+          "name": "concatBitmapColorMatrix",
+          "native": "flight::bitmap::concat_bitmap_color_matrix",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/array-float-copy-adapter/1"
+        },
+        {
+          "name": "setBitmapColorMatrixIdentity",
+          "native": "flight::bitmap::set_bitmap_color_matrix_identity",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/array-float-copy-adapter/1"
+        }
+      ]
+    },
+    {
       "module": "flight.Color",
       "functions": [
+        {
+          "name": "clampLinearRgb",
+          "native": "flight::color::clamp_linear_rgb",
+          "header": "flight/color/contract.hpp",
+          "provenance": "flight-hx/array-float-copy-adapter/1"
+        },
+        {
+          "name": "getRec2020LuminanceWeights",
+          "native": "flight::color::get_rec2020_luminance_weights",
+          "header": "flight/color/contract.hpp",
+          "provenance": "flight-hx/array-float-copy-adapter/1"
+        },
+        {
+          "name": "getRec709LuminanceWeights",
+          "native": "flight::color::get_rec709_luminance_weights",
+          "header": "flight/color/contract.hpp",
+          "provenance": "flight-hx/array-float-copy-adapter/1"
+        },
+        {
+          "name": "hslToRgb",
+          "native": "flight::color::hsl_to_rgb",
+          "header": "flight/color/contract.hpp",
+          "provenance": "flight-hx/array-float-copy-adapter/1"
+        },
+        {
+          "name": "hsvToRgb",
+          "native": "flight::color::hsv_to_rgb",
+          "header": "flight/color/contract.hpp",
+          "provenance": "flight-hx/array-float-copy-adapter/1"
+        },
+        {
+          "name": "linearRgbToOklab",
+          "native": "flight::color::linear_rgb_to_oklab",
+          "header": "flight/color/contract.hpp",
+          "provenance": "flight-hx/array-float-copy-adapter/1"
+        },
+        {
+          "name": "oklabToLinearRgb",
+          "native": "flight::color::oklab_to_linear_rgb",
+          "header": "flight/color/contract.hpp",
+          "provenance": "flight-hx/array-float-copy-adapter/1"
+        },
+        {
+          "name": "unpackColorRgba",
+          "native": "flight::color::unpack_color_rgba",
+          "header": "flight/color/contract.hpp",
+          "provenance": "flight-hx/array-float-copy-adapter/1"
+        },
         {
           "name": "colorFromKelvin",
           "native": "flight::color::color_from_kelvin",
@@ -573,6 +819,36 @@
     {
       "module": "flight.Math",
       "functions": [
+        {
+          "name": "mean",
+          "native": "flight::math::mean",
+          "header": "flight/math/contract.hpp",
+          "provenance": "flight-hx/array-float-copy-adapter/1"
+        },
+        {
+          "name": "median",
+          "native": "flight::math::median",
+          "header": "flight/math/contract.hpp",
+          "provenance": "flight-hx/array-float-copy-adapter/1"
+        },
+        {
+          "name": "standardDeviation",
+          "native": "flight::math::standard_deviation",
+          "header": "flight/math/contract.hpp",
+          "provenance": "flight-hx/array-float-copy-adapter/1"
+        },
+        {
+          "name": "variance",
+          "native": "flight::math::variance",
+          "header": "flight/math/contract.hpp",
+          "provenance": "flight-hx/array-float-copy-adapter/1"
+        },
+        {
+          "name": "weightedAverage",
+          "native": "flight::math::weighted_average",
+          "header": "flight/math/contract.hpp",
+          "provenance": "flight-hx/array-float-copy-adapter/1"
+        },
         {
           "name": "approxEqual",
           "native": "flight::math::approx_equal",
