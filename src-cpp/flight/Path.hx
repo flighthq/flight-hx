@@ -143,71 +143,49 @@ extern inline function translatePath(source:flight.Path, dx:Float, dy:Float, out
   flight._cpp._fn.Path.translatePath(source, dx, dy, out);
 }
 
-var PathMorphIssueContourClosednessMismatch(get, set):Float;
+var PathMorphIssueContourClosednessMismatch(get, never):Float;
 
-private extern inline function get_PathMorphIssueContourClosednessMismatch():Float return flight._cpp._attempt.Attempt_Path_PathMorphIssueContourClosednessMismatch.PathMorphIssueContourClosednessMismatch;
+private inline function get_PathMorphIssueContourClosednessMismatch():Float return flight._cpp._fn.Path.get_PathMorphIssueContourClosednessMismatch();
 
-private extern inline function set_PathMorphIssueContourClosednessMismatch(value:Float):Float return flight._cpp._attempt.Attempt_Path_PathMorphIssueContourClosednessMismatch.PathMorphIssueContourClosednessMismatch = value;
+var PathMorphIssueContourCountMismatch(get, never):Float;
 
-var PathMorphIssueContourCountMismatch(get, set):Float;
+private inline function get_PathMorphIssueContourCountMismatch():Float return flight._cpp._fn.Path.get_PathMorphIssueContourCountMismatch();
 
-private extern inline function get_PathMorphIssueContourCountMismatch():Float return flight._cpp._attempt.Attempt_Path_PathMorphIssueContourCountMismatch.PathMorphIssueContourCountMismatch;
+var PathMorphIssueContourOrientationMismatch(get, never):Float;
 
-private extern inline function set_PathMorphIssueContourCountMismatch(value:Float):Float return flight._cpp._attempt.Attempt_Path_PathMorphIssueContourCountMismatch.PathMorphIssueContourCountMismatch = value;
+private inline function get_PathMorphIssueContourOrientationMismatch():Float return flight._cpp._fn.Path.get_PathMorphIssueContourOrientationMismatch();
 
-var PathMorphIssueContourOrientationMismatch(get, set):Float;
+var PathMorphIssueNone(get, never):Float;
 
-private extern inline function get_PathMorphIssueContourOrientationMismatch():Float return flight._cpp._attempt.Attempt_Path_PathMorphIssueContourOrientationMismatch.PathMorphIssueContourOrientationMismatch;
+private inline function get_PathMorphIssueNone():Float return flight._cpp._fn.Path.get_PathMorphIssueNone();
 
-private extern inline function set_PathMorphIssueContourOrientationMismatch(value:Float):Float return flight._cpp._attempt.Attempt_Path_PathMorphIssueContourOrientationMismatch.PathMorphIssueContourOrientationMismatch = value;
+var PathMorphIssueWindingMismatch(get, never):Float;
 
-var PathMorphIssueNone(get, set):Float;
+private inline function get_PathMorphIssueWindingMismatch():Float return flight._cpp._fn.Path.get_PathMorphIssueWindingMismatch();
 
-private extern inline function get_PathMorphIssueNone():Float return flight._cpp._attempt.Attempt_Path_PathMorphIssueNone.PathMorphIssueNone;
+var StrokePathTessellationIssueInvalidPath(get, never):Float;
 
-private extern inline function set_PathMorphIssueNone(value:Float):Float return flight._cpp._attempt.Attempt_Path_PathMorphIssueNone.PathMorphIssueNone = value;
+private inline function get_StrokePathTessellationIssueInvalidPath():Float return flight._cpp._fn.Path.get_StrokePathTessellationIssueInvalidPath();
 
-var PathMorphIssueWindingMismatch(get, set):Float;
+var StrokePathTessellationIssueInvalidStyle(get, never):Float;
 
-private extern inline function get_PathMorphIssueWindingMismatch():Float return flight._cpp._attempt.Attempt_Path_PathMorphIssueWindingMismatch.PathMorphIssueWindingMismatch;
+private inline function get_StrokePathTessellationIssueInvalidStyle():Float return flight._cpp._fn.Path.get_StrokePathTessellationIssueInvalidStyle();
 
-private extern inline function set_PathMorphIssueWindingMismatch(value:Float):Float return flight._cpp._attempt.Attempt_Path_PathMorphIssueWindingMismatch.PathMorphIssueWindingMismatch = value;
+var StrokePathTessellationIssueNone(get, never):Float;
 
-var StrokePathTessellationIssueInvalidPath(get, set):Float;
+private inline function get_StrokePathTessellationIssueNone():Float return flight._cpp._fn.Path.get_StrokePathTessellationIssueNone();
 
-private extern inline function get_StrokePathTessellationIssueInvalidPath():Float return flight._cpp._attempt.Attempt_Path_StrokePathTessellationIssueInvalidPath.StrokePathTessellationIssueInvalidPath;
+var StrokePathTessellationIssueReversingJoin(get, never):Float;
 
-private extern inline function set_StrokePathTessellationIssueInvalidPath(value:Float):Float return flight._cpp._attempt.Attempt_Path_StrokePathTessellationIssueInvalidPath.StrokePathTessellationIssueInvalidPath = value;
+private inline function get_StrokePathTessellationIssueReversingJoin():Float return flight._cpp._fn.Path.get_StrokePathTessellationIssueReversingJoin();
 
-var StrokePathTessellationIssueInvalidStyle(get, set):Float;
+var StrokePathTessellationIssueSelfIntersectingCenterline(get, never):Float;
 
-private extern inline function get_StrokePathTessellationIssueInvalidStyle():Float return flight._cpp._attempt.Attempt_Path_StrokePathTessellationIssueInvalidStyle.StrokePathTessellationIssueInvalidStyle;
+private inline function get_StrokePathTessellationIssueSelfIntersectingCenterline():Float return flight._cpp._fn.Path.get_StrokePathTessellationIssueSelfIntersectingCenterline();
 
-private extern inline function set_StrokePathTessellationIssueInvalidStyle(value:Float):Float return flight._cpp._attempt.Attempt_Path_StrokePathTessellationIssueInvalidStyle.StrokePathTessellationIssueInvalidStyle = value;
+var StrokePathTessellationIssueSelfIntersectingOutline(get, never):Float;
 
-var StrokePathTessellationIssueNone(get, set):Float;
-
-private extern inline function get_StrokePathTessellationIssueNone():Float return flight._cpp._attempt.Attempt_Path_StrokePathTessellationIssueNone.StrokePathTessellationIssueNone;
-
-private extern inline function set_StrokePathTessellationIssueNone(value:Float):Float return flight._cpp._attempt.Attempt_Path_StrokePathTessellationIssueNone.StrokePathTessellationIssueNone = value;
-
-var StrokePathTessellationIssueReversingJoin(get, set):Float;
-
-private extern inline function get_StrokePathTessellationIssueReversingJoin():Float return flight._cpp._attempt.Attempt_Path_StrokePathTessellationIssueReversingJoin.StrokePathTessellationIssueReversingJoin;
-
-private extern inline function set_StrokePathTessellationIssueReversingJoin(value:Float):Float return flight._cpp._attempt.Attempt_Path_StrokePathTessellationIssueReversingJoin.StrokePathTessellationIssueReversingJoin = value;
-
-var StrokePathTessellationIssueSelfIntersectingCenterline(get, set):Float;
-
-private extern inline function get_StrokePathTessellationIssueSelfIntersectingCenterline():Float return flight._cpp._attempt.Attempt_Path_StrokePathTessellationIssueSelfIntersectingCenterline.StrokePathTessellationIssueSelfIntersectingCenterline;
-
-private extern inline function set_StrokePathTessellationIssueSelfIntersectingCenterline(value:Float):Float return flight._cpp._attempt.Attempt_Path_StrokePathTessellationIssueSelfIntersectingCenterline.StrokePathTessellationIssueSelfIntersectingCenterline = value;
-
-var StrokePathTessellationIssueSelfIntersectingOutline(get, set):Float;
-
-private extern inline function get_StrokePathTessellationIssueSelfIntersectingOutline():Float return flight._cpp._attempt.Attempt_Path_StrokePathTessellationIssueSelfIntersectingOutline.StrokePathTessellationIssueSelfIntersectingOutline;
-
-private extern inline function set_StrokePathTessellationIssueSelfIntersectingOutline(value:Float):Float return flight._cpp._attempt.Attempt_Path_StrokePathTessellationIssueSelfIntersectingOutline.StrokePathTessellationIssueSelfIntersectingOutline = value;
+private inline function get_StrokePathTessellationIssueSelfIntersectingOutline():Float return flight._cpp._fn.Path.get_StrokePathTessellationIssueSelfIntersectingOutline();
 
 extern inline function appendPathPolygon(path:flight.Path, points:Array<Float>):Void {
   flight._cpp._attempt.Attempt_Path_appendPathPolygon.appendPathPolygon(path, points);

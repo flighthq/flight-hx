@@ -33,5 +33,8 @@ extern class Binpack {
 
   @:native("flight_hx::binpack::pack_rectangles")
   static function packRectangles(rects:Array<flight.PackableRectangle>, options:flight.BinPackOptions):flight.PackResult;
+
+  @:native("flight_hx::binpack::get_bin_pack_default_max_extent")
+  static function get_BIN_PACK_DEFAULT_MAX_EXTENT():Float;
 }
 #end

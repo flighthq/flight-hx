@@ -13,8 +13,6 @@ extern inline function packRectangles(rects:Array<flight.PackableRectangle>, ?op
   return flight._cpp._fn.Binpack.packRectangles(rects, options);
 }
 
-var BIN_PACK_DEFAULT_MAX_EXTENT(get, set):Float;
+var BIN_PACK_DEFAULT_MAX_EXTENT(get, never):Float;
 
-private extern inline function get_BIN_PACK_DEFAULT_MAX_EXTENT():Float return flight._cpp._attempt.Attempt_Binpack_BIN_PACK_DEFAULT_MAX_EXTENT.BIN_PACK_DEFAULT_MAX_EXTENT;
-
-private extern inline function set_BIN_PACK_DEFAULT_MAX_EXTENT(value:Float):Float return flight._cpp._attempt.Attempt_Binpack_BIN_PACK_DEFAULT_MAX_EXTENT.BIN_PACK_DEFAULT_MAX_EXTENT = value;
+private inline function get_BIN_PACK_DEFAULT_MAX_EXTENT():Float return flight._cpp._fn.Binpack.get_BIN_PACK_DEFAULT_MAX_EXTENT();

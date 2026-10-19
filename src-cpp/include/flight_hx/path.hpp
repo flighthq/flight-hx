@@ -41,5 +41,16 @@ void tessellate_path_into(flight::Ref<flight::types::Path> path, flight::Ref<fli
 flight::Ref<flight::types::PathMeshTyped> tessellate_path_typed(flight::Ref<flight::types::Path> path, bool tolerancePresent, double tolerance);
 void tessellate_path_typed_into(flight::Ref<flight::types::Path> path, flight::Ref<flight::types::PathMeshTyped> out, bool tolerancePresent, double tolerance);
 void translate_path(flight::Ref<flight::types::Path> source, double dx, double dy, flight::Ref<flight::types::Path> out);
+double get_path_morph_issue_contour_closedness_mismatch();
+double get_path_morph_issue_contour_count_mismatch();
+double get_path_morph_issue_contour_orientation_mismatch();
+double get_path_morph_issue_none();
+double get_path_morph_issue_winding_mismatch();
+double get_stroke_path_tessellation_issue_invalid_path();
+double get_stroke_path_tessellation_issue_invalid_style();
+double get_stroke_path_tessellation_issue_none();
+double get_stroke_path_tessellation_issue_reversing_join();
+double get_stroke_path_tessellation_issue_self_intersecting_centerline();
+double get_stroke_path_tessellation_issue_self_intersecting_outline();
 
 } // namespace flight_hx::path

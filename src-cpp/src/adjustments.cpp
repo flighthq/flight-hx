@@ -251,4 +251,24 @@ flight::Ref<flight::types::TintAdjustment> create_tint_adjustment(double rgba) {
   return flight::adjustments::create_tint_adjustment(rgba);
 }
 
+double get_color_adjustment_affine() {
+  return flight::adjustments::color_adjustment_affine;
+}
+
+double get_color_adjustment_channel_mixing() {
+  return flight::adjustments::color_adjustment_channel_mixing;
+}
+
+double get_color_adjustment_none() {
+  return flight::adjustments::color_adjustment_none;
+}
+
+double get_color_lut_default_size() {
+  return flight::adjustments::color_lut_default_size;
+}
+
+double get_color_matrix_length() {
+  return flight::adjustments::color_matrix_length;
+}
+
 } // namespace flight_hx::adjustments

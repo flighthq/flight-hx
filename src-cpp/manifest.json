@@ -16,7 +16,8 @@
     "optionalOverridePromotion": "dependency-complete-optional-scalar-adapter-compile-run",
     "arrayFloatAdapterPromotion": "dependency-complete-array-float-copy-adapter-compile-run",
     "nullableStringAdapterPromotion": "dependency-complete-nullable-string-copy-adapter-compile-run",
-    "referenceCarrierPromotion": "dependency-complete-reference-carrier-compile-run"
+    "referenceCarrierPromotion": "dependency-complete-reference-carrier-compile-run",
+    "scalarValuePromotion": "dependency-complete-scalar-value-getter-compile-run"
   },
   "cppStandard": 20,
   "corrections": [
@@ -25,6 +26,7 @@
     "flight-hx-hxcpp-array-float-copy-adapter/1",
     "flight-hx-hxcpp-nullable-string-copy-adapter/1",
     "flight-hx-hxcpp-reference-carrier/1",
+    "flight-hx-hxcpp-scalar-value-getter/1",
     "flight-hx-hxcpp-nullable-reference-wrapper/1",
     "flight-hx-hxcpp-reference-array-box/1",
     "flight-hx-hxcpp-owned-string-copy/1",
@@ -62,6 +64,17 @@
     }
   ],
   "modules": [
+    {
+      "module": "flight.Accessibility",
+      "functions": [
+        {
+          "name": "destroyAccessibility",
+          "native": "flight::accessibility::destroy_accessibility",
+          "header": "flight/accessibility/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        }
+      ]
+    },
     {
       "module": "flight.Adjustments",
       "functions": [
@@ -215,6 +228,38 @@
           "header": "flight/adjustments/contract.hpp",
           "provenance": "flight-hx/reference-carrier/1"
         }
+      ],
+      "values": [
+        {
+          "name": "COLOR_ADJUSTMENT_AFFINE",
+          "native": "flight::adjustments::color_adjustment_affine",
+          "header": "flight/adjustments/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "COLOR_ADJUSTMENT_CHANNEL_MIXING",
+          "native": "flight::adjustments::color_adjustment_channel_mixing",
+          "header": "flight/adjustments/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "COLOR_ADJUSTMENT_NONE",
+          "native": "flight::adjustments::color_adjustment_none",
+          "header": "flight/adjustments/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "COLOR_LUT_DEFAULT_SIZE",
+          "native": "flight::adjustments::color_lut_default_size",
+          "header": "flight/adjustments/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "COLOR_MATRIX_LENGTH",
+          "native": "flight::adjustments::color_matrix_length",
+          "header": "flight/adjustments/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        }
       ]
     },
     {
@@ -302,6 +347,37 @@
           "native": "flight::audio::is_audio_resource_empty",
           "header": "flight/audio/contract.hpp",
           "provenance": "flight-hx/reference-carrier/1"
+        }
+      ]
+    },
+    {
+      "module": "flight.Binpack",
+      "functions": [
+        {
+          "name": "explainUnpackedRectangles",
+          "native": "flight::binpack::explain_unpacked_rectangles",
+          "header": "flight/binpack/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "getPackResultOccupancy",
+          "native": "flight::binpack::get_pack_result_occupancy",
+          "header": "flight/binpack/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "packRectangles",
+          "native": "flight::binpack::pack_rectangles",
+          "header": "flight/binpack/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        }
+      ],
+      "values": [
+        {
+          "name": "BIN_PACK_DEFAULT_MAX_EXTENT",
+          "native": "flight::binpack::bin_pack_default_max_extent",
+          "header": "flight/binpack/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
         }
       ]
     },
@@ -602,6 +678,210 @@
           "header": "flight/bitmap/contract.hpp",
           "provenance": "flight-hx/reference-carrier/1"
         }
+      ],
+      "values": [
+        {
+          "name": "BITMAP_FINGERPRINT_COMPUTATION_ID",
+          "native": "flight::bitmap::bitmap_fingerprint_computation_id",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "BITMAP_NOISE_CHANNEL_A",
+          "native": "flight::bitmap::bitmap_noise_channel_a",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "BITMAP_NOISE_CHANNEL_B",
+          "native": "flight::bitmap::bitmap_noise_channel_b",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "BITMAP_NOISE_CHANNEL_G",
+          "native": "flight::bitmap::bitmap_noise_channel_g",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "BITMAP_NOISE_CHANNEL_R",
+          "native": "flight::bitmap::bitmap_noise_channel_r",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        }
+      ]
+    },
+    {
+      "module": "flight.Bitmapfont",
+      "functions": [
+        {
+          "name": "packBitmapFontKerningKey",
+          "native": "flight::bitmapfont::pack_bitmap_font_kerning_key",
+          "header": "flight/bitmapfont/bitmap_font.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        }
+      ]
+    },
+    {
+      "module": "flight.CameraControls",
+      "functions": [
+        {
+          "name": "addCameraShakeTrauma",
+          "native": "flight::camera_controls::add_camera_shake_trauma",
+          "header": "flight/camera_controls/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "cloneFlyCameraController",
+          "native": "flight::camera_controls::clone_fly_camera_controller",
+          "header": "flight/camera_controls/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "cloneOrbitCameraController",
+          "native": "flight::camera_controls::clone_orbit_camera_controller",
+          "header": "flight/camera_controls/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "copyFlyCameraController",
+          "native": "flight::camera_controls::copy_fly_camera_controller",
+          "header": "flight/camera_controls/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "copyOrbitCameraController",
+          "native": "flight::camera_controls::copy_orbit_camera_controller",
+          "header": "flight/camera_controls/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "createCameraShake",
+          "native": "flight::camera_controls::create_camera_shake",
+          "header": "flight/camera_controls/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "createCameraShakeOffset",
+          "native": "flight::camera_controls::create_camera_shake_offset",
+          "header": "flight/camera_controls/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "createFlyCameraController",
+          "native": "flight::camera_controls::create_fly_camera_controller",
+          "header": "flight/camera_controls/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "createOrbitCameraController",
+          "native": "flight::camera_controls::create_orbit_camera_controller",
+          "header": "flight/camera_controls/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "dollyOrbitCameraController",
+          "native": "flight::camera_controls::dolly_orbit_camera_controller",
+          "header": "flight/camera_controls/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "lookFlyCameraController",
+          "native": "flight::camera_controls::look_fly_camera_controller",
+          "header": "flight/camera_controls/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "moveFlyCameraController",
+          "native": "flight::camera_controls::move_fly_camera_controller",
+          "header": "flight/camera_controls/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "panOrbitCameraController",
+          "native": "flight::camera_controls::pan_orbit_camera_controller",
+          "header": "flight/camera_controls/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "panOrbitCameraControllerInViewPlane",
+          "native": "flight::camera_controls::pan_orbit_camera_controller_in_view_plane",
+          "header": "flight/camera_controls/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "resetCameraShake",
+          "native": "flight::camera_controls::reset_camera_shake",
+          "header": "flight/camera_controls/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "resetFlyCameraController",
+          "native": "flight::camera_controls::reset_fly_camera_controller",
+          "header": "flight/camera_controls/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "resetOrbitCameraController",
+          "native": "flight::camera_controls::reset_orbit_camera_controller",
+          "header": "flight/camera_controls/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "rotateOrbitCameraController",
+          "native": "flight::camera_controls::rotate_orbit_camera_controller",
+          "header": "flight/camera_controls/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "snapFlyCameraController",
+          "native": "flight::camera_controls::snap_fly_camera_controller",
+          "header": "flight/camera_controls/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "snapOrbitCameraController",
+          "native": "flight::camera_controls::snap_orbit_camera_controller",
+          "header": "flight/camera_controls/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "updateCameraShake",
+          "native": "flight::camera_controls::update_camera_shake",
+          "header": "flight/camera_controls/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "getPerspectiveProjectionFrameDistanceToSphere",
+          "native": "flight::camera_controls::get_perspective_projection_frame_distance_to_sphere",
+          "header": "flight/camera_controls/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "setOrthographicProjectionFrameToSphere",
+          "native": "flight::camera_controls::set_orthographic_projection_frame_to_sphere",
+          "header": "flight/camera_controls/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "updateCamera2DFollow",
+          "native": "flight::camera_controls::update_camera_2d_follow",
+          "header": "flight/camera_controls/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "updateFlyCameraController",
+          "native": "flight::camera_controls::update_fly_camera_controller",
+          "header": "flight/camera_controls/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "updateOrbitCameraController",
+          "native": "flight::camera_controls::update_orbit_camera_controller",
+          "header": "flight/camera_controls/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        }
       ]
     },
     {
@@ -707,6 +987,17 @@
           "native": "flight::clock::set_clock_scale",
           "header": "flight/clock/contract.hpp",
           "provenance": "flight-hx/reference-carrier/1"
+        }
+      ]
+    },
+    {
+      "module": "flight.Collision",
+      "functions": [
+        {
+          "name": "packContactFeatureId",
+          "native": "flight::collision::pack_contact_feature_id",
+          "header": "flight/collision/contact_feature_id.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
         }
       ]
     },
@@ -904,74 +1195,6 @@
       ]
     },
     {
-      "module": "flight.Entity",
-      "functions": [
-        {
-          "name": "areEntityRuntimeGuardsEnabled",
-          "native": "flight::entity::are_entity_runtime_guards_enabled",
-          "header": "flight/entity/contract.hpp"
-        },
-        {
-          "name": "createEntityRuntime",
-          "native": "flight::entity::create_entity_runtime",
-          "header": "flight/entity/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "createGuardedEntityRuntime",
-          "native": "flight::entity::create_guarded_entity_runtime",
-          "header": "flight/entity/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "disableEntityRuntimeGuards",
-          "native": "flight::entity::disable_entity_runtime_guards",
-          "header": "flight/entity/contract.hpp"
-        },
-        {
-          "name": "setEntityRuntimeGuardMode",
-          "native": "flight::entity::set_entity_runtime_guard_mode",
-          "header": "flight/entity/contract.hpp"
-        },
-        {
-          "name": "detachEntityBinding",
-          "native": "flight::entity::detach_entity_binding",
-          "header": "flight/entity/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "getEntityRuntime",
-          "native": "flight::entity::get_entity_runtime",
-          "header": "flight/entity/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "getEntityUid",
-          "native": "flight::entity::get_entity_uid",
-          "header": "flight/entity/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "hasEntityBinding",
-          "native": "flight::entity::has_entity_binding",
-          "header": "flight/entity/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "hasEntityRuntime",
-          "native": "flight::entity::has_entity_runtime",
-          "header": "flight/entity/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "setEntityUid",
-          "native": "flight::entity::set_entity_uid",
-          "header": "flight/entity/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        }
-      ]
-    },
-    {
       "module": "flight.Effects",
       "functions": [
         {
@@ -1073,24 +1296,70 @@
       ]
     },
     {
-      "module": "flight.Bitmapfont",
+      "module": "flight.Entity",
       "functions": [
         {
-          "name": "packBitmapFontKerningKey",
-          "native": "flight::bitmapfont::pack_bitmap_font_kerning_key",
-          "header": "flight/bitmapfont/bitmap_font.hpp",
-          "provenance": "flight-hx/header-confirmed-scalar/1"
-        }
-      ]
-    },
-    {
-      "module": "flight.Collision",
-      "functions": [
+          "name": "areEntityRuntimeGuardsEnabled",
+          "native": "flight::entity::are_entity_runtime_guards_enabled",
+          "header": "flight/entity/contract.hpp"
+        },
         {
-          "name": "packContactFeatureId",
-          "native": "flight::collision::pack_contact_feature_id",
-          "header": "flight/collision/contact_feature_id.hpp",
-          "provenance": "flight-hx/header-confirmed-scalar/1"
+          "name": "createEntityRuntime",
+          "native": "flight::entity::create_entity_runtime",
+          "header": "flight/entity/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "createGuardedEntityRuntime",
+          "native": "flight::entity::create_guarded_entity_runtime",
+          "header": "flight/entity/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "disableEntityRuntimeGuards",
+          "native": "flight::entity::disable_entity_runtime_guards",
+          "header": "flight/entity/contract.hpp"
+        },
+        {
+          "name": "setEntityRuntimeGuardMode",
+          "native": "flight::entity::set_entity_runtime_guard_mode",
+          "header": "flight/entity/contract.hpp"
+        },
+        {
+          "name": "detachEntityBinding",
+          "native": "flight::entity::detach_entity_binding",
+          "header": "flight/entity/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "getEntityRuntime",
+          "native": "flight::entity::get_entity_runtime",
+          "header": "flight/entity/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "getEntityUid",
+          "native": "flight::entity::get_entity_uid",
+          "header": "flight/entity/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "hasEntityBinding",
+          "native": "flight::entity::has_entity_binding",
+          "header": "flight/entity/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "hasEntityRuntime",
+          "native": "flight::entity::has_entity_runtime",
+          "header": "flight/entity/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "setEntityUid",
+          "native": "flight::entity::set_entity_uid",
+          "header": "flight/entity/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
         }
       ]
     },
@@ -1114,6 +1383,29 @@
           "native": "flight::font_formats::rank_open_type_unicode_encoding",
           "header": "flight/font_formats/open_type_cmap.hpp",
           "provenance": "flight-hx/header-confirmed-scalar/1"
+        }
+      ]
+    },
+    {
+      "module": "flight.Geolocation",
+      "functions": [
+        {
+          "name": "createGeolocationPosition",
+          "native": "flight::geolocation::create_geolocation_position",
+          "header": "flight/geolocation/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "clearGeolocationWatch",
+          "native": "flight::geolocation::clear_geolocation_watch",
+          "header": "flight/geolocation/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "isGeolocationAvailable",
+          "native": "flight::geolocation::is_geolocation_available",
+          "header": "flight/geolocation/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
         }
       ]
     },
@@ -1171,6 +1463,47 @@
       ]
     },
     {
+      "module": "flight.Haptics",
+      "functions": [
+        {
+          "name": "cancelDeviceVibration",
+          "native": "flight::haptics::cancel_device_vibration",
+          "header": "flight/haptics/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "getHapticsCapabilities",
+          "native": "flight::haptics::get_haptics_capabilities",
+          "header": "flight/haptics/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "isHapticsSupported",
+          "native": "flight::haptics::is_haptics_supported",
+          "header": "flight/haptics/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "prepareHaptics",
+          "native": "flight::haptics::prepare_haptics",
+          "header": "flight/haptics/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "triggerHapticSelection",
+          "native": "flight::haptics::trigger_haptic_selection",
+          "header": "flight/haptics/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "vibrateDevice",
+          "native": "flight::haptics::vibrate_device",
+          "header": "flight/haptics/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        }
+      ]
+    },
+    {
       "module": "flight.Image",
       "functions": [
         {
@@ -1188,184 +1521,13 @@
       ]
     },
     {
-      "module": "flight.Lighting",
+      "module": "flight.Importdiagnostics",
       "functions": [
         {
-          "name": "applyLightExposure",
-          "native": "flight::lighting::apply_light_exposure",
-          "header": "flight/lighting/light_intensity.hpp",
-          "provenance": "flight-hx/header-confirmed-scalar/1"
-        }
-      ]
-    },
-    {
-      "module": "flight.Materials",
-      "functions": [
-        {
-          "name": "getPbrMetallicFromPhongSpecular",
-          "native": "flight::materials::get_pbr_metallic_from_phong_specular",
-          "header": "flight/materials/phong_to_pbr.hpp",
-          "provenance": "flight-hx/header-confirmed-scalar/1"
-        },
-        {
-          "name": "getPbrRoughnessFromPhongShininess",
-          "native": "flight::materials::get_pbr_roughness_from_phong_shininess",
-          "header": "flight/materials/phong_to_pbr.hpp",
-          "provenance": "flight-hx/header-confirmed-scalar/1"
-        },
-        {
-          "name": "getPhongToPbrLightExposure",
-          "native": "flight::materials::get_phong_to_pbr_light_exposure",
-          "header": "flight/materials/phong_to_pbr.hpp",
-          "provenance": "flight-hx/header-confirmed-scalar/1"
-        },
-        {
-          "name": "isValidMaterialClearcoat",
-          "native": "flight::materials::is_valid_material_clearcoat",
-          "header": "flight/materials/material_validation.hpp",
-          "provenance": "flight-hx/header-confirmed-scalar/1"
-        },
-        {
-          "name": "isValidMaterialIor",
-          "native": "flight::materials::is_valid_material_ior",
-          "header": "flight/materials/material_validation.hpp",
-          "provenance": "flight-hx/header-confirmed-scalar/1"
-        },
-        {
-          "name": "isValidMaterialIridescenceThickness",
-          "native": "flight::materials::is_valid_material_iridescence_thickness",
-          "header": "flight/materials/material_validation.hpp",
-          "provenance": "flight-hx/header-confirmed-scalar/1"
-        },
-        {
-          "name": "isValidMaterialWeight",
-          "native": "flight::materials::is_valid_material_weight",
-          "header": "flight/materials/material_validation.hpp",
-          "provenance": "flight-hx/header-confirmed-scalar/1"
-        },
-        {
-          "name": "isValidPbrUvSet",
-          "native": "flight::materials::is_valid_pbr_uv_set",
-          "header": "flight/materials/pbr_extension.hpp",
-          "provenance": "flight-hx/header-confirmed-scalar/1"
-        }
-      ]
-    },
-    {
-      "module": "flight.Scene2dFormats",
-      "functions": [
-        {
-          "name": "isRiveCoreBytesProperty",
-          "native": "flight::scene2d_formats::is_rive_core_bytes_property",
-          "header": "flight/scene2d_formats/rive_core_properties.hpp",
-          "provenance": "flight-hx/header-confirmed-scalar/1"
-        },
-        {
-          "name": "isRiveCoreTypeDerivedFrom",
-          "native": "flight::scene2d_formats::is_rive_core_type_derived_from",
-          "header": "flight/scene2d_formats/rive_core_types.hpp",
-          "provenance": "flight-hx/header-confirmed-scalar/1"
-        }
-      ]
-    },
-    {
-      "module": "flight.Scene3dFormats",
-      "functions": [
-        {
-          "name": "hasGltfDracoDecoder",
-          "native": "flight::scene3d_formats::has_gltf_draco_decoder",
-          "header": "flight/scene3d_formats/gltf_draco.hpp",
-          "provenance": "flight-hx/header-confirmed-scalar/1"
-        },
-        {
-          "name": "unregisterGltfDracoDecoder",
-          "native": "flight::scene3d_formats::unregister_gltf_draco_decoder",
-          "header": "flight/scene3d_formats/gltf_draco.hpp",
-          "provenance": "flight-hx/header-confirmed-scalar/1"
-        }
-      ]
-    },
-    {
-      "module": "flight.Shape",
-      "functions": [
-        {
-          "name": "clearShapeBoundsCommands",
-          "native": "flight::shape::clear_shape_bounds_commands",
-          "header": "flight/shape/shape_bounds_registry.hpp",
-          "provenance": "flight-hx/header-confirmed-scalar/1"
-        },
-        {
-          "name": "getPathCommandOperandCount",
-          "native": "flight::shape::get_path_command_operand_count",
-          "header": "flight/shape/shape_fill.hpp",
-          "provenance": "flight-hx/header-confirmed-scalar/1"
-        },
-        {
-          "name": "getShapeBoundsCommandRegistryRevision",
-          "native": "flight::shape::get_shape_bounds_command_registry_revision",
-          "header": "flight/shape/shape_bounds_registry.hpp",
-          "provenance": "flight-hx/header-confirmed-scalar/1"
-        }
-      ]
-    },
-    {
-      "module": "flight.Skeleton2dFormats",
-      "functions": [
-        {
-          "name": "clampUnit",
-          "native": "flight::skeleton2d_formats::clamp_unit",
-          "header": "flight/skeleton2d_formats/spine_parse_helpers.hpp",
-          "provenance": "flight-hx/header-confirmed-scalar/1"
-        },
-        {
-          "name": "clampSpineBinaryUnit",
-          "native": "flight::skeleton2d_formats::clamp_spine_binary_unit",
-          "header": "flight/skeleton2d_formats/spine_binary_parse_helpers.hpp",
-          "provenance": "flight-hx/header-confirmed-scalar/1"
-        }
-      ]
-    },
-    {
-      "module": "flight.Swf",
-      "functions": [
-        {
-          "name": "isKnownSwfTag",
-          "native": "flight::swf::is_known_swf_tag",
-          "header": "flight/swf/swf_known_tags.hpp",
-          "provenance": "flight-hx/header-confirmed-scalar/1"
-        }
-      ]
-    },
-    {
-      "module": "flight.Textbidi",
-      "functions": [
-        {
-          "name": "reportTextBidiCompactTableMiss",
-          "native": "flight::textbidi::report_text_bidi_compact_table_miss",
-          "header": "flight/textbidi/text_bidi_guards.hpp",
-          "provenance": "flight-hx/header-confirmed-scalar/1"
-        }
-      ]
-    },
-    {
-      "module": "flight.Textsegment",
-      "functions": [
-        {
-          "name": "reportTextSegmenterUnavailable",
-          "native": "flight::textsegment::report_text_segmenter_unavailable",
-          "header": "flight/textsegment/text_segment_guards.hpp",
-          "provenance": "flight-hx/header-confirmed-scalar/1"
-        }
-      ]
-    },
-    {
-      "module": "flight.Textshaper",
-      "functions": [
-        {
-          "name": "disposeTextShaperSignals",
-          "native": "flight::textshaper::dispose_text_shaper_signals",
-          "header": "flight/textshaper/text_shaper_signals.hpp",
-          "provenance": "flight-hx/header-confirmed-scalar/1"
+          "name": "formatImportDiagnostic",
+          "native": "flight::importdiagnostics::format_import_diagnostic",
+          "header": "flight/importdiagnostics/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
         }
       ]
     },
@@ -1454,6 +1616,105 @@
           "native": "flight::input::create_input_key_repeat_timer",
           "header": "flight/input/contract.hpp",
           "provenance": "flight-hx/reference-carrier/1"
+        }
+      ]
+    },
+    {
+      "module": "flight.Keyboard",
+      "functions": [
+        {
+          "name": "detachSoftKeyboard",
+          "native": "flight::keyboard::detach_soft_keyboard",
+          "header": "flight/keyboard/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "disposeSoftKeyboard",
+          "native": "flight::keyboard::dispose_soft_keyboard",
+          "header": "flight/keyboard/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "getSoftKeyboardHeight",
+          "native": "flight::keyboard::get_soft_keyboard_height",
+          "header": "flight/keyboard/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "getSoftKeyboardInfo",
+          "native": "flight::keyboard::get_soft_keyboard_info",
+          "header": "flight/keyboard/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "isSoftKeyboardVisible",
+          "native": "flight::keyboard::is_soft_keyboard_visible",
+          "header": "flight/keyboard/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        }
+      ]
+    },
+    {
+      "module": "flight.Lighting",
+      "functions": [
+        {
+          "name": "applyLightExposure",
+          "native": "flight::lighting::apply_light_exposure",
+          "header": "flight/lighting/light_intensity.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        }
+      ]
+    },
+    {
+      "module": "flight.Materials",
+      "functions": [
+        {
+          "name": "getPbrMetallicFromPhongSpecular",
+          "native": "flight::materials::get_pbr_metallic_from_phong_specular",
+          "header": "flight/materials/phong_to_pbr.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        },
+        {
+          "name": "getPbrRoughnessFromPhongShininess",
+          "native": "flight::materials::get_pbr_roughness_from_phong_shininess",
+          "header": "flight/materials/phong_to_pbr.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        },
+        {
+          "name": "getPhongToPbrLightExposure",
+          "native": "flight::materials::get_phong_to_pbr_light_exposure",
+          "header": "flight/materials/phong_to_pbr.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        },
+        {
+          "name": "isValidMaterialClearcoat",
+          "native": "flight::materials::is_valid_material_clearcoat",
+          "header": "flight/materials/material_validation.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        },
+        {
+          "name": "isValidMaterialIor",
+          "native": "flight::materials::is_valid_material_ior",
+          "header": "flight/materials/material_validation.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        },
+        {
+          "name": "isValidMaterialIridescenceThickness",
+          "native": "flight::materials::is_valid_material_iridescence_thickness",
+          "header": "flight/materials/material_validation.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        },
+        {
+          "name": "isValidMaterialWeight",
+          "native": "flight::materials::is_valid_material_weight",
+          "header": "flight/materials/material_validation.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        },
+        {
+          "name": "isValidPbrUvSet",
+          "native": "flight::materials::is_valid_pbr_uv_set",
+          "header": "flight/materials/pbr_extension.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
         }
       ]
     },
@@ -1713,6 +1974,114 @@
           "native": "flight::math::step",
           "header": "flight/math/contract.hpp"
         }
+      ],
+      "values": [
+        {
+          "name": "CIRCLE_KAPPA",
+          "native": "flight::math::circle_kappa",
+          "header": "flight/math/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "DEG_TO_RAD",
+          "native": "flight::math::deg_to_rad_flight_value_variable__u000044__u000045__u000047__u00005f__u000054__u00004f__u00005f__u000052__u000041__u000044__flight_source_ad5040a7d8c07bd3",
+          "header": "flight/math/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "EPSILON",
+          "native": "flight::math::epsilon",
+          "header": "flight/math/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "HALF_PI",
+          "native": "flight::math::half_pi",
+          "header": "flight/math/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "RAD_TO_DEG",
+          "native": "flight::math::rad_to_deg_flight_value_variable__u000052__u000041__u000044__u00005f__u000054__u00004f__u00005f__u000044__u000045__u000047__flight_source_ad5040a7d8c07bd3",
+          "header": "flight/math/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "TAU",
+          "native": "flight::math::tau",
+          "header": "flight/math/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        }
+      ]
+    },
+    {
+      "module": "flight.Mediasession",
+      "functions": [
+        {
+          "name": "attachMediaSessionAction",
+          "native": "flight::mediasession::attach_media_session_action",
+          "header": "flight/mediasession/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "destroyMediaSession",
+          "native": "flight::mediasession::destroy_media_session",
+          "header": "flight/mediasession/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "detachMediaSessionAction",
+          "native": "flight::mediasession::detach_media_session_action",
+          "header": "flight/mediasession/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "disposeMediaSessionActionSignal",
+          "native": "flight::mediasession::dispose_media_session_action_signal",
+          "header": "flight/mediasession/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        }
+      ]
+    },
+    {
+      "module": "flight.Motionpath",
+      "functions": [
+        {
+          "name": "getMotionPathHeading",
+          "native": "flight::motionpath::get_motion_path_heading",
+          "header": "flight/motionpath/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "getMotionPathProgress",
+          "native": "flight::motionpath::get_motion_path_progress",
+          "header": "flight/motionpath/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "isMotionPathAtEnd",
+          "native": "flight::motionpath::is_motion_path_at_end",
+          "header": "flight/motionpath/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "setMotionPathDistance",
+          "native": "flight::motionpath::set_motion_path_distance",
+          "header": "flight/motionpath/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "setMotionPathProgress",
+          "native": "flight::motionpath::set_motion_path_progress",
+          "header": "flight/motionpath/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "updateMotionPath",
+          "native": "flight::motionpath::update_motion_path",
+          "header": "flight/motionpath/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        }
       ]
     },
     {
@@ -1926,6 +2295,74 @@
           "header": "flight/path/contract.hpp",
           "provenance": "flight-hx/reference-carrier/1"
         }
+      ],
+      "values": [
+        {
+          "name": "PathMorphIssueContourClosednessMismatch",
+          "native": "flight::path::path_morph_issue_contour_closedness_mismatch",
+          "header": "flight/path/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "PathMorphIssueContourCountMismatch",
+          "native": "flight::path::path_morph_issue_contour_count_mismatch",
+          "header": "flight/path/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "PathMorphIssueContourOrientationMismatch",
+          "native": "flight::path::path_morph_issue_contour_orientation_mismatch",
+          "header": "flight/path/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "PathMorphIssueNone",
+          "native": "flight::path::path_morph_issue_none",
+          "header": "flight/path/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "PathMorphIssueWindingMismatch",
+          "native": "flight::path::path_morph_issue_winding_mismatch",
+          "header": "flight/path/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "StrokePathTessellationIssueInvalidPath",
+          "native": "flight::path::stroke_path_tessellation_issue_invalid_path",
+          "header": "flight/path/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "StrokePathTessellationIssueInvalidStyle",
+          "native": "flight::path::stroke_path_tessellation_issue_invalid_style",
+          "header": "flight/path/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "StrokePathTessellationIssueNone",
+          "native": "flight::path::stroke_path_tessellation_issue_none",
+          "header": "flight/path/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "StrokePathTessellationIssueReversingJoin",
+          "native": "flight::path::stroke_path_tessellation_issue_reversing_join",
+          "header": "flight/path/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "StrokePathTessellationIssueSelfIntersectingCenterline",
+          "native": "flight::path::stroke_path_tessellation_issue_self_intersecting_centerline",
+          "header": "flight/path/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "StrokePathTessellationIssueSelfIntersectingOutline",
+          "native": "flight::path::stroke_path_tessellation_issue_self_intersecting_outline",
+          "header": "flight/path/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        }
       ]
     },
     {
@@ -1947,6 +2384,59 @@
           "name": "parseSvgPathData",
           "native": "flight::path_formats::parse_svg_path_data",
           "header": "flight/path_formats/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        }
+      ]
+    },
+    {
+      "module": "flight.Platform",
+      "functions": [
+        {
+          "name": "createPlatformInfo",
+          "native": "flight::platform::create_platform_info",
+          "header": "flight/platform/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "getPlatformInfo",
+          "native": "flight::platform::get_platform_info",
+          "header": "flight/platform/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "isPlatformDesktop",
+          "native": "flight::platform::is_platform_desktop",
+          "header": "flight/platform/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "isPlatformMobile",
+          "native": "flight::platform::is_platform_mobile",
+          "header": "flight/platform/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "isPlatformNative",
+          "native": "flight::platform::is_platform_native",
+          "header": "flight/platform/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "isPlatformTouch",
+          "native": "flight::platform::is_platform_touch",
+          "header": "flight/platform/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "isPlatformVersionAtLeast",
+          "native": "flight::platform::is_platform_version_at_least",
+          "header": "flight/platform/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "isPlatformWeb",
+          "native": "flight::platform::is_platform_web",
+          "header": "flight/platform/contract.hpp",
           "provenance": "flight-hx/reference-carrier/1"
         }
       ]
@@ -2105,6 +2595,86 @@
           "native": "flight::protocol::unregister_protocol_scheme",
           "header": "flight/protocol/contract.hpp",
           "provenance": "flight-hx/reference-carrier/1"
+        }
+      ]
+    },
+    {
+      "module": "flight.Requirement",
+      "functions": [
+        {
+          "name": "diffRequirementSets",
+          "native": "flight::requirement::diff_requirement_sets",
+          "header": "flight/requirement/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "mergeRequirementSets",
+          "native": "flight::requirement::merge_requirement_sets",
+          "header": "flight/requirement/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        }
+      ]
+    },
+    {
+      "module": "flight.RequirementCatalog",
+      "functions": [
+        {
+          "name": "createRequirementCatalog",
+          "native": "flight::requirement_catalog::create_requirement_catalog",
+          "header": "flight/requirement_catalog/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "getRequirementCatalogEntries",
+          "native": "flight::requirement_catalog::get_requirement_catalog_entries",
+          "header": "flight/requirement_catalog/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "registerRequirementCatalogEntry",
+          "native": "flight::requirement_catalog::register_requirement_catalog_entry",
+          "header": "flight/requirement_catalog/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "unregisterRequirementCatalogEntry",
+          "native": "flight::requirement_catalog::unregister_requirement_catalog_entry",
+          "header": "flight/requirement_catalog/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        }
+      ]
+    },
+    {
+      "module": "flight.Scene2dFormats",
+      "functions": [
+        {
+          "name": "isRiveCoreBytesProperty",
+          "native": "flight::scene2d_formats::is_rive_core_bytes_property",
+          "header": "flight/scene2d_formats/rive_core_properties.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        },
+        {
+          "name": "isRiveCoreTypeDerivedFrom",
+          "native": "flight::scene2d_formats::is_rive_core_type_derived_from",
+          "header": "flight/scene2d_formats/rive_core_types.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        }
+      ]
+    },
+    {
+      "module": "flight.Scene3dFormats",
+      "functions": [
+        {
+          "name": "hasGltfDracoDecoder",
+          "native": "flight::scene3d_formats::has_gltf_draco_decoder",
+          "header": "flight/scene3d_formats/gltf_draco.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        },
+        {
+          "name": "unregisterGltfDracoDecoder",
+          "native": "flight::scene3d_formats::unregister_gltf_draco_decoder",
+          "header": "flight/scene3d_formats/gltf_draco.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
         }
       ]
     },
@@ -2365,328 +2935,59 @@
       ]
     },
     {
-      "module": "flight.CameraControls",
+      "module": "flight.Shape",
       "functions": [
         {
-          "name": "addCameraShakeTrauma",
-          "native": "flight::camera_controls::add_camera_shake_trauma",
-          "header": "flight/camera_controls/contract.hpp",
+          "name": "clearShapeBoundsCommands",
+          "native": "flight::shape::clear_shape_bounds_commands",
+          "header": "flight/shape/shape_bounds_registry.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        },
+        {
+          "name": "getPathCommandOperandCount",
+          "native": "flight::shape::get_path_command_operand_count",
+          "header": "flight/shape/shape_fill.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        },
+        {
+          "name": "getShapeBoundsCommandRegistryRevision",
+          "native": "flight::shape::get_shape_bounds_command_registry_revision",
+          "header": "flight/shape/shape_bounds_registry.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
+        }
+      ]
+    },
+    {
+      "module": "flight.Shell",
+      "functions": [
+        {
+          "name": "isShellUrlAllowed",
+          "native": "flight::shell::is_shell_url_allowed",
+          "header": "flight/shell/contract.hpp",
           "provenance": "flight-hx/reference-carrier/1"
         },
         {
-          "name": "cloneFlyCameraController",
-          "native": "flight::camera_controls::clone_fly_camera_controller",
-          "header": "flight/camera_controls/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "cloneOrbitCameraController",
-          "native": "flight::camera_controls::clone_orbit_camera_controller",
-          "header": "flight/camera_controls/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "copyFlyCameraController",
-          "native": "flight::camera_controls::copy_fly_camera_controller",
-          "header": "flight/camera_controls/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "copyOrbitCameraController",
-          "native": "flight::camera_controls::copy_orbit_camera_controller",
-          "header": "flight/camera_controls/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "createCameraShake",
-          "native": "flight::camera_controls::create_camera_shake",
-          "header": "flight/camera_controls/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "createCameraShakeOffset",
-          "native": "flight::camera_controls::create_camera_shake_offset",
-          "header": "flight/camera_controls/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "createFlyCameraController",
-          "native": "flight::camera_controls::create_fly_camera_controller",
-          "header": "flight/camera_controls/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "createOrbitCameraController",
-          "native": "flight::camera_controls::create_orbit_camera_controller",
-          "header": "flight/camera_controls/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "dollyOrbitCameraController",
-          "native": "flight::camera_controls::dolly_orbit_camera_controller",
-          "header": "flight/camera_controls/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "lookFlyCameraController",
-          "native": "flight::camera_controls::look_fly_camera_controller",
-          "header": "flight/camera_controls/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "moveFlyCameraController",
-          "native": "flight::camera_controls::move_fly_camera_controller",
-          "header": "flight/camera_controls/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "panOrbitCameraController",
-          "native": "flight::camera_controls::pan_orbit_camera_controller",
-          "header": "flight/camera_controls/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "panOrbitCameraControllerInViewPlane",
-          "native": "flight::camera_controls::pan_orbit_camera_controller_in_view_plane",
-          "header": "flight/camera_controls/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "resetCameraShake",
-          "native": "flight::camera_controls::reset_camera_shake",
-          "header": "flight/camera_controls/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "resetFlyCameraController",
-          "native": "flight::camera_controls::reset_fly_camera_controller",
-          "header": "flight/camera_controls/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "resetOrbitCameraController",
-          "native": "flight::camera_controls::reset_orbit_camera_controller",
-          "header": "flight/camera_controls/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "rotateOrbitCameraController",
-          "native": "flight::camera_controls::rotate_orbit_camera_controller",
-          "header": "flight/camera_controls/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "snapFlyCameraController",
-          "native": "flight::camera_controls::snap_fly_camera_controller",
-          "header": "flight/camera_controls/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "snapOrbitCameraController",
-          "native": "flight::camera_controls::snap_orbit_camera_controller",
-          "header": "flight/camera_controls/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "updateCameraShake",
-          "native": "flight::camera_controls::update_camera_shake",
-          "header": "flight/camera_controls/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "getPerspectiveProjectionFrameDistanceToSphere",
-          "native": "flight::camera_controls::get_perspective_projection_frame_distance_to_sphere",
-          "header": "flight/camera_controls/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "setOrthographicProjectionFrameToSphere",
-          "native": "flight::camera_controls::set_orthographic_projection_frame_to_sphere",
-          "header": "flight/camera_controls/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "updateCamera2DFollow",
-          "native": "flight::camera_controls::update_camera_2d_follow",
-          "header": "flight/camera_controls/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "updateFlyCameraController",
-          "native": "flight::camera_controls::update_fly_camera_controller",
-          "header": "flight/camera_controls/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "updateOrbitCameraController",
-          "native": "flight::camera_controls::update_orbit_camera_controller",
-          "header": "flight/camera_controls/contract.hpp",
+          "name": "shellBeep",
+          "native": "flight::shell::shell_beep",
+          "header": "flight/shell/contract.hpp",
           "provenance": "flight-hx/reference-carrier/1"
         }
       ]
     },
     {
-      "module": "flight.Geolocation",
+      "module": "flight.Skeleton2dFormats",
       "functions": [
         {
-          "name": "createGeolocationPosition",
-          "native": "flight::geolocation::create_geolocation_position",
-          "header": "flight/geolocation/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
+          "name": "clampUnit",
+          "native": "flight::skeleton2d_formats::clamp_unit",
+          "header": "flight/skeleton2d_formats/spine_parse_helpers.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
         },
         {
-          "name": "clearGeolocationWatch",
-          "native": "flight::geolocation::clear_geolocation_watch",
-          "header": "flight/geolocation/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "isGeolocationAvailable",
-          "native": "flight::geolocation::is_geolocation_available",
-          "header": "flight/geolocation/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        }
-      ]
-    },
-    {
-      "module": "flight.Platform",
-      "functions": [
-        {
-          "name": "createPlatformInfo",
-          "native": "flight::platform::create_platform_info",
-          "header": "flight/platform/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "getPlatformInfo",
-          "native": "flight::platform::get_platform_info",
-          "header": "flight/platform/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "isPlatformDesktop",
-          "native": "flight::platform::is_platform_desktop",
-          "header": "flight/platform/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "isPlatformMobile",
-          "native": "flight::platform::is_platform_mobile",
-          "header": "flight/platform/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "isPlatformNative",
-          "native": "flight::platform::is_platform_native",
-          "header": "flight/platform/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "isPlatformTouch",
-          "native": "flight::platform::is_platform_touch",
-          "header": "flight/platform/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "isPlatformVersionAtLeast",
-          "native": "flight::platform::is_platform_version_at_least",
-          "header": "flight/platform/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "isPlatformWeb",
-          "native": "flight::platform::is_platform_web",
-          "header": "flight/platform/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        }
-      ]
-    },
-    {
-      "module": "flight.Velocity",
-      "functions": [
-        {
-          "name": "beginVelocityFrame",
-          "native": "flight::velocity::begin_velocity_frame",
-          "header": "flight/velocity/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "createVelocityField",
-          "native": "flight::velocity::create_velocity_field",
-          "header": "flight/velocity/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "addVelocity",
-          "native": "flight::velocity::add_velocity",
-          "header": "flight/velocity/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "clampVelocity",
-          "native": "flight::velocity::clamp_velocity",
-          "header": "flight/velocity/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "copyVelocity",
-          "native": "flight::velocity::copy_velocity",
-          "header": "flight/velocity/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "dampVelocity",
-          "native": "flight::velocity::damp_velocity",
-          "header": "flight/velocity/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "getVelocitySampleAt",
-          "native": "flight::velocity::get_velocity_sample_at",
-          "header": "flight/velocity/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "isVelocityZero",
-          "native": "flight::velocity::is_velocity_zero",
-          "header": "flight/velocity/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "lengthOfVelocity",
-          "native": "flight::velocity::length_of_velocity",
-          "header": "flight/velocity/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "lerpVelocity",
-          "native": "flight::velocity::lerp_velocity",
-          "header": "flight/velocity/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "normalizeVelocity",
-          "native": "flight::velocity::normalize_velocity",
-          "header": "flight/velocity/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "scaleVelocity",
-          "native": "flight::velocity::scale_velocity",
-          "header": "flight/velocity/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "subtractVelocity",
-          "native": "flight::velocity::subtract_velocity",
-          "header": "flight/velocity/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "zeroVelocity",
-          "native": "flight::velocity::zero_velocity",
-          "header": "flight/velocity/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
+          "name": "clampSpineBinaryUnit",
+          "native": "flight::skeleton2d_formats::clamp_spine_binary_unit",
+          "header": "flight/skeleton2d_formats/spine_binary_parse_helpers.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
         }
       ]
     },
@@ -2804,291 +3105,46 @@
       ]
     },
     {
-      "module": "flight.Xml",
+      "module": "flight.Swf",
       "functions": [
         {
-          "name": "parseXmlDocument",
-          "native": "flight::xml::parse_xml_document",
-          "header": "flight/xml/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "getXmlElementChildByName",
-          "native": "flight::xml::get_xml_element_child_by_name",
-          "header": "flight/xml/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "getXmlElementAttribute",
-          "native": "flight::xml::get_xml_element_attribute",
-          "header": "flight/xml/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "getXmlElementAttributeNumber",
-          "native": "flight::xml::get_xml_element_attribute_number",
-          "header": "flight/xml/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "getXmlElementChildrenByName",
-          "native": "flight::xml::get_xml_element_children_by_name",
-          "header": "flight/xml/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
+          "name": "isKnownSwfTag",
+          "native": "flight::swf::is_known_swf_tag",
+          "header": "flight/swf/swf_known_tags.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
         }
       ]
     },
     {
-      "module": "flight.Accessibility",
+      "module": "flight.Textbidi",
       "functions": [
         {
-          "name": "destroyAccessibility",
-          "native": "flight::accessibility::destroy_accessibility",
-          "header": "flight/accessibility/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
+          "name": "reportTextBidiCompactTableMiss",
+          "native": "flight::textbidi::report_text_bidi_compact_table_miss",
+          "header": "flight/textbidi/text_bidi_guards.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
         }
       ]
     },
     {
-      "module": "flight.Binpack",
+      "module": "flight.Textsegment",
       "functions": [
         {
-          "name": "explainUnpackedRectangles",
-          "native": "flight::binpack::explain_unpacked_rectangles",
-          "header": "flight/binpack/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "getPackResultOccupancy",
-          "native": "flight::binpack::get_pack_result_occupancy",
-          "header": "flight/binpack/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "packRectangles",
-          "native": "flight::binpack::pack_rectangles",
-          "header": "flight/binpack/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
+          "name": "reportTextSegmenterUnavailable",
+          "native": "flight::textsegment::report_text_segmenter_unavailable",
+          "header": "flight/textsegment/text_segment_guards.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
         }
       ]
     },
     {
-      "module": "flight.Haptics",
+      "module": "flight.Textshaper",
       "functions": [
         {
-          "name": "cancelDeviceVibration",
-          "native": "flight::haptics::cancel_device_vibration",
-          "header": "flight/haptics/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "getHapticsCapabilities",
-          "native": "flight::haptics::get_haptics_capabilities",
-          "header": "flight/haptics/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "isHapticsSupported",
-          "native": "flight::haptics::is_haptics_supported",
-          "header": "flight/haptics/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "prepareHaptics",
-          "native": "flight::haptics::prepare_haptics",
-          "header": "flight/haptics/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "triggerHapticSelection",
-          "native": "flight::haptics::trigger_haptic_selection",
-          "header": "flight/haptics/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "vibrateDevice",
-          "native": "flight::haptics::vibrate_device",
-          "header": "flight/haptics/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        }
-      ]
-    },
-    {
-      "module": "flight.Importdiagnostics",
-      "functions": [
-        {
-          "name": "formatImportDiagnostic",
-          "native": "flight::importdiagnostics::format_import_diagnostic",
-          "header": "flight/importdiagnostics/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        }
-      ]
-    },
-    {
-      "module": "flight.Keyboard",
-      "functions": [
-        {
-          "name": "detachSoftKeyboard",
-          "native": "flight::keyboard::detach_soft_keyboard",
-          "header": "flight/keyboard/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "disposeSoftKeyboard",
-          "native": "flight::keyboard::dispose_soft_keyboard",
-          "header": "flight/keyboard/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "getSoftKeyboardHeight",
-          "native": "flight::keyboard::get_soft_keyboard_height",
-          "header": "flight/keyboard/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "getSoftKeyboardInfo",
-          "native": "flight::keyboard::get_soft_keyboard_info",
-          "header": "flight/keyboard/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "isSoftKeyboardVisible",
-          "native": "flight::keyboard::is_soft_keyboard_visible",
-          "header": "flight/keyboard/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        }
-      ]
-    },
-    {
-      "module": "flight.Mediasession",
-      "functions": [
-        {
-          "name": "attachMediaSessionAction",
-          "native": "flight::mediasession::attach_media_session_action",
-          "header": "flight/mediasession/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "destroyMediaSession",
-          "native": "flight::mediasession::destroy_media_session",
-          "header": "flight/mediasession/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "detachMediaSessionAction",
-          "native": "flight::mediasession::detach_media_session_action",
-          "header": "flight/mediasession/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "disposeMediaSessionActionSignal",
-          "native": "flight::mediasession::dispose_media_session_action_signal",
-          "header": "flight/mediasession/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        }
-      ]
-    },
-    {
-      "module": "flight.Motionpath",
-      "functions": [
-        {
-          "name": "getMotionPathHeading",
-          "native": "flight::motionpath::get_motion_path_heading",
-          "header": "flight/motionpath/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "getMotionPathProgress",
-          "native": "flight::motionpath::get_motion_path_progress",
-          "header": "flight/motionpath/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "isMotionPathAtEnd",
-          "native": "flight::motionpath::is_motion_path_at_end",
-          "header": "flight/motionpath/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "setMotionPathDistance",
-          "native": "flight::motionpath::set_motion_path_distance",
-          "header": "flight/motionpath/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "setMotionPathProgress",
-          "native": "flight::motionpath::set_motion_path_progress",
-          "header": "flight/motionpath/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "updateMotionPath",
-          "native": "flight::motionpath::update_motion_path",
-          "header": "flight/motionpath/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        }
-      ]
-    },
-    {
-      "module": "flight.Requirement",
-      "functions": [
-        {
-          "name": "diffRequirementSets",
-          "native": "flight::requirement::diff_requirement_sets",
-          "header": "flight/requirement/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "mergeRequirementSets",
-          "native": "flight::requirement::merge_requirement_sets",
-          "header": "flight/requirement/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        }
-      ]
-    },
-    {
-      "module": "flight.RequirementCatalog",
-      "functions": [
-        {
-          "name": "createRequirementCatalog",
-          "native": "flight::requirement_catalog::create_requirement_catalog",
-          "header": "flight/requirement_catalog/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "getRequirementCatalogEntries",
-          "native": "flight::requirement_catalog::get_requirement_catalog_entries",
-          "header": "flight/requirement_catalog/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "registerRequirementCatalogEntry",
-          "native": "flight::requirement_catalog::register_requirement_catalog_entry",
-          "header": "flight/requirement_catalog/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "unregisterRequirementCatalogEntry",
-          "native": "flight::requirement_catalog::unregister_requirement_catalog_entry",
-          "header": "flight/requirement_catalog/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        }
-      ]
-    },
-    {
-      "module": "flight.Shell",
-      "functions": [
-        {
-          "name": "isShellUrlAllowed",
-          "native": "flight::shell::is_shell_url_allowed",
-          "header": "flight/shell/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "shellBeep",
-          "native": "flight::shell::shell_beep",
-          "header": "flight/shell/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
+          "name": "disposeTextShaperSignals",
+          "native": "flight::textshaper::dispose_text_shaper_signals",
+          "header": "flight/textshaper/text_shaper_signals.hpp",
+          "provenance": "flight-hx/header-confirmed-scalar/1"
         }
       ]
     },
@@ -3159,6 +3215,1756 @@
           "name": "updateTimeline",
           "native": "flight::timeline::update_timeline",
           "header": "flight/timeline/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        }
+      ]
+    },
+    {
+      "module": "flight.Types",
+      "functions": [],
+      "values": [
+        {
+          "name": "AddNodeChildCommandKind",
+          "native": "flight::types::add_node_child_command_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "ALL_LIGHT_LAYERS",
+          "native": "flight::types::all_light_layers",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "AmbientLightKind",
+          "native": "flight::types::ambient_light_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "AnchorLayoutKind",
+          "native": "flight::types::anchor_layout_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "AnimatedNormalModifierKind",
+          "native": "flight::types::animated_normal_modifier_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "AnimationInterpolationCubic",
+          "native": "flight::types::animation_interpolation_cubic",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "AnimationInterpolationLinear",
+          "native": "flight::types::animation_interpolation_linear",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "AnimationInterpolationStep",
+          "native": "flight::types::animation_interpolation_step",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "AnimationLoopModePingPong",
+          "native": "flight::types::animation_loop_mode_ping_pong",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "AnimationLoopModeRepeat",
+          "native": "flight::types::animation_loop_mode_repeat",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "AnisotropyPbrExtensionKind",
+          "native": "flight::types::anisotropy_pbr_extension_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "AreaLightKind",
+          "native": "flight::types::area_light_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "AttractorForceKind",
+          "native": "flight::types::attractor_force_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "BillboardKind",
+          "native": "flight::types::billboard_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "BitmapFontFormatKindBmFontBinary",
+          "native": "flight::types::bitmap_font_format_kind_bm_font_binary",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "BitmapFontFormatKindBmFontJson",
+          "native": "flight::types::bitmap_font_format_kind_bm_font_json",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "BitmapFontFormatKindBmFontText",
+          "native": "flight::types::bitmap_font_format_kind_bm_font_text",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "BitmapFontFormatKindBmFontXml",
+          "native": "flight::types::bitmap_font_format_kind_bm_font_xml",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "BitmapTextKind",
+          "native": "flight::types::bitmap_text_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "BitmapTextureSourceKind",
+          "native": "flight::types::bitmap_texture_source_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "BlinnPhongMaterialKind",
+          "native": "flight::types::blinn_phong_material_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "BoundingBoxAttachment2DKind",
+          "native": "flight::types::bounding_box_attachment_2d_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "CandelaLightUnit",
+          "native": "flight::types::candela_light_unit",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "CircleColliderKind",
+          "native": "flight::types::circle_collider_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "ClearcoatPbrExtensionKind",
+          "native": "flight::types::clearcoat_pbr_extension_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "ClipboardFormatBookmark",
+          "native": "flight::types::clipboard_format_bookmark",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "ClipboardFormatHtml",
+          "native": "flight::types::clipboard_format_html",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "ClipboardFormatImage",
+          "native": "flight::types::clipboard_format_image",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "ClipboardFormatRtf",
+          "native": "flight::types::clipboard_format_rtf",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "ClipboardFormatText",
+          "native": "flight::types::clipboard_format_text",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "ClipboardFormatUriList",
+          "native": "flight::types::clipboard_format_uri_list",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "ClippingAttachment2DKind",
+          "native": "flight::types::clipping_attachment_2d_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "CompositeCommandKind",
+          "native": "flight::types::composite_command_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "CompressedImageTextureSourceKind",
+          "native": "flight::types::compressed_image_texture_source_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "CubeFaceNegativeX",
+          "native": "flight::types::cube_face_negative_x",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "CubeFaceNegativeY",
+          "native": "flight::types::cube_face_negative_y",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "CubeFaceNegativeZ",
+          "native": "flight::types::cube_face_negative_z",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "CubeFacePositiveX",
+          "native": "flight::types::cube_face_positive_x",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "CubeFacePositiveY",
+          "native": "flight::types::cube_face_positive_y",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "CubeFacePositiveZ",
+          "native": "flight::types::cube_face_positive_z",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "CurlNoiseForceKind",
+          "native": "flight::types::curl_noise_force_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "CustomShaderMaterialKind",
+          "native": "flight::types::custom_shader_material_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "DepthMaterialKind",
+          "native": "flight::types::depth_material_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "DeviceFormFactorCar",
+          "native": "flight::types::device_form_factor_car",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "DeviceFormFactorDesktop",
+          "native": "flight::types::device_form_factor_desktop",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "DeviceFormFactorPhone",
+          "native": "flight::types::device_form_factor_phone",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "DeviceFormFactorTablet",
+          "native": "flight::types::device_form_factor_tablet",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "DeviceFormFactorTV",
+          "native": "flight::types::device_form_factor_tv",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "DeviceFormFactorUnknown",
+          "native": "flight::types::device_form_factor_unknown",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "DeviceFormFactorWatch",
+          "native": "flight::types::device_form_factor_watch",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "DIRECTIONAL_SHADOW_MAP_SIZE",
+          "native": "flight::types::directional_shadow_map_size",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "DirectionalLightKind",
+          "native": "flight::types::directional_light_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "DisplayObjectKind",
+          "native": "flight::types::display_object_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "DissolveModifierKind",
+          "native": "flight::types::dissolve_modifier_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "DragForceKind",
+          "native": "flight::types::drag_force_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "EmissiveMaterialKind",
+          "native": "flight::types::emissive_material_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "EmissiveModifierKind",
+          "native": "flight::types::emissive_modifier_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "EnvironmentKind",
+          "native": "flight::types::environment_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "EnvReflectModifierKind",
+          "native": "flight::types::env_reflect_modifier_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "ExtendedPbrMaterialKind",
+          "native": "flight::types::extended_pbr_material_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "ExternalTextureSourceKind",
+          "native": "flight::types::external_texture_source_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "FlexLayoutKind",
+          "native": "flight::types::flex_layout_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "FogModifierKind",
+          "native": "flight::types::fog_modifier_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "FontVariationItalic",
+          "native": "flight::types::font_variation_italic",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "FontVariationOpticalSize",
+          "native": "flight::types::font_variation_optical_size",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "FontVariationSlant",
+          "native": "flight::types::font_variation_slant",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "FontVariationWeight",
+          "native": "flight::types::font_variation_weight",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "FontVariationWidth",
+          "native": "flight::types::font_variation_width",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "GridLayoutKind",
+          "native": "flight::types::grid_layout_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "GroupKind",
+          "native": "flight::types::group_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "HemisphereLightKind",
+          "native": "flight::types::hemisphere_light_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "HtmlViewKind",
+          "native": "flight::types::html_view_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "ImageTextureSourceKind",
+          "native": "flight::types::image_texture_source_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "InstancedMeshKind",
+          "native": "flight::types::instanced_mesh_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "IridescencePbrExtensionKind",
+          "native": "flight::types::iridescence_pbr_extension_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "LambertMaterialKind",
+          "native": "flight::types::lambert_material_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "LibgdxParticleFormatKind",
+          "native": "flight::types::libgdx_particle_format_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "LIGHT_PROBE_SH_FLOATS",
+          "native": "flight::types::light_probe_sh_floats",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "LodMeshKind",
+          "native": "flight::types::lod_mesh_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "LumenLightUnit",
+          "native": "flight::types::lumen_light_unit",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "LuxLightUnit",
+          "native": "flight::types::lux_light_unit",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "MatcapMaterialKind",
+          "native": "flight::types::matcap_material_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "MAX_COLLISION_CONTACT_POINTS_3D",
+          "native": "flight::types::max_collision_contact_points_3_d",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "MAX_DIRECTIONAL_SHADOW_PCF_RADIUS",
+          "native": "flight::types::max_directional_shadow_pcf_radius",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "MAX_FORWARD_LIGHTS",
+          "native": "flight::types::max_forward_lights",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "MD5_MATERIAL_FEATURE",
+          "native": "flight::types::md5_material_feature",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "MD5_SKELETON_FEATURE",
+          "native": "flight::types::md5_skeleton_feature",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "MeshAttachment2DKind",
+          "native": "flight::types::mesh_attachment_2d_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "MeshDeformerMorph",
+          "native": "flight::types::mesh_deformer_morph",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "MeshDeformerNone",
+          "native": "flight::types::mesh_deformer_none",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "MeshDeformerSkeletal",
+          "native": "flight::types::mesh_deformer_skeletal",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "MeshKind",
+          "native": "flight::types::mesh_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "MorphShapeKind",
+          "native": "flight::types::morph_shape_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "MovieClipKind",
+          "native": "flight::types::movie_clip_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "NativeTextKind",
+          "native": "flight::types::native_text_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "Node2DAnimationPathAlpha",
+          "native": "flight::types::node_2d_animation_path_alpha",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "Node2DAnimationPathPivot",
+          "native": "flight::types::node_2d_animation_path_pivot",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "Node2DAnimationPathPivotX",
+          "native": "flight::types::node_2d_animation_path_pivot_x",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "Node2DAnimationPathPivotY",
+          "native": "flight::types::node_2d_animation_path_pivot_y",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "Node2DAnimationPathPosition",
+          "native": "flight::types::node_2d_animation_path_position",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "Node2DAnimationPathRotation",
+          "native": "flight::types::node_2d_animation_path_rotation",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "Node2DAnimationPathScale",
+          "native": "flight::types::node_2d_animation_path_scale",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "Node2DAnimationPathScaleX",
+          "native": "flight::types::node_2d_animation_path_scale_x",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "Node2DAnimationPathScaleY",
+          "native": "flight::types::node_2d_animation_path_scale_y",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "Node2DAnimationPathSkew",
+          "native": "flight::types::node_2d_animation_path_skew",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "Node2DAnimationPathSkewX",
+          "native": "flight::types::node_2d_animation_path_skew_x",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "Node2DAnimationPathSkewY",
+          "native": "flight::types::node_2d_animation_path_skew_y",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "Node2DAnimationPathVisible",
+          "native": "flight::types::node_2d_animation_path_visible",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "Node2DAnimationPathX",
+          "native": "flight::types::node_2d_animation_path_x",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "Node2DAnimationPathY",
+          "native": "flight::types::node_2d_animation_path_y",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "Node3DKind",
+          "native": "flight::types::node_3d_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "NodeKind",
+          "native": "flight::types::node_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "NormalMaterialKind",
+          "native": "flight::types::normal_material_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "OBJ_MATERIAL_BLINN_PHONG_FEATURE",
+          "native": "flight::types::obj_material_blinn_phong_feature",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "OBJ_MATERIAL_STANDARD_PBR_FEATURE",
+          "native": "flight::types::obj_material_standard_pbr_feature",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "ParticleDesignerFormatKind",
+          "native": "flight::types::particle_designer_format_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "ParticleEmitter2DKind",
+          "native": "flight::types::particle_emitter_2d_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "ParticleEmitter3DKind",
+          "native": "flight::types::particle_emitter_3d_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "PathAttachment2DKind",
+          "native": "flight::types::path_attachment_2d_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "PhongMaterialKind",
+          "native": "flight::types::phong_material_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "PixiParticleFormatKind",
+          "native": "flight::types::pixi_particle_format_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "PlaneColliderKind",
+          "native": "flight::types::plane_collider_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "PointAttachment2DKind",
+          "native": "flight::types::point_attachment_2d_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "PointGravityWellForceKind",
+          "native": "flight::types::point_gravity_well_force_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "PointLightKind",
+          "native": "flight::types::point_light_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "QuadBatchKind",
+          "native": "flight::types::quad_batch_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "RectangleColliderKind",
+          "native": "flight::types::rectangle_collider_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "RegionAttachment2DKind",
+          "native": "flight::types::region_attachment_2d_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "RemoveNodeChildCommandKind",
+          "native": "flight::types::remove_node_child_command_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "RenderCacheKind",
+          "native": "flight::types::render_cache_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "RenderTargetTextureSourceKind",
+          "native": "flight::types::render_target_texture_source_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "ReorderNodeChildCommandKind",
+          "native": "flight::types::reorder_node_child_command_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "RichTextKind",
+          "native": "flight::types::rich_text_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "RimModifierKind",
+          "native": "flight::types::rim_modifier_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "SamplerKind",
+          "native": "flight::types::sampler_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "Scale9ShapeKind",
+          "native": "flight::types::scale9_shape_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "Scale9SpriteKind",
+          "native": "flight::types::scale9_sprite_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "SCENE_LIGHT_AMBIENT_RADIANCE_OFFSET",
+          "native": "flight::types::scene_light_ambient_radiance_offset",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "SCENE_LIGHT_BLOCK_FLOATS",
+          "native": "flight::types::scene_light_block_floats",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "SCENE_LIGHT_DIRECTIONAL_DIRECTION_OFFSET",
+          "native": "flight::types::scene_light_directional_direction_offset",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "SCENE_LIGHT_DIRECTIONAL_RADIANCE_OFFSET",
+          "native": "flight::types::scene_light_directional_radiance_offset",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "SCENE_LIGHT_HEAD_FLOATS",
+          "native": "flight::types::scene_light_head_floats",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "SCENE_LIGHT_HEMISPHERE_OFFSET",
+          "native": "flight::types::scene_light_hemisphere_offset",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "SCENE_LIGHT_HEMISPHERE_STRIDE",
+          "native": "flight::types::scene_light_hemisphere_stride",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "SCENE_LIGHT_POINT_OFFSET",
+          "native": "flight::types::scene_light_point_offset",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "SCENE_LIGHT_POINT_STRIDE",
+          "native": "flight::types::scene_light_point_stride",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "SCENE_LIGHT_SPOT_OFFSET",
+          "native": "flight::types::scene_light_spot_offset",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "SCENE_LIGHT_SPOT_STRIDE",
+          "native": "flight::types::scene_light_spot_stride",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "Scene3DAnimationPathRotation",
+          "native": "flight::types::scene_3d_animation_path_rotation",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "Scene3DAnimationPathScale",
+          "native": "flight::types::scene_3d_animation_path_scale",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "Scene3DAnimationPathTranslation",
+          "native": "flight::types::scene_3d_animation_path_translation",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "Scene3DAnimationPathWeights",
+          "native": "flight::types::scene_3d_animation_path_weights",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "SetNodePropertyCommandKind",
+          "native": "flight::types::set_node_property_command_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "ShadedMaterialKind",
+          "native": "flight::types::shaded_material_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "ShapeKind",
+          "native": "flight::types::shape_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "SheenPbrExtensionKind",
+          "native": "flight::types::sheen_pbr_extension_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "SoftKeyboardAttachAcquisitionFailedKind",
+          "native": "flight::types::soft_keyboard_attach_acquisition_failed_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "SoftKeyboardAttachOkKind",
+          "native": "flight::types::soft_keyboard_attach_ok_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "SoftKeyboardResizeBodyKind",
+          "native": "flight::types::soft_keyboard_resize_body_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "SoftKeyboardResizeNoneKind",
+          "native": "flight::types::soft_keyboard_resize_none_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "SoftKeyboardSetterOkKind",
+          "native": "flight::types::soft_keyboard_setter_ok_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "SoftKeyboardSetterOperationFailedKind",
+          "native": "flight::types::soft_keyboard_setter_operation_failed_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "SoftKeyboardSetterOperationUnavailableKind",
+          "native": "flight::types::soft_keyboard_setter_operation_unavailable_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "SoftKeyboardStyleDarkKind",
+          "native": "flight::types::soft_keyboard_style_dark_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "SoftKeyboardStyleDefaultKind",
+          "native": "flight::types::soft_keyboard_style_default_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "SoftKeyboardVisibilityOkKind",
+          "native": "flight::types::soft_keyboard_visibility_ok_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "SoftKeyboardVisibilityOperationFailedKind",
+          "native": "flight::types::soft_keyboard_visibility_operation_failed_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "SpecularGlossinessPbrMaterialKind",
+          "native": "flight::types::specular_glossiness_pbr_material_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "SpecularPbrExtensionKind",
+          "native": "flight::types::specular_pbr_extension_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "SphereColliderKind",
+          "native": "flight::types::sphere_collider_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "SpineParticleFormatKind",
+          "native": "flight::types::spine_particle_format_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "SpotLightKind",
+          "native": "flight::types::spot_light_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "SpriteKind",
+          "native": "flight::types::sprite_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "SpritesheetFormatKindAseprite",
+          "native": "flight::types::spritesheet_format_kind_aseprite",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "SpritesheetFormatKindCocosPlist",
+          "native": "flight::types::spritesheet_format_kind_cocos_plist",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "SpritesheetFormatKindLibgdxAtlas",
+          "native": "flight::types::spritesheet_format_kind_libgdx_atlas",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "SpritesheetFormatKindStarling",
+          "native": "flight::types::spritesheet_format_kind_starling",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "SpritesheetFormatKindTexturePacker",
+          "native": "flight::types::spritesheet_format_kind_texture_packer",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "StandardMaterialKind",
+          "native": "flight::types::standard_material_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "StandardPbrMaterialKind",
+          "native": "flight::types::standard_pbr_material_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "StarlingPexFormatKind",
+          "native": "flight::types::starling_pex_format_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "StatechartAtomicStateKind",
+          "native": "flight::types::statechart_atomic_state_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "StatechartNestedStateKind",
+          "native": "flight::types::statechart_nested_state_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "TextDirectionLeftToRight",
+          "native": "flight::types::text_direction_left_to_right",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "TextDirectionRightToLeft",
+          "native": "flight::types::text_direction_right_to_left",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "TextDirectionTopToBottom",
+          "native": "flight::types::text_direction_top_to_bottom",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "TextFeatureCapitals",
+          "native": "flight::types::text_feature_capitals",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "TextFeatureContextualAlternates",
+          "native": "flight::types::text_feature_contextual_alternates",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "TextFeatureDiscretionaryLigatures",
+          "native": "flight::types::text_feature_discretionary_ligatures",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "TextFeatureFractions",
+          "native": "flight::types::text_feature_fractions",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "TextFeatureKerning",
+          "native": "flight::types::text_feature_kerning",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "TextFeatureLigatures",
+          "native": "flight::types::text_feature_ligatures",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "TextFeatureOldStyleFigures",
+          "native": "flight::types::text_feature_old_style_figures",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "TextFeatureSmallCaps",
+          "native": "flight::types::text_feature_small_caps",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "TextFeatureStylisticAlternates",
+          "native": "flight::types::text_feature_stylistic_alternates",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "TextFeatureSubscript",
+          "native": "flight::types::text_feature_subscript",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "TextFeatureSuperscript",
+          "native": "flight::types::text_feature_superscript",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "TextFeatureTabularFigures",
+          "native": "flight::types::text_feature_tabular_figures",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "TextLabelKind",
+          "native": "flight::types::text_label_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "TextureAtlasFormatKindAseprite",
+          "native": "flight::types::texture_atlas_format_kind_aseprite",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "TextureAtlasFormatKindCocosPlist",
+          "native": "flight::types::texture_atlas_format_kind_cocos_plist",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "TextureAtlasFormatKindLibgdxAtlas",
+          "native": "flight::types::texture_atlas_format_kind_libgdx_atlas",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "TextureAtlasFormatKindStarling",
+          "native": "flight::types::texture_atlas_format_kind_starling",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "TextureAtlasFormatKindTexturePacker",
+          "native": "flight::types::texture_atlas_format_kind_texture_packer",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "TextureKind",
+          "native": "flight::types::texture_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "THREE_DS_CAMERA",
+          "native": "flight::types::three_ds_camera",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "THREE_DS_CAMERA_APERTURE_MM",
+          "native": "flight::types::three_ds_camera_aperture_mm",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "THREE_DS_CAMERA_RANGES",
+          "native": "flight::types::three_ds_camera_ranges",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "THREE_DS_CHUNK_HEADER_BYTES",
+          "native": "flight::types::three_ds_chunk_header_bytes",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "THREE_DS_COLOR_BYTE",
+          "native": "flight::types::three_ds_color_byte",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "THREE_DS_COLOR_FLOAT",
+          "native": "flight::types::three_ds_color_float",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "THREE_DS_EDITOR",
+          "native": "flight::types::three_ds_editor",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "THREE_DS_FACE_MATERIAL",
+          "native": "flight::types::three_ds_face_material",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "THREE_DS_FACES",
+          "native": "flight::types::three_ds_faces",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "THREE_DS_KEYFRAME",
+          "native": "flight::types::three_ds_keyframe",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "THREE_DS_KEYFRAME_NODE_HEADER",
+          "native": "flight::types::three_ds_keyframe_node_header",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "THREE_DS_KEYFRAME_OBJECT_NODE",
+          "native": "flight::types::three_ds_keyframe_object_node",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "THREE_DS_KEYFRAME_PIVOT",
+          "native": "flight::types::three_ds_keyframe_pivot",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "THREE_DS_LIGHT",
+          "native": "flight::types::three_ds_light",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "THREE_DS_LIGHT_INNER_RANGE",
+          "native": "flight::types::three_ds_light_inner_range",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "THREE_DS_LIGHT_MULTIPLIER",
+          "native": "flight::types::three_ds_light_multiplier",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "THREE_DS_LIGHT_OFF",
+          "native": "flight::types::three_ds_light_off",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "THREE_DS_LIGHT_OUTER_RANGE",
+          "native": "flight::types::three_ds_light_outer_range",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "THREE_DS_LIGHT_SPOT",
+          "native": "flight::types::three_ds_light_spot",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "THREE_DS_MAIN",
+          "native": "flight::types::three_ds_main",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "THREE_DS_MATERIAL",
+          "native": "flight::types::three_ds_material",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "THREE_DS_MATERIAL_AMBIENT",
+          "native": "flight::types::three_ds_material_ambient",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "THREE_DS_MATERIAL_BUMP_MAP",
+          "native": "flight::types::three_ds_material_bump_map",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "THREE_DS_MATERIAL_DIFFUSE",
+          "native": "flight::types::three_ds_material_diffuse",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "THREE_DS_MATERIAL_NAME",
+          "native": "flight::types::three_ds_material_name",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "THREE_DS_MATERIAL_OPACITY_MAP",
+          "native": "flight::types::three_ds_material_opacity_map",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "THREE_DS_MATERIAL_SHININESS",
+          "native": "flight::types::three_ds_material_shininess",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "THREE_DS_MATERIAL_SPECULAR",
+          "native": "flight::types::three_ds_material_specular",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "THREE_DS_MATERIAL_TEXTURE_FILENAME",
+          "native": "flight::types::three_ds_material_texture_filename",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "THREE_DS_MATERIAL_TEXTURE_MAP",
+          "native": "flight::types::three_ds_material_texture_map",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "THREE_DS_MATERIAL_TRANSPARENCY",
+          "native": "flight::types::three_ds_material_transparency",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "THREE_DS_OBJECT",
+          "native": "flight::types::three_ds_object",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "THREE_DS_PERCENT_FLOAT",
+          "native": "flight::types::three_ds_percent_float",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "THREE_DS_PERCENT_INT",
+          "native": "flight::types::three_ds_percent_int",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "THREE_DS_SMOOTH_GROUP",
+          "native": "flight::types::three_ds_smooth_group",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "THREE_DS_TRANSFORM_MATRIX",
+          "native": "flight::types::three_ds_transform_matrix",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "THREE_DS_TRIMESH",
+          "native": "flight::types::three_ds_trimesh",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "THREE_DS_UV_COORDS",
+          "native": "flight::types::three_ds_uv_coords",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "THREE_DS_VERTICES",
+          "native": "flight::types::three_ds_vertices",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "TilemapFormatKindTiledTmj",
+          "native": "flight::types::tilemap_format_kind_tiled_tmj",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "TilemapFormatKindTiledTmx",
+          "native": "flight::types::tilemap_format_kind_tiled_tmx",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "TilemapFormatKindTiledTsj",
+          "native": "flight::types::tilemap_format_kind_tiled_tsj",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "TilemapFormatKindTiledTsx",
+          "native": "flight::types::tilemap_format_kind_tiled_tsx",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "TilemapKind",
+          "native": "flight::types::tilemap_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "TimelineAudioCueKind",
+          "native": "flight::types::timeline_audio_cue_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "TimelineGotoCueKind",
+          "native": "flight::types::timeline_goto_cue_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "TimelineNextFrameCueKind",
+          "native": "flight::types::timeline_next_frame_cue_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "TimelinePlayCueKind",
+          "native": "flight::types::timeline_play_cue_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "TimelinePreviousFrameCueKind",
+          "native": "flight::types::timeline_previous_frame_cue_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "TimelineStopCueKind",
+          "native": "flight::types::timeline_stop_cue_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "TimelineStreamAudioCueKind",
+          "native": "flight::types::timeline_stream_audio_cue_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "ToonMaterialKind",
+          "native": "flight::types::toon_material_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "ToonModifierKind",
+          "native": "flight::types::toon_modifier_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "TransmissionVolumePbrExtensionKind",
+          "native": "flight::types::transmission_volume_pbr_extension_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "TurbulenceForceKind",
+          "native": "flight::types::turbulence_force_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "UnitlessLightUnit",
+          "native": "flight::types::unitless_light_unit",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "UnityParticleFormatKind",
+          "native": "flight::types::unity_particle_format_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "UnlitMaterialKind",
+          "native": "flight::types::unlit_material_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "VertexColorMaterialKind",
+          "native": "flight::types::vertex_color_material_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "VertexDisplaceModifierKind",
+          "native": "flight::types::vertex_displace_modifier_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "VortexForceKind",
+          "native": "flight::types::vortex_force_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "VoxelGridTextureSourceKind",
+          "native": "flight::types::voxel_grid_texture_source_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "WindForceKind",
+          "native": "flight::types::wind_force_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "WireframeMaterialKind",
+          "native": "flight::types::wireframe_material_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        },
+        {
+          "name": "WrappedDiffusePbrExtensionKind",
+          "native": "flight::types::wrapped_diffuse_pbr_extension_kind",
+          "header": "flight/types/contract.hpp",
+          "provenance": "flight-hx/scalar-value-getter/1"
+        }
+      ]
+    },
+    {
+      "module": "flight.Velocity",
+      "functions": [
+        {
+          "name": "beginVelocityFrame",
+          "native": "flight::velocity::begin_velocity_frame",
+          "header": "flight/velocity/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "createVelocityField",
+          "native": "flight::velocity::create_velocity_field",
+          "header": "flight/velocity/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "addVelocity",
+          "native": "flight::velocity::add_velocity",
+          "header": "flight/velocity/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "clampVelocity",
+          "native": "flight::velocity::clamp_velocity",
+          "header": "flight/velocity/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "copyVelocity",
+          "native": "flight::velocity::copy_velocity",
+          "header": "flight/velocity/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "dampVelocity",
+          "native": "flight::velocity::damp_velocity",
+          "header": "flight/velocity/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "getVelocitySampleAt",
+          "native": "flight::velocity::get_velocity_sample_at",
+          "header": "flight/velocity/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "isVelocityZero",
+          "native": "flight::velocity::is_velocity_zero",
+          "header": "flight/velocity/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "lengthOfVelocity",
+          "native": "flight::velocity::length_of_velocity",
+          "header": "flight/velocity/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "lerpVelocity",
+          "native": "flight::velocity::lerp_velocity",
+          "header": "flight/velocity/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "normalizeVelocity",
+          "native": "flight::velocity::normalize_velocity",
+          "header": "flight/velocity/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "scaleVelocity",
+          "native": "flight::velocity::scale_velocity",
+          "header": "flight/velocity/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "subtractVelocity",
+          "native": "flight::velocity::subtract_velocity",
+          "header": "flight/velocity/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "zeroVelocity",
+          "native": "flight::velocity::zero_velocity",
+          "header": "flight/velocity/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        }
+      ]
+    },
+    {
+      "module": "flight.Xml",
+      "functions": [
+        {
+          "name": "parseXmlDocument",
+          "native": "flight::xml::parse_xml_document",
+          "header": "flight/xml/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "getXmlElementChildByName",
+          "native": "flight::xml::get_xml_element_child_by_name",
+          "header": "flight/xml/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "getXmlElementAttribute",
+          "native": "flight::xml::get_xml_element_attribute",
+          "header": "flight/xml/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "getXmlElementAttributeNumber",
+          "native": "flight::xml::get_xml_element_attribute_number",
+          "header": "flight/xml/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "getXmlElementChildrenByName",
+          "native": "flight::xml::get_xml_element_children_by_name",
+          "header": "flight/xml/contract.hpp",
           "provenance": "flight-hx/reference-carrier/1"
         }
       ]

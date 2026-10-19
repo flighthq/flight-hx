@@ -27,9 +27,11 @@ const optionalScalarOverrideProvenance = 'flight-hx/header-confirmed-optional-sc
 const arrayFloatAdapterProvenance = 'flight-hx/array-float-copy-adapter/1';
 const nullableStringAdapterProvenance = 'flight-hx/nullable-string-copy-adapter/1';
 const referenceCarrierProvenance = 'flight-hx/reference-carrier/1';
+const scalarValueProvenance = 'flight-hx/scalar-value-getter/1';
 const flightCppHeaderStatuses = new Map(
   flightCppBestEffort.modules.map(({ path: header, status }) => [header, status]),
 );
+const nativePackageHeaderCache = new Map();
 if (planning.schema !== 'flight-hx-native-binding-plan/1') {
   throw new Error(`Unknown native binding plan schema ${String(planning.schema)}`);
 }
@@ -80,6 +82,14 @@ if (
     `Unknown native reference carrier policy ${String(manifest.haxeBindingPlan?.referenceCarrierPromotion)}`,
   );
 }
+if (
+  manifest.haxeBindingPlan?.scalarValuePromotion !==
+  'dependency-complete-scalar-value-getter-compile-run'
+) {
+  throw new Error(
+    `Unknown native scalar value policy ${String(manifest.haxeBindingPlan?.scalarValuePromotion)}`,
+  );
+}
 const planned = new Map(
   planning.declarations
     .filter(({ kind }) => kind === 'function')
@@ -88,6 +98,11 @@ const planned = new Map(
 const attemptedFunctions = new Map(
   planning.bindingAttempts
     .filter(({ publicHaxe }) => publicHaxe.kind === 'function')
+    .map((attempt) => [attempt.publicHaxe.qualifiedName, attempt]),
+);
+const attemptedValues = new Map(
+  planning.bindingAttempts
+    .filter(({ publicHaxe }) => publicHaxe.kind === 'value')
     .map((attempt) => [attempt.publicHaxe.qualifiedName, attempt]),
 );
 const nativeReferenceTypes = new Map(
@@ -101,9 +116,17 @@ const publicFunctions = new Map(
     package_.functions.map((declaration) => [`flight.${declaration.holder}.${declaration.name}`, declaration]),
   ),
 );
+const publicValues = new Map(
+  defaultApi.packages.flatMap((package_) =>
+    package_.values.map((declaration) => [`flight.${declaration.holder}.${declaration.name}`, declaration]),
+  ),
+);
 const nativeFacadeTypes = new Map(typeAttempts.declarations.map((declaration) => [declaration.publicName, declaration]));
 const manifestPublicNameSet = new Set(
-  manifest.modules.flatMap(({ module, functions }) => functions.map(({ name }) => `${module}.${name}`)),
+  manifest.modules.flatMap(({ module, functions, values = [] }) => [
+    ...functions.map(({ name }) => `${module}.${name}`),
+    ...values.map(({ name }) => `${module}.${name}`),
+  ]),
 );
 const unprovenAttempts = planning.bindingAttempts
   .filter(
@@ -135,6 +158,7 @@ const attemptsByOwner = Map.groupBy(unprovenAttempts, ({ publicHaxe }) => public
 const expected = new Map();
 const manifestEntries = [];
 const compileProbeBindings = [];
+const compileProbeValues = [];
 for (const module of manifest.modules) {
   const holder = module.module.replace(/^flight\./u, '');
   const holderAttempts = attemptsByOwner.get(module.module) ?? [];
@@ -227,25 +251,34 @@ for (const module of manifest.modules) {
     if (plan.transport === 'adapter') validateCompilerAdapter(publicName, binding, plan);
     return { ...binding, declaration, parsed, plan, provenance, structuralReferenceResult };
   });
+  const values = (module.values ?? []).map((binding) => {
+    const publicName = `${module.module}.${binding.name}`;
+    manifestEntries.push({ provenance: binding.provenance, publicName });
+    const declaration = publicValues.get(publicName);
+    const attempt = attemptedValues.get(publicName);
+    validateScalarValue(publicName, binding, declaration, attempt);
+    return { ...binding, attempt, declaration, type: declaration.type };
+  });
   const directBindings = bindings.filter(({ plan }) => plan.transport === 'direct');
   const adapterBindings = bindings.filter(({ plan }) => plan.transport === 'adapter');
   compileProbeBindings.push(...bindings.map((binding) => ({ ...binding, module: module.module })));
+  compileProbeValues.push(...values.map((binding) => ({ ...binding, module: module.module })));
   expected.set(
     path.join(root, 'src-cpp', 'flight', `${holder}.hx`),
-    emitFacade(holder, bindings, nativeFacadeTypes.get(module.module), holderAttempts),
+    emitFacade(holder, bindings, nativeFacadeTypes.get(module.module), holderAttempts, values),
   );
   expected.set(
     path.join(root, 'src', 'flight', '_cpp', '_fn', `${holder}.hx`),
-    emitExtern(holder, bindings),
+    emitExtern(holder, bindings, values),
   );
-  if (directBindings.length > 0) {
+  if (directBindings.length > 0 || values.length > 0) {
     expected.set(
       path.join(root, 'src-cpp', 'include', 'flight_hx', `${holder.toLowerCase()}.hpp`),
-      emitBridgeHeader(module, directBindings),
+      emitBridgeHeader(module, directBindings, values),
     );
     expected.set(
       path.join(root, 'src-cpp', 'src', `${holder.toLowerCase()}.cpp`),
-      emitBridgeSource(module, directBindings),
+      emitBridgeSource(module, directBindings, values),
     );
   }
   for (const binding of adapterBindings) {
@@ -259,8 +292,8 @@ for (const module of manifest.modules) {
 }
 
 expected.set(
-  path.join(root, 'examples', 'cross-target-math', 'NativeBindingCompileProbe.hx'),
-  emitNativeBindingCompileProbe(compileProbeBindings),
+    path.join(root, 'examples', 'cross-target-math', 'NativeBindingCompileProbe.hx'),
+  emitNativeBindingCompileProbe(compileProbeBindings, compileProbeValues),
 );
 
 for (const [owner, holderAttempts] of [...attemptsByOwner].sort(([left], [right]) => compareText(left, right))) {
@@ -345,20 +378,21 @@ if (check && drift.length > 0) {
 }
 process.stdout.write(
   `Native function bindings ${check ? 'are current' : 'updated'}: ${String(manifest.modules.length)} holder(s), ` +
-    `${String(manifestPublicNames.length)} function(s) ` +
+    `${String(compileProbeBindings.length)} function(s) ` +
     `(${String(planning.declarations.filter(({ kind, transport, headerStatus }) => kind === 'function' && transport === 'direct' && headerStatus === 'pass').length)} direct, ` +
     `${String(planning.declarations.filter(({ kind, transport, headerStatus }) => kind === 'function' && transport === 'adapter' && headerStatus === 'pass').length)} compiler adapter, ` +
     `${String(manifestEntries.filter(({ provenance }) => provenance === scalarOverrideProvenance).length)} required scalar override, ` +
     `${String(manifestEntries.filter(({ provenance }) => provenance === optionalScalarOverrideProvenance).length)} optional scalar adapter, ` +
     `${String(manifestEntries.filter(({ provenance }) => provenance === arrayFloatAdapterProvenance).length)} array carrier adapter, ` +
     `${String(manifestEntries.filter(({ provenance }) => provenance === nullableStringAdapterProvenance).length)} Null<String> adapter, ` +
-    `${String(manifestEntries.filter(({ provenance }) => provenance === referenceCarrierProvenance).length)} reference carrier); ` +
+    `${String(manifestEntries.filter(({ provenance }) => provenance === referenceCarrierProvenance).length)} reference carrier), ` +
+    `${String(compileProbeValues.length)} scalar value(s); ` +
     `${String(unprovenAttempts.filter(({ publicHaxe }) => publicHaxe.kind === 'function').length)} unproven function attempt(s) and ` +
     `${String(unprovenAttempts.filter(({ publicHaxe }) => publicHaxe.kind === 'value').length)} unproven value attempt(s) across ` +
     `${String(new Set(unprovenAttempts.map(({ publicHaxe }) => publicHaxe.owner)).size)} holder(s).\n`,
 );
 
-function emitFacade(holder, bindings, nativeType, attempts = []) {
+function emitFacade(holder, bindings, nativeType, attempts = [], values = []) {
   const lines = [
     '// Generated from src-cpp/manifest.json and flight-compiler native-planning.json. Do not edit.',
     'package flight;',
@@ -375,6 +409,13 @@ function emitFacade(holder, bindings, nativeType, attempts = []) {
     const call = `flight._cpp._fn.${holder}.${declaration.name}(${facadeArguments(binding).join(', ')})`;
     lines.push(parsed.result === 'Void' ? `  ${call};` : `  return ${call};`);
     lines.push('}', '');
+  }
+  for (const value of values) {
+    lines.push(`var ${value.name}(get, never):${value.type};`, '');
+    lines.push(
+      `private inline function get_${value.name}():${value.type} return flight._cpp._fn.${holder}.get_${value.name}();`,
+      '',
+    );
   }
   for (const attempt of attempts.sort(compareAttempts)) {
     if (attempt.publicHaxe.kind === 'function') {
@@ -400,15 +441,15 @@ function emitFacade(holder, bindings, nativeType, attempts = []) {
   return lines.join('\n');
 }
 
-function emitExtern(holder, bindings) {
+function emitExtern(holder, bindings, values) {
   const direct = bindings.filter(({ plan }) => plan.transport === 'direct');
   const adapters = bindings.filter(({ plan }) => plan.transport === 'adapter');
   const sources = [
-    ...(direct.length > 0 ? [`${holder.toLowerCase()}.cpp`] : []),
+    ...(direct.length > 0 || values.length > 0 ? [`${holder.toLowerCase()}.cpp`] : []),
     ...adapters.map((binding) => `adapters/${adapterIdentity(binding).name}.cpp`),
   ];
   const includes = [...new Set([
-    ...(direct.length > 0 ? [`flight_hx/${holder.toLowerCase()}.hpp`] : []),
+    ...(direct.length > 0 || values.length > 0 ? [`flight_hx/${holder.toLowerCase()}.hpp`] : []),
     ...adapters.map((binding) => `flight_hx/adapters/${adapterIdentity(binding).name}.hpp`),
   ])].sort(compareText);
   const sourceFiles = sources
@@ -428,6 +469,10 @@ function emitExtern(holder, bindings) {
     const { declaration, native } = binding;
     lines.push(`  @:native(${JSON.stringify(native.replace(/^flight::/u, 'flight_hx::'))})`);
     lines.push(`  static ${emitInternalSignature(binding)};`, '');
+  }
+  for (const value of values) {
+    lines.push(`  @:native(${JSON.stringify(valueBridgeNativeName(value))})`);
+    lines.push(`  static function get_${value.name}():${value.type};`, '');
   }
   if (lines.at(-1) === '') lines.pop();
   lines.push('}', '#end', '');
@@ -578,10 +623,7 @@ function validateArrayFloatAdapter(publicName, binding, declaration, parsed) {
     `\\binline\\s+${escapeRegExp(flightCppType(parsed.result))}\\s+${escapeRegExp(cppName)}\\s*\\(${parameterPattern}\\)`,
     'u',
   );
-  const packageHeaders = filesUnder(path.dirname(headerPath))
-    .filter((filename) => filename.endsWith('.hpp'))
-    .map((filename) => readFileSync(filename, 'utf8'))
-    .join('\n');
+  const packageHeaders = nativePackageHeaders(headerPath);
   if (!signaturePattern.test(packageHeaders)) {
     throw new Error(`${publicName} Array<Float> adapter cannot find its exact native signature`);
   }
@@ -607,10 +649,7 @@ function validateNullableStringAdapter(publicName, binding, declaration, parsed)
     `\\binline\\s+std::optional<flight::String>\\s+${escapeRegExp(cppName)}\\s*\\(${parameterPattern}\\)`,
     'u',
   );
-  const packageHeaders = filesUnder(path.dirname(headerPath))
-    .filter((filename) => filename.endsWith('.hpp'))
-    .map((filename) => readFileSync(filename, 'utf8'))
-    .join('\n');
+  const packageHeaders = nativePackageHeaders(headerPath);
   if (!signaturePattern.test(packageHeaders)) {
     throw new Error(`${publicName} Null<String> adapter cannot find its exact native signature`);
   }
@@ -685,10 +724,7 @@ function validateReferenceCarrier(publicName, binding, declaration, parsed) {
     `\\binline\\s+${nativeResultPattern(parsed.result)}\\s+${escapeRegExp(cppName)}\\s*\\(${parameterPattern}\\)`,
     'u',
   );
-  const packageHeaders = filesUnder(path.dirname(headerPath))
-    .filter((filename) => filename.endsWith('.hpp'))
-    .map((filename) => readFileSync(filename, 'utf8'))
-    .join('\n');
+  const packageHeaders = nativePackageHeaders(headerPath);
   if (signaturePattern.test(packageHeaders)) return false;
   const structuralResult = structuralReadonlyReferenceType(parsed.result);
   if (structuralResult) {
@@ -699,6 +735,39 @@ function validateReferenceCarrier(publicName, binding, declaration, parsed) {
     if (structuralSignaturePattern.test(packageHeaders)) return true;
   }
   throw new Error(`${publicName} reference carrier cannot find its exact native signature`);
+}
+
+function validateScalarValue(publicName, binding, declaration, attempt) {
+  if (binding.provenance !== scalarValueProvenance) {
+    throw new Error(`${publicName} has unknown value provenance ${String(binding.provenance)}`);
+  }
+  if (!declaration || (declaration.type !== 'Float' && declaration.type !== 'String')) {
+    throw new Error(`${publicName} is not a scalar value in the complete default web API`);
+  }
+  if (!attempt || attempt.cpp.availability !== 'available' || attempt.publicHaxe.typeIdentity !== declaration.type) {
+    throw new Error(`${publicName} has no matching compiler/flight-cpp scalar value locator`);
+  }
+  const expectedNative = `${attempt.cpp.locator.namespace}::${attempt.cpp.locator.spelling}`;
+  if (binding.native !== expectedNative || binding.header !== attempt.cpp.locator.include) {
+    throw new Error(
+      `${publicName} scalar value locator drifted: ` +
+        `${binding.native} in ${binding.header} != ${expectedNative} in ${attempt.cpp.locator.include}`,
+    );
+  }
+  if (flightCppHeaderStatuses.get(binding.header) !== 'emitted') {
+    throw new Error(`${publicName} scalar value header is not dependency-complete: ${binding.header}`);
+  }
+  const headerPath = path.join(flightCpp.directory, 'generated', 'include', binding.header);
+  if (!existsSync(headerPath)) throw new Error(`${publicName} scalar value header is missing: ${binding.header}`);
+  const packageHeaders = nativePackageHeaders(headerPath);
+  const nativeType = declaration.type === 'Float' ? 'double' : 'flight::String';
+  const declarationPattern = new RegExp(
+    `\\binline\\s+const\\s+${escapeRegExp(nativeType)}\\s+${escapeRegExp(attempt.cpp.locator.spelling)}\\s*=`,
+    'u',
+  );
+  if (!declarationPattern.test(packageHeaders)) {
+    throw new Error(`${publicName} scalar value cannot find its exact native declaration`);
+  }
 }
 
 function validateScalarOverrideRefusals(boundPublicNames) {
@@ -800,8 +869,16 @@ function nativeNamespace(module, bindings) {
   return [...namespaces][0];
 }
 
-function emitBridgeHeader(module, bindings) {
-  const namespace = nativeNamespace(module, bindings);
+function valueBridgeName(value) {
+  return `get_${value.attempt.cpp.locator.spelling}`;
+}
+
+function valueBridgeNativeName(value) {
+  return value.native.replace(/::([^:]+)$/u, `::${valueBridgeName(value)}`).replace(/^flight::/u, 'flight_hx::');
+}
+
+function emitBridgeHeader(module, bindings, values) {
+  const namespace = nativeNamespace(module, [...bindings, ...values]);
   const referenceTypeNames = [...new Set(
     bindings
       .flatMap(({ parsed }) => [...parsed.parameters.map(({ type }) => type), parsed.result])
@@ -819,7 +896,7 @@ function emitBridgeHeader(module, bindings) {
   const lines = [
     '// Generated from src-cpp/manifest.json and flight-compiler native-planning.json. Do not edit.',
     '#pragma once',
-    ...(bindings.some(
+    ...(values.some(({ type }) => type === 'String') || bindings.some(
       (binding) =>
         isArrayFloatAdapter(binding) ||
         isNullableStringAdapter(binding) ||
@@ -847,24 +924,27 @@ function emitBridgeHeader(module, bindings) {
       .join(', ');
     lines.push(`${cppType(parsed.result)} ${functionName}(${parameters});`);
   }
+  for (const value of values) lines.push(`${cppType(value.type)} ${valueBridgeName(value)}();`);
   lines.push('', `} // namespace flight_hx::${namespace}`, '');
   return lines.join('\n');
 }
 
-function emitBridgeSource(module, bindings) {
-  const namespace = nativeNamespace(module, bindings);
+function emitBridgeSource(module, bindings, values) {
+  const namespace = nativeNamespace(module, [...bindings, ...values]);
   const holder = module.module.replace(/^flight\./u, '').toLowerCase();
   const needsArrayFloatAdapter = bindings.some(isArrayFloatAdapter);
   const needsReferenceArrayAdapter = bindings.some((binding) =>
     [...binding.parsed.parameters.map(({ type }) => type), binding.parsed.result].some(isReferenceArrayType),
   );
-  const needsStringCopy = bindings.some(
-    (binding) =>
+  const needsStringCopy =
+    values.some(({ type }) => type === 'String') ||
+    bindings.some(
+      (binding) =>
       isNullableStringAdapter(binding) ||
       [...binding.parsed.parameters.map(({ type }) => type), binding.parsed.result].some(
         (type) => type === 'String' || type === 'Null<String>',
       ),
-  );
+    );
   const needsNestedArrayAdapter = bindings.some(
     (binding) =>
       isArrayFloatAdapter(binding) &&
@@ -884,7 +964,9 @@ function emitBridgeSource(module, bindings) {
           '#include <string>',
         ]
       : []),
-    ...[...new Set(bindings.map(({ header }) => header))].sort(compareText).map((header) => `#include <${header}>`),
+    ...[...new Set([...bindings, ...values].map(({ header }) => header))]
+      .sort(compareText)
+      .map((header) => `#include <${header}>`),
     `#include <flight_hx/${holder}.hpp>`,
     '',
     `namespace flight_hx::${namespace} {`,
@@ -1066,6 +1148,16 @@ function emitBridgeSource(module, bindings) {
       lines.push('  return result.shared_object();');
     } else {
       lines.push(parsed.result === 'Void' ? `  ${call};` : `  return ${call};`);
+    }
+    lines.push('}', '');
+  }
+  for (const value of values) {
+    lines.push(`${cppType(value.type)} ${valueBridgeName(value)}() {`);
+    if (value.type === 'String') {
+      lines.push(`  const std::string result_utf8 = ${value.native}.to_utf8();`);
+      lines.push(...haxeStringCopyLines('result_utf8'));
+    } else {
+      lines.push(`  return ${value.native};`);
     }
     lines.push('}', '');
   }
@@ -1299,7 +1391,7 @@ function haxeStringCopyLines(name) {
   ];
 }
 
-function emitNativeBindingCompileProbe(bindings) {
+function emitNativeBindingCompileProbe(bindings, values) {
   const lines = [
     '// Generated from src-cpp/manifest.json and flight-compiler native-planning.json. Do not edit.',
     '',
@@ -1312,6 +1404,9 @@ function emitNativeBindingCompileProbe(bindings) {
   for (const binding of bindings) {
     const arguments_ = binding.parsed.parameters.map(({ type }) => haxeCompileProbeValue(type)).join(', ');
     lines.push(`    ${binding.module}.${binding.declaration.name}(${arguments_});`);
+  }
+  for (const [index, value] of values.entries()) {
+    lines.push(`    final value${String(index)}:${value.type} = ${value.module}.${value.name};`);
   }
   lines.push('  }', '}', '');
   return lines.join('\n');
@@ -1531,6 +1626,20 @@ function safeCppName(name) {
 
 function readJson(filename) {
   return JSON.parse(readFileSync(filename, 'utf8'));
+}
+
+function nativePackageHeaders(headerPath) {
+  const directory = path.dirname(headerPath);
+  if (!nativePackageHeaderCache.has(directory)) {
+    nativePackageHeaderCache.set(
+      directory,
+      filesUnder(directory)
+        .filter((filename) => filename.endsWith('.hpp'))
+        .map((filename) => readFileSync(filename, 'utf8'))
+        .join('\n'),
+    );
+  }
+  return nativePackageHeaderCache.get(directory);
 }
 
 function filesUnder(directory) {

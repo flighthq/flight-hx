@@ -10,9 +10,10 @@ headers. Public facade overrides deliberately expose nothing outside that manife
 The current pin's generated SDK uses the same Flight revision as this repo and records its distinct
 flight-compiler revision (`806d257` versus flight-hx planning at `804435a`). It reports 2,574 emitted
 and 577 refused modules from 3,151 profile inputs across 153 packages. The exact general-purpose
-Haxe-callable partition remains intentionally smaller: 487 functions across 49 public modules. They
-are compared with current web signatures, then all compiled and linked from one Haxe source in the
-cross-target gate; its constructible host-free slice is also executed on both targets. Sixty-two bind
+Haxe-callable partition remains intentionally smaller: 487 functions across 49 public modules and
+298 primitive values across six modules, for 50 holders overall. They are compared with current web
+signatures, then all compiled and linked from one Haxe source in the cross-target gate; its
+constructible host-free slice is also executed on both targets. Sixty-two functions bind
 directly from the compiler plan, four use compiler-emitted UTF-8
 String adapters, 53 required-primitive functions, and three optional-scalar adapters are explicit
 flight-hx overrides from dependency-complete flight-cpp headers. Forty-five additional functions
@@ -30,6 +31,10 @@ the owning-reference array copy. The newest batches cover `Path` and `PathFormat
 camera, entity, input, protocol, screen, timeline, velocity, and requirement helpers; and the
 accessibility, device, geolocation, haptics, keyboard, media-session, platform, power, sensor, and
 shell host-capability surfaces.
+The value partition covers every locator-backed `Float` and `String` export. Generated read-only
+getters copy numbers by value and make owned, length-checked UTF-8 Haxe strings, avoiding both
+borrowed storage and invalid writes to flight-cpp's `inline const` variables. Numeric, package-string,
+and shared Types-string representatives execute on both production targets.
 Expanding that partition remains manifest-first and compile-proven; the larger generated C++
 inventory is not silently claimed as Haxe support.
 
@@ -42,6 +47,9 @@ header scan also finds 183 public scalar signatures with matching inline definit
 the promoted partition and the remaining 69 across 32 packages are probe candidates, not promised support.
 Complex signatures stay classified for identity, lifetime, nullable/union, callback, and
 structural-owner review.
+The remaining 382 functions and 81 complex values stay materialized as 463 isolated attempt externs;
+array, anonymous-structure, capability, callback, dynamic, generic, and typed-array carriers are not
+silently counted as supported.
 
 The bridges do not reimplement Flight. Generated declaration-only headers expose primitive ABI
 prototypes to hxcpp; separate C++ translation units include flight-cpp's `include`,

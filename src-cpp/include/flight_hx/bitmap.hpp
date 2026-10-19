@@ -55,5 +55,10 @@ flight_hx::Ref<flight::types::Bitmap> compare_bitmap(flight::Ref<flight::types::
 flight_hx::Ref<flight::types::BitmapFingerprint> parse_bitmap_fingerprint(::String text);
 flight_hx::Ref<flight::types::Bitmap> capture_bitmap_from_image_resource(flight::Ref<flight::types::HostBitmapReadbackCapability> hostBitmapReadback, flight::Ref<flight::types::ImageResource> resource);
 ::Array<::Dynamic> split_bitmap_channels(flight::Ref<flight::types::Bitmap> source);
+::String get_bitmap_fingerprint_computation_id();
+double get_bitmap_noise_channel_a();
+double get_bitmap_noise_channel_b();
+double get_bitmap_noise_channel_g();
+double get_bitmap_noise_channel_r();
 
 } // namespace flight_hx::bitmap

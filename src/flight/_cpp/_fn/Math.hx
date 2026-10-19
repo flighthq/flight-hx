@@ -171,5 +171,23 @@ extern class Math {
 
   @:native("flight_hx::math::step")
   static function step(edge:Float, x:Float):Float;
+
+  @:native("flight_hx::math::get_circle_kappa")
+  static function get_CIRCLE_KAPPA():Float;
+
+  @:native("flight_hx::math::get_deg_to_rad_flight_value_variable__u000044__u000045__u000047__u00005f__u000054__u00004f__u00005f__u000052__u000041__u000044__flight_source_ad5040a7d8c07bd3")
+  static function get_DEG_TO_RAD():Float;
+
+  @:native("flight_hx::math::get_epsilon")
+  static function get_EPSILON():Float;
+
+  @:native("flight_hx::math::get_half_pi")
+  static function get_HALF_PI():Float;
+
+  @:native("flight_hx::math::get_rad_to_deg_flight_value_variable__u000052__u000041__u000044__u00005f__u000054__u00004f__u00005f__u000044__u000045__u000047__flight_source_ad5040a7d8c07bd3")
+  static function get_RAD_TO_DEG():Float;
+
+  @:native("flight_hx::math::get_tau")
+  static function get_TAU():Float;
 }
 #end

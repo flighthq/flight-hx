@@ -99,5 +99,20 @@ extern class Adjustments {
 
   @:native("flight_hx::adjustments::create_tint_adjustment")
   static function createTintAdjustment(rgba:Float):flight.TintAdjustment;
+
+  @:native("flight_hx::adjustments::get_color_adjustment_affine")
+  static function get_COLOR_ADJUSTMENT_AFFINE():Float;
+
+  @:native("flight_hx::adjustments::get_color_adjustment_channel_mixing")
+  static function get_COLOR_ADJUSTMENT_CHANNEL_MIXING():Float;
+
+  @:native("flight_hx::adjustments::get_color_adjustment_none")
+  static function get_COLOR_ADJUSTMENT_NONE():Float;
+
+  @:native("flight_hx::adjustments::get_color_lut_default_size")
+  static function get_COLOR_LUT_DEFAULT_SIZE():Float;
+
+  @:native("flight_hx::adjustments::get_color_matrix_length")
+  static function get_COLOR_MATRIX_LENGTH():Float;
 }
 #end

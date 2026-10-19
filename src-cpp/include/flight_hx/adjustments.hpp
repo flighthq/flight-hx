@@ -31,5 +31,10 @@ bool is_affine_color_matrix(::Array<double> matrix);
 ::Array<double> multiply_color_matrix(::Array<double> a, ::Array<double> b, bool outPresent, ::Array<double> out);
 flight::Ref<flight::types::ColorLutCache> create_color_lut_cache();
 flight::Ref<flight::types::TintAdjustment> create_tint_adjustment(double rgba);
+double get_color_adjustment_affine();
+double get_color_adjustment_channel_mixing();
+double get_color_adjustment_none();
+double get_color_lut_default_size();
+double get_color_matrix_length();
 
 } // namespace flight_hx::adjustments

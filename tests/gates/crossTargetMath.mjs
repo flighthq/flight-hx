@@ -1,6 +1,6 @@
 // Installed consumers must cross both production backends: the complete Flight ESM extern surface
 // on web and the manifest-recorded flight-cpp subset/extensions on hxcpp. Every manifest function
-// is retained in generated target code so both backends compile and link it. A representative
+// and value is retained in generated target code so both backends compile and link it. A representative
 // host-free slice plus host creation and a Scene2D GL framebuffer have runtime oracles here.
 import { spawnSync } from 'node:child_process';
 import { existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync } from 'node:fs';
@@ -19,6 +19,7 @@ const optionalScalarOverrideProvenance = 'flight-hx/header-confirmed-optional-sc
 const arrayFloatAdapterProvenance = 'flight-hx/array-float-copy-adapter/1';
 const nullableStringAdapterProvenance = 'flight-hx/nullable-string-copy-adapter/1';
 const referenceCarrierProvenance = 'flight-hx/reference-carrier/1';
+const scalarValueProvenance = 'flight-hx/scalar-value-getter/1';
 const nativePlanning = JSON.parse(readFileSync(path.join(repoRoot, 'generated', 'js', 'native-planning.json'), 'utf8'));
 const plannedFunctions = new Map(
   nativePlanning.declarations
@@ -46,6 +47,7 @@ const expectedCorrections = [
   'flight-hx-hxcpp-array-float-copy-adapter/1',
   'flight-hx-hxcpp-nullable-string-copy-adapter/1',
   'flight-hx-hxcpp-reference-carrier/1',
+  'flight-hx-hxcpp-scalar-value-getter/1',
   'flight-hx-hxcpp-nullable-reference-wrapper/1',
   'flight-hx-hxcpp-reference-array-box/1',
   'flight-hx-hxcpp-owned-string-copy/1',
@@ -73,18 +75,19 @@ const temporaryRoot = mkdtempSync(path.join(tmpdir(), 'flight-hx-cross-target-ma
 try {
   const flightCpp = resolveDependency(repoRoot, 'flight-cpp');
   validateHaxelibMetadata();
-  const { bindings, nativeExtension, nativeHost } = validateNativeManifest(flightCpp);
+  const { bindings, nativeExtension, nativeHost, values } = validateNativeManifest(flightCpp);
+  const symbols = [...bindings, ...values];
   const consumer = createHaxelibConsumer();
-  runNative(flightCpp, bindings, consumer);
+  runNative(flightCpp, symbols, consumer);
   rejectUnsupportedNative(flightCpp, consumer);
   runNativeHost(flightCpp, nativeHost, consumer);
   runNativeCamera2d(flightCpp, nativeExtension, consumer);
   runFallback(consumer);
-  await runWeb(bindings, consumer);
+  await runWeb(symbols, consumer);
   await buildWebCamera2d(nativeExtension, consumer);
   process.stdout.write(
     `cross-target gate: an isolated -lib flight consumer compiled and linked ${String(bindings.length)} ` +
-      `manifest-recorded functions on Flight ESM and flight-cpp, and ran its representative host-free ` +
+      `manifest-recorded functions and ${String(values.length)} values on Flight ESM and flight-cpp, and ran its representative host-free ` +
       `behavioral slice on both; the optional legacy-pinned pure-Haxe backend passed its focused facade ` +
       `proof; the packaged native extensions also created and ` +
       `presented a real flight-cpp SDL3/GL surface, and the Haxe-authored Camera2D scene passed ` +
@@ -202,6 +205,7 @@ function validateNativeManifest(flightCpp) {
   }
 
   const bindings = [];
+  const values = [];
   for (const module of manifest.modules) {
     const holder = module.module.replace(/^flight\./u, '');
     const expectedFunctions = expectedFunctionsByModule.get(module.module) ?? [];
@@ -228,7 +232,7 @@ function validateNativeManifest(flightCpp) {
         plannedFunctions.get(`${module.module}.${name}`)?.transport === 'direct',
     );
     const directBridge =
-      directBindings.length === 0
+      directBindings.length === 0 && (module.values ?? []).length === 0
         ? ''
         : [
             path.join(repoRoot, 'src-cpp', 'include', 'flight_hx', `${holder.toLowerCase()}.hpp`),
@@ -241,11 +245,15 @@ function validateNativeManifest(flightCpp) {
     // retaining the exact public signature at each call site. Normalize that
     // modifier only for structural validation; the shared surface collector
     // intentionally ignores unproven extern-inline attempts elsewhere.
-    const facadeMembers = byName(parseModuleMembers(facade.replace(/^extern inline /gmu, 'inline ')).functions);
+    const parsedFacade = parseModuleMembers(facade.replace(/^extern inline /gmu, 'inline '));
+    const facadeMembers = byName(parsedFacade.functions);
+    const facadeValues = byName(parsedFacade.values);
     const nativeMembers = byName(
       parseModuleMembers(nativeExtern.replace(/^  @:/gmu, '@:').replace(/^  static /gmu, '')).functions,
     );
-    const jsMembers = byName(parseModuleMembers(jsExtern, '  static ').functions);
+    const parsedJs = parseModuleMembers(jsExtern, '  static ');
+    const jsMembers = byName(parsedJs.functions);
+    const jsValues = byName(parsedJs.values);
     for (const binding of module.functions) {
       const publicName = `${module.module}.${binding.name}`;
       let plan = plannedFunctions.get(publicName);
@@ -340,11 +348,44 @@ function validateNativeManifest(flightCpp) {
       }
       bindings.push({ ...binding, adapter, module: module.module, transport: plan.transport });
     }
+    for (const binding of module.values ?? []) {
+      const publicName = `${module.module}.${binding.name}`;
+      if (binding.provenance !== scalarValueProvenance) {
+        fail(`${publicName} has unknown native value provenance ${String(binding.provenance)}`);
+      }
+      const header = path.join(flightCpp.directory, 'generated', 'include', binding.header);
+      if (!existsSync(header)) fail(`${binding.name} value header is missing from pinned flight-cpp: ${binding.header}`);
+      const jsValue = jsValues.get(binding.name);
+      const facadeValue = facadeValues.get(binding.name);
+      const getterName = `get_${binding.name}`;
+      const nativeGetter = nativeMembers.get(getterName);
+      if (!jsValue) fail(`${publicName} is absent from the current JS value surface`);
+      if (!facadeValue) fail(`${publicName} is absent from the native public facade`);
+      if (!nativeGetter) fail(`${publicName} has no hxcpp value getter`);
+      if (facadeValue.valueType !== jsValue.valueType || nativeGetter.returnType !== jsValue.valueType) {
+        fail(
+          `${publicName} value type differs: JS=${jsValue.valueType}, facade=${facadeValue.valueType}, ` +
+            `native=${nativeGetter.returnType}`,
+        );
+      }
+      const nativeSpelling = binding.native.slice(binding.native.lastIndexOf('::') + 2);
+      const adapter = binding.native
+        .replace(/::([^:]+)$/u, `::get_${nativeSpelling}`)
+        .replace(/^flight::/u, 'flight_hx::');
+      if (nativeGetter.sourceName !== adapter) {
+        fail(`${publicName} getter binds ${nativeGetter.sourceName}, expected ${adapter}`);
+      }
+      if (!directBridge.includes(binding.native) || !directBridge.includes(`get_${nativeSpelling}()`)) {
+        fail(`${publicName} scalar value bridge does not read ${binding.native}`);
+      }
+      values.push({ ...binding, adapter, module: module.module, transport: 'scalar-value-getter' });
+    }
   }
   return {
     bindings,
     nativeExtension: manifest.extensions[0],
     nativeHost: manifest.hosts[0],
+    values,
   };
 }
 

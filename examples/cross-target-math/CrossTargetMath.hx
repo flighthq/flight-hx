@@ -54,6 +54,13 @@ class CrossTargetMath {
     assertTrue('inferred audio MIME absent', inferAudioMimeType('track.mid') == null);
 
     assertClose('clamp', clamp(4.0, -1.0, 2.0), 2.0);
+    assertClose('numeric value bridge', flight.Math.TAU, 6.283185307179586);
+    assertString(
+      'package string value bridge',
+      flight.Bitmap.BITMAP_FINGERPRINT_COMPUTATION_ID,
+      'grid-average-rgb-v1'
+    );
+    assertString('shared type string value bridge', flight.Types.AnimationInterpolationLinear, 'Linear');
     assertTrue('inRange', inRange(0.5, 0.0, 1.0));
     assertClose('inverseLerp', inverseLerp(10.0, 20.0, 12.5), 0.25);
     assertClose('lerp', lerp(10.0, 20.0, 0.25), 12.5);

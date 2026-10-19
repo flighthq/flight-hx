@@ -59,4 +59,8 @@ flight::Ref<flight::types::PackResult> pack_rectangles(::Array<::Dynamic> rects,
   return result;
 }
 
+double get_bin_pack_default_max_extent() {
+  return flight::binpack::bin_pack_default_max_extent;
+}
+
 } // namespace flight_hx::binpack

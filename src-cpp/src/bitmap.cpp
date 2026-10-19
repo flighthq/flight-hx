@@ -298,4 +298,28 @@ flight_hx::Ref<flight::types::Bitmap> capture_bitmap_from_image_resource(flight:
   return to_haxe_reference_array<flight::types::Bitmap>(result);
 }
 
+::String get_bitmap_fingerprint_computation_id() {
+  const std::string result_utf8 = flight::bitmap::bitmap_fingerprint_computation_id.to_utf8();
+  if (result_utf8.size() > static_cast<std::size_t>(std::numeric_limits<int>::max())) {
+    throw std::length_error("Flight String exceeds the hxcpp String length limit");
+  }
+  return ::String::create(result_utf8.data(), static_cast<int>(result_utf8.size()));
+}
+
+double get_bitmap_noise_channel_a() {
+  return flight::bitmap::bitmap_noise_channel_a;
+}
+
+double get_bitmap_noise_channel_b() {
+  return flight::bitmap::bitmap_noise_channel_b;
+}
+
+double get_bitmap_noise_channel_g() {
+  return flight::bitmap::bitmap_noise_channel_g;
+}
+
+double get_bitmap_noise_channel_r() {
+  return flight::bitmap::bitmap_noise_channel_r;
+}
+
 } // namespace flight_hx::bitmap

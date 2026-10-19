@@ -101,35 +101,25 @@ extern inline function createTintAdjustment(rgba:Float):flight.TintAdjustment {
   return flight._cpp._fn.Adjustments.createTintAdjustment(rgba);
 }
 
-var COLOR_ADJUSTMENT_AFFINE(get, set):Float;
+var COLOR_ADJUSTMENT_AFFINE(get, never):Float;
 
-private extern inline function get_COLOR_ADJUSTMENT_AFFINE():Float return flight._cpp._attempt.Attempt_Adjustments_COLOR_ADJUSTMENT_AFFINE.COLOR_ADJUSTMENT_AFFINE;
+private inline function get_COLOR_ADJUSTMENT_AFFINE():Float return flight._cpp._fn.Adjustments.get_COLOR_ADJUSTMENT_AFFINE();
 
-private extern inline function set_COLOR_ADJUSTMENT_AFFINE(value:Float):Float return flight._cpp._attempt.Attempt_Adjustments_COLOR_ADJUSTMENT_AFFINE.COLOR_ADJUSTMENT_AFFINE = value;
+var COLOR_ADJUSTMENT_CHANNEL_MIXING(get, never):Float;
 
-var COLOR_ADJUSTMENT_CHANNEL_MIXING(get, set):Float;
+private inline function get_COLOR_ADJUSTMENT_CHANNEL_MIXING():Float return flight._cpp._fn.Adjustments.get_COLOR_ADJUSTMENT_CHANNEL_MIXING();
 
-private extern inline function get_COLOR_ADJUSTMENT_CHANNEL_MIXING():Float return flight._cpp._attempt.Attempt_Adjustments_COLOR_ADJUSTMENT_CHANNEL_MIXING.COLOR_ADJUSTMENT_CHANNEL_MIXING;
+var COLOR_ADJUSTMENT_NONE(get, never):Float;
 
-private extern inline function set_COLOR_ADJUSTMENT_CHANNEL_MIXING(value:Float):Float return flight._cpp._attempt.Attempt_Adjustments_COLOR_ADJUSTMENT_CHANNEL_MIXING.COLOR_ADJUSTMENT_CHANNEL_MIXING = value;
+private inline function get_COLOR_ADJUSTMENT_NONE():Float return flight._cpp._fn.Adjustments.get_COLOR_ADJUSTMENT_NONE();
 
-var COLOR_ADJUSTMENT_NONE(get, set):Float;
+var COLOR_LUT_DEFAULT_SIZE(get, never):Float;
 
-private extern inline function get_COLOR_ADJUSTMENT_NONE():Float return flight._cpp._attempt.Attempt_Adjustments_COLOR_ADJUSTMENT_NONE.COLOR_ADJUSTMENT_NONE;
+private inline function get_COLOR_LUT_DEFAULT_SIZE():Float return flight._cpp._fn.Adjustments.get_COLOR_LUT_DEFAULT_SIZE();
 
-private extern inline function set_COLOR_ADJUSTMENT_NONE(value:Float):Float return flight._cpp._attempt.Attempt_Adjustments_COLOR_ADJUSTMENT_NONE.COLOR_ADJUSTMENT_NONE = value;
+var COLOR_MATRIX_LENGTH(get, never):Float;
 
-var COLOR_LUT_DEFAULT_SIZE(get, set):Float;
-
-private extern inline function get_COLOR_LUT_DEFAULT_SIZE():Float return flight._cpp._attempt.Attempt_Adjustments_COLOR_LUT_DEFAULT_SIZE.COLOR_LUT_DEFAULT_SIZE;
-
-private extern inline function set_COLOR_LUT_DEFAULT_SIZE(value:Float):Float return flight._cpp._attempt.Attempt_Adjustments_COLOR_LUT_DEFAULT_SIZE.COLOR_LUT_DEFAULT_SIZE = value;
-
-var COLOR_MATRIX_LENGTH(get, set):Float;
-
-private extern inline function get_COLOR_MATRIX_LENGTH():Float return flight._cpp._attempt.Attempt_Adjustments_COLOR_MATRIX_LENGTH.COLOR_MATRIX_LENGTH;
-
-private extern inline function set_COLOR_MATRIX_LENGTH(value:Float):Float return flight._cpp._attempt.Attempt_Adjustments_COLOR_MATRIX_LENGTH.COLOR_MATRIX_LENGTH = value;
+private inline function get_COLOR_MATRIX_LENGTH():Float return flight._cpp._fn.Adjustments.get_COLOR_MATRIX_LENGTH();
 
 extern inline function bakeColorLut(transforms:Array<flight.ColorTransformFunction>, ?size:Float):flight.ColorLut {
   return flight._cpp._attempt.Attempt_Adjustments_bakeColorLut.bakeColorLut(transforms, size);

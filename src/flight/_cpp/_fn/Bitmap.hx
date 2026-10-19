@@ -171,5 +171,20 @@ extern class Bitmap {
 
   @:native("flight_hx::bitmap::split_bitmap_channels")
   static function splitBitmapChannels(source:flight.Bitmap):Array<flight.Bitmap>;
+
+  @:native("flight_hx::bitmap::get_bitmap_fingerprint_computation_id")
+  static function get_BITMAP_FINGERPRINT_COMPUTATION_ID():String;
+
+  @:native("flight_hx::bitmap::get_bitmap_noise_channel_a")
+  static function get_BITMAP_NOISE_CHANNEL_A():Float;
+
+  @:native("flight_hx::bitmap::get_bitmap_noise_channel_b")
+  static function get_BITMAP_NOISE_CHANNEL_B():Float;
+
+  @:native("flight_hx::bitmap::get_bitmap_noise_channel_g")
+  static function get_BITMAP_NOISE_CHANNEL_G():Float;
+
+  @:native("flight_hx::bitmap::get_bitmap_noise_channel_r")
+  static function get_BITMAP_NOISE_CHANNEL_R():Float;
 }
 #end

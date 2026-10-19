@@ -13,8 +13,8 @@
       "reason": "Non-scalar types and signatures require an explicit identity, lifetime, nullable/union, callback, and structural-owner mapping; generated C++ header presence alone is not a safe Haxe binding contract."
     },
     {
-      "code": "native-runtime-values",
-      "reason": "The current compile-proven native partition binds functions and Scene2D handles but no mutable/default runtime value exports."
+      "code": "native-complex-runtime-values",
+      "reason": "Primitive immutable Float and String exports use owned getter bridges. Array, anonymous-structure, capability, and other complex values remain materialized attempts until their carriers are implemented."
     },
     {
       "code": "split-compiler-provenance",
@@ -110,6 +110,8 @@
     ],
     "refusals": [],
     "requiredScalarFunctions": [
+      "flight.Bitmapfont.packBitmapFontKerningKey",
+      "flight.Collision.packContactFeatureId",
       "flight.Effects.computeAcesToneMap",
       "flight.Effects.computeBoxBlurPassRadius",
       "flight.Effects.computeBoxBlurRadius",
@@ -126,8 +128,6 @@
       "flight.Effects.getBlurResidualSigma",
       "flight.Effects.getGaussianKernelSize",
       "flight.Effects.getLinearSampledGaussianTapCount",
-      "flight.Bitmapfont.packBitmapFontKerningKey",
-      "flight.Collision.packContactFeatureId",
       "flight.FontFormats.getWoff2BboxBitmapByteLength",
       "flight.FontFormats.isWoff2PointOnCurve",
       "flight.FontFormats.rankOpenTypeUnicodeEncoding",
@@ -165,6 +165,7 @@
       "flight.Textshaper.disposeTextShaperSignals"
     ],
     "referenceCarriers": [
+      "flight.Accessibility.destroyAccessibility",
       "flight.Adjustments.createColorLutCache",
       "flight.Adjustments.createTintAdjustment",
       "flight.Audio.canPlayAudioType",
@@ -178,6 +179,9 @@
       "flight.Audio.hasAudioDecodeSlot",
       "flight.Audio.hasAudioResourceBuffer",
       "flight.Audio.isAudioResourceEmpty",
+      "flight.Binpack.explainUnpackedRectangles",
+      "flight.Binpack.getPackResultOccupancy",
+      "flight.Binpack.packRectangles",
       "flight.Bitmap.applyBitmapLevels",
       "flight.Bitmap.cloneBitmap",
       "flight.Bitmap.copyBitmapAlpha",
@@ -218,6 +222,32 @@
       "flight.Bitmap.parseBitmapFingerprint",
       "flight.Bitmap.captureBitmapFromImageResource",
       "flight.Bitmap.splitBitmapChannels",
+      "flight.CameraControls.addCameraShakeTrauma",
+      "flight.CameraControls.cloneFlyCameraController",
+      "flight.CameraControls.cloneOrbitCameraController",
+      "flight.CameraControls.copyFlyCameraController",
+      "flight.CameraControls.copyOrbitCameraController",
+      "flight.CameraControls.createCameraShake",
+      "flight.CameraControls.createCameraShakeOffset",
+      "flight.CameraControls.createFlyCameraController",
+      "flight.CameraControls.createOrbitCameraController",
+      "flight.CameraControls.dollyOrbitCameraController",
+      "flight.CameraControls.lookFlyCameraController",
+      "flight.CameraControls.moveFlyCameraController",
+      "flight.CameraControls.panOrbitCameraController",
+      "flight.CameraControls.panOrbitCameraControllerInViewPlane",
+      "flight.CameraControls.resetCameraShake",
+      "flight.CameraControls.resetFlyCameraController",
+      "flight.CameraControls.resetOrbitCameraController",
+      "flight.CameraControls.rotateOrbitCameraController",
+      "flight.CameraControls.snapFlyCameraController",
+      "flight.CameraControls.snapOrbitCameraController",
+      "flight.CameraControls.updateCameraShake",
+      "flight.CameraControls.getPerspectiveProjectionFrameDistanceToSphere",
+      "flight.CameraControls.setOrthographicProjectionFrameToSphere",
+      "flight.CameraControls.updateCamera2DFollow",
+      "flight.CameraControls.updateFlyCameraController",
+      "flight.CameraControls.updateOrbitCameraController",
       "flight.Clipboard.createClipboardWatch",
       "flight.Clipboard.detachClipboardWatch",
       "flight.Clipboard.disposeClipboardWatch",
@@ -252,6 +282,16 @@
       "flight.Entity.hasEntityBinding",
       "flight.Entity.hasEntityRuntime",
       "flight.Entity.setEntityUid",
+      "flight.Geolocation.createGeolocationPosition",
+      "flight.Geolocation.clearGeolocationWatch",
+      "flight.Geolocation.isGeolocationAvailable",
+      "flight.Haptics.cancelDeviceVibration",
+      "flight.Haptics.getHapticsCapabilities",
+      "flight.Haptics.isHapticsSupported",
+      "flight.Haptics.prepareHaptics",
+      "flight.Haptics.triggerHapticSelection",
+      "flight.Haptics.vibrateDevice",
+      "flight.Importdiagnostics.formatImportDiagnostic",
       "flight.Input.createInputManager",
       "flight.Input.createInputSignals",
       "flight.Input.createInputState",
@@ -265,6 +305,21 @@
       "flight.Input.wasInputKeyPressed",
       "flight.Input.wasInputKeyReleased",
       "flight.Input.createInputKeyRepeatTimer",
+      "flight.Keyboard.detachSoftKeyboard",
+      "flight.Keyboard.disposeSoftKeyboard",
+      "flight.Keyboard.getSoftKeyboardHeight",
+      "flight.Keyboard.getSoftKeyboardInfo",
+      "flight.Keyboard.isSoftKeyboardVisible",
+      "flight.Mediasession.attachMediaSessionAction",
+      "flight.Mediasession.destroyMediaSession",
+      "flight.Mediasession.detachMediaSessionAction",
+      "flight.Mediasession.disposeMediaSessionActionSignal",
+      "flight.Motionpath.getMotionPathHeading",
+      "flight.Motionpath.getMotionPathProgress",
+      "flight.Motionpath.isMotionPathAtEnd",
+      "flight.Motionpath.setMotionPathDistance",
+      "flight.Motionpath.setMotionPathProgress",
+      "flight.Motionpath.updateMotionPath",
       "flight.Path.acquirePathMesh",
       "flight.Path.acquirePathMeshTyped",
       "flight.Path.appendPathArc",
@@ -301,6 +356,14 @@
       "flight.PathFormats.appendSvgPathData",
       "flight.PathFormats.formatSvgPathData",
       "flight.PathFormats.parseSvgPathData",
+      "flight.Platform.createPlatformInfo",
+      "flight.Platform.getPlatformInfo",
+      "flight.Platform.isPlatformDesktop",
+      "flight.Platform.isPlatformMobile",
+      "flight.Platform.isPlatformNative",
+      "flight.Platform.isPlatformTouch",
+      "flight.Platform.isPlatformVersionAtLeast",
+      "flight.Platform.isPlatformWeb",
       "flight.Power.createPower",
       "flight.Power.detachPower",
       "flight.Power.disposePower",
@@ -323,6 +386,12 @@
       "flight.Protocol.removeProtocolSchemeAsDefault",
       "flight.Protocol.setProtocolSchemeAsDefault",
       "flight.Protocol.unregisterProtocolScheme",
+      "flight.Requirement.diffRequirementSets",
+      "flight.Requirement.mergeRequirementSets",
+      "flight.RequirementCatalog.createRequirementCatalog",
+      "flight.RequirementCatalog.getRequirementCatalogEntries",
+      "flight.RequirementCatalog.registerRequirementCatalogEntry",
+      "flight.RequirementCatalog.unregisterRequirementCatalogEntry",
       "flight.Screen.createScreenInfo",
       "flight.Screen.createScreenMode",
       "flight.Screen.createScreenPermissionChange",
@@ -364,57 +433,8 @@
       "flight.Sensors.hasOrientationSensor",
       "flight.Sensors.hasProximitySensor",
       "flight.Sensors.isSensorsSupported",
-      "flight.CameraControls.addCameraShakeTrauma",
-      "flight.CameraControls.cloneFlyCameraController",
-      "flight.CameraControls.cloneOrbitCameraController",
-      "flight.CameraControls.copyFlyCameraController",
-      "flight.CameraControls.copyOrbitCameraController",
-      "flight.CameraControls.createCameraShake",
-      "flight.CameraControls.createCameraShakeOffset",
-      "flight.CameraControls.createFlyCameraController",
-      "flight.CameraControls.createOrbitCameraController",
-      "flight.CameraControls.dollyOrbitCameraController",
-      "flight.CameraControls.lookFlyCameraController",
-      "flight.CameraControls.moveFlyCameraController",
-      "flight.CameraControls.panOrbitCameraController",
-      "flight.CameraControls.panOrbitCameraControllerInViewPlane",
-      "flight.CameraControls.resetCameraShake",
-      "flight.CameraControls.resetFlyCameraController",
-      "flight.CameraControls.resetOrbitCameraController",
-      "flight.CameraControls.rotateOrbitCameraController",
-      "flight.CameraControls.snapFlyCameraController",
-      "flight.CameraControls.snapOrbitCameraController",
-      "flight.CameraControls.updateCameraShake",
-      "flight.CameraControls.getPerspectiveProjectionFrameDistanceToSphere",
-      "flight.CameraControls.setOrthographicProjectionFrameToSphere",
-      "flight.CameraControls.updateCamera2DFollow",
-      "flight.CameraControls.updateFlyCameraController",
-      "flight.CameraControls.updateOrbitCameraController",
-      "flight.Geolocation.createGeolocationPosition",
-      "flight.Geolocation.clearGeolocationWatch",
-      "flight.Geolocation.isGeolocationAvailable",
-      "flight.Platform.createPlatformInfo",
-      "flight.Platform.getPlatformInfo",
-      "flight.Platform.isPlatformDesktop",
-      "flight.Platform.isPlatformMobile",
-      "flight.Platform.isPlatformNative",
-      "flight.Platform.isPlatformTouch",
-      "flight.Platform.isPlatformVersionAtLeast",
-      "flight.Platform.isPlatformWeb",
-      "flight.Velocity.beginVelocityFrame",
-      "flight.Velocity.createVelocityField",
-      "flight.Velocity.addVelocity",
-      "flight.Velocity.clampVelocity",
-      "flight.Velocity.copyVelocity",
-      "flight.Velocity.dampVelocity",
-      "flight.Velocity.getVelocitySampleAt",
-      "flight.Velocity.isVelocityZero",
-      "flight.Velocity.lengthOfVelocity",
-      "flight.Velocity.lerpVelocity",
-      "flight.Velocity.normalizeVelocity",
-      "flight.Velocity.scaleVelocity",
-      "flight.Velocity.subtractVelocity",
-      "flight.Velocity.zeroVelocity",
+      "flight.Shell.isShellUrlAllowed",
+      "flight.Shell.shellBeep",
       "flight.Spring.addSpringImpulse",
       "flight.Spring.addSpringImpulse2D",
       "flight.Spring.addSpringImpulse3D",
@@ -433,45 +453,6 @@
       "flight.Spring.updateSpring2D",
       "flight.Spring.updateSpring3D",
       "flight.Spring.updateSpringAngle",
-      "flight.Xml.parseXmlDocument",
-      "flight.Xml.getXmlElementChildByName",
-      "flight.Xml.getXmlElementAttribute",
-      "flight.Xml.getXmlElementAttributeNumber",
-      "flight.Xml.getXmlElementChildrenByName",
-      "flight.Accessibility.destroyAccessibility",
-      "flight.Binpack.explainUnpackedRectangles",
-      "flight.Binpack.getPackResultOccupancy",
-      "flight.Binpack.packRectangles",
-      "flight.Haptics.cancelDeviceVibration",
-      "flight.Haptics.getHapticsCapabilities",
-      "flight.Haptics.isHapticsSupported",
-      "flight.Haptics.prepareHaptics",
-      "flight.Haptics.triggerHapticSelection",
-      "flight.Haptics.vibrateDevice",
-      "flight.Importdiagnostics.formatImportDiagnostic",
-      "flight.Keyboard.detachSoftKeyboard",
-      "flight.Keyboard.disposeSoftKeyboard",
-      "flight.Keyboard.getSoftKeyboardHeight",
-      "flight.Keyboard.getSoftKeyboardInfo",
-      "flight.Keyboard.isSoftKeyboardVisible",
-      "flight.Mediasession.attachMediaSessionAction",
-      "flight.Mediasession.destroyMediaSession",
-      "flight.Mediasession.detachMediaSessionAction",
-      "flight.Mediasession.disposeMediaSessionActionSignal",
-      "flight.Motionpath.getMotionPathHeading",
-      "flight.Motionpath.getMotionPathProgress",
-      "flight.Motionpath.isMotionPathAtEnd",
-      "flight.Motionpath.setMotionPathDistance",
-      "flight.Motionpath.setMotionPathProgress",
-      "flight.Motionpath.updateMotionPath",
-      "flight.Requirement.diffRequirementSets",
-      "flight.Requirement.mergeRequirementSets",
-      "flight.RequirementCatalog.createRequirementCatalog",
-      "flight.RequirementCatalog.getRequirementCatalogEntries",
-      "flight.RequirementCatalog.registerRequirementCatalogEntry",
-      "flight.RequirementCatalog.unregisterRequirementCatalogEntry",
-      "flight.Shell.isShellUrlAllowed",
-      "flight.Shell.shellBeep",
       "flight.Timeline.clearTimelineFrameScripts",
       "flight.Timeline.disposeTimelineSignals",
       "flight.Timeline.enableTimelineSignals",
@@ -482,7 +463,326 @@
       "flight.Timeline.playTimeline",
       "flight.Timeline.prevFrameTimeline",
       "flight.Timeline.stopTimeline",
-      "flight.Timeline.updateTimeline"
+      "flight.Timeline.updateTimeline",
+      "flight.Velocity.beginVelocityFrame",
+      "flight.Velocity.createVelocityField",
+      "flight.Velocity.addVelocity",
+      "flight.Velocity.clampVelocity",
+      "flight.Velocity.copyVelocity",
+      "flight.Velocity.dampVelocity",
+      "flight.Velocity.getVelocitySampleAt",
+      "flight.Velocity.isVelocityZero",
+      "flight.Velocity.lengthOfVelocity",
+      "flight.Velocity.lerpVelocity",
+      "flight.Velocity.normalizeVelocity",
+      "flight.Velocity.scaleVelocity",
+      "flight.Velocity.subtractVelocity",
+      "flight.Velocity.zeroVelocity",
+      "flight.Xml.parseXmlDocument",
+      "flight.Xml.getXmlElementChildByName",
+      "flight.Xml.getXmlElementAttribute",
+      "flight.Xml.getXmlElementAttributeNumber",
+      "flight.Xml.getXmlElementChildrenByName"
+    ],
+    "scalarValues": [
+      "flight.Adjustments.COLOR_ADJUSTMENT_AFFINE",
+      "flight.Adjustments.COLOR_ADJUSTMENT_CHANNEL_MIXING",
+      "flight.Adjustments.COLOR_ADJUSTMENT_NONE",
+      "flight.Adjustments.COLOR_LUT_DEFAULT_SIZE",
+      "flight.Adjustments.COLOR_MATRIX_LENGTH",
+      "flight.Binpack.BIN_PACK_DEFAULT_MAX_EXTENT",
+      "flight.Bitmap.BITMAP_FINGERPRINT_COMPUTATION_ID",
+      "flight.Bitmap.BITMAP_NOISE_CHANNEL_A",
+      "flight.Bitmap.BITMAP_NOISE_CHANNEL_B",
+      "flight.Bitmap.BITMAP_NOISE_CHANNEL_G",
+      "flight.Bitmap.BITMAP_NOISE_CHANNEL_R",
+      "flight.Math.CIRCLE_KAPPA",
+      "flight.Math.DEG_TO_RAD",
+      "flight.Math.EPSILON",
+      "flight.Math.HALF_PI",
+      "flight.Math.RAD_TO_DEG",
+      "flight.Math.TAU",
+      "flight.Path.PathMorphIssueContourClosednessMismatch",
+      "flight.Path.PathMorphIssueContourCountMismatch",
+      "flight.Path.PathMorphIssueContourOrientationMismatch",
+      "flight.Path.PathMorphIssueNone",
+      "flight.Path.PathMorphIssueWindingMismatch",
+      "flight.Path.StrokePathTessellationIssueInvalidPath",
+      "flight.Path.StrokePathTessellationIssueInvalidStyle",
+      "flight.Path.StrokePathTessellationIssueNone",
+      "flight.Path.StrokePathTessellationIssueReversingJoin",
+      "flight.Path.StrokePathTessellationIssueSelfIntersectingCenterline",
+      "flight.Path.StrokePathTessellationIssueSelfIntersectingOutline",
+      "flight.Types.AddNodeChildCommandKind",
+      "flight.Types.ALL_LIGHT_LAYERS",
+      "flight.Types.AmbientLightKind",
+      "flight.Types.AnchorLayoutKind",
+      "flight.Types.AnimatedNormalModifierKind",
+      "flight.Types.AnimationInterpolationCubic",
+      "flight.Types.AnimationInterpolationLinear",
+      "flight.Types.AnimationInterpolationStep",
+      "flight.Types.AnimationLoopModePingPong",
+      "flight.Types.AnimationLoopModeRepeat",
+      "flight.Types.AnisotropyPbrExtensionKind",
+      "flight.Types.AreaLightKind",
+      "flight.Types.AttractorForceKind",
+      "flight.Types.BillboardKind",
+      "flight.Types.BitmapFontFormatKindBmFontBinary",
+      "flight.Types.BitmapFontFormatKindBmFontJson",
+      "flight.Types.BitmapFontFormatKindBmFontText",
+      "flight.Types.BitmapFontFormatKindBmFontXml",
+      "flight.Types.BitmapTextKind",
+      "flight.Types.BitmapTextureSourceKind",
+      "flight.Types.BlinnPhongMaterialKind",
+      "flight.Types.BoundingBoxAttachment2DKind",
+      "flight.Types.CandelaLightUnit",
+      "flight.Types.CircleColliderKind",
+      "flight.Types.ClearcoatPbrExtensionKind",
+      "flight.Types.ClipboardFormatBookmark",
+      "flight.Types.ClipboardFormatHtml",
+      "flight.Types.ClipboardFormatImage",
+      "flight.Types.ClipboardFormatRtf",
+      "flight.Types.ClipboardFormatText",
+      "flight.Types.ClipboardFormatUriList",
+      "flight.Types.ClippingAttachment2DKind",
+      "flight.Types.CompositeCommandKind",
+      "flight.Types.CompressedImageTextureSourceKind",
+      "flight.Types.CubeFaceNegativeX",
+      "flight.Types.CubeFaceNegativeY",
+      "flight.Types.CubeFaceNegativeZ",
+      "flight.Types.CubeFacePositiveX",
+      "flight.Types.CubeFacePositiveY",
+      "flight.Types.CubeFacePositiveZ",
+      "flight.Types.CurlNoiseForceKind",
+      "flight.Types.CustomShaderMaterialKind",
+      "flight.Types.DepthMaterialKind",
+      "flight.Types.DeviceFormFactorCar",
+      "flight.Types.DeviceFormFactorDesktop",
+      "flight.Types.DeviceFormFactorPhone",
+      "flight.Types.DeviceFormFactorTablet",
+      "flight.Types.DeviceFormFactorTV",
+      "flight.Types.DeviceFormFactorUnknown",
+      "flight.Types.DeviceFormFactorWatch",
+      "flight.Types.DIRECTIONAL_SHADOW_MAP_SIZE",
+      "flight.Types.DirectionalLightKind",
+      "flight.Types.DisplayObjectKind",
+      "flight.Types.DissolveModifierKind",
+      "flight.Types.DragForceKind",
+      "flight.Types.EmissiveMaterialKind",
+      "flight.Types.EmissiveModifierKind",
+      "flight.Types.EnvironmentKind",
+      "flight.Types.EnvReflectModifierKind",
+      "flight.Types.ExtendedPbrMaterialKind",
+      "flight.Types.ExternalTextureSourceKind",
+      "flight.Types.FlexLayoutKind",
+      "flight.Types.FogModifierKind",
+      "flight.Types.FontVariationItalic",
+      "flight.Types.FontVariationOpticalSize",
+      "flight.Types.FontVariationSlant",
+      "flight.Types.FontVariationWeight",
+      "flight.Types.FontVariationWidth",
+      "flight.Types.GridLayoutKind",
+      "flight.Types.GroupKind",
+      "flight.Types.HemisphereLightKind",
+      "flight.Types.HtmlViewKind",
+      "flight.Types.ImageTextureSourceKind",
+      "flight.Types.InstancedMeshKind",
+      "flight.Types.IridescencePbrExtensionKind",
+      "flight.Types.LambertMaterialKind",
+      "flight.Types.LibgdxParticleFormatKind",
+      "flight.Types.LIGHT_PROBE_SH_FLOATS",
+      "flight.Types.LodMeshKind",
+      "flight.Types.LumenLightUnit",
+      "flight.Types.LuxLightUnit",
+      "flight.Types.MatcapMaterialKind",
+      "flight.Types.MAX_COLLISION_CONTACT_POINTS_3D",
+      "flight.Types.MAX_DIRECTIONAL_SHADOW_PCF_RADIUS",
+      "flight.Types.MAX_FORWARD_LIGHTS",
+      "flight.Types.MD5_MATERIAL_FEATURE",
+      "flight.Types.MD5_SKELETON_FEATURE",
+      "flight.Types.MeshAttachment2DKind",
+      "flight.Types.MeshDeformerMorph",
+      "flight.Types.MeshDeformerNone",
+      "flight.Types.MeshDeformerSkeletal",
+      "flight.Types.MeshKind",
+      "flight.Types.MorphShapeKind",
+      "flight.Types.MovieClipKind",
+      "flight.Types.NativeTextKind",
+      "flight.Types.Node2DAnimationPathAlpha",
+      "flight.Types.Node2DAnimationPathPivot",
+      "flight.Types.Node2DAnimationPathPivotX",
+      "flight.Types.Node2DAnimationPathPivotY",
+      "flight.Types.Node2DAnimationPathPosition",
+      "flight.Types.Node2DAnimationPathRotation",
+      "flight.Types.Node2DAnimationPathScale",
+      "flight.Types.Node2DAnimationPathScaleX",
+      "flight.Types.Node2DAnimationPathScaleY",
+      "flight.Types.Node2DAnimationPathSkew",
+      "flight.Types.Node2DAnimationPathSkewX",
+      "flight.Types.Node2DAnimationPathSkewY",
+      "flight.Types.Node2DAnimationPathVisible",
+      "flight.Types.Node2DAnimationPathX",
+      "flight.Types.Node2DAnimationPathY",
+      "flight.Types.Node3DKind",
+      "flight.Types.NodeKind",
+      "flight.Types.NormalMaterialKind",
+      "flight.Types.OBJ_MATERIAL_BLINN_PHONG_FEATURE",
+      "flight.Types.OBJ_MATERIAL_STANDARD_PBR_FEATURE",
+      "flight.Types.ParticleDesignerFormatKind",
+      "flight.Types.ParticleEmitter2DKind",
+      "flight.Types.ParticleEmitter3DKind",
+      "flight.Types.PathAttachment2DKind",
+      "flight.Types.PhongMaterialKind",
+      "flight.Types.PixiParticleFormatKind",
+      "flight.Types.PlaneColliderKind",
+      "flight.Types.PointAttachment2DKind",
+      "flight.Types.PointGravityWellForceKind",
+      "flight.Types.PointLightKind",
+      "flight.Types.QuadBatchKind",
+      "flight.Types.RectangleColliderKind",
+      "flight.Types.RegionAttachment2DKind",
+      "flight.Types.RemoveNodeChildCommandKind",
+      "flight.Types.RenderCacheKind",
+      "flight.Types.RenderTargetTextureSourceKind",
+      "flight.Types.ReorderNodeChildCommandKind",
+      "flight.Types.RichTextKind",
+      "flight.Types.RimModifierKind",
+      "flight.Types.SamplerKind",
+      "flight.Types.Scale9ShapeKind",
+      "flight.Types.Scale9SpriteKind",
+      "flight.Types.SCENE_LIGHT_AMBIENT_RADIANCE_OFFSET",
+      "flight.Types.SCENE_LIGHT_BLOCK_FLOATS",
+      "flight.Types.SCENE_LIGHT_DIRECTIONAL_DIRECTION_OFFSET",
+      "flight.Types.SCENE_LIGHT_DIRECTIONAL_RADIANCE_OFFSET",
+      "flight.Types.SCENE_LIGHT_HEAD_FLOATS",
+      "flight.Types.SCENE_LIGHT_HEMISPHERE_OFFSET",
+      "flight.Types.SCENE_LIGHT_HEMISPHERE_STRIDE",
+      "flight.Types.SCENE_LIGHT_POINT_OFFSET",
+      "flight.Types.SCENE_LIGHT_POINT_STRIDE",
+      "flight.Types.SCENE_LIGHT_SPOT_OFFSET",
+      "flight.Types.SCENE_LIGHT_SPOT_STRIDE",
+      "flight.Types.Scene3DAnimationPathRotation",
+      "flight.Types.Scene3DAnimationPathScale",
+      "flight.Types.Scene3DAnimationPathTranslation",
+      "flight.Types.Scene3DAnimationPathWeights",
+      "flight.Types.SetNodePropertyCommandKind",
+      "flight.Types.ShadedMaterialKind",
+      "flight.Types.ShapeKind",
+      "flight.Types.SheenPbrExtensionKind",
+      "flight.Types.SoftKeyboardAttachAcquisitionFailedKind",
+      "flight.Types.SoftKeyboardAttachOkKind",
+      "flight.Types.SoftKeyboardResizeBodyKind",
+      "flight.Types.SoftKeyboardResizeNoneKind",
+      "flight.Types.SoftKeyboardSetterOkKind",
+      "flight.Types.SoftKeyboardSetterOperationFailedKind",
+      "flight.Types.SoftKeyboardSetterOperationUnavailableKind",
+      "flight.Types.SoftKeyboardStyleDarkKind",
+      "flight.Types.SoftKeyboardStyleDefaultKind",
+      "flight.Types.SoftKeyboardVisibilityOkKind",
+      "flight.Types.SoftKeyboardVisibilityOperationFailedKind",
+      "flight.Types.SpecularGlossinessPbrMaterialKind",
+      "flight.Types.SpecularPbrExtensionKind",
+      "flight.Types.SphereColliderKind",
+      "flight.Types.SpineParticleFormatKind",
+      "flight.Types.SpotLightKind",
+      "flight.Types.SpriteKind",
+      "flight.Types.SpritesheetFormatKindAseprite",
+      "flight.Types.SpritesheetFormatKindCocosPlist",
+      "flight.Types.SpritesheetFormatKindLibgdxAtlas",
+      "flight.Types.SpritesheetFormatKindStarling",
+      "flight.Types.SpritesheetFormatKindTexturePacker",
+      "flight.Types.StandardMaterialKind",
+      "flight.Types.StandardPbrMaterialKind",
+      "flight.Types.StarlingPexFormatKind",
+      "flight.Types.StatechartAtomicStateKind",
+      "flight.Types.StatechartNestedStateKind",
+      "flight.Types.TextDirectionLeftToRight",
+      "flight.Types.TextDirectionRightToLeft",
+      "flight.Types.TextDirectionTopToBottom",
+      "flight.Types.TextFeatureCapitals",
+      "flight.Types.TextFeatureContextualAlternates",
+      "flight.Types.TextFeatureDiscretionaryLigatures",
+      "flight.Types.TextFeatureFractions",
+      "flight.Types.TextFeatureKerning",
+      "flight.Types.TextFeatureLigatures",
+      "flight.Types.TextFeatureOldStyleFigures",
+      "flight.Types.TextFeatureSmallCaps",
+      "flight.Types.TextFeatureStylisticAlternates",
+      "flight.Types.TextFeatureSubscript",
+      "flight.Types.TextFeatureSuperscript",
+      "flight.Types.TextFeatureTabularFigures",
+      "flight.Types.TextLabelKind",
+      "flight.Types.TextureAtlasFormatKindAseprite",
+      "flight.Types.TextureAtlasFormatKindCocosPlist",
+      "flight.Types.TextureAtlasFormatKindLibgdxAtlas",
+      "flight.Types.TextureAtlasFormatKindStarling",
+      "flight.Types.TextureAtlasFormatKindTexturePacker",
+      "flight.Types.TextureKind",
+      "flight.Types.THREE_DS_CAMERA",
+      "flight.Types.THREE_DS_CAMERA_APERTURE_MM",
+      "flight.Types.THREE_DS_CAMERA_RANGES",
+      "flight.Types.THREE_DS_CHUNK_HEADER_BYTES",
+      "flight.Types.THREE_DS_COLOR_BYTE",
+      "flight.Types.THREE_DS_COLOR_FLOAT",
+      "flight.Types.THREE_DS_EDITOR",
+      "flight.Types.THREE_DS_FACE_MATERIAL",
+      "flight.Types.THREE_DS_FACES",
+      "flight.Types.THREE_DS_KEYFRAME",
+      "flight.Types.THREE_DS_KEYFRAME_NODE_HEADER",
+      "flight.Types.THREE_DS_KEYFRAME_OBJECT_NODE",
+      "flight.Types.THREE_DS_KEYFRAME_PIVOT",
+      "flight.Types.THREE_DS_LIGHT",
+      "flight.Types.THREE_DS_LIGHT_INNER_RANGE",
+      "flight.Types.THREE_DS_LIGHT_MULTIPLIER",
+      "flight.Types.THREE_DS_LIGHT_OFF",
+      "flight.Types.THREE_DS_LIGHT_OUTER_RANGE",
+      "flight.Types.THREE_DS_LIGHT_SPOT",
+      "flight.Types.THREE_DS_MAIN",
+      "flight.Types.THREE_DS_MATERIAL",
+      "flight.Types.THREE_DS_MATERIAL_AMBIENT",
+      "flight.Types.THREE_DS_MATERIAL_BUMP_MAP",
+      "flight.Types.THREE_DS_MATERIAL_DIFFUSE",
+      "flight.Types.THREE_DS_MATERIAL_NAME",
+      "flight.Types.THREE_DS_MATERIAL_OPACITY_MAP",
+      "flight.Types.THREE_DS_MATERIAL_SHININESS",
+      "flight.Types.THREE_DS_MATERIAL_SPECULAR",
+      "flight.Types.THREE_DS_MATERIAL_TEXTURE_FILENAME",
+      "flight.Types.THREE_DS_MATERIAL_TEXTURE_MAP",
+      "flight.Types.THREE_DS_MATERIAL_TRANSPARENCY",
+      "flight.Types.THREE_DS_OBJECT",
+      "flight.Types.THREE_DS_PERCENT_FLOAT",
+      "flight.Types.THREE_DS_PERCENT_INT",
+      "flight.Types.THREE_DS_SMOOTH_GROUP",
+      "flight.Types.THREE_DS_TRANSFORM_MATRIX",
+      "flight.Types.THREE_DS_TRIMESH",
+      "flight.Types.THREE_DS_UV_COORDS",
+      "flight.Types.THREE_DS_VERTICES",
+      "flight.Types.TilemapFormatKindTiledTmj",
+      "flight.Types.TilemapFormatKindTiledTmx",
+      "flight.Types.TilemapFormatKindTiledTsj",
+      "flight.Types.TilemapFormatKindTiledTsx",
+      "flight.Types.TilemapKind",
+      "flight.Types.TimelineAudioCueKind",
+      "flight.Types.TimelineGotoCueKind",
+      "flight.Types.TimelineNextFrameCueKind",
+      "flight.Types.TimelinePlayCueKind",
+      "flight.Types.TimelinePreviousFrameCueKind",
+      "flight.Types.TimelineStopCueKind",
+      "flight.Types.TimelineStreamAudioCueKind",
+      "flight.Types.ToonMaterialKind",
+      "flight.Types.ToonModifierKind",
+      "flight.Types.TransmissionVolumePbrExtensionKind",
+      "flight.Types.TurbulenceForceKind",
+      "flight.Types.UnitlessLightUnit",
+      "flight.Types.UnityParticleFormatKind",
+      "flight.Types.UnlitMaterialKind",
+      "flight.Types.VertexColorMaterialKind",
+      "flight.Types.VertexDisplaceModifierKind",
+      "flight.Types.VortexForceKind",
+      "flight.Types.VoxelGridTextureSourceKind",
+      "flight.Types.WindForceKind",
+      "flight.Types.WireframeMaterialKind",
+      "flight.Types.WrappedDiffusePbrExtensionKind"
     ]
   },
   "packages": [
@@ -623,10 +923,6 @@
           "count": 39
         },
         {
-          "code": "native-value-gap",
-          "count": 5
-        },
-        {
           "code": "non-scalar-signature-review",
           "count": 64
         },
@@ -637,10 +933,6 @@
         {
           "code": "native-materialized-unproven-functions",
           "count": 39
-        },
-        {
-          "code": "native-materialized-unproven-values",
-          "count": 5
         }
       ],
       "nativeDefault": {
@@ -797,13 +1089,44 @@
           }
         ],
         "types": [],
-        "values": []
+        "values": [
+          {
+            "header": "flight/adjustments/contract.hpp",
+            "holder": "Adjustments",
+            "name": "COLOR_ADJUSTMENT_AFFINE",
+            "native": "flight::adjustments::color_adjustment_affine"
+          },
+          {
+            "header": "flight/adjustments/contract.hpp",
+            "holder": "Adjustments",
+            "name": "COLOR_ADJUSTMENT_CHANNEL_MIXING",
+            "native": "flight::adjustments::color_adjustment_channel_mixing"
+          },
+          {
+            "header": "flight/adjustments/contract.hpp",
+            "holder": "Adjustments",
+            "name": "COLOR_ADJUSTMENT_NONE",
+            "native": "flight::adjustments::color_adjustment_none"
+          },
+          {
+            "header": "flight/adjustments/contract.hpp",
+            "holder": "Adjustments",
+            "name": "COLOR_LUT_DEFAULT_SIZE",
+            "native": "flight::adjustments::color_lut_default_size"
+          },
+          {
+            "header": "flight/adjustments/contract.hpp",
+            "holder": "Adjustments",
+            "name": "COLOR_MATRIX_LENGTH",
+            "native": "flight::adjustments::color_matrix_length"
+          }
+        ]
       },
       "nativeAttempts": {
         "functions": 39,
         "types": 0,
         "unavailableUpstream": 0,
-        "values": 5
+        "values": 0
       },
       "package": "@flighthq/adjustments",
       "scalarProbeCandidates": [],
@@ -1188,20 +1511,12 @@
       },
       "issues": [
         {
-          "code": "native-value-gap",
-          "count": 1
-        },
-        {
           "code": "non-scalar-signature-review",
           "count": 3
         },
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 4
-        },
-        {
-          "code": "native-materialized-unproven-values",
-          "count": 1
         }
       ],
       "nativeDefault": {
@@ -1226,13 +1541,20 @@
           }
         ],
         "types": [],
-        "values": []
+        "values": [
+          {
+            "header": "flight/binpack/contract.hpp",
+            "holder": "Binpack",
+            "name": "BIN_PACK_DEFAULT_MAX_EXTENT",
+            "native": "flight::binpack::bin_pack_default_max_extent"
+          }
+        ]
       },
       "nativeAttempts": {
         "functions": 0,
         "types": 0,
         "unavailableUpstream": 0,
-        "values": 1
+        "values": 0
       },
       "package": "@flighthq/binpack",
       "scalarProbeCandidates": [],
@@ -1266,7 +1588,7 @@
         },
         {
           "code": "native-value-gap",
-          "count": 6
+          "count": 1
         },
         {
           "code": "native-type-gap",
@@ -1290,7 +1612,7 @@
         },
         {
           "code": "native-materialized-unproven-values",
-          "count": 6
+          "count": 1
         }
       ],
       "nativeDefault": {
@@ -1591,13 +1913,44 @@
           }
         ],
         "types": [],
-        "values": []
+        "values": [
+          {
+            "header": "flight/bitmap/contract.hpp",
+            "holder": "Bitmap",
+            "name": "BITMAP_FINGERPRINT_COMPUTATION_ID",
+            "native": "flight::bitmap::bitmap_fingerprint_computation_id"
+          },
+          {
+            "header": "flight/bitmap/contract.hpp",
+            "holder": "Bitmap",
+            "name": "BITMAP_NOISE_CHANNEL_A",
+            "native": "flight::bitmap::bitmap_noise_channel_a"
+          },
+          {
+            "header": "flight/bitmap/contract.hpp",
+            "holder": "Bitmap",
+            "name": "BITMAP_NOISE_CHANNEL_B",
+            "native": "flight::bitmap::bitmap_noise_channel_b"
+          },
+          {
+            "header": "flight/bitmap/contract.hpp",
+            "holder": "Bitmap",
+            "name": "BITMAP_NOISE_CHANNEL_G",
+            "native": "flight::bitmap::bitmap_noise_channel_g"
+          },
+          {
+            "header": "flight/bitmap/contract.hpp",
+            "holder": "Bitmap",
+            "name": "BITMAP_NOISE_CHANNEL_R",
+            "native": "flight::bitmap::bitmap_noise_channel_r"
+          }
+        ]
       },
       "nativeAttempts": {
         "functions": 57,
         "types": 1,
         "unavailableUpstream": 0,
-        "values": 6
+        "values": 1
       },
       "package": "@flighthq/bitmap",
       "scalarProbeCandidates": [],
@@ -6154,10 +6507,6 @@
           "count": 18
         },
         {
-          "code": "native-value-gap",
-          "count": 6
-        },
-        {
           "code": "native-type-gap",
           "count": 1
         },
@@ -6176,10 +6525,6 @@
         {
           "code": "native-materialized-unproven-functions",
           "count": 18
-        },
-        {
-          "code": "native-materialized-unproven-values",
-          "count": 6
         }
       ],
       "nativeDefault": {
@@ -6480,13 +6825,50 @@
           }
         ],
         "types": [],
-        "values": []
+        "values": [
+          {
+            "header": "flight/math/contract.hpp",
+            "holder": "Math",
+            "name": "CIRCLE_KAPPA",
+            "native": "flight::math::circle_kappa"
+          },
+          {
+            "header": "flight/math/contract.hpp",
+            "holder": "Math",
+            "name": "DEG_TO_RAD",
+            "native": "flight::math::deg_to_rad_flight_value_variable__u000044__u000045__u000047__u00005f__u000054__u00004f__u00005f__u000052__u000041__u000044__flight_source_ad5040a7d8c07bd3"
+          },
+          {
+            "header": "flight/math/contract.hpp",
+            "holder": "Math",
+            "name": "EPSILON",
+            "native": "flight::math::epsilon"
+          },
+          {
+            "header": "flight/math/contract.hpp",
+            "holder": "Math",
+            "name": "HALF_PI",
+            "native": "flight::math::half_pi"
+          },
+          {
+            "header": "flight/math/contract.hpp",
+            "holder": "Math",
+            "name": "RAD_TO_DEG",
+            "native": "flight::math::rad_to_deg_flight_value_variable__u000052__u000041__u000044__u00005f__u000054__u00004f__u00005f__u000044__u000045__u000047__flight_source_ad5040a7d8c07bd3"
+          },
+          {
+            "header": "flight/math/contract.hpp",
+            "holder": "Math",
+            "name": "TAU",
+            "native": "flight::math::tau"
+          }
+        ]
       },
       "nativeAttempts": {
         "functions": 18,
         "types": 1,
         "unavailableUpstream": 0,
-        "values": 6
+        "values": 0
       },
       "package": "@flighthq/math",
       "scalarProbeCandidates": [],
@@ -7630,10 +8012,6 @@
           "count": 31
         },
         {
-          "code": "native-value-gap",
-          "count": 11
-        },
-        {
           "code": "native-type-gap",
           "count": 6
         },
@@ -7652,10 +8030,6 @@
         {
           "code": "native-materialized-unproven-functions",
           "count": 31
-        },
-        {
-          "code": "native-materialized-unproven-values",
-          "count": 11
         }
       ],
       "nativeDefault": {
@@ -7872,13 +8246,80 @@
           }
         ],
         "types": [],
-        "values": []
+        "values": [
+          {
+            "header": "flight/path/contract.hpp",
+            "holder": "Path",
+            "name": "PathMorphIssueContourClosednessMismatch",
+            "native": "flight::path::path_morph_issue_contour_closedness_mismatch"
+          },
+          {
+            "header": "flight/path/contract.hpp",
+            "holder": "Path",
+            "name": "PathMorphIssueContourCountMismatch",
+            "native": "flight::path::path_morph_issue_contour_count_mismatch"
+          },
+          {
+            "header": "flight/path/contract.hpp",
+            "holder": "Path",
+            "name": "PathMorphIssueContourOrientationMismatch",
+            "native": "flight::path::path_morph_issue_contour_orientation_mismatch"
+          },
+          {
+            "header": "flight/path/contract.hpp",
+            "holder": "Path",
+            "name": "PathMorphIssueNone",
+            "native": "flight::path::path_morph_issue_none"
+          },
+          {
+            "header": "flight/path/contract.hpp",
+            "holder": "Path",
+            "name": "PathMorphIssueWindingMismatch",
+            "native": "flight::path::path_morph_issue_winding_mismatch"
+          },
+          {
+            "header": "flight/path/contract.hpp",
+            "holder": "Path",
+            "name": "StrokePathTessellationIssueInvalidPath",
+            "native": "flight::path::stroke_path_tessellation_issue_invalid_path"
+          },
+          {
+            "header": "flight/path/contract.hpp",
+            "holder": "Path",
+            "name": "StrokePathTessellationIssueInvalidStyle",
+            "native": "flight::path::stroke_path_tessellation_issue_invalid_style"
+          },
+          {
+            "header": "flight/path/contract.hpp",
+            "holder": "Path",
+            "name": "StrokePathTessellationIssueNone",
+            "native": "flight::path::stroke_path_tessellation_issue_none"
+          },
+          {
+            "header": "flight/path/contract.hpp",
+            "holder": "Path",
+            "name": "StrokePathTessellationIssueReversingJoin",
+            "native": "flight::path::stroke_path_tessellation_issue_reversing_join"
+          },
+          {
+            "header": "flight/path/contract.hpp",
+            "holder": "Path",
+            "name": "StrokePathTessellationIssueSelfIntersectingCenterline",
+            "native": "flight::path::stroke_path_tessellation_issue_self_intersecting_centerline"
+          },
+          {
+            "header": "flight/path/contract.hpp",
+            "holder": "Path",
+            "name": "StrokePathTessellationIssueSelfIntersectingOutline",
+            "native": "flight::path::stroke_path_tessellation_issue_self_intersecting_outline"
+          }
+        ]
       },
       "nativeAttempts": {
         "functions": 31,
         "types": 6,
         "unavailableUpstream": 0,
-        "values": 11
+        "values": 0
       },
       "package": "@flighthq/path",
       "scalarProbeCandidates": [],
@@ -14275,7 +14716,7 @@
       "issues": [
         {
           "code": "native-value-gap",
-          "count": 333
+          "count": 63
         },
         {
           "code": "native-type-gap",
@@ -14291,7 +14732,7 @@
         },
         {
           "code": "native-materialized-unproven-values",
-          "count": 333
+          "count": 63
         }
       ],
       "nativeDefault": {
@@ -14301,13 +14742,1634 @@
           "Shape",
           "Sprite"
         ],
-        "values": []
+        "values": [
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "ALL_LIGHT_LAYERS",
+            "native": "flight::types::all_light_layers"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "AddNodeChildCommandKind",
+            "native": "flight::types::add_node_child_command_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "AmbientLightKind",
+            "native": "flight::types::ambient_light_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "AnchorLayoutKind",
+            "native": "flight::types::anchor_layout_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "AnimatedNormalModifierKind",
+            "native": "flight::types::animated_normal_modifier_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "AnimationInterpolationCubic",
+            "native": "flight::types::animation_interpolation_cubic"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "AnimationInterpolationLinear",
+            "native": "flight::types::animation_interpolation_linear"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "AnimationInterpolationStep",
+            "native": "flight::types::animation_interpolation_step"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "AnimationLoopModePingPong",
+            "native": "flight::types::animation_loop_mode_ping_pong"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "AnimationLoopModeRepeat",
+            "native": "flight::types::animation_loop_mode_repeat"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "AnisotropyPbrExtensionKind",
+            "native": "flight::types::anisotropy_pbr_extension_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "AreaLightKind",
+            "native": "flight::types::area_light_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "AttractorForceKind",
+            "native": "flight::types::attractor_force_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "BillboardKind",
+            "native": "flight::types::billboard_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "BitmapFontFormatKindBmFontBinary",
+            "native": "flight::types::bitmap_font_format_kind_bm_font_binary"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "BitmapFontFormatKindBmFontJson",
+            "native": "flight::types::bitmap_font_format_kind_bm_font_json"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "BitmapFontFormatKindBmFontText",
+            "native": "flight::types::bitmap_font_format_kind_bm_font_text"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "BitmapFontFormatKindBmFontXml",
+            "native": "flight::types::bitmap_font_format_kind_bm_font_xml"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "BitmapTextKind",
+            "native": "flight::types::bitmap_text_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "BitmapTextureSourceKind",
+            "native": "flight::types::bitmap_texture_source_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "BlinnPhongMaterialKind",
+            "native": "flight::types::blinn_phong_material_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "BoundingBoxAttachment2DKind",
+            "native": "flight::types::bounding_box_attachment_2d_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "CandelaLightUnit",
+            "native": "flight::types::candela_light_unit"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "CircleColliderKind",
+            "native": "flight::types::circle_collider_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "ClearcoatPbrExtensionKind",
+            "native": "flight::types::clearcoat_pbr_extension_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "ClipboardFormatBookmark",
+            "native": "flight::types::clipboard_format_bookmark"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "ClipboardFormatHtml",
+            "native": "flight::types::clipboard_format_html"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "ClipboardFormatImage",
+            "native": "flight::types::clipboard_format_image"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "ClipboardFormatRtf",
+            "native": "flight::types::clipboard_format_rtf"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "ClipboardFormatText",
+            "native": "flight::types::clipboard_format_text"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "ClipboardFormatUriList",
+            "native": "flight::types::clipboard_format_uri_list"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "ClippingAttachment2DKind",
+            "native": "flight::types::clipping_attachment_2d_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "CompositeCommandKind",
+            "native": "flight::types::composite_command_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "CompressedImageTextureSourceKind",
+            "native": "flight::types::compressed_image_texture_source_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "CubeFaceNegativeX",
+            "native": "flight::types::cube_face_negative_x"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "CubeFaceNegativeY",
+            "native": "flight::types::cube_face_negative_y"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "CubeFaceNegativeZ",
+            "native": "flight::types::cube_face_negative_z"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "CubeFacePositiveX",
+            "native": "flight::types::cube_face_positive_x"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "CubeFacePositiveY",
+            "native": "flight::types::cube_face_positive_y"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "CubeFacePositiveZ",
+            "native": "flight::types::cube_face_positive_z"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "CurlNoiseForceKind",
+            "native": "flight::types::curl_noise_force_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "CustomShaderMaterialKind",
+            "native": "flight::types::custom_shader_material_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "DIRECTIONAL_SHADOW_MAP_SIZE",
+            "native": "flight::types::directional_shadow_map_size"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "DepthMaterialKind",
+            "native": "flight::types::depth_material_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "DeviceFormFactorCar",
+            "native": "flight::types::device_form_factor_car"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "DeviceFormFactorDesktop",
+            "native": "flight::types::device_form_factor_desktop"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "DeviceFormFactorPhone",
+            "native": "flight::types::device_form_factor_phone"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "DeviceFormFactorTV",
+            "native": "flight::types::device_form_factor_tv"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "DeviceFormFactorTablet",
+            "native": "flight::types::device_form_factor_tablet"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "DeviceFormFactorUnknown",
+            "native": "flight::types::device_form_factor_unknown"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "DeviceFormFactorWatch",
+            "native": "flight::types::device_form_factor_watch"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "DirectionalLightKind",
+            "native": "flight::types::directional_light_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "DisplayObjectKind",
+            "native": "flight::types::display_object_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "DissolveModifierKind",
+            "native": "flight::types::dissolve_modifier_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "DragForceKind",
+            "native": "flight::types::drag_force_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "EmissiveMaterialKind",
+            "native": "flight::types::emissive_material_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "EmissiveModifierKind",
+            "native": "flight::types::emissive_modifier_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "EnvReflectModifierKind",
+            "native": "flight::types::env_reflect_modifier_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "EnvironmentKind",
+            "native": "flight::types::environment_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "ExtendedPbrMaterialKind",
+            "native": "flight::types::extended_pbr_material_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "ExternalTextureSourceKind",
+            "native": "flight::types::external_texture_source_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "FlexLayoutKind",
+            "native": "flight::types::flex_layout_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "FogModifierKind",
+            "native": "flight::types::fog_modifier_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "FontVariationItalic",
+            "native": "flight::types::font_variation_italic"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "FontVariationOpticalSize",
+            "native": "flight::types::font_variation_optical_size"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "FontVariationSlant",
+            "native": "flight::types::font_variation_slant"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "FontVariationWeight",
+            "native": "flight::types::font_variation_weight"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "FontVariationWidth",
+            "native": "flight::types::font_variation_width"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "GridLayoutKind",
+            "native": "flight::types::grid_layout_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "GroupKind",
+            "native": "flight::types::group_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "HemisphereLightKind",
+            "native": "flight::types::hemisphere_light_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "HtmlViewKind",
+            "native": "flight::types::html_view_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "ImageTextureSourceKind",
+            "native": "flight::types::image_texture_source_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "InstancedMeshKind",
+            "native": "flight::types::instanced_mesh_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "IridescencePbrExtensionKind",
+            "native": "flight::types::iridescence_pbr_extension_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "LIGHT_PROBE_SH_FLOATS",
+            "native": "flight::types::light_probe_sh_floats"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "LambertMaterialKind",
+            "native": "flight::types::lambert_material_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "LibgdxParticleFormatKind",
+            "native": "flight::types::libgdx_particle_format_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "LodMeshKind",
+            "native": "flight::types::lod_mesh_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "LumenLightUnit",
+            "native": "flight::types::lumen_light_unit"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "LuxLightUnit",
+            "native": "flight::types::lux_light_unit"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "MAX_COLLISION_CONTACT_POINTS_3D",
+            "native": "flight::types::max_collision_contact_points_3_d"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "MAX_DIRECTIONAL_SHADOW_PCF_RADIUS",
+            "native": "flight::types::max_directional_shadow_pcf_radius"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "MAX_FORWARD_LIGHTS",
+            "native": "flight::types::max_forward_lights"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "MD5_MATERIAL_FEATURE",
+            "native": "flight::types::md5_material_feature"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "MD5_SKELETON_FEATURE",
+            "native": "flight::types::md5_skeleton_feature"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "MatcapMaterialKind",
+            "native": "flight::types::matcap_material_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "MeshAttachment2DKind",
+            "native": "flight::types::mesh_attachment_2d_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "MeshDeformerMorph",
+            "native": "flight::types::mesh_deformer_morph"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "MeshDeformerNone",
+            "native": "flight::types::mesh_deformer_none"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "MeshDeformerSkeletal",
+            "native": "flight::types::mesh_deformer_skeletal"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "MeshKind",
+            "native": "flight::types::mesh_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "MorphShapeKind",
+            "native": "flight::types::morph_shape_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "MovieClipKind",
+            "native": "flight::types::movie_clip_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "NativeTextKind",
+            "native": "flight::types::native_text_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "Node2DAnimationPathAlpha",
+            "native": "flight::types::node_2d_animation_path_alpha"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "Node2DAnimationPathPivot",
+            "native": "flight::types::node_2d_animation_path_pivot"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "Node2DAnimationPathPivotX",
+            "native": "flight::types::node_2d_animation_path_pivot_x"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "Node2DAnimationPathPivotY",
+            "native": "flight::types::node_2d_animation_path_pivot_y"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "Node2DAnimationPathPosition",
+            "native": "flight::types::node_2d_animation_path_position"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "Node2DAnimationPathRotation",
+            "native": "flight::types::node_2d_animation_path_rotation"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "Node2DAnimationPathScale",
+            "native": "flight::types::node_2d_animation_path_scale"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "Node2DAnimationPathScaleX",
+            "native": "flight::types::node_2d_animation_path_scale_x"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "Node2DAnimationPathScaleY",
+            "native": "flight::types::node_2d_animation_path_scale_y"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "Node2DAnimationPathSkew",
+            "native": "flight::types::node_2d_animation_path_skew"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "Node2DAnimationPathSkewX",
+            "native": "flight::types::node_2d_animation_path_skew_x"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "Node2DAnimationPathSkewY",
+            "native": "flight::types::node_2d_animation_path_skew_y"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "Node2DAnimationPathVisible",
+            "native": "flight::types::node_2d_animation_path_visible"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "Node2DAnimationPathX",
+            "native": "flight::types::node_2d_animation_path_x"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "Node2DAnimationPathY",
+            "native": "flight::types::node_2d_animation_path_y"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "Node3DKind",
+            "native": "flight::types::node_3d_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "NodeKind",
+            "native": "flight::types::node_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "NormalMaterialKind",
+            "native": "flight::types::normal_material_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "OBJ_MATERIAL_BLINN_PHONG_FEATURE",
+            "native": "flight::types::obj_material_blinn_phong_feature"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "OBJ_MATERIAL_STANDARD_PBR_FEATURE",
+            "native": "flight::types::obj_material_standard_pbr_feature"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "ParticleDesignerFormatKind",
+            "native": "flight::types::particle_designer_format_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "ParticleEmitter2DKind",
+            "native": "flight::types::particle_emitter_2d_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "ParticleEmitter3DKind",
+            "native": "flight::types::particle_emitter_3d_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "PathAttachment2DKind",
+            "native": "flight::types::path_attachment_2d_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "PhongMaterialKind",
+            "native": "flight::types::phong_material_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "PixiParticleFormatKind",
+            "native": "flight::types::pixi_particle_format_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "PlaneColliderKind",
+            "native": "flight::types::plane_collider_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "PointAttachment2DKind",
+            "native": "flight::types::point_attachment_2d_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "PointGravityWellForceKind",
+            "native": "flight::types::point_gravity_well_force_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "PointLightKind",
+            "native": "flight::types::point_light_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "QuadBatchKind",
+            "native": "flight::types::quad_batch_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "RectangleColliderKind",
+            "native": "flight::types::rectangle_collider_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "RegionAttachment2DKind",
+            "native": "flight::types::region_attachment_2d_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "RemoveNodeChildCommandKind",
+            "native": "flight::types::remove_node_child_command_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "RenderCacheKind",
+            "native": "flight::types::render_cache_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "RenderTargetTextureSourceKind",
+            "native": "flight::types::render_target_texture_source_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "ReorderNodeChildCommandKind",
+            "native": "flight::types::reorder_node_child_command_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "RichTextKind",
+            "native": "flight::types::rich_text_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "RimModifierKind",
+            "native": "flight::types::rim_modifier_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "SCENE_LIGHT_AMBIENT_RADIANCE_OFFSET",
+            "native": "flight::types::scene_light_ambient_radiance_offset"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "SCENE_LIGHT_BLOCK_FLOATS",
+            "native": "flight::types::scene_light_block_floats"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "SCENE_LIGHT_DIRECTIONAL_DIRECTION_OFFSET",
+            "native": "flight::types::scene_light_directional_direction_offset"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "SCENE_LIGHT_DIRECTIONAL_RADIANCE_OFFSET",
+            "native": "flight::types::scene_light_directional_radiance_offset"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "SCENE_LIGHT_HEAD_FLOATS",
+            "native": "flight::types::scene_light_head_floats"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "SCENE_LIGHT_HEMISPHERE_OFFSET",
+            "native": "flight::types::scene_light_hemisphere_offset"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "SCENE_LIGHT_HEMISPHERE_STRIDE",
+            "native": "flight::types::scene_light_hemisphere_stride"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "SCENE_LIGHT_POINT_OFFSET",
+            "native": "flight::types::scene_light_point_offset"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "SCENE_LIGHT_POINT_STRIDE",
+            "native": "flight::types::scene_light_point_stride"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "SCENE_LIGHT_SPOT_OFFSET",
+            "native": "flight::types::scene_light_spot_offset"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "SCENE_LIGHT_SPOT_STRIDE",
+            "native": "flight::types::scene_light_spot_stride"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "SamplerKind",
+            "native": "flight::types::sampler_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "Scale9ShapeKind",
+            "native": "flight::types::scale9_shape_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "Scale9SpriteKind",
+            "native": "flight::types::scale9_sprite_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "Scene3DAnimationPathRotation",
+            "native": "flight::types::scene_3d_animation_path_rotation"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "Scene3DAnimationPathScale",
+            "native": "flight::types::scene_3d_animation_path_scale"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "Scene3DAnimationPathTranslation",
+            "native": "flight::types::scene_3d_animation_path_translation"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "Scene3DAnimationPathWeights",
+            "native": "flight::types::scene_3d_animation_path_weights"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "SetNodePropertyCommandKind",
+            "native": "flight::types::set_node_property_command_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "ShadedMaterialKind",
+            "native": "flight::types::shaded_material_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "ShapeKind",
+            "native": "flight::types::shape_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "SheenPbrExtensionKind",
+            "native": "flight::types::sheen_pbr_extension_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "SoftKeyboardAttachAcquisitionFailedKind",
+            "native": "flight::types::soft_keyboard_attach_acquisition_failed_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "SoftKeyboardAttachOkKind",
+            "native": "flight::types::soft_keyboard_attach_ok_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "SoftKeyboardResizeBodyKind",
+            "native": "flight::types::soft_keyboard_resize_body_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "SoftKeyboardResizeNoneKind",
+            "native": "flight::types::soft_keyboard_resize_none_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "SoftKeyboardSetterOkKind",
+            "native": "flight::types::soft_keyboard_setter_ok_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "SoftKeyboardSetterOperationFailedKind",
+            "native": "flight::types::soft_keyboard_setter_operation_failed_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "SoftKeyboardSetterOperationUnavailableKind",
+            "native": "flight::types::soft_keyboard_setter_operation_unavailable_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "SoftKeyboardStyleDarkKind",
+            "native": "flight::types::soft_keyboard_style_dark_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "SoftKeyboardStyleDefaultKind",
+            "native": "flight::types::soft_keyboard_style_default_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "SoftKeyboardVisibilityOkKind",
+            "native": "flight::types::soft_keyboard_visibility_ok_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "SoftKeyboardVisibilityOperationFailedKind",
+            "native": "flight::types::soft_keyboard_visibility_operation_failed_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "SpecularGlossinessPbrMaterialKind",
+            "native": "flight::types::specular_glossiness_pbr_material_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "SpecularPbrExtensionKind",
+            "native": "flight::types::specular_pbr_extension_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "SphereColliderKind",
+            "native": "flight::types::sphere_collider_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "SpineParticleFormatKind",
+            "native": "flight::types::spine_particle_format_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "SpotLightKind",
+            "native": "flight::types::spot_light_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "SpriteKind",
+            "native": "flight::types::sprite_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "SpritesheetFormatKindAseprite",
+            "native": "flight::types::spritesheet_format_kind_aseprite"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "SpritesheetFormatKindCocosPlist",
+            "native": "flight::types::spritesheet_format_kind_cocos_plist"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "SpritesheetFormatKindLibgdxAtlas",
+            "native": "flight::types::spritesheet_format_kind_libgdx_atlas"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "SpritesheetFormatKindStarling",
+            "native": "flight::types::spritesheet_format_kind_starling"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "SpritesheetFormatKindTexturePacker",
+            "native": "flight::types::spritesheet_format_kind_texture_packer"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "StandardMaterialKind",
+            "native": "flight::types::standard_material_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "StandardPbrMaterialKind",
+            "native": "flight::types::standard_pbr_material_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "StarlingPexFormatKind",
+            "native": "flight::types::starling_pex_format_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "StatechartAtomicStateKind",
+            "native": "flight::types::statechart_atomic_state_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "StatechartNestedStateKind",
+            "native": "flight::types::statechart_nested_state_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "THREE_DS_CAMERA",
+            "native": "flight::types::three_ds_camera"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "THREE_DS_CAMERA_APERTURE_MM",
+            "native": "flight::types::three_ds_camera_aperture_mm"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "THREE_DS_CAMERA_RANGES",
+            "native": "flight::types::three_ds_camera_ranges"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "THREE_DS_CHUNK_HEADER_BYTES",
+            "native": "flight::types::three_ds_chunk_header_bytes"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "THREE_DS_COLOR_BYTE",
+            "native": "flight::types::three_ds_color_byte"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "THREE_DS_COLOR_FLOAT",
+            "native": "flight::types::three_ds_color_float"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "THREE_DS_EDITOR",
+            "native": "flight::types::three_ds_editor"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "THREE_DS_FACES",
+            "native": "flight::types::three_ds_faces"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "THREE_DS_FACE_MATERIAL",
+            "native": "flight::types::three_ds_face_material"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "THREE_DS_KEYFRAME",
+            "native": "flight::types::three_ds_keyframe"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "THREE_DS_KEYFRAME_NODE_HEADER",
+            "native": "flight::types::three_ds_keyframe_node_header"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "THREE_DS_KEYFRAME_OBJECT_NODE",
+            "native": "flight::types::three_ds_keyframe_object_node"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "THREE_DS_KEYFRAME_PIVOT",
+            "native": "flight::types::three_ds_keyframe_pivot"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "THREE_DS_LIGHT",
+            "native": "flight::types::three_ds_light"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "THREE_DS_LIGHT_INNER_RANGE",
+            "native": "flight::types::three_ds_light_inner_range"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "THREE_DS_LIGHT_MULTIPLIER",
+            "native": "flight::types::three_ds_light_multiplier"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "THREE_DS_LIGHT_OFF",
+            "native": "flight::types::three_ds_light_off"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "THREE_DS_LIGHT_OUTER_RANGE",
+            "native": "flight::types::three_ds_light_outer_range"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "THREE_DS_LIGHT_SPOT",
+            "native": "flight::types::three_ds_light_spot"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "THREE_DS_MAIN",
+            "native": "flight::types::three_ds_main"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "THREE_DS_MATERIAL",
+            "native": "flight::types::three_ds_material"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "THREE_DS_MATERIAL_AMBIENT",
+            "native": "flight::types::three_ds_material_ambient"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "THREE_DS_MATERIAL_BUMP_MAP",
+            "native": "flight::types::three_ds_material_bump_map"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "THREE_DS_MATERIAL_DIFFUSE",
+            "native": "flight::types::three_ds_material_diffuse"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "THREE_DS_MATERIAL_NAME",
+            "native": "flight::types::three_ds_material_name"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "THREE_DS_MATERIAL_OPACITY_MAP",
+            "native": "flight::types::three_ds_material_opacity_map"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "THREE_DS_MATERIAL_SHININESS",
+            "native": "flight::types::three_ds_material_shininess"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "THREE_DS_MATERIAL_SPECULAR",
+            "native": "flight::types::three_ds_material_specular"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "THREE_DS_MATERIAL_TEXTURE_FILENAME",
+            "native": "flight::types::three_ds_material_texture_filename"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "THREE_DS_MATERIAL_TEXTURE_MAP",
+            "native": "flight::types::three_ds_material_texture_map"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "THREE_DS_MATERIAL_TRANSPARENCY",
+            "native": "flight::types::three_ds_material_transparency"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "THREE_DS_OBJECT",
+            "native": "flight::types::three_ds_object"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "THREE_DS_PERCENT_FLOAT",
+            "native": "flight::types::three_ds_percent_float"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "THREE_DS_PERCENT_INT",
+            "native": "flight::types::three_ds_percent_int"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "THREE_DS_SMOOTH_GROUP",
+            "native": "flight::types::three_ds_smooth_group"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "THREE_DS_TRANSFORM_MATRIX",
+            "native": "flight::types::three_ds_transform_matrix"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "THREE_DS_TRIMESH",
+            "native": "flight::types::three_ds_trimesh"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "THREE_DS_UV_COORDS",
+            "native": "flight::types::three_ds_uv_coords"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "THREE_DS_VERTICES",
+            "native": "flight::types::three_ds_vertices"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "TextDirectionLeftToRight",
+            "native": "flight::types::text_direction_left_to_right"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "TextDirectionRightToLeft",
+            "native": "flight::types::text_direction_right_to_left"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "TextDirectionTopToBottom",
+            "native": "flight::types::text_direction_top_to_bottom"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "TextFeatureCapitals",
+            "native": "flight::types::text_feature_capitals"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "TextFeatureContextualAlternates",
+            "native": "flight::types::text_feature_contextual_alternates"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "TextFeatureDiscretionaryLigatures",
+            "native": "flight::types::text_feature_discretionary_ligatures"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "TextFeatureFractions",
+            "native": "flight::types::text_feature_fractions"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "TextFeatureKerning",
+            "native": "flight::types::text_feature_kerning"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "TextFeatureLigatures",
+            "native": "flight::types::text_feature_ligatures"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "TextFeatureOldStyleFigures",
+            "native": "flight::types::text_feature_old_style_figures"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "TextFeatureSmallCaps",
+            "native": "flight::types::text_feature_small_caps"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "TextFeatureStylisticAlternates",
+            "native": "flight::types::text_feature_stylistic_alternates"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "TextFeatureSubscript",
+            "native": "flight::types::text_feature_subscript"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "TextFeatureSuperscript",
+            "native": "flight::types::text_feature_superscript"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "TextFeatureTabularFigures",
+            "native": "flight::types::text_feature_tabular_figures"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "TextLabelKind",
+            "native": "flight::types::text_label_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "TextureAtlasFormatKindAseprite",
+            "native": "flight::types::texture_atlas_format_kind_aseprite"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "TextureAtlasFormatKindCocosPlist",
+            "native": "flight::types::texture_atlas_format_kind_cocos_plist"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "TextureAtlasFormatKindLibgdxAtlas",
+            "native": "flight::types::texture_atlas_format_kind_libgdx_atlas"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "TextureAtlasFormatKindStarling",
+            "native": "flight::types::texture_atlas_format_kind_starling"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "TextureAtlasFormatKindTexturePacker",
+            "native": "flight::types::texture_atlas_format_kind_texture_packer"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "TextureKind",
+            "native": "flight::types::texture_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "TilemapFormatKindTiledTmj",
+            "native": "flight::types::tilemap_format_kind_tiled_tmj"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "TilemapFormatKindTiledTmx",
+            "native": "flight::types::tilemap_format_kind_tiled_tmx"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "TilemapFormatKindTiledTsj",
+            "native": "flight::types::tilemap_format_kind_tiled_tsj"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "TilemapFormatKindTiledTsx",
+            "native": "flight::types::tilemap_format_kind_tiled_tsx"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "TilemapKind",
+            "native": "flight::types::tilemap_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "TimelineAudioCueKind",
+            "native": "flight::types::timeline_audio_cue_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "TimelineGotoCueKind",
+            "native": "flight::types::timeline_goto_cue_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "TimelineNextFrameCueKind",
+            "native": "flight::types::timeline_next_frame_cue_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "TimelinePlayCueKind",
+            "native": "flight::types::timeline_play_cue_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "TimelinePreviousFrameCueKind",
+            "native": "flight::types::timeline_previous_frame_cue_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "TimelineStopCueKind",
+            "native": "flight::types::timeline_stop_cue_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "TimelineStreamAudioCueKind",
+            "native": "flight::types::timeline_stream_audio_cue_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "ToonMaterialKind",
+            "native": "flight::types::toon_material_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "ToonModifierKind",
+            "native": "flight::types::toon_modifier_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "TransmissionVolumePbrExtensionKind",
+            "native": "flight::types::transmission_volume_pbr_extension_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "TurbulenceForceKind",
+            "native": "flight::types::turbulence_force_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "UnitlessLightUnit",
+            "native": "flight::types::unitless_light_unit"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "UnityParticleFormatKind",
+            "native": "flight::types::unity_particle_format_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "UnlitMaterialKind",
+            "native": "flight::types::unlit_material_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "VertexColorMaterialKind",
+            "native": "flight::types::vertex_color_material_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "VertexDisplaceModifierKind",
+            "native": "flight::types::vertex_displace_modifier_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "VortexForceKind",
+            "native": "flight::types::vortex_force_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "VoxelGridTextureSourceKind",
+            "native": "flight::types::voxel_grid_texture_source_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "WindForceKind",
+            "native": "flight::types::wind_force_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "WireframeMaterialKind",
+            "native": "flight::types::wireframe_material_kind"
+          },
+          {
+            "header": "flight/types/contract.hpp",
+            "holder": "Types",
+            "name": "WrappedDiffusePbrExtensionKind",
+            "native": "flight::types::wrapped_diffuse_pbr_extension_kind"
+          }
+        ]
       },
       "nativeAttempts": {
         "functions": 0,
         "types": 3065,
         "unavailableUpstream": 0,
-        "values": 333
+        "values": 63
       },
       "package": "@flighthq/types",
       "scalarProbeCandidates": [],
@@ -14820,7 +16882,7 @@
       "requiredScalarOverrides": 53,
       "scalarOverrideRefusals": 0,
       "types": 3,
-      "values": 0
+      "values": 298
     },
     "nativeAttempts": {
       "bindingCarrierFamilies": [
@@ -14853,10 +16915,6 @@
           "name": "nullable"
         },
         {
-          "count": 298,
-          "name": "scalar-value"
-        },
-        {
           "count": 53,
           "name": "typed-array"
         }
@@ -14867,9 +16925,9 @@
       "functions": 382,
       "genericReferenceTemplateAdapters": 44,
       "haxeTypecheck": "pass",
-      "isolatedFunctionValueExterns": 761,
+      "isolatedFunctionValueExterns": 463,
       "types": 3073,
-      "values": 379
+      "values": 81
     },
     "compilerPlan": {
       "bindings": 11247,

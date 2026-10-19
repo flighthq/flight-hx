@@ -197,41 +197,29 @@ inline function step(edge:Float, x:Float):Float {
   return flight._cpp._fn.Math.step(edge, x);
 }
 
-var CIRCLE_KAPPA(get, set):Float;
+var CIRCLE_KAPPA(get, never):Float;
 
-private extern inline function get_CIRCLE_KAPPA():Float return flight._cpp._attempt.Attempt_Math_CIRCLE_KAPPA.CIRCLE_KAPPA;
+private inline function get_CIRCLE_KAPPA():Float return flight._cpp._fn.Math.get_CIRCLE_KAPPA();
 
-private extern inline function set_CIRCLE_KAPPA(value:Float):Float return flight._cpp._attempt.Attempt_Math_CIRCLE_KAPPA.CIRCLE_KAPPA = value;
+var DEG_TO_RAD(get, never):Float;
 
-var DEG_TO_RAD(get, set):Float;
+private inline function get_DEG_TO_RAD():Float return flight._cpp._fn.Math.get_DEG_TO_RAD();
 
-private extern inline function get_DEG_TO_RAD():Float return flight._cpp._attempt.Attempt_Math_DEG_TO_RAD.DEG_TO_RAD;
+var EPSILON(get, never):Float;
 
-private extern inline function set_DEG_TO_RAD(value:Float):Float return flight._cpp._attempt.Attempt_Math_DEG_TO_RAD.DEG_TO_RAD = value;
+private inline function get_EPSILON():Float return flight._cpp._fn.Math.get_EPSILON();
 
-var EPSILON(get, set):Float;
+var HALF_PI(get, never):Float;
 
-private extern inline function get_EPSILON():Float return flight._cpp._attempt.Attempt_Math_EPSILON.EPSILON;
+private inline function get_HALF_PI():Float return flight._cpp._fn.Math.get_HALF_PI();
 
-private extern inline function set_EPSILON(value:Float):Float return flight._cpp._attempt.Attempt_Math_EPSILON.EPSILON = value;
+var RAD_TO_DEG(get, never):Float;
 
-var HALF_PI(get, set):Float;
+private inline function get_RAD_TO_DEG():Float return flight._cpp._fn.Math.get_RAD_TO_DEG();
 
-private extern inline function get_HALF_PI():Float return flight._cpp._attempt.Attempt_Math_HALF_PI.HALF_PI;
+var TAU(get, never):Float;
 
-private extern inline function set_HALF_PI(value:Float):Float return flight._cpp._attempt.Attempt_Math_HALF_PI.HALF_PI = value;
-
-var RAD_TO_DEG(get, set):Float;
-
-private extern inline function get_RAD_TO_DEG():Float return flight._cpp._attempt.Attempt_Math_RAD_TO_DEG.RAD_TO_DEG;
-
-private extern inline function set_RAD_TO_DEG(value:Float):Float return flight._cpp._attempt.Attempt_Math_RAD_TO_DEG.RAD_TO_DEG = value;
-
-var TAU(get, set):Float;
-
-private extern inline function get_TAU():Float return flight._cpp._attempt.Attempt_Math_TAU.TAU;
-
-private extern inline function set_TAU(value:Float):Float return flight._cpp._attempt.Attempt_Math_TAU.TAU = value;
+private inline function get_TAU():Float return flight._cpp._fn.Math.get_TAU();
 
 extern inline function createRandomSource(seed:Float):flight.RandomSource {
   return flight._cpp._attempt.Attempt_Math_createRandomSource.createRandomSource(seed);

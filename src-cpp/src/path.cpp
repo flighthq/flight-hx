@@ -145,4 +145,48 @@ void translate_path(flight::Ref<flight::types::Path> source, double dx, double d
   flight::path::translate_path(source, dx, dy, out);
 }
 
+double get_path_morph_issue_contour_closedness_mismatch() {
+  return flight::path::path_morph_issue_contour_closedness_mismatch;
+}
+
+double get_path_morph_issue_contour_count_mismatch() {
+  return flight::path::path_morph_issue_contour_count_mismatch;
+}
+
+double get_path_morph_issue_contour_orientation_mismatch() {
+  return flight::path::path_morph_issue_contour_orientation_mismatch;
+}
+
+double get_path_morph_issue_none() {
+  return flight::path::path_morph_issue_none;
+}
+
+double get_path_morph_issue_winding_mismatch() {
+  return flight::path::path_morph_issue_winding_mismatch;
+}
+
+double get_stroke_path_tessellation_issue_invalid_path() {
+  return flight::path::stroke_path_tessellation_issue_invalid_path;
+}
+
+double get_stroke_path_tessellation_issue_invalid_style() {
+  return flight::path::stroke_path_tessellation_issue_invalid_style;
+}
+
+double get_stroke_path_tessellation_issue_none() {
+  return flight::path::stroke_path_tessellation_issue_none;
+}
+
+double get_stroke_path_tessellation_issue_reversing_join() {
+  return flight::path::stroke_path_tessellation_issue_reversing_join;
+}
+
+double get_stroke_path_tessellation_issue_self_intersecting_centerline() {
+  return flight::path::stroke_path_tessellation_issue_self_intersecting_centerline;
+}
+
+double get_stroke_path_tessellation_issue_self_intersecting_outline() {
+  return flight::path::stroke_path_tessellation_issue_self_intersecting_outline;
+}
+
 } // namespace flight_hx::path

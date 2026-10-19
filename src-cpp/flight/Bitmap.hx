@@ -199,35 +199,25 @@ extern inline function splitBitmapChannels(source:flight.Bitmap):Array<flight.Bi
   return flight._cpp._fn.Bitmap.splitBitmapChannels(source);
 }
 
-var BITMAP_FINGERPRINT_COMPUTATION_ID(get, set):String;
+var BITMAP_FINGERPRINT_COMPUTATION_ID(get, never):String;
 
-private extern inline function get_BITMAP_FINGERPRINT_COMPUTATION_ID():String return flight._cpp._attempt.Attempt_Bitmap_BITMAP_FINGERPRINT_COMPUTATION_ID.BITMAP_FINGERPRINT_COMPUTATION_ID;
+private inline function get_BITMAP_FINGERPRINT_COMPUTATION_ID():String return flight._cpp._fn.Bitmap.get_BITMAP_FINGERPRINT_COMPUTATION_ID();
 
-private extern inline function set_BITMAP_FINGERPRINT_COMPUTATION_ID(value:String):String return flight._cpp._attempt.Attempt_Bitmap_BITMAP_FINGERPRINT_COMPUTATION_ID.BITMAP_FINGERPRINT_COMPUTATION_ID = value;
+var BITMAP_NOISE_CHANNEL_A(get, never):Float;
 
-var BITMAP_NOISE_CHANNEL_A(get, set):Float;
+private inline function get_BITMAP_NOISE_CHANNEL_A():Float return flight._cpp._fn.Bitmap.get_BITMAP_NOISE_CHANNEL_A();
 
-private extern inline function get_BITMAP_NOISE_CHANNEL_A():Float return flight._cpp._attempt.Attempt_Bitmap_BITMAP_NOISE_CHANNEL_A.BITMAP_NOISE_CHANNEL_A;
+var BITMAP_NOISE_CHANNEL_B(get, never):Float;
 
-private extern inline function set_BITMAP_NOISE_CHANNEL_A(value:Float):Float return flight._cpp._attempt.Attempt_Bitmap_BITMAP_NOISE_CHANNEL_A.BITMAP_NOISE_CHANNEL_A = value;
+private inline function get_BITMAP_NOISE_CHANNEL_B():Float return flight._cpp._fn.Bitmap.get_BITMAP_NOISE_CHANNEL_B();
 
-var BITMAP_NOISE_CHANNEL_B(get, set):Float;
+var BITMAP_NOISE_CHANNEL_G(get, never):Float;
 
-private extern inline function get_BITMAP_NOISE_CHANNEL_B():Float return flight._cpp._attempt.Attempt_Bitmap_BITMAP_NOISE_CHANNEL_B.BITMAP_NOISE_CHANNEL_B;
+private inline function get_BITMAP_NOISE_CHANNEL_G():Float return flight._cpp._fn.Bitmap.get_BITMAP_NOISE_CHANNEL_G();
 
-private extern inline function set_BITMAP_NOISE_CHANNEL_B(value:Float):Float return flight._cpp._attempt.Attempt_Bitmap_BITMAP_NOISE_CHANNEL_B.BITMAP_NOISE_CHANNEL_B = value;
+var BITMAP_NOISE_CHANNEL_R(get, never):Float;
 
-var BITMAP_NOISE_CHANNEL_G(get, set):Float;
-
-private extern inline function get_BITMAP_NOISE_CHANNEL_G():Float return flight._cpp._attempt.Attempt_Bitmap_BITMAP_NOISE_CHANNEL_G.BITMAP_NOISE_CHANNEL_G;
-
-private extern inline function set_BITMAP_NOISE_CHANNEL_G(value:Float):Float return flight._cpp._attempt.Attempt_Bitmap_BITMAP_NOISE_CHANNEL_G.BITMAP_NOISE_CHANNEL_G = value;
-
-var BITMAP_NOISE_CHANNEL_R(get, set):Float;
-
-private extern inline function get_BITMAP_NOISE_CHANNEL_R():Float return flight._cpp._attempt.Attempt_Bitmap_BITMAP_NOISE_CHANNEL_R.BITMAP_NOISE_CHANNEL_R;
-
-private extern inline function set_BITMAP_NOISE_CHANNEL_R(value:Float):Float return flight._cpp._attempt.Attempt_Bitmap_BITMAP_NOISE_CHANNEL_R.BITMAP_NOISE_CHANNEL_R = value;
+private inline function get_BITMAP_NOISE_CHANNEL_R():Float return flight._cpp._fn.Bitmap.get_BITMAP_NOISE_CHANNEL_R();
 
 var ImageChannel(get, set):{ Red:Float, Green:Float, Blue:Float, Alpha:Float };
 

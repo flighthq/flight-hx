@@ -129,5 +129,38 @@ extern class Path {
 
   @:native("flight_hx::path::translate_path")
   static function translatePath(source:flight.Path, dx:Float, dy:Float, out:flight.Path):Void;
+
+  @:native("flight_hx::path::get_path_morph_issue_contour_closedness_mismatch")
+  static function get_PathMorphIssueContourClosednessMismatch():Float;
+
+  @:native("flight_hx::path::get_path_morph_issue_contour_count_mismatch")
+  static function get_PathMorphIssueContourCountMismatch():Float;
+
+  @:native("flight_hx::path::get_path_morph_issue_contour_orientation_mismatch")
+  static function get_PathMorphIssueContourOrientationMismatch():Float;
+
+  @:native("flight_hx::path::get_path_morph_issue_none")
+  static function get_PathMorphIssueNone():Float;
+
+  @:native("flight_hx::path::get_path_morph_issue_winding_mismatch")
+  static function get_PathMorphIssueWindingMismatch():Float;
+
+  @:native("flight_hx::path::get_stroke_path_tessellation_issue_invalid_path")
+  static function get_StrokePathTessellationIssueInvalidPath():Float;
+
+  @:native("flight_hx::path::get_stroke_path_tessellation_issue_invalid_style")
+  static function get_StrokePathTessellationIssueInvalidStyle():Float;
+
+  @:native("flight_hx::path::get_stroke_path_tessellation_issue_none")
+  static function get_StrokePathTessellationIssueNone():Float;
+
+  @:native("flight_hx::path::get_stroke_path_tessellation_issue_reversing_join")
+  static function get_StrokePathTessellationIssueReversingJoin():Float;
+
+  @:native("flight_hx::path::get_stroke_path_tessellation_issue_self_intersecting_centerline")
+  static function get_StrokePathTessellationIssueSelfIntersectingCenterline():Float;
+
+  @:native("flight_hx::path::get_stroke_path_tessellation_issue_self_intersecting_outline")
+  static function get_StrokePathTessellationIssueSelfIntersectingOutline():Float;
 }
 #end

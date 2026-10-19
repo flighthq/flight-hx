@@ -33,6 +33,7 @@ const optionalScalarOverrideProvenance = 'flight-hx/header-confirmed-optional-sc
 const arrayFloatAdapterProvenance = 'flight-hx/array-float-copy-adapter/1';
 const nullableStringAdapterProvenance = 'flight-hx/nullable-string-copy-adapter/1';
 const referenceCarrierProvenance = 'flight-hx/reference-carrier/1';
+const scalarValueProvenance = 'flight-hx/scalar-value-getter/1';
 
 validatePins();
 validateCppInventory();
@@ -41,6 +42,7 @@ const cppModulesByPackage = groupBy(bestEffort.modules, ({ module }) => module.p
 const refusalsByPackage = groupBy(refusalLedger.refusals, ({ package: packageName }) => packageName);
 const cppHeaderIndex = buildCppHeaderIndex(bestEffort.modules);
 const nativeFunctionIndex = buildNativeFunctionIndex();
+const nativeValueIndex = buildNativeValueIndex();
 const nativeTypeIndex = buildNativeTypeIndex();
 const compilerPlanPackages = new Map(nativePlanning.packages.map((package_) => [package_.package, package_]));
 const compilerFunctionCandidatesByPackage = groupBy(
@@ -60,6 +62,7 @@ const packages = defaultApi.packages.map((package_) => {
   const cppModules = cppModulesByPackage.get(package_.package) ?? [];
   const refusals = refusalsByPackage.get(package_.package) ?? [];
   const nativeFunctions = nativeFunctionIndex.get(package_.package) ?? [];
+  const nativeValues = nativeValueIndex.get(package_.package) ?? [];
   const nativeTypes = [...(nativeTypeIndex.get(package_.package) ?? [])].sort(compareText);
   const packageTypeAttempts = typeAttemptsByPackage.get(package_.package) ?? [];
   const packageBindingAttempts = bindingAttemptsByPackage.get(package_.package) ?? [];
@@ -102,7 +105,7 @@ const packages = defaultApi.packages.map((package_) => {
     issue('flight-cpp-refused-modules', statusCounts['refused-placeholder'] ?? 0),
     issue('flight-cpp-dependency-incomplete-modules', statusCounts['dependency-incomplete'] ?? 0),
     issue('native-function-gap', package_.functions.length - nativeFunctions.length),
-    issue('native-value-gap', package_.values.length),
+    issue('native-value-gap', package_.values.length - nativeValues.length),
     issue('native-type-gap', package_.types.filter((name) => !nativeTypes.includes(name)).length),
     issue('non-scalar-signature-review', complexFunctions),
     issue('header-confirmed-scalar-probe-candidates', unboundScalarCandidates.length),
@@ -114,7 +117,7 @@ const packages = defaultApi.packages.map((package_) => {
     issue('native-plan-locator-unavailable', packageUnavailableAttempts.length),
   ].filter(({ count }) => count > 0);
   const webDeclarations = package_.functions.length + package_.types.length + package_.values.length;
-  const nativeDeclarations = nativeFunctions.length + nativeTypes.length;
+  const nativeDeclarations = nativeFunctions.length + nativeTypes.length + nativeValues.length;
   const completeCppModules = statusCounts.emitted ?? 0;
   const dependencyIncompleteCppModules = statusCounts['dependency-incomplete'] ?? 0;
   const status =
@@ -145,7 +148,7 @@ const packages = defaultApi.packages.map((package_) => {
     nativeDefault: {
       functions: nativeFunctions,
       types: nativeTypes,
-      values: [],
+      values: nativeValues,
     },
     nativeAttempts: {
       functions: packageBindingAttempts.filter(({ kind }) => kind === 'function').length,
@@ -165,6 +168,7 @@ const packages = defaultApi.packages.map((package_) => {
 });
 
 const nativeFunctions = [...nativeFunctionIndex.values()].flat();
+const nativeValues = [...nativeValueIndex.values()].flat();
 const nativeUpstreamTypes = new Set([...nativeTypeIndex.values()].flatMap((names) => [...names]));
 const extensionTypeNames = nativeManifest.extensions
   .flatMap(({ publicTypes }) => publicTypes)
@@ -189,6 +193,12 @@ const nullableStringAdapters = nativeOverrideFunctions.filter(
 const referenceCarriers = nativeOverrideFunctions.filter(
   ({ provenance }) => provenance === referenceCarrierProvenance,
 );
+const scalarValues = nativeManifest.modules.flatMap(({ module, values = [] }) =>
+  values.map(({ name, provenance }) => ({ provenance, publicName: `${module}.${name}` })),
+);
+if (scalarValues.some(({ provenance }) => provenance !== scalarValueProvenance)) {
+  throw new Error('Native manifest contains a value with unknown provenance');
+}
 const bestEffortStatus = countBy(bestEffort.modules, ({ status }) => status);
 const statusCounts = countBy(packages, ({ status }) => status);
 const boundScalarKeys = new Set(nativeFunctions.map(({ holder, name }) => `${holder}\0${name}`));
@@ -214,9 +224,9 @@ const report = {
         'Non-scalar types and signatures require an explicit identity, lifetime, nullable/union, callback, and structural-owner mapping; generated C++ header presence alone is not a safe Haxe binding contract.',
     },
     {
-      code: 'native-runtime-values',
+      code: 'native-complex-runtime-values',
       reason:
-        'The current compile-proven native partition binds functions and Scene2D handles but no mutable/default runtime value exports.',
+        'Primitive immutable Float and String exports use owned getter bridges. Array, anonymous-structure, capability, and other complex values remain materialized attempts until their carriers are implemented.',
     },
     {
       code: 'split-compiler-provenance',
@@ -252,6 +262,7 @@ const report = {
     refusals: nativeManifest.scalarOverrideRefusals ?? [],
     requiredScalarFunctions: requiredScalarOverrides.map(({ publicName }) => publicName),
     referenceCarriers: referenceCarriers.map(({ publicName }) => publicName),
+    scalarValues: scalarValues.map(({ publicName }) => publicName),
   },
   packages,
   pins: {
@@ -275,13 +286,13 @@ const report = {
       extensionTypes: extensionTypeNames.length,
       functions: nativeFunctions.length,
       nullableStringAdapters: nullableStringAdapters.length,
-      packages: new Set([...nativeFunctionIndex.keys(), ...nativeTypeIndex.keys()]).size,
+      packages: new Set([...nativeFunctionIndex.keys(), ...nativeTypeIndex.keys(), ...nativeValueIndex.keys()]).size,
       optionalScalarAdapters: optionalScalarOverrides.length,
       referenceCarriers: referenceCarriers.length,
       requiredScalarOverrides: requiredScalarOverrides.length,
       scalarOverrideRefusals: (nativeManifest.scalarOverrideRefusals ?? []).length,
       types: nativeUpstreamTypes.size,
-      values: 0,
+      values: nativeValues.length,
     },
     nativeAttempts: {
       bindingCarrierFamilies: nativeBindingAttempts.summary.carrierFamilies,
@@ -345,6 +356,26 @@ function buildNativeFunctionIndex() {
       );
       if (matches.length !== 1) {
         throw new Error(`Native binding ${holder}.${binding.name} matched ${String(matches.length)} web packages`);
+      }
+      const values = result.get(matches[0].package) ?? [];
+      values.push({ header: binding.header, holder, name: binding.name, native: binding.native });
+      result.set(matches[0].package, values);
+    }
+  }
+  for (const values of result.values()) values.sort(compareApiEntry);
+  return result;
+}
+
+function buildNativeValueIndex() {
+  const result = new Map();
+  for (const module of nativeManifest.modules) {
+    const holder = shortPublicName(module.module);
+    for (const binding of module.values ?? []) {
+      const matches = defaultApi.packages.filter((package_) =>
+        package_.values.some(({ holder: valueHolder, name }) => valueHolder === holder && name === binding.name),
+      );
+      if (matches.length !== 1) {
+        throw new Error(`Native value ${holder}.${binding.name} matched ${String(matches.length)} web packages`);
       }
       const values = result.get(matches[0].package) ?? [];
       values.push({ header: binding.header, holder, name: binding.name, native: binding.native });
@@ -442,6 +473,11 @@ function validatePins() {
     'dependency-complete-required-scalar-compile-run',
   );
   equal(
+    'native manifest scalar value promotion',
+    nativeManifest.haxeBindingPlan.scalarValuePromotion,
+    'dependency-complete-scalar-value-getter-compile-run',
+  );
+  equal(
     'native-plan manifest summary',
     JSON.stringify(nativePlanning.summary),
     JSON.stringify(webManifest.summary.nativePlanning),
@@ -530,6 +566,7 @@ function includes(label, actual, expected) {
 function formatSummary(prefix) {
   return (
     `${prefix}: ${String(report.summary.nativeDefault.functions)} functions and ` +
+    `${String(report.summary.nativeDefault.values)} values and ` +
     `${String(report.summary.nativeDefault.types)} upstream types are compile-proven; ` +
     `${String(report.summary.nativeAttempts.types)} types, ${String(report.summary.nativeAttempts.functions)} functions, and ` +
     `${String(report.summary.nativeAttempts.values)} values are materialized as unproven attempts; ` +
