@@ -274,13 +274,20 @@ function validateNativeManifest(flightCpp) {
       if (!jsMember) fail(`${module.module}.${binding.name} is absent from the current JS extern surface`);
       if (!facadeMember) fail(`${module.module}.${binding.name} is absent from the native public facade`);
       if (!nativeMember) fail(`${module.module}.${binding.name} is absent from the hxcpp extern`);
-      const expectedNativeSignature =
+      let expectedNativeSignature =
         plan.transport === 'optional-override' ||
         (plan.transport === 'array-float-adapter' && jsMember.signature.includes('?')) ||
         (plan.transport === 'reference-carrier' &&
           /\?[A-Za-z_][A-Za-z0-9_]*:(?:Bool|Float)(?:,|\))/u.test(jsMember.signature))
           ? optionalBridgeSignature(jsMember.signature)
           : jsMember.signature;
+      if (
+        plan.transport === 'reference-carrier' &&
+        expectedNativeSignature === jsMember.signature &&
+        jsMember.signature.includes('?')
+      ) {
+        expectedNativeSignature = requiredBridgeSignature(jsMember.signature);
+      }
       if (facadeMember.signature !== jsMember.signature || nativeMember.signature !== expectedNativeSignature) {
         fail(
           `${module.module}.${binding.name} signature differs: JS=${jsMember.signature}, ` +
@@ -456,6 +463,10 @@ function optionalBridgeSignature(signature) {
       })
     : [];
   return `function ${match[1]}(${parameters.join(', ')}):${match[3]}`;
+}
+
+function requiredBridgeSignature(signature) {
+  return signature.replace(/([,(] ?)\?([A-Za-z_][A-Za-z0-9_]*:)/gu, '$1$2');
 }
 
 function runNativeHost(flightCpp, nativeHost, consumer) {
