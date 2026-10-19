@@ -89,26 +89,27 @@ The complete 7,224-file transpiled tree compiles and executes on JavaScript usin
 
 Native integration starts from what the pinned current flight-cpp SDK actually provides, rather than waiting
 for full TS-to-Haxe transpilation or claiming parity it has not earned. `src-cpp/manifest.json` records
-322 compile-proven bindings across 37 public modules: 62 compiler-planned direct calls, four
+323 compile-proven bindings across 37 public modules: 62 compiler-planned direct calls, four
 compiler-emitted UTF-8 String adapters, 53 required-primitive overrides, and three optional-scalar
 adapters plus 45 flat/recursive `Array<Float>` copy adapters and two nullable-String adapters from
-dependency-complete flight-cpp headers, plus 153 reference-carrier bindings that retain
-`flight::Ref<T>` ownership. Optional reference inputs and nullable reference results use a thin
+dependency-complete flight-cpp headers, plus 154 reference-carrier bindings that retain
+`flight::Ref<T>` ownership. Reference arrays copy their owning handles between hxcpp and
+`flight::Array<flight::Ref<T>>`; optional reference inputs and nullable reference results use a thin
 hxcpp-facing owning wrapper while the isolated bridge retains Flight's exact shared-reference ABI;
 string-bearing reference calls convert required and nullable UTF-8 results at that same boundary.
 It also records the generated SDK's distinct source/compiler revisions,
-C++20, and the eight downstream hxcpp/flight-cpp corrections. The current generated native
+C++20, and the nine downstream hxcpp/flight-cpp corrections. The current generated native
 SDK reports 2,574 emitted modules. The manifest remains the exact compile/run-proven partition; the
 default native Haxe root now also exposes a separately recorded attempt tier instead of hiding
 unproven declarations.
 The checked `src-cpp/reconciliation.json` splits that total into 1,902 dependency-complete and 672
 dependency-incomplete modules, alongside 577 refused modules. It reconciles every web package with
-the 322 bound functions, three upstream Scene2D handle types, one integration-only handle, and the
+the 323 bound functions, three upstream Scene2D handle types, one integration-only handle, and the
 remaining gaps. Of 11,247 public SDK rows, flight-cpp provides a locator for 4,268. All 3,073
 symbol-backed type attempts are materialized, including 894 declarations previously refused by the
 Haxe/C++ planner; 44 nested generic reference carriers use generated C++ alias templates. The same
 default `flight.*` root now contains the 269 locator-backed functions already in the proven
-partition plus 547 unproven function attempts and 379 unproven value attempts across 42 holders.
+partition plus 546 unproven function attempts and 379 unproven value attempts across 42 holders.
 Each attempt forwards through its own hidden `extern inline` class, so importing one proven holder
 does not compile all of its experimental siblings; selecting an attempt still reaches its real
 Flight header and symbol.
@@ -123,11 +124,13 @@ they deliberately do not relabel it ABI-safe. The first concrete carrier seams a
 `flight::Array<double>`, preserve aliased arguments and optional-output identity, copy native
 mutations back into Haxe arrays, and execute through the installed-package gate on both C++ and
 ESM. Two more copy required strings into `flight::String` and map optional native results back to
-Haxe `Null<String>`. Another 153 operations across 17 packages now pass `flight::Ref<T>` carriers
+Haxe `Null<String>`. Another 154 operations across 17 packages now pass `flight::Ref<T>` carriers
 without raw pointers or ownership loss; optional primitive arguments use explicit
 presence bits, optional references preserve omission as an empty owning handle, nullable reference
 results map back to Haxe `Null<T>`, required strings and required/nullable UTF-8 results are copied
-at the isolated boundary, optional native numbers map to Haxe `Null<Float>`, and readonly structural
+at the isolated boundary, reference arrays use GC-finalized boxes to copy owning handles without
+weakening their lifetime,
+optional native numbers map to Haxe `Null<Float>`, and readonly structural
 views are accepted where flight-cpp does. These public native functions are
 `extern inline` because hxcpp's reflected static-function wrappers stop at five arguments, while
 call-site inlining preserves the complete Flight signatures. A generated comparison trait makes

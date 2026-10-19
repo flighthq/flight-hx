@@ -36,5 +36,8 @@ extern class Xml {
 
   @:native("flight_hx::xml::get_xml_element_attribute_number")
   static function getXmlElementAttributeNumber(element:flight.XmlElement, name:String):Null<Float>;
+
+  @:native("flight_hx::xml::get_xml_element_children_by_name")
+  static function getXmlElementChildrenByName(element:flight.XmlElement, name:String):Array<flight.XmlElement>;
 }
 #end

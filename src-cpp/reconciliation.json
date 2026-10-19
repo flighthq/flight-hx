@@ -317,7 +317,8 @@
       "flight.Xml.parseXmlDocument",
       "flight.Xml.getXmlElementChildByName",
       "flight.Xml.getXmlElementAttribute",
-      "flight.Xml.getXmlElementAttributeNumber"
+      "flight.Xml.getXmlElementAttributeNumber",
+      "flight.Xml.getXmlElementChildrenByName"
     ]
   },
   "packages": [
@@ -13581,7 +13582,7 @@
       "issues": [
         {
           "code": "native-function-gap",
-          "count": 2
+          "count": 1
         },
         {
           "code": "non-scalar-signature-review",
@@ -13593,7 +13594,7 @@
         },
         {
           "code": "native-materialized-unproven-functions",
-          "count": 2
+          "count": 1
         }
       ],
       "nativeDefault": {
@@ -13619,6 +13620,12 @@
           {
             "header": "flight/xml/contract.hpp",
             "holder": "Xml",
+            "name": "getXmlElementChildrenByName",
+            "native": "flight::xml::get_xml_element_children_by_name"
+          },
+          {
+            "header": "flight/xml/contract.hpp",
+            "holder": "Xml",
             "name": "parseXmlDocument",
             "native": "flight::xml::parse_xml_document"
           }
@@ -13627,7 +13634,7 @@
         "values": []
       },
       "nativeAttempts": {
-        "functions": 2,
+        "functions": 1,
         "types": 0,
         "unavailableUpstream": 0,
         "values": 0
@@ -13661,11 +13668,11 @@
       "arrayFloatAdapters": 45,
       "boundHeaderConfirmedScalarFunctions": 114,
       "extensionTypes": 1,
-      "functions": 322,
+      "functions": 323,
       "nullableStringAdapters": 2,
       "packages": 38,
       "optionalScalarAdapters": 3,
-      "referenceCarriers": 153,
+      "referenceCarriers": 154,
       "requiredScalarOverrides": 53,
       "scalarOverrideRefusals": 0,
       "types": 3,
@@ -13678,7 +13685,7 @@
           "name": "anonymous-structure"
         },
         {
-          "count": 77,
+          "count": 76,
           "name": "array"
         },
         {
@@ -13694,7 +13701,7 @@
           "name": "generic-function"
         },
         {
-          "count": 594,
+          "count": 593,
           "name": "named"
         },
         {
@@ -13713,10 +13720,10 @@
       "compileProbes": 0,
       "cppAvailable": 4268,
       "cppUnavailable": 6979,
-      "functions": 547,
+      "functions": 546,
       "genericReferenceTemplateAdapters": 44,
       "haxeTypecheck": "pass",
-      "isolatedFunctionValueExterns": 926,
+      "isolatedFunctionValueExterns": 925,
       "types": 3073,
       "values": 379
     },

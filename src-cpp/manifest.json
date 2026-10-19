@@ -26,6 +26,7 @@
     "flight-hx-hxcpp-nullable-string-copy-adapter/1",
     "flight-hx-hxcpp-reference-carrier/1",
     "flight-hx-hxcpp-nullable-reference-wrapper/1",
+    "flight-hx-hxcpp-reference-array-box/1",
     "flight-hx-hxcpp-owned-string-copy/1",
     "flight-hx-hxcpp-nullable-scalar-compare/1"
   ],
@@ -2107,6 +2108,12 @@
         {
           "name": "getXmlElementAttributeNumber",
           "native": "flight::xml::get_xml_element_attribute_number",
+          "header": "flight/xml/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "getXmlElementChildrenByName",
+          "native": "flight::xml::get_xml_element_children_by_name",
           "header": "flight/xml/contract.hpp",
           "provenance": "flight-hx/reference-carrier/1"
         }

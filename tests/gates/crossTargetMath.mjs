@@ -48,6 +48,7 @@ const expectedCorrections = [
   'flight-hx-hxcpp-nullable-string-copy-adapter/1',
   'flight-hx-hxcpp-reference-carrier/1',
   'flight-hx-hxcpp-nullable-reference-wrapper/1',
+  'flight-hx-hxcpp-reference-array-box/1',
   'flight-hx-hxcpp-owned-string-copy/1',
   'flight-hx-hxcpp-nullable-scalar-compare/1',
 ];

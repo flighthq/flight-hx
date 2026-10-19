@@ -18,7 +18,7 @@ extern inline function getXmlElementAttributeNumber(element:flight.XmlElement, n
 }
 
 extern inline function getXmlElementChildrenByName(element:flight.XmlElement, name:String):Array<flight.XmlElement> {
-  return flight._cpp._attempt.Attempt_Xml_getXmlElementChildrenByName.getXmlElementChildrenByName(element, name);
+  return flight._cpp._fn.Xml.getXmlElementChildrenByName(element, name);
 }
 
 extern inline function parseXmlAttributes(attrs:String):haxe.DynamicAccess<String> {

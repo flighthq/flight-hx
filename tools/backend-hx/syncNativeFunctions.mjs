@@ -781,7 +781,10 @@ function emitBridgeHeader(module, bindings) {
   const referenceTypeNames = [...new Set(
     bindings
       .flatMap(({ parsed }) => [...parsed.parameters.map(({ type }) => type), parsed.result])
-      .map((type) => nativeReferenceTypes.get(nullableReferenceInner(type) ?? type)?.nativeName)
+      .map(
+        (type) =>
+          nativeReferenceTypes.get(nullableReferenceInner(type) ?? referenceArrayInner(type) ?? type)?.nativeName,
+      )
       .filter(Boolean)
       .map((nativeName) => {
         const match = /^flight::Ref<flight::types::([A-Za-z_][A-Za-z0-9_]*)>$/u.exec(nativeName);
@@ -797,7 +800,11 @@ function emitBridgeHeader(module, bindings) {
         isArrayFloatAdapter(binding) ||
         isNullableStringAdapter(binding) ||
         [...binding.parsed.parameters.map(({ type }) => type), binding.parsed.result].some(
-          (type) => type === 'Null<Float>' || type === 'String' || type === 'Null<String>',
+          (type) =>
+            type === 'Null<Float>' ||
+            type === 'String' ||
+            type === 'Null<String>' ||
+            isReferenceArrayType(type),
         ),
     )
       ? ['#include <hxcpp.h>']
@@ -824,6 +831,9 @@ function emitBridgeSource(module, bindings) {
   const namespace = nativeNamespace(module, bindings);
   const holder = module.module.replace(/^flight\./u, '').toLowerCase();
   const needsArrayFloatAdapter = bindings.some(isArrayFloatAdapter);
+  const needsReferenceArrayAdapter = bindings.some((binding) =>
+    [...binding.parsed.parameters.map(({ type }) => type), binding.parsed.result].some(isReferenceArrayType),
+  );
   const needsStringCopy = bindings.some(
     (binding) =>
       isNullableStringAdapter(binding) ||
@@ -839,9 +849,16 @@ function emitBridgeSource(module, bindings) {
   );
   const lines = [
     '// Generated from src-cpp/manifest.json and flight-compiler native-planning.json. Do not edit.',
-    ...(needsArrayFloatAdapter ? ['#include <limits>', '#include <stdexcept>'] : []),
+    ...(needsArrayFloatAdapter || needsReferenceArrayAdapter
+      ? ['#include <limits>', '#include <stdexcept>']
+      : []),
     ...(needsStringCopy
-      ? [...(needsArrayFloatAdapter ? [] : ['#include <limits>', '#include <stdexcept>']), '#include <string>']
+      ? [
+          ...(needsArrayFloatAdapter || needsReferenceArrayAdapter
+            ? []
+            : ['#include <limits>', '#include <stdexcept>']),
+          '#include <string>',
+        ]
       : []),
     ...[...new Set(bindings.map(({ header }) => header))].sort(compareText).map((header) => `#include <${header}>`),
     `#include <flight_hx/${holder}.hpp>`,
@@ -943,6 +960,45 @@ function emitBridgeSource(module, bindings) {
       '',
     );
   }
+  if (needsReferenceArrayAdapter) {
+    lines.push(
+      'namespace {',
+      '',
+      'template <typename T>',
+      'flight::Array<flight::Ref<T>> to_flight_reference_array(const ::Array<::Dynamic>& source) {',
+      '  flight::Array<flight::Ref<T>> result;',
+      '  for (int index = 0; index < source->length; ++index) {',
+      '    const ::Dynamic value = source[index];',
+      '    result.push(value.GetPtr() ? static_cast<flight::Ref<T>>(value.StaticCast<flight_hx::Ref<T>>()) : flight::Ref<T>{});',
+      '  }',
+      '  return result;',
+      '}',
+      '',
+      'template <typename T>',
+      '::Array<::Dynamic> to_haxe_reference_array(const flight::Array<flight::Ref<T>>& source) {',
+      '  if (source.size() > static_cast<std::size_t>(std::numeric_limits<int>::max())) {',
+      '    throw std::length_error("Flight reference Array exceeds the hxcpp Array length limit");',
+      '  }',
+      '  ::Array<::Dynamic> result = ::Array_obj<::Dynamic>::__new(static_cast<int>(source.size()));',
+      '  int index = 0;',
+      '  for (const flight::Ref<T>& value : source) result[index++] = flight_hx::Ref<T>(value);',
+      '  return result;',
+      '}',
+      '',
+      'template <typename T>',
+      'void replace_haxe_reference_array(::Array<::Dynamic> destination, const flight::Array<flight::Ref<T>>& source) {',
+      '  if (source.size() > static_cast<std::size_t>(std::numeric_limits<int>::max())) {',
+      '    throw std::length_error("Flight reference Array exceeds the hxcpp Array length limit");',
+      '  }',
+      '  destination->resize(static_cast<int>(source.size()));',
+      '  int index = 0;',
+      '  for (const flight::Ref<T>& value : source) destination[index++] = flight_hx::Ref<T>(value);',
+      '}',
+      '',
+      '} // namespace',
+      '',
+    );
+  }
   for (const binding of bindings) {
     const { native, parsed } = binding;
     const functionName = native.slice(native.lastIndexOf('::') + 2);
@@ -955,6 +1011,12 @@ function emitBridgeSource(module, bindings) {
     }
     if (isNullableStringAdapter(binding)) {
       emitNullableStringBridgeBody(lines, binding, functionName, parameters);
+      continue;
+    }
+    if (
+      [...parsed.parameters.map(({ type }) => type), parsed.result].some(isReferenceArrayType)
+    ) {
+      emitReferenceCarrierBridgeBody(lines, binding, functionName, parameters);
       continue;
     }
     const arguments_ = nativeArguments(binding).join(', ');
@@ -1023,7 +1085,9 @@ function nativeArguments(binding) {
 }
 
 function nativeArgumentValue(name, type) {
-  return type === 'String' ? `flight::String::from_utf8(${name}.utf8_str())` : name;
+  if (type === 'String') return `flight::String::from_utf8(${name}.utf8_str())`;
+  if (isReferenceArrayType(type)) return `flight_${name}`;
+  return name;
 }
 
 function usesExpandedOptionalParameters(binding) {
@@ -1049,7 +1113,20 @@ function nullableReferenceInner(type) {
 }
 
 function isReferenceCarrierType(type) {
-  return nativeReferenceTypes.has(type) || nullableReferenceInner(type) !== undefined;
+  return (
+    nativeReferenceTypes.has(type) ||
+    nullableReferenceInner(type) !== undefined ||
+    referenceArrayInner(type) !== undefined
+  );
+}
+
+function referenceArrayInner(type) {
+  const match = /^Array<(flight\.[A-Z][A-Za-z0-9_]*)>$/u.exec(type);
+  return match && nativeReferenceTypes.has(match[1]) ? match[1] : undefined;
+}
+
+function isReferenceArrayType(type) {
+  return referenceArrayInner(type) !== undefined;
 }
 
 function nativeResultPattern(type) {
@@ -1130,6 +1207,53 @@ function emitNullableStringBridgeBody(lines, binding, functionName, parameters) 
   lines.push('  if (!result.has_value()) return null();');
   lines.push('  const std::string result_utf8 = result->to_utf8();');
   lines.push(...haxeStringCopyLines('result_utf8'));
+  lines.push('}', '');
+}
+
+function emitReferenceCarrierBridgeBody(lines, binding, functionName, parameters) {
+  const arrayParameters = binding.parsed.parameters.filter(({ type }) => isReferenceArrayType(type));
+  lines.push(`${cppType(binding.parsed.result)} ${functionName}(${parameters}) {`);
+  for (let index = 0; index < arrayParameters.length; index += 1) {
+    const parameter = arrayParameters[index];
+    const name = safeCppName(parameter.name);
+    const earlier = arrayParameters.slice(0, index).filter(({ type }) => type === parameter.type);
+    const conversion = earlier.reduceRight(
+      (fallback, previous) => {
+        const previousName = safeCppName(previous.name);
+        return `${name}.GetPtr() == ${previousName}.GetPtr() ? flight_${previousName} : (${fallback})`;
+      },
+      `to_flight_reference_array<${cppReferencePointee(parameter.type)}>(${name})`,
+    );
+    lines.push(`  auto flight_${name} = ${conversion};`);
+  }
+  const call = `${binding.native}(${nativeArguments(binding).join(', ')})`;
+  if (binding.parsed.result === 'Void') lines.push(`  ${call};`);
+  else lines.push(`  const auto result = ${call};`);
+  for (const parameter of arrayParameters) {
+    const name = safeCppName(parameter.name);
+    const statement = `replace_haxe_reference_array<${cppReferencePointee(parameter.type)}>(${name}, flight_${name});`;
+    lines.push(parameter.optional ? `  if (${safeCppName(`${parameter.name}Present`)}) ${statement}` : `  ${statement}`);
+  }
+  if (isReferenceArrayType(binding.parsed.result)) {
+    for (const parameter of arrayParameters) {
+      if (parameter.type !== binding.parsed.result) continue;
+      const name = safeCppName(parameter.name);
+      const condition = `result.identity() == flight_${name}.identity()`;
+      lines.push(parameter.optional ? `  if (${safeCppName(`${parameter.name}Present`)} && ${condition}) return ${name};` : `  if (${condition}) return ${name};`);
+    }
+    lines.push(`  return to_haxe_reference_array<${cppReferencePointee(binding.parsed.result)}>(result);`);
+  } else if (nullableReferenceInner(binding.parsed.result) || binding.parsed.result === 'Null<Float>') {
+    lines.push(`  return result.has_value() ? ${cppType(binding.parsed.result)}{result.value()} : ${cppType(binding.parsed.result)}{};`);
+  } else if (binding.parsed.result === 'Null<String>') {
+    lines.push('  if (!result.has_value()) return null();');
+    lines.push('  const std::string result_utf8 = result->to_utf8();');
+    lines.push(...haxeStringCopyLines('result_utf8'));
+  } else if (binding.parsed.result === 'String') {
+    lines.push('  const std::string result_utf8 = result.to_utf8();');
+    lines.push(...haxeStringCopyLines('result_utf8'));
+  } else if (binding.parsed.result !== 'Void') {
+    lines.push('  return result;');
+  }
   lines.push('}', '');
 }
 
@@ -1287,11 +1411,12 @@ function haxeZero(type) {
   if (type === 'Float') return '0.0';
   if (type === 'Array<Float>') return '([] : Array<Float>)';
   if (type === 'Array<Array<Float>>') return '([] : Array<Array<Float>>)';
+  if (isReferenceArrayType(type)) return `([] : ${type})`;
   throw new Error(`Unsupported optional native Haxe carrier ${type}`);
 }
 
 function parseSignature(signature) {
-  const typePattern = '(?:Array<Array<Float>>|Array<Float>|Null<Float>|Null<String>|Null<flight\\.[A-Z][A-Za-z0-9_]*>|Bool|Float|String|Void|flight\\.[A-Z][A-Za-z0-9_]*)';
+  const typePattern = '(?:Array<Array<Float>>|Array<Float>|Array<flight\\.[A-Z][A-Za-z0-9_]*>|Null<Float>|Null<String>|Null<flight\\.[A-Z][A-Za-z0-9_]*>|Bool|Float|String|Void|flight\\.[A-Z][A-Za-z0-9_]*)';
   const match = new RegExp(`^function ([A-Za-z_][A-Za-z0-9_]*)\\((.*)\\):(${typePattern})$`, 'u').exec(signature);
   if (!match) throw new Error(`Native function has unsupported Haxe signature: ${signature}`);
   const parameters = match[2]
@@ -1307,6 +1432,7 @@ function parseSignature(signature) {
 function cppType(type) {
   if (type === 'Array<Array<Float>>') return '::Array<::Array<double>>';
   if (type === 'Array<Float>') return '::Array<double>';
+  if (referenceArrayInner(type)) return '::Array<::Dynamic>';
   if (type === 'Bool') return 'bool';
   if (type === 'Float') return 'double';
   if (type === 'Null<Float>') return '::hx::Null<double>';
@@ -1322,8 +1448,18 @@ function cppType(type) {
 function flightCppType(type) {
   if (type === 'Array<Array<Float>>') return 'flight::Array<flight::Array<double>>';
   if (type === 'Array<Float>') return 'flight::Array<double>';
+  if (referenceArrayInner(type)) return `flight::Array<${cppType(referenceArrayInner(type))}>`;
   if (type === 'String') return 'flight::String';
   return cppType(type);
+}
+
+function cppReferencePointee(type) {
+  const inner = referenceArrayInner(type);
+  if (!inner) throw new Error(`Unsupported reference Array carrier ${type}`);
+  const nativeName = nativeReferenceTypes.get(inner).nativeName;
+  const match = /^flight::Ref<(.+)>$/u.exec(nativeName);
+  if (!match) throw new Error(`Reference Array element is not flight::Ref<T>: ${nativeName}`);
+  return match[1];
 }
 
 function safeCppName(name) {

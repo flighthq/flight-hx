@@ -171,7 +171,7 @@ class CrossTargetMath {
     invalidateBitmap(clonedBitmap);
     invalidateBitmap(trimBitmap(firstBitmap));
 
-    final xmlRoot = parseXmlDocument('<root answer="42"><child /></root>');
+    final xmlRoot = parseXmlDocument('<root answer="42"><child name="first" /></root>');
     assertTrue('XML parse', xmlRoot != null);
     if (xmlRoot != null) {
       assertString('XML attribute', getXmlElementAttribute(xmlRoot, 'answer'), '42');
@@ -181,6 +181,9 @@ class CrossTargetMath {
       assertTrue('XML missing numeric attribute', getXmlElementAttributeNumber(xmlRoot, 'missing') == null);
       assertTrue('XML child lookup', getXmlElementChildByName(xmlRoot, 'child') != null);
       assertTrue('XML missing child', getXmlElementChildByName(xmlRoot, 'missing') == null);
+      final xmlChildren = getXmlElementChildrenByName(xmlRoot, 'child');
+      assertTrue('XML child list', xmlChildren.length == 1 && xmlChildren[0] != null);
+      assertString('XML child list item', getXmlElementAttribute(xmlChildren[0], 'name'), 'first');
     }
     final spring = createSpring();
     final spring2D = createSpring2D();

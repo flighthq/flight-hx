@@ -17900,26 +17900,6 @@
     },
     {
       "carrierFamilies": [
-        "array",
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Xml_getXmlElementChildrenByName",
-      "header": "flight/xml/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::xml::get_xml_element_children_by_name",
-      "package": "@flighthq/xml",
-      "publicName": "flight.Xml.getXmlElementChildrenByName",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/xml/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
         "dynamic",
         "named"
       ],
@@ -17947,14 +17927,14 @@
   },
   "schema": "flight-hx-native-binding-attempts/1",
   "summary": {
-    "functions": 547,
+    "functions": 546,
     "carrierFamilies": [
       {
         "count": 80,
         "name": "anonymous-structure"
       },
       {
-        "count": 77,
+        "count": 76,
         "name": "array"
       },
       {
@@ -17970,7 +17950,7 @@
         "name": "generic-function"
       },
       {
-        "count": 594,
+        "count": 593,
         "name": "named"
       },
       {
@@ -17987,8 +17967,8 @@
       }
     ],
     "holders": 42,
-    "isolatedExterns": 926,
-    "total": 926,
+    "isolatedExterns": 925,
+    "total": 925,
     "values": 379
   }
 }
