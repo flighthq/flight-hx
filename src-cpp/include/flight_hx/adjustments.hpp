@@ -1,6 +1,7 @@
 // Generated from src-cpp/manifest.json and flight-compiler native-planning.json. Do not edit.
 #pragma once
 #include <hxcpp.h>
+#include <flight_hx/types/reference_fwd.hpp>
 
 // Declaration-only boundary: no flight::* type enters hxcpp-generated namespace flight.
 namespace flight_hx::adjustments {
@@ -28,5 +29,7 @@ void concat_color_matrix(::Array<double> target, ::Array<double> source);
 ::Array<double> create_white_balance_color_matrix(double temperature, double tint);
 bool is_affine_color_matrix(::Array<double> matrix);
 ::Array<double> multiply_color_matrix(::Array<double> a, ::Array<double> b, bool outPresent, ::Array<double> out);
+flight::Ref<flight::types::ColorLutCache> create_color_lut_cache();
+flight::Ref<flight::types::TintAdjustment> create_tint_adjustment(double rgba);
 
 } // namespace flight_hx::adjustments

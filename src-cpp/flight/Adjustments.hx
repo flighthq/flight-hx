@@ -93,6 +93,14 @@ inline function multiplyColorMatrix(a:Array<Float>, b:Array<Float>, ?out:Array<F
   return flight._cpp._fn.Adjustments.multiplyColorMatrix(a, b, out != null, out == null ? ([] : Array<Float>) : out);
 }
 
+extern inline function createColorLutCache():flight.ColorLutCache {
+  return flight._cpp._fn.Adjustments.createColorLutCache();
+}
+
+extern inline function createTintAdjustment(rgba:Float):flight.TintAdjustment {
+  return flight._cpp._fn.Adjustments.createTintAdjustment(rgba);
+}
+
 var COLOR_ADJUSTMENT_AFFINE(get, set):Float;
 
 private extern inline function get_COLOR_ADJUSTMENT_AFFINE():Float return flight._cpp._attempt.Attempt_Adjustments_COLOR_ADJUSTMENT_AFFINE.COLOR_ADJUSTMENT_AFFINE;
@@ -147,10 +155,6 @@ extern inline function createColorGradeAdjustment(?options:Dynamic):flight.Color
   return flight._cpp._attempt.Attempt_Adjustments_createColorGradeAdjustment.createColorGradeAdjustment(options);
 }
 
-extern inline function createColorLutCache():flight.ColorLutCache {
-  return flight._cpp._attempt.Attempt_Adjustments_createColorLutCache.createColorLutCache();
-}
-
 extern inline function createColorMatrixAdjustment(colorMatrix:Array<Float>):flight.ColorMatrixAdjustment {
   return flight._cpp._attempt.Attempt_Adjustments_createColorMatrixAdjustment.createColorMatrixAdjustment(colorMatrix);
 }
@@ -185,10 +189,6 @@ extern inline function createLookupTableGradeAdjustment(?options:Dynamic):flight
 
 extern inline function createSepiaAdjustment(?options:Dynamic):flight.SepiaAdjustment {
   return flight._cpp._attempt.Attempt_Adjustments_createSepiaAdjustment.createSepiaAdjustment(options);
-}
-
-extern inline function createTintAdjustment(rgba:Float):flight.TintAdjustment {
-  return flight._cpp._attempt.Attempt_Adjustments_createTintAdjustment.createTintAdjustment(rgba);
 }
 
 extern inline function getAdjustmentColorMatrix(operation:{ kind:String }):Null<Array<Float>> {

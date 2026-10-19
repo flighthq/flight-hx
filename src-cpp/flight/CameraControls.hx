@@ -1,6 +1,10 @@
 // Generated from src-cpp/manifest.json and flight-compiler native-planning.json. Do not edit.
 package flight;
 
+extern inline function createCameraShakeOffset():flight.CameraShakeOffset {
+  return flight._cpp._fn.CameraControls.createCameraShakeOffset();
+}
+
 extern inline function addCameraShakeTrauma(shake:flight.CameraShake, amount:Float):Void {
   flight._cpp._attempt.Attempt_CameraControls_addCameraShakeTrauma.addCameraShakeTrauma(shake, amount);
 }
@@ -23,10 +27,6 @@ extern inline function copyOrbitCameraController(out:flight.OrbitCameraControlle
 
 extern inline function createCameraShake(?options:flight.CameraShakeOptions):flight.CameraShake {
   return flight._cpp._attempt.Attempt_CameraControls_createCameraShake.createCameraShake(options);
-}
-
-extern inline function createCameraShakeOffset():flight.CameraShakeOffset {
-  return flight._cpp._attempt.Attempt_CameraControls_createCameraShakeOffset.createCameraShakeOffset();
 }
 
 extern inline function createFlyCameraController(?options:flight.FlyCameraControllerOptions):flight.FlyCameraController {

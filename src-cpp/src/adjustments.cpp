@@ -243,4 +243,12 @@ bool is_affine_color_matrix(::Array<double> matrix) {
   return to_haxe_array(result);
 }
 
+flight::Ref<flight::types::ColorLutCache> create_color_lut_cache() {
+  return flight::adjustments::create_color_lut_cache();
+}
+
+flight::Ref<flight::types::TintAdjustment> create_tint_adjustment(double rgba) {
+  return flight::adjustments::create_tint_adjustment(rgba);
+}
+
 } // namespace flight_hx::adjustments

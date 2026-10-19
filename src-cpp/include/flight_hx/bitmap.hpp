@@ -47,5 +47,8 @@ void set_bitmap_pixel(flight::Ref<flight::types::Bitmap> out, double x, double y
 void set_bitmap_pixel_rgb(flight::Ref<flight::types::Bitmap> out, double x, double y, double color);
 flight::Ref<flight::types::BitmapRegion> set_bitmap_region(flight::Ref<flight::types::BitmapRegion> out, flight::Ref<flight::types::Bitmap> bitmap, bool xPresent, double x, bool yPresent, double y, bool widthPresent, double width, bool heightPresent, double height);
 flight::Ref<flight::types::Bitmap> trim_bitmap(flight::Ref<flight::types::Bitmap> source);
+double compare_bitmap_fingerprints(flight::Ref<flight::types::BitmapFingerprint> a, flight::Ref<flight::types::BitmapFingerprint> b);
+flight::Ref<flight::types::BitmapFingerprint> create_bitmap_fingerprint(flight::Ref<flight::types::Bitmap> source, bool gridSizePresent, double gridSize);
+flight::Ref<flight::types::BitmapHistogram> get_bitmap_histogram(flight::Ref<flight::types::BitmapRegion> source);
 
 } // namespace flight_hx::bitmap

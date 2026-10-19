@@ -221,4 +221,16 @@ flight::Ref<flight::types::Bitmap> trim_bitmap(flight::Ref<flight::types::Bitmap
   return flight::bitmap::trim_bitmap(source);
 }
 
+double compare_bitmap_fingerprints(flight::Ref<flight::types::BitmapFingerprint> a, flight::Ref<flight::types::BitmapFingerprint> b) {
+  return flight::bitmap::compare_bitmap_fingerprints(a, b);
+}
+
+flight::Ref<flight::types::BitmapFingerprint> create_bitmap_fingerprint(flight::Ref<flight::types::Bitmap> source, bool gridSizePresent, double gridSize) {
+  return flight::bitmap::create_bitmap_fingerprint(source, (gridSizePresent ? std::optional<double>{gridSize} : std::nullopt));
+}
+
+flight::Ref<flight::types::BitmapHistogram> get_bitmap_histogram(flight::Ref<flight::types::BitmapRegion> source) {
+  return flight::bitmap::get_bitmap_histogram(source);
+}
+
 } // namespace flight_hx::bitmap

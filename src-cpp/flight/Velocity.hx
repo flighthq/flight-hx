@@ -1,12 +1,16 @@
 // Generated from src-cpp/manifest.json and flight-compiler native-planning.json. Do not edit.
 package flight;
 
-extern inline function addVelocity(out:flight.Velocity2D, a:flight.Velocity2D, b:flight.Velocity2D):flight.Velocity2D {
-  return flight._cpp._attempt.Attempt_Velocity_addVelocity.addVelocity(out, a, b);
+extern inline function beginVelocityFrame(field:flight.VelocityField):Void {
+  flight._cpp._fn.Velocity.beginVelocityFrame(field);
 }
 
-extern inline function beginVelocityFrame(field:flight.VelocityField):Void {
-  flight._cpp._attempt.Attempt_Velocity_beginVelocityFrame.beginVelocityFrame(field);
+extern inline function createVelocityField():flight.VelocityField {
+  return flight._cpp._fn.Velocity.createVelocityField();
+}
+
+extern inline function addVelocity(out:flight.Velocity2D, a:flight.Velocity2D, b:flight.Velocity2D):flight.Velocity2D {
+  return flight._cpp._attempt.Attempt_Velocity_addVelocity.addVelocity(out, a, b);
 }
 
 extern inline function clampVelocity(out:flight.Velocity2D, velocity:flight.Velocity2D, maxLength:Float):flight.Velocity2D {
@@ -23,10 +27,6 @@ extern inline function contributeVelocity(field:flight.VelocityField, source:Dyn
 
 extern inline function copyVelocity(out:flight.Velocity2D, source:flight.Velocity2D):flight.Velocity2D {
   return flight._cpp._attempt.Attempt_Velocity_copyVelocity.copyVelocity(out, source);
-}
-
-extern inline function createVelocityField():flight.VelocityField {
-  return flight._cpp._attempt.Attempt_Velocity_createVelocityField.createVelocityField();
 }
 
 extern inline function dampVelocity(out:flight.Velocity2D, current:flight.Velocity2D, previous:flight.Velocity2D, factor:Float):flight.Velocity2D {

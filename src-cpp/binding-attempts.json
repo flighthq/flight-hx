@@ -381,25 +381,6 @@
     },
     {
       "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Adjustments_createColorLutCache",
-      "header": "flight/adjustments/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::adjustments::create_color_lut_cache",
-      "package": "@flighthq/adjustments",
-      "publicName": "flight.Adjustments.createColorLutCache",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier ColorLutCache has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/adjustments/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
         "array",
         "named"
       ],
@@ -571,25 +552,6 @@
       "refusal": {
         "code": "unsupported-carrier",
         "message": "defaulted parameters need an exact C++ default-argument contract",
-        "phase": "planning"
-      },
-      "source": "packages/adjustments/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Adjustments_createTintAdjustment",
-      "header": "flight/adjustments/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::adjustments::create_tint_adjustment",
-      "package": "@flighthq/adjustments",
-      "publicName": "flight.Adjustments.createTintAdjustment",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier TintAdjustment has no unique published C++ type locator",
         "phase": "planning"
       },
       "source": "packages/adjustments/src/contract.ts",
@@ -2177,25 +2139,6 @@
     },
     {
       "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Bitmap_compareBitmapFingerprints",
-      "header": "flight/bitmap/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::bitmap::compare_bitmap_fingerprints",
-      "package": "@flighthq/bitmap",
-      "publicName": "flight.Bitmap.compareBitmapFingerprints",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/bitmap/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
         "named",
         "typed-array"
       ],
@@ -2321,25 +2264,6 @@
       "nativeName": "flight::bitmap::copy_bitmap_channel",
       "package": "@flighthq/bitmap",
       "publicName": "flight.Bitmap.copyBitmapChannel",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/bitmap/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Bitmap_createBitmapFingerprint",
-      "header": "flight/bitmap/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::bitmap::create_bitmap_fingerprint",
-      "package": "@flighthq/bitmap",
-      "publicName": "flight.Bitmap.createBitmapFingerprint",
       "refusal": {
         "code": "unsupported-carrier",
         "message": "type family named is outside the Haxe C++ extern vertical slice",
@@ -2677,25 +2601,6 @@
       "nativeName": "flight::bitmap::get_bitmap_color_bounds_rectangle",
       "package": "@flighthq/bitmap",
       "publicName": "flight.Bitmap.getBitmapColorBoundsRectangle",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/bitmap/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Bitmap_getBitmapHistogram",
-      "header": "flight/bitmap/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::bitmap::get_bitmap_histogram",
-      "package": "@flighthq/bitmap",
-      "publicName": "flight.Bitmap.getBitmapHistogram",
       "refusal": {
         "code": "unsupported-carrier",
         "message": "type family named is outside the Haxe C++ extern vertical slice",
@@ -3293,25 +3198,6 @@
       "refusal": {
         "code": "unsupported-carrier",
         "message": "only optional Float is supported by this Haxe C++ extern slice",
-        "phase": "planning"
-      },
-      "source": "packages/camera-controls/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_CameraControls_createCameraShakeOffset",
-      "header": "flight/camera_controls/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::camera_controls::create_camera_shake_offset",
-      "package": "@flighthq/camera-controls",
-      "publicName": "flight.CameraControls.createCameraShakeOffset",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier CameraShakeOffset has no unique published C++ type locator",
         "phase": "planning"
       },
       "source": "packages/camera-controls/src/contract.ts",
@@ -5442,25 +5328,6 @@
       "refusal": {
         "code": "unsupported-carrier",
         "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/geolocation/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Geolocation_createGeolocationPosition",
-      "header": "flight/geolocation/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::geolocation::create_geolocation_position",
-      "package": "@flighthq/geolocation",
-      "publicName": "flight.Geolocation.createGeolocationPosition",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier FlightGeolocationPosition has no unique published C++ type locator",
         "phase": "planning"
       },
       "source": "packages/geolocation/src/contract.ts",
@@ -9178,25 +9045,6 @@
       "refusal": {
         "code": "unsupported-carrier",
         "message": "type family union is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/platform/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Platform_createPlatformInfo",
-      "header": "flight/platform/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::platform::create_platform_info",
-      "package": "@flighthq/platform",
-      "publicName": "flight.Platform.createPlatformInfo",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier PlatformInfo has no unique published C++ type locator",
         "phase": "planning"
       },
       "source": "packages/platform/src/contract.ts",
@@ -18372,25 +18220,6 @@
       "carrierFamilies": [
         "named"
       ],
-      "externClass": "flight._cpp._attempt.Attempt_Velocity_beginVelocityFrame",
-      "header": "flight/velocity/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::velocity::begin_velocity_frame",
-      "package": "@flighthq/velocity",
-      "publicName": "flight.Velocity.beginVelocityFrame",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier VelocityField has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/velocity/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
       "externClass": "flight._cpp._attempt.Attempt_Velocity_clampVelocity",
       "header": "flight/velocity/contract.hpp",
       "kind": "function",
@@ -18460,25 +18289,6 @@
       "refusal": {
         "code": "unsupported-carrier",
         "message": "named carrier Velocity2D has no unique published C++ type locator",
-        "phase": "planning"
-      },
-      "source": "packages/velocity/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "named"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Velocity_createVelocityField",
-      "header": "flight/velocity/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::velocity::create_velocity_field",
-      "package": "@flighthq/velocity",
-      "publicName": "flight.Velocity.createVelocityField",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "named carrier VelocityField has no unique published C++ type locator",
         "phase": "planning"
       },
       "source": "packages/velocity/src/contract.ts",
@@ -18904,7 +18714,7 @@
   },
   "schema": "flight-hx-native-binding-attempts/1",
   "summary": {
-    "functions": 597,
+    "functions": 587,
     "carrierFamilies": [
       {
         "count": 80,
@@ -18927,7 +18737,7 @@
         "name": "generic-function"
       },
       {
-        "count": 644,
+        "count": 634,
         "name": "named"
       },
       {
@@ -18944,8 +18754,8 @@
       }
     ],
     "holders": 42,
-    "isolatedExterns": 976,
-    "total": 976,
+    "isolatedExterns": 966,
+    "total": 966,
     "values": 379
   }
 }

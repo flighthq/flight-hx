@@ -1,12 +1,12 @@
 // Generated from src-cpp/manifest.json and flight-compiler native-planning.json. Do not edit.
 package flight;
 
-extern inline function clearGeolocationWatch(hostGeolocation:flight.HostGeolocationCapability, id:Float):Void {
-  flight._cpp._attempt.Attempt_Geolocation_clearGeolocationWatch.clearGeolocationWatch(hostGeolocation, id);
+extern inline function createGeolocationPosition():flight.GeolocationPosition {
+  return flight._cpp._fn.Geolocation.createGeolocationPosition();
 }
 
-extern inline function createGeolocationPosition():flight.GeolocationPosition {
-  return flight._cpp._attempt.Attempt_Geolocation_createGeolocationPosition.createGeolocationPosition();
+extern inline function clearGeolocationWatch(hostGeolocation:flight.HostGeolocationCapability, id:Float):Void {
+  flight._cpp._attempt.Attempt_Geolocation_clearGeolocationWatch.clearGeolocationWatch(hostGeolocation, id);
 }
 
 extern inline function getCurrentGeolocationPosition(hostGeolocation:flight.HostGeolocationCapability, ?options:flight.GeolocationRequestOptions):flight._internal._Promise<Null<flight.GeolocationPosition>> {

@@ -198,6 +198,18 @@
           "native": "flight::adjustments::multiply_color_matrix",
           "header": "flight/adjustments/contract.hpp",
           "provenance": "flight-hx/array-float-copy-adapter/1"
+        },
+        {
+          "name": "createColorLutCache",
+          "native": "flight::adjustments::create_color_lut_cache",
+          "header": "flight/adjustments/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "createTintAdjustment",
+          "native": "flight::adjustments::create_tint_adjustment",
+          "header": "flight/adjustments/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
         }
       ]
     },
@@ -469,6 +481,24 @@
         {
           "name": "trimBitmap",
           "native": "flight::bitmap::trim_bitmap",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "compareBitmapFingerprints",
+          "native": "flight::bitmap::compare_bitmap_fingerprints",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "createBitmapFingerprint",
+          "native": "flight::bitmap::create_bitmap_fingerprint",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "getBitmapHistogram",
+          "native": "flight::bitmap::get_bitmap_histogram",
           "header": "flight/bitmap/contract.hpp",
           "provenance": "flight-hx/reference-carrier/1"
         }
@@ -1662,6 +1692,56 @@
           "name": "disposeSensors",
           "native": "flight::sensors::dispose_sensors",
           "header": "flight/sensors/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        }
+      ]
+    },
+    {
+      "module": "flight.CameraControls",
+      "functions": [
+        {
+          "name": "createCameraShakeOffset",
+          "native": "flight::camera_controls::create_camera_shake_offset",
+          "header": "flight/camera_controls/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        }
+      ]
+    },
+    {
+      "module": "flight.Geolocation",
+      "functions": [
+        {
+          "name": "createGeolocationPosition",
+          "native": "flight::geolocation::create_geolocation_position",
+          "header": "flight/geolocation/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        }
+      ]
+    },
+    {
+      "module": "flight.Platform",
+      "functions": [
+        {
+          "name": "createPlatformInfo",
+          "native": "flight::platform::create_platform_info",
+          "header": "flight/platform/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        }
+      ]
+    },
+    {
+      "module": "flight.Velocity",
+      "functions": [
+        {
+          "name": "beginVelocityFrame",
+          "native": "flight::velocity::begin_velocity_frame",
+          "header": "flight/velocity/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "createVelocityField",
+          "native": "flight::velocity::create_velocity_field",
+          "header": "flight/velocity/contract.hpp",
           "provenance": "flight-hx/reference-carrier/1"
         }
       ]

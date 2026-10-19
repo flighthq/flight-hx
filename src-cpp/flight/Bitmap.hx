@@ -167,6 +167,18 @@ extern inline function trimBitmap(source:flight.Bitmap):flight.Bitmap {
   return flight._cpp._fn.Bitmap.trimBitmap(source);
 }
 
+extern inline function compareBitmapFingerprints(a:flight.BitmapFingerprint, b:flight.BitmapFingerprint):Float {
+  return flight._cpp._fn.Bitmap.compareBitmapFingerprints(a, b);
+}
+
+extern inline function createBitmapFingerprint(source:flight.Bitmap, ?gridSize:Float):flight.BitmapFingerprint {
+  return flight._cpp._fn.Bitmap.createBitmapFingerprint(source, gridSize != null, gridSize == null ? 0.0 : gridSize);
+}
+
+extern inline function getBitmapHistogram(source:flight.BitmapRegion):flight.BitmapHistogram {
+  return flight._cpp._fn.Bitmap.getBitmapHistogram(source);
+}
+
 var BITMAP_FINGERPRINT_COMPUTATION_ID(get, set):String;
 
 private extern inline function get_BITMAP_FINGERPRINT_COMPUTATION_ID():String return flight._cpp._attempt.Attempt_Bitmap_BITMAP_FINGERPRINT_COMPUTATION_ID.BITMAP_FINGERPRINT_COMPUTATION_ID;
@@ -259,10 +271,6 @@ extern inline function compareBitmap(source:flight.Bitmap, other:flight.Bitmap):
   return flight._cpp._attempt.Attempt_Bitmap_compareBitmap.compareBitmap(source, other);
 }
 
-extern inline function compareBitmapFingerprints(a:flight.BitmapFingerprint, b:flight.BitmapFingerprint):Float {
-  return flight._cpp._attempt.Attempt_Bitmap_compareBitmapFingerprints.compareBitmapFingerprints(a, b);
-}
-
 extern inline function compositeBitmapPixels(dest:flight.BitmapRegion, pixels:flight._internal._UInt8ClampedArray, ?mode:flight.BitmapCompositeMode):Void {
   flight._cpp._attempt.Attempt_Bitmap_compositeBitmapPixels.compositeBitmapPixels(dest, pixels, mode);
 }
@@ -289,10 +297,6 @@ extern inline function convolveBitmap(out:flight._internal._UInt8ClampedArray, s
 
 extern inline function copyBitmapChannel(dest:flight.BitmapRegion, destChannel:flight.ImageChannel, source:flight.BitmapRegion, sourceChannel:flight.ImageChannel):Void {
   flight._cpp._attempt.Attempt_Bitmap_copyBitmapChannel.copyBitmapChannel(dest, destChannel, source, sourceChannel);
-}
-
-extern inline function createBitmapFingerprint(source:flight.Bitmap, ?gridSize:Float):flight.BitmapFingerprint {
-  return flight._cpp._attempt.Attempt_Bitmap_createBitmapFingerprint.createBitmapFingerprint(source, gridSize);
 }
 
 extern inline function createBitmapFromImageSource(hostBitmapReadback:flight.HostBitmapReadbackCapability, source:flight.HostImageSource, width:Float, height:Float):Null<flight.Bitmap> {
@@ -361,10 +365,6 @@ extern inline function gaussianBlurBitmap(out:flight._internal._UInt8ClampedArra
 
 extern inline function getBitmapColorBoundsRectangle(source:flight.BitmapRegion, mask:Float, color:Float, ?findColor:Bool):Null<flight.RectangleLike> {
   return flight._cpp._attempt.Attempt_Bitmap_getBitmapColorBoundsRectangle.getBitmapColorBoundsRectangle(source, mask, color, findColor);
-}
-
-extern inline function getBitmapHistogram(source:flight.BitmapRegion):flight.BitmapHistogram {
-  return flight._cpp._attempt.Attempt_Bitmap_getBitmapHistogram.getBitmapHistogram(source);
 }
 
 extern inline function getBitmapMismatch(source:{ width:Float, height:Float, data:Dynamic }, other:{ width:Float, height:Float, data:Dynamic }, ?channelTolerance:Float):flight.BitmapMismatch {

@@ -1,12 +1,12 @@
 // Generated from src-cpp/manifest.json and flight-compiler native-planning.json. Do not edit.
 package flight;
 
-extern inline function comparePlatformVersions(a:String, b:String):Dynamic {
-  return flight._cpp._attempt.Attempt_Platform_comparePlatformVersions.comparePlatformVersions(a, b);
+extern inline function createPlatformInfo():flight.PlatformInfo {
+  return flight._cpp._fn.Platform.createPlatformInfo();
 }
 
-extern inline function createPlatformInfo():flight.PlatformInfo {
-  return flight._cpp._attempt.Attempt_Platform_createPlatformInfo.createPlatformInfo();
+extern inline function comparePlatformVersions(a:String, b:String):Dynamic {
+  return flight._cpp._attempt.Attempt_Platform_comparePlatformVersions.comparePlatformVersions(a, b);
 }
 
 extern inline function getPlatformEngine(hostPlatform:flight.HostPlatformCapability):flight.PlatformEngine {

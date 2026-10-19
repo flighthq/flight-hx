@@ -2,6 +2,7 @@ import flight.Audio;
 import flight.Adjustments;
 import flight.Bitmap;
 import flight.Bitmapfont;
+import flight.CameraControls;
 import flight.Clipboard;
 import flight.Color;
 import flight.Collision;
@@ -9,6 +10,7 @@ import flight.Device;
 import flight.Entity;
 import flight.Effects;
 import flight.FontFormats;
+import flight.Geolocation;
 import flight.Geometry;
 import flight.Image;
 import flight.Input;
@@ -16,6 +18,7 @@ import flight.Lighting;
 import flight.Materials;
 import flight.Math;
 import flight.Path;
+import flight.Platform;
 import flight.Power;
 import flight.Protocol;
 import flight.Screen;
@@ -29,6 +32,7 @@ import flight.Swf;
 import flight.Textbidi;
 import flight.Textsegment;
 import flight.Textshaper;
+import flight.Velocity;
 
 // One source file exercises the generated Flight ESM externs on web and every compile-proven
 // flight-cpp function binding on hxcpp. Keeping this host-free isolates binding from host setup.
@@ -92,6 +96,8 @@ class CrossTargetMath {
     assertTrue('technicolor color matrix', createTechnicolorColorMatrix().length == 20);
     assertTrue('vintage color matrix', createVintageColorMatrix().length == 20);
     assertTrue('white balance color matrix', createWhiteBalanceColorMatrix(20.0, -10.0).length == 20);
+    createColorLutCache();
+    createTintAdjustment(4286595327.0);
     final concatenated = identity.copy();
     concatColorMatrix(concatenated, brightness);
     assertTrue('concatenated color matrix', concatenated.length == 20);
@@ -120,6 +126,10 @@ class CrossTargetMath {
     final firstRegion = createBitmapRegion(firstBitmap);
     final secondRegion = createBitmapRegion(secondBitmap, 0.0, 0.0, 4.0, 4.0);
     final outRegion = createBitmapRegion(outBitmap, 0.0, 0.0, 4.0, 4.0);
+    final firstFingerprint = createBitmapFingerprint(firstBitmap, 4.0);
+    final secondFingerprint = createBitmapFingerprint(secondBitmap, 4.0);
+    assertFinite('bitmap fingerprint comparison', compareBitmapFingerprints(firstFingerprint, secondFingerprint));
+    getBitmapHistogram(firstRegion);
     applyBitmapLevels(outRegion, firstRegion);
     final clonedBitmap = cloneBitmap(firstBitmap);
     copyBitmapAlpha(outRegion, firstRegion);
@@ -184,6 +194,12 @@ class CrossTargetMath {
     assertTrue('empty key press', !wasInputKeyPressed(inputState, 0.0));
     assertTrue('empty key release', !wasInputKeyReleased(inputState, 0.0));
     endInputStateFrame(inputState);
+
+    createCameraShakeOffset();
+    createGeolocationPosition();
+    createPlatformInfo();
+    final velocityField = createVelocityField();
+    beginVelocityFrame(velocityField);
 
     final clipboardWatch = createClipboardWatch();
     detachClipboardWatch(clipboardWatch);

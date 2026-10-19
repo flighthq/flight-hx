@@ -165,6 +165,8 @@
       "flight.Textshaper.disposeTextShaperSignals"
     ],
     "referenceCarriers": [
+      "flight.Adjustments.createColorLutCache",
+      "flight.Adjustments.createTintAdjustment",
       "flight.Bitmap.applyBitmapLevels",
       "flight.Bitmap.cloneBitmap",
       "flight.Bitmap.copyBitmapAlpha",
@@ -197,6 +199,9 @@
       "flight.Bitmap.setBitmapPixelRgb",
       "flight.Bitmap.setBitmapRegion",
       "flight.Bitmap.trimBitmap",
+      "flight.Bitmap.compareBitmapFingerprints",
+      "flight.Bitmap.createBitmapFingerprint",
+      "flight.Bitmap.getBitmapHistogram",
       "flight.Clipboard.createClipboardWatch",
       "flight.Clipboard.detachClipboardWatch",
       "flight.Clipboard.disposeClipboardWatch",
@@ -250,6 +255,11 @@
       "flight.Sensors.createSensors",
       "flight.Sensors.detachSensors",
       "flight.Sensors.disposeSensors",
+      "flight.CameraControls.createCameraShakeOffset",
+      "flight.Geolocation.createGeolocationPosition",
+      "flight.Platform.createPlatformInfo",
+      "flight.Velocity.beginVelocityFrame",
+      "flight.Velocity.createVelocityField",
       "flight.Spring.addSpringImpulse",
       "flight.Spring.addSpringImpulse2D",
       "flight.Spring.addSpringImpulse3D",
@@ -398,7 +408,7 @@
       "issues": [
         {
           "code": "native-function-gap",
-          "count": 41
+          "count": 39
         },
         {
           "code": "native-value-gap",
@@ -414,7 +424,7 @@
         },
         {
           "code": "native-materialized-unproven-functions",
-          "count": 41
+          "count": 39
         },
         {
           "code": "native-materialized-unproven-values",
@@ -452,6 +462,12 @@
             "holder": "Adjustments",
             "name": "createColorBalanceColorMatrix",
             "native": "flight::adjustments::create_color_balance_color_matrix"
+          },
+          {
+            "header": "flight/adjustments/contract.hpp",
+            "holder": "Adjustments",
+            "name": "createColorLutCache",
+            "native": "flight::adjustments::create_color_lut_cache"
           },
           {
             "header": "flight/adjustments/contract.hpp",
@@ -534,6 +550,12 @@
           {
             "header": "flight/adjustments/contract.hpp",
             "holder": "Adjustments",
+            "name": "createTintAdjustment",
+            "native": "flight::adjustments::create_tint_adjustment"
+          },
+          {
+            "header": "flight/adjustments/contract.hpp",
+            "holder": "Adjustments",
             "name": "createVintageColorMatrix",
             "native": "flight::adjustments::create_vintage_color_matrix"
           },
@@ -566,7 +588,7 @@
         "values": []
       },
       "nativeAttempts": {
-        "functions": 41,
+        "functions": 39,
         "types": 0,
         "unavailableUpstream": 0,
         "values": 5
@@ -951,7 +973,7 @@
       "issues": [
         {
           "code": "native-function-gap",
-          "count": 65
+          "count": 62
         },
         {
           "code": "native-value-gap",
@@ -975,7 +997,7 @@
         },
         {
           "code": "native-materialized-unproven-functions",
-          "count": 65
+          "count": 62
         },
         {
           "code": "native-materialized-unproven-values",
@@ -1041,6 +1063,12 @@
           {
             "header": "flight/bitmap/contract.hpp",
             "holder": "Bitmap",
+            "name": "compareBitmapFingerprints",
+            "native": "flight::bitmap::compare_bitmap_fingerprints"
+          },
+          {
+            "header": "flight/bitmap/contract.hpp",
+            "holder": "Bitmap",
             "name": "concatBitmapColorMatrix",
             "native": "flight::bitmap::concat_bitmap_color_matrix"
           },
@@ -1061,6 +1089,12 @@
             "holder": "Bitmap",
             "name": "createBitmap",
             "native": "flight::bitmap::create_bitmap"
+          },
+          {
+            "header": "flight/bitmap/contract.hpp",
+            "holder": "Bitmap",
+            "name": "createBitmapFingerprint",
+            "native": "flight::bitmap::create_bitmap_fingerprint"
           },
           {
             "header": "flight/bitmap/contract.hpp",
@@ -1127,6 +1161,12 @@
             "holder": "Bitmap",
             "name": "getBitmapCoverage",
             "native": "flight::bitmap::get_bitmap_coverage"
+          },
+          {
+            "header": "flight/bitmap/contract.hpp",
+            "holder": "Bitmap",
+            "name": "getBitmapHistogram",
+            "native": "flight::bitmap::get_bitmap_histogram"
           },
           {
             "header": "flight/bitmap/contract.hpp",
@@ -1235,7 +1275,7 @@
         "values": []
       },
       "nativeAttempts": {
-        "functions": 65,
+        "functions": 62,
         "types": 1,
         "unavailableUpstream": 0,
         "values": 6
@@ -1654,7 +1694,7 @@
       "issues": [
         {
           "code": "native-function-gap",
-          "count": 31
+          "count": 30
         },
         {
           "code": "non-scalar-signature-review",
@@ -1666,23 +1706,30 @@
         },
         {
           "code": "native-materialized-unproven-functions",
-          "count": 31
+          "count": 30
         }
       ],
       "nativeDefault": {
-        "functions": [],
+        "functions": [
+          {
+            "header": "flight/camera_controls/contract.hpp",
+            "holder": "CameraControls",
+            "name": "createCameraShakeOffset",
+            "native": "flight::camera_controls::create_camera_shake_offset"
+          }
+        ],
         "types": [],
         "values": []
       },
       "nativeAttempts": {
-        "functions": 31,
+        "functions": 30,
         "types": 0,
         "unavailableUpstream": 0,
         "values": 0
       },
       "package": "@flighthq/camera-controls",
       "scalarProbeCandidates": [],
-      "status": "emitted-unbound",
+      "status": "partial-native",
       "webDefault": {
         "functions": 31,
         "types": 0,
@@ -3691,7 +3738,7 @@
       "issues": [
         {
           "code": "native-function-gap",
-          "count": 8
+          "count": 7
         },
         {
           "code": "non-scalar-signature-review",
@@ -3703,23 +3750,30 @@
         },
         {
           "code": "native-materialized-unproven-functions",
-          "count": 8
+          "count": 7
         }
       ],
       "nativeDefault": {
-        "functions": [],
+        "functions": [
+          {
+            "header": "flight/geolocation/contract.hpp",
+            "holder": "Geolocation",
+            "name": "createGeolocationPosition",
+            "native": "flight::geolocation::create_geolocation_position"
+          }
+        ],
         "types": [],
         "values": []
       },
       "nativeAttempts": {
-        "functions": 8,
+        "functions": 7,
         "types": 0,
         "unavailableUpstream": 0,
         "values": 0
       },
       "package": "@flighthq/geolocation",
       "scalarProbeCandidates": [],
-      "status": "emitted-unbound",
+      "status": "partial-native",
       "webDefault": {
         "functions": 8,
         "types": 0,
@@ -7443,7 +7497,7 @@
       "issues": [
         {
           "code": "native-function-gap",
-          "count": 14
+          "count": 13
         },
         {
           "code": "non-scalar-signature-review",
@@ -7455,23 +7509,30 @@
         },
         {
           "code": "native-materialized-unproven-functions",
-          "count": 14
+          "count": 13
         }
       ],
       "nativeDefault": {
-        "functions": [],
+        "functions": [
+          {
+            "header": "flight/platform/contract.hpp",
+            "holder": "Platform",
+            "name": "createPlatformInfo",
+            "native": "flight::platform::create_platform_info"
+          }
+        ],
         "types": [],
         "values": []
       },
       "nativeAttempts": {
-        "functions": 14,
+        "functions": 13,
         "types": 0,
         "unavailableUpstream": 0,
         "values": 0
       },
       "package": "@flighthq/platform",
       "scalarProbeCandidates": [],
-      "status": "emitted-unbound",
+      "status": "partial-native",
       "webDefault": {
         "functions": 14,
         "types": 0,
@@ -13088,7 +13149,7 @@
       "issues": [
         {
           "code": "native-function-gap",
-          "count": 22
+          "count": 20
         },
         {
           "code": "non-scalar-signature-review",
@@ -13100,23 +13161,36 @@
         },
         {
           "code": "native-materialized-unproven-functions",
-          "count": 22
+          "count": 20
         }
       ],
       "nativeDefault": {
-        "functions": [],
+        "functions": [
+          {
+            "header": "flight/velocity/contract.hpp",
+            "holder": "Velocity",
+            "name": "beginVelocityFrame",
+            "native": "flight::velocity::begin_velocity_frame"
+          },
+          {
+            "header": "flight/velocity/contract.hpp",
+            "holder": "Velocity",
+            "name": "createVelocityField",
+            "native": "flight::velocity::create_velocity_field"
+          }
+        ],
         "types": [],
         "values": []
       },
       "nativeAttempts": {
-        "functions": 22,
+        "functions": 20,
         "types": 0,
         "unavailableUpstream": 0,
         "values": 0
       },
       "package": "@flighthq/velocity",
       "scalarProbeCandidates": [],
-      "status": "emitted-unbound",
+      "status": "partial-native",
       "webDefault": {
         "functions": 22,
         "types": 0,
@@ -13305,11 +13379,11 @@
       "arrayFloatAdapters": 45,
       "boundHeaderConfirmedScalarFunctions": 114,
       "extensionTypes": 1,
-      "functions": 272,
+      "functions": 282,
       "nullableStringAdapters": 2,
-      "packages": 32,
+      "packages": 36,
       "optionalScalarAdapters": 3,
-      "referenceCarriers": 103,
+      "referenceCarriers": 113,
       "requiredScalarOverrides": 53,
       "scalarOverrideRefusals": 0,
       "types": 3,
@@ -13338,7 +13412,7 @@
           "name": "generic-function"
         },
         {
-          "count": 644,
+          "count": 634,
           "name": "named"
         },
         {
@@ -13357,10 +13431,10 @@
       "compileProbes": 0,
       "cppAvailable": 4268,
       "cppUnavailable": 6979,
-      "functions": 597,
+      "functions": 587,
       "genericReferenceTemplateAdapters": 44,
       "haxeTypecheck": "pass",
-      "isolatedFunctionValueExterns": 976,
+      "isolatedFunctionValueExterns": 966,
       "types": 3073,
       "values": 379
     },
@@ -13394,9 +13468,9 @@
       "unboundFunctionCandidates": 0
     },
     "packageStatus": {
-      "emitted-unbound": 120,
+      "emitted-unbound": 116,
       "empty-web-contract": 1,
-      "partial-native": 32
+      "partial-native": 36
     },
     "scalarExpansion": {
       "headerConfirmedFunctions": 183,

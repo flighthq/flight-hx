@@ -93,5 +93,11 @@ extern class Adjustments {
 
   @:native("flight_hx::adjustments::multiply_color_matrix")
   static function multiplyColorMatrix(a:Array<Float>, b:Array<Float>, outPresent:Bool, out:Array<Float>):Array<Float>;
+
+  @:native("flight_hx::adjustments::create_color_lut_cache")
+  static function createColorLutCache():flight.ColorLutCache;
+
+  @:native("flight_hx::adjustments::create_tint_adjustment")
+  static function createTintAdjustment(rgba:Float):flight.TintAdjustment;
 }
 #end
