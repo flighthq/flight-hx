@@ -114,6 +114,12 @@ function requireWorkspace(flightRoot) {
   if (!flightRoot || !existsSync(path.join(flightRoot, 'Cargo.toml'))) {
     throw new Error(`No Rust Flight workspace at ${flightRoot ?? '(unset)'}. Set --flight-root or FLIGHT_ROOT to the new Flight checkout.`);
   }
+
+  for (const crate of ['flight-ffi', 'flight-bindgen']) {
+    if (!existsSync(path.join(flightRoot, 'crates', crate, 'Cargo.toml'))) {
+      throw new Error(`Flight workspace is missing ${crate}. The supplied Haxe recipe is on Flight's develop branch, not the inspected main snapshot.`);
+    }
+  }
 }
 
 function inventory(directory, prefix = '') {

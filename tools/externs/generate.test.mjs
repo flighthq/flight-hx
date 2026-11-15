@@ -14,6 +14,10 @@ function fixture(t) {
   const out = path.join(flightRoot, 'target/build/current/out');
   mkdirSync(out, { recursive: true });
   writeFileSync(path.join(flightRoot, 'Cargo.toml'), '[workspace]\n');
+  for (const crate of ['flight-ffi', 'flight-bindgen']) {
+    mkdirSync(path.join(flightRoot, 'crates', crate), { recursive: true });
+    writeFileSync(path.join(flightRoot, 'crates', crate, 'Cargo.toml'), `[package]\nname = "${crate}"\n`);
+  }
   writeFileSync(path.join(out, 'ffi_generated.rs'), 'pub fn flight_z() {}\npub fn flight_a() {}\nfn flight_z() {}\n');
   const calls = [];
   let fail = false;
@@ -100,4 +104,12 @@ test('rejects unrecorded source changes before building', (t) => {
   state.dirty();
   assert.throws(() => generate(state.options), /checkout is dirty/u);
   assert.equal(state.calls.some(({ command }) => command === 'cargo'), false);
+});
+
+
+test('rejects a Rust Flight snapshot without the requested binding crates before building', (t) => {
+  const state = fixture(t);
+  rmSync(path.join(state.options.flightRoot, 'crates/flight-bindgen'), { recursive: true });
+  assert.throws(() => generate(state.options), /missing flight-bindgen/u);
+  assert.equal(state.calls.length, 0);
 });

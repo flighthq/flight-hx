@@ -12,6 +12,12 @@ the new Rust revision is available and its output has been validated, the old
 package selection remains in place. This driver prepares the intake; it does
 not claim the installed package has switched to the new bindings.
 
+The upstream source has now been inspected: the recipe exists on `develop`, at
+`49c510e875461a9235b24ee846015ec1b47acd2a`. The inspected `main` revision
+`9de3cab1b68872c52264f5d83b6c05318a390599` has `flight-compiler` but no
+`flight-ffi`, `flight-bindgen`, or Haxe binding check script. The matching checkout
+is currently available locally at `.dependencies/flight-rust`.
+
 ## Generate and copy
 
 Use a clean Git checkout of the new Rust Flight workspace and an installed Rust
@@ -52,6 +58,21 @@ without replacing that tree.
 arguments and target matrix. It validates the upstream output selected by that
 script; it does not establish that this repository's copied bindings link or
 run. The local drift check and installed-package behavior checks are separate.
+
+`node tools/externs/check.mjs` verifies the copied inventory and hashes against
+its provenance and the dependency lock, then type-checks that copied tree on HL,
+cpp, and JS/ESM using the same target exclusions as the upstream script. It can
+run once the new Flight revision is pinned and real output has been copied.
+
+## Runtime contract found upstream
+
+The `develop` generator emits native C ABI extern names (`flight_*`) without a
+C header or hxcpp link configuration. Its JS externs use `@:jsRequire("flight")`
+with the same `flight_*` export names. They do not bind the existing
+`@flighthq/*` TypeScript ESM exports directly. The ESM generator can emit static
+imports for that module, but an actual module implementing those exports is
+still required. These are runtime integration requirements to verify, beyond the
+upstream script's type-check-only results.
 
 ## Remaining cutover work
 

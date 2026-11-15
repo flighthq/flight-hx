@@ -16,6 +16,13 @@ Rust workspace, so the new generated output, package wiring, and real FFI/ESM
 validation remain pending access to that workspace. Do not invent its output
 layout or claim the active legacy package already uses the new bindings.
 
+The matching Flight checkout is now available at `.dependencies/flight-rust`,
+revision `49c510e875461a9235b24ee846015ec1b47acd2a` on `develop`. The inspected
+`main` has no binding crates or Haxe check script. Cargo/rustc are absent here;
+repository-local toolchain setup is awaiting the user's network permission.
+See the intake README for the discovered C header/link and JS module contract
+requirements before attempting runtime validation.
+
 The rest of this file describes the **legacy implementation**, kept as migration
 context until its package roots and verification gates are replaced.
 
