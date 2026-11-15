@@ -1,0 +1,1080 @@
+package flight;
+
+inline function createBrightnessContrastAdjustment(options:BrightnessContrastAdjustmentOptions):BrightnessContrastAdjustment {
+#if hl
+	return flight._hl._fn.Adjustments.createBrightnessContrastAdjustment(options);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.createBrightnessContrastAdjustment(options);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.createBrightnessContrastAdjustment(options);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function createChannelMixerAdjustment(options:ChannelMixerAdjustmentOptions):ChannelMixerAdjustment {
+#if hl
+	return flight._hl._fn.Adjustments.createChannelMixerAdjustment(options);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.createChannelMixerAdjustment(options);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.createChannelMixerAdjustment(options);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function isAffineColorMatrix(matrix:Dynamic):Bool {
+#if hl
+	return flight._hl._fn.Adjustments.isAffineColorMatrix(matrix);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.isAffineColorMatrix(matrix);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.isAffineColorMatrix(matrix);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function createColorBlindSimulationAdjustment(options:ColorBlindSimulationAdjustmentOptions):ColorBlindSimulationAdjustment {
+#if hl
+	return flight._hl._fn.Adjustments.createColorBlindSimulationAdjustment(options);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.createColorBlindSimulationAdjustment(options);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.createColorBlindSimulationAdjustment(options);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function createColorGradeAdjustment(options:ColorGradeAdjustmentOptions):ColorGradeAdjustment {
+#if hl
+	return flight._hl._fn.Adjustments.createColorGradeAdjustment(options);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.createColorGradeAdjustment(options);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.createColorGradeAdjustment(options);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function bakeColorLut(transforms:Dynamic, transformsLen:Int, size:Int):ColorLut {
+#if hl
+	return flight._hl._fn.Adjustments.bakeColorLut(transforms, transformsLen, size);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.bakeColorLut(transforms, transformsLen, size);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.bakeColorLut(transforms, transformsLen, size);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function sampleColorLut(lut:ColorLut, out:Dynamic, r:Float, g:Float, b:Float):Void {
+#if hl
+	flight._hl._fn.Adjustments.sampleColorLut(lut, out, r, g, b);
+#elseif cpp
+	flight._cpp._fn.Adjustments.sampleColorLut(lut, out, r, g, b);
+#elseif (js && flight_esm)
+	flight._js._fn.Adjustments.sampleColorLut(lut, out, r, g, b);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function getAdjustmentColorTransformBrightnessContrastAdjustment(operation:BrightnessContrastAdjustment):ColorTransformFunction {
+#if hl
+	return flight._hl._fn.Adjustments.getAdjustmentColorTransformBrightnessContrastAdjustment(operation);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.getAdjustmentColorTransformBrightnessContrastAdjustment(operation);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.getAdjustmentColorTransformBrightnessContrastAdjustment(operation);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function getAdjustmentColorTransformChannelMixerAdjustment(operation:ChannelMixerAdjustment):ColorTransformFunction {
+#if hl
+	return flight._hl._fn.Adjustments.getAdjustmentColorTransformChannelMixerAdjustment(operation);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.getAdjustmentColorTransformChannelMixerAdjustment(operation);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.getAdjustmentColorTransformChannelMixerAdjustment(operation);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function getAdjustmentColorTransformColorBlindSimulationAdjustment(operation:ColorBlindSimulationAdjustment):ColorTransformFunction {
+#if hl
+	return flight._hl._fn.Adjustments.getAdjustmentColorTransformColorBlindSimulationAdjustment(operation);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.getAdjustmentColorTransformColorBlindSimulationAdjustment(operation);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.getAdjustmentColorTransformColorBlindSimulationAdjustment(operation);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function getAdjustmentColorTransformColorGradeAdjustment(operation:ColorGradeAdjustment):ColorTransformFunction {
+#if hl
+	return flight._hl._fn.Adjustments.getAdjustmentColorTransformColorGradeAdjustment(operation);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.getAdjustmentColorTransformColorGradeAdjustment(operation);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.getAdjustmentColorTransformColorGradeAdjustment(operation);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function getAdjustmentColorTransformColorMatrixAdjustment(operation:ColorMatrixAdjustment):ColorTransformFunction {
+#if hl
+	return flight._hl._fn.Adjustments.getAdjustmentColorTransformColorMatrixAdjustment(operation);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.getAdjustmentColorTransformColorMatrixAdjustment(operation);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.getAdjustmentColorTransformColorMatrixAdjustment(operation);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function getAdjustmentColorTransformColorScaleBiasAdjustment(operation:ColorScaleBiasAdjustment):ColorTransformFunction {
+#if hl
+	return flight._hl._fn.Adjustments.getAdjustmentColorTransformColorScaleBiasAdjustment(operation);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.getAdjustmentColorTransformColorScaleBiasAdjustment(operation);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.getAdjustmentColorTransformColorScaleBiasAdjustment(operation);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function getAdjustmentColorTransformExposureAdjustment(operation:ExposureAdjustment):ColorTransformFunction {
+#if hl
+	return flight._hl._fn.Adjustments.getAdjustmentColorTransformExposureAdjustment(operation);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.getAdjustmentColorTransformExposureAdjustment(operation);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.getAdjustmentColorTransformExposureAdjustment(operation);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function getAdjustmentColorTransformGrayscaleAdjustment(operation:GrayscaleAdjustment):ColorTransformFunction {
+#if hl
+	return flight._hl._fn.Adjustments.getAdjustmentColorTransformGrayscaleAdjustment(operation);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.getAdjustmentColorTransformGrayscaleAdjustment(operation);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.getAdjustmentColorTransformGrayscaleAdjustment(operation);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function getAdjustmentColorTransformHueSaturationAdjustment(operation:HueSaturationAdjustment):ColorTransformFunction {
+#if hl
+	return flight._hl._fn.Adjustments.getAdjustmentColorTransformHueSaturationAdjustment(operation);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.getAdjustmentColorTransformHueSaturationAdjustment(operation);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.getAdjustmentColorTransformHueSaturationAdjustment(operation);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function getAdjustmentColorTransformInvertAdjustment(operation:InvertAdjustment):ColorTransformFunction {
+#if hl
+	return flight._hl._fn.Adjustments.getAdjustmentColorTransformInvertAdjustment(operation);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.getAdjustmentColorTransformInvertAdjustment(operation);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.getAdjustmentColorTransformInvertAdjustment(operation);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function getAdjustmentColorTransformLiftGammaGainAdjustment(operation:LiftGammaGainAdjustment):ColorTransformFunction {
+#if hl
+	return flight._hl._fn.Adjustments.getAdjustmentColorTransformLiftGammaGainAdjustment(operation);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.getAdjustmentColorTransformLiftGammaGainAdjustment(operation);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.getAdjustmentColorTransformLiftGammaGainAdjustment(operation);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function getAdjustmentColorTransformLookupTableGradeAdjustment(operation:LookupTableGradeAdjustment):ColorTransformFunction {
+#if hl
+	return flight._hl._fn.Adjustments.getAdjustmentColorTransformLookupTableGradeAdjustment(operation);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.getAdjustmentColorTransformLookupTableGradeAdjustment(operation);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.getAdjustmentColorTransformLookupTableGradeAdjustment(operation);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function getAdjustmentColorTransformSepiaAdjustment(operation:SepiaAdjustment):ColorTransformFunction {
+#if hl
+	return flight._hl._fn.Adjustments.getAdjustmentColorTransformSepiaAdjustment(operation);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.getAdjustmentColorTransformSepiaAdjustment(operation);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.getAdjustmentColorTransformSepiaAdjustment(operation);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function getAdjustmentColorTransformTintAdjustment(operation:TintAdjustment):ColorTransformFunction {
+#if hl
+	return flight._hl._fn.Adjustments.getAdjustmentColorTransformTintAdjustment(operation);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.getAdjustmentColorTransformTintAdjustment(operation);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.getAdjustmentColorTransformTintAdjustment(operation);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function isColorLutAdjustmentBrightnessContrastAdjustment(operation:BrightnessContrastAdjustment):Bool {
+#if hl
+	return flight._hl._fn.Adjustments.isColorLutAdjustmentBrightnessContrastAdjustment(operation);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.isColorLutAdjustmentBrightnessContrastAdjustment(operation);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.isColorLutAdjustmentBrightnessContrastAdjustment(operation);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function isColorLutAdjustmentChannelMixerAdjustment(operation:ChannelMixerAdjustment):Bool {
+#if hl
+	return flight._hl._fn.Adjustments.isColorLutAdjustmentChannelMixerAdjustment(operation);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.isColorLutAdjustmentChannelMixerAdjustment(operation);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.isColorLutAdjustmentChannelMixerAdjustment(operation);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function isColorLutAdjustmentColorBlindSimulationAdjustment(operation:ColorBlindSimulationAdjustment):Bool {
+#if hl
+	return flight._hl._fn.Adjustments.isColorLutAdjustmentColorBlindSimulationAdjustment(operation);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.isColorLutAdjustmentColorBlindSimulationAdjustment(operation);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.isColorLutAdjustmentColorBlindSimulationAdjustment(operation);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function isColorLutAdjustmentColorGradeAdjustment(operation:ColorGradeAdjustment):Bool {
+#if hl
+	return flight._hl._fn.Adjustments.isColorLutAdjustmentColorGradeAdjustment(operation);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.isColorLutAdjustmentColorGradeAdjustment(operation);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.isColorLutAdjustmentColorGradeAdjustment(operation);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function isColorLutAdjustmentColorMatrixAdjustment(operation:ColorMatrixAdjustment):Bool {
+#if hl
+	return flight._hl._fn.Adjustments.isColorLutAdjustmentColorMatrixAdjustment(operation);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.isColorLutAdjustmentColorMatrixAdjustment(operation);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.isColorLutAdjustmentColorMatrixAdjustment(operation);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function isColorLutAdjustmentColorScaleBiasAdjustment(operation:ColorScaleBiasAdjustment):Bool {
+#if hl
+	return flight._hl._fn.Adjustments.isColorLutAdjustmentColorScaleBiasAdjustment(operation);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.isColorLutAdjustmentColorScaleBiasAdjustment(operation);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.isColorLutAdjustmentColorScaleBiasAdjustment(operation);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function isColorLutAdjustmentExposureAdjustment(operation:ExposureAdjustment):Bool {
+#if hl
+	return flight._hl._fn.Adjustments.isColorLutAdjustmentExposureAdjustment(operation);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.isColorLutAdjustmentExposureAdjustment(operation);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.isColorLutAdjustmentExposureAdjustment(operation);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function isColorLutAdjustmentGrayscaleAdjustment(operation:GrayscaleAdjustment):Bool {
+#if hl
+	return flight._hl._fn.Adjustments.isColorLutAdjustmentGrayscaleAdjustment(operation);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.isColorLutAdjustmentGrayscaleAdjustment(operation);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.isColorLutAdjustmentGrayscaleAdjustment(operation);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function isColorLutAdjustmentHueSaturationAdjustment(operation:HueSaturationAdjustment):Bool {
+#if hl
+	return flight._hl._fn.Adjustments.isColorLutAdjustmentHueSaturationAdjustment(operation);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.isColorLutAdjustmentHueSaturationAdjustment(operation);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.isColorLutAdjustmentHueSaturationAdjustment(operation);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function isColorLutAdjustmentInvertAdjustment(operation:InvertAdjustment):Bool {
+#if hl
+	return flight._hl._fn.Adjustments.isColorLutAdjustmentInvertAdjustment(operation);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.isColorLutAdjustmentInvertAdjustment(operation);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.isColorLutAdjustmentInvertAdjustment(operation);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function isColorLutAdjustmentLiftGammaGainAdjustment(operation:LiftGammaGainAdjustment):Bool {
+#if hl
+	return flight._hl._fn.Adjustments.isColorLutAdjustmentLiftGammaGainAdjustment(operation);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.isColorLutAdjustmentLiftGammaGainAdjustment(operation);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.isColorLutAdjustmentLiftGammaGainAdjustment(operation);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function isColorLutAdjustmentLookupTableGradeAdjustment(operation:LookupTableGradeAdjustment):Bool {
+#if hl
+	return flight._hl._fn.Adjustments.isColorLutAdjustmentLookupTableGradeAdjustment(operation);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.isColorLutAdjustmentLookupTableGradeAdjustment(operation);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.isColorLutAdjustmentLookupTableGradeAdjustment(operation);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function isColorLutAdjustmentSepiaAdjustment(operation:SepiaAdjustment):Bool {
+#if hl
+	return flight._hl._fn.Adjustments.isColorLutAdjustmentSepiaAdjustment(operation);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.isColorLutAdjustmentSepiaAdjustment(operation);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.isColorLutAdjustmentSepiaAdjustment(operation);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function isColorLutAdjustmentTintAdjustment(operation:TintAdjustment):Bool {
+#if hl
+	return flight._hl._fn.Adjustments.isColorLutAdjustmentTintAdjustment(operation);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.isColorLutAdjustmentTintAdjustment(operation);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.isColorLutAdjustmentTintAdjustment(operation);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function createColorLutCache():ColorLutCache {
+#if hl
+	return flight._hl._fn.Adjustments.createColorLutCache();
+#elseif cpp
+	return flight._cpp._fn.Adjustments.createColorLutCache();
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.createColorLutCache();
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function createColorMatrixAdjustment(colorMatrix:Dynamic):ColorMatrixAdjustment {
+#if hl
+	return flight._hl._fn.Adjustments.createColorMatrixAdjustment(colorMatrix);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.createColorMatrixAdjustment(colorMatrix);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.createColorMatrixAdjustment(colorMatrix);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function isColorMatrixAdjustmentBrightnessContrastAdjustment(operation:BrightnessContrastAdjustment):Bool {
+#if hl
+	return flight._hl._fn.Adjustments.isColorMatrixAdjustmentBrightnessContrastAdjustment(operation);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.isColorMatrixAdjustmentBrightnessContrastAdjustment(operation);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.isColorMatrixAdjustmentBrightnessContrastAdjustment(operation);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function isColorMatrixAdjustmentChannelMixerAdjustment(operation:ChannelMixerAdjustment):Bool {
+#if hl
+	return flight._hl._fn.Adjustments.isColorMatrixAdjustmentChannelMixerAdjustment(operation);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.isColorMatrixAdjustmentChannelMixerAdjustment(operation);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.isColorMatrixAdjustmentChannelMixerAdjustment(operation);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function isColorMatrixAdjustmentColorBlindSimulationAdjustment(operation:ColorBlindSimulationAdjustment):Bool {
+#if hl
+	return flight._hl._fn.Adjustments.isColorMatrixAdjustmentColorBlindSimulationAdjustment(operation);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.isColorMatrixAdjustmentColorBlindSimulationAdjustment(operation);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.isColorMatrixAdjustmentColorBlindSimulationAdjustment(operation);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function isColorMatrixAdjustmentColorGradeAdjustment(operation:ColorGradeAdjustment):Bool {
+#if hl
+	return flight._hl._fn.Adjustments.isColorMatrixAdjustmentColorGradeAdjustment(operation);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.isColorMatrixAdjustmentColorGradeAdjustment(operation);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.isColorMatrixAdjustmentColorGradeAdjustment(operation);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function isColorMatrixAdjustmentColorMatrixAdjustment(operation:ColorMatrixAdjustment):Bool {
+#if hl
+	return flight._hl._fn.Adjustments.isColorMatrixAdjustmentColorMatrixAdjustment(operation);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.isColorMatrixAdjustmentColorMatrixAdjustment(operation);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.isColorMatrixAdjustmentColorMatrixAdjustment(operation);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function isColorMatrixAdjustmentColorScaleBiasAdjustment(operation:ColorScaleBiasAdjustment):Bool {
+#if hl
+	return flight._hl._fn.Adjustments.isColorMatrixAdjustmentColorScaleBiasAdjustment(operation);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.isColorMatrixAdjustmentColorScaleBiasAdjustment(operation);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.isColorMatrixAdjustmentColorScaleBiasAdjustment(operation);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function isColorMatrixAdjustmentExposureAdjustment(operation:ExposureAdjustment):Bool {
+#if hl
+	return flight._hl._fn.Adjustments.isColorMatrixAdjustmentExposureAdjustment(operation);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.isColorMatrixAdjustmentExposureAdjustment(operation);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.isColorMatrixAdjustmentExposureAdjustment(operation);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function isColorMatrixAdjustmentGrayscaleAdjustment(operation:GrayscaleAdjustment):Bool {
+#if hl
+	return flight._hl._fn.Adjustments.isColorMatrixAdjustmentGrayscaleAdjustment(operation);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.isColorMatrixAdjustmentGrayscaleAdjustment(operation);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.isColorMatrixAdjustmentGrayscaleAdjustment(operation);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function isColorMatrixAdjustmentHueSaturationAdjustment(operation:HueSaturationAdjustment):Bool {
+#if hl
+	return flight._hl._fn.Adjustments.isColorMatrixAdjustmentHueSaturationAdjustment(operation);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.isColorMatrixAdjustmentHueSaturationAdjustment(operation);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.isColorMatrixAdjustmentHueSaturationAdjustment(operation);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function isColorMatrixAdjustmentInvertAdjustment(operation:InvertAdjustment):Bool {
+#if hl
+	return flight._hl._fn.Adjustments.isColorMatrixAdjustmentInvertAdjustment(operation);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.isColorMatrixAdjustmentInvertAdjustment(operation);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.isColorMatrixAdjustmentInvertAdjustment(operation);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function isColorMatrixAdjustmentLiftGammaGainAdjustment(operation:LiftGammaGainAdjustment):Bool {
+#if hl
+	return flight._hl._fn.Adjustments.isColorMatrixAdjustmentLiftGammaGainAdjustment(operation);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.isColorMatrixAdjustmentLiftGammaGainAdjustment(operation);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.isColorMatrixAdjustmentLiftGammaGainAdjustment(operation);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function isColorMatrixAdjustmentLookupTableGradeAdjustment(operation:LookupTableGradeAdjustment):Bool {
+#if hl
+	return flight._hl._fn.Adjustments.isColorMatrixAdjustmentLookupTableGradeAdjustment(operation);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.isColorMatrixAdjustmentLookupTableGradeAdjustment(operation);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.isColorMatrixAdjustmentLookupTableGradeAdjustment(operation);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function isColorMatrixAdjustmentSepiaAdjustment(operation:SepiaAdjustment):Bool {
+#if hl
+	return flight._hl._fn.Adjustments.isColorMatrixAdjustmentSepiaAdjustment(operation);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.isColorMatrixAdjustmentSepiaAdjustment(operation);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.isColorMatrixAdjustmentSepiaAdjustment(operation);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function isColorMatrixAdjustmentTintAdjustment(operation:TintAdjustment):Bool {
+#if hl
+	return flight._hl._fn.Adjustments.isColorMatrixAdjustmentTintAdjustment(operation);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.isColorMatrixAdjustmentTintAdjustment(operation);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.isColorMatrixAdjustmentTintAdjustment(operation);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function createBrightnessColorMatrix(amount:Float):Dynamic {
+#if hl
+	return flight._hl._fn.Adjustments.createBrightnessColorMatrix(amount);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.createBrightnessColorMatrix(amount);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.createBrightnessColorMatrix(amount);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function createChannelMixerColorMatrix(redOut:Dynamic, greenOut:Dynamic, blueOut:Dynamic):Dynamic {
+#if hl
+	return flight._hl._fn.Adjustments.createChannelMixerColorMatrix(redOut, greenOut, blueOut);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.createChannelMixerColorMatrix(redOut, greenOut, blueOut);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.createChannelMixerColorMatrix(redOut, greenOut, blueOut);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function createColorBalanceColorMatrix(shadows:Dynamic, midtones:Dynamic, highlights:Dynamic):Dynamic {
+#if hl
+	return flight._hl._fn.Adjustments.createColorBalanceColorMatrix(shadows, midtones, highlights);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.createColorBalanceColorMatrix(shadows, midtones, highlights);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.createColorBalanceColorMatrix(shadows, midtones, highlights);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function createColorMatrixFromTint(packedRgba:Int, amount:Float):Dynamic {
+#if hl
+	return flight._hl._fn.Adjustments.createColorMatrixFromTint(packedRgba, amount);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.createColorMatrixFromTint(packedRgba, amount);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.createColorMatrixFromTint(packedRgba, amount);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function createContrastColorMatrix(amount:Float):Dynamic {
+#if hl
+	return flight._hl._fn.Adjustments.createContrastColorMatrix(amount);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.createContrastColorMatrix(amount);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.createContrastColorMatrix(amount);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function createDesaturateColorMatrix(amount:Float):Dynamic {
+#if hl
+	return flight._hl._fn.Adjustments.createDesaturateColorMatrix(amount);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.createDesaturateColorMatrix(amount);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.createDesaturateColorMatrix(amount);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function createGrayscaleColorMatrix():Dynamic {
+#if hl
+	return flight._hl._fn.Adjustments.createGrayscaleColorMatrix();
+#elseif cpp
+	return flight._cpp._fn.Adjustments.createGrayscaleColorMatrix();
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.createGrayscaleColorMatrix();
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function createHueRotateColorMatrix(degrees:Float):Dynamic {
+#if hl
+	return flight._hl._fn.Adjustments.createHueRotateColorMatrix(degrees);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.createHueRotateColorMatrix(degrees);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.createHueRotateColorMatrix(degrees);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function createIdentityColorMatrix():Dynamic {
+#if hl
+	return flight._hl._fn.Adjustments.createIdentityColorMatrix();
+#elseif cpp
+	return flight._cpp._fn.Adjustments.createIdentityColorMatrix();
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.createIdentityColorMatrix();
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function createInvertColorMatrix():Dynamic {
+#if hl
+	return flight._hl._fn.Adjustments.createInvertColorMatrix();
+#elseif cpp
+	return flight._cpp._fn.Adjustments.createInvertColorMatrix();
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.createInvertColorMatrix();
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function createLevelsColorMatrix(inBlack:Float, inWhite:Float, outBlack:Float, outWhite:Float, gamma:Float):Dynamic {
+#if hl
+	return flight._hl._fn.Adjustments.createLevelsColorMatrix(inBlack, inWhite, outBlack, outWhite, gamma);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.createLevelsColorMatrix(inBlack, inWhite, outBlack, outWhite, gamma);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.createLevelsColorMatrix(inBlack, inWhite, outBlack, outWhite, gamma);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function createOpacityColorMatrix(alpha:Float):Dynamic {
+#if hl
+	return flight._hl._fn.Adjustments.createOpacityColorMatrix(alpha);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.createOpacityColorMatrix(alpha);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.createOpacityColorMatrix(alpha);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function createPolaroidColorMatrix():Dynamic {
+#if hl
+	return flight._hl._fn.Adjustments.createPolaroidColorMatrix();
+#elseif cpp
+	return flight._cpp._fn.Adjustments.createPolaroidColorMatrix();
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.createPolaroidColorMatrix();
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function createSaturationColorMatrix(amount:Float):Dynamic {
+#if hl
+	return flight._hl._fn.Adjustments.createSaturationColorMatrix(amount);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.createSaturationColorMatrix(amount);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.createSaturationColorMatrix(amount);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function createSepiaColorMatrix():Dynamic {
+#if hl
+	return flight._hl._fn.Adjustments.createSepiaColorMatrix();
+#elseif cpp
+	return flight._cpp._fn.Adjustments.createSepiaColorMatrix();
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.createSepiaColorMatrix();
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function createTechnicolorColorMatrix():Dynamic {
+#if hl
+	return flight._hl._fn.Adjustments.createTechnicolorColorMatrix();
+#elseif cpp
+	return flight._cpp._fn.Adjustments.createTechnicolorColorMatrix();
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.createTechnicolorColorMatrix();
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function createVintageColorMatrix():Dynamic {
+#if hl
+	return flight._hl._fn.Adjustments.createVintageColorMatrix();
+#elseif cpp
+	return flight._cpp._fn.Adjustments.createVintageColorMatrix();
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.createVintageColorMatrix();
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function createWhiteBalanceColorMatrix(temperature:Float, tint:Float):Dynamic {
+#if hl
+	return flight._hl._fn.Adjustments.createWhiteBalanceColorMatrix(temperature, tint);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.createWhiteBalanceColorMatrix(temperature, tint);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.createWhiteBalanceColorMatrix(temperature, tint);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function applyColorMatrixToColor(matrix:Dynamic, packedRgba:Int):Int {
+#if hl
+	return flight._hl._fn.Adjustments.applyColorMatrixToColor(matrix, packedRgba);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.applyColorMatrixToColor(matrix, packedRgba);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.applyColorMatrixToColor(matrix, packedRgba);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function concatColorMatrix(target:Dynamic, source:Dynamic):Void {
+#if hl
+	flight._hl._fn.Adjustments.concatColorMatrix(target, source);
+#elseif cpp
+	flight._cpp._fn.Adjustments.concatColorMatrix(target, source);
+#elseif (js && flight_esm)
+	flight._js._fn.Adjustments.concatColorMatrix(target, source);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function multiplyColorMatrix(out:Dynamic, a:Dynamic, b:Dynamic):Void {
+#if hl
+	flight._hl._fn.Adjustments.multiplyColorMatrix(out, a, b);
+#elseif cpp
+	flight._cpp._fn.Adjustments.multiplyColorMatrix(out, a, b);
+#elseif (js && flight_esm)
+	flight._js._fn.Adjustments.multiplyColorMatrix(out, a, b);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function createColorScaleBiasAdjustment(colorScaleBias:ColorScaleBias):ColorScaleBiasAdjustment {
+#if hl
+	return flight._hl._fn.Adjustments.createColorScaleBiasAdjustment(colorScaleBias);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.createColorScaleBiasAdjustment(colorScaleBias);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.createColorScaleBiasAdjustment(colorScaleBias);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function createExposureAdjustment(options:ExposureAdjustmentOptions):ExposureAdjustment {
+#if hl
+	return flight._hl._fn.Adjustments.createExposureAdjustment(options);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.createExposureAdjustment(options);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.createExposureAdjustment(options);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function createGrayscaleAdjustment(options:GrayscaleAdjustmentOptions):GrayscaleAdjustment {
+#if hl
+	return flight._hl._fn.Adjustments.createGrayscaleAdjustment(options);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.createGrayscaleAdjustment(options);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.createGrayscaleAdjustment(options);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function createHueSaturationAdjustment(options:HueSaturationAdjustmentOptions):HueSaturationAdjustment {
+#if hl
+	return flight._hl._fn.Adjustments.createHueSaturationAdjustment(options);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.createHueSaturationAdjustment(options);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.createHueSaturationAdjustment(options);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function createInvertAdjustment(options:InvertAdjustmentOptions):InvertAdjustment {
+#if hl
+	return flight._hl._fn.Adjustments.createInvertAdjustment(options);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.createInvertAdjustment(options);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.createInvertAdjustment(options);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function createLiftGammaGainAdjustment(options:LiftGammaGainAdjustmentOptions):LiftGammaGainAdjustment {
+#if hl
+	return flight._hl._fn.Adjustments.createLiftGammaGainAdjustment(options);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.createLiftGammaGainAdjustment(options);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.createLiftGammaGainAdjustment(options);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function createLookupTableGradeAdjustment(options:LookupTableGradeAdjustmentOptions):LookupTableGradeAdjustment {
+#if hl
+	return flight._hl._fn.Adjustments.createLookupTableGradeAdjustment(options);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.createLookupTableGradeAdjustment(options);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.createLookupTableGradeAdjustment(options);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function createSepiaAdjustment(options:SepiaAdjustmentOptions):SepiaAdjustment {
+#if hl
+	return flight._hl._fn.Adjustments.createSepiaAdjustment(options);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.createSepiaAdjustment(options);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.createSepiaAdjustment(options);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function createTintAdjustment(rgba:Int):TintAdjustment {
+#if hl
+	return flight._hl._fn.Adjustments.createTintAdjustment(rgba);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.createTintAdjustment(rgba);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.createTintAdjustment(rgba);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function freeBrightnessContrastAdjustment(ptr:BrightnessContrastAdjustment):Void {
+#if hl
+	flight._hl._fn.Adjustments.freeBrightnessContrastAdjustment(ptr);
+#elseif cpp
+	flight._cpp._fn.Adjustments.freeBrightnessContrastAdjustment(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Adjustments.freeBrightnessContrastAdjustment(ptr);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function freeChannelMixerAdjustment(ptr:ChannelMixerAdjustment):Void {
+#if hl
+	flight._hl._fn.Adjustments.freeChannelMixerAdjustment(ptr);
+#elseif cpp
+	flight._cpp._fn.Adjustments.freeChannelMixerAdjustment(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Adjustments.freeChannelMixerAdjustment(ptr);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function freeColorBlindSimulationAdjustment(ptr:ColorBlindSimulationAdjustment):Void {
+#if hl
+	flight._hl._fn.Adjustments.freeColorBlindSimulationAdjustment(ptr);
+#elseif cpp
+	flight._cpp._fn.Adjustments.freeColorBlindSimulationAdjustment(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Adjustments.freeColorBlindSimulationAdjustment(ptr);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function freeColorGradeAdjustment(ptr:ColorGradeAdjustment):Void {
+#if hl
+	flight._hl._fn.Adjustments.freeColorGradeAdjustment(ptr);
+#elseif cpp
+	flight._cpp._fn.Adjustments.freeColorGradeAdjustment(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Adjustments.freeColorGradeAdjustment(ptr);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function freeColorLut(ptr:ColorLut):Void {
+#if hl
+	flight._hl._fn.Adjustments.freeColorLut(ptr);
+#elseif cpp
+	flight._cpp._fn.Adjustments.freeColorLut(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Adjustments.freeColorLut(ptr);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function freeColorTransformFunction(ptr:ColorTransformFunction):Void {
+#if hl
+	flight._hl._fn.Adjustments.freeColorTransformFunction(ptr);
+#elseif cpp
+	flight._cpp._fn.Adjustments.freeColorTransformFunction(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Adjustments.freeColorTransformFunction(ptr);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function freeColorLutCache(ptr:ColorLutCache):Void {
+#if hl
+	flight._hl._fn.Adjustments.freeColorLutCache(ptr);
+#elseif cpp
+	flight._cpp._fn.Adjustments.freeColorLutCache(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Adjustments.freeColorLutCache(ptr);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function freeColorMatrixAdjustment(ptr:ColorMatrixAdjustment):Void {
+#if hl
+	flight._hl._fn.Adjustments.freeColorMatrixAdjustment(ptr);
+#elseif cpp
+	flight._cpp._fn.Adjustments.freeColorMatrixAdjustment(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Adjustments.freeColorMatrixAdjustment(ptr);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function freeColorScaleBiasAdjustment(ptr:ColorScaleBiasAdjustment):Void {
+#if hl
+	flight._hl._fn.Adjustments.freeColorScaleBiasAdjustment(ptr);
+#elseif cpp
+	flight._cpp._fn.Adjustments.freeColorScaleBiasAdjustment(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Adjustments.freeColorScaleBiasAdjustment(ptr);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function freeExposureAdjustment(ptr:ExposureAdjustment):Void {
+#if hl
+	flight._hl._fn.Adjustments.freeExposureAdjustment(ptr);
+#elseif cpp
+	flight._cpp._fn.Adjustments.freeExposureAdjustment(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Adjustments.freeExposureAdjustment(ptr);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function freeGrayscaleAdjustment(ptr:GrayscaleAdjustment):Void {
+#if hl
+	flight._hl._fn.Adjustments.freeGrayscaleAdjustment(ptr);
+#elseif cpp
+	flight._cpp._fn.Adjustments.freeGrayscaleAdjustment(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Adjustments.freeGrayscaleAdjustment(ptr);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function freeHueSaturationAdjustment(ptr:HueSaturationAdjustment):Void {
+#if hl
+	flight._hl._fn.Adjustments.freeHueSaturationAdjustment(ptr);
+#elseif cpp
+	flight._cpp._fn.Adjustments.freeHueSaturationAdjustment(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Adjustments.freeHueSaturationAdjustment(ptr);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function freeInvertAdjustment(ptr:InvertAdjustment):Void {
+#if hl
+	flight._hl._fn.Adjustments.freeInvertAdjustment(ptr);
+#elseif cpp
+	flight._cpp._fn.Adjustments.freeInvertAdjustment(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Adjustments.freeInvertAdjustment(ptr);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function freeLiftGammaGainAdjustment(ptr:LiftGammaGainAdjustment):Void {
+#if hl
+	flight._hl._fn.Adjustments.freeLiftGammaGainAdjustment(ptr);
+#elseif cpp
+	flight._cpp._fn.Adjustments.freeLiftGammaGainAdjustment(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Adjustments.freeLiftGammaGainAdjustment(ptr);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function freeLookupTableGradeAdjustment(ptr:LookupTableGradeAdjustment):Void {
+#if hl
+	flight._hl._fn.Adjustments.freeLookupTableGradeAdjustment(ptr);
+#elseif cpp
+	flight._cpp._fn.Adjustments.freeLookupTableGradeAdjustment(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Adjustments.freeLookupTableGradeAdjustment(ptr);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function freeSepiaAdjustment(ptr:SepiaAdjustment):Void {
+#if hl
+	flight._hl._fn.Adjustments.freeSepiaAdjustment(ptr);
+#elseif cpp
+	flight._cpp._fn.Adjustments.freeSepiaAdjustment(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Adjustments.freeSepiaAdjustment(ptr);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+inline function freeTintAdjustment(ptr:TintAdjustment):Void {
+#if hl
+	flight._hl._fn.Adjustments.freeTintAdjustment(ptr);
+#elseif cpp
+	flight._cpp._fn.Adjustments.freeTintAdjustment(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Adjustments.freeTintAdjustment(ptr);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}

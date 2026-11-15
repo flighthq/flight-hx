@@ -1,25 +1,6 @@
-# examples
+# Examples
 
-These demonstrate **the flight-hx binding layer** — that the `flight.*` surface is faithful,
-ergonomic, and pays-per-use — **not** "what Flight can do." Capability demos belong upstream in
-[Flight](https://github.com/flighthq/flight); see the *Examples* section of [../AGENTS.md](../AGENTS.md)
-for the reasoning and the litmus test.
-
-Core examples use **no host** or **Flight's own host** — never Lime/Clay, which are on-top
-integrations that consume flight-hx as a `haxelib`.
-
-| tier | host | pipeline | status |
-|---|---|---|---|
-| [`cross-target-math/`](cross-target-math/) | none | isolated `-lib flight`: current ESM + flight-cpp, focused legacy Haxe proof | ✅ one branch-free production source plus a separate fallback proof (`gate:cross-target`) |
-| [`headless/`](headless/) | none | any backend | ✅ runnable now (`flight_hx`) |
-| [`fallback-hx/`](fallback-hx/) | none | `js` + `flight_hx` | ✅ covered by the proof gate |
-| [`web-geometry/`](web-geometry/) | none | `js` + `flight_esm` → `_js` | ✅ **generated** bindings on **real** `@flighthq/geometry`, tree-shaken (`gate:web`, `gate:dce`) |
-| [`window-native/`](window-native/) | Flight's own SDL3/GL host | `cpp` → `_cpp` | ✅ real window/context/clear/present through current flight-cpp (`gate:cross-target`) |
-| [`camera2d/`](camera2d/) | Flight Scene2D GL | one branch-free `flight.Scene2dApp` scene → current ESM externs and flight-cpp | ✅ public `Sprite`/`Shape`/`DisplayObject`, web compile/link, and native 3-frame pixel oracle checked against flight-cpp's upstream control (`gate:cross-target`) |
-| [`window-web/`](window-web/) | Flight's browser host | `js` + `flight_esm` → `_js` | ⏳ portable window/render counterpart; web ESM pipeline already works |
-
-Run the headless example:
-
-```sh
-node tools/haxe.mjs examples/headless/build.hxml
-```
+`ffi-smoke/Smoke.hx` is a small generated-API consumer: scalar interpolation,
+Vector2 allocation, a geometry query, and field mutation. The package gate
+compiles it on HL/cpp/JS and checks static ESM emission from the extracted archive.
+Running it requires the runtime bridges described in the root README.

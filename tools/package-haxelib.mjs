@@ -112,8 +112,8 @@ process.stdout.write(
 );
 
 function packageFiles() {
-  const roots = ['examples', 'generated', 'lib', 'src', 'src-cpp'];
-  const fixed = ['AGENTS.md', 'extraParams.hxml', 'haxelib.json', 'LICENSE.md', 'README.md'];
+  const roots = ['examples/ffi-smoke', 'generated/externs', 'lib'];
+  const fixed = ['extraParams.hxml', 'haxelib.json', 'LICENSE.md', 'README.md'];
   const esm = filesUnder('tools/esm').filter((filename) => filename.endsWith('.hx'));
   const result = [...fixed, ...roots.flatMap(filesUnder), ...esm].sort(compareText);
   if (result.length > 0xffff) throw new Error('Haxelib archive exceeds the ZIP32 entry limit');

@@ -2,11 +2,20 @@
   "name": "flight",
   "url": "https://github.com/flighthq/flight-hx",
   "license": "MIT",
-  "tags": ["cross", "cpp", "externs", "flight", "haxe", "javascript"],
-  "description": "Haxe bindings for Flight: direct flight-cpp on native, ESM externs on web, and an optional transpiled fallback.",
-  "version": "0.5.0",
+  "tags": [
+    "cross",
+    "cpp",
+    "externs",
+    "flight",
+    "haxe",
+    "javascript"
+  ],
+  "description": "Haxe externs from Flight Rust: native C ABI and JS/ESM bindings.",
+  "version": "0.6.0",
   "classPath": "lib",
-  "releasenote": "Complete current Flight 0.5 default web API plus manifest-pinned flight-cpp scalar/Scene2D bindings, SDL3/OpenGL host, and checked native reconciliation.",
-  "contributors": ["singmajesty"],
+  "releasenote": "Replace transpiled Haxe and flight-cpp sources with verbatim Rust Flight-generated HL/cpp/JS externs.",
+  "contributors": [
+    "singmajesty"
+  ],
   "dependencies": {}
 }

@@ -1,0 +1,706 @@
+package flight;
+
+inline function createAmbientLight():AmbientLight {
+#if hl
+	return flight._hl._fn.Lighting.createAmbientLight();
+#elseif cpp
+	return flight._cpp._fn.Lighting.createAmbientLight();
+#elseif (js && flight_esm)
+	return flight._js._fn.Lighting.createAmbientLight();
+#else
+	#error "flight.Lighting: no backend for this target."
+#end
+}
+inline function cloneAmbientLight(source:AmbientLight):AmbientLight {
+#if hl
+	return flight._hl._fn.Lighting.cloneAmbientLight(source);
+#elseif cpp
+	return flight._cpp._fn.Lighting.cloneAmbientLight(source);
+#elseif (js && flight_esm)
+	return flight._js._fn.Lighting.cloneAmbientLight(source);
+#else
+	#error "flight.Lighting: no backend for this target."
+#end
+}
+inline function createAreaLight():AreaLight {
+#if hl
+	return flight._hl._fn.Lighting.createAreaLight();
+#elseif cpp
+	return flight._cpp._fn.Lighting.createAreaLight();
+#elseif (js && flight_esm)
+	return flight._js._fn.Lighting.createAreaLight();
+#else
+	#error "flight.Lighting: no backend for this target."
+#end
+}
+inline function cloneAreaLight(source:AreaLight):AreaLight {
+#if hl
+	return flight._hl._fn.Lighting.cloneAreaLight(source);
+#elseif cpp
+	return flight._cpp._fn.Lighting.cloneAreaLight(source);
+#elseif (js && flight_esm)
+	return flight._js._fn.Lighting.cloneAreaLight(source);
+#else
+	#error "flight.Lighting: no backend for this target."
+#end
+}
+inline function setAreaLightOrientation(out:AreaLight, direction:Vector3, right:Vector3, up:Vector3):Void {
+#if hl
+	flight._hl._fn.Lighting.setAreaLightOrientation(out, direction, right, up);
+#elseif cpp
+	flight._cpp._fn.Lighting.setAreaLightOrientation(out, direction, right, up);
+#elseif (js && flight_esm)
+	flight._js._fn.Lighting.setAreaLightOrientation(out, direction, right, up);
+#else
+	#error "flight.Lighting: no backend for this target."
+#end
+}
+inline function createDirectionalLight(options:DirectionalLightOptions):DirectionalLight {
+#if hl
+	return flight._hl._fn.Lighting.createDirectionalLight(options);
+#elseif cpp
+	return flight._cpp._fn.Lighting.createDirectionalLight(options);
+#elseif (js && flight_esm)
+	return flight._js._fn.Lighting.createDirectionalLight(options);
+#else
+	#error "flight.Lighting: no backend for this target."
+#end
+}
+inline function cloneDirectionalLight(source:DirectionalLight):DirectionalLight {
+#if hl
+	return flight._hl._fn.Lighting.cloneDirectionalLight(source);
+#elseif cpp
+	return flight._cpp._fn.Lighting.cloneDirectionalLight(source);
+#elseif (js && flight_esm)
+	return flight._js._fn.Lighting.cloneDirectionalLight(source);
+#else
+	#error "flight.Lighting: no backend for this target."
+#end
+}
+inline function setDirectionalLightDirection(out:DirectionalLight, x:Float, y:Float, z:Float):Void {
+#if hl
+	flight._hl._fn.Lighting.setDirectionalLightDirection(out, x, y, z);
+#elseif cpp
+	flight._cpp._fn.Lighting.setDirectionalLightDirection(out, x, y, z);
+#elseif (js && flight_esm)
+	flight._js._fn.Lighting.setDirectionalLightDirection(out, x, y, z);
+#else
+	#error "flight.Lighting: no backend for this target."
+#end
+}
+inline function setDirectionalLightTarget(out:DirectionalLight, fromX:Float, fromY:Float, fromZ:Float, toX:Float, toY:Float, toZ:Float):Void {
+#if hl
+	flight._hl._fn.Lighting.setDirectionalLightTarget(out, fromX, fromY, fromZ, toX, toY, toZ);
+#elseif cpp
+	flight._cpp._fn.Lighting.setDirectionalLightTarget(out, fromX, fromY, fromZ, toX, toY, toZ);
+#elseif (js && flight_esm)
+	flight._js._fn.Lighting.setDirectionalLightTarget(out, fromX, fromY, fromZ, toX, toY, toZ);
+#else
+	#error "flight.Lighting: no backend for this target."
+#end
+}
+inline function createEnvironment():Environment {
+#if hl
+	return flight._hl._fn.Lighting.createEnvironment();
+#elseif cpp
+	return flight._cpp._fn.Lighting.createEnvironment();
+#elseif (js && flight_esm)
+	return flight._js._fn.Lighting.createEnvironment();
+#else
+	#error "flight.Lighting: no backend for this target."
+#end
+}
+inline function cloneEnvironment(source:Environment):Environment {
+#if hl
+	return flight._hl._fn.Lighting.cloneEnvironment(source);
+#elseif cpp
+	return flight._cpp._fn.Lighting.cloneEnvironment(source);
+#elseif (js && flight_esm)
+	return flight._js._fn.Lighting.cloneEnvironment(source);
+#else
+	#error "flight.Lighting: no backend for this target."
+#end
+}
+inline function createHemisphereLight():HemisphereLight {
+#if hl
+	return flight._hl._fn.Lighting.createHemisphereLight();
+#elseif cpp
+	return flight._cpp._fn.Lighting.createHemisphereLight();
+#elseif (js && flight_esm)
+	return flight._js._fn.Lighting.createHemisphereLight();
+#else
+	#error "flight.Lighting: no backend for this target."
+#end
+}
+inline function cloneHemisphereLight(source:HemisphereLight):HemisphereLight {
+#if hl
+	return flight._hl._fn.Lighting.cloneHemisphereLight(source);
+#elseif cpp
+	return flight._cpp._fn.Lighting.cloneHemisphereLight(source);
+#elseif (js && flight_esm)
+	return flight._js._fn.Lighting.cloneHemisphereLight(source);
+#else
+	#error "flight.Lighting: no backend for this target."
+#end
+}
+inline function getLightContributionAtBoundingSpherePointLight(light:PointLight, bounds:BoundingSphere):Float {
+#if hl
+	return flight._hl._fn.Lighting.getLightContributionAtBoundingSpherePointLight(light, bounds);
+#elseif cpp
+	return flight._cpp._fn.Lighting.getLightContributionAtBoundingSpherePointLight(light, bounds);
+#elseif (js && flight_esm)
+	return flight._js._fn.Lighting.getLightContributionAtBoundingSpherePointLight(light, bounds);
+#else
+	#error "flight.Lighting: no backend for this target."
+#end
+}
+inline function getLightContributionAtBoundingSphereSpotLight(light:SpotLight, bounds:BoundingSphere):Float {
+#if hl
+	return flight._hl._fn.Lighting.getLightContributionAtBoundingSphereSpotLight(light, bounds);
+#elseif cpp
+	return flight._cpp._fn.Lighting.getLightContributionAtBoundingSphereSpotLight(light, bounds);
+#elseif (js && flight_esm)
+	return flight._js._fn.Lighting.getLightContributionAtBoundingSphereSpotLight(light, bounds);
+#else
+	#error "flight.Lighting: no backend for this target."
+#end
+}
+inline function getLightInfluenceBoundsAmbientLight(out:BoundingSphere, light:AmbientLight):Void {
+#if hl
+	flight._hl._fn.Lighting.getLightInfluenceBoundsAmbientLight(out, light);
+#elseif cpp
+	flight._cpp._fn.Lighting.getLightInfluenceBoundsAmbientLight(out, light);
+#elseif (js && flight_esm)
+	flight._js._fn.Lighting.getLightInfluenceBoundsAmbientLight(out, light);
+#else
+	#error "flight.Lighting: no backend for this target."
+#end
+}
+inline function getLightInfluenceBoundsDirectionalLight(out:BoundingSphere, light:DirectionalLight):Void {
+#if hl
+	flight._hl._fn.Lighting.getLightInfluenceBoundsDirectionalLight(out, light);
+#elseif cpp
+	flight._cpp._fn.Lighting.getLightInfluenceBoundsDirectionalLight(out, light);
+#elseif (js && flight_esm)
+	flight._js._fn.Lighting.getLightInfluenceBoundsDirectionalLight(out, light);
+#else
+	#error "flight.Lighting: no backend for this target."
+#end
+}
+inline function getLightInfluenceBoundsEnvironment(out:BoundingSphere, light:Environment):Void {
+#if hl
+	flight._hl._fn.Lighting.getLightInfluenceBoundsEnvironment(out, light);
+#elseif cpp
+	flight._cpp._fn.Lighting.getLightInfluenceBoundsEnvironment(out, light);
+#elseif (js && flight_esm)
+	flight._js._fn.Lighting.getLightInfluenceBoundsEnvironment(out, light);
+#else
+	#error "flight.Lighting: no backend for this target."
+#end
+}
+inline function getLightInfluenceBoundsHemisphereLight(out:BoundingSphere, light:HemisphereLight):Void {
+#if hl
+	flight._hl._fn.Lighting.getLightInfluenceBoundsHemisphereLight(out, light);
+#elseif cpp
+	flight._cpp._fn.Lighting.getLightInfluenceBoundsHemisphereLight(out, light);
+#elseif (js && flight_esm)
+	flight._js._fn.Lighting.getLightInfluenceBoundsHemisphereLight(out, light);
+#else
+	#error "flight.Lighting: no backend for this target."
+#end
+}
+inline function getLightLuminanceAmbientLight(light:AmbientLight):Float {
+#if hl
+	return flight._hl._fn.Lighting.getLightLuminanceAmbientLight(light);
+#elseif cpp
+	return flight._cpp._fn.Lighting.getLightLuminanceAmbientLight(light);
+#elseif (js && flight_esm)
+	return flight._js._fn.Lighting.getLightLuminanceAmbientLight(light);
+#else
+	#error "flight.Lighting: no backend for this target."
+#end
+}
+inline function getLightLuminanceDirectionalLight(light:DirectionalLight):Float {
+#if hl
+	return flight._hl._fn.Lighting.getLightLuminanceDirectionalLight(light);
+#elseif cpp
+	return flight._cpp._fn.Lighting.getLightLuminanceDirectionalLight(light);
+#elseif (js && flight_esm)
+	return flight._js._fn.Lighting.getLightLuminanceDirectionalLight(light);
+#else
+	#error "flight.Lighting: no backend for this target."
+#end
+}
+inline function getLightLuminanceEnvironment(light:Environment):Float {
+#if hl
+	return flight._hl._fn.Lighting.getLightLuminanceEnvironment(light);
+#elseif cpp
+	return flight._cpp._fn.Lighting.getLightLuminanceEnvironment(light);
+#elseif (js && flight_esm)
+	return flight._js._fn.Lighting.getLightLuminanceEnvironment(light);
+#else
+	#error "flight.Lighting: no backend for this target."
+#end
+}
+inline function getLightLuminanceHemisphereLight(light:HemisphereLight):Float {
+#if hl
+	return flight._hl._fn.Lighting.getLightLuminanceHemisphereLight(light);
+#elseif cpp
+	return flight._cpp._fn.Lighting.getLightLuminanceHemisphereLight(light);
+#elseif (js && flight_esm)
+	return flight._js._fn.Lighting.getLightLuminanceHemisphereLight(light);
+#else
+	#error "flight.Lighting: no backend for this target."
+#end
+}
+inline function hasLightInfluenceOnBoundsAmbientLight(light:AmbientLight, bounds:BoundingSphere):Bool {
+#if hl
+	return flight._hl._fn.Lighting.hasLightInfluenceOnBoundsAmbientLight(light, bounds);
+#elseif cpp
+	return flight._cpp._fn.Lighting.hasLightInfluenceOnBoundsAmbientLight(light, bounds);
+#elseif (js && flight_esm)
+	return flight._js._fn.Lighting.hasLightInfluenceOnBoundsAmbientLight(light, bounds);
+#else
+	#error "flight.Lighting: no backend for this target."
+#end
+}
+inline function hasLightInfluenceOnBoundsDirectionalLight(light:DirectionalLight, bounds:BoundingSphere):Bool {
+#if hl
+	return flight._hl._fn.Lighting.hasLightInfluenceOnBoundsDirectionalLight(light, bounds);
+#elseif cpp
+	return flight._cpp._fn.Lighting.hasLightInfluenceOnBoundsDirectionalLight(light, bounds);
+#elseif (js && flight_esm)
+	return flight._js._fn.Lighting.hasLightInfluenceOnBoundsDirectionalLight(light, bounds);
+#else
+	#error "flight.Lighting: no backend for this target."
+#end
+}
+inline function hasLightInfluenceOnBoundsEnvironment(light:Environment, bounds:BoundingSphere):Bool {
+#if hl
+	return flight._hl._fn.Lighting.hasLightInfluenceOnBoundsEnvironment(light, bounds);
+#elseif cpp
+	return flight._cpp._fn.Lighting.hasLightInfluenceOnBoundsEnvironment(light, bounds);
+#elseif (js && flight_esm)
+	return flight._js._fn.Lighting.hasLightInfluenceOnBoundsEnvironment(light, bounds);
+#else
+	#error "flight.Lighting: no backend for this target."
+#end
+}
+inline function hasLightInfluenceOnBoundsHemisphereLight(light:HemisphereLight, bounds:BoundingSphere):Bool {
+#if hl
+	return flight._hl._fn.Lighting.hasLightInfluenceOnBoundsHemisphereLight(light, bounds);
+#elseif cpp
+	return flight._cpp._fn.Lighting.hasLightInfluenceOnBoundsHemisphereLight(light, bounds);
+#elseif (js && flight_esm)
+	return flight._js._fn.Lighting.hasLightInfluenceOnBoundsHemisphereLight(light, bounds);
+#else
+	#error "flight.Lighting: no backend for this target."
+#end
+}
+inline function isLightCastingShadowAmbientLight(light:AmbientLight):Bool {
+#if hl
+	return flight._hl._fn.Lighting.isLightCastingShadowAmbientLight(light);
+#elseif cpp
+	return flight._cpp._fn.Lighting.isLightCastingShadowAmbientLight(light);
+#elseif (js && flight_esm)
+	return flight._js._fn.Lighting.isLightCastingShadowAmbientLight(light);
+#else
+	#error "flight.Lighting: no backend for this target."
+#end
+}
+inline function isLightCastingShadowDirectionalLight(light:DirectionalLight):Bool {
+#if hl
+	return flight._hl._fn.Lighting.isLightCastingShadowDirectionalLight(light);
+#elseif cpp
+	return flight._cpp._fn.Lighting.isLightCastingShadowDirectionalLight(light);
+#elseif (js && flight_esm)
+	return flight._js._fn.Lighting.isLightCastingShadowDirectionalLight(light);
+#else
+	#error "flight.Lighting: no backend for this target."
+#end
+}
+inline function isLightCastingShadowEnvironment(light:Environment):Bool {
+#if hl
+	return flight._hl._fn.Lighting.isLightCastingShadowEnvironment(light);
+#elseif cpp
+	return flight._cpp._fn.Lighting.isLightCastingShadowEnvironment(light);
+#elseif (js && flight_esm)
+	return flight._js._fn.Lighting.isLightCastingShadowEnvironment(light);
+#else
+	#error "flight.Lighting: no backend for this target."
+#end
+}
+inline function isLightCastingShadowHemisphereLight(light:HemisphereLight):Bool {
+#if hl
+	return flight._hl._fn.Lighting.isLightCastingShadowHemisphereLight(light);
+#elseif cpp
+	return flight._cpp._fn.Lighting.isLightCastingShadowHemisphereLight(light);
+#elseif (js && flight_esm)
+	return flight._js._fn.Lighting.isLightCastingShadowHemisphereLight(light);
+#else
+	#error "flight.Lighting: no backend for this target."
+#end
+}
+inline function applyLightExposure(intensity:Float, ev:Float):Float {
+#if hl
+	return flight._hl._fn.Lighting.applyLightExposure(intensity, ev);
+#elseif cpp
+	return flight._cpp._fn.Lighting.applyLightExposure(intensity, ev);
+#elseif (js && flight_esm)
+	return flight._js._fn.Lighting.applyLightExposure(intensity, ev);
+#else
+	#error "flight.Lighting: no backend for this target."
+#end
+}
+inline function convertLightIntensity(fromUnit:flight.LightUnit, toUnit:flight.LightUnit, value:Float):Float {
+#if hl
+	return flight._hl._fn.Lighting.convertLightIntensity(fromUnit, toUnit, value);
+#elseif cpp
+	return flight._cpp._fn.Lighting.convertLightIntensity(fromUnit, toUnit, value);
+#elseif (js && flight_esm)
+	return flight._js._fn.Lighting.convertLightIntensity(fromUnit, toUnit, value);
+#else
+	#error "flight.Lighting: no backend for this target."
+#end
+}
+inline function getLightLinearIntensity(unit:flight.LightUnit, value:Float):Float {
+#if hl
+	return flight._hl._fn.Lighting.getLightLinearIntensity(unit, value);
+#elseif cpp
+	return flight._cpp._fn.Lighting.getLightLinearIntensity(unit, value);
+#elseif (js && flight_esm)
+	return flight._js._fn.Lighting.getLightLinearIntensity(unit, value);
+#else
+	#error "flight.Lighting: no backend for this target."
+#end
+}
+inline function getLightPhotometricIntensityAmbientLight(light:AmbientLight):Float {
+#if hl
+	return flight._hl._fn.Lighting.getLightPhotometricIntensityAmbientLight(light);
+#elseif cpp
+	return flight._cpp._fn.Lighting.getLightPhotometricIntensityAmbientLight(light);
+#elseif (js && flight_esm)
+	return flight._js._fn.Lighting.getLightPhotometricIntensityAmbientLight(light);
+#else
+	#error "flight.Lighting: no backend for this target."
+#end
+}
+inline function getLightPhotometricIntensityDirectionalLight(light:DirectionalLight):Float {
+#if hl
+	return flight._hl._fn.Lighting.getLightPhotometricIntensityDirectionalLight(light);
+#elseif cpp
+	return flight._cpp._fn.Lighting.getLightPhotometricIntensityDirectionalLight(light);
+#elseif (js && flight_esm)
+	return flight._js._fn.Lighting.getLightPhotometricIntensityDirectionalLight(light);
+#else
+	#error "flight.Lighting: no backend for this target."
+#end
+}
+inline function getLightPhotometricIntensityHemisphereLight(light:HemisphereLight):Float {
+#if hl
+	return flight._hl._fn.Lighting.getLightPhotometricIntensityHemisphereLight(light);
+#elseif cpp
+	return flight._cpp._fn.Lighting.getLightPhotometricIntensityHemisphereLight(light);
+#elseif (js && flight_esm)
+	return flight._js._fn.Lighting.getLightPhotometricIntensityHemisphereLight(light);
+#else
+	#error "flight.Lighting: no backend for this target."
+#end
+}
+inline function setLightPhotometricIntensityAmbientLight(out:AmbientLight, value:Float):Void {
+#if hl
+	flight._hl._fn.Lighting.setLightPhotometricIntensityAmbientLight(out, value);
+#elseif cpp
+	flight._cpp._fn.Lighting.setLightPhotometricIntensityAmbientLight(out, value);
+#elseif (js && flight_esm)
+	flight._js._fn.Lighting.setLightPhotometricIntensityAmbientLight(out, value);
+#else
+	#error "flight.Lighting: no backend for this target."
+#end
+}
+inline function setLightPhotometricIntensityDirectionalLight(out:DirectionalLight, value:Float):Void {
+#if hl
+	flight._hl._fn.Lighting.setLightPhotometricIntensityDirectionalLight(out, value);
+#elseif cpp
+	flight._cpp._fn.Lighting.setLightPhotometricIntensityDirectionalLight(out, value);
+#elseif (js && flight_esm)
+	flight._js._fn.Lighting.setLightPhotometricIntensityDirectionalLight(out, value);
+#else
+	#error "flight.Lighting: no backend for this target."
+#end
+}
+inline function setLightPhotometricIntensityHemisphereLight(out:HemisphereLight, value:Float):Void {
+#if hl
+	flight._hl._fn.Lighting.setLightPhotometricIntensityHemisphereLight(out, value);
+#elseif cpp
+	flight._cpp._fn.Lighting.setLightPhotometricIntensityHemisphereLight(out, value);
+#elseif (js && flight_esm)
+	flight._js._fn.Lighting.setLightPhotometricIntensityHemisphereLight(out, value);
+#else
+	#error "flight.Lighting: no backend for this target."
+#end
+}
+inline function createLightProbe(position:Vector3, shCoefficients:Dynamic, shCoefficientsLen:Int):LightProbe {
+#if hl
+	return flight._hl._fn.Lighting.createLightProbe(position, shCoefficients, shCoefficientsLen);
+#elseif cpp
+	return flight._cpp._fn.Lighting.createLightProbe(position, shCoefficients, shCoefficientsLen);
+#elseif (js && flight_esm)
+	return flight._js._fn.Lighting.createLightProbe(position, shCoefficients, shCoefficientsLen);
+#else
+	#error "flight.Lighting: no backend for this target."
+#end
+}
+inline function evaluateLightProbeSh(out:Dynamic, outLen:Int, normal:Vector3, shCoefficients:Dynamic, shCoefficientsLen:Int):Void {
+#if hl
+	flight._hl._fn.Lighting.evaluateLightProbeSh(out, outLen, normal, shCoefficients, shCoefficientsLen);
+#elseif cpp
+	flight._cpp._fn.Lighting.evaluateLightProbeSh(out, outLen, normal, shCoefficients, shCoefficientsLen);
+#elseif (js && flight_esm)
+	flight._js._fn.Lighting.evaluateLightProbeSh(out, outLen, normal, shCoefficients, shCoefficientsLen);
+#else
+	#error "flight.Lighting: no backend for this target."
+#end
+}
+inline function sampleLightProbeGrid(out:Dynamic, outLen:Int, position:Vector3, grid:LightProbeGrid):Bool {
+#if hl
+	return flight._hl._fn.Lighting.sampleLightProbeGrid(out, outLen, position, grid);
+#elseif cpp
+	return flight._cpp._fn.Lighting.sampleLightProbeGrid(out, outLen, position, grid);
+#elseif (js && flight_esm)
+	return flight._js._fn.Lighting.sampleLightProbeGrid(out, outLen, position, grid);
+#else
+	#error "flight.Lighting: no backend for this target."
+#end
+}
+inline function setLightProbeShFromColors(target:LightProbe, colors:Dynamic, colorsLen:Int, directions:Dynamic, directionsLen:Int):Void {
+#if hl
+	flight._hl._fn.Lighting.setLightProbeShFromColors(target, colors, colorsLen, directions, directionsLen);
+#elseif cpp
+	flight._cpp._fn.Lighting.setLightProbeShFromColors(target, colors, colorsLen, directions, directionsLen);
+#elseif (js && flight_esm)
+	flight._js._fn.Lighting.setLightProbeShFromColors(target, colors, colorsLen, directions, directionsLen);
+#else
+	#error "flight.Lighting: no backend for this target."
+#end
+}
+inline function createPointLight():PointLight {
+#if hl
+	return flight._hl._fn.Lighting.createPointLight();
+#elseif cpp
+	return flight._cpp._fn.Lighting.createPointLight();
+#elseif (js && flight_esm)
+	return flight._js._fn.Lighting.createPointLight();
+#else
+	#error "flight.Lighting: no backend for this target."
+#end
+}
+inline function clonePointLight(source:PointLight):PointLight {
+#if hl
+	return flight._hl._fn.Lighting.clonePointLight(source);
+#elseif cpp
+	return flight._cpp._fn.Lighting.clonePointLight(source);
+#elseif (js && flight_esm)
+	return flight._js._fn.Lighting.clonePointLight(source);
+#else
+	#error "flight.Lighting: no backend for this target."
+#end
+}
+inline function selectScene3dForwardLights(out:Scene3DForwardLightSelection, lights:Scene3DLights, bounds:BoundingSphere, receiverLayerMask:Int):Void {
+#if hl
+	flight._hl._fn.Lighting.selectScene3dForwardLights(out, lights, bounds, receiverLayerMask);
+#elseif cpp
+	flight._cpp._fn.Lighting.selectScene3dForwardLights(out, lights, bounds, receiverLayerMask);
+#elseif (js && flight_esm)
+	flight._js._fn.Lighting.selectScene3dForwardLights(out, lights, bounds, receiverLayerMask);
+#else
+	#error "flight.Lighting: no backend for this target."
+#end
+}
+inline function createScene3dLights():Scene3DLights {
+#if hl
+	return flight._hl._fn.Lighting.createScene3dLights();
+#elseif cpp
+	return flight._cpp._fn.Lighting.createScene3dLights();
+#elseif (js && flight_esm)
+	return flight._js._fn.Lighting.createScene3dLights();
+#else
+	#error "flight.Lighting: no backend for this target."
+#end
+}
+inline function createSpotLight(options:SpotLightOptions):SpotLight {
+#if hl
+	return flight._hl._fn.Lighting.createSpotLight(options);
+#elseif cpp
+	return flight._cpp._fn.Lighting.createSpotLight(options);
+#elseif (js && flight_esm)
+	return flight._js._fn.Lighting.createSpotLight(options);
+#else
+	#error "flight.Lighting: no backend for this target."
+#end
+}
+inline function cloneSpotLight(source:SpotLight):SpotLight {
+#if hl
+	return flight._hl._fn.Lighting.cloneSpotLight(source);
+#elseif cpp
+	return flight._cpp._fn.Lighting.cloneSpotLight(source);
+#elseif (js && flight_esm)
+	return flight._js._fn.Lighting.cloneSpotLight(source);
+#else
+	#error "flight.Lighting: no backend for this target."
+#end
+}
+inline function getSpotLightConeDegrees(out:SpotLightConeAngles, source:SpotLight):Void {
+#if hl
+	flight._hl._fn.Lighting.getSpotLightConeDegrees(out, source);
+#elseif cpp
+	flight._cpp._fn.Lighting.getSpotLightConeDegrees(out, source);
+#elseif (js && flight_esm)
+	flight._js._fn.Lighting.getSpotLightConeDegrees(out, source);
+#else
+	#error "flight.Lighting: no backend for this target."
+#end
+}
+inline function setSpotLightBlend(out:SpotLight, blend:Float):Void {
+#if hl
+	flight._hl._fn.Lighting.setSpotLightBlend(out, blend);
+#elseif cpp
+	flight._cpp._fn.Lighting.setSpotLightBlend(out, blend);
+#elseif (js && flight_esm)
+	flight._js._fn.Lighting.setSpotLightBlend(out, blend);
+#else
+	#error "flight.Lighting: no backend for this target."
+#end
+}
+inline function setSpotLightCone(out:SpotLight, innerDegrees:Float, outerDegrees:Float):Void {
+#if hl
+	flight._hl._fn.Lighting.setSpotLightCone(out, innerDegrees, outerDegrees);
+#elseif cpp
+	flight._cpp._fn.Lighting.setSpotLightCone(out, innerDegrees, outerDegrees);
+#elseif (js && flight_esm)
+	flight._js._fn.Lighting.setSpotLightCone(out, innerDegrees, outerDegrees);
+#else
+	#error "flight.Lighting: no backend for this target."
+#end
+}
+inline function setSpotLightDirection(out:SpotLight, x:Float, y:Float, z:Float):Void {
+#if hl
+	flight._hl._fn.Lighting.setSpotLightDirection(out, x, y, z);
+#elseif cpp
+	flight._cpp._fn.Lighting.setSpotLightDirection(out, x, y, z);
+#elseif (js && flight_esm)
+	flight._js._fn.Lighting.setSpotLightDirection(out, x, y, z);
+#else
+	#error "flight.Lighting: no backend for this target."
+#end
+}
+inline function setSpotLightTarget(out:SpotLight, targetX:Float, targetY:Float, targetZ:Float):Void {
+#if hl
+	flight._hl._fn.Lighting.setSpotLightTarget(out, targetX, targetY, targetZ);
+#elseif cpp
+	flight._cpp._fn.Lighting.setSpotLightTarget(out, targetX, targetY, targetZ);
+#elseif (js && flight_esm)
+	flight._js._fn.Lighting.setSpotLightTarget(out, targetX, targetY, targetZ);
+#else
+	#error "flight.Lighting: no backend for this target."
+#end
+}
+inline function freeAmbientLight(ptr:AmbientLight):Void {
+#if hl
+	flight._hl._fn.Lighting.freeAmbientLight(ptr);
+#elseif cpp
+	flight._cpp._fn.Lighting.freeAmbientLight(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Lighting.freeAmbientLight(ptr);
+#else
+	#error "flight.Lighting: no backend for this target."
+#end
+}
+inline function freeAreaLight(ptr:AreaLight):Void {
+#if hl
+	flight._hl._fn.Lighting.freeAreaLight(ptr);
+#elseif cpp
+	flight._cpp._fn.Lighting.freeAreaLight(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Lighting.freeAreaLight(ptr);
+#else
+	#error "flight.Lighting: no backend for this target."
+#end
+}
+inline function freeDirectionalLight(ptr:DirectionalLight):Void {
+#if hl
+	flight._hl._fn.Lighting.freeDirectionalLight(ptr);
+#elseif cpp
+	flight._cpp._fn.Lighting.freeDirectionalLight(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Lighting.freeDirectionalLight(ptr);
+#else
+	#error "flight.Lighting: no backend for this target."
+#end
+}
+inline function freeEnvironment(ptr:Environment):Void {
+#if hl
+	flight._hl._fn.Lighting.freeEnvironment(ptr);
+#elseif cpp
+	flight._cpp._fn.Lighting.freeEnvironment(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Lighting.freeEnvironment(ptr);
+#else
+	#error "flight.Lighting: no backend for this target."
+#end
+}
+inline function freeHemisphereLight(ptr:HemisphereLight):Void {
+#if hl
+	flight._hl._fn.Lighting.freeHemisphereLight(ptr);
+#elseif cpp
+	flight._cpp._fn.Lighting.freeHemisphereLight(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Lighting.freeHemisphereLight(ptr);
+#else
+	#error "flight.Lighting: no backend for this target."
+#end
+}
+inline function freeLightProbe(ptr:LightProbe):Void {
+#if hl
+	flight._hl._fn.Lighting.freeLightProbe(ptr);
+#elseif cpp
+	flight._cpp._fn.Lighting.freeLightProbe(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Lighting.freeLightProbe(ptr);
+#else
+	#error "flight.Lighting: no backend for this target."
+#end
+}
+inline function freePointLight(ptr:PointLight):Void {
+#if hl
+	flight._hl._fn.Lighting.freePointLight(ptr);
+#elseif cpp
+	flight._cpp._fn.Lighting.freePointLight(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Lighting.freePointLight(ptr);
+#else
+	#error "flight.Lighting: no backend for this target."
+#end
+}
+inline function freeScene3Dlights(ptr:Scene3DLights):Void {
+#if hl
+	flight._hl._fn.Lighting.freeScene3Dlights(ptr);
+#elseif cpp
+	flight._cpp._fn.Lighting.freeScene3Dlights(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Lighting.freeScene3Dlights(ptr);
+#else
+	#error "flight.Lighting: no backend for this target."
+#end
+}
+inline function freeSpotLight(ptr:SpotLight):Void {
+#if hl
+	flight._hl._fn.Lighting.freeSpotLight(ptr);
+#elseif cpp
+	flight._cpp._fn.Lighting.freeSpotLight(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Lighting.freeSpotLight(ptr);
+#else
+	#error "flight.Lighting: no backend for this target."
+#end
+}

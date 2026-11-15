@@ -5,10 +5,8 @@ import haxe.io.Path;
 import haxe.macro.Compiler;
 import haxe.macro.Context;
 
-// Haxelib exposes one static classPath, while Flight deliberately has target-specific generated
-// roots. This initialization macro elects exactly one backend root and keeps its precedence over
-// the common maintained root. Direct repository builds may continue to spell the same
-// classpaths explicitly; installed consumers only need `-lib flight` and their pipeline define.
+// Flight owns the complete target dispatch. Keep legacy roots off the classpath so a missing
+// generated declaration cannot accidentally resolve to an old Haxe implementation or C++ adapter.
 class Package {
   static var configured = false;
 
@@ -18,18 +16,21 @@ class Package {
 
     final macroFile = Context.resolvePath('flight_hx/Package.hx');
     final root = Path.normalize(Path.join([Path.directory(macroFile), '..', '..']));
-    Compiler.addClassPath(Path.join([root, 'src']));
-
     if (Context.defined('flight_hx')) {
-      Compiler.addClassPath(Path.join([root, 'generated', 'hx']));
-    } else if (Context.defined('js') && Context.defined('flight_esm')) {
-      Compiler.addClassPath(Path.join([root, 'generated', 'js']));
-      Compiler.addClassPath(Path.join([root, 'tools', 'esm']));
-    } else if (Context.defined('cpp')) {
-      Compiler.addClassPath(Path.join([root, 'src-cpp']));
-      Compiler.define('HXCPP_NO_CPP11');
-      Compiler.define('flight_hx_root', root);
+      Context.fatalError('flight_hx implementation sources have been retired; use native FFI (cpp/hl) or JS with flight_esm.', Context.currentPos());
     }
+    if (Context.defined('js') && !Context.defined('flight_esm')) {
+      Context.fatalError('Flight on JS requires flight_esm and an ESM build pipeline.', Context.currentPos());
+    }
+    if (!Context.defined('cpp') && !Context.defined('hl') && !Context.defined('js')) {
+      Context.fatalError('Flight has no backend for this target; use cpp, hl, or JS with flight_esm.', Context.currentPos());
+    }
+    final generated = Path.join([root, 'generated', 'externs']);
+    if (!sys.FileSystem.exists(Path.join([generated, 'provenance.json']))) {
+      Context.fatalError('Flight Rust externs are missing; run npm run generate:externs before packaging.', Context.currentPos());
+    }
+    Compiler.addClassPath(generated);
+    if (Context.defined('js')) Compiler.addClassPath(Path.join([root, 'tools', 'esm']));
   }
 }
 #end

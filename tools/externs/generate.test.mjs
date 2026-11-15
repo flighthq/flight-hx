@@ -28,11 +28,14 @@ function fixture(t) {
     calls.push({ command, args, cwd });
     assert.equal(cwd, flightRoot);
     if (command === 'git') return args[0] === 'rev-parse' ? `${'a'.repeat(40)}\n` : dirty ? ' M Cargo.toml\n' : '';
+    if (command === 'rustc') return 'rustc fixture\n';
     assert.equal(command, 'cargo');
+    if (args[0] === '--version') return 'cargo fixture\n';
+    assert.ok(args.includes('--locked'));
     assert.ok(args.includes('--offline'));
     if (args[0] === 'build') return noBuildMessage ? '' : `${JSON.stringify({ reason: 'build-script-executed', out_dir: out })}\n`;
     if (args.includes('flight-offsets')) return invalidOffsets ? 'not JSON' : '{"Vector2":{"x":0,"y":8}}\n';
-    assert.deepEqual(args.slice(0, 7), ['run', '-p', 'flight-bindgen', '--offline', '--', '--target', 'haxe']);
+    assert.deepEqual(args.slice(0, 8), ['run', '-p', 'flight-bindgen', '--locked', '--offline', '--', '--target', 'haxe']);
     const readArgument = (flag) => args[args.indexOf(flag) + 1];
     assert.equal(readFileSync(readArgument('--ffi-names'), 'utf8'), 'flight_a\nflight_z\n');
     assert.deepEqual(JSON.parse(readFileSync(readArgument('--offsets'), 'utf8')), { Vector2: { x: 0, y: 8 } });
@@ -58,6 +61,8 @@ test('copies upstream bytes with provenance, checks drift without writing, and r
   const provenance = JSON.parse(readFileSync(path.join(state.output, 'provenance.json'), 'utf8'));
   assert.equal(provenance.files[0].path, 'flight/Vector2.hx');
   assert.equal(provenance.source.commit, 'a'.repeat(40));
+  assert.equal(provenance.toolchain.rustc, 'rustc fixture');
+  assert.equal(provenance.toolchain.cargo, 'cargo fixture');
   generate({ ...state.options, check: true });
   writeFileSync(hx, 'changed\n');
   writeFileSync(path.join(state.output, 'stale.hx'), 'obsolete\n');

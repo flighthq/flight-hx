@@ -19,7 +19,7 @@ Cargo runs offline unless --allow-network is explicitly supplied.
 
 export function run(command, args, cwd) {
   const result = spawnSync(command, args, {
-    cwd, encoding: 'utf8', maxBuffer: 64 * 1024 * 1024,
+    cwd, env: toolEnvironment(), encoding: 'utf8', maxBuffer: 64 * 1024 * 1024,
   });
   if (result.stderr) process.stderr.write(result.stderr);
   if (result.error) throw new Error(`Cannot run ${command}: ${result.error.message}`);
@@ -27,6 +27,25 @@ export function run(command, args, cwd) {
     throw new Error(`${command} ${args.join(' ')} failed (${result.signal ?? result.status}):\n${result.stdout}`);
   }
   return result.stdout;
+}
+
+function toolEnvironment() {
+  const localRust = path.join(root, '.artifacts/rust');
+  const localCargo = path.join(localRust, 'cargo');
+  const localHaxe = path.join(root, '.haxe/4.3.7');
+  const environment = { ...process.env };
+  const paths = [];
+  if (existsSync(path.join(localCargo, 'bin/cargo'))) {
+    environment.CARGO_HOME ??= localCargo;
+    environment.RUSTUP_HOME ??= path.join(localRust, 'rustup');
+    paths.push(path.join(environment.CARGO_HOME, 'bin'));
+  }
+  if (existsSync(path.join(localHaxe, 'haxe'))) {
+    paths.push(localHaxe);
+    environment.HAXE_STD_PATH ??= path.join(localHaxe, 'std');
+  }
+  environment.PATH = [...paths, process.env.PATH].join(path.delimiter);
+  return environment;
 }
 
 // This driver owns transport/provenance only. All Haxe emission belongs to Flight's Rust tooling.
@@ -37,12 +56,17 @@ export function generate({ repoRoot = root, flightRoot, check = false, offline =
   if (execute('git', ['status', '--porcelain', '--untracked-files=normal'], flightRoot).trim()) {
     throw new Error('Flight checkout is dirty; commit its source before recording generated provenance');
   }
+  const toolchain = {
+    rustc: execute('rustc', ['--version'], flightRoot).trim(),
+    cargo: execute('cargo', ['--version'], flightRoot).trim(),
+    platform: process.platform, architecture: process.arch,
+  };
 
   const artifactRoot = path.join(repoRoot, '.artifacts');
   mkdirSync(artifactRoot, { recursive: true });
   const temporary = mkdtempSync(path.join(artifactRoot, 'flight-externs-'));
   const output = path.join(repoRoot, 'generated/externs');
-  const cargo = (args) => execute('cargo', [...args, ...(offline ? ['--offline'] : [])], flightRoot);
+  const cargo = (args) => execute('cargo', [...args, '--locked', ...(offline ? ['--offline'] : [])], flightRoot);
   try {
     const messages = cargo(['build', '-p', 'flight-ffi', '--message-format=json']);
     const ffiFiles = new Set();
@@ -70,7 +94,7 @@ export function generate({ repoRoot = root, flightRoot, check = false, offline =
     writeFileSync(namesFile, ffiNames);
     const staged = path.join(temporary, 'bindings');
     execute('cargo', [
-      'run', '-p', 'flight-bindgen', ...(offline ? ['--offline'] : []), '--',
+      'run', '-p', 'flight-bindgen', '--locked', ...(offline ? ['--offline'] : []), '--',
       '--target', 'haxe', '--out', staged, '--offsets', offsetsFile, '--ffi-names', namesFile,
     ], flightRoot);
     const files = inventory(staged);
@@ -84,6 +108,7 @@ export function generate({ repoRoot = root, flightRoot, check = false, offline =
       schema: 'flight-hx-rust-externs/1',
       source: { repository: 'https://github.com/flighthq/flight', commit: revision },
       generator: 'flight-bindgen --target haxe',
+      toolchain,
       offsetsSha256: sha256(offsets), ffiNamesSha256: sha256(ffiNames),
       ffiFunctionCount: names.length, files,
     };
@@ -169,7 +194,7 @@ export function main(args) {
     // Preserve offline policy for any Cargo invocations made inside the upstream script.
     const result = spawnSync('bash', [script], {
       cwd: flightRoot, stdio: 'inherit',
-      env: { ...process.env, CARGO_NET_OFFLINE: args.includes('--allow-network') ? 'false' : 'true' },
+      env: { ...toolEnvironment(), CARGO_NET_OFFLINE: args.includes('--allow-network') ? 'false' : 'true' },
     });
     if (result.error) throw result.error;
     if (result.status !== 0) throw new Error(`Upstream Haxe binding check failed (${result.signal ?? result.status})`);

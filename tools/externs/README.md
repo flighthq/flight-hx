@@ -1,40 +1,29 @@
 # Rust Flight extern intake
 
-The replacement source for Haxe bindings is the Rust tooling inside
-[Flight](https://github.com/flighthq/flight): native binaries through FFI and web
-ESM through externs. The separate TypeScript flight-compiler repository,
-flight-cpp adapters, and transpiled Haxe fallback are being retired from the
-production path. Do not add new Haxe implementations or extend those legacy
-adapters during this migration.
-
-The local dependency pin still names the old TypeScript Flight snapshot. Until
-the new Rust revision is available and its output has been validated, the old
-package selection remains in place. This driver prepares the intake; it does
-not claim the installed package has switched to the new bindings.
-
-The upstream source has now been inspected: the recipe exists on `develop`, at
-`49c510e875461a9235b24ee846015ec1b47acd2a`. The inspected `main` revision
-`9de3cab1b68872c52264f5d83b6c05318a390599` has `flight-compiler` but no
-`flight-ffi`, `flight-bindgen`, or Haxe binding check script. The matching checkout
-is currently available locally at `.dependencies/flight-rust`.
+Bindings come from the Rust tooling inside Flight. The source pin is Flight
+`develop` revision `49c510e875461a9235b24ee846015ec1b47acd2a`; the inspected `main`
+revision does not have the binding crates. There is one dependency pin, for
+Flight, with `flight-compiler`, `flight-ffi`, and `flight-bindgen` inside it.
 
 ## Generate and copy
 
-Use a clean Git checkout of the new Rust Flight workspace and an installed Rust
-toolchain. No Flight sources are modified by this driver; Cargo will write its
-normal build artifacts in that workspace.
+Use a clean checkout and an installed Rust toolchain. Cargo writes its normal
+build artifacts in Flight; this driver does not edit Flight's sources.
 
 ```sh
-npm run generate:externs -- --flight-root /path/to/flight
-npm run generate:externs:check -- --flight-root /path/to/flight
-npm run check:externs:upstream -- --flight-root /path/to/flight
+npm run rehydrate
+npm run generate:externs -- --allow-network  # allow initial Cargo dependency downloads
+npm run generate:externs:check
+npm run check:externs:upstream
 ```
 
-`FLIGHT_ROOT` also selects the checkout; the default is `.dependencies/flight`.
-Cargo uses offline mode by default. To permit downloading missing Cargo packages,
-explicitly append `--allow-network`.
+`FLIGHT_ROOT` or `--flight-root <path>` selects another checkout; the default is
+`.dependencies/flight`. Update `dependencies.lock.json` when changing the source
+revision. Cargo is offline unless `--allow-network` is supplied. Repository-local
+Rust in `.artifacts/rust/{cargo,rustup}` is recognized automatically, as is an
+ordinary toolchain on PATH. Haxe validation uses the repository's pinned compiler.
 
-The generation steps are the upstream recipe:
+The generation steps follow the supplied upstream recipe:
 
 ```sh
 cargo build -p flight-ffi
@@ -46,45 +35,31 @@ cargo run -p flight-bindgen -- --target haxe --out <output-dir> \
 scripts/check-haxe-bindings.sh
 ```
 
-The driver uses private temporary files instead of shared `/tmp` names. It asks
-Cargo for the current build-script output path, avoiding a glob that can read
-stale FFI builds. It copies generated output without Haxe rewriting into
-`generated/externs/`, adding a `provenance.json` with the Flight revision, input
-hashes, FFI symbol count, and per-file hashes. Generation failures leave the
-previous copied tree intact. Check mode detects changed, missing, and extra files
-without replacing that tree.
+The driver uses private temporary files and Cargo's current build-script output
+path instead of shared `/tmp` names and stale glob matches. Output is copied
+unchanged into `generated/externs/`, adding only `provenance.json` with the Flight
+revision, toolchain/host identity, offsets and FFI-name hashes, symbol count,
+and per-file hashes. Failed
+generation leaves the previous tree intact. Check mode rejects missing, changed,
+and extra files without replacing the copy.
 
-`check:externs:upstream` runs the script **inside Flight**, with Flight's own
-arguments and target matrix. It validates the upstream output selected by that
-script; it does not establish that this repository's copied bindings link or
-run. The local drift check and installed-package behavior checks are separate.
+## Validation and limits
 
-`node tools/externs/check.mjs` verifies the copied inventory and hashes against
-its provenance and the dependency lock, then type-checks that copied tree on HL,
-cpp, and JS/ESM using the same target exclusions as the upstream script. It can
-run once the new Flight revision is pinned and real output has been copied.
+`gate:surface` verifies the copied inventory and hashes against provenance and
+the dependency lock, then type-checks every declaration on HL, cpp, and JS/ESM.
+It uses the same target exclusions as `scripts/check-haxe-bindings.sh`.
+`gate:package` validates the deterministic consumer archive, compiles its smoke
+consumer on those targets, and checks static ESM emission. `gate:native-ffi`
+executes selected real Rust C ABI functions through a C++ test probe.
 
-## Runtime contract found upstream
+Flight's own check script passes with the pinned Rust/Cargo 1.96.0 toolchain.
+Cargo 1.100 uses `target/debug/build/flight-ffi/<hash>/out`, breaking the script's
+older glob. The intake driver handles either layout using Cargo messages.
+Provenance also records toolchain identity and host architecture; layout offsets
+must match the binary used by consumers.
 
-The `develop` generator emits native C ABI extern names (`flight_*`) without a
-C header or hxcpp link configuration. Its JS externs use `@:jsRequire("flight")`
-with the same `flight_*` export names. They do not bind the existing
-`@flighthq/*` TypeScript ESM exports directly. The ESM generator can emit static
-imports for that module, but an actual module implementing those exports is
-still required. These are runtime integration requirements to verify, beyond the
-upstream script's type-check-only results.
-
-## Remaining cutover work
-
-After obtaining and validating the real output:
-
-1. Pin the new Flight revision and remove the separate compiler/flight-cpp pins.
-2. Replace package/classpath selection with the generated native FFI and ESM
-   entry points. Determine native link/header requirements from that output.
-3. Remove the transpiled fallback and local C++ adapters from the consumer
-   archive and update examples to the generated API.
-4. Replace legacy production gates and CI with generated-surface checks,
-   installed-package FFI/ESM execution, and drift checks for the new revision.
-
-`npm run test:externs-driver` tests intake orchestration and failure isolation
-using fixtures. It is not upstream Haxe type-check or native ABI evidence.
+These checks do not certify Haxe runtime linking. Native externs need a C header
+and hxcpp link integration or a HashLink native shim. JS externs import module
+`flight` with `flight_*` exports, rather than the existing `@flighthq/*` TS ESM
+surface. See the root README for the runtime requirements still supplied by
+neither this copied output nor a fabricated test runtime.
