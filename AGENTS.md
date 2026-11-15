@@ -1,5 +1,24 @@
 # flight-hx
 
+## Current migration direction (supersedes the legacy architecture below)
+
+Flight's **Rust tooling inside the Flight repository** is the new source of
+externs. Bind native binaries through FFI and web ESM through externs. Stop
+developing transpiled Haxe implementation sources and the old direct flight-cpp
+adapter surface. The separate TypeScript flight-compiler repository is no longer
+the intended generator dependency.
+
+`tools/externs/generate.mjs` implements the supplied Cargo generation recipe and
+copies unchanged output to `generated/externs`, with source/file provenance and
+drift checks. See [tools/externs/README.md](tools/externs/README.md) for commands
+and the remaining cutover steps. The current pinned Flight checkout predates the
+Rust workspace, so the new generated output, package wiring, and real FFI/ESM
+validation remain pending access to that workspace. Do not invent its output
+layout or claim the active legacy package already uses the new bindings.
+
+The rest of this file describes the **legacy implementation**, kept as migration
+context until its package roots and verification gates are replaced.
+
 Haxe **bindings** for the [Flight SDK](https://github.com/flighthq/flight). This repo is a thin, generated binding + runtime layer that presents one `flight.*` Haxe surface backed by compiled Flight — **not** a Haxe reimplementation of Flight.
 
 This document is the authoritative entry point. It records the decisions that shaped this repo so they don't have to be rediscovered. Read it before changing structure.

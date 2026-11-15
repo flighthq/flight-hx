@@ -1,5 +1,25 @@
 # flight-hx
 
+Migration in progress: the replacement bindings will come from Flight's Rust
+tooling in the Flight repository, targeting native FFI and web ESM. Haxe
+implementation generation and the direct flight-cpp adapter path are being
+retired. The installed package still uses the legacy roots described below until
+the new generated output is available and validated.
+
+The intake workflow is ready:
+
+```sh
+npm run generate:externs -- --flight-root /path/to/rust/flight
+npm run generate:externs:check -- --flight-root /path/to/rust/flight
+npm run check:externs:upstream -- --flight-root /path/to/rust/flight
+```
+
+See [Rust extern intake](tools/externs/README.md) for prerequisites, provenance,
+offline behavior, and remaining package/validation work. The existing dependency
+lock still pins the old TypeScript Flight tree, which cannot run these commands.
+
+## Legacy package
+
 Haxe **bindings** for the [Flight SDK](https://github.com/flighthq/flight) — one `flight.*` surface that resolves, by compile define, to compiled Flight: C++ (via [flight-cpp](https://github.com/flighthq/flight-cpp)) on native, ESM on web, and an optional transpiled-Haxe fallback for pure-VM targets.
 
 This is not a Haxe reimplementation of Flight; it binds to it. See [AGENTS.md](AGENTS.md) for the architecture, the rationale, and the decisions behind every part.

@@ -39,7 +39,11 @@
     "gate:transpile": "node tests/gates/transpiledSources.mjs",
     "gate:dce": "node tests/gates/webDce.mjs",
     "gate:cross-target": "node tests/gates/crossTargetMath.mjs",
-    "check": "node tests/gates/all.mjs"
+    "check": "node tests/gates/all.mjs",
+    "generate:externs": "node tools/externs/generate.mjs",
+    "generate:externs:check": "node tools/externs/generate.mjs --check",
+    "check:externs:upstream": "node tools/externs/generate.mjs --validate-upstream",
+    "test:externs-driver": "node --test tools/externs/generate.test.mjs"
   },
   "devDependencies": {
     "esbuild": "^0.28.2",
