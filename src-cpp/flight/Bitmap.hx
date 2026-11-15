@@ -3,6 +3,26 @@ package flight;
 
 typedef Bitmap = flight._cpp.Bitmap;
 
+extern inline function applyBitmapLevels(out:flight.BitmapRegion, source:flight.BitmapRegion, ?blackPoint:Float, ?whitePoint:Float, ?gamma:Float):Void {
+  flight._cpp._fn.Bitmap.applyBitmapLevels(out, source, blackPoint != null, blackPoint == null ? 0.0 : blackPoint, whitePoint != null, whitePoint == null ? 0.0 : whitePoint, gamma != null, gamma == null ? 0.0 : gamma);
+}
+
+inline function blurBitmapPixelsHorizontal(out:flight._internal._UInt8ClampedArray, source:flight._internal._UInt8ClampedArray, width:Float, height:Float, radius:Float):Void {
+  flight._cpp._fn.Bitmap.blurBitmapPixelsHorizontal(out, source, width, height, radius);
+}
+
+inline function blurBitmapPixelsHorizontalWeighted(out:flight._internal._UInt8ClampedArray, source:flight._internal._UInt8ClampedArray, width:Float, height:Float, kernel:flight._internal._Float32Array):Void {
+  flight._cpp._fn.Bitmap.blurBitmapPixelsHorizontalWeighted(out, source, width, height, kernel);
+}
+
+inline function blurBitmapPixelsVertical(out:flight._internal._UInt8ClampedArray, source:flight._internal._UInt8ClampedArray, width:Float, height:Float, radius:Float):Void {
+  flight._cpp._fn.Bitmap.blurBitmapPixelsVertical(out, source, width, height, radius);
+}
+
+inline function blurBitmapPixelsVerticalWeighted(out:flight._internal._UInt8ClampedArray, source:flight._internal._UInt8ClampedArray, width:Float, height:Float, kernel:flight._internal._Float32Array):Void {
+  flight._cpp._fn.Bitmap.blurBitmapPixelsVerticalWeighted(out, source, width, height, kernel);
+}
+
 inline function buildBitmapBrightnessColorMatrix(out:Array<Float>, amount:Float):Void {
   flight._cpp._fn.Bitmap.buildBitmapBrightnessColorMatrix(out, amount);
 }
@@ -31,20 +51,28 @@ inline function buildBitmapSepiaColorMatrix(out:Array<Float>):Void {
   flight._cpp._fn.Bitmap.buildBitmapSepiaColorMatrix(out);
 }
 
-inline function concatBitmapColorMatrix(out:Array<Float>, first:Array<Float>, second:Array<Float>):Void {
-  flight._cpp._fn.Bitmap.concatBitmapColorMatrix(out, first, second);
-}
-
-inline function setBitmapColorMatrixIdentity(out:Array<Float>):Void {
-  flight._cpp._fn.Bitmap.setBitmapColorMatrixIdentity(out);
-}
-
-extern inline function applyBitmapLevels(out:flight.BitmapRegion, source:flight.BitmapRegion, ?blackPoint:Float, ?whitePoint:Float, ?gamma:Float):Void {
-  flight._cpp._fn.Bitmap.applyBitmapLevels(out, source, blackPoint != null, blackPoint == null ? 0.0 : blackPoint, whitePoint != null, whitePoint == null ? 0.0 : whitePoint, gamma != null, gamma == null ? 0.0 : gamma);
+extern inline function captureBitmapFromImageResource(hostBitmapReadback:flight.HostBitmapReadbackCapability, resource:flight.ImageResource):Null<flight.Bitmap> {
+  return flight._cpp._fn.Bitmap.captureBitmapFromImageResource(hostBitmapReadback, resource);
 }
 
 extern inline function cloneBitmap(source:flight.Bitmap):flight.Bitmap {
   return flight._cpp._fn.Bitmap.cloneBitmap(source);
+}
+
+extern inline function compareBitmap(source:flight.Bitmap, other:flight.Bitmap):Null<flight.Bitmap> {
+  return flight._cpp._fn.Bitmap.compareBitmap(source, other);
+}
+
+extern inline function compareBitmapFingerprints(a:flight.BitmapFingerprint, b:flight.BitmapFingerprint):Float {
+  return flight._cpp._fn.Bitmap.compareBitmapFingerprints(a, b);
+}
+
+inline function computeGaussianKernel(out:flight._internal._Float32Array, radius:Float, sigma:Float):Void {
+  flight._cpp._fn.Bitmap.computeGaussianKernel(out, radius, sigma);
+}
+
+inline function concatBitmapColorMatrix(out:Array<Float>, first:Array<Float>, second:Array<Float>):Void {
+  flight._cpp._fn.Bitmap.concatBitmapColorMatrix(out, first, second);
 }
 
 extern inline function copyBitmapAlpha(dest:flight.BitmapRegion, source:flight.BitmapRegion):Void {
@@ -57,6 +85,10 @@ extern inline function copyBitmapPixels(dest:flight.BitmapRegion, source:flight.
 
 extern inline function createBitmap(width:Float, height:Float, ?color:Float):flight.Bitmap {
   return flight._cpp._fn.Bitmap.createBitmap(width, height, color != null, color == null ? 0.0 : color);
+}
+
+extern inline function createBitmapFingerprint(source:flight.Bitmap, ?gridSize:Float):flight.BitmapFingerprint {
+  return flight._cpp._fn.Bitmap.createBitmapFingerprint(source, gridSize != null, gridSize == null ? 0.0 : gridSize);
 }
 
 extern inline function createBitmapRegion(bitmap:flight.Bitmap, ?x:Float, ?y:Float, ?width:Float, ?height:Float):flight.BitmapRegion {
@@ -99,8 +131,16 @@ extern inline function floodFillBitmap(out:flight.Bitmap, x:Float, y:Float, colo
   flight._cpp._fn.Bitmap.floodFillBitmap(out, x, y, color);
 }
 
+extern inline function formatBitmapFingerprint(fingerprint:flight.BitmapFingerprint):String {
+  return flight._cpp._fn.Bitmap.formatBitmapFingerprint(fingerprint);
+}
+
 extern inline function getBitmapCoverage(source:flight.Bitmap, backgroundColor:Float, ?channelTolerance:Float):Float {
   return flight._cpp._fn.Bitmap.getBitmapCoverage(source, backgroundColor, channelTolerance != null, channelTolerance == null ? 0.0 : channelTolerance);
+}
+
+extern inline function getBitmapHistogram(source:flight.BitmapRegion):flight.BitmapHistogram {
+  return flight._cpp._fn.Bitmap.getBitmapHistogram(source);
 }
 
 extern inline function getBitmapPixel(source:flight.Bitmap, x:Float, y:Float):Float {
@@ -131,6 +171,14 @@ extern inline function multiplyBitmapAlpha(out:flight.BitmapRegion, factor:Float
   flight._cpp._fn.Bitmap.multiplyBitmapAlpha(out, factor);
 }
 
+extern inline function parseBitmapFingerprint(text:String):Null<flight.BitmapFingerprint> {
+  return flight._cpp._fn.Bitmap.parseBitmapFingerprint(text);
+}
+
+inline function premultiplyBitmapPixels(out:flight._internal._UInt8ClampedArray, source:flight._internal._UInt8ClampedArray, length:Float):Void {
+  flight._cpp._fn.Bitmap.premultiplyBitmapPixels(out, source, length);
+}
+
 extern inline function rotateBitmap180(dest:flight.BitmapRegion, source:flight.BitmapRegion):Void {
   flight._cpp._fn.Bitmap.rotateBitmap180(dest, source);
 }
@@ -151,6 +199,10 @@ extern inline function setBitmapAlpha(out:flight.BitmapRegion, alpha:Float):Void
   flight._cpp._fn.Bitmap.setBitmapAlpha(out, alpha);
 }
 
+inline function setBitmapColorMatrixIdentity(out:Array<Float>):Void {
+  flight._cpp._fn.Bitmap.setBitmapColorMatrixIdentity(out);
+}
+
 extern inline function setBitmapPixel(out:flight.Bitmap, x:Float, y:Float, color:Float):Void {
   flight._cpp._fn.Bitmap.setBitmapPixel(out, x, y, color);
 }
@@ -163,40 +215,16 @@ extern inline function setBitmapRegion(out:flight.BitmapRegion, bitmap:flight.Bi
   return flight._cpp._fn.Bitmap.setBitmapRegion(out, bitmap, x != null, x == null ? 0.0 : x, y != null, y == null ? 0.0 : y, width != null, width == null ? 0.0 : width, height != null, height == null ? 0.0 : height);
 }
 
+extern inline function splitBitmapChannels(source:flight.Bitmap):Array<flight.Bitmap> {
+  return flight._cpp._fn.Bitmap.splitBitmapChannels(source);
+}
+
 extern inline function trimBitmap(source:flight.Bitmap):flight.Bitmap {
   return flight._cpp._fn.Bitmap.trimBitmap(source);
 }
 
-extern inline function compareBitmapFingerprints(a:flight.BitmapFingerprint, b:flight.BitmapFingerprint):Float {
-  return flight._cpp._fn.Bitmap.compareBitmapFingerprints(a, b);
-}
-
-extern inline function createBitmapFingerprint(source:flight.Bitmap, ?gridSize:Float):flight.BitmapFingerprint {
-  return flight._cpp._fn.Bitmap.createBitmapFingerprint(source, gridSize != null, gridSize == null ? 0.0 : gridSize);
-}
-
-extern inline function getBitmapHistogram(source:flight.BitmapRegion):flight.BitmapHistogram {
-  return flight._cpp._fn.Bitmap.getBitmapHistogram(source);
-}
-
-extern inline function compareBitmap(source:flight.Bitmap, other:flight.Bitmap):Null<flight.Bitmap> {
-  return flight._cpp._fn.Bitmap.compareBitmap(source, other);
-}
-
-extern inline function formatBitmapFingerprint(fingerprint:flight.BitmapFingerprint):String {
-  return flight._cpp._fn.Bitmap.formatBitmapFingerprint(fingerprint);
-}
-
-extern inline function parseBitmapFingerprint(text:String):Null<flight.BitmapFingerprint> {
-  return flight._cpp._fn.Bitmap.parseBitmapFingerprint(text);
-}
-
-extern inline function captureBitmapFromImageResource(hostBitmapReadback:flight.HostBitmapReadbackCapability, resource:flight.ImageResource):Null<flight.Bitmap> {
-  return flight._cpp._fn.Bitmap.captureBitmapFromImageResource(hostBitmapReadback, resource);
-}
-
-extern inline function splitBitmapChannels(source:flight.Bitmap):Array<flight.Bitmap> {
-  return flight._cpp._fn.Bitmap.splitBitmapChannels(source);
+inline function unpremultiplyBitmapPixels(out:flight._internal._UInt8ClampedArray, source:flight._internal._UInt8ClampedArray, length:Float):Void {
+  flight._cpp._fn.Bitmap.unpremultiplyBitmapPixels(out, source, length);
 }
 
 var BITMAP_FINGERPRINT_COMPUTATION_ID(get, never):String;
@@ -245,22 +273,6 @@ extern inline function bevelBitmap(out:flight._internal._UInt8ClampedArray, scra
   flight._cpp._attempt.Attempt_Bitmap_bevelBitmap.bevelBitmap(out, scratch, source, options);
 }
 
-extern inline function blurBitmapPixelsHorizontal(out:flight._internal._UInt8ClampedArray, source:flight._internal._UInt8ClampedArray, width:Float, height:Float, radius:Float):Void {
-  flight._cpp._attempt.Attempt_Bitmap_blurBitmapPixelsHorizontal.blurBitmapPixelsHorizontal(out, source, width, height, radius);
-}
-
-extern inline function blurBitmapPixelsHorizontalWeighted(out:flight._internal._UInt8ClampedArray, source:flight._internal._UInt8ClampedArray, width:Float, height:Float, kernel:flight._internal._Float32Array):Void {
-  flight._cpp._attempt.Attempt_Bitmap_blurBitmapPixelsHorizontalWeighted.blurBitmapPixelsHorizontalWeighted(out, source, width, height, kernel);
-}
-
-extern inline function blurBitmapPixelsVertical(out:flight._internal._UInt8ClampedArray, source:flight._internal._UInt8ClampedArray, width:Float, height:Float, radius:Float):Void {
-  flight._cpp._attempt.Attempt_Bitmap_blurBitmapPixelsVertical.blurBitmapPixelsVertical(out, source, width, height, radius);
-}
-
-extern inline function blurBitmapPixelsVerticalWeighted(out:flight._internal._UInt8ClampedArray, source:flight._internal._UInt8ClampedArray, width:Float, height:Float, kernel:flight._internal._Float32Array):Void {
-  flight._cpp._attempt.Attempt_Bitmap_blurBitmapPixelsVerticalWeighted.blurBitmapPixelsVerticalWeighted(out, source, width, height, kernel);
-}
-
 extern inline function boxBlurBitmap(out:flight._internal._UInt8ClampedArray, scratch:flight._internal._UInt8ClampedArray, source:flight.BitmapRegion, ?options:flight.BitmapBoxBlurOptions):Void {
   flight._cpp._attempt.Attempt_Bitmap_boxBlurBitmap.boxBlurBitmap(out, scratch, source, options);
 }
@@ -279,10 +291,6 @@ extern inline function compositeBitmapPixels(dest:flight.BitmapRegion, pixels:fl
 
 extern inline function compositeBitmapRegion(dest:flight.BitmapRegion, source:flight.BitmapRegion, ?mode:flight.BitmapCompositeMode):Void {
   flight._cpp._attempt.Attempt_Bitmap_compositeBitmapRegion.compositeBitmapRegion(dest, source, mode);
-}
-
-extern inline function computeGaussianKernel(out:flight._internal._Float32Array, radius:Float, sigma:Float):Void {
-  flight._cpp._attempt.Attempt_Bitmap_computeGaussianKernel.computeGaussianKernel(out, radius, sigma);
 }
 
 extern inline function convertBitmapAlphaType(out:flight.Bitmap, target:flight.AlphaType):Void {
@@ -409,10 +417,6 @@ extern inline function pixelateBitmap(out:flight._internal._UInt8ClampedArray, s
   flight._cpp._attempt.Attempt_Bitmap_pixelateBitmap.pixelateBitmap(out, source, blockSize);
 }
 
-extern inline function premultiplyBitmapPixels(out:flight._internal._UInt8ClampedArray, source:flight._internal._UInt8ClampedArray, length:Float):Void {
-  flight._cpp._attempt.Attempt_Bitmap_premultiplyBitmapPixels.premultiplyBitmapPixels(out, source, length);
-}
-
 extern inline function resizeBitmap(dest:flight.BitmapRegion, source:flight.BitmapRegion, ?options:Dynamic):Void {
   flight._cpp._attempt.Attempt_Bitmap_resizeBitmap.resizeBitmap(dest, source, options);
 }
@@ -431,10 +435,6 @@ extern inline function sharpenBitmap(out:flight._internal._UInt8ClampedArray, sc
 
 extern inline function transformBitmap(dest:flight.BitmapRegion, source:flight.BitmapRegion, matrix:Array<Float>, ?edgeMode:flight.BitmapEdgeMode, ?sampleMode:flight.BitmapResizeMode):Void {
   flight._cpp._attempt.Attempt_Bitmap_transformBitmap.transformBitmap(dest, source, matrix, edgeMode, sampleMode);
-}
-
-extern inline function unpremultiplyBitmapPixels(out:flight._internal._UInt8ClampedArray, source:flight._internal._UInt8ClampedArray, length:Float):Void {
-  flight._cpp._attempt.Attempt_Bitmap_unpremultiplyBitmapPixels.unpremultiplyBitmapPixels(out, source, length);
 }
 
 extern inline function warpBitmap(dest:flight.BitmapRegion, source:flight.BitmapRegion, matrix:Array<Float>, ?edgeMode:flight.BitmapEdgeMode, ?sampleMode:flight.BitmapResizeMode):Void {

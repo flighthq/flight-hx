@@ -20,6 +20,7 @@ const arrayFloatAdapterProvenance = 'flight-hx/array-float-copy-adapter/1';
 const nullableStringAdapterProvenance = 'flight-hx/nullable-string-copy-adapter/1';
 const referenceCarrierProvenance = 'flight-hx/reference-carrier/1';
 const scalarValueProvenance = 'flight-hx/scalar-value-getter/1';
+const typedArrayAdapterProvenance = 'flight-hx/typed-array-copy-adapter/1';
 const nativePlanning = JSON.parse(readFileSync(path.join(repoRoot, 'generated', 'js', 'native-planning.json'), 'utf8'));
 const plannedFunctions = new Map(
   nativePlanning.declarations
@@ -48,6 +49,7 @@ const expectedCorrections = [
   'flight-hx-hxcpp-nullable-string-copy-adapter/1',
   'flight-hx-hxcpp-reference-carrier/1',
   'flight-hx-hxcpp-scalar-value-getter/1',
+  'flight-hx-hxcpp-typed-array-copy-adapter/1',
   'flight-hx-hxcpp-nullable-reference-wrapper/1',
   'flight-hx-hxcpp-reference-array-box/1',
   'flight-hx-hxcpp-owned-string-copy/1',
@@ -94,7 +96,11 @@ try {
       `the upstream-control and native framebuffer oracles while linking against current Flight ESM.\n`,
   );
 } finally {
-  rmSync(temporaryRoot, { force: true, recursive: true });
+  if (process.env.FLIGHT_HX_KEEP_TEMP === '1') {
+    process.stderr.write(`cross-target gate: preserved temporary root ${temporaryRoot}\n`);
+  } else {
+    rmSync(temporaryRoot, { force: true, recursive: true });
+  }
 }
 
 function validateHaxelibMetadata() {
@@ -229,6 +235,7 @@ function validateNativeManifest(flightCpp) {
         provenance === arrayFloatAdapterProvenance ||
         provenance === nullableStringAdapterProvenance ||
         provenance === referenceCarrierProvenance ||
+        provenance === typedArrayAdapterProvenance ||
         plannedFunctions.get(`${module.module}.${name}`)?.transport === 'direct',
     );
     const directBridge =
@@ -272,6 +279,9 @@ function validateNativeManifest(flightCpp) {
       } else if (binding.provenance === referenceCarrierProvenance) {
         if (plan) fail(`${publicName} downstream reference carrier now overlaps the compiler native plan`);
         plan = { transport: 'reference-carrier' };
+      } else if (binding.provenance === typedArrayAdapterProvenance) {
+        if (plan) fail(`${publicName} downstream typed-array adapter now overlaps the compiler native plan`);
+        plan = { transport: 'typed-array-adapter' };
       } else if (binding.provenance !== undefined) {
         fail(`${publicName} has unknown native provenance ${String(binding.provenance)}`);
       } else if (!plan) {
@@ -291,7 +301,8 @@ function validateNativeManifest(flightCpp) {
         (plan.transport === 'reference-carrier' &&
           /\?[A-Za-z_][A-Za-z0-9_]*:(?:Bool|Float|String|Array<flight\.[A-Z][A-Za-z0-9_]*>)(?:,|\))/u.test(
             jsMember.signature,
-          ))
+          )) ||
+        (plan.transport === 'typed-array-adapter' && jsMember.signature.includes('?'))
           ? optionalBridgeSignature(jsMember.signature)
           : jsMember.signature;
       if (
@@ -318,7 +329,8 @@ function validateNativeManifest(flightCpp) {
         plan.transport === 'optional-override' ||
         plan.transport === 'array-float-adapter' ||
         plan.transport === 'nullable-string-adapter' ||
-        plan.transport === 'reference-carrier'
+        plan.transport === 'reference-carrier' ||
+        plan.transport === 'typed-array-adapter'
       ) {
         if (!directBridge.includes(`${binding.native}(`)) {
           fail(`${publicName} direct bridge does not call ${binding.native}`);

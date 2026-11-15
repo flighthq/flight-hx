@@ -37,6 +37,13 @@ const holderNames = new Set([
     .map(({ publicHaxe }) => publicHaxe.owner),
 ]);
 const maintainedOverrides = new Set(manifest.extensions.flatMap(({ publicTypes: names }) => names));
+// flight-cpp's `flight::null` value shadows hxcpp's global `null()` sentinel when a
+// complete contract header is pulled into a generated Haxe module inside namespace
+// `flight`. Decompressor is only mentioned by unproven value attempts in that module;
+// their exact attempt externs already include the locator header when selected. Keep
+// the public Haxe type available, but defer its complete C++ definition to that actual
+// use site so an unused attempt cannot break otherwise proven Compression bindings.
+const deferredUseSiteIncludes = new Set(['flight.Decompressor']);
 const compilerDeclarations = planning.declarations
   .filter(({ kind }) => kind === 'type')
   .map((declaration) => ({ ...declaration, attemptOrigin: 'compiler-emitted', typeShape: simpleTypeShape(declaration.publicName) }));
@@ -49,6 +56,12 @@ const symbolBackedRefusals = planning.bindingAttempts
   .map((attempt) => createRefusedTypeAttempt(attempt, cppDefinitions));
 const declarations = [...compilerDeclarations, ...symbolBackedRefusals]
   .sort((left, right) => compareText(left.publicName, right.publicName));
+for (const publicName of deferredUseSiteIncludes) {
+  const declaration = declarations.find((candidate) => candidate.publicName === publicName);
+  if (!declaration || declaration.attemptOrigin !== 'compiler-refusal' || declaration.transport !== 'value-alias') {
+    throw new Error(`${publicName} is no longer an unproven value-alias eligible for a deferred use-site include`);
+  }
+}
 const generatedMarker = '// Generated from flight-compiler native-planning.json. Do not edit.\n';
 const duplicateNames = declarations
   .map(({ publicName }) => publicName)
@@ -74,9 +87,11 @@ const collisionAliases = [...collisionGroups]
   .sort((left, right) => compareText(left.name, right.name));
 const internalCarriers = [
   { haxeName: '_ArrayBuffer', include: 'flight/array_buffer.hpp', nativeName: 'flight::ArrayBuffer', parameters: '' },
-  { haxeName: '_UInt32Array', include: 'flight/typed_array.hpp', nativeName: 'flight::Uint32Array', parameters: '<T = Dynamic>' },
-  { haxeName: '_UInt8Array', include: 'flight/typed_array.hpp', nativeName: 'flight::Uint8Array', parameters: '<T = Dynamic>' },
+  { elementKind: 'float32', haxeName: '_Float32Array', include: 'flight/typed_array.hpp', nativeName: 'flight::Float32Array', parameters: '<T = Dynamic>' },
+  { elementKind: 'uint32', haxeName: '_UInt32Array', include: 'flight/typed_array.hpp', nativeName: 'flight::Uint32Array', parameters: '<T = Dynamic>' },
+  { elementKind: 'uint8', haxeName: '_UInt8Array', include: 'flight/typed_array.hpp', nativeName: 'flight::Uint8Array', parameters: '<T = Dynamic>' },
   {
+    elementKind: 'uint8-clamped',
     haxeName: '_UInt8ClampedArray',
     include: 'flight/typed_array.hpp',
     nativeName: 'flight::Uint8ClampedArray',
@@ -167,6 +182,7 @@ const report = {
   })),
   internalCarriers,
   hostCarriers,
+  deferredUseSiteIncludes: [...deferredUseSiteIncludes].sort(compareText),
   declarations: declarations.map(({ attemptOrigin, headerStatus, include, nativeName, package: packageName, publicName, representation, templateAdapter, transport, typeShape }) => ({
     attemptOrigin,
     genericArity: typeShape.genericArity,
@@ -194,6 +210,7 @@ const report = {
     generatedHiddenExterns: declarations.filter(({ publicName }) => !maintainedOverrides.has(publicName)).length,
     internalCarriers: internalCarriers.length,
     hostCarriers: hostCarriers.length,
+    deferredUseSiteIncludes: deferredUseSiteIncludes.size,
     maintainedOverrides: declarations.filter(({ publicName }) => maintainedOverrides.has(publicName)).length,
     nativeOnlyDisambiguations: declarations.filter(
       ({ publicName }) => !publicTypes.has(publicName.replace(/^flight\./u, '')),
@@ -254,7 +271,9 @@ function emitHiddenType(name, declaration) {
     '',
     '#if cpp',
     ownership,
-    `@:include(${JSON.stringify(referenceForwardName(declaration) ? 'flight_hx/types/reference_fwd.hpp' : declaration.templateAdapter?.include ?? declaration.include)})`,
+    ...(deferredUseSiteIncludes.has(declaration.publicName)
+      ? ['// The exact attempted use site supplies the defining header; see type-attempt provenance.']
+      : [`@:include(${JSON.stringify(referenceForwardName(declaration) ? 'flight_hx/types/reference_fwd.hpp' : declaration.templateAdapter?.include ?? declaration.include)})`]),
     `@:native(${JSON.stringify(haxeNativeName(declaration))})`,
     '@:structAccess',
     `extern class ${name}${declaration.typeShape.externParameters} {}`,
@@ -385,7 +404,8 @@ function emitPublicCollisionType(name, target, typeShape) {
   ].join('\n');
 }
 
-function emitInternalCarrier({ haxeName, include, nativeName, parameters }) {
+function emitInternalCarrier({ elementKind, haxeName, include, nativeName, parameters }) {
+  if (elementKind) return emitTypedArrayCarrier(haxeName, elementKind, parameters);
   const arguments_ = parameters ? `<${splitTopLevel(parameters.slice(1, -1)).map((part) => /^\s*([A-Za-z_][A-Za-z0-9_]*)/u.exec(part)[1]).join(', ')}>` : '';
   return [
     generatedMarker.trimEnd(),
@@ -396,6 +416,88 @@ function emitInternalCarrier({ haxeName, include, nativeName, parameters }) {
     `@:include(${JSON.stringify(include)})`,
     `@:native(${JSON.stringify(nativeName)})`,
     `extern class ${haxeName}Native${parameters ? `<${splitTopLevel(parameters.slice(1, -1)).map((part) => stripTopLevelDefault(part)).join(', ')}>` : ''} {}`,
+    '',
+  ].join('\n');
+}
+
+function emitTypedArrayCarrier(haxeName, elementKind, parameters) {
+  const normalize =
+    elementKind === 'float32'
+      ? 'haxe.io.FPHelper.i32ToFloat(haxe.io.FPHelper.floatToI32(value))'
+      : elementKind === 'uint8-clamped'
+        ? 'clampUint8(value)'
+        : elementKind === 'uint8'
+          ? 'wrapUnsigned(value, 256.0)'
+          : 'wrapUnsigned(value, 4294967296.0)';
+  return [
+    generatedMarker.trimEnd(),
+    'package flight._internal;',
+    '',
+    '// hxcpp-facing owning copy carrier. Native bridges convert this storage to the exact',
+    '// flight::TypedArray specialization and copy mutations/results back at the ABI boundary.',
+    `abstract ${haxeName}${parameters}(Array<Float>) {`,
+    '  public var length(get, never):Int;',
+    '',
+    '  public inline function new(length:Float) {',
+    '    this = [];',
+    '    final count = Std.int(length);',
+    "    if (count < 0 || count != length) throw 'Invalid typed array length: $length';",
+    '    for (_ in 0...count) this.push(0.0);',
+    '  }',
+    '',
+    '  @:arrayAccess',
+    '  public inline function get(index:Int):Float return this[index];',
+    '',
+    '  @:arrayAccess',
+    '  public inline function setAt(index:Int, value:Float):Float {',
+    `    final normalized = ${normalize};`,
+    '    this[index] = normalized;',
+    '    return normalized;',
+    '  }',
+    '',
+    `  public inline function fill(value:Float, start:Int = 0, ?end:Int):${haxeName}<T> {`,
+    '    final limit = end == null ? this.length : Std.int(Math.min(this.length, end));',
+    '    var index = Std.int(Math.max(0, start));',
+    '    while (index < limit) {',
+    '      setAt(index, value);',
+    '      index += 1;',
+    '    }',
+    '    return cast this;',
+    '  }',
+    '',
+    `  public inline function set(source:${haxeName}<T>, offset:Int = 0):Void {`,
+    '    for (index in 0...source.length) setAt(offset + index, source[index]);',
+    '  }',
+    '',
+    `  public inline function slice(start:Int = 0, ?end:Int):${haxeName}<T> {`,
+    '    return cast this.slice(start, end);',
+    '  }',
+    '',
+    `  public inline function subarray(start:Int = 0, ?end:Int):${haxeName}<T> {`,
+    '    return cast this.slice(start, end);',
+    '  }',
+    '',
+    '  @:to',
+    '  public inline function toArray():Array<Float> return this;',
+    '',
+    '  inline function get_length():Int return this.length;',
+    '',
+    '  static inline function wrapUnsigned(value:Float, modulus:Float):Float {',
+    '    if (!Math.isFinite(value) || value == 0.0) return 0.0;',
+    '    final truncated = value < 0.0 ? Math.fceil(value) : Math.ffloor(value);',
+    '    var wrapped = truncated % modulus;',
+    '    if (wrapped < 0.0) wrapped += modulus;',
+    '    return wrapped;',
+    '  }',
+    '',
+    '  static inline function clampUint8(value:Float):Float {',
+    '    if (Math.isNaN(value) || value <= 0.0) return 0.0;',
+    '    if (value >= 255.0) return 255.0;',
+    '    final lower = Math.ffloor(value);',
+    '    final fraction = value - lower;',
+    '    return fraction > 0.5 || (fraction == 0.5 && lower % 2.0 != 0.0) ? lower + 1.0 : lower;',
+    '  }',
+    '}',
     '',
   ].join('\n');
 }

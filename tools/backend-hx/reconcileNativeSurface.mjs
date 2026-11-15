@@ -34,6 +34,7 @@ const arrayFloatAdapterProvenance = 'flight-hx/array-float-copy-adapter/1';
 const nullableStringAdapterProvenance = 'flight-hx/nullable-string-copy-adapter/1';
 const referenceCarrierProvenance = 'flight-hx/reference-carrier/1';
 const scalarValueProvenance = 'flight-hx/scalar-value-getter/1';
+const typedArrayAdapterProvenance = 'flight-hx/typed-array-copy-adapter/1';
 
 validatePins();
 validateCppInventory();
@@ -193,6 +194,20 @@ const nullableStringAdapters = nativeOverrideFunctions.filter(
 const referenceCarriers = nativeOverrideFunctions.filter(
   ({ provenance }) => provenance === referenceCarrierProvenance,
 );
+const typedArrayAdapters = nativeOverrideFunctions.filter(
+  ({ provenance }) => provenance === typedArrayAdapterProvenance,
+);
+const knownFunctionProvenance = new Set([
+  requiredScalarOverrideProvenance,
+  optionalScalarOverrideProvenance,
+  arrayFloatAdapterProvenance,
+  nullableStringAdapterProvenance,
+  referenceCarrierProvenance,
+  typedArrayAdapterProvenance,
+]);
+if (nativeOverrideFunctions.some(({ provenance }) => provenance && !knownFunctionProvenance.has(provenance))) {
+  throw new Error('Native manifest contains a function with unknown provenance');
+}
 const scalarValues = nativeManifest.modules.flatMap(({ module, values = [] }) =>
   values.map(({ name, provenance }) => ({ provenance, publicName: `${module}.${name}` })),
 );
@@ -263,6 +278,7 @@ const report = {
     requiredScalarFunctions: requiredScalarOverrides.map(({ publicName }) => publicName),
     referenceCarriers: referenceCarriers.map(({ publicName }) => publicName),
     scalarValues: scalarValues.map(({ publicName }) => publicName),
+    typedArrayAdapters: typedArrayAdapters.map(({ publicName }) => publicName),
   },
   packages,
   pins: {
@@ -293,12 +309,14 @@ const report = {
       scalarOverrideRefusals: (nativeManifest.scalarOverrideRefusals ?? []).length,
       types: nativeUpstreamTypes.size,
       values: nativeValues.length,
+      typedArrayAdapters: typedArrayAdapters.length,
     },
     nativeAttempts: {
       bindingCarrierFamilies: nativeBindingAttempts.summary.carrierFamilies,
       compileProbes: nativeBindingAttempts.compileProbes.length,
       cppAvailable: nativePlanning.bindingAttempts.filter(({ cpp }) => cpp.availability === 'available').length,
       cppUnavailable: nativePlanning.bindingAttempts.filter(({ cpp }) => cpp.availability !== 'available').length,
+      deferredUseSiteIncludes: nativeTypeAttempts.summary.deferredUseSiteIncludes,
       functions: nativeBindingAttempts.summary.functions,
       genericReferenceTemplateAdapters: nativeTypeAttempts.summary.templateAdapters,
       haxeTypecheck: 'pass',
@@ -476,6 +494,11 @@ function validatePins() {
     'native manifest scalar value promotion',
     nativeManifest.haxeBindingPlan.scalarValuePromotion,
     'dependency-complete-scalar-value-getter-compile-run',
+  );
+  equal(
+    'native manifest typed-array promotion',
+    nativeManifest.haxeBindingPlan.typedArrayAdapterPromotion,
+    'dependency-complete-typed-array-copy-adapter-compile-run',
   );
   equal(
     'native-plan manifest summary',

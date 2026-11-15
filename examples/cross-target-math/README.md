@@ -4,10 +4,11 @@
 from an isolated `-lib flight` consumer:
 
 - web uses the complete generated Flight ESM extern surface and the static-import bundler pipeline;
-- desktop uses hxcpp for all 487 manifest-recorded, compile-and-link-proven functions across 49 public
+- desktop uses hxcpp for all 500 manifest-recorded, compile-and-link-proven functions across 51 public
   modules: 62 compiler-planned direct calls, four compiler-emitted UTF-8 String adapters, 53
-  required-scalar overrides, three optional-scalar adapters, 45 array adapters, two nullable-String
-  adapters, and 318 shared-reference carriers, including required/nullable UTF-8, nullable-number,
+  required-scalar overrides, three optional-scalar adapters, 45 array adapters, 13 exact typed-array
+  adapters, two nullable-String adapters, and 318 shared-reference carriers, including
+  required/nullable UTF-8, nullable-number,
   reference-array/readonly-sequence conversion, and readonly structural-result projection;
 - both targets also compile and link all 298 primitive value getters across six modules, with executed
   numeric, package-string, and shared Types-string representatives;
@@ -26,6 +27,8 @@ The sample contains a generated, opaque compile/link probe for every manifest fu
 executed host-free behavioral slice. This avoids pretending that host-dependent APIs can be safely
 called with fabricated handles while still catching missing symbols and ABI/signature failures on
 both production targets.
+The behavioral slice also checks UTF-8 encode/decode, Adler-32, deflate output, and a mutating
+premultiply operation whose `Uint8ClampedArray` result must be copied back into the same Haxe array.
 
 That gate also compiles and runs [`../window-native/`](../window-native/) from the same isolated
 Haxelib install against the current flight-cpp SDL3/OpenGL host. The scalar program is the unchanged

@@ -25,6 +25,21 @@ import flight.*;
 ')
 @:include("flight_hx/bitmap.hpp")
 extern class Bitmap {
+  @:native("flight_hx::bitmap::apply_bitmap_levels")
+  static function applyBitmapLevels(out:flight.BitmapRegion, source:flight.BitmapRegion, blackPointPresent:Bool, blackPoint:Float, whitePointPresent:Bool, whitePoint:Float, gammaPresent:Bool, gamma:Float):Void;
+
+  @:native("flight_hx::bitmap::blur_bitmap_pixels_horizontal")
+  static function blurBitmapPixelsHorizontal(out:flight._internal._UInt8ClampedArray, source:flight._internal._UInt8ClampedArray, width:Float, height:Float, radius:Float):Void;
+
+  @:native("flight_hx::bitmap::blur_bitmap_pixels_horizontal_weighted")
+  static function blurBitmapPixelsHorizontalWeighted(out:flight._internal._UInt8ClampedArray, source:flight._internal._UInt8ClampedArray, width:Float, height:Float, kernel:flight._internal._Float32Array):Void;
+
+  @:native("flight_hx::bitmap::blur_bitmap_pixels_vertical")
+  static function blurBitmapPixelsVertical(out:flight._internal._UInt8ClampedArray, source:flight._internal._UInt8ClampedArray, width:Float, height:Float, radius:Float):Void;
+
+  @:native("flight_hx::bitmap::blur_bitmap_pixels_vertical_weighted")
+  static function blurBitmapPixelsVerticalWeighted(out:flight._internal._UInt8ClampedArray, source:flight._internal._UInt8ClampedArray, width:Float, height:Float, kernel:flight._internal._Float32Array):Void;
+
   @:native("flight_hx::bitmap::build_bitmap_brightness_color_matrix")
   static function buildBitmapBrightnessColorMatrix(out:Array<Float>, amount:Float):Void;
 
@@ -46,17 +61,23 @@ extern class Bitmap {
   @:native("flight_hx::bitmap::build_bitmap_sepia_color_matrix")
   static function buildBitmapSepiaColorMatrix(out:Array<Float>):Void;
 
-  @:native("flight_hx::bitmap::concat_bitmap_color_matrix")
-  static function concatBitmapColorMatrix(out:Array<Float>, first:Array<Float>, second:Array<Float>):Void;
-
-  @:native("flight_hx::bitmap::set_bitmap_color_matrix_identity")
-  static function setBitmapColorMatrixIdentity(out:Array<Float>):Void;
-
-  @:native("flight_hx::bitmap::apply_bitmap_levels")
-  static function applyBitmapLevels(out:flight.BitmapRegion, source:flight.BitmapRegion, blackPointPresent:Bool, blackPoint:Float, whitePointPresent:Bool, whitePoint:Float, gammaPresent:Bool, gamma:Float):Void;
+  @:native("flight_hx::bitmap::capture_bitmap_from_image_resource")
+  static function captureBitmapFromImageResource(hostBitmapReadback:flight.HostBitmapReadbackCapability, resource:flight.ImageResource):Null<flight.Bitmap>;
 
   @:native("flight_hx::bitmap::clone_bitmap")
   static function cloneBitmap(source:flight.Bitmap):flight.Bitmap;
+
+  @:native("flight_hx::bitmap::compare_bitmap")
+  static function compareBitmap(source:flight.Bitmap, other:flight.Bitmap):Null<flight.Bitmap>;
+
+  @:native("flight_hx::bitmap::compare_bitmap_fingerprints")
+  static function compareBitmapFingerprints(a:flight.BitmapFingerprint, b:flight.BitmapFingerprint):Float;
+
+  @:native("flight_hx::bitmap::compute_gaussian_kernel")
+  static function computeGaussianKernel(out:flight._internal._Float32Array, radius:Float, sigma:Float):Void;
+
+  @:native("flight_hx::bitmap::concat_bitmap_color_matrix")
+  static function concatBitmapColorMatrix(out:Array<Float>, first:Array<Float>, second:Array<Float>):Void;
 
   @:native("flight_hx::bitmap::copy_bitmap_alpha")
   static function copyBitmapAlpha(dest:flight.BitmapRegion, source:flight.BitmapRegion):Void;
@@ -66,6 +87,9 @@ extern class Bitmap {
 
   @:native("flight_hx::bitmap::create_bitmap")
   static function createBitmap(width:Float, height:Float, colorPresent:Bool, color:Float):flight.Bitmap;
+
+  @:native("flight_hx::bitmap::create_bitmap_fingerprint")
+  static function createBitmapFingerprint(source:flight.Bitmap, gridSizePresent:Bool, gridSize:Float):flight.BitmapFingerprint;
 
   @:native("flight_hx::bitmap::create_bitmap_region")
   static function createBitmapRegion(bitmap:flight.Bitmap, xPresent:Bool, x:Float, yPresent:Bool, y:Float, widthPresent:Bool, width:Float, heightPresent:Bool, height:Float):flight.BitmapRegion;
@@ -97,8 +121,14 @@ extern class Bitmap {
   @:native("flight_hx::bitmap::flood_fill_bitmap")
   static function floodFillBitmap(out:flight.Bitmap, x:Float, y:Float, color:Float):Void;
 
+  @:native("flight_hx::bitmap::format_bitmap_fingerprint")
+  static function formatBitmapFingerprint(fingerprint:flight.BitmapFingerprint):String;
+
   @:native("flight_hx::bitmap::get_bitmap_coverage")
   static function getBitmapCoverage(source:flight.Bitmap, backgroundColor:Float, channelTolerancePresent:Bool, channelTolerance:Float):Float;
+
+  @:native("flight_hx::bitmap::get_bitmap_histogram")
+  static function getBitmapHistogram(source:flight.BitmapRegion):flight.BitmapHistogram;
 
   @:native("flight_hx::bitmap::get_bitmap_pixel")
   static function getBitmapPixel(source:flight.Bitmap, x:Float, y:Float):Float;
@@ -121,6 +151,12 @@ extern class Bitmap {
   @:native("flight_hx::bitmap::multiply_bitmap_alpha")
   static function multiplyBitmapAlpha(out:flight.BitmapRegion, factor:Float):Void;
 
+  @:native("flight_hx::bitmap::parse_bitmap_fingerprint")
+  static function parseBitmapFingerprint(text:String):Null<flight.BitmapFingerprint>;
+
+  @:native("flight_hx::bitmap::premultiply_bitmap_pixels")
+  static function premultiplyBitmapPixels(out:flight._internal._UInt8ClampedArray, source:flight._internal._UInt8ClampedArray, length:Float):Void;
+
   @:native("flight_hx::bitmap::rotate_bitmap180")
   static function rotateBitmap180(dest:flight.BitmapRegion, source:flight.BitmapRegion):Void;
 
@@ -136,6 +172,9 @@ extern class Bitmap {
   @:native("flight_hx::bitmap::set_bitmap_alpha")
   static function setBitmapAlpha(out:flight.BitmapRegion, alpha:Float):Void;
 
+  @:native("flight_hx::bitmap::set_bitmap_color_matrix_identity")
+  static function setBitmapColorMatrixIdentity(out:Array<Float>):Void;
+
   @:native("flight_hx::bitmap::set_bitmap_pixel")
   static function setBitmapPixel(out:flight.Bitmap, x:Float, y:Float, color:Float):Void;
 
@@ -145,32 +184,14 @@ extern class Bitmap {
   @:native("flight_hx::bitmap::set_bitmap_region")
   static function setBitmapRegion(out:flight.BitmapRegion, bitmap:flight.Bitmap, xPresent:Bool, x:Float, yPresent:Bool, y:Float, widthPresent:Bool, width:Float, heightPresent:Bool, height:Float):flight.BitmapRegion;
 
+  @:native("flight_hx::bitmap::split_bitmap_channels")
+  static function splitBitmapChannels(source:flight.Bitmap):Array<flight.Bitmap>;
+
   @:native("flight_hx::bitmap::trim_bitmap")
   static function trimBitmap(source:flight.Bitmap):flight.Bitmap;
 
-  @:native("flight_hx::bitmap::compare_bitmap_fingerprints")
-  static function compareBitmapFingerprints(a:flight.BitmapFingerprint, b:flight.BitmapFingerprint):Float;
-
-  @:native("flight_hx::bitmap::create_bitmap_fingerprint")
-  static function createBitmapFingerprint(source:flight.Bitmap, gridSizePresent:Bool, gridSize:Float):flight.BitmapFingerprint;
-
-  @:native("flight_hx::bitmap::get_bitmap_histogram")
-  static function getBitmapHistogram(source:flight.BitmapRegion):flight.BitmapHistogram;
-
-  @:native("flight_hx::bitmap::compare_bitmap")
-  static function compareBitmap(source:flight.Bitmap, other:flight.Bitmap):Null<flight.Bitmap>;
-
-  @:native("flight_hx::bitmap::format_bitmap_fingerprint")
-  static function formatBitmapFingerprint(fingerprint:flight.BitmapFingerprint):String;
-
-  @:native("flight_hx::bitmap::parse_bitmap_fingerprint")
-  static function parseBitmapFingerprint(text:String):Null<flight.BitmapFingerprint>;
-
-  @:native("flight_hx::bitmap::capture_bitmap_from_image_resource")
-  static function captureBitmapFromImageResource(hostBitmapReadback:flight.HostBitmapReadbackCapability, resource:flight.ImageResource):Null<flight.Bitmap>;
-
-  @:native("flight_hx::bitmap::split_bitmap_channels")
-  static function splitBitmapChannels(source:flight.Bitmap):Array<flight.Bitmap>;
+  @:native("flight_hx::bitmap::unpremultiply_bitmap_pixels")
+  static function unpremultiplyBitmapPixels(out:flight._internal._UInt8ClampedArray, source:flight._internal._UInt8ClampedArray, length:Float):Void;
 
   @:native("flight_hx::bitmap::get_bitmap_fingerprint_computation_id")
   static function get_BITMAP_FINGERPRINT_COMPUTATION_ID():String;

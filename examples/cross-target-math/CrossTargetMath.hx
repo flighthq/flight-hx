@@ -7,8 +7,10 @@ import flight.Clipboard;
 import flight.Clock;
 import flight.Color;
 import flight.Collision;
+import flight.Compression;
 import flight.Device;
 import flight.Entity;
+import flight.Encoding;
 import flight.Effects;
 import flight.FontFormats;
 import flight.Geolocation;
@@ -61,6 +63,18 @@ class CrossTargetMath {
       'grid-average-rgb-v1'
     );
     assertString('shared type string value bridge', flight.Types.AnimationInterpolationLinear, 'Linear');
+
+    final utf8 = encodeUTF8('Flight \u2713');
+    assertString('typed-array UTF-8 round trip', decodeUTF8(utf8), 'Flight \u2713');
+    assertTrue('typed-array Adler-32', computeAdler32(utf8) > 0.0);
+    assertTrue('typed-array deflate result', compressDeflate(utf8).length > 0);
+    final sourcePixels = new flight._internal._UInt8ClampedArray(4);
+    sourcePixels[0] = 255.0;
+    sourcePixels[3] = 128.0;
+    final premultipliedPixels = new flight._internal._UInt8ClampedArray(4);
+    premultiplyBitmapPixels(premultipliedPixels, sourcePixels, 4.0);
+    assertClose('typed-array bitmap copy-back red', premultipliedPixels[0], 128.0);
+    assertClose('typed-array bitmap copy-back alpha', premultipliedPixels[3], 128.0);
     assertTrue('inRange', inRange(0.5, 0.0, 1.0));
     assertClose('inverseLerp', inverseLerp(10.0, 20.0, 12.5), 0.25);
     assertClose('lerp', lerp(10.0, 20.0, 0.25), 12.5);

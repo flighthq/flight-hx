@@ -3,6 +3,22 @@ package flight;
 
 typedef Compression = flight._cpp.Compression;
 
+inline function compressDeflate(bytes:flight._internal._UInt8Array):flight._internal._UInt8Array {
+  return flight._cpp._fn.Compression.compressDeflate(bytes);
+}
+
+inline function compressDeflateZlib(bytes:flight._internal._UInt8Array):flight._internal._UInt8Array {
+  return flight._cpp._fn.Compression.compressDeflateZlib(bytes);
+}
+
+inline function compressLzma(bytes:flight._internal._UInt8Array):flight._internal._UInt8Array {
+  return flight._cpp._fn.Compression.compressLzma(bytes);
+}
+
+inline function computeAdler32(input:flight._internal._UInt8Array):Float {
+  return flight._cpp._fn.Compression.computeAdler32(input);
+}
+
 var DISTANCE_BASE(get, set):Array<Float>;
 
 private extern inline function get_DISTANCE_BASE():Array<Float> return flight._cpp._attempt.Attempt_Compression_DISTANCE_BASE.DISTANCE_BASE;
@@ -26,22 +42,6 @@ var LENGTH_EXTRA(get, set):Array<Float>;
 private extern inline function get_LENGTH_EXTRA():Array<Float> return flight._cpp._attempt.Attempt_Compression_LENGTH_EXTRA.LENGTH_EXTRA;
 
 private extern inline function set_LENGTH_EXTRA(value:Array<Float>):Array<Float> return flight._cpp._attempt.Attempt_Compression_LENGTH_EXTRA.LENGTH_EXTRA = value;
-
-extern inline function compressDeflate(bytes:flight._internal._UInt8Array):flight._internal._UInt8Array {
-  return flight._cpp._attempt.Attempt_Compression_compressDeflate.compressDeflate(bytes);
-}
-
-extern inline function compressDeflateZlib(bytes:flight._internal._UInt8Array):flight._internal._UInt8Array {
-  return flight._cpp._attempt.Attempt_Compression_compressDeflateZlib.compressDeflateZlib(bytes);
-}
-
-extern inline function compressLzma(bytes:flight._internal._UInt8Array):flight._internal._UInt8Array {
-  return flight._cpp._attempt.Attempt_Compression_compressLzma.compressLzma(bytes);
-}
-
-extern inline function computeAdler32(input:flight._internal._UInt8Array):Float {
-  return flight._cpp._attempt.Attempt_Compression_computeAdler32.computeAdler32(input);
-}
 
 var decompressDeflate(get, set):Decompressor;
 

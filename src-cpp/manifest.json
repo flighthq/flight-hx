@@ -17,7 +17,8 @@
     "arrayFloatAdapterPromotion": "dependency-complete-array-float-copy-adapter-compile-run",
     "nullableStringAdapterPromotion": "dependency-complete-nullable-string-copy-adapter-compile-run",
     "referenceCarrierPromotion": "dependency-complete-reference-carrier-compile-run",
-    "scalarValuePromotion": "dependency-complete-scalar-value-getter-compile-run"
+    "scalarValuePromotion": "dependency-complete-scalar-value-getter-compile-run",
+    "typedArrayAdapterPromotion": "dependency-complete-typed-array-copy-adapter-compile-run"
   },
   "cppStandard": 20,
   "corrections": [
@@ -27,6 +28,7 @@
     "flight-hx-hxcpp-nullable-string-copy-adapter/1",
     "flight-hx-hxcpp-reference-carrier/1",
     "flight-hx-hxcpp-scalar-value-getter/1",
+    "flight-hx-hxcpp-typed-array-copy-adapter/1",
     "flight-hx-hxcpp-nullable-reference-wrapper/1",
     "flight-hx-hxcpp-reference-array-box/1",
     "flight-hx-hxcpp-owned-string-copy/1",
@@ -385,6 +387,36 @@
       "module": "flight.Bitmap",
       "functions": [
         {
+          "name": "applyBitmapLevels",
+          "native": "flight::bitmap::apply_bitmap_levels",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "blurBitmapPixelsHorizontal",
+          "native": "flight::bitmap::blur_bitmap_pixels_horizontal",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/typed-array-copy-adapter/1"
+        },
+        {
+          "name": "blurBitmapPixelsHorizontalWeighted",
+          "native": "flight::bitmap::blur_bitmap_pixels_horizontal_weighted",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/typed-array-copy-adapter/1"
+        },
+        {
+          "name": "blurBitmapPixelsVertical",
+          "native": "flight::bitmap::blur_bitmap_pixels_vertical",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/typed-array-copy-adapter/1"
+        },
+        {
+          "name": "blurBitmapPixelsVerticalWeighted",
+          "native": "flight::bitmap::blur_bitmap_pixels_vertical_weighted",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/typed-array-copy-adapter/1"
+        },
+        {
           "name": "buildBitmapBrightnessColorMatrix",
           "native": "flight::bitmap::build_bitmap_brightness_color_matrix",
           "header": "flight/bitmap/contract.hpp",
@@ -427,20 +459,8 @@
           "provenance": "flight-hx/array-float-copy-adapter/1"
         },
         {
-          "name": "concatBitmapColorMatrix",
-          "native": "flight::bitmap::concat_bitmap_color_matrix",
-          "header": "flight/bitmap/contract.hpp",
-          "provenance": "flight-hx/array-float-copy-adapter/1"
-        },
-        {
-          "name": "setBitmapColorMatrixIdentity",
-          "native": "flight::bitmap::set_bitmap_color_matrix_identity",
-          "header": "flight/bitmap/contract.hpp",
-          "provenance": "flight-hx/array-float-copy-adapter/1"
-        },
-        {
-          "name": "applyBitmapLevels",
-          "native": "flight::bitmap::apply_bitmap_levels",
+          "name": "captureBitmapFromImageResource",
+          "native": "flight::bitmap::capture_bitmap_from_image_resource",
           "header": "flight/bitmap/contract.hpp",
           "provenance": "flight-hx/reference-carrier/1"
         },
@@ -449,6 +469,30 @@
           "native": "flight::bitmap::clone_bitmap",
           "header": "flight/bitmap/contract.hpp",
           "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "compareBitmap",
+          "native": "flight::bitmap::compare_bitmap",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "compareBitmapFingerprints",
+          "native": "flight::bitmap::compare_bitmap_fingerprints",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "computeGaussianKernel",
+          "native": "flight::bitmap::compute_gaussian_kernel",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/typed-array-copy-adapter/1"
+        },
+        {
+          "name": "concatBitmapColorMatrix",
+          "native": "flight::bitmap::concat_bitmap_color_matrix",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/array-float-copy-adapter/1"
         },
         {
           "name": "copyBitmapAlpha",
@@ -465,6 +509,12 @@
         {
           "name": "createBitmap",
           "native": "flight::bitmap::create_bitmap",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "createBitmapFingerprint",
+          "native": "flight::bitmap::create_bitmap_fingerprint",
           "header": "flight/bitmap/contract.hpp",
           "provenance": "flight-hx/reference-carrier/1"
         },
@@ -529,8 +579,20 @@
           "provenance": "flight-hx/reference-carrier/1"
         },
         {
+          "name": "formatBitmapFingerprint",
+          "native": "flight::bitmap::format_bitmap_fingerprint",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
           "name": "getBitmapCoverage",
           "native": "flight::bitmap::get_bitmap_coverage",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "getBitmapHistogram",
+          "native": "flight::bitmap::get_bitmap_histogram",
           "header": "flight/bitmap/contract.hpp",
           "provenance": "flight-hx/reference-carrier/1"
         },
@@ -577,6 +639,18 @@
           "provenance": "flight-hx/reference-carrier/1"
         },
         {
+          "name": "parseBitmapFingerprint",
+          "native": "flight::bitmap::parse_bitmap_fingerprint",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
+          "name": "premultiplyBitmapPixels",
+          "native": "flight::bitmap::premultiply_bitmap_pixels",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/typed-array-copy-adapter/1"
+        },
+        {
           "name": "rotateBitmap180",
           "native": "flight::bitmap::rotate_bitmap180",
           "header": "flight/bitmap/contract.hpp",
@@ -607,6 +681,12 @@
           "provenance": "flight-hx/reference-carrier/1"
         },
         {
+          "name": "setBitmapColorMatrixIdentity",
+          "native": "flight::bitmap::set_bitmap_color_matrix_identity",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/array-float-copy-adapter/1"
+        },
+        {
           "name": "setBitmapPixel",
           "native": "flight::bitmap::set_bitmap_pixel",
           "header": "flight/bitmap/contract.hpp",
@@ -625,58 +705,22 @@
           "provenance": "flight-hx/reference-carrier/1"
         },
         {
+          "name": "splitBitmapChannels",
+          "native": "flight::bitmap::split_bitmap_channels",
+          "header": "flight/bitmap/contract.hpp",
+          "provenance": "flight-hx/reference-carrier/1"
+        },
+        {
           "name": "trimBitmap",
           "native": "flight::bitmap::trim_bitmap",
           "header": "flight/bitmap/contract.hpp",
           "provenance": "flight-hx/reference-carrier/1"
         },
         {
-          "name": "compareBitmapFingerprints",
-          "native": "flight::bitmap::compare_bitmap_fingerprints",
+          "name": "unpremultiplyBitmapPixels",
+          "native": "flight::bitmap::unpremultiply_bitmap_pixels",
           "header": "flight/bitmap/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "createBitmapFingerprint",
-          "native": "flight::bitmap::create_bitmap_fingerprint",
-          "header": "flight/bitmap/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "getBitmapHistogram",
-          "native": "flight::bitmap::get_bitmap_histogram",
-          "header": "flight/bitmap/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "compareBitmap",
-          "native": "flight::bitmap::compare_bitmap",
-          "header": "flight/bitmap/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "formatBitmapFingerprint",
-          "native": "flight::bitmap::format_bitmap_fingerprint",
-          "header": "flight/bitmap/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "parseBitmapFingerprint",
-          "native": "flight::bitmap::parse_bitmap_fingerprint",
-          "header": "flight/bitmap/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "captureBitmapFromImageResource",
-          "native": "flight::bitmap::capture_bitmap_from_image_resource",
-          "header": "flight/bitmap/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
-        },
-        {
-          "name": "splitBitmapChannels",
-          "native": "flight::bitmap::split_bitmap_channels",
-          "header": "flight/bitmap/contract.hpp",
-          "provenance": "flight-hx/reference-carrier/1"
+          "provenance": "flight-hx/typed-array-copy-adapter/1"
         }
       ],
       "values": [
@@ -1130,6 +1174,35 @@
       ]
     },
     {
+      "module": "flight.Compression",
+      "functions": [
+        {
+          "name": "compressDeflate",
+          "native": "flight::compression::compress_deflate",
+          "header": "flight/compression/contract.hpp",
+          "provenance": "flight-hx/typed-array-copy-adapter/1"
+        },
+        {
+          "name": "compressDeflateZlib",
+          "native": "flight::compression::compress_deflate_zlib",
+          "header": "flight/compression/contract.hpp",
+          "provenance": "flight-hx/typed-array-copy-adapter/1"
+        },
+        {
+          "name": "compressLzma",
+          "native": "flight::compression::compress_lzma",
+          "header": "flight/compression/contract.hpp",
+          "provenance": "flight-hx/typed-array-copy-adapter/1"
+        },
+        {
+          "name": "computeAdler32",
+          "native": "flight::compression::compute_adler32",
+          "header": "flight/compression/contract.hpp",
+          "provenance": "flight-hx/typed-array-copy-adapter/1"
+        }
+      ]
+    },
+    {
       "module": "flight.Device",
       "functions": [
         {
@@ -1292,6 +1365,23 @@
           "native": "flight::effects::get_linear_sampled_gaussian_tap_count",
           "header": "flight/effects/linear_sampled_gaussian.hpp",
           "provenance": "flight-hx/header-confirmed-scalar/1"
+        }
+      ]
+    },
+    {
+      "module": "flight.Encoding",
+      "functions": [
+        {
+          "name": "decodeUTF8",
+          "native": "flight::encoding::decode_utf8",
+          "header": "flight/encoding/contract.hpp",
+          "provenance": "flight-hx/typed-array-copy-adapter/1"
+        },
+        {
+          "name": "encodeUTF8",
+          "native": "flight::encoding::encode_utf8",
+          "header": "flight/encoding/contract.hpp",
+          "provenance": "flight-hx/typed-array-copy-adapter/1"
         }
       ]
     },

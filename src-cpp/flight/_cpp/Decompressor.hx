@@ -3,7 +3,7 @@ package flight._cpp;
 
 #if cpp
 // The carrier is copied by value; no heap owner or borrowed address crosses the Haxe boundary.
-@:include("flight/types/contract.hpp")
+// The exact attempted use site supplies the defining header; see type-attempt provenance.
 @:native("flight::types::Decompressor")
 @:structAccess
 extern class Decompressor {}

@@ -1465,82 +1465,6 @@
     },
     {
       "carrierFamilies": [
-        "typed-array"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Bitmap_blurBitmapPixelsHorizontal",
-      "header": "flight/bitmap/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::bitmap::blur_bitmap_pixels_horizontal",
-      "package": "@flighthq/bitmap",
-      "publicName": "flight.Bitmap.blurBitmapPixelsHorizontal",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/bitmap/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "typed-array"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Bitmap_blurBitmapPixelsHorizontalWeighted",
-      "header": "flight/bitmap/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::bitmap::blur_bitmap_pixels_horizontal_weighted",
-      "package": "@flighthq/bitmap",
-      "publicName": "flight.Bitmap.blurBitmapPixelsHorizontalWeighted",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/bitmap/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "typed-array"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Bitmap_blurBitmapPixelsVertical",
-      "header": "flight/bitmap/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::bitmap::blur_bitmap_pixels_vertical",
-      "package": "@flighthq/bitmap",
-      "publicName": "flight.Bitmap.blurBitmapPixelsVertical",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/bitmap/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "typed-array"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Bitmap_blurBitmapPixelsVerticalWeighted",
-      "header": "flight/bitmap/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::bitmap::blur_bitmap_pixels_vertical_weighted",
-      "package": "@flighthq/bitmap",
-      "publicName": "flight.Bitmap.blurBitmapPixelsVerticalWeighted",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/bitmap/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
         "named",
         "typed-array"
       ],
@@ -1630,25 +1554,6 @@
       "nativeName": "flight::bitmap::composite_bitmap_region",
       "package": "@flighthq/bitmap",
       "publicName": "flight.Bitmap.compositeBitmapRegion",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/bitmap/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "typed-array"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Bitmap_computeGaussianKernel",
-      "header": "flight/bitmap/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::bitmap::compute_gaussian_kernel",
-      "package": "@flighthq/bitmap",
-      "publicName": "flight.Bitmap.computeGaussianKernel",
       "refusal": {
         "code": "unsupported-carrier",
         "message": "type family named is outside the Haxe C++ extern vertical slice",
@@ -2278,25 +2183,6 @@
     },
     {
       "carrierFamilies": [
-        "typed-array"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Bitmap_premultiplyBitmapPixels",
-      "header": "flight/bitmap/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::bitmap::premultiply_bitmap_pixels",
-      "package": "@flighthq/bitmap",
-      "publicName": "flight.Bitmap.premultiplyBitmapPixels",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/bitmap/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
         "dynamic",
         "named"
       ],
@@ -2386,25 +2272,6 @@
       "nativeName": "flight::bitmap::transform_bitmap",
       "package": "@flighthq/bitmap",
       "publicName": "flight.Bitmap.transformBitmap",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/bitmap/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "typed-array"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Bitmap_unpremultiplyBitmapPixels",
-      "header": "flight/bitmap/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::bitmap::unpremultiply_bitmap_pixels",
-      "package": "@flighthq/bitmap",
-      "publicName": "flight.Bitmap.unpremultiplyBitmapPixels",
       "refusal": {
         "code": "unsupported-carrier",
         "message": "type family named is outside the Haxe C++ extern vertical slice",
@@ -3321,82 +3188,6 @@
     },
     {
       "carrierFamilies": [
-        "typed-array"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Compression_compressDeflate",
-      "header": "flight/compression/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::compression::compress_deflate",
-      "package": "@flighthq/compression",
-      "publicName": "flight.Compression.compressDeflate",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/compression/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "typed-array"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Compression_compressDeflateZlib",
-      "header": "flight/compression/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::compression::compress_deflate_zlib",
-      "package": "@flighthq/compression",
-      "publicName": "flight.Compression.compressDeflateZlib",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/compression/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "typed-array"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Compression_compressLzma",
-      "header": "flight/compression/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::compression::compress_lzma",
-      "package": "@flighthq/compression",
-      "publicName": "flight.Compression.compressLzma",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/compression/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "typed-array"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Compression_computeAdler32",
-      "header": "flight/compression/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::compression::compute_adler32",
-      "package": "@flighthq/compression",
-      "publicName": "flight.Compression.computeAdler32",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/compression/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
         "named"
       ],
       "externClass": "flight._cpp._attempt.Attempt_Compression_decompressDeflate",
@@ -3506,44 +3297,6 @@
         "phase": "planning"
       },
       "source": "packages/compression/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "typed-array"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Encoding_decodeUTF8",
-      "header": "flight/encoding/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::encoding::decode_utf8",
-      "package": "@flighthq/encoding",
-      "publicName": "flight.Encoding.decodeUTF8",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/encoding/src/contract.ts",
-      "status": "materialized-unproven",
-      "transport": "isolated-extern-inline"
-    },
-    {
-      "carrierFamilies": [
-        "typed-array"
-      ],
-      "externClass": "flight._cpp._attempt.Attempt_Encoding_encodeUTF8",
-      "header": "flight/encoding/contract.hpp",
-      "kind": "function",
-      "nativeName": "flight::encoding::encode_utf8",
-      "package": "@flighthq/encoding",
-      "publicName": "flight.Encoding.encodeUTF8",
-      "refusal": {
-        "code": "unsupported-carrier",
-        "message": "type family named is outside the Haxe C++ extern vertical slice",
-        "phase": "planning"
-      },
-      "source": "packages/encoding/src/contract.ts",
       "status": "materialized-unproven",
       "transport": "isolated-extern-inline"
     },
@@ -9132,7 +8885,7 @@
   },
   "schema": "flight-hx-native-binding-attempts/1",
   "summary": {
-    "functions": 382,
+    "functions": 369,
     "carrierFamilies": [
       {
         "count": 80,
@@ -9163,13 +8916,13 @@
         "name": "nullable"
       },
       {
-        "count": 53,
+        "count": 40,
         "name": "typed-array"
       }
     ],
-    "holders": 40,
-    "isolatedExterns": 463,
-    "total": 463,
+    "holders": 39,
+    "isolatedExterns": 450,
+    "total": 450,
     "values": 81
   }
 }

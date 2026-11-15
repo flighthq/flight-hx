@@ -89,18 +89,28 @@
       "parameters": ""
     },
     {
+      "elementKind": "float32",
+      "haxeName": "_Float32Array",
+      "include": "flight/typed_array.hpp",
+      "nativeName": "flight::Float32Array",
+      "parameters": "<T = Dynamic>"
+    },
+    {
+      "elementKind": "uint32",
       "haxeName": "_UInt32Array",
       "include": "flight/typed_array.hpp",
       "nativeName": "flight::Uint32Array",
       "parameters": "<T = Dynamic>"
     },
     {
+      "elementKind": "uint8",
       "haxeName": "_UInt8Array",
       "include": "flight/typed_array.hpp",
       "nativeName": "flight::Uint8Array",
       "parameters": "<T = Dynamic>"
     },
     {
+      "elementKind": "uint8-clamped",
       "haxeName": "_UInt8ClampedArray",
       "include": "flight/typed_array.hpp",
       "nativeName": "flight::Uint8ClampedArray",
@@ -126,6 +136,9 @@
       "nativeName": "flight::Blob",
       "webType": "js.html.Blob"
     }
+  ],
+  "deferredUseSiteIncludes": [
+    "flight.Decompressor"
   ],
   "declarations": [
     {
@@ -35057,8 +35070,9 @@
     "compilerEmitted": 2179,
     "collisionAliases": 16,
     "generatedHiddenExterns": 3070,
-    "internalCarriers": 4,
+    "internalCarriers": 5,
     "hostCarriers": 3,
+    "deferredUseSiteIncludes": 1,
     "maintainedOverrides": 3,
     "nativeOnlyDisambiguations": 24,
     "publicAliases": 3049,

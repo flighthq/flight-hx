@@ -28,6 +28,7 @@ const arrayFloatAdapterProvenance = 'flight-hx/array-float-copy-adapter/1';
 const nullableStringAdapterProvenance = 'flight-hx/nullable-string-copy-adapter/1';
 const referenceCarrierProvenance = 'flight-hx/reference-carrier/1';
 const scalarValueProvenance = 'flight-hx/scalar-value-getter/1';
+const typedArrayAdapterProvenance = 'flight-hx/typed-array-copy-adapter/1';
 const flightCppHeaderStatuses = new Map(
   flightCppBestEffort.modules.map(({ path: header, status }) => [header, status]),
 );
@@ -88,6 +89,14 @@ if (
 ) {
   throw new Error(
     `Unknown native scalar value policy ${String(manifest.haxeBindingPlan?.scalarValuePromotion)}`,
+  );
+}
+if (
+  manifest.haxeBindingPlan?.typedArrayAdapterPromotion !==
+  'dependency-complete-typed-array-copy-adapter-compile-run'
+) {
+  throw new Error(
+    `Unknown native typed-array policy ${String(manifest.haxeBindingPlan?.typedArrayAdapterPromotion)}`,
   );
 }
 const planned = new Map(
@@ -229,6 +238,19 @@ for (const module of manifest.modules) {
         throw new Error(`${publicName} is now compiler-planned; remove its downstream reference carrier`);
       }
       structuralReferenceResult = validateReferenceCarrier(publicName, binding, declaration, parsed);
+      plan = {
+        headerStatus: 'pass',
+        include: binding.header,
+        kind: 'function',
+        nativeName: binding.native,
+        publicName,
+        transport: 'direct',
+      };
+    } else if (provenance === typedArrayAdapterProvenance) {
+      if (plan) {
+        throw new Error(`${publicName} is now compiler-planned; remove its downstream typed-array adapter`);
+      }
+      validateTypedArrayAdapter(publicName, binding, declaration, parsed);
       plan = {
         headerStatus: 'pass',
         include: binding.header,
@@ -386,6 +408,7 @@ process.stdout.write(
     `${String(manifestEntries.filter(({ provenance }) => provenance === arrayFloatAdapterProvenance).length)} array carrier adapter, ` +
     `${String(manifestEntries.filter(({ provenance }) => provenance === nullableStringAdapterProvenance).length)} Null<String> adapter, ` +
     `${String(manifestEntries.filter(({ provenance }) => provenance === referenceCarrierProvenance).length)} reference carrier), ` +
+    `${String(manifestEntries.filter(({ provenance }) => provenance === typedArrayAdapterProvenance).length)} typed-array adapter(s), ` +
     `${String(compileProbeValues.length)} scalar value(s); ` +
     `${String(unprovenAttempts.filter(({ publicHaxe }) => publicHaxe.kind === 'function').length)} unproven function attempt(s) and ` +
     `${String(unprovenAttempts.filter(({ publicHaxe }) => publicHaxe.kind === 'value').length)} unproven value attempt(s) across ` +
@@ -770,6 +793,47 @@ function validateScalarValue(publicName, binding, declaration, attempt) {
   }
 }
 
+function validateTypedArrayAdapter(publicName, binding, declaration, parsed) {
+  if (flightCppHeaderStatuses.get(binding.header) !== 'emitted') {
+    throw new Error(`${publicName} typed-array header is not dependency-complete: ${binding.header}`);
+  }
+  const types = [...parsed.parameters.map(({ type }) => type), parsed.result];
+  const allowed = new Set(['Bool', 'Float', 'String', 'Void']);
+  if (!types.some(isTypedArrayType) || types.some((type) => !allowed.has(type) && !isTypedArrayType(type))) {
+    throw new Error(`${publicName} is not a typed-array plus primitive signature`);
+  }
+  const firstOptional = parsed.parameters.findIndex(({ optional }) => optional);
+  if (firstOptional >= 0 && parsed.parameters.slice(firstOptional).some(({ optional }) => !optional)) {
+    throw new Error(`${publicName} typed-array adapter has a required parameter after an optional parameter`);
+  }
+  const attempt = attemptedFunctions.get(publicName);
+  const locator = attempt?.cpp?.availability === 'available' ? attempt.cpp.locator : undefined;
+  if (!locator) throw new Error(`${publicName} typed-array adapter has no compiler/flight-cpp locator`);
+  const expectedNative = `${locator.namespace}::${locator.spelling}`;
+  if (binding.native !== expectedNative || binding.header !== locator.include) {
+    throw new Error(
+      `${publicName} typed-array locator drifted: ` +
+        `${binding.native} in ${binding.header} != ${expectedNative} in ${locator.include}`,
+    );
+  }
+  const headerPath = path.join(flightCpp.directory, 'generated', 'include', binding.header);
+  if (!existsSync(headerPath)) throw new Error(`${publicName} typed-array header is missing: ${binding.header}`);
+  const parameters = parsed.parameters
+    .map(({ optional, type }) => {
+      const nativeType = optional ? `std::optional<${flightCppType(type)}>` : flightCppType(type);
+      const defaultPattern = optional ? '\\s*=\\s*std::nullopt' : '';
+      return `${escapeRegExp(nativeType)}\\s+[A-Za-z_][A-Za-z0-9_]*${defaultPattern}`;
+    })
+    .join('\\s*,\\s*');
+  const signature = new RegExp(
+    `\\binline\\s+${escapeRegExp(flightCppType(parsed.result))}\\s+${escapeRegExp(locator.spelling)}\\s*\\(${parameters}\\)`,
+    'u',
+  );
+  if (!signature.test(nativePackageHeaders(headerPath))) {
+    throw new Error(`${publicName} typed-array adapter cannot find its exact native signature`);
+  }
+}
+
 function validateScalarOverrideRefusals(boundPublicNames) {
   const seen = new Set();
   for (const refusal of manifest.scalarOverrideRefusals ?? []) {
@@ -900,6 +964,7 @@ function emitBridgeHeader(module, bindings, values) {
       (binding) =>
         isArrayFloatAdapter(binding) ||
         isNullableStringAdapter(binding) ||
+        isTypedArrayAdapter(binding) ||
         [...binding.parsed.parameters.map(({ type }) => type), binding.parsed.result].some(
           (type) =>
             type === 'Null<Float>' ||
@@ -936,6 +1001,7 @@ function emitBridgeSource(module, bindings, values) {
   const needsReferenceArrayAdapter = bindings.some((binding) =>
     [...binding.parsed.parameters.map(({ type }) => type), binding.parsed.result].some(isReferenceArrayType),
   );
+  const needsTypedArrayAdapter = bindings.some(isTypedArrayAdapter);
   const needsStringCopy =
     values.some(({ type }) => type === 'String') ||
     bindings.some(
@@ -953,12 +1019,12 @@ function emitBridgeSource(module, bindings, values) {
   );
   const lines = [
     '// Generated from src-cpp/manifest.json and flight-compiler native-planning.json. Do not edit.',
-    ...(needsArrayFloatAdapter || needsReferenceArrayAdapter
+    ...(needsArrayFloatAdapter || needsReferenceArrayAdapter || needsTypedArrayAdapter
       ? ['#include <limits>', '#include <stdexcept>']
       : []),
     ...(needsStringCopy
       ? [
-          ...(needsArrayFloatAdapter || needsReferenceArrayAdapter
+          ...(needsArrayFloatAdapter || needsReferenceArrayAdapter || needsTypedArrayAdapter
             ? []
             : ['#include <limits>', '#include <stdexcept>']),
           '#include <string>',
@@ -1105,6 +1171,42 @@ function emitBridgeSource(module, bindings, values) {
       '',
     );
   }
+  if (needsTypedArrayAdapter) {
+    lines.push(
+      'namespace {',
+      '',
+      'template <typename NativeArray>',
+      'NativeArray to_flight_typed_array(const ::Array<double>& source) {',
+      '  NativeArray result(static_cast<std::size_t>(source->length));',
+      '  for (int index = 0; index < source->length; ++index) result.set_index(static_cast<double>(index), source[index]);',
+      '  return result;',
+      '}',
+      '',
+      'template <typename NativeArray>',
+      '::Array<double> to_haxe_typed_array(const NativeArray& source) {',
+      '  if (source.size() > static_cast<std::size_t>(std::numeric_limits<int>::max())) {',
+      '    throw std::length_error("Flight TypedArray exceeds the hxcpp Array length limit");',
+      '  }',
+      '  ::Array<double> result = ::Array_obj<double>::__new(static_cast<int>(source.size()));',
+      '  int index = 0;',
+      '  for (const auto value : source) result[index++] = static_cast<double>(value);',
+      '  return result;',
+      '}',
+      '',
+      'template <typename NativeArray>',
+      'void replace_haxe_typed_array(::Array<double> destination, const NativeArray& source) {',
+      '  if (source.size() > static_cast<std::size_t>(std::numeric_limits<int>::max())) {',
+      '    throw std::length_error("Flight TypedArray exceeds the hxcpp Array length limit");',
+      '  }',
+      '  destination->resize(static_cast<int>(source.size()));',
+      '  int index = 0;',
+      '  for (const auto value : source) destination[index++] = static_cast<double>(value);',
+      '}',
+      '',
+      '} // namespace',
+      '',
+    );
+  }
   for (const binding of bindings) {
     const { native, parsed } = binding;
     const functionName = native.slice(native.lastIndexOf('::') + 2);
@@ -1117,6 +1219,10 @@ function emitBridgeSource(module, bindings, values) {
     }
     if (isNullableStringAdapter(binding)) {
       emitNullableStringBridgeBody(lines, binding, functionName, parameters);
+      continue;
+    }
+    if (isTypedArrayAdapter(binding)) {
+      emitTypedArrayBridgeBody(lines, binding, functionName, parameters);
       continue;
     }
     if (
@@ -1206,6 +1312,7 @@ function nativeArguments(binding) {
 function nativeArgumentValue(name, type) {
   if (type === 'String') return `flight::String::from_utf8(${name}.utf8_str())`;
   if (isReferenceArrayType(type)) return `flight_${name}`;
+  if (isTypedArrayType(type)) return `flight_${name}`;
   return name;
 }
 
@@ -1213,6 +1320,7 @@ function usesExpandedOptionalParameters(binding) {
   return (
     binding.provenance === optionalScalarOverrideProvenance ||
     (binding.provenance === arrayFloatAdapterProvenance && binding.parsed.parameters.some(({ optional }) => optional)) ||
+    (binding.provenance === typedArrayAdapterProvenance && binding.parsed.parameters.some(({ optional }) => optional)) ||
     (binding.provenance === referenceCarrierProvenance &&
       binding.parsed.parameters.some(({ optional, type }) => optional && !nativeReferenceTypes.has(type)))
   );
@@ -1224,6 +1332,10 @@ function isArrayFloatAdapter(binding) {
 
 function isNullableStringAdapter(binding) {
   return binding.provenance === nullableStringAdapterProvenance;
+}
+
+function isTypedArrayAdapter(binding) {
+  return binding.provenance === typedArrayAdapterProvenance;
 }
 
 function nullableReferenceInner(type) {
@@ -1246,6 +1358,20 @@ function referenceArrayInner(type) {
 
 function isReferenceArrayType(type) {
   return referenceArrayInner(type) !== undefined;
+}
+
+function typedArrayKind(type) {
+  return /^flight\._internal\._(Float32Array|UInt32Array|UInt8Array|UInt8ClampedArray)(?:<[^>]+>)?$/u.exec(type)?.[1];
+}
+
+function isTypedArrayType(type) {
+  return typedArrayKind(type) !== undefined;
+}
+
+function nativeTypedArrayType(type) {
+  const kind = typedArrayKind(type);
+  if (!kind) throw new Error(`Unsupported typed-array carrier ${type}`);
+  return `flight::${kind.replace(/^UInt/u, 'Uint')}`;
 }
 
 function nativeResultPattern(type) {
@@ -1310,6 +1436,51 @@ function emitArrayFloatBridgeBody(lines, binding, functionName, parameters) {
         ? '  return to_haxe_array(result);'
         : '  return to_haxe_nested_array(result);',
     );
+  } else if (binding.parsed.result !== 'Void') {
+    lines.push('  return result;');
+  }
+  lines.push('}', '');
+}
+
+function emitTypedArrayBridgeBody(lines, binding, functionName, parameters) {
+  const typedParameters = binding.parsed.parameters.filter(({ type }) => isTypedArrayType(type));
+  lines.push(`${cppType(binding.parsed.result)} ${functionName}(${parameters}) {`);
+  for (let index = 0; index < typedParameters.length; index += 1) {
+    const parameter = typedParameters[index];
+    const name = safeCppName(parameter.name);
+    const earlier = typedParameters.slice(0, index).filter(({ type }) => type === parameter.type);
+    const conversion = earlier.reduceRight(
+      (fallback, previous) => {
+        const previousName = safeCppName(previous.name);
+        return `${name}.GetPtr() == ${previousName}.GetPtr() ? flight_${previousName} : (${fallback})`;
+      },
+      `to_flight_typed_array<${nativeTypedArrayType(parameter.type)}>(${name})`,
+    );
+    lines.push(`  auto flight_${name} = ${conversion};`);
+  }
+  const call = `${binding.native}(${nativeArguments(binding).join(', ')})`;
+  if (binding.parsed.result === 'Void') lines.push(`  ${call};`);
+  else lines.push(`  const auto result = ${call};`);
+  for (const parameter of typedParameters) {
+    const name = safeCppName(parameter.name);
+    const statement = `replace_haxe_typed_array(${name}, flight_${name});`;
+    lines.push(parameter.optional ? `  if (${safeCppName(`${parameter.name}Present`)}) ${statement}` : `  ${statement}`);
+  }
+  if (isTypedArrayType(binding.parsed.result)) {
+    for (const parameter of typedParameters) {
+      if (parameter.type !== binding.parsed.result) continue;
+      const name = safeCppName(parameter.name);
+      const condition = `result.identity() == flight_${name}.identity()`;
+      lines.push(
+        parameter.optional
+          ? `  if (${safeCppName(`${parameter.name}Present`)} && ${condition}) return ${name};`
+          : `  if (${condition}) return ${name};`,
+      );
+    }
+    lines.push(`  return to_haxe_typed_array(result);`);
+  } else if (binding.parsed.result === 'String') {
+    lines.push('  const std::string result_utf8 = result.to_utf8();');
+    lines.push(...haxeStringCopyLines('result_utf8'));
   } else if (binding.parsed.result !== 'Void') {
     lines.push('  return result;');
   }
@@ -1418,6 +1589,7 @@ function haxeCompileProbeValue(type) {
   if (type === 'String') return "''";
   if (type.startsWith('Null<')) return 'null';
   if (type.startsWith('Array<')) return `([] : ${type})`;
+  if (isTypedArrayType(type)) return `(cast null : ${type})`;
   if (nativeReferenceTypes.has(type)) return `(cast null : ${type})`;
   throw new Error(`Unsupported native compile-probe carrier ${type}`);
 }
@@ -1572,7 +1744,7 @@ function haxeZero(type) {
 }
 
 function parseSignature(signature) {
-  const typePattern = '(?:Array<Array<Float>>|Array<Float>|Array<flight\\.[A-Z][A-Za-z0-9_]*>|Null<Float>|Null<String>|Null<flight\\.[A-Z][A-Za-z0-9_]*>|Bool|Float|String|Void|flight\\.[A-Z][A-Za-z0-9_]*)';
+  const typePattern = '(?:flight\\._internal\\._(?:Float32Array|UInt32Array|UInt8Array|UInt8ClampedArray)(?:<[^>]+>)?|Array<Array<Float>>|Array<Float>|Array<flight\\.[A-Z][A-Za-z0-9_]*>|Null<Float>|Null<String>|Null<flight\\.[A-Z][A-Za-z0-9_]*>|Bool|Float|String|Void|flight\\.[A-Z][A-Za-z0-9_]*)';
   const match = new RegExp(`^function ([A-Za-z_][A-Za-z0-9_]*)\\((.*)\\):(${typePattern})$`, 'u').exec(signature);
   if (!match) throw new Error(`Native function has unsupported Haxe signature: ${signature}`);
   const parameters = match[2]
@@ -1589,6 +1761,7 @@ function cppType(type) {
   if (type === 'Array<Array<Float>>') return '::Array<::Array<double>>';
   if (type === 'Array<Float>') return '::Array<double>';
   if (referenceArrayInner(type)) return '::Array<::Dynamic>';
+  if (isTypedArrayType(type)) return '::Array<double>';
   if (type === 'Bool') return 'bool';
   if (type === 'Float') return 'double';
   if (type === 'Null<Float>') return '::hx::Null<double>';
@@ -1605,6 +1778,7 @@ function flightCppType(type) {
   if (type === 'Array<Array<Float>>') return 'flight::Array<flight::Array<double>>';
   if (type === 'Array<Float>') return 'flight::Array<double>';
   if (referenceArrayInner(type)) return `flight::Array<${cppType(referenceArrayInner(type))}>`;
+  if (isTypedArrayType(type)) return nativeTypedArrayType(type);
   if (type === 'String') return 'flight::String';
   return cppType(type);
 }

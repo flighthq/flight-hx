@@ -183,10 +183,14 @@
       "flight.Binpack.getPackResultOccupancy",
       "flight.Binpack.packRectangles",
       "flight.Bitmap.applyBitmapLevels",
+      "flight.Bitmap.captureBitmapFromImageResource",
       "flight.Bitmap.cloneBitmap",
+      "flight.Bitmap.compareBitmap",
+      "flight.Bitmap.compareBitmapFingerprints",
       "flight.Bitmap.copyBitmapAlpha",
       "flight.Bitmap.copyBitmapPixels",
       "flight.Bitmap.createBitmap",
+      "flight.Bitmap.createBitmapFingerprint",
       "flight.Bitmap.createBitmapRegion",
       "flight.Bitmap.dissolveBitmapPixels",
       "flight.Bitmap.equalizeBitmapHistogram",
@@ -197,7 +201,9 @@
       "flight.Bitmap.flipBitmapHorizontal",
       "flight.Bitmap.flipBitmapVertical",
       "flight.Bitmap.floodFillBitmap",
+      "flight.Bitmap.formatBitmapFingerprint",
       "flight.Bitmap.getBitmapCoverage",
+      "flight.Bitmap.getBitmapHistogram",
       "flight.Bitmap.getBitmapPixel",
       "flight.Bitmap.getBitmapPixelLuminance",
       "flight.Bitmap.getBitmapPixelRgb",
@@ -205,6 +211,7 @@
       "flight.Bitmap.mergeBitmap",
       "flight.Bitmap.mergeBitmapChannels",
       "flight.Bitmap.multiplyBitmapAlpha",
+      "flight.Bitmap.parseBitmapFingerprint",
       "flight.Bitmap.rotateBitmap180",
       "flight.Bitmap.rotateBitmapClockwise",
       "flight.Bitmap.rotateBitmapCounterClockwise",
@@ -213,15 +220,8 @@
       "flight.Bitmap.setBitmapPixel",
       "flight.Bitmap.setBitmapPixelRgb",
       "flight.Bitmap.setBitmapRegion",
-      "flight.Bitmap.trimBitmap",
-      "flight.Bitmap.compareBitmapFingerprints",
-      "flight.Bitmap.createBitmapFingerprint",
-      "flight.Bitmap.getBitmapHistogram",
-      "flight.Bitmap.compareBitmap",
-      "flight.Bitmap.formatBitmapFingerprint",
-      "flight.Bitmap.parseBitmapFingerprint",
-      "flight.Bitmap.captureBitmapFromImageResource",
       "flight.Bitmap.splitBitmapChannels",
+      "flight.Bitmap.trimBitmap",
       "flight.CameraControls.addCameraShakeTrauma",
       "flight.CameraControls.cloneFlyCameraController",
       "flight.CameraControls.cloneOrbitCameraController",
@@ -783,6 +783,21 @@
       "flight.Types.WindForceKind",
       "flight.Types.WireframeMaterialKind",
       "flight.Types.WrappedDiffusePbrExtensionKind"
+    ],
+    "typedArrayAdapters": [
+      "flight.Bitmap.blurBitmapPixelsHorizontal",
+      "flight.Bitmap.blurBitmapPixelsHorizontalWeighted",
+      "flight.Bitmap.blurBitmapPixelsVertical",
+      "flight.Bitmap.blurBitmapPixelsVerticalWeighted",
+      "flight.Bitmap.computeGaussianKernel",
+      "flight.Bitmap.premultiplyBitmapPixels",
+      "flight.Bitmap.unpremultiplyBitmapPixels",
+      "flight.Compression.compressDeflate",
+      "flight.Compression.compressDeflateZlib",
+      "flight.Compression.compressLzma",
+      "flight.Compression.computeAdler32",
+      "flight.Encoding.decodeUTF8",
+      "flight.Encoding.encodeUTF8"
     ]
   },
   "packages": [
@@ -1584,7 +1599,7 @@
       "issues": [
         {
           "code": "native-function-gap",
-          "count": 57
+          "count": 50
         },
         {
           "code": "native-value-gap",
@@ -1608,7 +1623,7 @@
         },
         {
           "code": "native-materialized-unproven-functions",
-          "count": 57
+          "count": 50
         },
         {
           "code": "native-materialized-unproven-values",
@@ -1622,6 +1637,30 @@
             "holder": "Bitmap",
             "name": "applyBitmapLevels",
             "native": "flight::bitmap::apply_bitmap_levels"
+          },
+          {
+            "header": "flight/bitmap/contract.hpp",
+            "holder": "Bitmap",
+            "name": "blurBitmapPixelsHorizontal",
+            "native": "flight::bitmap::blur_bitmap_pixels_horizontal"
+          },
+          {
+            "header": "flight/bitmap/contract.hpp",
+            "holder": "Bitmap",
+            "name": "blurBitmapPixelsHorizontalWeighted",
+            "native": "flight::bitmap::blur_bitmap_pixels_horizontal_weighted"
+          },
+          {
+            "header": "flight/bitmap/contract.hpp",
+            "holder": "Bitmap",
+            "name": "blurBitmapPixelsVertical",
+            "native": "flight::bitmap::blur_bitmap_pixels_vertical"
+          },
+          {
+            "header": "flight/bitmap/contract.hpp",
+            "holder": "Bitmap",
+            "name": "blurBitmapPixelsVerticalWeighted",
+            "native": "flight::bitmap::blur_bitmap_pixels_vertical_weighted"
           },
           {
             "header": "flight/bitmap/contract.hpp",
@@ -1688,6 +1727,12 @@
             "holder": "Bitmap",
             "name": "compareBitmapFingerprints",
             "native": "flight::bitmap::compare_bitmap_fingerprints"
+          },
+          {
+            "header": "flight/bitmap/contract.hpp",
+            "holder": "Bitmap",
+            "name": "computeGaussianKernel",
+            "native": "flight::bitmap::compute_gaussian_kernel"
           },
           {
             "header": "flight/bitmap/contract.hpp",
@@ -1848,6 +1893,12 @@
           {
             "header": "flight/bitmap/contract.hpp",
             "holder": "Bitmap",
+            "name": "premultiplyBitmapPixels",
+            "native": "flight::bitmap::premultiply_bitmap_pixels"
+          },
+          {
+            "header": "flight/bitmap/contract.hpp",
+            "holder": "Bitmap",
             "name": "rotateBitmap180",
             "native": "flight::bitmap::rotate_bitmap180"
           },
@@ -1910,6 +1961,12 @@
             "holder": "Bitmap",
             "name": "trimBitmap",
             "native": "flight::bitmap::trim_bitmap"
+          },
+          {
+            "header": "flight/bitmap/contract.hpp",
+            "holder": "Bitmap",
+            "name": "unpremultiplyBitmapPixels",
+            "native": "flight::bitmap::unpremultiply_bitmap_pixels"
           }
         ],
         "types": [],
@@ -1947,7 +2004,7 @@
         ]
       },
       "nativeAttempts": {
-        "functions": 57,
+        "functions": 50,
         "types": 1,
         "unavailableUpstream": 0,
         "values": 1
@@ -3295,10 +3352,6 @@
       },
       "issues": [
         {
-          "code": "native-function-gap",
-          "count": 4
-        },
-        {
           "code": "native-value-gap",
           "count": 10
         },
@@ -3311,28 +3364,49 @@
           "count": 14
         },
         {
-          "code": "native-materialized-unproven-functions",
-          "count": 4
-        },
-        {
           "code": "native-materialized-unproven-values",
           "count": 10
         }
       ],
       "nativeDefault": {
-        "functions": [],
+        "functions": [
+          {
+            "header": "flight/compression/contract.hpp",
+            "holder": "Compression",
+            "name": "compressDeflate",
+            "native": "flight::compression::compress_deflate"
+          },
+          {
+            "header": "flight/compression/contract.hpp",
+            "holder": "Compression",
+            "name": "compressDeflateZlib",
+            "native": "flight::compression::compress_deflate_zlib"
+          },
+          {
+            "header": "flight/compression/contract.hpp",
+            "holder": "Compression",
+            "name": "compressLzma",
+            "native": "flight::compression::compress_lzma"
+          },
+          {
+            "header": "flight/compression/contract.hpp",
+            "holder": "Compression",
+            "name": "computeAdler32",
+            "native": "flight::compression::compute_adler32"
+          }
+        ],
         "types": [],
         "values": []
       },
       "nativeAttempts": {
-        "functions": 4,
+        "functions": 0,
         "types": 0,
         "unavailableUpstream": 0,
         "values": 10
       },
       "package": "@flighthq/compression",
       "scalarProbeCandidates": [],
-      "status": "emitted-unbound",
+      "status": "partial-native",
       "webDefault": {
         "functions": 4,
         "types": 0,
@@ -4195,36 +4269,41 @@
       },
       "issues": [
         {
-          "code": "native-function-gap",
-          "count": 2
-        },
-        {
           "code": "non-scalar-signature-review",
           "count": 2
         },
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 2
-        },
-        {
-          "code": "native-materialized-unproven-functions",
-          "count": 2
         }
       ],
       "nativeDefault": {
-        "functions": [],
+        "functions": [
+          {
+            "header": "flight/encoding/contract.hpp",
+            "holder": "Encoding",
+            "name": "decodeUTF8",
+            "native": "flight::encoding::decode_utf8"
+          },
+          {
+            "header": "flight/encoding/contract.hpp",
+            "holder": "Encoding",
+            "name": "encodeUTF8",
+            "native": "flight::encoding::encode_utf8"
+          }
+        ],
         "types": [],
         "values": []
       },
       "nativeAttempts": {
-        "functions": 2,
+        "functions": 0,
         "types": 0,
         "unavailableUpstream": 0,
         "values": 0
       },
       "package": "@flighthq/encoding",
       "scalarProbeCandidates": [],
-      "status": "emitted-unbound",
+      "status": "partial-native",
       "webDefault": {
         "functions": 2,
         "types": 0,
@@ -16874,15 +16953,16 @@
       "arrayFloatAdapters": 45,
       "boundHeaderConfirmedScalarFunctions": 114,
       "extensionTypes": 1,
-      "functions": 487,
+      "functions": 500,
       "nullableStringAdapters": 2,
-      "packages": 50,
+      "packages": 52,
       "optionalScalarAdapters": 3,
       "referenceCarriers": 318,
       "requiredScalarOverrides": 53,
       "scalarOverrideRefusals": 0,
       "types": 3,
-      "values": 298
+      "values": 298,
+      "typedArrayAdapters": 13
     },
     "nativeAttempts": {
       "bindingCarrierFamilies": [
@@ -16915,17 +16995,18 @@
           "name": "nullable"
         },
         {
-          "count": 53,
+          "count": 40,
           "name": "typed-array"
         }
       ],
       "compileProbes": 0,
       "cppAvailable": 4268,
       "cppUnavailable": 6979,
-      "functions": 382,
+      "deferredUseSiteIncludes": 1,
+      "functions": 369,
       "genericReferenceTemplateAdapters": 44,
       "haxeTypecheck": "pass",
-      "isolatedFunctionValueExterns": 463,
+      "isolatedFunctionValueExterns": 450,
       "types": 3073,
       "values": 81
     },
@@ -16959,9 +17040,9 @@
       "unboundFunctionCandidates": 0
     },
     "packageStatus": {
-      "emitted-unbound": 102,
+      "emitted-unbound": 100,
       "empty-web-contract": 1,
-      "partial-native": 50
+      "partial-native": 52
     },
     "scalarExpansion": {
       "headerConfirmedFunctions": 183,

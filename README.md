@@ -89,10 +89,11 @@ The complete 7,224-file transpiled tree compiles and executes on JavaScript usin
 
 Native integration starts from what the pinned current flight-cpp SDK actually provides, rather than waiting
 for full TS-to-Haxe transpilation or claiming parity it has not earned. `src-cpp/manifest.json` records
-487 compile-and-link-proven functions across 49 public modules, plus 298 primitive values across six
+500 compile-and-link-proven functions across 51 public modules, plus 298 primitive values across six
 modules: 62 compiler-planned direct calls, four
 compiler-emitted UTF-8 String adapters, 53 required-primitive overrides, and three optional-scalar
-adapters plus 45 flat/recursive `Array<Float>` copy adapters and two nullable-String adapters from
+adapters plus 45 flat/recursive `Array<Float>` copy adapters, 13 exact typed-array copy adapters,
+and two nullable-String adapters from
 dependency-complete flight-cpp headers, plus 318 reference-carrier bindings that retain
 `flight::Ref<T>` ownership. Reference arrays copy their owning handles between hxcpp and
 `flight::Array<flight::Ref<T>>`; optional reference inputs and nullable reference results use a thin
@@ -100,18 +101,18 @@ hxcpp-facing owning wrapper while the isolated bridge retains Flight's exact sha
 string-bearing reference calls convert required and nullable UTF-8 results at that same boundary.
 The values use read-only getter bridges: `Float` exports copy by value, while `String` exports make an
 owned, length-checked UTF-8 copy. It also records the generated SDK's distinct source/compiler revisions,
-C++20, and the ten downstream hxcpp/flight-cpp corrections. The current generated native
+C++20, and the eleven downstream hxcpp/flight-cpp corrections. The current generated native
 SDK reports 2,574 emitted modules. The manifest remains the exact compile/link-proven partition; a
 representative constructible slice also runs on both production targets. The default native Haxe
 root now also exposes a separately recorded attempt tier instead of hiding unproven declarations.
 The checked `src-cpp/reconciliation.json` splits that total into 1,902 dependency-complete and 672
 dependency-incomplete modules, alongside 577 refused modules. It reconciles every web package with
-the 487 bound functions, 298 bound primitive values, three upstream Scene2D handle types, one integration-only handle, and the
+the 500 bound functions, 298 bound primitive values, three upstream Scene2D handle types, one integration-only handle, and the
 remaining gaps. Of 11,247 public SDK rows, flight-cpp provides a locator for 4,268. All 3,073
 symbol-backed type attempts are materialized, including 894 declarations previously refused by the
 Haxe/C++ planner; 44 nested generic reference carriers use generated C++ alias templates. The same
-default `flight.*` root now contains all 487 functions and 298 primitive values in the proven
-partition plus 382 unproven function attempts and 81 unproven complex-value attempts across 40 holders.
+default `flight.*` root now contains all 500 functions and 298 primitive values in the proven
+partition plus 369 unproven function attempts and 81 unproven complex-value attempts across 39 holders.
 Each attempt forwards through its own hidden `extern inline` class, so importing one proven holder
 does not compile all of its experimental siblings; selecting an attempt still reaches its real
 Flight header and symbol.
@@ -120,12 +121,15 @@ compiler/flight-cpp planning pipeline provides no locator to bind. This does not
 header investigation could never find another candidate—the existing downstream scalar overrides
 demonstrate why locator availability and literal symbol existence must remain distinct.
 
-The remaining 463 per-symbol attempt externs prove that this entire tree resolves and type-checks as Haxe for the C++ target;
+The remaining 450 per-symbol attempt externs prove that this entire tree resolves and type-checks as Haxe for the C++ target;
 they deliberately do not relabel it ABI-safe. The first concrete carrier seams are now bridged:
 45 functions copy flat or recursively nested `Array<Float>` values between hxcpp and
 `flight::Array<double>`, preserve aliased arguments and optional-output identity, copy native
 mutations back into Haxe arrays, and execute through the installed-package gate on both C++ and
-ESM. Two more copy required strings into `flight::String` and map optional native results back to
+ESM. Thirteen more copy exact `Float32Array`, `Uint32Array`, `Uint8Array`, and `Uint8ClampedArray`
+carriers through Haxe-owned arrays while preserving JavaScript numeric normalization, argument
+aliasing, optional presence, return identity, and native mutations. Two more copy required strings
+into `flight::String` and map optional native results back to
 Haxe `Null<String>`. Another 318 operations across 31 public modules now pass `flight::Ref<T>` carriers
 without raw pointers or ownership loss; optional primitive arguments use explicit
 presence bits, optional references preserve omission as an empty owning handle, nullable reference
