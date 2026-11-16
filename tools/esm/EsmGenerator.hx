@@ -114,7 +114,8 @@ class EsmGenerator {
     if (c.superClass != null) {
       final sup = classAccessor(c.superClass.t.get());
       print('$p.__super__ = $sup'); newline();
-      print('for(var k in $sup.prototype ) $p.prototype[k] = $sup.prototype[k]'); newline();
+      print('$p.prototype = Object.create($sup.prototype)'); newline();
+      print('$p.prototype.constructor = $p'); newline();
     }
     for (f in c.statics.get()) genStaticField(c, p, f);
     for (f in c.fields.get()) {
@@ -163,6 +164,12 @@ class EsmGenerator {
     // Hoisted static ESM imports — the tree-shakeable replacement for require().
     for (specifier => alias in imports) print('import * as $alias from "$specifier";\n');
     // Minimal ESM-strict runtime scaffolding (declared, not global).
+    if (api.hasFeature('js.Lib.global') || api.hasFeature('$$global.$$haxeUID')) {
+      print('var $$global = globalThis'); newline();
+      if (api.hasFeature('$$global.$$haxeUID')) {
+        print('$$global.$$haxeUID |= 0'); newline();
+      }
+    }
     print('var $$hxClasses = {}');newline();
     print('var $$estr = function() { return ${flatName("js.Boot")}.__string_rec(this,""); }'); newline();
     for (t in api.types) genType(t);

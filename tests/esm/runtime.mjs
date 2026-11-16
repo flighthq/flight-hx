@@ -9,6 +9,11 @@ import { bundleFlightJs } from '../../tools/esm/bundle.mjs';
 const root = path.resolve(import.meta.dirname, '../..');
 mkdirSync(path.join(root, '.artifacts'), { recursive: true });
 const work = mkdtempSync(path.join(root, '.artifacts/esm-consumer-'));
+const generatorSmoke = path.join(work, 'generator.mjs');
+run(process.execPath, ['tools/haxe.mjs', '-cp', 'tests/esm', '-cp', 'tools/esm',
+  '-main', 'GeneratorSmoke', '-dce', 'full', '--macro', 'EsmGenerator.use()', '-js', generatorSmoke]);
+assert.match(run(process.execPath, [generatorSmoke]), /FLIGHT_ESM_GENERATOR_OK/u);
+assert.doesNotMatch(readFileSync(generatorSmoke, 'utf8'), /@flighthq\//u);
 const archive = path.join(work, 'flight.zip');
 run(process.execPath, ['tools/package-haxelib.mjs', '--externs-only', '--out', archive]);
 const installed = path.join(work, 'installed');
