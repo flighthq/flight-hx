@@ -1,4 +1,5 @@
 #include <cstdio>
+#include <initializer_list>
 
 #include "flight_ffi.h"
 
@@ -18,6 +19,20 @@ int main() {
   flight_set_bitmap_pixel(bitmap, 0, 0, 0x55667711);
   if (flight_get_bitmap_pixel(bitmap, 0, 0) != 0x55667711) return 5;
   flight_free_bitmap(bitmap);
+  void* parent = flight_create_display_object();
+  void* child = flight_create_sprite();
+  void* added = flight_add_node_child(parent, child);
+  if (flight_get_node_child_count(parent) != 1) return 6;
+  void* parent_view = flight_get_node_parent(added);
+  if (!parent_view || flight_get_node_child_count(parent_view) != 1) return 7;
+  void* runtime = flight_get_sprite_runtime(added);
+  flight_set_sprite_runtime_local_bounds_texture_version(runtime, 91);
+  if (flight_get_sprite_runtime_local_bounds_texture_version(runtime) != 91) return 8;
+  void* clone = flight_clone_sprite(added);
+  if (flight_get_node_child_count(clone) != 0) return 9;
+  void* removed = flight_remove_node_child(parent_view, added);
+  if (flight_get_node_child_count(parent) != 0 || flight_get_node_parent(removed)) return 10;
+  for (void* handle : {removed, clone, runtime, parent_view, added, child, parent}) flight_free_ref(handle);
   std::puts("FLIGHT_NATIVE_FFI_OK");
   return 0;
 }

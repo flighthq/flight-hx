@@ -23,6 +23,10 @@
       {
         "path": "patches/flight/0005-bitmap-ownership.patch",
         "sha256": "39f9bfe6abb6b44ae938fdc69c8bd72b77ed9ae9ea6a60f4f99bb6c9766e694f"
+      },
+      {
+        "path": "patches/flight/0006-ref-handles.patch",
+        "sha256": "86a02ee4bd96bd8f913cee9a41c4b28e92ee2dab1a45bac6480ba56ce88e68d2"
       }
     ]
   },
@@ -33,10 +37,10 @@
     "platform": "linux",
     "architecture": "x64"
   },
-  "nativeHeaderSha256": "74e03ae38e3bc6d99b687a5c8abae656cdd0d7def0295407a94c20b5475d3bb3",
+  "nativeHeaderSha256": "1995221d6ac2a3f0b9972a6bd1fb97fd6056c6a6235463ba76510a3a35a92078",
   "offsetsSha256": "b6a208ea570b8ac45d6439ca4a43c98ef66b03f9a10afeec54e81d5502d1d390",
-  "ffiNamesSha256": "e002d35144db7f52582d307bebe5a865ef354a978cc446e49862c7f4d426b169",
-  "ffiFunctionCount": 5724,
+  "ffiNamesSha256": "c423897c467e821e6655dbcb23ac0e4517e528f620dbf5f38a75d9ffd8d3aa1a",
+  "ffiFunctionCount": 5726,
   "files": [
     {
       "path": "flight/Aabb.hx",
@@ -956,7 +960,7 @@
     },
     {
       "path": "flight/Entity.hx",
-      "sha256": "214064ad3fe371ade97fd96fd49c088913abdefcc8b0c3bc7d7e60253e88a7c4"
+      "sha256": "9c91b78475a7fd185d03856a5fb020b87856c5827c39be2ff3f75f19a3baa0ac"
     },
     {
       "path": "flight/EntityRuntimeWriteExplanation.hx",
@@ -1732,7 +1736,7 @@
     },
     {
       "path": "flight/Node.hx",
-      "sha256": "658a928749a96de874305cf215a0f9dd3f93ad9fc669a4e42fb003eae740ebf0"
+      "sha256": "072bc9252e03456eab596597fb33931868787a21b156655cd33db7e12728d51a"
     },
     {
       "path": "flight/Node2DAnimationPath.hx",
@@ -5764,7 +5768,7 @@
     },
     {
       "path": "flight/_cpp/Rectangle.hx",
-      "sha256": "da2077fcab2b48c5b261362ef61a902201bdad387f46ccb7fcc60f49f0950b50"
+      "sha256": "a02669f68c0549fc9c6a53bbe8a10b3c2d907ec7290ba60bd0ce37a5ebf8cde7"
     },
     {
       "path": "flight/_cpp/RenderQueue.hx",
@@ -6960,7 +6964,7 @@
     },
     {
       "path": "flight/_cpp/_fn/Entity.hx",
-      "sha256": "a0680bc4391683cb1e669628ceece0ed31c82c312297c3cc9d6b57302d53dae7"
+      "sha256": "79cdb09fe37c1529ed77995aadda8f877b3c705398c8763a567e2d69fd84978d"
     },
     {
       "path": "flight/_cpp/_fn/Flow.hx",
@@ -7012,7 +7016,7 @@
     },
     {
       "path": "flight/_cpp/_fn/Node.hx",
-      "sha256": "d4e32eca5281b8bcfe14472da98bc0c1c545f5e74e01e98f5f96eb4e785727b8"
+      "sha256": "c2882ea938b8a07e77dc598d41c470e7114b9eb74dc0d1be4289ee8c5516e891"
     },
     {
       "path": "flight/_cpp/_fn/Particleemitter.hx",
@@ -7292,7 +7296,7 @@
     },
     {
       "path": "flight/_hl/AudioBuffer.hx",
-      "sha256": "cd31bb97fd5b60bdd9cc9f4ddeff724ee3b8e0cc2590240489da7882010d7980"
+      "sha256": "3eef1ba56aa4e44af77d830e5de161d5955a8d629c5fedb4c57c90c8adf2612b"
     },
     {
       "path": "flight/_hl/AudioDecoderRegistry.hx",
@@ -7520,7 +7524,7 @@
     },
     {
       "path": "flight/_hl/ClipRegion.hx",
-      "sha256": "a8693c740f00172a20f342b028723db7d827b94f2f1e5534c5eaafa6f8e22a3d"
+      "sha256": "cfc7089a798d75e53a8d3072da5f2c4f53216d5cc716fdf3eec162d68e8ac346"
     },
     {
       "path": "flight/_hl/ClipRegionContoursExplanation.hx",
@@ -7532,7 +7536,7 @@
     },
     {
       "path": "flight/_hl/Clock.hx",
-      "sha256": "db64e87e8a2b9692770f8e6d048c1d28fc20474a12f2c5e4b64346d89ddd3d6d"
+      "sha256": "9c8c0660936caf455c4eebae9a991335cb90840588087e2907d7e36f0db520fa"
     },
     {
       "path": "flight/_hl/ClockOptions.hx",
@@ -7764,7 +7768,7 @@
     },
     {
       "path": "flight/_hl/ConvolutionEffect.hx",
-      "sha256": "eeafa47e0550c60c4bb4cdd19dc914d565cdf1d420121271006395f58236b6bf"
+      "sha256": "828f684b3418c2b7ef6b595162553f49c0fbb97f995fdefc1ab251dddca73e4f"
     },
     {
       "path": "flight/_hl/CreateExternalTextureOptions.hx",
@@ -8192,7 +8196,7 @@
     },
     {
       "path": "flight/_hl/InputManager.hx",
-      "sha256": "82701e40af8f4785aeedddf06676d69c200497e89413edcdd60541ac9fc8586c"
+      "sha256": "f2a0f1dc23cfed7b8334a630772550dd4735c2000f21c7f678d4e3c85a214765"
     },
     {
       "path": "flight/_hl/InputPointerData.hx",
@@ -8504,7 +8508,7 @@
     },
     {
       "path": "flight/_hl/OrthographicProjection.hx",
-      "sha256": "2f283c9093d77e1d03034c8ef6f0935514d9838a793ab8b79f3e0486d46cfe2d"
+      "sha256": "cc46e04375d1ff27a54b8f7ccb0a6e539d1cc3573d0abc9bd48968c74e4e7e87"
     },
     {
       "path": "flight/_hl/OrthographicProjectionOptions.hx",
@@ -8672,7 +8676,7 @@
     },
     {
       "path": "flight/_hl/PerspectiveProjection.hx",
-      "sha256": "d978c3336100f26591c9518072140f6a244ab26817bbb8e05a478f24dbd66321"
+      "sha256": "eb615e202bdf5cad9497f1c7129caf7de3cddf190662b9a33501318855ef4517"
     },
     {
       "path": "flight/_hl/PerspectiveProjectionOptions.hx",
@@ -8716,7 +8720,7 @@
     },
     {
       "path": "flight/_hl/Physics2DCollider.hx",
-      "sha256": "dddbe8576d436eebe2eec0f60e366b6e21acd1b709b24b8bd9bc8e8a51ae2778"
+      "sha256": "c43cfd5cf914a11c0bfb4a23c82c4f0e149f092fe5f5b7de373852135f6f2f5a"
     },
     {
       "path": "flight/_hl/Physics2DCollisionExplanation.hx",
@@ -8752,7 +8756,7 @@
     },
     {
       "path": "flight/_hl/Physics2DDistanceJoint.hx",
-      "sha256": "bfb825490a668105b9038a179450691fb429c8b50c93baa0d647edbdb839110e"
+      "sha256": "3c3eb6573784c673217b2238c35ab7d94d9f67d72f01b1a7b86c2c436837d7c5"
     },
     {
       "path": "flight/_hl/Physics2DDistanceJointOptions.hx",
@@ -8760,7 +8764,7 @@
     },
     {
       "path": "flight/_hl/Physics2DGearJoint.hx",
-      "sha256": "14c4dd1110cb5101b42bbeca6f7d8450080ccffc723c85c0271c483009566fc6"
+      "sha256": "13b68f0403c8c6d8e99b8fc969b24fbd50106ecd9259eda0d4c73a77b95c928f"
     },
     {
       "path": "flight/_hl/Physics2DGearJointOptions.hx",
@@ -8808,7 +8812,7 @@
     },
     {
       "path": "flight/_hl/Physics2DMouseJoint.hx",
-      "sha256": "e7efa548cfadd227b4158bd80d3f25572515abd4bebe4dafdbb7fb9a7483eb4d"
+      "sha256": "158cfa2f97d2c1795f3f4812d3c9010ca17ecd94bfdbabbfef1d87ce6f1e1278"
     },
     {
       "path": "flight/_hl/Physics2DMouseJointOptions.hx",
@@ -8816,11 +8820,11 @@
     },
     {
       "path": "flight/_hl/Physics2DPrismaticJoint.hx",
-      "sha256": "c3ca298c12aa02e13a47b9c92bdf51acda06fbe8a191146ea59cd5e1e0ead32a"
+      "sha256": "f67ffa38fa835d8419c907faadbb9a3c607dfefac9252f31348438b33567e730"
     },
     {
       "path": "flight/_hl/Physics2DPulleyJoint.hx",
-      "sha256": "6ae794d510abfc14c495f19c5b79ede433a37680ff1ad62a4e8fa2ed6e299cea"
+      "sha256": "38d778060133a70768ba912b101469901ff0e1d122e8564319986440c0ec48e0"
     },
     {
       "path": "flight/_hl/Physics2DPulleyJointOptions.hx",
@@ -8848,11 +8852,11 @@
     },
     {
       "path": "flight/_hl/Physics2DRevoluteJoint.hx",
-      "sha256": "f9c933cf5edd240e2bbe0cacfd3db1fc70723ead5ecfc2ee16f005482fdf2923"
+      "sha256": "19caf0d30523ec615aef25678a08105f214e7d87b0e742bafd1aaae9edb82e32"
     },
     {
       "path": "flight/_hl/Physics2DRopeJoint.hx",
-      "sha256": "c3d3ddbdf767a4c51214bee297b2f96853a8a93b9923942770e2039ba4e22d24"
+      "sha256": "88f650208bd1a6f268baa0e8957835249a0c19225dc4d4404f13b7a3e3694986"
     },
     {
       "path": "flight/_hl/Physics2DRopeJointOptions.hx",
@@ -8876,11 +8880,11 @@
     },
     {
       "path": "flight/_hl/Physics2DWeldJoint.hx",
-      "sha256": "9e048e67384fa00378d5dc59985c9f9849895a369bd518a24dbd081eea92f324"
+      "sha256": "73ad23a0e59734683b9dbe84c442d764d7aa20cbbb299f63783c528f5565a708"
     },
     {
       "path": "flight/_hl/Physics2DWheelJoint.hx",
-      "sha256": "8fe2213b87162283a30d204b6b68f1d1e5688800fb12fbbe2c8cb6bcef840d1d"
+      "sha256": "c2b690439e358bf149763410d403531d5a39446b1ddcf48c478682662a2c9060"
     },
     {
       "path": "flight/_hl/Physics2DWorld.hx",
@@ -9000,7 +9004,7 @@
     },
     {
       "path": "flight/_hl/Rectangle.hx",
-      "sha256": "ecde8ee5046586047d5bd6093c560e42e0ef0a01c51834ffb197ed6d84ac566a"
+      "sha256": "0230b84f069f488014a23de21ef03ee0f2d1f02eb18676169c8fa570d35008c6"
     },
     {
       "path": "flight/_hl/RenderQueue.hx",
@@ -9048,7 +9052,7 @@
     },
     {
       "path": "flight/_hl/RigidBody2D.hx",
-      "sha256": "014433f2636e2f5e0e8af8f581946aa9601e342efe59b8600f1a6691e7e375ab"
+      "sha256": "2d9ac99f358889f4b52ca1b226b32e6e0d25c407301712825850cec9f55ba9b3"
     },
     {
       "path": "flight/_hl/RigidBody3D.hx",
@@ -9156,7 +9160,7 @@
     },
     {
       "path": "flight/_hl/Scene2D.hx",
-      "sha256": "44fda29167b56f68b4a421d8341695c0c743e561d510ff9b752f71b8b25a5499"
+      "sha256": "145324b80af17cb711d04f90ae40e690922254889024ffbc1d95a49b8a6c27da"
     },
     {
       "path": "flight/_hl/Scene2DFitContext.hx",
@@ -9440,7 +9444,7 @@
     },
     {
       "path": "flight/_hl/SpriteRuntime.hx",
-      "sha256": "2d7f28a5cf5fe4b35b115cb43ee547f2dd105b8af051aa27fafd024fd41624cf"
+      "sha256": "27bcc2a9904e5a97b2c3cc62d8aaf8c253551fe0503c6943e37bfa415502737b"
     },
     {
       "path": "flight/_hl/Spritesheet.hx",
@@ -9448,7 +9452,7 @@
     },
     {
       "path": "flight/_hl/SpritesheetAnimation.hx",
-      "sha256": "c58fc5c5287be7640370692fecaed7cde55b06c68762f689e74e2ddab5ce3adf"
+      "sha256": "256b45a6e6aa7fc062526127e49eb4942b36126e45a2910d749dfeda4f9153e5"
     },
     {
       "path": "flight/_hl/SpritesheetAnimationData.hx",
@@ -9476,7 +9480,7 @@
     },
     {
       "path": "flight/_hl/SpritesheetFrame.hx",
-      "sha256": "c5ea0aeeb6b364637dfe7d4fc08d56e3de5317a7b794c8883eab19f63d6815cc"
+      "sha256": "1fe91ea32710518a061adb1b776a7bd1ff9262c64b80e58f7924e9cfdfffacba"
     },
     {
       "path": "flight/_hl/SpritesheetFrameData.hx",
@@ -9496,7 +9500,7 @@
     },
     {
       "path": "flight/_hl/SpritesheetPlayer.hx",
-      "sha256": "bc54d9fee4f374e981c267bd34a11ca34311b4eea139ceb7a7766dff265cdfca"
+      "sha256": "db7d2307d6b7f4da2ccc499e3821b8bc5f168630094e351fd05f806372a623a7"
     },
     {
       "path": "flight/_hl/SpritesheetPlayerPool.hx",
@@ -9720,7 +9724,7 @@
     },
     {
       "path": "flight/_hl/TextureAtlas.hx",
-      "sha256": "2e11e708ab73bb8adc4a352fed074e816668197fd4f66847c43e05d1bf6dbe69"
+      "sha256": "b0cbd7fe281f11e8df3f616b0cb9de2389463d3e9fd0da8f828fb12f07c5511a"
     },
     {
       "path": "flight/_hl/TextureAtlasAsepriteArrayFrame.hx",
@@ -9772,7 +9776,7 @@
     },
     {
       "path": "flight/_hl/TextureAtlasRegion.hx",
-      "sha256": "5404d08103be382d2ba76fe30897c920f595b2d10d55044da264440d8ddf11a5"
+      "sha256": "020b4b04134820c40aaaf3a4e197ca8d0b8a283ebf634b98adfd3cfcf01c96fd"
     },
     {
       "path": "flight/_hl/TextureAtlasRegionLike.hx",
@@ -9932,7 +9936,7 @@
     },
     {
       "path": "flight/_hl/Timeline.hx",
-      "sha256": "fa2eb9759b416ebf299bc847f5b92f01ae72a99aa98ff79a9430f89ddae5c679"
+      "sha256": "91e401c08ac46973c7b13be3d688904c3f266c88b69247595d7800776566f95a"
     },
     {
       "path": "flight/_hl/TimelineFrameArg.hx",
@@ -10196,7 +10200,7 @@
     },
     {
       "path": "flight/_hl/_fn/Entity.hx",
-      "sha256": "215374b944b6760960de321009af5ce60988addc00ddc6032761916acd8884de"
+      "sha256": "210f044b28db433ecf9370502f6633af7be5978b8c14cd4639a46124613719b8"
     },
     {
       "path": "flight/_hl/_fn/Flow.hx",
@@ -10248,7 +10252,7 @@
     },
     {
       "path": "flight/_hl/_fn/Node.hx",
-      "sha256": "8a1b4d1a0e7eb2ad9b064c8e1e163188c6a2fd64b5ed1e1989949aa341c0b188"
+      "sha256": "f7961927fe78a89425407de0ebaa833c78142ea68773c5899aa23e783a807a7a"
     },
     {
       "path": "flight/_hl/_fn/Particleemitter.hx",
@@ -12236,7 +12240,7 @@
     },
     {
       "path": "flight/_js/Rectangle.hx",
-      "sha256": "a4b4b41017bb0c6c302ea49ace62c8dcefee85867c0ecba06eec5d0cdd201f1e"
+      "sha256": "c11099f53aed78d44d8d482705826ff8a0b1ae8d28e6376fc61a05e1ec0191ac"
     },
     {
       "path": "flight/_js/RenderQueue.hx",
@@ -13432,7 +13436,7 @@
     },
     {
       "path": "flight/_js/_fn/Entity.hx",
-      "sha256": "80347465aa3fd9031ff0d95924aa2c27df5487a10efd7d0fdd7c851962f7a010"
+      "sha256": "fc0d059a2a213bac141dbf666e710756ec7c4fe52f9e1da8aaeaea0b8775bda6"
     },
     {
       "path": "flight/_js/_fn/Flow.hx",
@@ -13484,7 +13488,7 @@
     },
     {
       "path": "flight/_js/_fn/Node.hx",
-      "sha256": "ce36e63d495f4e0ac3a9be1c9c56bb8bd36f6ba042b839d699d94f940c0ab446"
+      "sha256": "d8ce585b257d5d521dba57895294d04352166210dba705a054f09810134ef205"
     },
     {
       "path": "flight/_js/_fn/Particleemitter.hx",

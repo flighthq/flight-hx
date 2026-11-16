@@ -142,6 +142,9 @@ abstract Rectangle(Dynamic) {
 	inline public function free():Void {
 		flight._js._fn.Geometry.freeRectangle(cast this);
 	}
+	inline public function computeNodeBounds(source:Dynamic, targetCoordinateSpace:Null<Dynamic>):Void {
+		flight._js._fn.Node.computeNodeBoundsRectangle(cast this, source, targetCoordinateSpace);
+	}
 	inline public function computeNodeRootLocalBounds(root:Dynamic):Void {
 		flight._js._fn.Node.computeNodeRootLocalBoundsRectangle(cast this, root);
 	}

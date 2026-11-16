@@ -1,6 +1,9 @@
 import flight.Math;
 import flight.Geometry;
 import flight.Bitmap;
+import flight.Scene2D;
+import flight.Node;
+import flight.Entity;
 
 class Smoke {
   public static function main() {
@@ -31,6 +34,27 @@ class Smoke {
     if (getBitmapPixel(bitmap, 0, 0) != 0x55667711)
       throw 'caller bitmap is no longer writable';
     freeBitmap(bitmap);
+    final parent = createDisplayObject();
+    final child = createSprite();
+    final added = addNodeChild(parent, child);
+    if (getNodeChildCount(parent) != 1) throw 'concrete handle upcast failed';
+    final parentView = getNodeParent(added);
+    if (getNodeChildCount(parentView) != 1) throw 'returned node handle failed';
+    final runtime:flight.SpriteRuntime = cast getSpriteRuntime(cast added);
+    runtime.localBoundsTextureVersion = haxe.Int64.ofInt(91);
+    if (haxe.Int64.compare(runtime.localBoundsTextureVersion, haxe.Int64.ofInt(91)) != 0)
+      throw 'Ref runtime field access failed';
+    final cloned = cloneSprite(cast added);
+    if (getNodeChildCount(cloned) != 0) throw 'concrete Ref receiver failed';
+    final removed = removeNodeChild(parentView, added);
+    if (getNodeChildCount(parent) != 0) throw 'node removal failed';
+    freeRef(removed);
+    freeRef(cloned);
+    freeRef(cast runtime);
+    freeRef(parentView);
+    freeRef(added);
+    freeRef(child);
+    freeRef(parent);
     trace('FLIGHT_FFI_SMOKE_OK');
   }
 }

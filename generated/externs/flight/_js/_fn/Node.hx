@@ -2,6 +2,8 @@ package flight._js._fn;
 
 @:jsRequire("@flighthq/node")
 extern class Node {
+	@:native("computeNodeBoundsRectangle")
+	public static function computeNodeBoundsRectangle(out:flight._js.Rectangle, source:Dynamic, targetCoordinateSpace:Null<Dynamic>):Void;
 	@:native("computeNodeRootLocalBoundsRectangle")
 	public static function computeNodeRootLocalBoundsRectangle(out:flight._js.Rectangle, root:Dynamic):Void;
 	@:native("ensureNodeLocalBoundsRectangle")

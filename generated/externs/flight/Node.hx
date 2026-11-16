@@ -1,6 +1,23 @@
 package flight;
 
 #if (js && flight_esm)
+extern inline function computeNodeBoundsRectangle(out:Rectangle, source:Dynamic, targetCoordinateSpace:Null<Dynamic>):Void {
+	flight._js._fn.Node.computeNodeBoundsRectangle(out, source, targetCoordinateSpace);
+}
+#else
+extern inline function computeNodeBoundsRectangle(out:Rectangle, source:Dynamic, targetCoordinateSpace:Dynamic):Void {
+#if hl
+	flight._hl._fn.Node.computeNodeBoundsRectangle(out, source, targetCoordinateSpace);
+#elseif cpp
+	flight._cpp._fn.Node.computeNodeBoundsRectangle(out, source, targetCoordinateSpace);
+#elseif (js && flight_esm)
+	flight._js._fn.Node.computeNodeBoundsRectangle(out, source, targetCoordinateSpace);
+#else
+	#error "flight.Node: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
 extern inline function computeNodeRootLocalBoundsRectangle(out:Rectangle, root:Dynamic):Void {
 	flight._js._fn.Node.computeNodeRootLocalBoundsRectangle(out, root);
 }

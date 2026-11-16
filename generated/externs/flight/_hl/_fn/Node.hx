@@ -1,6 +1,8 @@
 package flight._hl._fn;
 
 extern class Node {
+	@:hlNative("flight", "flight_compute_node_bounds_rectangle")
+	public static function computeNodeBoundsRectangle(out:flight._hl.Rectangle, source:hl.Bytes, targetCoordinateSpace:hl.Bytes):Void;
 	@:hlNative("flight", "flight_compute_node_root_local_bounds_rectangle")
 	public static function computeNodeRootLocalBoundsRectangle(out:flight._hl.Rectangle, root:hl.Bytes):Void;
 	@:hlNative("flight", "flight_ensure_node_local_bounds_rectangle")

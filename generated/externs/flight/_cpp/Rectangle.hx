@@ -162,6 +162,9 @@ abstract Rectangle(cpp.Star<cpp.Void>) {
 	extern inline public function free():Void {
 		flight._cpp._fn.Geometry.freeRectangle(cast this);
 	}
+	extern inline public function computeNodeBounds(source:cpp.Star<cpp.Void>, targetCoordinateSpace:cpp.Star<cpp.Void>):Void {
+		flight._cpp._fn.Node.computeNodeBoundsRectangle(cast this, source, targetCoordinateSpace);
+	}
 	extern inline public function computeNodeRootLocalBounds(root:cpp.Star<cpp.Void>):Void {
 		flight._cpp._fn.Node.computeNodeRootLocalBoundsRectangle(cast this, root);
 	}

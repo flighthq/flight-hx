@@ -7,6 +7,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+void flight_free_ref(void * arg0);
 void * flight_read_abc_file(void * arg0, size_t arg1);
 void * flight_read_abc_instructions(void * arg0, size_t arg1);
 uint16_t flight_get_abc_file_major_version(void * arg0);
@@ -2464,6 +2465,7 @@ bool flight_get_movie_clip_guard_state_movie_clip_guards_enabled(void * arg0);
 bool flight_set_movie_clip_guard_state_movie_clip_guards_enabled(void * arg0, bool arg1);
 bool flight_get_spritesheet_timeline_source_explanation_direction_materialized(void * arg0);
 bool flight_set_spritesheet_timeline_source_explanation_direction_materialized(void * arg0, bool arg1);
+void flight_compute_node_bounds_rectangle(void * arg0, void * arg1, void * arg2);
 void flight_compute_node_root_local_bounds_rectangle(void * arg0, void * arg1);
 void flight_ensure_node_local_bounds_rectangle(void * arg0);
 void flight_ensure_node_parent_bounds_rectangle(void * arg0);

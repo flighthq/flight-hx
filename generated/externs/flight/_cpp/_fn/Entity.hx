@@ -13,4 +13,6 @@ extern class Entity {
 	public static function setEntityRuntimeGuardMode(enabled:Bool):Void;
 	@:native("flight_free_entity_runtime_write_explanation")
 	public static function freeEntityRuntimeWriteExplanation(ptr:flight._cpp.EntityRuntimeWriteExplanation):Void;
+	@:native("flight_free_ref")
+	public static function freeRef(ptr:cpp.Star<cpp.Void>):Void;
 }

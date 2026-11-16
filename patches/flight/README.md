@@ -56,6 +56,16 @@ and replacement now own independent storage, and releasing a region leaves the
 caller's bitmap readable, writable and independently releasable. C and Haxe
 smoke tests cover that lifetime sequence.
 
+`0006-ref-handles.patch` gives every returned `Ref<T>` one owning handle with
+typed views, including correctly coerced `Node`, `Node2D` and `Node3D` references.
+Borrowed concrete receivers and runtime field access retain the appropriate
+`RwLock` guard. The adapter distinguishes handles from ordinary owned value
+pointers, and HL uses native accessors for fields of Ref-backed types.
+`flight.Entity.freeRef` drops the handle and all its Arc views; its JS form is a
+GC no-op. Rust tests verify hierarchy results, concrete receiver access and
+weak-reference expiry after destruction. This changes native handle encoding;
+regenerate externs and rebuild native binaries together.
+
 ## Applying upstream
 
 Use Rust 1.96.0 and Haxe 4.3.7 on PATH, and a clean Flight checkout at the
@@ -69,6 +79,7 @@ git apply /path/to/flight-hx/patches/flight/0002-js-esm.patch
 git apply /path/to/flight-hx/patches/flight/0003-portable-module-names.patch
 git apply /path/to/flight-hx/patches/flight/0004-hl-packed-floats.patch
 git apply /path/to/flight-hx/patches/flight/0005-bitmap-ownership.patch
+git apply /path/to/flight-hx/patches/flight/0006-ref-handles.patch
 cargo test -p flight-bindgen --bin flight-bindgen
 scripts/check-haxe-bindings.sh
 ```

@@ -151,6 +151,9 @@ abstract Rectangle(hl.Bytes) {
 	inline public function free():Void {
 		flight._hl._fn.Geometry.freeRectangle(cast this);
 	}
+	inline public function computeNodeBounds(source:hl.Bytes, targetCoordinateSpace:hl.Bytes):Void {
+		flight._hl._fn.Node.computeNodeBoundsRectangle(cast this, source, targetCoordinateSpace);
+	}
 	inline public function computeNodeRootLocalBounds(root:hl.Bytes):Void {
 		flight._hl._fn.Node.computeNodeRootLocalBoundsRectangle(cast this, root);
 	}
