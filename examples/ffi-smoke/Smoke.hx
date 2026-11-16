@@ -41,13 +41,19 @@ class Smoke {
     final parentView = getNodeParent(added);
     if (getNodeChildCount(parentView) != 1) throw 'returned node handle failed';
     final runtime:flight.SpriteRuntime = cast getSpriteRuntime(cast added);
+    #if js
+    runtime.localBoundsTextureVersion = 91;
+    if (runtime.localBoundsTextureVersion != 91) throw 'runtime field access failed';
+    #else
     runtime.localBoundsTextureVersion = haxe.Int64.ofInt(91);
     if (haxe.Int64.compare(runtime.localBoundsTextureVersion, haxe.Int64.ofInt(91)) != 0)
       throw 'Ref runtime field access failed';
+    #end
     final cloned = cloneSprite(cast added);
     if (getNodeChildCount(cloned) != 0) throw 'concrete Ref receiver failed';
     final removed = removeNodeChild(parentView, added);
     if (getNodeChildCount(parent) != 0) throw 'node removal failed';
+    if (getNodeParent(removed) != null) throw 'absent parent did not return null';
     freeRef(removed);
     freeRef(cloned);
     freeRef(cast runtime);
