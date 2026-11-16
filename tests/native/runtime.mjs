@@ -73,7 +73,10 @@ for (const target of [host.limeTarget, 'hl']) {
   const outputDirectory = path.join(work, `Export/${target === 'mac' ? 'macos' : target}`);
   const bin = path.join(outputDirectory, 'bin', ...(process.platform === 'darwin' ? ['FlightSmoke.app/Contents/MacOS'] : []));
   assert.ok(existsSync(path.join(bin, host.core)), 'Lime did not deploy the shared Flight runtime');
-  if (target === 'hl') assert.ok(existsSync(path.join(bin, 'flight.hdll')), 'Lime did not select the HashLink adapter');
+  if (target === 'hl') {
+    assert.ok(existsSync(path.join(bin, 'flight.hdll')), 'Lime did not select the HashLink adapter');
+    if (process.platform === 'win32') assert.ok(existsSync(path.join(bin, 'flight.lib')), 'Lime did not deploy the HashLink adapter import library');
+  }
   const hxml = readFileSync(path.join(outputDirectory, 'haxe/release.hxml'), 'utf8').replaceAll('\\', '/');
   assert.ok(!hxml.includes(path.join(root, '.haxelib/flight').replaceAll('\\', '/')), 'Lime used a parent Flight installation');
 }

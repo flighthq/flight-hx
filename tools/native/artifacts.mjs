@@ -24,6 +24,7 @@ export function nativePayload(root, { allowEmpty = false } = {}) {
     if (m.hashLink) {
       if (target.static) throw new Error('This package supports HashLink adapters only on desktop');
       required.push(`ndll/${m.platform}/flight.hdll`);
+      if (target.importLibrary) required.push(`ndll/${m.platform}/flight.lib`);
     }
     if (parsed.nativeHeaderSha256 && m.files.find((file) => file.path === 'native/include/flight_ffi.h')?.sha256 !== parsed.nativeHeaderSha256) throw new Error('Native header differs from the extern ABI provenance');
     const actual = m.files.map((file) => file.path).sort();

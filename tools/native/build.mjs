@@ -78,6 +78,9 @@ if (hlInclude) {
       path.join(emitted, 'flight_hl.c'), '-L', path.join(root, `native/bin/${platform}`), '-lflight_ffi', `-Wl,-rpath,${rpath}`, '-o', destination], { encoding: 'utf8' });
   if (compile.status !== 0) throw new Error(`HL adapter build failed: ${compile.error ?? ''}${compile.stderr}`);
   files.push(`ndll/${platform}/flight.hdll`);
+  // Lime copies the adapter import library alongside the hdll on Windows,
+  // including for bytecode consumers. This is distinct from the core FFI lib.
+  if (target.importLibrary) stage(path.join(coreDirectory, 'flight_hl.lib'), `ndll/${platform}/flight.lib`);
 }
 const names = [...new Set([...readFileSync(path.join(emitted, 'ffi_generated.rs'), 'utf8').matchAll(/\bfn (flight_[a-z0-9_]+)\b/gu)].map((m) => m[1]))].sort();
 if (digest(`${names.join('\n')}\n`) !== externs.ffiNamesSha256) throw new Error('Native ABI names differ from extern generation');

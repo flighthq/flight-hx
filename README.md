@@ -55,6 +55,7 @@ native/bin/<platform>/              shared Flight runtime (.so/.dylib/.dll)
 native/lib/<platform>/              iOS static archive or Windows import library
 native/artifacts/<platform>.json    source identity and artifact checksums
 ndll/<platform>/flight.hdll         HashLink adapter
+ndll/Windows64/flight.lib           HashLink adapter import library for Lime
 ```
 
 Ordinary shared libraries live in `native/bin`; `ndll` is used only for the
