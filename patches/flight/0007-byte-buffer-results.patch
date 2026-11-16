@@ -243,7 +243,7 @@ new file mode 100644
 +pub fn emit_native(out: &Path, hl: bool) {
 +    let package = if hl { "flight._hl" } else { "flight._cpp" };
 +    let pointer = if hl { "hl.Bytes" } else { "cpp.Star<cpp.Void>" };
-+    let destination = if hl { "result.getData()" } else { "cast cpp.Pointer.ofArray(result.getData()).raw" };
++    let destination = if hl { "result.getData().bytes" } else { "cast cpp.Pointer.ofArray(result.getData()).raw" };
 +    let mut source = format!("package {package};\n\n// The result owns its Rust bytes until dispose(); data is a borrowed view.\nprivate extern class NativeByteBuffer_Ffi {{\n");
 +    for (method, symbol, parameters, result) in [
 +        ("length", "flight_get_byte_buffer_length", format!("ptr:{pointer}"), "Int"),

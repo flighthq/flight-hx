@@ -67,7 +67,7 @@ class Smoke {
     #if cpp
     final inputData = cpp.Pointer.ofArray(input.getData()).raw;
     #else
-    final inputData = input.getData();
+    final inputData = input.getData().bytes;
     #end
     final compressed = compressDeflate(inputData, input.length);
     if (compressed.length <= 0) throw 'compressed buffer length missing';

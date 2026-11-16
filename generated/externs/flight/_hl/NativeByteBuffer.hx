@@ -26,7 +26,7 @@ abstract NativeByteBuffer(hl.Bytes) {
 	public inline function toBytes():haxe.io.Bytes {
 		final count = length;
 		final result = haxe.io.Bytes.alloc(count);
-		if (count > 0 && NativeByteBuffer_Ffi.copy(this, result.getData(), count) != count) throw 'Byte buffer copy failed';
+		if (count > 0 && NativeByteBuffer_Ffi.copy(this, result.getData().bytes, count) != count) throw 'Byte buffer copy failed';
 		return result;
 	}
 	public inline function dispose():Void { NativeByteBuffer_Ffi.free(this); }
