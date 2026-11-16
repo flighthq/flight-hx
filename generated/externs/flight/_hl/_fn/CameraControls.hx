@@ -28,7 +28,7 @@ extern class CameraControls {
 	@:hlNative("flight", "flight_update_fly_camera_controller")
 	public static function updateFlyCameraController(controller:flight._hl.FlyCameraController, camera:flight._hl.Camera3D, deltaTime:Single):Void;
 	@:hlNative("flight", "flight_update_camera_2d_follow")
-	public static function updateCamera2dFollow(guardState:Dynamic, camera:flight._hl.Camera2D, viewportWidth:Single, viewportHeight:Single, targetX:Single, targetY:Single, deltaTime:Single, options:flight._hl.Camera2DFollowOptions):Void;
+	public static function updateCamera2dFollow(guardState:hl.Bytes, camera:flight._hl.Camera2D, viewportWidth:Single, viewportHeight:Single, targetX:Single, targetY:Single, deltaTime:Single, options:flight._hl.Camera2DFollowOptions):Void;
 	@:hlNative("flight", "flight_frame_orbit_camera_controller_to_sphere")
 	public static function frameOrbitCameraControllerToSphere(controller:flight._hl.OrbitCameraController, projection:flight._hl.Projection, sphere:flight._hl.BoundingSphere, aspect:Single, padding:Single):Bool;
 	@:hlNative("flight", "flight_get_perspective_projection_frame_distance_to_sphere")

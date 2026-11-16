@@ -10,5 +10,5 @@ abstract RiveProperty(cpp.Star<cpp.Void>) {
 
 	inline function get_key():haxe.Int64 return RiveProperty_Ffi.get_key(this);
 
-	inline function set_key(value:haxe.Int64):haxe.Int64 return RiveProperty_Ffi.set_key(this, value);
+	inline function set_key(value:haxe.Int64):haxe.Int64 { RiveProperty_Ffi.set_key(this, value); return value; }
 }

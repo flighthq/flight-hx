@@ -16,20 +16,20 @@ abstract BitmapRegion(cpp.Star<cpp.Void>) {
 
 	inline function get_x():Int return BitmapRegion_Ffi.get_x(this);
 
-	inline function set_x(value:Int):Int return BitmapRegion_Ffi.set_x(this, value);
+	inline function set_x(value:Int):Int { BitmapRegion_Ffi.set_x(this, value); return value; }
 	public var y(get, set):Int;
 
 	inline function get_y():Int return BitmapRegion_Ffi.get_y(this);
 
-	inline function set_y(value:Int):Int return BitmapRegion_Ffi.set_y(this, value);
+	inline function set_y(value:Int):Int { BitmapRegion_Ffi.set_y(this, value); return value; }
 	public var width(get, set):Int;
 
 	inline function get_width():Int return BitmapRegion_Ffi.get_width(this);
 
-	inline function set_width(value:Int):Int return BitmapRegion_Ffi.set_width(this, value);
+	inline function set_width(value:Int):Int { BitmapRegion_Ffi.set_width(this, value); return value; }
 	public var height(get, set):Int;
 
 	inline function get_height():Int return BitmapRegion_Ffi.get_height(this);
 
-	inline function set_height(value:Int):Int return BitmapRegion_Ffi.set_height(this, value);
+	inline function set_height(value:Int):Int { BitmapRegion_Ffi.set_height(this, value); return value; }
 }

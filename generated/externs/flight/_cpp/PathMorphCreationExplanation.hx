@@ -10,5 +10,5 @@ abstract PathMorphCreationExplanation(cpp.Star<cpp.Void>) {
 
 	inline function get_supported():Bool return PathMorphCreationExplanation_Ffi.get_supported(this);
 
-	inline function set_supported(value:Bool):Bool return PathMorphCreationExplanation_Ffi.set_supported(this, value);
+	inline function set_supported(value:Bool):Bool { PathMorphCreationExplanation_Ffi.set_supported(this, value); return value; }
 }

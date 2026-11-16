@@ -22,7 +22,7 @@ typedef Path = flight._js.Path;
 
 #end
 
-inline function cleanPath(source:Path, tolerance:Float, out:Path, flattenTolerance:Float):Void {
+extern inline function cleanPath(source:Path, tolerance:Float, out:Path, flattenTolerance:Float):Void {
 #if hl
 	flight._hl._fn.Path.cleanPath(source, tolerance, out, flattenTolerance);
 #elseif cpp
@@ -33,7 +33,7 @@ inline function cleanPath(source:Path, tolerance:Float, out:Path, flattenToleran
 	#error "flight.Path: no backend for this target."
 #end
 }
-inline function containsPathPoint(path:Path, px:Float, py:Float, tolerance:Float):Bool {
+extern inline function containsPathPoint(path:Path, px:Float, py:Float, tolerance:Float):Bool {
 #if hl
 	return flight._hl._fn.Path.containsPathPoint(path, px, py, tolerance);
 #elseif cpp
@@ -44,7 +44,7 @@ inline function containsPathPoint(path:Path, px:Float, py:Float, tolerance:Float
 	#error "flight.Path: no backend for this target."
 #end
 }
-inline function clonePath(source:Path):Path {
+extern inline function clonePath(source:Path):Path {
 #if hl
 	return flight._hl._fn.Path.clonePath(source);
 #elseif cpp
@@ -55,7 +55,7 @@ inline function clonePath(source:Path):Path {
 	#error "flight.Path: no backend for this target."
 #end
 }
-inline function copyPath(out:Path, source:Path):Void {
+extern inline function copyPath(out:Path, source:Path):Void {
 #if hl
 	flight._hl._fn.Path.copyPath(out, source);
 #elseif cpp
@@ -66,7 +66,7 @@ inline function copyPath(out:Path, source:Path):Void {
 	#error "flight.Path: no backend for this target."
 #end
 }
-inline function dashPath(source:Path, dash:Dynamic, dashLen:Int, dashOffset:Float, out:Path, tolerance:Float):Void {
+extern inline function dashPath(source:Path, dash:Dynamic, dashLen:Int, dashOffset:Float, out:Path, tolerance:Float):Void {
 #if hl
 	flight._hl._fn.Path.dashPath(source, dash, dashLen, dashOffset, out, tolerance);
 #elseif cpp
@@ -77,7 +77,7 @@ inline function dashPath(source:Path, dash:Dynamic, dashLen:Int, dashOffset:Floa
 	#error "flight.Path: no backend for this target."
 #end
 }
-inline function decimatePath(source:Path, tolerance:Float, out:Path, flattenTolerance:Float):Void {
+extern inline function decimatePath(source:Path, tolerance:Float, out:Path, flattenTolerance:Float):Void {
 #if hl
 	flight._hl._fn.Path.decimatePath(source, tolerance, out, flattenTolerance);
 #elseif cpp
@@ -88,7 +88,7 @@ inline function decimatePath(source:Path, tolerance:Float, out:Path, flattenTole
 	#error "flight.Path: no backend for this target."
 #end
 }
-inline function explainPathMorphCreation(start:Path, end:Path):PathMorphCreationExplanation {
+extern inline function explainPathMorphCreation(start:Path, end:Path):PathMorphCreationExplanation {
 #if hl
 	return flight._hl._fn.Path.explainPathMorphCreation(start, end);
 #elseif cpp
@@ -99,7 +99,7 @@ inline function explainPathMorphCreation(start:Path, end:Path):PathMorphCreation
 	#error "flight.Path: no backend for this target."
 #end
 }
-inline function explainStrokePathTessellation(path:Path, style:StrokeStyle, tolerance:Float):StrokePathTessellationExplanation {
+extern inline function explainStrokePathTessellation(path:Path, style:StrokeStyle, tolerance:Float):StrokePathTessellationExplanation {
 #if hl
 	return flight._hl._fn.Path.explainStrokePathTessellation(path, style, tolerance);
 #elseif cpp
@@ -110,7 +110,7 @@ inline function explainStrokePathTessellation(path:Path, style:StrokeStyle, tole
 	#error "flight.Path: no backend for this target."
 #end
 }
-inline function fitPathCurves(source:Path, tolerance:Float, out:Path, flattenTolerance:Float):Void {
+extern inline function fitPathCurves(source:Path, tolerance:Float, out:Path, flattenTolerance:Float):Void {
 #if hl
 	flight._hl._fn.Path.fitPathCurves(source, tolerance, out, flattenTolerance);
 #elseif cpp
@@ -121,7 +121,7 @@ inline function fitPathCurves(source:Path, tolerance:Float, out:Path, flattenTol
 	#error "flight.Path: no backend for this target."
 #end
 }
-inline function getPathContourLengths(path:Path, tolerance:Float):Dynamic {
+extern inline function getPathContourLengths(path:Path, tolerance:Float):Dynamic {
 #if hl
 	return flight._hl._fn.Path.getPathContourLengths(path, tolerance);
 #elseif cpp
@@ -132,7 +132,7 @@ inline function getPathContourLengths(path:Path, tolerance:Float):Dynamic {
 	#error "flight.Path: no backend for this target."
 #end
 }
-inline function getPathCurvatureAtDistance(path:Path, distance:Float, tolerance:Float):Float {
+extern inline function getPathCurvatureAtDistance(path:Path, distance:Float, tolerance:Float):Float {
 #if hl
 	return flight._hl._fn.Path.getPathCurvatureAtDistance(path, distance, tolerance);
 #elseif cpp
@@ -143,7 +143,7 @@ inline function getPathCurvatureAtDistance(path:Path, distance:Float, tolerance:
 	#error "flight.Path: no backend for this target."
 #end
 }
-inline function getPathLength(path:Path, tolerance:Float):Float {
+extern inline function getPathLength(path:Path, tolerance:Float):Float {
 #if hl
 	return flight._hl._fn.Path.getPathLength(path, tolerance);
 #elseif cpp
@@ -154,7 +154,7 @@ inline function getPathLength(path:Path, tolerance:Float):Float {
 	#error "flight.Path: no backend for this target."
 #end
 }
-inline function getPathNearestPoint(path:Path, px:Float, py:Float, out:Vector2, tolerance:Float):Float {
+extern inline function getPathNearestPoint(path:Path, px:Float, py:Float, out:Vector2, tolerance:Float):Float {
 #if hl
 	return flight._hl._fn.Path.getPathNearestPoint(path, px, py, out, tolerance);
 #elseif cpp
@@ -165,7 +165,7 @@ inline function getPathNearestPoint(path:Path, px:Float, py:Float, out:Vector2, 
 	#error "flight.Path: no backend for this target."
 #end
 }
-inline function getPathPointAtDistance(path:Path, distance:Float, out:Vector2, tolerance:Float):Bool {
+extern inline function getPathPointAtDistance(path:Path, distance:Float, out:Vector2, tolerance:Float):Bool {
 #if hl
 	return flight._hl._fn.Path.getPathPointAtDistance(path, distance, out, tolerance);
 #elseif cpp
@@ -176,7 +176,7 @@ inline function getPathPointAtDistance(path:Path, distance:Float, out:Vector2, t
 	#error "flight.Path: no backend for this target."
 #end
 }
-inline function getPathPositionAtDistance(path:Path, distance:Float, pointOut:Vector2, tangentOut:Vector2, tolerance:Float):Bool {
+extern inline function getPathPositionAtDistance(path:Path, distance:Float, pointOut:Vector2, tangentOut:Vector2, tolerance:Float):Bool {
 #if hl
 	return flight._hl._fn.Path.getPathPositionAtDistance(path, distance, pointOut, tangentOut, tolerance);
 #elseif cpp
@@ -187,7 +187,7 @@ inline function getPathPositionAtDistance(path:Path, distance:Float, pointOut:Ve
 	#error "flight.Path: no backend for this target."
 #end
 }
-inline function getPathTangentAtDistance(path:Path, distance:Float, out:Vector2, tolerance:Float):Bool {
+extern inline function getPathTangentAtDistance(path:Path, distance:Float, out:Vector2, tolerance:Float):Bool {
 #if hl
 	return flight._hl._fn.Path.getPathTangentAtDistance(path, distance, out, tolerance);
 #elseif cpp
@@ -198,7 +198,7 @@ inline function getPathTangentAtDistance(path:Path, distance:Float, out:Vector2,
 	#error "flight.Path: no backend for this target."
 #end
 }
-inline function getCubicBezierCurvature(x0:Float, y0:Float, c1x:Float, c1y:Float, c2x:Float, c2y:Float, x1:Float, y1:Float, t:Float):Float {
+extern inline function getCubicBezierCurvature(x0:Float, y0:Float, c1x:Float, c1y:Float, c2x:Float, c2y:Float, x1:Float, y1:Float, t:Float):Float {
 #if hl
 	return flight._hl._fn.Path.getCubicBezierCurvature(x0, y0, c1x, c1y, c2x, c2y, x1, y1, t);
 #elseif cpp
@@ -209,7 +209,7 @@ inline function getCubicBezierCurvature(x0:Float, y0:Float, c1x:Float, c1y:Float
 	#error "flight.Path: no backend for this target."
 #end
 }
-inline function getCubicBezierPoint(x0:Float, y0:Float, c1x:Float, c1y:Float, c2x:Float, c2y:Float, x1:Float, y1:Float, t:Float, out:Vector2):Void {
+extern inline function getCubicBezierPoint(x0:Float, y0:Float, c1x:Float, c1y:Float, c2x:Float, c2y:Float, x1:Float, y1:Float, t:Float, out:Vector2):Void {
 #if hl
 	flight._hl._fn.Path.getCubicBezierPoint(x0, y0, c1x, c1y, c2x, c2y, x1, y1, t, out);
 #elseif cpp
@@ -220,7 +220,7 @@ inline function getCubicBezierPoint(x0:Float, y0:Float, c1x:Float, c1y:Float, c2
 	#error "flight.Path: no backend for this target."
 #end
 }
-inline function getCubicBezierTangent(x0:Float, y0:Float, c1x:Float, c1y:Float, c2x:Float, c2y:Float, x1:Float, y1:Float, t:Float, out:Vector2):Void {
+extern inline function getCubicBezierTangent(x0:Float, y0:Float, c1x:Float, c1y:Float, c2x:Float, c2y:Float, x1:Float, y1:Float, t:Float, out:Vector2):Void {
 #if hl
 	flight._hl._fn.Path.getCubicBezierTangent(x0, y0, c1x, c1y, c2x, c2y, x1, y1, t, out);
 #elseif cpp
@@ -231,7 +231,7 @@ inline function getCubicBezierTangent(x0:Float, y0:Float, c1x:Float, c1y:Float, 
 	#error "flight.Path: no backend for this target."
 #end
 }
-inline function getPathSegmentCurvatureAtParameter(path:Path, segmentIndex:Int, t:Float):Float {
+extern inline function getPathSegmentCurvatureAtParameter(path:Path, segmentIndex:Int, t:Float):Float {
 #if hl
 	return flight._hl._fn.Path.getPathSegmentCurvatureAtParameter(path, segmentIndex, t);
 #elseif cpp
@@ -242,7 +242,7 @@ inline function getPathSegmentCurvatureAtParameter(path:Path, segmentIndex:Int, 
 	#error "flight.Path: no backend for this target."
 #end
 }
-inline function getPathSegmentPointAtParameter(path:Path, segmentIndex:Int, t:Float, out:Vector2):Bool {
+extern inline function getPathSegmentPointAtParameter(path:Path, segmentIndex:Int, t:Float, out:Vector2):Bool {
 #if hl
 	return flight._hl._fn.Path.getPathSegmentPointAtParameter(path, segmentIndex, t, out);
 #elseif cpp
@@ -253,7 +253,7 @@ inline function getPathSegmentPointAtParameter(path:Path, segmentIndex:Int, t:Fl
 	#error "flight.Path: no backend for this target."
 #end
 }
-inline function getPathSegmentTangentAtParameter(path:Path, segmentIndex:Int, t:Float, out:Vector2):Bool {
+extern inline function getPathSegmentTangentAtParameter(path:Path, segmentIndex:Int, t:Float, out:Vector2):Bool {
 #if hl
 	return flight._hl._fn.Path.getPathSegmentTangentAtParameter(path, segmentIndex, t, out);
 #elseif cpp
@@ -264,7 +264,7 @@ inline function getPathSegmentTangentAtParameter(path:Path, segmentIndex:Int, t:
 	#error "flight.Path: no backend for this target."
 #end
 }
-inline function getQuadraticBezierCurvature(x0:Float, y0:Float, cx:Float, cy:Float, x1:Float, y1:Float, t:Float):Float {
+extern inline function getQuadraticBezierCurvature(x0:Float, y0:Float, cx:Float, cy:Float, x1:Float, y1:Float, t:Float):Float {
 #if hl
 	return flight._hl._fn.Path.getQuadraticBezierCurvature(x0, y0, cx, cy, x1, y1, t);
 #elseif cpp
@@ -275,7 +275,7 @@ inline function getQuadraticBezierCurvature(x0:Float, y0:Float, cx:Float, cy:Flo
 	#error "flight.Path: no backend for this target."
 #end
 }
-inline function getQuadraticBezierPoint(x0:Float, y0:Float, cx:Float, cy:Float, x1:Float, y1:Float, t:Float, out:Vector2):Void {
+extern inline function getQuadraticBezierPoint(x0:Float, y0:Float, cx:Float, cy:Float, x1:Float, y1:Float, t:Float, out:Vector2):Void {
 #if hl
 	flight._hl._fn.Path.getQuadraticBezierPoint(x0, y0, cx, cy, x1, y1, t, out);
 #elseif cpp
@@ -286,7 +286,7 @@ inline function getQuadraticBezierPoint(x0:Float, y0:Float, cx:Float, cy:Float, 
 	#error "flight.Path: no backend for this target."
 #end
 }
-inline function getQuadraticBezierTangent(x0:Float, y0:Float, cx:Float, cy:Float, x1:Float, y1:Float, t:Float, out:Vector2):Void {
+extern inline function getQuadraticBezierTangent(x0:Float, y0:Float, cx:Float, cy:Float, x1:Float, y1:Float, t:Float, out:Vector2):Void {
 #if hl
 	flight._hl._fn.Path.getQuadraticBezierTangent(x0, y0, cx, cy, x1, y1, t, out);
 #elseif cpp
@@ -297,7 +297,7 @@ inline function getQuadraticBezierTangent(x0:Float, y0:Float, cx:Float, cy:Float
 	#error "flight.Path: no backend for this target."
 #end
 }
-inline function getPathContourOrientation(path:Path, tolerance:Float):flight.ContourOrientation {
+extern inline function getPathContourOrientation(path:Path, tolerance:Float):flight.ContourOrientation {
 #if hl
 	return flight._hl._fn.Path.getPathContourOrientation(path, tolerance);
 #elseif cpp
@@ -308,7 +308,7 @@ inline function getPathContourOrientation(path:Path, tolerance:Float):flight.Con
 	#error "flight.Path: no backend for this target."
 #end
 }
-inline function getPathSignedArea(path:Path, tolerance:Float):Float {
+extern inline function getPathSignedArea(path:Path, tolerance:Float):Float {
 #if hl
 	return flight._hl._fn.Path.getPathSignedArea(path, tolerance);
 #elseif cpp
@@ -319,7 +319,7 @@ inline function getPathSignedArea(path:Path, tolerance:Float):Float {
 	#error "flight.Path: no backend for this target."
 #end
 }
-inline function createPath(winding:Int):Path {
+extern inline function createPath(winding:Int):Path {
 #if hl
 	return flight._hl._fn.Path.createPath(winding);
 #elseif cpp
@@ -330,7 +330,7 @@ inline function createPath(winding:Int):Path {
 	#error "flight.Path: no backend for this target."
 #end
 }
-inline function appendPathArc(path:Path, centerX:Float, centerY:Float, radius:Float, startAngle:Float, endAngle:Float, anticlockwise:Int, connectToCurrent:Int):Void {
+extern inline function appendPathArc(path:Path, centerX:Float, centerY:Float, radius:Float, startAngle:Float, endAngle:Float, anticlockwise:Int, connectToCurrent:Int):Void {
 #if hl
 	flight._hl._fn.Path.appendPathArc(path, centerX, centerY, radius, startAngle, endAngle, anticlockwise, connectToCurrent);
 #elseif cpp
@@ -341,7 +341,7 @@ inline function appendPathArc(path:Path, centerX:Float, centerY:Float, radius:Fl
 	#error "flight.Path: no backend for this target."
 #end
 }
-inline function appendPathCircle(path:Path, centerX:Float, centerY:Float, radius:Float):Void {
+extern inline function appendPathCircle(path:Path, centerX:Float, centerY:Float, radius:Float):Void {
 #if hl
 	flight._hl._fn.Path.appendPathCircle(path, centerX, centerY, radius);
 #elseif cpp
@@ -352,7 +352,7 @@ inline function appendPathCircle(path:Path, centerX:Float, centerY:Float, radius
 	#error "flight.Path: no backend for this target."
 #end
 }
-inline function appendPathClose(path:Path):Void {
+extern inline function appendPathClose(path:Path):Void {
 #if hl
 	flight._hl._fn.Path.appendPathClose(path);
 #elseif cpp
@@ -363,7 +363,7 @@ inline function appendPathClose(path:Path):Void {
 	#error "flight.Path: no backend for this target."
 #end
 }
-inline function appendPathCubicCurveTo(path:Path, controlX1:Float, controlY1:Float, controlX2:Float, controlY2:Float, x:Float, y:Float):Void {
+extern inline function appendPathCubicCurveTo(path:Path, controlX1:Float, controlY1:Float, controlX2:Float, controlY2:Float, x:Float, y:Float):Void {
 #if hl
 	flight._hl._fn.Path.appendPathCubicCurveTo(path, controlX1, controlY1, controlX2, controlY2, x, y);
 #elseif cpp
@@ -374,7 +374,7 @@ inline function appendPathCubicCurveTo(path:Path, controlX1:Float, controlY1:Flo
 	#error "flight.Path: no backend for this target."
 #end
 }
-inline function appendPathEllipse(path:Path, centerX:Float, centerY:Float, radiusX:Float, radiusY:Float):Void {
+extern inline function appendPathEllipse(path:Path, centerX:Float, centerY:Float, radiusX:Float, radiusY:Float):Void {
 #if hl
 	flight._hl._fn.Path.appendPathEllipse(path, centerX, centerY, radiusX, radiusY);
 #elseif cpp
@@ -385,7 +385,7 @@ inline function appendPathEllipse(path:Path, centerX:Float, centerY:Float, radiu
 	#error "flight.Path: no backend for this target."
 #end
 }
-inline function appendPathEllipticalArcTo(path:Path, radiusX:Float, radiusY:Float, xAxisRotation:Float, largeArc:Bool, sweep:Bool, endX:Float, endY:Float):Void {
+extern inline function appendPathEllipticalArcTo(path:Path, radiusX:Float, radiusY:Float, xAxisRotation:Float, largeArc:Bool, sweep:Bool, endX:Float, endY:Float):Void {
 #if hl
 	flight._hl._fn.Path.appendPathEllipticalArcTo(path, radiusX, radiusY, xAxisRotation, largeArc, sweep, endX, endY);
 #elseif cpp
@@ -396,7 +396,7 @@ inline function appendPathEllipticalArcTo(path:Path, radiusX:Float, radiusY:Floa
 	#error "flight.Path: no backend for this target."
 #end
 }
-inline function appendPathLineTo(path:Path, x:Float, y:Float):Void {
+extern inline function appendPathLineTo(path:Path, x:Float, y:Float):Void {
 #if hl
 	flight._hl._fn.Path.appendPathLineTo(path, x, y);
 #elseif cpp
@@ -407,7 +407,7 @@ inline function appendPathLineTo(path:Path, x:Float, y:Float):Void {
 	#error "flight.Path: no backend for this target."
 #end
 }
-inline function appendPathMoveTo(path:Path, x:Float, y:Float):Void {
+extern inline function appendPathMoveTo(path:Path, x:Float, y:Float):Void {
 #if hl
 	flight._hl._fn.Path.appendPathMoveTo(path, x, y);
 #elseif cpp
@@ -418,7 +418,7 @@ inline function appendPathMoveTo(path:Path, x:Float, y:Float):Void {
 	#error "flight.Path: no backend for this target."
 #end
 }
-inline function appendPathPolygon(path:Path, points:Dynamic, pointsLen:Int):Void {
+extern inline function appendPathPolygon(path:Path, points:Dynamic, pointsLen:Int):Void {
 #if hl
 	flight._hl._fn.Path.appendPathPolygon(path, points, pointsLen);
 #elseif cpp
@@ -429,7 +429,7 @@ inline function appendPathPolygon(path:Path, points:Dynamic, pointsLen:Int):Void
 	#error "flight.Path: no backend for this target."
 #end
 }
-inline function appendPathPolyline(path:Path, points:Dynamic, pointsLen:Int):Void {
+extern inline function appendPathPolyline(path:Path, points:Dynamic, pointsLen:Int):Void {
 #if hl
 	flight._hl._fn.Path.appendPathPolyline(path, points, pointsLen);
 #elseif cpp
@@ -440,7 +440,7 @@ inline function appendPathPolyline(path:Path, points:Dynamic, pointsLen:Int):Voi
 	#error "flight.Path: no backend for this target."
 #end
 }
-inline function appendPathQuadraticCurveTo(path:Path, controlX:Float, controlY:Float, x:Float, y:Float):Void {
+extern inline function appendPathQuadraticCurveTo(path:Path, controlX:Float, controlY:Float, x:Float, y:Float):Void {
 #if hl
 	flight._hl._fn.Path.appendPathQuadraticCurveTo(path, controlX, controlY, x, y);
 #elseif cpp
@@ -451,7 +451,7 @@ inline function appendPathQuadraticCurveTo(path:Path, controlX:Float, controlY:F
 	#error "flight.Path: no backend for this target."
 #end
 }
-inline function appendPathRectangle(path:Path, x:Float, y:Float, width:Float, height:Float):Void {
+extern inline function appendPathRectangle(path:Path, x:Float, y:Float, width:Float, height:Float):Void {
 #if hl
 	flight._hl._fn.Path.appendPathRectangle(path, x, y, width, height);
 #elseif cpp
@@ -462,7 +462,7 @@ inline function appendPathRectangle(path:Path, x:Float, y:Float, width:Float, he
 	#error "flight.Path: no backend for this target."
 #end
 }
-inline function appendPathRoundedRectangle(path:Path, x:Float, y:Float, width:Float, height:Float, radius:Float):Void {
+extern inline function appendPathRoundedRectangle(path:Path, x:Float, y:Float, width:Float, height:Float, radius:Float):Void {
 #if hl
 	flight._hl._fn.Path.appendPathRoundedRectangle(path, x, y, width, height, radius);
 #elseif cpp
@@ -473,7 +473,7 @@ inline function appendPathRoundedRectangle(path:Path, x:Float, y:Float, width:Fl
 	#error "flight.Path: no backend for this target."
 #end
 }
-inline function appendPathRoundedRectangleWithCornerRadii(path:Path, x:Float, y:Float, width:Float, height:Float, topLeft:Float, topRight:Float, bottomRight:Float, bottomLeft:Float):Void {
+extern inline function appendPathRoundedRectangleWithCornerRadii(path:Path, x:Float, y:Float, width:Float, height:Float, topLeft:Float, topRight:Float, bottomRight:Float, bottomLeft:Float):Void {
 #if hl
 	flight._hl._fn.Path.appendPathRoundedRectangleWithCornerRadii(path, x, y, width, height, topLeft, topRight, bottomRight, bottomLeft);
 #elseif cpp
@@ -484,7 +484,7 @@ inline function appendPathRoundedRectangleWithCornerRadii(path:Path, x:Float, y:
 	#error "flight.Path: no backend for this target."
 #end
 }
-inline function appendPathTangentArcTo(path:Path, x1:Float, y1:Float, x2:Float, y2:Float, radius:Float):Void {
+extern inline function appendPathTangentArcTo(path:Path, x1:Float, y1:Float, x2:Float, y2:Float, radius:Float):Void {
 #if hl
 	flight._hl._fn.Path.appendPathTangentArcTo(path, x1, y1, x2, y2, radius);
 #elseif cpp
@@ -495,7 +495,7 @@ inline function appendPathTangentArcTo(path:Path, x1:Float, y1:Float, x2:Float, 
 	#error "flight.Path: no backend for this target."
 #end
 }
-inline function createPathMorph(start:Path, end:Path):PathMorph {
+extern inline function createPathMorph(start:Path, end:Path):PathMorph {
 #if hl
 	return flight._hl._fn.Path.createPathMorph(start, end);
 #elseif cpp
@@ -506,7 +506,7 @@ inline function createPathMorph(start:Path, end:Path):PathMorph {
 	#error "flight.Path: no backend for this target."
 #end
 }
-inline function samplePathMorph(out:Path, morph:PathMorph, progress:Float):Void {
+extern inline function samplePathMorph(out:Path, morph:PathMorph, progress:Float):Void {
 #if hl
 	flight._hl._fn.Path.samplePathMorph(out, morph, progress);
 #elseif cpp
@@ -517,7 +517,7 @@ inline function samplePathMorph(out:Path, morph:PathMorph, progress:Float):Void 
 	#error "flight.Path: no backend for this target."
 #end
 }
-inline function reversePath(source:Path, out:Path):Void {
+extern inline function reversePath(source:Path, out:Path):Void {
 #if hl
 	flight._hl._fn.Path.reversePath(source, out);
 #elseif cpp
@@ -528,7 +528,7 @@ inline function reversePath(source:Path, out:Path):Void {
 	#error "flight.Path: no backend for this target."
 #end
 }
-inline function strokePath(path:Path, style:StrokeStyle, tolerance:Float):Path {
+extern inline function strokePath(path:Path, style:StrokeStyle, tolerance:Float):Path {
 #if hl
 	return flight._hl._fn.Path.strokePath(path, style, tolerance);
 #elseif cpp
@@ -539,7 +539,7 @@ inline function strokePath(path:Path, style:StrokeStyle, tolerance:Float):Path {
 	#error "flight.Path: no backend for this target."
 #end
 }
-inline function tessellatePath(path:Path, tolerance:Float):PathMesh {
+extern inline function tessellatePath(path:Path, tolerance:Float):PathMesh {
 #if hl
 	return flight._hl._fn.Path.tessellatePath(path, tolerance);
 #elseif cpp
@@ -550,7 +550,7 @@ inline function tessellatePath(path:Path, tolerance:Float):PathMesh {
 	#error "flight.Path: no backend for this target."
 #end
 }
-inline function tessellatePathInto(path:Path, out:PathMesh, tolerance:Float):Void {
+extern inline function tessellatePathInto(path:Path, out:PathMesh, tolerance:Float):Void {
 #if hl
 	flight._hl._fn.Path.tessellatePathInto(path, out, tolerance);
 #elseif cpp
@@ -561,7 +561,7 @@ inline function tessellatePathInto(path:Path, out:PathMesh, tolerance:Float):Voi
 	#error "flight.Path: no backend for this target."
 #end
 }
-inline function tessellatePathTyped(path:Path, tolerance:Float):PathMeshTyped {
+extern inline function tessellatePathTyped(path:Path, tolerance:Float):PathMeshTyped {
 #if hl
 	return flight._hl._fn.Path.tessellatePathTyped(path, tolerance);
 #elseif cpp
@@ -572,7 +572,7 @@ inline function tessellatePathTyped(path:Path, tolerance:Float):PathMeshTyped {
 	#error "flight.Path: no backend for this target."
 #end
 }
-inline function tessellatePathTypedInto(path:Path, out:PathMeshTyped, tolerance:Float):Void {
+extern inline function tessellatePathTypedInto(path:Path, out:PathMeshTyped, tolerance:Float):Void {
 #if hl
 	flight._hl._fn.Path.tessellatePathTypedInto(path, out, tolerance);
 #elseif cpp
@@ -583,7 +583,7 @@ inline function tessellatePathTypedInto(path:Path, out:PathMeshTyped, tolerance:
 	#error "flight.Path: no backend for this target."
 #end
 }
-inline function tessellateStrokePath(path:Path, style:StrokeStyle, tolerance:Float):PathMesh {
+extern inline function tessellateStrokePath(path:Path, style:StrokeStyle, tolerance:Float):PathMesh {
 #if hl
 	return flight._hl._fn.Path.tessellateStrokePath(path, style, tolerance);
 #elseif cpp
@@ -594,7 +594,7 @@ inline function tessellateStrokePath(path:Path, style:StrokeStyle, tolerance:Flo
 	#error "flight.Path: no backend for this target."
 #end
 }
-inline function transformPath(source:Path, matrix:Matrix, out:Path):Void {
+extern inline function transformPath(source:Path, matrix:Matrix, out:Path):Void {
 #if hl
 	flight._hl._fn.Path.transformPath(source, matrix, out);
 #elseif cpp
@@ -605,7 +605,7 @@ inline function transformPath(source:Path, matrix:Matrix, out:Path):Void {
 	#error "flight.Path: no backend for this target."
 #end
 }
-inline function translatePath(source:Path, dx:Float, dy:Float, out:Path):Void {
+extern inline function translatePath(source:Path, dx:Float, dy:Float, out:Path):Void {
 #if hl
 	flight._hl._fn.Path.translatePath(source, dx, dy, out);
 #elseif cpp
@@ -616,7 +616,7 @@ inline function translatePath(source:Path, dx:Float, dy:Float, out:Path):Void {
 	#error "flight.Path: no backend for this target."
 #end
 }
-inline function freePath(ptr:Path):Void {
+extern inline function freePath(ptr:Path):Void {
 #if hl
 	flight._hl._fn.Path.freePath(ptr);
 #elseif cpp
@@ -627,7 +627,7 @@ inline function freePath(ptr:Path):Void {
 	#error "flight.Path: no backend for this target."
 #end
 }
-inline function freePathMorphCreationExplanation(ptr:PathMorphCreationExplanation):Void {
+extern inline function freePathMorphCreationExplanation(ptr:PathMorphCreationExplanation):Void {
 #if hl
 	flight._hl._fn.Path.freePathMorphCreationExplanation(ptr);
 #elseif cpp
@@ -638,7 +638,7 @@ inline function freePathMorphCreationExplanation(ptr:PathMorphCreationExplanatio
 	#error "flight.Path: no backend for this target."
 #end
 }
-inline function freeStrokePathTessellationExplanation(ptr:StrokePathTessellationExplanation):Void {
+extern inline function freeStrokePathTessellationExplanation(ptr:StrokePathTessellationExplanation):Void {
 #if hl
 	flight._hl._fn.Path.freeStrokePathTessellationExplanation(ptr);
 #elseif cpp
@@ -649,7 +649,7 @@ inline function freeStrokePathTessellationExplanation(ptr:StrokePathTessellation
 	#error "flight.Path: no backend for this target."
 #end
 }
-inline function freePathMorph(ptr:PathMorph):Void {
+extern inline function freePathMorph(ptr:PathMorph):Void {
 #if hl
 	flight._hl._fn.Path.freePathMorph(ptr);
 #elseif cpp
@@ -660,7 +660,7 @@ inline function freePathMorph(ptr:PathMorph):Void {
 	#error "flight.Path: no backend for this target."
 #end
 }
-inline function freePathMesh(ptr:PathMesh):Void {
+extern inline function freePathMesh(ptr:PathMesh):Void {
 #if hl
 	flight._hl._fn.Path.freePathMesh(ptr);
 #elseif cpp
@@ -671,7 +671,7 @@ inline function freePathMesh(ptr:PathMesh):Void {
 	#error "flight.Path: no backend for this target."
 #end
 }
-inline function freePathMeshTyped(ptr:PathMeshTyped):Void {
+extern inline function freePathMeshTyped(ptr:PathMeshTyped):Void {
 #if hl
 	flight._hl._fn.Path.freePathMeshTyped(ptr);
 #elseif cpp

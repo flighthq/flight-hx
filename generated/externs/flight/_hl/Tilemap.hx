@@ -4,7 +4,7 @@ abstract Tilemap(hl.Bytes) {
 	inline public function clear():Void {
 		flight._hl._fn.Tilemap.clearTilemap(cast this);
 	}
-	inline public function clone():Dynamic {
+	inline public function clone():hl.Bytes {
 		return flight._hl._fn.Tilemap.cloneTilemap(cast this);
 	}
 	inline public function enableSignals():flight._hl.TilemapSignals {

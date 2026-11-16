@@ -1,6 +1,6 @@
 package flight;
 
-inline function createAudioBuffer(length:Int, numberOfChannels:Int, sampleRate:Float):Dynamic {
+extern inline function createAudioBuffer(length:Int, numberOfChannels:Int, sampleRate:Float):Dynamic {
 #if hl
 	return flight._hl._fn.Audio.createAudioBuffer(length, numberOfChannels, sampleRate);
 #elseif cpp
@@ -11,7 +11,7 @@ inline function createAudioBuffer(length:Int, numberOfChannels:Int, sampleRate:F
 	#error "flight.Audio: no backend for this target."
 #end
 }
-inline function copyToAudioBufferChannel(buffer:Dynamic, source:Dynamic, sourceLen:Int, channel:Int):Void {
+extern inline function copyToAudioBufferChannel(buffer:Dynamic, source:Dynamic, sourceLen:Int, channel:Int):Void {
 #if hl
 	flight._hl._fn.Audio.copyToAudioBufferChannel(buffer, source, sourceLen, channel);
 #elseif cpp
@@ -22,7 +22,7 @@ inline function copyToAudioBufferChannel(buffer:Dynamic, source:Dynamic, sourceL
 	#error "flight.Audio: no backend for this target."
 #end
 }
-inline function hasAudioDecodeSlot(audioDecode:HostAudioDecodeCapabilities, mimeType:String):Bool {
+extern inline function hasAudioDecodeSlot(audioDecode:HostAudioDecodeCapabilities, mimeType:String):Bool {
 #if hl
 	return flight._hl._fn.Audio.hasAudioDecodeSlot(audioDecode, cast mimeType);
 #elseif cpp
@@ -33,7 +33,7 @@ inline function hasAudioDecodeSlot(audioDecode:HostAudioDecodeCapabilities, mime
 	#error "flight.Audio: no backend for this target."
 #end
 }
-inline function canPlayAudioType(hostAudioCodec:HostAudioCodecCapability, mimeType:String):Bool {
+extern inline function canPlayAudioType(hostAudioCodec:HostAudioCodecCapability, mimeType:String):Bool {
 #if hl
 	return flight._hl._fn.Audio.canPlayAudioType(hostAudioCodec, cast mimeType);
 #elseif cpp
@@ -44,7 +44,7 @@ inline function canPlayAudioType(hostAudioCodec:HostAudioCodecCapability, mimeTy
 	#error "flight.Audio: no backend for this target."
 #end
 }
-inline function getAudioMimeTypeEssence(mimeType:String):String {
+extern inline function getAudioMimeTypeEssence(mimeType:String):String {
 #if hl
 	return cast flight._hl._fn.Audio.getAudioMimeTypeEssence(cast mimeType);
 #elseif cpp
@@ -55,7 +55,7 @@ inline function getAudioMimeTypeEssence(mimeType:String):String {
 	#error "flight.Audio: no backend for this target."
 #end
 }
-inline function getAudioMimeTypeParameter(mimeType:String, name:String):String {
+extern inline function getAudioMimeTypeParameter(mimeType:String, name:String):String {
 #if hl
 	return cast flight._hl._fn.Audio.getAudioMimeTypeParameter(cast mimeType, cast name);
 #elseif cpp
@@ -66,7 +66,7 @@ inline function getAudioMimeTypeParameter(mimeType:String, name:String):String {
 	#error "flight.Audio: no backend for this target."
 #end
 }
-inline function inferAudioMimeType(url:String):String {
+extern inline function inferAudioMimeType(url:String):String {
 #if hl
 	return cast flight._hl._fn.Audio.inferAudioMimeType(cast url);
 #elseif cpp
@@ -77,7 +77,7 @@ inline function inferAudioMimeType(url:String):String {
 	#error "flight.Audio: no backend for this target."
 #end
 }
-inline function createAudioResource(buffer:Dynamic):Dynamic {
+extern inline function createAudioResource(buffer:Dynamic):Dynamic {
 #if hl
 	return flight._hl._fn.Audio.createAudioResource(buffer);
 #elseif cpp
@@ -88,7 +88,7 @@ inline function createAudioResource(buffer:Dynamic):Dynamic {
 	#error "flight.Audio: no backend for this target."
 #end
 }
-inline function cloneAudioResource(resource:Dynamic):Dynamic {
+extern inline function cloneAudioResource(resource:Dynamic):Dynamic {
 #if hl
 	return flight._hl._fn.Audio.cloneAudioResource(resource);
 #elseif cpp
@@ -99,7 +99,7 @@ inline function cloneAudioResource(resource:Dynamic):Dynamic {
 	#error "flight.Audio: no backend for this target."
 #end
 }
-inline function disposeAudioResource(resource:Dynamic):Void {
+extern inline function disposeAudioResource(resource:Dynamic):Void {
 #if hl
 	flight._hl._fn.Audio.disposeAudioResource(resource);
 #elseif cpp
@@ -110,7 +110,7 @@ inline function disposeAudioResource(resource:Dynamic):Void {
 	#error "flight.Audio: no backend for this target."
 #end
 }
-inline function getAudioResourceByteSize(resource:Dynamic):Int {
+extern inline function getAudioResourceByteSize(resource:Dynamic):Int {
 #if hl
 	return flight._hl._fn.Audio.getAudioResourceByteSize(resource);
 #elseif cpp
@@ -121,7 +121,7 @@ inline function getAudioResourceByteSize(resource:Dynamic):Int {
 	#error "flight.Audio: no backend for this target."
 #end
 }
-inline function getAudioResourceChannelCount(resource:Dynamic):Int {
+extern inline function getAudioResourceChannelCount(resource:Dynamic):Int {
 #if hl
 	return flight._hl._fn.Audio.getAudioResourceChannelCount(resource);
 #elseif cpp
@@ -132,7 +132,7 @@ inline function getAudioResourceChannelCount(resource:Dynamic):Int {
 	#error "flight.Audio: no backend for this target."
 #end
 }
-inline function getAudioResourceDuration(resource:Dynamic):Float {
+extern inline function getAudioResourceDuration(resource:Dynamic):Float {
 #if hl
 	return flight._hl._fn.Audio.getAudioResourceDuration(resource);
 #elseif cpp
@@ -143,7 +143,7 @@ inline function getAudioResourceDuration(resource:Dynamic):Float {
 	#error "flight.Audio: no backend for this target."
 #end
 }
-inline function getAudioResourceSampleRate(resource:Dynamic):Float {
+extern inline function getAudioResourceSampleRate(resource:Dynamic):Float {
 #if hl
 	return flight._hl._fn.Audio.getAudioResourceSampleRate(resource);
 #elseif cpp
@@ -154,7 +154,7 @@ inline function getAudioResourceSampleRate(resource:Dynamic):Float {
 	#error "flight.Audio: no backend for this target."
 #end
 }
-inline function hasAudioResourceBuffer(resource:Dynamic):Bool {
+extern inline function hasAudioResourceBuffer(resource:Dynamic):Bool {
 #if hl
 	return flight._hl._fn.Audio.hasAudioResourceBuffer(resource);
 #elseif cpp
@@ -165,7 +165,7 @@ inline function hasAudioResourceBuffer(resource:Dynamic):Bool {
 	#error "flight.Audio: no backend for this target."
 #end
 }
-inline function isAudioResourceEmpty(resource:Dynamic):Bool {
+extern inline function isAudioResourceEmpty(resource:Dynamic):Bool {
 #if hl
 	return flight._hl._fn.Audio.isAudioResourceEmpty(resource);
 #elseif cpp
@@ -176,7 +176,7 @@ inline function isAudioResourceEmpty(resource:Dynamic):Bool {
 	#error "flight.Audio: no backend for this target."
 #end
 }
-inline function selectAudioResourceUrl(hostAudioCodec:HostAudioCodecCapability, sources:Dynamic, sourcesLen:Int, decoders:AudioDecoderRegistry):String {
+extern inline function selectAudioResourceUrl(hostAudioCodec:HostAudioCodecCapability, sources:Dynamic, sourcesLen:Int, decoders:AudioDecoderRegistry):String {
 #if hl
 	return cast flight._hl._fn.Audio.selectAudioResourceUrl(hostAudioCodec, sources, sourcesLen, decoders);
 #elseif cpp
@@ -187,7 +187,7 @@ inline function selectAudioResourceUrl(hostAudioCodec:HostAudioCodecCapability, 
 	#error "flight.Audio: no backend for this target."
 #end
 }
-inline function createAudioResourceFailure(cause:Unknown):Dynamic {
+extern inline function createAudioResourceFailure(cause:Unknown):Dynamic {
 #if hl
 	return flight._hl._fn.Audio.createAudioResourceFailure(cause);
 #elseif cpp
@@ -198,7 +198,7 @@ inline function createAudioResourceFailure(cause:Unknown):Dynamic {
 	#error "flight.Audio: no backend for this target."
 #end
 }
-inline function createExternalAudioResourceReference(uri:String):Dynamic {
+extern inline function createExternalAudioResourceReference(uri:String):Dynamic {
 #if hl
 	return flight._hl._fn.Audio.createExternalAudioResourceReference(cast uri);
 #elseif cpp
@@ -209,7 +209,7 @@ inline function createExternalAudioResourceReference(uri:String):Dynamic {
 	#error "flight.Audio: no backend for this target."
 #end
 }
-inline function explainAudioResourceReferenceResolution(reference:AudioResourceReference):AudioResourceReferenceResolutionExplanation {
+extern inline function explainAudioResourceReferenceResolution(reference:AudioResourceReference):AudioResourceReferenceResolutionExplanation {
 #if hl
 	return flight._hl._fn.Audio.explainAudioResourceReferenceResolution(reference);
 #elseif cpp
@@ -220,7 +220,7 @@ inline function explainAudioResourceReferenceResolution(reference:AudioResourceR
 	#error "flight.Audio: no backend for this target."
 #end
 }
-inline function findAudioResourceReferenceByName(references:Dynamic, referencesLen:Int, name:String):AudioResourceReference {
+extern inline function findAudioResourceReferenceByName(references:Dynamic, referencesLen:Int, name:String):AudioResourceReference {
 #if hl
 	return flight._hl._fn.Audio.findAudioResourceReferenceByName(references, referencesLen, cast name);
 #elseif cpp
@@ -231,7 +231,7 @@ inline function findAudioResourceReferenceByName(references:Dynamic, referencesL
 	#error "flight.Audio: no backend for this target."
 #end
 }
-inline function resetFailedAudioResourceReference(reference:AudioResourceReference):Bool {
+extern inline function resetFailedAudioResourceReference(reference:AudioResourceReference):Bool {
 #if hl
 	return flight._hl._fn.Audio.resetFailedAudioResourceReference(reference);
 #elseif cpp
@@ -242,7 +242,7 @@ inline function resetFailedAudioResourceReference(reference:AudioResourceReferen
 	#error "flight.Audio: no backend for this target."
 #end
 }
-inline function getAudioChannelStateString(value:flight.AudioChannelState):String {
+extern inline function getAudioChannelStateString(value:flight.AudioChannelState):String {
 #if hl
 	return cast flight._hl._fn.Audio.getAudioChannelStateString(value);
 #elseif cpp
@@ -253,7 +253,7 @@ inline function getAudioChannelStateString(value:flight.AudioChannelState):Strin
 	#error "flight.Audio: no backend for this target."
 #end
 }
-inline function getAudioResourceFailureKindString(value:flight.AudioResourceFailureKind):String {
+extern inline function getAudioResourceFailureKindString(value:flight.AudioResourceFailureKind):String {
 #if hl
 	return cast flight._hl._fn.Audio.getAudioResourceFailureKindString(value);
 #elseif cpp
@@ -264,7 +264,7 @@ inline function getAudioResourceFailureKindString(value:flight.AudioResourceFail
 	#error "flight.Audio: no backend for this target."
 #end
 }
-inline function getAudioResourceReferenceKindString(value:flight.AudioResourceReferenceKind):String {
+extern inline function getAudioResourceReferenceKindString(value:flight.AudioResourceReferenceKind):String {
 #if hl
 	return cast flight._hl._fn.Audio.getAudioResourceReferenceKindString(value);
 #elseif cpp
@@ -275,7 +275,7 @@ inline function getAudioResourceReferenceKindString(value:flight.AudioResourceRe
 	#error "flight.Audio: no backend for this target."
 #end
 }
-inline function parseAudioChannelState(value:String):Int {
+extern inline function parseAudioChannelState(value:String):Int {
 #if hl
 	return flight._hl._fn.Audio.parseAudioChannelState(cast value);
 #elseif cpp
@@ -286,7 +286,7 @@ inline function parseAudioChannelState(value:String):Int {
 	#error "flight.Audio: no backend for this target."
 #end
 }
-inline function parseAudioResourceFailureKind(value:String):Int {
+extern inline function parseAudioResourceFailureKind(value:String):Int {
 #if hl
 	return flight._hl._fn.Audio.parseAudioResourceFailureKind(cast value);
 #elseif cpp
@@ -297,7 +297,7 @@ inline function parseAudioResourceFailureKind(value:String):Int {
 	#error "flight.Audio: no backend for this target."
 #end
 }
-inline function parseAudioResourceReferenceKind(value:String):Int {
+extern inline function parseAudioResourceReferenceKind(value:String):Int {
 #if hl
 	return flight._hl._fn.Audio.parseAudioResourceReferenceKind(cast value);
 #elseif cpp
@@ -308,7 +308,7 @@ inline function parseAudioResourceReferenceKind(value:String):Int {
 	#error "flight.Audio: no backend for this target."
 #end
 }
-inline function freeAudioResourceReferenceResolutionExplanation(ptr:AudioResourceReferenceResolutionExplanation):Void {
+extern inline function freeAudioResourceReferenceResolutionExplanation(ptr:AudioResourceReferenceResolutionExplanation):Void {
 #if hl
 	flight._hl._fn.Audio.freeAudioResourceReferenceResolutionExplanation(ptr);
 #elseif cpp
@@ -319,7 +319,7 @@ inline function freeAudioResourceReferenceResolutionExplanation(ptr:AudioResourc
 	#error "flight.Audio: no backend for this target."
 #end
 }
-inline function freeAudioResourceReference(ptr:AudioResourceReference):Void {
+extern inline function freeAudioResourceReference(ptr:AudioResourceReference):Void {
 #if hl
 	flight._hl._fn.Audio.freeAudioResourceReference(ptr);
 #elseif cpp
@@ -330,7 +330,7 @@ inline function freeAudioResourceReference(ptr:AudioResourceReference):Void {
 	#error "flight.Audio: no backend for this target."
 #end
 }
-inline function freeString(ptr:Dynamic):Void {
+extern inline function freeString(ptr:Dynamic):Void {
 #if hl
 	flight._hl._fn.Audio.freeString(ptr);
 #elseif cpp

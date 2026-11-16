@@ -20,30 +20,30 @@ abstract ParticleEmitterState(cpp.Star<cpp.Void>) {
 
 	inline function get_burstTimer():Single return ParticleEmitterState_Ffi.get_burstTimer(this);
 
-	inline function set_burstTimer(value:Single):Single return ParticleEmitterState_Ffi.set_burstTimer(this, value);
+	inline function set_burstTimer(value:Single):Single { ParticleEmitterState_Ffi.set_burstTimer(this, value); return value; }
 	public var emitterAge(get, set):Single;
 
 	inline function get_emitterAge():Single return ParticleEmitterState_Ffi.get_emitterAge(this);
 
-	inline function set_emitterAge(value:Single):Single return ParticleEmitterState_Ffi.set_emitterAge(this, value);
+	inline function set_emitterAge(value:Single):Single { ParticleEmitterState_Ffi.set_emitterAge(this, value); return value; }
 	public var prevX(get, set):Single;
 
 	inline function get_prevX():Single return ParticleEmitterState_Ffi.get_prevX(this);
 
-	inline function set_prevX(value:Single):Single return ParticleEmitterState_Ffi.set_prevX(this, value);
+	inline function set_prevX(value:Single):Single { ParticleEmitterState_Ffi.set_prevX(this, value); return value; }
 	public var prevY(get, set):Single;
 
 	inline function get_prevY():Single return ParticleEmitterState_Ffi.get_prevY(this);
 
-	inline function set_prevY(value:Single):Single return ParticleEmitterState_Ffi.set_prevY(this, value);
+	inline function set_prevY(value:Single):Single { ParticleEmitterState_Ffi.set_prevY(this, value); return value; }
 	public var prevZ(get, set):Single;
 
 	inline function get_prevZ():Single return ParticleEmitterState_Ffi.get_prevZ(this);
 
-	inline function set_prevZ(value:Single):Single return ParticleEmitterState_Ffi.set_prevZ(this, value);
+	inline function set_prevZ(value:Single):Single { ParticleEmitterState_Ffi.set_prevZ(this, value); return value; }
 	public var spawnAccumulator(get, set):Single;
 
 	inline function get_spawnAccumulator():Single return ParticleEmitterState_Ffi.get_spawnAccumulator(this);
 
-	inline function set_spawnAccumulator(value:Single):Single return ParticleEmitterState_Ffi.set_spawnAccumulator(this, value);
+	inline function set_spawnAccumulator(value:Single):Single { ParticleEmitterState_Ffi.set_spawnAccumulator(this, value); return value; }
 }

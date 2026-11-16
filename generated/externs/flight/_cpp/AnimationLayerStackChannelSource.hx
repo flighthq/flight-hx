@@ -12,10 +12,10 @@ abstract AnimationLayerStackChannelSource(cpp.Star<cpp.Void>) {
 
 	inline function get_channelIndex():Int return AnimationLayerStackChannelSource_Ffi.get_channelIndex(this);
 
-	inline function set_channelIndex(value:Int):Int return AnimationLayerStackChannelSource_Ffi.set_channelIndex(this, value);
+	inline function set_channelIndex(value:Int):Int { AnimationLayerStackChannelSource_Ffi.set_channelIndex(this, value); return value; }
 	public var layerIndex(get, set):Int;
 
 	inline function get_layerIndex():Int return AnimationLayerStackChannelSource_Ffi.get_layerIndex(this);
 
-	inline function set_layerIndex(value:Int):Int return AnimationLayerStackChannelSource_Ffi.set_layerIndex(this, value);
+	inline function set_layerIndex(value:Int):Int { AnimationLayerStackChannelSource_Ffi.set_layerIndex(this, value); return value; }
 }

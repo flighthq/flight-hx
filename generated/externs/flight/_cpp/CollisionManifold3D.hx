@@ -18,25 +18,25 @@ abstract CollisionManifold3D(cpp.Star<cpp.Void>) {
 
 	inline function get_overlapping():Bool return CollisionManifold3D_Ffi.get_overlapping(this);
 
-	inline function set_overlapping(value:Bool):Bool return CollisionManifold3D_Ffi.set_overlapping(this, value);
+	inline function set_overlapping(value:Bool):Bool { CollisionManifold3D_Ffi.set_overlapping(this, value); return value; }
 	public var normalX(get, set):Single;
 
 	inline function get_normalX():Single return CollisionManifold3D_Ffi.get_normalX(this);
 
-	inline function set_normalX(value:Single):Single return CollisionManifold3D_Ffi.set_normalX(this, value);
+	inline function set_normalX(value:Single):Single { CollisionManifold3D_Ffi.set_normalX(this, value); return value; }
 	public var normalY(get, set):Single;
 
 	inline function get_normalY():Single return CollisionManifold3D_Ffi.get_normalY(this);
 
-	inline function set_normalY(value:Single):Single return CollisionManifold3D_Ffi.set_normalY(this, value);
+	inline function set_normalY(value:Single):Single { CollisionManifold3D_Ffi.set_normalY(this, value); return value; }
 	public var normalZ(get, set):Single;
 
 	inline function get_normalZ():Single return CollisionManifold3D_Ffi.get_normalZ(this);
 
-	inline function set_normalZ(value:Single):Single return CollisionManifold3D_Ffi.set_normalZ(this, value);
+	inline function set_normalZ(value:Single):Single { CollisionManifold3D_Ffi.set_normalZ(this, value); return value; }
 	public var depth(get, set):Single;
 
 	inline function get_depth():Single return CollisionManifold3D_Ffi.get_depth(this);
 
-	inline function set_depth(value:Single):Single return CollisionManifold3D_Ffi.set_depth(this, value);
+	inline function set_depth(value:Single):Single { CollisionManifold3D_Ffi.set_depth(this, value); return value; }
 }

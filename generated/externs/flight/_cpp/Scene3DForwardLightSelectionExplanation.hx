@@ -14,15 +14,15 @@ abstract Scene3DForwardLightSelectionExplanation(cpp.Star<cpp.Void>) {
 
 	inline function get_pointLightCount():Int return Scene3DForwardLightSelectionExplanation_Ffi.get_pointLightCount(this);
 
-	inline function set_pointLightCount(value:Int):Int return Scene3DForwardLightSelectionExplanation_Ffi.set_pointLightCount(this, value);
+	inline function set_pointLightCount(value:Int):Int { Scene3DForwardLightSelectionExplanation_Ffi.set_pointLightCount(this, value); return value; }
 	public var selectionPrepared(get, set):Bool;
 
 	inline function get_selectionPrepared():Bool return Scene3DForwardLightSelectionExplanation_Ffi.get_selectionPrepared(this);
 
-	inline function set_selectionPrepared(value:Bool):Bool return Scene3DForwardLightSelectionExplanation_Ffi.set_selectionPrepared(this, value);
+	inline function set_selectionPrepared(value:Bool):Bool { Scene3DForwardLightSelectionExplanation_Ffi.set_selectionPrepared(this, value); return value; }
 	public var spotLightCount(get, set):Int;
 
 	inline function get_spotLightCount():Int return Scene3DForwardLightSelectionExplanation_Ffi.get_spotLightCount(this);
 
-	inline function set_spotLightCount(value:Int):Int return Scene3DForwardLightSelectionExplanation_Ffi.set_spotLightCount(this, value);
+	inline function set_spotLightCount(value:Int):Int { Scene3DForwardLightSelectionExplanation_Ffi.set_spotLightCount(this, value); return value; }
 }

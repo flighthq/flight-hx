@@ -12,10 +12,10 @@ abstract PackableRectangle(cpp.Star<cpp.Void>) {
 
 	inline function get_width():Single return PackableRectangle_Ffi.get_width(this);
 
-	inline function set_width(value:Single):Single return PackableRectangle_Ffi.set_width(this, value);
+	inline function set_width(value:Single):Single { PackableRectangle_Ffi.set_width(this, value); return value; }
 	public var height(get, set):Single;
 
 	inline function get_height():Single return PackableRectangle_Ffi.get_height(this);
 
-	inline function set_height(value:Single):Single return PackableRectangle_Ffi.set_height(this, value);
+	inline function set_height(value:Single):Single { PackableRectangle_Ffi.set_height(this, value); return value; }
 }

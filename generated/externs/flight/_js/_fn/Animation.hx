@@ -93,7 +93,7 @@ extern class Animation {
 	@:native("flight_sample_animation_state_machine_channel")
 	public static function sampleAnimationStateMachineChannel(out:Dynamic, outLen:Int, machine:flight._js.AnimationStateMachine, channelIndex:Int):Bool;
 	@:native("flight_transition_animation_state_machine")
-	public static function transitionAnimationStateMachine(machine:flight._js.AnimationStateMachine, toState:Int, duration:Float, curveFn:Dynamic, curveCtx:Dynamic):Bool;
+	public static function transitionAnimationStateMachine(machine:flight._js.AnimationStateMachine, toState:flight._js.StateRef, duration:Float, curveFn:Dynamic, curveCtx:Dynamic):Bool;
 	@:native("flight_create_animation_track")
 	public static function createAnimationTrack():flight._js.AnimationTrack;
 	@:native("flight_clone_animation_track")
@@ -105,9 +105,9 @@ extern class Animation {
 	@:native("flight_validate_animation_track")
 	public static function validateAnimationTrack(out:Dynamic, track:flight._js.AnimationTrack):Bool;
 	@:native("flight_create_state_ref_from_index")
-	public static function createStateRefFromIndex(index:Int):Int;
+	public static function createStateRefFromIndex(index:Int):flight._js.StateRef;
 	@:native("flight_create_state_ref_from_name")
-	public static function createStateRefFromName(name:String):Int;
+	public static function createStateRefFromName(name:String):flight._js.StateRef;
 	@:native("flight_free_animation_sample_accumulator")
 	public static function freeAnimationSampleAccumulator(ptr:flight._js.AnimationSampleAccumulator):Void;
 	@:native("flight_free_animation_blend_tree")
@@ -134,4 +134,6 @@ extern class Animation {
 	public static function freeAnimationStateMachineState(ptr:flight._js.AnimationStateMachineState):Void;
 	@:native("flight_free_animation_track")
 	public static function freeAnimationTrack(ptr:flight._js.AnimationTrack):Void;
+	@:native("flight_free_state_ref")
+	public static function freeStateRef(ptr:flight._js.StateRef):Void;
 }

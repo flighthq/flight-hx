@@ -12,10 +12,10 @@ abstract ParticleEmitterData(cpp.Star<cpp.Void>) {
 
 	inline function get_particleCount():Int return ParticleEmitterData_Ffi.get_particleCount(this);
 
-	inline function set_particleCount(value:Int):Int return ParticleEmitterData_Ffi.set_particleCount(this, value);
+	inline function set_particleCount(value:Int):Int { ParticleEmitterData_Ffi.set_particleCount(this, value); return value; }
 	public var worldSpace(get, set):Bool;
 
 	inline function get_worldSpace():Bool return ParticleEmitterData_Ffi.get_worldSpace(this);
 
-	inline function set_worldSpace(value:Bool):Bool return ParticleEmitterData_Ffi.set_worldSpace(this, value);
+	inline function set_worldSpace(value:Bool):Bool { ParticleEmitterData_Ffi.set_worldSpace(this, value); return value; }
 }

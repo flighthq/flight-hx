@@ -22,7 +22,7 @@ typedef Timeline = flight._js.Timeline;
 
 #end
 
-inline function createTimeline(obj:TimelineOptions):Dynamic {
+extern inline function createTimeline(obj:TimelineOptions):Dynamic {
 #if hl
 	return flight._hl._fn.Timeline.createTimeline(obj);
 #elseif cpp
@@ -33,7 +33,7 @@ inline function createTimeline(obj:TimelineOptions):Dynamic {
 	#error "flight.Timeline: no backend for this target."
 #end
 }
-inline function createTimelineSource(obj:TimelineSourceOptions):TimelineSourceRef {
+extern inline function createTimelineSource(obj:TimelineSourceOptions):TimelineSourceRef {
 #if hl
 	return flight._hl._fn.Timeline.createTimelineSource(obj);
 #elseif cpp
@@ -44,7 +44,7 @@ inline function createTimelineSource(obj:TimelineSourceOptions):TimelineSourceRe
 	#error "flight.Timeline: no backend for this target."
 #end
 }
-inline function addTimelineFrameScript(timeline:Dynamic, frame:TimelineFrameArg, script:FrameScript):Void {
+extern inline function addTimelineFrameScript(timeline:Dynamic, frame:TimelineFrameArg, script:FrameScript):Void {
 #if hl
 	flight._hl._fn.Timeline.addTimelineFrameScript(timeline, frame, script);
 #elseif cpp
@@ -55,7 +55,7 @@ inline function addTimelineFrameScript(timeline:Dynamic, frame:TimelineFrameArg,
 	#error "flight.Timeline: no backend for this target."
 #end
 }
-inline function clearTimelineFrameScripts(timeline:Dynamic):Void {
+extern inline function clearTimelineFrameScripts(timeline:Dynamic):Void {
 #if hl
 	flight._hl._fn.Timeline.clearTimelineFrameScripts(timeline);
 #elseif cpp
@@ -66,7 +66,7 @@ inline function clearTimelineFrameScripts(timeline:Dynamic):Void {
 	#error "flight.Timeline: no backend for this target."
 #end
 }
-inline function disposeTimelineSignals(timeline:Dynamic):Void {
+extern inline function disposeTimelineSignals(timeline:Dynamic):Void {
 #if hl
 	flight._hl._fn.Timeline.disposeTimelineSignals(timeline);
 #elseif cpp
@@ -77,7 +77,7 @@ inline function disposeTimelineSignals(timeline:Dynamic):Void {
 	#error "flight.Timeline: no backend for this target."
 #end
 }
-inline function enableTimelineSignals(timeline:Dynamic):Dynamic {
+extern inline function enableTimelineSignals(timeline:Dynamic):Dynamic {
 #if hl
 	return flight._hl._fn.Timeline.enableTimelineSignals(timeline);
 #elseif cpp
@@ -88,7 +88,7 @@ inline function enableTimelineSignals(timeline:Dynamic):Dynamic {
 	#error "flight.Timeline: no backend for this target."
 #end
 }
-inline function findTimelineLabel(timeline:Dynamic, name:String):TimelineLabel {
+extern inline function findTimelineLabel(timeline:Dynamic, name:String):TimelineLabel {
 #if hl
 	return flight._hl._fn.Timeline.findTimelineLabel(timeline, cast name);
 #elseif cpp
@@ -99,7 +99,7 @@ inline function findTimelineLabel(timeline:Dynamic, name:String):TimelineLabel {
 	#error "flight.Timeline: no backend for this target."
 #end
 }
-inline function getTimelineCurrentLabel(timeline:Dynamic):TimelineLabel {
+extern inline function getTimelineCurrentLabel(timeline:Dynamic):TimelineLabel {
 #if hl
 	return flight._hl._fn.Timeline.getTimelineCurrentLabel(timeline);
 #elseif cpp
@@ -110,7 +110,7 @@ inline function getTimelineCurrentLabel(timeline:Dynamic):TimelineLabel {
 	#error "flight.Timeline: no backend for this target."
 #end
 }
-inline function getTimelineFrameScript(timeline:Dynamic, frame:TimelineFrameArg):FrameScript {
+extern inline function getTimelineFrameScript(timeline:Dynamic, frame:TimelineFrameArg):FrameScript {
 #if hl
 	return flight._hl._fn.Timeline.getTimelineFrameScript(timeline, frame);
 #elseif cpp
@@ -121,7 +121,7 @@ inline function getTimelineFrameScript(timeline:Dynamic, frame:TimelineFrameArg)
 	#error "flight.Timeline: no backend for this target."
 #end
 }
-inline function getTimelineFrameScriptFrames(out:Dynamic, timeline:Dynamic):Void {
+extern inline function getTimelineFrameScriptFrames(out:Dynamic, timeline:Dynamic):Void {
 #if hl
 	flight._hl._fn.Timeline.getTimelineFrameScriptFrames(out, timeline);
 #elseif cpp
@@ -132,7 +132,7 @@ inline function getTimelineFrameScriptFrames(out:Dynamic, timeline:Dynamic):Void
 	#error "flight.Timeline: no backend for this target."
 #end
 }
-inline function gotoAndPlayTimeline(timeline:Dynamic, frame:TimelineFrameArg):Void {
+extern inline function gotoAndPlayTimeline(timeline:Dynamic, frame:TimelineFrameArg):Void {
 #if hl
 	flight._hl._fn.Timeline.gotoAndPlayTimeline(timeline, frame);
 #elseif cpp
@@ -143,7 +143,7 @@ inline function gotoAndPlayTimeline(timeline:Dynamic, frame:TimelineFrameArg):Vo
 	#error "flight.Timeline: no backend for this target."
 #end
 }
-inline function gotoAndStopTimeline(timeline:Dynamic, frame:TimelineFrameArg):Void {
+extern inline function gotoAndStopTimeline(timeline:Dynamic, frame:TimelineFrameArg):Void {
 #if hl
 	flight._hl._fn.Timeline.gotoAndStopTimeline(timeline, frame);
 #elseif cpp
@@ -154,7 +154,7 @@ inline function gotoAndStopTimeline(timeline:Dynamic, frame:TimelineFrameArg):Vo
 	#error "flight.Timeline: no backend for this target."
 #end
 }
-inline function nextFrameTimeline(timeline:Dynamic):Void {
+extern inline function nextFrameTimeline(timeline:Dynamic):Void {
 #if hl
 	flight._hl._fn.Timeline.nextFrameTimeline(timeline);
 #elseif cpp
@@ -165,7 +165,7 @@ inline function nextFrameTimeline(timeline:Dynamic):Void {
 	#error "flight.Timeline: no backend for this target."
 #end
 }
-inline function playTimeline(timeline:Dynamic):Void {
+extern inline function playTimeline(timeline:Dynamic):Void {
 #if hl
 	flight._hl._fn.Timeline.playTimeline(timeline);
 #elseif cpp
@@ -176,7 +176,7 @@ inline function playTimeline(timeline:Dynamic):Void {
 	#error "flight.Timeline: no backend for this target."
 #end
 }
-inline function prevFrameTimeline(timeline:Dynamic):Void {
+extern inline function prevFrameTimeline(timeline:Dynamic):Void {
 #if hl
 	flight._hl._fn.Timeline.prevFrameTimeline(timeline);
 #elseif cpp
@@ -187,7 +187,7 @@ inline function prevFrameTimeline(timeline:Dynamic):Void {
 	#error "flight.Timeline: no backend for this target."
 #end
 }
-inline function removeTimelineFrameScript(timeline:Dynamic, frame:TimelineFrameArg):Void {
+extern inline function removeTimelineFrameScript(timeline:Dynamic, frame:TimelineFrameArg):Void {
 #if hl
 	flight._hl._fn.Timeline.removeTimelineFrameScript(timeline, frame);
 #elseif cpp
@@ -198,7 +198,7 @@ inline function removeTimelineFrameScript(timeline:Dynamic, frame:TimelineFrameA
 	#error "flight.Timeline: no backend for this target."
 #end
 }
-inline function stopTimeline(timeline:Dynamic):Void {
+extern inline function stopTimeline(timeline:Dynamic):Void {
 #if hl
 	flight._hl._fn.Timeline.stopTimeline(timeline);
 #elseif cpp
@@ -209,7 +209,7 @@ inline function stopTimeline(timeline:Dynamic):Void {
 	#error "flight.Timeline: no backend for this target."
 #end
 }
-inline function updateTimeline(timeline:Dynamic, deltaTime:Float):Bool {
+extern inline function updateTimeline(timeline:Dynamic, deltaTime:Float):Bool {
 #if hl
 	return flight._hl._fn.Timeline.updateTimeline(timeline, deltaTime);
 #elseif cpp

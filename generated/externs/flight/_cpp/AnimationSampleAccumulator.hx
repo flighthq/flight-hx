@@ -14,15 +14,15 @@ abstract AnimationSampleAccumulator(cpp.Star<cpp.Void>) {
 
 	inline function get_components():Int return AnimationSampleAccumulator_Ffi.get_components(this);
 
-	inline function set_components(value:Int):Int return AnimationSampleAccumulator_Ffi.set_components(this, value);
+	inline function set_components(value:Int):Int { AnimationSampleAccumulator_Ffi.set_components(this, value); return value; }
 	public var quaternion(get, set):Bool;
 
 	inline function get_quaternion():Bool return AnimationSampleAccumulator_Ffi.get_quaternion(this);
 
-	inline function set_quaternion(value:Bool):Bool return AnimationSampleAccumulator_Ffi.set_quaternion(this, value);
+	inline function set_quaternion(value:Bool):Bool { AnimationSampleAccumulator_Ffi.set_quaternion(this, value); return value; }
 	public var weight(get, set):Single;
 
 	inline function get_weight():Single return AnimationSampleAccumulator_Ffi.get_weight(this);
 
-	inline function set_weight(value:Single):Single return AnimationSampleAccumulator_Ffi.set_weight(this, value);
+	inline function set_weight(value:Single):Single { AnimationSampleAccumulator_Ffi.set_weight(this, value); return value; }
 }

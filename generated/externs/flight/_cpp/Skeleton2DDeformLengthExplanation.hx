@@ -14,15 +14,15 @@ abstract Skeleton2DDeformLengthExplanation(cpp.Star<cpp.Void>) {
 
 	inline function get_accepted():Bool return Skeleton2DDeformLengthExplanation_Ffi.get_accepted(this);
 
-	inline function set_accepted(value:Bool):Bool return Skeleton2DDeformLengthExplanation_Ffi.set_accepted(this, value);
+	inline function set_accepted(value:Bool):Bool { Skeleton2DDeformLengthExplanation_Ffi.set_accepted(this, value); return value; }
 	public var addressed(get, set):Int;
 
 	inline function get_addressed():Int return Skeleton2DDeformLengthExplanation_Ffi.get_addressed(this);
 
-	inline function set_addressed(value:Int):Int return Skeleton2DDeformLengthExplanation_Ffi.set_addressed(this, value);
+	inline function set_addressed(value:Int):Int { Skeleton2DDeformLengthExplanation_Ffi.set_addressed(this, value); return value; }
 	public var offsets(get, set):Int;
 
 	inline function get_offsets():Int return Skeleton2DDeformLengthExplanation_Ffi.get_offsets(this);
 
-	inline function set_offsets(value:Int):Int return Skeleton2DDeformLengthExplanation_Ffi.set_offsets(this, value);
+	inline function set_offsets(value:Int):Int { Skeleton2DDeformLengthExplanation_Ffi.set_offsets(this, value); return value; }
 }

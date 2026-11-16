@@ -10,5 +10,5 @@ abstract CocosPlistMetadata(cpp.Star<cpp.Void>) {
 
 	inline function get_format():Int return CocosPlistMetadata_Ffi.get_format(this);
 
-	inline function set_format(value:Int):Int return CocosPlistMetadata_Ffi.set_format(this, value);
+	inline function set_format(value:Int):Int { CocosPlistMetadata_Ffi.set_format(this, value); return value; }
 }

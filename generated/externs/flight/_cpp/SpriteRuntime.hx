@@ -10,5 +10,5 @@ abstract SpriteRuntime(cpp.Star<cpp.Void>) {
 
 	inline function get_localBoundsTextureVersion():haxe.Int64 return SpriteRuntime_Ffi.get_localBoundsTextureVersion(this);
 
-	inline function set_localBoundsTextureVersion(value:haxe.Int64):haxe.Int64 return SpriteRuntime_Ffi.set_localBoundsTextureVersion(this, value);
+	inline function set_localBoundsTextureVersion(value:haxe.Int64):haxe.Int64 { SpriteRuntime_Ffi.set_localBoundsTextureVersion(this, value); return value; }
 }

@@ -1,15 +1,6 @@
 #include <cstdio>
 
-// Exact C ABI of the selected Rust exports. This probes the compiled binary independently
-// of Haxe codegen; it does not provide the missing general-purpose hxcpp header/link layer.
-extern "C" {
-float flight_lerp(float a, float b, float t);
-void* flight_create_vector2(float x, float y);
-float flight_get_vector2_length(const void* source);
-float flight_get_vector2_x(const void* source);
-float flight_set_vector2_x(void* source, float value);
-void flight_free_vector2(void* source);
-}
+#include "flight_ffi.h"
 
 int main() {
   if (flight_lerp(0, 10, 0.25f) != 2.5f) return 1;

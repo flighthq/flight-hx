@@ -77,9 +77,9 @@ extern class Math {
 	@:native("flight_create_random_source")
 	public static function createRandomSource(seed:Int):flight._js.RandomSource;
 	@:native("flight_random_exponential")
-	public static function randomExponential(randomFn:Dynamic, randomCtx:Dynamic):Float;
+	public static function randomExponential(randomFn:Dynamic, randomCtx:Dynamic, rate:Float):Float;
 	@:native("flight_random_gaussian")
-	public static function randomGaussian(randomFn:Dynamic, randomCtx:Dynamic):Float;
+	public static function randomGaussian(randomFn:Dynamic, randomCtx:Dynamic, mean:Float, standardDeviation:Float):Float;
 	@:native("flight_random_inside_unit_disc")
 	public static function randomInsideUnitDisc(out:Dynamic, randomFn:Dynamic, randomCtx:Dynamic):Void;
 	@:native("flight_random_inside_unit_sphere")
@@ -89,15 +89,15 @@ extern class Math {
 	@:native("flight_random_on_unit_sphere")
 	public static function randomOnUnitSphere(out:Dynamic, randomFn:Dynamic, randomCtx:Dynamic):Void;
 	@:native("flight_random_poisson")
-	public static function randomPoisson(randomFn:Dynamic, randomCtx:Dynamic):Int;
+	public static function randomPoisson(randomFn:Dynamic, randomCtx:Dynamic, lambda:Float):Int;
 	@:native("flight_random_weighted")
-	public static function randomWeighted(randomFn:Dynamic, randomCtx:Dynamic):Int;
+	public static function randomWeighted(randomFn:Dynamic, randomCtx:Dynamic, weights:Dynamic, weightsLen:Int):Int;
 	@:native("flight_random_bool")
-	public static function randomBool(randomFn:Dynamic, randomCtx:Dynamic):Bool;
+	public static function randomBool(randomFn:Dynamic, randomCtx:Dynamic, probability:Float):Bool;
 	@:native("flight_random_int")
-	public static function randomInt(randomFn:Dynamic, randomCtx:Dynamic):Int;
+	public static function randomInt(randomFn:Dynamic, randomCtx:Dynamic, min:Int, max:Int):Int;
 	@:native("flight_random_range")
-	public static function randomRange(randomFn:Dynamic, randomCtx:Dynamic):Float;
+	public static function randomRange(randomFn:Dynamic, randomCtx:Dynamic, min:Float, max:Float):Float;
 	@:native("flight_random_sign")
 	public static function randomSign(randomFn:Dynamic, randomCtx:Dynamic):Float;
 	@:native("flight_ceil_to")

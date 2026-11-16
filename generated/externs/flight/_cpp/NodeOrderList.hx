@@ -10,5 +10,5 @@ abstract NodeOrderList(cpp.Star<cpp.Void>) {
 
 	inline function get_entryCount():Int return NodeOrderList_Ffi.get_entryCount(this);
 
-	inline function set_entryCount(value:Int):Int return NodeOrderList_Ffi.set_entryCount(this, value);
+	inline function set_entryCount(value:Int):Int { NodeOrderList_Ffi.set_entryCount(this, value); return value; }
 }

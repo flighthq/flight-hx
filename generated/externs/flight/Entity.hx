@@ -1,6 +1,6 @@
 package flight;
 
-inline function disableEntityRuntimeGuards():Void {
+extern inline function disableEntityRuntimeGuards():Void {
 #if hl
 	flight._hl._fn.Entity.disableEntityRuntimeGuards();
 #elseif cpp
@@ -11,7 +11,7 @@ inline function disableEntityRuntimeGuards():Void {
 	#error "flight.Entity: no backend for this target."
 #end
 }
-inline function enableEntityRuntimeGuards(report:EntityRuntimeWriteGuard):Void {
+extern inline function enableEntityRuntimeGuards(report:EntityRuntimeWriteGuard):Void {
 #if hl
 	flight._hl._fn.Entity.enableEntityRuntimeGuards(report);
 #elseif cpp
@@ -22,7 +22,7 @@ inline function enableEntityRuntimeGuards(report:EntityRuntimeWriteGuard):Void {
 	#error "flight.Entity: no backend for this target."
 #end
 }
-inline function explainEntityRuntimeWrite(slot:flight.EntityRuntimeWriteSlot):EntityRuntimeWriteExplanation {
+extern inline function explainEntityRuntimeWrite(slot:flight.EntityRuntimeWriteSlot):EntityRuntimeWriteExplanation {
 #if hl
 	return flight._hl._fn.Entity.explainEntityRuntimeWrite(slot);
 #elseif cpp
@@ -33,7 +33,7 @@ inline function explainEntityRuntimeWrite(slot:flight.EntityRuntimeWriteSlot):En
 	#error "flight.Entity: no backend for this target."
 #end
 }
-inline function areEntityRuntimeGuardsEnabled():Bool {
+extern inline function areEntityRuntimeGuardsEnabled():Bool {
 #if hl
 	return flight._hl._fn.Entity.areEntityRuntimeGuardsEnabled();
 #elseif cpp
@@ -44,7 +44,7 @@ inline function areEntityRuntimeGuardsEnabled():Bool {
 	#error "flight.Entity: no backend for this target."
 #end
 }
-inline function setEntityRuntimeGuardMode(enabled:Bool):Void {
+extern inline function setEntityRuntimeGuardMode(enabled:Bool):Void {
 #if hl
 	flight._hl._fn.Entity.setEntityRuntimeGuardMode(enabled);
 #elseif cpp
@@ -55,7 +55,7 @@ inline function setEntityRuntimeGuardMode(enabled:Bool):Void {
 	#error "flight.Entity: no backend for this target."
 #end
 }
-inline function freeEntityRuntimeWriteExplanation(ptr:EntityRuntimeWriteExplanation):Void {
+extern inline function freeEntityRuntimeWriteExplanation(ptr:EntityRuntimeWriteExplanation):Void {
 #if hl
 	flight._hl._fn.Entity.freeEntityRuntimeWriteExplanation(ptr);
 #elseif cpp

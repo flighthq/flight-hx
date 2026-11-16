@@ -37,7 +37,7 @@ extern class Video {
 	@:native("flight_advance_video_texture__texture")
 	public static function advanceVideoTextureTexture(hostVideo:flight._js.HostVideoCapability, texture:flight._js.Texture):Int;
 	@:native("flight_clone_video_texture__texture")
-	public static function cloneVideoTextureTexture(source:flight._js.Texture):Int;
+	public static function cloneVideoTextureTexture(source:flight._js.Texture):flight._js.Texture;
 	@:native("flight_copy_video_texture__texture__texture")
 	public static function copyVideoTextureTextureTexture(out:flight._js.Texture, source:flight._js.Texture):Void;
 	@:native("flight_destroy_video_texture")

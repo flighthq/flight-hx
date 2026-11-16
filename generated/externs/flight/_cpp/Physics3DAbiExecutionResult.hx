@@ -14,15 +14,15 @@ abstract Physics3DAbiExecutionResult(cpp.Star<cpp.Void>) {
 
 	inline function get_byteOffset():Int return Physics3DAbiExecutionResult_Ffi.get_byteOffset(this);
 
-	inline function set_byteOffset(value:Int):Int return Physics3DAbiExecutionResult_Ffi.set_byteOffset(this, value);
+	inline function set_byteOffset(value:Int):Int { Physics3DAbiExecutionResult_Ffi.set_byteOffset(this, value); return value; }
 	public var commandIndex(get, set):Int;
 
 	inline function get_commandIndex():Int return Physics3DAbiExecutionResult_Ffi.get_commandIndex(this);
 
-	inline function set_commandIndex(value:Int):Int return Physics3DAbiExecutionResult_Ffi.set_commandIndex(this, value);
+	inline function set_commandIndex(value:Int):Int { Physics3DAbiExecutionResult_Ffi.set_commandIndex(this, value); return value; }
 	public var commandKind(get, set):Int;
 
 	inline function get_commandKind():Int return Physics3DAbiExecutionResult_Ffi.get_commandKind(this);
 
-	inline function set_commandKind(value:Int):Int return Physics3DAbiExecutionResult_Ffi.set_commandKind(this, value);
+	inline function set_commandKind(value:Int):Int { Physics3DAbiExecutionResult_Ffi.set_commandKind(this, value); return value; }
 }

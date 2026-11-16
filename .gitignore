@@ -16,3 +16,9 @@ build/
 bin/
 dist/
 *.n
+
+# Staged native payloads belong to release archives, never source control.
+/native/bin/
+/native/lib/
+/native/artifacts/
+/ndll/

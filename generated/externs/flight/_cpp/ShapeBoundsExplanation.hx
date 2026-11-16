@@ -10,5 +10,5 @@ abstract ShapeBoundsExplanation(cpp.Star<cpp.Void>) {
 
 	inline function get_complete():Bool return ShapeBoundsExplanation_Ffi.get_complete(this);
 
-	inline function set_complete(value:Bool):Bool return ShapeBoundsExplanation_Ffi.set_complete(this, value);
+	inline function set_complete(value:Bool):Bool { ShapeBoundsExplanation_Ffi.set_complete(this, value); return value; }
 }

@@ -12,10 +12,10 @@ abstract AbcFile(cpp.Star<cpp.Void>) {
 
 	inline function get_majorVersion():Int return AbcFile_Ffi.get_majorVersion(this);
 
-	inline function set_majorVersion(value:Int):Int return AbcFile_Ffi.set_majorVersion(this, value);
+	inline function set_majorVersion(value:Int):Int { AbcFile_Ffi.set_majorVersion(this, value); return value; }
 	public var minorVersion(get, set):Int;
 
 	inline function get_minorVersion():Int return AbcFile_Ffi.get_minorVersion(this);
 
-	inline function set_minorVersion(value:Int):Int return AbcFile_Ffi.set_minorVersion(this, value);
+	inline function set_minorVersion(value:Int):Int { AbcFile_Ffi.set_minorVersion(this, value); return value; }
 }

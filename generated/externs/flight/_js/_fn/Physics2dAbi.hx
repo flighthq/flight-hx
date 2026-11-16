@@ -23,7 +23,7 @@ extern class Physics2dAbi {
 	@:native("flight_create_physics2d_abi_body_buffer")
 	public static function createPhysics2dAbiBodyBuffer(capacity:Int):flight._js.Physics2DAbiBodyBuffer;
 	@:native("flight_create_physics2d_abi_command_buffer")
-	public static function createPhysics2dAbiCommandBuffer(byteCapacity:Int):flight._js.Physics2DAbiCommandBuffer;
+	public static function createPhysics2dAbiCommandBuffer(byteCapacity:haxe.Int64):flight._js.Physics2DAbiCommandBuffer;
 	@:native("flight_create_physics2d_abi_contact_buffer")
 	public static function createPhysics2dAbiContactBuffer(contactCapacity:Int, pointCapacity:Int):flight._js.Physics2DAbiContactBuffer;
 	@:native("flight_create_physics2d_abi_execution_result")

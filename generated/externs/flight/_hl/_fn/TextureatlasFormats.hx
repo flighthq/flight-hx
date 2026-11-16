@@ -12,9 +12,9 @@ extern class TextureatlasFormats {
 	@:hlNative("flight", "flight_aseprite_texture_atlas_format")
 	public static function asepriteTextureAtlasFormat(registry:flight._hl.TextureAtlasFormatRegistry):flight._hl.TextureAtlasFormatDescriptor;
 	@:hlNative("flight", "flight_detect_texture_atlas_format")
-	public static function detectTextureAtlasFormat(registry:flight._hl.TextureAtlasFormatRegistry, content:hl.Bytes):Dynamic;
+	public static function detectTextureAtlasFormat(registry:flight._hl.TextureAtlasFormatRegistry, content:hl.Bytes):flight._hl.TextureAtlasFormatKind;
 	@:hlNative("flight", "flight_get_texture_atlas_format_kinds")
-	public static function getTextureAtlasFormatKinds(out:Dynamic, registry:flight._hl.TextureAtlasFormatRegistry):Void;
+	public static function getTextureAtlasFormatKinds(out:hl.Bytes, registry:flight._hl.TextureAtlasFormatRegistry):Void;
 	@:hlNative("flight", "flight_libgdx_atlas_texture_atlas_format")
 	public static function libgdxAtlasTextureAtlasFormat(registry:flight._hl.TextureAtlasFormatRegistry):flight._hl.TextureAtlasFormatDescriptor;
 	@:hlNative("flight", "flight_parse_texture_atlas")

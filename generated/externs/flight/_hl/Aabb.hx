@@ -58,7 +58,7 @@ abstract Aabb(hl.Bytes) {
 	inline public function free():Void {
 		flight._hl._fn.Geometry.freeAabb(cast this);
 	}
-	inline public function computeParticleEmitter3dLocalBounds(source:Dynamic):Void {
+	inline public function computeParticleEmitter3dLocalBounds(source:hl.Bytes):Void {
 		flight._hl._fn.Particleemitter.computeParticleEmitter3dLocalBoundsAabb(cast this, source);
 	}
 }

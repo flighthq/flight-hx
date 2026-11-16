@@ -53,7 +53,7 @@ extern class Camera {
 	@:native("flight_explain_camera_3d_view")
 	public static function explainCamera3dView(camera:flight._js.Camera3D):flight._js.Camera3DViewExplanation;
 	@:native("flight_get_camera_3d_frustum_corners")
-	public static function getCamera3dFrustumCorners(out:Dynamic, outLen:Int, camera:flight._js.Camera3D, aspect:Float):Bool;
+	public static function getCamera3dFrustumCorners(out:Dynamic, camera:flight._js.Camera3D, aspect:Float):Bool;
 	@:native("flight_get_camera_3d_ray_through_bounding_sphere")
 	public static function getCamera3dRayThroughBoundingSphere(out:flight._js.Ray3D, camera:flight._js.Camera3D, sphere:flight._js.BoundingSphere, aspect:Float):Bool;
 	@:native("flight_intersect_camera_3d_ray_with_plane")

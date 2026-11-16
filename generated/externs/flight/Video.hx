@@ -1,6 +1,6 @@
 package flight;
 
-inline function canPlayVideoType(backend:HostVideoCapability, mimeType:String):Bool {
+extern inline function canPlayVideoType(backend:HostVideoCapability, mimeType:String):Bool {
 #if hl
 	return flight._hl._fn.Video.canPlayVideoType(backend, cast mimeType);
 #elseif cpp
@@ -11,7 +11,7 @@ inline function canPlayVideoType(backend:HostVideoCapability, mimeType:String):B
 	#error "flight.Video: no backend for this target."
 #end
 }
-inline function inferVideoMimeType(url:String):String {
+extern inline function inferVideoMimeType(url:String):String {
 #if hl
 	return cast flight._hl._fn.Video.inferVideoMimeType(cast url);
 #elseif cpp
@@ -22,7 +22,7 @@ inline function inferVideoMimeType(url:String):String {
 	#error "flight.Video: no backend for this target."
 #end
 }
-inline function createVideoResource():VideoResource {
+extern inline function createVideoResource():VideoResource {
 #if hl
 	return flight._hl._fn.Video.createVideoResource();
 #elseif cpp
@@ -33,7 +33,7 @@ inline function createVideoResource():VideoResource {
 	#error "flight.Video: no backend for this target."
 #end
 }
-inline function destroyVideoResource(hostVideo:HostVideoCapability, resource:VideoResource):Void {
+extern inline function destroyVideoResource(hostVideo:HostVideoCapability, resource:VideoResource):Void {
 #if hl
 	flight._hl._fn.Video.destroyVideoResource(hostVideo, resource);
 #elseif cpp
@@ -44,7 +44,7 @@ inline function destroyVideoResource(hostVideo:HostVideoCapability, resource:Vid
 	#error "flight.Video: no backend for this target."
 #end
 }
-inline function disposeVideoResource(hostVideo:HostVideoCapability, resource:VideoResource):Void {
+extern inline function disposeVideoResource(hostVideo:HostVideoCapability, resource:VideoResource):Void {
 #if hl
 	flight._hl._fn.Video.disposeVideoResource(hostVideo, resource);
 #elseif cpp
@@ -55,7 +55,7 @@ inline function disposeVideoResource(hostVideo:HostVideoCapability, resource:Vid
 	#error "flight.Video: no backend for this target."
 #end
 }
-inline function getVideoChannelStateString(value:flight.VideoChannelState):String {
+extern inline function getVideoChannelStateString(value:flight.VideoChannelState):String {
 #if hl
 	return cast flight._hl._fn.Video.getVideoChannelStateString(value);
 #elseif cpp
@@ -66,7 +66,7 @@ inline function getVideoChannelStateString(value:flight.VideoChannelState):Strin
 	#error "flight.Video: no backend for this target."
 #end
 }
-inline function getVideoResourceDuration(hostVideo:HostVideoCapability, resource:VideoResource):Float {
+extern inline function getVideoResourceDuration(hostVideo:HostVideoCapability, resource:VideoResource):Float {
 #if hl
 	return flight._hl._fn.Video.getVideoResourceDuration(hostVideo, resource);
 #elseif cpp
@@ -77,7 +77,7 @@ inline function getVideoResourceDuration(hostVideo:HostVideoCapability, resource
 	#error "flight.Video: no backend for this target."
 #end
 }
-inline function getVideoResourceHeight(hostVideo:HostVideoCapability, resource:VideoResource):Float {
+extern inline function getVideoResourceHeight(hostVideo:HostVideoCapability, resource:VideoResource):Float {
 #if hl
 	return flight._hl._fn.Video.getVideoResourceHeight(hostVideo, resource);
 #elseif cpp
@@ -88,7 +88,7 @@ inline function getVideoResourceHeight(hostVideo:HostVideoCapability, resource:V
 	#error "flight.Video: no backend for this target."
 #end
 }
-inline function getVideoResourceLoadReadinessString(value:flight.VideoResourceLoadReadiness):String {
+extern inline function getVideoResourceLoadReadinessString(value:flight.VideoResourceLoadReadiness):String {
 #if hl
 	return cast flight._hl._fn.Video.getVideoResourceLoadReadinessString(value);
 #elseif cpp
@@ -99,7 +99,7 @@ inline function getVideoResourceLoadReadinessString(value:flight.VideoResourceLo
 	#error "flight.Video: no backend for this target."
 #end
 }
-inline function getVideoResourceWidth(hostVideo:HostVideoCapability, resource:VideoResource):Float {
+extern inline function getVideoResourceWidth(hostVideo:HostVideoCapability, resource:VideoResource):Float {
 #if hl
 	return flight._hl._fn.Video.getVideoResourceWidth(hostVideo, resource);
 #elseif cpp
@@ -110,7 +110,7 @@ inline function getVideoResourceWidth(hostVideo:HostVideoCapability, resource:Vi
 	#error "flight.Video: no backend for this target."
 #end
 }
-inline function hasVideoResourceElement(resource:VideoResource):Bool {
+extern inline function hasVideoResourceElement(resource:VideoResource):Bool {
 #if hl
 	return flight._hl._fn.Video.hasVideoResourceElement(resource);
 #elseif cpp
@@ -121,7 +121,7 @@ inline function hasVideoResourceElement(resource:VideoResource):Bool {
 	#error "flight.Video: no backend for this target."
 #end
 }
-inline function isVideoResourceEmpty(hostVideo:HostVideoCapability, resource:VideoResource):Bool {
+extern inline function isVideoResourceEmpty(hostVideo:HostVideoCapability, resource:VideoResource):Bool {
 #if hl
 	return flight._hl._fn.Video.isVideoResourceEmpty(hostVideo, resource);
 #elseif cpp
@@ -132,7 +132,7 @@ inline function isVideoResourceEmpty(hostVideo:HostVideoCapability, resource:Vid
 	#error "flight.Video: no backend for this target."
 #end
 }
-inline function isVideoResourceReady(hostVideo:HostVideoCapability, resource:VideoResource):Bool {
+extern inline function isVideoResourceReady(hostVideo:HostVideoCapability, resource:VideoResource):Bool {
 #if hl
 	return flight._hl._fn.Video.isVideoResourceReady(hostVideo, resource);
 #elseif cpp
@@ -143,7 +143,7 @@ inline function isVideoResourceReady(hostVideo:HostVideoCapability, resource:Vid
 	#error "flight.Video: no backend for this target."
 #end
 }
-inline function parseVideoChannelState(value:String):Int {
+extern inline function parseVideoChannelState(value:String):Int {
 #if hl
 	return flight._hl._fn.Video.parseVideoChannelState(cast value);
 #elseif cpp
@@ -154,7 +154,7 @@ inline function parseVideoChannelState(value:String):Int {
 	#error "flight.Video: no backend for this target."
 #end
 }
-inline function parseVideoResourceLoadReadiness(value:String):Int {
+extern inline function parseVideoResourceLoadReadiness(value:String):Int {
 #if hl
 	return flight._hl._fn.Video.parseVideoResourceLoadReadiness(cast value);
 #elseif cpp
@@ -165,7 +165,7 @@ inline function parseVideoResourceLoadReadiness(value:String):Int {
 	#error "flight.Video: no backend for this target."
 #end
 }
-inline function createVideoTexture(hostVideo:HostVideoCapability, source:VideoResource, opts:CreateTextureCommonOptions):Texture2D {
+extern inline function createVideoTexture(hostVideo:HostVideoCapability, source:VideoResource, opts:CreateTextureCommonOptions):Texture2D {
 #if hl
 	return flight._hl._fn.Video.createVideoTexture(hostVideo, source, opts);
 #elseif cpp
@@ -176,7 +176,7 @@ inline function createVideoTexture(hostVideo:HostVideoCapability, source:VideoRe
 	#error "flight.Video: no backend for this target."
 #end
 }
-inline function advanceVideoTextureTexture(hostVideo:HostVideoCapability, texture:Texture):Int {
+extern inline function advanceVideoTextureTexture(hostVideo:HostVideoCapability, texture:Texture):Int {
 #if hl
 	return flight._hl._fn.Video.advanceVideoTextureTexture(hostVideo, texture);
 #elseif cpp
@@ -187,7 +187,7 @@ inline function advanceVideoTextureTexture(hostVideo:HostVideoCapability, textur
 	#error "flight.Video: no backend for this target."
 #end
 }
-inline function cloneVideoTextureTexture(source:Texture):Int {
+extern inline function cloneVideoTextureTexture(source:Texture):Texture {
 #if hl
 	return flight._hl._fn.Video.cloneVideoTextureTexture(source);
 #elseif cpp
@@ -198,7 +198,7 @@ inline function cloneVideoTextureTexture(source:Texture):Int {
 	#error "flight.Video: no backend for this target."
 #end
 }
-inline function copyVideoTextureTextureTexture(out:Texture, source:Texture):Void {
+extern inline function copyVideoTextureTextureTexture(out:Texture, source:Texture):Void {
 #if hl
 	flight._hl._fn.Video.copyVideoTextureTextureTexture(out, source);
 #elseif cpp
@@ -209,7 +209,7 @@ inline function copyVideoTextureTextureTexture(out:Texture, source:Texture):Void
 	#error "flight.Video: no backend for this target."
 #end
 }
-inline function destroyVideoTexture(texture:Texture2D):Void {
+extern inline function destroyVideoTexture(texture:Texture2D):Void {
 #if hl
 	flight._hl._fn.Video.destroyVideoTexture(texture);
 #elseif cpp
@@ -220,7 +220,7 @@ inline function destroyVideoTexture(texture:Texture2D):Void {
 	#error "flight.Video: no backend for this target."
 #end
 }
-inline function getVideoTextureHeightTexture(hostVideo:HostVideoCapability, texture:Texture):Float {
+extern inline function getVideoTextureHeightTexture(hostVideo:HostVideoCapability, texture:Texture):Float {
 #if hl
 	return flight._hl._fn.Video.getVideoTextureHeightTexture(hostVideo, texture);
 #elseif cpp
@@ -231,7 +231,7 @@ inline function getVideoTextureHeightTexture(hostVideo:HostVideoCapability, text
 	#error "flight.Video: no backend for this target."
 #end
 }
-inline function getVideoTextureInverseUvMatrixTexture(out:Matrix3, texture:Texture):Void {
+extern inline function getVideoTextureInverseUvMatrixTexture(out:Matrix3, texture:Texture):Void {
 #if hl
 	flight._hl._fn.Video.getVideoTextureInverseUvMatrixTexture(out, texture);
 #elseif cpp
@@ -242,7 +242,7 @@ inline function getVideoTextureInverseUvMatrixTexture(out:Matrix3, texture:Textu
 	#error "flight.Video: no backend for this target."
 #end
 }
-inline function getVideoTextureUvMatrixTexture(out:Matrix3, texture:Texture):Void {
+extern inline function getVideoTextureUvMatrixTexture(out:Matrix3, texture:Texture):Void {
 #if hl
 	flight._hl._fn.Video.getVideoTextureUvMatrixTexture(out, texture);
 #elseif cpp
@@ -253,7 +253,7 @@ inline function getVideoTextureUvMatrixTexture(out:Matrix3, texture:Texture):Voi
 	#error "flight.Video: no backend for this target."
 #end
 }
-inline function getVideoTextureWidthTexture(hostVideo:HostVideoCapability, texture:Texture):Float {
+extern inline function getVideoTextureWidthTexture(hostVideo:HostVideoCapability, texture:Texture):Float {
 #if hl
 	return flight._hl._fn.Video.getVideoTextureWidthTexture(hostVideo, texture);
 #elseif cpp
@@ -264,7 +264,7 @@ inline function getVideoTextureWidthTexture(hostVideo:HostVideoCapability, textu
 	#error "flight.Video: no backend for this target."
 #end
 }
-inline function isVideoTextureFrameReadyTexture(hostVideo:HostVideoCapability, texture:Texture):Bool {
+extern inline function isVideoTextureFrameReadyTexture(hostVideo:HostVideoCapability, texture:Texture):Bool {
 #if hl
 	return flight._hl._fn.Video.isVideoTextureFrameReadyTexture(hostVideo, texture);
 #elseif cpp
@@ -275,7 +275,7 @@ inline function isVideoTextureFrameReadyTexture(hostVideo:HostVideoCapability, t
 	#error "flight.Video: no backend for this target."
 #end
 }
-inline function resetVideoTextureFrameTexture(texture:Texture):Void {
+extern inline function resetVideoTextureFrameTexture(texture:Texture):Void {
 #if hl
 	flight._hl._fn.Video.resetVideoTextureFrameTexture(texture);
 #elseif cpp
@@ -286,7 +286,7 @@ inline function resetVideoTextureFrameTexture(texture:Texture):Void {
 	#error "flight.Video: no backend for this target."
 #end
 }
-inline function setVideoTextureSourceTexture(hostVideo:HostVideoCapability, texture:Texture, source:VideoResource):Void {
+extern inline function setVideoTextureSourceTexture(hostVideo:HostVideoCapability, texture:Texture, source:VideoResource):Void {
 #if hl
 	flight._hl._fn.Video.setVideoTextureSourceTexture(hostVideo, texture, source);
 #elseif cpp
@@ -297,7 +297,7 @@ inline function setVideoTextureSourceTexture(hostVideo:HostVideoCapability, text
 	#error "flight.Video: no backend for this target."
 #end
 }
-inline function freeVideoResource(ptr:VideoResource):Void {
+extern inline function freeVideoResource(ptr:VideoResource):Void {
 #if hl
 	flight._hl._fn.Video.freeVideoResource(ptr);
 #elseif cpp

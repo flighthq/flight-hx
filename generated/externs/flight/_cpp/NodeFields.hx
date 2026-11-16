@@ -10,5 +10,5 @@ abstract NodeFields(cpp.Star<cpp.Void>) {
 
 	inline function get_enabled():Bool return NodeFields_Ffi.get_enabled(this);
 
-	inline function set_enabled(value:Bool):Bool return NodeFields_Ffi.set_enabled(this, value);
+	inline function set_enabled(value:Bool):Bool { NodeFields_Ffi.set_enabled(this, value); return value; }
 }

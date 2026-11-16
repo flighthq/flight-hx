@@ -1,6 +1,6 @@
 package flight;
 
-inline function explainTextLabelContent(source:Dynamic):TextLabelContentExplanation {
+extern inline function explainTextLabelContent(source:Dynamic):TextLabelContentExplanation {
 #if hl
 	return flight._hl._fn.Text.explainTextLabelContent(source);
 #elseif cpp
@@ -11,7 +11,7 @@ inline function explainTextLabelContent(source:Dynamic):TextLabelContentExplanat
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function createNativeText():Dynamic {
+extern inline function createNativeText():Dynamic {
 #if hl
 	return flight._hl._fn.Text.createNativeText();
 #elseif cpp
@@ -22,7 +22,7 @@ inline function createNativeText():Dynamic {
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function computeNativeTextLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
+extern inline function computeNativeTextLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
 #if hl
 	flight._hl._fn.Text.computeNativeTextLocalBoundsRectangle(out, source);
 #elseif cpp
@@ -33,7 +33,7 @@ inline function computeNativeTextLocalBoundsRectangle(out:Rectangle, source:Dyna
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function getNativeTextMeasuredHeight(source:NativeText):Float {
+extern inline function getNativeTextMeasuredHeight(source:NativeText):Float {
 #if hl
 	return flight._hl._fn.Text.getNativeTextMeasuredHeight(source);
 #elseif cpp
@@ -44,7 +44,7 @@ inline function getNativeTextMeasuredHeight(source:NativeText):Float {
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function getNativeTextMeasuredWidth(source:NativeText):Float {
+extern inline function getNativeTextMeasuredWidth(source:NativeText):Float {
 #if hl
 	return flight._hl._fn.Text.getNativeTextMeasuredWidth(source);
 #elseif cpp
@@ -55,7 +55,7 @@ inline function getNativeTextMeasuredWidth(source:NativeText):Float {
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function getNativeTextString(source:NativeText):String {
+extern inline function getNativeTextString(source:NativeText):String {
 #if hl
 	return cast flight._hl._fn.Text.getNativeTextString(source);
 #elseif cpp
@@ -66,7 +66,7 @@ inline function getNativeTextString(source:NativeText):String {
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function getNativeTextStyle(source:NativeText):Dynamic {
+extern inline function getNativeTextStyle(source:NativeText):Dynamic {
 #if hl
 	return flight._hl._fn.Text.getNativeTextStyle(source);
 #elseif cpp
@@ -77,7 +77,7 @@ inline function getNativeTextStyle(source:NativeText):Dynamic {
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function patchNativeTextStyle(source:Dynamic, patch:NativeTextStyle):Void {
+extern inline function patchNativeTextStyle(source:Dynamic, patch:NativeTextStyle):Void {
 #if hl
 	flight._hl._fn.Text.patchNativeTextStyle(source, patch);
 #elseif cpp
@@ -88,7 +88,7 @@ inline function patchNativeTextStyle(source:Dynamic, patch:NativeTextStyle):Void
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function setNativeTextAutoSize(source:Dynamic, value:TextAutoSize):Void {
+extern inline function setNativeTextAutoSize(source:Dynamic, value:TextAutoSize):Void {
 #if hl
 	flight._hl._fn.Text.setNativeTextAutoSize(source, value);
 #elseif cpp
@@ -99,7 +99,7 @@ inline function setNativeTextAutoSize(source:Dynamic, value:TextAutoSize):Void {
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function setNativeTextHeight(source:Dynamic, value:Float):Void {
+extern inline function setNativeTextHeight(source:Dynamic, value:Float):Void {
 #if hl
 	flight._hl._fn.Text.setNativeTextHeight(source, value);
 #elseif cpp
@@ -110,7 +110,7 @@ inline function setNativeTextHeight(source:Dynamic, value:Float):Void {
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function setNativeTextString(source:Dynamic, value:String):Void {
+extern inline function setNativeTextString(source:Dynamic, value:String):Void {
 #if hl
 	flight._hl._fn.Text.setNativeTextString(source, cast value);
 #elseif cpp
@@ -121,7 +121,7 @@ inline function setNativeTextString(source:Dynamic, value:String):Void {
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function setNativeTextStyle(source:Dynamic, value:Dynamic):Void {
+extern inline function setNativeTextStyle(source:Dynamic, value:Dynamic):Void {
 #if hl
 	flight._hl._fn.Text.setNativeTextStyle(source, value);
 #elseif cpp
@@ -132,7 +132,7 @@ inline function setNativeTextStyle(source:Dynamic, value:Dynamic):Void {
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function setNativeTextVerticalAlign(source:Dynamic, value:TextVerticalAlign):Void {
+extern inline function setNativeTextVerticalAlign(source:Dynamic, value:TextVerticalAlign):Void {
 #if hl
 	flight._hl._fn.Text.setNativeTextVerticalAlign(source, value);
 #elseif cpp
@@ -143,7 +143,7 @@ inline function setNativeTextVerticalAlign(source:Dynamic, value:TextVerticalAli
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function setNativeTextWidth(source:Dynamic, value:Float):Void {
+extern inline function setNativeTextWidth(source:Dynamic, value:Float):Void {
 #if hl
 	flight._hl._fn.Text.setNativeTextWidth(source, value);
 #elseif cpp
@@ -154,7 +154,7 @@ inline function setNativeTextWidth(source:Dynamic, value:Float):Void {
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function appendRichTextString(source:Dynamic, value:String):Void {
+extern inline function appendRichTextString(source:Dynamic, value:String):Void {
 #if hl
 	flight._hl._fn.Text.appendRichTextString(source, cast value);
 #elseif cpp
@@ -165,7 +165,7 @@ inline function appendRichTextString(source:Dynamic, value:String):Void {
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function buildRichTextLayoutParams(source:RichText, measure:TextMeasureFunction):TextLayoutParams {
+extern inline function buildRichTextLayoutParams(source:RichText, measure:TextMeasureFunction):TextLayoutParams {
 #if hl
 	return flight._hl._fn.Text.buildRichTextLayoutParams(source, measure);
 #elseif cpp
@@ -176,7 +176,7 @@ inline function buildRichTextLayoutParams(source:RichText, measure:TextMeasureFu
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function clearRichTextFormatRanges(source:Dynamic):Void {
+extern inline function clearRichTextFormatRanges(source:Dynamic):Void {
 #if hl
 	flight._hl._fn.Text.clearRichTextFormatRanges(source);
 #elseif cpp
@@ -187,7 +187,7 @@ inline function clearRichTextFormatRanges(source:Dynamic):Void {
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function computeRichTextLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
+extern inline function computeRichTextLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
 #if hl
 	flight._hl._fn.Text.computeRichTextLocalBoundsRectangle(out, source);
 #elseif cpp
@@ -198,7 +198,7 @@ inline function computeRichTextLocalBoundsRectangle(out:Rectangle, source:Dynami
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function dispatchRichTextLinkAtPoint(source:Dynamic, x:Float, y:Float):String {
+extern inline function dispatchRichTextLinkAtPoint(source:Dynamic, x:Float, y:Float):String {
 #if hl
 	return cast flight._hl._fn.Text.dispatchRichTextLinkAtPoint(source, x, y);
 #elseif cpp
@@ -209,7 +209,7 @@ inline function dispatchRichTextLinkAtPoint(source:Dynamic, x:Float, y:Float):St
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function dispatchRichTextWheel(source:Dynamic, deltaLines:Float, layout:TextLayoutResult):Void {
+extern inline function dispatchRichTextWheel(source:Dynamic, deltaLines:Float, layout:TextLayoutResult):Void {
 #if hl
 	flight._hl._fn.Text.dispatchRichTextWheel(source, deltaLines, layout);
 #elseif cpp
@@ -220,7 +220,7 @@ inline function dispatchRichTextWheel(source:Dynamic, deltaLines:Float, layout:T
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function enableTextFieldSignals(source:Dynamic):Dynamic {
+extern inline function enableTextFieldSignals(source:Dynamic):Dynamic {
 #if hl
 	return flight._hl._fn.Text.enableTextFieldSignals(source);
 #elseif cpp
@@ -231,7 +231,7 @@ inline function enableTextFieldSignals(source:Dynamic):Dynamic {
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function getRichTextBottomScrollV(source:Dynamic):Float {
+extern inline function getRichTextBottomScrollV(source:Dynamic):Float {
 #if hl
 	return flight._hl._fn.Text.getRichTextBottomScrollV(source);
 #elseif cpp
@@ -242,7 +242,7 @@ inline function getRichTextBottomScrollV(source:Dynamic):Float {
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function getRichTextCharIndexAtPoint(source:Dynamic, x:Float, y:Float):Int {
+extern inline function getRichTextCharIndexAtPoint(source:Dynamic, x:Float, y:Float):Int {
 #if hl
 	return flight._hl._fn.Text.getRichTextCharIndexAtPoint(source, x, y);
 #elseif cpp
@@ -253,7 +253,7 @@ inline function getRichTextCharIndexAtPoint(source:Dynamic, x:Float, y:Float):In
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function getRichTextDefaultTextFormat(source:RichText):Dynamic {
+extern inline function getRichTextDefaultTextFormat(source:RichText):Dynamic {
 #if hl
 	return flight._hl._fn.Text.getRichTextDefaultTextFormat(source);
 #elseif cpp
@@ -264,7 +264,7 @@ inline function getRichTextDefaultTextFormat(source:RichText):Dynamic {
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function getRichTextFormatRangeAt(out:TextFormat, source:RichText, index:Int):Void {
+extern inline function getRichTextFormatRangeAt(out:TextFormat, source:RichText, index:Int):Void {
 #if hl
 	flight._hl._fn.Text.getRichTextFormatRangeAt(out, source, index);
 #elseif cpp
@@ -275,7 +275,7 @@ inline function getRichTextFormatRangeAt(out:TextFormat, source:RichText, index:
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function getRichTextFormatRangeByIndex(out:TextFormatRange, source:RichText, i:Int):Bool {
+extern inline function getRichTextFormatRangeByIndex(out:TextFormatRange, source:RichText, i:Int):Bool {
 #if hl
 	return flight._hl._fn.Text.getRichTextFormatRangeByIndex(out, source, i);
 #elseif cpp
@@ -286,7 +286,7 @@ inline function getRichTextFormatRangeByIndex(out:TextFormatRange, source:RichTe
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function getRichTextFormatRangeCount(source:RichText):Int {
+extern inline function getRichTextFormatRangeCount(source:RichText):Int {
 #if hl
 	return flight._hl._fn.Text.getRichTextFormatRangeCount(source);
 #elseif cpp
@@ -297,7 +297,7 @@ inline function getRichTextFormatRangeCount(source:RichText):Int {
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function getRichTextFormatRangesIn(out:Dynamic, source:RichText, beginIndex:Int, endIndex:Int):Void {
+extern inline function getRichTextFormatRangesIn(out:Dynamic, source:RichText, beginIndex:Int, endIndex:Int):Void {
 #if hl
 	flight._hl._fn.Text.getRichTextFormatRangesIn(out, source, beginIndex, endIndex);
 #elseif cpp
@@ -308,7 +308,7 @@ inline function getRichTextFormatRangesIn(out:Dynamic, source:RichText, beginInd
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function getRichTextLength(source:RichText):Int {
+extern inline function getRichTextLength(source:RichText):Int {
 #if hl
 	return flight._hl._fn.Text.getRichTextLength(source);
 #elseif cpp
@@ -319,7 +319,7 @@ inline function getRichTextLength(source:RichText):Int {
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function getRichTextLineCount(source:Dynamic):Int {
+extern inline function getRichTextLineCount(source:Dynamic):Int {
 #if hl
 	return flight._hl._fn.Text.getRichTextLineCount(source);
 #elseif cpp
@@ -330,7 +330,7 @@ inline function getRichTextLineCount(source:Dynamic):Int {
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function getRichTextLineMetrics(source:Dynamic, lineIndex:Int):TextLineMetrics {
+extern inline function getRichTextLineMetrics(source:Dynamic, lineIndex:Int):TextLineMetrics {
 #if hl
 	return flight._hl._fn.Text.getRichTextLineMetrics(source, lineIndex);
 #elseif cpp
@@ -341,7 +341,7 @@ inline function getRichTextLineMetrics(source:Dynamic, lineIndex:Int):TextLineMe
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function getRichTextMaxScrollH(source:Dynamic):Float {
+extern inline function getRichTextMaxScrollH(source:Dynamic):Float {
 #if hl
 	return flight._hl._fn.Text.getRichTextMaxScrollH(source);
 #elseif cpp
@@ -352,7 +352,7 @@ inline function getRichTextMaxScrollH(source:Dynamic):Float {
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function getRichTextMaxScrollV(source:Dynamic):Float {
+extern inline function getRichTextMaxScrollV(source:Dynamic):Float {
 #if hl
 	return flight._hl._fn.Text.getRichTextMaxScrollV(source);
 #elseif cpp
@@ -363,7 +363,7 @@ inline function getRichTextMaxScrollV(source:Dynamic):Float {
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function getRichTextPasswordCharacter(source:RichText):String {
+extern inline function getRichTextPasswordCharacter(source:RichText):String {
 #if hl
 	return cast flight._hl._fn.Text.getRichTextPasswordCharacter(source);
 #elseif cpp
@@ -374,7 +374,7 @@ inline function getRichTextPasswordCharacter(source:RichText):String {
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function getRichTextString(source:RichText):String {
+extern inline function getRichTextString(source:RichText):String {
 #if hl
 	return cast flight._hl._fn.Text.getRichTextString(source);
 #elseif cpp
@@ -385,7 +385,7 @@ inline function getRichTextString(source:RichText):String {
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function getRichTextTextHeight(source:Dynamic):Float {
+extern inline function getRichTextTextHeight(source:Dynamic):Float {
 #if hl
 	return flight._hl._fn.Text.getRichTextTextHeight(source);
 #elseif cpp
@@ -396,7 +396,7 @@ inline function getRichTextTextHeight(source:Dynamic):Float {
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function getRichTextTextWidth(source:Dynamic):Float {
+extern inline function getRichTextTextWidth(source:Dynamic):Float {
 #if hl
 	return flight._hl._fn.Text.getRichTextTextWidth(source);
 #elseif cpp
@@ -407,7 +407,7 @@ inline function getRichTextTextWidth(source:Dynamic):Float {
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function getTextFieldSignals(source:Dynamic):Dynamic {
+extern inline function getTextFieldSignals(source:Dynamic):Dynamic {
 #if hl
 	return flight._hl._fn.Text.getTextFieldSignals(source);
 #elseif cpp
@@ -418,7 +418,7 @@ inline function getTextFieldSignals(source:Dynamic):Dynamic {
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function insertRichTextString(source:Dynamic, index:Int, value:String):Void {
+extern inline function insertRichTextString(source:Dynamic, index:Int, value:String):Void {
 #if hl
 	flight._hl._fn.Text.insertRichTextString(source, index, cast value);
 #elseif cpp
@@ -429,7 +429,7 @@ inline function insertRichTextString(source:Dynamic, index:Int, value:String):Vo
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function removeRichTextFormatRangesIn(source:Dynamic, begin:Int, end:Int):Void {
+extern inline function removeRichTextFormatRangesIn(source:Dynamic, begin:Int, end:Int):Void {
 #if hl
 	flight._hl._fn.Text.removeRichTextFormatRangesIn(source, begin, end);
 #elseif cpp
@@ -440,7 +440,7 @@ inline function removeRichTextFormatRangesIn(source:Dynamic, begin:Int, end:Int)
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function replaceRichTextString(source:Dynamic, beginIndex:Int, endIndex:Int, value:String):Void {
+extern inline function replaceRichTextString(source:Dynamic, beginIndex:Int, endIndex:Int, value:String):Void {
 #if hl
 	flight._hl._fn.Text.replaceRichTextString(source, beginIndex, endIndex, cast value);
 #elseif cpp
@@ -451,7 +451,7 @@ inline function replaceRichTextString(source:Dynamic, beginIndex:Int, endIndex:I
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function setRichTextBackground(source:Dynamic, value:Bool):Void {
+extern inline function setRichTextBackground(source:Dynamic, value:Bool):Void {
 #if hl
 	flight._hl._fn.Text.setRichTextBackground(source, value);
 #elseif cpp
@@ -462,7 +462,7 @@ inline function setRichTextBackground(source:Dynamic, value:Bool):Void {
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function setRichTextBackgroundColor(source:Dynamic, value:Int):Void {
+extern inline function setRichTextBackgroundColor(source:Dynamic, value:Int):Void {
 #if hl
 	flight._hl._fn.Text.setRichTextBackgroundColor(source, value);
 #elseif cpp
@@ -473,7 +473,7 @@ inline function setRichTextBackgroundColor(source:Dynamic, value:Int):Void {
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function setRichTextBorder(source:Dynamic, value:Bool):Void {
+extern inline function setRichTextBorder(source:Dynamic, value:Bool):Void {
 #if hl
 	flight._hl._fn.Text.setRichTextBorder(source, value);
 #elseif cpp
@@ -484,7 +484,7 @@ inline function setRichTextBorder(source:Dynamic, value:Bool):Void {
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function setRichTextBorderColor(source:Dynamic, value:Int):Void {
+extern inline function setRichTextBorderColor(source:Dynamic, value:Int):Void {
 #if hl
 	flight._hl._fn.Text.setRichTextBorderColor(source, value);
 #elseif cpp
@@ -495,7 +495,7 @@ inline function setRichTextBorderColor(source:Dynamic, value:Int):Void {
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function setRichTextCondenseWhite(source:Dynamic, value:Bool):Void {
+extern inline function setRichTextCondenseWhite(source:Dynamic, value:Bool):Void {
 #if hl
 	flight._hl._fn.Text.setRichTextCondenseWhite(source, value);
 #elseif cpp
@@ -506,7 +506,7 @@ inline function setRichTextCondenseWhite(source:Dynamic, value:Bool):Void {
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function setRichTextContent(source:Dynamic, content:RichTextContent):Void {
+extern inline function setRichTextContent(source:Dynamic, content:RichTextContent):Void {
 #if hl
 	flight._hl._fn.Text.setRichTextContent(source, content);
 #elseif cpp
@@ -517,7 +517,7 @@ inline function setRichTextContent(source:Dynamic, content:RichTextContent):Void
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function setRichTextDefaultTextFormat(source:Dynamic, value:Dynamic):Void {
+extern inline function setRichTextDefaultTextFormat(source:Dynamic, value:Dynamic):Void {
 #if hl
 	flight._hl._fn.Text.setRichTextDefaultTextFormat(source, value);
 #elseif cpp
@@ -528,7 +528,7 @@ inline function setRichTextDefaultTextFormat(source:Dynamic, value:Dynamic):Void
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function setRichTextFormatRange(source:Dynamic, format:Dynamic, start:Int, end:Int):Void {
+extern inline function setRichTextFormatRange(source:Dynamic, format:Dynamic, start:haxe.Int64, end:haxe.Int64):Void {
 #if hl
 	flight._hl._fn.Text.setRichTextFormatRange(source, format, start, end);
 #elseif cpp
@@ -539,7 +539,7 @@ inline function setRichTextFormatRange(source:Dynamic, format:Dynamic, start:Int
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function setRichTextHeight(source:Dynamic, value:Float):Void {
+extern inline function setRichTextHeight(source:Dynamic, value:Float):Void {
 #if hl
 	flight._hl._fn.Text.setRichTextHeight(source, value);
 #elseif cpp
@@ -550,7 +550,7 @@ inline function setRichTextHeight(source:Dynamic, value:Float):Void {
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function setRichTextMaxChars(source:Dynamic, value:Int):Void {
+extern inline function setRichTextMaxChars(source:Dynamic, value:Int):Void {
 #if hl
 	flight._hl._fn.Text.setRichTextMaxChars(source, value);
 #elseif cpp
@@ -561,7 +561,7 @@ inline function setRichTextMaxChars(source:Dynamic, value:Int):Void {
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function setRichTextMouseWheelEnabled(source:Dynamic, value:Bool):Void {
+extern inline function setRichTextMouseWheelEnabled(source:Dynamic, value:Bool):Void {
 #if hl
 	flight._hl._fn.Text.setRichTextMouseWheelEnabled(source, value);
 #elseif cpp
@@ -572,7 +572,7 @@ inline function setRichTextMouseWheelEnabled(source:Dynamic, value:Bool):Void {
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function setRichTextMultiline(source:Dynamic, value:Bool):Void {
+extern inline function setRichTextMultiline(source:Dynamic, value:Bool):Void {
 #if hl
 	flight._hl._fn.Text.setRichTextMultiline(source, value);
 #elseif cpp
@@ -583,7 +583,7 @@ inline function setRichTextMultiline(source:Dynamic, value:Bool):Void {
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function setRichTextScrollH(source:Dynamic, value:Float, layout:TextLayoutResult):Void {
+extern inline function setRichTextScrollH(source:Dynamic, value:Float, layout:TextLayoutResult):Void {
 #if hl
 	flight._hl._fn.Text.setRichTextScrollH(source, value, layout);
 #elseif cpp
@@ -594,7 +594,7 @@ inline function setRichTextScrollH(source:Dynamic, value:Float, layout:TextLayou
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function setRichTextScrollV(source:Dynamic, value:Float, layout:TextLayoutResult):Void {
+extern inline function setRichTextScrollV(source:Dynamic, value:Float, layout:TextLayoutResult):Void {
 #if hl
 	flight._hl._fn.Text.setRichTextScrollV(source, value, layout);
 #elseif cpp
@@ -605,7 +605,7 @@ inline function setRichTextScrollV(source:Dynamic, value:Float, layout:TextLayou
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function setRichTextSelectable(source:Dynamic, value:Bool):Void {
+extern inline function setRichTextSelectable(source:Dynamic, value:Bool):Void {
 #if hl
 	flight._hl._fn.Text.setRichTextSelectable(source, value);
 #elseif cpp
@@ -616,7 +616,7 @@ inline function setRichTextSelectable(source:Dynamic, value:Bool):Void {
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function setRichTextString(source:Dynamic, value:String):Void {
+extern inline function setRichTextString(source:Dynamic, value:String):Void {
 #if hl
 	flight._hl._fn.Text.setRichTextString(source, cast value);
 #elseif cpp
@@ -627,7 +627,7 @@ inline function setRichTextString(source:Dynamic, value:String):Void {
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function setRichTextTextColor(source:Dynamic, value:Int):Void {
+extern inline function setRichTextTextColor(source:Dynamic, value:Int):Void {
 #if hl
 	flight._hl._fn.Text.setRichTextTextColor(source, value);
 #elseif cpp
@@ -638,7 +638,7 @@ inline function setRichTextTextColor(source:Dynamic, value:Int):Void {
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function setRichTextVerticalAlign(source:Dynamic, value:TextVerticalAlign):Void {
+extern inline function setRichTextVerticalAlign(source:Dynamic, value:TextVerticalAlign):Void {
 #if hl
 	flight._hl._fn.Text.setRichTextVerticalAlign(source, value);
 #elseif cpp
@@ -649,7 +649,7 @@ inline function setRichTextVerticalAlign(source:Dynamic, value:TextVerticalAlign
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function setRichTextWidth(source:Dynamic, value:Float):Void {
+extern inline function setRichTextWidth(source:Dynamic, value:Float):Void {
 #if hl
 	flight._hl._fn.Text.setRichTextWidth(source, value);
 #elseif cpp
@@ -660,7 +660,7 @@ inline function setRichTextWidth(source:Dynamic, value:Float):Void {
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function setRichTextWordWrap(source:Dynamic, value:Bool):Void {
+extern inline function setRichTextWordWrap(source:Dynamic, value:Bool):Void {
 #if hl
 	flight._hl._fn.Text.setRichTextWordWrap(source, value);
 #elseif cpp
@@ -671,7 +671,7 @@ inline function setRichTextWordWrap(source:Dynamic, value:Bool):Void {
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function computeTextFormatFontString(format:TextFormat):String {
+extern inline function computeTextFormatFontString(format:TextFormat):String {
 #if hl
 	return cast flight._hl._fn.Text.computeTextFormatFontString(format);
 #elseif cpp
@@ -682,7 +682,7 @@ inline function computeTextFormatFontString(format:TextFormat):String {
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function appendTextLabelString(source:Dynamic, value:String):Void {
+extern inline function appendTextLabelString(source:Dynamic, value:String):Void {
 #if hl
 	flight._hl._fn.Text.appendTextLabelString(source, cast value);
 #elseif cpp
@@ -693,7 +693,7 @@ inline function appendTextLabelString(source:Dynamic, value:String):Void {
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function computeTextLabelLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
+extern inline function computeTextLabelLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
 #if hl
 	flight._hl._fn.Text.computeTextLabelLocalBoundsRectangle(out, source);
 #elseif cpp
@@ -704,7 +704,7 @@ inline function computeTextLabelLocalBoundsRectangle(out:Rectangle, source:Dynam
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function getTextLabelFormat(source:TextLabel):Dynamic {
+extern inline function getTextLabelFormat(source:TextLabel):Dynamic {
 #if hl
 	return flight._hl._fn.Text.getTextLabelFormat(source);
 #elseif cpp
@@ -715,7 +715,7 @@ inline function getTextLabelFormat(source:TextLabel):Dynamic {
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function getTextLabelString(source:TextLabel):String {
+extern inline function getTextLabelString(source:TextLabel):String {
 #if hl
 	return cast flight._hl._fn.Text.getTextLabelString(source);
 #elseif cpp
@@ -726,7 +726,7 @@ inline function getTextLabelString(source:TextLabel):String {
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function setTextLabelAutoSize(source:Dynamic, value:TextAutoSize):Void {
+extern inline function setTextLabelAutoSize(source:Dynamic, value:TextAutoSize):Void {
 #if hl
 	flight._hl._fn.Text.setTextLabelAutoSize(source, value);
 #elseif cpp
@@ -737,7 +737,7 @@ inline function setTextLabelAutoSize(source:Dynamic, value:TextAutoSize):Void {
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function setTextLabelFormat(source:Dynamic, value:Dynamic):Void {
+extern inline function setTextLabelFormat(source:Dynamic, value:Dynamic):Void {
 #if hl
 	flight._hl._fn.Text.setTextLabelFormat(source, value);
 #elseif cpp
@@ -748,7 +748,7 @@ inline function setTextLabelFormat(source:Dynamic, value:Dynamic):Void {
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function setTextLabelHeight(source:Dynamic, value:Float):Void {
+extern inline function setTextLabelHeight(source:Dynamic, value:Float):Void {
 #if hl
 	flight._hl._fn.Text.setTextLabelHeight(source, value);
 #elseif cpp
@@ -759,7 +759,7 @@ inline function setTextLabelHeight(source:Dynamic, value:Float):Void {
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function setTextLabelString(source:Dynamic, value:String):Void {
+extern inline function setTextLabelString(source:Dynamic, value:String):Void {
 #if hl
 	flight._hl._fn.Text.setTextLabelString(source, cast value);
 #elseif cpp
@@ -770,7 +770,7 @@ inline function setTextLabelString(source:Dynamic, value:String):Void {
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function setTextLabelVerticalAlign(source:Dynamic, value:TextVerticalAlign):Void {
+extern inline function setTextLabelVerticalAlign(source:Dynamic, value:TextVerticalAlign):Void {
 #if hl
 	flight._hl._fn.Text.setTextLabelVerticalAlign(source, value);
 #elseif cpp
@@ -781,7 +781,7 @@ inline function setTextLabelVerticalAlign(source:Dynamic, value:TextVerticalAlig
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function setTextLabelWidth(source:Dynamic, value:Float):Void {
+extern inline function setTextLabelWidth(source:Dynamic, value:Float):Void {
 #if hl
 	flight._hl._fn.Text.setTextLabelWidth(source, value);
 #elseif cpp
@@ -792,7 +792,7 @@ inline function setTextLabelWidth(source:Dynamic, value:Float):Void {
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function getTextLayout(source:Dynamic):Dynamic {
+extern inline function getTextLayout(source:Dynamic):Dynamic {
 #if hl
 	return flight._hl._fn.Text.getTextLayout(source);
 #elseif cpp
@@ -803,7 +803,7 @@ inline function getTextLayout(source:Dynamic):Dynamic {
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function getTextLayoutMetrics(out:TextMetrics, source:Dynamic):Void {
+extern inline function getTextLayoutMetrics(out:TextMetrics, source:Dynamic):Void {
 #if hl
 	flight._hl._fn.Text.getTextLayoutMetrics(out, source);
 #elseif cpp
@@ -814,7 +814,7 @@ inline function getTextLayoutMetrics(out:TextMetrics, source:Dynamic):Void {
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function freeTextLabelContentExplanation(ptr:TextLabelContentExplanation):Void {
+extern inline function freeTextLabelContentExplanation(ptr:TextLabelContentExplanation):Void {
 #if hl
 	flight._hl._fn.Text.freeTextLabelContentExplanation(ptr);
 #elseif cpp
@@ -825,7 +825,7 @@ inline function freeTextLabelContentExplanation(ptr:TextLabelContentExplanation)
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function freeTextLayoutParams(ptr:TextLayoutParams):Void {
+extern inline function freeTextLayoutParams(ptr:TextLayoutParams):Void {
 #if hl
 	flight._hl._fn.Text.freeTextLayoutParams(ptr);
 #elseif cpp
@@ -836,7 +836,7 @@ inline function freeTextLayoutParams(ptr:TextLayoutParams):Void {
 	#error "flight.Text: no backend for this target."
 #end
 }
-inline function freeTextLineMetrics(ptr:TextLineMetrics):Void {
+extern inline function freeTextLineMetrics(ptr:TextLineMetrics):Void {
 #if hl
 	flight._hl._fn.Text.freeTextLineMetrics(ptr);
 #elseif cpp

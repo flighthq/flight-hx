@@ -10,5 +10,5 @@ abstract SpritesheetTimelineSourceExplanation(cpp.Star<cpp.Void>) {
 
 	inline function get_directionMaterialized():Bool return SpritesheetTimelineSourceExplanation_Ffi.get_directionMaterialized(this);
 
-	inline function set_directionMaterialized(value:Bool):Bool return SpritesheetTimelineSourceExplanation_Ffi.set_directionMaterialized(this, value);
+	inline function set_directionMaterialized(value:Bool):Bool { SpritesheetTimelineSourceExplanation_Ffi.set_directionMaterialized(this, value); return value; }
 }

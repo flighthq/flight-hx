@@ -10,5 +10,5 @@ abstract AnimationClipEvent(cpp.Star<cpp.Void>) {
 
 	inline function get_time():Single return AnimationClipEvent_Ffi.get_time(this);
 
-	inline function set_time(value:Single):Single return AnimationClipEvent_Ffi.set_time(this, value);
+	inline function set_time(value:Single):Single { AnimationClipEvent_Ffi.set_time(this, value); return value; }
 }

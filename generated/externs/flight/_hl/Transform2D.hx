@@ -53,10 +53,10 @@ abstract Transform2D(hl.Bytes) {
 	inline public function decomposeMatrixTo(source:flight._hl.Matrix):Void {
 		flight._hl._fn.Geometry.decomposeMatrixToTransform2d(cast this, source);
 	}
-	inline public function getNode(source:Dynamic):Void {
+	inline public function getNode(source:hl.Bytes):Void {
 		flight._hl._fn.Node.getNodeTransform2d(cast this, source);
 	}
-	inline public function setNode(target:Dynamic):Void {
+	inline public function setNode(target:hl.Bytes):Void {
 		flight._hl._fn.Node.setNodeTransform2d(target, cast this);
 	}
 }

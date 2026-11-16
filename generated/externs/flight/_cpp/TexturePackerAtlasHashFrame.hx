@@ -12,10 +12,10 @@ abstract TexturePackerAtlasHashFrame(cpp.Star<cpp.Void>) {
 
 	inline function get_rotated():Bool return TexturePackerAtlasHashFrame_Ffi.get_rotated(this);
 
-	inline function set_rotated(value:Bool):Bool return TexturePackerAtlasHashFrame_Ffi.set_rotated(this, value);
+	inline function set_rotated(value:Bool):Bool { TexturePackerAtlasHashFrame_Ffi.set_rotated(this, value); return value; }
 	public var trimmed(get, set):Bool;
 
 	inline function get_trimmed():Bool return TexturePackerAtlasHashFrame_Ffi.get_trimmed(this);
 
-	inline function set_trimmed(value:Bool):Bool return TexturePackerAtlasHashFrame_Ffi.set_trimmed(this, value);
+	inline function set_trimmed(value:Bool):Bool { TexturePackerAtlasHashFrame_Ffi.set_trimmed(this, value); return value; }
 }

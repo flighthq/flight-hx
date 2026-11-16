@@ -10,19 +10,19 @@ extern class Particles {
 	@:hlNative("flight", "flight_apply_particle_object_forces")
 	public static function applyParticleObjectForces(objects:hl.Bytes, objectsLen:Int, state:flight._hl.ParticleObjectsState, forces:hl.Bytes, forcesLen:Int, deltaTime:Single):Void;
 	@:hlNative("flight", "flight_build_particle_curve")
-	public static function buildParticleCurve(out:Dynamic, fFn:Dynamic, fCtx:Dynamic):Void;
+	public static function buildParticleCurve(out:hl.Bytes, fFn:hl.Bytes, fCtx:hl.Bytes, samples:Int):Void;
 	@:hlNative("flight", "flight_lerp_hsv_direct")
 	public static function lerpHsvDirect(out:hl.Bytes, outLen:Int, offset:Int, r0:Single, g0:Single, b0:Single, r1:Single, g1:Single, b1:Single, t:Single):Void;
 	@:hlNative("flight", "flight_lerp_hsv_in_place")
 	public static function lerpHsvInPlace(colorsOut:hl.Bytes, colorsOutLen:Int, offset:Int, birth:hl.Bytes, birthLen:Int, death:hl.Bytes, deathLen:Int, t:Single):Void;
 	@:hlNative("flight", "flight_particle_color_curve_from_keyframes")
-	public static function particleColorCurveFromKeyframes(out:Dynamic, keys:hl.Bytes, keysLen:Int, samples:Int):Void;
+	public static function particleColorCurveFromKeyframes(out:hl.Bytes, keys:hl.Bytes, keysLen:Int, samples:Int):Void;
 	@:hlNative("flight", "flight_particle_color_curve_to_keyframes")
-	public static function particleColorCurveToKeyframes(out:Dynamic, lut:hl.Bytes, lutLen:Int):Void;
+	public static function particleColorCurveToKeyframes(out:hl.Bytes, lut:hl.Bytes, lutLen:Int):Void;
 	@:hlNative("flight", "flight_particle_curve_from_keyframes")
-	public static function particleCurveFromKeyframes(out:Dynamic, keys:hl.Bytes, keysLen:Int, samples:Int):Void;
+	public static function particleCurveFromKeyframes(out:hl.Bytes, keys:hl.Bytes, keysLen:Int, samples:Int):Void;
 	@:hlNative("flight", "flight_particle_curve_to_keyframes")
-	public static function particleCurveToKeyframes(out:Dynamic, lut:hl.Bytes, lutLen:Int):Void;
+	public static function particleCurveToKeyframes(out:hl.Bytes, lut:hl.Bytes, lutLen:Int):Void;
 	@:hlNative("flight", "flight_sample_particle_color_curve")
 	public static function sampleParticleColorCurve(out:hl.Bytes, outLen:Int, offset:Int, lut:hl.Bytes, lutLen:Int, t:Single):Void;
 	@:hlNative("flight", "flight_sample_particle_curve")
@@ -34,7 +34,7 @@ extern class Particles {
 	@:hlNative("flight", "flight_enable_particle_emitter_signals")
 	public static function enableParticleEmitterSignals(state:flight._hl.ParticleEmitterState):flight._hl.ParticleEmitterSignals;
 	@:hlNative("flight", "flight_get_particle_emitter_signals")
-	public static function getParticleEmitterSignals(state:flight._hl.ParticleEmitterState):Dynamic;
+	public static function getParticleEmitterSignals(state:flight._hl.ParticleEmitterState):flight._hl.ParticleEmitterSignals;
 	@:hlNative("flight", "flight_create_particle_emitter_state")
 	public static function createParticleEmitterState():flight._hl.ParticleEmitterState;
 	@:hlNative("flight", "flight_create_particle_objects_state")
@@ -50,7 +50,7 @@ extern class Particles {
 	@:hlNative("flight", "flight_normalize_particle_emitter_config")
 	public static function normalizeParticleEmitterConfig(config:flight._hl.ParticleEmitterConfig):flight._hl.ParticleEmitterConfig;
 	@:hlNative("flight", "flight_validate_particle_emitter_config")
-	public static function validateParticleEmitterConfig(out:Dynamic, config:flight._hl.ParticleEmitterConfig):Void;
+	public static function validateParticleEmitterConfig(out:hl.Bytes, config:flight._hl.ParticleEmitterConfig):Void;
 	@:hlNative("flight", "flight_free_particle_emitter_config")
 	public static function freeParticleEmitterConfig(ptr:flight._hl.ParticleEmitterConfig):Void;
 	@:hlNative("flight", "flight_free_particle_emitter_config_options")

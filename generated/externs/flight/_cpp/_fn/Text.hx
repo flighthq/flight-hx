@@ -98,7 +98,7 @@ extern class Text {
 	@:native("flight_set_rich_text_default_text_format")
 	public static function setRichTextDefaultTextFormat(source:cpp.Star<cpp.Void>, value:cpp.Star<cpp.Void>):Void;
 	@:native("flight_set_rich_text_format_range")
-	public static function setRichTextFormatRange(source:cpp.Star<cpp.Void>, format:cpp.Star<cpp.Void>, start:Int, end:Int):Void;
+	public static function setRichTextFormatRange(source:cpp.Star<cpp.Void>, format:cpp.Star<cpp.Void>, start:haxe.Int64, end:haxe.Int64):Void;
 	@:native("flight_set_rich_text_height")
 	public static function setRichTextHeight(source:cpp.Star<cpp.Void>, value:Single):Void;
 	@:native("flight_set_rich_text_max_chars")

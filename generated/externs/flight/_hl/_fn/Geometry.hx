@@ -74,7 +74,7 @@ extern class Geometry {
 	@:hlNative("flight", "flight_disable_geometry_pool_guards")
 	public static function disableGeometryPoolGuards():Void;
 	@:hlNative("flight", "flight_enable_geometry_pool_guards")
-	public static function enableGeometryPoolGuards(logState:Dynamic, clockFn:Dynamic, clockCtx:Dynamic):Void;
+	public static function enableGeometryPoolGuards(logState:hl.Bytes, clockFn:hl.Bytes, clockCtx:hl.Bytes):Void;
 	@:hlNative("flight", "flight_create_frustum")
 	public static function createFrustum():flight._hl.Frustum;
 	@:hlNative("flight", "flight_get_frustum_corners")
@@ -542,11 +542,11 @@ extern class Geometry {
 	@:hlNative("flight", "flight_decompose_matrix4_to_transform3d")
 	public static function decomposeMatrix4ToTransform3d(out:flight._hl.Transform3D, m:flight._hl.Matrix4):Void;
 	@:hlNative("flight", "flight_reserve_float32_array")
-	public static function reserveFloat32Array(array:hl.Bytes, arrayLen:Int, capacity:Int):Dynamic;
+	public static function reserveFloat32Array(array:hl.Bytes, arrayLen:Int, capacity:Int):hl.Bytes;
 	@:hlNative("flight", "flight_reserve_int16_array")
-	public static function reserveInt16Array(array:hl.Bytes, arrayLen:Int, capacity:Int):Dynamic;
+	public static function reserveInt16Array(array:hl.Bytes, arrayLen:Int, capacity:Int):hl.Bytes;
 	@:hlNative("flight", "flight_reserve_uint16_array")
-	public static function reserveUint16Array(array:hl.Bytes, arrayLen:Int, capacity:Int):Dynamic;
+	public static function reserveUint16Array(array:hl.Bytes, arrayLen:Int, capacity:Int):hl.Bytes;
 	@:hlNative("flight", "flight_create_vector2")
 	public static function createVector2(x:Single, y:Single):flight._hl.Vector2;
 	@:hlNative("flight", "flight_create_vector2_from_polar")

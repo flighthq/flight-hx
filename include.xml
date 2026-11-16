@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+  <source path="lib" />
+  <haxeflag name="--macro" value="flight_hx.Package.configure()" />
+
+  <!-- An explicit platform also supports cross-compilation without guessing from the host. -->
+  <set name="flight_native_platform" value="LinuxArm64" if="linux arm64 || linux HXCPP_ARM64" unless="flight_native_platform" />
+  <set name="flight_native_platform" value="Linux64" if="linux" unless="flight_native_platform" />
+  <set name="flight_native_platform" value="MacArm64" if="mac arm64 || mac HXCPP_ARM64" unless="flight_native_platform" />
+  <set name="flight_native_platform" value="Mac64" if="mac" unless="flight_native_platform" />
+  <set name="flight_native_platform" value="Windows64" if="windows" unless="flight_native_platform" />
+  <set name="flight_native_platform" value="iPhoneSimulatorArm64" if="ios simulator arm64 || ios iphonesim arm64" unless="flight_native_platform" />
+  <set name="flight_native_platform" value="iPhoneSimulator64" if="ios simulator || ios iphonesim" unless="flight_native_platform" />
+  <set name="flight_native_platform" value="iPhoneOSArm64" if="ios" unless="flight_native_platform" />
+  <haxedef name="flight_native_platform" value="${flight_native_platform}" if="flight_native_platform" />
+
+  <assets path="native/bin/${flight_native_platform}/libflight_ffi.so" rename="libflight_ffi.so" type="binary" embed="false" if="linux cpp || linux hl" />
+  <assets path="native/bin/${flight_native_platform}/libflight_ffi.dylib" rename="../MacOS/libflight_ffi.dylib" type="binary" embed="false" if="mac cpp || mac hl" />
+  <assets path="native/bin/${flight_native_platform}/flight_ffi.dll" rename="flight_ffi.dll" type="binary" embed="false" if="windows cpp || windows hl" />
+  <dependency path="native/lib/${flight_native_platform}/libflight_ffi.a" if="ios" />
+  <ndll name="flight" haxelib="flight" if="hl" />
+</project>

@@ -22,7 +22,7 @@ typedef Spritesheet = flight._js.Spritesheet;
 
 #end
 
-inline function createSpritesheet():Spritesheet {
+extern inline function createSpritesheet():Spritesheet {
 #if hl
 	return flight._hl._fn.Spritesheet.createSpritesheet();
 #elseif cpp
@@ -33,7 +33,7 @@ inline function createSpritesheet():Spritesheet {
 	#error "flight.Spritesheet: no backend for this target."
 #end
 }
-inline function cloneSpritesheet(spritesheet:Spritesheet):Spritesheet {
+extern inline function cloneSpritesheet(spritesheet:Spritesheet):Spritesheet {
 #if hl
 	return flight._hl._fn.Spritesheet.cloneSpritesheet(spritesheet);
 #elseif cpp
@@ -44,7 +44,7 @@ inline function cloneSpritesheet(spritesheet:Spritesheet):Spritesheet {
 	#error "flight.Spritesheet: no backend for this target."
 #end
 }
-inline function getSpritesheetAnimation(spritesheet:Spritesheet, label:String):Dynamic {
+extern inline function getSpritesheetAnimation(spritesheet:Spritesheet, label:String):Dynamic {
 #if hl
 	return flight._hl._fn.Spritesheet.getSpritesheetAnimation(spritesheet, cast label);
 #elseif cpp
@@ -55,7 +55,7 @@ inline function getSpritesheetAnimation(spritesheet:Spritesheet, label:String):D
 	#error "flight.Spritesheet: no backend for this target."
 #end
 }
-inline function createSpritesheetAnimation():Dynamic {
+extern inline function createSpritesheetAnimation():Dynamic {
 #if hl
 	return flight._hl._fn.Spritesheet.createSpritesheetAnimation();
 #elseif cpp
@@ -66,7 +66,7 @@ inline function createSpritesheetAnimation():Dynamic {
 	#error "flight.Spritesheet: no backend for this target."
 #end
 }
-inline function createSpritesheetAnimationFromFrameNames(spritesheet:Spritesheet, pattern:SpritesheetFramePattern, options:SpritesheetAnimationFrameNameOptions):Dynamic {
+extern inline function createSpritesheetAnimationFromFrameNames(spritesheet:Spritesheet, pattern:SpritesheetFramePattern, options:SpritesheetAnimationFrameNameOptions):Dynamic {
 #if hl
 	return flight._hl._fn.Spritesheet.createSpritesheetAnimationFromFrameNames(spritesheet, pattern, options);
 #elseif cpp
@@ -77,7 +77,7 @@ inline function createSpritesheetAnimationFromFrameNames(spritesheet:Spritesheet
 	#error "flight.Spritesheet: no backend for this target."
 #end
 }
-inline function getSpritesheetAnimationDirectionString(value:flight.SpritesheetAnimationDirection):String {
+extern inline function getSpritesheetAnimationDirectionString(value:flight.SpritesheetAnimationDirection):String {
 #if hl
 	return cast flight._hl._fn.Spritesheet.getSpritesheetAnimationDirectionString(value);
 #elseif cpp
@@ -88,7 +88,7 @@ inline function getSpritesheetAnimationDirectionString(value:flight.SpritesheetA
 	#error "flight.Spritesheet: no backend for this target."
 #end
 }
-inline function parseSpritesheetAnimationDirection(value:String):Int {
+extern inline function parseSpritesheetAnimationDirection(value:String):Int {
 #if hl
 	return flight._hl._fn.Spritesheet.parseSpritesheetAnimationDirection(cast value);
 #elseif cpp
@@ -99,7 +99,7 @@ inline function parseSpritesheetAnimationDirection(value:String):Int {
 	#error "flight.Spritesheet: no backend for this target."
 #end
 }
-inline function createSpritesheetAnimationData():SpritesheetAnimationData {
+extern inline function createSpritesheetAnimationData():SpritesheetAnimationData {
 #if hl
 	return flight._hl._fn.Spritesheet.createSpritesheetAnimationData();
 #elseif cpp
@@ -110,7 +110,7 @@ inline function createSpritesheetAnimationData():SpritesheetAnimationData {
 	#error "flight.Spritesheet: no backend for this target."
 #end
 }
-inline function createSpritesheetData():SpritesheetData {
+extern inline function createSpritesheetData():SpritesheetData {
 #if hl
 	return flight._hl._fn.Spritesheet.createSpritesheetData();
 #elseif cpp
@@ -121,7 +121,7 @@ inline function createSpritesheetData():SpritesheetData {
 	#error "flight.Spritesheet: no backend for this target."
 #end
 }
-inline function createSpritesheetFrameData():SpritesheetFrameData {
+extern inline function createSpritesheetFrameData():SpritesheetFrameData {
 #if hl
 	return flight._hl._fn.Spritesheet.createSpritesheetFrameData();
 #elseif cpp
@@ -132,7 +132,7 @@ inline function createSpritesheetFrameData():SpritesheetFrameData {
 	#error "flight.Spritesheet: no backend for this target."
 #end
 }
-inline function createSpritesheetFrame():Dynamic {
+extern inline function createSpritesheetFrame():Dynamic {
 #if hl
 	return flight._hl._fn.Spritesheet.createSpritesheetFrame();
 #elseif cpp
@@ -143,7 +143,7 @@ inline function createSpritesheetFrame():Dynamic {
 	#error "flight.Spritesheet: no backend for this target."
 #end
 }
-inline function createSpritesheetFromData(data:SpritesheetData, atlas:Dynamic):Spritesheet {
+extern inline function createSpritesheetFromData(data:SpritesheetData, atlas:Dynamic):Spritesheet {
 #if hl
 	return flight._hl._fn.Spritesheet.createSpritesheetFromData(data, atlas);
 #elseif cpp
@@ -154,7 +154,7 @@ inline function createSpritesheetFromData(data:SpritesheetData, atlas:Dynamic):S
 	#error "flight.Spritesheet: no backend for this target."
 #end
 }
-inline function createSpritesheetFromGrid(options:GridSliceOptions):Spritesheet {
+extern inline function createSpritesheetFromGrid(options:GridSliceOptions):Spritesheet {
 #if hl
 	return flight._hl._fn.Spritesheet.createSpritesheetFromGrid(options);
 #elseif cpp
@@ -165,7 +165,7 @@ inline function createSpritesheetFromGrid(options:GridSliceOptions):Spritesheet 
 	#error "flight.Spritesheet: no backend for this target."
 #end
 }
-inline function createSpritesheetPlayer():Dynamic {
+extern inline function createSpritesheetPlayer():Dynamic {
 #if hl
 	return flight._hl._fn.Spritesheet.createSpritesheetPlayer();
 #elseif cpp
@@ -176,7 +176,7 @@ inline function createSpritesheetPlayer():Dynamic {
 	#error "flight.Spritesheet: no backend for this target."
 #end
 }
-inline function acquireSpritesheetPlayer(pool:SpritesheetPlayerPool):Dynamic {
+extern inline function acquireSpritesheetPlayer(pool:SpritesheetPlayerPool):Dynamic {
 #if hl
 	return flight._hl._fn.Spritesheet.acquireSpritesheetPlayer(pool);
 #elseif cpp
@@ -187,7 +187,7 @@ inline function acquireSpritesheetPlayer(pool:SpritesheetPlayerPool):Dynamic {
 	#error "flight.Spritesheet: no backend for this target."
 #end
 }
-inline function cloneSpritesheetPlayer(player:SpritesheetPlayer):Dynamic {
+extern inline function cloneSpritesheetPlayer(player:SpritesheetPlayer):Dynamic {
 #if hl
 	return flight._hl._fn.Spritesheet.cloneSpritesheetPlayer(player);
 #elseif cpp
@@ -198,7 +198,7 @@ inline function cloneSpritesheetPlayer(player:SpritesheetPlayer):Dynamic {
 	#error "flight.Spritesheet: no backend for this target."
 #end
 }
-inline function disposeSpritesheetPlayer(player:SpritesheetPlayer):Void {
+extern inline function disposeSpritesheetPlayer(player:SpritesheetPlayer):Void {
 #if hl
 	flight._hl._fn.Spritesheet.disposeSpritesheetPlayer(player);
 #elseif cpp
@@ -209,7 +209,7 @@ inline function disposeSpritesheetPlayer(player:SpritesheetPlayer):Void {
 	#error "flight.Spritesheet: no backend for this target."
 #end
 }
-inline function getSpritesheetPlayerFrame(player:SpritesheetPlayer, spritesheet:Spritesheet):Dynamic {
+extern inline function getSpritesheetPlayerFrame(player:SpritesheetPlayer, spritesheet:Spritesheet):Dynamic {
 #if hl
 	return flight._hl._fn.Spritesheet.getSpritesheetPlayerFrame(player, spritesheet);
 #elseif cpp
@@ -220,7 +220,7 @@ inline function getSpritesheetPlayerFrame(player:SpritesheetPlayer, spritesheet:
 	#error "flight.Spritesheet: no backend for this target."
 #end
 }
-inline function getSpritesheetPlayerFrameAt(player:SpritesheetPlayer, spritesheet:Spritesheet, frameOffset:Float):Dynamic {
+extern inline function getSpritesheetPlayerFrameAt(player:SpritesheetPlayer, spritesheet:Spritesheet, frameOffset:Float):Dynamic {
 #if hl
 	return flight._hl._fn.Spritesheet.getSpritesheetPlayerFrameAt(player, spritesheet, frameOffset);
 #elseif cpp
@@ -231,7 +231,7 @@ inline function getSpritesheetPlayerFrameAt(player:SpritesheetPlayer, spriteshee
 	#error "flight.Spritesheet: no backend for this target."
 #end
 }
-inline function pauseSpritesheetPlayer(player:SpritesheetPlayer):Void {
+extern inline function pauseSpritesheetPlayer(player:SpritesheetPlayer):Void {
 #if hl
 	flight._hl._fn.Spritesheet.pauseSpritesheetPlayer(player);
 #elseif cpp
@@ -242,7 +242,7 @@ inline function pauseSpritesheetPlayer(player:SpritesheetPlayer):Void {
 	#error "flight.Spritesheet: no backend for this target."
 #end
 }
-inline function playSpritesheetAnimation(player:SpritesheetPlayer, animation:Dynamic, restart:Int):Void {
+extern inline function playSpritesheetAnimation(player:SpritesheetPlayer, animation:Dynamic, restart:Int):Void {
 #if hl
 	flight._hl._fn.Spritesheet.playSpritesheetAnimation(player, animation, restart);
 #elseif cpp
@@ -253,7 +253,7 @@ inline function playSpritesheetAnimation(player:SpritesheetPlayer, animation:Dyn
 	#error "flight.Spritesheet: no backend for this target."
 #end
 }
-inline function queueSpritesheetAnimation(player:SpritesheetPlayer, animation:Dynamic):Void {
+extern inline function queueSpritesheetAnimation(player:SpritesheetPlayer, animation:Dynamic):Void {
 #if hl
 	flight._hl._fn.Spritesheet.queueSpritesheetAnimation(player, animation);
 #elseif cpp
@@ -264,7 +264,7 @@ inline function queueSpritesheetAnimation(player:SpritesheetPlayer, animation:Dy
 	#error "flight.Spritesheet: no backend for this target."
 #end
 }
-inline function releaseSpritesheetPlayer(pool:SpritesheetPlayerPool, player:Dynamic):Void {
+extern inline function releaseSpritesheetPlayer(pool:SpritesheetPlayerPool, player:Dynamic):Void {
 #if hl
 	flight._hl._fn.Spritesheet.releaseSpritesheetPlayer(pool, player);
 #elseif cpp
@@ -275,7 +275,7 @@ inline function releaseSpritesheetPlayer(pool:SpritesheetPlayerPool, player:Dyna
 	#error "flight.Spritesheet: no backend for this target."
 #end
 }
-inline function resumeSpritesheetPlayer(player:SpritesheetPlayer):Void {
+extern inline function resumeSpritesheetPlayer(player:SpritesheetPlayer):Void {
 #if hl
 	flight._hl._fn.Spritesheet.resumeSpritesheetPlayer(player);
 #elseif cpp
@@ -286,7 +286,7 @@ inline function resumeSpritesheetPlayer(player:SpritesheetPlayer):Void {
 	#error "flight.Spritesheet: no backend for this target."
 #end
 }
-inline function seekSpritesheetPlayerToFrame(player:SpritesheetPlayer, frameIndex:Float):Void {
+extern inline function seekSpritesheetPlayerToFrame(player:SpritesheetPlayer, frameIndex:Float):Void {
 #if hl
 	flight._hl._fn.Spritesheet.seekSpritesheetPlayerToFrame(player, frameIndex);
 #elseif cpp
@@ -297,7 +297,7 @@ inline function seekSpritesheetPlayerToFrame(player:SpritesheetPlayer, frameInde
 	#error "flight.Spritesheet: no backend for this target."
 #end
 }
-inline function seekSpritesheetPlayerToTime(player:SpritesheetPlayer, time:Float):Void {
+extern inline function seekSpritesheetPlayerToTime(player:SpritesheetPlayer, time:Float):Void {
 #if hl
 	flight._hl._fn.Spritesheet.seekSpritesheetPlayerToTime(player, time);
 #elseif cpp
@@ -308,7 +308,7 @@ inline function seekSpritesheetPlayerToTime(player:SpritesheetPlayer, time:Float
 	#error "flight.Spritesheet: no backend for this target."
 #end
 }
-inline function stopSpritesheetPlayer(player:SpritesheetPlayer):Void {
+extern inline function stopSpritesheetPlayer(player:SpritesheetPlayer):Void {
 #if hl
 	flight._hl._fn.Spritesheet.stopSpritesheetPlayer(player);
 #elseif cpp
@@ -319,7 +319,7 @@ inline function stopSpritesheetPlayer(player:SpritesheetPlayer):Void {
 	#error "flight.Spritesheet: no backend for this target."
 #end
 }
-inline function updateSpritesheetPlayer(player:SpritesheetPlayer, deltaTime:Float):Bool {
+extern inline function updateSpritesheetPlayer(player:SpritesheetPlayer, deltaTime:Float):Bool {
 #if hl
 	return flight._hl._fn.Spritesheet.updateSpritesheetPlayer(player, deltaTime);
 #elseif cpp
@@ -330,7 +330,7 @@ inline function updateSpritesheetPlayer(player:SpritesheetPlayer, deltaTime:Floa
 	#error "flight.Spritesheet: no backend for this target."
 #end
 }
-inline function getSpritesheetValidationSeverityString(value:flight.SpritesheetValidationSeverity):String {
+extern inline function getSpritesheetValidationSeverityString(value:flight.SpritesheetValidationSeverity):String {
 #if hl
 	return cast flight._hl._fn.Spritesheet.getSpritesheetValidationSeverityString(value);
 #elseif cpp
@@ -341,7 +341,7 @@ inline function getSpritesheetValidationSeverityString(value:flight.SpritesheetV
 	#error "flight.Spritesheet: no backend for this target."
 #end
 }
-inline function parseSpritesheetParseDiagnosticSeverity(value:String):Int {
+extern inline function parseSpritesheetParseDiagnosticSeverity(value:String):Int {
 #if hl
 	return flight._hl._fn.Spritesheet.parseSpritesheetParseDiagnosticSeverity(cast value);
 #elseif cpp
@@ -352,7 +352,7 @@ inline function parseSpritesheetParseDiagnosticSeverity(value:String):Int {
 	#error "flight.Spritesheet: no backend for this target."
 #end
 }
-inline function parseSpritesheetValidationSeverity(value:String):Int {
+extern inline function parseSpritesheetValidationSeverity(value:String):Int {
 #if hl
 	return flight._hl._fn.Spritesheet.parseSpritesheetValidationSeverity(cast value);
 #elseif cpp
@@ -363,7 +363,7 @@ inline function parseSpritesheetValidationSeverity(value:String):Int {
 	#error "flight.Spritesheet: no backend for this target."
 #end
 }
-inline function validateSpritesheet(out:Dynamic, spritesheet:Spritesheet):Bool {
+extern inline function validateSpritesheet(out:Dynamic, spritesheet:Spritesheet):Bool {
 #if hl
 	return flight._hl._fn.Spritesheet.validateSpritesheet(out, spritesheet);
 #elseif cpp
@@ -374,7 +374,7 @@ inline function validateSpritesheet(out:Dynamic, spritesheet:Spritesheet):Bool {
 	#error "flight.Spritesheet: no backend for this target."
 #end
 }
-inline function validateSpritesheetData(out:Dynamic, data:SpritesheetData):Bool {
+extern inline function validateSpritesheetData(out:Dynamic, data:SpritesheetData):Bool {
 #if hl
 	return flight._hl._fn.Spritesheet.validateSpritesheetData(out, data);
 #elseif cpp
@@ -385,7 +385,7 @@ inline function validateSpritesheetData(out:Dynamic, data:SpritesheetData):Bool 
 	#error "flight.Spritesheet: no backend for this target."
 #end
 }
-inline function freeSpritesheet(ptr:Spritesheet):Void {
+extern inline function freeSpritesheet(ptr:Spritesheet):Void {
 #if hl
 	flight._hl._fn.Spritesheet.freeSpritesheet(ptr);
 #elseif cpp
@@ -396,7 +396,7 @@ inline function freeSpritesheet(ptr:Spritesheet):Void {
 	#error "flight.Spritesheet: no backend for this target."
 #end
 }
-inline function freeSpritesheetAnimationData(ptr:SpritesheetAnimationData):Void {
+extern inline function freeSpritesheetAnimationData(ptr:SpritesheetAnimationData):Void {
 #if hl
 	flight._hl._fn.Spritesheet.freeSpritesheetAnimationData(ptr);
 #elseif cpp
@@ -407,7 +407,7 @@ inline function freeSpritesheetAnimationData(ptr:SpritesheetAnimationData):Void 
 	#error "flight.Spritesheet: no backend for this target."
 #end
 }
-inline function freeSpritesheetData(ptr:SpritesheetData):Void {
+extern inline function freeSpritesheetData(ptr:SpritesheetData):Void {
 #if hl
 	flight._hl._fn.Spritesheet.freeSpritesheetData(ptr);
 #elseif cpp
@@ -418,7 +418,7 @@ inline function freeSpritesheetData(ptr:SpritesheetData):Void {
 	#error "flight.Spritesheet: no backend for this target."
 #end
 }
-inline function freeSpritesheetFrameData(ptr:SpritesheetFrameData):Void {
+extern inline function freeSpritesheetFrameData(ptr:SpritesheetFrameData):Void {
 #if hl
 	flight._hl._fn.Spritesheet.freeSpritesheetFrameData(ptr);
 #elseif cpp

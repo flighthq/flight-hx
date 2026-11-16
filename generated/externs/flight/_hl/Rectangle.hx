@@ -151,49 +151,49 @@ abstract Rectangle(hl.Bytes) {
 	inline public function free():Void {
 		flight._hl._fn.Geometry.freeRectangle(cast this);
 	}
-	inline public function computeNodeRootLocalBounds(root:Dynamic):Void {
+	inline public function computeNodeRootLocalBounds(root:hl.Bytes):Void {
 		flight._hl._fn.Node.computeNodeRootLocalBoundsRectangle(cast this, root);
 	}
-	inline public function defaultComputeLocalBounds(source:Dynamic):Void {
+	inline public function defaultComputeLocalBounds(source:hl.Bytes):Void {
 		flight._hl._fn.Node.defaultComputeLocalBoundsRectangle(cast this, source);
 	}
 	inline public function computeParticleEmitter2dLocalBounds(source:flight._hl.ParticleEmitter2D):Void {
 		flight._hl._fn.Particleemitter.computeParticleEmitter2dLocalBoundsRectangle(cast this, source);
 	}
-	inline public function setParticleEmitter2dLocalBounds(target:Dynamic):Void {
+	inline public function setParticleEmitter2dLocalBounds(target:hl.Bytes):Void {
 		flight._hl._fn.Particleemitter.setParticleEmitter2dLocalBoundsRectangle(target, cast this);
 	}
 	inline public function computeQuadBatchLocalBounds(source:flight._hl.QuadBatch):Void {
 		flight._hl._fn.Quadbatch.computeQuadBatchLocalBoundsRectangle(cast this, source);
 	}
-	inline public function setQuadBatchLocalBounds(target:Dynamic):Void {
+	inline public function setQuadBatchLocalBounds(target:hl.Bytes):Void {
 		flight._hl._fn.Quadbatch.setQuadBatchLocalBoundsRectangle(target, cast this);
 	}
-	inline public function computeHtmlViewLocalBounds(source:Dynamic):Void {
+	inline public function computeHtmlViewLocalBounds(source:hl.Bytes):Void {
 		flight._hl._fn.Scene2d.computeHtmlViewLocalBoundsRectangle(cast this, source);
 	}
-	inline public function computeSpriteLocalBounds(source:Dynamic):Void {
+	inline public function computeSpriteLocalBounds(source:hl.Bytes):Void {
 		flight._hl._fn.Scene2d.computeSpriteLocalBoundsRectangle(cast this, source);
 	}
-	inline public function computeShapeLocalBounds(source:Dynamic):Void {
+	inline public function computeShapeLocalBounds(source:hl.Bytes):Void {
 		flight._hl._fn.Shape.computeShapeLocalBoundsRectangle(cast this, source);
 	}
-	inline public function computeShapeBounds(source:Dynamic, mode:Int):Bool {
+	inline public function computeShapeBounds(source:hl.Bytes, mode:Int):Bool {
 		return flight._hl._fn.Shape.computeShapeBoundsRectangle(cast this, source, mode);
 	}
-	inline public function computeNativeTextLocalBounds(source:Dynamic):Void {
+	inline public function computeNativeTextLocalBounds(source:hl.Bytes):Void {
 		flight._hl._fn.Text.computeNativeTextLocalBoundsRectangle(cast this, source);
 	}
-	inline public function computeRichTextLocalBounds(source:Dynamic):Void {
+	inline public function computeRichTextLocalBounds(source:hl.Bytes):Void {
 		flight._hl._fn.Text.computeRichTextLocalBoundsRectangle(cast this, source);
 	}
-	inline public function computeTextLabelLocalBounds(source:Dynamic):Void {
+	inline public function computeTextLabelLocalBounds(source:hl.Bytes):Void {
 		flight._hl._fn.Text.computeTextLabelLocalBoundsRectangle(cast this, source);
 	}
 	inline public function addTextureAtlasRegion(target:flight._hl.TextureAtlas, pivot:flight._hl.Vector2, name:hl.Bytes):Void {
 		flight._hl._fn.Textureatlas.addTextureAtlasRegionRectangle(target, cast this, pivot, name);
 	}
-	inline public function computeTilemapLocalBounds(source:Dynamic):Void {
+	inline public function computeTilemapLocalBounds(source:hl.Bytes):Void {
 		flight._hl._fn.Tilemap.computeTilemapLocalBoundsRectangle(cast this, source);
 	}
 }

@@ -14,15 +14,15 @@ abstract Physics2DCollisionFilter(cpp.Star<cpp.Void>) {
 
 	inline function get_categoryBits():Int return Physics2DCollisionFilter_Ffi.get_categoryBits(this);
 
-	inline function set_categoryBits(value:Int):Int return Physics2DCollisionFilter_Ffi.set_categoryBits(this, value);
+	inline function set_categoryBits(value:Int):Int { Physics2DCollisionFilter_Ffi.set_categoryBits(this, value); return value; }
 	public var maskBits(get, set):Int;
 
 	inline function get_maskBits():Int return Physics2DCollisionFilter_Ffi.get_maskBits(this);
 
-	inline function set_maskBits(value:Int):Int return Physics2DCollisionFilter_Ffi.set_maskBits(this, value);
+	inline function set_maskBits(value:Int):Int { Physics2DCollisionFilter_Ffi.set_maskBits(this, value); return value; }
 	public var groupIndex(get, set):Int;
 
 	inline function get_groupIndex():Int return Physics2DCollisionFilter_Ffi.get_groupIndex(this);
 
-	inline function set_groupIndex(value:Int):Int return Physics2DCollisionFilter_Ffi.set_groupIndex(this, value);
+	inline function set_groupIndex(value:Int):Int { Physics2DCollisionFilter_Ffi.set_groupIndex(this, value); return value; }
 }

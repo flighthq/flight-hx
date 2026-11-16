@@ -12,9 +12,9 @@ extern class PathBoolean {
 	@:hlNative("flight", "flight_xor_paths")
 	public static function xorPaths(out:flight._hl.Path, pathBooleanKernel:flight._hl.PathBooleanKernel, a:flight._hl.Path, b:flight._hl.Path, options:flight._hl.PathBooleanOptions):Void;
 	@:hlNative("flight", "flight_explain_offset_path")
-	public static function explainOffsetPath(pathBooleanKernel:flight._hl.PathBooleanKernel, path:flight._hl.Path, delta:Float, options:flight._hl.PathOffsetOptions):Dynamic;
+	public static function explainOffsetPath(pathBooleanKernel:flight._hl.PathBooleanKernel, path:flight._hl.Path, delta:Float, options:flight._hl.PathOffsetOptions):flight._hl.PathBooleanExplanation;
 	@:hlNative("flight", "flight_explain_simplify_path")
-	public static function explainSimplifyPath(pathBooleanKernel:flight._hl.PathBooleanKernel, path:flight._hl.Path, options:flight._hl.PathBooleanOptions):Dynamic;
+	public static function explainSimplifyPath(pathBooleanKernel:flight._hl.PathBooleanKernel, path:flight._hl.Path, options:flight._hl.PathBooleanOptions):flight._hl.PathBooleanExplanation;
 	@:hlNative("flight", "flight_create_martinez_path_boolean_kernel")
 	public static function createMartinezPathBooleanKernel():flight._hl.PathBooleanKernel;
 	@:hlNative("flight", "flight_get_path_boolean_fill_rule_string")

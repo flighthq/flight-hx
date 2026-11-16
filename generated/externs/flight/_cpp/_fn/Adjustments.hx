@@ -12,7 +12,7 @@ extern class Adjustments {
 	@:native("flight_create_color_grade_adjustment")
 	public static function createColorGradeAdjustment(options:flight._cpp.ColorGradeAdjustmentOptions):flight._cpp.ColorGradeAdjustment;
 	@:native("flight_bake_color_lut")
-	public static function bakeColorLut(transforms:cpp.Star<cpp.Void>, transformsLen:Int, size:Int):flight._cpp.ColorLut;
+	public static function bakeColorLut(transforms:cpp.Star<cpp.Void>, transformsLen:Int, size:haxe.Int64):flight._cpp.ColorLut;
 	@:native("flight_sample_color_lut")
 	public static function sampleColorLut(lut:flight._cpp.ColorLut, out:cpp.Star<cpp.Void>, r:Single, g:Single, b:Single):Void;
 	@:native("flight_get_adjustment_color_transform__brightness_contrast_adjustment")

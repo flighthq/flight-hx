@@ -22,35 +22,35 @@ abstract CollisionCapsule3D(cpp.Star<cpp.Void>) {
 
 	inline function get_x0():Single return CollisionCapsule3D_Ffi.get_x0(this);
 
-	inline function set_x0(value:Single):Single return CollisionCapsule3D_Ffi.set_x0(this, value);
+	inline function set_x0(value:Single):Single { CollisionCapsule3D_Ffi.set_x0(this, value); return value; }
 	public var y0(get, set):Single;
 
 	inline function get_y0():Single return CollisionCapsule3D_Ffi.get_y0(this);
 
-	inline function set_y0(value:Single):Single return CollisionCapsule3D_Ffi.set_y0(this, value);
+	inline function set_y0(value:Single):Single { CollisionCapsule3D_Ffi.set_y0(this, value); return value; }
 	public var z0(get, set):Single;
 
 	inline function get_z0():Single return CollisionCapsule3D_Ffi.get_z0(this);
 
-	inline function set_z0(value:Single):Single return CollisionCapsule3D_Ffi.set_z0(this, value);
+	inline function set_z0(value:Single):Single { CollisionCapsule3D_Ffi.set_z0(this, value); return value; }
 	public var x1(get, set):Single;
 
 	inline function get_x1():Single return CollisionCapsule3D_Ffi.get_x1(this);
 
-	inline function set_x1(value:Single):Single return CollisionCapsule3D_Ffi.set_x1(this, value);
+	inline function set_x1(value:Single):Single { CollisionCapsule3D_Ffi.set_x1(this, value); return value; }
 	public var y1(get, set):Single;
 
 	inline function get_y1():Single return CollisionCapsule3D_Ffi.get_y1(this);
 
-	inline function set_y1(value:Single):Single return CollisionCapsule3D_Ffi.set_y1(this, value);
+	inline function set_y1(value:Single):Single { CollisionCapsule3D_Ffi.set_y1(this, value); return value; }
 	public var z1(get, set):Single;
 
 	inline function get_z1():Single return CollisionCapsule3D_Ffi.get_z1(this);
 
-	inline function set_z1(value:Single):Single return CollisionCapsule3D_Ffi.set_z1(this, value);
+	inline function set_z1(value:Single):Single { CollisionCapsule3D_Ffi.set_z1(this, value); return value; }
 	public var radius(get, set):Single;
 
 	inline function get_radius():Single return CollisionCapsule3D_Ffi.get_radius(this);
 
-	inline function set_radius(value:Single):Single return CollisionCapsule3D_Ffi.set_radius(this, value);
+	inline function set_radius(value:Single):Single { CollisionCapsule3D_Ffi.set_radius(this, value); return value; }
 }

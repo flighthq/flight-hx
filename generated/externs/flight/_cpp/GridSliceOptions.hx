@@ -16,20 +16,20 @@ abstract GridSliceOptions(cpp.Star<cpp.Void>) {
 
 	inline function get_columns():Int return GridSliceOptions_Ffi.get_columns(this);
 
-	inline function set_columns(value:Int):Int return GridSliceOptions_Ffi.set_columns(this, value);
+	inline function set_columns(value:Int):Int { GridSliceOptions_Ffi.set_columns(this, value); return value; }
 	public var imageHeight(get, set):Single;
 
 	inline function get_imageHeight():Single return GridSliceOptions_Ffi.get_imageHeight(this);
 
-	inline function set_imageHeight(value:Single):Single return GridSliceOptions_Ffi.set_imageHeight(this, value);
+	inline function set_imageHeight(value:Single):Single { GridSliceOptions_Ffi.set_imageHeight(this, value); return value; }
 	public var imageWidth(get, set):Single;
 
 	inline function get_imageWidth():Single return GridSliceOptions_Ffi.get_imageWidth(this);
 
-	inline function set_imageWidth(value:Single):Single return GridSliceOptions_Ffi.set_imageWidth(this, value);
+	inline function set_imageWidth(value:Single):Single { GridSliceOptions_Ffi.set_imageWidth(this, value); return value; }
 	public var rows(get, set):Int;
 
 	inline function get_rows():Int return GridSliceOptions_Ffi.get_rows(this);
 
-	inline function set_rows(value:Int):Int return GridSliceOptions_Ffi.set_rows(this, value);
+	inline function set_rows(value:Int):Int { GridSliceOptions_Ffi.set_rows(this, value); return value; }
 }

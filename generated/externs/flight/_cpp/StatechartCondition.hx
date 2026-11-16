@@ -12,10 +12,10 @@ abstract StatechartCondition(cpp.Star<cpp.Void>) {
 
 	inline function get_inputIndex():Int return StatechartCondition_Ffi.get_inputIndex(this);
 
-	inline function set_inputIndex(value:Int):Int return StatechartCondition_Ffi.set_inputIndex(this, value);
+	inline function set_inputIndex(value:Int):Int { StatechartCondition_Ffi.set_inputIndex(this, value); return value; }
 	public var value(get, set):Float;
 
 	inline function get_value():Float return StatechartCondition_Ffi.get_value(this);
 
-	inline function set_value(value:Float):Float return StatechartCondition_Ffi.set_value(this, value);
+	inline function set_value(value:Float):Float { StatechartCondition_Ffi.set_value(this, value); return value; }
 }

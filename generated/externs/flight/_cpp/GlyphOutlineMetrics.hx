@@ -16,20 +16,20 @@ abstract GlyphOutlineMetrics(cpp.Star<cpp.Void>) {
 
 	inline function get_ascent():Single return GlyphOutlineMetrics_Ffi.get_ascent(this);
 
-	inline function set_ascent(value:Single):Single return GlyphOutlineMetrics_Ffi.set_ascent(this, value);
+	inline function set_ascent(value:Single):Single { GlyphOutlineMetrics_Ffi.set_ascent(this, value); return value; }
 	public var descent(get, set):Single;
 
 	inline function get_descent():Single return GlyphOutlineMetrics_Ffi.get_descent(this);
 
-	inline function set_descent(value:Single):Single return GlyphOutlineMetrics_Ffi.set_descent(this, value);
+	inline function set_descent(value:Single):Single { GlyphOutlineMetrics_Ffi.set_descent(this, value); return value; }
 	public var lineGap(get, set):Single;
 
 	inline function get_lineGap():Single return GlyphOutlineMetrics_Ffi.get_lineGap(this);
 
-	inline function set_lineGap(value:Single):Single return GlyphOutlineMetrics_Ffi.set_lineGap(this, value);
+	inline function set_lineGap(value:Single):Single { GlyphOutlineMetrics_Ffi.set_lineGap(this, value); return value; }
 	public var unitsPerEm(get, set):Single;
 
 	inline function get_unitsPerEm():Single return GlyphOutlineMetrics_Ffi.get_unitsPerEm(this);
 
-	inline function set_unitsPerEm(value:Single):Single return GlyphOutlineMetrics_Ffi.set_unitsPerEm(this, value);
+	inline function set_unitsPerEm(value:Single):Single { GlyphOutlineMetrics_Ffi.set_unitsPerEm(this, value); return value; }
 }

@@ -10,5 +10,5 @@ abstract ToonModifierOptions(cpp.Star<cpp.Void>) {
 
 	inline function get_steps():Single return ToonModifierOptions_Ffi.get_steps(this);
 
-	inline function set_steps(value:Single):Single return ToonModifierOptions_Ffi.set_steps(this, value);
+	inline function set_steps(value:Single):Single { ToonModifierOptions_Ffi.set_steps(this, value); return value; }
 }

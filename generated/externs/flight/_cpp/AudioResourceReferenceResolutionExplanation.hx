@@ -10,5 +10,5 @@ abstract AudioResourceReferenceResolutionExplanation(cpp.Star<cpp.Void>) {
 
 	inline function get_retryable():Bool return AudioResourceReferenceResolutionExplanation_Ffi.get_retryable(this);
 
-	inline function set_retryable(value:Bool):Bool return AudioResourceReferenceResolutionExplanation_Ffi.set_retryable(this, value);
+	inline function set_retryable(value:Bool):Bool { AudioResourceReferenceResolutionExplanation_Ffi.set_retryable(this, value); return value; }
 }

@@ -20,30 +20,30 @@ abstract Physics2DGearJoint(cpp.Star<cpp.Void>) {
 
 	inline function get_axisAx():Single return Physics2DGearJoint_Ffi.get_axisAx(this);
 
-	inline function set_axisAx(value:Single):Single return Physics2DGearJoint_Ffi.set_axisAx(this, value);
+	inline function set_axisAx(value:Single):Single { Physics2DGearJoint_Ffi.set_axisAx(this, value); return value; }
 	public var axisAy(get, set):Single;
 
 	inline function get_axisAy():Single return Physics2DGearJoint_Ffi.get_axisAy(this);
 
-	inline function set_axisAy(value:Single):Single return Physics2DGearJoint_Ffi.set_axisAy(this, value);
+	inline function set_axisAy(value:Single):Single { Physics2DGearJoint_Ffi.set_axisAy(this, value); return value; }
 	public var axisBx(get, set):Single;
 
 	inline function get_axisBx():Single return Physics2DGearJoint_Ffi.get_axisBx(this);
 
-	inline function set_axisBx(value:Single):Single return Physics2DGearJoint_Ffi.set_axisBx(this, value);
+	inline function set_axisBx(value:Single):Single { Physics2DGearJoint_Ffi.set_axisBx(this, value); return value; }
 	public var axisBy(get, set):Single;
 
 	inline function get_axisBy():Single return Physics2DGearJoint_Ffi.get_axisBy(this);
 
-	inline function set_axisBy(value:Single):Single return Physics2DGearJoint_Ffi.set_axisBy(this, value);
+	inline function set_axisBy(value:Single):Single { Physics2DGearJoint_Ffi.set_axisBy(this, value); return value; }
 	public var constant(get, set):Single;
 
 	inline function get_constant():Single return Physics2DGearJoint_Ffi.get_constant(this);
 
-	inline function set_constant(value:Single):Single return Physics2DGearJoint_Ffi.set_constant(this, value);
+	inline function set_constant(value:Single):Single { Physics2DGearJoint_Ffi.set_constant(this, value); return value; }
 	public var ratio(get, set):Single;
 
 	inline function get_ratio():Single return Physics2DGearJoint_Ffi.get_ratio(this);
 
-	inline function set_ratio(value:Single):Single return Physics2DGearJoint_Ffi.set_ratio(this, value);
+	inline function set_ratio(value:Single):Single { Physics2DGearJoint_Ffi.set_ratio(this, value); return value; }
 }

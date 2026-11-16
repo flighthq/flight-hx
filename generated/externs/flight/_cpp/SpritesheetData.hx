@@ -14,15 +14,15 @@ abstract SpritesheetData(cpp.Star<cpp.Void>) {
 
 	inline function get_imageHeight():Single return SpritesheetData_Ffi.get_imageHeight(this);
 
-	inline function set_imageHeight(value:Single):Single return SpritesheetData_Ffi.set_imageHeight(this, value);
+	inline function set_imageHeight(value:Single):Single { SpritesheetData_Ffi.set_imageHeight(this, value); return value; }
 	public var imageWidth(get, set):Single;
 
 	inline function get_imageWidth():Single return SpritesheetData_Ffi.get_imageWidth(this);
 
-	inline function set_imageWidth(value:Single):Single return SpritesheetData_Ffi.set_imageWidth(this, value);
+	inline function set_imageWidth(value:Single):Single { SpritesheetData_Ffi.set_imageWidth(this, value); return value; }
 	public var scale(get, set):Single;
 
 	inline function get_scale():Single return SpritesheetData_Ffi.get_scale(this);
 
-	inline function set_scale(value:Single):Single return SpritesheetData_Ffi.set_scale(this, value);
+	inline function set_scale(value:Single):Single { SpritesheetData_Ffi.set_scale(this, value); return value; }
 }

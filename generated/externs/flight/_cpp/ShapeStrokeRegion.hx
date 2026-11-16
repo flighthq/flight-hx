@@ -12,10 +12,10 @@ abstract ShapeStrokeRegion(cpp.Star<cpp.Void>) {
 
 	inline function get_alpha():Single return ShapeStrokeRegion_Ffi.get_alpha(this);
 
-	inline function set_alpha(value:Single):Single return ShapeStrokeRegion_Ffi.set_alpha(this, value);
+	inline function set_alpha(value:Single):Single { ShapeStrokeRegion_Ffi.set_alpha(this, value); return value; }
 	public var color(get, set):Int;
 
 	inline function get_color():Int return ShapeStrokeRegion_Ffi.get_color(this);
 
-	inline function set_color(value:Int):Int return ShapeStrokeRegion_Ffi.set_color(this, value);
+	inline function set_color(value:Int):Int { ShapeStrokeRegion_Ffi.set_color(this, value); return value; }
 }

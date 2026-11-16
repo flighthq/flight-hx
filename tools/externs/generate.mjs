@@ -6,6 +6,7 @@ import {
 } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { prepareFlight, preparedIdentity } from '../flight-source.mjs';
 
 const root = path.resolve(import.meta.dirname, '../..');
 const usage = `Usage: node tools/externs/generate.mjs [--flight-root <path>] [--check] [--validate-upstream] [--allow-network]
@@ -29,7 +30,7 @@ export function run(command, args, cwd) {
   return result.stdout;
 }
 
-function toolEnvironment() {
+export function toolEnvironment() {
   const localRust = path.join(root, '.artifacts/rust');
   const localCargo = path.join(localRust, 'cargo');
   const localHaxe = path.join(root, '.haxe/4.3.7');
@@ -53,9 +54,8 @@ export function generate({ repoRoot = root, flightRoot, check = false, offline =
   requireWorkspace(flightRoot);
   const revision = execute('git', ['rev-parse', 'HEAD'], flightRoot).trim();
   if (!/^[a-f0-9]{40}$/u.test(revision)) throw new Error('Flight has no full Git revision');
-  if (execute('git', ['status', '--porcelain', '--untracked-files=normal'], flightRoot).trim()) {
-    throw new Error('Flight checkout is dirty; commit its source before recording generated provenance');
-  }
+  const dirty = execute('git', ['status', '--porcelain', '--untracked-files=normal'], flightRoot).trim();
+  const patches = dirty ? preparedIdentity(flightRoot, execute).patches : [];
   const toolchain = {
     rustc: execute('rustc', ['--version'], flightRoot).trim(),
     cargo: execute('cargo', ['--version'], flightRoot).trim(),
@@ -83,6 +83,14 @@ export function generate({ repoRoot = root, flightRoot, check = false, offline =
       throw new Error(`Expected one current Cargo build-script ffi_generated.rs, found ${ffiFiles.size}`);
     }
     const ffiSource = readFileSync([...ffiFiles][0], 'utf8');
+    const nativeHeaderPath = path.join(path.dirname([...ffiFiles][0]), 'flight_ffi.h');
+    const nativeHeader = existsSync(nativeHeaderPath) ? readFileSync(nativeHeaderPath) : undefined;
+    const copiedHeader = path.join(repoRoot, 'native/include/flight_ffi.h');
+    if (patches.length && !nativeHeader) throw new Error('Patched native producer did not emit flight_ffi.h');
+    if (check && nativeHeader && (!existsSync(copiedHeader) || !nativeHeader.equals(readFileSync(copiedHeader)))) {
+      throw new Error('Generated native C header drift: native/include/flight_ffi.h');
+    }
+
     const names = [...new Set([...ffiSource.matchAll(/\bfn (flight_[a-z0-9_]+)\b/gu)].map((match) => match[1]))].sort();
     if (names.length === 0) throw new Error('Flight generated no flight_* FFI function names');
     const ffiNames = `${names.join('\n')}\n`;
@@ -106,9 +114,10 @@ export function generate({ repoRoot = root, flightRoot, check = false, offline =
     }
     const provenance = {
       schema: 'flight-hx-rust-externs/1',
-      source: { repository: 'https://github.com/flighthq/flight', commit: revision },
+      source: { repository: 'https://github.com/flighthq/flight', commit: revision, ...(patches.length ? { patches } : {}) },
       generator: 'flight-bindgen --target haxe',
       toolchain,
+      ...(nativeHeader ? { nativeHeaderSha256: sha256(nativeHeader) } : {}),
       offsetsSha256: sha256(offsets), ffiNamesSha256: sha256(ffiNames),
       ffiFunctionCount: names.length, files,
     };
@@ -128,6 +137,10 @@ export function generate({ repoRoot = root, flightRoot, check = false, offline =
         if (hadOutput) renameSync(backup, output);
         throw error;
       }
+    }
+    if (!check && nativeHeader) {
+      mkdirSync(path.dirname(copiedHeader), { recursive: true });
+      writeFileSync(copiedHeader, nativeHeader);
     }
     return { revision, files: files.length, ffiFunctions: names.length };
   } finally {
@@ -187,6 +200,7 @@ export function main(args) {
   }
   flightRoot = path.resolve(flightRoot);
   requireWorkspace(flightRoot);
+  flightRoot = prepareFlight(root, flightRoot, run);
   if (args.includes('--validate-upstream')) {
     if (args.includes('--check')) throw new Error('--validate-upstream and --check are separate operations');
     const script = path.join(flightRoot, 'scripts/check-haxe-bindings.sh');

@@ -10,5 +10,5 @@ abstract BitmapFingerprint(cpp.Star<cpp.Void>) {
 
 	inline function get_gridSize():Int return BitmapFingerprint_Ffi.get_gridSize(this);
 
-	inline function set_gridSize(value:Int):Int return BitmapFingerprint_Ffi.set_gridSize(this, value);
+	inline function set_gridSize(value:Int):Int { BitmapFingerprint_Ffi.set_gridSize(this, value); return value; }
 }

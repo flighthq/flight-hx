@@ -1,6 +1,6 @@
 package flight;
 
-inline function inferFontFormatFromUrl(url:String):String {
+extern inline function inferFontFormatFromUrl(url:String):String {
 #if hl
 	return cast flight._hl._fn.Font.inferFontFormatFromUrl(cast url);
 #elseif cpp
@@ -11,7 +11,7 @@ inline function inferFontFormatFromUrl(url:String):String {
 	#error "flight.Font: no backend for this target."
 #end
 }
-inline function createFontResource():FontResource {
+extern inline function createFontResource():FontResource {
 #if hl
 	return flight._hl._fn.Font.createFontResource();
 #elseif cpp
@@ -22,7 +22,7 @@ inline function createFontResource():FontResource {
 	#error "flight.Font: no backend for this target."
 #end
 }
-inline function getFontShorthand(family:String, style:String):String {
+extern inline function getFontShorthand(family:String, style:String):String {
 #if hl
 	return cast flight._hl._fn.Font.getFontShorthand(cast family, cast style);
 #elseif cpp
@@ -33,7 +33,7 @@ inline function getFontShorthand(family:String, style:String):String {
 	#error "flight.Font: no backend for this target."
 #end
 }
-inline function isFontLoaded(backend:HostFontLoadingCapability, family:String, style:String):Bool {
+extern inline function isFontLoaded(backend:HostFontLoadingCapability, family:String, style:String):Bool {
 #if hl
 	return flight._hl._fn.Font.isFontLoaded(backend, cast family, cast style);
 #elseif cpp
@@ -44,7 +44,7 @@ inline function isFontLoaded(backend:HostFontLoadingCapability, family:String, s
 	#error "flight.Font: no backend for this target."
 #end
 }
-inline function getGlyphRasterizerOperationString(value:flight.GlyphRasterizerOperation):String {
+extern inline function getGlyphRasterizerOperationString(value:flight.GlyphRasterizerOperation):String {
 #if hl
 	return cast flight._hl._fn.Font.getGlyphRasterizerOperationString(value);
 #elseif cpp
@@ -55,7 +55,7 @@ inline function getGlyphRasterizerOperationString(value:flight.GlyphRasterizerOp
 	#error "flight.Font: no backend for this target."
 #end
 }
-inline function parseGlyphRasterizerOperation(value:String):Int {
+extern inline function parseGlyphRasterizerOperation(value:String):Int {
 #if hl
 	return flight._hl._fn.Font.parseGlyphRasterizerOperation(cast value);
 #elseif cpp
@@ -66,7 +66,7 @@ inline function parseGlyphRasterizerOperation(value:String):Int {
 	#error "flight.Font: no backend for this target."
 #end
 }
-inline function freeFontResource(ptr:FontResource):Void {
+extern inline function freeFontResource(ptr:FontResource):Void {
 #if hl
 	flight._hl._fn.Font.freeFontResource(ptr);
 #elseif cpp

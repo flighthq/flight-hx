@@ -10,5 +10,5 @@ abstract BitmapReadbackExplanation(cpp.Star<cpp.Void>) {
 
 	inline function get_readable():Bool return BitmapReadbackExplanation_Ffi.get_readable(this);
 
-	inline function set_readable(value:Bool):Bool return BitmapReadbackExplanation_Ffi.set_readable(this, value);
+	inline function set_readable(value:Bool):Bool { BitmapReadbackExplanation_Ffi.set_readable(this, value); return value; }
 }

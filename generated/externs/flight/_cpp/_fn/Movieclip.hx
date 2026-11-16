@@ -6,7 +6,7 @@ extern class Movieclip {
 	@:native("flight_disable_movie_clip_guards")
 	public static function disableMovieClipGuards(guards:flight._cpp.MovieClipGuardState):Void;
 	@:native("flight_enable_movie_clip_guards")
-	public static function enableMovieClipGuards(guards:flight._cpp.MovieClipGuardState, logState:cpp.Star<cpp.Void>, clock:flight._cpp.MovieClipGuardClock):Void;
+	public static function enableMovieClipGuards(guards:flight._cpp.MovieClipGuardState, logState:cpp.Star<cpp.Void>, clockFn:cpp.Star<cpp.Void>, clockCtx:cpp.Star<cpp.Void>):Void;
 	@:native("flight_create_movie_clip")
 	public static function createMovieClip():cpp.Star<cpp.Void>;
 	@:native("flight_create_movie_clip_data")

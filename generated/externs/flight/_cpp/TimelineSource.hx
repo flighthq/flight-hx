@@ -10,5 +10,5 @@ abstract TimelineSource(cpp.Star<cpp.Void>) {
 
 	inline function get_totalFrames():Int return TimelineSource_Ffi.get_totalFrames(this);
 
-	inline function set_totalFrames(value:Int):Int return TimelineSource_Ffi.set_totalFrames(this, value);
+	inline function set_totalFrames(value:Int):Int { TimelineSource_Ffi.set_totalFrames(this, value); return value; }
 }

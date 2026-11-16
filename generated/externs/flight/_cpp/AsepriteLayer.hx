@@ -10,5 +10,5 @@ abstract AsepriteLayer(cpp.Star<cpp.Void>) {
 
 	inline function get_opacity():Single return AsepriteLayer_Ffi.get_opacity(this);
 
-	inline function set_opacity(value:Single):Single return AsepriteLayer_Ffi.set_opacity(this, value);
+	inline function set_opacity(value:Single):Single { AsepriteLayer_Ffi.set_opacity(this, value); return value; }
 }

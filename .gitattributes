@@ -1,0 +1,5 @@
+# Preserve bytes used by generated provenance and producer patch fingerprints.
+generated/externs/** text eol=lf
+native/include/*.h text eol=lf
+# A patch context line containing one space is valid patch syntax.
+patches/flight/*.patch -text -whitespace

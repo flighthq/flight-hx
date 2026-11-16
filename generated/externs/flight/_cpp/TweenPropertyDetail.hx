@@ -12,10 +12,10 @@ abstract TweenPropertyDetail(cpp.Star<cpp.Void>) {
 
 	inline function get_change():Single return TweenPropertyDetail_Ffi.get_change(this);
 
-	inline function set_change(value:Single):Single return TweenPropertyDetail_Ffi.set_change(this, value);
+	inline function set_change(value:Single):Single { TweenPropertyDetail_Ffi.set_change(this, value); return value; }
 	public var start(get, set):Single;
 
 	inline function get_start():Single return TweenPropertyDetail_Ffi.get_start(this);
 
-	inline function set_start(value:Single):Single return TweenPropertyDetail_Ffi.set_start(this, value);
+	inline function set_start(value:Single):Single { TweenPropertyDetail_Ffi.set_start(this, value); return value; }
 }

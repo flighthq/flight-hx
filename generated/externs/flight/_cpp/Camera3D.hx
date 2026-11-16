@@ -12,10 +12,10 @@ abstract Camera3D(cpp.Star<cpp.Void>) {
 
 	inline function get_far():Single return Camera3D_Ffi.get_far(this);
 
-	inline function set_far(value:Single):Single return Camera3D_Ffi.set_far(this, value);
+	inline function set_far(value:Single):Single { Camera3D_Ffi.set_far(this, value); return value; }
 	public var near(get, set):Single;
 
 	inline function get_near():Single return Camera3D_Ffi.get_near(this);
 
-	inline function set_near(value:Single):Single return Camera3D_Ffi.set_near(this, value);
+	inline function set_near(value:Single):Single { Camera3D_Ffi.set_near(this, value); return value; }
 }

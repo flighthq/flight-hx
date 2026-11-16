@@ -20,30 +20,30 @@ abstract Physics2DRayHit(cpp.Star<cpp.Void>) {
 
 	inline function get_colliderIndex():Int return Physics2DRayHit_Ffi.get_colliderIndex(this);
 
-	inline function set_colliderIndex(value:Int):Int return Physics2DRayHit_Ffi.set_colliderIndex(this, value);
+	inline function set_colliderIndex(value:Int):Int { Physics2DRayHit_Ffi.set_colliderIndex(this, value); return value; }
 	public var fraction(get, set):Single;
 
 	inline function get_fraction():Single return Physics2DRayHit_Ffi.get_fraction(this);
 
-	inline function set_fraction(value:Single):Single return Physics2DRayHit_Ffi.set_fraction(this, value);
+	inline function set_fraction(value:Single):Single { Physics2DRayHit_Ffi.set_fraction(this, value); return value; }
 	public var normalX(get, set):Single;
 
 	inline function get_normalX():Single return Physics2DRayHit_Ffi.get_normalX(this);
 
-	inline function set_normalX(value:Single):Single return Physics2DRayHit_Ffi.set_normalX(this, value);
+	inline function set_normalX(value:Single):Single { Physics2DRayHit_Ffi.set_normalX(this, value); return value; }
 	public var normalY(get, set):Single;
 
 	inline function get_normalY():Single return Physics2DRayHit_Ffi.get_normalY(this);
 
-	inline function set_normalY(value:Single):Single return Physics2DRayHit_Ffi.set_normalY(this, value);
+	inline function set_normalY(value:Single):Single { Physics2DRayHit_Ffi.set_normalY(this, value); return value; }
 	public var x(get, set):Single;
 
 	inline function get_x():Single return Physics2DRayHit_Ffi.get_x(this);
 
-	inline function set_x(value:Single):Single return Physics2DRayHit_Ffi.set_x(this, value);
+	inline function set_x(value:Single):Single { Physics2DRayHit_Ffi.set_x(this, value); return value; }
 	public var y(get, set):Single;
 
 	inline function get_y():Single return Physics2DRayHit_Ffi.get_y(this);
 
-	inline function set_y(value:Single):Single return Physics2DRayHit_Ffi.set_y(this, value);
+	inline function set_y(value:Single):Single { Physics2DRayHit_Ffi.set_y(this, value); return value; }
 }

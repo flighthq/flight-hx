@@ -22,7 +22,7 @@ extern class Camera {
 	@:hlNative("flight", "flight_set_camera_3d_view_matrix4_from_look_at")
 	public static function setCamera3dViewMatrix4FromLookAt(camera:flight._hl.Camera3D, eye:flight._hl.Vector3, target:flight._hl.Vector3, up:flight._hl.Vector3):Void;
 	@:hlNative("flight", "flight_set_camera_3d_view_matrix4_from_matrix4")
-	public static function setCamera3dViewMatrix4FromMatrix4(guardState:Dynamic, camera:flight._hl.Camera3D, view:flight._hl.Matrix4):Void;
+	public static function setCamera3dViewMatrix4FromMatrix4(guardState:hl.Bytes, camera:flight._hl.Camera3D, view:flight._hl.Matrix4):Void;
 	@:hlNative("flight", "flight_update_camera_3d_inverse_view_projection")
 	public static function updateCamera3dInverseViewProjection(camera:flight._hl.Camera3D, aspect:Single):Bool;
 	@:hlNative("flight", "flight_create_camera_2d")
@@ -44,15 +44,15 @@ extern class Camera {
 	@:hlNative("flight", "flight_get_camera_3d_view_space_z")
 	public static function getCamera3dViewSpaceZ(camera:flight._hl.Camera3D, ndcZ:Single):Single;
 	@:hlNative("flight", "flight_are_camera_guards_enabled")
-	public static function areCameraGuardsEnabled(guardState:Dynamic):Bool;
+	public static function areCameraGuardsEnabled(guardState:hl.Bytes):Bool;
 	@:hlNative("flight", "flight_disable_camera_guards")
-	public static function disableCameraGuards(guardState:Dynamic):Void;
+	public static function disableCameraGuards(guardState:hl.Bytes):Void;
 	@:hlNative("flight", "flight_enable_camera_guards")
-	public static function enableCameraGuards(guardState:Dynamic, logState:Dynamic, clockFn:Dynamic, clockCtx:Dynamic):Void;
+	public static function enableCameraGuards(guardState:hl.Bytes, logState:hl.Bytes, clockFn:hl.Bytes, clockCtx:hl.Bytes):Void;
 	@:hlNative("flight", "flight_explain_camera_3d_view")
 	public static function explainCamera3dView(camera:flight._hl.Camera3D):flight._hl.Camera3DViewExplanation;
 	@:hlNative("flight", "flight_get_camera_3d_frustum_corners")
-	public static function getCamera3dFrustumCorners(out:hl.Bytes, outLen:Int, camera:flight._hl.Camera3D, aspect:Single):Bool;
+	public static function getCamera3dFrustumCorners(out:hl.Bytes, camera:flight._hl.Camera3D, aspect:Single):Bool;
 	@:hlNative("flight", "flight_get_camera_3d_ray_through_bounding_sphere")
 	public static function getCamera3dRayThroughBoundingSphere(out:flight._hl.Ray3D, camera:flight._hl.Camera3D, sphere:flight._hl.BoundingSphere, aspect:Single):Bool;
 	@:hlNative("flight", "flight_intersect_camera_3d_ray_with_plane")
@@ -64,11 +64,11 @@ extern class Camera {
 	@:hlNative("flight", "flight_get_camera_3d_world_to_screen")
 	public static function getCamera3dWorldToScreen(out:flight._hl.Vector3, camera:flight._hl.Camera3D, worldPoint:flight._hl.Vector3, aspect:Single):Bool;
 	@:hlNative("flight", "flight_create_orthographic_projection")
-	public static function createOrthographicProjection():Dynamic;
+	public static function createOrthographicProjection():hl.Bytes;
 	@:hlNative("flight", "flight_create_perspective_projection")
-	public static function createPerspectiveProjection():Dynamic;
+	public static function createPerspectiveProjection():hl.Bytes;
 	@:hlNative("flight", "flight_create_raw_projection")
-	public static function createRawProjection():Dynamic;
+	public static function createRawProjection():hl.Bytes;
 	@:hlNative("flight", "flight_get_orthographic_projection_texel_size")
 	public static function getOrthographicProjectionTexelSize(projection:flight._hl.OrthographicProjection, pixelWidth:Single, pixelHeight:Single):Single;
 	@:hlNative("flight", "flight_is_orthographic_projection")
@@ -94,7 +94,7 @@ extern class Camera {
 	@:hlNative("flight", "flight_get_camera_2d_view_matrix")
 	public static function getCamera2dViewMatrix(camera:flight._hl.Camera2D, viewportWidth:Single, viewportHeight:Single, out:flight._hl.Matrix):Void;
 	@:hlNative("flight", "flight_get_camera_2d_visible_bounds")
-	public static function getCamera2dVisibleBounds(guardState:Dynamic, camera:flight._hl.Camera2D, viewportWidth:Single, viewportHeight:Single, out:flight._hl.Rectangle):Void;
+	public static function getCamera2dVisibleBounds(guardState:hl.Bytes, camera:flight._hl.Camera2D, viewportWidth:Single, viewportHeight:Single, out:flight._hl.Rectangle):Void;
 	@:hlNative("flight", "flight_zoom_camera_2d_at_screen_point")
 	public static function zoomCamera2dAtScreenPoint(camera:flight._hl.Camera2D, viewportWidth:Single, viewportHeight:Single, screenX:Single, screenY:Single, zoom:Single):Void;
 	@:hlNative("flight", "flight_free_camera3_d")

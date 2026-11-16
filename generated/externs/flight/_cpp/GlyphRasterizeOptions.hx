@@ -10,5 +10,5 @@ abstract GlyphRasterizeOptions(cpp.Star<cpp.Void>) {
 
 	inline function get_fontSize():Single return GlyphRasterizeOptions_Ffi.get_fontSize(this);
 
-	inline function set_fontSize(value:Single):Single return GlyphRasterizeOptions_Ffi.set_fontSize(this, value);
+	inline function set_fontSize(value:Single):Single { GlyphRasterizeOptions_Ffi.set_fontSize(this, value); return value; }
 }

@@ -10,5 +10,5 @@ abstract SvgPathDataExplanation(cpp.Star<cpp.Void>) {
 
 	inline function get_position():Int return SvgPathDataExplanation_Ffi.get_position(this);
 
-	inline function set_position(value:Int):Int return SvgPathDataExplanation_Ffi.set_position(this, value);
+	inline function set_position(value:Int):Int { SvgPathDataExplanation_Ffi.set_position(this, value); return value; }
 }

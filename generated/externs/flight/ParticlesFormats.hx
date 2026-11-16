@@ -1,6 +1,6 @@
 package flight;
 
-inline function detectParticleFormat(registry:ParticleFormatRegistry, text:String):ParticleFormatKind {
+extern inline function detectParticleFormat(registry:ParticleFormatRegistry, text:String):ParticleFormatKind {
 #if hl
 	return flight._hl._fn.ParticlesFormats.detectParticleFormat(registry, cast text);
 #elseif cpp
@@ -11,7 +11,7 @@ inline function detectParticleFormat(registry:ParticleFormatRegistry, text:Strin
 	#error "flight.ParticlesFormats: no backend for this target."
 #end
 }
-inline function createParticleFormatRegistry():ParticleFormatRegistry {
+extern inline function createParticleFormatRegistry():ParticleFormatRegistry {
 #if hl
 	return flight._hl._fn.ParticlesFormats.createParticleFormatRegistry();
 #elseif cpp
@@ -22,7 +22,7 @@ inline function createParticleFormatRegistry():ParticleFormatRegistry {
 	#error "flight.ParticlesFormats: no backend for this target."
 #end
 }
-inline function detectRegisteredParticleFormat(registry:ParticleFormatRegistry, text:String):ParticleFormatKind {
+extern inline function detectRegisteredParticleFormat(registry:ParticleFormatRegistry, text:String):ParticleFormatKind {
 #if hl
 	return flight._hl._fn.ParticlesFormats.detectRegisteredParticleFormat(registry, cast text);
 #elseif cpp
@@ -33,7 +33,7 @@ inline function detectRegisteredParticleFormat(registry:ParticleFormatRegistry, 
 	#error "flight.ParticlesFormats: no backend for this target."
 #end
 }
-inline function getRegisteredParticleFormats(out:Dynamic, registry:ParticleFormatRegistry):Void {
+extern inline function getRegisteredParticleFormats(out:Dynamic, registry:ParticleFormatRegistry):Void {
 #if hl
 	flight._hl._fn.ParticlesFormats.getRegisteredParticleFormats(out, registry);
 #elseif cpp
@@ -44,7 +44,7 @@ inline function getRegisteredParticleFormats(out:Dynamic, registry:ParticleForma
 	#error "flight.ParticlesFormats: no backend for this target."
 #end
 }
-inline function parseRegisteredParticleFormat(registry:ParticleFormatRegistry, text:String, kind:String, options:ParseParticleConfigOptions):ParticleConfigParseResult {
+extern inline function parseRegisteredParticleFormat(registry:ParticleFormatRegistry, text:String, kind:String, options:ParseParticleConfigOptions):ParticleConfigParseResult {
 #if hl
 	return flight._hl._fn.ParticlesFormats.parseRegisteredParticleFormat(registry, cast text, cast kind, options);
 #elseif cpp
@@ -55,7 +55,7 @@ inline function parseRegisteredParticleFormat(registry:ParticleFormatRegistry, t
 	#error "flight.ParticlesFormats: no backend for this target."
 #end
 }
-inline function registerParticleFormat(registry:ParticleFormatRegistry, kind:String, codec:ParticleFormatCodec):Void {
+extern inline function registerParticleFormat(registry:ParticleFormatRegistry, kind:String, codec:ParticleFormatCodec):Void {
 #if hl
 	flight._hl._fn.ParticlesFormats.registerParticleFormat(registry, cast kind, codec);
 #elseif cpp
@@ -66,7 +66,7 @@ inline function registerParticleFormat(registry:ParticleFormatRegistry, kind:Str
 	#error "flight.ParticlesFormats: no backend for this target."
 #end
 }
-inline function unregisterParticleFormat(registry:ParticleFormatRegistry, kind:String):Bool {
+extern inline function unregisterParticleFormat(registry:ParticleFormatRegistry, kind:String):Bool {
 #if hl
 	return flight._hl._fn.ParticlesFormats.unregisterParticleFormat(registry, cast kind);
 #elseif cpp
@@ -77,7 +77,7 @@ inline function unregisterParticleFormat(registry:ParticleFormatRegistry, kind:S
 	#error "flight.ParticlesFormats: no backend for this target."
 #end
 }
-inline function parseLibgdxParticle(text:String, options:LibgdxParseOptions):ParticleEmitterConfig {
+extern inline function parseLibgdxParticle(text:String, options:LibgdxParseOptions):ParticleEmitterConfig {
 #if hl
 	return flight._hl._fn.ParticlesFormats.parseLibgdxParticle(cast text, options);
 #elseif cpp
@@ -88,7 +88,7 @@ inline function parseLibgdxParticle(text:String, options:LibgdxParseOptions):Par
 	#error "flight.ParticlesFormats: no backend for this target."
 #end
 }
-inline function parseLibgdxParticleDocument(text:String, options:LibgdxParseOptions):LibgdxParseResult {
+extern inline function parseLibgdxParticleDocument(text:String, options:LibgdxParseOptions):LibgdxParseResult {
 #if hl
 	return flight._hl._fn.ParticlesFormats.parseLibgdxParticleDocument(cast text, options);
 #elseif cpp
@@ -99,7 +99,7 @@ inline function parseLibgdxParticleDocument(text:String, options:LibgdxParseOpti
 	#error "flight.ParticlesFormats: no backend for this target."
 #end
 }
-inline function serializeLibgdxParticle(config:ParticleEmitterConfig, existing:LibgdxParticleDocument, options:LibgdxSerializeOptions):String {
+extern inline function serializeLibgdxParticle(config:ParticleEmitterConfig, existing:LibgdxParticleDocument, options:LibgdxSerializeOptions):String {
 #if hl
 	return cast flight._hl._fn.ParticlesFormats.serializeLibgdxParticle(config, existing, options);
 #elseif cpp
@@ -110,7 +110,7 @@ inline function serializeLibgdxParticle(config:ParticleEmitterConfig, existing:L
 	#error "flight.ParticlesFormats: no backend for this target."
 #end
 }
-inline function serializeLibgdxParticleDocument(config:ParticleEmitterConfig, existing:LibgdxParticleDocument, options:LibgdxSerializeOptions):ParticleSerializeResult {
+extern inline function serializeLibgdxParticleDocument(config:ParticleEmitterConfig, existing:LibgdxParticleDocument, options:LibgdxSerializeOptions):ParticleSerializeResult {
 #if hl
 	return flight._hl._fn.ParticlesFormats.serializeLibgdxParticleDocument(config, existing, options);
 #elseif cpp
@@ -121,7 +121,7 @@ inline function serializeLibgdxParticleDocument(config:ParticleEmitterConfig, ex
 	#error "flight.ParticlesFormats: no backend for this target."
 #end
 }
-inline function parseParticleConfig(registry:ParticleFormatRegistry, text:String, options:ParseParticleConfigOptions):ParticleEmitterConfig {
+extern inline function parseParticleConfig(registry:ParticleFormatRegistry, text:String, options:ParseParticleConfigOptions):ParticleEmitterConfig {
 #if hl
 	return flight._hl._fn.ParticlesFormats.parseParticleConfig(registry, cast text, options);
 #elseif cpp
@@ -132,7 +132,7 @@ inline function parseParticleConfig(registry:ParticleFormatRegistry, text:String
 	#error "flight.ParticlesFormats: no backend for this target."
 #end
 }
-inline function parseParticleConfigDocument(registry:ParticleFormatRegistry, text:String, options:ParseParticleConfigOptions):ParticleConfigParseResult {
+extern inline function parseParticleConfigDocument(registry:ParticleFormatRegistry, text:String, options:ParseParticleConfigOptions):ParticleConfigParseResult {
 #if hl
 	return flight._hl._fn.ParticlesFormats.parseParticleConfigDocument(registry, cast text, options);
 #elseif cpp
@@ -143,7 +143,7 @@ inline function parseParticleConfigDocument(registry:ParticleFormatRegistry, tex
 	#error "flight.ParticlesFormats: no backend for this target."
 #end
 }
-inline function parseParticleDesignerPlist(plistXml:String, options:ParticleDesignerParseOptions):ParticleEmitterConfig {
+extern inline function parseParticleDesignerPlist(plistXml:String, options:ParticleDesignerParseOptions):ParticleEmitterConfig {
 #if hl
 	return flight._hl._fn.ParticlesFormats.parseParticleDesignerPlist(cast plistXml, options);
 #elseif cpp
@@ -154,7 +154,7 @@ inline function parseParticleDesignerPlist(plistXml:String, options:ParticleDesi
 	#error "flight.ParticlesFormats: no backend for this target."
 #end
 }
-inline function parseParticleDesignerPlistDocument(plistXml:String, options:ParticleDesignerParseOptions):ParticleDesignerParseResult {
+extern inline function parseParticleDesignerPlistDocument(plistXml:String, options:ParticleDesignerParseOptions):ParticleDesignerParseResult {
 #if hl
 	return flight._hl._fn.ParticlesFormats.parseParticleDesignerPlistDocument(cast plistXml, options);
 #elseif cpp
@@ -165,7 +165,7 @@ inline function parseParticleDesignerPlistDocument(plistXml:String, options:Part
 	#error "flight.ParticlesFormats: no backend for this target."
 #end
 }
-inline function serializeParticleDesignerPlist(config:ParticleEmitterConfig, existing:ParticleDesignerDocument, options:ParticleDesignerSerializeOptions):String {
+extern inline function serializeParticleDesignerPlist(config:ParticleEmitterConfig, existing:ParticleDesignerDocument, options:ParticleDesignerSerializeOptions):String {
 #if hl
 	return cast flight._hl._fn.ParticlesFormats.serializeParticleDesignerPlist(config, existing, options);
 #elseif cpp
@@ -176,7 +176,7 @@ inline function serializeParticleDesignerPlist(config:ParticleEmitterConfig, exi
 	#error "flight.ParticlesFormats: no backend for this target."
 #end
 }
-inline function serializeParticleDesignerPlistDocument(config:ParticleEmitterConfig, existing:ParticleDesignerDocument, options:ParticleDesignerSerializeOptions):ParticleSerializeResult {
+extern inline function serializeParticleDesignerPlistDocument(config:ParticleEmitterConfig, existing:ParticleDesignerDocument, options:ParticleDesignerSerializeOptions):ParticleSerializeResult {
 #if hl
 	return flight._hl._fn.ParticlesFormats.serializeParticleDesignerPlistDocument(config, existing, options);
 #elseif cpp
@@ -187,7 +187,7 @@ inline function serializeParticleDesignerPlistDocument(config:ParticleEmitterCon
 	#error "flight.ParticlesFormats: no backend for this target."
 #end
 }
-inline function parsePixiParticle(json:String):ParticleEmitterConfig {
+extern inline function parsePixiParticle(json:String):ParticleEmitterConfig {
 #if hl
 	return flight._hl._fn.ParticlesFormats.parsePixiParticle(cast json);
 #elseif cpp
@@ -198,7 +198,7 @@ inline function parsePixiParticle(json:String):ParticleEmitterConfig {
 	#error "flight.ParticlesFormats: no backend for this target."
 #end
 }
-inline function parsePixiParticleDocument(json:String):PixiParseResult {
+extern inline function parsePixiParticleDocument(json:String):PixiParseResult {
 #if hl
 	return flight._hl._fn.ParticlesFormats.parsePixiParticleDocument(cast json);
 #elseif cpp
@@ -209,7 +209,7 @@ inline function parsePixiParticleDocument(json:String):PixiParseResult {
 	#error "flight.ParticlesFormats: no backend for this target."
 #end
 }
-inline function createParticleAllFormats():Dynamic {
+extern inline function createParticleAllFormats():Dynamic {
 #if hl
 	return flight._hl._fn.ParticlesFormats.createParticleAllFormats();
 #elseif cpp
@@ -220,7 +220,7 @@ inline function createParticleAllFormats():Dynamic {
 	#error "flight.ParticlesFormats: no backend for this target."
 #end
 }
-inline function applyParticleImportOptions(registry:ParticleFormatRegistry, options:ParticleImportOptions):Void {
+extern inline function applyParticleImportOptions(registry:ParticleFormatRegistry, options:ParticleImportOptions):Void {
 #if hl
 	flight._hl._fn.ParticlesFormats.applyParticleImportOptions(registry, options);
 #elseif cpp
@@ -231,7 +231,7 @@ inline function applyParticleImportOptions(registry:ParticleFormatRegistry, opti
 	#error "flight.ParticlesFormats: no backend for this target."
 #end
 }
-inline function getLibgdxParticleFormat():ParticleFormatDescriptor {
+extern inline function getLibgdxParticleFormat():ParticleFormatDescriptor {
 #if hl
 	return flight._hl._fn.ParticlesFormats.getLibgdxParticleFormat();
 #elseif cpp
@@ -242,7 +242,7 @@ inline function getLibgdxParticleFormat():ParticleFormatDescriptor {
 	#error "flight.ParticlesFormats: no backend for this target."
 #end
 }
-inline function getParticleDesignerParticleFormat():ParticleFormatDescriptor {
+extern inline function getParticleDesignerParticleFormat():ParticleFormatDescriptor {
 #if hl
 	return flight._hl._fn.ParticlesFormats.getParticleDesignerParticleFormat();
 #elseif cpp
@@ -253,7 +253,7 @@ inline function getParticleDesignerParticleFormat():ParticleFormatDescriptor {
 	#error "flight.ParticlesFormats: no backend for this target."
 #end
 }
-inline function getPixiParticleFormat():ParticleFormatDescriptor {
+extern inline function getPixiParticleFormat():ParticleFormatDescriptor {
 #if hl
 	return flight._hl._fn.ParticlesFormats.getPixiParticleFormat();
 #elseif cpp
@@ -264,7 +264,7 @@ inline function getPixiParticleFormat():ParticleFormatDescriptor {
 	#error "flight.ParticlesFormats: no backend for this target."
 #end
 }
-inline function getSpineParticleFormat():ParticleFormatDescriptor {
+extern inline function getSpineParticleFormat():ParticleFormatDescriptor {
 #if hl
 	return flight._hl._fn.ParticlesFormats.getSpineParticleFormat();
 #elseif cpp
@@ -275,7 +275,7 @@ inline function getSpineParticleFormat():ParticleFormatDescriptor {
 	#error "flight.ParticlesFormats: no backend for this target."
 #end
 }
-inline function getStarlingPexParticleFormat():ParticleFormatDescriptor {
+extern inline function getStarlingPexParticleFormat():ParticleFormatDescriptor {
 #if hl
 	return flight._hl._fn.ParticlesFormats.getStarlingPexParticleFormat();
 #elseif cpp
@@ -286,7 +286,7 @@ inline function getStarlingPexParticleFormat():ParticleFormatDescriptor {
 	#error "flight.ParticlesFormats: no backend for this target."
 #end
 }
-inline function getUnityParticleFormat():ParticleFormatDescriptor {
+extern inline function getUnityParticleFormat():ParticleFormatDescriptor {
 #if hl
 	return flight._hl._fn.ParticlesFormats.getUnityParticleFormat();
 #elseif cpp
@@ -297,7 +297,7 @@ inline function getUnityParticleFormat():ParticleFormatDescriptor {
 	#error "flight.ParticlesFormats: no backend for this target."
 #end
 }
-inline function registerBuiltInParticleFormats(registry:ParticleFormatRegistry):Void {
+extern inline function registerBuiltInParticleFormats(registry:ParticleFormatRegistry):Void {
 #if hl
 	flight._hl._fn.ParticlesFormats.registerBuiltInParticleFormats(registry);
 #elseif cpp
@@ -308,7 +308,7 @@ inline function registerBuiltInParticleFormats(registry:ParticleFormatRegistry):
 	#error "flight.ParticlesFormats: no backend for this target."
 #end
 }
-inline function parseSpineParticle(json:String):ParticleEmitterConfig {
+extern inline function parseSpineParticle(json:String):ParticleEmitterConfig {
 #if hl
 	return flight._hl._fn.ParticlesFormats.parseSpineParticle(cast json);
 #elseif cpp
@@ -319,7 +319,7 @@ inline function parseSpineParticle(json:String):ParticleEmitterConfig {
 	#error "flight.ParticlesFormats: no backend for this target."
 #end
 }
-inline function parseSpineParticleDocument(json:String):SpineParseResult {
+extern inline function parseSpineParticleDocument(json:String):SpineParseResult {
 #if hl
 	return flight._hl._fn.ParticlesFormats.parseSpineParticleDocument(cast json);
 #elseif cpp
@@ -330,7 +330,7 @@ inline function parseSpineParticleDocument(json:String):SpineParseResult {
 	#error "flight.ParticlesFormats: no backend for this target."
 #end
 }
-inline function serializeSpineParticle(config:ParticleEmitterConfig, existing:SpineParticleDocument):String {
+extern inline function serializeSpineParticle(config:ParticleEmitterConfig, existing:SpineParticleDocument):String {
 #if hl
 	return cast flight._hl._fn.ParticlesFormats.serializeSpineParticle(config, existing);
 #elseif cpp
@@ -341,7 +341,7 @@ inline function serializeSpineParticle(config:ParticleEmitterConfig, existing:Sp
 	#error "flight.ParticlesFormats: no backend for this target."
 #end
 }
-inline function serializeSpineParticleDocument(config:ParticleEmitterConfig, existing:SpineParticleDocument):ParticleSerializeResult {
+extern inline function serializeSpineParticleDocument(config:ParticleEmitterConfig, existing:SpineParticleDocument):ParticleSerializeResult {
 #if hl
 	return flight._hl._fn.ParticlesFormats.serializeSpineParticleDocument(config, existing);
 #elseif cpp
@@ -352,7 +352,7 @@ inline function serializeSpineParticleDocument(config:ParticleEmitterConfig, exi
 	#error "flight.ParticlesFormats: no backend for this target."
 #end
 }
-inline function parseStarlingPex(xml:String, options:StarlingPexParseOptions):ParticleEmitterConfig {
+extern inline function parseStarlingPex(xml:String, options:StarlingPexParseOptions):ParticleEmitterConfig {
 #if hl
 	return flight._hl._fn.ParticlesFormats.parseStarlingPex(cast xml, options);
 #elseif cpp
@@ -363,7 +363,7 @@ inline function parseStarlingPex(xml:String, options:StarlingPexParseOptions):Pa
 	#error "flight.ParticlesFormats: no backend for this target."
 #end
 }
-inline function parseStarlingPexDocument(xml:String, options:StarlingPexParseOptions):StarlingPexParseResult {
+extern inline function parseStarlingPexDocument(xml:String, options:StarlingPexParseOptions):StarlingPexParseResult {
 #if hl
 	return flight._hl._fn.ParticlesFormats.parseStarlingPexDocument(cast xml, options);
 #elseif cpp
@@ -374,7 +374,7 @@ inline function parseStarlingPexDocument(xml:String, options:StarlingPexParseOpt
 	#error "flight.ParticlesFormats: no backend for this target."
 #end
 }
-inline function serializeStarlingPex(config:ParticleEmitterConfig, existing:StarlingPexDocument, options:StarlingPexSerializeOptions):String {
+extern inline function serializeStarlingPex(config:ParticleEmitterConfig, existing:StarlingPexDocument, options:StarlingPexSerializeOptions):String {
 #if hl
 	return cast flight._hl._fn.ParticlesFormats.serializeStarlingPex(config, existing, options);
 #elseif cpp
@@ -385,7 +385,7 @@ inline function serializeStarlingPex(config:ParticleEmitterConfig, existing:Star
 	#error "flight.ParticlesFormats: no backend for this target."
 #end
 }
-inline function serializeStarlingPexDocument(config:ParticleEmitterConfig, existing:StarlingPexDocument, options:StarlingPexSerializeOptions):ParticleSerializeResult {
+extern inline function serializeStarlingPexDocument(config:ParticleEmitterConfig, existing:StarlingPexDocument, options:StarlingPexSerializeOptions):ParticleSerializeResult {
 #if hl
 	return flight._hl._fn.ParticlesFormats.serializeStarlingPexDocument(config, existing, options);
 #elseif cpp
@@ -396,7 +396,7 @@ inline function serializeStarlingPexDocument(config:ParticleEmitterConfig, exist
 	#error "flight.ParticlesFormats: no backend for this target."
 #end
 }
-inline function parseUnityParticle(json:String, options:UnityParseOptions):ParticleEmitterConfig {
+extern inline function parseUnityParticle(json:String, options:UnityParseOptions):ParticleEmitterConfig {
 #if hl
 	return flight._hl._fn.ParticlesFormats.parseUnityParticle(cast json, options);
 #elseif cpp
@@ -407,7 +407,7 @@ inline function parseUnityParticle(json:String, options:UnityParseOptions):Parti
 	#error "flight.ParticlesFormats: no backend for this target."
 #end
 }
-inline function parseUnityParticleDocument(json:String, options:UnityParseOptions):UnityParseResult {
+extern inline function parseUnityParticleDocument(json:String, options:UnityParseOptions):UnityParseResult {
 #if hl
 	return flight._hl._fn.ParticlesFormats.parseUnityParticleDocument(cast json, options);
 #elseif cpp
@@ -418,7 +418,7 @@ inline function parseUnityParticleDocument(json:String, options:UnityParseOption
 	#error "flight.ParticlesFormats: no backend for this target."
 #end
 }
-inline function serializeUnityParticle(config:ParticleEmitterConfig, existing:UnityParticleDocument, options:UnitySerializeOptions):String {
+extern inline function serializeUnityParticle(config:ParticleEmitterConfig, existing:UnityParticleDocument, options:UnitySerializeOptions):String {
 #if hl
 	return cast flight._hl._fn.ParticlesFormats.serializeUnityParticle(config, existing, options);
 #elseif cpp
@@ -429,7 +429,7 @@ inline function serializeUnityParticle(config:ParticleEmitterConfig, existing:Un
 	#error "flight.ParticlesFormats: no backend for this target."
 #end
 }
-inline function serializeUnityParticleDocument(config:ParticleEmitterConfig, existing:UnityParticleDocument, options:UnitySerializeOptions):ParticleSerializeResult {
+extern inline function serializeUnityParticleDocument(config:ParticleEmitterConfig, existing:UnityParticleDocument, options:UnitySerializeOptions):ParticleSerializeResult {
 #if hl
 	return flight._hl._fn.ParticlesFormats.serializeUnityParticleDocument(config, existing, options);
 #elseif cpp
@@ -440,7 +440,7 @@ inline function serializeUnityParticleDocument(config:ParticleEmitterConfig, exi
 	#error "flight.ParticlesFormats: no backend for this target."
 #end
 }
-inline function freeParticleFormatKind(ptr:ParticleFormatKind):Void {
+extern inline function freeParticleFormatKind(ptr:ParticleFormatKind):Void {
 #if hl
 	flight._hl._fn.ParticlesFormats.freeParticleFormatKind(ptr);
 #elseif cpp
@@ -451,7 +451,7 @@ inline function freeParticleFormatKind(ptr:ParticleFormatKind):Void {
 	#error "flight.ParticlesFormats: no backend for this target."
 #end
 }
-inline function freeParticleFormatRegistry(ptr:ParticleFormatRegistry):Void {
+extern inline function freeParticleFormatRegistry(ptr:ParticleFormatRegistry):Void {
 #if hl
 	flight._hl._fn.ParticlesFormats.freeParticleFormatRegistry(ptr);
 #elseif cpp
@@ -462,7 +462,7 @@ inline function freeParticleFormatRegistry(ptr:ParticleFormatRegistry):Void {
 	#error "flight.ParticlesFormats: no backend for this target."
 #end
 }
-inline function freeParticleConfigParseResult(ptr:ParticleConfigParseResult):Void {
+extern inline function freeParticleConfigParseResult(ptr:ParticleConfigParseResult):Void {
 #if hl
 	flight._hl._fn.ParticlesFormats.freeParticleConfigParseResult(ptr);
 #elseif cpp
@@ -473,7 +473,7 @@ inline function freeParticleConfigParseResult(ptr:ParticleConfigParseResult):Voi
 	#error "flight.ParticlesFormats: no backend for this target."
 #end
 }
-inline function freeLibgdxParseResult(ptr:LibgdxParseResult):Void {
+extern inline function freeLibgdxParseResult(ptr:LibgdxParseResult):Void {
 #if hl
 	flight._hl._fn.ParticlesFormats.freeLibgdxParseResult(ptr);
 #elseif cpp
@@ -484,7 +484,7 @@ inline function freeLibgdxParseResult(ptr:LibgdxParseResult):Void {
 	#error "flight.ParticlesFormats: no backend for this target."
 #end
 }
-inline function freeParticleSerializeResult(ptr:ParticleSerializeResult):Void {
+extern inline function freeParticleSerializeResult(ptr:ParticleSerializeResult):Void {
 #if hl
 	flight._hl._fn.ParticlesFormats.freeParticleSerializeResult(ptr);
 #elseif cpp
@@ -495,7 +495,7 @@ inline function freeParticleSerializeResult(ptr:ParticleSerializeResult):Void {
 	#error "flight.ParticlesFormats: no backend for this target."
 #end
 }
-inline function freeParticleDesignerParseResult(ptr:ParticleDesignerParseResult):Void {
+extern inline function freeParticleDesignerParseResult(ptr:ParticleDesignerParseResult):Void {
 #if hl
 	flight._hl._fn.ParticlesFormats.freeParticleDesignerParseResult(ptr);
 #elseif cpp
@@ -506,7 +506,7 @@ inline function freeParticleDesignerParseResult(ptr:ParticleDesignerParseResult)
 	#error "flight.ParticlesFormats: no backend for this target."
 #end
 }
-inline function freePixiParseResult(ptr:PixiParseResult):Void {
+extern inline function freePixiParseResult(ptr:PixiParseResult):Void {
 #if hl
 	flight._hl._fn.ParticlesFormats.freePixiParseResult(ptr);
 #elseif cpp
@@ -517,7 +517,7 @@ inline function freePixiParseResult(ptr:PixiParseResult):Void {
 	#error "flight.ParticlesFormats: no backend for this target."
 #end
 }
-inline function freeParticleFormatDescriptor(ptr:ParticleFormatDescriptor):Void {
+extern inline function freeParticleFormatDescriptor(ptr:ParticleFormatDescriptor):Void {
 #if hl
 	flight._hl._fn.ParticlesFormats.freeParticleFormatDescriptor(ptr);
 #elseif cpp
@@ -528,7 +528,7 @@ inline function freeParticleFormatDescriptor(ptr:ParticleFormatDescriptor):Void 
 	#error "flight.ParticlesFormats: no backend for this target."
 #end
 }
-inline function freeSpineParseResult(ptr:SpineParseResult):Void {
+extern inline function freeSpineParseResult(ptr:SpineParseResult):Void {
 #if hl
 	flight._hl._fn.ParticlesFormats.freeSpineParseResult(ptr);
 #elseif cpp
@@ -539,7 +539,7 @@ inline function freeSpineParseResult(ptr:SpineParseResult):Void {
 	#error "flight.ParticlesFormats: no backend for this target."
 #end
 }
-inline function freeStarlingPexParseResult(ptr:StarlingPexParseResult):Void {
+extern inline function freeStarlingPexParseResult(ptr:StarlingPexParseResult):Void {
 #if hl
 	flight._hl._fn.ParticlesFormats.freeStarlingPexParseResult(ptr);
 #elseif cpp
@@ -550,7 +550,7 @@ inline function freeStarlingPexParseResult(ptr:StarlingPexParseResult):Void {
 	#error "flight.ParticlesFormats: no backend for this target."
 #end
 }
-inline function freeUnityParseResult(ptr:UnityParseResult):Void {
+extern inline function freeUnityParseResult(ptr:UnityParseResult):Void {
 #if hl
 	flight._hl._fn.ParticlesFormats.freeUnityParseResult(ptr);
 #elseif cpp

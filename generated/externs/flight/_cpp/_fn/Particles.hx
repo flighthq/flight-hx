@@ -10,7 +10,7 @@ extern class Particles {
 	@:native("flight_apply_particle_object_forces")
 	public static function applyParticleObjectForces(objects:cpp.Star<cpp.Void>, objectsLen:Int, state:flight._cpp.ParticleObjectsState, forces:cpp.Star<cpp.Void>, forcesLen:Int, deltaTime:Single):Void;
 	@:native("flight_build_particle_curve")
-	public static function buildParticleCurve(out:cpp.Star<cpp.Void>, fFn:cpp.Star<cpp.Void>, fCtx:cpp.Star<cpp.Void>):Void;
+	public static function buildParticleCurve(out:cpp.Star<cpp.Void>, fFn:cpp.Star<cpp.Void>, fCtx:cpp.Star<cpp.Void>, samples:Int):Void;
 	@:native("flight_lerp_hsv_direct")
 	public static function lerpHsvDirect(out:cpp.Star<cpp.Void>, outLen:Int, offset:Int, r0:Single, g0:Single, b0:Single, r1:Single, g1:Single, b1:Single, t:Single):Void;
 	@:native("flight_lerp_hsv_in_place")

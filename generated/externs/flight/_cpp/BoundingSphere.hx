@@ -10,5 +10,5 @@ abstract BoundingSphere(cpp.Star<cpp.Void>) {
 
 	inline function get_radius():Single return BoundingSphere_Ffi.get_radius(this);
 
-	inline function set_radius(value:Single):Single return BoundingSphere_Ffi.set_radius(this, value);
+	inline function set_radius(value:Single):Single { BoundingSphere_Ffi.set_radius(this, value); return value; }
 }

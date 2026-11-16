@@ -10,5 +10,5 @@ abstract StrokePathTessellationExplanation(cpp.Star<cpp.Void>) {
 
 	inline function get_supported():Bool return StrokePathTessellationExplanation_Ffi.get_supported(this);
 
-	inline function set_supported(value:Bool):Bool return StrokePathTessellationExplanation_Ffi.set_supported(this, value);
+	inline function set_supported(value:Bool):Bool { StrokePathTessellationExplanation_Ffi.set_supported(this, value); return value; }
 }

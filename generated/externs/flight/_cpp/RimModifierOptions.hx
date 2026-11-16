@@ -10,5 +10,5 @@ abstract RimModifierOptions(cpp.Star<cpp.Void>) {
 
 	inline function get_color():Int return RimModifierOptions_Ffi.get_color(this);
 
-	inline function set_color(value:Int):Int return RimModifierOptions_Ffi.set_color(this, value);
+	inline function set_color(value:Int):Int { RimModifierOptions_Ffi.set_color(this, value); return value; }
 }

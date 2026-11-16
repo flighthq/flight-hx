@@ -102,235 +102,235 @@ abstract ParticleEmitterConfig(cpp.Star<cpp.Void>) {
 
 	inline function get_alphaEnd():Single return ParticleEmitterConfig_Ffi.get_alphaEnd(this);
 
-	inline function set_alphaEnd(value:Single):Single return ParticleEmitterConfig_Ffi.set_alphaEnd(this, value);
+	inline function set_alphaEnd(value:Single):Single { ParticleEmitterConfig_Ffi.set_alphaEnd(this, value); return value; }
 	public var alphaStart(get, set):Single;
 
 	inline function get_alphaStart():Single return ParticleEmitterConfig_Ffi.get_alphaStart(this);
 
-	inline function set_alphaStart(value:Single):Single return ParticleEmitterConfig_Ffi.set_alphaStart(this, value);
+	inline function set_alphaStart(value:Single):Single { ParticleEmitterConfig_Ffi.set_alphaStart(this, value); return value; }
 	public var burstCount(get, set):Single;
 
 	inline function get_burstCount():Single return ParticleEmitterConfig_Ffi.get_burstCount(this);
 
-	inline function set_burstCount(value:Single):Single return ParticleEmitterConfig_Ffi.set_burstCount(this, value);
+	inline function set_burstCount(value:Single):Single { ParticleEmitterConfig_Ffi.set_burstCount(this, value); return value; }
 	public var burstInterval(get, set):Single;
 
 	inline function get_burstInterval():Single return ParticleEmitterConfig_Ffi.get_burstInterval(this);
 
-	inline function set_burstInterval(value:Single):Single return ParticleEmitterConfig_Ffi.set_burstInterval(this, value);
+	inline function set_burstInterval(value:Single):Single { ParticleEmitterConfig_Ffi.set_burstInterval(this, value); return value; }
 	public var colorEndB(get, set):Single;
 
 	inline function get_colorEndB():Single return ParticleEmitterConfig_Ffi.get_colorEndB(this);
 
-	inline function set_colorEndB(value:Single):Single return ParticleEmitterConfig_Ffi.set_colorEndB(this, value);
+	inline function set_colorEndB(value:Single):Single { ParticleEmitterConfig_Ffi.set_colorEndB(this, value); return value; }
 	public var colorEndG(get, set):Single;
 
 	inline function get_colorEndG():Single return ParticleEmitterConfig_Ffi.get_colorEndG(this);
 
-	inline function set_colorEndG(value:Single):Single return ParticleEmitterConfig_Ffi.set_colorEndG(this, value);
+	inline function set_colorEndG(value:Single):Single { ParticleEmitterConfig_Ffi.set_colorEndG(this, value); return value; }
 	public var colorEndR(get, set):Single;
 
 	inline function get_colorEndR():Single return ParticleEmitterConfig_Ffi.get_colorEndR(this);
 
-	inline function set_colorEndR(value:Single):Single return ParticleEmitterConfig_Ffi.set_colorEndR(this, value);
+	inline function set_colorEndR(value:Single):Single { ParticleEmitterConfig_Ffi.set_colorEndR(this, value); return value; }
 	public var colorEndVarianceB(get, set):Single;
 
 	inline function get_colorEndVarianceB():Single return ParticleEmitterConfig_Ffi.get_colorEndVarianceB(this);
 
-	inline function set_colorEndVarianceB(value:Single):Single return ParticleEmitterConfig_Ffi.set_colorEndVarianceB(this, value);
+	inline function set_colorEndVarianceB(value:Single):Single { ParticleEmitterConfig_Ffi.set_colorEndVarianceB(this, value); return value; }
 	public var colorEndVarianceG(get, set):Single;
 
 	inline function get_colorEndVarianceG():Single return ParticleEmitterConfig_Ffi.get_colorEndVarianceG(this);
 
-	inline function set_colorEndVarianceG(value:Single):Single return ParticleEmitterConfig_Ffi.set_colorEndVarianceG(this, value);
+	inline function set_colorEndVarianceG(value:Single):Single { ParticleEmitterConfig_Ffi.set_colorEndVarianceG(this, value); return value; }
 	public var colorEndVarianceR(get, set):Single;
 
 	inline function get_colorEndVarianceR():Single return ParticleEmitterConfig_Ffi.get_colorEndVarianceR(this);
 
-	inline function set_colorEndVarianceR(value:Single):Single return ParticleEmitterConfig_Ffi.set_colorEndVarianceR(this, value);
+	inline function set_colorEndVarianceR(value:Single):Single { ParticleEmitterConfig_Ffi.set_colorEndVarianceR(this, value); return value; }
 	public var colorStartB(get, set):Single;
 
 	inline function get_colorStartB():Single return ParticleEmitterConfig_Ffi.get_colorStartB(this);
 
-	inline function set_colorStartB(value:Single):Single return ParticleEmitterConfig_Ffi.set_colorStartB(this, value);
+	inline function set_colorStartB(value:Single):Single { ParticleEmitterConfig_Ffi.set_colorStartB(this, value); return value; }
 	public var colorStartG(get, set):Single;
 
 	inline function get_colorStartG():Single return ParticleEmitterConfig_Ffi.get_colorStartG(this);
 
-	inline function set_colorStartG(value:Single):Single return ParticleEmitterConfig_Ffi.set_colorStartG(this, value);
+	inline function set_colorStartG(value:Single):Single { ParticleEmitterConfig_Ffi.set_colorStartG(this, value); return value; }
 	public var colorStartR(get, set):Single;
 
 	inline function get_colorStartR():Single return ParticleEmitterConfig_Ffi.get_colorStartR(this);
 
-	inline function set_colorStartR(value:Single):Single return ParticleEmitterConfig_Ffi.set_colorStartR(this, value);
+	inline function set_colorStartR(value:Single):Single { ParticleEmitterConfig_Ffi.set_colorStartR(this, value); return value; }
 	public var colorStartVarianceB(get, set):Single;
 
 	inline function get_colorStartVarianceB():Single return ParticleEmitterConfig_Ffi.get_colorStartVarianceB(this);
 
-	inline function set_colorStartVarianceB(value:Single):Single return ParticleEmitterConfig_Ffi.set_colorStartVarianceB(this, value);
+	inline function set_colorStartVarianceB(value:Single):Single { ParticleEmitterConfig_Ffi.set_colorStartVarianceB(this, value); return value; }
 	public var colorStartVarianceG(get, set):Single;
 
 	inline function get_colorStartVarianceG():Single return ParticleEmitterConfig_Ffi.get_colorStartVarianceG(this);
 
-	inline function set_colorStartVarianceG(value:Single):Single return ParticleEmitterConfig_Ffi.set_colorStartVarianceG(this, value);
+	inline function set_colorStartVarianceG(value:Single):Single { ParticleEmitterConfig_Ffi.set_colorStartVarianceG(this, value); return value; }
 	public var colorStartVarianceR(get, set):Single;
 
 	inline function get_colorStartVarianceR():Single return ParticleEmitterConfig_Ffi.get_colorStartVarianceR(this);
 
-	inline function set_colorStartVarianceR(value:Single):Single return ParticleEmitterConfig_Ffi.set_colorStartVarianceR(this, value);
+	inline function set_colorStartVarianceR(value:Single):Single { ParticleEmitterConfig_Ffi.set_colorStartVarianceR(this, value); return value; }
 	public var directionX(get, set):Single;
 
 	inline function get_directionX():Single return ParticleEmitterConfig_Ffi.get_directionX(this);
 
-	inline function set_directionX(value:Single):Single return ParticleEmitterConfig_Ffi.set_directionX(this, value);
+	inline function set_directionX(value:Single):Single { ParticleEmitterConfig_Ffi.set_directionX(this, value); return value; }
 	public var directionY(get, set):Single;
 
 	inline function get_directionY():Single return ParticleEmitterConfig_Ffi.get_directionY(this);
 
-	inline function set_directionY(value:Single):Single return ParticleEmitterConfig_Ffi.set_directionY(this, value);
+	inline function set_directionY(value:Single):Single { ParticleEmitterConfig_Ffi.set_directionY(this, value); return value; }
 	public var directionZ(get, set):Single;
 
 	inline function get_directionZ():Single return ParticleEmitterConfig_Ffi.get_directionZ(this);
 
-	inline function set_directionZ(value:Single):Single return ParticleEmitterConfig_Ffi.set_directionZ(this, value);
+	inline function set_directionZ(value:Single):Single { ParticleEmitterConfig_Ffi.set_directionZ(this, value); return value; }
 	public var duration(get, set):Single;
 
 	inline function get_duration():Single return ParticleEmitterConfig_Ffi.get_duration(this);
 
-	inline function set_duration(value:Single):Single return ParticleEmitterConfig_Ffi.set_duration(this, value);
+	inline function set_duration(value:Single):Single { ParticleEmitterConfig_Ffi.set_duration(this, value); return value; }
 	public var emitterConeAngle(get, set):Single;
 
 	inline function get_emitterConeAngle():Single return ParticleEmitterConfig_Ffi.get_emitterConeAngle(this);
 
-	inline function set_emitterConeAngle(value:Single):Single return ParticleEmitterConfig_Ffi.set_emitterConeAngle(this, value);
+	inline function set_emitterConeAngle(value:Single):Single { ParticleEmitterConfig_Ffi.set_emitterConeAngle(this, value); return value; }
 	public var emitterDepth(get, set):Single;
 
 	inline function get_emitterDepth():Single return ParticleEmitterConfig_Ffi.get_emitterDepth(this);
 
-	inline function set_emitterDepth(value:Single):Single return ParticleEmitterConfig_Ffi.set_emitterDepth(this, value);
+	inline function set_emitterDepth(value:Single):Single { ParticleEmitterConfig_Ffi.set_emitterDepth(this, value); return value; }
 	public var emitterHeight(get, set):Single;
 
 	inline function get_emitterHeight():Single return ParticleEmitterConfig_Ffi.get_emitterHeight(this);
 
-	inline function set_emitterHeight(value:Single):Single return ParticleEmitterConfig_Ffi.set_emitterHeight(this, value);
+	inline function set_emitterHeight(value:Single):Single { ParticleEmitterConfig_Ffi.set_emitterHeight(this, value); return value; }
 	public var emitterRadius(get, set):Single;
 
 	inline function get_emitterRadius():Single return ParticleEmitterConfig_Ffi.get_emitterRadius(this);
 
-	inline function set_emitterRadius(value:Single):Single return ParticleEmitterConfig_Ffi.set_emitterRadius(this, value);
+	inline function set_emitterRadius(value:Single):Single { ParticleEmitterConfig_Ffi.set_emitterRadius(this, value); return value; }
 	public var emitterWidth(get, set):Single;
 
 	inline function get_emitterWidth():Single return ParticleEmitterConfig_Ffi.get_emitterWidth(this);
 
-	inline function set_emitterWidth(value:Single):Single return ParticleEmitterConfig_Ffi.set_emitterWidth(this, value);
+	inline function set_emitterWidth(value:Single):Single { ParticleEmitterConfig_Ffi.set_emitterWidth(this, value); return value; }
 	public var frameCount(get, set):Single;
 
 	inline function get_frameCount():Single return ParticleEmitterConfig_Ffi.get_frameCount(this);
 
-	inline function set_frameCount(value:Single):Single return ParticleEmitterConfig_Ffi.set_frameCount(this, value);
+	inline function set_frameCount(value:Single):Single { ParticleEmitterConfig_Ffi.set_frameCount(this, value); return value; }
 	public var frameRate(get, set):Single;
 
 	inline function get_frameRate():Single return ParticleEmitterConfig_Ffi.get_frameRate(this);
 
-	inline function set_frameRate(value:Single):Single return ParticleEmitterConfig_Ffi.set_frameRate(this, value);
+	inline function set_frameRate(value:Single):Single { ParticleEmitterConfig_Ffi.set_frameRate(this, value); return value; }
 	public var gravityX(get, set):Single;
 
 	inline function get_gravityX():Single return ParticleEmitterConfig_Ffi.get_gravityX(this);
 
-	inline function set_gravityX(value:Single):Single return ParticleEmitterConfig_Ffi.set_gravityX(this, value);
+	inline function set_gravityX(value:Single):Single { ParticleEmitterConfig_Ffi.set_gravityX(this, value); return value; }
 	public var gravityY(get, set):Single;
 
 	inline function get_gravityY():Single return ParticleEmitterConfig_Ffi.get_gravityY(this);
 
-	inline function set_gravityY(value:Single):Single return ParticleEmitterConfig_Ffi.set_gravityY(this, value);
+	inline function set_gravityY(value:Single):Single { ParticleEmitterConfig_Ffi.set_gravityY(this, value); return value; }
 	public var gravityZ(get, set):Single;
 
 	inline function get_gravityZ():Single return ParticleEmitterConfig_Ffi.get_gravityZ(this);
 
-	inline function set_gravityZ(value:Single):Single return ParticleEmitterConfig_Ffi.set_gravityZ(this, value);
+	inline function set_gravityZ(value:Single):Single { ParticleEmitterConfig_Ffi.set_gravityZ(this, value); return value; }
 	public var lifetimeMax(get, set):Single;
 
 	inline function get_lifetimeMax():Single return ParticleEmitterConfig_Ffi.get_lifetimeMax(this);
 
-	inline function set_lifetimeMax(value:Single):Single return ParticleEmitterConfig_Ffi.set_lifetimeMax(this, value);
+	inline function set_lifetimeMax(value:Single):Single { ParticleEmitterConfig_Ffi.set_lifetimeMax(this, value); return value; }
 	public var lifetimeMin(get, set):Single;
 
 	inline function get_lifetimeMin():Single return ParticleEmitterConfig_Ffi.get_lifetimeMin(this);
 
-	inline function set_lifetimeMin(value:Single):Single return ParticleEmitterConfig_Ffi.set_lifetimeMin(this, value);
+	inline function set_lifetimeMin(value:Single):Single { ParticleEmitterConfig_Ffi.set_lifetimeMin(this, value); return value; }
 	public var looping(get, set):Bool;
 
 	inline function get_looping():Bool return ParticleEmitterConfig_Ffi.get_looping(this);
 
-	inline function set_looping(value:Bool):Bool return ParticleEmitterConfig_Ffi.set_looping(this, value);
+	inline function set_looping(value:Bool):Bool { ParticleEmitterConfig_Ffi.set_looping(this, value); return value; }
 	public var maxParticles(get, set):Single;
 
 	inline function get_maxParticles():Single return ParticleEmitterConfig_Ffi.get_maxParticles(this);
 
-	inline function set_maxParticles(value:Single):Single return ParticleEmitterConfig_Ffi.set_maxParticles(this, value);
+	inline function set_maxParticles(value:Single):Single { ParticleEmitterConfig_Ffi.set_maxParticles(this, value); return value; }
 	public var regionIdMax(get, set):Single;
 
 	inline function get_regionIdMax():Single return ParticleEmitterConfig_Ffi.get_regionIdMax(this);
 
-	inline function set_regionIdMax(value:Single):Single return ParticleEmitterConfig_Ffi.set_regionIdMax(this, value);
+	inline function set_regionIdMax(value:Single):Single { ParticleEmitterConfig_Ffi.set_regionIdMax(this, value); return value; }
 	public var regionIdMin(get, set):Single;
 
 	inline function get_regionIdMin():Single return ParticleEmitterConfig_Ffi.get_regionIdMin(this);
 
-	inline function set_regionIdMin(value:Single):Single return ParticleEmitterConfig_Ffi.set_regionIdMin(this, value);
+	inline function set_regionIdMin(value:Single):Single { ParticleEmitterConfig_Ffi.set_regionIdMin(this, value); return value; }
 	public var rotationSpeedMax(get, set):Single;
 
 	inline function get_rotationSpeedMax():Single return ParticleEmitterConfig_Ffi.get_rotationSpeedMax(this);
 
-	inline function set_rotationSpeedMax(value:Single):Single return ParticleEmitterConfig_Ffi.set_rotationSpeedMax(this, value);
+	inline function set_rotationSpeedMax(value:Single):Single { ParticleEmitterConfig_Ffi.set_rotationSpeedMax(this, value); return value; }
 	public var rotationSpeedMin(get, set):Single;
 
 	inline function get_rotationSpeedMin():Single return ParticleEmitterConfig_Ffi.get_rotationSpeedMin(this);
 
-	inline function set_rotationSpeedMin(value:Single):Single return ParticleEmitterConfig_Ffi.set_rotationSpeedMin(this, value);
+	inline function set_rotationSpeedMin(value:Single):Single { ParticleEmitterConfig_Ffi.set_rotationSpeedMin(this, value); return value; }
 	public var scaleEnd(get, set):Single;
 
 	inline function get_scaleEnd():Single return ParticleEmitterConfig_Ffi.get_scaleEnd(this);
 
-	inline function set_scaleEnd(value:Single):Single return ParticleEmitterConfig_Ffi.set_scaleEnd(this, value);
+	inline function set_scaleEnd(value:Single):Single { ParticleEmitterConfig_Ffi.set_scaleEnd(this, value); return value; }
 	public var scaleMax(get, set):Single;
 
 	inline function get_scaleMax():Single return ParticleEmitterConfig_Ffi.get_scaleMax(this);
 
-	inline function set_scaleMax(value:Single):Single return ParticleEmitterConfig_Ffi.set_scaleMax(this, value);
+	inline function set_scaleMax(value:Single):Single { ParticleEmitterConfig_Ffi.set_scaleMax(this, value); return value; }
 	public var scaleMin(get, set):Single;
 
 	inline function get_scaleMin():Single return ParticleEmitterConfig_Ffi.get_scaleMin(this);
 
-	inline function set_scaleMin(value:Single):Single return ParticleEmitterConfig_Ffi.set_scaleMin(this, value);
+	inline function set_scaleMin(value:Single):Single { ParticleEmitterConfig_Ffi.set_scaleMin(this, value); return value; }
 	public var spawnRate(get, set):Single;
 
 	inline function get_spawnRate():Single return ParticleEmitterConfig_Ffi.get_spawnRate(this);
 
-	inline function set_spawnRate(value:Single):Single return ParticleEmitterConfig_Ffi.set_spawnRate(this, value);
+	inline function set_spawnRate(value:Single):Single { ParticleEmitterConfig_Ffi.set_spawnRate(this, value); return value; }
 	public var speedMax(get, set):Single;
 
 	inline function get_speedMax():Single return ParticleEmitterConfig_Ffi.get_speedMax(this);
 
-	inline function set_speedMax(value:Single):Single return ParticleEmitterConfig_Ffi.set_speedMax(this, value);
+	inline function set_speedMax(value:Single):Single { ParticleEmitterConfig_Ffi.set_speedMax(this, value); return value; }
 	public var speedMin(get, set):Single;
 
 	inline function get_speedMin():Single return ParticleEmitterConfig_Ffi.get_speedMin(this);
 
-	inline function set_speedMin(value:Single):Single return ParticleEmitterConfig_Ffi.set_speedMin(this, value);
+	inline function set_speedMin(value:Single):Single { ParticleEmitterConfig_Ffi.set_speedMin(this, value); return value; }
 	public var spread(get, set):Single;
 
 	inline function get_spread():Single return ParticleEmitterConfig_Ffi.get_spread(this);
 
-	inline function set_spread(value:Single):Single return ParticleEmitterConfig_Ffi.set_spread(this, value);
+	inline function set_spread(value:Single):Single { ParticleEmitterConfig_Ffi.set_spread(this, value); return value; }
 	public var velocityInheritance(get, set):Single;
 
 	inline function get_velocityInheritance():Single return ParticleEmitterConfig_Ffi.get_velocityInheritance(this);
 
-	inline function set_velocityInheritance(value:Single):Single return ParticleEmitterConfig_Ffi.set_velocityInheritance(this, value);
+	inline function set_velocityInheritance(value:Single):Single { ParticleEmitterConfig_Ffi.set_velocityInheritance(this, value); return value; }
 	public var worldSpace(get, set):Bool;
 
 	inline function get_worldSpace():Bool return ParticleEmitterConfig_Ffi.get_worldSpace(this);
 
-	inline function set_worldSpace(value:Bool):Bool return ParticleEmitterConfig_Ffi.set_worldSpace(this, value);
+	inline function set_worldSpace(value:Bool):Bool { ParticleEmitterConfig_Ffi.set_worldSpace(this, value); return value; }
 }

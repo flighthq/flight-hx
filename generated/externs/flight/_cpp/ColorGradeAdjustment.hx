@@ -26,45 +26,45 @@ abstract ColorGradeAdjustment(cpp.Star<cpp.Void>) {
 
 	inline function get_exposure():Single return ColorGradeAdjustment_Ffi.get_exposure(this);
 
-	inline function set_exposure(value:Single):Single return ColorGradeAdjustment_Ffi.set_exposure(this, value);
+	inline function set_exposure(value:Single):Single { ColorGradeAdjustment_Ffi.set_exposure(this, value); return value; }
 	public var brightness(get, set):Single;
 
 	inline function get_brightness():Single return ColorGradeAdjustment_Ffi.get_brightness(this);
 
-	inline function set_brightness(value:Single):Single return ColorGradeAdjustment_Ffi.set_brightness(this, value);
+	inline function set_brightness(value:Single):Single { ColorGradeAdjustment_Ffi.set_brightness(this, value); return value; }
 	public var contrast(get, set):Single;
 
 	inline function get_contrast():Single return ColorGradeAdjustment_Ffi.get_contrast(this);
 
-	inline function set_contrast(value:Single):Single return ColorGradeAdjustment_Ffi.set_contrast(this, value);
+	inline function set_contrast(value:Single):Single { ColorGradeAdjustment_Ffi.set_contrast(this, value); return value; }
 	public var saturation(get, set):Single;
 
 	inline function get_saturation():Single return ColorGradeAdjustment_Ffi.get_saturation(this);
 
-	inline function set_saturation(value:Single):Single return ColorGradeAdjustment_Ffi.set_saturation(this, value);
+	inline function set_saturation(value:Single):Single { ColorGradeAdjustment_Ffi.set_saturation(this, value); return value; }
 	public var temperature(get, set):Single;
 
 	inline function get_temperature():Single return ColorGradeAdjustment_Ffi.get_temperature(this);
 
-	inline function set_temperature(value:Single):Single return ColorGradeAdjustment_Ffi.set_temperature(this, value);
+	inline function set_temperature(value:Single):Single { ColorGradeAdjustment_Ffi.set_temperature(this, value); return value; }
 	public var tint(get, set):Single;
 
 	inline function get_tint():Single return ColorGradeAdjustment_Ffi.get_tint(this);
 
-	inline function set_tint(value:Single):Single return ColorGradeAdjustment_Ffi.set_tint(this, value);
+	inline function set_tint(value:Single):Single { ColorGradeAdjustment_Ffi.set_tint(this, value); return value; }
 	public var lift(get, set):Int;
 
 	inline function get_lift():Int return ColorGradeAdjustment_Ffi.get_lift(this);
 
-	inline function set_lift(value:Int):Int return ColorGradeAdjustment_Ffi.set_lift(this, value);
+	inline function set_lift(value:Int):Int { ColorGradeAdjustment_Ffi.set_lift(this, value); return value; }
 	public var gamma(get, set):Int;
 
 	inline function get_gamma():Int return ColorGradeAdjustment_Ffi.get_gamma(this);
 
-	inline function set_gamma(value:Int):Int return ColorGradeAdjustment_Ffi.set_gamma(this, value);
+	inline function set_gamma(value:Int):Int { ColorGradeAdjustment_Ffi.set_gamma(this, value); return value; }
 	public var gain(get, set):Int;
 
 	inline function get_gain():Int return ColorGradeAdjustment_Ffi.get_gain(this);
 
-	inline function set_gain(value:Int):Int return ColorGradeAdjustment_Ffi.set_gain(this, value);
+	inline function set_gain(value:Int):Int { ColorGradeAdjustment_Ffi.set_gain(this, value); return value; }
 }

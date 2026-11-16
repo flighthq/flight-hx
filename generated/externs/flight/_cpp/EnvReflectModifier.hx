@@ -16,20 +16,20 @@ abstract EnvReflectModifier(cpp.Star<cpp.Void>) {
 
 	inline function get_tint():Int return EnvReflectModifier_Ffi.get_tint(this);
 
-	inline function set_tint(value:Int):Int return EnvReflectModifier_Ffi.set_tint(this, value);
+	inline function set_tint(value:Int):Int { EnvReflectModifier_Ffi.set_tint(this, value); return value; }
 	public var intensity(get, set):Single;
 
 	inline function get_intensity():Single return EnvReflectModifier_Ffi.get_intensity(this);
 
-	inline function set_intensity(value:Single):Single return EnvReflectModifier_Ffi.set_intensity(this, value);
+	inline function set_intensity(value:Single):Single { EnvReflectModifier_Ffi.set_intensity(this, value); return value; }
 	public var fresnelBias(get, set):Single;
 
 	inline function get_fresnelBias():Single return EnvReflectModifier_Ffi.get_fresnelBias(this);
 
-	inline function set_fresnelBias(value:Single):Single return EnvReflectModifier_Ffi.set_fresnelBias(this, value);
+	inline function set_fresnelBias(value:Single):Single { EnvReflectModifier_Ffi.set_fresnelBias(this, value); return value; }
 	public var roughness(get, set):Single;
 
 	inline function get_roughness():Single return EnvReflectModifier_Ffi.get_roughness(this);
 
-	inline function set_roughness(value:Single):Single return EnvReflectModifier_Ffi.set_roughness(this, value);
+	inline function set_roughness(value:Single):Single { EnvReflectModifier_Ffi.set_roughness(this, value); return value; }
 }

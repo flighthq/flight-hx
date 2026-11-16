@@ -26,45 +26,45 @@ abstract SpritesheetFrameData(cpp.Star<cpp.Void>) {
 
 	inline function get_height():Single return SpritesheetFrameData_Ffi.get_height(this);
 
-	inline function set_height(value:Single):Single return SpritesheetFrameData_Ffi.set_height(this, value);
+	inline function set_height(value:Single):Single { SpritesheetFrameData_Ffi.set_height(this, value); return value; }
 	public var offsetX(get, set):Single;
 
 	inline function get_offsetX():Single return SpritesheetFrameData_Ffi.get_offsetX(this);
 
-	inline function set_offsetX(value:Single):Single return SpritesheetFrameData_Ffi.set_offsetX(this, value);
+	inline function set_offsetX(value:Single):Single { SpritesheetFrameData_Ffi.set_offsetX(this, value); return value; }
 	public var offsetY(get, set):Single;
 
 	inline function get_offsetY():Single return SpritesheetFrameData_Ffi.get_offsetY(this);
 
-	inline function set_offsetY(value:Single):Single return SpritesheetFrameData_Ffi.set_offsetY(this, value);
+	inline function set_offsetY(value:Single):Single { SpritesheetFrameData_Ffi.set_offsetY(this, value); return value; }
 	public var rotated(get, set):Bool;
 
 	inline function get_rotated():Bool return SpritesheetFrameData_Ffi.get_rotated(this);
 
-	inline function set_rotated(value:Bool):Bool return SpritesheetFrameData_Ffi.set_rotated(this, value);
+	inline function set_rotated(value:Bool):Bool { SpritesheetFrameData_Ffi.set_rotated(this, value); return value; }
 	public var sourceHeight(get, set):Single;
 
 	inline function get_sourceHeight():Single return SpritesheetFrameData_Ffi.get_sourceHeight(this);
 
-	inline function set_sourceHeight(value:Single):Single return SpritesheetFrameData_Ffi.set_sourceHeight(this, value);
+	inline function set_sourceHeight(value:Single):Single { SpritesheetFrameData_Ffi.set_sourceHeight(this, value); return value; }
 	public var sourceWidth(get, set):Single;
 
 	inline function get_sourceWidth():Single return SpritesheetFrameData_Ffi.get_sourceWidth(this);
 
-	inline function set_sourceWidth(value:Single):Single return SpritesheetFrameData_Ffi.set_sourceWidth(this, value);
+	inline function set_sourceWidth(value:Single):Single { SpritesheetFrameData_Ffi.set_sourceWidth(this, value); return value; }
 	public var width(get, set):Single;
 
 	inline function get_width():Single return SpritesheetFrameData_Ffi.get_width(this);
 
-	inline function set_width(value:Single):Single return SpritesheetFrameData_Ffi.set_width(this, value);
+	inline function set_width(value:Single):Single { SpritesheetFrameData_Ffi.set_width(this, value); return value; }
 	public var x(get, set):Single;
 
 	inline function get_x():Single return SpritesheetFrameData_Ffi.get_x(this);
 
-	inline function set_x(value:Single):Single return SpritesheetFrameData_Ffi.set_x(this, value);
+	inline function set_x(value:Single):Single { SpritesheetFrameData_Ffi.set_x(this, value); return value; }
 	public var y(get, set):Single;
 
 	inline function get_y():Single return SpritesheetFrameData_Ffi.get_y(this);
 
-	inline function set_y(value:Single):Single return SpritesheetFrameData_Ffi.set_y(this, value);
+	inline function set_y(value:Single):Single { SpritesheetFrameData_Ffi.set_y(this, value); return value; }
 }

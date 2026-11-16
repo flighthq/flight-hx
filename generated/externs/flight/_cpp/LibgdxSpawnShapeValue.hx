@@ -10,5 +10,5 @@ abstract LibgdxSpawnShapeValue(cpp.Star<cpp.Void>) {
 
 	inline function get_edges():Bool return LibgdxSpawnShapeValue_Ffi.get_edges(this);
 
-	inline function set_edges(value:Bool):Bool return LibgdxSpawnShapeValue_Ffi.set_edges(this, value);
+	inline function set_edges(value:Bool):Bool { LibgdxSpawnShapeValue_Ffi.set_edges(this, value); return value; }
 }

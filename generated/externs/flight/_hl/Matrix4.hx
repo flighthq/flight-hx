@@ -7,7 +7,7 @@ abstract Matrix4(hl.Bytes) {
 	inline public function getCamera3dViewProjection(camera:flight._hl.Camera3D, aspect:Single):Void {
 		flight._hl._fn.Camera.getCamera3dViewProjectionMatrix4(cast this, camera, aspect);
 	}
-	inline public function setCamera3dViewMatrix4From(guardState:Dynamic, camera:flight._hl.Camera3D):Void {
+	inline public function setCamera3dViewMatrix4From(guardState:hl.Bytes, camera:flight._hl.Camera3D):Void {
 		flight._hl._fn.Camera.setCamera3dViewMatrix4FromMatrix4(guardState, camera, cast this);
 	}
 	inline public function setProjection(projection:flight._hl.Projection, aspect:Single, near:Single, far:Single):Void {

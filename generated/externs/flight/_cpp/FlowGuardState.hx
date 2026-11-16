@@ -12,10 +12,10 @@ abstract FlowGuardState(cpp.Star<cpp.Void>) {
 
 	inline function get_enabled():Bool return FlowGuardState_Ffi.get_enabled(this);
 
-	inline function set_enabled(value:Bool):Bool return FlowGuardState_Ffi.set_enabled(this, value);
+	inline function set_enabled(value:Bool):Bool { FlowGuardState_Ffi.set_enabled(this, value); return value; }
 	public var transitionDepth(get, set):Int;
 
 	inline function get_transitionDepth():Int return FlowGuardState_Ffi.get_transitionDepth(this);
 
-	inline function set_transitionDepth(value:Int):Int return FlowGuardState_Ffi.set_transitionDepth(this, value);
+	inline function set_transitionDepth(value:Int):Int { FlowGuardState_Ffi.set_transitionDepth(this, value); return value; }
 }

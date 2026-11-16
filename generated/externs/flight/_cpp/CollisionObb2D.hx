@@ -18,25 +18,25 @@ abstract CollisionObb2D(cpp.Star<cpp.Void>) {
 
 	inline function get_x():Single return CollisionObb2D_Ffi.get_x(this);
 
-	inline function set_x(value:Single):Single return CollisionObb2D_Ffi.set_x(this, value);
+	inline function set_x(value:Single):Single { CollisionObb2D_Ffi.set_x(this, value); return value; }
 	public var y(get, set):Single;
 
 	inline function get_y():Single return CollisionObb2D_Ffi.get_y(this);
 
-	inline function set_y(value:Single):Single return CollisionObb2D_Ffi.set_y(this, value);
+	inline function set_y(value:Single):Single { CollisionObb2D_Ffi.set_y(this, value); return value; }
 	public var halfW(get, set):Single;
 
 	inline function get_halfW():Single return CollisionObb2D_Ffi.get_halfW(this);
 
-	inline function set_halfW(value:Single):Single return CollisionObb2D_Ffi.set_halfW(this, value);
+	inline function set_halfW(value:Single):Single { CollisionObb2D_Ffi.set_halfW(this, value); return value; }
 	public var halfH(get, set):Single;
 
 	inline function get_halfH():Single return CollisionObb2D_Ffi.get_halfH(this);
 
-	inline function set_halfH(value:Single):Single return CollisionObb2D_Ffi.set_halfH(this, value);
+	inline function set_halfH(value:Single):Single { CollisionObb2D_Ffi.set_halfH(this, value); return value; }
 	public var rotation(get, set):Single;
 
 	inline function get_rotation():Single return CollisionObb2D_Ffi.get_rotation(this);
 
-	inline function set_rotation(value:Single):Single return CollisionObb2D_Ffi.set_rotation(this, value);
+	inline function set_rotation(value:Single):Single { CollisionObb2D_Ffi.set_rotation(this, value); return value; }
 }

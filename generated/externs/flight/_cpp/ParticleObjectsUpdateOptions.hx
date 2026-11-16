@@ -12,10 +12,10 @@ abstract ParticleObjectsUpdateOptions(cpp.Star<cpp.Void>) {
 
 	inline function get_emitterX():Single return ParticleObjectsUpdateOptions_Ffi.get_emitterX(this);
 
-	inline function set_emitterX(value:Single):Single return ParticleObjectsUpdateOptions_Ffi.set_emitterX(this, value);
+	inline function set_emitterX(value:Single):Single { ParticleObjectsUpdateOptions_Ffi.set_emitterX(this, value); return value; }
 	public var emitterY(get, set):Single;
 
 	inline function get_emitterY():Single return ParticleObjectsUpdateOptions_Ffi.get_emitterY(this);
 
-	inline function set_emitterY(value:Single):Single return ParticleObjectsUpdateOptions_Ffi.set_emitterY(this, value);
+	inline function set_emitterY(value:Single):Single { ParticleObjectsUpdateOptions_Ffi.set_emitterY(this, value); return value; }
 }

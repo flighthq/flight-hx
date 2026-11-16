@@ -10,5 +10,5 @@ abstract RiveCoreObject(cpp.Star<cpp.Void>) {
 
 	inline function get_typeKey():haxe.Int64 return RiveCoreObject_Ffi.get_typeKey(this);
 
-	inline function set_typeKey(value:haxe.Int64):haxe.Int64 return RiveCoreObject_Ffi.set_typeKey(this, value);
+	inline function set_typeKey(value:haxe.Int64):haxe.Int64 { RiveCoreObject_Ffi.set_typeKey(this, value); return value; }
 }

@@ -22,7 +22,7 @@ typedef Clock = flight._js.Clock;
 
 #end
 
-inline function createChildClock(parent:Dynamic, options:ClockOptions):Dynamic {
+extern inline function createChildClock(parent:Dynamic, options:ClockOptions):Dynamic {
 #if hl
 	return flight._hl._fn.Clock.createChildClock(parent, options);
 #elseif cpp
@@ -33,7 +33,7 @@ inline function createChildClock(parent:Dynamic, options:ClockOptions):Dynamic {
 	#error "flight.Clock: no backend for this target."
 #end
 }
-inline function createClock():Dynamic {
+extern inline function createClock():Dynamic {
 #if hl
 	return flight._hl._fn.Clock.createClock();
 #elseif cpp
@@ -44,7 +44,7 @@ inline function createClock():Dynamic {
 	#error "flight.Clock: no backend for this target."
 #end
 }
-inline function addClockChild(parent:Dynamic, child:Dynamic):Void {
+extern inline function addClockChild(parent:Dynamic, child:Dynamic):Void {
 #if hl
 	flight._hl._fn.Clock.addClockChild(parent, child);
 #elseif cpp
@@ -55,7 +55,7 @@ inline function addClockChild(parent:Dynamic, child:Dynamic):Void {
 	#error "flight.Clock: no backend for this target."
 #end
 }
-inline function advanceClock(clock:Dynamic, deltaTime:Float):Void {
+extern inline function advanceClock(clock:Dynamic, deltaTime:Float):Void {
 #if hl
 	flight._hl._fn.Clock.advanceClock(clock, deltaTime);
 #elseif cpp
@@ -66,7 +66,7 @@ inline function advanceClock(clock:Dynamic, deltaTime:Float):Void {
 	#error "flight.Clock: no backend for this target."
 #end
 }
-inline function disposeClock(clock:Dynamic):Void {
+extern inline function disposeClock(clock:Dynamic):Void {
 #if hl
 	flight._hl._fn.Clock.disposeClock(clock);
 #elseif cpp
@@ -77,7 +77,7 @@ inline function disposeClock(clock:Dynamic):Void {
 	#error "flight.Clock: no backend for this target."
 #end
 }
-inline function getClockEffectiveScale(clock:Clock):Float {
+extern inline function getClockEffectiveScale(clock:Clock):Float {
 #if hl
 	return flight._hl._fn.Clock.getClockEffectiveScale(clock);
 #elseif cpp
@@ -88,7 +88,7 @@ inline function getClockEffectiveScale(clock:Clock):Float {
 	#error "flight.Clock: no backend for this target."
 #end
 }
-inline function getClockParent(clock:Clock):Dynamic {
+extern inline function getClockParent(clock:Clock):Dynamic {
 #if hl
 	return flight._hl._fn.Clock.getClockParent(clock);
 #elseif cpp
@@ -99,7 +99,7 @@ inline function getClockParent(clock:Clock):Dynamic {
 	#error "flight.Clock: no backend for this target."
 #end
 }
-inline function isClockEffectivelyPaused(clock:Clock):Bool {
+extern inline function isClockEffectivelyPaused(clock:Clock):Bool {
 #if hl
 	return flight._hl._fn.Clock.isClockEffectivelyPaused(clock);
 #elseif cpp
@@ -110,7 +110,7 @@ inline function isClockEffectivelyPaused(clock:Clock):Bool {
 	#error "flight.Clock: no backend for this target."
 #end
 }
-inline function pauseClock(clock:Clock):Void {
+extern inline function pauseClock(clock:Clock):Void {
 #if hl
 	flight._hl._fn.Clock.pauseClock(clock);
 #elseif cpp
@@ -121,7 +121,7 @@ inline function pauseClock(clock:Clock):Void {
 	#error "flight.Clock: no backend for this target."
 #end
 }
-inline function removeClockChild(parent:Dynamic, child:Dynamic):Void {
+extern inline function removeClockChild(parent:Dynamic, child:Dynamic):Void {
 #if hl
 	flight._hl._fn.Clock.removeClockChild(parent, child);
 #elseif cpp
@@ -132,7 +132,7 @@ inline function removeClockChild(parent:Dynamic, child:Dynamic):Void {
 	#error "flight.Clock: no backend for this target."
 #end
 }
-inline function resetClock(clock:Clock):Void {
+extern inline function resetClock(clock:Clock):Void {
 #if hl
 	flight._hl._fn.Clock.resetClock(clock);
 #elseif cpp
@@ -143,7 +143,7 @@ inline function resetClock(clock:Clock):Void {
 	#error "flight.Clock: no backend for this target."
 #end
 }
-inline function resumeClock(clock:Clock):Void {
+extern inline function resumeClock(clock:Clock):Void {
 #if hl
 	flight._hl._fn.Clock.resumeClock(clock);
 #elseif cpp
@@ -154,7 +154,7 @@ inline function resumeClock(clock:Clock):Void {
 	#error "flight.Clock: no backend for this target."
 #end
 }
-inline function setClockScale(clock:Clock, scale:Float):Void {
+extern inline function setClockScale(clock:Clock, scale:Float):Void {
 #if hl
 	flight._hl._fn.Clock.setClockScale(clock, scale);
 #elseif cpp

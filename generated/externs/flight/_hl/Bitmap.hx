@@ -1,7 +1,7 @@
 package flight._hl;
 
 abstract Bitmap(hl.Bytes) {
-	static inline public function create(width:Int, height:Int, color:Int):flight._hl.Bitmap {
+	static inline public function create(width:Int, height:Int, color:haxe.Int64):flight._hl.Bitmap {
 		return flight._hl._fn.Bitmap.createBitmap(width, height, color);
 	}
 	inline public function clone():flight._hl.Bitmap {
@@ -13,7 +13,7 @@ abstract Bitmap(hl.Bytes) {
 	inline public function invalidate():Void {
 		flight._hl._fn.Bitmap.invalidateBitmap(cast this);
 	}
-	inline public function compare(other:flight._hl.Bitmap):Dynamic {
+	inline public function compare(other:flight._hl.Bitmap):flight._hl.Bitmap {
 		return flight._hl._fn.Bitmap.compareBitmap(cast this, other);
 	}
 	inline public function getMismatch(other:flight._hl.Bitmap, channelTolerance:Int):flight._hl.BitmapMismatch {
@@ -28,7 +28,7 @@ abstract Bitmap(hl.Bytes) {
 	inline public function trim():flight._hl.Bitmap {
 		return flight._hl._fn.Bitmap.trimBitmap(cast this);
 	}
-	inline public function encode(hostBitmapEncode:flight._hl.HostBitmapEncodeCapability, format:Int, quality:Single):Dynamic {
+	inline public function encode(hostBitmapEncode:flight._hl.HostBitmapEncodeCapability, format:Int, quality:Single):hl.Bytes {
 		return flight._hl._fn.Bitmap.encodeBitmap(hostBitmapEncode, cast this, format, quality);
 	}
 	inline public function floodFill(x:Int, y:Int, color:Int):Void {
@@ -40,7 +40,7 @@ abstract Bitmap(hl.Bytes) {
 	inline public function getPixel(x:Int, y:Int):Int {
 		return flight._hl._fn.Bitmap.getBitmapPixel(cast this, x, y);
 	}
-	inline public function getPixelChannel(x:Int, y:Int, channel:Int):Int {
+	inline public function getPixelChannel(x:Int, y:Int, channel:flight._hl.ImageChannel):Int {
 		return flight._hl._fn.Bitmap.getBitmapPixelChannel(cast this, x, y, channel);
 	}
 	inline public function getPixelLuminance(x:Int, y:Int):Int {
@@ -67,7 +67,7 @@ abstract Bitmap(hl.Bytes) {
 	inline public function free():Void {
 		flight._hl._fn.Bitmap.freeBitmap(cast this);
 	}
-	inline public function createImageResourceFrom(hostImage:flight._hl.HostImageCapability):Dynamic {
+	inline public function createImageResourceFrom(hostImage:flight._hl.HostImageCapability):hl.Bytes {
 		return flight._hl._fn.Image.createImageResourceFromBitmap(hostImage, cast this);
 	}
 }

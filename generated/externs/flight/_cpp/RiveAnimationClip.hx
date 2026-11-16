@@ -10,5 +10,5 @@ abstract RiveAnimationClip(cpp.Star<cpp.Void>) {
 
 	inline function get_speed():Single return RiveAnimationClip_Ffi.get_speed(this);
 
-	inline function set_speed(value:Single):Single return RiveAnimationClip_Ffi.set_speed(this, value);
+	inline function set_speed(value:Single):Single { RiveAnimationClip_Ffi.set_speed(this, value); return value; }
 }

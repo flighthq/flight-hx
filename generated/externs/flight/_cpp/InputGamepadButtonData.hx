@@ -16,20 +16,20 @@ abstract InputGamepadButtonData(cpp.Star<cpp.Void>) {
 
 	inline function get_button():Int return InputGamepadButtonData_Ffi.get_button(this);
 
-	inline function set_button(value:Int):Int return InputGamepadButtonData_Ffi.set_button(this, value);
+	inline function set_button(value:Int):Int { InputGamepadButtonData_Ffi.set_button(this, value); return value; }
 	public var gamepad(get, set):Int;
 
 	inline function get_gamepad():Int return InputGamepadButtonData_Ffi.get_gamepad(this);
 
-	inline function set_gamepad(value:Int):Int return InputGamepadButtonData_Ffi.set_gamepad(this, value);
+	inline function set_gamepad(value:Int):Int { InputGamepadButtonData_Ffi.set_gamepad(this, value); return value; }
 	public var timeStamp(get, set):Float;
 
 	inline function get_timeStamp():Float return InputGamepadButtonData_Ffi.get_timeStamp(this);
 
-	inline function set_timeStamp(value:Float):Float return InputGamepadButtonData_Ffi.set_timeStamp(this, value);
+	inline function set_timeStamp(value:Float):Float { InputGamepadButtonData_Ffi.set_timeStamp(this, value); return value; }
 	public var value(get, set):Single;
 
 	inline function get_value():Single return InputGamepadButtonData_Ffi.get_value(this);
 
-	inline function set_value(value:Single):Single return InputGamepadButtonData_Ffi.set_value(this, value);
+	inline function set_value(value:Single):Single { InputGamepadButtonData_Ffi.set_value(this, value); return value; }
 }

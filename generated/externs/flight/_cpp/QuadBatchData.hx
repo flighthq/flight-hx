@@ -10,5 +10,5 @@ abstract QuadBatchData(cpp.Star<cpp.Void>) {
 
 	inline function get_instanceCount():Int return QuadBatchData_Ffi.get_instanceCount(this);
 
-	inline function set_instanceCount(value:Int):Int return QuadBatchData_Ffi.set_instanceCount(this, value);
+	inline function set_instanceCount(value:Int):Int { QuadBatchData_Ffi.set_instanceCount(this, value); return value; }
 }

@@ -10,5 +10,5 @@ abstract TimerId(cpp.Star<cpp.Void>) {
 
 	inline function get_value():haxe.Int64 return TimerId_Ffi.get_value(this);
 
-	inline function set_value(value:haxe.Int64):haxe.Int64 return TimerId_Ffi.set_value(this, value);
+	inline function set_value(value:haxe.Int64):haxe.Int64 { TimerId_Ffi.set_value(this, value); return value; }
 }

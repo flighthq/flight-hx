@@ -12,10 +12,10 @@ abstract SvgColor(cpp.Star<cpp.Void>) {
 
 	inline function get_alpha():Single return SvgColor_Ffi.get_alpha(this);
 
-	inline function set_alpha(value:Single):Single return SvgColor_Ffi.set_alpha(this, value);
+	inline function set_alpha(value:Single):Single { SvgColor_Ffi.set_alpha(this, value); return value; }
 	public var rgb(get, set):Int;
 
 	inline function get_rgb():Int return SvgColor_Ffi.get_rgb(this);
 
-	inline function set_rgb(value:Int):Int return SvgColor_Ffi.set_rgb(this, value);
+	inline function set_rgb(value:Int):Int { SvgColor_Ffi.set_rgb(this, value); return value; }
 }

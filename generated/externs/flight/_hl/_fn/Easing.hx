@@ -102,11 +102,11 @@ extern class Easing {
 	@:hlNative("flight", "flight_disable_easing_guards")
 	public static function disableEasingGuards():Void;
 	@:hlNative("flight", "flight_enable_easing_guards")
-	public static function enableEasingGuards(logState:Dynamic, clockFn:Dynamic, clockCtx:Dynamic):Void;
+	public static function enableEasingGuards(logState:hl.Bytes, clockFn:hl.Bytes, clockCtx:hl.Bytes):Void;
 	@:hlNative("flight", "flight_get_easing_derivative")
-	public static function getEasingDerivative(easeFn:Dynamic, easeCtx:Dynamic):Single;
+	public static function getEasingDerivative(easeFn:hl.Bytes, easeCtx:hl.Bytes, t:Single, epsilon:Single):Single;
 	@:hlNative("flight", "flight_write_easing_samples")
-	public static function writeEasingSamples(out:hl.Bytes, outLen:Int, easeFn:Dynamic, easeCtx:Dynamic):Void;
+	public static function writeEasingSamples(out:hl.Bytes, outLen:Int, easeFn:hl.Bytes, easeCtx:hl.Bytes):Void;
 	@:hlNative("flight", "flight_free_easing_function")
 	public static function freeEasingFunction(ptr:flight._hl.EasingFunction):Void;
 	@:hlNative("flight", "flight_free_scalar_remap")

@@ -52,7 +52,7 @@ extern class Camera {
 	@:native("flight_explain_camera_3d_view")
 	public static function explainCamera3dView(camera:flight._cpp.Camera3D):flight._cpp.Camera3DViewExplanation;
 	@:native("flight_get_camera_3d_frustum_corners")
-	public static function getCamera3dFrustumCorners(out:cpp.Star<cpp.Void>, outLen:Int, camera:flight._cpp.Camera3D, aspect:Single):Bool;
+	public static function getCamera3dFrustumCorners(out:cpp.Star<cpp.Void>, camera:flight._cpp.Camera3D, aspect:Single):Bool;
 	@:native("flight_get_camera_3d_ray_through_bounding_sphere")
 	public static function getCamera3dRayThroughBoundingSphere(out:flight._cpp.Ray3D, camera:flight._cpp.Camera3D, sphere:flight._cpp.BoundingSphere, aspect:Single):Bool;
 	@:native("flight_intersect_camera_3d_ray_with_plane")

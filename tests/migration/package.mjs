@@ -3,6 +3,7 @@ import { spawnSync } from 'node:child_process';
 import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { inflateRawSync } from 'node:zlib';
+import { nativePayload } from '../../tools/native/artifacts.mjs';
 
 const root = path.resolve(import.meta.dirname, '../..');
 mkdirSync(path.join(root, '.artifacts'), { recursive: true });
@@ -18,6 +19,10 @@ try {
   const entries = unpack(bytes, installed);
   assert.ok(entries.includes('generated/externs/provenance.json'));
   assert.ok(entries.includes('lib/flight_hx/Package.hx'));
+  for (const filename of ['include.xml', 'project/Build.xml', 'lib/flight_hx/Native.hx', ...nativePayload(root)]) {
+    assert.ok(entries.includes(filename), `missing native integration file: ${filename}`);
+    assert.deepEqual(readFileSync(path.join(installed, filename)), readFileSync(path.join(root, filename)));
+  }
   for (const name of entries) {
     assert.ok(!/^(?:src(?:-cpp)?\/|generated\/(?:hx|js|flight)\/|tools\/backend-hx\/)/u.test(name), `legacy source in archive: ${name}`);
   }

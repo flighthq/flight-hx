@@ -1,6 +1,6 @@
 package flight;
 
-inline function registerSkeleton2dDeformAnimationTarget(registry:Skeleton2DAnimationTargetBinderRegistry):Void {
+extern inline function registerSkeleton2dDeformAnimationTarget(registry:Skeleton2DAnimationTargetBinderRegistry):Void {
 #if hl
 	flight._hl._fn.Skeleton2d.registerSkeleton2dDeformAnimationTarget(registry);
 #elseif cpp
@@ -11,7 +11,7 @@ inline function registerSkeleton2dDeformAnimationTarget(registry:Skeleton2DAnima
 	#error "flight.Skeleton2d: no backend for this target."
 #end
 }
-inline function isSkeleton2dSteppedChannelSubject(subject:String):Bool {
+extern inline function isSkeleton2dSteppedChannelSubject(subject:String):Bool {
 #if hl
 	return flight._hl._fn.Skeleton2d.isSkeleton2dSteppedChannelSubject(cast subject);
 #elseif cpp
@@ -22,7 +22,7 @@ inline function isSkeleton2dSteppedChannelSubject(subject:String):Bool {
 	#error "flight.Skeleton2d: no backend for this target."
 #end
 }
-inline function explainSkeleton2dDeformLength(skin:Skin2D, vertices:Dynamic, verticesLen:Int, deform:Dynamic, deformLen:Int):Skeleton2DDeformLengthExplanation {
+extern inline function explainSkeleton2dDeformLength(skin:Skin2D, vertices:Dynamic, verticesLen:Int, deform:Dynamic, deformLen:Int):Skeleton2DDeformLengthExplanation {
 #if hl
 	return flight._hl._fn.Skeleton2d.explainSkeleton2dDeformLength(skin, vertices, verticesLen, deform, deformLen);
 #elseif cpp
@@ -33,7 +33,7 @@ inline function explainSkeleton2dDeformLength(skin:Skin2D, vertices:Dynamic, ver
 	#error "flight.Skeleton2d: no backend for this target."
 #end
 }
-inline function registerSkeleton2dIkConstraintSolver(registry:Skeleton2DConstraintRegistry):Void {
+extern inline function registerSkeleton2dIkConstraintSolver(registry:Skeleton2DConstraintRegistry):Void {
 #if hl
 	flight._hl._fn.Skeleton2d.registerSkeleton2dIkConstraintSolver(registry);
 #elseif cpp
@@ -44,7 +44,7 @@ inline function registerSkeleton2dIkConstraintSolver(registry:Skeleton2DConstrai
 	#error "flight.Skeleton2d: no backend for this target."
 #end
 }
-inline function solveSkeleton2dIkConstraintSkeleton2DikConstraint(skeleton:Skeleton2D, constraint:Skeleton2DIkConstraint):Void {
+extern inline function solveSkeleton2dIkConstraintSkeleton2DikConstraint(skeleton:Skeleton2D, constraint:Skeleton2DIkConstraint):Void {
 #if hl
 	flight._hl._fn.Skeleton2d.solveSkeleton2dIkConstraintSkeleton2DikConstraint(skeleton, constraint);
 #elseif cpp
@@ -55,7 +55,7 @@ inline function solveSkeleton2dIkConstraintSkeleton2DikConstraint(skeleton:Skele
 	#error "flight.Skeleton2d: no backend for this target."
 #end
 }
-inline function solveSkeleton2dIkConstraintSkeleton2DpathConstraint(skeleton:Skeleton2D, constraint:Skeleton2DPathConstraint):Void {
+extern inline function solveSkeleton2dIkConstraintSkeleton2DpathConstraint(skeleton:Skeleton2D, constraint:Skeleton2DPathConstraint):Void {
 #if hl
 	flight._hl._fn.Skeleton2d.solveSkeleton2dIkConstraintSkeleton2DpathConstraint(skeleton, constraint);
 #elseif cpp
@@ -66,7 +66,7 @@ inline function solveSkeleton2dIkConstraintSkeleton2DpathConstraint(skeleton:Ske
 	#error "flight.Skeleton2d: no backend for this target."
 #end
 }
-inline function solveSkeleton2dIkConstraintSkeleton2DtransformConstraint(skeleton:Skeleton2D, constraint:Skeleton2DTransformConstraint):Void {
+extern inline function solveSkeleton2dIkConstraintSkeleton2DtransformConstraint(skeleton:Skeleton2D, constraint:Skeleton2DTransformConstraint):Void {
 #if hl
 	flight._hl._fn.Skeleton2d.solveSkeleton2dIkConstraintSkeleton2DtransformConstraint(skeleton, constraint);
 #elseif cpp
@@ -77,7 +77,7 @@ inline function solveSkeleton2dIkConstraintSkeleton2DtransformConstraint(skeleto
 	#error "flight.Skeleton2d: no backend for this target."
 #end
 }
-inline function registerSkeleton2dPathConstraintSolver(registry:Skeleton2DConstraintRegistry):Void {
+extern inline function registerSkeleton2dPathConstraintSolver(registry:Skeleton2DConstraintRegistry):Void {
 #if hl
 	flight._hl._fn.Skeleton2d.registerSkeleton2dPathConstraintSolver(registry);
 #elseif cpp
@@ -88,7 +88,7 @@ inline function registerSkeleton2dPathConstraintSolver(registry:Skeleton2DConstr
 	#error "flight.Skeleton2d: no backend for this target."
 #end
 }
-inline function solveSkeleton2dPathConstraintSkeleton2DikConstraint(skeleton:Skeleton2D, constraint:Skeleton2DIkConstraint):Void {
+extern inline function solveSkeleton2dPathConstraintSkeleton2DikConstraint(skeleton:Skeleton2D, constraint:Skeleton2DIkConstraint):Void {
 #if hl
 	flight._hl._fn.Skeleton2d.solveSkeleton2dPathConstraintSkeleton2DikConstraint(skeleton, constraint);
 #elseif cpp
@@ -99,7 +99,7 @@ inline function solveSkeleton2dPathConstraintSkeleton2DikConstraint(skeleton:Ske
 	#error "flight.Skeleton2d: no backend for this target."
 #end
 }
-inline function solveSkeleton2dPathConstraintSkeleton2DpathConstraint(skeleton:Skeleton2D, constraint:Skeleton2DPathConstraint):Void {
+extern inline function solveSkeleton2dPathConstraintSkeleton2DpathConstraint(skeleton:Skeleton2D, constraint:Skeleton2DPathConstraint):Void {
 #if hl
 	flight._hl._fn.Skeleton2d.solveSkeleton2dPathConstraintSkeleton2DpathConstraint(skeleton, constraint);
 #elseif cpp
@@ -110,7 +110,7 @@ inline function solveSkeleton2dPathConstraintSkeleton2DpathConstraint(skeleton:S
 	#error "flight.Skeleton2d: no backend for this target."
 #end
 }
-inline function solveSkeleton2dPathConstraintSkeleton2DtransformConstraint(skeleton:Skeleton2D, constraint:Skeleton2DTransformConstraint):Void {
+extern inline function solveSkeleton2dPathConstraintSkeleton2DtransformConstraint(skeleton:Skeleton2D, constraint:Skeleton2DTransformConstraint):Void {
 #if hl
 	flight._hl._fn.Skeleton2d.solveSkeleton2dPathConstraintSkeleton2DtransformConstraint(skeleton, constraint);
 #elseif cpp
@@ -121,7 +121,7 @@ inline function solveSkeleton2dPathConstraintSkeleton2DtransformConstraint(skele
 	#error "flight.Skeleton2d: no backend for this target."
 #end
 }
-inline function computeSkeleton2dBoneMatrices(skeleton:Skeleton2D):Void {
+extern inline function computeSkeleton2dBoneMatrices(skeleton:Skeleton2D):Void {
 #if hl
 	flight._hl._fn.Skeleton2d.computeSkeleton2dBoneMatrices(skeleton);
 #elseif cpp
@@ -132,7 +132,7 @@ inline function computeSkeleton2dBoneMatrices(skeleton:Skeleton2D):Void {
 	#error "flight.Skeleton2d: no backend for this target."
 #end
 }
-inline function computeSkeleton2dBoneWorldTransform(skeleton:Skeleton2D, boneIndex:Int):Void {
+extern inline function computeSkeleton2dBoneWorldTransform(skeleton:Skeleton2D, boneIndex:Int):Void {
 #if hl
 	flight._hl._fn.Skeleton2d.computeSkeleton2dBoneWorldTransform(skeleton, boneIndex);
 #elseif cpp
@@ -143,7 +143,7 @@ inline function computeSkeleton2dBoneWorldTransform(skeleton:Skeleton2D, boneInd
 	#error "flight.Skeleton2d: no backend for this target."
 #end
 }
-inline function computeSkeleton2dWorldTransforms(skeleton:Skeleton2D):Void {
+extern inline function computeSkeleton2dWorldTransforms(skeleton:Skeleton2D):Void {
 #if hl
 	flight._hl._fn.Skeleton2d.computeSkeleton2dWorldTransforms(skeleton);
 #elseif cpp
@@ -154,7 +154,7 @@ inline function computeSkeleton2dWorldTransforms(skeleton:Skeleton2D):Void {
 	#error "flight.Skeleton2d: no backend for this target."
 #end
 }
-inline function disposeSkeleton2d(skeleton:Skeleton2D):Void {
+extern inline function disposeSkeleton2d(skeleton:Skeleton2D):Void {
 #if hl
 	flight._hl._fn.Skeleton2d.disposeSkeleton2d(skeleton);
 #elseif cpp
@@ -165,7 +165,7 @@ inline function disposeSkeleton2d(skeleton:Skeleton2D):Void {
 	#error "flight.Skeleton2d: no backend for this target."
 #end
 }
-inline function equalsSkeleton2d(a:Skeleton2D, b:Skeleton2D):Bool {
+extern inline function equalsSkeleton2d(a:Skeleton2D, b:Skeleton2D):Bool {
 #if hl
 	return flight._hl._fn.Skeleton2d.equalsSkeleton2d(a, b);
 #elseif cpp
@@ -176,7 +176,7 @@ inline function equalsSkeleton2d(a:Skeleton2D, b:Skeleton2D):Bool {
 	#error "flight.Skeleton2d: no backend for this target."
 #end
 }
-inline function getSkeleton2dBoneIndexByName(skeleton:Skeleton2D, name:String):Int {
+extern inline function getSkeleton2dBoneIndexByName(skeleton:Skeleton2D, name:String):Int {
 #if hl
 	return flight._hl._fn.Skeleton2d.getSkeleton2dBoneIndexByName(skeleton, cast name);
 #elseif cpp
@@ -187,7 +187,7 @@ inline function getSkeleton2dBoneIndexByName(skeleton:Skeleton2D, name:String):I
 	#error "flight.Skeleton2d: no backend for this target."
 #end
 }
-inline function getSkeleton2dBoneWorldMatrix(out:Matrix, skeleton:Skeleton2D, boneIndex:Int):Bool {
+extern inline function getSkeleton2dBoneWorldMatrix(out:Matrix, skeleton:Skeleton2D, boneIndex:Int):Bool {
 #if hl
 	return flight._hl._fn.Skeleton2d.getSkeleton2dBoneWorldMatrix(out, skeleton, boneIndex);
 #elseif cpp
@@ -198,7 +198,7 @@ inline function getSkeleton2dBoneWorldMatrix(out:Matrix, skeleton:Skeleton2D, bo
 	#error "flight.Skeleton2d: no backend for this target."
 #end
 }
-inline function setSkeleton2dBindPose(skeleton:Skeleton2D):Void {
+extern inline function setSkeleton2dBindPose(skeleton:Skeleton2D):Void {
 #if hl
 	flight._hl._fn.Skeleton2d.setSkeleton2dBindPose(skeleton);
 #elseif cpp
@@ -209,7 +209,7 @@ inline function setSkeleton2dBindPose(skeleton:Skeleton2D):Void {
 	#error "flight.Skeleton2d: no backend for this target."
 #end
 }
-inline function validateSkeleton2d(skeleton:Skeleton2D):String {
+extern inline function validateSkeleton2d(skeleton:Skeleton2D):String {
 #if hl
 	return cast flight._hl._fn.Skeleton2d.validateSkeleton2d(skeleton);
 #elseif cpp
@@ -220,7 +220,7 @@ inline function validateSkeleton2d(skeleton:Skeleton2D):String {
 	#error "flight.Skeleton2d: no backend for this target."
 #end
 }
-inline function createSkeleton2dAnimationTargetHandle(kind:String, target:Unknown):Skeleton2DAnimationTargetHandle {
+extern inline function createSkeleton2dAnimationTargetHandle(kind:String, target:Unknown):Skeleton2DAnimationTargetHandle {
 #if hl
 	return flight._hl._fn.Skeleton2d.createSkeleton2dAnimationTargetHandle(cast kind, target);
 #elseif cpp
@@ -231,7 +231,7 @@ inline function createSkeleton2dAnimationTargetHandle(kind:String, target:Unknow
 	#error "flight.Skeleton2d: no backend for this target."
 #end
 }
-inline function createSkeleton2dAnimationTargetRegistry():Skeleton2DAnimationTargetBinderRegistry {
+extern inline function createSkeleton2dAnimationTargetRegistry():Skeleton2DAnimationTargetBinderRegistry {
 #if hl
 	return flight._hl._fn.Skeleton2d.createSkeleton2dAnimationTargetRegistry();
 #elseif cpp
@@ -242,7 +242,7 @@ inline function createSkeleton2dAnimationTargetRegistry():Skeleton2DAnimationTar
 	#error "flight.Skeleton2d: no backend for this target."
 #end
 }
-inline function createSkeleton2dBoneAnimationTarget(boneIndex:Int, path:String):Skeleton2DAnimationTarget {
+extern inline function createSkeleton2dBoneAnimationTarget(boneIndex:Int, path:String):Skeleton2DAnimationTarget {
 #if hl
 	return flight._hl._fn.Skeleton2d.createSkeleton2dBoneAnimationTarget(boneIndex, cast path);
 #elseif cpp
@@ -253,7 +253,7 @@ inline function createSkeleton2dBoneAnimationTarget(boneIndex:Int, path:String):
 	#error "flight.Skeleton2d: no backend for this target."
 #end
 }
-inline function createSkeleton2dSlotAnimationTarget():Skeleton2DSlotAnimationTarget {
+extern inline function createSkeleton2dSlotAnimationTarget():Skeleton2DSlotAnimationTarget {
 #if hl
 	return flight._hl._fn.Skeleton2d.createSkeleton2dSlotAnimationTarget();
 #elseif cpp
@@ -264,7 +264,7 @@ inline function createSkeleton2dSlotAnimationTarget():Skeleton2DSlotAnimationTar
 	#error "flight.Skeleton2d: no backend for this target."
 #end
 }
-inline function findSkeleton2dStepKeyframe(times:Dynamic, timesLen:Int, time:Float):Int {
+extern inline function findSkeleton2dStepKeyframe(times:Dynamic, timesLen:Int, time:Float):Int {
 #if hl
 	return flight._hl._fn.Skeleton2d.findSkeleton2dStepKeyframe(times, timesLen, time);
 #elseif cpp
@@ -275,7 +275,7 @@ inline function findSkeleton2dStepKeyframe(times:Dynamic, timesLen:Int, time:Flo
 	#error "flight.Skeleton2d: no backend for this target."
 #end
 }
-inline function getSkeleton2dAnimationTargetBinder(registry:Skeleton2DAnimationTargetBinderRegistry, kind:String):Skeleton2DAnimationTargetBinder {
+extern inline function getSkeleton2dAnimationTargetBinder(registry:Skeleton2DAnimationTargetBinderRegistry, kind:String):Skeleton2DAnimationTargetBinder {
 #if hl
 	return flight._hl._fn.Skeleton2d.getSkeleton2dAnimationTargetBinder(registry, cast kind);
 #elseif cpp
@@ -286,7 +286,7 @@ inline function getSkeleton2dAnimationTargetBinder(registry:Skeleton2DAnimationT
 	#error "flight.Skeleton2d: no backend for this target."
 #end
 }
-inline function getSkeleton2dAnimationTargetBinderKinds(out:Dynamic, registry:Skeleton2DAnimationTargetBinderRegistry):Void {
+extern inline function getSkeleton2dAnimationTargetBinderKinds(out:Dynamic, registry:Skeleton2DAnimationTargetBinderRegistry):Void {
 #if hl
 	flight._hl._fn.Skeleton2d.getSkeleton2dAnimationTargetBinderKinds(out, registry);
 #elseif cpp
@@ -297,7 +297,7 @@ inline function getSkeleton2dAnimationTargetBinderKinds(out:Dynamic, registry:Sk
 	#error "flight.Skeleton2d: no backend for this target."
 #end
 }
-inline function registerSkeleton2dAnimationTargetBinder(registry:Skeleton2DAnimationTargetBinderRegistry, kind:String, bind:Skeleton2DAnimationTargetBinder):Void {
+extern inline function registerSkeleton2dAnimationTargetBinder(registry:Skeleton2DAnimationTargetBinderRegistry, kind:String, bind:Skeleton2DAnimationTargetBinder):Void {
 #if hl
 	flight._hl._fn.Skeleton2d.registerSkeleton2dAnimationTargetBinder(registry, cast kind, bind);
 #elseif cpp
@@ -308,7 +308,7 @@ inline function registerSkeleton2dAnimationTargetBinder(registry:Skeleton2DAnima
 	#error "flight.Skeleton2d: no backend for this target."
 #end
 }
-inline function unregisterSkeleton2dAnimationTargetBinder(registry:Skeleton2DAnimationTargetBinderRegistry, kind:String):Void {
+extern inline function unregisterSkeleton2dAnimationTargetBinder(registry:Skeleton2DAnimationTargetBinderRegistry, kind:String):Void {
 #if hl
 	flight._hl._fn.Skeleton2d.unregisterSkeleton2dAnimationTargetBinder(registry, cast kind);
 #elseif cpp
@@ -319,7 +319,7 @@ inline function unregisterSkeleton2dAnimationTargetBinder(registry:Skeleton2DAni
 	#error "flight.Skeleton2d: no backend for this target."
 #end
 }
-inline function solveSkeleton2dConstraints(registry:Skeleton2DConstraintRegistry, skeleton:Skeleton2D, constraints:Dynamic, constraintsLen:Int):Void {
+extern inline function solveSkeleton2dConstraints(registry:Skeleton2DConstraintRegistry, skeleton:Skeleton2D, constraints:Dynamic, constraintsLen:Int):Void {
 #if hl
 	flight._hl._fn.Skeleton2d.solveSkeleton2dConstraints(registry, skeleton, constraints, constraintsLen);
 #elseif cpp
@@ -330,7 +330,7 @@ inline function solveSkeleton2dConstraints(registry:Skeleton2DConstraintRegistry
 	#error "flight.Skeleton2d: no backend for this target."
 #end
 }
-inline function unregisterSkeleton2dConstraintSolver(registry:Skeleton2DConstraintRegistry, kind:String):Void {
+extern inline function unregisterSkeleton2dConstraintSolver(registry:Skeleton2DConstraintRegistry, kind:String):Void {
 #if hl
 	flight._hl._fn.Skeleton2d.unregisterSkeleton2dConstraintSolver(registry, cast kind);
 #elseif cpp
@@ -341,7 +341,7 @@ inline function unregisterSkeleton2dConstraintSolver(registry:Skeleton2DConstrai
 	#error "flight.Skeleton2d: no backend for this target."
 #end
 }
-inline function registerSkeleton2dDrawOrderAnimationBinder(registry:Skeleton2DAnimationTargetBinderRegistry):Void {
+extern inline function registerSkeleton2dDrawOrderAnimationBinder(registry:Skeleton2DAnimationTargetBinderRegistry):Void {
 #if hl
 	flight._hl._fn.Skeleton2d.registerSkeleton2dDrawOrderAnimationBinder(registry);
 #elseif cpp
@@ -352,7 +352,7 @@ inline function registerSkeleton2dDrawOrderAnimationBinder(registry:Skeleton2DAn
 	#error "flight.Skeleton2d: no backend for this target."
 #end
 }
-inline function unregisterSkeleton2dDrawOrderAnimationBinder(registry:Skeleton2DAnimationTargetBinderRegistry):Void {
+extern inline function unregisterSkeleton2dDrawOrderAnimationBinder(registry:Skeleton2DAnimationTargetBinderRegistry):Void {
 #if hl
 	flight._hl._fn.Skeleton2d.unregisterSkeleton2dDrawOrderAnimationBinder(registry);
 #elseif cpp
@@ -363,7 +363,7 @@ inline function unregisterSkeleton2dDrawOrderAnimationBinder(registry:Skeleton2D
 	#error "flight.Skeleton2d: no backend for this target."
 #end
 }
-inline function createSkin2d(influenceCounts:Dynamic, influences:Dynamic):Skin2D {
+extern inline function createSkin2d(influenceCounts:Dynamic, influences:Dynamic):Skin2D {
 #if hl
 	return flight._hl._fn.Skeleton2d.createSkin2d(influenceCounts, influences);
 #elseif cpp
@@ -374,7 +374,7 @@ inline function createSkin2d(influenceCounts:Dynamic, influences:Dynamic):Skin2D
 	#error "flight.Skeleton2d: no backend for this target."
 #end
 }
-inline function registerSkeleton2dTransformConstraintSolver(registry:Skeleton2DConstraintRegistry):Void {
+extern inline function registerSkeleton2dTransformConstraintSolver(registry:Skeleton2DConstraintRegistry):Void {
 #if hl
 	flight._hl._fn.Skeleton2d.registerSkeleton2dTransformConstraintSolver(registry);
 #elseif cpp
@@ -385,7 +385,7 @@ inline function registerSkeleton2dTransformConstraintSolver(registry:Skeleton2DC
 	#error "flight.Skeleton2d: no backend for this target."
 #end
 }
-inline function solveSkeleton2dTransformConstraintSkeleton2DikConstraint(skeleton:Skeleton2D, constraint:Skeleton2DIkConstraint):Void {
+extern inline function solveSkeleton2dTransformConstraintSkeleton2DikConstraint(skeleton:Skeleton2D, constraint:Skeleton2DIkConstraint):Void {
 #if hl
 	flight._hl._fn.Skeleton2d.solveSkeleton2dTransformConstraintSkeleton2DikConstraint(skeleton, constraint);
 #elseif cpp
@@ -396,7 +396,7 @@ inline function solveSkeleton2dTransformConstraintSkeleton2DikConstraint(skeleto
 	#error "flight.Skeleton2d: no backend for this target."
 #end
 }
-inline function solveSkeleton2dTransformConstraintSkeleton2DpathConstraint(skeleton:Skeleton2D, constraint:Skeleton2DPathConstraint):Void {
+extern inline function solveSkeleton2dTransformConstraintSkeleton2DpathConstraint(skeleton:Skeleton2D, constraint:Skeleton2DPathConstraint):Void {
 #if hl
 	flight._hl._fn.Skeleton2d.solveSkeleton2dTransformConstraintSkeleton2DpathConstraint(skeleton, constraint);
 #elseif cpp
@@ -407,7 +407,7 @@ inline function solveSkeleton2dTransformConstraintSkeleton2DpathConstraint(skele
 	#error "flight.Skeleton2d: no backend for this target."
 #end
 }
-inline function solveSkeleton2dTransformConstraintSkeleton2DtransformConstraint(skeleton:Skeleton2D, constraint:Skeleton2DTransformConstraint):Void {
+extern inline function solveSkeleton2dTransformConstraintSkeleton2DtransformConstraint(skeleton:Skeleton2D, constraint:Skeleton2DTransformConstraint):Void {
 #if hl
 	flight._hl._fn.Skeleton2d.solveSkeleton2dTransformConstraintSkeleton2DtransformConstraint(skeleton, constraint);
 #elseif cpp
@@ -418,7 +418,7 @@ inline function solveSkeleton2dTransformConstraintSkeleton2DtransformConstraint(
 	#error "flight.Skeleton2d: no backend for this target."
 #end
 }
-inline function freeSkeleton2DdeformLengthExplanation(ptr:Skeleton2DDeformLengthExplanation):Void {
+extern inline function freeSkeleton2DdeformLengthExplanation(ptr:Skeleton2DDeformLengthExplanation):Void {
 #if hl
 	flight._hl._fn.Skeleton2d.freeSkeleton2DdeformLengthExplanation(ptr);
 #elseif cpp
@@ -429,7 +429,7 @@ inline function freeSkeleton2DdeformLengthExplanation(ptr:Skeleton2DDeformLength
 	#error "flight.Skeleton2d: no backend for this target."
 #end
 }
-inline function freeSkeleton2DanimationTargetHandle(ptr:Skeleton2DAnimationTargetHandle):Void {
+extern inline function freeSkeleton2DanimationTargetHandle(ptr:Skeleton2DAnimationTargetHandle):Void {
 #if hl
 	flight._hl._fn.Skeleton2d.freeSkeleton2DanimationTargetHandle(ptr);
 #elseif cpp
@@ -440,7 +440,7 @@ inline function freeSkeleton2DanimationTargetHandle(ptr:Skeleton2DAnimationTarge
 	#error "flight.Skeleton2d: no backend for this target."
 #end
 }
-inline function freeSkeleton2DanimationTargetBinderRegistry(ptr:Skeleton2DAnimationTargetBinderRegistry):Void {
+extern inline function freeSkeleton2DanimationTargetBinderRegistry(ptr:Skeleton2DAnimationTargetBinderRegistry):Void {
 #if hl
 	flight._hl._fn.Skeleton2d.freeSkeleton2DanimationTargetBinderRegistry(ptr);
 #elseif cpp
@@ -451,7 +451,7 @@ inline function freeSkeleton2DanimationTargetBinderRegistry(ptr:Skeleton2DAnimat
 	#error "flight.Skeleton2d: no backend for this target."
 #end
 }
-inline function freeSkeleton2DanimationTarget(ptr:Skeleton2DAnimationTarget):Void {
+extern inline function freeSkeleton2DanimationTarget(ptr:Skeleton2DAnimationTarget):Void {
 #if hl
 	flight._hl._fn.Skeleton2d.freeSkeleton2DanimationTarget(ptr);
 #elseif cpp
@@ -462,7 +462,7 @@ inline function freeSkeleton2DanimationTarget(ptr:Skeleton2DAnimationTarget):Voi
 	#error "flight.Skeleton2d: no backend for this target."
 #end
 }
-inline function freeSkeleton2DslotAnimationTarget(ptr:Skeleton2DSlotAnimationTarget):Void {
+extern inline function freeSkeleton2DslotAnimationTarget(ptr:Skeleton2DSlotAnimationTarget):Void {
 #if hl
 	flight._hl._fn.Skeleton2d.freeSkeleton2DslotAnimationTarget(ptr);
 #elseif cpp
@@ -473,7 +473,7 @@ inline function freeSkeleton2DslotAnimationTarget(ptr:Skeleton2DSlotAnimationTar
 	#error "flight.Skeleton2d: no backend for this target."
 #end
 }
-inline function freeSkeleton2DanimationTargetBinder(ptr:Skeleton2DAnimationTargetBinder):Void {
+extern inline function freeSkeleton2DanimationTargetBinder(ptr:Skeleton2DAnimationTargetBinder):Void {
 #if hl
 	flight._hl._fn.Skeleton2d.freeSkeleton2DanimationTargetBinder(ptr);
 #elseif cpp
@@ -484,7 +484,7 @@ inline function freeSkeleton2DanimationTargetBinder(ptr:Skeleton2DAnimationTarge
 	#error "flight.Skeleton2d: no backend for this target."
 #end
 }
-inline function freeSkin2D(ptr:Skin2D):Void {
+extern inline function freeSkin2D(ptr:Skin2D):Void {
 #if hl
 	flight._hl._fn.Skeleton2d.freeSkin2D(ptr);
 #elseif cpp

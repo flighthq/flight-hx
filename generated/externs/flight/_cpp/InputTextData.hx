@@ -10,5 +10,5 @@ abstract InputTextData(cpp.Star<cpp.Void>) {
 
 	inline function get_isComposing():Bool return InputTextData_Ffi.get_isComposing(this);
 
-	inline function set_isComposing(value:Bool):Bool return InputTextData_Ffi.set_isComposing(this, value);
+	inline function set_isComposing(value:Bool):Bool { InputTextData_Ffi.set_isComposing(this, value); return value; }
 }

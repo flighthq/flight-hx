@@ -30,55 +30,55 @@ abstract Node2DFields(cpp.Star<cpp.Void>) {
 
 	inline function get_alpha():Single return Node2DFields_Ffi.get_alpha(this);
 
-	inline function set_alpha(value:Single):Single return Node2DFields_Ffi.set_alpha(this, value);
+	inline function set_alpha(value:Single):Single { Node2DFields_Ffi.set_alpha(this, value); return value; }
 	public var pivotX(get, set):Single;
 
 	inline function get_pivotX():Single return Node2DFields_Ffi.get_pivotX(this);
 
-	inline function set_pivotX(value:Single):Single return Node2DFields_Ffi.set_pivotX(this, value);
+	inline function set_pivotX(value:Single):Single { Node2DFields_Ffi.set_pivotX(this, value); return value; }
 	public var pivotY(get, set):Single;
 
 	inline function get_pivotY():Single return Node2DFields_Ffi.get_pivotY(this);
 
-	inline function set_pivotY(value:Single):Single return Node2DFields_Ffi.set_pivotY(this, value);
+	inline function set_pivotY(value:Single):Single { Node2DFields_Ffi.set_pivotY(this, value); return value; }
 	public var rotation(get, set):Single;
 
 	inline function get_rotation():Single return Node2DFields_Ffi.get_rotation(this);
 
-	inline function set_rotation(value:Single):Single return Node2DFields_Ffi.set_rotation(this, value);
+	inline function set_rotation(value:Single):Single { Node2DFields_Ffi.set_rotation(this, value); return value; }
 	public var scaleX(get, set):Single;
 
 	inline function get_scaleX():Single return Node2DFields_Ffi.get_scaleX(this);
 
-	inline function set_scaleX(value:Single):Single return Node2DFields_Ffi.set_scaleX(this, value);
+	inline function set_scaleX(value:Single):Single { Node2DFields_Ffi.set_scaleX(this, value); return value; }
 	public var scaleY(get, set):Single;
 
 	inline function get_scaleY():Single return Node2DFields_Ffi.get_scaleY(this);
 
-	inline function set_scaleY(value:Single):Single return Node2DFields_Ffi.set_scaleY(this, value);
+	inline function set_scaleY(value:Single):Single { Node2DFields_Ffi.set_scaleY(this, value); return value; }
 	public var skewX(get, set):Single;
 
 	inline function get_skewX():Single return Node2DFields_Ffi.get_skewX(this);
 
-	inline function set_skewX(value:Single):Single return Node2DFields_Ffi.set_skewX(this, value);
+	inline function set_skewX(value:Single):Single { Node2DFields_Ffi.set_skewX(this, value); return value; }
 	public var skewY(get, set):Single;
 
 	inline function get_skewY():Single return Node2DFields_Ffi.get_skewY(this);
 
-	inline function set_skewY(value:Single):Single return Node2DFields_Ffi.set_skewY(this, value);
+	inline function set_skewY(value:Single):Single { Node2DFields_Ffi.set_skewY(this, value); return value; }
 	public var visible(get, set):Bool;
 
 	inline function get_visible():Bool return Node2DFields_Ffi.get_visible(this);
 
-	inline function set_visible(value:Bool):Bool return Node2DFields_Ffi.set_visible(this, value);
+	inline function set_visible(value:Bool):Bool { Node2DFields_Ffi.set_visible(this, value); return value; }
 	public var x(get, set):Single;
 
 	inline function get_x():Single return Node2DFields_Ffi.get_x(this);
 
-	inline function set_x(value:Single):Single return Node2DFields_Ffi.set_x(this, value);
+	inline function set_x(value:Single):Single { Node2DFields_Ffi.set_x(this, value); return value; }
 	public var y(get, set):Single;
 
 	inline function get_y():Single return Node2DFields_Ffi.get_y(this);
 
-	inline function set_y(value:Single):Single return Node2DFields_Ffi.set_y(this, value);
+	inline function set_y(value:Single):Single { Node2DFields_Ffi.set_y(this, value); return value; }
 }

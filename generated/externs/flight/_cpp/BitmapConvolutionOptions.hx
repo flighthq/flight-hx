@@ -12,10 +12,10 @@ abstract BitmapConvolutionOptions(cpp.Star<cpp.Void>) {
 
 	inline function get_matrixX():Int return BitmapConvolutionOptions_Ffi.get_matrixX(this);
 
-	inline function set_matrixX(value:Int):Int return BitmapConvolutionOptions_Ffi.set_matrixX(this, value);
+	inline function set_matrixX(value:Int):Int { BitmapConvolutionOptions_Ffi.set_matrixX(this, value); return value; }
 	public var matrixY(get, set):Int;
 
 	inline function get_matrixY():Int return BitmapConvolutionOptions_Ffi.get_matrixY(this);
 
-	inline function set_matrixY(value:Int):Int return BitmapConvolutionOptions_Ffi.set_matrixY(this, value);
+	inline function set_matrixY(value:Int):Int { BitmapConvolutionOptions_Ffi.set_matrixY(this, value); return value; }
 }

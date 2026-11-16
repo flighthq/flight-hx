@@ -22,7 +22,7 @@ typedef Spring = flight._js.Spring;
 
 #end
 
-inline function createSpring(value:Float, velocity:Float):Spring {
+extern inline function createSpring(value:Float, velocity:Float):Spring {
 #if hl
 	return flight._hl._fn.Spring.createSpring(value, velocity);
 #elseif cpp
@@ -33,7 +33,7 @@ inline function createSpring(value:Float, velocity:Float):Spring {
 	#error "flight.Spring: no backend for this target."
 #end
 }
-inline function addSpringImpulse(spring:Spring, velocity:Float):Void {
+extern inline function addSpringImpulse(spring:Spring, velocity:Float):Void {
 #if hl
 	flight._hl._fn.Spring.addSpringImpulse(spring, velocity);
 #elseif cpp
@@ -44,7 +44,7 @@ inline function addSpringImpulse(spring:Spring, velocity:Float):Void {
 	#error "flight.Spring: no backend for this target."
 #end
 }
-inline function isSpringSettled(spring:Spring, target:Float, positionEpsilon:Float, velocityEpsilon:Float):Bool {
+extern inline function isSpringSettled(spring:Spring, target:Float, positionEpsilon:Float, velocityEpsilon:Float):Bool {
 #if hl
 	return flight._hl._fn.Spring.isSpringSettled(spring, target, positionEpsilon, velocityEpsilon);
 #elseif cpp
@@ -55,7 +55,7 @@ inline function isSpringSettled(spring:Spring, target:Float, positionEpsilon:Flo
 	#error "flight.Spring: no backend for this target."
 #end
 }
-inline function resetSpring(spring:Spring, value:Float, velocity:Float):Void {
+extern inline function resetSpring(spring:Spring, value:Float, velocity:Float):Void {
 #if hl
 	flight._hl._fn.Spring.resetSpring(spring, value, velocity);
 #elseif cpp
@@ -66,7 +66,7 @@ inline function resetSpring(spring:Spring, value:Float, velocity:Float):Void {
 	#error "flight.Spring: no backend for this target."
 #end
 }
-inline function updateSpring(spring:Spring, target:Float, config:SpringConfig, deltaTime:Float):Void {
+extern inline function updateSpring(spring:Spring, target:Float, config:SpringConfig, deltaTime:Float):Void {
 #if hl
 	flight._hl._fn.Spring.updateSpring(spring, target, config, deltaTime);
 #elseif cpp
@@ -77,7 +77,7 @@ inline function updateSpring(spring:Spring, target:Float, config:SpringConfig, d
 	#error "flight.Spring: no backend for this target."
 #end
 }
-inline function updateSpringAngle(spring:Spring, target:Float, fullTurn:Float, config:SpringConfig, deltaTime:Float):Void {
+extern inline function updateSpringAngle(spring:Spring, target:Float, fullTurn:Float, config:SpringConfig, deltaTime:Float):Void {
 #if hl
 	flight._hl._fn.Spring.updateSpringAngle(spring, target, fullTurn, config, deltaTime);
 #elseif cpp
@@ -88,7 +88,7 @@ inline function updateSpringAngle(spring:Spring, target:Float, fullTurn:Float, c
 	#error "flight.Spring: no backend for this target."
 #end
 }
-inline function createSpring2d(valueX:Float, valueY:Float, velocityX:Float, velocityY:Float):Spring2D {
+extern inline function createSpring2d(valueX:Float, valueY:Float, velocityX:Float, velocityY:Float):Spring2D {
 #if hl
 	return flight._hl._fn.Spring.createSpring2d(valueX, valueY, velocityX, velocityY);
 #elseif cpp
@@ -99,7 +99,7 @@ inline function createSpring2d(valueX:Float, valueY:Float, velocityX:Float, velo
 	#error "flight.Spring: no backend for this target."
 #end
 }
-inline function addSpringImpulse2d(spring2d:Spring2D, velocityX:Float, velocityY:Float):Void {
+extern inline function addSpringImpulse2d(spring2d:Spring2D, velocityX:Float, velocityY:Float):Void {
 #if hl
 	flight._hl._fn.Spring.addSpringImpulse2d(spring2d, velocityX, velocityY);
 #elseif cpp
@@ -110,7 +110,7 @@ inline function addSpringImpulse2d(spring2d:Spring2D, velocityX:Float, velocityY
 	#error "flight.Spring: no backend for this target."
 #end
 }
-inline function isSpring2dSettled(spring2d:Spring2D, targetX:Float, targetY:Float, positionEpsilon:Float, velocityEpsilon:Float):Bool {
+extern inline function isSpring2dSettled(spring2d:Spring2D, targetX:Float, targetY:Float, positionEpsilon:Float, velocityEpsilon:Float):Bool {
 #if hl
 	return flight._hl._fn.Spring.isSpring2dSettled(spring2d, targetX, targetY, positionEpsilon, velocityEpsilon);
 #elseif cpp
@@ -121,7 +121,7 @@ inline function isSpring2dSettled(spring2d:Spring2D, targetX:Float, targetY:Floa
 	#error "flight.Spring: no backend for this target."
 #end
 }
-inline function resetSpring2d(spring2d:Spring2D, valueX:Float, valueY:Float, velocityX:Float, velocityY:Float):Void {
+extern inline function resetSpring2d(spring2d:Spring2D, valueX:Float, valueY:Float, velocityX:Float, velocityY:Float):Void {
 #if hl
 	flight._hl._fn.Spring.resetSpring2d(spring2d, valueX, valueY, velocityX, velocityY);
 #elseif cpp
@@ -132,7 +132,7 @@ inline function resetSpring2d(spring2d:Spring2D, valueX:Float, valueY:Float, vel
 	#error "flight.Spring: no backend for this target."
 #end
 }
-inline function updateSpring2d(spring2d:Spring2D, targetX:Float, targetY:Float, config:SpringConfig, deltaTime:Float):Void {
+extern inline function updateSpring2d(spring2d:Spring2D, targetX:Float, targetY:Float, config:SpringConfig, deltaTime:Float):Void {
 #if hl
 	flight._hl._fn.Spring.updateSpring2d(spring2d, targetX, targetY, config, deltaTime);
 #elseif cpp
@@ -143,7 +143,7 @@ inline function updateSpring2d(spring2d:Spring2D, targetX:Float, targetY:Float, 
 	#error "flight.Spring: no backend for this target."
 #end
 }
-inline function createSpring3d(valueX:Float, valueY:Float, valueZ:Float, velocityX:Float, velocityY:Float, velocityZ:Float):Spring3D {
+extern inline function createSpring3d(valueX:Float, valueY:Float, valueZ:Float, velocityX:Float, velocityY:Float, velocityZ:Float):Spring3D {
 #if hl
 	return flight._hl._fn.Spring.createSpring3d(valueX, valueY, valueZ, velocityX, velocityY, velocityZ);
 #elseif cpp
@@ -154,7 +154,7 @@ inline function createSpring3d(valueX:Float, valueY:Float, valueZ:Float, velocit
 	#error "flight.Spring: no backend for this target."
 #end
 }
-inline function addSpringImpulse3d(spring3d:Spring3D, velocityX:Float, velocityY:Float, velocityZ:Float):Void {
+extern inline function addSpringImpulse3d(spring3d:Spring3D, velocityX:Float, velocityY:Float, velocityZ:Float):Void {
 #if hl
 	flight._hl._fn.Spring.addSpringImpulse3d(spring3d, velocityX, velocityY, velocityZ);
 #elseif cpp
@@ -165,7 +165,7 @@ inline function addSpringImpulse3d(spring3d:Spring3D, velocityX:Float, velocityY
 	#error "flight.Spring: no backend for this target."
 #end
 }
-inline function isSpring3dSettled(spring3d:Spring3D, targetX:Float, targetY:Float, targetZ:Float, positionEpsilon:Float, velocityEpsilon:Float):Bool {
+extern inline function isSpring3dSettled(spring3d:Spring3D, targetX:Float, targetY:Float, targetZ:Float, positionEpsilon:Float, velocityEpsilon:Float):Bool {
 #if hl
 	return flight._hl._fn.Spring.isSpring3dSettled(spring3d, targetX, targetY, targetZ, positionEpsilon, velocityEpsilon);
 #elseif cpp
@@ -176,7 +176,7 @@ inline function isSpring3dSettled(spring3d:Spring3D, targetX:Float, targetY:Floa
 	#error "flight.Spring: no backend for this target."
 #end
 }
-inline function resetSpring3d(spring3d:Spring3D, valueX:Float, valueY:Float, valueZ:Float, velocityX:Float, velocityY:Float, velocityZ:Float):Void {
+extern inline function resetSpring3d(spring3d:Spring3D, valueX:Float, valueY:Float, valueZ:Float, velocityX:Float, velocityY:Float, velocityZ:Float):Void {
 #if hl
 	flight._hl._fn.Spring.resetSpring3d(spring3d, valueX, valueY, valueZ, velocityX, velocityY, velocityZ);
 #elseif cpp
@@ -187,7 +187,7 @@ inline function resetSpring3d(spring3d:Spring3D, valueX:Float, valueY:Float, val
 	#error "flight.Spring: no backend for this target."
 #end
 }
-inline function updateSpring3d(spring3d:Spring3D, targetX:Float, targetY:Float, targetZ:Float, config:SpringConfig, deltaTime:Float):Void {
+extern inline function updateSpring3d(spring3d:Spring3D, targetX:Float, targetY:Float, targetZ:Float, config:SpringConfig, deltaTime:Float):Void {
 #if hl
 	flight._hl._fn.Spring.updateSpring3d(spring3d, targetX, targetY, targetZ, config, deltaTime);
 #elseif cpp
@@ -198,7 +198,7 @@ inline function updateSpring3d(spring3d:Spring3D, targetX:Float, targetY:Float, 
 	#error "flight.Spring: no backend for this target."
 #end
 }
-inline function createSpringConfig(frequency:Float, dampingRatio:Float):SpringConfig {
+extern inline function createSpringConfig(frequency:Float, dampingRatio:Float):SpringConfig {
 #if hl
 	return flight._hl._fn.Spring.createSpringConfig(frequency, dampingRatio);
 #elseif cpp
@@ -209,7 +209,7 @@ inline function createSpringConfig(frequency:Float, dampingRatio:Float):SpringCo
 	#error "flight.Spring: no backend for this target."
 #end
 }
-inline function createSpringConfigFromPhysical(stiffness:Float, damping:Float, mass:Float):SpringConfig {
+extern inline function createSpringConfigFromPhysical(stiffness:Float, damping:Float, mass:Float):SpringConfig {
 #if hl
 	return flight._hl._fn.Spring.createSpringConfigFromPhysical(stiffness, damping, mass);
 #elseif cpp
@@ -220,7 +220,7 @@ inline function createSpringConfigFromPhysical(stiffness:Float, damping:Float, m
 	#error "flight.Spring: no backend for this target."
 #end
 }
-inline function freeSpring(ptr:Spring):Void {
+extern inline function freeSpring(ptr:Spring):Void {
 #if hl
 	flight._hl._fn.Spring.freeSpring(ptr);
 #elseif cpp
@@ -231,7 +231,7 @@ inline function freeSpring(ptr:Spring):Void {
 	#error "flight.Spring: no backend for this target."
 #end
 }
-inline function freeSpring2D(ptr:Spring2D):Void {
+extern inline function freeSpring2D(ptr:Spring2D):Void {
 #if hl
 	flight._hl._fn.Spring.freeSpring2D(ptr);
 #elseif cpp
@@ -242,7 +242,7 @@ inline function freeSpring2D(ptr:Spring2D):Void {
 	#error "flight.Spring: no backend for this target."
 #end
 }
-inline function freeSpring3D(ptr:Spring3D):Void {
+extern inline function freeSpring3D(ptr:Spring3D):Void {
 #if hl
 	flight._hl._fn.Spring.freeSpring3D(ptr);
 #elseif cpp
@@ -253,7 +253,7 @@ inline function freeSpring3D(ptr:Spring3D):Void {
 	#error "flight.Spring: no backend for this target."
 #end
 }
-inline function freeSpringConfig(ptr:SpringConfig):Void {
+extern inline function freeSpringConfig(ptr:SpringConfig):Void {
 #if hl
 	flight._hl._fn.Spring.freeSpringConfig(ptr);
 #elseif cpp

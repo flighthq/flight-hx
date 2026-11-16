@@ -1,6 +1,6 @@
 package flight;
 
-inline function parseXmlDocument(xml:String):XmlElement {
+extern inline function parseXmlDocument(xml:String):XmlElement {
 #if hl
 	return flight._hl._fn.Xml.parseXmlDocument(cast xml);
 #elseif cpp
@@ -11,7 +11,7 @@ inline function parseXmlDocument(xml:String):XmlElement {
 	#error "flight.Xml: no backend for this target."
 #end
 }
-inline function getXmlElementAttributeNumber(element:XmlElement, name:String):Float {
+extern inline function getXmlElementAttributeNumber(element:XmlElement, name:String):Float {
 #if hl
 	return flight._hl._fn.Xml.getXmlElementAttributeNumber(element, cast name);
 #elseif cpp
@@ -22,7 +22,7 @@ inline function getXmlElementAttributeNumber(element:XmlElement, name:String):Fl
 	#error "flight.Xml: no backend for this target."
 #end
 }
-inline function getXmlElementChildByName(element:XmlElement, name:String):Dynamic {
+extern inline function getXmlElementChildByName(element:XmlElement, name:String):Dynamic {
 #if hl
 	return flight._hl._fn.Xml.getXmlElementChildByName(element, cast name);
 #elseif cpp
@@ -33,7 +33,7 @@ inline function getXmlElementChildByName(element:XmlElement, name:String):Dynami
 	#error "flight.Xml: no backend for this target."
 #end
 }
-inline function freeXmlElement(ptr:XmlElement):Void {
+extern inline function freeXmlElement(ptr:XmlElement):Void {
 #if hl
 	flight._hl._fn.Xml.freeXmlElement(ptr);
 #elseif cpp

@@ -10,5 +10,5 @@ abstract ImageResourceReferenceResolutionExplanation(cpp.Star<cpp.Void>) {
 
 	inline function get_retryable():Bool return ImageResourceReferenceResolutionExplanation_Ffi.get_retryable(this);
 
-	inline function set_retryable(value:Bool):Bool return ImageResourceReferenceResolutionExplanation_Ffi.set_retryable(this, value);
+	inline function set_retryable(value:Bool):Bool { ImageResourceReferenceResolutionExplanation_Ffi.set_retryable(this, value); return value; }
 }

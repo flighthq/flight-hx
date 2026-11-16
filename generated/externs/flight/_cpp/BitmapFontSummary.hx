@@ -20,30 +20,30 @@ abstract BitmapFontSummary(cpp.Star<cpp.Void>) {
 
 	inline function get_byteSize():Int return BitmapFontSummary_Ffi.get_byteSize(this);
 
-	inline function set_byteSize(value:Int):Int return BitmapFontSummary_Ffi.set_byteSize(this, value);
+	inline function set_byteSize(value:Int):Int { BitmapFontSummary_Ffi.set_byteSize(this, value); return value; }
 	public var glyphCount(get, set):Int;
 
 	inline function get_glyphCount():Int return BitmapFontSummary_Ffi.get_glyphCount(this);
 
-	inline function set_glyphCount(value:Int):Int return BitmapFontSummary_Ffi.set_glyphCount(this, value);
+	inline function set_glyphCount(value:Int):Int { BitmapFontSummary_Ffi.set_glyphCount(this, value); return value; }
 	public var kerningPairCount(get, set):Int;
 
 	inline function get_kerningPairCount():Int return BitmapFontSummary_Ffi.get_kerningPairCount(this);
 
-	inline function set_kerningPairCount(value:Int):Int return BitmapFontSummary_Ffi.set_kerningPairCount(this, value);
+	inline function set_kerningPairCount(value:Int):Int { BitmapFontSummary_Ffi.set_kerningPairCount(this, value); return value; }
 	public var maxCodepoint(get, set):Int;
 
 	inline function get_maxCodepoint():Int return BitmapFontSummary_Ffi.get_maxCodepoint(this);
 
-	inline function set_maxCodepoint(value:Int):Int return BitmapFontSummary_Ffi.set_maxCodepoint(this, value);
+	inline function set_maxCodepoint(value:Int):Int { BitmapFontSummary_Ffi.set_maxCodepoint(this, value); return value; }
 	public var minCodepoint(get, set):Int;
 
 	inline function get_minCodepoint():Int return BitmapFontSummary_Ffi.get_minCodepoint(this);
 
-	inline function set_minCodepoint(value:Int):Int return BitmapFontSummary_Ffi.set_minCodepoint(this, value);
+	inline function set_minCodepoint(value:Int):Int { BitmapFontSummary_Ffi.set_minCodepoint(this, value); return value; }
 	public var pageCount(get, set):Int;
 
 	inline function get_pageCount():Int return BitmapFontSummary_Ffi.get_pageCount(this);
 
-	inline function set_pageCount(value:Int):Int return BitmapFontSummary_Ffi.set_pageCount(this, value);
+	inline function set_pageCount(value:Int):Int { BitmapFontSummary_Ffi.set_pageCount(this, value); return value; }
 }

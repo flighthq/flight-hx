@@ -10,5 +10,5 @@ abstract Physics2DDistanceJointOptions(cpp.Star<cpp.Void>) {
 
 	inline function get_length():Single return Physics2DDistanceJointOptions_Ffi.get_length(this);
 
-	inline function set_length(value:Single):Single return Physics2DDistanceJointOptions_Ffi.set_length(this, value);
+	inline function set_length(value:Single):Single { Physics2DDistanceJointOptions_Ffi.set_length(this, value); return value; }
 }

@@ -16,20 +16,20 @@ abstract LayoutResolutionExplanation(cpp.Star<cpp.Void>) {
 
 	inline function get_actualLength():Int return LayoutResolutionExplanation_Ffi.get_actualLength(this);
 
-	inline function set_actualLength(value:Int):Int return LayoutResolutionExplanation_Ffi.set_actualLength(this, value);
+	inline function set_actualLength(value:Int):Int { LayoutResolutionExplanation_Ffi.set_actualLength(this, value); return value; }
 	public var nodeIndex(get, set):Int;
 
 	inline function get_nodeIndex():Int return LayoutResolutionExplanation_Ffi.get_nodeIndex(this);
 
-	inline function set_nodeIndex(value:Int):Int return LayoutResolutionExplanation_Ffi.set_nodeIndex(this, value);
+	inline function set_nodeIndex(value:Int):Int { LayoutResolutionExplanation_Ffi.set_nodeIndex(this, value); return value; }
 	public var parentIndex(get, set):Int;
 
 	inline function get_parentIndex():Int return LayoutResolutionExplanation_Ffi.get_parentIndex(this);
 
-	inline function set_parentIndex(value:Int):Int return LayoutResolutionExplanation_Ffi.set_parentIndex(this, value);
+	inline function set_parentIndex(value:Int):Int { LayoutResolutionExplanation_Ffi.set_parentIndex(this, value); return value; }
 	public var requiredLength(get, set):Int;
 
 	inline function get_requiredLength():Int return LayoutResolutionExplanation_Ffi.get_requiredLength(this);
 
-	inline function set_requiredLength(value:Int):Int return LayoutResolutionExplanation_Ffi.set_requiredLength(this, value);
+	inline function set_requiredLength(value:Int):Int { LayoutResolutionExplanation_Ffi.set_requiredLength(this, value); return value; }
 }

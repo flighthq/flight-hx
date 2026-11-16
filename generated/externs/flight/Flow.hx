@@ -1,6 +1,6 @@
 package flight;
 
-inline function createFlowStack():Dynamic {
+extern inline function createFlowStack():Dynamic {
 #if hl
 	return flight._hl._fn.Flow.createFlowStack();
 #elseif cpp
@@ -11,7 +11,7 @@ inline function createFlowStack():Dynamic {
 	#error "flight.Flow: no backend for this target."
 #end
 }
-inline function clearFlowStack(stack:Dynamic):Void {
+extern inline function clearFlowStack(stack:Dynamic):Void {
 #if hl
 	flight._hl._fn.Flow.clearFlowStack(stack);
 #elseif cpp
@@ -22,7 +22,7 @@ inline function clearFlowStack(stack:Dynamic):Void {
 	#error "flight.Flow: no backend for this target."
 #end
 }
-inline function getActiveFlowState(stack:Dynamic):Dynamic {
+extern inline function getActiveFlowState(stack:Dynamic):Dynamic {
 #if hl
 	return flight._hl._fn.Flow.getActiveFlowState(stack);
 #elseif cpp
@@ -33,7 +33,7 @@ inline function getActiveFlowState(stack:Dynamic):Dynamic {
 	#error "flight.Flow: no backend for this target."
 #end
 }
-inline function getFlowStackDepth(stack:Dynamic):Int {
+extern inline function getFlowStackDepth(stack:Dynamic):Int {
 #if hl
 	return flight._hl._fn.Flow.getFlowStackDepth(stack);
 #elseif cpp
@@ -44,7 +44,7 @@ inline function getFlowStackDepth(stack:Dynamic):Int {
 	#error "flight.Flow: no backend for this target."
 #end
 }
-inline function popFlowState(stack:Dynamic):Dynamic {
+extern inline function popFlowState(stack:Dynamic):Dynamic {
 #if hl
 	return flight._hl._fn.Flow.popFlowState(stack);
 #elseif cpp
@@ -55,7 +55,7 @@ inline function popFlowState(stack:Dynamic):Dynamic {
 	#error "flight.Flow: no backend for this target."
 #end
 }
-inline function pushFlowState(stack:Dynamic, state:Dynamic, guards:Dynamic):Void {
+extern inline function pushFlowState(stack:Dynamic, state:Dynamic, guards:Dynamic):Void {
 #if hl
 	flight._hl._fn.Flow.pushFlowState(stack, state, guards);
 #elseif cpp
@@ -66,7 +66,7 @@ inline function pushFlowState(stack:Dynamic, state:Dynamic, guards:Dynamic):Void
 	#error "flight.Flow: no backend for this target."
 #end
 }
-inline function replaceFlowState(stack:Dynamic, state:Dynamic, guards:Dynamic):Void {
+extern inline function replaceFlowState(stack:Dynamic, state:Dynamic, guards:Dynamic):Void {
 #if hl
 	flight._hl._fn.Flow.replaceFlowState(stack, state, guards);
 #elseif cpp
@@ -77,7 +77,7 @@ inline function replaceFlowState(stack:Dynamic, state:Dynamic, guards:Dynamic):V
 	#error "flight.Flow: no backend for this target."
 #end
 }
-inline function updateFlowStack(stack:Dynamic, deltaTime:Float):Void {
+extern inline function updateFlowStack(stack:Dynamic, deltaTime:Float):Void {
 #if hl
 	flight._hl._fn.Flow.updateFlowStack(stack, deltaTime);
 #elseif cpp
@@ -88,7 +88,7 @@ inline function updateFlowStack(stack:Dynamic, deltaTime:Float):Void {
 	#error "flight.Flow: no backend for this target."
 #end
 }
-inline function disableFlowGuards(state:Dynamic):Void {
+extern inline function disableFlowGuards(state:Dynamic):Void {
 #if hl
 	flight._hl._fn.Flow.disableFlowGuards(state);
 #elseif cpp
@@ -99,7 +99,7 @@ inline function disableFlowGuards(state:Dynamic):Void {
 	#error "flight.Flow: no backend for this target."
 #end
 }
-inline function enableFlowGuards(state:Dynamic, logState:Dynamic, clockFn:Dynamic, clockCtx:Dynamic):Void {
+extern inline function enableFlowGuards(state:Dynamic, logState:Dynamic, clockFn:Dynamic, clockCtx:Dynamic):Void {
 #if hl
 	flight._hl._fn.Flow.enableFlowGuards(state, logState, clockFn, clockCtx);
 #elseif cpp
@@ -110,7 +110,7 @@ inline function enableFlowGuards(state:Dynamic, logState:Dynamic, clockFn:Dynami
 	#error "flight.Flow: no backend for this target."
 #end
 }
-inline function getFlowGuardKindString(value:flight.FlowGuardKind):String {
+extern inline function getFlowGuardKindString(value:flight.FlowGuardKind):String {
 #if hl
 	return cast flight._hl._fn.Flow.getFlowGuardKindString(value);
 #elseif cpp
@@ -121,7 +121,7 @@ inline function getFlowGuardKindString(value:flight.FlowGuardKind):String {
 	#error "flight.Flow: no backend for this target."
 #end
 }
-inline function parseFlowGuardKind(value:String):Int {
+extern inline function parseFlowGuardKind(value:String):Int {
 #if hl
 	return flight._hl._fn.Flow.parseFlowGuardKind(cast value);
 #elseif cpp

@@ -31,11 +31,11 @@ extern class Texture {
 	@:native("flight_equals_sampler")
 	public static function equalsSampler(a:flight._js.Sampler, b:flight._js.Sampler):Bool;
 	@:native("flight_create_texture")
-	public static function createTexture(opts:flight._js.CreateTextureOptions):Int;
+	public static function createTexture(opts:flight._js.CreateTextureOptions):flight._js.Texture;
 	@:native("flight_create_texture_2d")
 	public static function createTexture2d():flight._js.Texture2D;
 	@:native("flight_clone_texture__texture")
-	public static function cloneTextureTexture(source:flight._js.Texture):Int;
+	public static function cloneTextureTexture(source:flight._js.Texture):flight._js.Texture;
 	@:native("flight_copy_texture__texture__texture")
 	public static function copyTextureTextureTexture(out:flight._js.Texture, source:flight._js.Texture):Void;
 	@:native("flight_get_texture_height__texture")
@@ -84,6 +84,8 @@ extern class Texture {
 	public static function freeCubeTexture(ptr:flight._js.CubeTexture):Void;
 	@:native("flight_free_sampler")
 	public static function freeSampler(ptr:flight._js.Sampler):Void;
+	@:native("flight_free_texture")
+	public static function freeTexture(ptr:flight._js.Texture):Void;
 	@:native("flight_free_texture2_d")
 	public static function freeTexture2D(ptr:flight._js.Texture2D):Void;
 	@:native("flight_free_texture_source_ref")

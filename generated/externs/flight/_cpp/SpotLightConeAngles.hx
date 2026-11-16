@@ -12,10 +12,10 @@ abstract SpotLightConeAngles(cpp.Star<cpp.Void>) {
 
 	inline function get_innerDegrees():Single return SpotLightConeAngles_Ffi.get_innerDegrees(this);
 
-	inline function set_innerDegrees(value:Single):Single return SpotLightConeAngles_Ffi.set_innerDegrees(this, value);
+	inline function set_innerDegrees(value:Single):Single { SpotLightConeAngles_Ffi.set_innerDegrees(this, value); return value; }
 	public var outerDegrees(get, set):Single;
 
 	inline function get_outerDegrees():Single return SpotLightConeAngles_Ffi.get_outerDegrees(this);
 
-	inline function set_outerDegrees(value:Single):Single return SpotLightConeAngles_Ffi.set_outerDegrees(this, value);
+	inline function set_outerDegrees(value:Single):Single { SpotLightConeAngles_Ffi.set_outerDegrees(this, value); return value; }
 }

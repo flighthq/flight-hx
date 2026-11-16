@@ -18,25 +18,25 @@ abstract Physics2DDebugCircle(cpp.Star<cpp.Void>) {
 
 	inline function get_bodyA():Int return Physics2DDebugCircle_Ffi.get_bodyA(this);
 
-	inline function set_bodyA(value:Int):Int return Physics2DDebugCircle_Ffi.set_bodyA(this, value);
+	inline function set_bodyA(value:Int):Int { Physics2DDebugCircle_Ffi.set_bodyA(this, value); return value; }
 	public var bodyB(get, set):Int;
 
 	inline function get_bodyB():Int return Physics2DDebugCircle_Ffi.get_bodyB(this);
 
-	inline function set_bodyB(value:Int):Int return Physics2DDebugCircle_Ffi.set_bodyB(this, value);
+	inline function set_bodyB(value:Int):Int { Physics2DDebugCircle_Ffi.set_bodyB(this, value); return value; }
 	public var radius(get, set):Single;
 
 	inline function get_radius():Single return Physics2DDebugCircle_Ffi.get_radius(this);
 
-	inline function set_radius(value:Single):Single return Physics2DDebugCircle_Ffi.set_radius(this, value);
+	inline function set_radius(value:Single):Single { Physics2DDebugCircle_Ffi.set_radius(this, value); return value; }
 	public var x(get, set):Single;
 
 	inline function get_x():Single return Physics2DDebugCircle_Ffi.get_x(this);
 
-	inline function set_x(value:Single):Single return Physics2DDebugCircle_Ffi.set_x(this, value);
+	inline function set_x(value:Single):Single { Physics2DDebugCircle_Ffi.set_x(this, value); return value; }
 	public var y(get, set):Single;
 
 	inline function get_y():Single return Physics2DDebugCircle_Ffi.get_y(this);
 
-	inline function set_y(value:Single):Single return Physics2DDebugCircle_Ffi.set_y(this, value);
+	inline function set_y(value:Single):Single { Physics2DDebugCircle_Ffi.set_y(this, value); return value; }
 }

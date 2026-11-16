@@ -10,5 +10,5 @@ abstract ClipRegionExplanation(cpp.Star<cpp.Void>) {
 
 	inline function get_conservative():Bool return ClipRegionExplanation_Ffi.get_conservative(this);
 
-	inline function set_conservative(value:Bool):Bool return ClipRegionExplanation_Ffi.set_conservative(this, value);
+	inline function set_conservative(value:Bool):Bool { ClipRegionExplanation_Ffi.set_conservative(this, value); return value; }
 }

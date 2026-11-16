@@ -22,7 +22,7 @@ typedef Texture = flight._js.Texture;
 
 #end
 
-inline function createCubeTexture():CubeTexture {
+extern inline function createCubeTexture():CubeTexture {
 #if hl
 	return flight._hl._fn.Texture.createCubeTexture();
 #elseif cpp
@@ -33,7 +33,7 @@ inline function createCubeTexture():CubeTexture {
 	#error "flight.Texture: no backend for this target."
 #end
 }
-inline function cloneCubeTexture(source:CubeTexture):CubeTexture {
+extern inline function cloneCubeTexture(source:CubeTexture):CubeTexture {
 #if hl
 	return flight._hl._fn.Texture.cloneCubeTexture(source);
 #elseif cpp
@@ -44,7 +44,7 @@ inline function cloneCubeTexture(source:CubeTexture):CubeTexture {
 	#error "flight.Texture: no backend for this target."
 #end
 }
-inline function copyCubeTexture(out:CubeTexture, source:CubeTexture):Void {
+extern inline function copyCubeTexture(out:CubeTexture, source:CubeTexture):Void {
 #if hl
 	flight._hl._fn.Texture.copyCubeTexture(out, source);
 #elseif cpp
@@ -55,7 +55,7 @@ inline function copyCubeTexture(out:CubeTexture, source:CubeTexture):Void {
 	#error "flight.Texture: no backend for this target."
 #end
 }
-inline function equalsCubeTexture(a:CubeTexture, b:CubeTexture):Bool {
+extern inline function equalsCubeTexture(a:CubeTexture, b:CubeTexture):Bool {
 #if hl
 	return flight._hl._fn.Texture.equalsCubeTexture(a, b);
 #elseif cpp
@@ -66,7 +66,7 @@ inline function equalsCubeTexture(a:CubeTexture, b:CubeTexture):Bool {
 	#error "flight.Texture: no backend for this target."
 #end
 }
-inline function getCubeTextureFaceSize(cube:CubeTexture):Int {
+extern inline function getCubeTextureFaceSize(cube:CubeTexture):Int {
 #if hl
 	return flight._hl._fn.Texture.getCubeTextureFaceSize(cube);
 #elseif cpp
@@ -77,7 +77,7 @@ inline function getCubeTextureFaceSize(cube:CubeTexture):Int {
 	#error "flight.Texture: no backend for this target."
 #end
 }
-inline function isCubeTextureComplete(cube:CubeTexture):Bool {
+extern inline function isCubeTextureComplete(cube:CubeTexture):Bool {
 #if hl
 	return flight._hl._fn.Texture.isCubeTextureComplete(cube);
 #elseif cpp
@@ -88,7 +88,7 @@ inline function isCubeTextureComplete(cube:CubeTexture):Bool {
 	#error "flight.Texture: no backend for this target."
 #end
 }
-inline function createAnisotropicSampler(level:Float):Sampler {
+extern inline function createAnisotropicSampler(level:Float):Sampler {
 #if hl
 	return flight._hl._fn.Texture.createAnisotropicSampler(level);
 #elseif cpp
@@ -99,7 +99,7 @@ inline function createAnisotropicSampler(level:Float):Sampler {
 	#error "flight.Texture: no backend for this target."
 #end
 }
-inline function createClampLinearSampler():Sampler {
+extern inline function createClampLinearSampler():Sampler {
 #if hl
 	return flight._hl._fn.Texture.createClampLinearSampler();
 #elseif cpp
@@ -110,7 +110,7 @@ inline function createClampLinearSampler():Sampler {
 	#error "flight.Texture: no backend for this target."
 #end
 }
-inline function createPixelArtSampler():Sampler {
+extern inline function createPixelArtSampler():Sampler {
 #if hl
 	return flight._hl._fn.Texture.createPixelArtSampler();
 #elseif cpp
@@ -121,7 +121,7 @@ inline function createPixelArtSampler():Sampler {
 	#error "flight.Texture: no backend for this target."
 #end
 }
-inline function createSampler():Sampler {
+extern inline function createSampler():Sampler {
 #if hl
 	return flight._hl._fn.Texture.createSampler();
 #elseif cpp
@@ -132,7 +132,7 @@ inline function createSampler():Sampler {
 	#error "flight.Texture: no backend for this target."
 #end
 }
-inline function createTilingSampler():Sampler {
+extern inline function createTilingSampler():Sampler {
 #if hl
 	return flight._hl._fn.Texture.createTilingSampler();
 #elseif cpp
@@ -143,7 +143,7 @@ inline function createTilingSampler():Sampler {
 	#error "flight.Texture: no backend for this target."
 #end
 }
-inline function cloneSampler(source:Sampler):Sampler {
+extern inline function cloneSampler(source:Sampler):Sampler {
 #if hl
 	return flight._hl._fn.Texture.cloneSampler(source);
 #elseif cpp
@@ -154,7 +154,7 @@ inline function cloneSampler(source:Sampler):Sampler {
 	#error "flight.Texture: no backend for this target."
 #end
 }
-inline function copySampler(out:Sampler, source:Sampler):Void {
+extern inline function copySampler(out:Sampler, source:Sampler):Void {
 #if hl
 	flight._hl._fn.Texture.copySampler(out, source);
 #elseif cpp
@@ -165,7 +165,7 @@ inline function copySampler(out:Sampler, source:Sampler):Void {
 	#error "flight.Texture: no backend for this target."
 #end
 }
-inline function equalsSampler(a:Sampler, b:Sampler):Bool {
+extern inline function equalsSampler(a:Sampler, b:Sampler):Bool {
 #if hl
 	return flight._hl._fn.Texture.equalsSampler(a, b);
 #elseif cpp
@@ -176,7 +176,7 @@ inline function equalsSampler(a:Sampler, b:Sampler):Bool {
 	#error "flight.Texture: no backend for this target."
 #end
 }
-inline function createTexture(opts:CreateTextureOptions):Int {
+extern inline function createTexture(opts:CreateTextureOptions):Texture {
 #if hl
 	return flight._hl._fn.Texture.createTexture(opts);
 #elseif cpp
@@ -187,7 +187,7 @@ inline function createTexture(opts:CreateTextureOptions):Int {
 	#error "flight.Texture: no backend for this target."
 #end
 }
-inline function createTexture2d():Texture2D {
+extern inline function createTexture2d():Texture2D {
 #if hl
 	return flight._hl._fn.Texture.createTexture2d();
 #elseif cpp
@@ -198,7 +198,7 @@ inline function createTexture2d():Texture2D {
 	#error "flight.Texture: no backend for this target."
 #end
 }
-inline function cloneTextureTexture(source:Texture):Int {
+extern inline function cloneTextureTexture(source:Texture):Texture {
 #if hl
 	return flight._hl._fn.Texture.cloneTextureTexture(source);
 #elseif cpp
@@ -209,7 +209,7 @@ inline function cloneTextureTexture(source:Texture):Int {
 	#error "flight.Texture: no backend for this target."
 #end
 }
-inline function copyTextureTextureTexture(out:Texture, source:Texture):Void {
+extern inline function copyTextureTextureTexture(out:Texture, source:Texture):Void {
 #if hl
 	flight._hl._fn.Texture.copyTextureTextureTexture(out, source);
 #elseif cpp
@@ -220,7 +220,7 @@ inline function copyTextureTextureTexture(out:Texture, source:Texture):Void {
 	#error "flight.Texture: no backend for this target."
 #end
 }
-inline function getTextureHeightTexture(texture:Texture):Int {
+extern inline function getTextureHeightTexture(texture:Texture):Int {
 #if hl
 	return flight._hl._fn.Texture.getTextureHeightTexture(texture);
 #elseif cpp
@@ -231,7 +231,7 @@ inline function getTextureHeightTexture(texture:Texture):Int {
 	#error "flight.Texture: no backend for this target."
 #end
 }
-inline function getTextureInverseUvMatrixTexture(out:Matrix3, texture:Texture):Void {
+extern inline function getTextureInverseUvMatrixTexture(out:Matrix3, texture:Texture):Void {
 #if hl
 	flight._hl._fn.Texture.getTextureInverseUvMatrixTexture(out, texture);
 #elseif cpp
@@ -242,7 +242,7 @@ inline function getTextureInverseUvMatrixTexture(out:Matrix3, texture:Texture):V
 	#error "flight.Texture: no backend for this target."
 #end
 }
-inline function getTextureSourceTexture(texture:Texture):TextureSourceRef {
+extern inline function getTextureSourceTexture(texture:Texture):TextureSourceRef {
 #if hl
 	return flight._hl._fn.Texture.getTextureSourceTexture(texture);
 #elseif cpp
@@ -253,7 +253,7 @@ inline function getTextureSourceTexture(texture:Texture):TextureSourceRef {
 	#error "flight.Texture: no backend for this target."
 #end
 }
-inline function getTextureSourceKindTexture(texture:Texture):TextureSourceKind {
+extern inline function getTextureSourceKindTexture(texture:Texture):TextureSourceKind {
 #if hl
 	return flight._hl._fn.Texture.getTextureSourceKindTexture(texture);
 #elseif cpp
@@ -264,7 +264,7 @@ inline function getTextureSourceKindTexture(texture:Texture):TextureSourceKind {
 	#error "flight.Texture: no backend for this target."
 #end
 }
-inline function getTextureUvMatrixTexture(out:Matrix3, texture:Texture):Void {
+extern inline function getTextureUvMatrixTexture(out:Matrix3, texture:Texture):Void {
 #if hl
 	flight._hl._fn.Texture.getTextureUvMatrixTexture(out, texture);
 #elseif cpp
@@ -275,7 +275,7 @@ inline function getTextureUvMatrixTexture(out:Matrix3, texture:Texture):Void {
 	#error "flight.Texture: no backend for this target."
 #end
 }
-inline function getTextureViewSizeTexture(out:Vector2, texture:Texture):Void {
+extern inline function getTextureViewSizeTexture(out:Vector2, texture:Texture):Void {
 #if hl
 	flight._hl._fn.Texture.getTextureViewSizeTexture(out, texture);
 #elseif cpp
@@ -286,7 +286,7 @@ inline function getTextureViewSizeTexture(out:Vector2, texture:Texture):Void {
 	#error "flight.Texture: no backend for this target."
 #end
 }
-inline function getTextureWidthTexture(texture:Texture):Int {
+extern inline function getTextureWidthTexture(texture:Texture):Int {
 #if hl
 	return flight._hl._fn.Texture.getTextureWidthTexture(texture);
 #elseif cpp
@@ -297,7 +297,7 @@ inline function getTextureWidthTexture(texture:Texture):Int {
 	#error "flight.Texture: no backend for this target."
 #end
 }
-inline function hasTextureSourceTexture(texture:Texture):Bool {
+extern inline function hasTextureSourceTexture(texture:Texture):Bool {
 #if hl
 	return flight._hl._fn.Texture.hasTextureSourceTexture(texture);
 #elseif cpp
@@ -308,7 +308,7 @@ inline function hasTextureSourceTexture(texture:Texture):Bool {
 	#error "flight.Texture: no backend for this target."
 #end
 }
-inline function hasTextureUvTransformTexture(texture:Texture):Bool {
+extern inline function hasTextureUvTransformTexture(texture:Texture):Bool {
 #if hl
 	return flight._hl._fn.Texture.hasTextureUvTransformTexture(texture);
 #elseif cpp
@@ -319,7 +319,7 @@ inline function hasTextureUvTransformTexture(texture:Texture):Bool {
 	#error "flight.Texture: no backend for this target."
 #end
 }
-inline function isTextureReadyTexture(texture:Texture):Bool {
+extern inline function isTextureReadyTexture(texture:Texture):Bool {
 #if hl
 	return flight._hl._fn.Texture.isTextureReadyTexture(texture);
 #elseif cpp
@@ -330,7 +330,7 @@ inline function isTextureReadyTexture(texture:Texture):Bool {
 	#error "flight.Texture: no backend for this target."
 #end
 }
-inline function resetTextureUvTransformTexture(texture:Texture):Void {
+extern inline function resetTextureUvTransformTexture(texture:Texture):Void {
 #if hl
 	flight._hl._fn.Texture.resetTextureUvTransformTexture(texture);
 #elseif cpp
@@ -341,7 +341,7 @@ inline function resetTextureUvTransformTexture(texture:Texture):Void {
 	#error "flight.Texture: no backend for this target."
 #end
 }
-inline function setTextureFlipTexture(texture:Texture, flipX:Bool, flipY:Bool):Void {
+extern inline function setTextureFlipTexture(texture:Texture, flipX:Bool, flipY:Bool):Void {
 #if hl
 	flight._hl._fn.Texture.setTextureFlipTexture(texture, flipX, flipY);
 #elseif cpp
@@ -352,7 +352,7 @@ inline function setTextureFlipTexture(texture:Texture, flipX:Bool, flipY:Bool):V
 	#error "flight.Texture: no backend for this target."
 #end
 }
-inline function setTextureUvFromPixelRectTexture(texture:Texture, x:Float, y:Float, width:Float, height:Float):Void {
+extern inline function setTextureUvFromPixelRectTexture(texture:Texture, x:Float, y:Float, width:Float, height:Float):Void {
 #if hl
 	flight._hl._fn.Texture.setTextureUvFromPixelRectTexture(texture, x, y, width, height);
 #elseif cpp
@@ -363,7 +363,7 @@ inline function setTextureUvFromPixelRectTexture(texture:Texture, x:Float, y:Flo
 	#error "flight.Texture: no backend for this target."
 #end
 }
-inline function setTextureUvOffsetTexture(texture:Texture, x:Float, y:Float):Void {
+extern inline function setTextureUvOffsetTexture(texture:Texture, x:Float, y:Float):Void {
 #if hl
 	flight._hl._fn.Texture.setTextureUvOffsetTexture(texture, x, y);
 #elseif cpp
@@ -374,7 +374,7 @@ inline function setTextureUvOffsetTexture(texture:Texture, x:Float, y:Float):Voi
 	#error "flight.Texture: no backend for this target."
 #end
 }
-inline function setTextureUvRotationTexture(texture:Texture, radians:Float):Void {
+extern inline function setTextureUvRotationTexture(texture:Texture, radians:Float):Void {
 #if hl
 	flight._hl._fn.Texture.setTextureUvRotationTexture(texture, radians);
 #elseif cpp
@@ -385,7 +385,7 @@ inline function setTextureUvRotationTexture(texture:Texture, radians:Float):Void
 	#error "flight.Texture: no backend for this target."
 #end
 }
-inline function setTextureUvScaleTexture(texture:Texture, x:Float, y:Float):Void {
+extern inline function setTextureUvScaleTexture(texture:Texture, x:Float, y:Float):Void {
 #if hl
 	flight._hl._fn.Texture.setTextureUvScaleTexture(texture, x, y);
 #elseif cpp
@@ -396,7 +396,7 @@ inline function setTextureUvScaleTexture(texture:Texture, x:Float, y:Float):Void
 	#error "flight.Texture: no backend for this target."
 #end
 }
-inline function transformTextureUvTexture(out:Vector2, texture:Texture, u:Float, v:Float):Void {
+extern inline function transformTextureUvTexture(out:Vector2, texture:Texture, u:Float, v:Float):Void {
 #if hl
 	flight._hl._fn.Texture.transformTextureUvTexture(out, texture, u, v);
 #elseif cpp
@@ -407,7 +407,7 @@ inline function transformTextureUvTexture(out:Vector2, texture:Texture, u:Float,
 	#error "flight.Texture: no backend for this target."
 #end
 }
-inline function getTextureSampleColorSpace(source:flight.TextureColorSpace, working:flight.RenderTargetColorSpace):flight.TextureColorSpace {
+extern inline function getTextureSampleColorSpace(source:flight.TextureColorSpace, working:flight.RenderTargetColorSpace):flight.TextureColorSpace {
 #if hl
 	return flight._hl._fn.Texture.getTextureSampleColorSpace(source, working);
 #elseif cpp
@@ -418,7 +418,7 @@ inline function getTextureSampleColorSpace(source:flight.TextureColorSpace, work
 	#error "flight.Texture: no backend for this target."
 #end
 }
-inline function shouldDecodeTextureOnSample(source:flight.TextureColorSpace, working:flight.RenderTargetColorSpace):Bool {
+extern inline function shouldDecodeTextureOnSample(source:flight.TextureColorSpace, working:flight.RenderTargetColorSpace):Bool {
 #if hl
 	return flight._hl._fn.Texture.shouldDecodeTextureOnSample(source, working);
 #elseif cpp
@@ -429,7 +429,7 @@ inline function shouldDecodeTextureOnSample(source:flight.TextureColorSpace, wor
 	#error "flight.Texture: no backend for this target."
 #end
 }
-inline function shouldPremultiplyTextureOnUpload(source:flight.TextureColorSpace, working:flight.RenderTargetColorSpace):Bool {
+extern inline function shouldPremultiplyTextureOnUpload(source:flight.TextureColorSpace, working:flight.RenderTargetColorSpace):Bool {
 #if hl
 	return flight._hl._fn.Texture.shouldPremultiplyTextureOnUpload(source, working);
 #elseif cpp
@@ -440,7 +440,7 @@ inline function shouldPremultiplyTextureOnUpload(source:flight.TextureColorSpace
 	#error "flight.Texture: no backend for this target."
 #end
 }
-inline function invalidateVoxelGrid(voxelGrid:VoxelGrid):Void {
+extern inline function invalidateVoxelGrid(voxelGrid:VoxelGrid):Void {
 #if hl
 	flight._hl._fn.Texture.invalidateVoxelGrid(voxelGrid);
 #elseif cpp
@@ -451,7 +451,7 @@ inline function invalidateVoxelGrid(voxelGrid:VoxelGrid):Void {
 	#error "flight.Texture: no backend for this target."
 #end
 }
-inline function freeCubeTexture(ptr:CubeTexture):Void {
+extern inline function freeCubeTexture(ptr:CubeTexture):Void {
 #if hl
 	flight._hl._fn.Texture.freeCubeTexture(ptr);
 #elseif cpp
@@ -462,7 +462,7 @@ inline function freeCubeTexture(ptr:CubeTexture):Void {
 	#error "flight.Texture: no backend for this target."
 #end
 }
-inline function freeSampler(ptr:Sampler):Void {
+extern inline function freeSampler(ptr:Sampler):Void {
 #if hl
 	flight._hl._fn.Texture.freeSampler(ptr);
 #elseif cpp
@@ -473,7 +473,18 @@ inline function freeSampler(ptr:Sampler):Void {
 	#error "flight.Texture: no backend for this target."
 #end
 }
-inline function freeTexture2D(ptr:Texture2D):Void {
+extern inline function freeTexture(ptr:Texture):Void {
+#if hl
+	flight._hl._fn.Texture.freeTexture(ptr);
+#elseif cpp
+	flight._cpp._fn.Texture.freeTexture(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Texture.freeTexture(ptr);
+#else
+	#error "flight.Texture: no backend for this target."
+#end
+}
+extern inline function freeTexture2D(ptr:Texture2D):Void {
 #if hl
 	flight._hl._fn.Texture.freeTexture2D(ptr);
 #elseif cpp
@@ -484,7 +495,7 @@ inline function freeTexture2D(ptr:Texture2D):Void {
 	#error "flight.Texture: no backend for this target."
 #end
 }
-inline function freeTextureSourceRef(ptr:TextureSourceRef):Void {
+extern inline function freeTextureSourceRef(ptr:TextureSourceRef):Void {
 #if hl
 	flight._hl._fn.Texture.freeTextureSourceRef(ptr);
 #elseif cpp
@@ -495,7 +506,7 @@ inline function freeTextureSourceRef(ptr:TextureSourceRef):Void {
 	#error "flight.Texture: no backend for this target."
 #end
 }
-inline function freeTextureSourceKind(ptr:TextureSourceKind):Void {
+extern inline function freeTextureSourceKind(ptr:TextureSourceKind):Void {
 #if hl
 	flight._hl._fn.Texture.freeTextureSourceKind(ptr);
 #elseif cpp

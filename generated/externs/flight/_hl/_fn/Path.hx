@@ -20,7 +20,7 @@ extern class Path {
 	@:hlNative("flight", "flight_fit_path_curves")
 	public static function fitPathCurves(source:flight._hl.Path, tolerance:Float, out:flight._hl.Path, flattenTolerance:Float):Void;
 	@:hlNative("flight", "flight_get_path_contour_lengths")
-	public static function getPathContourLengths(path:flight._hl.Path, tolerance:Float):Dynamic;
+	public static function getPathContourLengths(path:flight._hl.Path, tolerance:Float):hl.Bytes;
 	@:hlNative("flight", "flight_get_path_curvature_at_distance")
 	public static function getPathCurvatureAtDistance(path:flight._hl.Path, distance:Float, tolerance:Float):Float;
 	@:hlNative("flight", "flight_get_path_length")
@@ -88,7 +88,7 @@ extern class Path {
 	@:hlNative("flight", "flight_append_path_tangent_arc_to")
 	public static function appendPathTangentArcTo(path:flight._hl.Path, x1:Float, y1:Float, x2:Float, y2:Float, radius:Float):Void;
 	@:hlNative("flight", "flight_create_path_morph")
-	public static function createPathMorph(start:flight._hl.Path, end:flight._hl.Path):Dynamic;
+	public static function createPathMorph(start:flight._hl.Path, end:flight._hl.Path):flight._hl.PathMorph;
 	@:hlNative("flight", "flight_sample_path_morph")
 	public static function samplePathMorph(out:flight._hl.Path, morph:flight._hl.PathMorph, progress:Float):Void;
 	@:hlNative("flight", "flight_reverse_path")
@@ -104,7 +104,7 @@ extern class Path {
 	@:hlNative("flight", "flight_tessellate_path_typed_into")
 	public static function tessellatePathTypedInto(path:flight._hl.Path, out:flight._hl.PathMeshTyped, tolerance:Float):Void;
 	@:hlNative("flight", "flight_tessellate_stroke_path")
-	public static function tessellateStrokePath(path:flight._hl.Path, style:flight._hl.StrokeStyle, tolerance:Float):Dynamic;
+	public static function tessellateStrokePath(path:flight._hl.Path, style:flight._hl.StrokeStyle, tolerance:Float):flight._hl.PathMesh;
 	@:hlNative("flight", "flight_transform_path")
 	public static function transformPath(source:flight._hl.Path, matrix:flight._hl.Matrix, out:flight._hl.Path):Void;
 	@:hlNative("flight", "flight_translate_path")

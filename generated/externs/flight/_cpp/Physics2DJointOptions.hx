@@ -12,10 +12,10 @@ abstract Physics2DJointOptions(cpp.Star<cpp.Void>) {
 
 	inline function get_bodyA():Int return Physics2DJointOptions_Ffi.get_bodyA(this);
 
-	inline function set_bodyA(value:Int):Int return Physics2DJointOptions_Ffi.set_bodyA(this, value);
+	inline function set_bodyA(value:Int):Int { Physics2DJointOptions_Ffi.set_bodyA(this, value); return value; }
 	public var bodyB(get, set):Int;
 
 	inline function get_bodyB():Int return Physics2DJointOptions_Ffi.get_bodyB(this);
 
-	inline function set_bodyB(value:Int):Int return Physics2DJointOptions_Ffi.set_bodyB(this, value);
+	inline function set_bodyB(value:Int):Int { Physics2DJointOptions_Ffi.set_bodyB(this, value); return value; }
 }

@@ -1,6 +1,6 @@
 package flight;
 
-inline function parseTextureAtlasAsepriteDocument(atlas:TextureAtlas, doc:TextureAtlasAsepriteDocument):Void {
+extern inline function parseTextureAtlasAsepriteDocument(atlas:TextureAtlas, doc:TextureAtlasAsepriteDocument):Void {
 #if hl
 	flight._hl._fn.TextureatlasFormats.parseTextureAtlasAsepriteDocument(atlas, doc);
 #elseif cpp
@@ -11,7 +11,7 @@ inline function parseTextureAtlasAsepriteDocument(atlas:TextureAtlas, doc:Textur
 	#error "flight.TextureatlasFormats: no backend for this target."
 #end
 }
-inline function parseTextureAtlasAsepriteJson(atlas:TextureAtlas, json:String):Void {
+extern inline function parseTextureAtlasAsepriteJson(atlas:TextureAtlas, json:String):Void {
 #if hl
 	flight._hl._fn.TextureatlasFormats.parseTextureAtlasAsepriteJson(atlas, cast json);
 #elseif cpp
@@ -22,7 +22,7 @@ inline function parseTextureAtlasAsepriteJson(atlas:TextureAtlas, json:String):V
 	#error "flight.TextureatlasFormats: no backend for this target."
 #end
 }
-inline function createTextureAtlasFormatRegistry():TextureAtlasFormatRegistry {
+extern inline function createTextureAtlasFormatRegistry():TextureAtlasFormatRegistry {
 #if hl
 	return flight._hl._fn.TextureatlasFormats.createTextureAtlasFormatRegistry();
 #elseif cpp
@@ -33,7 +33,7 @@ inline function createTextureAtlasFormatRegistry():TextureAtlasFormatRegistry {
 	#error "flight.TextureatlasFormats: no backend for this target."
 #end
 }
-inline function applyTextureAtlasImportOptions(registry:TextureAtlasFormatRegistry, options:TextureAtlasImportOptions):Void {
+extern inline function applyTextureAtlasImportOptions(registry:TextureAtlasFormatRegistry, options:TextureAtlasImportOptions):Void {
 #if hl
 	flight._hl._fn.TextureatlasFormats.applyTextureAtlasImportOptions(registry, options);
 #elseif cpp
@@ -44,7 +44,7 @@ inline function applyTextureAtlasImportOptions(registry:TextureAtlasFormatRegist
 	#error "flight.TextureatlasFormats: no backend for this target."
 #end
 }
-inline function asepriteTextureAtlasFormat(registry:TextureAtlasFormatRegistry):TextureAtlasFormatDescriptor {
+extern inline function asepriteTextureAtlasFormat(registry:TextureAtlasFormatRegistry):TextureAtlasFormatDescriptor {
 #if hl
 	return flight._hl._fn.TextureatlasFormats.asepriteTextureAtlasFormat(registry);
 #elseif cpp
@@ -55,7 +55,7 @@ inline function asepriteTextureAtlasFormat(registry:TextureAtlasFormatRegistry):
 	#error "flight.TextureatlasFormats: no backend for this target."
 #end
 }
-inline function detectTextureAtlasFormat(registry:TextureAtlasFormatRegistry, content:String):TextureAtlasFormatKind {
+extern inline function detectTextureAtlasFormat(registry:TextureAtlasFormatRegistry, content:String):TextureAtlasFormatKind {
 #if hl
 	return flight._hl._fn.TextureatlasFormats.detectTextureAtlasFormat(registry, cast content);
 #elseif cpp
@@ -66,7 +66,7 @@ inline function detectTextureAtlasFormat(registry:TextureAtlasFormatRegistry, co
 	#error "flight.TextureatlasFormats: no backend for this target."
 #end
 }
-inline function getTextureAtlasFormatKinds(out:Dynamic, registry:TextureAtlasFormatRegistry):Void {
+extern inline function getTextureAtlasFormatKinds(out:Dynamic, registry:TextureAtlasFormatRegistry):Void {
 #if hl
 	flight._hl._fn.TextureatlasFormats.getTextureAtlasFormatKinds(out, registry);
 #elseif cpp
@@ -77,7 +77,7 @@ inline function getTextureAtlasFormatKinds(out:Dynamic, registry:TextureAtlasFor
 	#error "flight.TextureatlasFormats: no backend for this target."
 #end
 }
-inline function libgdxAtlasTextureAtlasFormat(registry:TextureAtlasFormatRegistry):TextureAtlasFormatDescriptor {
+extern inline function libgdxAtlasTextureAtlasFormat(registry:TextureAtlasFormatRegistry):TextureAtlasFormatDescriptor {
 #if hl
 	return flight._hl._fn.TextureatlasFormats.libgdxAtlasTextureAtlasFormat(registry);
 #elseif cpp
@@ -88,7 +88,7 @@ inline function libgdxAtlasTextureAtlasFormat(registry:TextureAtlasFormatRegistr
 	#error "flight.TextureatlasFormats: no backend for this target."
 #end
 }
-inline function parseTextureAtlas(atlas:TextureAtlas, registry:TextureAtlasFormatRegistry, content:String, formatKind:TextureAtlasFormatKind, options:TextureAtlasParseOptions):Bool {
+extern inline function parseTextureAtlas(atlas:TextureAtlas, registry:TextureAtlasFormatRegistry, content:String, formatKind:TextureAtlasFormatKind, options:TextureAtlasParseOptions):Bool {
 #if hl
 	return flight._hl._fn.TextureatlasFormats.parseTextureAtlas(atlas, registry, cast content, formatKind, options);
 #elseif cpp
@@ -99,7 +99,7 @@ inline function parseTextureAtlas(atlas:TextureAtlas, registry:TextureAtlasForma
 	#error "flight.TextureatlasFormats: no backend for this target."
 #end
 }
-inline function starlingTextureAtlasFormat(registry:TextureAtlasFormatRegistry):TextureAtlasFormatDescriptor {
+extern inline function starlingTextureAtlasFormat(registry:TextureAtlasFormatRegistry):TextureAtlasFormatDescriptor {
 #if hl
 	return flight._hl._fn.TextureatlasFormats.starlingTextureAtlasFormat(registry);
 #elseif cpp
@@ -110,7 +110,7 @@ inline function starlingTextureAtlasFormat(registry:TextureAtlasFormatRegistry):
 	#error "flight.TextureatlasFormats: no backend for this target."
 #end
 }
-inline function texturePackerTextureAtlasFormat(registry:TextureAtlasFormatRegistry):TextureAtlasFormatDescriptor {
+extern inline function texturePackerTextureAtlasFormat(registry:TextureAtlasFormatRegistry):TextureAtlasFormatDescriptor {
 #if hl
 	return flight._hl._fn.TextureatlasFormats.texturePackerTextureAtlasFormat(registry);
 #elseif cpp
@@ -121,7 +121,7 @@ inline function texturePackerTextureAtlasFormat(registry:TextureAtlasFormatRegis
 	#error "flight.TextureatlasFormats: no backend for this target."
 #end
 }
-inline function unregisterTextureAtlasFormat(registry:TextureAtlasFormatRegistry, kind:TextureAtlasFormatKind):Void {
+extern inline function unregisterTextureAtlasFormat(registry:TextureAtlasFormatRegistry, kind:TextureAtlasFormatKind):Void {
 #if hl
 	flight._hl._fn.TextureatlasFormats.unregisterTextureAtlasFormat(registry, kind);
 #elseif cpp
@@ -132,7 +132,7 @@ inline function unregisterTextureAtlasFormat(registry:TextureAtlasFormatRegistry
 	#error "flight.TextureatlasFormats: no backend for this target."
 #end
 }
-inline function parseTextureAtlasLibgdxAtlas(atlas:TextureAtlas, text:String):Void {
+extern inline function parseTextureAtlasLibgdxAtlas(atlas:TextureAtlas, text:String):Void {
 #if hl
 	flight._hl._fn.TextureatlasFormats.parseTextureAtlasLibgdxAtlas(atlas, cast text);
 #elseif cpp
@@ -143,7 +143,7 @@ inline function parseTextureAtlasLibgdxAtlas(atlas:TextureAtlas, text:String):Vo
 	#error "flight.TextureatlasFormats: no backend for this target."
 #end
 }
-inline function readTextureAtlasScale(scale:TextureAtlasScale):Float {
+extern inline function readTextureAtlasScale(scale:TextureAtlasScale):Float {
 #if hl
 	return flight._hl._fn.TextureatlasFormats.readTextureAtlasScale(scale);
 #elseif cpp
@@ -154,7 +154,7 @@ inline function readTextureAtlasScale(scale:TextureAtlasScale):Float {
 	#error "flight.TextureatlasFormats: no backend for this target."
 #end
 }
-inline function resetTextureAtlasPageMeta(atlas:TextureAtlas):Void {
+extern inline function resetTextureAtlasPageMeta(atlas:TextureAtlas):Void {
 #if hl
 	flight._hl._fn.TextureatlasFormats.resetTextureAtlasPageMeta(atlas);
 #elseif cpp
@@ -165,7 +165,7 @@ inline function resetTextureAtlasPageMeta(atlas:TextureAtlas):Void {
 	#error "flight.TextureatlasFormats: no backend for this target."
 #end
 }
-inline function parseTextureAtlasStarlingXml(atlas:TextureAtlas, xml:String):Void {
+extern inline function parseTextureAtlasStarlingXml(atlas:TextureAtlas, xml:String):Void {
 #if hl
 	flight._hl._fn.TextureatlasFormats.parseTextureAtlasStarlingXml(atlas, cast xml);
 #elseif cpp
@@ -176,7 +176,7 @@ inline function parseTextureAtlasStarlingXml(atlas:TextureAtlas, xml:String):Voi
 	#error "flight.TextureatlasFormats: no backend for this target."
 #end
 }
-inline function parseTexturePackerAtlasDocument(atlas:TextureAtlas, doc:TexturePackerAtlasDocument, options:TexturePackerAtlasParseOptions):Void {
+extern inline function parseTexturePackerAtlasDocument(atlas:TextureAtlas, doc:TexturePackerAtlasDocument, options:TexturePackerAtlasParseOptions):Void {
 #if hl
 	flight._hl._fn.TextureatlasFormats.parseTexturePackerAtlasDocument(atlas, doc, options);
 #elseif cpp
@@ -187,7 +187,7 @@ inline function parseTexturePackerAtlasDocument(atlas:TextureAtlas, doc:TextureP
 	#error "flight.TextureatlasFormats: no backend for this target."
 #end
 }
-inline function parseTexturePackerAtlasJson(atlas:TextureAtlas, json:String, options:TexturePackerAtlasParseOptions):Void {
+extern inline function parseTexturePackerAtlasJson(atlas:TextureAtlas, json:String, options:TexturePackerAtlasParseOptions):Void {
 #if hl
 	flight._hl._fn.TextureatlasFormats.parseTexturePackerAtlasJson(atlas, cast json, options);
 #elseif cpp
@@ -198,7 +198,7 @@ inline function parseTexturePackerAtlasJson(atlas:TextureAtlas, json:String, opt
 	#error "flight.TextureatlasFormats: no backend for this target."
 #end
 }
-inline function getTextureAtlasFrameTagDirectionString(value:flight.TextureAtlasFrameTagDirection):String {
+extern inline function getTextureAtlasFrameTagDirectionString(value:flight.TextureAtlasFrameTagDirection):String {
 #if hl
 	return cast flight._hl._fn.TextureatlasFormats.getTextureAtlasFrameTagDirectionString(value);
 #elseif cpp
@@ -209,7 +209,7 @@ inline function getTextureAtlasFrameTagDirectionString(value:flight.TextureAtlas
 	#error "flight.TextureatlasFormats: no backend for this target."
 #end
 }
-inline function parseTextureAtlasFrameTagDirection(value:String):Int {
+extern inline function parseTextureAtlasFrameTagDirection(value:String):Int {
 #if hl
 	return flight._hl._fn.TextureatlasFormats.parseTextureAtlasFrameTagDirection(cast value);
 #elseif cpp
@@ -220,7 +220,7 @@ inline function parseTextureAtlasFrameTagDirection(value:String):Int {
 	#error "flight.TextureatlasFormats: no backend for this target."
 #end
 }
-inline function freeTextureAtlasFormatRegistry(ptr:TextureAtlasFormatRegistry):Void {
+extern inline function freeTextureAtlasFormatRegistry(ptr:TextureAtlasFormatRegistry):Void {
 #if hl
 	flight._hl._fn.TextureatlasFormats.freeTextureAtlasFormatRegistry(ptr);
 #elseif cpp
@@ -231,7 +231,7 @@ inline function freeTextureAtlasFormatRegistry(ptr:TextureAtlasFormatRegistry):V
 	#error "flight.TextureatlasFormats: no backend for this target."
 #end
 }
-inline function freeTextureAtlasFormatKind(ptr:TextureAtlasFormatKind):Void {
+extern inline function freeTextureAtlasFormatKind(ptr:TextureAtlasFormatKind):Void {
 #if hl
 	flight._hl._fn.TextureatlasFormats.freeTextureAtlasFormatKind(ptr);
 #elseif cpp

@@ -16,20 +16,20 @@ abstract ShadedMaterial(cpp.Star<cpp.Void>) {
 
 	inline function get_diffuse():Int return ShadedMaterial_Ffi.get_diffuse(this);
 
-	inline function set_diffuse(value:Int):Int return ShadedMaterial_Ffi.set_diffuse(this, value);
+	inline function set_diffuse(value:Int):Int { ShadedMaterial_Ffi.set_diffuse(this, value); return value; }
 	public var normalScale(get, set):Single;
 
 	inline function get_normalScale():Single return ShadedMaterial_Ffi.get_normalScale(this);
 
-	inline function set_normalScale(value:Single):Single return ShadedMaterial_Ffi.set_normalScale(this, value);
+	inline function set_normalScale(value:Single):Single { ShadedMaterial_Ffi.set_normalScale(this, value); return value; }
 	public var shininess(get, set):Single;
 
 	inline function get_shininess():Single return ShadedMaterial_Ffi.get_shininess(this);
 
-	inline function set_shininess(value:Single):Single return ShadedMaterial_Ffi.set_shininess(this, value);
+	inline function set_shininess(value:Single):Single { ShadedMaterial_Ffi.set_shininess(this, value); return value; }
 	public var specular(get, set):Int;
 
 	inline function get_specular():Int return ShadedMaterial_Ffi.get_specular(this);
 
-	inline function set_specular(value:Int):Int return ShadedMaterial_Ffi.set_specular(this, value);
+	inline function set_specular(value:Int):Int { ShadedMaterial_Ffi.set_specular(this, value); return value; }
 }

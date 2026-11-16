@@ -20,7 +20,13 @@
     "gate:package": "node tests/migration/package.mjs",
     "gate:native-ffi": "node tests/migration/native.mjs",
     "test:externs-driver": "node --test tools/externs/generate.test.mjs",
-    "check": "node tests/migration/all.mjs"
+    "check": "node tests/migration/all.mjs",
+    "setup:native-tests": "node tools/setup-native-tests.mjs",
+    "native:build": "node tools/native/build.mjs",
+    "native:build:test": "node tools/native/build.mjs --profile dev",
+    "test:native-packaging": "node --test tests/native/artifacts.test.mjs tests/native/source.test.mjs",
+    "gate:native-runtime": "node tests/native/runtime.mjs",
+    "test:native-producer": "node tools/native/producer-check.mjs"
   },
   "devDependencies": {
     "lix": "17.0.4-alpha.0"

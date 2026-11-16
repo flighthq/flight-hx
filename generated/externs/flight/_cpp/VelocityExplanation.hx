@@ -18,25 +18,25 @@ abstract VelocityExplanation(cpp.Star<cpp.Void>) {
 
 	inline function get_currentFrameId():Int return VelocityExplanation_Ffi.get_currentFrameId(this);
 
-	inline function set_currentFrameId(value:Int):Int return VelocityExplanation_Ffi.set_currentFrameId(this, value);
+	inline function set_currentFrameId(value:Int):Int { VelocityExplanation_Ffi.set_currentFrameId(this, value); return value; }
 	public var explicit(get, set):Bool;
 
 	inline function get_explicit():Bool return VelocityExplanation_Ffi.get_explicit(this);
 
-	inline function set_explicit(value:Bool):Bool return VelocityExplanation_Ffi.set_explicit(this, value);
+	inline function set_explicit(value:Bool):Bool { VelocityExplanation_Ffi.set_explicit(this, value); return value; }
 	public var lastFrameId(get, set):Int;
 
 	inline function get_lastFrameId():Int return VelocityExplanation_Ffi.get_lastFrameId(this);
 
-	inline function set_lastFrameId(value:Int):Int return VelocityExplanation_Ffi.set_lastFrameId(this, value);
+	inline function set_lastFrameId(value:Int):Int { VelocityExplanation_Ffi.set_lastFrameId(this, value); return value; }
 	public var x(get, set):Single;
 
 	inline function get_x():Single return VelocityExplanation_Ffi.get_x(this);
 
-	inline function set_x(value:Single):Single return VelocityExplanation_Ffi.set_x(this, value);
+	inline function set_x(value:Single):Single { VelocityExplanation_Ffi.set_x(this, value); return value; }
 	public var y(get, set):Single;
 
 	inline function get_y():Single return VelocityExplanation_Ffi.get_y(this);
 
-	inline function set_y(value:Single):Single return VelocityExplanation_Ffi.set_y(this, value);
+	inline function set_y(value:Single):Single { VelocityExplanation_Ffi.set_y(this, value); return value; }
 }

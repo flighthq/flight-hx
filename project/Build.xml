@@ -1,0 +1,13 @@
+<xml>
+  <files id="haxe">
+    <compilerflag value="-I${flight_native_root}/native/include" />
+  </files>
+  <target id="haxe">
+    <lib name="${flight_native_root}/native/lib/${flight_native_platform}/libflight_ffi.a" if="iphoneos || iphonesim || ios" />
+    <lib name="${flight_native_root}/native/lib/${flight_native_platform}/flight_ffi.dll.lib" if="windows" />
+    <lib name="-L${flight_native_root}/native/bin/${flight_native_platform}" unless="windows || iphoneos || iphonesim || ios" />
+    <lib name="-lflight_ffi" unless="windows || iphoneos || iphonesim || ios" />
+    <flag value="-Wl,-rpath,$ORIGIN" if="linux" />
+    <flag value="-Wl,-rpath,@executable_path" if="mac" unless="iphoneos || iphonesim || ios" />
+  </target>
+</xml>

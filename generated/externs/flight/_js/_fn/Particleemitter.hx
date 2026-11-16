@@ -23,7 +23,7 @@ extern class Particleemitter {
 	@:native("flight_compact_particle_emitter_2d")
 	public static function compactParticleEmitter2d(target:Dynamic):Void;
 	@:native("flight_emit_particle_burst_2d")
-	public static function emitParticleBurst2d(emitter:Dynamic, state:flight._js.ParticleEmitterState, config:flight._js.ParticleEmitterConfig, count:Float, x:Float, y:Float, tint:Int):Int;
+	public static function emitParticleBurst2d(emitter:Dynamic, state:flight._js.ParticleEmitterState, config:flight._js.ParticleEmitterConfig, count:Float, x:Float, y:Float, tint:haxe.Int64):Int;
 	@:native("flight_get_particle_emitter_2d_capacity")
 	public static function getParticleEmitter2dCapacity(source:Dynamic):Int;
 	@:native("flight_get_particle_emitter_2d_particle_alpha")
@@ -61,7 +61,7 @@ extern class Particleemitter {
 	@:native("flight_compute_particle_emitter_3d_local_bounds_aabb")
 	public static function computeParticleEmitter3dLocalBoundsAabb(out:flight._js.Aabb, source:Dynamic):Void;
 	@:native("flight_emit_particle_burst_3d")
-	public static function emitParticleBurst3d(emitter:Dynamic, state:flight._js.ParticleEmitterState, config:flight._js.ParticleEmitterConfig, count:Float, x:Float, y:Float, z:Float, tint:Int):Int;
+	public static function emitParticleBurst3d(emitter:Dynamic, state:flight._js.ParticleEmitterState, config:flight._js.ParticleEmitterConfig, count:Float, x:Float, y:Float, z:Float, tint:haxe.Int64):Int;
 	@:native("flight_get_particle_emitter_3d_capacity")
 	public static function getParticleEmitter3dCapacity(source:Dynamic):Int;
 	@:native("flight_get_particle_emitter_3d_particle_alpha")

@@ -2,7 +2,7 @@ package flight._hl._fn;
 
 extern class Bitmap {
 	@:hlNative("flight", "flight_create_bitmap")
-	public static function createBitmap(width:Int, height:Int, color:Int):flight._hl.Bitmap;
+	public static function createBitmap(width:Int, height:Int, color:haxe.Int64):flight._hl.Bitmap;
 	@:hlNative("flight", "flight_clone_bitmap")
 	public static function cloneBitmap(source:flight._hl.Bitmap):flight._hl.Bitmap;
 	@:hlNative("flight", "flight_convert_bitmap_alpha_type")
@@ -56,13 +56,13 @@ extern class Bitmap {
 	@:hlNative("flight", "flight_set_bitmap_color_matrix_identity")
 	public static function setBitmapColorMatrixIdentity(out:hl.Bytes):Void;
 	@:hlNative("flight", "flight_compare_bitmap")
-	public static function compareBitmap(source:flight._hl.Bitmap, other:flight._hl.Bitmap):Dynamic;
+	public static function compareBitmap(source:flight._hl.Bitmap, other:flight._hl.Bitmap):flight._hl.Bitmap;
 	@:hlNative("flight", "flight_get_bitmap_mismatch")
 	public static function getBitmapMismatch(source:flight._hl.Bitmap, other:flight._hl.Bitmap, channelTolerance:Int):flight._hl.BitmapMismatch;
 	@:hlNative("flight", "flight_composite_bitmap_pixels")
-	public static function compositeBitmapPixels(dest:flight._hl.BitmapRegion, pixels:hl.Bytes, pixelsLen:Int, mode:Int):Void;
+	public static function compositeBitmapPixels(dest:flight._hl.BitmapRegion, pixels:hl.Bytes, pixelsLen:Int, mode:flight._hl.BitmapCompositeMode):Void;
 	@:hlNative("flight", "flight_composite_bitmap_region")
-	public static function compositeBitmapRegion(dest:flight._hl.BitmapRegion, source:flight._hl.BitmapRegion, mode:Int):Void;
+	public static function compositeBitmapRegion(dest:flight._hl.BitmapRegion, source:flight._hl.BitmapRegion, mode:flight._hl.BitmapCompositeMode):Void;
 	@:hlNative("flight", "flight_extract_bitmap_pixels")
 	public static function extractBitmapPixels(out:hl.Bytes, outLen:Int, source:flight._hl.BitmapRegion):Void;
 	@:hlNative("flight", "flight_extract_bitmap_pixels32")
@@ -74,7 +74,7 @@ extern class Bitmap {
 	@:hlNative("flight", "flight_convolve_bitmap")
 	public static function convolveBitmap(out:hl.Bytes, outLen:Int, source:flight._hl.BitmapRegion, options:flight._hl.BitmapConvolutionOptions):Void;
 	@:hlNative("flight", "flight_copy_bitmap_channel")
-	public static function copyBitmapChannel(dest:flight._hl.BitmapRegion, destChannel:Int, source:flight._hl.BitmapRegion, sourceChannel:Int):Void;
+	public static function copyBitmapChannel(dest:flight._hl.BitmapRegion, destChannel:flight._hl.ImageChannel, source:flight._hl.BitmapRegion, sourceChannel:flight._hl.ImageChannel):Void;
 	@:hlNative("flight", "flight_copy_bitmap_pixels")
 	public static function copyBitmapPixels(dest:flight._hl.BitmapRegion, source:flight._hl.BitmapRegion, composite:Bool):Void;
 	@:hlNative("flight", "flight_get_bitmap_coverage")
@@ -88,9 +88,9 @@ extern class Bitmap {
 	@:hlNative("flight", "flight_dissolve_bitmap_pixels")
 	public static function dissolveBitmapPixels(dest:flight._hl.BitmapRegion, source:flight._hl.BitmapRegion, seed:Int, pixelCount:Int, fillColor:Int):Int;
 	@:hlNative("flight", "flight_encode_bitmap")
-	public static function encodeBitmap(hostBitmapEncode:flight._hl.HostBitmapEncodeCapability, source:flight._hl.Bitmap, format:Int, quality:Single):Dynamic;
+	public static function encodeBitmap(hostBitmapEncode:flight._hl.HostBitmapEncodeCapability, source:flight._hl.Bitmap, format:Int, quality:Single):hl.Bytes;
 	@:hlNative("flight", "flight_explain_bitmap_encode_failure")
-	public static function explainBitmapEncodeFailure(hostBitmapEncode:flight._hl.HostBitmapEncodeCapability, format:Int):Dynamic;
+	public static function explainBitmapEncodeFailure(hostBitmapEncode:flight._hl.HostBitmapEncodeCapability, format:Int):flight._hl.BitmapEncodeFailureExplanation;
 	@:hlNative("flight", "flight_fill_bitmap_rectangle")
 	public static function fillBitmapRectangle(dest:flight._hl.BitmapRegion, color:Int):Void;
 	@:hlNative("flight", "flight_flood_fill_bitmap")
@@ -102,7 +102,7 @@ extern class Bitmap {
 	@:hlNative("flight", "flight_format_bitmap_fingerprint")
 	public static function formatBitmapFingerprint(fingerprint:flight._hl.BitmapFingerprint):hl.Bytes;
 	@:hlNative("flight", "flight_parse_bitmap_fingerprint")
-	public static function parseBitmapFingerprint(text:hl.Bytes):Dynamic;
+	public static function parseBitmapFingerprint(text:hl.Bytes):flight._hl.BitmapFingerprint;
 	@:hlNative("flight", "flight_flip_bitmap_horizontal")
 	public static function flipBitmapHorizontal(dest:flight._hl.BitmapRegion, source:flight._hl.BitmapRegion):Void;
 	@:hlNative("flight", "flight_flip_bitmap_vertical")
@@ -144,7 +144,7 @@ extern class Bitmap {
 	@:hlNative("flight", "flight_get_bitmap_pixel")
 	public static function getBitmapPixel(source:flight._hl.Bitmap, x:Int, y:Int):Int;
 	@:hlNative("flight", "flight_get_bitmap_pixel_channel")
-	public static function getBitmapPixelChannel(source:flight._hl.Bitmap, x:Int, y:Int, channel:Int):Int;
+	public static function getBitmapPixelChannel(source:flight._hl.Bitmap, x:Int, y:Int, channel:flight._hl.ImageChannel):Int;
 	@:hlNative("flight", "flight_get_bitmap_pixel_luminance")
 	public static function getBitmapPixelLuminance(source:flight._hl.Bitmap, x:Int, y:Int):Int;
 	@:hlNative("flight", "flight_get_bitmap_pixel_rgb")

@@ -1,6 +1,6 @@
 package flight;
 
-inline function readBitmapFontFormatKind(bytes:Dynamic, bytesLen:Int):BitmapFontFormatKind {
+extern inline function readBitmapFontFormatKind(bytes:Dynamic, bytesLen:Int):BitmapFontFormatKind {
 #if hl
 	return flight._hl._fn.BitmapfontFormats.readBitmapFontFormatKind(bytes, bytesLen);
 #elseif cpp
@@ -11,7 +11,7 @@ inline function readBitmapFontFormatKind(bytes:Dynamic, bytesLen:Int):BitmapFont
 	#error "flight.BitmapfontFormats: no backend for this target."
 #end
 }
-inline function explainBitmapFontParse(text:String, options:BitmapFontParseOptions):BitmapFontParseExplanation {
+extern inline function explainBitmapFontParse(text:String, options:BitmapFontParseOptions):BitmapFontParseExplanation {
 #if hl
 	return flight._hl._fn.BitmapfontFormats.explainBitmapFontParse(cast text, options);
 #elseif cpp
@@ -22,7 +22,7 @@ inline function explainBitmapFontParse(text:String, options:BitmapFontParseOptio
 	#error "flight.BitmapfontFormats: no backend for this target."
 #end
 }
-inline function freeBitmapFontFormatKind(ptr:BitmapFontFormatKind):Void {
+extern inline function freeBitmapFontFormatKind(ptr:BitmapFontFormatKind):Void {
 #if hl
 	flight._hl._fn.BitmapfontFormats.freeBitmapFontFormatKind(ptr);
 #elseif cpp
@@ -33,7 +33,7 @@ inline function freeBitmapFontFormatKind(ptr:BitmapFontFormatKind):Void {
 	#error "flight.BitmapfontFormats: no backend for this target."
 #end
 }
-inline function freeBitmapFontParseExplanation(ptr:BitmapFontParseExplanation):Void {
+extern inline function freeBitmapFontParseExplanation(ptr:BitmapFontParseExplanation):Void {
 #if hl
 	flight._hl._fn.BitmapfontFormats.freeBitmapFontParseExplanation(ptr);
 #elseif cpp

@@ -18,25 +18,25 @@ abstract AnimationPlayer(cpp.Star<cpp.Void>) {
 
 	inline function get_loopEnabled():Bool return AnimationPlayer_Ffi.get_loopEnabled(this);
 
-	inline function set_loopEnabled(value:Bool):Bool return AnimationPlayer_Ffi.set_loopEnabled(this, value);
+	inline function set_loopEnabled(value:Bool):Bool { AnimationPlayer_Ffi.set_loopEnabled(this, value); return value; }
 	public var playing(get, set):Bool;
 
 	inline function get_playing():Bool return AnimationPlayer_Ffi.get_playing(this);
 
-	inline function set_playing(value:Bool):Bool return AnimationPlayer_Ffi.set_playing(this, value);
+	inline function set_playing(value:Bool):Bool { AnimationPlayer_Ffi.set_playing(this, value); return value; }
 	public var repeatCount(get, set):Int;
 
 	inline function get_repeatCount():Int return AnimationPlayer_Ffi.get_repeatCount(this);
 
-	inline function set_repeatCount(value:Int):Int return AnimationPlayer_Ffi.set_repeatCount(this, value);
+	inline function set_repeatCount(value:Int):Int { AnimationPlayer_Ffi.set_repeatCount(this, value); return value; }
 	public var speed(get, set):Single;
 
 	inline function get_speed():Single return AnimationPlayer_Ffi.get_speed(this);
 
-	inline function set_speed(value:Single):Single return AnimationPlayer_Ffi.set_speed(this, value);
+	inline function set_speed(value:Single):Single { AnimationPlayer_Ffi.set_speed(this, value); return value; }
 	public var time(get, set):Single;
 
 	inline function get_time():Single return AnimationPlayer_Ffi.get_time(this);
 
-	inline function set_time(value:Single):Single return AnimationPlayer_Ffi.set_time(this, value);
+	inline function set_time(value:Single):Single { AnimationPlayer_Ffi.set_time(this, value); return value; }
 }

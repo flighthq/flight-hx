@@ -18,25 +18,25 @@ abstract BitmapFontGlyphExplanation(cpp.Star<cpp.Void>) {
 
 	inline function get_glyphHeight():Int return BitmapFontGlyphExplanation_Ffi.get_glyphHeight(this);
 
-	inline function set_glyphHeight(value:Int):Int return BitmapFontGlyphExplanation_Ffi.set_glyphHeight(this, value);
+	inline function set_glyphHeight(value:Int):Int { BitmapFontGlyphExplanation_Ffi.set_glyphHeight(this, value); return value; }
 	public var glyphWidth(get, set):Int;
 
 	inline function get_glyphWidth():Int return BitmapFontGlyphExplanation_Ffi.get_glyphWidth(this);
 
-	inline function set_glyphWidth(value:Int):Int return BitmapFontGlyphExplanation_Ffi.set_glyphWidth(this, value);
+	inline function set_glyphWidth(value:Int):Int { BitmapFontGlyphExplanation_Ffi.set_glyphWidth(this, value); return value; }
 	public var page(get, set):Int;
 
 	inline function get_page():Int return BitmapFontGlyphExplanation_Ffi.get_page(this);
 
-	inline function set_page(value:Int):Int return BitmapFontGlyphExplanation_Ffi.set_page(this, value);
+	inline function set_page(value:Int):Int { BitmapFontGlyphExplanation_Ffi.set_page(this, value); return value; }
 	public var pageCount(get, set):Int;
 
 	inline function get_pageCount():Int return BitmapFontGlyphExplanation_Ffi.get_pageCount(this);
 
-	inline function set_pageCount(value:Int):Int return BitmapFontGlyphExplanation_Ffi.set_pageCount(this, value);
+	inline function set_pageCount(value:Int):Int { BitmapFontGlyphExplanation_Ffi.set_pageCount(this, value); return value; }
 	public var renderable(get, set):Bool;
 
 	inline function get_renderable():Bool return BitmapFontGlyphExplanation_Ffi.get_renderable(this);
 
-	inline function set_renderable(value:Bool):Bool return BitmapFontGlyphExplanation_Ffi.set_renderable(this, value);
+	inline function set_renderable(value:Bool):Bool { BitmapFontGlyphExplanation_Ffi.set_renderable(this, value); return value; }
 }

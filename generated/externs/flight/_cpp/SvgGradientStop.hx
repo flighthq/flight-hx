@@ -10,5 +10,5 @@ abstract SvgGradientStop(cpp.Star<cpp.Void>) {
 
 	inline function get_offset():Single return SvgGradientStop_Ffi.get_offset(this);
 
-	inline function set_offset(value:Single):Single return SvgGradientStop_Ffi.set_offset(this, value);
+	inline function set_offset(value:Single):Single { SvgGradientStop_Ffi.set_offset(this, value); return value; }
 }

@@ -1,6 +1,6 @@
 package flight;
 
-inline function createLottieBezierPath(value:LottieShapePath):Path {
+extern inline function createLottieBezierPath(value:LottieShapePath):Path {
 #if hl
 	return flight._hl._fn.Scene2dFormats.createLottieBezierPath(value);
 #elseif cpp
@@ -11,7 +11,7 @@ inline function createLottieBezierPath(value:LottieShapePath):Path {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function flattenLottieShapePath(out:Dynamic, path:LottieShapePath):Void {
+extern inline function flattenLottieShapePath(out:Dynamic, path:LottieShapePath):Void {
 #if hl
 	flight._hl._fn.Scene2dFormats.flattenLottieShapePath(out, path);
 #elseif cpp
@@ -22,7 +22,7 @@ inline function flattenLottieShapePath(out:Dynamic, path:LottieShapePath):Void {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function unflattenLottieShapePath(template:LottieShapePath, values:Dynamic, valuesLen:Int):LottieShapePath {
+extern inline function unflattenLottieShapePath(template:LottieShapePath, values:Dynamic, valuesLen:Int):LottieShapePath {
 #if hl
 	return flight._hl._fn.Scene2dFormats.unflattenLottieShapePath(template, values, valuesLen);
 #elseif cpp
@@ -33,7 +33,7 @@ inline function unflattenLottieShapePath(template:LottieShapePath, values:Dynami
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function getLottieFeatureNames(out:Dynamic):Void {
+extern inline function getLottieFeatureNames(out:Dynamic):Void {
 #if hl
 	flight._hl._fn.Scene2dFormats.getLottieFeatureNames(out);
 #elseif cpp
@@ -44,7 +44,7 @@ inline function getLottieFeatureNames(out:Dynamic):Void {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function applyAnimationClipToLottieDocument(clip:AnimationClip, time:Float):Void {
+extern inline function applyAnimationClipToLottieDocument(clip:AnimationClip, time:Float):Void {
 #if hl
 	flight._hl._fn.Scene2dFormats.applyAnimationClipToLottieDocument(clip, time);
 #elseif cpp
@@ -55,7 +55,7 @@ inline function applyAnimationClipToLottieDocument(clip:AnimationClip, time:Floa
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function lottieClamp(value:Float, minimum:Float, maximum:Float):Float {
+extern inline function lottieClamp(value:Float, minimum:Float, maximum:Float):Float {
 #if hl
 	return flight._hl._fn.Scene2dFormats.lottieClamp(value, minimum, maximum);
 #elseif cpp
@@ -66,7 +66,7 @@ inline function lottieClamp(value:Float, minimum:Float, maximum:Float):Float {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function lottieDegreesToRadians(value:Float):Float {
+extern inline function lottieDegreesToRadians(value:Float):Float {
 #if hl
 	return flight._hl._fn.Scene2dFormats.lottieDegreesToRadians(value);
 #elseif cpp
@@ -77,7 +77,7 @@ inline function lottieDegreesToRadians(value:Float):Float {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function lottieNumericValue(out:Dynamic, value:Unknown, components:Int):Void {
+extern inline function lottieNumericValue(out:Dynamic, value:Unknown, components:Int):Void {
 #if hl
 	flight._hl._fn.Scene2dFormats.lottieNumericValue(out, value, components);
 #elseif cpp
@@ -88,7 +88,7 @@ inline function lottieNumericValue(out:Dynamic, value:Unknown, components:Int):V
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function lottieRgba(color:Dynamic, colorLen:Int):Int {
+extern inline function lottieRgba(color:Dynamic, colorLen:Int):Int {
 #if hl
 	return flight._hl._fn.Scene2dFormats.lottieRgba(color, colorLen);
 #elseif cpp
@@ -99,7 +99,7 @@ inline function lottieRgba(color:Dynamic, colorLen:Int):Int {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function createLottieGradientMatrix(start:Dynamic, startLen:Int, end:Dynamic, endLen:Int):Matrix {
+extern inline function createLottieGradientMatrix(start:Dynamic, startLen:Int, end:Dynamic, endLen:Int):Matrix {
 #if hl
 	return flight._hl._fn.Scene2dFormats.createLottieGradientMatrix(start, startLen, end, endLen);
 #elseif cpp
@@ -110,7 +110,7 @@ inline function createLottieGradientMatrix(start:Dynamic, startLen:Int, end:Dyna
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function interpolateLottieGradientOpacity(stops:Dynamic, stopsLen:Int, offset:Float):Float {
+extern inline function interpolateLottieGradientOpacity(stops:Dynamic, stopsLen:Int, offset:Float):Float {
 #if hl
 	return flight._hl._fn.Scene2dFormats.interpolateLottieGradientOpacity(stops, stopsLen, offset);
 #elseif cpp
@@ -121,7 +121,7 @@ inline function interpolateLottieGradientOpacity(stops:Dynamic, stopsLen:Int, of
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function parseLottieGradient(values:Dynamic, valuesLen:Int, count:Int, opacity:Float):LottieGradientPaint {
+extern inline function parseLottieGradient(values:Dynamic, valuesLen:Int, count:Int, opacity:Float):LottieGradientPaint {
 #if hl
 	return flight._hl._fn.Scene2dFormats.parseLottieGradient(values, valuesLen, count, opacity);
 #elseif cpp
@@ -132,7 +132,7 @@ inline function parseLottieGradient(values:Dynamic, valuesLen:Int, count:Int, op
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function registerAllLottieHandlers(registry:LottieRegistry):Void {
+extern inline function registerAllLottieHandlers(registry:LottieRegistry):Void {
 #if hl
 	flight._hl._fn.Scene2dFormats.registerAllLottieHandlers(registry);
 #elseif cpp
@@ -143,7 +143,7 @@ inline function registerAllLottieHandlers(registry:LottieRegistry):Void {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function registerLottieLayerHandlers(registry:LottieRegistry):Void {
+extern inline function registerLottieLayerHandlers(registry:LottieRegistry):Void {
 #if hl
 	flight._hl._fn.Scene2dFormats.registerLottieLayerHandlers(registry);
 #elseif cpp
@@ -154,7 +154,7 @@ inline function registerLottieLayerHandlers(registry:LottieRegistry):Void {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function registerLottieMaskHandlers(registry:LottieRegistry):Void {
+extern inline function registerLottieMaskHandlers(registry:LottieRegistry):Void {
 #if hl
 	flight._hl._fn.Scene2dFormats.registerLottieMaskHandlers(registry);
 #elseif cpp
@@ -165,7 +165,7 @@ inline function registerLottieMaskHandlers(registry:LottieRegistry):Void {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function createLottieRegistry():LottieRegistry {
+extern inline function createLottieRegistry():LottieRegistry {
 #if hl
 	return flight._hl._fn.Scene2dFormats.createLottieRegistry();
 #elseif cpp
@@ -176,7 +176,7 @@ inline function createLottieRegistry():LottieRegistry {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function getLottieLayerHandler(registry:LottieRegistry, kind:LottieLayerKind):LottieLayerHandler {
+extern inline function getLottieLayerHandler(registry:LottieRegistry, kind:LottieLayerKind):LottieLayerHandler {
 #if hl
 	return flight._hl._fn.Scene2dFormats.getLottieLayerHandler(registry, kind);
 #elseif cpp
@@ -187,7 +187,7 @@ inline function getLottieLayerHandler(registry:LottieRegistry, kind:LottieLayerK
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function getLottieMaskHandler(registry:LottieRegistry, kind:String):LottieMaskHandler {
+extern inline function getLottieMaskHandler(registry:LottieRegistry, kind:String):LottieMaskHandler {
 #if hl
 	return flight._hl._fn.Scene2dFormats.getLottieMaskHandler(registry, cast kind);
 #elseif cpp
@@ -198,7 +198,7 @@ inline function getLottieMaskHandler(registry:LottieRegistry, kind:String):Lotti
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function getLottieShapeItemHandler(registry:LottieRegistry, kind:String):LottieShapeItemHandler {
+extern inline function getLottieShapeItemHandler(registry:LottieRegistry, kind:String):LottieShapeItemHandler {
 #if hl
 	return flight._hl._fn.Scene2dFormats.getLottieShapeItemHandler(registry, cast kind);
 #elseif cpp
@@ -209,7 +209,7 @@ inline function getLottieShapeItemHandler(registry:LottieRegistry, kind:String):
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function registerLottieLayerHandler(registry:LottieRegistry, kind:LottieLayerKind, handle:LottieLayerHandler):Void {
+extern inline function registerLottieLayerHandler(registry:LottieRegistry, kind:LottieLayerKind, handle:LottieLayerHandler):Void {
 #if hl
 	flight._hl._fn.Scene2dFormats.registerLottieLayerHandler(registry, kind, handle);
 #elseif cpp
@@ -220,7 +220,7 @@ inline function registerLottieLayerHandler(registry:LottieRegistry, kind:LottieL
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function registerLottieMaskHandler(registry:LottieRegistry, kind:String, handle:LottieMaskHandler):Void {
+extern inline function registerLottieMaskHandler(registry:LottieRegistry, kind:String, handle:LottieMaskHandler):Void {
 #if hl
 	flight._hl._fn.Scene2dFormats.registerLottieMaskHandler(registry, cast kind, handle);
 #elseif cpp
@@ -231,7 +231,7 @@ inline function registerLottieMaskHandler(registry:LottieRegistry, kind:String, 
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function registerLottieShapeItemHandler(registry:LottieRegistry, kind:String, handle:LottieShapeItemHandler):Void {
+extern inline function registerLottieShapeItemHandler(registry:LottieRegistry, kind:String, handle:LottieShapeItemHandler):Void {
 #if hl
 	flight._hl._fn.Scene2dFormats.registerLottieShapeItemHandler(registry, cast kind, handle);
 #elseif cpp
@@ -242,7 +242,7 @@ inline function registerLottieShapeItemHandler(registry:LottieRegistry, kind:Str
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function unregisterLottieLayerHandler(registry:LottieRegistry, kind:LottieLayerKind):Bool {
+extern inline function unregisterLottieLayerHandler(registry:LottieRegistry, kind:LottieLayerKind):Bool {
 #if hl
 	return flight._hl._fn.Scene2dFormats.unregisterLottieLayerHandler(registry, kind);
 #elseif cpp
@@ -253,7 +253,7 @@ inline function unregisterLottieLayerHandler(registry:LottieRegistry, kind:Lotti
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function unregisterLottieMaskHandler(registry:LottieRegistry, kind:String):Bool {
+extern inline function unregisterLottieMaskHandler(registry:LottieRegistry, kind:String):Bool {
 #if hl
 	return flight._hl._fn.Scene2dFormats.unregisterLottieMaskHandler(registry, cast kind);
 #elseif cpp
@@ -264,7 +264,7 @@ inline function unregisterLottieMaskHandler(registry:LottieRegistry, kind:String
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function unregisterLottieShapeItemHandler(registry:LottieRegistry, kind:String):Bool {
+extern inline function unregisterLottieShapeItemHandler(registry:LottieRegistry, kind:String):Bool {
 #if hl
 	return flight._hl._fn.Scene2dFormats.unregisterLottieShapeItemHandler(registry, cast kind);
 #elseif cpp
@@ -275,7 +275,7 @@ inline function unregisterLottieShapeItemHandler(registry:LottieRegistry, kind:S
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function isReadableLottie(json:String):Bool {
+extern inline function isReadableLottie(json:String):Bool {
 #if hl
 	return flight._hl._fn.Scene2dFormats.isReadableLottie(cast json);
 #elseif cpp
@@ -286,7 +286,7 @@ inline function isReadableLottie(json:String):Bool {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function parseLottieRequirements(json:String):RequirementSet {
+extern inline function parseLottieRequirements(json:String):RequirementSet {
 #if hl
 	return flight._hl._fn.Scene2dFormats.parseLottieRequirements(cast json);
 #elseif cpp
@@ -297,7 +297,7 @@ inline function parseLottieRequirements(json:String):RequirementSet {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function applyLottieShapeDirection(path:Dynamic, direction:Int):Dynamic {
+extern inline function applyLottieShapeDirection(path:Dynamic, direction:Int):Dynamic {
 #if hl
 	return flight._hl._fn.Scene2dFormats.applyLottieShapeDirection(path, direction);
 #elseif cpp
@@ -308,7 +308,7 @@ inline function applyLottieShapeDirection(path:Dynamic, direction:Int):Dynamic {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function registerLottieShapeItemHandlers(registry:LottieRegistry):Void {
+extern inline function registerLottieShapeItemHandlers(registry:LottieRegistry):Void {
 #if hl
 	flight._hl._fn.Scene2dFormats.registerLottieShapeItemHandlers(registry);
 #elseif cpp
@@ -319,7 +319,7 @@ inline function registerLottieShapeItemHandlers(registry:LottieRegistry):Void {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function mapLottieLineCap(value:Int):flight.CapsStyle {
+extern inline function mapLottieLineCap(value:Int):flight.CapsStyle {
 #if hl
 	return flight._hl._fn.Scene2dFormats.mapLottieLineCap(value);
 #elseif cpp
@@ -330,7 +330,7 @@ inline function mapLottieLineCap(value:Int):flight.CapsStyle {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function mapLottieLineJoin(value:Int):flight.JointStyle {
+extern inline function mapLottieLineJoin(value:Int):flight.JointStyle {
 #if hl
 	return flight._hl._fn.Scene2dFormats.mapLottieLineJoin(value);
 #elseif cpp
@@ -341,7 +341,7 @@ inline function mapLottieLineJoin(value:Int):flight.JointStyle {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function applyAnimationClipToRiveDocument(clip:AnimationClip, time:Float):Void {
+extern inline function applyAnimationClipToRiveDocument(clip:AnimationClip, time:Float):Void {
 #if hl
 	flight._hl._fn.Scene2dFormats.applyAnimationClipToRiveDocument(clip, time);
 #elseif cpp
@@ -352,7 +352,7 @@ inline function applyAnimationClipToRiveDocument(clip:AnimationClip, time:Float)
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function registerRiveAnimationHandlers(registry:RiveImportRegistry):Void {
+extern inline function registerRiveAnimationHandlers(registry:RiveImportRegistry):Void {
 #if hl
 	flight._hl._fn.Scene2dFormats.registerRiveAnimationHandlers(registry);
 #elseif cpp
@@ -363,7 +363,7 @@ inline function registerRiveAnimationHandlers(registry:RiveImportRegistry):Void 
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function createRiveImageSprite(name:String, assetIndex:Int):Dynamic {
+extern inline function createRiveImageSprite(name:String, assetIndex:Int):Dynamic {
 #if hl
 	return flight._hl._fn.Scene2dFormats.createRiveImageSprite(cast name, assetIndex);
 #elseif cpp
@@ -374,7 +374,7 @@ inline function createRiveImageSprite(name:String, assetIndex:Int):Dynamic {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function getRiveImageAssetIndex(node:Dynamic):Int {
+extern inline function getRiveImageAssetIndex(node:Dynamic):Int {
 #if hl
 	return flight._hl._fn.Scene2dFormats.getRiveImageAssetIndex(node);
 #elseif cpp
@@ -385,7 +385,7 @@ inline function getRiveImageAssetIndex(node:Dynamic):Int {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function getRiveImageTexture(node:Dynamic):Dynamic {
+extern inline function getRiveImageTexture(node:Dynamic):Dynamic {
 #if hl
 	return flight._hl._fn.Scene2dFormats.getRiveImageTexture(node);
 #elseif cpp
@@ -396,7 +396,7 @@ inline function getRiveImageTexture(node:Dynamic):Dynamic {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function getRiveNestedArtboardIndex(node:Dynamic):Int {
+extern inline function getRiveNestedArtboardIndex(node:Dynamic):Int {
 #if hl
 	return flight._hl._fn.Scene2dFormats.getRiveNestedArtboardIndex(node);
 #elseif cpp
@@ -407,7 +407,7 @@ inline function getRiveNestedArtboardIndex(node:Dynamic):Int {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function markRiveNestedArtboard(node:Dynamic, artboardIndex:Int):Void {
+extern inline function markRiveNestedArtboard(node:Dynamic, artboardIndex:Int):Void {
 #if hl
 	flight._hl._fn.Scene2dFormats.markRiveNestedArtboard(node, artboardIndex);
 #elseif cpp
@@ -418,7 +418,7 @@ inline function markRiveNestedArtboard(node:Dynamic, artboardIndex:Int):Void {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function registerRiveAssetHandlers(registry:RiveImportRegistry):Void {
+extern inline function registerRiveAssetHandlers(registry:RiveImportRegistry):Void {
 #if hl
 	flight._hl._fn.Scene2dFormats.registerRiveAssetHandlers(registry);
 #elseif cpp
@@ -429,7 +429,7 @@ inline function registerRiveAssetHandlers(registry:RiveImportRegistry):Void {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function registerRiveClippingHandlers(pathBooleanKernel:PathBooleanKernel, registry:RiveImportRegistry):Void {
+extern inline function registerRiveClippingHandlers(pathBooleanKernel:PathBooleanKernel, registry:RiveImportRegistry):Void {
 #if hl
 	flight._hl._fn.Scene2dFormats.registerRiveClippingHandlers(pathBooleanKernel, registry);
 #elseif cpp
@@ -440,7 +440,7 @@ inline function registerRiveClippingHandlers(pathBooleanKernel:PathBooleanKernel
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function getRiveCorePropertyFieldType(key:Int):RiveFieldType {
+extern inline function getRiveCorePropertyFieldType(key:Int):RiveFieldType {
 #if hl
 	return flight._hl._fn.Scene2dFormats.getRiveCorePropertyFieldType(key);
 #elseif cpp
@@ -451,7 +451,7 @@ inline function getRiveCorePropertyFieldType(key:Int):RiveFieldType {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function isRiveCoreBytesProperty(key:Int):Bool {
+extern inline function isRiveCoreBytesProperty(key:Int):Bool {
 #if hl
 	return flight._hl._fn.Scene2dFormats.isRiveCoreBytesProperty(key);
 #elseif cpp
@@ -462,7 +462,7 @@ inline function isRiveCoreBytesProperty(key:Int):Bool {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function isReadableRive(source:Dynamic, sourceLen:Int):Bool {
+extern inline function isReadableRive(source:Dynamic, sourceLen:Int):Bool {
 #if hl
 	return flight._hl._fn.Scene2dFormats.isReadableRive(source, sourceLen);
 #elseif cpp
@@ -473,7 +473,7 @@ inline function isReadableRive(source:Dynamic, sourceLen:Int):Bool {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function getRiveCoreTypeName(typeKey:Int):String {
+extern inline function getRiveCoreTypeName(typeKey:Int):String {
 #if hl
 	return cast flight._hl._fn.Scene2dFormats.getRiveCoreTypeName(typeKey);
 #elseif cpp
@@ -484,7 +484,7 @@ inline function getRiveCoreTypeName(typeKey:Int):String {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function getRiveCoreTypeParent(typeKey:Int):Int {
+extern inline function getRiveCoreTypeParent(typeKey:Int):haxe.Int64 {
 #if hl
 	return flight._hl._fn.Scene2dFormats.getRiveCoreTypeParent(typeKey);
 #elseif cpp
@@ -495,7 +495,7 @@ inline function getRiveCoreTypeParent(typeKey:Int):Int {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function isRiveCoreTypeDerivedFrom(typeKey:Int, ancestorTypeKey:Int):Bool {
+extern inline function isRiveCoreTypeDerivedFrom(typeKey:Int, ancestorTypeKey:Int):Bool {
 #if hl
 	return flight._hl._fn.Scene2dFormats.isRiveCoreTypeDerivedFrom(typeKey, ancestorTypeKey);
 #elseif cpp
@@ -506,7 +506,7 @@ inline function isRiveCoreTypeDerivedFrom(typeKey:Int, ancestorTypeKey:Int):Bool
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function registerRiveDrawOrderHandlers(registry:RiveImportRegistry):Void {
+extern inline function registerRiveDrawOrderHandlers(registry:RiveImportRegistry):Void {
 #if hl
 	flight._hl._fn.Scene2dFormats.registerRiveDrawOrderHandlers(registry);
 #elseif cpp
@@ -517,7 +517,7 @@ inline function registerRiveDrawOrderHandlers(registry:RiveImportRegistry):Void 
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function registerAllRiveHandlers(pathBooleanKernel:PathBooleanKernel, registry:RiveImportRegistry):Void {
+extern inline function registerAllRiveHandlers(pathBooleanKernel:PathBooleanKernel, registry:RiveImportRegistry):Void {
 #if hl
 	flight._hl._fn.Scene2dFormats.registerAllRiveHandlers(pathBooleanKernel, registry);
 #elseif cpp
@@ -528,7 +528,7 @@ inline function registerAllRiveHandlers(pathBooleanKernel:PathBooleanKernel, reg
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function createRiveImportRegistry():RiveImportRegistry {
+extern inline function createRiveImportRegistry():RiveImportRegistry {
 #if hl
 	return flight._hl._fn.Scene2dFormats.createRiveImportRegistry();
 #elseif cpp
@@ -539,7 +539,7 @@ inline function createRiveImportRegistry():RiveImportRegistry {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function importRiveCoreObjectAsData():Dynamic {
+extern inline function importRiveCoreObjectAsData():Dynamic {
 #if hl
 	return flight._hl._fn.Scene2dFormats.importRiveCoreObjectAsData();
 #elseif cpp
@@ -550,7 +550,7 @@ inline function importRiveCoreObjectAsData():Dynamic {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function registerRiveLayoutHandlers(registry:RiveImportRegistry):Void {
+extern inline function registerRiveLayoutHandlers(registry:RiveImportRegistry):Void {
 #if hl
 	flight._hl._fn.Scene2dFormats.registerRiveLayoutHandlers(registry);
 #elseif cpp
@@ -561,7 +561,7 @@ inline function registerRiveLayoutHandlers(registry:RiveImportRegistry):Void {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function createRiveImportRegistryFromOptions(options:RiveImportOptions, pathBooleanKernel:PathBooleanKernel):RiveImportRegistry {
+extern inline function createRiveImportRegistryFromOptions(options:RiveImportOptions, pathBooleanKernel:PathBooleanKernel):RiveImportRegistry {
 #if hl
 	return flight._hl._fn.Scene2dFormats.createRiveImportRegistryFromOptions(options, pathBooleanKernel);
 #elseif cpp
@@ -572,7 +572,7 @@ inline function createRiveImportRegistryFromOptions(options:RiveImportOptions, p
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function applyRiveImportOptions(options:RiveImportOptions, pathBooleanKernel:PathBooleanKernel, registry:RiveImportRegistry):Void {
+extern inline function applyRiveImportOptions(options:RiveImportOptions, pathBooleanKernel:PathBooleanKernel, registry:RiveImportRegistry):Void {
 #if hl
 	flight._hl._fn.Scene2dFormats.applyRiveImportOptions(options, pathBooleanKernel, registry);
 #elseif cpp
@@ -583,7 +583,7 @@ inline function applyRiveImportOptions(options:RiveImportOptions, pathBooleanKer
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function registerRiveShapeHandlers(registry:RiveImportRegistry):Void {
+extern inline function registerRiveShapeHandlers(registry:RiveImportRegistry):Void {
 #if hl
 	flight._hl._fn.Scene2dFormats.registerRiveShapeHandlers(registry);
 #elseif cpp
@@ -594,7 +594,7 @@ inline function registerRiveShapeHandlers(registry:RiveImportRegistry):Void {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function appendRiveShapeGeometry(shape:Dynamic, paths:Dynamic, pathsLen:Int):Void {
+extern inline function appendRiveShapeGeometry(shape:Dynamic, paths:Dynamic, pathsLen:Int):Void {
 #if hl
 	flight._hl._fn.Scene2dFormats.appendRiveShapeGeometry(shape, paths, pathsLen);
 #elseif cpp
@@ -605,7 +605,7 @@ inline function appendRiveShapeGeometry(shape:Dynamic, paths:Dynamic, pathsLen:I
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function registerRivePaintHandlers(registry:RiveImportRegistry):Void {
+extern inline function registerRivePaintHandlers(registry:RiveImportRegistry):Void {
 #if hl
 	flight._hl._fn.Scene2dFormats.registerRivePaintHandlers(registry);
 #elseif cpp
@@ -616,7 +616,7 @@ inline function registerRivePaintHandlers(registry:RiveImportRegistry):Void {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function registerRivePathHandlers(registry:RiveImportRegistry):Void {
+extern inline function registerRivePathHandlers(registry:RiveImportRegistry):Void {
 #if hl
 	flight._hl._fn.Scene2dFormats.registerRivePathHandlers(registry);
 #elseif cpp
@@ -627,7 +627,7 @@ inline function registerRivePathHandlers(registry:RiveImportRegistry):Void {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function createRiveSkeleton2d(artboard:RiveArtboardGraph):RiveSkeleton2DImport {
+extern inline function createRiveSkeleton2d(artboard:RiveArtboardGraph):RiveSkeleton2DImport {
 #if hl
 	return flight._hl._fn.Scene2dFormats.createRiveSkeleton2d(artboard);
 #elseif cpp
@@ -638,7 +638,7 @@ inline function createRiveSkeleton2d(artboard:RiveArtboardGraph):RiveSkeleton2DI
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function registerRiveSkeletonHandlers(registry:RiveImportRegistry):Void {
+extern inline function registerRiveSkeletonHandlers(registry:RiveImportRegistry):Void {
 #if hl
 	flight._hl._fn.Scene2dFormats.registerRiveSkeletonHandlers(registry);
 #elseif cpp
@@ -649,7 +649,7 @@ inline function registerRiveSkeletonHandlers(registry:RiveImportRegistry):Void {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function registerRiveSoloHandlers(registry:RiveImportRegistry):Void {
+extern inline function registerRiveSoloHandlers(registry:RiveImportRegistry):Void {
 #if hl
 	flight._hl._fn.Scene2dFormats.registerRiveSoloHandlers(registry);
 #elseif cpp
@@ -660,7 +660,7 @@ inline function registerRiveSoloHandlers(registry:RiveImportRegistry):Void {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function registerRiveStateMachineHandlers(registry:RiveImportRegistry):Void {
+extern inline function registerRiveStateMachineHandlers(registry:RiveImportRegistry):Void {
 #if hl
 	flight._hl._fn.Scene2dFormats.registerRiveStateMachineHandlers(registry);
 #elseif cpp
@@ -671,7 +671,7 @@ inline function registerRiveStateMachineHandlers(registry:RiveImportRegistry):Vo
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function registerRiveTextHandlers(registry:RiveImportRegistry):Void {
+extern inline function registerRiveTextHandlers(registry:RiveImportRegistry):Void {
 #if hl
 	flight._hl._fn.Scene2dFormats.registerRiveTextHandlers(registry);
 #elseif cpp
@@ -682,7 +682,7 @@ inline function registerRiveTextHandlers(registry:RiveImportRegistry):Void {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function hasUnmeasurableSvgText(target:Dynamic):Bool {
+extern inline function hasUnmeasurableSvgText(target:Dynamic):Bool {
 #if hl
 	return flight._hl._fn.Scene2dFormats.hasUnmeasurableSvgText(target);
 #elseif cpp
@@ -693,7 +693,7 @@ inline function hasUnmeasurableSvgText(target:Dynamic):Bool {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function usesSvgObjectBoundingBoxUnits(element:Dynamic):Bool {
+extern inline function usesSvgObjectBoundingBoxUnits(element:Dynamic):Bool {
 #if hl
 	return flight._hl._fn.Scene2dFormats.usesSvgObjectBoundingBoxUnits(element);
 #elseif cpp
@@ -704,7 +704,7 @@ inline function usesSvgObjectBoundingBoxUnits(element:Dynamic):Bool {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function registerSvgClipHandlers(registry:SvgRegistry):Void {
+extern inline function registerSvgClipHandlers(registry:SvgRegistry):Void {
 #if hl
 	flight._hl._fn.Scene2dFormats.registerSvgClipHandlers(registry);
 #elseif cpp
@@ -715,7 +715,7 @@ inline function registerSvgClipHandlers(registry:SvgRegistry):Void {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function parseSvgColor(value:String):SvgColor {
+extern inline function parseSvgColor(value:String):SvgColor {
 #if hl
 	return flight._hl._fn.Scene2dFormats.parseSvgColor(cast value);
 #elseif cpp
@@ -726,7 +726,7 @@ inline function parseSvgColor(value:String):SvgColor {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function resolveSvgColor(value:String, currentColor:String):SvgColor {
+extern inline function resolveSvgColor(value:String, currentColor:String):SvgColor {
 #if hl
 	return flight._hl._fn.Scene2dFormats.resolveSvgColor(cast value, cast currentColor);
 #elseif cpp
@@ -737,7 +737,7 @@ inline function resolveSvgColor(value:String, currentColor:String):SvgColor {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function registerSvgElementHandlers(registry:SvgRegistry):Void {
+extern inline function registerSvgElementHandlers(registry:SvgRegistry):Void {
 #if hl
 	flight._hl._fn.Scene2dFormats.registerSvgElementHandlers(registry);
 #elseif cpp
@@ -748,7 +748,7 @@ inline function registerSvgElementHandlers(registry:SvgRegistry):Void {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function createSvgGeometryPath(element:XmlElement, winding:flight.PathWinding):Path {
+extern inline function createSvgGeometryPath(element:XmlElement, winding:flight.PathWinding):Path {
 #if hl
 	return flight._hl._fn.Scene2dFormats.createSvgGeometryPath(element, winding);
 #elseif cpp
@@ -759,7 +759,7 @@ inline function createSvgGeometryPath(element:XmlElement, winding:flight.PathWin
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function createSvgGradientMatrix(gradient:SvgGradient, path:Path):Matrix {
+extern inline function createSvgGradientMatrix(gradient:SvgGradient, path:Path):Matrix {
 #if hl
 	return flight._hl._fn.Scene2dFormats.createSvgGradientMatrix(gradient, path);
 #elseif cpp
@@ -770,7 +770,7 @@ inline function createSvgGradientMatrix(gradient:SvgGradient, path:Path):Matrix 
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function hasZeroAreaSvgGradientBox(gradient:SvgGradient, path:Path):Bool {
+extern inline function hasZeroAreaSvgGradientBox(gradient:SvgGradient, path:Path):Bool {
 #if hl
 	return flight._hl._fn.Scene2dFormats.hasZeroAreaSvgGradientBox(gradient, path);
 #elseif cpp
@@ -781,7 +781,7 @@ inline function hasZeroAreaSvgGradientBox(gradient:SvgGradient, path:Path):Bool 
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function registerAllSvgHandlers(registry:SvgRegistry):Void {
+extern inline function registerAllSvgHandlers(registry:SvgRegistry):Void {
 #if hl
 	flight._hl._fn.Scene2dFormats.registerAllSvgHandlers(registry);
 #elseif cpp
@@ -792,7 +792,7 @@ inline function registerAllSvgHandlers(registry:SvgRegistry):Void {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function createSvgRegistry():SvgRegistry {
+extern inline function createSvgRegistry():SvgRegistry {
 #if hl
 	return flight._hl._fn.Scene2dFormats.createSvgRegistry();
 #elseif cpp
@@ -803,7 +803,7 @@ inline function createSvgRegistry():SvgRegistry {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function getSvgClipHandler(registry:SvgRegistry, kind:String):SvgClipHandler {
+extern inline function getSvgClipHandler(registry:SvgRegistry, kind:String):SvgClipHandler {
 #if hl
 	return flight._hl._fn.Scene2dFormats.getSvgClipHandler(registry, cast kind);
 #elseif cpp
@@ -814,7 +814,7 @@ inline function getSvgClipHandler(registry:SvgRegistry, kind:String):SvgClipHand
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function getSvgElementHandler(registry:SvgRegistry, kind:String):SvgElementHandler {
+extern inline function getSvgElementHandler(registry:SvgRegistry, kind:String):SvgElementHandler {
 #if hl
 	return flight._hl._fn.Scene2dFormats.getSvgElementHandler(registry, cast kind);
 #elseif cpp
@@ -825,7 +825,7 @@ inline function getSvgElementHandler(registry:SvgRegistry, kind:String):SvgEleme
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function registerSvgClipHandler(registry:SvgRegistry, kind:String, handle:SvgClipHandler):Void {
+extern inline function registerSvgClipHandler(registry:SvgRegistry, kind:String, handle:SvgClipHandler):Void {
 #if hl
 	flight._hl._fn.Scene2dFormats.registerSvgClipHandler(registry, cast kind, handle);
 #elseif cpp
@@ -836,7 +836,7 @@ inline function registerSvgClipHandler(registry:SvgRegistry, kind:String, handle
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function registerSvgElementHandler(registry:SvgRegistry, kind:String, handle:SvgElementHandler):Void {
+extern inline function registerSvgElementHandler(registry:SvgRegistry, kind:String, handle:SvgElementHandler):Void {
 #if hl
 	flight._hl._fn.Scene2dFormats.registerSvgElementHandler(registry, cast kind, handle);
 #elseif cpp
@@ -847,7 +847,7 @@ inline function registerSvgElementHandler(registry:SvgRegistry, kind:String, han
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function unregisterSvgClipHandler(registry:SvgRegistry, kind:String):Bool {
+extern inline function unregisterSvgClipHandler(registry:SvgRegistry, kind:String):Bool {
 #if hl
 	return flight._hl._fn.Scene2dFormats.unregisterSvgClipHandler(registry, cast kind);
 #elseif cpp
@@ -858,7 +858,7 @@ inline function unregisterSvgClipHandler(registry:SvgRegistry, kind:String):Bool
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function unregisterSvgElementHandler(registry:SvgRegistry, kind:String):Bool {
+extern inline function unregisterSvgElementHandler(registry:SvgRegistry, kind:String):Bool {
 #if hl
 	return flight._hl._fn.Scene2dFormats.unregisterSvgElementHandler(registry, cast kind);
 #elseif cpp
@@ -869,7 +869,7 @@ inline function unregisterSvgElementHandler(registry:SvgRegistry, kind:String):B
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function isReadableSvg(source:String):Bool {
+extern inline function isReadableSvg(source:String):Bool {
 #if hl
 	return flight._hl._fn.Scene2dFormats.isReadableSvg(cast source);
 #elseif cpp
@@ -880,7 +880,7 @@ inline function isReadableSvg(source:String):Bool {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function parseSvgRequirements(source:String):RequirementSet {
+extern inline function parseSvgRequirements(source:String):RequirementSet {
 #if hl
 	return flight._hl._fn.Scene2dFormats.parseSvgRequirements(cast source);
 #elseif cpp
@@ -891,7 +891,7 @@ inline function parseSvgRequirements(source:String):RequirementSet {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function collectCssRules(out:Dynamic, root:XmlElement):Void {
+extern inline function collectCssRules(out:Dynamic, root:XmlElement):Void {
 #if hl
 	flight._hl._fn.Scene2dFormats.collectCssRules(out, root);
 #elseif cpp
@@ -902,7 +902,7 @@ inline function collectCssRules(out:Dynamic, root:XmlElement):Void {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function resolveSvgWinding(value:String, fallback:flight.PathWinding):flight.PathWinding {
+extern inline function resolveSvgWinding(value:String, fallback:flight.PathWinding):flight.PathWinding {
 #if hl
 	return flight._hl._fn.Scene2dFormats.resolveSvgWinding(cast value, fallback);
 #elseif cpp
@@ -913,7 +913,7 @@ inline function resolveSvgWinding(value:String, fallback:flight.PathWinding):fli
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function createSvgViewBoxMatrix(viewBox:Dynamic, viewBoxLen:Int, viewport:SvgViewport, preserveAspectRatioValue:String):Matrix {
+extern inline function createSvgViewBoxMatrix(viewBox:Dynamic, viewBoxLen:Int, viewport:SvgViewport, preserveAspectRatioValue:String):Matrix {
 #if hl
 	return flight._hl._fn.Scene2dFormats.createSvgViewBoxMatrix(viewBox, viewBoxLen, viewport, cast preserveAspectRatioValue);
 #elseif cpp
@@ -924,7 +924,7 @@ inline function createSvgViewBoxMatrix(viewBox:Dynamic, viewBoxLen:Int, viewport
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function createSvgViewportMatrix(element:XmlElement, viewport:SvgViewportOptions):Matrix {
+extern inline function createSvgViewportMatrix(element:XmlElement, viewport:SvgViewportOptions):Matrix {
 #if hl
 	return flight._hl._fn.Scene2dFormats.createSvgViewportMatrix(element, viewport);
 #elseif cpp
@@ -935,7 +935,7 @@ inline function createSvgViewportMatrix(element:XmlElement, viewport:SvgViewport
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function applySvgTransform(target:Dynamic, matrix:Matrix):Void {
+extern inline function applySvgTransform(target:Dynamic, matrix:Matrix):Void {
 #if hl
 	flight._hl._fn.Scene2dFormats.applySvgTransform(target, matrix);
 #elseif cpp
@@ -946,7 +946,7 @@ inline function applySvgTransform(target:Dynamic, matrix:Matrix):Void {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function assignSvgTransform(target:Dynamic, transform:Transform2D):Void {
+extern inline function assignSvgTransform(target:Dynamic, transform:Transform2D):Void {
 #if hl
 	flight._hl._fn.Scene2dFormats.assignSvgTransform(target, transform);
 #elseif cpp
@@ -957,7 +957,7 @@ inline function assignSvgTransform(target:Dynamic, transform:Transform2D):Void {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function multiplySvgMatrices(out:Matrix, a:Matrix, b:Matrix):Void {
+extern inline function multiplySvgMatrices(out:Matrix, a:Matrix, b:Matrix):Void {
 #if hl
 	flight._hl._fn.Scene2dFormats.multiplySvgMatrices(out, a, b);
 #elseif cpp
@@ -968,7 +968,7 @@ inline function multiplySvgMatrices(out:Matrix, a:Matrix, b:Matrix):Void {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function parseSvgTransform(value:String):Matrix {
+extern inline function parseSvgTransform(value:String):Matrix {
 #if hl
 	return flight._hl._fn.Scene2dFormats.parseSvgTransform(cast value);
 #elseif cpp
@@ -979,7 +979,7 @@ inline function parseSvgTransform(value:String):Matrix {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function parseSvgCoordinate(value:String, fallback:Float):Float {
+extern inline function parseSvgCoordinate(value:String, fallback:Float):Float {
 #if hl
 	return flight._hl._fn.Scene2dFormats.parseSvgCoordinate(cast value, fallback);
 #elseif cpp
@@ -990,7 +990,7 @@ inline function parseSvgCoordinate(value:String, fallback:Float):Float {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function parseSvgCssNumber(value:String, fallback:Float):Float {
+extern inline function parseSvgCssNumber(value:String, fallback:Float):Float {
 #if hl
 	return flight._hl._fn.Scene2dFormats.parseSvgCssNumber(cast value, fallback);
 #elseif cpp
@@ -1001,7 +1001,7 @@ inline function parseSvgCssNumber(value:String, fallback:Float):Float {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function parseSvgLength(value:String, fallback:Float):Float {
+extern inline function parseSvgLength(value:String, fallback:Float):Float {
 #if hl
 	return flight._hl._fn.Scene2dFormats.parseSvgLength(cast value, fallback);
 #elseif cpp
@@ -1012,7 +1012,7 @@ inline function parseSvgLength(value:String, fallback:Float):Float {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function parseSvgNumberList(value:String):Dynamic {
+extern inline function parseSvgNumberList(value:String):Dynamic {
 #if hl
 	return flight._hl._fn.Scene2dFormats.parseSvgNumberList(cast value);
 #elseif cpp
@@ -1023,7 +1023,7 @@ inline function parseSvgNumberList(value:String):Dynamic {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function parseUrlReference(value:String):String {
+extern inline function parseUrlReference(value:String):String {
 #if hl
 	return cast flight._hl._fn.Scene2dFormats.parseUrlReference(cast value);
 #elseif cpp
@@ -1034,7 +1034,7 @@ inline function parseUrlReference(value:String):String {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function svgFirstNumber(value:String, fallback:Float):Float {
+extern inline function svgFirstNumber(value:String, fallback:Float):Float {
 #if hl
 	return flight._hl._fn.Scene2dFormats.svgFirstNumber(cast value, fallback);
 #elseif cpp
@@ -1045,7 +1045,7 @@ inline function svgFirstNumber(value:String, fallback:Float):Float {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function svgLocalName(name:String):String {
+extern inline function svgLocalName(name:String):String {
 #if hl
 	return cast flight._hl._fn.Scene2dFormats.svgLocalName(cast name);
 #elseif cpp
@@ -1056,7 +1056,7 @@ inline function svgLocalName(name:String):String {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function svgNumberAttribute(element:XmlElement, name:String, fallback:Float):Float {
+extern inline function svgNumberAttribute(element:XmlElement, name:String, fallback:Float):Float {
 #if hl
 	return flight._hl._fn.Scene2dFormats.svgNumberAttribute(element, cast name, fallback);
 #elseif cpp
@@ -1067,7 +1067,7 @@ inline function svgNumberAttribute(element:XmlElement, name:String, fallback:Flo
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function svgOptionalNumberAttribute(element:XmlElement, name:String):Float {
+extern inline function svgOptionalNumberAttribute(element:XmlElement, name:String):Float {
 #if hl
 	return flight._hl._fn.Scene2dFormats.svgOptionalNumberAttribute(element, cast name);
 #elseif cpp
@@ -1078,7 +1078,7 @@ inline function svgOptionalNumberAttribute(element:XmlElement, name:String):Floa
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function visitSvgElements(element:XmlElement, visitorFn:Dynamic, visitorCtx:Dynamic):Void {
+extern inline function visitSvgElements(element:XmlElement, visitorFn:Dynamic, visitorCtx:Dynamic):Void {
 #if hl
 	flight._hl._fn.Scene2dFormats.visitSvgElements(element, visitorFn, visitorCtx);
 #elseif cpp
@@ -1089,7 +1089,7 @@ inline function visitSvgElements(element:XmlElement, visitorFn:Dynamic, visitorC
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function freeLottieShapePath(ptr:LottieShapePath):Void {
+extern inline function freeLottieShapePath(ptr:LottieShapePath):Void {
 #if hl
 	flight._hl._fn.Scene2dFormats.freeLottieShapePath(ptr);
 #elseif cpp
@@ -1100,7 +1100,7 @@ inline function freeLottieShapePath(ptr:LottieShapePath):Void {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function freeLottieGradientPaint(ptr:LottieGradientPaint):Void {
+extern inline function freeLottieGradientPaint(ptr:LottieGradientPaint):Void {
 #if hl
 	flight._hl._fn.Scene2dFormats.freeLottieGradientPaint(ptr);
 #elseif cpp
@@ -1111,7 +1111,7 @@ inline function freeLottieGradientPaint(ptr:LottieGradientPaint):Void {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function freeLottieRegistry(ptr:LottieRegistry):Void {
+extern inline function freeLottieRegistry(ptr:LottieRegistry):Void {
 #if hl
 	flight._hl._fn.Scene2dFormats.freeLottieRegistry(ptr);
 #elseif cpp
@@ -1122,7 +1122,7 @@ inline function freeLottieRegistry(ptr:LottieRegistry):Void {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function freeLottieLayerHandler(ptr:LottieLayerHandler):Void {
+extern inline function freeLottieLayerHandler(ptr:LottieLayerHandler):Void {
 #if hl
 	flight._hl._fn.Scene2dFormats.freeLottieLayerHandler(ptr);
 #elseif cpp
@@ -1133,7 +1133,7 @@ inline function freeLottieLayerHandler(ptr:LottieLayerHandler):Void {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function freeLottieMaskHandler(ptr:LottieMaskHandler):Void {
+extern inline function freeLottieMaskHandler(ptr:LottieMaskHandler):Void {
 #if hl
 	flight._hl._fn.Scene2dFormats.freeLottieMaskHandler(ptr);
 #elseif cpp
@@ -1144,7 +1144,7 @@ inline function freeLottieMaskHandler(ptr:LottieMaskHandler):Void {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function freeLottieShapeItemHandler(ptr:LottieShapeItemHandler):Void {
+extern inline function freeLottieShapeItemHandler(ptr:LottieShapeItemHandler):Void {
 #if hl
 	flight._hl._fn.Scene2dFormats.freeLottieShapeItemHandler(ptr);
 #elseif cpp
@@ -1155,7 +1155,7 @@ inline function freeLottieShapeItemHandler(ptr:LottieShapeItemHandler):Void {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function freeRequirementSet(ptr:RequirementSet):Void {
+extern inline function freeRequirementSet(ptr:RequirementSet):Void {
 #if hl
 	flight._hl._fn.Scene2dFormats.freeRequirementSet(ptr);
 #elseif cpp
@@ -1166,7 +1166,7 @@ inline function freeRequirementSet(ptr:RequirementSet):Void {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function freeRiveFieldType(ptr:RiveFieldType):Void {
+extern inline function freeRiveFieldType(ptr:RiveFieldType):Void {
 #if hl
 	flight._hl._fn.Scene2dFormats.freeRiveFieldType(ptr);
 #elseif cpp
@@ -1177,7 +1177,7 @@ inline function freeRiveFieldType(ptr:RiveFieldType):Void {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function freeRiveImportRegistry(ptr:RiveImportRegistry):Void {
+extern inline function freeRiveImportRegistry(ptr:RiveImportRegistry):Void {
 #if hl
 	flight._hl._fn.Scene2dFormats.freeRiveImportRegistry(ptr);
 #elseif cpp
@@ -1188,7 +1188,7 @@ inline function freeRiveImportRegistry(ptr:RiveImportRegistry):Void {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function freeRiveSkeleton2Dimport(ptr:RiveSkeleton2DImport):Void {
+extern inline function freeRiveSkeleton2Dimport(ptr:RiveSkeleton2DImport):Void {
 #if hl
 	flight._hl._fn.Scene2dFormats.freeRiveSkeleton2Dimport(ptr);
 #elseif cpp
@@ -1199,7 +1199,7 @@ inline function freeRiveSkeleton2Dimport(ptr:RiveSkeleton2DImport):Void {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function freeSvgColor(ptr:SvgColor):Void {
+extern inline function freeSvgColor(ptr:SvgColor):Void {
 #if hl
 	flight._hl._fn.Scene2dFormats.freeSvgColor(ptr);
 #elseif cpp
@@ -1210,7 +1210,7 @@ inline function freeSvgColor(ptr:SvgColor):Void {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function freeSvgRegistry(ptr:SvgRegistry):Void {
+extern inline function freeSvgRegistry(ptr:SvgRegistry):Void {
 #if hl
 	flight._hl._fn.Scene2dFormats.freeSvgRegistry(ptr);
 #elseif cpp
@@ -1221,7 +1221,7 @@ inline function freeSvgRegistry(ptr:SvgRegistry):Void {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function freeSvgClipHandler(ptr:SvgClipHandler):Void {
+extern inline function freeSvgClipHandler(ptr:SvgClipHandler):Void {
 #if hl
 	flight._hl._fn.Scene2dFormats.freeSvgClipHandler(ptr);
 #elseif cpp
@@ -1232,7 +1232,7 @@ inline function freeSvgClipHandler(ptr:SvgClipHandler):Void {
 	#error "flight.Scene2dFormats: no backend for this target."
 #end
 }
-inline function freeSvgElementHandler(ptr:SvgElementHandler):Void {
+extern inline function freeSvgElementHandler(ptr:SvgElementHandler):Void {
 #if hl
 	flight._hl._fn.Scene2dFormats.freeSvgElementHandler(ptr);
 #elseif cpp

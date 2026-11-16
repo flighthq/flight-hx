@@ -16,20 +16,20 @@ abstract CollisionAabb2D(cpp.Star<cpp.Void>) {
 
 	inline function get_minX():Single return CollisionAabb2D_Ffi.get_minX(this);
 
-	inline function set_minX(value:Single):Single return CollisionAabb2D_Ffi.set_minX(this, value);
+	inline function set_minX(value:Single):Single { CollisionAabb2D_Ffi.set_minX(this, value); return value; }
 	public var minY(get, set):Single;
 
 	inline function get_minY():Single return CollisionAabb2D_Ffi.get_minY(this);
 
-	inline function set_minY(value:Single):Single return CollisionAabb2D_Ffi.set_minY(this, value);
+	inline function set_minY(value:Single):Single { CollisionAabb2D_Ffi.set_minY(this, value); return value; }
 	public var maxX(get, set):Single;
 
 	inline function get_maxX():Single return CollisionAabb2D_Ffi.get_maxX(this);
 
-	inline function set_maxX(value:Single):Single return CollisionAabb2D_Ffi.set_maxX(this, value);
+	inline function set_maxX(value:Single):Single { CollisionAabb2D_Ffi.set_maxX(this, value); return value; }
 	public var maxY(get, set):Single;
 
 	inline function get_maxY():Single return CollisionAabb2D_Ffi.get_maxY(this);
 
-	inline function set_maxY(value:Single):Single return CollisionAabb2D_Ffi.set_maxY(this, value);
+	inline function set_maxY(value:Single):Single { CollisionAabb2D_Ffi.set_maxY(this, value); return value; }
 }

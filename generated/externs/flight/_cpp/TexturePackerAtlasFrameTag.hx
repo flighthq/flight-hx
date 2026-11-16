@@ -12,10 +12,10 @@ abstract TexturePackerAtlasFrameTag(cpp.Star<cpp.Void>) {
 
 	inline function get_from():Int return TexturePackerAtlasFrameTag_Ffi.get_from(this);
 
-	inline function set_from(value:Int):Int return TexturePackerAtlasFrameTag_Ffi.set_from(this, value);
+	inline function set_from(value:Int):Int { TexturePackerAtlasFrameTag_Ffi.set_from(this, value); return value; }
 	public var to(get, set):Int;
 
 	inline function get_to():Int return TexturePackerAtlasFrameTag_Ffi.get_to(this);
 
-	inline function set_to(value:Int):Int return TexturePackerAtlasFrameTag_Ffi.set_to(this, value);
+	inline function set_to(value:Int):Int { TexturePackerAtlasFrameTag_Ffi.set_to(this, value); return value; }
 }

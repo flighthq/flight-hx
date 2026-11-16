@@ -1,6 +1,6 @@
 package flight;
 
-inline function createScene3dHit():Scene3DHit {
+extern inline function createScene3dHit():Scene3DHit {
 #if hl
 	return flight._hl._fn.Picking.createScene3dHit();
 #elseif cpp
@@ -11,7 +11,7 @@ inline function createScene3dHit():Scene3DHit {
 	#error "flight.Picking: no backend for this target."
 #end
 }
-inline function pickScene3d(out:Scene3DHit, scene:Dynamic, camera:Camera3D, screenX:Float, screenY:Float, options:Scene3DPickOptions):Bool {
+extern inline function pickScene3d(out:Scene3DHit, scene:Dynamic, camera:Camera3D, screenX:Float, screenY:Float, options:Scene3DPickOptions):Bool {
 #if hl
 	return flight._hl._fn.Picking.pickScene3d(out, scene, camera, screenX, screenY, options);
 #elseif cpp
@@ -22,7 +22,7 @@ inline function pickScene3d(out:Scene3DHit, scene:Dynamic, camera:Camera3D, scre
 	#error "flight.Picking: no backend for this target."
 #end
 }
-inline function pickScene3dAll(outArray:Dynamic, scene:Dynamic, camera:Camera3D, screenX:Float, screenY:Float, options:Scene3DPickOptions):Void {
+extern inline function pickScene3dAll(outArray:Dynamic, scene:Dynamic, camera:Camera3D, screenX:Float, screenY:Float, options:Scene3DPickOptions):Void {
 #if hl
 	flight._hl._fn.Picking.pickScene3dAll(outArray, scene, camera, screenX, screenY, options);
 #elseif cpp
@@ -33,7 +33,7 @@ inline function pickScene3dAll(outArray:Dynamic, scene:Dynamic, camera:Camera3D,
 	#error "flight.Picking: no backend for this target."
 #end
 }
-inline function pickScene3dAllWithRay3d(outArray:Dynamic, scene:Dynamic, ray:Ray3D, options:Scene3DPickOptions):Void {
+extern inline function pickScene3dAllWithRay3d(outArray:Dynamic, scene:Dynamic, ray:Ray3D, options:Scene3DPickOptions):Void {
 #if hl
 	flight._hl._fn.Picking.pickScene3dAllWithRay3d(outArray, scene, ray, options);
 #elseif cpp
@@ -44,7 +44,7 @@ inline function pickScene3dAllWithRay3d(outArray:Dynamic, scene:Dynamic, ray:Ray
 	#error "flight.Picking: no backend for this target."
 #end
 }
-inline function pickScene3dWithRay3d(out:Scene3DHit, scene:Dynamic, ray:Ray3D, options:Scene3DPickOptions):Bool {
+extern inline function pickScene3dWithRay3d(out:Scene3DHit, scene:Dynamic, ray:Ray3D, options:Scene3DPickOptions):Bool {
 #if hl
 	return flight._hl._fn.Picking.pickScene3dWithRay3d(out, scene, ray, options);
 #elseif cpp
@@ -55,7 +55,7 @@ inline function pickScene3dWithRay3d(out:Scene3DHit, scene:Dynamic, ray:Ray3D, o
 	#error "flight.Picking: no backend for this target."
 #end
 }
-inline function getScene3dHitMaterial(hit:Scene3DHit):Dynamic {
+extern inline function getScene3dHitMaterial(hit:Scene3DHit):Dynamic {
 #if hl
 	return flight._hl._fn.Picking.getScene3dHitMaterial(hit);
 #elseif cpp
@@ -66,7 +66,7 @@ inline function getScene3dHitMaterial(hit:Scene3DHit):Dynamic {
 	#error "flight.Picking: no backend for this target."
 #end
 }
-inline function getScene3dHitSubsetIndex(hit:Scene3DHit):Int {
+extern inline function getScene3dHitSubsetIndex(hit:Scene3DHit):Int {
 #if hl
 	return flight._hl._fn.Picking.getScene3dHitSubsetIndex(hit);
 #elseif cpp
@@ -77,7 +77,7 @@ inline function getScene3dHitSubsetIndex(hit:Scene3DHit):Int {
 	#error "flight.Picking: no backend for this target."
 #end
 }
-inline function getScene3dHitUv0(out:Vector2, hit:Scene3DHit):Bool {
+extern inline function getScene3dHitUv0(out:Vector2, hit:Scene3DHit):Bool {
 #if hl
 	return flight._hl._fn.Picking.getScene3dHitUv0(out, hit);
 #elseif cpp
@@ -88,7 +88,7 @@ inline function getScene3dHitUv0(out:Vector2, hit:Scene3DHit):Bool {
 	#error "flight.Picking: no backend for this target."
 #end
 }
-inline function getScene3dHitVertexNormal(out:Vector3, hit:Scene3DHit):Bool {
+extern inline function getScene3dHitVertexNormal(out:Vector3, hit:Scene3DHit):Bool {
 #if hl
 	return flight._hl._fn.Picking.getScene3dHitVertexNormal(out, hit);
 #elseif cpp
@@ -99,7 +99,7 @@ inline function getScene3dHitVertexNormal(out:Vector3, hit:Scene3DHit):Bool {
 	#error "flight.Picking: no backend for this target."
 #end
 }
-inline function getScene3dHitVertexTangent(out:Vector4, hit:Scene3DHit):Bool {
+extern inline function getScene3dHitVertexTangent(out:Vector4, hit:Scene3DHit):Bool {
 #if hl
 	return flight._hl._fn.Picking.getScene3dHitVertexTangent(out, hit);
 #elseif cpp
@@ -110,7 +110,7 @@ inline function getScene3dHitVertexTangent(out:Vector4, hit:Scene3DHit):Bool {
 	#error "flight.Picking: no backend for this target."
 #end
 }
-inline function isScene3dHitFrontFacing(hit:Scene3DHit, ray:Ray3D):Bool {
+extern inline function isScene3dHitFrontFacing(hit:Scene3DHit, ray:Ray3D):Bool {
 #if hl
 	return flight._hl._fn.Picking.isScene3dHitFrontFacing(hit, ray);
 #elseif cpp
@@ -121,7 +121,7 @@ inline function isScene3dHitFrontFacing(hit:Scene3DHit, ray:Ray3D):Bool {
 	#error "flight.Picking: no backend for this target."
 #end
 }
-inline function freeScene3Dhit(ptr:Scene3DHit):Void {
+extern inline function freeScene3Dhit(ptr:Scene3DHit):Void {
 #if hl
 	flight._hl._fn.Picking.freeScene3Dhit(ptr);
 #elseif cpp

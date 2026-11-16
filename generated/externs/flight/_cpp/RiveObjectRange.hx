@@ -12,10 +12,10 @@ abstract RiveObjectRange(cpp.Star<cpp.Void>) {
 
 	inline function get_end():Int return RiveObjectRange_Ffi.get_end(this);
 
-	inline function set_end(value:Int):Int return RiveObjectRange_Ffi.set_end(this, value);
+	inline function set_end(value:Int):Int { RiveObjectRange_Ffi.set_end(this, value); return value; }
 	public var start(get, set):Int;
 
 	inline function get_start():Int return RiveObjectRange_Ffi.get_start(this);
 
-	inline function set_start(value:Int):Int return RiveObjectRange_Ffi.set_start(this, value);
+	inline function set_start(value:Int):Int { RiveObjectRange_Ffi.set_start(this, value); return value; }
 }

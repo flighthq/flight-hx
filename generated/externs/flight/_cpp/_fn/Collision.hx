@@ -210,7 +210,7 @@ extern class Collision {
 	@:native("flight_create_collision_triangle_mesh3d")
 	public static function createCollisionTriangleMesh3d():flight._cpp.CollisionTriangleMesh3D;
 	@:native("flight_clone_collision_collider_shape3d")
-	public static function cloneCollisionColliderShape3d(shape:flight._cpp.CollisionColliderShape3D):Int;
+	public static function cloneCollisionColliderShape3d(shape:flight._cpp.CollisionColliderShape3D):flight._cpp.CollisionColliderShape3D;
 	@:native("flight_collide_collision_heightfield3d")
 	public static function collideCollisionHeightfield3d(out:flight._cpp.CollisionContactManifold3D, registry:flight._cpp.CollisionRegistry3D, convex:flight._cpp.CollisionShape3D, heightfield:flight._cpp.CollisionHeightfield3D):Bool;
 	@:native("flight_collide_collision_triangle_mesh3d")
@@ -257,4 +257,6 @@ extern class Collision {
 	public static function freeCollisionHeightfield3D(ptr:flight._cpp.CollisionHeightfield3D):Void;
 	@:native("flight_free_collision_triangle_mesh3_d")
 	public static function freeCollisionTriangleMesh3D(ptr:flight._cpp.CollisionTriangleMesh3D):Void;
+	@:native("flight_free_collision_collider_shape3_d")
+	public static function freeCollisionColliderShape3D(ptr:flight._cpp.CollisionColliderShape3D):Void;
 }

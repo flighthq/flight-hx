@@ -1,6 +1,6 @@
 package flight;
 
-inline function createAmbientLight():AmbientLight {
+extern inline function createAmbientLight():AmbientLight {
 #if hl
 	return flight._hl._fn.Lighting.createAmbientLight();
 #elseif cpp
@@ -11,7 +11,7 @@ inline function createAmbientLight():AmbientLight {
 	#error "flight.Lighting: no backend for this target."
 #end
 }
-inline function cloneAmbientLight(source:AmbientLight):AmbientLight {
+extern inline function cloneAmbientLight(source:AmbientLight):AmbientLight {
 #if hl
 	return flight._hl._fn.Lighting.cloneAmbientLight(source);
 #elseif cpp
@@ -22,7 +22,7 @@ inline function cloneAmbientLight(source:AmbientLight):AmbientLight {
 	#error "flight.Lighting: no backend for this target."
 #end
 }
-inline function createAreaLight():AreaLight {
+extern inline function createAreaLight():AreaLight {
 #if hl
 	return flight._hl._fn.Lighting.createAreaLight();
 #elseif cpp
@@ -33,7 +33,7 @@ inline function createAreaLight():AreaLight {
 	#error "flight.Lighting: no backend for this target."
 #end
 }
-inline function cloneAreaLight(source:AreaLight):AreaLight {
+extern inline function cloneAreaLight(source:AreaLight):AreaLight {
 #if hl
 	return flight._hl._fn.Lighting.cloneAreaLight(source);
 #elseif cpp
@@ -44,7 +44,7 @@ inline function cloneAreaLight(source:AreaLight):AreaLight {
 	#error "flight.Lighting: no backend for this target."
 #end
 }
-inline function setAreaLightOrientation(out:AreaLight, direction:Vector3, right:Vector3, up:Vector3):Void {
+extern inline function setAreaLightOrientation(out:AreaLight, direction:Vector3, right:Vector3, up:Vector3):Void {
 #if hl
 	flight._hl._fn.Lighting.setAreaLightOrientation(out, direction, right, up);
 #elseif cpp
@@ -55,7 +55,7 @@ inline function setAreaLightOrientation(out:AreaLight, direction:Vector3, right:
 	#error "flight.Lighting: no backend for this target."
 #end
 }
-inline function createDirectionalLight(options:DirectionalLightOptions):DirectionalLight {
+extern inline function createDirectionalLight(options:DirectionalLightOptions):DirectionalLight {
 #if hl
 	return flight._hl._fn.Lighting.createDirectionalLight(options);
 #elseif cpp
@@ -66,7 +66,7 @@ inline function createDirectionalLight(options:DirectionalLightOptions):Directio
 	#error "flight.Lighting: no backend for this target."
 #end
 }
-inline function cloneDirectionalLight(source:DirectionalLight):DirectionalLight {
+extern inline function cloneDirectionalLight(source:DirectionalLight):DirectionalLight {
 #if hl
 	return flight._hl._fn.Lighting.cloneDirectionalLight(source);
 #elseif cpp
@@ -77,7 +77,7 @@ inline function cloneDirectionalLight(source:DirectionalLight):DirectionalLight 
 	#error "flight.Lighting: no backend for this target."
 #end
 }
-inline function setDirectionalLightDirection(out:DirectionalLight, x:Float, y:Float, z:Float):Void {
+extern inline function setDirectionalLightDirection(out:DirectionalLight, x:Float, y:Float, z:Float):Void {
 #if hl
 	flight._hl._fn.Lighting.setDirectionalLightDirection(out, x, y, z);
 #elseif cpp
@@ -88,7 +88,7 @@ inline function setDirectionalLightDirection(out:DirectionalLight, x:Float, y:Fl
 	#error "flight.Lighting: no backend for this target."
 #end
 }
-inline function setDirectionalLightTarget(out:DirectionalLight, fromX:Float, fromY:Float, fromZ:Float, toX:Float, toY:Float, toZ:Float):Void {
+extern inline function setDirectionalLightTarget(out:DirectionalLight, fromX:Float, fromY:Float, fromZ:Float, toX:Float, toY:Float, toZ:Float):Void {
 #if hl
 	flight._hl._fn.Lighting.setDirectionalLightTarget(out, fromX, fromY, fromZ, toX, toY, toZ);
 #elseif cpp
@@ -99,7 +99,7 @@ inline function setDirectionalLightTarget(out:DirectionalLight, fromX:Float, fro
 	#error "flight.Lighting: no backend for this target."
 #end
 }
-inline function createEnvironment():Environment {
+extern inline function createEnvironment():Environment {
 #if hl
 	return flight._hl._fn.Lighting.createEnvironment();
 #elseif cpp
@@ -110,7 +110,7 @@ inline function createEnvironment():Environment {
 	#error "flight.Lighting: no backend for this target."
 #end
 }
-inline function cloneEnvironment(source:Environment):Environment {
+extern inline function cloneEnvironment(source:Environment):Environment {
 #if hl
 	return flight._hl._fn.Lighting.cloneEnvironment(source);
 #elseif cpp
@@ -121,7 +121,7 @@ inline function cloneEnvironment(source:Environment):Environment {
 	#error "flight.Lighting: no backend for this target."
 #end
 }
-inline function createHemisphereLight():HemisphereLight {
+extern inline function createHemisphereLight():HemisphereLight {
 #if hl
 	return flight._hl._fn.Lighting.createHemisphereLight();
 #elseif cpp
@@ -132,7 +132,7 @@ inline function createHemisphereLight():HemisphereLight {
 	#error "flight.Lighting: no backend for this target."
 #end
 }
-inline function cloneHemisphereLight(source:HemisphereLight):HemisphereLight {
+extern inline function cloneHemisphereLight(source:HemisphereLight):HemisphereLight {
 #if hl
 	return flight._hl._fn.Lighting.cloneHemisphereLight(source);
 #elseif cpp
@@ -143,7 +143,7 @@ inline function cloneHemisphereLight(source:HemisphereLight):HemisphereLight {
 	#error "flight.Lighting: no backend for this target."
 #end
 }
-inline function getLightContributionAtBoundingSpherePointLight(light:PointLight, bounds:BoundingSphere):Float {
+extern inline function getLightContributionAtBoundingSpherePointLight(light:PointLight, bounds:BoundingSphere):Float {
 #if hl
 	return flight._hl._fn.Lighting.getLightContributionAtBoundingSpherePointLight(light, bounds);
 #elseif cpp
@@ -154,7 +154,7 @@ inline function getLightContributionAtBoundingSpherePointLight(light:PointLight,
 	#error "flight.Lighting: no backend for this target."
 #end
 }
-inline function getLightContributionAtBoundingSphereSpotLight(light:SpotLight, bounds:BoundingSphere):Float {
+extern inline function getLightContributionAtBoundingSphereSpotLight(light:SpotLight, bounds:BoundingSphere):Float {
 #if hl
 	return flight._hl._fn.Lighting.getLightContributionAtBoundingSphereSpotLight(light, bounds);
 #elseif cpp
@@ -165,7 +165,7 @@ inline function getLightContributionAtBoundingSphereSpotLight(light:SpotLight, b
 	#error "flight.Lighting: no backend for this target."
 #end
 }
-inline function getLightInfluenceBoundsAmbientLight(out:BoundingSphere, light:AmbientLight):Void {
+extern inline function getLightInfluenceBoundsAmbientLight(out:BoundingSphere, light:AmbientLight):Void {
 #if hl
 	flight._hl._fn.Lighting.getLightInfluenceBoundsAmbientLight(out, light);
 #elseif cpp
@@ -176,7 +176,7 @@ inline function getLightInfluenceBoundsAmbientLight(out:BoundingSphere, light:Am
 	#error "flight.Lighting: no backend for this target."
 #end
 }
-inline function getLightInfluenceBoundsDirectionalLight(out:BoundingSphere, light:DirectionalLight):Void {
+extern inline function getLightInfluenceBoundsDirectionalLight(out:BoundingSphere, light:DirectionalLight):Void {
 #if hl
 	flight._hl._fn.Lighting.getLightInfluenceBoundsDirectionalLight(out, light);
 #elseif cpp
@@ -187,7 +187,7 @@ inline function getLightInfluenceBoundsDirectionalLight(out:BoundingSphere, ligh
 	#error "flight.Lighting: no backend for this target."
 #end
 }
-inline function getLightInfluenceBoundsEnvironment(out:BoundingSphere, light:Environment):Void {
+extern inline function getLightInfluenceBoundsEnvironment(out:BoundingSphere, light:Environment):Void {
 #if hl
 	flight._hl._fn.Lighting.getLightInfluenceBoundsEnvironment(out, light);
 #elseif cpp
@@ -198,7 +198,7 @@ inline function getLightInfluenceBoundsEnvironment(out:BoundingSphere, light:Env
 	#error "flight.Lighting: no backend for this target."
 #end
 }
-inline function getLightInfluenceBoundsHemisphereLight(out:BoundingSphere, light:HemisphereLight):Void {
+extern inline function getLightInfluenceBoundsHemisphereLight(out:BoundingSphere, light:HemisphereLight):Void {
 #if hl
 	flight._hl._fn.Lighting.getLightInfluenceBoundsHemisphereLight(out, light);
 #elseif cpp
@@ -209,7 +209,7 @@ inline function getLightInfluenceBoundsHemisphereLight(out:BoundingSphere, light
 	#error "flight.Lighting: no backend for this target."
 #end
 }
-inline function getLightLuminanceAmbientLight(light:AmbientLight):Float {
+extern inline function getLightLuminanceAmbientLight(light:AmbientLight):Float {
 #if hl
 	return flight._hl._fn.Lighting.getLightLuminanceAmbientLight(light);
 #elseif cpp
@@ -220,7 +220,7 @@ inline function getLightLuminanceAmbientLight(light:AmbientLight):Float {
 	#error "flight.Lighting: no backend for this target."
 #end
 }
-inline function getLightLuminanceDirectionalLight(light:DirectionalLight):Float {
+extern inline function getLightLuminanceDirectionalLight(light:DirectionalLight):Float {
 #if hl
 	return flight._hl._fn.Lighting.getLightLuminanceDirectionalLight(light);
 #elseif cpp
@@ -231,7 +231,7 @@ inline function getLightLuminanceDirectionalLight(light:DirectionalLight):Float 
 	#error "flight.Lighting: no backend for this target."
 #end
 }
-inline function getLightLuminanceEnvironment(light:Environment):Float {
+extern inline function getLightLuminanceEnvironment(light:Environment):Float {
 #if hl
 	return flight._hl._fn.Lighting.getLightLuminanceEnvironment(light);
 #elseif cpp
@@ -242,7 +242,7 @@ inline function getLightLuminanceEnvironment(light:Environment):Float {
 	#error "flight.Lighting: no backend for this target."
 #end
 }
-inline function getLightLuminanceHemisphereLight(light:HemisphereLight):Float {
+extern inline function getLightLuminanceHemisphereLight(light:HemisphereLight):Float {
 #if hl
 	return flight._hl._fn.Lighting.getLightLuminanceHemisphereLight(light);
 #elseif cpp
@@ -253,7 +253,7 @@ inline function getLightLuminanceHemisphereLight(light:HemisphereLight):Float {
 	#error "flight.Lighting: no backend for this target."
 #end
 }
-inline function hasLightInfluenceOnBoundsAmbientLight(light:AmbientLight, bounds:BoundingSphere):Bool {
+extern inline function hasLightInfluenceOnBoundsAmbientLight(light:AmbientLight, bounds:BoundingSphere):Bool {
 #if hl
 	return flight._hl._fn.Lighting.hasLightInfluenceOnBoundsAmbientLight(light, bounds);
 #elseif cpp
@@ -264,7 +264,7 @@ inline function hasLightInfluenceOnBoundsAmbientLight(light:AmbientLight, bounds
 	#error "flight.Lighting: no backend for this target."
 #end
 }
-inline function hasLightInfluenceOnBoundsDirectionalLight(light:DirectionalLight, bounds:BoundingSphere):Bool {
+extern inline function hasLightInfluenceOnBoundsDirectionalLight(light:DirectionalLight, bounds:BoundingSphere):Bool {
 #if hl
 	return flight._hl._fn.Lighting.hasLightInfluenceOnBoundsDirectionalLight(light, bounds);
 #elseif cpp
@@ -275,7 +275,7 @@ inline function hasLightInfluenceOnBoundsDirectionalLight(light:DirectionalLight
 	#error "flight.Lighting: no backend for this target."
 #end
 }
-inline function hasLightInfluenceOnBoundsEnvironment(light:Environment, bounds:BoundingSphere):Bool {
+extern inline function hasLightInfluenceOnBoundsEnvironment(light:Environment, bounds:BoundingSphere):Bool {
 #if hl
 	return flight._hl._fn.Lighting.hasLightInfluenceOnBoundsEnvironment(light, bounds);
 #elseif cpp
@@ -286,7 +286,7 @@ inline function hasLightInfluenceOnBoundsEnvironment(light:Environment, bounds:B
 	#error "flight.Lighting: no backend for this target."
 #end
 }
-inline function hasLightInfluenceOnBoundsHemisphereLight(light:HemisphereLight, bounds:BoundingSphere):Bool {
+extern inline function hasLightInfluenceOnBoundsHemisphereLight(light:HemisphereLight, bounds:BoundingSphere):Bool {
 #if hl
 	return flight._hl._fn.Lighting.hasLightInfluenceOnBoundsHemisphereLight(light, bounds);
 #elseif cpp
@@ -297,7 +297,7 @@ inline function hasLightInfluenceOnBoundsHemisphereLight(light:HemisphereLight, 
 	#error "flight.Lighting: no backend for this target."
 #end
 }
-inline function isLightCastingShadowAmbientLight(light:AmbientLight):Bool {
+extern inline function isLightCastingShadowAmbientLight(light:AmbientLight):Bool {
 #if hl
 	return flight._hl._fn.Lighting.isLightCastingShadowAmbientLight(light);
 #elseif cpp
@@ -308,7 +308,7 @@ inline function isLightCastingShadowAmbientLight(light:AmbientLight):Bool {
 	#error "flight.Lighting: no backend for this target."
 #end
 }
-inline function isLightCastingShadowDirectionalLight(light:DirectionalLight):Bool {
+extern inline function isLightCastingShadowDirectionalLight(light:DirectionalLight):Bool {
 #if hl
 	return flight._hl._fn.Lighting.isLightCastingShadowDirectionalLight(light);
 #elseif cpp
@@ -319,7 +319,7 @@ inline function isLightCastingShadowDirectionalLight(light:DirectionalLight):Boo
 	#error "flight.Lighting: no backend for this target."
 #end
 }
-inline function isLightCastingShadowEnvironment(light:Environment):Bool {
+extern inline function isLightCastingShadowEnvironment(light:Environment):Bool {
 #if hl
 	return flight._hl._fn.Lighting.isLightCastingShadowEnvironment(light);
 #elseif cpp
@@ -330,7 +330,7 @@ inline function isLightCastingShadowEnvironment(light:Environment):Bool {
 	#error "flight.Lighting: no backend for this target."
 #end
 }
-inline function isLightCastingShadowHemisphereLight(light:HemisphereLight):Bool {
+extern inline function isLightCastingShadowHemisphereLight(light:HemisphereLight):Bool {
 #if hl
 	return flight._hl._fn.Lighting.isLightCastingShadowHemisphereLight(light);
 #elseif cpp
@@ -341,7 +341,7 @@ inline function isLightCastingShadowHemisphereLight(light:HemisphereLight):Bool 
 	#error "flight.Lighting: no backend for this target."
 #end
 }
-inline function applyLightExposure(intensity:Float, ev:Float):Float {
+extern inline function applyLightExposure(intensity:Float, ev:Float):Float {
 #if hl
 	return flight._hl._fn.Lighting.applyLightExposure(intensity, ev);
 #elseif cpp
@@ -352,7 +352,7 @@ inline function applyLightExposure(intensity:Float, ev:Float):Float {
 	#error "flight.Lighting: no backend for this target."
 #end
 }
-inline function convertLightIntensity(fromUnit:flight.LightUnit, toUnit:flight.LightUnit, value:Float):Float {
+extern inline function convertLightIntensity(fromUnit:flight.LightUnit, toUnit:flight.LightUnit, value:Float):Float {
 #if hl
 	return flight._hl._fn.Lighting.convertLightIntensity(fromUnit, toUnit, value);
 #elseif cpp
@@ -363,7 +363,7 @@ inline function convertLightIntensity(fromUnit:flight.LightUnit, toUnit:flight.L
 	#error "flight.Lighting: no backend for this target."
 #end
 }
-inline function getLightLinearIntensity(unit:flight.LightUnit, value:Float):Float {
+extern inline function getLightLinearIntensity(unit:flight.LightUnit, value:Float):Float {
 #if hl
 	return flight._hl._fn.Lighting.getLightLinearIntensity(unit, value);
 #elseif cpp
@@ -374,7 +374,7 @@ inline function getLightLinearIntensity(unit:flight.LightUnit, value:Float):Floa
 	#error "flight.Lighting: no backend for this target."
 #end
 }
-inline function getLightPhotometricIntensityAmbientLight(light:AmbientLight):Float {
+extern inline function getLightPhotometricIntensityAmbientLight(light:AmbientLight):Float {
 #if hl
 	return flight._hl._fn.Lighting.getLightPhotometricIntensityAmbientLight(light);
 #elseif cpp
@@ -385,7 +385,7 @@ inline function getLightPhotometricIntensityAmbientLight(light:AmbientLight):Flo
 	#error "flight.Lighting: no backend for this target."
 #end
 }
-inline function getLightPhotometricIntensityDirectionalLight(light:DirectionalLight):Float {
+extern inline function getLightPhotometricIntensityDirectionalLight(light:DirectionalLight):Float {
 #if hl
 	return flight._hl._fn.Lighting.getLightPhotometricIntensityDirectionalLight(light);
 #elseif cpp
@@ -396,7 +396,7 @@ inline function getLightPhotometricIntensityDirectionalLight(light:DirectionalLi
 	#error "flight.Lighting: no backend for this target."
 #end
 }
-inline function getLightPhotometricIntensityHemisphereLight(light:HemisphereLight):Float {
+extern inline function getLightPhotometricIntensityHemisphereLight(light:HemisphereLight):Float {
 #if hl
 	return flight._hl._fn.Lighting.getLightPhotometricIntensityHemisphereLight(light);
 #elseif cpp
@@ -407,7 +407,7 @@ inline function getLightPhotometricIntensityHemisphereLight(light:HemisphereLigh
 	#error "flight.Lighting: no backend for this target."
 #end
 }
-inline function setLightPhotometricIntensityAmbientLight(out:AmbientLight, value:Float):Void {
+extern inline function setLightPhotometricIntensityAmbientLight(out:AmbientLight, value:Float):Void {
 #if hl
 	flight._hl._fn.Lighting.setLightPhotometricIntensityAmbientLight(out, value);
 #elseif cpp
@@ -418,7 +418,7 @@ inline function setLightPhotometricIntensityAmbientLight(out:AmbientLight, value
 	#error "flight.Lighting: no backend for this target."
 #end
 }
-inline function setLightPhotometricIntensityDirectionalLight(out:DirectionalLight, value:Float):Void {
+extern inline function setLightPhotometricIntensityDirectionalLight(out:DirectionalLight, value:Float):Void {
 #if hl
 	flight._hl._fn.Lighting.setLightPhotometricIntensityDirectionalLight(out, value);
 #elseif cpp
@@ -429,7 +429,7 @@ inline function setLightPhotometricIntensityDirectionalLight(out:DirectionalLigh
 	#error "flight.Lighting: no backend for this target."
 #end
 }
-inline function setLightPhotometricIntensityHemisphereLight(out:HemisphereLight, value:Float):Void {
+extern inline function setLightPhotometricIntensityHemisphereLight(out:HemisphereLight, value:Float):Void {
 #if hl
 	flight._hl._fn.Lighting.setLightPhotometricIntensityHemisphereLight(out, value);
 #elseif cpp
@@ -440,7 +440,7 @@ inline function setLightPhotometricIntensityHemisphereLight(out:HemisphereLight,
 	#error "flight.Lighting: no backend for this target."
 #end
 }
-inline function createLightProbe(position:Vector3, shCoefficients:Dynamic, shCoefficientsLen:Int):LightProbe {
+extern inline function createLightProbe(position:Vector3, shCoefficients:Dynamic, shCoefficientsLen:Int):LightProbe {
 #if hl
 	return flight._hl._fn.Lighting.createLightProbe(position, shCoefficients, shCoefficientsLen);
 #elseif cpp
@@ -451,7 +451,7 @@ inline function createLightProbe(position:Vector3, shCoefficients:Dynamic, shCoe
 	#error "flight.Lighting: no backend for this target."
 #end
 }
-inline function evaluateLightProbeSh(out:Dynamic, outLen:Int, normal:Vector3, shCoefficients:Dynamic, shCoefficientsLen:Int):Void {
+extern inline function evaluateLightProbeSh(out:Dynamic, outLen:Int, normal:Vector3, shCoefficients:Dynamic, shCoefficientsLen:Int):Void {
 #if hl
 	flight._hl._fn.Lighting.evaluateLightProbeSh(out, outLen, normal, shCoefficients, shCoefficientsLen);
 #elseif cpp
@@ -462,7 +462,7 @@ inline function evaluateLightProbeSh(out:Dynamic, outLen:Int, normal:Vector3, sh
 	#error "flight.Lighting: no backend for this target."
 #end
 }
-inline function sampleLightProbeGrid(out:Dynamic, outLen:Int, position:Vector3, grid:LightProbeGrid):Bool {
+extern inline function sampleLightProbeGrid(out:Dynamic, outLen:Int, position:Vector3, grid:LightProbeGrid):Bool {
 #if hl
 	return flight._hl._fn.Lighting.sampleLightProbeGrid(out, outLen, position, grid);
 #elseif cpp
@@ -473,7 +473,7 @@ inline function sampleLightProbeGrid(out:Dynamic, outLen:Int, position:Vector3, 
 	#error "flight.Lighting: no backend for this target."
 #end
 }
-inline function setLightProbeShFromColors(target:LightProbe, colors:Dynamic, colorsLen:Int, directions:Dynamic, directionsLen:Int):Void {
+extern inline function setLightProbeShFromColors(target:LightProbe, colors:Dynamic, colorsLen:Int, directions:Dynamic, directionsLen:Int):Void {
 #if hl
 	flight._hl._fn.Lighting.setLightProbeShFromColors(target, colors, colorsLen, directions, directionsLen);
 #elseif cpp
@@ -484,7 +484,7 @@ inline function setLightProbeShFromColors(target:LightProbe, colors:Dynamic, col
 	#error "flight.Lighting: no backend for this target."
 #end
 }
-inline function createPointLight():PointLight {
+extern inline function createPointLight():PointLight {
 #if hl
 	return flight._hl._fn.Lighting.createPointLight();
 #elseif cpp
@@ -495,7 +495,7 @@ inline function createPointLight():PointLight {
 	#error "flight.Lighting: no backend for this target."
 #end
 }
-inline function clonePointLight(source:PointLight):PointLight {
+extern inline function clonePointLight(source:PointLight):PointLight {
 #if hl
 	return flight._hl._fn.Lighting.clonePointLight(source);
 #elseif cpp
@@ -506,7 +506,7 @@ inline function clonePointLight(source:PointLight):PointLight {
 	#error "flight.Lighting: no backend for this target."
 #end
 }
-inline function selectScene3dForwardLights(out:Scene3DForwardLightSelection, lights:Scene3DLights, bounds:BoundingSphere, receiverLayerMask:Int):Void {
+extern inline function selectScene3dForwardLights(out:Scene3DForwardLightSelection, lights:Scene3DLights, bounds:BoundingSphere, receiverLayerMask:Int):Void {
 #if hl
 	flight._hl._fn.Lighting.selectScene3dForwardLights(out, lights, bounds, receiverLayerMask);
 #elseif cpp
@@ -517,7 +517,7 @@ inline function selectScene3dForwardLights(out:Scene3DForwardLightSelection, lig
 	#error "flight.Lighting: no backend for this target."
 #end
 }
-inline function createScene3dLights():Scene3DLights {
+extern inline function createScene3dLights():Scene3DLights {
 #if hl
 	return flight._hl._fn.Lighting.createScene3dLights();
 #elseif cpp
@@ -528,7 +528,7 @@ inline function createScene3dLights():Scene3DLights {
 	#error "flight.Lighting: no backend for this target."
 #end
 }
-inline function createSpotLight(options:SpotLightOptions):SpotLight {
+extern inline function createSpotLight(options:SpotLightOptions):SpotLight {
 #if hl
 	return flight._hl._fn.Lighting.createSpotLight(options);
 #elseif cpp
@@ -539,7 +539,7 @@ inline function createSpotLight(options:SpotLightOptions):SpotLight {
 	#error "flight.Lighting: no backend for this target."
 #end
 }
-inline function cloneSpotLight(source:SpotLight):SpotLight {
+extern inline function cloneSpotLight(source:SpotLight):SpotLight {
 #if hl
 	return flight._hl._fn.Lighting.cloneSpotLight(source);
 #elseif cpp
@@ -550,7 +550,7 @@ inline function cloneSpotLight(source:SpotLight):SpotLight {
 	#error "flight.Lighting: no backend for this target."
 #end
 }
-inline function getSpotLightConeDegrees(out:SpotLightConeAngles, source:SpotLight):Void {
+extern inline function getSpotLightConeDegrees(out:SpotLightConeAngles, source:SpotLight):Void {
 #if hl
 	flight._hl._fn.Lighting.getSpotLightConeDegrees(out, source);
 #elseif cpp
@@ -561,7 +561,7 @@ inline function getSpotLightConeDegrees(out:SpotLightConeAngles, source:SpotLigh
 	#error "flight.Lighting: no backend for this target."
 #end
 }
-inline function setSpotLightBlend(out:SpotLight, blend:Float):Void {
+extern inline function setSpotLightBlend(out:SpotLight, blend:Float):Void {
 #if hl
 	flight._hl._fn.Lighting.setSpotLightBlend(out, blend);
 #elseif cpp
@@ -572,7 +572,7 @@ inline function setSpotLightBlend(out:SpotLight, blend:Float):Void {
 	#error "flight.Lighting: no backend for this target."
 #end
 }
-inline function setSpotLightCone(out:SpotLight, innerDegrees:Float, outerDegrees:Float):Void {
+extern inline function setSpotLightCone(out:SpotLight, innerDegrees:Float, outerDegrees:Float):Void {
 #if hl
 	flight._hl._fn.Lighting.setSpotLightCone(out, innerDegrees, outerDegrees);
 #elseif cpp
@@ -583,7 +583,7 @@ inline function setSpotLightCone(out:SpotLight, innerDegrees:Float, outerDegrees
 	#error "flight.Lighting: no backend for this target."
 #end
 }
-inline function setSpotLightDirection(out:SpotLight, x:Float, y:Float, z:Float):Void {
+extern inline function setSpotLightDirection(out:SpotLight, x:Float, y:Float, z:Float):Void {
 #if hl
 	flight._hl._fn.Lighting.setSpotLightDirection(out, x, y, z);
 #elseif cpp
@@ -594,7 +594,7 @@ inline function setSpotLightDirection(out:SpotLight, x:Float, y:Float, z:Float):
 	#error "flight.Lighting: no backend for this target."
 #end
 }
-inline function setSpotLightTarget(out:SpotLight, targetX:Float, targetY:Float, targetZ:Float):Void {
+extern inline function setSpotLightTarget(out:SpotLight, targetX:Float, targetY:Float, targetZ:Float):Void {
 #if hl
 	flight._hl._fn.Lighting.setSpotLightTarget(out, targetX, targetY, targetZ);
 #elseif cpp
@@ -605,7 +605,7 @@ inline function setSpotLightTarget(out:SpotLight, targetX:Float, targetY:Float, 
 	#error "flight.Lighting: no backend for this target."
 #end
 }
-inline function freeAmbientLight(ptr:AmbientLight):Void {
+extern inline function freeAmbientLight(ptr:AmbientLight):Void {
 #if hl
 	flight._hl._fn.Lighting.freeAmbientLight(ptr);
 #elseif cpp
@@ -616,7 +616,7 @@ inline function freeAmbientLight(ptr:AmbientLight):Void {
 	#error "flight.Lighting: no backend for this target."
 #end
 }
-inline function freeAreaLight(ptr:AreaLight):Void {
+extern inline function freeAreaLight(ptr:AreaLight):Void {
 #if hl
 	flight._hl._fn.Lighting.freeAreaLight(ptr);
 #elseif cpp
@@ -627,7 +627,7 @@ inline function freeAreaLight(ptr:AreaLight):Void {
 	#error "flight.Lighting: no backend for this target."
 #end
 }
-inline function freeDirectionalLight(ptr:DirectionalLight):Void {
+extern inline function freeDirectionalLight(ptr:DirectionalLight):Void {
 #if hl
 	flight._hl._fn.Lighting.freeDirectionalLight(ptr);
 #elseif cpp
@@ -638,7 +638,7 @@ inline function freeDirectionalLight(ptr:DirectionalLight):Void {
 	#error "flight.Lighting: no backend for this target."
 #end
 }
-inline function freeEnvironment(ptr:Environment):Void {
+extern inline function freeEnvironment(ptr:Environment):Void {
 #if hl
 	flight._hl._fn.Lighting.freeEnvironment(ptr);
 #elseif cpp
@@ -649,7 +649,7 @@ inline function freeEnvironment(ptr:Environment):Void {
 	#error "flight.Lighting: no backend for this target."
 #end
 }
-inline function freeHemisphereLight(ptr:HemisphereLight):Void {
+extern inline function freeHemisphereLight(ptr:HemisphereLight):Void {
 #if hl
 	flight._hl._fn.Lighting.freeHemisphereLight(ptr);
 #elseif cpp
@@ -660,7 +660,7 @@ inline function freeHemisphereLight(ptr:HemisphereLight):Void {
 	#error "flight.Lighting: no backend for this target."
 #end
 }
-inline function freeLightProbe(ptr:LightProbe):Void {
+extern inline function freeLightProbe(ptr:LightProbe):Void {
 #if hl
 	flight._hl._fn.Lighting.freeLightProbe(ptr);
 #elseif cpp
@@ -671,7 +671,7 @@ inline function freeLightProbe(ptr:LightProbe):Void {
 	#error "flight.Lighting: no backend for this target."
 #end
 }
-inline function freePointLight(ptr:PointLight):Void {
+extern inline function freePointLight(ptr:PointLight):Void {
 #if hl
 	flight._hl._fn.Lighting.freePointLight(ptr);
 #elseif cpp
@@ -682,7 +682,7 @@ inline function freePointLight(ptr:PointLight):Void {
 	#error "flight.Lighting: no backend for this target."
 #end
 }
-inline function freeScene3Dlights(ptr:Scene3DLights):Void {
+extern inline function freeScene3Dlights(ptr:Scene3DLights):Void {
 #if hl
 	flight._hl._fn.Lighting.freeScene3Dlights(ptr);
 #elseif cpp
@@ -693,7 +693,7 @@ inline function freeScene3Dlights(ptr:Scene3DLights):Void {
 	#error "flight.Lighting: no backend for this target."
 #end
 }
-inline function freeSpotLight(ptr:SpotLight):Void {
+extern inline function freeSpotLight(ptr:SpotLight):Void {
 #if hl
 	flight._hl._fn.Lighting.freeSpotLight(ptr);
 #elseif cpp

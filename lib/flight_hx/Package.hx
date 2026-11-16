@@ -14,8 +14,8 @@ class Package {
     if (configured) return;
     configured = true;
 
-    final macroFile = Context.resolvePath('flight_hx/Package.hx');
-    final root = Path.normalize(Path.join([Path.directory(macroFile), '..', '..']));
+    final macroFile = sys.FileSystem.fullPath(Context.resolvePath('flight_hx/Package.hx'));
+    final root = sys.FileSystem.fullPath(Path.normalize(Path.join([Path.directory(macroFile), '..', '..'])));
     if (Context.defined('flight_hx')) {
       Context.fatalError('flight_hx implementation sources have been retired; use native FFI (cpp/hl) or JS with flight_esm.', Context.currentPos());
     }
@@ -31,6 +31,7 @@ class Package {
     }
     Compiler.addClassPath(generated);
     if (Context.defined('js')) Compiler.addClassPath(Path.join([root, 'tools', 'esm']));
+    else Native.configure(root);
   }
 }
 #end

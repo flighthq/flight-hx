@@ -1,6 +1,6 @@
 package flight;
 
-inline function contributeTransformVelocity(field:VelocityField, root:Dynamic):Void {
+extern inline function contributeTransformVelocity(field:VelocityField, root:Dynamic):Void {
 #if hl
 	flight._hl._fn.Velocity.contributeTransformVelocity(field, root);
 #elseif cpp
@@ -11,7 +11,7 @@ inline function contributeTransformVelocity(field:VelocityField, root:Dynamic):V
 	#error "flight.Velocity: no backend for this target."
 #end
 }
-inline function addVelocity(out:Velocity2D, a:Velocity2D, b:Velocity2D):Void {
+extern inline function addVelocity(out:Velocity2D, a:Velocity2D, b:Velocity2D):Void {
 #if hl
 	flight._hl._fn.Velocity.addVelocity(out, a, b);
 #elseif cpp
@@ -22,7 +22,7 @@ inline function addVelocity(out:Velocity2D, a:Velocity2D, b:Velocity2D):Void {
 	#error "flight.Velocity: no backend for this target."
 #end
 }
-inline function clampVelocity(out:Velocity2D, velocity:Velocity2D, maxLength:Float):Void {
+extern inline function clampVelocity(out:Velocity2D, velocity:Velocity2D, maxLength:Float):Void {
 #if hl
 	flight._hl._fn.Velocity.clampVelocity(out, velocity, maxLength);
 #elseif cpp
@@ -33,7 +33,7 @@ inline function clampVelocity(out:Velocity2D, velocity:Velocity2D, maxLength:Flo
 	#error "flight.Velocity: no backend for this target."
 #end
 }
-inline function copyVelocity(out:Velocity2D, source:Velocity2D):Void {
+extern inline function copyVelocity(out:Velocity2D, source:Velocity2D):Void {
 #if hl
 	flight._hl._fn.Velocity.copyVelocity(out, source);
 #elseif cpp
@@ -44,7 +44,7 @@ inline function copyVelocity(out:Velocity2D, source:Velocity2D):Void {
 	#error "flight.Velocity: no backend for this target."
 #end
 }
-inline function dampVelocity(out:Velocity2D, current:Velocity2D, previous:Velocity2D, factor:Float):Void {
+extern inline function dampVelocity(out:Velocity2D, current:Velocity2D, previous:Velocity2D, factor:Float):Void {
 #if hl
 	flight._hl._fn.Velocity.dampVelocity(out, current, previous, factor);
 #elseif cpp
@@ -55,7 +55,7 @@ inline function dampVelocity(out:Velocity2D, current:Velocity2D, previous:Veloci
 	#error "flight.Velocity: no backend for this target."
 #end
 }
-inline function isVelocityZero(velocity:Velocity2D, epsilon:Float):Bool {
+extern inline function isVelocityZero(velocity:Velocity2D, epsilon:Float):Bool {
 #if hl
 	return flight._hl._fn.Velocity.isVelocityZero(velocity, epsilon);
 #elseif cpp
@@ -66,7 +66,7 @@ inline function isVelocityZero(velocity:Velocity2D, epsilon:Float):Bool {
 	#error "flight.Velocity: no backend for this target."
 #end
 }
-inline function lengthOfVelocity(velocity:Velocity2D):Float {
+extern inline function lengthOfVelocity(velocity:Velocity2D):Float {
 #if hl
 	return flight._hl._fn.Velocity.lengthOfVelocity(velocity);
 #elseif cpp
@@ -77,7 +77,7 @@ inline function lengthOfVelocity(velocity:Velocity2D):Float {
 	#error "flight.Velocity: no backend for this target."
 #end
 }
-inline function lerpVelocity(out:Velocity2D, a:Velocity2D, b:Velocity2D, t:Float):Void {
+extern inline function lerpVelocity(out:Velocity2D, a:Velocity2D, b:Velocity2D, t:Float):Void {
 #if hl
 	flight._hl._fn.Velocity.lerpVelocity(out, a, b, t);
 #elseif cpp
@@ -88,7 +88,7 @@ inline function lerpVelocity(out:Velocity2D, a:Velocity2D, b:Velocity2D, t:Float
 	#error "flight.Velocity: no backend for this target."
 #end
 }
-inline function normalizeVelocity(out:Velocity2D, source:Velocity2D):Void {
+extern inline function normalizeVelocity(out:Velocity2D, source:Velocity2D):Void {
 #if hl
 	flight._hl._fn.Velocity.normalizeVelocity(out, source);
 #elseif cpp
@@ -99,7 +99,7 @@ inline function normalizeVelocity(out:Velocity2D, source:Velocity2D):Void {
 	#error "flight.Velocity: no backend for this target."
 #end
 }
-inline function scaleVelocity(out:Velocity2D, velocity:Velocity2D, scale:Float):Void {
+extern inline function scaleVelocity(out:Velocity2D, velocity:Velocity2D, scale:Float):Void {
 #if hl
 	flight._hl._fn.Velocity.scaleVelocity(out, velocity, scale);
 #elseif cpp
@@ -110,7 +110,7 @@ inline function scaleVelocity(out:Velocity2D, velocity:Velocity2D, scale:Float):
 	#error "flight.Velocity: no backend for this target."
 #end
 }
-inline function subtractVelocity(out:Velocity2D, a:Velocity2D, b:Velocity2D):Void {
+extern inline function subtractVelocity(out:Velocity2D, a:Velocity2D, b:Velocity2D):Void {
 #if hl
 	flight._hl._fn.Velocity.subtractVelocity(out, a, b);
 #elseif cpp
@@ -121,7 +121,7 @@ inline function subtractVelocity(out:Velocity2D, a:Velocity2D, b:Velocity2D):Voi
 	#error "flight.Velocity: no backend for this target."
 #end
 }
-inline function zeroVelocity(out:Velocity2D):Void {
+extern inline function zeroVelocity(out:Velocity2D):Void {
 #if hl
 	flight._hl._fn.Velocity.zeroVelocity(out);
 #elseif cpp
@@ -132,7 +132,7 @@ inline function zeroVelocity(out:Velocity2D):Void {
 	#error "flight.Velocity: no backend for this target."
 #end
 }
-inline function getVelocitySampleAt(sample:VelocitySample, currentWorldTransform:Matrix, pointX:Float, pointY:Float, out:Velocity2D):Void {
+extern inline function getVelocitySampleAt(sample:VelocitySample, currentWorldTransform:Matrix, pointX:Float, pointY:Float, out:Velocity2D):Void {
 #if hl
 	flight._hl._fn.Velocity.getVelocitySampleAt(sample, currentWorldTransform, pointX, pointY, out);
 #elseif cpp
@@ -143,7 +143,7 @@ inline function getVelocitySampleAt(sample:VelocitySample, currentWorldTransform
 	#error "flight.Velocity: no backend for this target."
 #end
 }
-inline function createVelocityField():VelocityField {
+extern inline function createVelocityField():VelocityField {
 #if hl
 	return flight._hl._fn.Velocity.createVelocityField();
 #elseif cpp
@@ -154,7 +154,7 @@ inline function createVelocityField():VelocityField {
 	#error "flight.Velocity: no backend for this target."
 #end
 }
-inline function beginVelocityFrame(field:VelocityField):Void {
+extern inline function beginVelocityFrame(field:VelocityField):Void {
 #if hl
 	flight._hl._fn.Velocity.beginVelocityFrame(field);
 #elseif cpp
@@ -165,7 +165,7 @@ inline function beginVelocityFrame(field:VelocityField):Void {
 	#error "flight.Velocity: no backend for this target."
 #end
 }
-inline function contributeVelocity(field:VelocityField, source:haxe.Int64, x:Float, y:Float):Void {
+extern inline function contributeVelocity(field:VelocityField, source:haxe.Int64, x:Float, y:Float):Void {
 #if hl
 	flight._hl._fn.Velocity.contributeVelocity(field, source, x, y);
 #elseif cpp
@@ -176,7 +176,7 @@ inline function contributeVelocity(field:VelocityField, source:haxe.Int64, x:Flo
 	#error "flight.Velocity: no backend for this target."
 #end
 }
-inline function explainVelocity(field:VelocityField, source:haxe.Int64):VelocityExplanation {
+extern inline function explainVelocity(field:VelocityField, source:haxe.Int64):VelocityExplanation {
 #if hl
 	return flight._hl._fn.Velocity.explainVelocity(field, source);
 #elseif cpp
@@ -187,7 +187,7 @@ inline function explainVelocity(field:VelocityField, source:haxe.Int64):Velocity
 	#error "flight.Velocity: no backend for this target."
 #end
 }
-inline function getVelocity(field:VelocityField, source:haxe.Int64, out:Velocity2D):Void {
+extern inline function getVelocity(field:VelocityField, source:haxe.Int64, out:Velocity2D):Void {
 #if hl
 	flight._hl._fn.Velocity.getVelocity(field, source, out);
 #elseif cpp
@@ -198,7 +198,7 @@ inline function getVelocity(field:VelocityField, source:haxe.Int64, out:Velocity
 	#error "flight.Velocity: no backend for this target."
 #end
 }
-inline function hasVelocity(field:VelocityField, source:haxe.Int64):Bool {
+extern inline function hasVelocity(field:VelocityField, source:haxe.Int64):Bool {
 #if hl
 	return flight._hl._fn.Velocity.hasVelocity(field, source);
 #elseif cpp
@@ -209,7 +209,7 @@ inline function hasVelocity(field:VelocityField, source:haxe.Int64):Bool {
 	#error "flight.Velocity: no backend for this target."
 #end
 }
-inline function suppressVelocity(field:VelocityField, source:haxe.Int64):Void {
+extern inline function suppressVelocity(field:VelocityField, source:haxe.Int64):Void {
 #if hl
 	flight._hl._fn.Velocity.suppressVelocity(field, source);
 #elseif cpp
@@ -220,7 +220,7 @@ inline function suppressVelocity(field:VelocityField, source:haxe.Int64):Void {
 	#error "flight.Velocity: no backend for this target."
 #end
 }
-inline function freeVelocityField(ptr:VelocityField):Void {
+extern inline function freeVelocityField(ptr:VelocityField):Void {
 #if hl
 	flight._hl._fn.Velocity.freeVelocityField(ptr);
 #elseif cpp
@@ -231,7 +231,7 @@ inline function freeVelocityField(ptr:VelocityField):Void {
 	#error "flight.Velocity: no backend for this target."
 #end
 }
-inline function freeVelocityExplanation(ptr:VelocityExplanation):Void {
+extern inline function freeVelocityExplanation(ptr:VelocityExplanation):Void {
 #if hl
 	flight._hl._fn.Velocity.freeVelocityExplanation(ptr);
 #elseif cpp

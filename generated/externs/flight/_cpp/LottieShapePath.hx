@@ -10,5 +10,5 @@ abstract LottieShapePath(cpp.Star<cpp.Void>) {
 
 	inline function get_c():Bool return LottieShapePath_Ffi.get_c(this);
 
-	inline function set_c(value:Bool):Bool return LottieShapePath_Ffi.set_c(this, value);
+	inline function set_c(value:Bool):Bool { LottieShapePath_Ffi.set_c(this, value); return value; }
 }

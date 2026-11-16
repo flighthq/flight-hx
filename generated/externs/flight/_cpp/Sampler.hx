@@ -12,38 +12,38 @@ abstract Sampler(cpp.Star<cpp.Void>) {
 
 	inline function get_anisotropy():Single return Sampler_Ffi.get_anisotropy(this);
 
-	inline function set_anisotropy(value:Single):Single return Sampler_Ffi.set_anisotropy(this, value);
+	inline function set_anisotropy(value:Single):Single { Sampler_Ffi.set_anisotropy(this, value); return value; }
 	public var mipmaps(get, set):Bool;
 
 	inline function get_mipmaps():Bool return Sampler_Ffi.get_mipmaps(this);
 
-	inline function set_mipmaps(value:Bool):Bool return Sampler_Ffi.set_mipmaps(this, value);
+	inline function set_mipmaps(value:Bool):Bool { Sampler_Ffi.set_mipmaps(this, value); return value; }
 
-	static inline public function createAnisotropic(level:Single):flight._cpp.Sampler {
+	static extern inline public function createAnisotropic(level:Single):flight._cpp.Sampler {
 		return flight._cpp._fn.Texture.createAnisotropicSampler(level);
 	}
-	static inline public function createClampLinear():flight._cpp.Sampler {
+	static extern inline public function createClampLinear():flight._cpp.Sampler {
 		return flight._cpp._fn.Texture.createClampLinearSampler();
 	}
-	static inline public function createPixelArt():flight._cpp.Sampler {
+	static extern inline public function createPixelArt():flight._cpp.Sampler {
 		return flight._cpp._fn.Texture.createPixelArtSampler();
 	}
-	static inline public function create():flight._cpp.Sampler {
+	static extern inline public function create():flight._cpp.Sampler {
 		return flight._cpp._fn.Texture.createSampler();
 	}
-	static inline public function createTiling():flight._cpp.Sampler {
+	static extern inline public function createTiling():flight._cpp.Sampler {
 		return flight._cpp._fn.Texture.createTilingSampler();
 	}
-	inline public function clone():flight._cpp.Sampler {
+	extern inline public function clone():flight._cpp.Sampler {
 		return flight._cpp._fn.Texture.cloneSampler(cast this);
 	}
-	inline public function copy(source:flight._cpp.Sampler):Void {
+	extern inline public function copy(source:flight._cpp.Sampler):Void {
 		flight._cpp._fn.Texture.copySampler(cast this, source);
 	}
-	inline public function equals(b:flight._cpp.Sampler):Bool {
+	extern inline public function equals(b:flight._cpp.Sampler):Bool {
 		return flight._cpp._fn.Texture.equalsSampler(cast this, b);
 	}
-	inline public function free():Void {
+	extern inline public function free():Void {
 		flight._cpp._fn.Texture.freeSampler(cast this);
 	}
 }

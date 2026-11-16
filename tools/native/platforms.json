@@ -1,0 +1,10 @@
+{
+  "Linux64": { "triple": "x86_64-unknown-linux-gnu", "shared": "libflight_ffi.so" },
+  "LinuxArm64": { "triple": "aarch64-unknown-linux-gnu", "shared": "libflight_ffi.so" },
+  "Mac64": { "triple": "x86_64-apple-darwin", "shared": "libflight_ffi.dylib" },
+  "MacArm64": { "triple": "aarch64-apple-darwin", "shared": "libflight_ffi.dylib" },
+  "Windows64": { "triple": "x86_64-pc-windows-msvc", "shared": "flight_ffi.dll", "importLibrary": "flight_ffi.dll.lib" },
+  "iPhoneOSArm64": { "triple": "aarch64-apple-ios", "static": "libflight_ffi.a" },
+  "iPhoneSimulatorArm64": { "triple": "aarch64-apple-ios-sim", "static": "libflight_ffi.a" },
+  "iPhoneSimulator64": { "triple": "x86_64-apple-ios", "static": "libflight_ffi.a" }
+}

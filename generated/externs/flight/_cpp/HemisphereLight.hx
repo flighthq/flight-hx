@@ -16,20 +16,20 @@ abstract HemisphereLight(cpp.Star<cpp.Void>) {
 
 	inline function get_enabled():Bool return HemisphereLight_Ffi.get_enabled(this);
 
-	inline function set_enabled(value:Bool):Bool return HemisphereLight_Ffi.set_enabled(this, value);
+	inline function set_enabled(value:Bool):Bool { HemisphereLight_Ffi.set_enabled(this, value); return value; }
 	public var groundColor(get, set):Int;
 
 	inline function get_groundColor():Int return HemisphereLight_Ffi.get_groundColor(this);
 
-	inline function set_groundColor(value:Int):Int return HemisphereLight_Ffi.set_groundColor(this, value);
+	inline function set_groundColor(value:Int):Int { HemisphereLight_Ffi.set_groundColor(this, value); return value; }
 	public var intensity(get, set):Single;
 
 	inline function get_intensity():Single return HemisphereLight_Ffi.get_intensity(this);
 
-	inline function set_intensity(value:Single):Single return HemisphereLight_Ffi.set_intensity(this, value);
+	inline function set_intensity(value:Single):Single { HemisphereLight_Ffi.set_intensity(this, value); return value; }
 	public var skyColor(get, set):Int;
 
 	inline function get_skyColor():Int return HemisphereLight_Ffi.get_skyColor(this);
 
-	inline function set_skyColor(value:Int):Int return HemisphereLight_Ffi.set_skyColor(this, value);
+	inline function set_skyColor(value:Int):Int { HemisphereLight_Ffi.set_skyColor(this, value); return value; }
 }

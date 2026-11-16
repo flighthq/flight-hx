@@ -12,10 +12,10 @@ abstract SpineAlphaKeyframe(cpp.Star<cpp.Void>) {
 
 	inline function get_alpha():Single return SpineAlphaKeyframe_Ffi.get_alpha(this);
 
-	inline function set_alpha(value:Single):Single return SpineAlphaKeyframe_Ffi.set_alpha(this, value);
+	inline function set_alpha(value:Single):Single { SpineAlphaKeyframe_Ffi.set_alpha(this, value); return value; }
 	public var time(get, set):Single;
 
 	inline function get_time():Single return SpineAlphaKeyframe_Ffi.get_time(this);
 
-	inline function set_time(value:Single):Single return SpineAlphaKeyframe_Ffi.set_time(this, value);
+	inline function set_time(value:Single):Single { SpineAlphaKeyframe_Ffi.set_time(this, value); return value; }
 }

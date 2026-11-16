@@ -18,25 +18,25 @@ abstract MorphShapeColorPaintBinding(cpp.Star<cpp.Void>) {
 
 	inline function get_commandIndex():Int return MorphShapeColorPaintBinding_Ffi.get_commandIndex(this);
 
-	inline function set_commandIndex(value:Int):Int return MorphShapeColorPaintBinding_Ffi.set_commandIndex(this, value);
+	inline function set_commandIndex(value:Int):Int { MorphShapeColorPaintBinding_Ffi.set_commandIndex(this, value); return value; }
 	public var endAlpha(get, set):Single;
 
 	inline function get_endAlpha():Single return MorphShapeColorPaintBinding_Ffi.get_endAlpha(this);
 
-	inline function set_endAlpha(value:Single):Single return MorphShapeColorPaintBinding_Ffi.set_endAlpha(this, value);
+	inline function set_endAlpha(value:Single):Single { MorphShapeColorPaintBinding_Ffi.set_endAlpha(this, value); return value; }
 	public var endColor(get, set):Int;
 
 	inline function get_endColor():Int return MorphShapeColorPaintBinding_Ffi.get_endColor(this);
 
-	inline function set_endColor(value:Int):Int return MorphShapeColorPaintBinding_Ffi.set_endColor(this, value);
+	inline function set_endColor(value:Int):Int { MorphShapeColorPaintBinding_Ffi.set_endColor(this, value); return value; }
 	public var startAlpha(get, set):Single;
 
 	inline function get_startAlpha():Single return MorphShapeColorPaintBinding_Ffi.get_startAlpha(this);
 
-	inline function set_startAlpha(value:Single):Single return MorphShapeColorPaintBinding_Ffi.set_startAlpha(this, value);
+	inline function set_startAlpha(value:Single):Single { MorphShapeColorPaintBinding_Ffi.set_startAlpha(this, value); return value; }
 	public var startColor(get, set):Int;
 
 	inline function get_startColor():Int return MorphShapeColorPaintBinding_Ffi.get_startColor(this);
 
-	inline function set_startColor(value:Int):Int return MorphShapeColorPaintBinding_Ffi.set_startColor(this, value);
+	inline function set_startColor(value:Int):Int { MorphShapeColorPaintBinding_Ffi.set_startColor(this, value); return value; }
 }

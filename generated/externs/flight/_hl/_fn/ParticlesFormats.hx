@@ -2,13 +2,13 @@ package flight._hl._fn;
 
 extern class ParticlesFormats {
 	@:hlNative("flight", "flight_detect_particle_format")
-	public static function detectParticleFormat(registry:flight._hl.ParticleFormatRegistry, text:hl.Bytes):Dynamic;
+	public static function detectParticleFormat(registry:flight._hl.ParticleFormatRegistry, text:hl.Bytes):flight._hl.ParticleFormatKind;
 	@:hlNative("flight", "flight_create_particle_format_registry")
 	public static function createParticleFormatRegistry():flight._hl.ParticleFormatRegistry;
 	@:hlNative("flight", "flight_detect_registered_particle_format")
-	public static function detectRegisteredParticleFormat(registry:flight._hl.ParticleFormatRegistry, text:hl.Bytes):Dynamic;
+	public static function detectRegisteredParticleFormat(registry:flight._hl.ParticleFormatRegistry, text:hl.Bytes):flight._hl.ParticleFormatKind;
 	@:hlNative("flight", "flight_get_registered_particle_formats")
-	public static function getRegisteredParticleFormats(out:Dynamic, registry:flight._hl.ParticleFormatRegistry):Void;
+	public static function getRegisteredParticleFormats(out:hl.Bytes, registry:flight._hl.ParticleFormatRegistry):Void;
 	@:hlNative("flight", "flight_parse_registered_particle_format")
 	public static function parseRegisteredParticleFormat(registry:flight._hl.ParticleFormatRegistry, text:hl.Bytes, kind:hl.Bytes, options:flight._hl.ParseParticleConfigOptions):flight._hl.ParticleConfigParseResult;
 	@:hlNative("flight", "flight_register_particle_format")
@@ -40,7 +40,7 @@ extern class ParticlesFormats {
 	@:hlNative("flight", "flight_parse_pixi_particle_document")
 	public static function parsePixiParticleDocument(json:hl.Bytes):flight._hl.PixiParseResult;
 	@:hlNative("flight", "flight_create_particle_all_formats")
-	public static function createParticleAllFormats():Dynamic;
+	public static function createParticleAllFormats():hl.Bytes;
 	@:hlNative("flight", "flight_apply_particle_import_options")
 	public static function applyParticleImportOptions(registry:flight._hl.ParticleFormatRegistry, options:flight._hl.ParticleImportOptions):Void;
 	@:hlNative("flight", "flight_get_libgdx_particle_format")

@@ -12,10 +12,10 @@ abstract AbcInstruction(cpp.Star<cpp.Void>) {
 
 	inline function get_offset():Int return AbcInstruction_Ffi.get_offset(this);
 
-	inline function set_offset(value:Int):Int return AbcInstruction_Ffi.set_offset(this, value);
+	inline function set_offset(value:Int):Int { AbcInstruction_Ffi.set_offset(this, value); return value; }
 	public var opcode(get, set):Int;
 
 	inline function get_opcode():Int return AbcInstruction_Ffi.get_opcode(this);
 
-	inline function set_opcode(value:Int):Int return AbcInstruction_Ffi.set_opcode(this, value);
+	inline function set_opcode(value:Int):Int { AbcInstruction_Ffi.set_opcode(this, value); return value; }
 }

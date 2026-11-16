@@ -14,15 +14,15 @@ abstract ColorComponents(cpp.Star<cpp.Void>) {
 
 	inline function get_r():Single return ColorComponents_Ffi.get_r(this);
 
-	inline function set_r(value:Single):Single return ColorComponents_Ffi.set_r(this, value);
+	inline function set_r(value:Single):Single { ColorComponents_Ffi.set_r(this, value); return value; }
 	public var g(get, set):Single;
 
 	inline function get_g():Single return ColorComponents_Ffi.get_g(this);
 
-	inline function set_g(value:Single):Single return ColorComponents_Ffi.set_g(this, value);
+	inline function set_g(value:Single):Single { ColorComponents_Ffi.set_g(this, value); return value; }
 	public var b(get, set):Single;
 
 	inline function get_b():Single return ColorComponents_Ffi.get_b(this);
 
-	inline function set_b(value:Single):Single return ColorComponents_Ffi.set_b(this, value);
+	inline function set_b(value:Single):Single { ColorComponents_Ffi.set_b(this, value); return value; }
 }

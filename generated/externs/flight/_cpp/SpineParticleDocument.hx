@@ -16,20 +16,20 @@ abstract SpineParticleDocument(cpp.Star<cpp.Void>) {
 
 	inline function get_continuous():Bool return SpineParticleDocument_Ffi.get_continuous(this);
 
-	inline function set_continuous(value:Bool):Bool return SpineParticleDocument_Ffi.set_continuous(this, value);
+	inline function set_continuous(value:Bool):Bool { SpineParticleDocument_Ffi.set_continuous(this, value); return value; }
 	public var duration(get, set):Single;
 
 	inline function get_duration():Single return SpineParticleDocument_Ffi.get_duration(this);
 
-	inline function set_duration(value:Single):Single return SpineParticleDocument_Ffi.set_duration(this, value);
+	inline function set_duration(value:Single):Single { SpineParticleDocument_Ffi.set_duration(this, value); return value; }
 	public var maxParticles(get, set):Single;
 
 	inline function get_maxParticles():Single return SpineParticleDocument_Ffi.get_maxParticles(this);
 
-	inline function set_maxParticles(value:Single):Single return SpineParticleDocument_Ffi.set_maxParticles(this, value);
+	inline function set_maxParticles(value:Single):Single { SpineParticleDocument_Ffi.set_maxParticles(this, value); return value; }
 	public var premultiplied(get, set):Bool;
 
 	inline function get_premultiplied():Bool return SpineParticleDocument_Ffi.get_premultiplied(this);
 
-	inline function set_premultiplied(value:Bool):Bool return SpineParticleDocument_Ffi.set_premultiplied(this, value);
+	inline function set_premultiplied(value:Bool):Bool { SpineParticleDocument_Ffi.set_premultiplied(this, value); return value; }
 }

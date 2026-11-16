@@ -12,10 +12,10 @@ abstract SvgCssRule(cpp.Star<cpp.Void>) {
 
 	inline function get_order():Int return SvgCssRule_Ffi.get_order(this);
 
-	inline function set_order(value:Int):Int return SvgCssRule_Ffi.set_order(this, value);
+	inline function set_order(value:Int):Int { SvgCssRule_Ffi.set_order(this, value); return value; }
 	public var specificity(get, set):Int;
 
 	inline function get_specificity():Int return SvgCssRule_Ffi.get_specificity(this);
 
-	inline function set_specificity(value:Int):Int return SvgCssRule_Ffi.set_specificity(this, value);
+	inline function set_specificity(value:Int):Int { SvgCssRule_Ffi.set_specificity(this, value); return value; }
 }

@@ -22,35 +22,35 @@ abstract Physics2DJointResolution(cpp.Star<cpp.Void>) {
 
 	inline function get_bodyA():Int return Physics2DJointResolution_Ffi.get_bodyA(this);
 
-	inline function set_bodyA(value:Int):Int return Physics2DJointResolution_Ffi.set_bodyA(this, value);
+	inline function set_bodyA(value:Int):Int { Physics2DJointResolution_Ffi.set_bodyA(this, value); return value; }
 	public var bodyAFound(get, set):Bool;
 
 	inline function get_bodyAFound():Bool return Physics2DJointResolution_Ffi.get_bodyAFound(this);
 
-	inline function set_bodyAFound(value:Bool):Bool return Physics2DJointResolution_Ffi.set_bodyAFound(this, value);
+	inline function set_bodyAFound(value:Bool):Bool { Physics2DJointResolution_Ffi.set_bodyAFound(this, value); return value; }
 	public var bodyAUsed(get, set):Bool;
 
 	inline function get_bodyAUsed():Bool return Physics2DJointResolution_Ffi.get_bodyAUsed(this);
 
-	inline function set_bodyAUsed(value:Bool):Bool return Physics2DJointResolution_Ffi.set_bodyAUsed(this, value);
+	inline function set_bodyAUsed(value:Bool):Bool { Physics2DJointResolution_Ffi.set_bodyAUsed(this, value); return value; }
 	public var bodyB(get, set):Int;
 
 	inline function get_bodyB():Int return Physics2DJointResolution_Ffi.get_bodyB(this);
 
-	inline function set_bodyB(value:Int):Int return Physics2DJointResolution_Ffi.set_bodyB(this, value);
+	inline function set_bodyB(value:Int):Int { Physics2DJointResolution_Ffi.set_bodyB(this, value); return value; }
 	public var bodyBFound(get, set):Bool;
 
 	inline function get_bodyBFound():Bool return Physics2DJointResolution_Ffi.get_bodyBFound(this);
 
-	inline function set_bodyBFound(value:Bool):Bool return Physics2DJointResolution_Ffi.set_bodyBFound(this, value);
+	inline function set_bodyBFound(value:Bool):Bool { Physics2DJointResolution_Ffi.set_bodyBFound(this, value); return value; }
 	public var jointIndex(get, set):Int;
 
 	inline function get_jointIndex():Int return Physics2DJointResolution_Ffi.get_jointIndex(this);
 
-	inline function set_jointIndex(value:Int):Int return Physics2DJointResolution_Ffi.set_jointIndex(this, value);
+	inline function set_jointIndex(value:Int):Int { Physics2DJointResolution_Ffi.set_jointIndex(this, value); return value; }
 	public var solverRegistered(get, set):Bool;
 
 	inline function get_solverRegistered():Bool return Physics2DJointResolution_Ffi.get_solverRegistered(this);
 
-	inline function set_solverRegistered(value:Bool):Bool return Physics2DJointResolution_Ffi.set_solverRegistered(this, value);
+	inline function set_solverRegistered(value:Bool):Bool { Physics2DJointResolution_Ffi.set_solverRegistered(this, value); return value; }
 }

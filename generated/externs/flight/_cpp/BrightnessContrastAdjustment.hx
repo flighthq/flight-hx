@@ -12,10 +12,10 @@ abstract BrightnessContrastAdjustment(cpp.Star<cpp.Void>) {
 
 	inline function get_brightness():Single return BrightnessContrastAdjustment_Ffi.get_brightness(this);
 
-	inline function set_brightness(value:Single):Single return BrightnessContrastAdjustment_Ffi.set_brightness(this, value);
+	inline function set_brightness(value:Single):Single { BrightnessContrastAdjustment_Ffi.set_brightness(this, value); return value; }
 	public var contrast(get, set):Single;
 
 	inline function get_contrast():Single return BrightnessContrastAdjustment_Ffi.get_contrast(this);
 
-	inline function set_contrast(value:Single):Single return BrightnessContrastAdjustment_Ffi.set_contrast(this, value);
+	inline function set_contrast(value:Single):Single { BrightnessContrastAdjustment_Ffi.set_contrast(this, value); return value; }
 }

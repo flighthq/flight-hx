@@ -1,6 +1,6 @@
 package flight;
 
-inline function areTextureAtlasGuardsEnabled(state:TextureAtlasGuardState):Bool {
+extern inline function areTextureAtlasGuardsEnabled(state:TextureAtlasGuardState):Bool {
 #if hl
 	return flight._hl._fn.Textureatlas.areTextureAtlasGuardsEnabled(state);
 #elseif cpp
@@ -11,7 +11,7 @@ inline function areTextureAtlasGuardsEnabled(state:TextureAtlasGuardState):Bool 
 	#error "flight.Textureatlas: no backend for this target."
 #end
 }
-inline function disableTextureAtlasGuards(state:TextureAtlasGuardState):Void {
+extern inline function disableTextureAtlasGuards(state:TextureAtlasGuardState):Void {
 #if hl
 	flight._hl._fn.Textureatlas.disableTextureAtlasGuards(state);
 #elseif cpp
@@ -22,7 +22,7 @@ inline function disableTextureAtlasGuards(state:TextureAtlasGuardState):Void {
 	#error "flight.Textureatlas: no backend for this target."
 #end
 }
-inline function enableTextureAtlasGuards(state:TextureAtlasGuardState, logState:Dynamic, clockFn:Dynamic, clockCtx:Dynamic):Void {
+extern inline function enableTextureAtlasGuards(state:TextureAtlasGuardState, logState:Dynamic, clockFn:Dynamic, clockCtx:Dynamic):Void {
 #if hl
 	flight._hl._fn.Textureatlas.enableTextureAtlasGuards(state, logState, clockFn, clockCtx);
 #elseif cpp
@@ -33,7 +33,7 @@ inline function enableTextureAtlasGuards(state:TextureAtlasGuardState, logState:
 	#error "flight.Textureatlas: no backend for this target."
 #end
 }
-inline function createTextureAtlas():Dynamic {
+extern inline function createTextureAtlas():Dynamic {
 #if hl
 	return flight._hl._fn.Textureatlas.createTextureAtlas();
 #elseif cpp
@@ -44,7 +44,7 @@ inline function createTextureAtlas():Dynamic {
 	#error "flight.Textureatlas: no backend for this target."
 #end
 }
-inline function disposeTextureAtlas(atlas:TextureAtlas):Void {
+extern inline function disposeTextureAtlas(atlas:TextureAtlas):Void {
 #if hl
 	flight._hl._fn.Textureatlas.disposeTextureAtlas(atlas);
 #elseif cpp
@@ -55,7 +55,7 @@ inline function disposeTextureAtlas(atlas:TextureAtlas):Void {
 	#error "flight.Textureatlas: no backend for this target."
 #end
 }
-inline function getTextureAtlasByteSize(atlas:TextureAtlas):Int {
+extern inline function getTextureAtlasByteSize(atlas:TextureAtlas):Int {
 #if hl
 	return flight._hl._fn.Textureatlas.getTextureAtlasByteSize(atlas);
 #elseif cpp
@@ -66,7 +66,7 @@ inline function getTextureAtlasByteSize(atlas:TextureAtlas):Int {
 	#error "flight.Textureatlas: no backend for this target."
 #end
 }
-inline function createTextureAtlasFromImageResource(resource:Dynamic):Dynamic {
+extern inline function createTextureAtlasFromImageResource(resource:Dynamic):Dynamic {
 #if hl
 	return flight._hl._fn.Textureatlas.createTextureAtlasFromImageResource(resource);
 #elseif cpp
@@ -77,7 +77,7 @@ inline function createTextureAtlasFromImageResource(resource:Dynamic):Dynamic {
 	#error "flight.Textureatlas: no backend for this target."
 #end
 }
-inline function createTextureAtlasFromGrid(options:GridSliceOptions, texture:Dynamic):Dynamic {
+extern inline function createTextureAtlasFromGrid(options:GridSliceOptions, texture:Dynamic):Dynamic {
 #if hl
 	return flight._hl._fn.Textureatlas.createTextureAtlasFromGrid(options, texture);
 #elseif cpp
@@ -88,7 +88,7 @@ inline function createTextureAtlasFromGrid(options:GridSliceOptions, texture:Dyn
 	#error "flight.Textureatlas: no backend for this target."
 #end
 }
-inline function createTextureAtlasRegion():Dynamic {
+extern inline function createTextureAtlasRegion():Dynamic {
 #if hl
 	return flight._hl._fn.Textureatlas.createTextureAtlasRegion();
 #elseif cpp
@@ -99,7 +99,7 @@ inline function createTextureAtlasRegion():Dynamic {
 	#error "flight.Textureatlas: no backend for this target."
 #end
 }
-inline function addTextureAtlasRegion(target:TextureAtlas, x:Float, y:Float, width:Float, height:Float, pivotX:Float, pivotY:Float, name:String):Void {
+extern inline function addTextureAtlasRegion(target:TextureAtlas, x:Float, y:Float, width:Float, height:Float, pivotX:Float, pivotY:Float, name:String):Void {
 #if hl
 	flight._hl._fn.Textureatlas.addTextureAtlasRegion(target, x, y, width, height, pivotX, pivotY, cast name);
 #elseif cpp
@@ -110,7 +110,7 @@ inline function addTextureAtlasRegion(target:TextureAtlas, x:Float, y:Float, wid
 	#error "flight.Textureatlas: no backend for this target."
 #end
 }
-inline function addTextureAtlasRegionCorners(target:TextureAtlas, ax:Float, ay:Float, bx:Float, by:Float, pivotX:Float, pivotY:Float, name:String):Void {
+extern inline function addTextureAtlasRegionCorners(target:TextureAtlas, ax:Float, ay:Float, bx:Float, by:Float, pivotX:Float, pivotY:Float, name:String):Void {
 #if hl
 	flight._hl._fn.Textureatlas.addTextureAtlasRegionCorners(target, ax, ay, bx, by, pivotX, pivotY, cast name);
 #elseif cpp
@@ -121,7 +121,7 @@ inline function addTextureAtlasRegionCorners(target:TextureAtlas, ax:Float, ay:F
 	#error "flight.Textureatlas: no backend for this target."
 #end
 }
-inline function addTextureAtlasRegionRectangle(target:TextureAtlas, rect:Rectangle, pivot:Vector2, name:String):Void {
+extern inline function addTextureAtlasRegionRectangle(target:TextureAtlas, rect:Rectangle, pivot:Vector2, name:String):Void {
 #if hl
 	flight._hl._fn.Textureatlas.addTextureAtlasRegionRectangle(target, rect, pivot, cast name);
 #elseif cpp
@@ -132,7 +132,7 @@ inline function addTextureAtlasRegionRectangle(target:TextureAtlas, rect:Rectang
 	#error "flight.Textureatlas: no backend for this target."
 #end
 }
-inline function addTextureAtlasRegionVector2(target:TextureAtlas, a:Vector2, b:Vector2, pivot:Vector2, name:String):Void {
+extern inline function addTextureAtlasRegionVector2(target:TextureAtlas, a:Vector2, b:Vector2, pivot:Vector2, name:String):Void {
 #if hl
 	flight._hl._fn.Textureatlas.addTextureAtlasRegionVector2(target, a, b, pivot, cast name);
 #elseif cpp
@@ -143,7 +143,7 @@ inline function addTextureAtlasRegionVector2(target:TextureAtlas, a:Vector2, b:V
 	#error "flight.Textureatlas: no backend for this target."
 #end
 }
-inline function clearTextureAtlasRegions(target:TextureAtlas):Void {
+extern inline function clearTextureAtlasRegions(target:TextureAtlas):Void {
 #if hl
 	flight._hl._fn.Textureatlas.clearTextureAtlasRegions(target);
 #elseif cpp
@@ -154,7 +154,7 @@ inline function clearTextureAtlasRegions(target:TextureAtlas):Void {
 	#error "flight.Textureatlas: no backend for this target."
 #end
 }
-inline function explainTextureAtlasRegionTexture(atlas:TextureAtlas, regionId:Int):TextureAtlasRegionTextureExplanation {
+extern inline function explainTextureAtlasRegionTexture(atlas:TextureAtlas, regionId:Int):TextureAtlasRegionTextureExplanation {
 #if hl
 	return flight._hl._fn.Textureatlas.explainTextureAtlasRegionTexture(atlas, regionId);
 #elseif cpp
@@ -165,7 +165,7 @@ inline function explainTextureAtlasRegionTexture(atlas:TextureAtlas, regionId:In
 	#error "flight.Textureatlas: no backend for this target."
 #end
 }
-inline function getTextureAtlasRegionById(atlas:TextureAtlas, id:Int):Dynamic {
+extern inline function getTextureAtlasRegionById(atlas:TextureAtlas, id:Int):Dynamic {
 #if hl
 	return flight._hl._fn.Textureatlas.getTextureAtlasRegionById(atlas, id);
 #elseif cpp
@@ -176,7 +176,7 @@ inline function getTextureAtlasRegionById(atlas:TextureAtlas, id:Int):Dynamic {
 	#error "flight.Textureatlas: no backend for this target."
 #end
 }
-inline function getTextureAtlasRegionByName(atlas:TextureAtlas, name:String):Dynamic {
+extern inline function getTextureAtlasRegionByName(atlas:TextureAtlas, name:String):Dynamic {
 #if hl
 	return flight._hl._fn.Textureatlas.getTextureAtlasRegionByName(atlas, cast name);
 #elseif cpp
@@ -187,7 +187,7 @@ inline function getTextureAtlasRegionByName(atlas:TextureAtlas, name:String):Dyn
 	#error "flight.Textureatlas: no backend for this target."
 #end
 }
-inline function getTextureAtlasRegionByOrdinal(atlas:TextureAtlas, prefix:String, ordinal:Float):Dynamic {
+extern inline function getTextureAtlasRegionByOrdinal(atlas:TextureAtlas, prefix:String, ordinal:Float):Dynamic {
 #if hl
 	return flight._hl._fn.Textureatlas.getTextureAtlasRegionByOrdinal(atlas, cast prefix, ordinal);
 #elseif cpp
@@ -198,7 +198,7 @@ inline function getTextureAtlasRegionByOrdinal(atlas:TextureAtlas, prefix:String
 	#error "flight.Textureatlas: no backend for this target."
 #end
 }
-inline function getTextureAtlasRegionCount(atlas:TextureAtlas):Int {
+extern inline function getTextureAtlasRegionCount(atlas:TextureAtlas):Int {
 #if hl
 	return flight._hl._fn.Textureatlas.getTextureAtlasRegionCount(atlas);
 #elseif cpp
@@ -209,7 +209,7 @@ inline function getTextureAtlasRegionCount(atlas:TextureAtlas):Int {
 	#error "flight.Textureatlas: no backend for this target."
 #end
 }
-inline function getTextureAtlasRegionFrame(out:Rectangle, region:TextureAtlasRegion):Void {
+extern inline function getTextureAtlasRegionFrame(out:Rectangle, region:TextureAtlasRegion):Void {
 #if hl
 	flight._hl._fn.Textureatlas.getTextureAtlasRegionFrame(out, region);
 #elseif cpp
@@ -220,7 +220,7 @@ inline function getTextureAtlasRegionFrame(out:Rectangle, region:TextureAtlasReg
 	#error "flight.Textureatlas: no backend for this target."
 #end
 }
-inline function getTextureAtlasRegionOrdinal(region:TextureAtlasRegion):Float {
+extern inline function getTextureAtlasRegionOrdinal(region:TextureAtlasRegion):Float {
 #if hl
 	return flight._hl._fn.Textureatlas.getTextureAtlasRegionOrdinal(region);
 #elseif cpp
@@ -231,7 +231,7 @@ inline function getTextureAtlasRegionOrdinal(region:TextureAtlasRegion):Float {
 	#error "flight.Textureatlas: no backend for this target."
 #end
 }
-inline function getTextureAtlasRegionTexture(atlas:Dynamic, regionId:Int, guards:TextureAtlasGuardState):Dynamic {
+extern inline function getTextureAtlasRegionTexture(atlas:Dynamic, regionId:Int, guards:TextureAtlasGuardState):Dynamic {
 #if hl
 	return flight._hl._fn.Textureatlas.getTextureAtlasRegionTexture(atlas, regionId, guards);
 #elseif cpp
@@ -242,7 +242,7 @@ inline function getTextureAtlasRegionTexture(atlas:Dynamic, regionId:Int, guards
 	#error "flight.Textureatlas: no backend for this target."
 #end
 }
-inline function getTextureAtlasRegionTextureStatusString(value:flight.TextureAtlasRegionTextureStatus):String {
+extern inline function getTextureAtlasRegionTextureStatusString(value:flight.TextureAtlasRegionTextureStatus):String {
 #if hl
 	return cast flight._hl._fn.Textureatlas.getTextureAtlasRegionTextureStatusString(value);
 #elseif cpp
@@ -253,7 +253,7 @@ inline function getTextureAtlasRegionTextureStatusString(value:flight.TextureAtl
 	#error "flight.Textureatlas: no backend for this target."
 #end
 }
-inline function getTextureAtlasRegionUv(out:Rectangle, region:TextureAtlasRegion, imageWidth:Float, imageHeight:Float):Void {
+extern inline function getTextureAtlasRegionUv(out:Rectangle, region:TextureAtlasRegion, imageWidth:Float, imageHeight:Float):Void {
 #if hl
 	flight._hl._fn.Textureatlas.getTextureAtlasRegionUv(out, region, imageWidth, imageHeight);
 #elseif cpp
@@ -264,7 +264,7 @@ inline function getTextureAtlasRegionUv(out:Rectangle, region:TextureAtlasRegion
 	#error "flight.Textureatlas: no backend for this target."
 #end
 }
-inline function getTextureAtlasRegionUvQuad(out:Dynamic, region:TextureAtlasRegion, imageWidth:Float, imageHeight:Float):Void {
+extern inline function getTextureAtlasRegionUvQuad(out:Dynamic, region:TextureAtlasRegion, imageWidth:Float, imageHeight:Float):Void {
 #if hl
 	flight._hl._fn.Textureatlas.getTextureAtlasRegionUvQuad(out, region, imageWidth, imageHeight);
 #elseif cpp
@@ -275,7 +275,7 @@ inline function getTextureAtlasRegionUvQuad(out:Dynamic, region:TextureAtlasRegi
 	#error "flight.Textureatlas: no backend for this target."
 #end
 }
-inline function hasTextureAtlasRegion(atlas:TextureAtlas, name:String):Bool {
+extern inline function hasTextureAtlasRegion(atlas:TextureAtlas, name:String):Bool {
 #if hl
 	return flight._hl._fn.Textureatlas.hasTextureAtlasRegion(atlas, cast name);
 #elseif cpp
@@ -286,7 +286,7 @@ inline function hasTextureAtlasRegion(atlas:TextureAtlas, name:String):Bool {
 	#error "flight.Textureatlas: no backend for this target."
 #end
 }
-inline function parseTextureAtlasRegionTextureStatus(value:String):Int {
+extern inline function parseTextureAtlasRegionTextureStatus(value:String):Int {
 #if hl
 	return flight._hl._fn.Textureatlas.parseTextureAtlasRegionTextureStatus(cast value);
 #elseif cpp
@@ -297,7 +297,7 @@ inline function parseTextureAtlasRegionTextureStatus(value:String):Int {
 	#error "flight.Textureatlas: no backend for this target."
 #end
 }
-inline function removeTextureAtlasRegion(target:TextureAtlas, id:Int):Bool {
+extern inline function removeTextureAtlasRegion(target:TextureAtlas, id:Int):Bool {
 #if hl
 	return flight._hl._fn.Textureatlas.removeTextureAtlasRegion(target, id);
 #elseif cpp
@@ -308,7 +308,7 @@ inline function removeTextureAtlasRegion(target:TextureAtlas, id:Int):Bool {
 	#error "flight.Textureatlas: no backend for this target."
 #end
 }
-inline function setTextureAtlasRegion(out:TextureAtlasRegion, source:TextureAtlasRegionOptions):Void {
+extern inline function setTextureAtlasRegion(out:TextureAtlasRegion, source:TextureAtlasRegionOptions):Void {
 #if hl
 	flight._hl._fn.Textureatlas.setTextureAtlasRegion(out, source);
 #elseif cpp
@@ -319,7 +319,7 @@ inline function setTextureAtlasRegion(out:TextureAtlasRegion, source:TextureAtla
 	#error "flight.Textureatlas: no backend for this target."
 #end
 }
-inline function freeTextureAtlasRegionTextureExplanation(ptr:TextureAtlasRegionTextureExplanation):Void {
+extern inline function freeTextureAtlasRegionTextureExplanation(ptr:TextureAtlasRegionTextureExplanation):Void {
 #if hl
 	flight._hl._fn.Textureatlas.freeTextureAtlasRegionTextureExplanation(ptr);
 #elseif cpp

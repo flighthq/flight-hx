@@ -16,20 +16,20 @@ abstract Physics2DMassData(cpp.Star<cpp.Void>) {
 
 	inline function get_centerX():Single return Physics2DMassData_Ffi.get_centerX(this);
 
-	inline function set_centerX(value:Single):Single return Physics2DMassData_Ffi.set_centerX(this, value);
+	inline function set_centerX(value:Single):Single { Physics2DMassData_Ffi.set_centerX(this, value); return value; }
 	public var centerY(get, set):Single;
 
 	inline function get_centerY():Single return Physics2DMassData_Ffi.get_centerY(this);
 
-	inline function set_centerY(value:Single):Single return Physics2DMassData_Ffi.set_centerY(this, value);
+	inline function set_centerY(value:Single):Single { Physics2DMassData_Ffi.set_centerY(this, value); return value; }
 	public var inertia(get, set):Single;
 
 	inline function get_inertia():Single return Physics2DMassData_Ffi.get_inertia(this);
 
-	inline function set_inertia(value:Single):Single return Physics2DMassData_Ffi.set_inertia(this, value);
+	inline function set_inertia(value:Single):Single { Physics2DMassData_Ffi.set_inertia(this, value); return value; }
 	public var mass(get, set):Single;
 
 	inline function get_mass():Single return Physics2DMassData_Ffi.get_mass(this);
 
-	inline function set_mass(value:Single):Single return Physics2DMassData_Ffi.set_mass(this, value);
+	inline function set_mass(value:Single):Single { Physics2DMassData_Ffi.set_mass(this, value); return value; }
 }

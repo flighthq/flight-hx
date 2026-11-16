@@ -16,20 +16,20 @@ abstract Physics3DAbiContactBuffer(cpp.Star<cpp.Void>) {
 
 	inline function get_count():Int return Physics3DAbiContactBuffer_Ffi.get_count(this);
 
-	inline function set_count(value:Int):Int return Physics3DAbiContactBuffer_Ffi.set_count(this, value);
+	inline function set_count(value:Int):Int { Physics3DAbiContactBuffer_Ffi.set_count(this, value); return value; }
 	public var pointCount(get, set):Int;
 
 	inline function get_pointCount():Int return Physics3DAbiContactBuffer_Ffi.get_pointCount(this);
 
-	inline function set_pointCount(value:Int):Int return Physics3DAbiContactBuffer_Ffi.set_pointCount(this, value);
+	inline function set_pointCount(value:Int):Int { Physics3DAbiContactBuffer_Ffi.set_pointCount(this, value); return value; }
 	public var requiredCount(get, set):Int;
 
 	inline function get_requiredCount():Int return Physics3DAbiContactBuffer_Ffi.get_requiredCount(this);
 
-	inline function set_requiredCount(value:Int):Int return Physics3DAbiContactBuffer_Ffi.set_requiredCount(this, value);
+	inline function set_requiredCount(value:Int):Int { Physics3DAbiContactBuffer_Ffi.set_requiredCount(this, value); return value; }
 	public var requiredPointCount(get, set):Int;
 
 	inline function get_requiredPointCount():Int return Physics3DAbiContactBuffer_Ffi.get_requiredPointCount(this);
 
-	inline function set_requiredPointCount(value:Int):Int return Physics3DAbiContactBuffer_Ffi.set_requiredPointCount(this, value);
+	inline function set_requiredPointCount(value:Int):Int { Physics3DAbiContactBuffer_Ffi.set_requiredPointCount(this, value); return value; }
 }

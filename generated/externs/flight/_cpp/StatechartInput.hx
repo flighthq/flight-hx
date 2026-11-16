@@ -10,5 +10,5 @@ abstract StatechartInput(cpp.Star<cpp.Void>) {
 
 	inline function get_initialValue():Float return StatechartInput_Ffi.get_initialValue(this);
 
-	inline function set_initialValue(value:Float):Float return StatechartInput_Ffi.set_initialValue(this, value);
+	inline function set_initialValue(value:Float):Float { StatechartInput_Ffi.set_initialValue(this, value); return value; }
 }

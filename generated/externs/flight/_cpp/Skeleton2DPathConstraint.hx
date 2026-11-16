@@ -22,35 +22,35 @@ abstract Skeleton2DPathConstraint(cpp.Star<cpp.Void>) {
 
 	inline function get_mix():Single return Skeleton2DPathConstraint_Ffi.get_mix(this);
 
-	inline function set_mix(value:Single):Single return Skeleton2DPathConstraint_Ffi.set_mix(this, value);
+	inline function set_mix(value:Single):Single { Skeleton2DPathConstraint_Ffi.set_mix(this, value); return value; }
 	public var mixRotate(get, set):Single;
 
 	inline function get_mixRotate():Single return Skeleton2DPathConstraint_Ffi.get_mixRotate(this);
 
-	inline function set_mixRotate(value:Single):Single return Skeleton2DPathConstraint_Ffi.set_mixRotate(this, value);
+	inline function set_mixRotate(value:Single):Single { Skeleton2DPathConstraint_Ffi.set_mixRotate(this, value); return value; }
 	public var mixX(get, set):Single;
 
 	inline function get_mixX():Single return Skeleton2DPathConstraint_Ffi.get_mixX(this);
 
-	inline function set_mixX(value:Single):Single return Skeleton2DPathConstraint_Ffi.set_mixX(this, value);
+	inline function set_mixX(value:Single):Single { Skeleton2DPathConstraint_Ffi.set_mixX(this, value); return value; }
 	public var mixY(get, set):Single;
 
 	inline function get_mixY():Single return Skeleton2DPathConstraint_Ffi.get_mixY(this);
 
-	inline function set_mixY(value:Single):Single return Skeleton2DPathConstraint_Ffi.set_mixY(this, value);
+	inline function set_mixY(value:Single):Single { Skeleton2DPathConstraint_Ffi.set_mixY(this, value); return value; }
 	public var position(get, set):Single;
 
 	inline function get_position():Single return Skeleton2DPathConstraint_Ffi.get_position(this);
 
-	inline function set_position(value:Single):Single return Skeleton2DPathConstraint_Ffi.set_position(this, value);
+	inline function set_position(value:Single):Single { Skeleton2DPathConstraint_Ffi.set_position(this, value); return value; }
 	public var spacing(get, set):Single;
 
 	inline function get_spacing():Single return Skeleton2DPathConstraint_Ffi.get_spacing(this);
 
-	inline function set_spacing(value:Single):Single return Skeleton2DPathConstraint_Ffi.set_spacing(this, value);
+	inline function set_spacing(value:Single):Single { Skeleton2DPathConstraint_Ffi.set_spacing(this, value); return value; }
 	public var targetSlotIndex(get, set):Int;
 
 	inline function get_targetSlotIndex():Int return Skeleton2DPathConstraint_Ffi.get_targetSlotIndex(this);
 
-	inline function set_targetSlotIndex(value:Int):Int return Skeleton2DPathConstraint_Ffi.set_targetSlotIndex(this, value);
+	inline function set_targetSlotIndex(value:Int):Int { Skeleton2DPathConstraint_Ffi.set_targetSlotIndex(this, value); return value; }
 }

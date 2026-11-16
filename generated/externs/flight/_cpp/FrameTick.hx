@@ -10,5 +10,5 @@ abstract FrameTick(cpp.Star<cpp.Void>) {
 
 	inline function get_deltaTime():Float return FrameTick_Ffi.get_deltaTime(this);
 
-	inline function set_deltaTime(value:Float):Float return FrameTick_Ffi.set_deltaTime(this, value);
+	inline function set_deltaTime(value:Float):Float { FrameTick_Ffi.set_deltaTime(this, value); return value; }
 }

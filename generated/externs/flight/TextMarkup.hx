@@ -1,6 +1,6 @@
 package flight;
 
-inline function resolveMarkupHexColor(value:String):Int {
+extern inline function resolveMarkupHexColor(value:String):haxe.Int64 {
 #if hl
 	return flight._hl._fn.TextMarkup.resolveMarkupHexColor(cast value);
 #elseif cpp
@@ -11,7 +11,7 @@ inline function resolveMarkupHexColor(value:String):Int {
 	#error "flight.TextMarkup: no backend for this target."
 #end
 }
-inline function formatTextMarkup(content:RichTextContent):String {
+extern inline function formatTextMarkup(content:RichTextContent):String {
 #if hl
 	return cast flight._hl._fn.TextMarkup.formatTextMarkup(content);
 #elseif cpp

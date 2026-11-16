@@ -14,15 +14,15 @@ abstract UnitySizeOverLifetime(cpp.Star<cpp.Void>) {
 
 	inline function get_enabled():Bool return UnitySizeOverLifetime_Ffi.get_enabled(this);
 
-	inline function set_enabled(value:Bool):Bool return UnitySizeOverLifetime_Ffi.set_enabled(this, value);
+	inline function set_enabled(value:Bool):Bool { UnitySizeOverLifetime_Ffi.set_enabled(this, value); return value; }
 	public var sizeEnd(get, set):Single;
 
 	inline function get_sizeEnd():Single return UnitySizeOverLifetime_Ffi.get_sizeEnd(this);
 
-	inline function set_sizeEnd(value:Single):Single return UnitySizeOverLifetime_Ffi.set_sizeEnd(this, value);
+	inline function set_sizeEnd(value:Single):Single { UnitySizeOverLifetime_Ffi.set_sizeEnd(this, value); return value; }
 	public var sizeStart(get, set):Single;
 
 	inline function get_sizeStart():Single return UnitySizeOverLifetime_Ffi.get_sizeStart(this);
 
-	inline function set_sizeStart(value:Single):Single return UnitySizeOverLifetime_Ffi.set_sizeStart(this, value);
+	inline function set_sizeStart(value:Single):Single { UnitySizeOverLifetime_Ffi.set_sizeStart(this, value); return value; }
 }

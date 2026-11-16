@@ -1,6 +1,6 @@
 package flight;
 
-inline function explainUnpackedRectangles(out:Dynamic, rectangles:Dynamic, rectanglesLen:Int, options:BinPackOptions):Void {
+extern inline function explainUnpackedRectangles(out:Dynamic, rectangles:Dynamic, rectanglesLen:Int, options:BinPackOptions):Void {
 #if hl
 	flight._hl._fn.Binpack.explainUnpackedRectangles(out, rectangles, rectanglesLen, options);
 #elseif cpp
@@ -11,7 +11,7 @@ inline function explainUnpackedRectangles(out:Dynamic, rectangles:Dynamic, recta
 	#error "flight.Binpack: no backend for this target."
 #end
 }
-inline function getPackResultOccupancy(result:PackResult):Float {
+extern inline function getPackResultOccupancy(result:PackResult):Float {
 #if hl
 	return flight._hl._fn.Binpack.getPackResultOccupancy(result);
 #elseif cpp
@@ -22,7 +22,7 @@ inline function getPackResultOccupancy(result:PackResult):Float {
 	#error "flight.Binpack: no backend for this target."
 #end
 }
-inline function packRectangles(rects:Dynamic, rectsLen:Int, options:BinPackOptions):PackResult {
+extern inline function packRectangles(rects:Dynamic, rectsLen:Int, options:BinPackOptions):PackResult {
 #if hl
 	return flight._hl._fn.Binpack.packRectangles(rects, rectsLen, options);
 #elseif cpp
@@ -33,7 +33,7 @@ inline function packRectangles(rects:Dynamic, rectsLen:Int, options:BinPackOptio
 	#error "flight.Binpack: no backend for this target."
 #end
 }
-inline function freePackResult(ptr:PackResult):Void {
+extern inline function freePackResult(ptr:PackResult):Void {
 #if hl
 	flight._hl._fn.Binpack.freePackResult(ptr);
 #elseif cpp

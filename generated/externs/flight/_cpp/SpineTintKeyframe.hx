@@ -10,5 +10,5 @@ abstract SpineTintKeyframe(cpp.Star<cpp.Void>) {
 
 	inline function get_time():Single return SpineTintKeyframe_Ffi.get_time(this);
 
-	inline function set_time(value:Single):Single return SpineTintKeyframe_Ffi.set_time(this, value);
+	inline function set_time(value:Single):Single { SpineTintKeyframe_Ffi.set_time(this, value); return value; }
 }

@@ -52,9 +52,9 @@ extern class Skeleton2d {
 	@:hlNative("flight", "flight_find_skeleton_2d_step_keyframe")
 	public static function findSkeleton2dStepKeyframe(times:hl.Bytes, timesLen:Int, time:Single):Int;
 	@:hlNative("flight", "flight_get_skeleton_2d_animation_target_binder")
-	public static function getSkeleton2dAnimationTargetBinder(registry:flight._hl.Skeleton2DAnimationTargetBinderRegistry, kind:hl.Bytes):Dynamic;
+	public static function getSkeleton2dAnimationTargetBinder(registry:flight._hl.Skeleton2DAnimationTargetBinderRegistry, kind:hl.Bytes):flight._hl.Skeleton2DAnimationTargetBinder;
 	@:hlNative("flight", "flight_get_skeleton_2d_animation_target_binder_kinds")
-	public static function getSkeleton2dAnimationTargetBinderKinds(out:Dynamic, registry:flight._hl.Skeleton2DAnimationTargetBinderRegistry):Void;
+	public static function getSkeleton2dAnimationTargetBinderKinds(out:hl.Bytes, registry:flight._hl.Skeleton2DAnimationTargetBinderRegistry):Void;
 	@:hlNative("flight", "flight_register_skeleton_2d_animation_target_binder")
 	public static function registerSkeleton2dAnimationTargetBinder(registry:flight._hl.Skeleton2DAnimationTargetBinderRegistry, kind:hl.Bytes, bind:flight._hl.Skeleton2DAnimationTargetBinder):Void;
 	@:hlNative("flight", "flight_unregister_skeleton_2d_animation_target_binder")
@@ -68,7 +68,7 @@ extern class Skeleton2d {
 	@:hlNative("flight", "flight_unregister_skeleton_2d_draw_order_animation_binder")
 	public static function unregisterSkeleton2dDrawOrderAnimationBinder(registry:flight._hl.Skeleton2DAnimationTargetBinderRegistry):Void;
 	@:hlNative("flight", "flight_create_skin_2d")
-	public static function createSkin2d(influenceCounts:Dynamic, influences:Dynamic):flight._hl.Skin2D;
+	public static function createSkin2d(influenceCounts:hl.Bytes, influences:hl.Bytes):flight._hl.Skin2D;
 	@:hlNative("flight", "flight_register_skeleton_2d_transform_constraint_solver")
 	public static function registerSkeleton2dTransformConstraintSolver(registry:flight._hl.Skeleton2DConstraintRegistry):Void;
 	@:hlNative("flight", "flight_solve_skeleton_2d_transform_constraint__skeleton2_dik_constraint")

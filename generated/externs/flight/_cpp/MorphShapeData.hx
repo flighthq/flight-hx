@@ -10,5 +10,5 @@ abstract MorphShapeData(cpp.Star<cpp.Void>) {
 
 	inline function get_progress():Float return MorphShapeData_Ffi.get_progress(this);
 
-	inline function set_progress(value:Float):Float return MorphShapeData_Ffi.set_progress(this, value);
+	inline function set_progress(value:Float):Float { MorphShapeData_Ffi.set_progress(this, value); return value; }
 }

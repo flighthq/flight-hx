@@ -12,10 +12,10 @@ abstract TimelineFrameEvent(cpp.Star<cpp.Void>) {
 
 	inline function get_frame():Int return TimelineFrameEvent_Ffi.get_frame(this);
 
-	inline function set_frame(value:Int):Int return TimelineFrameEvent_Ffi.set_frame(this, value);
+	inline function set_frame(value:Int):Int { TimelineFrameEvent_Ffi.set_frame(this, value); return value; }
 	public var previousFrame(get, set):Int;
 
 	inline function get_previousFrame():Int return TimelineFrameEvent_Ffi.get_previousFrame(this);
 
-	inline function set_previousFrame(value:Int):Int return TimelineFrameEvent_Ffi.set_previousFrame(this, value);
+	inline function set_previousFrame(value:Int):Int { TimelineFrameEvent_Ffi.set_previousFrame(this, value); return value; }
 }

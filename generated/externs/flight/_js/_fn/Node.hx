@@ -29,7 +29,7 @@ extern class Node {
 	@:native("flight_disable_node_guards")
 	public static function disableNodeGuards(guards:flight._js.NodeGuardState):Void;
 	@:native("flight_enable_node_guards")
-	public static function enableNodeGuards(guards:flight._js.NodeGuardState, logState:Dynamic, clock:flight._js.NodeGuardClock):Void;
+	public static function enableNodeGuards(guards:flight._js.NodeGuardState, logState:Dynamic, clockFn:Dynamic, clockCtx:Dynamic):Void;
 	@:native("flight_init_appearance_runtime_trait")
 	public static function initAppearanceRuntimeTrait(target:flight._js.HasAppearanceRuntime):Void;
 	@:native("flight_init_appearance_trait")
@@ -151,7 +151,7 @@ extern class Node {
 	@:native("flight_set_node_transform2d")
 	public static function setNodeTransform2d(target:Dynamic, source:flight._js.Transform2D):Void;
 	@:native("flight_compute_node_world_transform_revision")
-	public static function computeNodeWorldTransformRevision(target:Dynamic, parentWorldTransformId:Int, root:flight._js.NodeRuntime):Void;
+	public static function computeNodeWorldTransformRevision(target:Dynamic, parentWorldTransformId:haxe.Int64, root:flight._js.NodeRuntime):Void;
 	@:native("flight_get_node_appearance_revision")
 	public static function getNodeAppearanceRevision(source:Dynamic):Int;
 	@:native("flight_get_node_children_revision")
@@ -185,9 +185,9 @@ extern class Node {
 	@:native("flight_invalidate_node_world_bounds")
 	public static function invalidateNodeWorldBounds(target:Dynamic):Void;
 	@:native("flight_compute_scene2d_fit_align_x")
-	public static function computeScene2dFitAlignX(scaledContentWidth:Float, viewWidth:Float, align:Int):Float;
+	public static function computeScene2dFitAlignX(scaledContentWidth:Float, viewWidth:Float, align:flight._js.ViewportAlign):Float;
 	@:native("flight_compute_scene2d_fit_align_y")
-	public static function computeScene2dFitAlignY(scaledContentHeight:Float, viewHeight:Float, align:Int):Float;
+	public static function computeScene2dFitAlignY(scaledContentHeight:Float, viewHeight:Float, align:flight._js.ViewportAlign):Float;
 	@:native("flight_compute_scene2d_fit_fill_scale")
 	public static function computeScene2dFitFillScale(contentWidth:Float, contentHeight:Float, viewWidth:Float, viewHeight:Float):Float;
 	@:native("flight_compute_scene2d_fit_scale")

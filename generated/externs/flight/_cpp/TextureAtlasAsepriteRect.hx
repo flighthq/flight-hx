@@ -16,20 +16,20 @@ abstract TextureAtlasAsepriteRect(cpp.Star<cpp.Void>) {
 
 	inline function get_h():Single return TextureAtlasAsepriteRect_Ffi.get_h(this);
 
-	inline function set_h(value:Single):Single return TextureAtlasAsepriteRect_Ffi.set_h(this, value);
+	inline function set_h(value:Single):Single { TextureAtlasAsepriteRect_Ffi.set_h(this, value); return value; }
 	public var w(get, set):Single;
 
 	inline function get_w():Single return TextureAtlasAsepriteRect_Ffi.get_w(this);
 
-	inline function set_w(value:Single):Single return TextureAtlasAsepriteRect_Ffi.set_w(this, value);
+	inline function set_w(value:Single):Single { TextureAtlasAsepriteRect_Ffi.set_w(this, value); return value; }
 	public var x(get, set):Single;
 
 	inline function get_x():Single return TextureAtlasAsepriteRect_Ffi.get_x(this);
 
-	inline function set_x(value:Single):Single return TextureAtlasAsepriteRect_Ffi.set_x(this, value);
+	inline function set_x(value:Single):Single { TextureAtlasAsepriteRect_Ffi.set_x(this, value); return value; }
 	public var y(get, set):Single;
 
 	inline function get_y():Single return TextureAtlasAsepriteRect_Ffi.get_y(this);
 
-	inline function set_y(value:Single):Single return TextureAtlasAsepriteRect_Ffi.set_y(this, value);
+	inline function set_y(value:Single):Single { TextureAtlasAsepriteRect_Ffi.set_y(this, value); return value; }
 }

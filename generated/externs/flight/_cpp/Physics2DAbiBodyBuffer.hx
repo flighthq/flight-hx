@@ -12,10 +12,10 @@ abstract Physics2DAbiBodyBuffer(cpp.Star<cpp.Void>) {
 
 	inline function get_count():Int return Physics2DAbiBodyBuffer_Ffi.get_count(this);
 
-	inline function set_count(value:Int):Int return Physics2DAbiBodyBuffer_Ffi.set_count(this, value);
+	inline function set_count(value:Int):Int { Physics2DAbiBodyBuffer_Ffi.set_count(this, value); return value; }
 	public var requiredCount(get, set):Int;
 
 	inline function get_requiredCount():Int return Physics2DAbiBodyBuffer_Ffi.get_requiredCount(this);
 
-	inline function set_requiredCount(value:Int):Int return Physics2DAbiBodyBuffer_Ffi.set_requiredCount(this, value);
+	inline function set_requiredCount(value:Int):Int { Physics2DAbiBodyBuffer_Ffi.set_requiredCount(this, value); return value; }
 }

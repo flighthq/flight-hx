@@ -10,5 +10,5 @@ abstract Skeleton2DDeformAnimationTarget(cpp.Star<cpp.Void>) {
 
 	inline function get_slotIndex():Int return Skeleton2DDeformAnimationTarget_Ffi.get_slotIndex(this);
 
-	inline function set_slotIndex(value:Int):Int return Skeleton2DDeformAnimationTarget_Ffi.set_slotIndex(this, value);
+	inline function set_slotIndex(value:Int):Int { Skeleton2DDeformAnimationTarget_Ffi.set_slotIndex(this, value); return value; }
 }

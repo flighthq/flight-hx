@@ -14,15 +14,15 @@ abstract AmbientLight(cpp.Star<cpp.Void>) {
 
 	inline function get_color():Int return AmbientLight_Ffi.get_color(this);
 
-	inline function set_color(value:Int):Int return AmbientLight_Ffi.set_color(this, value);
+	inline function set_color(value:Int):Int { AmbientLight_Ffi.set_color(this, value); return value; }
 	public var enabled(get, set):Bool;
 
 	inline function get_enabled():Bool return AmbientLight_Ffi.get_enabled(this);
 
-	inline function set_enabled(value:Bool):Bool return AmbientLight_Ffi.set_enabled(this, value);
+	inline function set_enabled(value:Bool):Bool { AmbientLight_Ffi.set_enabled(this, value); return value; }
 	public var intensity(get, set):Single;
 
 	inline function get_intensity():Single return AmbientLight_Ffi.get_intensity(this);
 
-	inline function set_intensity(value:Single):Single return AmbientLight_Ffi.set_intensity(this, value);
+	inline function set_intensity(value:Single):Single { AmbientLight_Ffi.set_intensity(this, value); return value; }
 }

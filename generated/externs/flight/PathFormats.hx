@@ -1,6 +1,6 @@
 package flight;
 
-inline function appendSvgPathData(path:Path, d:String):Bool {
+extern inline function appendSvgPathData(path:Path, d:String):Bool {
 #if hl
 	return flight._hl._fn.PathFormats.appendSvgPathData(path, cast d);
 #elseif cpp
@@ -11,7 +11,7 @@ inline function appendSvgPathData(path:Path, d:String):Bool {
 	#error "flight.PathFormats: no backend for this target."
 #end
 }
-inline function explainSvgPathData(d:String):SvgPathDataExplanation {
+extern inline function explainSvgPathData(d:String):SvgPathDataExplanation {
 #if hl
 	return flight._hl._fn.PathFormats.explainSvgPathData(cast d);
 #elseif cpp
@@ -22,7 +22,7 @@ inline function explainSvgPathData(d:String):SvgPathDataExplanation {
 	#error "flight.PathFormats: no backend for this target."
 #end
 }
-inline function formatSvgPathData(path:Path, options:SvgPathDataFormatOptions):String {
+extern inline function formatSvgPathData(path:Path, options:SvgPathDataFormatOptions):String {
 #if hl
 	return cast flight._hl._fn.PathFormats.formatSvgPathData(path, options);
 #elseif cpp
@@ -33,7 +33,7 @@ inline function formatSvgPathData(path:Path, options:SvgPathDataFormatOptions):S
 	#error "flight.PathFormats: no backend for this target."
 #end
 }
-inline function parseSvgPathData(d:String):Path {
+extern inline function parseSvgPathData(d:String):Path {
 #if hl
 	return flight._hl._fn.PathFormats.parseSvgPathData(cast d);
 #elseif cpp
@@ -44,7 +44,7 @@ inline function parseSvgPathData(d:String):Path {
 	#error "flight.PathFormats: no backend for this target."
 #end
 }
-inline function freeSvgPathDataExplanation(ptr:SvgPathDataExplanation):Void {
+extern inline function freeSvgPathDataExplanation(ptr:SvgPathDataExplanation):Void {
 #if hl
 	flight._hl._fn.PathFormats.freeSvgPathDataExplanation(ptr);
 #elseif cpp

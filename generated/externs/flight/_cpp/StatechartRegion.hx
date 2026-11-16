@@ -10,5 +10,5 @@ abstract StatechartRegion(cpp.Star<cpp.Void>) {
 
 	inline function get_initialStateIndex():Int return StatechartRegion_Ffi.get_initialStateIndex(this);
 
-	inline function set_initialStateIndex(value:Int):Int return StatechartRegion_Ffi.set_initialStateIndex(this, value);
+	inline function set_initialStateIndex(value:Int):Int { StatechartRegion_Ffi.set_initialStateIndex(this, value); return value; }
 }

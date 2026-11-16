@@ -16,20 +16,20 @@ abstract Timeline(cpp.Star<cpp.Void>) {
 
 	inline function get_currentFrame():Int return Timeline_Ffi.get_currentFrame(this);
 
-	inline function set_currentFrame(value:Int):Int return Timeline_Ffi.set_currentFrame(this, value);
+	inline function set_currentFrame(value:Int):Int { Timeline_Ffi.set_currentFrame(this, value); return value; }
 	public var isPlaying(get, set):Bool;
 
 	inline function get_isPlaying():Bool return Timeline_Ffi.get_isPlaying(this);
 
-	inline function set_isPlaying(value:Bool):Bool return Timeline_Ffi.set_isPlaying(this, value);
+	inline function set_isPlaying(value:Bool):Bool { Timeline_Ffi.set_isPlaying(this, value); return value; }
 	public var timeElapsed(get, set):Float;
 
 	inline function get_timeElapsed():Float return Timeline_Ffi.get_timeElapsed(this);
 
-	inline function set_timeElapsed(value:Float):Float return Timeline_Ffi.set_timeElapsed(this, value);
+	inline function set_timeElapsed(value:Float):Float { Timeline_Ffi.set_timeElapsed(this, value); return value; }
 	public var lastFrameUpdate(get, set):Int;
 
 	inline function get_lastFrameUpdate():Int return Timeline_Ffi.get_lastFrameUpdate(this);
 
-	inline function set_lastFrameUpdate(value:Int):Int return Timeline_Ffi.set_lastFrameUpdate(this, value);
+	inline function set_lastFrameUpdate(value:Int):Int { Timeline_Ffi.set_lastFrameUpdate(this, value); return value; }
 }

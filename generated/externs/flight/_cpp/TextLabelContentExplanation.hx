@@ -12,10 +12,10 @@ abstract TextLabelContentExplanation(cpp.Star<cpp.Void>) {
 
 	inline function get_agreement():Bool return TextLabelContentExplanation_Ffi.get_agreement(this);
 
-	inline function set_agreement(value:Bool):Bool return TextLabelContentExplanation_Ffi.set_agreement(this, value);
+	inline function set_agreement(value:Bool):Bool { TextLabelContentExplanation_Ffi.set_agreement(this, value); return value; }
 	public var revision(get, set):Int;
 
 	inline function get_revision():Int return TextLabelContentExplanation_Ffi.get_revision(this);
 
-	inline function set_revision(value:Int):Int return TextLabelContentExplanation_Ffi.set_revision(this, value);
+	inline function set_revision(value:Int):Int { TextLabelContentExplanation_Ffi.set_revision(this, value); return value; }
 }

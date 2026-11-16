@@ -10,5 +10,5 @@ abstract ColorLut(cpp.Star<cpp.Void>) {
 
 	inline function get_size():Int return ColorLut_Ffi.get_size(this);
 
-	inline function set_size(value:Int):Int return ColorLut_Ffi.set_size(this, value);
+	inline function set_size(value:Int):Int { ColorLut_Ffi.set_size(this, value); return value; }
 }

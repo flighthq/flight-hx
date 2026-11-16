@@ -1,6 +1,6 @@
 package flight;
 
-inline function serializeAsepriteSpritesheet(data:SpritesheetData, existing:AsepriteDocument, options:AsepriteSerializeOptions):String {
+extern inline function serializeAsepriteSpritesheet(data:SpritesheetData, existing:AsepriteDocument, options:AsepriteSerializeOptions):String {
 #if hl
 	return cast flight._hl._fn.SpritesheetFormats.serializeAsepriteSpritesheet(data, existing, options);
 #elseif cpp
@@ -11,7 +11,7 @@ inline function serializeAsepriteSpritesheet(data:SpritesheetData, existing:Asep
 	#error "flight.SpritesheetFormats: no backend for this target."
 #end
 }
-inline function serializeCocosPlistSpritesheet(data:SpritesheetData, existing:CocosPlistDocument):String {
+extern inline function serializeCocosPlistSpritesheet(data:SpritesheetData, existing:CocosPlistDocument):String {
 #if hl
 	return cast flight._hl._fn.SpritesheetFormats.serializeCocosPlistSpritesheet(data, existing);
 #elseif cpp
@@ -22,7 +22,7 @@ inline function serializeCocosPlistSpritesheet(data:SpritesheetData, existing:Co
 	#error "flight.SpritesheetFormats: no backend for this target."
 #end
 }
-inline function formatLibgdxAtlas(data:SpritesheetData):String {
+extern inline function formatLibgdxAtlas(data:SpritesheetData):String {
 #if hl
 	return cast flight._hl._fn.SpritesheetFormats.formatLibgdxAtlas(data);
 #elseif cpp
@@ -33,7 +33,7 @@ inline function formatLibgdxAtlas(data:SpritesheetData):String {
 	#error "flight.SpritesheetFormats: no backend for this target."
 #end
 }
-inline function createSpritesheetFormatRegistry():SpritesheetFormatRegistry {
+extern inline function createSpritesheetFormatRegistry():SpritesheetFormatRegistry {
 #if hl
 	return flight._hl._fn.SpritesheetFormats.createSpritesheetFormatRegistry();
 #elseif cpp
@@ -44,7 +44,7 @@ inline function createSpritesheetFormatRegistry():SpritesheetFormatRegistry {
 	#error "flight.SpritesheetFormats: no backend for this target."
 #end
 }
-inline function applySpritesheetImportOptions(registry:SpritesheetFormatRegistry, options:SpritesheetImportOptions):Void {
+extern inline function applySpritesheetImportOptions(registry:SpritesheetFormatRegistry, options:SpritesheetImportOptions):Void {
 #if hl
 	flight._hl._fn.SpritesheetFormats.applySpritesheetImportOptions(registry, options);
 #elseif cpp
@@ -55,7 +55,7 @@ inline function applySpritesheetImportOptions(registry:SpritesheetFormatRegistry
 	#error "flight.SpritesheetFormats: no backend for this target."
 #end
 }
-inline function asepriteSpritesheetFormat(registry:SpritesheetFormatRegistry):SpritesheetFormatDescriptor {
+extern inline function asepriteSpritesheetFormat(registry:SpritesheetFormatRegistry):SpritesheetFormatDescriptor {
 #if hl
 	return flight._hl._fn.SpritesheetFormats.asepriteSpritesheetFormat(registry);
 #elseif cpp
@@ -66,7 +66,7 @@ inline function asepriteSpritesheetFormat(registry:SpritesheetFormatRegistry):Sp
 	#error "flight.SpritesheetFormats: no backend for this target."
 #end
 }
-inline function cocosPlistSpritesheetFormat(registry:SpritesheetFormatRegistry):SpritesheetFormatDescriptor {
+extern inline function cocosPlistSpritesheetFormat(registry:SpritesheetFormatRegistry):SpritesheetFormatDescriptor {
 #if hl
 	return flight._hl._fn.SpritesheetFormats.cocosPlistSpritesheetFormat(registry);
 #elseif cpp
@@ -77,7 +77,7 @@ inline function cocosPlistSpritesheetFormat(registry:SpritesheetFormatRegistry):
 	#error "flight.SpritesheetFormats: no backend for this target."
 #end
 }
-inline function detectSpritesheetFormat(registry:SpritesheetFormatRegistry, text:String):SpritesheetFormatKind {
+extern inline function detectSpritesheetFormat(registry:SpritesheetFormatRegistry, text:String):SpritesheetFormatKind {
 #if hl
 	return flight._hl._fn.SpritesheetFormats.detectSpritesheetFormat(registry, cast text);
 #elseif cpp
@@ -88,7 +88,7 @@ inline function detectSpritesheetFormat(registry:SpritesheetFormatRegistry, text
 	#error "flight.SpritesheetFormats: no backend for this target."
 #end
 }
-inline function getSpritesheetFormatKinds(out:Dynamic, registry:SpritesheetFormatRegistry):Void {
+extern inline function getSpritesheetFormatKinds(out:Dynamic, registry:SpritesheetFormatRegistry):Void {
 #if hl
 	flight._hl._fn.SpritesheetFormats.getSpritesheetFormatKinds(out, registry);
 #elseif cpp
@@ -99,7 +99,7 @@ inline function getSpritesheetFormatKinds(out:Dynamic, registry:SpritesheetForma
 	#error "flight.SpritesheetFormats: no backend for this target."
 #end
 }
-inline function libgdxAtlasSpritesheetFormat(registry:SpritesheetFormatRegistry):SpritesheetFormatDescriptor {
+extern inline function libgdxAtlasSpritesheetFormat(registry:SpritesheetFormatRegistry):SpritesheetFormatDescriptor {
 #if hl
 	return flight._hl._fn.SpritesheetFormats.libgdxAtlasSpritesheetFormat(registry);
 #elseif cpp
@@ -110,7 +110,7 @@ inline function libgdxAtlasSpritesheetFormat(registry:SpritesheetFormatRegistry)
 	#error "flight.SpritesheetFormats: no backend for this target."
 #end
 }
-inline function parseSpritesheet(registry:SpritesheetFormatRegistry, text:String, formatKind:SpritesheetFormatKind, options:SpritesheetParseOptions):SpritesheetData {
+extern inline function parseSpritesheet(registry:SpritesheetFormatRegistry, text:String, formatKind:SpritesheetFormatKind, options:SpritesheetParseOptions):SpritesheetData {
 #if hl
 	return flight._hl._fn.SpritesheetFormats.parseSpritesheet(registry, cast text, formatKind, options);
 #elseif cpp
@@ -121,7 +121,7 @@ inline function parseSpritesheet(registry:SpritesheetFormatRegistry, text:String
 	#error "flight.SpritesheetFormats: no backend for this target."
 #end
 }
-inline function starlingSpritesheetFormat(registry:SpritesheetFormatRegistry):SpritesheetFormatDescriptor {
+extern inline function starlingSpritesheetFormat(registry:SpritesheetFormatRegistry):SpritesheetFormatDescriptor {
 #if hl
 	return flight._hl._fn.SpritesheetFormats.starlingSpritesheetFormat(registry);
 #elseif cpp
@@ -132,7 +132,7 @@ inline function starlingSpritesheetFormat(registry:SpritesheetFormatRegistry):Sp
 	#error "flight.SpritesheetFormats: no backend for this target."
 #end
 }
-inline function texturePackerSpritesheetFormat(registry:SpritesheetFormatRegistry):SpritesheetFormatDescriptor {
+extern inline function texturePackerSpritesheetFormat(registry:SpritesheetFormatRegistry):SpritesheetFormatDescriptor {
 #if hl
 	return flight._hl._fn.SpritesheetFormats.texturePackerSpritesheetFormat(registry);
 #elseif cpp
@@ -143,7 +143,7 @@ inline function texturePackerSpritesheetFormat(registry:SpritesheetFormatRegistr
 	#error "flight.SpritesheetFormats: no backend for this target."
 #end
 }
-inline function unregisterSpritesheetFormat(registry:SpritesheetFormatRegistry, kind:SpritesheetFormatKind):Void {
+extern inline function unregisterSpritesheetFormat(registry:SpritesheetFormatRegistry, kind:SpritesheetFormatKind):Void {
 #if hl
 	flight._hl._fn.SpritesheetFormats.unregisterSpritesheetFormat(registry, kind);
 #elseif cpp
@@ -154,7 +154,7 @@ inline function unregisterSpritesheetFormat(registry:SpritesheetFormatRegistry, 
 	#error "flight.SpritesheetFormats: no backend for this target."
 #end
 }
-inline function serializeStarlingSpritesheet(data:SpritesheetData, existing:StarlingDocument):String {
+extern inline function serializeStarlingSpritesheet(data:SpritesheetData, existing:StarlingDocument):String {
 #if hl
 	return cast flight._hl._fn.SpritesheetFormats.serializeStarlingSpritesheet(data, existing);
 #elseif cpp
@@ -165,7 +165,7 @@ inline function serializeStarlingSpritesheet(data:SpritesheetData, existing:Star
 	#error "flight.SpritesheetFormats: no backend for this target."
 #end
 }
-inline function serializeTexturePackerSpritesheet(data:SpritesheetData, existing:TexturePackerDocument, options:TexturePackerSerializeOptions):String {
+extern inline function serializeTexturePackerSpritesheet(data:SpritesheetData, existing:TexturePackerDocument, options:TexturePackerSerializeOptions):String {
 #if hl
 	return cast flight._hl._fn.SpritesheetFormats.serializeTexturePackerSpritesheet(data, existing, options);
 #elseif cpp
@@ -176,7 +176,7 @@ inline function serializeTexturePackerSpritesheet(data:SpritesheetData, existing
 	#error "flight.SpritesheetFormats: no backend for this target."
 #end
 }
-inline function freeSpritesheetFormatRegistry(ptr:SpritesheetFormatRegistry):Void {
+extern inline function freeSpritesheetFormatRegistry(ptr:SpritesheetFormatRegistry):Void {
 #if hl
 	flight._hl._fn.SpritesheetFormats.freeSpritesheetFormatRegistry(ptr);
 #elseif cpp
@@ -187,7 +187,7 @@ inline function freeSpritesheetFormatRegistry(ptr:SpritesheetFormatRegistry):Voi
 	#error "flight.SpritesheetFormats: no backend for this target."
 #end
 }
-inline function freeSpritesheetFormatKind(ptr:SpritesheetFormatKind):Void {
+extern inline function freeSpritesheetFormatKind(ptr:SpritesheetFormatKind):Void {
 #if hl
 	flight._hl._fn.SpritesheetFormats.freeSpritesheetFormatKind(ptr);
 #elseif cpp

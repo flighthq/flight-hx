@@ -1,6 +1,6 @@
 package flight;
 
-inline function createDisplayObject():Dynamic {
+extern inline function createDisplayObject():Dynamic {
 #if hl
 	return flight._hl._fn.Scene2d.createDisplayObject();
 #elseif cpp
@@ -11,7 +11,7 @@ inline function createDisplayObject():Dynamic {
 	#error "flight.Scene2d: no backend for this target."
 #end
 }
-inline function createDisplayObjectRuntime():DisplayObjectRuntime {
+extern inline function createDisplayObjectRuntime():DisplayObjectRuntime {
 #if hl
 	return flight._hl._fn.Scene2d.createDisplayObjectRuntime();
 #elseif cpp
@@ -22,7 +22,7 @@ inline function createDisplayObjectRuntime():DisplayObjectRuntime {
 	#error "flight.Scene2d: no backend for this target."
 #end
 }
-inline function createNode2dRuntime(methods:Node2DRuntimeMethods):Node2DRuntime {
+extern inline function createNode2dRuntime(methods:Node2DRuntimeMethods):Node2DRuntime {
 #if hl
 	return flight._hl._fn.Scene2d.createNode2dRuntime(methods);
 #elseif cpp
@@ -33,7 +33,7 @@ inline function createNode2dRuntime(methods:Node2DRuntimeMethods):Node2DRuntime 
 	#error "flight.Scene2d: no backend for this target."
 #end
 }
-inline function asNode2dRef(node:Dynamic):Dynamic {
+extern inline function asNode2dRef(node:Dynamic):Dynamic {
 #if hl
 	return flight._hl._fn.Scene2d.asNode2dRef(node);
 #elseif cpp
@@ -44,7 +44,7 @@ inline function asNode2dRef(node:Dynamic):Dynamic {
 	#error "flight.Scene2d: no backend for this target."
 #end
 }
-inline function getDisplayObjectRuntime(source:DisplayObject):DisplayObjectRuntime {
+extern inline function getDisplayObjectRuntime(source:DisplayObject):DisplayObjectRuntime {
 #if hl
 	return flight._hl._fn.Scene2d.getDisplayObjectRuntime(source);
 #elseif cpp
@@ -55,7 +55,7 @@ inline function getDisplayObjectRuntime(source:DisplayObject):DisplayObjectRunti
 	#error "flight.Scene2d: no backend for this target."
 #end
 }
-inline function getNode2dRuntime(source:Dynamic):Node2DRuntime {
+extern inline function getNode2dRuntime(source:Dynamic):Node2DRuntime {
 #if hl
 	return flight._hl._fn.Scene2d.getNode2dRuntime(source);
 #elseif cpp
@@ -66,7 +66,7 @@ inline function getNode2dRuntime(source:Dynamic):Node2DRuntime {
 	#error "flight.Scene2d: no backend for this target."
 #end
 }
-inline function isNode2d(node:Dynamic):Bool {
+extern inline function isNode2d(node:Dynamic):Bool {
 #if hl
 	return flight._hl._fn.Scene2d.isNode2d(node);
 #elseif cpp
@@ -77,7 +77,7 @@ inline function isNode2d(node:Dynamic):Bool {
 	#error "flight.Scene2d: no backend for this target."
 #end
 }
-inline function setNode2dClip(source:Dynamic, value:Dynamic):Void {
+extern inline function setNode2dClip(source:Dynamic, value:Dynamic):Void {
 #if hl
 	flight._hl._fn.Scene2d.setNode2dClip(source, value);
 #elseif cpp
@@ -88,7 +88,7 @@ inline function setNode2dClip(source:Dynamic, value:Dynamic):Void {
 	#error "flight.Scene2d: no backend for this target."
 #end
 }
-inline function applyAnimationClipToNode2d(clip:AnimationClip, time:Float):Void {
+extern inline function applyAnimationClipToNode2d(clip:AnimationClip, time:Float):Void {
 #if hl
 	flight._hl._fn.Scene2d.applyAnimationClipToNode2d(clip, time);
 #elseif cpp
@@ -99,7 +99,7 @@ inline function applyAnimationClipToNode2d(clip:AnimationClip, time:Float):Void 
 	#error "flight.Scene2d: no backend for this target."
 #end
 }
-inline function getNode2dAnimationPathString(value:flight.Node2DAnimationPath):String {
+extern inline function getNode2dAnimationPathString(value:flight.Node2DAnimationPath):String {
 #if hl
 	return cast flight._hl._fn.Scene2d.getNode2dAnimationPathString(value);
 #elseif cpp
@@ -110,7 +110,7 @@ inline function getNode2dAnimationPathString(value:flight.Node2DAnimationPath):S
 	#error "flight.Scene2d: no backend for this target."
 #end
 }
-inline function parseNode2dAnimationPath(value:String):Int {
+extern inline function parseNode2dAnimationPath(value:String):Int {
 #if hl
 	return flight._hl._fn.Scene2d.parseNode2dAnimationPath(cast value);
 #elseif cpp
@@ -121,7 +121,7 @@ inline function parseNode2dAnimationPath(value:String):Int {
 	#error "flight.Scene2d: no backend for this target."
 #end
 }
-inline function createHtmlView():Dynamic {
+extern inline function createHtmlView():Dynamic {
 #if hl
 	return flight._hl._fn.Scene2d.createHtmlView();
 #elseif cpp
@@ -132,7 +132,7 @@ inline function createHtmlView():Dynamic {
 	#error "flight.Scene2d: no backend for this target."
 #end
 }
-inline function createHtmlViewData():HtmlViewData {
+extern inline function createHtmlViewData():HtmlViewData {
 #if hl
 	return flight._hl._fn.Scene2d.createHtmlViewData();
 #elseif cpp
@@ -143,7 +143,7 @@ inline function createHtmlViewData():HtmlViewData {
 	#error "flight.Scene2d: no backend for this target."
 #end
 }
-inline function createHtmlViewRuntime():HtmlViewRuntime {
+extern inline function createHtmlViewRuntime():HtmlViewRuntime {
 #if hl
 	return flight._hl._fn.Scene2d.createHtmlViewRuntime();
 #elseif cpp
@@ -154,7 +154,7 @@ inline function createHtmlViewRuntime():HtmlViewRuntime {
 	#error "flight.Scene2d: no backend for this target."
 #end
 }
-inline function computeHtmlViewLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
+extern inline function computeHtmlViewLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
 #if hl
 	flight._hl._fn.Scene2d.computeHtmlViewLocalBoundsRectangle(out, source);
 #elseif cpp
@@ -165,7 +165,7 @@ inline function computeHtmlViewLocalBoundsRectangle(out:Rectangle, source:Dynami
 	#error "flight.Scene2d: no backend for this target."
 #end
 }
-inline function getHtmlViewRuntime(source:HtmlView):HtmlViewRuntime {
+extern inline function getHtmlViewRuntime(source:HtmlView):HtmlViewRuntime {
 #if hl
 	return flight._hl._fn.Scene2d.getHtmlViewRuntime(source);
 #elseif cpp
@@ -176,7 +176,7 @@ inline function getHtmlViewRuntime(source:HtmlView):HtmlViewRuntime {
 	#error "flight.Scene2d: no backend for this target."
 #end
 }
-inline function setHtmlViewSize(source:Dynamic, width:Float, height:Float):Void {
+extern inline function setHtmlViewSize(source:Dynamic, width:Float, height:Float):Void {
 #if hl
 	flight._hl._fn.Scene2d.setHtmlViewSize(source, width, height);
 #elseif cpp
@@ -187,7 +187,7 @@ inline function setHtmlViewSize(source:Dynamic, width:Float, height:Float):Void 
 	#error "flight.Scene2d: no backend for this target."
 #end
 }
-inline function createScale9Sprite(scale9Grid:Rectangle):Dynamic {
+extern inline function createScale9Sprite(scale9Grid:Rectangle):Dynamic {
 #if hl
 	return flight._hl._fn.Scene2d.createScale9Sprite(scale9Grid);
 #elseif cpp
@@ -198,7 +198,7 @@ inline function createScale9Sprite(scale9Grid:Rectangle):Dynamic {
 	#error "flight.Scene2d: no backend for this target."
 #end
 }
-inline function createScale9SpriteData(scale9Grid:Rectangle):Scale9SpriteData {
+extern inline function createScale9SpriteData(scale9Grid:Rectangle):Scale9SpriteData {
 #if hl
 	return flight._hl._fn.Scene2d.createScale9SpriteData(scale9Grid);
 #elseif cpp
@@ -209,7 +209,7 @@ inline function createScale9SpriteData(scale9Grid:Rectangle):Scale9SpriteData {
 	#error "flight.Scene2d: no backend for this target."
 #end
 }
-inline function createScale9SpriteRuntime():Node2DRuntime {
+extern inline function createScale9SpriteRuntime():Node2DRuntime {
 #if hl
 	return flight._hl._fn.Scene2d.createScale9SpriteRuntime();
 #elseif cpp
@@ -220,7 +220,7 @@ inline function createScale9SpriteRuntime():Node2DRuntime {
 	#error "flight.Scene2d: no backend for this target."
 #end
 }
-inline function getScale9SpriteRuntime(source:Scale9Sprite):Dynamic {
+extern inline function getScale9SpriteRuntime(source:Scale9Sprite):Dynamic {
 #if hl
 	return flight._hl._fn.Scene2d.getScale9SpriteRuntime(source);
 #elseif cpp
@@ -231,7 +231,7 @@ inline function getScale9SpriteRuntime(source:Scale9Sprite):Dynamic {
 	#error "flight.Scene2d: no backend for this target."
 #end
 }
-inline function createScene2d():Dynamic {
+extern inline function createScene2d():Dynamic {
 #if hl
 	return flight._hl._fn.Scene2d.createScene2d();
 #elseif cpp
@@ -242,7 +242,7 @@ inline function createScene2d():Dynamic {
 	#error "flight.Scene2d: no backend for this target."
 #end
 }
-inline function createScene2dRuntime():Scene2DRuntime {
+extern inline function createScene2dRuntime():Scene2DRuntime {
 #if hl
 	return flight._hl._fn.Scene2d.createScene2dRuntime();
 #elseif cpp
@@ -253,7 +253,7 @@ inline function createScene2dRuntime():Scene2DRuntime {
 	#error "flight.Scene2d: no backend for this target."
 #end
 }
-inline function createScene2dSignals():Dynamic {
+extern inline function createScene2dSignals():Dynamic {
 #if hl
 	return flight._hl._fn.Scene2d.createScene2dSignals();
 #elseif cpp
@@ -264,7 +264,7 @@ inline function createScene2dSignals():Dynamic {
 	#error "flight.Scene2d: no backend for this target."
 #end
 }
-inline function enableScene2dSignals(source:Scene2D):Dynamic {
+extern inline function enableScene2dSignals(source:Scene2D):Dynamic {
 #if hl
 	return flight._hl._fn.Scene2d.enableScene2dSignals(source);
 #elseif cpp
@@ -275,7 +275,7 @@ inline function enableScene2dSignals(source:Scene2D):Dynamic {
 	#error "flight.Scene2d: no backend for this target."
 #end
 }
-inline function getScene2dAlignString(value:flight.Scene2DAlign):String {
+extern inline function getScene2dAlignString(value:flight.Scene2DAlign):String {
 #if hl
 	return cast flight._hl._fn.Scene2d.getScene2dAlignString(value);
 #elseif cpp
@@ -286,7 +286,7 @@ inline function getScene2dAlignString(value:flight.Scene2DAlign):String {
 	#error "flight.Scene2d: no backend for this target."
 #end
 }
-inline function getScene2dDisplayStateString(value:flight.Scene2DDisplayState):String {
+extern inline function getScene2dDisplayStateString(value:flight.Scene2DDisplayState):String {
 #if hl
 	return cast flight._hl._fn.Scene2d.getScene2dDisplayStateString(value);
 #elseif cpp
@@ -297,7 +297,7 @@ inline function getScene2dDisplayStateString(value:flight.Scene2DDisplayState):S
 	#error "flight.Scene2d: no backend for this target."
 #end
 }
-inline function getScene2dQualityString(value:flight.Scene2DQuality):String {
+extern inline function getScene2dQualityString(value:flight.Scene2DQuality):String {
 #if hl
 	return cast flight._hl._fn.Scene2d.getScene2dQualityString(value);
 #elseif cpp
@@ -308,7 +308,7 @@ inline function getScene2dQualityString(value:flight.Scene2DQuality):String {
 	#error "flight.Scene2d: no backend for this target."
 #end
 }
-inline function getScene2dRoot(source:Dynamic):Dynamic {
+extern inline function getScene2dRoot(source:Dynamic):Dynamic {
 #if hl
 	return flight._hl._fn.Scene2d.getScene2dRoot(source);
 #elseif cpp
@@ -319,7 +319,7 @@ inline function getScene2dRoot(source:Dynamic):Dynamic {
 	#error "flight.Scene2d: no backend for this target."
 #end
 }
-inline function getScene2dRuntime(source:Scene2D):Scene2DRuntime {
+extern inline function getScene2dRuntime(source:Scene2D):Scene2DRuntime {
 #if hl
 	return flight._hl._fn.Scene2d.getScene2dRuntime(source);
 #elseif cpp
@@ -330,7 +330,7 @@ inline function getScene2dRuntime(source:Scene2D):Scene2DRuntime {
 	#error "flight.Scene2d: no backend for this target."
 #end
 }
-inline function getScene2dScaleModeString(value:flight.Scene2DScaleMode):String {
+extern inline function getScene2dScaleModeString(value:flight.Scene2DScaleMode):String {
 #if hl
 	return cast flight._hl._fn.Scene2d.getScene2dScaleModeString(value);
 #elseif cpp
@@ -341,7 +341,7 @@ inline function getScene2dScaleModeString(value:flight.Scene2DScaleMode):String 
 	#error "flight.Scene2d: no backend for this target."
 #end
 }
-inline function getScene2dSignals(source:Scene2D):Dynamic {
+extern inline function getScene2dSignals(source:Scene2D):Dynamic {
 #if hl
 	return flight._hl._fn.Scene2d.getScene2dSignals(source);
 #elseif cpp
@@ -352,7 +352,7 @@ inline function getScene2dSignals(source:Scene2D):Dynamic {
 	#error "flight.Scene2d: no backend for this target."
 #end
 }
-inline function parseScene2dAlign(value:String):Int {
+extern inline function parseScene2dAlign(value:String):Int {
 #if hl
 	return flight._hl._fn.Scene2d.parseScene2dAlign(cast value);
 #elseif cpp
@@ -363,7 +363,7 @@ inline function parseScene2dAlign(value:String):Int {
 	#error "flight.Scene2d: no backend for this target."
 #end
 }
-inline function parseScene2dDisplayState(value:String):Int {
+extern inline function parseScene2dDisplayState(value:String):Int {
 #if hl
 	return flight._hl._fn.Scene2d.parseScene2dDisplayState(cast value);
 #elseif cpp
@@ -374,7 +374,7 @@ inline function parseScene2dDisplayState(value:String):Int {
 	#error "flight.Scene2d: no backend for this target."
 #end
 }
-inline function parseScene2dQuality(value:String):Int {
+extern inline function parseScene2dQuality(value:String):Int {
 #if hl
 	return flight._hl._fn.Scene2d.parseScene2dQuality(cast value);
 #elseif cpp
@@ -385,7 +385,7 @@ inline function parseScene2dQuality(value:String):Int {
 	#error "flight.Scene2d: no backend for this target."
 #end
 }
-inline function parseScene2dScaleMode(value:String):Int {
+extern inline function parseScene2dScaleMode(value:String):Int {
 #if hl
 	return flight._hl._fn.Scene2d.parseScene2dScaleMode(cast value);
 #elseif cpp
@@ -396,7 +396,7 @@ inline function parseScene2dScaleMode(value:String):Int {
 	#error "flight.Scene2d: no backend for this target."
 #end
 }
-inline function setScene2dSize(source:Dynamic, width:Float, height:Float):Void {
+extern inline function setScene2dSize(source:Dynamic, width:Float, height:Float):Void {
 #if hl
 	flight._hl._fn.Scene2d.setScene2dSize(source, width, height);
 #elseif cpp
@@ -407,7 +407,7 @@ inline function setScene2dSize(source:Dynamic, width:Float, height:Float):Void {
 	#error "flight.Scene2d: no backend for this target."
 #end
 }
-inline function createScene2dKindUsage():Scene2DKindUsage {
+extern inline function createScene2dKindUsage():Scene2DKindUsage {
 #if hl
 	return flight._hl._fn.Scene2d.createScene2dKindUsage();
 #elseif cpp
@@ -418,7 +418,7 @@ inline function createScene2dKindUsage():Scene2DKindUsage {
 	#error "flight.Scene2d: no backend for this target."
 #end
 }
-inline function getScene2dKindUsage(out:Scene2DKindUsage, scene:Scene2D):Void {
+extern inline function getScene2dKindUsage(out:Scene2DKindUsage, scene:Scene2D):Void {
 #if hl
 	flight._hl._fn.Scene2d.getScene2dKindUsage(out, scene);
 #elseif cpp
@@ -429,7 +429,7 @@ inline function getScene2dKindUsage(out:Scene2DKindUsage, scene:Scene2D):Void {
 	#error "flight.Scene2d: no backend for this target."
 #end
 }
-inline function createSprite():Dynamic {
+extern inline function createSprite():Dynamic {
 #if hl
 	return flight._hl._fn.Scene2d.createSprite();
 #elseif cpp
@@ -440,7 +440,7 @@ inline function createSprite():Dynamic {
 	#error "flight.Scene2d: no backend for this target."
 #end
 }
-inline function createSpriteData():SpriteData {
+extern inline function createSpriteData():SpriteData {
 #if hl
 	return flight._hl._fn.Scene2d.createSpriteData();
 #elseif cpp
@@ -451,7 +451,7 @@ inline function createSpriteData():SpriteData {
 	#error "flight.Scene2d: no backend for this target."
 #end
 }
-inline function createSpriteRendererData(source:Dynamic):SpriteIdentityRendererData {
+extern inline function createSpriteRendererData(source:Dynamic):SpriteIdentityRendererData {
 #if hl
 	return flight._hl._fn.Scene2d.createSpriteRendererData(source);
 #elseif cpp
@@ -462,7 +462,7 @@ inline function createSpriteRendererData(source:Dynamic):SpriteIdentityRendererD
 	#error "flight.Scene2d: no backend for this target."
 #end
 }
-inline function createSpriteRuntime():Node2DRuntime {
+extern inline function createSpriteRuntime():Node2DRuntime {
 #if hl
 	return flight._hl._fn.Scene2d.createSpriteRuntime();
 #elseif cpp
@@ -473,7 +473,7 @@ inline function createSpriteRuntime():Node2DRuntime {
 	#error "flight.Scene2d: no backend for this target."
 #end
 }
-inline function cloneSprite(source:Sprite):Dynamic {
+extern inline function cloneSprite(source:Sprite):Dynamic {
 #if hl
 	return flight._hl._fn.Scene2d.cloneSprite(source);
 #elseif cpp
@@ -484,7 +484,7 @@ inline function cloneSprite(source:Sprite):Dynamic {
 	#error "flight.Scene2d: no backend for this target."
 #end
 }
-inline function computeSpriteLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
+extern inline function computeSpriteLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
 #if hl
 	flight._hl._fn.Scene2d.computeSpriteLocalBoundsRectangle(out, source);
 #elseif cpp
@@ -495,7 +495,7 @@ inline function computeSpriteLocalBoundsRectangle(out:Rectangle, source:Dynamic)
 	#error "flight.Scene2d: no backend for this target."
 #end
 }
-inline function getSpriteRuntime(source:Sprite):Dynamic {
+extern inline function getSpriteRuntime(source:Sprite):Dynamic {
 #if hl
 	return flight._hl._fn.Scene2d.getSpriteRuntime(source);
 #elseif cpp
@@ -506,7 +506,7 @@ inline function getSpriteRuntime(source:Sprite):Dynamic {
 	#error "flight.Scene2d: no backend for this target."
 #end
 }
-inline function freeDisplayObjectRuntime(ptr:DisplayObjectRuntime):Void {
+extern inline function freeDisplayObjectRuntime(ptr:DisplayObjectRuntime):Void {
 #if hl
 	flight._hl._fn.Scene2d.freeDisplayObjectRuntime(ptr);
 #elseif cpp
@@ -517,7 +517,7 @@ inline function freeDisplayObjectRuntime(ptr:DisplayObjectRuntime):Void {
 	#error "flight.Scene2d: no backend for this target."
 #end
 }
-inline function freeHtmlViewData(ptr:HtmlViewData):Void {
+extern inline function freeHtmlViewData(ptr:HtmlViewData):Void {
 #if hl
 	flight._hl._fn.Scene2d.freeHtmlViewData(ptr);
 #elseif cpp
@@ -528,7 +528,7 @@ inline function freeHtmlViewData(ptr:HtmlViewData):Void {
 	#error "flight.Scene2d: no backend for this target."
 #end
 }
-inline function freeHtmlViewRuntime(ptr:HtmlViewRuntime):Void {
+extern inline function freeHtmlViewRuntime(ptr:HtmlViewRuntime):Void {
 #if hl
 	flight._hl._fn.Scene2d.freeHtmlViewRuntime(ptr);
 #elseif cpp
@@ -539,7 +539,7 @@ inline function freeHtmlViewRuntime(ptr:HtmlViewRuntime):Void {
 	#error "flight.Scene2d: no backend for this target."
 #end
 }
-inline function freeScale9SpriteData(ptr:Scale9SpriteData):Void {
+extern inline function freeScale9SpriteData(ptr:Scale9SpriteData):Void {
 #if hl
 	flight._hl._fn.Scene2d.freeScale9SpriteData(ptr);
 #elseif cpp
@@ -550,7 +550,7 @@ inline function freeScale9SpriteData(ptr:Scale9SpriteData):Void {
 	#error "flight.Scene2d: no backend for this target."
 #end
 }
-inline function freeScene2Druntime(ptr:Scene2DRuntime):Void {
+extern inline function freeScene2Druntime(ptr:Scene2DRuntime):Void {
 #if hl
 	flight._hl._fn.Scene2d.freeScene2Druntime(ptr);
 #elseif cpp
@@ -561,7 +561,7 @@ inline function freeScene2Druntime(ptr:Scene2DRuntime):Void {
 	#error "flight.Scene2d: no backend for this target."
 #end
 }
-inline function freeScene2DkindUsage(ptr:Scene2DKindUsage):Void {
+extern inline function freeScene2DkindUsage(ptr:Scene2DKindUsage):Void {
 #if hl
 	flight._hl._fn.Scene2d.freeScene2DkindUsage(ptr);
 #elseif cpp
@@ -572,7 +572,7 @@ inline function freeScene2DkindUsage(ptr:Scene2DKindUsage):Void {
 	#error "flight.Scene2d: no backend for this target."
 #end
 }
-inline function freeSpriteData(ptr:SpriteData):Void {
+extern inline function freeSpriteData(ptr:SpriteData):Void {
 #if hl
 	flight._hl._fn.Scene2d.freeSpriteData(ptr);
 #elseif cpp
@@ -583,7 +583,7 @@ inline function freeSpriteData(ptr:SpriteData):Void {
 	#error "flight.Scene2d: no backend for this target."
 #end
 }
-inline function freeSpriteIdentityRendererData(ptr:SpriteIdentityRendererData):Void {
+extern inline function freeSpriteIdentityRendererData(ptr:SpriteIdentityRendererData):Void {
 #if hl
 	flight._hl._fn.Scene2d.freeSpriteIdentityRendererData(ptr);
 #elseif cpp

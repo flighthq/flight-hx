@@ -18,25 +18,25 @@ abstract CollisionTimeOfImpact2D(cpp.Star<cpp.Void>) {
 
 	inline function get_fraction():Single return CollisionTimeOfImpact2D_Ffi.get_fraction(this);
 
-	inline function set_fraction(value:Single):Single return CollisionTimeOfImpact2D_Ffi.set_fraction(this, value);
+	inline function set_fraction(value:Single):Single { CollisionTimeOfImpact2D_Ffi.set_fraction(this, value); return value; }
 	public var x(get, set):Single;
 
 	inline function get_x():Single return CollisionTimeOfImpact2D_Ffi.get_x(this);
 
-	inline function set_x(value:Single):Single return CollisionTimeOfImpact2D_Ffi.set_x(this, value);
+	inline function set_x(value:Single):Single { CollisionTimeOfImpact2D_Ffi.set_x(this, value); return value; }
 	public var y(get, set):Single;
 
 	inline function get_y():Single return CollisionTimeOfImpact2D_Ffi.get_y(this);
 
-	inline function set_y(value:Single):Single return CollisionTimeOfImpact2D_Ffi.set_y(this, value);
+	inline function set_y(value:Single):Single { CollisionTimeOfImpact2D_Ffi.set_y(this, value); return value; }
 	public var normalX(get, set):Single;
 
 	inline function get_normalX():Single return CollisionTimeOfImpact2D_Ffi.get_normalX(this);
 
-	inline function set_normalX(value:Single):Single return CollisionTimeOfImpact2D_Ffi.set_normalX(this, value);
+	inline function set_normalX(value:Single):Single { CollisionTimeOfImpact2D_Ffi.set_normalX(this, value); return value; }
 	public var normalY(get, set):Single;
 
 	inline function get_normalY():Single return CollisionTimeOfImpact2D_Ffi.get_normalY(this);
 
-	inline function set_normalY(value:Single):Single return CollisionTimeOfImpact2D_Ffi.set_normalY(this, value);
+	inline function set_normalY(value:Single):Single { CollisionTimeOfImpact2D_Ffi.set_normalY(this, value); return value; }
 }

@@ -1,6 +1,6 @@
 package flight;
 
-inline function disableTextBidiGuards():Void {
+extern inline function disableTextBidiGuards():Void {
 #if hl
 	flight._hl._fn.Textbidi.disableTextBidiGuards();
 #elseif cpp
@@ -11,7 +11,7 @@ inline function disableTextBidiGuards():Void {
 	#error "flight.Textbidi: no backend for this target."
 #end
 }
-inline function enableTextBidiGuards(logState:Dynamic, clockFn:Dynamic, clockCtx:Dynamic):Void {
+extern inline function enableTextBidiGuards(logState:Dynamic, clockFn:Dynamic, clockCtx:Dynamic):Void {
 #if hl
 	flight._hl._fn.Textbidi.enableTextBidiGuards(logState, clockFn, clockCtx);
 #elseif cpp
@@ -22,7 +22,7 @@ inline function enableTextBidiGuards(logState:Dynamic, clockFn:Dynamic, clockCtx
 	#error "flight.Textbidi: no backend for this target."
 #end
 }
-inline function reorderBidiLine(levels:Dynamic, levelsLen:Int, start:Int, end:Int, out:Dynamic):Void {
+extern inline function reorderBidiLine(levels:Dynamic, levelsLen:Int, start:Int, end:Int, out:Dynamic):Void {
 #if hl
 	flight._hl._fn.Textbidi.reorderBidiLine(levels, levelsLen, start, end, out);
 #elseif cpp

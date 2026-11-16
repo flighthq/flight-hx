@@ -26,45 +26,45 @@ abstract HasTransform2D(cpp.Star<cpp.Void>) {
 
 	inline function get_pivotX():Single return HasTransform2D_Ffi.get_pivotX(this);
 
-	inline function set_pivotX(value:Single):Single return HasTransform2D_Ffi.set_pivotX(this, value);
+	inline function set_pivotX(value:Single):Single { HasTransform2D_Ffi.set_pivotX(this, value); return value; }
 	public var pivotY(get, set):Single;
 
 	inline function get_pivotY():Single return HasTransform2D_Ffi.get_pivotY(this);
 
-	inline function set_pivotY(value:Single):Single return HasTransform2D_Ffi.set_pivotY(this, value);
+	inline function set_pivotY(value:Single):Single { HasTransform2D_Ffi.set_pivotY(this, value); return value; }
 	public var rotation(get, set):Single;
 
 	inline function get_rotation():Single return HasTransform2D_Ffi.get_rotation(this);
 
-	inline function set_rotation(value:Single):Single return HasTransform2D_Ffi.set_rotation(this, value);
+	inline function set_rotation(value:Single):Single { HasTransform2D_Ffi.set_rotation(this, value); return value; }
 	public var scaleX(get, set):Single;
 
 	inline function get_scaleX():Single return HasTransform2D_Ffi.get_scaleX(this);
 
-	inline function set_scaleX(value:Single):Single return HasTransform2D_Ffi.set_scaleX(this, value);
+	inline function set_scaleX(value:Single):Single { HasTransform2D_Ffi.set_scaleX(this, value); return value; }
 	public var scaleY(get, set):Single;
 
 	inline function get_scaleY():Single return HasTransform2D_Ffi.get_scaleY(this);
 
-	inline function set_scaleY(value:Single):Single return HasTransform2D_Ffi.set_scaleY(this, value);
+	inline function set_scaleY(value:Single):Single { HasTransform2D_Ffi.set_scaleY(this, value); return value; }
 	public var skewX(get, set):Single;
 
 	inline function get_skewX():Single return HasTransform2D_Ffi.get_skewX(this);
 
-	inline function set_skewX(value:Single):Single return HasTransform2D_Ffi.set_skewX(this, value);
+	inline function set_skewX(value:Single):Single { HasTransform2D_Ffi.set_skewX(this, value); return value; }
 	public var skewY(get, set):Single;
 
 	inline function get_skewY():Single return HasTransform2D_Ffi.get_skewY(this);
 
-	inline function set_skewY(value:Single):Single return HasTransform2D_Ffi.set_skewY(this, value);
+	inline function set_skewY(value:Single):Single { HasTransform2D_Ffi.set_skewY(this, value); return value; }
 	public var x(get, set):Single;
 
 	inline function get_x():Single return HasTransform2D_Ffi.get_x(this);
 
-	inline function set_x(value:Single):Single return HasTransform2D_Ffi.set_x(this, value);
+	inline function set_x(value:Single):Single { HasTransform2D_Ffi.set_x(this, value); return value; }
 	public var y(get, set):Single;
 
 	inline function get_y():Single return HasTransform2D_Ffi.get_y(this);
 
-	inline function set_y(value:Single):Single return HasTransform2D_Ffi.set_y(this, value);
+	inline function set_y(value:Single):Single { HasTransform2D_Ffi.set_y(this, value); return value; }
 }

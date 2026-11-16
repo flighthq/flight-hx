@@ -16,20 +16,20 @@ abstract LayoutState(cpp.Star<cpp.Void>) {
 
 	inline function get_lastFailureActualLength():Int return LayoutState_Ffi.get_lastFailureActualLength(this);
 
-	inline function set_lastFailureActualLength(value:Int):Int return LayoutState_Ffi.set_lastFailureActualLength(this, value);
+	inline function set_lastFailureActualLength(value:Int):Int { LayoutState_Ffi.set_lastFailureActualLength(this, value); return value; }
 	public var lastFailureNodeIndex(get, set):Int;
 
 	inline function get_lastFailureNodeIndex():Int return LayoutState_Ffi.get_lastFailureNodeIndex(this);
 
-	inline function set_lastFailureNodeIndex(value:Int):Int return LayoutState_Ffi.set_lastFailureNodeIndex(this, value);
+	inline function set_lastFailureNodeIndex(value:Int):Int { LayoutState_Ffi.set_lastFailureNodeIndex(this, value); return value; }
 	public var lastFailureParentIndex(get, set):Int;
 
 	inline function get_lastFailureParentIndex():Int return LayoutState_Ffi.get_lastFailureParentIndex(this);
 
-	inline function set_lastFailureParentIndex(value:Int):Int return LayoutState_Ffi.set_lastFailureParentIndex(this, value);
+	inline function set_lastFailureParentIndex(value:Int):Int { LayoutState_Ffi.set_lastFailureParentIndex(this, value); return value; }
 	public var lastFailureRequiredLength(get, set):Int;
 
 	inline function get_lastFailureRequiredLength():Int return LayoutState_Ffi.get_lastFailureRequiredLength(this);
 
-	inline function set_lastFailureRequiredLength(value:Int):Int return LayoutState_Ffi.set_lastFailureRequiredLength(this, value);
+	inline function set_lastFailureRequiredLength(value:Int):Int { LayoutState_Ffi.set_lastFailureRequiredLength(this, value); return value; }
 }

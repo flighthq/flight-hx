@@ -14,15 +14,15 @@ abstract HsvColor(cpp.Star<cpp.Void>) {
 
 	inline function get_h():Single return HsvColor_Ffi.get_h(this);
 
-	inline function set_h(value:Single):Single return HsvColor_Ffi.set_h(this, value);
+	inline function set_h(value:Single):Single { HsvColor_Ffi.set_h(this, value); return value; }
 	public var s(get, set):Single;
 
 	inline function get_s():Single return HsvColor_Ffi.get_s(this);
 
-	inline function set_s(value:Single):Single return HsvColor_Ffi.set_s(this, value);
+	inline function set_s(value:Single):Single { HsvColor_Ffi.set_s(this, value); return value; }
 	public var v(get, set):Single;
 
 	inline function get_v():Single return HsvColor_Ffi.get_v(this);
 
-	inline function set_v(value:Single):Single return HsvColor_Ffi.set_v(this, value);
+	inline function set_v(value:Single):Single { HsvColor_Ffi.set_v(this, value); return value; }
 }

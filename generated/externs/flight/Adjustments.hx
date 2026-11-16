@@ -1,6 +1,6 @@
 package flight;
 
-inline function createBrightnessContrastAdjustment(options:BrightnessContrastAdjustmentOptions):BrightnessContrastAdjustment {
+extern inline function createBrightnessContrastAdjustment(options:BrightnessContrastAdjustmentOptions):BrightnessContrastAdjustment {
 #if hl
 	return flight._hl._fn.Adjustments.createBrightnessContrastAdjustment(options);
 #elseif cpp
@@ -11,7 +11,7 @@ inline function createBrightnessContrastAdjustment(options:BrightnessContrastAdj
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function createChannelMixerAdjustment(options:ChannelMixerAdjustmentOptions):ChannelMixerAdjustment {
+extern inline function createChannelMixerAdjustment(options:ChannelMixerAdjustmentOptions):ChannelMixerAdjustment {
 #if hl
 	return flight._hl._fn.Adjustments.createChannelMixerAdjustment(options);
 #elseif cpp
@@ -22,7 +22,7 @@ inline function createChannelMixerAdjustment(options:ChannelMixerAdjustmentOptio
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function isAffineColorMatrix(matrix:Dynamic):Bool {
+extern inline function isAffineColorMatrix(matrix:Dynamic):Bool {
 #if hl
 	return flight._hl._fn.Adjustments.isAffineColorMatrix(matrix);
 #elseif cpp
@@ -33,7 +33,7 @@ inline function isAffineColorMatrix(matrix:Dynamic):Bool {
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function createColorBlindSimulationAdjustment(options:ColorBlindSimulationAdjustmentOptions):ColorBlindSimulationAdjustment {
+extern inline function createColorBlindSimulationAdjustment(options:ColorBlindSimulationAdjustmentOptions):ColorBlindSimulationAdjustment {
 #if hl
 	return flight._hl._fn.Adjustments.createColorBlindSimulationAdjustment(options);
 #elseif cpp
@@ -44,7 +44,7 @@ inline function createColorBlindSimulationAdjustment(options:ColorBlindSimulatio
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function createColorGradeAdjustment(options:ColorGradeAdjustmentOptions):ColorGradeAdjustment {
+extern inline function createColorGradeAdjustment(options:ColorGradeAdjustmentOptions):ColorGradeAdjustment {
 #if hl
 	return flight._hl._fn.Adjustments.createColorGradeAdjustment(options);
 #elseif cpp
@@ -55,7 +55,7 @@ inline function createColorGradeAdjustment(options:ColorGradeAdjustmentOptions):
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function bakeColorLut(transforms:Dynamic, transformsLen:Int, size:Int):ColorLut {
+extern inline function bakeColorLut(transforms:Dynamic, transformsLen:Int, size:haxe.Int64):ColorLut {
 #if hl
 	return flight._hl._fn.Adjustments.bakeColorLut(transforms, transformsLen, size);
 #elseif cpp
@@ -66,7 +66,7 @@ inline function bakeColorLut(transforms:Dynamic, transformsLen:Int, size:Int):Co
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function sampleColorLut(lut:ColorLut, out:Dynamic, r:Float, g:Float, b:Float):Void {
+extern inline function sampleColorLut(lut:ColorLut, out:Dynamic, r:Float, g:Float, b:Float):Void {
 #if hl
 	flight._hl._fn.Adjustments.sampleColorLut(lut, out, r, g, b);
 #elseif cpp
@@ -77,7 +77,7 @@ inline function sampleColorLut(lut:ColorLut, out:Dynamic, r:Float, g:Float, b:Fl
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function getAdjustmentColorTransformBrightnessContrastAdjustment(operation:BrightnessContrastAdjustment):ColorTransformFunction {
+extern inline function getAdjustmentColorTransformBrightnessContrastAdjustment(operation:BrightnessContrastAdjustment):ColorTransformFunction {
 #if hl
 	return flight._hl._fn.Adjustments.getAdjustmentColorTransformBrightnessContrastAdjustment(operation);
 #elseif cpp
@@ -88,7 +88,7 @@ inline function getAdjustmentColorTransformBrightnessContrastAdjustment(operatio
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function getAdjustmentColorTransformChannelMixerAdjustment(operation:ChannelMixerAdjustment):ColorTransformFunction {
+extern inline function getAdjustmentColorTransformChannelMixerAdjustment(operation:ChannelMixerAdjustment):ColorTransformFunction {
 #if hl
 	return flight._hl._fn.Adjustments.getAdjustmentColorTransformChannelMixerAdjustment(operation);
 #elseif cpp
@@ -99,7 +99,7 @@ inline function getAdjustmentColorTransformChannelMixerAdjustment(operation:Chan
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function getAdjustmentColorTransformColorBlindSimulationAdjustment(operation:ColorBlindSimulationAdjustment):ColorTransformFunction {
+extern inline function getAdjustmentColorTransformColorBlindSimulationAdjustment(operation:ColorBlindSimulationAdjustment):ColorTransformFunction {
 #if hl
 	return flight._hl._fn.Adjustments.getAdjustmentColorTransformColorBlindSimulationAdjustment(operation);
 #elseif cpp
@@ -110,7 +110,7 @@ inline function getAdjustmentColorTransformColorBlindSimulationAdjustment(operat
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function getAdjustmentColorTransformColorGradeAdjustment(operation:ColorGradeAdjustment):ColorTransformFunction {
+extern inline function getAdjustmentColorTransformColorGradeAdjustment(operation:ColorGradeAdjustment):ColorTransformFunction {
 #if hl
 	return flight._hl._fn.Adjustments.getAdjustmentColorTransformColorGradeAdjustment(operation);
 #elseif cpp
@@ -121,7 +121,7 @@ inline function getAdjustmentColorTransformColorGradeAdjustment(operation:ColorG
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function getAdjustmentColorTransformColorMatrixAdjustment(operation:ColorMatrixAdjustment):ColorTransformFunction {
+extern inline function getAdjustmentColorTransformColorMatrixAdjustment(operation:ColorMatrixAdjustment):ColorTransformFunction {
 #if hl
 	return flight._hl._fn.Adjustments.getAdjustmentColorTransformColorMatrixAdjustment(operation);
 #elseif cpp
@@ -132,7 +132,7 @@ inline function getAdjustmentColorTransformColorMatrixAdjustment(operation:Color
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function getAdjustmentColorTransformColorScaleBiasAdjustment(operation:ColorScaleBiasAdjustment):ColorTransformFunction {
+extern inline function getAdjustmentColorTransformColorScaleBiasAdjustment(operation:ColorScaleBiasAdjustment):ColorTransformFunction {
 #if hl
 	return flight._hl._fn.Adjustments.getAdjustmentColorTransformColorScaleBiasAdjustment(operation);
 #elseif cpp
@@ -143,7 +143,7 @@ inline function getAdjustmentColorTransformColorScaleBiasAdjustment(operation:Co
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function getAdjustmentColorTransformExposureAdjustment(operation:ExposureAdjustment):ColorTransformFunction {
+extern inline function getAdjustmentColorTransformExposureAdjustment(operation:ExposureAdjustment):ColorTransformFunction {
 #if hl
 	return flight._hl._fn.Adjustments.getAdjustmentColorTransformExposureAdjustment(operation);
 #elseif cpp
@@ -154,7 +154,7 @@ inline function getAdjustmentColorTransformExposureAdjustment(operation:Exposure
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function getAdjustmentColorTransformGrayscaleAdjustment(operation:GrayscaleAdjustment):ColorTransformFunction {
+extern inline function getAdjustmentColorTransformGrayscaleAdjustment(operation:GrayscaleAdjustment):ColorTransformFunction {
 #if hl
 	return flight._hl._fn.Adjustments.getAdjustmentColorTransformGrayscaleAdjustment(operation);
 #elseif cpp
@@ -165,7 +165,7 @@ inline function getAdjustmentColorTransformGrayscaleAdjustment(operation:Graysca
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function getAdjustmentColorTransformHueSaturationAdjustment(operation:HueSaturationAdjustment):ColorTransformFunction {
+extern inline function getAdjustmentColorTransformHueSaturationAdjustment(operation:HueSaturationAdjustment):ColorTransformFunction {
 #if hl
 	return flight._hl._fn.Adjustments.getAdjustmentColorTransformHueSaturationAdjustment(operation);
 #elseif cpp
@@ -176,7 +176,7 @@ inline function getAdjustmentColorTransformHueSaturationAdjustment(operation:Hue
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function getAdjustmentColorTransformInvertAdjustment(operation:InvertAdjustment):ColorTransformFunction {
+extern inline function getAdjustmentColorTransformInvertAdjustment(operation:InvertAdjustment):ColorTransformFunction {
 #if hl
 	return flight._hl._fn.Adjustments.getAdjustmentColorTransformInvertAdjustment(operation);
 #elseif cpp
@@ -187,7 +187,7 @@ inline function getAdjustmentColorTransformInvertAdjustment(operation:InvertAdju
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function getAdjustmentColorTransformLiftGammaGainAdjustment(operation:LiftGammaGainAdjustment):ColorTransformFunction {
+extern inline function getAdjustmentColorTransformLiftGammaGainAdjustment(operation:LiftGammaGainAdjustment):ColorTransformFunction {
 #if hl
 	return flight._hl._fn.Adjustments.getAdjustmentColorTransformLiftGammaGainAdjustment(operation);
 #elseif cpp
@@ -198,7 +198,7 @@ inline function getAdjustmentColorTransformLiftGammaGainAdjustment(operation:Lif
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function getAdjustmentColorTransformLookupTableGradeAdjustment(operation:LookupTableGradeAdjustment):ColorTransformFunction {
+extern inline function getAdjustmentColorTransformLookupTableGradeAdjustment(operation:LookupTableGradeAdjustment):ColorTransformFunction {
 #if hl
 	return flight._hl._fn.Adjustments.getAdjustmentColorTransformLookupTableGradeAdjustment(operation);
 #elseif cpp
@@ -209,7 +209,7 @@ inline function getAdjustmentColorTransformLookupTableGradeAdjustment(operation:
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function getAdjustmentColorTransformSepiaAdjustment(operation:SepiaAdjustment):ColorTransformFunction {
+extern inline function getAdjustmentColorTransformSepiaAdjustment(operation:SepiaAdjustment):ColorTransformFunction {
 #if hl
 	return flight._hl._fn.Adjustments.getAdjustmentColorTransformSepiaAdjustment(operation);
 #elseif cpp
@@ -220,7 +220,7 @@ inline function getAdjustmentColorTransformSepiaAdjustment(operation:SepiaAdjust
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function getAdjustmentColorTransformTintAdjustment(operation:TintAdjustment):ColorTransformFunction {
+extern inline function getAdjustmentColorTransformTintAdjustment(operation:TintAdjustment):ColorTransformFunction {
 #if hl
 	return flight._hl._fn.Adjustments.getAdjustmentColorTransformTintAdjustment(operation);
 #elseif cpp
@@ -231,7 +231,7 @@ inline function getAdjustmentColorTransformTintAdjustment(operation:TintAdjustme
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function isColorLutAdjustmentBrightnessContrastAdjustment(operation:BrightnessContrastAdjustment):Bool {
+extern inline function isColorLutAdjustmentBrightnessContrastAdjustment(operation:BrightnessContrastAdjustment):Bool {
 #if hl
 	return flight._hl._fn.Adjustments.isColorLutAdjustmentBrightnessContrastAdjustment(operation);
 #elseif cpp
@@ -242,7 +242,7 @@ inline function isColorLutAdjustmentBrightnessContrastAdjustment(operation:Brigh
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function isColorLutAdjustmentChannelMixerAdjustment(operation:ChannelMixerAdjustment):Bool {
+extern inline function isColorLutAdjustmentChannelMixerAdjustment(operation:ChannelMixerAdjustment):Bool {
 #if hl
 	return flight._hl._fn.Adjustments.isColorLutAdjustmentChannelMixerAdjustment(operation);
 #elseif cpp
@@ -253,7 +253,7 @@ inline function isColorLutAdjustmentChannelMixerAdjustment(operation:ChannelMixe
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function isColorLutAdjustmentColorBlindSimulationAdjustment(operation:ColorBlindSimulationAdjustment):Bool {
+extern inline function isColorLutAdjustmentColorBlindSimulationAdjustment(operation:ColorBlindSimulationAdjustment):Bool {
 #if hl
 	return flight._hl._fn.Adjustments.isColorLutAdjustmentColorBlindSimulationAdjustment(operation);
 #elseif cpp
@@ -264,7 +264,7 @@ inline function isColorLutAdjustmentColorBlindSimulationAdjustment(operation:Col
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function isColorLutAdjustmentColorGradeAdjustment(operation:ColorGradeAdjustment):Bool {
+extern inline function isColorLutAdjustmentColorGradeAdjustment(operation:ColorGradeAdjustment):Bool {
 #if hl
 	return flight._hl._fn.Adjustments.isColorLutAdjustmentColorGradeAdjustment(operation);
 #elseif cpp
@@ -275,7 +275,7 @@ inline function isColorLutAdjustmentColorGradeAdjustment(operation:ColorGradeAdj
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function isColorLutAdjustmentColorMatrixAdjustment(operation:ColorMatrixAdjustment):Bool {
+extern inline function isColorLutAdjustmentColorMatrixAdjustment(operation:ColorMatrixAdjustment):Bool {
 #if hl
 	return flight._hl._fn.Adjustments.isColorLutAdjustmentColorMatrixAdjustment(operation);
 #elseif cpp
@@ -286,7 +286,7 @@ inline function isColorLutAdjustmentColorMatrixAdjustment(operation:ColorMatrixA
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function isColorLutAdjustmentColorScaleBiasAdjustment(operation:ColorScaleBiasAdjustment):Bool {
+extern inline function isColorLutAdjustmentColorScaleBiasAdjustment(operation:ColorScaleBiasAdjustment):Bool {
 #if hl
 	return flight._hl._fn.Adjustments.isColorLutAdjustmentColorScaleBiasAdjustment(operation);
 #elseif cpp
@@ -297,7 +297,7 @@ inline function isColorLutAdjustmentColorScaleBiasAdjustment(operation:ColorScal
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function isColorLutAdjustmentExposureAdjustment(operation:ExposureAdjustment):Bool {
+extern inline function isColorLutAdjustmentExposureAdjustment(operation:ExposureAdjustment):Bool {
 #if hl
 	return flight._hl._fn.Adjustments.isColorLutAdjustmentExposureAdjustment(operation);
 #elseif cpp
@@ -308,7 +308,7 @@ inline function isColorLutAdjustmentExposureAdjustment(operation:ExposureAdjustm
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function isColorLutAdjustmentGrayscaleAdjustment(operation:GrayscaleAdjustment):Bool {
+extern inline function isColorLutAdjustmentGrayscaleAdjustment(operation:GrayscaleAdjustment):Bool {
 #if hl
 	return flight._hl._fn.Adjustments.isColorLutAdjustmentGrayscaleAdjustment(operation);
 #elseif cpp
@@ -319,7 +319,7 @@ inline function isColorLutAdjustmentGrayscaleAdjustment(operation:GrayscaleAdjus
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function isColorLutAdjustmentHueSaturationAdjustment(operation:HueSaturationAdjustment):Bool {
+extern inline function isColorLutAdjustmentHueSaturationAdjustment(operation:HueSaturationAdjustment):Bool {
 #if hl
 	return flight._hl._fn.Adjustments.isColorLutAdjustmentHueSaturationAdjustment(operation);
 #elseif cpp
@@ -330,7 +330,7 @@ inline function isColorLutAdjustmentHueSaturationAdjustment(operation:HueSaturat
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function isColorLutAdjustmentInvertAdjustment(operation:InvertAdjustment):Bool {
+extern inline function isColorLutAdjustmentInvertAdjustment(operation:InvertAdjustment):Bool {
 #if hl
 	return flight._hl._fn.Adjustments.isColorLutAdjustmentInvertAdjustment(operation);
 #elseif cpp
@@ -341,7 +341,7 @@ inline function isColorLutAdjustmentInvertAdjustment(operation:InvertAdjustment)
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function isColorLutAdjustmentLiftGammaGainAdjustment(operation:LiftGammaGainAdjustment):Bool {
+extern inline function isColorLutAdjustmentLiftGammaGainAdjustment(operation:LiftGammaGainAdjustment):Bool {
 #if hl
 	return flight._hl._fn.Adjustments.isColorLutAdjustmentLiftGammaGainAdjustment(operation);
 #elseif cpp
@@ -352,7 +352,7 @@ inline function isColorLutAdjustmentLiftGammaGainAdjustment(operation:LiftGammaG
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function isColorLutAdjustmentLookupTableGradeAdjustment(operation:LookupTableGradeAdjustment):Bool {
+extern inline function isColorLutAdjustmentLookupTableGradeAdjustment(operation:LookupTableGradeAdjustment):Bool {
 #if hl
 	return flight._hl._fn.Adjustments.isColorLutAdjustmentLookupTableGradeAdjustment(operation);
 #elseif cpp
@@ -363,7 +363,7 @@ inline function isColorLutAdjustmentLookupTableGradeAdjustment(operation:LookupT
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function isColorLutAdjustmentSepiaAdjustment(operation:SepiaAdjustment):Bool {
+extern inline function isColorLutAdjustmentSepiaAdjustment(operation:SepiaAdjustment):Bool {
 #if hl
 	return flight._hl._fn.Adjustments.isColorLutAdjustmentSepiaAdjustment(operation);
 #elseif cpp
@@ -374,7 +374,7 @@ inline function isColorLutAdjustmentSepiaAdjustment(operation:SepiaAdjustment):B
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function isColorLutAdjustmentTintAdjustment(operation:TintAdjustment):Bool {
+extern inline function isColorLutAdjustmentTintAdjustment(operation:TintAdjustment):Bool {
 #if hl
 	return flight._hl._fn.Adjustments.isColorLutAdjustmentTintAdjustment(operation);
 #elseif cpp
@@ -385,7 +385,7 @@ inline function isColorLutAdjustmentTintAdjustment(operation:TintAdjustment):Boo
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function createColorLutCache():ColorLutCache {
+extern inline function createColorLutCache():ColorLutCache {
 #if hl
 	return flight._hl._fn.Adjustments.createColorLutCache();
 #elseif cpp
@@ -396,7 +396,7 @@ inline function createColorLutCache():ColorLutCache {
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function createColorMatrixAdjustment(colorMatrix:Dynamic):ColorMatrixAdjustment {
+extern inline function createColorMatrixAdjustment(colorMatrix:Dynamic):ColorMatrixAdjustment {
 #if hl
 	return flight._hl._fn.Adjustments.createColorMatrixAdjustment(colorMatrix);
 #elseif cpp
@@ -407,7 +407,7 @@ inline function createColorMatrixAdjustment(colorMatrix:Dynamic):ColorMatrixAdju
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function isColorMatrixAdjustmentBrightnessContrastAdjustment(operation:BrightnessContrastAdjustment):Bool {
+extern inline function isColorMatrixAdjustmentBrightnessContrastAdjustment(operation:BrightnessContrastAdjustment):Bool {
 #if hl
 	return flight._hl._fn.Adjustments.isColorMatrixAdjustmentBrightnessContrastAdjustment(operation);
 #elseif cpp
@@ -418,7 +418,7 @@ inline function isColorMatrixAdjustmentBrightnessContrastAdjustment(operation:Br
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function isColorMatrixAdjustmentChannelMixerAdjustment(operation:ChannelMixerAdjustment):Bool {
+extern inline function isColorMatrixAdjustmentChannelMixerAdjustment(operation:ChannelMixerAdjustment):Bool {
 #if hl
 	return flight._hl._fn.Adjustments.isColorMatrixAdjustmentChannelMixerAdjustment(operation);
 #elseif cpp
@@ -429,7 +429,7 @@ inline function isColorMatrixAdjustmentChannelMixerAdjustment(operation:ChannelM
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function isColorMatrixAdjustmentColorBlindSimulationAdjustment(operation:ColorBlindSimulationAdjustment):Bool {
+extern inline function isColorMatrixAdjustmentColorBlindSimulationAdjustment(operation:ColorBlindSimulationAdjustment):Bool {
 #if hl
 	return flight._hl._fn.Adjustments.isColorMatrixAdjustmentColorBlindSimulationAdjustment(operation);
 #elseif cpp
@@ -440,7 +440,7 @@ inline function isColorMatrixAdjustmentColorBlindSimulationAdjustment(operation:
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function isColorMatrixAdjustmentColorGradeAdjustment(operation:ColorGradeAdjustment):Bool {
+extern inline function isColorMatrixAdjustmentColorGradeAdjustment(operation:ColorGradeAdjustment):Bool {
 #if hl
 	return flight._hl._fn.Adjustments.isColorMatrixAdjustmentColorGradeAdjustment(operation);
 #elseif cpp
@@ -451,7 +451,7 @@ inline function isColorMatrixAdjustmentColorGradeAdjustment(operation:ColorGrade
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function isColorMatrixAdjustmentColorMatrixAdjustment(operation:ColorMatrixAdjustment):Bool {
+extern inline function isColorMatrixAdjustmentColorMatrixAdjustment(operation:ColorMatrixAdjustment):Bool {
 #if hl
 	return flight._hl._fn.Adjustments.isColorMatrixAdjustmentColorMatrixAdjustment(operation);
 #elseif cpp
@@ -462,7 +462,7 @@ inline function isColorMatrixAdjustmentColorMatrixAdjustment(operation:ColorMatr
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function isColorMatrixAdjustmentColorScaleBiasAdjustment(operation:ColorScaleBiasAdjustment):Bool {
+extern inline function isColorMatrixAdjustmentColorScaleBiasAdjustment(operation:ColorScaleBiasAdjustment):Bool {
 #if hl
 	return flight._hl._fn.Adjustments.isColorMatrixAdjustmentColorScaleBiasAdjustment(operation);
 #elseif cpp
@@ -473,7 +473,7 @@ inline function isColorMatrixAdjustmentColorScaleBiasAdjustment(operation:ColorS
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function isColorMatrixAdjustmentExposureAdjustment(operation:ExposureAdjustment):Bool {
+extern inline function isColorMatrixAdjustmentExposureAdjustment(operation:ExposureAdjustment):Bool {
 #if hl
 	return flight._hl._fn.Adjustments.isColorMatrixAdjustmentExposureAdjustment(operation);
 #elseif cpp
@@ -484,7 +484,7 @@ inline function isColorMatrixAdjustmentExposureAdjustment(operation:ExposureAdju
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function isColorMatrixAdjustmentGrayscaleAdjustment(operation:GrayscaleAdjustment):Bool {
+extern inline function isColorMatrixAdjustmentGrayscaleAdjustment(operation:GrayscaleAdjustment):Bool {
 #if hl
 	return flight._hl._fn.Adjustments.isColorMatrixAdjustmentGrayscaleAdjustment(operation);
 #elseif cpp
@@ -495,7 +495,7 @@ inline function isColorMatrixAdjustmentGrayscaleAdjustment(operation:GrayscaleAd
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function isColorMatrixAdjustmentHueSaturationAdjustment(operation:HueSaturationAdjustment):Bool {
+extern inline function isColorMatrixAdjustmentHueSaturationAdjustment(operation:HueSaturationAdjustment):Bool {
 #if hl
 	return flight._hl._fn.Adjustments.isColorMatrixAdjustmentHueSaturationAdjustment(operation);
 #elseif cpp
@@ -506,7 +506,7 @@ inline function isColorMatrixAdjustmentHueSaturationAdjustment(operation:HueSatu
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function isColorMatrixAdjustmentInvertAdjustment(operation:InvertAdjustment):Bool {
+extern inline function isColorMatrixAdjustmentInvertAdjustment(operation:InvertAdjustment):Bool {
 #if hl
 	return flight._hl._fn.Adjustments.isColorMatrixAdjustmentInvertAdjustment(operation);
 #elseif cpp
@@ -517,7 +517,7 @@ inline function isColorMatrixAdjustmentInvertAdjustment(operation:InvertAdjustme
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function isColorMatrixAdjustmentLiftGammaGainAdjustment(operation:LiftGammaGainAdjustment):Bool {
+extern inline function isColorMatrixAdjustmentLiftGammaGainAdjustment(operation:LiftGammaGainAdjustment):Bool {
 #if hl
 	return flight._hl._fn.Adjustments.isColorMatrixAdjustmentLiftGammaGainAdjustment(operation);
 #elseif cpp
@@ -528,7 +528,7 @@ inline function isColorMatrixAdjustmentLiftGammaGainAdjustment(operation:LiftGam
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function isColorMatrixAdjustmentLookupTableGradeAdjustment(operation:LookupTableGradeAdjustment):Bool {
+extern inline function isColorMatrixAdjustmentLookupTableGradeAdjustment(operation:LookupTableGradeAdjustment):Bool {
 #if hl
 	return flight._hl._fn.Adjustments.isColorMatrixAdjustmentLookupTableGradeAdjustment(operation);
 #elseif cpp
@@ -539,7 +539,7 @@ inline function isColorMatrixAdjustmentLookupTableGradeAdjustment(operation:Look
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function isColorMatrixAdjustmentSepiaAdjustment(operation:SepiaAdjustment):Bool {
+extern inline function isColorMatrixAdjustmentSepiaAdjustment(operation:SepiaAdjustment):Bool {
 #if hl
 	return flight._hl._fn.Adjustments.isColorMatrixAdjustmentSepiaAdjustment(operation);
 #elseif cpp
@@ -550,7 +550,7 @@ inline function isColorMatrixAdjustmentSepiaAdjustment(operation:SepiaAdjustment
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function isColorMatrixAdjustmentTintAdjustment(operation:TintAdjustment):Bool {
+extern inline function isColorMatrixAdjustmentTintAdjustment(operation:TintAdjustment):Bool {
 #if hl
 	return flight._hl._fn.Adjustments.isColorMatrixAdjustmentTintAdjustment(operation);
 #elseif cpp
@@ -561,7 +561,7 @@ inline function isColorMatrixAdjustmentTintAdjustment(operation:TintAdjustment):
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function createBrightnessColorMatrix(amount:Float):Dynamic {
+extern inline function createBrightnessColorMatrix(amount:Float):Dynamic {
 #if hl
 	return flight._hl._fn.Adjustments.createBrightnessColorMatrix(amount);
 #elseif cpp
@@ -572,7 +572,7 @@ inline function createBrightnessColorMatrix(amount:Float):Dynamic {
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function createChannelMixerColorMatrix(redOut:Dynamic, greenOut:Dynamic, blueOut:Dynamic):Dynamic {
+extern inline function createChannelMixerColorMatrix(redOut:Dynamic, greenOut:Dynamic, blueOut:Dynamic):Dynamic {
 #if hl
 	return flight._hl._fn.Adjustments.createChannelMixerColorMatrix(redOut, greenOut, blueOut);
 #elseif cpp
@@ -583,7 +583,7 @@ inline function createChannelMixerColorMatrix(redOut:Dynamic, greenOut:Dynamic, 
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function createColorBalanceColorMatrix(shadows:Dynamic, midtones:Dynamic, highlights:Dynamic):Dynamic {
+extern inline function createColorBalanceColorMatrix(shadows:Dynamic, midtones:Dynamic, highlights:Dynamic):Dynamic {
 #if hl
 	return flight._hl._fn.Adjustments.createColorBalanceColorMatrix(shadows, midtones, highlights);
 #elseif cpp
@@ -594,7 +594,7 @@ inline function createColorBalanceColorMatrix(shadows:Dynamic, midtones:Dynamic,
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function createColorMatrixFromTint(packedRgba:Int, amount:Float):Dynamic {
+extern inline function createColorMatrixFromTint(packedRgba:Int, amount:Float):Dynamic {
 #if hl
 	return flight._hl._fn.Adjustments.createColorMatrixFromTint(packedRgba, amount);
 #elseif cpp
@@ -605,7 +605,7 @@ inline function createColorMatrixFromTint(packedRgba:Int, amount:Float):Dynamic 
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function createContrastColorMatrix(amount:Float):Dynamic {
+extern inline function createContrastColorMatrix(amount:Float):Dynamic {
 #if hl
 	return flight._hl._fn.Adjustments.createContrastColorMatrix(amount);
 #elseif cpp
@@ -616,7 +616,7 @@ inline function createContrastColorMatrix(amount:Float):Dynamic {
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function createDesaturateColorMatrix(amount:Float):Dynamic {
+extern inline function createDesaturateColorMatrix(amount:Float):Dynamic {
 #if hl
 	return flight._hl._fn.Adjustments.createDesaturateColorMatrix(amount);
 #elseif cpp
@@ -627,7 +627,7 @@ inline function createDesaturateColorMatrix(amount:Float):Dynamic {
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function createGrayscaleColorMatrix():Dynamic {
+extern inline function createGrayscaleColorMatrix():Dynamic {
 #if hl
 	return flight._hl._fn.Adjustments.createGrayscaleColorMatrix();
 #elseif cpp
@@ -638,7 +638,7 @@ inline function createGrayscaleColorMatrix():Dynamic {
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function createHueRotateColorMatrix(degrees:Float):Dynamic {
+extern inline function createHueRotateColorMatrix(degrees:Float):Dynamic {
 #if hl
 	return flight._hl._fn.Adjustments.createHueRotateColorMatrix(degrees);
 #elseif cpp
@@ -649,7 +649,7 @@ inline function createHueRotateColorMatrix(degrees:Float):Dynamic {
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function createIdentityColorMatrix():Dynamic {
+extern inline function createIdentityColorMatrix():Dynamic {
 #if hl
 	return flight._hl._fn.Adjustments.createIdentityColorMatrix();
 #elseif cpp
@@ -660,7 +660,7 @@ inline function createIdentityColorMatrix():Dynamic {
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function createInvertColorMatrix():Dynamic {
+extern inline function createInvertColorMatrix():Dynamic {
 #if hl
 	return flight._hl._fn.Adjustments.createInvertColorMatrix();
 #elseif cpp
@@ -671,7 +671,7 @@ inline function createInvertColorMatrix():Dynamic {
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function createLevelsColorMatrix(inBlack:Float, inWhite:Float, outBlack:Float, outWhite:Float, gamma:Float):Dynamic {
+extern inline function createLevelsColorMatrix(inBlack:Float, inWhite:Float, outBlack:Float, outWhite:Float, gamma:Float):Dynamic {
 #if hl
 	return flight._hl._fn.Adjustments.createLevelsColorMatrix(inBlack, inWhite, outBlack, outWhite, gamma);
 #elseif cpp
@@ -682,7 +682,7 @@ inline function createLevelsColorMatrix(inBlack:Float, inWhite:Float, outBlack:F
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function createOpacityColorMatrix(alpha:Float):Dynamic {
+extern inline function createOpacityColorMatrix(alpha:Float):Dynamic {
 #if hl
 	return flight._hl._fn.Adjustments.createOpacityColorMatrix(alpha);
 #elseif cpp
@@ -693,7 +693,7 @@ inline function createOpacityColorMatrix(alpha:Float):Dynamic {
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function createPolaroidColorMatrix():Dynamic {
+extern inline function createPolaroidColorMatrix():Dynamic {
 #if hl
 	return flight._hl._fn.Adjustments.createPolaroidColorMatrix();
 #elseif cpp
@@ -704,7 +704,7 @@ inline function createPolaroidColorMatrix():Dynamic {
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function createSaturationColorMatrix(amount:Float):Dynamic {
+extern inline function createSaturationColorMatrix(amount:Float):Dynamic {
 #if hl
 	return flight._hl._fn.Adjustments.createSaturationColorMatrix(amount);
 #elseif cpp
@@ -715,7 +715,7 @@ inline function createSaturationColorMatrix(amount:Float):Dynamic {
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function createSepiaColorMatrix():Dynamic {
+extern inline function createSepiaColorMatrix():Dynamic {
 #if hl
 	return flight._hl._fn.Adjustments.createSepiaColorMatrix();
 #elseif cpp
@@ -726,7 +726,7 @@ inline function createSepiaColorMatrix():Dynamic {
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function createTechnicolorColorMatrix():Dynamic {
+extern inline function createTechnicolorColorMatrix():Dynamic {
 #if hl
 	return flight._hl._fn.Adjustments.createTechnicolorColorMatrix();
 #elseif cpp
@@ -737,7 +737,7 @@ inline function createTechnicolorColorMatrix():Dynamic {
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function createVintageColorMatrix():Dynamic {
+extern inline function createVintageColorMatrix():Dynamic {
 #if hl
 	return flight._hl._fn.Adjustments.createVintageColorMatrix();
 #elseif cpp
@@ -748,7 +748,7 @@ inline function createVintageColorMatrix():Dynamic {
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function createWhiteBalanceColorMatrix(temperature:Float, tint:Float):Dynamic {
+extern inline function createWhiteBalanceColorMatrix(temperature:Float, tint:Float):Dynamic {
 #if hl
 	return flight._hl._fn.Adjustments.createWhiteBalanceColorMatrix(temperature, tint);
 #elseif cpp
@@ -759,7 +759,7 @@ inline function createWhiteBalanceColorMatrix(temperature:Float, tint:Float):Dyn
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function applyColorMatrixToColor(matrix:Dynamic, packedRgba:Int):Int {
+extern inline function applyColorMatrixToColor(matrix:Dynamic, packedRgba:Int):Int {
 #if hl
 	return flight._hl._fn.Adjustments.applyColorMatrixToColor(matrix, packedRgba);
 #elseif cpp
@@ -770,7 +770,7 @@ inline function applyColorMatrixToColor(matrix:Dynamic, packedRgba:Int):Int {
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function concatColorMatrix(target:Dynamic, source:Dynamic):Void {
+extern inline function concatColorMatrix(target:Dynamic, source:Dynamic):Void {
 #if hl
 	flight._hl._fn.Adjustments.concatColorMatrix(target, source);
 #elseif cpp
@@ -781,7 +781,7 @@ inline function concatColorMatrix(target:Dynamic, source:Dynamic):Void {
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function multiplyColorMatrix(out:Dynamic, a:Dynamic, b:Dynamic):Void {
+extern inline function multiplyColorMatrix(out:Dynamic, a:Dynamic, b:Dynamic):Void {
 #if hl
 	flight._hl._fn.Adjustments.multiplyColorMatrix(out, a, b);
 #elseif cpp
@@ -792,7 +792,7 @@ inline function multiplyColorMatrix(out:Dynamic, a:Dynamic, b:Dynamic):Void {
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function createColorScaleBiasAdjustment(colorScaleBias:ColorScaleBias):ColorScaleBiasAdjustment {
+extern inline function createColorScaleBiasAdjustment(colorScaleBias:ColorScaleBias):ColorScaleBiasAdjustment {
 #if hl
 	return flight._hl._fn.Adjustments.createColorScaleBiasAdjustment(colorScaleBias);
 #elseif cpp
@@ -803,7 +803,7 @@ inline function createColorScaleBiasAdjustment(colorScaleBias:ColorScaleBias):Co
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function createExposureAdjustment(options:ExposureAdjustmentOptions):ExposureAdjustment {
+extern inline function createExposureAdjustment(options:ExposureAdjustmentOptions):ExposureAdjustment {
 #if hl
 	return flight._hl._fn.Adjustments.createExposureAdjustment(options);
 #elseif cpp
@@ -814,7 +814,7 @@ inline function createExposureAdjustment(options:ExposureAdjustmentOptions):Expo
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function createGrayscaleAdjustment(options:GrayscaleAdjustmentOptions):GrayscaleAdjustment {
+extern inline function createGrayscaleAdjustment(options:GrayscaleAdjustmentOptions):GrayscaleAdjustment {
 #if hl
 	return flight._hl._fn.Adjustments.createGrayscaleAdjustment(options);
 #elseif cpp
@@ -825,7 +825,7 @@ inline function createGrayscaleAdjustment(options:GrayscaleAdjustmentOptions):Gr
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function createHueSaturationAdjustment(options:HueSaturationAdjustmentOptions):HueSaturationAdjustment {
+extern inline function createHueSaturationAdjustment(options:HueSaturationAdjustmentOptions):HueSaturationAdjustment {
 #if hl
 	return flight._hl._fn.Adjustments.createHueSaturationAdjustment(options);
 #elseif cpp
@@ -836,7 +836,7 @@ inline function createHueSaturationAdjustment(options:HueSaturationAdjustmentOpt
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function createInvertAdjustment(options:InvertAdjustmentOptions):InvertAdjustment {
+extern inline function createInvertAdjustment(options:InvertAdjustmentOptions):InvertAdjustment {
 #if hl
 	return flight._hl._fn.Adjustments.createInvertAdjustment(options);
 #elseif cpp
@@ -847,7 +847,7 @@ inline function createInvertAdjustment(options:InvertAdjustmentOptions):InvertAd
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function createLiftGammaGainAdjustment(options:LiftGammaGainAdjustmentOptions):LiftGammaGainAdjustment {
+extern inline function createLiftGammaGainAdjustment(options:LiftGammaGainAdjustmentOptions):LiftGammaGainAdjustment {
 #if hl
 	return flight._hl._fn.Adjustments.createLiftGammaGainAdjustment(options);
 #elseif cpp
@@ -858,7 +858,7 @@ inline function createLiftGammaGainAdjustment(options:LiftGammaGainAdjustmentOpt
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function createLookupTableGradeAdjustment(options:LookupTableGradeAdjustmentOptions):LookupTableGradeAdjustment {
+extern inline function createLookupTableGradeAdjustment(options:LookupTableGradeAdjustmentOptions):LookupTableGradeAdjustment {
 #if hl
 	return flight._hl._fn.Adjustments.createLookupTableGradeAdjustment(options);
 #elseif cpp
@@ -869,7 +869,7 @@ inline function createLookupTableGradeAdjustment(options:LookupTableGradeAdjustm
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function createSepiaAdjustment(options:SepiaAdjustmentOptions):SepiaAdjustment {
+extern inline function createSepiaAdjustment(options:SepiaAdjustmentOptions):SepiaAdjustment {
 #if hl
 	return flight._hl._fn.Adjustments.createSepiaAdjustment(options);
 #elseif cpp
@@ -880,7 +880,7 @@ inline function createSepiaAdjustment(options:SepiaAdjustmentOptions):SepiaAdjus
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function createTintAdjustment(rgba:Int):TintAdjustment {
+extern inline function createTintAdjustment(rgba:Int):TintAdjustment {
 #if hl
 	return flight._hl._fn.Adjustments.createTintAdjustment(rgba);
 #elseif cpp
@@ -891,7 +891,7 @@ inline function createTintAdjustment(rgba:Int):TintAdjustment {
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function freeBrightnessContrastAdjustment(ptr:BrightnessContrastAdjustment):Void {
+extern inline function freeBrightnessContrastAdjustment(ptr:BrightnessContrastAdjustment):Void {
 #if hl
 	flight._hl._fn.Adjustments.freeBrightnessContrastAdjustment(ptr);
 #elseif cpp
@@ -902,7 +902,7 @@ inline function freeBrightnessContrastAdjustment(ptr:BrightnessContrastAdjustmen
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function freeChannelMixerAdjustment(ptr:ChannelMixerAdjustment):Void {
+extern inline function freeChannelMixerAdjustment(ptr:ChannelMixerAdjustment):Void {
 #if hl
 	flight._hl._fn.Adjustments.freeChannelMixerAdjustment(ptr);
 #elseif cpp
@@ -913,7 +913,7 @@ inline function freeChannelMixerAdjustment(ptr:ChannelMixerAdjustment):Void {
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function freeColorBlindSimulationAdjustment(ptr:ColorBlindSimulationAdjustment):Void {
+extern inline function freeColorBlindSimulationAdjustment(ptr:ColorBlindSimulationAdjustment):Void {
 #if hl
 	flight._hl._fn.Adjustments.freeColorBlindSimulationAdjustment(ptr);
 #elseif cpp
@@ -924,7 +924,7 @@ inline function freeColorBlindSimulationAdjustment(ptr:ColorBlindSimulationAdjus
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function freeColorGradeAdjustment(ptr:ColorGradeAdjustment):Void {
+extern inline function freeColorGradeAdjustment(ptr:ColorGradeAdjustment):Void {
 #if hl
 	flight._hl._fn.Adjustments.freeColorGradeAdjustment(ptr);
 #elseif cpp
@@ -935,7 +935,7 @@ inline function freeColorGradeAdjustment(ptr:ColorGradeAdjustment):Void {
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function freeColorLut(ptr:ColorLut):Void {
+extern inline function freeColorLut(ptr:ColorLut):Void {
 #if hl
 	flight._hl._fn.Adjustments.freeColorLut(ptr);
 #elseif cpp
@@ -946,7 +946,7 @@ inline function freeColorLut(ptr:ColorLut):Void {
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function freeColorTransformFunction(ptr:ColorTransformFunction):Void {
+extern inline function freeColorTransformFunction(ptr:ColorTransformFunction):Void {
 #if hl
 	flight._hl._fn.Adjustments.freeColorTransformFunction(ptr);
 #elseif cpp
@@ -957,7 +957,7 @@ inline function freeColorTransformFunction(ptr:ColorTransformFunction):Void {
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function freeColorLutCache(ptr:ColorLutCache):Void {
+extern inline function freeColorLutCache(ptr:ColorLutCache):Void {
 #if hl
 	flight._hl._fn.Adjustments.freeColorLutCache(ptr);
 #elseif cpp
@@ -968,7 +968,7 @@ inline function freeColorLutCache(ptr:ColorLutCache):Void {
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function freeColorMatrixAdjustment(ptr:ColorMatrixAdjustment):Void {
+extern inline function freeColorMatrixAdjustment(ptr:ColorMatrixAdjustment):Void {
 #if hl
 	flight._hl._fn.Adjustments.freeColorMatrixAdjustment(ptr);
 #elseif cpp
@@ -979,7 +979,7 @@ inline function freeColorMatrixAdjustment(ptr:ColorMatrixAdjustment):Void {
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function freeColorScaleBiasAdjustment(ptr:ColorScaleBiasAdjustment):Void {
+extern inline function freeColorScaleBiasAdjustment(ptr:ColorScaleBiasAdjustment):Void {
 #if hl
 	flight._hl._fn.Adjustments.freeColorScaleBiasAdjustment(ptr);
 #elseif cpp
@@ -990,7 +990,7 @@ inline function freeColorScaleBiasAdjustment(ptr:ColorScaleBiasAdjustment):Void 
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function freeExposureAdjustment(ptr:ExposureAdjustment):Void {
+extern inline function freeExposureAdjustment(ptr:ExposureAdjustment):Void {
 #if hl
 	flight._hl._fn.Adjustments.freeExposureAdjustment(ptr);
 #elseif cpp
@@ -1001,7 +1001,7 @@ inline function freeExposureAdjustment(ptr:ExposureAdjustment):Void {
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function freeGrayscaleAdjustment(ptr:GrayscaleAdjustment):Void {
+extern inline function freeGrayscaleAdjustment(ptr:GrayscaleAdjustment):Void {
 #if hl
 	flight._hl._fn.Adjustments.freeGrayscaleAdjustment(ptr);
 #elseif cpp
@@ -1012,7 +1012,7 @@ inline function freeGrayscaleAdjustment(ptr:GrayscaleAdjustment):Void {
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function freeHueSaturationAdjustment(ptr:HueSaturationAdjustment):Void {
+extern inline function freeHueSaturationAdjustment(ptr:HueSaturationAdjustment):Void {
 #if hl
 	flight._hl._fn.Adjustments.freeHueSaturationAdjustment(ptr);
 #elseif cpp
@@ -1023,7 +1023,7 @@ inline function freeHueSaturationAdjustment(ptr:HueSaturationAdjustment):Void {
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function freeInvertAdjustment(ptr:InvertAdjustment):Void {
+extern inline function freeInvertAdjustment(ptr:InvertAdjustment):Void {
 #if hl
 	flight._hl._fn.Adjustments.freeInvertAdjustment(ptr);
 #elseif cpp
@@ -1034,7 +1034,7 @@ inline function freeInvertAdjustment(ptr:InvertAdjustment):Void {
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function freeLiftGammaGainAdjustment(ptr:LiftGammaGainAdjustment):Void {
+extern inline function freeLiftGammaGainAdjustment(ptr:LiftGammaGainAdjustment):Void {
 #if hl
 	flight._hl._fn.Adjustments.freeLiftGammaGainAdjustment(ptr);
 #elseif cpp
@@ -1045,7 +1045,7 @@ inline function freeLiftGammaGainAdjustment(ptr:LiftGammaGainAdjustment):Void {
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function freeLookupTableGradeAdjustment(ptr:LookupTableGradeAdjustment):Void {
+extern inline function freeLookupTableGradeAdjustment(ptr:LookupTableGradeAdjustment):Void {
 #if hl
 	flight._hl._fn.Adjustments.freeLookupTableGradeAdjustment(ptr);
 #elseif cpp
@@ -1056,7 +1056,7 @@ inline function freeLookupTableGradeAdjustment(ptr:LookupTableGradeAdjustment):V
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function freeSepiaAdjustment(ptr:SepiaAdjustment):Void {
+extern inline function freeSepiaAdjustment(ptr:SepiaAdjustment):Void {
 #if hl
 	flight._hl._fn.Adjustments.freeSepiaAdjustment(ptr);
 #elseif cpp
@@ -1067,7 +1067,7 @@ inline function freeSepiaAdjustment(ptr:SepiaAdjustment):Void {
 	#error "flight.Adjustments: no backend for this target."
 #end
 }
-inline function freeTintAdjustment(ptr:TintAdjustment):Void {
+extern inline function freeTintAdjustment(ptr:TintAdjustment):Void {
 #if hl
 	flight._hl._fn.Adjustments.freeTintAdjustment(ptr);
 #elseif cpp

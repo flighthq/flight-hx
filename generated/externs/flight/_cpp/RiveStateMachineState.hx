@@ -10,5 +10,5 @@ abstract RiveStateMachineState(cpp.Star<cpp.Void>) {
 
 	inline function get_animationId():Single return RiveStateMachineState_Ffi.get_animationId(this);
 
-	inline function set_animationId(value:Single):Single return RiveStateMachineState_Ffi.set_animationId(this, value);
+	inline function set_animationId(value:Single):Single { RiveStateMachineState_Ffi.set_animationId(this, value); return value; }
 }

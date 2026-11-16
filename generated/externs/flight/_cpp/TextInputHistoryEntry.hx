@@ -16,20 +16,20 @@ abstract TextInputHistoryEntry(cpp.Star<cpp.Void>) {
 
 	inline function get_caretIndexAfter():Int return TextInputHistoryEntry_Ffi.get_caretIndexAfter(this);
 
-	inline function set_caretIndexAfter(value:Int):Int return TextInputHistoryEntry_Ffi.set_caretIndexAfter(this, value);
+	inline function set_caretIndexAfter(value:Int):Int { TextInputHistoryEntry_Ffi.set_caretIndexAfter(this, value); return value; }
 	public var caretIndexBefore(get, set):Int;
 
 	inline function get_caretIndexBefore():Int return TextInputHistoryEntry_Ffi.get_caretIndexBefore(this);
 
-	inline function set_caretIndexBefore(value:Int):Int return TextInputHistoryEntry_Ffi.set_caretIndexBefore(this, value);
+	inline function set_caretIndexBefore(value:Int):Int { TextInputHistoryEntry_Ffi.set_caretIndexBefore(this, value); return value; }
 	public var selectionIndexAfter(get, set):Int;
 
 	inline function get_selectionIndexAfter():Int return TextInputHistoryEntry_Ffi.get_selectionIndexAfter(this);
 
-	inline function set_selectionIndexAfter(value:Int):Int return TextInputHistoryEntry_Ffi.set_selectionIndexAfter(this, value);
+	inline function set_selectionIndexAfter(value:Int):Int { TextInputHistoryEntry_Ffi.set_selectionIndexAfter(this, value); return value; }
 	public var selectionIndexBefore(get, set):Int;
 
 	inline function get_selectionIndexBefore():Int return TextInputHistoryEntry_Ffi.get_selectionIndexBefore(this);
 
-	inline function set_selectionIndexBefore(value:Int):Int return TextInputHistoryEntry_Ffi.set_selectionIndexBefore(this, value);
+	inline function set_selectionIndexBefore(value:Int):Int { TextInputHistoryEntry_Ffi.set_selectionIndexBefore(this, value); return value; }
 }

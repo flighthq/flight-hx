@@ -1,6 +1,6 @@
 package flight;
 
-inline function compactStrokePath(out:Path, path:Path, style:StrokeStyle, tolerance:Float):Void {
+extern inline function compactStrokePath(out:Path, path:Path, style:StrokeStyle, tolerance:Float):Void {
 #if hl
 	flight._hl._fn.Shape.compactStrokePath(out, path, style, tolerance);
 #elseif cpp
@@ -11,7 +11,7 @@ inline function compactStrokePath(out:Path, path:Path, style:StrokeStyle, tolera
 	#error "flight.Shape: no backend for this target."
 #end
 }
-inline function enableShapeBoundsGuards(state:Dynamic, logState:Dynamic, nowMs:Float):Void {
+extern inline function enableShapeBoundsGuards(state:Dynamic, logState:Dynamic, nowMs:Float):Void {
 #if hl
 	flight._hl._fn.Shape.enableShapeBoundsGuards(state, logState, nowMs);
 #elseif cpp
@@ -22,7 +22,7 @@ inline function enableShapeBoundsGuards(state:Dynamic, logState:Dynamic, nowMs:F
 	#error "flight.Shape: no backend for this target."
 #end
 }
-inline function explainMorphShapeGradientEndpoints(start:MorphShapeGradientEndpoint, end:MorphShapeGradientEndpoint):MorphShapeGradientEndpointExplanation {
+extern inline function explainMorphShapeGradientEndpoints(start:MorphShapeGradientEndpoint, end:MorphShapeGradientEndpoint):MorphShapeGradientEndpointExplanation {
 #if hl
 	return flight._hl._fn.Shape.explainMorphShapeGradientEndpoints(start, end);
 #elseif cpp
@@ -33,7 +33,7 @@ inline function explainMorphShapeGradientEndpoints(start:MorphShapeGradientEndpo
 	#error "flight.Shape: no backend for this target."
 #end
 }
-inline function explainShapeTessellation(commands:Dynamic, commandsLen:Int, strokePathTessellationEnabled:Int):ShapeTessellationExplanation {
+extern inline function explainShapeTessellation(commands:Dynamic, commandsLen:Int, strokePathTessellationEnabled:Int):ShapeTessellationExplanation {
 #if hl
 	return flight._hl._fn.Shape.explainShapeTessellation(commands, commandsLen, strokePathTessellationEnabled);
 #elseif cpp
@@ -44,7 +44,7 @@ inline function explainShapeTessellation(commands:Dynamic, commandsLen:Int, stro
 	#error "flight.Shape: no backend for this target."
 #end
 }
-inline function createMorphShape(morph:Dynamic):Dynamic {
+extern inline function createMorphShape(morph:Dynamic):Dynamic {
 #if hl
 	return flight._hl._fn.Shape.createMorphShape(morph);
 #elseif cpp
@@ -55,7 +55,7 @@ inline function createMorphShape(morph:Dynamic):Dynamic {
 	#error "flight.Shape: no backend for this target."
 #end
 }
-inline function createMorphShapeData(morph:Dynamic):MorphShapeData {
+extern inline function createMorphShapeData(morph:Dynamic):MorphShapeData {
 #if hl
 	return flight._hl._fn.Shape.createMorphShapeData(morph);
 #elseif cpp
@@ -66,7 +66,7 @@ inline function createMorphShapeData(morph:Dynamic):MorphShapeData {
 	#error "flight.Shape: no backend for this target."
 #end
 }
-inline function appendMorphShapePath(shape:Dynamic, morph:Dynamic):Dynamic {
+extern inline function appendMorphShapePath(shape:Dynamic, morph:Dynamic):Dynamic {
 #if hl
 	return flight._hl._fn.Shape.appendMorphShapePath(shape, morph);
 #elseif cpp
@@ -77,7 +77,7 @@ inline function appendMorphShapePath(shape:Dynamic, morph:Dynamic):Dynamic {
 	#error "flight.Shape: no backend for this target."
 #end
 }
-inline function setMorphShapeProgress(shape:Dynamic, progress:Float):Void {
+extern inline function setMorphShapeProgress(shape:Dynamic, progress:Float):Void {
 #if hl
 	flight._hl._fn.Shape.setMorphShapeProgress(shape, progress);
 #elseif cpp
@@ -88,7 +88,7 @@ inline function setMorphShapeProgress(shape:Dynamic, progress:Float):Void {
 	#error "flight.Shape: no backend for this target."
 #end
 }
-inline function createMorphShapeAnimationTarget(shape:Dynamic):Dynamic {
+extern inline function createMorphShapeAnimationTarget(shape:Dynamic):Dynamic {
 #if hl
 	return flight._hl._fn.Shape.createMorphShapeAnimationTarget(shape);
 #elseif cpp
@@ -99,7 +99,7 @@ inline function createMorphShapeAnimationTarget(shape:Dynamic):Dynamic {
 	#error "flight.Shape: no backend for this target."
 #end
 }
-inline function applyAnimationClipToMorphShape(clip:AnimationClip, time:Float):Void {
+extern inline function applyAnimationClipToMorphShape(clip:AnimationClip, time:Float):Void {
 #if hl
 	flight._hl._fn.Shape.applyAnimationClipToMorphShape(clip, time);
 #elseif cpp
@@ -110,7 +110,7 @@ inline function applyAnimationClipToMorphShape(clip:AnimationClip, time:Float):V
 	#error "flight.Shape: no backend for this target."
 #end
 }
-inline function applyMorphShapeAnimationSample(sampled:Dynamic, sampledLen:Int, channel:AnimationChannel):Bool {
+extern inline function applyMorphShapeAnimationSample(sampled:Dynamic, sampledLen:Int, channel:AnimationChannel):Bool {
 #if hl
 	return flight._hl._fn.Shape.applyMorphShapeAnimationSample(sampled, sampledLen, channel);
 #elseif cpp
@@ -121,7 +121,7 @@ inline function applyMorphShapeAnimationSample(sampled:Dynamic, sampledLen:Int, 
 	#error "flight.Shape: no backend for this target."
 #end
 }
-inline function appendMorphShapeBeginFill(shape:Dynamic, start:MorphShapeColorEndpoint, end:MorphShapeColorEndpoint):Void {
+extern inline function appendMorphShapeBeginFill(shape:Dynamic, start:MorphShapeColorEndpoint, end:MorphShapeColorEndpoint):Void {
 #if hl
 	flight._hl._fn.Shape.appendMorphShapeBeginFill(shape, start, end);
 #elseif cpp
@@ -132,7 +132,7 @@ inline function appendMorphShapeBeginFill(shape:Dynamic, start:MorphShapeColorEn
 	#error "flight.Shape: no backend for this target."
 #end
 }
-inline function appendMorphShapeBeginTextureFill(shape:Dynamic, texture:Dynamic, startMatrix:Matrix, endMatrix:Matrix):Void {
+extern inline function appendMorphShapeBeginTextureFill(shape:Dynamic, texture:Dynamic, startMatrix:Matrix, endMatrix:Matrix):Void {
 #if hl
 	flight._hl._fn.Shape.appendMorphShapeBeginTextureFill(shape, texture, startMatrix, endMatrix);
 #elseif cpp
@@ -143,7 +143,7 @@ inline function appendMorphShapeBeginTextureFill(shape:Dynamic, texture:Dynamic,
 	#error "flight.Shape: no backend for this target."
 #end
 }
-inline function appendMorphShapeLineStyle(shape:Dynamic, start:MorphShapeLineEndpoint, end:MorphShapeLineEndpoint, pixelHinting:Int, scaleMode:Int, caps:Int, joints:Int, miterLimit:Float):Void {
+extern inline function appendMorphShapeLineStyle(shape:Dynamic, start:MorphShapeLineEndpoint, end:MorphShapeLineEndpoint, pixelHinting:Int, scaleMode:Int, caps:Int, joints:Int, miterLimit:Float):Void {
 #if hl
 	flight._hl._fn.Shape.appendMorphShapeLineStyle(shape, start, end, pixelHinting, scaleMode, caps, joints, miterLimit);
 #elseif cpp
@@ -154,7 +154,7 @@ inline function appendMorphShapeLineStyle(shape:Dynamic, start:MorphShapeLineEnd
 	#error "flight.Shape: no backend for this target."
 #end
 }
-inline function appendMorphShapeLineTextureStyle(shape:Dynamic, texture:Dynamic, startMatrix:Matrix, endMatrix:Matrix):Void {
+extern inline function appendMorphShapeLineTextureStyle(shape:Dynamic, texture:Dynamic, startMatrix:Matrix, endMatrix:Matrix):Void {
 #if hl
 	flight._hl._fn.Shape.appendMorphShapeLineTextureStyle(shape, texture, startMatrix, endMatrix);
 #elseif cpp
@@ -165,7 +165,7 @@ inline function appendMorphShapeLineTextureStyle(shape:Dynamic, texture:Dynamic,
 	#error "flight.Shape: no backend for this target."
 #end
 }
-inline function registerDefaultShapeBoundsCommands(state:Dynamic):Void {
+extern inline function registerDefaultShapeBoundsCommands(state:Dynamic):Void {
 #if hl
 	flight._hl._fn.Shape.registerDefaultShapeBoundsCommands(state);
 #elseif cpp
@@ -176,7 +176,7 @@ inline function registerDefaultShapeBoundsCommands(state:Dynamic):Void {
 	#error "flight.Shape: no backend for this target."
 #end
 }
-inline function createScale9Shape(scale9Grid:ShapeScale9Grid):Dynamic {
+extern inline function createScale9Shape(scale9Grid:ShapeScale9Grid):Dynamic {
 #if hl
 	return flight._hl._fn.Shape.createScale9Shape(scale9Grid);
 #elseif cpp
@@ -187,7 +187,7 @@ inline function createScale9Shape(scale9Grid:ShapeScale9Grid):Dynamic {
 	#error "flight.Shape: no backend for this target."
 #end
 }
-inline function createScale9ShapeData(scale9Grid:ShapeScale9Grid):Scale9ShapeData {
+extern inline function createScale9ShapeData(scale9Grid:ShapeScale9Grid):Scale9ShapeData {
 #if hl
 	return flight._hl._fn.Shape.createScale9ShapeData(scale9Grid);
 #elseif cpp
@@ -198,7 +198,7 @@ inline function createScale9ShapeData(scale9Grid:ShapeScale9Grid):Scale9ShapeDat
 	#error "flight.Shape: no backend for this target."
 #end
 }
-inline function mapScale9ShapeCommands(out:Dynamic, source:Dynamic, sourceLen:Int, mapper:ShapeScale9Mapper):Void {
+extern inline function mapScale9ShapeCommands(out:Dynamic, source:Dynamic, sourceLen:Int, mapper:ShapeScale9Mapper):Void {
 #if hl
 	flight._hl._fn.Shape.mapScale9ShapeCommands(out, source, sourceLen, mapper);
 #elseif cpp
@@ -209,7 +209,7 @@ inline function mapScale9ShapeCommands(out:Dynamic, source:Dynamic, sourceLen:In
 	#error "flight.Shape: no backend for this target."
 #end
 }
-inline function createShape():Dynamic {
+extern inline function createShape():Dynamic {
 #if hl
 	return flight._hl._fn.Shape.createShape();
 #elseif cpp
@@ -220,7 +220,7 @@ inline function createShape():Dynamic {
 	#error "flight.Shape: no backend for this target."
 #end
 }
-inline function createShapeData():ShapeData {
+extern inline function createShapeData():ShapeData {
 #if hl
 	return flight._hl._fn.Shape.createShapeData();
 #elseif cpp
@@ -231,7 +231,7 @@ inline function createShapeData():ShapeData {
 	#error "flight.Shape: no backend for this target."
 #end
 }
-inline function computeShapeLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
+extern inline function computeShapeLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
 #if hl
 	flight._hl._fn.Shape.computeShapeLocalBoundsRectangle(out, source);
 #elseif cpp
@@ -242,7 +242,7 @@ inline function computeShapeLocalBoundsRectangle(out:Rectangle, source:Dynamic):
 	#error "flight.Shape: no backend for this target."
 #end
 }
-inline function getShapeBounds(out:Rectangle, source:Dynamic, mode:Int):Bool {
+extern inline function getShapeBounds(out:Rectangle, source:Dynamic, mode:Int):Bool {
 #if hl
 	return flight._hl._fn.Shape.getShapeBounds(out, source, mode);
 #elseif cpp
@@ -253,7 +253,7 @@ inline function getShapeBounds(out:Rectangle, source:Dynamic, mode:Int):Bool {
 	#error "flight.Shape: no backend for this target."
 #end
 }
-inline function getShapeCommandCount(source:Dynamic):Int {
+extern inline function getShapeCommandCount(source:Dynamic):Int {
 #if hl
 	return flight._hl._fn.Shape.getShapeCommandCount(source);
 #elseif cpp
@@ -264,7 +264,7 @@ inline function getShapeCommandCount(source:Dynamic):Int {
 	#error "flight.Shape: no backend for this target."
 #end
 }
-inline function isShapeEmpty(source:Dynamic):Bool {
+extern inline function isShapeEmpty(source:Dynamic):Bool {
 #if hl
 	return flight._hl._fn.Shape.isShapeEmpty(source);
 #elseif cpp
@@ -275,7 +275,7 @@ inline function isShapeEmpty(source:Dynamic):Bool {
 	#error "flight.Shape: no backend for this target."
 #end
 }
-inline function computeShapeBoundsRectangle(out:Rectangle, source:Dynamic, mode:Int):Bool {
+extern inline function computeShapeBoundsRectangle(out:Rectangle, source:Dynamic, mode:Int):Bool {
 #if hl
 	return flight._hl._fn.Shape.computeShapeBoundsRectangle(out, source, mode);
 #elseif cpp
@@ -286,7 +286,7 @@ inline function computeShapeBoundsRectangle(out:Rectangle, source:Dynamic, mode:
 	#error "flight.Shape: no backend for this target."
 #end
 }
-inline function explainShapeBounds(source:Dynamic, mode:Int):ShapeBoundsExplanation {
+extern inline function explainShapeBounds(source:Dynamic, mode:Int):ShapeBoundsExplanation {
 #if hl
 	return flight._hl._fn.Shape.explainShapeBounds(source, mode);
 #elseif cpp
@@ -297,7 +297,7 @@ inline function explainShapeBounds(source:Dynamic, mode:Int):ShapeBoundsExplanat
 	#error "flight.Shape: no backend for this target."
 #end
 }
-inline function normalizeShapeStrokeMiterLimit(miterLimit:Float):Float {
+extern inline function normalizeShapeStrokeMiterLimit(miterLimit:Float):Float {
 #if hl
 	return flight._hl._fn.Shape.normalizeShapeStrokeMiterLimit(miterLimit);
 #elseif cpp
@@ -308,7 +308,7 @@ inline function normalizeShapeStrokeMiterLimit(miterLimit:Float):Float {
 	#error "flight.Shape: no backend for this target."
 #end
 }
-inline function normalizeShapeStrokeWidth(width:Float):Float {
+extern inline function normalizeShapeStrokeWidth(width:Float):Float {
 #if hl
 	return flight._hl._fn.Shape.normalizeShapeStrokeWidth(width);
 #elseif cpp
@@ -319,7 +319,7 @@ inline function normalizeShapeStrokeWidth(width:Float):Float {
 	#error "flight.Shape: no backend for this target."
 #end
 }
-inline function getShapeFillRegions(commands:Dynamic, commandsLen:Int):Dynamic {
+extern inline function getShapeFillRegions(commands:Dynamic, commandsLen:Int):Dynamic {
 #if hl
 	return flight._hl._fn.Shape.getShapeFillRegions(commands, commandsLen);
 #elseif cpp
@@ -330,7 +330,7 @@ inline function getShapeFillRegions(commands:Dynamic, commandsLen:Int):Dynamic {
 	#error "flight.Shape: no backend for this target."
 #end
 }
-inline function hasNonSolidShapeFill(commands:Dynamic, commandsLen:Int):Bool {
+extern inline function hasNonSolidShapeFill(commands:Dynamic, commandsLen:Int):Bool {
 #if hl
 	return flight._hl._fn.Shape.hasNonSolidShapeFill(commands, commandsLen);
 #elseif cpp
@@ -341,7 +341,7 @@ inline function hasNonSolidShapeFill(commands:Dynamic, commandsLen:Int):Bool {
 	#error "flight.Shape: no backend for this target."
 #end
 }
-inline function hasShapeFill(commands:Dynamic, commandsLen:Int):Bool {
+extern inline function hasShapeFill(commands:Dynamic, commandsLen:Int):Bool {
 #if hl
 	return flight._hl._fn.Shape.hasShapeFill(commands, commandsLen);
 #elseif cpp
@@ -352,7 +352,7 @@ inline function hasShapeFill(commands:Dynamic, commandsLen:Int):Bool {
 	#error "flight.Shape: no backend for this target."
 #end
 }
-inline function getShapeStrokeRegions(commands:Dynamic, commandsLen:Int):Dynamic {
+extern inline function getShapeStrokeRegions(commands:Dynamic, commandsLen:Int):Dynamic {
 #if hl
 	return flight._hl._fn.Shape.getShapeStrokeRegions(commands, commandsLen);
 #elseif cpp
@@ -363,7 +363,7 @@ inline function getShapeStrokeRegions(commands:Dynamic, commandsLen:Int):Dynamic
 	#error "flight.Shape: no backend for this target."
 #end
 }
-inline function hasNonSolidShapeStroke(commands:Dynamic, commandsLen:Int):Bool {
+extern inline function hasNonSolidShapeStroke(commands:Dynamic, commandsLen:Int):Bool {
 #if hl
 	return flight._hl._fn.Shape.hasNonSolidShapeStroke(commands, commandsLen);
 #elseif cpp
@@ -374,7 +374,7 @@ inline function hasNonSolidShapeStroke(commands:Dynamic, commandsLen:Int):Bool {
 	#error "flight.Shape: no backend for this target."
 #end
 }
-inline function getShapeStrokeOutlineRegions(commands:Dynamic, commandsLen:Int):Dynamic {
+extern inline function getShapeStrokeOutlineRegions(commands:Dynamic, commandsLen:Int):Dynamic {
 #if hl
 	return flight._hl._fn.Shape.getShapeStrokeOutlineRegions(commands, commandsLen);
 #elseif cpp
@@ -385,7 +385,7 @@ inline function getShapeStrokeOutlineRegions(commands:Dynamic, commandsLen:Int):
 	#error "flight.Shape: no backend for this target."
 #end
 }
-inline function freeMorphShapeGradientEndpointExplanation(ptr:MorphShapeGradientEndpointExplanation):Void {
+extern inline function freeMorphShapeGradientEndpointExplanation(ptr:MorphShapeGradientEndpointExplanation):Void {
 #if hl
 	flight._hl._fn.Shape.freeMorphShapeGradientEndpointExplanation(ptr);
 #elseif cpp
@@ -396,7 +396,7 @@ inline function freeMorphShapeGradientEndpointExplanation(ptr:MorphShapeGradient
 	#error "flight.Shape: no backend for this target."
 #end
 }
-inline function freeShapeTessellationExplanation(ptr:ShapeTessellationExplanation):Void {
+extern inline function freeShapeTessellationExplanation(ptr:ShapeTessellationExplanation):Void {
 #if hl
 	flight._hl._fn.Shape.freeShapeTessellationExplanation(ptr);
 #elseif cpp
@@ -407,7 +407,7 @@ inline function freeShapeTessellationExplanation(ptr:ShapeTessellationExplanatio
 	#error "flight.Shape: no backend for this target."
 #end
 }
-inline function freeMorphShapeData(ptr:MorphShapeData):Void {
+extern inline function freeMorphShapeData(ptr:MorphShapeData):Void {
 #if hl
 	flight._hl._fn.Shape.freeMorphShapeData(ptr);
 #elseif cpp
@@ -418,7 +418,7 @@ inline function freeMorphShapeData(ptr:MorphShapeData):Void {
 	#error "flight.Shape: no backend for this target."
 #end
 }
-inline function freeScale9ShapeData(ptr:Scale9ShapeData):Void {
+extern inline function freeScale9ShapeData(ptr:Scale9ShapeData):Void {
 #if hl
 	flight._hl._fn.Shape.freeScale9ShapeData(ptr);
 #elseif cpp
@@ -429,7 +429,7 @@ inline function freeScale9ShapeData(ptr:Scale9ShapeData):Void {
 	#error "flight.Shape: no backend for this target."
 #end
 }
-inline function freeShapeData(ptr:ShapeData):Void {
+extern inline function freeShapeData(ptr:ShapeData):Void {
 #if hl
 	flight._hl._fn.Shape.freeShapeData(ptr);
 #elseif cpp
@@ -440,7 +440,7 @@ inline function freeShapeData(ptr:ShapeData):Void {
 	#error "flight.Shape: no backend for this target."
 #end
 }
-inline function freeShapeBoundsExplanation(ptr:ShapeBoundsExplanation):Void {
+extern inline function freeShapeBoundsExplanation(ptr:ShapeBoundsExplanation):Void {
 #if hl
 	flight._hl._fn.Shape.freeShapeBoundsExplanation(ptr);
 #elseif cpp

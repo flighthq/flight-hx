@@ -34,65 +34,65 @@ abstract Physics2DSolverConfig(cpp.Star<cpp.Void>) {
 
 	inline function get_allowSleeping():Bool return Physics2DSolverConfig_Ffi.get_allowSleeping(this);
 
-	inline function set_allowSleeping(value:Bool):Bool return Physics2DSolverConfig_Ffi.set_allowSleeping(this, value);
+	inline function set_allowSleeping(value:Bool):Bool { Physics2DSolverConfig_Ffi.set_allowSleeping(this, value); return value; }
 	public var continuousCollision(get, set):Bool;
 
 	inline function get_continuousCollision():Bool return Physics2DSolverConfig_Ffi.get_continuousCollision(this);
 
-	inline function set_continuousCollision(value:Bool):Bool return Physics2DSolverConfig_Ffi.set_continuousCollision(this, value);
+	inline function set_continuousCollision(value:Bool):Bool { Physics2DSolverConfig_Ffi.set_continuousCollision(this, value); return value; }
 	public var maxCcdRotationSubsteps(get, set):Int;
 
 	inline function get_maxCcdRotationSubsteps():Int return Physics2DSolverConfig_Ffi.get_maxCcdRotationSubsteps(this);
 
-	inline function set_maxCcdRotationSubsteps(value:Int):Int return Physics2DSolverConfig_Ffi.set_maxCcdRotationSubsteps(this, value);
+	inline function set_maxCcdRotationSubsteps(value:Int):Int { Physics2DSolverConfig_Ffi.set_maxCcdRotationSubsteps(this, value); return value; }
 	public var maxCcdSubsteps(get, set):Int;
 
 	inline function get_maxCcdSubsteps():Int return Physics2DSolverConfig_Ffi.get_maxCcdSubsteps(this);
 
-	inline function set_maxCcdSubsteps(value:Int):Int return Physics2DSolverConfig_Ffi.set_maxCcdSubsteps(this, value);
+	inline function set_maxCcdSubsteps(value:Int):Int { Physics2DSolverConfig_Ffi.set_maxCcdSubsteps(this, value); return value; }
 	public var penetrationSlop(get, set):Single;
 
 	inline function get_penetrationSlop():Single return Physics2DSolverConfig_Ffi.get_penetrationSlop(this);
 
-	inline function set_penetrationSlop(value:Single):Single return Physics2DSolverConfig_Ffi.set_penetrationSlop(this, value);
+	inline function set_penetrationSlop(value:Single):Single { Physics2DSolverConfig_Ffi.set_penetrationSlop(this, value); return value; }
 	public var positionCorrection(get, set):Single;
 
 	inline function get_positionCorrection():Single return Physics2DSolverConfig_Ffi.get_positionCorrection(this);
 
-	inline function set_positionCorrection(value:Single):Single return Physics2DSolverConfig_Ffi.set_positionCorrection(this, value);
+	inline function set_positionCorrection(value:Single):Single { Physics2DSolverConfig_Ffi.set_positionCorrection(this, value); return value; }
 	public var positionIterations(get, set):Int;
 
 	inline function get_positionIterations():Int return Physics2DSolverConfig_Ffi.get_positionIterations(this);
 
-	inline function set_positionIterations(value:Int):Int return Physics2DSolverConfig_Ffi.set_positionIterations(this, value);
+	inline function set_positionIterations(value:Int):Int { Physics2DSolverConfig_Ffi.set_positionIterations(this, value); return value; }
 	public var restitutionThreshold(get, set):Single;
 
 	inline function get_restitutionThreshold():Single return Physics2DSolverConfig_Ffi.get_restitutionThreshold(this);
 
-	inline function set_restitutionThreshold(value:Single):Single return Physics2DSolverConfig_Ffi.set_restitutionThreshold(this, value);
+	inline function set_restitutionThreshold(value:Single):Single { Physics2DSolverConfig_Ffi.set_restitutionThreshold(this, value); return value; }
 	public var sleepAngularThreshold(get, set):Single;
 
 	inline function get_sleepAngularThreshold():Single return Physics2DSolverConfig_Ffi.get_sleepAngularThreshold(this);
 
-	inline function set_sleepAngularThreshold(value:Single):Single return Physics2DSolverConfig_Ffi.set_sleepAngularThreshold(this, value);
+	inline function set_sleepAngularThreshold(value:Single):Single { Physics2DSolverConfig_Ffi.set_sleepAngularThreshold(this, value); return value; }
 	public var sleepLinearThreshold(get, set):Single;
 
 	inline function get_sleepLinearThreshold():Single return Physics2DSolverConfig_Ffi.get_sleepLinearThreshold(this);
 
-	inline function set_sleepLinearThreshold(value:Single):Single return Physics2DSolverConfig_Ffi.set_sleepLinearThreshold(this, value);
+	inline function set_sleepLinearThreshold(value:Single):Single { Physics2DSolverConfig_Ffi.set_sleepLinearThreshold(this, value); return value; }
 	public var timeToSleep(get, set):Single;
 
 	inline function get_timeToSleep():Single return Physics2DSolverConfig_Ffi.get_timeToSleep(this);
 
-	inline function set_timeToSleep(value:Single):Single return Physics2DSolverConfig_Ffi.set_timeToSleep(this, value);
+	inline function set_timeToSleep(value:Single):Single { Physics2DSolverConfig_Ffi.set_timeToSleep(this, value); return value; }
 	public var velocityIterations(get, set):Int;
 
 	inline function get_velocityIterations():Int return Physics2DSolverConfig_Ffi.get_velocityIterations(this);
 
-	inline function set_velocityIterations(value:Int):Int return Physics2DSolverConfig_Ffi.set_velocityIterations(this, value);
+	inline function set_velocityIterations(value:Int):Int { Physics2DSolverConfig_Ffi.set_velocityIterations(this, value); return value; }
 	public var warmStarting(get, set):Bool;
 
 	inline function get_warmStarting():Bool return Physics2DSolverConfig_Ffi.get_warmStarting(this);
 
-	inline function set_warmStarting(value:Bool):Bool return Physics2DSolverConfig_Ffi.set_warmStarting(this, value);
+	inline function set_warmStarting(value:Bool):Bool { Physics2DSolverConfig_Ffi.set_warmStarting(this, value); return value; }
 }

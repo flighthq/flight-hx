@@ -10,5 +10,5 @@ abstract ExposureAdjustment(cpp.Star<cpp.Void>) {
 
 	inline function get_exposure():Single return ExposureAdjustment_Ffi.get_exposure(this);
 
-	inline function set_exposure(value:Single):Single return ExposureAdjustment_Ffi.set_exposure(this, value);
+	inline function set_exposure(value:Single):Single { ExposureAdjustment_Ffi.set_exposure(this, value); return value; }
 }

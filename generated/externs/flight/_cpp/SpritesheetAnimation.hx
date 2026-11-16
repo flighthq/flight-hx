@@ -16,20 +16,20 @@ abstract SpritesheetAnimation(cpp.Star<cpp.Void>) {
 
 	inline function get_frameDuration():Float return SpritesheetAnimation_Ffi.get_frameDuration(this);
 
-	inline function set_frameDuration(value:Float):Float return SpritesheetAnimation_Ffi.set_frameDuration(this, value);
+	inline function set_frameDuration(value:Float):Float { SpritesheetAnimation_Ffi.set_frameDuration(this, value); return value; }
 	public var repeatCount(get, set):Int;
 
 	inline function get_repeatCount():Int return SpritesheetAnimation_Ffi.get_repeatCount(this);
 
-	inline function set_repeatCount(value:Int):Int return SpritesheetAnimation_Ffi.set_repeatCount(this, value);
+	inline function set_repeatCount(value:Int):Int { SpritesheetAnimation_Ffi.set_repeatCount(this, value); return value; }
 	public var originX(get, set):Single;
 
 	inline function get_originX():Single return SpritesheetAnimation_Ffi.get_originX(this);
 
-	inline function set_originX(value:Single):Single return SpritesheetAnimation_Ffi.set_originX(this, value);
+	inline function set_originX(value:Single):Single { SpritesheetAnimation_Ffi.set_originX(this, value); return value; }
 	public var originY(get, set):Single;
 
 	inline function get_originY():Single return SpritesheetAnimation_Ffi.get_originY(this);
 
-	inline function set_originY(value:Single):Single return SpritesheetAnimation_Ffi.set_originY(this, value);
+	inline function set_originY(value:Single):Single { SpritesheetAnimation_Ffi.set_originY(this, value); return value; }
 }

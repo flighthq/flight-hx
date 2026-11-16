@@ -92,7 +92,7 @@ extern class Animation {
 	@:native("flight_sample_animation_state_machine_channel")
 	public static function sampleAnimationStateMachineChannel(out:cpp.Star<cpp.Void>, outLen:Int, machine:flight._cpp.AnimationStateMachine, channelIndex:Int):Bool;
 	@:native("flight_transition_animation_state_machine")
-	public static function transitionAnimationStateMachine(machine:flight._cpp.AnimationStateMachine, toState:Int, duration:Single, curveFn:cpp.Star<cpp.Void>, curveCtx:cpp.Star<cpp.Void>):Bool;
+	public static function transitionAnimationStateMachine(machine:flight._cpp.AnimationStateMachine, toState:flight._cpp.StateRef, duration:Single, curveFn:cpp.Star<cpp.Void>, curveCtx:cpp.Star<cpp.Void>):Bool;
 	@:native("flight_create_animation_track")
 	public static function createAnimationTrack():flight._cpp.AnimationTrack;
 	@:native("flight_clone_animation_track")
@@ -104,9 +104,9 @@ extern class Animation {
 	@:native("flight_validate_animation_track")
 	public static function validateAnimationTrack(out:cpp.Star<cpp.Void>, track:flight._cpp.AnimationTrack):Bool;
 	@:native("flight_create_state_ref_from_index")
-	public static function createStateRefFromIndex(index:Int):Int;
+	public static function createStateRefFromIndex(index:Int):flight._cpp.StateRef;
 	@:native("flight_create_state_ref_from_name")
-	public static function createStateRefFromName(name:cpp.ConstCharStar):Int;
+	public static function createStateRefFromName(name:cpp.ConstCharStar):flight._cpp.StateRef;
 	@:native("flight_free_animation_sample_accumulator")
 	public static function freeAnimationSampleAccumulator(ptr:flight._cpp.AnimationSampleAccumulator):Void;
 	@:native("flight_free_animation_blend_tree")
@@ -133,4 +133,6 @@ extern class Animation {
 	public static function freeAnimationStateMachineState(ptr:flight._cpp.AnimationStateMachineState):Void;
 	@:native("flight_free_animation_track")
 	public static function freeAnimationTrack(ptr:flight._cpp.AnimationTrack):Void;
+	@:native("flight_free_state_ref")
+	public static function freeStateRef(ptr:flight._cpp.StateRef):Void;
 }

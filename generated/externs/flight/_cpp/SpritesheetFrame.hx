@@ -16,20 +16,20 @@ abstract SpritesheetFrame(cpp.Star<cpp.Void>) {
 
 	inline function get_id():Int return SpritesheetFrame_Ffi.get_id(this);
 
-	inline function set_id(value:Int):Int return SpritesheetFrame_Ffi.set_id(this, value);
+	inline function set_id(value:Int):Int { SpritesheetFrame_Ffi.set_id(this, value); return value; }
 	public var offsetX(get, set):Single;
 
 	inline function get_offsetX():Single return SpritesheetFrame_Ffi.get_offsetX(this);
 
-	inline function set_offsetX(value:Single):Single return SpritesheetFrame_Ffi.set_offsetX(this, value);
+	inline function set_offsetX(value:Single):Single { SpritesheetFrame_Ffi.set_offsetX(this, value); return value; }
 	public var offsetY(get, set):Single;
 
 	inline function get_offsetY():Single return SpritesheetFrame_Ffi.get_offsetY(this);
 
-	inline function set_offsetY(value:Single):Single return SpritesheetFrame_Ffi.set_offsetY(this, value);
+	inline function set_offsetY(value:Single):Single { SpritesheetFrame_Ffi.set_offsetY(this, value); return value; }
 	public var rotated(get, set):Bool;
 
 	inline function get_rotated():Bool return SpritesheetFrame_Ffi.get_rotated(this);
 
-	inline function set_rotated(value:Bool):Bool return SpritesheetFrame_Ffi.set_rotated(this, value);
+	inline function set_rotated(value:Bool):Bool { SpritesheetFrame_Ffi.set_rotated(this, value); return value; }
 }

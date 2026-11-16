@@ -12,10 +12,10 @@ abstract OrthographicProjectionOptions(cpp.Star<cpp.Void>) {
 
 	inline function get_halfHeight():Single return OrthographicProjectionOptions_Ffi.get_halfHeight(this);
 
-	inline function set_halfHeight(value:Single):Single return OrthographicProjectionOptions_Ffi.set_halfHeight(this, value);
+	inline function set_halfHeight(value:Single):Single { OrthographicProjectionOptions_Ffi.set_halfHeight(this, value); return value; }
 	public var halfWidth(get, set):Single;
 
 	inline function get_halfWidth():Single return OrthographicProjectionOptions_Ffi.get_halfWidth(this);
 
-	inline function set_halfWidth(value:Single):Single return OrthographicProjectionOptions_Ffi.set_halfWidth(this, value);
+	inline function set_halfWidth(value:Single):Single { OrthographicProjectionOptions_Ffi.set_halfWidth(this, value); return value; }
 }

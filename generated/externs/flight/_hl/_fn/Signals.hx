@@ -18,11 +18,11 @@ extern class Signals {
 	@:hlNative("flight", "flight_create_signal_timer_state")
 	public static function createSignalTimerState():flight._hl.SignalTimerState;
 	@:hlNative("flight", "flight_advance_signal_timers")
-	public static function advanceSignalTimers(state:Dynamic, nowMs:Float):Void;
+	public static function advanceSignalTimers(state:hl.Bytes, nowMs:Float):Void;
 	@:hlNative("flight", "flight_clear_signal_timeout")
-	public static function clearSignalTimeout(state:Dynamic, id:flight._hl.TimerId):Void;
+	public static function clearSignalTimeout(state:hl.Bytes, id:flight._hl.TimerId):Void;
 	@:hlNative("flight", "flight_set_signal_timeout")
-	public static function setSignalTimeout(state:Dynamic, delayMs:Float, callback_Fn:Dynamic, callback_Ctx:Dynamic):flight._hl.TimerId;
+	public static function setSignalTimeout(state:hl.Bytes, delayMs:Float, callback_Fn:hl.Bytes, callback_Ctx:hl.Bytes):flight._hl.TimerId;
 	@:hlNative("flight", "flight_free_signal_scope")
 	public static function freeSignalScope(ptr:flight._hl.SignalScope):Void;
 	@:hlNative("flight", "flight_free_signal_timer_state")

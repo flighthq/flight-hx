@@ -1,7 +1,7 @@
 package flight._js;
 
 abstract Bitmap(Dynamic) {
-	static inline public function create(width:Int, height:Int, color:Int):flight._js.Bitmap {
+	static inline public function create(width:Int, height:Int, color:haxe.Int64):flight._js.Bitmap {
 		return flight._js._fn.Bitmap.createBitmap(width, height, color);
 	}
 	inline public function clone():flight._js.Bitmap {
@@ -40,7 +40,7 @@ abstract Bitmap(Dynamic) {
 	inline public function getPixel(x:Int, y:Int):Int {
 		return flight._js._fn.Bitmap.getBitmapPixel(cast this, x, y);
 	}
-	inline public function getPixelChannel(x:Int, y:Int, channel:Int):Int {
+	inline public function getPixelChannel(x:Int, y:Int, channel:flight._js.ImageChannel):Int {
 		return flight._js._fn.Bitmap.getBitmapPixelChannel(cast this, x, y, channel);
 	}
 	inline public function getPixelLuminance(x:Int, y:Int):Int {

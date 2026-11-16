@@ -14,15 +14,15 @@ abstract RiveWeightedPoint(cpp.Star<cpp.Void>) {
 
 	inline function get_vertex():Int return RiveWeightedPoint_Ffi.get_vertex(this);
 
-	inline function set_vertex(value:Int):Int return RiveWeightedPoint_Ffi.set_vertex(this, value);
+	inline function set_vertex(value:Int):Int { RiveWeightedPoint_Ffi.set_vertex(this, value); return value; }
 	public var x(get, set):Single;
 
 	inline function get_x():Single return RiveWeightedPoint_Ffi.get_x(this);
 
-	inline function set_x(value:Single):Single return RiveWeightedPoint_Ffi.set_x(this, value);
+	inline function set_x(value:Single):Single { RiveWeightedPoint_Ffi.set_x(this, value); return value; }
 	public var y(get, set):Single;
 
 	inline function get_y():Single return RiveWeightedPoint_Ffi.get_y(this);
 
-	inline function set_y(value:Single):Single return RiveWeightedPoint_Ffi.set_y(this, value);
+	inline function set_y(value:Single):Single { RiveWeightedPoint_Ffi.set_y(this, value); return value; }
 }

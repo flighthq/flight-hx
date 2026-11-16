@@ -2,25 +2,25 @@ package flight._hl._fn;
 
 extern class Quadbatch {
 	@:hlNative("flight", "flight_create_quad_batch")
-	public static function createQuadBatch():Dynamic;
+	public static function createQuadBatch():hl.Bytes;
 	@:hlNative("flight", "flight_create_quad_batch_data")
 	public static function createQuadBatchData():flight._hl.QuadBatchData;
 	@:hlNative("flight", "flight_create_quad_batch_runtime")
 	public static function createQuadBatchRuntime():flight._hl.Node2DRuntime;
 	@:hlNative("flight", "flight_create_quad_batch_signals")
-	public static function createQuadBatchSignals():Dynamic;
+	public static function createQuadBatchSignals():hl.Bytes;
 	@:hlNative("flight", "flight_append_quad_batch_instance")
 	public static function appendQuadBatchInstance(target:flight._hl.QuadBatch, id:Int, x:Single, y:Single):Int;
 	@:hlNative("flight", "flight_clear_quad_batch")
 	public static function clearQuadBatch(target:flight._hl.QuadBatch):Void;
 	@:hlNative("flight", "flight_clone_quad_batch")
-	public static function cloneQuadBatch(source:flight._hl.QuadBatch):Dynamic;
+	public static function cloneQuadBatch(source:flight._hl.QuadBatch):hl.Bytes;
 	@:hlNative("flight", "flight_compact_quad_batch")
 	public static function compactQuadBatch(target:flight._hl.QuadBatch):Void;
 	@:hlNative("flight", "flight_compute_quad_batch_local_bounds_rectangle")
 	public static function computeQuadBatchLocalBoundsRectangle(out:flight._hl.Rectangle, source:flight._hl.QuadBatch):Void;
 	@:hlNative("flight", "flight_enable_quad_batch_signals")
-	public static function enableQuadBatchSignals(target:flight._hl.QuadBatch):Dynamic;
+	public static function enableQuadBatchSignals(target:flight._hl.QuadBatch):hl.Bytes;
 	@:hlNative("flight", "flight_get_quad_batch_capacity")
 	public static function getQuadBatchCapacity(source:flight._hl.QuadBatch):Int;
 	@:hlNative("flight", "flight_get_quad_batch_instance_id")
@@ -28,9 +28,9 @@ extern class Quadbatch {
 	@:hlNative("flight", "flight_get_quad_batch_instance_transform")
 	public static function getQuadBatchInstanceTransform(out:flight._hl.Vector2, source:flight._hl.QuadBatch, index:Int):Bool;
 	@:hlNative("flight", "flight_get_quad_batch_runtime")
-	public static function getQuadBatchRuntime(source:flight._hl.QuadBatch):Dynamic;
+	public static function getQuadBatchRuntime(source:flight._hl.QuadBatch):hl.Bytes;
 	@:hlNative("flight", "flight_get_quad_batch_signals")
-	public static function getQuadBatchSignals(source:flight._hl.QuadBatch):Dynamic;
+	public static function getQuadBatchSignals(source:flight._hl.QuadBatch):hl.Bytes;
 	@:hlNative("flight", "flight_get_quad_batch_transform_stride")
 	public static function getQuadBatchTransformStride(transformType:Int):Int;
 	@:hlNative("flight", "flight_hit_test_quad_batch_point")
@@ -42,7 +42,7 @@ extern class Quadbatch {
 	@:hlNative("flight", "flight_hit_test_quad_batch_point_xy")
 	public static function hitTestQuadBatchPointXy(source:flight._hl.QuadBatch, x:Single, y:Single):Int;
 	@:hlNative("flight", "flight_iterate_quad_batch_instances")
-	public static function iterateQuadBatchInstances(source:flight._hl.QuadBatch, visitorFn:Dynamic, visitorCtx:Dynamic):Void;
+	public static function iterateQuadBatchInstances(source:flight._hl.QuadBatch, visitorFn:hl.Bytes, visitorCtx:hl.Bytes):Void;
 	@:hlNative("flight", "flight_remove_quad_batch_instance")
 	public static function removeQuadBatchInstance(target:flight._hl.QuadBatch, index:Int):Void;
 	@:hlNative("flight", "flight_reserve_quad_batch")
@@ -58,7 +58,7 @@ extern class Quadbatch {
 	@:hlNative("flight", "flight_set_quad_batch_instance_tint")
 	public static function setQuadBatchInstanceTint(target:flight._hl.QuadBatch, index:Int, rgba:Int):Void;
 	@:hlNative("flight", "flight_set_quad_batch_local_bounds_rectangle")
-	public static function setQuadBatchLocalBoundsRectangle(target:Dynamic, rect:flight._hl.Rectangle):Void;
+	public static function setQuadBatchLocalBoundsRectangle(target:hl.Bytes, rect:flight._hl.Rectangle):Void;
 	@:hlNative("flight", "flight_set_quad_batch_transform_type")
 	public static function setQuadBatchTransformType(target:flight._hl.QuadBatch, newType:Int):Void;
 	@:hlNative("flight", "flight_free_quad_batch_data")

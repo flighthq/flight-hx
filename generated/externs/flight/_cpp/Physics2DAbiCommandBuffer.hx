@@ -12,10 +12,10 @@ abstract Physics2DAbiCommandBuffer(cpp.Star<cpp.Void>) {
 
 	inline function get_byteLength():Int return Physics2DAbiCommandBuffer_Ffi.get_byteLength(this);
 
-	inline function set_byteLength(value:Int):Int return Physics2DAbiCommandBuffer_Ffi.set_byteLength(this, value);
+	inline function set_byteLength(value:Int):Int { Physics2DAbiCommandBuffer_Ffi.set_byteLength(this, value); return value; }
 	public var commandCount(get, set):Int;
 
 	inline function get_commandCount():Int return Physics2DAbiCommandBuffer_Ffi.get_commandCount(this);
 
-	inline function set_commandCount(value:Int):Int return Physics2DAbiCommandBuffer_Ffi.set_commandCount(this, value);
+	inline function set_commandCount(value:Int):Int { Physics2DAbiCommandBuffer_Ffi.set_commandCount(this, value); return value; }
 }

@@ -16,20 +16,20 @@ abstract Camera2D(cpp.Star<cpp.Void>) {
 
 	inline function get_rotation():Single return Camera2D_Ffi.get_rotation(this);
 
-	inline function set_rotation(value:Single):Single return Camera2D_Ffi.set_rotation(this, value);
+	inline function set_rotation(value:Single):Single { Camera2D_Ffi.set_rotation(this, value); return value; }
 	public var x(get, set):Single;
 
 	inline function get_x():Single return Camera2D_Ffi.get_x(this);
 
-	inline function set_x(value:Single):Single return Camera2D_Ffi.set_x(this, value);
+	inline function set_x(value:Single):Single { Camera2D_Ffi.set_x(this, value); return value; }
 	public var y(get, set):Single;
 
 	inline function get_y():Single return Camera2D_Ffi.get_y(this);
 
-	inline function set_y(value:Single):Single return Camera2D_Ffi.set_y(this, value);
+	inline function set_y(value:Single):Single { Camera2D_Ffi.set_y(this, value); return value; }
 	public var zoom(get, set):Single;
 
 	inline function get_zoom():Single return Camera2D_Ffi.get_zoom(this);
 
-	inline function set_zoom(value:Single):Single return Camera2D_Ffi.set_zoom(this, value);
+	inline function set_zoom(value:Single):Single { Camera2D_Ffi.set_zoom(this, value); return value; }
 }

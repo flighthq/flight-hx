@@ -10,5 +10,5 @@ abstract Scene2DSlotReference(cpp.Star<cpp.Void>) {
 
 	inline function get_required():Bool return Scene2DSlotReference_Ffi.get_required(this);
 
-	inline function set_required(value:Bool):Bool return Scene2DSlotReference_Ffi.set_required(this, value);
+	inline function set_required(value:Bool):Bool { Scene2DSlotReference_Ffi.set_required(this, value); return value; }
 }

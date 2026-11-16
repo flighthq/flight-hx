@@ -16,20 +16,20 @@ abstract RiveStateMachineTransition(cpp.Star<cpp.Void>) {
 
 	inline function get_duration():Single return RiveStateMachineTransition_Ffi.get_duration(this);
 
-	inline function set_duration(value:Single):Single return RiveStateMachineTransition_Ffi.set_duration(this, value);
+	inline function set_duration(value:Single):Single { RiveStateMachineTransition_Ffi.set_duration(this, value); return value; }
 	public var exitTime(get, set):Single;
 
 	inline function get_exitTime():Single return RiveStateMachineTransition_Ffi.get_exitTime(this);
 
-	inline function set_exitTime(value:Single):Single return RiveStateMachineTransition_Ffi.set_exitTime(this, value);
+	inline function set_exitTime(value:Single):Single { RiveStateMachineTransition_Ffi.set_exitTime(this, value); return value; }
 	public var flags(get, set):Single;
 
 	inline function get_flags():Single return RiveStateMachineTransition_Ffi.get_flags(this);
 
-	inline function set_flags(value:Single):Single return RiveStateMachineTransition_Ffi.set_flags(this, value);
+	inline function set_flags(value:Single):Single { RiveStateMachineTransition_Ffi.set_flags(this, value); return value; }
 	public var toStateId(get, set):Single;
 
 	inline function get_toStateId():Single return RiveStateMachineTransition_Ffi.get_toStateId(this);
 
-	inline function set_toStateId(value:Single):Single return RiveStateMachineTransition_Ffi.set_toStateId(this, value);
+	inline function set_toStateId(value:Single):Single { RiveStateMachineTransition_Ffi.set_toStateId(this, value); return value; }
 }

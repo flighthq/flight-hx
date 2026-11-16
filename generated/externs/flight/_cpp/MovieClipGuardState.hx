@@ -10,5 +10,5 @@ abstract MovieClipGuardState(cpp.Star<cpp.Void>) {
 
 	inline function get_movieClipGuardsEnabled():Bool return MovieClipGuardState_Ffi.get_movieClipGuardsEnabled(this);
 
-	inline function set_movieClipGuardsEnabled(value:Bool):Bool return MovieClipGuardState_Ffi.set_movieClipGuardsEnabled(this, value);
+	inline function set_movieClipGuardsEnabled(value:Bool):Bool { MovieClipGuardState_Ffi.set_movieClipGuardsEnabled(this, value); return value; }
 }

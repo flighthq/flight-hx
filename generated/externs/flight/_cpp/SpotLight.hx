@@ -44,90 +44,90 @@ abstract SpotLight(cpp.Star<cpp.Void>) {
 
 	inline function get_castsShadow():Bool return SpotLight_Ffi.get_castsShadow(this);
 
-	inline function set_castsShadow(value:Bool):Bool return SpotLight_Ffi.set_castsShadow(this, value);
+	inline function set_castsShadow(value:Bool):Bool { SpotLight_Ffi.set_castsShadow(this, value); return value; }
 	public var color(get, set):Int;
 
 	inline function get_color():Int return SpotLight_Ffi.get_color(this);
 
-	inline function set_color(value:Int):Int return SpotLight_Ffi.set_color(this, value);
+	inline function set_color(value:Int):Int { SpotLight_Ffi.set_color(this, value); return value; }
 	public var decay(get, set):Single;
 
 	inline function get_decay():Single return SpotLight_Ffi.get_decay(this);
 
-	inline function set_decay(value:Single):Single return SpotLight_Ffi.set_decay(this, value);
+	inline function set_decay(value:Single):Single { SpotLight_Ffi.set_decay(this, value); return value; }
 	public var enabled(get, set):Bool;
 
 	inline function get_enabled():Bool return SpotLight_Ffi.get_enabled(this);
 
-	inline function set_enabled(value:Bool):Bool return SpotLight_Ffi.set_enabled(this, value);
+	inline function set_enabled(value:Bool):Bool { SpotLight_Ffi.set_enabled(this, value); return value; }
 	public var innerConeCos(get, set):Single;
 
 	inline function get_innerConeCos():Single return SpotLight_Ffi.get_innerConeCos(this);
 
-	inline function set_innerConeCos(value:Single):Single return SpotLight_Ffi.set_innerConeCos(this, value);
+	inline function set_innerConeCos(value:Single):Single { SpotLight_Ffi.set_innerConeCos(this, value); return value; }
 	public var intensity(get, set):Single;
 
 	inline function get_intensity():Single return SpotLight_Ffi.get_intensity(this);
 
-	inline function set_intensity(value:Single):Single return SpotLight_Ffi.set_intensity(this, value);
+	inline function set_intensity(value:Single):Single { SpotLight_Ffi.set_intensity(this, value); return value; }
 	public var layerMask(get, set):Int;
 
 	inline function get_layerMask():Int return SpotLight_Ffi.get_layerMask(this);
 
-	inline function set_layerMask(value:Int):Int return SpotLight_Ffi.set_layerMask(this, value);
+	inline function set_layerMask(value:Int):Int { SpotLight_Ffi.set_layerMask(this, value); return value; }
 	public var priority(get, set):Single;
 
 	inline function get_priority():Single return SpotLight_Ffi.get_priority(this);
 
-	inline function set_priority(value:Single):Single return SpotLight_Ffi.set_priority(this, value);
+	inline function set_priority(value:Single):Single { SpotLight_Ffi.set_priority(this, value); return value; }
 	public var normalBias(get, set):Single;
 
 	inline function get_normalBias():Single return SpotLight_Ffi.get_normalBias(this);
 
-	inline function set_normalBias(value:Single):Single return SpotLight_Ffi.set_normalBias(this, value);
+	inline function set_normalBias(value:Single):Single { SpotLight_Ffi.set_normalBias(this, value); return value; }
 	public var outerConeCos(get, set):Single;
 
 	inline function get_outerConeCos():Single return SpotLight_Ffi.get_outerConeCos(this);
 
-	inline function set_outerConeCos(value:Single):Single return SpotLight_Ffi.set_outerConeCos(this, value);
+	inline function set_outerConeCos(value:Single):Single { SpotLight_Ffi.set_outerConeCos(this, value); return value; }
 	public var pcfRadius(get, set):Single;
 
 	inline function get_pcfRadius():Single return SpotLight_Ffi.get_pcfRadius(this);
 
-	inline function set_pcfRadius(value:Single):Single return SpotLight_Ffi.set_pcfRadius(this, value);
+	inline function set_pcfRadius(value:Single):Single { SpotLight_Ffi.set_pcfRadius(this, value); return value; }
 	public var range(get, set):Single;
 
 	inline function get_range():Single return SpotLight_Ffi.get_range(this);
 
-	inline function set_range(value:Single):Single return SpotLight_Ffi.set_range(this, value);
+	inline function set_range(value:Single):Single { SpotLight_Ffi.set_range(this, value); return value; }
 	public var shadowBias(get, set):Single;
 
 	inline function get_shadowBias():Single return SpotLight_Ffi.get_shadowBias(this);
 
-	inline function set_shadowBias(value:Single):Single return SpotLight_Ffi.set_shadowBias(this, value);
+	inline function set_shadowBias(value:Single):Single { SpotLight_Ffi.set_shadowBias(this, value); return value; }
 	public var shadowFar(get, set):Single;
 
 	inline function get_shadowFar():Single return SpotLight_Ffi.get_shadowFar(this);
 
-	inline function set_shadowFar(value:Single):Single return SpotLight_Ffi.set_shadowFar(this, value);
+	inline function set_shadowFar(value:Single):Single { SpotLight_Ffi.set_shadowFar(this, value); return value; }
 	public var shadowMapSize(get, set):Int;
 
 	inline function get_shadowMapSize():Int return SpotLight_Ffi.get_shadowMapSize(this);
 
-	inline function set_shadowMapSize(value:Int):Int return SpotLight_Ffi.set_shadowMapSize(this, value);
+	inline function set_shadowMapSize(value:Int):Int { SpotLight_Ffi.set_shadowMapSize(this, value); return value; }
 	public var shadowNear(get, set):Single;
 
 	inline function get_shadowNear():Single return SpotLight_Ffi.get_shadowNear(this);
 
-	inline function set_shadowNear(value:Single):Single return SpotLight_Ffi.set_shadowNear(this, value);
+	inline function set_shadowNear(value:Single):Single { SpotLight_Ffi.set_shadowNear(this, value); return value; }
 	public var shadowStrength(get, set):Single;
 
 	inline function get_shadowStrength():Single return SpotLight_Ffi.get_shadowStrength(this);
 
-	inline function set_shadowStrength(value:Single):Single return SpotLight_Ffi.set_shadowStrength(this, value);
+	inline function set_shadowStrength(value:Single):Single { SpotLight_Ffi.set_shadowStrength(this, value); return value; }
 	public var spotBlend(get, set):Single;
 
 	inline function get_spotBlend():Single return SpotLight_Ffi.get_spotBlend(this);
 
-	inline function set_spotBlend(value:Single):Single return SpotLight_Ffi.set_spotBlend(this, value);
+	inline function set_spotBlend(value:Single):Single { SpotLight_Ffi.set_spotBlend(this, value); return value; }
 }

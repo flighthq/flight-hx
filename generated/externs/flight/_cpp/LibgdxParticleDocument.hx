@@ -18,25 +18,25 @@ abstract LibgdxParticleDocument(cpp.Star<cpp.Void>) {
 
 	inline function get_additive():Bool return LibgdxParticleDocument_Ffi.get_additive(this);
 
-	inline function set_additive(value:Bool):Bool return LibgdxParticleDocument_Ffi.set_additive(this, value);
+	inline function set_additive(value:Bool):Bool { LibgdxParticleDocument_Ffi.set_additive(this, value); return value; }
 	public var imageCount(get, set):Single;
 
 	inline function get_imageCount():Single return LibgdxParticleDocument_Ffi.get_imageCount(this);
 
-	inline function set_imageCount(value:Single):Single return LibgdxParticleDocument_Ffi.set_imageCount(this, value);
+	inline function set_imageCount(value:Single):Single { LibgdxParticleDocument_Ffi.set_imageCount(this, value); return value; }
 	public var maxParticleCount(get, set):Single;
 
 	inline function get_maxParticleCount():Single return LibgdxParticleDocument_Ffi.get_maxParticleCount(this);
 
-	inline function set_maxParticleCount(value:Single):Single return LibgdxParticleDocument_Ffi.set_maxParticleCount(this, value);
+	inline function set_maxParticleCount(value:Single):Single { LibgdxParticleDocument_Ffi.set_maxParticleCount(this, value); return value; }
 	public var minParticleCount(get, set):Single;
 
 	inline function get_minParticleCount():Single return LibgdxParticleDocument_Ffi.get_minParticleCount(this);
 
-	inline function set_minParticleCount(value:Single):Single return LibgdxParticleDocument_Ffi.set_minParticleCount(this, value);
+	inline function set_minParticleCount(value:Single):Single { LibgdxParticleDocument_Ffi.set_minParticleCount(this, value); return value; }
 	public var premultipliedAlpha(get, set):Bool;
 
 	inline function get_premultipliedAlpha():Bool return LibgdxParticleDocument_Ffi.get_premultipliedAlpha(this);
 
-	inline function set_premultipliedAlpha(value:Bool):Bool return LibgdxParticleDocument_Ffi.set_premultipliedAlpha(this, value);
+	inline function set_premultipliedAlpha(value:Bool):Bool { LibgdxParticleDocument_Ffi.set_premultipliedAlpha(this, value); return value; }
 }

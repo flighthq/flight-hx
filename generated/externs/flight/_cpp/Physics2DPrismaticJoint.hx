@@ -34,65 +34,65 @@ abstract Physics2DPrismaticJoint(cpp.Star<cpp.Void>) {
 
 	inline function get_enableLimit():Bool return Physics2DPrismaticJoint_Ffi.get_enableLimit(this);
 
-	inline function set_enableLimit(value:Bool):Bool return Physics2DPrismaticJoint_Ffi.set_enableLimit(this, value);
+	inline function set_enableLimit(value:Bool):Bool { Physics2DPrismaticJoint_Ffi.set_enableLimit(this, value); return value; }
 	public var enableLimitSpring(get, set):Bool;
 
 	inline function get_enableLimitSpring():Bool return Physics2DPrismaticJoint_Ffi.get_enableLimitSpring(this);
 
-	inline function set_enableLimitSpring(value:Bool):Bool return Physics2DPrismaticJoint_Ffi.set_enableLimitSpring(this, value);
+	inline function set_enableLimitSpring(value:Bool):Bool { Physics2DPrismaticJoint_Ffi.set_enableLimitSpring(this, value); return value; }
 	public var enableMotor(get, set):Bool;
 
 	inline function get_enableMotor():Bool return Physics2DPrismaticJoint_Ffi.get_enableMotor(this);
 
-	inline function set_enableMotor(value:Bool):Bool return Physics2DPrismaticJoint_Ffi.set_enableMotor(this, value);
+	inline function set_enableMotor(value:Bool):Bool { Physics2DPrismaticJoint_Ffi.set_enableMotor(this, value); return value; }
 	public var limitDampingRatio(get, set):Single;
 
 	inline function get_limitDampingRatio():Single return Physics2DPrismaticJoint_Ffi.get_limitDampingRatio(this);
 
-	inline function set_limitDampingRatio(value:Single):Single return Physics2DPrismaticJoint_Ffi.set_limitDampingRatio(this, value);
+	inline function set_limitDampingRatio(value:Single):Single { Physics2DPrismaticJoint_Ffi.set_limitDampingRatio(this, value); return value; }
 	public var limitFrequencyHz(get, set):Single;
 
 	inline function get_limitFrequencyHz():Single return Physics2DPrismaticJoint_Ffi.get_limitFrequencyHz(this);
 
-	inline function set_limitFrequencyHz(value:Single):Single return Physics2DPrismaticJoint_Ffi.set_limitFrequencyHz(this, value);
+	inline function set_limitFrequencyHz(value:Single):Single { Physics2DPrismaticJoint_Ffi.set_limitFrequencyHz(this, value); return value; }
 	public var localAxisAx(get, set):Single;
 
 	inline function get_localAxisAx():Single return Physics2DPrismaticJoint_Ffi.get_localAxisAx(this);
 
-	inline function set_localAxisAx(value:Single):Single return Physics2DPrismaticJoint_Ffi.set_localAxisAx(this, value);
+	inline function set_localAxisAx(value:Single):Single { Physics2DPrismaticJoint_Ffi.set_localAxisAx(this, value); return value; }
 	public var localAxisAy(get, set):Single;
 
 	inline function get_localAxisAy():Single return Physics2DPrismaticJoint_Ffi.get_localAxisAy(this);
 
-	inline function set_localAxisAy(value:Single):Single return Physics2DPrismaticJoint_Ffi.set_localAxisAy(this, value);
+	inline function set_localAxisAy(value:Single):Single { Physics2DPrismaticJoint_Ffi.set_localAxisAy(this, value); return value; }
 	public var lowerTranslation(get, set):Single;
 
 	inline function get_lowerTranslation():Single return Physics2DPrismaticJoint_Ffi.get_lowerTranslation(this);
 
-	inline function set_lowerTranslation(value:Single):Single return Physics2DPrismaticJoint_Ffi.set_lowerTranslation(this, value);
+	inline function set_lowerTranslation(value:Single):Single { Physics2DPrismaticJoint_Ffi.set_lowerTranslation(this, value); return value; }
 	public var maxMotorForce(get, set):Single;
 
 	inline function get_maxMotorForce():Single return Physics2DPrismaticJoint_Ffi.get_maxMotorForce(this);
 
-	inline function set_maxMotorForce(value:Single):Single return Physics2DPrismaticJoint_Ffi.set_maxMotorForce(this, value);
+	inline function set_maxMotorForce(value:Single):Single { Physics2DPrismaticJoint_Ffi.set_maxMotorForce(this, value); return value; }
 	public var motorImpulse(get, set):Single;
 
 	inline function get_motorImpulse():Single return Physics2DPrismaticJoint_Ffi.get_motorImpulse(this);
 
-	inline function set_motorImpulse(value:Single):Single return Physics2DPrismaticJoint_Ffi.set_motorImpulse(this, value);
+	inline function set_motorImpulse(value:Single):Single { Physics2DPrismaticJoint_Ffi.set_motorImpulse(this, value); return value; }
 	public var motorSpeed(get, set):Single;
 
 	inline function get_motorSpeed():Single return Physics2DPrismaticJoint_Ffi.get_motorSpeed(this);
 
-	inline function set_motorSpeed(value:Single):Single return Physics2DPrismaticJoint_Ffi.set_motorSpeed(this, value);
+	inline function set_motorSpeed(value:Single):Single { Physics2DPrismaticJoint_Ffi.set_motorSpeed(this, value); return value; }
 	public var referenceAngle(get, set):Single;
 
 	inline function get_referenceAngle():Single return Physics2DPrismaticJoint_Ffi.get_referenceAngle(this);
 
-	inline function set_referenceAngle(value:Single):Single return Physics2DPrismaticJoint_Ffi.set_referenceAngle(this, value);
+	inline function set_referenceAngle(value:Single):Single { Physics2DPrismaticJoint_Ffi.set_referenceAngle(this, value); return value; }
 	public var upperTranslation(get, set):Single;
 
 	inline function get_upperTranslation():Single return Physics2DPrismaticJoint_Ffi.get_upperTranslation(this);
 
-	inline function set_upperTranslation(value:Single):Single return Physics2DPrismaticJoint_Ffi.set_upperTranslation(this, value);
+	inline function set_upperTranslation(value:Single):Single { Physics2DPrismaticJoint_Ffi.set_upperTranslation(this, value); return value; }
 }

@@ -10,5 +10,5 @@ abstract TextureAtlasGuardState(cpp.Star<cpp.Void>) {
 
 	inline function get_enabled():Bool return TextureAtlasGuardState_Ffi.get_enabled(this);
 
-	inline function set_enabled(value:Bool):Bool return TextureAtlasGuardState_Ffi.set_enabled(this, value);
+	inline function set_enabled(value:Bool):Bool { TextureAtlasGuardState_Ffi.set_enabled(this, value); return value; }
 }

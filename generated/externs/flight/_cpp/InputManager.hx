@@ -10,5 +10,5 @@ abstract InputManager(cpp.Star<cpp.Void>) {
 
 	inline function get_enabled():Bool return InputManager_Ffi.get_enabled(this);
 
-	inline function set_enabled(value:Bool):Bool return InputManager_Ffi.set_enabled(this, value);
+	inline function set_enabled(value:Bool):Bool { InputManager_Ffi.set_enabled(this, value); return value; }
 }

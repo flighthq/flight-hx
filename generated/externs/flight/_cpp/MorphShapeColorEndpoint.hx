@@ -10,5 +10,5 @@ abstract MorphShapeColorEndpoint(cpp.Star<cpp.Void>) {
 
 	inline function get_color():Int return MorphShapeColorEndpoint_Ffi.get_color(this);
 
-	inline function set_color(value:Int):Int return MorphShapeColorEndpoint_Ffi.set_color(this, value);
+	inline function set_color(value:Int):Int { MorphShapeColorEndpoint_Ffi.set_color(this, value); return value; }
 }

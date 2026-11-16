@@ -1,6 +1,6 @@
 package flight;
 
-inline function createAnimationSampleAccumulator(components:Int, quaternion:Bool):AnimationSampleAccumulator {
+extern inline function createAnimationSampleAccumulator(components:Int, quaternion:Bool):AnimationSampleAccumulator {
 #if hl
 	return flight._hl._fn.Animation.createAnimationSampleAccumulator(components, quaternion);
 #elseif cpp
@@ -11,7 +11,7 @@ inline function createAnimationSampleAccumulator(components:Int, quaternion:Bool
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function accumulateAnimationSample(accumulator:AnimationSampleAccumulator, sample:Dynamic, sampleLen:Int, weight:Float):Void {
+extern inline function accumulateAnimationSample(accumulator:AnimationSampleAccumulator, sample:Dynamic, sampleLen:Int, weight:Float):Void {
 #if hl
 	flight._hl._fn.Animation.accumulateAnimationSample(accumulator, sample, sampleLen, weight);
 #elseif cpp
@@ -22,7 +22,7 @@ inline function accumulateAnimationSample(accumulator:AnimationSampleAccumulator
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function addAnimationSample(out:Dynamic, outLen:Int, base:Dynamic, baseLen:Int, delta:Dynamic, deltaLen:Int, weight:Float, quaternion:Bool):Void {
+extern inline function addAnimationSample(out:Dynamic, outLen:Int, base:Dynamic, baseLen:Int, delta:Dynamic, deltaLen:Int, weight:Float, quaternion:Bool):Void {
 #if hl
 	flight._hl._fn.Animation.addAnimationSample(out, outLen, base, baseLen, delta, deltaLen, weight, quaternion);
 #elseif cpp
@@ -33,7 +33,7 @@ inline function addAnimationSample(out:Dynamic, outLen:Int, base:Dynamic, baseLe
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function blendAnimationSamples(out:Dynamic, outLen:Int, a:Dynamic, aLen:Int, b:Dynamic, bLen:Int, alpha:Float, quaternion:Bool):Void {
+extern inline function blendAnimationSamples(out:Dynamic, outLen:Int, a:Dynamic, aLen:Int, b:Dynamic, bLen:Int, alpha:Float, quaternion:Bool):Void {
 #if hl
 	flight._hl._fn.Animation.blendAnimationSamples(out, outLen, a, aLen, b, bLen, alpha, quaternion);
 #elseif cpp
@@ -44,7 +44,7 @@ inline function blendAnimationSamples(out:Dynamic, outLen:Int, a:Dynamic, aLen:I
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function finishAnimationSample(out:Dynamic, outLen:Int, accumulator:AnimationSampleAccumulator):Bool {
+extern inline function finishAnimationSample(out:Dynamic, outLen:Int, accumulator:AnimationSampleAccumulator):Bool {
 #if hl
 	return flight._hl._fn.Animation.finishAnimationSample(out, outLen, accumulator);
 #elseif cpp
@@ -55,7 +55,7 @@ inline function finishAnimationSample(out:Dynamic, outLen:Int, accumulator:Anima
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function resetAnimationSampleAccumulator(accumulator:AnimationSampleAccumulator):Void {
+extern inline function resetAnimationSampleAccumulator(accumulator:AnimationSampleAccumulator):Void {
 #if hl
 	flight._hl._fn.Animation.resetAnimationSampleAccumulator(accumulator);
 #elseif cpp
@@ -66,7 +66,7 @@ inline function resetAnimationSampleAccumulator(accumulator:AnimationSampleAccum
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function createAnimationBlendTree(inputs:Dynamic, inputsLen:Int):AnimationBlendTree {
+extern inline function createAnimationBlendTree(inputs:Dynamic, inputsLen:Int):AnimationBlendTree {
 #if hl
 	return flight._hl._fn.Animation.createAnimationBlendTree(inputs, inputsLen);
 #elseif cpp
@@ -77,7 +77,7 @@ inline function createAnimationBlendTree(inputs:Dynamic, inputsLen:Int):Animatio
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function createAnimationBlendTreeInput(player:Dynamic):AnimationBlendTreeInput {
+extern inline function createAnimationBlendTreeInput(player:Dynamic):AnimationBlendTreeInput {
 #if hl
 	return flight._hl._fn.Animation.createAnimationBlendTreeInput(player);
 #elseif cpp
@@ -88,7 +88,7 @@ inline function createAnimationBlendTreeInput(player:Dynamic):AnimationBlendTree
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function advanceAnimationBlendTree(tree:AnimationBlendTree, dt:Float):Void {
+extern inline function advanceAnimationBlendTree(tree:AnimationBlendTree, dt:Float):Void {
 #if hl
 	flight._hl._fn.Animation.advanceAnimationBlendTree(tree, dt);
 #elseif cpp
@@ -99,7 +99,7 @@ inline function advanceAnimationBlendTree(tree:AnimationBlendTree, dt:Float):Voi
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function sampleAnimationBlendTree(out:Dynamic, outLen:Int, tree:AnimationBlendTree, visitFn:Dynamic, visitCtx:Dynamic):Void {
+extern inline function sampleAnimationBlendTree(out:Dynamic, outLen:Int, tree:AnimationBlendTree, visitFn:Dynamic, visitCtx:Dynamic):Void {
 #if hl
 	flight._hl._fn.Animation.sampleAnimationBlendTree(out, outLen, tree, visitFn, visitCtx);
 #elseif cpp
@@ -110,7 +110,7 @@ inline function sampleAnimationBlendTree(out:Dynamic, outLen:Int, tree:Animation
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function sampleAnimationBlendTreeChannel(out:Dynamic, outLen:Int, tree:AnimationBlendTree, channelIndex:Int):Bool {
+extern inline function sampleAnimationBlendTreeChannel(out:Dynamic, outLen:Int, tree:AnimationBlendTree, channelIndex:Int):Bool {
 #if hl
 	return flight._hl._fn.Animation.sampleAnimationBlendTreeChannel(out, outLen, tree, channelIndex);
 #elseif cpp
@@ -121,7 +121,7 @@ inline function sampleAnimationBlendTreeChannel(out:Dynamic, outLen:Int, tree:An
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function setAnimationBlendTreeInputWeight(tree:AnimationBlendTree, inputIndex:Int, weight:Float):Bool {
+extern inline function setAnimationBlendTreeInputWeight(tree:AnimationBlendTree, inputIndex:Int, weight:Float):Bool {
 #if hl
 	return flight._hl._fn.Animation.setAnimationBlendTreeInputWeight(tree, inputIndex, weight);
 #elseif cpp
@@ -132,7 +132,7 @@ inline function setAnimationBlendTreeInputWeight(tree:AnimationBlendTree, inputI
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function createAnimationChannel(track:Dynamic, targetRef:TargetRef):AnimationChannel {
+extern inline function createAnimationChannel(track:Dynamic, targetRef:TargetRef):AnimationChannel {
 #if hl
 	return flight._hl._fn.Animation.createAnimationChannel(track, targetRef);
 #elseif cpp
@@ -143,7 +143,7 @@ inline function createAnimationChannel(track:Dynamic, targetRef:TargetRef):Anima
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function createAnimationClip(channels:Dynamic, duration:Float, events:Dynamic, eventsLen:Int):AnimationClip {
+extern inline function createAnimationClip(channels:Dynamic, duration:Float, events:Dynamic, eventsLen:Int):AnimationClip {
 #if hl
 	return flight._hl._fn.Animation.createAnimationClip(channels, duration, events, eventsLen);
 #elseif cpp
@@ -154,7 +154,7 @@ inline function createAnimationClip(channels:Dynamic, duration:Float, events:Dyn
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function createAnimationClipEvent():AnimationClipEvent {
+extern inline function createAnimationClipEvent():AnimationClipEvent {
 #if hl
 	return flight._hl._fn.Animation.createAnimationClipEvent();
 #elseif cpp
@@ -165,7 +165,7 @@ inline function createAnimationClipEvent():AnimationClipEvent {
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function cloneAnimationClip(clip:AnimationClip):AnimationClip {
+extern inline function cloneAnimationClip(clip:AnimationClip):AnimationClip {
 #if hl
 	return flight._hl._fn.Animation.cloneAnimationClip(clip);
 #elseif cpp
@@ -176,7 +176,7 @@ inline function cloneAnimationClip(clip:AnimationClip):AnimationClip {
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function getAnimationClipDuration(clip:AnimationClip):Float {
+extern inline function getAnimationClipDuration(clip:AnimationClip):Float {
 #if hl
 	return flight._hl._fn.Animation.getAnimationClipDuration(clip);
 #elseif cpp
@@ -187,7 +187,7 @@ inline function getAnimationClipDuration(clip:AnimationClip):Float {
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function sampleAnimationClip(out:Dynamic, outLen:Int, clip:AnimationClip, time:Float, visitFn:Dynamic, visitCtx:Dynamic):Void {
+extern inline function sampleAnimationClip(out:Dynamic, outLen:Int, clip:AnimationClip, time:Float, visitFn:Dynamic, visitCtx:Dynamic):Void {
 #if hl
 	flight._hl._fn.Animation.sampleAnimationClip(out, outLen, clip, time, visitFn, visitCtx);
 #elseif cpp
@@ -198,7 +198,7 @@ inline function sampleAnimationClip(out:Dynamic, outLen:Int, clip:AnimationClip,
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function createAnimationCrossfade(from:Dynamic, to:Dynamic, duration:Float, opts:AnimationCrossfadeOptions):AnimationCrossfade {
+extern inline function createAnimationCrossfade(from:Dynamic, to:Dynamic, duration:Float, opts:AnimationCrossfadeOptions):AnimationCrossfade {
 #if hl
 	return flight._hl._fn.Animation.createAnimationCrossfade(from, to, duration, opts);
 #elseif cpp
@@ -209,7 +209,7 @@ inline function createAnimationCrossfade(from:Dynamic, to:Dynamic, duration:Floa
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function advanceAnimationCrossfade(state:AnimationCrossfade, dt:Float):Void {
+extern inline function advanceAnimationCrossfade(state:AnimationCrossfade, dt:Float):Void {
 #if hl
 	flight._hl._fn.Animation.advanceAnimationCrossfade(state, dt);
 #elseif cpp
@@ -220,7 +220,7 @@ inline function advanceAnimationCrossfade(state:AnimationCrossfade, dt:Float):Vo
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function isAnimationCrossfadeComplete(state:AnimationCrossfade):Bool {
+extern inline function isAnimationCrossfadeComplete(state:AnimationCrossfade):Bool {
 #if hl
 	return flight._hl._fn.Animation.isAnimationCrossfadeComplete(state);
 #elseif cpp
@@ -231,7 +231,7 @@ inline function isAnimationCrossfadeComplete(state:AnimationCrossfade):Bool {
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function sampleAnimationCrossfade(out:Dynamic, outLen:Int, state:AnimationCrossfade, visitFn:Dynamic, visitCtx:Dynamic):Void {
+extern inline function sampleAnimationCrossfade(out:Dynamic, outLen:Int, state:AnimationCrossfade, visitFn:Dynamic, visitCtx:Dynamic):Void {
 #if hl
 	flight._hl._fn.Animation.sampleAnimationCrossfade(out, outLen, state, visitFn, visitCtx);
 #elseif cpp
@@ -242,7 +242,7 @@ inline function sampleAnimationCrossfade(out:Dynamic, outLen:Int, state:Animatio
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function createAnimationBlendTreeLayer(blendTree:Dynamic, options:AnimationLayerOptions):AnimationLayer {
+extern inline function createAnimationBlendTreeLayer(blendTree:Dynamic, options:AnimationLayerOptions):AnimationLayer {
 #if hl
 	return flight._hl._fn.Animation.createAnimationBlendTreeLayer(blendTree, options);
 #elseif cpp
@@ -253,7 +253,7 @@ inline function createAnimationBlendTreeLayer(blendTree:Dynamic, options:Animati
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function createAnimationLayerStack(layers:Dynamic, layersLen:Int):AnimationLayerStack {
+extern inline function createAnimationLayerStack(layers:Dynamic, layersLen:Int):AnimationLayerStack {
 #if hl
 	return flight._hl._fn.Animation.createAnimationLayerStack(layers, layersLen);
 #elseif cpp
@@ -264,7 +264,7 @@ inline function createAnimationLayerStack(layers:Dynamic, layersLen:Int):Animati
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function createAnimationStateMachineLayer(stateMachine:Dynamic, options:AnimationLayerOptions):AnimationLayer {
+extern inline function createAnimationStateMachineLayer(stateMachine:Dynamic, options:AnimationLayerOptions):AnimationLayer {
 #if hl
 	return flight._hl._fn.Animation.createAnimationStateMachineLayer(stateMachine, options);
 #elseif cpp
@@ -275,7 +275,7 @@ inline function createAnimationStateMachineLayer(stateMachine:Dynamic, options:A
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function advanceAnimationLayerStack(stack:AnimationLayerStack, dt:Float):Void {
+extern inline function advanceAnimationLayerStack(stack:AnimationLayerStack, dt:Float):Void {
 #if hl
 	flight._hl._fn.Animation.advanceAnimationLayerStack(stack, dt);
 #elseif cpp
@@ -286,7 +286,7 @@ inline function advanceAnimationLayerStack(stack:AnimationLayerStack, dt:Float):
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function sampleAnimationLayerStack(out:Dynamic, outLen:Int, stack:AnimationLayerStack, visitFn:Dynamic, visitCtx:Dynamic):Void {
+extern inline function sampleAnimationLayerStack(out:Dynamic, outLen:Int, stack:AnimationLayerStack, visitFn:Dynamic, visitCtx:Dynamic):Void {
 #if hl
 	flight._hl._fn.Animation.sampleAnimationLayerStack(out, outLen, stack, visitFn, visitCtx);
 #elseif cpp
@@ -297,7 +297,7 @@ inline function sampleAnimationLayerStack(out:Dynamic, outLen:Int, stack:Animati
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function sampleAnimationLayerStackChannel(out:Dynamic, outLen:Int, stack:AnimationLayerStack, channelIndex:Int):Bool {
+extern inline function sampleAnimationLayerStackChannel(out:Dynamic, outLen:Int, stack:AnimationLayerStack, channelIndex:Int):Bool {
 #if hl
 	return flight._hl._fn.Animation.sampleAnimationLayerStackChannel(out, outLen, stack, channelIndex);
 #elseif cpp
@@ -308,7 +308,7 @@ inline function sampleAnimationLayerStackChannel(out:Dynamic, outLen:Int, stack:
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function setAnimationLayerWeight(stack:AnimationLayerStack, layerIndex:Int, weight:Float):Bool {
+extern inline function setAnimationLayerWeight(stack:AnimationLayerStack, layerIndex:Int, weight:Float):Bool {
 #if hl
 	return flight._hl._fn.Animation.setAnimationLayerWeight(stack, layerIndex, weight);
 #elseif cpp
@@ -319,7 +319,7 @@ inline function setAnimationLayerWeight(stack:AnimationLayerStack, layerIndex:In
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function createAnimationPlayer(clip:AnimationClip):AnimationPlayer {
+extern inline function createAnimationPlayer(clip:AnimationClip):AnimationPlayer {
 #if hl
 	return flight._hl._fn.Animation.createAnimationPlayer(clip);
 #elseif cpp
@@ -330,7 +330,7 @@ inline function createAnimationPlayer(clip:AnimationClip):AnimationPlayer {
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function advanceAnimationPlayer(player:AnimationPlayer, dt:Float):Void {
+extern inline function advanceAnimationPlayer(player:AnimationPlayer, dt:Float):Void {
 #if hl
 	flight._hl._fn.Animation.advanceAnimationPlayer(player, dt);
 #elseif cpp
@@ -341,7 +341,7 @@ inline function advanceAnimationPlayer(player:AnimationPlayer, dt:Float):Void {
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function cloneAnimationPlayer(player:AnimationPlayer):AnimationPlayer {
+extern inline function cloneAnimationPlayer(player:AnimationPlayer):AnimationPlayer {
 #if hl
 	return flight._hl._fn.Animation.cloneAnimationPlayer(player);
 #elseif cpp
@@ -352,7 +352,7 @@ inline function cloneAnimationPlayer(player:AnimationPlayer):AnimationPlayer {
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function enableAnimationPlayerSignals(player:AnimationPlayer):Void {
+extern inline function enableAnimationPlayerSignals(player:AnimationPlayer):Void {
 #if hl
 	flight._hl._fn.Animation.enableAnimationPlayerSignals(player);
 #elseif cpp
@@ -363,7 +363,7 @@ inline function enableAnimationPlayerSignals(player:AnimationPlayer):Void {
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function getAnimationPlayerNormalizedTime(player:AnimationPlayer):Float {
+extern inline function getAnimationPlayerNormalizedTime(player:AnimationPlayer):Float {
 #if hl
 	return flight._hl._fn.Animation.getAnimationPlayerNormalizedTime(player);
 #elseif cpp
@@ -374,7 +374,7 @@ inline function getAnimationPlayerNormalizedTime(player:AnimationPlayer):Float {
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function playAnimationPlayer(player:AnimationPlayer):Void {
+extern inline function playAnimationPlayer(player:AnimationPlayer):Void {
 #if hl
 	flight._hl._fn.Animation.playAnimationPlayer(player);
 #elseif cpp
@@ -385,7 +385,7 @@ inline function playAnimationPlayer(player:AnimationPlayer):Void {
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function seekAnimationPlayer(player:AnimationPlayer, time:Float):Void {
+extern inline function seekAnimationPlayer(player:AnimationPlayer, time:Float):Void {
 #if hl
 	flight._hl._fn.Animation.seekAnimationPlayer(player, time);
 #elseif cpp
@@ -396,7 +396,7 @@ inline function seekAnimationPlayer(player:AnimationPlayer, time:Float):Void {
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function stopAnimationPlayer(player:AnimationPlayer):Void {
+extern inline function stopAnimationPlayer(player:AnimationPlayer):Void {
 #if hl
 	flight._hl._fn.Animation.stopAnimationPlayer(player);
 #elseif cpp
@@ -407,7 +407,7 @@ inline function stopAnimationPlayer(player:AnimationPlayer):Void {
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function createAnimationRootMotionExtractor(clip:Dynamic, channelIndex:Int):AnimationRootMotionExtractor {
+extern inline function createAnimationRootMotionExtractor(clip:Dynamic, channelIndex:Int):AnimationRootMotionExtractor {
 #if hl
 	return flight._hl._fn.Animation.createAnimationRootMotionExtractor(clip, channelIndex);
 #elseif cpp
@@ -418,7 +418,7 @@ inline function createAnimationRootMotionExtractor(clip:Dynamic, channelIndex:In
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function extractAnimationRootMotion(out:Dynamic, outLen:Int, extractor:AnimationRootMotionExtractor, startTime:Float, endTime:Float):Bool {
+extern inline function extractAnimationRootMotion(out:Dynamic, outLen:Int, extractor:AnimationRootMotionExtractor, startTime:Float, endTime:Float):Bool {
 #if hl
 	return flight._hl._fn.Animation.extractAnimationRootMotion(out, outLen, extractor, startTime, endTime);
 #elseif cpp
@@ -429,7 +429,7 @@ inline function extractAnimationRootMotion(out:Dynamic, outLen:Int, extractor:An
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function createAnimationStateMachineState(blendTree:Dynamic):AnimationStateMachineState {
+extern inline function createAnimationStateMachineState(blendTree:Dynamic):AnimationStateMachineState {
 #if hl
 	return flight._hl._fn.Animation.createAnimationStateMachineState(blendTree);
 #elseif cpp
@@ -440,7 +440,7 @@ inline function createAnimationStateMachineState(blendTree:Dynamic):AnimationSta
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function advanceAnimationStateMachine(machine:AnimationStateMachine, dt:Float):Void {
+extern inline function advanceAnimationStateMachine(machine:AnimationStateMachine, dt:Float):Void {
 #if hl
 	flight._hl._fn.Animation.advanceAnimationStateMachine(machine, dt);
 #elseif cpp
@@ -451,7 +451,7 @@ inline function advanceAnimationStateMachine(machine:AnimationStateMachine, dt:F
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function getAnimationStateMachineCurrentState(machine:AnimationStateMachine):AnimationStateMachineState {
+extern inline function getAnimationStateMachineCurrentState(machine:AnimationStateMachine):AnimationStateMachineState {
 #if hl
 	return flight._hl._fn.Animation.getAnimationStateMachineCurrentState(machine);
 #elseif cpp
@@ -462,7 +462,7 @@ inline function getAnimationStateMachineCurrentState(machine:AnimationStateMachi
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function isAnimationStateMachineTransitioning(machine:AnimationStateMachine):Bool {
+extern inline function isAnimationStateMachineTransitioning(machine:AnimationStateMachine):Bool {
 #if hl
 	return flight._hl._fn.Animation.isAnimationStateMachineTransitioning(machine);
 #elseif cpp
@@ -473,7 +473,7 @@ inline function isAnimationStateMachineTransitioning(machine:AnimationStateMachi
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function sampleAnimationStateMachine(out:Dynamic, outLen:Int, machine:AnimationStateMachine, visitFn:Dynamic, visitCtx:Dynamic):Void {
+extern inline function sampleAnimationStateMachine(out:Dynamic, outLen:Int, machine:AnimationStateMachine, visitFn:Dynamic, visitCtx:Dynamic):Void {
 #if hl
 	flight._hl._fn.Animation.sampleAnimationStateMachine(out, outLen, machine, visitFn, visitCtx);
 #elseif cpp
@@ -484,7 +484,7 @@ inline function sampleAnimationStateMachine(out:Dynamic, outLen:Int, machine:Ani
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function sampleAnimationStateMachineChannel(out:Dynamic, outLen:Int, machine:AnimationStateMachine, channelIndex:Int):Bool {
+extern inline function sampleAnimationStateMachineChannel(out:Dynamic, outLen:Int, machine:AnimationStateMachine, channelIndex:Int):Bool {
 #if hl
 	return flight._hl._fn.Animation.sampleAnimationStateMachineChannel(out, outLen, machine, channelIndex);
 #elseif cpp
@@ -495,7 +495,7 @@ inline function sampleAnimationStateMachineChannel(out:Dynamic, outLen:Int, mach
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function transitionAnimationStateMachine(machine:AnimationStateMachine, toState:Int, duration:Float, curveFn:Dynamic, curveCtx:Dynamic):Bool {
+extern inline function transitionAnimationStateMachine(machine:AnimationStateMachine, toState:StateRef, duration:Float, curveFn:Dynamic, curveCtx:Dynamic):Bool {
 #if hl
 	return flight._hl._fn.Animation.transitionAnimationStateMachine(machine, toState, duration, curveFn, curveCtx);
 #elseif cpp
@@ -506,7 +506,7 @@ inline function transitionAnimationStateMachine(machine:AnimationStateMachine, t
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function createAnimationTrack():AnimationTrack {
+extern inline function createAnimationTrack():AnimationTrack {
 #if hl
 	return flight._hl._fn.Animation.createAnimationTrack();
 #elseif cpp
@@ -517,7 +517,7 @@ inline function createAnimationTrack():AnimationTrack {
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function cloneAnimationTrack(track:AnimationTrack):AnimationTrack {
+extern inline function cloneAnimationTrack(track:AnimationTrack):AnimationTrack {
 #if hl
 	return flight._hl._fn.Animation.cloneAnimationTrack(track);
 #elseif cpp
@@ -528,7 +528,7 @@ inline function cloneAnimationTrack(track:AnimationTrack):AnimationTrack {
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function sampleAnimationTrack(out:Dynamic, outLen:Int, track:AnimationTrack, t:Float):Void {
+extern inline function sampleAnimationTrack(out:Dynamic, outLen:Int, track:AnimationTrack, t:Float):Void {
 #if hl
 	flight._hl._fn.Animation.sampleAnimationTrack(out, outLen, track, t);
 #elseif cpp
@@ -539,7 +539,7 @@ inline function sampleAnimationTrack(out:Dynamic, outLen:Int, track:AnimationTra
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function trimAnimationTrack(track:AnimationTrack, startTime:Float, endTime:Float):AnimationTrack {
+extern inline function trimAnimationTrack(track:AnimationTrack, startTime:Float, endTime:Float):AnimationTrack {
 #if hl
 	return flight._hl._fn.Animation.trimAnimationTrack(track, startTime, endTime);
 #elseif cpp
@@ -550,7 +550,7 @@ inline function trimAnimationTrack(track:AnimationTrack, startTime:Float, endTim
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function validateAnimationTrack(out:Dynamic, track:AnimationTrack):Bool {
+extern inline function validateAnimationTrack(out:Dynamic, track:AnimationTrack):Bool {
 #if hl
 	return flight._hl._fn.Animation.validateAnimationTrack(out, track);
 #elseif cpp
@@ -561,7 +561,7 @@ inline function validateAnimationTrack(out:Dynamic, track:AnimationTrack):Bool {
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function createStateRefFromIndex(index:Int):Int {
+extern inline function createStateRefFromIndex(index:Int):StateRef {
 #if hl
 	return flight._hl._fn.Animation.createStateRefFromIndex(index);
 #elseif cpp
@@ -572,7 +572,7 @@ inline function createStateRefFromIndex(index:Int):Int {
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function createStateRefFromName(name:String):Int {
+extern inline function createStateRefFromName(name:String):StateRef {
 #if hl
 	return flight._hl._fn.Animation.createStateRefFromName(cast name);
 #elseif cpp
@@ -583,7 +583,7 @@ inline function createStateRefFromName(name:String):Int {
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function freeAnimationSampleAccumulator(ptr:AnimationSampleAccumulator):Void {
+extern inline function freeAnimationSampleAccumulator(ptr:AnimationSampleAccumulator):Void {
 #if hl
 	flight._hl._fn.Animation.freeAnimationSampleAccumulator(ptr);
 #elseif cpp
@@ -594,7 +594,7 @@ inline function freeAnimationSampleAccumulator(ptr:AnimationSampleAccumulator):V
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function freeAnimationBlendTree(ptr:AnimationBlendTree):Void {
+extern inline function freeAnimationBlendTree(ptr:AnimationBlendTree):Void {
 #if hl
 	flight._hl._fn.Animation.freeAnimationBlendTree(ptr);
 #elseif cpp
@@ -605,7 +605,7 @@ inline function freeAnimationBlendTree(ptr:AnimationBlendTree):Void {
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function freeAnimationBlendTreeInput(ptr:AnimationBlendTreeInput):Void {
+extern inline function freeAnimationBlendTreeInput(ptr:AnimationBlendTreeInput):Void {
 #if hl
 	flight._hl._fn.Animation.freeAnimationBlendTreeInput(ptr);
 #elseif cpp
@@ -616,7 +616,7 @@ inline function freeAnimationBlendTreeInput(ptr:AnimationBlendTreeInput):Void {
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function freeAnimationChannel(ptr:AnimationChannel):Void {
+extern inline function freeAnimationChannel(ptr:AnimationChannel):Void {
 #if hl
 	flight._hl._fn.Animation.freeAnimationChannel(ptr);
 #elseif cpp
@@ -627,7 +627,7 @@ inline function freeAnimationChannel(ptr:AnimationChannel):Void {
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function freeAnimationClip(ptr:AnimationClip):Void {
+extern inline function freeAnimationClip(ptr:AnimationClip):Void {
 #if hl
 	flight._hl._fn.Animation.freeAnimationClip(ptr);
 #elseif cpp
@@ -638,7 +638,7 @@ inline function freeAnimationClip(ptr:AnimationClip):Void {
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function freeAnimationClipEvent(ptr:AnimationClipEvent):Void {
+extern inline function freeAnimationClipEvent(ptr:AnimationClipEvent):Void {
 #if hl
 	flight._hl._fn.Animation.freeAnimationClipEvent(ptr);
 #elseif cpp
@@ -649,7 +649,7 @@ inline function freeAnimationClipEvent(ptr:AnimationClipEvent):Void {
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function freeAnimationCrossfade(ptr:AnimationCrossfade):Void {
+extern inline function freeAnimationCrossfade(ptr:AnimationCrossfade):Void {
 #if hl
 	flight._hl._fn.Animation.freeAnimationCrossfade(ptr);
 #elseif cpp
@@ -660,7 +660,7 @@ inline function freeAnimationCrossfade(ptr:AnimationCrossfade):Void {
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function freeAnimationLayer(ptr:AnimationLayer):Void {
+extern inline function freeAnimationLayer(ptr:AnimationLayer):Void {
 #if hl
 	flight._hl._fn.Animation.freeAnimationLayer(ptr);
 #elseif cpp
@@ -671,7 +671,7 @@ inline function freeAnimationLayer(ptr:AnimationLayer):Void {
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function freeAnimationLayerStack(ptr:AnimationLayerStack):Void {
+extern inline function freeAnimationLayerStack(ptr:AnimationLayerStack):Void {
 #if hl
 	flight._hl._fn.Animation.freeAnimationLayerStack(ptr);
 #elseif cpp
@@ -682,7 +682,7 @@ inline function freeAnimationLayerStack(ptr:AnimationLayerStack):Void {
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function freeAnimationPlayer(ptr:AnimationPlayer):Void {
+extern inline function freeAnimationPlayer(ptr:AnimationPlayer):Void {
 #if hl
 	flight._hl._fn.Animation.freeAnimationPlayer(ptr);
 #elseif cpp
@@ -693,7 +693,7 @@ inline function freeAnimationPlayer(ptr:AnimationPlayer):Void {
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function freeAnimationRootMotionExtractor(ptr:AnimationRootMotionExtractor):Void {
+extern inline function freeAnimationRootMotionExtractor(ptr:AnimationRootMotionExtractor):Void {
 #if hl
 	flight._hl._fn.Animation.freeAnimationRootMotionExtractor(ptr);
 #elseif cpp
@@ -704,7 +704,7 @@ inline function freeAnimationRootMotionExtractor(ptr:AnimationRootMotionExtracto
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function freeAnimationStateMachineState(ptr:AnimationStateMachineState):Void {
+extern inline function freeAnimationStateMachineState(ptr:AnimationStateMachineState):Void {
 #if hl
 	flight._hl._fn.Animation.freeAnimationStateMachineState(ptr);
 #elseif cpp
@@ -715,13 +715,24 @@ inline function freeAnimationStateMachineState(ptr:AnimationStateMachineState):V
 	#error "flight.Animation: no backend for this target."
 #end
 }
-inline function freeAnimationTrack(ptr:AnimationTrack):Void {
+extern inline function freeAnimationTrack(ptr:AnimationTrack):Void {
 #if hl
 	flight._hl._fn.Animation.freeAnimationTrack(ptr);
 #elseif cpp
 	flight._cpp._fn.Animation.freeAnimationTrack(ptr);
 #elseif (js && flight_esm)
 	flight._js._fn.Animation.freeAnimationTrack(ptr);
+#else
+	#error "flight.Animation: no backend for this target."
+#end
+}
+extern inline function freeStateRef(ptr:StateRef):Void {
+#if hl
+	flight._hl._fn.Animation.freeStateRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Animation.freeStateRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Animation.freeStateRef(ptr);
 #else
 	#error "flight.Animation: no backend for this target."
 #end

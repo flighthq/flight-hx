@@ -14,15 +14,15 @@ abstract AnimationCrossfade(cpp.Star<cpp.Void>) {
 
 	inline function get_duration():Single return AnimationCrossfade_Ffi.get_duration(this);
 
-	inline function set_duration(value:Single):Single return AnimationCrossfade_Ffi.set_duration(this, value);
+	inline function set_duration(value:Single):Single { AnimationCrossfade_Ffi.set_duration(this, value); return value; }
 	public var elapsed(get, set):Single;
 
 	inline function get_elapsed():Single return AnimationCrossfade_Ffi.get_elapsed(this);
 
-	inline function set_elapsed(value:Single):Single return AnimationCrossfade_Ffi.set_elapsed(this, value);
+	inline function set_elapsed(value:Single):Single { AnimationCrossfade_Ffi.set_elapsed(this, value); return value; }
 	public var weight(get, set):Single;
 
 	inline function get_weight():Single return AnimationCrossfade_Ffi.get_weight(this);
 
-	inline function set_weight(value:Single):Single return AnimationCrossfade_Ffi.set_weight(this, value);
+	inline function set_weight(value:Single):Single { AnimationCrossfade_Ffi.set_weight(this, value); return value; }
 }

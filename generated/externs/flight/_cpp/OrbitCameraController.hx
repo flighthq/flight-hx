@@ -30,55 +30,55 @@ abstract OrbitCameraController(cpp.Star<cpp.Void>) {
 
 	inline function get_azimuth():Single return OrbitCameraController_Ffi.get_azimuth(this);
 
-	inline function set_azimuth(value:Single):Single return OrbitCameraController_Ffi.set_azimuth(this, value);
+	inline function set_azimuth(value:Single):Single { OrbitCameraController_Ffi.set_azimuth(this, value); return value; }
 	public var distance(get, set):Single;
 
 	inline function get_distance():Single return OrbitCameraController_Ffi.get_distance(this);
 
-	inline function set_distance(value:Single):Single return OrbitCameraController_Ffi.set_distance(this, value);
+	inline function set_distance(value:Single):Single { OrbitCameraController_Ffi.set_distance(this, value); return value; }
 	public var goalAzimuth(get, set):Single;
 
 	inline function get_goalAzimuth():Single return OrbitCameraController_Ffi.get_goalAzimuth(this);
 
-	inline function set_goalAzimuth(value:Single):Single return OrbitCameraController_Ffi.set_goalAzimuth(this, value);
+	inline function set_goalAzimuth(value:Single):Single { OrbitCameraController_Ffi.set_goalAzimuth(this, value); return value; }
 	public var goalDistance(get, set):Single;
 
 	inline function get_goalDistance():Single return OrbitCameraController_Ffi.get_goalDistance(this);
 
-	inline function set_goalDistance(value:Single):Single return OrbitCameraController_Ffi.set_goalDistance(this, value);
+	inline function set_goalDistance(value:Single):Single { OrbitCameraController_Ffi.set_goalDistance(this, value); return value; }
 	public var goalPolar(get, set):Single;
 
 	inline function get_goalPolar():Single return OrbitCameraController_Ffi.get_goalPolar(this);
 
-	inline function set_goalPolar(value:Single):Single return OrbitCameraController_Ffi.set_goalPolar(this, value);
+	inline function set_goalPolar(value:Single):Single { OrbitCameraController_Ffi.set_goalPolar(this, value); return value; }
 	public var maxDistance(get, set):Single;
 
 	inline function get_maxDistance():Single return OrbitCameraController_Ffi.get_maxDistance(this);
 
-	inline function set_maxDistance(value:Single):Single return OrbitCameraController_Ffi.set_maxDistance(this, value);
+	inline function set_maxDistance(value:Single):Single { OrbitCameraController_Ffi.set_maxDistance(this, value); return value; }
 	public var maxPolar(get, set):Single;
 
 	inline function get_maxPolar():Single return OrbitCameraController_Ffi.get_maxPolar(this);
 
-	inline function set_maxPolar(value:Single):Single return OrbitCameraController_Ffi.set_maxPolar(this, value);
+	inline function set_maxPolar(value:Single):Single { OrbitCameraController_Ffi.set_maxPolar(this, value); return value; }
 	public var minDistance(get, set):Single;
 
 	inline function get_minDistance():Single return OrbitCameraController_Ffi.get_minDistance(this);
 
-	inline function set_minDistance(value:Single):Single return OrbitCameraController_Ffi.set_minDistance(this, value);
+	inline function set_minDistance(value:Single):Single { OrbitCameraController_Ffi.set_minDistance(this, value); return value; }
 	public var minPolar(get, set):Single;
 
 	inline function get_minPolar():Single return OrbitCameraController_Ffi.get_minPolar(this);
 
-	inline function set_minPolar(value:Single):Single return OrbitCameraController_Ffi.set_minPolar(this, value);
+	inline function set_minPolar(value:Single):Single { OrbitCameraController_Ffi.set_minPolar(this, value); return value; }
 	public var polar(get, set):Single;
 
 	inline function get_polar():Single return OrbitCameraController_Ffi.get_polar(this);
 
-	inline function set_polar(value:Single):Single return OrbitCameraController_Ffi.set_polar(this, value);
+	inline function set_polar(value:Single):Single { OrbitCameraController_Ffi.set_polar(this, value); return value; }
 	public var smoothTime(get, set):Single;
 
 	inline function get_smoothTime():Single return OrbitCameraController_Ffi.get_smoothTime(this);
 
-	inline function set_smoothTime(value:Single):Single return OrbitCameraController_Ffi.set_smoothTime(this, value);
+	inline function set_smoothTime(value:Single):Single { OrbitCameraController_Ffi.set_smoothTime(this, value); return value; }
 }

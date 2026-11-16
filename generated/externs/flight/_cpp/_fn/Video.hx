@@ -36,7 +36,7 @@ extern class Video {
 	@:native("flight_advance_video_texture__texture")
 	public static function advanceVideoTextureTexture(hostVideo:flight._cpp.HostVideoCapability, texture:flight._cpp.Texture):Int;
 	@:native("flight_clone_video_texture__texture")
-	public static function cloneVideoTextureTexture(source:flight._cpp.Texture):Int;
+	public static function cloneVideoTextureTexture(source:flight._cpp.Texture):flight._cpp.Texture;
 	@:native("flight_copy_video_texture__texture__texture")
 	public static function copyVideoTextureTextureTexture(out:flight._cpp.Texture, source:flight._cpp.Texture):Void;
 	@:native("flight_destroy_video_texture")

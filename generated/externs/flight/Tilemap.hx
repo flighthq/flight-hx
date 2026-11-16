@@ -22,7 +22,7 @@ typedef Tilemap = flight._js.Tilemap;
 
 #end
 
-inline function createTilemap():Dynamic {
+extern inline function createTilemap():Dynamic {
 #if hl
 	return flight._hl._fn.Tilemap.createTilemap();
 #elseif cpp
@@ -33,7 +33,7 @@ inline function createTilemap():Dynamic {
 	#error "flight.Tilemap: no backend for this target."
 #end
 }
-inline function createTilemapData():TilemapData {
+extern inline function createTilemapData():TilemapData {
 #if hl
 	return flight._hl._fn.Tilemap.createTilemapData();
 #elseif cpp
@@ -44,7 +44,7 @@ inline function createTilemapData():TilemapData {
 	#error "flight.Tilemap: no backend for this target."
 #end
 }
-inline function createTilemapRuntime():TilemapRuntime {
+extern inline function createTilemapRuntime():TilemapRuntime {
 #if hl
 	return flight._hl._fn.Tilemap.createTilemapRuntime();
 #elseif cpp
@@ -55,7 +55,7 @@ inline function createTilemapRuntime():TilemapRuntime {
 	#error "flight.Tilemap: no backend for this target."
 #end
 }
-inline function createTilemapSignals():TilemapSignals {
+extern inline function createTilemapSignals():TilemapSignals {
 #if hl
 	return flight._hl._fn.Tilemap.createTilemapSignals();
 #elseif cpp
@@ -66,7 +66,7 @@ inline function createTilemapSignals():TilemapSignals {
 	#error "flight.Tilemap: no backend for this target."
 #end
 }
-inline function clearTilemap(tilemap:Tilemap):Void {
+extern inline function clearTilemap(tilemap:Tilemap):Void {
 #if hl
 	flight._hl._fn.Tilemap.clearTilemap(tilemap);
 #elseif cpp
@@ -77,7 +77,7 @@ inline function clearTilemap(tilemap:Tilemap):Void {
 	#error "flight.Tilemap: no backend for this target."
 #end
 }
-inline function cloneTilemap(source:Tilemap):Dynamic {
+extern inline function cloneTilemap(source:Tilemap):Dynamic {
 #if hl
 	return flight._hl._fn.Tilemap.cloneTilemap(source);
 #elseif cpp
@@ -88,7 +88,7 @@ inline function cloneTilemap(source:Tilemap):Dynamic {
 	#error "flight.Tilemap: no backend for this target."
 #end
 }
-inline function computeTilemapLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
+extern inline function computeTilemapLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
 #if hl
 	flight._hl._fn.Tilemap.computeTilemapLocalBoundsRectangle(out, source);
 #elseif cpp
@@ -99,7 +99,7 @@ inline function computeTilemapLocalBoundsRectangle(out:Rectangle, source:Dynamic
 	#error "flight.Tilemap: no backend for this target."
 #end
 }
-inline function enableTilemapSignals(target:Tilemap):TilemapSignals {
+extern inline function enableTilemapSignals(target:Tilemap):TilemapSignals {
 #if hl
 	return flight._hl._fn.Tilemap.enableTilemapSignals(target);
 #elseif cpp
@@ -110,7 +110,7 @@ inline function enableTilemapSignals(target:Tilemap):TilemapSignals {
 	#error "flight.Tilemap: no backend for this target."
 #end
 }
-inline function fillTilemapTiles(tilemap:Tilemap, id:Int):Void {
+extern inline function fillTilemapTiles(tilemap:Tilemap, id:Int):Void {
 #if hl
 	flight._hl._fn.Tilemap.fillTilemapTiles(tilemap, id);
 #elseif cpp
@@ -121,7 +121,7 @@ inline function fillTilemapTiles(tilemap:Tilemap, id:Int):Void {
 	#error "flight.Tilemap: no backend for this target."
 #end
 }
-inline function getTilemapColumnAtX(source:Tilemap, x:Float):Int {
+extern inline function getTilemapColumnAtX(source:Tilemap, x:Float):Int {
 #if hl
 	return flight._hl._fn.Tilemap.getTilemapColumnAtX(source, x);
 #elseif cpp
@@ -132,7 +132,7 @@ inline function getTilemapColumnAtX(source:Tilemap, x:Float):Int {
 	#error "flight.Tilemap: no backend for this target."
 #end
 }
-inline function getTilemapColumnRowAtPoint(out:Vector2, source:Tilemap, x:Float, y:Float):Bool {
+extern inline function getTilemapColumnRowAtPoint(out:Vector2, source:Tilemap, x:Float, y:Float):Bool {
 #if hl
 	return flight._hl._fn.Tilemap.getTilemapColumnRowAtPoint(out, source, x, y);
 #elseif cpp
@@ -143,7 +143,7 @@ inline function getTilemapColumnRowAtPoint(out:Vector2, source:Tilemap, x:Float,
 	#error "flight.Tilemap: no backend for this target."
 #end
 }
-inline function getTilemapRowAtY(source:Tilemap, y:Float):Int {
+extern inline function getTilemapRowAtY(source:Tilemap, y:Float):Int {
 #if hl
 	return flight._hl._fn.Tilemap.getTilemapRowAtY(source, y);
 #elseif cpp
@@ -154,7 +154,7 @@ inline function getTilemapRowAtY(source:Tilemap, y:Float):Int {
 	#error "flight.Tilemap: no backend for this target."
 #end
 }
-inline function getTilemapRuntime(source:Tilemap):TilemapRuntime {
+extern inline function getTilemapRuntime(source:Tilemap):TilemapRuntime {
 #if hl
 	return flight._hl._fn.Tilemap.getTilemapRuntime(source);
 #elseif cpp
@@ -165,7 +165,7 @@ inline function getTilemapRuntime(source:Tilemap):TilemapRuntime {
 	#error "flight.Tilemap: no backend for this target."
 #end
 }
-inline function getTilemapTile(tilemap:Tilemap, column:Int, row:Int):Int {
+extern inline function getTilemapTile(tilemap:Tilemap, column:Int, row:Int):Int {
 #if hl
 	return flight._hl._fn.Tilemap.getTilemapTile(tilemap, column, row);
 #elseif cpp
@@ -176,7 +176,7 @@ inline function getTilemapTile(tilemap:Tilemap, column:Int, row:Int):Int {
 	#error "flight.Tilemap: no backend for this target."
 #end
 }
-inline function getTilemapTileAtPoint(source:Tilemap, point:Vector2):Int {
+extern inline function getTilemapTileAtPoint(source:Tilemap, point:Vector2):Int {
 #if hl
 	return flight._hl._fn.Tilemap.getTilemapTileAtPoint(source, point);
 #elseif cpp
@@ -187,7 +187,7 @@ inline function getTilemapTileAtPoint(source:Tilemap, point:Vector2):Int {
 	#error "flight.Tilemap: no backend for this target."
 #end
 }
-inline function getTilemapTileAtPointXy(source:Tilemap, x:Float, y:Float):Int {
+extern inline function getTilemapTileAtPointXy(source:Tilemap, x:Float, y:Float):Int {
 #if hl
 	return flight._hl._fn.Tilemap.getTilemapTileAtPointXy(source, x, y);
 #elseif cpp
@@ -198,7 +198,7 @@ inline function getTilemapTileAtPointXy(source:Tilemap, x:Float, y:Float):Int {
 	#error "flight.Tilemap: no backend for this target."
 #end
 }
-inline function getTilemapTileRect(out:Rectangle, source:Tilemap, column:Int, row:Int):Bool {
+extern inline function getTilemapTileRect(out:Rectangle, source:Tilemap, column:Int, row:Int):Bool {
 #if hl
 	return flight._hl._fn.Tilemap.getTilemapTileRect(out, source, column, row);
 #elseif cpp
@@ -209,7 +209,7 @@ inline function getTilemapTileRect(out:Rectangle, source:Tilemap, column:Int, ro
 	#error "flight.Tilemap: no backend for this target."
 #end
 }
-inline function resizeTilemap(tilemap:Tilemap, columns:Int, rows:Int):Void {
+extern inline function resizeTilemap(tilemap:Tilemap, columns:Int, rows:Int):Void {
 #if hl
 	flight._hl._fn.Tilemap.resizeTilemap(tilemap, columns, rows);
 #elseif cpp
@@ -220,7 +220,7 @@ inline function resizeTilemap(tilemap:Tilemap, columns:Int, rows:Int):Void {
 	#error "flight.Tilemap: no backend for this target."
 #end
 }
-inline function setTilemapTile(tilemap:Tilemap, column:Int, row:Int, id:Int):Void {
+extern inline function setTilemapTile(tilemap:Tilemap, column:Int, row:Int, id:Int):Void {
 #if hl
 	flight._hl._fn.Tilemap.setTilemapTile(tilemap, column, row, id);
 #elseif cpp
@@ -231,7 +231,7 @@ inline function setTilemapTile(tilemap:Tilemap, column:Int, row:Int, id:Int):Voi
 	#error "flight.Tilemap: no backend for this target."
 #end
 }
-inline function setTilemapTileTint(tilemap:Tilemap, column:Int, row:Int, rgba:Int):Void {
+extern inline function setTilemapTileTint(tilemap:Tilemap, column:Int, row:Int, rgba:Int):Void {
 #if hl
 	flight._hl._fn.Tilemap.setTilemapTileTint(tilemap, column, row, rgba);
 #elseif cpp
@@ -242,7 +242,7 @@ inline function setTilemapTileTint(tilemap:Tilemap, column:Int, row:Int, rgba:In
 	#error "flight.Tilemap: no backend for this target."
 #end
 }
-inline function setTilemapTiles(tilemap:Tilemap, ids:Dynamic, idsLen:Int, offsetColumn:Int, offsetRow:Int, width:Int, height:Int):Void {
+extern inline function setTilemapTiles(tilemap:Tilemap, ids:Dynamic, idsLen:Int, offsetColumn:Int, offsetRow:Int, width:Int, height:Int):Void {
 #if hl
 	flight._hl._fn.Tilemap.setTilemapTiles(tilemap, ids, idsLen, offsetColumn, offsetRow, width, height);
 #elseif cpp
@@ -253,7 +253,7 @@ inline function setTilemapTiles(tilemap:Tilemap, ids:Dynamic, idsLen:Int, offset
 	#error "flight.Tilemap: no backend for this target."
 #end
 }
-inline function freeTilemapData(ptr:TilemapData):Void {
+extern inline function freeTilemapData(ptr:TilemapData):Void {
 #if hl
 	flight._hl._fn.Tilemap.freeTilemapData(ptr);
 #elseif cpp
@@ -264,7 +264,7 @@ inline function freeTilemapData(ptr:TilemapData):Void {
 	#error "flight.Tilemap: no backend for this target."
 #end
 }
-inline function freeTilemapRuntime(ptr:TilemapRuntime):Void {
+extern inline function freeTilemapRuntime(ptr:TilemapRuntime):Void {
 #if hl
 	flight._hl._fn.Tilemap.freeTilemapRuntime(ptr);
 #elseif cpp
@@ -275,7 +275,7 @@ inline function freeTilemapRuntime(ptr:TilemapRuntime):Void {
 	#error "flight.Tilemap: no backend for this target."
 #end
 }
-inline function freeTilemapSignals(ptr:TilemapSignals):Void {
+extern inline function freeTilemapSignals(ptr:TilemapSignals):Void {
 #if hl
 	flight._hl._fn.Tilemap.freeTilemapSignals(ptr);
 #elseif cpp

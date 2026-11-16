@@ -1,6 +1,6 @@
 package flight;
 
-inline function computeNodeRootLocalBoundsRectangle(out:Rectangle, root:Dynamic):Void {
+extern inline function computeNodeRootLocalBoundsRectangle(out:Rectangle, root:Dynamic):Void {
 #if hl
 	flight._hl._fn.Node.computeNodeRootLocalBoundsRectangle(out, root);
 #elseif cpp
@@ -11,7 +11,7 @@ inline function computeNodeRootLocalBoundsRectangle(out:Rectangle, root:Dynamic)
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function ensureNodeLocalBoundsRectangle(target:Dynamic):Void {
+extern inline function ensureNodeLocalBoundsRectangle(target:Dynamic):Void {
 #if hl
 	flight._hl._fn.Node.ensureNodeLocalBoundsRectangle(target);
 #elseif cpp
@@ -22,7 +22,7 @@ inline function ensureNodeLocalBoundsRectangle(target:Dynamic):Void {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function ensureNodeParentBoundsRectangle(target:Dynamic):Void {
+extern inline function ensureNodeParentBoundsRectangle(target:Dynamic):Void {
 #if hl
 	flight._hl._fn.Node.ensureNodeParentBoundsRectangle(target);
 #elseif cpp
@@ -33,7 +33,7 @@ inline function ensureNodeParentBoundsRectangle(target:Dynamic):Void {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function ensureNodeWorldBoundsRectangle(target:Dynamic):Void {
+extern inline function ensureNodeWorldBoundsRectangle(target:Dynamic):Void {
 #if hl
 	flight._hl._fn.Node.ensureNodeWorldBoundsRectangle(target);
 #elseif cpp
@@ -44,7 +44,7 @@ inline function ensureNodeWorldBoundsRectangle(target:Dynamic):Void {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function getNodeHeight(source:Dynamic):Float {
+extern inline function getNodeHeight(source:Dynamic):Float {
 #if hl
 	return flight._hl._fn.Node.getNodeHeight(source);
 #elseif cpp
@@ -55,7 +55,7 @@ inline function getNodeHeight(source:Dynamic):Float {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function getNodeLocalBoundsRectangle(target:Dynamic):Rectangle {
+extern inline function getNodeLocalBoundsRectangle(target:Dynamic):Rectangle {
 #if hl
 	return flight._hl._fn.Node.getNodeLocalBoundsRectangle(target);
 #elseif cpp
@@ -66,7 +66,7 @@ inline function getNodeLocalBoundsRectangle(target:Dynamic):Rectangle {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function getNodeParentBoundsRectangle(target:Dynamic):Rectangle {
+extern inline function getNodeParentBoundsRectangle(target:Dynamic):Rectangle {
 #if hl
 	return flight._hl._fn.Node.getNodeParentBoundsRectangle(target);
 #elseif cpp
@@ -77,7 +77,7 @@ inline function getNodeParentBoundsRectangle(target:Dynamic):Rectangle {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function getNodeWidth(source:Dynamic):Float {
+extern inline function getNodeWidth(source:Dynamic):Float {
 #if hl
 	return flight._hl._fn.Node.getNodeWidth(source);
 #elseif cpp
@@ -88,7 +88,7 @@ inline function getNodeWidth(source:Dynamic):Float {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function getNodeWorldBoundsRectangle(target:Dynamic):Rectangle {
+extern inline function getNodeWorldBoundsRectangle(target:Dynamic):Rectangle {
 #if hl
 	return flight._hl._fn.Node.getNodeWorldBoundsRectangle(target);
 #elseif cpp
@@ -99,7 +99,7 @@ inline function getNodeWorldBoundsRectangle(target:Dynamic):Rectangle {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function setNodeHeight(target:Dynamic, value:Float):Void {
+extern inline function setNodeHeight(target:Dynamic, value:Float):Void {
 #if hl
 	flight._hl._fn.Node.setNodeHeight(target, value);
 #elseif cpp
@@ -110,7 +110,7 @@ inline function setNodeHeight(target:Dynamic, value:Float):Void {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function setNodeWidth(target:Dynamic, value:Float):Void {
+extern inline function setNodeWidth(target:Dynamic, value:Float):Void {
 #if hl
 	flight._hl._fn.Node.setNodeWidth(target, value);
 #elseif cpp
@@ -121,7 +121,7 @@ inline function setNodeWidth(target:Dynamic, value:Float):Void {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function areNodeGuardsEnabled(guards:NodeGuardState):Bool {
+extern inline function areNodeGuardsEnabled(guards:NodeGuardState):Bool {
 #if hl
 	return flight._hl._fn.Node.areNodeGuardsEnabled(guards);
 #elseif cpp
@@ -132,7 +132,7 @@ inline function areNodeGuardsEnabled(guards:NodeGuardState):Bool {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function disableNodeGuards(guards:NodeGuardState):Void {
+extern inline function disableNodeGuards(guards:NodeGuardState):Void {
 #if hl
 	flight._hl._fn.Node.disableNodeGuards(guards);
 #elseif cpp
@@ -143,18 +143,18 @@ inline function disableNodeGuards(guards:NodeGuardState):Void {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function enableNodeGuards(guards:NodeGuardState, logState:Dynamic, clock:NodeGuardClock):Void {
+extern inline function enableNodeGuards(guards:NodeGuardState, logState:Dynamic, clockFn:Dynamic, clockCtx:Dynamic):Void {
 #if hl
-	flight._hl._fn.Node.enableNodeGuards(guards, logState, clock);
+	flight._hl._fn.Node.enableNodeGuards(guards, logState, clockFn, clockCtx);
 #elseif cpp
-	flight._cpp._fn.Node.enableNodeGuards(guards, logState, clock);
+	flight._cpp._fn.Node.enableNodeGuards(guards, logState, clockFn, clockCtx);
 #elseif (js && flight_esm)
-	flight._js._fn.Node.enableNodeGuards(guards, logState, clock);
+	flight._js._fn.Node.enableNodeGuards(guards, logState, clockFn, clockCtx);
 #else
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function initAppearanceRuntimeTrait(target:HasAppearanceRuntime):Void {
+extern inline function initAppearanceRuntimeTrait(target:HasAppearanceRuntime):Void {
 #if hl
 	flight._hl._fn.Node.initAppearanceRuntimeTrait(target);
 #elseif cpp
@@ -165,7 +165,7 @@ inline function initAppearanceRuntimeTrait(target:HasAppearanceRuntime):Void {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function initAppearanceTrait(target:HasAppearance, obj:HasAppearanceOptions):Void {
+extern inline function initAppearanceTrait(target:HasAppearance, obj:HasAppearanceOptions):Void {
 #if hl
 	flight._hl._fn.Node.initAppearanceTrait(target, obj);
 #elseif cpp
@@ -176,7 +176,7 @@ inline function initAppearanceTrait(target:HasAppearance, obj:HasAppearanceOptio
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function initBlendModeTrait(target:HasBlendMode, obj:HasBlendModeOptions):Void {
+extern inline function initBlendModeTrait(target:HasBlendMode, obj:HasBlendModeOptions):Void {
 #if hl
 	flight._hl._fn.Node.initBlendModeTrait(target, obj);
 #elseif cpp
@@ -187,7 +187,7 @@ inline function initBlendModeTrait(target:HasBlendMode, obj:HasBlendModeOptions)
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function defaultComputeLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
+extern inline function defaultComputeLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
 #if hl
 	flight._hl._fn.Node.defaultComputeLocalBoundsRectangle(out, source);
 #elseif cpp
@@ -198,7 +198,7 @@ inline function defaultComputeLocalBoundsRectangle(out:Rectangle, source:Dynamic
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function initBoundsRectangleTrait(target:HasBoundsRectangle, obj:HasBoundsRectangleOptions):Void {
+extern inline function initBoundsRectangleTrait(target:HasBoundsRectangle, obj:HasBoundsRectangleOptions):Void {
 #if hl
 	flight._hl._fn.Node.initBoundsRectangleTrait(target, obj);
 #elseif cpp
@@ -209,7 +209,7 @@ inline function initBoundsRectangleTrait(target:HasBoundsRectangle, obj:HasBound
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function initClipTrait(target:HasClip, obj:HasClipOptions):Void {
+extern inline function initClipTrait(target:HasClip, obj:HasClipOptions):Void {
 #if hl
 	flight._hl._fn.Node.initClipTrait(target, obj);
 #elseif cpp
@@ -220,7 +220,7 @@ inline function initClipTrait(target:HasClip, obj:HasClipOptions):Void {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function initMaterialTrait(target:HasMaterial, obj:HasMaterialOptions):Void {
+extern inline function initMaterialTrait(target:HasMaterial, obj:HasMaterialOptions):Void {
 #if hl
 	flight._hl._fn.Node.initMaterialTrait(target, obj);
 #elseif cpp
@@ -231,7 +231,7 @@ inline function initMaterialTrait(target:HasMaterial, obj:HasMaterialOptions):Vo
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function initTransform2dTrait(target:HasTransform2D, obj:HasTransform2DOptions):Void {
+extern inline function initTransform2dTrait(target:HasTransform2D, obj:HasTransform2DOptions):Void {
 #if hl
 	flight._hl._fn.Node.initTransform2dTrait(target, obj);
 #elseif cpp
@@ -242,7 +242,7 @@ inline function initTransform2dTrait(target:HasTransform2D, obj:HasTransform2DOp
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function initTransform3dRuntimeTrait(target:HasTransform3DRuntime):Void {
+extern inline function initTransform3dRuntimeTrait(target:HasTransform3DRuntime):Void {
 #if hl
 	flight._hl._fn.Node.initTransform3dRuntimeTrait(target);
 #elseif cpp
@@ -253,7 +253,7 @@ inline function initTransform3dRuntimeTrait(target:HasTransform3DRuntime):Void {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function initTransform3dTrait(target:HasTransform3D, obj:HasTransform3DOptions):Void {
+extern inline function initTransform3dTrait(target:HasTransform3D, obj:HasTransform3DOptions):Void {
 #if hl
 	flight._hl._fn.Node.initTransform3dTrait(target, obj);
 #elseif cpp
@@ -264,7 +264,7 @@ inline function initTransform3dTrait(target:HasTransform3D, obj:HasTransform3DOp
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function addNodeChild(target:Dynamic, child:Dynamic):Dynamic {
+extern inline function addNodeChild(target:Dynamic, child:Dynamic):Dynamic {
 #if hl
 	return flight._hl._fn.Node.addNodeChild(target, child);
 #elseif cpp
@@ -275,7 +275,7 @@ inline function addNodeChild(target:Dynamic, child:Dynamic):Dynamic {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function addNodeChildAt(target:Dynamic, child:Dynamic, index:Int):Dynamic {
+extern inline function addNodeChildAt(target:Dynamic, child:Dynamic, index:Int):Dynamic {
 #if hl
 	return flight._hl._fn.Node.addNodeChildAt(target, child, index);
 #elseif cpp
@@ -286,7 +286,7 @@ inline function addNodeChildAt(target:Dynamic, child:Dynamic, index:Int):Dynamic
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function addNodeChildren(target:Dynamic, children:Dynamic, childrenLen:Int):Void {
+extern inline function addNodeChildren(target:Dynamic, children:Dynamic, childrenLen:Int):Void {
 #if hl
 	flight._hl._fn.Node.addNodeChildren(target, children, childrenLen);
 #elseif cpp
@@ -297,7 +297,7 @@ inline function addNodeChildren(target:Dynamic, children:Dynamic, childrenLen:In
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function containsNodeChild(source:Dynamic, child:Dynamic):Bool {
+extern inline function containsNodeChild(source:Dynamic, child:Dynamic):Bool {
 #if hl
 	return flight._hl._fn.Node.containsNodeChild(source, child);
 #elseif cpp
@@ -308,7 +308,7 @@ inline function containsNodeChild(source:Dynamic, child:Dynamic):Bool {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function forEachNodeChild(source:Dynamic, callback_Fn:Dynamic, callback_Ctx:Dynamic):Void {
+extern inline function forEachNodeChild(source:Dynamic, callback_Fn:Dynamic, callback_Ctx:Dynamic):Void {
 #if hl
 	flight._hl._fn.Node.forEachNodeChild(source, callback_Fn, callback_Ctx);
 #elseif cpp
@@ -319,7 +319,7 @@ inline function forEachNodeChild(source:Dynamic, callback_Fn:Dynamic, callback_C
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function getNodeAncestors(out:Dynamic, source:Dynamic):Void {
+extern inline function getNodeAncestors(out:Dynamic, source:Dynamic):Void {
 #if hl
 	flight._hl._fn.Node.getNodeAncestors(out, source);
 #elseif cpp
@@ -330,7 +330,7 @@ inline function getNodeAncestors(out:Dynamic, source:Dynamic):Void {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function getNodeChildAt(source:Dynamic, index:Int):Dynamic {
+extern inline function getNodeChildAt(source:Dynamic, index:Int):Dynamic {
 #if hl
 	return flight._hl._fn.Node.getNodeChildAt(source, index);
 #elseif cpp
@@ -341,7 +341,7 @@ inline function getNodeChildAt(source:Dynamic, index:Int):Dynamic {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function getNodeChildByName(source:Dynamic, name:String):Dynamic {
+extern inline function getNodeChildByName(source:Dynamic, name:String):Dynamic {
 #if hl
 	return flight._hl._fn.Node.getNodeChildByName(source, cast name);
 #elseif cpp
@@ -352,7 +352,7 @@ inline function getNodeChildByName(source:Dynamic, name:String):Dynamic {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function getNodeChildCount(source:Dynamic):Int {
+extern inline function getNodeChildCount(source:Dynamic):Int {
 #if hl
 	return flight._hl._fn.Node.getNodeChildCount(source);
 #elseif cpp
@@ -363,7 +363,7 @@ inline function getNodeChildCount(source:Dynamic):Int {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function getNodeChildIndex(source:Dynamic, child:Dynamic):Int {
+extern inline function getNodeChildIndex(source:Dynamic, child:Dynamic):Int {
 #if hl
 	return flight._hl._fn.Node.getNodeChildIndex(source, child);
 #elseif cpp
@@ -374,7 +374,7 @@ inline function getNodeChildIndex(source:Dynamic, child:Dynamic):Int {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function getNodeCommonAncestor(a:Dynamic, b:Dynamic):Dynamic {
+extern inline function getNodeCommonAncestor(a:Dynamic, b:Dynamic):Dynamic {
 #if hl
 	return flight._hl._fn.Node.getNodeCommonAncestor(a, b);
 #elseif cpp
@@ -385,7 +385,7 @@ inline function getNodeCommonAncestor(a:Dynamic, b:Dynamic):Dynamic {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function getNodeParent(source:Dynamic):Dynamic {
+extern inline function getNodeParent(source:Dynamic):Dynamic {
 #if hl
 	return flight._hl._fn.Node.getNodeParent(source);
 #elseif cpp
@@ -396,7 +396,7 @@ inline function getNodeParent(source:Dynamic):Dynamic {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function getNodeRoot(source:Dynamic):Dynamic {
+extern inline function getNodeRoot(source:Dynamic):Dynamic {
 #if hl
 	return flight._hl._fn.Node.getNodeRoot(source);
 #elseif cpp
@@ -407,7 +407,7 @@ inline function getNodeRoot(source:Dynamic):Dynamic {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function isNodeAncestorOf(ancestor:Dynamic, descendant:Dynamic):Bool {
+extern inline function isNodeAncestorOf(ancestor:Dynamic, descendant:Dynamic):Bool {
 #if hl
 	return flight._hl._fn.Node.isNodeAncestorOf(ancestor, descendant);
 #elseif cpp
@@ -418,7 +418,7 @@ inline function isNodeAncestorOf(ancestor:Dynamic, descendant:Dynamic):Bool {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function removeNodeChild(target:Dynamic, child:Dynamic):Dynamic {
+extern inline function removeNodeChild(target:Dynamic, child:Dynamic):Dynamic {
 #if hl
 	return flight._hl._fn.Node.removeNodeChild(target, child);
 #elseif cpp
@@ -429,7 +429,7 @@ inline function removeNodeChild(target:Dynamic, child:Dynamic):Dynamic {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function removeNodeChildAt(target:Dynamic, index:Int):Dynamic {
+extern inline function removeNodeChildAt(target:Dynamic, index:Int):Dynamic {
 #if hl
 	return flight._hl._fn.Node.removeNodeChildAt(target, index);
 #elseif cpp
@@ -440,7 +440,7 @@ inline function removeNodeChildAt(target:Dynamic, index:Int):Dynamic {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function removeNodeChildren(target:Dynamic, beginIndex:Int, endIndex:Int):Void {
+extern inline function removeNodeChildren(target:Dynamic, beginIndex:Int, endIndex:Int):Void {
 #if hl
 	flight._hl._fn.Node.removeNodeChildren(target, beginIndex, endIndex);
 #elseif cpp
@@ -451,7 +451,7 @@ inline function removeNodeChildren(target:Dynamic, beginIndex:Int, endIndex:Int)
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function reparentNode(child:Dynamic, newParent:Dynamic, guards:NodeGuardState):Bool {
+extern inline function reparentNode(child:Dynamic, newParent:Dynamic, guards:NodeGuardState):Bool {
 #if hl
 	return flight._hl._fn.Node.reparentNode(child, newParent, guards);
 #elseif cpp
@@ -462,7 +462,7 @@ inline function reparentNode(child:Dynamic, newParent:Dynamic, guards:NodeGuardS
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function replaceNodeChild(target:Dynamic, oldChild:Dynamic, newChild:Dynamic):Void {
+extern inline function replaceNodeChild(target:Dynamic, oldChild:Dynamic, newChild:Dynamic):Void {
 #if hl
 	flight._hl._fn.Node.replaceNodeChild(target, oldChild, newChild);
 #elseif cpp
@@ -473,7 +473,7 @@ inline function replaceNodeChild(target:Dynamic, oldChild:Dynamic, newChild:Dyna
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function setNodeChildIndex(target:Dynamic, child:Dynamic, index:Int):Void {
+extern inline function setNodeChildIndex(target:Dynamic, child:Dynamic, index:Int):Void {
 #if hl
 	flight._hl._fn.Node.setNodeChildIndex(target, child, index);
 #elseif cpp
@@ -484,7 +484,7 @@ inline function setNodeChildIndex(target:Dynamic, child:Dynamic, index:Int):Void
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function swapNodeChildren(target:Dynamic, child1:Dynamic, child2:Dynamic):Void {
+extern inline function swapNodeChildren(target:Dynamic, child1:Dynamic, child2:Dynamic):Void {
 #if hl
 	flight._hl._fn.Node.swapNodeChildren(target, child1, child2);
 #elseif cpp
@@ -495,7 +495,7 @@ inline function swapNodeChildren(target:Dynamic, child1:Dynamic, child2:Dynamic)
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function swapNodeChildrenAt(target:Dynamic, index1:Int, index2:Int):Void {
+extern inline function swapNodeChildrenAt(target:Dynamic, index1:Int, index2:Int):Void {
 #if hl
 	flight._hl._fn.Node.swapNodeChildrenAt(target, index1, index2);
 #elseif cpp
@@ -506,7 +506,7 @@ inline function swapNodeChildrenAt(target:Dynamic, index1:Int, index2:Int):Void 
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function createNodeRuntime(methods:NodeRuntimeMethods):NodeRuntime {
+extern inline function createNodeRuntime(methods:NodeRuntimeMethods):NodeRuntime {
 #if hl
 	return flight._hl._fn.Node.createNodeRuntime(methods);
 #elseif cpp
@@ -517,7 +517,7 @@ inline function createNodeRuntime(methods:NodeRuntimeMethods):NodeRuntime {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function createNodeSignals():Dynamic {
+extern inline function createNodeSignals():Dynamic {
 #if hl
 	return flight._hl._fn.Node.createNodeSignals();
 #elseif cpp
@@ -528,7 +528,7 @@ inline function createNodeSignals():Dynamic {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function defaultNodeRuntimeCanAddChild(target:Dynamic, child:Dynamic):Bool {
+extern inline function defaultNodeRuntimeCanAddChild(target:Dynamic, child:Dynamic):Bool {
 #if hl
 	return flight._hl._fn.Node.defaultNodeRuntimeCanAddChild(target, child);
 #elseif cpp
@@ -539,7 +539,7 @@ inline function defaultNodeRuntimeCanAddChild(target:Dynamic, child:Dynamic):Boo
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function disposeNode(target:Dynamic):Void {
+extern inline function disposeNode(target:Dynamic):Void {
 #if hl
 	flight._hl._fn.Node.disposeNode(target);
 #elseif cpp
@@ -550,7 +550,7 @@ inline function disposeNode(target:Dynamic):Void {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function enableNodeSignals(source:Dynamic):Dynamic {
+extern inline function enableNodeSignals(source:Dynamic):Dynamic {
 #if hl
 	return flight._hl._fn.Node.enableNodeSignals(source);
 #elseif cpp
@@ -561,7 +561,7 @@ inline function enableNodeSignals(source:Dynamic):Dynamic {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function getNodeRuntime(source:Dynamic):NodeRuntime {
+extern inline function getNodeRuntime(source:Dynamic):NodeRuntime {
 #if hl
 	return flight._hl._fn.Node.getNodeRuntime(source);
 #elseif cpp
@@ -572,7 +572,7 @@ inline function getNodeRuntime(source:Dynamic):NodeRuntime {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function getNodeSignals(source:Dynamic):Dynamic {
+extern inline function getNodeSignals(source:Dynamic):Dynamic {
 #if hl
 	return flight._hl._fn.Node.getNodeSignals(source);
 #elseif cpp
@@ -583,7 +583,7 @@ inline function getNodeSignals(source:Dynamic):Dynamic {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function setNodeEnabled(target:Dynamic, value:Bool):Void {
+extern inline function setNodeEnabled(target:Dynamic, value:Bool):Void {
 #if hl
 	flight._hl._fn.Node.setNodeEnabled(target, value);
 #elseif cpp
@@ -594,7 +594,7 @@ inline function setNodeEnabled(target:Dynamic, value:Bool):Void {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function setNodeColorAdjustmentsTint(source:Dynamic, tint:Int):Void {
+extern inline function setNodeColorAdjustmentsTint(source:Dynamic, tint:Int):Void {
 #if hl
 	flight._hl._fn.Node.setNodeColorAdjustmentsTint(source, tint);
 #elseif cpp
@@ -605,7 +605,7 @@ inline function setNodeColorAdjustmentsTint(source:Dynamic, tint:Int):Void {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function createNodeOrderList():NodeOrderList {
+extern inline function createNodeOrderList():NodeOrderList {
 #if hl
 	return flight._hl._fn.Node.createNodeOrderList();
 #elseif cpp
@@ -616,7 +616,7 @@ inline function createNodeOrderList():NodeOrderList {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function addNodeOrderListEntry(list:NodeOrderList, node:Dynamic, sortKey:Float):Void {
+extern inline function addNodeOrderListEntry(list:NodeOrderList, node:Dynamic, sortKey:Float):Void {
 #if hl
 	flight._hl._fn.Node.addNodeOrderListEntry(list, node, sortKey);
 #elseif cpp
@@ -627,7 +627,7 @@ inline function addNodeOrderListEntry(list:NodeOrderList, node:Dynamic, sortKey:
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function applyNodeOrderList(target:Dynamic, list:NodeOrderList):Void {
+extern inline function applyNodeOrderList(target:Dynamic, list:NodeOrderList):Void {
 #if hl
 	flight._hl._fn.Node.applyNodeOrderList(target, list);
 #elseif cpp
@@ -638,7 +638,7 @@ inline function applyNodeOrderList(target:Dynamic, list:NodeOrderList):Void {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function clearNodeOrderList(list:NodeOrderList):Void {
+extern inline function clearNodeOrderList(list:NodeOrderList):Void {
 #if hl
 	flight._hl._fn.Node.clearNodeOrderList(list);
 #elseif cpp
@@ -649,7 +649,7 @@ inline function clearNodeOrderList(list:NodeOrderList):Void {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function disposeNodeOrderList(list:NodeOrderList):Void {
+extern inline function disposeNodeOrderList(list:NodeOrderList):Void {
 #if hl
 	flight._hl._fn.Node.disposeNodeOrderList(list);
 #elseif cpp
@@ -660,7 +660,7 @@ inline function disposeNodeOrderList(list:NodeOrderList):Void {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function forEachNodeOrderListEntry(list:NodeOrderList, callback_Fn:Dynamic, callback_Ctx:Dynamic):Void {
+extern inline function forEachNodeOrderListEntry(list:NodeOrderList, callback_Fn:Dynamic, callback_Ctx:Dynamic):Void {
 #if hl
 	flight._hl._fn.Node.forEachNodeOrderListEntry(list, callback_Fn, callback_Ctx);
 #elseif cpp
@@ -671,7 +671,7 @@ inline function forEachNodeOrderListEntry(list:NodeOrderList, callback_Fn:Dynami
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function getNodeOrderListEntrySortKey(list:NodeOrderList, node:Dynamic):Float {
+extern inline function getNodeOrderListEntrySortKey(list:NodeOrderList, node:Dynamic):Float {
 #if hl
 	return flight._hl._fn.Node.getNodeOrderListEntrySortKey(list, node);
 #elseif cpp
@@ -682,7 +682,7 @@ inline function getNodeOrderListEntrySortKey(list:NodeOrderList, node:Dynamic):F
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function hasNodeOrderListEntry(list:NodeOrderList, node:Dynamic):Bool {
+extern inline function hasNodeOrderListEntry(list:NodeOrderList, node:Dynamic):Bool {
 #if hl
 	return flight._hl._fn.Node.hasNodeOrderListEntry(list, node);
 #elseif cpp
@@ -693,7 +693,7 @@ inline function hasNodeOrderListEntry(list:NodeOrderList, node:Dynamic):Bool {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function removeNodeOrderListEntry(list:NodeOrderList, node:Dynamic):Bool {
+extern inline function removeNodeOrderListEntry(list:NodeOrderList, node:Dynamic):Bool {
 #if hl
 	return flight._hl._fn.Node.removeNodeOrderListEntry(list, node);
 #elseif cpp
@@ -704,7 +704,7 @@ inline function removeNodeOrderListEntry(list:NodeOrderList, node:Dynamic):Bool 
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function setNodeOrderListEntry(list:NodeOrderList, node:Dynamic, sortKey:Float):Void {
+extern inline function setNodeOrderListEntry(list:NodeOrderList, node:Dynamic, sortKey:Float):Void {
 #if hl
 	flight._hl._fn.Node.setNodeOrderListEntry(list, node, sortKey);
 #elseif cpp
@@ -715,7 +715,7 @@ inline function setNodeOrderListEntry(list:NodeOrderList, node:Dynamic, sortKey:
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function setNodeOrderListEntryAbove(list:NodeOrderList, node:Dynamic, target:Dynamic):Void {
+extern inline function setNodeOrderListEntryAbove(list:NodeOrderList, node:Dynamic, target:Dynamic):Void {
 #if hl
 	flight._hl._fn.Node.setNodeOrderListEntryAbove(list, node, target);
 #elseif cpp
@@ -726,7 +726,7 @@ inline function setNodeOrderListEntryAbove(list:NodeOrderList, node:Dynamic, tar
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function setNodeOrderListEntryBelow(list:NodeOrderList, node:Dynamic, target:Dynamic):Void {
+extern inline function setNodeOrderListEntryBelow(list:NodeOrderList, node:Dynamic, target:Dynamic):Void {
 #if hl
 	flight._hl._fn.Node.setNodeOrderListEntryBelow(list, node, target);
 #elseif cpp
@@ -737,7 +737,7 @@ inline function setNodeOrderListEntryBelow(list:NodeOrderList, node:Dynamic, tar
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function setNodeOrderListFromNodeChildren(list:NodeOrderList, source:Dynamic):Void {
+extern inline function setNodeOrderListFromNodeChildren(list:NodeOrderList, source:Dynamic):Void {
 #if hl
 	flight._hl._fn.Node.setNodeOrderListFromNodeChildren(list, source);
 #elseif cpp
@@ -748,7 +748,7 @@ inline function setNodeOrderListFromNodeChildren(list:NodeOrderList, source:Dyna
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function swapNodeOrderListEntries(list:NodeOrderList, nodeA:Dynamic, nodeB:Dynamic):Void {
+extern inline function swapNodeOrderListEntries(list:NodeOrderList, nodeA:Dynamic, nodeB:Dynamic):Void {
 #if hl
 	flight._hl._fn.Node.swapNodeOrderListEntries(list, nodeA, nodeB);
 #elseif cpp
@@ -759,7 +759,7 @@ inline function swapNodeOrderListEntries(list:NodeOrderList, nodeA:Dynamic, node
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function getNodeLocalMatrix(target:Dynamic):Matrix {
+extern inline function getNodeLocalMatrix(target:Dynamic):Matrix {
 #if hl
 	return flight._hl._fn.Node.getNodeLocalMatrix(target);
 #elseif cpp
@@ -770,7 +770,7 @@ inline function getNodeLocalMatrix(target:Dynamic):Matrix {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function getNodeTransform2d(out:Transform2D, source:Dynamic):Void {
+extern inline function getNodeTransform2d(out:Transform2D, source:Dynamic):Void {
 #if hl
 	flight._hl._fn.Node.getNodeTransform2d(out, source);
 #elseif cpp
@@ -781,7 +781,7 @@ inline function getNodeTransform2d(out:Transform2D, source:Dynamic):Void {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function getNodeWorldMatrix(target:Dynamic):Matrix {
+extern inline function getNodeWorldMatrix(target:Dynamic):Matrix {
 #if hl
 	return flight._hl._fn.Node.getNodeWorldMatrix(target);
 #elseif cpp
@@ -792,7 +792,7 @@ inline function getNodeWorldMatrix(target:Dynamic):Matrix {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function setNodeLocalMatrix(target:Dynamic, source:Matrix):Void {
+extern inline function setNodeLocalMatrix(target:Dynamic, source:Matrix):Void {
 #if hl
 	flight._hl._fn.Node.setNodeLocalMatrix(target, source);
 #elseif cpp
@@ -803,7 +803,7 @@ inline function setNodeLocalMatrix(target:Dynamic, source:Matrix):Void {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function setNodeTransform2d(target:Dynamic, source:Transform2D):Void {
+extern inline function setNodeTransform2d(target:Dynamic, source:Transform2D):Void {
 #if hl
 	flight._hl._fn.Node.setNodeTransform2d(target, source);
 #elseif cpp
@@ -814,7 +814,7 @@ inline function setNodeTransform2d(target:Dynamic, source:Transform2D):Void {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function computeNodeWorldTransformRevision(target:Dynamic, parentWorldTransformId:Int, root:NodeRuntime):Void {
+extern inline function computeNodeWorldTransformRevision(target:Dynamic, parentWorldTransformId:haxe.Int64, root:NodeRuntime):Void {
 #if hl
 	flight._hl._fn.Node.computeNodeWorldTransformRevision(target, parentWorldTransformId, root);
 #elseif cpp
@@ -825,7 +825,7 @@ inline function computeNodeWorldTransformRevision(target:Dynamic, parentWorldTra
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function getNodeAppearanceRevision(source:Dynamic):Int {
+extern inline function getNodeAppearanceRevision(source:Dynamic):Int {
 #if hl
 	return flight._hl._fn.Node.getNodeAppearanceRevision(source);
 #elseif cpp
@@ -836,7 +836,7 @@ inline function getNodeAppearanceRevision(source:Dynamic):Int {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function getNodeChildrenRevision(source:Dynamic):Int {
+extern inline function getNodeChildrenRevision(source:Dynamic):Int {
 #if hl
 	return flight._hl._fn.Node.getNodeChildrenRevision(source);
 #elseif cpp
@@ -847,7 +847,7 @@ inline function getNodeChildrenRevision(source:Dynamic):Int {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function getNodeLocalBoundsRevision(source:Dynamic):Int {
+extern inline function getNodeLocalBoundsRevision(source:Dynamic):Int {
 #if hl
 	return flight._hl._fn.Node.getNodeLocalBoundsRevision(source);
 #elseif cpp
@@ -858,7 +858,7 @@ inline function getNodeLocalBoundsRevision(source:Dynamic):Int {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function getNodeLocalContentRevision(source:Dynamic):Int {
+extern inline function getNodeLocalContentRevision(source:Dynamic):Int {
 #if hl
 	return flight._hl._fn.Node.getNodeLocalContentRevision(source);
 #elseif cpp
@@ -869,7 +869,7 @@ inline function getNodeLocalContentRevision(source:Dynamic):Int {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function getNodeLocalTransformRevision(source:Dynamic):Int {
+extern inline function getNodeLocalTransformRevision(source:Dynamic):Int {
 #if hl
 	return flight._hl._fn.Node.getNodeLocalTransformRevision(source);
 #elseif cpp
@@ -880,7 +880,7 @@ inline function getNodeLocalTransformRevision(source:Dynamic):Int {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function getNodeParentReferenceRevision(source:Dynamic):Int {
+extern inline function getNodeParentReferenceRevision(source:Dynamic):Int {
 #if hl
 	return flight._hl._fn.Node.getNodeParentReferenceRevision(source);
 #elseif cpp
@@ -891,7 +891,7 @@ inline function getNodeParentReferenceRevision(source:Dynamic):Int {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function getNodeWorldTransformRevision(source:Dynamic):Int {
+extern inline function getNodeWorldTransformRevision(source:Dynamic):Int {
 #if hl
 	return flight._hl._fn.Node.getNodeWorldTransformRevision(source);
 #elseif cpp
@@ -902,7 +902,7 @@ inline function getNodeWorldTransformRevision(source:Dynamic):Int {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function invalidateContent(target:Dynamic):Void {
+extern inline function invalidateContent(target:Dynamic):Void {
 #if hl
 	flight._hl._fn.Node.invalidateContent(target);
 #elseif cpp
@@ -913,7 +913,7 @@ inline function invalidateContent(target:Dynamic):Void {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function invalidateNode(target:Dynamic):Void {
+extern inline function invalidateNode(target:Dynamic):Void {
 #if hl
 	flight._hl._fn.Node.invalidateNode(target);
 #elseif cpp
@@ -924,7 +924,7 @@ inline function invalidateNode(target:Dynamic):Void {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function invalidateNodeAppearance(target:Dynamic):Void {
+extern inline function invalidateNodeAppearance(target:Dynamic):Void {
 #if hl
 	flight._hl._fn.Node.invalidateNodeAppearance(target);
 #elseif cpp
@@ -935,7 +935,7 @@ inline function invalidateNodeAppearance(target:Dynamic):Void {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function invalidateNodeLocalBounds(target:Dynamic):Void {
+extern inline function invalidateNodeLocalBounds(target:Dynamic):Void {
 #if hl
 	flight._hl._fn.Node.invalidateNodeLocalBounds(target);
 #elseif cpp
@@ -946,7 +946,7 @@ inline function invalidateNodeLocalBounds(target:Dynamic):Void {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function invalidateNodeLocalContent(target:Dynamic):Void {
+extern inline function invalidateNodeLocalContent(target:Dynamic):Void {
 #if hl
 	flight._hl._fn.Node.invalidateNodeLocalContent(target);
 #elseif cpp
@@ -957,7 +957,7 @@ inline function invalidateNodeLocalContent(target:Dynamic):Void {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function invalidateNodeLocalTransform(target:Dynamic):Void {
+extern inline function invalidateNodeLocalTransform(target:Dynamic):Void {
 #if hl
 	flight._hl._fn.Node.invalidateNodeLocalTransform(target);
 #elseif cpp
@@ -968,7 +968,7 @@ inline function invalidateNodeLocalTransform(target:Dynamic):Void {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function invalidateNodeParentReference(target:Dynamic):Void {
+extern inline function invalidateNodeParentReference(target:Dynamic):Void {
 #if hl
 	flight._hl._fn.Node.invalidateNodeParentReference(target);
 #elseif cpp
@@ -979,7 +979,7 @@ inline function invalidateNodeParentReference(target:Dynamic):Void {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function invalidateNodeRender(target:Dynamic):Void {
+extern inline function invalidateNodeRender(target:Dynamic):Void {
 #if hl
 	flight._hl._fn.Node.invalidateNodeRender(target);
 #elseif cpp
@@ -990,7 +990,7 @@ inline function invalidateNodeRender(target:Dynamic):Void {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function invalidateNodeWorldBounds(target:Dynamic):Void {
+extern inline function invalidateNodeWorldBounds(target:Dynamic):Void {
 #if hl
 	flight._hl._fn.Node.invalidateNodeWorldBounds(target);
 #elseif cpp
@@ -1001,7 +1001,7 @@ inline function invalidateNodeWorldBounds(target:Dynamic):Void {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function computeScene2dFitAlignX(scaledContentWidth:Float, viewWidth:Float, align:Int):Float {
+extern inline function computeScene2dFitAlignX(scaledContentWidth:Float, viewWidth:Float, align:ViewportAlign):Float {
 #if hl
 	return flight._hl._fn.Node.computeScene2dFitAlignX(scaledContentWidth, viewWidth, align);
 #elseif cpp
@@ -1012,7 +1012,7 @@ inline function computeScene2dFitAlignX(scaledContentWidth:Float, viewWidth:Floa
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function computeScene2dFitAlignY(scaledContentHeight:Float, viewHeight:Float, align:Int):Float {
+extern inline function computeScene2dFitAlignY(scaledContentHeight:Float, viewHeight:Float, align:ViewportAlign):Float {
 #if hl
 	return flight._hl._fn.Node.computeScene2dFitAlignY(scaledContentHeight, viewHeight, align);
 #elseif cpp
@@ -1023,7 +1023,7 @@ inline function computeScene2dFitAlignY(scaledContentHeight:Float, viewHeight:Fl
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function computeScene2dFitFillScale(contentWidth:Float, contentHeight:Float, viewWidth:Float, viewHeight:Float):Float {
+extern inline function computeScene2dFitFillScale(contentWidth:Float, contentHeight:Float, viewWidth:Float, viewHeight:Float):Float {
 #if hl
 	return flight._hl._fn.Node.computeScene2dFitFillScale(contentWidth, contentHeight, viewWidth, viewHeight);
 #elseif cpp
@@ -1034,7 +1034,7 @@ inline function computeScene2dFitFillScale(contentWidth:Float, contentHeight:Flo
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function computeScene2dFitScale(contentWidth:Float, contentHeight:Float, viewWidth:Float, viewHeight:Float):Float {
+extern inline function computeScene2dFitScale(contentWidth:Float, contentHeight:Float, viewWidth:Float, viewHeight:Float):Float {
 #if hl
 	return flight._hl._fn.Node.computeScene2dFitScale(contentWidth, contentHeight, viewWidth, viewHeight);
 #elseif cpp
@@ -1045,7 +1045,7 @@ inline function computeScene2dFitScale(contentWidth:Float, contentHeight:Float, 
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function computeScene2dFitTransform(out:Matrix, scene2d:Scene2DFitContext, viewWidth:Float, viewHeight:Float):Void {
+extern inline function computeScene2dFitTransform(out:Matrix, scene2d:Scene2DFitContext, viewWidth:Float, viewHeight:Float):Void {
 #if hl
 	flight._hl._fn.Node.computeScene2dFitTransform(out, scene2d, viewWidth, viewHeight);
 #elseif cpp
@@ -1056,7 +1056,7 @@ inline function computeScene2dFitTransform(out:Matrix, scene2d:Scene2DFitContext
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function findNode(source:Dynamic, predicateFn:Dynamic, predicateCtx:Dynamic):Dynamic {
+extern inline function findNode(source:Dynamic, predicateFn:Dynamic, predicateCtx:Dynamic):Dynamic {
 #if hl
 	return flight._hl._fn.Node.findNode(source, predicateFn, predicateCtx);
 #elseif cpp
@@ -1067,7 +1067,7 @@ inline function findNode(source:Dynamic, predicateFn:Dynamic, predicateCtx:Dynam
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function findNodeByName(source:Dynamic, name:String):Dynamic {
+extern inline function findNodeByName(source:Dynamic, name:String):Dynamic {
 #if hl
 	return flight._hl._fn.Node.findNodeByName(source, cast name);
 #elseif cpp
@@ -1078,7 +1078,7 @@ inline function findNodeByName(source:Dynamic, name:String):Dynamic {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function forEachNodeAncestor(source:Dynamic, callback_Fn:Dynamic, callback_Ctx:Dynamic):Void {
+extern inline function forEachNodeAncestor(source:Dynamic, callback_Fn:Dynamic, callback_Ctx:Dynamic):Void {
 #if hl
 	flight._hl._fn.Node.forEachNodeAncestor(source, callback_Fn, callback_Ctx);
 #elseif cpp
@@ -1089,7 +1089,7 @@ inline function forEachNodeAncestor(source:Dynamic, callback_Fn:Dynamic, callbac
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function forEachNodeDescendant(source:Dynamic, callback_Fn:Dynamic, callback_Ctx:Dynamic):Void {
+extern inline function forEachNodeDescendant(source:Dynamic, callback_Fn:Dynamic, callback_Ctx:Dynamic):Void {
 #if hl
 	flight._hl._fn.Node.forEachNodeDescendant(source, callback_Fn, callback_Ctx);
 #elseif cpp
@@ -1100,7 +1100,7 @@ inline function forEachNodeDescendant(source:Dynamic, callback_Fn:Dynamic, callb
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function getNodeChildren(out:Dynamic, source:Dynamic):Void {
+extern inline function getNodeChildren(out:Dynamic, source:Dynamic):Void {
 #if hl
 	flight._hl._fn.Node.getNodeChildren(out, source);
 #elseif cpp
@@ -1111,7 +1111,7 @@ inline function getNodeChildren(out:Dynamic, source:Dynamic):Void {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function getNodeDepth(source:Dynamic):Int {
+extern inline function getNodeDepth(source:Dynamic):Int {
 #if hl
 	return flight._hl._fn.Node.getNodeDepth(source);
 #elseif cpp
@@ -1122,7 +1122,7 @@ inline function getNodeDepth(source:Dynamic):Int {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function getNodeNextSibling(source:Dynamic):Dynamic {
+extern inline function getNodeNextSibling(source:Dynamic):Dynamic {
 #if hl
 	return flight._hl._fn.Node.getNodeNextSibling(source);
 #elseif cpp
@@ -1133,7 +1133,7 @@ inline function getNodeNextSibling(source:Dynamic):Dynamic {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function getNodePreviousSibling(source:Dynamic):Dynamic {
+extern inline function getNodePreviousSibling(source:Dynamic):Dynamic {
 #if hl
 	return flight._hl._fn.Node.getNodePreviousSibling(source);
 #elseif cpp
@@ -1144,7 +1144,7 @@ inline function getNodePreviousSibling(source:Dynamic):Dynamic {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function walkNodeDescendants(source:Dynamic, visitFn:Dynamic, visitCtx:Dynamic):Bool {
+extern inline function walkNodeDescendants(source:Dynamic, visitFn:Dynamic, visitCtx:Dynamic):Bool {
 #if hl
 	return flight._hl._fn.Node.walkNodeDescendants(source, visitFn, visitCtx);
 #elseif cpp
@@ -1155,7 +1155,7 @@ inline function walkNodeDescendants(source:Dynamic, visitFn:Dynamic, visitCtx:Dy
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function createViewport():Viewport {
+extern inline function createViewport():Viewport {
 #if hl
 	return flight._hl._fn.Node.createViewport();
 #elseif cpp
@@ -1166,7 +1166,7 @@ inline function createViewport():Viewport {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function getViewportAspect(viewport:Viewport):Float {
+extern inline function getViewportAspect(viewport:Viewport):Float {
 #if hl
 	return flight._hl._fn.Node.getViewportAspect(viewport);
 #elseif cpp
@@ -1177,7 +1177,7 @@ inline function getViewportAspect(viewport:Viewport):Float {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function freeNodeRuntime(ptr:NodeRuntime):Void {
+extern inline function freeNodeRuntime(ptr:NodeRuntime):Void {
 #if hl
 	flight._hl._fn.Node.freeNodeRuntime(ptr);
 #elseif cpp
@@ -1188,7 +1188,7 @@ inline function freeNodeRuntime(ptr:NodeRuntime):Void {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function freeNodeOrderList(ptr:NodeOrderList):Void {
+extern inline function freeNodeOrderList(ptr:NodeOrderList):Void {
 #if hl
 	flight._hl._fn.Node.freeNodeOrderList(ptr);
 #elseif cpp
@@ -1199,7 +1199,7 @@ inline function freeNodeOrderList(ptr:NodeOrderList):Void {
 	#error "flight.Node: no backend for this target."
 #end
 }
-inline function freeViewport(ptr:Viewport):Void {
+extern inline function freeViewport(ptr:Viewport):Void {
 #if hl
 	flight._hl._fn.Node.freeViewport(ptr);
 #elseif cpp

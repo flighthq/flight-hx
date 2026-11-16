@@ -20,30 +20,30 @@ abstract Physics2DQueryFilter(cpp.Star<cpp.Void>) {
 
 	inline function get_categoryBits():Int return Physics2DQueryFilter_Ffi.get_categoryBits(this);
 
-	inline function set_categoryBits(value:Int):Int return Physics2DQueryFilter_Ffi.set_categoryBits(this, value);
+	inline function set_categoryBits(value:Int):Int { Physics2DQueryFilter_Ffi.set_categoryBits(this, value); return value; }
 	public var includeDynamic(get, set):Bool;
 
 	inline function get_includeDynamic():Bool return Physics2DQueryFilter_Ffi.get_includeDynamic(this);
 
-	inline function set_includeDynamic(value:Bool):Bool return Physics2DQueryFilter_Ffi.set_includeDynamic(this, value);
+	inline function set_includeDynamic(value:Bool):Bool { Physics2DQueryFilter_Ffi.set_includeDynamic(this, value); return value; }
 	public var includeKinematic(get, set):Bool;
 
 	inline function get_includeKinematic():Bool return Physics2DQueryFilter_Ffi.get_includeKinematic(this);
 
-	inline function set_includeKinematic(value:Bool):Bool return Physics2DQueryFilter_Ffi.set_includeKinematic(this, value);
+	inline function set_includeKinematic(value:Bool):Bool { Physics2DQueryFilter_Ffi.set_includeKinematic(this, value); return value; }
 	public var includeSensors(get, set):Bool;
 
 	inline function get_includeSensors():Bool return Physics2DQueryFilter_Ffi.get_includeSensors(this);
 
-	inline function set_includeSensors(value:Bool):Bool return Physics2DQueryFilter_Ffi.set_includeSensors(this, value);
+	inline function set_includeSensors(value:Bool):Bool { Physics2DQueryFilter_Ffi.set_includeSensors(this, value); return value; }
 	public var includeStatic(get, set):Bool;
 
 	inline function get_includeStatic():Bool return Physics2DQueryFilter_Ffi.get_includeStatic(this);
 
-	inline function set_includeStatic(value:Bool):Bool return Physics2DQueryFilter_Ffi.set_includeStatic(this, value);
+	inline function set_includeStatic(value:Bool):Bool { Physics2DQueryFilter_Ffi.set_includeStatic(this, value); return value; }
 	public var maskBits(get, set):Int;
 
 	inline function get_maskBits():Int return Physics2DQueryFilter_Ffi.get_maskBits(this);
 
-	inline function set_maskBits(value:Int):Int return Physics2DQueryFilter_Ffi.set_maskBits(this, value);
+	inline function set_maskBits(value:Int):Int { Physics2DQueryFilter_Ffi.set_maskBits(this, value); return value; }
 }

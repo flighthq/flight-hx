@@ -12,10 +12,10 @@ abstract LottieDocumentImportResult(cpp.Star<cpp.Void>) {
 
 	inline function get_duration():Single return LottieDocumentImportResult_Ffi.get_duration(this);
 
-	inline function set_duration(value:Single):Single return LottieDocumentImportResult_Ffi.set_duration(this, value);
+	inline function set_duration(value:Single):Single { LottieDocumentImportResult_Ffi.set_duration(this, value); return value; }
 	public var frameRate(get, set):Single;
 
 	inline function get_frameRate():Single return LottieDocumentImportResult_Ffi.get_frameRate(this);
 
-	inline function set_frameRate(value:Single):Single return LottieDocumentImportResult_Ffi.set_frameRate(this, value);
+	inline function set_frameRate(value:Single):Single { LottieDocumentImportResult_Ffi.set_frameRate(this, value); return value; }
 }

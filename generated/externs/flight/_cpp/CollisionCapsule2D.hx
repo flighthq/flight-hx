@@ -18,25 +18,25 @@ abstract CollisionCapsule2D(cpp.Star<cpp.Void>) {
 
 	inline function get_x0():Single return CollisionCapsule2D_Ffi.get_x0(this);
 
-	inline function set_x0(value:Single):Single return CollisionCapsule2D_Ffi.set_x0(this, value);
+	inline function set_x0(value:Single):Single { CollisionCapsule2D_Ffi.set_x0(this, value); return value; }
 	public var y0(get, set):Single;
 
 	inline function get_y0():Single return CollisionCapsule2D_Ffi.get_y0(this);
 
-	inline function set_y0(value:Single):Single return CollisionCapsule2D_Ffi.set_y0(this, value);
+	inline function set_y0(value:Single):Single { CollisionCapsule2D_Ffi.set_y0(this, value); return value; }
 	public var x1(get, set):Single;
 
 	inline function get_x1():Single return CollisionCapsule2D_Ffi.get_x1(this);
 
-	inline function set_x1(value:Single):Single return CollisionCapsule2D_Ffi.set_x1(this, value);
+	inline function set_x1(value:Single):Single { CollisionCapsule2D_Ffi.set_x1(this, value); return value; }
 	public var y1(get, set):Single;
 
 	inline function get_y1():Single return CollisionCapsule2D_Ffi.get_y1(this);
 
-	inline function set_y1(value:Single):Single return CollisionCapsule2D_Ffi.set_y1(this, value);
+	inline function set_y1(value:Single):Single { CollisionCapsule2D_Ffi.set_y1(this, value); return value; }
 	public var radius(get, set):Single;
 
 	inline function get_radius():Single return CollisionCapsule2D_Ffi.get_radius(this);
 
-	inline function set_radius(value:Single):Single return CollisionCapsule2D_Ffi.set_radius(this, value);
+	inline function set_radius(value:Single):Single { CollisionCapsule2D_Ffi.set_radius(this, value); return value; }
 }

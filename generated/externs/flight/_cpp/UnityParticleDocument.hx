@@ -20,30 +20,30 @@ abstract UnityParticleDocument(cpp.Star<cpp.Void>) {
 
 	inline function get_duration():Single return UnityParticleDocument_Ffi.get_duration(this);
 
-	inline function set_duration(value:Single):Single return UnityParticleDocument_Ffi.set_duration(this, value);
+	inline function set_duration(value:Single):Single { UnityParticleDocument_Ffi.set_duration(this, value); return value; }
 	public var gravityModifier(get, set):Single;
 
 	inline function get_gravityModifier():Single return UnityParticleDocument_Ffi.get_gravityModifier(this);
 
-	inline function set_gravityModifier(value:Single):Single return UnityParticleDocument_Ffi.set_gravityModifier(this, value);
+	inline function set_gravityModifier(value:Single):Single { UnityParticleDocument_Ffi.set_gravityModifier(this, value); return value; }
 	public var looping(get, set):Bool;
 
 	inline function get_looping():Bool return UnityParticleDocument_Ffi.get_looping(this);
 
-	inline function set_looping(value:Bool):Bool return UnityParticleDocument_Ffi.set_looping(this, value);
+	inline function set_looping(value:Bool):Bool { UnityParticleDocument_Ffi.set_looping(this, value); return value; }
 	public var maxParticles(get, set):Single;
 
 	inline function get_maxParticles():Single return UnityParticleDocument_Ffi.get_maxParticles(this);
 
-	inline function set_maxParticles(value:Single):Single return UnityParticleDocument_Ffi.set_maxParticles(this, value);
+	inline function set_maxParticles(value:Single):Single { UnityParticleDocument_Ffi.set_maxParticles(this, value); return value; }
 	public var physicsGravity(get, set):Single;
 
 	inline function get_physicsGravity():Single return UnityParticleDocument_Ffi.get_physicsGravity(this);
 
-	inline function set_physicsGravity(value:Single):Single return UnityParticleDocument_Ffi.set_physicsGravity(this, value);
+	inline function set_physicsGravity(value:Single):Single { UnityParticleDocument_Ffi.set_physicsGravity(this, value); return value; }
 	public var prewarm(get, set):Bool;
 
 	inline function get_prewarm():Bool return UnityParticleDocument_Ffi.get_prewarm(this);
 
-	inline function set_prewarm(value:Bool):Bool return UnityParticleDocument_Ffi.set_prewarm(this, value);
+	inline function set_prewarm(value:Bool):Bool { UnityParticleDocument_Ffi.set_prewarm(this, value); return value; }
 }

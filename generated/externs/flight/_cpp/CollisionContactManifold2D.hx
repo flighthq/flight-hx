@@ -18,25 +18,25 @@ abstract CollisionContactManifold2D(cpp.Star<cpp.Void>) {
 
 	inline function get_overlapping():Bool return CollisionContactManifold2D_Ffi.get_overlapping(this);
 
-	inline function set_overlapping(value:Bool):Bool return CollisionContactManifold2D_Ffi.set_overlapping(this, value);
+	inline function set_overlapping(value:Bool):Bool { CollisionContactManifold2D_Ffi.set_overlapping(this, value); return value; }
 	public var normalX(get, set):Single;
 
 	inline function get_normalX():Single return CollisionContactManifold2D_Ffi.get_normalX(this);
 
-	inline function set_normalX(value:Single):Single return CollisionContactManifold2D_Ffi.set_normalX(this, value);
+	inline function set_normalX(value:Single):Single { CollisionContactManifold2D_Ffi.set_normalX(this, value); return value; }
 	public var normalY(get, set):Single;
 
 	inline function get_normalY():Single return CollisionContactManifold2D_Ffi.get_normalY(this);
 
-	inline function set_normalY(value:Single):Single return CollisionContactManifold2D_Ffi.set_normalY(this, value);
+	inline function set_normalY(value:Single):Single { CollisionContactManifold2D_Ffi.set_normalY(this, value); return value; }
 	public var depth(get, set):Single;
 
 	inline function get_depth():Single return CollisionContactManifold2D_Ffi.get_depth(this);
 
-	inline function set_depth(value:Single):Single return CollisionContactManifold2D_Ffi.set_depth(this, value);
+	inline function set_depth(value:Single):Single { CollisionContactManifold2D_Ffi.set_depth(this, value); return value; }
 	public var pointCount(get, set):Int;
 
 	inline function get_pointCount():Int return CollisionContactManifold2D_Ffi.get_pointCount(this);
 
-	inline function set_pointCount(value:Int):Int return CollisionContactManifold2D_Ffi.set_pointCount(this, value);
+	inline function set_pointCount(value:Int):Int { CollisionContactManifold2D_Ffi.set_pointCount(this, value); return value; }
 }

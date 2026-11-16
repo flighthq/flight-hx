@@ -26,9 +26,9 @@ extern class Bitmapfont {
 	@:native("flight_get_bitmap_font_glyph_explanation_reason_string")
 	public static function getBitmapFontGlyphExplanationReasonString(value:Int):cpp.ConstCharStar;
 	@:native("flight_get_bitmap_font_guard_log_key_string")
-	public static function getBitmapFontGuardLogKeyString(value:Int):cpp.ConstCharStar;
+	public static function getBitmapFontGuardLogKeyString(value:flight._cpp.BitmapFontGuardLogKey):cpp.ConstCharStar;
 	@:native("flight_get_bitmap_font_guard_reason_string")
-	public static function getBitmapFontGuardReasonString(value:Int):cpp.ConstCharStar;
+	public static function getBitmapFontGuardReasonString(value:flight._cpp.BitmapFontGuardReason):cpp.ConstCharStar;
 	@:native("flight_parse_bitmap_font_encoding")
 	public static function parseBitmapFontEncoding(value:cpp.ConstCharStar):Int;
 	@:native("flight_parse_bitmap_font_glyph_explanation_reason")

@@ -1,6 +1,6 @@
 package flight;
 
-inline function asImageResourceRef(source:TextureSourceRef):Dynamic {
+extern inline function asImageResourceRef(source:TextureSourceRef):Dynamic {
 #if hl
 	return flight._hl._fn.Image.asImageResourceRef(source);
 #elseif cpp
@@ -11,7 +11,7 @@ inline function asImageResourceRef(source:TextureSourceRef):Dynamic {
 	#error "flight.Image: no backend for this target."
 #end
 }
-inline function cloneImageResource(resource:Dynamic):Dynamic {
+extern inline function cloneImageResource(resource:Dynamic):Dynamic {
 #if hl
 	return flight._hl._fn.Image.cloneImageResource(resource);
 #elseif cpp
@@ -22,7 +22,7 @@ inline function cloneImageResource(resource:Dynamic):Dynamic {
 	#error "flight.Image: no backend for this target."
 #end
 }
-inline function invalidateImageResource(resource:Dynamic, state:ImageResolverState):Void {
+extern inline function invalidateImageResource(resource:Dynamic, state:ImageResolverState):Void {
 #if hl
 	flight._hl._fn.Image.invalidateImageResource(resource, state);
 #elseif cpp
@@ -33,7 +33,7 @@ inline function invalidateImageResource(resource:Dynamic, state:ImageResolverSta
 	#error "flight.Image: no backend for this target."
 #end
 }
-inline function isImageResourceEmpty(resource:Dynamic):Bool {
+extern inline function isImageResourceEmpty(resource:Dynamic):Bool {
 #if hl
 	return flight._hl._fn.Image.isImageResourceEmpty(resource);
 #elseif cpp
@@ -44,7 +44,7 @@ inline function isImageResourceEmpty(resource:Dynamic):Bool {
 	#error "flight.Image: no backend for this target."
 #end
 }
-inline function createImageResourceFromBitmap(hostImage:HostImageCapability, bitmap:Bitmap):Dynamic {
+extern inline function createImageResourceFromBitmap(hostImage:HostImageCapability, bitmap:Bitmap):Dynamic {
 #if hl
 	return flight._hl._fn.Image.createImageResourceFromBitmap(hostImage, bitmap);
 #elseif cpp
@@ -55,7 +55,7 @@ inline function createImageResourceFromBitmap(hostImage:HostImageCapability, bit
 	#error "flight.Image: no backend for this target."
 #end
 }
-inline function createImageResourceFromSurface(hostImage:HostImageCapability, surface:SurfaceRef):Dynamic {
+extern inline function createImageResourceFromSurface(hostImage:HostImageCapability, surface:SurfaceRef):Dynamic {
 #if hl
 	return flight._hl._fn.Image.createImageResourceFromSurface(hostImage, surface);
 #elseif cpp
@@ -66,7 +66,7 @@ inline function createImageResourceFromSurface(hostImage:HostImageCapability, su
 	#error "flight.Image: no backend for this target."
 #end
 }
-inline function captureBitmapFromImageResource(hostBitmapReadback:HostBitmapReadbackCapability, resource:Dynamic):Bitmap {
+extern inline function captureBitmapFromImageResource(hostBitmapReadback:HostBitmapReadbackCapability, resource:Dynamic):Bitmap {
 #if hl
 	return flight._hl._fn.Image.captureBitmapFromImageResource(hostBitmapReadback, resource);
 #elseif cpp
@@ -77,7 +77,7 @@ inline function captureBitmapFromImageResource(hostBitmapReadback:HostBitmapRead
 	#error "flight.Image: no backend for this target."
 #end
 }
-inline function isImageUrlSameOrigin(url:String, context:ImageUrlOriginContext):Bool {
+extern inline function isImageUrlSameOrigin(url:String, context:ImageUrlOriginContext):Bool {
 #if hl
 	return flight._hl._fn.Image.isImageUrlSameOrigin(cast url, context);
 #elseif cpp
@@ -88,7 +88,7 @@ inline function isImageUrlSameOrigin(url:String, context:ImageUrlOriginContext):
 	#error "flight.Image: no backend for this target."
 #end
 }
-inline function createExternalImageResourceReference(uri:String):Dynamic {
+extern inline function createExternalImageResourceReference(uri:String):Dynamic {
 #if hl
 	return flight._hl._fn.Image.createExternalImageResourceReference(cast uri);
 #elseif cpp
@@ -99,7 +99,7 @@ inline function createExternalImageResourceReference(uri:String):Dynamic {
 	#error "flight.Image: no backend for this target."
 #end
 }
-inline function createImageResourceFailure(cause:Unknown):Dynamic {
+extern inline function createImageResourceFailure(cause:Unknown):Dynamic {
 #if hl
 	return flight._hl._fn.Image.createImageResourceFailure(cause);
 #elseif cpp
@@ -110,7 +110,7 @@ inline function createImageResourceFailure(cause:Unknown):Dynamic {
 	#error "flight.Image: no backend for this target."
 #end
 }
-inline function explainImageResourceReferenceResolution(reference:ImageResourceReference):ImageResourceReferenceResolutionExplanation {
+extern inline function explainImageResourceReferenceResolution(reference:ImageResourceReference):ImageResourceReferenceResolutionExplanation {
 #if hl
 	return flight._hl._fn.Image.explainImageResourceReferenceResolution(reference);
 #elseif cpp
@@ -121,7 +121,7 @@ inline function explainImageResourceReferenceResolution(reference:ImageResourceR
 	#error "flight.Image: no backend for this target."
 #end
 }
-inline function resetFailedImageResourceReference(reference:ImageResourceReference):Bool {
+extern inline function resetFailedImageResourceReference(reference:ImageResourceReference):Bool {
 #if hl
 	return flight._hl._fn.Image.resetFailedImageResourceReference(reference);
 #elseif cpp
@@ -132,7 +132,7 @@ inline function resetFailedImageResourceReference(reference:ImageResourceReferen
 	#error "flight.Image: no backend for this target."
 #end
 }
-inline function createImageResolverState():ImageResolverState {
+extern inline function createImageResolverState():ImageResolverState {
 #if hl
 	return flight._hl._fn.Image.createImageResolverState();
 #elseif cpp
@@ -143,7 +143,7 @@ inline function createImageResolverState():ImageResolverState {
 	#error "flight.Image: no backend for this target."
 #end
 }
-inline function createTextureFromImageResource(reference:ImageResourceReference, opts:CreateTexture2DOptions):Dynamic {
+extern inline function createTextureFromImageResource(reference:ImageResourceReference, opts:CreateTexture2DOptions):Dynamic {
 #if hl
 	return flight._hl._fn.Image.createTextureFromImageResource(reference, opts);
 #elseif cpp
@@ -154,7 +154,7 @@ inline function createTextureFromImageResource(reference:ImageResourceReference,
 	#error "flight.Image: no backend for this target."
 #end
 }
-inline function freeImageResourceReferenceResolutionExplanation(ptr:ImageResourceReferenceResolutionExplanation):Void {
+extern inline function freeImageResourceReferenceResolutionExplanation(ptr:ImageResourceReferenceResolutionExplanation):Void {
 #if hl
 	flight._hl._fn.Image.freeImageResourceReferenceResolutionExplanation(ptr);
 #elseif cpp
@@ -165,7 +165,7 @@ inline function freeImageResourceReferenceResolutionExplanation(ptr:ImageResourc
 	#error "flight.Image: no backend for this target."
 #end
 }
-inline function freeImageResolverState(ptr:ImageResolverState):Void {
+extern inline function freeImageResolverState(ptr:ImageResolverState):Void {
 #if hl
 	flight._hl._fn.Image.freeImageResolverState(ptr);
 #elseif cpp

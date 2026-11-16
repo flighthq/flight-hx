@@ -12,10 +12,10 @@ abstract AudioBuffer(cpp.Star<cpp.Void>) {
 
 	inline function get_sampleRate():Single return AudioBuffer_Ffi.get_sampleRate(this);
 
-	inline function set_sampleRate(value:Single):Single return AudioBuffer_Ffi.set_sampleRate(this, value);
+	inline function set_sampleRate(value:Single):Single { AudioBuffer_Ffi.set_sampleRate(this, value); return value; }
 	public var length(get, set):Int;
 
 	inline function get_length():Int return AudioBuffer_Ffi.get_length(this);
 
-	inline function set_length(value:Int):Int return AudioBuffer_Ffi.set_length(this, value);
+	inline function set_length(value:Int):Int { AudioBuffer_Ffi.set_length(this, value); return value; }
 }

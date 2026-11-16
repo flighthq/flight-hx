@@ -14,15 +14,15 @@ abstract UnityVector3(cpp.Star<cpp.Void>) {
 
 	inline function get_x():Single return UnityVector3_Ffi.get_x(this);
 
-	inline function set_x(value:Single):Single return UnityVector3_Ffi.set_x(this, value);
+	inline function set_x(value:Single):Single { UnityVector3_Ffi.set_x(this, value); return value; }
 	public var y(get, set):Single;
 
 	inline function get_y():Single return UnityVector3_Ffi.get_y(this);
 
-	inline function set_y(value:Single):Single return UnityVector3_Ffi.set_y(this, value);
+	inline function set_y(value:Single):Single { UnityVector3_Ffi.set_y(this, value); return value; }
 	public var z(get, set):Single;
 
 	inline function get_z():Single return UnityVector3_Ffi.get_z(this);
 
-	inline function set_z(value:Single):Single return UnityVector3_Ffi.set_z(this, value);
+	inline function set_z(value:Single):Single { UnityVector3_Ffi.set_z(this, value); return value; }
 }

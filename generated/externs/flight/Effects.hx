@@ -1,6 +1,6 @@
 package flight;
 
-inline function createAutoExposureEffect():Dynamic {
+extern inline function createAutoExposureEffect():Dynamic {
 #if hl
 	return flight._hl._fn.Effects.createAutoExposureEffect();
 #elseif cpp
@@ -11,7 +11,7 @@ inline function createAutoExposureEffect():Dynamic {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function createBarrelDistortionEffect():Dynamic {
+extern inline function createBarrelDistortionEffect():Dynamic {
 #if hl
 	return flight._hl._fn.Effects.createBarrelDistortionEffect();
 #elseif cpp
@@ -22,7 +22,7 @@ inline function createBarrelDistortionEffect():Dynamic {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function createBevelEffect():Dynamic {
+extern inline function createBevelEffect():Dynamic {
 #if hl
 	return flight._hl._fn.Effects.createBevelEffect();
 #elseif cpp
@@ -33,7 +33,7 @@ inline function createBevelEffect():Dynamic {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function getBevelEffectPadding(out:EffectPadding, effect:BevelEffect):Void {
+extern inline function getBevelEffectPadding(out:EffectPadding, effect:BevelEffect):Void {
 #if hl
 	flight._hl._fn.Effects.getBevelEffectPadding(out, effect);
 #elseif cpp
@@ -44,7 +44,7 @@ inline function getBevelEffectPadding(out:EffectPadding, effect:BevelEffect):Voi
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function createBitmapDisplacementEffect():Dynamic {
+extern inline function createBitmapDisplacementEffect():Dynamic {
 #if hl
 	return flight._hl._fn.Effects.createBitmapDisplacementEffect();
 #elseif cpp
@@ -55,7 +55,7 @@ inline function createBitmapDisplacementEffect():Dynamic {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function getBitmapDisplacementEffectPadding(out:EffectPadding, effect:BitmapDisplacementEffect):Void {
+extern inline function getBitmapDisplacementEffectPadding(out:EffectPadding, effect:BitmapDisplacementEffect):Void {
 #if hl
 	flight._hl._fn.Effects.getBitmapDisplacementEffectPadding(out, effect);
 #elseif cpp
@@ -66,7 +66,7 @@ inline function getBitmapDisplacementEffectPadding(out:EffectPadding, effect:Bit
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function createBlendEffect():Dynamic {
+extern inline function createBlendEffect():Dynamic {
 #if hl
 	return flight._hl._fn.Effects.createBlendEffect();
 #elseif cpp
@@ -77,7 +77,7 @@ inline function createBlendEffect():Dynamic {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function blendNonSeparableRgb(out:Dynamic, outLen:Int, mode:String, cbR:Float, cbG:Float, cbB:Float, csR:Float, csG:Float, csB:Float):Void {
+extern inline function blendNonSeparableRgb(out:Dynamic, outLen:Int, mode:String, cbR:Float, cbG:Float, cbB:Float, csR:Float, csG:Float, csB:Float):Void {
 #if hl
 	flight._hl._fn.Effects.blendNonSeparableRgb(out, outLen, cast mode, cbR, cbG, cbB, csR, csG, csB);
 #elseif cpp
@@ -88,7 +88,7 @@ inline function blendNonSeparableRgb(out:Dynamic, outLen:Int, mode:String, cbR:F
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function getAdvancedBlendRgb(out:Dynamic, outLen:Int, mode:String, cbR:Float, cbG:Float, cbB:Float, csR:Float, csG:Float, csB:Float):Void {
+extern inline function getAdvancedBlendRgb(out:Dynamic, outLen:Int, mode:String, cbR:Float, cbG:Float, cbB:Float, csR:Float, csG:Float, csB:Float):Void {
 #if hl
 	flight._hl._fn.Effects.getAdvancedBlendRgb(out, outLen, cast mode, cbR, cbG, cbB, csR, csG, csB);
 #elseif cpp
@@ -99,7 +99,7 @@ inline function getAdvancedBlendRgb(out:Dynamic, outLen:Int, mode:String, cbR:Fl
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function getSeparableBlendChannel(mode:String, cb:Float, cs:Float):Float {
+extern inline function getSeparableBlendChannel(mode:String, cb:Float, cs:Float):Float {
 #if hl
 	return flight._hl._fn.Effects.getSeparableBlendChannel(cast mode, cb, cs);
 #elseif cpp
@@ -110,7 +110,7 @@ inline function getSeparableBlendChannel(mode:String, cb:Float, cs:Float):Float 
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function isNonSeparableBlendMode(mode:String):Bool {
+extern inline function isNonSeparableBlendMode(mode:String):Bool {
 #if hl
 	return flight._hl._fn.Effects.isNonSeparableBlendMode(cast mode);
 #elseif cpp
@@ -121,7 +121,7 @@ inline function isNonSeparableBlendMode(mode:String):Bool {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function createBloomEffect():Dynamic {
+extern inline function createBloomEffect():Dynamic {
 #if hl
 	return flight._hl._fn.Effects.createBloomEffect();
 #elseif cpp
@@ -132,7 +132,7 @@ inline function createBloomEffect():Dynamic {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function computeBloomBlurRadius(effect:BloomEffect):Float {
+extern inline function computeBloomBlurRadius(effect:BloomEffect):Float {
 #if hl
 	return flight._hl._fn.Effects.computeBloomBlurRadius(effect);
 #elseif cpp
@@ -143,7 +143,7 @@ inline function computeBloomBlurRadius(effect:BloomEffect):Float {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function computeBloomIntensity(effect:BloomEffect):Float {
+extern inline function computeBloomIntensity(effect:BloomEffect):Float {
 #if hl
 	return flight._hl._fn.Effects.computeBloomIntensity(effect);
 #elseif cpp
@@ -154,7 +154,7 @@ inline function computeBloomIntensity(effect:BloomEffect):Float {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function computeBloomThreshold(effect:BloomEffect):Float {
+extern inline function computeBloomThreshold(effect:BloomEffect):Float {
 #if hl
 	return flight._hl._fn.Effects.computeBloomThreshold(effect);
 #elseif cpp
@@ -165,7 +165,7 @@ inline function computeBloomThreshold(effect:BloomEffect):Float {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function getBloomEffectPadding(out:EffectPadding, effect:BloomEffect):Void {
+extern inline function getBloomEffectPadding(out:EffectPadding, effect:BloomEffect):Void {
 #if hl
 	flight._hl._fn.Effects.getBloomEffectPadding(out, effect);
 #elseif cpp
@@ -176,7 +176,7 @@ inline function getBloomEffectPadding(out:EffectPadding, effect:BloomEffect):Voi
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function getBlurDownsampleLevel(sigma:Float):Int {
+extern inline function getBlurDownsampleLevel(sigma:Float):Int {
 #if hl
 	return flight._hl._fn.Effects.getBlurDownsampleLevel(sigma);
 #elseif cpp
@@ -187,7 +187,7 @@ inline function getBlurDownsampleLevel(sigma:Float):Int {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function getBlurResidualSigma(sigma:Float, level:Int):Float {
+extern inline function getBlurResidualSigma(sigma:Float, level:Int):Float {
 #if hl
 	return flight._hl._fn.Effects.getBlurResidualSigma(sigma, level);
 #elseif cpp
@@ -198,7 +198,7 @@ inline function getBlurResidualSigma(sigma:Float, level:Int):Float {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function createBlurEffect():Dynamic {
+extern inline function createBlurEffect():Dynamic {
 #if hl
 	return flight._hl._fn.Effects.createBlurEffect();
 #elseif cpp
@@ -209,7 +209,7 @@ inline function createBlurEffect():Dynamic {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function getBlurEffectPadding(out:EffectPadding, effect:BlurEffect):Void {
+extern inline function getBlurEffectPadding(out:EffectPadding, effect:BlurEffect):Void {
 #if hl
 	flight._hl._fn.Effects.getBlurEffectPadding(out, effect);
 #elseif cpp
@@ -220,7 +220,7 @@ inline function getBlurEffectPadding(out:EffectPadding, effect:BlurEffect):Void 
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function createBokehDepthOfFieldEffect():Dynamic {
+extern inline function createBokehDepthOfFieldEffect():Dynamic {
 #if hl
 	return flight._hl._fn.Effects.createBokehDepthOfFieldEffect();
 #elseif cpp
@@ -231,7 +231,7 @@ inline function createBokehDepthOfFieldEffect():Dynamic {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function getBokehDepthOfFieldEffectPadding(out:EffectPadding, effect:BokehDepthOfFieldEffect):Void {
+extern inline function getBokehDepthOfFieldEffectPadding(out:EffectPadding, effect:BokehDepthOfFieldEffect):Void {
 #if hl
 	flight._hl._fn.Effects.getBokehDepthOfFieldEffectPadding(out, effect);
 #elseif cpp
@@ -242,7 +242,7 @@ inline function getBokehDepthOfFieldEffectPadding(out:EffectPadding, effect:Boke
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function computeBoxBlurPassRadius(sigma:Float, passes:Float, pass:Float):Float {
+extern inline function computeBoxBlurPassRadius(sigma:Float, passes:Float, pass:Float):Float {
 #if hl
 	return flight._hl._fn.Effects.computeBoxBlurPassRadius(sigma, passes, pass);
 #elseif cpp
@@ -253,7 +253,7 @@ inline function computeBoxBlurPassRadius(sigma:Float, passes:Float, pass:Float):
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function computeBoxBlurRadius(sigma:Float, passes:Float):Float {
+extern inline function computeBoxBlurRadius(sigma:Float, passes:Float):Float {
 #if hl
 	return flight._hl._fn.Effects.computeBoxBlurRadius(sigma, passes);
 #elseif cpp
@@ -264,7 +264,7 @@ inline function computeBoxBlurRadius(sigma:Float, passes:Float):Float {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function computeGaussianSigmaForBlurRadius(radius:Float, passes:Float):Float {
+extern inline function computeGaussianSigmaForBlurRadius(radius:Float, passes:Float):Float {
 #if hl
 	return flight._hl._fn.Effects.computeGaussianSigmaForBlurRadius(radius, passes);
 #elseif cpp
@@ -275,7 +275,7 @@ inline function computeGaussianSigmaForBlurRadius(radius:Float, passes:Float):Fl
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function createCameraMotionBlurEffect():Dynamic {
+extern inline function createCameraMotionBlurEffect():Dynamic {
 #if hl
 	return flight._hl._fn.Effects.createCameraMotionBlurEffect();
 #elseif cpp
@@ -286,7 +286,7 @@ inline function createCameraMotionBlurEffect():Dynamic {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function createChromaticAberrationEffect():Dynamic {
+extern inline function createChromaticAberrationEffect():Dynamic {
 #if hl
 	return flight._hl._fn.Effects.createChromaticAberrationEffect();
 #elseif cpp
@@ -297,7 +297,7 @@ inline function createChromaticAberrationEffect():Dynamic {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function computeColorTemperatureRgb(out:Dynamic, kelvin:Float):Void {
+extern inline function computeColorTemperatureRgb(out:Dynamic, kelvin:Float):Void {
 #if hl
 	flight._hl._fn.Effects.computeColorTemperatureRgb(out, kelvin);
 #elseif cpp
@@ -308,7 +308,7 @@ inline function computeColorTemperatureRgb(out:Dynamic, kelvin:Float):Void {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function computeWhiteBalanceMultipliers(out:Dynamic, temperature:Float, tint:Float):Void {
+extern inline function computeWhiteBalanceMultipliers(out:Dynamic, temperature:Float, tint:Float):Void {
 #if hl
 	flight._hl._fn.Effects.computeWhiteBalanceMultipliers(out, temperature, tint);
 #elseif cpp
@@ -319,7 +319,7 @@ inline function computeWhiteBalanceMultipliers(out:Dynamic, temperature:Float, t
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function createCompositeEffect():Dynamic {
+extern inline function createCompositeEffect():Dynamic {
 #if hl
 	return flight._hl._fn.Effects.createCompositeEffect();
 #elseif cpp
@@ -330,7 +330,7 @@ inline function createCompositeEffect():Dynamic {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function getCompositeOperatorFactors(out:Dynamic, outLen:Int, operator_:String, sourceAlpha:Float, backdropAlpha:Float):Void {
+extern inline function getCompositeOperatorFactors(out:Dynamic, outLen:Int, operator_:String, sourceAlpha:Float, backdropAlpha:Float):Void {
 #if hl
 	flight._hl._fn.Effects.getCompositeOperatorFactors(out, outLen, cast operator_, sourceAlpha, backdropAlpha);
 #elseif cpp
@@ -341,7 +341,7 @@ inline function getCompositeOperatorFactors(out:Dynamic, outLen:Int, operator_:S
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function createContactShadowsEffect():Dynamic {
+extern inline function createContactShadowsEffect():Dynamic {
 #if hl
 	return flight._hl._fn.Effects.createContactShadowsEffect();
 #elseif cpp
@@ -352,7 +352,7 @@ inline function createContactShadowsEffect():Dynamic {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function getContactShadowsEffectPadding(out:EffectPadding, effect:ContactShadowsEffect):Void {
+extern inline function getContactShadowsEffectPadding(out:EffectPadding, effect:ContactShadowsEffect):Void {
 #if hl
 	flight._hl._fn.Effects.getContactShadowsEffectPadding(out, effect);
 #elseif cpp
@@ -363,7 +363,7 @@ inline function getContactShadowsEffectPadding(out:EffectPadding, effect:Contact
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function createConvolutionEffect():Dynamic {
+extern inline function createConvolutionEffect():Dynamic {
 #if hl
 	return flight._hl._fn.Effects.createConvolutionEffect();
 #elseif cpp
@@ -374,7 +374,7 @@ inline function createConvolutionEffect():Dynamic {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function getConvolutionEffectPadding(out:EffectPadding, effect:ConvolutionEffect):Void {
+extern inline function getConvolutionEffectPadding(out:EffectPadding, effect:ConvolutionEffect):Void {
 #if hl
 	flight._hl._fn.Effects.getConvolutionEffectPadding(out, effect);
 #elseif cpp
@@ -385,7 +385,7 @@ inline function getConvolutionEffectPadding(out:EffectPadding, effect:Convolutio
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function createCrtEffect():Dynamic {
+extern inline function createCrtEffect():Dynamic {
 #if hl
 	return flight._hl._fn.Effects.createCrtEffect();
 #elseif cpp
@@ -396,7 +396,7 @@ inline function createCrtEffect():Dynamic {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function createCustomShaderEffect():Dynamic {
+extern inline function createCustomShaderEffect():Dynamic {
 #if hl
 	return flight._hl._fn.Effects.createCustomShaderEffect();
 #elseif cpp
@@ -407,7 +407,7 @@ inline function createCustomShaderEffect():Dynamic {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function computeDepthOfFieldCoc(depth:Float, focusDistance:Float, aperture:Float, focalLength:Float):Float {
+extern inline function computeDepthOfFieldCoc(depth:Float, focusDistance:Float, aperture:Float, focalLength:Float):Float {
 #if hl
 	return flight._hl._fn.Effects.computeDepthOfFieldCoc(depth, focusDistance, aperture, focalLength);
 #elseif cpp
@@ -418,7 +418,7 @@ inline function computeDepthOfFieldCoc(depth:Float, focusDistance:Float, apertur
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function computeLinearDepthFromNonlinear(depth:Float, near:Float, far:Float):Float {
+extern inline function computeLinearDepthFromNonlinear(depth:Float, near:Float, far:Float):Float {
 #if hl
 	return flight._hl._fn.Effects.computeLinearDepthFromNonlinear(depth, near, far);
 #elseif cpp
@@ -429,7 +429,7 @@ inline function computeLinearDepthFromNonlinear(depth:Float, near:Float, far:Flo
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function computeSsaoSampleKernel(out:Dynamic, outLen:Int, samples:Float):Int {
+extern inline function computeSsaoSampleKernel(out:Dynamic, outLen:Int, samples:Float):Int {
 #if hl
 	return flight._hl._fn.Effects.computeSsaoSampleKernel(out, outLen, samples);
 #elseif cpp
@@ -440,7 +440,7 @@ inline function computeSsaoSampleKernel(out:Dynamic, outLen:Int, samples:Float):
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function createDirectionalBlurEffect():Dynamic {
+extern inline function createDirectionalBlurEffect():Dynamic {
 #if hl
 	return flight._hl._fn.Effects.createDirectionalBlurEffect();
 #elseif cpp
@@ -451,7 +451,7 @@ inline function createDirectionalBlurEffect():Dynamic {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function getDirectionalBlurEffectPadding(out:EffectPadding, effect:DirectionalBlurEffect):Void {
+extern inline function getDirectionalBlurEffectPadding(out:EffectPadding, effect:DirectionalBlurEffect):Void {
 #if hl
 	flight._hl._fn.Effects.getDirectionalBlurEffectPadding(out, effect);
 #elseif cpp
@@ -462,7 +462,7 @@ inline function getDirectionalBlurEffectPadding(out:EffectPadding, effect:Direct
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function createDisplacementEffect():Dynamic {
+extern inline function createDisplacementEffect():Dynamic {
 #if hl
 	return flight._hl._fn.Effects.createDisplacementEffect();
 #elseif cpp
@@ -473,7 +473,7 @@ inline function createDisplacementEffect():Dynamic {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function getDisplacementEffectPadding(out:EffectPadding, effect:DisplacementEffect):Void {
+extern inline function getDisplacementEffectPadding(out:EffectPadding, effect:DisplacementEffect):Void {
 #if hl
 	flight._hl._fn.Effects.getDisplacementEffectPadding(out, effect);
 #elseif cpp
@@ -484,7 +484,7 @@ inline function getDisplacementEffectPadding(out:EffectPadding, effect:Displacem
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function createDitherEffect():Dynamic {
+extern inline function createDitherEffect():Dynamic {
 #if hl
 	return flight._hl._fn.Effects.createDitherEffect();
 #elseif cpp
@@ -495,7 +495,7 @@ inline function createDitherEffect():Dynamic {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function createDropShadowEffect():Dynamic {
+extern inline function createDropShadowEffect():Dynamic {
 #if hl
 	return flight._hl._fn.Effects.createDropShadowEffect();
 #elseif cpp
@@ -506,7 +506,7 @@ inline function createDropShadowEffect():Dynamic {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function getDropShadowEffectPadding(out:EffectPadding, effect:DropShadowEffect):Void {
+extern inline function getDropShadowEffectPadding(out:EffectPadding, effect:DropShadowEffect):Void {
 #if hl
 	flight._hl._fn.Effects.getDropShadowEffectPadding(out, effect);
 #elseif cpp
@@ -517,7 +517,7 @@ inline function getDropShadowEffectPadding(out:EffectPadding, effect:DropShadowE
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function computeOutlineEdgeParams(out:Dynamic, effect:OutlineEffect):Void {
+extern inline function computeOutlineEdgeParams(out:Dynamic, effect:OutlineEffect):Void {
 #if hl
 	flight._hl._fn.Effects.computeOutlineEdgeParams(out, effect);
 #elseif cpp
@@ -528,7 +528,7 @@ inline function computeOutlineEdgeParams(out:Dynamic, effect:OutlineEffect):Void
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function computeOutlineThicknessPx(effect:OutlineEffect):Float {
+extern inline function computeOutlineThicknessPx(effect:OutlineEffect):Float {
 #if hl
 	return flight._hl._fn.Effects.computeOutlineThicknessPx(effect);
 #elseif cpp
@@ -539,7 +539,7 @@ inline function computeOutlineThicknessPx(effect:OutlineEffect):Float {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function computeSketchEdgeParams(out:Dynamic, effect:SketchEffect):Void {
+extern inline function computeSketchEdgeParams(out:Dynamic, effect:SketchEffect):Void {
 #if hl
 	flight._hl._fn.Effects.computeSketchEdgeParams(out, effect);
 #elseif cpp
@@ -550,7 +550,7 @@ inline function computeSketchEdgeParams(out:Dynamic, effect:SketchEffect):Void {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function getSobelKernelCoefficients(out:Dynamic, outLen:Int):Void {
+extern inline function getSobelKernelCoefficients(out:Dynamic, outLen:Int):Void {
 #if hl
 	flight._hl._fn.Effects.getSobelKernelCoefficients(out, outLen);
 #elseif cpp
@@ -561,7 +561,7 @@ inline function getSobelKernelCoefficients(out:Dynamic, outLen:Int):Void {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function getEffectDefaults(out:EffectDefaults, kind:String):Void {
+extern inline function getEffectDefaults(out:EffectDefaults, kind:String):Void {
 #if hl
 	flight._hl._fn.Effects.getEffectDefaults(out, cast kind);
 #elseif cpp
@@ -572,7 +572,7 @@ inline function getEffectDefaults(out:EffectDefaults, kind:String):Void {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function normalizeEffect(effect:EffectRef, out:EffectRef):Bool {
+extern inline function normalizeEffect(effect:EffectRef, out:EffectRef):Bool {
 #if hl
 	return flight._hl._fn.Effects.normalizeEffect(effect, out);
 #elseif cpp
@@ -583,7 +583,7 @@ inline function normalizeEffect(effect:EffectRef, out:EffectRef):Bool {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function canLerpEffects(a:EffectRef, b:EffectRef):Bool {
+extern inline function canLerpEffects(a:EffectRef, b:EffectRef):Bool {
 #if hl
 	return flight._hl._fn.Effects.canLerpEffects(a, b);
 #elseif cpp
@@ -594,7 +594,7 @@ inline function canLerpEffects(a:EffectRef, b:EffectRef):Bool {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function getDirectionalEffectPadding(out:EffectPadding, blurX:Float, blurY:Float, offsetX:Float, offsetY:Float):Void {
+extern inline function getDirectionalEffectPadding(out:EffectPadding, blurX:Float, blurY:Float, offsetX:Float, offsetY:Float):Void {
 #if hl
 	flight._hl._fn.Effects.getDirectionalEffectPadding(out, blurX, blurY, offsetX, offsetY);
 #elseif cpp
@@ -605,7 +605,7 @@ inline function getDirectionalEffectPadding(out:EffectPadding, blurX:Float, blur
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function getGaussianEffectPadding(out:EffectPadding, blurX:Float, blurY:Float):Void {
+extern inline function getGaussianEffectPadding(out:EffectPadding, blurX:Float, blurY:Float):Void {
 #if hl
 	flight._hl._fn.Effects.getGaussianEffectPadding(out, blurX, blurY);
 #elseif cpp
@@ -616,7 +616,7 @@ inline function getGaussianEffectPadding(out:EffectPadding, blurX:Float, blurY:F
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function validateEffectList(effects:Dynamic, effectsLen:Int, available:Dynamic, availableLen:Int):Int {
+extern inline function validateEffectList(effects:Dynamic, effectsLen:Int, available:Dynamic, availableLen:Int):Int {
 #if hl
 	return flight._hl._fn.Effects.validateEffectList(effects, effectsLen, available, availableLen);
 #elseif cpp
@@ -627,7 +627,7 @@ inline function validateEffectList(effects:Dynamic, effectsLen:Int, available:Dy
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function createFilmEmulationEffect():Dynamic {
+extern inline function createFilmEmulationEffect():Dynamic {
 #if hl
 	return flight._hl._fn.Effects.createFilmEmulationEffect();
 #elseif cpp
@@ -638,7 +638,7 @@ inline function createFilmEmulationEffect():Dynamic {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function createFilmGrainEffect():Dynamic {
+extern inline function createFilmGrainEffect():Dynamic {
 #if hl
 	return flight._hl._fn.Effects.createFilmGrainEffect();
 #elseif cpp
@@ -649,7 +649,7 @@ inline function createFilmGrainEffect():Dynamic {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function createFxaaEffect():Dynamic {
+extern inline function createFxaaEffect():Dynamic {
 #if hl
 	return flight._hl._fn.Effects.createFxaaEffect();
 #elseif cpp
@@ -660,7 +660,7 @@ inline function createFxaaEffect():Dynamic {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function computeGaussianKernelWeights(out:Dynamic, sigma:Float):Void {
+extern inline function computeGaussianKernelWeights(out:Dynamic, sigma:Float):Void {
 #if hl
 	flight._hl._fn.Effects.computeGaussianKernelWeights(out, sigma);
 #elseif cpp
@@ -671,7 +671,7 @@ inline function computeGaussianKernelWeights(out:Dynamic, sigma:Float):Void {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function getGaussianKernelSize(sigma:Float):Int {
+extern inline function getGaussianKernelSize(sigma:Float):Int {
 #if hl
 	return flight._hl._fn.Effects.getGaussianKernelSize(sigma);
 #elseif cpp
@@ -682,7 +682,7 @@ inline function getGaussianKernelSize(sigma:Float):Int {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function createGaussianKernelWeights(out:Dynamic, outLen:Int, radius:Float, sigma:Float):Int {
+extern inline function createGaussianKernelWeights(out:Dynamic, outLen:Int, radius:Float, sigma:Float):Int {
 #if hl
 	return flight._hl._fn.Effects.createGaussianKernelWeights(out, outLen, radius, sigma);
 #elseif cpp
@@ -693,7 +693,7 @@ inline function createGaussianKernelWeights(out:Dynamic, outLen:Int, radius:Floa
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function computeGaussianRadiusFromSigma(sigma:Float):Float {
+extern inline function computeGaussianRadiusFromSigma(sigma:Float):Float {
 #if hl
 	return flight._hl._fn.Effects.computeGaussianRadiusFromSigma(sigma);
 #elseif cpp
@@ -704,7 +704,7 @@ inline function computeGaussianRadiusFromSigma(sigma:Float):Float {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function computeGaussianSigmaFromRadius(radius:Float):Float {
+extern inline function computeGaussianSigmaFromRadius(radius:Float):Float {
 #if hl
 	return flight._hl._fn.Effects.computeGaussianSigmaFromRadius(radius);
 #elseif cpp
@@ -715,7 +715,7 @@ inline function computeGaussianSigmaFromRadius(radius:Float):Float {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function computeSeparableBlurPassCount(samples:Float):Float {
+extern inline function computeSeparableBlurPassCount(samples:Float):Float {
 #if hl
 	return flight._hl._fn.Effects.computeSeparableBlurPassCount(samples);
 #elseif cpp
@@ -726,7 +726,7 @@ inline function computeSeparableBlurPassCount(samples:Float):Float {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function createGlitchEffect():Dynamic {
+extern inline function createGlitchEffect():Dynamic {
 #if hl
 	return flight._hl._fn.Effects.createGlitchEffect();
 #elseif cpp
@@ -737,7 +737,7 @@ inline function createGlitchEffect():Dynamic {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function getGlitchEffectPadding(out:EffectPadding, effect:GlitchEffect):Void {
+extern inline function getGlitchEffectPadding(out:EffectPadding, effect:GlitchEffect):Void {
 #if hl
 	flight._hl._fn.Effects.getGlitchEffectPadding(out, effect);
 #elseif cpp
@@ -748,7 +748,7 @@ inline function getGlitchEffectPadding(out:EffectPadding, effect:GlitchEffect):V
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function createGodRaysEffect():Dynamic {
+extern inline function createGodRaysEffect():Dynamic {
 #if hl
 	return flight._hl._fn.Effects.createGodRaysEffect();
 #elseif cpp
@@ -759,7 +759,7 @@ inline function createGodRaysEffect():Dynamic {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function computeGodRaysAccumulationScale(effect:GodRaysEffect):Float {
+extern inline function computeGodRaysAccumulationScale(effect:GodRaysEffect):Float {
 #if hl
 	return flight._hl._fn.Effects.computeGodRaysAccumulationScale(effect);
 #elseif cpp
@@ -770,7 +770,7 @@ inline function computeGodRaysAccumulationScale(effect:GodRaysEffect):Float {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function computeGodRaysLightCenter(out:Dynamic, effect:GodRaysEffect):Void {
+extern inline function computeGodRaysLightCenter(out:Dynamic, effect:GodRaysEffect):Void {
 #if hl
 	flight._hl._fn.Effects.computeGodRaysLightCenter(out, effect);
 #elseif cpp
@@ -781,7 +781,7 @@ inline function computeGodRaysLightCenter(out:Dynamic, effect:GodRaysEffect):Voi
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function computeGodRaysSampleWeight(effect:GodRaysEffect, sampleIndex:Float):Float {
+extern inline function computeGodRaysSampleWeight(effect:GodRaysEffect, sampleIndex:Float):Float {
 #if hl
 	return flight._hl._fn.Effects.computeGodRaysSampleWeight(effect, sampleIndex);
 #elseif cpp
@@ -792,7 +792,7 @@ inline function computeGodRaysSampleWeight(effect:GodRaysEffect, sampleIndex:Flo
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function computeGodRaysStepSize(out:Dynamic, effect:GodRaysEffect, px:Float, py:Float):Void {
+extern inline function computeGodRaysStepSize(out:Dynamic, effect:GodRaysEffect, px:Float, py:Float):Void {
 #if hl
 	flight._hl._fn.Effects.computeGodRaysStepSize(out, effect, px, py);
 #elseif cpp
@@ -803,7 +803,7 @@ inline function computeGodRaysStepSize(out:Dynamic, effect:GodRaysEffect, px:Flo
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function createGradientBevelEffect():Dynamic {
+extern inline function createGradientBevelEffect():Dynamic {
 #if hl
 	return flight._hl._fn.Effects.createGradientBevelEffect();
 #elseif cpp
@@ -814,7 +814,7 @@ inline function createGradientBevelEffect():Dynamic {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function getGradientBevelEffectPadding(out:EffectPadding, effect:GradientBevelEffect):Void {
+extern inline function getGradientBevelEffectPadding(out:EffectPadding, effect:GradientBevelEffect):Void {
 #if hl
 	flight._hl._fn.Effects.getGradientBevelEffectPadding(out, effect);
 #elseif cpp
@@ -825,7 +825,7 @@ inline function getGradientBevelEffectPadding(out:EffectPadding, effect:Gradient
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function createGradientGlowEffect():Dynamic {
+extern inline function createGradientGlowEffect():Dynamic {
 #if hl
 	return flight._hl._fn.Effects.createGradientGlowEffect();
 #elseif cpp
@@ -836,7 +836,7 @@ inline function createGradientGlowEffect():Dynamic {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function getGradientGlowEffectPadding(out:EffectPadding, effect:GradientGlowEffect):Void {
+extern inline function getGradientGlowEffectPadding(out:EffectPadding, effect:GradientGlowEffect):Void {
 #if hl
 	flight._hl._fn.Effects.getGradientGlowEffectPadding(out, effect);
 #elseif cpp
@@ -847,7 +847,7 @@ inline function getGradientGlowEffectPadding(out:EffectPadding, effect:GradientG
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function createHalftoneEffect():Dynamic {
+extern inline function createHalftoneEffect():Dynamic {
 #if hl
 	return flight._hl._fn.Effects.createHalftoneEffect();
 #elseif cpp
@@ -858,7 +858,7 @@ inline function createHalftoneEffect():Dynamic {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function createInnerGlowEffect():Dynamic {
+extern inline function createInnerGlowEffect():Dynamic {
 #if hl
 	return flight._hl._fn.Effects.createInnerGlowEffect();
 #elseif cpp
@@ -869,7 +869,7 @@ inline function createInnerGlowEffect():Dynamic {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function getInnerGlowEffectPadding(out:EffectPadding, effect:InnerGlowEffect):Void {
+extern inline function getInnerGlowEffectPadding(out:EffectPadding, effect:InnerGlowEffect):Void {
 #if hl
 	flight._hl._fn.Effects.getInnerGlowEffectPadding(out, effect);
 #elseif cpp
@@ -880,7 +880,7 @@ inline function getInnerGlowEffectPadding(out:EffectPadding, effect:InnerGlowEff
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function createInnerShadowEffect():Dynamic {
+extern inline function createInnerShadowEffect():Dynamic {
 #if hl
 	return flight._hl._fn.Effects.createInnerShadowEffect();
 #elseif cpp
@@ -891,7 +891,7 @@ inline function createInnerShadowEffect():Dynamic {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function getInnerShadowEffectPadding(out:EffectPadding, effect:InnerShadowEffect):Void {
+extern inline function getInnerShadowEffectPadding(out:EffectPadding, effect:InnerShadowEffect):Void {
 #if hl
 	flight._hl._fn.Effects.getInnerShadowEffectPadding(out, effect);
 #elseif cpp
@@ -902,7 +902,7 @@ inline function getInnerShadowEffectPadding(out:EffectPadding, effect:InnerShado
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function createKuwaharaEffect():Dynamic {
+extern inline function createKuwaharaEffect():Dynamic {
 #if hl
 	return flight._hl._fn.Effects.createKuwaharaEffect();
 #elseif cpp
@@ -913,7 +913,7 @@ inline function createKuwaharaEffect():Dynamic {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function computeKuwaharaGaussianWeights(out:Dynamic, outLen:Int, radius:Float):Int {
+extern inline function computeKuwaharaGaussianWeights(out:Dynamic, outLen:Int, radius:Float):Int {
 #if hl
 	return flight._hl._fn.Effects.computeKuwaharaGaussianWeights(out, outLen, radius);
 #elseif cpp
@@ -924,7 +924,7 @@ inline function computeKuwaharaGaussianWeights(out:Dynamic, outLen:Int, radius:F
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function computeKuwaharaSectorOffsets(out:Dynamic, radius:Float):Void {
+extern inline function computeKuwaharaSectorOffsets(out:Dynamic, radius:Float):Void {
 #if hl
 	flight._hl._fn.Effects.computeKuwaharaSectorOffsets(out, radius);
 #elseif cpp
@@ -935,7 +935,7 @@ inline function computeKuwaharaSectorOffsets(out:Dynamic, radius:Float):Void {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function computeKuwaharaSectorPixelCount(effect:KuwaharaEffect):Int {
+extern inline function computeKuwaharaSectorPixelCount(effect:KuwaharaEffect):Int {
 #if hl
 	return flight._hl._fn.Effects.computeKuwaharaSectorPixelCount(effect);
 #elseif cpp
@@ -946,7 +946,7 @@ inline function computeKuwaharaSectorPixelCount(effect:KuwaharaEffect):Int {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function computeKuwaharaSectorSize(effect:KuwaharaEffect):Int {
+extern inline function computeKuwaharaSectorSize(effect:KuwaharaEffect):Int {
 #if hl
 	return flight._hl._fn.Effects.computeKuwaharaSectorSize(effect);
 #elseif cpp
@@ -957,7 +957,7 @@ inline function computeKuwaharaSectorSize(effect:KuwaharaEffect):Int {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function createLensDirtEffect():Dynamic {
+extern inline function createLensDirtEffect():Dynamic {
 #if hl
 	return flight._hl._fn.Effects.createLensDirtEffect();
 #elseif cpp
@@ -968,7 +968,7 @@ inline function createLensDirtEffect():Dynamic {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function createLensDistortionEffect():Dynamic {
+extern inline function createLensDistortionEffect():Dynamic {
 #if hl
 	return flight._hl._fn.Effects.createLensDistortionEffect();
 #elseif cpp
@@ -979,7 +979,7 @@ inline function createLensDistortionEffect():Dynamic {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function createLensFlareEffect():Dynamic {
+extern inline function createLensFlareEffect():Dynamic {
 #if hl
 	return flight._hl._fn.Effects.createLensFlareEffect();
 #elseif cpp
@@ -990,7 +990,7 @@ inline function createLensFlareEffect():Dynamic {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function computeLinearSampledGaussian(outWeights:Dynamic, outOffsets:Dynamic, sigma:Float):Void {
+extern inline function computeLinearSampledGaussian(outWeights:Dynamic, outOffsets:Dynamic, sigma:Float):Void {
 #if hl
 	flight._hl._fn.Effects.computeLinearSampledGaussian(outWeights, outOffsets, sigma);
 #elseif cpp
@@ -1001,7 +1001,7 @@ inline function computeLinearSampledGaussian(outWeights:Dynamic, outOffsets:Dyna
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function getLinearSampledGaussianTapCount(sigma:Float):Int {
+extern inline function getLinearSampledGaussianTapCount(sigma:Float):Int {
 #if hl
 	return flight._hl._fn.Effects.getLinearSampledGaussianTapCount(sigma);
 #elseif cpp
@@ -1012,7 +1012,7 @@ inline function getLinearSampledGaussianTapCount(sigma:Float):Int {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function createMedianEffect():Dynamic {
+extern inline function createMedianEffect():Dynamic {
 #if hl
 	return flight._hl._fn.Effects.createMedianEffect();
 #elseif cpp
@@ -1023,7 +1023,7 @@ inline function createMedianEffect():Dynamic {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function getMedianEffectPadding(out:EffectPadding, effect:MedianEffect):Void {
+extern inline function getMedianEffectPadding(out:EffectPadding, effect:MedianEffect):Void {
 #if hl
 	flight._hl._fn.Effects.getMedianEffectPadding(out, effect);
 #elseif cpp
@@ -1034,7 +1034,7 @@ inline function getMedianEffectPadding(out:EffectPadding, effect:MedianEffect):V
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function createMotionBlurEffect():Dynamic {
+extern inline function createMotionBlurEffect():Dynamic {
 #if hl
 	return flight._hl._fn.Effects.createMotionBlurEffect();
 #elseif cpp
@@ -1045,7 +1045,7 @@ inline function createMotionBlurEffect():Dynamic {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function createOuterGlowEffect():Dynamic {
+extern inline function createOuterGlowEffect():Dynamic {
 #if hl
 	return flight._hl._fn.Effects.createOuterGlowEffect();
 #elseif cpp
@@ -1056,7 +1056,7 @@ inline function createOuterGlowEffect():Dynamic {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function getOuterGlowEffectPadding(out:EffectPadding, effect:OuterGlowEffect):Void {
+extern inline function getOuterGlowEffectPadding(out:EffectPadding, effect:OuterGlowEffect):Void {
 #if hl
 	flight._hl._fn.Effects.getOuterGlowEffectPadding(out, effect);
 #elseif cpp
@@ -1067,7 +1067,7 @@ inline function getOuterGlowEffectPadding(out:EffectPadding, effect:OuterGlowEff
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function createOutlineEffect():Dynamic {
+extern inline function createOutlineEffect():Dynamic {
 #if hl
 	return flight._hl._fn.Effects.createOutlineEffect();
 #elseif cpp
@@ -1078,7 +1078,7 @@ inline function createOutlineEffect():Dynamic {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function getOutlineEffectPadding(out:EffectPadding, effect:OutlineEffect):Void {
+extern inline function getOutlineEffectPadding(out:EffectPadding, effect:OutlineEffect):Void {
 #if hl
 	flight._hl._fn.Effects.getOutlineEffectPadding(out, effect);
 #elseif cpp
@@ -1089,7 +1089,7 @@ inline function getOutlineEffectPadding(out:EffectPadding, effect:OutlineEffect)
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function createPanniniProjectionEffect():Dynamic {
+extern inline function createPanniniProjectionEffect():Dynamic {
 #if hl
 	return flight._hl._fn.Effects.createPanniniProjectionEffect();
 #elseif cpp
@@ -1100,7 +1100,7 @@ inline function createPanniniProjectionEffect():Dynamic {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function createPixelateEffect():Dynamic {
+extern inline function createPixelateEffect():Dynamic {
 #if hl
 	return flight._hl._fn.Effects.createPixelateEffect();
 #elseif cpp
@@ -1111,7 +1111,7 @@ inline function createPixelateEffect():Dynamic {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function createPosterizeEffect():Dynamic {
+extern inline function createPosterizeEffect():Dynamic {
 #if hl
 	return flight._hl._fn.Effects.createPosterizeEffect();
 #elseif cpp
@@ -1122,7 +1122,7 @@ inline function createPosterizeEffect():Dynamic {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function createRadialBlurEffect():Dynamic {
+extern inline function createRadialBlurEffect():Dynamic {
 #if hl
 	return flight._hl._fn.Effects.createRadialBlurEffect();
 #elseif cpp
@@ -1133,7 +1133,7 @@ inline function createRadialBlurEffect():Dynamic {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function createScanlinesEffect():Dynamic {
+extern inline function createScanlinesEffect():Dynamic {
 #if hl
 	return flight._hl._fn.Effects.createScanlinesEffect();
 #elseif cpp
@@ -1144,7 +1144,7 @@ inline function createScanlinesEffect():Dynamic {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function createScreenSpaceFogEffect():Dynamic {
+extern inline function createScreenSpaceFogEffect():Dynamic {
 #if hl
 	return flight._hl._fn.Effects.createScreenSpaceFogEffect();
 #elseif cpp
@@ -1155,7 +1155,7 @@ inline function createScreenSpaceFogEffect():Dynamic {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function createSharpenEffect():Dynamic {
+extern inline function createSharpenEffect():Dynamic {
 #if hl
 	return flight._hl._fn.Effects.createSharpenEffect();
 #elseif cpp
@@ -1166,7 +1166,7 @@ inline function createSharpenEffect():Dynamic {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function createSketchEffect():Dynamic {
+extern inline function createSketchEffect():Dynamic {
 #if hl
 	return flight._hl._fn.Effects.createSketchEffect();
 #elseif cpp
@@ -1177,7 +1177,7 @@ inline function createSketchEffect():Dynamic {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function createSmaaEffect():Dynamic {
+extern inline function createSmaaEffect():Dynamic {
 #if hl
 	return flight._hl._fn.Effects.createSmaaEffect();
 #elseif cpp
@@ -1188,7 +1188,7 @@ inline function createSmaaEffect():Dynamic {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function createSsaoEffect():Dynamic {
+extern inline function createSsaoEffect():Dynamic {
 #if hl
 	return flight._hl._fn.Effects.createSsaoEffect();
 #elseif cpp
@@ -1199,7 +1199,7 @@ inline function createSsaoEffect():Dynamic {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function createSsrEffect():Dynamic {
+extern inline function createSsrEffect():Dynamic {
 #if hl
 	return flight._hl._fn.Effects.createSsrEffect();
 #elseif cpp
@@ -1210,7 +1210,7 @@ inline function createSsrEffect():Dynamic {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function createBayerMatrix(out:Dynamic, outLen:Int, order:Float):Int {
+extern inline function createBayerMatrix(out:Dynamic, outLen:Int, order:Float):Int {
 #if hl
 	return flight._hl._fn.Effects.createBayerMatrix(out, outLen, order);
 #elseif cpp
@@ -1221,7 +1221,7 @@ inline function createBayerMatrix(out:Dynamic, outLen:Int, order:Float):Int {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function computeCrtMaskParams(out:Dynamic, resolution:Float, curvature:Float):Void {
+extern inline function computeCrtMaskParams(out:Dynamic, resolution:Float, curvature:Float):Void {
 #if hl
 	flight._hl._fn.Effects.computeCrtMaskParams(out, resolution, curvature);
 #elseif cpp
@@ -1232,7 +1232,7 @@ inline function computeCrtMaskParams(out:Dynamic, resolution:Float, curvature:Fl
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function computeHalftoneCellParams(out:Dynamic, frequency:Float, angle:Float):Void {
+extern inline function computeHalftoneCellParams(out:Dynamic, frequency:Float, angle:Float):Void {
 #if hl
 	flight._hl._fn.Effects.computeHalftoneCellParams(out, frequency, angle);
 #elseif cpp
@@ -1243,7 +1243,7 @@ inline function computeHalftoneCellParams(out:Dynamic, frequency:Float, angle:Fl
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function computeScanlineParams(out:Dynamic, resolution:Float, intensity:Float):Void {
+extern inline function computeScanlineParams(out:Dynamic, resolution:Float, intensity:Float):Void {
 #if hl
 	flight._hl._fn.Effects.computeScanlineParams(out, resolution, intensity);
 #elseif cpp
@@ -1254,7 +1254,7 @@ inline function computeScanlineParams(out:Dynamic, resolution:Float, intensity:F
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function createTaaEffect():Dynamic {
+extern inline function createTaaEffect():Dynamic {
 #if hl
 	return flight._hl._fn.Effects.createTaaEffect();
 #elseif cpp
@@ -1265,7 +1265,7 @@ inline function createTaaEffect():Dynamic {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function createTiltShiftEffect():Dynamic {
+extern inline function createTiltShiftEffect():Dynamic {
 #if hl
 	return flight._hl._fn.Effects.createTiltShiftEffect();
 #elseif cpp
@@ -1276,7 +1276,7 @@ inline function createTiltShiftEffect():Dynamic {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function getTiltShiftEffectPadding(out:EffectPadding, effect:TiltShiftEffect):Void {
+extern inline function getTiltShiftEffectPadding(out:EffectPadding, effect:TiltShiftEffect):Void {
 #if hl
 	flight._hl._fn.Effects.getTiltShiftEffectPadding(out, effect);
 #elseif cpp
@@ -1287,7 +1287,7 @@ inline function getTiltShiftEffectPadding(out:EffectPadding, effect:TiltShiftEff
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function createToneMapEffect():Dynamic {
+extern inline function createToneMapEffect():Dynamic {
 #if hl
 	return flight._hl._fn.Effects.createToneMapEffect();
 #elseif cpp
@@ -1298,7 +1298,7 @@ inline function createToneMapEffect():Dynamic {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function computeAcesToneMap(x:Float):Float {
+extern inline function computeAcesToneMap(x:Float):Float {
 #if hl
 	return flight._hl._fn.Effects.computeAcesToneMap(x);
 #elseif cpp
@@ -1309,7 +1309,7 @@ inline function computeAcesToneMap(x:Float):Float {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function computeAgxToneMap(x:Float, options:AgxToneMapOptions):Float {
+extern inline function computeAgxToneMap(x:Float, options:AgxToneMapOptions):Float {
 #if hl
 	return flight._hl._fn.Effects.computeAgxToneMap(x, options);
 #elseif cpp
@@ -1320,7 +1320,7 @@ inline function computeAgxToneMap(x:Float, options:AgxToneMapOptions):Float {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function computeExposureScale(exposure:Float):Float {
+extern inline function computeExposureScale(exposure:Float):Float {
 #if hl
 	return flight._hl._fn.Effects.computeExposureScale(exposure);
 #elseif cpp
@@ -1331,7 +1331,7 @@ inline function computeExposureScale(exposure:Float):Float {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function computeFilmicToneMap(x:Float, options:FilmicToneMapOptions):Float {
+extern inline function computeFilmicToneMap(x:Float, options:FilmicToneMapOptions):Float {
 #if hl
 	return flight._hl._fn.Effects.computeFilmicToneMap(x, options);
 #elseif cpp
@@ -1342,7 +1342,7 @@ inline function computeFilmicToneMap(x:Float, options:FilmicToneMapOptions):Floa
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function computeReinhardExtendedToneMap(x:Float, white:Float):Float {
+extern inline function computeReinhardExtendedToneMap(x:Float, white:Float):Float {
 #if hl
 	return flight._hl._fn.Effects.computeReinhardExtendedToneMap(x, white);
 #elseif cpp
@@ -1353,7 +1353,7 @@ inline function computeReinhardExtendedToneMap(x:Float, white:Float):Float {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function computeReinhardToneMap(x:Float):Float {
+extern inline function computeReinhardToneMap(x:Float):Float {
 #if hl
 	return flight._hl._fn.Effects.computeReinhardToneMap(x);
 #elseif cpp
@@ -1364,7 +1364,7 @@ inline function computeReinhardToneMap(x:Float):Float {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function computeUncharted2ToneMap(x:Float):Float {
+extern inline function computeUncharted2ToneMap(x:Float):Float {
 #if hl
 	return flight._hl._fn.Effects.computeUncharted2ToneMap(x);
 #elseif cpp
@@ -1375,7 +1375,7 @@ inline function computeUncharted2ToneMap(x:Float):Float {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function getAcesInputMatrix(out:Dynamic, outLen:Int):Void {
+extern inline function getAcesInputMatrix(out:Dynamic, outLen:Int):Void {
 #if hl
 	flight._hl._fn.Effects.getAcesInputMatrix(out, outLen);
 #elseif cpp
@@ -1386,7 +1386,7 @@ inline function getAcesInputMatrix(out:Dynamic, outLen:Int):Void {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function getAcesOutputMatrix(out:Dynamic, outLen:Int):Void {
+extern inline function getAcesOutputMatrix(out:Dynamic, outLen:Int):Void {
 #if hl
 	flight._hl._fn.Effects.getAcesOutputMatrix(out, outLen);
 #elseif cpp
@@ -1397,7 +1397,7 @@ inline function getAcesOutputMatrix(out:Dynamic, outLen:Int):Void {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function createVignetteEffect():Dynamic {
+extern inline function createVignetteEffect():Dynamic {
 #if hl
 	return flight._hl._fn.Effects.createVignetteEffect();
 #elseif cpp
@@ -1408,7 +1408,7 @@ inline function createVignetteEffect():Dynamic {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function createVolumetricLightEffect():Dynamic {
+extern inline function createVolumetricLightEffect():Dynamic {
 #if hl
 	return flight._hl._fn.Effects.createVolumetricLightEffect();
 #elseif cpp
@@ -1419,7 +1419,7 @@ inline function createVolumetricLightEffect():Dynamic {
 	#error "flight.Effects: no backend for this target."
 #end
 }
-inline function createWhiteBalanceEffect():Dynamic {
+extern inline function createWhiteBalanceEffect():Dynamic {
 #if hl
 	return flight._hl._fn.Effects.createWhiteBalanceEffect();
 #elseif cpp

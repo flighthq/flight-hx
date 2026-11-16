@@ -1,6 +1,6 @@
 package flight;
 
-inline function disableTextSegmentGuards():Void {
+extern inline function disableTextSegmentGuards():Void {
 #if hl
 	flight._hl._fn.Textsegment.disableTextSegmentGuards();
 #elseif cpp
@@ -11,7 +11,7 @@ inline function disableTextSegmentGuards():Void {
 	#error "flight.Textsegment: no backend for this target."
 #end
 }
-inline function enableTextSegmentGuards(logState:Dynamic, clockFn:Dynamic, clockCtx:Dynamic):Void {
+extern inline function enableTextSegmentGuards(logState:Dynamic, clockFn:Dynamic, clockCtx:Dynamic):Void {
 #if hl
 	flight._hl._fn.Textsegment.enableTextSegmentGuards(logState, clockFn, clockCtx);
 #elseif cpp
@@ -22,7 +22,7 @@ inline function enableTextSegmentGuards(logState:Dynamic, clockFn:Dynamic, clock
 	#error "flight.Textsegment: no backend for this target."
 #end
 }
-inline function segmentGraphemes(out:Dynamic, hostTextSegmenter:HostTextSegmenterCapability, text:String, locale:String):Void {
+extern inline function segmentGraphemes(out:Dynamic, hostTextSegmenter:HostTextSegmenterCapability, text:String, locale:String):Void {
 #if hl
 	flight._hl._fn.Textsegment.segmentGraphemes(out, hostTextSegmenter, cast text, cast locale);
 #elseif cpp
@@ -33,7 +33,7 @@ inline function segmentGraphemes(out:Dynamic, hostTextSegmenter:HostTextSegmente
 	#error "flight.Textsegment: no backend for this target."
 #end
 }
-inline function segmentSentences(out:Dynamic, hostTextSegmenter:HostTextSegmenterCapability, text:String, locale:String):Void {
+extern inline function segmentSentences(out:Dynamic, hostTextSegmenter:HostTextSegmenterCapability, text:String, locale:String):Void {
 #if hl
 	flight._hl._fn.Textsegment.segmentSentences(out, hostTextSegmenter, cast text, cast locale);
 #elseif cpp
@@ -44,7 +44,7 @@ inline function segmentSentences(out:Dynamic, hostTextSegmenter:HostTextSegmente
 	#error "flight.Textsegment: no backend for this target."
 #end
 }
-inline function segmentWords(out:Dynamic, hostTextSegmenter:HostTextSegmenterCapability, text:String, locale:String):Void {
+extern inline function segmentWords(out:Dynamic, hostTextSegmenter:HostTextSegmenterCapability, text:String, locale:String):Void {
 #if hl
 	flight._hl._fn.Textsegment.segmentWords(out, hostTextSegmenter, cast text, cast locale);
 #elseif cpp
@@ -55,7 +55,7 @@ inline function segmentWords(out:Dynamic, hostTextSegmenter:HostTextSegmenterCap
 	#error "flight.Textsegment: no backend for this target."
 #end
 }
-inline function getNextGraphemeBoundary(textSegmenter:HostTextSegmenterCapability, text:String, index:Int, locale:String):Int {
+extern inline function getNextGraphemeBoundary(textSegmenter:HostTextSegmenterCapability, text:String, index:Int, locale:String):Int {
 #if hl
 	return flight._hl._fn.Textsegment.getNextGraphemeBoundary(textSegmenter, cast text, index, cast locale);
 #elseif cpp
@@ -66,7 +66,7 @@ inline function getNextGraphemeBoundary(textSegmenter:HostTextSegmenterCapabilit
 	#error "flight.Textsegment: no backend for this target."
 #end
 }
-inline function getNextSentenceBoundary(textSegmenter:HostTextSegmenterCapability, text:String, index:Int, locale:String):Int {
+extern inline function getNextSentenceBoundary(textSegmenter:HostTextSegmenterCapability, text:String, index:Int, locale:String):Int {
 #if hl
 	return flight._hl._fn.Textsegment.getNextSentenceBoundary(textSegmenter, cast text, index, cast locale);
 #elseif cpp
@@ -77,7 +77,7 @@ inline function getNextSentenceBoundary(textSegmenter:HostTextSegmenterCapabilit
 	#error "flight.Textsegment: no backend for this target."
 #end
 }
-inline function getNextWordBoundary(textSegmenter:HostTextSegmenterCapability, text:String, index:Int, locale:String):Int {
+extern inline function getNextWordBoundary(textSegmenter:HostTextSegmenterCapability, text:String, index:Int, locale:String):Int {
 #if hl
 	return flight._hl._fn.Textsegment.getNextWordBoundary(textSegmenter, cast text, index, cast locale);
 #elseif cpp
@@ -88,7 +88,7 @@ inline function getNextWordBoundary(textSegmenter:HostTextSegmenterCapability, t
 	#error "flight.Textsegment: no backend for this target."
 #end
 }
-inline function getPreviousGraphemeBoundary(textSegmenter:HostTextSegmenterCapability, text:String, index:Int, locale:String):Int {
+extern inline function getPreviousGraphemeBoundary(textSegmenter:HostTextSegmenterCapability, text:String, index:Int, locale:String):Int {
 #if hl
 	return flight._hl._fn.Textsegment.getPreviousGraphemeBoundary(textSegmenter, cast text, index, cast locale);
 #elseif cpp
@@ -99,7 +99,7 @@ inline function getPreviousGraphemeBoundary(textSegmenter:HostTextSegmenterCapab
 	#error "flight.Textsegment: no backend for this target."
 #end
 }
-inline function getPreviousSentenceBoundary(textSegmenter:HostTextSegmenterCapability, text:String, index:Int, locale:String):Int {
+extern inline function getPreviousSentenceBoundary(textSegmenter:HostTextSegmenterCapability, text:String, index:Int, locale:String):Int {
 #if hl
 	return flight._hl._fn.Textsegment.getPreviousSentenceBoundary(textSegmenter, cast text, index, cast locale);
 #elseif cpp
@@ -110,7 +110,7 @@ inline function getPreviousSentenceBoundary(textSegmenter:HostTextSegmenterCapab
 	#error "flight.Textsegment: no backend for this target."
 #end
 }
-inline function getPreviousWordBoundary(textSegmenter:HostTextSegmenterCapability, text:String, index:Int, locale:String):Int {
+extern inline function getPreviousWordBoundary(textSegmenter:HostTextSegmenterCapability, text:String, index:Int, locale:String):Int {
 #if hl
 	return flight._hl._fn.Textsegment.getPreviousWordBoundary(textSegmenter, cast text, index, cast locale);
 #elseif cpp
@@ -121,7 +121,7 @@ inline function getPreviousWordBoundary(textSegmenter:HostTextSegmenterCapabilit
 	#error "flight.Textsegment: no backend for this target."
 #end
 }
-inline function getWordRangeAt(textSegmenter:HostTextSegmenterCapability, text:String, index:Int, locale:String):TextSegmentRange {
+extern inline function getWordRangeAt(textSegmenter:HostTextSegmenterCapability, text:String, index:Int, locale:String):TextSegmentRange {
 #if hl
 	return flight._hl._fn.Textsegment.getWordRangeAt(textSegmenter, cast text, index, cast locale);
 #elseif cpp
@@ -132,7 +132,7 @@ inline function getWordRangeAt(textSegmenter:HostTextSegmenterCapability, text:S
 	#error "flight.Textsegment: no backend for this target."
 #end
 }
-inline function explainTextSegmenterBackend(textSegmenter:HostTextSegmenterCapability):TextSegmenterExplanation {
+extern inline function explainTextSegmenterBackend(textSegmenter:HostTextSegmenterCapability):TextSegmenterExplanation {
 #if hl
 	return flight._hl._fn.Textsegment.explainTextSegmenterBackend(textSegmenter);
 #elseif cpp
@@ -143,7 +143,7 @@ inline function explainTextSegmenterBackend(textSegmenter:HostTextSegmenterCapab
 	#error "flight.Textsegment: no backend for this target."
 #end
 }
-inline function freeTextSegmentRange(ptr:TextSegmentRange):Void {
+extern inline function freeTextSegmentRange(ptr:TextSegmentRange):Void {
 #if hl
 	flight._hl._fn.Textsegment.freeTextSegmentRange(ptr);
 #elseif cpp
@@ -154,7 +154,7 @@ inline function freeTextSegmentRange(ptr:TextSegmentRange):Void {
 	#error "flight.Textsegment: no backend for this target."
 #end
 }
-inline function freeTextSegmenterExplanation(ptr:TextSegmenterExplanation):Void {
+extern inline function freeTextSegmenterExplanation(ptr:TextSegmenterExplanation):Void {
 #if hl
 	flight._hl._fn.Textsegment.freeTextSegmenterExplanation(ptr);
 #elseif cpp

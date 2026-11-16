@@ -12,10 +12,10 @@ abstract SpineRangeValue(cpp.Star<cpp.Void>) {
 
 	inline function get_high():Single return SpineRangeValue_Ffi.get_high(this);
 
-	inline function set_high(value:Single):Single return SpineRangeValue_Ffi.set_high(this, value);
+	inline function set_high(value:Single):Single { SpineRangeValue_Ffi.set_high(this, value); return value; }
 	public var low(get, set):Single;
 
 	inline function get_low():Single return SpineRangeValue_Ffi.get_low(this);
 
-	inline function set_low(value:Single):Single return SpineRangeValue_Ffi.set_low(this, value);
+	inline function set_low(value:Single):Single { SpineRangeValue_Ffi.set_low(this, value); return value; }
 }

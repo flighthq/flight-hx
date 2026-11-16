@@ -10,5 +10,5 @@ abstract Physics2DRopeJointOptions(cpp.Star<cpp.Void>) {
 
 	inline function get_maxLength():Single return Physics2DRopeJointOptions_Ffi.get_maxLength(this);
 
-	inline function set_maxLength(value:Single):Single return Physics2DRopeJointOptions_Ffi.set_maxLength(this, value);
+	inline function set_maxLength(value:Single):Single { Physics2DRopeJointOptions_Ffi.set_maxLength(this, value); return value; }
 }

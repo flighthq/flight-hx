@@ -26,45 +26,45 @@ abstract Physics2DWheelJoint(cpp.Star<cpp.Void>) {
 
 	inline function get_dampingRatio():Single return Physics2DWheelJoint_Ffi.get_dampingRatio(this);
 
-	inline function set_dampingRatio(value:Single):Single return Physics2DWheelJoint_Ffi.set_dampingRatio(this, value);
+	inline function set_dampingRatio(value:Single):Single { Physics2DWheelJoint_Ffi.set_dampingRatio(this, value); return value; }
 	public var enableMotor(get, set):Bool;
 
 	inline function get_enableMotor():Bool return Physics2DWheelJoint_Ffi.get_enableMotor(this);
 
-	inline function set_enableMotor(value:Bool):Bool return Physics2DWheelJoint_Ffi.set_enableMotor(this, value);
+	inline function set_enableMotor(value:Bool):Bool { Physics2DWheelJoint_Ffi.set_enableMotor(this, value); return value; }
 	public var frequencyHz(get, set):Single;
 
 	inline function get_frequencyHz():Single return Physics2DWheelJoint_Ffi.get_frequencyHz(this);
 
-	inline function set_frequencyHz(value:Single):Single return Physics2DWheelJoint_Ffi.set_frequencyHz(this, value);
+	inline function set_frequencyHz(value:Single):Single { Physics2DWheelJoint_Ffi.set_frequencyHz(this, value); return value; }
 	public var localAxisAx(get, set):Single;
 
 	inline function get_localAxisAx():Single return Physics2DWheelJoint_Ffi.get_localAxisAx(this);
 
-	inline function set_localAxisAx(value:Single):Single return Physics2DWheelJoint_Ffi.set_localAxisAx(this, value);
+	inline function set_localAxisAx(value:Single):Single { Physics2DWheelJoint_Ffi.set_localAxisAx(this, value); return value; }
 	public var localAxisAy(get, set):Single;
 
 	inline function get_localAxisAy():Single return Physics2DWheelJoint_Ffi.get_localAxisAy(this);
 
-	inline function set_localAxisAy(value:Single):Single return Physics2DWheelJoint_Ffi.set_localAxisAy(this, value);
+	inline function set_localAxisAy(value:Single):Single { Physics2DWheelJoint_Ffi.set_localAxisAy(this, value); return value; }
 	public var maxMotorTorque(get, set):Single;
 
 	inline function get_maxMotorTorque():Single return Physics2DWheelJoint_Ffi.get_maxMotorTorque(this);
 
-	inline function set_maxMotorTorque(value:Single):Single return Physics2DWheelJoint_Ffi.set_maxMotorTorque(this, value);
+	inline function set_maxMotorTorque(value:Single):Single { Physics2DWheelJoint_Ffi.set_maxMotorTorque(this, value); return value; }
 	public var motorImpulse(get, set):Single;
 
 	inline function get_motorImpulse():Single return Physics2DWheelJoint_Ffi.get_motorImpulse(this);
 
-	inline function set_motorImpulse(value:Single):Single return Physics2DWheelJoint_Ffi.set_motorImpulse(this, value);
+	inline function set_motorImpulse(value:Single):Single { Physics2DWheelJoint_Ffi.set_motorImpulse(this, value); return value; }
 	public var motorSpeed(get, set):Single;
 
 	inline function get_motorSpeed():Single return Physics2DWheelJoint_Ffi.get_motorSpeed(this);
 
-	inline function set_motorSpeed(value:Single):Single return Physics2DWheelJoint_Ffi.set_motorSpeed(this, value);
+	inline function set_motorSpeed(value:Single):Single { Physics2DWheelJoint_Ffi.set_motorSpeed(this, value); return value; }
 	public var restTranslation(get, set):Single;
 
 	inline function get_restTranslation():Single return Physics2DWheelJoint_Ffi.get_restTranslation(this);
 
-	inline function set_restTranslation(value:Single):Single return Physics2DWheelJoint_Ffi.set_restTranslation(this, value);
+	inline function set_restTranslation(value:Single):Single { Physics2DWheelJoint_Ffi.set_restTranslation(this, value); return value; }
 }

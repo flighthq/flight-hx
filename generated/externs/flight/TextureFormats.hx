@@ -1,6 +1,6 @@
 package flight;
 
-inline function detectTextureContainer(bytes:Dynamic, bytesLen:Int):Int {
+extern inline function detectTextureContainer(bytes:Dynamic, bytesLen:Int):Int {
 #if hl
 	return flight._hl._fn.TextureFormats.detectTextureContainer(bytes, bytesLen);
 #elseif cpp
@@ -11,7 +11,7 @@ inline function detectTextureContainer(bytes:Dynamic, bytesLen:Int):Int {
 	#error "flight.TextureFormats: no backend for this target."
 #end
 }
-inline function explainTextureContainerParse(bytes:Dynamic, bytesLen:Int):TextureContainerParseExplanation {
+extern inline function explainTextureContainerParse(bytes:Dynamic, bytesLen:Int):TextureContainerParseExplanation {
 #if hl
 	return flight._hl._fn.TextureFormats.explainTextureContainerParse(bytes, bytesLen);
 #elseif cpp
@@ -22,7 +22,7 @@ inline function explainTextureContainerParse(bytes:Dynamic, bytesLen:Int):Textur
 	#error "flight.TextureFormats: no backend for this target."
 #end
 }
-inline function getAtfParseFailureReason(bytes:Dynamic, bytesLen:Int):Int {
+extern inline function getAtfParseFailureReason(bytes:Dynamic, bytesLen:Int):Int {
 #if hl
 	return flight._hl._fn.TextureFormats.getAtfParseFailureReason(bytes, bytesLen);
 #elseif cpp
@@ -33,7 +33,7 @@ inline function getAtfParseFailureReason(bytes:Dynamic, bytesLen:Int):Int {
 	#error "flight.TextureFormats: no backend for this target."
 #end
 }
-inline function parseAtf(bytes:Dynamic, bytesLen:Int):Dynamic {
+extern inline function parseAtf(bytes:Dynamic, bytesLen:Int):Dynamic {
 #if hl
 	return flight._hl._fn.TextureFormats.parseAtf(bytes, bytesLen);
 #elseif cpp
@@ -44,7 +44,7 @@ inline function parseAtf(bytes:Dynamic, bytesLen:Int):Dynamic {
 	#error "flight.TextureFormats: no backend for this target."
 #end
 }
-inline function getBasisParseFailureReason(bytes:Dynamic, bytesLen:Int):Int {
+extern inline function getBasisParseFailureReason(bytes:Dynamic, bytesLen:Int):Int {
 #if hl
 	return flight._hl._fn.TextureFormats.getBasisParseFailureReason(bytes, bytesLen);
 #elseif cpp
@@ -55,7 +55,7 @@ inline function getBasisParseFailureReason(bytes:Dynamic, bytesLen:Int):Int {
 	#error "flight.TextureFormats: no backend for this target."
 #end
 }
-inline function parseBasis(bytes:Dynamic, bytesLen:Int):TextureContainer {
+extern inline function parseBasis(bytes:Dynamic, bytesLen:Int):TextureContainer {
 #if hl
 	return flight._hl._fn.TextureFormats.parseBasis(bytes, bytesLen);
 #elseif cpp
@@ -66,7 +66,7 @@ inline function parseBasis(bytes:Dynamic, bytesLen:Int):TextureContainer {
 	#error "flight.TextureFormats: no backend for this target."
 #end
 }
-inline function getDdsParseFailureReason(bytes:Dynamic, bytesLen:Int):Int {
+extern inline function getDdsParseFailureReason(bytes:Dynamic, bytesLen:Int):Int {
 #if hl
 	return flight._hl._fn.TextureFormats.getDdsParseFailureReason(bytes, bytesLen);
 #elseif cpp
@@ -77,7 +77,7 @@ inline function getDdsParseFailureReason(bytes:Dynamic, bytesLen:Int):Int {
 	#error "flight.TextureFormats: no backend for this target."
 #end
 }
-inline function parseDds(bytes:Dynamic, bytesLen:Int):TextureContainer {
+extern inline function parseDds(bytes:Dynamic, bytesLen:Int):TextureContainer {
 #if hl
 	return flight._hl._fn.TextureFormats.parseDds(bytes, bytesLen);
 #elseif cpp
@@ -88,7 +88,7 @@ inline function parseDds(bytes:Dynamic, bytesLen:Int):TextureContainer {
 	#error "flight.TextureFormats: no backend for this target."
 #end
 }
-inline function getKtx2ParseFailureReason(bytes:Dynamic, bytesLen:Int):Int {
+extern inline function getKtx2ParseFailureReason(bytes:Dynamic, bytesLen:Int):Int {
 #if hl
 	return flight._hl._fn.TextureFormats.getKtx2ParseFailureReason(bytes, bytesLen);
 #elseif cpp
@@ -99,7 +99,7 @@ inline function getKtx2ParseFailureReason(bytes:Dynamic, bytesLen:Int):Int {
 	#error "flight.TextureFormats: no backend for this target."
 #end
 }
-inline function parseKtx2(bytes:Dynamic, bytesLen:Int):TextureContainer {
+extern inline function parseKtx2(bytes:Dynamic, bytesLen:Int):TextureContainer {
 #if hl
 	return flight._hl._fn.TextureFormats.parseKtx2(bytes, bytesLen);
 #elseif cpp
@@ -110,7 +110,7 @@ inline function parseKtx2(bytes:Dynamic, bytesLen:Int):TextureContainer {
 	#error "flight.TextureFormats: no backend for this target."
 #end
 }
-inline function computeTextureContainerLevels(format:flight.TextureContainerFormat, baseWidth:Int, baseHeight:Int, mipLevels:Int, layers:Int, faces:Int, startOffset:Int):TextureContainerLevels {
+extern inline function computeTextureContainerLevels(format:flight.TextureContainerFormat, baseWidth:Int, baseHeight:Int, mipLevels:Int, layers:Int, faces:Int, startOffset:Int):TextureContainerLevels {
 #if hl
 	return flight._hl._fn.TextureFormats.computeTextureContainerLevels(format, baseWidth, baseHeight, mipLevels, layers, faces, startOffset);
 #elseif cpp
@@ -121,7 +121,7 @@ inline function computeTextureContainerLevels(format:flight.TextureContainerForm
 	#error "flight.TextureFormats: no backend for this target."
 #end
 }
-inline function getTextureContainerLevelByteLength(format:flight.TextureContainerFormat, width:Int, height:Int):haxe.Int64 {
+extern inline function getTextureContainerLevelByteLength(format:flight.TextureContainerFormat, width:Int, height:Int):haxe.Int64 {
 #if hl
 	return flight._hl._fn.TextureFormats.getTextureContainerLevelByteLength(format, width, height);
 #elseif cpp
@@ -132,7 +132,7 @@ inline function getTextureContainerLevelByteLength(format:flight.TextureContaine
 	#error "flight.TextureFormats: no backend for this target."
 #end
 }
-inline function freeTextureContainerParseExplanation(ptr:TextureContainerParseExplanation):Void {
+extern inline function freeTextureContainerParseExplanation(ptr:TextureContainerParseExplanation):Void {
 #if hl
 	flight._hl._fn.TextureFormats.freeTextureContainerParseExplanation(ptr);
 #elseif cpp
@@ -143,7 +143,7 @@ inline function freeTextureContainerParseExplanation(ptr:TextureContainerParseEx
 	#error "flight.TextureFormats: no backend for this target."
 #end
 }
-inline function freeTextureContainer(ptr:TextureContainer):Void {
+extern inline function freeTextureContainer(ptr:TextureContainer):Void {
 #if hl
 	flight._hl._fn.TextureFormats.freeTextureContainer(ptr);
 #elseif cpp
@@ -154,7 +154,7 @@ inline function freeTextureContainer(ptr:TextureContainer):Void {
 	#error "flight.TextureFormats: no backend for this target."
 #end
 }
-inline function freeTextureContainerLevels(ptr:TextureContainerLevels):Void {
+extern inline function freeTextureContainerLevels(ptr:TextureContainerLevels):Void {
 #if hl
 	flight._hl._fn.TextureFormats.freeTextureContainerLevels(ptr);
 #elseif cpp

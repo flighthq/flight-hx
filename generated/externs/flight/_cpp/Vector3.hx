@@ -14,142 +14,142 @@ abstract Vector3(cpp.Star<cpp.Void>) {
 
 	inline function get_x():Single return Vector3_Ffi.get_x(this);
 
-	inline function set_x(value:Single):Single return Vector3_Ffi.set_x(this, value);
+	inline function set_x(value:Single):Single { Vector3_Ffi.set_x(this, value); return value; }
 	public var y(get, set):Single;
 
 	inline function get_y():Single return Vector3_Ffi.get_y(this);
 
-	inline function set_y(value:Single):Single return Vector3_Ffi.set_y(this, value);
+	inline function set_y(value:Single):Single { Vector3_Ffi.set_y(this, value); return value; }
 	public var z(get, set):Single;
 
 	inline function get_z():Single return Vector3_Ffi.get_z(this);
 
-	inline function set_z(value:Single):Single return Vector3_Ffi.set_z(this, value);
+	inline function set_z(value:Single):Single { Vector3_Ffi.set_z(this, value); return value; }
 
-	inline public function copyMatrixColumnTo(column:Int, source:flight._cpp.Matrix):Void {
+	extern inline public function copyMatrixColumnTo(column:Int, source:flight._cpp.Matrix):Void {
 		flight._cpp._fn.Geometry.copyMatrixColumnToVector3(cast this, column, source);
 	}
-	inline public function copyMatrixRowTo(row:Int, source:flight._cpp.Matrix):Void {
+	extern inline public function copyMatrixRowTo(row:Int, source:flight._cpp.Matrix):Void {
 		flight._cpp._fn.Geometry.copyMatrixRowToVector3(cast this, row, source);
 	}
-	inline public function copyMatrix3ColumnTo(column:Int, source:flight._cpp.Matrix3):Void {
+	extern inline public function copyMatrix3ColumnTo(column:Int, source:flight._cpp.Matrix3):Void {
 		flight._cpp._fn.Geometry.copyMatrix3ColumnToVector3(cast this, column, source);
 	}
-	inline public function copyMatrix3RowTo(row:Int, source:flight._cpp.Matrix3):Void {
+	extern inline public function copyMatrix3RowTo(row:Int, source:flight._cpp.Matrix3):Void {
 		flight._cpp._fn.Geometry.copyMatrix3RowToVector3(cast this, row, source);
 	}
-	inline public function projectOntoPlane(point:flight._cpp.Vector3, plane:flight._cpp.Plane):Void {
+	extern inline public function projectOntoPlane(point:flight._cpp.Vector3, plane:flight._cpp.Plane):Void {
 		flight._cpp._fn.Geometry.projectVector3OntoPlane(cast this, point, plane);
 	}
-	inline public function rotateByQuaternion(vector:flight._cpp.Vector3, q:flight._cpp.Quaternion):Void {
+	extern inline public function rotateByQuaternion(vector:flight._cpp.Vector3, q:flight._cpp.Quaternion):Void {
 		flight._cpp._fn.Geometry.rotateVector3ByQuaternion(cast this, vector, q);
 	}
-	static inline public function create(x:Single, y:Single, z:Single):flight._cpp.Vector3 {
+	static extern inline public function create(x:Single, y:Single, z:Single):flight._cpp.Vector3 {
 		return flight._cpp._fn.Geometry.createVector3(x, y, z);
 	}
-	static inline public function createFromSpherical(radius:Single, theta:Single, phi:Single):flight._cpp.Vector3 {
+	static extern inline public function createFromSpherical(radius:Single, theta:Single, phi:Single):flight._cpp.Vector3 {
 		return flight._cpp._fn.Geometry.createVector3FromSpherical(radius, theta, phi);
 	}
-	inline public function add(a:flight._cpp.Vector3, b:flight._cpp.Vector3):Void {
+	extern inline public function add(a:flight._cpp.Vector3, b:flight._cpp.Vector3):Void {
 		flight._cpp._fn.Geometry.addVector3(cast this, a, b);
 	}
-	inline public function clamp(value:flight._cpp.Vector3, min:flight._cpp.Vector3, max:flight._cpp.Vector3):Void {
+	extern inline public function clamp(value:flight._cpp.Vector3, min:flight._cpp.Vector3, max:flight._cpp.Vector3):Void {
 		flight._cpp._fn.Geometry.clampVector3(cast this, value, min, max);
 	}
-	inline public function clone():flight._cpp.Vector3 {
+	extern inline public function clone():flight._cpp.Vector3 {
 		return flight._cpp._fn.Geometry.cloneVector3(cast this);
 	}
-	inline public function copy(source:flight._cpp.Vector3):Void {
+	extern inline public function copy(source:flight._cpp.Vector3):Void {
 		flight._cpp._fn.Geometry.copyVector3(cast this, source);
 	}
-	inline public function cross(source:flight._cpp.Vector3, other:flight._cpp.Vector3):Void {
+	extern inline public function cross(source:flight._cpp.Vector3, other:flight._cpp.Vector3):Void {
 		flight._cpp._fn.Geometry.crossVector3(cast this, source, other);
 	}
-	inline public function divide(source:flight._cpp.Vector3, divisor:flight._cpp.Vector3):Void {
+	extern inline public function divide(source:flight._cpp.Vector3, divisor:flight._cpp.Vector3):Void {
 		flight._cpp._fn.Geometry.divideVector3(cast this, source, divisor);
 	}
-	inline public function equals(b:flight._cpp.Vector3):Bool {
+	extern inline public function equals(b:flight._cpp.Vector3):Bool {
 		return flight._cpp._fn.Geometry.equalsVector3(cast this, b);
 	}
-	inline public function getAngleBetween(b:flight._cpp.Vector3):Single {
+	extern inline public function getAngleBetween(b:flight._cpp.Vector3):Single {
 		return flight._cpp._fn.Geometry.getVector3AngleBetween(cast this, b);
 	}
-	inline public function getDistance(b:flight._cpp.Vector3):Single {
+	extern inline public function getDistance(b:flight._cpp.Vector3):Single {
 		return flight._cpp._fn.Geometry.getVector3Distance(cast this, b);
 	}
-	inline public function getDistanceSquared(b:flight._cpp.Vector3):Single {
+	extern inline public function getDistanceSquared(b:flight._cpp.Vector3):Single {
 		return flight._cpp._fn.Geometry.getVector3DistanceSquared(cast this, b);
 	}
-	inline public function getDot(b:flight._cpp.Vector3):Single {
+	extern inline public function getDot(b:flight._cpp.Vector3):Single {
 		return flight._cpp._fn.Geometry.getVector3Dot(cast this, b);
 	}
-	inline public function getLength():Single {
+	extern inline public function getLength():Single {
 		return flight._cpp._fn.Geometry.getVector3Length(cast this);
 	}
-	inline public function getLengthSquared():Single {
+	extern inline public function getLengthSquared():Single {
 		return flight._cpp._fn.Geometry.getVector3LengthSquared(cast this);
 	}
-	inline public function getSpherical(source:flight._cpp.Vector3):Void {
+	extern inline public function getSpherical(source:flight._cpp.Vector3):Void {
 		flight._cpp._fn.Geometry.getVector3Spherical(cast this, source);
 	}
-	inline public function interpolate(a:flight._cpp.Vector3, b:flight._cpp.Vector3, t:Single):Void {
+	extern inline public function interpolate(a:flight._cpp.Vector3, b:flight._cpp.Vector3, t:Single):Void {
 		flight._cpp._fn.Geometry.interpolateVector3(cast this, a, b, t);
 	}
-	inline public function max(a:flight._cpp.Vector3, b:flight._cpp.Vector3):Void {
+	extern inline public function max(a:flight._cpp.Vector3, b:flight._cpp.Vector3):Void {
 		flight._cpp._fn.Geometry.maxVector3(cast this, a, b);
 	}
-	inline public function min(a:flight._cpp.Vector3, b:flight._cpp.Vector3):Void {
+	extern inline public function min(a:flight._cpp.Vector3, b:flight._cpp.Vector3):Void {
 		flight._cpp._fn.Geometry.minVector3(cast this, a, b);
 	}
-	inline public function multiply(a:flight._cpp.Vector3, b:flight._cpp.Vector3):Void {
+	extern inline public function multiply(a:flight._cpp.Vector3, b:flight._cpp.Vector3):Void {
 		flight._cpp._fn.Geometry.multiplyVector3(cast this, a, b);
 	}
-	inline public function nearEquals(b:flight._cpp.Vector3, tolerance:Single):Bool {
+	extern inline public function nearEquals(b:flight._cpp.Vector3, tolerance:Single):Bool {
 		return flight._cpp._fn.Geometry.nearEqualsVector3(cast this, b, tolerance);
 	}
-	inline public function negate(source:flight._cpp.Vector3):Void {
+	extern inline public function negate(source:flight._cpp.Vector3):Void {
 		flight._cpp._fn.Geometry.negateVector3(cast this, source);
 	}
-	inline public function normalize(source:flight._cpp.Vector3):Single {
+	extern inline public function normalize(source:flight._cpp.Vector3):Single {
 		return flight._cpp._fn.Geometry.normalizeVector3(cast this, source);
 	}
-	inline public function offset(source:flight._cpp.Vector3, dx:Single, dy:Single, dz:Single):Void {
+	extern inline public function offset(source:flight._cpp.Vector3, dx:Single, dy:Single, dz:Single):Void {
 		flight._cpp._fn.Geometry.offsetVector3(cast this, source, dx, dy, dz);
 	}
-	inline public function project(out:flight._cpp.Vector2):Void {
+	extern inline public function project(out:flight._cpp.Vector2):Void {
 		flight._cpp._fn.Geometry.projectVector3(out, cast this);
 	}
-	inline public function reflect(incident:flight._cpp.Vector3, normal:flight._cpp.Vector3):Void {
+	extern inline public function reflect(incident:flight._cpp.Vector3, normal:flight._cpp.Vector3):Void {
 		flight._cpp._fn.Geometry.reflectVector3(cast this, incident, normal);
 	}
-	inline public function scale(source:flight._cpp.Vector3, scalar:Single):Void {
+	extern inline public function scale(source:flight._cpp.Vector3, scalar:Single):Void {
 		flight._cpp._fn.Geometry.scaleVector3(cast this, source, scalar);
 	}
-	inline public function set(x:Single, y:Single, z:Single):Void {
+	extern inline public function set(x:Single, y:Single, z:Single):Void {
 		flight._cpp._fn.Geometry.setVector3(cast this, x, y, z);
 	}
-	inline public function setFromFloat32Array(offset:Int, source:cpp.Star<cpp.Void>, sourceLen:Int):Void {
+	extern inline public function setFromFloat32Array(offset:Int, source:cpp.Star<cpp.Void>, sourceLen:Int):Void {
 		flight._cpp._fn.Geometry.setVector3FromFloat32Array(cast this, offset, source, sourceLen);
 	}
-	inline public function setFromSpherical(radius:Single, theta:Single, phi:Single):Void {
+	extern inline public function setFromSpherical(radius:Single, theta:Single, phi:Single):Void {
 		flight._cpp._fn.Geometry.setVector3FromSpherical(cast this, radius, theta, phi);
 	}
-	inline public function setFromVector4(source:flight._cpp.Vector4):Void {
+	extern inline public function setFromVector4(source:flight._cpp.Vector4):Void {
 		flight._cpp._fn.Geometry.setVector3FromVector4(cast this, source);
 	}
-	inline public function subtract(source:flight._cpp.Vector3, other:flight._cpp.Vector3):Void {
+	extern inline public function subtract(source:flight._cpp.Vector3, other:flight._cpp.Vector3):Void {
 		flight._cpp._fn.Geometry.subtractVector3(cast this, source, other);
 	}
-	inline public function transformByMatrix3(source:flight._cpp.Vector3, matrix:flight._cpp.Matrix3):Void {
+	extern inline public function transformByMatrix3(source:flight._cpp.Vector3, matrix:flight._cpp.Matrix3):Void {
 		flight._cpp._fn.Geometry.transformVector3ByMatrix3(cast this, source, matrix);
 	}
-	inline public function writeToFloat32Array(out:cpp.Star<cpp.Void>, outLen:Int, offset:Int):Void {
+	extern inline public function writeToFloat32Array(out:cpp.Star<cpp.Void>, outLen:Int, offset:Int):Void {
 		flight._cpp._fn.Geometry.writeVector3ToFloat32Array(out, outLen, offset, cast this);
 	}
-	inline public function release():Void {
+	extern inline public function release():Void {
 		flight._cpp._fn.Geometry.releaseVector3(cast this);
 	}
-	inline public function free():Void {
+	extern inline public function free():Void {
 		flight._cpp._fn.Geometry.freeVector3(cast this);
 	}
 }

@@ -20,30 +20,30 @@ abstract LibgdxActiveRangeValue(cpp.Star<cpp.Void>) {
 
 	inline function get_active():Bool return LibgdxActiveRangeValue_Ffi.get_active(this);
 
-	inline function set_active(value:Bool):Bool return LibgdxActiveRangeValue_Ffi.set_active(this, value);
+	inline function set_active(value:Bool):Bool { LibgdxActiveRangeValue_Ffi.set_active(this, value); return value; }
 	public var lowMin(get, set):Single;
 
 	inline function get_lowMin():Single return LibgdxActiveRangeValue_Ffi.get_lowMin(this);
 
-	inline function set_lowMin(value:Single):Single return LibgdxActiveRangeValue_Ffi.set_lowMin(this, value);
+	inline function set_lowMin(value:Single):Single { LibgdxActiveRangeValue_Ffi.set_lowMin(this, value); return value; }
 	public var lowMax(get, set):Single;
 
 	inline function get_lowMax():Single return LibgdxActiveRangeValue_Ffi.get_lowMax(this);
 
-	inline function set_lowMax(value:Single):Single return LibgdxActiveRangeValue_Ffi.set_lowMax(this, value);
+	inline function set_lowMax(value:Single):Single { LibgdxActiveRangeValue_Ffi.set_lowMax(this, value); return value; }
 	public var highMin(get, set):Single;
 
 	inline function get_highMin():Single return LibgdxActiveRangeValue_Ffi.get_highMin(this);
 
-	inline function set_highMin(value:Single):Single return LibgdxActiveRangeValue_Ffi.set_highMin(this, value);
+	inline function set_highMin(value:Single):Single { LibgdxActiveRangeValue_Ffi.set_highMin(this, value); return value; }
 	public var highMax(get, set):Single;
 
 	inline function get_highMax():Single return LibgdxActiveRangeValue_Ffi.get_highMax(this);
 
-	inline function set_highMax(value:Single):Single return LibgdxActiveRangeValue_Ffi.set_highMax(this, value);
+	inline function set_highMax(value:Single):Single { LibgdxActiveRangeValue_Ffi.set_highMax(this, value); return value; }
 	public var relative(get, set):Bool;
 
 	inline function get_relative():Bool return LibgdxActiveRangeValue_Ffi.get_relative(this);
 
-	inline function set_relative(value:Bool):Bool return LibgdxActiveRangeValue_Ffi.set_relative(this, value);
+	inline function set_relative(value:Bool):Bool { LibgdxActiveRangeValue_Ffi.set_relative(this, value); return value; }
 }

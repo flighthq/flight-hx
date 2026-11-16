@@ -10,5 +10,5 @@ abstract TextureContainerLevels(cpp.Star<cpp.Void>) {
 
 	inline function get_endOffset():Int return TextureContainerLevels_Ffi.get_endOffset(this);
 
-	inline function set_endOffset(value:Int):Int return TextureContainerLevels_Ffi.set_endOffset(this, value);
+	inline function set_endOffset(value:Int):Int { TextureContainerLevels_Ffi.set_endOffset(this, value); return value; }
 }

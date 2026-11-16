@@ -20,30 +20,30 @@ abstract TextureContainer(cpp.Star<cpp.Void>) {
 
 	inline function get_width():Int return TextureContainer_Ffi.get_width(this);
 
-	inline function set_width(value:Int):Int return TextureContainer_Ffi.set_width(this, value);
+	inline function set_width(value:Int):Int { TextureContainer_Ffi.set_width(this, value); return value; }
 	public var height(get, set):Int;
 
 	inline function get_height():Int return TextureContainer_Ffi.get_height(this);
 
-	inline function set_height(value:Int):Int return TextureContainer_Ffi.set_height(this, value);
+	inline function set_height(value:Int):Int { TextureContainer_Ffi.set_height(this, value); return value; }
 	public var depth(get, set):Int;
 
 	inline function get_depth():Int return TextureContainer_Ffi.get_depth(this);
 
-	inline function set_depth(value:Int):Int return TextureContainer_Ffi.set_depth(this, value);
+	inline function set_depth(value:Int):Int { TextureContainer_Ffi.set_depth(this, value); return value; }
 	public var mipLevels(get, set):Int;
 
 	inline function get_mipLevels():Int return TextureContainer_Ffi.get_mipLevels(this);
 
-	inline function set_mipLevels(value:Int):Int return TextureContainer_Ffi.set_mipLevels(this, value);
+	inline function set_mipLevels(value:Int):Int { TextureContainer_Ffi.set_mipLevels(this, value); return value; }
 	public var layers(get, set):Int;
 
 	inline function get_layers():Int return TextureContainer_Ffi.get_layers(this);
 
-	inline function set_layers(value:Int):Int return TextureContainer_Ffi.set_layers(this, value);
+	inline function set_layers(value:Int):Int { TextureContainer_Ffi.set_layers(this, value); return value; }
 	public var faces(get, set):Int;
 
 	inline function get_faces():Int return TextureContainer_Ffi.get_faces(this);
 
-	inline function set_faces(value:Int):Int return TextureContainer_Ffi.set_faces(this, value);
+	inline function set_faces(value:Int):Int { TextureContainer_Ffi.set_faces(this, value); return value; }
 }

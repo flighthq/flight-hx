@@ -16,120 +16,120 @@ abstract Vector4(cpp.Star<cpp.Void>) {
 
 	inline function get_x():Single return Vector4_Ffi.get_x(this);
 
-	inline function set_x(value:Single):Single return Vector4_Ffi.set_x(this, value);
+	inline function set_x(value:Single):Single { Vector4_Ffi.set_x(this, value); return value; }
 	public var y(get, set):Single;
 
 	inline function get_y():Single return Vector4_Ffi.get_y(this);
 
-	inline function set_y(value:Single):Single return Vector4_Ffi.set_y(this, value);
+	inline function set_y(value:Single):Single { Vector4_Ffi.set_y(this, value); return value; }
 	public var z(get, set):Single;
 
 	inline function get_z():Single return Vector4_Ffi.get_z(this);
 
-	inline function set_z(value:Single):Single return Vector4_Ffi.set_z(this, value);
+	inline function set_z(value:Single):Single { Vector4_Ffi.set_z(this, value); return value; }
 	public var w(get, set):Single;
 
 	inline function get_w():Single return Vector4_Ffi.get_w(this);
 
-	inline function set_w(value:Single):Single return Vector4_Ffi.set_w(this, value);
+	inline function set_w(value:Single):Single { Vector4_Ffi.set_w(this, value); return value; }
 
-	inline public function copyMatrix4ColumnTo(column:Int, source:flight._cpp.Matrix4):Void {
+	extern inline public function copyMatrix4ColumnTo(column:Int, source:flight._cpp.Matrix4):Void {
 		flight._cpp._fn.Geometry.copyMatrix4ColumnToVector4(cast this, column, source);
 	}
-	inline public function copyMatrix4RowTo(row:Int, source:flight._cpp.Matrix4):Void {
+	extern inline public function copyMatrix4RowTo(row:Int, source:flight._cpp.Matrix4):Void {
 		flight._cpp._fn.Geometry.copyMatrix4RowToVector4(cast this, row, source);
 	}
-	static inline public function create(x:Single, y:Single, z:Single, w:Single):flight._cpp.Vector4 {
+	static extern inline public function create(x:Single, y:Single, z:Single, w:Single):flight._cpp.Vector4 {
 		return flight._cpp._fn.Geometry.createVector4(x, y, z, w);
 	}
-	inline public function add(a:flight._cpp.Vector4, b:flight._cpp.Vector4):Void {
+	extern inline public function add(a:flight._cpp.Vector4, b:flight._cpp.Vector4):Void {
 		flight._cpp._fn.Geometry.addVector4(cast this, a, b);
 	}
-	inline public function clamp(value:flight._cpp.Vector4, min:flight._cpp.Vector4, max:flight._cpp.Vector4):Void {
+	extern inline public function clamp(value:flight._cpp.Vector4, min:flight._cpp.Vector4, max:flight._cpp.Vector4):Void {
 		flight._cpp._fn.Geometry.clampVector4(cast this, value, min, max);
 	}
-	inline public function clone():flight._cpp.Vector4 {
+	extern inline public function clone():flight._cpp.Vector4 {
 		return flight._cpp._fn.Geometry.cloneVector4(cast this);
 	}
-	inline public function copy(source:flight._cpp.Vector4):Void {
+	extern inline public function copy(source:flight._cpp.Vector4):Void {
 		flight._cpp._fn.Geometry.copyVector4(cast this, source);
 	}
-	inline public function divide(source:flight._cpp.Vector4, divisor:flight._cpp.Vector4):Void {
+	extern inline public function divide(source:flight._cpp.Vector4, divisor:flight._cpp.Vector4):Void {
 		flight._cpp._fn.Geometry.divideVector4(cast this, source, divisor);
 	}
-	inline public function equals(b:flight._cpp.Vector4):Bool {
+	extern inline public function equals(b:flight._cpp.Vector4):Bool {
 		return flight._cpp._fn.Geometry.equalsVector4(cast this, b);
 	}
-	inline public function getAngleBetween(b:flight._cpp.Vector4):Single {
+	extern inline public function getAngleBetween(b:flight._cpp.Vector4):Single {
 		return flight._cpp._fn.Geometry.getVector4AngleBetween(cast this, b);
 	}
-	inline public function getDistance(b:flight._cpp.Vector4):Single {
+	extern inline public function getDistance(b:flight._cpp.Vector4):Single {
 		return flight._cpp._fn.Geometry.getVector4Distance(cast this, b);
 	}
-	inline public function getDistanceSquared(b:flight._cpp.Vector4):Single {
+	extern inline public function getDistanceSquared(b:flight._cpp.Vector4):Single {
 		return flight._cpp._fn.Geometry.getVector4DistanceSquared(cast this, b);
 	}
-	inline public function getDot(b:flight._cpp.Vector4):Single {
+	extern inline public function getDot(b:flight._cpp.Vector4):Single {
 		return flight._cpp._fn.Geometry.getVector4Dot(cast this, b);
 	}
-	inline public function getLength():Single {
+	extern inline public function getLength():Single {
 		return flight._cpp._fn.Geometry.getVector4Length(cast this);
 	}
-	inline public function getLengthSquared():Single {
+	extern inline public function getLengthSquared():Single {
 		return flight._cpp._fn.Geometry.getVector4LengthSquared(cast this);
 	}
-	inline public function interpolate(a:flight._cpp.Vector4, b:flight._cpp.Vector4, t:Single):Void {
+	extern inline public function interpolate(a:flight._cpp.Vector4, b:flight._cpp.Vector4, t:Single):Void {
 		flight._cpp._fn.Geometry.interpolateVector4(cast this, a, b, t);
 	}
-	inline public function max(a:flight._cpp.Vector4, b:flight._cpp.Vector4):Void {
+	extern inline public function max(a:flight._cpp.Vector4, b:flight._cpp.Vector4):Void {
 		flight._cpp._fn.Geometry.maxVector4(cast this, a, b);
 	}
-	inline public function min(a:flight._cpp.Vector4, b:flight._cpp.Vector4):Void {
+	extern inline public function min(a:flight._cpp.Vector4, b:flight._cpp.Vector4):Void {
 		flight._cpp._fn.Geometry.minVector4(cast this, a, b);
 	}
-	inline public function multiply(a:flight._cpp.Vector4, b:flight._cpp.Vector4):Void {
+	extern inline public function multiply(a:flight._cpp.Vector4, b:flight._cpp.Vector4):Void {
 		flight._cpp._fn.Geometry.multiplyVector4(cast this, a, b);
 	}
-	inline public function nearEquals(b:flight._cpp.Vector4, tolerance:Single):Bool {
+	extern inline public function nearEquals(b:flight._cpp.Vector4, tolerance:Single):Bool {
 		return flight._cpp._fn.Geometry.nearEqualsVector4(cast this, b, tolerance);
 	}
-	inline public function negate(source:flight._cpp.Vector4):Void {
+	extern inline public function negate(source:flight._cpp.Vector4):Void {
 		flight._cpp._fn.Geometry.negateVector4(cast this, source);
 	}
-	inline public function normalize(source:flight._cpp.Vector4):Single {
+	extern inline public function normalize(source:flight._cpp.Vector4):Single {
 		return flight._cpp._fn.Geometry.normalizeVector4(cast this, source);
 	}
-	inline public function offset(source:flight._cpp.Vector4, dx:Single, dy:Single, dz:Single, dw:Single):Void {
+	extern inline public function offset(source:flight._cpp.Vector4, dx:Single, dy:Single, dz:Single, dw:Single):Void {
 		flight._cpp._fn.Geometry.offsetVector4(cast this, source, dx, dy, dz, dw);
 	}
-	inline public function project(out:flight._cpp.Vector3):Void {
+	extern inline public function project(out:flight._cpp.Vector3):Void {
 		flight._cpp._fn.Geometry.projectVector4(out, cast this);
 	}
-	inline public function reflect(incident:flight._cpp.Vector4, normal:flight._cpp.Vector4):Void {
+	extern inline public function reflect(incident:flight._cpp.Vector4, normal:flight._cpp.Vector4):Void {
 		flight._cpp._fn.Geometry.reflectVector4(cast this, incident, normal);
 	}
-	inline public function scale(source:flight._cpp.Vector4, scalar:Single):Void {
+	extern inline public function scale(source:flight._cpp.Vector4, scalar:Single):Void {
 		flight._cpp._fn.Geometry.scaleVector4(cast this, source, scalar);
 	}
-	inline public function set(x:Single, y:Single, z:Single, w:Single):Void {
+	extern inline public function set(x:Single, y:Single, z:Single, w:Single):Void {
 		flight._cpp._fn.Geometry.setVector4(cast this, x, y, z, w);
 	}
-	inline public function setFromFloat32Array(offset:Int, source:cpp.Star<cpp.Void>, sourceLen:Int):Void {
+	extern inline public function setFromFloat32Array(offset:Int, source:cpp.Star<cpp.Void>, sourceLen:Int):Void {
 		flight._cpp._fn.Geometry.setVector4FromFloat32Array(cast this, offset, source, sourceLen);
 	}
-	inline public function setFromVector3(source:flight._cpp.Vector3, w:Single):Void {
+	extern inline public function setFromVector3(source:flight._cpp.Vector3, w:Single):Void {
 		flight._cpp._fn.Geometry.setVector4FromVector3(cast this, source, w);
 	}
-	inline public function subtract(source:flight._cpp.Vector4, other:flight._cpp.Vector4):Void {
+	extern inline public function subtract(source:flight._cpp.Vector4, other:flight._cpp.Vector4):Void {
 		flight._cpp._fn.Geometry.subtractVector4(cast this, source, other);
 	}
-	inline public function writeToFloat32Array(out:cpp.Star<cpp.Void>, outLen:Int, offset:Int):Void {
+	extern inline public function writeToFloat32Array(out:cpp.Star<cpp.Void>, outLen:Int, offset:Int):Void {
 		flight._cpp._fn.Geometry.writeVector4ToFloat32Array(out, outLen, offset, cast this);
 	}
-	inline public function release():Void {
+	extern inline public function release():Void {
 		flight._cpp._fn.Geometry.releaseVector4(cast this);
 	}
-	inline public function free():Void {
+	extern inline public function free():Void {
 		flight._cpp._fn.Geometry.freeVector4(cast this);
 	}
 }

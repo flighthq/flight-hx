@@ -12,10 +12,10 @@ abstract AnimationBlendTreeChannelSource(cpp.Star<cpp.Void>) {
 
 	inline function get_channelIndex():Int return AnimationBlendTreeChannelSource_Ffi.get_channelIndex(this);
 
-	inline function set_channelIndex(value:Int):Int return AnimationBlendTreeChannelSource_Ffi.set_channelIndex(this, value);
+	inline function set_channelIndex(value:Int):Int { AnimationBlendTreeChannelSource_Ffi.set_channelIndex(this, value); return value; }
 	public var inputIndex(get, set):Int;
 
 	inline function get_inputIndex():Int return AnimationBlendTreeChannelSource_Ffi.get_inputIndex(this);
 
-	inline function set_inputIndex(value:Int):Int return AnimationBlendTreeChannelSource_Ffi.set_inputIndex(this, value);
+	inline function set_inputIndex(value:Int):Int { AnimationBlendTreeChannelSource_Ffi.set_inputIndex(this, value); return value; }
 }

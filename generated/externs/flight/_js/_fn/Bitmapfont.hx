@@ -27,9 +27,9 @@ extern class Bitmapfont {
 	@:native("flight_get_bitmap_font_glyph_explanation_reason_string")
 	public static function getBitmapFontGlyphExplanationReasonString(value:Int):String;
 	@:native("flight_get_bitmap_font_guard_log_key_string")
-	public static function getBitmapFontGuardLogKeyString(value:Int):String;
+	public static function getBitmapFontGuardLogKeyString(value:flight._js.BitmapFontGuardLogKey):String;
 	@:native("flight_get_bitmap_font_guard_reason_string")
-	public static function getBitmapFontGuardReasonString(value:Int):String;
+	public static function getBitmapFontGuardReasonString(value:flight._js.BitmapFontGuardReason):String;
 	@:native("flight_parse_bitmap_font_encoding")
 	public static function parseBitmapFontEncoding(value:String):Int;
 	@:native("flight_parse_bitmap_font_glyph_explanation_reason")

@@ -10,5 +10,5 @@ abstract Physics2DGearJointOptions(cpp.Star<cpp.Void>) {
 
 	inline function get_constant():Single return Physics2DGearJointOptions_Ffi.get_constant(this);
 
-	inline function set_constant(value:Single):Single return Physics2DGearJointOptions_Ffi.set_constant(this, value);
+	inline function set_constant(value:Single):Single { Physics2DGearJointOptions_Ffi.set_constant(this, value); return value; }
 }

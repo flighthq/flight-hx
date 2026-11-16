@@ -14,15 +14,15 @@ abstract MorphShapeGradientEndpointExplanation(cpp.Star<cpp.Void>) {
 
 	inline function get_endStopCount():Int return MorphShapeGradientEndpointExplanation_Ffi.get_endStopCount(this);
 
-	inline function set_endStopCount(value:Int):Int return MorphShapeGradientEndpointExplanation_Ffi.set_endStopCount(this, value);
+	inline function set_endStopCount(value:Int):Int { MorphShapeGradientEndpointExplanation_Ffi.set_endStopCount(this, value); return value; }
 	public var startStopCount(get, set):Int;
 
 	inline function get_startStopCount():Int return MorphShapeGradientEndpointExplanation_Ffi.get_startStopCount(this);
 
-	inline function set_startStopCount(value:Int):Int return MorphShapeGradientEndpointExplanation_Ffi.set_startStopCount(this, value);
+	inline function set_startStopCount(value:Int):Int { MorphShapeGradientEndpointExplanation_Ffi.set_startStopCount(this, value); return value; }
 	public var supported(get, set):Bool;
 
 	inline function get_supported():Bool return MorphShapeGradientEndpointExplanation_Ffi.get_supported(this);
 
-	inline function set_supported(value:Bool):Bool return MorphShapeGradientEndpointExplanation_Ffi.set_supported(this, value);
+	inline function set_supported(value:Bool):Bool { MorphShapeGradientEndpointExplanation_Ffi.set_supported(this, value); return value; }
 }

@@ -20,30 +20,30 @@ abstract CameraShakeOffset(cpp.Star<cpp.Void>) {
 
 	inline function get_rotationX():Single return CameraShakeOffset_Ffi.get_rotationX(this);
 
-	inline function set_rotationX(value:Single):Single return CameraShakeOffset_Ffi.set_rotationX(this, value);
+	inline function set_rotationX(value:Single):Single { CameraShakeOffset_Ffi.set_rotationX(this, value); return value; }
 	public var rotationY(get, set):Single;
 
 	inline function get_rotationY():Single return CameraShakeOffset_Ffi.get_rotationY(this);
 
-	inline function set_rotationY(value:Single):Single return CameraShakeOffset_Ffi.set_rotationY(this, value);
+	inline function set_rotationY(value:Single):Single { CameraShakeOffset_Ffi.set_rotationY(this, value); return value; }
 	public var rotationZ(get, set):Single;
 
 	inline function get_rotationZ():Single return CameraShakeOffset_Ffi.get_rotationZ(this);
 
-	inline function set_rotationZ(value:Single):Single return CameraShakeOffset_Ffi.set_rotationZ(this, value);
+	inline function set_rotationZ(value:Single):Single { CameraShakeOffset_Ffi.set_rotationZ(this, value); return value; }
 	public var x(get, set):Single;
 
 	inline function get_x():Single return CameraShakeOffset_Ffi.get_x(this);
 
-	inline function set_x(value:Single):Single return CameraShakeOffset_Ffi.set_x(this, value);
+	inline function set_x(value:Single):Single { CameraShakeOffset_Ffi.set_x(this, value); return value; }
 	public var y(get, set):Single;
 
 	inline function get_y():Single return CameraShakeOffset_Ffi.get_y(this);
 
-	inline function set_y(value:Single):Single return CameraShakeOffset_Ffi.set_y(this, value);
+	inline function set_y(value:Single):Single { CameraShakeOffset_Ffi.set_y(this, value); return value; }
 	public var z(get, set):Single;
 
 	inline function get_z():Single return CameraShakeOffset_Ffi.get_z(this);
 
-	inline function set_z(value:Single):Single return CameraShakeOffset_Ffi.set_z(this, value);
+	inline function set_z(value:Single):Single { CameraShakeOffset_Ffi.set_z(this, value); return value; }
 }

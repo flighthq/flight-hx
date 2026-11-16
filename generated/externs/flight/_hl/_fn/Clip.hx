@@ -2,41 +2,41 @@ package flight._hl._fn;
 
 extern class Clip {
 	@:hlNative("flight", "flight_acquire_clip_region")
-	public static function acquireClipRegion():Dynamic;
+	public static function acquireClipRegion():hl.Bytes;
 	@:hlNative("flight", "flight_clip_region_contains_clip_region")
-	public static function clipRegionContainsClipRegion(a:Dynamic, b:Dynamic):Bool;
+	public static function clipRegionContainsClipRegion(a:hl.Bytes, b:hl.Bytes):Bool;
 	@:hlNative("flight", "flight_clip_region_contains_point")
-	public static function clipRegionContainsPoint(clip:Dynamic, x:Float, y:Float):Bool;
+	public static function clipRegionContainsPoint(clip:hl.Bytes, x:Float, y:Float):Bool;
 	@:hlNative("flight", "flight_clip_region_intersects_clip_region")
-	public static function clipRegionIntersectsClipRegion(a:Dynamic, b:Dynamic):Bool;
+	public static function clipRegionIntersectsClipRegion(a:hl.Bytes, b:hl.Bytes):Bool;
 	@:hlNative("flight", "flight_clone_clip_region")
-	public static function cloneClipRegion(clip:Dynamic):Dynamic;
+	public static function cloneClipRegion(clip:hl.Bytes):hl.Bytes;
 	@:hlNative("flight", "flight_copy_clip_region")
-	public static function copyClipRegion(out:Dynamic, source:Dynamic):Void;
+	public static function copyClipRegion(out:hl.Bytes, source:hl.Bytes):Void;
 	@:hlNative("flight", "flight_equals_clip_region")
-	public static function equalsClipRegion(a:Dynamic, b:Dynamic):Bool;
+	public static function equalsClipRegion(a:hl.Bytes, b:hl.Bytes):Bool;
 	@:hlNative("flight", "flight_explain_clip_region")
-	public static function explainClipRegion(clip:Dynamic):flight._hl.ClipRegionExplanation;
+	public static function explainClipRegion(clip:hl.Bytes):flight._hl.ClipRegionExplanation;
 	@:hlNative("flight", "flight_intersect_clip_regions")
-	public static function intersectClipRegions(out:Dynamic, a:Dynamic, b:Dynamic):Void;
+	public static function intersectClipRegions(out:hl.Bytes, a:hl.Bytes, b:hl.Bytes):Void;
 	@:hlNative("flight", "flight_invalidate_clip_region")
-	public static function invalidateClipRegion(clip:Dynamic):Void;
+	public static function invalidateClipRegion(clip:hl.Bytes):Void;
 	@:hlNative("flight", "flight_is_clip_region_empty")
-	public static function isClipRegionEmpty(clip:Dynamic):Bool;
+	public static function isClipRegionEmpty(clip:hl.Bytes):Bool;
 	@:hlNative("flight", "flight_is_clip_region_rectangular")
-	public static function isClipRegionRectangular(clip:Dynamic):Bool;
+	public static function isClipRegionRectangular(clip:hl.Bytes):Bool;
 	@:hlNative("flight", "flight_normalize_clip_region")
-	public static function normalizeClipRegion(out:Dynamic, clip:Dynamic):Void;
+	public static function normalizeClipRegion(out:hl.Bytes, clip:hl.Bytes):Void;
 	@:hlNative("flight", "flight_release_clip_region")
-	public static function releaseClipRegion(clip:Dynamic):Void;
+	public static function releaseClipRegion(clip:hl.Bytes):Void;
 	@:hlNative("flight", "flight_transform_clip_region")
-	public static function transformClipRegion(out:Dynamic, clip:Dynamic, matrix:flight._hl.Matrix):Void;
+	public static function transformClipRegion(out:hl.Bytes, clip:hl.Bytes, matrix:flight._hl.Matrix):Void;
 	@:hlNative("flight", "flight_union_clip_regions")
-	public static function unionClipRegions(out:Dynamic, a:Dynamic, b:Dynamic):Void;
+	public static function unionClipRegions(out:hl.Bytes, a:hl.Bytes, b:hl.Bytes):Void;
 	@:hlNative("flight", "flight_create_clip_region_from_circle")
-	public static function createClipRegionFromCircle(x:Float, y:Float, radius:Float, tolerance:Float):Dynamic;
+	public static function createClipRegionFromCircle(x:Float, y:Float, radius:Float, tolerance:Float):hl.Bytes;
 	@:hlNative("flight", "flight_create_clip_region_from_path")
-	public static function createClipRegionFromPath(path:flight._hl.Path, tolerance:Float):Dynamic;
+	public static function createClipRegionFromPath(path:flight._hl.Path, tolerance:Float):hl.Bytes;
 	@:hlNative("flight", "flight_get_clip_region_contours_reason_string")
 	public static function getClipRegionContoursReasonString(reason:Int):hl.Bytes;
 	@:hlNative("flight", "flight_get_clip_region_status_string")

@@ -1,6 +1,6 @@
 package flight;
 
-inline function getCamera3dForward(out:Vector3, camera:Camera3D):Void {
+extern inline function getCamera3dForward(out:Vector3, camera:Camera3D):Void {
 #if hl
 	flight._hl._fn.Camera.getCamera3dForward(out, camera);
 #elseif cpp
@@ -11,7 +11,7 @@ inline function getCamera3dForward(out:Vector3, camera:Camera3D):Void {
 	#error "flight.Camera: no backend for this target."
 #end
 }
-inline function getCamera3dPosition(out:Vector3, camera:Camera3D):Void {
+extern inline function getCamera3dPosition(out:Vector3, camera:Camera3D):Void {
 #if hl
 	flight._hl._fn.Camera.getCamera3dPosition(out, camera);
 #elseif cpp
@@ -22,7 +22,7 @@ inline function getCamera3dPosition(out:Vector3, camera:Camera3D):Void {
 	#error "flight.Camera: no backend for this target."
 #end
 }
-inline function getCamera3dRight(out:Vector3, camera:Camera3D):Void {
+extern inline function getCamera3dRight(out:Vector3, camera:Camera3D):Void {
 #if hl
 	flight._hl._fn.Camera.getCamera3dRight(out, camera);
 #elseif cpp
@@ -33,7 +33,7 @@ inline function getCamera3dRight(out:Vector3, camera:Camera3D):Void {
 	#error "flight.Camera: no backend for this target."
 #end
 }
-inline function getCamera3dUp(out:Vector3, camera:Camera3D):Void {
+extern inline function getCamera3dUp(out:Vector3, camera:Camera3D):Void {
 #if hl
 	flight._hl._fn.Camera.getCamera3dUp(out, camera);
 #elseif cpp
@@ -44,7 +44,7 @@ inline function getCamera3dUp(out:Vector3, camera:Camera3D):Void {
 	#error "flight.Camera: no backend for this target."
 #end
 }
-inline function createCamera3d():Camera3D {
+extern inline function createCamera3d():Camera3D {
 #if hl
 	return flight._hl._fn.Camera.createCamera3d();
 #elseif cpp
@@ -55,7 +55,7 @@ inline function createCamera3d():Camera3D {
 	#error "flight.Camera: no backend for this target."
 #end
 }
-inline function getCamera3dInverseViewProjectionMatrix4(out:Matrix4, camera:Camera3D, aspect:Float):Bool {
+extern inline function getCamera3dInverseViewProjectionMatrix4(out:Matrix4, camera:Camera3D, aspect:Float):Bool {
 #if hl
 	return flight._hl._fn.Camera.getCamera3dInverseViewProjectionMatrix4(out, camera, aspect);
 #elseif cpp
@@ -66,7 +66,7 @@ inline function getCamera3dInverseViewProjectionMatrix4(out:Matrix4, camera:Came
 	#error "flight.Camera: no backend for this target."
 #end
 }
-inline function getCamera3dViewProjectionMatrix4(out:Matrix4, camera:Camera3D, aspect:Float):Void {
+extern inline function getCamera3dViewProjectionMatrix4(out:Matrix4, camera:Camera3D, aspect:Float):Void {
 #if hl
 	flight._hl._fn.Camera.getCamera3dViewProjectionMatrix4(out, camera, aspect);
 #elseif cpp
@@ -77,7 +77,7 @@ inline function getCamera3dViewProjectionMatrix4(out:Matrix4, camera:Camera3D, a
 	#error "flight.Camera: no backend for this target."
 #end
 }
-inline function setCamera3dAspect(camera:Camera3D, aspect:Float):Void {
+extern inline function setCamera3dAspect(camera:Camera3D, aspect:Float):Void {
 #if hl
 	flight._hl._fn.Camera.setCamera3dAspect(camera, aspect);
 #elseif cpp
@@ -88,7 +88,7 @@ inline function setCamera3dAspect(camera:Camera3D, aspect:Float):Void {
 	#error "flight.Camera: no backend for this target."
 #end
 }
-inline function setCamera3dJitter(camera:Camera3D, x:Float, y:Float):Void {
+extern inline function setCamera3dJitter(camera:Camera3D, x:Float, y:Float):Void {
 #if hl
 	flight._hl._fn.Camera.setCamera3dJitter(camera, x, y);
 #elseif cpp
@@ -99,7 +99,7 @@ inline function setCamera3dJitter(camera:Camera3D, x:Float, y:Float):Void {
 	#error "flight.Camera: no backend for this target."
 #end
 }
-inline function setCamera3dViewMatrix4FromLookAt(camera:Camera3D, eye:Vector3, target:Vector3, up:Vector3):Void {
+extern inline function setCamera3dViewMatrix4FromLookAt(camera:Camera3D, eye:Vector3, target:Vector3, up:Vector3):Void {
 #if hl
 	flight._hl._fn.Camera.setCamera3dViewMatrix4FromLookAt(camera, eye, target, up);
 #elseif cpp
@@ -110,7 +110,7 @@ inline function setCamera3dViewMatrix4FromLookAt(camera:Camera3D, eye:Vector3, t
 	#error "flight.Camera: no backend for this target."
 #end
 }
-inline function setCamera3dViewMatrix4FromMatrix4(guardState:Dynamic, camera:Camera3D, view:Matrix4):Void {
+extern inline function setCamera3dViewMatrix4FromMatrix4(guardState:Dynamic, camera:Camera3D, view:Matrix4):Void {
 #if hl
 	flight._hl._fn.Camera.setCamera3dViewMatrix4FromMatrix4(guardState, camera, view);
 #elseif cpp
@@ -121,7 +121,7 @@ inline function setCamera3dViewMatrix4FromMatrix4(guardState:Dynamic, camera:Cam
 	#error "flight.Camera: no backend for this target."
 #end
 }
-inline function updateCamera3dInverseViewProjection(camera:Camera3D, aspect:Float):Bool {
+extern inline function updateCamera3dInverseViewProjection(camera:Camera3D, aspect:Float):Bool {
 #if hl
 	return flight._hl._fn.Camera.updateCamera3dInverseViewProjection(camera, aspect);
 #elseif cpp
@@ -132,7 +132,7 @@ inline function updateCamera3dInverseViewProjection(camera:Camera3D, aspect:Floa
 	#error "flight.Camera: no backend for this target."
 #end
 }
-inline function createCamera2d():Camera2D {
+extern inline function createCamera2d():Camera2D {
 #if hl
 	return flight._hl._fn.Camera.createCamera2d();
 #elseif cpp
@@ -143,7 +143,7 @@ inline function createCamera2d():Camera2D {
 	#error "flight.Camera: no backend for this target."
 #end
 }
-inline function setCamera2dLookAt(camera:Camera2D, x:Float, y:Float):Void {
+extern inline function setCamera2dLookAt(camera:Camera2D, x:Float, y:Float):Void {
 #if hl
 	flight._hl._fn.Camera.setCamera2dLookAt(camera, x, y);
 #elseif cpp
@@ -154,7 +154,7 @@ inline function setCamera2dLookAt(camera:Camera2D, x:Float, y:Float):Void {
 	#error "flight.Camera: no backend for this target."
 #end
 }
-inline function getCubeCaptureFaceCamera3d(out:Camera3D, position:Vector3, face:Int):Void {
+extern inline function getCubeCaptureFaceCamera3d(out:Camera3D, position:Vector3, face:Int):Void {
 #if hl
 	flight._hl._fn.Camera.getCubeCaptureFaceCamera3d(out, position, face);
 #elseif cpp
@@ -165,7 +165,7 @@ inline function getCubeCaptureFaceCamera3d(out:Camera3D, position:Vector3, face:
 	#error "flight.Camera: no backend for this target."
 #end
 }
-inline function getCamera3dFrustum(out:Frustum, camera:Camera3D, aspect:Float):Void {
+extern inline function getCamera3dFrustum(out:Frustum, camera:Camera3D, aspect:Float):Void {
 #if hl
 	flight._hl._fn.Camera.getCamera3dFrustum(out, camera, aspect);
 #elseif cpp
@@ -176,7 +176,7 @@ inline function getCamera3dFrustum(out:Frustum, camera:Camera3D, aspect:Float):V
 	#error "flight.Camera: no backend for this target."
 #end
 }
-inline function isBoxInCamera3dFrustum(camera:Camera3D, aabb:Aabb, aspect:Float):Bool {
+extern inline function isBoxInCamera3dFrustum(camera:Camera3D, aabb:Aabb, aspect:Float):Bool {
 #if hl
 	return flight._hl._fn.Camera.isBoxInCamera3dFrustum(camera, aabb, aspect);
 #elseif cpp
@@ -187,7 +187,7 @@ inline function isBoxInCamera3dFrustum(camera:Camera3D, aabb:Aabb, aspect:Float)
 	#error "flight.Camera: no backend for this target."
 #end
 }
-inline function isPointInCamera3dFrustum(camera:Camera3D, point:Vector3, aspect:Float):Bool {
+extern inline function isPointInCamera3dFrustum(camera:Camera3D, point:Vector3, aspect:Float):Bool {
 #if hl
 	return flight._hl._fn.Camera.isPointInCamera3dFrustum(camera, point, aspect);
 #elseif cpp
@@ -198,7 +198,7 @@ inline function isPointInCamera3dFrustum(camera:Camera3D, point:Vector3, aspect:
 	#error "flight.Camera: no backend for this target."
 #end
 }
-inline function isSphereInCamera3dFrustum(camera:Camera3D, sphere:BoundingSphere, aspect:Float):Bool {
+extern inline function isSphereInCamera3dFrustum(camera:Camera3D, sphere:BoundingSphere, aspect:Float):Bool {
 #if hl
 	return flight._hl._fn.Camera.isSphereInCamera3dFrustum(camera, sphere, aspect);
 #elseif cpp
@@ -209,7 +209,7 @@ inline function isSphereInCamera3dFrustum(camera:Camera3D, sphere:BoundingSphere
 	#error "flight.Camera: no backend for this target."
 #end
 }
-inline function getCamera3dLinearDepth(camera:Camera3D, ndcZ:Float):Float {
+extern inline function getCamera3dLinearDepth(camera:Camera3D, ndcZ:Float):Float {
 #if hl
 	return flight._hl._fn.Camera.getCamera3dLinearDepth(camera, ndcZ);
 #elseif cpp
@@ -220,7 +220,7 @@ inline function getCamera3dLinearDepth(camera:Camera3D, ndcZ:Float):Float {
 	#error "flight.Camera: no backend for this target."
 #end
 }
-inline function getCamera3dViewSpaceZ(camera:Camera3D, ndcZ:Float):Float {
+extern inline function getCamera3dViewSpaceZ(camera:Camera3D, ndcZ:Float):Float {
 #if hl
 	return flight._hl._fn.Camera.getCamera3dViewSpaceZ(camera, ndcZ);
 #elseif cpp
@@ -231,7 +231,7 @@ inline function getCamera3dViewSpaceZ(camera:Camera3D, ndcZ:Float):Float {
 	#error "flight.Camera: no backend for this target."
 #end
 }
-inline function areCameraGuardsEnabled(guardState:Dynamic):Bool {
+extern inline function areCameraGuardsEnabled(guardState:Dynamic):Bool {
 #if hl
 	return flight._hl._fn.Camera.areCameraGuardsEnabled(guardState);
 #elseif cpp
@@ -242,7 +242,7 @@ inline function areCameraGuardsEnabled(guardState:Dynamic):Bool {
 	#error "flight.Camera: no backend for this target."
 #end
 }
-inline function disableCameraGuards(guardState:Dynamic):Void {
+extern inline function disableCameraGuards(guardState:Dynamic):Void {
 #if hl
 	flight._hl._fn.Camera.disableCameraGuards(guardState);
 #elseif cpp
@@ -253,7 +253,7 @@ inline function disableCameraGuards(guardState:Dynamic):Void {
 	#error "flight.Camera: no backend for this target."
 #end
 }
-inline function enableCameraGuards(guardState:Dynamic, logState:Dynamic, clockFn:Dynamic, clockCtx:Dynamic):Void {
+extern inline function enableCameraGuards(guardState:Dynamic, logState:Dynamic, clockFn:Dynamic, clockCtx:Dynamic):Void {
 #if hl
 	flight._hl._fn.Camera.enableCameraGuards(guardState, logState, clockFn, clockCtx);
 #elseif cpp
@@ -264,7 +264,7 @@ inline function enableCameraGuards(guardState:Dynamic, logState:Dynamic, clockFn
 	#error "flight.Camera: no backend for this target."
 #end
 }
-inline function explainCamera3dView(camera:Camera3D):Camera3DViewExplanation {
+extern inline function explainCamera3dView(camera:Camera3D):Camera3DViewExplanation {
 #if hl
 	return flight._hl._fn.Camera.explainCamera3dView(camera);
 #elseif cpp
@@ -275,18 +275,18 @@ inline function explainCamera3dView(camera:Camera3D):Camera3DViewExplanation {
 	#error "flight.Camera: no backend for this target."
 #end
 }
-inline function getCamera3dFrustumCorners(out:Dynamic, outLen:Int, camera:Camera3D, aspect:Float):Bool {
+extern inline function getCamera3dFrustumCorners(out:Dynamic, camera:Camera3D, aspect:Float):Bool {
 #if hl
-	return flight._hl._fn.Camera.getCamera3dFrustumCorners(out, outLen, camera, aspect);
+	return flight._hl._fn.Camera.getCamera3dFrustumCorners(out, camera, aspect);
 #elseif cpp
-	return flight._cpp._fn.Camera.getCamera3dFrustumCorners(out, outLen, camera, aspect);
+	return flight._cpp._fn.Camera.getCamera3dFrustumCorners(out, camera, aspect);
 #elseif (js && flight_esm)
-	return flight._js._fn.Camera.getCamera3dFrustumCorners(out, outLen, camera, aspect);
+	return flight._js._fn.Camera.getCamera3dFrustumCorners(out, camera, aspect);
 #else
 	#error "flight.Camera: no backend for this target."
 #end
 }
-inline function getCamera3dRayThroughBoundingSphere(out:Ray3D, camera:Camera3D, sphere:BoundingSphere, aspect:Float):Bool {
+extern inline function getCamera3dRayThroughBoundingSphere(out:Ray3D, camera:Camera3D, sphere:BoundingSphere, aspect:Float):Bool {
 #if hl
 	return flight._hl._fn.Camera.getCamera3dRayThroughBoundingSphere(out, camera, sphere, aspect);
 #elseif cpp
@@ -297,7 +297,7 @@ inline function getCamera3dRayThroughBoundingSphere(out:Ray3D, camera:Camera3D, 
 	#error "flight.Camera: no backend for this target."
 #end
 }
-inline function intersectCamera3dRayWithPlane(out:Vector3, ray:Ray3D, plane:Plane):Bool {
+extern inline function intersectCamera3dRayWithPlane(out:Vector3, ray:Ray3D, plane:Plane):Bool {
 #if hl
 	return flight._hl._fn.Camera.intersectCamera3dRayWithPlane(out, ray, plane);
 #elseif cpp
@@ -308,7 +308,7 @@ inline function intersectCamera3dRayWithPlane(out:Vector3, ray:Ray3D, plane:Plan
 	#error "flight.Camera: no backend for this target."
 #end
 }
-inline function getCamera2dParallaxPoint(camera:Camera2D, viewportWidth:Float, viewportHeight:Float, factor:Float, out:Vector2):Void {
+extern inline function getCamera2dParallaxPoint(camera:Camera2D, viewportWidth:Float, viewportHeight:Float, factor:Float, out:Vector2):Void {
 #if hl
 	flight._hl._fn.Camera.getCamera2dParallaxPoint(camera, viewportWidth, viewportHeight, factor, out);
 #elseif cpp
@@ -319,7 +319,7 @@ inline function getCamera2dParallaxPoint(camera:Camera2D, viewportWidth:Float, v
 	#error "flight.Camera: no backend for this target."
 #end
 }
-inline function getCamera3dScreenToWorldRay(out:Ray3D, camera:Camera3D, ndcX:Float, ndcY:Float, aspect:Float):Bool {
+extern inline function getCamera3dScreenToWorldRay(out:Ray3D, camera:Camera3D, ndcX:Float, ndcY:Float, aspect:Float):Bool {
 #if hl
 	return flight._hl._fn.Camera.getCamera3dScreenToWorldRay(out, camera, ndcX, ndcY, aspect);
 #elseif cpp
@@ -330,7 +330,7 @@ inline function getCamera3dScreenToWorldRay(out:Ray3D, camera:Camera3D, ndcX:Flo
 	#error "flight.Camera: no backend for this target."
 #end
 }
-inline function getCamera3dWorldToScreen(out:Vector3, camera:Camera3D, worldPoint:Vector3, aspect:Float):Bool {
+extern inline function getCamera3dWorldToScreen(out:Vector3, camera:Camera3D, worldPoint:Vector3, aspect:Float):Bool {
 #if hl
 	return flight._hl._fn.Camera.getCamera3dWorldToScreen(out, camera, worldPoint, aspect);
 #elseif cpp
@@ -341,7 +341,7 @@ inline function getCamera3dWorldToScreen(out:Vector3, camera:Camera3D, worldPoin
 	#error "flight.Camera: no backend for this target."
 #end
 }
-inline function createOrthographicProjection():Dynamic {
+extern inline function createOrthographicProjection():Dynamic {
 #if hl
 	return flight._hl._fn.Camera.createOrthographicProjection();
 #elseif cpp
@@ -352,7 +352,7 @@ inline function createOrthographicProjection():Dynamic {
 	#error "flight.Camera: no backend for this target."
 #end
 }
-inline function createPerspectiveProjection():Dynamic {
+extern inline function createPerspectiveProjection():Dynamic {
 #if hl
 	return flight._hl._fn.Camera.createPerspectiveProjection();
 #elseif cpp
@@ -363,7 +363,7 @@ inline function createPerspectiveProjection():Dynamic {
 	#error "flight.Camera: no backend for this target."
 #end
 }
-inline function createRawProjection():Dynamic {
+extern inline function createRawProjection():Dynamic {
 #if hl
 	return flight._hl._fn.Camera.createRawProjection();
 #elseif cpp
@@ -374,7 +374,7 @@ inline function createRawProjection():Dynamic {
 	#error "flight.Camera: no backend for this target."
 #end
 }
-inline function getOrthographicProjectionTexelSize(projection:OrthographicProjection, pixelWidth:Float, pixelHeight:Float):Float {
+extern inline function getOrthographicProjectionTexelSize(projection:OrthographicProjection, pixelWidth:Float, pixelHeight:Float):Float {
 #if hl
 	return flight._hl._fn.Camera.getOrthographicProjectionTexelSize(projection, pixelWidth, pixelHeight);
 #elseif cpp
@@ -385,7 +385,7 @@ inline function getOrthographicProjectionTexelSize(projection:OrthographicProjec
 	#error "flight.Camera: no backend for this target."
 #end
 }
-inline function isOrthographicProjection(projection:Projection):Bool {
+extern inline function isOrthographicProjection(projection:Projection):Bool {
 #if hl
 	return flight._hl._fn.Camera.isOrthographicProjection(projection);
 #elseif cpp
@@ -396,7 +396,7 @@ inline function isOrthographicProjection(projection:Projection):Bool {
 	#error "flight.Camera: no backend for this target."
 #end
 }
-inline function isPerspectiveProjection(projection:Projection):Bool {
+extern inline function isPerspectiveProjection(projection:Projection):Bool {
 #if hl
 	return flight._hl._fn.Camera.isPerspectiveProjection(projection);
 #elseif cpp
@@ -407,7 +407,7 @@ inline function isPerspectiveProjection(projection:Projection):Bool {
 	#error "flight.Camera: no backend for this target."
 #end
 }
-inline function isRawProjection(projection:Projection):Bool {
+extern inline function isRawProjection(projection:Projection):Bool {
 #if hl
 	return flight._hl._fn.Camera.isRawProjection(projection);
 #elseif cpp
@@ -418,7 +418,7 @@ inline function isRawProjection(projection:Projection):Bool {
 	#error "flight.Camera: no backend for this target."
 #end
 }
-inline function setProjectionMatrix4(out:Matrix4, projection:Projection, aspect:Float, near:Float, far:Float):Void {
+extern inline function setProjectionMatrix4(out:Matrix4, projection:Projection, aspect:Float, near:Float, far:Float):Void {
 #if hl
 	flight._hl._fn.Camera.setProjectionMatrix4(out, projection, aspect, near, far);
 #elseif cpp
@@ -429,7 +429,7 @@ inline function setProjectionMatrix4(out:Matrix4, projection:Projection, aspect:
 	#error "flight.Camera: no backend for this target."
 #end
 }
-inline function projectCamera2dPoint(camera:Camera2D, viewportWidth:Float, viewportHeight:Float, worldX:Float, worldY:Float, out:Vector2):Void {
+extern inline function projectCamera2dPoint(camera:Camera2D, viewportWidth:Float, viewportHeight:Float, worldX:Float, worldY:Float, out:Vector2):Void {
 #if hl
 	flight._hl._fn.Camera.projectCamera2dPoint(camera, viewportWidth, viewportHeight, worldX, worldY, out);
 #elseif cpp
@@ -440,7 +440,7 @@ inline function projectCamera2dPoint(camera:Camera2D, viewportWidth:Float, viewp
 	#error "flight.Camera: no backend for this target."
 #end
 }
-inline function unprojectCamera2dPoint(camera:Camera2D, viewportWidth:Float, viewportHeight:Float, screenX:Float, screenY:Float, out:Vector2):Void {
+extern inline function unprojectCamera2dPoint(camera:Camera2D, viewportWidth:Float, viewportHeight:Float, screenX:Float, screenY:Float, out:Vector2):Void {
 #if hl
 	flight._hl._fn.Camera.unprojectCamera2dPoint(camera, viewportWidth, viewportHeight, screenX, screenY, out);
 #elseif cpp
@@ -451,7 +451,7 @@ inline function unprojectCamera2dPoint(camera:Camera2D, viewportWidth:Float, vie
 	#error "flight.Camera: no backend for this target."
 #end
 }
-inline function applyObliqueNearClipPlane(projection:Matrix4, viewSpacePlane:Plane):Void {
+extern inline function applyObliqueNearClipPlane(projection:Matrix4, viewSpacePlane:Plane):Void {
 #if hl
 	flight._hl._fn.Camera.applyObliqueNearClipPlane(projection, viewSpacePlane);
 #elseif cpp
@@ -462,7 +462,7 @@ inline function applyObliqueNearClipPlane(projection:Matrix4, viewSpacePlane:Pla
 	#error "flight.Camera: no backend for this target."
 #end
 }
-inline function reflectCamera3dByPlane(out:Camera3D, camera:Camera3D, plane:Plane):Void {
+extern inline function reflectCamera3dByPlane(out:Camera3D, camera:Camera3D, plane:Plane):Void {
 #if hl
 	flight._hl._fn.Camera.reflectCamera3dByPlane(out, camera, plane);
 #elseif cpp
@@ -473,7 +473,7 @@ inline function reflectCamera3dByPlane(out:Camera3D, camera:Camera3D, plane:Plan
 	#error "flight.Camera: no backend for this target."
 #end
 }
-inline function configureDirectionalShadowCamera3d(camera:Camera3D, lightDirection:Vector3, sceneBounds:Aabb):Void {
+extern inline function configureDirectionalShadowCamera3d(camera:Camera3D, lightDirection:Vector3, sceneBounds:Aabb):Void {
 #if hl
 	flight._hl._fn.Camera.configureDirectionalShadowCamera3d(camera, lightDirection, sceneBounds);
 #elseif cpp
@@ -484,7 +484,7 @@ inline function configureDirectionalShadowCamera3d(camera:Camera3D, lightDirecti
 	#error "flight.Camera: no backend for this target."
 #end
 }
-inline function configureDirectionalShadowCamera3dTightFit(camera:Camera3D, lightDirection:Vector3, worldBounds:Aabb, padding:Float):Void {
+extern inline function configureDirectionalShadowCamera3dTightFit(camera:Camera3D, lightDirection:Vector3, worldBounds:Aabb, padding:Float):Void {
 #if hl
 	flight._hl._fn.Camera.configureDirectionalShadowCamera3dTightFit(camera, lightDirection, worldBounds, padding);
 #elseif cpp
@@ -495,7 +495,7 @@ inline function configureDirectionalShadowCamera3dTightFit(camera:Camera3D, ligh
 	#error "flight.Camera: no backend for this target."
 #end
 }
-inline function getCamera2dViewMatrix(camera:Camera2D, viewportWidth:Float, viewportHeight:Float, out:Matrix):Void {
+extern inline function getCamera2dViewMatrix(camera:Camera2D, viewportWidth:Float, viewportHeight:Float, out:Matrix):Void {
 #if hl
 	flight._hl._fn.Camera.getCamera2dViewMatrix(camera, viewportWidth, viewportHeight, out);
 #elseif cpp
@@ -506,7 +506,7 @@ inline function getCamera2dViewMatrix(camera:Camera2D, viewportWidth:Float, view
 	#error "flight.Camera: no backend for this target."
 #end
 }
-inline function getCamera2dVisibleBounds(guardState:Dynamic, camera:Camera2D, viewportWidth:Float, viewportHeight:Float, out:Rectangle):Void {
+extern inline function getCamera2dVisibleBounds(guardState:Dynamic, camera:Camera2D, viewportWidth:Float, viewportHeight:Float, out:Rectangle):Void {
 #if hl
 	flight._hl._fn.Camera.getCamera2dVisibleBounds(guardState, camera, viewportWidth, viewportHeight, out);
 #elseif cpp
@@ -517,7 +517,7 @@ inline function getCamera2dVisibleBounds(guardState:Dynamic, camera:Camera2D, vi
 	#error "flight.Camera: no backend for this target."
 #end
 }
-inline function zoomCamera2dAtScreenPoint(camera:Camera2D, viewportWidth:Float, viewportHeight:Float, screenX:Float, screenY:Float, zoom:Float):Void {
+extern inline function zoomCamera2dAtScreenPoint(camera:Camera2D, viewportWidth:Float, viewportHeight:Float, screenX:Float, screenY:Float, zoom:Float):Void {
 #if hl
 	flight._hl._fn.Camera.zoomCamera2dAtScreenPoint(camera, viewportWidth, viewportHeight, screenX, screenY, zoom);
 #elseif cpp
@@ -528,7 +528,7 @@ inline function zoomCamera2dAtScreenPoint(camera:Camera2D, viewportWidth:Float, 
 	#error "flight.Camera: no backend for this target."
 #end
 }
-inline function freeCamera3D(ptr:Camera3D):Void {
+extern inline function freeCamera3D(ptr:Camera3D):Void {
 #if hl
 	flight._hl._fn.Camera.freeCamera3D(ptr);
 #elseif cpp
@@ -539,7 +539,7 @@ inline function freeCamera3D(ptr:Camera3D):Void {
 	#error "flight.Camera: no backend for this target."
 #end
 }
-inline function freeCamera2D(ptr:Camera2D):Void {
+extern inline function freeCamera2D(ptr:Camera2D):Void {
 #if hl
 	flight._hl._fn.Camera.freeCamera2D(ptr);
 #elseif cpp
@@ -550,7 +550,7 @@ inline function freeCamera2D(ptr:Camera2D):Void {
 	#error "flight.Camera: no backend for this target."
 #end
 }
-inline function freeCamera3DviewExplanation(ptr:Camera3DViewExplanation):Void {
+extern inline function freeCamera3DviewExplanation(ptr:Camera3DViewExplanation):Void {
 #if hl
 	flight._hl._fn.Camera.freeCamera3DviewExplanation(ptr);
 #elseif cpp

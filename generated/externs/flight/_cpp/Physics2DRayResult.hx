@@ -10,5 +10,5 @@ abstract Physics2DRayResult(cpp.Star<cpp.Void>) {
 
 	inline function get_hitCount():Int return Physics2DRayResult_Ffi.get_hitCount(this);
 
-	inline function set_hitCount(value:Int):Int return Physics2DRayResult_Ffi.set_hitCount(this, value);
+	inline function set_hitCount(value:Int):Int { Physics2DRayResult_Ffi.set_hitCount(this, value); return value; }
 }

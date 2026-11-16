@@ -1,6 +1,6 @@
 package flight;
 
-inline function readAbcFile(source:Dynamic, sourceLen:Int):AbcFile {
+extern inline function readAbcFile(source:Dynamic, sourceLen:Int):AbcFile {
 #if hl
 	return flight._hl._fn.Abc.readAbcFile(source, sourceLen);
 #elseif cpp
@@ -11,7 +11,7 @@ inline function readAbcFile(source:Dynamic, sourceLen:Int):AbcFile {
 	#error "flight.Abc: no backend for this target."
 #end
 }
-inline function readAbcInstructions(code:Dynamic, codeLen:Int):Dynamic {
+extern inline function readAbcInstructions(code:Dynamic, codeLen:Int):Dynamic {
 #if hl
 	return flight._hl._fn.Abc.readAbcInstructions(code, codeLen);
 #elseif cpp
@@ -22,7 +22,7 @@ inline function readAbcInstructions(code:Dynamic, codeLen:Int):Dynamic {
 	#error "flight.Abc: no backend for this target."
 #end
 }
-inline function freeAbcFile(ptr:AbcFile):Void {
+extern inline function freeAbcFile(ptr:AbcFile):Void {
 #if hl
 	flight._hl._fn.Abc.freeAbcFile(ptr);
 #elseif cpp

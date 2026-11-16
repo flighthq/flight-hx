@@ -20,30 +20,30 @@ abstract ParticleSpawnEvent(cpp.Star<cpp.Void>) {
 
 	inline function get_x():Single return ParticleSpawnEvent_Ffi.get_x(this);
 
-	inline function set_x(value:Single):Single return ParticleSpawnEvent_Ffi.set_x(this, value);
+	inline function set_x(value:Single):Single { ParticleSpawnEvent_Ffi.set_x(this, value); return value; }
 	public var y(get, set):Single;
 
 	inline function get_y():Single return ParticleSpawnEvent_Ffi.get_y(this);
 
-	inline function set_y(value:Single):Single return ParticleSpawnEvent_Ffi.set_y(this, value);
+	inline function set_y(value:Single):Single { ParticleSpawnEvent_Ffi.set_y(this, value); return value; }
 	public var z(get, set):Single;
 
 	inline function get_z():Single return ParticleSpawnEvent_Ffi.get_z(this);
 
-	inline function set_z(value:Single):Single return ParticleSpawnEvent_Ffi.set_z(this, value);
+	inline function set_z(value:Single):Single { ParticleSpawnEvent_Ffi.set_z(this, value); return value; }
 	public var vx(get, set):Single;
 
 	inline function get_vx():Single return ParticleSpawnEvent_Ffi.get_vx(this);
 
-	inline function set_vx(value:Single):Single return ParticleSpawnEvent_Ffi.set_vx(this, value);
+	inline function set_vx(value:Single):Single { ParticleSpawnEvent_Ffi.set_vx(this, value); return value; }
 	public var vy(get, set):Single;
 
 	inline function get_vy():Single return ParticleSpawnEvent_Ffi.get_vy(this);
 
-	inline function set_vy(value:Single):Single return ParticleSpawnEvent_Ffi.set_vy(this, value);
+	inline function set_vy(value:Single):Single { ParticleSpawnEvent_Ffi.set_vy(this, value); return value; }
 	public var vz(get, set):Single;
 
 	inline function get_vz():Single return ParticleSpawnEvent_Ffi.get_vz(this);
 
-	inline function set_vz(value:Single):Single return ParticleSpawnEvent_Ffi.set_vz(this, value);
+	inline function set_vz(value:Single):Single { ParticleSpawnEvent_Ffi.set_vz(this, value); return value; }
 }

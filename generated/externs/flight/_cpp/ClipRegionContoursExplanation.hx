@@ -12,10 +12,10 @@ abstract ClipRegionContoursExplanation(cpp.Star<cpp.Void>) {
 
 	inline function get_contourIndex():Int return ClipRegionContoursExplanation_Ffi.get_contourIndex(this);
 
-	inline function set_contourIndex(value:Int):Int return ClipRegionContoursExplanation_Ffi.set_contourIndex(this, value);
+	inline function set_contourIndex(value:Int):Int { ClipRegionContoursExplanation_Ffi.set_contourIndex(this, value); return value; }
 	public var coordinateCount(get, set):Int;
 
 	inline function get_coordinateCount():Int return ClipRegionContoursExplanation_Ffi.get_coordinateCount(this);
 
-	inline function set_coordinateCount(value:Int):Int return ClipRegionContoursExplanation_Ffi.set_coordinateCount(this, value);
+	inline function set_coordinateCount(value:Int):Int { ClipRegionContoursExplanation_Ffi.set_coordinateCount(this, value); return value; }
 }

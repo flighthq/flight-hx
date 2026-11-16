@@ -1,6 +1,6 @@
 package flight;
 
-inline function createCameraShake():CameraShake {
+extern inline function createCameraShake():CameraShake {
 #if hl
 	return flight._hl._fn.CameraControls.createCameraShake();
 #elseif cpp
@@ -11,7 +11,7 @@ inline function createCameraShake():CameraShake {
 	#error "flight.CameraControls: no backend for this target."
 #end
 }
-inline function createCameraShakeOffset():CameraShakeOffset {
+extern inline function createCameraShakeOffset():CameraShakeOffset {
 #if hl
 	return flight._hl._fn.CameraControls.createCameraShakeOffset();
 #elseif cpp
@@ -22,7 +22,7 @@ inline function createCameraShakeOffset():CameraShakeOffset {
 	#error "flight.CameraControls: no backend for this target."
 #end
 }
-inline function addCameraShakeTrauma(shake:CameraShake, amount:Float):Void {
+extern inline function addCameraShakeTrauma(shake:CameraShake, amount:Float):Void {
 #if hl
 	flight._hl._fn.CameraControls.addCameraShakeTrauma(shake, amount);
 #elseif cpp
@@ -33,7 +33,7 @@ inline function addCameraShakeTrauma(shake:CameraShake, amount:Float):Void {
 	#error "flight.CameraControls: no backend for this target."
 #end
 }
-inline function resetCameraShake(shake:CameraShake):Void {
+extern inline function resetCameraShake(shake:CameraShake):Void {
 #if hl
 	flight._hl._fn.CameraControls.resetCameraShake(shake);
 #elseif cpp
@@ -44,7 +44,7 @@ inline function resetCameraShake(shake:CameraShake):Void {
 	#error "flight.CameraControls: no backend for this target."
 #end
 }
-inline function updateCameraShake(shake:CameraShake, dt:Float, out:CameraShakeOffset):Void {
+extern inline function updateCameraShake(shake:CameraShake, dt:Float, out:CameraShakeOffset):Void {
 #if hl
 	flight._hl._fn.CameraControls.updateCameraShake(shake, dt, out);
 #elseif cpp
@@ -55,7 +55,7 @@ inline function updateCameraShake(shake:CameraShake, dt:Float, out:CameraShakeOf
 	#error "flight.CameraControls: no backend for this target."
 #end
 }
-inline function createFlyCameraController(options:FlyCameraControllerOptions):FlyCameraController {
+extern inline function createFlyCameraController(options:FlyCameraControllerOptions):FlyCameraController {
 #if hl
 	return flight._hl._fn.CameraControls.createFlyCameraController(options);
 #elseif cpp
@@ -66,7 +66,7 @@ inline function createFlyCameraController(options:FlyCameraControllerOptions):Fl
 	#error "flight.CameraControls: no backend for this target."
 #end
 }
-inline function cloneFlyCameraController(source:FlyCameraController):FlyCameraController {
+extern inline function cloneFlyCameraController(source:FlyCameraController):FlyCameraController {
 #if hl
 	return flight._hl._fn.CameraControls.cloneFlyCameraController(source);
 #elseif cpp
@@ -77,7 +77,7 @@ inline function cloneFlyCameraController(source:FlyCameraController):FlyCameraCo
 	#error "flight.CameraControls: no backend for this target."
 #end
 }
-inline function copyFlyCameraController(out:FlyCameraController, source:FlyCameraController):Void {
+extern inline function copyFlyCameraController(out:FlyCameraController, source:FlyCameraController):Void {
 #if hl
 	flight._hl._fn.CameraControls.copyFlyCameraController(out, source);
 #elseif cpp
@@ -88,7 +88,7 @@ inline function copyFlyCameraController(out:FlyCameraController, source:FlyCamer
 	#error "flight.CameraControls: no backend for this target."
 #end
 }
-inline function lookFlyCameraController(controller:FlyCameraController, deltaYaw:Float, deltaPitch:Float):Void {
+extern inline function lookFlyCameraController(controller:FlyCameraController, deltaYaw:Float, deltaPitch:Float):Void {
 #if hl
 	flight._hl._fn.CameraControls.lookFlyCameraController(controller, deltaYaw, deltaPitch);
 #elseif cpp
@@ -99,7 +99,7 @@ inline function lookFlyCameraController(controller:FlyCameraController, deltaYaw
 	#error "flight.CameraControls: no backend for this target."
 #end
 }
-inline function moveFlyCameraController(controller:FlyCameraController, forward:Float, right:Float, up:Float):Void {
+extern inline function moveFlyCameraController(controller:FlyCameraController, forward:Float, right:Float, up:Float):Void {
 #if hl
 	flight._hl._fn.CameraControls.moveFlyCameraController(controller, forward, right, up);
 #elseif cpp
@@ -110,7 +110,7 @@ inline function moveFlyCameraController(controller:FlyCameraController, forward:
 	#error "flight.CameraControls: no backend for this target."
 #end
 }
-inline function resetFlyCameraController(controller:FlyCameraController, options:FlyCameraControllerOptions):Void {
+extern inline function resetFlyCameraController(controller:FlyCameraController, options:FlyCameraControllerOptions):Void {
 #if hl
 	flight._hl._fn.CameraControls.resetFlyCameraController(controller, options);
 #elseif cpp
@@ -121,7 +121,7 @@ inline function resetFlyCameraController(controller:FlyCameraController, options
 	#error "flight.CameraControls: no backend for this target."
 #end
 }
-inline function snapFlyCameraController(controller:FlyCameraController):Void {
+extern inline function snapFlyCameraController(controller:FlyCameraController):Void {
 #if hl
 	flight._hl._fn.CameraControls.snapFlyCameraController(controller);
 #elseif cpp
@@ -132,7 +132,7 @@ inline function snapFlyCameraController(controller:FlyCameraController):Void {
 	#error "flight.CameraControls: no backend for this target."
 #end
 }
-inline function updateFlyCameraController(controller:FlyCameraController, camera:Camera3D, deltaTime:Float):Void {
+extern inline function updateFlyCameraController(controller:FlyCameraController, camera:Camera3D, deltaTime:Float):Void {
 #if hl
 	flight._hl._fn.CameraControls.updateFlyCameraController(controller, camera, deltaTime);
 #elseif cpp
@@ -143,7 +143,7 @@ inline function updateFlyCameraController(controller:FlyCameraController, camera
 	#error "flight.CameraControls: no backend for this target."
 #end
 }
-inline function updateCamera2dFollow(guardState:Dynamic, camera:Camera2D, viewportWidth:Float, viewportHeight:Float, targetX:Float, targetY:Float, deltaTime:Float, options:Camera2DFollowOptions):Void {
+extern inline function updateCamera2dFollow(guardState:Dynamic, camera:Camera2D, viewportWidth:Float, viewportHeight:Float, targetX:Float, targetY:Float, deltaTime:Float, options:Camera2DFollowOptions):Void {
 #if hl
 	flight._hl._fn.CameraControls.updateCamera2dFollow(guardState, camera, viewportWidth, viewportHeight, targetX, targetY, deltaTime, options);
 #elseif cpp
@@ -154,7 +154,7 @@ inline function updateCamera2dFollow(guardState:Dynamic, camera:Camera2D, viewpo
 	#error "flight.CameraControls: no backend for this target."
 #end
 }
-inline function frameOrbitCameraControllerToSphere(controller:OrbitCameraController, projection:Projection, sphere:BoundingSphere, aspect:Float, padding:Float):Bool {
+extern inline function frameOrbitCameraControllerToSphere(controller:OrbitCameraController, projection:Projection, sphere:BoundingSphere, aspect:Float, padding:Float):Bool {
 #if hl
 	return flight._hl._fn.CameraControls.frameOrbitCameraControllerToSphere(controller, projection, sphere, aspect, padding);
 #elseif cpp
@@ -165,7 +165,7 @@ inline function frameOrbitCameraControllerToSphere(controller:OrbitCameraControl
 	#error "flight.CameraControls: no backend for this target."
 #end
 }
-inline function getPerspectiveProjectionFrameDistanceToSphere(projection:PerspectiveProjection, radius:Float, aspect:Float, padding:Float):Float {
+extern inline function getPerspectiveProjectionFrameDistanceToSphere(projection:PerspectiveProjection, radius:Float, aspect:Float, padding:Float):Float {
 #if hl
 	return flight._hl._fn.CameraControls.getPerspectiveProjectionFrameDistanceToSphere(projection, radius, aspect, padding);
 #elseif cpp
@@ -176,7 +176,7 @@ inline function getPerspectiveProjectionFrameDistanceToSphere(projection:Perspec
 	#error "flight.CameraControls: no backend for this target."
 #end
 }
-inline function setOrthographicProjectionFrameToSphere(projection:OrthographicProjection, radius:Float, aspect:Float, padding:Float):Void {
+extern inline function setOrthographicProjectionFrameToSphere(projection:OrthographicProjection, radius:Float, aspect:Float, padding:Float):Void {
 #if hl
 	flight._hl._fn.CameraControls.setOrthographicProjectionFrameToSphere(projection, radius, aspect, padding);
 #elseif cpp
@@ -187,7 +187,7 @@ inline function setOrthographicProjectionFrameToSphere(projection:OrthographicPr
 	#error "flight.CameraControls: no backend for this target."
 #end
 }
-inline function createOrbitCameraController(options:OrbitCameraControllerOptions):OrbitCameraController {
+extern inline function createOrbitCameraController(options:OrbitCameraControllerOptions):OrbitCameraController {
 #if hl
 	return flight._hl._fn.CameraControls.createOrbitCameraController(options);
 #elseif cpp
@@ -198,7 +198,7 @@ inline function createOrbitCameraController(options:OrbitCameraControllerOptions
 	#error "flight.CameraControls: no backend for this target."
 #end
 }
-inline function cloneOrbitCameraController(source:OrbitCameraController):OrbitCameraController {
+extern inline function cloneOrbitCameraController(source:OrbitCameraController):OrbitCameraController {
 #if hl
 	return flight._hl._fn.CameraControls.cloneOrbitCameraController(source);
 #elseif cpp
@@ -209,7 +209,7 @@ inline function cloneOrbitCameraController(source:OrbitCameraController):OrbitCa
 	#error "flight.CameraControls: no backend for this target."
 #end
 }
-inline function copyOrbitCameraController(out:OrbitCameraController, source:OrbitCameraController):Void {
+extern inline function copyOrbitCameraController(out:OrbitCameraController, source:OrbitCameraController):Void {
 #if hl
 	flight._hl._fn.CameraControls.copyOrbitCameraController(out, source);
 #elseif cpp
@@ -220,7 +220,7 @@ inline function copyOrbitCameraController(out:OrbitCameraController, source:Orbi
 	#error "flight.CameraControls: no backend for this target."
 #end
 }
-inline function dollyOrbitCameraController(controller:OrbitCameraController, deltaDistance:Float):Void {
+extern inline function dollyOrbitCameraController(controller:OrbitCameraController, deltaDistance:Float):Void {
 #if hl
 	flight._hl._fn.CameraControls.dollyOrbitCameraController(controller, deltaDistance);
 #elseif cpp
@@ -231,7 +231,7 @@ inline function dollyOrbitCameraController(controller:OrbitCameraController, del
 	#error "flight.CameraControls: no backend for this target."
 #end
 }
-inline function panOrbitCameraController(controller:OrbitCameraController, deltaRight:Float, deltaUp:Float):Void {
+extern inline function panOrbitCameraController(controller:OrbitCameraController, deltaRight:Float, deltaUp:Float):Void {
 #if hl
 	flight._hl._fn.CameraControls.panOrbitCameraController(controller, deltaRight, deltaUp);
 #elseif cpp
@@ -242,7 +242,7 @@ inline function panOrbitCameraController(controller:OrbitCameraController, delta
 	#error "flight.CameraControls: no backend for this target."
 #end
 }
-inline function panOrbitCameraControllerInViewPlane(controller:OrbitCameraController, deltaRight:Float, deltaUp:Float):Void {
+extern inline function panOrbitCameraControllerInViewPlane(controller:OrbitCameraController, deltaRight:Float, deltaUp:Float):Void {
 #if hl
 	flight._hl._fn.CameraControls.panOrbitCameraControllerInViewPlane(controller, deltaRight, deltaUp);
 #elseif cpp
@@ -253,7 +253,7 @@ inline function panOrbitCameraControllerInViewPlane(controller:OrbitCameraContro
 	#error "flight.CameraControls: no backend for this target."
 #end
 }
-inline function resetOrbitCameraController(controller:OrbitCameraController, options:OrbitCameraControllerOptions):Void {
+extern inline function resetOrbitCameraController(controller:OrbitCameraController, options:OrbitCameraControllerOptions):Void {
 #if hl
 	flight._hl._fn.CameraControls.resetOrbitCameraController(controller, options);
 #elseif cpp
@@ -264,7 +264,7 @@ inline function resetOrbitCameraController(controller:OrbitCameraController, opt
 	#error "flight.CameraControls: no backend for this target."
 #end
 }
-inline function rotateOrbitCameraController(controller:OrbitCameraController, deltaAzimuth:Float, deltaPolar:Float):Void {
+extern inline function rotateOrbitCameraController(controller:OrbitCameraController, deltaAzimuth:Float, deltaPolar:Float):Void {
 #if hl
 	flight._hl._fn.CameraControls.rotateOrbitCameraController(controller, deltaAzimuth, deltaPolar);
 #elseif cpp
@@ -275,7 +275,7 @@ inline function rotateOrbitCameraController(controller:OrbitCameraController, de
 	#error "flight.CameraControls: no backend for this target."
 #end
 }
-inline function snapOrbitCameraController(controller:OrbitCameraController):Void {
+extern inline function snapOrbitCameraController(controller:OrbitCameraController):Void {
 #if hl
 	flight._hl._fn.CameraControls.snapOrbitCameraController(controller);
 #elseif cpp
@@ -286,7 +286,7 @@ inline function snapOrbitCameraController(controller:OrbitCameraController):Void
 	#error "flight.CameraControls: no backend for this target."
 #end
 }
-inline function updateOrbitCameraController(controller:OrbitCameraController, camera:Camera3D, deltaTime:Float):Void {
+extern inline function updateOrbitCameraController(controller:OrbitCameraController, camera:Camera3D, deltaTime:Float):Void {
 #if hl
 	flight._hl._fn.CameraControls.updateOrbitCameraController(controller, camera, deltaTime);
 #elseif cpp
@@ -297,7 +297,7 @@ inline function updateOrbitCameraController(controller:OrbitCameraController, ca
 	#error "flight.CameraControls: no backend for this target."
 #end
 }
-inline function freeCameraShake(ptr:CameraShake):Void {
+extern inline function freeCameraShake(ptr:CameraShake):Void {
 #if hl
 	flight._hl._fn.CameraControls.freeCameraShake(ptr);
 #elseif cpp
@@ -308,7 +308,7 @@ inline function freeCameraShake(ptr:CameraShake):Void {
 	#error "flight.CameraControls: no backend for this target."
 #end
 }
-inline function freeCameraShakeOffset(ptr:CameraShakeOffset):Void {
+extern inline function freeCameraShakeOffset(ptr:CameraShakeOffset):Void {
 #if hl
 	flight._hl._fn.CameraControls.freeCameraShakeOffset(ptr);
 #elseif cpp
@@ -319,7 +319,7 @@ inline function freeCameraShakeOffset(ptr:CameraShakeOffset):Void {
 	#error "flight.CameraControls: no backend for this target."
 #end
 }
-inline function freeFlyCameraController(ptr:FlyCameraController):Void {
+extern inline function freeFlyCameraController(ptr:FlyCameraController):Void {
 #if hl
 	flight._hl._fn.CameraControls.freeFlyCameraController(ptr);
 #elseif cpp
@@ -330,7 +330,7 @@ inline function freeFlyCameraController(ptr:FlyCameraController):Void {
 	#error "flight.CameraControls: no backend for this target."
 #end
 }
-inline function freeOrbitCameraController(ptr:OrbitCameraController):Void {
+extern inline function freeOrbitCameraController(ptr:OrbitCameraController):Void {
 #if hl
 	flight._hl._fn.CameraControls.freeOrbitCameraController(ptr);
 #elseif cpp

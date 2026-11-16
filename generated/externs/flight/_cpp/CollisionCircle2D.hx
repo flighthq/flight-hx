@@ -14,15 +14,15 @@ abstract CollisionCircle2D(cpp.Star<cpp.Void>) {
 
 	inline function get_x():Float return CollisionCircle2D_Ffi.get_x(this);
 
-	inline function set_x(value:Float):Float return CollisionCircle2D_Ffi.set_x(this, value);
+	inline function set_x(value:Float):Float { CollisionCircle2D_Ffi.set_x(this, value); return value; }
 	public var y(get, set):Float;
 
 	inline function get_y():Float return CollisionCircle2D_Ffi.get_y(this);
 
-	inline function set_y(value:Float):Float return CollisionCircle2D_Ffi.set_y(this, value);
+	inline function set_y(value:Float):Float { CollisionCircle2D_Ffi.set_y(this, value); return value; }
 	public var radius(get, set):Float;
 
 	inline function get_radius():Float return CollisionCircle2D_Ffi.get_radius(this);
 
-	inline function set_radius(value:Float):Float return CollisionCircle2D_Ffi.set_radius(this, value);
+	inline function set_radius(value:Float):Float { CollisionCircle2D_Ffi.set_radius(this, value); return value; }
 }

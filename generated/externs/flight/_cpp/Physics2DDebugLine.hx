@@ -20,30 +20,30 @@ abstract Physics2DDebugLine(cpp.Star<cpp.Void>) {
 
 	inline function get_bodyA():Int return Physics2DDebugLine_Ffi.get_bodyA(this);
 
-	inline function set_bodyA(value:Int):Int return Physics2DDebugLine_Ffi.set_bodyA(this, value);
+	inline function set_bodyA(value:Int):Int { Physics2DDebugLine_Ffi.set_bodyA(this, value); return value; }
 	public var bodyB(get, set):Int;
 
 	inline function get_bodyB():Int return Physics2DDebugLine_Ffi.get_bodyB(this);
 
-	inline function set_bodyB(value:Int):Int return Physics2DDebugLine_Ffi.set_bodyB(this, value);
+	inline function set_bodyB(value:Int):Int { Physics2DDebugLine_Ffi.set_bodyB(this, value); return value; }
 	public var x0(get, set):Single;
 
 	inline function get_x0():Single return Physics2DDebugLine_Ffi.get_x0(this);
 
-	inline function set_x0(value:Single):Single return Physics2DDebugLine_Ffi.set_x0(this, value);
+	inline function set_x0(value:Single):Single { Physics2DDebugLine_Ffi.set_x0(this, value); return value; }
 	public var x1(get, set):Single;
 
 	inline function get_x1():Single return Physics2DDebugLine_Ffi.get_x1(this);
 
-	inline function set_x1(value:Single):Single return Physics2DDebugLine_Ffi.set_x1(this, value);
+	inline function set_x1(value:Single):Single { Physics2DDebugLine_Ffi.set_x1(this, value); return value; }
 	public var y0(get, set):Single;
 
 	inline function get_y0():Single return Physics2DDebugLine_Ffi.get_y0(this);
 
-	inline function set_y0(value:Single):Single return Physics2DDebugLine_Ffi.set_y0(this, value);
+	inline function set_y0(value:Single):Single { Physics2DDebugLine_Ffi.set_y0(this, value); return value; }
 	public var y1(get, set):Single;
 
 	inline function get_y1():Single return Physics2DDebugLine_Ffi.get_y1(this);
 
-	inline function set_y1(value:Single):Single return Physics2DDebugLine_Ffi.set_y1(this, value);
+	inline function set_y1(value:Single):Single { Physics2DDebugLine_Ffi.set_y1(this, value); return value; }
 }

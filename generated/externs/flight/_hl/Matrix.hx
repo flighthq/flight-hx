@@ -122,7 +122,7 @@ abstract Matrix(hl.Bytes) {
 	inline public function free():Void {
 		flight._hl._fn.Geometry.freeMatrix(cast this);
 	}
-	inline public function setNodeLocal(target:Dynamic):Void {
+	inline public function setNodeLocal(target:hl.Bytes):Void {
 		flight._hl._fn.Node.setNodeLocalMatrix(target, cast this);
 	}
 	static inline public function createLottieGradient(start:hl.Bytes, startLen:Int, end:hl.Bytes, endLen:Int):flight._hl.Matrix {

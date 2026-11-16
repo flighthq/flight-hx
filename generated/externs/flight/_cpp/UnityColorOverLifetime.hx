@@ -10,5 +10,5 @@ abstract UnityColorOverLifetime(cpp.Star<cpp.Void>) {
 
 	inline function get_enabled():Bool return UnityColorOverLifetime_Ffi.get_enabled(this);
 
-	inline function set_enabled(value:Bool):Bool return UnityColorOverLifetime_Ffi.set_enabled(this, value);
+	inline function set_enabled(value:Bool):Bool { UnityColorOverLifetime_Ffi.set_enabled(this, value); return value; }
 }

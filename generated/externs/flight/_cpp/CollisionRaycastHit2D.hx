@@ -18,25 +18,25 @@ abstract CollisionRaycastHit2D(cpp.Star<cpp.Void>) {
 
 	inline function get_fraction():Float return CollisionRaycastHit2D_Ffi.get_fraction(this);
 
-	inline function set_fraction(value:Float):Float return CollisionRaycastHit2D_Ffi.set_fraction(this, value);
+	inline function set_fraction(value:Float):Float { CollisionRaycastHit2D_Ffi.set_fraction(this, value); return value; }
 	public var x(get, set):Float;
 
 	inline function get_x():Float return CollisionRaycastHit2D_Ffi.get_x(this);
 
-	inline function set_x(value:Float):Float return CollisionRaycastHit2D_Ffi.set_x(this, value);
+	inline function set_x(value:Float):Float { CollisionRaycastHit2D_Ffi.set_x(this, value); return value; }
 	public var y(get, set):Float;
 
 	inline function get_y():Float return CollisionRaycastHit2D_Ffi.get_y(this);
 
-	inline function set_y(value:Float):Float return CollisionRaycastHit2D_Ffi.set_y(this, value);
+	inline function set_y(value:Float):Float { CollisionRaycastHit2D_Ffi.set_y(this, value); return value; }
 	public var normalX(get, set):Float;
 
 	inline function get_normalX():Float return CollisionRaycastHit2D_Ffi.get_normalX(this);
 
-	inline function set_normalX(value:Float):Float return CollisionRaycastHit2D_Ffi.set_normalX(this, value);
+	inline function set_normalX(value:Float):Float { CollisionRaycastHit2D_Ffi.set_normalX(this, value); return value; }
 	public var normalY(get, set):Float;
 
 	inline function get_normalY():Float return CollisionRaycastHit2D_Ffi.get_normalY(this);
 
-	inline function set_normalY(value:Float):Float return CollisionRaycastHit2D_Ffi.set_normalY(this, value);
+	inline function set_normalY(value:Float):Float { CollisionRaycastHit2D_Ffi.set_normalY(this, value); return value; }
 }

@@ -10,5 +10,5 @@ abstract MorphShapePathBinding(cpp.Star<cpp.Void>) {
 
 	inline function get_commandIndex():Int return MorphShapePathBinding_Ffi.get_commandIndex(this);
 
-	inline function set_commandIndex(value:Int):Int return MorphShapePathBinding_Ffi.set_commandIndex(this, value);
+	inline function set_commandIndex(value:Int):Int { MorphShapePathBinding_Ffi.set_commandIndex(this, value); return value; }
 }

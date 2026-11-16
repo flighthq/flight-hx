@@ -1,6 +1,6 @@
 package flight;
 
-inline function createAnimatedNormalModifier():AnimatedNormalModifier {
+extern inline function createAnimatedNormalModifier():AnimatedNormalModifier {
 #if hl
 	return flight._hl._fn.Shading.createAnimatedNormalModifier();
 #elseif cpp
@@ -11,7 +11,7 @@ inline function createAnimatedNormalModifier():AnimatedNormalModifier {
 	#error "flight.Shading: no backend for this target."
 #end
 }
-inline function createDissolveModifier():DissolveModifier {
+extern inline function createDissolveModifier():DissolveModifier {
 #if hl
 	return flight._hl._fn.Shading.createDissolveModifier();
 #elseif cpp
@@ -22,7 +22,7 @@ inline function createDissolveModifier():DissolveModifier {
 	#error "flight.Shading: no backend for this target."
 #end
 }
-inline function createEmissiveModifier():EmissiveModifier {
+extern inline function createEmissiveModifier():EmissiveModifier {
 #if hl
 	return flight._hl._fn.Shading.createEmissiveModifier();
 #elseif cpp
@@ -33,7 +33,7 @@ inline function createEmissiveModifier():EmissiveModifier {
 	#error "flight.Shading: no backend for this target."
 #end
 }
-inline function getEmissiveModifierFacingString(value:flight.EmissiveModifierFacing):String {
+extern inline function getEmissiveModifierFacingString(value:flight.EmissiveModifierFacing):String {
 #if hl
 	return cast flight._hl._fn.Shading.getEmissiveModifierFacingString(value);
 #elseif cpp
@@ -44,7 +44,7 @@ inline function getEmissiveModifierFacingString(value:flight.EmissiveModifierFac
 	#error "flight.Shading: no backend for this target."
 #end
 }
-inline function getFogModifierModeString(value:flight.FogModifierMode):String {
+extern inline function getFogModifierModeString(value:flight.FogModifierMode):String {
 #if hl
 	return cast flight._hl._fn.Shading.getFogModifierModeString(value);
 #elseif cpp
@@ -55,7 +55,7 @@ inline function getFogModifierModeString(value:flight.FogModifierMode):String {
 	#error "flight.Shading: no backend for this target."
 #end
 }
-inline function getVertexDisplaceModifierSourceString(value:flight.VertexDisplaceModifierSource):String {
+extern inline function getVertexDisplaceModifierSourceString(value:flight.VertexDisplaceModifierSource):String {
 #if hl
 	return cast flight._hl._fn.Shading.getVertexDisplaceModifierSourceString(value);
 #elseif cpp
@@ -66,7 +66,7 @@ inline function getVertexDisplaceModifierSourceString(value:flight.VertexDisplac
 	#error "flight.Shading: no backend for this target."
 #end
 }
-inline function parseEmissiveModifierFacing(value:String):Int {
+extern inline function parseEmissiveModifierFacing(value:String):Int {
 #if hl
 	return flight._hl._fn.Shading.parseEmissiveModifierFacing(cast value);
 #elseif cpp
@@ -77,7 +77,7 @@ inline function parseEmissiveModifierFacing(value:String):Int {
 	#error "flight.Shading: no backend for this target."
 #end
 }
-inline function parseFogModifierMode(value:String):Int {
+extern inline function parseFogModifierMode(value:String):Int {
 #if hl
 	return flight._hl._fn.Shading.parseFogModifierMode(cast value);
 #elseif cpp
@@ -88,7 +88,7 @@ inline function parseFogModifierMode(value:String):Int {
 	#error "flight.Shading: no backend for this target."
 #end
 }
-inline function parseVertexDisplaceModifierSource(value:String):Int {
+extern inline function parseVertexDisplaceModifierSource(value:String):Int {
 #if hl
 	return flight._hl._fn.Shading.parseVertexDisplaceModifierSource(cast value);
 #elseif cpp
@@ -99,7 +99,7 @@ inline function parseVertexDisplaceModifierSource(value:String):Int {
 	#error "flight.Shading: no backend for this target."
 #end
 }
-inline function createEnvReflectModifier():EnvReflectModifier {
+extern inline function createEnvReflectModifier():EnvReflectModifier {
 #if hl
 	return flight._hl._fn.Shading.createEnvReflectModifier();
 #elseif cpp
@@ -110,7 +110,7 @@ inline function createEnvReflectModifier():EnvReflectModifier {
 	#error "flight.Shading: no backend for this target."
 #end
 }
-inline function createFogModifier():FogModifier {
+extern inline function createFogModifier():FogModifier {
 #if hl
 	return flight._hl._fn.Shading.createFogModifier();
 #elseif cpp
@@ -121,7 +121,7 @@ inline function createFogModifier():FogModifier {
 	#error "flight.Shading: no backend for this target."
 #end
 }
-inline function isBuiltInModifierSlot(value:String):Bool {
+extern inline function isBuiltInModifierSlot(value:String):Bool {
 #if hl
 	return flight._hl._fn.Shading.isBuiltInModifierSlot(cast value);
 #elseif cpp
@@ -132,7 +132,7 @@ inline function isBuiltInModifierSlot(value:String):Bool {
 	#error "flight.Shading: no backend for this target."
 #end
 }
-inline function registerModifier(registry:ModifierRegistry, definition:Dynamic):Void {
+extern inline function registerModifier(registry:ModifierRegistry, definition:Dynamic):Void {
 #if hl
 	flight._hl._fn.Shading.registerModifier(registry, definition);
 #elseif cpp
@@ -143,7 +143,7 @@ inline function registerModifier(registry:ModifierRegistry, definition:Dynamic):
 	#error "flight.Shading: no backend for this target."
 #end
 }
-inline function resolveModifier(registry:ModifierRegistry, kind:String):Dynamic {
+extern inline function resolveModifier(registry:ModifierRegistry, kind:String):Dynamic {
 #if hl
 	return flight._hl._fn.Shading.resolveModifier(registry, cast kind);
 #elseif cpp
@@ -154,7 +154,7 @@ inline function resolveModifier(registry:ModifierRegistry, kind:String):Dynamic 
 	#error "flight.Shading: no backend for this target."
 #end
 }
-inline function registerBuiltInModifiers(registry:ModifierRegistry):Void {
+extern inline function registerBuiltInModifiers(registry:ModifierRegistry):Void {
 #if hl
 	flight._hl._fn.Shading.registerBuiltInModifiers(registry);
 #elseif cpp
@@ -165,7 +165,7 @@ inline function registerBuiltInModifiers(registry:ModifierRegistry):Void {
 	#error "flight.Shading: no backend for this target."
 #end
 }
-inline function createRimModifier():RimModifier {
+extern inline function createRimModifier():RimModifier {
 #if hl
 	return flight._hl._fn.Shading.createRimModifier();
 #elseif cpp
@@ -176,7 +176,7 @@ inline function createRimModifier():RimModifier {
 	#error "flight.Shading: no backend for this target."
 #end
 }
-inline function createShadedMaterial():ShadedMaterial {
+extern inline function createShadedMaterial():ShadedMaterial {
 #if hl
 	return flight._hl._fn.Shading.createShadedMaterial();
 #elseif cpp
@@ -187,7 +187,7 @@ inline function createShadedMaterial():ShadedMaterial {
 	#error "flight.Shading: no backend for this target."
 #end
 }
-inline function createToonModifier():ToonModifier {
+extern inline function createToonModifier():ToonModifier {
 #if hl
 	return flight._hl._fn.Shading.createToonModifier();
 #elseif cpp
@@ -198,7 +198,7 @@ inline function createToonModifier():ToonModifier {
 	#error "flight.Shading: no backend for this target."
 #end
 }
-inline function createVertexDisplaceModifier():VertexDisplaceModifier {
+extern inline function createVertexDisplaceModifier():VertexDisplaceModifier {
 #if hl
 	return flight._hl._fn.Shading.createVertexDisplaceModifier();
 #elseif cpp
@@ -209,7 +209,7 @@ inline function createVertexDisplaceModifier():VertexDisplaceModifier {
 	#error "flight.Shading: no backend for this target."
 #end
 }
-inline function freeAnimatedNormalModifier(ptr:AnimatedNormalModifier):Void {
+extern inline function freeAnimatedNormalModifier(ptr:AnimatedNormalModifier):Void {
 #if hl
 	flight._hl._fn.Shading.freeAnimatedNormalModifier(ptr);
 #elseif cpp
@@ -220,7 +220,7 @@ inline function freeAnimatedNormalModifier(ptr:AnimatedNormalModifier):Void {
 	#error "flight.Shading: no backend for this target."
 #end
 }
-inline function freeDissolveModifier(ptr:DissolveModifier):Void {
+extern inline function freeDissolveModifier(ptr:DissolveModifier):Void {
 #if hl
 	flight._hl._fn.Shading.freeDissolveModifier(ptr);
 #elseif cpp
@@ -231,7 +231,7 @@ inline function freeDissolveModifier(ptr:DissolveModifier):Void {
 	#error "flight.Shading: no backend for this target."
 #end
 }
-inline function freeEmissiveModifier(ptr:EmissiveModifier):Void {
+extern inline function freeEmissiveModifier(ptr:EmissiveModifier):Void {
 #if hl
 	flight._hl._fn.Shading.freeEmissiveModifier(ptr);
 #elseif cpp
@@ -242,7 +242,7 @@ inline function freeEmissiveModifier(ptr:EmissiveModifier):Void {
 	#error "flight.Shading: no backend for this target."
 #end
 }
-inline function freeEnvReflectModifier(ptr:EnvReflectModifier):Void {
+extern inline function freeEnvReflectModifier(ptr:EnvReflectModifier):Void {
 #if hl
 	flight._hl._fn.Shading.freeEnvReflectModifier(ptr);
 #elseif cpp
@@ -253,7 +253,7 @@ inline function freeEnvReflectModifier(ptr:EnvReflectModifier):Void {
 	#error "flight.Shading: no backend for this target."
 #end
 }
-inline function freeFogModifier(ptr:FogModifier):Void {
+extern inline function freeFogModifier(ptr:FogModifier):Void {
 #if hl
 	flight._hl._fn.Shading.freeFogModifier(ptr);
 #elseif cpp
@@ -264,7 +264,7 @@ inline function freeFogModifier(ptr:FogModifier):Void {
 	#error "flight.Shading: no backend for this target."
 #end
 }
-inline function freeRimModifier(ptr:RimModifier):Void {
+extern inline function freeRimModifier(ptr:RimModifier):Void {
 #if hl
 	flight._hl._fn.Shading.freeRimModifier(ptr);
 #elseif cpp
@@ -275,7 +275,7 @@ inline function freeRimModifier(ptr:RimModifier):Void {
 	#error "flight.Shading: no backend for this target."
 #end
 }
-inline function freeShadedMaterial(ptr:ShadedMaterial):Void {
+extern inline function freeShadedMaterial(ptr:ShadedMaterial):Void {
 #if hl
 	flight._hl._fn.Shading.freeShadedMaterial(ptr);
 #elseif cpp
@@ -286,7 +286,7 @@ inline function freeShadedMaterial(ptr:ShadedMaterial):Void {
 	#error "flight.Shading: no backend for this target."
 #end
 }
-inline function freeToonModifier(ptr:ToonModifier):Void {
+extern inline function freeToonModifier(ptr:ToonModifier):Void {
 #if hl
 	flight._hl._fn.Shading.freeToonModifier(ptr);
 #elseif cpp
@@ -297,7 +297,7 @@ inline function freeToonModifier(ptr:ToonModifier):Void {
 	#error "flight.Shading: no backend for this target."
 #end
 }
-inline function freeVertexDisplaceModifier(ptr:VertexDisplaceModifier):Void {
+extern inline function freeVertexDisplaceModifier(ptr:VertexDisplaceModifier):Void {
 #if hl
 	flight._hl._fn.Shading.freeVertexDisplaceModifier(ptr);
 #elseif cpp

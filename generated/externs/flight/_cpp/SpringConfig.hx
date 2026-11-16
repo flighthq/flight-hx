@@ -12,10 +12,10 @@ abstract SpringConfig(cpp.Star<cpp.Void>) {
 
 	inline function get_dampingRatio():Single return SpringConfig_Ffi.get_dampingRatio(this);
 
-	inline function set_dampingRatio(value:Single):Single return SpringConfig_Ffi.set_dampingRatio(this, value);
+	inline function set_dampingRatio(value:Single):Single { SpringConfig_Ffi.set_dampingRatio(this, value); return value; }
 	public var frequency(get, set):Single;
 
 	inline function get_frequency():Single return SpringConfig_Ffi.get_frequency(this);
 
-	inline function set_frequency(value:Single):Single return SpringConfig_Ffi.set_frequency(this, value);
+	inline function set_frequency(value:Single):Single { SpringConfig_Ffi.set_frequency(this, value); return value; }
 }

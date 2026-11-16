@@ -2,9 +2,9 @@ package flight._hl._fn;
 
 extern class Audio {
 	@:hlNative("flight", "flight_create_audio_buffer")
-	public static function createAudioBuffer(length:Int, numberOfChannels:Int, sampleRate:Single):Dynamic;
+	public static function createAudioBuffer(length:Int, numberOfChannels:Int, sampleRate:Single):hl.Bytes;
 	@:hlNative("flight", "flight_copy_to_audio_buffer_channel")
-	public static function copyToAudioBufferChannel(buffer:Dynamic, source:hl.Bytes, sourceLen:Int, channel:Int):Void;
+	public static function copyToAudioBufferChannel(buffer:hl.Bytes, source:hl.Bytes, sourceLen:Int, channel:Int):Void;
 	@:hlNative("flight", "flight_has_audio_decode_slot")
 	public static function hasAudioDecodeSlot(audioDecode:flight._hl.HostAudioDecodeCapabilities, mimeType:hl.Bytes):Bool;
 	@:hlNative("flight", "flight_can_play_audio_type")
@@ -16,33 +16,33 @@ extern class Audio {
 	@:hlNative("flight", "flight_infer_audio_mime_type")
 	public static function inferAudioMimeType(url:hl.Bytes):hl.Bytes;
 	@:hlNative("flight", "flight_create_audio_resource")
-	public static function createAudioResource(buffer:Dynamic):Dynamic;
+	public static function createAudioResource(buffer:hl.Bytes):hl.Bytes;
 	@:hlNative("flight", "flight_clone_audio_resource")
-	public static function cloneAudioResource(resource:Dynamic):Dynamic;
+	public static function cloneAudioResource(resource:hl.Bytes):hl.Bytes;
 	@:hlNative("flight", "flight_dispose_audio_resource")
-	public static function disposeAudioResource(resource:Dynamic):Void;
+	public static function disposeAudioResource(resource:hl.Bytes):Void;
 	@:hlNative("flight", "flight_get_audio_resource_byte_size")
-	public static function getAudioResourceByteSize(resource:Dynamic):Int;
+	public static function getAudioResourceByteSize(resource:hl.Bytes):Int;
 	@:hlNative("flight", "flight_get_audio_resource_channel_count")
-	public static function getAudioResourceChannelCount(resource:Dynamic):Int;
+	public static function getAudioResourceChannelCount(resource:hl.Bytes):Int;
 	@:hlNative("flight", "flight_get_audio_resource_duration")
-	public static function getAudioResourceDuration(resource:Dynamic):Float;
+	public static function getAudioResourceDuration(resource:hl.Bytes):Float;
 	@:hlNative("flight", "flight_get_audio_resource_sample_rate")
-	public static function getAudioResourceSampleRate(resource:Dynamic):Single;
+	public static function getAudioResourceSampleRate(resource:hl.Bytes):Single;
 	@:hlNative("flight", "flight_has_audio_resource_buffer")
-	public static function hasAudioResourceBuffer(resource:Dynamic):Bool;
+	public static function hasAudioResourceBuffer(resource:hl.Bytes):Bool;
 	@:hlNative("flight", "flight_is_audio_resource_empty")
-	public static function isAudioResourceEmpty(resource:Dynamic):Bool;
+	public static function isAudioResourceEmpty(resource:hl.Bytes):Bool;
 	@:hlNative("flight", "flight_select_audio_resource_url")
 	public static function selectAudioResourceUrl(hostAudioCodec:flight._hl.HostAudioCodecCapability, sources:hl.Bytes, sourcesLen:Int, decoders:flight._hl.AudioDecoderRegistry):hl.Bytes;
 	@:hlNative("flight", "flight_create_audio_resource_failure")
-	public static function createAudioResourceFailure(cause:flight._hl.Unknown):Dynamic;
+	public static function createAudioResourceFailure(cause:flight._hl.Unknown):hl.Bytes;
 	@:hlNative("flight", "flight_create_external_audio_resource_reference")
-	public static function createExternalAudioResourceReference(uri:hl.Bytes):Dynamic;
+	public static function createExternalAudioResourceReference(uri:hl.Bytes):hl.Bytes;
 	@:hlNative("flight", "flight_explain_audio_resource_reference_resolution")
 	public static function explainAudioResourceReferenceResolution(reference:flight._hl.AudioResourceReference):flight._hl.AudioResourceReferenceResolutionExplanation;
 	@:hlNative("flight", "flight_find_audio_resource_reference_by_name")
-	public static function findAudioResourceReferenceByName(references:hl.Bytes, referencesLen:Int, name:hl.Bytes):Dynamic;
+	public static function findAudioResourceReferenceByName(references:hl.Bytes, referencesLen:Int, name:hl.Bytes):flight._hl.AudioResourceReference;
 	@:hlNative("flight", "flight_reset_failed_audio_resource_reference")
 	public static function resetFailedAudioResourceReference(reference:flight._hl.AudioResourceReference):Bool;
 	@:hlNative("flight", "flight_get_audio_channel_state_string")
@@ -62,5 +62,5 @@ extern class Audio {
 	@:hlNative("flight", "flight_free_audio_resource_reference")
 	public static function freeAudioResourceReference(ptr:flight._hl.AudioResourceReference):Void;
 	@:hlNative("flight", "flight_free_string")
-	public static function freeString(ptr:Dynamic):Void;
+	public static function freeString(ptr:hl.Bytes):Void;
 }

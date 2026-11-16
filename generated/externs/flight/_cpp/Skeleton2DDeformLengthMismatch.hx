@@ -12,10 +12,10 @@ abstract Skeleton2DDeformLengthMismatch(cpp.Star<cpp.Void>) {
 
 	inline function get_addressed():Int return Skeleton2DDeformLengthMismatch_Ffi.get_addressed(this);
 
-	inline function set_addressed(value:Int):Int return Skeleton2DDeformLengthMismatch_Ffi.set_addressed(this, value);
+	inline function set_addressed(value:Int):Int { Skeleton2DDeformLengthMismatch_Ffi.set_addressed(this, value); return value; }
 	public var offsets(get, set):Int;
 
 	inline function get_offsets():Int return Skeleton2DDeformLengthMismatch_Ffi.get_offsets(this);
 
-	inline function set_offsets(value:Int):Int return Skeleton2DDeformLengthMismatch_Ffi.set_offsets(this, value);
+	inline function set_offsets(value:Int):Int { Skeleton2DDeformLengthMismatch_Ffi.set_offsets(this, value); return value; }
 }

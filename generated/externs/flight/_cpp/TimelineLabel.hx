@@ -10,5 +10,5 @@ abstract TimelineLabel(cpp.Star<cpp.Void>) {
 
 	inline function get_frame():Int return TimelineLabel_Ffi.get_frame(this);
 
-	inline function set_frame(value:Int):Int return TimelineLabel_Ffi.set_frame(this, value);
+	inline function set_frame(value:Int):Int { TimelineLabel_Ffi.set_frame(this, value); return value; }
 }

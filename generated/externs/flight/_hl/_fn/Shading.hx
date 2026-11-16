@@ -26,9 +26,9 @@ extern class Shading {
 	@:hlNative("flight", "flight_is_built_in_modifier_slot")
 	public static function isBuiltInModifierSlot(value:hl.Bytes):Bool;
 	@:hlNative("flight", "flight_register_modifier")
-	public static function registerModifier(registry:flight._hl.ModifierRegistry, definition:Dynamic):Void;
+	public static function registerModifier(registry:flight._hl.ModifierRegistry, definition:hl.Bytes):Void;
 	@:hlNative("flight", "flight_resolve_modifier")
-	public static function resolveModifier(registry:flight._hl.ModifierRegistry, kind:hl.Bytes):Dynamic;
+	public static function resolveModifier(registry:flight._hl.ModifierRegistry, kind:hl.Bytes):hl.Bytes;
 	@:hlNative("flight", "flight_register_built_in_modifiers")
 	public static function registerBuiltInModifiers(registry:flight._hl.ModifierRegistry):Void;
 	@:hlNative("flight", "flight_create_rim_modifier")

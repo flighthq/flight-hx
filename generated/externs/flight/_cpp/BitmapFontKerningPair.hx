@@ -12,10 +12,10 @@ abstract BitmapFontKerningPair(cpp.Star<cpp.Void>) {
 
 	inline function get_left():Int return BitmapFontKerningPair_Ffi.get_left(this);
 
-	inline function set_left(value:Int):Int return BitmapFontKerningPair_Ffi.set_left(this, value);
+	inline function set_left(value:Int):Int { BitmapFontKerningPair_Ffi.set_left(this, value); return value; }
 	public var right(get, set):Int;
 
 	inline function get_right():Int return BitmapFontKerningPair_Ffi.get_right(this);
 
-	inline function set_right(value:Int):Int return BitmapFontKerningPair_Ffi.set_right(this, value);
+	inline function set_right(value:Int):Int { BitmapFontKerningPair_Ffi.set_right(this, value); return value; }
 }

@@ -18,25 +18,25 @@ abstract Physics2DPulleyJointOptions(cpp.Star<cpp.Void>) {
 
 	inline function get_constant():Single return Physics2DPulleyJointOptions_Ffi.get_constant(this);
 
-	inline function set_constant(value:Single):Single return Physics2DPulleyJointOptions_Ffi.set_constant(this, value);
+	inline function set_constant(value:Single):Single { Physics2DPulleyJointOptions_Ffi.set_constant(this, value); return value; }
 	public var groundAnchorAx(get, set):Single;
 
 	inline function get_groundAnchorAx():Single return Physics2DPulleyJointOptions_Ffi.get_groundAnchorAx(this);
 
-	inline function set_groundAnchorAx(value:Single):Single return Physics2DPulleyJointOptions_Ffi.set_groundAnchorAx(this, value);
+	inline function set_groundAnchorAx(value:Single):Single { Physics2DPulleyJointOptions_Ffi.set_groundAnchorAx(this, value); return value; }
 	public var groundAnchorAy(get, set):Single;
 
 	inline function get_groundAnchorAy():Single return Physics2DPulleyJointOptions_Ffi.get_groundAnchorAy(this);
 
-	inline function set_groundAnchorAy(value:Single):Single return Physics2DPulleyJointOptions_Ffi.set_groundAnchorAy(this, value);
+	inline function set_groundAnchorAy(value:Single):Single { Physics2DPulleyJointOptions_Ffi.set_groundAnchorAy(this, value); return value; }
 	public var groundAnchorBx(get, set):Single;
 
 	inline function get_groundAnchorBx():Single return Physics2DPulleyJointOptions_Ffi.get_groundAnchorBx(this);
 
-	inline function set_groundAnchorBx(value:Single):Single return Physics2DPulleyJointOptions_Ffi.set_groundAnchorBx(this, value);
+	inline function set_groundAnchorBx(value:Single):Single { Physics2DPulleyJointOptions_Ffi.set_groundAnchorBx(this, value); return value; }
 	public var groundAnchorBy(get, set):Single;
 
 	inline function get_groundAnchorBy():Single return Physics2DPulleyJointOptions_Ffi.get_groundAnchorBy(this);
 
-	inline function set_groundAnchorBy(value:Single):Single return Physics2DPulleyJointOptions_Ffi.set_groundAnchorBy(this, value);
+	inline function set_groundAnchorBy(value:Single):Single { Physics2DPulleyJointOptions_Ffi.set_groundAnchorBy(this, value); return value; }
 }

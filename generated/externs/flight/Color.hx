@@ -1,6 +1,6 @@
 package flight;
 
-inline function colorFromKelvin(kelvin:Float):Int {
+extern inline function colorFromKelvin(kelvin:Float):Int {
 #if hl
 	return flight._hl._fn.Color.colorFromKelvin(kelvin);
 #elseif cpp
@@ -11,7 +11,7 @@ inline function colorFromKelvin(kelvin:Float):Int {
 	#error "flight.Color: no backend for this target."
 #end
 }
-inline function allocateHslColor():HslColor {
+extern inline function allocateHslColor():HslColor {
 #if hl
 	return flight._hl._fn.Color.allocateHslColor();
 #elseif cpp
@@ -22,7 +22,7 @@ inline function allocateHslColor():HslColor {
 	#error "flight.Color: no backend for this target."
 #end
 }
-inline function hslToRgb(out:Dynamic, h:Float, s:Float, l:Float):Void {
+extern inline function hslToRgb(out:Dynamic, h:Float, s:Float, l:Float):Void {
 #if hl
 	flight._hl._fn.Color.hslToRgb(out, h, s, l);
 #elseif cpp
@@ -33,7 +33,7 @@ inline function hslToRgb(out:Dynamic, h:Float, s:Float, l:Float):Void {
 	#error "flight.Color: no backend for this target."
 #end
 }
-inline function rgbToHsl(out:HslColor, color:Int):Void {
+extern inline function rgbToHsl(out:HslColor, color:Int):Void {
 #if hl
 	flight._hl._fn.Color.rgbToHsl(out, color);
 #elseif cpp
@@ -44,7 +44,7 @@ inline function rgbToHsl(out:HslColor, color:Int):Void {
 	#error "flight.Color: no backend for this target."
 #end
 }
-inline function allocateHsvColor():HsvColor {
+extern inline function allocateHsvColor():HsvColor {
 #if hl
 	return flight._hl._fn.Color.allocateHsvColor();
 #elseif cpp
@@ -55,7 +55,7 @@ inline function allocateHsvColor():HsvColor {
 	#error "flight.Color: no backend for this target."
 #end
 }
-inline function hsvToRgb(out:Dynamic, h:Float, s:Float, v:Float):Void {
+extern inline function hsvToRgb(out:Dynamic, h:Float, s:Float, v:Float):Void {
 #if hl
 	flight._hl._fn.Color.hsvToRgb(out, h, s, v);
 #elseif cpp
@@ -66,7 +66,7 @@ inline function hsvToRgb(out:Dynamic, h:Float, s:Float, v:Float):Void {
 	#error "flight.Color: no backend for this target."
 #end
 }
-inline function rgbToHsv(out:HsvColor, color:Int):Void {
+extern inline function rgbToHsv(out:HsvColor, color:Int):Void {
 #if hl
 	flight._hl._fn.Color.rgbToHsv(out, color);
 #elseif cpp
@@ -77,7 +77,7 @@ inline function rgbToHsv(out:HsvColor, color:Int):Void {
 	#error "flight.Color: no backend for this target."
 #end
 }
-inline function lerpColor(start:Int, end:Int, t:Float):Int {
+extern inline function lerpColor(start:Int, end:Int, t:Float):Int {
 #if hl
 	return flight._hl._fn.Color.lerpColor(start, end, t);
 #elseif cpp
@@ -88,7 +88,7 @@ inline function lerpColor(start:Int, end:Int, t:Float):Int {
 	#error "flight.Color: no backend for this target."
 #end
 }
-inline function lerpLinearColor(out:LinearColor, start:LinearColor, end:LinearColor, t:Float):Void {
+extern inline function lerpLinearColor(out:LinearColor, start:LinearColor, end:LinearColor, t:Float):Void {
 #if hl
 	flight._hl._fn.Color.lerpLinearColor(out, start, end, t);
 #elseif cpp
@@ -99,7 +99,7 @@ inline function lerpLinearColor(out:LinearColor, start:LinearColor, end:LinearCo
 	#error "flight.Color: no backend for this target."
 #end
 }
-inline function getColorContrastRatio(a:Int, b:Int):Float {
+extern inline function getColorContrastRatio(a:Int, b:Int):Float {
 #if hl
 	return flight._hl._fn.Color.getColorContrastRatio(a, b);
 #elseif cpp
@@ -110,7 +110,7 @@ inline function getColorContrastRatio(a:Int, b:Int):Float {
 	#error "flight.Color: no backend for this target."
 #end
 }
-inline function getColorLuminance(color:Int):Float {
+extern inline function getColorLuminance(color:Int):Float {
 #if hl
 	return flight._hl._fn.Color.getColorLuminance(color);
 #elseif cpp
@@ -121,7 +121,7 @@ inline function getColorLuminance(color:Int):Float {
 	#error "flight.Color: no backend for this target."
 #end
 }
-inline function getRec2020LuminanceWeights(out:Dynamic):Void {
+extern inline function getRec2020LuminanceWeights(out:Dynamic):Void {
 #if hl
 	flight._hl._fn.Color.getRec2020LuminanceWeights(out);
 #elseif cpp
@@ -132,7 +132,7 @@ inline function getRec2020LuminanceWeights(out:Dynamic):Void {
 	#error "flight.Color: no backend for this target."
 #end
 }
-inline function getRec709LuminanceWeights(out:Dynamic):Void {
+extern inline function getRec709LuminanceWeights(out:Dynamic):Void {
 #if hl
 	flight._hl._fn.Color.getRec709LuminanceWeights(out);
 #elseif cpp
@@ -143,7 +143,7 @@ inline function getRec709LuminanceWeights(out:Dynamic):Void {
 	#error "flight.Color: no backend for this target."
 #end
 }
-inline function clampLinearRgb(out:Dynamic, r:Float, g:Float, b:Float):Void {
+extern inline function clampLinearRgb(out:Dynamic, r:Float, g:Float, b:Float):Void {
 #if hl
 	flight._hl._fn.Color.clampLinearRgb(out, r, g, b);
 #elseif cpp
@@ -154,7 +154,7 @@ inline function clampLinearRgb(out:Dynamic, r:Float, g:Float, b:Float):Void {
 	#error "flight.Color: no backend for this target."
 #end
 }
-inline function linearRgbToOklab(out:Dynamic, r:Float, g:Float, b:Float):Void {
+extern inline function linearRgbToOklab(out:Dynamic, r:Float, g:Float, b:Float):Void {
 #if hl
 	flight._hl._fn.Color.linearRgbToOklab(out, r, g, b);
 #elseif cpp
@@ -165,7 +165,7 @@ inline function linearRgbToOklab(out:Dynamic, r:Float, g:Float, b:Float):Void {
 	#error "flight.Color: no backend for this target."
 #end
 }
-inline function oklabToLinearRgb(out:Dynamic, l:Float, a:Float, b:Float):Void {
+extern inline function oklabToLinearRgb(out:Dynamic, l:Float, a:Float, b:Float):Void {
 #if hl
 	flight._hl._fn.Color.oklabToLinearRgb(out, l, a, b);
 #elseif cpp
@@ -176,7 +176,7 @@ inline function oklabToLinearRgb(out:Dynamic, l:Float, a:Float, b:Float):Void {
 	#error "flight.Color: no backend for this target."
 #end
 }
-inline function allocateLinearColor():LinearColor {
+extern inline function allocateLinearColor():LinearColor {
 #if hl
 	return flight._hl._fn.Color.allocateLinearColor();
 #elseif cpp
@@ -187,7 +187,7 @@ inline function allocateLinearColor():LinearColor {
 	#error "flight.Color: no backend for this target."
 #end
 }
-inline function computeRgbHexString(color:Int):String {
+extern inline function computeRgbHexString(color:Int):String {
 #if hl
 	return cast flight._hl._fn.Color.computeRgbHexString(color);
 #elseif cpp
@@ -198,7 +198,7 @@ inline function computeRgbHexString(color:Int):String {
 	#error "flight.Color: no backend for this target."
 #end
 }
-inline function computeRgbaCssString(color:Int):String {
+extern inline function computeRgbaCssString(color:Int):String {
 #if hl
 	return cast flight._hl._fn.Color.computeRgbaCssString(color);
 #elseif cpp
@@ -209,7 +209,7 @@ inline function computeRgbaCssString(color:Int):String {
 	#error "flight.Color: no backend for this target."
 #end
 }
-inline function getColorAlpha(color:Int):Float {
+extern inline function getColorAlpha(color:Int):Float {
 #if hl
 	return flight._hl._fn.Color.getColorAlpha(color);
 #elseif cpp
@@ -220,7 +220,7 @@ inline function getColorAlpha(color:Int):Float {
 	#error "flight.Color: no backend for this target."
 #end
 }
-inline function getColorRgb(color:Int):Int {
+extern inline function getColorRgb(color:Int):Int {
 #if hl
 	return flight._hl._fn.Color.getColorRgb(color);
 #elseif cpp
@@ -231,7 +231,7 @@ inline function getColorRgb(color:Int):Int {
 	#error "flight.Color: no backend for this target."
 #end
 }
-inline function packColor(r:Float, g:Float, b:Float, a:Float):Int {
+extern inline function packColor(r:Float, g:Float, b:Float, a:Float):Int {
 #if hl
 	return flight._hl._fn.Color.packColor(r, g, b, a);
 #elseif cpp
@@ -242,7 +242,7 @@ inline function packColor(r:Float, g:Float, b:Float, a:Float):Int {
 	#error "flight.Color: no backend for this target."
 #end
 }
-inline function packLinearChannelsToColor(r:Float, g:Float, b:Float, a:Float):Int {
+extern inline function packLinearChannelsToColor(r:Float, g:Float, b:Float, a:Float):Int {
 #if hl
 	return flight._hl._fn.Color.packLinearChannelsToColor(r, g, b, a);
 #elseif cpp
@@ -253,7 +253,7 @@ inline function packLinearChannelsToColor(r:Float, g:Float, b:Float, a:Float):In
 	#error "flight.Color: no backend for this target."
 #end
 }
-inline function packLinearToColor(color:LinearColor):Int {
+extern inline function packLinearToColor(color:LinearColor):Int {
 #if hl
 	return flight._hl._fn.Color.packLinearToColor(color);
 #elseif cpp
@@ -264,7 +264,7 @@ inline function packLinearToColor(color:LinearColor):Int {
 	#error "flight.Color: no backend for this target."
 #end
 }
-inline function packOpaqueColor(rgb:Int):Int {
+extern inline function packOpaqueColor(rgb:Int):Int {
 #if hl
 	return flight._hl._fn.Color.packOpaqueColor(rgb);
 #elseif cpp
@@ -275,7 +275,7 @@ inline function packOpaqueColor(rgb:Int):Int {
 	#error "flight.Color: no backend for this target."
 #end
 }
-inline function setColorAlpha(color:Int, alpha:Float):Int {
+extern inline function setColorAlpha(color:Int, alpha:Float):Int {
 #if hl
 	return flight._hl._fn.Color.setColorAlpha(color, alpha);
 #elseif cpp
@@ -286,7 +286,7 @@ inline function setColorAlpha(color:Int, alpha:Float):Int {
 	#error "flight.Color: no backend for this target."
 #end
 }
-inline function unpackColorRgba(out:Dynamic, color:Int):Void {
+extern inline function unpackColorRgba(out:Dynamic, color:Int):Void {
 #if hl
 	flight._hl._fn.Color.unpackColorRgba(out, color);
 #elseif cpp
@@ -297,7 +297,7 @@ inline function unpackColorRgba(out:Dynamic, color:Int):Void {
 	#error "flight.Color: no backend for this target."
 #end
 }
-inline function unpackColorToLinear(out:LinearColor, color:Int):Void {
+extern inline function unpackColorToLinear(out:LinearColor, color:Int):Void {
 #if hl
 	flight._hl._fn.Color.unpackColorToLinear(out, color);
 #elseif cpp
@@ -308,7 +308,7 @@ inline function unpackColorToLinear(out:LinearColor, color:Int):Void {
 	#error "flight.Color: no backend for this target."
 #end
 }
-inline function premultiplyColorAlpha(color:Int):Int {
+extern inline function premultiplyColorAlpha(color:Int):Int {
 #if hl
 	return flight._hl._fn.Color.premultiplyColorAlpha(color);
 #elseif cpp
@@ -319,7 +319,7 @@ inline function premultiplyColorAlpha(color:Int):Int {
 	#error "flight.Color: no backend for this target."
 #end
 }
-inline function unpremultiplyColorAlpha(color:Int):Int {
+extern inline function unpremultiplyColorAlpha(color:Int):Int {
 #if hl
 	return flight._hl._fn.Color.unpremultiplyColorAlpha(color);
 #elseif cpp
@@ -330,7 +330,7 @@ inline function unpremultiplyColorAlpha(color:Int):Int {
 	#error "flight.Color: no backend for this target."
 #end
 }
-inline function linearChannelToSrgb(value:Float):Float {
+extern inline function linearChannelToSrgb(value:Float):Float {
 #if hl
 	return flight._hl._fn.Color.linearChannelToSrgb(value);
 #elseif cpp
@@ -341,7 +341,7 @@ inline function linearChannelToSrgb(value:Float):Float {
 	#error "flight.Color: no backend for this target."
 #end
 }
-inline function srgbChannelToLinear(value:Float):Float {
+extern inline function srgbChannelToLinear(value:Float):Float {
 #if hl
 	return flight._hl._fn.Color.srgbChannelToLinear(value);
 #elseif cpp
@@ -352,7 +352,7 @@ inline function srgbChannelToLinear(value:Float):Float {
 	#error "flight.Color: no backend for this target."
 #end
 }
-inline function freeHslColor(ptr:HslColor):Void {
+extern inline function freeHslColor(ptr:HslColor):Void {
 #if hl
 	flight._hl._fn.Color.freeHslColor(ptr);
 #elseif cpp
@@ -363,7 +363,7 @@ inline function freeHslColor(ptr:HslColor):Void {
 	#error "flight.Color: no backend for this target."
 #end
 }
-inline function freeHsvColor(ptr:HsvColor):Void {
+extern inline function freeHsvColor(ptr:HsvColor):Void {
 #if hl
 	flight._hl._fn.Color.freeHsvColor(ptr);
 #elseif cpp
@@ -374,7 +374,7 @@ inline function freeHsvColor(ptr:HsvColor):Void {
 	#error "flight.Color: no backend for this target."
 #end
 }
-inline function freeLinearColor(ptr:LinearColor):Void {
+extern inline function freeLinearColor(ptr:LinearColor):Void {
 #if hl
 	flight._hl._fn.Color.freeLinearColor(ptr);
 #elseif cpp

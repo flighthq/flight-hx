@@ -36,70 +36,70 @@ abstract Skeleton2DTransformConstraint(cpp.Star<cpp.Void>) {
 
 	inline function get_mix():Single return Skeleton2DTransformConstraint_Ffi.get_mix(this);
 
-	inline function set_mix(value:Single):Single return Skeleton2DTransformConstraint_Ffi.set_mix(this, value);
+	inline function set_mix(value:Single):Single { Skeleton2DTransformConstraint_Ffi.set_mix(this, value); return value; }
 	public var mixRotate(get, set):Single;
 
 	inline function get_mixRotate():Single return Skeleton2DTransformConstraint_Ffi.get_mixRotate(this);
 
-	inline function set_mixRotate(value:Single):Single return Skeleton2DTransformConstraint_Ffi.set_mixRotate(this, value);
+	inline function set_mixRotate(value:Single):Single { Skeleton2DTransformConstraint_Ffi.set_mixRotate(this, value); return value; }
 	public var mixScaleX(get, set):Single;
 
 	inline function get_mixScaleX():Single return Skeleton2DTransformConstraint_Ffi.get_mixScaleX(this);
 
-	inline function set_mixScaleX(value:Single):Single return Skeleton2DTransformConstraint_Ffi.set_mixScaleX(this, value);
+	inline function set_mixScaleX(value:Single):Single { Skeleton2DTransformConstraint_Ffi.set_mixScaleX(this, value); return value; }
 	public var mixScaleY(get, set):Single;
 
 	inline function get_mixScaleY():Single return Skeleton2DTransformConstraint_Ffi.get_mixScaleY(this);
 
-	inline function set_mixScaleY(value:Single):Single return Skeleton2DTransformConstraint_Ffi.set_mixScaleY(this, value);
+	inline function set_mixScaleY(value:Single):Single { Skeleton2DTransformConstraint_Ffi.set_mixScaleY(this, value); return value; }
 	public var mixShearY(get, set):Single;
 
 	inline function get_mixShearY():Single return Skeleton2DTransformConstraint_Ffi.get_mixShearY(this);
 
-	inline function set_mixShearY(value:Single):Single return Skeleton2DTransformConstraint_Ffi.set_mixShearY(this, value);
+	inline function set_mixShearY(value:Single):Single { Skeleton2DTransformConstraint_Ffi.set_mixShearY(this, value); return value; }
 	public var mixX(get, set):Single;
 
 	inline function get_mixX():Single return Skeleton2DTransformConstraint_Ffi.get_mixX(this);
 
-	inline function set_mixX(value:Single):Single return Skeleton2DTransformConstraint_Ffi.set_mixX(this, value);
+	inline function set_mixX(value:Single):Single { Skeleton2DTransformConstraint_Ffi.set_mixX(this, value); return value; }
 	public var mixY(get, set):Single;
 
 	inline function get_mixY():Single return Skeleton2DTransformConstraint_Ffi.get_mixY(this);
 
-	inline function set_mixY(value:Single):Single return Skeleton2DTransformConstraint_Ffi.set_mixY(this, value);
+	inline function set_mixY(value:Single):Single { Skeleton2DTransformConstraint_Ffi.set_mixY(this, value); return value; }
 	public var offsetRotation(get, set):Single;
 
 	inline function get_offsetRotation():Single return Skeleton2DTransformConstraint_Ffi.get_offsetRotation(this);
 
-	inline function set_offsetRotation(value:Single):Single return Skeleton2DTransformConstraint_Ffi.set_offsetRotation(this, value);
+	inline function set_offsetRotation(value:Single):Single { Skeleton2DTransformConstraint_Ffi.set_offsetRotation(this, value); return value; }
 	public var offsetScaleX(get, set):Single;
 
 	inline function get_offsetScaleX():Single return Skeleton2DTransformConstraint_Ffi.get_offsetScaleX(this);
 
-	inline function set_offsetScaleX(value:Single):Single return Skeleton2DTransformConstraint_Ffi.set_offsetScaleX(this, value);
+	inline function set_offsetScaleX(value:Single):Single { Skeleton2DTransformConstraint_Ffi.set_offsetScaleX(this, value); return value; }
 	public var offsetScaleY(get, set):Single;
 
 	inline function get_offsetScaleY():Single return Skeleton2DTransformConstraint_Ffi.get_offsetScaleY(this);
 
-	inline function set_offsetScaleY(value:Single):Single return Skeleton2DTransformConstraint_Ffi.set_offsetScaleY(this, value);
+	inline function set_offsetScaleY(value:Single):Single { Skeleton2DTransformConstraint_Ffi.set_offsetScaleY(this, value); return value; }
 	public var offsetShearY(get, set):Single;
 
 	inline function get_offsetShearY():Single return Skeleton2DTransformConstraint_Ffi.get_offsetShearY(this);
 
-	inline function set_offsetShearY(value:Single):Single return Skeleton2DTransformConstraint_Ffi.set_offsetShearY(this, value);
+	inline function set_offsetShearY(value:Single):Single { Skeleton2DTransformConstraint_Ffi.set_offsetShearY(this, value); return value; }
 	public var offsetX(get, set):Single;
 
 	inline function get_offsetX():Single return Skeleton2DTransformConstraint_Ffi.get_offsetX(this);
 
-	inline function set_offsetX(value:Single):Single return Skeleton2DTransformConstraint_Ffi.set_offsetX(this, value);
+	inline function set_offsetX(value:Single):Single { Skeleton2DTransformConstraint_Ffi.set_offsetX(this, value); return value; }
 	public var offsetY(get, set):Single;
 
 	inline function get_offsetY():Single return Skeleton2DTransformConstraint_Ffi.get_offsetY(this);
 
-	inline function set_offsetY(value:Single):Single return Skeleton2DTransformConstraint_Ffi.set_offsetY(this, value);
+	inline function set_offsetY(value:Single):Single { Skeleton2DTransformConstraint_Ffi.set_offsetY(this, value); return value; }
 	public var targetBoneIndex(get, set):Int;
 
 	inline function get_targetBoneIndex():Int return Skeleton2DTransformConstraint_Ffi.get_targetBoneIndex(this);
 
-	inline function set_targetBoneIndex(value:Int):Int return Skeleton2DTransformConstraint_Ffi.set_targetBoneIndex(this, value);
+	inline function set_targetBoneIndex(value:Int):Int { Skeleton2DTransformConstraint_Ffi.set_targetBoneIndex(this, value); return value; }
 }

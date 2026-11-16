@@ -10,5 +10,5 @@ abstract AnimationRootMotionExtractor(cpp.Star<cpp.Void>) {
 
 	inline function get_channelIndex():Int return AnimationRootMotionExtractor_Ffi.get_channelIndex(this);
 
-	inline function set_channelIndex(value:Int):Int return AnimationRootMotionExtractor_Ffi.set_channelIndex(this, value);
+	inline function set_channelIndex(value:Int):Int { AnimationRootMotionExtractor_Ffi.set_channelIndex(this, value); return value; }
 }

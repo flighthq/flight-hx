@@ -10,5 +10,5 @@ abstract Physics2DWeldJoint(cpp.Star<cpp.Void>) {
 
 	inline function get_referenceAngle():Single return Physics2DWeldJoint_Ffi.get_referenceAngle(this);
 
-	inline function set_referenceAngle(value:Single):Single return Physics2DWeldJoint_Ffi.set_referenceAngle(this, value);
+	inline function set_referenceAngle(value:Single):Single { Physics2DWeldJoint_Ffi.set_referenceAngle(this, value); return value; }
 }

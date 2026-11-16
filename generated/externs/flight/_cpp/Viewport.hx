@@ -18,35 +18,35 @@ abstract Viewport(cpp.Star<cpp.Void>) {
 
 	inline function get_devicePixelRatio():Single return Viewport_Ffi.get_devicePixelRatio(this);
 
-	inline function set_devicePixelRatio(value:Single):Single return Viewport_Ffi.set_devicePixelRatio(this, value);
+	inline function set_devicePixelRatio(value:Single):Single { Viewport_Ffi.set_devicePixelRatio(this, value); return value; }
 	public var height(get, set):Single;
 
 	inline function get_height():Single return Viewport_Ffi.get_height(this);
 
-	inline function set_height(value:Single):Single return Viewport_Ffi.set_height(this, value);
+	inline function set_height(value:Single):Single { Viewport_Ffi.set_height(this, value); return value; }
 	public var width(get, set):Single;
 
 	inline function get_width():Single return Viewport_Ffi.get_width(this);
 
-	inline function set_width(value:Single):Single return Viewport_Ffi.set_width(this, value);
+	inline function set_width(value:Single):Single { Viewport_Ffi.set_width(this, value); return value; }
 	public var x(get, set):Single;
 
 	inline function get_x():Single return Viewport_Ffi.get_x(this);
 
-	inline function set_x(value:Single):Single return Viewport_Ffi.set_x(this, value);
+	inline function set_x(value:Single):Single { Viewport_Ffi.set_x(this, value); return value; }
 	public var y(get, set):Single;
 
 	inline function get_y():Single return Viewport_Ffi.get_y(this);
 
-	inline function set_y(value:Single):Single return Viewport_Ffi.set_y(this, value);
+	inline function set_y(value:Single):Single { Viewport_Ffi.set_y(this, value); return value; }
 
-	static inline public function create():flight._cpp.Viewport {
+	static extern inline public function create():flight._cpp.Viewport {
 		return flight._cpp._fn.Node.createViewport();
 	}
-	inline public function getAspect():Single {
+	extern inline public function getAspect():Single {
 		return flight._cpp._fn.Node.getViewportAspect(cast this);
 	}
-	inline public function free():Void {
+	extern inline public function free():Void {
 		flight._cpp._fn.Node.freeViewport(cast this);
 	}
 }

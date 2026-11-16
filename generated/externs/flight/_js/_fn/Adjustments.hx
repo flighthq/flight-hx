@@ -13,7 +13,7 @@ extern class Adjustments {
 	@:native("flight_create_color_grade_adjustment")
 	public static function createColorGradeAdjustment(options:flight._js.ColorGradeAdjustmentOptions):flight._js.ColorGradeAdjustment;
 	@:native("flight_bake_color_lut")
-	public static function bakeColorLut(transforms:Dynamic, transformsLen:Int, size:Int):flight._js.ColorLut;
+	public static function bakeColorLut(transforms:Dynamic, transformsLen:Int, size:haxe.Int64):flight._js.ColorLut;
 	@:native("flight_sample_color_lut")
 	public static function sampleColorLut(lut:flight._js.ColorLut, out:Dynamic, r:Float, g:Float, b:Float):Void;
 	@:native("flight_get_adjustment_color_transform__brightness_contrast_adjustment")

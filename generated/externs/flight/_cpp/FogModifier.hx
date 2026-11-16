@@ -16,20 +16,20 @@ abstract FogModifier(cpp.Star<cpp.Void>) {
 
 	inline function get_color():Int return FogModifier_Ffi.get_color(this);
 
-	inline function set_color(value:Int):Int return FogModifier_Ffi.set_color(this, value);
+	inline function set_color(value:Int):Int { FogModifier_Ffi.set_color(this, value); return value; }
 	public var near(get, set):Single;
 
 	inline function get_near():Single return FogModifier_Ffi.get_near(this);
 
-	inline function set_near(value:Single):Single return FogModifier_Ffi.set_near(this, value);
+	inline function set_near(value:Single):Single { FogModifier_Ffi.set_near(this, value); return value; }
 	public var far(get, set):Single;
 
 	inline function get_far():Single return FogModifier_Ffi.get_far(this);
 
-	inline function set_far(value:Single):Single return FogModifier_Ffi.set_far(this, value);
+	inline function set_far(value:Single):Single { FogModifier_Ffi.set_far(this, value); return value; }
 	public var density(get, set):Single;
 
 	inline function get_density():Single return FogModifier_Ffi.get_density(this);
 
-	inline function set_density(value:Single):Single return FogModifier_Ffi.set_density(this, value);
+	inline function set_density(value:Single):Single { FogModifier_Ffi.set_density(this, value); return value; }
 }

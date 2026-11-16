@@ -10,5 +10,5 @@ abstract VelocityField(cpp.Star<cpp.Void>) {
 
 	inline function get_frameId():Int return VelocityField_Ffi.get_frameId(this);
 
-	inline function set_frameId(value:Int):Int return VelocityField_Ffi.set_frameId(this, value);
+	inline function set_frameId(value:Int):Int { VelocityField_Ffi.set_frameId(this, value); return value; }
 }

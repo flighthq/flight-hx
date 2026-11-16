@@ -91,7 +91,7 @@ extern class Scene2dFormats {
 	@:native("flight_get_rive_core_type_name")
 	public static function getRiveCoreTypeName(typeKey:Int):String;
 	@:native("flight_get_rive_core_type_parent")
-	public static function getRiveCoreTypeParent(typeKey:Int):Int;
+	public static function getRiveCoreTypeParent(typeKey:Int):haxe.Int64;
 	@:native("flight_is_rive_core_type_derived_from")
 	public static function isRiveCoreTypeDerivedFrom(typeKey:Int, ancestorTypeKey:Int):Bool;
 	@:native("flight_register_rive_draw_order_handlers")

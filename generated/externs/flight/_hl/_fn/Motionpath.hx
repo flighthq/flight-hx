@@ -2,7 +2,7 @@ package flight._hl._fn;
 
 extern class Motionpath {
 	@:hlNative("flight", "flight_create_motion_path")
-	public static function createMotionPath(path:Dynamic, speed:Float, loopMode:Int, tolerance:Float):flight._hl.MotionPath;
+	public static function createMotionPath(path:hl.Bytes, speed:Float, loopMode:Int, tolerance:Float):flight._hl.MotionPath;
 	@:hlNative("flight", "flight_get_motion_path_heading")
 	public static function getMotionPathHeading(mp:flight._hl.MotionPath):Float;
 	@:hlNative("flight", "flight_get_motion_path_position")
@@ -12,7 +12,7 @@ extern class Motionpath {
 	@:hlNative("flight", "flight_is_motion_path_at_end")
 	public static function isMotionPathAtEnd(mp:flight._hl.MotionPath):Bool;
 	@:hlNative("flight", "flight_set_motion_path_direction")
-	public static function setMotionPathDirection(mp:flight._hl.MotionPath, direction:Int):Void;
+	public static function setMotionPathDirection(mp:flight._hl.MotionPath, direction:flight._hl.MotionPathDirection):Void;
 	@:hlNative("flight", "flight_set_motion_path_distance")
 	public static function setMotionPathDistance(mp:flight._hl.MotionPath, distance:Float):Void;
 	@:hlNative("flight", "flight_set_motion_path_progress")

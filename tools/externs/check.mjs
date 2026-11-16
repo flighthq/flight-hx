@@ -3,6 +3,7 @@ import { createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
 import { readFileSync, readdirSync } from 'node:fs';
 import path from 'node:path';
+import { patchIdentity } from '../flight-source.mjs';
 import { resolveDependency } from '../../scripts/dependencyLock.mjs';
 
 const root = path.resolve(import.meta.dirname, '../..');
@@ -10,6 +11,7 @@ const generated = path.join(root, 'generated/externs');
 const provenance = JSON.parse(readFileSync(path.join(generated, 'provenance.json'), 'utf8'));
 assert.equal(provenance.schema, 'flight-hx-rust-externs/1');
 assert.equal(provenance.source.commit, resolveDependency(root, 'flight').commit, 'extern source differs from Flight pin');
+assert.deepEqual(provenance.source.patches, patchIdentity(root).patches, 'extern producer patch differs from tracked source');
 const expected = new Map(provenance.files.map((file) => [file.path, file.sha256]));
 assert.equal(expected.size, provenance.files.length, 'duplicate provenance path');
 const actual = filesUnder(generated).filter((file) => file !== 'provenance.json');

@@ -18,25 +18,25 @@ abstract Skeleton2DIkConstraint(cpp.Star<cpp.Void>) {
 
 	inline function get_bendPositive():Bool return Skeleton2DIkConstraint_Ffi.get_bendPositive(this);
 
-	inline function set_bendPositive(value:Bool):Bool return Skeleton2DIkConstraint_Ffi.set_bendPositive(this, value);
+	inline function set_bendPositive(value:Bool):Bool { Skeleton2DIkConstraint_Ffi.set_bendPositive(this, value); return value; }
 	public var compress(get, set):Bool;
 
 	inline function get_compress():Bool return Skeleton2DIkConstraint_Ffi.get_compress(this);
 
-	inline function set_compress(value:Bool):Bool return Skeleton2DIkConstraint_Ffi.set_compress(this, value);
+	inline function set_compress(value:Bool):Bool { Skeleton2DIkConstraint_Ffi.set_compress(this, value); return value; }
 	public var mix(get, set):Single;
 
 	inline function get_mix():Single return Skeleton2DIkConstraint_Ffi.get_mix(this);
 
-	inline function set_mix(value:Single):Single return Skeleton2DIkConstraint_Ffi.set_mix(this, value);
+	inline function set_mix(value:Single):Single { Skeleton2DIkConstraint_Ffi.set_mix(this, value); return value; }
 	public var stretch(get, set):Bool;
 
 	inline function get_stretch():Bool return Skeleton2DIkConstraint_Ffi.get_stretch(this);
 
-	inline function set_stretch(value:Bool):Bool return Skeleton2DIkConstraint_Ffi.set_stretch(this, value);
+	inline function set_stretch(value:Bool):Bool { Skeleton2DIkConstraint_Ffi.set_stretch(this, value); return value; }
 	public var targetBoneIndex(get, set):Int;
 
 	inline function get_targetBoneIndex():Int return Skeleton2DIkConstraint_Ffi.get_targetBoneIndex(this);
 
-	inline function set_targetBoneIndex(value:Int):Int return Skeleton2DIkConstraint_Ffi.set_targetBoneIndex(this, value);
+	inline function set_targetBoneIndex(value:Int):Int { Skeleton2DIkConstraint_Ffi.set_targetBoneIndex(this, value); return value; }
 }

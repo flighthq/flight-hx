@@ -2,7 +2,7 @@ package flight._hl._fn;
 
 extern class Tilemap {
 	@:hlNative("flight", "flight_create_tilemap")
-	public static function createTilemap():Dynamic;
+	public static function createTilemap():hl.Bytes;
 	@:hlNative("flight", "flight_create_tilemap_data")
 	public static function createTilemapData():flight._hl.TilemapData;
 	@:hlNative("flight", "flight_create_tilemap_runtime")
@@ -12,9 +12,9 @@ extern class Tilemap {
 	@:hlNative("flight", "flight_clear_tilemap")
 	public static function clearTilemap(tilemap:flight._hl.Tilemap):Void;
 	@:hlNative("flight", "flight_clone_tilemap")
-	public static function cloneTilemap(source:flight._hl.Tilemap):Dynamic;
+	public static function cloneTilemap(source:flight._hl.Tilemap):hl.Bytes;
 	@:hlNative("flight", "flight_compute_tilemap_local_bounds_rectangle")
-	public static function computeTilemapLocalBoundsRectangle(out:flight._hl.Rectangle, source:Dynamic):Void;
+	public static function computeTilemapLocalBoundsRectangle(out:flight._hl.Rectangle, source:hl.Bytes):Void;
 	@:hlNative("flight", "flight_enable_tilemap_signals")
 	public static function enableTilemapSignals(target:flight._hl.Tilemap):flight._hl.TilemapSignals;
 	@:hlNative("flight", "flight_fill_tilemap_tiles")

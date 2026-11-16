@@ -13,7 +13,7 @@ extern class Motionpath {
 	@:native("flight_is_motion_path_at_end")
 	public static function isMotionPathAtEnd(mp:flight._js.MotionPath):Bool;
 	@:native("flight_set_motion_path_direction")
-	public static function setMotionPathDirection(mp:flight._js.MotionPath, direction:Int):Void;
+	public static function setMotionPathDirection(mp:flight._js.MotionPath, direction:flight._js.MotionPathDirection):Void;
 	@:native("flight_set_motion_path_distance")
 	public static function setMotionPathDistance(mp:flight._js.MotionPath, distance:Float):Void;
 	@:native("flight_set_motion_path_progress")

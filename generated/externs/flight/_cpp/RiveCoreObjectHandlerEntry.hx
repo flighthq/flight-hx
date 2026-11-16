@@ -10,5 +10,5 @@ abstract RiveCoreObjectHandlerEntry(cpp.Star<cpp.Void>) {
 
 	inline function get_typeKey():Int return RiveCoreObjectHandlerEntry_Ffi.get_typeKey(this);
 
-	inline function set_typeKey(value:Int):Int return RiveCoreObjectHandlerEntry_Ffi.set_typeKey(this, value);
+	inline function set_typeKey(value:Int):Int { RiveCoreObjectHandlerEntry_Ffi.set_typeKey(this, value); return value; }
 }

@@ -38,75 +38,75 @@ abstract RichTextData(cpp.Star<cpp.Void>) {
 
 	inline function get_background():Bool return RichTextData_Ffi.get_background(this);
 
-	inline function set_background(value:Bool):Bool return RichTextData_Ffi.set_background(this, value);
+	inline function set_background(value:Bool):Bool { RichTextData_Ffi.set_background(this, value); return value; }
 	public var backgroundColor(get, set):Int;
 
 	inline function get_backgroundColor():Int return RichTextData_Ffi.get_backgroundColor(this);
 
-	inline function set_backgroundColor(value:Int):Int return RichTextData_Ffi.set_backgroundColor(this, value);
+	inline function set_backgroundColor(value:Int):Int { RichTextData_Ffi.set_backgroundColor(this, value); return value; }
 	public var border(get, set):Bool;
 
 	inline function get_border():Bool return RichTextData_Ffi.get_border(this);
 
-	inline function set_border(value:Bool):Bool return RichTextData_Ffi.set_border(this, value);
+	inline function set_border(value:Bool):Bool { RichTextData_Ffi.set_border(this, value); return value; }
 	public var borderColor(get, set):Int;
 
 	inline function get_borderColor():Int return RichTextData_Ffi.get_borderColor(this);
 
-	inline function set_borderColor(value:Int):Int return RichTextData_Ffi.set_borderColor(this, value);
+	inline function set_borderColor(value:Int):Int { RichTextData_Ffi.set_borderColor(this, value); return value; }
 	public var condenseWhite(get, set):Bool;
 
 	inline function get_condenseWhite():Bool return RichTextData_Ffi.get_condenseWhite(this);
 
-	inline function set_condenseWhite(value:Bool):Bool return RichTextData_Ffi.set_condenseWhite(this, value);
+	inline function set_condenseWhite(value:Bool):Bool { RichTextData_Ffi.set_condenseWhite(this, value); return value; }
 	public var height(get, set):Single;
 
 	inline function get_height():Single return RichTextData_Ffi.get_height(this);
 
-	inline function set_height(value:Single):Single return RichTextData_Ffi.set_height(this, value);
+	inline function set_height(value:Single):Single { RichTextData_Ffi.set_height(this, value); return value; }
 	public var maxChars(get, set):Int;
 
 	inline function get_maxChars():Int return RichTextData_Ffi.get_maxChars(this);
 
-	inline function set_maxChars(value:Int):Int return RichTextData_Ffi.set_maxChars(this, value);
+	inline function set_maxChars(value:Int):Int { RichTextData_Ffi.set_maxChars(this, value); return value; }
 	public var mouseWheelEnabled(get, set):Bool;
 
 	inline function get_mouseWheelEnabled():Bool return RichTextData_Ffi.get_mouseWheelEnabled(this);
 
-	inline function set_mouseWheelEnabled(value:Bool):Bool return RichTextData_Ffi.set_mouseWheelEnabled(this, value);
+	inline function set_mouseWheelEnabled(value:Bool):Bool { RichTextData_Ffi.set_mouseWheelEnabled(this, value); return value; }
 	public var multiline(get, set):Bool;
 
 	inline function get_multiline():Bool return RichTextData_Ffi.get_multiline(this);
 
-	inline function set_multiline(value:Bool):Bool return RichTextData_Ffi.set_multiline(this, value);
+	inline function set_multiline(value:Bool):Bool { RichTextData_Ffi.set_multiline(this, value); return value; }
 	public var scrollH(get, set):Single;
 
 	inline function get_scrollH():Single return RichTextData_Ffi.get_scrollH(this);
 
-	inline function set_scrollH(value:Single):Single return RichTextData_Ffi.set_scrollH(this, value);
+	inline function set_scrollH(value:Single):Single { RichTextData_Ffi.set_scrollH(this, value); return value; }
 	public var scrollV(get, set):Single;
 
 	inline function get_scrollV():Single return RichTextData_Ffi.get_scrollV(this);
 
-	inline function set_scrollV(value:Single):Single return RichTextData_Ffi.set_scrollV(this, value);
+	inline function set_scrollV(value:Single):Single { RichTextData_Ffi.set_scrollV(this, value); return value; }
 	public var selectable(get, set):Bool;
 
 	inline function get_selectable():Bool return RichTextData_Ffi.get_selectable(this);
 
-	inline function set_selectable(value:Bool):Bool return RichTextData_Ffi.set_selectable(this, value);
+	inline function set_selectable(value:Bool):Bool { RichTextData_Ffi.set_selectable(this, value); return value; }
 	public var textColor(get, set):Int;
 
 	inline function get_textColor():Int return RichTextData_Ffi.get_textColor(this);
 
-	inline function set_textColor(value:Int):Int return RichTextData_Ffi.set_textColor(this, value);
+	inline function set_textColor(value:Int):Int { RichTextData_Ffi.set_textColor(this, value); return value; }
 	public var width(get, set):Single;
 
 	inline function get_width():Single return RichTextData_Ffi.get_width(this);
 
-	inline function set_width(value:Single):Single return RichTextData_Ffi.set_width(this, value);
+	inline function set_width(value:Single):Single { RichTextData_Ffi.set_width(this, value); return value; }
 	public var wordWrap(get, set):Bool;
 
 	inline function get_wordWrap():Bool return RichTextData_Ffi.get_wordWrap(this);
 
-	inline function set_wordWrap(value:Bool):Bool return RichTextData_Ffi.set_wordWrap(this, value);
+	inline function set_wordWrap(value:Bool):Bool { RichTextData_Ffi.set_wordWrap(this, value); return value; }
 }

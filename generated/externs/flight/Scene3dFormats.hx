@@ -1,6 +1,6 @@
 package flight;
 
-inline function createAwd2ParseState():Awd2ParseState {
+extern inline function createAwd2ParseState():Awd2ParseState {
 #if hl
 	return flight._hl._fn.Scene3dFormats.createAwd2ParseState();
 #elseif cpp
@@ -11,7 +11,7 @@ inline function createAwd2ParseState():Awd2ParseState {
 	#error "flight.Scene3dFormats: no backend for this target."
 #end
 }
-inline function freeAwd2ParseState(ptr:Awd2ParseState):Void {
+extern inline function freeAwd2ParseState(ptr:Awd2ParseState):Void {
 #if hl
 	flight._hl._fn.Scene3dFormats.freeAwd2ParseState(ptr);
 #elseif cpp

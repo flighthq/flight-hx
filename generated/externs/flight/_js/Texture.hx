@@ -1,7 +1,10 @@
 package flight._js;
 
 abstract Texture(Dynamic) {
-	inline public function cloneTexture():Int {
+	static inline public function create(opts:flight._js.CreateTextureOptions):flight._js.Texture {
+		return flight._js._fn.Texture.createTexture(opts);
+	}
+	inline public function cloneTexture():flight._js.Texture {
 		return flight._js._fn.Texture.cloneTextureTexture(cast this);
 	}
 	inline public function copyTextureTexture(source:flight._js.Texture):Void {
@@ -58,10 +61,13 @@ abstract Texture(Dynamic) {
 	inline public function transformTextureUv(out:flight._js.Vector2, u:Float, v:Float):Void {
 		flight._js._fn.Texture.transformTextureUvTexture(out, cast this, u, v);
 	}
+	inline public function free():Void {
+		flight._js._fn.Texture.freeTexture(cast this);
+	}
 	inline public function advanceVideoTexture(hostVideo:flight._js.HostVideoCapability):Int {
 		return flight._js._fn.Video.advanceVideoTextureTexture(hostVideo, cast this);
 	}
-	inline public function cloneVideoTexture():Int {
+	inline public function cloneVideoTexture():flight._js.Texture {
 		return flight._js._fn.Video.cloneVideoTextureTexture(cast this);
 	}
 	inline public function copyVideoTextureTexture(source:flight._js.Texture):Void {

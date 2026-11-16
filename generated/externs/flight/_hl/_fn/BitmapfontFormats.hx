@@ -2,7 +2,7 @@ package flight._hl._fn;
 
 extern class BitmapfontFormats {
 	@:hlNative("flight", "flight_read_bitmap_font_format_kind")
-	public static function readBitmapFontFormatKind(bytes:hl.Bytes, bytesLen:Int):Dynamic;
+	public static function readBitmapFontFormatKind(bytes:hl.Bytes, bytesLen:Int):flight._hl.BitmapFontFormatKind;
 	@:hlNative("flight", "flight_explain_bitmap_font_parse")
 	public static function explainBitmapFontParse(text:hl.Bytes, options:flight._hl.BitmapFontParseOptions):flight._hl.BitmapFontParseExplanation;
 	@:hlNative("flight", "flight_free_bitmap_font_format_kind")

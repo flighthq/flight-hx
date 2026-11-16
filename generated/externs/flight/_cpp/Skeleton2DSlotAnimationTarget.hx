@@ -10,5 +10,5 @@ abstract Skeleton2DSlotAnimationTarget(cpp.Star<cpp.Void>) {
 
 	inline function get_slotIndex():Int return Skeleton2DSlotAnimationTarget_Ffi.get_slotIndex(this);
 
-	inline function set_slotIndex(value:Int):Int return Skeleton2DSlotAnimationTarget_Ffi.set_slotIndex(this, value);
+	inline function set_slotIndex(value:Int):Int { Skeleton2DSlotAnimationTarget_Ffi.set_slotIndex(this, value); return value; }
 }

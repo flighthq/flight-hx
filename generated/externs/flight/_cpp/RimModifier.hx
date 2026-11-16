@@ -16,20 +16,20 @@ abstract RimModifier(cpp.Star<cpp.Void>) {
 
 	inline function get_color():Int return RimModifier_Ffi.get_color(this);
 
-	inline function set_color(value:Int):Int return RimModifier_Ffi.set_color(this, value);
+	inline function set_color(value:Int):Int { RimModifier_Ffi.set_color(this, value); return value; }
 	public var power(get, set):Single;
 
 	inline function get_power():Single return RimModifier_Ffi.get_power(this);
 
-	inline function set_power(value:Single):Single return RimModifier_Ffi.set_power(this, value);
+	inline function set_power(value:Single):Single { RimModifier_Ffi.set_power(this, value); return value; }
 	public var intensity(get, set):Single;
 
 	inline function get_intensity():Single return RimModifier_Ffi.get_intensity(this);
 
-	inline function set_intensity(value:Single):Single return RimModifier_Ffi.set_intensity(this, value);
+	inline function set_intensity(value:Single):Single { RimModifier_Ffi.set_intensity(this, value); return value; }
 	public var bias(get, set):Single;
 
 	inline function get_bias():Single return RimModifier_Ffi.get_bias(this);
 
-	inline function set_bias(value:Single):Single return RimModifier_Ffi.set_bias(this, value);
+	inline function set_bias(value:Single):Single { RimModifier_Ffi.set_bias(this, value); return value; }
 }

@@ -22,7 +22,7 @@ extern class Particleemitter {
 	@:native("flight_compact_particle_emitter_2d")
 	public static function compactParticleEmitter2d(target:cpp.Star<cpp.Void>):Void;
 	@:native("flight_emit_particle_burst_2d")
-	public static function emitParticleBurst2d(emitter:cpp.Star<cpp.Void>, state:flight._cpp.ParticleEmitterState, config:flight._cpp.ParticleEmitterConfig, count:Single, x:Single, y:Single, tint:Int):Int;
+	public static function emitParticleBurst2d(emitter:cpp.Star<cpp.Void>, state:flight._cpp.ParticleEmitterState, config:flight._cpp.ParticleEmitterConfig, count:Single, x:Single, y:Single, tint:haxe.Int64):Int;
 	@:native("flight_get_particle_emitter_2d_capacity")
 	public static function getParticleEmitter2dCapacity(source:cpp.Star<cpp.Void>):Int;
 	@:native("flight_get_particle_emitter_2d_particle_alpha")
@@ -60,7 +60,7 @@ extern class Particleemitter {
 	@:native("flight_compute_particle_emitter_3d_local_bounds_aabb")
 	public static function computeParticleEmitter3dLocalBoundsAabb(out:flight._cpp.Aabb, source:cpp.Star<cpp.Void>):Void;
 	@:native("flight_emit_particle_burst_3d")
-	public static function emitParticleBurst3d(emitter:cpp.Star<cpp.Void>, state:flight._cpp.ParticleEmitterState, config:flight._cpp.ParticleEmitterConfig, count:Single, x:Single, y:Single, z:Single, tint:Int):Int;
+	public static function emitParticleBurst3d(emitter:cpp.Star<cpp.Void>, state:flight._cpp.ParticleEmitterState, config:flight._cpp.ParticleEmitterConfig, count:Single, x:Single, y:Single, z:Single, tint:haxe.Int64):Int;
 	@:native("flight_get_particle_emitter_3d_capacity")
 	public static function getParticleEmitter3dCapacity(source:cpp.Star<cpp.Void>):Int;
 	@:native("flight_get_particle_emitter_3d_particle_alpha")

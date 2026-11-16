@@ -16,20 +16,20 @@ abstract CollisionContactPoint2D(cpp.Star<cpp.Void>) {
 
 	inline function get_x():Single return CollisionContactPoint2D_Ffi.get_x(this);
 
-	inline function set_x(value:Single):Single return CollisionContactPoint2D_Ffi.set_x(this, value);
+	inline function set_x(value:Single):Single { CollisionContactPoint2D_Ffi.set_x(this, value); return value; }
 	public var y(get, set):Single;
 
 	inline function get_y():Single return CollisionContactPoint2D_Ffi.get_y(this);
 
-	inline function set_y(value:Single):Single return CollisionContactPoint2D_Ffi.set_y(this, value);
+	inline function set_y(value:Single):Single { CollisionContactPoint2D_Ffi.set_y(this, value); return value; }
 	public var depth(get, set):Single;
 
 	inline function get_depth():Single return CollisionContactPoint2D_Ffi.get_depth(this);
 
-	inline function set_depth(value:Single):Single return CollisionContactPoint2D_Ffi.set_depth(this, value);
+	inline function set_depth(value:Single):Single { CollisionContactPoint2D_Ffi.set_depth(this, value); return value; }
 	public var featureId(get, set):haxe.Int64;
 
 	inline function get_featureId():haxe.Int64 return CollisionContactPoint2D_Ffi.get_featureId(this);
 
-	inline function set_featureId(value:haxe.Int64):haxe.Int64 return CollisionContactPoint2D_Ffi.set_featureId(this, value);
+	inline function set_featureId(value:haxe.Int64):haxe.Int64 { CollisionContactPoint2D_Ffi.set_featureId(this, value); return value; }
 }

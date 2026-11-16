@@ -10,5 +10,5 @@ abstract PerspectiveProjectionOptions(cpp.Star<cpp.Void>) {
 
 	inline function get_fovY():Single return PerspectiveProjectionOptions_Ffi.get_fovY(this);
 
-	inline function set_fovY(value:Single):Single return PerspectiveProjectionOptions_Ffi.set_fovY(this, value);
+	inline function set_fovY(value:Single):Single { PerspectiveProjectionOptions_Ffi.set_fovY(this, value); return value; }
 }

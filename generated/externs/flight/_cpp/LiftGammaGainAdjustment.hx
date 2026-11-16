@@ -14,15 +14,15 @@ abstract LiftGammaGainAdjustment(cpp.Star<cpp.Void>) {
 
 	inline function get_lift():Int return LiftGammaGainAdjustment_Ffi.get_lift(this);
 
-	inline function set_lift(value:Int):Int return LiftGammaGainAdjustment_Ffi.set_lift(this, value);
+	inline function set_lift(value:Int):Int { LiftGammaGainAdjustment_Ffi.set_lift(this, value); return value; }
 	public var gamma(get, set):Int;
 
 	inline function get_gamma():Int return LiftGammaGainAdjustment_Ffi.get_gamma(this);
 
-	inline function set_gamma(value:Int):Int return LiftGammaGainAdjustment_Ffi.set_gamma(this, value);
+	inline function set_gamma(value:Int):Int { LiftGammaGainAdjustment_Ffi.set_gamma(this, value); return value; }
 	public var gain(get, set):Int;
 
 	inline function get_gain():Int return LiftGammaGainAdjustment_Ffi.get_gain(this);
 
-	inline function set_gain(value:Int):Int return LiftGammaGainAdjustment_Ffi.set_gain(this, value);
+	inline function set_gain(value:Int):Int { LiftGammaGainAdjustment_Ffi.set_gain(this, value); return value; }
 }

@@ -12,37 +12,37 @@ extern class Adjustments {
 	@:hlNative("flight", "flight_create_color_grade_adjustment")
 	public static function createColorGradeAdjustment(options:flight._hl.ColorGradeAdjustmentOptions):flight._hl.ColorGradeAdjustment;
 	@:hlNative("flight", "flight_bake_color_lut")
-	public static function bakeColorLut(transforms:hl.Bytes, transformsLen:Int, size:Int):flight._hl.ColorLut;
+	public static function bakeColorLut(transforms:hl.Bytes, transformsLen:Int, size:haxe.Int64):flight._hl.ColorLut;
 	@:hlNative("flight", "flight_sample_color_lut")
 	public static function sampleColorLut(lut:flight._hl.ColorLut, out:hl.Bytes, r:Single, g:Single, b:Single):Void;
 	@:hlNative("flight", "flight_get_adjustment_color_transform__brightness_contrast_adjustment")
-	public static function getAdjustmentColorTransformBrightnessContrastAdjustment(operation:flight._hl.BrightnessContrastAdjustment):Dynamic;
+	public static function getAdjustmentColorTransformBrightnessContrastAdjustment(operation:flight._hl.BrightnessContrastAdjustment):flight._hl.ColorTransformFunction;
 	@:hlNative("flight", "flight_get_adjustment_color_transform__channel_mixer_adjustment")
-	public static function getAdjustmentColorTransformChannelMixerAdjustment(operation:flight._hl.ChannelMixerAdjustment):Dynamic;
+	public static function getAdjustmentColorTransformChannelMixerAdjustment(operation:flight._hl.ChannelMixerAdjustment):flight._hl.ColorTransformFunction;
 	@:hlNative("flight", "flight_get_adjustment_color_transform__color_blind_simulation_adjustment")
-	public static function getAdjustmentColorTransformColorBlindSimulationAdjustment(operation:flight._hl.ColorBlindSimulationAdjustment):Dynamic;
+	public static function getAdjustmentColorTransformColorBlindSimulationAdjustment(operation:flight._hl.ColorBlindSimulationAdjustment):flight._hl.ColorTransformFunction;
 	@:hlNative("flight", "flight_get_adjustment_color_transform__color_grade_adjustment")
-	public static function getAdjustmentColorTransformColorGradeAdjustment(operation:flight._hl.ColorGradeAdjustment):Dynamic;
+	public static function getAdjustmentColorTransformColorGradeAdjustment(operation:flight._hl.ColorGradeAdjustment):flight._hl.ColorTransformFunction;
 	@:hlNative("flight", "flight_get_adjustment_color_transform__color_matrix_adjustment")
-	public static function getAdjustmentColorTransformColorMatrixAdjustment(operation:flight._hl.ColorMatrixAdjustment):Dynamic;
+	public static function getAdjustmentColorTransformColorMatrixAdjustment(operation:flight._hl.ColorMatrixAdjustment):flight._hl.ColorTransformFunction;
 	@:hlNative("flight", "flight_get_adjustment_color_transform__color_scale_bias_adjustment")
-	public static function getAdjustmentColorTransformColorScaleBiasAdjustment(operation:flight._hl.ColorScaleBiasAdjustment):Dynamic;
+	public static function getAdjustmentColorTransformColorScaleBiasAdjustment(operation:flight._hl.ColorScaleBiasAdjustment):flight._hl.ColorTransformFunction;
 	@:hlNative("flight", "flight_get_adjustment_color_transform__exposure_adjustment")
-	public static function getAdjustmentColorTransformExposureAdjustment(operation:flight._hl.ExposureAdjustment):Dynamic;
+	public static function getAdjustmentColorTransformExposureAdjustment(operation:flight._hl.ExposureAdjustment):flight._hl.ColorTransformFunction;
 	@:hlNative("flight", "flight_get_adjustment_color_transform__grayscale_adjustment")
-	public static function getAdjustmentColorTransformGrayscaleAdjustment(operation:flight._hl.GrayscaleAdjustment):Dynamic;
+	public static function getAdjustmentColorTransformGrayscaleAdjustment(operation:flight._hl.GrayscaleAdjustment):flight._hl.ColorTransformFunction;
 	@:hlNative("flight", "flight_get_adjustment_color_transform__hue_saturation_adjustment")
-	public static function getAdjustmentColorTransformHueSaturationAdjustment(operation:flight._hl.HueSaturationAdjustment):Dynamic;
+	public static function getAdjustmentColorTransformHueSaturationAdjustment(operation:flight._hl.HueSaturationAdjustment):flight._hl.ColorTransformFunction;
 	@:hlNative("flight", "flight_get_adjustment_color_transform__invert_adjustment")
-	public static function getAdjustmentColorTransformInvertAdjustment(operation:flight._hl.InvertAdjustment):Dynamic;
+	public static function getAdjustmentColorTransformInvertAdjustment(operation:flight._hl.InvertAdjustment):flight._hl.ColorTransformFunction;
 	@:hlNative("flight", "flight_get_adjustment_color_transform__lift_gamma_gain_adjustment")
-	public static function getAdjustmentColorTransformLiftGammaGainAdjustment(operation:flight._hl.LiftGammaGainAdjustment):Dynamic;
+	public static function getAdjustmentColorTransformLiftGammaGainAdjustment(operation:flight._hl.LiftGammaGainAdjustment):flight._hl.ColorTransformFunction;
 	@:hlNative("flight", "flight_get_adjustment_color_transform__lookup_table_grade_adjustment")
-	public static function getAdjustmentColorTransformLookupTableGradeAdjustment(operation:flight._hl.LookupTableGradeAdjustment):Dynamic;
+	public static function getAdjustmentColorTransformLookupTableGradeAdjustment(operation:flight._hl.LookupTableGradeAdjustment):flight._hl.ColorTransformFunction;
 	@:hlNative("flight", "flight_get_adjustment_color_transform__sepia_adjustment")
-	public static function getAdjustmentColorTransformSepiaAdjustment(operation:flight._hl.SepiaAdjustment):Dynamic;
+	public static function getAdjustmentColorTransformSepiaAdjustment(operation:flight._hl.SepiaAdjustment):flight._hl.ColorTransformFunction;
 	@:hlNative("flight", "flight_get_adjustment_color_transform__tint_adjustment")
-	public static function getAdjustmentColorTransformTintAdjustment(operation:flight._hl.TintAdjustment):Dynamic;
+	public static function getAdjustmentColorTransformTintAdjustment(operation:flight._hl.TintAdjustment):flight._hl.ColorTransformFunction;
 	@:hlNative("flight", "flight_is_color_lut_adjustment__brightness_contrast_adjustment")
 	public static function isColorLutAdjustmentBrightnessContrastAdjustment(operation:flight._hl.BrightnessContrastAdjustment):Bool;
 	@:hlNative("flight", "flight_is_color_lut_adjustment__channel_mixer_adjustment")

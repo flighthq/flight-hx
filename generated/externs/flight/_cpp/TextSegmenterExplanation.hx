@@ -12,10 +12,10 @@ abstract TextSegmenterExplanation(cpp.Star<cpp.Void>) {
 
 	inline function get_available():Bool return TextSegmenterExplanation_Ffi.get_available(this);
 
-	inline function set_available(value:Bool):Bool return TextSegmenterExplanation_Ffi.set_available(this, value);
+	inline function set_available(value:Bool):Bool { TextSegmenterExplanation_Ffi.set_available(this, value); return value; }
 	public var intlSegmenterAvailable(get, set):Bool;
 
 	inline function get_intlSegmenterAvailable():Bool return TextSegmenterExplanation_Ffi.get_intlSegmenterAvailable(this);
 
-	inline function set_intlSegmenterAvailable(value:Bool):Bool return TextSegmenterExplanation_Ffi.set_intlSegmenterAvailable(this, value);
+	inline function set_intlSegmenterAvailable(value:Bool):Bool { TextSegmenterExplanation_Ffi.set_intlSegmenterAvailable(this, value); return value; }
 }

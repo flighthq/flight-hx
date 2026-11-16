@@ -12,10 +12,10 @@ abstract CocosPlistFrame(cpp.Star<cpp.Void>) {
 
 	inline function get_spriteTrimmed():Bool return CocosPlistFrame_Ffi.get_spriteTrimmed(this);
 
-	inline function set_spriteTrimmed(value:Bool):Bool return CocosPlistFrame_Ffi.set_spriteTrimmed(this, value);
+	inline function set_spriteTrimmed(value:Bool):Bool { CocosPlistFrame_Ffi.set_spriteTrimmed(this, value); return value; }
 	public var textureRotated(get, set):Bool;
 
 	inline function get_textureRotated():Bool return CocosPlistFrame_Ffi.get_textureRotated(this);
 
-	inline function set_textureRotated(value:Bool):Bool return CocosPlistFrame_Ffi.set_textureRotated(this, value);
+	inline function set_textureRotated(value:Bool):Bool { CocosPlistFrame_Ffi.set_textureRotated(this, value); return value; }
 }

@@ -14,15 +14,15 @@ abstract BitmapFontKerningData(cpp.Star<cpp.Void>) {
 
 	inline function get_amount():Single return BitmapFontKerningData_Ffi.get_amount(this);
 
-	inline function set_amount(value:Single):Single return BitmapFontKerningData_Ffi.set_amount(this, value);
+	inline function set_amount(value:Single):Single { BitmapFontKerningData_Ffi.set_amount(this, value); return value; }
 	public var left(get, set):Int;
 
 	inline function get_left():Int return BitmapFontKerningData_Ffi.get_left(this);
 
-	inline function set_left(value:Int):Int return BitmapFontKerningData_Ffi.set_left(this, value);
+	inline function set_left(value:Int):Int { BitmapFontKerningData_Ffi.set_left(this, value); return value; }
 	public var right(get, set):Int;
 
 	inline function get_right():Int return BitmapFontKerningData_Ffi.get_right(this);
 
-	inline function set_right(value:Int):Int return BitmapFontKerningData_Ffi.set_right(this, value);
+	inline function set_right(value:Int):Int { BitmapFontKerningData_Ffi.set_right(this, value); return value; }
 }

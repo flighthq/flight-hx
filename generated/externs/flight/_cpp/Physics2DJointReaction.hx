@@ -14,15 +14,15 @@ abstract Physics2DJointReaction(cpp.Star<cpp.Void>) {
 
 	inline function get_forceX():Single return Physics2DJointReaction_Ffi.get_forceX(this);
 
-	inline function set_forceX(value:Single):Single return Physics2DJointReaction_Ffi.set_forceX(this, value);
+	inline function set_forceX(value:Single):Single { Physics2DJointReaction_Ffi.set_forceX(this, value); return value; }
 	public var forceY(get, set):Single;
 
 	inline function get_forceY():Single return Physics2DJointReaction_Ffi.get_forceY(this);
 
-	inline function set_forceY(value:Single):Single return Physics2DJointReaction_Ffi.set_forceY(this, value);
+	inline function set_forceY(value:Single):Single { Physics2DJointReaction_Ffi.set_forceY(this, value); return value; }
 	public var torque(get, set):Single;
 
 	inline function get_torque():Single return Physics2DJointReaction_Ffi.get_torque(this);
 
-	inline function set_torque(value:Single):Single return Physics2DJointReaction_Ffi.set_torque(this, value);
+	inline function set_torque(value:Single):Single { Physics2DJointReaction_Ffi.set_torque(this, value); return value; }
 }

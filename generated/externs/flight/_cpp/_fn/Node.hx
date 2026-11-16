@@ -28,7 +28,7 @@ extern class Node {
 	@:native("flight_disable_node_guards")
 	public static function disableNodeGuards(guards:flight._cpp.NodeGuardState):Void;
 	@:native("flight_enable_node_guards")
-	public static function enableNodeGuards(guards:flight._cpp.NodeGuardState, logState:cpp.Star<cpp.Void>, clock:flight._cpp.NodeGuardClock):Void;
+	public static function enableNodeGuards(guards:flight._cpp.NodeGuardState, logState:cpp.Star<cpp.Void>, clockFn:cpp.Star<cpp.Void>, clockCtx:cpp.Star<cpp.Void>):Void;
 	@:native("flight_init_appearance_runtime_trait")
 	public static function initAppearanceRuntimeTrait(target:flight._cpp.HasAppearanceRuntime):Void;
 	@:native("flight_init_appearance_trait")
@@ -150,7 +150,7 @@ extern class Node {
 	@:native("flight_set_node_transform2d")
 	public static function setNodeTransform2d(target:cpp.Star<cpp.Void>, source:flight._cpp.Transform2D):Void;
 	@:native("flight_compute_node_world_transform_revision")
-	public static function computeNodeWorldTransformRevision(target:cpp.Star<cpp.Void>, parentWorldTransformId:Int, root:flight._cpp.NodeRuntime):Void;
+	public static function computeNodeWorldTransformRevision(target:cpp.Star<cpp.Void>, parentWorldTransformId:haxe.Int64, root:flight._cpp.NodeRuntime):Void;
 	@:native("flight_get_node_appearance_revision")
 	public static function getNodeAppearanceRevision(source:cpp.Star<cpp.Void>):Int;
 	@:native("flight_get_node_children_revision")
@@ -184,9 +184,9 @@ extern class Node {
 	@:native("flight_invalidate_node_world_bounds")
 	public static function invalidateNodeWorldBounds(target:cpp.Star<cpp.Void>):Void;
 	@:native("flight_compute_scene2d_fit_align_x")
-	public static function computeScene2dFitAlignX(scaledContentWidth:Single, viewWidth:Single, align:Int):Single;
+	public static function computeScene2dFitAlignX(scaledContentWidth:Single, viewWidth:Single, align:flight._cpp.ViewportAlign):Single;
 	@:native("flight_compute_scene2d_fit_align_y")
-	public static function computeScene2dFitAlignY(scaledContentHeight:Single, viewHeight:Single, align:Int):Single;
+	public static function computeScene2dFitAlignY(scaledContentHeight:Single, viewHeight:Single, align:flight._cpp.ViewportAlign):Single;
 	@:native("flight_compute_scene2d_fit_fill_scale")
 	public static function computeScene2dFitFillScale(contentWidth:Single, contentHeight:Single, viewWidth:Single, viewHeight:Single):Single;
 	@:native("flight_compute_scene2d_fit_scale")

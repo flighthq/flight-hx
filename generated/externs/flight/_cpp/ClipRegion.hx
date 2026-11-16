@@ -10,5 +10,5 @@ abstract ClipRegion(cpp.Star<cpp.Void>) {
 
 	inline function get_version():Int return ClipRegion_Ffi.get_version(this);
 
-	inline function set_version(value:Int):Int return ClipRegion_Ffi.set_version(this, value);
+	inline function set_version(value:Int):Int { ClipRegion_Ffi.set_version(this, value); return value; }
 }

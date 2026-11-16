@@ -12,10 +12,10 @@ abstract HasAppearance(cpp.Star<cpp.Void>) {
 
 	inline function get_alpha():Single return HasAppearance_Ffi.get_alpha(this);
 
-	inline function set_alpha(value:Single):Single return HasAppearance_Ffi.set_alpha(this, value);
+	inline function set_alpha(value:Single):Single { HasAppearance_Ffi.set_alpha(this, value); return value; }
 	public var visible(get, set):Bool;
 
 	inline function get_visible():Bool return HasAppearance_Ffi.get_visible(this);
 
-	inline function set_visible(value:Bool):Bool return HasAppearance_Ffi.set_visible(this, value);
+	inline function set_visible(value:Bool):Bool { HasAppearance_Ffi.set_visible(this, value); return value; }
 }

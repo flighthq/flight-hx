@@ -10,5 +10,5 @@ abstract GrayscaleAdjustment(cpp.Star<cpp.Void>) {
 
 	inline function get_intensity():Single return GrayscaleAdjustment_Ffi.get_intensity(this);
 
-	inline function set_intensity(value:Single):Single return GrayscaleAdjustment_Ffi.set_intensity(this, value);
+	inline function set_intensity(value:Single):Single { GrayscaleAdjustment_Ffi.set_intensity(this, value); return value; }
 }

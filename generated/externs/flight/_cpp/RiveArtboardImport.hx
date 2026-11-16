@@ -12,10 +12,10 @@ abstract RiveArtboardImport(cpp.Star<cpp.Void>) {
 
 	inline function get_height():Single return RiveArtboardImport_Ffi.get_height(this);
 
-	inline function set_height(value:Single):Single return RiveArtboardImport_Ffi.set_height(this, value);
+	inline function set_height(value:Single):Single { RiveArtboardImport_Ffi.set_height(this, value); return value; }
 	public var width(get, set):Single;
 
 	inline function get_width():Single return RiveArtboardImport_Ffi.get_width(this);
 
-	inline function set_width(value:Single):Single return RiveArtboardImport_Ffi.set_width(this, value);
+	inline function set_width(value:Single):Single { RiveArtboardImport_Ffi.set_width(this, value); return value; }
 }

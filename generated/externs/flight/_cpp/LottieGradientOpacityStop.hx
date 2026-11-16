@@ -12,10 +12,10 @@ abstract LottieGradientOpacityStop(cpp.Star<cpp.Void>) {
 
 	inline function get_alpha():Single return LottieGradientOpacityStop_Ffi.get_alpha(this);
 
-	inline function set_alpha(value:Single):Single return LottieGradientOpacityStop_Ffi.set_alpha(this, value);
+	inline function set_alpha(value:Single):Single { LottieGradientOpacityStop_Ffi.set_alpha(this, value); return value; }
 	public var offset(get, set):Single;
 
 	inline function get_offset():Single return LottieGradientOpacityStop_Ffi.get_offset(this);
 
-	inline function set_offset(value:Single):Single return LottieGradientOpacityStop_Ffi.set_offset(this, value);
+	inline function set_offset(value:Single):Single { LottieGradientOpacityStop_Ffi.set_offset(this, value); return value; }
 }

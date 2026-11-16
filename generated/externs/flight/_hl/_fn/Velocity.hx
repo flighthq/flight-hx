@@ -2,7 +2,7 @@ package flight._hl._fn;
 
 extern class Velocity {
 	@:hlNative("flight", "flight_contribute_transform_velocity")
-	public static function contributeTransformVelocity(field:flight._hl.VelocityField, root:Dynamic):Void;
+	public static function contributeTransformVelocity(field:flight._hl.VelocityField, root:hl.Bytes):Void;
 	@:hlNative("flight", "flight_add_velocity")
 	public static function addVelocity(out:flight._hl.Velocity2D, a:flight._hl.Velocity2D, b:flight._hl.Velocity2D):Void;
 	@:hlNative("flight", "flight_clamp_velocity")

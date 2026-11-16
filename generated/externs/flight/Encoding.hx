@@ -1,6 +1,6 @@
 package flight;
 
-inline function decodeUtf8(bytes:Dynamic, bytesLen:Int, offset:Int, length:Int):String {
+extern inline function decodeUtf8(bytes:Dynamic, bytesLen:Int, offset:haxe.Int64, length:haxe.Int64):String {
 #if hl
 	return cast flight._hl._fn.Encoding.decodeUtf8(bytes, bytesLen, offset, length);
 #elseif cpp
@@ -11,7 +11,7 @@ inline function decodeUtf8(bytes:Dynamic, bytesLen:Int, offset:Int, length:Int):
 	#error "flight.Encoding: no backend for this target."
 #end
 }
-inline function encodeUtf8(text:String):Dynamic {
+extern inline function encodeUtf8(text:String):Dynamic {
 #if hl
 	return flight._hl._fn.Encoding.encodeUtf8(cast text);
 #elseif cpp

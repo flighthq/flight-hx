@@ -22,7 +22,7 @@ typedef Bitmap = flight._js.Bitmap;
 
 #end
 
-inline function createBitmap(width:Int, height:Int, color:Int):Bitmap {
+extern inline function createBitmap(width:Int, height:Int, color:haxe.Int64):Bitmap {
 #if hl
 	return flight._hl._fn.Bitmap.createBitmap(width, height, color);
 #elseif cpp
@@ -33,7 +33,7 @@ inline function createBitmap(width:Int, height:Int, color:Int):Bitmap {
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function cloneBitmap(source:Bitmap):Bitmap {
+extern inline function cloneBitmap(source:Bitmap):Bitmap {
 #if hl
 	return flight._hl._fn.Bitmap.cloneBitmap(source);
 #elseif cpp
@@ -44,7 +44,7 @@ inline function cloneBitmap(source:Bitmap):Bitmap {
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function convertBitmapAlphaType(out:Bitmap, target:flight.AlphaType):Void {
+extern inline function convertBitmapAlphaType(out:Bitmap, target:flight.AlphaType):Void {
 #if hl
 	flight._hl._fn.Bitmap.convertBitmapAlphaType(out, target);
 #elseif cpp
@@ -55,7 +55,7 @@ inline function convertBitmapAlphaType(out:Bitmap, target:flight.AlphaType):Void
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function invalidateBitmap(bitmap:Bitmap):Void {
+extern inline function invalidateBitmap(bitmap:Bitmap):Void {
 #if hl
 	flight._hl._fn.Bitmap.invalidateBitmap(bitmap);
 #elseif cpp
@@ -66,7 +66,7 @@ inline function invalidateBitmap(bitmap:Bitmap):Void {
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function transformBitmap(dest:BitmapRegion, source:BitmapRegion, matrix:Dynamic, edgeMode:flight.BitmapEdgeMode, sampleMode:flight.BitmapResizeMode):Void {
+extern inline function transformBitmap(dest:BitmapRegion, source:BitmapRegion, matrix:Dynamic, edgeMode:flight.BitmapEdgeMode, sampleMode:flight.BitmapResizeMode):Void {
 #if hl
 	flight._hl._fn.Bitmap.transformBitmap(dest, source, matrix, edgeMode, sampleMode);
 #elseif cpp
@@ -77,7 +77,7 @@ inline function transformBitmap(dest:BitmapRegion, source:BitmapRegion, matrix:D
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function copyBitmapAlpha(dest:BitmapRegion, source:BitmapRegion):Void {
+extern inline function copyBitmapAlpha(dest:BitmapRegion, source:BitmapRegion):Void {
 #if hl
 	flight._hl._fn.Bitmap.copyBitmapAlpha(dest, source);
 #elseif cpp
@@ -88,7 +88,7 @@ inline function copyBitmapAlpha(dest:BitmapRegion, source:BitmapRegion):Void {
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function multiplyBitmapAlpha(out:BitmapRegion, factor:Float):Void {
+extern inline function multiplyBitmapAlpha(out:BitmapRegion, factor:Float):Void {
 #if hl
 	flight._hl._fn.Bitmap.multiplyBitmapAlpha(out, factor);
 #elseif cpp
@@ -99,7 +99,7 @@ inline function multiplyBitmapAlpha(out:BitmapRegion, factor:Float):Void {
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function setBitmapAlpha(out:BitmapRegion, alpha:Float):Void {
+extern inline function setBitmapAlpha(out:BitmapRegion, alpha:Float):Void {
 #if hl
 	flight._hl._fn.Bitmap.setBitmapAlpha(out, alpha);
 #elseif cpp
@@ -110,7 +110,7 @@ inline function setBitmapAlpha(out:BitmapRegion, alpha:Float):Void {
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function bevelBitmap(out:Dynamic, outLen:Int, scratch:Dynamic, scratchLen:Int, source:BitmapRegion, options:BitmapBevelOptions):Void {
+extern inline function bevelBitmap(out:Dynamic, outLen:Int, scratch:Dynamic, scratchLen:Int, source:BitmapRegion, options:BitmapBevelOptions):Void {
 #if hl
 	flight._hl._fn.Bitmap.bevelBitmap(out, outLen, scratch, scratchLen, source, options);
 #elseif cpp
@@ -121,7 +121,7 @@ inline function bevelBitmap(out:Dynamic, outLen:Int, scratch:Dynamic, scratchLen
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function blurBitmapPixelsHorizontal(out:Dynamic, outLen:Int, source:Dynamic, sourceLen:Int, width:Int, height:Int, radius:Int):Void {
+extern inline function blurBitmapPixelsHorizontal(out:Dynamic, outLen:Int, source:Dynamic, sourceLen:Int, width:Int, height:Int, radius:Int):Void {
 #if hl
 	flight._hl._fn.Bitmap.blurBitmapPixelsHorizontal(out, outLen, source, sourceLen, width, height, radius);
 #elseif cpp
@@ -132,7 +132,7 @@ inline function blurBitmapPixelsHorizontal(out:Dynamic, outLen:Int, source:Dynam
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function blurBitmapPixelsHorizontalWeighted(out:Dynamic, outLen:Int, source:Dynamic, sourceLen:Int, width:Int, height:Int, kernel:Dynamic, kernelLen:Int):Void {
+extern inline function blurBitmapPixelsHorizontalWeighted(out:Dynamic, outLen:Int, source:Dynamic, sourceLen:Int, width:Int, height:Int, kernel:Dynamic, kernelLen:Int):Void {
 #if hl
 	flight._hl._fn.Bitmap.blurBitmapPixelsHorizontalWeighted(out, outLen, source, sourceLen, width, height, kernel, kernelLen);
 #elseif cpp
@@ -143,7 +143,7 @@ inline function blurBitmapPixelsHorizontalWeighted(out:Dynamic, outLen:Int, sour
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function blurBitmapPixelsVertical(out:Dynamic, outLen:Int, source:Dynamic, sourceLen:Int, width:Int, height:Int, radius:Int):Void {
+extern inline function blurBitmapPixelsVertical(out:Dynamic, outLen:Int, source:Dynamic, sourceLen:Int, width:Int, height:Int, radius:Int):Void {
 #if hl
 	flight._hl._fn.Bitmap.blurBitmapPixelsVertical(out, outLen, source, sourceLen, width, height, radius);
 #elseif cpp
@@ -154,7 +154,7 @@ inline function blurBitmapPixelsVertical(out:Dynamic, outLen:Int, source:Dynamic
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function blurBitmapPixelsVerticalWeighted(out:Dynamic, outLen:Int, source:Dynamic, sourceLen:Int, width:Int, height:Int, kernel:Dynamic, kernelLen:Int):Void {
+extern inline function blurBitmapPixelsVerticalWeighted(out:Dynamic, outLen:Int, source:Dynamic, sourceLen:Int, width:Int, height:Int, kernel:Dynamic, kernelLen:Int):Void {
 #if hl
 	flight._hl._fn.Bitmap.blurBitmapPixelsVerticalWeighted(out, outLen, source, sourceLen, width, height, kernel, kernelLen);
 #elseif cpp
@@ -165,7 +165,7 @@ inline function blurBitmapPixelsVerticalWeighted(out:Dynamic, outLen:Int, source
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function boxBlurBitmap(out:Dynamic, outLen:Int, scratch:Dynamic, scratchLen:Int, source:BitmapRegion, options:BitmapBoxBlurOptions):Void {
+extern inline function boxBlurBitmap(out:Dynamic, outLen:Int, scratch:Dynamic, scratchLen:Int, source:BitmapRegion, options:BitmapBoxBlurOptions):Void {
 #if hl
 	flight._hl._fn.Bitmap.boxBlurBitmap(out, outLen, scratch, scratchLen, source, options);
 #elseif cpp
@@ -176,7 +176,7 @@ inline function boxBlurBitmap(out:Dynamic, outLen:Int, scratch:Dynamic, scratchL
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function computeGaussianKernel(out:Dynamic, outLen:Int, radius:Int, sigma:Float):Void {
+extern inline function computeGaussianKernel(out:Dynamic, outLen:Int, radius:Int, sigma:Float):Void {
 #if hl
 	flight._hl._fn.Bitmap.computeGaussianKernel(out, outLen, radius, sigma);
 #elseif cpp
@@ -187,7 +187,7 @@ inline function computeGaussianKernel(out:Dynamic, outLen:Int, radius:Int, sigma
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function gaussianBlurBitmap(out:Dynamic, outLen:Int, scratch:Dynamic, scratchLen:Int, source:BitmapRegion, sigmaX:Float, sigmaY:Float, passes:Int):Void {
+extern inline function gaussianBlurBitmap(out:Dynamic, outLen:Int, scratch:Dynamic, scratchLen:Int, source:BitmapRegion, sigmaX:Float, sigmaY:Float, passes:Int):Void {
 #if hl
 	flight._hl._fn.Bitmap.gaussianBlurBitmap(out, outLen, scratch, scratchLen, source, sigmaX, sigmaY, passes);
 #elseif cpp
@@ -198,7 +198,7 @@ inline function gaussianBlurBitmap(out:Dynamic, outLen:Int, scratch:Dynamic, scr
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function mergeBitmapChannels(out:BitmapRegion, r:BitmapRegion, g:BitmapRegion, b:BitmapRegion, a:BitmapRegion):Void {
+extern inline function mergeBitmapChannels(out:BitmapRegion, r:BitmapRegion, g:BitmapRegion, b:BitmapRegion, a:BitmapRegion):Void {
 #if hl
 	flight._hl._fn.Bitmap.mergeBitmapChannels(out, r, g, b, a);
 #elseif cpp
@@ -209,7 +209,7 @@ inline function mergeBitmapChannels(out:BitmapRegion, r:BitmapRegion, g:BitmapRe
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function buildBitmapBrightnessColorMatrix(out:Dynamic, amount:Float):Void {
+extern inline function buildBitmapBrightnessColorMatrix(out:Dynamic, amount:Float):Void {
 #if hl
 	flight._hl._fn.Bitmap.buildBitmapBrightnessColorMatrix(out, amount);
 #elseif cpp
@@ -220,7 +220,7 @@ inline function buildBitmapBrightnessColorMatrix(out:Dynamic, amount:Float):Void
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function buildBitmapContrastColorMatrix(out:Dynamic, amount:Float):Void {
+extern inline function buildBitmapContrastColorMatrix(out:Dynamic, amount:Float):Void {
 #if hl
 	flight._hl._fn.Bitmap.buildBitmapContrastColorMatrix(out, amount);
 #elseif cpp
@@ -231,7 +231,7 @@ inline function buildBitmapContrastColorMatrix(out:Dynamic, amount:Float):Void {
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function buildBitmapGrayscaleColorMatrix(out:Dynamic):Void {
+extern inline function buildBitmapGrayscaleColorMatrix(out:Dynamic):Void {
 #if hl
 	flight._hl._fn.Bitmap.buildBitmapGrayscaleColorMatrix(out);
 #elseif cpp
@@ -242,7 +242,7 @@ inline function buildBitmapGrayscaleColorMatrix(out:Dynamic):Void {
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function buildBitmapHueRotationColorMatrix(out:Dynamic, degrees:Float):Void {
+extern inline function buildBitmapHueRotationColorMatrix(out:Dynamic, degrees:Float):Void {
 #if hl
 	flight._hl._fn.Bitmap.buildBitmapHueRotationColorMatrix(out, degrees);
 #elseif cpp
@@ -253,7 +253,7 @@ inline function buildBitmapHueRotationColorMatrix(out:Dynamic, degrees:Float):Vo
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function buildBitmapInvertColorMatrix(out:Dynamic):Void {
+extern inline function buildBitmapInvertColorMatrix(out:Dynamic):Void {
 #if hl
 	flight._hl._fn.Bitmap.buildBitmapInvertColorMatrix(out);
 #elseif cpp
@@ -264,7 +264,7 @@ inline function buildBitmapInvertColorMatrix(out:Dynamic):Void {
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function buildBitmapSaturationColorMatrix(out:Dynamic, amount:Float):Void {
+extern inline function buildBitmapSaturationColorMatrix(out:Dynamic, amount:Float):Void {
 #if hl
 	flight._hl._fn.Bitmap.buildBitmapSaturationColorMatrix(out, amount);
 #elseif cpp
@@ -275,7 +275,7 @@ inline function buildBitmapSaturationColorMatrix(out:Dynamic, amount:Float):Void
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function buildBitmapSepiaColorMatrix(out:Dynamic):Void {
+extern inline function buildBitmapSepiaColorMatrix(out:Dynamic):Void {
 #if hl
 	flight._hl._fn.Bitmap.buildBitmapSepiaColorMatrix(out);
 #elseif cpp
@@ -286,7 +286,7 @@ inline function buildBitmapSepiaColorMatrix(out:Dynamic):Void {
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function colorMatrixBitmap(out:Dynamic, outLen:Int, source:BitmapRegion, matrix:Dynamic, matrixLen:Int):Void {
+extern inline function colorMatrixBitmap(out:Dynamic, outLen:Int, source:BitmapRegion, matrix:Dynamic, matrixLen:Int):Void {
 #if hl
 	flight._hl._fn.Bitmap.colorMatrixBitmap(out, outLen, source, matrix, matrixLen);
 #elseif cpp
@@ -297,7 +297,7 @@ inline function colorMatrixBitmap(out:Dynamic, outLen:Int, source:BitmapRegion, 
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function concatBitmapColorMatrix(out:Dynamic, first:Dynamic, second:Dynamic):Void {
+extern inline function concatBitmapColorMatrix(out:Dynamic, first:Dynamic, second:Dynamic):Void {
 #if hl
 	flight._hl._fn.Bitmap.concatBitmapColorMatrix(out, first, second);
 #elseif cpp
@@ -308,7 +308,7 @@ inline function concatBitmapColorMatrix(out:Dynamic, first:Dynamic, second:Dynam
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function setBitmapColorMatrixIdentity(out:Dynamic):Void {
+extern inline function setBitmapColorMatrixIdentity(out:Dynamic):Void {
 #if hl
 	flight._hl._fn.Bitmap.setBitmapColorMatrixIdentity(out);
 #elseif cpp
@@ -319,7 +319,7 @@ inline function setBitmapColorMatrixIdentity(out:Dynamic):Void {
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function compareBitmap(source:Bitmap, other:Bitmap):Bitmap {
+extern inline function compareBitmap(source:Bitmap, other:Bitmap):Bitmap {
 #if hl
 	return flight._hl._fn.Bitmap.compareBitmap(source, other);
 #elseif cpp
@@ -330,7 +330,7 @@ inline function compareBitmap(source:Bitmap, other:Bitmap):Bitmap {
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function getBitmapMismatch(source:Bitmap, other:Bitmap, channelTolerance:Int):BitmapMismatch {
+extern inline function getBitmapMismatch(source:Bitmap, other:Bitmap, channelTolerance:Int):BitmapMismatch {
 #if hl
 	return flight._hl._fn.Bitmap.getBitmapMismatch(source, other, channelTolerance);
 #elseif cpp
@@ -341,7 +341,7 @@ inline function getBitmapMismatch(source:Bitmap, other:Bitmap, channelTolerance:
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function compositeBitmapPixels(dest:BitmapRegion, pixels:Dynamic, pixelsLen:Int, mode:Int):Void {
+extern inline function compositeBitmapPixels(dest:BitmapRegion, pixels:Dynamic, pixelsLen:Int, mode:BitmapCompositeMode):Void {
 #if hl
 	flight._hl._fn.Bitmap.compositeBitmapPixels(dest, pixels, pixelsLen, mode);
 #elseif cpp
@@ -352,7 +352,7 @@ inline function compositeBitmapPixels(dest:BitmapRegion, pixels:Dynamic, pixelsL
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function compositeBitmapRegion(dest:BitmapRegion, source:BitmapRegion, mode:Int):Void {
+extern inline function compositeBitmapRegion(dest:BitmapRegion, source:BitmapRegion, mode:BitmapCompositeMode):Void {
 #if hl
 	flight._hl._fn.Bitmap.compositeBitmapRegion(dest, source, mode);
 #elseif cpp
@@ -363,7 +363,7 @@ inline function compositeBitmapRegion(dest:BitmapRegion, source:BitmapRegion, mo
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function extractBitmapPixels(out:Dynamic, outLen:Int, source:BitmapRegion):Void {
+extern inline function extractBitmapPixels(out:Dynamic, outLen:Int, source:BitmapRegion):Void {
 #if hl
 	flight._hl._fn.Bitmap.extractBitmapPixels(out, outLen, source);
 #elseif cpp
@@ -374,7 +374,7 @@ inline function extractBitmapPixels(out:Dynamic, outLen:Int, source:BitmapRegion
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function extractBitmapPixels32(out:Dynamic, outLen:Int, source:BitmapRegion):Void {
+extern inline function extractBitmapPixels32(out:Dynamic, outLen:Int, source:BitmapRegion):Void {
 #if hl
 	flight._hl._fn.Bitmap.extractBitmapPixels32(out, outLen, source);
 #elseif cpp
@@ -385,7 +385,7 @@ inline function extractBitmapPixels32(out:Dynamic, outLen:Int, source:BitmapRegi
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function writeBitmapPixels(dest:BitmapRegion, pixels:Dynamic, pixelsLen:Int):Void {
+extern inline function writeBitmapPixels(dest:BitmapRegion, pixels:Dynamic, pixelsLen:Int):Void {
 #if hl
 	flight._hl._fn.Bitmap.writeBitmapPixels(dest, pixels, pixelsLen);
 #elseif cpp
@@ -396,7 +396,7 @@ inline function writeBitmapPixels(dest:BitmapRegion, pixels:Dynamic, pixelsLen:I
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function writeBitmapPixels32(dest:BitmapRegion, pixels:Dynamic, pixelsLen:Int):Void {
+extern inline function writeBitmapPixels32(dest:BitmapRegion, pixels:Dynamic, pixelsLen:Int):Void {
 #if hl
 	flight._hl._fn.Bitmap.writeBitmapPixels32(dest, pixels, pixelsLen);
 #elseif cpp
@@ -407,7 +407,7 @@ inline function writeBitmapPixels32(dest:BitmapRegion, pixels:Dynamic, pixelsLen
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function convolveBitmap(out:Dynamic, outLen:Int, source:BitmapRegion, options:BitmapConvolutionOptions):Void {
+extern inline function convolveBitmap(out:Dynamic, outLen:Int, source:BitmapRegion, options:BitmapConvolutionOptions):Void {
 #if hl
 	flight._hl._fn.Bitmap.convolveBitmap(out, outLen, source, options);
 #elseif cpp
@@ -418,7 +418,7 @@ inline function convolveBitmap(out:Dynamic, outLen:Int, source:BitmapRegion, opt
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function copyBitmapChannel(dest:BitmapRegion, destChannel:Int, source:BitmapRegion, sourceChannel:Int):Void {
+extern inline function copyBitmapChannel(dest:BitmapRegion, destChannel:ImageChannel, source:BitmapRegion, sourceChannel:ImageChannel):Void {
 #if hl
 	flight._hl._fn.Bitmap.copyBitmapChannel(dest, destChannel, source, sourceChannel);
 #elseif cpp
@@ -429,7 +429,7 @@ inline function copyBitmapChannel(dest:BitmapRegion, destChannel:Int, source:Bit
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function copyBitmapPixels(dest:BitmapRegion, source:BitmapRegion, composite:Bool):Void {
+extern inline function copyBitmapPixels(dest:BitmapRegion, source:BitmapRegion, composite:Bool):Void {
 #if hl
 	flight._hl._fn.Bitmap.copyBitmapPixels(dest, source, composite);
 #elseif cpp
@@ -440,7 +440,7 @@ inline function copyBitmapPixels(dest:BitmapRegion, source:BitmapRegion, composi
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function getBitmapCoverage(source:Bitmap, backgroundColor:Int, channelTolerance:Int):Float {
+extern inline function getBitmapCoverage(source:Bitmap, backgroundColor:Int, channelTolerance:Int):Float {
 #if hl
 	return flight._hl._fn.Bitmap.getBitmapCoverage(source, backgroundColor, channelTolerance);
 #elseif cpp
@@ -451,7 +451,7 @@ inline function getBitmapCoverage(source:Bitmap, backgroundColor:Int, channelTol
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function extendBitmap(source:Bitmap, left:Int, top:Int, right:Int, bottom:Int, edgeMode:flight.BitmapEdgeMode, fillColor:Int):Bitmap {
+extern inline function extendBitmap(source:Bitmap, left:Int, top:Int, right:Int, bottom:Int, edgeMode:flight.BitmapEdgeMode, fillColor:Int):Bitmap {
 #if hl
 	return flight._hl._fn.Bitmap.extendBitmap(source, left, top, right, bottom, edgeMode, fillColor);
 #elseif cpp
@@ -462,7 +462,7 @@ inline function extendBitmap(source:Bitmap, left:Int, top:Int, right:Int, bottom
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function trimBitmap(source:Bitmap):Bitmap {
+extern inline function trimBitmap(source:Bitmap):Bitmap {
 #if hl
 	return flight._hl._fn.Bitmap.trimBitmap(source);
 #elseif cpp
@@ -473,7 +473,7 @@ inline function trimBitmap(source:Bitmap):Bitmap {
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function displaceBitmap(out:Dynamic, outLen:Int, source:BitmapRegion, options:BitmapDisplacementMapOptions):Void {
+extern inline function displaceBitmap(out:Dynamic, outLen:Int, source:BitmapRegion, options:BitmapDisplacementMapOptions):Void {
 #if hl
 	flight._hl._fn.Bitmap.displaceBitmap(out, outLen, source, options);
 #elseif cpp
@@ -484,7 +484,7 @@ inline function displaceBitmap(out:Dynamic, outLen:Int, source:BitmapRegion, opt
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function dissolveBitmapPixels(dest:BitmapRegion, source:BitmapRegion, seed:Int, pixelCount:Int, fillColor:Int):Int {
+extern inline function dissolveBitmapPixels(dest:BitmapRegion, source:BitmapRegion, seed:Int, pixelCount:Int, fillColor:Int):Int {
 #if hl
 	return flight._hl._fn.Bitmap.dissolveBitmapPixels(dest, source, seed, pixelCount, fillColor);
 #elseif cpp
@@ -495,7 +495,7 @@ inline function dissolveBitmapPixels(dest:BitmapRegion, source:BitmapRegion, see
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function encodeBitmap(hostBitmapEncode:HostBitmapEncodeCapability, source:Bitmap, format:Int, quality:Float):Dynamic {
+extern inline function encodeBitmap(hostBitmapEncode:HostBitmapEncodeCapability, source:Bitmap, format:Int, quality:Float):Dynamic {
 #if hl
 	return flight._hl._fn.Bitmap.encodeBitmap(hostBitmapEncode, source, format, quality);
 #elseif cpp
@@ -506,7 +506,7 @@ inline function encodeBitmap(hostBitmapEncode:HostBitmapEncodeCapability, source
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function explainBitmapEncodeFailure(hostBitmapEncode:HostBitmapEncodeCapability, format:flight.ImageFormat):BitmapEncodeFailureExplanation {
+extern inline function explainBitmapEncodeFailure(hostBitmapEncode:HostBitmapEncodeCapability, format:flight.ImageFormat):BitmapEncodeFailureExplanation {
 #if hl
 	return flight._hl._fn.Bitmap.explainBitmapEncodeFailure(hostBitmapEncode, format);
 #elseif cpp
@@ -517,7 +517,7 @@ inline function explainBitmapEncodeFailure(hostBitmapEncode:HostBitmapEncodeCapa
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function fillBitmapRectangle(dest:BitmapRegion, color:Int):Void {
+extern inline function fillBitmapRectangle(dest:BitmapRegion, color:Int):Void {
 #if hl
 	flight._hl._fn.Bitmap.fillBitmapRectangle(dest, color);
 #elseif cpp
@@ -528,7 +528,7 @@ inline function fillBitmapRectangle(dest:BitmapRegion, color:Int):Void {
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function floodFillBitmap(out:Bitmap, x:Int, y:Int, color:Int):Void {
+extern inline function floodFillBitmap(out:Bitmap, x:Int, y:Int, color:Int):Void {
 #if hl
 	flight._hl._fn.Bitmap.floodFillBitmap(out, x, y, color);
 #elseif cpp
@@ -539,7 +539,7 @@ inline function floodFillBitmap(out:Bitmap, x:Int, y:Int, color:Int):Void {
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function createBitmapFingerprint(source:Bitmap, gridSize:Int):BitmapFingerprint {
+extern inline function createBitmapFingerprint(source:Bitmap, gridSize:Int):BitmapFingerprint {
 #if hl
 	return flight._hl._fn.Bitmap.createBitmapFingerprint(source, gridSize);
 #elseif cpp
@@ -550,7 +550,7 @@ inline function createBitmapFingerprint(source:Bitmap, gridSize:Int):BitmapFinge
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function compareBitmapFingerprints(a:BitmapFingerprint, b:BitmapFingerprint):Float {
+extern inline function compareBitmapFingerprints(a:BitmapFingerprint, b:BitmapFingerprint):Float {
 #if hl
 	return flight._hl._fn.Bitmap.compareBitmapFingerprints(a, b);
 #elseif cpp
@@ -561,7 +561,7 @@ inline function compareBitmapFingerprints(a:BitmapFingerprint, b:BitmapFingerpri
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function formatBitmapFingerprint(fingerprint:BitmapFingerprint):String {
+extern inline function formatBitmapFingerprint(fingerprint:BitmapFingerprint):String {
 #if hl
 	return cast flight._hl._fn.Bitmap.formatBitmapFingerprint(fingerprint);
 #elseif cpp
@@ -572,7 +572,7 @@ inline function formatBitmapFingerprint(fingerprint:BitmapFingerprint):String {
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function parseBitmapFingerprint(text:String):BitmapFingerprint {
+extern inline function parseBitmapFingerprint(text:String):BitmapFingerprint {
 #if hl
 	return flight._hl._fn.Bitmap.parseBitmapFingerprint(cast text);
 #elseif cpp
@@ -583,7 +583,7 @@ inline function parseBitmapFingerprint(text:String):BitmapFingerprint {
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function flipBitmapHorizontal(dest:BitmapRegion, source:BitmapRegion):Void {
+extern inline function flipBitmapHorizontal(dest:BitmapRegion, source:BitmapRegion):Void {
 #if hl
 	flight._hl._fn.Bitmap.flipBitmapHorizontal(dest, source);
 #elseif cpp
@@ -594,7 +594,7 @@ inline function flipBitmapHorizontal(dest:BitmapRegion, source:BitmapRegion):Voi
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function flipBitmapVertical(dest:BitmapRegion, source:BitmapRegion):Void {
+extern inline function flipBitmapVertical(dest:BitmapRegion, source:BitmapRegion):Void {
 #if hl
 	flight._hl._fn.Bitmap.flipBitmapVertical(dest, source);
 #elseif cpp
@@ -605,7 +605,7 @@ inline function flipBitmapVertical(dest:BitmapRegion, source:BitmapRegion):Void 
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function convertBitmapPixelOrder(out:Dynamic, outLen:Int, source:Dynamic, sourceLen:Int, length:Int, from:flight.PixelOrder, to:flight.PixelOrder):Void {
+extern inline function convertBitmapPixelOrder(out:Dynamic, outLen:Int, source:Dynamic, sourceLen:Int, length:Int, from:flight.PixelOrder, to:flight.PixelOrder):Void {
 #if hl
 	flight._hl._fn.Bitmap.convertBitmapPixelOrder(out, outLen, source, sourceLen, length, from, to);
 #elseif cpp
@@ -616,7 +616,7 @@ inline function convertBitmapPixelOrder(out:Dynamic, outLen:Int, source:Dynamic,
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function premultiplyBitmapPixels(out:Dynamic, outLen:Int, source:Dynamic, sourceLen:Int, length:Int):Void {
+extern inline function premultiplyBitmapPixels(out:Dynamic, outLen:Int, source:Dynamic, sourceLen:Int, length:Int):Void {
 #if hl
 	flight._hl._fn.Bitmap.premultiplyBitmapPixels(out, outLen, source, sourceLen, length);
 #elseif cpp
@@ -627,7 +627,7 @@ inline function premultiplyBitmapPixels(out:Dynamic, outLen:Int, source:Dynamic,
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function unpremultiplyBitmapPixels(out:Dynamic, outLen:Int, source:Dynamic, sourceLen:Int, length:Int):Void {
+extern inline function unpremultiplyBitmapPixels(out:Dynamic, outLen:Int, source:Dynamic, sourceLen:Int, length:Int):Void {
 #if hl
 	flight._hl._fn.Bitmap.unpremultiplyBitmapPixels(out, outLen, source, sourceLen, length);
 #elseif cpp
@@ -638,7 +638,7 @@ inline function unpremultiplyBitmapPixels(out:Dynamic, outLen:Int, source:Dynami
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function buildBitmapGradientRamp(out:Dynamic, outLen:Int, colors:Dynamic, colorsLen:Int, alphas:Dynamic, alphasLen:Int, ratios:Dynamic, ratiosLen:Int):Void {
+extern inline function buildBitmapGradientRamp(out:Dynamic, outLen:Int, colors:Dynamic, colorsLen:Int, alphas:Dynamic, alphasLen:Int, ratios:Dynamic, ratiosLen:Int):Void {
 #if hl
 	flight._hl._fn.Bitmap.buildBitmapGradientRamp(out, outLen, colors, colorsLen, alphas, alphasLen, ratios, ratiosLen);
 #elseif cpp
@@ -649,7 +649,7 @@ inline function buildBitmapGradientRamp(out:Dynamic, outLen:Int, colors:Dynamic,
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function gradientBevelBitmap(out:Dynamic, outLen:Int, scratch:Dynamic, scratchLen:Int, source:BitmapRegion, ramp:Dynamic, rampLen:Int, options:BitmapGradientBevelOptions):Void {
+extern inline function gradientBevelBitmap(out:Dynamic, outLen:Int, scratch:Dynamic, scratchLen:Int, source:BitmapRegion, ramp:Dynamic, rampLen:Int, options:BitmapGradientBevelOptions):Void {
 #if hl
 	flight._hl._fn.Bitmap.gradientBevelBitmap(out, outLen, scratch, scratchLen, source, ramp, rampLen, options);
 #elseif cpp
@@ -660,7 +660,7 @@ inline function gradientBevelBitmap(out:Dynamic, outLen:Int, scratch:Dynamic, sc
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function gradientGlowBitmap(out:Dynamic, outLen:Int, scratch:Dynamic, scratchLen:Int, source:BitmapRegion, ramp:Dynamic, rampLen:Int, options:BitmapGradientGlowOptions):Void {
+extern inline function gradientGlowBitmap(out:Dynamic, outLen:Int, scratch:Dynamic, scratchLen:Int, source:BitmapRegion, ramp:Dynamic, rampLen:Int, options:BitmapGradientGlowOptions):Void {
 #if hl
 	flight._hl._fn.Bitmap.gradientGlowBitmap(out, outLen, scratch, scratchLen, source, ramp, rampLen, options);
 #elseif cpp
@@ -671,7 +671,7 @@ inline function gradientGlowBitmap(out:Dynamic, outLen:Int, scratch:Dynamic, scr
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function fillBitmapLinearGradient(dest:BitmapRegion, ramp:Dynamic, rampLen:Int, x0:Float, y0:Float, x1:Float, y1:Float, spread:flight.GradientSpread):Void {
+extern inline function fillBitmapLinearGradient(dest:BitmapRegion, ramp:Dynamic, rampLen:Int, x0:Float, y0:Float, x1:Float, y1:Float, spread:flight.GradientSpread):Void {
 #if hl
 	flight._hl._fn.Bitmap.fillBitmapLinearGradient(dest, ramp, rampLen, x0, y0, x1, y1, spread);
 #elseif cpp
@@ -682,7 +682,7 @@ inline function fillBitmapLinearGradient(dest:BitmapRegion, ramp:Dynamic, rampLe
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function fillBitmapRadialGradient(dest:BitmapRegion, ramp:Dynamic, rampLen:Int, cx:Float, cy:Float, radius:Float, focalX:Float, focalY:Float, spread:flight.GradientSpread):Void {
+extern inline function fillBitmapRadialGradient(dest:BitmapRegion, ramp:Dynamic, rampLen:Int, cx:Float, cy:Float, radius:Float, focalX:Float, focalY:Float, spread:flight.GradientSpread):Void {
 #if hl
 	flight._hl._fn.Bitmap.fillBitmapRadialGradient(dest, ramp, rampLen, cx, cy, radius, focalX, focalY, spread);
 #elseif cpp
@@ -693,7 +693,7 @@ inline function fillBitmapRadialGradient(dest:BitmapRegion, ramp:Dynamic, rampLe
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function equalizeBitmapHistogram(dest:BitmapRegion, source:BitmapRegion):Void {
+extern inline function equalizeBitmapHistogram(dest:BitmapRegion, source:BitmapRegion):Void {
 #if hl
 	flight._hl._fn.Bitmap.equalizeBitmapHistogram(dest, source);
 #elseif cpp
@@ -704,7 +704,7 @@ inline function equalizeBitmapHistogram(dest:BitmapRegion, source:BitmapRegion):
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function getBitmapHistogram(source:BitmapRegion):BitmapHistogram {
+extern inline function getBitmapHistogram(source:BitmapRegion):BitmapHistogram {
 #if hl
 	return flight._hl._fn.Bitmap.getBitmapHistogram(source);
 #elseif cpp
@@ -715,7 +715,7 @@ inline function getBitmapHistogram(source:BitmapRegion):BitmapHistogram {
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function medianBitmap(out:Dynamic, outLen:Int, source:BitmapRegion, radius:Int):Void {
+extern inline function medianBitmap(out:Dynamic, outLen:Int, source:BitmapRegion, radius:Int):Void {
 #if hl
 	flight._hl._fn.Bitmap.medianBitmap(out, outLen, source, radius);
 #elseif cpp
@@ -726,7 +726,7 @@ inline function medianBitmap(out:Dynamic, outLen:Int, source:BitmapRegion, radiu
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function dilateBitmap(out:Dynamic, outLen:Int, source:BitmapRegion, radius:Int):Void {
+extern inline function dilateBitmap(out:Dynamic, outLen:Int, source:BitmapRegion, radius:Int):Void {
 #if hl
 	flight._hl._fn.Bitmap.dilateBitmap(out, outLen, source, radius);
 #elseif cpp
@@ -737,7 +737,7 @@ inline function dilateBitmap(out:Dynamic, outLen:Int, source:BitmapRegion, radiu
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function erodeBitmap(out:Dynamic, outLen:Int, source:BitmapRegion, radius:Int):Void {
+extern inline function erodeBitmap(out:Dynamic, outLen:Int, source:BitmapRegion, radius:Int):Void {
 #if hl
 	flight._hl._fn.Bitmap.erodeBitmap(out, outLen, source, radius);
 #elseif cpp
@@ -748,7 +748,7 @@ inline function erodeBitmap(out:Dynamic, outLen:Int, source:BitmapRegion, radius
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function fillBitmapNoise(dest:BitmapRegion, seed:Int, low:Int, high:Int, grayScale:Bool):Void {
+extern inline function fillBitmapNoise(dest:BitmapRegion, seed:Int, low:Int, high:Int, grayScale:Bool):Void {
 #if hl
 	flight._hl._fn.Bitmap.fillBitmapNoise(dest, seed, low, high, grayScale);
 #elseif cpp
@@ -759,7 +759,7 @@ inline function fillBitmapNoise(dest:BitmapRegion, seed:Int, low:Int, high:Int, 
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function fillBitmapPerlinNoise(dest:BitmapRegion, baseX:Float, baseY:Float, octaves:Int, seed:Int, grayScale:Bool, stitch:Bool, channelOptions:Int):Void {
+extern inline function fillBitmapPerlinNoise(dest:BitmapRegion, baseX:Float, baseY:Float, octaves:Int, seed:Int, grayScale:Bool, stitch:Bool, channelOptions:Int):Void {
 #if hl
 	flight._hl._fn.Bitmap.fillBitmapPerlinNoise(dest, baseX, baseY, octaves, seed, grayScale, stitch, channelOptions);
 #elseif cpp
@@ -770,7 +770,7 @@ inline function fillBitmapPerlinNoise(dest:BitmapRegion, baseX:Float, baseY:Floa
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function fillBitmapTurbulence(dest:BitmapRegion, baseX:Float, baseY:Float, octaves:Int, seed:Int, grayScale:Bool, stitch:Bool, channelOptions:Int):Void {
+extern inline function fillBitmapTurbulence(dest:BitmapRegion, baseX:Float, baseY:Float, octaves:Int, seed:Int, grayScale:Bool, stitch:Bool, channelOptions:Int):Void {
 #if hl
 	flight._hl._fn.Bitmap.fillBitmapTurbulence(dest, baseX, baseY, octaves, seed, grayScale, stitch, channelOptions);
 #elseif cpp
@@ -781,7 +781,7 @@ inline function fillBitmapTurbulence(dest:BitmapRegion, baseX:Float, baseY:Float
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function applyBitmapPaletteMap(dest:BitmapRegion, source:BitmapRegion, redMap:Dynamic, redMapLen:Int, greenMap:Dynamic, greenMapLen:Int, blueMap:Dynamic, blueMapLen:Int, alphaMap:Dynamic, alphaMapLen:Int):Void {
+extern inline function applyBitmapPaletteMap(dest:BitmapRegion, source:BitmapRegion, redMap:Dynamic, redMapLen:Int, greenMap:Dynamic, greenMapLen:Int, blueMap:Dynamic, blueMapLen:Int, alphaMap:Dynamic, alphaMapLen:Int):Void {
 #if hl
 	flight._hl._fn.Bitmap.applyBitmapPaletteMap(dest, source, redMap, redMapLen, greenMap, greenMapLen, blueMap, blueMapLen, alphaMap, alphaMapLen);
 #elseif cpp
@@ -792,7 +792,7 @@ inline function applyBitmapPaletteMap(dest:BitmapRegion, source:BitmapRegion, re
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function getBitmapPixel(source:Bitmap, x:Int, y:Int):Int {
+extern inline function getBitmapPixel(source:Bitmap, x:Int, y:Int):Int {
 #if hl
 	return flight._hl._fn.Bitmap.getBitmapPixel(source, x, y);
 #elseif cpp
@@ -803,7 +803,7 @@ inline function getBitmapPixel(source:Bitmap, x:Int, y:Int):Int {
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function getBitmapPixelChannel(source:Bitmap, x:Int, y:Int, channel:Int):Int {
+extern inline function getBitmapPixelChannel(source:Bitmap, x:Int, y:Int, channel:ImageChannel):Int {
 #if hl
 	return flight._hl._fn.Bitmap.getBitmapPixelChannel(source, x, y, channel);
 #elseif cpp
@@ -814,7 +814,7 @@ inline function getBitmapPixelChannel(source:Bitmap, x:Int, y:Int, channel:Int):
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function getBitmapPixelLuminance(source:Bitmap, x:Int, y:Int):Int {
+extern inline function getBitmapPixelLuminance(source:Bitmap, x:Int, y:Int):Int {
 #if hl
 	return flight._hl._fn.Bitmap.getBitmapPixelLuminance(source, x, y);
 #elseif cpp
@@ -825,7 +825,7 @@ inline function getBitmapPixelLuminance(source:Bitmap, x:Int, y:Int):Int {
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function getBitmapPixelRgb(source:Bitmap, x:Int, y:Int):Int {
+extern inline function getBitmapPixelRgb(source:Bitmap, x:Int, y:Int):Int {
 #if hl
 	return flight._hl._fn.Bitmap.getBitmapPixelRgb(source, x, y);
 #elseif cpp
@@ -836,7 +836,7 @@ inline function getBitmapPixelRgb(source:Bitmap, x:Int, y:Int):Int {
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function setBitmapPixel(out:Bitmap, x:Int, y:Int, color:Int):Void {
+extern inline function setBitmapPixel(out:Bitmap, x:Int, y:Int, color:Int):Void {
 #if hl
 	flight._hl._fn.Bitmap.setBitmapPixel(out, x, y, color);
 #elseif cpp
@@ -847,7 +847,7 @@ inline function setBitmapPixel(out:Bitmap, x:Int, y:Int, color:Int):Void {
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function setBitmapPixelRgb(out:Bitmap, x:Int, y:Int, color:Int):Void {
+extern inline function setBitmapPixelRgb(out:Bitmap, x:Int, y:Int, color:Int):Void {
 #if hl
 	flight._hl._fn.Bitmap.setBitmapPixelRgb(out, x, y, color);
 #elseif cpp
@@ -858,7 +858,7 @@ inline function setBitmapPixelRgb(out:Bitmap, x:Int, y:Int, color:Int):Void {
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function toClampedU8(value:Float):Int {
+extern inline function toClampedU8(value:Float):Int {
 #if hl
 	return flight._hl._fn.Bitmap.toClampedU8(value);
 #elseif cpp
@@ -869,7 +869,7 @@ inline function toClampedU8(value:Float):Int {
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function pixelateBitmap(out:Dynamic, outLen:Int, source:BitmapRegion, blockSize:Int):Void {
+extern inline function pixelateBitmap(out:Dynamic, outLen:Int, source:BitmapRegion, blockSize:Int):Void {
 #if hl
 	flight._hl._fn.Bitmap.pixelateBitmap(out, outLen, source, blockSize);
 #elseif cpp
@@ -880,7 +880,7 @@ inline function pixelateBitmap(out:Dynamic, outLen:Int, source:BitmapRegion, blo
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function createBitmapRegion(bitmap:Bitmap, x:Int, y:Int, width:Int, height:Int):BitmapRegion {
+extern inline function createBitmapRegion(bitmap:Bitmap, x:Int, y:Int, width:Int, height:Int):BitmapRegion {
 #if hl
 	return flight._hl._fn.Bitmap.createBitmapRegion(bitmap, x, y, width, height);
 #elseif cpp
@@ -891,7 +891,7 @@ inline function createBitmapRegion(bitmap:Bitmap, x:Int, y:Int, width:Int, heigh
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function setBitmapRegion(out:BitmapRegion, bitmap:Bitmap, x:Int, y:Int, width:Int, height:Int):Void {
+extern inline function setBitmapRegion(out:BitmapRegion, bitmap:Bitmap, x:Int, y:Int, width:Int, height:Int):Void {
 #if hl
 	flight._hl._fn.Bitmap.setBitmapRegion(out, bitmap, x, y, width, height);
 #elseif cpp
@@ -902,7 +902,7 @@ inline function setBitmapRegion(out:BitmapRegion, bitmap:Bitmap, x:Int, y:Int, w
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function resizeBitmap(dest:BitmapRegion, source:BitmapRegion, mode:flight.BitmapResizeMode, edgeMode:flight.BitmapEdgeMode, premultiplied:Bool):Void {
+extern inline function resizeBitmap(dest:BitmapRegion, source:BitmapRegion, mode:flight.BitmapResizeMode, edgeMode:flight.BitmapEdgeMode, premultiplied:Bool):Void {
 #if hl
 	flight._hl._fn.Bitmap.resizeBitmap(dest, source, mode, edgeMode, premultiplied);
 #elseif cpp
@@ -913,7 +913,7 @@ inline function resizeBitmap(dest:BitmapRegion, source:BitmapRegion, mode:flight
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function rotateBitmap(dest:BitmapRegion, source:BitmapRegion, angle:Float, pivotX:Float, pivotY:Float, edgeMode:flight.BitmapEdgeMode, sampleMode:flight.BitmapResizeMode):Void {
+extern inline function rotateBitmap(dest:BitmapRegion, source:BitmapRegion, angle:Float, pivotX:Float, pivotY:Float, edgeMode:flight.BitmapEdgeMode, sampleMode:flight.BitmapResizeMode):Void {
 #if hl
 	flight._hl._fn.Bitmap.rotateBitmap(dest, source, angle, pivotX, pivotY, edgeMode, sampleMode);
 #elseif cpp
@@ -924,7 +924,7 @@ inline function rotateBitmap(dest:BitmapRegion, source:BitmapRegion, angle:Float
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function rotateBitmap180(dest:BitmapRegion, source:BitmapRegion):Void {
+extern inline function rotateBitmap180(dest:BitmapRegion, source:BitmapRegion):Void {
 #if hl
 	flight._hl._fn.Bitmap.rotateBitmap180(dest, source);
 #elseif cpp
@@ -935,7 +935,7 @@ inline function rotateBitmap180(dest:BitmapRegion, source:BitmapRegion):Void {
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function rotateBitmapClockwise(dest:BitmapRegion, source:BitmapRegion):Void {
+extern inline function rotateBitmapClockwise(dest:BitmapRegion, source:BitmapRegion):Void {
 #if hl
 	flight._hl._fn.Bitmap.rotateBitmapClockwise(dest, source);
 #elseif cpp
@@ -946,7 +946,7 @@ inline function rotateBitmapClockwise(dest:BitmapRegion, source:BitmapRegion):Vo
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function rotateBitmapCounterClockwise(dest:BitmapRegion, source:BitmapRegion):Void {
+extern inline function rotateBitmapCounterClockwise(dest:BitmapRegion, source:BitmapRegion):Void {
 #if hl
 	flight._hl._fn.Bitmap.rotateBitmapCounterClockwise(dest, source);
 #elseif cpp
@@ -957,7 +957,7 @@ inline function rotateBitmapCounterClockwise(dest:BitmapRegion, source:BitmapReg
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function dropShadowBitmap(out:Dynamic, outLen:Int, scratch:Dynamic, scratchLen:Int, source:BitmapRegion, options:BitmapDropShadowOptions):Void {
+extern inline function dropShadowBitmap(out:Dynamic, outLen:Int, scratch:Dynamic, scratchLen:Int, source:BitmapRegion, options:BitmapDropShadowOptions):Void {
 #if hl
 	flight._hl._fn.Bitmap.dropShadowBitmap(out, outLen, scratch, scratchLen, source, options);
 #elseif cpp
@@ -968,7 +968,7 @@ inline function dropShadowBitmap(out:Dynamic, outLen:Int, scratch:Dynamic, scrat
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function glowBitmap(out:Dynamic, outLen:Int, scratch:Dynamic, scratchLen:Int, source:BitmapRegion, options:BitmapGlowOptions):Void {
+extern inline function glowBitmap(out:Dynamic, outLen:Int, scratch:Dynamic, scratchLen:Int, source:BitmapRegion, options:BitmapGlowOptions):Void {
 #if hl
 	flight._hl._fn.Bitmap.glowBitmap(out, outLen, scratch, scratchLen, source, options);
 #elseif cpp
@@ -979,7 +979,7 @@ inline function glowBitmap(out:Dynamic, outLen:Int, scratch:Dynamic, scratchLen:
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function innerGlowBitmap(out:Dynamic, outLen:Int, scratch:Dynamic, scratchLen:Int, source:BitmapRegion, options:BitmapInnerGlowOptions):Void {
+extern inline function innerGlowBitmap(out:Dynamic, outLen:Int, scratch:Dynamic, scratchLen:Int, source:BitmapRegion, options:BitmapInnerGlowOptions):Void {
 #if hl
 	flight._hl._fn.Bitmap.innerGlowBitmap(out, outLen, scratch, scratchLen, source, options);
 #elseif cpp
@@ -990,7 +990,7 @@ inline function innerGlowBitmap(out:Dynamic, outLen:Int, scratch:Dynamic, scratc
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function innerShadowBitmap(out:Dynamic, outLen:Int, scratch:Dynamic, scratchLen:Int, source:BitmapRegion, options:BitmapInnerShadowOptions):Void {
+extern inline function innerShadowBitmap(out:Dynamic, outLen:Int, scratch:Dynamic, scratchLen:Int, source:BitmapRegion, options:BitmapInnerShadowOptions):Void {
 #if hl
 	flight._hl._fn.Bitmap.innerShadowBitmap(out, outLen, scratch, scratchLen, source, options);
 #elseif cpp
@@ -1001,7 +1001,7 @@ inline function innerShadowBitmap(out:Dynamic, outLen:Int, scratch:Dynamic, scra
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function sharpenBitmap(out:Dynamic, outLen:Int, scratch:Dynamic, scratchLen:Int, source:BitmapRegion, options:BitmapSharpenOptions):Void {
+extern inline function sharpenBitmap(out:Dynamic, outLen:Int, scratch:Dynamic, scratchLen:Int, source:BitmapRegion, options:BitmapSharpenOptions):Void {
 #if hl
 	flight._hl._fn.Bitmap.sharpenBitmap(out, outLen, scratch, scratchLen, source, options);
 #elseif cpp
@@ -1012,7 +1012,7 @@ inline function sharpenBitmap(out:Dynamic, outLen:Int, scratch:Dynamic, scratchL
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function applyBitmapCurve(out:BitmapRegion, source:BitmapRegion, redLut:Dynamic, redLutLen:Int, greenLut:Dynamic, greenLutLen:Int, blueLut:Dynamic, blueLutLen:Int, alphaLut:Dynamic, alphaLutLen:Int):Void {
+extern inline function applyBitmapCurve(out:BitmapRegion, source:BitmapRegion, redLut:Dynamic, redLutLen:Int, greenLut:Dynamic, greenLutLen:Int, blueLut:Dynamic, blueLutLen:Int, alphaLut:Dynamic, alphaLutLen:Int):Void {
 #if hl
 	flight._hl._fn.Bitmap.applyBitmapCurve(out, source, redLut, redLutLen, greenLut, greenLutLen, blueLut, blueLutLen, alphaLut, alphaLutLen);
 #elseif cpp
@@ -1023,7 +1023,7 @@ inline function applyBitmapCurve(out:BitmapRegion, source:BitmapRegion, redLut:D
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function applyBitmapLevels(out:BitmapRegion, source:BitmapRegion, blackPoint:Float, whitePoint:Float, gamma:Float):Void {
+extern inline function applyBitmapLevels(out:BitmapRegion, source:BitmapRegion, blackPoint:Float, whitePoint:Float, gamma:Float):Void {
 #if hl
 	flight._hl._fn.Bitmap.applyBitmapLevels(out, source, blackPoint, whitePoint, gamma);
 #elseif cpp
@@ -1034,7 +1034,7 @@ inline function applyBitmapLevels(out:BitmapRegion, source:BitmapRegion, blackPo
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function applyBitmapColorScaleBias(dest:BitmapRegion, source:BitmapRegion, ct:ColorScaleBias):Void {
+extern inline function applyBitmapColorScaleBias(dest:BitmapRegion, source:BitmapRegion, ct:ColorScaleBias):Void {
 #if hl
 	flight._hl._fn.Bitmap.applyBitmapColorScaleBias(dest, source, ct);
 #elseif cpp
@@ -1045,7 +1045,7 @@ inline function applyBitmapColorScaleBias(dest:BitmapRegion, source:BitmapRegion
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function applyBitmapThreshold(dest:BitmapRegion, source:BitmapRegion, operation:flight.ThresholdOperation, thresholdValue:Int, color:Int, mask:Int, copySource:Bool):Int {
+extern inline function applyBitmapThreshold(dest:BitmapRegion, source:BitmapRegion, operation:flight.ThresholdOperation, thresholdValue:Int, color:Int, mask:Int, copySource:Bool):Int {
 #if hl
 	return flight._hl._fn.Bitmap.applyBitmapThreshold(dest, source, operation, thresholdValue, color, mask, copySource);
 #elseif cpp
@@ -1056,7 +1056,7 @@ inline function applyBitmapThreshold(dest:BitmapRegion, source:BitmapRegion, ope
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function mergeBitmap(dest:BitmapRegion, source:BitmapRegion, redScale:Float, greenScale:Float, blueScale:Float, alphaScale:Float):Void {
+extern inline function mergeBitmap(dest:BitmapRegion, source:BitmapRegion, redScale:Float, greenScale:Float, blueScale:Float, alphaScale:Float):Void {
 #if hl
 	flight._hl._fn.Bitmap.mergeBitmap(dest, source, redScale, greenScale, blueScale, alphaScale);
 #elseif cpp
@@ -1067,7 +1067,7 @@ inline function mergeBitmap(dest:BitmapRegion, source:BitmapRegion, redScale:Flo
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function scrollBitmap(out:Bitmap, dx:Int, dy:Int):Void {
+extern inline function scrollBitmap(out:Bitmap, dx:Int, dy:Int):Void {
 #if hl
 	flight._hl._fn.Bitmap.scrollBitmap(out, dx, dy);
 #elseif cpp
@@ -1078,7 +1078,7 @@ inline function scrollBitmap(out:Bitmap, dx:Int, dy:Int):Void {
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function warpBitmap(dest:BitmapRegion, source:BitmapRegion, matrix:Dynamic, edgeMode:flight.BitmapEdgeMode, sampleMode:flight.BitmapResizeMode):Void {
+extern inline function warpBitmap(dest:BitmapRegion, source:BitmapRegion, matrix:Dynamic, edgeMode:flight.BitmapEdgeMode, sampleMode:flight.BitmapResizeMode):Void {
 #if hl
 	flight._hl._fn.Bitmap.warpBitmap(dest, source, matrix, edgeMode, sampleMode);
 #elseif cpp
@@ -1089,7 +1089,7 @@ inline function warpBitmap(dest:BitmapRegion, source:BitmapRegion, matrix:Dynami
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function warpBitmapQuad(dest:BitmapRegion, source:BitmapRegion, dstQuad:Dynamic, edgeMode:flight.BitmapEdgeMode, sampleMode:flight.BitmapResizeMode):Void {
+extern inline function warpBitmapQuad(dest:BitmapRegion, source:BitmapRegion, dstQuad:Dynamic, edgeMode:flight.BitmapEdgeMode, sampleMode:flight.BitmapResizeMode):Void {
 #if hl
 	flight._hl._fn.Bitmap.warpBitmapQuad(dest, source, dstQuad, edgeMode, sampleMode);
 #elseif cpp
@@ -1100,7 +1100,7 @@ inline function warpBitmapQuad(dest:BitmapRegion, source:BitmapRegion, dstQuad:D
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function freeBitmap(ptr:Bitmap):Void {
+extern inline function freeBitmap(ptr:Bitmap):Void {
 #if hl
 	flight._hl._fn.Bitmap.freeBitmap(ptr);
 #elseif cpp
@@ -1111,7 +1111,7 @@ inline function freeBitmap(ptr:Bitmap):Void {
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function freeBitmapMismatch(ptr:BitmapMismatch):Void {
+extern inline function freeBitmapMismatch(ptr:BitmapMismatch):Void {
 #if hl
 	flight._hl._fn.Bitmap.freeBitmapMismatch(ptr);
 #elseif cpp
@@ -1122,7 +1122,7 @@ inline function freeBitmapMismatch(ptr:BitmapMismatch):Void {
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function freeBitmapEncodeFailureExplanation(ptr:BitmapEncodeFailureExplanation):Void {
+extern inline function freeBitmapEncodeFailureExplanation(ptr:BitmapEncodeFailureExplanation):Void {
 #if hl
 	flight._hl._fn.Bitmap.freeBitmapEncodeFailureExplanation(ptr);
 #elseif cpp
@@ -1133,7 +1133,7 @@ inline function freeBitmapEncodeFailureExplanation(ptr:BitmapEncodeFailureExplan
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function freeBitmapFingerprint(ptr:BitmapFingerprint):Void {
+extern inline function freeBitmapFingerprint(ptr:BitmapFingerprint):Void {
 #if hl
 	flight._hl._fn.Bitmap.freeBitmapFingerprint(ptr);
 #elseif cpp
@@ -1144,7 +1144,7 @@ inline function freeBitmapFingerprint(ptr:BitmapFingerprint):Void {
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function freeBitmapHistogram(ptr:BitmapHistogram):Void {
+extern inline function freeBitmapHistogram(ptr:BitmapHistogram):Void {
 #if hl
 	flight._hl._fn.Bitmap.freeBitmapHistogram(ptr);
 #elseif cpp
@@ -1155,7 +1155,7 @@ inline function freeBitmapHistogram(ptr:BitmapHistogram):Void {
 	#error "flight.Bitmap: no backend for this target."
 #end
 }
-inline function freeBitmapRegion(ptr:BitmapRegion):Void {
+extern inline function freeBitmapRegion(ptr:BitmapRegion):Void {
 #if hl
 	flight._hl._fn.Bitmap.freeBitmapRegion(ptr);
 #elseif cpp

@@ -12,10 +12,10 @@ abstract Physics2DDebugGeometry(cpp.Star<cpp.Void>) {
 
 	inline function get_circleCount():Int return Physics2DDebugGeometry_Ffi.get_circleCount(this);
 
-	inline function set_circleCount(value:Int):Int return Physics2DDebugGeometry_Ffi.set_circleCount(this, value);
+	inline function set_circleCount(value:Int):Int { Physics2DDebugGeometry_Ffi.set_circleCount(this, value); return value; }
 	public var lineCount(get, set):Int;
 
 	inline function get_lineCount():Int return Physics2DDebugGeometry_Ffi.get_lineCount(this);
 
-	inline function set_lineCount(value:Int):Int return Physics2DDebugGeometry_Ffi.set_lineCount(this, value);
+	inline function set_lineCount(value:Int):Int { Physics2DDebugGeometry_Ffi.set_lineCount(this, value); return value; }
 }

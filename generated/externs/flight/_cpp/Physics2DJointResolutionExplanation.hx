@@ -10,5 +10,5 @@ abstract Physics2DJointResolutionExplanation(cpp.Star<cpp.Void>) {
 
 	inline function get_readyCount():Int return Physics2DJointResolutionExplanation_Ffi.get_readyCount(this);
 
-	inline function set_readyCount(value:Int):Int return Physics2DJointResolutionExplanation_Ffi.set_readyCount(this, value);
+	inline function set_readyCount(value:Int):Int { Physics2DJointResolutionExplanation_Ffi.set_readyCount(this, value); return value; }
 }

@@ -10,5 +10,5 @@ abstract VertexDisplaceModifierOptions(cpp.Star<cpp.Void>) {
 
 	inline function get_amplitude():Single return VertexDisplaceModifierOptions_Ffi.get_amplitude(this);
 
-	inline function set_amplitude(value:Single):Single return VertexDisplaceModifierOptions_Ffi.set_amplitude(this, value);
+	inline function set_amplitude(value:Single):Single { VertexDisplaceModifierOptions_Ffi.set_amplitude(this, value); return value; }
 }

@@ -76,29 +76,29 @@ extern class Math {
 	@:hlNative("flight", "flight_create_random_source")
 	public static function createRandomSource(seed:Int):flight._hl.RandomSource;
 	@:hlNative("flight", "flight_random_exponential")
-	public static function randomExponential(randomFn:Dynamic, randomCtx:Dynamic):Single;
+	public static function randomExponential(randomFn:hl.Bytes, randomCtx:hl.Bytes, rate:Single):Single;
 	@:hlNative("flight", "flight_random_gaussian")
-	public static function randomGaussian(randomFn:Dynamic, randomCtx:Dynamic):Single;
+	public static function randomGaussian(randomFn:hl.Bytes, randomCtx:hl.Bytes, mean:Single, standardDeviation:Single):Single;
 	@:hlNative("flight", "flight_random_inside_unit_disc")
-	public static function randomInsideUnitDisc(out:hl.Bytes, randomFn:Dynamic, randomCtx:Dynamic):Void;
+	public static function randomInsideUnitDisc(out:hl.Bytes, randomFn:hl.Bytes, randomCtx:hl.Bytes):Void;
 	@:hlNative("flight", "flight_random_inside_unit_sphere")
-	public static function randomInsideUnitSphere(out:hl.Bytes, randomFn:Dynamic, randomCtx:Dynamic):Void;
+	public static function randomInsideUnitSphere(out:hl.Bytes, randomFn:hl.Bytes, randomCtx:hl.Bytes):Void;
 	@:hlNative("flight", "flight_random_on_unit_circle")
-	public static function randomOnUnitCircle(out:hl.Bytes, randomFn:Dynamic, randomCtx:Dynamic):Void;
+	public static function randomOnUnitCircle(out:hl.Bytes, randomFn:hl.Bytes, randomCtx:hl.Bytes):Void;
 	@:hlNative("flight", "flight_random_on_unit_sphere")
-	public static function randomOnUnitSphere(out:hl.Bytes, randomFn:Dynamic, randomCtx:Dynamic):Void;
+	public static function randomOnUnitSphere(out:hl.Bytes, randomFn:hl.Bytes, randomCtx:hl.Bytes):Void;
 	@:hlNative("flight", "flight_random_poisson")
-	public static function randomPoisson(randomFn:Dynamic, randomCtx:Dynamic):Int;
+	public static function randomPoisson(randomFn:hl.Bytes, randomCtx:hl.Bytes, lambda:Single):Int;
 	@:hlNative("flight", "flight_random_weighted")
-	public static function randomWeighted(randomFn:Dynamic, randomCtx:Dynamic):Int;
+	public static function randomWeighted(randomFn:hl.Bytes, randomCtx:hl.Bytes, weights:hl.Bytes, weightsLen:Int):Int;
 	@:hlNative("flight", "flight_random_bool")
-	public static function randomBool(randomFn:Dynamic, randomCtx:Dynamic):Bool;
+	public static function randomBool(randomFn:hl.Bytes, randomCtx:hl.Bytes, probability:Single):Bool;
 	@:hlNative("flight", "flight_random_int")
-	public static function randomInt(randomFn:Dynamic, randomCtx:Dynamic):Int;
+	public static function randomInt(randomFn:hl.Bytes, randomCtx:hl.Bytes, min:Int, max:Int):Int;
 	@:hlNative("flight", "flight_random_range")
-	public static function randomRange(randomFn:Dynamic, randomCtx:Dynamic):Single;
+	public static function randomRange(randomFn:hl.Bytes, randomCtx:hl.Bytes, min:Single, max:Single):Single;
 	@:hlNative("flight", "flight_random_sign")
-	public static function randomSign(randomFn:Dynamic, randomCtx:Dynamic):Single;
+	public static function randomSign(randomFn:hl.Bytes, randomCtx:hl.Bytes):Single;
 	@:hlNative("flight", "flight_ceil_to")
 	public static function ceilTo(value:Single, step:Single):Single;
 	@:hlNative("flight", "flight_euclidean_mod")

@@ -11,7 +11,7 @@ extern class Particles {
 	@:native("flight_apply_particle_object_forces")
 	public static function applyParticleObjectForces(objects:Dynamic, objectsLen:Int, state:flight._js.ParticleObjectsState, forces:Dynamic, forcesLen:Int, deltaTime:Float):Void;
 	@:native("flight_build_particle_curve")
-	public static function buildParticleCurve(out:Dynamic, fFn:Dynamic, fCtx:Dynamic):Void;
+	public static function buildParticleCurve(out:Dynamic, fFn:Dynamic, fCtx:Dynamic, samples:Int):Void;
 	@:native("flight_lerp_hsv_direct")
 	public static function lerpHsvDirect(out:Dynamic, outLen:Int, offset:Int, r0:Float, g0:Float, b0:Float, r1:Float, g1:Float, b1:Float, t:Float):Void;
 	@:native("flight_lerp_hsv_in_place")

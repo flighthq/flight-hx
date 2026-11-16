@@ -10,5 +10,5 @@ abstract RivePathRecord(cpp.Star<cpp.Void>) {
 
 	inline function get_pathIndex():Int return RivePathRecord_Ffi.get_pathIndex(this);
 
-	inline function set_pathIndex(value:Int):Int return RivePathRecord_Ffi.set_pathIndex(this, value);
+	inline function set_pathIndex(value:Int):Int { RivePathRecord_Ffi.set_pathIndex(this, value); return value; }
 }

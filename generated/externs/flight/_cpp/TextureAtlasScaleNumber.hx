@@ -10,5 +10,5 @@ abstract TextureAtlasScaleNumber(cpp.Star<cpp.Void>) {
 
 	inline function get_value():Single return TextureAtlasScaleNumber_Ffi.get_value(this);
 
-	inline function set_value(value:Single):Single return TextureAtlasScaleNumber_Ffi.set_value(this, value);
+	inline function set_value(value:Single):Single { TextureAtlasScaleNumber_Ffi.set_value(this, value); return value; }
 }

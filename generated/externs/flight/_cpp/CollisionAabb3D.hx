@@ -20,30 +20,30 @@ abstract CollisionAabb3D(cpp.Star<cpp.Void>) {
 
 	inline function get_minX():Single return CollisionAabb3D_Ffi.get_minX(this);
 
-	inline function set_minX(value:Single):Single return CollisionAabb3D_Ffi.set_minX(this, value);
+	inline function set_minX(value:Single):Single { CollisionAabb3D_Ffi.set_minX(this, value); return value; }
 	public var minY(get, set):Single;
 
 	inline function get_minY():Single return CollisionAabb3D_Ffi.get_minY(this);
 
-	inline function set_minY(value:Single):Single return CollisionAabb3D_Ffi.set_minY(this, value);
+	inline function set_minY(value:Single):Single { CollisionAabb3D_Ffi.set_minY(this, value); return value; }
 	public var minZ(get, set):Single;
 
 	inline function get_minZ():Single return CollisionAabb3D_Ffi.get_minZ(this);
 
-	inline function set_minZ(value:Single):Single return CollisionAabb3D_Ffi.set_minZ(this, value);
+	inline function set_minZ(value:Single):Single { CollisionAabb3D_Ffi.set_minZ(this, value); return value; }
 	public var maxX(get, set):Single;
 
 	inline function get_maxX():Single return CollisionAabb3D_Ffi.get_maxX(this);
 
-	inline function set_maxX(value:Single):Single return CollisionAabb3D_Ffi.set_maxX(this, value);
+	inline function set_maxX(value:Single):Single { CollisionAabb3D_Ffi.set_maxX(this, value); return value; }
 	public var maxY(get, set):Single;
 
 	inline function get_maxY():Single return CollisionAabb3D_Ffi.get_maxY(this);
 
-	inline function set_maxY(value:Single):Single return CollisionAabb3D_Ffi.set_maxY(this, value);
+	inline function set_maxY(value:Single):Single { CollisionAabb3D_Ffi.set_maxY(this, value); return value; }
 	public var maxZ(get, set):Single;
 
 	inline function get_maxZ():Single return CollisionAabb3D_Ffi.get_maxZ(this);
 
-	inline function set_maxZ(value:Single):Single return CollisionAabb3D_Ffi.set_maxZ(this, value);
+	inline function set_maxZ(value:Single):Single { CollisionAabb3D_Ffi.set_maxZ(this, value); return value; }
 }

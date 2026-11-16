@@ -6,7 +6,7 @@ extern class Physics2d {
 	@:native("flight_synchronize_physics2d_swept_broadphase")
 	public static function synchronizePhysics2dSweptBroadphase(world:flight._cpp.Physics2DWorld, dt:Single):Void;
 	@:native("flight_create_physics2d_collider_world_shape")
-	public static function createPhysics2dColliderWorldShape(local:flight._cpp.CollisionShape2D):Int;
+	public static function createPhysics2dColliderWorldShape(local:flight._cpp.CollisionShape2D):flight._cpp.CollisionShape2D;
 	@:native("flight_update_physics2d_collider_world_shape")
 	public static function updatePhysics2dColliderWorldShape(collider:flight._cpp.Physics2DCollider, body:flight._cpp.RigidBody2D):Void;
 	@:native("flight_write_physics2d_collider_bounds")
@@ -20,7 +20,7 @@ extern class Physics2d {
 	@:native("flight_disable_physics2d_guards")
 	public static function disablePhysics2dGuards(guards:flight._cpp.Physics2DGuardState):Void;
 	@:native("flight_enable_physics2d_guards")
-	public static function enablePhysics2dGuards(guards:flight._cpp.Physics2DGuardState, logState:cpp.Star<cpp.Void>, clock:flight._cpp.Physics2DGuardClock):Void;
+	public static function enablePhysics2dGuards(guards:flight._cpp.Physics2DGuardState, logState:cpp.Star<cpp.Void>, clockFn:cpp.Star<cpp.Void>, clockCtx:cpp.Star<cpp.Void>):Void;
 	@:native("flight_explain_physics2d_collision")
 	public static function explainPhysics2dCollision(world:flight._cpp.Physics2DWorld):flight._cpp.Physics2DCollisionExplanation;
 	@:native("flight_explain_physics2d_joints")
@@ -201,6 +201,8 @@ extern class Physics2d {
 	public static function queryPhysics2dRegion(out:flight._cpp.Physics2DQueryResult, world:flight._cpp.Physics2DWorld, region:flight._cpp.SpatialAabb2D, filter:flight._cpp.Physics2DQueryFilter):Void;
 	@:native("flight_query_physics2d_shape_cast")
 	public static function queryPhysics2dShapeCast(out:flight._cpp.Physics2DShapeCastResult, world:flight._cpp.Physics2DWorld, registry:flight._cpp.CollisionRegistry2D, shape:flight._cpp.CollisionShape2D, dx:Single, dy:Single, maxFraction:Single, filter:flight._cpp.Physics2DQueryFilter):Void;
+	@:native("flight_free_collision_shape2_d")
+	public static function freeCollisionShape2D(ptr:flight._cpp.CollisionShape2D):Void;
 	@:native("flight_free_physics2_ddebug_geometry")
 	public static function freePhysics2DdebugGeometry(ptr:flight._cpp.Physics2DDebugGeometry):Void;
 	@:native("flight_free_physics2_dcollision_explanation")

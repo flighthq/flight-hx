@@ -12,10 +12,10 @@ abstract CurveKeyframe(cpp.Star<cpp.Void>) {
 
 	inline function get_time():Single return CurveKeyframe_Ffi.get_time(this);
 
-	inline function set_time(value:Single):Single return CurveKeyframe_Ffi.set_time(this, value);
+	inline function set_time(value:Single):Single { CurveKeyframe_Ffi.set_time(this, value); return value; }
 	public var value(get, set):Single;
 
 	inline function get_value():Single return CurveKeyframe_Ffi.get_value(this);
 
-	inline function set_value(value:Single):Single return CurveKeyframe_Ffi.set_value(this, value);
+	inline function set_value(value:Single):Single { CurveKeyframe_Ffi.set_value(this, value); return value; }
 }

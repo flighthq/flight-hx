@@ -1,6 +1,6 @@
 package flight;
 
-inline function areMovieClipGuardsEnabled(guards:MovieClipGuardState):Bool {
+extern inline function areMovieClipGuardsEnabled(guards:MovieClipGuardState):Bool {
 #if hl
 	return flight._hl._fn.Movieclip.areMovieClipGuardsEnabled(guards);
 #elseif cpp
@@ -11,7 +11,7 @@ inline function areMovieClipGuardsEnabled(guards:MovieClipGuardState):Bool {
 	#error "flight.Movieclip: no backend for this target."
 #end
 }
-inline function disableMovieClipGuards(guards:MovieClipGuardState):Void {
+extern inline function disableMovieClipGuards(guards:MovieClipGuardState):Void {
 #if hl
 	flight._hl._fn.Movieclip.disableMovieClipGuards(guards);
 #elseif cpp
@@ -22,18 +22,18 @@ inline function disableMovieClipGuards(guards:MovieClipGuardState):Void {
 	#error "flight.Movieclip: no backend for this target."
 #end
 }
-inline function enableMovieClipGuards(guards:MovieClipGuardState, logState:Dynamic, clock:MovieClipGuardClock):Void {
+extern inline function enableMovieClipGuards(guards:MovieClipGuardState, logState:Dynamic, clockFn:Dynamic, clockCtx:Dynamic):Void {
 #if hl
-	flight._hl._fn.Movieclip.enableMovieClipGuards(guards, logState, clock);
+	flight._hl._fn.Movieclip.enableMovieClipGuards(guards, logState, clockFn, clockCtx);
 #elseif cpp
-	flight._cpp._fn.Movieclip.enableMovieClipGuards(guards, logState, clock);
+	flight._cpp._fn.Movieclip.enableMovieClipGuards(guards, logState, clockFn, clockCtx);
 #elseif (js && flight_esm)
-	flight._js._fn.Movieclip.enableMovieClipGuards(guards, logState, clock);
+	flight._js._fn.Movieclip.enableMovieClipGuards(guards, logState, clockFn, clockCtx);
 #else
 	#error "flight.Movieclip: no backend for this target."
 #end
 }
-inline function createMovieClip():Dynamic {
+extern inline function createMovieClip():Dynamic {
 #if hl
 	return flight._hl._fn.Movieclip.createMovieClip();
 #elseif cpp
@@ -44,7 +44,7 @@ inline function createMovieClip():Dynamic {
 	#error "flight.Movieclip: no backend for this target."
 #end
 }
-inline function createMovieClipData():MovieClipData {
+extern inline function createMovieClipData():MovieClipData {
 #if hl
 	return flight._hl._fn.Movieclip.createMovieClipData();
 #elseif cpp
@@ -55,7 +55,7 @@ inline function createMovieClipData():MovieClipData {
 	#error "flight.Movieclip: no backend for this target."
 #end
 }
-inline function createMovieClipRuntime():MovieClipRuntime {
+extern inline function createMovieClipRuntime():MovieClipRuntime {
 #if hl
 	return flight._hl._fn.Movieclip.createMovieClipRuntime();
 #elseif cpp
@@ -66,7 +66,7 @@ inline function createMovieClipRuntime():MovieClipRuntime {
 	#error "flight.Movieclip: no backend for this target."
 #end
 }
-inline function addMovieClipFrameScript(clip:Dynamic, frame:TimelineFrameArg, script:FrameScript):Void {
+extern inline function addMovieClipFrameScript(clip:Dynamic, frame:TimelineFrameArg, script:FrameScript):Void {
 #if hl
 	flight._hl._fn.Movieclip.addMovieClipFrameScript(clip, frame, script);
 #elseif cpp
@@ -77,7 +77,7 @@ inline function addMovieClipFrameScript(clip:Dynamic, frame:TimelineFrameArg, sc
 	#error "flight.Movieclip: no backend for this target."
 #end
 }
-inline function disposeMovieClipSignals(clip:Dynamic):Void {
+extern inline function disposeMovieClipSignals(clip:Dynamic):Void {
 #if hl
 	flight._hl._fn.Movieclip.disposeMovieClipSignals(clip);
 #elseif cpp
@@ -88,7 +88,7 @@ inline function disposeMovieClipSignals(clip:Dynamic):Void {
 	#error "flight.Movieclip: no backend for this target."
 #end
 }
-inline function enableMovieClipSignals(clip:Dynamic):MovieClipSignals {
+extern inline function enableMovieClipSignals(clip:Dynamic):MovieClipSignals {
 #if hl
 	return flight._hl._fn.Movieclip.enableMovieClipSignals(clip);
 #elseif cpp
@@ -99,7 +99,7 @@ inline function enableMovieClipSignals(clip:Dynamic):MovieClipSignals {
 	#error "flight.Movieclip: no backend for this target."
 #end
 }
-inline function getMovieClipCurrentFrame(clip:Dynamic):Int {
+extern inline function getMovieClipCurrentFrame(clip:Dynamic):Int {
 #if hl
 	return flight._hl._fn.Movieclip.getMovieClipCurrentFrame(clip);
 #elseif cpp
@@ -110,7 +110,7 @@ inline function getMovieClipCurrentFrame(clip:Dynamic):Int {
 	#error "flight.Movieclip: no backend for this target."
 #end
 }
-inline function getMovieClipCurrentLabel(clip:Dynamic):TimelineLabel {
+extern inline function getMovieClipCurrentLabel(clip:Dynamic):TimelineLabel {
 #if hl
 	return flight._hl._fn.Movieclip.getMovieClipCurrentLabel(clip);
 #elseif cpp
@@ -121,7 +121,7 @@ inline function getMovieClipCurrentLabel(clip:Dynamic):TimelineLabel {
 	#error "flight.Movieclip: no backend for this target."
 #end
 }
-inline function getMovieClipFrameScript(clip:Dynamic, frame:TimelineFrameArg):FrameScript {
+extern inline function getMovieClipFrameScript(clip:Dynamic, frame:TimelineFrameArg):FrameScript {
 #if hl
 	return flight._hl._fn.Movieclip.getMovieClipFrameScript(clip, frame);
 #elseif cpp
@@ -132,7 +132,7 @@ inline function getMovieClipFrameScript(clip:Dynamic, frame:TimelineFrameArg):Fr
 	#error "flight.Movieclip: no backend for this target."
 #end
 }
-inline function getMovieClipRuntime(source:MovieClip):MovieClipRuntime {
+extern inline function getMovieClipRuntime(source:MovieClip):MovieClipRuntime {
 #if hl
 	return flight._hl._fn.Movieclip.getMovieClipRuntime(source);
 #elseif cpp
@@ -143,7 +143,7 @@ inline function getMovieClipRuntime(source:MovieClip):MovieClipRuntime {
 	#error "flight.Movieclip: no backend for this target."
 #end
 }
-inline function getMovieClipSignals(clip:Dynamic):MovieClipSignals {
+extern inline function getMovieClipSignals(clip:Dynamic):MovieClipSignals {
 #if hl
 	return flight._hl._fn.Movieclip.getMovieClipSignals(clip);
 #elseif cpp
@@ -154,7 +154,7 @@ inline function getMovieClipSignals(clip:Dynamic):MovieClipSignals {
 	#error "flight.Movieclip: no backend for this target."
 #end
 }
-inline function getMovieClipTotalFrames(clip:Dynamic):Int {
+extern inline function getMovieClipTotalFrames(clip:Dynamic):Int {
 #if hl
 	return flight._hl._fn.Movieclip.getMovieClipTotalFrames(clip);
 #elseif cpp
@@ -165,7 +165,7 @@ inline function getMovieClipTotalFrames(clip:Dynamic):Int {
 	#error "flight.Movieclip: no backend for this target."
 #end
 }
-inline function gotoAndPlayMovieClip(clip:Dynamic, frame:TimelineFrameArg):Void {
+extern inline function gotoAndPlayMovieClip(clip:Dynamic, frame:TimelineFrameArg):Void {
 #if hl
 	flight._hl._fn.Movieclip.gotoAndPlayMovieClip(clip, frame);
 #elseif cpp
@@ -176,7 +176,7 @@ inline function gotoAndPlayMovieClip(clip:Dynamic, frame:TimelineFrameArg):Void 
 	#error "flight.Movieclip: no backend for this target."
 #end
 }
-inline function gotoAndStopMovieClip(clip:Dynamic, frame:TimelineFrameArg):Void {
+extern inline function gotoAndStopMovieClip(clip:Dynamic, frame:TimelineFrameArg):Void {
 #if hl
 	flight._hl._fn.Movieclip.gotoAndStopMovieClip(clip, frame);
 #elseif cpp
@@ -187,7 +187,7 @@ inline function gotoAndStopMovieClip(clip:Dynamic, frame:TimelineFrameArg):Void 
 	#error "flight.Movieclip: no backend for this target."
 #end
 }
-inline function isMovieClipPlaying(clip:Dynamic):Bool {
+extern inline function isMovieClipPlaying(clip:Dynamic):Bool {
 #if hl
 	return flight._hl._fn.Movieclip.isMovieClipPlaying(clip);
 #elseif cpp
@@ -198,7 +198,7 @@ inline function isMovieClipPlaying(clip:Dynamic):Bool {
 	#error "flight.Movieclip: no backend for this target."
 #end
 }
-inline function nextFrameMovieClip(clip:Dynamic):Void {
+extern inline function nextFrameMovieClip(clip:Dynamic):Void {
 #if hl
 	flight._hl._fn.Movieclip.nextFrameMovieClip(clip);
 #elseif cpp
@@ -209,7 +209,7 @@ inline function nextFrameMovieClip(clip:Dynamic):Void {
 	#error "flight.Movieclip: no backend for this target."
 #end
 }
-inline function playMovieClip(clip:Dynamic):Void {
+extern inline function playMovieClip(clip:Dynamic):Void {
 #if hl
 	flight._hl._fn.Movieclip.playMovieClip(clip);
 #elseif cpp
@@ -220,7 +220,7 @@ inline function playMovieClip(clip:Dynamic):Void {
 	#error "flight.Movieclip: no backend for this target."
 #end
 }
-inline function prevFrameMovieClip(clip:Dynamic):Void {
+extern inline function prevFrameMovieClip(clip:Dynamic):Void {
 #if hl
 	flight._hl._fn.Movieclip.prevFrameMovieClip(clip);
 #elseif cpp
@@ -231,7 +231,7 @@ inline function prevFrameMovieClip(clip:Dynamic):Void {
 	#error "flight.Movieclip: no backend for this target."
 #end
 }
-inline function removeMovieClipFrameScript(clip:Dynamic, frame:TimelineFrameArg):Void {
+extern inline function removeMovieClipFrameScript(clip:Dynamic, frame:TimelineFrameArg):Void {
 #if hl
 	flight._hl._fn.Movieclip.removeMovieClipFrameScript(clip, frame);
 #elseif cpp
@@ -242,7 +242,7 @@ inline function removeMovieClipFrameScript(clip:Dynamic, frame:TimelineFrameArg)
 	#error "flight.Movieclip: no backend for this target."
 #end
 }
-inline function setMovieClipSource(clip:Dynamic, source:TimelineSourceRef):Void {
+extern inline function setMovieClipSource(clip:Dynamic, source:TimelineSourceRef):Void {
 #if hl
 	flight._hl._fn.Movieclip.setMovieClipSource(clip, source);
 #elseif cpp
@@ -253,7 +253,7 @@ inline function setMovieClipSource(clip:Dynamic, source:TimelineSourceRef):Void 
 	#error "flight.Movieclip: no backend for this target."
 #end
 }
-inline function stopMovieClip(clip:Dynamic):Void {
+extern inline function stopMovieClip(clip:Dynamic):Void {
 #if hl
 	flight._hl._fn.Movieclip.stopMovieClip(clip);
 #elseif cpp
@@ -264,7 +264,7 @@ inline function stopMovieClip(clip:Dynamic):Void {
 	#error "flight.Movieclip: no backend for this target."
 #end
 }
-inline function updateMovieClip(clip:Dynamic, deltaTime:Float):Void {
+extern inline function updateMovieClip(clip:Dynamic, deltaTime:Float):Void {
 #if hl
 	flight._hl._fn.Movieclip.updateMovieClip(clip, deltaTime);
 #elseif cpp
@@ -275,7 +275,7 @@ inline function updateMovieClip(clip:Dynamic, deltaTime:Float):Void {
 	#error "flight.Movieclip: no backend for this target."
 #end
 }
-inline function createSpritesheetTimelineSource(guards:MovieClipGuardState, spritesheet:Dynamic, animation:Dynamic):TimelineSourceRef {
+extern inline function createSpritesheetTimelineSource(guards:MovieClipGuardState, spritesheet:Dynamic, animation:Dynamic):TimelineSourceRef {
 #if hl
 	return flight._hl._fn.Movieclip.createSpritesheetTimelineSource(guards, spritesheet, animation);
 #elseif cpp
@@ -286,7 +286,7 @@ inline function createSpritesheetTimelineSource(guards:MovieClipGuardState, spri
 	#error "flight.Movieclip: no backend for this target."
 #end
 }
-inline function explainSpritesheetTimelineSource(animation:Dynamic):SpritesheetTimelineSourceExplanation {
+extern inline function explainSpritesheetTimelineSource(animation:Dynamic):SpritesheetTimelineSourceExplanation {
 #if hl
 	return flight._hl._fn.Movieclip.explainSpritesheetTimelineSource(animation);
 #elseif cpp
@@ -297,7 +297,7 @@ inline function explainSpritesheetTimelineSource(animation:Dynamic):SpritesheetT
 	#error "flight.Movieclip: no backend for this target."
 #end
 }
-inline function getSpritesheetTimelineSourceUnsupportedFieldString(value:flight.SpritesheetTimelineSourceUnsupportedField):String {
+extern inline function getSpritesheetTimelineSourceUnsupportedFieldString(value:flight.SpritesheetTimelineSourceUnsupportedField):String {
 #if hl
 	return cast flight._hl._fn.Movieclip.getSpritesheetTimelineSourceUnsupportedFieldString(value);
 #elseif cpp
@@ -308,7 +308,7 @@ inline function getSpritesheetTimelineSourceUnsupportedFieldString(value:flight.
 	#error "flight.Movieclip: no backend for this target."
 #end
 }
-inline function parseSpritesheetTimelineSourceUnsupportedField(value:String):Int {
+extern inline function parseSpritesheetTimelineSourceUnsupportedField(value:String):Int {
 #if hl
 	return flight._hl._fn.Movieclip.parseSpritesheetTimelineSourceUnsupportedField(cast value);
 #elseif cpp
@@ -319,7 +319,7 @@ inline function parseSpritesheetTimelineSourceUnsupportedField(value:String):Int
 	#error "flight.Movieclip: no backend for this target."
 #end
 }
-inline function freeMovieClipData(ptr:MovieClipData):Void {
+extern inline function freeMovieClipData(ptr:MovieClipData):Void {
 #if hl
 	flight._hl._fn.Movieclip.freeMovieClipData(ptr);
 #elseif cpp
@@ -330,7 +330,7 @@ inline function freeMovieClipData(ptr:MovieClipData):Void {
 	#error "flight.Movieclip: no backend for this target."
 #end
 }
-inline function freeMovieClipRuntime(ptr:MovieClipRuntime):Void {
+extern inline function freeMovieClipRuntime(ptr:MovieClipRuntime):Void {
 #if hl
 	flight._hl._fn.Movieclip.freeMovieClipRuntime(ptr);
 #elseif cpp
@@ -341,7 +341,7 @@ inline function freeMovieClipRuntime(ptr:MovieClipRuntime):Void {
 	#error "flight.Movieclip: no backend for this target."
 #end
 }
-inline function freeMovieClipSignals(ptr:MovieClipSignals):Void {
+extern inline function freeMovieClipSignals(ptr:MovieClipSignals):Void {
 #if hl
 	flight._hl._fn.Movieclip.freeMovieClipSignals(ptr);
 #elseif cpp
@@ -352,7 +352,7 @@ inline function freeMovieClipSignals(ptr:MovieClipSignals):Void {
 	#error "flight.Movieclip: no backend for this target."
 #end
 }
-inline function freeTimelineLabel(ptr:TimelineLabel):Void {
+extern inline function freeTimelineLabel(ptr:TimelineLabel):Void {
 #if hl
 	flight._hl._fn.Movieclip.freeTimelineLabel(ptr);
 #elseif cpp
@@ -363,7 +363,7 @@ inline function freeTimelineLabel(ptr:TimelineLabel):Void {
 	#error "flight.Movieclip: no backend for this target."
 #end
 }
-inline function freeFrameScript(ptr:FrameScript):Void {
+extern inline function freeFrameScript(ptr:FrameScript):Void {
 #if hl
 	flight._hl._fn.Movieclip.freeFrameScript(ptr);
 #elseif cpp
@@ -374,7 +374,7 @@ inline function freeFrameScript(ptr:FrameScript):Void {
 	#error "flight.Movieclip: no backend for this target."
 #end
 }
-inline function freeTimelineSourceRef(ptr:TimelineSourceRef):Void {
+extern inline function freeTimelineSourceRef(ptr:TimelineSourceRef):Void {
 #if hl
 	flight._hl._fn.Movieclip.freeTimelineSourceRef(ptr);
 #elseif cpp
@@ -385,7 +385,7 @@ inline function freeTimelineSourceRef(ptr:TimelineSourceRef):Void {
 	#error "flight.Movieclip: no backend for this target."
 #end
 }
-inline function freeSpritesheetTimelineSourceExplanation(ptr:SpritesheetTimelineSourceExplanation):Void {
+extern inline function freeSpritesheetTimelineSourceExplanation(ptr:SpritesheetTimelineSourceExplanation):Void {
 #if hl
 	flight._hl._fn.Movieclip.freeSpritesheetTimelineSourceExplanation(ptr);
 #elseif cpp

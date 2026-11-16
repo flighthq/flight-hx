@@ -1,6 +1,6 @@
 package flight;
 
-inline function compareStrings(cache:FormatterCache, host:HostIntlCapability, a:String, b:String, locale:LocaleInput, options:CollatorOptions):Float {
+extern inline function compareStrings(cache:FormatterCache, host:HostIntlCapability, a:String, b:String, locale:LocaleInput, options:CollatorOptions):Float {
 #if hl
 	return flight._hl._fn.Intl.compareStrings(cache, host, cast a, cast b, locale, options);
 #elseif cpp
@@ -11,7 +11,7 @@ inline function compareStrings(cache:FormatterCache, host:HostIntlCapability, a:
 	#error "flight.Intl: no backend for this target."
 #end
 }
-inline function sortStrings(out:Dynamic, cache:FormatterCache, host:HostIntlCapability, items:Dynamic, itemsLen:Int, locale:LocaleInput, options:CollatorOptions):Void {
+extern inline function sortStrings(out:Dynamic, cache:FormatterCache, host:HostIntlCapability, items:Dynamic, itemsLen:Int, locale:LocaleInput, options:CollatorOptions):Void {
 #if hl
 	flight._hl._fn.Intl.sortStrings(out, cache, host, items, itemsLen, locale, options);
 #elseif cpp
@@ -22,7 +22,7 @@ inline function sortStrings(out:Dynamic, cache:FormatterCache, host:HostIntlCapa
 	#error "flight.Intl: no backend for this target."
 #end
 }
-inline function formatList(cache:FormatterCache, host:HostIntlCapability, items:Dynamic, itemsLen:Int, locale:LocaleInput, options:ListFormatOptions):String {
+extern inline function formatList(cache:FormatterCache, host:HostIntlCapability, items:Dynamic, itemsLen:Int, locale:LocaleInput, options:ListFormatOptions):String {
 #if hl
 	return cast flight._hl._fn.Intl.formatList(cache, host, items, itemsLen, locale, options);
 #elseif cpp

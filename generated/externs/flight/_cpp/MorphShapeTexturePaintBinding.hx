@@ -10,5 +10,5 @@ abstract MorphShapeTexturePaintBinding(cpp.Star<cpp.Void>) {
 
 	inline function get_commandIndex():Int return MorphShapeTexturePaintBinding_Ffi.get_commandIndex(this);
 
-	inline function set_commandIndex(value:Int):Int return MorphShapeTexturePaintBinding_Ffi.set_commandIndex(this, value);
+	inline function set_commandIndex(value:Int):Int { MorphShapeTexturePaintBinding_Ffi.set_commandIndex(this, value); return value; }
 }

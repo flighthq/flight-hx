@@ -14,15 +14,15 @@ abstract TextureAtlasAsepriteBaseFrame(cpp.Star<cpp.Void>) {
 
 	inline function get_duration():Single return TextureAtlasAsepriteBaseFrame_Ffi.get_duration(this);
 
-	inline function set_duration(value:Single):Single return TextureAtlasAsepriteBaseFrame_Ffi.set_duration(this, value);
+	inline function set_duration(value:Single):Single { TextureAtlasAsepriteBaseFrame_Ffi.set_duration(this, value); return value; }
 	public var rotated(get, set):Bool;
 
 	inline function get_rotated():Bool return TextureAtlasAsepriteBaseFrame_Ffi.get_rotated(this);
 
-	inline function set_rotated(value:Bool):Bool return TextureAtlasAsepriteBaseFrame_Ffi.set_rotated(this, value);
+	inline function set_rotated(value:Bool):Bool { TextureAtlasAsepriteBaseFrame_Ffi.set_rotated(this, value); return value; }
 	public var trimmed(get, set):Bool;
 
 	inline function get_trimmed():Bool return TextureAtlasAsepriteBaseFrame_Ffi.get_trimmed(this);
 
-	inline function set_trimmed(value:Bool):Bool return TextureAtlasAsepriteBaseFrame_Ffi.set_trimmed(this, value);
+	inline function set_trimmed(value:Bool):Bool { TextureAtlasAsepriteBaseFrame_Ffi.set_trimmed(this, value); return value; }
 }

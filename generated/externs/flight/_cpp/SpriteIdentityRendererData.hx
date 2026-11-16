@@ -10,5 +10,5 @@ abstract SpriteIdentityRendererData(cpp.Star<cpp.Void>) {
 
 	inline function get_textureVersion():haxe.Int64 return SpriteIdentityRendererData_Ffi.get_textureVersion(this);
 
-	inline function set_textureVersion(value:haxe.Int64):haxe.Int64 return SpriteIdentityRendererData_Ffi.set_textureVersion(this, value);
+	inline function set_textureVersion(value:haxe.Int64):haxe.Int64 { SpriteIdentityRendererData_Ffi.set_textureVersion(this, value); return value; }
 }

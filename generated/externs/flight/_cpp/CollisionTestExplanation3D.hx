@@ -10,5 +10,5 @@ abstract CollisionTestExplanation3D(cpp.Star<cpp.Void>) {
 
 	inline function get_overlapping():Bool return CollisionTestExplanation3D_Ffi.get_overlapping(this);
 
-	inline function set_overlapping(value:Bool):Bool return CollisionTestExplanation3D_Ffi.set_overlapping(this, value);
+	inline function set_overlapping(value:Bool):Bool { CollisionTestExplanation3D_Ffi.set_overlapping(this, value); return value; }
 }

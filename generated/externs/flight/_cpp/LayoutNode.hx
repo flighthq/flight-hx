@@ -10,5 +10,5 @@ abstract LayoutNode(cpp.Star<cpp.Void>) {
 
 	inline function get_parentIndex():Int return LayoutNode_Ffi.get_parentIndex(this);
 
-	inline function set_parentIndex(value:Int):Int return LayoutNode_Ffi.set_parentIndex(this, value);
+	inline function set_parentIndex(value:Int):Int { LayoutNode_Ffi.set_parentIndex(this, value); return value; }
 }

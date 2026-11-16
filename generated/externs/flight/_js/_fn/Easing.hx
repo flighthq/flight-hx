@@ -105,7 +105,7 @@ extern class Easing {
 	@:native("flight_enable_easing_guards")
 	public static function enableEasingGuards(logState:Dynamic, clockFn:Dynamic, clockCtx:Dynamic):Void;
 	@:native("flight_get_easing_derivative")
-	public static function getEasingDerivative(easeFn:Dynamic, easeCtx:Dynamic):Float;
+	public static function getEasingDerivative(easeFn:Dynamic, easeCtx:Dynamic, t:Float, epsilon:Float):Float;
 	@:native("flight_write_easing_samples")
 	public static function writeEasingSamples(out:Dynamic, outLen:Int, easeFn:Dynamic, easeCtx:Dynamic):Void;
 	@:native("flight_free_easing_function")

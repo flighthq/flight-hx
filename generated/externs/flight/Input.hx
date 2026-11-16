@@ -1,6 +1,6 @@
 package flight;
 
-inline function attachGamepadInput(hostInputIngress:HostInputIngressCapability, manager:Dynamic, source:InputIngressSource, options:AttachInputOptions):Void {
+extern inline function attachGamepadInput(hostInputIngress:HostInputIngressCapability, manager:Dynamic, source:InputIngressSource, options:AttachInputOptions):Void {
 #if hl
 	flight._hl._fn.Input.attachGamepadInput(hostInputIngress, manager, source, options);
 #elseif cpp
@@ -11,7 +11,7 @@ inline function attachGamepadInput(hostInputIngress:HostInputIngressCapability, 
 	#error "flight.Input: no backend for this target."
 #end
 }
-inline function attachKeyboardInput(hostInputIngress:HostInputIngressCapability, manager:Dynamic, source:InputIngressSource, options:AttachInputOptions):Void {
+extern inline function attachKeyboardInput(hostInputIngress:HostInputIngressCapability, manager:Dynamic, source:InputIngressSource, options:AttachInputOptions):Void {
 #if hl
 	flight._hl._fn.Input.attachKeyboardInput(hostInputIngress, manager, source, options);
 #elseif cpp
@@ -22,7 +22,7 @@ inline function attachKeyboardInput(hostInputIngress:HostInputIngressCapability,
 	#error "flight.Input: no backend for this target."
 #end
 }
-inline function attachPointerInput(hostInputIngress:HostInputIngressCapability, manager:Dynamic, source:InputIngressSource, options:AttachInputOptions):Void {
+extern inline function attachPointerInput(hostInputIngress:HostInputIngressCapability, manager:Dynamic, source:InputIngressSource, options:AttachInputOptions):Void {
 #if hl
 	flight._hl._fn.Input.attachPointerInput(hostInputIngress, manager, source, options);
 #elseif cpp
@@ -33,7 +33,7 @@ inline function attachPointerInput(hostInputIngress:HostInputIngressCapability, 
 	#error "flight.Input: no backend for this target."
 #end
 }
-inline function attachRelativePointerInput(hostInputIngress:HostInputIngressCapability, manager:Dynamic, source:InputIngressSource, options:AttachInputOptions):Void {
+extern inline function attachRelativePointerInput(hostInputIngress:HostInputIngressCapability, manager:Dynamic, source:InputIngressSource, options:AttachInputOptions):Void {
 #if hl
 	flight._hl._fn.Input.attachRelativePointerInput(hostInputIngress, manager, source, options);
 #elseif cpp
@@ -44,7 +44,7 @@ inline function attachRelativePointerInput(hostInputIngress:HostInputIngressCapa
 	#error "flight.Input: no backend for this target."
 #end
 }
-inline function attachTextInput(hostInputIngress:HostInputIngressCapability, manager:Dynamic, source:InputIngressSource, options:AttachInputOptions):Void {
+extern inline function attachTextInput(hostInputIngress:HostInputIngressCapability, manager:Dynamic, source:InputIngressSource, options:AttachInputOptions):Void {
 #if hl
 	flight._hl._fn.Input.attachTextInput(hostInputIngress, manager, source, options);
 #elseif cpp
@@ -55,7 +55,7 @@ inline function attachTextInput(hostInputIngress:HostInputIngressCapability, man
 	#error "flight.Input: no backend for this target."
 #end
 }
-inline function attachWheelInput(hostInputIngress:HostInputIngressCapability, manager:Dynamic, source:InputIngressSource, options:AttachInputOptions):Void {
+extern inline function attachWheelInput(hostInputIngress:HostInputIngressCapability, manager:Dynamic, source:InputIngressSource, options:AttachInputOptions):Void {
 #if hl
 	flight._hl._fn.Input.attachWheelInput(hostInputIngress, manager, source, options);
 #elseif cpp
@@ -66,7 +66,7 @@ inline function attachWheelInput(hostInputIngress:HostInputIngressCapability, ma
 	#error "flight.Input: no backend for this target."
 #end
 }
-inline function detachGamepadInput(manager:Dynamic, source:InputIngressSource):Void {
+extern inline function detachGamepadInput(manager:Dynamic, source:InputIngressSource):Void {
 #if hl
 	flight._hl._fn.Input.detachGamepadInput(manager, source);
 #elseif cpp
@@ -77,7 +77,7 @@ inline function detachGamepadInput(manager:Dynamic, source:InputIngressSource):V
 	#error "flight.Input: no backend for this target."
 #end
 }
-inline function detachKeyboardInput(manager:Dynamic, source:InputIngressSource):Void {
+extern inline function detachKeyboardInput(manager:Dynamic, source:InputIngressSource):Void {
 #if hl
 	flight._hl._fn.Input.detachKeyboardInput(manager, source);
 #elseif cpp
@@ -88,7 +88,7 @@ inline function detachKeyboardInput(manager:Dynamic, source:InputIngressSource):
 	#error "flight.Input: no backend for this target."
 #end
 }
-inline function detachPointerInput(manager:Dynamic, source:InputIngressSource):Void {
+extern inline function detachPointerInput(manager:Dynamic, source:InputIngressSource):Void {
 #if hl
 	flight._hl._fn.Input.detachPointerInput(manager, source);
 #elseif cpp
@@ -99,7 +99,7 @@ inline function detachPointerInput(manager:Dynamic, source:InputIngressSource):V
 	#error "flight.Input: no backend for this target."
 #end
 }
-inline function detachRelativePointerInput(manager:Dynamic, source:InputIngressSource):Void {
+extern inline function detachRelativePointerInput(manager:Dynamic, source:InputIngressSource):Void {
 #if hl
 	flight._hl._fn.Input.detachRelativePointerInput(manager, source);
 #elseif cpp
@@ -110,7 +110,7 @@ inline function detachRelativePointerInput(manager:Dynamic, source:InputIngressS
 	#error "flight.Input: no backend for this target."
 #end
 }
-inline function detachTextInput(manager:Dynamic, source:InputIngressSource):Void {
+extern inline function detachTextInput(manager:Dynamic, source:InputIngressSource):Void {
 #if hl
 	flight._hl._fn.Input.detachTextInput(manager, source);
 #elseif cpp
@@ -121,7 +121,7 @@ inline function detachTextInput(manager:Dynamic, source:InputIngressSource):Void
 	#error "flight.Input: no backend for this target."
 #end
 }
-inline function detachWheelInput(manager:Dynamic, source:InputIngressSource):Void {
+extern inline function detachWheelInput(manager:Dynamic, source:InputIngressSource):Void {
 #if hl
 	flight._hl._fn.Input.detachWheelInput(manager, source);
 #elseif cpp
@@ -132,7 +132,7 @@ inline function detachWheelInput(manager:Dynamic, source:InputIngressSource):Voi
 	#error "flight.Input: no backend for this target."
 #end
 }
-inline function applyGamepadAxisDeadZone(value:Float, deadZone:Float):Float {
+extern inline function applyGamepadAxisDeadZone(value:Float, deadZone:Float):Float {
 #if hl
 	return flight._hl._fn.Input.applyGamepadAxisDeadZone(value, deadZone);
 #elseif cpp
@@ -143,7 +143,7 @@ inline function applyGamepadAxisDeadZone(value:Float, deadZone:Float):Float {
 	#error "flight.Input: no backend for this target."
 #end
 }
-inline function applyGamepadStickDeadZone(out:GamepadStickOutput, x:Float, y:Float, deadZone:Float):Void {
+extern inline function applyGamepadStickDeadZone(out:GamepadStickOutput, x:Float, y:Float, deadZone:Float):Void {
 #if hl
 	flight._hl._fn.Input.applyGamepadStickDeadZone(out, x, y, deadZone);
 #elseif cpp
@@ -154,7 +154,7 @@ inline function applyGamepadStickDeadZone(out:GamepadStickOutput, x:Float, y:Flo
 	#error "flight.Input: no backend for this target."
 #end
 }
-inline function getGamepadAxisName(mapping:flight.GamepadMapping, index:Int):Int {
+extern inline function getGamepadAxisName(mapping:flight.GamepadMapping, index:Int):Int {
 #if hl
 	return flight._hl._fn.Input.getGamepadAxisName(mapping, index);
 #elseif cpp
@@ -165,7 +165,7 @@ inline function getGamepadAxisName(mapping:flight.GamepadMapping, index:Int):Int
 	#error "flight.Input: no backend for this target."
 #end
 }
-inline function getGamepadButtonName(mapping:flight.GamepadMapping, index:Int):Int {
+extern inline function getGamepadButtonName(mapping:flight.GamepadMapping, index:Int):Int {
 #if hl
 	return flight._hl._fn.Input.getGamepadButtonName(mapping, index);
 #elseif cpp
@@ -176,7 +176,7 @@ inline function getGamepadButtonName(mapping:flight.GamepadMapping, index:Int):I
 	#error "flight.Input: no backend for this target."
 #end
 }
-inline function createInputManager():Dynamic {
+extern inline function createInputManager():Dynamic {
 #if hl
 	return flight._hl._fn.Input.createInputManager();
 #elseif cpp
@@ -187,7 +187,7 @@ inline function createInputManager():Dynamic {
 	#error "flight.Input: no backend for this target."
 #end
 }
-inline function createInputState():Dynamic {
+extern inline function createInputState():Dynamic {
 #if hl
 	return flight._hl._fn.Input.createInputState();
 #elseif cpp
@@ -198,7 +198,7 @@ inline function createInputState():Dynamic {
 	#error "flight.Input: no backend for this target."
 #end
 }
-inline function connectInputStateToInputManager(state:Dynamic, manager:Dynamic):InputDisposer {
+extern inline function connectInputStateToInputManager(state:Dynamic, manager:Dynamic):InputDisposer {
 #if hl
 	return flight._hl._fn.Input.connectInputStateToInputManager(state, manager);
 #elseif cpp
@@ -209,7 +209,7 @@ inline function connectInputStateToInputManager(state:Dynamic, manager:Dynamic):
 	#error "flight.Input: no backend for this target."
 #end
 }
-inline function endInputStateFrame(state:Dynamic):Void {
+extern inline function endInputStateFrame(state:Dynamic):Void {
 #if hl
 	flight._hl._fn.Input.endInputStateFrame(state);
 #elseif cpp
@@ -220,7 +220,7 @@ inline function endInputStateFrame(state:Dynamic):Void {
 	#error "flight.Input: no backend for this target."
 #end
 }
-inline function getInputGamepadAxis(state:Dynamic, gamepad:Int, axis:Int):Float {
+extern inline function getInputGamepadAxis(state:Dynamic, gamepad:Int, axis:Int):Float {
 #if hl
 	return flight._hl._fn.Input.getInputGamepadAxis(state, gamepad, axis);
 #elseif cpp
@@ -231,7 +231,7 @@ inline function getInputGamepadAxis(state:Dynamic, gamepad:Int, axis:Int):Float 
 	#error "flight.Input: no backend for this target."
 #end
 }
-inline function isInputGamepadButtonDown(state:Dynamic, gamepad:Int, button:Int):Bool {
+extern inline function isInputGamepadButtonDown(state:Dynamic, gamepad:Int, button:Int):Bool {
 #if hl
 	return flight._hl._fn.Input.isInputGamepadButtonDown(state, gamepad, button);
 #elseif cpp
@@ -242,7 +242,7 @@ inline function isInputGamepadButtonDown(state:Dynamic, gamepad:Int, button:Int)
 	#error "flight.Input: no backend for this target."
 #end
 }
-inline function isInputKeyDown(state:Dynamic, keyCode:Int):Bool {
+extern inline function isInputKeyDown(state:Dynamic, keyCode:Int):Bool {
 #if hl
 	return flight._hl._fn.Input.isInputKeyDown(state, keyCode);
 #elseif cpp
@@ -253,7 +253,7 @@ inline function isInputKeyDown(state:Dynamic, keyCode:Int):Bool {
 	#error "flight.Input: no backend for this target."
 #end
 }
-inline function isInputPointerButtonDown(state:Dynamic, pointerId:Int, button:Int):Bool {
+extern inline function isInputPointerButtonDown(state:Dynamic, pointerId:Int, button:Int):Bool {
 #if hl
 	return flight._hl._fn.Input.isInputPointerButtonDown(state, pointerId, button);
 #elseif cpp
@@ -264,7 +264,7 @@ inline function isInputPointerButtonDown(state:Dynamic, pointerId:Int, button:In
 	#error "flight.Input: no backend for this target."
 #end
 }
-inline function wasInputGamepadButtonPressed(state:Dynamic, gamepad:Int, button:Int):Bool {
+extern inline function wasInputGamepadButtonPressed(state:Dynamic, gamepad:Int, button:Int):Bool {
 #if hl
 	return flight._hl._fn.Input.wasInputGamepadButtonPressed(state, gamepad, button);
 #elseif cpp
@@ -275,7 +275,7 @@ inline function wasInputGamepadButtonPressed(state:Dynamic, gamepad:Int, button:
 	#error "flight.Input: no backend for this target."
 #end
 }
-inline function wasInputGamepadButtonReleased(state:Dynamic, gamepad:Int, button:Int):Bool {
+extern inline function wasInputGamepadButtonReleased(state:Dynamic, gamepad:Int, button:Int):Bool {
 #if hl
 	return flight._hl._fn.Input.wasInputGamepadButtonReleased(state, gamepad, button);
 #elseif cpp
@@ -286,7 +286,7 @@ inline function wasInputGamepadButtonReleased(state:Dynamic, gamepad:Int, button
 	#error "flight.Input: no backend for this target."
 #end
 }
-inline function wasInputKeyPressed(state:Dynamic, keyCode:Int):Bool {
+extern inline function wasInputKeyPressed(state:Dynamic, keyCode:Int):Bool {
 #if hl
 	return flight._hl._fn.Input.wasInputKeyPressed(state, keyCode);
 #elseif cpp
@@ -297,7 +297,7 @@ inline function wasInputKeyPressed(state:Dynamic, keyCode:Int):Bool {
 	#error "flight.Input: no backend for this target."
 #end
 }
-inline function wasInputKeyReleased(state:Dynamic, keyCode:Int):Bool {
+extern inline function wasInputKeyReleased(state:Dynamic, keyCode:Int):Bool {
 #if hl
 	return flight._hl._fn.Input.wasInputKeyReleased(state, keyCode);
 #elseif cpp
@@ -308,7 +308,7 @@ inline function wasInputKeyReleased(state:Dynamic, keyCode:Int):Bool {
 	#error "flight.Input: no backend for this target."
 #end
 }
-inline function createInputTargetHandle():Dynamic {
+extern inline function createInputTargetHandle():Dynamic {
 #if hl
 	return flight._hl._fn.Input.createInputTargetHandle();
 #elseif cpp
@@ -319,7 +319,7 @@ inline function createInputTargetHandle():Dynamic {
 	#error "flight.Input: no backend for this target."
 #end
 }
-inline function createInputKeyRepeatTimer(options:InputKeyRepeatOptions):Dynamic {
+extern inline function createInputKeyRepeatTimer(options:InputKeyRepeatOptions):Dynamic {
 #if hl
 	return flight._hl._fn.Input.createInputKeyRepeatTimer(options);
 #elseif cpp
@@ -330,7 +330,7 @@ inline function createInputKeyRepeatTimer(options:InputKeyRepeatOptions):Dynamic
 	#error "flight.Input: no backend for this target."
 #end
 }
-inline function advanceInputKeyRepeatTimer(timer:Dynamic, nowMs:Float):Void {
+extern inline function advanceInputKeyRepeatTimer(timer:Dynamic, nowMs:Float):Void {
 #if hl
 	flight._hl._fn.Input.advanceInputKeyRepeatTimer(timer, nowMs);
 #elseif cpp
@@ -341,7 +341,7 @@ inline function advanceInputKeyRepeatTimer(timer:Dynamic, nowMs:Float):Void {
 	#error "flight.Input: no backend for this target."
 #end
 }
-inline function startInputKeyRepeatTimer(timer:Dynamic, callback_:InputRepeatCallback, nowMs:Float):Void {
+extern inline function startInputKeyRepeatTimer(timer:Dynamic, callback_:InputRepeatCallback, nowMs:Float):Void {
 #if hl
 	flight._hl._fn.Input.startInputKeyRepeatTimer(timer, callback_, nowMs);
 #elseif cpp
@@ -352,7 +352,7 @@ inline function startInputKeyRepeatTimer(timer:Dynamic, callback_:InputRepeatCal
 	#error "flight.Input: no backend for this target."
 #end
 }
-inline function stopInputKeyRepeatTimer(timer:Dynamic):Void {
+extern inline function stopInputKeyRepeatTimer(timer:Dynamic):Void {
 #if hl
 	flight._hl._fn.Input.stopInputKeyRepeatTimer(timer);
 #elseif cpp
@@ -363,7 +363,7 @@ inline function stopInputKeyRepeatTimer(timer:Dynamic):Void {
 	#error "flight.Input: no backend for this target."
 #end
 }
-inline function freeInputDisposer(ptr:InputDisposer):Void {
+extern inline function freeInputDisposer(ptr:InputDisposer):Void {
 #if hl
 	flight._hl._fn.Input.freeInputDisposer(ptr);
 #elseif cpp

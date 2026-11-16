@@ -14,15 +14,15 @@ abstract HasTransform2DRuntime(cpp.Star<cpp.Void>) {
 
 	inline function get_rotationAngle():Single return HasTransform2DRuntime_Ffi.get_rotationAngle(this);
 
-	inline function set_rotationAngle(value:Single):Single return HasTransform2DRuntime_Ffi.set_rotationAngle(this, value);
+	inline function set_rotationAngle(value:Single):Single { HasTransform2DRuntime_Ffi.set_rotationAngle(this, value); return value; }
 	public var rotationCosine(get, set):Single;
 
 	inline function get_rotationCosine():Single return HasTransform2DRuntime_Ffi.get_rotationCosine(this);
 
-	inline function set_rotationCosine(value:Single):Single return HasTransform2DRuntime_Ffi.set_rotationCosine(this, value);
+	inline function set_rotationCosine(value:Single):Single { HasTransform2DRuntime_Ffi.set_rotationCosine(this, value); return value; }
 	public var rotationSine(get, set):Single;
 
 	inline function get_rotationSine():Single return HasTransform2DRuntime_Ffi.get_rotationSine(this);
 
-	inline function set_rotationSine(value:Single):Single return HasTransform2DRuntime_Ffi.set_rotationSine(this, value);
+	inline function set_rotationSine(value:Single):Single { HasTransform2DRuntime_Ffi.set_rotationSine(this, value); return value; }
 }

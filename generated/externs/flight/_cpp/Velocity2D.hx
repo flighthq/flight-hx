@@ -12,10 +12,10 @@ abstract Velocity2D(cpp.Star<cpp.Void>) {
 
 	inline function get_x():Single return Velocity2D_Ffi.get_x(this);
 
-	inline function set_x(value:Single):Single return Velocity2D_Ffi.set_x(this, value);
+	inline function set_x(value:Single):Single { Velocity2D_Ffi.set_x(this, value); return value; }
 	public var y(get, set):Single;
 
 	inline function get_y():Single return Velocity2D_Ffi.get_y(this);
 
-	inline function set_y(value:Single):Single return Velocity2D_Ffi.set_y(this, value);
+	inline function set_y(value:Single):Single { Velocity2D_Ffi.set_y(this, value); return value; }
 }

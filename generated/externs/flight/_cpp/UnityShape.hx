@@ -14,15 +14,15 @@ abstract UnityShape(cpp.Star<cpp.Void>) {
 
 	inline function get_angle():Single return UnityShape_Ffi.get_angle(this);
 
-	inline function set_angle(value:Single):Single return UnityShape_Ffi.set_angle(this, value);
+	inline function set_angle(value:Single):Single { UnityShape_Ffi.set_angle(this, value); return value; }
 	public var enabled(get, set):Bool;
 
 	inline function get_enabled():Bool return UnityShape_Ffi.get_enabled(this);
 
-	inline function set_enabled(value:Bool):Bool return UnityShape_Ffi.set_enabled(this, value);
+	inline function set_enabled(value:Bool):Bool { UnityShape_Ffi.set_enabled(this, value); return value; }
 	public var radius(get, set):Single;
 
 	inline function get_radius():Single return UnityShape_Ffi.get_radius(this);
 
-	inline function set_radius(value:Single):Single return UnityShape_Ffi.set_radius(this, value);
+	inline function set_radius(value:Single):Single { UnityShape_Ffi.set_radius(this, value); return value; }
 }

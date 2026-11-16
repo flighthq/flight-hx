@@ -10,5 +10,5 @@ abstract GlyphRasterizeFontWeightNumber(cpp.Star<cpp.Void>) {
 
 	inline function get_value():Single return GlyphRasterizeFontWeightNumber_Ffi.get_value(this);
 
-	inline function set_value(value:Single):Single return GlyphRasterizeFontWeightNumber_Ffi.set_value(this, value);
+	inline function set_value(value:Single):Single { GlyphRasterizeFontWeightNumber_Ffi.set_value(this, value); return value; }
 }

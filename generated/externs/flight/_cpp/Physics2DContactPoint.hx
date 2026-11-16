@@ -34,65 +34,65 @@ abstract Physics2DContactPoint(cpp.Star<cpp.Void>) {
 
 	inline function get_bias():Single return Physics2DContactPoint_Ffi.get_bias(this);
 
-	inline function set_bias(value:Single):Single return Physics2DContactPoint_Ffi.set_bias(this, value);
+	inline function set_bias(value:Single):Single { Physics2DContactPoint_Ffi.set_bias(this, value); return value; }
 	public var depth(get, set):Single;
 
 	inline function get_depth():Single return Physics2DContactPoint_Ffi.get_depth(this);
 
-	inline function set_depth(value:Single):Single return Physics2DContactPoint_Ffi.set_depth(this, value);
+	inline function set_depth(value:Single):Single { Physics2DContactPoint_Ffi.set_depth(this, value); return value; }
 	public var featureId(get, set):haxe.Int64;
 
 	inline function get_featureId():haxe.Int64 return Physics2DContactPoint_Ffi.get_featureId(this);
 
-	inline function set_featureId(value:haxe.Int64):haxe.Int64 return Physics2DContactPoint_Ffi.set_featureId(this, value);
+	inline function set_featureId(value:haxe.Int64):haxe.Int64 { Physics2DContactPoint_Ffi.set_featureId(this, value); return value; }
 	public var normalImpulse(get, set):Single;
 
 	inline function get_normalImpulse():Single return Physics2DContactPoint_Ffi.get_normalImpulse(this);
 
-	inline function set_normalImpulse(value:Single):Single return Physics2DContactPoint_Ffi.set_normalImpulse(this, value);
+	inline function set_normalImpulse(value:Single):Single { Physics2DContactPoint_Ffi.set_normalImpulse(this, value); return value; }
 	public var normalMass(get, set):Single;
 
 	inline function get_normalMass():Single return Physics2DContactPoint_Ffi.get_normalMass(this);
 
-	inline function set_normalMass(value:Single):Single return Physics2DContactPoint_Ffi.set_normalMass(this, value);
+	inline function set_normalMass(value:Single):Single { Physics2DContactPoint_Ffi.set_normalMass(this, value); return value; }
 	public var rAx(get, set):Single;
 
 	inline function get_rAx():Single return Physics2DContactPoint_Ffi.get_rAx(this);
 
-	inline function set_rAx(value:Single):Single return Physics2DContactPoint_Ffi.set_rAx(this, value);
+	inline function set_rAx(value:Single):Single { Physics2DContactPoint_Ffi.set_rAx(this, value); return value; }
 	public var rAy(get, set):Single;
 
 	inline function get_rAy():Single return Physics2DContactPoint_Ffi.get_rAy(this);
 
-	inline function set_rAy(value:Single):Single return Physics2DContactPoint_Ffi.set_rAy(this, value);
+	inline function set_rAy(value:Single):Single { Physics2DContactPoint_Ffi.set_rAy(this, value); return value; }
 	public var rBx(get, set):Single;
 
 	inline function get_rBx():Single return Physics2DContactPoint_Ffi.get_rBx(this);
 
-	inline function set_rBx(value:Single):Single return Physics2DContactPoint_Ffi.set_rBx(this, value);
+	inline function set_rBx(value:Single):Single { Physics2DContactPoint_Ffi.set_rBx(this, value); return value; }
 	public var rBy(get, set):Single;
 
 	inline function get_rBy():Single return Physics2DContactPoint_Ffi.get_rBy(this);
 
-	inline function set_rBy(value:Single):Single return Physics2DContactPoint_Ffi.set_rBy(this, value);
+	inline function set_rBy(value:Single):Single { Physics2DContactPoint_Ffi.set_rBy(this, value); return value; }
 	public var tangentImpulse(get, set):Single;
 
 	inline function get_tangentImpulse():Single return Physics2DContactPoint_Ffi.get_tangentImpulse(this);
 
-	inline function set_tangentImpulse(value:Single):Single return Physics2DContactPoint_Ffi.set_tangentImpulse(this, value);
+	inline function set_tangentImpulse(value:Single):Single { Physics2DContactPoint_Ffi.set_tangentImpulse(this, value); return value; }
 	public var tangentMass(get, set):Single;
 
 	inline function get_tangentMass():Single return Physics2DContactPoint_Ffi.get_tangentMass(this);
 
-	inline function set_tangentMass(value:Single):Single return Physics2DContactPoint_Ffi.set_tangentMass(this, value);
+	inline function set_tangentMass(value:Single):Single { Physics2DContactPoint_Ffi.set_tangentMass(this, value); return value; }
 	public var x(get, set):Single;
 
 	inline function get_x():Single return Physics2DContactPoint_Ffi.get_x(this);
 
-	inline function set_x(value:Single):Single return Physics2DContactPoint_Ffi.set_x(this, value);
+	inline function set_x(value:Single):Single { Physics2DContactPoint_Ffi.set_x(this, value); return value; }
 	public var y(get, set):Single;
 
 	inline function get_y():Single return Physics2DContactPoint_Ffi.get_y(this);
 
-	inline function set_y(value:Single):Single return Physics2DContactPoint_Ffi.set_y(this, value);
+	inline function set_y(value:Single):Single { Physics2DContactPoint_Ffi.set_y(this, value); return value; }
 }

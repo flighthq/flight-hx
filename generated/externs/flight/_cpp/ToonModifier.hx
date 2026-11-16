@@ -12,10 +12,10 @@ abstract ToonModifier(cpp.Star<cpp.Void>) {
 
 	inline function get_steps():Single return ToonModifier_Ffi.get_steps(this);
 
-	inline function set_steps(value:Single):Single return ToonModifier_Ffi.set_steps(this, value);
+	inline function set_steps(value:Single):Single { ToonModifier_Ffi.set_steps(this, value); return value; }
 	public var smoothness(get, set):Single;
 
 	inline function get_smoothness():Single return ToonModifier_Ffi.get_smoothness(this);
 
-	inline function set_smoothness(value:Single):Single return ToonModifier_Ffi.set_smoothness(this, value);
+	inline function set_smoothness(value:Single):Single { ToonModifier_Ffi.set_smoothness(this, value); return value; }
 }

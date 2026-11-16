@@ -14,8 +14,16 @@ implementation backend or local C++ SDK adapters.
 - `tools/externs/generate.mjs` orchestrates the supplied Cargo recipe, stages
   output, records provenance, and detects drift. It uses Cargo build-script
   messages to locate the current FFI source, rather than globbing stale builds.
-- `lib/flight_hx/Package.hx` adds only the generated root and, on JS, the ESM
-  generator. Unsupported targets and the removed `flight_hx` define fail loud.
+- `patches/flight/` carries reviewable changes to the Rust producer. Apply only
+  through `tools/flight-source.mjs`; keep the pinned input checkout clean. Exact
+  patch/diff fingerprints identify the prepared source and generated provenance.
+- `lib/flight_hx/Package.hx` adds the generated root and configures native linking
+  or the JS ESM generator. Unsupported targets and `flight_hx` fail loud.
+- `include.xml`, `project/Build.xml`, and `lib/flight_hx/Native*.hx` integrate Lime
+  and ordinary hxcpp/HL consumers. Native C ABI libraries live in native/bin or
+  native/lib; ndll is only for the HL adapter. Do not add a CFFI/Neko bridge.
+- `tools/native/` builds/stages binaries and validates source identity/checksums.
+  Never commit binaries or artifact manifests; package the ignored staged files.
 - `tools/esm/EsmGenerator.hx` turns upstream `@:jsRequire` metadata into static
   ESM imports. Consumers supply the runtime module those externs import.
 - `tools/package-haxelib.mjs` makes a deterministic consumer archive from an
@@ -41,8 +49,11 @@ Do not install system dependencies without the user's go-ahead.
 
 Commit first, then run `npm run check`. It checks the dependency pin, the intake
 orchestration tests, regeneration drift, all copied HL/cpp/JS declarations, the
-extracted consumer archive, static ESM emission, and selected real native C ABI
-calls. `npm run package:haxelib` creates the consumer ZIP.
+extracted consumer archive, static ESM emission, producer regression tests,
+artifact validation, C ABI calls, and installed-ZIP hxcpp/HashLink/Lime runtime
+checks on Linux64. It stages dev binaries. Set up native test dependencies with
+`npm run setup:native-tests` first. `npm run native:build` stages release binaries;
+`npm run package:haxelib` packages staged platforms into the consumer ZIP.
 
 The upstream command is `npm run check:externs:upstream`; the supplied script
 passes HL/cpp/JS with Rust 1.96.0. Cargo 1.100 changes the build output layout and
@@ -53,13 +64,14 @@ match the binary they describe.
 
 ## Runtime scope
 
-This migration changes the source and packaging of externs. Type-check success is
-not link/run certification. The current upstream native externs name C ABI
-symbols but do not emit a general hxcpp C header/link layer or a HashLink native
-shim. JS externs import module `flight`, expecting `flight_*` functions including
-field accessors. They are not direct externs for the old `@flighthq/*` TS ESM
-exports. Do not substitute test fixtures for that missing runtime or claim the
-entire public API is runtime-proven. See README.md for the current boundary.
+The tracked Rust producer patch supplies the C header and HL shim missing from
+the pinned Flight revision. It is local reviewable upstream work, not a claim
+that these changes have landed in Flight. Linux64 smoke execution and full HL
+declaration loading do not certify every API or other platforms. macOS, Windows,
+ARM and iOS configuration requires validation on the relevant hosts/SDKs.
+JS externs import module `flight`, expecting `flight_*` functions including field
+accessors. They are not direct externs for the old `@flighthq/*` TS ESM exports.
+Do not substitute fixtures for a missing web runtime or claim it is proven.
 
 Commit messages must be a single Conventional Commits line, with no body or
 Co-Authored-By trailer.

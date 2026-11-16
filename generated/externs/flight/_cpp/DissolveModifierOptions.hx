@@ -10,5 +10,5 @@ abstract DissolveModifierOptions(cpp.Star<cpp.Void>) {
 
 	inline function get_threshold():Single return DissolveModifierOptions_Ffi.get_threshold(this);
 
-	inline function set_threshold(value:Single):Single return DissolveModifierOptions_Ffi.set_threshold(this, value);
+	inline function set_threshold(value:Single):Single { DissolveModifierOptions_Ffi.set_threshold(this, value); return value; }
 }

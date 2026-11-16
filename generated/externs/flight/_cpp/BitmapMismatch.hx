@@ -16,20 +16,20 @@ abstract BitmapMismatch(cpp.Star<cpp.Void>) {
 
 	inline function get_mismatchedPixels():Int return BitmapMismatch_Ffi.get_mismatchedPixels(this);
 
-	inline function set_mismatchedPixels(value:Int):Int return BitmapMismatch_Ffi.set_mismatchedPixels(this, value);
+	inline function set_mismatchedPixels(value:Int):Int { BitmapMismatch_Ffi.set_mismatchedPixels(this, value); return value; }
 	public var totalPixels(get, set):Int;
 
 	inline function get_totalPixels():Int return BitmapMismatch_Ffi.get_totalPixels(this);
 
-	inline function set_totalPixels(value:Int):Int return BitmapMismatch_Ffi.set_totalPixels(this, value);
+	inline function set_totalPixels(value:Int):Int { BitmapMismatch_Ffi.set_totalPixels(this, value); return value; }
 	public var fraction(get, set):Float;
 
 	inline function get_fraction():Float return BitmapMismatch_Ffi.get_fraction(this);
 
-	inline function set_fraction(value:Float):Float return BitmapMismatch_Ffi.set_fraction(this, value);
+	inline function set_fraction(value:Float):Float { BitmapMismatch_Ffi.set_fraction(this, value); return value; }
 	public var maxChannelDelta(get, set):Int;
 
 	inline function get_maxChannelDelta():Int return BitmapMismatch_Ffi.get_maxChannelDelta(this);
 
-	inline function set_maxChannelDelta(value:Int):Int return BitmapMismatch_Ffi.set_maxChannelDelta(this, value);
+	inline function set_maxChannelDelta(value:Int):Int { BitmapMismatch_Ffi.set_maxChannelDelta(this, value); return value; }
 }

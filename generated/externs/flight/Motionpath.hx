@@ -1,6 +1,6 @@
 package flight;
 
-inline function createMotionPath(path:Dynamic, speed:Float, loopMode:Int, tolerance:Float):MotionPath {
+extern inline function createMotionPath(path:Dynamic, speed:Float, loopMode:Int, tolerance:Float):MotionPath {
 #if hl
 	return flight._hl._fn.Motionpath.createMotionPath(path, speed, loopMode, tolerance);
 #elseif cpp
@@ -11,7 +11,7 @@ inline function createMotionPath(path:Dynamic, speed:Float, loopMode:Int, tolera
 	#error "flight.Motionpath: no backend for this target."
 #end
 }
-inline function getMotionPathHeading(mp:MotionPath):Float {
+extern inline function getMotionPathHeading(mp:MotionPath):Float {
 #if hl
 	return flight._hl._fn.Motionpath.getMotionPathHeading(mp);
 #elseif cpp
@@ -22,7 +22,7 @@ inline function getMotionPathHeading(mp:MotionPath):Float {
 	#error "flight.Motionpath: no backend for this target."
 #end
 }
-inline function getMotionPathPosition(mp:MotionPath, pointOut:Vector2, tangentOut:Vector2):Bool {
+extern inline function getMotionPathPosition(mp:MotionPath, pointOut:Vector2, tangentOut:Vector2):Bool {
 #if hl
 	return flight._hl._fn.Motionpath.getMotionPathPosition(mp, pointOut, tangentOut);
 #elseif cpp
@@ -33,7 +33,7 @@ inline function getMotionPathPosition(mp:MotionPath, pointOut:Vector2, tangentOu
 	#error "flight.Motionpath: no backend for this target."
 #end
 }
-inline function getMotionPathProgress(mp:MotionPath):Float {
+extern inline function getMotionPathProgress(mp:MotionPath):Float {
 #if hl
 	return flight._hl._fn.Motionpath.getMotionPathProgress(mp);
 #elseif cpp
@@ -44,7 +44,7 @@ inline function getMotionPathProgress(mp:MotionPath):Float {
 	#error "flight.Motionpath: no backend for this target."
 #end
 }
-inline function isMotionPathAtEnd(mp:MotionPath):Bool {
+extern inline function isMotionPathAtEnd(mp:MotionPath):Bool {
 #if hl
 	return flight._hl._fn.Motionpath.isMotionPathAtEnd(mp);
 #elseif cpp
@@ -55,7 +55,7 @@ inline function isMotionPathAtEnd(mp:MotionPath):Bool {
 	#error "flight.Motionpath: no backend for this target."
 #end
 }
-inline function setMotionPathDirection(mp:MotionPath, direction:Int):Void {
+extern inline function setMotionPathDirection(mp:MotionPath, direction:MotionPathDirection):Void {
 #if hl
 	flight._hl._fn.Motionpath.setMotionPathDirection(mp, direction);
 #elseif cpp
@@ -66,7 +66,7 @@ inline function setMotionPathDirection(mp:MotionPath, direction:Int):Void {
 	#error "flight.Motionpath: no backend for this target."
 #end
 }
-inline function setMotionPathDistance(mp:MotionPath, distance:Float):Void {
+extern inline function setMotionPathDistance(mp:MotionPath, distance:Float):Void {
 #if hl
 	flight._hl._fn.Motionpath.setMotionPathDistance(mp, distance);
 #elseif cpp
@@ -77,7 +77,7 @@ inline function setMotionPathDistance(mp:MotionPath, distance:Float):Void {
 	#error "flight.Motionpath: no backend for this target."
 #end
 }
-inline function setMotionPathProgress(mp:MotionPath, t:Float):Void {
+extern inline function setMotionPathProgress(mp:MotionPath, t:Float):Void {
 #if hl
 	flight._hl._fn.Motionpath.setMotionPathProgress(mp, t);
 #elseif cpp
@@ -88,7 +88,7 @@ inline function setMotionPathProgress(mp:MotionPath, t:Float):Void {
 	#error "flight.Motionpath: no backend for this target."
 #end
 }
-inline function updateMotionPath(mp:MotionPath, deltaTime:Float):Void {
+extern inline function updateMotionPath(mp:MotionPath, deltaTime:Float):Void {
 #if hl
 	flight._hl._fn.Motionpath.updateMotionPath(mp, deltaTime);
 #elseif cpp
@@ -99,7 +99,7 @@ inline function updateMotionPath(mp:MotionPath, deltaTime:Float):Void {
 	#error "flight.Motionpath: no backend for this target."
 #end
 }
-inline function freeMotionPath(ptr:MotionPath):Void {
+extern inline function freeMotionPath(ptr:MotionPath):Void {
 #if hl
 	flight._hl._fn.Motionpath.freeMotionPath(ptr);
 #elseif cpp

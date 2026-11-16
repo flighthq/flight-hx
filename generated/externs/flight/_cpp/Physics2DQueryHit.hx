@@ -10,5 +10,5 @@ abstract Physics2DQueryHit(cpp.Star<cpp.Void>) {
 
 	inline function get_colliderIndex():Int return Physics2DQueryHit_Ffi.get_colliderIndex(this);
 
-	inline function set_colliderIndex(value:Int):Int return Physics2DQueryHit_Ffi.set_colliderIndex(this, value);
+	inline function set_colliderIndex(value:Int):Int { Physics2DQueryHit_Ffi.set_colliderIndex(this, value); return value; }
 }

@@ -12,10 +12,10 @@ abstract EffectCaptureGeometry(cpp.Star<cpp.Void>) {
 
 	inline function get_targetHeight():Single return EffectCaptureGeometry_Ffi.get_targetHeight(this);
 
-	inline function set_targetHeight(value:Single):Single return EffectCaptureGeometry_Ffi.set_targetHeight(this, value);
+	inline function set_targetHeight(value:Single):Single { EffectCaptureGeometry_Ffi.set_targetHeight(this, value); return value; }
 	public var targetWidth(get, set):Single;
 
 	inline function get_targetWidth():Single return EffectCaptureGeometry_Ffi.get_targetWidth(this);
 
-	inline function set_targetWidth(value:Single):Single return EffectCaptureGeometry_Ffi.set_targetWidth(this, value);
+	inline function set_targetWidth(value:Single):Single { EffectCaptureGeometry_Ffi.set_targetWidth(this, value); return value; }
 }

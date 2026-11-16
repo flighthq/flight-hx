@@ -14,15 +14,15 @@ abstract RiveDocumentHeader(cpp.Star<cpp.Void>) {
 
 	inline function get_fileId():haxe.Int64 return RiveDocumentHeader_Ffi.get_fileId(this);
 
-	inline function set_fileId(value:haxe.Int64):haxe.Int64 return RiveDocumentHeader_Ffi.set_fileId(this, value);
+	inline function set_fileId(value:haxe.Int64):haxe.Int64 { RiveDocumentHeader_Ffi.set_fileId(this, value); return value; }
 	public var majorVersion(get, set):haxe.Int64;
 
 	inline function get_majorVersion():haxe.Int64 return RiveDocumentHeader_Ffi.get_majorVersion(this);
 
-	inline function set_majorVersion(value:haxe.Int64):haxe.Int64 return RiveDocumentHeader_Ffi.set_majorVersion(this, value);
+	inline function set_majorVersion(value:haxe.Int64):haxe.Int64 { RiveDocumentHeader_Ffi.set_majorVersion(this, value); return value; }
 	public var minorVersion(get, set):haxe.Int64;
 
 	inline function get_minorVersion():haxe.Int64 return RiveDocumentHeader_Ffi.get_minorVersion(this);
 
-	inline function set_minorVersion(value:haxe.Int64):haxe.Int64 return RiveDocumentHeader_Ffi.set_minorVersion(this, value);
+	inline function set_minorVersion(value:haxe.Int64):haxe.Int64 { RiveDocumentHeader_Ffi.set_minorVersion(this, value); return value; }
 }

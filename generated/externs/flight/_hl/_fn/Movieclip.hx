@@ -6,55 +6,55 @@ extern class Movieclip {
 	@:hlNative("flight", "flight_disable_movie_clip_guards")
 	public static function disableMovieClipGuards(guards:flight._hl.MovieClipGuardState):Void;
 	@:hlNative("flight", "flight_enable_movie_clip_guards")
-	public static function enableMovieClipGuards(guards:flight._hl.MovieClipGuardState, logState:Dynamic, clock:flight._hl.MovieClipGuardClock):Void;
+	public static function enableMovieClipGuards(guards:flight._hl.MovieClipGuardState, logState:hl.Bytes, clockFn:hl.Bytes, clockCtx:hl.Bytes):Void;
 	@:hlNative("flight", "flight_create_movie_clip")
-	public static function createMovieClip():Dynamic;
+	public static function createMovieClip():hl.Bytes;
 	@:hlNative("flight", "flight_create_movie_clip_data")
 	public static function createMovieClipData():flight._hl.MovieClipData;
 	@:hlNative("flight", "flight_create_movie_clip_runtime")
 	public static function createMovieClipRuntime():flight._hl.MovieClipRuntime;
 	@:hlNative("flight", "flight_add_movie_clip_frame_script")
-	public static function addMovieClipFrameScript(clip:Dynamic, frame:flight._hl.TimelineFrameArg, script:flight._hl.FrameScript):Void;
+	public static function addMovieClipFrameScript(clip:hl.Bytes, frame:flight._hl.TimelineFrameArg, script:flight._hl.FrameScript):Void;
 	@:hlNative("flight", "flight_dispose_movie_clip_signals")
-	public static function disposeMovieClipSignals(clip:Dynamic):Void;
+	public static function disposeMovieClipSignals(clip:hl.Bytes):Void;
 	@:hlNative("flight", "flight_enable_movie_clip_signals")
-	public static function enableMovieClipSignals(clip:Dynamic):flight._hl.MovieClipSignals;
+	public static function enableMovieClipSignals(clip:hl.Bytes):flight._hl.MovieClipSignals;
 	@:hlNative("flight", "flight_get_movie_clip_current_frame")
-	public static function getMovieClipCurrentFrame(clip:Dynamic):Int;
+	public static function getMovieClipCurrentFrame(clip:hl.Bytes):Int;
 	@:hlNative("flight", "flight_get_movie_clip_current_label")
-	public static function getMovieClipCurrentLabel(clip:Dynamic):Dynamic;
+	public static function getMovieClipCurrentLabel(clip:hl.Bytes):flight._hl.TimelineLabel;
 	@:hlNative("flight", "flight_get_movie_clip_frame_script")
-	public static function getMovieClipFrameScript(clip:Dynamic, frame:flight._hl.TimelineFrameArg):Dynamic;
+	public static function getMovieClipFrameScript(clip:hl.Bytes, frame:flight._hl.TimelineFrameArg):flight._hl.FrameScript;
 	@:hlNative("flight", "flight_get_movie_clip_runtime")
 	public static function getMovieClipRuntime(source:flight._hl.MovieClip):flight._hl.MovieClipRuntime;
 	@:hlNative("flight", "flight_get_movie_clip_signals")
-	public static function getMovieClipSignals(clip:Dynamic):Dynamic;
+	public static function getMovieClipSignals(clip:hl.Bytes):flight._hl.MovieClipSignals;
 	@:hlNative("flight", "flight_get_movie_clip_total_frames")
-	public static function getMovieClipTotalFrames(clip:Dynamic):Int;
+	public static function getMovieClipTotalFrames(clip:hl.Bytes):Int;
 	@:hlNative("flight", "flight_goto_and_play_movie_clip")
-	public static function gotoAndPlayMovieClip(clip:Dynamic, frame:flight._hl.TimelineFrameArg):Void;
+	public static function gotoAndPlayMovieClip(clip:hl.Bytes, frame:flight._hl.TimelineFrameArg):Void;
 	@:hlNative("flight", "flight_goto_and_stop_movie_clip")
-	public static function gotoAndStopMovieClip(clip:Dynamic, frame:flight._hl.TimelineFrameArg):Void;
+	public static function gotoAndStopMovieClip(clip:hl.Bytes, frame:flight._hl.TimelineFrameArg):Void;
 	@:hlNative("flight", "flight_is_movie_clip_playing")
-	public static function isMovieClipPlaying(clip:Dynamic):Bool;
+	public static function isMovieClipPlaying(clip:hl.Bytes):Bool;
 	@:hlNative("flight", "flight_next_frame_movie_clip")
-	public static function nextFrameMovieClip(clip:Dynamic):Void;
+	public static function nextFrameMovieClip(clip:hl.Bytes):Void;
 	@:hlNative("flight", "flight_play_movie_clip")
-	public static function playMovieClip(clip:Dynamic):Void;
+	public static function playMovieClip(clip:hl.Bytes):Void;
 	@:hlNative("flight", "flight_prev_frame_movie_clip")
-	public static function prevFrameMovieClip(clip:Dynamic):Void;
+	public static function prevFrameMovieClip(clip:hl.Bytes):Void;
 	@:hlNative("flight", "flight_remove_movie_clip_frame_script")
-	public static function removeMovieClipFrameScript(clip:Dynamic, frame:flight._hl.TimelineFrameArg):Void;
+	public static function removeMovieClipFrameScript(clip:hl.Bytes, frame:flight._hl.TimelineFrameArg):Void;
 	@:hlNative("flight", "flight_set_movie_clip_source")
-	public static function setMovieClipSource(clip:Dynamic, source:flight._hl.TimelineSourceRef):Void;
+	public static function setMovieClipSource(clip:hl.Bytes, source:flight._hl.TimelineSourceRef):Void;
 	@:hlNative("flight", "flight_stop_movie_clip")
-	public static function stopMovieClip(clip:Dynamic):Void;
+	public static function stopMovieClip(clip:hl.Bytes):Void;
 	@:hlNative("flight", "flight_update_movie_clip")
-	public static function updateMovieClip(clip:Dynamic, deltaTime:Float):Void;
+	public static function updateMovieClip(clip:hl.Bytes, deltaTime:Float):Void;
 	@:hlNative("flight", "flight_create_spritesheet_timeline_source")
-	public static function createSpritesheetTimelineSource(guards:flight._hl.MovieClipGuardState, spritesheet:Dynamic, animation:Dynamic):flight._hl.TimelineSourceRef;
+	public static function createSpritesheetTimelineSource(guards:flight._hl.MovieClipGuardState, spritesheet:hl.Bytes, animation:hl.Bytes):flight._hl.TimelineSourceRef;
 	@:hlNative("flight", "flight_explain_spritesheet_timeline_source")
-	public static function explainSpritesheetTimelineSource(animation:Dynamic):flight._hl.SpritesheetTimelineSourceExplanation;
+	public static function explainSpritesheetTimelineSource(animation:hl.Bytes):flight._hl.SpritesheetTimelineSourceExplanation;
 	@:hlNative("flight", "flight_get_spritesheet_timeline_source_unsupported_field_string")
 	public static function getSpritesheetTimelineSourceUnsupportedFieldString(value:Int):hl.Bytes;
 	@:hlNative("flight", "flight_parse_spritesheet_timeline_source_unsupported_field")

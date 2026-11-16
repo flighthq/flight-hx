@@ -12,10 +12,10 @@ abstract RiveArtboardGraph(cpp.Star<cpp.Void>) {
 
 	inline function get_streamEnd():Int return RiveArtboardGraph_Ffi.get_streamEnd(this);
 
-	inline function set_streamEnd(value:Int):Int return RiveArtboardGraph_Ffi.set_streamEnd(this, value);
+	inline function set_streamEnd(value:Int):Int { RiveArtboardGraph_Ffi.set_streamEnd(this, value); return value; }
 	public var streamStart(get, set):Int;
 
 	inline function get_streamStart():Int return RiveArtboardGraph_Ffi.get_streamStart(this);
 
-	inline function set_streamStart(value:Int):Int return RiveArtboardGraph_Ffi.set_streamStart(this, value);
+	inline function set_streamStart(value:Int):Int { RiveArtboardGraph_Ffi.set_streamStart(this, value); return value; }
 }

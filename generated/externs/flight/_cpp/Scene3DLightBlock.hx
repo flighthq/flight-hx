@@ -20,30 +20,30 @@ abstract Scene3DLightBlock(cpp.Star<cpp.Void>) {
 
 	inline function get_ambientCount():Int return Scene3DLightBlock_Ffi.get_ambientCount(this);
 
-	inline function set_ambientCount(value:Int):Int return Scene3DLightBlock_Ffi.set_ambientCount(this, value);
+	inline function set_ambientCount(value:Int):Int { Scene3DLightBlock_Ffi.set_ambientCount(this, value); return value; }
 	public var directionalCount(get, set):Int;
 
 	inline function get_directionalCount():Int return Scene3DLightBlock_Ffi.get_directionalCount(this);
 
-	inline function set_directionalCount(value:Int):Int return Scene3DLightBlock_Ffi.set_directionalCount(this, value);
+	inline function set_directionalCount(value:Int):Int { Scene3DLightBlock_Ffi.set_directionalCount(this, value); return value; }
 	public var hemisphereCount(get, set):Int;
 
 	inline function get_hemisphereCount():Int return Scene3DLightBlock_Ffi.get_hemisphereCount(this);
 
-	inline function set_hemisphereCount(value:Int):Int return Scene3DLightBlock_Ffi.set_hemisphereCount(this, value);
+	inline function set_hemisphereCount(value:Int):Int { Scene3DLightBlock_Ffi.set_hemisphereCount(this, value); return value; }
 	public var pointCount(get, set):Int;
 
 	inline function get_pointCount():Int return Scene3DLightBlock_Ffi.get_pointCount(this);
 
-	inline function set_pointCount(value:Int):Int return Scene3DLightBlock_Ffi.set_pointCount(this, value);
+	inline function set_pointCount(value:Int):Int { Scene3DLightBlock_Ffi.set_pointCount(this, value); return value; }
 	public var spotCount(get, set):Int;
 
 	inline function get_spotCount():Int return Scene3DLightBlock_Ffi.get_spotCount(this);
 
-	inline function set_spotCount(value:Int):Int return Scene3DLightBlock_Ffi.set_spotCount(this, value);
+	inline function set_spotCount(value:Int):Int { Scene3DLightBlock_Ffi.set_spotCount(this, value); return value; }
 	public var version(get, set):Int;
 
 	inline function get_version():Int return Scene3DLightBlock_Ffi.get_version(this);
 
-	inline function set_version(value:Int):Int return Scene3DLightBlock_Ffi.set_version(this, value);
+	inline function set_version(value:Int):Int { Scene3DLightBlock_Ffi.set_version(this, value); return value; }
 }

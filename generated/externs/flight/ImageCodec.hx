@@ -1,6 +1,6 @@
 package flight;
 
-inline function detectImageMimeType(data:Dynamic, dataLen:Int):String {
+extern inline function detectImageMimeType(data:Dynamic, dataLen:Int):String {
 #if hl
 	return cast flight._hl._fn.ImageCodec.detectImageMimeType(data, dataLen);
 #elseif cpp

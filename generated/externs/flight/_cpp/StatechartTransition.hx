@@ -14,15 +14,15 @@ abstract StatechartTransition(cpp.Star<cpp.Void>) {
 
 	inline function get_durationMs():Float return StatechartTransition_Ffi.get_durationMs(this);
 
-	inline function set_durationMs(value:Float):Float return StatechartTransition_Ffi.set_durationMs(this, value);
+	inline function set_durationMs(value:Float):Float { StatechartTransition_Ffi.set_durationMs(this, value); return value; }
 	public var exitTimeRatio(get, set):Float;
 
 	inline function get_exitTimeRatio():Float return StatechartTransition_Ffi.get_exitTimeRatio(this);
 
-	inline function set_exitTimeRatio(value:Float):Float return StatechartTransition_Ffi.set_exitTimeRatio(this, value);
+	inline function set_exitTimeRatio(value:Float):Float { StatechartTransition_Ffi.set_exitTimeRatio(this, value); return value; }
 	public var targetStateIndex(get, set):Int;
 
 	inline function get_targetStateIndex():Int return StatechartTransition_Ffi.get_targetStateIndex(this);
 
-	inline function set_targetStateIndex(value:Int):Int return StatechartTransition_Ffi.set_targetStateIndex(this, value);
+	inline function set_targetStateIndex(value:Int):Int { StatechartTransition_Ffi.set_targetStateIndex(this, value); return value; }
 }

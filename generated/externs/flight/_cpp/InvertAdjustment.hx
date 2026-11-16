@@ -10,5 +10,5 @@ abstract InvertAdjustment(cpp.Star<cpp.Void>) {
 
 	inline function get_intensity():Single return InvertAdjustment_Ffi.get_intensity(this);
 
-	inline function set_intensity(value:Single):Single return InvertAdjustment_Ffi.set_intensity(this, value);
+	inline function set_intensity(value:Single):Single { InvertAdjustment_Ffi.set_intensity(this, value); return value; }
 }

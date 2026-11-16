@@ -10,5 +10,5 @@ abstract LightProbeGrid(cpp.Star<cpp.Void>) {
 
 	inline function get_enabled():Bool return LightProbeGrid_Ffi.get_enabled(this);
 
-	inline function set_enabled(value:Bool):Bool return LightProbeGrid_Ffi.set_enabled(this, value);
+	inline function set_enabled(value:Bool):Bool { LightProbeGrid_Ffi.set_enabled(this, value); return value; }
 }

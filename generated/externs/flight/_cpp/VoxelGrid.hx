@@ -10,5 +10,5 @@ abstract VoxelGrid(cpp.Star<cpp.Void>) {
 
 	inline function get_depth():Int return VoxelGrid_Ffi.get_depth(this);
 
-	inline function set_depth(value:Int):Int return VoxelGrid_Ffi.set_depth(this, value);
+	inline function set_depth(value:Int):Int { VoxelGrid_Ffi.set_depth(this, value); return value; }
 }

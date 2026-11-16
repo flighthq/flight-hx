@@ -12,10 +12,10 @@ abstract PerspectiveProjection(cpp.Star<cpp.Void>) {
 
 	inline function get_aspect():Single return PerspectiveProjection_Ffi.get_aspect(this);
 
-	inline function set_aspect(value:Single):Single return PerspectiveProjection_Ffi.set_aspect(this, value);
+	inline function set_aspect(value:Single):Single { PerspectiveProjection_Ffi.set_aspect(this, value); return value; }
 	public var fovY(get, set):Single;
 
 	inline function get_fovY():Single return PerspectiveProjection_Ffi.get_fovY(this);
 
-	inline function set_fovY(value:Single):Single return PerspectiveProjection_Ffi.set_fovY(this, value);
+	inline function set_fovY(value:Single):Single { PerspectiveProjection_Ffi.set_fovY(this, value); return value; }
 }

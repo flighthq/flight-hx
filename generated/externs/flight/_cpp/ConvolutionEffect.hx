@@ -12,10 +12,10 @@ abstract ConvolutionEffect(cpp.Star<cpp.Void>) {
 
 	inline function get_matrixX():Single return ConvolutionEffect_Ffi.get_matrixX(this);
 
-	inline function set_matrixX(value:Single):Single return ConvolutionEffect_Ffi.set_matrixX(this, value);
+	inline function set_matrixX(value:Single):Single { ConvolutionEffect_Ffi.set_matrixX(this, value); return value; }
 	public var matrixY(get, set):Single;
 
 	inline function get_matrixY():Single return ConvolutionEffect_Ffi.get_matrixY(this);
 
-	inline function set_matrixY(value:Single):Single return ConvolutionEffect_Ffi.set_matrixY(this, value);
+	inline function set_matrixY(value:Single):Single { ConvolutionEffect_Ffi.set_matrixY(this, value); return value; }
 }

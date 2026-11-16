@@ -1,7 +1,7 @@
 package flight._hl;
 
 abstract Path(hl.Bytes) {
-	inline public function createClipRegionFrom(tolerance:Float):Dynamic {
+	inline public function createClipRegionFrom(tolerance:Float):hl.Bytes {
 		return flight._hl._fn.Clip.createClipRegionFromPath(cast this, tolerance);
 	}
 	inline public function clean(tolerance:Float, out:flight._hl.Path, flattenTolerance:Float):Void {
@@ -31,7 +31,7 @@ abstract Path(hl.Bytes) {
 	inline public function fitCurves(tolerance:Float, out:flight._hl.Path, flattenTolerance:Float):Void {
 		flight._hl._fn.Path.fitPathCurves(cast this, tolerance, out, flattenTolerance);
 	}
-	inline public function getContourLengths(tolerance:Float):Dynamic {
+	inline public function getContourLengths(tolerance:Float):hl.Bytes {
 		return flight._hl._fn.Path.getPathContourLengths(cast this, tolerance);
 	}
 	inline public function getCurvatureAtDistance(distance:Float, tolerance:Float):Float {
@@ -115,7 +115,7 @@ abstract Path(hl.Bytes) {
 	inline public function appendTangentArcTo(x1:Float, y1:Float, x2:Float, y2:Float, radius:Float):Void {
 		flight._hl._fn.Path.appendPathTangentArcTo(cast this, x1, y1, x2, y2, radius);
 	}
-	inline public function createMorph(end:flight._hl.Path):Dynamic {
+	inline public function createMorph(end:flight._hl.Path):flight._hl.PathMorph {
 		return flight._hl._fn.Path.createPathMorph(cast this, end);
 	}
 	inline public function sampleMorph(morph:flight._hl.PathMorph, progress:Float):Void {
@@ -139,7 +139,7 @@ abstract Path(hl.Bytes) {
 	inline public function tessellateTypedInto(out:flight._hl.PathMeshTyped, tolerance:Float):Void {
 		flight._hl._fn.Path.tessellatePathTypedInto(cast this, out, tolerance);
 	}
-	inline public function tessellateStroke(style:flight._hl.StrokeStyle, tolerance:Float):Dynamic {
+	inline public function tessellateStroke(style:flight._hl.StrokeStyle, tolerance:Float):flight._hl.PathMesh {
 		return flight._hl._fn.Path.tessellateStrokePath(cast this, style, tolerance);
 	}
 	inline public function transform(matrix:flight._hl.Matrix, out:flight._hl.Path):Void {
@@ -151,10 +151,10 @@ abstract Path(hl.Bytes) {
 	inline public function free():Void {
 		flight._hl._fn.Path.freePath(cast this);
 	}
-	inline public function explainOffset(pathBooleanKernel:flight._hl.PathBooleanKernel, delta:Float, options:flight._hl.PathOffsetOptions):Dynamic {
+	inline public function explainOffset(pathBooleanKernel:flight._hl.PathBooleanKernel, delta:Float, options:flight._hl.PathOffsetOptions):flight._hl.PathBooleanExplanation {
 		return flight._hl._fn.PathBoolean.explainOffsetPath(pathBooleanKernel, cast this, delta, options);
 	}
-	inline public function explainSimplify(pathBooleanKernel:flight._hl.PathBooleanKernel, options:flight._hl.PathBooleanOptions):Dynamic {
+	inline public function explainSimplify(pathBooleanKernel:flight._hl.PathBooleanKernel, options:flight._hl.PathBooleanOptions):flight._hl.PathBooleanExplanation {
 		return flight._hl._fn.PathBoolean.explainSimplifyPath(pathBooleanKernel, cast this, options);
 	}
 	inline public function offset(pathBooleanKernel:flight._hl.PathBooleanKernel, path:flight._hl.Path, delta:Float, options:flight._hl.PathOffsetOptions):Void {

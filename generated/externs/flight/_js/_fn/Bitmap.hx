@@ -3,7 +3,7 @@ package flight._js._fn;
 @:jsRequire("flight")
 extern class Bitmap {
 	@:native("flight_create_bitmap")
-	public static function createBitmap(width:Int, height:Int, color:Int):flight._js.Bitmap;
+	public static function createBitmap(width:Int, height:Int, color:haxe.Int64):flight._js.Bitmap;
 	@:native("flight_clone_bitmap")
 	public static function cloneBitmap(source:flight._js.Bitmap):flight._js.Bitmap;
 	@:native("flight_convert_bitmap_alpha_type")
@@ -61,9 +61,9 @@ extern class Bitmap {
 	@:native("flight_get_bitmap_mismatch")
 	public static function getBitmapMismatch(source:flight._js.Bitmap, other:flight._js.Bitmap, channelTolerance:Int):flight._js.BitmapMismatch;
 	@:native("flight_composite_bitmap_pixels")
-	public static function compositeBitmapPixels(dest:flight._js.BitmapRegion, pixels:Dynamic, pixelsLen:Int, mode:Int):Void;
+	public static function compositeBitmapPixels(dest:flight._js.BitmapRegion, pixels:Dynamic, pixelsLen:Int, mode:flight._js.BitmapCompositeMode):Void;
 	@:native("flight_composite_bitmap_region")
-	public static function compositeBitmapRegion(dest:flight._js.BitmapRegion, source:flight._js.BitmapRegion, mode:Int):Void;
+	public static function compositeBitmapRegion(dest:flight._js.BitmapRegion, source:flight._js.BitmapRegion, mode:flight._js.BitmapCompositeMode):Void;
 	@:native("flight_extract_bitmap_pixels")
 	public static function extractBitmapPixels(out:Dynamic, outLen:Int, source:flight._js.BitmapRegion):Void;
 	@:native("flight_extract_bitmap_pixels32")
@@ -75,7 +75,7 @@ extern class Bitmap {
 	@:native("flight_convolve_bitmap")
 	public static function convolveBitmap(out:Dynamic, outLen:Int, source:flight._js.BitmapRegion, options:flight._js.BitmapConvolutionOptions):Void;
 	@:native("flight_copy_bitmap_channel")
-	public static function copyBitmapChannel(dest:flight._js.BitmapRegion, destChannel:Int, source:flight._js.BitmapRegion, sourceChannel:Int):Void;
+	public static function copyBitmapChannel(dest:flight._js.BitmapRegion, destChannel:flight._js.ImageChannel, source:flight._js.BitmapRegion, sourceChannel:flight._js.ImageChannel):Void;
 	@:native("flight_copy_bitmap_pixels")
 	public static function copyBitmapPixels(dest:flight._js.BitmapRegion, source:flight._js.BitmapRegion, composite:Bool):Void;
 	@:native("flight_get_bitmap_coverage")
@@ -145,7 +145,7 @@ extern class Bitmap {
 	@:native("flight_get_bitmap_pixel")
 	public static function getBitmapPixel(source:flight._js.Bitmap, x:Int, y:Int):Int;
 	@:native("flight_get_bitmap_pixel_channel")
-	public static function getBitmapPixelChannel(source:flight._js.Bitmap, x:Int, y:Int, channel:Int):Int;
+	public static function getBitmapPixelChannel(source:flight._js.Bitmap, x:Int, y:Int, channel:flight._js.ImageChannel):Int;
 	@:native("flight_get_bitmap_pixel_luminance")
 	public static function getBitmapPixelLuminance(source:flight._js.Bitmap, x:Int, y:Int):Int;
 	@:native("flight_get_bitmap_pixel_rgb")

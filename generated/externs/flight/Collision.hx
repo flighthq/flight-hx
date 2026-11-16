@@ -1,6 +1,6 @@
 package flight;
 
-inline function collideCapsuleAabbContactManifold2d(a:CollisionCapsule2D, b:CollisionAabb2D, out:CollisionContactManifold2D):Bool {
+extern inline function collideCapsuleAabbContactManifold2d(a:CollisionCapsule2D, b:CollisionAabb2D, out:CollisionContactManifold2D):Bool {
 #if hl
 	return flight._hl._fn.Collision.collideCapsuleAabbContactManifold2d(a, b, out);
 #elseif cpp
@@ -11,7 +11,7 @@ inline function collideCapsuleAabbContactManifold2d(a:CollisionCapsule2D, b:Coll
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function collideCapsuleCapsuleContactManifold2d(a:CollisionCapsule2D, b:CollisionCapsule2D, out:CollisionContactManifold2D):Bool {
+extern inline function collideCapsuleCapsuleContactManifold2d(a:CollisionCapsule2D, b:CollisionCapsule2D, out:CollisionContactManifold2D):Bool {
 #if hl
 	return flight._hl._fn.Collision.collideCapsuleCapsuleContactManifold2d(a, b, out);
 #elseif cpp
@@ -22,7 +22,7 @@ inline function collideCapsuleCapsuleContactManifold2d(a:CollisionCapsule2D, b:C
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function collideCapsuleObbContactManifold2d(a:CollisionCapsule2D, b:CollisionObb2D, out:CollisionContactManifold2D):Bool {
+extern inline function collideCapsuleObbContactManifold2d(a:CollisionCapsule2D, b:CollisionObb2D, out:CollisionContactManifold2D):Bool {
 #if hl
 	return flight._hl._fn.Collision.collideCapsuleObbContactManifold2d(a, b, out);
 #elseif cpp
@@ -33,7 +33,7 @@ inline function collideCapsuleObbContactManifold2d(a:CollisionCapsule2D, b:Colli
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function collideCapsulePolygonContactManifold2d(a:CollisionCapsule2D, b:CollisionPolygon2D, out:CollisionContactManifold2D):Bool {
+extern inline function collideCapsulePolygonContactManifold2d(a:CollisionCapsule2D, b:CollisionPolygon2D, out:CollisionContactManifold2D):Bool {
 #if hl
 	return flight._hl._fn.Collision.collideCapsulePolygonContactManifold2d(a, b, out);
 #elseif cpp
@@ -44,7 +44,7 @@ inline function collideCapsulePolygonContactManifold2d(a:CollisionCapsule2D, b:C
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function collideCircleCapsuleContactManifold2d(a:CollisionCircle2D, b:CollisionCapsule2D, out:CollisionContactManifold2D):Bool {
+extern inline function collideCircleCapsuleContactManifold2d(a:CollisionCircle2D, b:CollisionCapsule2D, out:CollisionContactManifold2D):Bool {
 #if hl
 	return flight._hl._fn.Collision.collideCircleCapsuleContactManifold2d(a, b, out);
 #elseif cpp
@@ -55,7 +55,7 @@ inline function collideCircleCapsuleContactManifold2d(a:CollisionCircle2D, b:Col
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function collideContactManifold2d(a:CollisionShape2D, b:CollisionShape2D, out:CollisionContactManifold2D):Bool {
+extern inline function collideContactManifold2d(a:CollisionShape2D, b:CollisionShape2D, out:CollisionContactManifold2D):Bool {
 #if hl
 	return flight._hl._fn.Collision.collideContactManifold2d(a, b, out);
 #elseif cpp
@@ -66,7 +66,7 @@ inline function collideContactManifold2d(a:CollisionShape2D, b:CollisionShape2D,
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function collideContactManifold3d(registry:CollisionRegistry3D, a:CollisionShape3D, b:CollisionShape3D, out:CollisionContactManifold3D):Bool {
+extern inline function collideContactManifold3d(registry:CollisionRegistry3D, a:CollisionShape3D, b:CollisionShape3D, out:CollisionContactManifold3D):Bool {
 #if hl
 	return flight._hl._fn.Collision.collideContactManifold3d(registry, a, b, out);
 #elseif cpp
@@ -77,7 +77,7 @@ inline function collideContactManifold3d(registry:CollisionRegistry3D, a:Collisi
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function queryCollisionAabbFace3d(shape:CollisionShape3D, dirX:Float, dirY:Float, dirZ:Float, out:Dynamic):Int {
+extern inline function queryCollisionAabbFace3d(shape:CollisionShape3D, dirX:Float, dirY:Float, dirZ:Float, out:Dynamic):Int {
 #if hl
 	return flight._hl._fn.Collision.queryCollisionAabbFace3d(shape, dirX, dirY, dirZ, out);
 #elseif cpp
@@ -88,7 +88,7 @@ inline function queryCollisionAabbFace3d(shape:CollisionShape3D, dirX:Float, dir
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function queryCollisionBoxFace3d(shape:CollisionShape3D, dirX:Float, dirY:Float, dirZ:Float, out:Dynamic):Int {
+extern inline function queryCollisionBoxFace3d(shape:CollisionShape3D, dirX:Float, dirY:Float, dirZ:Float, out:Dynamic):Int {
 #if hl
 	return flight._hl._fn.Collision.queryCollisionBoxFace3d(shape, dirX, dirY, dirZ, out);
 #elseif cpp
@@ -99,7 +99,7 @@ inline function queryCollisionBoxFace3d(shape:CollisionShape3D, dirX:Float, dirY
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function queryCollisionCapsuleFace3d(shape:CollisionShape3D, dirX:Float, dirY:Float, dirZ:Float, out:Dynamic):Int {
+extern inline function queryCollisionCapsuleFace3d(shape:CollisionShape3D, dirX:Float, dirY:Float, dirZ:Float, out:Dynamic):Int {
 #if hl
 	return flight._hl._fn.Collision.queryCollisionCapsuleFace3d(shape, dirX, dirY, dirZ, out);
 #elseif cpp
@@ -110,7 +110,7 @@ inline function queryCollisionCapsuleFace3d(shape:CollisionShape3D, dirX:Float, 
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function queryCollisionConvexFace3d(shape:CollisionShape3D, dirX:Float, dirY:Float, dirZ:Float, out:Dynamic):Int {
+extern inline function queryCollisionConvexFace3d(shape:CollisionShape3D, dirX:Float, dirY:Float, dirZ:Float, out:Dynamic):Int {
 #if hl
 	return flight._hl._fn.Collision.queryCollisionConvexFace3d(shape, dirX, dirY, dirZ, out);
 #elseif cpp
@@ -121,7 +121,7 @@ inline function queryCollisionConvexFace3d(shape:CollisionShape3D, dirX:Float, d
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function registerBuiltInCollisionFaceQueries3d(registry:CollisionRegistry3D):Void {
+extern inline function registerBuiltInCollisionFaceQueries3d(registry:CollisionRegistry3D):Void {
 #if hl
 	flight._hl._fn.Collision.registerBuiltInCollisionFaceQueries3d(registry);
 #elseif cpp
@@ -132,7 +132,7 @@ inline function registerBuiltInCollisionFaceQueries3d(registry:CollisionRegistry
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function registerCollisionFaceQuery3d(registry:CollisionRegistry3D, kind:String, query:CollisionFaceQuery3D):Void {
+extern inline function registerCollisionFaceQuery3d(registry:CollisionRegistry3D, kind:String, query:CollisionFaceQuery3D):Void {
 #if hl
 	flight._hl._fn.Collision.registerCollisionFaceQuery3d(registry, cast kind, query);
 #elseif cpp
@@ -143,7 +143,7 @@ inline function registerCollisionFaceQuery3d(registry:CollisionRegistry3D, kind:
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function getCollisionPolygonValidationStatus2d(points:Dynamic):Int {
+extern inline function getCollisionPolygonValidationStatus2d(points:Dynamic):Int {
 #if hl
 	return flight._hl._fn.Collision.getCollisionPolygonValidationStatus2d(points);
 #elseif cpp
@@ -154,7 +154,7 @@ inline function getCollisionPolygonValidationStatus2d(points:Dynamic):Int {
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function getCollisionShapeValidationStatus2d(shape:CollisionShape2D):Int {
+extern inline function getCollisionShapeValidationStatus2d(shape:CollisionShape2D):Int {
 #if hl
 	return flight._hl._fn.Collision.getCollisionShapeValidationStatus2d(shape);
 #elseif cpp
@@ -165,7 +165,7 @@ inline function getCollisionShapeValidationStatus2d(shape:CollisionShape2D):Int 
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function getCollisionConvexValidationStatus3d(points:Dynamic):Int {
+extern inline function getCollisionConvexValidationStatus3d(points:Dynamic):Int {
 #if hl
 	return flight._hl._fn.Collision.getCollisionConvexValidationStatus3d(points);
 #elseif cpp
@@ -176,7 +176,7 @@ inline function getCollisionConvexValidationStatus3d(points:Dynamic):Int {
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function getCollisionShapeValidationStatus3d(shape:CollisionShape3D):Int {
+extern inline function getCollisionShapeValidationStatus3d(shape:CollisionShape3D):Int {
 #if hl
 	return flight._hl._fn.Collision.getCollisionShapeValidationStatus3d(shape);
 #elseif cpp
@@ -187,7 +187,7 @@ inline function getCollisionShapeValidationStatus3d(shape:CollisionShape3D):Int 
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function registerBuiltInCollisionSupports2d(registry:CollisionRegistry2D):Void {
+extern inline function registerBuiltInCollisionSupports2d(registry:CollisionRegistry2D):Void {
 #if hl
 	flight._hl._fn.Collision.registerBuiltInCollisionSupports2d(registry);
 #elseif cpp
@@ -198,7 +198,7 @@ inline function registerBuiltInCollisionSupports2d(registry:CollisionRegistry2D)
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function registerCollisionPairTest2d(registry:CollisionRegistry2D, kindA:String, kindB:String, test:CollisionPairTest2D):Void {
+extern inline function registerCollisionPairTest2d(registry:CollisionRegistry2D, kindA:String, kindB:String, test:CollisionPairTest2D):Void {
 #if hl
 	flight._hl._fn.Collision.registerCollisionPairTest2d(registry, cast kindA, cast kindB, test);
 #elseif cpp
@@ -209,7 +209,7 @@ inline function registerCollisionPairTest2d(registry:CollisionRegistry2D, kindA:
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function registerCollisionSupport2d(registry:CollisionRegistry2D, kind:String, support:CollisionSupport2D):Void {
+extern inline function registerCollisionSupport2d(registry:CollisionRegistry2D, kind:String, support:CollisionSupport2D):Void {
 #if hl
 	flight._hl._fn.Collision.registerCollisionSupport2d(registry, cast kind, support);
 #elseif cpp
@@ -220,7 +220,7 @@ inline function registerCollisionSupport2d(registry:CollisionRegistry2D, kind:St
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function supportCollisionAabb2d(shape:CollisionAabb2D, dirX:Float, dirY:Float, out:Dynamic):Void {
+extern inline function supportCollisionAabb2d(shape:CollisionAabb2D, dirX:Float, dirY:Float, out:Dynamic):Void {
 #if hl
 	flight._hl._fn.Collision.supportCollisionAabb2d(shape, dirX, dirY, out);
 #elseif cpp
@@ -231,7 +231,7 @@ inline function supportCollisionAabb2d(shape:CollisionAabb2D, dirX:Float, dirY:F
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function supportCollisionCircle2d(shape:CollisionCircle2D, dirX:Float, dirY:Float, out:Dynamic):Void {
+extern inline function supportCollisionCircle2d(shape:CollisionCircle2D, dirX:Float, dirY:Float, out:Dynamic):Void {
 #if hl
 	flight._hl._fn.Collision.supportCollisionCircle2d(shape, dirX, dirY, out);
 #elseif cpp
@@ -242,7 +242,7 @@ inline function supportCollisionCircle2d(shape:CollisionCircle2D, dirX:Float, di
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function supportCollisionObb2d(shape:CollisionObb2D, dirX:Float, dirY:Float, out:Dynamic):Void {
+extern inline function supportCollisionObb2d(shape:CollisionObb2D, dirX:Float, dirY:Float, out:Dynamic):Void {
 #if hl
 	flight._hl._fn.Collision.supportCollisionObb2d(shape, dirX, dirY, out);
 #elseif cpp
@@ -253,7 +253,7 @@ inline function supportCollisionObb2d(shape:CollisionObb2D, dirX:Float, dirY:Flo
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function supportCollisionPolygon2d(shape:CollisionPolygon2D, dirX:Float, dirY:Float, out:Dynamic):Void {
+extern inline function supportCollisionPolygon2d(shape:CollisionPolygon2D, dirX:Float, dirY:Float, out:Dynamic):Void {
 #if hl
 	flight._hl._fn.Collision.supportCollisionPolygon2d(shape, dirX, dirY, out);
 #elseif cpp
@@ -264,7 +264,7 @@ inline function supportCollisionPolygon2d(shape:CollisionPolygon2D, dirX:Float, 
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function writeVertexListSupport2d(vertices:Dynamic, verticesLen:Int, count:Int, dirX:Float, dirY:Float, out:Dynamic):Void {
+extern inline function writeVertexListSupport2d(vertices:Dynamic, verticesLen:Int, count:Int, dirX:Float, dirY:Float, out:Dynamic):Void {
 #if hl
 	flight._hl._fn.Collision.writeVertexListSupport2d(vertices, verticesLen, count, dirX, dirY, out);
 #elseif cpp
@@ -275,7 +275,7 @@ inline function writeVertexListSupport2d(vertices:Dynamic, verticesLen:Int, coun
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function clearCollisionPairTests3d(registry:CollisionRegistry3D):Void {
+extern inline function clearCollisionPairTests3d(registry:CollisionRegistry3D):Void {
 #if hl
 	flight._hl._fn.Collision.clearCollisionPairTests3d(registry);
 #elseif cpp
@@ -286,7 +286,7 @@ inline function clearCollisionPairTests3d(registry:CollisionRegistry3D):Void {
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function clearCollisionSupports3d(registry:CollisionRegistry3D):Void {
+extern inline function clearCollisionSupports3d(registry:CollisionRegistry3D):Void {
 #if hl
 	flight._hl._fn.Collision.clearCollisionSupports3d(registry);
 #elseif cpp
@@ -297,7 +297,7 @@ inline function clearCollisionSupports3d(registry:CollisionRegistry3D):Void {
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function registerBuiltInCollisionSupports3d(registry:CollisionRegistry3D):Void {
+extern inline function registerBuiltInCollisionSupports3d(registry:CollisionRegistry3D):Void {
 #if hl
 	flight._hl._fn.Collision.registerBuiltInCollisionSupports3d(registry);
 #elseif cpp
@@ -308,7 +308,7 @@ inline function registerBuiltInCollisionSupports3d(registry:CollisionRegistry3D)
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function registerCollisionPairTest3d(registry:CollisionRegistry3D, kindA:String, kindB:String, test:CollisionPairTest3D):Void {
+extern inline function registerCollisionPairTest3d(registry:CollisionRegistry3D, kindA:String, kindB:String, test:CollisionPairTest3D):Void {
 #if hl
 	flight._hl._fn.Collision.registerCollisionPairTest3d(registry, cast kindA, cast kindB, test);
 #elseif cpp
@@ -319,7 +319,7 @@ inline function registerCollisionPairTest3d(registry:CollisionRegistry3D, kindA:
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function registerCollisionSupport3d(registry:CollisionRegistry3D, kind:String, support:CollisionSupport3D):Void {
+extern inline function registerCollisionSupport3d(registry:CollisionRegistry3D, kind:String, support:CollisionSupport3D):Void {
 #if hl
 	flight._hl._fn.Collision.registerCollisionSupport3d(registry, cast kind, support);
 #elseif cpp
@@ -330,7 +330,7 @@ inline function registerCollisionSupport3d(registry:CollisionRegistry3D, kind:St
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function supportCollisionAabb3d(shape:CollisionAabb3D, dirX:Float, dirY:Float, dirZ:Float, out:Dynamic):Void {
+extern inline function supportCollisionAabb3d(shape:CollisionAabb3D, dirX:Float, dirY:Float, dirZ:Float, out:Dynamic):Void {
 #if hl
 	flight._hl._fn.Collision.supportCollisionAabb3d(shape, dirX, dirY, dirZ, out);
 #elseif cpp
@@ -341,7 +341,7 @@ inline function supportCollisionAabb3d(shape:CollisionAabb3D, dirX:Float, dirY:F
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function supportCollisionBox3d(shape:CollisionBox3D, dirX:Float, dirY:Float, dirZ:Float, out:Dynamic):Void {
+extern inline function supportCollisionBox3d(shape:CollisionBox3D, dirX:Float, dirY:Float, dirZ:Float, out:Dynamic):Void {
 #if hl
 	flight._hl._fn.Collision.supportCollisionBox3d(shape, dirX, dirY, dirZ, out);
 #elseif cpp
@@ -352,7 +352,7 @@ inline function supportCollisionBox3d(shape:CollisionBox3D, dirX:Float, dirY:Flo
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function supportCollisionCapsule3d(shape:CollisionCapsule3D, dirX:Float, dirY:Float, dirZ:Float, out:Dynamic):Void {
+extern inline function supportCollisionCapsule3d(shape:CollisionCapsule3D, dirX:Float, dirY:Float, dirZ:Float, out:Dynamic):Void {
 #if hl
 	flight._hl._fn.Collision.supportCollisionCapsule3d(shape, dirX, dirY, dirZ, out);
 #elseif cpp
@@ -363,7 +363,7 @@ inline function supportCollisionCapsule3d(shape:CollisionCapsule3D, dirX:Float, 
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function supportCollisionCone3d(shape:CollisionCone3D, dirX:Float, dirY:Float, dirZ:Float, out:Dynamic):Void {
+extern inline function supportCollisionCone3d(shape:CollisionCone3D, dirX:Float, dirY:Float, dirZ:Float, out:Dynamic):Void {
 #if hl
 	flight._hl._fn.Collision.supportCollisionCone3d(shape, dirX, dirY, dirZ, out);
 #elseif cpp
@@ -374,7 +374,7 @@ inline function supportCollisionCone3d(shape:CollisionCone3D, dirX:Float, dirY:F
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function supportCollisionConvex3d(shape:CollisionConvex3D, dirX:Float, dirY:Float, dirZ:Float, out:Dynamic):Void {
+extern inline function supportCollisionConvex3d(shape:CollisionConvex3D, dirX:Float, dirY:Float, dirZ:Float, out:Dynamic):Void {
 #if hl
 	flight._hl._fn.Collision.supportCollisionConvex3d(shape, dirX, dirY, dirZ, out);
 #elseif cpp
@@ -385,7 +385,7 @@ inline function supportCollisionConvex3d(shape:CollisionConvex3D, dirX:Float, di
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function supportCollisionCylinder3d(shape:CollisionCylinder3D, dirX:Float, dirY:Float, dirZ:Float, out:Dynamic):Void {
+extern inline function supportCollisionCylinder3d(shape:CollisionCylinder3D, dirX:Float, dirY:Float, dirZ:Float, out:Dynamic):Void {
 #if hl
 	flight._hl._fn.Collision.supportCollisionCylinder3d(shape, dirX, dirY, dirZ, out);
 #elseif cpp
@@ -396,7 +396,7 @@ inline function supportCollisionCylinder3d(shape:CollisionCylinder3D, dirX:Float
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function supportCollisionSphere3d(shape:CollisionSphere3D, dirX:Float, dirY:Float, dirZ:Float, out:Dynamic):Void {
+extern inline function supportCollisionSphere3d(shape:CollisionSphere3D, dirX:Float, dirY:Float, dirZ:Float, out:Dynamic):Void {
 #if hl
 	flight._hl._fn.Collision.supportCollisionSphere3d(shape, dirX, dirY, dirZ, out);
 #elseif cpp
@@ -407,7 +407,7 @@ inline function supportCollisionSphere3d(shape:CollisionSphere3D, dirX:Float, di
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function writeVertexListSupport3d(vertices:Dynamic, verticesLen:Int, count:Int, dirX:Float, dirY:Float, dirZ:Float, out:Dynamic):Void {
+extern inline function writeVertexListSupport3d(vertices:Dynamic, verticesLen:Int, count:Int, dirX:Float, dirY:Float, dirZ:Float, out:Dynamic):Void {
 #if hl
 	flight._hl._fn.Collision.writeVertexListSupport3d(vertices, verticesLen, count, dirX, dirY, dirZ, out);
 #elseif cpp
@@ -418,7 +418,7 @@ inline function writeVertexListSupport3d(vertices:Dynamic, verticesLen:Int, coun
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function packContactFeatureId(referenceIsA:Bool, referenceEdge:haxe.Int64, incidentEdge:haxe.Int64, secondPoint:Bool):haxe.Int64 {
+extern inline function packContactFeatureId(referenceIsA:Bool, referenceEdge:haxe.Int64, incidentEdge:haxe.Int64, secondPoint:Bool):haxe.Int64 {
 #if hl
 	return flight._hl._fn.Collision.packContactFeatureId(referenceIsA, referenceEdge, incidentEdge, secondPoint);
 #elseif cpp
@@ -429,7 +429,7 @@ inline function packContactFeatureId(referenceIsA:Bool, referenceEdge:haxe.Int64
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function createCollisionContactManifold2d():CollisionContactManifold2D {
+extern inline function createCollisionContactManifold2d():CollisionContactManifold2D {
 #if hl
 	return flight._hl._fn.Collision.createCollisionContactManifold2d();
 #elseif cpp
@@ -440,7 +440,7 @@ inline function createCollisionContactManifold2d():CollisionContactManifold2D {
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function clearCollisionContactManifold2d(out:CollisionContactManifold2D):Void {
+extern inline function clearCollisionContactManifold2d(out:CollisionContactManifold2D):Void {
 #if hl
 	flight._hl._fn.Collision.clearCollisionContactManifold2d(out);
 #elseif cpp
@@ -451,7 +451,7 @@ inline function clearCollisionContactManifold2d(out:CollisionContactManifold2D):
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function createCollisionContactManifold3d():CollisionContactManifold3D {
+extern inline function createCollisionContactManifold3d():CollisionContactManifold3D {
 #if hl
 	return flight._hl._fn.Collision.createCollisionContactManifold3d();
 #elseif cpp
@@ -462,7 +462,7 @@ inline function createCollisionContactManifold3d():CollisionContactManifold3D {
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function clearCollisionContactManifold3d(out:CollisionContactManifold3D):Void {
+extern inline function clearCollisionContactManifold3d(out:CollisionContactManifold3D):Void {
 #if hl
 	flight._hl._fn.Collision.clearCollisionContactManifold3d(out);
 #elseif cpp
@@ -473,7 +473,7 @@ inline function clearCollisionContactManifold3d(out:CollisionContactManifold3D):
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function writeCollisionConvexHullFaces3d(out:Dynamic, points:Dynamic):Int {
+extern inline function writeCollisionConvexHullFaces3d(out:Dynamic, points:Dynamic):Int {
 #if hl
 	return flight._hl._fn.Collision.writeCollisionConvexHullFaces3d(out, points);
 #elseif cpp
@@ -484,7 +484,7 @@ inline function writeCollisionConvexHullFaces3d(out:Dynamic, points:Dynamic):Int
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function writeAabbVertices(aabb:CollisionAabb2D, out:Dynamic):Void {
+extern inline function writeAabbVertices(aabb:CollisionAabb2D, out:Dynamic):Void {
 #if hl
 	flight._hl._fn.Collision.writeAabbVertices(aabb, out);
 #elseif cpp
@@ -495,7 +495,7 @@ inline function writeAabbVertices(aabb:CollisionAabb2D, out:Dynamic):Void {
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function writeObbVertices(obb:CollisionObb2D, out:Dynamic):Void {
+extern inline function writeObbVertices(obb:CollisionObb2D, out:Dynamic):Void {
 #if hl
 	flight._hl._fn.Collision.writeObbVertices(obb, out);
 #elseif cpp
@@ -506,7 +506,7 @@ inline function writeObbVertices(obb:CollisionObb2D, out:Dynamic):Void {
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function areCollisionGuardsEnabled(registry2d:CollisionRegistry2D, registry3d:CollisionRegistry3D):Bool {
+extern inline function areCollisionGuardsEnabled(registry2d:CollisionRegistry2D, registry3d:CollisionRegistry3D):Bool {
 #if hl
 	return flight._hl._fn.Collision.areCollisionGuardsEnabled(registry2d, registry3d);
 #elseif cpp
@@ -517,7 +517,7 @@ inline function areCollisionGuardsEnabled(registry2d:CollisionRegistry2D, regist
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function disableCollisionGuards(registry2d:CollisionRegistry2D, registry3d:CollisionRegistry3D):Void {
+extern inline function disableCollisionGuards(registry2d:CollisionRegistry2D, registry3d:CollisionRegistry3D):Void {
 #if hl
 	flight._hl._fn.Collision.disableCollisionGuards(registry2d, registry3d);
 #elseif cpp
@@ -528,7 +528,7 @@ inline function disableCollisionGuards(registry2d:CollisionRegistry2D, registry3
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function enableCollisionGuards(registry2d:CollisionRegistry2D, registry3d:CollisionRegistry3D, logState:Dynamic, clockFn:Dynamic, clockCtx:Dynamic):Void {
+extern inline function enableCollisionGuards(registry2d:CollisionRegistry2D, registry3d:CollisionRegistry3D, logState:Dynamic, clockFn:Dynamic, clockCtx:Dynamic):Void {
 #if hl
 	flight._hl._fn.Collision.enableCollisionGuards(registry2d, registry3d, logState, clockFn, clockCtx);
 #elseif cpp
@@ -539,7 +539,7 @@ inline function enableCollisionGuards(registry2d:CollisionRegistry2D, registry3d
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function testCollisionSupport2d(registry:CollisionRegistry2D, a:CollisionShape2D, b:CollisionShape2D, out:CollisionManifold2D):Bool {
+extern inline function testCollisionSupport2d(registry:CollisionRegistry2D, a:CollisionShape2D, b:CollisionShape2D, out:CollisionManifold2D):Bool {
 #if hl
 	return flight._hl._fn.Collision.testCollisionSupport2d(registry, a, b, out);
 #elseif cpp
@@ -550,7 +550,7 @@ inline function testCollisionSupport2d(registry:CollisionRegistry2D, a:Collision
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function testCollisionSupportOverlap2d(registry:CollisionRegistry2D, a:CollisionShape2D, b:CollisionShape2D):Bool {
+extern inline function testCollisionSupportOverlap2d(registry:CollisionRegistry2D, a:CollisionShape2D, b:CollisionShape2D):Bool {
 #if hl
 	return flight._hl._fn.Collision.testCollisionSupportOverlap2d(registry, a, b);
 #elseif cpp
@@ -561,7 +561,7 @@ inline function testCollisionSupportOverlap2d(registry:CollisionRegistry2D, a:Co
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function testCollisionSupport3d(registry:CollisionRegistry3D, a:CollisionShape3D, b:CollisionShape3D, out:CollisionManifold3D):Bool {
+extern inline function testCollisionSupport3d(registry:CollisionRegistry3D, a:CollisionShape3D, b:CollisionShape3D, out:CollisionManifold3D):Bool {
 #if hl
 	return flight._hl._fn.Collision.testCollisionSupport3d(registry, a, b, out);
 #elseif cpp
@@ -572,7 +572,7 @@ inline function testCollisionSupport3d(registry:CollisionRegistry3D, a:Collision
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function testCollisionSupportOverlap3d(registry:CollisionRegistry3D, a:CollisionShape3D, b:CollisionShape3D):Bool {
+extern inline function testCollisionSupportOverlap3d(registry:CollisionRegistry3D, a:CollisionShape3D, b:CollisionShape3D):Bool {
 #if hl
 	return flight._hl._fn.Collision.testCollisionSupportOverlap3d(registry, a, b);
 #elseif cpp
@@ -583,7 +583,7 @@ inline function testCollisionSupportOverlap3d(registry:CollisionRegistry3D, a:Co
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function createCollisionDistance3d():CollisionDistance3D {
+extern inline function createCollisionDistance3d():CollisionDistance3D {
 #if hl
 	return flight._hl._fn.Collision.createCollisionDistance3d();
 #elseif cpp
@@ -594,7 +594,7 @@ inline function createCollisionDistance3d():CollisionDistance3D {
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function writeCollisionDistance3d(out:CollisionDistance3D, registry:CollisionRegistry3D, a:CollisionShape3D, b:CollisionShape3D, offsetX:Float, offsetY:Float, offsetZ:Float):Bool {
+extern inline function writeCollisionDistance3d(out:CollisionDistance3D, registry:CollisionRegistry3D, a:CollisionShape3D, b:CollisionShape3D, offsetX:Float, offsetY:Float, offsetZ:Float):Bool {
 #if hl
 	return flight._hl._fn.Collision.writeCollisionDistance3d(out, registry, a, b, offsetX, offsetY, offsetZ);
 #elseif cpp
@@ -605,7 +605,7 @@ inline function writeCollisionDistance3d(out:CollisionDistance3D, registry:Colli
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function createCollisionManifold2d():CollisionManifold2D {
+extern inline function createCollisionManifold2d():CollisionManifold2D {
 #if hl
 	return flight._hl._fn.Collision.createCollisionManifold2d();
 #elseif cpp
@@ -616,7 +616,7 @@ inline function createCollisionManifold2d():CollisionManifold2D {
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function clearCollisionManifold2d(out:CollisionManifold2D):Void {
+extern inline function clearCollisionManifold2d(out:CollisionManifold2D):Void {
 #if hl
 	flight._hl._fn.Collision.clearCollisionManifold2d(out);
 #elseif cpp
@@ -627,7 +627,7 @@ inline function clearCollisionManifold2d(out:CollisionManifold2D):Void {
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function createCollisionManifold3d():CollisionManifold3D {
+extern inline function createCollisionManifold3d():CollisionManifold3D {
 #if hl
 	return flight._hl._fn.Collision.createCollisionManifold3d();
 #elseif cpp
@@ -638,7 +638,7 @@ inline function createCollisionManifold3d():CollisionManifold3D {
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function clearCollisionManifold3d(out:CollisionManifold3D):Void {
+extern inline function clearCollisionManifold3d(out:CollisionManifold3D):Void {
 #if hl
 	flight._hl._fn.Collision.clearCollisionManifold3d(out);
 #elseif cpp
@@ -649,7 +649,7 @@ inline function clearCollisionManifold3d(out:CollisionManifold3D):Void {
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function getCollisionShapeContainsPoint2d(shape:CollisionShape2D, x:Float, y:Float):Bool {
+extern inline function getCollisionShapeContainsPoint2d(shape:CollisionShape2D, x:Float, y:Float):Bool {
 #if hl
 	return flight._hl._fn.Collision.getCollisionShapeContainsPoint2d(shape, x, y);
 #elseif cpp
@@ -660,7 +660,7 @@ inline function getCollisionShapeContainsPoint2d(shape:CollisionShape2D, x:Float
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function getCollisionShapeContainsPoint3d(shape:CollisionShape3D, x:Float, y:Float, z:Float):Bool {
+extern inline function getCollisionShapeContainsPoint3d(shape:CollisionShape3D, x:Float, y:Float, z:Float):Bool {
 #if hl
 	return flight._hl._fn.Collision.getCollisionShapeContainsPoint3d(shape, x, y, z);
 #elseif cpp
@@ -671,7 +671,7 @@ inline function getCollisionShapeContainsPoint3d(shape:CollisionShape3D, x:Float
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function createCollisionRaycastHit2d():CollisionRaycastHit2D {
+extern inline function createCollisionRaycastHit2d():CollisionRaycastHit2D {
 #if hl
 	return flight._hl._fn.Collision.createCollisionRaycastHit2d();
 #elseif cpp
@@ -682,7 +682,7 @@ inline function createCollisionRaycastHit2d():CollisionRaycastHit2D {
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function raycastCollisionShape2d(out:CollisionRaycastHit2D, shape:CollisionShape2D, originX:Float, originY:Float, directionX:Float, directionY:Float, maxFraction:Float):Bool {
+extern inline function raycastCollisionShape2d(out:CollisionRaycastHit2D, shape:CollisionShape2D, originX:Float, originY:Float, directionX:Float, directionY:Float, maxFraction:Float):Bool {
 #if hl
 	return flight._hl._fn.Collision.raycastCollisionShape2d(out, shape, originX, originY, directionX, directionY, maxFraction);
 #elseif cpp
@@ -693,7 +693,7 @@ inline function raycastCollisionShape2d(out:CollisionRaycastHit2D, shape:Collisi
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function createCollisionRaycastHit3d():CollisionRaycastHit3D {
+extern inline function createCollisionRaycastHit3d():CollisionRaycastHit3D {
 #if hl
 	return flight._hl._fn.Collision.createCollisionRaycastHit3d();
 #elseif cpp
@@ -704,7 +704,7 @@ inline function createCollisionRaycastHit3d():CollisionRaycastHit3D {
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function raycastCollisionShape3d(out:CollisionRaycastHit3D, shape:CollisionShape3D, originX:Float, originY:Float, originZ:Float, directionX:Float, directionY:Float, directionZ:Float, maxFraction:Float):Bool {
+extern inline function raycastCollisionShape3d(out:CollisionRaycastHit3D, shape:CollisionShape3D, originX:Float, originY:Float, originZ:Float, directionX:Float, directionY:Float, directionZ:Float, maxFraction:Float):Bool {
 #if hl
 	return flight._hl._fn.Collision.raycastCollisionShape3d(out, shape, originX, originY, originZ, directionX, directionY, directionZ, maxFraction);
 #elseif cpp
@@ -715,7 +715,7 @@ inline function raycastCollisionShape3d(out:CollisionRaycastHit3D, shape:Collisi
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function testSegmentAabbCollision2d(a:CollisionSegment2D, b:CollisionAabb2D):Bool {
+extern inline function testSegmentAabbCollision2d(a:CollisionSegment2D, b:CollisionAabb2D):Bool {
 #if hl
 	return flight._hl._fn.Collision.testSegmentAabbCollision2d(a, b);
 #elseif cpp
@@ -726,7 +726,7 @@ inline function testSegmentAabbCollision2d(a:CollisionSegment2D, b:CollisionAabb
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function testSegmentCapsuleCollision2d(a:CollisionSegment2D, b:CollisionCapsule2D):Bool {
+extern inline function testSegmentCapsuleCollision2d(a:CollisionSegment2D, b:CollisionCapsule2D):Bool {
 #if hl
 	return flight._hl._fn.Collision.testSegmentCapsuleCollision2d(a, b);
 #elseif cpp
@@ -737,7 +737,7 @@ inline function testSegmentCapsuleCollision2d(a:CollisionSegment2D, b:CollisionC
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function testSegmentCircleCollision2d(a:CollisionSegment2D, b:CollisionCircle2D):Bool {
+extern inline function testSegmentCircleCollision2d(a:CollisionSegment2D, b:CollisionCircle2D):Bool {
 #if hl
 	return flight._hl._fn.Collision.testSegmentCircleCollision2d(a, b);
 #elseif cpp
@@ -748,7 +748,7 @@ inline function testSegmentCircleCollision2d(a:CollisionSegment2D, b:CollisionCi
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function testSegmentObbCollision2d(a:CollisionSegment2D, b:CollisionObb2D):Bool {
+extern inline function testSegmentObbCollision2d(a:CollisionSegment2D, b:CollisionObb2D):Bool {
 #if hl
 	return flight._hl._fn.Collision.testSegmentObbCollision2d(a, b);
 #elseif cpp
@@ -759,7 +759,7 @@ inline function testSegmentObbCollision2d(a:CollisionSegment2D, b:CollisionObb2D
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function testSegmentPolygonCollision2d(a:CollisionSegment2D, b:CollisionPolygon2D):Bool {
+extern inline function testSegmentPolygonCollision2d(a:CollisionSegment2D, b:CollisionPolygon2D):Bool {
 #if hl
 	return flight._hl._fn.Collision.testSegmentPolygonCollision2d(a, b);
 #elseif cpp
@@ -770,7 +770,7 @@ inline function testSegmentPolygonCollision2d(a:CollisionSegment2D, b:CollisionP
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function testSegmentSegmentCollision2d(a:CollisionSegment2D, b:CollisionSegment2D):Bool {
+extern inline function testSegmentSegmentCollision2d(a:CollisionSegment2D, b:CollisionSegment2D):Bool {
 #if hl
 	return flight._hl._fn.Collision.testSegmentSegmentCollision2d(a, b);
 #elseif cpp
@@ -781,7 +781,7 @@ inline function testSegmentSegmentCollision2d(a:CollisionSegment2D, b:CollisionS
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function testAabbAabbCollision2d(a:CollisionAabb2D, b:CollisionAabb2D, out:CollisionManifold2D):Bool {
+extern inline function testAabbAabbCollision2d(a:CollisionAabb2D, b:CollisionAabb2D, out:CollisionManifold2D):Bool {
 #if hl
 	return flight._hl._fn.Collision.testAabbAabbCollision2d(a, b, out);
 #elseif cpp
@@ -792,7 +792,7 @@ inline function testAabbAabbCollision2d(a:CollisionAabb2D, b:CollisionAabb2D, ou
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function testAabbObbCollision2d(a:CollisionAabb2D, b:CollisionObb2D, out:CollisionManifold2D):Bool {
+extern inline function testAabbObbCollision2d(a:CollisionAabb2D, b:CollisionObb2D, out:CollisionManifold2D):Bool {
 #if hl
 	return flight._hl._fn.Collision.testAabbObbCollision2d(a, b, out);
 #elseif cpp
@@ -803,7 +803,7 @@ inline function testAabbObbCollision2d(a:CollisionAabb2D, b:CollisionObb2D, out:
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function testAabbPolygonCollision2d(a:CollisionAabb2D, b:CollisionPolygon2D, out:CollisionManifold2D):Bool {
+extern inline function testAabbPolygonCollision2d(a:CollisionAabb2D, b:CollisionPolygon2D, out:CollisionManifold2D):Bool {
 #if hl
 	return flight._hl._fn.Collision.testAabbPolygonCollision2d(a, b, out);
 #elseif cpp
@@ -814,7 +814,7 @@ inline function testAabbPolygonCollision2d(a:CollisionAabb2D, b:CollisionPolygon
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function testCircleAabbCollision2d(a:CollisionCircle2D, b:CollisionAabb2D, out:CollisionManifold2D):Bool {
+extern inline function testCircleAabbCollision2d(a:CollisionCircle2D, b:CollisionAabb2D, out:CollisionManifold2D):Bool {
 #if hl
 	return flight._hl._fn.Collision.testCircleAabbCollision2d(a, b, out);
 #elseif cpp
@@ -825,7 +825,7 @@ inline function testCircleAabbCollision2d(a:CollisionCircle2D, b:CollisionAabb2D
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function testCircleCircleCollision2d(a:CollisionCircle2D, b:CollisionCircle2D, out:CollisionManifold2D):Bool {
+extern inline function testCircleCircleCollision2d(a:CollisionCircle2D, b:CollisionCircle2D, out:CollisionManifold2D):Bool {
 #if hl
 	return flight._hl._fn.Collision.testCircleCircleCollision2d(a, b, out);
 #elseif cpp
@@ -836,7 +836,7 @@ inline function testCircleCircleCollision2d(a:CollisionCircle2D, b:CollisionCirc
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function testCircleObbCollision2d(a:CollisionCircle2D, b:CollisionObb2D, out:CollisionManifold2D):Bool {
+extern inline function testCircleObbCollision2d(a:CollisionCircle2D, b:CollisionObb2D, out:CollisionManifold2D):Bool {
 #if hl
 	return flight._hl._fn.Collision.testCircleObbCollision2d(a, b, out);
 #elseif cpp
@@ -847,7 +847,7 @@ inline function testCircleObbCollision2d(a:CollisionCircle2D, b:CollisionObb2D, 
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function testCirclePolygonCollision2d(a:CollisionCircle2D, b:CollisionPolygon2D, out:CollisionManifold2D):Bool {
+extern inline function testCirclePolygonCollision2d(a:CollisionCircle2D, b:CollisionPolygon2D, out:CollisionManifold2D):Bool {
 #if hl
 	return flight._hl._fn.Collision.testCirclePolygonCollision2d(a, b, out);
 #elseif cpp
@@ -858,7 +858,7 @@ inline function testCirclePolygonCollision2d(a:CollisionCircle2D, b:CollisionPol
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function testObbObbCollision2d(a:CollisionObb2D, b:CollisionObb2D, out:CollisionManifold2D):Bool {
+extern inline function testObbObbCollision2d(a:CollisionObb2D, b:CollisionObb2D, out:CollisionManifold2D):Bool {
 #if hl
 	return flight._hl._fn.Collision.testObbObbCollision2d(a, b, out);
 #elseif cpp
@@ -869,7 +869,7 @@ inline function testObbObbCollision2d(a:CollisionObb2D, b:CollisionObb2D, out:Co
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function testObbPolygonCollision2d(a:CollisionObb2D, b:CollisionPolygon2D, out:CollisionManifold2D):Bool {
+extern inline function testObbPolygonCollision2d(a:CollisionObb2D, b:CollisionPolygon2D, out:CollisionManifold2D):Bool {
 #if hl
 	return flight._hl._fn.Collision.testObbPolygonCollision2d(a, b, out);
 #elseif cpp
@@ -880,7 +880,7 @@ inline function testObbPolygonCollision2d(a:CollisionObb2D, b:CollisionPolygon2D
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function testPolygonPolygonCollision2d(a:CollisionPolygon2D, b:CollisionPolygon2D, out:CollisionManifold2D):Bool {
+extern inline function testPolygonPolygonCollision2d(a:CollisionPolygon2D, b:CollisionPolygon2D, out:CollisionManifold2D):Bool {
 #if hl
 	return flight._hl._fn.Collision.testPolygonPolygonCollision2d(a, b, out);
 #elseif cpp
@@ -891,7 +891,7 @@ inline function testPolygonPolygonCollision2d(a:CollisionPolygon2D, b:CollisionP
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function testAabbAabbCollision3d(a:CollisionAabb3D, b:CollisionAabb3D, out:CollisionManifold3D):Bool {
+extern inline function testAabbAabbCollision3d(a:CollisionAabb3D, b:CollisionAabb3D, out:CollisionManifold3D):Bool {
 #if hl
 	return flight._hl._fn.Collision.testAabbAabbCollision3d(a, b, out);
 #elseif cpp
@@ -902,7 +902,7 @@ inline function testAabbAabbCollision3d(a:CollisionAabb3D, b:CollisionAabb3D, ou
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function testBoxBoxCollision3d(a:CollisionBox3D, b:CollisionBox3D, out:CollisionManifold3D):Bool {
+extern inline function testBoxBoxCollision3d(a:CollisionBox3D, b:CollisionBox3D, out:CollisionManifold3D):Bool {
 #if hl
 	return flight._hl._fn.Collision.testBoxBoxCollision3d(a, b, out);
 #elseif cpp
@@ -913,7 +913,7 @@ inline function testBoxBoxCollision3d(a:CollisionBox3D, b:CollisionBox3D, out:Co
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function testCapsuleCapsuleCollision3d(a:CollisionCapsule3D, b:CollisionCapsule3D, out:CollisionManifold3D):Bool {
+extern inline function testCapsuleCapsuleCollision3d(a:CollisionCapsule3D, b:CollisionCapsule3D, out:CollisionManifold3D):Bool {
 #if hl
 	return flight._hl._fn.Collision.testCapsuleCapsuleCollision3d(a, b, out);
 #elseif cpp
@@ -924,7 +924,7 @@ inline function testCapsuleCapsuleCollision3d(a:CollisionCapsule3D, b:CollisionC
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function testSphereAabbCollision3d(a:CollisionSphere3D, b:CollisionAabb3D, out:CollisionManifold3D):Bool {
+extern inline function testSphereAabbCollision3d(a:CollisionSphere3D, b:CollisionAabb3D, out:CollisionManifold3D):Bool {
 #if hl
 	return flight._hl._fn.Collision.testSphereAabbCollision3d(a, b, out);
 #elseif cpp
@@ -935,7 +935,7 @@ inline function testSphereAabbCollision3d(a:CollisionSphere3D, b:CollisionAabb3D
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function testSphereBoxCollision3d(a:CollisionSphere3D, b:CollisionBox3D, out:CollisionManifold3D):Bool {
+extern inline function testSphereBoxCollision3d(a:CollisionSphere3D, b:CollisionBox3D, out:CollisionManifold3D):Bool {
 #if hl
 	return flight._hl._fn.Collision.testSphereBoxCollision3d(a, b, out);
 #elseif cpp
@@ -946,7 +946,7 @@ inline function testSphereBoxCollision3d(a:CollisionSphere3D, b:CollisionBox3D, 
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function testSphereCapsuleCollision3d(a:CollisionSphere3D, b:CollisionCapsule3D, out:CollisionManifold3D):Bool {
+extern inline function testSphereCapsuleCollision3d(a:CollisionSphere3D, b:CollisionCapsule3D, out:CollisionManifold3D):Bool {
 #if hl
 	return flight._hl._fn.Collision.testSphereCapsuleCollision3d(a, b, out);
 #elseif cpp
@@ -957,7 +957,7 @@ inline function testSphereCapsuleCollision3d(a:CollisionSphere3D, b:CollisionCap
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function testSphereSphereCollision3d(a:CollisionSphere3D, b:CollisionSphere3D, out:CollisionManifold3D):Bool {
+extern inline function testSphereSphereCollision3d(a:CollisionSphere3D, b:CollisionSphere3D, out:CollisionManifold3D):Bool {
 #if hl
 	return flight._hl._fn.Collision.testSphereSphereCollision3d(a, b, out);
 #elseif cpp
@@ -968,7 +968,7 @@ inline function testSphereSphereCollision3d(a:CollisionSphere3D, b:CollisionSphe
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function collideAabbAabbContactManifold2d(a:CollisionAabb2D, b:CollisionAabb2D, out:CollisionContactManifold2D):Bool {
+extern inline function collideAabbAabbContactManifold2d(a:CollisionAabb2D, b:CollisionAabb2D, out:CollisionContactManifold2D):Bool {
 #if hl
 	return flight._hl._fn.Collision.collideAabbAabbContactManifold2d(a, b, out);
 #elseif cpp
@@ -979,7 +979,7 @@ inline function collideAabbAabbContactManifold2d(a:CollisionAabb2D, b:CollisionA
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function collideAabbObbContactManifold2d(a:CollisionAabb2D, b:CollisionObb2D, out:CollisionContactManifold2D):Bool {
+extern inline function collideAabbObbContactManifold2d(a:CollisionAabb2D, b:CollisionObb2D, out:CollisionContactManifold2D):Bool {
 #if hl
 	return flight._hl._fn.Collision.collideAabbObbContactManifold2d(a, b, out);
 #elseif cpp
@@ -990,7 +990,7 @@ inline function collideAabbObbContactManifold2d(a:CollisionAabb2D, b:CollisionOb
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function collideAabbPolygonContactManifold2d(a:CollisionAabb2D, b:CollisionPolygon2D, out:CollisionContactManifold2D):Bool {
+extern inline function collideAabbPolygonContactManifold2d(a:CollisionAabb2D, b:CollisionPolygon2D, out:CollisionContactManifold2D):Bool {
 #if hl
 	return flight._hl._fn.Collision.collideAabbPolygonContactManifold2d(a, b, out);
 #elseif cpp
@@ -1001,7 +1001,7 @@ inline function collideAabbPolygonContactManifold2d(a:CollisionAabb2D, b:Collisi
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function collideCircleAabbContactManifold2d(a:CollisionCircle2D, b:CollisionAabb2D, out:CollisionContactManifold2D):Bool {
+extern inline function collideCircleAabbContactManifold2d(a:CollisionCircle2D, b:CollisionAabb2D, out:CollisionContactManifold2D):Bool {
 #if hl
 	return flight._hl._fn.Collision.collideCircleAabbContactManifold2d(a, b, out);
 #elseif cpp
@@ -1012,7 +1012,7 @@ inline function collideCircleAabbContactManifold2d(a:CollisionCircle2D, b:Collis
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function collideCircleCircleContactManifold2d(a:CollisionCircle2D, b:CollisionCircle2D, out:CollisionContactManifold2D):Bool {
+extern inline function collideCircleCircleContactManifold2d(a:CollisionCircle2D, b:CollisionCircle2D, out:CollisionContactManifold2D):Bool {
 #if hl
 	return flight._hl._fn.Collision.collideCircleCircleContactManifold2d(a, b, out);
 #elseif cpp
@@ -1023,7 +1023,7 @@ inline function collideCircleCircleContactManifold2d(a:CollisionCircle2D, b:Coll
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function collideCircleObbContactManifold2d(a:CollisionCircle2D, b:CollisionObb2D, out:CollisionContactManifold2D):Bool {
+extern inline function collideCircleObbContactManifold2d(a:CollisionCircle2D, b:CollisionObb2D, out:CollisionContactManifold2D):Bool {
 #if hl
 	return flight._hl._fn.Collision.collideCircleObbContactManifold2d(a, b, out);
 #elseif cpp
@@ -1034,7 +1034,7 @@ inline function collideCircleObbContactManifold2d(a:CollisionCircle2D, b:Collisi
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function collideCirclePolygonContactManifold2d(a:CollisionCircle2D, b:CollisionPolygon2D, out:CollisionContactManifold2D):Bool {
+extern inline function collideCirclePolygonContactManifold2d(a:CollisionCircle2D, b:CollisionPolygon2D, out:CollisionContactManifold2D):Bool {
 #if hl
 	return flight._hl._fn.Collision.collideCirclePolygonContactManifold2d(a, b, out);
 #elseif cpp
@@ -1045,7 +1045,7 @@ inline function collideCirclePolygonContactManifold2d(a:CollisionCircle2D, b:Col
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function collideObbObbContactManifold2d(a:CollisionObb2D, b:CollisionObb2D, out:CollisionContactManifold2D):Bool {
+extern inline function collideObbObbContactManifold2d(a:CollisionObb2D, b:CollisionObb2D, out:CollisionContactManifold2D):Bool {
 #if hl
 	return flight._hl._fn.Collision.collideObbObbContactManifold2d(a, b, out);
 #elseif cpp
@@ -1056,7 +1056,7 @@ inline function collideObbObbContactManifold2d(a:CollisionObb2D, b:CollisionObb2
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function collideObbPolygonContactManifold2d(a:CollisionObb2D, b:CollisionPolygon2D, out:CollisionContactManifold2D):Bool {
+extern inline function collideObbPolygonContactManifold2d(a:CollisionObb2D, b:CollisionPolygon2D, out:CollisionContactManifold2D):Bool {
 #if hl
 	return flight._hl._fn.Collision.collideObbPolygonContactManifold2d(a, b, out);
 #elseif cpp
@@ -1067,7 +1067,7 @@ inline function collideObbPolygonContactManifold2d(a:CollisionObb2D, b:Collision
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function collidePolygonPolygonContactManifold2d(a:CollisionPolygon2D, b:CollisionPolygon2D, out:CollisionContactManifold2D):Bool {
+extern inline function collidePolygonPolygonContactManifold2d(a:CollisionPolygon2D, b:CollisionPolygon2D, out:CollisionContactManifold2D):Bool {
 #if hl
 	return flight._hl._fn.Collision.collidePolygonPolygonContactManifold2d(a, b, out);
 #elseif cpp
@@ -1078,7 +1078,7 @@ inline function collidePolygonPolygonContactManifold2d(a:CollisionPolygon2D, b:C
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function createCollisionTimeOfImpact2d():CollisionTimeOfImpact2D {
+extern inline function createCollisionTimeOfImpact2d():CollisionTimeOfImpact2D {
 #if hl
 	return flight._hl._fn.Collision.createCollisionTimeOfImpact2d();
 #elseif cpp
@@ -1089,7 +1089,7 @@ inline function createCollisionTimeOfImpact2d():CollisionTimeOfImpact2D {
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function sweepCollisionShape2d(out:CollisionTimeOfImpact2D, registry:CollisionRegistry2D, shapeA:CollisionShape2D, translationAx:Float, translationAy:Float, shapeB:CollisionShape2D, translationBx:Float, translationBy:Float, maxFraction:Float):Bool {
+extern inline function sweepCollisionShape2d(out:CollisionTimeOfImpact2D, registry:CollisionRegistry2D, shapeA:CollisionShape2D, translationAx:Float, translationAy:Float, shapeB:CollisionShape2D, translationBx:Float, translationBy:Float, maxFraction:Float):Bool {
 #if hl
 	return flight._hl._fn.Collision.sweepCollisionShape2d(out, registry, shapeA, translationAx, translationAy, shapeB, translationBx, translationBy, maxFraction);
 #elseif cpp
@@ -1100,7 +1100,7 @@ inline function sweepCollisionShape2d(out:CollisionTimeOfImpact2D, registry:Coll
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function createCollisionTimeOfImpact3d():CollisionTimeOfImpact3D {
+extern inline function createCollisionTimeOfImpact3d():CollisionTimeOfImpact3D {
 #if hl
 	return flight._hl._fn.Collision.createCollisionTimeOfImpact3d();
 #elseif cpp
@@ -1111,7 +1111,7 @@ inline function createCollisionTimeOfImpact3d():CollisionTimeOfImpact3D {
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function sweepCollisionShape3d(out:CollisionTimeOfImpact3D, registry:CollisionRegistry3D, shapeA:CollisionShape3D, translationAx:Float, translationAy:Float, translationAz:Float, shapeB:CollisionShape3D, translationBx:Float, translationBy:Float, translationBz:Float, maxFraction:Float):Bool {
+extern inline function sweepCollisionShape3d(out:CollisionTimeOfImpact3D, registry:CollisionRegistry3D, shapeA:CollisionShape3D, translationAx:Float, translationAy:Float, translationAz:Float, shapeB:CollisionShape3D, translationBx:Float, translationBy:Float, translationBz:Float, maxFraction:Float):Bool {
 #if hl
 	return flight._hl._fn.Collision.sweepCollisionShape3d(out, registry, shapeA, translationAx, translationAy, translationAz, shapeB, translationBx, translationBy, translationBz, maxFraction);
 #elseif cpp
@@ -1122,7 +1122,7 @@ inline function sweepCollisionShape3d(out:CollisionTimeOfImpact3D, registry:Coll
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function createCollisionHeightfield3d():CollisionHeightfield3D {
+extern inline function createCollisionHeightfield3d():CollisionHeightfield3D {
 #if hl
 	return flight._hl._fn.Collision.createCollisionHeightfield3d();
 #elseif cpp
@@ -1133,7 +1133,7 @@ inline function createCollisionHeightfield3d():CollisionHeightfield3D {
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function createCollisionTriangleMesh3d():CollisionTriangleMesh3D {
+extern inline function createCollisionTriangleMesh3d():CollisionTriangleMesh3D {
 #if hl
 	return flight._hl._fn.Collision.createCollisionTriangleMesh3d();
 #elseif cpp
@@ -1144,7 +1144,7 @@ inline function createCollisionTriangleMesh3d():CollisionTriangleMesh3D {
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function cloneCollisionColliderShape3d(shape:CollisionColliderShape3D):Int {
+extern inline function cloneCollisionColliderShape3d(shape:CollisionColliderShape3D):CollisionColliderShape3D {
 #if hl
 	return flight._hl._fn.Collision.cloneCollisionColliderShape3d(shape);
 #elseif cpp
@@ -1155,7 +1155,7 @@ inline function cloneCollisionColliderShape3d(shape:CollisionColliderShape3D):In
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function collideCollisionHeightfield3d(out:CollisionContactManifold3D, registry:CollisionRegistry3D, convex:CollisionShape3D, heightfield:CollisionHeightfield3D):Bool {
+extern inline function collideCollisionHeightfield3d(out:CollisionContactManifold3D, registry:CollisionRegistry3D, convex:CollisionShape3D, heightfield:CollisionHeightfield3D):Bool {
 #if hl
 	return flight._hl._fn.Collision.collideCollisionHeightfield3d(out, registry, convex, heightfield);
 #elseif cpp
@@ -1166,7 +1166,7 @@ inline function collideCollisionHeightfield3d(out:CollisionContactManifold3D, re
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function collideCollisionTriangleMesh3d(out:CollisionContactManifold3D, registry:CollisionRegistry3D, convex:CollisionShape3D, mesh:CollisionTriangleMesh3D):Bool {
+extern inline function collideCollisionTriangleMesh3d(out:CollisionContactManifold3D, registry:CollisionRegistry3D, convex:CollisionShape3D, mesh:CollisionTriangleMesh3D):Bool {
 #if hl
 	return flight._hl._fn.Collision.collideCollisionTriangleMesh3d(out, registry, convex, mesh);
 #elseif cpp
@@ -1177,7 +1177,7 @@ inline function collideCollisionTriangleMesh3d(out:CollisionContactManifold3D, r
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function getCollisionHeightfieldValidationStatus3d(heightfield:CollisionHeightfield3D):Int {
+extern inline function getCollisionHeightfieldValidationStatus3d(heightfield:CollisionHeightfield3D):Int {
 #if hl
 	return flight._hl._fn.Collision.getCollisionHeightfieldValidationStatus3d(heightfield);
 #elseif cpp
@@ -1188,7 +1188,7 @@ inline function getCollisionHeightfieldValidationStatus3d(heightfield:CollisionH
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function getCollisionTriangleMeshValidationStatus3d(mesh:CollisionTriangleMesh3D):Int {
+extern inline function getCollisionTriangleMeshValidationStatus3d(mesh:CollisionTriangleMesh3D):Int {
 #if hl
 	return flight._hl._fn.Collision.getCollisionTriangleMeshValidationStatus3d(mesh);
 #elseif cpp
@@ -1199,7 +1199,7 @@ inline function getCollisionTriangleMeshValidationStatus3d(mesh:CollisionTriangl
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function invalidateCollisionHeightfield3d(heightfield:CollisionHeightfield3D):Void {
+extern inline function invalidateCollisionHeightfield3d(heightfield:CollisionHeightfield3D):Void {
 #if hl
 	flight._hl._fn.Collision.invalidateCollisionHeightfield3d(heightfield);
 #elseif cpp
@@ -1210,7 +1210,7 @@ inline function invalidateCollisionHeightfield3d(heightfield:CollisionHeightfiel
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function invalidateCollisionTriangleMesh3d(mesh:CollisionTriangleMesh3D):Void {
+extern inline function invalidateCollisionTriangleMesh3d(mesh:CollisionTriangleMesh3D):Void {
 #if hl
 	flight._hl._fn.Collision.invalidateCollisionTriangleMesh3d(mesh);
 #elseif cpp
@@ -1221,7 +1221,7 @@ inline function invalidateCollisionTriangleMesh3d(mesh:CollisionTriangleMesh3D):
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function raycastCollisionHeightfield3d(out:CollisionRaycastHit3D, heightfield:CollisionHeightfield3D, originX:Float, originY:Float, originZ:Float, directionX:Float, directionY:Float, directionZ:Float, maxFraction:Float):Bool {
+extern inline function raycastCollisionHeightfield3d(out:CollisionRaycastHit3D, heightfield:CollisionHeightfield3D, originX:Float, originY:Float, originZ:Float, directionX:Float, directionY:Float, directionZ:Float, maxFraction:Float):Bool {
 #if hl
 	return flight._hl._fn.Collision.raycastCollisionHeightfield3d(out, heightfield, originX, originY, originZ, directionX, directionY, directionZ, maxFraction);
 #elseif cpp
@@ -1232,7 +1232,7 @@ inline function raycastCollisionHeightfield3d(out:CollisionRaycastHit3D, heightf
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function raycastCollisionTriangleMesh3d(out:CollisionRaycastHit3D, mesh:CollisionTriangleMesh3D, originX:Float, originY:Float, originZ:Float, directionX:Float, directionY:Float, directionZ:Float, maxFraction:Float):Bool {
+extern inline function raycastCollisionTriangleMesh3d(out:CollisionRaycastHit3D, mesh:CollisionTriangleMesh3D, originX:Float, originY:Float, originZ:Float, directionX:Float, directionY:Float, directionZ:Float, maxFraction:Float):Bool {
 #if hl
 	return flight._hl._fn.Collision.raycastCollisionTriangleMesh3d(out, mesh, originX, originY, originZ, directionX, directionY, directionZ, maxFraction);
 #elseif cpp
@@ -1243,7 +1243,7 @@ inline function raycastCollisionTriangleMesh3d(out:CollisionRaycastHit3D, mesh:C
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function sweepCollisionHeightfield3d(out:CollisionTimeOfImpact3D, registry:CollisionRegistry3D, convex:CollisionShape3D, deltaX:Float, deltaY:Float, deltaZ:Float, heightfield:CollisionHeightfield3D, maxFraction:Float):Bool {
+extern inline function sweepCollisionHeightfield3d(out:CollisionTimeOfImpact3D, registry:CollisionRegistry3D, convex:CollisionShape3D, deltaX:Float, deltaY:Float, deltaZ:Float, heightfield:CollisionHeightfield3D, maxFraction:Float):Bool {
 #if hl
 	return flight._hl._fn.Collision.sweepCollisionHeightfield3d(out, registry, convex, deltaX, deltaY, deltaZ, heightfield, maxFraction);
 #elseif cpp
@@ -1254,7 +1254,7 @@ inline function sweepCollisionHeightfield3d(out:CollisionTimeOfImpact3D, registr
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function sweepCollisionTriangleMesh3d(out:CollisionTimeOfImpact3D, registry:CollisionRegistry3D, convex:CollisionShape3D, deltaX:Float, deltaY:Float, deltaZ:Float, mesh:CollisionTriangleMesh3D, maxFraction:Float):Bool {
+extern inline function sweepCollisionTriangleMesh3d(out:CollisionTimeOfImpact3D, registry:CollisionRegistry3D, convex:CollisionShape3D, deltaX:Float, deltaY:Float, deltaZ:Float, mesh:CollisionTriangleMesh3D, maxFraction:Float):Bool {
 #if hl
 	return flight._hl._fn.Collision.sweepCollisionTriangleMesh3d(out, registry, convex, deltaX, deltaY, deltaZ, mesh, maxFraction);
 #elseif cpp
@@ -1265,7 +1265,7 @@ inline function sweepCollisionTriangleMesh3d(out:CollisionTimeOfImpact3D, regist
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function writeCollisionHeightfieldBounds3d(heightfield:CollisionHeightfield3D, out:CollisionAabb3D):Void {
+extern inline function writeCollisionHeightfieldBounds3d(heightfield:CollisionHeightfield3D, out:CollisionAabb3D):Void {
 #if hl
 	flight._hl._fn.Collision.writeCollisionHeightfieldBounds3d(heightfield, out);
 #elseif cpp
@@ -1276,7 +1276,7 @@ inline function writeCollisionHeightfieldBounds3d(heightfield:CollisionHeightfie
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function writeCollisionTriangleMeshBounds3d(mesh:CollisionTriangleMesh3D, out:CollisionAabb3D):Void {
+extern inline function writeCollisionTriangleMeshBounds3d(mesh:CollisionTriangleMesh3D, out:CollisionAabb3D):Void {
 #if hl
 	flight._hl._fn.Collision.writeCollisionTriangleMeshBounds3d(mesh, out);
 #elseif cpp
@@ -1287,7 +1287,7 @@ inline function writeCollisionTriangleMeshBounds3d(mesh:CollisionTriangleMesh3D,
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function freeCollisionContactManifold2D(ptr:CollisionContactManifold2D):Void {
+extern inline function freeCollisionContactManifold2D(ptr:CollisionContactManifold2D):Void {
 #if hl
 	flight._hl._fn.Collision.freeCollisionContactManifold2D(ptr);
 #elseif cpp
@@ -1298,7 +1298,7 @@ inline function freeCollisionContactManifold2D(ptr:CollisionContactManifold2D):V
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function freeCollisionContactManifold3D(ptr:CollisionContactManifold3D):Void {
+extern inline function freeCollisionContactManifold3D(ptr:CollisionContactManifold3D):Void {
 #if hl
 	flight._hl._fn.Collision.freeCollisionContactManifold3D(ptr);
 #elseif cpp
@@ -1309,7 +1309,7 @@ inline function freeCollisionContactManifold3D(ptr:CollisionContactManifold3D):V
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function freeCollisionDistance3D(ptr:CollisionDistance3D):Void {
+extern inline function freeCollisionDistance3D(ptr:CollisionDistance3D):Void {
 #if hl
 	flight._hl._fn.Collision.freeCollisionDistance3D(ptr);
 #elseif cpp
@@ -1320,7 +1320,7 @@ inline function freeCollisionDistance3D(ptr:CollisionDistance3D):Void {
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function freeCollisionManifold2D(ptr:CollisionManifold2D):Void {
+extern inline function freeCollisionManifold2D(ptr:CollisionManifold2D):Void {
 #if hl
 	flight._hl._fn.Collision.freeCollisionManifold2D(ptr);
 #elseif cpp
@@ -1331,7 +1331,7 @@ inline function freeCollisionManifold2D(ptr:CollisionManifold2D):Void {
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function freeCollisionManifold3D(ptr:CollisionManifold3D):Void {
+extern inline function freeCollisionManifold3D(ptr:CollisionManifold3D):Void {
 #if hl
 	flight._hl._fn.Collision.freeCollisionManifold3D(ptr);
 #elseif cpp
@@ -1342,7 +1342,7 @@ inline function freeCollisionManifold3D(ptr:CollisionManifold3D):Void {
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function freeCollisionRaycastHit2D(ptr:CollisionRaycastHit2D):Void {
+extern inline function freeCollisionRaycastHit2D(ptr:CollisionRaycastHit2D):Void {
 #if hl
 	flight._hl._fn.Collision.freeCollisionRaycastHit2D(ptr);
 #elseif cpp
@@ -1353,7 +1353,7 @@ inline function freeCollisionRaycastHit2D(ptr:CollisionRaycastHit2D):Void {
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function freeCollisionRaycastHit3D(ptr:CollisionRaycastHit3D):Void {
+extern inline function freeCollisionRaycastHit3D(ptr:CollisionRaycastHit3D):Void {
 #if hl
 	flight._hl._fn.Collision.freeCollisionRaycastHit3D(ptr);
 #elseif cpp
@@ -1364,7 +1364,7 @@ inline function freeCollisionRaycastHit3D(ptr:CollisionRaycastHit3D):Void {
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function freeCollisionTimeOfImpact2D(ptr:CollisionTimeOfImpact2D):Void {
+extern inline function freeCollisionTimeOfImpact2D(ptr:CollisionTimeOfImpact2D):Void {
 #if hl
 	flight._hl._fn.Collision.freeCollisionTimeOfImpact2D(ptr);
 #elseif cpp
@@ -1375,7 +1375,7 @@ inline function freeCollisionTimeOfImpact2D(ptr:CollisionTimeOfImpact2D):Void {
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function freeCollisionTimeOfImpact3D(ptr:CollisionTimeOfImpact3D):Void {
+extern inline function freeCollisionTimeOfImpact3D(ptr:CollisionTimeOfImpact3D):Void {
 #if hl
 	flight._hl._fn.Collision.freeCollisionTimeOfImpact3D(ptr);
 #elseif cpp
@@ -1386,7 +1386,7 @@ inline function freeCollisionTimeOfImpact3D(ptr:CollisionTimeOfImpact3D):Void {
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function freeCollisionHeightfield3D(ptr:CollisionHeightfield3D):Void {
+extern inline function freeCollisionHeightfield3D(ptr:CollisionHeightfield3D):Void {
 #if hl
 	flight._hl._fn.Collision.freeCollisionHeightfield3D(ptr);
 #elseif cpp
@@ -1397,13 +1397,24 @@ inline function freeCollisionHeightfield3D(ptr:CollisionHeightfield3D):Void {
 	#error "flight.Collision: no backend for this target."
 #end
 }
-inline function freeCollisionTriangleMesh3D(ptr:CollisionTriangleMesh3D):Void {
+extern inline function freeCollisionTriangleMesh3D(ptr:CollisionTriangleMesh3D):Void {
 #if hl
 	flight._hl._fn.Collision.freeCollisionTriangleMesh3D(ptr);
 #elseif cpp
 	flight._cpp._fn.Collision.freeCollisionTriangleMesh3D(ptr);
 #elseif (js && flight_esm)
 	flight._js._fn.Collision.freeCollisionTriangleMesh3D(ptr);
+#else
+	#error "flight.Collision: no backend for this target."
+#end
+}
+extern inline function freeCollisionColliderShape3D(ptr:CollisionColliderShape3D):Void {
+#if hl
+	flight._hl._fn.Collision.freeCollisionColliderShape3D(ptr);
+#elseif cpp
+	flight._cpp._fn.Collision.freeCollisionColliderShape3D(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Collision.freeCollisionColliderShape3D(ptr);
 #else
 	#error "flight.Collision: no backend for this target."
 #end

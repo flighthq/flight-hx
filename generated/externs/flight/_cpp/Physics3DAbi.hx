@@ -12,10 +12,10 @@ abstract Physics3DAbi(cpp.Star<cpp.Void>) {
 
 	inline function get_capabilities():Int return Physics3DAbi_Ffi.get_capabilities(this);
 
-	inline function set_capabilities(value:Int):Int return Physics3DAbi_Ffi.set_capabilities(this, value);
+	inline function set_capabilities(value:Int):Int { Physics3DAbi_Ffi.set_capabilities(this, value); return value; }
 	public var version(get, set):Int;
 
 	inline function get_version():Int return Physics3DAbi_Ffi.get_version(this);
 
-	inline function set_version(value:Int):Int return Physics3DAbi_Ffi.set_version(this, value);
+	inline function set_version(value:Int):Int { Physics3DAbi_Ffi.set_version(this, value); return value; }
 }

@@ -1,6 +1,6 @@
 package flight;
 
-inline function getActiveTweenCount(manager:TweenManager):Int {
+extern inline function getActiveTweenCount(manager:TweenManager):Int {
 #if hl
 	return flight._hl._fn.Tween.getActiveTweenCount(manager);
 #elseif cpp
@@ -11,7 +11,7 @@ inline function getActiveTweenCount(manager:TweenManager):Int {
 	#error "flight.Tween: no backend for this target."
 #end
 }
-inline function killTweensOfProperty(manager:TweenManager, key:String):Void {
+extern inline function killTweensOfProperty(manager:TweenManager, key:String):Void {
 #if hl
 	flight._hl._fn.Tween.killTweensOfProperty(manager, cast key);
 #elseif cpp
@@ -22,7 +22,7 @@ inline function killTweensOfProperty(manager:TweenManager, key:String):Void {
 	#error "flight.Tween: no backend for this target."
 #end
 }
-inline function pauseAllTweens(manager:TweenManager):Void {
+extern inline function pauseAllTweens(manager:TweenManager):Void {
 #if hl
 	flight._hl._fn.Tween.pauseAllTweens(manager);
 #elseif cpp
@@ -33,7 +33,7 @@ inline function pauseAllTweens(manager:TweenManager):Void {
 	#error "flight.Tween: no backend for this target."
 #end
 }
-inline function resetAllTweens(manager:TweenManager):Void {
+extern inline function resetAllTweens(manager:TweenManager):Void {
 #if hl
 	flight._hl._fn.Tween.resetAllTweens(manager);
 #elseif cpp
@@ -44,7 +44,7 @@ inline function resetAllTweens(manager:TweenManager):Void {
 	#error "flight.Tween: no backend for this target."
 #end
 }
-inline function resumeAllTweens(manager:TweenManager):Void {
+extern inline function resumeAllTweens(manager:TweenManager):Void {
 #if hl
 	flight._hl._fn.Tween.resumeAllTweens(manager);
 #elseif cpp
@@ -55,7 +55,7 @@ inline function resumeAllTweens(manager:TweenManager):Void {
 	#error "flight.Tween: no backend for this target."
 #end
 }
-inline function stopAllTweens(manager:TweenManager, options:StopTweenOptions):Void {
+extern inline function stopAllTweens(manager:TweenManager, options:StopTweenOptions):Void {
 #if hl
 	flight._hl._fn.Tween.stopAllTweens(manager, options);
 #elseif cpp
@@ -66,7 +66,7 @@ inline function stopAllTweens(manager:TweenManager, options:StopTweenOptions):Vo
 	#error "flight.Tween: no backend for this target."
 #end
 }
-inline function createTweenManager(options:TweenManagerOptions):TweenManager {
+extern inline function createTweenManager(options:TweenManagerOptions):TweenManager {
 #if hl
 	return flight._hl._fn.Tween.createTweenManager(options);
 #elseif cpp
@@ -77,7 +77,7 @@ inline function createTweenManager(options:TweenManagerOptions):TweenManager {
 	#error "flight.Tween: no backend for this target."
 #end
 }
-inline function defaultManager(context:TweenContext):TweenManager {
+extern inline function defaultManager(context:TweenContext):TweenManager {
 #if hl
 	return flight._hl._fn.Tween.defaultManager(context);
 #elseif cpp
@@ -88,7 +88,7 @@ inline function defaultManager(context:TweenContext):TweenManager {
 	#error "flight.Tween: no backend for this target."
 #end
 }
-inline function createTweenContext():TweenContext {
+extern inline function createTweenContext():TweenContext {
 #if hl
 	return flight._hl._fn.Tween.createTweenContext();
 #elseif cpp
@@ -99,7 +99,7 @@ inline function createTweenContext():TweenContext {
 	#error "flight.Tween: no backend for this target."
 #end
 }
-inline function updateTweens(manager:TweenManager, deltaTime:Float):Void {
+extern inline function updateTweens(manager:TweenManager, deltaTime:Float):Void {
 #if hl
 	flight._hl._fn.Tween.updateTweens(manager, deltaTime);
 #elseif cpp
@@ -110,7 +110,7 @@ inline function updateTweens(manager:TweenManager, deltaTime:Float):Void {
 	#error "flight.Tween: no backend for this target."
 #end
 }
-inline function freeTweenManager(ptr:TweenManager):Void {
+extern inline function freeTweenManager(ptr:TweenManager):Void {
 #if hl
 	flight._hl._fn.Tween.freeTweenManager(ptr);
 #elseif cpp
@@ -121,7 +121,7 @@ inline function freeTweenManager(ptr:TweenManager):Void {
 	#error "flight.Tween: no backend for this target."
 #end
 }
-inline function freeTweenContext(ptr:TweenContext):Void {
+extern inline function freeTweenContext(ptr:TweenContext):Void {
 #if hl
 	flight._hl._fn.Tween.freeTweenContext(ptr);
 #elseif cpp

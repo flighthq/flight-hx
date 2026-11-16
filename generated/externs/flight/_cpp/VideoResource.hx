@@ -10,5 +10,5 @@ abstract VideoResource(cpp.Star<cpp.Void>) {
 
 	inline function get_ownsElement():Bool return VideoResource_Ffi.get_ownsElement(this);
 
-	inline function set_ownsElement(value:Bool):Bool return VideoResource_Ffi.set_ownsElement(this, value);
+	inline function set_ownsElement(value:Bool):Bool { VideoResource_Ffi.set_ownsElement(this, value); return value; }
 }

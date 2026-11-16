@@ -1,6 +1,6 @@
 package flight;
 
-inline function booleanPaths(out:Path, pathBooleanKernel:PathBooleanKernel, subject:Path, clip:Path, operation:flight.PathBooleanOperation, options:PathBooleanOptions):Void {
+extern inline function booleanPaths(out:Path, pathBooleanKernel:PathBooleanKernel, subject:Path, clip:Path, operation:flight.PathBooleanOperation, options:PathBooleanOptions):Void {
 #if hl
 	flight._hl._fn.PathBoolean.booleanPaths(out, pathBooleanKernel, subject, clip, operation, options);
 #elseif cpp
@@ -11,7 +11,7 @@ inline function booleanPaths(out:Path, pathBooleanKernel:PathBooleanKernel, subj
 	#error "flight.PathBoolean: no backend for this target."
 #end
 }
-inline function differencePaths(out:Path, pathBooleanKernel:PathBooleanKernel, a:Path, b:Path, options:PathBooleanOptions):Void {
+extern inline function differencePaths(out:Path, pathBooleanKernel:PathBooleanKernel, a:Path, b:Path, options:PathBooleanOptions):Void {
 #if hl
 	flight._hl._fn.PathBoolean.differencePaths(out, pathBooleanKernel, a, b, options);
 #elseif cpp
@@ -22,7 +22,7 @@ inline function differencePaths(out:Path, pathBooleanKernel:PathBooleanKernel, a
 	#error "flight.PathBoolean: no backend for this target."
 #end
 }
-inline function intersectPaths(out:Path, pathBooleanKernel:PathBooleanKernel, a:Path, b:Path, options:PathBooleanOptions):Void {
+extern inline function intersectPaths(out:Path, pathBooleanKernel:PathBooleanKernel, a:Path, b:Path, options:PathBooleanOptions):Void {
 #if hl
 	flight._hl._fn.PathBoolean.intersectPaths(out, pathBooleanKernel, a, b, options);
 #elseif cpp
@@ -33,7 +33,7 @@ inline function intersectPaths(out:Path, pathBooleanKernel:PathBooleanKernel, a:
 	#error "flight.PathBoolean: no backend for this target."
 #end
 }
-inline function unionPaths(out:Path, pathBooleanKernel:PathBooleanKernel, a:Path, b:Path, options:PathBooleanOptions):Void {
+extern inline function unionPaths(out:Path, pathBooleanKernel:PathBooleanKernel, a:Path, b:Path, options:PathBooleanOptions):Void {
 #if hl
 	flight._hl._fn.PathBoolean.unionPaths(out, pathBooleanKernel, a, b, options);
 #elseif cpp
@@ -44,7 +44,7 @@ inline function unionPaths(out:Path, pathBooleanKernel:PathBooleanKernel, a:Path
 	#error "flight.PathBoolean: no backend for this target."
 #end
 }
-inline function xorPaths(out:Path, pathBooleanKernel:PathBooleanKernel, a:Path, b:Path, options:PathBooleanOptions):Void {
+extern inline function xorPaths(out:Path, pathBooleanKernel:PathBooleanKernel, a:Path, b:Path, options:PathBooleanOptions):Void {
 #if hl
 	flight._hl._fn.PathBoolean.xorPaths(out, pathBooleanKernel, a, b, options);
 #elseif cpp
@@ -55,7 +55,7 @@ inline function xorPaths(out:Path, pathBooleanKernel:PathBooleanKernel, a:Path, 
 	#error "flight.PathBoolean: no backend for this target."
 #end
 }
-inline function explainOffsetPath(pathBooleanKernel:PathBooleanKernel, path:Path, delta:Float, options:PathOffsetOptions):PathBooleanExplanation {
+extern inline function explainOffsetPath(pathBooleanKernel:PathBooleanKernel, path:Path, delta:Float, options:PathOffsetOptions):PathBooleanExplanation {
 #if hl
 	return flight._hl._fn.PathBoolean.explainOffsetPath(pathBooleanKernel, path, delta, options);
 #elseif cpp
@@ -66,7 +66,7 @@ inline function explainOffsetPath(pathBooleanKernel:PathBooleanKernel, path:Path
 	#error "flight.PathBoolean: no backend for this target."
 #end
 }
-inline function explainSimplifyPath(pathBooleanKernel:PathBooleanKernel, path:Path, options:PathBooleanOptions):PathBooleanExplanation {
+extern inline function explainSimplifyPath(pathBooleanKernel:PathBooleanKernel, path:Path, options:PathBooleanOptions):PathBooleanExplanation {
 #if hl
 	return flight._hl._fn.PathBoolean.explainSimplifyPath(pathBooleanKernel, path, options);
 #elseif cpp
@@ -77,7 +77,7 @@ inline function explainSimplifyPath(pathBooleanKernel:PathBooleanKernel, path:Pa
 	#error "flight.PathBoolean: no backend for this target."
 #end
 }
-inline function createMartinezPathBooleanKernel():PathBooleanKernel {
+extern inline function createMartinezPathBooleanKernel():PathBooleanKernel {
 #if hl
 	return flight._hl._fn.PathBoolean.createMartinezPathBooleanKernel();
 #elseif cpp
@@ -88,7 +88,7 @@ inline function createMartinezPathBooleanKernel():PathBooleanKernel {
 	#error "flight.PathBoolean: no backend for this target."
 #end
 }
-inline function getPathBooleanFillRuleString(value:flight.PathBooleanFillRule):String {
+extern inline function getPathBooleanFillRuleString(value:flight.PathBooleanFillRule):String {
 #if hl
 	return cast flight._hl._fn.PathBoolean.getPathBooleanFillRuleString(value);
 #elseif cpp
@@ -99,7 +99,7 @@ inline function getPathBooleanFillRuleString(value:flight.PathBooleanFillRule):S
 	#error "flight.PathBoolean: no backend for this target."
 #end
 }
-inline function getPathBooleanOperationString(value:flight.PathBooleanOperation):String {
+extern inline function getPathBooleanOperationString(value:flight.PathBooleanOperation):String {
 #if hl
 	return cast flight._hl._fn.PathBoolean.getPathBooleanOperationString(value);
 #elseif cpp
@@ -110,7 +110,7 @@ inline function getPathBooleanOperationString(value:flight.PathBooleanOperation)
 	#error "flight.PathBoolean: no backend for this target."
 #end
 }
-inline function parsePathBooleanFillRule(value:String):Int {
+extern inline function parsePathBooleanFillRule(value:String):Int {
 #if hl
 	return flight._hl._fn.PathBoolean.parsePathBooleanFillRule(cast value);
 #elseif cpp
@@ -121,7 +121,7 @@ inline function parsePathBooleanFillRule(value:String):Int {
 	#error "flight.PathBoolean: no backend for this target."
 #end
 }
-inline function parsePathBooleanOperation(value:String):Int {
+extern inline function parsePathBooleanOperation(value:String):Int {
 #if hl
 	return flight._hl._fn.PathBoolean.parsePathBooleanOperation(cast value);
 #elseif cpp
@@ -132,7 +132,7 @@ inline function parsePathBooleanOperation(value:String):Int {
 	#error "flight.PathBoolean: no backend for this target."
 #end
 }
-inline function offsetPath(out:Path, pathBooleanKernel:PathBooleanKernel, path:Path, delta:Float, options:PathOffsetOptions):Void {
+extern inline function offsetPath(out:Path, pathBooleanKernel:PathBooleanKernel, path:Path, delta:Float, options:PathOffsetOptions):Void {
 #if hl
 	flight._hl._fn.PathBoolean.offsetPath(out, pathBooleanKernel, path, delta, options);
 #elseif cpp
@@ -143,7 +143,7 @@ inline function offsetPath(out:Path, pathBooleanKernel:PathBooleanKernel, path:P
 	#error "flight.PathBoolean: no backend for this target."
 #end
 }
-inline function getPathBooleanExplanationOperationString(value:flight.PathBooleanExplanationOperation):String {
+extern inline function getPathBooleanExplanationOperationString(value:flight.PathBooleanExplanationOperation):String {
 #if hl
 	return cast flight._hl._fn.PathBoolean.getPathBooleanExplanationOperationString(value);
 #elseif cpp
@@ -154,7 +154,7 @@ inline function getPathBooleanExplanationOperationString(value:flight.PathBoolea
 	#error "flight.PathBoolean: no backend for this target."
 #end
 }
-inline function getPathBooleanExplanationReasonString(value:flight.PathBooleanExplanationReason):String {
+extern inline function getPathBooleanExplanationReasonString(value:flight.PathBooleanExplanationReason):String {
 #if hl
 	return cast flight._hl._fn.PathBoolean.getPathBooleanExplanationReasonString(value);
 #elseif cpp
@@ -165,7 +165,7 @@ inline function getPathBooleanExplanationReasonString(value:flight.PathBooleanEx
 	#error "flight.PathBoolean: no backend for this target."
 #end
 }
-inline function getPathOffsetEndString(value:flight.PathOffsetEnd):String {
+extern inline function getPathOffsetEndString(value:flight.PathOffsetEnd):String {
 #if hl
 	return cast flight._hl._fn.PathBoolean.getPathOffsetEndString(value);
 #elseif cpp
@@ -176,7 +176,7 @@ inline function getPathOffsetEndString(value:flight.PathOffsetEnd):String {
 	#error "flight.PathBoolean: no backend for this target."
 #end
 }
-inline function getPathOffsetJoinString(value:flight.PathOffsetJoin):String {
+extern inline function getPathOffsetJoinString(value:flight.PathOffsetJoin):String {
 #if hl
 	return cast flight._hl._fn.PathBoolean.getPathOffsetJoinString(value);
 #elseif cpp
@@ -187,7 +187,7 @@ inline function getPathOffsetJoinString(value:flight.PathOffsetJoin):String {
 	#error "flight.PathBoolean: no backend for this target."
 #end
 }
-inline function parsePathBooleanExplanationOperation(value:String):Int {
+extern inline function parsePathBooleanExplanationOperation(value:String):Int {
 #if hl
 	return flight._hl._fn.PathBoolean.parsePathBooleanExplanationOperation(cast value);
 #elseif cpp
@@ -198,7 +198,7 @@ inline function parsePathBooleanExplanationOperation(value:String):Int {
 	#error "flight.PathBoolean: no backend for this target."
 #end
 }
-inline function parsePathBooleanExplanationReason(value:String):Int {
+extern inline function parsePathBooleanExplanationReason(value:String):Int {
 #if hl
 	return flight._hl._fn.PathBoolean.parsePathBooleanExplanationReason(cast value);
 #elseif cpp
@@ -209,7 +209,7 @@ inline function parsePathBooleanExplanationReason(value:String):Int {
 	#error "flight.PathBoolean: no backend for this target."
 #end
 }
-inline function parsePathOffsetEnd(value:String):Int {
+extern inline function parsePathOffsetEnd(value:String):Int {
 #if hl
 	return flight._hl._fn.PathBoolean.parsePathOffsetEnd(cast value);
 #elseif cpp
@@ -220,7 +220,7 @@ inline function parsePathOffsetEnd(value:String):Int {
 	#error "flight.PathBoolean: no backend for this target."
 #end
 }
-inline function parsePathOffsetJoin(value:String):Int {
+extern inline function parsePathOffsetJoin(value:String):Int {
 #if hl
 	return flight._hl._fn.PathBoolean.parsePathOffsetJoin(cast value);
 #elseif cpp
@@ -231,7 +231,7 @@ inline function parsePathOffsetJoin(value:String):Int {
 	#error "flight.PathBoolean: no backend for this target."
 #end
 }
-inline function simplifyPath(out:Path, pathBooleanKernel:PathBooleanKernel, path:Path, options:PathBooleanOptions):Void {
+extern inline function simplifyPath(out:Path, pathBooleanKernel:PathBooleanKernel, path:Path, options:PathBooleanOptions):Void {
 #if hl
 	flight._hl._fn.PathBoolean.simplifyPath(out, pathBooleanKernel, path, options);
 #elseif cpp
@@ -242,7 +242,7 @@ inline function simplifyPath(out:Path, pathBooleanKernel:PathBooleanKernel, path
 	#error "flight.PathBoolean: no backend for this target."
 #end
 }
-inline function freePathBooleanExplanation(ptr:PathBooleanExplanation):Void {
+extern inline function freePathBooleanExplanation(ptr:PathBooleanExplanation):Void {
 #if hl
 	flight._hl._fn.PathBoolean.freePathBooleanExplanation(ptr);
 #elseif cpp
@@ -253,7 +253,7 @@ inline function freePathBooleanExplanation(ptr:PathBooleanExplanation):Void {
 	#error "flight.PathBoolean: no backend for this target."
 #end
 }
-inline function freePathBooleanKernel(ptr:PathBooleanKernel):Void {
+extern inline function freePathBooleanKernel(ptr:PathBooleanKernel):Void {
 #if hl
 	flight._hl._fn.PathBoolean.freePathBooleanKernel(ptr);
 #elseif cpp

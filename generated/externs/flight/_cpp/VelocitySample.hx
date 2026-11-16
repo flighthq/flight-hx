@@ -12,10 +12,10 @@ abstract VelocitySample(cpp.Star<cpp.Void>) {
 
 	inline function get_lastFrameId():Int return VelocitySample_Ffi.get_lastFrameId(this);
 
-	inline function set_lastFrameId(value:Int):Int return VelocitySample_Ffi.set_lastFrameId(this, value);
+	inline function set_lastFrameId(value:Int):Int { VelocitySample_Ffi.set_lastFrameId(this, value); return value; }
 	public var explicitFrameId(get, set):Int;
 
 	inline function get_explicitFrameId():Int return VelocitySample_Ffi.get_explicitFrameId(this);
 
-	inline function set_explicitFrameId(value:Int):Int return VelocitySample_Ffi.set_explicitFrameId(this, value);
+	inline function set_explicitFrameId(value:Int):Int { VelocitySample_Ffi.set_explicitFrameId(this, value); return value; }
 }

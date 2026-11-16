@@ -25,7 +25,7 @@ abstract Clock(hl.Bytes) {
 	inline public function getEffectiveScale():Float {
 		return flight._hl._fn.Clock.getClockEffectiveScale(cast this);
 	}
-	inline public function getParent():Dynamic {
+	inline public function getParent():hl.Bytes {
 		return flight._hl._fn.Clock.getClockParent(cast this);
 	}
 	inline public function isEffectivelyPaused():Bool {

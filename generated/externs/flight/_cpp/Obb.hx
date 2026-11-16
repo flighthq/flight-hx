@@ -28,75 +28,75 @@ abstract Obb(cpp.Star<cpp.Void>) {
 
 	inline function get_centerX():Single return Obb_Ffi.get_centerX(this);
 
-	inline function set_centerX(value:Single):Single return Obb_Ffi.set_centerX(this, value);
+	inline function set_centerX(value:Single):Single { Obb_Ffi.set_centerX(this, value); return value; }
 	public var centerY(get, set):Single;
 
 	inline function get_centerY():Single return Obb_Ffi.get_centerY(this);
 
-	inline function set_centerY(value:Single):Single return Obb_Ffi.set_centerY(this, value);
+	inline function set_centerY(value:Single):Single { Obb_Ffi.set_centerY(this, value); return value; }
 	public var centerZ(get, set):Single;
 
 	inline function get_centerZ():Single return Obb_Ffi.get_centerZ(this);
 
-	inline function set_centerZ(value:Single):Single return Obb_Ffi.set_centerZ(this, value);
+	inline function set_centerZ(value:Single):Single { Obb_Ffi.set_centerZ(this, value); return value; }
 	public var halfExtentX(get, set):Single;
 
 	inline function get_halfExtentX():Single return Obb_Ffi.get_halfExtentX(this);
 
-	inline function set_halfExtentX(value:Single):Single return Obb_Ffi.set_halfExtentX(this, value);
+	inline function set_halfExtentX(value:Single):Single { Obb_Ffi.set_halfExtentX(this, value); return value; }
 	public var halfExtentY(get, set):Single;
 
 	inline function get_halfExtentY():Single return Obb_Ffi.get_halfExtentY(this);
 
-	inline function set_halfExtentY(value:Single):Single return Obb_Ffi.set_halfExtentY(this, value);
+	inline function set_halfExtentY(value:Single):Single { Obb_Ffi.set_halfExtentY(this, value); return value; }
 	public var halfExtentZ(get, set):Single;
 
 	inline function get_halfExtentZ():Single return Obb_Ffi.get_halfExtentZ(this);
 
-	inline function set_halfExtentZ(value:Single):Single return Obb_Ffi.set_halfExtentZ(this, value);
+	inline function set_halfExtentZ(value:Single):Single { Obb_Ffi.set_halfExtentZ(this, value); return value; }
 	public var orientationX(get, set):Single;
 
 	inline function get_orientationX():Single return Obb_Ffi.get_orientationX(this);
 
-	inline function set_orientationX(value:Single):Single return Obb_Ffi.set_orientationX(this, value);
+	inline function set_orientationX(value:Single):Single { Obb_Ffi.set_orientationX(this, value); return value; }
 	public var orientationY(get, set):Single;
 
 	inline function get_orientationY():Single return Obb_Ffi.get_orientationY(this);
 
-	inline function set_orientationY(value:Single):Single return Obb_Ffi.set_orientationY(this, value);
+	inline function set_orientationY(value:Single):Single { Obb_Ffi.set_orientationY(this, value); return value; }
 	public var orientationZ(get, set):Single;
 
 	inline function get_orientationZ():Single return Obb_Ffi.get_orientationZ(this);
 
-	inline function set_orientationZ(value:Single):Single return Obb_Ffi.set_orientationZ(this, value);
+	inline function set_orientationZ(value:Single):Single { Obb_Ffi.set_orientationZ(this, value); return value; }
 	public var orientationW(get, set):Single;
 
 	inline function get_orientationW():Single return Obb_Ffi.get_orientationW(this);
 
-	inline function set_orientationW(value:Single):Single return Obb_Ffi.set_orientationW(this, value);
+	inline function set_orientationW(value:Single):Single { Obb_Ffi.set_orientationW(this, value); return value; }
 
-	static inline public function create(centerX:Single, centerY:Single, centerZ:Single, halfExtentX:Single, halfExtentY:Single, halfExtentZ:Single, orientationX:Single, orientationY:Single, orientationZ:Single, orientationW:Single):flight._cpp.Obb {
+	static extern inline public function create(centerX:Single, centerY:Single, centerZ:Single, halfExtentX:Single, halfExtentY:Single, halfExtentZ:Single, orientationX:Single, orientationY:Single, orientationZ:Single, orientationW:Single):flight._cpp.Obb {
 		return flight._cpp._fn.Geometry.createObb(centerX, centerY, centerZ, halfExtentX, halfExtentY, halfExtentZ, orientationX, orientationY, orientationZ, orientationW);
 	}
-	inline public function getClosestPointOn(out:flight._cpp.Vector3, point:flight._cpp.Vector3):Void {
+	extern inline public function getClosestPointOn(out:flight._cpp.Vector3, point:flight._cpp.Vector3):Void {
 		flight._cpp._fn.Geometry.getClosestPointOnObb(out, cast this, point);
 	}
-	inline public function isIntersectingAabb(aabb:flight._cpp.Aabb):Bool {
+	extern inline public function isIntersectingAabb(aabb:flight._cpp.Aabb):Bool {
 		return flight._cpp._fn.Geometry.isObbIntersectingAabb(cast this, aabb);
 	}
-	inline public function isObbIntersecting(b:flight._cpp.Obb):Bool {
+	extern inline public function isObbIntersecting(b:flight._cpp.Obb):Bool {
 		return flight._cpp._fn.Geometry.isObbIntersectingObb(cast this, b);
 	}
-	inline public function isIntersectingSphere(sphere:flight._cpp.BoundingSphere):Bool {
+	extern inline public function isIntersectingSphere(sphere:flight._cpp.BoundingSphere):Bool {
 		return flight._cpp._fn.Geometry.isObbIntersectingSphere(cast this, sphere);
 	}
-	inline public function set(centerX:Single, centerY:Single, centerZ:Single, halfExtentX:Single, halfExtentY:Single, halfExtentZ:Single, orientationX:Single, orientationY:Single, orientationZ:Single, orientationW:Single):Void {
+	extern inline public function set(centerX:Single, centerY:Single, centerZ:Single, halfExtentX:Single, halfExtentY:Single, halfExtentZ:Single, orientationX:Single, orientationY:Single, orientationZ:Single, orientationW:Single):Void {
 		flight._cpp._fn.Geometry.setObb(cast this, centerX, centerY, centerZ, halfExtentX, halfExtentY, halfExtentZ, orientationX, orientationY, orientationZ, orientationW);
 	}
-	inline public function transformByMatrix4(obb:flight._cpp.Obb, m:flight._cpp.Matrix4):Void {
+	extern inline public function transformByMatrix4(obb:flight._cpp.Obb, m:flight._cpp.Matrix4):Void {
 		flight._cpp._fn.Geometry.transformObbByMatrix4(cast this, obb, m);
 	}
-	inline public function free():Void {
+	extern inline public function free():Void {
 		flight._cpp._fn.Geometry.freeObb(cast this);
 	}
 }

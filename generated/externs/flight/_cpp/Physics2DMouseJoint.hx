@@ -18,25 +18,25 @@ abstract Physics2DMouseJoint(cpp.Star<cpp.Void>) {
 
 	inline function get_dampingRatio():Single return Physics2DMouseJoint_Ffi.get_dampingRatio(this);
 
-	inline function set_dampingRatio(value:Single):Single return Physics2DMouseJoint_Ffi.set_dampingRatio(this, value);
+	inline function set_dampingRatio(value:Single):Single { Physics2DMouseJoint_Ffi.set_dampingRatio(this, value); return value; }
 	public var frequencyHz(get, set):Single;
 
 	inline function get_frequencyHz():Single return Physics2DMouseJoint_Ffi.get_frequencyHz(this);
 
-	inline function set_frequencyHz(value:Single):Single return Physics2DMouseJoint_Ffi.set_frequencyHz(this, value);
+	inline function set_frequencyHz(value:Single):Single { Physics2DMouseJoint_Ffi.set_frequencyHz(this, value); return value; }
 	public var maxForce(get, set):Single;
 
 	inline function get_maxForce():Single return Physics2DMouseJoint_Ffi.get_maxForce(this);
 
-	inline function set_maxForce(value:Single):Single return Physics2DMouseJoint_Ffi.set_maxForce(this, value);
+	inline function set_maxForce(value:Single):Single { Physics2DMouseJoint_Ffi.set_maxForce(this, value); return value; }
 	public var targetX(get, set):Single;
 
 	inline function get_targetX():Single return Physics2DMouseJoint_Ffi.get_targetX(this);
 
-	inline function set_targetX(value:Single):Single return Physics2DMouseJoint_Ffi.set_targetX(this, value);
+	inline function set_targetX(value:Single):Single { Physics2DMouseJoint_Ffi.set_targetX(this, value); return value; }
 	public var targetY(get, set):Single;
 
 	inline function get_targetY():Single return Physics2DMouseJoint_Ffi.get_targetY(this);
 
-	inline function set_targetY(value:Single):Single return Physics2DMouseJoint_Ffi.set_targetY(this, value);
+	inline function set_targetY(value:Single):Single { Physics2DMouseJoint_Ffi.set_targetY(this, value); return value; }
 }

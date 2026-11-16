@@ -12,10 +12,10 @@ abstract SignalTimerState(cpp.Star<cpp.Void>) {
 
 	inline function get_nowMs():Float return SignalTimerState_Ffi.get_nowMs(this);
 
-	inline function set_nowMs(value:Float):Float return SignalTimerState_Ffi.set_nowMs(this, value);
+	inline function set_nowMs(value:Float):Float { SignalTimerState_Ffi.set_nowMs(this, value); return value; }
 	public var nextId(get, set):haxe.Int64;
 
 	inline function get_nextId():haxe.Int64 return SignalTimerState_Ffi.get_nextId(this);
 
-	inline function set_nextId(value:haxe.Int64):haxe.Int64 return SignalTimerState_Ffi.set_nextId(this, value);
+	inline function set_nextId(value:haxe.Int64):haxe.Int64 { SignalTimerState_Ffi.set_nextId(this, value); return value; }
 }

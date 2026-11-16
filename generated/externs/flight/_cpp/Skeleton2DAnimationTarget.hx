@@ -10,5 +10,5 @@ abstract Skeleton2DAnimationTarget(cpp.Star<cpp.Void>) {
 
 	inline function get_boneIndex():Int return Skeleton2DAnimationTarget_Ffi.get_boneIndex(this);
 
-	inline function set_boneIndex(value:Int):Int return Skeleton2DAnimationTarget_Ffi.set_boneIndex(this, value);
+	inline function set_boneIndex(value:Int):Int { Skeleton2DAnimationTarget_Ffi.set_boneIndex(this, value); return value; }
 }

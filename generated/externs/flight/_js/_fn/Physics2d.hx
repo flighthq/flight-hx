@@ -7,7 +7,7 @@ extern class Physics2d {
 	@:native("flight_synchronize_physics2d_swept_broadphase")
 	public static function synchronizePhysics2dSweptBroadphase(world:flight._js.Physics2DWorld, dt:Float):Void;
 	@:native("flight_create_physics2d_collider_world_shape")
-	public static function createPhysics2dColliderWorldShape(local:flight._js.CollisionShape2D):Int;
+	public static function createPhysics2dColliderWorldShape(local:flight._js.CollisionShape2D):flight._js.CollisionShape2D;
 	@:native("flight_update_physics2d_collider_world_shape")
 	public static function updatePhysics2dColliderWorldShape(collider:flight._js.Physics2DCollider, body:flight._js.RigidBody2D):Void;
 	@:native("flight_write_physics2d_collider_bounds")
@@ -21,7 +21,7 @@ extern class Physics2d {
 	@:native("flight_disable_physics2d_guards")
 	public static function disablePhysics2dGuards(guards:flight._js.Physics2DGuardState):Void;
 	@:native("flight_enable_physics2d_guards")
-	public static function enablePhysics2dGuards(guards:flight._js.Physics2DGuardState, logState:Dynamic, clock:flight._js.Physics2DGuardClock):Void;
+	public static function enablePhysics2dGuards(guards:flight._js.Physics2DGuardState, logState:Dynamic, clockFn:Dynamic, clockCtx:Dynamic):Void;
 	@:native("flight_explain_physics2d_collision")
 	public static function explainPhysics2dCollision(world:flight._js.Physics2DWorld):flight._js.Physics2DCollisionExplanation;
 	@:native("flight_explain_physics2d_joints")
@@ -202,6 +202,8 @@ extern class Physics2d {
 	public static function queryPhysics2dRegion(out:flight._js.Physics2DQueryResult, world:flight._js.Physics2DWorld, region:flight._js.SpatialAabb2D, filter:flight._js.Physics2DQueryFilter):Void;
 	@:native("flight_query_physics2d_shape_cast")
 	public static function queryPhysics2dShapeCast(out:flight._js.Physics2DShapeCastResult, world:flight._js.Physics2DWorld, registry:flight._js.CollisionRegistry2D, shape:flight._js.CollisionShape2D, dx:Float, dy:Float, maxFraction:Float, filter:flight._js.Physics2DQueryFilter):Void;
+	@:native("flight_free_collision_shape2_d")
+	public static function freeCollisionShape2D(ptr:flight._js.CollisionShape2D):Void;
 	@:native("flight_free_physics2_ddebug_geometry")
 	public static function freePhysics2DdebugGeometry(ptr:flight._js.Physics2DDebugGeometry):Void;
 	@:native("flight_free_physics2_dcollision_explanation")

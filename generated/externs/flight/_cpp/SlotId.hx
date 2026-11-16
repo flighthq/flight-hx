@@ -10,5 +10,5 @@ abstract SlotId(cpp.Star<cpp.Void>) {
 
 	inline function get_value():Int return SlotId_Ffi.get_value(this);
 
-	inline function set_value(value:Int):Int return SlotId_Ffi.set_value(this, value);
+	inline function set_value(value:Int):Int { SlotId_Ffi.set_value(this, value); return value; }
 }

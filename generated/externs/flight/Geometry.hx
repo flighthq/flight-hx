@@ -1,6 +1,6 @@
 package flight;
 
-inline function createAabb(minX:Float, minY:Float, minZ:Float, maxX:Float, maxY:Float, maxZ:Float):Aabb {
+extern inline function createAabb(minX:Float, minY:Float, minZ:Float, maxX:Float, maxY:Float, maxZ:Float):Aabb {
 #if hl
 	return flight._hl._fn.Geometry.createAabb(minX, minY, minZ, maxX, maxY, maxZ);
 #elseif cpp
@@ -11,7 +11,7 @@ inline function createAabb(minX:Float, minY:Float, minZ:Float, maxX:Float, maxY:
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function cloneAabb(source:Aabb):Aabb {
+extern inline function cloneAabb(source:Aabb):Aabb {
 #if hl
 	return flight._hl._fn.Geometry.cloneAabb(source);
 #elseif cpp
@@ -22,7 +22,7 @@ inline function cloneAabb(source:Aabb):Aabb {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function containsAabbPoint(aabb:Aabb, point:Vector3):Bool {
+extern inline function containsAabbPoint(aabb:Aabb, point:Vector3):Bool {
 #if hl
 	return flight._hl._fn.Geometry.containsAabbPoint(aabb, point);
 #elseif cpp
@@ -33,7 +33,7 @@ inline function containsAabbPoint(aabb:Aabb, point:Vector3):Bool {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function copyAabb(out:Aabb, source:Aabb):Void {
+extern inline function copyAabb(out:Aabb, source:Aabb):Void {
 #if hl
 	flight._hl._fn.Geometry.copyAabb(out, source);
 #elseif cpp
@@ -44,7 +44,7 @@ inline function copyAabb(out:Aabb, source:Aabb):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function expandAabbByPoint(out:Aabb, aabb:Aabb, point:Vector3):Void {
+extern inline function expandAabbByPoint(out:Aabb, aabb:Aabb, point:Vector3):Void {
 #if hl
 	flight._hl._fn.Geometry.expandAabbByPoint(out, aabb, point);
 #elseif cpp
@@ -55,7 +55,7 @@ inline function expandAabbByPoint(out:Aabb, aabb:Aabb, point:Vector3):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function expandAabbBySphere(out:Aabb, aabb:Aabb, sphere:BoundingSphere):Void {
+extern inline function expandAabbBySphere(out:Aabb, aabb:Aabb, sphere:BoundingSphere):Void {
 #if hl
 	flight._hl._fn.Geometry.expandAabbBySphere(out, aabb, sphere);
 #elseif cpp
@@ -66,7 +66,7 @@ inline function expandAabbBySphere(out:Aabb, aabb:Aabb, sphere:BoundingSphere):V
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function getAabbCenter(out:Vector3, aabb:Aabb):Void {
+extern inline function getAabbCenter(out:Vector3, aabb:Aabb):Void {
 #if hl
 	flight._hl._fn.Geometry.getAabbCenter(out, aabb);
 #elseif cpp
@@ -77,7 +77,7 @@ inline function getAabbCenter(out:Vector3, aabb:Aabb):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function getAabbExtents(out:Vector3, aabb:Aabb):Void {
+extern inline function getAabbExtents(out:Vector3, aabb:Aabb):Void {
 #if hl
 	flight._hl._fn.Geometry.getAabbExtents(out, aabb);
 #elseif cpp
@@ -88,7 +88,7 @@ inline function getAabbExtents(out:Vector3, aabb:Aabb):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function getAabbSize(out:Vector3, aabb:Aabb):Void {
+extern inline function getAabbSize(out:Vector3, aabb:Aabb):Void {
 #if hl
 	flight._hl._fn.Geometry.getAabbSize(out, aabb);
 #elseif cpp
@@ -99,7 +99,7 @@ inline function getAabbSize(out:Vector3, aabb:Aabb):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function getClosestPointOnAabb(out:Vector3, aabb:Aabb, point:Vector3):Void {
+extern inline function getClosestPointOnAabb(out:Vector3, aabb:Aabb, point:Vector3):Void {
 #if hl
 	flight._hl._fn.Geometry.getClosestPointOnAabb(out, aabb, point);
 #elseif cpp
@@ -110,7 +110,7 @@ inline function getClosestPointOnAabb(out:Vector3, aabb:Aabb, point:Vector3):Voi
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function intersectAabb(out:Aabb, a:Aabb, b:Aabb):Void {
+extern inline function intersectAabb(out:Aabb, a:Aabb, b:Aabb):Void {
 #if hl
 	flight._hl._fn.Geometry.intersectAabb(out, a, b);
 #elseif cpp
@@ -121,7 +121,7 @@ inline function intersectAabb(out:Aabb, a:Aabb, b:Aabb):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function isAabbIntersectingAabb(a:Aabb, b:Aabb):Bool {
+extern inline function isAabbIntersectingAabb(a:Aabb, b:Aabb):Bool {
 #if hl
 	return flight._hl._fn.Geometry.isAabbIntersectingAabb(a, b);
 #elseif cpp
@@ -132,7 +132,7 @@ inline function isAabbIntersectingAabb(a:Aabb, b:Aabb):Bool {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function isAabbIntersectingSphere(aabb:Aabb, sphere:BoundingSphere):Bool {
+extern inline function isAabbIntersectingSphere(aabb:Aabb, sphere:BoundingSphere):Bool {
 #if hl
 	return flight._hl._fn.Geometry.isAabbIntersectingSphere(aabb, sphere);
 #elseif cpp
@@ -143,7 +143,7 @@ inline function isAabbIntersectingSphere(aabb:Aabb, sphere:BoundingSphere):Bool 
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function setAabb(out:Aabb, minX:Float, minY:Float, minZ:Float, maxX:Float, maxY:Float, maxZ:Float):Void {
+extern inline function setAabb(out:Aabb, minX:Float, minY:Float, minZ:Float, maxX:Float, maxY:Float, maxZ:Float):Void {
 #if hl
 	flight._hl._fn.Geometry.setAabb(out, minX, minY, minZ, maxX, maxY, maxZ);
 #elseif cpp
@@ -154,7 +154,7 @@ inline function setAabb(out:Aabb, minX:Float, minY:Float, minZ:Float, maxX:Float
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function setAabbFromPoints(out:Aabb, points:Dynamic, pointsLen:Int):Void {
+extern inline function setAabbFromPoints(out:Aabb, points:Dynamic, pointsLen:Int):Void {
 #if hl
 	flight._hl._fn.Geometry.setAabbFromPoints(out, points, pointsLen);
 #elseif cpp
@@ -165,7 +165,7 @@ inline function setAabbFromPoints(out:Aabb, points:Dynamic, pointsLen:Int):Void 
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function transformAabbByMatrix4(out:Aabb, aabb:Aabb, m:Matrix4):Void {
+extern inline function transformAabbByMatrix4(out:Aabb, aabb:Aabb, m:Matrix4):Void {
 #if hl
 	flight._hl._fn.Geometry.transformAabbByMatrix4(out, aabb, m);
 #elseif cpp
@@ -176,7 +176,7 @@ inline function transformAabbByMatrix4(out:Aabb, aabb:Aabb, m:Matrix4):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function unionAabb(out:Aabb, a:Aabb, b:Aabb):Void {
+extern inline function unionAabb(out:Aabb, a:Aabb, b:Aabb):Void {
 #if hl
 	flight._hl._fn.Geometry.unionAabb(out, a, b);
 #elseif cpp
@@ -187,7 +187,7 @@ inline function unionAabb(out:Aabb, a:Aabb, b:Aabb):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function createBoundingSphere(centerX:Float, centerY:Float, centerZ:Float, radius:Float):BoundingSphere {
+extern inline function createBoundingSphere(centerX:Float, centerY:Float, centerZ:Float, radius:Float):BoundingSphere {
 #if hl
 	return flight._hl._fn.Geometry.createBoundingSphere(centerX, centerY, centerZ, radius);
 #elseif cpp
@@ -198,7 +198,7 @@ inline function createBoundingSphere(centerX:Float, centerY:Float, centerZ:Float
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function cloneBoundingSphere(source:BoundingSphere):BoundingSphere {
+extern inline function cloneBoundingSphere(source:BoundingSphere):BoundingSphere {
 #if hl
 	return flight._hl._fn.Geometry.cloneBoundingSphere(source);
 #elseif cpp
@@ -209,7 +209,7 @@ inline function cloneBoundingSphere(source:BoundingSphere):BoundingSphere {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function containsBoundingSpherePoint(sphere:BoundingSphere, point:Vector3):Bool {
+extern inline function containsBoundingSpherePoint(sphere:BoundingSphere, point:Vector3):Bool {
 #if hl
 	return flight._hl._fn.Geometry.containsBoundingSpherePoint(sphere, point);
 #elseif cpp
@@ -220,7 +220,7 @@ inline function containsBoundingSpherePoint(sphere:BoundingSphere, point:Vector3
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function copyBoundingSphere(out:BoundingSphere, source:BoundingSphere):Void {
+extern inline function copyBoundingSphere(out:BoundingSphere, source:BoundingSphere):Void {
 #if hl
 	flight._hl._fn.Geometry.copyBoundingSphere(out, source);
 #elseif cpp
@@ -231,7 +231,7 @@ inline function copyBoundingSphere(out:BoundingSphere, source:BoundingSphere):Vo
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function getClosestPointOnBoundingSphere(out:Vector3, sphere:BoundingSphere, point:Vector3):Void {
+extern inline function getClosestPointOnBoundingSphere(out:Vector3, sphere:BoundingSphere, point:Vector3):Void {
 #if hl
 	flight._hl._fn.Geometry.getClosestPointOnBoundingSphere(out, sphere, point);
 #elseif cpp
@@ -242,7 +242,7 @@ inline function getClosestPointOnBoundingSphere(out:Vector3, sphere:BoundingSphe
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function isBoundingSphereIntersectingBoundingSphere(a:BoundingSphere, b:BoundingSphere):Bool {
+extern inline function isBoundingSphereIntersectingBoundingSphere(a:BoundingSphere, b:BoundingSphere):Bool {
 #if hl
 	return flight._hl._fn.Geometry.isBoundingSphereIntersectingBoundingSphere(a, b);
 #elseif cpp
@@ -253,7 +253,7 @@ inline function isBoundingSphereIntersectingBoundingSphere(a:BoundingSphere, b:B
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function mergeBoundingSphere(out:BoundingSphere, a:BoundingSphere, b:BoundingSphere):Void {
+extern inline function mergeBoundingSphere(out:BoundingSphere, a:BoundingSphere, b:BoundingSphere):Void {
 #if hl
 	flight._hl._fn.Geometry.mergeBoundingSphere(out, a, b);
 #elseif cpp
@@ -264,7 +264,7 @@ inline function mergeBoundingSphere(out:BoundingSphere, a:BoundingSphere, b:Boun
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function setBoundingSphere(out:BoundingSphere, centerX:Float, centerY:Float, centerZ:Float, radius:Float):Void {
+extern inline function setBoundingSphere(out:BoundingSphere, centerX:Float, centerY:Float, centerZ:Float, radius:Float):Void {
 #if hl
 	flight._hl._fn.Geometry.setBoundingSphere(out, centerX, centerY, centerZ, radius);
 #elseif cpp
@@ -275,7 +275,7 @@ inline function setBoundingSphere(out:BoundingSphere, centerX:Float, centerY:Flo
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function setBoundingSphereFromAabb(out:BoundingSphere, aabb:Aabb):Void {
+extern inline function setBoundingSphereFromAabb(out:BoundingSphere, aabb:Aabb):Void {
 #if hl
 	flight._hl._fn.Geometry.setBoundingSphereFromAabb(out, aabb);
 #elseif cpp
@@ -286,7 +286,7 @@ inline function setBoundingSphereFromAabb(out:BoundingSphere, aabb:Aabb):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function transformBoundingSphereByMatrix4(out:BoundingSphere, sphere:BoundingSphere, m:Matrix4):Void {
+extern inline function transformBoundingSphereByMatrix4(out:BoundingSphere, sphere:BoundingSphere, m:Matrix4):Void {
 #if hl
 	flight._hl._fn.Geometry.transformBoundingSphereByMatrix4(out, sphere, m);
 #elseif cpp
@@ -297,7 +297,7 @@ inline function transformBoundingSphereByMatrix4(out:BoundingSphere, sphere:Boun
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function createCapsule(startX:Float, startY:Float, startZ:Float, endX:Float, endY:Float, endZ:Float, radius:Float):Capsule {
+extern inline function createCapsule(startX:Float, startY:Float, startZ:Float, endX:Float, endY:Float, endZ:Float, radius:Float):Capsule {
 #if hl
 	return flight._hl._fn.Geometry.createCapsule(startX, startY, startZ, endX, endY, endZ, radius);
 #elseif cpp
@@ -308,7 +308,7 @@ inline function createCapsule(startX:Float, startY:Float, startZ:Float, endX:Flo
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function getClosestPointOnCapsule(out:Vector3, capsule:Capsule, point:Vector3):Void {
+extern inline function getClosestPointOnCapsule(out:Vector3, capsule:Capsule, point:Vector3):Void {
 #if hl
 	flight._hl._fn.Geometry.getClosestPointOnCapsule(out, capsule, point);
 #elseif cpp
@@ -319,7 +319,7 @@ inline function getClosestPointOnCapsule(out:Vector3, capsule:Capsule, point:Vec
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function intersectRay3dCapsule(ray:Ray3D, capsule:Capsule):Float {
+extern inline function intersectRay3dCapsule(ray:Ray3D, capsule:Capsule):Float {
 #if hl
 	return flight._hl._fn.Geometry.intersectRay3dCapsule(ray, capsule);
 #elseif cpp
@@ -330,7 +330,7 @@ inline function intersectRay3dCapsule(ray:Ray3D, capsule:Capsule):Float {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function isCapsuleIntersectingAabb(capsule:Capsule, aabb:Aabb):Bool {
+extern inline function isCapsuleIntersectingAabb(capsule:Capsule, aabb:Aabb):Bool {
 #if hl
 	return flight._hl._fn.Geometry.isCapsuleIntersectingAabb(capsule, aabb);
 #elseif cpp
@@ -341,7 +341,7 @@ inline function isCapsuleIntersectingAabb(capsule:Capsule, aabb:Aabb):Bool {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function isCapsuleIntersectingCapsule(a:Capsule, b:Capsule):Bool {
+extern inline function isCapsuleIntersectingCapsule(a:Capsule, b:Capsule):Bool {
 #if hl
 	return flight._hl._fn.Geometry.isCapsuleIntersectingCapsule(a, b);
 #elseif cpp
@@ -352,7 +352,7 @@ inline function isCapsuleIntersectingCapsule(a:Capsule, b:Capsule):Bool {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function isCapsuleIntersectingSphere(capsule:Capsule, sphere:BoundingSphere):Bool {
+extern inline function isCapsuleIntersectingSphere(capsule:Capsule, sphere:BoundingSphere):Bool {
 #if hl
 	return flight._hl._fn.Geometry.isCapsuleIntersectingSphere(capsule, sphere);
 #elseif cpp
@@ -363,7 +363,7 @@ inline function isCapsuleIntersectingSphere(capsule:Capsule, sphere:BoundingSphe
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function setCapsule(out:Capsule, startX:Float, startY:Float, startZ:Float, endX:Float, endY:Float, endZ:Float, radius:Float):Void {
+extern inline function setCapsule(out:Capsule, startX:Float, startY:Float, startZ:Float, endX:Float, endY:Float, endZ:Float, radius:Float):Void {
 #if hl
 	flight._hl._fn.Geometry.setCapsule(out, startX, startY, startZ, endX, endY, endZ, radius);
 #elseif cpp
@@ -374,7 +374,7 @@ inline function setCapsule(out:Capsule, startX:Float, startY:Float, startZ:Float
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function areGeometryPoolGuardsEnabled():Bool {
+extern inline function areGeometryPoolGuardsEnabled():Bool {
 #if hl
 	return flight._hl._fn.Geometry.areGeometryPoolGuardsEnabled();
 #elseif cpp
@@ -385,7 +385,7 @@ inline function areGeometryPoolGuardsEnabled():Bool {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function disableGeometryPoolGuards():Void {
+extern inline function disableGeometryPoolGuards():Void {
 #if hl
 	flight._hl._fn.Geometry.disableGeometryPoolGuards();
 #elseif cpp
@@ -396,7 +396,7 @@ inline function disableGeometryPoolGuards():Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function enableGeometryPoolGuards(logState:Dynamic, clockFn:Dynamic, clockCtx:Dynamic):Void {
+extern inline function enableGeometryPoolGuards(logState:Dynamic, clockFn:Dynamic, clockCtx:Dynamic):Void {
 #if hl
 	flight._hl._fn.Geometry.enableGeometryPoolGuards(logState, clockFn, clockCtx);
 #elseif cpp
@@ -407,7 +407,7 @@ inline function enableGeometryPoolGuards(logState:Dynamic, clockFn:Dynamic, cloc
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function createFrustum():Frustum {
+extern inline function createFrustum():Frustum {
 #if hl
 	return flight._hl._fn.Geometry.createFrustum();
 #elseif cpp
@@ -418,7 +418,7 @@ inline function createFrustum():Frustum {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function getFrustumCorners(out:Dynamic, outLen:Int, inverseViewProjection:Matrix4):Void {
+extern inline function getFrustumCorners(out:Dynamic, outLen:Int, inverseViewProjection:Matrix4):Void {
 #if hl
 	flight._hl._fn.Geometry.getFrustumCorners(out, outLen, inverseViewProjection);
 #elseif cpp
@@ -429,7 +429,7 @@ inline function getFrustumCorners(out:Dynamic, outLen:Int, inverseViewProjection
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function isFrustumContainingPoint(frustum:Frustum, point:Vector3):Bool {
+extern inline function isFrustumContainingPoint(frustum:Frustum, point:Vector3):Bool {
 #if hl
 	return flight._hl._fn.Geometry.isFrustumContainingPoint(frustum, point);
 #elseif cpp
@@ -440,7 +440,7 @@ inline function isFrustumContainingPoint(frustum:Frustum, point:Vector3):Bool {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function isFrustumIntersectingAabb(frustum:Frustum, aabb:Aabb):Bool {
+extern inline function isFrustumIntersectingAabb(frustum:Frustum, aabb:Aabb):Bool {
 #if hl
 	return flight._hl._fn.Geometry.isFrustumIntersectingAabb(frustum, aabb);
 #elseif cpp
@@ -451,7 +451,7 @@ inline function isFrustumIntersectingAabb(frustum:Frustum, aabb:Aabb):Bool {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function isFrustumIntersectingObb(frustum:Frustum, obb:Obb):Bool {
+extern inline function isFrustumIntersectingObb(frustum:Frustum, obb:Obb):Bool {
 #if hl
 	return flight._hl._fn.Geometry.isFrustumIntersectingObb(frustum, obb);
 #elseif cpp
@@ -462,7 +462,7 @@ inline function isFrustumIntersectingObb(frustum:Frustum, obb:Obb):Bool {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function isFrustumIntersectingSphere(frustum:Frustum, sphere:BoundingSphere):Bool {
+extern inline function isFrustumIntersectingSphere(frustum:Frustum, sphere:BoundingSphere):Bool {
 #if hl
 	return flight._hl._fn.Geometry.isFrustumIntersectingSphere(frustum, sphere);
 #elseif cpp
@@ -473,7 +473,7 @@ inline function isFrustumIntersectingSphere(frustum:Frustum, sphere:BoundingSphe
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function setFrustumFromMatrix4(out:Frustum, viewProjection:Matrix4):Void {
+extern inline function setFrustumFromMatrix4(out:Frustum, viewProjection:Matrix4):Void {
 #if hl
 	flight._hl._fn.Geometry.setFrustumFromMatrix4(out, viewProjection);
 #elseif cpp
@@ -484,7 +484,7 @@ inline function setFrustumFromMatrix4(out:Frustum, viewProjection:Matrix4):Void 
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function createGradientTransformMatrix(width:Float, height:Float, rotation:Float, tx:Float, ty:Float):Matrix {
+extern inline function createGradientTransformMatrix(width:Float, height:Float, rotation:Float, tx:Float, ty:Float):Matrix {
 #if hl
 	return flight._hl._fn.Geometry.createGradientTransformMatrix(width, height, rotation, tx, ty);
 #elseif cpp
@@ -495,7 +495,7 @@ inline function createGradientTransformMatrix(width:Float, height:Float, rotatio
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function createMatrix(a:Float, b:Float, c:Float, d:Float, tx:Float, ty:Float):Matrix {
+extern inline function createMatrix(a:Float, b:Float, c:Float, d:Float, tx:Float, ty:Float):Matrix {
 #if hl
 	return flight._hl._fn.Geometry.createMatrix(a, b, c, d, tx, ty);
 #elseif cpp
@@ -506,7 +506,7 @@ inline function createMatrix(a:Float, b:Float, c:Float, d:Float, tx:Float, ty:Fl
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function createTransformMatrix(scaleX:Float, scaleY:Float, rotation:Float, tx:Float, ty:Float):Matrix {
+extern inline function createTransformMatrix(scaleX:Float, scaleY:Float, rotation:Float, tx:Float, ty:Float):Matrix {
 #if hl
 	return flight._hl._fn.Geometry.createTransformMatrix(scaleX, scaleY, rotation, tx, ty);
 #elseif cpp
@@ -517,7 +517,7 @@ inline function createTransformMatrix(scaleX:Float, scaleY:Float, rotation:Float
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function cloneMatrix(source:Matrix):Matrix {
+extern inline function cloneMatrix(source:Matrix):Matrix {
 #if hl
 	return flight._hl._fn.Geometry.cloneMatrix(source);
 #elseif cpp
@@ -528,7 +528,7 @@ inline function cloneMatrix(source:Matrix):Matrix {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function copyMatrix(out:Matrix, source:Matrix):Void {
+extern inline function copyMatrix(out:Matrix, source:Matrix):Void {
 #if hl
 	flight._hl._fn.Geometry.copyMatrix(out, source);
 #elseif cpp
@@ -539,7 +539,7 @@ inline function copyMatrix(out:Matrix, source:Matrix):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function copyMatrixColumnFromVector3(out:Matrix, column:Int, source:Vector3):Void {
+extern inline function copyMatrixColumnFromVector3(out:Matrix, column:Int, source:Vector3):Void {
 #if hl
 	flight._hl._fn.Geometry.copyMatrixColumnFromVector3(out, column, source);
 #elseif cpp
@@ -550,7 +550,7 @@ inline function copyMatrixColumnFromVector3(out:Matrix, column:Int, source:Vecto
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function copyMatrixColumnToVector3(out:Vector3, column:Int, source:Matrix):Void {
+extern inline function copyMatrixColumnToVector3(out:Vector3, column:Int, source:Matrix):Void {
 #if hl
 	flight._hl._fn.Geometry.copyMatrixColumnToVector3(out, column, source);
 #elseif cpp
@@ -561,7 +561,7 @@ inline function copyMatrixColumnToVector3(out:Vector3, column:Int, source:Matrix
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function copyMatrixRowFromVector3(out:Matrix, row:Int, source:Vector3):Void {
+extern inline function copyMatrixRowFromVector3(out:Matrix, row:Int, source:Vector3):Void {
 #if hl
 	flight._hl._fn.Geometry.copyMatrixRowFromVector3(out, row, source);
 #elseif cpp
@@ -572,7 +572,7 @@ inline function copyMatrixRowFromVector3(out:Matrix, row:Int, source:Vector3):Vo
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function copyMatrixRowToVector3(out:Vector3, row:Int, source:Matrix):Void {
+extern inline function copyMatrixRowToVector3(out:Vector3, row:Int, source:Matrix):Void {
 #if hl
 	flight._hl._fn.Geometry.copyMatrixRowToVector3(out, row, source);
 #elseif cpp
@@ -583,7 +583,7 @@ inline function copyMatrixRowToVector3(out:Vector3, row:Int, source:Matrix):Void
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function equalsMatrix(a:Matrix, b:Matrix, compareTranslation:Bool):Bool {
+extern inline function equalsMatrix(a:Matrix, b:Matrix, compareTranslation:Bool):Bool {
 #if hl
 	return flight._hl._fn.Geometry.equalsMatrix(a, b, compareTranslation);
 #elseif cpp
@@ -594,7 +594,7 @@ inline function equalsMatrix(a:Matrix, b:Matrix, compareTranslation:Bool):Bool {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function inverseMatrix(out:Matrix, source:Matrix):Bool {
+extern inline function inverseMatrix(out:Matrix, source:Matrix):Bool {
 #if hl
 	return flight._hl._fn.Geometry.inverseMatrix(out, source);
 #elseif cpp
@@ -605,7 +605,7 @@ inline function inverseMatrix(out:Matrix, source:Matrix):Bool {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function inverseMatrixTransformPoint(out:Vector2, matrix:Matrix, point:Vector2):Void {
+extern inline function inverseMatrixTransformPoint(out:Vector2, matrix:Matrix, point:Vector2):Void {
 #if hl
 	flight._hl._fn.Geometry.inverseMatrixTransformPoint(out, matrix, point);
 #elseif cpp
@@ -616,7 +616,7 @@ inline function inverseMatrixTransformPoint(out:Vector2, matrix:Matrix, point:Ve
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function inverseMatrixTransformPointXy(out:Vector2, source:Matrix, x:Float, y:Float):Void {
+extern inline function inverseMatrixTransformPointXy(out:Vector2, source:Matrix, x:Float, y:Float):Void {
 #if hl
 	flight._hl._fn.Geometry.inverseMatrixTransformPointXy(out, source, x, y);
 #elseif cpp
@@ -627,7 +627,7 @@ inline function inverseMatrixTransformPointXy(out:Vector2, source:Matrix, x:Floa
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function inverseMatrixTransformVector(out:Vector2, matrix:Matrix, vector:Vector2):Void {
+extern inline function inverseMatrixTransformVector(out:Vector2, matrix:Matrix, vector:Vector2):Void {
 #if hl
 	flight._hl._fn.Geometry.inverseMatrixTransformVector(out, matrix, vector);
 #elseif cpp
@@ -638,7 +638,7 @@ inline function inverseMatrixTransformVector(out:Vector2, matrix:Matrix, vector:
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function inverseMatrixTransformVectorXy(out:Vector2, source:Matrix, x:Float, y:Float):Void {
+extern inline function inverseMatrixTransformVectorXy(out:Vector2, source:Matrix, x:Float, y:Float):Void {
 #if hl
 	flight._hl._fn.Geometry.inverseMatrixTransformVectorXy(out, source, x, y);
 #elseif cpp
@@ -649,7 +649,7 @@ inline function inverseMatrixTransformVectorXy(out:Vector2, source:Matrix, x:Flo
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function matrixTransformBounds(out:Rectangle, source:Matrix, ax:Float, ay:Float, bx:Float, by:Float):Void {
+extern inline function matrixTransformBounds(out:Rectangle, source:Matrix, ax:Float, ay:Float, bx:Float, by:Float):Void {
 #if hl
 	flight._hl._fn.Geometry.matrixTransformBounds(out, source, ax, ay, bx, by);
 #elseif cpp
@@ -660,7 +660,7 @@ inline function matrixTransformBounds(out:Rectangle, source:Matrix, ax:Float, ay
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function matrixTransformBoundsVector2(out:Rectangle, matrix:Matrix, a:Vector2, b:Vector2):Void {
+extern inline function matrixTransformBoundsVector2(out:Rectangle, matrix:Matrix, a:Vector2, b:Vector2):Void {
 #if hl
 	flight._hl._fn.Geometry.matrixTransformBoundsVector2(out, matrix, a, b);
 #elseif cpp
@@ -671,7 +671,7 @@ inline function matrixTransformBoundsVector2(out:Rectangle, matrix:Matrix, a:Vec
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function matrixTransformPoint(out:Vector2, matrix:Matrix, point:Vector2):Void {
+extern inline function matrixTransformPoint(out:Vector2, matrix:Matrix, point:Vector2):Void {
 #if hl
 	flight._hl._fn.Geometry.matrixTransformPoint(out, matrix, point);
 #elseif cpp
@@ -682,7 +682,7 @@ inline function matrixTransformPoint(out:Vector2, matrix:Matrix, point:Vector2):
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function matrixTransformPointXy(out:Vector2, source:Matrix, x:Float, y:Float):Void {
+extern inline function matrixTransformPointXy(out:Vector2, source:Matrix, x:Float, y:Float):Void {
 #if hl
 	flight._hl._fn.Geometry.matrixTransformPointXy(out, source, x, y);
 #elseif cpp
@@ -693,7 +693,7 @@ inline function matrixTransformPointXy(out:Vector2, source:Matrix, x:Float, y:Fl
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function matrixTransformRectangle(out:Rectangle, matrix:Matrix, source:Rectangle):Void {
+extern inline function matrixTransformRectangle(out:Rectangle, matrix:Matrix, source:Rectangle):Void {
 #if hl
 	flight._hl._fn.Geometry.matrixTransformRectangle(out, matrix, source);
 #elseif cpp
@@ -704,7 +704,7 @@ inline function matrixTransformRectangle(out:Rectangle, matrix:Matrix, source:Re
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function matrixTransformVector(out:Vector2, matrix:Matrix, vector:Vector2):Void {
+extern inline function matrixTransformVector(out:Vector2, matrix:Matrix, vector:Vector2):Void {
 #if hl
 	flight._hl._fn.Geometry.matrixTransformVector(out, matrix, vector);
 #elseif cpp
@@ -715,7 +715,7 @@ inline function matrixTransformVector(out:Vector2, matrix:Matrix, vector:Vector2
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function matrixTransformVectorXy(out:Vector2, source:Matrix, x:Float, y:Float):Void {
+extern inline function matrixTransformVectorXy(out:Vector2, source:Matrix, x:Float, y:Float):Void {
 #if hl
 	flight._hl._fn.Geometry.matrixTransformVectorXy(out, source, x, y);
 #elseif cpp
@@ -726,7 +726,7 @@ inline function matrixTransformVectorXy(out:Vector2, source:Matrix, x:Float, y:F
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function multiplyMatrix(out:Matrix, a:Matrix, b:Matrix):Void {
+extern inline function multiplyMatrix(out:Matrix, a:Matrix, b:Matrix):Void {
 #if hl
 	flight._hl._fn.Geometry.multiplyMatrix(out, a, b);
 #elseif cpp
@@ -737,7 +737,7 @@ inline function multiplyMatrix(out:Matrix, a:Matrix, b:Matrix):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function rotateMatrix(out:Matrix, source:Matrix, theta:Float):Void {
+extern inline function rotateMatrix(out:Matrix, source:Matrix, theta:Float):Void {
 #if hl
 	flight._hl._fn.Geometry.rotateMatrix(out, source, theta);
 #elseif cpp
@@ -748,7 +748,7 @@ inline function rotateMatrix(out:Matrix, source:Matrix, theta:Float):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function scaleMatrix(out:Matrix, source:Matrix, sx:Float, sy:Float):Void {
+extern inline function scaleMatrix(out:Matrix, source:Matrix, sx:Float, sy:Float):Void {
 #if hl
 	flight._hl._fn.Geometry.scaleMatrix(out, source, sx, sy);
 #elseif cpp
@@ -759,7 +759,7 @@ inline function scaleMatrix(out:Matrix, source:Matrix, sx:Float, sy:Float):Void 
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function setGradientTransformMatrix(out:Matrix, width:Float, height:Float, rotation:Float, tx:Float, ty:Float):Void {
+extern inline function setGradientTransformMatrix(out:Matrix, width:Float, height:Float, rotation:Float, tx:Float, ty:Float):Void {
 #if hl
 	flight._hl._fn.Geometry.setGradientTransformMatrix(out, width, height, rotation, tx, ty);
 #elseif cpp
@@ -770,7 +770,7 @@ inline function setGradientTransformMatrix(out:Matrix, width:Float, height:Float
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function setMatrix(out:Matrix, a:Float, b:Float, c:Float, d:Float, tx:Float, ty:Float):Void {
+extern inline function setMatrix(out:Matrix, a:Float, b:Float, c:Float, d:Float, tx:Float, ty:Float):Void {
 #if hl
 	flight._hl._fn.Geometry.setMatrix(out, a, b, c, d, tx, ty);
 #elseif cpp
@@ -781,7 +781,7 @@ inline function setMatrix(out:Matrix, a:Float, b:Float, c:Float, d:Float, tx:Flo
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function setMatrixFromFloat32Array(out:Matrix, offset:Int, source:Dynamic, sourceLen:Int):Void {
+extern inline function setMatrixFromFloat32Array(out:Matrix, offset:Int, source:Dynamic, sourceLen:Int):Void {
 #if hl
 	flight._hl._fn.Geometry.setMatrixFromFloat32Array(out, offset, source, sourceLen);
 #elseif cpp
@@ -792,7 +792,7 @@ inline function setMatrixFromFloat32Array(out:Matrix, offset:Int, source:Dynamic
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function setMatrixFromMatrix3(out:Matrix, source:Matrix3):Void {
+extern inline function setMatrixFromMatrix3(out:Matrix, source:Matrix3):Void {
 #if hl
 	flight._hl._fn.Geometry.setMatrixFromMatrix3(out, source);
 #elseif cpp
@@ -803,7 +803,7 @@ inline function setMatrixFromMatrix3(out:Matrix, source:Matrix3):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function setMatrixFromMatrix4(out:Matrix, source:Matrix4):Void {
+extern inline function setMatrixFromMatrix4(out:Matrix, source:Matrix4):Void {
 #if hl
 	flight._hl._fn.Geometry.setMatrixFromMatrix4(out, source);
 #elseif cpp
@@ -814,7 +814,7 @@ inline function setMatrixFromMatrix4(out:Matrix, source:Matrix4):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function setMatrixIdentity(out:Matrix):Void {
+extern inline function setMatrixIdentity(out:Matrix):Void {
 #if hl
 	flight._hl._fn.Geometry.setMatrixIdentity(out);
 #elseif cpp
@@ -825,7 +825,7 @@ inline function setMatrixIdentity(out:Matrix):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function setTransformMatrix(out:Matrix, scaleX:Float, scaleY:Float, rotation:Float, tx:Float, ty:Float):Void {
+extern inline function setTransformMatrix(out:Matrix, scaleX:Float, scaleY:Float, rotation:Float, tx:Float, ty:Float):Void {
 #if hl
 	flight._hl._fn.Geometry.setTransformMatrix(out, scaleX, scaleY, rotation, tx, ty);
 #elseif cpp
@@ -836,7 +836,7 @@ inline function setTransformMatrix(out:Matrix, scaleX:Float, scaleY:Float, rotat
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function translateMatrix(out:Matrix, source:Matrix, dx:Float, dy:Float):Void {
+extern inline function translateMatrix(out:Matrix, source:Matrix, dx:Float, dy:Float):Void {
 #if hl
 	flight._hl._fn.Geometry.translateMatrix(out, source, dx, dy);
 #elseif cpp
@@ -847,7 +847,7 @@ inline function translateMatrix(out:Matrix, source:Matrix, dx:Float, dy:Float):V
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function translateMatrixByVector(out:Matrix, matrix:Matrix, vector:Vector2):Void {
+extern inline function translateMatrixByVector(out:Matrix, matrix:Matrix, vector:Vector2):Void {
 #if hl
 	flight._hl._fn.Geometry.translateMatrixByVector(out, matrix, vector);
 #elseif cpp
@@ -858,7 +858,7 @@ inline function translateMatrixByVector(out:Matrix, matrix:Matrix, vector:Vector
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function translateMatrixByVectorXy(out:Matrix, source:Matrix, x:Float, y:Float):Void {
+extern inline function translateMatrixByVectorXy(out:Matrix, source:Matrix, x:Float, y:Float):Void {
 #if hl
 	flight._hl._fn.Geometry.translateMatrixByVectorXy(out, source, x, y);
 #elseif cpp
@@ -869,7 +869,7 @@ inline function translateMatrixByVectorXy(out:Matrix, source:Matrix, x:Float, y:
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function writeMatrixToFloat32Array(out:Dynamic, outLen:Int, offset:Int, source:Matrix):Void {
+extern inline function writeMatrixToFloat32Array(out:Dynamic, outLen:Int, offset:Int, source:Matrix):Void {
 #if hl
 	flight._hl._fn.Geometry.writeMatrixToFloat32Array(out, outLen, offset, source);
 #elseif cpp
@@ -880,7 +880,7 @@ inline function writeMatrixToFloat32Array(out:Dynamic, outLen:Int, offset:Int, s
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function createMatrix3():Matrix3 {
+extern inline function createMatrix3():Matrix3 {
 #if hl
 	return flight._hl._fn.Geometry.createMatrix3();
 #elseif cpp
@@ -891,7 +891,7 @@ inline function createMatrix3():Matrix3 {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function createMatrix3FromValues(m00:Float, m01:Float, m02:Float, m10:Float, m11:Float, m12:Float, m20:Float, m21:Float, m22:Float):Matrix3 {
+extern inline function createMatrix3FromValues(m00:Float, m01:Float, m02:Float, m10:Float, m11:Float, m12:Float, m20:Float, m21:Float, m22:Float):Matrix3 {
 #if hl
 	return flight._hl._fn.Geometry.createMatrix3FromValues(m00, m01, m02, m10, m11, m12, m20, m21, m22);
 #elseif cpp
@@ -902,7 +902,7 @@ inline function createMatrix3FromValues(m00:Float, m01:Float, m02:Float, m10:Flo
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function cloneMatrix3(source:Matrix3):Matrix3 {
+extern inline function cloneMatrix3(source:Matrix3):Matrix3 {
 #if hl
 	return flight._hl._fn.Geometry.cloneMatrix3(source);
 #elseif cpp
@@ -913,7 +913,7 @@ inline function cloneMatrix3(source:Matrix3):Matrix3 {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function copyMatrix3(out:Matrix3, source:Matrix3):Void {
+extern inline function copyMatrix3(out:Matrix3, source:Matrix3):Void {
 #if hl
 	flight._hl._fn.Geometry.copyMatrix3(out, source);
 #elseif cpp
@@ -924,7 +924,7 @@ inline function copyMatrix3(out:Matrix3, source:Matrix3):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function copyMatrix3ColumnFromVector3(out:Matrix3, column:Int, source:Vector3):Void {
+extern inline function copyMatrix3ColumnFromVector3(out:Matrix3, column:Int, source:Vector3):Void {
 #if hl
 	flight._hl._fn.Geometry.copyMatrix3ColumnFromVector3(out, column, source);
 #elseif cpp
@@ -935,7 +935,7 @@ inline function copyMatrix3ColumnFromVector3(out:Matrix3, column:Int, source:Vec
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function copyMatrix3ColumnToVector3(out:Vector3, column:Int, source:Matrix3):Void {
+extern inline function copyMatrix3ColumnToVector3(out:Vector3, column:Int, source:Matrix3):Void {
 #if hl
 	flight._hl._fn.Geometry.copyMatrix3ColumnToVector3(out, column, source);
 #elseif cpp
@@ -946,7 +946,7 @@ inline function copyMatrix3ColumnToVector3(out:Vector3, column:Int, source:Matri
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function copyMatrix3RowFromVector3(out:Matrix3, row:Int, source:Vector3):Void {
+extern inline function copyMatrix3RowFromVector3(out:Matrix3, row:Int, source:Vector3):Void {
 #if hl
 	flight._hl._fn.Geometry.copyMatrix3RowFromVector3(out, row, source);
 #elseif cpp
@@ -957,7 +957,7 @@ inline function copyMatrix3RowFromVector3(out:Matrix3, row:Int, source:Vector3):
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function copyMatrix3RowToVector3(out:Vector3, row:Int, source:Matrix3):Void {
+extern inline function copyMatrix3RowToVector3(out:Vector3, row:Int, source:Matrix3):Void {
 #if hl
 	flight._hl._fn.Geometry.copyMatrix3RowToVector3(out, row, source);
 #elseif cpp
@@ -968,7 +968,7 @@ inline function copyMatrix3RowToVector3(out:Vector3, row:Int, source:Matrix3):Vo
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function equalsMatrix3(a:Matrix3, b:Matrix3):Bool {
+extern inline function equalsMatrix3(a:Matrix3, b:Matrix3):Bool {
 #if hl
 	return flight._hl._fn.Geometry.equalsMatrix3(a, b);
 #elseif cpp
@@ -979,7 +979,7 @@ inline function equalsMatrix3(a:Matrix3, b:Matrix3):Bool {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function getMatrix3Determinant(source:Matrix3):Float {
+extern inline function getMatrix3Determinant(source:Matrix3):Float {
 #if hl
 	return flight._hl._fn.Geometry.getMatrix3Determinant(source);
 #elseif cpp
@@ -990,7 +990,7 @@ inline function getMatrix3Determinant(source:Matrix3):Float {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function getMatrix3Element(source:Matrix3, row:Int, column:Int):Float {
+extern inline function getMatrix3Element(source:Matrix3, row:Int, column:Int):Float {
 #if hl
 	return flight._hl._fn.Geometry.getMatrix3Element(source, row, column);
 #elseif cpp
@@ -1001,7 +1001,7 @@ inline function getMatrix3Element(source:Matrix3, row:Int, column:Int):Float {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function inverseMatrix3(out:Matrix3, source:Matrix3):Bool {
+extern inline function inverseMatrix3(out:Matrix3, source:Matrix3):Bool {
 #if hl
 	return flight._hl._fn.Geometry.inverseMatrix3(out, source);
 #elseif cpp
@@ -1012,7 +1012,7 @@ inline function inverseMatrix3(out:Matrix3, source:Matrix3):Bool {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function isAffineMatrix3(source:Matrix3):Bool {
+extern inline function isAffineMatrix3(source:Matrix3):Bool {
 #if hl
 	return flight._hl._fn.Geometry.isAffineMatrix3(source);
 #elseif cpp
@@ -1023,7 +1023,7 @@ inline function isAffineMatrix3(source:Matrix3):Bool {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function multiplyMatrix3(out:Matrix3, a:Matrix3, b:Matrix3):Void {
+extern inline function multiplyMatrix3(out:Matrix3, a:Matrix3, b:Matrix3):Void {
 #if hl
 	flight._hl._fn.Geometry.multiplyMatrix3(out, a, b);
 #elseif cpp
@@ -1034,7 +1034,7 @@ inline function multiplyMatrix3(out:Matrix3, a:Matrix3, b:Matrix3):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function rotateMatrix3(out:Matrix3, source:Matrix3, theta:Float):Void {
+extern inline function rotateMatrix3(out:Matrix3, source:Matrix3, theta:Float):Void {
 #if hl
 	flight._hl._fn.Geometry.rotateMatrix3(out, source, theta);
 #elseif cpp
@@ -1045,7 +1045,7 @@ inline function rotateMatrix3(out:Matrix3, source:Matrix3, theta:Float):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function scaleMatrix3(out:Matrix3, source:Matrix3, sx:Float, sy:Float):Void {
+extern inline function scaleMatrix3(out:Matrix3, source:Matrix3, sx:Float, sy:Float):Void {
 #if hl
 	flight._hl._fn.Geometry.scaleMatrix3(out, source, sx, sy);
 #elseif cpp
@@ -1056,7 +1056,7 @@ inline function scaleMatrix3(out:Matrix3, source:Matrix3, sx:Float, sy:Float):Vo
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function setMatrix3(out:Matrix3, m00:Float, m01:Float, m02:Float, m10:Float, m11:Float, m12:Float, m20:Float, m21:Float, m22:Float):Void {
+extern inline function setMatrix3(out:Matrix3, m00:Float, m01:Float, m02:Float, m10:Float, m11:Float, m12:Float, m20:Float, m21:Float, m22:Float):Void {
 #if hl
 	flight._hl._fn.Geometry.setMatrix3(out, m00, m01, m02, m10, m11, m12, m20, m21, m22);
 #elseif cpp
@@ -1067,7 +1067,7 @@ inline function setMatrix3(out:Matrix3, m00:Float, m01:Float, m02:Float, m10:Flo
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function setMatrix3Element(out:Matrix3, row:Int, column:Int, value:Float):Void {
+extern inline function setMatrix3Element(out:Matrix3, row:Int, column:Int, value:Float):Void {
 #if hl
 	flight._hl._fn.Geometry.setMatrix3Element(out, row, column, value);
 #elseif cpp
@@ -1078,7 +1078,7 @@ inline function setMatrix3Element(out:Matrix3, row:Int, column:Int, value:Float)
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function setMatrix3FromFloat32Array(out:Matrix3, offset:Int, source:Dynamic, sourceLen:Int):Void {
+extern inline function setMatrix3FromFloat32Array(out:Matrix3, offset:Int, source:Dynamic, sourceLen:Int):Void {
 #if hl
 	flight._hl._fn.Geometry.setMatrix3FromFloat32Array(out, offset, source, sourceLen);
 #elseif cpp
@@ -1089,7 +1089,7 @@ inline function setMatrix3FromFloat32Array(out:Matrix3, offset:Int, source:Dynam
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function setMatrix3FromMatrix(out:Matrix3, source:Matrix):Void {
+extern inline function setMatrix3FromMatrix(out:Matrix3, source:Matrix):Void {
 #if hl
 	flight._hl._fn.Geometry.setMatrix3FromMatrix(out, source);
 #elseif cpp
@@ -1100,7 +1100,7 @@ inline function setMatrix3FromMatrix(out:Matrix3, source:Matrix):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function setMatrix3FromMatrix4(out:Matrix3, source:Matrix4):Void {
+extern inline function setMatrix3FromMatrix4(out:Matrix3, source:Matrix4):Void {
 #if hl
 	flight._hl._fn.Geometry.setMatrix3FromMatrix4(out, source);
 #elseif cpp
@@ -1111,7 +1111,7 @@ inline function setMatrix3FromMatrix4(out:Matrix3, source:Matrix4):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function setMatrix3Identity(out:Matrix3):Void {
+extern inline function setMatrix3Identity(out:Matrix3):Void {
 #if hl
 	flight._hl._fn.Geometry.setMatrix3Identity(out);
 #elseif cpp
@@ -1122,7 +1122,7 @@ inline function setMatrix3Identity(out:Matrix3):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function setMatrix3NormalFromMatrix4(out:Matrix3, source:Matrix4):Void {
+extern inline function setMatrix3NormalFromMatrix4(out:Matrix3, source:Matrix4):Void {
 #if hl
 	flight._hl._fn.Geometry.setMatrix3NormalFromMatrix4(out, source);
 #elseif cpp
@@ -1133,7 +1133,7 @@ inline function setMatrix3NormalFromMatrix4(out:Matrix3, source:Matrix4):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function translateMatrix3(out:Matrix3, source:Matrix3, tx:Float, ty:Float):Void {
+extern inline function translateMatrix3(out:Matrix3, source:Matrix3, tx:Float, ty:Float):Void {
 #if hl
 	flight._hl._fn.Geometry.translateMatrix3(out, source, tx, ty);
 #elseif cpp
@@ -1144,7 +1144,7 @@ inline function translateMatrix3(out:Matrix3, source:Matrix3, tx:Float, ty:Float
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function transposeMatrix3(out:Matrix3, source:Matrix3):Void {
+extern inline function transposeMatrix3(out:Matrix3, source:Matrix3):Void {
 #if hl
 	flight._hl._fn.Geometry.transposeMatrix3(out, source);
 #elseif cpp
@@ -1155,7 +1155,7 @@ inline function transposeMatrix3(out:Matrix3, source:Matrix3):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function writeMatrix3ToFloat32Array(out:Dynamic, outLen:Int, offset:Int, source:Matrix3):Void {
+extern inline function writeMatrix3ToFloat32Array(out:Dynamic, outLen:Int, offset:Int, source:Matrix3):Void {
 #if hl
 	flight._hl._fn.Geometry.writeMatrix3ToFloat32Array(out, outLen, offset, source);
 #elseif cpp
@@ -1166,7 +1166,7 @@ inline function writeMatrix3ToFloat32Array(out:Dynamic, outLen:Int, offset:Int, 
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function acquireIdentityMatrix3():Matrix3 {
+extern inline function acquireIdentityMatrix3():Matrix3 {
 #if hl
 	return flight._hl._fn.Geometry.acquireIdentityMatrix3();
 #elseif cpp
@@ -1177,7 +1177,7 @@ inline function acquireIdentityMatrix3():Matrix3 {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function acquireMatrix3():Matrix3 {
+extern inline function acquireMatrix3():Matrix3 {
 #if hl
 	return flight._hl._fn.Geometry.acquireMatrix3();
 #elseif cpp
@@ -1188,7 +1188,7 @@ inline function acquireMatrix3():Matrix3 {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function clearMatrix3Pool():Void {
+extern inline function clearMatrix3Pool():Void {
 #if hl
 	flight._hl._fn.Geometry.clearMatrix3Pool();
 #elseif cpp
@@ -1199,7 +1199,7 @@ inline function clearMatrix3Pool():Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function releaseMatrix3(m:Matrix3):Void {
+extern inline function releaseMatrix3(m:Matrix3):Void {
 #if hl
 	flight._hl._fn.Geometry.releaseMatrix3(m);
 #elseif cpp
@@ -1210,7 +1210,7 @@ inline function releaseMatrix3(m:Matrix3):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function createMatrix4():Matrix4 {
+extern inline function createMatrix4():Matrix4 {
 #if hl
 	return flight._hl._fn.Geometry.createMatrix4();
 #elseif cpp
@@ -1221,7 +1221,7 @@ inline function createMatrix4():Matrix4 {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function createMatrix4From2d(a:Float, b:Float, c:Float, d:Float, tx:Float, ty:Float):Matrix4 {
+extern inline function createMatrix4From2d(a:Float, b:Float, c:Float, d:Float, tx:Float, ty:Float):Matrix4 {
 #if hl
 	return flight._hl._fn.Geometry.createMatrix4From2d(a, b, c, d, tx, ty);
 #elseif cpp
@@ -1232,7 +1232,7 @@ inline function createMatrix4From2d(a:Float, b:Float, c:Float, d:Float, tx:Float
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function createMatrix4FromValues(m00:Float, m01:Float, m02:Float, m03:Float, m10:Float, m11:Float, m12:Float, m13:Float, m20:Float, m21:Float, m22:Float, m23:Float, m30:Float, m31:Float, m32:Float, m33:Float):Matrix4 {
+extern inline function createMatrix4FromValues(m00:Float, m01:Float, m02:Float, m03:Float, m10:Float, m11:Float, m12:Float, m13:Float, m20:Float, m21:Float, m22:Float, m23:Float, m30:Float, m31:Float, m32:Float, m33:Float):Matrix4 {
 #if hl
 	return flight._hl._fn.Geometry.createMatrix4FromValues(m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23, m30, m31, m32, m33);
 #elseif cpp
@@ -1243,7 +1243,7 @@ inline function createMatrix4FromValues(m00:Float, m01:Float, m02:Float, m03:Flo
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function createOrthographicMatrix4(left:Float, right:Float, bottom:Float, top:Float, zNear:Float, zFar:Float):Matrix4 {
+extern inline function createOrthographicMatrix4(left:Float, right:Float, bottom:Float, top:Float, zNear:Float, zFar:Float):Matrix4 {
 #if hl
 	return flight._hl._fn.Geometry.createOrthographicMatrix4(left, right, bottom, top, zNear, zFar);
 #elseif cpp
@@ -1254,7 +1254,7 @@ inline function createOrthographicMatrix4(left:Float, right:Float, bottom:Float,
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function createPerspectiveMatrix4(tanHalfFovY:Float, aspect:Float, zNear:Float, zFar:Float):Matrix4 {
+extern inline function createPerspectiveMatrix4(tanHalfFovY:Float, aspect:Float, zNear:Float, zFar:Float):Matrix4 {
 #if hl
 	return flight._hl._fn.Geometry.createPerspectiveMatrix4(tanHalfFovY, aspect, zNear, zFar);
 #elseif cpp
@@ -1265,7 +1265,7 @@ inline function createPerspectiveMatrix4(tanHalfFovY:Float, aspect:Float, zNear:
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function appendMatrix4(out:Matrix4, source:Matrix4, other:Matrix4):Void {
+extern inline function appendMatrix4(out:Matrix4, source:Matrix4, other:Matrix4):Void {
 #if hl
 	flight._hl._fn.Geometry.appendMatrix4(out, source, other);
 #elseif cpp
@@ -1276,7 +1276,7 @@ inline function appendMatrix4(out:Matrix4, source:Matrix4, other:Matrix4):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function appendRotationMatrix4(out:Matrix4, source:Matrix4, radians:Float, axis:Vector4, pivotPoint:Vector4):Void {
+extern inline function appendRotationMatrix4(out:Matrix4, source:Matrix4, radians:Float, axis:Vector4, pivotPoint:Vector4):Void {
 #if hl
 	flight._hl._fn.Geometry.appendRotationMatrix4(out, source, radians, axis, pivotPoint);
 #elseif cpp
@@ -1287,7 +1287,7 @@ inline function appendRotationMatrix4(out:Matrix4, source:Matrix4, radians:Float
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function appendScaleMatrix4(out:Matrix4, source:Matrix4, xScale:Float, yScale:Float, zScale:Float):Void {
+extern inline function appendScaleMatrix4(out:Matrix4, source:Matrix4, xScale:Float, yScale:Float, zScale:Float):Void {
 #if hl
 	flight._hl._fn.Geometry.appendScaleMatrix4(out, source, xScale, yScale, zScale);
 #elseif cpp
@@ -1298,7 +1298,7 @@ inline function appendScaleMatrix4(out:Matrix4, source:Matrix4, xScale:Float, yS
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function appendTranslationMatrix4(out:Matrix4, source:Matrix4, x:Float, y:Float, z:Float):Void {
+extern inline function appendTranslationMatrix4(out:Matrix4, source:Matrix4, x:Float, y:Float, z:Float):Void {
 #if hl
 	flight._hl._fn.Geometry.appendTranslationMatrix4(out, source, x, y, z);
 #elseif cpp
@@ -1309,7 +1309,7 @@ inline function appendTranslationMatrix4(out:Matrix4, source:Matrix4, x:Float, y
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function cloneMatrix4(source:Matrix4):Matrix4 {
+extern inline function cloneMatrix4(source:Matrix4):Matrix4 {
 #if hl
 	return flight._hl._fn.Geometry.cloneMatrix4(source);
 #elseif cpp
@@ -1320,7 +1320,7 @@ inline function cloneMatrix4(source:Matrix4):Matrix4 {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function composeMatrix4(out:Matrix4, position:Vector3, rotation:Quaternion, scale:Vector3):Void {
+extern inline function composeMatrix4(out:Matrix4, position:Vector3, rotation:Quaternion, scale:Vector3):Void {
 #if hl
 	flight._hl._fn.Geometry.composeMatrix4(out, position, rotation, scale);
 #elseif cpp
@@ -1331,7 +1331,7 @@ inline function composeMatrix4(out:Matrix4, position:Vector3, rotation:Quaternio
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function copyMatrix4(out:Matrix4, source:Matrix4):Void {
+extern inline function copyMatrix4(out:Matrix4, source:Matrix4):Void {
 #if hl
 	flight._hl._fn.Geometry.copyMatrix4(out, source);
 #elseif cpp
@@ -1342,7 +1342,7 @@ inline function copyMatrix4(out:Matrix4, source:Matrix4):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function copyMatrix4ColumnFromVector4(out:Matrix4, column:Int, source:Vector4):Void {
+extern inline function copyMatrix4ColumnFromVector4(out:Matrix4, column:Int, source:Vector4):Void {
 #if hl
 	flight._hl._fn.Geometry.copyMatrix4ColumnFromVector4(out, column, source);
 #elseif cpp
@@ -1353,7 +1353,7 @@ inline function copyMatrix4ColumnFromVector4(out:Matrix4, column:Int, source:Vec
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function copyMatrix4ColumnToVector4(out:Vector4, column:Int, source:Matrix4):Void {
+extern inline function copyMatrix4ColumnToVector4(out:Vector4, column:Int, source:Matrix4):Void {
 #if hl
 	flight._hl._fn.Geometry.copyMatrix4ColumnToVector4(out, column, source);
 #elseif cpp
@@ -1364,7 +1364,7 @@ inline function copyMatrix4ColumnToVector4(out:Vector4, column:Int, source:Matri
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function copyMatrix4RowFromVector4(out:Matrix4, row:Int, source:Vector4):Void {
+extern inline function copyMatrix4RowFromVector4(out:Matrix4, row:Int, source:Vector4):Void {
 #if hl
 	flight._hl._fn.Geometry.copyMatrix4RowFromVector4(out, row, source);
 #elseif cpp
@@ -1375,7 +1375,7 @@ inline function copyMatrix4RowFromVector4(out:Matrix4, row:Int, source:Vector4):
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function copyMatrix4RowToVector4(out:Vector4, row:Int, source:Matrix4):Void {
+extern inline function copyMatrix4RowToVector4(out:Vector4, row:Int, source:Matrix4):Void {
 #if hl
 	flight._hl._fn.Geometry.copyMatrix4RowToVector4(out, row, source);
 #elseif cpp
@@ -1386,7 +1386,7 @@ inline function copyMatrix4RowToVector4(out:Vector4, row:Int, source:Matrix4):Vo
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function decomposeMatrix4(outPosition:Vector3, outRotation:Quaternion, outScale:Vector3, m:Matrix4):Void {
+extern inline function decomposeMatrix4(outPosition:Vector3, outRotation:Quaternion, outScale:Vector3, m:Matrix4):Void {
 #if hl
 	flight._hl._fn.Geometry.decomposeMatrix4(outPosition, outRotation, outScale, m);
 #elseif cpp
@@ -1397,7 +1397,7 @@ inline function decomposeMatrix4(outPosition:Vector3, outRotation:Quaternion, ou
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function equalsMatrix4(a:Matrix4, b:Matrix4):Bool {
+extern inline function equalsMatrix4(a:Matrix4, b:Matrix4):Bool {
 #if hl
 	return flight._hl._fn.Geometry.equalsMatrix4(a, b);
 #elseif cpp
@@ -1408,7 +1408,7 @@ inline function equalsMatrix4(a:Matrix4, b:Matrix4):Bool {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function getMatrix4Determinant(source:Matrix4):Float {
+extern inline function getMatrix4Determinant(source:Matrix4):Float {
 #if hl
 	return flight._hl._fn.Geometry.getMatrix4Determinant(source);
 #elseif cpp
@@ -1419,7 +1419,7 @@ inline function getMatrix4Determinant(source:Matrix4):Float {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function getMatrix4Element(source:Matrix4, row:Int, column:Int):Float {
+extern inline function getMatrix4Element(source:Matrix4, row:Int, column:Int):Float {
 #if hl
 	return flight._hl._fn.Geometry.getMatrix4Element(source, row, column);
 #elseif cpp
@@ -1430,7 +1430,7 @@ inline function getMatrix4Element(source:Matrix4, row:Int, column:Int):Float {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function getMatrix4Position(out:Vector3, source:Matrix4):Void {
+extern inline function getMatrix4Position(out:Vector3, source:Matrix4):Void {
 #if hl
 	flight._hl._fn.Geometry.getMatrix4Position(out, source);
 #elseif cpp
@@ -1441,7 +1441,7 @@ inline function getMatrix4Position(out:Vector3, source:Matrix4):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function interpolateMatrix4(out:Matrix4, a:Matrix4, b:Matrix4, t:Float):Void {
+extern inline function interpolateMatrix4(out:Matrix4, a:Matrix4, b:Matrix4, t:Float):Void {
 #if hl
 	flight._hl._fn.Geometry.interpolateMatrix4(out, a, b, t);
 #elseif cpp
@@ -1452,7 +1452,7 @@ inline function interpolateMatrix4(out:Matrix4, a:Matrix4, b:Matrix4, t:Float):V
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function inverseMatrix4(out:Matrix4, source:Matrix4):Bool {
+extern inline function inverseMatrix4(out:Matrix4, source:Matrix4):Bool {
 #if hl
 	return flight._hl._fn.Geometry.inverseMatrix4(out, source);
 #elseif cpp
@@ -1463,7 +1463,7 @@ inline function inverseMatrix4(out:Matrix4, source:Matrix4):Bool {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function isAffineMatrix4(source:Matrix4):Bool {
+extern inline function isAffineMatrix4(source:Matrix4):Bool {
 #if hl
 	return flight._hl._fn.Geometry.isAffineMatrix4(source);
 #elseif cpp
@@ -1474,7 +1474,7 @@ inline function isAffineMatrix4(source:Matrix4):Bool {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function matrix4TransformPoint(out:Vector3, source:Matrix4, point:Vector3):Void {
+extern inline function matrix4TransformPoint(out:Vector3, source:Matrix4, point:Vector3):Void {
 #if hl
 	flight._hl._fn.Geometry.matrix4TransformPoint(out, source, point);
 #elseif cpp
@@ -1485,7 +1485,7 @@ inline function matrix4TransformPoint(out:Vector3, source:Matrix4, point:Vector3
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function matrix4TransformVector(out:Vector4, source:Matrix4, vector:Vector4):Void {
+extern inline function matrix4TransformVector(out:Vector4, source:Matrix4, vector:Vector4):Void {
 #if hl
 	flight._hl._fn.Geometry.matrix4TransformVector(out, source, vector);
 #elseif cpp
@@ -1496,7 +1496,7 @@ inline function matrix4TransformVector(out:Vector4, source:Matrix4, vector:Vecto
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function matrix4TransformVectors(out:Dynamic, outLen:Int, source:Matrix4, vectors:Dynamic, vectorsLen:Int):Void {
+extern inline function matrix4TransformVectors(out:Dynamic, outLen:Int, source:Matrix4, vectors:Dynamic, vectorsLen:Int):Void {
 #if hl
 	flight._hl._fn.Geometry.matrix4TransformVectors(out, outLen, source, vectors, vectorsLen);
 #elseif cpp
@@ -1507,7 +1507,7 @@ inline function matrix4TransformVectors(out:Dynamic, outLen:Int, source:Matrix4,
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function multiplyMatrix4(out:Matrix4, a:Matrix4, b:Matrix4):Void {
+extern inline function multiplyMatrix4(out:Matrix4, a:Matrix4, b:Matrix4):Void {
 #if hl
 	flight._hl._fn.Geometry.multiplyMatrix4(out, a, b);
 #elseif cpp
@@ -1518,7 +1518,7 @@ inline function multiplyMatrix4(out:Matrix4, a:Matrix4, b:Matrix4):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function prependMatrix4(out:Matrix4, source:Matrix4, other:Matrix4):Void {
+extern inline function prependMatrix4(out:Matrix4, source:Matrix4, other:Matrix4):Void {
 #if hl
 	flight._hl._fn.Geometry.prependMatrix4(out, source, other);
 #elseif cpp
@@ -1529,7 +1529,7 @@ inline function prependMatrix4(out:Matrix4, source:Matrix4, other:Matrix4):Void 
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function prependRotationMatrix4(out:Matrix4, source:Matrix4, radians:Float, axis:Vector4, pivotPoint:Vector4):Void {
+extern inline function prependRotationMatrix4(out:Matrix4, source:Matrix4, radians:Float, axis:Vector4, pivotPoint:Vector4):Void {
 #if hl
 	flight._hl._fn.Geometry.prependRotationMatrix4(out, source, radians, axis, pivotPoint);
 #elseif cpp
@@ -1540,7 +1540,7 @@ inline function prependRotationMatrix4(out:Matrix4, source:Matrix4, radians:Floa
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function prependScaleMatrix4(out:Matrix4, source:Matrix4, xScale:Float, yScale:Float, zScale:Float):Void {
+extern inline function prependScaleMatrix4(out:Matrix4, source:Matrix4, xScale:Float, yScale:Float, zScale:Float):Void {
 #if hl
 	flight._hl._fn.Geometry.prependScaleMatrix4(out, source, xScale, yScale, zScale);
 #elseif cpp
@@ -1551,7 +1551,7 @@ inline function prependScaleMatrix4(out:Matrix4, source:Matrix4, xScale:Float, y
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function prependTranslationMatrix4(out:Matrix4, source:Matrix4, x:Float, y:Float, z:Float):Void {
+extern inline function prependTranslationMatrix4(out:Matrix4, source:Matrix4, x:Float, y:Float, z:Float):Void {
 #if hl
 	flight._hl._fn.Geometry.prependTranslationMatrix4(out, source, x, y, z);
 #elseif cpp
@@ -1562,7 +1562,7 @@ inline function prependTranslationMatrix4(out:Matrix4, source:Matrix4, x:Float, 
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function rotateMatrix4(out:Matrix4, source:Matrix4, axis:Vector3, radians:Float):Void {
+extern inline function rotateMatrix4(out:Matrix4, source:Matrix4, axis:Vector3, radians:Float):Void {
 #if hl
 	flight._hl._fn.Geometry.rotateMatrix4(out, source, axis, radians);
 #elseif cpp
@@ -1573,7 +1573,7 @@ inline function rotateMatrix4(out:Matrix4, source:Matrix4, axis:Vector3, radians
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function scaleMatrix4(out:Matrix4, source:Matrix4, sx:Float, sy:Float, sz:Float):Void {
+extern inline function scaleMatrix4(out:Matrix4, source:Matrix4, sx:Float, sy:Float, sz:Float):Void {
 #if hl
 	flight._hl._fn.Geometry.scaleMatrix4(out, source, sx, sy, sz);
 #elseif cpp
@@ -1584,7 +1584,7 @@ inline function scaleMatrix4(out:Matrix4, source:Matrix4, sx:Float, sy:Float, sz
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function setMatrix4(out:Matrix4, m00:Float, m01:Float, m02:Float, m03:Float, m10:Float, m11:Float, m12:Float, m13:Float, m20:Float, m21:Float, m22:Float, m23:Float, m30:Float, m31:Float, m32:Float, m33:Float):Void {
+extern inline function setMatrix4(out:Matrix4, m00:Float, m01:Float, m02:Float, m03:Float, m10:Float, m11:Float, m12:Float, m13:Float, m20:Float, m21:Float, m22:Float, m23:Float, m30:Float, m31:Float, m32:Float, m33:Float):Void {
 #if hl
 	flight._hl._fn.Geometry.setMatrix4(out, m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23, m30, m31, m32, m33);
 #elseif cpp
@@ -1595,7 +1595,7 @@ inline function setMatrix4(out:Matrix4, m00:Float, m01:Float, m02:Float, m03:Flo
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function setMatrix4Element(out:Matrix4, row:Int, column:Int, value:Float):Void {
+extern inline function setMatrix4Element(out:Matrix4, row:Int, column:Int, value:Float):Void {
 #if hl
 	flight._hl._fn.Geometry.setMatrix4Element(out, row, column, value);
 #elseif cpp
@@ -1606,7 +1606,7 @@ inline function setMatrix4Element(out:Matrix4, row:Int, column:Int, value:Float)
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function setMatrix4From2d(out:Matrix4, a:Float, b:Float, c:Float, d:Float, tx:Float, ty:Float):Void {
+extern inline function setMatrix4From2d(out:Matrix4, a:Float, b:Float, c:Float, d:Float, tx:Float, ty:Float):Void {
 #if hl
 	flight._hl._fn.Geometry.setMatrix4From2d(out, a, b, c, d, tx, ty);
 #elseif cpp
@@ -1617,7 +1617,7 @@ inline function setMatrix4From2d(out:Matrix4, a:Float, b:Float, c:Float, d:Float
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function setMatrix4FromFloat32Array(out:Matrix4, offset:Int, source:Dynamic, sourceLen:Int):Void {
+extern inline function setMatrix4FromFloat32Array(out:Matrix4, offset:Int, source:Dynamic, sourceLen:Int):Void {
 #if hl
 	flight._hl._fn.Geometry.setMatrix4FromFloat32Array(out, offset, source, sourceLen);
 #elseif cpp
@@ -1628,7 +1628,7 @@ inline function setMatrix4FromFloat32Array(out:Matrix4, offset:Int, source:Dynam
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function setMatrix4FromMatrix(out:Matrix4, source:Matrix):Void {
+extern inline function setMatrix4FromMatrix(out:Matrix4, source:Matrix):Void {
 #if hl
 	flight._hl._fn.Geometry.setMatrix4FromMatrix(out, source);
 #elseif cpp
@@ -1639,7 +1639,7 @@ inline function setMatrix4FromMatrix(out:Matrix4, source:Matrix):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function setMatrix4FromMatrix3(out:Matrix4, source:Matrix3):Void {
+extern inline function setMatrix4FromMatrix3(out:Matrix4, source:Matrix3):Void {
 #if hl
 	flight._hl._fn.Geometry.setMatrix4FromMatrix3(out, source);
 #elseif cpp
@@ -1650,7 +1650,7 @@ inline function setMatrix4FromMatrix3(out:Matrix4, source:Matrix3):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function setMatrix4FromQuaternion(out:Matrix4, source:Quaternion):Void {
+extern inline function setMatrix4FromQuaternion(out:Matrix4, source:Quaternion):Void {
 #if hl
 	flight._hl._fn.Geometry.setMatrix4FromQuaternion(out, source);
 #elseif cpp
@@ -1661,7 +1661,7 @@ inline function setMatrix4FromQuaternion(out:Matrix4, source:Quaternion):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function setMatrix4Identity(out:Matrix4):Void {
+extern inline function setMatrix4Identity(out:Matrix4):Void {
 #if hl
 	flight._hl._fn.Geometry.setMatrix4Identity(out);
 #elseif cpp
@@ -1672,7 +1672,7 @@ inline function setMatrix4Identity(out:Matrix4):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function setMatrix4LookAt(out:Matrix4, eye:Vector3, target:Vector3, up:Vector3):Void {
+extern inline function setMatrix4LookAt(out:Matrix4, eye:Vector3, target:Vector3, up:Vector3):Void {
 #if hl
 	flight._hl._fn.Geometry.setMatrix4LookAt(out, eye, target, up);
 #elseif cpp
@@ -1683,7 +1683,7 @@ inline function setMatrix4LookAt(out:Matrix4, eye:Vector3, target:Vector3, up:Ve
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function setMatrix4Position(out:Matrix4, source:Vector3):Void {
+extern inline function setMatrix4Position(out:Matrix4, source:Vector3):Void {
 #if hl
 	flight._hl._fn.Geometry.setMatrix4Position(out, source);
 #elseif cpp
@@ -1694,7 +1694,7 @@ inline function setMatrix4Position(out:Matrix4, source:Vector3):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function setOrthographicMatrix4(out:Matrix4, left:Float, right:Float, bottom:Float, top:Float, zNear:Float, zFar:Float):Void {
+extern inline function setOrthographicMatrix4(out:Matrix4, left:Float, right:Float, bottom:Float, top:Float, zNear:Float, zFar:Float):Void {
 #if hl
 	flight._hl._fn.Geometry.setOrthographicMatrix4(out, left, right, bottom, top, zNear, zFar);
 #elseif cpp
@@ -1705,7 +1705,7 @@ inline function setOrthographicMatrix4(out:Matrix4, left:Float, right:Float, bot
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function setPerspectiveMatrix4(out:Matrix4, tanHalfFovY:Float, aspect:Float, zNear:Float, zFar:Float):Void {
+extern inline function setPerspectiveMatrix4(out:Matrix4, tanHalfFovY:Float, aspect:Float, zNear:Float, zFar:Float):Void {
 #if hl
 	flight._hl._fn.Geometry.setPerspectiveMatrix4(out, tanHalfFovY, aspect, zNear, zFar);
 #elseif cpp
@@ -1716,7 +1716,7 @@ inline function setPerspectiveMatrix4(out:Matrix4, tanHalfFovY:Float, aspect:Flo
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function translateMatrix4(out:Matrix4, source:Matrix4, tx:Float, ty:Float, tz:Float):Void {
+extern inline function translateMatrix4(out:Matrix4, source:Matrix4, tx:Float, ty:Float, tz:Float):Void {
 #if hl
 	flight._hl._fn.Geometry.translateMatrix4(out, source, tx, ty, tz);
 #elseif cpp
@@ -1727,7 +1727,7 @@ inline function translateMatrix4(out:Matrix4, source:Matrix4, tx:Float, ty:Float
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function transposeMatrix4(out:Matrix4, source:Matrix4):Void {
+extern inline function transposeMatrix4(out:Matrix4, source:Matrix4):Void {
 #if hl
 	flight._hl._fn.Geometry.transposeMatrix4(out, source);
 #elseif cpp
@@ -1738,7 +1738,7 @@ inline function transposeMatrix4(out:Matrix4, source:Matrix4):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function writeMatrix4ToFloat32Array(out:Dynamic, outLen:Int, offset:Int, source:Matrix4):Void {
+extern inline function writeMatrix4ToFloat32Array(out:Dynamic, outLen:Int, offset:Int, source:Matrix4):Void {
 #if hl
 	flight._hl._fn.Geometry.writeMatrix4ToFloat32Array(out, outLen, offset, source);
 #elseif cpp
@@ -1749,7 +1749,7 @@ inline function writeMatrix4ToFloat32Array(out:Dynamic, outLen:Int, offset:Int, 
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function acquireIdentityMatrix4():Matrix4 {
+extern inline function acquireIdentityMatrix4():Matrix4 {
 #if hl
 	return flight._hl._fn.Geometry.acquireIdentityMatrix4();
 #elseif cpp
@@ -1760,7 +1760,7 @@ inline function acquireIdentityMatrix4():Matrix4 {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function acquireMatrix4():Matrix4 {
+extern inline function acquireMatrix4():Matrix4 {
 #if hl
 	return flight._hl._fn.Geometry.acquireMatrix4();
 #elseif cpp
@@ -1771,7 +1771,7 @@ inline function acquireMatrix4():Matrix4 {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function clearMatrix4Pool():Void {
+extern inline function clearMatrix4Pool():Void {
 #if hl
 	flight._hl._fn.Geometry.clearMatrix4Pool();
 #elseif cpp
@@ -1782,7 +1782,7 @@ inline function clearMatrix4Pool():Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function releaseMatrix4(m:Matrix4):Void {
+extern inline function releaseMatrix4(m:Matrix4):Void {
 #if hl
 	flight._hl._fn.Geometry.releaseMatrix4(m);
 #elseif cpp
@@ -1793,7 +1793,7 @@ inline function releaseMatrix4(m:Matrix4):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function acquireIdentityMatrix():Matrix {
+extern inline function acquireIdentityMatrix():Matrix {
 #if hl
 	return flight._hl._fn.Geometry.acquireIdentityMatrix();
 #elseif cpp
@@ -1804,7 +1804,7 @@ inline function acquireIdentityMatrix():Matrix {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function acquireMatrix():Matrix {
+extern inline function acquireMatrix():Matrix {
 #if hl
 	return flight._hl._fn.Geometry.acquireMatrix();
 #elseif cpp
@@ -1815,7 +1815,7 @@ inline function acquireMatrix():Matrix {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function clearMatrixPool():Void {
+extern inline function clearMatrixPool():Void {
 #if hl
 	flight._hl._fn.Geometry.clearMatrixPool();
 #elseif cpp
@@ -1826,7 +1826,7 @@ inline function clearMatrixPool():Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function releaseMatrix(m:Matrix):Void {
+extern inline function releaseMatrix(m:Matrix):Void {
 #if hl
 	flight._hl._fn.Geometry.releaseMatrix(m);
 #elseif cpp
@@ -1837,7 +1837,7 @@ inline function releaseMatrix(m:Matrix):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function createObb(centerX:Float, centerY:Float, centerZ:Float, halfExtentX:Float, halfExtentY:Float, halfExtentZ:Float, orientationX:Float, orientationY:Float, orientationZ:Float, orientationW:Float):Obb {
+extern inline function createObb(centerX:Float, centerY:Float, centerZ:Float, halfExtentX:Float, halfExtentY:Float, halfExtentZ:Float, orientationX:Float, orientationY:Float, orientationZ:Float, orientationW:Float):Obb {
 #if hl
 	return flight._hl._fn.Geometry.createObb(centerX, centerY, centerZ, halfExtentX, halfExtentY, halfExtentZ, orientationX, orientationY, orientationZ, orientationW);
 #elseif cpp
@@ -1848,7 +1848,7 @@ inline function createObb(centerX:Float, centerY:Float, centerZ:Float, halfExten
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function getClosestPointOnObb(out:Vector3, obb:Obb, point:Vector3):Void {
+extern inline function getClosestPointOnObb(out:Vector3, obb:Obb, point:Vector3):Void {
 #if hl
 	flight._hl._fn.Geometry.getClosestPointOnObb(out, obb, point);
 #elseif cpp
@@ -1859,7 +1859,7 @@ inline function getClosestPointOnObb(out:Vector3, obb:Obb, point:Vector3):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function intersectRay3dObb(ray:Ray3D, obb:Obb):Float {
+extern inline function intersectRay3dObb(ray:Ray3D, obb:Obb):Float {
 #if hl
 	return flight._hl._fn.Geometry.intersectRay3dObb(ray, obb);
 #elseif cpp
@@ -1870,7 +1870,7 @@ inline function intersectRay3dObb(ray:Ray3D, obb:Obb):Float {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function isObbIntersectingAabb(obb:Obb, aabb:Aabb):Bool {
+extern inline function isObbIntersectingAabb(obb:Obb, aabb:Aabb):Bool {
 #if hl
 	return flight._hl._fn.Geometry.isObbIntersectingAabb(obb, aabb);
 #elseif cpp
@@ -1881,7 +1881,7 @@ inline function isObbIntersectingAabb(obb:Obb, aabb:Aabb):Bool {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function isObbIntersectingObb(a:Obb, b:Obb):Bool {
+extern inline function isObbIntersectingObb(a:Obb, b:Obb):Bool {
 #if hl
 	return flight._hl._fn.Geometry.isObbIntersectingObb(a, b);
 #elseif cpp
@@ -1892,7 +1892,7 @@ inline function isObbIntersectingObb(a:Obb, b:Obb):Bool {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function isObbIntersectingSphere(obb:Obb, sphere:BoundingSphere):Bool {
+extern inline function isObbIntersectingSphere(obb:Obb, sphere:BoundingSphere):Bool {
 #if hl
 	return flight._hl._fn.Geometry.isObbIntersectingSphere(obb, sphere);
 #elseif cpp
@@ -1903,7 +1903,7 @@ inline function isObbIntersectingSphere(obb:Obb, sphere:BoundingSphere):Bool {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function setObb(out:Obb, centerX:Float, centerY:Float, centerZ:Float, halfExtentX:Float, halfExtentY:Float, halfExtentZ:Float, orientationX:Float, orientationY:Float, orientationZ:Float, orientationW:Float):Void {
+extern inline function setObb(out:Obb, centerX:Float, centerY:Float, centerZ:Float, halfExtentX:Float, halfExtentY:Float, halfExtentZ:Float, orientationX:Float, orientationY:Float, orientationZ:Float, orientationW:Float):Void {
 #if hl
 	flight._hl._fn.Geometry.setObb(out, centerX, centerY, centerZ, halfExtentX, halfExtentY, halfExtentZ, orientationX, orientationY, orientationZ, orientationW);
 #elseif cpp
@@ -1914,7 +1914,7 @@ inline function setObb(out:Obb, centerX:Float, centerY:Float, centerZ:Float, hal
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function transformObbByMatrix4(out:Obb, obb:Obb, m:Matrix4):Void {
+extern inline function transformObbByMatrix4(out:Obb, obb:Obb, m:Matrix4):Void {
 #if hl
 	flight._hl._fn.Geometry.transformObbByMatrix4(out, obb, m);
 #elseif cpp
@@ -1925,7 +1925,7 @@ inline function transformObbByMatrix4(out:Obb, obb:Obb, m:Matrix4):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function createPlane(a:Float, b:Float, c:Float, d:Float):Plane {
+extern inline function createPlane(a:Float, b:Float, c:Float, d:Float):Plane {
 #if hl
 	return flight._hl._fn.Geometry.createPlane(a, b, c, d);
 #elseif cpp
@@ -1936,7 +1936,7 @@ inline function createPlane(a:Float, b:Float, c:Float, d:Float):Plane {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function clonePlane(source:Plane):Plane {
+extern inline function clonePlane(source:Plane):Plane {
 #if hl
 	return flight._hl._fn.Geometry.clonePlane(source);
 #elseif cpp
@@ -1947,7 +1947,7 @@ inline function clonePlane(source:Plane):Plane {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function copyPlane(out:Plane, source:Plane):Void {
+extern inline function copyPlane(out:Plane, source:Plane):Void {
 #if hl
 	flight._hl._fn.Geometry.copyPlane(out, source);
 #elseif cpp
@@ -1958,7 +1958,7 @@ inline function copyPlane(out:Plane, source:Plane):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function getClosestPointOnPlane(out:Vector3, plane:Plane, point:Vector3):Void {
+extern inline function getClosestPointOnPlane(out:Vector3, plane:Plane, point:Vector3):Void {
 #if hl
 	flight._hl._fn.Geometry.getClosestPointOnPlane(out, plane, point);
 #elseif cpp
@@ -1969,7 +1969,7 @@ inline function getClosestPointOnPlane(out:Vector3, plane:Plane, point:Vector3):
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function getPlaneCoplanarPoint(out:Vector3, plane:Plane):Void {
+extern inline function getPlaneCoplanarPoint(out:Vector3, plane:Plane):Void {
 #if hl
 	flight._hl._fn.Geometry.getPlaneCoplanarPoint(out, plane);
 #elseif cpp
@@ -1980,7 +1980,7 @@ inline function getPlaneCoplanarPoint(out:Vector3, plane:Plane):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function getPlaneSignedDistanceToPoint(plane:Plane, point:Vector3):Float {
+extern inline function getPlaneSignedDistanceToPoint(plane:Plane, point:Vector3):Float {
 #if hl
 	return flight._hl._fn.Geometry.getPlaneSignedDistanceToPoint(plane, point);
 #elseif cpp
@@ -1991,7 +1991,7 @@ inline function getPlaneSignedDistanceToPoint(plane:Plane, point:Vector3):Float 
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function normalizePlane(out:Plane, source:Plane):Void {
+extern inline function normalizePlane(out:Plane, source:Plane):Void {
 #if hl
 	flight._hl._fn.Geometry.normalizePlane(out, source);
 #elseif cpp
@@ -2002,7 +2002,7 @@ inline function normalizePlane(out:Plane, source:Plane):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function projectVector3OntoPlane(out:Vector3, point:Vector3, plane:Plane):Void {
+extern inline function projectVector3OntoPlane(out:Vector3, point:Vector3, plane:Plane):Void {
 #if hl
 	flight._hl._fn.Geometry.projectVector3OntoPlane(out, point, plane);
 #elseif cpp
@@ -2013,7 +2013,7 @@ inline function projectVector3OntoPlane(out:Vector3, point:Vector3, plane:Plane)
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function setPlane(out:Plane, a:Float, b:Float, c:Float, d:Float):Void {
+extern inline function setPlane(out:Plane, a:Float, b:Float, c:Float, d:Float):Void {
 #if hl
 	flight._hl._fn.Geometry.setPlane(out, a, b, c, d);
 #elseif cpp
@@ -2024,7 +2024,7 @@ inline function setPlane(out:Plane, a:Float, b:Float, c:Float, d:Float):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function setPlaneFromNormalAndPoint(out:Plane, normal:Vector3, point:Vector3):Void {
+extern inline function setPlaneFromNormalAndPoint(out:Plane, normal:Vector3, point:Vector3):Void {
 #if hl
 	flight._hl._fn.Geometry.setPlaneFromNormalAndPoint(out, normal, point);
 #elseif cpp
@@ -2035,7 +2035,7 @@ inline function setPlaneFromNormalAndPoint(out:Plane, normal:Vector3, point:Vect
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function setPlaneFromPoints(out:Plane, a:Vector3, b:Vector3, c:Vector3):Void {
+extern inline function setPlaneFromPoints(out:Plane, a:Vector3, b:Vector3, c:Vector3):Void {
 #if hl
 	flight._hl._fn.Geometry.setPlaneFromPoints(out, a, b, c);
 #elseif cpp
@@ -2046,7 +2046,7 @@ inline function setPlaneFromPoints(out:Plane, a:Vector3, b:Vector3, c:Vector3):V
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function createQuaternion(x:Float, y:Float, z:Float, w:Float):Quaternion {
+extern inline function createQuaternion(x:Float, y:Float, z:Float, w:Float):Quaternion {
 #if hl
 	return flight._hl._fn.Geometry.createQuaternion(x, y, z, w);
 #elseif cpp
@@ -2057,7 +2057,7 @@ inline function createQuaternion(x:Float, y:Float, z:Float, w:Float):Quaternion 
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function cloneQuaternion(source:Quaternion):Quaternion {
+extern inline function cloneQuaternion(source:Quaternion):Quaternion {
 #if hl
 	return flight._hl._fn.Geometry.cloneQuaternion(source);
 #elseif cpp
@@ -2068,7 +2068,7 @@ inline function cloneQuaternion(source:Quaternion):Quaternion {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function conjugateQuaternion(out:Quaternion, source:Quaternion):Void {
+extern inline function conjugateQuaternion(out:Quaternion, source:Quaternion):Void {
 #if hl
 	flight._hl._fn.Geometry.conjugateQuaternion(out, source);
 #elseif cpp
@@ -2079,7 +2079,7 @@ inline function conjugateQuaternion(out:Quaternion, source:Quaternion):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function copyQuaternion(out:Quaternion, source:Quaternion):Void {
+extern inline function copyQuaternion(out:Quaternion, source:Quaternion):Void {
 #if hl
 	flight._hl._fn.Geometry.copyQuaternion(out, source);
 #elseif cpp
@@ -2090,7 +2090,7 @@ inline function copyQuaternion(out:Quaternion, source:Quaternion):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function equalsQuaternion(a:Quaternion, b:Quaternion):Bool {
+extern inline function equalsQuaternion(a:Quaternion, b:Quaternion):Bool {
 #if hl
 	return flight._hl._fn.Geometry.equalsQuaternion(a, b);
 #elseif cpp
@@ -2101,7 +2101,7 @@ inline function equalsQuaternion(a:Quaternion, b:Quaternion):Bool {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function getQuaternionAngleBetween(a:Quaternion, b:Quaternion):Float {
+extern inline function getQuaternionAngleBetween(a:Quaternion, b:Quaternion):Float {
 #if hl
 	return flight._hl._fn.Geometry.getQuaternionAngleBetween(a, b);
 #elseif cpp
@@ -2112,7 +2112,7 @@ inline function getQuaternionAngleBetween(a:Quaternion, b:Quaternion):Float {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function getQuaternionAxisAngle(outAxis:Vector3, source:Quaternion):Float {
+extern inline function getQuaternionAxisAngle(outAxis:Vector3, source:Quaternion):Float {
 #if hl
 	return flight._hl._fn.Geometry.getQuaternionAxisAngle(outAxis, source);
 #elseif cpp
@@ -2123,7 +2123,7 @@ inline function getQuaternionAxisAngle(outAxis:Vector3, source:Quaternion):Float
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function getQuaternionDot(a:Quaternion, b:Quaternion):Float {
+extern inline function getQuaternionDot(a:Quaternion, b:Quaternion):Float {
 #if hl
 	return flight._hl._fn.Geometry.getQuaternionDot(a, b);
 #elseif cpp
@@ -2134,7 +2134,7 @@ inline function getQuaternionDot(a:Quaternion, b:Quaternion):Float {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function getQuaternionEuler(out:Vector3, source:Quaternion, order:flight.EulerOrder):Void {
+extern inline function getQuaternionEuler(out:Vector3, source:Quaternion, order:flight.EulerOrder):Void {
 #if hl
 	flight._hl._fn.Geometry.getQuaternionEuler(out, source, order);
 #elseif cpp
@@ -2145,7 +2145,7 @@ inline function getQuaternionEuler(out:Vector3, source:Quaternion, order:flight.
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function inverseQuaternion(out:Quaternion, source:Quaternion):Void {
+extern inline function inverseQuaternion(out:Quaternion, source:Quaternion):Void {
 #if hl
 	flight._hl._fn.Geometry.inverseQuaternion(out, source);
 #elseif cpp
@@ -2156,7 +2156,7 @@ inline function inverseQuaternion(out:Quaternion, source:Quaternion):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function multiplyQuaternion(out:Quaternion, a:Quaternion, b:Quaternion):Void {
+extern inline function multiplyQuaternion(out:Quaternion, a:Quaternion, b:Quaternion):Void {
 #if hl
 	flight._hl._fn.Geometry.multiplyQuaternion(out, a, b);
 #elseif cpp
@@ -2167,7 +2167,7 @@ inline function multiplyQuaternion(out:Quaternion, a:Quaternion, b:Quaternion):V
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function normalizeQuaternion(out:Quaternion, source:Quaternion):Float {
+extern inline function normalizeQuaternion(out:Quaternion, source:Quaternion):Float {
 #if hl
 	return flight._hl._fn.Geometry.normalizeQuaternion(out, source);
 #elseif cpp
@@ -2178,7 +2178,7 @@ inline function normalizeQuaternion(out:Quaternion, source:Quaternion):Float {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function rotateVector3ByQuaternion(out:Vector3, vector:Vector3, q:Quaternion):Void {
+extern inline function rotateVector3ByQuaternion(out:Vector3, vector:Vector3, q:Quaternion):Void {
 #if hl
 	flight._hl._fn.Geometry.rotateVector3ByQuaternion(out, vector, q);
 #elseif cpp
@@ -2189,7 +2189,7 @@ inline function rotateVector3ByQuaternion(out:Vector3, vector:Vector3, q:Quatern
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function setQuaternion(out:Quaternion, x:Float, y:Float, z:Float, w:Float):Void {
+extern inline function setQuaternion(out:Quaternion, x:Float, y:Float, z:Float, w:Float):Void {
 #if hl
 	flight._hl._fn.Geometry.setQuaternion(out, x, y, z, w);
 #elseif cpp
@@ -2200,7 +2200,7 @@ inline function setQuaternion(out:Quaternion, x:Float, y:Float, z:Float, w:Float
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function setQuaternionFromAxisAngle(out:Quaternion, axis:Vector3, angle:Float):Void {
+extern inline function setQuaternionFromAxisAngle(out:Quaternion, axis:Vector3, angle:Float):Void {
 #if hl
 	flight._hl._fn.Geometry.setQuaternionFromAxisAngle(out, axis, angle);
 #elseif cpp
@@ -2211,7 +2211,7 @@ inline function setQuaternionFromAxisAngle(out:Quaternion, axis:Vector3, angle:F
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function setQuaternionFromEuler(out:Quaternion, x:Float, y:Float, z:Float, order:flight.EulerOrder):Void {
+extern inline function setQuaternionFromEuler(out:Quaternion, x:Float, y:Float, z:Float, order:flight.EulerOrder):Void {
 #if hl
 	flight._hl._fn.Geometry.setQuaternionFromEuler(out, x, y, z, order);
 #elseif cpp
@@ -2222,7 +2222,7 @@ inline function setQuaternionFromEuler(out:Quaternion, x:Float, y:Float, z:Float
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function setQuaternionFromMatrix4(out:Quaternion, source:Matrix4):Void {
+extern inline function setQuaternionFromMatrix4(out:Quaternion, source:Matrix4):Void {
 #if hl
 	flight._hl._fn.Geometry.setQuaternionFromMatrix4(out, source);
 #elseif cpp
@@ -2233,7 +2233,7 @@ inline function setQuaternionFromMatrix4(out:Quaternion, source:Matrix4):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function setQuaternionFromUnitVectors(out:Quaternion, from:Vector3, to:Vector3):Void {
+extern inline function setQuaternionFromUnitVectors(out:Quaternion, from:Vector3, to:Vector3):Void {
 #if hl
 	flight._hl._fn.Geometry.setQuaternionFromUnitVectors(out, from, to);
 #elseif cpp
@@ -2244,7 +2244,7 @@ inline function setQuaternionFromUnitVectors(out:Quaternion, from:Vector3, to:Ve
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function setQuaternionIdentity(out:Quaternion):Void {
+extern inline function setQuaternionIdentity(out:Quaternion):Void {
 #if hl
 	flight._hl._fn.Geometry.setQuaternionIdentity(out);
 #elseif cpp
@@ -2255,7 +2255,7 @@ inline function setQuaternionIdentity(out:Quaternion):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function setQuaternionLookRotation(out:Quaternion, forward:Vector3, up:Vector3):Void {
+extern inline function setQuaternionLookRotation(out:Quaternion, forward:Vector3, up:Vector3):Void {
 #if hl
 	flight._hl._fn.Geometry.setQuaternionLookRotation(out, forward, up);
 #elseif cpp
@@ -2266,7 +2266,7 @@ inline function setQuaternionLookRotation(out:Quaternion, forward:Vector3, up:Ve
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function slerpQuaternion(out:Quaternion, a:Quaternion, b:Quaternion, t:Float):Void {
+extern inline function slerpQuaternion(out:Quaternion, a:Quaternion, b:Quaternion, t:Float):Void {
 #if hl
 	flight._hl._fn.Geometry.slerpQuaternion(out, a, b, t);
 #elseif cpp
@@ -2277,7 +2277,7 @@ inline function slerpQuaternion(out:Quaternion, a:Quaternion, b:Quaternion, t:Fl
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function acquireIdentityQuaternion():Quaternion {
+extern inline function acquireIdentityQuaternion():Quaternion {
 #if hl
 	return flight._hl._fn.Geometry.acquireIdentityQuaternion();
 #elseif cpp
@@ -2288,7 +2288,7 @@ inline function acquireIdentityQuaternion():Quaternion {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function acquireQuaternion():Quaternion {
+extern inline function acquireQuaternion():Quaternion {
 #if hl
 	return flight._hl._fn.Geometry.acquireQuaternion();
 #elseif cpp
@@ -2299,7 +2299,7 @@ inline function acquireQuaternion():Quaternion {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function clearQuaternionPool():Void {
+extern inline function clearQuaternionPool():Void {
 #if hl
 	flight._hl._fn.Geometry.clearQuaternionPool();
 #elseif cpp
@@ -2310,7 +2310,7 @@ inline function clearQuaternionPool():Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function releaseQuaternion(q:Quaternion):Void {
+extern inline function releaseQuaternion(q:Quaternion):Void {
 #if hl
 	flight._hl._fn.Geometry.releaseQuaternion(q);
 #elseif cpp
@@ -2321,7 +2321,7 @@ inline function releaseQuaternion(q:Quaternion):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function createRay3d(originX:Float, originY:Float, originZ:Float, directionX:Float, directionY:Float, directionZ:Float):Ray3D {
+extern inline function createRay3d(originX:Float, originY:Float, originZ:Float, directionX:Float, directionY:Float, directionZ:Float):Ray3D {
 #if hl
 	return flight._hl._fn.Geometry.createRay3d(originX, originY, originZ, directionX, directionY, directionZ);
 #elseif cpp
@@ -2332,7 +2332,7 @@ inline function createRay3d(originX:Float, originY:Float, originZ:Float, directi
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function getClosestPointBetweenRay3ds(outA:Vector3, outB:Vector3, a:Ray3D, b:Ray3D):Void {
+extern inline function getClosestPointBetweenRay3ds(outA:Vector3, outB:Vector3, a:Ray3D, b:Ray3D):Void {
 #if hl
 	flight._hl._fn.Geometry.getClosestPointBetweenRay3ds(outA, outB, a, b);
 #elseif cpp
@@ -2343,7 +2343,7 @@ inline function getClosestPointBetweenRay3ds(outA:Vector3, outB:Vector3, a:Ray3D
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function getClosestPointOnRay3d(out:Vector3, ray:Ray3D, point:Vector3):Void {
+extern inline function getClosestPointOnRay3d(out:Vector3, ray:Ray3D, point:Vector3):Void {
 #if hl
 	flight._hl._fn.Geometry.getClosestPointOnRay3d(out, ray, point);
 #elseif cpp
@@ -2354,7 +2354,7 @@ inline function getClosestPointOnRay3d(out:Vector3, ray:Ray3D, point:Vector3):Vo
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function getRay3dPointAt(out:Vector3, ray:Ray3D, t:Float):Void {
+extern inline function getRay3dPointAt(out:Vector3, ray:Ray3D, t:Float):Void {
 #if hl
 	flight._hl._fn.Geometry.getRay3dPointAt(out, ray, t);
 #elseif cpp
@@ -2365,7 +2365,7 @@ inline function getRay3dPointAt(out:Vector3, ray:Ray3D, t:Float):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function intersectRay3dAabb(ray:Ray3D, aabb:Aabb):Float {
+extern inline function intersectRay3dAabb(ray:Ray3D, aabb:Aabb):Float {
 #if hl
 	return flight._hl._fn.Geometry.intersectRay3dAabb(ray, aabb);
 #elseif cpp
@@ -2376,7 +2376,7 @@ inline function intersectRay3dAabb(ray:Ray3D, aabb:Aabb):Float {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function intersectRay3dPlane(ray:Ray3D, plane:Plane):Float {
+extern inline function intersectRay3dPlane(ray:Ray3D, plane:Plane):Float {
 #if hl
 	return flight._hl._fn.Geometry.intersectRay3dPlane(ray, plane);
 #elseif cpp
@@ -2387,7 +2387,7 @@ inline function intersectRay3dPlane(ray:Ray3D, plane:Plane):Float {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function intersectRay3dSphere(ray:Ray3D, sphere:BoundingSphere):Float {
+extern inline function intersectRay3dSphere(ray:Ray3D, sphere:BoundingSphere):Float {
 #if hl
 	return flight._hl._fn.Geometry.intersectRay3dSphere(ray, sphere);
 #elseif cpp
@@ -2398,7 +2398,7 @@ inline function intersectRay3dSphere(ray:Ray3D, sphere:BoundingSphere):Float {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function intersectRay3dTriangle(ray:Ray3D, a:Vector3, b:Vector3, c:Vector3):Float {
+extern inline function intersectRay3dTriangle(ray:Ray3D, a:Vector3, b:Vector3, c:Vector3):Float {
 #if hl
 	return flight._hl._fn.Geometry.intersectRay3dTriangle(ray, a, b, c);
 #elseif cpp
@@ -2409,7 +2409,7 @@ inline function intersectRay3dTriangle(ray:Ray3D, a:Vector3, b:Vector3, c:Vector
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function setRay3d(out:Ray3D, origin:Vector3, direction:Vector3):Void {
+extern inline function setRay3d(out:Ray3D, origin:Vector3, direction:Vector3):Void {
 #if hl
 	flight._hl._fn.Geometry.setRay3d(out, origin, direction);
 #elseif cpp
@@ -2420,7 +2420,7 @@ inline function setRay3d(out:Ray3D, origin:Vector3, direction:Vector3):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function transformRay3dByMatrix4(out:Ray3D, ray:Ray3D, m:Matrix4):Void {
+extern inline function transformRay3dByMatrix4(out:Ray3D, ray:Ray3D, m:Matrix4):Void {
 #if hl
 	flight._hl._fn.Geometry.transformRay3dByMatrix4(out, ray, m);
 #elseif cpp
@@ -2431,7 +2431,7 @@ inline function transformRay3dByMatrix4(out:Ray3D, ray:Ray3D, m:Matrix4):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function createRectangle(x:Float, y:Float, width:Float, height:Float):Rectangle {
+extern inline function createRectangle(x:Float, y:Float, width:Float, height:Float):Rectangle {
 #if hl
 	return flight._hl._fn.Geometry.createRectangle(x, y, width, height);
 #elseif cpp
@@ -2442,7 +2442,7 @@ inline function createRectangle(x:Float, y:Float, width:Float, height:Float):Rec
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function cloneRectangle(source:Rectangle):Rectangle {
+extern inline function cloneRectangle(source:Rectangle):Rectangle {
 #if hl
 	return flight._hl._fn.Geometry.cloneRectangle(source);
 #elseif cpp
@@ -2453,7 +2453,7 @@ inline function cloneRectangle(source:Rectangle):Rectangle {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function computeRectangleIntersection(out:Rectangle, a:Rectangle, b:Rectangle):Void {
+extern inline function computeRectangleIntersection(out:Rectangle, a:Rectangle, b:Rectangle):Void {
 #if hl
 	flight._hl._fn.Geometry.computeRectangleIntersection(out, a, b);
 #elseif cpp
@@ -2464,7 +2464,7 @@ inline function computeRectangleIntersection(out:Rectangle, a:Rectangle, b:Recta
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function containsRectanglePoint(source:Rectangle, vector:Vector2):Bool {
+extern inline function containsRectanglePoint(source:Rectangle, vector:Vector2):Bool {
 #if hl
 	return flight._hl._fn.Geometry.containsRectanglePoint(source, vector);
 #elseif cpp
@@ -2475,7 +2475,7 @@ inline function containsRectanglePoint(source:Rectangle, vector:Vector2):Bool {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function containsRectanglePointXy(source:Rectangle, x:Float, y:Float):Bool {
+extern inline function containsRectanglePointXy(source:Rectangle, x:Float, y:Float):Bool {
 #if hl
 	return flight._hl._fn.Geometry.containsRectanglePointXy(source, x, y);
 #elseif cpp
@@ -2486,7 +2486,7 @@ inline function containsRectanglePointXy(source:Rectangle, x:Float, y:Float):Boo
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function copyRectangle(out:Rectangle, source:Rectangle):Void {
+extern inline function copyRectangle(out:Rectangle, source:Rectangle):Void {
 #if hl
 	flight._hl._fn.Geometry.copyRectangle(out, source);
 #elseif cpp
@@ -2497,7 +2497,7 @@ inline function copyRectangle(out:Rectangle, source:Rectangle):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function enclosesRectangle(source:Rectangle, other:Rectangle):Bool {
+extern inline function enclosesRectangle(source:Rectangle, other:Rectangle):Bool {
 #if hl
 	return flight._hl._fn.Geometry.enclosesRectangle(source, other);
 #elseif cpp
@@ -2508,7 +2508,7 @@ inline function enclosesRectangle(source:Rectangle, other:Rectangle):Bool {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function equalsRectangle(a:Rectangle, b:Rectangle):Bool {
+extern inline function equalsRectangle(a:Rectangle, b:Rectangle):Bool {
 #if hl
 	return flight._hl._fn.Geometry.equalsRectangle(a, b);
 #elseif cpp
@@ -2519,7 +2519,7 @@ inline function equalsRectangle(a:Rectangle, b:Rectangle):Bool {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function expandRectangleToPoint(out:Rectangle, sourceRect:Rectangle, sourceVec2:Vector2):Void {
+extern inline function expandRectangleToPoint(out:Rectangle, sourceRect:Rectangle, sourceVec2:Vector2):Void {
 #if hl
 	flight._hl._fn.Geometry.expandRectangleToPoint(out, sourceRect, sourceVec2);
 #elseif cpp
@@ -2530,7 +2530,7 @@ inline function expandRectangleToPoint(out:Rectangle, sourceRect:Rectangle, sour
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function getRectangleBottom(source:Rectangle):Float {
+extern inline function getRectangleBottom(source:Rectangle):Float {
 #if hl
 	return flight._hl._fn.Geometry.getRectangleBottom(source);
 #elseif cpp
@@ -2541,7 +2541,7 @@ inline function getRectangleBottom(source:Rectangle):Float {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function getRectangleBottomRight(out:Vector2, source:Rectangle):Void {
+extern inline function getRectangleBottomRight(out:Vector2, source:Rectangle):Void {
 #if hl
 	flight._hl._fn.Geometry.getRectangleBottomRight(out, source);
 #elseif cpp
@@ -2552,7 +2552,7 @@ inline function getRectangleBottomRight(out:Vector2, source:Rectangle):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function getRectangleLeft(source:Rectangle):Float {
+extern inline function getRectangleLeft(source:Rectangle):Float {
 #if hl
 	return flight._hl._fn.Geometry.getRectangleLeft(source);
 #elseif cpp
@@ -2563,7 +2563,7 @@ inline function getRectangleLeft(source:Rectangle):Float {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function getRectangleMaxX(source:Rectangle):Float {
+extern inline function getRectangleMaxX(source:Rectangle):Float {
 #if hl
 	return flight._hl._fn.Geometry.getRectangleMaxX(source);
 #elseif cpp
@@ -2574,7 +2574,7 @@ inline function getRectangleMaxX(source:Rectangle):Float {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function getRectangleMaxY(source:Rectangle):Float {
+extern inline function getRectangleMaxY(source:Rectangle):Float {
 #if hl
 	return flight._hl._fn.Geometry.getRectangleMaxY(source);
 #elseif cpp
@@ -2585,7 +2585,7 @@ inline function getRectangleMaxY(source:Rectangle):Float {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function getRectangleMinX(source:Rectangle):Float {
+extern inline function getRectangleMinX(source:Rectangle):Float {
 #if hl
 	return flight._hl._fn.Geometry.getRectangleMinX(source);
 #elseif cpp
@@ -2596,7 +2596,7 @@ inline function getRectangleMinX(source:Rectangle):Float {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function getRectangleMinY(source:Rectangle):Float {
+extern inline function getRectangleMinY(source:Rectangle):Float {
 #if hl
 	return flight._hl._fn.Geometry.getRectangleMinY(source);
 #elseif cpp
@@ -2607,7 +2607,7 @@ inline function getRectangleMinY(source:Rectangle):Float {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function getRectangleNormalizedBottomRight(out:Vector2, source:Rectangle):Void {
+extern inline function getRectangleNormalizedBottomRight(out:Vector2, source:Rectangle):Void {
 #if hl
 	flight._hl._fn.Geometry.getRectangleNormalizedBottomRight(out, source);
 #elseif cpp
@@ -2618,7 +2618,7 @@ inline function getRectangleNormalizedBottomRight(out:Vector2, source:Rectangle)
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function getRectangleNormalizedTopLeft(out:Vector2, source:Rectangle):Void {
+extern inline function getRectangleNormalizedTopLeft(out:Vector2, source:Rectangle):Void {
 #if hl
 	flight._hl._fn.Geometry.getRectangleNormalizedTopLeft(out, source);
 #elseif cpp
@@ -2629,7 +2629,7 @@ inline function getRectangleNormalizedTopLeft(out:Vector2, source:Rectangle):Voi
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function getRectangleRight(source:Rectangle):Float {
+extern inline function getRectangleRight(source:Rectangle):Float {
 #if hl
 	return flight._hl._fn.Geometry.getRectangleRight(source);
 #elseif cpp
@@ -2640,7 +2640,7 @@ inline function getRectangleRight(source:Rectangle):Float {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function getRectangleSize(out:Vector2, source:Rectangle):Void {
+extern inline function getRectangleSize(out:Vector2, source:Rectangle):Void {
 #if hl
 	flight._hl._fn.Geometry.getRectangleSize(out, source);
 #elseif cpp
@@ -2651,7 +2651,7 @@ inline function getRectangleSize(out:Vector2, source:Rectangle):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function getRectangleTop(source:Rectangle):Float {
+extern inline function getRectangleTop(source:Rectangle):Float {
 #if hl
 	return flight._hl._fn.Geometry.getRectangleTop(source);
 #elseif cpp
@@ -2662,7 +2662,7 @@ inline function getRectangleTop(source:Rectangle):Float {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function getRectangleTopLeft(out:Vector2, source:Rectangle):Void {
+extern inline function getRectangleTopLeft(out:Vector2, source:Rectangle):Void {
 #if hl
 	flight._hl._fn.Geometry.getRectangleTopLeft(out, source);
 #elseif cpp
@@ -2673,7 +2673,7 @@ inline function getRectangleTopLeft(out:Vector2, source:Rectangle):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function inflateRectangle(out:Rectangle, source:Rectangle, dx:Float, dy:Float):Void {
+extern inline function inflateRectangle(out:Rectangle, source:Rectangle, dx:Float, dy:Float):Void {
 #if hl
 	flight._hl._fn.Geometry.inflateRectangle(out, source, dx, dy);
 #elseif cpp
@@ -2684,7 +2684,7 @@ inline function inflateRectangle(out:Rectangle, source:Rectangle, dx:Float, dy:F
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function intersectsRectangle(a:Rectangle, b:Rectangle):Bool {
+extern inline function intersectsRectangle(a:Rectangle, b:Rectangle):Bool {
 #if hl
 	return flight._hl._fn.Geometry.intersectsRectangle(a, b);
 #elseif cpp
@@ -2695,7 +2695,7 @@ inline function intersectsRectangle(a:Rectangle, b:Rectangle):Bool {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function isEmptyRectangle(source:Rectangle):Bool {
+extern inline function isEmptyRectangle(source:Rectangle):Bool {
 #if hl
 	return flight._hl._fn.Geometry.isEmptyRectangle(source);
 #elseif cpp
@@ -2706,7 +2706,7 @@ inline function isEmptyRectangle(source:Rectangle):Bool {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function isFlippedXRectangle(source:Rectangle):Bool {
+extern inline function isFlippedXRectangle(source:Rectangle):Bool {
 #if hl
 	return flight._hl._fn.Geometry.isFlippedXRectangle(source);
 #elseif cpp
@@ -2717,7 +2717,7 @@ inline function isFlippedXRectangle(source:Rectangle):Bool {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function isFlippedYRectangle(source:Rectangle):Bool {
+extern inline function isFlippedYRectangle(source:Rectangle):Bool {
 #if hl
 	return flight._hl._fn.Geometry.isFlippedYRectangle(source);
 #elseif cpp
@@ -2728,7 +2728,7 @@ inline function isFlippedYRectangle(source:Rectangle):Bool {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function mergeRectangle(out:Rectangle, source:Rectangle, other:Rectangle):Void {
+extern inline function mergeRectangle(out:Rectangle, source:Rectangle, other:Rectangle):Void {
 #if hl
 	flight._hl._fn.Geometry.mergeRectangle(out, source, other);
 #elseif cpp
@@ -2739,7 +2739,7 @@ inline function mergeRectangle(out:Rectangle, source:Rectangle, other:Rectangle)
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function normalizeRectangle(out:Rectangle, source:Rectangle):Void {
+extern inline function normalizeRectangle(out:Rectangle, source:Rectangle):Void {
 #if hl
 	flight._hl._fn.Geometry.normalizeRectangle(out, source);
 #elseif cpp
@@ -2750,7 +2750,7 @@ inline function normalizeRectangle(out:Rectangle, source:Rectangle):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function offsetRectangle(out:Rectangle, source:Rectangle, dx:Float, dy:Float):Void {
+extern inline function offsetRectangle(out:Rectangle, source:Rectangle, dx:Float, dy:Float):Void {
 #if hl
 	flight._hl._fn.Geometry.offsetRectangle(out, source, dx, dy);
 #elseif cpp
@@ -2761,7 +2761,7 @@ inline function offsetRectangle(out:Rectangle, source:Rectangle, dx:Float, dy:Fl
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function offsetRectangleByPoint(out:Rectangle, source:Rectangle, point:Vector2):Void {
+extern inline function offsetRectangleByPoint(out:Rectangle, source:Rectangle, point:Vector2):Void {
 #if hl
 	flight._hl._fn.Geometry.offsetRectangleByPoint(out, source, point);
 #elseif cpp
@@ -2772,7 +2772,7 @@ inline function offsetRectangleByPoint(out:Rectangle, source:Rectangle, point:Ve
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function setEmptyRectangle(out:Rectangle):Void {
+extern inline function setEmptyRectangle(out:Rectangle):Void {
 #if hl
 	flight._hl._fn.Geometry.setEmptyRectangle(out);
 #elseif cpp
@@ -2783,7 +2783,7 @@ inline function setEmptyRectangle(out:Rectangle):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function setRectangle(out:Rectangle, x:Float, y:Float, width:Float, height:Float):Void {
+extern inline function setRectangle(out:Rectangle, x:Float, y:Float, width:Float, height:Float):Void {
 #if hl
 	flight._hl._fn.Geometry.setRectangle(out, x, y, width, height);
 #elseif cpp
@@ -2794,7 +2794,7 @@ inline function setRectangle(out:Rectangle, x:Float, y:Float, width:Float, heigh
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function setRectangleBottom(target:Rectangle, value:Float):Void {
+extern inline function setRectangleBottom(target:Rectangle, value:Float):Void {
 #if hl
 	flight._hl._fn.Geometry.setRectangleBottom(target, value);
 #elseif cpp
@@ -2805,7 +2805,7 @@ inline function setRectangleBottom(target:Rectangle, value:Float):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function setRectangleBottomRight(target:Rectangle, point:Vector2):Void {
+extern inline function setRectangleBottomRight(target:Rectangle, point:Vector2):Void {
 #if hl
 	flight._hl._fn.Geometry.setRectangleBottomRight(target, point);
 #elseif cpp
@@ -2816,7 +2816,7 @@ inline function setRectangleBottomRight(target:Rectangle, point:Vector2):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function setRectangleLeft(target:Rectangle, value:Float):Void {
+extern inline function setRectangleLeft(target:Rectangle, value:Float):Void {
 #if hl
 	flight._hl._fn.Geometry.setRectangleLeft(target, value);
 #elseif cpp
@@ -2827,7 +2827,7 @@ inline function setRectangleLeft(target:Rectangle, value:Float):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function setRectangleRight(target:Rectangle, value:Float):Void {
+extern inline function setRectangleRight(target:Rectangle, value:Float):Void {
 #if hl
 	flight._hl._fn.Geometry.setRectangleRight(target, value);
 #elseif cpp
@@ -2838,7 +2838,7 @@ inline function setRectangleRight(target:Rectangle, value:Float):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function setRectangleSize(out:Rectangle, size:Vector2):Void {
+extern inline function setRectangleSize(out:Rectangle, size:Vector2):Void {
 #if hl
 	flight._hl._fn.Geometry.setRectangleSize(out, size);
 #elseif cpp
@@ -2849,7 +2849,7 @@ inline function setRectangleSize(out:Rectangle, size:Vector2):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function setRectangleTop(target:Rectangle, value:Float):Void {
+extern inline function setRectangleTop(target:Rectangle, value:Float):Void {
 #if hl
 	flight._hl._fn.Geometry.setRectangleTop(target, value);
 #elseif cpp
@@ -2860,7 +2860,7 @@ inline function setRectangleTop(target:Rectangle, value:Float):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function setRectangleTopLeft(out:Rectangle, point:Vector2):Void {
+extern inline function setRectangleTopLeft(out:Rectangle, point:Vector2):Void {
 #if hl
 	flight._hl._fn.Geometry.setRectangleTopLeft(out, point);
 #elseif cpp
@@ -2871,7 +2871,7 @@ inline function setRectangleTopLeft(out:Rectangle, point:Vector2):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function acquireEmptyRectangle():Rectangle {
+extern inline function acquireEmptyRectangle():Rectangle {
 #if hl
 	return flight._hl._fn.Geometry.acquireEmptyRectangle();
 #elseif cpp
@@ -2882,7 +2882,7 @@ inline function acquireEmptyRectangle():Rectangle {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function acquireRectangle():Rectangle {
+extern inline function acquireRectangle():Rectangle {
 #if hl
 	return flight._hl._fn.Geometry.acquireRectangle();
 #elseif cpp
@@ -2893,7 +2893,7 @@ inline function acquireRectangle():Rectangle {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function clearRectanglePool():Void {
+extern inline function clearRectanglePool():Void {
 #if hl
 	flight._hl._fn.Geometry.clearRectanglePool();
 #elseif cpp
@@ -2904,7 +2904,7 @@ inline function clearRectanglePool():Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function releaseRectangle(r:Rectangle):Void {
+extern inline function releaseRectangle(r:Rectangle):Void {
 #if hl
 	flight._hl._fn.Geometry.releaseRectangle(r);
 #elseif cpp
@@ -2915,7 +2915,7 @@ inline function releaseRectangle(r:Rectangle):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function createTransform2d(x:Float, y:Float, rotation:Float, scaleX:Float, scaleY:Float, skewX:Float, skewY:Float, pivotX:Float, pivotY:Float):Transform2D {
+extern inline function createTransform2d(x:Float, y:Float, rotation:Float, scaleX:Float, scaleY:Float, skewX:Float, skewY:Float, pivotX:Float, pivotY:Float):Transform2D {
 #if hl
 	return flight._hl._fn.Geometry.createTransform2d(x, y, rotation, scaleX, scaleY, skewX, skewY, pivotX, pivotY);
 #elseif cpp
@@ -2926,7 +2926,7 @@ inline function createTransform2d(x:Float, y:Float, rotation:Float, scaleX:Float
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function decomposeMatrixToTransform2d(out:Transform2D, source:Matrix):Void {
+extern inline function decomposeMatrixToTransform2d(out:Transform2D, source:Matrix):Void {
 #if hl
 	flight._hl._fn.Geometry.decomposeMatrixToTransform2d(out, source);
 #elseif cpp
@@ -2937,7 +2937,7 @@ inline function decomposeMatrixToTransform2d(out:Transform2D, source:Matrix):Voi
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function createTransform3d():Transform3D {
+extern inline function createTransform3d():Transform3D {
 #if hl
 	return flight._hl._fn.Geometry.createTransform3d();
 #elseif cpp
@@ -2948,7 +2948,7 @@ inline function createTransform3d():Transform3D {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function composeMatrix4FromTransform3d(out:Matrix4, source:Transform3D):Void {
+extern inline function composeMatrix4FromTransform3d(out:Matrix4, source:Transform3D):Void {
 #if hl
 	flight._hl._fn.Geometry.composeMatrix4FromTransform3d(out, source);
 #elseif cpp
@@ -2959,7 +2959,7 @@ inline function composeMatrix4FromTransform3d(out:Matrix4, source:Transform3D):V
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function decomposeMatrix4ToTransform3d(out:Transform3D, m:Matrix4):Void {
+extern inline function decomposeMatrix4ToTransform3d(out:Transform3D, m:Matrix4):Void {
 #if hl
 	flight._hl._fn.Geometry.decomposeMatrix4ToTransform3d(out, m);
 #elseif cpp
@@ -2970,7 +2970,7 @@ inline function decomposeMatrix4ToTransform3d(out:Transform3D, m:Matrix4):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function reserveFloat32Array(array:Dynamic, arrayLen:Int, capacity:Int):Dynamic {
+extern inline function reserveFloat32Array(array:Dynamic, arrayLen:Int, capacity:Int):Dynamic {
 #if hl
 	return flight._hl._fn.Geometry.reserveFloat32Array(array, arrayLen, capacity);
 #elseif cpp
@@ -2981,7 +2981,7 @@ inline function reserveFloat32Array(array:Dynamic, arrayLen:Int, capacity:Int):D
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function reserveInt16Array(array:Dynamic, arrayLen:Int, capacity:Int):Dynamic {
+extern inline function reserveInt16Array(array:Dynamic, arrayLen:Int, capacity:Int):Dynamic {
 #if hl
 	return flight._hl._fn.Geometry.reserveInt16Array(array, arrayLen, capacity);
 #elseif cpp
@@ -2992,7 +2992,7 @@ inline function reserveInt16Array(array:Dynamic, arrayLen:Int, capacity:Int):Dyn
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function reserveUint16Array(array:Dynamic, arrayLen:Int, capacity:Int):Dynamic {
+extern inline function reserveUint16Array(array:Dynamic, arrayLen:Int, capacity:Int):Dynamic {
 #if hl
 	return flight._hl._fn.Geometry.reserveUint16Array(array, arrayLen, capacity);
 #elseif cpp
@@ -3003,7 +3003,7 @@ inline function reserveUint16Array(array:Dynamic, arrayLen:Int, capacity:Int):Dy
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function createVector2(x:Float, y:Float):Vector2 {
+extern inline function createVector2(x:Float, y:Float):Vector2 {
 #if hl
 	return flight._hl._fn.Geometry.createVector2(x, y);
 #elseif cpp
@@ -3014,7 +3014,7 @@ inline function createVector2(x:Float, y:Float):Vector2 {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function createVector2FromPolar(length:Float, angle:Float):Vector2 {
+extern inline function createVector2FromPolar(length:Float, angle:Float):Vector2 {
 #if hl
 	return flight._hl._fn.Geometry.createVector2FromPolar(length, angle);
 #elseif cpp
@@ -3025,7 +3025,7 @@ inline function createVector2FromPolar(length:Float, angle:Float):Vector2 {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function addVector2(out:Vector2, a:Vector2, b:Vector2):Void {
+extern inline function addVector2(out:Vector2, a:Vector2, b:Vector2):Void {
 #if hl
 	flight._hl._fn.Geometry.addVector2(out, a, b);
 #elseif cpp
@@ -3036,7 +3036,7 @@ inline function addVector2(out:Vector2, a:Vector2, b:Vector2):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function clampVector2(out:Vector2, value:Vector2, min:Vector2, max:Vector2):Void {
+extern inline function clampVector2(out:Vector2, value:Vector2, min:Vector2, max:Vector2):Void {
 #if hl
 	flight._hl._fn.Geometry.clampVector2(out, value, min, max);
 #elseif cpp
@@ -3047,7 +3047,7 @@ inline function clampVector2(out:Vector2, value:Vector2, min:Vector2, max:Vector
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function cloneVector2(source:Vector2):Vector2 {
+extern inline function cloneVector2(source:Vector2):Vector2 {
 #if hl
 	return flight._hl._fn.Geometry.cloneVector2(source);
 #elseif cpp
@@ -3058,7 +3058,7 @@ inline function cloneVector2(source:Vector2):Vector2 {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function copyVector2(out:Vector2, source:Vector2):Void {
+extern inline function copyVector2(out:Vector2, source:Vector2):Void {
 #if hl
 	flight._hl._fn.Geometry.copyVector2(out, source);
 #elseif cpp
@@ -3069,7 +3069,7 @@ inline function copyVector2(out:Vector2, source:Vector2):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function crossVector2(a:Vector2, b:Vector2):Float {
+extern inline function crossVector2(a:Vector2, b:Vector2):Float {
 #if hl
 	return flight._hl._fn.Geometry.crossVector2(a, b);
 #elseif cpp
@@ -3080,7 +3080,7 @@ inline function crossVector2(a:Vector2, b:Vector2):Float {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function divideVector2(out:Vector2, source:Vector2, divisor:Vector2):Void {
+extern inline function divideVector2(out:Vector2, source:Vector2, divisor:Vector2):Void {
 #if hl
 	flight._hl._fn.Geometry.divideVector2(out, source, divisor);
 #elseif cpp
@@ -3091,7 +3091,7 @@ inline function divideVector2(out:Vector2, source:Vector2, divisor:Vector2):Void
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function equalsVector2(a:Vector2, b:Vector2):Bool {
+extern inline function equalsVector2(a:Vector2, b:Vector2):Bool {
 #if hl
 	return flight._hl._fn.Geometry.equalsVector2(a, b);
 #elseif cpp
@@ -3102,7 +3102,7 @@ inline function equalsVector2(a:Vector2, b:Vector2):Bool {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function getVector2Angle(source:Vector2):Float {
+extern inline function getVector2Angle(source:Vector2):Float {
 #if hl
 	return flight._hl._fn.Geometry.getVector2Angle(source);
 #elseif cpp
@@ -3113,7 +3113,7 @@ inline function getVector2Angle(source:Vector2):Float {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function getVector2AngleBetween(a:Vector2, b:Vector2):Float {
+extern inline function getVector2AngleBetween(a:Vector2, b:Vector2):Float {
 #if hl
 	return flight._hl._fn.Geometry.getVector2AngleBetween(a, b);
 #elseif cpp
@@ -3124,7 +3124,7 @@ inline function getVector2AngleBetween(a:Vector2, b:Vector2):Float {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function getVector2Distance(a:Vector2, b:Vector2):Float {
+extern inline function getVector2Distance(a:Vector2, b:Vector2):Float {
 #if hl
 	return flight._hl._fn.Geometry.getVector2Distance(a, b);
 #elseif cpp
@@ -3135,7 +3135,7 @@ inline function getVector2Distance(a:Vector2, b:Vector2):Float {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function getVector2DistanceSquared(a:Vector2, b:Vector2):Float {
+extern inline function getVector2DistanceSquared(a:Vector2, b:Vector2):Float {
 #if hl
 	return flight._hl._fn.Geometry.getVector2DistanceSquared(a, b);
 #elseif cpp
@@ -3146,7 +3146,7 @@ inline function getVector2DistanceSquared(a:Vector2, b:Vector2):Float {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function getVector2Dot(a:Vector2, b:Vector2):Float {
+extern inline function getVector2Dot(a:Vector2, b:Vector2):Float {
 #if hl
 	return flight._hl._fn.Geometry.getVector2Dot(a, b);
 #elseif cpp
@@ -3157,7 +3157,7 @@ inline function getVector2Dot(a:Vector2, b:Vector2):Float {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function getVector2Length(source:Vector2):Float {
+extern inline function getVector2Length(source:Vector2):Float {
 #if hl
 	return flight._hl._fn.Geometry.getVector2Length(source);
 #elseif cpp
@@ -3168,7 +3168,7 @@ inline function getVector2Length(source:Vector2):Float {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function getVector2LengthSquared(source:Vector2):Float {
+extern inline function getVector2LengthSquared(source:Vector2):Float {
 #if hl
 	return flight._hl._fn.Geometry.getVector2LengthSquared(source);
 #elseif cpp
@@ -3179,7 +3179,7 @@ inline function getVector2LengthSquared(source:Vector2):Float {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function interpolateVector2(out:Vector2, a:Vector2, b:Vector2, t:Float):Void {
+extern inline function interpolateVector2(out:Vector2, a:Vector2, b:Vector2, t:Float):Void {
 #if hl
 	flight._hl._fn.Geometry.interpolateVector2(out, a, b, t);
 #elseif cpp
@@ -3190,7 +3190,7 @@ inline function interpolateVector2(out:Vector2, a:Vector2, b:Vector2, t:Float):V
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function maxVector2(out:Vector2, a:Vector2, b:Vector2):Void {
+extern inline function maxVector2(out:Vector2, a:Vector2, b:Vector2):Void {
 #if hl
 	flight._hl._fn.Geometry.maxVector2(out, a, b);
 #elseif cpp
@@ -3201,7 +3201,7 @@ inline function maxVector2(out:Vector2, a:Vector2, b:Vector2):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function minVector2(out:Vector2, a:Vector2, b:Vector2):Void {
+extern inline function minVector2(out:Vector2, a:Vector2, b:Vector2):Void {
 #if hl
 	flight._hl._fn.Geometry.minVector2(out, a, b);
 #elseif cpp
@@ -3212,7 +3212,7 @@ inline function minVector2(out:Vector2, a:Vector2, b:Vector2):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function multiplyVector2(out:Vector2, a:Vector2, b:Vector2):Void {
+extern inline function multiplyVector2(out:Vector2, a:Vector2, b:Vector2):Void {
 #if hl
 	flight._hl._fn.Geometry.multiplyVector2(out, a, b);
 #elseif cpp
@@ -3223,7 +3223,7 @@ inline function multiplyVector2(out:Vector2, a:Vector2, b:Vector2):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function nearEqualsVector2(a:Vector2, b:Vector2, tolerance:Float):Bool {
+extern inline function nearEqualsVector2(a:Vector2, b:Vector2, tolerance:Float):Bool {
 #if hl
 	return flight._hl._fn.Geometry.nearEqualsVector2(a, b, tolerance);
 #elseif cpp
@@ -3234,7 +3234,7 @@ inline function nearEqualsVector2(a:Vector2, b:Vector2, tolerance:Float):Bool {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function negateVector2(out:Vector2, source:Vector2):Void {
+extern inline function negateVector2(out:Vector2, source:Vector2):Void {
 #if hl
 	flight._hl._fn.Geometry.negateVector2(out, source);
 #elseif cpp
@@ -3245,7 +3245,7 @@ inline function negateVector2(out:Vector2, source:Vector2):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function normalizeVector2(out:Vector2, source:Vector2):Float {
+extern inline function normalizeVector2(out:Vector2, source:Vector2):Float {
 #if hl
 	return flight._hl._fn.Geometry.normalizeVector2(out, source);
 #elseif cpp
@@ -3256,7 +3256,7 @@ inline function normalizeVector2(out:Vector2, source:Vector2):Float {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function offsetVector2(out:Vector2, source:Vector2, dx:Float, dy:Float):Void {
+extern inline function offsetVector2(out:Vector2, source:Vector2, dx:Float, dy:Float):Void {
 #if hl
 	flight._hl._fn.Geometry.offsetVector2(out, source, dx, dy);
 #elseif cpp
@@ -3267,7 +3267,7 @@ inline function offsetVector2(out:Vector2, source:Vector2, dx:Float, dy:Float):V
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function reflectVector2(out:Vector2, incident:Vector2, normal:Vector2):Void {
+extern inline function reflectVector2(out:Vector2, incident:Vector2, normal:Vector2):Void {
 #if hl
 	flight._hl._fn.Geometry.reflectVector2(out, incident, normal);
 #elseif cpp
@@ -3278,7 +3278,7 @@ inline function reflectVector2(out:Vector2, incident:Vector2, normal:Vector2):Vo
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function rotateVector2(out:Vector2, source:Vector2, angle:Float):Void {
+extern inline function rotateVector2(out:Vector2, source:Vector2, angle:Float):Void {
 #if hl
 	flight._hl._fn.Geometry.rotateVector2(out, source, angle);
 #elseif cpp
@@ -3289,7 +3289,7 @@ inline function rotateVector2(out:Vector2, source:Vector2, angle:Float):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function scaleVector2(out:Vector2, source:Vector2, scalar:Float):Void {
+extern inline function scaleVector2(out:Vector2, source:Vector2, scalar:Float):Void {
 #if hl
 	flight._hl._fn.Geometry.scaleVector2(out, source, scalar);
 #elseif cpp
@@ -3300,7 +3300,7 @@ inline function scaleVector2(out:Vector2, source:Vector2, scalar:Float):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function scaleVector2ToLength(out:Vector2, source:Vector2, length:Float):Void {
+extern inline function scaleVector2ToLength(out:Vector2, source:Vector2, length:Float):Void {
 #if hl
 	flight._hl._fn.Geometry.scaleVector2ToLength(out, source, length);
 #elseif cpp
@@ -3311,7 +3311,7 @@ inline function scaleVector2ToLength(out:Vector2, source:Vector2, length:Float):
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function setVector2(out:Vector2, x:Float, y:Float):Void {
+extern inline function setVector2(out:Vector2, x:Float, y:Float):Void {
 #if hl
 	flight._hl._fn.Geometry.setVector2(out, x, y);
 #elseif cpp
@@ -3322,7 +3322,7 @@ inline function setVector2(out:Vector2, x:Float, y:Float):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function setVector2FromFloat32Array(out:Vector2, offset:Int, source:Dynamic, sourceLen:Int):Void {
+extern inline function setVector2FromFloat32Array(out:Vector2, offset:Int, source:Dynamic, sourceLen:Int):Void {
 #if hl
 	flight._hl._fn.Geometry.setVector2FromFloat32Array(out, offset, source, sourceLen);
 #elseif cpp
@@ -3333,7 +3333,7 @@ inline function setVector2FromFloat32Array(out:Vector2, offset:Int, source:Dynam
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function setVector2FromPolar(out:Vector2, length:Float, angle:Float):Void {
+extern inline function setVector2FromPolar(out:Vector2, length:Float, angle:Float):Void {
 #if hl
 	flight._hl._fn.Geometry.setVector2FromPolar(out, length, angle);
 #elseif cpp
@@ -3344,7 +3344,7 @@ inline function setVector2FromPolar(out:Vector2, length:Float, angle:Float):Void
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function setVector2FromVector3(out:Vector2, source:Vector3):Void {
+extern inline function setVector2FromVector3(out:Vector2, source:Vector3):Void {
 #if hl
 	flight._hl._fn.Geometry.setVector2FromVector3(out, source);
 #elseif cpp
@@ -3355,7 +3355,7 @@ inline function setVector2FromVector3(out:Vector2, source:Vector3):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function subtractVector2(out:Vector2, source:Vector2, other:Vector2):Void {
+extern inline function subtractVector2(out:Vector2, source:Vector2, other:Vector2):Void {
 #if hl
 	flight._hl._fn.Geometry.subtractVector2(out, source, other);
 #elseif cpp
@@ -3366,7 +3366,7 @@ inline function subtractVector2(out:Vector2, source:Vector2, other:Vector2):Void
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function writeVector2ToFloat32Array(out:Dynamic, outLen:Int, offset:Int, source:Vector2):Void {
+extern inline function writeVector2ToFloat32Array(out:Dynamic, outLen:Int, offset:Int, source:Vector2):Void {
 #if hl
 	flight._hl._fn.Geometry.writeVector2ToFloat32Array(out, outLen, offset, source);
 #elseif cpp
@@ -3377,7 +3377,7 @@ inline function writeVector2ToFloat32Array(out:Dynamic, outLen:Int, offset:Int, 
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function acquireEmptyVector2():Vector2 {
+extern inline function acquireEmptyVector2():Vector2 {
 #if hl
 	return flight._hl._fn.Geometry.acquireEmptyVector2();
 #elseif cpp
@@ -3388,7 +3388,7 @@ inline function acquireEmptyVector2():Vector2 {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function acquireVector2():Vector2 {
+extern inline function acquireVector2():Vector2 {
 #if hl
 	return flight._hl._fn.Geometry.acquireVector2();
 #elseif cpp
@@ -3399,7 +3399,7 @@ inline function acquireVector2():Vector2 {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function clearVector2Pool():Void {
+extern inline function clearVector2Pool():Void {
 #if hl
 	flight._hl._fn.Geometry.clearVector2Pool();
 #elseif cpp
@@ -3410,7 +3410,7 @@ inline function clearVector2Pool():Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function releaseVector2(v:Vector2):Void {
+extern inline function releaseVector2(v:Vector2):Void {
 #if hl
 	flight._hl._fn.Geometry.releaseVector2(v);
 #elseif cpp
@@ -3421,7 +3421,7 @@ inline function releaseVector2(v:Vector2):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function createVector3(x:Float, y:Float, z:Float):Vector3 {
+extern inline function createVector3(x:Float, y:Float, z:Float):Vector3 {
 #if hl
 	return flight._hl._fn.Geometry.createVector3(x, y, z);
 #elseif cpp
@@ -3432,7 +3432,7 @@ inline function createVector3(x:Float, y:Float, z:Float):Vector3 {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function createVector3FromSpherical(radius:Float, theta:Float, phi:Float):Vector3 {
+extern inline function createVector3FromSpherical(radius:Float, theta:Float, phi:Float):Vector3 {
 #if hl
 	return flight._hl._fn.Geometry.createVector3FromSpherical(radius, theta, phi);
 #elseif cpp
@@ -3443,7 +3443,7 @@ inline function createVector3FromSpherical(radius:Float, theta:Float, phi:Float)
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function addVector3(out:Vector3, a:Vector3, b:Vector3):Void {
+extern inline function addVector3(out:Vector3, a:Vector3, b:Vector3):Void {
 #if hl
 	flight._hl._fn.Geometry.addVector3(out, a, b);
 #elseif cpp
@@ -3454,7 +3454,7 @@ inline function addVector3(out:Vector3, a:Vector3, b:Vector3):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function clampVector3(out:Vector3, value:Vector3, min:Vector3, max:Vector3):Void {
+extern inline function clampVector3(out:Vector3, value:Vector3, min:Vector3, max:Vector3):Void {
 #if hl
 	flight._hl._fn.Geometry.clampVector3(out, value, min, max);
 #elseif cpp
@@ -3465,7 +3465,7 @@ inline function clampVector3(out:Vector3, value:Vector3, min:Vector3, max:Vector
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function cloneVector3(source:Vector3):Vector3 {
+extern inline function cloneVector3(source:Vector3):Vector3 {
 #if hl
 	return flight._hl._fn.Geometry.cloneVector3(source);
 #elseif cpp
@@ -3476,7 +3476,7 @@ inline function cloneVector3(source:Vector3):Vector3 {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function copyVector3(out:Vector3, source:Vector3):Void {
+extern inline function copyVector3(out:Vector3, source:Vector3):Void {
 #if hl
 	flight._hl._fn.Geometry.copyVector3(out, source);
 #elseif cpp
@@ -3487,7 +3487,7 @@ inline function copyVector3(out:Vector3, source:Vector3):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function crossVector3(out:Vector3, source:Vector3, other:Vector3):Void {
+extern inline function crossVector3(out:Vector3, source:Vector3, other:Vector3):Void {
 #if hl
 	flight._hl._fn.Geometry.crossVector3(out, source, other);
 #elseif cpp
@@ -3498,7 +3498,7 @@ inline function crossVector3(out:Vector3, source:Vector3, other:Vector3):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function divideVector3(out:Vector3, source:Vector3, divisor:Vector3):Void {
+extern inline function divideVector3(out:Vector3, source:Vector3, divisor:Vector3):Void {
 #if hl
 	flight._hl._fn.Geometry.divideVector3(out, source, divisor);
 #elseif cpp
@@ -3509,7 +3509,7 @@ inline function divideVector3(out:Vector3, source:Vector3, divisor:Vector3):Void
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function equalsVector3(a:Vector3, b:Vector3):Bool {
+extern inline function equalsVector3(a:Vector3, b:Vector3):Bool {
 #if hl
 	return flight._hl._fn.Geometry.equalsVector3(a, b);
 #elseif cpp
@@ -3520,7 +3520,7 @@ inline function equalsVector3(a:Vector3, b:Vector3):Bool {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function getVector3AngleBetween(a:Vector3, b:Vector3):Float {
+extern inline function getVector3AngleBetween(a:Vector3, b:Vector3):Float {
 #if hl
 	return flight._hl._fn.Geometry.getVector3AngleBetween(a, b);
 #elseif cpp
@@ -3531,7 +3531,7 @@ inline function getVector3AngleBetween(a:Vector3, b:Vector3):Float {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function getVector3Distance(a:Vector3, b:Vector3):Float {
+extern inline function getVector3Distance(a:Vector3, b:Vector3):Float {
 #if hl
 	return flight._hl._fn.Geometry.getVector3Distance(a, b);
 #elseif cpp
@@ -3542,7 +3542,7 @@ inline function getVector3Distance(a:Vector3, b:Vector3):Float {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function getVector3DistanceSquared(a:Vector3, b:Vector3):Float {
+extern inline function getVector3DistanceSquared(a:Vector3, b:Vector3):Float {
 #if hl
 	return flight._hl._fn.Geometry.getVector3DistanceSquared(a, b);
 #elseif cpp
@@ -3553,7 +3553,7 @@ inline function getVector3DistanceSquared(a:Vector3, b:Vector3):Float {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function getVector3Dot(a:Vector3, b:Vector3):Float {
+extern inline function getVector3Dot(a:Vector3, b:Vector3):Float {
 #if hl
 	return flight._hl._fn.Geometry.getVector3Dot(a, b);
 #elseif cpp
@@ -3564,7 +3564,7 @@ inline function getVector3Dot(a:Vector3, b:Vector3):Float {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function getVector3Length(source:Vector3):Float {
+extern inline function getVector3Length(source:Vector3):Float {
 #if hl
 	return flight._hl._fn.Geometry.getVector3Length(source);
 #elseif cpp
@@ -3575,7 +3575,7 @@ inline function getVector3Length(source:Vector3):Float {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function getVector3LengthSquared(source:Vector3):Float {
+extern inline function getVector3LengthSquared(source:Vector3):Float {
 #if hl
 	return flight._hl._fn.Geometry.getVector3LengthSquared(source);
 #elseif cpp
@@ -3586,7 +3586,7 @@ inline function getVector3LengthSquared(source:Vector3):Float {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function getVector3Spherical(out:Vector3, source:Vector3):Void {
+extern inline function getVector3Spherical(out:Vector3, source:Vector3):Void {
 #if hl
 	flight._hl._fn.Geometry.getVector3Spherical(out, source);
 #elseif cpp
@@ -3597,7 +3597,7 @@ inline function getVector3Spherical(out:Vector3, source:Vector3):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function interpolateVector3(out:Vector3, a:Vector3, b:Vector3, t:Float):Void {
+extern inline function interpolateVector3(out:Vector3, a:Vector3, b:Vector3, t:Float):Void {
 #if hl
 	flight._hl._fn.Geometry.interpolateVector3(out, a, b, t);
 #elseif cpp
@@ -3608,7 +3608,7 @@ inline function interpolateVector3(out:Vector3, a:Vector3, b:Vector3, t:Float):V
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function maxVector3(out:Vector3, a:Vector3, b:Vector3):Void {
+extern inline function maxVector3(out:Vector3, a:Vector3, b:Vector3):Void {
 #if hl
 	flight._hl._fn.Geometry.maxVector3(out, a, b);
 #elseif cpp
@@ -3619,7 +3619,7 @@ inline function maxVector3(out:Vector3, a:Vector3, b:Vector3):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function minVector3(out:Vector3, a:Vector3, b:Vector3):Void {
+extern inline function minVector3(out:Vector3, a:Vector3, b:Vector3):Void {
 #if hl
 	flight._hl._fn.Geometry.minVector3(out, a, b);
 #elseif cpp
@@ -3630,7 +3630,7 @@ inline function minVector3(out:Vector3, a:Vector3, b:Vector3):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function multiplyVector3(out:Vector3, a:Vector3, b:Vector3):Void {
+extern inline function multiplyVector3(out:Vector3, a:Vector3, b:Vector3):Void {
 #if hl
 	flight._hl._fn.Geometry.multiplyVector3(out, a, b);
 #elseif cpp
@@ -3641,7 +3641,7 @@ inline function multiplyVector3(out:Vector3, a:Vector3, b:Vector3):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function nearEqualsVector3(a:Vector3, b:Vector3, tolerance:Float):Bool {
+extern inline function nearEqualsVector3(a:Vector3, b:Vector3, tolerance:Float):Bool {
 #if hl
 	return flight._hl._fn.Geometry.nearEqualsVector3(a, b, tolerance);
 #elseif cpp
@@ -3652,7 +3652,7 @@ inline function nearEqualsVector3(a:Vector3, b:Vector3, tolerance:Float):Bool {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function negateVector3(out:Vector3, source:Vector3):Void {
+extern inline function negateVector3(out:Vector3, source:Vector3):Void {
 #if hl
 	flight._hl._fn.Geometry.negateVector3(out, source);
 #elseif cpp
@@ -3663,7 +3663,7 @@ inline function negateVector3(out:Vector3, source:Vector3):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function normalizeVector3(out:Vector3, source:Vector3):Float {
+extern inline function normalizeVector3(out:Vector3, source:Vector3):Float {
 #if hl
 	return flight._hl._fn.Geometry.normalizeVector3(out, source);
 #elseif cpp
@@ -3674,7 +3674,7 @@ inline function normalizeVector3(out:Vector3, source:Vector3):Float {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function offsetVector3(out:Vector3, source:Vector3, dx:Float, dy:Float, dz:Float):Void {
+extern inline function offsetVector3(out:Vector3, source:Vector3, dx:Float, dy:Float, dz:Float):Void {
 #if hl
 	flight._hl._fn.Geometry.offsetVector3(out, source, dx, dy, dz);
 #elseif cpp
@@ -3685,7 +3685,7 @@ inline function offsetVector3(out:Vector3, source:Vector3, dx:Float, dy:Float, d
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function projectVector3(out:Vector2, source:Vector3):Void {
+extern inline function projectVector3(out:Vector2, source:Vector3):Void {
 #if hl
 	flight._hl._fn.Geometry.projectVector3(out, source);
 #elseif cpp
@@ -3696,7 +3696,7 @@ inline function projectVector3(out:Vector2, source:Vector3):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function reflectVector3(out:Vector3, incident:Vector3, normal:Vector3):Void {
+extern inline function reflectVector3(out:Vector3, incident:Vector3, normal:Vector3):Void {
 #if hl
 	flight._hl._fn.Geometry.reflectVector3(out, incident, normal);
 #elseif cpp
@@ -3707,7 +3707,7 @@ inline function reflectVector3(out:Vector3, incident:Vector3, normal:Vector3):Vo
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function scaleVector3(out:Vector3, source:Vector3, scalar:Float):Void {
+extern inline function scaleVector3(out:Vector3, source:Vector3, scalar:Float):Void {
 #if hl
 	flight._hl._fn.Geometry.scaleVector3(out, source, scalar);
 #elseif cpp
@@ -3718,7 +3718,7 @@ inline function scaleVector3(out:Vector3, source:Vector3, scalar:Float):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function setVector3(out:Vector3, x:Float, y:Float, z:Float):Void {
+extern inline function setVector3(out:Vector3, x:Float, y:Float, z:Float):Void {
 #if hl
 	flight._hl._fn.Geometry.setVector3(out, x, y, z);
 #elseif cpp
@@ -3729,7 +3729,7 @@ inline function setVector3(out:Vector3, x:Float, y:Float, z:Float):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function setVector3FromFloat32Array(out:Vector3, offset:Int, source:Dynamic, sourceLen:Int):Void {
+extern inline function setVector3FromFloat32Array(out:Vector3, offset:Int, source:Dynamic, sourceLen:Int):Void {
 #if hl
 	flight._hl._fn.Geometry.setVector3FromFloat32Array(out, offset, source, sourceLen);
 #elseif cpp
@@ -3740,7 +3740,7 @@ inline function setVector3FromFloat32Array(out:Vector3, offset:Int, source:Dynam
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function setVector3FromSpherical(out:Vector3, radius:Float, theta:Float, phi:Float):Void {
+extern inline function setVector3FromSpherical(out:Vector3, radius:Float, theta:Float, phi:Float):Void {
 #if hl
 	flight._hl._fn.Geometry.setVector3FromSpherical(out, radius, theta, phi);
 #elseif cpp
@@ -3751,7 +3751,7 @@ inline function setVector3FromSpherical(out:Vector3, radius:Float, theta:Float, 
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function setVector3FromVector4(out:Vector3, source:Vector4):Void {
+extern inline function setVector3FromVector4(out:Vector3, source:Vector4):Void {
 #if hl
 	flight._hl._fn.Geometry.setVector3FromVector4(out, source);
 #elseif cpp
@@ -3762,7 +3762,7 @@ inline function setVector3FromVector4(out:Vector3, source:Vector4):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function subtractVector3(out:Vector3, source:Vector3, other:Vector3):Void {
+extern inline function subtractVector3(out:Vector3, source:Vector3, other:Vector3):Void {
 #if hl
 	flight._hl._fn.Geometry.subtractVector3(out, source, other);
 #elseif cpp
@@ -3773,7 +3773,7 @@ inline function subtractVector3(out:Vector3, source:Vector3, other:Vector3):Void
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function transformVector3ByMatrix3(out:Vector3, source:Vector3, matrix:Matrix3):Void {
+extern inline function transformVector3ByMatrix3(out:Vector3, source:Vector3, matrix:Matrix3):Void {
 #if hl
 	flight._hl._fn.Geometry.transformVector3ByMatrix3(out, source, matrix);
 #elseif cpp
@@ -3784,7 +3784,7 @@ inline function transformVector3ByMatrix3(out:Vector3, source:Vector3, matrix:Ma
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function writeVector3ToFloat32Array(out:Dynamic, outLen:Int, offset:Int, source:Vector3):Void {
+extern inline function writeVector3ToFloat32Array(out:Dynamic, outLen:Int, offset:Int, source:Vector3):Void {
 #if hl
 	flight._hl._fn.Geometry.writeVector3ToFloat32Array(out, outLen, offset, source);
 #elseif cpp
@@ -3795,7 +3795,7 @@ inline function writeVector3ToFloat32Array(out:Dynamic, outLen:Int, offset:Int, 
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function acquireEmptyVector3():Vector3 {
+extern inline function acquireEmptyVector3():Vector3 {
 #if hl
 	return flight._hl._fn.Geometry.acquireEmptyVector3();
 #elseif cpp
@@ -3806,7 +3806,7 @@ inline function acquireEmptyVector3():Vector3 {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function acquireVector3():Vector3 {
+extern inline function acquireVector3():Vector3 {
 #if hl
 	return flight._hl._fn.Geometry.acquireVector3();
 #elseif cpp
@@ -3817,7 +3817,7 @@ inline function acquireVector3():Vector3 {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function clearVector3Pool():Void {
+extern inline function clearVector3Pool():Void {
 #if hl
 	flight._hl._fn.Geometry.clearVector3Pool();
 #elseif cpp
@@ -3828,7 +3828,7 @@ inline function clearVector3Pool():Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function releaseVector3(v:Vector3):Void {
+extern inline function releaseVector3(v:Vector3):Void {
 #if hl
 	flight._hl._fn.Geometry.releaseVector3(v);
 #elseif cpp
@@ -3839,7 +3839,7 @@ inline function releaseVector3(v:Vector3):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function createVector4(x:Float, y:Float, z:Float, w:Float):Vector4 {
+extern inline function createVector4(x:Float, y:Float, z:Float, w:Float):Vector4 {
 #if hl
 	return flight._hl._fn.Geometry.createVector4(x, y, z, w);
 #elseif cpp
@@ -3850,7 +3850,7 @@ inline function createVector4(x:Float, y:Float, z:Float, w:Float):Vector4 {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function addVector4(out:Vector4, a:Vector4, b:Vector4):Void {
+extern inline function addVector4(out:Vector4, a:Vector4, b:Vector4):Void {
 #if hl
 	flight._hl._fn.Geometry.addVector4(out, a, b);
 #elseif cpp
@@ -3861,7 +3861,7 @@ inline function addVector4(out:Vector4, a:Vector4, b:Vector4):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function clampVector4(out:Vector4, value:Vector4, min:Vector4, max:Vector4):Void {
+extern inline function clampVector4(out:Vector4, value:Vector4, min:Vector4, max:Vector4):Void {
 #if hl
 	flight._hl._fn.Geometry.clampVector4(out, value, min, max);
 #elseif cpp
@@ -3872,7 +3872,7 @@ inline function clampVector4(out:Vector4, value:Vector4, min:Vector4, max:Vector
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function cloneVector4(source:Vector4):Vector4 {
+extern inline function cloneVector4(source:Vector4):Vector4 {
 #if hl
 	return flight._hl._fn.Geometry.cloneVector4(source);
 #elseif cpp
@@ -3883,7 +3883,7 @@ inline function cloneVector4(source:Vector4):Vector4 {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function copyVector4(out:Vector4, source:Vector4):Void {
+extern inline function copyVector4(out:Vector4, source:Vector4):Void {
 #if hl
 	flight._hl._fn.Geometry.copyVector4(out, source);
 #elseif cpp
@@ -3894,7 +3894,7 @@ inline function copyVector4(out:Vector4, source:Vector4):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function divideVector4(out:Vector4, source:Vector4, divisor:Vector4):Void {
+extern inline function divideVector4(out:Vector4, source:Vector4, divisor:Vector4):Void {
 #if hl
 	flight._hl._fn.Geometry.divideVector4(out, source, divisor);
 #elseif cpp
@@ -3905,7 +3905,7 @@ inline function divideVector4(out:Vector4, source:Vector4, divisor:Vector4):Void
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function equalsVector4(a:Vector4, b:Vector4):Bool {
+extern inline function equalsVector4(a:Vector4, b:Vector4):Bool {
 #if hl
 	return flight._hl._fn.Geometry.equalsVector4(a, b);
 #elseif cpp
@@ -3916,7 +3916,7 @@ inline function equalsVector4(a:Vector4, b:Vector4):Bool {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function getVector4AngleBetween(a:Vector4, b:Vector4):Float {
+extern inline function getVector4AngleBetween(a:Vector4, b:Vector4):Float {
 #if hl
 	return flight._hl._fn.Geometry.getVector4AngleBetween(a, b);
 #elseif cpp
@@ -3927,7 +3927,7 @@ inline function getVector4AngleBetween(a:Vector4, b:Vector4):Float {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function getVector4Distance(a:Vector4, b:Vector4):Float {
+extern inline function getVector4Distance(a:Vector4, b:Vector4):Float {
 #if hl
 	return flight._hl._fn.Geometry.getVector4Distance(a, b);
 #elseif cpp
@@ -3938,7 +3938,7 @@ inline function getVector4Distance(a:Vector4, b:Vector4):Float {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function getVector4DistanceSquared(a:Vector4, b:Vector4):Float {
+extern inline function getVector4DistanceSquared(a:Vector4, b:Vector4):Float {
 #if hl
 	return flight._hl._fn.Geometry.getVector4DistanceSquared(a, b);
 #elseif cpp
@@ -3949,7 +3949,7 @@ inline function getVector4DistanceSquared(a:Vector4, b:Vector4):Float {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function getVector4Dot(a:Vector4, b:Vector4):Float {
+extern inline function getVector4Dot(a:Vector4, b:Vector4):Float {
 #if hl
 	return flight._hl._fn.Geometry.getVector4Dot(a, b);
 #elseif cpp
@@ -3960,7 +3960,7 @@ inline function getVector4Dot(a:Vector4, b:Vector4):Float {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function getVector4Length(source:Vector4):Float {
+extern inline function getVector4Length(source:Vector4):Float {
 #if hl
 	return flight._hl._fn.Geometry.getVector4Length(source);
 #elseif cpp
@@ -3971,7 +3971,7 @@ inline function getVector4Length(source:Vector4):Float {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function getVector4LengthSquared(source:Vector4):Float {
+extern inline function getVector4LengthSquared(source:Vector4):Float {
 #if hl
 	return flight._hl._fn.Geometry.getVector4LengthSquared(source);
 #elseif cpp
@@ -3982,7 +3982,7 @@ inline function getVector4LengthSquared(source:Vector4):Float {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function interpolateVector4(out:Vector4, a:Vector4, b:Vector4, t:Float):Void {
+extern inline function interpolateVector4(out:Vector4, a:Vector4, b:Vector4, t:Float):Void {
 #if hl
 	flight._hl._fn.Geometry.interpolateVector4(out, a, b, t);
 #elseif cpp
@@ -3993,7 +3993,7 @@ inline function interpolateVector4(out:Vector4, a:Vector4, b:Vector4, t:Float):V
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function maxVector4(out:Vector4, a:Vector4, b:Vector4):Void {
+extern inline function maxVector4(out:Vector4, a:Vector4, b:Vector4):Void {
 #if hl
 	flight._hl._fn.Geometry.maxVector4(out, a, b);
 #elseif cpp
@@ -4004,7 +4004,7 @@ inline function maxVector4(out:Vector4, a:Vector4, b:Vector4):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function minVector4(out:Vector4, a:Vector4, b:Vector4):Void {
+extern inline function minVector4(out:Vector4, a:Vector4, b:Vector4):Void {
 #if hl
 	flight._hl._fn.Geometry.minVector4(out, a, b);
 #elseif cpp
@@ -4015,7 +4015,7 @@ inline function minVector4(out:Vector4, a:Vector4, b:Vector4):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function multiplyVector4(out:Vector4, a:Vector4, b:Vector4):Void {
+extern inline function multiplyVector4(out:Vector4, a:Vector4, b:Vector4):Void {
 #if hl
 	flight._hl._fn.Geometry.multiplyVector4(out, a, b);
 #elseif cpp
@@ -4026,7 +4026,7 @@ inline function multiplyVector4(out:Vector4, a:Vector4, b:Vector4):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function nearEqualsVector4(a:Vector4, b:Vector4, tolerance:Float):Bool {
+extern inline function nearEqualsVector4(a:Vector4, b:Vector4, tolerance:Float):Bool {
 #if hl
 	return flight._hl._fn.Geometry.nearEqualsVector4(a, b, tolerance);
 #elseif cpp
@@ -4037,7 +4037,7 @@ inline function nearEqualsVector4(a:Vector4, b:Vector4, tolerance:Float):Bool {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function negateVector4(out:Vector4, source:Vector4):Void {
+extern inline function negateVector4(out:Vector4, source:Vector4):Void {
 #if hl
 	flight._hl._fn.Geometry.negateVector4(out, source);
 #elseif cpp
@@ -4048,7 +4048,7 @@ inline function negateVector4(out:Vector4, source:Vector4):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function normalizeVector4(out:Vector4, source:Vector4):Float {
+extern inline function normalizeVector4(out:Vector4, source:Vector4):Float {
 #if hl
 	return flight._hl._fn.Geometry.normalizeVector4(out, source);
 #elseif cpp
@@ -4059,7 +4059,7 @@ inline function normalizeVector4(out:Vector4, source:Vector4):Float {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function offsetVector4(out:Vector4, source:Vector4, dx:Float, dy:Float, dz:Float, dw:Float):Void {
+extern inline function offsetVector4(out:Vector4, source:Vector4, dx:Float, dy:Float, dz:Float, dw:Float):Void {
 #if hl
 	flight._hl._fn.Geometry.offsetVector4(out, source, dx, dy, dz, dw);
 #elseif cpp
@@ -4070,7 +4070,7 @@ inline function offsetVector4(out:Vector4, source:Vector4, dx:Float, dy:Float, d
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function projectVector4(out:Vector3, source:Vector4):Void {
+extern inline function projectVector4(out:Vector3, source:Vector4):Void {
 #if hl
 	flight._hl._fn.Geometry.projectVector4(out, source);
 #elseif cpp
@@ -4081,7 +4081,7 @@ inline function projectVector4(out:Vector3, source:Vector4):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function reflectVector4(out:Vector4, incident:Vector4, normal:Vector4):Void {
+extern inline function reflectVector4(out:Vector4, incident:Vector4, normal:Vector4):Void {
 #if hl
 	flight._hl._fn.Geometry.reflectVector4(out, incident, normal);
 #elseif cpp
@@ -4092,7 +4092,7 @@ inline function reflectVector4(out:Vector4, incident:Vector4, normal:Vector4):Vo
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function scaleVector4(out:Vector4, source:Vector4, scalar:Float):Void {
+extern inline function scaleVector4(out:Vector4, source:Vector4, scalar:Float):Void {
 #if hl
 	flight._hl._fn.Geometry.scaleVector4(out, source, scalar);
 #elseif cpp
@@ -4103,7 +4103,7 @@ inline function scaleVector4(out:Vector4, source:Vector4, scalar:Float):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function setVector4(out:Vector4, x:Float, y:Float, z:Float, w:Float):Void {
+extern inline function setVector4(out:Vector4, x:Float, y:Float, z:Float, w:Float):Void {
 #if hl
 	flight._hl._fn.Geometry.setVector4(out, x, y, z, w);
 #elseif cpp
@@ -4114,7 +4114,7 @@ inline function setVector4(out:Vector4, x:Float, y:Float, z:Float, w:Float):Void
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function setVector4FromFloat32Array(out:Vector4, offset:Int, source:Dynamic, sourceLen:Int):Void {
+extern inline function setVector4FromFloat32Array(out:Vector4, offset:Int, source:Dynamic, sourceLen:Int):Void {
 #if hl
 	flight._hl._fn.Geometry.setVector4FromFloat32Array(out, offset, source, sourceLen);
 #elseif cpp
@@ -4125,7 +4125,7 @@ inline function setVector4FromFloat32Array(out:Vector4, offset:Int, source:Dynam
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function setVector4FromVector3(out:Vector4, source:Vector3, w:Float):Void {
+extern inline function setVector4FromVector3(out:Vector4, source:Vector3, w:Float):Void {
 #if hl
 	flight._hl._fn.Geometry.setVector4FromVector3(out, source, w);
 #elseif cpp
@@ -4136,7 +4136,7 @@ inline function setVector4FromVector3(out:Vector4, source:Vector3, w:Float):Void
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function subtractVector4(out:Vector4, source:Vector4, other:Vector4):Void {
+extern inline function subtractVector4(out:Vector4, source:Vector4, other:Vector4):Void {
 #if hl
 	flight._hl._fn.Geometry.subtractVector4(out, source, other);
 #elseif cpp
@@ -4147,7 +4147,7 @@ inline function subtractVector4(out:Vector4, source:Vector4, other:Vector4):Void
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function writeVector4ToFloat32Array(out:Dynamic, outLen:Int, offset:Int, source:Vector4):Void {
+extern inline function writeVector4ToFloat32Array(out:Dynamic, outLen:Int, offset:Int, source:Vector4):Void {
 #if hl
 	flight._hl._fn.Geometry.writeVector4ToFloat32Array(out, outLen, offset, source);
 #elseif cpp
@@ -4158,7 +4158,7 @@ inline function writeVector4ToFloat32Array(out:Dynamic, outLen:Int, offset:Int, 
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function acquireEmptyVector4():Vector4 {
+extern inline function acquireEmptyVector4():Vector4 {
 #if hl
 	return flight._hl._fn.Geometry.acquireEmptyVector4();
 #elseif cpp
@@ -4169,7 +4169,7 @@ inline function acquireEmptyVector4():Vector4 {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function acquireVector4():Vector4 {
+extern inline function acquireVector4():Vector4 {
 #if hl
 	return flight._hl._fn.Geometry.acquireVector4();
 #elseif cpp
@@ -4180,7 +4180,7 @@ inline function acquireVector4():Vector4 {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function clearVector4Pool():Void {
+extern inline function clearVector4Pool():Void {
 #if hl
 	flight._hl._fn.Geometry.clearVector4Pool();
 #elseif cpp
@@ -4191,7 +4191,7 @@ inline function clearVector4Pool():Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function releaseVector4(v:Vector4):Void {
+extern inline function releaseVector4(v:Vector4):Void {
 #if hl
 	flight._hl._fn.Geometry.releaseVector4(v);
 #elseif cpp
@@ -4202,7 +4202,7 @@ inline function releaseVector4(v:Vector4):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function freeAabb(ptr:Aabb):Void {
+extern inline function freeAabb(ptr:Aabb):Void {
 #if hl
 	flight._hl._fn.Geometry.freeAabb(ptr);
 #elseif cpp
@@ -4213,7 +4213,7 @@ inline function freeAabb(ptr:Aabb):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function freeBoundingSphere(ptr:BoundingSphere):Void {
+extern inline function freeBoundingSphere(ptr:BoundingSphere):Void {
 #if hl
 	flight._hl._fn.Geometry.freeBoundingSphere(ptr);
 #elseif cpp
@@ -4224,7 +4224,7 @@ inline function freeBoundingSphere(ptr:BoundingSphere):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function freeCapsule(ptr:Capsule):Void {
+extern inline function freeCapsule(ptr:Capsule):Void {
 #if hl
 	flight._hl._fn.Geometry.freeCapsule(ptr);
 #elseif cpp
@@ -4235,7 +4235,7 @@ inline function freeCapsule(ptr:Capsule):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function freeFrustum(ptr:Frustum):Void {
+extern inline function freeFrustum(ptr:Frustum):Void {
 #if hl
 	flight._hl._fn.Geometry.freeFrustum(ptr);
 #elseif cpp
@@ -4246,7 +4246,7 @@ inline function freeFrustum(ptr:Frustum):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function freeMatrix(ptr:Matrix):Void {
+extern inline function freeMatrix(ptr:Matrix):Void {
 #if hl
 	flight._hl._fn.Geometry.freeMatrix(ptr);
 #elseif cpp
@@ -4257,7 +4257,7 @@ inline function freeMatrix(ptr:Matrix):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function freeMatrix3(ptr:Matrix3):Void {
+extern inline function freeMatrix3(ptr:Matrix3):Void {
 #if hl
 	flight._hl._fn.Geometry.freeMatrix3(ptr);
 #elseif cpp
@@ -4268,7 +4268,7 @@ inline function freeMatrix3(ptr:Matrix3):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function freeMatrix4(ptr:Matrix4):Void {
+extern inline function freeMatrix4(ptr:Matrix4):Void {
 #if hl
 	flight._hl._fn.Geometry.freeMatrix4(ptr);
 #elseif cpp
@@ -4279,7 +4279,7 @@ inline function freeMatrix4(ptr:Matrix4):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function freeObb(ptr:Obb):Void {
+extern inline function freeObb(ptr:Obb):Void {
 #if hl
 	flight._hl._fn.Geometry.freeObb(ptr);
 #elseif cpp
@@ -4290,7 +4290,7 @@ inline function freeObb(ptr:Obb):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function freePlane(ptr:Plane):Void {
+extern inline function freePlane(ptr:Plane):Void {
 #if hl
 	flight._hl._fn.Geometry.freePlane(ptr);
 #elseif cpp
@@ -4301,7 +4301,7 @@ inline function freePlane(ptr:Plane):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function freeQuaternion(ptr:Quaternion):Void {
+extern inline function freeQuaternion(ptr:Quaternion):Void {
 #if hl
 	flight._hl._fn.Geometry.freeQuaternion(ptr);
 #elseif cpp
@@ -4312,7 +4312,7 @@ inline function freeQuaternion(ptr:Quaternion):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function freeRay3D(ptr:Ray3D):Void {
+extern inline function freeRay3D(ptr:Ray3D):Void {
 #if hl
 	flight._hl._fn.Geometry.freeRay3D(ptr);
 #elseif cpp
@@ -4323,7 +4323,7 @@ inline function freeRay3D(ptr:Ray3D):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function freeRectangle(ptr:Rectangle):Void {
+extern inline function freeRectangle(ptr:Rectangle):Void {
 #if hl
 	flight._hl._fn.Geometry.freeRectangle(ptr);
 #elseif cpp
@@ -4334,7 +4334,7 @@ inline function freeRectangle(ptr:Rectangle):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function freeTransform2D(ptr:Transform2D):Void {
+extern inline function freeTransform2D(ptr:Transform2D):Void {
 #if hl
 	flight._hl._fn.Geometry.freeTransform2D(ptr);
 #elseif cpp
@@ -4345,7 +4345,7 @@ inline function freeTransform2D(ptr:Transform2D):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function freeTransform3D(ptr:Transform3D):Void {
+extern inline function freeTransform3D(ptr:Transform3D):Void {
 #if hl
 	flight._hl._fn.Geometry.freeTransform3D(ptr);
 #elseif cpp
@@ -4356,7 +4356,7 @@ inline function freeTransform3D(ptr:Transform3D):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function freeVector2(ptr:Vector2):Void {
+extern inline function freeVector2(ptr:Vector2):Void {
 #if hl
 	flight._hl._fn.Geometry.freeVector2(ptr);
 #elseif cpp
@@ -4367,7 +4367,7 @@ inline function freeVector2(ptr:Vector2):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function freeVector3(ptr:Vector3):Void {
+extern inline function freeVector3(ptr:Vector3):Void {
 #if hl
 	flight._hl._fn.Geometry.freeVector3(ptr);
 #elseif cpp
@@ -4378,7 +4378,7 @@ inline function freeVector3(ptr:Vector3):Void {
 	#error "flight.Geometry: no backend for this target."
 #end
 }
-inline function freeVector4(ptr:Vector4):Void {
+extern inline function freeVector4(ptr:Vector4):Void {
 #if hl
 	flight._hl._fn.Geometry.freeVector4(ptr);
 #elseif cpp

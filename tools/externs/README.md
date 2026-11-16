@@ -7,8 +7,10 @@ Flight, with `flight-compiler`, `flight-ffi`, and `flight-bindgen` inside it.
 
 ## Generate and copy
 
-Use a clean checkout and an installed Rust toolchain. Cargo writes its normal
-build artifacts in Flight; this driver does not edit Flight's sources.
+Use a clean checkout and an installed Rust toolchain. The driver prepares an
+isolated copy under `.artifacts/flight-source-*` and applies the tracked
+`patches/flight/` producer patch there. The original checkout stays clean.
+Both generated Haxe and native binaries use this exact patched producer.
 
 ```sh
 npm run rehydrate
@@ -38,8 +40,9 @@ scripts/check-haxe-bindings.sh
 The driver uses private temporary files and Cargo's current build-script output
 path instead of shared `/tmp` names and stale glob matches. Output is copied
 unchanged into `generated/externs/`, adding only `provenance.json` with the Flight
-revision, toolchain/host identity, offsets and FFI-name hashes, symbol count,
-and per-file hashes. Failed
+revision and patch hashes, toolchain/host identity, offsets and FFI-name hashes,
+symbol count, generated native header hash, and per-file hashes. The C header is
+copied to `native/include/flight_ffi.h`. Failed
 generation leaves the previous tree intact. Check mode rejects missing, changed,
 and extra files without replacing the copy.
 
@@ -58,8 +61,13 @@ older glob. The intake driver handles either layout using Cargo messages.
 Provenance also records toolchain identity and host architecture; layout offsets
 must match the binary used by consumers.
 
-These checks do not certify Haxe runtime linking. Native externs need a C header
-and hxcpp link integration or a HashLink native shim. JS externs import module
-`flight` with `flight_*` exports, rather than the existing `@flighthq/*` TS ESM
-surface. See the root README for the runtime requirements still supplied by
-neither this copied output nor a fabricated test runtime.
+The producer patch also emits a C header and HashLink adapter source from the
+same generated Rust FFI. `native:build` stages their binaries and ABI manifest;
+`gate:native-runtime` installs the resulting haxelib ZIP and executes real hxcpp,
+HashLink, and Lime consumers on Linux64. The patch includes binding fixes exposed
+by these actual builds; no post-processing edits are applied to generated Haxe.
+See [patch notes](../../patches/flight/README.md).
+
+JS externs import module `flight` with `flight_*` exports, rather than the
+existing `@flighthq/*` TS ESM surface. The web runtime remains separate. See the
+root README for tested platforms and the limits of the native smoke checks.

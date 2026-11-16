@@ -16,13 +16,13 @@ extern class SpritesheetFormats {
 	@:hlNative("flight", "flight_cocos_plist_spritesheet_format")
 	public static function cocosPlistSpritesheetFormat(registry:flight._hl.SpritesheetFormatRegistry):flight._hl.SpritesheetFormatDescriptor;
 	@:hlNative("flight", "flight_detect_spritesheet_format")
-	public static function detectSpritesheetFormat(registry:flight._hl.SpritesheetFormatRegistry, text:hl.Bytes):Dynamic;
+	public static function detectSpritesheetFormat(registry:flight._hl.SpritesheetFormatRegistry, text:hl.Bytes):flight._hl.SpritesheetFormatKind;
 	@:hlNative("flight", "flight_get_spritesheet_format_kinds")
-	public static function getSpritesheetFormatKinds(out:Dynamic, registry:flight._hl.SpritesheetFormatRegistry):Void;
+	public static function getSpritesheetFormatKinds(out:hl.Bytes, registry:flight._hl.SpritesheetFormatRegistry):Void;
 	@:hlNative("flight", "flight_libgdx_atlas_spritesheet_format")
 	public static function libgdxAtlasSpritesheetFormat(registry:flight._hl.SpritesheetFormatRegistry):flight._hl.SpritesheetFormatDescriptor;
 	@:hlNative("flight", "flight_parse_spritesheet")
-	public static function parseSpritesheet(registry:flight._hl.SpritesheetFormatRegistry, text:hl.Bytes, formatKind:flight._hl.SpritesheetFormatKind, options:flight._hl.SpritesheetParseOptions):Dynamic;
+	public static function parseSpritesheet(registry:flight._hl.SpritesheetFormatRegistry, text:hl.Bytes, formatKind:flight._hl.SpritesheetFormatKind, options:flight._hl.SpritesheetParseOptions):flight._hl.SpritesheetData;
 	@:hlNative("flight", "flight_starling_spritesheet_format")
 	public static function starlingSpritesheetFormat(registry:flight._hl.SpritesheetFormatRegistry):flight._hl.SpritesheetFormatDescriptor;
 	@:hlNative("flight", "flight_texture_packer_spritesheet_format")

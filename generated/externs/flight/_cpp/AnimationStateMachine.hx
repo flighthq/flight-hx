@@ -16,20 +16,20 @@ abstract AnimationStateMachine(cpp.Star<cpp.Void>) {
 
 	inline function get_currentStateIndex():Int return AnimationStateMachine_Ffi.get_currentStateIndex(this);
 
-	inline function set_currentStateIndex(value:Int):Int return AnimationStateMachine_Ffi.set_currentStateIndex(this, value);
+	inline function set_currentStateIndex(value:Int):Int { AnimationStateMachine_Ffi.set_currentStateIndex(this, value); return value; }
 	public var transitionDuration(get, set):Single;
 
 	inline function get_transitionDuration():Single return AnimationStateMachine_Ffi.get_transitionDuration(this);
 
-	inline function set_transitionDuration(value:Single):Single return AnimationStateMachine_Ffi.set_transitionDuration(this, value);
+	inline function set_transitionDuration(value:Single):Single { AnimationStateMachine_Ffi.set_transitionDuration(this, value); return value; }
 	public var transitionElapsed(get, set):Single;
 
 	inline function get_transitionElapsed():Single return AnimationStateMachine_Ffi.get_transitionElapsed(this);
 
-	inline function set_transitionElapsed(value:Single):Single return AnimationStateMachine_Ffi.set_transitionElapsed(this, value);
+	inline function set_transitionElapsed(value:Single):Single { AnimationStateMachine_Ffi.set_transitionElapsed(this, value); return value; }
 	public var transitionWeight(get, set):Single;
 
 	inline function get_transitionWeight():Single return AnimationStateMachine_Ffi.get_transitionWeight(this);
 
-	inline function set_transitionWeight(value:Single):Single return AnimationStateMachine_Ffi.set_transitionWeight(this, value);
+	inline function set_transitionWeight(value:Single):Single { AnimationStateMachine_Ffi.set_transitionWeight(this, value); return value; }
 }

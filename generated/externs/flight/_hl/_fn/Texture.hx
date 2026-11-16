@@ -30,11 +30,11 @@ extern class Texture {
 	@:hlNative("flight", "flight_equals_sampler")
 	public static function equalsSampler(a:flight._hl.Sampler, b:flight._hl.Sampler):Bool;
 	@:hlNative("flight", "flight_create_texture")
-	public static function createTexture(opts:flight._hl.CreateTextureOptions):Int;
+	public static function createTexture(opts:flight._hl.CreateTextureOptions):flight._hl.Texture;
 	@:hlNative("flight", "flight_create_texture_2d")
 	public static function createTexture2d():flight._hl.Texture2D;
 	@:hlNative("flight", "flight_clone_texture__texture")
-	public static function cloneTextureTexture(source:flight._hl.Texture):Int;
+	public static function cloneTextureTexture(source:flight._hl.Texture):flight._hl.Texture;
 	@:hlNative("flight", "flight_copy_texture__texture__texture")
 	public static function copyTextureTextureTexture(out:flight._hl.Texture, source:flight._hl.Texture):Void;
 	@:hlNative("flight", "flight_get_texture_height__texture")
@@ -42,9 +42,9 @@ extern class Texture {
 	@:hlNative("flight", "flight_get_texture_inverse_uv_matrix__texture")
 	public static function getTextureInverseUvMatrixTexture(out:flight._hl.Matrix3, texture:flight._hl.Texture):Void;
 	@:hlNative("flight", "flight_get_texture_source__texture")
-	public static function getTextureSourceTexture(texture:flight._hl.Texture):Dynamic;
+	public static function getTextureSourceTexture(texture:flight._hl.Texture):flight._hl.TextureSourceRef;
 	@:hlNative("flight", "flight_get_texture_source_kind__texture")
-	public static function getTextureSourceKindTexture(texture:flight._hl.Texture):Dynamic;
+	public static function getTextureSourceKindTexture(texture:flight._hl.Texture):flight._hl.TextureSourceKind;
 	@:hlNative("flight", "flight_get_texture_uv_matrix__texture")
 	public static function getTextureUvMatrixTexture(out:flight._hl.Matrix3, texture:flight._hl.Texture):Void;
 	@:hlNative("flight", "flight_get_texture_view_size__texture")
@@ -83,6 +83,8 @@ extern class Texture {
 	public static function freeCubeTexture(ptr:flight._hl.CubeTexture):Void;
 	@:hlNative("flight", "flight_free_sampler")
 	public static function freeSampler(ptr:flight._hl.Sampler):Void;
+	@:hlNative("flight", "flight_free_texture")
+	public static function freeTexture(ptr:flight._hl.Texture):Void;
 	@:hlNative("flight", "flight_free_texture2_d")
 	public static function freeTexture2D(ptr:flight._hl.Texture2D):Void;
 	@:hlNative("flight", "flight_free_texture_source_ref")

@@ -10,5 +10,5 @@ abstract InputGamepadConnectData(cpp.Star<cpp.Void>) {
 
 	inline function get_gamepad():Int return InputGamepadConnectData_Ffi.get_gamepad(this);
 
-	inline function set_gamepad(value:Int):Int return InputGamepadConnectData_Ffi.set_gamepad(this, value);
+	inline function set_gamepad(value:Int):Int { InputGamepadConnectData_Ffi.set_gamepad(this, value); return value; }
 }

@@ -12,10 +12,10 @@ abstract TextureAtlasAsepriteSize(cpp.Star<cpp.Void>) {
 
 	inline function get_h():Single return TextureAtlasAsepriteSize_Ffi.get_h(this);
 
-	inline function set_h(value:Single):Single return TextureAtlasAsepriteSize_Ffi.set_h(this, value);
+	inline function set_h(value:Single):Single { TextureAtlasAsepriteSize_Ffi.set_h(this, value); return value; }
 	public var w(get, set):Single;
 
 	inline function get_w():Single return TextureAtlasAsepriteSize_Ffi.get_w(this);
 
-	inline function set_w(value:Single):Single return TextureAtlasAsepriteSize_Ffi.set_w(this, value);
+	inline function set_w(value:Single):Single { TextureAtlasAsepriteSize_Ffi.set_w(this, value); return value; }
 }

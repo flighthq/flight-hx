@@ -32,60 +32,60 @@ abstract DirectionalLight(cpp.Star<cpp.Void>) {
 
 	inline function get_cascadeCount():Int return DirectionalLight_Ffi.get_cascadeCount(this);
 
-	inline function set_cascadeCount(value:Int):Int return DirectionalLight_Ffi.set_cascadeCount(this, value);
+	inline function set_cascadeCount(value:Int):Int { DirectionalLight_Ffi.set_cascadeCount(this, value); return value; }
 	public var castsShadow(get, set):Bool;
 
 	inline function get_castsShadow():Bool return DirectionalLight_Ffi.get_castsShadow(this);
 
-	inline function set_castsShadow(value:Bool):Bool return DirectionalLight_Ffi.set_castsShadow(this, value);
+	inline function set_castsShadow(value:Bool):Bool { DirectionalLight_Ffi.set_castsShadow(this, value); return value; }
 	public var color(get, set):Int;
 
 	inline function get_color():Int return DirectionalLight_Ffi.get_color(this);
 
-	inline function set_color(value:Int):Int return DirectionalLight_Ffi.set_color(this, value);
+	inline function set_color(value:Int):Int { DirectionalLight_Ffi.set_color(this, value); return value; }
 	public var enabled(get, set):Bool;
 
 	inline function get_enabled():Bool return DirectionalLight_Ffi.get_enabled(this);
 
-	inline function set_enabled(value:Bool):Bool return DirectionalLight_Ffi.set_enabled(this, value);
+	inline function set_enabled(value:Bool):Bool { DirectionalLight_Ffi.set_enabled(this, value); return value; }
 	public var intensity(get, set):Single;
 
 	inline function get_intensity():Single return DirectionalLight_Ffi.get_intensity(this);
 
-	inline function set_intensity(value:Single):Single return DirectionalLight_Ffi.set_intensity(this, value);
+	inline function set_intensity(value:Single):Single { DirectionalLight_Ffi.set_intensity(this, value); return value; }
 	public var normalBias(get, set):Single;
 
 	inline function get_normalBias():Single return DirectionalLight_Ffi.get_normalBias(this);
 
-	inline function set_normalBias(value:Single):Single return DirectionalLight_Ffi.set_normalBias(this, value);
+	inline function set_normalBias(value:Single):Single { DirectionalLight_Ffi.set_normalBias(this, value); return value; }
 	public var pcfRadius(get, set):Single;
 
 	inline function get_pcfRadius():Single return DirectionalLight_Ffi.get_pcfRadius(this);
 
-	inline function set_pcfRadius(value:Single):Single return DirectionalLight_Ffi.set_pcfRadius(this, value);
+	inline function set_pcfRadius(value:Single):Single { DirectionalLight_Ffi.set_pcfRadius(this, value); return value; }
 	public var shadowBias(get, set):Single;
 
 	inline function get_shadowBias():Single return DirectionalLight_Ffi.get_shadowBias(this);
 
-	inline function set_shadowBias(value:Single):Single return DirectionalLight_Ffi.set_shadowBias(this, value);
+	inline function set_shadowBias(value:Single):Single { DirectionalLight_Ffi.set_shadowBias(this, value); return value; }
 	public var shadowFar(get, set):Single;
 
 	inline function get_shadowFar():Single return DirectionalLight_Ffi.get_shadowFar(this);
 
-	inline function set_shadowFar(value:Single):Single return DirectionalLight_Ffi.set_shadowFar(this, value);
+	inline function set_shadowFar(value:Single):Single { DirectionalLight_Ffi.set_shadowFar(this, value); return value; }
 	public var shadowMapSize(get, set):Int;
 
 	inline function get_shadowMapSize():Int return DirectionalLight_Ffi.get_shadowMapSize(this);
 
-	inline function set_shadowMapSize(value:Int):Int return DirectionalLight_Ffi.set_shadowMapSize(this, value);
+	inline function set_shadowMapSize(value:Int):Int { DirectionalLight_Ffi.set_shadowMapSize(this, value); return value; }
 	public var shadowNear(get, set):Single;
 
 	inline function get_shadowNear():Single return DirectionalLight_Ffi.get_shadowNear(this);
 
-	inline function set_shadowNear(value:Single):Single return DirectionalLight_Ffi.set_shadowNear(this, value);
+	inline function set_shadowNear(value:Single):Single { DirectionalLight_Ffi.set_shadowNear(this, value); return value; }
 	public var shadowStrength(get, set):Single;
 
 	inline function get_shadowStrength():Single return DirectionalLight_Ffi.get_shadowStrength(this);
 
-	inline function set_shadowStrength(value:Single):Single return DirectionalLight_Ffi.set_shadowStrength(this, value);
+	inline function set_shadowStrength(value:Single):Single { DirectionalLight_Ffi.set_shadowStrength(this, value); return value; }
 }

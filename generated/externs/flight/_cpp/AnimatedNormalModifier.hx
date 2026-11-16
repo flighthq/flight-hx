@@ -10,5 +10,5 @@ abstract AnimatedNormalModifier(cpp.Star<cpp.Void>) {
 
 	inline function get_strength():Single return AnimatedNormalModifier_Ffi.get_strength(this);
 
-	inline function set_strength(value:Single):Single return AnimatedNormalModifier_Ffi.set_strength(this, value);
+	inline function set_strength(value:Single):Single { AnimatedNormalModifier_Ffi.set_strength(this, value); return value; }
 }

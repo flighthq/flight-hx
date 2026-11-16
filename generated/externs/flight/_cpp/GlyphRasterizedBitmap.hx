@@ -18,25 +18,25 @@ abstract GlyphRasterizedBitmap(cpp.Star<cpp.Void>) {
 
 	inline function get_advance():Single return GlyphRasterizedBitmap_Ffi.get_advance(this);
 
-	inline function set_advance(value:Single):Single return GlyphRasterizedBitmap_Ffi.set_advance(this, value);
+	inline function set_advance(value:Single):Single { GlyphRasterizedBitmap_Ffi.set_advance(this, value); return value; }
 	public var bearingX(get, set):Int;
 
 	inline function get_bearingX():Int return GlyphRasterizedBitmap_Ffi.get_bearingX(this);
 
-	inline function set_bearingX(value:Int):Int return GlyphRasterizedBitmap_Ffi.set_bearingX(this, value);
+	inline function set_bearingX(value:Int):Int { GlyphRasterizedBitmap_Ffi.set_bearingX(this, value); return value; }
 	public var bearingY(get, set):Int;
 
 	inline function get_bearingY():Int return GlyphRasterizedBitmap_Ffi.get_bearingY(this);
 
-	inline function set_bearingY(value:Int):Int return GlyphRasterizedBitmap_Ffi.set_bearingY(this, value);
+	inline function set_bearingY(value:Int):Int { GlyphRasterizedBitmap_Ffi.set_bearingY(this, value); return value; }
 	public var height(get, set):Int;
 
 	inline function get_height():Int return GlyphRasterizedBitmap_Ffi.get_height(this);
 
-	inline function set_height(value:Int):Int return GlyphRasterizedBitmap_Ffi.set_height(this, value);
+	inline function set_height(value:Int):Int { GlyphRasterizedBitmap_Ffi.set_height(this, value); return value; }
 	public var width(get, set):Int;
 
 	inline function get_width():Int return GlyphRasterizedBitmap_Ffi.get_width(this);
 
-	inline function set_width(value:Int):Int return GlyphRasterizedBitmap_Ffi.set_width(this, value);
+	inline function set_width(value:Int):Int { GlyphRasterizedBitmap_Ffi.set_width(this, value); return value; }
 }

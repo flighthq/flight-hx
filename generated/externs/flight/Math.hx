@@ -1,6 +1,6 @@
 package flight;
 
-inline function degToRad(degrees:Float):Float {
+extern inline function degToRad(degrees:Float):Float {
 #if hl
 	return flight._hl._fn.Math.degToRad(degrees);
 #elseif cpp
@@ -11,7 +11,7 @@ inline function degToRad(degrees:Float):Float {
 	#error "flight.Math: no backend for this target."
 #end
 }
-inline function deltaAngle(from:Float, to:Float):Float {
+extern inline function deltaAngle(from:Float, to:Float):Float {
 #if hl
 	return flight._hl._fn.Math.deltaAngle(from, to);
 #elseif cpp
@@ -22,7 +22,7 @@ inline function deltaAngle(from:Float, to:Float):Float {
 	#error "flight.Math: no backend for this target."
 #end
 }
-inline function normalizeAngle(radians:Float):Float {
+extern inline function normalizeAngle(radians:Float):Float {
 #if hl
 	return flight._hl._fn.Math.normalizeAngle(radians);
 #elseif cpp
@@ -33,7 +33,7 @@ inline function normalizeAngle(radians:Float):Float {
 	#error "flight.Math: no backend for this target."
 #end
 }
-inline function radToDeg(radians:Float):Float {
+extern inline function radToDeg(radians:Float):Float {
 #if hl
 	return flight._hl._fn.Math.radToDeg(radians);
 #elseif cpp
@@ -44,7 +44,7 @@ inline function radToDeg(radians:Float):Float {
 	#error "flight.Math: no backend for this target."
 #end
 }
-inline function clamp(value:Float, min:Float, max:Float):Float {
+extern inline function clamp(value:Float, min:Float, max:Float):Float {
 #if hl
 	return flight._hl._fn.Math.clamp(value, min, max);
 #elseif cpp
@@ -55,7 +55,7 @@ inline function clamp(value:Float, min:Float, max:Float):Float {
 	#error "flight.Math: no backend for this target."
 #end
 }
-inline function inRange(value:Float, min:Float, max:Float):Bool {
+extern inline function inRange(value:Float, min:Float, max:Float):Bool {
 #if hl
 	return flight._hl._fn.Math.inRange(value, min, max);
 #elseif cpp
@@ -66,7 +66,7 @@ inline function inRange(value:Float, min:Float, max:Float):Bool {
 	#error "flight.Math: no backend for this target."
 #end
 }
-inline function saturate(value:Float):Float {
+extern inline function saturate(value:Float):Float {
 #if hl
 	return flight._hl._fn.Math.saturate(value);
 #elseif cpp
@@ -77,7 +77,7 @@ inline function saturate(value:Float):Float {
 	#error "flight.Math: no backend for this target."
 #end
 }
-inline function approxEqual(a:Float, b:Float, epsilon:Float):Bool {
+extern inline function approxEqual(a:Float, b:Float, epsilon:Float):Bool {
 #if hl
 	return flight._hl._fn.Math.approxEqual(a, b, epsilon);
 #elseif cpp
@@ -88,7 +88,7 @@ inline function approxEqual(a:Float, b:Float, epsilon:Float):Bool {
 	#error "flight.Math: no backend for this target."
 #end
 }
-inline function approxEqualRelative(a:Float, b:Float, relativeEpsilon:Float):Bool {
+extern inline function approxEqualRelative(a:Float, b:Float, relativeEpsilon:Float):Bool {
 #if hl
 	return flight._hl._fn.Math.approxEqualRelative(a, b, relativeEpsilon);
 #elseif cpp
@@ -99,7 +99,7 @@ inline function approxEqualRelative(a:Float, b:Float, relativeEpsilon:Float):Boo
 	#error "flight.Math: no backend for this target."
 #end
 }
-inline function approxZero(value:Float, epsilon:Float):Bool {
+extern inline function approxZero(value:Float, epsilon:Float):Bool {
 #if hl
 	return flight._hl._fn.Math.approxZero(value, epsilon);
 #elseif cpp
@@ -110,7 +110,7 @@ inline function approxZero(value:Float, epsilon:Float):Bool {
 	#error "flight.Math: no backend for this target."
 #end
 }
-inline function createRandomSourceFromHash(x:Int, y:Int):RandomSource {
+extern inline function createRandomSourceFromHash(x:Int, y:Int):RandomSource {
 #if hl
 	return flight._hl._fn.Math.createRandomSourceFromHash(x, y);
 #elseif cpp
@@ -121,7 +121,7 @@ inline function createRandomSourceFromHash(x:Int, y:Int):RandomSource {
 	#error "flight.Math: no backend for this target."
 #end
 }
-inline function hash2d(x:Int, y:Int):Int {
+extern inline function hash2d(x:Int, y:Int):Int {
 #if hl
 	return flight._hl._fn.Math.hash2d(x, y);
 #elseif cpp
@@ -132,7 +132,7 @@ inline function hash2d(x:Int, y:Int):Int {
 	#error "flight.Math: no backend for this target."
 #end
 }
-inline function hash3d(x:Int, y:Int, z:Int):Int {
+extern inline function hash3d(x:Int, y:Int, z:Int):Int {
 #if hl
 	return flight._hl._fn.Math.hash3d(x, y, z);
 #elseif cpp
@@ -143,7 +143,7 @@ inline function hash3d(x:Int, y:Int, z:Int):Int {
 	#error "flight.Math: no backend for this target."
 #end
 }
-inline function hashCombine(seed:Int, value:Int):Int {
+extern inline function hashCombine(seed:Int, value:Int):Int {
 #if hl
 	return flight._hl._fn.Math.hashCombine(seed, value);
 #elseif cpp
@@ -154,7 +154,7 @@ inline function hashCombine(seed:Int, value:Int):Int {
 	#error "flight.Math: no backend for this target."
 #end
 }
-inline function hashUint32(value:Int):Int {
+extern inline function hashUint32(value:Int):Int {
 #if hl
 	return flight._hl._fn.Math.hashUint32(value);
 #elseif cpp
@@ -165,7 +165,7 @@ inline function hashUint32(value:Int):Int {
 	#error "flight.Math: no backend for this target."
 #end
 }
-inline function inverseLerp(a:Float, b:Float, value:Float):Float {
+extern inline function inverseLerp(a:Float, b:Float, value:Float):Float {
 #if hl
 	return flight._hl._fn.Math.inverseLerp(a, b, value);
 #elseif cpp
@@ -176,7 +176,7 @@ inline function inverseLerp(a:Float, b:Float, value:Float):Float {
 	#error "flight.Math: no backend for this target."
 #end
 }
-inline function lerp(a:Float, b:Float, t:Float):Float {
+extern inline function lerp(a:Float, b:Float, t:Float):Float {
 #if hl
 	return flight._hl._fn.Math.lerp(a, b, t);
 #elseif cpp
@@ -187,7 +187,7 @@ inline function lerp(a:Float, b:Float, t:Float):Float {
 	#error "flight.Math: no backend for this target."
 #end
 }
-inline function remap(value:Float, inMin:Float, inMax:Float, outMin:Float, outMax:Float):Float {
+extern inline function remap(value:Float, inMin:Float, inMax:Float, outMin:Float, outMax:Float):Float {
 #if hl
 	return flight._hl._fn.Math.remap(value, inMin, inMax, outMin, outMax);
 #elseif cpp
@@ -198,7 +198,7 @@ inline function remap(value:Float, inMin:Float, inMax:Float, outMin:Float, outMa
 	#error "flight.Math: no backend for this target."
 #end
 }
-inline function smoothStep(edge0:Float, edge1:Float, x:Float):Float {
+extern inline function smoothStep(edge0:Float, edge1:Float, x:Float):Float {
 #if hl
 	return flight._hl._fn.Math.smoothStep(edge0, edge1, x);
 #elseif cpp
@@ -209,7 +209,7 @@ inline function smoothStep(edge0:Float, edge1:Float, x:Float):Float {
 	#error "flight.Math: no backend for this target."
 #end
 }
-inline function step(edge:Float, x:Float):Float {
+extern inline function step(edge:Float, x:Float):Float {
 #if hl
 	return flight._hl._fn.Math.step(edge, x);
 #elseif cpp
@@ -220,7 +220,7 @@ inline function step(edge:Float, x:Float):Float {
 	#error "flight.Math: no backend for this target."
 #end
 }
-inline function damp(current:Float, target:Float, lambda:Float, deltaTime:Float):Float {
+extern inline function damp(current:Float, target:Float, lambda:Float, deltaTime:Float):Float {
 #if hl
 	return flight._hl._fn.Math.damp(current, target, lambda, deltaTime);
 #elseif cpp
@@ -231,7 +231,7 @@ inline function damp(current:Float, target:Float, lambda:Float, deltaTime:Float)
 	#error "flight.Math: no backend for this target."
 #end
 }
-inline function lerpAngle(a:Float, b:Float, t:Float):Float {
+extern inline function lerpAngle(a:Float, b:Float, t:Float):Float {
 #if hl
 	return flight._hl._fn.Math.lerpAngle(a, b, t);
 #elseif cpp
@@ -242,7 +242,7 @@ inline function lerpAngle(a:Float, b:Float, t:Float):Float {
 	#error "flight.Math: no backend for this target."
 #end
 }
-inline function moveTowards(current:Float, target:Float, maxDelta:Float):Float {
+extern inline function moveTowards(current:Float, target:Float, maxDelta:Float):Float {
 #if hl
 	return flight._hl._fn.Math.moveTowards(current, target, maxDelta);
 #elseif cpp
@@ -253,7 +253,7 @@ inline function moveTowards(current:Float, target:Float, maxDelta:Float):Float {
 	#error "flight.Math: no backend for this target."
 #end
 }
-inline function pingPong(t:Float, length:Float):Float {
+extern inline function pingPong(t:Float, length:Float):Float {
 #if hl
 	return flight._hl._fn.Math.pingPong(t, length);
 #elseif cpp
@@ -264,7 +264,7 @@ inline function pingPong(t:Float, length:Float):Float {
 	#error "flight.Math: no backend for this target."
 #end
 }
-inline function repeat(t:Float, length:Float):Float {
+extern inline function repeat(t:Float, length:Float):Float {
 #if hl
 	return flight._hl._fn.Math.repeat(t, length);
 #elseif cpp
@@ -275,7 +275,7 @@ inline function repeat(t:Float, length:Float):Float {
 	#error "flight.Math: no backend for this target."
 #end
 }
-inline function smootherStep(edge0:Float, edge1:Float, x:Float):Float {
+extern inline function smootherStep(edge0:Float, edge1:Float, x:Float):Float {
 #if hl
 	return flight._hl._fn.Math.smootherStep(edge0, edge1, x);
 #elseif cpp
@@ -286,7 +286,7 @@ inline function smootherStep(edge0:Float, edge1:Float, x:Float):Float {
 	#error "flight.Math: no backend for this target."
 #end
 }
-inline function isPowerOfTwo(n:Int):Bool {
+extern inline function isPowerOfTwo(n:Int):Bool {
 #if hl
 	return flight._hl._fn.Math.isPowerOfTwo(n);
 #elseif cpp
@@ -297,7 +297,7 @@ inline function isPowerOfTwo(n:Int):Bool {
 	#error "flight.Math: no backend for this target."
 #end
 }
-inline function nextMultipleOf(value:Float, multiple:Float):Float {
+extern inline function nextMultipleOf(value:Float, multiple:Float):Float {
 #if hl
 	return flight._hl._fn.Math.nextMultipleOf(value, multiple);
 #elseif cpp
@@ -308,7 +308,7 @@ inline function nextMultipleOf(value:Float, multiple:Float):Float {
 	#error "flight.Math: no backend for this target."
 #end
 }
-inline function nextPowerOfTwo(n:Int):Int {
+extern inline function nextPowerOfTwo(n:Int):Int {
 #if hl
 	return flight._hl._fn.Math.nextPowerOfTwo(n);
 #elseif cpp
@@ -319,7 +319,7 @@ inline function nextPowerOfTwo(n:Int):Int {
 	#error "flight.Math: no backend for this target."
 #end
 }
-inline function previousPowerOfTwo(n:Int):Int {
+extern inline function previousPowerOfTwo(n:Int):Int {
 #if hl
 	return flight._hl._fn.Math.previousPowerOfTwo(n);
 #elseif cpp
@@ -330,7 +330,7 @@ inline function previousPowerOfTwo(n:Int):Int {
 	#error "flight.Math: no backend for this target."
 #end
 }
-inline function factorial(n:Int):Float {
+extern inline function factorial(n:Int):Float {
 #if hl
 	return flight._hl._fn.Math.factorial(n);
 #elseif cpp
@@ -341,7 +341,7 @@ inline function factorial(n:Int):Float {
 	#error "flight.Math: no backend for this target."
 #end
 }
-inline function gcd(a:Int, b:Int):Int {
+extern inline function gcd(a:Int, b:Int):Int {
 #if hl
 	return flight._hl._fn.Math.gcd(a, b);
 #elseif cpp
@@ -352,7 +352,7 @@ inline function gcd(a:Int, b:Int):Int {
 	#error "flight.Math: no backend for this target."
 #end
 }
-inline function hypot2(x:Float, y:Float):Float {
+extern inline function hypot2(x:Float, y:Float):Float {
 #if hl
 	return flight._hl._fn.Math.hypot2(x, y);
 #elseif cpp
@@ -363,7 +363,7 @@ inline function hypot2(x:Float, y:Float):Float {
 	#error "flight.Math: no backend for this target."
 #end
 }
-inline function isEven(n:Int):Bool {
+extern inline function isEven(n:Int):Bool {
 #if hl
 	return flight._hl._fn.Math.isEven(n);
 #elseif cpp
@@ -374,7 +374,7 @@ inline function isEven(n:Int):Bool {
 	#error "flight.Math: no backend for this target."
 #end
 }
-inline function isOdd(n:Int):Bool {
+extern inline function isOdd(n:Int):Bool {
 #if hl
 	return flight._hl._fn.Math.isOdd(n);
 #elseif cpp
@@ -385,7 +385,7 @@ inline function isOdd(n:Int):Bool {
 	#error "flight.Math: no backend for this target."
 #end
 }
-inline function lcm(a:Int, b:Int):Int {
+extern inline function lcm(a:Int, b:Int):Int {
 #if hl
 	return flight._hl._fn.Math.lcm(a, b);
 #elseif cpp
@@ -396,7 +396,7 @@ inline function lcm(a:Int, b:Int):Int {
 	#error "flight.Math: no backend for this target."
 #end
 }
-inline function createRandomSource(seed:Int):RandomSource {
+extern inline function createRandomSource(seed:Int):RandomSource {
 #if hl
 	return flight._hl._fn.Math.createRandomSource(seed);
 #elseif cpp
@@ -407,29 +407,29 @@ inline function createRandomSource(seed:Int):RandomSource {
 	#error "flight.Math: no backend for this target."
 #end
 }
-inline function randomExponential(randomFn:Dynamic, randomCtx:Dynamic):Float {
+extern inline function randomExponential(randomFn:Dynamic, randomCtx:Dynamic, rate:Float):Float {
 #if hl
-	return flight._hl._fn.Math.randomExponential(randomFn, randomCtx);
+	return flight._hl._fn.Math.randomExponential(randomFn, randomCtx, rate);
 #elseif cpp
-	return flight._cpp._fn.Math.randomExponential(randomFn, randomCtx);
+	return flight._cpp._fn.Math.randomExponential(randomFn, randomCtx, rate);
 #elseif (js && flight_esm)
-	return flight._js._fn.Math.randomExponential(randomFn, randomCtx);
+	return flight._js._fn.Math.randomExponential(randomFn, randomCtx, rate);
 #else
 	#error "flight.Math: no backend for this target."
 #end
 }
-inline function randomGaussian(randomFn:Dynamic, randomCtx:Dynamic):Float {
+extern inline function randomGaussian(randomFn:Dynamic, randomCtx:Dynamic, mean:Float, standardDeviation:Float):Float {
 #if hl
-	return flight._hl._fn.Math.randomGaussian(randomFn, randomCtx);
+	return flight._hl._fn.Math.randomGaussian(randomFn, randomCtx, mean, standardDeviation);
 #elseif cpp
-	return flight._cpp._fn.Math.randomGaussian(randomFn, randomCtx);
+	return flight._cpp._fn.Math.randomGaussian(randomFn, randomCtx, mean, standardDeviation);
 #elseif (js && flight_esm)
-	return flight._js._fn.Math.randomGaussian(randomFn, randomCtx);
+	return flight._js._fn.Math.randomGaussian(randomFn, randomCtx, mean, standardDeviation);
 #else
 	#error "flight.Math: no backend for this target."
 #end
 }
-inline function randomInsideUnitDisc(out:Dynamic, randomFn:Dynamic, randomCtx:Dynamic):Void {
+extern inline function randomInsideUnitDisc(out:Dynamic, randomFn:Dynamic, randomCtx:Dynamic):Void {
 #if hl
 	flight._hl._fn.Math.randomInsideUnitDisc(out, randomFn, randomCtx);
 #elseif cpp
@@ -440,7 +440,7 @@ inline function randomInsideUnitDisc(out:Dynamic, randomFn:Dynamic, randomCtx:Dy
 	#error "flight.Math: no backend for this target."
 #end
 }
-inline function randomInsideUnitSphere(out:Dynamic, randomFn:Dynamic, randomCtx:Dynamic):Void {
+extern inline function randomInsideUnitSphere(out:Dynamic, randomFn:Dynamic, randomCtx:Dynamic):Void {
 #if hl
 	flight._hl._fn.Math.randomInsideUnitSphere(out, randomFn, randomCtx);
 #elseif cpp
@@ -451,7 +451,7 @@ inline function randomInsideUnitSphere(out:Dynamic, randomFn:Dynamic, randomCtx:
 	#error "flight.Math: no backend for this target."
 #end
 }
-inline function randomOnUnitCircle(out:Dynamic, randomFn:Dynamic, randomCtx:Dynamic):Void {
+extern inline function randomOnUnitCircle(out:Dynamic, randomFn:Dynamic, randomCtx:Dynamic):Void {
 #if hl
 	flight._hl._fn.Math.randomOnUnitCircle(out, randomFn, randomCtx);
 #elseif cpp
@@ -462,7 +462,7 @@ inline function randomOnUnitCircle(out:Dynamic, randomFn:Dynamic, randomCtx:Dyna
 	#error "flight.Math: no backend for this target."
 #end
 }
-inline function randomOnUnitSphere(out:Dynamic, randomFn:Dynamic, randomCtx:Dynamic):Void {
+extern inline function randomOnUnitSphere(out:Dynamic, randomFn:Dynamic, randomCtx:Dynamic):Void {
 #if hl
 	flight._hl._fn.Math.randomOnUnitSphere(out, randomFn, randomCtx);
 #elseif cpp
@@ -473,62 +473,62 @@ inline function randomOnUnitSphere(out:Dynamic, randomFn:Dynamic, randomCtx:Dyna
 	#error "flight.Math: no backend for this target."
 #end
 }
-inline function randomPoisson(randomFn:Dynamic, randomCtx:Dynamic):Int {
+extern inline function randomPoisson(randomFn:Dynamic, randomCtx:Dynamic, lambda:Float):Int {
 #if hl
-	return flight._hl._fn.Math.randomPoisson(randomFn, randomCtx);
+	return flight._hl._fn.Math.randomPoisson(randomFn, randomCtx, lambda);
 #elseif cpp
-	return flight._cpp._fn.Math.randomPoisson(randomFn, randomCtx);
+	return flight._cpp._fn.Math.randomPoisson(randomFn, randomCtx, lambda);
 #elseif (js && flight_esm)
-	return flight._js._fn.Math.randomPoisson(randomFn, randomCtx);
+	return flight._js._fn.Math.randomPoisson(randomFn, randomCtx, lambda);
 #else
 	#error "flight.Math: no backend for this target."
 #end
 }
-inline function randomWeighted(randomFn:Dynamic, randomCtx:Dynamic):Int {
+extern inline function randomWeighted(randomFn:Dynamic, randomCtx:Dynamic, weights:Dynamic, weightsLen:Int):Int {
 #if hl
-	return flight._hl._fn.Math.randomWeighted(randomFn, randomCtx);
+	return flight._hl._fn.Math.randomWeighted(randomFn, randomCtx, weights, weightsLen);
 #elseif cpp
-	return flight._cpp._fn.Math.randomWeighted(randomFn, randomCtx);
+	return flight._cpp._fn.Math.randomWeighted(randomFn, randomCtx, weights, weightsLen);
 #elseif (js && flight_esm)
-	return flight._js._fn.Math.randomWeighted(randomFn, randomCtx);
+	return flight._js._fn.Math.randomWeighted(randomFn, randomCtx, weights, weightsLen);
 #else
 	#error "flight.Math: no backend for this target."
 #end
 }
-inline function randomBool(randomFn:Dynamic, randomCtx:Dynamic):Bool {
+extern inline function randomBool(randomFn:Dynamic, randomCtx:Dynamic, probability:Float):Bool {
 #if hl
-	return flight._hl._fn.Math.randomBool(randomFn, randomCtx);
+	return flight._hl._fn.Math.randomBool(randomFn, randomCtx, probability);
 #elseif cpp
-	return flight._cpp._fn.Math.randomBool(randomFn, randomCtx);
+	return flight._cpp._fn.Math.randomBool(randomFn, randomCtx, probability);
 #elseif (js && flight_esm)
-	return flight._js._fn.Math.randomBool(randomFn, randomCtx);
+	return flight._js._fn.Math.randomBool(randomFn, randomCtx, probability);
 #else
 	#error "flight.Math: no backend for this target."
 #end
 }
-inline function randomInt(randomFn:Dynamic, randomCtx:Dynamic):Int {
+extern inline function randomInt(randomFn:Dynamic, randomCtx:Dynamic, min:Int, max:Int):Int {
 #if hl
-	return flight._hl._fn.Math.randomInt(randomFn, randomCtx);
+	return flight._hl._fn.Math.randomInt(randomFn, randomCtx, min, max);
 #elseif cpp
-	return flight._cpp._fn.Math.randomInt(randomFn, randomCtx);
+	return flight._cpp._fn.Math.randomInt(randomFn, randomCtx, min, max);
 #elseif (js && flight_esm)
-	return flight._js._fn.Math.randomInt(randomFn, randomCtx);
+	return flight._js._fn.Math.randomInt(randomFn, randomCtx, min, max);
 #else
 	#error "flight.Math: no backend for this target."
 #end
 }
-inline function randomRange(randomFn:Dynamic, randomCtx:Dynamic):Float {
+extern inline function randomRange(randomFn:Dynamic, randomCtx:Dynamic, min:Float, max:Float):Float {
 #if hl
-	return flight._hl._fn.Math.randomRange(randomFn, randomCtx);
+	return flight._hl._fn.Math.randomRange(randomFn, randomCtx, min, max);
 #elseif cpp
-	return flight._cpp._fn.Math.randomRange(randomFn, randomCtx);
+	return flight._cpp._fn.Math.randomRange(randomFn, randomCtx, min, max);
 #elseif (js && flight_esm)
-	return flight._js._fn.Math.randomRange(randomFn, randomCtx);
+	return flight._js._fn.Math.randomRange(randomFn, randomCtx, min, max);
 #else
 	#error "flight.Math: no backend for this target."
 #end
 }
-inline function randomSign(randomFn:Dynamic, randomCtx:Dynamic):Float {
+extern inline function randomSign(randomFn:Dynamic, randomCtx:Dynamic):Float {
 #if hl
 	return flight._hl._fn.Math.randomSign(randomFn, randomCtx);
 #elseif cpp
@@ -539,7 +539,7 @@ inline function randomSign(randomFn:Dynamic, randomCtx:Dynamic):Float {
 	#error "flight.Math: no backend for this target."
 #end
 }
-inline function ceilTo(value:Float, step:Float):Float {
+extern inline function ceilTo(value:Float, step:Float):Float {
 #if hl
 	return flight._hl._fn.Math.ceilTo(value, step);
 #elseif cpp
@@ -550,7 +550,7 @@ inline function ceilTo(value:Float, step:Float):Float {
 	#error "flight.Math: no backend for this target."
 #end
 }
-inline function euclideanMod(value:Float, divisor:Float):Float {
+extern inline function euclideanMod(value:Float, divisor:Float):Float {
 #if hl
 	return flight._hl._fn.Math.euclideanMod(value, divisor);
 #elseif cpp
@@ -561,7 +561,7 @@ inline function euclideanMod(value:Float, divisor:Float):Float {
 	#error "flight.Math: no backend for this target."
 #end
 }
-inline function floorTo(value:Float, step:Float):Float {
+extern inline function floorTo(value:Float, step:Float):Float {
 #if hl
 	return flight._hl._fn.Math.floorTo(value, step);
 #elseif cpp
@@ -572,7 +572,7 @@ inline function floorTo(value:Float, step:Float):Float {
 	#error "flight.Math: no backend for this target."
 #end
 }
-inline function fract(value:Float):Float {
+extern inline function fract(value:Float):Float {
 #if hl
 	return flight._hl._fn.Math.fract(value);
 #elseif cpp
@@ -583,7 +583,7 @@ inline function fract(value:Float):Float {
 	#error "flight.Math: no backend for this target."
 #end
 }
-inline function roundTo(value:Float, step:Float):Float {
+extern inline function roundTo(value:Float, step:Float):Float {
 #if hl
 	return flight._hl._fn.Math.roundTo(value, step);
 #elseif cpp
@@ -594,7 +594,7 @@ inline function roundTo(value:Float, step:Float):Float {
 	#error "flight.Math: no backend for this target."
 #end
 }
-inline function ceilPowerOfTwo(n:Int):Int {
+extern inline function ceilPowerOfTwo(n:Int):Int {
 #if hl
 	return flight._hl._fn.Math.ceilPowerOfTwo(n);
 #elseif cpp
@@ -605,7 +605,7 @@ inline function ceilPowerOfTwo(n:Int):Int {
 	#error "flight.Math: no backend for this target."
 #end
 }
-inline function floorPowerOfTwo(n:Int):Int {
+extern inline function floorPowerOfTwo(n:Int):Int {
 #if hl
 	return flight._hl._fn.Math.floorPowerOfTwo(n);
 #elseif cpp
@@ -616,7 +616,7 @@ inline function floorPowerOfTwo(n:Int):Int {
 	#error "flight.Math: no backend for this target."
 #end
 }
-inline function quantize(value:Float, steps:Float, min:Float, max:Float):Float {
+extern inline function quantize(value:Float, steps:Float, min:Float, max:Float):Float {
 #if hl
 	return flight._hl._fn.Math.quantize(value, steps, min, max);
 #elseif cpp
@@ -627,7 +627,7 @@ inline function quantize(value:Float, steps:Float, min:Float, max:Float):Float {
 	#error "flight.Math: no backend for this target."
 #end
 }
-inline function sign(value:Float):Float {
+extern inline function sign(value:Float):Float {
 #if hl
 	return flight._hl._fn.Math.sign(value);
 #elseif cpp
@@ -638,7 +638,7 @@ inline function sign(value:Float):Float {
 	#error "flight.Math: no backend for this target."
 #end
 }
-inline function mean(values:Dynamic, valuesLen:Int):Float {
+extern inline function mean(values:Dynamic, valuesLen:Int):Float {
 #if hl
 	return flight._hl._fn.Math.mean(values, valuesLen);
 #elseif cpp
@@ -649,7 +649,7 @@ inline function mean(values:Dynamic, valuesLen:Int):Float {
 	#error "flight.Math: no backend for this target."
 #end
 }
-inline function median(values:Dynamic, valuesLen:Int):Float {
+extern inline function median(values:Dynamic, valuesLen:Int):Float {
 #if hl
 	return flight._hl._fn.Math.median(values, valuesLen);
 #elseif cpp
@@ -660,7 +660,7 @@ inline function median(values:Dynamic, valuesLen:Int):Float {
 	#error "flight.Math: no backend for this target."
 #end
 }
-inline function standardDeviation(values:Dynamic, valuesLen:Int):Float {
+extern inline function standardDeviation(values:Dynamic, valuesLen:Int):Float {
 #if hl
 	return flight._hl._fn.Math.standardDeviation(values, valuesLen);
 #elseif cpp
@@ -671,7 +671,7 @@ inline function standardDeviation(values:Dynamic, valuesLen:Int):Float {
 	#error "flight.Math: no backend for this target."
 #end
 }
-inline function variance(values:Dynamic, valuesLen:Int):Float {
+extern inline function variance(values:Dynamic, valuesLen:Int):Float {
 #if hl
 	return flight._hl._fn.Math.variance(values, valuesLen);
 #elseif cpp
@@ -682,7 +682,7 @@ inline function variance(values:Dynamic, valuesLen:Int):Float {
 	#error "flight.Math: no backend for this target."
 #end
 }
-inline function weightedAverage(values:Dynamic, valuesLen:Int, weights:Dynamic, weightsLen:Int):Float {
+extern inline function weightedAverage(values:Dynamic, valuesLen:Int, weights:Dynamic, weightsLen:Int):Float {
 #if hl
 	return flight._hl._fn.Math.weightedAverage(values, valuesLen, weights, weightsLen);
 #elseif cpp
@@ -693,7 +693,7 @@ inline function weightedAverage(values:Dynamic, valuesLen:Int, weights:Dynamic, 
 	#error "flight.Math: no backend for this target."
 #end
 }
-inline function freeRandomSource(ptr:RandomSource):Void {
+extern inline function freeRandomSource(ptr:RandomSource):Void {
 #if hl
 	flight._hl._fn.Math.freeRandomSource(ptr);
 #elseif cpp

@@ -16,20 +16,20 @@ abstract TextFieldScrollEvent(cpp.Star<cpp.Void>) {
 
 	inline function get_previousScrollH():Single return TextFieldScrollEvent_Ffi.get_previousScrollH(this);
 
-	inline function set_previousScrollH(value:Single):Single return TextFieldScrollEvent_Ffi.set_previousScrollH(this, value);
+	inline function set_previousScrollH(value:Single):Single { TextFieldScrollEvent_Ffi.set_previousScrollH(this, value); return value; }
 	public var previousScrollV(get, set):Single;
 
 	inline function get_previousScrollV():Single return TextFieldScrollEvent_Ffi.get_previousScrollV(this);
 
-	inline function set_previousScrollV(value:Single):Single return TextFieldScrollEvent_Ffi.set_previousScrollV(this, value);
+	inline function set_previousScrollV(value:Single):Single { TextFieldScrollEvent_Ffi.set_previousScrollV(this, value); return value; }
 	public var scrollH(get, set):Single;
 
 	inline function get_scrollH():Single return TextFieldScrollEvent_Ffi.get_scrollH(this);
 
-	inline function set_scrollH(value:Single):Single return TextFieldScrollEvent_Ffi.set_scrollH(this, value);
+	inline function set_scrollH(value:Single):Single { TextFieldScrollEvent_Ffi.set_scrollH(this, value); return value; }
 	public var scrollV(get, set):Single;
 
 	inline function get_scrollV():Single return TextFieldScrollEvent_Ffi.get_scrollV(this);
 
-	inline function set_scrollV(value:Single):Single return TextFieldScrollEvent_Ffi.set_scrollV(this, value);
+	inline function set_scrollV(value:Single):Single { TextFieldScrollEvent_Ffi.set_scrollV(this, value); return value; }
 }

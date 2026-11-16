@@ -32,60 +32,60 @@ abstract TextInputState(cpp.Star<cpp.Void>) {
 
 	inline function get_alwaysShowSelection():Bool return TextInputState_Ffi.get_alwaysShowSelection(this);
 
-	inline function set_alwaysShowSelection(value:Bool):Bool return TextInputState_Ffi.set_alwaysShowSelection(this, value);
+	inline function set_alwaysShowSelection(value:Bool):Bool { TextInputState_Ffi.set_alwaysShowSelection(this, value); return value; }
 	public var caretColor(get, set):Int;
 
 	inline function get_caretColor():Int return TextInputState_Ffi.get_caretColor(this);
 
-	inline function set_caretColor(value:Int):Int return TextInputState_Ffi.set_caretColor(this, value);
+	inline function set_caretColor(value:Int):Int { TextInputState_Ffi.set_caretColor(this, value); return value; }
 	public var caretIndex(get, set):Int;
 
 	inline function get_caretIndex():Int return TextInputState_Ffi.get_caretIndex(this);
 
-	inline function set_caretIndex(value:Int):Int return TextInputState_Ffi.set_caretIndex(this, value);
+	inline function set_caretIndex(value:Int):Int { TextInputState_Ffi.set_caretIndex(this, value); return value; }
 	public var caretWidth(get, set):Single;
 
 	inline function get_caretWidth():Single return TextInputState_Ffi.get_caretWidth(this);
 
-	inline function set_caretWidth(value:Single):Single return TextInputState_Ffi.set_caretWidth(this, value);
+	inline function set_caretWidth(value:Single):Single { TextInputState_Ffi.set_caretWidth(this, value); return value; }
 	public var desiredCaretX(get, set):Single;
 
 	inline function get_desiredCaretX():Single return TextInputState_Ffi.get_desiredCaretX(this);
 
-	inline function set_desiredCaretX(value:Single):Single return TextInputState_Ffi.set_desiredCaretX(this, value);
+	inline function set_desiredCaretX(value:Single):Single { TextInputState_Ffi.set_desiredCaretX(this, value); return value; }
 	public var displayAsPassword(get, set):Bool;
 
 	inline function get_displayAsPassword():Bool return TextInputState_Ffi.get_displayAsPassword(this);
 
-	inline function set_displayAsPassword(value:Bool):Bool return TextInputState_Ffi.set_displayAsPassword(this, value);
+	inline function set_displayAsPassword(value:Bool):Bool { TextInputState_Ffi.set_displayAsPassword(this, value); return value; }
 	public var focused(get, set):Bool;
 
 	inline function get_focused():Bool return TextInputState_Ffi.get_focused(this);
 
-	inline function set_focused(value:Bool):Bool return TextInputState_Ffi.set_focused(this, value);
+	inline function set_focused(value:Bool):Bool { TextInputState_Ffi.set_focused(this, value); return value; }
 	public var historyIndex(get, set):Int;
 
 	inline function get_historyIndex():Int return TextInputState_Ffi.get_historyIndex(this);
 
-	inline function set_historyIndex(value:Int):Int return TextInputState_Ffi.set_historyIndex(this, value);
+	inline function set_historyIndex(value:Int):Int { TextInputState_Ffi.set_historyIndex(this, value); return value; }
 	public var historyLimit(get, set):Int;
 
 	inline function get_historyLimit():Int return TextInputState_Ffi.get_historyLimit(this);
 
-	inline function set_historyLimit(value:Int):Int return TextInputState_Ffi.set_historyLimit(this, value);
+	inline function set_historyLimit(value:Int):Int { TextInputState_Ffi.set_historyLimit(this, value); return value; }
 	public var selectionAlpha(get, set):Single;
 
 	inline function get_selectionAlpha():Single return TextInputState_Ffi.get_selectionAlpha(this);
 
-	inline function set_selectionAlpha(value:Single):Single return TextInputState_Ffi.set_selectionAlpha(this, value);
+	inline function set_selectionAlpha(value:Single):Single { TextInputState_Ffi.set_selectionAlpha(this, value); return value; }
 	public var selectionColor(get, set):Int;
 
 	inline function get_selectionColor():Int return TextInputState_Ffi.get_selectionColor(this);
 
-	inline function set_selectionColor(value:Int):Int return TextInputState_Ffi.set_selectionColor(this, value);
+	inline function set_selectionColor(value:Int):Int { TextInputState_Ffi.set_selectionColor(this, value); return value; }
 	public var selectionIndex(get, set):Int;
 
 	inline function get_selectionIndex():Int return TextInputState_Ffi.get_selectionIndex(this);
 
-	inline function set_selectionIndex(value:Int):Int return TextInputState_Ffi.set_selectionIndex(this, value);
+	inline function set_selectionIndex(value:Int):Int { TextInputState_Ffi.set_selectionIndex(this, value); return value; }
 }

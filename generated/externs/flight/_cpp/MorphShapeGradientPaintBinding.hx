@@ -14,15 +14,15 @@ abstract MorphShapeGradientPaintBinding(cpp.Star<cpp.Void>) {
 
 	inline function get_commandIndex():Int return MorphShapeGradientPaintBinding_Ffi.get_commandIndex(this);
 
-	inline function set_commandIndex(value:Int):Int return MorphShapeGradientPaintBinding_Ffi.set_commandIndex(this, value);
+	inline function set_commandIndex(value:Int):Int { MorphShapeGradientPaintBinding_Ffi.set_commandIndex(this, value); return value; }
 	public var endFocalPointRatio(get, set):Float;
 
 	inline function get_endFocalPointRatio():Float return MorphShapeGradientPaintBinding_Ffi.get_endFocalPointRatio(this);
 
-	inline function set_endFocalPointRatio(value:Float):Float return MorphShapeGradientPaintBinding_Ffi.set_endFocalPointRatio(this, value);
+	inline function set_endFocalPointRatio(value:Float):Float { MorphShapeGradientPaintBinding_Ffi.set_endFocalPointRatio(this, value); return value; }
 	public var startFocalPointRatio(get, set):Float;
 
 	inline function get_startFocalPointRatio():Float return MorphShapeGradientPaintBinding_Ffi.get_startFocalPointRatio(this);
 
-	inline function set_startFocalPointRatio(value:Float):Float return MorphShapeGradientPaintBinding_Ffi.set_startFocalPointRatio(this, value);
+	inline function set_startFocalPointRatio(value:Float):Float { MorphShapeGradientPaintBinding_Ffi.set_startFocalPointRatio(this, value); return value; }
 }

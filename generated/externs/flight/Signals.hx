@@ -1,6 +1,6 @@
 package flight;
 
-inline function disconnectSignalConnection(connection:SignalConnection):Void {
+extern inline function disconnectSignalConnection(connection:SignalConnection):Void {
 #if hl
 	flight._hl._fn.Signals.disconnectSignalConnection(connection);
 #elseif cpp
@@ -11,7 +11,7 @@ inline function disconnectSignalConnection(connection:SignalConnection):Void {
 	#error "flight.Signals: no backend for this target."
 #end
 }
-inline function isSignalConnectionConnected(connection:SignalConnection):Bool {
+extern inline function isSignalConnectionConnected(connection:SignalConnection):Bool {
 #if hl
 	return flight._hl._fn.Signals.isSignalConnectionConnected(connection);
 #elseif cpp
@@ -22,7 +22,7 @@ inline function isSignalConnectionConnected(connection:SignalConnection):Bool {
 	#error "flight.Signals: no backend for this target."
 #end
 }
-inline function isSignalConnectionPaused(connection:SignalConnection):Bool {
+extern inline function isSignalConnectionPaused(connection:SignalConnection):Bool {
 #if hl
 	return flight._hl._fn.Signals.isSignalConnectionPaused(connection);
 #elseif cpp
@@ -33,7 +33,7 @@ inline function isSignalConnectionPaused(connection:SignalConnection):Bool {
 	#error "flight.Signals: no backend for this target."
 #end
 }
-inline function pauseSignalConnection(connection:SignalConnection):Void {
+extern inline function pauseSignalConnection(connection:SignalConnection):Void {
 #if hl
 	flight._hl._fn.Signals.pauseSignalConnection(connection);
 #elseif cpp
@@ -44,7 +44,7 @@ inline function pauseSignalConnection(connection:SignalConnection):Void {
 	#error "flight.Signals: no backend for this target."
 #end
 }
-inline function resumeSignalConnection(connection:SignalConnection):Void {
+extern inline function resumeSignalConnection(connection:SignalConnection):Void {
 #if hl
 	flight._hl._fn.Signals.resumeSignalConnection(connection);
 #elseif cpp
@@ -55,7 +55,7 @@ inline function resumeSignalConnection(connection:SignalConnection):Void {
 	#error "flight.Signals: no backend for this target."
 #end
 }
-inline function createSignalScope():SignalScope {
+extern inline function createSignalScope():SignalScope {
 #if hl
 	return flight._hl._fn.Signals.createSignalScope();
 #elseif cpp
@@ -66,7 +66,7 @@ inline function createSignalScope():SignalScope {
 	#error "flight.Signals: no backend for this target."
 #end
 }
-inline function disconnectSignalScope(scope:SignalScope):Void {
+extern inline function disconnectSignalScope(scope:SignalScope):Void {
 #if hl
 	flight._hl._fn.Signals.disconnectSignalScope(scope);
 #elseif cpp
@@ -77,7 +77,7 @@ inline function disconnectSignalScope(scope:SignalScope):Void {
 	#error "flight.Signals: no backend for this target."
 #end
 }
-inline function createSignalTimerState():SignalTimerState {
+extern inline function createSignalTimerState():SignalTimerState {
 #if hl
 	return flight._hl._fn.Signals.createSignalTimerState();
 #elseif cpp
@@ -88,7 +88,7 @@ inline function createSignalTimerState():SignalTimerState {
 	#error "flight.Signals: no backend for this target."
 #end
 }
-inline function advanceSignalTimers(state:Dynamic, nowMs:Float):Void {
+extern inline function advanceSignalTimers(state:Dynamic, nowMs:Float):Void {
 #if hl
 	flight._hl._fn.Signals.advanceSignalTimers(state, nowMs);
 #elseif cpp
@@ -99,7 +99,7 @@ inline function advanceSignalTimers(state:Dynamic, nowMs:Float):Void {
 	#error "flight.Signals: no backend for this target."
 #end
 }
-inline function clearSignalTimeout(state:Dynamic, id:TimerId):Void {
+extern inline function clearSignalTimeout(state:Dynamic, id:TimerId):Void {
 #if hl
 	flight._hl._fn.Signals.clearSignalTimeout(state, id);
 #elseif cpp
@@ -110,7 +110,7 @@ inline function clearSignalTimeout(state:Dynamic, id:TimerId):Void {
 	#error "flight.Signals: no backend for this target."
 #end
 }
-inline function setSignalTimeout(state:Dynamic, delayMs:Float, callback_Fn:Dynamic, callback_Ctx:Dynamic):TimerId {
+extern inline function setSignalTimeout(state:Dynamic, delayMs:Float, callback_Fn:Dynamic, callback_Ctx:Dynamic):TimerId {
 #if hl
 	return flight._hl._fn.Signals.setSignalTimeout(state, delayMs, callback_Fn, callback_Ctx);
 #elseif cpp
@@ -121,7 +121,7 @@ inline function setSignalTimeout(state:Dynamic, delayMs:Float, callback_Fn:Dynam
 	#error "flight.Signals: no backend for this target."
 #end
 }
-inline function freeSignalScope(ptr:SignalScope):Void {
+extern inline function freeSignalScope(ptr:SignalScope):Void {
 #if hl
 	flight._hl._fn.Signals.freeSignalScope(ptr);
 #elseif cpp
@@ -132,7 +132,7 @@ inline function freeSignalScope(ptr:SignalScope):Void {
 	#error "flight.Signals: no backend for this target."
 #end
 }
-inline function freeSignalTimerState(ptr:SignalTimerState):Void {
+extern inline function freeSignalTimerState(ptr:SignalTimerState):Void {
 #if hl
 	flight._hl._fn.Signals.freeSignalTimerState(ptr);
 #elseif cpp
@@ -143,7 +143,7 @@ inline function freeSignalTimerState(ptr:SignalTimerState):Void {
 	#error "flight.Signals: no backend for this target."
 #end
 }
-inline function freeTimerId(ptr:TimerId):Void {
+extern inline function freeTimerId(ptr:TimerId):Void {
 #if hl
 	flight._hl._fn.Signals.freeTimerId(ptr);
 #elseif cpp

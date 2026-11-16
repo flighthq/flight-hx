@@ -12,32 +12,32 @@ abstract Spring(cpp.Star<cpp.Void>) {
 
 	inline function get_value():Single return Spring_Ffi.get_value(this);
 
-	inline function set_value(value:Single):Single return Spring_Ffi.set_value(this, value);
+	inline function set_value(value:Single):Single { Spring_Ffi.set_value(this, value); return value; }
 	public var velocity(get, set):Single;
 
 	inline function get_velocity():Single return Spring_Ffi.get_velocity(this);
 
-	inline function set_velocity(value:Single):Single return Spring_Ffi.set_velocity(this, value);
+	inline function set_velocity(value:Single):Single { Spring_Ffi.set_velocity(this, value); return value; }
 
-	static inline public function create(value:Single, velocity:Single):flight._cpp.Spring {
+	static extern inline public function create(value:Single, velocity:Single):flight._cpp.Spring {
 		return flight._cpp._fn.Spring.createSpring(value, velocity);
 	}
-	inline public function addImpulse(velocity:Single):Void {
+	extern inline public function addImpulse(velocity:Single):Void {
 		flight._cpp._fn.Spring.addSpringImpulse(cast this, velocity);
 	}
-	inline public function isSettled(target:Single, positionEpsilon:Single, velocityEpsilon:Single):Bool {
+	extern inline public function isSettled(target:Single, positionEpsilon:Single, velocityEpsilon:Single):Bool {
 		return flight._cpp._fn.Spring.isSpringSettled(cast this, target, positionEpsilon, velocityEpsilon);
 	}
-	inline public function reset(value:Single, velocity:Single):Void {
+	extern inline public function reset(value:Single, velocity:Single):Void {
 		flight._cpp._fn.Spring.resetSpring(cast this, value, velocity);
 	}
-	inline public function update(target:Single, config:flight._cpp.SpringConfig, deltaTime:Single):Void {
+	extern inline public function update(target:Single, config:flight._cpp.SpringConfig, deltaTime:Single):Void {
 		flight._cpp._fn.Spring.updateSpring(cast this, target, config, deltaTime);
 	}
-	inline public function updateAngle(target:Single, fullTurn:Single, config:flight._cpp.SpringConfig, deltaTime:Single):Void {
+	extern inline public function updateAngle(target:Single, fullTurn:Single, config:flight._cpp.SpringConfig, deltaTime:Single):Void {
 		flight._cpp._fn.Spring.updateSpringAngle(cast this, target, fullTurn, config, deltaTime);
 	}
-	inline public function free():Void {
+	extern inline public function free():Void {
 		flight._cpp._fn.Spring.freeSpring(cast this);
 	}
 }

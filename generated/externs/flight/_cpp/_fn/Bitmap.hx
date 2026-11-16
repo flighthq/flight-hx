@@ -2,7 +2,7 @@ package flight._cpp._fn;
 
 extern class Bitmap {
 	@:native("flight_create_bitmap")
-	public static function createBitmap(width:Int, height:Int, color:Int):flight._cpp.Bitmap;
+	public static function createBitmap(width:Int, height:Int, color:haxe.Int64):flight._cpp.Bitmap;
 	@:native("flight_clone_bitmap")
 	public static function cloneBitmap(source:flight._cpp.Bitmap):flight._cpp.Bitmap;
 	@:native("flight_convert_bitmap_alpha_type")
@@ -60,9 +60,9 @@ extern class Bitmap {
 	@:native("flight_get_bitmap_mismatch")
 	public static function getBitmapMismatch(source:flight._cpp.Bitmap, other:flight._cpp.Bitmap, channelTolerance:Int):flight._cpp.BitmapMismatch;
 	@:native("flight_composite_bitmap_pixels")
-	public static function compositeBitmapPixels(dest:flight._cpp.BitmapRegion, pixels:cpp.Star<cpp.Void>, pixelsLen:Int, mode:Int):Void;
+	public static function compositeBitmapPixels(dest:flight._cpp.BitmapRegion, pixels:cpp.Star<cpp.Void>, pixelsLen:Int, mode:flight._cpp.BitmapCompositeMode):Void;
 	@:native("flight_composite_bitmap_region")
-	public static function compositeBitmapRegion(dest:flight._cpp.BitmapRegion, source:flight._cpp.BitmapRegion, mode:Int):Void;
+	public static function compositeBitmapRegion(dest:flight._cpp.BitmapRegion, source:flight._cpp.BitmapRegion, mode:flight._cpp.BitmapCompositeMode):Void;
 	@:native("flight_extract_bitmap_pixels")
 	public static function extractBitmapPixels(out:cpp.Star<cpp.Void>, outLen:Int, source:flight._cpp.BitmapRegion):Void;
 	@:native("flight_extract_bitmap_pixels32")
@@ -74,7 +74,7 @@ extern class Bitmap {
 	@:native("flight_convolve_bitmap")
 	public static function convolveBitmap(out:cpp.Star<cpp.Void>, outLen:Int, source:flight._cpp.BitmapRegion, options:flight._cpp.BitmapConvolutionOptions):Void;
 	@:native("flight_copy_bitmap_channel")
-	public static function copyBitmapChannel(dest:flight._cpp.BitmapRegion, destChannel:Int, source:flight._cpp.BitmapRegion, sourceChannel:Int):Void;
+	public static function copyBitmapChannel(dest:flight._cpp.BitmapRegion, destChannel:flight._cpp.ImageChannel, source:flight._cpp.BitmapRegion, sourceChannel:flight._cpp.ImageChannel):Void;
 	@:native("flight_copy_bitmap_pixels")
 	public static function copyBitmapPixels(dest:flight._cpp.BitmapRegion, source:flight._cpp.BitmapRegion, composite:Bool):Void;
 	@:native("flight_get_bitmap_coverage")
@@ -144,7 +144,7 @@ extern class Bitmap {
 	@:native("flight_get_bitmap_pixel")
 	public static function getBitmapPixel(source:flight._cpp.Bitmap, x:Int, y:Int):Int;
 	@:native("flight_get_bitmap_pixel_channel")
-	public static function getBitmapPixelChannel(source:flight._cpp.Bitmap, x:Int, y:Int, channel:Int):Int;
+	public static function getBitmapPixelChannel(source:flight._cpp.Bitmap, x:Int, y:Int, channel:flight._cpp.ImageChannel):Int;
 	@:native("flight_get_bitmap_pixel_luminance")
 	public static function getBitmapPixelLuminance(source:flight._cpp.Bitmap, x:Int, y:Int):Int;
 	@:native("flight_get_bitmap_pixel_rgb")

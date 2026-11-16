@@ -30,11 +30,11 @@ extern class Texture {
 	@:native("flight_equals_sampler")
 	public static function equalsSampler(a:flight._cpp.Sampler, b:flight._cpp.Sampler):Bool;
 	@:native("flight_create_texture")
-	public static function createTexture(opts:flight._cpp.CreateTextureOptions):Int;
+	public static function createTexture(opts:flight._cpp.CreateTextureOptions):flight._cpp.Texture;
 	@:native("flight_create_texture_2d")
 	public static function createTexture2d():flight._cpp.Texture2D;
 	@:native("flight_clone_texture__texture")
-	public static function cloneTextureTexture(source:flight._cpp.Texture):Int;
+	public static function cloneTextureTexture(source:flight._cpp.Texture):flight._cpp.Texture;
 	@:native("flight_copy_texture__texture__texture")
 	public static function copyTextureTextureTexture(out:flight._cpp.Texture, source:flight._cpp.Texture):Void;
 	@:native("flight_get_texture_height__texture")
@@ -83,6 +83,8 @@ extern class Texture {
 	public static function freeCubeTexture(ptr:flight._cpp.CubeTexture):Void;
 	@:native("flight_free_sampler")
 	public static function freeSampler(ptr:flight._cpp.Sampler):Void;
+	@:native("flight_free_texture")
+	public static function freeTexture(ptr:flight._cpp.Texture):Void;
 	@:native("flight_free_texture2_d")
 	public static function freeTexture2D(ptr:flight._cpp.Texture2D):Void;
 	@:native("flight_free_texture_source_ref")

@@ -2,6 +2,8 @@ package flight._js;
 
 @:jsRequire("flight")
 private extern class Clock_Ffi {
+	@:native("flight_get_clock_scale") static function get_scale(ptr:Dynamic):Float;
+	@:native("flight_set_clock_scale") static function set_scale(ptr:Dynamic, value:Float):Float;
 	@:native("flight_get_clock_paused") static function get_paused(ptr:Dynamic):Bool;
 	@:native("flight_set_clock_paused") static function set_paused(ptr:Dynamic, value:Bool):Bool;
 	@:native("flight_get_clock_delta_time") static function get_deltaTime(ptr:Dynamic):Float;
@@ -11,6 +13,11 @@ private extern class Clock_Ffi {
 }
 
 abstract Clock(Dynamic) {
+	public var scale(get, set):Float;
+
+	inline function get_scale():Float return Clock_Ffi.get_scale(this);
+
+	inline function set_scale(value:Float):Float return Clock_Ffi.set_scale(this, value);
 	public var paused(get, set):Bool;
 
 	inline function get_paused():Bool return Clock_Ffi.get_paused(this);

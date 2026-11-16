@@ -14,15 +14,15 @@ abstract FontVariationAxis(cpp.Star<cpp.Void>) {
 
 	inline function get_defaultValue():Single return FontVariationAxis_Ffi.get_defaultValue(this);
 
-	inline function set_defaultValue(value:Single):Single return FontVariationAxis_Ffi.set_defaultValue(this, value);
+	inline function set_defaultValue(value:Single):Single { FontVariationAxis_Ffi.set_defaultValue(this, value); return value; }
 	public var max(get, set):Single;
 
 	inline function get_max():Single return FontVariationAxis_Ffi.get_max(this);
 
-	inline function set_max(value:Single):Single return FontVariationAxis_Ffi.set_max(this, value);
+	inline function set_max(value:Single):Single { FontVariationAxis_Ffi.set_max(this, value); return value; }
 	public var min(get, set):Single;
 
 	inline function get_min():Single return FontVariationAxis_Ffi.get_min(this);
 
-	inline function set_min(value:Single):Single return FontVariationAxis_Ffi.set_min(this, value);
+	inline function set_min(value:Single):Single { FontVariationAxis_Ffi.set_min(this, value); return value; }
 }

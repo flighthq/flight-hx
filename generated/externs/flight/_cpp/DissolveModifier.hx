@@ -16,20 +16,20 @@ abstract DissolveModifier(cpp.Star<cpp.Void>) {
 
 	inline function get_threshold():Single return DissolveModifier_Ffi.get_threshold(this);
 
-	inline function set_threshold(value:Single):Single return DissolveModifier_Ffi.set_threshold(this, value);
+	inline function set_threshold(value:Single):Single { DissolveModifier_Ffi.set_threshold(this, value); return value; }
 	public var edgeColor(get, set):Int;
 
 	inline function get_edgeColor():Int return DissolveModifier_Ffi.get_edgeColor(this);
 
-	inline function set_edgeColor(value:Int):Int return DissolveModifier_Ffi.set_edgeColor(this, value);
+	inline function set_edgeColor(value:Int):Int { DissolveModifier_Ffi.set_edgeColor(this, value); return value; }
 	public var edgeWidth(get, set):Single;
 
 	inline function get_edgeWidth():Single return DissolveModifier_Ffi.get_edgeWidth(this);
 
-	inline function set_edgeWidth(value:Single):Single return DissolveModifier_Ffi.set_edgeWidth(this, value);
+	inline function set_edgeWidth(value:Single):Single { DissolveModifier_Ffi.set_edgeWidth(this, value); return value; }
 	public var scale(get, set):Single;
 
 	inline function get_scale():Single return DissolveModifier_Ffi.get_scale(this);
 
-	inline function set_scale(value:Single):Single return DissolveModifier_Ffi.set_scale(this, value);
+	inline function set_scale(value:Single):Single { DissolveModifier_Ffi.set_scale(this, value); return value; }
 }

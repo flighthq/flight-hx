@@ -14,15 +14,15 @@ abstract HueSaturationAdjustment(cpp.Star<cpp.Void>) {
 
 	inline function get_hue():Single return HueSaturationAdjustment_Ffi.get_hue(this);
 
-	inline function set_hue(value:Single):Single return HueSaturationAdjustment_Ffi.set_hue(this, value);
+	inline function set_hue(value:Single):Single { HueSaturationAdjustment_Ffi.set_hue(this, value); return value; }
 	public var saturation(get, set):Single;
 
 	inline function get_saturation():Single return HueSaturationAdjustment_Ffi.get_saturation(this);
 
-	inline function set_saturation(value:Single):Single return HueSaturationAdjustment_Ffi.set_saturation(this, value);
+	inline function set_saturation(value:Single):Single { HueSaturationAdjustment_Ffi.set_saturation(this, value); return value; }
 	public var lightness(get, set):Single;
 
 	inline function get_lightness():Single return HueSaturationAdjustment_Ffi.get_lightness(this);
 
-	inline function set_lightness(value:Single):Single return HueSaturationAdjustment_Ffi.set_lightness(this, value);
+	inline function set_lightness(value:Single):Single { HueSaturationAdjustment_Ffi.set_lightness(this, value); return value; }
 }

@@ -10,5 +10,5 @@ abstract Physics2DGuardState(cpp.Star<cpp.Void>) {
 
 	inline function get_enabled():Bool return Physics2DGuardState_Ffi.get_enabled(this);
 
-	inline function set_enabled(value:Bool):Bool return Physics2DGuardState_Ffi.set_enabled(this, value);
+	inline function set_enabled(value:Bool):Bool { Physics2DGuardState_Ffi.set_enabled(this, value); return value; }
 }

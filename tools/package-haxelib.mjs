@@ -11,6 +11,7 @@ import {
 import path from 'node:path';
 import process from 'node:process';
 import { deflateRawSync } from 'node:zlib';
+import { nativePayload } from './native/artifacts.mjs';
 
 // Haxelib consumes ordinary ZIP archives, but Node has no built-in ZIP container writer. This
 // small deterministic ZIP32 writer keeps packaging dependency-free: fixed timestamps, sorted paths,
@@ -25,14 +26,13 @@ const crcTable = Array.from({ length: 256 }, (_, value) => {
   return entry >>> 0;
 });
 const options = process.argv.slice(2);
-const outputOption = options.indexOf('--out');
-const unknown = options.filter((option, index) => option !== '--out' && index !== outputOption + 1);
-if (unknown.length > 0 || (outputOption !== -1 && options[outputOption + 1] === undefined)) {
-  process.stderr.write('Usage: node tools/package-haxelib.mjs [--out <archive.zip>]\n');
-  process.exit(2);
+let outputArgument;
+for (let index = 0; index < options.length; index++) {
+  if (options[index] === '--out' && options[index + 1] && !options[index + 1].startsWith('--') && outputArgument === undefined) outputArgument = options[++index];
+  else if (options[index] !== '--externs-only') throw new Error('Usage: node tools/package-haxelib.mjs [--out <archive.zip>] [--externs-only]');
 }
 const output = path.resolve(
-  outputOption === -1 ? path.join(root, 'dist', `flight-${manifest.version}.zip`) : options[outputOption + 1],
+  outputArgument ?? path.join(root, 'dist', `flight-${manifest.version}.zip`),
 );
 const temporary = `${output}.tmp-${String(process.pid)}`;
 const files = packageFiles();
@@ -112,10 +112,11 @@ process.stdout.write(
 );
 
 function packageFiles() {
-  const roots = ['examples/ffi-smoke', 'generated/externs', 'lib'];
-  const fixed = ['extraParams.hxml', 'haxelib.json', 'LICENSE.md', 'README.md'];
+  const roots = ['examples/ffi-smoke', 'generated/externs', 'lib', 'project'];
+  const fixed = ['extraParams.hxml', 'haxelib.json', 'LICENSE.md', 'README.md', 'include.xml'];
   const esm = filesUnder('tools/esm').filter((filename) => filename.endsWith('.hx'));
-  const result = [...fixed, ...roots.flatMap(filesUnder), ...esm].sort(compareText);
+  const native = options.includes('--externs-only') ? [] : nativePayload(root);
+  const result = [...fixed, ...roots.flatMap(filesUnder), ...esm, ...native].sort(compareText);
   if (result.length > 0xffff) throw new Error('Haxelib archive exceeds the ZIP32 entry limit');
   return result;
 }

@@ -1,7 +1,10 @@
 package flight._hl;
 
 abstract Texture(hl.Bytes) {
-	inline public function cloneTexture():Int {
+	static inline public function create(opts:flight._hl.CreateTextureOptions):flight._hl.Texture {
+		return flight._hl._fn.Texture.createTexture(opts);
+	}
+	inline public function cloneTexture():flight._hl.Texture {
 		return flight._hl._fn.Texture.cloneTextureTexture(cast this);
 	}
 	inline public function copyTextureTexture(source:flight._hl.Texture):Void {
@@ -13,10 +16,10 @@ abstract Texture(hl.Bytes) {
 	inline public function getTextureInverseUvMatrix(out:flight._hl.Matrix3):Void {
 		flight._hl._fn.Texture.getTextureInverseUvMatrixTexture(out, cast this);
 	}
-	inline public function getTextureSource():Dynamic {
+	inline public function getTextureSource():flight._hl.TextureSourceRef {
 		return flight._hl._fn.Texture.getTextureSourceTexture(cast this);
 	}
-	inline public function getTextureSourceKind():Dynamic {
+	inline public function getTextureSourceKind():flight._hl.TextureSourceKind {
 		return flight._hl._fn.Texture.getTextureSourceKindTexture(cast this);
 	}
 	inline public function getTextureUvMatrix(out:flight._hl.Matrix3):Void {
@@ -58,10 +61,13 @@ abstract Texture(hl.Bytes) {
 	inline public function transformTextureUv(out:flight._hl.Vector2, u:Single, v:Single):Void {
 		flight._hl._fn.Texture.transformTextureUvTexture(out, cast this, u, v);
 	}
+	inline public function free():Void {
+		flight._hl._fn.Texture.freeTexture(cast this);
+	}
 	inline public function advanceVideoTexture(hostVideo:flight._hl.HostVideoCapability):Int {
 		return flight._hl._fn.Video.advanceVideoTextureTexture(hostVideo, cast this);
 	}
-	inline public function cloneVideoTexture():Int {
+	inline public function cloneVideoTexture():flight._hl.Texture {
 		return flight._hl._fn.Video.cloneVideoTextureTexture(cast this);
 	}
 	inline public function copyVideoTextureTexture(source:flight._hl.Texture):Void {

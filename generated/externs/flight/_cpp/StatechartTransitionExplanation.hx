@@ -20,30 +20,30 @@ abstract StatechartTransitionExplanation(cpp.Star<cpp.Void>) {
 
 	inline function get_blend():Single return StatechartTransitionExplanation_Ffi.get_blend(this);
 
-	inline function set_blend(value:Single):Single return StatechartTransitionExplanation_Ffi.set_blend(this, value);
+	inline function set_blend(value:Single):Single { StatechartTransitionExplanation_Ffi.set_blend(this, value); return value; }
 	public var conditionIndex(get, set):Int;
 
 	inline function get_conditionIndex():Int return StatechartTransitionExplanation_Ffi.get_conditionIndex(this);
 
-	inline function set_conditionIndex(value:Int):Int return StatechartTransitionExplanation_Ffi.set_conditionIndex(this, value);
+	inline function set_conditionIndex(value:Int):Int { StatechartTransitionExplanation_Ffi.set_conditionIndex(this, value); return value; }
 	public var regionIndex(get, set):Int;
 
 	inline function get_regionIndex():Int return StatechartTransitionExplanation_Ffi.get_regionIndex(this);
 
-	inline function set_regionIndex(value:Int):Int return StatechartTransitionExplanation_Ffi.set_regionIndex(this, value);
+	inline function set_regionIndex(value:Int):Int { StatechartTransitionExplanation_Ffi.set_regionIndex(this, value); return value; }
 	public var sourceStateIndex(get, set):Int;
 
 	inline function get_sourceStateIndex():Int return StatechartTransitionExplanation_Ffi.get_sourceStateIndex(this);
 
-	inline function set_sourceStateIndex(value:Int):Int return StatechartTransitionExplanation_Ffi.set_sourceStateIndex(this, value);
+	inline function set_sourceStateIndex(value:Int):Int { StatechartTransitionExplanation_Ffi.set_sourceStateIndex(this, value); return value; }
 	public var targetStateIndex(get, set):Int;
 
 	inline function get_targetStateIndex():Int return StatechartTransitionExplanation_Ffi.get_targetStateIndex(this);
 
-	inline function set_targetStateIndex(value:Int):Int return StatechartTransitionExplanation_Ffi.set_targetStateIndex(this, value);
+	inline function set_targetStateIndex(value:Int):Int { StatechartTransitionExplanation_Ffi.set_targetStateIndex(this, value); return value; }
 	public var transitionIndex(get, set):Int;
 
 	inline function get_transitionIndex():Int return StatechartTransitionExplanation_Ffi.get_transitionIndex(this);
 
-	inline function set_transitionIndex(value:Int):Int return StatechartTransitionExplanation_Ffi.set_transitionIndex(this, value);
+	inline function set_transitionIndex(value:Int):Int { StatechartTransitionExplanation_Ffi.set_transitionIndex(this, value); return value; }
 }

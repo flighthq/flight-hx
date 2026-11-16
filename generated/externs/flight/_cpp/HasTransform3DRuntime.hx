@@ -10,5 +10,5 @@ abstract HasTransform3DRuntime(cpp.Star<cpp.Void>) {
 
 	inline function get_localMatrix4Detached():Bool return HasTransform3DRuntime_Ffi.get_localMatrix4Detached(this);
 
-	inline function set_localMatrix4Detached(value:Bool):Bool return HasTransform3DRuntime_Ffi.set_localMatrix4Detached(this, value);
+	inline function set_localMatrix4Detached(value:Bool):Bool { HasTransform3DRuntime_Ffi.set_localMatrix4Detached(this, value); return value; }
 }

@@ -14,15 +14,15 @@ abstract Physics2DMaterial(cpp.Star<cpp.Void>) {
 
 	inline function get_density():Single return Physics2DMaterial_Ffi.get_density(this);
 
-	inline function set_density(value:Single):Single return Physics2DMaterial_Ffi.set_density(this, value);
+	inline function set_density(value:Single):Single { Physics2DMaterial_Ffi.set_density(this, value); return value; }
 	public var friction(get, set):Single;
 
 	inline function get_friction():Single return Physics2DMaterial_Ffi.get_friction(this);
 
-	inline function set_friction(value:Single):Single return Physics2DMaterial_Ffi.set_friction(this, value);
+	inline function set_friction(value:Single):Single { Physics2DMaterial_Ffi.set_friction(this, value); return value; }
 	public var restitution(get, set):Single;
 
 	inline function get_restitution():Single return Physics2DMaterial_Ffi.get_restitution(this);
 
-	inline function set_restitution(value:Single):Single return Physics2DMaterial_Ffi.set_restitution(this, value);
+	inline function set_restitution(value:Single):Single { Physics2DMaterial_Ffi.set_restitution(this, value); return value; }
 }

@@ -10,5 +10,5 @@ abstract LookupTableGradeAdjustment(cpp.Star<cpp.Void>) {
 
 	inline function get_strength():Single return LookupTableGradeAdjustment_Ffi.get_strength(this);
 
-	inline function set_strength(value:Single):Single return LookupTableGradeAdjustment_Ffi.set_strength(this, value);
+	inline function set_strength(value:Single):Single { LookupTableGradeAdjustment_Ffi.set_strength(this, value); return value; }
 }

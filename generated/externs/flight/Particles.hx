@@ -1,6 +1,6 @@
 package flight;
 
-inline function applyParticleCollisions(transforms:Dynamic, transformsLen:Int, positionsZ:Dynamic, positionsZLen:Int, particleCount:Int, state:ParticleEmitterState, colliders:Dynamic, collidersLen:Int):Void {
+extern inline function applyParticleCollisions(transforms:Dynamic, transformsLen:Int, positionsZ:Dynamic, positionsZLen:Int, particleCount:Int, state:ParticleEmitterState, colliders:Dynamic, collidersLen:Int):Void {
 #if hl
 	flight._hl._fn.Particles.applyParticleCollisions(transforms, transformsLen, positionsZ, positionsZLen, particleCount, state, colliders, collidersLen);
 #elseif cpp
@@ -11,7 +11,7 @@ inline function applyParticleCollisions(transforms:Dynamic, transformsLen:Int, p
 	#error "flight.Particles: no backend for this target."
 #end
 }
-inline function applyParticleObjectCollisions(objects:Dynamic, objectsLen:Int, state:ParticleObjectsState, colliders:Dynamic, collidersLen:Int):Void {
+extern inline function applyParticleObjectCollisions(objects:Dynamic, objectsLen:Int, state:ParticleObjectsState, colliders:Dynamic, collidersLen:Int):Void {
 #if hl
 	flight._hl._fn.Particles.applyParticleObjectCollisions(objects, objectsLen, state, colliders, collidersLen);
 #elseif cpp
@@ -22,7 +22,7 @@ inline function applyParticleObjectCollisions(objects:Dynamic, objectsLen:Int, s
 	#error "flight.Particles: no backend for this target."
 #end
 }
-inline function applyParticleForces(transforms:Dynamic, transformsLen:Int, positionsZ:Dynamic, positionsZLen:Int, particleCount:Int, state:ParticleEmitterState, forces:Dynamic, forcesLen:Int, deltaTime:Float):Void {
+extern inline function applyParticleForces(transforms:Dynamic, transformsLen:Int, positionsZ:Dynamic, positionsZLen:Int, particleCount:Int, state:ParticleEmitterState, forces:Dynamic, forcesLen:Int, deltaTime:Float):Void {
 #if hl
 	flight._hl._fn.Particles.applyParticleForces(transforms, transformsLen, positionsZ, positionsZLen, particleCount, state, forces, forcesLen, deltaTime);
 #elseif cpp
@@ -33,7 +33,7 @@ inline function applyParticleForces(transforms:Dynamic, transformsLen:Int, posit
 	#error "flight.Particles: no backend for this target."
 #end
 }
-inline function applyParticleObjectForces(objects:Dynamic, objectsLen:Int, state:ParticleObjectsState, forces:Dynamic, forcesLen:Int, deltaTime:Float):Void {
+extern inline function applyParticleObjectForces(objects:Dynamic, objectsLen:Int, state:ParticleObjectsState, forces:Dynamic, forcesLen:Int, deltaTime:Float):Void {
 #if hl
 	flight._hl._fn.Particles.applyParticleObjectForces(objects, objectsLen, state, forces, forcesLen, deltaTime);
 #elseif cpp
@@ -44,18 +44,18 @@ inline function applyParticleObjectForces(objects:Dynamic, objectsLen:Int, state
 	#error "flight.Particles: no backend for this target."
 #end
 }
-inline function buildParticleCurve(out:Dynamic, fFn:Dynamic, fCtx:Dynamic):Void {
+extern inline function buildParticleCurve(out:Dynamic, fFn:Dynamic, fCtx:Dynamic, samples:Int):Void {
 #if hl
-	flight._hl._fn.Particles.buildParticleCurve(out, fFn, fCtx);
+	flight._hl._fn.Particles.buildParticleCurve(out, fFn, fCtx, samples);
 #elseif cpp
-	flight._cpp._fn.Particles.buildParticleCurve(out, fFn, fCtx);
+	flight._cpp._fn.Particles.buildParticleCurve(out, fFn, fCtx, samples);
 #elseif (js && flight_esm)
-	flight._js._fn.Particles.buildParticleCurve(out, fFn, fCtx);
+	flight._js._fn.Particles.buildParticleCurve(out, fFn, fCtx, samples);
 #else
 	#error "flight.Particles: no backend for this target."
 #end
 }
-inline function lerpHsvDirect(out:Dynamic, outLen:Int, offset:Int, r0:Float, g0:Float, b0:Float, r1:Float, g1:Float, b1:Float, t:Float):Void {
+extern inline function lerpHsvDirect(out:Dynamic, outLen:Int, offset:Int, r0:Float, g0:Float, b0:Float, r1:Float, g1:Float, b1:Float, t:Float):Void {
 #if hl
 	flight._hl._fn.Particles.lerpHsvDirect(out, outLen, offset, r0, g0, b0, r1, g1, b1, t);
 #elseif cpp
@@ -66,7 +66,7 @@ inline function lerpHsvDirect(out:Dynamic, outLen:Int, offset:Int, r0:Float, g0:
 	#error "flight.Particles: no backend for this target."
 #end
 }
-inline function lerpHsvInPlace(colorsOut:Dynamic, colorsOutLen:Int, offset:Int, birth:Dynamic, birthLen:Int, death:Dynamic, deathLen:Int, t:Float):Void {
+extern inline function lerpHsvInPlace(colorsOut:Dynamic, colorsOutLen:Int, offset:Int, birth:Dynamic, birthLen:Int, death:Dynamic, deathLen:Int, t:Float):Void {
 #if hl
 	flight._hl._fn.Particles.lerpHsvInPlace(colorsOut, colorsOutLen, offset, birth, birthLen, death, deathLen, t);
 #elseif cpp
@@ -77,7 +77,7 @@ inline function lerpHsvInPlace(colorsOut:Dynamic, colorsOutLen:Int, offset:Int, 
 	#error "flight.Particles: no backend for this target."
 #end
 }
-inline function particleColorCurveFromKeyframes(out:Dynamic, keys:Dynamic, keysLen:Int, samples:Int):Void {
+extern inline function particleColorCurveFromKeyframes(out:Dynamic, keys:Dynamic, keysLen:Int, samples:Int):Void {
 #if hl
 	flight._hl._fn.Particles.particleColorCurveFromKeyframes(out, keys, keysLen, samples);
 #elseif cpp
@@ -88,7 +88,7 @@ inline function particleColorCurveFromKeyframes(out:Dynamic, keys:Dynamic, keysL
 	#error "flight.Particles: no backend for this target."
 #end
 }
-inline function particleColorCurveToKeyframes(out:Dynamic, lut:Dynamic, lutLen:Int):Void {
+extern inline function particleColorCurveToKeyframes(out:Dynamic, lut:Dynamic, lutLen:Int):Void {
 #if hl
 	flight._hl._fn.Particles.particleColorCurveToKeyframes(out, lut, lutLen);
 #elseif cpp
@@ -99,7 +99,7 @@ inline function particleColorCurveToKeyframes(out:Dynamic, lut:Dynamic, lutLen:I
 	#error "flight.Particles: no backend for this target."
 #end
 }
-inline function particleCurveFromKeyframes(out:Dynamic, keys:Dynamic, keysLen:Int, samples:Int):Void {
+extern inline function particleCurveFromKeyframes(out:Dynamic, keys:Dynamic, keysLen:Int, samples:Int):Void {
 #if hl
 	flight._hl._fn.Particles.particleCurveFromKeyframes(out, keys, keysLen, samples);
 #elseif cpp
@@ -110,7 +110,7 @@ inline function particleCurveFromKeyframes(out:Dynamic, keys:Dynamic, keysLen:In
 	#error "flight.Particles: no backend for this target."
 #end
 }
-inline function particleCurveToKeyframes(out:Dynamic, lut:Dynamic, lutLen:Int):Void {
+extern inline function particleCurveToKeyframes(out:Dynamic, lut:Dynamic, lutLen:Int):Void {
 #if hl
 	flight._hl._fn.Particles.particleCurveToKeyframes(out, lut, lutLen);
 #elseif cpp
@@ -121,7 +121,7 @@ inline function particleCurveToKeyframes(out:Dynamic, lut:Dynamic, lutLen:Int):V
 	#error "flight.Particles: no backend for this target."
 #end
 }
-inline function sampleParticleColorCurve(out:Dynamic, outLen:Int, offset:Int, lut:Dynamic, lutLen:Int, t:Float):Void {
+extern inline function sampleParticleColorCurve(out:Dynamic, outLen:Int, offset:Int, lut:Dynamic, lutLen:Int, t:Float):Void {
 #if hl
 	flight._hl._fn.Particles.sampleParticleColorCurve(out, outLen, offset, lut, lutLen, t);
 #elseif cpp
@@ -132,7 +132,7 @@ inline function sampleParticleColorCurve(out:Dynamic, outLen:Int, offset:Int, lu
 	#error "flight.Particles: no backend for this target."
 #end
 }
-inline function sampleParticleCurve(lut:Dynamic, lutLen:Int, t:Float):Float {
+extern inline function sampleParticleCurve(lut:Dynamic, lutLen:Int, t:Float):Float {
 #if hl
 	return flight._hl._fn.Particles.sampleParticleCurve(lut, lutLen, t);
 #elseif cpp
@@ -143,7 +143,7 @@ inline function sampleParticleCurve(lut:Dynamic, lutLen:Int, t:Float):Float {
 	#error "flight.Particles: no backend for this target."
 #end
 }
-inline function createParticleEmitterConfig(config:ParticleEmitterConfigOptions):ParticleEmitterConfig {
+extern inline function createParticleEmitterConfig(config:ParticleEmitterConfigOptions):ParticleEmitterConfig {
 #if hl
 	return flight._hl._fn.Particles.createParticleEmitterConfig(config);
 #elseif cpp
@@ -154,7 +154,7 @@ inline function createParticleEmitterConfig(config:ParticleEmitterConfigOptions)
 	#error "flight.Particles: no backend for this target."
 #end
 }
-inline function createParticleEmitterConfigOptions():ParticleEmitterConfigOptions {
+extern inline function createParticleEmitterConfigOptions():ParticleEmitterConfigOptions {
 #if hl
 	return flight._hl._fn.Particles.createParticleEmitterConfigOptions();
 #elseif cpp
@@ -165,7 +165,7 @@ inline function createParticleEmitterConfigOptions():ParticleEmitterConfigOption
 	#error "flight.Particles: no backend for this target."
 #end
 }
-inline function enableParticleEmitterSignals(state:ParticleEmitterState):ParticleEmitterSignals {
+extern inline function enableParticleEmitterSignals(state:ParticleEmitterState):ParticleEmitterSignals {
 #if hl
 	return flight._hl._fn.Particles.enableParticleEmitterSignals(state);
 #elseif cpp
@@ -176,7 +176,7 @@ inline function enableParticleEmitterSignals(state:ParticleEmitterState):Particl
 	#error "flight.Particles: no backend for this target."
 #end
 }
-inline function getParticleEmitterSignals(state:ParticleEmitterState):ParticleEmitterSignals {
+extern inline function getParticleEmitterSignals(state:ParticleEmitterState):ParticleEmitterSignals {
 #if hl
 	return flight._hl._fn.Particles.getParticleEmitterSignals(state);
 #elseif cpp
@@ -187,7 +187,7 @@ inline function getParticleEmitterSignals(state:ParticleEmitterState):ParticleEm
 	#error "flight.Particles: no backend for this target."
 #end
 }
-inline function createParticleEmitterState():ParticleEmitterState {
+extern inline function createParticleEmitterState():ParticleEmitterState {
 #if hl
 	return flight._hl._fn.Particles.createParticleEmitterState();
 #elseif cpp
@@ -198,7 +198,7 @@ inline function createParticleEmitterState():ParticleEmitterState {
 	#error "flight.Particles: no backend for this target."
 #end
 }
-inline function createParticleObjectsState():ParticleObjectsState {
+extern inline function createParticleObjectsState():ParticleObjectsState {
 #if hl
 	return flight._hl._fn.Particles.createParticleObjectsState();
 #elseif cpp
@@ -209,7 +209,7 @@ inline function createParticleObjectsState():ParticleObjectsState {
 	#error "flight.Particles: no backend for this target."
 #end
 }
-inline function stepParticleObjects(objects:Dynamic, objectsLen:Int, state:ParticleObjectsState, config:ParticleEmitterConfig, deltaTime:Float, forces:Dynamic, forcesLen:Int, colliders:Dynamic, collidersLen:Int, updateOptions:ParticleObjectsUpdateOptions):Void {
+extern inline function stepParticleObjects(objects:Dynamic, objectsLen:Int, state:ParticleObjectsState, config:ParticleEmitterConfig, deltaTime:Float, forces:Dynamic, forcesLen:Int, colliders:Dynamic, collidersLen:Int, updateOptions:ParticleObjectsUpdateOptions):Void {
 #if hl
 	flight._hl._fn.Particles.stepParticleObjects(objects, objectsLen, state, config, deltaTime, forces, forcesLen, colliders, collidersLen, updateOptions);
 #elseif cpp
@@ -220,7 +220,7 @@ inline function stepParticleObjects(objects:Dynamic, objectsLen:Int, state:Parti
 	#error "flight.Particles: no backend for this target."
 #end
 }
-inline function particleBlendModeAsStr(mode:flight.ParticleBlendMode):String {
+extern inline function particleBlendModeAsStr(mode:flight.ParticleBlendMode):String {
 #if hl
 	return cast flight._hl._fn.Particles.particleBlendModeAsStr(mode);
 #elseif cpp
@@ -231,7 +231,7 @@ inline function particleBlendModeAsStr(mode:flight.ParticleBlendMode):String {
 	#error "flight.Particles: no backend for this target."
 #end
 }
-inline function isParticleObjectsComplete(objects:Dynamic, objectsLen:Int, state:ParticleObjectsState, config:ParticleEmitterConfig):Bool {
+extern inline function isParticleObjectsComplete(objects:Dynamic, objectsLen:Int, state:ParticleObjectsState, config:ParticleEmitterConfig):Bool {
 #if hl
 	return flight._hl._fn.Particles.isParticleObjectsComplete(objects, objectsLen, state, config);
 #elseif cpp
@@ -242,7 +242,7 @@ inline function isParticleObjectsComplete(objects:Dynamic, objectsLen:Int, state
 	#error "flight.Particles: no backend for this target."
 #end
 }
-inline function updateParticleObjects(objects:Dynamic, objectsLen:Int, state:ParticleObjectsState, config:ParticleEmitterConfig, deltaTime:Float, options:ParticleObjectsUpdateOptions):Void {
+extern inline function updateParticleObjects(objects:Dynamic, objectsLen:Int, state:ParticleObjectsState, config:ParticleEmitterConfig, deltaTime:Float, options:ParticleObjectsUpdateOptions):Void {
 #if hl
 	flight._hl._fn.Particles.updateParticleObjects(objects, objectsLen, state, config, deltaTime, options);
 #elseif cpp
@@ -253,7 +253,7 @@ inline function updateParticleObjects(objects:Dynamic, objectsLen:Int, state:Par
 	#error "flight.Particles: no backend for this target."
 #end
 }
-inline function normalizeParticleEmitterConfig(config:ParticleEmitterConfig):ParticleEmitterConfig {
+extern inline function normalizeParticleEmitterConfig(config:ParticleEmitterConfig):ParticleEmitterConfig {
 #if hl
 	return flight._hl._fn.Particles.normalizeParticleEmitterConfig(config);
 #elseif cpp
@@ -264,7 +264,7 @@ inline function normalizeParticleEmitterConfig(config:ParticleEmitterConfig):Par
 	#error "flight.Particles: no backend for this target."
 #end
 }
-inline function validateParticleEmitterConfig(out:Dynamic, config:ParticleEmitterConfig):Void {
+extern inline function validateParticleEmitterConfig(out:Dynamic, config:ParticleEmitterConfig):Void {
 #if hl
 	flight._hl._fn.Particles.validateParticleEmitterConfig(out, config);
 #elseif cpp
@@ -275,7 +275,7 @@ inline function validateParticleEmitterConfig(out:Dynamic, config:ParticleEmitte
 	#error "flight.Particles: no backend for this target."
 #end
 }
-inline function freeParticleEmitterConfig(ptr:ParticleEmitterConfig):Void {
+extern inline function freeParticleEmitterConfig(ptr:ParticleEmitterConfig):Void {
 #if hl
 	flight._hl._fn.Particles.freeParticleEmitterConfig(ptr);
 #elseif cpp
@@ -286,7 +286,7 @@ inline function freeParticleEmitterConfig(ptr:ParticleEmitterConfig):Void {
 	#error "flight.Particles: no backend for this target."
 #end
 }
-inline function freeParticleEmitterConfigOptions(ptr:ParticleEmitterConfigOptions):Void {
+extern inline function freeParticleEmitterConfigOptions(ptr:ParticleEmitterConfigOptions):Void {
 #if hl
 	flight._hl._fn.Particles.freeParticleEmitterConfigOptions(ptr);
 #elseif cpp
@@ -297,7 +297,7 @@ inline function freeParticleEmitterConfigOptions(ptr:ParticleEmitterConfigOption
 	#error "flight.Particles: no backend for this target."
 #end
 }
-inline function freeParticleEmitterSignals(ptr:ParticleEmitterSignals):Void {
+extern inline function freeParticleEmitterSignals(ptr:ParticleEmitterSignals):Void {
 #if hl
 	flight._hl._fn.Particles.freeParticleEmitterSignals(ptr);
 #elseif cpp
@@ -308,7 +308,7 @@ inline function freeParticleEmitterSignals(ptr:ParticleEmitterSignals):Void {
 	#error "flight.Particles: no backend for this target."
 #end
 }
-inline function freeParticleEmitterState(ptr:ParticleEmitterState):Void {
+extern inline function freeParticleEmitterState(ptr:ParticleEmitterState):Void {
 #if hl
 	flight._hl._fn.Particles.freeParticleEmitterState(ptr);
 #elseif cpp
@@ -319,7 +319,7 @@ inline function freeParticleEmitterState(ptr:ParticleEmitterState):Void {
 	#error "flight.Particles: no backend for this target."
 #end
 }
-inline function freeParticleObjectsState(ptr:ParticleObjectsState):Void {
+extern inline function freeParticleObjectsState(ptr:ParticleObjectsState):Void {
 #if hl
 	flight._hl._fn.Particles.freeParticleObjectsState(ptr);
 #elseif cpp

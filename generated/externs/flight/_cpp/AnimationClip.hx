@@ -10,5 +10,5 @@ abstract AnimationClip(cpp.Star<cpp.Void>) {
 
 	inline function get_duration():Single return AnimationClip_Ffi.get_duration(this);
 
-	inline function set_duration(value:Single):Single return AnimationClip_Ffi.set_duration(this, value);
+	inline function set_duration(value:Single):Single { AnimationClip_Ffi.set_duration(this, value); return value; }
 }

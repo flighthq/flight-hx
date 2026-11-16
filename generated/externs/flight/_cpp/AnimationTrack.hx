@@ -12,10 +12,10 @@ abstract AnimationTrack(cpp.Star<cpp.Void>) {
 
 	inline function get_components():Int return AnimationTrack_Ffi.get_components(this);
 
-	inline function set_components(value:Int):Int return AnimationTrack_Ffi.set_components(this, value);
+	inline function set_components(value:Int):Int { AnimationTrack_Ffi.set_components(this, value); return value; }
 	public var quaternion(get, set):Bool;
 
 	inline function get_quaternion():Bool return AnimationTrack_Ffi.get_quaternion(this);
 
-	inline function set_quaternion(value:Bool):Bool return AnimationTrack_Ffi.set_quaternion(this, value);
+	inline function set_quaternion(value:Bool):Bool { AnimationTrack_Ffi.set_quaternion(this, value); return value; }
 }

@@ -14,15 +14,15 @@ abstract VertexDisplaceModifier(cpp.Star<cpp.Void>) {
 
 	inline function get_amplitude():Single return VertexDisplaceModifier_Ffi.get_amplitude(this);
 
-	inline function set_amplitude(value:Single):Single return VertexDisplaceModifier_Ffi.set_amplitude(this, value);
+	inline function set_amplitude(value:Single):Single { VertexDisplaceModifier_Ffi.set_amplitude(this, value); return value; }
 	public var frequency(get, set):Single;
 
 	inline function get_frequency():Single return VertexDisplaceModifier_Ffi.get_frequency(this);
 
-	inline function set_frequency(value:Single):Single return VertexDisplaceModifier_Ffi.set_frequency(this, value);
+	inline function set_frequency(value:Single):Single { VertexDisplaceModifier_Ffi.set_frequency(this, value); return value; }
 	public var speed(get, set):Single;
 
 	inline function get_speed():Single return VertexDisplaceModifier_Ffi.get_speed(this);
 
-	inline function set_speed(value:Single):Single return VertexDisplaceModifier_Ffi.set_speed(this, value);
+	inline function set_speed(value:Single):Single { VertexDisplaceModifier_Ffi.set_speed(this, value); return value; }
 }

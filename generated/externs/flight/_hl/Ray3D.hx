@@ -34,10 +34,10 @@ abstract Ray3D(hl.Bytes) {
 	inline public function transformByMatrix4(ray:flight._hl.Ray3D, m:flight._hl.Matrix4):Void {
 		flight._hl._fn.Geometry.transformRay3dByMatrix4(cast this, ray, m);
 	}
-	inline public function pickScene3dAllWith(outArray:Dynamic, scene:Dynamic, options:flight._hl.Scene3DPickOptions):Void {
+	inline public function pickScene3dAllWith(outArray:hl.Bytes, scene:hl.Bytes, options:flight._hl.Scene3DPickOptions):Void {
 		flight._hl._fn.Picking.pickScene3dAllWithRay3d(outArray, scene, cast this, options);
 	}
-	inline public function pickScene3dWith(out:flight._hl.Scene3DHit, scene:Dynamic, options:flight._hl.Scene3DPickOptions):Bool {
+	inline public function pickScene3dWith(out:flight._hl.Scene3DHit, scene:hl.Bytes, options:flight._hl.Scene3DPickOptions):Bool {
 		return flight._hl._fn.Picking.pickScene3dWithRay3d(out, scene, cast this, options);
 	}
 }

@@ -12,32 +12,32 @@ abstract Environment(cpp.Star<cpp.Void>) {
 
 	inline function get_enabled():Bool return Environment_Ffi.get_enabled(this);
 
-	inline function set_enabled(value:Bool):Bool return Environment_Ffi.set_enabled(this, value);
+	inline function set_enabled(value:Bool):Bool { Environment_Ffi.set_enabled(this, value); return value; }
 	public var intensity(get, set):Single;
 
 	inline function get_intensity():Single return Environment_Ffi.get_intensity(this);
 
-	inline function set_intensity(value:Single):Single return Environment_Ffi.set_intensity(this, value);
+	inline function set_intensity(value:Single):Single { Environment_Ffi.set_intensity(this, value); return value; }
 
-	static inline public function create():flight._cpp.Environment {
+	static extern inline public function create():flight._cpp.Environment {
 		return flight._cpp._fn.Lighting.createEnvironment();
 	}
-	inline public function clone():flight._cpp.Environment {
+	extern inline public function clone():flight._cpp.Environment {
 		return flight._cpp._fn.Lighting.cloneEnvironment(cast this);
 	}
-	inline public function getLightInfluenceBounds(out:flight._cpp.BoundingSphere):Void {
+	extern inline public function getLightInfluenceBounds(out:flight._cpp.BoundingSphere):Void {
 		flight._cpp._fn.Lighting.getLightInfluenceBoundsEnvironment(out, cast this);
 	}
-	inline public function getLightLuminance():Single {
+	extern inline public function getLightLuminance():Single {
 		return flight._cpp._fn.Lighting.getLightLuminanceEnvironment(cast this);
 	}
-	inline public function hasLightInfluenceOnBounds(bounds:flight._cpp.BoundingSphere):Bool {
+	extern inline public function hasLightInfluenceOnBounds(bounds:flight._cpp.BoundingSphere):Bool {
 		return flight._cpp._fn.Lighting.hasLightInfluenceOnBoundsEnvironment(cast this, bounds);
 	}
-	inline public function isLightCastingShadow():Bool {
+	extern inline public function isLightCastingShadow():Bool {
 		return flight._cpp._fn.Lighting.isLightCastingShadowEnvironment(cast this);
 	}
-	inline public function free():Void {
+	extern inline public function free():Void {
 		flight._cpp._fn.Lighting.freeEnvironment(cast this);
 	}
 }

@@ -76,9 +76,9 @@ extern class Math {
 	@:native("flight_create_random_source")
 	public static function createRandomSource(seed:Int):flight._cpp.RandomSource;
 	@:native("flight_random_exponential")
-	public static function randomExponential(randomFn:cpp.Star<cpp.Void>, randomCtx:cpp.Star<cpp.Void>):Single;
+	public static function randomExponential(randomFn:cpp.Star<cpp.Void>, randomCtx:cpp.Star<cpp.Void>, rate:Single):Single;
 	@:native("flight_random_gaussian")
-	public static function randomGaussian(randomFn:cpp.Star<cpp.Void>, randomCtx:cpp.Star<cpp.Void>):Single;
+	public static function randomGaussian(randomFn:cpp.Star<cpp.Void>, randomCtx:cpp.Star<cpp.Void>, mean:Single, standardDeviation:Single):Single;
 	@:native("flight_random_inside_unit_disc")
 	public static function randomInsideUnitDisc(out:cpp.Star<cpp.Void>, randomFn:cpp.Star<cpp.Void>, randomCtx:cpp.Star<cpp.Void>):Void;
 	@:native("flight_random_inside_unit_sphere")
@@ -88,15 +88,15 @@ extern class Math {
 	@:native("flight_random_on_unit_sphere")
 	public static function randomOnUnitSphere(out:cpp.Star<cpp.Void>, randomFn:cpp.Star<cpp.Void>, randomCtx:cpp.Star<cpp.Void>):Void;
 	@:native("flight_random_poisson")
-	public static function randomPoisson(randomFn:cpp.Star<cpp.Void>, randomCtx:cpp.Star<cpp.Void>):Int;
+	public static function randomPoisson(randomFn:cpp.Star<cpp.Void>, randomCtx:cpp.Star<cpp.Void>, lambda:Single):Int;
 	@:native("flight_random_weighted")
-	public static function randomWeighted(randomFn:cpp.Star<cpp.Void>, randomCtx:cpp.Star<cpp.Void>):Int;
+	public static function randomWeighted(randomFn:cpp.Star<cpp.Void>, randomCtx:cpp.Star<cpp.Void>, weights:cpp.Star<cpp.Void>, weightsLen:Int):Int;
 	@:native("flight_random_bool")
-	public static function randomBool(randomFn:cpp.Star<cpp.Void>, randomCtx:cpp.Star<cpp.Void>):Bool;
+	public static function randomBool(randomFn:cpp.Star<cpp.Void>, randomCtx:cpp.Star<cpp.Void>, probability:Single):Bool;
 	@:native("flight_random_int")
-	public static function randomInt(randomFn:cpp.Star<cpp.Void>, randomCtx:cpp.Star<cpp.Void>):Int;
+	public static function randomInt(randomFn:cpp.Star<cpp.Void>, randomCtx:cpp.Star<cpp.Void>, min:Int, max:Int):Int;
 	@:native("flight_random_range")
-	public static function randomRange(randomFn:cpp.Star<cpp.Void>, randomCtx:cpp.Star<cpp.Void>):Single;
+	public static function randomRange(randomFn:cpp.Star<cpp.Void>, randomCtx:cpp.Star<cpp.Void>, min:Single, max:Single):Single;
 	@:native("flight_random_sign")
 	public static function randomSign(randomFn:cpp.Star<cpp.Void>, randomCtx:cpp.Star<cpp.Void>):Single;
 	@:native("flight_ceil_to")

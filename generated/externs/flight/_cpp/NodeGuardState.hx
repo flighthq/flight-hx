@@ -10,5 +10,5 @@ abstract NodeGuardState(cpp.Star<cpp.Void>) {
 
 	inline function get_enabled():Bool return NodeGuardState_Ffi.get_enabled(this);
 
-	inline function set_enabled(value:Bool):Bool return NodeGuardState_Ffi.set_enabled(this, value);
+	inline function set_enabled(value:Bool):Bool { NodeGuardState_Ffi.set_enabled(this, value); return value; }
 }
