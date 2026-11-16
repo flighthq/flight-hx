@@ -20,7 +20,7 @@ const installed = path.join(work, 'installed');
 unpack(readFileSync(archive), installed);
 const fieldsSmoke = path.join(work, 'fields.mjs');
 run(process.execPath, ['tools/haxe.mjs', '-cp', path.join(installed, 'lib'), '-cp', 'tests/esm',
-  '-main', 'FieldSmoke', '-dce', 'full', '--macro', 'flight_hx.Package.configure()', '-js', fieldsSmoke]);
+  '-main', 'FieldSmoke', '-dce', 'full', '-D', 'flight_esm', '--macro', 'flight_hx.Package.configure()', '-js', fieldsSmoke]);
 assert.match(run(process.execPath, [fieldsSmoke]), /FLIGHT_ESM_FIELDS_OK/u);
 const classpaths = [path.join(installed, 'lib'), path.join(installed, 'examples/esm-smoke')];
 const built = await buildWebBundle({ main: 'WebSmoke', classpaths, outDir: path.join(work, 'used') });
