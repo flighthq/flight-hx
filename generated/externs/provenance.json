@@ -19,6 +19,10 @@
       {
         "path": "patches/flight/0004-hl-packed-floats.patch",
         "sha256": "d419ccb56a49e8cadd8d8cde1a9e02297e1b9ad40e09667a888310903459c8d5"
+      },
+      {
+        "path": "patches/flight/0005-bitmap-ownership.patch",
+        "sha256": "39f9bfe6abb6b44ae938fdc69c8bd72b77ed9ae9ea6a60f4f99bb6c9766e694f"
       }
     ]
   },

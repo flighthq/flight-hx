@@ -1,5 +1,6 @@
 import flight.Math;
 import flight.Geometry;
+import flight.Bitmap;
 
 class Smoke {
   public static function main() {
@@ -20,6 +21,16 @@ class Smoke {
         throw 'matrix setter arguments corrupted';
     }
     freeMatrix4(m);
+    final bitmap = createBitmap(2, 2, 0x11223344);
+    final region = createBitmapRegion(bitmap, 0, 0, 2, 2);
+    setBitmapRegion(region, bitmap, 0, 0, 1, 1);
+    freeBitmapRegion(region);
+    if (getBitmapPixel(bitmap, 0, 0) != 0x11223344)
+      throw 'region consumed caller bitmap storage';
+    setBitmapPixel(bitmap, 0, 0, 0x55667711);
+    if (getBitmapPixel(bitmap, 0, 0) != 0x55667711)
+      throw 'caller bitmap is no longer writable';
+    freeBitmap(bitmap);
     trace('FLIGHT_FFI_SMOKE_OK');
   }
 }

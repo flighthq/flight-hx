@@ -49,6 +49,13 @@ in a `hl.NativeArray<Float>`. The shim unpacks them before calling the core FFI.
 Both the matrix constructor and setter are exercised by installed hxcpp, HL and
 Lime consumers; producer tests also cover the six-argument boundary.
 
+`0005-bitmap-ownership.patch` clones an owned `Bitmap` argument from its borrowed
+FFI handle before passing it into the SDK. `ptr::read` duplicated the bitmap's
+pixel-buffer owner while leaving the caller's handle live. Region construction
+and replacement now own independent storage, and releasing a region leaves the
+caller's bitmap readable, writable and independently releasable. C and Haxe
+smoke tests cover that lifetime sequence.
+
 ## Applying upstream
 
 Use Rust 1.96.0 and Haxe 4.3.7 on PATH, and a clean Flight checkout at the
@@ -61,6 +68,7 @@ git apply /path/to/flight-hx/patches/flight/0001-native-artifacts.patch
 git apply /path/to/flight-hx/patches/flight/0002-js-esm.patch
 git apply /path/to/flight-hx/patches/flight/0003-portable-module-names.patch
 git apply /path/to/flight-hx/patches/flight/0004-hl-packed-floats.patch
+git apply /path/to/flight-hx/patches/flight/0005-bitmap-ownership.patch
 cargo test -p flight-bindgen --bin flight-bindgen
 scripts/check-haxe-bindings.sh
 ```
