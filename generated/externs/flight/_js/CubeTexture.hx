@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract CubeTexture(Dynamic) {}
+abstract CubeTexture(Dynamic) {
+}

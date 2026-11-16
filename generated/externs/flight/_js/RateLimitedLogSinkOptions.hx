@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract RateLimitedLogSinkOptions(Dynamic) {}
+abstract RateLimitedLogSinkOptions(Dynamic) {
+}

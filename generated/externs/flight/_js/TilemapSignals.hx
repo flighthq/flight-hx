@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract TilemapSignals(Dynamic) {}
+abstract TilemapSignals(Dynamic) {
+}

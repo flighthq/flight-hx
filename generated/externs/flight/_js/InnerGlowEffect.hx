@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract InnerGlowEffect(Dynamic) {}
+abstract InnerGlowEffect(Dynamic) {
+}

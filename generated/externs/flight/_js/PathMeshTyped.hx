@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract PathMeshTyped(Dynamic) {}
+abstract PathMeshTyped(Dynamic) {
+}

@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract TextLabel(Dynamic) {}
+abstract TextLabel(Dynamic) {
+}

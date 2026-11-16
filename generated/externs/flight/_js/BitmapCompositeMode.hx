@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract BitmapCompositeMode(Dynamic) {}
+abstract BitmapCompositeMode(Dynamic) {
+}

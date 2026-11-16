@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract Physics2DAbiContactHooks(Dynamic) {}
+abstract Physics2DAbiContactHooks(Dynamic) {
+}

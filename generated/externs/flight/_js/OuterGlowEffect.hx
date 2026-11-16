@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract OuterGlowEffect(Dynamic) {}
+abstract OuterGlowEffect(Dynamic) {
+}

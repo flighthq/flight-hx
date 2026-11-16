@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract BitmapBevelOptions(Dynamic) {}
+abstract BitmapBevelOptions(Dynamic) {
+}

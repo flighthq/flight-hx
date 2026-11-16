@@ -1,13 +1,13 @@
 package flight._js._fn;
 
-@:jsRequire("flight")
+@:jsRequire("@flighthq/xml")
 extern class Xml {
-	@:native("flight_parse_xml_document")
-	public static function parseXmlDocument(xml:String):Dynamic;
-	@:native("flight_get_xml_element_attribute_number")
-	public static function getXmlElementAttributeNumber(element:flight._js.XmlElement, name:String):Float;
-	@:native("flight_get_xml_element_child_by_name")
-	public static function getXmlElementChildByName(element:flight._js.XmlElement, name:String):Dynamic;
-	@:native("flight_free_xml_element")
-	public static function freeXmlElement(ptr:flight._js.XmlElement):Void;
+	@:native("parseXmlDocument")
+	public static function parseXmlDocument(xml:String):Null<flight._js.XmlElement>;
+	@:native("getXmlElementAttributeNumber")
+	public static function getXmlElementAttributeNumber(element:flight._js.XmlElement, name:String):Null<Float>;
+	@:native("getXmlElementChildByName")
+	public static function getXmlElementChildByName(element:flight._js.XmlElement, name:String):Null<Dynamic>;
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeXmlElement(ptr:flight._js.XmlElement):Void {}
 }

@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract StatechartRaw(Dynamic) {}
+abstract StatechartRaw(Dynamic) {
+}

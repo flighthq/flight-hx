@@ -1,5 +1,10 @@
 package flight;
 
+#if (js && flight_esm)
+extern inline function serializeAsepriteSpritesheet(data:SpritesheetData, existing:Null<AsepriteDocument>, options:Null<AsepriteSerializeOptions>):String {
+	return flight._js._fn.SpritesheetFormats.serializeAsepriteSpritesheet(data, existing, options);
+}
+#else
 extern inline function serializeAsepriteSpritesheet(data:SpritesheetData, existing:AsepriteDocument, options:AsepriteSerializeOptions):String {
 #if hl
 	return cast flight._hl._fn.SpritesheetFormats.serializeAsepriteSpritesheet(data, existing, options);
@@ -11,6 +16,12 @@ extern inline function serializeAsepriteSpritesheet(data:SpritesheetData, existi
 	#error "flight.SpritesheetFormats: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function serializeCocosPlistSpritesheet(data:SpritesheetData, existing:Null<CocosPlistDocument>):String {
+	return flight._js._fn.SpritesheetFormats.serializeCocosPlistSpritesheet(data, existing);
+}
+#else
 extern inline function serializeCocosPlistSpritesheet(data:SpritesheetData, existing:CocosPlistDocument):String {
 #if hl
 	return cast flight._hl._fn.SpritesheetFormats.serializeCocosPlistSpritesheet(data, existing);
@@ -22,6 +33,12 @@ extern inline function serializeCocosPlistSpritesheet(data:SpritesheetData, exis
 	#error "flight.SpritesheetFormats: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function formatLibgdxAtlas(data:SpritesheetData):String {
+	return flight._js._fn.SpritesheetFormats.formatLibgdxAtlas(data);
+}
+#else
 extern inline function formatLibgdxAtlas(data:SpritesheetData):String {
 #if hl
 	return cast flight._hl._fn.SpritesheetFormats.formatLibgdxAtlas(data);
@@ -33,6 +50,12 @@ extern inline function formatLibgdxAtlas(data:SpritesheetData):String {
 	#error "flight.SpritesheetFormats: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function createSpritesheetFormatRegistry():SpritesheetFormatRegistry {
+	return flight._js._fn.SpritesheetFormats.createSpritesheetFormatRegistry();
+}
+#else
 extern inline function createSpritesheetFormatRegistry():SpritesheetFormatRegistry {
 #if hl
 	return flight._hl._fn.SpritesheetFormats.createSpritesheetFormatRegistry();
@@ -44,6 +67,12 @@ extern inline function createSpritesheetFormatRegistry():SpritesheetFormatRegist
 	#error "flight.SpritesheetFormats: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function applySpritesheetImportOptions(registry:SpritesheetFormatRegistry, options:SpritesheetImportOptions):Void {
+	flight._js._fn.SpritesheetFormats.applySpritesheetImportOptions(registry, options);
+}
+#else
 extern inline function applySpritesheetImportOptions(registry:SpritesheetFormatRegistry, options:SpritesheetImportOptions):Void {
 #if hl
 	flight._hl._fn.SpritesheetFormats.applySpritesheetImportOptions(registry, options);
@@ -55,6 +84,12 @@ extern inline function applySpritesheetImportOptions(registry:SpritesheetFormatR
 	#error "flight.SpritesheetFormats: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function asepriteSpritesheetFormat(registry:SpritesheetFormatRegistry):SpritesheetFormatDescriptor {
+	return flight._js._fn.SpritesheetFormats.asepriteSpritesheetFormat(registry);
+}
+#else
 extern inline function asepriteSpritesheetFormat(registry:SpritesheetFormatRegistry):SpritesheetFormatDescriptor {
 #if hl
 	return flight._hl._fn.SpritesheetFormats.asepriteSpritesheetFormat(registry);
@@ -66,6 +101,12 @@ extern inline function asepriteSpritesheetFormat(registry:SpritesheetFormatRegis
 	#error "flight.SpritesheetFormats: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function cocosPlistSpritesheetFormat(registry:SpritesheetFormatRegistry):SpritesheetFormatDescriptor {
+	return flight._js._fn.SpritesheetFormats.cocosPlistSpritesheetFormat(registry);
+}
+#else
 extern inline function cocosPlistSpritesheetFormat(registry:SpritesheetFormatRegistry):SpritesheetFormatDescriptor {
 #if hl
 	return flight._hl._fn.SpritesheetFormats.cocosPlistSpritesheetFormat(registry);
@@ -77,6 +118,12 @@ extern inline function cocosPlistSpritesheetFormat(registry:SpritesheetFormatReg
 	#error "flight.SpritesheetFormats: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function detectSpritesheetFormat(registry:SpritesheetFormatRegistry, text:String):Null<SpritesheetFormatKind> {
+	return flight._js._fn.SpritesheetFormats.detectSpritesheetFormat(registry, text);
+}
+#else
 extern inline function detectSpritesheetFormat(registry:SpritesheetFormatRegistry, text:String):SpritesheetFormatKind {
 #if hl
 	return flight._hl._fn.SpritesheetFormats.detectSpritesheetFormat(registry, cast text);
@@ -88,6 +135,12 @@ extern inline function detectSpritesheetFormat(registry:SpritesheetFormatRegistr
 	#error "flight.SpritesheetFormats: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getSpritesheetFormatKinds(out:Dynamic, registry:SpritesheetFormatRegistry):Void {
+	flight._js._fn.SpritesheetFormats.getSpritesheetFormatKinds(out, registry);
+}
+#else
 extern inline function getSpritesheetFormatKinds(out:Dynamic, registry:SpritesheetFormatRegistry):Void {
 #if hl
 	flight._hl._fn.SpritesheetFormats.getSpritesheetFormatKinds(out, registry);
@@ -99,6 +152,12 @@ extern inline function getSpritesheetFormatKinds(out:Dynamic, registry:Spriteshe
 	#error "flight.SpritesheetFormats: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function libgdxAtlasSpritesheetFormat(registry:SpritesheetFormatRegistry):SpritesheetFormatDescriptor {
+	return flight._js._fn.SpritesheetFormats.libgdxAtlasSpritesheetFormat(registry);
+}
+#else
 extern inline function libgdxAtlasSpritesheetFormat(registry:SpritesheetFormatRegistry):SpritesheetFormatDescriptor {
 #if hl
 	return flight._hl._fn.SpritesheetFormats.libgdxAtlasSpritesheetFormat(registry);
@@ -110,6 +169,12 @@ extern inline function libgdxAtlasSpritesheetFormat(registry:SpritesheetFormatRe
 	#error "flight.SpritesheetFormats: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function parseSpritesheet(registry:SpritesheetFormatRegistry, text:String, formatKind:Null<SpritesheetFormatKind>, options:Null<SpritesheetParseOptions>):Null<SpritesheetData> {
+	return flight._js._fn.SpritesheetFormats.parseSpritesheet(registry, text, formatKind, options);
+}
+#else
 extern inline function parseSpritesheet(registry:SpritesheetFormatRegistry, text:String, formatKind:SpritesheetFormatKind, options:SpritesheetParseOptions):SpritesheetData {
 #if hl
 	return flight._hl._fn.SpritesheetFormats.parseSpritesheet(registry, cast text, formatKind, options);
@@ -121,6 +186,12 @@ extern inline function parseSpritesheet(registry:SpritesheetFormatRegistry, text
 	#error "flight.SpritesheetFormats: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function starlingSpritesheetFormat(registry:SpritesheetFormatRegistry):SpritesheetFormatDescriptor {
+	return flight._js._fn.SpritesheetFormats.starlingSpritesheetFormat(registry);
+}
+#else
 extern inline function starlingSpritesheetFormat(registry:SpritesheetFormatRegistry):SpritesheetFormatDescriptor {
 #if hl
 	return flight._hl._fn.SpritesheetFormats.starlingSpritesheetFormat(registry);
@@ -132,6 +203,12 @@ extern inline function starlingSpritesheetFormat(registry:SpritesheetFormatRegis
 	#error "flight.SpritesheetFormats: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function texturePackerSpritesheetFormat(registry:SpritesheetFormatRegistry):SpritesheetFormatDescriptor {
+	return flight._js._fn.SpritesheetFormats.texturePackerSpritesheetFormat(registry);
+}
+#else
 extern inline function texturePackerSpritesheetFormat(registry:SpritesheetFormatRegistry):SpritesheetFormatDescriptor {
 #if hl
 	return flight._hl._fn.SpritesheetFormats.texturePackerSpritesheetFormat(registry);
@@ -143,6 +220,12 @@ extern inline function texturePackerSpritesheetFormat(registry:SpritesheetFormat
 	#error "flight.SpritesheetFormats: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function unregisterSpritesheetFormat(registry:SpritesheetFormatRegistry, kind:SpritesheetFormatKind):Void {
+	flight._js._fn.SpritesheetFormats.unregisterSpritesheetFormat(registry, kind);
+}
+#else
 extern inline function unregisterSpritesheetFormat(registry:SpritesheetFormatRegistry, kind:SpritesheetFormatKind):Void {
 #if hl
 	flight._hl._fn.SpritesheetFormats.unregisterSpritesheetFormat(registry, kind);
@@ -154,6 +237,12 @@ extern inline function unregisterSpritesheetFormat(registry:SpritesheetFormatReg
 	#error "flight.SpritesheetFormats: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function serializeStarlingSpritesheet(data:SpritesheetData, existing:Null<StarlingDocument>):String {
+	return flight._js._fn.SpritesheetFormats.serializeStarlingSpritesheet(data, existing);
+}
+#else
 extern inline function serializeStarlingSpritesheet(data:SpritesheetData, existing:StarlingDocument):String {
 #if hl
 	return cast flight._hl._fn.SpritesheetFormats.serializeStarlingSpritesheet(data, existing);
@@ -165,6 +254,12 @@ extern inline function serializeStarlingSpritesheet(data:SpritesheetData, existi
 	#error "flight.SpritesheetFormats: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function serializeTexturePackerSpritesheet(data:SpritesheetData, existing:Null<TexturePackerDocument>, options:Null<TexturePackerSerializeOptions>):String {
+	return flight._js._fn.SpritesheetFormats.serializeTexturePackerSpritesheet(data, existing, options);
+}
+#else
 extern inline function serializeTexturePackerSpritesheet(data:SpritesheetData, existing:TexturePackerDocument, options:TexturePackerSerializeOptions):String {
 #if hl
 	return cast flight._hl._fn.SpritesheetFormats.serializeTexturePackerSpritesheet(data, existing, options);
@@ -176,6 +271,12 @@ extern inline function serializeTexturePackerSpritesheet(data:SpritesheetData, e
 	#error "flight.SpritesheetFormats: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freeSpritesheetFormatRegistry(ptr:SpritesheetFormatRegistry):Void {
+	flight._js._fn.SpritesheetFormats.freeSpritesheetFormatRegistry(ptr);
+}
+#else
 extern inline function freeSpritesheetFormatRegistry(ptr:SpritesheetFormatRegistry):Void {
 #if hl
 	flight._hl._fn.SpritesheetFormats.freeSpritesheetFormatRegistry(ptr);
@@ -187,6 +288,12 @@ extern inline function freeSpritesheetFormatRegistry(ptr:SpritesheetFormatRegist
 	#error "flight.SpritesheetFormats: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freeSpritesheetFormatKind(ptr:SpritesheetFormatKind):Void {
+	flight._js._fn.SpritesheetFormats.freeSpritesheetFormatKind(ptr);
+}
+#else
 extern inline function freeSpritesheetFormatKind(ptr:SpritesheetFormatKind):Void {
 #if hl
 	flight._hl._fn.SpritesheetFormats.freeSpritesheetFormatKind(ptr);
@@ -198,3 +305,4 @@ extern inline function freeSpritesheetFormatKind(ptr:SpritesheetFormatKind):Void
 	#error "flight.SpritesheetFormats: no backend for this target."
 #end
 }
+#end

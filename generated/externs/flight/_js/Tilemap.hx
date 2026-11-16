@@ -46,7 +46,7 @@ abstract Tilemap(Dynamic) {
 	inline public function setTileTint(column:Int, row:Int, rgba:Int):Void {
 		flight._js._fn.Tilemap.setTilemapTileTint(cast this, column, row, rgba);
 	}
-	inline public function setTiles(ids:Dynamic, idsLen:Int, offsetColumn:Int, offsetRow:Int, width:Int, height:Int):Void {
-		flight._js._fn.Tilemap.setTilemapTiles(cast this, ids, idsLen, offsetColumn, offsetRow, width, height);
+	inline public function setTiles(ids:Dynamic, offsetColumn:Int, offsetRow:Int, width:Int, height:Int):Void {
+		flight._js._fn.Tilemap.setTilemapTiles(cast this, ids, offsetColumn, offsetRow, width, height);
 	}
 }

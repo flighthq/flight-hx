@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract Physics3DBallAndSocketJoint(Dynamic) {}
+abstract Physics3DBallAndSocketJoint(Dynamic) {
+}

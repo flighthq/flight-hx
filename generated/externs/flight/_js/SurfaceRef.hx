@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract SurfaceRef(Dynamic) {}
+abstract SurfaceRef(Dynamic) {
+}

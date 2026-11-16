@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract StrokeStyle(Dynamic) {}
+abstract StrokeStyle(Dynamic) {
+}

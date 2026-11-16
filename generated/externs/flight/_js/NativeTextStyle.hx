@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract NativeTextStyle(Dynamic) {}
+abstract NativeTextStyle(Dynamic) {
+}

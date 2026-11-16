@@ -1,5 +1,10 @@
 package flight;
 
+#if (js && flight_esm)
+extern inline function createMotionPath(path:Dynamic, speed:Null<Float>, loopMode:Null<Dynamic>, tolerance:Null<Float>):MotionPath {
+	return flight._js._fn.Motionpath.createMotionPath(path, speed, loopMode, tolerance);
+}
+#else
 extern inline function createMotionPath(path:Dynamic, speed:Float, loopMode:Int, tolerance:Float):MotionPath {
 #if hl
 	return flight._hl._fn.Motionpath.createMotionPath(path, speed, loopMode, tolerance);
@@ -11,6 +16,12 @@ extern inline function createMotionPath(path:Dynamic, speed:Float, loopMode:Int,
 	#error "flight.Motionpath: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getMotionPathHeading(mp:MotionPath):Float {
+	return flight._js._fn.Motionpath.getMotionPathHeading(mp);
+}
+#else
 extern inline function getMotionPathHeading(mp:MotionPath):Float {
 #if hl
 	return flight._hl._fn.Motionpath.getMotionPathHeading(mp);
@@ -22,6 +33,12 @@ extern inline function getMotionPathHeading(mp:MotionPath):Float {
 	#error "flight.Motionpath: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getMotionPathPosition(mp:MotionPath, pointOut:Vector2, tangentOut:Vector2):Bool {
+	return flight._js._fn.Motionpath.getMotionPathPosition(mp, pointOut, tangentOut);
+}
+#else
 extern inline function getMotionPathPosition(mp:MotionPath, pointOut:Vector2, tangentOut:Vector2):Bool {
 #if hl
 	return flight._hl._fn.Motionpath.getMotionPathPosition(mp, pointOut, tangentOut);
@@ -33,6 +50,12 @@ extern inline function getMotionPathPosition(mp:MotionPath, pointOut:Vector2, ta
 	#error "flight.Motionpath: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getMotionPathProgress(mp:MotionPath):Float {
+	return flight._js._fn.Motionpath.getMotionPathProgress(mp);
+}
+#else
 extern inline function getMotionPathProgress(mp:MotionPath):Float {
 #if hl
 	return flight._hl._fn.Motionpath.getMotionPathProgress(mp);
@@ -44,6 +67,12 @@ extern inline function getMotionPathProgress(mp:MotionPath):Float {
 	#error "flight.Motionpath: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function isMotionPathAtEnd(mp:MotionPath):Bool {
+	return flight._js._fn.Motionpath.isMotionPathAtEnd(mp);
+}
+#else
 extern inline function isMotionPathAtEnd(mp:MotionPath):Bool {
 #if hl
 	return flight._hl._fn.Motionpath.isMotionPathAtEnd(mp);
@@ -55,6 +84,12 @@ extern inline function isMotionPathAtEnd(mp:MotionPath):Bool {
 	#error "flight.Motionpath: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setMotionPathDirection(mp:MotionPath, direction:MotionPathDirection):Void {
+	flight._js._fn.Motionpath.setMotionPathDirection(mp, direction);
+}
+#else
 extern inline function setMotionPathDirection(mp:MotionPath, direction:MotionPathDirection):Void {
 #if hl
 	flight._hl._fn.Motionpath.setMotionPathDirection(mp, direction);
@@ -66,6 +101,12 @@ extern inline function setMotionPathDirection(mp:MotionPath, direction:MotionPat
 	#error "flight.Motionpath: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setMotionPathDistance(mp:MotionPath, distance:Float):Void {
+	flight._js._fn.Motionpath.setMotionPathDistance(mp, distance);
+}
+#else
 extern inline function setMotionPathDistance(mp:MotionPath, distance:Float):Void {
 #if hl
 	flight._hl._fn.Motionpath.setMotionPathDistance(mp, distance);
@@ -77,6 +118,12 @@ extern inline function setMotionPathDistance(mp:MotionPath, distance:Float):Void
 	#error "flight.Motionpath: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setMotionPathProgress(mp:MotionPath, t:Float):Void {
+	flight._js._fn.Motionpath.setMotionPathProgress(mp, t);
+}
+#else
 extern inline function setMotionPathProgress(mp:MotionPath, t:Float):Void {
 #if hl
 	flight._hl._fn.Motionpath.setMotionPathProgress(mp, t);
@@ -88,6 +135,12 @@ extern inline function setMotionPathProgress(mp:MotionPath, t:Float):Void {
 	#error "flight.Motionpath: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function updateMotionPath(mp:MotionPath, deltaTime:Float):Void {
+	flight._js._fn.Motionpath.updateMotionPath(mp, deltaTime);
+}
+#else
 extern inline function updateMotionPath(mp:MotionPath, deltaTime:Float):Void {
 #if hl
 	flight._hl._fn.Motionpath.updateMotionPath(mp, deltaTime);
@@ -99,6 +152,12 @@ extern inline function updateMotionPath(mp:MotionPath, deltaTime:Float):Void {
 	#error "flight.Motionpath: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freeMotionPath(ptr:MotionPath):Void {
+	flight._js._fn.Motionpath.freeMotionPath(ptr);
+}
+#else
 extern inline function freeMotionPath(ptr:MotionPath):Void {
 #if hl
 	flight._hl._fn.Motionpath.freeMotionPath(ptr);
@@ -110,3 +169,4 @@ extern inline function freeMotionPath(ptr:MotionPath):Void {
 	#error "flight.Motionpath: no backend for this target."
 #end
 }
+#end

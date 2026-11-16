@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract BitmapFontFormatKind(Dynamic) {}
+abstract BitmapFontFormatKind(Dynamic) {
+}

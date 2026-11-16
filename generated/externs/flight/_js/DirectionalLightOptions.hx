@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract DirectionalLightOptions(Dynamic) {}
+abstract DirectionalLightOptions(Dynamic) {
+}

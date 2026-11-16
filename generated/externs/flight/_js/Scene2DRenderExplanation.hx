@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract Scene2DRenderExplanation(Dynamic) {}
+abstract Scene2DRenderExplanation(Dynamic) {
+}

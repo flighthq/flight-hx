@@ -1,5 +1,10 @@
 package flight;
 
+#if (js && flight_esm)
+extern inline function createQuadBatch():Dynamic {
+	return flight._js._fn.Quadbatch.createQuadBatch();
+}
+#else
 extern inline function createQuadBatch():Dynamic {
 #if hl
 	return flight._hl._fn.Quadbatch.createQuadBatch();
@@ -11,6 +16,12 @@ extern inline function createQuadBatch():Dynamic {
 	#error "flight.Quadbatch: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function createQuadBatchData():QuadBatchData {
+	return flight._js._fn.Quadbatch.createQuadBatchData();
+}
+#else
 extern inline function createQuadBatchData():QuadBatchData {
 #if hl
 	return flight._hl._fn.Quadbatch.createQuadBatchData();
@@ -22,6 +33,12 @@ extern inline function createQuadBatchData():QuadBatchData {
 	#error "flight.Quadbatch: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function createQuadBatchRuntime():Node2DRuntime {
+	return flight._js._fn.Quadbatch.createQuadBatchRuntime();
+}
+#else
 extern inline function createQuadBatchRuntime():Node2DRuntime {
 #if hl
 	return flight._hl._fn.Quadbatch.createQuadBatchRuntime();
@@ -33,6 +50,12 @@ extern inline function createQuadBatchRuntime():Node2DRuntime {
 	#error "flight.Quadbatch: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function createQuadBatchSignals():Dynamic {
+	return flight._js._fn.Quadbatch.createQuadBatchSignals();
+}
+#else
 extern inline function createQuadBatchSignals():Dynamic {
 #if hl
 	return flight._hl._fn.Quadbatch.createQuadBatchSignals();
@@ -44,6 +67,12 @@ extern inline function createQuadBatchSignals():Dynamic {
 	#error "flight.Quadbatch: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function appendQuadBatchInstance(target:QuadBatch, id:Int, x:Float, y:Float):Int {
+	return flight._js._fn.Quadbatch.appendQuadBatchInstance(target, id, x, y);
+}
+#else
 extern inline function appendQuadBatchInstance(target:QuadBatch, id:Int, x:Float, y:Float):Int {
 #if hl
 	return flight._hl._fn.Quadbatch.appendQuadBatchInstance(target, id, x, y);
@@ -55,6 +84,12 @@ extern inline function appendQuadBatchInstance(target:QuadBatch, id:Int, x:Float
 	#error "flight.Quadbatch: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function clearQuadBatch(target:QuadBatch):Void {
+	flight._js._fn.Quadbatch.clearQuadBatch(target);
+}
+#else
 extern inline function clearQuadBatch(target:QuadBatch):Void {
 #if hl
 	flight._hl._fn.Quadbatch.clearQuadBatch(target);
@@ -66,6 +101,12 @@ extern inline function clearQuadBatch(target:QuadBatch):Void {
 	#error "flight.Quadbatch: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function cloneQuadBatch(source:QuadBatch):Dynamic {
+	return flight._js._fn.Quadbatch.cloneQuadBatch(source);
+}
+#else
 extern inline function cloneQuadBatch(source:QuadBatch):Dynamic {
 #if hl
 	return flight._hl._fn.Quadbatch.cloneQuadBatch(source);
@@ -77,6 +118,12 @@ extern inline function cloneQuadBatch(source:QuadBatch):Dynamic {
 	#error "flight.Quadbatch: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function compactQuadBatch(target:QuadBatch):Void {
+	flight._js._fn.Quadbatch.compactQuadBatch(target);
+}
+#else
 extern inline function compactQuadBatch(target:QuadBatch):Void {
 #if hl
 	flight._hl._fn.Quadbatch.compactQuadBatch(target);
@@ -88,6 +135,12 @@ extern inline function compactQuadBatch(target:QuadBatch):Void {
 	#error "flight.Quadbatch: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function computeQuadBatchLocalBoundsRectangle(out:Rectangle, source:QuadBatch):Void {
+	flight._js._fn.Quadbatch.computeQuadBatchLocalBoundsRectangle(out, source);
+}
+#else
 extern inline function computeQuadBatchLocalBoundsRectangle(out:Rectangle, source:QuadBatch):Void {
 #if hl
 	flight._hl._fn.Quadbatch.computeQuadBatchLocalBoundsRectangle(out, source);
@@ -99,6 +152,12 @@ extern inline function computeQuadBatchLocalBoundsRectangle(out:Rectangle, sourc
 	#error "flight.Quadbatch: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function enableQuadBatchSignals(target:QuadBatch):Dynamic {
+	return flight._js._fn.Quadbatch.enableQuadBatchSignals(target);
+}
+#else
 extern inline function enableQuadBatchSignals(target:QuadBatch):Dynamic {
 #if hl
 	return flight._hl._fn.Quadbatch.enableQuadBatchSignals(target);
@@ -110,6 +169,12 @@ extern inline function enableQuadBatchSignals(target:QuadBatch):Dynamic {
 	#error "flight.Quadbatch: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getQuadBatchCapacity(source:QuadBatch):Int {
+	return flight._js._fn.Quadbatch.getQuadBatchCapacity(source);
+}
+#else
 extern inline function getQuadBatchCapacity(source:QuadBatch):Int {
 #if hl
 	return flight._hl._fn.Quadbatch.getQuadBatchCapacity(source);
@@ -121,6 +186,12 @@ extern inline function getQuadBatchCapacity(source:QuadBatch):Int {
 	#error "flight.Quadbatch: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getQuadBatchInstanceId(source:QuadBatch, index:Int):Int {
+	return flight._js._fn.Quadbatch.getQuadBatchInstanceId(source, index);
+}
+#else
 extern inline function getQuadBatchInstanceId(source:QuadBatch, index:Int):Int {
 #if hl
 	return flight._hl._fn.Quadbatch.getQuadBatchInstanceId(source, index);
@@ -132,6 +203,12 @@ extern inline function getQuadBatchInstanceId(source:QuadBatch, index:Int):Int {
 	#error "flight.Quadbatch: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getQuadBatchInstanceTransform(out:Vector2, source:QuadBatch, index:Int):Bool {
+	return flight._js._fn.Quadbatch.getQuadBatchInstanceTransform(out, source, index);
+}
+#else
 extern inline function getQuadBatchInstanceTransform(out:Vector2, source:QuadBatch, index:Int):Bool {
 #if hl
 	return flight._hl._fn.Quadbatch.getQuadBatchInstanceTransform(out, source, index);
@@ -143,6 +220,12 @@ extern inline function getQuadBatchInstanceTransform(out:Vector2, source:QuadBat
 	#error "flight.Quadbatch: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getQuadBatchRuntime(source:QuadBatch):Dynamic {
+	return flight._js._fn.Quadbatch.getQuadBatchRuntime(source);
+}
+#else
 extern inline function getQuadBatchRuntime(source:QuadBatch):Dynamic {
 #if hl
 	return flight._hl._fn.Quadbatch.getQuadBatchRuntime(source);
@@ -154,6 +237,12 @@ extern inline function getQuadBatchRuntime(source:QuadBatch):Dynamic {
 	#error "flight.Quadbatch: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getQuadBatchSignals(source:QuadBatch):Null<Dynamic> {
+	return flight._js._fn.Quadbatch.getQuadBatchSignals(source);
+}
+#else
 extern inline function getQuadBatchSignals(source:QuadBatch):Dynamic {
 #if hl
 	return flight._hl._fn.Quadbatch.getQuadBatchSignals(source);
@@ -165,6 +254,12 @@ extern inline function getQuadBatchSignals(source:QuadBatch):Dynamic {
 	#error "flight.Quadbatch: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getQuadBatchTransformStride(transformType:Dynamic):Int {
+	return flight._js._fn.Quadbatch.getQuadBatchTransformStride(transformType);
+}
+#else
 extern inline function getQuadBatchTransformStride(transformType:flight.QuadTransformType):Int {
 #if hl
 	return flight._hl._fn.Quadbatch.getQuadBatchTransformStride(transformType);
@@ -176,6 +271,12 @@ extern inline function getQuadBatchTransformStride(transformType:flight.QuadTran
 	#error "flight.Quadbatch: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function hitTestQuadBatchPoint(source:QuadBatch, point:Vector2):Int {
+	return flight._js._fn.Quadbatch.hitTestQuadBatchPoint(source, point);
+}
+#else
 extern inline function hitTestQuadBatchPoint(source:QuadBatch, point:Vector2):Int {
 #if hl
 	return flight._hl._fn.Quadbatch.hitTestQuadBatchPoint(source, point);
@@ -187,6 +288,12 @@ extern inline function hitTestQuadBatchPoint(source:QuadBatch, point:Vector2):In
 	#error "flight.Quadbatch: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function hitTestQuadBatchPointExact(source:QuadBatch, point:Vector2):Int {
+	return flight._js._fn.Quadbatch.hitTestQuadBatchPointExact(source, point);
+}
+#else
 extern inline function hitTestQuadBatchPointExact(source:QuadBatch, point:Vector2):Int {
 #if hl
 	return flight._hl._fn.Quadbatch.hitTestQuadBatchPointExact(source, point);
@@ -198,6 +305,12 @@ extern inline function hitTestQuadBatchPointExact(source:QuadBatch, point:Vector
 	#error "flight.Quadbatch: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function hitTestQuadBatchPointExactXy(source:QuadBatch, x:Float, y:Float):Int {
+	return flight._js._fn.Quadbatch.hitTestQuadBatchPointExactXy(source, x, y);
+}
+#else
 extern inline function hitTestQuadBatchPointExactXy(source:QuadBatch, x:Float, y:Float):Int {
 #if hl
 	return flight._hl._fn.Quadbatch.hitTestQuadBatchPointExactXy(source, x, y);
@@ -209,6 +322,12 @@ extern inline function hitTestQuadBatchPointExactXy(source:QuadBatch, x:Float, y
 	#error "flight.Quadbatch: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function hitTestQuadBatchPointXy(source:QuadBatch, x:Float, y:Float):Int {
+	return flight._js._fn.Quadbatch.hitTestQuadBatchPointXy(source, x, y);
+}
+#else
 extern inline function hitTestQuadBatchPointXy(source:QuadBatch, x:Float, y:Float):Int {
 #if hl
 	return flight._hl._fn.Quadbatch.hitTestQuadBatchPointXy(source, x, y);
@@ -220,6 +339,12 @@ extern inline function hitTestQuadBatchPointXy(source:QuadBatch, x:Float, y:Floa
 	#error "flight.Quadbatch: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function iterateQuadBatchInstances(source:QuadBatch, visitor:Dynamic):Void {
+	flight._js._fn.Quadbatch.iterateQuadBatchInstances(source, visitor);
+}
+#else
 extern inline function iterateQuadBatchInstances(source:QuadBatch, visitorFn:Dynamic, visitorCtx:Dynamic):Void {
 #if hl
 	flight._hl._fn.Quadbatch.iterateQuadBatchInstances(source, visitorFn, visitorCtx);
@@ -231,6 +356,12 @@ extern inline function iterateQuadBatchInstances(source:QuadBatch, visitorFn:Dyn
 	#error "flight.Quadbatch: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function removeQuadBatchInstance(target:QuadBatch, index:Int):Void {
+	flight._js._fn.Quadbatch.removeQuadBatchInstance(target, index);
+}
+#else
 extern inline function removeQuadBatchInstance(target:QuadBatch, index:Int):Void {
 #if hl
 	flight._hl._fn.Quadbatch.removeQuadBatchInstance(target, index);
@@ -242,6 +373,12 @@ extern inline function removeQuadBatchInstance(target:QuadBatch, index:Int):Void
 	#error "flight.Quadbatch: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function reserveQuadBatch(target:QuadBatch, capacity:Int):Void {
+	flight._js._fn.Quadbatch.reserveQuadBatch(target, capacity);
+}
+#else
 extern inline function reserveQuadBatch(target:QuadBatch, capacity:Int):Void {
 #if hl
 	flight._hl._fn.Quadbatch.reserveQuadBatch(target, capacity);
@@ -253,6 +390,12 @@ extern inline function reserveQuadBatch(target:QuadBatch, capacity:Int):Void {
 	#error "flight.Quadbatch: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function resizeQuadBatch(target:QuadBatch, instanceCount:Int):Void {
+	flight._js._fn.Quadbatch.resizeQuadBatch(target, instanceCount);
+}
+#else
 extern inline function resizeQuadBatch(target:QuadBatch, instanceCount:Int):Void {
 #if hl
 	flight._hl._fn.Quadbatch.resizeQuadBatch(target, instanceCount);
@@ -264,6 +407,12 @@ extern inline function resizeQuadBatch(target:QuadBatch, instanceCount:Int):Void
 	#error "flight.Quadbatch: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setQuadBatchInstance(target:QuadBatch, index:Int, id:Int, x:Float, y:Float):Void {
+	flight._js._fn.Quadbatch.setQuadBatchInstance(target, index, id, x, y);
+}
+#else
 extern inline function setQuadBatchInstance(target:QuadBatch, index:Int, id:Int, x:Float, y:Float):Void {
 #if hl
 	flight._hl._fn.Quadbatch.setQuadBatchInstance(target, index, id, x, y);
@@ -275,6 +424,12 @@ extern inline function setQuadBatchInstance(target:QuadBatch, index:Int, id:Int,
 	#error "flight.Quadbatch: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setQuadBatchInstanceMatrix(target:QuadBatch, index:Int, id:Int, a:Float, b:Float, c:Float, d:Float, tx:Float, ty:Float):Void {
+	flight._js._fn.Quadbatch.setQuadBatchInstanceMatrix(target, index, id, a, b, c, d, tx, ty);
+}
+#else
 extern inline function setQuadBatchInstanceMatrix(target:QuadBatch, index:Int, id:Int, a:Float, b:Float, c:Float, d:Float, tx:Float, ty:Float):Void {
 #if hl
 	flight._hl._fn.Quadbatch.setQuadBatchInstanceMatrix(target, index, id, a, b, c, d, tx, ty);
@@ -286,6 +441,12 @@ extern inline function setQuadBatchInstanceMatrix(target:QuadBatch, index:Int, i
 	#error "flight.Quadbatch: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setQuadBatchInstanceRange(target:QuadBatch, startIndex:Int, count:Int, source:Dynamic):Void {
+	flight._js._fn.Quadbatch.setQuadBatchInstanceRange(target, startIndex, count, source);
+}
+#else
 extern inline function setQuadBatchInstanceRange(target:QuadBatch, startIndex:Int, count:Int, source:Dynamic, sourceLen:Int):Void {
 #if hl
 	flight._hl._fn.Quadbatch.setQuadBatchInstanceRange(target, startIndex, count, source, sourceLen);
@@ -297,6 +458,12 @@ extern inline function setQuadBatchInstanceRange(target:QuadBatch, startIndex:In
 	#error "flight.Quadbatch: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setQuadBatchInstanceTint(target:QuadBatch, index:Int, rgba:Int):Void {
+	flight._js._fn.Quadbatch.setQuadBatchInstanceTint(target, index, rgba);
+}
+#else
 extern inline function setQuadBatchInstanceTint(target:QuadBatch, index:Int, rgba:Int):Void {
 #if hl
 	flight._hl._fn.Quadbatch.setQuadBatchInstanceTint(target, index, rgba);
@@ -308,6 +475,12 @@ extern inline function setQuadBatchInstanceTint(target:QuadBatch, index:Int, rgb
 	#error "flight.Quadbatch: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setQuadBatchLocalBoundsRectangle(target:Dynamic, rect:Rectangle):Void {
+	flight._js._fn.Quadbatch.setQuadBatchLocalBoundsRectangle(target, rect);
+}
+#else
 extern inline function setQuadBatchLocalBoundsRectangle(target:Dynamic, rect:Rectangle):Void {
 #if hl
 	flight._hl._fn.Quadbatch.setQuadBatchLocalBoundsRectangle(target, rect);
@@ -319,6 +492,12 @@ extern inline function setQuadBatchLocalBoundsRectangle(target:Dynamic, rect:Rec
 	#error "flight.Quadbatch: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setQuadBatchTransformType(target:QuadBatch, newType:Dynamic):Void {
+	flight._js._fn.Quadbatch.setQuadBatchTransformType(target, newType);
+}
+#else
 extern inline function setQuadBatchTransformType(target:QuadBatch, newType:flight.QuadTransformType):Void {
 #if hl
 	flight._hl._fn.Quadbatch.setQuadBatchTransformType(target, newType);
@@ -330,6 +509,12 @@ extern inline function setQuadBatchTransformType(target:QuadBatch, newType:fligh
 	#error "flight.Quadbatch: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freeQuadBatchData(ptr:QuadBatchData):Void {
+	flight._js._fn.Quadbatch.freeQuadBatchData(ptr);
+}
+#else
 extern inline function freeQuadBatchData(ptr:QuadBatchData):Void {
 #if hl
 	flight._hl._fn.Quadbatch.freeQuadBatchData(ptr);
@@ -341,3 +526,4 @@ extern inline function freeQuadBatchData(ptr:QuadBatchData):Void {
 	#error "flight.Quadbatch: no backend for this target."
 #end
 }
+#end

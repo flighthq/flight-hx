@@ -1,9 +1,9 @@
 package flight._js._fn;
 
-@:jsRequire("flight")
+@:jsRequire("@flighthq/text-markup")
 extern class TextMarkup {
-	@:native("flight_resolve_markup_hex_color")
-	public static function resolveMarkupHexColor(value:String):haxe.Int64;
-	@:native("flight_format_text_markup")
+	@:native("resolveMarkupHexColor")
+	public static function resolveMarkupHexColor(value:String):Null<Int>;
+	@:native("formatTextMarkup")
 	public static function formatTextMarkup(content:flight._js.RichTextContent):String;
 }

@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract SpotLightOptions(Dynamic) {}
+abstract SpotLightOptions(Dynamic) {
+}

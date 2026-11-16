@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract ColorBlindSimulationAdjustment(Dynamic) {}
+abstract ColorBlindSimulationAdjustment(Dynamic) {
+}

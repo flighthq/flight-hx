@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract BitmapBoxBlurOptions(Dynamic) {}
+abstract BitmapBoxBlurOptions(Dynamic) {
+}

@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract KuwaharaEffect(Dynamic) {}
+abstract KuwaharaEffect(Dynamic) {
+}

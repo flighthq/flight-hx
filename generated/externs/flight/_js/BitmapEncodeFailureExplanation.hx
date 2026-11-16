@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract BitmapEncodeFailureExplanation(Dynamic) {}
+abstract BitmapEncodeFailureExplanation(Dynamic) {
+}

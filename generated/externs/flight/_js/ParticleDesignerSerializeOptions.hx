@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract ParticleDesignerSerializeOptions(Dynamic) {}
+abstract ParticleDesignerSerializeOptions(Dynamic) {
+}

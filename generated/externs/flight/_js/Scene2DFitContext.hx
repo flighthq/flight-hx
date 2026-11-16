@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract Scene2DFitContext(Dynamic) {}
+abstract Scene2DFitContext(Dynamic) {
+}

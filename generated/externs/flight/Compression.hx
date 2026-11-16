@@ -1,5 +1,10 @@
 package flight;
 
+#if (js && flight_esm)
+extern inline function compressDeflate(bytes:Dynamic):Dynamic {
+	return flight._js._fn.Compression.compressDeflate(bytes);
+}
+#else
 extern inline function compressDeflate(bytes:Dynamic, bytesLen:Int):Dynamic {
 #if hl
 	return flight._hl._fn.Compression.compressDeflate(bytes, bytesLen);
@@ -11,6 +16,12 @@ extern inline function compressDeflate(bytes:Dynamic, bytesLen:Int):Dynamic {
 	#error "flight.Compression: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function compressDeflateZlib(bytes:Dynamic):Dynamic {
+	return flight._js._fn.Compression.compressDeflateZlib(bytes);
+}
+#else
 extern inline function compressDeflateZlib(bytes:Dynamic, bytesLen:Int):Dynamic {
 #if hl
 	return flight._hl._fn.Compression.compressDeflateZlib(bytes, bytesLen);
@@ -22,6 +33,12 @@ extern inline function compressDeflateZlib(bytes:Dynamic, bytesLen:Int):Dynamic 
 	#error "flight.Compression: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function decompressDeflate(compressed:Dynamic, uncompressedLength:Int, framing:Dynamic):Null<Dynamic> {
+	return flight._js._fn.Compression.decompressDeflate(compressed, uncompressedLength, framing);
+}
+#else
 extern inline function decompressDeflate(compressed:Dynamic, compressedLen:Int, uncompressedLength:Int, framing:flight.CompressionFraming):Dynamic {
 #if hl
 	return flight._hl._fn.Compression.decompressDeflate(compressed, compressedLen, uncompressedLength, framing);
@@ -33,6 +50,12 @@ extern inline function decompressDeflate(compressed:Dynamic, compressedLen:Int, 
 	#error "flight.Compression: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function decompressLzma(compressed:Dynamic, uncompressedLength:Int, framing:Dynamic):Null<Dynamic> {
+	return flight._js._fn.Compression.decompressLzma(compressed, uncompressedLength, framing);
+}
+#else
 extern inline function decompressLzma(compressed:Dynamic, compressedLen:Int, uncompressedLength:Int, framing:flight.CompressionFraming):Dynamic {
 #if hl
 	return flight._hl._fn.Compression.decompressLzma(compressed, compressedLen, uncompressedLength, framing);
@@ -44,6 +67,12 @@ extern inline function decompressLzma(compressed:Dynamic, compressedLen:Int, unc
 	#error "flight.Compression: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function compressLzma(bytes:Dynamic):Dynamic {
+	return flight._js._fn.Compression.compressLzma(bytes);
+}
+#else
 extern inline function compressLzma(bytes:Dynamic, bytesLen:Int):Dynamic {
 #if hl
 	return flight._hl._fn.Compression.compressLzma(bytes, bytesLen);
@@ -55,6 +84,12 @@ extern inline function compressLzma(bytes:Dynamic, bytesLen:Int):Dynamic {
 	#error "flight.Compression: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getCompressionString(value:Dynamic):String {
+	return flight._js._fn.Compression.getCompressionString(value);
+}
+#else
 extern inline function getCompressionString(value:Int):String {
 #if hl
 	return cast flight._hl._fn.Compression.getCompressionString(value);
@@ -66,6 +101,12 @@ extern inline function getCompressionString(value:Int):String {
 	#error "flight.Compression: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function parseCompression(value:String):Null<Dynamic> {
+	return flight._js._fn.Compression.parseCompression(value);
+}
+#else
 extern inline function parseCompression(value:String):Int {
 #if hl
 	return flight._hl._fn.Compression.parseCompression(cast value);
@@ -77,3 +118,4 @@ extern inline function parseCompression(value:String):Int {
 	#error "flight.Compression: no backend for this target."
 #end
 }
+#end

@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract ListFormatOptions(Dynamic) {}
+abstract ListFormatOptions(Dynamic) {
+}

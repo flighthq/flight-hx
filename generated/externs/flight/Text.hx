@@ -1,5 +1,10 @@
 package flight;
 
+#if (js && flight_esm)
+extern inline function explainTextLabelContent(source:Dynamic):TextLabelContentExplanation {
+	return flight._js._fn.Text.explainTextLabelContent(source);
+}
+#else
 extern inline function explainTextLabelContent(source:Dynamic):TextLabelContentExplanation {
 #if hl
 	return flight._hl._fn.Text.explainTextLabelContent(source);
@@ -11,6 +16,12 @@ extern inline function explainTextLabelContent(source:Dynamic):TextLabelContentE
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function createNativeText():Dynamic {
+	return flight._js._fn.Text.createNativeText();
+}
+#else
 extern inline function createNativeText():Dynamic {
 #if hl
 	return flight._hl._fn.Text.createNativeText();
@@ -22,6 +33,12 @@ extern inline function createNativeText():Dynamic {
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function computeNativeTextLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
+	flight._js._fn.Text.computeNativeTextLocalBoundsRectangle(out, source);
+}
+#else
 extern inline function computeNativeTextLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
 #if hl
 	flight._hl._fn.Text.computeNativeTextLocalBoundsRectangle(out, source);
@@ -33,6 +50,12 @@ extern inline function computeNativeTextLocalBoundsRectangle(out:Rectangle, sour
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getNativeTextMeasuredHeight(source:NativeText):Float {
+	return flight._js._fn.Text.getNativeTextMeasuredHeight(source);
+}
+#else
 extern inline function getNativeTextMeasuredHeight(source:NativeText):Float {
 #if hl
 	return flight._hl._fn.Text.getNativeTextMeasuredHeight(source);
@@ -44,6 +67,12 @@ extern inline function getNativeTextMeasuredHeight(source:NativeText):Float {
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getNativeTextMeasuredWidth(source:NativeText):Float {
+	return flight._js._fn.Text.getNativeTextMeasuredWidth(source);
+}
+#else
 extern inline function getNativeTextMeasuredWidth(source:NativeText):Float {
 #if hl
 	return flight._hl._fn.Text.getNativeTextMeasuredWidth(source);
@@ -55,6 +84,12 @@ extern inline function getNativeTextMeasuredWidth(source:NativeText):Float {
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getNativeTextString(source:NativeText):String {
+	return flight._js._fn.Text.getNativeTextString(source);
+}
+#else
 extern inline function getNativeTextString(source:NativeText):String {
 #if hl
 	return cast flight._hl._fn.Text.getNativeTextString(source);
@@ -66,6 +101,12 @@ extern inline function getNativeTextString(source:NativeText):String {
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getNativeTextStyle(source:NativeText):Dynamic {
+	return flight._js._fn.Text.getNativeTextStyle(source);
+}
+#else
 extern inline function getNativeTextStyle(source:NativeText):Dynamic {
 #if hl
 	return flight._hl._fn.Text.getNativeTextStyle(source);
@@ -77,6 +118,12 @@ extern inline function getNativeTextStyle(source:NativeText):Dynamic {
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function patchNativeTextStyle(source:Dynamic, patch:NativeTextStyle):Void {
+	flight._js._fn.Text.patchNativeTextStyle(source, patch);
+}
+#else
 extern inline function patchNativeTextStyle(source:Dynamic, patch:NativeTextStyle):Void {
 #if hl
 	flight._hl._fn.Text.patchNativeTextStyle(source, patch);
@@ -88,6 +135,12 @@ extern inline function patchNativeTextStyle(source:Dynamic, patch:NativeTextStyl
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setNativeTextAutoSize(source:Dynamic, value:TextAutoSize):Void {
+	flight._js._fn.Text.setNativeTextAutoSize(source, value);
+}
+#else
 extern inline function setNativeTextAutoSize(source:Dynamic, value:TextAutoSize):Void {
 #if hl
 	flight._hl._fn.Text.setNativeTextAutoSize(source, value);
@@ -99,6 +152,12 @@ extern inline function setNativeTextAutoSize(source:Dynamic, value:TextAutoSize)
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setNativeTextHeight(source:Dynamic, value:Float):Void {
+	flight._js._fn.Text.setNativeTextHeight(source, value);
+}
+#else
 extern inline function setNativeTextHeight(source:Dynamic, value:Float):Void {
 #if hl
 	flight._hl._fn.Text.setNativeTextHeight(source, value);
@@ -110,6 +169,12 @@ extern inline function setNativeTextHeight(source:Dynamic, value:Float):Void {
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setNativeTextString(source:Dynamic, value:String):Void {
+	flight._js._fn.Text.setNativeTextString(source, value);
+}
+#else
 extern inline function setNativeTextString(source:Dynamic, value:String):Void {
 #if hl
 	flight._hl._fn.Text.setNativeTextString(source, cast value);
@@ -121,6 +186,12 @@ extern inline function setNativeTextString(source:Dynamic, value:String):Void {
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setNativeTextStyle(source:Dynamic, value:Dynamic):Void {
+	flight._js._fn.Text.setNativeTextStyle(source, value);
+}
+#else
 extern inline function setNativeTextStyle(source:Dynamic, value:Dynamic):Void {
 #if hl
 	flight._hl._fn.Text.setNativeTextStyle(source, value);
@@ -132,6 +203,12 @@ extern inline function setNativeTextStyle(source:Dynamic, value:Dynamic):Void {
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setNativeTextVerticalAlign(source:Dynamic, value:TextVerticalAlign):Void {
+	flight._js._fn.Text.setNativeTextVerticalAlign(source, value);
+}
+#else
 extern inline function setNativeTextVerticalAlign(source:Dynamic, value:TextVerticalAlign):Void {
 #if hl
 	flight._hl._fn.Text.setNativeTextVerticalAlign(source, value);
@@ -143,6 +220,12 @@ extern inline function setNativeTextVerticalAlign(source:Dynamic, value:TextVert
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setNativeTextWidth(source:Dynamic, value:Float):Void {
+	flight._js._fn.Text.setNativeTextWidth(source, value);
+}
+#else
 extern inline function setNativeTextWidth(source:Dynamic, value:Float):Void {
 #if hl
 	flight._hl._fn.Text.setNativeTextWidth(source, value);
@@ -154,6 +237,12 @@ extern inline function setNativeTextWidth(source:Dynamic, value:Float):Void {
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function appendRichTextString(source:Dynamic, value:String):Void {
+	flight._js._fn.Text.appendRichTextString(source, value);
+}
+#else
 extern inline function appendRichTextString(source:Dynamic, value:String):Void {
 #if hl
 	flight._hl._fn.Text.appendRichTextString(source, cast value);
@@ -165,6 +254,12 @@ extern inline function appendRichTextString(source:Dynamic, value:String):Void {
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function buildRichTextLayoutParams(source:RichText, measure:TextMeasureFunction):TextLayoutParams {
+	return flight._js._fn.Text.buildRichTextLayoutParams(source, measure);
+}
+#else
 extern inline function buildRichTextLayoutParams(source:RichText, measure:TextMeasureFunction):TextLayoutParams {
 #if hl
 	return flight._hl._fn.Text.buildRichTextLayoutParams(source, measure);
@@ -176,6 +271,12 @@ extern inline function buildRichTextLayoutParams(source:RichText, measure:TextMe
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function clearRichTextFormatRanges(source:Dynamic):Void {
+	flight._js._fn.Text.clearRichTextFormatRanges(source);
+}
+#else
 extern inline function clearRichTextFormatRanges(source:Dynamic):Void {
 #if hl
 	flight._hl._fn.Text.clearRichTextFormatRanges(source);
@@ -187,6 +288,12 @@ extern inline function clearRichTextFormatRanges(source:Dynamic):Void {
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function computeRichTextLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
+	flight._js._fn.Text.computeRichTextLocalBoundsRectangle(out, source);
+}
+#else
 extern inline function computeRichTextLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
 #if hl
 	flight._hl._fn.Text.computeRichTextLocalBoundsRectangle(out, source);
@@ -198,6 +305,12 @@ extern inline function computeRichTextLocalBoundsRectangle(out:Rectangle, source
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function dispatchRichTextLinkAtPoint(source:Dynamic, x:Float, y:Float):Null<String> {
+	return flight._js._fn.Text.dispatchRichTextLinkAtPoint(source, x, y);
+}
+#else
 extern inline function dispatchRichTextLinkAtPoint(source:Dynamic, x:Float, y:Float):String {
 #if hl
 	return cast flight._hl._fn.Text.dispatchRichTextLinkAtPoint(source, x, y);
@@ -209,6 +322,12 @@ extern inline function dispatchRichTextLinkAtPoint(source:Dynamic, x:Float, y:Fl
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function dispatchRichTextWheel(source:Dynamic, deltaLines:Float, layout:Null<TextLayoutResult>):Void {
+	flight._js._fn.Text.dispatchRichTextWheel(source, deltaLines, layout);
+}
+#else
 extern inline function dispatchRichTextWheel(source:Dynamic, deltaLines:Float, layout:TextLayoutResult):Void {
 #if hl
 	flight._hl._fn.Text.dispatchRichTextWheel(source, deltaLines, layout);
@@ -220,6 +339,12 @@ extern inline function dispatchRichTextWheel(source:Dynamic, deltaLines:Float, l
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function enableTextFieldSignals(source:Dynamic):Dynamic {
+	return flight._js._fn.Text.enableTextFieldSignals(source);
+}
+#else
 extern inline function enableTextFieldSignals(source:Dynamic):Dynamic {
 #if hl
 	return flight._hl._fn.Text.enableTextFieldSignals(source);
@@ -231,6 +356,12 @@ extern inline function enableTextFieldSignals(source:Dynamic):Dynamic {
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getRichTextBottomScrollV(source:Dynamic):Float {
+	return flight._js._fn.Text.getRichTextBottomScrollV(source);
+}
+#else
 extern inline function getRichTextBottomScrollV(source:Dynamic):Float {
 #if hl
 	return flight._hl._fn.Text.getRichTextBottomScrollV(source);
@@ -242,6 +373,12 @@ extern inline function getRichTextBottomScrollV(source:Dynamic):Float {
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getRichTextCharIndexAtPoint(source:Dynamic, x:Float, y:Float):Int {
+	return flight._js._fn.Text.getRichTextCharIndexAtPoint(source, x, y);
+}
+#else
 extern inline function getRichTextCharIndexAtPoint(source:Dynamic, x:Float, y:Float):Int {
 #if hl
 	return flight._hl._fn.Text.getRichTextCharIndexAtPoint(source, x, y);
@@ -253,6 +390,12 @@ extern inline function getRichTextCharIndexAtPoint(source:Dynamic, x:Float, y:Fl
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getRichTextDefaultTextFormat(source:RichText):Dynamic {
+	return flight._js._fn.Text.getRichTextDefaultTextFormat(source);
+}
+#else
 extern inline function getRichTextDefaultTextFormat(source:RichText):Dynamic {
 #if hl
 	return flight._hl._fn.Text.getRichTextDefaultTextFormat(source);
@@ -264,6 +407,12 @@ extern inline function getRichTextDefaultTextFormat(source:RichText):Dynamic {
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getRichTextFormatRangeAt(out:TextFormat, source:RichText, index:Int):Void {
+	flight._js._fn.Text.getRichTextFormatRangeAt(out, source, index);
+}
+#else
 extern inline function getRichTextFormatRangeAt(out:TextFormat, source:RichText, index:Int):Void {
 #if hl
 	flight._hl._fn.Text.getRichTextFormatRangeAt(out, source, index);
@@ -275,6 +424,12 @@ extern inline function getRichTextFormatRangeAt(out:TextFormat, source:RichText,
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getRichTextFormatRangeByIndex(out:TextFormatRange, source:RichText, i:Int):Bool {
+	return flight._js._fn.Text.getRichTextFormatRangeByIndex(out, source, i);
+}
+#else
 extern inline function getRichTextFormatRangeByIndex(out:TextFormatRange, source:RichText, i:Int):Bool {
 #if hl
 	return flight._hl._fn.Text.getRichTextFormatRangeByIndex(out, source, i);
@@ -286,6 +441,12 @@ extern inline function getRichTextFormatRangeByIndex(out:TextFormatRange, source
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getRichTextFormatRangeCount(source:RichText):Int {
+	return flight._js._fn.Text.getRichTextFormatRangeCount(source);
+}
+#else
 extern inline function getRichTextFormatRangeCount(source:RichText):Int {
 #if hl
 	return flight._hl._fn.Text.getRichTextFormatRangeCount(source);
@@ -297,6 +458,12 @@ extern inline function getRichTextFormatRangeCount(source:RichText):Int {
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getRichTextFormatRangesIn(out:Dynamic, source:RichText, beginIndex:Int, endIndex:Int):Void {
+	flight._js._fn.Text.getRichTextFormatRangesIn(out, source, beginIndex, endIndex);
+}
+#else
 extern inline function getRichTextFormatRangesIn(out:Dynamic, source:RichText, beginIndex:Int, endIndex:Int):Void {
 #if hl
 	flight._hl._fn.Text.getRichTextFormatRangesIn(out, source, beginIndex, endIndex);
@@ -308,6 +475,12 @@ extern inline function getRichTextFormatRangesIn(out:Dynamic, source:RichText, b
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getRichTextLength(source:RichText):Int {
+	return flight._js._fn.Text.getRichTextLength(source);
+}
+#else
 extern inline function getRichTextLength(source:RichText):Int {
 #if hl
 	return flight._hl._fn.Text.getRichTextLength(source);
@@ -319,6 +492,12 @@ extern inline function getRichTextLength(source:RichText):Int {
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getRichTextLineCount(source:Dynamic):Int {
+	return flight._js._fn.Text.getRichTextLineCount(source);
+}
+#else
 extern inline function getRichTextLineCount(source:Dynamic):Int {
 #if hl
 	return flight._hl._fn.Text.getRichTextLineCount(source);
@@ -330,6 +509,12 @@ extern inline function getRichTextLineCount(source:Dynamic):Int {
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getRichTextLineMetrics(source:Dynamic, lineIndex:Int):Null<TextLineMetrics> {
+	return flight._js._fn.Text.getRichTextLineMetrics(source, lineIndex);
+}
+#else
 extern inline function getRichTextLineMetrics(source:Dynamic, lineIndex:Int):TextLineMetrics {
 #if hl
 	return flight._hl._fn.Text.getRichTextLineMetrics(source, lineIndex);
@@ -341,6 +526,12 @@ extern inline function getRichTextLineMetrics(source:Dynamic, lineIndex:Int):Tex
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getRichTextMaxScrollH(source:Dynamic):Float {
+	return flight._js._fn.Text.getRichTextMaxScrollH(source);
+}
+#else
 extern inline function getRichTextMaxScrollH(source:Dynamic):Float {
 #if hl
 	return flight._hl._fn.Text.getRichTextMaxScrollH(source);
@@ -352,6 +543,12 @@ extern inline function getRichTextMaxScrollH(source:Dynamic):Float {
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getRichTextMaxScrollV(source:Dynamic):Float {
+	return flight._js._fn.Text.getRichTextMaxScrollV(source);
+}
+#else
 extern inline function getRichTextMaxScrollV(source:Dynamic):Float {
 #if hl
 	return flight._hl._fn.Text.getRichTextMaxScrollV(source);
@@ -363,6 +560,12 @@ extern inline function getRichTextMaxScrollV(source:Dynamic):Float {
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getRichTextPasswordCharacter(source:RichText):Null<String> {
+	return flight._js._fn.Text.getRichTextPasswordCharacter(source);
+}
+#else
 extern inline function getRichTextPasswordCharacter(source:RichText):String {
 #if hl
 	return cast flight._hl._fn.Text.getRichTextPasswordCharacter(source);
@@ -374,6 +577,12 @@ extern inline function getRichTextPasswordCharacter(source:RichText):String {
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getRichTextString(source:RichText):String {
+	return flight._js._fn.Text.getRichTextString(source);
+}
+#else
 extern inline function getRichTextString(source:RichText):String {
 #if hl
 	return cast flight._hl._fn.Text.getRichTextString(source);
@@ -385,6 +594,12 @@ extern inline function getRichTextString(source:RichText):String {
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getRichTextTextHeight(source:Dynamic):Float {
+	return flight._js._fn.Text.getRichTextTextHeight(source);
+}
+#else
 extern inline function getRichTextTextHeight(source:Dynamic):Float {
 #if hl
 	return flight._hl._fn.Text.getRichTextTextHeight(source);
@@ -396,6 +611,12 @@ extern inline function getRichTextTextHeight(source:Dynamic):Float {
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getRichTextTextWidth(source:Dynamic):Float {
+	return flight._js._fn.Text.getRichTextTextWidth(source);
+}
+#else
 extern inline function getRichTextTextWidth(source:Dynamic):Float {
 #if hl
 	return flight._hl._fn.Text.getRichTextTextWidth(source);
@@ -407,6 +628,12 @@ extern inline function getRichTextTextWidth(source:Dynamic):Float {
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getTextFieldSignals(source:Dynamic):Null<Dynamic> {
+	return flight._js._fn.Text.getTextFieldSignals(source);
+}
+#else
 extern inline function getTextFieldSignals(source:Dynamic):Dynamic {
 #if hl
 	return flight._hl._fn.Text.getTextFieldSignals(source);
@@ -418,6 +645,12 @@ extern inline function getTextFieldSignals(source:Dynamic):Dynamic {
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function insertRichTextString(source:Dynamic, index:Int, value:String):Void {
+	flight._js._fn.Text.insertRichTextString(source, index, value);
+}
+#else
 extern inline function insertRichTextString(source:Dynamic, index:Int, value:String):Void {
 #if hl
 	flight._hl._fn.Text.insertRichTextString(source, index, cast value);
@@ -429,6 +662,12 @@ extern inline function insertRichTextString(source:Dynamic, index:Int, value:Str
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function removeRichTextFormatRangesIn(source:Dynamic, begin:Int, end:Int):Void {
+	flight._js._fn.Text.removeRichTextFormatRangesIn(source, begin, end);
+}
+#else
 extern inline function removeRichTextFormatRangesIn(source:Dynamic, begin:Int, end:Int):Void {
 #if hl
 	flight._hl._fn.Text.removeRichTextFormatRangesIn(source, begin, end);
@@ -440,6 +679,12 @@ extern inline function removeRichTextFormatRangesIn(source:Dynamic, begin:Int, e
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function replaceRichTextString(source:Dynamic, beginIndex:Int, endIndex:Int, value:String):Void {
+	flight._js._fn.Text.replaceRichTextString(source, beginIndex, endIndex, value);
+}
+#else
 extern inline function replaceRichTextString(source:Dynamic, beginIndex:Int, endIndex:Int, value:String):Void {
 #if hl
 	flight._hl._fn.Text.replaceRichTextString(source, beginIndex, endIndex, cast value);
@@ -451,6 +696,12 @@ extern inline function replaceRichTextString(source:Dynamic, beginIndex:Int, end
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setRichTextBackground(source:Dynamic, value:Bool):Void {
+	flight._js._fn.Text.setRichTextBackground(source, value);
+}
+#else
 extern inline function setRichTextBackground(source:Dynamic, value:Bool):Void {
 #if hl
 	flight._hl._fn.Text.setRichTextBackground(source, value);
@@ -462,6 +713,12 @@ extern inline function setRichTextBackground(source:Dynamic, value:Bool):Void {
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setRichTextBackgroundColor(source:Dynamic, value:Int):Void {
+	flight._js._fn.Text.setRichTextBackgroundColor(source, value);
+}
+#else
 extern inline function setRichTextBackgroundColor(source:Dynamic, value:Int):Void {
 #if hl
 	flight._hl._fn.Text.setRichTextBackgroundColor(source, value);
@@ -473,6 +730,12 @@ extern inline function setRichTextBackgroundColor(source:Dynamic, value:Int):Voi
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setRichTextBorder(source:Dynamic, value:Bool):Void {
+	flight._js._fn.Text.setRichTextBorder(source, value);
+}
+#else
 extern inline function setRichTextBorder(source:Dynamic, value:Bool):Void {
 #if hl
 	flight._hl._fn.Text.setRichTextBorder(source, value);
@@ -484,6 +747,12 @@ extern inline function setRichTextBorder(source:Dynamic, value:Bool):Void {
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setRichTextBorderColor(source:Dynamic, value:Int):Void {
+	flight._js._fn.Text.setRichTextBorderColor(source, value);
+}
+#else
 extern inline function setRichTextBorderColor(source:Dynamic, value:Int):Void {
 #if hl
 	flight._hl._fn.Text.setRichTextBorderColor(source, value);
@@ -495,6 +764,12 @@ extern inline function setRichTextBorderColor(source:Dynamic, value:Int):Void {
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setRichTextCondenseWhite(source:Dynamic, value:Bool):Void {
+	flight._js._fn.Text.setRichTextCondenseWhite(source, value);
+}
+#else
 extern inline function setRichTextCondenseWhite(source:Dynamic, value:Bool):Void {
 #if hl
 	flight._hl._fn.Text.setRichTextCondenseWhite(source, value);
@@ -506,6 +781,12 @@ extern inline function setRichTextCondenseWhite(source:Dynamic, value:Bool):Void
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setRichTextContent(source:Dynamic, content:RichTextContent):Void {
+	flight._js._fn.Text.setRichTextContent(source, content);
+}
+#else
 extern inline function setRichTextContent(source:Dynamic, content:RichTextContent):Void {
 #if hl
 	flight._hl._fn.Text.setRichTextContent(source, content);
@@ -517,6 +798,12 @@ extern inline function setRichTextContent(source:Dynamic, content:RichTextConten
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setRichTextDefaultTextFormat(source:Dynamic, value:Dynamic):Void {
+	flight._js._fn.Text.setRichTextDefaultTextFormat(source, value);
+}
+#else
 extern inline function setRichTextDefaultTextFormat(source:Dynamic, value:Dynamic):Void {
 #if hl
 	flight._hl._fn.Text.setRichTextDefaultTextFormat(source, value);
@@ -528,6 +815,12 @@ extern inline function setRichTextDefaultTextFormat(source:Dynamic, value:Dynami
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setRichTextFormatRange(source:Dynamic, format:Dynamic, start:Null<Int>, end:Null<Int>):Void {
+	flight._js._fn.Text.setRichTextFormatRange(source, format, start, end);
+}
+#else
 extern inline function setRichTextFormatRange(source:Dynamic, format:Dynamic, start:haxe.Int64, end:haxe.Int64):Void {
 #if hl
 	flight._hl._fn.Text.setRichTextFormatRange(source, format, start, end);
@@ -539,6 +832,12 @@ extern inline function setRichTextFormatRange(source:Dynamic, format:Dynamic, st
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setRichTextHeight(source:Dynamic, value:Float):Void {
+	flight._js._fn.Text.setRichTextHeight(source, value);
+}
+#else
 extern inline function setRichTextHeight(source:Dynamic, value:Float):Void {
 #if hl
 	flight._hl._fn.Text.setRichTextHeight(source, value);
@@ -550,6 +849,12 @@ extern inline function setRichTextHeight(source:Dynamic, value:Float):Void {
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setRichTextMaxChars(source:Dynamic, value:Int):Void {
+	flight._js._fn.Text.setRichTextMaxChars(source, value);
+}
+#else
 extern inline function setRichTextMaxChars(source:Dynamic, value:Int):Void {
 #if hl
 	flight._hl._fn.Text.setRichTextMaxChars(source, value);
@@ -561,6 +866,12 @@ extern inline function setRichTextMaxChars(source:Dynamic, value:Int):Void {
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setRichTextMouseWheelEnabled(source:Dynamic, value:Bool):Void {
+	flight._js._fn.Text.setRichTextMouseWheelEnabled(source, value);
+}
+#else
 extern inline function setRichTextMouseWheelEnabled(source:Dynamic, value:Bool):Void {
 #if hl
 	flight._hl._fn.Text.setRichTextMouseWheelEnabled(source, value);
@@ -572,6 +883,12 @@ extern inline function setRichTextMouseWheelEnabled(source:Dynamic, value:Bool):
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setRichTextMultiline(source:Dynamic, value:Bool):Void {
+	flight._js._fn.Text.setRichTextMultiline(source, value);
+}
+#else
 extern inline function setRichTextMultiline(source:Dynamic, value:Bool):Void {
 #if hl
 	flight._hl._fn.Text.setRichTextMultiline(source, value);
@@ -583,6 +900,12 @@ extern inline function setRichTextMultiline(source:Dynamic, value:Bool):Void {
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setRichTextScrollH(source:Dynamic, value:Float, layout:Null<TextLayoutResult>):Void {
+	flight._js._fn.Text.setRichTextScrollH(source, value, layout);
+}
+#else
 extern inline function setRichTextScrollH(source:Dynamic, value:Float, layout:TextLayoutResult):Void {
 #if hl
 	flight._hl._fn.Text.setRichTextScrollH(source, value, layout);
@@ -594,6 +917,12 @@ extern inline function setRichTextScrollH(source:Dynamic, value:Float, layout:Te
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setRichTextScrollV(source:Dynamic, value:Float, layout:Null<TextLayoutResult>):Void {
+	flight._js._fn.Text.setRichTextScrollV(source, value, layout);
+}
+#else
 extern inline function setRichTextScrollV(source:Dynamic, value:Float, layout:TextLayoutResult):Void {
 #if hl
 	flight._hl._fn.Text.setRichTextScrollV(source, value, layout);
@@ -605,6 +934,12 @@ extern inline function setRichTextScrollV(source:Dynamic, value:Float, layout:Te
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setRichTextSelectable(source:Dynamic, value:Bool):Void {
+	flight._js._fn.Text.setRichTextSelectable(source, value);
+}
+#else
 extern inline function setRichTextSelectable(source:Dynamic, value:Bool):Void {
 #if hl
 	flight._hl._fn.Text.setRichTextSelectable(source, value);
@@ -616,6 +951,12 @@ extern inline function setRichTextSelectable(source:Dynamic, value:Bool):Void {
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setRichTextString(source:Dynamic, value:String):Void {
+	flight._js._fn.Text.setRichTextString(source, value);
+}
+#else
 extern inline function setRichTextString(source:Dynamic, value:String):Void {
 #if hl
 	flight._hl._fn.Text.setRichTextString(source, cast value);
@@ -627,6 +968,12 @@ extern inline function setRichTextString(source:Dynamic, value:String):Void {
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setRichTextTextColor(source:Dynamic, value:Int):Void {
+	flight._js._fn.Text.setRichTextTextColor(source, value);
+}
+#else
 extern inline function setRichTextTextColor(source:Dynamic, value:Int):Void {
 #if hl
 	flight._hl._fn.Text.setRichTextTextColor(source, value);
@@ -638,6 +985,12 @@ extern inline function setRichTextTextColor(source:Dynamic, value:Int):Void {
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setRichTextVerticalAlign(source:Dynamic, value:TextVerticalAlign):Void {
+	flight._js._fn.Text.setRichTextVerticalAlign(source, value);
+}
+#else
 extern inline function setRichTextVerticalAlign(source:Dynamic, value:TextVerticalAlign):Void {
 #if hl
 	flight._hl._fn.Text.setRichTextVerticalAlign(source, value);
@@ -649,6 +1002,12 @@ extern inline function setRichTextVerticalAlign(source:Dynamic, value:TextVertic
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setRichTextWidth(source:Dynamic, value:Float):Void {
+	flight._js._fn.Text.setRichTextWidth(source, value);
+}
+#else
 extern inline function setRichTextWidth(source:Dynamic, value:Float):Void {
 #if hl
 	flight._hl._fn.Text.setRichTextWidth(source, value);
@@ -660,6 +1019,12 @@ extern inline function setRichTextWidth(source:Dynamic, value:Float):Void {
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setRichTextWordWrap(source:Dynamic, value:Bool):Void {
+	flight._js._fn.Text.setRichTextWordWrap(source, value);
+}
+#else
 extern inline function setRichTextWordWrap(source:Dynamic, value:Bool):Void {
 #if hl
 	flight._hl._fn.Text.setRichTextWordWrap(source, value);
@@ -671,6 +1036,12 @@ extern inline function setRichTextWordWrap(source:Dynamic, value:Bool):Void {
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function computeTextFormatFontString(format:TextFormat):String {
+	return flight._js._fn.Text.computeTextFormatFontString(format);
+}
+#else
 extern inline function computeTextFormatFontString(format:TextFormat):String {
 #if hl
 	return cast flight._hl._fn.Text.computeTextFormatFontString(format);
@@ -682,6 +1053,12 @@ extern inline function computeTextFormatFontString(format:TextFormat):String {
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function appendTextLabelString(source:Dynamic, value:String):Void {
+	flight._js._fn.Text.appendTextLabelString(source, value);
+}
+#else
 extern inline function appendTextLabelString(source:Dynamic, value:String):Void {
 #if hl
 	flight._hl._fn.Text.appendTextLabelString(source, cast value);
@@ -693,6 +1070,12 @@ extern inline function appendTextLabelString(source:Dynamic, value:String):Void 
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function computeTextLabelLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
+	flight._js._fn.Text.computeTextLabelLocalBoundsRectangle(out, source);
+}
+#else
 extern inline function computeTextLabelLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
 #if hl
 	flight._hl._fn.Text.computeTextLabelLocalBoundsRectangle(out, source);
@@ -704,6 +1087,12 @@ extern inline function computeTextLabelLocalBoundsRectangle(out:Rectangle, sourc
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getTextLabelFormat(source:TextLabel):Dynamic {
+	return flight._js._fn.Text.getTextLabelFormat(source);
+}
+#else
 extern inline function getTextLabelFormat(source:TextLabel):Dynamic {
 #if hl
 	return flight._hl._fn.Text.getTextLabelFormat(source);
@@ -715,6 +1104,12 @@ extern inline function getTextLabelFormat(source:TextLabel):Dynamic {
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getTextLabelString(source:TextLabel):String {
+	return flight._js._fn.Text.getTextLabelString(source);
+}
+#else
 extern inline function getTextLabelString(source:TextLabel):String {
 #if hl
 	return cast flight._hl._fn.Text.getTextLabelString(source);
@@ -726,6 +1121,12 @@ extern inline function getTextLabelString(source:TextLabel):String {
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setTextLabelAutoSize(source:Dynamic, value:TextAutoSize):Void {
+	flight._js._fn.Text.setTextLabelAutoSize(source, value);
+}
+#else
 extern inline function setTextLabelAutoSize(source:Dynamic, value:TextAutoSize):Void {
 #if hl
 	flight._hl._fn.Text.setTextLabelAutoSize(source, value);
@@ -737,6 +1138,12 @@ extern inline function setTextLabelAutoSize(source:Dynamic, value:TextAutoSize):
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setTextLabelFormat(source:Dynamic, value:Dynamic):Void {
+	flight._js._fn.Text.setTextLabelFormat(source, value);
+}
+#else
 extern inline function setTextLabelFormat(source:Dynamic, value:Dynamic):Void {
 #if hl
 	flight._hl._fn.Text.setTextLabelFormat(source, value);
@@ -748,6 +1155,12 @@ extern inline function setTextLabelFormat(source:Dynamic, value:Dynamic):Void {
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setTextLabelHeight(source:Dynamic, value:Float):Void {
+	flight._js._fn.Text.setTextLabelHeight(source, value);
+}
+#else
 extern inline function setTextLabelHeight(source:Dynamic, value:Float):Void {
 #if hl
 	flight._hl._fn.Text.setTextLabelHeight(source, value);
@@ -759,6 +1172,12 @@ extern inline function setTextLabelHeight(source:Dynamic, value:Float):Void {
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setTextLabelString(source:Dynamic, value:String):Void {
+	flight._js._fn.Text.setTextLabelString(source, value);
+}
+#else
 extern inline function setTextLabelString(source:Dynamic, value:String):Void {
 #if hl
 	flight._hl._fn.Text.setTextLabelString(source, cast value);
@@ -770,6 +1189,12 @@ extern inline function setTextLabelString(source:Dynamic, value:String):Void {
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setTextLabelVerticalAlign(source:Dynamic, value:TextVerticalAlign):Void {
+	flight._js._fn.Text.setTextLabelVerticalAlign(source, value);
+}
+#else
 extern inline function setTextLabelVerticalAlign(source:Dynamic, value:TextVerticalAlign):Void {
 #if hl
 	flight._hl._fn.Text.setTextLabelVerticalAlign(source, value);
@@ -781,6 +1206,12 @@ extern inline function setTextLabelVerticalAlign(source:Dynamic, value:TextVerti
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setTextLabelWidth(source:Dynamic, value:Float):Void {
+	flight._js._fn.Text.setTextLabelWidth(source, value);
+}
+#else
 extern inline function setTextLabelWidth(source:Dynamic, value:Float):Void {
 #if hl
 	flight._hl._fn.Text.setTextLabelWidth(source, value);
@@ -792,6 +1223,12 @@ extern inline function setTextLabelWidth(source:Dynamic, value:Float):Void {
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getTextLayout(source:Dynamic):Null<Dynamic> {
+	return flight._js._fn.Text.getTextLayout(source);
+}
+#else
 extern inline function getTextLayout(source:Dynamic):Dynamic {
 #if hl
 	return flight._hl._fn.Text.getTextLayout(source);
@@ -803,6 +1240,12 @@ extern inline function getTextLayout(source:Dynamic):Dynamic {
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getTextLayoutMetrics(out:TextMetrics, source:Dynamic):Void {
+	flight._js._fn.Text.getTextLayoutMetrics(out, source);
+}
+#else
 extern inline function getTextLayoutMetrics(out:TextMetrics, source:Dynamic):Void {
 #if hl
 	flight._hl._fn.Text.getTextLayoutMetrics(out, source);
@@ -814,6 +1257,12 @@ extern inline function getTextLayoutMetrics(out:TextMetrics, source:Dynamic):Voi
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freeTextLabelContentExplanation(ptr:TextLabelContentExplanation):Void {
+	flight._js._fn.Text.freeTextLabelContentExplanation(ptr);
+}
+#else
 extern inline function freeTextLabelContentExplanation(ptr:TextLabelContentExplanation):Void {
 #if hl
 	flight._hl._fn.Text.freeTextLabelContentExplanation(ptr);
@@ -825,6 +1274,12 @@ extern inline function freeTextLabelContentExplanation(ptr:TextLabelContentExpla
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freeTextLayoutParams(ptr:TextLayoutParams):Void {
+	flight._js._fn.Text.freeTextLayoutParams(ptr);
+}
+#else
 extern inline function freeTextLayoutParams(ptr:TextLayoutParams):Void {
 #if hl
 	flight._hl._fn.Text.freeTextLayoutParams(ptr);
@@ -836,6 +1291,12 @@ extern inline function freeTextLayoutParams(ptr:TextLayoutParams):Void {
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freeTextLineMetrics(ptr:TextLineMetrics):Void {
+	flight._js._fn.Text.freeTextLineMetrics(ptr);
+}
+#else
 extern inline function freeTextLineMetrics(ptr:TextLineMetrics):Void {
 #if hl
 	flight._hl._fn.Text.freeTextLineMetrics(ptr);
@@ -847,3 +1308,4 @@ extern inline function freeTextLineMetrics(ptr:TextLineMetrics):Void {
 	#error "flight.Text: no backend for this target."
 #end
 }
+#end

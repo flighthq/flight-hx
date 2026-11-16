@@ -1,5 +1,10 @@
 package flight;
 
+#if (js && flight_esm)
+extern inline function getActiveTweenCount(manager:TweenManager):Int {
+	return flight._js._fn.Tween.getActiveTweenCount(manager);
+}
+#else
 extern inline function getActiveTweenCount(manager:TweenManager):Int {
 #if hl
 	return flight._hl._fn.Tween.getActiveTweenCount(manager);
@@ -11,6 +16,12 @@ extern inline function getActiveTweenCount(manager:TweenManager):Int {
 	#error "flight.Tween: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function killTweensOfProperty(manager:TweenManager, key:String):Void {
+	flight._js._fn.Tween.killTweensOfProperty(manager, key);
+}
+#else
 extern inline function killTweensOfProperty(manager:TweenManager, key:String):Void {
 #if hl
 	flight._hl._fn.Tween.killTweensOfProperty(manager, cast key);
@@ -22,6 +33,12 @@ extern inline function killTweensOfProperty(manager:TweenManager, key:String):Vo
 	#error "flight.Tween: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function pauseAllTweens(manager:TweenManager):Void {
+	flight._js._fn.Tween.pauseAllTweens(manager);
+}
+#else
 extern inline function pauseAllTweens(manager:TweenManager):Void {
 #if hl
 	flight._hl._fn.Tween.pauseAllTweens(manager);
@@ -33,6 +50,12 @@ extern inline function pauseAllTweens(manager:TweenManager):Void {
 	#error "flight.Tween: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function resetAllTweens(manager:TweenManager):Void {
+	flight._js._fn.Tween.resetAllTweens(manager);
+}
+#else
 extern inline function resetAllTweens(manager:TweenManager):Void {
 #if hl
 	flight._hl._fn.Tween.resetAllTweens(manager);
@@ -44,6 +67,12 @@ extern inline function resetAllTweens(manager:TweenManager):Void {
 	#error "flight.Tween: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function resumeAllTweens(manager:TweenManager):Void {
+	flight._js._fn.Tween.resumeAllTweens(manager);
+}
+#else
 extern inline function resumeAllTweens(manager:TweenManager):Void {
 #if hl
 	flight._hl._fn.Tween.resumeAllTweens(manager);
@@ -55,6 +84,12 @@ extern inline function resumeAllTweens(manager:TweenManager):Void {
 	#error "flight.Tween: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function stopAllTweens(manager:TweenManager, options:Null<StopTweenOptions>):Void {
+	flight._js._fn.Tween.stopAllTweens(manager, options);
+}
+#else
 extern inline function stopAllTweens(manager:TweenManager, options:StopTweenOptions):Void {
 #if hl
 	flight._hl._fn.Tween.stopAllTweens(manager, options);
@@ -66,6 +101,12 @@ extern inline function stopAllTweens(manager:TweenManager, options:StopTweenOpti
 	#error "flight.Tween: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function createTweenManager(options:Null<TweenManagerOptions>):TweenManager {
+	return flight._js._fn.Tween.createTweenManager(options);
+}
+#else
 extern inline function createTweenManager(options:TweenManagerOptions):TweenManager {
 #if hl
 	return flight._hl._fn.Tween.createTweenManager(options);
@@ -77,6 +118,12 @@ extern inline function createTweenManager(options:TweenManagerOptions):TweenMana
 	#error "flight.Tween: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function defaultManager(context:TweenContext):TweenManager {
+	return flight._js._fn.Tween.defaultManager(context);
+}
+#else
 extern inline function defaultManager(context:TweenContext):TweenManager {
 #if hl
 	return flight._hl._fn.Tween.defaultManager(context);
@@ -88,6 +135,12 @@ extern inline function defaultManager(context:TweenContext):TweenManager {
 	#error "flight.Tween: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function createTweenContext():TweenContext {
+	return flight._js._fn.Tween.createTweenContext();
+}
+#else
 extern inline function createTweenContext():TweenContext {
 #if hl
 	return flight._hl._fn.Tween.createTweenContext();
@@ -99,6 +152,12 @@ extern inline function createTweenContext():TweenContext {
 	#error "flight.Tween: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function updateTweens(manager:TweenManager, deltaTime:Float):Void {
+	flight._js._fn.Tween.updateTweens(manager, deltaTime);
+}
+#else
 extern inline function updateTweens(manager:TweenManager, deltaTime:Float):Void {
 #if hl
 	flight._hl._fn.Tween.updateTweens(manager, deltaTime);
@@ -110,6 +169,12 @@ extern inline function updateTweens(manager:TweenManager, deltaTime:Float):Void 
 	#error "flight.Tween: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freeTweenManager(ptr:TweenManager):Void {
+	flight._js._fn.Tween.freeTweenManager(ptr);
+}
+#else
 extern inline function freeTweenManager(ptr:TweenManager):Void {
 #if hl
 	flight._hl._fn.Tween.freeTweenManager(ptr);
@@ -121,6 +186,12 @@ extern inline function freeTweenManager(ptr:TweenManager):Void {
 	#error "flight.Tween: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freeTweenContext(ptr:TweenContext):Void {
+	flight._js._fn.Tween.freeTweenContext(ptr);
+}
+#else
 extern inline function freeTweenContext(ptr:TweenContext):Void {
 #if hl
 	flight._hl._fn.Tween.freeTweenContext(ptr);
@@ -132,3 +203,4 @@ extern inline function freeTweenContext(ptr:TweenContext):Void {
 	#error "flight.Tween: no backend for this target."
 #end
 }
+#end

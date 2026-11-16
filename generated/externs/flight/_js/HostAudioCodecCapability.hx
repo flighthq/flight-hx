@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract HostAudioCodecCapability(Dynamic) {}
+abstract HostAudioCodecCapability(Dynamic) {
+}

@@ -23,3 +23,10 @@ diff, and records patch SHA-256 identities in extern/native provenance.
 The resulting Haxe files are copied unchanged. The consumer-side hxcpp macro
 adds the generated header and disables reflection of raw pointer helpers.
 There is no replacement Haxe implementation, local SDK, or CFFI bridge.
+
+`0002-js-esm.patch` replaces the C ABI-shaped JS target with direct Flight ESM
+bindings. It exposes and reuses `flight-compiler`'s TypeScript name conversion,
+preserves original SDK names through native monomorphization, emits direct object
+field access, and gives JS its logical arrays/callbacks/options in dispatch and
+type methods. Synthetic native frees become GC no-ops. Three Rust tests cover
+these changes, and `gate:web` executes real Flight modules from the pinned tree.

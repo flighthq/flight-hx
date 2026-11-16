@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract SpineBinaryVersionFailure(Dynamic) {}
+abstract SpineBinaryVersionFailure(Dynamic) {
+}

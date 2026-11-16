@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract CreateRenderTextureOptions(Dynamic) {}
+abstract CreateRenderTextureOptions(Dynamic) {
+}

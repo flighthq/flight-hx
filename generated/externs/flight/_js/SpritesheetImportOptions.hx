@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract SpritesheetImportOptions(Dynamic) {}
+abstract SpritesheetImportOptions(Dynamic) {
+}

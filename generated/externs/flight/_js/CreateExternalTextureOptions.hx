@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract CreateExternalTextureOptions(Dynamic) {}
+abstract CreateExternalTextureOptions(Dynamic) {
+}

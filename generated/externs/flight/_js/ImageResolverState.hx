@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract ImageResolverState(Dynamic) {}
+abstract ImageResolverState(Dynamic) {
+}

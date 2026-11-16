@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract EffectPadding(Dynamic) {}
+abstract EffectPadding(Dynamic) {
+}

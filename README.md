@@ -64,13 +64,15 @@ links the shared library; iOS links `libflight_ffi.a`. For a cross build, set
 <haxelib name="flight" />
 ```
 
-The Linux x64 checks run a consumer installed from the ZIP through hxcpp,
+The native runtime checks run a consumer installed from the ZIP through hxcpp,
 HashLink, Lime Linux, and Lime HashLink. HashLink also loads the entire generated
 native declaration surface. The smoke calls cover scalar math, allocation,
 field access/mutation, and release. This does not establish every API's runtime
-behavior. macOS, Windows, ARM, and iOS have build/link configuration but have not
-been built or run by these Linux checks. In particular, iOS needs validation
-with the Apple SDK and any required final application system libraries.
+behavior. Locally these have passed on Linux x64. CI now runs the same installed
+consumer on Intel macOS and Windows, and builds/links iOS device and simulator
+archives with the Apple SDK. Those new jobs need a successful remote run before
+claiming validation. iOS execution, ARM desktop execution, and a complete iOS
+Haxe/Lime application remain outside these checks.
 
 HashLink field access uses generated native offsets. Staging its adapter checks
 the host offsets against the checked-in extern provenance; a different layout
@@ -79,10 +81,19 @@ requires a matching generated extern set.
 ## Web ESM
 
 Use `-D flight_esm`, `--macro EsmGenerator.use()`, and `-dce full` for static ESM
-imports. The externs expect a module named `flight` exporting `flight_*`
-functions, including field accessors. They do not directly consume the older
-`@flighthq/*` TypeScript modules. A matching ESM runtime remains a separate
-integration task; the checks verify declarations and import emission only.
+imports from real `@flighthq/*` modules. Rust bindgen uses Flight compiler naming,
+direct JS fields, and logical JS arrays/callbacks/options instead of native ABI
+carriers. Synthetic native `free*` helpers are no-ops on JS; SDK `release*` methods
+still call the real pool/lifecycle function. For example, native slice arguments
+have pointer/length carriers, while their JS form takes a single array.
+
+`tools/esm/buildWeb.mjs` compiles a Haxe consumer and bundles it against the pinned
+Flight TypeScript sources with esbuild, without installing Flight's workspace
+tooling. Apps can use their own bundler with matching published packages instead.
+`npm run gate:web` executes math/geometry from an extracted consumer ZIP, including
+field mutation, typed arrays, callbacks/options and release, and verifies unused
+exports disappear. Full SDK behavior, rendering and browser host integration are
+not established by this core smoke. See [ESM pipeline](tools/esm/README.md).
 
 ## Develop and package
 
@@ -118,6 +129,7 @@ npm run test:native-producer       # Rust binding regression tests
 npm run test:native-packaging      # patch identity and artifact rejection cases
 npm run gate:package               # deterministic ZIP, declarations and ESM output
 npm run gate:native-runtime        # installed ZIP: hxcpp/HL and real Lime consumers
+npm run gate:web                   # installed ZIP: real ESM behavior + tree-shaking
 ```
 
 `npm run check` stages a development binary before the native gates. Run

@@ -1,15 +1,7 @@
 package flight._js;
 
-@:jsRequire("flight")
-private extern class AnimationRootMotionExtractor_Ffi {
-	@:native("flight_get_animation_root_motion_extractor_channel_index") static function get_channelIndex(ptr:Dynamic):Int;
-	@:native("flight_set_animation_root_motion_extractor_channel_index") static function set_channelIndex(ptr:Dynamic, value:Int):Int;
-}
-
 abstract AnimationRootMotionExtractor(Dynamic) {
 	public var channelIndex(get, set):Int;
-
-	inline function get_channelIndex():Int return AnimationRootMotionExtractor_Ffi.get_channelIndex(this);
-
-	inline function set_channelIndex(value:Int):Int return AnimationRootMotionExtractor_Ffi.set_channelIndex(this, value);
+	inline function get_channelIndex():Int return untyped this.channelIndex;
+	inline function set_channelIndex(value:Int):Int return untyped this.channelIndex = value;
 }

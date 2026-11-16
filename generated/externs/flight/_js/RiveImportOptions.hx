@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract RiveImportOptions(Dynamic) {}
+abstract RiveImportOptions(Dynamic) {
+}

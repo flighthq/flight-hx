@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract ParticleFormatRegistry(Dynamic) {}
+abstract ParticleFormatRegistry(Dynamic) {
+}

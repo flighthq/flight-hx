@@ -6,6 +6,14 @@ concurrency:
   group: bindings-${{ github.ref }}
   cancel-in-progress: true
 jobs:
+  esm:
+    name: real ESM runtime + tree-shaking
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/toolchain
+      - run: npm run rehydrate
+      - run: npm run gate:web
   check:
     runs-on: ubuntu-latest
     steps:

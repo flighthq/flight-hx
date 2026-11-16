@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract TexturePackerDocument(Dynamic) {}
+abstract TexturePackerDocument(Dynamic) {
+}

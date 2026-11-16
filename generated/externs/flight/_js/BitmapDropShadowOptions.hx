@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract BitmapDropShadowOptions(Dynamic) {}
+abstract BitmapDropShadowOptions(Dynamic) {
+}

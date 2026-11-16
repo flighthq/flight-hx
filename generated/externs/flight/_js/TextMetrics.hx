@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract TextMetrics(Dynamic) {}
+abstract TextMetrics(Dynamic) {
+}

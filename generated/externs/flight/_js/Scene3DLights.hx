@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract Scene3DLights(Dynamic) {}
+abstract Scene3DLights(Dynamic) {
+}

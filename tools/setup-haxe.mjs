@@ -21,7 +21,7 @@ if (!existsSync(executable)) {
 // on Windows, which otherwise leaves ensureHxcppRunner looking in the wrong place.
 process.env.HAXE_LIBCACHE ??= path.join(os.homedir(), 'haxe', 'haxe_libraries');
 
-const lix = path.join(workspace, 'node_modules', '.bin', process.platform === 'win32' ? 'lix.cmd' : 'lix');
+const lix = path.join(workspace, 'node_modules', 'lix', 'bin', 'lix.js');
 if (!existsSync(lix)) throw new Error('Local npm dependencies are missing. Run npm ci first.');
 downloadLibraries(lix);
 ensureHxcppRunner();
@@ -36,7 +36,7 @@ function downloadLibraries(lixExecutable) {
     const specification = readFileSync(path.join(directory, file), 'utf8');
     const install = /# @install: lix --silent download "([^"]+)" into ([^\s]+)/u.exec(specification);
     if (!install) continue;
-    run(lixExecutable, ['--silent', 'download', install[1], 'into', install[2]]);
+    run(process.execPath, [lixExecutable, '--silent', 'download', install[1], 'into', install[2]]);
   }
 }
 
@@ -95,7 +95,7 @@ function ensureHxcppRunner() {
   if (!relativeCachePath) throw new Error('Could not resolve the pinned hxcpp cache path.');
   const libraryCache = process.env.HAXE_LIBCACHE ?? path.join(os.homedir(), 'haxe', 'haxe_libraries');
   const hxcppDirectory = path.join(libraryCache, relativeCachePath);
-  const runner = path.join(hxcppDirectory, process.platform === 'win32' ? 'hxcpp.exe' : 'hxcpp.n');
+  const runner = path.join(hxcppDirectory, 'hxcpp.n');
   if (!existsSync(runner)) {
     if (!existsSync(hxcppDirectory)) throw new Error(`Pinned hxcpp was not downloaded to ${hxcppDirectory}`);
     process.stdout.write('Building the pinned hxcpp command runner.\n');

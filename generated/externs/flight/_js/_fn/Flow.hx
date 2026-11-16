@@ -1,29 +1,29 @@
 package flight._js._fn;
 
-@:jsRequire("flight")
+@:jsRequire("@flighthq/flow")
 extern class Flow {
-	@:native("flight_create_flow_stack")
+	@:native("createFlowStack")
 	public static function createFlowStack():Dynamic;
-	@:native("flight_clear_flow_stack")
+	@:native("clearFlowStack")
 	public static function clearFlowStack(stack:Dynamic):Void;
-	@:native("flight_get_active_flow_state")
-	public static function getActiveFlowState(stack:Dynamic):Dynamic;
-	@:native("flight_get_flow_stack_depth")
+	@:native("getActiveFlowState")
+	public static function getActiveFlowState(stack:Dynamic):Null<Dynamic>;
+	@:native("getFlowStackDepth")
 	public static function getFlowStackDepth(stack:Dynamic):Int;
-	@:native("flight_pop_flow_state")
-	public static function popFlowState(stack:Dynamic):Dynamic;
-	@:native("flight_push_flow_state")
+	@:native("popFlowState")
+	public static function popFlowState(stack:Dynamic):Null<Dynamic>;
+	@:native("pushFlowState")
 	public static function pushFlowState(stack:Dynamic, state:Dynamic, guards:Dynamic):Void;
-	@:native("flight_replace_flow_state")
+	@:native("replaceFlowState")
 	public static function replaceFlowState(stack:Dynamic, state:Dynamic, guards:Dynamic):Void;
-	@:native("flight_update_flow_stack")
+	@:native("updateFlowStack")
 	public static function updateFlowStack(stack:Dynamic, deltaTime:Float):Void;
-	@:native("flight_disable_flow_guards")
+	@:native("disableFlowGuards")
 	public static function disableFlowGuards(state:Dynamic):Void;
-	@:native("flight_enable_flow_guards")
-	public static function enableFlowGuards(state:Dynamic, logState:Dynamic, clockFn:Dynamic, clockCtx:Dynamic):Void;
-	@:native("flight_get_flow_guard_kind_string")
-	public static function getFlowGuardKindString(value:Int):String;
-	@:native("flight_parse_flow_guard_kind")
-	public static function parseFlowGuardKind(value:String):Int;
+	@:native("enableFlowGuards")
+	public static function enableFlowGuards(state:Dynamic, logState:Dynamic, clock:Dynamic):Void;
+	@:native("getFlowGuardKindString")
+	public static function getFlowGuardKindString(value:Dynamic):String;
+	@:native("parseFlowGuardKind")
+	public static function parseFlowGuardKind(value:String):Null<Dynamic>;
 }

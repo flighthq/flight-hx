@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract BitmapInnerGlowOptions(Dynamic) {}
+abstract BitmapInnerGlowOptions(Dynamic) {
+}

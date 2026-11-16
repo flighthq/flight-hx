@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract LottieGradientPaint(Dynamic) {}
+abstract LottieGradientPaint(Dynamic) {
+}

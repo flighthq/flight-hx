@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract InputRepeatCallback(Dynamic) {}
+abstract InputRepeatCallback(Dynamic) {
+}

@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract TiledMap(Dynamic) {}
+abstract TiledMap(Dynamic) {
+}

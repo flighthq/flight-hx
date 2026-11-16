@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract SpritesheetAnimationFrameNameOptions(Dynamic) {}
+abstract SpritesheetAnimationFrameNameOptions(Dynamic) {
+}

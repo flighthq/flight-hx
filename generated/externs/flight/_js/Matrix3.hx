@@ -19,7 +19,7 @@ abstract Matrix3(Dynamic) {
 	inline public function copyRowFromVector3(row:Int, source:flight._js.Vector3):Void {
 		flight._js._fn.Geometry.copyMatrix3RowFromVector3(cast this, row, source);
 	}
-	inline public function equals(b:flight._js.Matrix3):Bool {
+	inline public function equals(b:Null<flight._js.Matrix3>):Bool {
 		return flight._js._fn.Geometry.equalsMatrix3(cast this, b);
 	}
 	inline public function getDeterminant():Float {
@@ -49,8 +49,8 @@ abstract Matrix3(Dynamic) {
 	inline public function setElement(row:Int, column:Int, value:Float):Void {
 		flight._js._fn.Geometry.setMatrix3Element(cast this, row, column, value);
 	}
-	inline public function setFromFloat32Array(offset:Int, source:Dynamic, sourceLen:Int):Void {
-		flight._js._fn.Geometry.setMatrix3FromFloat32Array(cast this, offset, source, sourceLen);
+	inline public function setFromFloat32Array(offset:Int, source:Dynamic):Void {
+		flight._js._fn.Geometry.setMatrix3FromFloat32Array(cast this, offset, source);
 	}
 	inline public function setFromMatrix(source:flight._js.Matrix):Void {
 		flight._js._fn.Geometry.setMatrix3FromMatrix(cast this, source);
@@ -70,8 +70,8 @@ abstract Matrix3(Dynamic) {
 	inline public function transpose(source:flight._js.Matrix3):Void {
 		flight._js._fn.Geometry.transposeMatrix3(cast this, source);
 	}
-	inline public function writeToFloat32Array(out:Dynamic, outLen:Int, offset:Int):Void {
-		flight._js._fn.Geometry.writeMatrix3ToFloat32Array(out, outLen, offset, cast this);
+	inline public function writeToFloat32Array(out:Dynamic, offset:Int):Void {
+		flight._js._fn.Geometry.writeMatrix3ToFloat32Array(out, offset, cast this);
 	}
 	inline public function release():Void {
 		flight._js._fn.Geometry.releaseMatrix3(cast this);

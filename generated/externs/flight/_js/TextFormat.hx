@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract TextFormat(Dynamic) {}
+abstract TextFormat(Dynamic) {
+}

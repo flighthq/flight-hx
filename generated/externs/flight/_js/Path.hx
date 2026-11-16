@@ -1,13 +1,13 @@
 package flight._js;
 
 abstract Path(Dynamic) {
-	inline public function createClipRegionFrom(tolerance:Float):Dynamic {
+	inline public function createClipRegionFrom(tolerance:Null<Float>):Dynamic {
 		return flight._js._fn.Clip.createClipRegionFromPath(cast this, tolerance);
 	}
-	inline public function clean(tolerance:Float, out:flight._js.Path, flattenTolerance:Float):Void {
+	inline public function clean(tolerance:Float, out:flight._js.Path, flattenTolerance:Null<Float>):Void {
 		flight._js._fn.Path.cleanPath(cast this, tolerance, out, flattenTolerance);
 	}
-	inline public function containsPoint(px:Float, py:Float, tolerance:Float):Bool {
+	inline public function containsPoint(px:Float, py:Float, tolerance:Null<Float>):Bool {
 		return flight._js._fn.Path.containsPathPoint(cast this, px, py, tolerance);
 	}
 	inline public function clone():flight._js.Path {
@@ -16,43 +16,43 @@ abstract Path(Dynamic) {
 	inline public function copy(source:flight._js.Path):Void {
 		flight._js._fn.Path.copyPath(cast this, source);
 	}
-	inline public function dash(dash:Dynamic, dashLen:Int, dashOffset:Float, out:flight._js.Path, tolerance:Float):Void {
-		flight._js._fn.Path.dashPath(cast this, dash, dashLen, dashOffset, out, tolerance);
+	inline public function dash(dash:Dynamic, dashOffset:Float, out:flight._js.Path, tolerance:Null<Float>):Void {
+		flight._js._fn.Path.dashPath(cast this, dash, dashOffset, out, tolerance);
 	}
-	inline public function decimate(tolerance:Float, out:flight._js.Path, flattenTolerance:Float):Void {
+	inline public function decimate(tolerance:Float, out:flight._js.Path, flattenTolerance:Null<Float>):Void {
 		flight._js._fn.Path.decimatePath(cast this, tolerance, out, flattenTolerance);
 	}
 	inline public function explainMorphCreation(end:flight._js.Path):flight._js.PathMorphCreationExplanation {
 		return flight._js._fn.Path.explainPathMorphCreation(cast this, end);
 	}
-	inline public function explainStrokeTessellation(style:flight._js.StrokeStyle, tolerance:Float):flight._js.StrokePathTessellationExplanation {
+	inline public function explainStrokeTessellation(style:flight._js.StrokeStyle, tolerance:Null<Float>):flight._js.StrokePathTessellationExplanation {
 		return flight._js._fn.Path.explainStrokePathTessellation(cast this, style, tolerance);
 	}
-	inline public function fitCurves(tolerance:Float, out:flight._js.Path, flattenTolerance:Float):Void {
+	inline public function fitCurves(tolerance:Float, out:flight._js.Path, flattenTolerance:Null<Float>):Void {
 		flight._js._fn.Path.fitPathCurves(cast this, tolerance, out, flattenTolerance);
 	}
-	inline public function getContourLengths(tolerance:Float):Dynamic {
+	inline public function getContourLengths(tolerance:Null<Float>):Dynamic {
 		return flight._js._fn.Path.getPathContourLengths(cast this, tolerance);
 	}
-	inline public function getCurvatureAtDistance(distance:Float, tolerance:Float):Float {
+	inline public function getCurvatureAtDistance(distance:Float, tolerance:Null<Float>):Float {
 		return flight._js._fn.Path.getPathCurvatureAtDistance(cast this, distance, tolerance);
 	}
-	inline public function getLength(tolerance:Float):Float {
+	inline public function getLength(tolerance:Null<Float>):Float {
 		return flight._js._fn.Path.getPathLength(cast this, tolerance);
 	}
-	inline public function getNearestPoint(px:Float, py:Float, out:flight._js.Vector2, tolerance:Float):Float {
+	inline public function getNearestPoint(px:Float, py:Float, out:flight._js.Vector2, tolerance:Null<Float>):Float {
 		return flight._js._fn.Path.getPathNearestPoint(cast this, px, py, out, tolerance);
 	}
-	inline public function getPointAtDistance(distance:Float, out:flight._js.Vector2, tolerance:Float):Bool {
+	inline public function getPointAtDistance(distance:Float, out:flight._js.Vector2, tolerance:Null<Float>):Bool {
 		return flight._js._fn.Path.getPathPointAtDistance(cast this, distance, out, tolerance);
 	}
-	inline public function getPositionAtDistance(distance:Float, pointOut:flight._js.Vector2, tangentOut:flight._js.Vector2, tolerance:Float):Bool {
+	inline public function getPositionAtDistance(distance:Float, pointOut:flight._js.Vector2, tangentOut:flight._js.Vector2, tolerance:Null<Float>):Bool {
 		return flight._js._fn.Path.getPathPositionAtDistance(cast this, distance, pointOut, tangentOut, tolerance);
 	}
-	inline public function getTangentAtDistance(distance:Float, out:flight._js.Vector2, tolerance:Float):Bool {
+	inline public function getTangentAtDistance(distance:Float, out:flight._js.Vector2, tolerance:Null<Float>):Bool {
 		return flight._js._fn.Path.getPathTangentAtDistance(cast this, distance, out, tolerance);
 	}
-	inline public function getSegmentCurvatureAtParameter(segmentIndex:Int, t:Float):Float {
+	inline public function getSegmentCurvatureAtParameter(segmentIndex:Int, t:Float):Null<Float> {
 		return flight._js._fn.Path.getPathSegmentCurvatureAtParameter(cast this, segmentIndex, t);
 	}
 	inline public function getSegmentPointAtParameter(segmentIndex:Int, t:Float, out:flight._js.Vector2):Bool {
@@ -61,16 +61,16 @@ abstract Path(Dynamic) {
 	inline public function getSegmentTangentAtParameter(segmentIndex:Int, t:Float, out:flight._js.Vector2):Bool {
 		return flight._js._fn.Path.getPathSegmentTangentAtParameter(cast this, segmentIndex, t, out);
 	}
-	inline public function getContourOrientation(tolerance:Float):Int {
+	inline public function getContourOrientation(tolerance:Null<Float>):Dynamic {
 		return flight._js._fn.Path.getPathContourOrientation(cast this, tolerance);
 	}
-	inline public function getSignedArea(tolerance:Float):Float {
+	inline public function getSignedArea(tolerance:Null<Float>):Float {
 		return flight._js._fn.Path.getPathSignedArea(cast this, tolerance);
 	}
-	static inline public function create(winding:Int):flight._js.Path {
+	static inline public function create(winding:Null<Dynamic>):flight._js.Path {
 		return flight._js._fn.Path.createPath(winding);
 	}
-	inline public function appendArc(centerX:Float, centerY:Float, radius:Float, startAngle:Float, endAngle:Float, anticlockwise:Int, connectToCurrent:Int):Void {
+	inline public function appendArc(centerX:Float, centerY:Float, radius:Float, startAngle:Float, endAngle:Float, anticlockwise:Null<Bool>, connectToCurrent:Null<Bool>):Void {
 		flight._js._fn.Path.appendPathArc(cast this, centerX, centerY, radius, startAngle, endAngle, anticlockwise, connectToCurrent);
 	}
 	inline public function appendCircle(centerX:Float, centerY:Float, radius:Float):Void {
@@ -94,11 +94,11 @@ abstract Path(Dynamic) {
 	inline public function appendMoveTo(x:Float, y:Float):Void {
 		flight._js._fn.Path.appendPathMoveTo(cast this, x, y);
 	}
-	inline public function appendPolygon(points:Dynamic, pointsLen:Int):Void {
-		flight._js._fn.Path.appendPathPolygon(cast this, points, pointsLen);
+	inline public function appendPolygon(points:Dynamic):Void {
+		flight._js._fn.Path.appendPathPolygon(cast this, points);
 	}
-	inline public function appendPolyline(points:Dynamic, pointsLen:Int):Void {
-		flight._js._fn.Path.appendPathPolyline(cast this, points, pointsLen);
+	inline public function appendPolyline(points:Dynamic):Void {
+		flight._js._fn.Path.appendPathPolyline(cast this, points);
 	}
 	inline public function appendQuadraticCurveTo(controlX:Float, controlY:Float, x:Float, y:Float):Void {
 		flight._js._fn.Path.appendPathQuadraticCurveTo(cast this, controlX, controlY, x, y);
@@ -115,7 +115,7 @@ abstract Path(Dynamic) {
 	inline public function appendTangentArcTo(x1:Float, y1:Float, x2:Float, y2:Float, radius:Float):Void {
 		flight._js._fn.Path.appendPathTangentArcTo(cast this, x1, y1, x2, y2, radius);
 	}
-	inline public function createMorph(end:flight._js.Path):Dynamic {
+	inline public function createMorph(end:flight._js.Path):Null<flight._js.PathMorph> {
 		return flight._js._fn.Path.createPathMorph(cast this, end);
 	}
 	inline public function sampleMorph(morph:flight._js.PathMorph, progress:Float):Void {
@@ -124,22 +124,22 @@ abstract Path(Dynamic) {
 	inline public function reverse(out:flight._js.Path):Void {
 		flight._js._fn.Path.reversePath(cast this, out);
 	}
-	inline public function stroke(style:flight._js.StrokeStyle, tolerance:Float):flight._js.Path {
+	inline public function stroke(style:flight._js.StrokeStyle, tolerance:Null<Float>):flight._js.Path {
 		return flight._js._fn.Path.strokePath(cast this, style, tolerance);
 	}
-	inline public function tessellate(tolerance:Float):flight._js.PathMesh {
+	inline public function tessellate(tolerance:Null<Float>):flight._js.PathMesh {
 		return flight._js._fn.Path.tessellatePath(cast this, tolerance);
 	}
-	inline public function tessellateInto(out:flight._js.PathMesh, tolerance:Float):Void {
+	inline public function tessellateInto(out:flight._js.PathMesh, tolerance:Null<Float>):Void {
 		flight._js._fn.Path.tessellatePathInto(cast this, out, tolerance);
 	}
-	inline public function tessellateTyped(tolerance:Float):flight._js.PathMeshTyped {
+	inline public function tessellateTyped(tolerance:Null<Float>):flight._js.PathMeshTyped {
 		return flight._js._fn.Path.tessellatePathTyped(cast this, tolerance);
 	}
-	inline public function tessellateTypedInto(out:flight._js.PathMeshTyped, tolerance:Float):Void {
+	inline public function tessellateTypedInto(out:flight._js.PathMeshTyped, tolerance:Null<Float>):Void {
 		flight._js._fn.Path.tessellatePathTypedInto(cast this, out, tolerance);
 	}
-	inline public function tessellateStroke(style:flight._js.StrokeStyle, tolerance:Float):Dynamic {
+	inline public function tessellateStroke(style:flight._js.StrokeStyle, tolerance:Null<Float>):Null<flight._js.PathMesh> {
 		return flight._js._fn.Path.tessellateStrokePath(cast this, style, tolerance);
 	}
 	inline public function transform(matrix:flight._js.Matrix, out:flight._js.Path):Void {
@@ -151,28 +151,28 @@ abstract Path(Dynamic) {
 	inline public function free():Void {
 		flight._js._fn.Path.freePath(cast this);
 	}
-	inline public function explainOffset(pathBooleanKernel:flight._js.PathBooleanKernel, delta:Float, options:flight._js.PathOffsetOptions):Dynamic {
+	inline public function explainOffset(pathBooleanKernel:flight._js.PathBooleanKernel, delta:Float, options:Null<flight._js.PathOffsetOptions>):Null<flight._js.PathBooleanExplanation> {
 		return flight._js._fn.PathBoolean.explainOffsetPath(pathBooleanKernel, cast this, delta, options);
 	}
-	inline public function explainSimplify(pathBooleanKernel:flight._js.PathBooleanKernel, options:flight._js.PathBooleanOptions):Dynamic {
+	inline public function explainSimplify(pathBooleanKernel:flight._js.PathBooleanKernel, options:Null<flight._js.PathBooleanOptions>):Null<flight._js.PathBooleanExplanation> {
 		return flight._js._fn.PathBoolean.explainSimplifyPath(pathBooleanKernel, cast this, options);
 	}
-	inline public function offset(pathBooleanKernel:flight._js.PathBooleanKernel, path:flight._js.Path, delta:Float, options:flight._js.PathOffsetOptions):Void {
+	inline public function offset(pathBooleanKernel:flight._js.PathBooleanKernel, path:flight._js.Path, delta:Float, options:Null<flight._js.PathOffsetOptions>):Void {
 		flight._js._fn.PathBoolean.offsetPath(cast this, pathBooleanKernel, path, delta, options);
 	}
-	inline public function simplify(pathBooleanKernel:flight._js.PathBooleanKernel, path:flight._js.Path, options:flight._js.PathBooleanOptions):Void {
+	inline public function simplify(pathBooleanKernel:flight._js.PathBooleanKernel, path:flight._js.Path, options:Null<flight._js.PathBooleanOptions>):Void {
 		flight._js._fn.PathBoolean.simplifyPath(cast this, pathBooleanKernel, path, options);
 	}
 	inline public function appendSvgData(d:String):Bool {
 		return flight._js._fn.PathFormats.appendSvgPathData(cast this, d);
 	}
-	inline public function formatSvgData(options:flight._js.SvgPathDataFormatOptions):String {
+	inline public function formatSvgData(options:Null<flight._js.SvgPathDataFormatOptions>):String {
 		return flight._js._fn.PathFormats.formatSvgPathData(cast this, options);
 	}
 	static inline public function createLottieBezier(value:flight._js.LottieShapePath):flight._js.Path {
 		return flight._js._fn.Scene2dFormats.createLottieBezierPath(value);
 	}
-	inline public function compactStroke(path:flight._js.Path, style:flight._js.StrokeStyle, tolerance:Float):Void {
+	inline public function compactStroke(path:flight._js.Path, style:flight._js.StrokeStyle, tolerance:Null<Float>):Void {
 		flight._js._fn.Shape.compactStrokePath(cast this, path, style, tolerance);
 	}
 }

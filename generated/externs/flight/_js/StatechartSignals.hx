@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract StatechartSignals(Dynamic) {}
+abstract StatechartSignals(Dynamic) {
+}

@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract MovieClip(Dynamic) {}
+abstract MovieClip(Dynamic) {
+}

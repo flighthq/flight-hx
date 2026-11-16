@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract AnimationBlendTree(Dynamic) {}
+abstract AnimationBlendTree(Dynamic) {
+}

@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract HostTextSegmenterCapability(Dynamic) {}
+abstract HostTextSegmenterCapability(Dynamic) {
+}

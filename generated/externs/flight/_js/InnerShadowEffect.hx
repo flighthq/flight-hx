@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract InnerShadowEffect(Dynamic) {}
+abstract InnerShadowEffect(Dynamic) {
+}

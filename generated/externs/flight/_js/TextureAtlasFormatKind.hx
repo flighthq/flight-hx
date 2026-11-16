@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract TextureAtlasFormatKind(Dynamic) {}
+abstract TextureAtlasFormatKind(Dynamic) {
+}

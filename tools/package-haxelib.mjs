@@ -112,7 +112,7 @@ process.stdout.write(
 );
 
 function packageFiles() {
-  const roots = ['examples/ffi-smoke', 'generated/externs', 'lib', 'project'];
+  const roots = ['examples/ffi-smoke', 'examples/esm-smoke', 'generated/externs', 'lib', 'project'];
   const fixed = ['extraParams.hxml', 'haxelib.json', 'LICENSE.md', 'README.md', 'include.xml'];
   const esm = filesUnder('tools/esm').filter((filename) => filename.endsWith('.hx'));
   const native = options.includes('--externs-only') ? [] : nativePayload(root);

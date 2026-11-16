@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract Skeleton2DAnimationTargetBinder(Dynamic) {}
+abstract Skeleton2DAnimationTargetBinder(Dynamic) {
+}

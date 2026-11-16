@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract TextureSourceKind(Dynamic) {}
+abstract TextureSourceKind(Dynamic) {
+}

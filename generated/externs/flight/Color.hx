@@ -1,5 +1,10 @@
 package flight;
 
+#if (js && flight_esm)
+extern inline function colorFromKelvin(kelvin:Float):Int {
+	return flight._js._fn.Color.colorFromKelvin(kelvin);
+}
+#else
 extern inline function colorFromKelvin(kelvin:Float):Int {
 #if hl
 	return flight._hl._fn.Color.colorFromKelvin(kelvin);
@@ -11,6 +16,12 @@ extern inline function colorFromKelvin(kelvin:Float):Int {
 	#error "flight.Color: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function allocateHslColor():HslColor {
+	return flight._js._fn.Color.allocateHslColor();
+}
+#else
 extern inline function allocateHslColor():HslColor {
 #if hl
 	return flight._hl._fn.Color.allocateHslColor();
@@ -22,6 +33,12 @@ extern inline function allocateHslColor():HslColor {
 	#error "flight.Color: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function hslToRgb(out:Dynamic, h:Float, s:Float, l:Float):Void {
+	flight._js._fn.Color.hslToRgb(out, h, s, l);
+}
+#else
 extern inline function hslToRgb(out:Dynamic, h:Float, s:Float, l:Float):Void {
 #if hl
 	flight._hl._fn.Color.hslToRgb(out, h, s, l);
@@ -33,6 +50,12 @@ extern inline function hslToRgb(out:Dynamic, h:Float, s:Float, l:Float):Void {
 	#error "flight.Color: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function rgbToHsl(out:HslColor, color:Int):Void {
+	flight._js._fn.Color.rgbToHsl(out, color);
+}
+#else
 extern inline function rgbToHsl(out:HslColor, color:Int):Void {
 #if hl
 	flight._hl._fn.Color.rgbToHsl(out, color);
@@ -44,6 +67,12 @@ extern inline function rgbToHsl(out:HslColor, color:Int):Void {
 	#error "flight.Color: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function allocateHsvColor():HsvColor {
+	return flight._js._fn.Color.allocateHsvColor();
+}
+#else
 extern inline function allocateHsvColor():HsvColor {
 #if hl
 	return flight._hl._fn.Color.allocateHsvColor();
@@ -55,6 +84,12 @@ extern inline function allocateHsvColor():HsvColor {
 	#error "flight.Color: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function hsvToRgb(out:Dynamic, h:Float, s:Float, v:Float):Void {
+	flight._js._fn.Color.hsvToRgb(out, h, s, v);
+}
+#else
 extern inline function hsvToRgb(out:Dynamic, h:Float, s:Float, v:Float):Void {
 #if hl
 	flight._hl._fn.Color.hsvToRgb(out, h, s, v);
@@ -66,6 +101,12 @@ extern inline function hsvToRgb(out:Dynamic, h:Float, s:Float, v:Float):Void {
 	#error "flight.Color: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function rgbToHsv(out:HsvColor, color:Int):Void {
+	flight._js._fn.Color.rgbToHsv(out, color);
+}
+#else
 extern inline function rgbToHsv(out:HsvColor, color:Int):Void {
 #if hl
 	flight._hl._fn.Color.rgbToHsv(out, color);
@@ -77,6 +118,12 @@ extern inline function rgbToHsv(out:HsvColor, color:Int):Void {
 	#error "flight.Color: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function lerpColor(start:Int, end:Int, t:Float):Int {
+	return flight._js._fn.Color.lerpColor(start, end, t);
+}
+#else
 extern inline function lerpColor(start:Int, end:Int, t:Float):Int {
 #if hl
 	return flight._hl._fn.Color.lerpColor(start, end, t);
@@ -88,6 +135,12 @@ extern inline function lerpColor(start:Int, end:Int, t:Float):Int {
 	#error "flight.Color: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function lerpLinearColor(out:LinearColor, start:LinearColor, end:LinearColor, t:Float):Void {
+	flight._js._fn.Color.lerpLinearColor(out, start, end, t);
+}
+#else
 extern inline function lerpLinearColor(out:LinearColor, start:LinearColor, end:LinearColor, t:Float):Void {
 #if hl
 	flight._hl._fn.Color.lerpLinearColor(out, start, end, t);
@@ -99,6 +152,12 @@ extern inline function lerpLinearColor(out:LinearColor, start:LinearColor, end:L
 	#error "flight.Color: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getColorContrastRatio(a:Int, b:Int):Float {
+	return flight._js._fn.Color.getColorContrastRatio(a, b);
+}
+#else
 extern inline function getColorContrastRatio(a:Int, b:Int):Float {
 #if hl
 	return flight._hl._fn.Color.getColorContrastRatio(a, b);
@@ -110,6 +169,12 @@ extern inline function getColorContrastRatio(a:Int, b:Int):Float {
 	#error "flight.Color: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getColorLuminance(color:Int):Float {
+	return flight._js._fn.Color.getColorLuminance(color);
+}
+#else
 extern inline function getColorLuminance(color:Int):Float {
 #if hl
 	return flight._hl._fn.Color.getColorLuminance(color);
@@ -121,6 +186,12 @@ extern inline function getColorLuminance(color:Int):Float {
 	#error "flight.Color: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getRec2020LuminanceWeights(out:Dynamic):Void {
+	flight._js._fn.Color.getRec2020LuminanceWeights(out);
+}
+#else
 extern inline function getRec2020LuminanceWeights(out:Dynamic):Void {
 #if hl
 	flight._hl._fn.Color.getRec2020LuminanceWeights(out);
@@ -132,6 +203,12 @@ extern inline function getRec2020LuminanceWeights(out:Dynamic):Void {
 	#error "flight.Color: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getRec709LuminanceWeights(out:Dynamic):Void {
+	flight._js._fn.Color.getRec709LuminanceWeights(out);
+}
+#else
 extern inline function getRec709LuminanceWeights(out:Dynamic):Void {
 #if hl
 	flight._hl._fn.Color.getRec709LuminanceWeights(out);
@@ -143,6 +220,12 @@ extern inline function getRec709LuminanceWeights(out:Dynamic):Void {
 	#error "flight.Color: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function clampLinearRgb(out:Dynamic, r:Float, g:Float, b:Float):Void {
+	flight._js._fn.Color.clampLinearRgb(out, r, g, b);
+}
+#else
 extern inline function clampLinearRgb(out:Dynamic, r:Float, g:Float, b:Float):Void {
 #if hl
 	flight._hl._fn.Color.clampLinearRgb(out, r, g, b);
@@ -154,6 +237,12 @@ extern inline function clampLinearRgb(out:Dynamic, r:Float, g:Float, b:Float):Vo
 	#error "flight.Color: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function linearRgbToOklab(out:Dynamic, r:Float, g:Float, b:Float):Void {
+	flight._js._fn.Color.linearRgbToOklab(out, r, g, b);
+}
+#else
 extern inline function linearRgbToOklab(out:Dynamic, r:Float, g:Float, b:Float):Void {
 #if hl
 	flight._hl._fn.Color.linearRgbToOklab(out, r, g, b);
@@ -165,6 +254,12 @@ extern inline function linearRgbToOklab(out:Dynamic, r:Float, g:Float, b:Float):
 	#error "flight.Color: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function oklabToLinearRgb(out:Dynamic, l:Float, a:Float, b:Float):Void {
+	flight._js._fn.Color.oklabToLinearRgb(out, l, a, b);
+}
+#else
 extern inline function oklabToLinearRgb(out:Dynamic, l:Float, a:Float, b:Float):Void {
 #if hl
 	flight._hl._fn.Color.oklabToLinearRgb(out, l, a, b);
@@ -176,6 +271,12 @@ extern inline function oklabToLinearRgb(out:Dynamic, l:Float, a:Float, b:Float):
 	#error "flight.Color: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function allocateLinearColor():LinearColor {
+	return flight._js._fn.Color.allocateLinearColor();
+}
+#else
 extern inline function allocateLinearColor():LinearColor {
 #if hl
 	return flight._hl._fn.Color.allocateLinearColor();
@@ -187,6 +288,12 @@ extern inline function allocateLinearColor():LinearColor {
 	#error "flight.Color: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function computeRgbHexString(color:Int):String {
+	return flight._js._fn.Color.computeRgbHexString(color);
+}
+#else
 extern inline function computeRgbHexString(color:Int):String {
 #if hl
 	return cast flight._hl._fn.Color.computeRgbHexString(color);
@@ -198,6 +305,12 @@ extern inline function computeRgbHexString(color:Int):String {
 	#error "flight.Color: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function computeRgbaCssString(color:Int):String {
+	return flight._js._fn.Color.computeRgbaCssString(color);
+}
+#else
 extern inline function computeRgbaCssString(color:Int):String {
 #if hl
 	return cast flight._hl._fn.Color.computeRgbaCssString(color);
@@ -209,6 +322,12 @@ extern inline function computeRgbaCssString(color:Int):String {
 	#error "flight.Color: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getColorAlpha(color:Int):Float {
+	return flight._js._fn.Color.getColorAlpha(color);
+}
+#else
 extern inline function getColorAlpha(color:Int):Float {
 #if hl
 	return flight._hl._fn.Color.getColorAlpha(color);
@@ -220,6 +339,12 @@ extern inline function getColorAlpha(color:Int):Float {
 	#error "flight.Color: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getColorRgb(color:Int):Int {
+	return flight._js._fn.Color.getColorRgb(color);
+}
+#else
 extern inline function getColorRgb(color:Int):Int {
 #if hl
 	return flight._hl._fn.Color.getColorRgb(color);
@@ -231,6 +356,12 @@ extern inline function getColorRgb(color:Int):Int {
 	#error "flight.Color: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function packColor(r:Float, g:Float, b:Float, a:Float):Int {
+	return flight._js._fn.Color.packColor(r, g, b, a);
+}
+#else
 extern inline function packColor(r:Float, g:Float, b:Float, a:Float):Int {
 #if hl
 	return flight._hl._fn.Color.packColor(r, g, b, a);
@@ -242,6 +373,12 @@ extern inline function packColor(r:Float, g:Float, b:Float, a:Float):Int {
 	#error "flight.Color: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function packLinearChannelsToColor(r:Float, g:Float, b:Float, a:Float):Int {
+	return flight._js._fn.Color.packLinearChannelsToColor(r, g, b, a);
+}
+#else
 extern inline function packLinearChannelsToColor(r:Float, g:Float, b:Float, a:Float):Int {
 #if hl
 	return flight._hl._fn.Color.packLinearChannelsToColor(r, g, b, a);
@@ -253,6 +390,12 @@ extern inline function packLinearChannelsToColor(r:Float, g:Float, b:Float, a:Fl
 	#error "flight.Color: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function packLinearToColor(color:LinearColor):Int {
+	return flight._js._fn.Color.packLinearToColor(color);
+}
+#else
 extern inline function packLinearToColor(color:LinearColor):Int {
 #if hl
 	return flight._hl._fn.Color.packLinearToColor(color);
@@ -264,6 +407,12 @@ extern inline function packLinearToColor(color:LinearColor):Int {
 	#error "flight.Color: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function packOpaqueColor(rgb:Int):Int {
+	return flight._js._fn.Color.packOpaqueColor(rgb);
+}
+#else
 extern inline function packOpaqueColor(rgb:Int):Int {
 #if hl
 	return flight._hl._fn.Color.packOpaqueColor(rgb);
@@ -275,6 +424,12 @@ extern inline function packOpaqueColor(rgb:Int):Int {
 	#error "flight.Color: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setColorAlpha(color:Int, alpha:Float):Int {
+	return flight._js._fn.Color.setColorAlpha(color, alpha);
+}
+#else
 extern inline function setColorAlpha(color:Int, alpha:Float):Int {
 #if hl
 	return flight._hl._fn.Color.setColorAlpha(color, alpha);
@@ -286,6 +441,12 @@ extern inline function setColorAlpha(color:Int, alpha:Float):Int {
 	#error "flight.Color: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function unpackColorRgba(out:Dynamic, color:Int):Void {
+	flight._js._fn.Color.unpackColorRgba(out, color);
+}
+#else
 extern inline function unpackColorRgba(out:Dynamic, color:Int):Void {
 #if hl
 	flight._hl._fn.Color.unpackColorRgba(out, color);
@@ -297,6 +458,12 @@ extern inline function unpackColorRgba(out:Dynamic, color:Int):Void {
 	#error "flight.Color: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function unpackColorToLinear(out:LinearColor, color:Int):Void {
+	flight._js._fn.Color.unpackColorToLinear(out, color);
+}
+#else
 extern inline function unpackColorToLinear(out:LinearColor, color:Int):Void {
 #if hl
 	flight._hl._fn.Color.unpackColorToLinear(out, color);
@@ -308,6 +475,12 @@ extern inline function unpackColorToLinear(out:LinearColor, color:Int):Void {
 	#error "flight.Color: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function premultiplyColorAlpha(color:Int):Int {
+	return flight._js._fn.Color.premultiplyColorAlpha(color);
+}
+#else
 extern inline function premultiplyColorAlpha(color:Int):Int {
 #if hl
 	return flight._hl._fn.Color.premultiplyColorAlpha(color);
@@ -319,6 +492,12 @@ extern inline function premultiplyColorAlpha(color:Int):Int {
 	#error "flight.Color: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function unpremultiplyColorAlpha(color:Int):Int {
+	return flight._js._fn.Color.unpremultiplyColorAlpha(color);
+}
+#else
 extern inline function unpremultiplyColorAlpha(color:Int):Int {
 #if hl
 	return flight._hl._fn.Color.unpremultiplyColorAlpha(color);
@@ -330,6 +509,12 @@ extern inline function unpremultiplyColorAlpha(color:Int):Int {
 	#error "flight.Color: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function linearChannelToSrgb(value:Float):Float {
+	return flight._js._fn.Color.linearChannelToSrgb(value);
+}
+#else
 extern inline function linearChannelToSrgb(value:Float):Float {
 #if hl
 	return flight._hl._fn.Color.linearChannelToSrgb(value);
@@ -341,6 +526,12 @@ extern inline function linearChannelToSrgb(value:Float):Float {
 	#error "flight.Color: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function srgbChannelToLinear(value:Float):Float {
+	return flight._js._fn.Color.srgbChannelToLinear(value);
+}
+#else
 extern inline function srgbChannelToLinear(value:Float):Float {
 #if hl
 	return flight._hl._fn.Color.srgbChannelToLinear(value);
@@ -352,6 +543,12 @@ extern inline function srgbChannelToLinear(value:Float):Float {
 	#error "flight.Color: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freeHslColor(ptr:HslColor):Void {
+	flight._js._fn.Color.freeHslColor(ptr);
+}
+#else
 extern inline function freeHslColor(ptr:HslColor):Void {
 #if hl
 	flight._hl._fn.Color.freeHslColor(ptr);
@@ -363,6 +560,12 @@ extern inline function freeHslColor(ptr:HslColor):Void {
 	#error "flight.Color: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freeHsvColor(ptr:HsvColor):Void {
+	flight._js._fn.Color.freeHsvColor(ptr);
+}
+#else
 extern inline function freeHsvColor(ptr:HsvColor):Void {
 #if hl
 	flight._hl._fn.Color.freeHsvColor(ptr);
@@ -374,6 +577,12 @@ extern inline function freeHsvColor(ptr:HsvColor):Void {
 	#error "flight.Color: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freeLinearColor(ptr:LinearColor):Void {
+	flight._js._fn.Color.freeLinearColor(ptr);
+}
+#else
 extern inline function freeLinearColor(ptr:LinearColor):Void {
 #if hl
 	flight._hl._fn.Color.freeLinearColor(ptr);
@@ -385,3 +594,4 @@ extern inline function freeLinearColor(ptr:LinearColor):Void {
 	#error "flight.Color: no backend for this target."
 #end
 }
+#end

@@ -22,6 +22,11 @@ typedef Timeline = flight._js.Timeline;
 
 #end
 
+#if (js && flight_esm)
+extern inline function createTimeline(obj:Null<TimelineOptions>):Dynamic {
+	return flight._js._fn.Timeline.createTimeline(obj);
+}
+#else
 extern inline function createTimeline(obj:TimelineOptions):Dynamic {
 #if hl
 	return flight._hl._fn.Timeline.createTimeline(obj);
@@ -33,6 +38,12 @@ extern inline function createTimeline(obj:TimelineOptions):Dynamic {
 	#error "flight.Timeline: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function createTimelineSource(obj:Null<TimelineSourceOptions>):TimelineSourceRef {
+	return flight._js._fn.Timeline.createTimelineSource(obj);
+}
+#else
 extern inline function createTimelineSource(obj:TimelineSourceOptions):TimelineSourceRef {
 #if hl
 	return flight._hl._fn.Timeline.createTimelineSource(obj);
@@ -44,6 +55,12 @@ extern inline function createTimelineSource(obj:TimelineSourceOptions):TimelineS
 	#error "flight.Timeline: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function addTimelineFrameScript(timeline:Dynamic, frame:TimelineFrameArg, script:FrameScript):Void {
+	flight._js._fn.Timeline.addTimelineFrameScript(timeline, frame, script);
+}
+#else
 extern inline function addTimelineFrameScript(timeline:Dynamic, frame:TimelineFrameArg, script:FrameScript):Void {
 #if hl
 	flight._hl._fn.Timeline.addTimelineFrameScript(timeline, frame, script);
@@ -55,6 +72,12 @@ extern inline function addTimelineFrameScript(timeline:Dynamic, frame:TimelineFr
 	#error "flight.Timeline: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function clearTimelineFrameScripts(timeline:Dynamic):Void {
+	flight._js._fn.Timeline.clearTimelineFrameScripts(timeline);
+}
+#else
 extern inline function clearTimelineFrameScripts(timeline:Dynamic):Void {
 #if hl
 	flight._hl._fn.Timeline.clearTimelineFrameScripts(timeline);
@@ -66,6 +89,12 @@ extern inline function clearTimelineFrameScripts(timeline:Dynamic):Void {
 	#error "flight.Timeline: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function disposeTimelineSignals(timeline:Dynamic):Void {
+	flight._js._fn.Timeline.disposeTimelineSignals(timeline);
+}
+#else
 extern inline function disposeTimelineSignals(timeline:Dynamic):Void {
 #if hl
 	flight._hl._fn.Timeline.disposeTimelineSignals(timeline);
@@ -77,6 +106,12 @@ extern inline function disposeTimelineSignals(timeline:Dynamic):Void {
 	#error "flight.Timeline: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function enableTimelineSignals(timeline:Dynamic):Dynamic {
+	return flight._js._fn.Timeline.enableTimelineSignals(timeline);
+}
+#else
 extern inline function enableTimelineSignals(timeline:Dynamic):Dynamic {
 #if hl
 	return flight._hl._fn.Timeline.enableTimelineSignals(timeline);
@@ -88,6 +123,12 @@ extern inline function enableTimelineSignals(timeline:Dynamic):Dynamic {
 	#error "flight.Timeline: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function findTimelineLabel(timeline:Dynamic, name:String):Null<TimelineLabel> {
+	return flight._js._fn.Timeline.findTimelineLabel(timeline, name);
+}
+#else
 extern inline function findTimelineLabel(timeline:Dynamic, name:String):TimelineLabel {
 #if hl
 	return flight._hl._fn.Timeline.findTimelineLabel(timeline, cast name);
@@ -99,6 +140,12 @@ extern inline function findTimelineLabel(timeline:Dynamic, name:String):Timeline
 	#error "flight.Timeline: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getTimelineCurrentLabel(timeline:Dynamic):Null<TimelineLabel> {
+	return flight._js._fn.Timeline.getTimelineCurrentLabel(timeline);
+}
+#else
 extern inline function getTimelineCurrentLabel(timeline:Dynamic):TimelineLabel {
 #if hl
 	return flight._hl._fn.Timeline.getTimelineCurrentLabel(timeline);
@@ -110,6 +157,12 @@ extern inline function getTimelineCurrentLabel(timeline:Dynamic):TimelineLabel {
 	#error "flight.Timeline: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getTimelineFrameScript(timeline:Dynamic, frame:TimelineFrameArg):Null<FrameScript> {
+	return flight._js._fn.Timeline.getTimelineFrameScript(timeline, frame);
+}
+#else
 extern inline function getTimelineFrameScript(timeline:Dynamic, frame:TimelineFrameArg):FrameScript {
 #if hl
 	return flight._hl._fn.Timeline.getTimelineFrameScript(timeline, frame);
@@ -121,6 +174,12 @@ extern inline function getTimelineFrameScript(timeline:Dynamic, frame:TimelineFr
 	#error "flight.Timeline: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getTimelineFrameScriptFrames(out:Dynamic, timeline:Dynamic):Void {
+	flight._js._fn.Timeline.getTimelineFrameScriptFrames(out, timeline);
+}
+#else
 extern inline function getTimelineFrameScriptFrames(out:Dynamic, timeline:Dynamic):Void {
 #if hl
 	flight._hl._fn.Timeline.getTimelineFrameScriptFrames(out, timeline);
@@ -132,6 +191,12 @@ extern inline function getTimelineFrameScriptFrames(out:Dynamic, timeline:Dynami
 	#error "flight.Timeline: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function gotoAndPlayTimeline(timeline:Dynamic, frame:TimelineFrameArg):Void {
+	flight._js._fn.Timeline.gotoAndPlayTimeline(timeline, frame);
+}
+#else
 extern inline function gotoAndPlayTimeline(timeline:Dynamic, frame:TimelineFrameArg):Void {
 #if hl
 	flight._hl._fn.Timeline.gotoAndPlayTimeline(timeline, frame);
@@ -143,6 +208,12 @@ extern inline function gotoAndPlayTimeline(timeline:Dynamic, frame:TimelineFrame
 	#error "flight.Timeline: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function gotoAndStopTimeline(timeline:Dynamic, frame:TimelineFrameArg):Void {
+	flight._js._fn.Timeline.gotoAndStopTimeline(timeline, frame);
+}
+#else
 extern inline function gotoAndStopTimeline(timeline:Dynamic, frame:TimelineFrameArg):Void {
 #if hl
 	flight._hl._fn.Timeline.gotoAndStopTimeline(timeline, frame);
@@ -154,6 +225,12 @@ extern inline function gotoAndStopTimeline(timeline:Dynamic, frame:TimelineFrame
 	#error "flight.Timeline: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function nextFrameTimeline(timeline:Dynamic):Void {
+	flight._js._fn.Timeline.nextFrameTimeline(timeline);
+}
+#else
 extern inline function nextFrameTimeline(timeline:Dynamic):Void {
 #if hl
 	flight._hl._fn.Timeline.nextFrameTimeline(timeline);
@@ -165,6 +242,12 @@ extern inline function nextFrameTimeline(timeline:Dynamic):Void {
 	#error "flight.Timeline: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function playTimeline(timeline:Dynamic):Void {
+	flight._js._fn.Timeline.playTimeline(timeline);
+}
+#else
 extern inline function playTimeline(timeline:Dynamic):Void {
 #if hl
 	flight._hl._fn.Timeline.playTimeline(timeline);
@@ -176,6 +259,12 @@ extern inline function playTimeline(timeline:Dynamic):Void {
 	#error "flight.Timeline: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function prevFrameTimeline(timeline:Dynamic):Void {
+	flight._js._fn.Timeline.prevFrameTimeline(timeline);
+}
+#else
 extern inline function prevFrameTimeline(timeline:Dynamic):Void {
 #if hl
 	flight._hl._fn.Timeline.prevFrameTimeline(timeline);
@@ -187,6 +276,12 @@ extern inline function prevFrameTimeline(timeline:Dynamic):Void {
 	#error "flight.Timeline: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function removeTimelineFrameScript(timeline:Dynamic, frame:TimelineFrameArg):Void {
+	flight._js._fn.Timeline.removeTimelineFrameScript(timeline, frame);
+}
+#else
 extern inline function removeTimelineFrameScript(timeline:Dynamic, frame:TimelineFrameArg):Void {
 #if hl
 	flight._hl._fn.Timeline.removeTimelineFrameScript(timeline, frame);
@@ -198,6 +293,12 @@ extern inline function removeTimelineFrameScript(timeline:Dynamic, frame:Timelin
 	#error "flight.Timeline: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function stopTimeline(timeline:Dynamic):Void {
+	flight._js._fn.Timeline.stopTimeline(timeline);
+}
+#else
 extern inline function stopTimeline(timeline:Dynamic):Void {
 #if hl
 	flight._hl._fn.Timeline.stopTimeline(timeline);
@@ -209,6 +310,12 @@ extern inline function stopTimeline(timeline:Dynamic):Void {
 	#error "flight.Timeline: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function updateTimeline(timeline:Dynamic, deltaTime:Float):Bool {
+	return flight._js._fn.Timeline.updateTimeline(timeline, deltaTime);
+}
+#else
 extern inline function updateTimeline(timeline:Dynamic, deltaTime:Float):Bool {
 #if hl
 	return flight._hl._fn.Timeline.updateTimeline(timeline, deltaTime);
@@ -220,3 +327,4 @@ extern inline function updateTimeline(timeline:Dynamic, deltaTime:Float):Bool {
 	#error "flight.Timeline: no backend for this target."
 #end
 }
+#end

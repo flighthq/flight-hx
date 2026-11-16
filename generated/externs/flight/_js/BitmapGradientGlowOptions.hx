@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract BitmapGradientGlowOptions(Dynamic) {}
+abstract BitmapGradientGlowOptions(Dynamic) {
+}

@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract AttachInputOptions(Dynamic) {}
+abstract AttachInputOptions(Dynamic) {
+}

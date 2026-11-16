@@ -1,5 +1,10 @@
 package flight;
 
+#if (js && flight_esm)
+extern inline function disableTextBidiGuards():Void {
+	flight._js._fn.Textbidi.disableTextBidiGuards();
+}
+#else
 extern inline function disableTextBidiGuards():Void {
 #if hl
 	flight._hl._fn.Textbidi.disableTextBidiGuards();
@@ -11,6 +16,12 @@ extern inline function disableTextBidiGuards():Void {
 	#error "flight.Textbidi: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function enableTextBidiGuards(logState:Dynamic, clock:Dynamic):Void {
+	flight._js._fn.Textbidi.enableTextBidiGuards(logState, clock);
+}
+#else
 extern inline function enableTextBidiGuards(logState:Dynamic, clockFn:Dynamic, clockCtx:Dynamic):Void {
 #if hl
 	flight._hl._fn.Textbidi.enableTextBidiGuards(logState, clockFn, clockCtx);
@@ -22,6 +33,12 @@ extern inline function enableTextBidiGuards(logState:Dynamic, clockFn:Dynamic, c
 	#error "flight.Textbidi: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function reorderBidiLine(levels:Dynamic, start:Int, end:Int, out:Dynamic):Void {
+	flight._js._fn.Textbidi.reorderBidiLine(levels, start, end, out);
+}
+#else
 extern inline function reorderBidiLine(levels:Dynamic, levelsLen:Int, start:Int, end:Int, out:Dynamic):Void {
 #if hl
 	flight._hl._fn.Textbidi.reorderBidiLine(levels, levelsLen, start, end, out);
@@ -33,3 +50,4 @@ extern inline function reorderBidiLine(levels:Dynamic, levelsLen:Int, start:Int,
 	#error "flight.Textbidi: no backend for this target."
 #end
 }
+#end

@@ -1,85 +1,37 @@
 package flight._js;
 
-@:jsRequire("flight")
-private extern class OrbitCameraController_Ffi {
-	@:native("flight_get_orbit_camera_controller_azimuth") static function get_azimuth(ptr:Dynamic):Float;
-	@:native("flight_set_orbit_camera_controller_azimuth") static function set_azimuth(ptr:Dynamic, value:Float):Float;
-	@:native("flight_get_orbit_camera_controller_distance") static function get_distance(ptr:Dynamic):Float;
-	@:native("flight_set_orbit_camera_controller_distance") static function set_distance(ptr:Dynamic, value:Float):Float;
-	@:native("flight_get_orbit_camera_controller_goal_azimuth") static function get_goalAzimuth(ptr:Dynamic):Float;
-	@:native("flight_set_orbit_camera_controller_goal_azimuth") static function set_goalAzimuth(ptr:Dynamic, value:Float):Float;
-	@:native("flight_get_orbit_camera_controller_goal_distance") static function get_goalDistance(ptr:Dynamic):Float;
-	@:native("flight_set_orbit_camera_controller_goal_distance") static function set_goalDistance(ptr:Dynamic, value:Float):Float;
-	@:native("flight_get_orbit_camera_controller_goal_polar") static function get_goalPolar(ptr:Dynamic):Float;
-	@:native("flight_set_orbit_camera_controller_goal_polar") static function set_goalPolar(ptr:Dynamic, value:Float):Float;
-	@:native("flight_get_orbit_camera_controller_max_distance") static function get_maxDistance(ptr:Dynamic):Float;
-	@:native("flight_set_orbit_camera_controller_max_distance") static function set_maxDistance(ptr:Dynamic, value:Float):Float;
-	@:native("flight_get_orbit_camera_controller_max_polar") static function get_maxPolar(ptr:Dynamic):Float;
-	@:native("flight_set_orbit_camera_controller_max_polar") static function set_maxPolar(ptr:Dynamic, value:Float):Float;
-	@:native("flight_get_orbit_camera_controller_min_distance") static function get_minDistance(ptr:Dynamic):Float;
-	@:native("flight_set_orbit_camera_controller_min_distance") static function set_minDistance(ptr:Dynamic, value:Float):Float;
-	@:native("flight_get_orbit_camera_controller_min_polar") static function get_minPolar(ptr:Dynamic):Float;
-	@:native("flight_set_orbit_camera_controller_min_polar") static function set_minPolar(ptr:Dynamic, value:Float):Float;
-	@:native("flight_get_orbit_camera_controller_polar") static function get_polar(ptr:Dynamic):Float;
-	@:native("flight_set_orbit_camera_controller_polar") static function set_polar(ptr:Dynamic, value:Float):Float;
-	@:native("flight_get_orbit_camera_controller_smooth_time") static function get_smoothTime(ptr:Dynamic):Float;
-	@:native("flight_set_orbit_camera_controller_smooth_time") static function set_smoothTime(ptr:Dynamic, value:Float):Float;
-}
-
 abstract OrbitCameraController(Dynamic) {
 	public var azimuth(get, set):Float;
-
-	inline function get_azimuth():Float return OrbitCameraController_Ffi.get_azimuth(this);
-
-	inline function set_azimuth(value:Float):Float return OrbitCameraController_Ffi.set_azimuth(this, value);
+	inline function get_azimuth():Float return untyped this.azimuth;
+	inline function set_azimuth(value:Float):Float return untyped this.azimuth = value;
 	public var distance(get, set):Float;
-
-	inline function get_distance():Float return OrbitCameraController_Ffi.get_distance(this);
-
-	inline function set_distance(value:Float):Float return OrbitCameraController_Ffi.set_distance(this, value);
+	inline function get_distance():Float return untyped this.distance;
+	inline function set_distance(value:Float):Float return untyped this.distance = value;
 	public var goalAzimuth(get, set):Float;
-
-	inline function get_goalAzimuth():Float return OrbitCameraController_Ffi.get_goalAzimuth(this);
-
-	inline function set_goalAzimuth(value:Float):Float return OrbitCameraController_Ffi.set_goalAzimuth(this, value);
+	inline function get_goalAzimuth():Float return untyped this.goalAzimuth;
+	inline function set_goalAzimuth(value:Float):Float return untyped this.goalAzimuth = value;
 	public var goalDistance(get, set):Float;
-
-	inline function get_goalDistance():Float return OrbitCameraController_Ffi.get_goalDistance(this);
-
-	inline function set_goalDistance(value:Float):Float return OrbitCameraController_Ffi.set_goalDistance(this, value);
+	inline function get_goalDistance():Float return untyped this.goalDistance;
+	inline function set_goalDistance(value:Float):Float return untyped this.goalDistance = value;
 	public var goalPolar(get, set):Float;
-
-	inline function get_goalPolar():Float return OrbitCameraController_Ffi.get_goalPolar(this);
-
-	inline function set_goalPolar(value:Float):Float return OrbitCameraController_Ffi.set_goalPolar(this, value);
+	inline function get_goalPolar():Float return untyped this.goalPolar;
+	inline function set_goalPolar(value:Float):Float return untyped this.goalPolar = value;
 	public var maxDistance(get, set):Float;
-
-	inline function get_maxDistance():Float return OrbitCameraController_Ffi.get_maxDistance(this);
-
-	inline function set_maxDistance(value:Float):Float return OrbitCameraController_Ffi.set_maxDistance(this, value);
+	inline function get_maxDistance():Float return untyped this.maxDistance;
+	inline function set_maxDistance(value:Float):Float return untyped this.maxDistance = value;
 	public var maxPolar(get, set):Float;
-
-	inline function get_maxPolar():Float return OrbitCameraController_Ffi.get_maxPolar(this);
-
-	inline function set_maxPolar(value:Float):Float return OrbitCameraController_Ffi.set_maxPolar(this, value);
+	inline function get_maxPolar():Float return untyped this.maxPolar;
+	inline function set_maxPolar(value:Float):Float return untyped this.maxPolar = value;
 	public var minDistance(get, set):Float;
-
-	inline function get_minDistance():Float return OrbitCameraController_Ffi.get_minDistance(this);
-
-	inline function set_minDistance(value:Float):Float return OrbitCameraController_Ffi.set_minDistance(this, value);
+	inline function get_minDistance():Float return untyped this.minDistance;
+	inline function set_minDistance(value:Float):Float return untyped this.minDistance = value;
 	public var minPolar(get, set):Float;
-
-	inline function get_minPolar():Float return OrbitCameraController_Ffi.get_minPolar(this);
-
-	inline function set_minPolar(value:Float):Float return OrbitCameraController_Ffi.set_minPolar(this, value);
+	inline function get_minPolar():Float return untyped this.minPolar;
+	inline function set_minPolar(value:Float):Float return untyped this.minPolar = value;
 	public var polar(get, set):Float;
-
-	inline function get_polar():Float return OrbitCameraController_Ffi.get_polar(this);
-
-	inline function set_polar(value:Float):Float return OrbitCameraController_Ffi.set_polar(this, value);
+	inline function get_polar():Float return untyped this.polar;
+	inline function set_polar(value:Float):Float return untyped this.polar = value;
 	public var smoothTime(get, set):Float;
-
-	inline function get_smoothTime():Float return OrbitCameraController_Ffi.get_smoothTime(this);
-
-	inline function set_smoothTime(value:Float):Float return OrbitCameraController_Ffi.set_smoothTime(this, value);
+	inline function get_smoothTime():Float return untyped this.smoothTime;
+	inline function set_smoothTime(value:Float):Float return untyped this.smoothTime = value;
 }

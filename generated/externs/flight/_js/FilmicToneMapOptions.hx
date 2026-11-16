@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract FilmicToneMapOptions(Dynamic) {}
+abstract FilmicToneMapOptions(Dynamic) {
+}

@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract MotionPathDirection(Dynamic) {}
+abstract MotionPathDirection(Dynamic) {
+}

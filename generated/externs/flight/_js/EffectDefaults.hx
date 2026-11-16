@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract EffectDefaults(Dynamic) {}
+abstract EffectDefaults(Dynamic) {
+}

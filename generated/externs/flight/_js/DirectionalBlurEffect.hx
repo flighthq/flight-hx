@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract DirectionalBlurEffect(Dynamic) {}
+abstract DirectionalBlurEffect(Dynamic) {
+}

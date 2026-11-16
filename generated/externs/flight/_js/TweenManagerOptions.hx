@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract TweenManagerOptions(Dynamic) {}
+abstract TweenManagerOptions(Dynamic) {
+}

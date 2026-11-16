@@ -1,7 +1,7 @@
 package flight._js._fn;
 
-@:jsRequire("flight")
+@:jsRequire("@flighthq/image-codec")
 extern class ImageCodec {
-	@:native("flight_detect_image_mime_type")
-	public static function detectImageMimeType(data:Dynamic, dataLen:Int):String;
+	@:native("detectImageMimeType")
+	public static function detectImageMimeType(data:Dynamic):Null<String>;
 }

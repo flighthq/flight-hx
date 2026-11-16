@@ -1,5 +1,10 @@
 package flight;
 
+#if (js && flight_esm)
+extern inline function createAwd2ParseState():Awd2ParseState {
+	return flight._js._fn.Scene3dFormats.createAwd2ParseState();
+}
+#else
 extern inline function createAwd2ParseState():Awd2ParseState {
 #if hl
 	return flight._hl._fn.Scene3dFormats.createAwd2ParseState();
@@ -11,6 +16,12 @@ extern inline function createAwd2ParseState():Awd2ParseState {
 	#error "flight.Scene3dFormats: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freeAwd2ParseState(ptr:Awd2ParseState):Void {
+	flight._js._fn.Scene3dFormats.freeAwd2ParseState(ptr);
+}
+#else
 extern inline function freeAwd2ParseState(ptr:Awd2ParseState):Void {
 #if hl
 	flight._hl._fn.Scene3dFormats.freeAwd2ParseState(ptr);
@@ -22,3 +33,4 @@ extern inline function freeAwd2ParseState(ptr:Awd2ParseState):Void {
 	#error "flight.Scene3dFormats: no backend for this target."
 #end
 }
+#end

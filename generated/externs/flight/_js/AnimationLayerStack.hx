@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract AnimationLayerStack(Dynamic) {}
+abstract AnimationLayerStack(Dynamic) {
+}

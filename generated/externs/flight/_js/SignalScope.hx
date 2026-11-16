@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract SignalScope(Dynamic) {}
+abstract SignalScope(Dynamic) {
+}

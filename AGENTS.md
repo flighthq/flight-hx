@@ -25,7 +25,9 @@ implementation backend or local C++ SDK adapters.
 - `tools/native/` builds/stages binaries and validates source identity/checksums.
   Never commit binaries or artifact manifests; package the ignored staged files.
 - `tools/esm/EsmGenerator.hx` turns upstream `@:jsRequire` metadata into static
-  ESM imports. Consumers supply the runtime module those externs import.
+  ESM imports. `buildWeb.mjs`/`bundle.mjs` restore bundling against real pinned
+  `@flighthq/*` TypeScript sources. JS signatures use logical objects/arrays/
+  callbacks/options; keep C ABI lowering out of that target.
 - `tools/package-haxelib.mjs` makes a deterministic consumer archive from an
   explicit allowlist. No old fallback or flight-cpp sources enter the package.
 - `tests/migration/` validates the consumer archive, generated type surface, ESM
@@ -51,7 +53,8 @@ Commit first, then run `npm run check`. It checks the dependency pin, the intake
 orchestration tests, regeneration drift, all copied HL/cpp/JS declarations, the
 extracted consumer archive, static ESM emission, producer regression tests,
 artifact validation, C ABI calls, and installed-ZIP hxcpp/HashLink/Lime runtime
-checks on Linux64. It stages dev binaries. Set up native test dependencies with
+checks on the current x64 desktop, plus real math/geometry ESM execution and DCE.
+It stages dev binaries. Set up native test dependencies with
 `npm run setup:native-tests` first. `npm run native:build` stages release binaries;
 `npm run package:haxelib` packages staged platforms into the consumer ZIP.
 
@@ -69,9 +72,13 @@ the pinned Flight revision. It is local reviewable upstream work, not a claim
 that these changes have landed in Flight. Linux64 smoke execution and full HL
 declaration loading do not certify every API or other platforms. macOS, Windows,
 ARM and iOS configuration requires validation on the relevant hosts/SDKs.
-JS externs import module `flight`, expecting `flight_*` functions including field
-accessors. They are not direct externs for the old `@flighthq/*` TS ESM exports.
-Do not substitute fixtures for a missing web runtime or claim it is proven.
+The second Rust producer patch binds JS directly to `@flighthq/*` using compiler
+naming. Real math/geometry execution and tree-shaking pass; this does not certify
+every SDK API or browser rendering. Never replace SDK execution with fixtures.
+CI runs installed-package cpp/HL/Lime on Linux, Intel macOS and Windows; Apple SDK
+jobs build/link iOS static archives without claiming execution. Desktop jobs
+regenerate their own native layouts before packaging. CI configuration is not
+evidence of a successful remote run; report actual local and CI results separately.
 
 Commit messages must be a single Conventional Commits line, with no body or
 Co-Authored-By trailer.

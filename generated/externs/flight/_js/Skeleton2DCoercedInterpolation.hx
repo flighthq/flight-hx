@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract Skeleton2DCoercedInterpolation(Dynamic) {}
+abstract Skeleton2DCoercedInterpolation(Dynamic) {
+}

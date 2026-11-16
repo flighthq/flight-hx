@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract TextureAtlasImportOptions(Dynamic) {}
+abstract TextureAtlasImportOptions(Dynamic) {
+}

@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract LogTimer(Dynamic) {}
+abstract LogTimer(Dynamic) {
+}

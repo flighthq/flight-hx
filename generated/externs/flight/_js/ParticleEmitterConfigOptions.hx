@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract ParticleEmitterConfigOptions(Dynamic) {}
+abstract ParticleEmitterConfigOptions(Dynamic) {
+}

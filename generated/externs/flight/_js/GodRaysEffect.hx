@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract GodRaysEffect(Dynamic) {}
+abstract GodRaysEffect(Dynamic) {
+}

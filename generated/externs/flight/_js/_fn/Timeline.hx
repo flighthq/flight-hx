@@ -1,41 +1,41 @@
 package flight._js._fn;
 
-@:jsRequire("flight")
+@:jsRequire("@flighthq/timeline")
 extern class Timeline {
-	@:native("flight_create_timeline")
-	public static function createTimeline(obj:flight._js.TimelineOptions):Dynamic;
-	@:native("flight_create_timeline_source")
-	public static function createTimelineSource(obj:flight._js.TimelineSourceOptions):flight._js.TimelineSourceRef;
-	@:native("flight_add_timeline_frame_script")
+	@:native("createTimeline")
+	public static function createTimeline(obj:Null<flight._js.TimelineOptions>):Dynamic;
+	@:native("createTimelineSource")
+	public static function createTimelineSource(obj:Null<flight._js.TimelineSourceOptions>):flight._js.TimelineSourceRef;
+	@:native("addTimelineFrameScript")
 	public static function addTimelineFrameScript(timeline:Dynamic, frame:flight._js.TimelineFrameArg, script:flight._js.FrameScript):Void;
-	@:native("flight_clear_timeline_frame_scripts")
+	@:native("clearTimelineFrameScripts")
 	public static function clearTimelineFrameScripts(timeline:Dynamic):Void;
-	@:native("flight_dispose_timeline_signals")
+	@:native("disposeTimelineSignals")
 	public static function disposeTimelineSignals(timeline:Dynamic):Void;
-	@:native("flight_enable_timeline_signals")
+	@:native("enableTimelineSignals")
 	public static function enableTimelineSignals(timeline:Dynamic):Dynamic;
-	@:native("flight_find_timeline_label")
-	public static function findTimelineLabel(timeline:Dynamic, name:String):Dynamic;
-	@:native("flight_get_timeline_current_label")
-	public static function getTimelineCurrentLabel(timeline:Dynamic):Dynamic;
-	@:native("flight_get_timeline_frame_script")
-	public static function getTimelineFrameScript(timeline:Dynamic, frame:flight._js.TimelineFrameArg):Dynamic;
-	@:native("flight_get_timeline_frame_script_frames")
+	@:native("findTimelineLabel")
+	public static function findTimelineLabel(timeline:Dynamic, name:String):Null<flight._js.TimelineLabel>;
+	@:native("getTimelineCurrentLabel")
+	public static function getTimelineCurrentLabel(timeline:Dynamic):Null<flight._js.TimelineLabel>;
+	@:native("getTimelineFrameScript")
+	public static function getTimelineFrameScript(timeline:Dynamic, frame:flight._js.TimelineFrameArg):Null<flight._js.FrameScript>;
+	@:native("getTimelineFrameScriptFrames")
 	public static function getTimelineFrameScriptFrames(out:Dynamic, timeline:Dynamic):Void;
-	@:native("flight_goto_and_play_timeline")
+	@:native("gotoAndPlayTimeline")
 	public static function gotoAndPlayTimeline(timeline:Dynamic, frame:flight._js.TimelineFrameArg):Void;
-	@:native("flight_goto_and_stop_timeline")
+	@:native("gotoAndStopTimeline")
 	public static function gotoAndStopTimeline(timeline:Dynamic, frame:flight._js.TimelineFrameArg):Void;
-	@:native("flight_next_frame_timeline")
+	@:native("nextFrameTimeline")
 	public static function nextFrameTimeline(timeline:Dynamic):Void;
-	@:native("flight_play_timeline")
+	@:native("playTimeline")
 	public static function playTimeline(timeline:Dynamic):Void;
-	@:native("flight_prev_frame_timeline")
+	@:native("prevFrameTimeline")
 	public static function prevFrameTimeline(timeline:Dynamic):Void;
-	@:native("flight_remove_timeline_frame_script")
+	@:native("removeTimelineFrameScript")
 	public static function removeTimelineFrameScript(timeline:Dynamic, frame:flight._js.TimelineFrameArg):Void;
-	@:native("flight_stop_timeline")
+	@:native("stopTimeline")
 	public static function stopTimeline(timeline:Dynamic):Void;
-	@:native("flight_update_timeline")
+	@:native("updateTimeline")
 	public static function updateTimeline(timeline:Dynamic, deltaTime:Float):Bool;
 }

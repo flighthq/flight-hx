@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract HasMaterialOptions(Dynamic) {}
+abstract HasMaterialOptions(Dynamic) {
+}

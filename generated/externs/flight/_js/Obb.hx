@@ -1,81 +1,36 @@
 package flight._js;
 
-@:jsRequire("flight")
-private extern class Obb_Ffi {
-	@:native("flight_get_obb_center_x") static function get_centerX(ptr:Dynamic):Float;
-	@:native("flight_set_obb_center_x") static function set_centerX(ptr:Dynamic, value:Float):Float;
-	@:native("flight_get_obb_center_y") static function get_centerY(ptr:Dynamic):Float;
-	@:native("flight_set_obb_center_y") static function set_centerY(ptr:Dynamic, value:Float):Float;
-	@:native("flight_get_obb_center_z") static function get_centerZ(ptr:Dynamic):Float;
-	@:native("flight_set_obb_center_z") static function set_centerZ(ptr:Dynamic, value:Float):Float;
-	@:native("flight_get_obb_half_extent_x") static function get_halfExtentX(ptr:Dynamic):Float;
-	@:native("flight_set_obb_half_extent_x") static function set_halfExtentX(ptr:Dynamic, value:Float):Float;
-	@:native("flight_get_obb_half_extent_y") static function get_halfExtentY(ptr:Dynamic):Float;
-	@:native("flight_set_obb_half_extent_y") static function set_halfExtentY(ptr:Dynamic, value:Float):Float;
-	@:native("flight_get_obb_half_extent_z") static function get_halfExtentZ(ptr:Dynamic):Float;
-	@:native("flight_set_obb_half_extent_z") static function set_halfExtentZ(ptr:Dynamic, value:Float):Float;
-	@:native("flight_get_obb_orientation_x") static function get_orientationX(ptr:Dynamic):Float;
-	@:native("flight_set_obb_orientation_x") static function set_orientationX(ptr:Dynamic, value:Float):Float;
-	@:native("flight_get_obb_orientation_y") static function get_orientationY(ptr:Dynamic):Float;
-	@:native("flight_set_obb_orientation_y") static function set_orientationY(ptr:Dynamic, value:Float):Float;
-	@:native("flight_get_obb_orientation_z") static function get_orientationZ(ptr:Dynamic):Float;
-	@:native("flight_set_obb_orientation_z") static function set_orientationZ(ptr:Dynamic, value:Float):Float;
-	@:native("flight_get_obb_orientation_w") static function get_orientationW(ptr:Dynamic):Float;
-	@:native("flight_set_obb_orientation_w") static function set_orientationW(ptr:Dynamic, value:Float):Float;
-}
-
 abstract Obb(Dynamic) {
 	public var centerX(get, set):Float;
-
-	inline function get_centerX():Float return Obb_Ffi.get_centerX(this);
-
-	inline function set_centerX(value:Float):Float return Obb_Ffi.set_centerX(this, value);
+	inline function get_centerX():Float return untyped this.centerX;
+	inline function set_centerX(value:Float):Float return untyped this.centerX = value;
 	public var centerY(get, set):Float;
-
-	inline function get_centerY():Float return Obb_Ffi.get_centerY(this);
-
-	inline function set_centerY(value:Float):Float return Obb_Ffi.set_centerY(this, value);
+	inline function get_centerY():Float return untyped this.centerY;
+	inline function set_centerY(value:Float):Float return untyped this.centerY = value;
 	public var centerZ(get, set):Float;
-
-	inline function get_centerZ():Float return Obb_Ffi.get_centerZ(this);
-
-	inline function set_centerZ(value:Float):Float return Obb_Ffi.set_centerZ(this, value);
+	inline function get_centerZ():Float return untyped this.centerZ;
+	inline function set_centerZ(value:Float):Float return untyped this.centerZ = value;
 	public var halfExtentX(get, set):Float;
-
-	inline function get_halfExtentX():Float return Obb_Ffi.get_halfExtentX(this);
-
-	inline function set_halfExtentX(value:Float):Float return Obb_Ffi.set_halfExtentX(this, value);
+	inline function get_halfExtentX():Float return untyped this.halfExtentX;
+	inline function set_halfExtentX(value:Float):Float return untyped this.halfExtentX = value;
 	public var halfExtentY(get, set):Float;
-
-	inline function get_halfExtentY():Float return Obb_Ffi.get_halfExtentY(this);
-
-	inline function set_halfExtentY(value:Float):Float return Obb_Ffi.set_halfExtentY(this, value);
+	inline function get_halfExtentY():Float return untyped this.halfExtentY;
+	inline function set_halfExtentY(value:Float):Float return untyped this.halfExtentY = value;
 	public var halfExtentZ(get, set):Float;
-
-	inline function get_halfExtentZ():Float return Obb_Ffi.get_halfExtentZ(this);
-
-	inline function set_halfExtentZ(value:Float):Float return Obb_Ffi.set_halfExtentZ(this, value);
+	inline function get_halfExtentZ():Float return untyped this.halfExtentZ;
+	inline function set_halfExtentZ(value:Float):Float return untyped this.halfExtentZ = value;
 	public var orientationX(get, set):Float;
-
-	inline function get_orientationX():Float return Obb_Ffi.get_orientationX(this);
-
-	inline function set_orientationX(value:Float):Float return Obb_Ffi.set_orientationX(this, value);
+	inline function get_orientationX():Float return untyped this.orientationX;
+	inline function set_orientationX(value:Float):Float return untyped this.orientationX = value;
 	public var orientationY(get, set):Float;
-
-	inline function get_orientationY():Float return Obb_Ffi.get_orientationY(this);
-
-	inline function set_orientationY(value:Float):Float return Obb_Ffi.set_orientationY(this, value);
+	inline function get_orientationY():Float return untyped this.orientationY;
+	inline function set_orientationY(value:Float):Float return untyped this.orientationY = value;
 	public var orientationZ(get, set):Float;
-
-	inline function get_orientationZ():Float return Obb_Ffi.get_orientationZ(this);
-
-	inline function set_orientationZ(value:Float):Float return Obb_Ffi.set_orientationZ(this, value);
+	inline function get_orientationZ():Float return untyped this.orientationZ;
+	inline function set_orientationZ(value:Float):Float return untyped this.orientationZ = value;
 	public var orientationW(get, set):Float;
-
-	inline function get_orientationW():Float return Obb_Ffi.get_orientationW(this);
-
-	inline function set_orientationW(value:Float):Float return Obb_Ffi.set_orientationW(this, value);
-
+	inline function get_orientationW():Float return untyped this.orientationW;
+	inline function set_orientationW(value:Float):Float return untyped this.orientationW = value;
 	static inline public function create(centerX:Float, centerY:Float, centerZ:Float, halfExtentX:Float, halfExtentY:Float, halfExtentZ:Float, orientationX:Float, orientationY:Float, orientationZ:Float, orientationW:Float):flight._js.Obb {
 		return flight._js._fn.Geometry.createObb(centerX, centerY, centerZ, halfExtentX, halfExtentY, halfExtentZ, orientationX, orientationY, orientationZ, orientationW);
 	}

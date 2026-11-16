@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract BitmapDisplacementMapOptions(Dynamic) {}
+abstract BitmapDisplacementMapOptions(Dynamic) {
+}

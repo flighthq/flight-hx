@@ -1,32 +1,15 @@
 package flight._js;
 
-@:jsRequire("flight")
-private extern class Vector3_Ffi {
-	@:native("flight_get_vector3_x") static function get_x(ptr:Dynamic):Float;
-	@:native("flight_set_vector3_x") static function set_x(ptr:Dynamic, value:Float):Float;
-	@:native("flight_get_vector3_y") static function get_y(ptr:Dynamic):Float;
-	@:native("flight_set_vector3_y") static function set_y(ptr:Dynamic, value:Float):Float;
-	@:native("flight_get_vector3_z") static function get_z(ptr:Dynamic):Float;
-	@:native("flight_set_vector3_z") static function set_z(ptr:Dynamic, value:Float):Float;
-}
-
 abstract Vector3(Dynamic) {
 	public var x(get, set):Float;
-
-	inline function get_x():Float return Vector3_Ffi.get_x(this);
-
-	inline function set_x(value:Float):Float return Vector3_Ffi.set_x(this, value);
+	inline function get_x():Float return untyped this.x;
+	inline function set_x(value:Float):Float return untyped this.x = value;
 	public var y(get, set):Float;
-
-	inline function get_y():Float return Vector3_Ffi.get_y(this);
-
-	inline function set_y(value:Float):Float return Vector3_Ffi.set_y(this, value);
+	inline function get_y():Float return untyped this.y;
+	inline function set_y(value:Float):Float return untyped this.y = value;
 	public var z(get, set):Float;
-
-	inline function get_z():Float return Vector3_Ffi.get_z(this);
-
-	inline function set_z(value:Float):Float return Vector3_Ffi.set_z(this, value);
-
+	inline function get_z():Float return untyped this.z;
+	inline function set_z(value:Float):Float return untyped this.z = value;
 	inline public function copyMatrixColumnTo(column:Int, source:flight._js.Matrix):Void {
 		flight._js._fn.Geometry.copyMatrixColumnToVector3(cast this, column, source);
 	}
@@ -69,7 +52,7 @@ abstract Vector3(Dynamic) {
 	inline public function divide(source:flight._js.Vector3, divisor:flight._js.Vector3):Void {
 		flight._js._fn.Geometry.divideVector3(cast this, source, divisor);
 	}
-	inline public function equals(b:flight._js.Vector3):Bool {
+	inline public function equals(b:Null<flight._js.Vector3>):Bool {
 		return flight._js._fn.Geometry.equalsVector3(cast this, b);
 	}
 	inline public function getAngleBetween(b:flight._js.Vector3):Float {
@@ -129,8 +112,8 @@ abstract Vector3(Dynamic) {
 	inline public function set(x:Float, y:Float, z:Float):Void {
 		flight._js._fn.Geometry.setVector3(cast this, x, y, z);
 	}
-	inline public function setFromFloat32Array(offset:Int, source:Dynamic, sourceLen:Int):Void {
-		flight._js._fn.Geometry.setVector3FromFloat32Array(cast this, offset, source, sourceLen);
+	inline public function setFromFloat32Array(offset:Int, source:Dynamic):Void {
+		flight._js._fn.Geometry.setVector3FromFloat32Array(cast this, offset, source);
 	}
 	inline public function setFromSpherical(radius:Float, theta:Float, phi:Float):Void {
 		flight._js._fn.Geometry.setVector3FromSpherical(cast this, radius, theta, phi);
@@ -144,8 +127,8 @@ abstract Vector3(Dynamic) {
 	inline public function transformByMatrix3(source:flight._js.Vector3, matrix:flight._js.Matrix3):Void {
 		flight._js._fn.Geometry.transformVector3ByMatrix3(cast this, source, matrix);
 	}
-	inline public function writeToFloat32Array(out:Dynamic, outLen:Int, offset:Int):Void {
-		flight._js._fn.Geometry.writeVector3ToFloat32Array(out, outLen, offset, cast this);
+	inline public function writeToFloat32Array(out:Dynamic, offset:Int):Void {
+		flight._js._fn.Geometry.writeVector3ToFloat32Array(out, offset, cast this);
 	}
 	inline public function release():Void {
 		flight._js._fn.Geometry.releaseVector3(cast this);

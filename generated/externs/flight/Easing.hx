@@ -1,5 +1,10 @@
 package flight;
 
+#if (js && flight_esm)
+extern inline function easeInBack(t:Float):Float {
+	return flight._js._fn.Easing.easeInBack(t);
+}
+#else
 extern inline function easeInBack(t:Float):Float {
 #if hl
 	return flight._hl._fn.Easing.easeInBack(t);
@@ -11,6 +16,12 @@ extern inline function easeInBack(t:Float):Float {
 	#error "flight.Easing: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function easeInOutBack(t:Float):Float {
+	return flight._js._fn.Easing.easeInOutBack(t);
+}
+#else
 extern inline function easeInOutBack(t:Float):Float {
 #if hl
 	return flight._hl._fn.Easing.easeInOutBack(t);
@@ -22,6 +33,12 @@ extern inline function easeInOutBack(t:Float):Float {
 	#error "flight.Easing: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function easeOutBack(t:Float):Float {
+	return flight._js._fn.Easing.easeOutBack(t);
+}
+#else
 extern inline function easeOutBack(t:Float):Float {
 #if hl
 	return flight._hl._fn.Easing.easeOutBack(t);
@@ -33,6 +50,12 @@ extern inline function easeOutBack(t:Float):Float {
 	#error "flight.Easing: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function easeInBounce(t:Float):Float {
+	return flight._js._fn.Easing.easeInBounce(t);
+}
+#else
 extern inline function easeInBounce(t:Float):Float {
 #if hl
 	return flight._hl._fn.Easing.easeInBounce(t);
@@ -44,6 +67,12 @@ extern inline function easeInBounce(t:Float):Float {
 	#error "flight.Easing: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function easeInOutBounce(t:Float):Float {
+	return flight._js._fn.Easing.easeInOutBounce(t);
+}
+#else
 extern inline function easeInOutBounce(t:Float):Float {
 #if hl
 	return flight._hl._fn.Easing.easeInOutBounce(t);
@@ -55,6 +84,12 @@ extern inline function easeInOutBounce(t:Float):Float {
 	#error "flight.Easing: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function easeOutBounce(t:Float):Float {
+	return flight._js._fn.Easing.easeOutBounce(t);
+}
+#else
 extern inline function easeOutBounce(t:Float):Float {
 #if hl
 	return flight._hl._fn.Easing.easeOutBounce(t);
@@ -66,6 +101,12 @@ extern inline function easeOutBounce(t:Float):Float {
 	#error "flight.Easing: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function easeInCircular(t:Float):Float {
+	return flight._js._fn.Easing.easeInCircular(t);
+}
+#else
 extern inline function easeInCircular(t:Float):Float {
 #if hl
 	return flight._hl._fn.Easing.easeInCircular(t);
@@ -77,6 +118,12 @@ extern inline function easeInCircular(t:Float):Float {
 	#error "flight.Easing: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function easeInOutCircular(t:Float):Float {
+	return flight._js._fn.Easing.easeInOutCircular(t);
+}
+#else
 extern inline function easeInOutCircular(t:Float):Float {
 #if hl
 	return flight._hl._fn.Easing.easeInOutCircular(t);
@@ -88,6 +135,12 @@ extern inline function easeInOutCircular(t:Float):Float {
 	#error "flight.Easing: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function easeOutCircular(t:Float):Float {
+	return flight._js._fn.Easing.easeOutCircular(t);
+}
+#else
 extern inline function easeOutCircular(t:Float):Float {
 #if hl
 	return flight._hl._fn.Easing.easeOutCircular(t);
@@ -99,6 +152,12 @@ extern inline function easeOutCircular(t:Float):Float {
 	#error "flight.Easing: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function easeClamp(ease:EasingFunction):EasingFunction {
+	return flight._js._fn.Easing.easeClamp(ease);
+}
+#else
 extern inline function easeClamp(ease:EasingFunction):EasingFunction {
 #if hl
 	return flight._hl._fn.Easing.easeClamp(ease);
@@ -110,6 +169,12 @@ extern inline function easeClamp(ease:EasingFunction):EasingFunction {
 	#error "flight.Easing: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function easeClampOutput(ease:EasingFunction, min:Float, max:Float):EasingFunction {
+	return flight._js._fn.Easing.easeClampOutput(ease, min, max);
+}
+#else
 extern inline function easeClampOutput(ease:EasingFunction, min:Float, max:Float):EasingFunction {
 #if hl
 	return flight._hl._fn.Easing.easeClampOutput(ease, min, max);
@@ -121,6 +186,12 @@ extern inline function easeClampOutput(ease:EasingFunction, min:Float, max:Float
 	#error "flight.Easing: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function easeInvert(ease:EasingFunction):EasingFunction {
+	return flight._js._fn.Easing.easeInvert(ease);
+}
+#else
 extern inline function easeInvert(ease:EasingFunction):EasingFunction {
 #if hl
 	return flight._hl._fn.Easing.easeInvert(ease);
@@ -132,6 +203,12 @@ extern inline function easeInvert(ease:EasingFunction):EasingFunction {
 	#error "flight.Easing: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function easeMirror(easeIn:EasingFunction):EasingFunction {
+	return flight._js._fn.Easing.easeMirror(easeIn);
+}
+#else
 extern inline function easeMirror(easeIn:EasingFunction):EasingFunction {
 #if hl
 	return flight._hl._fn.Easing.easeMirror(easeIn);
@@ -143,6 +220,12 @@ extern inline function easeMirror(easeIn:EasingFunction):EasingFunction {
 	#error "flight.Easing: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function easeReverse(easeIn:EasingFunction):EasingFunction {
+	return flight._js._fn.Easing.easeReverse(easeIn);
+}
+#else
 extern inline function easeReverse(easeIn:EasingFunction):EasingFunction {
 #if hl
 	return flight._hl._fn.Easing.easeReverse(easeIn);
@@ -154,6 +237,12 @@ extern inline function easeReverse(easeIn:EasingFunction):EasingFunction {
 	#error "flight.Easing: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function easeScaleOutput(ease:EasingFunction, fromValue:Float, toValue:Float):EasingFunction {
+	return flight._js._fn.Easing.easeScaleOutput(ease, fromValue, toValue);
+}
+#else
 extern inline function easeScaleOutput(ease:EasingFunction, fromValue:Float, toValue:Float):EasingFunction {
 #if hl
 	return flight._hl._fn.Easing.easeScaleOutput(ease, fromValue, toValue);
@@ -165,6 +254,12 @@ extern inline function easeScaleOutput(ease:EasingFunction, fromValue:Float, toV
 	#error "flight.Easing: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function easeInCubic(t:Float):Float {
+	return flight._js._fn.Easing.easeInCubic(t);
+}
+#else
 extern inline function easeInCubic(t:Float):Float {
 #if hl
 	return flight._hl._fn.Easing.easeInCubic(t);
@@ -176,6 +271,12 @@ extern inline function easeInCubic(t:Float):Float {
 	#error "flight.Easing: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function easeInOutCubic(t:Float):Float {
+	return flight._js._fn.Easing.easeInOutCubic(t);
+}
+#else
 extern inline function easeInOutCubic(t:Float):Float {
 #if hl
 	return flight._hl._fn.Easing.easeInOutCubic(t);
@@ -187,6 +288,12 @@ extern inline function easeInOutCubic(t:Float):Float {
 	#error "flight.Easing: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function easeOutCubic(t:Float):Float {
+	return flight._js._fn.Easing.easeOutCubic(t);
+}
+#else
 extern inline function easeOutCubic(t:Float):Float {
 #if hl
 	return flight._hl._fn.Easing.easeOutCubic(t);
@@ -198,6 +305,12 @@ extern inline function easeOutCubic(t:Float):Float {
 	#error "flight.Easing: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function easeCubicBezier(x1:Float, y1:Float, x2:Float, y2:Float):EasingFunction {
+	return flight._js._fn.Easing.easeCubicBezier(x1, y1, x2, y2);
+}
+#else
 extern inline function easeCubicBezier(x1:Float, y1:Float, x2:Float, y2:Float):EasingFunction {
 #if hl
 	return flight._hl._fn.Easing.easeCubicBezier(x1, y1, x2, y2);
@@ -209,6 +322,12 @@ extern inline function easeCubicBezier(x1:Float, y1:Float, x2:Float, y2:Float):E
 	#error "flight.Easing: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function easeInDampedSine(amplitude:Float, period:Float):EasingFunction {
+	return flight._js._fn.Easing.easeInDampedSine(amplitude, period);
+}
+#else
 extern inline function easeInDampedSine(amplitude:Float, period:Float):EasingFunction {
 #if hl
 	return flight._hl._fn.Easing.easeInDampedSine(amplitude, period);
@@ -220,6 +339,12 @@ extern inline function easeInDampedSine(amplitude:Float, period:Float):EasingFun
 	#error "flight.Easing: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function easeInOutDampedSine(amplitude:Float, period:Float):EasingFunction {
+	return flight._js._fn.Easing.easeInOutDampedSine(amplitude, period);
+}
+#else
 extern inline function easeInOutDampedSine(amplitude:Float, period:Float):EasingFunction {
 #if hl
 	return flight._hl._fn.Easing.easeInOutDampedSine(amplitude, period);
@@ -231,6 +356,12 @@ extern inline function easeInOutDampedSine(amplitude:Float, period:Float):Easing
 	#error "flight.Easing: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function easeOutDampedSine(amplitude:Float, period:Float):EasingFunction {
+	return flight._js._fn.Easing.easeOutDampedSine(amplitude, period);
+}
+#else
 extern inline function easeOutDampedSine(amplitude:Float, period:Float):EasingFunction {
 #if hl
 	return flight._hl._fn.Easing.easeOutDampedSine(amplitude, period);
@@ -242,6 +373,12 @@ extern inline function easeOutDampedSine(amplitude:Float, period:Float):EasingFu
 	#error "flight.Easing: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function easeInElastic(t:Float):Float {
+	return flight._js._fn.Easing.easeInElastic(t);
+}
+#else
 extern inline function easeInElastic(t:Float):Float {
 #if hl
 	return flight._hl._fn.Easing.easeInElastic(t);
@@ -253,6 +390,12 @@ extern inline function easeInElastic(t:Float):Float {
 	#error "flight.Easing: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function easeInOutElastic(t:Float):Float {
+	return flight._js._fn.Easing.easeInOutElastic(t);
+}
+#else
 extern inline function easeInOutElastic(t:Float):Float {
 #if hl
 	return flight._hl._fn.Easing.easeInOutElastic(t);
@@ -264,6 +407,12 @@ extern inline function easeInOutElastic(t:Float):Float {
 	#error "flight.Easing: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function easeOutElastic(t:Float):Float {
+	return flight._js._fn.Easing.easeOutElastic(t);
+}
+#else
 extern inline function easeOutElastic(t:Float):Float {
 #if hl
 	return flight._hl._fn.Easing.easeOutElastic(t);
@@ -275,6 +424,12 @@ extern inline function easeOutElastic(t:Float):Float {
 	#error "flight.Easing: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function easeInExponential(t:Float):Float {
+	return flight._js._fn.Easing.easeInExponential(t);
+}
+#else
 extern inline function easeInExponential(t:Float):Float {
 #if hl
 	return flight._hl._fn.Easing.easeInExponential(t);
@@ -286,6 +441,12 @@ extern inline function easeInExponential(t:Float):Float {
 	#error "flight.Easing: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function easeInOutExponential(t:Float):Float {
+	return flight._js._fn.Easing.easeInOutExponential(t);
+}
+#else
 extern inline function easeInOutExponential(t:Float):Float {
 #if hl
 	return flight._hl._fn.Easing.easeInOutExponential(t);
@@ -297,6 +458,12 @@ extern inline function easeInOutExponential(t:Float):Float {
 	#error "flight.Easing: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function easeOutExponential(t:Float):Float {
+	return flight._js._fn.Easing.easeOutExponential(t);
+}
+#else
 extern inline function easeOutExponential(t:Float):Float {
 #if hl
 	return flight._hl._fn.Easing.easeOutExponential(t);
@@ -308,6 +475,12 @@ extern inline function easeOutExponential(t:Float):Float {
 	#error "flight.Easing: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function easeLinear(t:Float):Float {
+	return flight._js._fn.Easing.easeLinear(t);
+}
+#else
 extern inline function easeLinear(t:Float):Float {
 #if hl
 	return flight._hl._fn.Easing.easeLinear(t);
@@ -319,6 +492,12 @@ extern inline function easeLinear(t:Float):Float {
 	#error "flight.Easing: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function easePiecewise(segments:Dynamic):EasingFunction {
+	return flight._js._fn.Easing.easePiecewise(segments);
+}
+#else
 extern inline function easePiecewise(segments:Dynamic, segmentsLen:Int):EasingFunction {
 #if hl
 	return flight._hl._fn.Easing.easePiecewise(segments, segmentsLen);
@@ -330,6 +509,12 @@ extern inline function easePiecewise(segments:Dynamic, segmentsLen:Int):EasingFu
 	#error "flight.Easing: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function easeInOutPower(exponent:Float):EasingFunction {
+	return flight._js._fn.Easing.easeInOutPower(exponent);
+}
+#else
 extern inline function easeInOutPower(exponent:Float):EasingFunction {
 #if hl
 	return flight._hl._fn.Easing.easeInOutPower(exponent);
@@ -341,6 +526,12 @@ extern inline function easeInOutPower(exponent:Float):EasingFunction {
 	#error "flight.Easing: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function easeInPower(exponent:Float):EasingFunction {
+	return flight._js._fn.Easing.easeInPower(exponent);
+}
+#else
 extern inline function easeInPower(exponent:Float):EasingFunction {
 #if hl
 	return flight._hl._fn.Easing.easeInPower(exponent);
@@ -352,6 +543,12 @@ extern inline function easeInPower(exponent:Float):EasingFunction {
 	#error "flight.Easing: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function easeOutPower(exponent:Float):EasingFunction {
+	return flight._js._fn.Easing.easeOutPower(exponent);
+}
+#else
 extern inline function easeOutPower(exponent:Float):EasingFunction {
 #if hl
 	return flight._hl._fn.Easing.easeOutPower(exponent);
@@ -363,6 +560,12 @@ extern inline function easeOutPower(exponent:Float):EasingFunction {
 	#error "flight.Easing: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function easeInOutQuadratic(t:Float):Float {
+	return flight._js._fn.Easing.easeInOutQuadratic(t);
+}
+#else
 extern inline function easeInOutQuadratic(t:Float):Float {
 #if hl
 	return flight._hl._fn.Easing.easeInOutQuadratic(t);
@@ -374,6 +577,12 @@ extern inline function easeInOutQuadratic(t:Float):Float {
 	#error "flight.Easing: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function easeInQuadratic(t:Float):Float {
+	return flight._js._fn.Easing.easeInQuadratic(t);
+}
+#else
 extern inline function easeInQuadratic(t:Float):Float {
 #if hl
 	return flight._hl._fn.Easing.easeInQuadratic(t);
@@ -385,6 +594,12 @@ extern inline function easeInQuadratic(t:Float):Float {
 	#error "flight.Easing: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function easeOutQuadratic(t:Float):Float {
+	return flight._js._fn.Easing.easeOutQuadratic(t);
+}
+#else
 extern inline function easeOutQuadratic(t:Float):Float {
 #if hl
 	return flight._hl._fn.Easing.easeOutQuadratic(t);
@@ -396,6 +611,12 @@ extern inline function easeOutQuadratic(t:Float):Float {
 	#error "flight.Easing: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function easeInOutQuartic(t:Float):Float {
+	return flight._js._fn.Easing.easeInOutQuartic(t);
+}
+#else
 extern inline function easeInOutQuartic(t:Float):Float {
 #if hl
 	return flight._hl._fn.Easing.easeInOutQuartic(t);
@@ -407,6 +628,12 @@ extern inline function easeInOutQuartic(t:Float):Float {
 	#error "flight.Easing: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function easeInQuartic(t:Float):Float {
+	return flight._js._fn.Easing.easeInQuartic(t);
+}
+#else
 extern inline function easeInQuartic(t:Float):Float {
 #if hl
 	return flight._hl._fn.Easing.easeInQuartic(t);
@@ -418,6 +645,12 @@ extern inline function easeInQuartic(t:Float):Float {
 	#error "flight.Easing: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function easeOutQuartic(t:Float):Float {
+	return flight._js._fn.Easing.easeOutQuartic(t);
+}
+#else
 extern inline function easeOutQuartic(t:Float):Float {
 #if hl
 	return flight._hl._fn.Easing.easeOutQuartic(t);
@@ -429,6 +662,12 @@ extern inline function easeOutQuartic(t:Float):Float {
 	#error "flight.Easing: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function easeInOutQuintic(t:Float):Float {
+	return flight._js._fn.Easing.easeInOutQuintic(t);
+}
+#else
 extern inline function easeInOutQuintic(t:Float):Float {
 #if hl
 	return flight._hl._fn.Easing.easeInOutQuintic(t);
@@ -440,6 +679,12 @@ extern inline function easeInOutQuintic(t:Float):Float {
 	#error "flight.Easing: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function easeInQuintic(t:Float):Float {
+	return flight._js._fn.Easing.easeInQuintic(t);
+}
+#else
 extern inline function easeInQuintic(t:Float):Float {
 #if hl
 	return flight._hl._fn.Easing.easeInQuintic(t);
@@ -451,6 +696,12 @@ extern inline function easeInQuintic(t:Float):Float {
 	#error "flight.Easing: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function easeOutQuintic(t:Float):Float {
+	return flight._js._fn.Easing.easeOutQuintic(t);
+}
+#else
 extern inline function easeOutQuintic(t:Float):Float {
 #if hl
 	return flight._hl._fn.Easing.easeOutQuintic(t);
@@ -462,6 +713,12 @@ extern inline function easeOutQuintic(t:Float):Float {
 	#error "flight.Easing: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function easeInOutSine(t:Float):Float {
+	return flight._js._fn.Easing.easeInOutSine(t);
+}
+#else
 extern inline function easeInOutSine(t:Float):Float {
 #if hl
 	return flight._hl._fn.Easing.easeInOutSine(t);
@@ -473,6 +730,12 @@ extern inline function easeInOutSine(t:Float):Float {
 	#error "flight.Easing: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function easeInSine(t:Float):Float {
+	return flight._js._fn.Easing.easeInSine(t);
+}
+#else
 extern inline function easeInSine(t:Float):Float {
 #if hl
 	return flight._hl._fn.Easing.easeInSine(t);
@@ -484,6 +747,12 @@ extern inline function easeInSine(t:Float):Float {
 	#error "flight.Easing: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function easeOutSine(t:Float):Float {
+	return flight._js._fn.Easing.easeOutSine(t);
+}
+#else
 extern inline function easeOutSine(t:Float):Float {
 #if hl
 	return flight._hl._fn.Easing.easeOutSine(t);
@@ -495,6 +764,12 @@ extern inline function easeOutSine(t:Float):Float {
 	#error "flight.Easing: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function easeSmootherstep(t:Float):Float {
+	return flight._js._fn.Easing.easeSmootherstep(t);
+}
+#else
 extern inline function easeSmootherstep(t:Float):Float {
 #if hl
 	return flight._hl._fn.Easing.easeSmootherstep(t);
@@ -506,6 +781,12 @@ extern inline function easeSmootherstep(t:Float):Float {
 	#error "flight.Easing: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function easeSmoothstep(t:Float):Float {
+	return flight._js._fn.Easing.easeSmoothstep(t);
+}
+#else
 extern inline function easeSmoothstep(t:Float):Float {
 #if hl
 	return flight._hl._fn.Easing.easeSmoothstep(t);
@@ -517,6 +798,12 @@ extern inline function easeSmoothstep(t:Float):Float {
 	#error "flight.Easing: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function easeSmoothstepRange(edge0:Float, edge1:Float):ScalarRemap {
+	return flight._js._fn.Easing.easeSmoothstepRange(edge0, edge1);
+}
+#else
 extern inline function easeSmoothstepRange(edge0:Float, edge1:Float):ScalarRemap {
 #if hl
 	return flight._hl._fn.Easing.easeSmoothstepRange(edge0, edge1);
@@ -528,6 +815,12 @@ extern inline function easeSmoothstepRange(edge0:Float, edge1:Float):ScalarRemap
 	#error "flight.Easing: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function easeSteps(count:Int, position:Null<Dynamic>):EasingFunction {
+	return flight._js._fn.Easing.easeSteps(count, position);
+}
+#else
 extern inline function easeSteps(count:Int, position:Int):EasingFunction {
 #if hl
 	return flight._hl._fn.Easing.easeSteps(count, position);
@@ -539,6 +832,12 @@ extern inline function easeSteps(count:Int, position:Int):EasingFunction {
 	#error "flight.Easing: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function disableEasingGuards():Void {
+	flight._js._fn.Easing.disableEasingGuards();
+}
+#else
 extern inline function disableEasingGuards():Void {
 #if hl
 	flight._hl._fn.Easing.disableEasingGuards();
@@ -550,6 +849,12 @@ extern inline function disableEasingGuards():Void {
 	#error "flight.Easing: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function enableEasingGuards(logState:Dynamic, clock:Dynamic):Void {
+	flight._js._fn.Easing.enableEasingGuards(logState, clock);
+}
+#else
 extern inline function enableEasingGuards(logState:Dynamic, clockFn:Dynamic, clockCtx:Dynamic):Void {
 #if hl
 	flight._hl._fn.Easing.enableEasingGuards(logState, clockFn, clockCtx);
@@ -561,6 +866,12 @@ extern inline function enableEasingGuards(logState:Dynamic, clockFn:Dynamic, clo
 	#error "flight.Easing: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getEasingDerivative(ease:Dynamic, t:Float, epsilon:Null<Float>):Float {
+	return flight._js._fn.Easing.getEasingDerivative(ease, t, epsilon);
+}
+#else
 extern inline function getEasingDerivative(easeFn:Dynamic, easeCtx:Dynamic, t:Float, epsilon:Float):Float {
 #if hl
 	return flight._hl._fn.Easing.getEasingDerivative(easeFn, easeCtx, t, epsilon);
@@ -572,6 +883,12 @@ extern inline function getEasingDerivative(easeFn:Dynamic, easeCtx:Dynamic, t:Fl
 	#error "flight.Easing: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function writeEasingSamples(out:Dynamic, ease:Dynamic):Void {
+	flight._js._fn.Easing.writeEasingSamples(out, ease);
+}
+#else
 extern inline function writeEasingSamples(out:Dynamic, outLen:Int, easeFn:Dynamic, easeCtx:Dynamic):Void {
 #if hl
 	flight._hl._fn.Easing.writeEasingSamples(out, outLen, easeFn, easeCtx);
@@ -583,6 +900,12 @@ extern inline function writeEasingSamples(out:Dynamic, outLen:Int, easeFn:Dynami
 	#error "flight.Easing: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freeEasingFunction(ptr:EasingFunction):Void {
+	flight._js._fn.Easing.freeEasingFunction(ptr);
+}
+#else
 extern inline function freeEasingFunction(ptr:EasingFunction):Void {
 #if hl
 	flight._hl._fn.Easing.freeEasingFunction(ptr);
@@ -594,6 +917,12 @@ extern inline function freeEasingFunction(ptr:EasingFunction):Void {
 	#error "flight.Easing: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freeScalarRemap(ptr:ScalarRemap):Void {
+	flight._js._fn.Easing.freeScalarRemap(ptr);
+}
+#else
 extern inline function freeScalarRemap(ptr:ScalarRemap):Void {
 #if hl
 	flight._hl._fn.Easing.freeScalarRemap(ptr);
@@ -605,3 +934,4 @@ extern inline function freeScalarRemap(ptr:ScalarRemap):Void {
 	#error "flight.Easing: no backend for this target."
 #end
 }
+#end

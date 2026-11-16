@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract Scale9ShapeData(Dynamic) {}
+abstract Scale9ShapeData(Dynamic) {
+}

@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract RenderTargetSize(Dynamic) {}
+abstract RenderTargetSize(Dynamic) {
+}

@@ -1,9 +1,9 @@
 package flight._js._fn;
 
-@:jsRequire("flight")
+@:jsRequire("@flighthq/encoding")
 extern class Encoding {
-	@:native("flight_decode_utf8")
-	public static function decodeUtf8(bytes:Dynamic, bytesLen:Int, offset:haxe.Int64, length:haxe.Int64):String;
-	@:native("flight_encode_utf8")
+	@:native("decodeUtf8")
+	public static function decodeUtf8(bytes:Dynamic, offset:Null<Int>, length:Null<Int>):String;
+	@:native("encodeUtf8")
 	public static function encodeUtf8(text:String):Dynamic;
 }

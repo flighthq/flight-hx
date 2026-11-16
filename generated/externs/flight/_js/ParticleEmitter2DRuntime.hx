@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract ParticleEmitter2DRuntime(Dynamic) {}
+abstract ParticleEmitter2DRuntime(Dynamic) {
+}

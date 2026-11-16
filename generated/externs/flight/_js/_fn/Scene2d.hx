@@ -1,113 +1,113 @@
 package flight._js._fn;
 
-@:jsRequire("flight")
+@:jsRequire("@flighthq/scene2d")
 extern class Scene2d {
-	@:native("flight_create_display_object")
+	@:native("createDisplayObject")
 	public static function createDisplayObject():Dynamic;
-	@:native("flight_create_display_object_runtime")
+	@:native("createDisplayObjectRuntime")
 	public static function createDisplayObjectRuntime():flight._js.DisplayObjectRuntime;
-	@:native("flight_create_node2d_runtime")
-	public static function createNode2dRuntime(methods:flight._js.Node2DRuntimeMethods):flight._js.Node2DRuntime;
-	@:native("flight_as_node2d_ref")
-	public static function asNode2dRef(node:Dynamic):Dynamic;
-	@:native("flight_get_display_object_runtime")
+	@:native("createNode2DRuntime")
+	public static function createNode2dRuntime(methods:Null<flight._js.Node2DRuntimeMethods>):flight._js.Node2DRuntime;
+	@:native("asNode2DRef")
+	public static function asNode2dRef(node:Dynamic):Null<Dynamic>;
+	@:native("getDisplayObjectRuntime")
 	public static function getDisplayObjectRuntime(source:flight._js.DisplayObject):flight._js.DisplayObjectRuntime;
-	@:native("flight_get_node2d_runtime")
+	@:native("getNode2DRuntime")
 	public static function getNode2dRuntime(source:Dynamic):flight._js.Node2DRuntime;
-	@:native("flight_is_node2d")
+	@:native("isNode2D")
 	public static function isNode2d(node:Dynamic):Bool;
-	@:native("flight_set_node2d_clip")
-	public static function setNode2dClip(source:Dynamic, value:Dynamic):Void;
-	@:native("flight_apply_animation_clip_to_node2d")
+	@:native("setNode2DClip")
+	public static function setNode2dClip(source:Dynamic, value:Null<Dynamic>):Void;
+	@:native("applyAnimationClipToNode2D")
 	public static function applyAnimationClipToNode2d(clip:flight._js.AnimationClip, time:Float):Void;
-	@:native("flight_get_node2d_animation_path_string")
-	public static function getNode2dAnimationPathString(value:Int):String;
-	@:native("flight_parse_node2d_animation_path")
-	public static function parseNode2dAnimationPath(value:String):Int;
-	@:native("flight_create_html_view")
+	@:native("getNode2DAnimationPathString")
+	public static function getNode2dAnimationPathString(value:Dynamic):String;
+	@:native("parseNode2DAnimationPath")
+	public static function parseNode2dAnimationPath(value:String):Null<Dynamic>;
+	@:native("createHtmlView")
 	public static function createHtmlView():Dynamic;
-	@:native("flight_create_html_view_data")
+	@:native("createHtmlViewData")
 	public static function createHtmlViewData():flight._js.HtmlViewData;
-	@:native("flight_create_html_view_runtime")
+	@:native("createHtmlViewRuntime")
 	public static function createHtmlViewRuntime():flight._js.HtmlViewRuntime;
-	@:native("flight_compute_html_view_local_bounds_rectangle")
+	@:native("computeHtmlViewLocalBoundsRectangle")
 	public static function computeHtmlViewLocalBoundsRectangle(out:flight._js.Rectangle, source:Dynamic):Void;
-	@:native("flight_get_html_view_runtime")
+	@:native("getHtmlViewRuntime")
 	public static function getHtmlViewRuntime(source:flight._js.HtmlView):flight._js.HtmlViewRuntime;
-	@:native("flight_set_html_view_size")
+	@:native("setHtmlViewSize")
 	public static function setHtmlViewSize(source:Dynamic, width:Float, height:Float):Void;
-	@:native("flight_create_scale9_sprite")
+	@:native("createScale9Sprite")
 	public static function createScale9Sprite(scale9Grid:flight._js.Rectangle):Dynamic;
-	@:native("flight_create_scale9_sprite_data")
+	@:native("createScale9SpriteData")
 	public static function createScale9SpriteData(scale9Grid:flight._js.Rectangle):flight._js.Scale9SpriteData;
-	@:native("flight_create_scale9_sprite_runtime")
+	@:native("createScale9SpriteRuntime")
 	public static function createScale9SpriteRuntime():flight._js.Node2DRuntime;
-	@:native("flight_get_scale9_sprite_runtime")
+	@:native("getScale9SpriteRuntime")
 	public static function getScale9SpriteRuntime(source:flight._js.Scale9Sprite):Dynamic;
-	@:native("flight_create_scene2d")
+	@:native("createScene2D")
 	public static function createScene2d():Dynamic;
-	@:native("flight_create_scene2d_runtime")
+	@:native("createScene2DRuntime")
 	public static function createScene2dRuntime():flight._js.Scene2DRuntime;
-	@:native("flight_create_scene2d_signals")
+	@:native("createScene2DSignals")
 	public static function createScene2dSignals():Dynamic;
-	@:native("flight_enable_scene2d_signals")
+	@:native("enableScene2DSignals")
 	public static function enableScene2dSignals(source:flight._js.Scene2D):Dynamic;
-	@:native("flight_get_scene2d_align_string")
-	public static function getScene2dAlignString(value:Int):String;
-	@:native("flight_get_scene2d_display_state_string")
-	public static function getScene2dDisplayStateString(value:Int):String;
-	@:native("flight_get_scene2d_quality_string")
-	public static function getScene2dQualityString(value:Int):String;
-	@:native("flight_get_scene2d_root")
-	public static function getScene2dRoot(source:Dynamic):Dynamic;
-	@:native("flight_get_scene2d_runtime")
+	@:native("getScene2DAlignString")
+	public static function getScene2dAlignString(value:Dynamic):String;
+	@:native("getScene2DDisplayStateString")
+	public static function getScene2dDisplayStateString(value:Dynamic):String;
+	@:native("getScene2DQualityString")
+	public static function getScene2dQualityString(value:Dynamic):String;
+	@:native("getScene2DRoot")
+	public static function getScene2dRoot(source:Dynamic):Null<Dynamic>;
+	@:native("getScene2DRuntime")
 	public static function getScene2dRuntime(source:flight._js.Scene2D):flight._js.Scene2DRuntime;
-	@:native("flight_get_scene2d_scale_mode_string")
-	public static function getScene2dScaleModeString(value:Int):String;
-	@:native("flight_get_scene2d_signals")
-	public static function getScene2dSignals(source:flight._js.Scene2D):Dynamic;
-	@:native("flight_parse_scene2d_align")
-	public static function parseScene2dAlign(value:String):Int;
-	@:native("flight_parse_scene2d_display_state")
-	public static function parseScene2dDisplayState(value:String):Int;
-	@:native("flight_parse_scene2d_quality")
-	public static function parseScene2dQuality(value:String):Int;
-	@:native("flight_parse_scene2d_scale_mode")
-	public static function parseScene2dScaleMode(value:String):Int;
-	@:native("flight_set_scene2d_size")
+	@:native("getScene2DScaleModeString")
+	public static function getScene2dScaleModeString(value:Dynamic):String;
+	@:native("getScene2DSignals")
+	public static function getScene2dSignals(source:flight._js.Scene2D):Null<Dynamic>;
+	@:native("parseScene2DAlign")
+	public static function parseScene2dAlign(value:String):Null<Dynamic>;
+	@:native("parseScene2DDisplayState")
+	public static function parseScene2dDisplayState(value:String):Null<Dynamic>;
+	@:native("parseScene2DQuality")
+	public static function parseScene2dQuality(value:String):Null<Dynamic>;
+	@:native("parseScene2DScaleMode")
+	public static function parseScene2dScaleMode(value:String):Null<Dynamic>;
+	@:native("setScene2DSize")
 	public static function setScene2dSize(source:Dynamic, width:Float, height:Float):Void;
-	@:native("flight_create_scene2d_kind_usage")
+	@:native("createScene2DKindUsage")
 	public static function createScene2dKindUsage():flight._js.Scene2DKindUsage;
-	@:native("flight_get_scene2d_kind_usage")
+	@:native("getScene2DKindUsage")
 	public static function getScene2dKindUsage(out:flight._js.Scene2DKindUsage, scene:flight._js.Scene2D):Void;
-	@:native("flight_create_sprite")
+	@:native("createSprite")
 	public static function createSprite():Dynamic;
-	@:native("flight_create_sprite_data")
+	@:native("createSpriteData")
 	public static function createSpriteData():flight._js.SpriteData;
-	@:native("flight_create_sprite_renderer_data")
+	@:native("createSpriteRendererData")
 	public static function createSpriteRendererData(source:Dynamic):flight._js.SpriteIdentityRendererData;
-	@:native("flight_create_sprite_runtime")
+	@:native("createSpriteRuntime")
 	public static function createSpriteRuntime():flight._js.Node2DRuntime;
-	@:native("flight_clone_sprite")
+	@:native("cloneSprite")
 	public static function cloneSprite(source:flight._js.Sprite):Dynamic;
-	@:native("flight_compute_sprite_local_bounds_rectangle")
+	@:native("computeSpriteLocalBoundsRectangle")
 	public static function computeSpriteLocalBoundsRectangle(out:flight._js.Rectangle, source:Dynamic):Void;
-	@:native("flight_get_sprite_runtime")
+	@:native("getSpriteRuntime")
 	public static function getSpriteRuntime(source:flight._js.Sprite):Dynamic;
-	@:native("flight_free_display_object_runtime")
-	public static function freeDisplayObjectRuntime(ptr:flight._js.DisplayObjectRuntime):Void;
-	@:native("flight_free_html_view_data")
-	public static function freeHtmlViewData(ptr:flight._js.HtmlViewData):Void;
-	@:native("flight_free_html_view_runtime")
-	public static function freeHtmlViewRuntime(ptr:flight._js.HtmlViewRuntime):Void;
-	@:native("flight_free_scale9_sprite_data")
-	public static function freeScale9SpriteData(ptr:flight._js.Scale9SpriteData):Void;
-	@:native("flight_free_scene2_druntime")
-	public static function freeScene2Druntime(ptr:flight._js.Scene2DRuntime):Void;
-	@:native("flight_free_scene2_dkind_usage")
-	public static function freeScene2DkindUsage(ptr:flight._js.Scene2DKindUsage):Void;
-	@:native("flight_free_sprite_data")
-	public static function freeSpriteData(ptr:flight._js.SpriteData):Void;
-	@:native("flight_free_sprite_identity_renderer_data")
-	public static function freeSpriteIdentityRendererData(ptr:flight._js.SpriteIdentityRendererData):Void;
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeDisplayObjectRuntime(ptr:flight._js.DisplayObjectRuntime):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeHtmlViewData(ptr:flight._js.HtmlViewData):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeHtmlViewRuntime(ptr:flight._js.HtmlViewRuntime):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeScale9SpriteData(ptr:flight._js.Scale9SpriteData):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeScene2Druntime(ptr:flight._js.Scene2DRuntime):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeScene2DkindUsage(ptr:flight._js.Scene2DKindUsage):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeSpriteData(ptr:flight._js.SpriteData):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeSpriteIdentityRendererData(ptr:flight._js.SpriteIdentityRendererData):Void {}
 }

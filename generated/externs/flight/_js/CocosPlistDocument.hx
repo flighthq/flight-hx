@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract CocosPlistDocument(Dynamic) {}
+abstract CocosPlistDocument(Dynamic) {
+}

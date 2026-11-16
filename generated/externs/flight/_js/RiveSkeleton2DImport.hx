@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract RiveSkeleton2DImport(Dynamic) {}
+abstract RiveSkeleton2DImport(Dynamic) {
+}

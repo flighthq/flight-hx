@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract TextureAtlasScale(Dynamic) {}
+abstract TextureAtlasScale(Dynamic) {
+}

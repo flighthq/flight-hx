@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract SpatialIndex3D(Dynamic) {}
+abstract SpatialIndex3D(Dynamic) {
+}

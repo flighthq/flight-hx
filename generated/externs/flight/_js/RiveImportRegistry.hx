@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract RiveImportRegistry(Dynamic) {}
+abstract RiveImportRegistry(Dynamic) {
+}

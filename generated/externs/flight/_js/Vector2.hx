@@ -1,25 +1,12 @@
 package flight._js;
 
-@:jsRequire("flight")
-private extern class Vector2_Ffi {
-	@:native("flight_get_vector2_x") static function get_x(ptr:Dynamic):Float;
-	@:native("flight_set_vector2_x") static function set_x(ptr:Dynamic, value:Float):Float;
-	@:native("flight_get_vector2_y") static function get_y(ptr:Dynamic):Float;
-	@:native("flight_set_vector2_y") static function set_y(ptr:Dynamic, value:Float):Float;
-}
-
 abstract Vector2(Dynamic) {
 	public var x(get, set):Float;
-
-	inline function get_x():Float return Vector2_Ffi.get_x(this);
-
-	inline function set_x(value:Float):Float return Vector2_Ffi.set_x(this, value);
+	inline function get_x():Float return untyped this.x;
+	inline function set_x(value:Float):Float return untyped this.x = value;
 	public var y(get, set):Float;
-
-	inline function get_y():Float return Vector2_Ffi.get_y(this);
-
-	inline function set_y(value:Float):Float return Vector2_Ffi.set_y(this, value);
-
+	inline function get_y():Float return untyped this.y;
+	inline function set_y(value:Float):Float return untyped this.y = value;
 	inline public function matrixTransformBounds(out:flight._js.Rectangle, matrix:flight._js.Matrix, b:flight._js.Vector2):Void {
 		flight._js._fn.Geometry.matrixTransformBoundsVector2(out, matrix, cast this, b);
 	}
@@ -47,7 +34,7 @@ abstract Vector2(Dynamic) {
 	inline public function divide(source:flight._js.Vector2, divisor:flight._js.Vector2):Void {
 		flight._js._fn.Geometry.divideVector2(cast this, source, divisor);
 	}
-	inline public function equals(b:flight._js.Vector2):Bool {
+	inline public function equals(b:Null<flight._js.Vector2>):Bool {
 		return flight._js._fn.Geometry.equalsVector2(cast this, b);
 	}
 	inline public function getAngle():Float {
@@ -110,8 +97,8 @@ abstract Vector2(Dynamic) {
 	inline public function set(x:Float, y:Float):Void {
 		flight._js._fn.Geometry.setVector2(cast this, x, y);
 	}
-	inline public function setFromFloat32Array(offset:Int, source:Dynamic, sourceLen:Int):Void {
-		flight._js._fn.Geometry.setVector2FromFloat32Array(cast this, offset, source, sourceLen);
+	inline public function setFromFloat32Array(offset:Int, source:Dynamic):Void {
+		flight._js._fn.Geometry.setVector2FromFloat32Array(cast this, offset, source);
 	}
 	inline public function setFromPolar(length:Float, angle:Float):Void {
 		flight._js._fn.Geometry.setVector2FromPolar(cast this, length, angle);
@@ -122,8 +109,8 @@ abstract Vector2(Dynamic) {
 	inline public function subtract(source:flight._js.Vector2, other:flight._js.Vector2):Void {
 		flight._js._fn.Geometry.subtractVector2(cast this, source, other);
 	}
-	inline public function writeToFloat32Array(out:Dynamic, outLen:Int, offset:Int):Void {
-		flight._js._fn.Geometry.writeVector2ToFloat32Array(out, outLen, offset, cast this);
+	inline public function writeToFloat32Array(out:Dynamic, offset:Int):Void {
+		flight._js._fn.Geometry.writeVector2ToFloat32Array(out, offset, cast this);
 	}
 	inline public function release():Void {
 		flight._js._fn.Geometry.releaseVector2(cast this);
@@ -131,7 +118,7 @@ abstract Vector2(Dynamic) {
 	inline public function free():Void {
 		flight._js._fn.Geometry.freeVector2(cast this);
 	}
-	inline public function addTextureAtlasRegion(target:flight._js.TextureAtlas, b:flight._js.Vector2, pivot:flight._js.Vector2, name:String):Void {
+	inline public function addTextureAtlasRegion(target:flight._js.TextureAtlas, b:flight._js.Vector2, pivot:Null<flight._js.Vector2>, name:Null<String>):Void {
 		flight._js._fn.Textureatlas.addTextureAtlasRegionVector2(target, cast this, b, pivot, name);
 	}
 }

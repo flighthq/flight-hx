@@ -1,5 +1,10 @@
 package flight;
 
+#if (js && flight_esm)
+extern inline function appendSvgPathData(path:Path, d:String):Bool {
+	return flight._js._fn.PathFormats.appendSvgPathData(path, d);
+}
+#else
 extern inline function appendSvgPathData(path:Path, d:String):Bool {
 #if hl
 	return flight._hl._fn.PathFormats.appendSvgPathData(path, cast d);
@@ -11,6 +16,12 @@ extern inline function appendSvgPathData(path:Path, d:String):Bool {
 	#error "flight.PathFormats: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function explainSvgPathData(d:String):Null<SvgPathDataExplanation> {
+	return flight._js._fn.PathFormats.explainSvgPathData(d);
+}
+#else
 extern inline function explainSvgPathData(d:String):SvgPathDataExplanation {
 #if hl
 	return flight._hl._fn.PathFormats.explainSvgPathData(cast d);
@@ -22,6 +33,12 @@ extern inline function explainSvgPathData(d:String):SvgPathDataExplanation {
 	#error "flight.PathFormats: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function formatSvgPathData(path:Path, options:Null<SvgPathDataFormatOptions>):String {
+	return flight._js._fn.PathFormats.formatSvgPathData(path, options);
+}
+#else
 extern inline function formatSvgPathData(path:Path, options:SvgPathDataFormatOptions):String {
 #if hl
 	return cast flight._hl._fn.PathFormats.formatSvgPathData(path, options);
@@ -33,6 +50,12 @@ extern inline function formatSvgPathData(path:Path, options:SvgPathDataFormatOpt
 	#error "flight.PathFormats: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function parseSvgPathData(d:String):Null<Path> {
+	return flight._js._fn.PathFormats.parseSvgPathData(d);
+}
+#else
 extern inline function parseSvgPathData(d:String):Path {
 #if hl
 	return flight._hl._fn.PathFormats.parseSvgPathData(cast d);
@@ -44,6 +67,12 @@ extern inline function parseSvgPathData(d:String):Path {
 	#error "flight.PathFormats: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freeSvgPathDataExplanation(ptr:SvgPathDataExplanation):Void {
+	flight._js._fn.PathFormats.freeSvgPathDataExplanation(ptr);
+}
+#else
 extern inline function freeSvgPathDataExplanation(ptr:SvgPathDataExplanation):Void {
 #if hl
 	flight._hl._fn.PathFormats.freeSvgPathDataExplanation(ptr);
@@ -55,3 +84,4 @@ extern inline function freeSvgPathDataExplanation(ptr:SvgPathDataExplanation):Vo
 	#error "flight.PathFormats: no backend for this target."
 #end
 }
+#end

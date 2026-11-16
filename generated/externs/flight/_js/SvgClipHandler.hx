@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract SvgClipHandler(Dynamic) {}
+abstract SvgClipHandler(Dynamic) {
+}

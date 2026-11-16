@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract SvgRegistry(Dynamic) {}
+abstract SvgRegistry(Dynamic) {
+}

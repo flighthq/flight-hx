@@ -1,77 +1,77 @@
 package flight._js._fn;
 
-@:jsRequire("flight")
+@:jsRequire("@flighthq/movieclip")
 extern class Movieclip {
-	@:native("flight_are_movie_clip_guards_enabled")
+	@:native("areMovieClipGuardsEnabled")
 	public static function areMovieClipGuardsEnabled(guards:flight._js.MovieClipGuardState):Bool;
-	@:native("flight_disable_movie_clip_guards")
+	@:native("disableMovieClipGuards")
 	public static function disableMovieClipGuards(guards:flight._js.MovieClipGuardState):Void;
-	@:native("flight_enable_movie_clip_guards")
-	public static function enableMovieClipGuards(guards:flight._js.MovieClipGuardState, logState:Dynamic, clockFn:Dynamic, clockCtx:Dynamic):Void;
-	@:native("flight_create_movie_clip")
+	@:native("enableMovieClipGuards")
+	public static function enableMovieClipGuards(guards:flight._js.MovieClipGuardState, logState:Dynamic, clock:Dynamic):Void;
+	@:native("createMovieClip")
 	public static function createMovieClip():Dynamic;
-	@:native("flight_create_movie_clip_data")
+	@:native("createMovieClipData")
 	public static function createMovieClipData():flight._js.MovieClipData;
-	@:native("flight_create_movie_clip_runtime")
+	@:native("createMovieClipRuntime")
 	public static function createMovieClipRuntime():flight._js.MovieClipRuntime;
-	@:native("flight_add_movie_clip_frame_script")
+	@:native("addMovieClipFrameScript")
 	public static function addMovieClipFrameScript(clip:Dynamic, frame:flight._js.TimelineFrameArg, script:flight._js.FrameScript):Void;
-	@:native("flight_dispose_movie_clip_signals")
+	@:native("disposeMovieClipSignals")
 	public static function disposeMovieClipSignals(clip:Dynamic):Void;
-	@:native("flight_enable_movie_clip_signals")
+	@:native("enableMovieClipSignals")
 	public static function enableMovieClipSignals(clip:Dynamic):flight._js.MovieClipSignals;
-	@:native("flight_get_movie_clip_current_frame")
+	@:native("getMovieClipCurrentFrame")
 	public static function getMovieClipCurrentFrame(clip:Dynamic):Int;
-	@:native("flight_get_movie_clip_current_label")
-	public static function getMovieClipCurrentLabel(clip:Dynamic):Dynamic;
-	@:native("flight_get_movie_clip_frame_script")
-	public static function getMovieClipFrameScript(clip:Dynamic, frame:flight._js.TimelineFrameArg):Dynamic;
-	@:native("flight_get_movie_clip_runtime")
+	@:native("getMovieClipCurrentLabel")
+	public static function getMovieClipCurrentLabel(clip:Dynamic):Null<flight._js.TimelineLabel>;
+	@:native("getMovieClipFrameScript")
+	public static function getMovieClipFrameScript(clip:Dynamic, frame:flight._js.TimelineFrameArg):Null<flight._js.FrameScript>;
+	@:native("getMovieClipRuntime")
 	public static function getMovieClipRuntime(source:flight._js.MovieClip):flight._js.MovieClipRuntime;
-	@:native("flight_get_movie_clip_signals")
-	public static function getMovieClipSignals(clip:Dynamic):Dynamic;
-	@:native("flight_get_movie_clip_total_frames")
+	@:native("getMovieClipSignals")
+	public static function getMovieClipSignals(clip:Dynamic):Null<flight._js.MovieClipSignals>;
+	@:native("getMovieClipTotalFrames")
 	public static function getMovieClipTotalFrames(clip:Dynamic):Int;
-	@:native("flight_goto_and_play_movie_clip")
+	@:native("gotoAndPlayMovieClip")
 	public static function gotoAndPlayMovieClip(clip:Dynamic, frame:flight._js.TimelineFrameArg):Void;
-	@:native("flight_goto_and_stop_movie_clip")
+	@:native("gotoAndStopMovieClip")
 	public static function gotoAndStopMovieClip(clip:Dynamic, frame:flight._js.TimelineFrameArg):Void;
-	@:native("flight_is_movie_clip_playing")
+	@:native("isMovieClipPlaying")
 	public static function isMovieClipPlaying(clip:Dynamic):Bool;
-	@:native("flight_next_frame_movie_clip")
+	@:native("nextFrameMovieClip")
 	public static function nextFrameMovieClip(clip:Dynamic):Void;
-	@:native("flight_play_movie_clip")
+	@:native("playMovieClip")
 	public static function playMovieClip(clip:Dynamic):Void;
-	@:native("flight_prev_frame_movie_clip")
+	@:native("prevFrameMovieClip")
 	public static function prevFrameMovieClip(clip:Dynamic):Void;
-	@:native("flight_remove_movie_clip_frame_script")
+	@:native("removeMovieClipFrameScript")
 	public static function removeMovieClipFrameScript(clip:Dynamic, frame:flight._js.TimelineFrameArg):Void;
-	@:native("flight_set_movie_clip_source")
+	@:native("setMovieClipSource")
 	public static function setMovieClipSource(clip:Dynamic, source:flight._js.TimelineSourceRef):Void;
-	@:native("flight_stop_movie_clip")
+	@:native("stopMovieClip")
 	public static function stopMovieClip(clip:Dynamic):Void;
-	@:native("flight_update_movie_clip")
+	@:native("updateMovieClip")
 	public static function updateMovieClip(clip:Dynamic, deltaTime:Float):Void;
-	@:native("flight_create_spritesheet_timeline_source")
+	@:native("createSpritesheetTimelineSource")
 	public static function createSpritesheetTimelineSource(guards:flight._js.MovieClipGuardState, spritesheet:Dynamic, animation:Dynamic):flight._js.TimelineSourceRef;
-	@:native("flight_explain_spritesheet_timeline_source")
+	@:native("explainSpritesheetTimelineSource")
 	public static function explainSpritesheetTimelineSource(animation:Dynamic):flight._js.SpritesheetTimelineSourceExplanation;
-	@:native("flight_get_spritesheet_timeline_source_unsupported_field_string")
-	public static function getSpritesheetTimelineSourceUnsupportedFieldString(value:Int):String;
-	@:native("flight_parse_spritesheet_timeline_source_unsupported_field")
-	public static function parseSpritesheetTimelineSourceUnsupportedField(value:String):Int;
-	@:native("flight_free_movie_clip_data")
-	public static function freeMovieClipData(ptr:flight._js.MovieClipData):Void;
-	@:native("flight_free_movie_clip_runtime")
-	public static function freeMovieClipRuntime(ptr:flight._js.MovieClipRuntime):Void;
-	@:native("flight_free_movie_clip_signals")
-	public static function freeMovieClipSignals(ptr:flight._js.MovieClipSignals):Void;
-	@:native("flight_free_timeline_label")
-	public static function freeTimelineLabel(ptr:flight._js.TimelineLabel):Void;
-	@:native("flight_free_frame_script")
-	public static function freeFrameScript(ptr:flight._js.FrameScript):Void;
-	@:native("flight_free_timeline_source_ref")
-	public static function freeTimelineSourceRef(ptr:flight._js.TimelineSourceRef):Void;
-	@:native("flight_free_spritesheet_timeline_source_explanation")
-	public static function freeSpritesheetTimelineSourceExplanation(ptr:flight._js.SpritesheetTimelineSourceExplanation):Void;
+	@:native("getSpritesheetTimelineSourceUnsupportedFieldString")
+	public static function getSpritesheetTimelineSourceUnsupportedFieldString(value:Dynamic):String;
+	@:native("parseSpritesheetTimelineSourceUnsupportedField")
+	public static function parseSpritesheetTimelineSourceUnsupportedField(value:String):Null<Dynamic>;
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeMovieClipData(ptr:flight._js.MovieClipData):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeMovieClipRuntime(ptr:flight._js.MovieClipRuntime):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeMovieClipSignals(ptr:flight._js.MovieClipSignals):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeTimelineLabel(ptr:flight._js.TimelineLabel):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeFrameScript(ptr:flight._js.FrameScript):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeTimelineSourceRef(ptr:flight._js.TimelineSourceRef):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeSpritesheetTimelineSourceExplanation(ptr:flight._js.SpritesheetTimelineSourceExplanation):Void {}
 }

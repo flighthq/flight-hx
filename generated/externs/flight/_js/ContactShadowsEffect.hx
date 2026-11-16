@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract ContactShadowsEffect(Dynamic) {}
+abstract ContactShadowsEffect(Dynamic) {
+}

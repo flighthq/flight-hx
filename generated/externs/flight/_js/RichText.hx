@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract RichText(Dynamic) {}
+abstract RichText(Dynamic) {
+}

@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract AsepriteDocument(Dynamic) {}
+abstract AsepriteDocument(Dynamic) {
+}

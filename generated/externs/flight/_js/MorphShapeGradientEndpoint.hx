@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract MorphShapeGradientEndpoint(Dynamic) {}
+abstract MorphShapeGradientEndpoint(Dynamic) {
+}

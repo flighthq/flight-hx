@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract Skeleton2D(Dynamic) {}
+abstract Skeleton2D(Dynamic) {
+}

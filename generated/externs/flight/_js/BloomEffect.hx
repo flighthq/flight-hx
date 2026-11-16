@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract BloomEffect(Dynamic) {}
+abstract BloomEffect(Dynamic) {
+}

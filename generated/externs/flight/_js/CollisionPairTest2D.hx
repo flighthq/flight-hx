@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract CollisionPairTest2D(Dynamic) {}
+abstract CollisionPairTest2D(Dynamic) {
+}

@@ -1,133 +1,133 @@
 package flight._js._fn;
 
-@:jsRequire("flight")
+@:jsRequire("@flighthq/math")
 extern class Math {
-	@:native("flight_deg_to_rad")
+	@:native("degToRad")
 	public static function degToRad(degrees:Float):Float;
-	@:native("flight_delta_angle")
+	@:native("deltaAngle")
 	public static function deltaAngle(from:Float, to:Float):Float;
-	@:native("flight_normalize_angle")
+	@:native("normalizeAngle")
 	public static function normalizeAngle(radians:Float):Float;
-	@:native("flight_rad_to_deg")
+	@:native("radToDeg")
 	public static function radToDeg(radians:Float):Float;
-	@:native("flight_clamp")
+	@:native("clamp")
 	public static function clamp(value:Float, min:Float, max:Float):Float;
-	@:native("flight_in_range")
+	@:native("inRange")
 	public static function inRange(value:Float, min:Float, max:Float):Bool;
-	@:native("flight_saturate")
+	@:native("saturate")
 	public static function saturate(value:Float):Float;
-	@:native("flight_approx_equal")
-	public static function approxEqual(a:Float, b:Float, epsilon:Float):Bool;
-	@:native("flight_approx_equal_relative")
-	public static function approxEqualRelative(a:Float, b:Float, relativeEpsilon:Float):Bool;
-	@:native("flight_approx_zero")
-	public static function approxZero(value:Float, epsilon:Float):Bool;
-	@:native("flight_create_random_source_from_hash")
+	@:native("approxEqual")
+	public static function approxEqual(a:Float, b:Float, epsilon:Null<Float>):Bool;
+	@:native("approxEqualRelative")
+	public static function approxEqualRelative(a:Float, b:Float, relativeEpsilon:Null<Float>):Bool;
+	@:native("approxZero")
+	public static function approxZero(value:Float, epsilon:Null<Float>):Bool;
+	@:native("createRandomSourceFromHash")
 	public static function createRandomSourceFromHash(x:Int, y:Int):flight._js.RandomSource;
-	@:native("flight_hash_2d")
+	@:native("hash2D")
 	public static function hash2d(x:Int, y:Int):Int;
-	@:native("flight_hash_3d")
+	@:native("hash3D")
 	public static function hash3d(x:Int, y:Int, z:Int):Int;
-	@:native("flight_hash_combine")
+	@:native("hashCombine")
 	public static function hashCombine(seed:Int, value:Int):Int;
-	@:native("flight_hash_uint32")
+	@:native("hashUint32")
 	public static function hashUint32(value:Int):Int;
-	@:native("flight_inverse_lerp")
+	@:native("inverseLerp")
 	public static function inverseLerp(a:Float, b:Float, value:Float):Float;
-	@:native("flight_lerp")
+	@:native("lerp")
 	public static function lerp(a:Float, b:Float, t:Float):Float;
-	@:native("flight_remap")
+	@:native("remap")
 	public static function remap(value:Float, inMin:Float, inMax:Float, outMin:Float, outMax:Float):Float;
-	@:native("flight_smooth_step")
+	@:native("smoothStep")
 	public static function smoothStep(edge0:Float, edge1:Float, x:Float):Float;
-	@:native("flight_step")
+	@:native("step")
 	public static function step(edge:Float, x:Float):Float;
-	@:native("flight_damp")
+	@:native("damp")
 	public static function damp(current:Float, target:Float, lambda:Float, deltaTime:Float):Float;
-	@:native("flight_lerp_angle")
+	@:native("lerpAngle")
 	public static function lerpAngle(a:Float, b:Float, t:Float):Float;
-	@:native("flight_move_towards")
+	@:native("moveTowards")
 	public static function moveTowards(current:Float, target:Float, maxDelta:Float):Float;
-	@:native("flight_ping_pong")
+	@:native("pingPong")
 	public static function pingPong(t:Float, length:Float):Float;
-	@:native("flight_repeat")
+	@:native("repeat")
 	public static function repeat(t:Float, length:Float):Float;
-	@:native("flight_smoother_step")
+	@:native("smootherStep")
 	public static function smootherStep(edge0:Float, edge1:Float, x:Float):Float;
-	@:native("flight_is_power_of_two")
+	@:native("isPowerOfTwo")
 	public static function isPowerOfTwo(n:Int):Bool;
-	@:native("flight_next_multiple_of")
+	@:native("nextMultipleOf")
 	public static function nextMultipleOf(value:Float, multiple:Float):Float;
-	@:native("flight_next_power_of_two")
+	@:native("nextPowerOfTwo")
 	public static function nextPowerOfTwo(n:Int):Int;
-	@:native("flight_previous_power_of_two")
+	@:native("previousPowerOfTwo")
 	public static function previousPowerOfTwo(n:Int):Int;
-	@:native("flight_factorial")
+	@:native("factorial")
 	public static function factorial(n:Int):Float;
-	@:native("flight_gcd")
+	@:native("gcd")
 	public static function gcd(a:Int, b:Int):Int;
-	@:native("flight_hypot2")
+	@:native("hypot2")
 	public static function hypot2(x:Float, y:Float):Float;
-	@:native("flight_is_even")
+	@:native("isEven")
 	public static function isEven(n:Int):Bool;
-	@:native("flight_is_odd")
+	@:native("isOdd")
 	public static function isOdd(n:Int):Bool;
-	@:native("flight_lcm")
+	@:native("lcm")
 	public static function lcm(a:Int, b:Int):Int;
-	@:native("flight_create_random_source")
+	@:native("createRandomSource")
 	public static function createRandomSource(seed:Int):flight._js.RandomSource;
-	@:native("flight_random_exponential")
-	public static function randomExponential(randomFn:Dynamic, randomCtx:Dynamic, rate:Float):Float;
-	@:native("flight_random_gaussian")
-	public static function randomGaussian(randomFn:Dynamic, randomCtx:Dynamic, mean:Float, standardDeviation:Float):Float;
-	@:native("flight_random_inside_unit_disc")
-	public static function randomInsideUnitDisc(out:Dynamic, randomFn:Dynamic, randomCtx:Dynamic):Void;
-	@:native("flight_random_inside_unit_sphere")
-	public static function randomInsideUnitSphere(out:Dynamic, randomFn:Dynamic, randomCtx:Dynamic):Void;
-	@:native("flight_random_on_unit_circle")
-	public static function randomOnUnitCircle(out:Dynamic, randomFn:Dynamic, randomCtx:Dynamic):Void;
-	@:native("flight_random_on_unit_sphere")
-	public static function randomOnUnitSphere(out:Dynamic, randomFn:Dynamic, randomCtx:Dynamic):Void;
-	@:native("flight_random_poisson")
-	public static function randomPoisson(randomFn:Dynamic, randomCtx:Dynamic, lambda:Float):Int;
-	@:native("flight_random_weighted")
-	public static function randomWeighted(randomFn:Dynamic, randomCtx:Dynamic, weights:Dynamic, weightsLen:Int):Int;
-	@:native("flight_random_bool")
-	public static function randomBool(randomFn:Dynamic, randomCtx:Dynamic, probability:Float):Bool;
-	@:native("flight_random_int")
-	public static function randomInt(randomFn:Dynamic, randomCtx:Dynamic, min:Int, max:Int):Int;
-	@:native("flight_random_range")
-	public static function randomRange(randomFn:Dynamic, randomCtx:Dynamic, min:Float, max:Float):Float;
-	@:native("flight_random_sign")
-	public static function randomSign(randomFn:Dynamic, randomCtx:Dynamic):Float;
-	@:native("flight_ceil_to")
+	@:native("randomExponential")
+	public static function randomExponential(random:Dynamic, rate:Null<Float>):Float;
+	@:native("randomGaussian")
+	public static function randomGaussian(random:Dynamic, mean:Null<Float>, standardDeviation:Null<Float>):Float;
+	@:native("randomInsideUnitDisc")
+	public static function randomInsideUnitDisc(out:Dynamic, random:Dynamic):Void;
+	@:native("randomInsideUnitSphere")
+	public static function randomInsideUnitSphere(out:Dynamic, random:Dynamic):Void;
+	@:native("randomOnUnitCircle")
+	public static function randomOnUnitCircle(out:Dynamic, random:Dynamic):Void;
+	@:native("randomOnUnitSphere")
+	public static function randomOnUnitSphere(out:Dynamic, random:Dynamic):Void;
+	@:native("randomPoisson")
+	public static function randomPoisson(random:Dynamic, lambda:Null<Float>):Int;
+	@:native("randomWeighted")
+	public static function randomWeighted(random:Dynamic, weights:Dynamic):Int;
+	@:native("randomBool")
+	public static function randomBool(random:Dynamic, probability:Null<Float>):Bool;
+	@:native("randomInt")
+	public static function randomInt(random:Dynamic, min:Int, max:Int):Int;
+	@:native("randomRange")
+	public static function randomRange(random:Dynamic, min:Float, max:Float):Float;
+	@:native("randomSign")
+	public static function randomSign(random:Dynamic):Float;
+	@:native("ceilTo")
 	public static function ceilTo(value:Float, step:Float):Float;
-	@:native("flight_euclidean_mod")
+	@:native("euclideanMod")
 	public static function euclideanMod(value:Float, divisor:Float):Float;
-	@:native("flight_floor_to")
+	@:native("floorTo")
 	public static function floorTo(value:Float, step:Float):Float;
-	@:native("flight_fract")
+	@:native("fract")
 	public static function fract(value:Float):Float;
-	@:native("flight_round_to")
+	@:native("roundTo")
 	public static function roundTo(value:Float, step:Float):Float;
-	@:native("flight_ceil_power_of_two")
+	@:native("ceilPowerOfTwo")
 	public static function ceilPowerOfTwo(n:Int):Int;
-	@:native("flight_floor_power_of_two")
+	@:native("floorPowerOfTwo")
 	public static function floorPowerOfTwo(n:Int):Int;
-	@:native("flight_quantize")
+	@:native("quantize")
 	public static function quantize(value:Float, steps:Float, min:Float, max:Float):Float;
-	@:native("flight_sign")
+	@:native("sign")
 	public static function sign(value:Float):Float;
-	@:native("flight_mean")
-	public static function mean(values:Dynamic, valuesLen:Int):Float;
-	@:native("flight_median")
-	public static function median(values:Dynamic, valuesLen:Int):Float;
-	@:native("flight_standard_deviation")
-	public static function standardDeviation(values:Dynamic, valuesLen:Int):Float;
-	@:native("flight_variance")
-	public static function variance(values:Dynamic, valuesLen:Int):Float;
-	@:native("flight_weighted_average")
-	public static function weightedAverage(values:Dynamic, valuesLen:Int, weights:Dynamic, weightsLen:Int):Float;
-	@:native("flight_free_random_source")
-	public static function freeRandomSource(ptr:flight._js.RandomSource):Void;
+	@:native("mean")
+	public static function mean(values:Dynamic):Float;
+	@:native("median")
+	public static function median(values:Dynamic):Float;
+	@:native("standardDeviation")
+	public static function standardDeviation(values:Dynamic):Float;
+	@:native("variance")
+	public static function variance(values:Dynamic):Float;
+	@:native("weightedAverage")
+	public static function weightedAverage(values:Dynamic, weights:Dynamic):Float;
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeRandomSource(ptr:flight._js.RandomSource):Void {}
 }

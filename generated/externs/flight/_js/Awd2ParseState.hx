@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract Awd2ParseState(Dynamic) {}
+abstract Awd2ParseState(Dynamic) {
+}

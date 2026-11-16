@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract SpineDrawOrderMove(Dynamic) {}
+abstract SpineDrawOrderMove(Dynamic) {
+}

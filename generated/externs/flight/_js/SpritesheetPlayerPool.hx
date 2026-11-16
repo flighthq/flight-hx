@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract SpritesheetPlayerPool(Dynamic) {}
+abstract SpritesheetPlayerPool(Dynamic) {
+}

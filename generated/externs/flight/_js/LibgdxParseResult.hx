@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract LibgdxParseResult(Dynamic) {}
+abstract LibgdxParseResult(Dynamic) {
+}

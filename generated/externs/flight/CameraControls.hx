@@ -1,5 +1,10 @@
 package flight;
 
+#if (js && flight_esm)
+extern inline function createCameraShake():CameraShake {
+	return flight._js._fn.CameraControls.createCameraShake();
+}
+#else
 extern inline function createCameraShake():CameraShake {
 #if hl
 	return flight._hl._fn.CameraControls.createCameraShake();
@@ -11,6 +16,12 @@ extern inline function createCameraShake():CameraShake {
 	#error "flight.CameraControls: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function createCameraShakeOffset():CameraShakeOffset {
+	return flight._js._fn.CameraControls.createCameraShakeOffset();
+}
+#else
 extern inline function createCameraShakeOffset():CameraShakeOffset {
 #if hl
 	return flight._hl._fn.CameraControls.createCameraShakeOffset();
@@ -22,6 +33,12 @@ extern inline function createCameraShakeOffset():CameraShakeOffset {
 	#error "flight.CameraControls: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function addCameraShakeTrauma(shake:CameraShake, amount:Float):Void {
+	flight._js._fn.CameraControls.addCameraShakeTrauma(shake, amount);
+}
+#else
 extern inline function addCameraShakeTrauma(shake:CameraShake, amount:Float):Void {
 #if hl
 	flight._hl._fn.CameraControls.addCameraShakeTrauma(shake, amount);
@@ -33,6 +50,12 @@ extern inline function addCameraShakeTrauma(shake:CameraShake, amount:Float):Voi
 	#error "flight.CameraControls: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function resetCameraShake(shake:CameraShake):Void {
+	flight._js._fn.CameraControls.resetCameraShake(shake);
+}
+#else
 extern inline function resetCameraShake(shake:CameraShake):Void {
 #if hl
 	flight._hl._fn.CameraControls.resetCameraShake(shake);
@@ -44,6 +67,12 @@ extern inline function resetCameraShake(shake:CameraShake):Void {
 	#error "flight.CameraControls: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function updateCameraShake(shake:CameraShake, dt:Float, out:CameraShakeOffset):Void {
+	flight._js._fn.CameraControls.updateCameraShake(shake, dt, out);
+}
+#else
 extern inline function updateCameraShake(shake:CameraShake, dt:Float, out:CameraShakeOffset):Void {
 #if hl
 	flight._hl._fn.CameraControls.updateCameraShake(shake, dt, out);
@@ -55,6 +84,12 @@ extern inline function updateCameraShake(shake:CameraShake, dt:Float, out:Camera
 	#error "flight.CameraControls: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function createFlyCameraController(options:Null<FlyCameraControllerOptions>):FlyCameraController {
+	return flight._js._fn.CameraControls.createFlyCameraController(options);
+}
+#else
 extern inline function createFlyCameraController(options:FlyCameraControllerOptions):FlyCameraController {
 #if hl
 	return flight._hl._fn.CameraControls.createFlyCameraController(options);
@@ -66,6 +101,12 @@ extern inline function createFlyCameraController(options:FlyCameraControllerOpti
 	#error "flight.CameraControls: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function cloneFlyCameraController(source:FlyCameraController):FlyCameraController {
+	return flight._js._fn.CameraControls.cloneFlyCameraController(source);
+}
+#else
 extern inline function cloneFlyCameraController(source:FlyCameraController):FlyCameraController {
 #if hl
 	return flight._hl._fn.CameraControls.cloneFlyCameraController(source);
@@ -77,6 +118,12 @@ extern inline function cloneFlyCameraController(source:FlyCameraController):FlyC
 	#error "flight.CameraControls: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function copyFlyCameraController(out:FlyCameraController, source:FlyCameraController):Void {
+	flight._js._fn.CameraControls.copyFlyCameraController(out, source);
+}
+#else
 extern inline function copyFlyCameraController(out:FlyCameraController, source:FlyCameraController):Void {
 #if hl
 	flight._hl._fn.CameraControls.copyFlyCameraController(out, source);
@@ -88,6 +135,12 @@ extern inline function copyFlyCameraController(out:FlyCameraController, source:F
 	#error "flight.CameraControls: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function lookFlyCameraController(controller:FlyCameraController, deltaYaw:Float, deltaPitch:Float):Void {
+	flight._js._fn.CameraControls.lookFlyCameraController(controller, deltaYaw, deltaPitch);
+}
+#else
 extern inline function lookFlyCameraController(controller:FlyCameraController, deltaYaw:Float, deltaPitch:Float):Void {
 #if hl
 	flight._hl._fn.CameraControls.lookFlyCameraController(controller, deltaYaw, deltaPitch);
@@ -99,6 +152,12 @@ extern inline function lookFlyCameraController(controller:FlyCameraController, d
 	#error "flight.CameraControls: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function moveFlyCameraController(controller:FlyCameraController, forward:Float, right:Float, up:Float):Void {
+	flight._js._fn.CameraControls.moveFlyCameraController(controller, forward, right, up);
+}
+#else
 extern inline function moveFlyCameraController(controller:FlyCameraController, forward:Float, right:Float, up:Float):Void {
 #if hl
 	flight._hl._fn.CameraControls.moveFlyCameraController(controller, forward, right, up);
@@ -110,6 +169,12 @@ extern inline function moveFlyCameraController(controller:FlyCameraController, f
 	#error "flight.CameraControls: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function resetFlyCameraController(controller:FlyCameraController, options:Null<FlyCameraControllerOptions>):Void {
+	flight._js._fn.CameraControls.resetFlyCameraController(controller, options);
+}
+#else
 extern inline function resetFlyCameraController(controller:FlyCameraController, options:FlyCameraControllerOptions):Void {
 #if hl
 	flight._hl._fn.CameraControls.resetFlyCameraController(controller, options);
@@ -121,6 +186,12 @@ extern inline function resetFlyCameraController(controller:FlyCameraController, 
 	#error "flight.CameraControls: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function snapFlyCameraController(controller:FlyCameraController):Void {
+	flight._js._fn.CameraControls.snapFlyCameraController(controller);
+}
+#else
 extern inline function snapFlyCameraController(controller:FlyCameraController):Void {
 #if hl
 	flight._hl._fn.CameraControls.snapFlyCameraController(controller);
@@ -132,6 +203,12 @@ extern inline function snapFlyCameraController(controller:FlyCameraController):V
 	#error "flight.CameraControls: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function updateFlyCameraController(controller:FlyCameraController, camera:Camera3D, deltaTime:Float):Void {
+	flight._js._fn.CameraControls.updateFlyCameraController(controller, camera, deltaTime);
+}
+#else
 extern inline function updateFlyCameraController(controller:FlyCameraController, camera:Camera3D, deltaTime:Float):Void {
 #if hl
 	flight._hl._fn.CameraControls.updateFlyCameraController(controller, camera, deltaTime);
@@ -143,6 +220,12 @@ extern inline function updateFlyCameraController(controller:FlyCameraController,
 	#error "flight.CameraControls: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function updateCamera2dFollow(guardState:Dynamic, camera:Camera2D, viewportWidth:Float, viewportHeight:Float, targetX:Float, targetY:Float, deltaTime:Float, options:Null<Camera2DFollowOptions>):Void {
+	flight._js._fn.CameraControls.updateCamera2dFollow(guardState, camera, viewportWidth, viewportHeight, targetX, targetY, deltaTime, options);
+}
+#else
 extern inline function updateCamera2dFollow(guardState:Dynamic, camera:Camera2D, viewportWidth:Float, viewportHeight:Float, targetX:Float, targetY:Float, deltaTime:Float, options:Camera2DFollowOptions):Void {
 #if hl
 	flight._hl._fn.CameraControls.updateCamera2dFollow(guardState, camera, viewportWidth, viewportHeight, targetX, targetY, deltaTime, options);
@@ -154,6 +237,12 @@ extern inline function updateCamera2dFollow(guardState:Dynamic, camera:Camera2D,
 	#error "flight.CameraControls: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function frameOrbitCameraControllerToSphere(controller:OrbitCameraController, projection:Projection, sphere:BoundingSphere, aspect:Float, padding:Null<Float>):Bool {
+	return flight._js._fn.CameraControls.frameOrbitCameraControllerToSphere(controller, projection, sphere, aspect, padding);
+}
+#else
 extern inline function frameOrbitCameraControllerToSphere(controller:OrbitCameraController, projection:Projection, sphere:BoundingSphere, aspect:Float, padding:Float):Bool {
 #if hl
 	return flight._hl._fn.CameraControls.frameOrbitCameraControllerToSphere(controller, projection, sphere, aspect, padding);
@@ -165,6 +254,12 @@ extern inline function frameOrbitCameraControllerToSphere(controller:OrbitCamera
 	#error "flight.CameraControls: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getPerspectiveProjectionFrameDistanceToSphere(projection:PerspectiveProjection, radius:Float, aspect:Float, padding:Null<Float>):Float {
+	return flight._js._fn.CameraControls.getPerspectiveProjectionFrameDistanceToSphere(projection, radius, aspect, padding);
+}
+#else
 extern inline function getPerspectiveProjectionFrameDistanceToSphere(projection:PerspectiveProjection, radius:Float, aspect:Float, padding:Float):Float {
 #if hl
 	return flight._hl._fn.CameraControls.getPerspectiveProjectionFrameDistanceToSphere(projection, radius, aspect, padding);
@@ -176,6 +271,12 @@ extern inline function getPerspectiveProjectionFrameDistanceToSphere(projection:
 	#error "flight.CameraControls: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setOrthographicProjectionFrameToSphere(projection:OrthographicProjection, radius:Float, aspect:Float, padding:Null<Float>):Void {
+	flight._js._fn.CameraControls.setOrthographicProjectionFrameToSphere(projection, radius, aspect, padding);
+}
+#else
 extern inline function setOrthographicProjectionFrameToSphere(projection:OrthographicProjection, radius:Float, aspect:Float, padding:Float):Void {
 #if hl
 	flight._hl._fn.CameraControls.setOrthographicProjectionFrameToSphere(projection, radius, aspect, padding);
@@ -187,6 +288,12 @@ extern inline function setOrthographicProjectionFrameToSphere(projection:Orthogr
 	#error "flight.CameraControls: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function createOrbitCameraController(options:Null<OrbitCameraControllerOptions>):OrbitCameraController {
+	return flight._js._fn.CameraControls.createOrbitCameraController(options);
+}
+#else
 extern inline function createOrbitCameraController(options:OrbitCameraControllerOptions):OrbitCameraController {
 #if hl
 	return flight._hl._fn.CameraControls.createOrbitCameraController(options);
@@ -198,6 +305,12 @@ extern inline function createOrbitCameraController(options:OrbitCameraController
 	#error "flight.CameraControls: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function cloneOrbitCameraController(source:OrbitCameraController):OrbitCameraController {
+	return flight._js._fn.CameraControls.cloneOrbitCameraController(source);
+}
+#else
 extern inline function cloneOrbitCameraController(source:OrbitCameraController):OrbitCameraController {
 #if hl
 	return flight._hl._fn.CameraControls.cloneOrbitCameraController(source);
@@ -209,6 +322,12 @@ extern inline function cloneOrbitCameraController(source:OrbitCameraController):
 	#error "flight.CameraControls: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function copyOrbitCameraController(out:OrbitCameraController, source:OrbitCameraController):Void {
+	flight._js._fn.CameraControls.copyOrbitCameraController(out, source);
+}
+#else
 extern inline function copyOrbitCameraController(out:OrbitCameraController, source:OrbitCameraController):Void {
 #if hl
 	flight._hl._fn.CameraControls.copyOrbitCameraController(out, source);
@@ -220,6 +339,12 @@ extern inline function copyOrbitCameraController(out:OrbitCameraController, sour
 	#error "flight.CameraControls: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function dollyOrbitCameraController(controller:OrbitCameraController, deltaDistance:Float):Void {
+	flight._js._fn.CameraControls.dollyOrbitCameraController(controller, deltaDistance);
+}
+#else
 extern inline function dollyOrbitCameraController(controller:OrbitCameraController, deltaDistance:Float):Void {
 #if hl
 	flight._hl._fn.CameraControls.dollyOrbitCameraController(controller, deltaDistance);
@@ -231,6 +356,12 @@ extern inline function dollyOrbitCameraController(controller:OrbitCameraControll
 	#error "flight.CameraControls: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function panOrbitCameraController(controller:OrbitCameraController, deltaRight:Float, deltaUp:Float):Void {
+	flight._js._fn.CameraControls.panOrbitCameraController(controller, deltaRight, deltaUp);
+}
+#else
 extern inline function panOrbitCameraController(controller:OrbitCameraController, deltaRight:Float, deltaUp:Float):Void {
 #if hl
 	flight._hl._fn.CameraControls.panOrbitCameraController(controller, deltaRight, deltaUp);
@@ -242,6 +373,12 @@ extern inline function panOrbitCameraController(controller:OrbitCameraController
 	#error "flight.CameraControls: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function panOrbitCameraControllerInViewPlane(controller:OrbitCameraController, deltaRight:Float, deltaUp:Float):Void {
+	flight._js._fn.CameraControls.panOrbitCameraControllerInViewPlane(controller, deltaRight, deltaUp);
+}
+#else
 extern inline function panOrbitCameraControllerInViewPlane(controller:OrbitCameraController, deltaRight:Float, deltaUp:Float):Void {
 #if hl
 	flight._hl._fn.CameraControls.panOrbitCameraControllerInViewPlane(controller, deltaRight, deltaUp);
@@ -253,6 +390,12 @@ extern inline function panOrbitCameraControllerInViewPlane(controller:OrbitCamer
 	#error "flight.CameraControls: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function resetOrbitCameraController(controller:OrbitCameraController, options:Null<OrbitCameraControllerOptions>):Void {
+	flight._js._fn.CameraControls.resetOrbitCameraController(controller, options);
+}
+#else
 extern inline function resetOrbitCameraController(controller:OrbitCameraController, options:OrbitCameraControllerOptions):Void {
 #if hl
 	flight._hl._fn.CameraControls.resetOrbitCameraController(controller, options);
@@ -264,6 +407,12 @@ extern inline function resetOrbitCameraController(controller:OrbitCameraControll
 	#error "flight.CameraControls: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function rotateOrbitCameraController(controller:OrbitCameraController, deltaAzimuth:Float, deltaPolar:Float):Void {
+	flight._js._fn.CameraControls.rotateOrbitCameraController(controller, deltaAzimuth, deltaPolar);
+}
+#else
 extern inline function rotateOrbitCameraController(controller:OrbitCameraController, deltaAzimuth:Float, deltaPolar:Float):Void {
 #if hl
 	flight._hl._fn.CameraControls.rotateOrbitCameraController(controller, deltaAzimuth, deltaPolar);
@@ -275,6 +424,12 @@ extern inline function rotateOrbitCameraController(controller:OrbitCameraControl
 	#error "flight.CameraControls: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function snapOrbitCameraController(controller:OrbitCameraController):Void {
+	flight._js._fn.CameraControls.snapOrbitCameraController(controller);
+}
+#else
 extern inline function snapOrbitCameraController(controller:OrbitCameraController):Void {
 #if hl
 	flight._hl._fn.CameraControls.snapOrbitCameraController(controller);
@@ -286,6 +441,12 @@ extern inline function snapOrbitCameraController(controller:OrbitCameraControlle
 	#error "flight.CameraControls: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function updateOrbitCameraController(controller:OrbitCameraController, camera:Camera3D, deltaTime:Float):Void {
+	flight._js._fn.CameraControls.updateOrbitCameraController(controller, camera, deltaTime);
+}
+#else
 extern inline function updateOrbitCameraController(controller:OrbitCameraController, camera:Camera3D, deltaTime:Float):Void {
 #if hl
 	flight._hl._fn.CameraControls.updateOrbitCameraController(controller, camera, deltaTime);
@@ -297,6 +458,12 @@ extern inline function updateOrbitCameraController(controller:OrbitCameraControl
 	#error "flight.CameraControls: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freeCameraShake(ptr:CameraShake):Void {
+	flight._js._fn.CameraControls.freeCameraShake(ptr);
+}
+#else
 extern inline function freeCameraShake(ptr:CameraShake):Void {
 #if hl
 	flight._hl._fn.CameraControls.freeCameraShake(ptr);
@@ -308,6 +475,12 @@ extern inline function freeCameraShake(ptr:CameraShake):Void {
 	#error "flight.CameraControls: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freeCameraShakeOffset(ptr:CameraShakeOffset):Void {
+	flight._js._fn.CameraControls.freeCameraShakeOffset(ptr);
+}
+#else
 extern inline function freeCameraShakeOffset(ptr:CameraShakeOffset):Void {
 #if hl
 	flight._hl._fn.CameraControls.freeCameraShakeOffset(ptr);
@@ -319,6 +492,12 @@ extern inline function freeCameraShakeOffset(ptr:CameraShakeOffset):Void {
 	#error "flight.CameraControls: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freeFlyCameraController(ptr:FlyCameraController):Void {
+	flight._js._fn.CameraControls.freeFlyCameraController(ptr);
+}
+#else
 extern inline function freeFlyCameraController(ptr:FlyCameraController):Void {
 #if hl
 	flight._hl._fn.CameraControls.freeFlyCameraController(ptr);
@@ -330,6 +509,12 @@ extern inline function freeFlyCameraController(ptr:FlyCameraController):Void {
 	#error "flight.CameraControls: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freeOrbitCameraController(ptr:OrbitCameraController):Void {
+	flight._js._fn.CameraControls.freeOrbitCameraController(ptr);
+}
+#else
 extern inline function freeOrbitCameraController(ptr:OrbitCameraController):Void {
 #if hl
 	flight._hl._fn.CameraControls.freeOrbitCameraController(ptr);
@@ -341,3 +526,4 @@ extern inline function freeOrbitCameraController(ptr:OrbitCameraController):Void
 	#error "flight.CameraControls: no backend for this target."
 #end
 }
+#end

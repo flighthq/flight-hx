@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract Physics2DJointSolverRef(Dynamic) {}
+abstract Physics2DJointSolverRef(Dynamic) {
+}

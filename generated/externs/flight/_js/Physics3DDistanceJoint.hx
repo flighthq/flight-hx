@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract Physics3DDistanceJoint(Dynamic) {}
+abstract Physics3DDistanceJoint(Dynamic) {
+}

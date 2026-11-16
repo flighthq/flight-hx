@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract PathOffsetOptions(Dynamic) {}
+abstract PathOffsetOptions(Dynamic) {
+}

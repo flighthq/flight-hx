@@ -1,5 +1,10 @@
 package flight;
 
+#if (js && flight_esm)
+extern inline function createPhysics2dAbi():Physics2DAbi {
+	return flight._js._fn.Physics2dAbi.createPhysics2dAbi();
+}
+#else
 extern inline function createPhysics2dAbi():Physics2DAbi {
 #if hl
 	return flight._hl._fn.Physics2dAbi.createPhysics2dAbi();
@@ -11,6 +16,12 @@ extern inline function createPhysics2dAbi():Physics2DAbi {
 	#error "flight.Physics2dAbi: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function createPhysics2dAbiWorld(abi:Physics2DAbi):Int {
+	return flight._js._fn.Physics2dAbi.createPhysics2dAbiWorld(abi);
+}
+#else
 extern inline function createPhysics2dAbiWorld(abi:Physics2DAbi):Int {
 #if hl
 	return flight._hl._fn.Physics2dAbi.createPhysics2dAbiWorld(abi);
@@ -22,6 +33,12 @@ extern inline function createPhysics2dAbiWorld(abi:Physics2DAbi):Int {
 	#error "flight.Physics2dAbi: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function destroyPhysics2dAbiWorld(abi:Physics2DAbi, world:Int):Bool {
+	return flight._js._fn.Physics2dAbi.destroyPhysics2dAbiWorld(abi, world);
+}
+#else
 extern inline function destroyPhysics2dAbiWorld(abi:Physics2DAbi, world:Int):Bool {
 #if hl
 	return flight._hl._fn.Physics2dAbi.destroyPhysics2dAbiWorld(abi, world);
@@ -33,6 +50,12 @@ extern inline function destroyPhysics2dAbiWorld(abi:Physics2DAbi, world:Int):Boo
 	#error "flight.Physics2dAbi: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function executePhysics2dAbiCommands(out:Physics2DAbiExecutionResult, abi:Physics2DAbi, world:Int, commands:Physics2DAbiCommandBuffer):Bool {
+	return flight._js._fn.Physics2dAbi.executePhysics2dAbiCommands(out, abi, world, commands);
+}
+#else
 extern inline function executePhysics2dAbiCommands(out:Physics2DAbiExecutionResult, abi:Physics2DAbi, world:Int, commands:Physics2DAbiCommandBuffer):Bool {
 #if hl
 	return flight._hl._fn.Physics2dAbi.executePhysics2dAbiCommands(out, abi, world, commands);
@@ -44,6 +67,12 @@ extern inline function executePhysics2dAbiCommands(out:Physics2DAbiExecutionResu
 	#error "flight.Physics2dAbi: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getPhysics2dAbiWorldStatus(abi:Physics2DAbi, world:Int):Dynamic {
+	return flight._js._fn.Physics2dAbi.getPhysics2dAbiWorldStatus(abi, world);
+}
+#else
 extern inline function getPhysics2dAbiWorldStatus(abi:Physics2DAbi, world:Int):flight.Physics2DAbiWorldStatus {
 #if hl
 	return flight._hl._fn.Physics2dAbi.getPhysics2dAbiWorldStatus(abi, world);
@@ -55,6 +84,12 @@ extern inline function getPhysics2dAbiWorldStatus(abi:Physics2DAbi, world:Int):f
 	#error "flight.Physics2dAbi: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function readPhysics2dAbiBodies(out:Physics2DAbiBodyBuffer, abi:Physics2DAbi, world:Int, bodyIds:Null<Dynamic>):Bool {
+	return flight._js._fn.Physics2dAbi.readPhysics2dAbiBodies(out, abi, world, bodyIds);
+}
+#else
 extern inline function readPhysics2dAbiBodies(out:Physics2DAbiBodyBuffer, abi:Physics2DAbi, world:Int, bodyIds:Dynamic, bodyIdsLen:Int):Bool {
 #if hl
 	return flight._hl._fn.Physics2dAbi.readPhysics2dAbiBodies(out, abi, world, bodyIds, bodyIdsLen);
@@ -66,6 +101,12 @@ extern inline function readPhysics2dAbiBodies(out:Physics2DAbiBodyBuffer, abi:Ph
 	#error "flight.Physics2dAbi: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function readPhysics2dAbiContacts(out:Physics2DAbiContactBuffer, abi:Physics2DAbi, world:Int, selection:Dynamic):Bool {
+	return flight._js._fn.Physics2dAbi.readPhysics2dAbiContacts(out, abi, world, selection);
+}
+#else
 extern inline function readPhysics2dAbiContacts(out:Physics2DAbiContactBuffer, abi:Physics2DAbi, world:Int, selection:flight.Physics2DAbiContactSelection):Bool {
 #if hl
 	return flight._hl._fn.Physics2dAbi.readPhysics2dAbiContacts(out, abi, world, selection);
@@ -77,6 +118,12 @@ extern inline function readPhysics2dAbiContacts(out:Physics2DAbiContactBuffer, a
 	#error "flight.Physics2dAbi: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function readPhysics2dAbiJoints(out:Physics2DAbiJointBuffer, abi:Physics2DAbi, world:Int):Bool {
+	return flight._js._fn.Physics2dAbi.readPhysics2dAbiJoints(out, abi, world);
+}
+#else
 extern inline function readPhysics2dAbiJoints(out:Physics2DAbiJointBuffer, abi:Physics2DAbi, world:Int):Bool {
 #if hl
 	return flight._hl._fn.Physics2dAbi.readPhysics2dAbiJoints(out, abi, world);
@@ -88,6 +135,12 @@ extern inline function readPhysics2dAbiJoints(out:Physics2DAbiJointBuffer, abi:P
 	#error "flight.Physics2dAbi: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function stepPhysics2dAbiWorld(abi:Physics2DAbi, world:Int, dt:Float, hooks:Null<Physics2DAbiContactHooks>):Dynamic {
+	return flight._js._fn.Physics2dAbi.stepPhysics2dAbiWorld(abi, world, dt, hooks);
+}
+#else
 extern inline function stepPhysics2dAbiWorld(abi:Physics2DAbi, world:Int, dt:Float, hooks:Physics2DAbiContactHooks):flight.Physics2DAbiStepStatus {
 #if hl
 	return flight._hl._fn.Physics2dAbi.stepPhysics2dAbiWorld(abi, world, dt, hooks);
@@ -99,6 +152,12 @@ extern inline function stepPhysics2dAbiWorld(abi:Physics2DAbi, world:Int, dt:Flo
 	#error "flight.Physics2dAbi: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function createPhysics2dAbiBodyBuffer(capacity:Int):Physics2DAbiBodyBuffer {
+	return flight._js._fn.Physics2dAbi.createPhysics2dAbiBodyBuffer(capacity);
+}
+#else
 extern inline function createPhysics2dAbiBodyBuffer(capacity:Int):Physics2DAbiBodyBuffer {
 #if hl
 	return flight._hl._fn.Physics2dAbi.createPhysics2dAbiBodyBuffer(capacity);
@@ -110,6 +169,12 @@ extern inline function createPhysics2dAbiBodyBuffer(capacity:Int):Physics2DAbiBo
 	#error "flight.Physics2dAbi: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function createPhysics2dAbiCommandBuffer(byteCapacity:Null<Int>):Physics2DAbiCommandBuffer {
+	return flight._js._fn.Physics2dAbi.createPhysics2dAbiCommandBuffer(byteCapacity);
+}
+#else
 extern inline function createPhysics2dAbiCommandBuffer(byteCapacity:haxe.Int64):Physics2DAbiCommandBuffer {
 #if hl
 	return flight._hl._fn.Physics2dAbi.createPhysics2dAbiCommandBuffer(byteCapacity);
@@ -121,6 +186,12 @@ extern inline function createPhysics2dAbiCommandBuffer(byteCapacity:haxe.Int64):
 	#error "flight.Physics2dAbi: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function createPhysics2dAbiContactBuffer(contactCapacity:Int, pointCapacity:Int):Physics2DAbiContactBuffer {
+	return flight._js._fn.Physics2dAbi.createPhysics2dAbiContactBuffer(contactCapacity, pointCapacity);
+}
+#else
 extern inline function createPhysics2dAbiContactBuffer(contactCapacity:Int, pointCapacity:Int):Physics2DAbiContactBuffer {
 #if hl
 	return flight._hl._fn.Physics2dAbi.createPhysics2dAbiContactBuffer(contactCapacity, pointCapacity);
@@ -132,6 +203,12 @@ extern inline function createPhysics2dAbiContactBuffer(contactCapacity:Int, poin
 	#error "flight.Physics2dAbi: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function createPhysics2dAbiExecutionResult():Physics2DAbiExecutionResult {
+	return flight._js._fn.Physics2dAbi.createPhysics2dAbiExecutionResult();
+}
+#else
 extern inline function createPhysics2dAbiExecutionResult():Physics2DAbiExecutionResult {
 #if hl
 	return flight._hl._fn.Physics2dAbi.createPhysics2dAbiExecutionResult();
@@ -143,6 +220,12 @@ extern inline function createPhysics2dAbiExecutionResult():Physics2DAbiExecution
 	#error "flight.Physics2dAbi: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function createPhysics2dAbiJointBuffer(capacity:Int):Physics2DAbiJointBuffer {
+	return flight._js._fn.Physics2dAbi.createPhysics2dAbiJointBuffer(capacity);
+}
+#else
 extern inline function createPhysics2dAbiJointBuffer(capacity:Int):Physics2DAbiJointBuffer {
 #if hl
 	return flight._hl._fn.Physics2dAbi.createPhysics2dAbiJointBuffer(capacity);
@@ -154,6 +237,12 @@ extern inline function createPhysics2dAbiJointBuffer(capacity:Int):Physics2DAbiJ
 	#error "flight.Physics2dAbi: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function createPhysics2dAbiQueryBuffer(capacity:Int):Physics2DAbiQueryBuffer {
+	return flight._js._fn.Physics2dAbi.createPhysics2dAbiQueryBuffer(capacity);
+}
+#else
 extern inline function createPhysics2dAbiQueryBuffer(capacity:Int):Physics2DAbiQueryBuffer {
 #if hl
 	return flight._hl._fn.Physics2dAbi.createPhysics2dAbiQueryBuffer(capacity);
@@ -165,6 +254,12 @@ extern inline function createPhysics2dAbiQueryBuffer(capacity:Int):Physics2DAbiQ
 	#error "flight.Physics2dAbi: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function clearPhysics2dAbiCommandBuffer(out:Physics2DAbiCommandBuffer):Void {
+	flight._js._fn.Physics2dAbi.clearPhysics2dAbiCommandBuffer(out);
+}
+#else
 extern inline function clearPhysics2dAbiCommandBuffer(out:Physics2DAbiCommandBuffer):Void {
 #if hl
 	flight._hl._fn.Physics2dAbi.clearPhysics2dAbiCommandBuffer(out);
@@ -176,6 +271,12 @@ extern inline function clearPhysics2dAbiCommandBuffer(out:Physics2DAbiCommandBuf
 	#error "flight.Physics2dAbi: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getPhysics2dAbiCommandBufferRemainingByteLength(buffer:Physics2DAbiCommandBuffer):Int {
+	return flight._js._fn.Physics2dAbi.getPhysics2dAbiCommandBufferRemainingByteLength(buffer);
+}
+#else
 extern inline function getPhysics2dAbiCommandBufferRemainingByteLength(buffer:Physics2DAbiCommandBuffer):Int {
 #if hl
 	return flight._hl._fn.Physics2dAbi.getPhysics2dAbiCommandBufferRemainingByteLength(buffer);
@@ -187,6 +288,12 @@ extern inline function getPhysics2dAbiCommandBufferRemainingByteLength(buffer:Ph
 	#error "flight.Physics2dAbi: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getPhysics2dAbiSetColliderCommandByteLength(collider:Physics2DCollider):Float {
+	return flight._js._fn.Physics2dAbi.getPhysics2dAbiSetColliderCommandByteLength(collider);
+}
+#else
 extern inline function getPhysics2dAbiSetColliderCommandByteLength(collider:Physics2DCollider):haxe.Int64 {
 #if hl
 	return flight._hl._fn.Physics2dAbi.getPhysics2dAbiSetColliderCommandByteLength(collider);
@@ -198,6 +305,12 @@ extern inline function getPhysics2dAbiSetColliderCommandByteLength(collider:Phys
 	#error "flight.Physics2dAbi: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function writePhysics2dAbiApplyForceAtPointCommand(out:Physics2DAbiCommandBuffer, bodyId:Int, x:Float, y:Float, pointX:Float, pointY:Float):Bool {
+	return flight._js._fn.Physics2dAbi.writePhysics2dAbiApplyForceAtPointCommand(out, bodyId, x, y, pointX, pointY);
+}
+#else
 extern inline function writePhysics2dAbiApplyForceAtPointCommand(out:Physics2DAbiCommandBuffer, bodyId:Int, x:Float, y:Float, pointX:Float, pointY:Float):Bool {
 #if hl
 	return flight._hl._fn.Physics2dAbi.writePhysics2dAbiApplyForceAtPointCommand(out, bodyId, x, y, pointX, pointY);
@@ -209,6 +322,12 @@ extern inline function writePhysics2dAbiApplyForceAtPointCommand(out:Physics2DAb
 	#error "flight.Physics2dAbi: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function writePhysics2dAbiApplyForceCommand(out:Physics2DAbiCommandBuffer, bodyId:Int, x:Float, y:Float):Bool {
+	return flight._js._fn.Physics2dAbi.writePhysics2dAbiApplyForceCommand(out, bodyId, x, y);
+}
+#else
 extern inline function writePhysics2dAbiApplyForceCommand(out:Physics2DAbiCommandBuffer, bodyId:Int, x:Float, y:Float):Bool {
 #if hl
 	return flight._hl._fn.Physics2dAbi.writePhysics2dAbiApplyForceCommand(out, bodyId, x, y);
@@ -220,6 +339,12 @@ extern inline function writePhysics2dAbiApplyForceCommand(out:Physics2DAbiComman
 	#error "flight.Physics2dAbi: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function writePhysics2dAbiApplyLinearImpulseAtPointCommand(out:Physics2DAbiCommandBuffer, bodyId:Int, x:Float, y:Float, pointX:Float, pointY:Float):Bool {
+	return flight._js._fn.Physics2dAbi.writePhysics2dAbiApplyLinearImpulseAtPointCommand(out, bodyId, x, y, pointX, pointY);
+}
+#else
 extern inline function writePhysics2dAbiApplyLinearImpulseAtPointCommand(out:Physics2DAbiCommandBuffer, bodyId:Int, x:Float, y:Float, pointX:Float, pointY:Float):Bool {
 #if hl
 	return flight._hl._fn.Physics2dAbi.writePhysics2dAbiApplyLinearImpulseAtPointCommand(out, bodyId, x, y, pointX, pointY);
@@ -231,6 +356,12 @@ extern inline function writePhysics2dAbiApplyLinearImpulseAtPointCommand(out:Phy
 	#error "flight.Physics2dAbi: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function writePhysics2dAbiApplyLinearImpulseCommand(out:Physics2DAbiCommandBuffer, bodyId:Int, x:Float, y:Float):Bool {
+	return flight._js._fn.Physics2dAbi.writePhysics2dAbiApplyLinearImpulseCommand(out, bodyId, x, y);
+}
+#else
 extern inline function writePhysics2dAbiApplyLinearImpulseCommand(out:Physics2DAbiCommandBuffer, bodyId:Int, x:Float, y:Float):Bool {
 #if hl
 	return flight._hl._fn.Physics2dAbi.writePhysics2dAbiApplyLinearImpulseCommand(out, bodyId, x, y);
@@ -242,6 +373,12 @@ extern inline function writePhysics2dAbiApplyLinearImpulseCommand(out:Physics2DA
 	#error "flight.Physics2dAbi: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function writePhysics2dAbiApplyTorqueCommand(out:Physics2DAbiCommandBuffer, bodyId:Int, torque:Float):Bool {
+	return flight._js._fn.Physics2dAbi.writePhysics2dAbiApplyTorqueCommand(out, bodyId, torque);
+}
+#else
 extern inline function writePhysics2dAbiApplyTorqueCommand(out:Physics2DAbiCommandBuffer, bodyId:Int, torque:Float):Bool {
 #if hl
 	return flight._hl._fn.Physics2dAbi.writePhysics2dAbiApplyTorqueCommand(out, bodyId, torque);
@@ -253,6 +390,12 @@ extern inline function writePhysics2dAbiApplyTorqueCommand(out:Physics2DAbiComma
 	#error "flight.Physics2dAbi: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function writePhysics2dAbiDestroyBodyCommand(out:Physics2DAbiCommandBuffer, bodyId:Int):Bool {
+	return flight._js._fn.Physics2dAbi.writePhysics2dAbiDestroyBodyCommand(out, bodyId);
+}
+#else
 extern inline function writePhysics2dAbiDestroyBodyCommand(out:Physics2DAbiCommandBuffer, bodyId:Int):Bool {
 #if hl
 	return flight._hl._fn.Physics2dAbi.writePhysics2dAbiDestroyBodyCommand(out, bodyId);
@@ -264,6 +407,12 @@ extern inline function writePhysics2dAbiDestroyBodyCommand(out:Physics2DAbiComma
 	#error "flight.Physics2dAbi: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function writePhysics2dAbiDestroyColliderCommand(out:Physics2DAbiCommandBuffer, colliderId:Int):Bool {
+	return flight._js._fn.Physics2dAbi.writePhysics2dAbiDestroyColliderCommand(out, colliderId);
+}
+#else
 extern inline function writePhysics2dAbiDestroyColliderCommand(out:Physics2DAbiCommandBuffer, colliderId:Int):Bool {
 #if hl
 	return flight._hl._fn.Physics2dAbi.writePhysics2dAbiDestroyColliderCommand(out, colliderId);
@@ -275,6 +424,12 @@ extern inline function writePhysics2dAbiDestroyColliderCommand(out:Physics2DAbiC
 	#error "flight.Physics2dAbi: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function writePhysics2dAbiDestroyJointCommand(out:Physics2DAbiCommandBuffer, jointId:Int):Bool {
+	return flight._js._fn.Physics2dAbi.writePhysics2dAbiDestroyJointCommand(out, jointId);
+}
+#else
 extern inline function writePhysics2dAbiDestroyJointCommand(out:Physics2DAbiCommandBuffer, jointId:Int):Bool {
 #if hl
 	return flight._hl._fn.Physics2dAbi.writePhysics2dAbiDestroyJointCommand(out, jointId);
@@ -286,6 +441,12 @@ extern inline function writePhysics2dAbiDestroyJointCommand(out:Physics2DAbiComm
 	#error "flight.Physics2dAbi: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function writePhysics2dAbiSetBodyCommand(out:Physics2DAbiCommandBuffer, bodyId:Int, body:RigidBody2D):Bool {
+	return flight._js._fn.Physics2dAbi.writePhysics2dAbiSetBodyCommand(out, bodyId, body);
+}
+#else
 extern inline function writePhysics2dAbiSetBodyCommand(out:Physics2DAbiCommandBuffer, bodyId:Int, body:RigidBody2D):Bool {
 #if hl
 	return flight._hl._fn.Physics2dAbi.writePhysics2dAbiSetBodyCommand(out, bodyId, body);
@@ -297,6 +458,12 @@ extern inline function writePhysics2dAbiSetBodyCommand(out:Physics2DAbiCommandBu
 	#error "flight.Physics2dAbi: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function writePhysics2dAbiSetColliderCommand(out:Physics2DAbiCommandBuffer, colliderId:Int, bodyId:Int, collider:Physics2DCollider):Bool {
+	return flight._js._fn.Physics2dAbi.writePhysics2dAbiSetColliderCommand(out, colliderId, bodyId, collider);
+}
+#else
 extern inline function writePhysics2dAbiSetColliderCommand(out:Physics2DAbiCommandBuffer, colliderId:Int, bodyId:Int, collider:Physics2DCollider):Bool {
 #if hl
 	return flight._hl._fn.Physics2dAbi.writePhysics2dAbiSetColliderCommand(out, colliderId, bodyId, collider);
@@ -308,6 +475,12 @@ extern inline function writePhysics2dAbiSetColliderCommand(out:Physics2DAbiComma
 	#error "flight.Physics2dAbi: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function writePhysics2dAbiSetGravityCommand(out:Physics2DAbiCommandBuffer, x:Float, y:Float):Bool {
+	return flight._js._fn.Physics2dAbi.writePhysics2dAbiSetGravityCommand(out, x, y);
+}
+#else
 extern inline function writePhysics2dAbiSetGravityCommand(out:Physics2DAbiCommandBuffer, x:Float, y:Float):Bool {
 #if hl
 	return flight._hl._fn.Physics2dAbi.writePhysics2dAbiSetGravityCommand(out, x, y);
@@ -319,6 +492,12 @@ extern inline function writePhysics2dAbiSetGravityCommand(out:Physics2DAbiComman
 	#error "flight.Physics2dAbi: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function writePhysics2dAbiSetJointCommandPhysics2DdistanceJoint(out:Physics2DAbiCommandBuffer, jointId:Int, bodyAId:Int, bodyBId:Int, joint:Physics2DDistanceJoint):Bool {
+	return flight._js._fn.Physics2dAbi.writePhysics2dAbiSetJointCommandPhysics2DdistanceJoint(out, jointId, bodyAId, bodyBId, joint);
+}
+#else
 extern inline function writePhysics2dAbiSetJointCommandPhysics2DdistanceJoint(out:Physics2DAbiCommandBuffer, jointId:Int, bodyAId:Int, bodyBId:Int, joint:Physics2DDistanceJoint):Bool {
 #if hl
 	return flight._hl._fn.Physics2dAbi.writePhysics2dAbiSetJointCommandPhysics2DdistanceJoint(out, jointId, bodyAId, bodyBId, joint);
@@ -330,6 +509,12 @@ extern inline function writePhysics2dAbiSetJointCommandPhysics2DdistanceJoint(ou
 	#error "flight.Physics2dAbi: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function writePhysics2dAbiSetJointCommandPhysics2DgearJoint(out:Physics2DAbiCommandBuffer, jointId:Int, bodyAId:Int, bodyBId:Int, joint:Physics2DGearJoint):Bool {
+	return flight._js._fn.Physics2dAbi.writePhysics2dAbiSetJointCommandPhysics2DgearJoint(out, jointId, bodyAId, bodyBId, joint);
+}
+#else
 extern inline function writePhysics2dAbiSetJointCommandPhysics2DgearJoint(out:Physics2DAbiCommandBuffer, jointId:Int, bodyAId:Int, bodyBId:Int, joint:Physics2DGearJoint):Bool {
 #if hl
 	return flight._hl._fn.Physics2dAbi.writePhysics2dAbiSetJointCommandPhysics2DgearJoint(out, jointId, bodyAId, bodyBId, joint);
@@ -341,6 +526,12 @@ extern inline function writePhysics2dAbiSetJointCommandPhysics2DgearJoint(out:Ph
 	#error "flight.Physics2dAbi: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function writePhysics2dAbiSetJointCommandPhysics2DmouseJoint(out:Physics2DAbiCommandBuffer, jointId:Int, bodyAId:Int, bodyBId:Int, joint:Physics2DMouseJoint):Bool {
+	return flight._js._fn.Physics2dAbi.writePhysics2dAbiSetJointCommandPhysics2DmouseJoint(out, jointId, bodyAId, bodyBId, joint);
+}
+#else
 extern inline function writePhysics2dAbiSetJointCommandPhysics2DmouseJoint(out:Physics2DAbiCommandBuffer, jointId:Int, bodyAId:Int, bodyBId:Int, joint:Physics2DMouseJoint):Bool {
 #if hl
 	return flight._hl._fn.Physics2dAbi.writePhysics2dAbiSetJointCommandPhysics2DmouseJoint(out, jointId, bodyAId, bodyBId, joint);
@@ -352,6 +543,12 @@ extern inline function writePhysics2dAbiSetJointCommandPhysics2DmouseJoint(out:P
 	#error "flight.Physics2dAbi: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function writePhysics2dAbiSetJointCommandPhysics2DprismaticJoint(out:Physics2DAbiCommandBuffer, jointId:Int, bodyAId:Int, bodyBId:Int, joint:Physics2DPrismaticJoint):Bool {
+	return flight._js._fn.Physics2dAbi.writePhysics2dAbiSetJointCommandPhysics2DprismaticJoint(out, jointId, bodyAId, bodyBId, joint);
+}
+#else
 extern inline function writePhysics2dAbiSetJointCommandPhysics2DprismaticJoint(out:Physics2DAbiCommandBuffer, jointId:Int, bodyAId:Int, bodyBId:Int, joint:Physics2DPrismaticJoint):Bool {
 #if hl
 	return flight._hl._fn.Physics2dAbi.writePhysics2dAbiSetJointCommandPhysics2DprismaticJoint(out, jointId, bodyAId, bodyBId, joint);
@@ -363,6 +560,12 @@ extern inline function writePhysics2dAbiSetJointCommandPhysics2DprismaticJoint(o
 	#error "flight.Physics2dAbi: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function writePhysics2dAbiSetJointCommandPhysics2DpulleyJoint(out:Physics2DAbiCommandBuffer, jointId:Int, bodyAId:Int, bodyBId:Int, joint:Physics2DPulleyJoint):Bool {
+	return flight._js._fn.Physics2dAbi.writePhysics2dAbiSetJointCommandPhysics2DpulleyJoint(out, jointId, bodyAId, bodyBId, joint);
+}
+#else
 extern inline function writePhysics2dAbiSetJointCommandPhysics2DpulleyJoint(out:Physics2DAbiCommandBuffer, jointId:Int, bodyAId:Int, bodyBId:Int, joint:Physics2DPulleyJoint):Bool {
 #if hl
 	return flight._hl._fn.Physics2dAbi.writePhysics2dAbiSetJointCommandPhysics2DpulleyJoint(out, jointId, bodyAId, bodyBId, joint);
@@ -374,6 +577,12 @@ extern inline function writePhysics2dAbiSetJointCommandPhysics2DpulleyJoint(out:
 	#error "flight.Physics2dAbi: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function writePhysics2dAbiSetJointCommandPhysics2DrevoluteJoint(out:Physics2DAbiCommandBuffer, jointId:Int, bodyAId:Int, bodyBId:Int, joint:Physics2DRevoluteJoint):Bool {
+	return flight._js._fn.Physics2dAbi.writePhysics2dAbiSetJointCommandPhysics2DrevoluteJoint(out, jointId, bodyAId, bodyBId, joint);
+}
+#else
 extern inline function writePhysics2dAbiSetJointCommandPhysics2DrevoluteJoint(out:Physics2DAbiCommandBuffer, jointId:Int, bodyAId:Int, bodyBId:Int, joint:Physics2DRevoluteJoint):Bool {
 #if hl
 	return flight._hl._fn.Physics2dAbi.writePhysics2dAbiSetJointCommandPhysics2DrevoluteJoint(out, jointId, bodyAId, bodyBId, joint);
@@ -385,6 +594,12 @@ extern inline function writePhysics2dAbiSetJointCommandPhysics2DrevoluteJoint(ou
 	#error "flight.Physics2dAbi: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function writePhysics2dAbiSetJointCommandPhysics2DropeJoint(out:Physics2DAbiCommandBuffer, jointId:Int, bodyAId:Int, bodyBId:Int, joint:Physics2DRopeJoint):Bool {
+	return flight._js._fn.Physics2dAbi.writePhysics2dAbiSetJointCommandPhysics2DropeJoint(out, jointId, bodyAId, bodyBId, joint);
+}
+#else
 extern inline function writePhysics2dAbiSetJointCommandPhysics2DropeJoint(out:Physics2DAbiCommandBuffer, jointId:Int, bodyAId:Int, bodyBId:Int, joint:Physics2DRopeJoint):Bool {
 #if hl
 	return flight._hl._fn.Physics2dAbi.writePhysics2dAbiSetJointCommandPhysics2DropeJoint(out, jointId, bodyAId, bodyBId, joint);
@@ -396,6 +611,12 @@ extern inline function writePhysics2dAbiSetJointCommandPhysics2DropeJoint(out:Ph
 	#error "flight.Physics2dAbi: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function writePhysics2dAbiSetJointCommandPhysics2DweldJoint(out:Physics2DAbiCommandBuffer, jointId:Int, bodyAId:Int, bodyBId:Int, joint:Physics2DWeldJoint):Bool {
+	return flight._js._fn.Physics2dAbi.writePhysics2dAbiSetJointCommandPhysics2DweldJoint(out, jointId, bodyAId, bodyBId, joint);
+}
+#else
 extern inline function writePhysics2dAbiSetJointCommandPhysics2DweldJoint(out:Physics2DAbiCommandBuffer, jointId:Int, bodyAId:Int, bodyBId:Int, joint:Physics2DWeldJoint):Bool {
 #if hl
 	return flight._hl._fn.Physics2dAbi.writePhysics2dAbiSetJointCommandPhysics2DweldJoint(out, jointId, bodyAId, bodyBId, joint);
@@ -407,6 +628,12 @@ extern inline function writePhysics2dAbiSetJointCommandPhysics2DweldJoint(out:Ph
 	#error "flight.Physics2dAbi: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function writePhysics2dAbiSetJointCommandPhysics2DwheelJoint(out:Physics2DAbiCommandBuffer, jointId:Int, bodyAId:Int, bodyBId:Int, joint:Physics2DWheelJoint):Bool {
+	return flight._js._fn.Physics2dAbi.writePhysics2dAbiSetJointCommandPhysics2DwheelJoint(out, jointId, bodyAId, bodyBId, joint);
+}
+#else
 extern inline function writePhysics2dAbiSetJointCommandPhysics2DwheelJoint(out:Physics2DAbiCommandBuffer, jointId:Int, bodyAId:Int, bodyBId:Int, joint:Physics2DWheelJoint):Bool {
 #if hl
 	return flight._hl._fn.Physics2dAbi.writePhysics2dAbiSetJointCommandPhysics2DwheelJoint(out, jointId, bodyAId, bodyBId, joint);
@@ -418,6 +645,12 @@ extern inline function writePhysics2dAbiSetJointCommandPhysics2DwheelJoint(out:P
 	#error "flight.Physics2dAbi: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function writePhysics2dAbiSetSolverConfigCommand(out:Physics2DAbiCommandBuffer, config:Physics2DSolverConfig):Bool {
+	return flight._js._fn.Physics2dAbi.writePhysics2dAbiSetSolverConfigCommand(out, config);
+}
+#else
 extern inline function writePhysics2dAbiSetSolverConfigCommand(out:Physics2DAbiCommandBuffer, config:Physics2DSolverConfig):Bool {
 #if hl
 	return flight._hl._fn.Physics2dAbi.writePhysics2dAbiSetSolverConfigCommand(out, config);
@@ -429,6 +662,12 @@ extern inline function writePhysics2dAbiSetSolverConfigCommand(out:Physics2DAbiC
 	#error "flight.Physics2dAbi: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function writePhysics2dAbiWakeBodyCommand(out:Physics2DAbiCommandBuffer, bodyId:Int):Bool {
+	return flight._js._fn.Physics2dAbi.writePhysics2dAbiWakeBodyCommand(out, bodyId);
+}
+#else
 extern inline function writePhysics2dAbiWakeBodyCommand(out:Physics2DAbiCommandBuffer, bodyId:Int):Bool {
 #if hl
 	return flight._hl._fn.Physics2dAbi.writePhysics2dAbiWakeBodyCommand(out, bodyId);
@@ -440,6 +679,12 @@ extern inline function writePhysics2dAbiWakeBodyCommand(out:Physics2DAbiCommandB
 	#error "flight.Physics2dAbi: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function queryPhysics2dAbiPoint(out:Physics2DAbiQueryBuffer, abi:Physics2DAbi, world:Int, x:Float, y:Float, filter:Null<Physics2DQueryFilter>):Bool {
+	return flight._js._fn.Physics2dAbi.queryPhysics2dAbiPoint(out, abi, world, x, y, filter);
+}
+#else
 extern inline function queryPhysics2dAbiPoint(out:Physics2DAbiQueryBuffer, abi:Physics2DAbi, world:Int, x:Float, y:Float, filter:Physics2DQueryFilter):Bool {
 #if hl
 	return flight._hl._fn.Physics2dAbi.queryPhysics2dAbiPoint(out, abi, world, x, y, filter);
@@ -451,6 +696,12 @@ extern inline function queryPhysics2dAbiPoint(out:Physics2DAbiQueryBuffer, abi:P
 	#error "flight.Physics2dAbi: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function queryPhysics2dAbiRay(out:Physics2DAbiQueryBuffer, abi:Physics2DAbi, world:Int, originX:Float, originY:Float, directionX:Float, directionY:Float, maxFraction:Null<Float>, filter:Null<Physics2DQueryFilter>):Bool {
+	return flight._js._fn.Physics2dAbi.queryPhysics2dAbiRay(out, abi, world, originX, originY, directionX, directionY, maxFraction, filter);
+}
+#else
 extern inline function queryPhysics2dAbiRay(out:Physics2DAbiQueryBuffer, abi:Physics2DAbi, world:Int, originX:Float, originY:Float, directionX:Float, directionY:Float, maxFraction:Float, filter:Physics2DQueryFilter):Bool {
 #if hl
 	return flight._hl._fn.Physics2dAbi.queryPhysics2dAbiRay(out, abi, world, originX, originY, directionX, directionY, maxFraction, filter);
@@ -462,6 +713,12 @@ extern inline function queryPhysics2dAbiRay(out:Physics2DAbiQueryBuffer, abi:Phy
 	#error "flight.Physics2dAbi: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function queryPhysics2dAbiRayClosest(out:Physics2DAbiQueryBuffer, abi:Physics2DAbi, world:Int, originX:Float, originY:Float, directionX:Float, directionY:Float, maxFraction:Null<Float>, filter:Null<Physics2DQueryFilter>):Bool {
+	return flight._js._fn.Physics2dAbi.queryPhysics2dAbiRayClosest(out, abi, world, originX, originY, directionX, directionY, maxFraction, filter);
+}
+#else
 extern inline function queryPhysics2dAbiRayClosest(out:Physics2DAbiQueryBuffer, abi:Physics2DAbi, world:Int, originX:Float, originY:Float, directionX:Float, directionY:Float, maxFraction:Float, filter:Physics2DQueryFilter):Bool {
 #if hl
 	return flight._hl._fn.Physics2dAbi.queryPhysics2dAbiRayClosest(out, abi, world, originX, originY, directionX, directionY, maxFraction, filter);
@@ -473,6 +730,12 @@ extern inline function queryPhysics2dAbiRayClosest(out:Physics2DAbiQueryBuffer, 
 	#error "flight.Physics2dAbi: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function queryPhysics2dAbiRegion(out:Physics2DAbiQueryBuffer, abi:Physics2DAbi, world:Int, region:SpatialAabb2D, filter:Null<Physics2DQueryFilter>):Bool {
+	return flight._js._fn.Physics2dAbi.queryPhysics2dAbiRegion(out, abi, world, region, filter);
+}
+#else
 extern inline function queryPhysics2dAbiRegion(out:Physics2DAbiQueryBuffer, abi:Physics2DAbi, world:Int, region:SpatialAabb2D, filter:Physics2DQueryFilter):Bool {
 #if hl
 	return flight._hl._fn.Physics2dAbi.queryPhysics2dAbiRegion(out, abi, world, region, filter);
@@ -484,6 +747,12 @@ extern inline function queryPhysics2dAbiRegion(out:Physics2DAbiQueryBuffer, abi:
 	#error "flight.Physics2dAbi: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function queryPhysics2dAbiShapeCast(out:Physics2DAbiQueryBuffer, abi:Physics2DAbi, world:Int, shape:CollisionShape2D, dx:Float, dy:Float, maxFraction:Null<Float>, filter:Null<Physics2DQueryFilter>):Bool {
+	return flight._js._fn.Physics2dAbi.queryPhysics2dAbiShapeCast(out, abi, world, shape, dx, dy, maxFraction, filter);
+}
+#else
 extern inline function queryPhysics2dAbiShapeCast(out:Physics2DAbiQueryBuffer, abi:Physics2DAbi, world:Int, shape:CollisionShape2D, dx:Float, dy:Float, maxFraction:Float, filter:Physics2DQueryFilter):Bool {
 #if hl
 	return flight._hl._fn.Physics2dAbi.queryPhysics2dAbiShapeCast(out, abi, world, shape, dx, dy, maxFraction, filter);
@@ -495,6 +764,12 @@ extern inline function queryPhysics2dAbiShapeCast(out:Physics2DAbiQueryBuffer, a
 	#error "flight.Physics2dAbi: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function createReferencePhysics2dAbi():Physics2DAbi {
+	return flight._js._fn.Physics2dAbi.createReferencePhysics2dAbi();
+}
+#else
 extern inline function createReferencePhysics2dAbi():Physics2DAbi {
 #if hl
 	return flight._hl._fn.Physics2dAbi.createReferencePhysics2dAbi();
@@ -506,6 +781,12 @@ extern inline function createReferencePhysics2dAbi():Physics2DAbi {
 	#error "flight.Physics2dAbi: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freePhysics2Dabi(ptr:Physics2DAbi):Void {
+	flight._js._fn.Physics2dAbi.freePhysics2Dabi(ptr);
+}
+#else
 extern inline function freePhysics2Dabi(ptr:Physics2DAbi):Void {
 #if hl
 	flight._hl._fn.Physics2dAbi.freePhysics2Dabi(ptr);
@@ -517,6 +798,12 @@ extern inline function freePhysics2Dabi(ptr:Physics2DAbi):Void {
 	#error "flight.Physics2dAbi: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freePhysics2DabiBodyBuffer(ptr:Physics2DAbiBodyBuffer):Void {
+	flight._js._fn.Physics2dAbi.freePhysics2DabiBodyBuffer(ptr);
+}
+#else
 extern inline function freePhysics2DabiBodyBuffer(ptr:Physics2DAbiBodyBuffer):Void {
 #if hl
 	flight._hl._fn.Physics2dAbi.freePhysics2DabiBodyBuffer(ptr);
@@ -528,6 +815,12 @@ extern inline function freePhysics2DabiBodyBuffer(ptr:Physics2DAbiBodyBuffer):Vo
 	#error "flight.Physics2dAbi: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freePhysics2DabiCommandBuffer(ptr:Physics2DAbiCommandBuffer):Void {
+	flight._js._fn.Physics2dAbi.freePhysics2DabiCommandBuffer(ptr);
+}
+#else
 extern inline function freePhysics2DabiCommandBuffer(ptr:Physics2DAbiCommandBuffer):Void {
 #if hl
 	flight._hl._fn.Physics2dAbi.freePhysics2DabiCommandBuffer(ptr);
@@ -539,6 +832,12 @@ extern inline function freePhysics2DabiCommandBuffer(ptr:Physics2DAbiCommandBuff
 	#error "flight.Physics2dAbi: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freePhysics2DabiContactBuffer(ptr:Physics2DAbiContactBuffer):Void {
+	flight._js._fn.Physics2dAbi.freePhysics2DabiContactBuffer(ptr);
+}
+#else
 extern inline function freePhysics2DabiContactBuffer(ptr:Physics2DAbiContactBuffer):Void {
 #if hl
 	flight._hl._fn.Physics2dAbi.freePhysics2DabiContactBuffer(ptr);
@@ -550,6 +849,12 @@ extern inline function freePhysics2DabiContactBuffer(ptr:Physics2DAbiContactBuff
 	#error "flight.Physics2dAbi: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freePhysics2DabiExecutionResult(ptr:Physics2DAbiExecutionResult):Void {
+	flight._js._fn.Physics2dAbi.freePhysics2DabiExecutionResult(ptr);
+}
+#else
 extern inline function freePhysics2DabiExecutionResult(ptr:Physics2DAbiExecutionResult):Void {
 #if hl
 	flight._hl._fn.Physics2dAbi.freePhysics2DabiExecutionResult(ptr);
@@ -561,6 +866,12 @@ extern inline function freePhysics2DabiExecutionResult(ptr:Physics2DAbiExecution
 	#error "flight.Physics2dAbi: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freePhysics2DabiJointBuffer(ptr:Physics2DAbiJointBuffer):Void {
+	flight._js._fn.Physics2dAbi.freePhysics2DabiJointBuffer(ptr);
+}
+#else
 extern inline function freePhysics2DabiJointBuffer(ptr:Physics2DAbiJointBuffer):Void {
 #if hl
 	flight._hl._fn.Physics2dAbi.freePhysics2DabiJointBuffer(ptr);
@@ -572,6 +883,12 @@ extern inline function freePhysics2DabiJointBuffer(ptr:Physics2DAbiJointBuffer):
 	#error "flight.Physics2dAbi: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freePhysics2DabiQueryBuffer(ptr:Physics2DAbiQueryBuffer):Void {
+	flight._js._fn.Physics2dAbi.freePhysics2DabiQueryBuffer(ptr);
+}
+#else
 extern inline function freePhysics2DabiQueryBuffer(ptr:Physics2DAbiQueryBuffer):Void {
 #if hl
 	flight._hl._fn.Physics2dAbi.freePhysics2DabiQueryBuffer(ptr);
@@ -583,3 +900,4 @@ extern inline function freePhysics2DabiQueryBuffer(ptr:Physics2DAbiQueryBuffer):
 	#error "flight.Physics2dAbi: no backend for this target."
 #end
 }
+#end

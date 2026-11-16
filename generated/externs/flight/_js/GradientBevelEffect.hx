@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract GradientBevelEffect(Dynamic) {}
+abstract GradientBevelEffect(Dynamic) {
+}

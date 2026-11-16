@@ -71,7 +71,7 @@ if (hlInclude) {
   mkdirSync(path.dirname(destination), { recursive: true });
   const rpath = process.platform === 'darwin' ? '@loader_path' : '$ORIGIN';
   const compile = process.platform === 'win32'
-    ? spawnSync(process.env.CC ?? 'cl', ['/nologo', '/LD', '/O2', '/bigobj', `/I${path.dirname(header)}`, `/I${path.resolve(hlInclude)}`,
+    ? spawnSync(process.env.CC ?? 'cl', ['/nologo', '/LD', '/O2', '/bigobj', '/std:c11', `/I${path.dirname(header)}`, `/I${path.resolve(hlInclude)}`,
       path.join(emitted, 'flight_hl.c'), path.join(root, `native/lib/${platform}/${target.importLibrary}`), '/link', `/OUT:${destination}`,
       `/IMPLIB:${path.join(coreDirectory, 'flight_hl.lib')}`], { cwd: coreDirectory, encoding: 'utf8' })
     : spawnSync(process.env.CC ?? 'cc', ['-shared', '-fPIC', '-I', path.dirname(header), '-I', path.resolve(hlInclude),

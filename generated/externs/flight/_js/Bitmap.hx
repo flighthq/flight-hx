@@ -1,19 +1,19 @@
 package flight._js;
 
 abstract Bitmap(Dynamic) {
-	static inline public function create(width:Int, height:Int, color:haxe.Int64):flight._js.Bitmap {
+	static inline public function create(width:Int, height:Int, color:Null<Int>):flight._js.Bitmap {
 		return flight._js._fn.Bitmap.createBitmap(width, height, color);
 	}
 	inline public function clone():flight._js.Bitmap {
 		return flight._js._fn.Bitmap.cloneBitmap(cast this);
 	}
-	inline public function convertAlphaType(target:Int):Void {
+	inline public function convertAlphaType(target:Dynamic):Void {
 		flight._js._fn.Bitmap.convertBitmapAlphaType(cast this, target);
 	}
 	inline public function invalidate():Void {
 		flight._js._fn.Bitmap.invalidateBitmap(cast this);
 	}
-	inline public function compare(other:flight._js.Bitmap):Dynamic {
+	inline public function compare(other:flight._js.Bitmap):Null<flight._js.Bitmap> {
 		return flight._js._fn.Bitmap.compareBitmap(cast this, other);
 	}
 	inline public function getMismatch(other:flight._js.Bitmap, channelTolerance:Int):flight._js.BitmapMismatch {
@@ -22,13 +22,13 @@ abstract Bitmap(Dynamic) {
 	inline public function getCoverage(backgroundColor:Int, channelTolerance:Int):Float {
 		return flight._js._fn.Bitmap.getBitmapCoverage(cast this, backgroundColor, channelTolerance);
 	}
-	inline public function extend(left:Int, top:Int, right:Int, bottom:Int, edgeMode:Int, fillColor:Int):flight._js.Bitmap {
+	inline public function extend(left:Int, top:Int, right:Int, bottom:Int, edgeMode:Dynamic, fillColor:Int):flight._js.Bitmap {
 		return flight._js._fn.Bitmap.extendBitmap(cast this, left, top, right, bottom, edgeMode, fillColor);
 	}
 	inline public function trim():flight._js.Bitmap {
 		return flight._js._fn.Bitmap.trimBitmap(cast this);
 	}
-	inline public function encode(hostBitmapEncode:flight._js.HostBitmapEncodeCapability, format:Int, quality:Float):Dynamic {
+	inline public function encode(hostBitmapEncode:flight._js.HostBitmapEncodeCapability, format:Null<Dynamic>, quality:Null<Float>):Null<Dynamic> {
 		return flight._js._fn.Bitmap.encodeBitmap(hostBitmapEncode, cast this, format, quality);
 	}
 	inline public function floodFill(x:Int, y:Int, color:Int):Void {
@@ -67,7 +67,7 @@ abstract Bitmap(Dynamic) {
 	inline public function free():Void {
 		flight._js._fn.Bitmap.freeBitmap(cast this);
 	}
-	inline public function createImageResourceFrom(hostImage:flight._js.HostImageCapability):Dynamic {
+	inline public function createImageResourceFrom(hostImage:flight._js.HostImageCapability):Null<Dynamic> {
 		return flight._js._fn.Image.createImageResourceFromBitmap(hostImage, cast this);
 	}
 }

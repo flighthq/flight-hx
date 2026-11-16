@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract BrightnessContrastAdjustmentOptions(Dynamic) {}
+abstract BrightnessContrastAdjustmentOptions(Dynamic) {
+}

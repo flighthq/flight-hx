@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract TexturePackerSerializeOptions(Dynamic) {}
+abstract TexturePackerSerializeOptions(Dynamic) {
+}

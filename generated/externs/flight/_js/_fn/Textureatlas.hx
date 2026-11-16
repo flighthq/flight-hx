@@ -1,65 +1,65 @@
 package flight._js._fn;
 
-@:jsRequire("flight")
+@:jsRequire("@flighthq/textureatlas")
 extern class Textureatlas {
-	@:native("flight_are_texture_atlas_guards_enabled")
+	@:native("areTextureAtlasGuardsEnabled")
 	public static function areTextureAtlasGuardsEnabled(state:flight._js.TextureAtlasGuardState):Bool;
-	@:native("flight_disable_texture_atlas_guards")
+	@:native("disableTextureAtlasGuards")
 	public static function disableTextureAtlasGuards(state:flight._js.TextureAtlasGuardState):Void;
-	@:native("flight_enable_texture_atlas_guards")
-	public static function enableTextureAtlasGuards(state:flight._js.TextureAtlasGuardState, logState:Dynamic, clockFn:Dynamic, clockCtx:Dynamic):Void;
-	@:native("flight_create_texture_atlas")
+	@:native("enableTextureAtlasGuards")
+	public static function enableTextureAtlasGuards(state:flight._js.TextureAtlasGuardState, logState:Dynamic, clock:Dynamic):Void;
+	@:native("createTextureAtlas")
 	public static function createTextureAtlas():Dynamic;
-	@:native("flight_dispose_texture_atlas")
+	@:native("disposeTextureAtlas")
 	public static function disposeTextureAtlas(atlas:flight._js.TextureAtlas):Void;
-	@:native("flight_get_texture_atlas_byte_size")
+	@:native("getTextureAtlasByteSize")
 	public static function getTextureAtlasByteSize(atlas:flight._js.TextureAtlas):Int;
-	@:native("flight_create_texture_atlas_from_image_resource")
+	@:native("createTextureAtlasFromImageResource")
 	public static function createTextureAtlasFromImageResource(resource:Dynamic):Dynamic;
-	@:native("flight_create_texture_atlas_from_grid")
-	public static function createTextureAtlasFromGrid(options:flight._js.GridSliceOptions, texture:Dynamic):Dynamic;
-	@:native("flight_create_texture_atlas_region")
+	@:native("createTextureAtlasFromGrid")
+	public static function createTextureAtlasFromGrid(options:flight._js.GridSliceOptions, texture:Null<Dynamic>):Dynamic;
+	@:native("createTextureAtlasRegion")
 	public static function createTextureAtlasRegion():Dynamic;
-	@:native("flight_add_texture_atlas_region")
-	public static function addTextureAtlasRegion(target:flight._js.TextureAtlas, x:Float, y:Float, width:Float, height:Float, pivotX:Float, pivotY:Float, name:String):Void;
-	@:native("flight_add_texture_atlas_region_corners")
-	public static function addTextureAtlasRegionCorners(target:flight._js.TextureAtlas, ax:Float, ay:Float, bx:Float, by:Float, pivotX:Float, pivotY:Float, name:String):Void;
-	@:native("flight_add_texture_atlas_region_rectangle")
-	public static function addTextureAtlasRegionRectangle(target:flight._js.TextureAtlas, rect:flight._js.Rectangle, pivot:flight._js.Vector2, name:String):Void;
-	@:native("flight_add_texture_atlas_region_vector2")
-	public static function addTextureAtlasRegionVector2(target:flight._js.TextureAtlas, a:flight._js.Vector2, b:flight._js.Vector2, pivot:flight._js.Vector2, name:String):Void;
-	@:native("flight_clear_texture_atlas_regions")
+	@:native("addTextureAtlasRegion")
+	public static function addTextureAtlasRegion(target:flight._js.TextureAtlas, x:Float, y:Float, width:Float, height:Float, pivotX:Null<Float>, pivotY:Null<Float>, name:Null<String>):Void;
+	@:native("addTextureAtlasRegionCorners")
+	public static function addTextureAtlasRegionCorners(target:flight._js.TextureAtlas, ax:Float, ay:Float, bx:Float, by:Float, pivotX:Null<Float>, pivotY:Null<Float>, name:Null<String>):Void;
+	@:native("addTextureAtlasRegionRectangle")
+	public static function addTextureAtlasRegionRectangle(target:flight._js.TextureAtlas, rect:flight._js.Rectangle, pivot:Null<flight._js.Vector2>, name:Null<String>):Void;
+	@:native("addTextureAtlasRegionVector2")
+	public static function addTextureAtlasRegionVector2(target:flight._js.TextureAtlas, a:flight._js.Vector2, b:flight._js.Vector2, pivot:Null<flight._js.Vector2>, name:Null<String>):Void;
+	@:native("clearTextureAtlasRegions")
 	public static function clearTextureAtlasRegions(target:flight._js.TextureAtlas):Void;
-	@:native("flight_explain_texture_atlas_region_texture")
+	@:native("explainTextureAtlasRegionTexture")
 	public static function explainTextureAtlasRegionTexture(atlas:flight._js.TextureAtlas, regionId:Int):flight._js.TextureAtlasRegionTextureExplanation;
-	@:native("flight_get_texture_atlas_region_by_id")
-	public static function getTextureAtlasRegionById(atlas:flight._js.TextureAtlas, id:Int):Dynamic;
-	@:native("flight_get_texture_atlas_region_by_name")
-	public static function getTextureAtlasRegionByName(atlas:flight._js.TextureAtlas, name:String):Dynamic;
-	@:native("flight_get_texture_atlas_region_by_ordinal")
-	public static function getTextureAtlasRegionByOrdinal(atlas:flight._js.TextureAtlas, prefix:String, ordinal:Float):Dynamic;
-	@:native("flight_get_texture_atlas_region_count")
+	@:native("getTextureAtlasRegionById")
+	public static function getTextureAtlasRegionById(atlas:flight._js.TextureAtlas, id:Int):Null<Dynamic>;
+	@:native("getTextureAtlasRegionByName")
+	public static function getTextureAtlasRegionByName(atlas:flight._js.TextureAtlas, name:String):Null<Dynamic>;
+	@:native("getTextureAtlasRegionByOrdinal")
+	public static function getTextureAtlasRegionByOrdinal(atlas:flight._js.TextureAtlas, prefix:String, ordinal:Float):Null<Dynamic>;
+	@:native("getTextureAtlasRegionCount")
 	public static function getTextureAtlasRegionCount(atlas:flight._js.TextureAtlas):Int;
-	@:native("flight_get_texture_atlas_region_frame")
+	@:native("getTextureAtlasRegionFrame")
 	public static function getTextureAtlasRegionFrame(out:flight._js.Rectangle, region:flight._js.TextureAtlasRegion):Void;
-	@:native("flight_get_texture_atlas_region_ordinal")
+	@:native("getTextureAtlasRegionOrdinal")
 	public static function getTextureAtlasRegionOrdinal(region:flight._js.TextureAtlasRegion):Float;
-	@:native("flight_get_texture_atlas_region_texture")
-	public static function getTextureAtlasRegionTexture(atlas:Dynamic, regionId:Int, guards:flight._js.TextureAtlasGuardState):Dynamic;
-	@:native("flight_get_texture_atlas_region_texture_status_string")
-	public static function getTextureAtlasRegionTextureStatusString(value:Int):String;
-	@:native("flight_get_texture_atlas_region_uv")
+	@:native("getTextureAtlasRegionTexture")
+	public static function getTextureAtlasRegionTexture(atlas:Dynamic, regionId:Int, guards:Null<flight._js.TextureAtlasGuardState>):Null<Dynamic>;
+	@:native("getTextureAtlasRegionTextureStatusString")
+	public static function getTextureAtlasRegionTextureStatusString(value:Dynamic):String;
+	@:native("getTextureAtlasRegionUv")
 	public static function getTextureAtlasRegionUv(out:flight._js.Rectangle, region:flight._js.TextureAtlasRegion, imageWidth:Float, imageHeight:Float):Void;
-	@:native("flight_get_texture_atlas_region_uv_quad")
+	@:native("getTextureAtlasRegionUvQuad")
 	public static function getTextureAtlasRegionUvQuad(out:Dynamic, region:flight._js.TextureAtlasRegion, imageWidth:Float, imageHeight:Float):Void;
-	@:native("flight_has_texture_atlas_region")
+	@:native("hasTextureAtlasRegion")
 	public static function hasTextureAtlasRegion(atlas:flight._js.TextureAtlas, name:String):Bool;
-	@:native("flight_parse_texture_atlas_region_texture_status")
-	public static function parseTextureAtlasRegionTextureStatus(value:String):Int;
-	@:native("flight_remove_texture_atlas_region")
+	@:native("parseTextureAtlasRegionTextureStatus")
+	public static function parseTextureAtlasRegionTextureStatus(value:String):Null<Dynamic>;
+	@:native("removeTextureAtlasRegion")
 	public static function removeTextureAtlasRegion(target:flight._js.TextureAtlas, id:Int):Bool;
-	@:native("flight_set_texture_atlas_region")
+	@:native("setTextureAtlasRegion")
 	public static function setTextureAtlasRegion(out:flight._js.TextureAtlasRegion, source:flight._js.TextureAtlasRegionOptions):Void;
-	@:native("flight_free_texture_atlas_region_texture_explanation")
-	public static function freeTextureAtlasRegionTextureExplanation(ptr:flight._js.TextureAtlasRegionTextureExplanation):Void;
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeTextureAtlasRegionTextureExplanation(ptr:flight._js.TextureAtlasRegionTextureExplanation):Void {}
 }

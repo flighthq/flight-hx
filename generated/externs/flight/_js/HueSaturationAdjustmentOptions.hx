@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract HueSaturationAdjustmentOptions(Dynamic) {}
+abstract HueSaturationAdjustmentOptions(Dynamic) {
+}

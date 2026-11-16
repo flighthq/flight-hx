@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract FontResource(Dynamic) {}
+abstract FontResource(Dynamic) {
+}

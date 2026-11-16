@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract ImageUrlOriginContext(Dynamic) {}
+abstract ImageUrlOriginContext(Dynamic) {
+}

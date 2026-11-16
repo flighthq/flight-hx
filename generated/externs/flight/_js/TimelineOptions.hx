@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract TimelineOptions(Dynamic) {}
+abstract TimelineOptions(Dynamic) {
+}

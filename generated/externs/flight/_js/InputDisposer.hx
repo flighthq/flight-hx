@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract InputDisposer(Dynamic) {}
+abstract InputDisposer(Dynamic) {
+}

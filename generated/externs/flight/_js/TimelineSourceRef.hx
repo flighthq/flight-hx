@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract TimelineSourceRef(Dynamic) {}
+abstract TimelineSourceRef(Dynamic) {
+}

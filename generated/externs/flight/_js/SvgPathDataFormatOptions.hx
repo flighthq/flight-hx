@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract SvgPathDataFormatOptions(Dynamic) {}
+abstract SvgPathDataFormatOptions(Dynamic) {
+}

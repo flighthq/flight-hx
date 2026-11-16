@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract Physics3DSolverConfig(Dynamic) {}
+abstract Physics3DSolverConfig(Dynamic) {
+}

@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract GrayscaleAdjustmentOptions(Dynamic) {}
+abstract GrayscaleAdjustmentOptions(Dynamic) {
+}

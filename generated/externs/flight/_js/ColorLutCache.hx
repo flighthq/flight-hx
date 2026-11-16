@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract ColorLutCache(Dynamic) {}
+abstract ColorLutCache(Dynamic) {
+}

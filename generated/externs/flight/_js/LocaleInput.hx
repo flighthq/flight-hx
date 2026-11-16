@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract LocaleInput(Dynamic) {}
+abstract LocaleInput(Dynamic) {
+}

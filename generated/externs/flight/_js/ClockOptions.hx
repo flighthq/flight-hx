@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract ClockOptions(Dynamic) {}
+abstract ClockOptions(Dynamic) {
+}

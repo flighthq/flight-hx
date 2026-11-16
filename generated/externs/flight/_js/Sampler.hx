@@ -1,25 +1,12 @@
 package flight._js;
 
-@:jsRequire("flight")
-private extern class Sampler_Ffi {
-	@:native("flight_get_sampler_anisotropy") static function get_anisotropy(ptr:Dynamic):Float;
-	@:native("flight_set_sampler_anisotropy") static function set_anisotropy(ptr:Dynamic, value:Float):Float;
-	@:native("flight_get_sampler_mipmaps") static function get_mipmaps(ptr:Dynamic):Bool;
-	@:native("flight_set_sampler_mipmaps") static function set_mipmaps(ptr:Dynamic, value:Bool):Bool;
-}
-
 abstract Sampler(Dynamic) {
 	public var anisotropy(get, set):Float;
-
-	inline function get_anisotropy():Float return Sampler_Ffi.get_anisotropy(this);
-
-	inline function set_anisotropy(value:Float):Float return Sampler_Ffi.set_anisotropy(this, value);
+	inline function get_anisotropy():Float return untyped this.anisotropy;
+	inline function set_anisotropy(value:Float):Float return untyped this.anisotropy = value;
 	public var mipmaps(get, set):Bool;
-
-	inline function get_mipmaps():Bool return Sampler_Ffi.get_mipmaps(this);
-
-	inline function set_mipmaps(value:Bool):Bool return Sampler_Ffi.set_mipmaps(this, value);
-
+	inline function get_mipmaps():Bool return untyped this.mipmaps;
+	inline function set_mipmaps(value:Bool):Bool return untyped this.mipmaps = value;
 	static inline public function createAnisotropic(level:Float):flight._js.Sampler {
 		return flight._js._fn.Texture.createAnisotropicSampler(level);
 	}
@@ -41,7 +28,7 @@ abstract Sampler(Dynamic) {
 	inline public function copy(source:flight._js.Sampler):Void {
 		flight._js._fn.Texture.copySampler(cast this, source);
 	}
-	inline public function equals(b:flight._js.Sampler):Bool {
+	inline public function equals(b:Null<flight._js.Sampler>):Bool {
 		return flight._js._fn.Texture.equalsSampler(cast this, b);
 	}
 	inline public function free():Void {

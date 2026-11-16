@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract SvgElementHandler(Dynamic) {}
+abstract SvgElementHandler(Dynamic) {
+}

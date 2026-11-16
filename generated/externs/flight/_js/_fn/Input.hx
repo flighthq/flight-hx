@@ -1,73 +1,73 @@
 package flight._js._fn;
 
-@:jsRequire("flight")
+@:jsRequire("@flighthq/input")
 extern class Input {
-	@:native("flight_attach_gamepad_input")
-	public static function attachGamepadInput(hostInputIngress:flight._js.HostInputIngressCapability, manager:Dynamic, source:flight._js.InputIngressSource, options:flight._js.AttachInputOptions):Void;
-	@:native("flight_attach_keyboard_input")
-	public static function attachKeyboardInput(hostInputIngress:flight._js.HostInputIngressCapability, manager:Dynamic, source:flight._js.InputIngressSource, options:flight._js.AttachInputOptions):Void;
-	@:native("flight_attach_pointer_input")
-	public static function attachPointerInput(hostInputIngress:flight._js.HostInputIngressCapability, manager:Dynamic, source:flight._js.InputIngressSource, options:flight._js.AttachInputOptions):Void;
-	@:native("flight_attach_relative_pointer_input")
-	public static function attachRelativePointerInput(hostInputIngress:flight._js.HostInputIngressCapability, manager:Dynamic, source:flight._js.InputIngressSource, options:flight._js.AttachInputOptions):Void;
-	@:native("flight_attach_text_input")
-	public static function attachTextInput(hostInputIngress:flight._js.HostInputIngressCapability, manager:Dynamic, source:flight._js.InputIngressSource, options:flight._js.AttachInputOptions):Void;
-	@:native("flight_attach_wheel_input")
-	public static function attachWheelInput(hostInputIngress:flight._js.HostInputIngressCapability, manager:Dynamic, source:flight._js.InputIngressSource, options:flight._js.AttachInputOptions):Void;
-	@:native("flight_detach_gamepad_input")
+	@:native("attachGamepadInput")
+	public static function attachGamepadInput(hostInputIngress:flight._js.HostInputIngressCapability, manager:Dynamic, source:flight._js.InputIngressSource, options:Null<flight._js.AttachInputOptions>):Void;
+	@:native("attachKeyboardInput")
+	public static function attachKeyboardInput(hostInputIngress:flight._js.HostInputIngressCapability, manager:Dynamic, source:flight._js.InputIngressSource, options:Null<flight._js.AttachInputOptions>):Void;
+	@:native("attachPointerInput")
+	public static function attachPointerInput(hostInputIngress:flight._js.HostInputIngressCapability, manager:Dynamic, source:flight._js.InputIngressSource, options:Null<flight._js.AttachInputOptions>):Void;
+	@:native("attachRelativePointerInput")
+	public static function attachRelativePointerInput(hostInputIngress:flight._js.HostInputIngressCapability, manager:Dynamic, source:flight._js.InputIngressSource, options:Null<flight._js.AttachInputOptions>):Void;
+	@:native("attachTextInput")
+	public static function attachTextInput(hostInputIngress:flight._js.HostInputIngressCapability, manager:Dynamic, source:flight._js.InputIngressSource, options:Null<flight._js.AttachInputOptions>):Void;
+	@:native("attachWheelInput")
+	public static function attachWheelInput(hostInputIngress:flight._js.HostInputIngressCapability, manager:Dynamic, source:flight._js.InputIngressSource, options:Null<flight._js.AttachInputOptions>):Void;
+	@:native("detachGamepadInput")
 	public static function detachGamepadInput(manager:Dynamic, source:flight._js.InputIngressSource):Void;
-	@:native("flight_detach_keyboard_input")
+	@:native("detachKeyboardInput")
 	public static function detachKeyboardInput(manager:Dynamic, source:flight._js.InputIngressSource):Void;
-	@:native("flight_detach_pointer_input")
+	@:native("detachPointerInput")
 	public static function detachPointerInput(manager:Dynamic, source:flight._js.InputIngressSource):Void;
-	@:native("flight_detach_relative_pointer_input")
+	@:native("detachRelativePointerInput")
 	public static function detachRelativePointerInput(manager:Dynamic, source:flight._js.InputIngressSource):Void;
-	@:native("flight_detach_text_input")
+	@:native("detachTextInput")
 	public static function detachTextInput(manager:Dynamic, source:flight._js.InputIngressSource):Void;
-	@:native("flight_detach_wheel_input")
+	@:native("detachWheelInput")
 	public static function detachWheelInput(manager:Dynamic, source:flight._js.InputIngressSource):Void;
-	@:native("flight_apply_gamepad_axis_dead_zone")
+	@:native("applyGamepadAxisDeadZone")
 	public static function applyGamepadAxisDeadZone(value:Float, deadZone:Float):Float;
-	@:native("flight_apply_gamepad_stick_dead_zone")
+	@:native("applyGamepadStickDeadZone")
 	public static function applyGamepadStickDeadZone(out:flight._js.GamepadStickOutput, x:Float, y:Float, deadZone:Float):Void;
-	@:native("flight_get_gamepad_axis_name")
-	public static function getGamepadAxisName(mapping:Int, index:Int):Int;
-	@:native("flight_get_gamepad_button_name")
-	public static function getGamepadButtonName(mapping:Int, index:Int):Int;
-	@:native("flight_create_input_manager")
+	@:native("getGamepadAxisName")
+	public static function getGamepadAxisName(mapping:Dynamic, index:Int):Null<Dynamic>;
+	@:native("getGamepadButtonName")
+	public static function getGamepadButtonName(mapping:Dynamic, index:Int):Null<Dynamic>;
+	@:native("createInputManager")
 	public static function createInputManager():Dynamic;
-	@:native("flight_create_input_state")
+	@:native("createInputState")
 	public static function createInputState():Dynamic;
-	@:native("flight_connect_input_state_to_input_manager")
+	@:native("connectInputStateToInputManager")
 	public static function connectInputStateToInputManager(state:Dynamic, manager:Dynamic):flight._js.InputDisposer;
-	@:native("flight_end_input_state_frame")
+	@:native("endInputStateFrame")
 	public static function endInputStateFrame(state:Dynamic):Void;
-	@:native("flight_get_input_gamepad_axis")
+	@:native("getInputGamepadAxis")
 	public static function getInputGamepadAxis(state:Dynamic, gamepad:Int, axis:Int):Float;
-	@:native("flight_is_input_gamepad_button_down")
+	@:native("isInputGamepadButtonDown")
 	public static function isInputGamepadButtonDown(state:Dynamic, gamepad:Int, button:Int):Bool;
-	@:native("flight_is_input_key_down")
+	@:native("isInputKeyDown")
 	public static function isInputKeyDown(state:Dynamic, keyCode:Int):Bool;
-	@:native("flight_is_input_pointer_button_down")
+	@:native("isInputPointerButtonDown")
 	public static function isInputPointerButtonDown(state:Dynamic, pointerId:Int, button:Int):Bool;
-	@:native("flight_was_input_gamepad_button_pressed")
+	@:native("wasInputGamepadButtonPressed")
 	public static function wasInputGamepadButtonPressed(state:Dynamic, gamepad:Int, button:Int):Bool;
-	@:native("flight_was_input_gamepad_button_released")
+	@:native("wasInputGamepadButtonReleased")
 	public static function wasInputGamepadButtonReleased(state:Dynamic, gamepad:Int, button:Int):Bool;
-	@:native("flight_was_input_key_pressed")
+	@:native("wasInputKeyPressed")
 	public static function wasInputKeyPressed(state:Dynamic, keyCode:Int):Bool;
-	@:native("flight_was_input_key_released")
+	@:native("wasInputKeyReleased")
 	public static function wasInputKeyReleased(state:Dynamic, keyCode:Int):Bool;
-	@:native("flight_create_input_target_handle")
+	@:native("createInputTargetHandle")
 	public static function createInputTargetHandle():Dynamic;
-	@:native("flight_create_input_key_repeat_timer")
+	@:native("createInputKeyRepeatTimer")
 	public static function createInputKeyRepeatTimer(options:flight._js.InputKeyRepeatOptions):Dynamic;
-	@:native("flight_advance_input_key_repeat_timer")
+	@:native("advanceInputKeyRepeatTimer")
 	public static function advanceInputKeyRepeatTimer(timer:Dynamic, nowMs:Float):Void;
-	@:native("flight_start_input_key_repeat_timer")
+	@:native("startInputKeyRepeatTimer")
 	public static function startInputKeyRepeatTimer(timer:Dynamic, callback_:flight._js.InputRepeatCallback, nowMs:Float):Void;
-	@:native("flight_stop_input_key_repeat_timer")
+	@:native("stopInputKeyRepeatTimer")
 	public static function stopInputKeyRepeatTimer(timer:Dynamic):Void;
-	@:native("flight_free_input_disposer")
-	public static function freeInputDisposer(ptr:flight._js.InputDisposer):Void;
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeInputDisposer(ptr:flight._js.InputDisposer):Void {}
 }

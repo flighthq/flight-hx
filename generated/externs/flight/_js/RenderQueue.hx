@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract RenderQueue(Dynamic) {}
+abstract RenderQueue(Dynamic) {
+}

@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract SpatialIndexingExplanation(Dynamic) {}
+abstract SpatialIndexingExplanation(Dynamic) {
+}

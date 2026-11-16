@@ -1,5 +1,10 @@
 package flight;
 
+#if (js && flight_esm)
+extern inline function createBitmapFont(guardState:BitmapFontGuardStateRef, data:BitmapFontData):Dynamic {
+	return flight._js._fn.Bitmapfont.createBitmapFont(guardState, data);
+}
+#else
 extern inline function createBitmapFont(guardState:BitmapFontGuardStateRef, data:BitmapFontData):Dynamic {
 #if hl
 	return flight._hl._fn.Bitmapfont.createBitmapFont(guardState, data);
@@ -11,6 +16,12 @@ extern inline function createBitmapFont(guardState:BitmapFontGuardStateRef, data
 	#error "flight.Bitmapfont: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function createBitmapFontGuardState():BitmapFontGuardStateRef {
+	return flight._js._fn.Bitmapfont.createBitmapFontGuardState();
+}
+#else
 extern inline function createBitmapFontGuardState():BitmapFontGuardStateRef {
 #if hl
 	return flight._hl._fn.Bitmapfont.createBitmapFontGuardState();
@@ -22,6 +33,12 @@ extern inline function createBitmapFontGuardState():BitmapFontGuardStateRef {
 	#error "flight.Bitmapfont: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getBitmapFontGlyph(font:Dynamic, codepoint:Int):Null<Dynamic> {
+	return flight._js._fn.Bitmapfont.getBitmapFontGlyph(font, codepoint);
+}
+#else
 extern inline function getBitmapFontGlyph(font:Dynamic, codepoint:Int):Dynamic {
 #if hl
 	return flight._hl._fn.Bitmapfont.getBitmapFontGlyph(font, codepoint);
@@ -33,6 +50,12 @@ extern inline function getBitmapFontGlyph(font:Dynamic, codepoint:Int):Dynamic {
 	#error "flight.Bitmapfont: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getBitmapFontKerning(font:Dynamic, left:Int, right:Int):Float {
+	return flight._js._fn.Bitmapfont.getBitmapFontKerning(font, left, right);
+}
+#else
 extern inline function getBitmapFontKerning(font:Dynamic, left:Int, right:Int):Float {
 #if hl
 	return flight._hl._fn.Bitmapfont.getBitmapFontKerning(font, left, right);
@@ -44,6 +67,12 @@ extern inline function getBitmapFontKerning(font:Dynamic, left:Int, right:Int):F
 	#error "flight.Bitmapfont: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getBitmapFontPage(font:Dynamic, page:Null<Int>):Null<Dynamic> {
+	return flight._js._fn.Bitmapfont.getBitmapFontPage(font, page);
+}
+#else
 extern inline function getBitmapFontPage(font:Dynamic, page:Int):Dynamic {
 #if hl
 	return flight._hl._fn.Bitmapfont.getBitmapFontPage(font, page);
@@ -55,6 +84,12 @@ extern inline function getBitmapFontPage(font:Dynamic, page:Int):Dynamic {
 	#error "flight.Bitmapfont: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function hasBitmapFontGlyph(font:Dynamic, codepoint:Int):Bool {
+	return flight._js._fn.Bitmapfont.hasBitmapFontGlyph(font, codepoint);
+}
+#else
 extern inline function hasBitmapFontGlyph(font:Dynamic, codepoint:Int):Bool {
 #if hl
 	return flight._hl._fn.Bitmapfont.hasBitmapFontGlyph(font, codepoint);
@@ -66,6 +101,12 @@ extern inline function hasBitmapFontGlyph(font:Dynamic, codepoint:Int):Bool {
 	#error "flight.Bitmapfont: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function packBitmapFontKerningKey(left:Int, right:Int):Float {
+	return flight._js._fn.Bitmapfont.packBitmapFontKerningKey(left, right);
+}
+#else
 extern inline function packBitmapFontKerningKey(left:Int, right:Int):haxe.Int64 {
 #if hl
 	return flight._hl._fn.Bitmapfont.packBitmapFontKerningKey(left, right);
@@ -77,6 +118,12 @@ extern inline function packBitmapFontKerningKey(left:Int, right:Int):haxe.Int64 
 	#error "flight.Bitmapfont: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function unpackBitmapFontKerningKey(out:BitmapFontKerningPair, key:Float):Void {
+	flight._js._fn.Bitmapfont.unpackBitmapFontKerningKey(out, key);
+}
+#else
 extern inline function unpackBitmapFontKerningKey(out:BitmapFontKerningPair, key:haxe.Int64):Void {
 #if hl
 	flight._hl._fn.Bitmapfont.unpackBitmapFontKerningKey(out, key);
@@ -88,6 +135,12 @@ extern inline function unpackBitmapFontKerningKey(out:BitmapFontKerningPair, key
 	#error "flight.Bitmapfont: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function createBitmapFontFromGlyphAtlas(guardState:BitmapFontGuardStateRef, atlas:Dynamic):Dynamic {
+	return flight._js._fn.Bitmapfont.createBitmapFontFromGlyphAtlas(guardState, atlas);
+}
+#else
 extern inline function createBitmapFontFromGlyphAtlas(guardState:BitmapFontGuardStateRef, atlas:Dynamic):Dynamic {
 #if hl
 	return flight._hl._fn.Bitmapfont.createBitmapFontFromGlyphAtlas(guardState, atlas);
@@ -99,6 +152,12 @@ extern inline function createBitmapFontFromGlyphAtlas(guardState:BitmapFontGuard
 	#error "flight.Bitmapfont: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function createGlyphSourceFromBitmapFont(font:Dynamic):Dynamic {
+	return flight._js._fn.Bitmapfont.createGlyphSourceFromBitmapFont(font);
+}
+#else
 extern inline function createGlyphSourceFromBitmapFont(font:Dynamic):Dynamic {
 #if hl
 	return flight._hl._fn.Bitmapfont.createGlyphSourceFromBitmapFont(font);
@@ -110,6 +169,12 @@ extern inline function createGlyphSourceFromBitmapFont(font:Dynamic):Dynamic {
 	#error "flight.Bitmapfont: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getBitmapFontEncodingString(value:Dynamic):String {
+	return flight._js._fn.Bitmapfont.getBitmapFontEncodingString(value);
+}
+#else
 extern inline function getBitmapFontEncodingString(value:flight.BitmapFontEncoding):String {
 #if hl
 	return cast flight._hl._fn.Bitmapfont.getBitmapFontEncodingString(value);
@@ -121,6 +186,12 @@ extern inline function getBitmapFontEncodingString(value:flight.BitmapFontEncodi
 	#error "flight.Bitmapfont: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getBitmapFontGlyphExplanationReasonString(value:Dynamic):String {
+	return flight._js._fn.Bitmapfont.getBitmapFontGlyphExplanationReasonString(value);
+}
+#else
 extern inline function getBitmapFontGlyphExplanationReasonString(value:flight.BitmapFontGlyphExplanationReason):String {
 #if hl
 	return cast flight._hl._fn.Bitmapfont.getBitmapFontGlyphExplanationReasonString(value);
@@ -132,6 +203,12 @@ extern inline function getBitmapFontGlyphExplanationReasonString(value:flight.Bi
 	#error "flight.Bitmapfont: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getBitmapFontGuardLogKeyString(value:BitmapFontGuardLogKey):String {
+	return flight._js._fn.Bitmapfont.getBitmapFontGuardLogKeyString(value);
+}
+#else
 extern inline function getBitmapFontGuardLogKeyString(value:BitmapFontGuardLogKey):String {
 #if hl
 	return cast flight._hl._fn.Bitmapfont.getBitmapFontGuardLogKeyString(value);
@@ -143,6 +220,12 @@ extern inline function getBitmapFontGuardLogKeyString(value:BitmapFontGuardLogKe
 	#error "flight.Bitmapfont: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getBitmapFontGuardReasonString(value:BitmapFontGuardReason):String {
+	return flight._js._fn.Bitmapfont.getBitmapFontGuardReasonString(value);
+}
+#else
 extern inline function getBitmapFontGuardReasonString(value:BitmapFontGuardReason):String {
 #if hl
 	return cast flight._hl._fn.Bitmapfont.getBitmapFontGuardReasonString(value);
@@ -154,6 +237,12 @@ extern inline function getBitmapFontGuardReasonString(value:BitmapFontGuardReaso
 	#error "flight.Bitmapfont: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function parseBitmapFontEncoding(value:String):Null<Dynamic> {
+	return flight._js._fn.Bitmapfont.parseBitmapFontEncoding(value);
+}
+#else
 extern inline function parseBitmapFontEncoding(value:String):Int {
 #if hl
 	return flight._hl._fn.Bitmapfont.parseBitmapFontEncoding(cast value);
@@ -165,6 +254,12 @@ extern inline function parseBitmapFontEncoding(value:String):Int {
 	#error "flight.Bitmapfont: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function parseBitmapFontGlyphExplanationReason(value:String):Null<Dynamic> {
+	return flight._js._fn.Bitmapfont.parseBitmapFontGlyphExplanationReason(value);
+}
+#else
 extern inline function parseBitmapFontGlyphExplanationReason(value:String):Int {
 #if hl
 	return flight._hl._fn.Bitmapfont.parseBitmapFontGlyphExplanationReason(cast value);
@@ -176,6 +271,12 @@ extern inline function parseBitmapFontGlyphExplanationReason(value:String):Int {
 	#error "flight.Bitmapfont: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function parseBitmapFontGuardLogKey(value:String):Null<BitmapFontGuardLogKey> {
+	return flight._js._fn.Bitmapfont.parseBitmapFontGuardLogKey(value);
+}
+#else
 extern inline function parseBitmapFontGuardLogKey(value:String):BitmapFontGuardLogKey {
 #if hl
 	return flight._hl._fn.Bitmapfont.parseBitmapFontGuardLogKey(cast value);
@@ -187,6 +288,12 @@ extern inline function parseBitmapFontGuardLogKey(value:String):BitmapFontGuardL
 	#error "flight.Bitmapfont: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function parseBitmapFontGuardReason(value:String):Null<BitmapFontGuardReason> {
+	return flight._js._fn.Bitmapfont.parseBitmapFontGuardReason(value);
+}
+#else
 extern inline function parseBitmapFontGuardReason(value:String):BitmapFontGuardReason {
 #if hl
 	return flight._hl._fn.Bitmapfont.parseBitmapFontGuardReason(cast value);
@@ -198,6 +305,12 @@ extern inline function parseBitmapFontGuardReason(value:String):BitmapFontGuardR
 	#error "flight.Bitmapfont: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function disableBitmapFontGuards(guardState:BitmapFontGuardStateRef):Void {
+	flight._js._fn.Bitmapfont.disableBitmapFontGuards(guardState);
+}
+#else
 extern inline function disableBitmapFontGuards(guardState:BitmapFontGuardStateRef):Void {
 #if hl
 	flight._hl._fn.Bitmapfont.disableBitmapFontGuards(guardState);
@@ -209,6 +322,12 @@ extern inline function disableBitmapFontGuards(guardState:BitmapFontGuardStateRe
 	#error "flight.Bitmapfont: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function enableBitmapFontGuards(guardState:BitmapFontGuardStateRef, logState:Dynamic, clock:BitmapFontClock):Void {
+	flight._js._fn.Bitmapfont.enableBitmapFontGuards(guardState, logState, clock);
+}
+#else
 extern inline function enableBitmapFontGuards(guardState:BitmapFontGuardStateRef, logState:Dynamic, clock:BitmapFontClock):Void {
 #if hl
 	flight._hl._fn.Bitmapfont.enableBitmapFontGuards(guardState, logState, clock);
@@ -220,6 +339,12 @@ extern inline function enableBitmapFontGuards(guardState:BitmapFontGuardStateRef
 	#error "flight.Bitmapfont: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function explainBitmapFontGlyph(font:Dynamic, codepoint:Int):BitmapFontGlyphExplanation {
+	return flight._js._fn.Bitmapfont.explainBitmapFontGlyph(font, codepoint);
+}
+#else
 extern inline function explainBitmapFontGlyph(font:Dynamic, codepoint:Int):BitmapFontGlyphExplanation {
 #if hl
 	return flight._hl._fn.Bitmapfont.explainBitmapFontGlyph(font, codepoint);
@@ -231,6 +356,12 @@ extern inline function explainBitmapFontGlyph(font:Dynamic, codepoint:Int):Bitma
 	#error "flight.Bitmapfont: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function summarizeBitmapFont(font:Dynamic):BitmapFontSummary {
+	return flight._js._fn.Bitmapfont.summarizeBitmapFont(font);
+}
+#else
 extern inline function summarizeBitmapFont(font:Dynamic):BitmapFontSummary {
 #if hl
 	return flight._hl._fn.Bitmapfont.summarizeBitmapFont(font);
@@ -242,6 +373,12 @@ extern inline function summarizeBitmapFont(font:Dynamic):BitmapFontSummary {
 	#error "flight.Bitmapfont: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freeBitmapFontGuardStateRef(ptr:BitmapFontGuardStateRef):Void {
+	flight._js._fn.Bitmapfont.freeBitmapFontGuardStateRef(ptr);
+}
+#else
 extern inline function freeBitmapFontGuardStateRef(ptr:BitmapFontGuardStateRef):Void {
 #if hl
 	flight._hl._fn.Bitmapfont.freeBitmapFontGuardStateRef(ptr);
@@ -253,6 +390,12 @@ extern inline function freeBitmapFontGuardStateRef(ptr:BitmapFontGuardStateRef):
 	#error "flight.Bitmapfont: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freeBitmapFontGuardLogKey(ptr:BitmapFontGuardLogKey):Void {
+	flight._js._fn.Bitmapfont.freeBitmapFontGuardLogKey(ptr);
+}
+#else
 extern inline function freeBitmapFontGuardLogKey(ptr:BitmapFontGuardLogKey):Void {
 #if hl
 	flight._hl._fn.Bitmapfont.freeBitmapFontGuardLogKey(ptr);
@@ -264,6 +407,12 @@ extern inline function freeBitmapFontGuardLogKey(ptr:BitmapFontGuardLogKey):Void
 	#error "flight.Bitmapfont: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freeBitmapFontGuardReason(ptr:BitmapFontGuardReason):Void {
+	flight._js._fn.Bitmapfont.freeBitmapFontGuardReason(ptr);
+}
+#else
 extern inline function freeBitmapFontGuardReason(ptr:BitmapFontGuardReason):Void {
 #if hl
 	flight._hl._fn.Bitmapfont.freeBitmapFontGuardReason(ptr);
@@ -275,6 +424,12 @@ extern inline function freeBitmapFontGuardReason(ptr:BitmapFontGuardReason):Void
 	#error "flight.Bitmapfont: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freeBitmapFontGlyphExplanation(ptr:BitmapFontGlyphExplanation):Void {
+	flight._js._fn.Bitmapfont.freeBitmapFontGlyphExplanation(ptr);
+}
+#else
 extern inline function freeBitmapFontGlyphExplanation(ptr:BitmapFontGlyphExplanation):Void {
 #if hl
 	flight._hl._fn.Bitmapfont.freeBitmapFontGlyphExplanation(ptr);
@@ -286,6 +441,12 @@ extern inline function freeBitmapFontGlyphExplanation(ptr:BitmapFontGlyphExplana
 	#error "flight.Bitmapfont: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freeBitmapFontSummary(ptr:BitmapFontSummary):Void {
+	flight._js._fn.Bitmapfont.freeBitmapFontSummary(ptr);
+}
+#else
 extern inline function freeBitmapFontSummary(ptr:BitmapFontSummary):Void {
 #if hl
 	flight._hl._fn.Bitmapfont.freeBitmapFontSummary(ptr);
@@ -297,3 +458,4 @@ extern inline function freeBitmapFontSummary(ptr:BitmapFontSummary):Void {
 	#error "flight.Bitmapfont: no backend for this target."
 #end
 }
+#end

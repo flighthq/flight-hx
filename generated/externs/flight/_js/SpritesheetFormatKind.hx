@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract SpritesheetFormatKind(Dynamic) {}
+abstract SpritesheetFormatKind(Dynamic) {
+}

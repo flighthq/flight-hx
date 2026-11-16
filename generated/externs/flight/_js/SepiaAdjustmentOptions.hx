@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract SepiaAdjustmentOptions(Dynamic) {}
+abstract SepiaAdjustmentOptions(Dynamic) {
+}

@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract LayoutResolutionGuard(Dynamic) {}
+abstract LayoutResolutionGuard(Dynamic) {
+}

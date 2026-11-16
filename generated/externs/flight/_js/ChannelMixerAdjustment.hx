@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract ChannelMixerAdjustment(Dynamic) {}
+abstract ChannelMixerAdjustment(Dynamic) {
+}

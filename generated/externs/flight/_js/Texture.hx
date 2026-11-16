@@ -1,7 +1,7 @@
 package flight._js;
 
 abstract Texture(Dynamic) {
-	static inline public function create(opts:flight._js.CreateTextureOptions):flight._js.Texture {
+	static inline public function create(opts:Null<flight._js.CreateTextureOptions>):flight._js.Texture {
 		return flight._js._fn.Texture.createTexture(opts);
 	}
 	inline public function cloneTexture():flight._js.Texture {
@@ -16,10 +16,10 @@ abstract Texture(Dynamic) {
 	inline public function getTextureInverseUvMatrix(out:flight._js.Matrix3):Void {
 		flight._js._fn.Texture.getTextureInverseUvMatrixTexture(out, cast this);
 	}
-	inline public function getTextureSource():Dynamic {
+	inline public function getTextureSource():Null<flight._js.TextureSourceRef> {
 		return flight._js._fn.Texture.getTextureSourceTexture(cast this);
 	}
-	inline public function getTextureSourceKind():Dynamic {
+	inline public function getTextureSourceKind():Null<flight._js.TextureSourceKind> {
 		return flight._js._fn.Texture.getTextureSourceKindTexture(cast this);
 	}
 	inline public function getTextureUvMatrix(out:flight._js.Matrix3):Void {

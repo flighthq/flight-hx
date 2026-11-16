@@ -1,5 +1,10 @@
 package flight;
 
+#if (js && flight_esm)
+extern inline function disconnectSignalConnection(connection:SignalConnection):Void {
+	flight._js._fn.Signals.disconnectSignalConnection(connection);
+}
+#else
 extern inline function disconnectSignalConnection(connection:SignalConnection):Void {
 #if hl
 	flight._hl._fn.Signals.disconnectSignalConnection(connection);
@@ -11,6 +16,12 @@ extern inline function disconnectSignalConnection(connection:SignalConnection):V
 	#error "flight.Signals: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function isSignalConnectionConnected(connection:SignalConnection):Bool {
+	return flight._js._fn.Signals.isSignalConnectionConnected(connection);
+}
+#else
 extern inline function isSignalConnectionConnected(connection:SignalConnection):Bool {
 #if hl
 	return flight._hl._fn.Signals.isSignalConnectionConnected(connection);
@@ -22,6 +33,12 @@ extern inline function isSignalConnectionConnected(connection:SignalConnection):
 	#error "flight.Signals: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function isSignalConnectionPaused(connection:SignalConnection):Bool {
+	return flight._js._fn.Signals.isSignalConnectionPaused(connection);
+}
+#else
 extern inline function isSignalConnectionPaused(connection:SignalConnection):Bool {
 #if hl
 	return flight._hl._fn.Signals.isSignalConnectionPaused(connection);
@@ -33,6 +50,12 @@ extern inline function isSignalConnectionPaused(connection:SignalConnection):Boo
 	#error "flight.Signals: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function pauseSignalConnection(connection:SignalConnection):Void {
+	flight._js._fn.Signals.pauseSignalConnection(connection);
+}
+#else
 extern inline function pauseSignalConnection(connection:SignalConnection):Void {
 #if hl
 	flight._hl._fn.Signals.pauseSignalConnection(connection);
@@ -44,6 +67,12 @@ extern inline function pauseSignalConnection(connection:SignalConnection):Void {
 	#error "flight.Signals: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function resumeSignalConnection(connection:SignalConnection):Void {
+	flight._js._fn.Signals.resumeSignalConnection(connection);
+}
+#else
 extern inline function resumeSignalConnection(connection:SignalConnection):Void {
 #if hl
 	flight._hl._fn.Signals.resumeSignalConnection(connection);
@@ -55,6 +84,12 @@ extern inline function resumeSignalConnection(connection:SignalConnection):Void 
 	#error "flight.Signals: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function createSignalScope():SignalScope {
+	return flight._js._fn.Signals.createSignalScope();
+}
+#else
 extern inline function createSignalScope():SignalScope {
 #if hl
 	return flight._hl._fn.Signals.createSignalScope();
@@ -66,6 +101,12 @@ extern inline function createSignalScope():SignalScope {
 	#error "flight.Signals: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function disconnectSignalScope(scope:SignalScope):Void {
+	flight._js._fn.Signals.disconnectSignalScope(scope);
+}
+#else
 extern inline function disconnectSignalScope(scope:SignalScope):Void {
 #if hl
 	flight._hl._fn.Signals.disconnectSignalScope(scope);
@@ -77,6 +118,12 @@ extern inline function disconnectSignalScope(scope:SignalScope):Void {
 	#error "flight.Signals: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function createSignalTimerState():SignalTimerState {
+	return flight._js._fn.Signals.createSignalTimerState();
+}
+#else
 extern inline function createSignalTimerState():SignalTimerState {
 #if hl
 	return flight._hl._fn.Signals.createSignalTimerState();
@@ -88,6 +135,12 @@ extern inline function createSignalTimerState():SignalTimerState {
 	#error "flight.Signals: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function advanceSignalTimers(state:Dynamic, nowMs:Float):Void {
+	flight._js._fn.Signals.advanceSignalTimers(state, nowMs);
+}
+#else
 extern inline function advanceSignalTimers(state:Dynamic, nowMs:Float):Void {
 #if hl
 	flight._hl._fn.Signals.advanceSignalTimers(state, nowMs);
@@ -99,6 +152,12 @@ extern inline function advanceSignalTimers(state:Dynamic, nowMs:Float):Void {
 	#error "flight.Signals: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function clearSignalTimeout(state:Dynamic, id:TimerId):Void {
+	flight._js._fn.Signals.clearSignalTimeout(state, id);
+}
+#else
 extern inline function clearSignalTimeout(state:Dynamic, id:TimerId):Void {
 #if hl
 	flight._hl._fn.Signals.clearSignalTimeout(state, id);
@@ -110,6 +169,12 @@ extern inline function clearSignalTimeout(state:Dynamic, id:TimerId):Void {
 	#error "flight.Signals: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setSignalTimeout(state:Dynamic, delayMs:Float, callback_:Dynamic):TimerId {
+	return flight._js._fn.Signals.setSignalTimeout(state, delayMs, callback_);
+}
+#else
 extern inline function setSignalTimeout(state:Dynamic, delayMs:Float, callback_Fn:Dynamic, callback_Ctx:Dynamic):TimerId {
 #if hl
 	return flight._hl._fn.Signals.setSignalTimeout(state, delayMs, callback_Fn, callback_Ctx);
@@ -121,6 +186,12 @@ extern inline function setSignalTimeout(state:Dynamic, delayMs:Float, callback_F
 	#error "flight.Signals: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freeSignalScope(ptr:SignalScope):Void {
+	flight._js._fn.Signals.freeSignalScope(ptr);
+}
+#else
 extern inline function freeSignalScope(ptr:SignalScope):Void {
 #if hl
 	flight._hl._fn.Signals.freeSignalScope(ptr);
@@ -132,6 +203,12 @@ extern inline function freeSignalScope(ptr:SignalScope):Void {
 	#error "flight.Signals: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freeSignalTimerState(ptr:SignalTimerState):Void {
+	flight._js._fn.Signals.freeSignalTimerState(ptr);
+}
+#else
 extern inline function freeSignalTimerState(ptr:SignalTimerState):Void {
 #if hl
 	flight._hl._fn.Signals.freeSignalTimerState(ptr);
@@ -143,6 +220,12 @@ extern inline function freeSignalTimerState(ptr:SignalTimerState):Void {
 	#error "flight.Signals: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freeTimerId(ptr:TimerId):Void {
+	flight._js._fn.Signals.freeTimerId(ptr);
+}
+#else
 extern inline function freeTimerId(ptr:TimerId):Void {
 #if hl
 	flight._hl._fn.Signals.freeTimerId(ptr);
@@ -154,3 +237,4 @@ extern inline function freeTimerId(ptr:TimerId):Void {
 	#error "flight.Signals: no backend for this target."
 #end
 }
+#end

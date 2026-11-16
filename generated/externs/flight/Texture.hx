@@ -22,6 +22,11 @@ typedef Texture = flight._js.Texture;
 
 #end
 
+#if (js && flight_esm)
+extern inline function createCubeTexture():CubeTexture {
+	return flight._js._fn.Texture.createCubeTexture();
+}
+#else
 extern inline function createCubeTexture():CubeTexture {
 #if hl
 	return flight._hl._fn.Texture.createCubeTexture();
@@ -33,6 +38,12 @@ extern inline function createCubeTexture():CubeTexture {
 	#error "flight.Texture: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function cloneCubeTexture(source:CubeTexture):CubeTexture {
+	return flight._js._fn.Texture.cloneCubeTexture(source);
+}
+#else
 extern inline function cloneCubeTexture(source:CubeTexture):CubeTexture {
 #if hl
 	return flight._hl._fn.Texture.cloneCubeTexture(source);
@@ -44,6 +55,12 @@ extern inline function cloneCubeTexture(source:CubeTexture):CubeTexture {
 	#error "flight.Texture: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function copyCubeTexture(out:CubeTexture, source:CubeTexture):Void {
+	flight._js._fn.Texture.copyCubeTexture(out, source);
+}
+#else
 extern inline function copyCubeTexture(out:CubeTexture, source:CubeTexture):Void {
 #if hl
 	flight._hl._fn.Texture.copyCubeTexture(out, source);
@@ -55,6 +72,12 @@ extern inline function copyCubeTexture(out:CubeTexture, source:CubeTexture):Void
 	#error "flight.Texture: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function equalsCubeTexture(a:Null<CubeTexture>, b:Null<CubeTexture>):Bool {
+	return flight._js._fn.Texture.equalsCubeTexture(a, b);
+}
+#else
 extern inline function equalsCubeTexture(a:CubeTexture, b:CubeTexture):Bool {
 #if hl
 	return flight._hl._fn.Texture.equalsCubeTexture(a, b);
@@ -66,6 +89,12 @@ extern inline function equalsCubeTexture(a:CubeTexture, b:CubeTexture):Bool {
 	#error "flight.Texture: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getCubeTextureFaceSize(cube:CubeTexture):Int {
+	return flight._js._fn.Texture.getCubeTextureFaceSize(cube);
+}
+#else
 extern inline function getCubeTextureFaceSize(cube:CubeTexture):Int {
 #if hl
 	return flight._hl._fn.Texture.getCubeTextureFaceSize(cube);
@@ -77,6 +106,12 @@ extern inline function getCubeTextureFaceSize(cube:CubeTexture):Int {
 	#error "flight.Texture: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function isCubeTextureComplete(cube:CubeTexture):Bool {
+	return flight._js._fn.Texture.isCubeTextureComplete(cube);
+}
+#else
 extern inline function isCubeTextureComplete(cube:CubeTexture):Bool {
 #if hl
 	return flight._hl._fn.Texture.isCubeTextureComplete(cube);
@@ -88,6 +123,12 @@ extern inline function isCubeTextureComplete(cube:CubeTexture):Bool {
 	#error "flight.Texture: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function createAnisotropicSampler(level:Float):Sampler {
+	return flight._js._fn.Texture.createAnisotropicSampler(level);
+}
+#else
 extern inline function createAnisotropicSampler(level:Float):Sampler {
 #if hl
 	return flight._hl._fn.Texture.createAnisotropicSampler(level);
@@ -99,6 +140,12 @@ extern inline function createAnisotropicSampler(level:Float):Sampler {
 	#error "flight.Texture: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function createClampLinearSampler():Sampler {
+	return flight._js._fn.Texture.createClampLinearSampler();
+}
+#else
 extern inline function createClampLinearSampler():Sampler {
 #if hl
 	return flight._hl._fn.Texture.createClampLinearSampler();
@@ -110,6 +157,12 @@ extern inline function createClampLinearSampler():Sampler {
 	#error "flight.Texture: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function createPixelArtSampler():Sampler {
+	return flight._js._fn.Texture.createPixelArtSampler();
+}
+#else
 extern inline function createPixelArtSampler():Sampler {
 #if hl
 	return flight._hl._fn.Texture.createPixelArtSampler();
@@ -121,6 +174,12 @@ extern inline function createPixelArtSampler():Sampler {
 	#error "flight.Texture: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function createSampler():Sampler {
+	return flight._js._fn.Texture.createSampler();
+}
+#else
 extern inline function createSampler():Sampler {
 #if hl
 	return flight._hl._fn.Texture.createSampler();
@@ -132,6 +191,12 @@ extern inline function createSampler():Sampler {
 	#error "flight.Texture: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function createTilingSampler():Sampler {
+	return flight._js._fn.Texture.createTilingSampler();
+}
+#else
 extern inline function createTilingSampler():Sampler {
 #if hl
 	return flight._hl._fn.Texture.createTilingSampler();
@@ -143,6 +208,12 @@ extern inline function createTilingSampler():Sampler {
 	#error "flight.Texture: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function cloneSampler(source:Sampler):Sampler {
+	return flight._js._fn.Texture.cloneSampler(source);
+}
+#else
 extern inline function cloneSampler(source:Sampler):Sampler {
 #if hl
 	return flight._hl._fn.Texture.cloneSampler(source);
@@ -154,6 +225,12 @@ extern inline function cloneSampler(source:Sampler):Sampler {
 	#error "flight.Texture: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function copySampler(out:Sampler, source:Sampler):Void {
+	flight._js._fn.Texture.copySampler(out, source);
+}
+#else
 extern inline function copySampler(out:Sampler, source:Sampler):Void {
 #if hl
 	flight._hl._fn.Texture.copySampler(out, source);
@@ -165,6 +242,12 @@ extern inline function copySampler(out:Sampler, source:Sampler):Void {
 	#error "flight.Texture: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function equalsSampler(a:Null<Sampler>, b:Null<Sampler>):Bool {
+	return flight._js._fn.Texture.equalsSampler(a, b);
+}
+#else
 extern inline function equalsSampler(a:Sampler, b:Sampler):Bool {
 #if hl
 	return flight._hl._fn.Texture.equalsSampler(a, b);
@@ -176,6 +259,12 @@ extern inline function equalsSampler(a:Sampler, b:Sampler):Bool {
 	#error "flight.Texture: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function createTexture(opts:Null<CreateTextureOptions>):Texture {
+	return flight._js._fn.Texture.createTexture(opts);
+}
+#else
 extern inline function createTexture(opts:CreateTextureOptions):Texture {
 #if hl
 	return flight._hl._fn.Texture.createTexture(opts);
@@ -187,6 +276,12 @@ extern inline function createTexture(opts:CreateTextureOptions):Texture {
 	#error "flight.Texture: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function createTexture2d():Texture2D {
+	return flight._js._fn.Texture.createTexture2d();
+}
+#else
 extern inline function createTexture2d():Texture2D {
 #if hl
 	return flight._hl._fn.Texture.createTexture2d();
@@ -198,6 +293,12 @@ extern inline function createTexture2d():Texture2D {
 	#error "flight.Texture: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function cloneTextureTexture(source:Texture):Texture {
+	return flight._js._fn.Texture.cloneTextureTexture(source);
+}
+#else
 extern inline function cloneTextureTexture(source:Texture):Texture {
 #if hl
 	return flight._hl._fn.Texture.cloneTextureTexture(source);
@@ -209,6 +310,12 @@ extern inline function cloneTextureTexture(source:Texture):Texture {
 	#error "flight.Texture: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function copyTextureTextureTexture(out:Texture, source:Texture):Void {
+	flight._js._fn.Texture.copyTextureTextureTexture(out, source);
+}
+#else
 extern inline function copyTextureTextureTexture(out:Texture, source:Texture):Void {
 #if hl
 	flight._hl._fn.Texture.copyTextureTextureTexture(out, source);
@@ -220,6 +327,12 @@ extern inline function copyTextureTextureTexture(out:Texture, source:Texture):Vo
 	#error "flight.Texture: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getTextureHeightTexture(texture:Texture):Int {
+	return flight._js._fn.Texture.getTextureHeightTexture(texture);
+}
+#else
 extern inline function getTextureHeightTexture(texture:Texture):Int {
 #if hl
 	return flight._hl._fn.Texture.getTextureHeightTexture(texture);
@@ -231,6 +344,12 @@ extern inline function getTextureHeightTexture(texture:Texture):Int {
 	#error "flight.Texture: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getTextureInverseUvMatrixTexture(out:Matrix3, texture:Texture):Void {
+	flight._js._fn.Texture.getTextureInverseUvMatrixTexture(out, texture);
+}
+#else
 extern inline function getTextureInverseUvMatrixTexture(out:Matrix3, texture:Texture):Void {
 #if hl
 	flight._hl._fn.Texture.getTextureInverseUvMatrixTexture(out, texture);
@@ -242,6 +361,12 @@ extern inline function getTextureInverseUvMatrixTexture(out:Matrix3, texture:Tex
 	#error "flight.Texture: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getTextureSourceTexture(texture:Texture):Null<TextureSourceRef> {
+	return flight._js._fn.Texture.getTextureSourceTexture(texture);
+}
+#else
 extern inline function getTextureSourceTexture(texture:Texture):TextureSourceRef {
 #if hl
 	return flight._hl._fn.Texture.getTextureSourceTexture(texture);
@@ -253,6 +378,12 @@ extern inline function getTextureSourceTexture(texture:Texture):TextureSourceRef
 	#error "flight.Texture: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getTextureSourceKindTexture(texture:Texture):Null<TextureSourceKind> {
+	return flight._js._fn.Texture.getTextureSourceKindTexture(texture);
+}
+#else
 extern inline function getTextureSourceKindTexture(texture:Texture):TextureSourceKind {
 #if hl
 	return flight._hl._fn.Texture.getTextureSourceKindTexture(texture);
@@ -264,6 +395,12 @@ extern inline function getTextureSourceKindTexture(texture:Texture):TextureSourc
 	#error "flight.Texture: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getTextureUvMatrixTexture(out:Matrix3, texture:Texture):Void {
+	flight._js._fn.Texture.getTextureUvMatrixTexture(out, texture);
+}
+#else
 extern inline function getTextureUvMatrixTexture(out:Matrix3, texture:Texture):Void {
 #if hl
 	flight._hl._fn.Texture.getTextureUvMatrixTexture(out, texture);
@@ -275,6 +412,12 @@ extern inline function getTextureUvMatrixTexture(out:Matrix3, texture:Texture):V
 	#error "flight.Texture: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getTextureViewSizeTexture(out:Vector2, texture:Texture):Void {
+	flight._js._fn.Texture.getTextureViewSizeTexture(out, texture);
+}
+#else
 extern inline function getTextureViewSizeTexture(out:Vector2, texture:Texture):Void {
 #if hl
 	flight._hl._fn.Texture.getTextureViewSizeTexture(out, texture);
@@ -286,6 +429,12 @@ extern inline function getTextureViewSizeTexture(out:Vector2, texture:Texture):V
 	#error "flight.Texture: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getTextureWidthTexture(texture:Texture):Int {
+	return flight._js._fn.Texture.getTextureWidthTexture(texture);
+}
+#else
 extern inline function getTextureWidthTexture(texture:Texture):Int {
 #if hl
 	return flight._hl._fn.Texture.getTextureWidthTexture(texture);
@@ -297,6 +446,12 @@ extern inline function getTextureWidthTexture(texture:Texture):Int {
 	#error "flight.Texture: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function hasTextureSourceTexture(texture:Texture):Bool {
+	return flight._js._fn.Texture.hasTextureSourceTexture(texture);
+}
+#else
 extern inline function hasTextureSourceTexture(texture:Texture):Bool {
 #if hl
 	return flight._hl._fn.Texture.hasTextureSourceTexture(texture);
@@ -308,6 +463,12 @@ extern inline function hasTextureSourceTexture(texture:Texture):Bool {
 	#error "flight.Texture: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function hasTextureUvTransformTexture(texture:Texture):Bool {
+	return flight._js._fn.Texture.hasTextureUvTransformTexture(texture);
+}
+#else
 extern inline function hasTextureUvTransformTexture(texture:Texture):Bool {
 #if hl
 	return flight._hl._fn.Texture.hasTextureUvTransformTexture(texture);
@@ -319,6 +480,12 @@ extern inline function hasTextureUvTransformTexture(texture:Texture):Bool {
 	#error "flight.Texture: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function isTextureReadyTexture(texture:Texture):Bool {
+	return flight._js._fn.Texture.isTextureReadyTexture(texture);
+}
+#else
 extern inline function isTextureReadyTexture(texture:Texture):Bool {
 #if hl
 	return flight._hl._fn.Texture.isTextureReadyTexture(texture);
@@ -330,6 +497,12 @@ extern inline function isTextureReadyTexture(texture:Texture):Bool {
 	#error "flight.Texture: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function resetTextureUvTransformTexture(texture:Texture):Void {
+	flight._js._fn.Texture.resetTextureUvTransformTexture(texture);
+}
+#else
 extern inline function resetTextureUvTransformTexture(texture:Texture):Void {
 #if hl
 	flight._hl._fn.Texture.resetTextureUvTransformTexture(texture);
@@ -341,6 +514,12 @@ extern inline function resetTextureUvTransformTexture(texture:Texture):Void {
 	#error "flight.Texture: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setTextureFlipTexture(texture:Texture, flipX:Bool, flipY:Bool):Void {
+	flight._js._fn.Texture.setTextureFlipTexture(texture, flipX, flipY);
+}
+#else
 extern inline function setTextureFlipTexture(texture:Texture, flipX:Bool, flipY:Bool):Void {
 #if hl
 	flight._hl._fn.Texture.setTextureFlipTexture(texture, flipX, flipY);
@@ -352,6 +531,12 @@ extern inline function setTextureFlipTexture(texture:Texture, flipX:Bool, flipY:
 	#error "flight.Texture: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setTextureUvFromPixelRectTexture(texture:Texture, x:Float, y:Float, width:Float, height:Float):Void {
+	flight._js._fn.Texture.setTextureUvFromPixelRectTexture(texture, x, y, width, height);
+}
+#else
 extern inline function setTextureUvFromPixelRectTexture(texture:Texture, x:Float, y:Float, width:Float, height:Float):Void {
 #if hl
 	flight._hl._fn.Texture.setTextureUvFromPixelRectTexture(texture, x, y, width, height);
@@ -363,6 +548,12 @@ extern inline function setTextureUvFromPixelRectTexture(texture:Texture, x:Float
 	#error "flight.Texture: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setTextureUvOffsetTexture(texture:Texture, x:Float, y:Float):Void {
+	flight._js._fn.Texture.setTextureUvOffsetTexture(texture, x, y);
+}
+#else
 extern inline function setTextureUvOffsetTexture(texture:Texture, x:Float, y:Float):Void {
 #if hl
 	flight._hl._fn.Texture.setTextureUvOffsetTexture(texture, x, y);
@@ -374,6 +565,12 @@ extern inline function setTextureUvOffsetTexture(texture:Texture, x:Float, y:Flo
 	#error "flight.Texture: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setTextureUvRotationTexture(texture:Texture, radians:Float):Void {
+	flight._js._fn.Texture.setTextureUvRotationTexture(texture, radians);
+}
+#else
 extern inline function setTextureUvRotationTexture(texture:Texture, radians:Float):Void {
 #if hl
 	flight._hl._fn.Texture.setTextureUvRotationTexture(texture, radians);
@@ -385,6 +582,12 @@ extern inline function setTextureUvRotationTexture(texture:Texture, radians:Floa
 	#error "flight.Texture: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setTextureUvScaleTexture(texture:Texture, x:Float, y:Float):Void {
+	flight._js._fn.Texture.setTextureUvScaleTexture(texture, x, y);
+}
+#else
 extern inline function setTextureUvScaleTexture(texture:Texture, x:Float, y:Float):Void {
 #if hl
 	flight._hl._fn.Texture.setTextureUvScaleTexture(texture, x, y);
@@ -396,6 +599,12 @@ extern inline function setTextureUvScaleTexture(texture:Texture, x:Float, y:Floa
 	#error "flight.Texture: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function transformTextureUvTexture(out:Vector2, texture:Texture, u:Float, v:Float):Void {
+	flight._js._fn.Texture.transformTextureUvTexture(out, texture, u, v);
+}
+#else
 extern inline function transformTextureUvTexture(out:Vector2, texture:Texture, u:Float, v:Float):Void {
 #if hl
 	flight._hl._fn.Texture.transformTextureUvTexture(out, texture, u, v);
@@ -407,6 +616,12 @@ extern inline function transformTextureUvTexture(out:Vector2, texture:Texture, u
 	#error "flight.Texture: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getTextureSampleColorSpace(source:Dynamic, working:Dynamic):Dynamic {
+	return flight._js._fn.Texture.getTextureSampleColorSpace(source, working);
+}
+#else
 extern inline function getTextureSampleColorSpace(source:flight.TextureColorSpace, working:flight.RenderTargetColorSpace):flight.TextureColorSpace {
 #if hl
 	return flight._hl._fn.Texture.getTextureSampleColorSpace(source, working);
@@ -418,6 +633,12 @@ extern inline function getTextureSampleColorSpace(source:flight.TextureColorSpac
 	#error "flight.Texture: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function shouldDecodeTextureOnSample(source:Dynamic, working:Dynamic):Bool {
+	return flight._js._fn.Texture.shouldDecodeTextureOnSample(source, working);
+}
+#else
 extern inline function shouldDecodeTextureOnSample(source:flight.TextureColorSpace, working:flight.RenderTargetColorSpace):Bool {
 #if hl
 	return flight._hl._fn.Texture.shouldDecodeTextureOnSample(source, working);
@@ -429,6 +650,12 @@ extern inline function shouldDecodeTextureOnSample(source:flight.TextureColorSpa
 	#error "flight.Texture: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function shouldPremultiplyTextureOnUpload(source:Dynamic, working:Dynamic):Bool {
+	return flight._js._fn.Texture.shouldPremultiplyTextureOnUpload(source, working);
+}
+#else
 extern inline function shouldPremultiplyTextureOnUpload(source:flight.TextureColorSpace, working:flight.RenderTargetColorSpace):Bool {
 #if hl
 	return flight._hl._fn.Texture.shouldPremultiplyTextureOnUpload(source, working);
@@ -440,6 +667,12 @@ extern inline function shouldPremultiplyTextureOnUpload(source:flight.TextureCol
 	#error "flight.Texture: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function invalidateVoxelGrid(voxelGrid:VoxelGrid):Void {
+	flight._js._fn.Texture.invalidateVoxelGrid(voxelGrid);
+}
+#else
 extern inline function invalidateVoxelGrid(voxelGrid:VoxelGrid):Void {
 #if hl
 	flight._hl._fn.Texture.invalidateVoxelGrid(voxelGrid);
@@ -451,6 +684,12 @@ extern inline function invalidateVoxelGrid(voxelGrid:VoxelGrid):Void {
 	#error "flight.Texture: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freeCubeTexture(ptr:CubeTexture):Void {
+	flight._js._fn.Texture.freeCubeTexture(ptr);
+}
+#else
 extern inline function freeCubeTexture(ptr:CubeTexture):Void {
 #if hl
 	flight._hl._fn.Texture.freeCubeTexture(ptr);
@@ -462,6 +701,12 @@ extern inline function freeCubeTexture(ptr:CubeTexture):Void {
 	#error "flight.Texture: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freeSampler(ptr:Sampler):Void {
+	flight._js._fn.Texture.freeSampler(ptr);
+}
+#else
 extern inline function freeSampler(ptr:Sampler):Void {
 #if hl
 	flight._hl._fn.Texture.freeSampler(ptr);
@@ -473,6 +718,12 @@ extern inline function freeSampler(ptr:Sampler):Void {
 	#error "flight.Texture: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freeTexture(ptr:Texture):Void {
+	flight._js._fn.Texture.freeTexture(ptr);
+}
+#else
 extern inline function freeTexture(ptr:Texture):Void {
 #if hl
 	flight._hl._fn.Texture.freeTexture(ptr);
@@ -484,6 +735,12 @@ extern inline function freeTexture(ptr:Texture):Void {
 	#error "flight.Texture: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freeTexture2D(ptr:Texture2D):Void {
+	flight._js._fn.Texture.freeTexture2D(ptr);
+}
+#else
 extern inline function freeTexture2D(ptr:Texture2D):Void {
 #if hl
 	flight._hl._fn.Texture.freeTexture2D(ptr);
@@ -495,6 +752,12 @@ extern inline function freeTexture2D(ptr:Texture2D):Void {
 	#error "flight.Texture: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freeTextureSourceRef(ptr:TextureSourceRef):Void {
+	flight._js._fn.Texture.freeTextureSourceRef(ptr);
+}
+#else
 extern inline function freeTextureSourceRef(ptr:TextureSourceRef):Void {
 #if hl
 	flight._hl._fn.Texture.freeTextureSourceRef(ptr);
@@ -506,6 +769,12 @@ extern inline function freeTextureSourceRef(ptr:TextureSourceRef):Void {
 	#error "flight.Texture: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freeTextureSourceKind(ptr:TextureSourceKind):Void {
+	flight._js._fn.Texture.freeTextureSourceKind(ptr);
+}
+#else
 extern inline function freeTextureSourceKind(ptr:TextureSourceKind):Void {
 #if hl
 	flight._hl._fn.Texture.freeTextureSourceKind(ptr);
@@ -517,3 +786,4 @@ extern inline function freeTextureSourceKind(ptr:TextureSourceKind):Void {
 	#error "flight.Texture: no backend for this target."
 #end
 }
+#end

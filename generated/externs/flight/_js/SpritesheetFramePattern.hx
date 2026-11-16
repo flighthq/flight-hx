@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract SpritesheetFramePattern(Dynamic) {}
+abstract SpritesheetFramePattern(Dynamic) {
+}

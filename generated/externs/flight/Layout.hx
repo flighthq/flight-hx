@@ -1,5 +1,10 @@
 package flight;
 
+#if (js && flight_esm)
+extern inline function registerAnchorLayoutResolver(state:LayoutState):Void {
+	flight._js._fn.Layout.registerAnchorLayoutResolver(state);
+}
+#else
 extern inline function registerAnchorLayoutResolver(state:LayoutState):Void {
 #if hl
 	flight._hl._fn.Layout.registerAnchorLayoutResolver(state);
@@ -11,6 +16,12 @@ extern inline function registerAnchorLayoutResolver(state:LayoutState):Void {
 	#error "flight.Layout: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function enableLayoutGuards(state:LayoutState, warningSink:LayoutResolutionGuard):Void {
+	flight._js._fn.Layout.enableLayoutGuards(state, warningSink);
+}
+#else
 extern inline function enableLayoutGuards(state:LayoutState, warningSink:LayoutResolutionGuard):Void {
 #if hl
 	flight._hl._fn.Layout.enableLayoutGuards(state, warningSink);
@@ -22,6 +33,12 @@ extern inline function enableLayoutGuards(state:LayoutState, warningSink:LayoutR
 	#error "flight.Layout: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function registerFlexLayoutResolver(state:LayoutState):Void {
+	flight._js._fn.Layout.registerFlexLayoutResolver(state);
+}
+#else
 extern inline function registerFlexLayoutResolver(state:LayoutState):Void {
 #if hl
 	flight._hl._fn.Layout.registerFlexLayoutResolver(state);
@@ -33,6 +50,12 @@ extern inline function registerFlexLayoutResolver(state:LayoutState):Void {
 	#error "flight.Layout: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function registerGridLayoutResolver(state:LayoutState):Void {
+	flight._js._fn.Layout.registerGridLayoutResolver(state);
+}
+#else
 extern inline function registerGridLayoutResolver(state:LayoutState):Void {
 #if hl
 	flight._hl._fn.Layout.registerGridLayoutResolver(state);
@@ -44,6 +67,12 @@ extern inline function registerGridLayoutResolver(state:LayoutState):Void {
 	#error "flight.Layout: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function createLayoutState():LayoutState {
+	return flight._js._fn.Layout.createLayoutState();
+}
+#else
 extern inline function createLayoutState():LayoutState {
 #if hl
 	return flight._hl._fn.Layout.createLayoutState();
@@ -55,6 +84,12 @@ extern inline function createLayoutState():LayoutState {
 	#error "flight.Layout: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function explainLayoutResolution(state:LayoutState, tree:LayoutTree, nodeIndex:Int):Null<LayoutResolutionExplanation> {
+	return flight._js._fn.Layout.explainLayoutResolution(state, tree, nodeIndex);
+}
+#else
 extern inline function explainLayoutResolution(state:LayoutState, tree:LayoutTree, nodeIndex:Int):LayoutResolutionExplanation {
 #if hl
 	return flight._hl._fn.Layout.explainLayoutResolution(state, tree, nodeIndex);
@@ -66,6 +101,12 @@ extern inline function explainLayoutResolution(state:LayoutState, tree:LayoutTre
 	#error "flight.Layout: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function resolveLayoutTree(out:Dynamic, state:LayoutState, tree:LayoutTree, intrinsicSizes:Dynamic, availableWidth:Float, availableHeight:Float):Bool {
+	return flight._js._fn.Layout.resolveLayoutTree(out, state, tree, intrinsicSizes, availableWidth, availableHeight);
+}
+#else
 extern inline function resolveLayoutTree(out:Dynamic, outLen:Int, state:LayoutState, tree:LayoutTree, intrinsicSizes:Dynamic, intrinsicSizesLen:Int, availableWidth:Float, availableHeight:Float):Bool {
 #if hl
 	return flight._hl._fn.Layout.resolveLayoutTree(out, outLen, state, tree, intrinsicSizes, intrinsicSizesLen, availableWidth, availableHeight);
@@ -77,6 +118,12 @@ extern inline function resolveLayoutTree(out:Dynamic, outLen:Int, state:LayoutSt
 	#error "flight.Layout: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freeLayoutState(ptr:LayoutState):Void {
+	flight._js._fn.Layout.freeLayoutState(ptr);
+}
+#else
 extern inline function freeLayoutState(ptr:LayoutState):Void {
 #if hl
 	flight._hl._fn.Layout.freeLayoutState(ptr);
@@ -88,6 +135,12 @@ extern inline function freeLayoutState(ptr:LayoutState):Void {
 	#error "flight.Layout: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freeLayoutResolutionExplanation(ptr:LayoutResolutionExplanation):Void {
+	flight._js._fn.Layout.freeLayoutResolutionExplanation(ptr);
+}
+#else
 extern inline function freeLayoutResolutionExplanation(ptr:LayoutResolutionExplanation):Void {
 #if hl
 	flight._hl._fn.Layout.freeLayoutResolutionExplanation(ptr);
@@ -99,3 +152,4 @@ extern inline function freeLayoutResolutionExplanation(ptr:LayoutResolutionExpla
 	#error "flight.Layout: no backend for this target."
 #end
 }
+#end

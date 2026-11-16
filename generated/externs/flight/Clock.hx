@@ -22,6 +22,11 @@ typedef Clock = flight._js.Clock;
 
 #end
 
+#if (js && flight_esm)
+extern inline function createChildClock(parent:Dynamic, options:Null<ClockOptions>):Dynamic {
+	return flight._js._fn.Clock.createChildClock(parent, options);
+}
+#else
 extern inline function createChildClock(parent:Dynamic, options:ClockOptions):Dynamic {
 #if hl
 	return flight._hl._fn.Clock.createChildClock(parent, options);
@@ -33,6 +38,12 @@ extern inline function createChildClock(parent:Dynamic, options:ClockOptions):Dy
 	#error "flight.Clock: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function createClock():Dynamic {
+	return flight._js._fn.Clock.createClock();
+}
+#else
 extern inline function createClock():Dynamic {
 #if hl
 	return flight._hl._fn.Clock.createClock();
@@ -44,6 +55,12 @@ extern inline function createClock():Dynamic {
 	#error "flight.Clock: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function addClockChild(parent:Dynamic, child:Dynamic):Void {
+	flight._js._fn.Clock.addClockChild(parent, child);
+}
+#else
 extern inline function addClockChild(parent:Dynamic, child:Dynamic):Void {
 #if hl
 	flight._hl._fn.Clock.addClockChild(parent, child);
@@ -55,6 +72,12 @@ extern inline function addClockChild(parent:Dynamic, child:Dynamic):Void {
 	#error "flight.Clock: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function advanceClock(clock:Dynamic, deltaTime:Float):Void {
+	flight._js._fn.Clock.advanceClock(clock, deltaTime);
+}
+#else
 extern inline function advanceClock(clock:Dynamic, deltaTime:Float):Void {
 #if hl
 	flight._hl._fn.Clock.advanceClock(clock, deltaTime);
@@ -66,6 +89,12 @@ extern inline function advanceClock(clock:Dynamic, deltaTime:Float):Void {
 	#error "flight.Clock: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function disposeClock(clock:Dynamic):Void {
+	flight._js._fn.Clock.disposeClock(clock);
+}
+#else
 extern inline function disposeClock(clock:Dynamic):Void {
 #if hl
 	flight._hl._fn.Clock.disposeClock(clock);
@@ -77,6 +106,12 @@ extern inline function disposeClock(clock:Dynamic):Void {
 	#error "flight.Clock: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getClockEffectiveScale(clock:Clock):Float {
+	return flight._js._fn.Clock.getClockEffectiveScale(clock);
+}
+#else
 extern inline function getClockEffectiveScale(clock:Clock):Float {
 #if hl
 	return flight._hl._fn.Clock.getClockEffectiveScale(clock);
@@ -88,6 +123,12 @@ extern inline function getClockEffectiveScale(clock:Clock):Float {
 	#error "flight.Clock: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getClockParent(clock:Clock):Null<Dynamic> {
+	return flight._js._fn.Clock.getClockParent(clock);
+}
+#else
 extern inline function getClockParent(clock:Clock):Dynamic {
 #if hl
 	return flight._hl._fn.Clock.getClockParent(clock);
@@ -99,6 +140,12 @@ extern inline function getClockParent(clock:Clock):Dynamic {
 	#error "flight.Clock: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function isClockEffectivelyPaused(clock:Clock):Bool {
+	return flight._js._fn.Clock.isClockEffectivelyPaused(clock);
+}
+#else
 extern inline function isClockEffectivelyPaused(clock:Clock):Bool {
 #if hl
 	return flight._hl._fn.Clock.isClockEffectivelyPaused(clock);
@@ -110,6 +157,12 @@ extern inline function isClockEffectivelyPaused(clock:Clock):Bool {
 	#error "flight.Clock: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function pauseClock(clock:Clock):Void {
+	flight._js._fn.Clock.pauseClock(clock);
+}
+#else
 extern inline function pauseClock(clock:Clock):Void {
 #if hl
 	flight._hl._fn.Clock.pauseClock(clock);
@@ -121,6 +174,12 @@ extern inline function pauseClock(clock:Clock):Void {
 	#error "flight.Clock: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function removeClockChild(parent:Dynamic, child:Dynamic):Void {
+	flight._js._fn.Clock.removeClockChild(parent, child);
+}
+#else
 extern inline function removeClockChild(parent:Dynamic, child:Dynamic):Void {
 #if hl
 	flight._hl._fn.Clock.removeClockChild(parent, child);
@@ -132,6 +191,12 @@ extern inline function removeClockChild(parent:Dynamic, child:Dynamic):Void {
 	#error "flight.Clock: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function resetClock(clock:Clock):Void {
+	flight._js._fn.Clock.resetClock(clock);
+}
+#else
 extern inline function resetClock(clock:Clock):Void {
 #if hl
 	flight._hl._fn.Clock.resetClock(clock);
@@ -143,6 +208,12 @@ extern inline function resetClock(clock:Clock):Void {
 	#error "flight.Clock: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function resumeClock(clock:Clock):Void {
+	flight._js._fn.Clock.resumeClock(clock);
+}
+#else
 extern inline function resumeClock(clock:Clock):Void {
 #if hl
 	flight._hl._fn.Clock.resumeClock(clock);
@@ -154,6 +225,12 @@ extern inline function resumeClock(clock:Clock):Void {
 	#error "flight.Clock: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setClockScale(clock:Clock, scale:Float):Void {
+	flight._js._fn.Clock.setClockScale(clock, scale);
+}
+#else
 extern inline function setClockScale(clock:Clock, scale:Float):Void {
 #if hl
 	flight._hl._fn.Clock.setClockScale(clock, scale);
@@ -165,3 +242,4 @@ extern inline function setClockScale(clock:Clock, scale:Float):Void {
 	#error "flight.Clock: no backend for this target."
 #end
 }
+#end

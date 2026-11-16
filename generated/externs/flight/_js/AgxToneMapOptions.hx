@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract AgxToneMapOptions(Dynamic) {}
+abstract AgxToneMapOptions(Dynamic) {
+}

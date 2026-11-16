@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract LottieShapeItemHandler(Dynamic) {}
+abstract LottieShapeItemHandler(Dynamic) {
+}

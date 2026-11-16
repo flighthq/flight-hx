@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract SpineParseResult(Dynamic) {}
+abstract SpineParseResult(Dynamic) {
+}

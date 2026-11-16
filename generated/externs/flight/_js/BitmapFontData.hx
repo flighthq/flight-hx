@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract BitmapFontData(Dynamic) {}
+abstract BitmapFontData(Dynamic) {
+}

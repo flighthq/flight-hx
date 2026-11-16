@@ -1,159 +1,159 @@
 package flight._js._fn;
 
-@:jsRequire("flight")
+@:jsRequire("@flighthq/text")
 extern class Text {
-	@:native("flight_explain_text_label_content")
+	@:native("explainTextLabelContent")
 	public static function explainTextLabelContent(source:Dynamic):flight._js.TextLabelContentExplanation;
-	@:native("flight_create_native_text")
+	@:native("createNativeText")
 	public static function createNativeText():Dynamic;
-	@:native("flight_compute_native_text_local_bounds_rectangle")
+	@:native("computeNativeTextLocalBoundsRectangle")
 	public static function computeNativeTextLocalBoundsRectangle(out:flight._js.Rectangle, source:Dynamic):Void;
-	@:native("flight_get_native_text_measured_height")
+	@:native("getNativeTextMeasuredHeight")
 	public static function getNativeTextMeasuredHeight(source:flight._js.NativeText):Float;
-	@:native("flight_get_native_text_measured_width")
+	@:native("getNativeTextMeasuredWidth")
 	public static function getNativeTextMeasuredWidth(source:flight._js.NativeText):Float;
-	@:native("flight_get_native_text_string")
+	@:native("getNativeTextString")
 	public static function getNativeTextString(source:flight._js.NativeText):String;
-	@:native("flight_get_native_text_style")
+	@:native("getNativeTextStyle")
 	public static function getNativeTextStyle(source:flight._js.NativeText):Dynamic;
-	@:native("flight_patch_native_text_style")
+	@:native("patchNativeTextStyle")
 	public static function patchNativeTextStyle(source:Dynamic, patch:flight._js.NativeTextStyle):Void;
-	@:native("flight_set_native_text_auto_size")
+	@:native("setNativeTextAutoSize")
 	public static function setNativeTextAutoSize(source:Dynamic, value:flight._js.TextAutoSize):Void;
-	@:native("flight_set_native_text_height")
+	@:native("setNativeTextHeight")
 	public static function setNativeTextHeight(source:Dynamic, value:Float):Void;
-	@:native("flight_set_native_text_string")
+	@:native("setNativeTextString")
 	public static function setNativeTextString(source:Dynamic, value:String):Void;
-	@:native("flight_set_native_text_style")
+	@:native("setNativeTextStyle")
 	public static function setNativeTextStyle(source:Dynamic, value:Dynamic):Void;
-	@:native("flight_set_native_text_vertical_align")
+	@:native("setNativeTextVerticalAlign")
 	public static function setNativeTextVerticalAlign(source:Dynamic, value:flight._js.TextVerticalAlign):Void;
-	@:native("flight_set_native_text_width")
+	@:native("setNativeTextWidth")
 	public static function setNativeTextWidth(source:Dynamic, value:Float):Void;
-	@:native("flight_append_rich_text_string")
+	@:native("appendRichTextString")
 	public static function appendRichTextString(source:Dynamic, value:String):Void;
-	@:native("flight_build_rich_text_layout_params")
+	@:native("buildRichTextLayoutParams")
 	public static function buildRichTextLayoutParams(source:flight._js.RichText, measure:flight._js.TextMeasureFunction):flight._js.TextLayoutParams;
-	@:native("flight_clear_rich_text_format_ranges")
+	@:native("clearRichTextFormatRanges")
 	public static function clearRichTextFormatRanges(source:Dynamic):Void;
-	@:native("flight_compute_rich_text_local_bounds_rectangle")
+	@:native("computeRichTextLocalBoundsRectangle")
 	public static function computeRichTextLocalBoundsRectangle(out:flight._js.Rectangle, source:Dynamic):Void;
-	@:native("flight_dispatch_rich_text_link_at_point")
-	public static function dispatchRichTextLinkAtPoint(source:Dynamic, x:Float, y:Float):String;
-	@:native("flight_dispatch_rich_text_wheel")
-	public static function dispatchRichTextWheel(source:Dynamic, deltaLines:Float, layout:flight._js.TextLayoutResult):Void;
-	@:native("flight_enable_text_field_signals")
+	@:native("dispatchRichTextLinkAtPoint")
+	public static function dispatchRichTextLinkAtPoint(source:Dynamic, x:Float, y:Float):Null<String>;
+	@:native("dispatchRichTextWheel")
+	public static function dispatchRichTextWheel(source:Dynamic, deltaLines:Float, layout:Null<flight._js.TextLayoutResult>):Void;
+	@:native("enableTextFieldSignals")
 	public static function enableTextFieldSignals(source:Dynamic):Dynamic;
-	@:native("flight_get_rich_text_bottom_scroll_v")
+	@:native("getRichTextBottomScrollV")
 	public static function getRichTextBottomScrollV(source:Dynamic):Float;
-	@:native("flight_get_rich_text_char_index_at_point")
+	@:native("getRichTextCharIndexAtPoint")
 	public static function getRichTextCharIndexAtPoint(source:Dynamic, x:Float, y:Float):Int;
-	@:native("flight_get_rich_text_default_text_format")
+	@:native("getRichTextDefaultTextFormat")
 	public static function getRichTextDefaultTextFormat(source:flight._js.RichText):Dynamic;
-	@:native("flight_get_rich_text_format_range_at")
+	@:native("getRichTextFormatRangeAt")
 	public static function getRichTextFormatRangeAt(out:flight._js.TextFormat, source:flight._js.RichText, index:Int):Void;
-	@:native("flight_get_rich_text_format_range_by_index")
+	@:native("getRichTextFormatRangeByIndex")
 	public static function getRichTextFormatRangeByIndex(out:flight._js.TextFormatRange, source:flight._js.RichText, i:Int):Bool;
-	@:native("flight_get_rich_text_format_range_count")
+	@:native("getRichTextFormatRangeCount")
 	public static function getRichTextFormatRangeCount(source:flight._js.RichText):Int;
-	@:native("flight_get_rich_text_format_ranges_in")
+	@:native("getRichTextFormatRangesIn")
 	public static function getRichTextFormatRangesIn(out:Dynamic, source:flight._js.RichText, beginIndex:Int, endIndex:Int):Void;
-	@:native("flight_get_rich_text_length")
+	@:native("getRichTextLength")
 	public static function getRichTextLength(source:flight._js.RichText):Int;
-	@:native("flight_get_rich_text_line_count")
+	@:native("getRichTextLineCount")
 	public static function getRichTextLineCount(source:Dynamic):Int;
-	@:native("flight_get_rich_text_line_metrics")
-	public static function getRichTextLineMetrics(source:Dynamic, lineIndex:Int):Dynamic;
-	@:native("flight_get_rich_text_max_scroll_h")
+	@:native("getRichTextLineMetrics")
+	public static function getRichTextLineMetrics(source:Dynamic, lineIndex:Int):Null<flight._js.TextLineMetrics>;
+	@:native("getRichTextMaxScrollH")
 	public static function getRichTextMaxScrollH(source:Dynamic):Float;
-	@:native("flight_get_rich_text_max_scroll_v")
+	@:native("getRichTextMaxScrollV")
 	public static function getRichTextMaxScrollV(source:Dynamic):Float;
-	@:native("flight_get_rich_text_password_character")
-	public static function getRichTextPasswordCharacter(source:flight._js.RichText):String;
-	@:native("flight_get_rich_text_string")
+	@:native("getRichTextPasswordCharacter")
+	public static function getRichTextPasswordCharacter(source:flight._js.RichText):Null<String>;
+	@:native("getRichTextString")
 	public static function getRichTextString(source:flight._js.RichText):String;
-	@:native("flight_get_rich_text_text_height")
+	@:native("getRichTextTextHeight")
 	public static function getRichTextTextHeight(source:Dynamic):Float;
-	@:native("flight_get_rich_text_text_width")
+	@:native("getRichTextTextWidth")
 	public static function getRichTextTextWidth(source:Dynamic):Float;
-	@:native("flight_get_text_field_signals")
-	public static function getTextFieldSignals(source:Dynamic):Dynamic;
-	@:native("flight_insert_rich_text_string")
+	@:native("getTextFieldSignals")
+	public static function getTextFieldSignals(source:Dynamic):Null<Dynamic>;
+	@:native("insertRichTextString")
 	public static function insertRichTextString(source:Dynamic, index:Int, value:String):Void;
-	@:native("flight_remove_rich_text_format_ranges_in")
+	@:native("removeRichTextFormatRangesIn")
 	public static function removeRichTextFormatRangesIn(source:Dynamic, begin:Int, end:Int):Void;
-	@:native("flight_replace_rich_text_string")
+	@:native("replaceRichTextString")
 	public static function replaceRichTextString(source:Dynamic, beginIndex:Int, endIndex:Int, value:String):Void;
-	@:native("flight_set_rich_text_background")
+	@:native("setRichTextBackground")
 	public static function setRichTextBackground(source:Dynamic, value:Bool):Void;
-	@:native("flight_set_rich_text_background_color")
+	@:native("setRichTextBackgroundColor")
 	public static function setRichTextBackgroundColor(source:Dynamic, value:Int):Void;
-	@:native("flight_set_rich_text_border")
+	@:native("setRichTextBorder")
 	public static function setRichTextBorder(source:Dynamic, value:Bool):Void;
-	@:native("flight_set_rich_text_border_color")
+	@:native("setRichTextBorderColor")
 	public static function setRichTextBorderColor(source:Dynamic, value:Int):Void;
-	@:native("flight_set_rich_text_condense_white")
+	@:native("setRichTextCondenseWhite")
 	public static function setRichTextCondenseWhite(source:Dynamic, value:Bool):Void;
-	@:native("flight_set_rich_text_content")
+	@:native("setRichTextContent")
 	public static function setRichTextContent(source:Dynamic, content:flight._js.RichTextContent):Void;
-	@:native("flight_set_rich_text_default_text_format")
+	@:native("setRichTextDefaultTextFormat")
 	public static function setRichTextDefaultTextFormat(source:Dynamic, value:Dynamic):Void;
-	@:native("flight_set_rich_text_format_range")
-	public static function setRichTextFormatRange(source:Dynamic, format:Dynamic, start:haxe.Int64, end:haxe.Int64):Void;
-	@:native("flight_set_rich_text_height")
+	@:native("setRichTextFormatRange")
+	public static function setRichTextFormatRange(source:Dynamic, format:Dynamic, start:Null<Int>, end:Null<Int>):Void;
+	@:native("setRichTextHeight")
 	public static function setRichTextHeight(source:Dynamic, value:Float):Void;
-	@:native("flight_set_rich_text_max_chars")
+	@:native("setRichTextMaxChars")
 	public static function setRichTextMaxChars(source:Dynamic, value:Int):Void;
-	@:native("flight_set_rich_text_mouse_wheel_enabled")
+	@:native("setRichTextMouseWheelEnabled")
 	public static function setRichTextMouseWheelEnabled(source:Dynamic, value:Bool):Void;
-	@:native("flight_set_rich_text_multiline")
+	@:native("setRichTextMultiline")
 	public static function setRichTextMultiline(source:Dynamic, value:Bool):Void;
-	@:native("flight_set_rich_text_scroll_h")
-	public static function setRichTextScrollH(source:Dynamic, value:Float, layout:flight._js.TextLayoutResult):Void;
-	@:native("flight_set_rich_text_scroll_v")
-	public static function setRichTextScrollV(source:Dynamic, value:Float, layout:flight._js.TextLayoutResult):Void;
-	@:native("flight_set_rich_text_selectable")
+	@:native("setRichTextScrollH")
+	public static function setRichTextScrollH(source:Dynamic, value:Float, layout:Null<flight._js.TextLayoutResult>):Void;
+	@:native("setRichTextScrollV")
+	public static function setRichTextScrollV(source:Dynamic, value:Float, layout:Null<flight._js.TextLayoutResult>):Void;
+	@:native("setRichTextSelectable")
 	public static function setRichTextSelectable(source:Dynamic, value:Bool):Void;
-	@:native("flight_set_rich_text_string")
+	@:native("setRichTextString")
 	public static function setRichTextString(source:Dynamic, value:String):Void;
-	@:native("flight_set_rich_text_text_color")
+	@:native("setRichTextTextColor")
 	public static function setRichTextTextColor(source:Dynamic, value:Int):Void;
-	@:native("flight_set_rich_text_vertical_align")
+	@:native("setRichTextVerticalAlign")
 	public static function setRichTextVerticalAlign(source:Dynamic, value:flight._js.TextVerticalAlign):Void;
-	@:native("flight_set_rich_text_width")
+	@:native("setRichTextWidth")
 	public static function setRichTextWidth(source:Dynamic, value:Float):Void;
-	@:native("flight_set_rich_text_word_wrap")
+	@:native("setRichTextWordWrap")
 	public static function setRichTextWordWrap(source:Dynamic, value:Bool):Void;
-	@:native("flight_compute_text_format_font_string")
+	@:native("computeTextFormatFontString")
 	public static function computeTextFormatFontString(format:flight._js.TextFormat):String;
-	@:native("flight_append_text_label_string")
+	@:native("appendTextLabelString")
 	public static function appendTextLabelString(source:Dynamic, value:String):Void;
-	@:native("flight_compute_text_label_local_bounds_rectangle")
+	@:native("computeTextLabelLocalBoundsRectangle")
 	public static function computeTextLabelLocalBoundsRectangle(out:flight._js.Rectangle, source:Dynamic):Void;
-	@:native("flight_get_text_label_format")
+	@:native("getTextLabelFormat")
 	public static function getTextLabelFormat(source:flight._js.TextLabel):Dynamic;
-	@:native("flight_get_text_label_string")
+	@:native("getTextLabelString")
 	public static function getTextLabelString(source:flight._js.TextLabel):String;
-	@:native("flight_set_text_label_auto_size")
+	@:native("setTextLabelAutoSize")
 	public static function setTextLabelAutoSize(source:Dynamic, value:flight._js.TextAutoSize):Void;
-	@:native("flight_set_text_label_format")
+	@:native("setTextLabelFormat")
 	public static function setTextLabelFormat(source:Dynamic, value:Dynamic):Void;
-	@:native("flight_set_text_label_height")
+	@:native("setTextLabelHeight")
 	public static function setTextLabelHeight(source:Dynamic, value:Float):Void;
-	@:native("flight_set_text_label_string")
+	@:native("setTextLabelString")
 	public static function setTextLabelString(source:Dynamic, value:String):Void;
-	@:native("flight_set_text_label_vertical_align")
+	@:native("setTextLabelVerticalAlign")
 	public static function setTextLabelVerticalAlign(source:Dynamic, value:flight._js.TextVerticalAlign):Void;
-	@:native("flight_set_text_label_width")
+	@:native("setTextLabelWidth")
 	public static function setTextLabelWidth(source:Dynamic, value:Float):Void;
-	@:native("flight_get_text_layout")
-	public static function getTextLayout(source:Dynamic):Dynamic;
-	@:native("flight_get_text_layout_metrics")
+	@:native("getTextLayout")
+	public static function getTextLayout(source:Dynamic):Null<Dynamic>;
+	@:native("getTextLayoutMetrics")
 	public static function getTextLayoutMetrics(out:flight._js.TextMetrics, source:Dynamic):Void;
-	@:native("flight_free_text_label_content_explanation")
-	public static function freeTextLabelContentExplanation(ptr:flight._js.TextLabelContentExplanation):Void;
-	@:native("flight_free_text_layout_params")
-	public static function freeTextLayoutParams(ptr:flight._js.TextLayoutParams):Void;
-	@:native("flight_free_text_line_metrics")
-	public static function freeTextLineMetrics(ptr:flight._js.TextLineMetrics):Void;
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeTextLabelContentExplanation(ptr:flight._js.TextLabelContentExplanation):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeTextLayoutParams(ptr:flight._js.TextLayoutParams):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeTextLineMetrics(ptr:flight._js.TextLineMetrics):Void {}
 }

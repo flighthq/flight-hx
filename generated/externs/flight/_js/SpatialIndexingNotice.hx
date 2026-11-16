@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract SpatialIndexingNotice(Dynamic) {}
+abstract SpatialIndexingNotice(Dynamic) {
+}

@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract RiveFieldType(Dynamic) {}
+abstract RiveFieldType(Dynamic) {
+}

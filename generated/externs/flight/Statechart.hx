@@ -1,5 +1,10 @@
 package flight;
 
+#if (js && flight_esm)
+extern inline function areStatechartGuardsEnabled(instance:Dynamic):Bool {
+	return flight._js._fn.Statechart.areStatechartGuardsEnabled(instance);
+}
+#else
 extern inline function areStatechartGuardsEnabled(instance:Dynamic):Bool {
 #if hl
 	return flight._hl._fn.Statechart.areStatechartGuardsEnabled(instance);
@@ -11,6 +16,12 @@ extern inline function areStatechartGuardsEnabled(instance:Dynamic):Bool {
 	#error "flight.Statechart: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function disableStatechartGuards(instance:Dynamic):Void {
+	flight._js._fn.Statechart.disableStatechartGuards(instance);
+}
+#else
 extern inline function disableStatechartGuards(instance:Dynamic):Void {
 #if hl
 	flight._hl._fn.Statechart.disableStatechartGuards(instance);
@@ -22,6 +33,12 @@ extern inline function disableStatechartGuards(instance:Dynamic):Void {
 	#error "flight.Statechart: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function createStatechartInstance(chart:Dynamic):Dynamic {
+	return flight._js._fn.Statechart.createStatechartInstance(chart);
+}
+#else
 extern inline function createStatechartInstance(chart:Dynamic):Dynamic {
 #if hl
 	return flight._hl._fn.Statechart.createStatechartInstance(chart);
@@ -33,6 +50,12 @@ extern inline function createStatechartInstance(chart:Dynamic):Dynamic {
 	#error "flight.Statechart: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function advanceStatechartInstance(instance:Dynamic, deltaTime:Float):Int {
+	return flight._js._fn.Statechart.advanceStatechartInstance(instance, deltaTime);
+}
+#else
 extern inline function advanceStatechartInstance(instance:Dynamic, deltaTime:Float):Int {
 #if hl
 	return flight._hl._fn.Statechart.advanceStatechartInstance(instance, deltaTime);
@@ -44,6 +67,12 @@ extern inline function advanceStatechartInstance(instance:Dynamic, deltaTime:Flo
 	#error "flight.Statechart: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function explainStatechartTransition(instance:Dynamic, regionIndex:Int):StatechartTransitionExplanation {
+	return flight._js._fn.Statechart.explainStatechartTransition(instance, regionIndex);
+}
+#else
 extern inline function explainStatechartTransition(instance:Dynamic, regionIndex:Int):StatechartTransitionExplanation {
 #if hl
 	return flight._hl._fn.Statechart.explainStatechartTransition(instance, regionIndex);
@@ -55,6 +84,12 @@ extern inline function explainStatechartTransition(instance:Dynamic, regionIndex
 	#error "flight.Statechart: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function fireStatechartTrigger(instance:Dynamic, inputIndex:Int):Void {
+	flight._js._fn.Statechart.fireStatechartTrigger(instance, inputIndex);
+}
+#else
 extern inline function fireStatechartTrigger(instance:Dynamic, inputIndex:Int):Void {
 #if hl
 	flight._hl._fn.Statechart.fireStatechartTrigger(instance, inputIndex);
@@ -66,6 +101,12 @@ extern inline function fireStatechartTrigger(instance:Dynamic, inputIndex:Int):V
 	#error "flight.Statechart: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getStatechartInputIndex(chart:StatechartRaw, name:String):Int {
+	return flight._js._fn.Statechart.getStatechartInputIndex(chart, name);
+}
+#else
 extern inline function getStatechartInputIndex(chart:StatechartRaw, name:String):Int {
 #if hl
 	return flight._hl._fn.Statechart.getStatechartInputIndex(chart, cast name);
@@ -77,6 +118,12 @@ extern inline function getStatechartInputIndex(chart:StatechartRaw, name:String)
 	#error "flight.Statechart: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getStatechartRegionBlend(instance:Dynamic, regionIndex:Int):Float {
+	return flight._js._fn.Statechart.getStatechartRegionBlend(instance, regionIndex);
+}
+#else
 extern inline function getStatechartRegionBlend(instance:Dynamic, regionIndex:Int):Float {
 #if hl
 	return flight._hl._fn.Statechart.getStatechartRegionBlend(instance, regionIndex);
@@ -88,6 +135,12 @@ extern inline function getStatechartRegionBlend(instance:Dynamic, regionIndex:In
 	#error "flight.Statechart: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getStatechartRegionState(instance:Dynamic, regionIndex:Int):Int {
+	return flight._js._fn.Statechart.getStatechartRegionState(instance, regionIndex);
+}
+#else
 extern inline function getStatechartRegionState(instance:Dynamic, regionIndex:Int):Int {
 #if hl
 	return flight._hl._fn.Statechart.getStatechartRegionState(instance, regionIndex);
@@ -99,6 +152,12 @@ extern inline function getStatechartRegionState(instance:Dynamic, regionIndex:In
 	#error "flight.Statechart: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setStatechartBooleanInput(instance:Dynamic, inputIndex:Int, value:Bool):Void {
+	flight._js._fn.Statechart.setStatechartBooleanInput(instance, inputIndex, value);
+}
+#else
 extern inline function setStatechartBooleanInput(instance:Dynamic, inputIndex:Int, value:Bool):Void {
 #if hl
 	flight._hl._fn.Statechart.setStatechartBooleanInput(instance, inputIndex, value);
@@ -110,6 +169,12 @@ extern inline function setStatechartBooleanInput(instance:Dynamic, inputIndex:In
 	#error "flight.Statechart: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setStatechartNumberInput(instance:Dynamic, inputIndex:Int, value:Float):Void {
+	flight._js._fn.Statechart.setStatechartNumberInput(instance, inputIndex, value);
+}
+#else
 extern inline function setStatechartNumberInput(instance:Dynamic, inputIndex:Int, value:Float):Void {
 #if hl
 	flight._hl._fn.Statechart.setStatechartNumberInput(instance, inputIndex, value);
@@ -121,6 +186,12 @@ extern inline function setStatechartNumberInput(instance:Dynamic, inputIndex:Int
 	#error "flight.Statechart: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setStatechartRegionDuration(instance:Dynamic, regionIndex:Int, duration:Float):Void {
+	flight._js._fn.Statechart.setStatechartRegionDuration(instance, regionIndex, duration);
+}
+#else
 extern inline function setStatechartRegionDuration(instance:Dynamic, regionIndex:Int, duration:Float):Void {
 #if hl
 	flight._hl._fn.Statechart.setStatechartRegionDuration(instance, regionIndex, duration);
@@ -132,6 +203,12 @@ extern inline function setStatechartRegionDuration(instance:Dynamic, regionIndex
 	#error "flight.Statechart: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function enableStatechartSignals(instance:Dynamic):StatechartSignals {
+	return flight._js._fn.Statechart.enableStatechartSignals(instance);
+}
+#else
 extern inline function enableStatechartSignals(instance:Dynamic):StatechartSignals {
 #if hl
 	return flight._hl._fn.Statechart.enableStatechartSignals(instance);
@@ -143,6 +220,12 @@ extern inline function enableStatechartSignals(instance:Dynamic):StatechartSigna
 	#error "flight.Statechart: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getStatechartSignals(instance:Dynamic):Null<StatechartSignals> {
+	return flight._js._fn.Statechart.getStatechartSignals(instance);
+}
+#else
 extern inline function getStatechartSignals(instance:Dynamic):StatechartSignals {
 #if hl
 	return flight._hl._fn.Statechart.getStatechartSignals(instance);
@@ -154,6 +237,12 @@ extern inline function getStatechartSignals(instance:Dynamic):StatechartSignals 
 	#error "flight.Statechart: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freeStatechartTransitionExplanation(ptr:StatechartTransitionExplanation):Void {
+	flight._js._fn.Statechart.freeStatechartTransitionExplanation(ptr);
+}
+#else
 extern inline function freeStatechartTransitionExplanation(ptr:StatechartTransitionExplanation):Void {
 #if hl
 	flight._hl._fn.Statechart.freeStatechartTransitionExplanation(ptr);
@@ -165,6 +254,12 @@ extern inline function freeStatechartTransitionExplanation(ptr:StatechartTransit
 	#error "flight.Statechart: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freeStatechartSignals(ptr:StatechartSignals):Void {
+	flight._js._fn.Statechart.freeStatechartSignals(ptr);
+}
+#else
 extern inline function freeStatechartSignals(ptr:StatechartSignals):Void {
 #if hl
 	flight._hl._fn.Statechart.freeStatechartSignals(ptr);
@@ -176,3 +271,4 @@ extern inline function freeStatechartSignals(ptr:StatechartSignals):Void {
 	#error "flight.Statechart: no backend for this target."
 #end
 }
+#end

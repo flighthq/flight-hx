@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract HasClip(Dynamic) {}
+abstract HasClip(Dynamic) {
+}

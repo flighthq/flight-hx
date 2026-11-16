@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract MedianEffect(Dynamic) {}
+abstract MedianEffect(Dynamic) {
+}

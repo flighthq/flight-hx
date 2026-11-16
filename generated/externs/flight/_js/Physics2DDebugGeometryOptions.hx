@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract Physics2DDebugGeometryOptions(Dynamic) {}
+abstract Physics2DDebugGeometryOptions(Dynamic) {
+}

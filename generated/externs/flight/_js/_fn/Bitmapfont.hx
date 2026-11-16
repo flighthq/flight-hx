@@ -1,59 +1,59 @@
 package flight._js._fn;
 
-@:jsRequire("flight")
+@:jsRequire("@flighthq/bitmapfont")
 extern class Bitmapfont {
-	@:native("flight_create_bitmap_font")
+	@:native("createBitmapFont")
 	public static function createBitmapFont(guardState:flight._js.BitmapFontGuardStateRef, data:flight._js.BitmapFontData):Dynamic;
-	@:native("flight_create_bitmap_font_guard_state")
+	@:native("createBitmapFontGuardState")
 	public static function createBitmapFontGuardState():flight._js.BitmapFontGuardStateRef;
-	@:native("flight_get_bitmap_font_glyph")
-	public static function getBitmapFontGlyph(font:Dynamic, codepoint:Int):Dynamic;
-	@:native("flight_get_bitmap_font_kerning")
+	@:native("getBitmapFontGlyph")
+	public static function getBitmapFontGlyph(font:Dynamic, codepoint:Int):Null<Dynamic>;
+	@:native("getBitmapFontKerning")
 	public static function getBitmapFontKerning(font:Dynamic, left:Int, right:Int):Float;
-	@:native("flight_get_bitmap_font_page")
-	public static function getBitmapFontPage(font:Dynamic, page:Int):Dynamic;
-	@:native("flight_has_bitmap_font_glyph")
+	@:native("getBitmapFontPage")
+	public static function getBitmapFontPage(font:Dynamic, page:Null<Int>):Null<Dynamic>;
+	@:native("hasBitmapFontGlyph")
 	public static function hasBitmapFontGlyph(font:Dynamic, codepoint:Int):Bool;
-	@:native("flight_pack_bitmap_font_kerning_key")
-	public static function packBitmapFontKerningKey(left:Int, right:Int):haxe.Int64;
-	@:native("flight_unpack_bitmap_font_kerning_key")
-	public static function unpackBitmapFontKerningKey(out:flight._js.BitmapFontKerningPair, key:haxe.Int64):Void;
-	@:native("flight_create_bitmap_font_from_glyph_atlas")
+	@:native("packBitmapFontKerningKey")
+	public static function packBitmapFontKerningKey(left:Int, right:Int):Float;
+	@:native("unpackBitmapFontKerningKey")
+	public static function unpackBitmapFontKerningKey(out:flight._js.BitmapFontKerningPair, key:Float):Void;
+	@:native("createBitmapFontFromGlyphAtlas")
 	public static function createBitmapFontFromGlyphAtlas(guardState:flight._js.BitmapFontGuardStateRef, atlas:Dynamic):Dynamic;
-	@:native("flight_create_glyph_source_from_bitmap_font")
+	@:native("createGlyphSourceFromBitmapFont")
 	public static function createGlyphSourceFromBitmapFont(font:Dynamic):Dynamic;
-	@:native("flight_get_bitmap_font_encoding_string")
-	public static function getBitmapFontEncodingString(value:Int):String;
-	@:native("flight_get_bitmap_font_glyph_explanation_reason_string")
-	public static function getBitmapFontGlyphExplanationReasonString(value:Int):String;
-	@:native("flight_get_bitmap_font_guard_log_key_string")
+	@:native("getBitmapFontEncodingString")
+	public static function getBitmapFontEncodingString(value:Dynamic):String;
+	@:native("getBitmapFontGlyphExplanationReasonString")
+	public static function getBitmapFontGlyphExplanationReasonString(value:Dynamic):String;
+	@:native("getBitmapFontGuardLogKeyString")
 	public static function getBitmapFontGuardLogKeyString(value:flight._js.BitmapFontGuardLogKey):String;
-	@:native("flight_get_bitmap_font_guard_reason_string")
+	@:native("getBitmapFontGuardReasonString")
 	public static function getBitmapFontGuardReasonString(value:flight._js.BitmapFontGuardReason):String;
-	@:native("flight_parse_bitmap_font_encoding")
-	public static function parseBitmapFontEncoding(value:String):Int;
-	@:native("flight_parse_bitmap_font_glyph_explanation_reason")
-	public static function parseBitmapFontGlyphExplanationReason(value:String):Int;
-	@:native("flight_parse_bitmap_font_guard_log_key")
-	public static function parseBitmapFontGuardLogKey(value:String):Dynamic;
-	@:native("flight_parse_bitmap_font_guard_reason")
-	public static function parseBitmapFontGuardReason(value:String):Dynamic;
-	@:native("flight_disable_bitmap_font_guards")
+	@:native("parseBitmapFontEncoding")
+	public static function parseBitmapFontEncoding(value:String):Null<Dynamic>;
+	@:native("parseBitmapFontGlyphExplanationReason")
+	public static function parseBitmapFontGlyphExplanationReason(value:String):Null<Dynamic>;
+	@:native("parseBitmapFontGuardLogKey")
+	public static function parseBitmapFontGuardLogKey(value:String):Null<flight._js.BitmapFontGuardLogKey>;
+	@:native("parseBitmapFontGuardReason")
+	public static function parseBitmapFontGuardReason(value:String):Null<flight._js.BitmapFontGuardReason>;
+	@:native("disableBitmapFontGuards")
 	public static function disableBitmapFontGuards(guardState:flight._js.BitmapFontGuardStateRef):Void;
-	@:native("flight_enable_bitmap_font_guards")
+	@:native("enableBitmapFontGuards")
 	public static function enableBitmapFontGuards(guardState:flight._js.BitmapFontGuardStateRef, logState:Dynamic, clock:flight._js.BitmapFontClock):Void;
-	@:native("flight_explain_bitmap_font_glyph")
+	@:native("explainBitmapFontGlyph")
 	public static function explainBitmapFontGlyph(font:Dynamic, codepoint:Int):flight._js.BitmapFontGlyphExplanation;
-	@:native("flight_summarize_bitmap_font")
+	@:native("summarizeBitmapFont")
 	public static function summarizeBitmapFont(font:Dynamic):flight._js.BitmapFontSummary;
-	@:native("flight_free_bitmap_font_guard_state_ref")
-	public static function freeBitmapFontGuardStateRef(ptr:flight._js.BitmapFontGuardStateRef):Void;
-	@:native("flight_free_bitmap_font_guard_log_key")
-	public static function freeBitmapFontGuardLogKey(ptr:flight._js.BitmapFontGuardLogKey):Void;
-	@:native("flight_free_bitmap_font_guard_reason")
-	public static function freeBitmapFontGuardReason(ptr:flight._js.BitmapFontGuardReason):Void;
-	@:native("flight_free_bitmap_font_glyph_explanation")
-	public static function freeBitmapFontGlyphExplanation(ptr:flight._js.BitmapFontGlyphExplanation):Void;
-	@:native("flight_free_bitmap_font_summary")
-	public static function freeBitmapFontSummary(ptr:flight._js.BitmapFontSummary):Void;
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeBitmapFontGuardStateRef(ptr:flight._js.BitmapFontGuardStateRef):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeBitmapFontGuardLogKey(ptr:flight._js.BitmapFontGuardLogKey):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeBitmapFontGuardReason(ptr:flight._js.BitmapFontGuardReason):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeBitmapFontGlyphExplanation(ptr:flight._js.BitmapFontGlyphExplanation):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeBitmapFontSummary(ptr:flight._js.BitmapFontSummary):Void {}
 }

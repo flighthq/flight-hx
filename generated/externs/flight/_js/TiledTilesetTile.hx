@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract TiledTilesetTile(Dynamic) {}
+abstract TiledTilesetTile(Dynamic) {
+}

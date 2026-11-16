@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract BitmapFontClock(Dynamic) {}
+abstract BitmapFontClock(Dynamic) {
+}

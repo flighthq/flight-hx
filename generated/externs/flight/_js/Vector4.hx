@@ -1,39 +1,18 @@
 package flight._js;
 
-@:jsRequire("flight")
-private extern class Vector4_Ffi {
-	@:native("flight_get_vector4_x") static function get_x(ptr:Dynamic):Float;
-	@:native("flight_set_vector4_x") static function set_x(ptr:Dynamic, value:Float):Float;
-	@:native("flight_get_vector4_y") static function get_y(ptr:Dynamic):Float;
-	@:native("flight_set_vector4_y") static function set_y(ptr:Dynamic, value:Float):Float;
-	@:native("flight_get_vector4_z") static function get_z(ptr:Dynamic):Float;
-	@:native("flight_set_vector4_z") static function set_z(ptr:Dynamic, value:Float):Float;
-	@:native("flight_get_vector4_w") static function get_w(ptr:Dynamic):Float;
-	@:native("flight_set_vector4_w") static function set_w(ptr:Dynamic, value:Float):Float;
-}
-
 abstract Vector4(Dynamic) {
 	public var x(get, set):Float;
-
-	inline function get_x():Float return Vector4_Ffi.get_x(this);
-
-	inline function set_x(value:Float):Float return Vector4_Ffi.set_x(this, value);
+	inline function get_x():Float return untyped this.x;
+	inline function set_x(value:Float):Float return untyped this.x = value;
 	public var y(get, set):Float;
-
-	inline function get_y():Float return Vector4_Ffi.get_y(this);
-
-	inline function set_y(value:Float):Float return Vector4_Ffi.set_y(this, value);
+	inline function get_y():Float return untyped this.y;
+	inline function set_y(value:Float):Float return untyped this.y = value;
 	public var z(get, set):Float;
-
-	inline function get_z():Float return Vector4_Ffi.get_z(this);
-
-	inline function set_z(value:Float):Float return Vector4_Ffi.set_z(this, value);
+	inline function get_z():Float return untyped this.z;
+	inline function set_z(value:Float):Float return untyped this.z = value;
 	public var w(get, set):Float;
-
-	inline function get_w():Float return Vector4_Ffi.get_w(this);
-
-	inline function set_w(value:Float):Float return Vector4_Ffi.set_w(this, value);
-
+	inline function get_w():Float return untyped this.w;
+	inline function set_w(value:Float):Float return untyped this.w = value;
 	inline public function copyMatrix4ColumnTo(column:Int, source:flight._js.Matrix4):Void {
 		flight._js._fn.Geometry.copyMatrix4ColumnToVector4(cast this, column, source);
 	}
@@ -58,7 +37,7 @@ abstract Vector4(Dynamic) {
 	inline public function divide(source:flight._js.Vector4, divisor:flight._js.Vector4):Void {
 		flight._js._fn.Geometry.divideVector4(cast this, source, divisor);
 	}
-	inline public function equals(b:flight._js.Vector4):Bool {
+	inline public function equals(b:Null<flight._js.Vector4>):Bool {
 		return flight._js._fn.Geometry.equalsVector4(cast this, b);
 	}
 	inline public function getAngleBetween(b:flight._js.Vector4):Float {
@@ -115,8 +94,8 @@ abstract Vector4(Dynamic) {
 	inline public function set(x:Float, y:Float, z:Float, w:Float):Void {
 		flight._js._fn.Geometry.setVector4(cast this, x, y, z, w);
 	}
-	inline public function setFromFloat32Array(offset:Int, source:Dynamic, sourceLen:Int):Void {
-		flight._js._fn.Geometry.setVector4FromFloat32Array(cast this, offset, source, sourceLen);
+	inline public function setFromFloat32Array(offset:Int, source:Dynamic):Void {
+		flight._js._fn.Geometry.setVector4FromFloat32Array(cast this, offset, source);
 	}
 	inline public function setFromVector3(source:flight._js.Vector3, w:Float):Void {
 		flight._js._fn.Geometry.setVector4FromVector3(cast this, source, w);
@@ -124,8 +103,8 @@ abstract Vector4(Dynamic) {
 	inline public function subtract(source:flight._js.Vector4, other:flight._js.Vector4):Void {
 		flight._js._fn.Geometry.subtractVector4(cast this, source, other);
 	}
-	inline public function writeToFloat32Array(out:Dynamic, outLen:Int, offset:Int):Void {
-		flight._js._fn.Geometry.writeVector4ToFloat32Array(out, outLen, offset, cast this);
+	inline public function writeToFloat32Array(out:Dynamic, offset:Int):Void {
+		flight._js._fn.Geometry.writeVector4ToFloat32Array(out, offset, cast this);
 	}
 	inline public function release():Void {
 		flight._js._fn.Geometry.releaseVector4(cast this);

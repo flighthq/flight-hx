@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract ColorScaleBias(Dynamic) {}
+abstract ColorScaleBias(Dynamic) {
+}

@@ -1,5 +1,10 @@
 package flight;
 
+#if (js && flight_esm)
+extern inline function computeNodeRootLocalBoundsRectangle(out:Rectangle, root:Dynamic):Void {
+	flight._js._fn.Node.computeNodeRootLocalBoundsRectangle(out, root);
+}
+#else
 extern inline function computeNodeRootLocalBoundsRectangle(out:Rectangle, root:Dynamic):Void {
 #if hl
 	flight._hl._fn.Node.computeNodeRootLocalBoundsRectangle(out, root);
@@ -11,6 +16,12 @@ extern inline function computeNodeRootLocalBoundsRectangle(out:Rectangle, root:D
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function ensureNodeLocalBoundsRectangle(target:Dynamic):Void {
+	flight._js._fn.Node.ensureNodeLocalBoundsRectangle(target);
+}
+#else
 extern inline function ensureNodeLocalBoundsRectangle(target:Dynamic):Void {
 #if hl
 	flight._hl._fn.Node.ensureNodeLocalBoundsRectangle(target);
@@ -22,6 +33,12 @@ extern inline function ensureNodeLocalBoundsRectangle(target:Dynamic):Void {
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function ensureNodeParentBoundsRectangle(target:Dynamic):Void {
+	flight._js._fn.Node.ensureNodeParentBoundsRectangle(target);
+}
+#else
 extern inline function ensureNodeParentBoundsRectangle(target:Dynamic):Void {
 #if hl
 	flight._hl._fn.Node.ensureNodeParentBoundsRectangle(target);
@@ -33,6 +50,12 @@ extern inline function ensureNodeParentBoundsRectangle(target:Dynamic):Void {
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function ensureNodeWorldBoundsRectangle(target:Dynamic):Void {
+	flight._js._fn.Node.ensureNodeWorldBoundsRectangle(target);
+}
+#else
 extern inline function ensureNodeWorldBoundsRectangle(target:Dynamic):Void {
 #if hl
 	flight._hl._fn.Node.ensureNodeWorldBoundsRectangle(target);
@@ -44,6 +67,12 @@ extern inline function ensureNodeWorldBoundsRectangle(target:Dynamic):Void {
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getNodeHeight(source:Dynamic):Float {
+	return flight._js._fn.Node.getNodeHeight(source);
+}
+#else
 extern inline function getNodeHeight(source:Dynamic):Float {
 #if hl
 	return flight._hl._fn.Node.getNodeHeight(source);
@@ -55,6 +84,12 @@ extern inline function getNodeHeight(source:Dynamic):Float {
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getNodeLocalBoundsRectangle(target:Dynamic):Rectangle {
+	return flight._js._fn.Node.getNodeLocalBoundsRectangle(target);
+}
+#else
 extern inline function getNodeLocalBoundsRectangle(target:Dynamic):Rectangle {
 #if hl
 	return flight._hl._fn.Node.getNodeLocalBoundsRectangle(target);
@@ -66,6 +101,12 @@ extern inline function getNodeLocalBoundsRectangle(target:Dynamic):Rectangle {
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getNodeParentBoundsRectangle(target:Dynamic):Rectangle {
+	return flight._js._fn.Node.getNodeParentBoundsRectangle(target);
+}
+#else
 extern inline function getNodeParentBoundsRectangle(target:Dynamic):Rectangle {
 #if hl
 	return flight._hl._fn.Node.getNodeParentBoundsRectangle(target);
@@ -77,6 +118,12 @@ extern inline function getNodeParentBoundsRectangle(target:Dynamic):Rectangle {
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getNodeWidth(source:Dynamic):Float {
+	return flight._js._fn.Node.getNodeWidth(source);
+}
+#else
 extern inline function getNodeWidth(source:Dynamic):Float {
 #if hl
 	return flight._hl._fn.Node.getNodeWidth(source);
@@ -88,6 +135,12 @@ extern inline function getNodeWidth(source:Dynamic):Float {
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getNodeWorldBoundsRectangle(target:Dynamic):Rectangle {
+	return flight._js._fn.Node.getNodeWorldBoundsRectangle(target);
+}
+#else
 extern inline function getNodeWorldBoundsRectangle(target:Dynamic):Rectangle {
 #if hl
 	return flight._hl._fn.Node.getNodeWorldBoundsRectangle(target);
@@ -99,6 +152,12 @@ extern inline function getNodeWorldBoundsRectangle(target:Dynamic):Rectangle {
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setNodeHeight(target:Dynamic, value:Float):Void {
+	flight._js._fn.Node.setNodeHeight(target, value);
+}
+#else
 extern inline function setNodeHeight(target:Dynamic, value:Float):Void {
 #if hl
 	flight._hl._fn.Node.setNodeHeight(target, value);
@@ -110,6 +169,12 @@ extern inline function setNodeHeight(target:Dynamic, value:Float):Void {
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setNodeWidth(target:Dynamic, value:Float):Void {
+	flight._js._fn.Node.setNodeWidth(target, value);
+}
+#else
 extern inline function setNodeWidth(target:Dynamic, value:Float):Void {
 #if hl
 	flight._hl._fn.Node.setNodeWidth(target, value);
@@ -121,6 +186,12 @@ extern inline function setNodeWidth(target:Dynamic, value:Float):Void {
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function areNodeGuardsEnabled(guards:NodeGuardState):Bool {
+	return flight._js._fn.Node.areNodeGuardsEnabled(guards);
+}
+#else
 extern inline function areNodeGuardsEnabled(guards:NodeGuardState):Bool {
 #if hl
 	return flight._hl._fn.Node.areNodeGuardsEnabled(guards);
@@ -132,6 +203,12 @@ extern inline function areNodeGuardsEnabled(guards:NodeGuardState):Bool {
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function disableNodeGuards(guards:NodeGuardState):Void {
+	flight._js._fn.Node.disableNodeGuards(guards);
+}
+#else
 extern inline function disableNodeGuards(guards:NodeGuardState):Void {
 #if hl
 	flight._hl._fn.Node.disableNodeGuards(guards);
@@ -143,6 +220,12 @@ extern inline function disableNodeGuards(guards:NodeGuardState):Void {
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function enableNodeGuards(guards:NodeGuardState, logState:Dynamic, clock:Dynamic):Void {
+	flight._js._fn.Node.enableNodeGuards(guards, logState, clock);
+}
+#else
 extern inline function enableNodeGuards(guards:NodeGuardState, logState:Dynamic, clockFn:Dynamic, clockCtx:Dynamic):Void {
 #if hl
 	flight._hl._fn.Node.enableNodeGuards(guards, logState, clockFn, clockCtx);
@@ -154,6 +237,12 @@ extern inline function enableNodeGuards(guards:NodeGuardState, logState:Dynamic,
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function initAppearanceRuntimeTrait(target:HasAppearanceRuntime):Void {
+	flight._js._fn.Node.initAppearanceRuntimeTrait(target);
+}
+#else
 extern inline function initAppearanceRuntimeTrait(target:HasAppearanceRuntime):Void {
 #if hl
 	flight._hl._fn.Node.initAppearanceRuntimeTrait(target);
@@ -165,6 +254,12 @@ extern inline function initAppearanceRuntimeTrait(target:HasAppearanceRuntime):V
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function initAppearanceTrait(target:HasAppearance, obj:Null<HasAppearanceOptions>):Void {
+	flight._js._fn.Node.initAppearanceTrait(target, obj);
+}
+#else
 extern inline function initAppearanceTrait(target:HasAppearance, obj:HasAppearanceOptions):Void {
 #if hl
 	flight._hl._fn.Node.initAppearanceTrait(target, obj);
@@ -176,6 +271,12 @@ extern inline function initAppearanceTrait(target:HasAppearance, obj:HasAppearan
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function initBlendModeTrait(target:HasBlendMode, obj:Null<HasBlendModeOptions>):Void {
+	flight._js._fn.Node.initBlendModeTrait(target, obj);
+}
+#else
 extern inline function initBlendModeTrait(target:HasBlendMode, obj:HasBlendModeOptions):Void {
 #if hl
 	flight._hl._fn.Node.initBlendModeTrait(target, obj);
@@ -187,6 +288,12 @@ extern inline function initBlendModeTrait(target:HasBlendMode, obj:HasBlendModeO
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function defaultComputeLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
+	flight._js._fn.Node.defaultComputeLocalBoundsRectangle(out, source);
+}
+#else
 extern inline function defaultComputeLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
 #if hl
 	flight._hl._fn.Node.defaultComputeLocalBoundsRectangle(out, source);
@@ -198,6 +305,12 @@ extern inline function defaultComputeLocalBoundsRectangle(out:Rectangle, source:
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function initBoundsRectangleTrait(target:HasBoundsRectangle, obj:Null<HasBoundsRectangleOptions>):Void {
+	flight._js._fn.Node.initBoundsRectangleTrait(target, obj);
+}
+#else
 extern inline function initBoundsRectangleTrait(target:HasBoundsRectangle, obj:HasBoundsRectangleOptions):Void {
 #if hl
 	flight._hl._fn.Node.initBoundsRectangleTrait(target, obj);
@@ -209,6 +322,12 @@ extern inline function initBoundsRectangleTrait(target:HasBoundsRectangle, obj:H
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function initClipTrait(target:HasClip, obj:Null<HasClipOptions>):Void {
+	flight._js._fn.Node.initClipTrait(target, obj);
+}
+#else
 extern inline function initClipTrait(target:HasClip, obj:HasClipOptions):Void {
 #if hl
 	flight._hl._fn.Node.initClipTrait(target, obj);
@@ -220,6 +339,12 @@ extern inline function initClipTrait(target:HasClip, obj:HasClipOptions):Void {
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function initMaterialTrait(target:HasMaterial, obj:Null<HasMaterialOptions>):Void {
+	flight._js._fn.Node.initMaterialTrait(target, obj);
+}
+#else
 extern inline function initMaterialTrait(target:HasMaterial, obj:HasMaterialOptions):Void {
 #if hl
 	flight._hl._fn.Node.initMaterialTrait(target, obj);
@@ -231,6 +356,12 @@ extern inline function initMaterialTrait(target:HasMaterial, obj:HasMaterialOpti
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function initTransform2dTrait(target:HasTransform2D, obj:Null<HasTransform2DOptions>):Void {
+	flight._js._fn.Node.initTransform2dTrait(target, obj);
+}
+#else
 extern inline function initTransform2dTrait(target:HasTransform2D, obj:HasTransform2DOptions):Void {
 #if hl
 	flight._hl._fn.Node.initTransform2dTrait(target, obj);
@@ -242,6 +373,12 @@ extern inline function initTransform2dTrait(target:HasTransform2D, obj:HasTransf
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function initTransform3dRuntimeTrait(target:HasTransform3DRuntime):Void {
+	flight._js._fn.Node.initTransform3dRuntimeTrait(target);
+}
+#else
 extern inline function initTransform3dRuntimeTrait(target:HasTransform3DRuntime):Void {
 #if hl
 	flight._hl._fn.Node.initTransform3dRuntimeTrait(target);
@@ -253,6 +390,12 @@ extern inline function initTransform3dRuntimeTrait(target:HasTransform3DRuntime)
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function initTransform3dTrait(target:HasTransform3D, obj:Null<HasTransform3DOptions>):Void {
+	flight._js._fn.Node.initTransform3dTrait(target, obj);
+}
+#else
 extern inline function initTransform3dTrait(target:HasTransform3D, obj:HasTransform3DOptions):Void {
 #if hl
 	flight._hl._fn.Node.initTransform3dTrait(target, obj);
@@ -264,6 +407,12 @@ extern inline function initTransform3dTrait(target:HasTransform3D, obj:HasTransf
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function addNodeChild(target:Dynamic, child:Dynamic):Dynamic {
+	return flight._js._fn.Node.addNodeChild(target, child);
+}
+#else
 extern inline function addNodeChild(target:Dynamic, child:Dynamic):Dynamic {
 #if hl
 	return flight._hl._fn.Node.addNodeChild(target, child);
@@ -275,6 +424,12 @@ extern inline function addNodeChild(target:Dynamic, child:Dynamic):Dynamic {
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function addNodeChildAt(target:Dynamic, child:Dynamic, index:Int):Dynamic {
+	return flight._js._fn.Node.addNodeChildAt(target, child, index);
+}
+#else
 extern inline function addNodeChildAt(target:Dynamic, child:Dynamic, index:Int):Dynamic {
 #if hl
 	return flight._hl._fn.Node.addNodeChildAt(target, child, index);
@@ -286,6 +441,12 @@ extern inline function addNodeChildAt(target:Dynamic, child:Dynamic, index:Int):
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function addNodeChildren(target:Dynamic, children:Dynamic):Void {
+	flight._js._fn.Node.addNodeChildren(target, children);
+}
+#else
 extern inline function addNodeChildren(target:Dynamic, children:Dynamic, childrenLen:Int):Void {
 #if hl
 	flight._hl._fn.Node.addNodeChildren(target, children, childrenLen);
@@ -297,6 +458,12 @@ extern inline function addNodeChildren(target:Dynamic, children:Dynamic, childre
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function containsNodeChild(source:Dynamic, child:Dynamic):Bool {
+	return flight._js._fn.Node.containsNodeChild(source, child);
+}
+#else
 extern inline function containsNodeChild(source:Dynamic, child:Dynamic):Bool {
 #if hl
 	return flight._hl._fn.Node.containsNodeChild(source, child);
@@ -308,6 +475,12 @@ extern inline function containsNodeChild(source:Dynamic, child:Dynamic):Bool {
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function forEachNodeChild(source:Dynamic, callback_:Dynamic):Void {
+	flight._js._fn.Node.forEachNodeChild(source, callback_);
+}
+#else
 extern inline function forEachNodeChild(source:Dynamic, callback_Fn:Dynamic, callback_Ctx:Dynamic):Void {
 #if hl
 	flight._hl._fn.Node.forEachNodeChild(source, callback_Fn, callback_Ctx);
@@ -319,6 +492,12 @@ extern inline function forEachNodeChild(source:Dynamic, callback_Fn:Dynamic, cal
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getNodeAncestors(out:Dynamic, source:Dynamic):Void {
+	flight._js._fn.Node.getNodeAncestors(out, source);
+}
+#else
 extern inline function getNodeAncestors(out:Dynamic, source:Dynamic):Void {
 #if hl
 	flight._hl._fn.Node.getNodeAncestors(out, source);
@@ -330,6 +509,12 @@ extern inline function getNodeAncestors(out:Dynamic, source:Dynamic):Void {
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getNodeChildAt(source:Dynamic, index:Int):Null<Dynamic> {
+	return flight._js._fn.Node.getNodeChildAt(source, index);
+}
+#else
 extern inline function getNodeChildAt(source:Dynamic, index:Int):Dynamic {
 #if hl
 	return flight._hl._fn.Node.getNodeChildAt(source, index);
@@ -341,6 +526,12 @@ extern inline function getNodeChildAt(source:Dynamic, index:Int):Dynamic {
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getNodeChildByName(source:Dynamic, name:String):Null<Dynamic> {
+	return flight._js._fn.Node.getNodeChildByName(source, name);
+}
+#else
 extern inline function getNodeChildByName(source:Dynamic, name:String):Dynamic {
 #if hl
 	return flight._hl._fn.Node.getNodeChildByName(source, cast name);
@@ -352,6 +543,12 @@ extern inline function getNodeChildByName(source:Dynamic, name:String):Dynamic {
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getNodeChildCount(source:Dynamic):Int {
+	return flight._js._fn.Node.getNodeChildCount(source);
+}
+#else
 extern inline function getNodeChildCount(source:Dynamic):Int {
 #if hl
 	return flight._hl._fn.Node.getNodeChildCount(source);
@@ -363,6 +560,12 @@ extern inline function getNodeChildCount(source:Dynamic):Int {
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getNodeChildIndex(source:Dynamic, child:Dynamic):Int {
+	return flight._js._fn.Node.getNodeChildIndex(source, child);
+}
+#else
 extern inline function getNodeChildIndex(source:Dynamic, child:Dynamic):Int {
 #if hl
 	return flight._hl._fn.Node.getNodeChildIndex(source, child);
@@ -374,6 +577,12 @@ extern inline function getNodeChildIndex(source:Dynamic, child:Dynamic):Int {
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getNodeCommonAncestor(a:Dynamic, b:Dynamic):Null<Dynamic> {
+	return flight._js._fn.Node.getNodeCommonAncestor(a, b);
+}
+#else
 extern inline function getNodeCommonAncestor(a:Dynamic, b:Dynamic):Dynamic {
 #if hl
 	return flight._hl._fn.Node.getNodeCommonAncestor(a, b);
@@ -385,6 +594,12 @@ extern inline function getNodeCommonAncestor(a:Dynamic, b:Dynamic):Dynamic {
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getNodeParent(source:Dynamic):Null<Dynamic> {
+	return flight._js._fn.Node.getNodeParent(source);
+}
+#else
 extern inline function getNodeParent(source:Dynamic):Dynamic {
 #if hl
 	return flight._hl._fn.Node.getNodeParent(source);
@@ -396,6 +611,12 @@ extern inline function getNodeParent(source:Dynamic):Dynamic {
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getNodeRoot(source:Dynamic):Dynamic {
+	return flight._js._fn.Node.getNodeRoot(source);
+}
+#else
 extern inline function getNodeRoot(source:Dynamic):Dynamic {
 #if hl
 	return flight._hl._fn.Node.getNodeRoot(source);
@@ -407,6 +628,12 @@ extern inline function getNodeRoot(source:Dynamic):Dynamic {
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function isNodeAncestorOf(ancestor:Dynamic, descendant:Dynamic):Bool {
+	return flight._js._fn.Node.isNodeAncestorOf(ancestor, descendant);
+}
+#else
 extern inline function isNodeAncestorOf(ancestor:Dynamic, descendant:Dynamic):Bool {
 #if hl
 	return flight._hl._fn.Node.isNodeAncestorOf(ancestor, descendant);
@@ -418,6 +645,12 @@ extern inline function isNodeAncestorOf(ancestor:Dynamic, descendant:Dynamic):Bo
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function removeNodeChild(target:Dynamic, child:Dynamic):Dynamic {
+	return flight._js._fn.Node.removeNodeChild(target, child);
+}
+#else
 extern inline function removeNodeChild(target:Dynamic, child:Dynamic):Dynamic {
 #if hl
 	return flight._hl._fn.Node.removeNodeChild(target, child);
@@ -429,6 +662,12 @@ extern inline function removeNodeChild(target:Dynamic, child:Dynamic):Dynamic {
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function removeNodeChildAt(target:Dynamic, index:Int):Null<Dynamic> {
+	return flight._js._fn.Node.removeNodeChildAt(target, index);
+}
+#else
 extern inline function removeNodeChildAt(target:Dynamic, index:Int):Dynamic {
 #if hl
 	return flight._hl._fn.Node.removeNodeChildAt(target, index);
@@ -440,6 +679,12 @@ extern inline function removeNodeChildAt(target:Dynamic, index:Int):Dynamic {
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function removeNodeChildren(target:Dynamic, beginIndex:Null<Int>, endIndex:Null<Int>):Void {
+	flight._js._fn.Node.removeNodeChildren(target, beginIndex, endIndex);
+}
+#else
 extern inline function removeNodeChildren(target:Dynamic, beginIndex:Int, endIndex:Int):Void {
 #if hl
 	flight._hl._fn.Node.removeNodeChildren(target, beginIndex, endIndex);
@@ -451,6 +696,12 @@ extern inline function removeNodeChildren(target:Dynamic, beginIndex:Int, endInd
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function reparentNode(child:Dynamic, newParent:Dynamic, guards:Null<NodeGuardState>):Bool {
+	return flight._js._fn.Node.reparentNode(child, newParent, guards);
+}
+#else
 extern inline function reparentNode(child:Dynamic, newParent:Dynamic, guards:NodeGuardState):Bool {
 #if hl
 	return flight._hl._fn.Node.reparentNode(child, newParent, guards);
@@ -462,6 +713,12 @@ extern inline function reparentNode(child:Dynamic, newParent:Dynamic, guards:Nod
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function replaceNodeChild(target:Dynamic, oldChild:Dynamic, newChild:Dynamic):Void {
+	flight._js._fn.Node.replaceNodeChild(target, oldChild, newChild);
+}
+#else
 extern inline function replaceNodeChild(target:Dynamic, oldChild:Dynamic, newChild:Dynamic):Void {
 #if hl
 	flight._hl._fn.Node.replaceNodeChild(target, oldChild, newChild);
@@ -473,6 +730,12 @@ extern inline function replaceNodeChild(target:Dynamic, oldChild:Dynamic, newChi
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setNodeChildIndex(target:Dynamic, child:Dynamic, index:Int):Void {
+	flight._js._fn.Node.setNodeChildIndex(target, child, index);
+}
+#else
 extern inline function setNodeChildIndex(target:Dynamic, child:Dynamic, index:Int):Void {
 #if hl
 	flight._hl._fn.Node.setNodeChildIndex(target, child, index);
@@ -484,6 +747,12 @@ extern inline function setNodeChildIndex(target:Dynamic, child:Dynamic, index:In
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function swapNodeChildren(target:Dynamic, child1:Dynamic, child2:Dynamic):Void {
+	flight._js._fn.Node.swapNodeChildren(target, child1, child2);
+}
+#else
 extern inline function swapNodeChildren(target:Dynamic, child1:Dynamic, child2:Dynamic):Void {
 #if hl
 	flight._hl._fn.Node.swapNodeChildren(target, child1, child2);
@@ -495,6 +764,12 @@ extern inline function swapNodeChildren(target:Dynamic, child1:Dynamic, child2:D
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function swapNodeChildrenAt(target:Dynamic, index1:Int, index2:Int):Void {
+	flight._js._fn.Node.swapNodeChildrenAt(target, index1, index2);
+}
+#else
 extern inline function swapNodeChildrenAt(target:Dynamic, index1:Int, index2:Int):Void {
 #if hl
 	flight._hl._fn.Node.swapNodeChildrenAt(target, index1, index2);
@@ -506,6 +781,12 @@ extern inline function swapNodeChildrenAt(target:Dynamic, index1:Int, index2:Int
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function createNodeRuntime(methods:Null<NodeRuntimeMethods>):NodeRuntime {
+	return flight._js._fn.Node.createNodeRuntime(methods);
+}
+#else
 extern inline function createNodeRuntime(methods:NodeRuntimeMethods):NodeRuntime {
 #if hl
 	return flight._hl._fn.Node.createNodeRuntime(methods);
@@ -517,6 +798,12 @@ extern inline function createNodeRuntime(methods:NodeRuntimeMethods):NodeRuntime
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function createNodeSignals():Dynamic {
+	return flight._js._fn.Node.createNodeSignals();
+}
+#else
 extern inline function createNodeSignals():Dynamic {
 #if hl
 	return flight._hl._fn.Node.createNodeSignals();
@@ -528,6 +815,12 @@ extern inline function createNodeSignals():Dynamic {
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function defaultNodeRuntimeCanAddChild(target:Dynamic, child:Dynamic):Bool {
+	return flight._js._fn.Node.defaultNodeRuntimeCanAddChild(target, child);
+}
+#else
 extern inline function defaultNodeRuntimeCanAddChild(target:Dynamic, child:Dynamic):Bool {
 #if hl
 	return flight._hl._fn.Node.defaultNodeRuntimeCanAddChild(target, child);
@@ -539,6 +832,12 @@ extern inline function defaultNodeRuntimeCanAddChild(target:Dynamic, child:Dynam
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function disposeNode(target:Dynamic):Void {
+	flight._js._fn.Node.disposeNode(target);
+}
+#else
 extern inline function disposeNode(target:Dynamic):Void {
 #if hl
 	flight._hl._fn.Node.disposeNode(target);
@@ -550,6 +849,12 @@ extern inline function disposeNode(target:Dynamic):Void {
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function enableNodeSignals(source:Dynamic):Dynamic {
+	return flight._js._fn.Node.enableNodeSignals(source);
+}
+#else
 extern inline function enableNodeSignals(source:Dynamic):Dynamic {
 #if hl
 	return flight._hl._fn.Node.enableNodeSignals(source);
@@ -561,6 +866,12 @@ extern inline function enableNodeSignals(source:Dynamic):Dynamic {
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getNodeRuntime(source:Dynamic):NodeRuntime {
+	return flight._js._fn.Node.getNodeRuntime(source);
+}
+#else
 extern inline function getNodeRuntime(source:Dynamic):NodeRuntime {
 #if hl
 	return flight._hl._fn.Node.getNodeRuntime(source);
@@ -572,6 +883,12 @@ extern inline function getNodeRuntime(source:Dynamic):NodeRuntime {
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getNodeSignals(source:Dynamic):Null<Dynamic> {
+	return flight._js._fn.Node.getNodeSignals(source);
+}
+#else
 extern inline function getNodeSignals(source:Dynamic):Dynamic {
 #if hl
 	return flight._hl._fn.Node.getNodeSignals(source);
@@ -583,6 +900,12 @@ extern inline function getNodeSignals(source:Dynamic):Dynamic {
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setNodeEnabled(target:Dynamic, value:Bool):Void {
+	flight._js._fn.Node.setNodeEnabled(target, value);
+}
+#else
 extern inline function setNodeEnabled(target:Dynamic, value:Bool):Void {
 #if hl
 	flight._hl._fn.Node.setNodeEnabled(target, value);
@@ -594,6 +917,12 @@ extern inline function setNodeEnabled(target:Dynamic, value:Bool):Void {
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setNodeColorAdjustmentsTint(source:Dynamic, tint:Int):Void {
+	flight._js._fn.Node.setNodeColorAdjustmentsTint(source, tint);
+}
+#else
 extern inline function setNodeColorAdjustmentsTint(source:Dynamic, tint:Int):Void {
 #if hl
 	flight._hl._fn.Node.setNodeColorAdjustmentsTint(source, tint);
@@ -605,6 +934,12 @@ extern inline function setNodeColorAdjustmentsTint(source:Dynamic, tint:Int):Voi
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function createNodeOrderList():NodeOrderList {
+	return flight._js._fn.Node.createNodeOrderList();
+}
+#else
 extern inline function createNodeOrderList():NodeOrderList {
 #if hl
 	return flight._hl._fn.Node.createNodeOrderList();
@@ -616,6 +951,12 @@ extern inline function createNodeOrderList():NodeOrderList {
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function addNodeOrderListEntry(list:NodeOrderList, node:Dynamic, sortKey:Float):Void {
+	flight._js._fn.Node.addNodeOrderListEntry(list, node, sortKey);
+}
+#else
 extern inline function addNodeOrderListEntry(list:NodeOrderList, node:Dynamic, sortKey:Float):Void {
 #if hl
 	flight._hl._fn.Node.addNodeOrderListEntry(list, node, sortKey);
@@ -627,6 +968,12 @@ extern inline function addNodeOrderListEntry(list:NodeOrderList, node:Dynamic, s
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function applyNodeOrderList(target:Dynamic, list:NodeOrderList):Void {
+	flight._js._fn.Node.applyNodeOrderList(target, list);
+}
+#else
 extern inline function applyNodeOrderList(target:Dynamic, list:NodeOrderList):Void {
 #if hl
 	flight._hl._fn.Node.applyNodeOrderList(target, list);
@@ -638,6 +985,12 @@ extern inline function applyNodeOrderList(target:Dynamic, list:NodeOrderList):Vo
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function clearNodeOrderList(list:NodeOrderList):Void {
+	flight._js._fn.Node.clearNodeOrderList(list);
+}
+#else
 extern inline function clearNodeOrderList(list:NodeOrderList):Void {
 #if hl
 	flight._hl._fn.Node.clearNodeOrderList(list);
@@ -649,6 +1002,12 @@ extern inline function clearNodeOrderList(list:NodeOrderList):Void {
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function disposeNodeOrderList(list:NodeOrderList):Void {
+	flight._js._fn.Node.disposeNodeOrderList(list);
+}
+#else
 extern inline function disposeNodeOrderList(list:NodeOrderList):Void {
 #if hl
 	flight._hl._fn.Node.disposeNodeOrderList(list);
@@ -660,6 +1019,12 @@ extern inline function disposeNodeOrderList(list:NodeOrderList):Void {
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function forEachNodeOrderListEntry(list:NodeOrderList, callback_:Dynamic):Void {
+	flight._js._fn.Node.forEachNodeOrderListEntry(list, callback_);
+}
+#else
 extern inline function forEachNodeOrderListEntry(list:NodeOrderList, callback_Fn:Dynamic, callback_Ctx:Dynamic):Void {
 #if hl
 	flight._hl._fn.Node.forEachNodeOrderListEntry(list, callback_Fn, callback_Ctx);
@@ -671,6 +1036,12 @@ extern inline function forEachNodeOrderListEntry(list:NodeOrderList, callback_Fn
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getNodeOrderListEntrySortKey(list:NodeOrderList, node:Dynamic):Null<Float> {
+	return flight._js._fn.Node.getNodeOrderListEntrySortKey(list, node);
+}
+#else
 extern inline function getNodeOrderListEntrySortKey(list:NodeOrderList, node:Dynamic):Float {
 #if hl
 	return flight._hl._fn.Node.getNodeOrderListEntrySortKey(list, node);
@@ -682,6 +1053,12 @@ extern inline function getNodeOrderListEntrySortKey(list:NodeOrderList, node:Dyn
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function hasNodeOrderListEntry(list:NodeOrderList, node:Dynamic):Bool {
+	return flight._js._fn.Node.hasNodeOrderListEntry(list, node);
+}
+#else
 extern inline function hasNodeOrderListEntry(list:NodeOrderList, node:Dynamic):Bool {
 #if hl
 	return flight._hl._fn.Node.hasNodeOrderListEntry(list, node);
@@ -693,6 +1070,12 @@ extern inline function hasNodeOrderListEntry(list:NodeOrderList, node:Dynamic):B
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function removeNodeOrderListEntry(list:NodeOrderList, node:Dynamic):Bool {
+	return flight._js._fn.Node.removeNodeOrderListEntry(list, node);
+}
+#else
 extern inline function removeNodeOrderListEntry(list:NodeOrderList, node:Dynamic):Bool {
 #if hl
 	return flight._hl._fn.Node.removeNodeOrderListEntry(list, node);
@@ -704,6 +1087,12 @@ extern inline function removeNodeOrderListEntry(list:NodeOrderList, node:Dynamic
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setNodeOrderListEntry(list:NodeOrderList, node:Dynamic, sortKey:Float):Void {
+	flight._js._fn.Node.setNodeOrderListEntry(list, node, sortKey);
+}
+#else
 extern inline function setNodeOrderListEntry(list:NodeOrderList, node:Dynamic, sortKey:Float):Void {
 #if hl
 	flight._hl._fn.Node.setNodeOrderListEntry(list, node, sortKey);
@@ -715,6 +1104,12 @@ extern inline function setNodeOrderListEntry(list:NodeOrderList, node:Dynamic, s
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setNodeOrderListEntryAbove(list:NodeOrderList, node:Dynamic, target:Dynamic):Void {
+	flight._js._fn.Node.setNodeOrderListEntryAbove(list, node, target);
+}
+#else
 extern inline function setNodeOrderListEntryAbove(list:NodeOrderList, node:Dynamic, target:Dynamic):Void {
 #if hl
 	flight._hl._fn.Node.setNodeOrderListEntryAbove(list, node, target);
@@ -726,6 +1121,12 @@ extern inline function setNodeOrderListEntryAbove(list:NodeOrderList, node:Dynam
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setNodeOrderListEntryBelow(list:NodeOrderList, node:Dynamic, target:Dynamic):Void {
+	flight._js._fn.Node.setNodeOrderListEntryBelow(list, node, target);
+}
+#else
 extern inline function setNodeOrderListEntryBelow(list:NodeOrderList, node:Dynamic, target:Dynamic):Void {
 #if hl
 	flight._hl._fn.Node.setNodeOrderListEntryBelow(list, node, target);
@@ -737,6 +1138,12 @@ extern inline function setNodeOrderListEntryBelow(list:NodeOrderList, node:Dynam
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setNodeOrderListFromNodeChildren(list:NodeOrderList, source:Dynamic):Void {
+	flight._js._fn.Node.setNodeOrderListFromNodeChildren(list, source);
+}
+#else
 extern inline function setNodeOrderListFromNodeChildren(list:NodeOrderList, source:Dynamic):Void {
 #if hl
 	flight._hl._fn.Node.setNodeOrderListFromNodeChildren(list, source);
@@ -748,6 +1155,12 @@ extern inline function setNodeOrderListFromNodeChildren(list:NodeOrderList, sour
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function swapNodeOrderListEntries(list:NodeOrderList, nodeA:Dynamic, nodeB:Dynamic):Void {
+	flight._js._fn.Node.swapNodeOrderListEntries(list, nodeA, nodeB);
+}
+#else
 extern inline function swapNodeOrderListEntries(list:NodeOrderList, nodeA:Dynamic, nodeB:Dynamic):Void {
 #if hl
 	flight._hl._fn.Node.swapNodeOrderListEntries(list, nodeA, nodeB);
@@ -759,6 +1172,12 @@ extern inline function swapNodeOrderListEntries(list:NodeOrderList, nodeA:Dynami
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getNodeLocalMatrix(target:Dynamic):Matrix {
+	return flight._js._fn.Node.getNodeLocalMatrix(target);
+}
+#else
 extern inline function getNodeLocalMatrix(target:Dynamic):Matrix {
 #if hl
 	return flight._hl._fn.Node.getNodeLocalMatrix(target);
@@ -770,6 +1189,12 @@ extern inline function getNodeLocalMatrix(target:Dynamic):Matrix {
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getNodeTransform2d(out:Transform2D, source:Dynamic):Void {
+	flight._js._fn.Node.getNodeTransform2d(out, source);
+}
+#else
 extern inline function getNodeTransform2d(out:Transform2D, source:Dynamic):Void {
 #if hl
 	flight._hl._fn.Node.getNodeTransform2d(out, source);
@@ -781,6 +1206,12 @@ extern inline function getNodeTransform2d(out:Transform2D, source:Dynamic):Void 
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getNodeWorldMatrix(target:Dynamic):Matrix {
+	return flight._js._fn.Node.getNodeWorldMatrix(target);
+}
+#else
 extern inline function getNodeWorldMatrix(target:Dynamic):Matrix {
 #if hl
 	return flight._hl._fn.Node.getNodeWorldMatrix(target);
@@ -792,6 +1223,12 @@ extern inline function getNodeWorldMatrix(target:Dynamic):Matrix {
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setNodeLocalMatrix(target:Dynamic, source:Matrix):Void {
+	flight._js._fn.Node.setNodeLocalMatrix(target, source);
+}
+#else
 extern inline function setNodeLocalMatrix(target:Dynamic, source:Matrix):Void {
 #if hl
 	flight._hl._fn.Node.setNodeLocalMatrix(target, source);
@@ -803,6 +1240,12 @@ extern inline function setNodeLocalMatrix(target:Dynamic, source:Matrix):Void {
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setNodeTransform2d(target:Dynamic, source:Transform2D):Void {
+	flight._js._fn.Node.setNodeTransform2d(target, source);
+}
+#else
 extern inline function setNodeTransform2d(target:Dynamic, source:Transform2D):Void {
 #if hl
 	flight._hl._fn.Node.setNodeTransform2d(target, source);
@@ -814,6 +1257,12 @@ extern inline function setNodeTransform2d(target:Dynamic, source:Transform2D):Vo
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function computeNodeWorldTransformRevision(target:Dynamic, parentWorldTransformId:Null<Int>, root:Null<NodeRuntime>):Void {
+	flight._js._fn.Node.computeNodeWorldTransformRevision(target, parentWorldTransformId, root);
+}
+#else
 extern inline function computeNodeWorldTransformRevision(target:Dynamic, parentWorldTransformId:haxe.Int64, root:NodeRuntime):Void {
 #if hl
 	flight._hl._fn.Node.computeNodeWorldTransformRevision(target, parentWorldTransformId, root);
@@ -825,6 +1274,12 @@ extern inline function computeNodeWorldTransformRevision(target:Dynamic, parentW
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getNodeAppearanceRevision(source:Dynamic):Int {
+	return flight._js._fn.Node.getNodeAppearanceRevision(source);
+}
+#else
 extern inline function getNodeAppearanceRevision(source:Dynamic):Int {
 #if hl
 	return flight._hl._fn.Node.getNodeAppearanceRevision(source);
@@ -836,6 +1291,12 @@ extern inline function getNodeAppearanceRevision(source:Dynamic):Int {
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getNodeChildrenRevision(source:Dynamic):Int {
+	return flight._js._fn.Node.getNodeChildrenRevision(source);
+}
+#else
 extern inline function getNodeChildrenRevision(source:Dynamic):Int {
 #if hl
 	return flight._hl._fn.Node.getNodeChildrenRevision(source);
@@ -847,6 +1308,12 @@ extern inline function getNodeChildrenRevision(source:Dynamic):Int {
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getNodeLocalBoundsRevision(source:Dynamic):Int {
+	return flight._js._fn.Node.getNodeLocalBoundsRevision(source);
+}
+#else
 extern inline function getNodeLocalBoundsRevision(source:Dynamic):Int {
 #if hl
 	return flight._hl._fn.Node.getNodeLocalBoundsRevision(source);
@@ -858,6 +1325,12 @@ extern inline function getNodeLocalBoundsRevision(source:Dynamic):Int {
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getNodeLocalContentRevision(source:Dynamic):Int {
+	return flight._js._fn.Node.getNodeLocalContentRevision(source);
+}
+#else
 extern inline function getNodeLocalContentRevision(source:Dynamic):Int {
 #if hl
 	return flight._hl._fn.Node.getNodeLocalContentRevision(source);
@@ -869,6 +1342,12 @@ extern inline function getNodeLocalContentRevision(source:Dynamic):Int {
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getNodeLocalTransformRevision(source:Dynamic):Int {
+	return flight._js._fn.Node.getNodeLocalTransformRevision(source);
+}
+#else
 extern inline function getNodeLocalTransformRevision(source:Dynamic):Int {
 #if hl
 	return flight._hl._fn.Node.getNodeLocalTransformRevision(source);
@@ -880,6 +1359,12 @@ extern inline function getNodeLocalTransformRevision(source:Dynamic):Int {
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getNodeParentReferenceRevision(source:Dynamic):Int {
+	return flight._js._fn.Node.getNodeParentReferenceRevision(source);
+}
+#else
 extern inline function getNodeParentReferenceRevision(source:Dynamic):Int {
 #if hl
 	return flight._hl._fn.Node.getNodeParentReferenceRevision(source);
@@ -891,6 +1376,12 @@ extern inline function getNodeParentReferenceRevision(source:Dynamic):Int {
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getNodeWorldTransformRevision(source:Dynamic):Int {
+	return flight._js._fn.Node.getNodeWorldTransformRevision(source);
+}
+#else
 extern inline function getNodeWorldTransformRevision(source:Dynamic):Int {
 #if hl
 	return flight._hl._fn.Node.getNodeWorldTransformRevision(source);
@@ -902,6 +1393,12 @@ extern inline function getNodeWorldTransformRevision(source:Dynamic):Int {
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function invalidateContent(target:Dynamic):Void {
+	flight._js._fn.Node.invalidateContent(target);
+}
+#else
 extern inline function invalidateContent(target:Dynamic):Void {
 #if hl
 	flight._hl._fn.Node.invalidateContent(target);
@@ -913,6 +1410,12 @@ extern inline function invalidateContent(target:Dynamic):Void {
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function invalidateNode(target:Dynamic):Void {
+	flight._js._fn.Node.invalidateNode(target);
+}
+#else
 extern inline function invalidateNode(target:Dynamic):Void {
 #if hl
 	flight._hl._fn.Node.invalidateNode(target);
@@ -924,6 +1427,12 @@ extern inline function invalidateNode(target:Dynamic):Void {
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function invalidateNodeAppearance(target:Dynamic):Void {
+	flight._js._fn.Node.invalidateNodeAppearance(target);
+}
+#else
 extern inline function invalidateNodeAppearance(target:Dynamic):Void {
 #if hl
 	flight._hl._fn.Node.invalidateNodeAppearance(target);
@@ -935,6 +1444,12 @@ extern inline function invalidateNodeAppearance(target:Dynamic):Void {
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function invalidateNodeLocalBounds(target:Dynamic):Void {
+	flight._js._fn.Node.invalidateNodeLocalBounds(target);
+}
+#else
 extern inline function invalidateNodeLocalBounds(target:Dynamic):Void {
 #if hl
 	flight._hl._fn.Node.invalidateNodeLocalBounds(target);
@@ -946,6 +1461,12 @@ extern inline function invalidateNodeLocalBounds(target:Dynamic):Void {
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function invalidateNodeLocalContent(target:Dynamic):Void {
+	flight._js._fn.Node.invalidateNodeLocalContent(target);
+}
+#else
 extern inline function invalidateNodeLocalContent(target:Dynamic):Void {
 #if hl
 	flight._hl._fn.Node.invalidateNodeLocalContent(target);
@@ -957,6 +1478,12 @@ extern inline function invalidateNodeLocalContent(target:Dynamic):Void {
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function invalidateNodeLocalTransform(target:Dynamic):Void {
+	flight._js._fn.Node.invalidateNodeLocalTransform(target);
+}
+#else
 extern inline function invalidateNodeLocalTransform(target:Dynamic):Void {
 #if hl
 	flight._hl._fn.Node.invalidateNodeLocalTransform(target);
@@ -968,6 +1495,12 @@ extern inline function invalidateNodeLocalTransform(target:Dynamic):Void {
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function invalidateNodeParentReference(target:Dynamic):Void {
+	flight._js._fn.Node.invalidateNodeParentReference(target);
+}
+#else
 extern inline function invalidateNodeParentReference(target:Dynamic):Void {
 #if hl
 	flight._hl._fn.Node.invalidateNodeParentReference(target);
@@ -979,6 +1512,12 @@ extern inline function invalidateNodeParentReference(target:Dynamic):Void {
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function invalidateNodeRender(target:Dynamic):Void {
+	flight._js._fn.Node.invalidateNodeRender(target);
+}
+#else
 extern inline function invalidateNodeRender(target:Dynamic):Void {
 #if hl
 	flight._hl._fn.Node.invalidateNodeRender(target);
@@ -990,6 +1529,12 @@ extern inline function invalidateNodeRender(target:Dynamic):Void {
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function invalidateNodeWorldBounds(target:Dynamic):Void {
+	flight._js._fn.Node.invalidateNodeWorldBounds(target);
+}
+#else
 extern inline function invalidateNodeWorldBounds(target:Dynamic):Void {
 #if hl
 	flight._hl._fn.Node.invalidateNodeWorldBounds(target);
@@ -1001,6 +1546,12 @@ extern inline function invalidateNodeWorldBounds(target:Dynamic):Void {
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function computeScene2dFitAlignX(scaledContentWidth:Float, viewWidth:Float, align:ViewportAlign):Float {
+	return flight._js._fn.Node.computeScene2dFitAlignX(scaledContentWidth, viewWidth, align);
+}
+#else
 extern inline function computeScene2dFitAlignX(scaledContentWidth:Float, viewWidth:Float, align:ViewportAlign):Float {
 #if hl
 	return flight._hl._fn.Node.computeScene2dFitAlignX(scaledContentWidth, viewWidth, align);
@@ -1012,6 +1563,12 @@ extern inline function computeScene2dFitAlignX(scaledContentWidth:Float, viewWid
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function computeScene2dFitAlignY(scaledContentHeight:Float, viewHeight:Float, align:ViewportAlign):Float {
+	return flight._js._fn.Node.computeScene2dFitAlignY(scaledContentHeight, viewHeight, align);
+}
+#else
 extern inline function computeScene2dFitAlignY(scaledContentHeight:Float, viewHeight:Float, align:ViewportAlign):Float {
 #if hl
 	return flight._hl._fn.Node.computeScene2dFitAlignY(scaledContentHeight, viewHeight, align);
@@ -1023,6 +1580,12 @@ extern inline function computeScene2dFitAlignY(scaledContentHeight:Float, viewHe
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function computeScene2dFitFillScale(contentWidth:Float, contentHeight:Float, viewWidth:Float, viewHeight:Float):Float {
+	return flight._js._fn.Node.computeScene2dFitFillScale(contentWidth, contentHeight, viewWidth, viewHeight);
+}
+#else
 extern inline function computeScene2dFitFillScale(contentWidth:Float, contentHeight:Float, viewWidth:Float, viewHeight:Float):Float {
 #if hl
 	return flight._hl._fn.Node.computeScene2dFitFillScale(contentWidth, contentHeight, viewWidth, viewHeight);
@@ -1034,6 +1597,12 @@ extern inline function computeScene2dFitFillScale(contentWidth:Float, contentHei
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function computeScene2dFitScale(contentWidth:Float, contentHeight:Float, viewWidth:Float, viewHeight:Float):Float {
+	return flight._js._fn.Node.computeScene2dFitScale(contentWidth, contentHeight, viewWidth, viewHeight);
+}
+#else
 extern inline function computeScene2dFitScale(contentWidth:Float, contentHeight:Float, viewWidth:Float, viewHeight:Float):Float {
 #if hl
 	return flight._hl._fn.Node.computeScene2dFitScale(contentWidth, contentHeight, viewWidth, viewHeight);
@@ -1045,6 +1614,12 @@ extern inline function computeScene2dFitScale(contentWidth:Float, contentHeight:
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function computeScene2dFitTransform(out:Matrix, scene2d:Scene2DFitContext, viewWidth:Float, viewHeight:Float):Void {
+	flight._js._fn.Node.computeScene2dFitTransform(out, scene2d, viewWidth, viewHeight);
+}
+#else
 extern inline function computeScene2dFitTransform(out:Matrix, scene2d:Scene2DFitContext, viewWidth:Float, viewHeight:Float):Void {
 #if hl
 	flight._hl._fn.Node.computeScene2dFitTransform(out, scene2d, viewWidth, viewHeight);
@@ -1056,6 +1631,12 @@ extern inline function computeScene2dFitTransform(out:Matrix, scene2d:Scene2DFit
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function findNode(source:Dynamic, predicate:Dynamic):Null<Dynamic> {
+	return flight._js._fn.Node.findNode(source, predicate);
+}
+#else
 extern inline function findNode(source:Dynamic, predicateFn:Dynamic, predicateCtx:Dynamic):Dynamic {
 #if hl
 	return flight._hl._fn.Node.findNode(source, predicateFn, predicateCtx);
@@ -1067,6 +1648,12 @@ extern inline function findNode(source:Dynamic, predicateFn:Dynamic, predicateCt
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function findNodeByName(source:Dynamic, name:String):Null<Dynamic> {
+	return flight._js._fn.Node.findNodeByName(source, name);
+}
+#else
 extern inline function findNodeByName(source:Dynamic, name:String):Dynamic {
 #if hl
 	return flight._hl._fn.Node.findNodeByName(source, cast name);
@@ -1078,6 +1665,12 @@ extern inline function findNodeByName(source:Dynamic, name:String):Dynamic {
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function forEachNodeAncestor(source:Dynamic, callback_:Dynamic):Void {
+	flight._js._fn.Node.forEachNodeAncestor(source, callback_);
+}
+#else
 extern inline function forEachNodeAncestor(source:Dynamic, callback_Fn:Dynamic, callback_Ctx:Dynamic):Void {
 #if hl
 	flight._hl._fn.Node.forEachNodeAncestor(source, callback_Fn, callback_Ctx);
@@ -1089,6 +1682,12 @@ extern inline function forEachNodeAncestor(source:Dynamic, callback_Fn:Dynamic, 
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function forEachNodeDescendant(source:Dynamic, callback_:Dynamic):Void {
+	flight._js._fn.Node.forEachNodeDescendant(source, callback_);
+}
+#else
 extern inline function forEachNodeDescendant(source:Dynamic, callback_Fn:Dynamic, callback_Ctx:Dynamic):Void {
 #if hl
 	flight._hl._fn.Node.forEachNodeDescendant(source, callback_Fn, callback_Ctx);
@@ -1100,6 +1699,12 @@ extern inline function forEachNodeDescendant(source:Dynamic, callback_Fn:Dynamic
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getNodeChildren(out:Dynamic, source:Dynamic):Void {
+	flight._js._fn.Node.getNodeChildren(out, source);
+}
+#else
 extern inline function getNodeChildren(out:Dynamic, source:Dynamic):Void {
 #if hl
 	flight._hl._fn.Node.getNodeChildren(out, source);
@@ -1111,6 +1716,12 @@ extern inline function getNodeChildren(out:Dynamic, source:Dynamic):Void {
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getNodeDepth(source:Dynamic):Int {
+	return flight._js._fn.Node.getNodeDepth(source);
+}
+#else
 extern inline function getNodeDepth(source:Dynamic):Int {
 #if hl
 	return flight._hl._fn.Node.getNodeDepth(source);
@@ -1122,6 +1733,12 @@ extern inline function getNodeDepth(source:Dynamic):Int {
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getNodeNextSibling(source:Dynamic):Null<Dynamic> {
+	return flight._js._fn.Node.getNodeNextSibling(source);
+}
+#else
 extern inline function getNodeNextSibling(source:Dynamic):Dynamic {
 #if hl
 	return flight._hl._fn.Node.getNodeNextSibling(source);
@@ -1133,6 +1750,12 @@ extern inline function getNodeNextSibling(source:Dynamic):Dynamic {
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getNodePreviousSibling(source:Dynamic):Null<Dynamic> {
+	return flight._js._fn.Node.getNodePreviousSibling(source);
+}
+#else
 extern inline function getNodePreviousSibling(source:Dynamic):Dynamic {
 #if hl
 	return flight._hl._fn.Node.getNodePreviousSibling(source);
@@ -1144,6 +1767,12 @@ extern inline function getNodePreviousSibling(source:Dynamic):Dynamic {
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function walkNodeDescendants(source:Dynamic, visit:Dynamic):Bool {
+	return flight._js._fn.Node.walkNodeDescendants(source, visit);
+}
+#else
 extern inline function walkNodeDescendants(source:Dynamic, visitFn:Dynamic, visitCtx:Dynamic):Bool {
 #if hl
 	return flight._hl._fn.Node.walkNodeDescendants(source, visitFn, visitCtx);
@@ -1155,6 +1784,12 @@ extern inline function walkNodeDescendants(source:Dynamic, visitFn:Dynamic, visi
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function createViewport():Viewport {
+	return flight._js._fn.Node.createViewport();
+}
+#else
 extern inline function createViewport():Viewport {
 #if hl
 	return flight._hl._fn.Node.createViewport();
@@ -1166,6 +1801,12 @@ extern inline function createViewport():Viewport {
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getViewportAspect(viewport:Viewport):Float {
+	return flight._js._fn.Node.getViewportAspect(viewport);
+}
+#else
 extern inline function getViewportAspect(viewport:Viewport):Float {
 #if hl
 	return flight._hl._fn.Node.getViewportAspect(viewport);
@@ -1177,6 +1818,12 @@ extern inline function getViewportAspect(viewport:Viewport):Float {
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freeNodeRuntime(ptr:NodeRuntime):Void {
+	flight._js._fn.Node.freeNodeRuntime(ptr);
+}
+#else
 extern inline function freeNodeRuntime(ptr:NodeRuntime):Void {
 #if hl
 	flight._hl._fn.Node.freeNodeRuntime(ptr);
@@ -1188,6 +1835,12 @@ extern inline function freeNodeRuntime(ptr:NodeRuntime):Void {
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freeNodeOrderList(ptr:NodeOrderList):Void {
+	flight._js._fn.Node.freeNodeOrderList(ptr);
+}
+#else
 extern inline function freeNodeOrderList(ptr:NodeOrderList):Void {
 #if hl
 	flight._hl._fn.Node.freeNodeOrderList(ptr);
@@ -1199,6 +1852,12 @@ extern inline function freeNodeOrderList(ptr:NodeOrderList):Void {
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freeViewport(ptr:Viewport):Void {
+	flight._js._fn.Node.freeViewport(ptr);
+}
+#else
 extern inline function freeViewport(ptr:Viewport):Void {
 #if hl
 	flight._hl._fn.Node.freeViewport(ptr);
@@ -1210,3 +1869,4 @@ extern inline function freeViewport(ptr:Viewport):Void {
 	#error "flight.Node: no backend for this target."
 #end
 }
+#end

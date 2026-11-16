@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract FlyCameraControllerOptions(Dynamic) {}
+abstract FlyCameraControllerOptions(Dynamic) {
+}

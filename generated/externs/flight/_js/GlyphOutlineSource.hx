@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract GlyphOutlineSource(Dynamic) {}
+abstract GlyphOutlineSource(Dynamic) {
+}

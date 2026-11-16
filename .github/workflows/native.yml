@@ -1,0 +1,73 @@
+name: native platforms
+on:
+  push:
+  pull_request:
+concurrency:
+  group: native-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  desktop:
+    name: ${{ matrix.platform }} cpp + HL + Lime
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # Linux executes the same gate in ci.yml's complete check.
+          - { os: macos-15-intel, platform: Mac64 }
+          - { os: windows-2025, platform: Windows64 }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - uses: krdlab/setup-haxe@v2
+        with: { haxe-version: 4.3.7 }
+      - uses: dtolnay/rust-toolchain@master
+        with: { toolchain: 1.96.0 }
+      - uses: ilammy/msvc-dev-cmd@v1
+        if: runner.os == 'Windows'
+      - run: npm ci
+      - run: npm run setup:native-tests
+      - run: npm run rehydrate
+      - run: cargo fetch --locked --manifest-path .dependencies/flight/Cargo.toml
+      # HashLink layouts belong to this ABI, not the checked-in Linux host.
+      - run: npm run generate
+      - run: npm run gate:surface
+      - run: npm run native:build:test
+      - run: npm run gate:package
+      - run: npm run gate:native-runtime
+      - run: npm run package:haxelib
+      - uses: actions/upload-artifact@v4
+        with:
+          name: flight-${{ matrix.platform }}-dev
+          path: dist/flight-*.zip
+  ios:
+    name: ${{ matrix.platform }} static build + link
+    runs-on: macos-15-intel
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { platform: iPhoneOSArm64, triple: aarch64-apple-ios }
+          - { platform: iPhoneSimulator64, triple: x86_64-apple-ios }
+          - { platform: iPhoneSimulatorArm64, triple: aarch64-apple-ios-sim }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: 1.96.0
+          targets: ${{ matrix.triple }}
+      - run: npm ci
+      - run: npm run rehydrate
+      - run: cargo fetch --locked --manifest-path .dependencies/flight/Cargo.toml
+      - run: npm run native:build:test -- --platform ${{ matrix.platform }}
+      - run: node tests/native/ios-link.mjs --platform ${{ matrix.platform }}
+      - run: npm run package:haxelib
+      - uses: actions/upload-artifact@v4
+        with:
+          name: flight-${{ matrix.platform }}-dev
+          path: dist/flight-*.zip

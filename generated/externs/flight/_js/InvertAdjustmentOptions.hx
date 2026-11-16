@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract InvertAdjustmentOptions(Dynamic) {}
+abstract InvertAdjustmentOptions(Dynamic) {
+}

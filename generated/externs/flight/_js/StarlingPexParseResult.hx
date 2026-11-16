@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract StarlingPexParseResult(Dynamic) {}
+abstract StarlingPexParseResult(Dynamic) {
+}

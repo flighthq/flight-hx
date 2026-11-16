@@ -1,25 +1,25 @@
 package flight._js._fn;
 
-@:jsRequire("flight")
+@:jsRequire("@flighthq/motionpath")
 extern class Motionpath {
-	@:native("flight_create_motion_path")
-	public static function createMotionPath(path:Dynamic, speed:Float, loopMode:Int, tolerance:Float):flight._js.MotionPath;
-	@:native("flight_get_motion_path_heading")
+	@:native("createMotionPath")
+	public static function createMotionPath(path:Dynamic, speed:Null<Float>, loopMode:Null<Dynamic>, tolerance:Null<Float>):flight._js.MotionPath;
+	@:native("getMotionPathHeading")
 	public static function getMotionPathHeading(mp:flight._js.MotionPath):Float;
-	@:native("flight_get_motion_path_position")
+	@:native("getMotionPathPosition")
 	public static function getMotionPathPosition(mp:flight._js.MotionPath, pointOut:flight._js.Vector2, tangentOut:flight._js.Vector2):Bool;
-	@:native("flight_get_motion_path_progress")
+	@:native("getMotionPathProgress")
 	public static function getMotionPathProgress(mp:flight._js.MotionPath):Float;
-	@:native("flight_is_motion_path_at_end")
+	@:native("isMotionPathAtEnd")
 	public static function isMotionPathAtEnd(mp:flight._js.MotionPath):Bool;
-	@:native("flight_set_motion_path_direction")
+	@:native("setMotionPathDirection")
 	public static function setMotionPathDirection(mp:flight._js.MotionPath, direction:flight._js.MotionPathDirection):Void;
-	@:native("flight_set_motion_path_distance")
+	@:native("setMotionPathDistance")
 	public static function setMotionPathDistance(mp:flight._js.MotionPath, distance:Float):Void;
-	@:native("flight_set_motion_path_progress")
+	@:native("setMotionPathProgress")
 	public static function setMotionPathProgress(mp:flight._js.MotionPath, t:Float):Void;
-	@:native("flight_update_motion_path")
+	@:native("updateMotionPath")
 	public static function updateMotionPath(mp:flight._js.MotionPath, deltaTime:Float):Void;
-	@:native("flight_free_motion_path")
-	public static function freeMotionPath(ptr:flight._js.MotionPath):Void;
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeMotionPath(ptr:flight._js.MotionPath):Void {}
 }

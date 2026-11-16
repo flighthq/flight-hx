@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract LiftGammaGainAdjustmentOptions(Dynamic) {}
+abstract LiftGammaGainAdjustmentOptions(Dynamic) {
+}

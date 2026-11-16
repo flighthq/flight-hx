@@ -1,5 +1,10 @@
 package flight;
 
+#if (js && flight_esm)
+extern inline function acquireClipRegion():Dynamic {
+	return flight._js._fn.Clip.acquireClipRegion();
+}
+#else
 extern inline function acquireClipRegion():Dynamic {
 #if hl
 	return flight._hl._fn.Clip.acquireClipRegion();
@@ -11,6 +16,12 @@ extern inline function acquireClipRegion():Dynamic {
 	#error "flight.Clip: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function clipRegionContainsClipRegion(a:Dynamic, b:Dynamic):Bool {
+	return flight._js._fn.Clip.clipRegionContainsClipRegion(a, b);
+}
+#else
 extern inline function clipRegionContainsClipRegion(a:Dynamic, b:Dynamic):Bool {
 #if hl
 	return flight._hl._fn.Clip.clipRegionContainsClipRegion(a, b);
@@ -22,6 +33,12 @@ extern inline function clipRegionContainsClipRegion(a:Dynamic, b:Dynamic):Bool {
 	#error "flight.Clip: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function clipRegionContainsPoint(clip:Dynamic, x:Float, y:Float):Bool {
+	return flight._js._fn.Clip.clipRegionContainsPoint(clip, x, y);
+}
+#else
 extern inline function clipRegionContainsPoint(clip:Dynamic, x:Float, y:Float):Bool {
 #if hl
 	return flight._hl._fn.Clip.clipRegionContainsPoint(clip, x, y);
@@ -33,6 +50,12 @@ extern inline function clipRegionContainsPoint(clip:Dynamic, x:Float, y:Float):B
 	#error "flight.Clip: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function clipRegionIntersectsClipRegion(a:Dynamic, b:Dynamic):Bool {
+	return flight._js._fn.Clip.clipRegionIntersectsClipRegion(a, b);
+}
+#else
 extern inline function clipRegionIntersectsClipRegion(a:Dynamic, b:Dynamic):Bool {
 #if hl
 	return flight._hl._fn.Clip.clipRegionIntersectsClipRegion(a, b);
@@ -44,6 +67,12 @@ extern inline function clipRegionIntersectsClipRegion(a:Dynamic, b:Dynamic):Bool
 	#error "flight.Clip: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function cloneClipRegion(clip:Dynamic):Dynamic {
+	return flight._js._fn.Clip.cloneClipRegion(clip);
+}
+#else
 extern inline function cloneClipRegion(clip:Dynamic):Dynamic {
 #if hl
 	return flight._hl._fn.Clip.cloneClipRegion(clip);
@@ -55,6 +84,12 @@ extern inline function cloneClipRegion(clip:Dynamic):Dynamic {
 	#error "flight.Clip: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function copyClipRegion(out:Dynamic, source:Dynamic):Void {
+	flight._js._fn.Clip.copyClipRegion(out, source);
+}
+#else
 extern inline function copyClipRegion(out:Dynamic, source:Dynamic):Void {
 #if hl
 	flight._hl._fn.Clip.copyClipRegion(out, source);
@@ -66,6 +101,12 @@ extern inline function copyClipRegion(out:Dynamic, source:Dynamic):Void {
 	#error "flight.Clip: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function equalsClipRegion(a:Dynamic, b:Dynamic):Bool {
+	return flight._js._fn.Clip.equalsClipRegion(a, b);
+}
+#else
 extern inline function equalsClipRegion(a:Dynamic, b:Dynamic):Bool {
 #if hl
 	return flight._hl._fn.Clip.equalsClipRegion(a, b);
@@ -77,6 +118,12 @@ extern inline function equalsClipRegion(a:Dynamic, b:Dynamic):Bool {
 	#error "flight.Clip: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function explainClipRegion(clip:Dynamic):ClipRegionExplanation {
+	return flight._js._fn.Clip.explainClipRegion(clip);
+}
+#else
 extern inline function explainClipRegion(clip:Dynamic):ClipRegionExplanation {
 #if hl
 	return flight._hl._fn.Clip.explainClipRegion(clip);
@@ -88,6 +135,12 @@ extern inline function explainClipRegion(clip:Dynamic):ClipRegionExplanation {
 	#error "flight.Clip: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function intersectClipRegions(out:Dynamic, a:Dynamic, b:Dynamic):Void {
+	flight._js._fn.Clip.intersectClipRegions(out, a, b);
+}
+#else
 extern inline function intersectClipRegions(out:Dynamic, a:Dynamic, b:Dynamic):Void {
 #if hl
 	flight._hl._fn.Clip.intersectClipRegions(out, a, b);
@@ -99,6 +152,12 @@ extern inline function intersectClipRegions(out:Dynamic, a:Dynamic, b:Dynamic):V
 	#error "flight.Clip: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function invalidateClipRegion(clip:Dynamic):Void {
+	flight._js._fn.Clip.invalidateClipRegion(clip);
+}
+#else
 extern inline function invalidateClipRegion(clip:Dynamic):Void {
 #if hl
 	flight._hl._fn.Clip.invalidateClipRegion(clip);
@@ -110,6 +169,12 @@ extern inline function invalidateClipRegion(clip:Dynamic):Void {
 	#error "flight.Clip: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function isClipRegionEmpty(clip:Dynamic):Bool {
+	return flight._js._fn.Clip.isClipRegionEmpty(clip);
+}
+#else
 extern inline function isClipRegionEmpty(clip:Dynamic):Bool {
 #if hl
 	return flight._hl._fn.Clip.isClipRegionEmpty(clip);
@@ -121,6 +186,12 @@ extern inline function isClipRegionEmpty(clip:Dynamic):Bool {
 	#error "flight.Clip: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function isClipRegionRectangular(clip:Dynamic):Bool {
+	return flight._js._fn.Clip.isClipRegionRectangular(clip);
+}
+#else
 extern inline function isClipRegionRectangular(clip:Dynamic):Bool {
 #if hl
 	return flight._hl._fn.Clip.isClipRegionRectangular(clip);
@@ -132,6 +203,12 @@ extern inline function isClipRegionRectangular(clip:Dynamic):Bool {
 	#error "flight.Clip: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function normalizeClipRegion(out:Dynamic, clip:Dynamic):Void {
+	flight._js._fn.Clip.normalizeClipRegion(out, clip);
+}
+#else
 extern inline function normalizeClipRegion(out:Dynamic, clip:Dynamic):Void {
 #if hl
 	flight._hl._fn.Clip.normalizeClipRegion(out, clip);
@@ -143,6 +220,12 @@ extern inline function normalizeClipRegion(out:Dynamic, clip:Dynamic):Void {
 	#error "flight.Clip: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function releaseClipRegion(clip:Dynamic):Void {
+	flight._js._fn.Clip.releaseClipRegion(clip);
+}
+#else
 extern inline function releaseClipRegion(clip:Dynamic):Void {
 #if hl
 	flight._hl._fn.Clip.releaseClipRegion(clip);
@@ -154,6 +237,12 @@ extern inline function releaseClipRegion(clip:Dynamic):Void {
 	#error "flight.Clip: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function transformClipRegion(out:Dynamic, clip:Dynamic, matrix:Matrix):Void {
+	flight._js._fn.Clip.transformClipRegion(out, clip, matrix);
+}
+#else
 extern inline function transformClipRegion(out:Dynamic, clip:Dynamic, matrix:Matrix):Void {
 #if hl
 	flight._hl._fn.Clip.transformClipRegion(out, clip, matrix);
@@ -165,6 +254,12 @@ extern inline function transformClipRegion(out:Dynamic, clip:Dynamic, matrix:Mat
 	#error "flight.Clip: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function unionClipRegions(out:Dynamic, a:Dynamic, b:Dynamic):Void {
+	flight._js._fn.Clip.unionClipRegions(out, a, b);
+}
+#else
 extern inline function unionClipRegions(out:Dynamic, a:Dynamic, b:Dynamic):Void {
 #if hl
 	flight._hl._fn.Clip.unionClipRegions(out, a, b);
@@ -176,6 +271,12 @@ extern inline function unionClipRegions(out:Dynamic, a:Dynamic, b:Dynamic):Void 
 	#error "flight.Clip: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function createClipRegionFromCircle(x:Float, y:Float, radius:Float, tolerance:Null<Float>):Dynamic {
+	return flight._js._fn.Clip.createClipRegionFromCircle(x, y, radius, tolerance);
+}
+#else
 extern inline function createClipRegionFromCircle(x:Float, y:Float, radius:Float, tolerance:Float):Dynamic {
 #if hl
 	return flight._hl._fn.Clip.createClipRegionFromCircle(x, y, radius, tolerance);
@@ -187,6 +288,12 @@ extern inline function createClipRegionFromCircle(x:Float, y:Float, radius:Float
 	#error "flight.Clip: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function createClipRegionFromPath(path:Path, tolerance:Null<Float>):Dynamic {
+	return flight._js._fn.Clip.createClipRegionFromPath(path, tolerance);
+}
+#else
 extern inline function createClipRegionFromPath(path:Path, tolerance:Float):Dynamic {
 #if hl
 	return flight._hl._fn.Clip.createClipRegionFromPath(path, tolerance);
@@ -198,6 +305,12 @@ extern inline function createClipRegionFromPath(path:Path, tolerance:Float):Dyna
 	#error "flight.Clip: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getClipRegionContoursReasonString(reason:Dynamic):String {
+	return flight._js._fn.Clip.getClipRegionContoursReasonString(reason);
+}
+#else
 extern inline function getClipRegionContoursReasonString(reason:flight.ClipRegionContoursReason):String {
 #if hl
 	return cast flight._hl._fn.Clip.getClipRegionContoursReasonString(reason);
@@ -209,6 +322,12 @@ extern inline function getClipRegionContoursReasonString(reason:flight.ClipRegio
 	#error "flight.Clip: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getClipRegionStatusString(status:Dynamic):String {
+	return flight._js._fn.Clip.getClipRegionStatusString(status);
+}
+#else
 extern inline function getClipRegionStatusString(status:flight.ClipRegionStatus):String {
 #if hl
 	return cast flight._hl._fn.Clip.getClipRegionStatusString(status);
@@ -220,6 +339,12 @@ extern inline function getClipRegionStatusString(status:flight.ClipRegionStatus)
 	#error "flight.Clip: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function parseClipRegionContoursReason(value:String):Null<Dynamic> {
+	return flight._js._fn.Clip.parseClipRegionContoursReason(value);
+}
+#else
 extern inline function parseClipRegionContoursReason(value:String):Int {
 #if hl
 	return flight._hl._fn.Clip.parseClipRegionContoursReason(cast value);
@@ -231,6 +356,12 @@ extern inline function parseClipRegionContoursReason(value:String):Int {
 	#error "flight.Clip: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function parseClipRegionStatus(value:String):Null<Dynamic> {
+	return flight._js._fn.Clip.parseClipRegionStatus(value);
+}
+#else
 extern inline function parseClipRegionStatus(value:String):Int {
 #if hl
 	return flight._hl._fn.Clip.parseClipRegionStatus(cast value);
@@ -242,6 +373,12 @@ extern inline function parseClipRegionStatus(value:String):Int {
 	#error "flight.Clip: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function disableClipGuards():Void {
+	flight._js._fn.Clip.disableClipGuards();
+}
+#else
 extern inline function disableClipGuards():Void {
 #if hl
 	flight._hl._fn.Clip.disableClipGuards();
@@ -253,6 +390,12 @@ extern inline function disableClipGuards():Void {
 	#error "flight.Clip: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freeClipRegionExplanation(ptr:ClipRegionExplanation):Void {
+	flight._js._fn.Clip.freeClipRegionExplanation(ptr);
+}
+#else
 extern inline function freeClipRegionExplanation(ptr:ClipRegionExplanation):Void {
 #if hl
 	flight._hl._fn.Clip.freeClipRegionExplanation(ptr);
@@ -264,3 +407,4 @@ extern inline function freeClipRegionExplanation(ptr:ClipRegionExplanation):Void
 	#error "flight.Clip: no backend for this target."
 #end
 }
+#end

@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract ImageChannel(Dynamic) {}
+abstract ImageChannel(Dynamic) {
+}

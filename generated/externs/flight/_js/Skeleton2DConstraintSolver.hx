@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract Skeleton2DConstraintSolver(Dynamic) {}
+abstract Skeleton2DConstraintSolver(Dynamic) {
+}

@@ -1,5 +1,10 @@
 package flight;
 
+#if (js && flight_esm)
+extern inline function createParticleEmitterData():ParticleEmitterData {
+	return flight._js._fn.Particleemitter.createParticleEmitterData();
+}
+#else
 extern inline function createParticleEmitterData():ParticleEmitterData {
 #if hl
 	return flight._hl._fn.Particleemitter.createParticleEmitterData();
@@ -11,6 +16,12 @@ extern inline function createParticleEmitterData():ParticleEmitterData {
 	#error "flight.Particleemitter: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function computeParticleEmitter2dLocalBoundsRectangle(out:Rectangle, source:ParticleEmitter2D):Void {
+	flight._js._fn.Particleemitter.computeParticleEmitter2dLocalBoundsRectangle(out, source);
+}
+#else
 extern inline function computeParticleEmitter2dLocalBoundsRectangle(out:Rectangle, source:ParticleEmitter2D):Void {
 #if hl
 	flight._hl._fn.Particleemitter.computeParticleEmitter2dLocalBoundsRectangle(out, source);
@@ -22,6 +33,12 @@ extern inline function computeParticleEmitter2dLocalBoundsRectangle(out:Rectangl
 	#error "flight.Particleemitter: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function createParticleEmitter2d():Dynamic {
+	return flight._js._fn.Particleemitter.createParticleEmitter2d();
+}
+#else
 extern inline function createParticleEmitter2d():Dynamic {
 #if hl
 	return flight._hl._fn.Particleemitter.createParticleEmitter2d();
@@ -33,6 +50,12 @@ extern inline function createParticleEmitter2d():Dynamic {
 	#error "flight.Particleemitter: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function createParticleEmitter2dRuntime():Node2DRuntime {
+	return flight._js._fn.Particleemitter.createParticleEmitter2dRuntime();
+}
+#else
 extern inline function createParticleEmitter2dRuntime():Node2DRuntime {
 #if hl
 	return flight._hl._fn.Particleemitter.createParticleEmitter2dRuntime();
@@ -44,6 +67,12 @@ extern inline function createParticleEmitter2dRuntime():Node2DRuntime {
 	#error "flight.Particleemitter: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function createParticleEmitter3d():Dynamic {
+	return flight._js._fn.Particleemitter.createParticleEmitter3d();
+}
+#else
 extern inline function createParticleEmitter3d():Dynamic {
 #if hl
 	return flight._hl._fn.Particleemitter.createParticleEmitter3d();
@@ -55,6 +84,12 @@ extern inline function createParticleEmitter3d():Dynamic {
 	#error "flight.Particleemitter: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function appendParticleEmitter2dParticle(target:Dynamic, id:Int, x:Float, y:Float, rotation:Float, scale:Float):Int {
+	return flight._js._fn.Particleemitter.appendParticleEmitter2dParticle(target, id, x, y, rotation, scale);
+}
+#else
 extern inline function appendParticleEmitter2dParticle(target:Dynamic, id:Int, x:Float, y:Float, rotation:Float, scale:Float):Int {
 #if hl
 	return flight._hl._fn.Particleemitter.appendParticleEmitter2dParticle(target, id, x, y, rotation, scale);
@@ -66,6 +101,12 @@ extern inline function appendParticleEmitter2dParticle(target:Dynamic, id:Int, x
 	#error "flight.Particleemitter: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function clearParticleEmitter2d(target:Dynamic):Void {
+	flight._js._fn.Particleemitter.clearParticleEmitter2d(target);
+}
+#else
 extern inline function clearParticleEmitter2d(target:Dynamic):Void {
 #if hl
 	flight._hl._fn.Particleemitter.clearParticleEmitter2d(target);
@@ -77,6 +118,12 @@ extern inline function clearParticleEmitter2d(target:Dynamic):Void {
 	#error "flight.Particleemitter: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function cloneParticleEmitter2d(source:ParticleEmitter2D):Dynamic {
+	return flight._js._fn.Particleemitter.cloneParticleEmitter2d(source);
+}
+#else
 extern inline function cloneParticleEmitter2d(source:ParticleEmitter2D):Dynamic {
 #if hl
 	return flight._hl._fn.Particleemitter.cloneParticleEmitter2d(source);
@@ -88,6 +135,12 @@ extern inline function cloneParticleEmitter2d(source:ParticleEmitter2D):Dynamic 
 	#error "flight.Particleemitter: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function cloneParticleEmitter3d(source:ParticleEmitter3D):Dynamic {
+	return flight._js._fn.Particleemitter.cloneParticleEmitter3d(source);
+}
+#else
 extern inline function cloneParticleEmitter3d(source:ParticleEmitter3D):Dynamic {
 #if hl
 	return flight._hl._fn.Particleemitter.cloneParticleEmitter3d(source);
@@ -99,6 +152,12 @@ extern inline function cloneParticleEmitter3d(source:ParticleEmitter3D):Dynamic 
 	#error "flight.Particleemitter: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function compactParticleEmitter2d(target:Dynamic):Void {
+	flight._js._fn.Particleemitter.compactParticleEmitter2d(target);
+}
+#else
 extern inline function compactParticleEmitter2d(target:Dynamic):Void {
 #if hl
 	flight._hl._fn.Particleemitter.compactParticleEmitter2d(target);
@@ -110,6 +169,12 @@ extern inline function compactParticleEmitter2d(target:Dynamic):Void {
 	#error "flight.Particleemitter: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function emitParticleBurst2d(emitter:Dynamic, state:ParticleEmitterState, config:ParticleEmitterConfig, count:Float, x:Float, y:Float, tint:Null<Int>):Int {
+	return flight._js._fn.Particleemitter.emitParticleBurst2d(emitter, state, config, count, x, y, tint);
+}
+#else
 extern inline function emitParticleBurst2d(emitter:Dynamic, state:ParticleEmitterState, config:ParticleEmitterConfig, count:Float, x:Float, y:Float, tint:haxe.Int64):Int {
 #if hl
 	return flight._hl._fn.Particleemitter.emitParticleBurst2d(emitter, state, config, count, x, y, tint);
@@ -121,6 +186,12 @@ extern inline function emitParticleBurst2d(emitter:Dynamic, state:ParticleEmitte
 	#error "flight.Particleemitter: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getParticleEmitter2dCapacity(source:Dynamic):Int {
+	return flight._js._fn.Particleemitter.getParticleEmitter2dCapacity(source);
+}
+#else
 extern inline function getParticleEmitter2dCapacity(source:Dynamic):Int {
 #if hl
 	return flight._hl._fn.Particleemitter.getParticleEmitter2dCapacity(source);
@@ -132,6 +203,12 @@ extern inline function getParticleEmitter2dCapacity(source:Dynamic):Int {
 	#error "flight.Particleemitter: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getParticleEmitter2dParticleAlpha(source:Dynamic, index:Int):Float {
+	return flight._js._fn.Particleemitter.getParticleEmitter2dParticleAlpha(source, index);
+}
+#else
 extern inline function getParticleEmitter2dParticleAlpha(source:Dynamic, index:Int):Float {
 #if hl
 	return flight._hl._fn.Particleemitter.getParticleEmitter2dParticleAlpha(source, index);
@@ -143,6 +220,12 @@ extern inline function getParticleEmitter2dParticleAlpha(source:Dynamic, index:I
 	#error "flight.Particleemitter: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getParticleEmitter2dParticleId(source:Dynamic, index:Int):Int {
+	return flight._js._fn.Particleemitter.getParticleEmitter2dParticleId(source, index);
+}
+#else
 extern inline function getParticleEmitter2dParticleId(source:Dynamic, index:Int):Int {
 #if hl
 	return flight._hl._fn.Particleemitter.getParticleEmitter2dParticleId(source, index);
@@ -154,6 +237,12 @@ extern inline function getParticleEmitter2dParticleId(source:Dynamic, index:Int)
 	#error "flight.Particleemitter: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getParticleEmitter2dParticleVelocity(out:Vector2, source:Dynamic, index:Int):Bool {
+	return flight._js._fn.Particleemitter.getParticleEmitter2dParticleVelocity(out, source, index);
+}
+#else
 extern inline function getParticleEmitter2dParticleVelocity(out:Vector2, source:Dynamic, index:Int):Bool {
 #if hl
 	return flight._hl._fn.Particleemitter.getParticleEmitter2dParticleVelocity(out, source, index);
@@ -165,6 +254,12 @@ extern inline function getParticleEmitter2dParticleVelocity(out:Vector2, source:
 	#error "flight.Particleemitter: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getParticleEmitter2dRuntime(source:ParticleEmitter2D):ParticleEmitter2DRuntime {
+	return flight._js._fn.Particleemitter.getParticleEmitter2dRuntime(source);
+}
+#else
 extern inline function getParticleEmitter2dRuntime(source:ParticleEmitter2D):ParticleEmitter2DRuntime {
 #if hl
 	return flight._hl._fn.Particleemitter.getParticleEmitter2dRuntime(source);
@@ -176,6 +271,12 @@ extern inline function getParticleEmitter2dRuntime(source:ParticleEmitter2D):Par
 	#error "flight.Particleemitter: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getParticleEmitter3dRuntime(source:Dynamic):Node3DRuntime {
+	return flight._js._fn.Particleemitter.getParticleEmitter3dRuntime(source);
+}
+#else
 extern inline function getParticleEmitter3dRuntime(source:Dynamic):Node3DRuntime {
 #if hl
 	return flight._hl._fn.Particleemitter.getParticleEmitter3dRuntime(source);
@@ -187,6 +288,12 @@ extern inline function getParticleEmitter3dRuntime(source:Dynamic):Node3DRuntime
 	#error "flight.Particleemitter: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function isParticleEmitter3d(node:Dynamic):Bool {
+	return flight._js._fn.Particleemitter.isParticleEmitter3d(node);
+}
+#else
 extern inline function isParticleEmitter3d(node:Dynamic):Bool {
 #if hl
 	return flight._hl._fn.Particleemitter.isParticleEmitter3d(node);
@@ -198,6 +305,12 @@ extern inline function isParticleEmitter3d(node:Dynamic):Bool {
 	#error "flight.Particleemitter: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function removeParticleEmitter2dParticle(target:Dynamic, index:Int):Void {
+	flight._js._fn.Particleemitter.removeParticleEmitter2dParticle(target, index);
+}
+#else
 extern inline function removeParticleEmitter2dParticle(target:Dynamic, index:Int):Void {
 #if hl
 	flight._hl._fn.Particleemitter.removeParticleEmitter2dParticle(target, index);
@@ -209,6 +322,12 @@ extern inline function removeParticleEmitter2dParticle(target:Dynamic, index:Int
 	#error "flight.Particleemitter: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function reserveParticleEmitter2d(target:Dynamic, capacity:Int):Void {
+	flight._js._fn.Particleemitter.reserveParticleEmitter2d(target, capacity);
+}
+#else
 extern inline function reserveParticleEmitter2d(target:Dynamic, capacity:Int):Void {
 #if hl
 	flight._hl._fn.Particleemitter.reserveParticleEmitter2d(target, capacity);
@@ -220,6 +339,12 @@ extern inline function reserveParticleEmitter2d(target:Dynamic, capacity:Int):Vo
 	#error "flight.Particleemitter: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setParticleEmitter2dLocalBoundsRectangle(target:Dynamic, rect:Rectangle):Void {
+	flight._js._fn.Particleemitter.setParticleEmitter2dLocalBoundsRectangle(target, rect);
+}
+#else
 extern inline function setParticleEmitter2dLocalBoundsRectangle(target:Dynamic, rect:Rectangle):Void {
 #if hl
 	flight._hl._fn.Particleemitter.setParticleEmitter2dLocalBoundsRectangle(target, rect);
@@ -231,6 +356,12 @@ extern inline function setParticleEmitter2dLocalBoundsRectangle(target:Dynamic, 
 	#error "flight.Particleemitter: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setParticleEmitter2dParticle(target:Dynamic, index:Int, id:Int, x:Float, y:Float, rotation:Float, scale:Float):Void {
+	flight._js._fn.Particleemitter.setParticleEmitter2dParticle(target, index, id, x, y, rotation, scale);
+}
+#else
 extern inline function setParticleEmitter2dParticle(target:Dynamic, index:Int, id:Int, x:Float, y:Float, rotation:Float, scale:Float):Void {
 #if hl
 	flight._hl._fn.Particleemitter.setParticleEmitter2dParticle(target, index, id, x, y, rotation, scale);
@@ -242,6 +373,12 @@ extern inline function setParticleEmitter2dParticle(target:Dynamic, index:Int, i
 	#error "flight.Particleemitter: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setParticleEmitter2dParticleAlpha(target:Dynamic, index:Int, alpha:Float):Void {
+	flight._js._fn.Particleemitter.setParticleEmitter2dParticleAlpha(target, index, alpha);
+}
+#else
 extern inline function setParticleEmitter2dParticleAlpha(target:Dynamic, index:Int, alpha:Float):Void {
 #if hl
 	flight._hl._fn.Particleemitter.setParticleEmitter2dParticleAlpha(target, index, alpha);
@@ -253,6 +390,12 @@ extern inline function setParticleEmitter2dParticleAlpha(target:Dynamic, index:I
 	#error "flight.Particleemitter: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setParticleEmitter2dParticleColor(target:Dynamic, index:Int, r:Float, g:Float, b:Float):Void {
+	flight._js._fn.Particleemitter.setParticleEmitter2dParticleColor(target, index, r, g, b);
+}
+#else
 extern inline function setParticleEmitter2dParticleColor(target:Dynamic, index:Int, r:Float, g:Float, b:Float):Void {
 #if hl
 	flight._hl._fn.Particleemitter.setParticleEmitter2dParticleColor(target, index, r, g, b);
@@ -264,6 +407,12 @@ extern inline function setParticleEmitter2dParticleColor(target:Dynamic, index:I
 	#error "flight.Particleemitter: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setParticleEmitter2dParticleVelocity(target:Dynamic, index:Int, vx:Float, vy:Float):Void {
+	flight._js._fn.Particleemitter.setParticleEmitter2dParticleVelocity(target, index, vx, vy);
+}
+#else
 extern inline function setParticleEmitter2dParticleVelocity(target:Dynamic, index:Int, vx:Float, vy:Float):Void {
 #if hl
 	flight._hl._fn.Particleemitter.setParticleEmitter2dParticleVelocity(target, index, vx, vy);
@@ -275,6 +424,12 @@ extern inline function setParticleEmitter2dParticleVelocity(target:Dynamic, inde
 	#error "flight.Particleemitter: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function appendParticleEmitter3dParticle(target:Dynamic, id:Int, x:Float, y:Float, z:Float, rotation:Float, scale:Float):Int {
+	return flight._js._fn.Particleemitter.appendParticleEmitter3dParticle(target, id, x, y, z, rotation, scale);
+}
+#else
 extern inline function appendParticleEmitter3dParticle(target:Dynamic, id:Int, x:Float, y:Float, z:Float, rotation:Float, scale:Float):Int {
 #if hl
 	return flight._hl._fn.Particleemitter.appendParticleEmitter3dParticle(target, id, x, y, z, rotation, scale);
@@ -286,6 +441,12 @@ extern inline function appendParticleEmitter3dParticle(target:Dynamic, id:Int, x
 	#error "flight.Particleemitter: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function clearParticleEmitter3d(target:Dynamic):Void {
+	flight._js._fn.Particleemitter.clearParticleEmitter3d(target);
+}
+#else
 extern inline function clearParticleEmitter3d(target:Dynamic):Void {
 #if hl
 	flight._hl._fn.Particleemitter.clearParticleEmitter3d(target);
@@ -297,6 +458,12 @@ extern inline function clearParticleEmitter3d(target:Dynamic):Void {
 	#error "flight.Particleemitter: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function compactParticleEmitter3d(target:Dynamic):Void {
+	flight._js._fn.Particleemitter.compactParticleEmitter3d(target);
+}
+#else
 extern inline function compactParticleEmitter3d(target:Dynamic):Void {
 #if hl
 	flight._hl._fn.Particleemitter.compactParticleEmitter3d(target);
@@ -308,6 +475,12 @@ extern inline function compactParticleEmitter3d(target:Dynamic):Void {
 	#error "flight.Particleemitter: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function computeParticleEmitter3dLocalBoundsAabb(out:Aabb, source:Dynamic):Void {
+	flight._js._fn.Particleemitter.computeParticleEmitter3dLocalBoundsAabb(out, source);
+}
+#else
 extern inline function computeParticleEmitter3dLocalBoundsAabb(out:Aabb, source:Dynamic):Void {
 #if hl
 	flight._hl._fn.Particleemitter.computeParticleEmitter3dLocalBoundsAabb(out, source);
@@ -319,6 +492,12 @@ extern inline function computeParticleEmitter3dLocalBoundsAabb(out:Aabb, source:
 	#error "flight.Particleemitter: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function emitParticleBurst3d(emitter:Dynamic, state:ParticleEmitterState, config:ParticleEmitterConfig, count:Float, x:Float, y:Float, z:Float, tint:Null<Int>):Int {
+	return flight._js._fn.Particleemitter.emitParticleBurst3d(emitter, state, config, count, x, y, z, tint);
+}
+#else
 extern inline function emitParticleBurst3d(emitter:Dynamic, state:ParticleEmitterState, config:ParticleEmitterConfig, count:Float, x:Float, y:Float, z:Float, tint:haxe.Int64):Int {
 #if hl
 	return flight._hl._fn.Particleemitter.emitParticleBurst3d(emitter, state, config, count, x, y, z, tint);
@@ -330,6 +509,12 @@ extern inline function emitParticleBurst3d(emitter:Dynamic, state:ParticleEmitte
 	#error "flight.Particleemitter: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getParticleEmitter3dCapacity(source:Dynamic):Int {
+	return flight._js._fn.Particleemitter.getParticleEmitter3dCapacity(source);
+}
+#else
 extern inline function getParticleEmitter3dCapacity(source:Dynamic):Int {
 #if hl
 	return flight._hl._fn.Particleemitter.getParticleEmitter3dCapacity(source);
@@ -341,6 +526,12 @@ extern inline function getParticleEmitter3dCapacity(source:Dynamic):Int {
 	#error "flight.Particleemitter: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getParticleEmitter3dParticleAlpha(source:Dynamic, index:Int):Float {
+	return flight._js._fn.Particleemitter.getParticleEmitter3dParticleAlpha(source, index);
+}
+#else
 extern inline function getParticleEmitter3dParticleAlpha(source:Dynamic, index:Int):Float {
 #if hl
 	return flight._hl._fn.Particleemitter.getParticleEmitter3dParticleAlpha(source, index);
@@ -352,6 +543,12 @@ extern inline function getParticleEmitter3dParticleAlpha(source:Dynamic, index:I
 	#error "flight.Particleemitter: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getParticleEmitter3dParticleId(source:Dynamic, index:Int):Int {
+	return flight._js._fn.Particleemitter.getParticleEmitter3dParticleId(source, index);
+}
+#else
 extern inline function getParticleEmitter3dParticleId(source:Dynamic, index:Int):Int {
 #if hl
 	return flight._hl._fn.Particleemitter.getParticleEmitter3dParticleId(source, index);
@@ -363,6 +560,12 @@ extern inline function getParticleEmitter3dParticleId(source:Dynamic, index:Int)
 	#error "flight.Particleemitter: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getParticleEmitter3dParticleVelocity(out:Dynamic, source:Dynamic, index:Int):Bool {
+	return flight._js._fn.Particleemitter.getParticleEmitter3dParticleVelocity(out, source, index);
+}
+#else
 extern inline function getParticleEmitter3dParticleVelocity(out:Dynamic, source:Dynamic, index:Int):Bool {
 #if hl
 	return flight._hl._fn.Particleemitter.getParticleEmitter3dParticleVelocity(out, source, index);
@@ -374,6 +577,12 @@ extern inline function getParticleEmitter3dParticleVelocity(out:Dynamic, source:
 	#error "flight.Particleemitter: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function removeParticleEmitter3dParticle(target:Dynamic, index:Int):Void {
+	flight._js._fn.Particleemitter.removeParticleEmitter3dParticle(target, index);
+}
+#else
 extern inline function removeParticleEmitter3dParticle(target:Dynamic, index:Int):Void {
 #if hl
 	flight._hl._fn.Particleemitter.removeParticleEmitter3dParticle(target, index);
@@ -385,6 +594,12 @@ extern inline function removeParticleEmitter3dParticle(target:Dynamic, index:Int
 	#error "flight.Particleemitter: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function reserveParticleEmitter3d(target:Dynamic, capacity:Int):Void {
+	flight._js._fn.Particleemitter.reserveParticleEmitter3d(target, capacity);
+}
+#else
 extern inline function reserveParticleEmitter3d(target:Dynamic, capacity:Int):Void {
 #if hl
 	flight._hl._fn.Particleemitter.reserveParticleEmitter3d(target, capacity);
@@ -396,6 +611,12 @@ extern inline function reserveParticleEmitter3d(target:Dynamic, capacity:Int):Vo
 	#error "flight.Particleemitter: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setParticleEmitter3dParticle(target:Dynamic, index:Int, id:Int, x:Float, y:Float, z:Float, rotation:Float, scale:Float):Void {
+	flight._js._fn.Particleemitter.setParticleEmitter3dParticle(target, index, id, x, y, z, rotation, scale);
+}
+#else
 extern inline function setParticleEmitter3dParticle(target:Dynamic, index:Int, id:Int, x:Float, y:Float, z:Float, rotation:Float, scale:Float):Void {
 #if hl
 	flight._hl._fn.Particleemitter.setParticleEmitter3dParticle(target, index, id, x, y, z, rotation, scale);
@@ -407,6 +628,12 @@ extern inline function setParticleEmitter3dParticle(target:Dynamic, index:Int, i
 	#error "flight.Particleemitter: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setParticleEmitter3dParticleAlpha(target:Dynamic, index:Int, alpha:Float):Void {
+	flight._js._fn.Particleemitter.setParticleEmitter3dParticleAlpha(target, index, alpha);
+}
+#else
 extern inline function setParticleEmitter3dParticleAlpha(target:Dynamic, index:Int, alpha:Float):Void {
 #if hl
 	flight._hl._fn.Particleemitter.setParticleEmitter3dParticleAlpha(target, index, alpha);
@@ -418,6 +645,12 @@ extern inline function setParticleEmitter3dParticleAlpha(target:Dynamic, index:I
 	#error "flight.Particleemitter: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setParticleEmitter3dParticleColor(target:Dynamic, index:Int, r:Float, g:Float, b:Float):Void {
+	flight._js._fn.Particleemitter.setParticleEmitter3dParticleColor(target, index, r, g, b);
+}
+#else
 extern inline function setParticleEmitter3dParticleColor(target:Dynamic, index:Int, r:Float, g:Float, b:Float):Void {
 #if hl
 	flight._hl._fn.Particleemitter.setParticleEmitter3dParticleColor(target, index, r, g, b);
@@ -429,6 +662,12 @@ extern inline function setParticleEmitter3dParticleColor(target:Dynamic, index:I
 	#error "flight.Particleemitter: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setParticleEmitter3dParticleVelocity(target:Dynamic, index:Int, vx:Float, vy:Float, vz:Float):Void {
+	flight._js._fn.Particleemitter.setParticleEmitter3dParticleVelocity(target, index, vx, vy, vz);
+}
+#else
 extern inline function setParticleEmitter3dParticleVelocity(target:Dynamic, index:Int, vx:Float, vy:Float, vz:Float):Void {
 #if hl
 	flight._hl._fn.Particleemitter.setParticleEmitter3dParticleVelocity(target, index, vx, vy, vz);
@@ -440,6 +679,12 @@ extern inline function setParticleEmitter3dParticleVelocity(target:Dynamic, inde
 	#error "flight.Particleemitter: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function sortParticleEmitter3dByViewDepth(emitter:Dynamic, viewMatrix:Dynamic):Void {
+	flight._js._fn.Particleemitter.sortParticleEmitter3dByViewDepth(emitter, viewMatrix);
+}
+#else
 extern inline function sortParticleEmitter3dByViewDepth(emitter:Dynamic, viewMatrix:Dynamic):Void {
 #if hl
 	flight._hl._fn.Particleemitter.sortParticleEmitter3dByViewDepth(emitter, viewMatrix);
@@ -451,6 +696,12 @@ extern inline function sortParticleEmitter3dByViewDepth(emitter:Dynamic, viewMat
 	#error "flight.Particleemitter: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function sortParticleEmitter3dIndicesByViewDepth(outIndices:Dynamic, outViewDepths:Dynamic, source:Dynamic, positionToView:Dynamic):Bool {
+	return flight._js._fn.Particleemitter.sortParticleEmitter3dIndicesByViewDepth(outIndices, outViewDepths, source, positionToView);
+}
+#else
 extern inline function sortParticleEmitter3dIndicesByViewDepth(outIndices:Dynamic, outIndicesLen:Int, outViewDepths:Dynamic, outViewDepthsLen:Int, source:Dynamic, positionToView:Dynamic):Bool {
 #if hl
 	return flight._hl._fn.Particleemitter.sortParticleEmitter3dIndicesByViewDepth(outIndices, outIndicesLen, outViewDepths, outViewDepthsLen, source, positionToView);
@@ -462,6 +713,12 @@ extern inline function sortParticleEmitter3dIndicesByViewDepth(outIndices:Dynami
 	#error "flight.Particleemitter: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function prewarmParticleEmitter2d(emitter:Dynamic, state:ParticleEmitterState, config:ParticleEmitterConfig, duration:Float, stepDeltaTime:Float, callbacks:Null<ParticleEmitterCallbacks>):Void {
+	flight._js._fn.Particleemitter.prewarmParticleEmitter2d(emitter, state, config, duration, stepDeltaTime, callbacks);
+}
+#else
 extern inline function prewarmParticleEmitter2d(emitter:Dynamic, state:ParticleEmitterState, config:ParticleEmitterConfig, duration:Float, stepDeltaTime:Float, callbacks:ParticleEmitterCallbacks):Void {
 #if hl
 	flight._hl._fn.Particleemitter.prewarmParticleEmitter2d(emitter, state, config, duration, stepDeltaTime, callbacks);
@@ -473,6 +730,12 @@ extern inline function prewarmParticleEmitter2d(emitter:Dynamic, state:ParticleE
 	#error "flight.Particleemitter: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function prewarmParticleEmitter3d(emitter:Dynamic, state:ParticleEmitterState, config:ParticleEmitterConfig, duration:Float, stepDeltaTime:Float, callbacks:Null<ParticleEmitterCallbacks>):Void {
+	flight._js._fn.Particleemitter.prewarmParticleEmitter3d(emitter, state, config, duration, stepDeltaTime, callbacks);
+}
+#else
 extern inline function prewarmParticleEmitter3d(emitter:Dynamic, state:ParticleEmitterState, config:ParticleEmitterConfig, duration:Float, stepDeltaTime:Float, callbacks:ParticleEmitterCallbacks):Void {
 #if hl
 	flight._hl._fn.Particleemitter.prewarmParticleEmitter3d(emitter, state, config, duration, stepDeltaTime, callbacks);
@@ -484,6 +747,12 @@ extern inline function prewarmParticleEmitter3d(emitter:Dynamic, state:ParticleE
 	#error "flight.Particleemitter: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function stepParticleEmitter2d(emitter:Dynamic, state:ParticleEmitterState, config:ParticleEmitterConfig, deltaTime:Float, forces:Null<Dynamic>, colliders:Null<Dynamic>, callbacks:Null<ParticleEmitterCallbacks>):Void {
+	flight._js._fn.Particleemitter.stepParticleEmitter2d(emitter, state, config, deltaTime, forces, colliders, callbacks);
+}
+#else
 extern inline function stepParticleEmitter2d(emitter:Dynamic, state:ParticleEmitterState, config:ParticleEmitterConfig, deltaTime:Float, forces:Dynamic, forcesLen:Int, colliders:Dynamic, collidersLen:Int, callbacks:ParticleEmitterCallbacks):Void {
 #if hl
 	flight._hl._fn.Particleemitter.stepParticleEmitter2d(emitter, state, config, deltaTime, forces, forcesLen, colliders, collidersLen, callbacks);
@@ -495,6 +764,12 @@ extern inline function stepParticleEmitter2d(emitter:Dynamic, state:ParticleEmit
 	#error "flight.Particleemitter: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function stepParticleEmitter3d(emitter:Dynamic, state:ParticleEmitterState, config:ParticleEmitterConfig, deltaTime:Float, forces:Null<Dynamic>, colliders:Null<Dynamic>, callbacks:Null<ParticleEmitterCallbacks>):Void {
+	flight._js._fn.Particleemitter.stepParticleEmitter3d(emitter, state, config, deltaTime, forces, colliders, callbacks);
+}
+#else
 extern inline function stepParticleEmitter3d(emitter:Dynamic, state:ParticleEmitterState, config:ParticleEmitterConfig, deltaTime:Float, forces:Dynamic, forcesLen:Int, colliders:Dynamic, collidersLen:Int, callbacks:ParticleEmitterCallbacks):Void {
 #if hl
 	flight._hl._fn.Particleemitter.stepParticleEmitter3d(emitter, state, config, deltaTime, forces, forcesLen, colliders, collidersLen, callbacks);
@@ -506,6 +781,12 @@ extern inline function stepParticleEmitter3d(emitter:Dynamic, state:ParticleEmit
 	#error "flight.Particleemitter: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function isParticleEmitter2dComplete(emitter:ParticleEmitter2D, state:ParticleEmitterState, config:ParticleEmitterConfig):Bool {
+	return flight._js._fn.Particleemitter.isParticleEmitter2dComplete(emitter, state, config);
+}
+#else
 extern inline function isParticleEmitter2dComplete(emitter:ParticleEmitter2D, state:ParticleEmitterState, config:ParticleEmitterConfig):Bool {
 #if hl
 	return flight._hl._fn.Particleemitter.isParticleEmitter2dComplete(emitter, state, config);
@@ -517,6 +798,12 @@ extern inline function isParticleEmitter2dComplete(emitter:ParticleEmitter2D, st
 	#error "flight.Particleemitter: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function updateParticleEmitter2d(emitter:Dynamic, state:ParticleEmitterState, config:ParticleEmitterConfig, deltaTime:Float, callbacks:Null<ParticleEmitterCallbacks>):Void {
+	flight._js._fn.Particleemitter.updateParticleEmitter2d(emitter, state, config, deltaTime, callbacks);
+}
+#else
 extern inline function updateParticleEmitter2d(emitter:Dynamic, state:ParticleEmitterState, config:ParticleEmitterConfig, deltaTime:Float, callbacks:ParticleEmitterCallbacks):Void {
 #if hl
 	flight._hl._fn.Particleemitter.updateParticleEmitter2d(emitter, state, config, deltaTime, callbacks);
@@ -528,6 +815,12 @@ extern inline function updateParticleEmitter2d(emitter:Dynamic, state:ParticleEm
 	#error "flight.Particleemitter: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function isParticleEmitter3dComplete(emitter:ParticleEmitter3D, state:ParticleEmitterState, config:ParticleEmitterConfig):Bool {
+	return flight._js._fn.Particleemitter.isParticleEmitter3dComplete(emitter, state, config);
+}
+#else
 extern inline function isParticleEmitter3dComplete(emitter:ParticleEmitter3D, state:ParticleEmitterState, config:ParticleEmitterConfig):Bool {
 #if hl
 	return flight._hl._fn.Particleemitter.isParticleEmitter3dComplete(emitter, state, config);
@@ -539,6 +832,12 @@ extern inline function isParticleEmitter3dComplete(emitter:ParticleEmitter3D, st
 	#error "flight.Particleemitter: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function updateParticleEmitter3d(emitter:Dynamic, state:ParticleEmitterState, config:ParticleEmitterConfig, deltaTime:Float, callbacks:Null<ParticleEmitterCallbacks>):Void {
+	flight._js._fn.Particleemitter.updateParticleEmitter3d(emitter, state, config, deltaTime, callbacks);
+}
+#else
 extern inline function updateParticleEmitter3d(emitter:Dynamic, state:ParticleEmitterState, config:ParticleEmitterConfig, deltaTime:Float, callbacks:ParticleEmitterCallbacks):Void {
 #if hl
 	flight._hl._fn.Particleemitter.updateParticleEmitter3d(emitter, state, config, deltaTime, callbacks);
@@ -550,6 +849,12 @@ extern inline function updateParticleEmitter3d(emitter:Dynamic, state:ParticleEm
 	#error "flight.Particleemitter: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freeParticleEmitterData(ptr:ParticleEmitterData):Void {
+	flight._js._fn.Particleemitter.freeParticleEmitterData(ptr);
+}
+#else
 extern inline function freeParticleEmitterData(ptr:ParticleEmitterData):Void {
 #if hl
 	flight._hl._fn.Particleemitter.freeParticleEmitterData(ptr);
@@ -561,6 +866,12 @@ extern inline function freeParticleEmitterData(ptr:ParticleEmitterData):Void {
 	#error "flight.Particleemitter: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freeNode2Druntime(ptr:Node2DRuntime):Void {
+	flight._js._fn.Particleemitter.freeNode2Druntime(ptr);
+}
+#else
 extern inline function freeNode2Druntime(ptr:Node2DRuntime):Void {
 #if hl
 	flight._hl._fn.Particleemitter.freeNode2Druntime(ptr);
@@ -572,3 +883,4 @@ extern inline function freeNode2Druntime(ptr:Node2DRuntime):Void {
 	#error "flight.Particleemitter: no backend for this target."
 #end
 }
+#end

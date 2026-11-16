@@ -1,5 +1,10 @@
 package flight;
 
+#if (js && flight_esm)
+extern inline function readAbcFile(source:Dynamic):Null<AbcFile> {
+	return flight._js._fn.Abc.readAbcFile(source);
+}
+#else
 extern inline function readAbcFile(source:Dynamic, sourceLen:Int):AbcFile {
 #if hl
 	return flight._hl._fn.Abc.readAbcFile(source, sourceLen);
@@ -11,6 +16,12 @@ extern inline function readAbcFile(source:Dynamic, sourceLen:Int):AbcFile {
 	#error "flight.Abc: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function readAbcInstructions(code:Dynamic):Null<Dynamic> {
+	return flight._js._fn.Abc.readAbcInstructions(code);
+}
+#else
 extern inline function readAbcInstructions(code:Dynamic, codeLen:Int):Dynamic {
 #if hl
 	return flight._hl._fn.Abc.readAbcInstructions(code, codeLen);
@@ -22,6 +33,12 @@ extern inline function readAbcInstructions(code:Dynamic, codeLen:Int):Dynamic {
 	#error "flight.Abc: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freeAbcFile(ptr:AbcFile):Void {
+	flight._js._fn.Abc.freeAbcFile(ptr);
+}
+#else
 extern inline function freeAbcFile(ptr:AbcFile):Void {
 #if hl
 	flight._hl._fn.Abc.freeAbcFile(ptr);
@@ -33,3 +50,4 @@ extern inline function freeAbcFile(ptr:AbcFile):Void {
 	#error "flight.Abc: no backend for this target."
 #end
 }
+#end

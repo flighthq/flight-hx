@@ -1,53 +1,53 @@
 package flight._js._fn;
 
-@:jsRequire("flight")
+@:jsRequire("@flighthq/clip")
 extern class Clip {
-	@:native("flight_acquire_clip_region")
+	@:native("acquireClipRegion")
 	public static function acquireClipRegion():Dynamic;
-	@:native("flight_clip_region_contains_clip_region")
+	@:native("clipRegionContainsClipRegion")
 	public static function clipRegionContainsClipRegion(a:Dynamic, b:Dynamic):Bool;
-	@:native("flight_clip_region_contains_point")
+	@:native("clipRegionContainsPoint")
 	public static function clipRegionContainsPoint(clip:Dynamic, x:Float, y:Float):Bool;
-	@:native("flight_clip_region_intersects_clip_region")
+	@:native("clipRegionIntersectsClipRegion")
 	public static function clipRegionIntersectsClipRegion(a:Dynamic, b:Dynamic):Bool;
-	@:native("flight_clone_clip_region")
+	@:native("cloneClipRegion")
 	public static function cloneClipRegion(clip:Dynamic):Dynamic;
-	@:native("flight_copy_clip_region")
+	@:native("copyClipRegion")
 	public static function copyClipRegion(out:Dynamic, source:Dynamic):Void;
-	@:native("flight_equals_clip_region")
+	@:native("equalsClipRegion")
 	public static function equalsClipRegion(a:Dynamic, b:Dynamic):Bool;
-	@:native("flight_explain_clip_region")
+	@:native("explainClipRegion")
 	public static function explainClipRegion(clip:Dynamic):flight._js.ClipRegionExplanation;
-	@:native("flight_intersect_clip_regions")
+	@:native("intersectClipRegions")
 	public static function intersectClipRegions(out:Dynamic, a:Dynamic, b:Dynamic):Void;
-	@:native("flight_invalidate_clip_region")
+	@:native("invalidateClipRegion")
 	public static function invalidateClipRegion(clip:Dynamic):Void;
-	@:native("flight_is_clip_region_empty")
+	@:native("isClipRegionEmpty")
 	public static function isClipRegionEmpty(clip:Dynamic):Bool;
-	@:native("flight_is_clip_region_rectangular")
+	@:native("isClipRegionRectangular")
 	public static function isClipRegionRectangular(clip:Dynamic):Bool;
-	@:native("flight_normalize_clip_region")
+	@:native("normalizeClipRegion")
 	public static function normalizeClipRegion(out:Dynamic, clip:Dynamic):Void;
-	@:native("flight_release_clip_region")
+	@:native("releaseClipRegion")
 	public static function releaseClipRegion(clip:Dynamic):Void;
-	@:native("flight_transform_clip_region")
+	@:native("transformClipRegion")
 	public static function transformClipRegion(out:Dynamic, clip:Dynamic, matrix:flight._js.Matrix):Void;
-	@:native("flight_union_clip_regions")
+	@:native("unionClipRegions")
 	public static function unionClipRegions(out:Dynamic, a:Dynamic, b:Dynamic):Void;
-	@:native("flight_create_clip_region_from_circle")
-	public static function createClipRegionFromCircle(x:Float, y:Float, radius:Float, tolerance:Float):Dynamic;
-	@:native("flight_create_clip_region_from_path")
-	public static function createClipRegionFromPath(path:flight._js.Path, tolerance:Float):Dynamic;
-	@:native("flight_get_clip_region_contours_reason_string")
-	public static function getClipRegionContoursReasonString(reason:Int):String;
-	@:native("flight_get_clip_region_status_string")
-	public static function getClipRegionStatusString(status:Int):String;
-	@:native("flight_parse_clip_region_contours_reason")
-	public static function parseClipRegionContoursReason(value:String):Int;
-	@:native("flight_parse_clip_region_status")
-	public static function parseClipRegionStatus(value:String):Int;
-	@:native("flight_disable_clip_guards")
+	@:native("createClipRegionFromCircle")
+	public static function createClipRegionFromCircle(x:Float, y:Float, radius:Float, tolerance:Null<Float>):Dynamic;
+	@:native("createClipRegionFromPath")
+	public static function createClipRegionFromPath(path:flight._js.Path, tolerance:Null<Float>):Dynamic;
+	@:native("getClipRegionContoursReasonString")
+	public static function getClipRegionContoursReasonString(reason:Dynamic):String;
+	@:native("getClipRegionStatusString")
+	public static function getClipRegionStatusString(status:Dynamic):String;
+	@:native("parseClipRegionContoursReason")
+	public static function parseClipRegionContoursReason(value:String):Null<Dynamic>;
+	@:native("parseClipRegionStatus")
+	public static function parseClipRegionStatus(value:String):Null<Dynamic>;
+	@:native("disableClipGuards")
 	public static function disableClipGuards():Void;
-	@:native("flight_free_clip_region_explanation")
-	public static function freeClipRegionExplanation(ptr:flight._js.ClipRegionExplanation):Void;
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeClipRegionExplanation(ptr:flight._js.ClipRegionExplanation):Void {}
 }

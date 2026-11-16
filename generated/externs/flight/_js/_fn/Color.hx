@@ -1,75 +1,75 @@
 package flight._js._fn;
 
-@:jsRequire("flight")
+@:jsRequire("@flighthq/color")
 extern class Color {
-	@:native("flight_color_from_kelvin")
+	@:native("colorFromKelvin")
 	public static function colorFromKelvin(kelvin:Float):Int;
-	@:native("flight_allocate_hsl_color")
+	@:native("allocateHslColor")
 	public static function allocateHslColor():flight._js.HslColor;
-	@:native("flight_hsl_to_rgb")
+	@:native("hslToRgb")
 	public static function hslToRgb(out:Dynamic, h:Float, s:Float, l:Float):Void;
-	@:native("flight_rgb_to_hsl")
+	@:native("rgbToHsl")
 	public static function rgbToHsl(out:flight._js.HslColor, color:Int):Void;
-	@:native("flight_allocate_hsv_color")
+	@:native("allocateHsvColor")
 	public static function allocateHsvColor():flight._js.HsvColor;
-	@:native("flight_hsv_to_rgb")
+	@:native("hsvToRgb")
 	public static function hsvToRgb(out:Dynamic, h:Float, s:Float, v:Float):Void;
-	@:native("flight_rgb_to_hsv")
+	@:native("rgbToHsv")
 	public static function rgbToHsv(out:flight._js.HsvColor, color:Int):Void;
-	@:native("flight_lerp_color")
+	@:native("lerpColor")
 	public static function lerpColor(start:Int, end:Int, t:Float):Int;
-	@:native("flight_lerp_linear_color")
+	@:native("lerpLinearColor")
 	public static function lerpLinearColor(out:flight._js.LinearColor, start:flight._js.LinearColor, end:flight._js.LinearColor, t:Float):Void;
-	@:native("flight_get_color_contrast_ratio")
+	@:native("getColorContrastRatio")
 	public static function getColorContrastRatio(a:Int, b:Int):Float;
-	@:native("flight_get_color_luminance")
+	@:native("getColorLuminance")
 	public static function getColorLuminance(color:Int):Float;
-	@:native("flight_get_rec2020_luminance_weights")
+	@:native("getRec2020LuminanceWeights")
 	public static function getRec2020LuminanceWeights(out:Dynamic):Void;
-	@:native("flight_get_rec709_luminance_weights")
+	@:native("getRec709LuminanceWeights")
 	public static function getRec709LuminanceWeights(out:Dynamic):Void;
-	@:native("flight_clamp_linear_rgb")
+	@:native("clampLinearRgb")
 	public static function clampLinearRgb(out:Dynamic, r:Float, g:Float, b:Float):Void;
-	@:native("flight_linear_rgb_to_oklab")
+	@:native("linearRgbToOklab")
 	public static function linearRgbToOklab(out:Dynamic, r:Float, g:Float, b:Float):Void;
-	@:native("flight_oklab_to_linear_rgb")
+	@:native("oklabToLinearRgb")
 	public static function oklabToLinearRgb(out:Dynamic, l:Float, a:Float, b:Float):Void;
-	@:native("flight_allocate_linear_color")
+	@:native("allocateLinearColor")
 	public static function allocateLinearColor():flight._js.LinearColor;
-	@:native("flight_compute_rgb_hex_string")
+	@:native("computeRgbHexString")
 	public static function computeRgbHexString(color:Int):String;
-	@:native("flight_compute_rgba_css_string")
+	@:native("computeRgbaCssString")
 	public static function computeRgbaCssString(color:Int):String;
-	@:native("flight_get_color_alpha")
+	@:native("getColorAlpha")
 	public static function getColorAlpha(color:Int):Float;
-	@:native("flight_get_color_rgb")
+	@:native("getColorRgb")
 	public static function getColorRgb(color:Int):Int;
-	@:native("flight_pack_color")
+	@:native("packColor")
 	public static function packColor(r:Float, g:Float, b:Float, a:Float):Int;
-	@:native("flight_pack_linear_channels_to_color")
+	@:native("packLinearChannelsToColor")
 	public static function packLinearChannelsToColor(r:Float, g:Float, b:Float, a:Float):Int;
-	@:native("flight_pack_linear_to_color")
+	@:native("packLinearToColor")
 	public static function packLinearToColor(color:flight._js.LinearColor):Int;
-	@:native("flight_pack_opaque_color")
+	@:native("packOpaqueColor")
 	public static function packOpaqueColor(rgb:Int):Int;
-	@:native("flight_set_color_alpha")
+	@:native("setColorAlpha")
 	public static function setColorAlpha(color:Int, alpha:Float):Int;
-	@:native("flight_unpack_color_rgba")
+	@:native("unpackColorRgba")
 	public static function unpackColorRgba(out:Dynamic, color:Int):Void;
-	@:native("flight_unpack_color_to_linear")
+	@:native("unpackColorToLinear")
 	public static function unpackColorToLinear(out:flight._js.LinearColor, color:Int):Void;
-	@:native("flight_premultiply_color_alpha")
+	@:native("premultiplyColorAlpha")
 	public static function premultiplyColorAlpha(color:Int):Int;
-	@:native("flight_unpremultiply_color_alpha")
+	@:native("unpremultiplyColorAlpha")
 	public static function unpremultiplyColorAlpha(color:Int):Int;
-	@:native("flight_linear_channel_to_srgb")
+	@:native("linearChannelToSrgb")
 	public static function linearChannelToSrgb(value:Float):Float;
-	@:native("flight_srgb_channel_to_linear")
+	@:native("srgbChannelToLinear")
 	public static function srgbChannelToLinear(value:Float):Float;
-	@:native("flight_free_hsl_color")
-	public static function freeHslColor(ptr:flight._js.HslColor):Void;
-	@:native("flight_free_hsv_color")
-	public static function freeHsvColor(ptr:flight._js.HsvColor):Void;
-	@:native("flight_free_linear_color")
-	public static function freeLinearColor(ptr:flight._js.LinearColor):Void;
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeHslColor(ptr:flight._js.HslColor):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeHsvColor(ptr:flight._js.HsvColor):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeLinearColor(ptr:flight._js.LinearColor):Void {}
 }

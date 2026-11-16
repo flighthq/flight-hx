@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract EasingFunction(Dynamic) {}
+abstract EasingFunction(Dynamic) {
+}

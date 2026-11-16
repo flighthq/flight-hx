@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract Node3DRuntime(Dynamic) {}
+abstract Node3DRuntime(Dynamic) {
+}

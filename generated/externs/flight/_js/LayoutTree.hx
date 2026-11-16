@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract LayoutTree(Dynamic) {}
+abstract LayoutTree(Dynamic) {
+}

@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract ParticleEmitter3D(Dynamic) {}
+abstract ParticleEmitter3D(Dynamic) {
+}

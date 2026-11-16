@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract Node2DRuntime(Dynamic) {}
+abstract Node2DRuntime(Dynamic) {
+}

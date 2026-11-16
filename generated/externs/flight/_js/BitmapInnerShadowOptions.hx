@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract BitmapInnerShadowOptions(Dynamic) {}
+abstract BitmapInnerShadowOptions(Dynamic) {
+}

@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract HasBlendMode(Dynamic) {}
+abstract HasBlendMode(Dynamic) {
+}

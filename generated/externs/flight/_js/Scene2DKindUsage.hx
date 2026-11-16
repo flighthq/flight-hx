@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract Scene2DKindUsage(Dynamic) {}
+abstract Scene2DKindUsage(Dynamic) {
+}

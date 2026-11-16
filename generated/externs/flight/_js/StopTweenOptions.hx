@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract StopTweenOptions(Dynamic) {}
+abstract StopTweenOptions(Dynamic) {
+}

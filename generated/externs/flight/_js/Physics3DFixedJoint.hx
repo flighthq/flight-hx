@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract Physics3DFixedJoint(Dynamic) {}
+abstract Physics3DFixedJoint(Dynamic) {
+}

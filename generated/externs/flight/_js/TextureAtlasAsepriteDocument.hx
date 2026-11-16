@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract TextureAtlasAsepriteDocument(Dynamic) {}
+abstract TextureAtlasAsepriteDocument(Dynamic) {
+}

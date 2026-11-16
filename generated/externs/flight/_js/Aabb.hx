@@ -43,8 +43,8 @@ abstract Aabb(Dynamic) {
 	inline public function set(minX:Float, minY:Float, minZ:Float, maxX:Float, maxY:Float, maxZ:Float):Void {
 		flight._js._fn.Geometry.setAabb(cast this, minX, minY, minZ, maxX, maxY, maxZ);
 	}
-	inline public function setFromPoints(points:Dynamic, pointsLen:Int):Void {
-		flight._js._fn.Geometry.setAabbFromPoints(cast this, points, pointsLen);
+	inline public function setFromPoints(points:Dynamic):Void {
+		flight._js._fn.Geometry.setAabbFromPoints(cast this, points);
 	}
 	inline public function transformByMatrix4(aabb:flight._js.Aabb, m:flight._js.Matrix4):Void {
 		flight._js._fn.Geometry.transformAabbByMatrix4(cast this, aabb, m);

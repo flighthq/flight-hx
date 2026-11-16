@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract RenderTargetDescriptor(Dynamic) {}
+abstract RenderTargetDescriptor(Dynamic) {
+}

@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract FrameScript(Dynamic) {}
+abstract FrameScript(Dynamic) {
+}

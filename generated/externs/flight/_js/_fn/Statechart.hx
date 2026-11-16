@@ -1,37 +1,37 @@
 package flight._js._fn;
 
-@:jsRequire("flight")
+@:jsRequire("@flighthq/statechart")
 extern class Statechart {
-	@:native("flight_are_statechart_guards_enabled")
+	@:native("areStatechartGuardsEnabled")
 	public static function areStatechartGuardsEnabled(instance:Dynamic):Bool;
-	@:native("flight_disable_statechart_guards")
+	@:native("disableStatechartGuards")
 	public static function disableStatechartGuards(instance:Dynamic):Void;
-	@:native("flight_create_statechart_instance")
+	@:native("createStatechartInstance")
 	public static function createStatechartInstance(chart:Dynamic):Dynamic;
-	@:native("flight_advance_statechart_instance")
+	@:native("advanceStatechartInstance")
 	public static function advanceStatechartInstance(instance:Dynamic, deltaTime:Float):Int;
-	@:native("flight_explain_statechart_transition")
+	@:native("explainStatechartTransition")
 	public static function explainStatechartTransition(instance:Dynamic, regionIndex:Int):flight._js.StatechartTransitionExplanation;
-	@:native("flight_fire_statechart_trigger")
+	@:native("fireStatechartTrigger")
 	public static function fireStatechartTrigger(instance:Dynamic, inputIndex:Int):Void;
-	@:native("flight_get_statechart_input_index")
+	@:native("getStatechartInputIndex")
 	public static function getStatechartInputIndex(chart:flight._js.StatechartRaw, name:String):Int;
-	@:native("flight_get_statechart_region_blend")
+	@:native("getStatechartRegionBlend")
 	public static function getStatechartRegionBlend(instance:Dynamic, regionIndex:Int):Float;
-	@:native("flight_get_statechart_region_state")
+	@:native("getStatechartRegionState")
 	public static function getStatechartRegionState(instance:Dynamic, regionIndex:Int):Int;
-	@:native("flight_set_statechart_boolean_input")
+	@:native("setStatechartBooleanInput")
 	public static function setStatechartBooleanInput(instance:Dynamic, inputIndex:Int, value:Bool):Void;
-	@:native("flight_set_statechart_number_input")
+	@:native("setStatechartNumberInput")
 	public static function setStatechartNumberInput(instance:Dynamic, inputIndex:Int, value:Float):Void;
-	@:native("flight_set_statechart_region_duration")
+	@:native("setStatechartRegionDuration")
 	public static function setStatechartRegionDuration(instance:Dynamic, regionIndex:Int, duration:Float):Void;
-	@:native("flight_enable_statechart_signals")
+	@:native("enableStatechartSignals")
 	public static function enableStatechartSignals(instance:Dynamic):flight._js.StatechartSignals;
-	@:native("flight_get_statechart_signals")
-	public static function getStatechartSignals(instance:Dynamic):Dynamic;
-	@:native("flight_free_statechart_transition_explanation")
-	public static function freeStatechartTransitionExplanation(ptr:flight._js.StatechartTransitionExplanation):Void;
-	@:native("flight_free_statechart_signals")
-	public static function freeStatechartSignals(ptr:flight._js.StatechartSignals):Void;
+	@:native("getStatechartSignals")
+	public static function getStatechartSignals(instance:Dynamic):Null<flight._js.StatechartSignals>;
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeStatechartTransitionExplanation(ptr:flight._js.StatechartTransitionExplanation):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeStatechartSignals(ptr:flight._js.StatechartSignals):Void {}
 }

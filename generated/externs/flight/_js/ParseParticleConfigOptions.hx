@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract ParseParticleConfigOptions(Dynamic) {}
+abstract ParseParticleConfigOptions(Dynamic) {
+}

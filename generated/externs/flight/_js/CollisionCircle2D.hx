@@ -1,29 +1,13 @@
 package flight._js;
 
-@:jsRequire("flight")
-private extern class CollisionCircle2D_Ffi {
-	@:native("flight_get_collision_circle2_d_x") static function get_x(ptr:Dynamic):Float;
-	@:native("flight_set_collision_circle2_d_x") static function set_x(ptr:Dynamic, value:Float):Float;
-	@:native("flight_get_collision_circle2_d_y") static function get_y(ptr:Dynamic):Float;
-	@:native("flight_set_collision_circle2_d_y") static function set_y(ptr:Dynamic, value:Float):Float;
-	@:native("flight_get_collision_circle2_d_radius") static function get_radius(ptr:Dynamic):Float;
-	@:native("flight_set_collision_circle2_d_radius") static function set_radius(ptr:Dynamic, value:Float):Float;
-}
-
 abstract CollisionCircle2D(Dynamic) {
 	public var x(get, set):Float;
-
-	inline function get_x():Float return CollisionCircle2D_Ffi.get_x(this);
-
-	inline function set_x(value:Float):Float return CollisionCircle2D_Ffi.set_x(this, value);
+	inline function get_x():Float return untyped this.x;
+	inline function set_x(value:Float):Float return untyped this.x = value;
 	public var y(get, set):Float;
-
-	inline function get_y():Float return CollisionCircle2D_Ffi.get_y(this);
-
-	inline function set_y(value:Float):Float return CollisionCircle2D_Ffi.set_y(this, value);
+	inline function get_y():Float return untyped this.y;
+	inline function set_y(value:Float):Float return untyped this.y = value;
 	public var radius(get, set):Float;
-
-	inline function get_radius():Float return CollisionCircle2D_Ffi.get_radius(this);
-
-	inline function set_radius(value:Float):Float return CollisionCircle2D_Ffi.set_radius(this, value);
+	inline function get_radius():Float return untyped this.radius;
+	inline function set_radius(value:Float):Float return untyped this.radius = value;
 }

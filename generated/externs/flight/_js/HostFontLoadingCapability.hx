@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract HostFontLoadingCapability(Dynamic) {}
+abstract HostFontLoadingCapability(Dynamic) {
+}

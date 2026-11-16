@@ -1,39 +1,18 @@
 package flight._js;
 
-@:jsRequire("flight")
-private extern class Rectangle_Ffi {
-	@:native("flight_get_rectangle_x") static function get_x(ptr:Dynamic):Float;
-	@:native("flight_set_rectangle_x") static function set_x(ptr:Dynamic, value:Float):Float;
-	@:native("flight_get_rectangle_y") static function get_y(ptr:Dynamic):Float;
-	@:native("flight_set_rectangle_y") static function set_y(ptr:Dynamic, value:Float):Float;
-	@:native("flight_get_rectangle_width") static function get_width(ptr:Dynamic):Float;
-	@:native("flight_set_rectangle_width") static function set_width(ptr:Dynamic, value:Float):Float;
-	@:native("flight_get_rectangle_height") static function get_height(ptr:Dynamic):Float;
-	@:native("flight_set_rectangle_height") static function set_height(ptr:Dynamic, value:Float):Float;
-}
-
 abstract Rectangle(Dynamic) {
 	public var x(get, set):Float;
-
-	inline function get_x():Float return Rectangle_Ffi.get_x(this);
-
-	inline function set_x(value:Float):Float return Rectangle_Ffi.set_x(this, value);
+	inline function get_x():Float return untyped this.x;
+	inline function set_x(value:Float):Float return untyped this.x = value;
 	public var y(get, set):Float;
-
-	inline function get_y():Float return Rectangle_Ffi.get_y(this);
-
-	inline function set_y(value:Float):Float return Rectangle_Ffi.set_y(this, value);
+	inline function get_y():Float return untyped this.y;
+	inline function set_y(value:Float):Float return untyped this.y = value;
 	public var width(get, set):Float;
-
-	inline function get_width():Float return Rectangle_Ffi.get_width(this);
-
-	inline function set_width(value:Float):Float return Rectangle_Ffi.set_width(this, value);
+	inline function get_width():Float return untyped this.width;
+	inline function set_width(value:Float):Float return untyped this.width = value;
 	public var height(get, set):Float;
-
-	inline function get_height():Float return Rectangle_Ffi.get_height(this);
-
-	inline function set_height(value:Float):Float return Rectangle_Ffi.set_height(this, value);
-
+	inline function get_height():Float return untyped this.height;
+	inline function set_height(value:Float):Float return untyped this.height = value;
 	inline public function matrixTransform(matrix:flight._js.Matrix, source:flight._js.Rectangle):Void {
 		flight._js._fn.Geometry.matrixTransformRectangle(cast this, matrix, source);
 	}
@@ -58,7 +37,7 @@ abstract Rectangle(Dynamic) {
 	inline public function encloses(other:flight._js.Rectangle):Bool {
 		return flight._js._fn.Geometry.enclosesRectangle(cast this, other);
 	}
-	inline public function equals(b:flight._js.Rectangle):Bool {
+	inline public function equals(b:Null<flight._js.Rectangle>):Bool {
 		return flight._js._fn.Geometry.equalsRectangle(cast this, b);
 	}
 	inline public function expandToPoint(sourceRect:flight._js.Rectangle, sourceVec2:flight._js.Vector2):Void {
@@ -190,7 +169,7 @@ abstract Rectangle(Dynamic) {
 	inline public function computeShapeLocalBounds(source:Dynamic):Void {
 		flight._js._fn.Shape.computeShapeLocalBoundsRectangle(cast this, source);
 	}
-	inline public function computeShapeBounds(source:Dynamic, mode:Int):Bool {
+	inline public function computeShapeBounds(source:Dynamic, mode:Null<Dynamic>):Bool {
 		return flight._js._fn.Shape.computeShapeBoundsRectangle(cast this, source, mode);
 	}
 	inline public function computeNativeTextLocalBounds(source:Dynamic):Void {
@@ -202,7 +181,7 @@ abstract Rectangle(Dynamic) {
 	inline public function computeTextLabelLocalBounds(source:Dynamic):Void {
 		flight._js._fn.Text.computeTextLabelLocalBoundsRectangle(cast this, source);
 	}
-	inline public function addTextureAtlasRegion(target:flight._js.TextureAtlas, pivot:flight._js.Vector2, name:String):Void {
+	inline public function addTextureAtlasRegion(target:flight._js.TextureAtlas, pivot:Null<flight._js.Vector2>, name:Null<String>):Void {
 		flight._js._fn.Textureatlas.addTextureAtlasRegionRectangle(target, cast this, pivot, name);
 	}
 	inline public function computeTilemapLocalBounds(source:Dynamic):Void {

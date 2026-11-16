@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract HtmlView(Dynamic) {}
+abstract HtmlView(Dynamic) {
+}

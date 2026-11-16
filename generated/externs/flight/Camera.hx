@@ -1,5 +1,10 @@
 package flight;
 
+#if (js && flight_esm)
+extern inline function getCamera3dForward(out:Vector3, camera:Camera3D):Void {
+	flight._js._fn.Camera.getCamera3dForward(out, camera);
+}
+#else
 extern inline function getCamera3dForward(out:Vector3, camera:Camera3D):Void {
 #if hl
 	flight._hl._fn.Camera.getCamera3dForward(out, camera);
@@ -11,6 +16,12 @@ extern inline function getCamera3dForward(out:Vector3, camera:Camera3D):Void {
 	#error "flight.Camera: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getCamera3dPosition(out:Vector3, camera:Camera3D):Void {
+	flight._js._fn.Camera.getCamera3dPosition(out, camera);
+}
+#else
 extern inline function getCamera3dPosition(out:Vector3, camera:Camera3D):Void {
 #if hl
 	flight._hl._fn.Camera.getCamera3dPosition(out, camera);
@@ -22,6 +33,12 @@ extern inline function getCamera3dPosition(out:Vector3, camera:Camera3D):Void {
 	#error "flight.Camera: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getCamera3dRight(out:Vector3, camera:Camera3D):Void {
+	flight._js._fn.Camera.getCamera3dRight(out, camera);
+}
+#else
 extern inline function getCamera3dRight(out:Vector3, camera:Camera3D):Void {
 #if hl
 	flight._hl._fn.Camera.getCamera3dRight(out, camera);
@@ -33,6 +50,12 @@ extern inline function getCamera3dRight(out:Vector3, camera:Camera3D):Void {
 	#error "flight.Camera: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getCamera3dUp(out:Vector3, camera:Camera3D):Void {
+	flight._js._fn.Camera.getCamera3dUp(out, camera);
+}
+#else
 extern inline function getCamera3dUp(out:Vector3, camera:Camera3D):Void {
 #if hl
 	flight._hl._fn.Camera.getCamera3dUp(out, camera);
@@ -44,6 +67,12 @@ extern inline function getCamera3dUp(out:Vector3, camera:Camera3D):Void {
 	#error "flight.Camera: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function createCamera3d():Camera3D {
+	return flight._js._fn.Camera.createCamera3d();
+}
+#else
 extern inline function createCamera3d():Camera3D {
 #if hl
 	return flight._hl._fn.Camera.createCamera3d();
@@ -55,6 +84,12 @@ extern inline function createCamera3d():Camera3D {
 	#error "flight.Camera: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getCamera3dInverseViewProjectionMatrix4(out:Matrix4, camera:Camera3D, aspect:Float):Bool {
+	return flight._js._fn.Camera.getCamera3dInverseViewProjectionMatrix4(out, camera, aspect);
+}
+#else
 extern inline function getCamera3dInverseViewProjectionMatrix4(out:Matrix4, camera:Camera3D, aspect:Float):Bool {
 #if hl
 	return flight._hl._fn.Camera.getCamera3dInverseViewProjectionMatrix4(out, camera, aspect);
@@ -66,6 +101,12 @@ extern inline function getCamera3dInverseViewProjectionMatrix4(out:Matrix4, came
 	#error "flight.Camera: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getCamera3dViewProjectionMatrix4(out:Matrix4, camera:Camera3D, aspect:Float):Void {
+	flight._js._fn.Camera.getCamera3dViewProjectionMatrix4(out, camera, aspect);
+}
+#else
 extern inline function getCamera3dViewProjectionMatrix4(out:Matrix4, camera:Camera3D, aspect:Float):Void {
 #if hl
 	flight._hl._fn.Camera.getCamera3dViewProjectionMatrix4(out, camera, aspect);
@@ -77,6 +118,12 @@ extern inline function getCamera3dViewProjectionMatrix4(out:Matrix4, camera:Came
 	#error "flight.Camera: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setCamera3dAspect(camera:Camera3D, aspect:Float):Void {
+	flight._js._fn.Camera.setCamera3dAspect(camera, aspect);
+}
+#else
 extern inline function setCamera3dAspect(camera:Camera3D, aspect:Float):Void {
 #if hl
 	flight._hl._fn.Camera.setCamera3dAspect(camera, aspect);
@@ -88,6 +135,12 @@ extern inline function setCamera3dAspect(camera:Camera3D, aspect:Float):Void {
 	#error "flight.Camera: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setCamera3dJitter(camera:Camera3D, x:Float, y:Float):Void {
+	flight._js._fn.Camera.setCamera3dJitter(camera, x, y);
+}
+#else
 extern inline function setCamera3dJitter(camera:Camera3D, x:Float, y:Float):Void {
 #if hl
 	flight._hl._fn.Camera.setCamera3dJitter(camera, x, y);
@@ -99,6 +152,12 @@ extern inline function setCamera3dJitter(camera:Camera3D, x:Float, y:Float):Void
 	#error "flight.Camera: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setCamera3dViewMatrix4FromLookAt(camera:Camera3D, eye:Vector3, target:Vector3, up:Vector3):Void {
+	flight._js._fn.Camera.setCamera3dViewMatrix4FromLookAt(camera, eye, target, up);
+}
+#else
 extern inline function setCamera3dViewMatrix4FromLookAt(camera:Camera3D, eye:Vector3, target:Vector3, up:Vector3):Void {
 #if hl
 	flight._hl._fn.Camera.setCamera3dViewMatrix4FromLookAt(camera, eye, target, up);
@@ -110,6 +169,12 @@ extern inline function setCamera3dViewMatrix4FromLookAt(camera:Camera3D, eye:Vec
 	#error "flight.Camera: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setCamera3dViewMatrix4FromMatrix4(guardState:Dynamic, camera:Camera3D, view:Matrix4):Void {
+	flight._js._fn.Camera.setCamera3dViewMatrix4FromMatrix4(guardState, camera, view);
+}
+#else
 extern inline function setCamera3dViewMatrix4FromMatrix4(guardState:Dynamic, camera:Camera3D, view:Matrix4):Void {
 #if hl
 	flight._hl._fn.Camera.setCamera3dViewMatrix4FromMatrix4(guardState, camera, view);
@@ -121,6 +186,12 @@ extern inline function setCamera3dViewMatrix4FromMatrix4(guardState:Dynamic, cam
 	#error "flight.Camera: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function updateCamera3dInverseViewProjection(camera:Camera3D, aspect:Float):Bool {
+	return flight._js._fn.Camera.updateCamera3dInverseViewProjection(camera, aspect);
+}
+#else
 extern inline function updateCamera3dInverseViewProjection(camera:Camera3D, aspect:Float):Bool {
 #if hl
 	return flight._hl._fn.Camera.updateCamera3dInverseViewProjection(camera, aspect);
@@ -132,6 +203,12 @@ extern inline function updateCamera3dInverseViewProjection(camera:Camera3D, aspe
 	#error "flight.Camera: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function createCamera2d():Camera2D {
+	return flight._js._fn.Camera.createCamera2d();
+}
+#else
 extern inline function createCamera2d():Camera2D {
 #if hl
 	return flight._hl._fn.Camera.createCamera2d();
@@ -143,6 +220,12 @@ extern inline function createCamera2d():Camera2D {
 	#error "flight.Camera: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setCamera2dLookAt(camera:Camera2D, x:Float, y:Float):Void {
+	flight._js._fn.Camera.setCamera2dLookAt(camera, x, y);
+}
+#else
 extern inline function setCamera2dLookAt(camera:Camera2D, x:Float, y:Float):Void {
 #if hl
 	flight._hl._fn.Camera.setCamera2dLookAt(camera, x, y);
@@ -154,6 +237,12 @@ extern inline function setCamera2dLookAt(camera:Camera2D, x:Float, y:Float):Void
 	#error "flight.Camera: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getCubeCaptureFaceCamera3d(out:Camera3D, position:Vector3, face:Int):Void {
+	flight._js._fn.Camera.getCubeCaptureFaceCamera3d(out, position, face);
+}
+#else
 extern inline function getCubeCaptureFaceCamera3d(out:Camera3D, position:Vector3, face:Int):Void {
 #if hl
 	flight._hl._fn.Camera.getCubeCaptureFaceCamera3d(out, position, face);
@@ -165,6 +254,12 @@ extern inline function getCubeCaptureFaceCamera3d(out:Camera3D, position:Vector3
 	#error "flight.Camera: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getCamera3dFrustum(out:Frustum, camera:Camera3D, aspect:Float):Void {
+	flight._js._fn.Camera.getCamera3dFrustum(out, camera, aspect);
+}
+#else
 extern inline function getCamera3dFrustum(out:Frustum, camera:Camera3D, aspect:Float):Void {
 #if hl
 	flight._hl._fn.Camera.getCamera3dFrustum(out, camera, aspect);
@@ -176,6 +271,12 @@ extern inline function getCamera3dFrustum(out:Frustum, camera:Camera3D, aspect:F
 	#error "flight.Camera: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function isBoxInCamera3dFrustum(camera:Camera3D, aabb:Aabb, aspect:Float):Bool {
+	return flight._js._fn.Camera.isBoxInCamera3dFrustum(camera, aabb, aspect);
+}
+#else
 extern inline function isBoxInCamera3dFrustum(camera:Camera3D, aabb:Aabb, aspect:Float):Bool {
 #if hl
 	return flight._hl._fn.Camera.isBoxInCamera3dFrustum(camera, aabb, aspect);
@@ -187,6 +288,12 @@ extern inline function isBoxInCamera3dFrustum(camera:Camera3D, aabb:Aabb, aspect
 	#error "flight.Camera: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function isPointInCamera3dFrustum(camera:Camera3D, point:Vector3, aspect:Float):Bool {
+	return flight._js._fn.Camera.isPointInCamera3dFrustum(camera, point, aspect);
+}
+#else
 extern inline function isPointInCamera3dFrustum(camera:Camera3D, point:Vector3, aspect:Float):Bool {
 #if hl
 	return flight._hl._fn.Camera.isPointInCamera3dFrustum(camera, point, aspect);
@@ -198,6 +305,12 @@ extern inline function isPointInCamera3dFrustum(camera:Camera3D, point:Vector3, 
 	#error "flight.Camera: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function isSphereInCamera3dFrustum(camera:Camera3D, sphere:BoundingSphere, aspect:Float):Bool {
+	return flight._js._fn.Camera.isSphereInCamera3dFrustum(camera, sphere, aspect);
+}
+#else
 extern inline function isSphereInCamera3dFrustum(camera:Camera3D, sphere:BoundingSphere, aspect:Float):Bool {
 #if hl
 	return flight._hl._fn.Camera.isSphereInCamera3dFrustum(camera, sphere, aspect);
@@ -209,6 +322,12 @@ extern inline function isSphereInCamera3dFrustum(camera:Camera3D, sphere:Boundin
 	#error "flight.Camera: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getCamera3dLinearDepth(camera:Camera3D, ndcZ:Float):Float {
+	return flight._js._fn.Camera.getCamera3dLinearDepth(camera, ndcZ);
+}
+#else
 extern inline function getCamera3dLinearDepth(camera:Camera3D, ndcZ:Float):Float {
 #if hl
 	return flight._hl._fn.Camera.getCamera3dLinearDepth(camera, ndcZ);
@@ -220,6 +339,12 @@ extern inline function getCamera3dLinearDepth(camera:Camera3D, ndcZ:Float):Float
 	#error "flight.Camera: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getCamera3dViewSpaceZ(camera:Camera3D, ndcZ:Float):Float {
+	return flight._js._fn.Camera.getCamera3dViewSpaceZ(camera, ndcZ);
+}
+#else
 extern inline function getCamera3dViewSpaceZ(camera:Camera3D, ndcZ:Float):Float {
 #if hl
 	return flight._hl._fn.Camera.getCamera3dViewSpaceZ(camera, ndcZ);
@@ -231,6 +356,12 @@ extern inline function getCamera3dViewSpaceZ(camera:Camera3D, ndcZ:Float):Float 
 	#error "flight.Camera: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function areCameraGuardsEnabled(guardState:Dynamic):Bool {
+	return flight._js._fn.Camera.areCameraGuardsEnabled(guardState);
+}
+#else
 extern inline function areCameraGuardsEnabled(guardState:Dynamic):Bool {
 #if hl
 	return flight._hl._fn.Camera.areCameraGuardsEnabled(guardState);
@@ -242,6 +373,12 @@ extern inline function areCameraGuardsEnabled(guardState:Dynamic):Bool {
 	#error "flight.Camera: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function disableCameraGuards(guardState:Dynamic):Void {
+	flight._js._fn.Camera.disableCameraGuards(guardState);
+}
+#else
 extern inline function disableCameraGuards(guardState:Dynamic):Void {
 #if hl
 	flight._hl._fn.Camera.disableCameraGuards(guardState);
@@ -253,6 +390,12 @@ extern inline function disableCameraGuards(guardState:Dynamic):Void {
 	#error "flight.Camera: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function enableCameraGuards(guardState:Dynamic, logState:Dynamic, clock:Dynamic):Void {
+	flight._js._fn.Camera.enableCameraGuards(guardState, logState, clock);
+}
+#else
 extern inline function enableCameraGuards(guardState:Dynamic, logState:Dynamic, clockFn:Dynamic, clockCtx:Dynamic):Void {
 #if hl
 	flight._hl._fn.Camera.enableCameraGuards(guardState, logState, clockFn, clockCtx);
@@ -264,6 +407,12 @@ extern inline function enableCameraGuards(guardState:Dynamic, logState:Dynamic, 
 	#error "flight.Camera: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function explainCamera3dView(camera:Camera3D):Camera3DViewExplanation {
+	return flight._js._fn.Camera.explainCamera3dView(camera);
+}
+#else
 extern inline function explainCamera3dView(camera:Camera3D):Camera3DViewExplanation {
 #if hl
 	return flight._hl._fn.Camera.explainCamera3dView(camera);
@@ -275,6 +424,12 @@ extern inline function explainCamera3dView(camera:Camera3D):Camera3DViewExplanat
 	#error "flight.Camera: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getCamera3dFrustumCorners(out:Dynamic, camera:Camera3D, aspect:Float):Bool {
+	return flight._js._fn.Camera.getCamera3dFrustumCorners(out, camera, aspect);
+}
+#else
 extern inline function getCamera3dFrustumCorners(out:Dynamic, camera:Camera3D, aspect:Float):Bool {
 #if hl
 	return flight._hl._fn.Camera.getCamera3dFrustumCorners(out, camera, aspect);
@@ -286,6 +441,12 @@ extern inline function getCamera3dFrustumCorners(out:Dynamic, camera:Camera3D, a
 	#error "flight.Camera: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getCamera3dRayThroughBoundingSphere(out:Ray3D, camera:Camera3D, sphere:BoundingSphere, aspect:Float):Bool {
+	return flight._js._fn.Camera.getCamera3dRayThroughBoundingSphere(out, camera, sphere, aspect);
+}
+#else
 extern inline function getCamera3dRayThroughBoundingSphere(out:Ray3D, camera:Camera3D, sphere:BoundingSphere, aspect:Float):Bool {
 #if hl
 	return flight._hl._fn.Camera.getCamera3dRayThroughBoundingSphere(out, camera, sphere, aspect);
@@ -297,6 +458,12 @@ extern inline function getCamera3dRayThroughBoundingSphere(out:Ray3D, camera:Cam
 	#error "flight.Camera: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function intersectCamera3dRayWithPlane(out:Vector3, ray:Ray3D, plane:Plane):Bool {
+	return flight._js._fn.Camera.intersectCamera3dRayWithPlane(out, ray, plane);
+}
+#else
 extern inline function intersectCamera3dRayWithPlane(out:Vector3, ray:Ray3D, plane:Plane):Bool {
 #if hl
 	return flight._hl._fn.Camera.intersectCamera3dRayWithPlane(out, ray, plane);
@@ -308,6 +475,12 @@ extern inline function intersectCamera3dRayWithPlane(out:Vector3, ray:Ray3D, pla
 	#error "flight.Camera: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getCamera2dParallaxPoint(camera:Camera2D, viewportWidth:Float, viewportHeight:Float, factor:Float, out:Vector2):Void {
+	flight._js._fn.Camera.getCamera2dParallaxPoint(camera, viewportWidth, viewportHeight, factor, out);
+}
+#else
 extern inline function getCamera2dParallaxPoint(camera:Camera2D, viewportWidth:Float, viewportHeight:Float, factor:Float, out:Vector2):Void {
 #if hl
 	flight._hl._fn.Camera.getCamera2dParallaxPoint(camera, viewportWidth, viewportHeight, factor, out);
@@ -319,6 +492,12 @@ extern inline function getCamera2dParallaxPoint(camera:Camera2D, viewportWidth:F
 	#error "flight.Camera: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getCamera3dScreenToWorldRay(out:Ray3D, camera:Camera3D, ndcX:Float, ndcY:Float, aspect:Float):Bool {
+	return flight._js._fn.Camera.getCamera3dScreenToWorldRay(out, camera, ndcX, ndcY, aspect);
+}
+#else
 extern inline function getCamera3dScreenToWorldRay(out:Ray3D, camera:Camera3D, ndcX:Float, ndcY:Float, aspect:Float):Bool {
 #if hl
 	return flight._hl._fn.Camera.getCamera3dScreenToWorldRay(out, camera, ndcX, ndcY, aspect);
@@ -330,6 +509,12 @@ extern inline function getCamera3dScreenToWorldRay(out:Ray3D, camera:Camera3D, n
 	#error "flight.Camera: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getCamera3dWorldToScreen(out:Vector3, camera:Camera3D, worldPoint:Vector3, aspect:Float):Bool {
+	return flight._js._fn.Camera.getCamera3dWorldToScreen(out, camera, worldPoint, aspect);
+}
+#else
 extern inline function getCamera3dWorldToScreen(out:Vector3, camera:Camera3D, worldPoint:Vector3, aspect:Float):Bool {
 #if hl
 	return flight._hl._fn.Camera.getCamera3dWorldToScreen(out, camera, worldPoint, aspect);
@@ -341,6 +526,12 @@ extern inline function getCamera3dWorldToScreen(out:Vector3, camera:Camera3D, wo
 	#error "flight.Camera: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function createOrthographicProjection():Dynamic {
+	return flight._js._fn.Camera.createOrthographicProjection();
+}
+#else
 extern inline function createOrthographicProjection():Dynamic {
 #if hl
 	return flight._hl._fn.Camera.createOrthographicProjection();
@@ -352,6 +543,12 @@ extern inline function createOrthographicProjection():Dynamic {
 	#error "flight.Camera: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function createPerspectiveProjection():Dynamic {
+	return flight._js._fn.Camera.createPerspectiveProjection();
+}
+#else
 extern inline function createPerspectiveProjection():Dynamic {
 #if hl
 	return flight._hl._fn.Camera.createPerspectiveProjection();
@@ -363,6 +560,12 @@ extern inline function createPerspectiveProjection():Dynamic {
 	#error "flight.Camera: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function createRawProjection():Dynamic {
+	return flight._js._fn.Camera.createRawProjection();
+}
+#else
 extern inline function createRawProjection():Dynamic {
 #if hl
 	return flight._hl._fn.Camera.createRawProjection();
@@ -374,6 +577,12 @@ extern inline function createRawProjection():Dynamic {
 	#error "flight.Camera: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getOrthographicProjectionTexelSize(projection:OrthographicProjection, pixelWidth:Float, pixelHeight:Float):Float {
+	return flight._js._fn.Camera.getOrthographicProjectionTexelSize(projection, pixelWidth, pixelHeight);
+}
+#else
 extern inline function getOrthographicProjectionTexelSize(projection:OrthographicProjection, pixelWidth:Float, pixelHeight:Float):Float {
 #if hl
 	return flight._hl._fn.Camera.getOrthographicProjectionTexelSize(projection, pixelWidth, pixelHeight);
@@ -385,6 +594,12 @@ extern inline function getOrthographicProjectionTexelSize(projection:Orthographi
 	#error "flight.Camera: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function isOrthographicProjection(projection:Projection):Bool {
+	return flight._js._fn.Camera.isOrthographicProjection(projection);
+}
+#else
 extern inline function isOrthographicProjection(projection:Projection):Bool {
 #if hl
 	return flight._hl._fn.Camera.isOrthographicProjection(projection);
@@ -396,6 +611,12 @@ extern inline function isOrthographicProjection(projection:Projection):Bool {
 	#error "flight.Camera: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function isPerspectiveProjection(projection:Projection):Bool {
+	return flight._js._fn.Camera.isPerspectiveProjection(projection);
+}
+#else
 extern inline function isPerspectiveProjection(projection:Projection):Bool {
 #if hl
 	return flight._hl._fn.Camera.isPerspectiveProjection(projection);
@@ -407,6 +628,12 @@ extern inline function isPerspectiveProjection(projection:Projection):Bool {
 	#error "flight.Camera: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function isRawProjection(projection:Projection):Bool {
+	return flight._js._fn.Camera.isRawProjection(projection);
+}
+#else
 extern inline function isRawProjection(projection:Projection):Bool {
 #if hl
 	return flight._hl._fn.Camera.isRawProjection(projection);
@@ -418,6 +645,12 @@ extern inline function isRawProjection(projection:Projection):Bool {
 	#error "flight.Camera: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function setProjectionMatrix4(out:Matrix4, projection:Projection, aspect:Float, near:Float, far:Float):Void {
+	flight._js._fn.Camera.setProjectionMatrix4(out, projection, aspect, near, far);
+}
+#else
 extern inline function setProjectionMatrix4(out:Matrix4, projection:Projection, aspect:Float, near:Float, far:Float):Void {
 #if hl
 	flight._hl._fn.Camera.setProjectionMatrix4(out, projection, aspect, near, far);
@@ -429,6 +662,12 @@ extern inline function setProjectionMatrix4(out:Matrix4, projection:Projection, 
 	#error "flight.Camera: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function projectCamera2dPoint(camera:Camera2D, viewportWidth:Float, viewportHeight:Float, worldX:Float, worldY:Float, out:Vector2):Void {
+	flight._js._fn.Camera.projectCamera2dPoint(camera, viewportWidth, viewportHeight, worldX, worldY, out);
+}
+#else
 extern inline function projectCamera2dPoint(camera:Camera2D, viewportWidth:Float, viewportHeight:Float, worldX:Float, worldY:Float, out:Vector2):Void {
 #if hl
 	flight._hl._fn.Camera.projectCamera2dPoint(camera, viewportWidth, viewportHeight, worldX, worldY, out);
@@ -440,6 +679,12 @@ extern inline function projectCamera2dPoint(camera:Camera2D, viewportWidth:Float
 	#error "flight.Camera: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function unprojectCamera2dPoint(camera:Camera2D, viewportWidth:Float, viewportHeight:Float, screenX:Float, screenY:Float, out:Vector2):Void {
+	flight._js._fn.Camera.unprojectCamera2dPoint(camera, viewportWidth, viewportHeight, screenX, screenY, out);
+}
+#else
 extern inline function unprojectCamera2dPoint(camera:Camera2D, viewportWidth:Float, viewportHeight:Float, screenX:Float, screenY:Float, out:Vector2):Void {
 #if hl
 	flight._hl._fn.Camera.unprojectCamera2dPoint(camera, viewportWidth, viewportHeight, screenX, screenY, out);
@@ -451,6 +696,12 @@ extern inline function unprojectCamera2dPoint(camera:Camera2D, viewportWidth:Flo
 	#error "flight.Camera: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function applyObliqueNearClipPlane(projection:Matrix4, viewSpacePlane:Plane):Void {
+	flight._js._fn.Camera.applyObliqueNearClipPlane(projection, viewSpacePlane);
+}
+#else
 extern inline function applyObliqueNearClipPlane(projection:Matrix4, viewSpacePlane:Plane):Void {
 #if hl
 	flight._hl._fn.Camera.applyObliqueNearClipPlane(projection, viewSpacePlane);
@@ -462,6 +713,12 @@ extern inline function applyObliqueNearClipPlane(projection:Matrix4, viewSpacePl
 	#error "flight.Camera: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function reflectCamera3dByPlane(out:Camera3D, camera:Camera3D, plane:Plane):Void {
+	flight._js._fn.Camera.reflectCamera3dByPlane(out, camera, plane);
+}
+#else
 extern inline function reflectCamera3dByPlane(out:Camera3D, camera:Camera3D, plane:Plane):Void {
 #if hl
 	flight._hl._fn.Camera.reflectCamera3dByPlane(out, camera, plane);
@@ -473,6 +730,12 @@ extern inline function reflectCamera3dByPlane(out:Camera3D, camera:Camera3D, pla
 	#error "flight.Camera: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function configureDirectionalShadowCamera3d(camera:Camera3D, lightDirection:Vector3, sceneBounds:Aabb):Void {
+	flight._js._fn.Camera.configureDirectionalShadowCamera3d(camera, lightDirection, sceneBounds);
+}
+#else
 extern inline function configureDirectionalShadowCamera3d(camera:Camera3D, lightDirection:Vector3, sceneBounds:Aabb):Void {
 #if hl
 	flight._hl._fn.Camera.configureDirectionalShadowCamera3d(camera, lightDirection, sceneBounds);
@@ -484,6 +747,12 @@ extern inline function configureDirectionalShadowCamera3d(camera:Camera3D, light
 	#error "flight.Camera: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function configureDirectionalShadowCamera3dTightFit(camera:Camera3D, lightDirection:Vector3, worldBounds:Aabb, padding:Null<Float>):Void {
+	flight._js._fn.Camera.configureDirectionalShadowCamera3dTightFit(camera, lightDirection, worldBounds, padding);
+}
+#else
 extern inline function configureDirectionalShadowCamera3dTightFit(camera:Camera3D, lightDirection:Vector3, worldBounds:Aabb, padding:Float):Void {
 #if hl
 	flight._hl._fn.Camera.configureDirectionalShadowCamera3dTightFit(camera, lightDirection, worldBounds, padding);
@@ -495,6 +764,12 @@ extern inline function configureDirectionalShadowCamera3dTightFit(camera:Camera3
 	#error "flight.Camera: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getCamera2dViewMatrix(camera:Camera2D, viewportWidth:Float, viewportHeight:Float, out:Matrix):Void {
+	flight._js._fn.Camera.getCamera2dViewMatrix(camera, viewportWidth, viewportHeight, out);
+}
+#else
 extern inline function getCamera2dViewMatrix(camera:Camera2D, viewportWidth:Float, viewportHeight:Float, out:Matrix):Void {
 #if hl
 	flight._hl._fn.Camera.getCamera2dViewMatrix(camera, viewportWidth, viewportHeight, out);
@@ -506,6 +781,12 @@ extern inline function getCamera2dViewMatrix(camera:Camera2D, viewportWidth:Floa
 	#error "flight.Camera: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getCamera2dVisibleBounds(guardState:Dynamic, camera:Camera2D, viewportWidth:Float, viewportHeight:Float, out:Rectangle):Void {
+	flight._js._fn.Camera.getCamera2dVisibleBounds(guardState, camera, viewportWidth, viewportHeight, out);
+}
+#else
 extern inline function getCamera2dVisibleBounds(guardState:Dynamic, camera:Camera2D, viewportWidth:Float, viewportHeight:Float, out:Rectangle):Void {
 #if hl
 	flight._hl._fn.Camera.getCamera2dVisibleBounds(guardState, camera, viewportWidth, viewportHeight, out);
@@ -517,6 +798,12 @@ extern inline function getCamera2dVisibleBounds(guardState:Dynamic, camera:Camer
 	#error "flight.Camera: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function zoomCamera2dAtScreenPoint(camera:Camera2D, viewportWidth:Float, viewportHeight:Float, screenX:Float, screenY:Float, zoom:Float):Void {
+	flight._js._fn.Camera.zoomCamera2dAtScreenPoint(camera, viewportWidth, viewportHeight, screenX, screenY, zoom);
+}
+#else
 extern inline function zoomCamera2dAtScreenPoint(camera:Camera2D, viewportWidth:Float, viewportHeight:Float, screenX:Float, screenY:Float, zoom:Float):Void {
 #if hl
 	flight._hl._fn.Camera.zoomCamera2dAtScreenPoint(camera, viewportWidth, viewportHeight, screenX, screenY, zoom);
@@ -528,6 +815,12 @@ extern inline function zoomCamera2dAtScreenPoint(camera:Camera2D, viewportWidth:
 	#error "flight.Camera: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freeCamera3D(ptr:Camera3D):Void {
+	flight._js._fn.Camera.freeCamera3D(ptr);
+}
+#else
 extern inline function freeCamera3D(ptr:Camera3D):Void {
 #if hl
 	flight._hl._fn.Camera.freeCamera3D(ptr);
@@ -539,6 +832,12 @@ extern inline function freeCamera3D(ptr:Camera3D):Void {
 	#error "flight.Camera: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freeCamera2D(ptr:Camera2D):Void {
+	flight._js._fn.Camera.freeCamera2D(ptr);
+}
+#else
 extern inline function freeCamera2D(ptr:Camera2D):Void {
 #if hl
 	flight._hl._fn.Camera.freeCamera2D(ptr);
@@ -550,6 +849,12 @@ extern inline function freeCamera2D(ptr:Camera2D):Void {
 	#error "flight.Camera: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freeCamera3DviewExplanation(ptr:Camera3DViewExplanation):Void {
+	flight._js._fn.Camera.freeCamera3DviewExplanation(ptr);
+}
+#else
 extern inline function freeCamera3DviewExplanation(ptr:Camera3DViewExplanation):Void {
 #if hl
 	flight._hl._fn.Camera.freeCamera3DviewExplanation(ptr);
@@ -561,3 +866,4 @@ extern inline function freeCamera3DviewExplanation(ptr:Camera3DViewExplanation):
 	#error "flight.Camera: no backend for this target."
 #end
 }
+#end

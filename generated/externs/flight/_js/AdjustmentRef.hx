@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract AdjustmentRef(Dynamic) {}
+abstract AdjustmentRef(Dynamic) {
+}

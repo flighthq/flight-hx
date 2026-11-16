@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract TiledLayerBase(Dynamic) {}
+abstract TiledLayerBase(Dynamic) {
+}

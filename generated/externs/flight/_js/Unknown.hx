@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract Unknown(Dynamic) {}
+abstract Unknown(Dynamic) {
+}

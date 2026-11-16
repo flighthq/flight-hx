@@ -1,5 +1,10 @@
 package flight;
 
+#if (js && flight_esm)
+extern inline function readBitmapFontFormatKind(bytes:Dynamic):Null<BitmapFontFormatKind> {
+	return flight._js._fn.BitmapfontFormats.readBitmapFontFormatKind(bytes);
+}
+#else
 extern inline function readBitmapFontFormatKind(bytes:Dynamic, bytesLen:Int):BitmapFontFormatKind {
 #if hl
 	return flight._hl._fn.BitmapfontFormats.readBitmapFontFormatKind(bytes, bytesLen);
@@ -11,6 +16,12 @@ extern inline function readBitmapFontFormatKind(bytes:Dynamic, bytesLen:Int):Bit
 	#error "flight.BitmapfontFormats: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function explainBitmapFontParse(text:String, options:Null<BitmapFontParseOptions>):BitmapFontParseExplanation {
+	return flight._js._fn.BitmapfontFormats.explainBitmapFontParse(text, options);
+}
+#else
 extern inline function explainBitmapFontParse(text:String, options:BitmapFontParseOptions):BitmapFontParseExplanation {
 #if hl
 	return flight._hl._fn.BitmapfontFormats.explainBitmapFontParse(cast text, options);
@@ -22,6 +33,12 @@ extern inline function explainBitmapFontParse(text:String, options:BitmapFontPar
 	#error "flight.BitmapfontFormats: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freeBitmapFontFormatKind(ptr:BitmapFontFormatKind):Void {
+	flight._js._fn.BitmapfontFormats.freeBitmapFontFormatKind(ptr);
+}
+#else
 extern inline function freeBitmapFontFormatKind(ptr:BitmapFontFormatKind):Void {
 #if hl
 	flight._hl._fn.BitmapfontFormats.freeBitmapFontFormatKind(ptr);
@@ -33,6 +50,12 @@ extern inline function freeBitmapFontFormatKind(ptr:BitmapFontFormatKind):Void {
 	#error "flight.BitmapfontFormats: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freeBitmapFontParseExplanation(ptr:BitmapFontParseExplanation):Void {
+	flight._js._fn.BitmapfontFormats.freeBitmapFontParseExplanation(ptr);
+}
+#else
 extern inline function freeBitmapFontParseExplanation(ptr:BitmapFontParseExplanation):Void {
 #if hl
 	flight._hl._fn.BitmapfontFormats.freeBitmapFontParseExplanation(ptr);
@@ -44,3 +67,4 @@ extern inline function freeBitmapFontParseExplanation(ptr:BitmapFontParseExplana
 	#error "flight.BitmapfontFormats: no backend for this target."
 #end
 }
+#end

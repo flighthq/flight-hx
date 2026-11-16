@@ -68,6 +68,7 @@ HashLink, and Lime consumers on Linux64. The patch includes binding fixes expose
 by these actual builds; no post-processing edits are applied to generated Haxe.
 See [patch notes](../../patches/flight/README.md).
 
-JS externs import module `flight` with `flight_*` exports, rather than the
-existing `@flighthq/*` TS ESM surface. The web runtime remains separate. See the
-root README for tested platforms and the limits of the native smoke checks.
+The second producer patch restores direct `@flighthq/*` ESM bindings using Flight
+compiler naming and logical JS carriers. `gate:web` executes real math/geometry
+from the pinned Flight TypeScript sources and verifies tree-shaking. See the
+root README for tested platforms and the limits of native and web smoke checks.

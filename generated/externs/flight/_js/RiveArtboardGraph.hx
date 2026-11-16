@@ -1,22 +1,10 @@
 package flight._js;
 
-@:jsRequire("flight")
-private extern class RiveArtboardGraph_Ffi {
-	@:native("flight_get_rive_artboard_graph_stream_end") static function get_streamEnd(ptr:Dynamic):Int;
-	@:native("flight_set_rive_artboard_graph_stream_end") static function set_streamEnd(ptr:Dynamic, value:Int):Int;
-	@:native("flight_get_rive_artboard_graph_stream_start") static function get_streamStart(ptr:Dynamic):Int;
-	@:native("flight_set_rive_artboard_graph_stream_start") static function set_streamStart(ptr:Dynamic, value:Int):Int;
-}
-
 abstract RiveArtboardGraph(Dynamic) {
 	public var streamEnd(get, set):Int;
-
-	inline function get_streamEnd():Int return RiveArtboardGraph_Ffi.get_streamEnd(this);
-
-	inline function set_streamEnd(value:Int):Int return RiveArtboardGraph_Ffi.set_streamEnd(this, value);
+	inline function get_streamEnd():Int return untyped this.streamEnd;
+	inline function set_streamEnd(value:Int):Int return untyped this.streamEnd = value;
 	public var streamStart(get, set):Int;
-
-	inline function get_streamStart():Int return RiveArtboardGraph_Ffi.get_streamStart(this);
-
-	inline function set_streamStart(value:Int):Int return RiveArtboardGraph_Ffi.set_streamStart(this, value);
+	inline function get_streamStart():Int return untyped this.streamStart;
+	inline function set_streamStart(value:Int):Int return untyped this.streamStart = value;
 }

@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract AsepriteSerializeOptions(Dynamic) {}
+abstract AsepriteSerializeOptions(Dynamic) {
+}

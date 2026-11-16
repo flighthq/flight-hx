@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract HasTransform3D(Dynamic) {}
+abstract HasTransform3D(Dynamic) {
+}

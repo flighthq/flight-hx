@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract CollisionPolygon2D(Dynamic) {}
+abstract CollisionPolygon2D(Dynamic) {
+}

@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract BinPackOptions(Dynamic) {}
+abstract BinPackOptions(Dynamic) {
+}

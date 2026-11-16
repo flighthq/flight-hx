@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract Camera2DFollowOptions(Dynamic) {}
+abstract Camera2DFollowOptions(Dynamic) {
+}

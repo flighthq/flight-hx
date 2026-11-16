@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract OrbitCameraControllerOptions(Dynamic) {}
+abstract OrbitCameraControllerOptions(Dynamic) {
+}

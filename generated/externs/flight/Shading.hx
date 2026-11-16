@@ -1,5 +1,10 @@
 package flight;
 
+#if (js && flight_esm)
+extern inline function createAnimatedNormalModifier():AnimatedNormalModifier {
+	return flight._js._fn.Shading.createAnimatedNormalModifier();
+}
+#else
 extern inline function createAnimatedNormalModifier():AnimatedNormalModifier {
 #if hl
 	return flight._hl._fn.Shading.createAnimatedNormalModifier();
@@ -11,6 +16,12 @@ extern inline function createAnimatedNormalModifier():AnimatedNormalModifier {
 	#error "flight.Shading: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function createDissolveModifier():DissolveModifier {
+	return flight._js._fn.Shading.createDissolveModifier();
+}
+#else
 extern inline function createDissolveModifier():DissolveModifier {
 #if hl
 	return flight._hl._fn.Shading.createDissolveModifier();
@@ -22,6 +33,12 @@ extern inline function createDissolveModifier():DissolveModifier {
 	#error "flight.Shading: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function createEmissiveModifier():EmissiveModifier {
+	return flight._js._fn.Shading.createEmissiveModifier();
+}
+#else
 extern inline function createEmissiveModifier():EmissiveModifier {
 #if hl
 	return flight._hl._fn.Shading.createEmissiveModifier();
@@ -33,6 +50,12 @@ extern inline function createEmissiveModifier():EmissiveModifier {
 	#error "flight.Shading: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getEmissiveModifierFacingString(value:Dynamic):String {
+	return flight._js._fn.Shading.getEmissiveModifierFacingString(value);
+}
+#else
 extern inline function getEmissiveModifierFacingString(value:flight.EmissiveModifierFacing):String {
 #if hl
 	return cast flight._hl._fn.Shading.getEmissiveModifierFacingString(value);
@@ -44,6 +67,12 @@ extern inline function getEmissiveModifierFacingString(value:flight.EmissiveModi
 	#error "flight.Shading: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getFogModifierModeString(value:Dynamic):String {
+	return flight._js._fn.Shading.getFogModifierModeString(value);
+}
+#else
 extern inline function getFogModifierModeString(value:flight.FogModifierMode):String {
 #if hl
 	return cast flight._hl._fn.Shading.getFogModifierModeString(value);
@@ -55,6 +84,12 @@ extern inline function getFogModifierModeString(value:flight.FogModifierMode):St
 	#error "flight.Shading: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getVertexDisplaceModifierSourceString(value:Dynamic):String {
+	return flight._js._fn.Shading.getVertexDisplaceModifierSourceString(value);
+}
+#else
 extern inline function getVertexDisplaceModifierSourceString(value:flight.VertexDisplaceModifierSource):String {
 #if hl
 	return cast flight._hl._fn.Shading.getVertexDisplaceModifierSourceString(value);
@@ -66,6 +101,12 @@ extern inline function getVertexDisplaceModifierSourceString(value:flight.Vertex
 	#error "flight.Shading: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function parseEmissiveModifierFacing(value:String):Null<Dynamic> {
+	return flight._js._fn.Shading.parseEmissiveModifierFacing(value);
+}
+#else
 extern inline function parseEmissiveModifierFacing(value:String):Int {
 #if hl
 	return flight._hl._fn.Shading.parseEmissiveModifierFacing(cast value);
@@ -77,6 +118,12 @@ extern inline function parseEmissiveModifierFacing(value:String):Int {
 	#error "flight.Shading: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function parseFogModifierMode(value:String):Null<Dynamic> {
+	return flight._js._fn.Shading.parseFogModifierMode(value);
+}
+#else
 extern inline function parseFogModifierMode(value:String):Int {
 #if hl
 	return flight._hl._fn.Shading.parseFogModifierMode(cast value);
@@ -88,6 +135,12 @@ extern inline function parseFogModifierMode(value:String):Int {
 	#error "flight.Shading: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function parseVertexDisplaceModifierSource(value:String):Null<Dynamic> {
+	return flight._js._fn.Shading.parseVertexDisplaceModifierSource(value);
+}
+#else
 extern inline function parseVertexDisplaceModifierSource(value:String):Int {
 #if hl
 	return flight._hl._fn.Shading.parseVertexDisplaceModifierSource(cast value);
@@ -99,6 +152,12 @@ extern inline function parseVertexDisplaceModifierSource(value:String):Int {
 	#error "flight.Shading: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function createEnvReflectModifier():EnvReflectModifier {
+	return flight._js._fn.Shading.createEnvReflectModifier();
+}
+#else
 extern inline function createEnvReflectModifier():EnvReflectModifier {
 #if hl
 	return flight._hl._fn.Shading.createEnvReflectModifier();
@@ -110,6 +169,12 @@ extern inline function createEnvReflectModifier():EnvReflectModifier {
 	#error "flight.Shading: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function createFogModifier():FogModifier {
+	return flight._js._fn.Shading.createFogModifier();
+}
+#else
 extern inline function createFogModifier():FogModifier {
 #if hl
 	return flight._hl._fn.Shading.createFogModifier();
@@ -121,6 +186,12 @@ extern inline function createFogModifier():FogModifier {
 	#error "flight.Shading: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function isBuiltInModifierSlot(value:String):Bool {
+	return flight._js._fn.Shading.isBuiltInModifierSlot(value);
+}
+#else
 extern inline function isBuiltInModifierSlot(value:String):Bool {
 #if hl
 	return flight._hl._fn.Shading.isBuiltInModifierSlot(cast value);
@@ -132,6 +203,12 @@ extern inline function isBuiltInModifierSlot(value:String):Bool {
 	#error "flight.Shading: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function registerModifier(registry:ModifierRegistry, definition:Dynamic):Void {
+	flight._js._fn.Shading.registerModifier(registry, definition);
+}
+#else
 extern inline function registerModifier(registry:ModifierRegistry, definition:Dynamic):Void {
 #if hl
 	flight._hl._fn.Shading.registerModifier(registry, definition);
@@ -143,6 +220,12 @@ extern inline function registerModifier(registry:ModifierRegistry, definition:Dy
 	#error "flight.Shading: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function resolveModifier(registry:ModifierRegistry, kind:String):Null<Dynamic> {
+	return flight._js._fn.Shading.resolveModifier(registry, kind);
+}
+#else
 extern inline function resolveModifier(registry:ModifierRegistry, kind:String):Dynamic {
 #if hl
 	return flight._hl._fn.Shading.resolveModifier(registry, cast kind);
@@ -154,6 +237,12 @@ extern inline function resolveModifier(registry:ModifierRegistry, kind:String):D
 	#error "flight.Shading: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function registerBuiltInModifiers(registry:ModifierRegistry):Void {
+	flight._js._fn.Shading.registerBuiltInModifiers(registry);
+}
+#else
 extern inline function registerBuiltInModifiers(registry:ModifierRegistry):Void {
 #if hl
 	flight._hl._fn.Shading.registerBuiltInModifiers(registry);
@@ -165,6 +254,12 @@ extern inline function registerBuiltInModifiers(registry:ModifierRegistry):Void 
 	#error "flight.Shading: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function createRimModifier():RimModifier {
+	return flight._js._fn.Shading.createRimModifier();
+}
+#else
 extern inline function createRimModifier():RimModifier {
 #if hl
 	return flight._hl._fn.Shading.createRimModifier();
@@ -176,6 +271,12 @@ extern inline function createRimModifier():RimModifier {
 	#error "flight.Shading: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function createShadedMaterial():ShadedMaterial {
+	return flight._js._fn.Shading.createShadedMaterial();
+}
+#else
 extern inline function createShadedMaterial():ShadedMaterial {
 #if hl
 	return flight._hl._fn.Shading.createShadedMaterial();
@@ -187,6 +288,12 @@ extern inline function createShadedMaterial():ShadedMaterial {
 	#error "flight.Shading: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function createToonModifier():ToonModifier {
+	return flight._js._fn.Shading.createToonModifier();
+}
+#else
 extern inline function createToonModifier():ToonModifier {
 #if hl
 	return flight._hl._fn.Shading.createToonModifier();
@@ -198,6 +305,12 @@ extern inline function createToonModifier():ToonModifier {
 	#error "flight.Shading: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function createVertexDisplaceModifier():VertexDisplaceModifier {
+	return flight._js._fn.Shading.createVertexDisplaceModifier();
+}
+#else
 extern inline function createVertexDisplaceModifier():VertexDisplaceModifier {
 #if hl
 	return flight._hl._fn.Shading.createVertexDisplaceModifier();
@@ -209,6 +322,12 @@ extern inline function createVertexDisplaceModifier():VertexDisplaceModifier {
 	#error "flight.Shading: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freeAnimatedNormalModifier(ptr:AnimatedNormalModifier):Void {
+	flight._js._fn.Shading.freeAnimatedNormalModifier(ptr);
+}
+#else
 extern inline function freeAnimatedNormalModifier(ptr:AnimatedNormalModifier):Void {
 #if hl
 	flight._hl._fn.Shading.freeAnimatedNormalModifier(ptr);
@@ -220,6 +339,12 @@ extern inline function freeAnimatedNormalModifier(ptr:AnimatedNormalModifier):Vo
 	#error "flight.Shading: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freeDissolveModifier(ptr:DissolveModifier):Void {
+	flight._js._fn.Shading.freeDissolveModifier(ptr);
+}
+#else
 extern inline function freeDissolveModifier(ptr:DissolveModifier):Void {
 #if hl
 	flight._hl._fn.Shading.freeDissolveModifier(ptr);
@@ -231,6 +356,12 @@ extern inline function freeDissolveModifier(ptr:DissolveModifier):Void {
 	#error "flight.Shading: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freeEmissiveModifier(ptr:EmissiveModifier):Void {
+	flight._js._fn.Shading.freeEmissiveModifier(ptr);
+}
+#else
 extern inline function freeEmissiveModifier(ptr:EmissiveModifier):Void {
 #if hl
 	flight._hl._fn.Shading.freeEmissiveModifier(ptr);
@@ -242,6 +373,12 @@ extern inline function freeEmissiveModifier(ptr:EmissiveModifier):Void {
 	#error "flight.Shading: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freeEnvReflectModifier(ptr:EnvReflectModifier):Void {
+	flight._js._fn.Shading.freeEnvReflectModifier(ptr);
+}
+#else
 extern inline function freeEnvReflectModifier(ptr:EnvReflectModifier):Void {
 #if hl
 	flight._hl._fn.Shading.freeEnvReflectModifier(ptr);
@@ -253,6 +390,12 @@ extern inline function freeEnvReflectModifier(ptr:EnvReflectModifier):Void {
 	#error "flight.Shading: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freeFogModifier(ptr:FogModifier):Void {
+	flight._js._fn.Shading.freeFogModifier(ptr);
+}
+#else
 extern inline function freeFogModifier(ptr:FogModifier):Void {
 #if hl
 	flight._hl._fn.Shading.freeFogModifier(ptr);
@@ -264,6 +407,12 @@ extern inline function freeFogModifier(ptr:FogModifier):Void {
 	#error "flight.Shading: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freeRimModifier(ptr:RimModifier):Void {
+	flight._js._fn.Shading.freeRimModifier(ptr);
+}
+#else
 extern inline function freeRimModifier(ptr:RimModifier):Void {
 #if hl
 	flight._hl._fn.Shading.freeRimModifier(ptr);
@@ -275,6 +424,12 @@ extern inline function freeRimModifier(ptr:RimModifier):Void {
 	#error "flight.Shading: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freeShadedMaterial(ptr:ShadedMaterial):Void {
+	flight._js._fn.Shading.freeShadedMaterial(ptr);
+}
+#else
 extern inline function freeShadedMaterial(ptr:ShadedMaterial):Void {
 #if hl
 	flight._hl._fn.Shading.freeShadedMaterial(ptr);
@@ -286,6 +441,12 @@ extern inline function freeShadedMaterial(ptr:ShadedMaterial):Void {
 	#error "flight.Shading: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freeToonModifier(ptr:ToonModifier):Void {
+	flight._js._fn.Shading.freeToonModifier(ptr);
+}
+#else
 extern inline function freeToonModifier(ptr:ToonModifier):Void {
 #if hl
 	flight._hl._fn.Shading.freeToonModifier(ptr);
@@ -297,6 +458,12 @@ extern inline function freeToonModifier(ptr:ToonModifier):Void {
 	#error "flight.Shading: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freeVertexDisplaceModifier(ptr:VertexDisplaceModifier):Void {
+	flight._js._fn.Shading.freeVertexDisplaceModifier(ptr);
+}
+#else
 extern inline function freeVertexDisplaceModifier(ptr:VertexDisplaceModifier):Void {
 #if hl
 	flight._hl._fn.Shading.freeVertexDisplaceModifier(ptr);
@@ -308,3 +475,4 @@ extern inline function freeVertexDisplaceModifier(ptr:VertexDisplaceModifier):Vo
 	#error "flight.Shading: no backend for this target."
 #end
 }
+#end

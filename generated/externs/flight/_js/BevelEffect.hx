@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract BevelEffect(Dynamic) {}
+abstract BevelEffect(Dynamic) {
+}

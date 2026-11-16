@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract BlurEffect(Dynamic) {}
+abstract BlurEffect(Dynamic) {
+}

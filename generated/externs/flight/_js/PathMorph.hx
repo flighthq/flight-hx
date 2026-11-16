@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract PathMorph(Dynamic) {}
+abstract PathMorph(Dynamic) {
+}

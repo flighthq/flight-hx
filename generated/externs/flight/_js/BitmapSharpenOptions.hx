@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract BitmapSharpenOptions(Dynamic) {}
+abstract BitmapSharpenOptions(Dynamic) {
+}

@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract CollatorOptions(Dynamic) {}
+abstract CollatorOptions(Dynamic) {
+}

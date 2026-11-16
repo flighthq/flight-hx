@@ -1,43 +1,22 @@
 package flight._js;
 
-@:jsRequire("flight")
-private extern class Clock_Ffi {
-	@:native("flight_get_clock_scale") static function get_scale(ptr:Dynamic):Float;
-	@:native("flight_set_clock_scale") static function set_scale(ptr:Dynamic, value:Float):Float;
-	@:native("flight_get_clock_paused") static function get_paused(ptr:Dynamic):Bool;
-	@:native("flight_set_clock_paused") static function set_paused(ptr:Dynamic, value:Bool):Bool;
-	@:native("flight_get_clock_delta_time") static function get_deltaTime(ptr:Dynamic):Float;
-	@:native("flight_set_clock_delta_time") static function set_deltaTime(ptr:Dynamic, value:Float):Float;
-	@:native("flight_get_clock_elapsed") static function get_elapsed(ptr:Dynamic):Float;
-	@:native("flight_set_clock_elapsed") static function set_elapsed(ptr:Dynamic, value:Float):Float;
-}
-
 abstract Clock(Dynamic) {
 	public var scale(get, set):Float;
-
-	inline function get_scale():Float return Clock_Ffi.get_scale(this);
-
-	inline function set_scale(value:Float):Float return Clock_Ffi.set_scale(this, value);
+	inline function get_scale():Float return untyped this.scale;
+	inline function set_scale(value:Float):Float return untyped this.scale = value;
 	public var paused(get, set):Bool;
-
-	inline function get_paused():Bool return Clock_Ffi.get_paused(this);
-
-	inline function set_paused(value:Bool):Bool return Clock_Ffi.set_paused(this, value);
+	inline function get_paused():Bool return untyped this.paused;
+	inline function set_paused(value:Bool):Bool return untyped this.paused = value;
 	public var deltaTime(get, set):Float;
-
-	inline function get_deltaTime():Float return Clock_Ffi.get_deltaTime(this);
-
-	inline function set_deltaTime(value:Float):Float return Clock_Ffi.set_deltaTime(this, value);
+	inline function get_deltaTime():Float return untyped this.deltaTime;
+	inline function set_deltaTime(value:Float):Float return untyped this.deltaTime = value;
 	public var elapsed(get, set):Float;
-
-	inline function get_elapsed():Float return Clock_Ffi.get_elapsed(this);
-
-	inline function set_elapsed(value:Float):Float return Clock_Ffi.set_elapsed(this, value);
-
+	inline function get_elapsed():Float return untyped this.elapsed;
+	inline function set_elapsed(value:Float):Float return untyped this.elapsed = value;
 	inline public function getEffectiveScale():Float {
 		return flight._js._fn.Clock.getClockEffectiveScale(cast this);
 	}
-	inline public function getParent():Dynamic {
+	inline public function getParent():Null<Dynamic> {
 		return flight._js._fn.Clock.getClockParent(cast this);
 	}
 	inline public function isEffectivelyPaused():Bool {

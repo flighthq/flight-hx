@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract LottieLayerKind(Dynamic) {}
+abstract LottieLayerKind(Dynamic) {
+}

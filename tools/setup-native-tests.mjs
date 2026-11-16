@@ -6,7 +6,12 @@ import { testEnvironment } from './native/test-environment.mjs';
 
 const root = path.resolve(import.meta.dirname, '..');
 let environment = testEnvironment(root);
-const probe = spawnSync(path.join(root, '.haxe/4.3.7/haxelib'), ['version'], { env: environment, encoding: 'utf8' });
+// Installing Haxe and emitting hxcpp.n does not require executing Neko. Do this
+// before probing the local haxelib executable, which is absent on a fresh runner.
+if (!process.env.npm_execpath) throw new Error('Run this setup through npm run setup:native-tests');
+run(process.execPath, [process.env.npm_execpath, 'run', 'setup']);
+const executable = process.platform === 'win32' ? 'haxelib.exe' : 'haxelib';
+const probe = spawnSync(path.join(root, '.haxe/4.3.7', executable), ['version'], { env: environment, encoding: 'utf8' });
 if (probe.status !== 0 && !process.env.FLIGHT_NEKO_ROOT) {
   if (process.platform !== 'linux' || process.arch !== 'x64') throw new Error('Install Neko for this host or provide FLIGHT_NEKO_ROOT');
   const artifacts = path.join(root, '.artifacts'); mkdirSync(artifacts, { recursive: true });
@@ -23,7 +28,6 @@ if (probe.status !== 0 && !process.env.FLIGHT_NEKO_ROOT) {
   }
   environment = testEnvironment(root);
 }
-run(process.platform === 'win32' ? 'npm.cmd' : 'npm', ['run', 'setup']);
 const haxelib = path.join(root, '.haxe/4.3.7', process.platform === 'win32' ? 'haxelib.exe' : 'haxelib');
 if (!existsSync(path.join(root, '.haxelib/lime/8,3,2/haxelib.json'))) run(haxelib, ['install', 'lime', '8.3.2', '--always', '--skip-dependencies']);
 process.stdout.write('Native test toolchain ready: Haxe/hxcpp, Neko, and Lime 8.3.2. No system packages installed.\n');

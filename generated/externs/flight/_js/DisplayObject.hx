@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract DisplayObject(Dynamic) {}
+abstract DisplayObject(Dynamic) {
+}

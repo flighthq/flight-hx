@@ -34,7 +34,7 @@ abstract Matrix4(Dynamic) {
 	inline public function append(source:flight._js.Matrix4, other:flight._js.Matrix4):Void {
 		flight._js._fn.Geometry.appendMatrix4(cast this, source, other);
 	}
-	inline public function appendRotation(source:flight._js.Matrix4, radians:Float, axis:flight._js.Vector4, pivotPoint:flight._js.Vector4):Void {
+	inline public function appendRotation(source:flight._js.Matrix4, radians:Float, axis:flight._js.Vector4, pivotPoint:Null<flight._js.Vector4>):Void {
 		flight._js._fn.Geometry.appendRotationMatrix4(cast this, source, radians, axis, pivotPoint);
 	}
 	inline public function appendScale(source:flight._js.Matrix4, xScale:Float, yScale:Float, zScale:Float):Void {
@@ -61,7 +61,7 @@ abstract Matrix4(Dynamic) {
 	inline public function decompose(outPosition:flight._js.Vector3, outRotation:flight._js.Quaternion, outScale:flight._js.Vector3):Void {
 		flight._js._fn.Geometry.decomposeMatrix4(outPosition, outRotation, outScale, cast this);
 	}
-	inline public function equals(b:flight._js.Matrix4):Bool {
+	inline public function equals(b:Null<flight._js.Matrix4>):Bool {
 		return flight._js._fn.Geometry.equalsMatrix4(cast this, b);
 	}
 	inline public function getDeterminant():Float {
@@ -88,7 +88,7 @@ abstract Matrix4(Dynamic) {
 	inline public function prepend(source:flight._js.Matrix4, other:flight._js.Matrix4):Void {
 		flight._js._fn.Geometry.prependMatrix4(cast this, source, other);
 	}
-	inline public function prependRotation(source:flight._js.Matrix4, radians:Float, axis:flight._js.Vector4, pivotPoint:flight._js.Vector4):Void {
+	inline public function prependRotation(source:flight._js.Matrix4, radians:Float, axis:flight._js.Vector4, pivotPoint:Null<flight._js.Vector4>):Void {
 		flight._js._fn.Geometry.prependRotationMatrix4(cast this, source, radians, axis, pivotPoint);
 	}
 	inline public function prependScale(source:flight._js.Matrix4, xScale:Float, yScale:Float, zScale:Float):Void {
@@ -112,8 +112,8 @@ abstract Matrix4(Dynamic) {
 	inline public function setFrom2d(a:Float, b:Float, c:Float, d:Float, tx:Float, ty:Float):Void {
 		flight._js._fn.Geometry.setMatrix4From2d(cast this, a, b, c, d, tx, ty);
 	}
-	inline public function setFromFloat32Array(offset:Int, source:Dynamic, sourceLen:Int):Void {
-		flight._js._fn.Geometry.setMatrix4FromFloat32Array(cast this, offset, source, sourceLen);
+	inline public function setFromFloat32Array(offset:Int, source:Dynamic):Void {
+		flight._js._fn.Geometry.setMatrix4FromFloat32Array(cast this, offset, source);
 	}
 	inline public function setFromMatrix(source:flight._js.Matrix):Void {
 		flight._js._fn.Geometry.setMatrix4FromMatrix(cast this, source);
@@ -145,8 +145,8 @@ abstract Matrix4(Dynamic) {
 	inline public function transpose(source:flight._js.Matrix4):Void {
 		flight._js._fn.Geometry.transposeMatrix4(cast this, source);
 	}
-	inline public function writeToFloat32Array(out:Dynamic, outLen:Int, offset:Int):Void {
-		flight._js._fn.Geometry.writeMatrix4ToFloat32Array(out, outLen, offset, cast this);
+	inline public function writeToFloat32Array(out:Dynamic, offset:Int):Void {
+		flight._js._fn.Geometry.writeMatrix4ToFloat32Array(out, offset, cast this);
 	}
 	inline public function release():Void {
 		flight._js._fn.Geometry.releaseMatrix4(cast this);

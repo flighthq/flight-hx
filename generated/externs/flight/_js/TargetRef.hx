@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract TargetRef(Dynamic) {}
+abstract TargetRef(Dynamic) {
+}

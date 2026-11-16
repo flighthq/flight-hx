@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract LibgdxSerializeOptions(Dynamic) {}
+abstract LibgdxSerializeOptions(Dynamic) {
+}

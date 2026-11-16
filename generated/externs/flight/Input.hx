@@ -1,5 +1,10 @@
 package flight;
 
+#if (js && flight_esm)
+extern inline function attachGamepadInput(hostInputIngress:HostInputIngressCapability, manager:Dynamic, source:InputIngressSource, options:Null<AttachInputOptions>):Void {
+	flight._js._fn.Input.attachGamepadInput(hostInputIngress, manager, source, options);
+}
+#else
 extern inline function attachGamepadInput(hostInputIngress:HostInputIngressCapability, manager:Dynamic, source:InputIngressSource, options:AttachInputOptions):Void {
 #if hl
 	flight._hl._fn.Input.attachGamepadInput(hostInputIngress, manager, source, options);
@@ -11,6 +16,12 @@ extern inline function attachGamepadInput(hostInputIngress:HostInputIngressCapab
 	#error "flight.Input: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function attachKeyboardInput(hostInputIngress:HostInputIngressCapability, manager:Dynamic, source:InputIngressSource, options:Null<AttachInputOptions>):Void {
+	flight._js._fn.Input.attachKeyboardInput(hostInputIngress, manager, source, options);
+}
+#else
 extern inline function attachKeyboardInput(hostInputIngress:HostInputIngressCapability, manager:Dynamic, source:InputIngressSource, options:AttachInputOptions):Void {
 #if hl
 	flight._hl._fn.Input.attachKeyboardInput(hostInputIngress, manager, source, options);
@@ -22,6 +33,12 @@ extern inline function attachKeyboardInput(hostInputIngress:HostInputIngressCapa
 	#error "flight.Input: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function attachPointerInput(hostInputIngress:HostInputIngressCapability, manager:Dynamic, source:InputIngressSource, options:Null<AttachInputOptions>):Void {
+	flight._js._fn.Input.attachPointerInput(hostInputIngress, manager, source, options);
+}
+#else
 extern inline function attachPointerInput(hostInputIngress:HostInputIngressCapability, manager:Dynamic, source:InputIngressSource, options:AttachInputOptions):Void {
 #if hl
 	flight._hl._fn.Input.attachPointerInput(hostInputIngress, manager, source, options);
@@ -33,6 +50,12 @@ extern inline function attachPointerInput(hostInputIngress:HostInputIngressCapab
 	#error "flight.Input: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function attachRelativePointerInput(hostInputIngress:HostInputIngressCapability, manager:Dynamic, source:InputIngressSource, options:Null<AttachInputOptions>):Void {
+	flight._js._fn.Input.attachRelativePointerInput(hostInputIngress, manager, source, options);
+}
+#else
 extern inline function attachRelativePointerInput(hostInputIngress:HostInputIngressCapability, manager:Dynamic, source:InputIngressSource, options:AttachInputOptions):Void {
 #if hl
 	flight._hl._fn.Input.attachRelativePointerInput(hostInputIngress, manager, source, options);
@@ -44,6 +67,12 @@ extern inline function attachRelativePointerInput(hostInputIngress:HostInputIngr
 	#error "flight.Input: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function attachTextInput(hostInputIngress:HostInputIngressCapability, manager:Dynamic, source:InputIngressSource, options:Null<AttachInputOptions>):Void {
+	flight._js._fn.Input.attachTextInput(hostInputIngress, manager, source, options);
+}
+#else
 extern inline function attachTextInput(hostInputIngress:HostInputIngressCapability, manager:Dynamic, source:InputIngressSource, options:AttachInputOptions):Void {
 #if hl
 	flight._hl._fn.Input.attachTextInput(hostInputIngress, manager, source, options);
@@ -55,6 +84,12 @@ extern inline function attachTextInput(hostInputIngress:HostInputIngressCapabili
 	#error "flight.Input: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function attachWheelInput(hostInputIngress:HostInputIngressCapability, manager:Dynamic, source:InputIngressSource, options:Null<AttachInputOptions>):Void {
+	flight._js._fn.Input.attachWheelInput(hostInputIngress, manager, source, options);
+}
+#else
 extern inline function attachWheelInput(hostInputIngress:HostInputIngressCapability, manager:Dynamic, source:InputIngressSource, options:AttachInputOptions):Void {
 #if hl
 	flight._hl._fn.Input.attachWheelInput(hostInputIngress, manager, source, options);
@@ -66,6 +101,12 @@ extern inline function attachWheelInput(hostInputIngress:HostInputIngressCapabil
 	#error "flight.Input: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function detachGamepadInput(manager:Dynamic, source:InputIngressSource):Void {
+	flight._js._fn.Input.detachGamepadInput(manager, source);
+}
+#else
 extern inline function detachGamepadInput(manager:Dynamic, source:InputIngressSource):Void {
 #if hl
 	flight._hl._fn.Input.detachGamepadInput(manager, source);
@@ -77,6 +118,12 @@ extern inline function detachGamepadInput(manager:Dynamic, source:InputIngressSo
 	#error "flight.Input: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function detachKeyboardInput(manager:Dynamic, source:InputIngressSource):Void {
+	flight._js._fn.Input.detachKeyboardInput(manager, source);
+}
+#else
 extern inline function detachKeyboardInput(manager:Dynamic, source:InputIngressSource):Void {
 #if hl
 	flight._hl._fn.Input.detachKeyboardInput(manager, source);
@@ -88,6 +135,12 @@ extern inline function detachKeyboardInput(manager:Dynamic, source:InputIngressS
 	#error "flight.Input: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function detachPointerInput(manager:Dynamic, source:InputIngressSource):Void {
+	flight._js._fn.Input.detachPointerInput(manager, source);
+}
+#else
 extern inline function detachPointerInput(manager:Dynamic, source:InputIngressSource):Void {
 #if hl
 	flight._hl._fn.Input.detachPointerInput(manager, source);
@@ -99,6 +152,12 @@ extern inline function detachPointerInput(manager:Dynamic, source:InputIngressSo
 	#error "flight.Input: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function detachRelativePointerInput(manager:Dynamic, source:InputIngressSource):Void {
+	flight._js._fn.Input.detachRelativePointerInput(manager, source);
+}
+#else
 extern inline function detachRelativePointerInput(manager:Dynamic, source:InputIngressSource):Void {
 #if hl
 	flight._hl._fn.Input.detachRelativePointerInput(manager, source);
@@ -110,6 +169,12 @@ extern inline function detachRelativePointerInput(manager:Dynamic, source:InputI
 	#error "flight.Input: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function detachTextInput(manager:Dynamic, source:InputIngressSource):Void {
+	flight._js._fn.Input.detachTextInput(manager, source);
+}
+#else
 extern inline function detachTextInput(manager:Dynamic, source:InputIngressSource):Void {
 #if hl
 	flight._hl._fn.Input.detachTextInput(manager, source);
@@ -121,6 +186,12 @@ extern inline function detachTextInput(manager:Dynamic, source:InputIngressSourc
 	#error "flight.Input: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function detachWheelInput(manager:Dynamic, source:InputIngressSource):Void {
+	flight._js._fn.Input.detachWheelInput(manager, source);
+}
+#else
 extern inline function detachWheelInput(manager:Dynamic, source:InputIngressSource):Void {
 #if hl
 	flight._hl._fn.Input.detachWheelInput(manager, source);
@@ -132,6 +203,12 @@ extern inline function detachWheelInput(manager:Dynamic, source:InputIngressSour
 	#error "flight.Input: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function applyGamepadAxisDeadZone(value:Float, deadZone:Float):Float {
+	return flight._js._fn.Input.applyGamepadAxisDeadZone(value, deadZone);
+}
+#else
 extern inline function applyGamepadAxisDeadZone(value:Float, deadZone:Float):Float {
 #if hl
 	return flight._hl._fn.Input.applyGamepadAxisDeadZone(value, deadZone);
@@ -143,6 +220,12 @@ extern inline function applyGamepadAxisDeadZone(value:Float, deadZone:Float):Flo
 	#error "flight.Input: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function applyGamepadStickDeadZone(out:GamepadStickOutput, x:Float, y:Float, deadZone:Float):Void {
+	flight._js._fn.Input.applyGamepadStickDeadZone(out, x, y, deadZone);
+}
+#else
 extern inline function applyGamepadStickDeadZone(out:GamepadStickOutput, x:Float, y:Float, deadZone:Float):Void {
 #if hl
 	flight._hl._fn.Input.applyGamepadStickDeadZone(out, x, y, deadZone);
@@ -154,6 +237,12 @@ extern inline function applyGamepadStickDeadZone(out:GamepadStickOutput, x:Float
 	#error "flight.Input: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getGamepadAxisName(mapping:Dynamic, index:Int):Null<Dynamic> {
+	return flight._js._fn.Input.getGamepadAxisName(mapping, index);
+}
+#else
 extern inline function getGamepadAxisName(mapping:flight.GamepadMapping, index:Int):Int {
 #if hl
 	return flight._hl._fn.Input.getGamepadAxisName(mapping, index);
@@ -165,6 +254,12 @@ extern inline function getGamepadAxisName(mapping:flight.GamepadMapping, index:I
 	#error "flight.Input: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getGamepadButtonName(mapping:Dynamic, index:Int):Null<Dynamic> {
+	return flight._js._fn.Input.getGamepadButtonName(mapping, index);
+}
+#else
 extern inline function getGamepadButtonName(mapping:flight.GamepadMapping, index:Int):Int {
 #if hl
 	return flight._hl._fn.Input.getGamepadButtonName(mapping, index);
@@ -176,6 +271,12 @@ extern inline function getGamepadButtonName(mapping:flight.GamepadMapping, index
 	#error "flight.Input: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function createInputManager():Dynamic {
+	return flight._js._fn.Input.createInputManager();
+}
+#else
 extern inline function createInputManager():Dynamic {
 #if hl
 	return flight._hl._fn.Input.createInputManager();
@@ -187,6 +288,12 @@ extern inline function createInputManager():Dynamic {
 	#error "flight.Input: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function createInputState():Dynamic {
+	return flight._js._fn.Input.createInputState();
+}
+#else
 extern inline function createInputState():Dynamic {
 #if hl
 	return flight._hl._fn.Input.createInputState();
@@ -198,6 +305,12 @@ extern inline function createInputState():Dynamic {
 	#error "flight.Input: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function connectInputStateToInputManager(state:Dynamic, manager:Dynamic):InputDisposer {
+	return flight._js._fn.Input.connectInputStateToInputManager(state, manager);
+}
+#else
 extern inline function connectInputStateToInputManager(state:Dynamic, manager:Dynamic):InputDisposer {
 #if hl
 	return flight._hl._fn.Input.connectInputStateToInputManager(state, manager);
@@ -209,6 +322,12 @@ extern inline function connectInputStateToInputManager(state:Dynamic, manager:Dy
 	#error "flight.Input: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function endInputStateFrame(state:Dynamic):Void {
+	flight._js._fn.Input.endInputStateFrame(state);
+}
+#else
 extern inline function endInputStateFrame(state:Dynamic):Void {
 #if hl
 	flight._hl._fn.Input.endInputStateFrame(state);
@@ -220,6 +339,12 @@ extern inline function endInputStateFrame(state:Dynamic):Void {
 	#error "flight.Input: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function getInputGamepadAxis(state:Dynamic, gamepad:Int, axis:Int):Float {
+	return flight._js._fn.Input.getInputGamepadAxis(state, gamepad, axis);
+}
+#else
 extern inline function getInputGamepadAxis(state:Dynamic, gamepad:Int, axis:Int):Float {
 #if hl
 	return flight._hl._fn.Input.getInputGamepadAxis(state, gamepad, axis);
@@ -231,6 +356,12 @@ extern inline function getInputGamepadAxis(state:Dynamic, gamepad:Int, axis:Int)
 	#error "flight.Input: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function isInputGamepadButtonDown(state:Dynamic, gamepad:Int, button:Int):Bool {
+	return flight._js._fn.Input.isInputGamepadButtonDown(state, gamepad, button);
+}
+#else
 extern inline function isInputGamepadButtonDown(state:Dynamic, gamepad:Int, button:Int):Bool {
 #if hl
 	return flight._hl._fn.Input.isInputGamepadButtonDown(state, gamepad, button);
@@ -242,6 +373,12 @@ extern inline function isInputGamepadButtonDown(state:Dynamic, gamepad:Int, butt
 	#error "flight.Input: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function isInputKeyDown(state:Dynamic, keyCode:Int):Bool {
+	return flight._js._fn.Input.isInputKeyDown(state, keyCode);
+}
+#else
 extern inline function isInputKeyDown(state:Dynamic, keyCode:Int):Bool {
 #if hl
 	return flight._hl._fn.Input.isInputKeyDown(state, keyCode);
@@ -253,6 +390,12 @@ extern inline function isInputKeyDown(state:Dynamic, keyCode:Int):Bool {
 	#error "flight.Input: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function isInputPointerButtonDown(state:Dynamic, pointerId:Int, button:Int):Bool {
+	return flight._js._fn.Input.isInputPointerButtonDown(state, pointerId, button);
+}
+#else
 extern inline function isInputPointerButtonDown(state:Dynamic, pointerId:Int, button:Int):Bool {
 #if hl
 	return flight._hl._fn.Input.isInputPointerButtonDown(state, pointerId, button);
@@ -264,6 +407,12 @@ extern inline function isInputPointerButtonDown(state:Dynamic, pointerId:Int, bu
 	#error "flight.Input: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function wasInputGamepadButtonPressed(state:Dynamic, gamepad:Int, button:Int):Bool {
+	return flight._js._fn.Input.wasInputGamepadButtonPressed(state, gamepad, button);
+}
+#else
 extern inline function wasInputGamepadButtonPressed(state:Dynamic, gamepad:Int, button:Int):Bool {
 #if hl
 	return flight._hl._fn.Input.wasInputGamepadButtonPressed(state, gamepad, button);
@@ -275,6 +424,12 @@ extern inline function wasInputGamepadButtonPressed(state:Dynamic, gamepad:Int, 
 	#error "flight.Input: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function wasInputGamepadButtonReleased(state:Dynamic, gamepad:Int, button:Int):Bool {
+	return flight._js._fn.Input.wasInputGamepadButtonReleased(state, gamepad, button);
+}
+#else
 extern inline function wasInputGamepadButtonReleased(state:Dynamic, gamepad:Int, button:Int):Bool {
 #if hl
 	return flight._hl._fn.Input.wasInputGamepadButtonReleased(state, gamepad, button);
@@ -286,6 +441,12 @@ extern inline function wasInputGamepadButtonReleased(state:Dynamic, gamepad:Int,
 	#error "flight.Input: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function wasInputKeyPressed(state:Dynamic, keyCode:Int):Bool {
+	return flight._js._fn.Input.wasInputKeyPressed(state, keyCode);
+}
+#else
 extern inline function wasInputKeyPressed(state:Dynamic, keyCode:Int):Bool {
 #if hl
 	return flight._hl._fn.Input.wasInputKeyPressed(state, keyCode);
@@ -297,6 +458,12 @@ extern inline function wasInputKeyPressed(state:Dynamic, keyCode:Int):Bool {
 	#error "flight.Input: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function wasInputKeyReleased(state:Dynamic, keyCode:Int):Bool {
+	return flight._js._fn.Input.wasInputKeyReleased(state, keyCode);
+}
+#else
 extern inline function wasInputKeyReleased(state:Dynamic, keyCode:Int):Bool {
 #if hl
 	return flight._hl._fn.Input.wasInputKeyReleased(state, keyCode);
@@ -308,6 +475,12 @@ extern inline function wasInputKeyReleased(state:Dynamic, keyCode:Int):Bool {
 	#error "flight.Input: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function createInputTargetHandle():Dynamic {
+	return flight._js._fn.Input.createInputTargetHandle();
+}
+#else
 extern inline function createInputTargetHandle():Dynamic {
 #if hl
 	return flight._hl._fn.Input.createInputTargetHandle();
@@ -319,6 +492,12 @@ extern inline function createInputTargetHandle():Dynamic {
 	#error "flight.Input: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function createInputKeyRepeatTimer(options:InputKeyRepeatOptions):Dynamic {
+	return flight._js._fn.Input.createInputKeyRepeatTimer(options);
+}
+#else
 extern inline function createInputKeyRepeatTimer(options:InputKeyRepeatOptions):Dynamic {
 #if hl
 	return flight._hl._fn.Input.createInputKeyRepeatTimer(options);
@@ -330,6 +509,12 @@ extern inline function createInputKeyRepeatTimer(options:InputKeyRepeatOptions):
 	#error "flight.Input: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function advanceInputKeyRepeatTimer(timer:Dynamic, nowMs:Float):Void {
+	flight._js._fn.Input.advanceInputKeyRepeatTimer(timer, nowMs);
+}
+#else
 extern inline function advanceInputKeyRepeatTimer(timer:Dynamic, nowMs:Float):Void {
 #if hl
 	flight._hl._fn.Input.advanceInputKeyRepeatTimer(timer, nowMs);
@@ -341,6 +526,12 @@ extern inline function advanceInputKeyRepeatTimer(timer:Dynamic, nowMs:Float):Vo
 	#error "flight.Input: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function startInputKeyRepeatTimer(timer:Dynamic, callback_:InputRepeatCallback, nowMs:Float):Void {
+	flight._js._fn.Input.startInputKeyRepeatTimer(timer, callback_, nowMs);
+}
+#else
 extern inline function startInputKeyRepeatTimer(timer:Dynamic, callback_:InputRepeatCallback, nowMs:Float):Void {
 #if hl
 	flight._hl._fn.Input.startInputKeyRepeatTimer(timer, callback_, nowMs);
@@ -352,6 +543,12 @@ extern inline function startInputKeyRepeatTimer(timer:Dynamic, callback_:InputRe
 	#error "flight.Input: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function stopInputKeyRepeatTimer(timer:Dynamic):Void {
+	flight._js._fn.Input.stopInputKeyRepeatTimer(timer);
+}
+#else
 extern inline function stopInputKeyRepeatTimer(timer:Dynamic):Void {
 #if hl
 	flight._hl._fn.Input.stopInputKeyRepeatTimer(timer);
@@ -363,6 +560,12 @@ extern inline function stopInputKeyRepeatTimer(timer:Dynamic):Void {
 	#error "flight.Input: no backend for this target."
 #end
 }
+#end
+#if (js && flight_esm)
+extern inline function freeInputDisposer(ptr:InputDisposer):Void {
+	flight._js._fn.Input.freeInputDisposer(ptr);
+}
+#else
 extern inline function freeInputDisposer(ptr:InputDisposer):Void {
 #if hl
 	flight._hl._fn.Input.freeInputDisposer(ptr);
@@ -374,3 +577,4 @@ extern inline function freeInputDisposer(ptr:InputDisposer):Void {
 	#error "flight.Input: no backend for this target."
 #end
 }
+#end

@@ -1,39 +1,18 @@
 package flight._js;
 
-@:jsRequire("flight")
-private extern class Plane_Ffi {
-	@:native("flight_get_plane_a") static function get_a(ptr:Dynamic):Float;
-	@:native("flight_set_plane_a") static function set_a(ptr:Dynamic, value:Float):Float;
-	@:native("flight_get_plane_b") static function get_b(ptr:Dynamic):Float;
-	@:native("flight_set_plane_b") static function set_b(ptr:Dynamic, value:Float):Float;
-	@:native("flight_get_plane_c") static function get_c(ptr:Dynamic):Float;
-	@:native("flight_set_plane_c") static function set_c(ptr:Dynamic, value:Float):Float;
-	@:native("flight_get_plane_d") static function get_d(ptr:Dynamic):Float;
-	@:native("flight_set_plane_d") static function set_d(ptr:Dynamic, value:Float):Float;
-}
-
 abstract Plane(Dynamic) {
 	public var a(get, set):Float;
-
-	inline function get_a():Float return Plane_Ffi.get_a(this);
-
-	inline function set_a(value:Float):Float return Plane_Ffi.set_a(this, value);
+	inline function get_a():Float return untyped this.a;
+	inline function set_a(value:Float):Float return untyped this.a = value;
 	public var b(get, set):Float;
-
-	inline function get_b():Float return Plane_Ffi.get_b(this);
-
-	inline function set_b(value:Float):Float return Plane_Ffi.set_b(this, value);
+	inline function get_b():Float return untyped this.b;
+	inline function set_b(value:Float):Float return untyped this.b = value;
 	public var c(get, set):Float;
-
-	inline function get_c():Float return Plane_Ffi.get_c(this);
-
-	inline function set_c(value:Float):Float return Plane_Ffi.set_c(this, value);
+	inline function get_c():Float return untyped this.c;
+	inline function set_c(value:Float):Float return untyped this.c = value;
 	public var d(get, set):Float;
-
-	inline function get_d():Float return Plane_Ffi.get_d(this);
-
-	inline function set_d(value:Float):Float return Plane_Ffi.set_d(this, value);
-
+	inline function get_d():Float return untyped this.d;
+	inline function set_d(value:Float):Float return untyped this.d = value;
 	inline public function intersectCamera3dRayWith(out:flight._js.Vector3, ray:flight._js.Ray3D):Bool {
 		return flight._js._fn.Camera.intersectCamera3dRayWithPlane(out, ray, cast this);
 	}

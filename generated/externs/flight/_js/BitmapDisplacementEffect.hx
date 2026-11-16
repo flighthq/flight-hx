@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract BitmapDisplacementEffect(Dynamic) {}
+abstract BitmapDisplacementEffect(Dynamic) {
+}

@@ -1,125 +1,125 @@
 package flight._js._fn;
 
-@:jsRequire("flight")
+@:jsRequire("@flighthq/path")
 extern class Path {
-	@:native("flight_clean_path")
-	public static function cleanPath(source:flight._js.Path, tolerance:Float, out:flight._js.Path, flattenTolerance:Float):Void;
-	@:native("flight_contains_path_point")
-	public static function containsPathPoint(path:flight._js.Path, px:Float, py:Float, tolerance:Float):Bool;
-	@:native("flight_clone_path")
+	@:native("cleanPath")
+	public static function cleanPath(source:flight._js.Path, tolerance:Float, out:flight._js.Path, flattenTolerance:Null<Float>):Void;
+	@:native("containsPathPoint")
+	public static function containsPathPoint(path:flight._js.Path, px:Float, py:Float, tolerance:Null<Float>):Bool;
+	@:native("clonePath")
 	public static function clonePath(source:flight._js.Path):flight._js.Path;
-	@:native("flight_copy_path")
+	@:native("copyPath")
 	public static function copyPath(out:flight._js.Path, source:flight._js.Path):Void;
-	@:native("flight_dash_path")
-	public static function dashPath(source:flight._js.Path, dash:Dynamic, dashLen:Int, dashOffset:Float, out:flight._js.Path, tolerance:Float):Void;
-	@:native("flight_decimate_path")
-	public static function decimatePath(source:flight._js.Path, tolerance:Float, out:flight._js.Path, flattenTolerance:Float):Void;
-	@:native("flight_explain_path_morph_creation")
+	@:native("dashPath")
+	public static function dashPath(source:flight._js.Path, dash:Dynamic, dashOffset:Float, out:flight._js.Path, tolerance:Null<Float>):Void;
+	@:native("decimatePath")
+	public static function decimatePath(source:flight._js.Path, tolerance:Float, out:flight._js.Path, flattenTolerance:Null<Float>):Void;
+	@:native("explainPathMorphCreation")
 	public static function explainPathMorphCreation(start:flight._js.Path, end:flight._js.Path):flight._js.PathMorphCreationExplanation;
-	@:native("flight_explain_stroke_path_tessellation")
-	public static function explainStrokePathTessellation(path:flight._js.Path, style:flight._js.StrokeStyle, tolerance:Float):flight._js.StrokePathTessellationExplanation;
-	@:native("flight_fit_path_curves")
-	public static function fitPathCurves(source:flight._js.Path, tolerance:Float, out:flight._js.Path, flattenTolerance:Float):Void;
-	@:native("flight_get_path_contour_lengths")
-	public static function getPathContourLengths(path:flight._js.Path, tolerance:Float):Dynamic;
-	@:native("flight_get_path_curvature_at_distance")
-	public static function getPathCurvatureAtDistance(path:flight._js.Path, distance:Float, tolerance:Float):Float;
-	@:native("flight_get_path_length")
-	public static function getPathLength(path:flight._js.Path, tolerance:Float):Float;
-	@:native("flight_get_path_nearest_point")
-	public static function getPathNearestPoint(path:flight._js.Path, px:Float, py:Float, out:flight._js.Vector2, tolerance:Float):Float;
-	@:native("flight_get_path_point_at_distance")
-	public static function getPathPointAtDistance(path:flight._js.Path, distance:Float, out:flight._js.Vector2, tolerance:Float):Bool;
-	@:native("flight_get_path_position_at_distance")
-	public static function getPathPositionAtDistance(path:flight._js.Path, distance:Float, pointOut:flight._js.Vector2, tangentOut:flight._js.Vector2, tolerance:Float):Bool;
-	@:native("flight_get_path_tangent_at_distance")
-	public static function getPathTangentAtDistance(path:flight._js.Path, distance:Float, out:flight._js.Vector2, tolerance:Float):Bool;
-	@:native("flight_get_cubic_bezier_curvature")
+	@:native("explainStrokePathTessellation")
+	public static function explainStrokePathTessellation(path:flight._js.Path, style:flight._js.StrokeStyle, tolerance:Null<Float>):flight._js.StrokePathTessellationExplanation;
+	@:native("fitPathCurves")
+	public static function fitPathCurves(source:flight._js.Path, tolerance:Float, out:flight._js.Path, flattenTolerance:Null<Float>):Void;
+	@:native("getPathContourLengths")
+	public static function getPathContourLengths(path:flight._js.Path, tolerance:Null<Float>):Dynamic;
+	@:native("getPathCurvatureAtDistance")
+	public static function getPathCurvatureAtDistance(path:flight._js.Path, distance:Float, tolerance:Null<Float>):Float;
+	@:native("getPathLength")
+	public static function getPathLength(path:flight._js.Path, tolerance:Null<Float>):Float;
+	@:native("getPathNearestPoint")
+	public static function getPathNearestPoint(path:flight._js.Path, px:Float, py:Float, out:flight._js.Vector2, tolerance:Null<Float>):Float;
+	@:native("getPathPointAtDistance")
+	public static function getPathPointAtDistance(path:flight._js.Path, distance:Float, out:flight._js.Vector2, tolerance:Null<Float>):Bool;
+	@:native("getPathPositionAtDistance")
+	public static function getPathPositionAtDistance(path:flight._js.Path, distance:Float, pointOut:flight._js.Vector2, tangentOut:flight._js.Vector2, tolerance:Null<Float>):Bool;
+	@:native("getPathTangentAtDistance")
+	public static function getPathTangentAtDistance(path:flight._js.Path, distance:Float, out:flight._js.Vector2, tolerance:Null<Float>):Bool;
+	@:native("getCubicBezierCurvature")
 	public static function getCubicBezierCurvature(x0:Float, y0:Float, c1x:Float, c1y:Float, c2x:Float, c2y:Float, x1:Float, y1:Float, t:Float):Float;
-	@:native("flight_get_cubic_bezier_point")
+	@:native("getCubicBezierPoint")
 	public static function getCubicBezierPoint(x0:Float, y0:Float, c1x:Float, c1y:Float, c2x:Float, c2y:Float, x1:Float, y1:Float, t:Float, out:flight._js.Vector2):Void;
-	@:native("flight_get_cubic_bezier_tangent")
+	@:native("getCubicBezierTangent")
 	public static function getCubicBezierTangent(x0:Float, y0:Float, c1x:Float, c1y:Float, c2x:Float, c2y:Float, x1:Float, y1:Float, t:Float, out:flight._js.Vector2):Void;
-	@:native("flight_get_path_segment_curvature_at_parameter")
-	public static function getPathSegmentCurvatureAtParameter(path:flight._js.Path, segmentIndex:Int, t:Float):Float;
-	@:native("flight_get_path_segment_point_at_parameter")
+	@:native("getPathSegmentCurvatureAtParameter")
+	public static function getPathSegmentCurvatureAtParameter(path:flight._js.Path, segmentIndex:Int, t:Float):Null<Float>;
+	@:native("getPathSegmentPointAtParameter")
 	public static function getPathSegmentPointAtParameter(path:flight._js.Path, segmentIndex:Int, t:Float, out:flight._js.Vector2):Bool;
-	@:native("flight_get_path_segment_tangent_at_parameter")
+	@:native("getPathSegmentTangentAtParameter")
 	public static function getPathSegmentTangentAtParameter(path:flight._js.Path, segmentIndex:Int, t:Float, out:flight._js.Vector2):Bool;
-	@:native("flight_get_quadratic_bezier_curvature")
+	@:native("getQuadraticBezierCurvature")
 	public static function getQuadraticBezierCurvature(x0:Float, y0:Float, cx:Float, cy:Float, x1:Float, y1:Float, t:Float):Float;
-	@:native("flight_get_quadratic_bezier_point")
+	@:native("getQuadraticBezierPoint")
 	public static function getQuadraticBezierPoint(x0:Float, y0:Float, cx:Float, cy:Float, x1:Float, y1:Float, t:Float, out:flight._js.Vector2):Void;
-	@:native("flight_get_quadratic_bezier_tangent")
+	@:native("getQuadraticBezierTangent")
 	public static function getQuadraticBezierTangent(x0:Float, y0:Float, cx:Float, cy:Float, x1:Float, y1:Float, t:Float, out:flight._js.Vector2):Void;
-	@:native("flight_get_path_contour_orientation")
-	public static function getPathContourOrientation(path:flight._js.Path, tolerance:Float):Int;
-	@:native("flight_get_path_signed_area")
-	public static function getPathSignedArea(path:flight._js.Path, tolerance:Float):Float;
-	@:native("flight_create_path")
-	public static function createPath(winding:Int):flight._js.Path;
-	@:native("flight_append_path_arc")
-	public static function appendPathArc(path:flight._js.Path, centerX:Float, centerY:Float, radius:Float, startAngle:Float, endAngle:Float, anticlockwise:Int, connectToCurrent:Int):Void;
-	@:native("flight_append_path_circle")
+	@:native("getPathContourOrientation")
+	public static function getPathContourOrientation(path:flight._js.Path, tolerance:Null<Float>):Dynamic;
+	@:native("getPathSignedArea")
+	public static function getPathSignedArea(path:flight._js.Path, tolerance:Null<Float>):Float;
+	@:native("createPath")
+	public static function createPath(winding:Null<Dynamic>):flight._js.Path;
+	@:native("appendPathArc")
+	public static function appendPathArc(path:flight._js.Path, centerX:Float, centerY:Float, radius:Float, startAngle:Float, endAngle:Float, anticlockwise:Null<Bool>, connectToCurrent:Null<Bool>):Void;
+	@:native("appendPathCircle")
 	public static function appendPathCircle(path:flight._js.Path, centerX:Float, centerY:Float, radius:Float):Void;
-	@:native("flight_append_path_close")
+	@:native("appendPathClose")
 	public static function appendPathClose(path:flight._js.Path):Void;
-	@:native("flight_append_path_cubic_curve_to")
+	@:native("appendPathCubicCurveTo")
 	public static function appendPathCubicCurveTo(path:flight._js.Path, controlX1:Float, controlY1:Float, controlX2:Float, controlY2:Float, x:Float, y:Float):Void;
-	@:native("flight_append_path_ellipse")
+	@:native("appendPathEllipse")
 	public static function appendPathEllipse(path:flight._js.Path, centerX:Float, centerY:Float, radiusX:Float, radiusY:Float):Void;
-	@:native("flight_append_path_elliptical_arc_to")
+	@:native("appendPathEllipticalArcTo")
 	public static function appendPathEllipticalArcTo(path:flight._js.Path, radiusX:Float, radiusY:Float, xAxisRotation:Float, largeArc:Bool, sweep:Bool, endX:Float, endY:Float):Void;
-	@:native("flight_append_path_line_to")
+	@:native("appendPathLineTo")
 	public static function appendPathLineTo(path:flight._js.Path, x:Float, y:Float):Void;
-	@:native("flight_append_path_move_to")
+	@:native("appendPathMoveTo")
 	public static function appendPathMoveTo(path:flight._js.Path, x:Float, y:Float):Void;
-	@:native("flight_append_path_polygon")
-	public static function appendPathPolygon(path:flight._js.Path, points:Dynamic, pointsLen:Int):Void;
-	@:native("flight_append_path_polyline")
-	public static function appendPathPolyline(path:flight._js.Path, points:Dynamic, pointsLen:Int):Void;
-	@:native("flight_append_path_quadratic_curve_to")
+	@:native("appendPathPolygon")
+	public static function appendPathPolygon(path:flight._js.Path, points:Dynamic):Void;
+	@:native("appendPathPolyline")
+	public static function appendPathPolyline(path:flight._js.Path, points:Dynamic):Void;
+	@:native("appendPathQuadraticCurveTo")
 	public static function appendPathQuadraticCurveTo(path:flight._js.Path, controlX:Float, controlY:Float, x:Float, y:Float):Void;
-	@:native("flight_append_path_rectangle")
+	@:native("appendPathRectangle")
 	public static function appendPathRectangle(path:flight._js.Path, x:Float, y:Float, width:Float, height:Float):Void;
-	@:native("flight_append_path_rounded_rectangle")
+	@:native("appendPathRoundedRectangle")
 	public static function appendPathRoundedRectangle(path:flight._js.Path, x:Float, y:Float, width:Float, height:Float, radius:Float):Void;
-	@:native("flight_append_path_rounded_rectangle_with_corner_radii")
+	@:native("appendPathRoundedRectangleWithCornerRadii")
 	public static function appendPathRoundedRectangleWithCornerRadii(path:flight._js.Path, x:Float, y:Float, width:Float, height:Float, topLeft:Float, topRight:Float, bottomRight:Float, bottomLeft:Float):Void;
-	@:native("flight_append_path_tangent_arc_to")
+	@:native("appendPathTangentArcTo")
 	public static function appendPathTangentArcTo(path:flight._js.Path, x1:Float, y1:Float, x2:Float, y2:Float, radius:Float):Void;
-	@:native("flight_create_path_morph")
-	public static function createPathMorph(start:flight._js.Path, end:flight._js.Path):Dynamic;
-	@:native("flight_sample_path_morph")
+	@:native("createPathMorph")
+	public static function createPathMorph(start:flight._js.Path, end:flight._js.Path):Null<flight._js.PathMorph>;
+	@:native("samplePathMorph")
 	public static function samplePathMorph(out:flight._js.Path, morph:flight._js.PathMorph, progress:Float):Void;
-	@:native("flight_reverse_path")
+	@:native("reversePath")
 	public static function reversePath(source:flight._js.Path, out:flight._js.Path):Void;
-	@:native("flight_stroke_path")
-	public static function strokePath(path:flight._js.Path, style:flight._js.StrokeStyle, tolerance:Float):flight._js.Path;
-	@:native("flight_tessellate_path")
-	public static function tessellatePath(path:flight._js.Path, tolerance:Float):flight._js.PathMesh;
-	@:native("flight_tessellate_path_into")
-	public static function tessellatePathInto(path:flight._js.Path, out:flight._js.PathMesh, tolerance:Float):Void;
-	@:native("flight_tessellate_path_typed")
-	public static function tessellatePathTyped(path:flight._js.Path, tolerance:Float):flight._js.PathMeshTyped;
-	@:native("flight_tessellate_path_typed_into")
-	public static function tessellatePathTypedInto(path:flight._js.Path, out:flight._js.PathMeshTyped, tolerance:Float):Void;
-	@:native("flight_tessellate_stroke_path")
-	public static function tessellateStrokePath(path:flight._js.Path, style:flight._js.StrokeStyle, tolerance:Float):Dynamic;
-	@:native("flight_transform_path")
+	@:native("strokePath")
+	public static function strokePath(path:flight._js.Path, style:flight._js.StrokeStyle, tolerance:Null<Float>):flight._js.Path;
+	@:native("tessellatePath")
+	public static function tessellatePath(path:flight._js.Path, tolerance:Null<Float>):flight._js.PathMesh;
+	@:native("tessellatePathInto")
+	public static function tessellatePathInto(path:flight._js.Path, out:flight._js.PathMesh, tolerance:Null<Float>):Void;
+	@:native("tessellatePathTyped")
+	public static function tessellatePathTyped(path:flight._js.Path, tolerance:Null<Float>):flight._js.PathMeshTyped;
+	@:native("tessellatePathTypedInto")
+	public static function tessellatePathTypedInto(path:flight._js.Path, out:flight._js.PathMeshTyped, tolerance:Null<Float>):Void;
+	@:native("tessellateStrokePath")
+	public static function tessellateStrokePath(path:flight._js.Path, style:flight._js.StrokeStyle, tolerance:Null<Float>):Null<flight._js.PathMesh>;
+	@:native("transformPath")
 	public static function transformPath(source:flight._js.Path, matrix:flight._js.Matrix, out:flight._js.Path):Void;
-	@:native("flight_translate_path")
+	@:native("translatePath")
 	public static function translatePath(source:flight._js.Path, dx:Float, dy:Float, out:flight._js.Path):Void;
-	@:native("flight_free_path")
-	public static function freePath(ptr:flight._js.Path):Void;
-	@:native("flight_free_path_morph_creation_explanation")
-	public static function freePathMorphCreationExplanation(ptr:flight._js.PathMorphCreationExplanation):Void;
-	@:native("flight_free_stroke_path_tessellation_explanation")
-	public static function freeStrokePathTessellationExplanation(ptr:flight._js.StrokePathTessellationExplanation):Void;
-	@:native("flight_free_path_morph")
-	public static function freePathMorph(ptr:flight._js.PathMorph):Void;
-	@:native("flight_free_path_mesh")
-	public static function freePathMesh(ptr:flight._js.PathMesh):Void;
-	@:native("flight_free_path_mesh_typed")
-	public static function freePathMeshTyped(ptr:flight._js.PathMeshTyped):Void;
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freePath(ptr:flight._js.Path):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freePathMorphCreationExplanation(ptr:flight._js.PathMorphCreationExplanation):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeStrokePathTessellationExplanation(ptr:flight._js.StrokePathTessellationExplanation):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freePathMorph(ptr:flight._js.PathMorph):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freePathMesh(ptr:flight._js.PathMesh):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freePathMeshTyped(ptr:flight._js.PathMeshTyped):Void {}
 }

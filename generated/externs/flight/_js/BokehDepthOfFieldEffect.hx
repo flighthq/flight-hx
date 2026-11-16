@@ -1,3 +1,4 @@
 package flight._js;
 
-abstract BokehDepthOfFieldEffect(Dynamic) {}
+abstract BokehDepthOfFieldEffect(Dynamic) {
+}
