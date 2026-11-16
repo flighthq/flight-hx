@@ -20,15 +20,15 @@ abstract Scene2D(cpp.Star<cpp.Void>) {
 	inline function set_scene2dWidth(value:Float):Float { Scene2D_Ffi.set_scene2dWidth(this, value); return value; }
 
 	extern inline public function enableSignals():cpp.Star<cpp.Void> {
-		return flight._cpp._fn.Scene2d.enableScene2dSignals(cast this);
+		return flight._cpp._fn.Scene2D.enableScene2dSignals(cast this);
 	}
 	extern inline public function getRuntime():flight._cpp.Scene2DRuntime {
-		return flight._cpp._fn.Scene2d.getScene2dRuntime(cast this);
+		return flight._cpp._fn.Scene2D.getScene2dRuntime(cast this);
 	}
 	extern inline public function getSignals():cpp.Star<cpp.Void> {
-		return flight._cpp._fn.Scene2d.getScene2dSignals(cast this);
+		return flight._cpp._fn.Scene2D.getScene2dSignals(cast this);
 	}
 	extern inline public function getKindUsage(out:flight._cpp.Scene2DKindUsage):Void {
-		flight._cpp._fn.Scene2d.getScene2dKindUsage(out, cast this);
+		flight._cpp._fn.Scene2D.getScene2dKindUsage(out, cast this);
 	}
 }

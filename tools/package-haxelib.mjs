@@ -12,6 +12,7 @@ import path from 'node:path';
 import process from 'node:process';
 import { deflateRawSync } from 'node:zlib';
 import { nativePayload } from './native/artifacts.mjs';
+import { assertPortablePaths } from './externs/portable-paths.mjs';
 
 // Haxelib consumes ordinary ZIP archives, but Node has no built-in ZIP container writer. This
 // small deterministic ZIP32 writer keeps packaging dependency-free: fixed timestamps, sorted paths,
@@ -117,6 +118,7 @@ function packageFiles() {
   const esm = filesUnder('tools/esm').filter((filename) => filename.endsWith('.hx'));
   const native = options.includes('--externs-only') ? [] : nativePayload(root);
   const result = [...fixed, ...roots.flatMap(filesUnder), ...esm, ...native].sort(compareText);
+  assertPortablePaths(result);
   if (result.length > 0xffff) throw new Error('Haxelib archive exceeds the ZIP32 entry limit');
   return result;
 }

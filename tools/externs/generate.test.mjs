@@ -4,6 +4,14 @@ import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { test } from 'node:test';
 import { generate } from './generate.mjs';
+import { assertPortablePaths } from './portable-paths.mjs';
+
+test('rejects case-only SDK module/type collisions before copying or packaging', () => {
+  for (const [type, module] of [['TextureAtlas', 'Textureatlas'], ['MotionPath', 'Motionpath'], ['Physics2DAbi', 'Physics2dAbi']]) {
+    assert.throws(() => assertPortablePaths([`flight/${type}.hx`, `flight/${module}.hx`]), /Case-insensitive filename collision/u);
+  }
+  assert.doesNotThrow(() => assertPortablePaths(['flight/TextureAtlas.hx', 'flight/_hl/TextureAtlas.hx', 'flight/_cpp/_fn/TextureAtlas.hx']));
+});
 
 // Exercise orchestration and failure isolation without claiming these fixture externs prove the
 // actual Rust generator or ABI. Those require the upstream checkout and Haxe/Cargo toolchains.

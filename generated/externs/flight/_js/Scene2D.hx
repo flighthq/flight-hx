@@ -8,15 +8,15 @@ abstract Scene2D(Dynamic) {
 	inline function get_scene2dWidth():Float return untyped this.scene2DWidth;
 	inline function set_scene2dWidth(value:Float):Float return untyped this.scene2DWidth = value;
 	inline public function enableSignals():Dynamic {
-		return flight._js._fn.Scene2d.enableScene2dSignals(cast this);
+		return flight._js._fn.Scene2D.enableScene2dSignals(cast this);
 	}
 	inline public function getRuntime():flight._js.Scene2DRuntime {
-		return flight._js._fn.Scene2d.getScene2dRuntime(cast this);
+		return flight._js._fn.Scene2D.getScene2dRuntime(cast this);
 	}
 	inline public function getSignals():Null<Dynamic> {
-		return flight._js._fn.Scene2d.getScene2dSignals(cast this);
+		return flight._js._fn.Scene2D.getScene2dSignals(cast this);
 	}
 	inline public function getKindUsage(out:flight._js.Scene2DKindUsage):Void {
-		flight._js._fn.Scene2d.getScene2dKindUsage(out, cast this);
+		flight._js._fn.Scene2D.getScene2dKindUsage(out, cast this);
 	}
 }

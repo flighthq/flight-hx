@@ -14,6 +14,9 @@ implementation backend or local C++ SDK adapters.
 - `tools/externs/generate.mjs` orchestrates the supplied Cargo recipe, stages
   output, records provenance, and detects drift. It uses Cargo build-script
   messages to locate the current FFI source, rather than globbing stale builds.
+- Intake, surface and ZIP checks reject case-insensitive path collisions.
+  Producer facades sharing a name with an SDK type use its exact case and one
+  combined module. Preserve this for Windows/default macOS filesystem support.
 - `patches/flight/` carries reviewable changes to the Rust producer. Apply only
   through `tools/flight-source.mjs`; keep the pinned input checkout clean. Exact
   patch/diff fingerprints identify the prepared source and generated provenance.

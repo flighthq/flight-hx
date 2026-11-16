@@ -11,6 +11,10 @@
       {
         "path": "patches/flight/0002-js-esm.patch",
         "sha256": "881469fbb4b1267d1f1329bd88f10ca6edfc40958fb438481461da1ebc5b2f67"
+      },
+      {
+        "path": "patches/flight/0003-portable-module-names.patch",
+        "sha256": "6f6d5b2fafdb3c8bf1905b3b9b4e5782fbf668b49e4c205046c8d7b73b1175c1"
       }
     ]
   },
@@ -1672,7 +1676,7 @@
     },
     {
       "path": "flight/MotionPath.hx",
-      "sha256": "c9acbc92101824ffc926631dadff100128e31c2d399ae369adce7aa5331b11ad"
+      "sha256": "2bc97ace9ecc1df507523b3f16534c29a394ffec09d06589dd3cd28d845e6629"
     },
     {
       "path": "flight/MotionPathDirection.hx",
@@ -1683,16 +1687,12 @@
       "sha256": "c0f77d3f1fc9da9578db693e5c08de776d3734407db69e64094bcee3332be3f6"
     },
     {
-      "path": "flight/Motionpath.hx",
-      "sha256": "4cb8408329db0d9d06ede7b8b95ffff27c3ac3b780e6d76549471985967e06b4"
-    },
-    {
       "path": "flight/MouseWheelMode.hx",
       "sha256": "e91602d6e0c87bc0fe350ae69f9e85c4078953e9451f669a2e416865e213389d"
     },
     {
       "path": "flight/MovieClip.hx",
-      "sha256": "55fc83b5282725459cc0e5fe639525c9078c0dea06be15d85528aba0b78ad1dd"
+      "sha256": "f979cd9bb3c931df134cb71559c48b8f3c43f7ea5eb815936d5a5d0befe616f3"
     },
     {
       "path": "flight/MovieClipData.hx",
@@ -1709,10 +1709,6 @@
     {
       "path": "flight/MovieClipSignals.hx",
       "sha256": "4dec198874b3f66007fa4b60239fb57f7fd4dbe0acc2e7bbe942ce7cfbf2c287"
-    },
-    {
-      "path": "flight/Movieclip.hx",
-      "sha256": "610a4e84744cb739c478acd576af67f50c453d0e2c5125d658065a441b469056"
     },
     {
       "path": "flight/NativeText.hx",
@@ -2028,7 +2024,7 @@
     },
     {
       "path": "flight/Physics2DAbi.hx",
-      "sha256": "f7a474aada0226a0808e294c9d583be54cbbf2104029bef6322981059b0e4a76"
+      "sha256": "a78307c8e9ad6d23c86fd76c1b46345a3e9f3708dbd8d7478ea78b822ffc0a90"
     },
     {
       "path": "flight/Physics2DAbiBodyBuffer.hx",
@@ -2283,12 +2279,8 @@
       "sha256": "09b85d543c4722e48ab554fe6f81ef53ffe05a155e1e5e25dd3204448532892b"
     },
     {
-      "path": "flight/Physics2dAbi.hx",
-      "sha256": "d1acff822d00ebb1d7f9456aaa69c0390d3872c8decfd7b9d4f1e0c0be31ab4d"
-    },
-    {
       "path": "flight/Physics3DAbi.hx",
-      "sha256": "6c9136f6739766b02a1a90de5aa1f5d35b57d9ba3c0de38769829780fcc474a7"
+      "sha256": "e400403164fef329ae3f9b2750b2dbeb6cb155250c035b5dd3862d2b18517178"
     },
     {
       "path": "flight/Physics3DAbiBodyBuffer.hx",
@@ -2375,10 +2367,6 @@
       "sha256": "d0a84318fdafbcdd14a693072c3986cf40ed62d1eec9c0350eb70a6c7473bbf7"
     },
     {
-      "path": "flight/Physics3dAbi.hx",
-      "sha256": "8675b3d4ced69288186ceb086fbf52df600fd6dbaa18a179b7dd2f3de4c9c42d"
-    },
-    {
       "path": "flight/Picking.hx",
       "sha256": "e7ca2eb68a480920322e22323172c14a61becced67cb1d460f9b2cb2282e34a3"
     },
@@ -2416,7 +2404,7 @@
     },
     {
       "path": "flight/QuadBatch.hx",
-      "sha256": "46379fc43ace64ac9bd9b8528ed8d8fd988319c1f0b3df5a6ec056e1f6a51fec"
+      "sha256": "317d1202f8d4b213a82f92442a507d5a131f8dbc123e3dcf8ea450729372cc48"
     },
     {
       "path": "flight/QuadBatchData.hx",
@@ -2425,10 +2413,6 @@
     {
       "path": "flight/QuadTransformType.hx",
       "sha256": "4c3d7a3dd59a31715ff988e8964b55f4e1d664607bf31961f6e54bdcd2deca7a"
-    },
-    {
-      "path": "flight/Quadbatch.hx",
-      "sha256": "690d4101a771af7965b3133053f56e9cabfdec848e08dd1e2b3eeac1f34de919"
     },
     {
       "path": "flight/Quaternion.hx",
@@ -2640,7 +2624,7 @@
     },
     {
       "path": "flight/Scene2D.hx",
-      "sha256": "356df3cda557b4472da3ce356f649ec2ee1032f2d66ddaddf7cb1f42307191b6"
+      "sha256": "7893393a620fd6cd5717f555c456c969ab975297c94c9f8b87133eecee671904"
     },
     {
       "path": "flight/Scene2DAlign.hx",
@@ -2681,10 +2665,6 @@
     {
       "path": "flight/Scene2DSlotReference.hx",
       "sha256": "0db83e9be0c193c92cef74c755733a5bc2c513260c3b753384b39276e9020535"
-    },
-    {
-      "path": "flight/Scene2d.hx",
-      "sha256": "b9096c0ea1836d02cbca99653f8402aafdfb9c6b4cec65d6e0575330b9a6d0e1"
     },
     {
       "path": "flight/Scene2dFormats.hx",
@@ -2820,7 +2800,7 @@
     },
     {
       "path": "flight/Skeleton2D.hx",
-      "sha256": "e2e4654acb9cf36b237c4e277b192c345ac2a3be36a43c81b48cf53dfb62529e"
+      "sha256": "daba5471d6d5f17485eae617c354682c86a27f15d51b01768523384c1a9e4fdd"
     },
     {
       "path": "flight/Skeleton2DAnimationTarget.hx",
@@ -2877,10 +2857,6 @@
     {
       "path": "flight/Skeleton2DTransformConstraint.hx",
       "sha256": "94b2443aa0f96447eab2f0ff0c46b42b84c44987e3fe91dcd92e52cfa76f1016"
-    },
-    {
-      "path": "flight/Skeleton2d.hx",
-      "sha256": "c8601052248e84d56fe30682e9e3880734b0f8b905780a5c828290f0a9db6f5c"
     },
     {
       "path": "flight/SketchEffect.hx",
@@ -3348,7 +3324,7 @@
     },
     {
       "path": "flight/TextSegment.hx",
-      "sha256": "bd674be37ee378cbb72f7e60f1217c92b55c1a65419879e6fc3807d00aa11840"
+      "sha256": "4794ccd1e7c28c7a1b56a3f09498126724608d68e22d383b21315ba5dddcfe7e"
     },
     {
       "path": "flight/TextSegmentRange.hx",
@@ -3367,10 +3343,6 @@
       "sha256": "4fd34c556a2ba685a8f420b1f038c86e7882160ff6522af7f5cb26e207a60002"
     },
     {
-      "path": "flight/Textsegment.hx",
-      "sha256": "53911328543333ecd17b73a9d7139d1169e9e5a690e9c6a22ae27107ed2643fc"
-    },
-    {
       "path": "flight/Texture.hx",
       "sha256": "866b1e95e953b96075830efd112d25be5c025d60140a0dde459d2c44a2f24c4f"
     },
@@ -3380,7 +3352,7 @@
     },
     {
       "path": "flight/TextureAtlas.hx",
-      "sha256": "611a11066c4821dc7beaaeb89be6caab2cc978dd1d34729800252cebbcbaaf42"
+      "sha256": "3e4195bb42f563a43992455cd9d272a74038b4f063ecd17f2e6d62d48283e63d"
     },
     {
       "path": "flight/TextureAtlasAsepriteArrayFrame.hx",
@@ -3573,10 +3545,6 @@
     {
       "path": "flight/TextureWrap.hx",
       "sha256": "00233181a8711626390996b4c374a4cf00263d0903146af3745ae029c7a81530"
-    },
-    {
-      "path": "flight/Textureatlas.hx",
-      "sha256": "3b44f97d654dae86c934f7787f1f95a0844981475ffc26e82db9ac55534ac776"
     },
     {
       "path": "flight/TextureatlasFormats.hx",
@@ -5144,7 +5112,7 @@
     },
     {
       "path": "flight/_cpp/Matrix.hx",
-      "sha256": "c5027392813cbfddf7635490f75779264249ff0c9f4ba8276c5090a06bb2e369"
+      "sha256": "c99dc9ab5ba2c290ede157eea067b52a1e8d9fcc1db409374e8ee7a49659ec96"
     },
     {
       "path": "flight/_cpp/Matrix3.hx",
@@ -5788,7 +5756,7 @@
     },
     {
       "path": "flight/_cpp/Rectangle.hx",
-      "sha256": "9b1d6555dab8d9003030a087d63b9842d041364cfd0b89e26e10b6ce3c816847"
+      "sha256": "da2077fcab2b48c5b261362ef61a902201bdad387f46ccb7fcc60f49f0950b50"
     },
     {
       "path": "flight/_cpp/RenderQueue.hx",
@@ -5944,7 +5912,7 @@
     },
     {
       "path": "flight/_cpp/Scene2D.hx",
-      "sha256": "99d0dfdf1a180056458a531eb1c43f0599c443a59a621bc3ce6547903ec308af"
+      "sha256": "b9505773d27b225578cc23f49f80e738c5b4bf40d11a20e976d537d621e0ddeb"
     },
     {
       "path": "flight/_cpp/Scene2DFitContext.hx",
@@ -6216,7 +6184,7 @@
     },
     {
       "path": "flight/_cpp/Sprite.hx",
-      "sha256": "c50dd31f7b9c882f26448f6d4aa607a917605eac9bdbb4848e6af3f4b69f46d6"
+      "sha256": "8c1801dfe6fda90ede6852093ac98a3eff70b042dbee0d9ab0bb2fe68b8723d3"
     },
     {
       "path": "flight/_cpp/SpriteData.hx",
@@ -6856,7 +6824,7 @@
     },
     {
       "path": "flight/_cpp/Vector2.hx",
-      "sha256": "0fca96b9ada9aa79b90529ce44c57511d7067c899f610b8f3a89b9fece82ef97"
+      "sha256": "5739702340bf2b9d389315571a6bd6db05cf4965f59f2629ea489cec8b431f2c"
     },
     {
       "path": "flight/_cpp/Vector3.hx",
@@ -7027,12 +6995,12 @@
       "sha256": "c0a6f42277da370595706ac7585611ca51a97dc91c6665f5f2cc59069626952b"
     },
     {
-      "path": "flight/_cpp/_fn/Motionpath.hx",
-      "sha256": "fe620b9664d8bb4b8f46567cb838d7e9bf29bf6316dd146a197faedf596e4c4d"
+      "path": "flight/_cpp/_fn/MotionPath.hx",
+      "sha256": "29db3b7b5f683ae4d0813bc83ef2ee5e312649056da37bee01f1d1828c967b28"
     },
     {
-      "path": "flight/_cpp/_fn/Movieclip.hx",
-      "sha256": "75e4f6c6a884b1e2afed8a49c17258ef779b2280a031cd5c068df2c6292830e5"
+      "path": "flight/_cpp/_fn/MovieClip.hx",
+      "sha256": "fb9dc372b8032d075bea9ad43d2ec8b90b0769eda1e5c889fef57dc6f2a247c2"
     },
     {
       "path": "flight/_cpp/_fn/Node.hx",
@@ -7063,28 +7031,28 @@
       "sha256": "f48667e3942839b841100fa5996671b454ae74b9dac89a9e6bc988e27cf3f60e"
     },
     {
+      "path": "flight/_cpp/_fn/Physics2DAbi.hx",
+      "sha256": "8ef4c94e5eaf88f848e44c9d69acc7d218f6ac79dcfc87ceebd9c840786a14ee"
+    },
+    {
       "path": "flight/_cpp/_fn/Physics2d.hx",
       "sha256": "fa735460dc442234e4ae6998503bed34530f4a62256e1e72d1126b088e15e8e3"
     },
     {
-      "path": "flight/_cpp/_fn/Physics2dAbi.hx",
-      "sha256": "6a121f7114c940067560b5a8abe4ef872c2cde13547ebcb2b83548dff9669fdf"
-    },
-    {
-      "path": "flight/_cpp/_fn/Physics3dAbi.hx",
-      "sha256": "3cc7e31d5801bf8f0dc904b61bda4c14ca6ada33193ddf8a8474c02af9c0916f"
+      "path": "flight/_cpp/_fn/Physics3DAbi.hx",
+      "sha256": "c27ef78d79e5c37ab61d8edc3a4399ea026439faa03f370044e036fdb86b4156"
     },
     {
       "path": "flight/_cpp/_fn/Picking.hx",
       "sha256": "d4e6c9fa08b59030024119357f89c84d1e55427be9a093eab5255709aad1c4e8"
     },
     {
-      "path": "flight/_cpp/_fn/Quadbatch.hx",
-      "sha256": "ee3065d064f39515ff2ade2337047c794e8f335d03ce95124c8df272fd1e7303"
+      "path": "flight/_cpp/_fn/QuadBatch.hx",
+      "sha256": "4209c85081c2a86c232b3fb20d0f561be9e2c086ff201d21c2ceb3149cbdfdb6"
     },
     {
-      "path": "flight/_cpp/_fn/Scene2d.hx",
-      "sha256": "0ceaf0716965318430cd3e46c750251095ff985eabd358e8040aa83707bb349e"
+      "path": "flight/_cpp/_fn/Scene2D.hx",
+      "sha256": "b9f8bd9a44b2c2af8edd0b246d50b19fe6dd949655d11eaccb02069c52c5d9c0"
     },
     {
       "path": "flight/_cpp/_fn/Scene2dFormats.hx",
@@ -7107,8 +7075,8 @@
       "sha256": "16d5db71e0033ed7f6f8d013f5577d6752a43f7d24fd0c531708e2d6d610b941"
     },
     {
-      "path": "flight/_cpp/_fn/Skeleton2d.hx",
-      "sha256": "3fa3ab0a2ba632e59977f4d176cad52ce41df9d76acf9e8d5ab7b6a33c9e186f"
+      "path": "flight/_cpp/_fn/Skeleton2D.hx",
+      "sha256": "3dde60cad944ff7b4865c325238500d06e7bf0a5ff8b0c9453fc366767b9e13e"
     },
     {
       "path": "flight/_cpp/_fn/Snapshot.hx",
@@ -7143,24 +7111,24 @@
       "sha256": "3b1e558bc491b052de2ee986371b016c2437f8ebb7af541afc6fc0a387bbc440"
     },
     {
-      "path": "flight/_cpp/_fn/Textbidi.hx",
-      "sha256": "6aac4078fd7ff27a7e353041de4a1255043b078c28b908a15eda3de1a3e3bd73"
+      "path": "flight/_cpp/_fn/TextSegment.hx",
+      "sha256": "407be33ddc150b68ca51d14ee8b5135c33c073ad16306350cfcf02979f955190"
     },
     {
-      "path": "flight/_cpp/_fn/Textsegment.hx",
-      "sha256": "c91007bf378ed002934263b4486400357058b0e48c9f78772e9fffa2879aa5f5"
+      "path": "flight/_cpp/_fn/Textbidi.hx",
+      "sha256": "6aac4078fd7ff27a7e353041de4a1255043b078c28b908a15eda3de1a3e3bd73"
     },
     {
       "path": "flight/_cpp/_fn/Texture.hx",
       "sha256": "35a52b48ea79c922d1e80cac1dfe5b2ee90a9315f272b1614aecc1af4a86b499"
     },
     {
-      "path": "flight/_cpp/_fn/TextureFormats.hx",
-      "sha256": "eaf1a115cf9604d4483cf9b7787bc2d6015b615a630c34556d9175d51f8d2899"
+      "path": "flight/_cpp/_fn/TextureAtlas.hx",
+      "sha256": "aad2222ddc6fdd1681b9adeb489ebdf59803dcb0b56b530a93d81048490c6d0b"
     },
     {
-      "path": "flight/_cpp/_fn/Textureatlas.hx",
-      "sha256": "e6bbaaf7105c68a482a0cb67c4ef1dc92c4526decf232ac18c5b1ba4e40f488a"
+      "path": "flight/_cpp/_fn/TextureFormats.hx",
+      "sha256": "eaf1a115cf9604d4483cf9b7787bc2d6015b615a630c34556d9175d51f8d2899"
     },
     {
       "path": "flight/_cpp/_fn/TextureatlasFormats.hx",
@@ -8380,7 +8348,7 @@
     },
     {
       "path": "flight/_hl/Matrix.hx",
-      "sha256": "10497a16d318fd8b68cd0da10a7c48435c585905989c4cea3424b73b571006c7"
+      "sha256": "21102ea5a279ccc606b08a71aeadfb7b6e6e881fa36f01a8aeac537ead40871e"
     },
     {
       "path": "flight/_hl/Matrix3.hx",
@@ -9024,7 +8992,7 @@
     },
     {
       "path": "flight/_hl/Rectangle.hx",
-      "sha256": "62018eda1fcac0655e8e9793219640b4b90bc818d83c82bba0c43f98901a8136"
+      "sha256": "ecde8ee5046586047d5bd6093c560e42e0ef0a01c51834ffb197ed6d84ac566a"
     },
     {
       "path": "flight/_hl/RenderQueue.hx",
@@ -9180,7 +9148,7 @@
     },
     {
       "path": "flight/_hl/Scene2D.hx",
-      "sha256": "430c689c98f6ef999e7b63c45a62532044e3275f69b3e018d0a8a523b06476ce"
+      "sha256": "44fda29167b56f68b4a421d8341695c0c743e561d510ff9b752f71b8b25a5499"
     },
     {
       "path": "flight/_hl/Scene2DFitContext.hx",
@@ -9452,7 +9420,7 @@
     },
     {
       "path": "flight/_hl/Sprite.hx",
-      "sha256": "271cfffdcda23246b8fd831028ad4c1779085d65406c300352be1780056a979d"
+      "sha256": "9c9b0727a850aa812d169132a464c2f032d7c46095ae45cf6871f0f111f21663"
     },
     {
       "path": "flight/_hl/SpriteData.hx",
@@ -10092,7 +10060,7 @@
     },
     {
       "path": "flight/_hl/Vector2.hx",
-      "sha256": "b788db2693700f84bdfe6b023f57298a2f9e8a6caa60ba489c03365054352423"
+      "sha256": "bee8b3ee2c2f6a7de66ed1f5009bfa546d9f43d4340836793c5b1fbe53f25005"
     },
     {
       "path": "flight/_hl/Vector3.hx",
@@ -10263,12 +10231,12 @@
       "sha256": "b93fa535d0be154ea526699665deb8c4212b10914d8601e51757fff777d8ef0d"
     },
     {
-      "path": "flight/_hl/_fn/Motionpath.hx",
-      "sha256": "91cbe857ceb57f09900df664446bf290bec5c1ae327742a6c1b5ff73d9001986"
+      "path": "flight/_hl/_fn/MotionPath.hx",
+      "sha256": "89de914561e14380adbff58fa7ee2e394282bd4dcd7aaa6cf7939beb544b0f49"
     },
     {
-      "path": "flight/_hl/_fn/Movieclip.hx",
-      "sha256": "8270d66a670c9f005a7d31894b622d2eeedd1bc4b55451edab1b515fb7fc118e"
+      "path": "flight/_hl/_fn/MovieClip.hx",
+      "sha256": "c49aeabf2e90732ee4ddeef1256d264821f45e7f44b77e5bd9d7c2c85d8ce2ce"
     },
     {
       "path": "flight/_hl/_fn/Node.hx",
@@ -10299,28 +10267,28 @@
       "sha256": "c1e04527e45ff872ce13a7316a5aaa0abfcede435445df3901417a1fa4a0acdb"
     },
     {
+      "path": "flight/_hl/_fn/Physics2DAbi.hx",
+      "sha256": "334cb3fd0d776fd220c579aeb16f74da9610a4adea51a1aacf1dc137b93717f9"
+    },
+    {
       "path": "flight/_hl/_fn/Physics2d.hx",
       "sha256": "4a44c50f2b27103d60338c1ac53bf93118558d5a64178322675976b5fe9a8fd6"
     },
     {
-      "path": "flight/_hl/_fn/Physics2dAbi.hx",
-      "sha256": "9063b5ebc2da6f65df981d882ef5eb4bbb86f2d64b963884d82f73228b42ae54"
-    },
-    {
-      "path": "flight/_hl/_fn/Physics3dAbi.hx",
-      "sha256": "6ec5db35e5c23c714fb505c09b3384273779399cb694195416a7685b579eabe0"
+      "path": "flight/_hl/_fn/Physics3DAbi.hx",
+      "sha256": "548db9bfc578d178377783f4dc544b23a2a0e54544b9b9396b778666e17fa778"
     },
     {
       "path": "flight/_hl/_fn/Picking.hx",
       "sha256": "b7a461822d529db7ef9bb7dcfe6842afd8ed8151527751d55603b3408c14608e"
     },
     {
-      "path": "flight/_hl/_fn/Quadbatch.hx",
-      "sha256": "68c8901f63d10865fc955c91cf2ff4cd3528026dd230d44be5f0d53b6c2e34a2"
+      "path": "flight/_hl/_fn/QuadBatch.hx",
+      "sha256": "51600d7b7499791919e663db9b62203e03fc4179af08e3eec94b9679a9c41019"
     },
     {
-      "path": "flight/_hl/_fn/Scene2d.hx",
-      "sha256": "7bdcd8816fe3e53c6ddcc5272854a20beecd4c97aa7a37a6a90fa9310268f5d4"
+      "path": "flight/_hl/_fn/Scene2D.hx",
+      "sha256": "9a16e1b9fee8690d6e0a241537ef6eef2402bc426edfb6256290939cfbb117f7"
     },
     {
       "path": "flight/_hl/_fn/Scene2dFormats.hx",
@@ -10343,8 +10311,8 @@
       "sha256": "cc254f230e3f3dc6b7c79096fb0a076bc2a3b3944036605ae444d4a4fb0399be"
     },
     {
-      "path": "flight/_hl/_fn/Skeleton2d.hx",
-      "sha256": "4138653a78117ca037ac156dd6d4d4cea4a11999d07db964ed6776e1f760b096"
+      "path": "flight/_hl/_fn/Skeleton2D.hx",
+      "sha256": "a852a59c64ade775c099add4992782c75c12df6bd41700b9581cdba5128e0c3e"
     },
     {
       "path": "flight/_hl/_fn/Snapshot.hx",
@@ -10379,24 +10347,24 @@
       "sha256": "27c05fcbcd5d1ecb298a8d99eac52e3375c115e170de92f9941b5f56a1c5aecf"
     },
     {
-      "path": "flight/_hl/_fn/Textbidi.hx",
-      "sha256": "7d770641e139eaef6b6c5690db9ffadf74deb3f4ea9dcdd006f10da051871b89"
+      "path": "flight/_hl/_fn/TextSegment.hx",
+      "sha256": "5bf849cc331ccc1d8c4d18d90f654307fe44c7a753d17caeed23e1e0da5663ce"
     },
     {
-      "path": "flight/_hl/_fn/Textsegment.hx",
-      "sha256": "78044f2e4cebe2b44c8e0bcc5105b5dceb427048eb43b4816b2a262d5db2acba"
+      "path": "flight/_hl/_fn/Textbidi.hx",
+      "sha256": "7d770641e139eaef6b6c5690db9ffadf74deb3f4ea9dcdd006f10da051871b89"
     },
     {
       "path": "flight/_hl/_fn/Texture.hx",
       "sha256": "03ab14687e17f072cf3557a6bc1445a10d40de8c00a49eca6e03ba0ef275c719"
     },
     {
-      "path": "flight/_hl/_fn/TextureFormats.hx",
-      "sha256": "b49bde5235cda2c90a8bef7ebafd677e89ab912b184a676e0860ee8f7e053637"
+      "path": "flight/_hl/_fn/TextureAtlas.hx",
+      "sha256": "cfbee7241c53916d012af556c5cc2f81db7b687fb76af808f5309dd19aa7d151"
     },
     {
-      "path": "flight/_hl/_fn/Textureatlas.hx",
-      "sha256": "63e2f025b9add000dbf168aa7de3c7b7f3d6a6d063a2a54d2ac3678c8f03452d"
+      "path": "flight/_hl/_fn/TextureFormats.hx",
+      "sha256": "b49bde5235cda2c90a8bef7ebafd677e89ab912b184a676e0860ee8f7e053637"
     },
     {
       "path": "flight/_hl/_fn/TextureatlasFormats.hx",
@@ -11616,7 +11584,7 @@
     },
     {
       "path": "flight/_js/Matrix.hx",
-      "sha256": "2b802867200af1cddbc8d2642b55d18a41d7f141f1b170b62eaf83e0ac3eae6b"
+      "sha256": "87daf2fd8dece8d35e3a9e47e60f5650cf0aad27d0dfd161913e158a690ca77c"
     },
     {
       "path": "flight/_js/Matrix3.hx",
@@ -12260,7 +12228,7 @@
     },
     {
       "path": "flight/_js/Rectangle.hx",
-      "sha256": "8b6e1d7374b20c7a859901f30e4c7a3d54698be6114598b8a92f98da5865d295"
+      "sha256": "a4b4b41017bb0c6c302ea49ace62c8dcefee85867c0ecba06eec5d0cdd201f1e"
     },
     {
       "path": "flight/_js/RenderQueue.hx",
@@ -12416,7 +12384,7 @@
     },
     {
       "path": "flight/_js/Scene2D.hx",
-      "sha256": "8bca7bae8274ec5924cc3ef7c3c93a59a716c473340e9a99207b4e9572ee5f19"
+      "sha256": "cb10e5e1b6b1591dd7ef22d210b89b4c6f44dcf9879d3ec361ee291aba0706ca"
     },
     {
       "path": "flight/_js/Scene2DFitContext.hx",
@@ -12688,7 +12656,7 @@
     },
     {
       "path": "flight/_js/Sprite.hx",
-      "sha256": "26d7d4d5b5f7360b6fc61f5db3a46a9a469b4b1205bbbee6acaba279a7bbb9bb"
+      "sha256": "38664c427c9f22c39ebf095d31d641f77fd34c931faf181887a640fcc5bdc39b"
     },
     {
       "path": "flight/_js/SpriteData.hx",
@@ -13328,7 +13296,7 @@
     },
     {
       "path": "flight/_js/Vector2.hx",
-      "sha256": "46d8be2213c3aa1453762e09ccdc64050676b766d5191eb29e01fa9e047b46f7"
+      "sha256": "9dd5a80033f43e03fb4d93d7b45698c53bf838e45f8142d285666ad78abe0db6"
     },
     {
       "path": "flight/_js/Vector3.hx",
@@ -13499,12 +13467,12 @@
       "sha256": "6b9ff0317021569a61ef060f6ef9e886f140a9f54e4f812e902f3309352717d4"
     },
     {
-      "path": "flight/_js/_fn/Motionpath.hx",
-      "sha256": "81a7590492340357c99923e132f0f90f62aad4b976eb2af5dde14add91aec96f"
+      "path": "flight/_js/_fn/MotionPath.hx",
+      "sha256": "5b1e0868882011f12c206a52d9a2e9d3b1fb1265e0c9df8b1a23f08694d3453a"
     },
     {
-      "path": "flight/_js/_fn/Movieclip.hx",
-      "sha256": "4d59ba9fe1224f96defacb5816f7f8e1ee81a7e1de58d87fd7fc0ed7f6691a00"
+      "path": "flight/_js/_fn/MovieClip.hx",
+      "sha256": "9db0d5251e8286bc637ecc27cc2dac898d5929f0a97a1f946e804f8070a47b4f"
     },
     {
       "path": "flight/_js/_fn/Node.hx",
@@ -13535,28 +13503,28 @@
       "sha256": "e5d71aec3a9851e8c8442bdab7a9cd5c8aeeb15a1fc9706d93ddf393d8b3bbae"
     },
     {
+      "path": "flight/_js/_fn/Physics2DAbi.hx",
+      "sha256": "d28aca1643efd04e331a1927a98251558f5c960156badda940796f5d168f87b7"
+    },
+    {
       "path": "flight/_js/_fn/Physics2d.hx",
       "sha256": "5152becbdbc9cd2151707f27dc740be6b65d62e64448542db9fc192c733bd8ea"
     },
     {
-      "path": "flight/_js/_fn/Physics2dAbi.hx",
-      "sha256": "94b437e67222322487e91a773d2a7eff7ee236b9e9fa71b73f0204d3bd7c9bdf"
-    },
-    {
-      "path": "flight/_js/_fn/Physics3dAbi.hx",
-      "sha256": "f503ab7883a1ca39a3499cf103e650b50e501d2761956720abd38ba2962a7a6f"
+      "path": "flight/_js/_fn/Physics3DAbi.hx",
+      "sha256": "ed4d37f3303dc6f45ad5cb8aff58f25a9daaddeb656a8be1b303396c134a15bf"
     },
     {
       "path": "flight/_js/_fn/Picking.hx",
       "sha256": "1d1ed5daaa5db7224a051bdcee36967731de491b8c9fc8b03e10968a62ff70be"
     },
     {
-      "path": "flight/_js/_fn/Quadbatch.hx",
-      "sha256": "73b96a5e726bce209d6465ea93003ca1b3cd19120cf2c172b9c937c4f49b54a8"
+      "path": "flight/_js/_fn/QuadBatch.hx",
+      "sha256": "e93473c4853b4550c9c8bc151977f50bfd746317fde6be3d641a6498860101d3"
     },
     {
-      "path": "flight/_js/_fn/Scene2d.hx",
-      "sha256": "a8b09a0c72a0f5217c5bcd9c6c24d110c1840e9e5a7e2bd2722694b36c0896d2"
+      "path": "flight/_js/_fn/Scene2D.hx",
+      "sha256": "1dffbb07dd6c5cc449d9c2d8ce3a11b0219dead5ba752ceabc7ac4f490d7e848"
     },
     {
       "path": "flight/_js/_fn/Scene2dFormats.hx",
@@ -13579,8 +13547,8 @@
       "sha256": "128f791754e22c28e7e4961d37b0219319d9db9b128d22da002d12a5b44942a0"
     },
     {
-      "path": "flight/_js/_fn/Skeleton2d.hx",
-      "sha256": "9ae637caf1ca416a107a2007b658ee7f1de6ef7c96af5fe12058b58f9e63dffe"
+      "path": "flight/_js/_fn/Skeleton2D.hx",
+      "sha256": "f57b7f815edff93a5f6a08b18167b2200ff7e090bd8b85a452715a61beee7fc2"
     },
     {
       "path": "flight/_js/_fn/Snapshot.hx",
@@ -13615,24 +13583,24 @@
       "sha256": "2d975b0df1c1446232ba5525650a84c775d8e4462b3cf4b553e15c593db3e86a"
     },
     {
-      "path": "flight/_js/_fn/Textbidi.hx",
-      "sha256": "4ea7a2d1f4183cbba5af09e1cfefa7be7b6de2142f4fbd3a620d01a1b3d6e5a6"
+      "path": "flight/_js/_fn/TextSegment.hx",
+      "sha256": "cd7e6733154349b74b980aec744813779effd4def743c53a31e0fbe4dd5116fb"
     },
     {
-      "path": "flight/_js/_fn/Textsegment.hx",
-      "sha256": "4bc675683cb71cc730ae0b6018d3d0047ebddd91f8fa423e93fe7f308b2c4c18"
+      "path": "flight/_js/_fn/Textbidi.hx",
+      "sha256": "4ea7a2d1f4183cbba5af09e1cfefa7be7b6de2142f4fbd3a620d01a1b3d6e5a6"
     },
     {
       "path": "flight/_js/_fn/Texture.hx",
       "sha256": "dfc4cc6f9dcac9731c40cd0d2074dabef9707d67d3be0a0194da8970a87a8844"
     },
     {
-      "path": "flight/_js/_fn/TextureFormats.hx",
-      "sha256": "85ee04aff709cfc796d67db6544762071150346c0502d48548386d7b256db262"
+      "path": "flight/_js/_fn/TextureAtlas.hx",
+      "sha256": "de3872eec03d781f3400fab500af3501faa7525830abbdc445fef145fa19a0ec"
     },
     {
-      "path": "flight/_js/_fn/Textureatlas.hx",
-      "sha256": "78f326821b60dbc488908d5f64eee5b8c46bb168e5a854a3af78157c4ecdb63f"
+      "path": "flight/_js/_fn/TextureFormats.hx",
+      "sha256": "85ee04aff709cfc796d67db6544762071150346c0502d48548386d7b256db262"
     },
     {
       "path": "flight/_js/_fn/TextureatlasFormats.hx",

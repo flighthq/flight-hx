@@ -135,6 +135,6 @@ abstract Matrix(hl.Bytes) {
 		return flight._hl._fn.Scene2dFormats.createSvgViewBoxMatrix(viewBox, viewBoxLen, viewport, preserveAspectRatioValue);
 	}
 	inline public function getSkeleton2dBoneWorld(skeleton:flight._hl.Skeleton2D, boneIndex:Int):Bool {
-		return flight._hl._fn.Skeleton2d.getSkeleton2dBoneWorldMatrix(cast this, skeleton, boneIndex);
+		return flight._hl._fn.Skeleton2D.getSkeleton2dBoneWorldMatrix(cast this, skeleton, boneIndex);
 	}
 }

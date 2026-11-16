@@ -131,6 +131,6 @@ abstract Vector2(cpp.Star<cpp.Void>) {
 		flight._cpp._fn.Geometry.freeVector2(cast this);
 	}
 	extern inline public function addTextureAtlasRegion(target:flight._cpp.TextureAtlas, b:flight._cpp.Vector2, pivot:flight._cpp.Vector2, name:cpp.ConstCharStar):Void {
-		flight._cpp._fn.Textureatlas.addTextureAtlasRegionVector2(target, cast this, b, pivot, name);
+		flight._cpp._fn.TextureAtlas.addTextureAtlasRegionVector2(target, cast this, b, pivot, name);
 	}
 }

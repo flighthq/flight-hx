@@ -30,3 +30,36 @@ preserves original SDK names through native monomorphization, emits direct objec
 field access, and gives JS its logical arrays/callbacks/options in dispatch and
 type methods. Synthetic native frees become GC no-ops. Three Rust tests cover
 these changes, and `gate:web` executes real Flight modules from the pinned tree.
+
+`0003-portable-module-names.patch` fixes nine case-only dispatch/type filename
+collisions, including `Textureatlas`/`TextureAtlas` and `Motionpath`/`MotionPath`.
+Windows and default macOS filesystems overwrite one file with the other, causing
+the missing-type failures reported by both CI jobs. The producer consistently
+uses the SDK type's canonical case in all backends and emits one dispatch module
+containing its typedef and functions. Public facade imports now use `TextureAtlas`,
+`MotionPath`, `MovieClip`, `Physics2DAbi`, `Physics3DAbi`, `QuadBatch`, `Scene2D`,
+`Skeleton2D`, and `TextSegment`. FFI symbol names and native ABI are unchanged.
+Two Rust regressions cover canonical names and the combined dispatch module;
+intake, surface and ZIP checks also reject case-insensitive path collisions.
+
+## Applying upstream
+
+Use Rust 1.96.0 and Haxe 4.3.7 on PATH, and a clean Flight checkout at the
+manifest's exact base revision. Apply the
+patches in order; later patches depend on the preceding producer changes:
+
+```sh
+git checkout 49c510e875461a9235b24ee846015ec1b47acd2a
+git apply /path/to/flight-hx/patches/flight/0001-native-artifacts.patch
+git apply /path/to/flight-hx/patches/flight/0002-js-esm.patch
+git apply /path/to/flight-hx/patches/flight/0003-portable-module-names.patch
+cargo test -p flight-bindgen --bin flight-bindgen
+scripts/check-haxe-bindings.sh
+```
+
+The first patch covers native artifact emission and ABI correctness; the second
+selects direct SDK ESM bindings rather than a C ABI-shaped JS module; the third
+fixes portable naming for every target. Keep those review topics distinct.
+Once changes land upstream, advance the pinned revision and remove the patches
+that are included there. The local stack records reviewable producer work, not
+a claim that upstream has already integrated it.

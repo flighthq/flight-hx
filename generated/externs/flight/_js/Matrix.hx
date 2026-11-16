@@ -122,6 +122,6 @@ abstract Matrix(Dynamic) {
 		return flight._js._fn.Scene2dFormats.createSvgViewBoxMatrix(viewBox, viewport, preserveAspectRatioValue);
 	}
 	inline public function getSkeleton2dBoneWorld(skeleton:flight._js.Skeleton2D, boneIndex:Int):Bool {
-		return flight._js._fn.Skeleton2d.getSkeleton2dBoneWorldMatrix(cast this, skeleton, boneIndex);
+		return flight._js._fn.Skeleton2D.getSkeleton2dBoneWorldMatrix(cast this, skeleton, boneIndex);
 	}
 }

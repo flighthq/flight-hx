@@ -7,6 +7,7 @@ import {
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { prepareFlight, preparedIdentity } from '../flight-source.mjs';
+import { assertPortablePaths } from './portable-paths.mjs';
 
 const root = path.resolve(import.meta.dirname, '../..');
 const usage = `Usage: node tools/externs/generate.mjs [--flight-root <path>] [--check] [--validate-upstream] [--allow-network]
@@ -106,6 +107,7 @@ export function generate({ repoRoot = root, flightRoot, check = false, offline =
       '--target', 'haxe', '--out', staged, '--offsets', offsetsFile, '--ffi-names', namesFile,
     ], flightRoot);
     const files = inventory(staged);
+    assertPortablePaths(files.map((file) => file.path));
     if (!files.some(({ path: filename }) => filename.endsWith('.hx'))) {
       throw new Error('flight-bindgen produced no Haxe bindings');
     }

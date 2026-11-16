@@ -5,6 +5,7 @@ import { readFileSync, readdirSync } from 'node:fs';
 import path from 'node:path';
 import { patchIdentity } from '../flight-source.mjs';
 import { resolveDependency } from '../../scripts/dependencyLock.mjs';
+import { assertPortablePaths } from './portable-paths.mjs';
 
 const root = path.resolve(import.meta.dirname, '../..');
 const generated = path.join(root, 'generated/externs');
@@ -15,6 +16,7 @@ assert.deepEqual(provenance.source.patches, patchIdentity(root).patches, 'extern
 const expected = new Map(provenance.files.map((file) => [file.path, file.sha256]));
 assert.equal(expected.size, provenance.files.length, 'duplicate provenance path');
 const actual = filesUnder(generated).filter((file) => file !== 'provenance.json');
+assertPortablePaths(actual);
 assert.deepEqual([...actual].sort(), [...expected.keys()].sort(), 'generated file inventory drift');
 for (const filename of actual) {
   const contents = readFileSync(path.join(generated, filename));

@@ -155,16 +155,16 @@ abstract Rectangle(Dynamic) {
 		flight._js._fn.Particleemitter.setParticleEmitter2dLocalBoundsRectangle(target, cast this);
 	}
 	inline public function computeQuadBatchLocalBounds(source:flight._js.QuadBatch):Void {
-		flight._js._fn.Quadbatch.computeQuadBatchLocalBoundsRectangle(cast this, source);
+		flight._js._fn.QuadBatch.computeQuadBatchLocalBoundsRectangle(cast this, source);
 	}
 	inline public function setQuadBatchLocalBounds(target:Dynamic):Void {
-		flight._js._fn.Quadbatch.setQuadBatchLocalBoundsRectangle(target, cast this);
+		flight._js._fn.QuadBatch.setQuadBatchLocalBoundsRectangle(target, cast this);
 	}
 	inline public function computeHtmlViewLocalBounds(source:Dynamic):Void {
-		flight._js._fn.Scene2d.computeHtmlViewLocalBoundsRectangle(cast this, source);
+		flight._js._fn.Scene2D.computeHtmlViewLocalBoundsRectangle(cast this, source);
 	}
 	inline public function computeSpriteLocalBounds(source:Dynamic):Void {
-		flight._js._fn.Scene2d.computeSpriteLocalBoundsRectangle(cast this, source);
+		flight._js._fn.Scene2D.computeSpriteLocalBoundsRectangle(cast this, source);
 	}
 	inline public function computeShapeLocalBounds(source:Dynamic):Void {
 		flight._js._fn.Shape.computeShapeLocalBoundsRectangle(cast this, source);
@@ -182,7 +182,7 @@ abstract Rectangle(Dynamic) {
 		flight._js._fn.Text.computeTextLabelLocalBoundsRectangle(cast this, source);
 	}
 	inline public function addTextureAtlasRegion(target:flight._js.TextureAtlas, pivot:Null<flight._js.Vector2>, name:Null<String>):Void {
-		flight._js._fn.Textureatlas.addTextureAtlasRegionRectangle(target, cast this, pivot, name);
+		flight._js._fn.TextureAtlas.addTextureAtlasRegionRectangle(target, cast this, pivot, name);
 	}
 	inline public function computeTilemapLocalBounds(source:Dynamic):Void {
 		flight._js._fn.Tilemap.computeTilemapLocalBoundsRectangle(cast this, source);

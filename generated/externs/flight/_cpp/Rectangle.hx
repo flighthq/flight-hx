@@ -175,16 +175,16 @@ abstract Rectangle(cpp.Star<cpp.Void>) {
 		flight._cpp._fn.Particleemitter.setParticleEmitter2dLocalBoundsRectangle(target, cast this);
 	}
 	extern inline public function computeQuadBatchLocalBounds(source:flight._cpp.QuadBatch):Void {
-		flight._cpp._fn.Quadbatch.computeQuadBatchLocalBoundsRectangle(cast this, source);
+		flight._cpp._fn.QuadBatch.computeQuadBatchLocalBoundsRectangle(cast this, source);
 	}
 	extern inline public function setQuadBatchLocalBounds(target:cpp.Star<cpp.Void>):Void {
-		flight._cpp._fn.Quadbatch.setQuadBatchLocalBoundsRectangle(target, cast this);
+		flight._cpp._fn.QuadBatch.setQuadBatchLocalBoundsRectangle(target, cast this);
 	}
 	extern inline public function computeHtmlViewLocalBounds(source:cpp.Star<cpp.Void>):Void {
-		flight._cpp._fn.Scene2d.computeHtmlViewLocalBoundsRectangle(cast this, source);
+		flight._cpp._fn.Scene2D.computeHtmlViewLocalBoundsRectangle(cast this, source);
 	}
 	extern inline public function computeSpriteLocalBounds(source:cpp.Star<cpp.Void>):Void {
-		flight._cpp._fn.Scene2d.computeSpriteLocalBoundsRectangle(cast this, source);
+		flight._cpp._fn.Scene2D.computeSpriteLocalBoundsRectangle(cast this, source);
 	}
 	extern inline public function computeShapeLocalBounds(source:cpp.Star<cpp.Void>):Void {
 		flight._cpp._fn.Shape.computeShapeLocalBoundsRectangle(cast this, source);
@@ -202,7 +202,7 @@ abstract Rectangle(cpp.Star<cpp.Void>) {
 		flight._cpp._fn.Text.computeTextLabelLocalBoundsRectangle(cast this, source);
 	}
 	extern inline public function addTextureAtlasRegion(target:flight._cpp.TextureAtlas, pivot:flight._cpp.Vector2, name:cpp.ConstCharStar):Void {
-		flight._cpp._fn.Textureatlas.addTextureAtlasRegionRectangle(target, cast this, pivot, name);
+		flight._cpp._fn.TextureAtlas.addTextureAtlasRegionRectangle(target, cast this, pivot, name);
 	}
 	extern inline public function computeTilemapLocalBounds(source:cpp.Star<cpp.Void>):Void {
 		flight._cpp._fn.Tilemap.computeTilemapLocalBoundsRectangle(cast this, source);

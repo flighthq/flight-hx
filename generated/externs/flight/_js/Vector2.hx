@@ -119,6 +119,6 @@ abstract Vector2(Dynamic) {
 		flight._js._fn.Geometry.freeVector2(cast this);
 	}
 	inline public function addTextureAtlasRegion(target:flight._js.TextureAtlas, b:flight._js.Vector2, pivot:Null<flight._js.Vector2>, name:Null<String>):Void {
-		flight._js._fn.Textureatlas.addTextureAtlasRegionVector2(target, cast this, b, pivot, name);
+		flight._js._fn.TextureAtlas.addTextureAtlasRegionVector2(target, cast this, b, pivot, name);
 	}
 }

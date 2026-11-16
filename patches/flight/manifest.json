@@ -1,4 +1,8 @@
 {
   "sourceCommit": "49c510e875461a9235b24ee846015ec1b47acd2a",
-  "patches": ["patches/flight/0001-native-artifacts.patch", "patches/flight/0002-js-esm.patch"]
+  "patches": [
+    "patches/flight/0001-native-artifacts.patch",
+    "patches/flight/0002-js-esm.patch",
+    "patches/flight/0003-portable-module-names.patch"
+  ]
 }

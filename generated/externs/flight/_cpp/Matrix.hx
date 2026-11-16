@@ -150,6 +150,6 @@ abstract Matrix(cpp.Star<cpp.Void>) {
 		return flight._cpp._fn.Scene2dFormats.createSvgViewBoxMatrix(viewBox, viewBoxLen, viewport, preserveAspectRatioValue);
 	}
 	extern inline public function getSkeleton2dBoneWorld(skeleton:flight._cpp.Skeleton2D, boneIndex:Int):Bool {
-		return flight._cpp._fn.Skeleton2d.getSkeleton2dBoneWorldMatrix(cast this, skeleton, boneIndex);
+		return flight._cpp._fn.Skeleton2D.getSkeleton2dBoneWorldMatrix(cast this, skeleton, boneIndex);
 	}
 }

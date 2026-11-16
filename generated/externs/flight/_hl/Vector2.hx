@@ -124,6 +124,6 @@ abstract Vector2(hl.Bytes) {
 		flight._hl._fn.Geometry.freeVector2(cast this);
 	}
 	inline public function addTextureAtlasRegion(target:flight._hl.TextureAtlas, b:flight._hl.Vector2, pivot:flight._hl.Vector2, name:hl.Bytes):Void {
-		flight._hl._fn.Textureatlas.addTextureAtlasRegionVector2(target, cast this, b, pivot, name);
+		flight._hl._fn.TextureAtlas.addTextureAtlasRegionVector2(target, cast this, b, pivot, name);
 	}
 }

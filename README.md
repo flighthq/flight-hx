@@ -7,7 +7,7 @@ and flight-cpp adapters have been removed.
 
 The source is Flight `develop` revision
 `49c510e875461a9235b24ee846015ec1b47acd2a` plus the reviewable
-[native producer patch](patches/flight/README.md). There are 3,409 generated Haxe
+[native producer patches](patches/flight/README.md). There are 3,400 generated Haxe
 files selected from 5,724 C ABI exports. Generated Haxe is copied unchanged from
 that producer; provenance records both the Flight revision and patch hashes.
 
@@ -70,8 +70,9 @@ native declaration surface. The smoke calls cover scalar math, allocation,
 field access/mutation, and release. This does not establish every API's runtime
 behavior. Locally these have passed on Linux x64. CI now runs the same installed
 consumer on Intel macOS and Windows, and builds/links iOS device and simulator
-archives with the Apple SDK. Those new jobs need a successful remote run before
-claiming validation. iOS execution, ARM desktop execution, and a complete iOS
+archives with the Apple SDK. Check the CI results for the revision being consumed;
+configured jobs alone do not establish platform validation. iOS execution,
+ARM desktop execution, and a complete iOS
 Haxe/Lime application remain outside these checks.
 
 HashLink field access uses generated native offsets. Staging its adapter checks
