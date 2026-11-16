@@ -2,17 +2,17 @@ package flight._js;
 
 abstract Plane(Dynamic) {
 	public var a(get, set):Float;
-	inline function get_a():Float return untyped this.a;
-	inline function set_a(value:Float):Float return untyped this.a = value;
+	inline function get_a():Float return untyped this["a"];
+	inline function set_a(value:Float):Float return untyped this["a"] = value;
 	public var b(get, set):Float;
-	inline function get_b():Float return untyped this.b;
-	inline function set_b(value:Float):Float return untyped this.b = value;
+	inline function get_b():Float return untyped this["b"];
+	inline function set_b(value:Float):Float return untyped this["b"] = value;
 	public var c(get, set):Float;
-	inline function get_c():Float return untyped this.c;
-	inline function set_c(value:Float):Float return untyped this.c = value;
+	inline function get_c():Float return untyped this["c"];
+	inline function set_c(value:Float):Float return untyped this["c"] = value;
 	public var d(get, set):Float;
-	inline function get_d():Float return untyped this.d;
-	inline function set_d(value:Float):Float return untyped this.d = value;
+	inline function get_d():Float return untyped this["d"];
+	inline function set_d(value:Float):Float return untyped this["d"] = value;
 	inline public function intersectCamera3dRayWith(out:flight._js.Vector3, ray:flight._js.Ray3D):Bool {
 		return flight._js._fn.Camera.intersectCamera3dRayWithPlane(out, ray, cast this);
 	}

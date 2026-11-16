@@ -5,8 +5,16 @@ private extern class InputKeyboardData_Ffi {
 	@:native("flight_set_input_keyboard_data_alt_key") static function set_altKey(ptr:cpp.Star<cpp.Void>, value:Bool):Bool;
 	@:native("flight_get_input_keyboard_data_caps_lock") static function get_capsLock(ptr:cpp.Star<cpp.Void>):Bool;
 	@:native("flight_set_input_keyboard_data_caps_lock") static function set_capsLock(ptr:cpp.Star<cpp.Void>, value:Bool):Bool;
+	@:native("flight_field_get_input_keyboard_data_code")
+	static function get_code(ptr:cpp.Star<cpp.Void>):flight._cpp.NativeByteBuffer;
+	@:native("flight_field_set_input_keyboard_data_code")
+	static function set_code(ptr:cpp.Star<cpp.Void>, data:cpp.Star<cpp.Void>, length:Int):Void;
 	@:native("flight_get_input_keyboard_data_ctrl_key") static function get_ctrlKey(ptr:cpp.Star<cpp.Void>):Bool;
 	@:native("flight_set_input_keyboard_data_ctrl_key") static function set_ctrlKey(ptr:cpp.Star<cpp.Void>, value:Bool):Bool;
+	@:native("flight_field_get_input_keyboard_data_key")
+	static function get_key(ptr:cpp.Star<cpp.Void>):flight._cpp.NativeByteBuffer;
+	@:native("flight_field_set_input_keyboard_data_key")
+	static function set_key(ptr:cpp.Star<cpp.Void>, data:cpp.Star<cpp.Void>, length:Int):Void;
 	@:native("flight_get_input_keyboard_data_key_code") static function get_keyCode(ptr:cpp.Star<cpp.Void>):Int;
 	@:native("flight_set_input_keyboard_data_key_code") static function set_keyCode(ptr:cpp.Star<cpp.Void>, value:Int):Int;
 	@:native("flight_get_input_keyboard_data_location") static function get_location(ptr:cpp.Star<cpp.Void>):Int;
@@ -36,11 +44,41 @@ abstract InputKeyboardData(cpp.Star<cpp.Void>) {
 	inline function get_capsLock():Bool return InputKeyboardData_Ffi.get_capsLock(this);
 
 	inline function set_capsLock(value:Bool):Bool { InputKeyboardData_Ffi.set_capsLock(this, value); return value; }
+	public var code(get, set):String;
+	inline function get_code():String {
+		final bytes = InputKeyboardData_Ffi.get_code(this);
+		try {
+			final value = bytes.toBytes().toString();
+			bytes.dispose();
+			return value;
+		} catch (error:Dynamic) { bytes.dispose(); throw error; }
+	}
+	inline function set_code(value:String):String {
+		final bytes = haxe.io.Bytes.ofString(value);
+		InputKeyboardData_Ffi.set_code(this, cast cpp.Pointer.ofArray(bytes.getData()).raw, bytes.length);
+		return value;
+	}
+
 	public var ctrlKey(get, set):Bool;
 
 	inline function get_ctrlKey():Bool return InputKeyboardData_Ffi.get_ctrlKey(this);
 
 	inline function set_ctrlKey(value:Bool):Bool { InputKeyboardData_Ffi.set_ctrlKey(this, value); return value; }
+	public var key(get, set):String;
+	inline function get_key():String {
+		final bytes = InputKeyboardData_Ffi.get_key(this);
+		try {
+			final value = bytes.toBytes().toString();
+			bytes.dispose();
+			return value;
+		} catch (error:Dynamic) { bytes.dispose(); throw error; }
+	}
+	inline function set_key(value:String):String {
+		final bytes = haxe.io.Bytes.ofString(value);
+		InputKeyboardData_Ffi.set_key(this, cast cpp.Pointer.ofArray(bytes.getData()).raw, bytes.length);
+		return value;
+	}
+
 	public var keyCode(get, set):Int;
 
 	inline function get_keyCode():Int return InputKeyboardData_Ffi.get_keyCode(this);

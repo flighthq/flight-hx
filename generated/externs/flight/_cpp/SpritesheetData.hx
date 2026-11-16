@@ -1,6 +1,10 @@
 package flight._cpp;
 
 private extern class SpritesheetData_Ffi {
+	@:native("flight_field_get_spritesheet_data_image_file")
+	static function get_imageFile(ptr:cpp.Star<cpp.Void>):flight._cpp.NativeByteBuffer;
+	@:native("flight_field_set_spritesheet_data_image_file")
+	static function set_imageFile(ptr:cpp.Star<cpp.Void>, data:cpp.Star<cpp.Void>, length:Int):Void;
 	@:native("flight_get_spritesheet_data_image_height") static function get_imageHeight(ptr:cpp.Star<cpp.Void>):Single;
 	@:native("flight_set_spritesheet_data_image_height") static function set_imageHeight(ptr:cpp.Star<cpp.Void>, value:Single):Single;
 	@:native("flight_get_spritesheet_data_image_width") static function get_imageWidth(ptr:cpp.Star<cpp.Void>):Single;
@@ -10,6 +14,21 @@ private extern class SpritesheetData_Ffi {
 }
 
 abstract SpritesheetData(cpp.Star<cpp.Void>) {
+	public var imageFile(get, set):String;
+	inline function get_imageFile():String {
+		final bytes = SpritesheetData_Ffi.get_imageFile(this);
+		try {
+			final value = bytes.toBytes().toString();
+			bytes.dispose();
+			return value;
+		} catch (error:Dynamic) { bytes.dispose(); throw error; }
+	}
+	inline function set_imageFile(value:String):String {
+		final bytes = haxe.io.Bytes.ofString(value);
+		SpritesheetData_Ffi.set_imageFile(this, cast cpp.Pointer.ofArray(bytes.getData()).raw, bytes.length);
+		return value;
+	}
+
 	public var imageHeight(get, set):Single;
 
 	inline function get_imageHeight():Single return SpritesheetData_Ffi.get_imageHeight(this);

@@ -9,6 +9,14 @@ private extern class TextInputHistoryEntry_Ffi {
 	@:native("flight_set_text_input_history_entry_selection_index_after") static function set_selectionIndexAfter(ptr:cpp.Star<cpp.Void>, value:Int):Int;
 	@:native("flight_get_text_input_history_entry_selection_index_before") static function get_selectionIndexBefore(ptr:cpp.Star<cpp.Void>):Int;
 	@:native("flight_set_text_input_history_entry_selection_index_before") static function set_selectionIndexBefore(ptr:cpp.Star<cpp.Void>, value:Int):Int;
+	@:native("flight_field_get_text_input_history_entry_text_after")
+	static function get_textAfter(ptr:cpp.Star<cpp.Void>):flight._cpp.NativeByteBuffer;
+	@:native("flight_field_set_text_input_history_entry_text_after")
+	static function set_textAfter(ptr:cpp.Star<cpp.Void>, data:cpp.Star<cpp.Void>, length:Int):Void;
+	@:native("flight_field_get_text_input_history_entry_text_before")
+	static function get_textBefore(ptr:cpp.Star<cpp.Void>):flight._cpp.NativeByteBuffer;
+	@:native("flight_field_set_text_input_history_entry_text_before")
+	static function set_textBefore(ptr:cpp.Star<cpp.Void>, data:cpp.Star<cpp.Void>, length:Int):Void;
 }
 
 abstract TextInputHistoryEntry(cpp.Star<cpp.Void>) {
@@ -32,4 +40,34 @@ abstract TextInputHistoryEntry(cpp.Star<cpp.Void>) {
 	inline function get_selectionIndexBefore():Int return TextInputHistoryEntry_Ffi.get_selectionIndexBefore(this);
 
 	inline function set_selectionIndexBefore(value:Int):Int { TextInputHistoryEntry_Ffi.set_selectionIndexBefore(this, value); return value; }
+	public var textAfter(get, set):String;
+	inline function get_textAfter():String {
+		final bytes = TextInputHistoryEntry_Ffi.get_textAfter(this);
+		try {
+			final value = bytes.toBytes().toString();
+			bytes.dispose();
+			return value;
+		} catch (error:Dynamic) { bytes.dispose(); throw error; }
+	}
+	inline function set_textAfter(value:String):String {
+		final bytes = haxe.io.Bytes.ofString(value);
+		TextInputHistoryEntry_Ffi.set_textAfter(this, cast cpp.Pointer.ofArray(bytes.getData()).raw, bytes.length);
+		return value;
+	}
+
+	public var textBefore(get, set):String;
+	inline function get_textBefore():String {
+		final bytes = TextInputHistoryEntry_Ffi.get_textBefore(this);
+		try {
+			final value = bytes.toBytes().toString();
+			bytes.dispose();
+			return value;
+		} catch (error:Dynamic) { bytes.dispose(); throw error; }
+	}
+	inline function set_textBefore(value:String):String {
+		final bytes = haxe.io.Bytes.ofString(value);
+		TextInputHistoryEntry_Ffi.set_textBefore(this, cast cpp.Pointer.ofArray(bytes.getData()).raw, bytes.length);
+		return value;
+	}
+
 }

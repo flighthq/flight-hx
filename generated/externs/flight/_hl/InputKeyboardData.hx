@@ -1,5 +1,16 @@
 package flight._hl;
 
+private extern class InputKeyboardData_Ffi {
+	@:hlNative("flight", "flight_field_get_input_keyboard_data_code")
+	static function get_code(ptr:hl.Bytes):flight._hl.NativeByteBuffer;
+	@:hlNative("flight", "flight_field_set_input_keyboard_data_code")
+	static function set_code(ptr:hl.Bytes, data:hl.Bytes, length:Int):Void;
+	@:hlNative("flight", "flight_field_get_input_keyboard_data_key")
+	static function get_key(ptr:hl.Bytes):flight._hl.NativeByteBuffer;
+	@:hlNative("flight", "flight_field_set_input_keyboard_data_key")
+	static function set_key(ptr:hl.Bytes, data:hl.Bytes, length:Int):Void;
+}
+
 abstract InputKeyboardData(hl.Bytes) {
 	public var altKey(get, set):Bool;
 
@@ -11,11 +22,41 @@ abstract InputKeyboardData(hl.Bytes) {
 	inline function get_capsLock():Bool return this.getUI8(1) != 0;
 
 	inline function set_capsLock(value:Bool):Bool { this.setUI8(1, value ? 1 : 0); return value; }
+	public var code(get, set):String;
+	inline function get_code():String {
+		final bytes = InputKeyboardData_Ffi.get_code(this);
+		try {
+			final value = bytes.toBytes().toString();
+			bytes.dispose();
+			return value;
+		} catch (error:Dynamic) { bytes.dispose(); throw error; }
+	}
+	inline function set_code(value:String):String {
+		final bytes = haxe.io.Bytes.ofString(value);
+		InputKeyboardData_Ffi.set_code(this, bytes.getData().bytes, bytes.length);
+		return value;
+	}
+
 	public var ctrlKey(get, set):Bool;
 
 	inline function get_ctrlKey():Bool return this.getUI8(32) != 0;
 
 	inline function set_ctrlKey(value:Bool):Bool { this.setUI8(32, value ? 1 : 0); return value; }
+	public var key(get, set):String;
+	inline function get_key():String {
+		final bytes = InputKeyboardData_Ffi.get_key(this);
+		try {
+			final value = bytes.toBytes().toString();
+			bytes.dispose();
+			return value;
+		} catch (error:Dynamic) { bytes.dispose(); throw error; }
+	}
+	inline function set_key(value:String):String {
+		final bytes = haxe.io.Bytes.ofString(value);
+		InputKeyboardData_Ffi.set_key(this, bytes.getData().bytes, bytes.length);
+		return value;
+	}
+
 	public var keyCode(get, set):Int;
 
 	inline function get_keyCode():Int return this.getI32(64);

@@ -2,18 +2,18 @@ package flight._js;
 
 abstract CollisionTimeOfImpact2D(Dynamic) {
 	public var fraction(get, set):Float;
-	inline function get_fraction():Float return untyped this.fraction;
-	inline function set_fraction(value:Float):Float return untyped this.fraction = value;
+	inline function get_fraction():Float return untyped this["fraction"];
+	inline function set_fraction(value:Float):Float return untyped this["fraction"] = value;
 	public var x(get, set):Float;
-	inline function get_x():Float return untyped this.x;
-	inline function set_x(value:Float):Float return untyped this.x = value;
+	inline function get_x():Float return untyped this["x"];
+	inline function set_x(value:Float):Float return untyped this["x"] = value;
 	public var y(get, set):Float;
-	inline function get_y():Float return untyped this.y;
-	inline function set_y(value:Float):Float return untyped this.y = value;
+	inline function get_y():Float return untyped this["y"];
+	inline function set_y(value:Float):Float return untyped this["y"] = value;
 	public var normalX(get, set):Float;
-	inline function get_normalX():Float return untyped this.normalX;
-	inline function set_normalX(value:Float):Float return untyped this.normalX = value;
+	inline function get_normalX():Float return untyped this["normalX"];
+	inline function set_normalX(value:Float):Float return untyped this["normalX"] = value;
 	public var normalY(get, set):Float;
-	inline function get_normalY():Float return untyped this.normalY;
-	inline function set_normalY(value:Float):Float return untyped this.normalY = value;
+	inline function get_normalY():Float return untyped this["normalY"];
+	inline function set_normalY(value:Float):Float return untyped this["normalY"] = value;
 }

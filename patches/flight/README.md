@@ -74,6 +74,17 @@ accept a null data pointer with length zero. Rust and consumer tests cover
 binary round-trips, empty buffers, failure results and release; JS continues
 to use the SDK's logical byte arrays.
 
+`0008-exported-struct-fields.patch` includes types declared directly in a
+glob-re-exported module and exposes public scalar and `String` fields. Native
+string getters return owned UTF-8 byte buffers; generated Haxe accessors copy
+and release them. Setters copy borrowed UTF-8 bytes into Rust. Ref-backed fields
+keep their lock guards, and HL never reads Rust string layouts by offset.
+Raw Rust identifiers and Haxe keyword field names retain their SDK spelling.
+Tests cover `FontResource.family` mutation, getter copies surviving source
+destruction, `ColorScaleBias` channels, glob discovery and JS keyword fields.
+This does not add optional/nested field access, data-enum constructors, or the
+generic signal callback ABI described in the main README.
+
 ## Applying upstream
 
 Use Rust 1.96.0 and Haxe 4.3.7 on PATH, and a clean Flight checkout at the
@@ -89,6 +100,7 @@ git apply /path/to/flight-hx/patches/flight/0004-hl-packed-floats.patch
 git apply /path/to/flight-hx/patches/flight/0005-bitmap-ownership.patch
 git apply /path/to/flight-hx/patches/flight/0006-ref-handles.patch
 git apply /path/to/flight-hx/patches/flight/0007-byte-buffer-results.patch
+git apply /path/to/flight-hx/patches/flight/0008-exported-struct-fields.patch
 cargo test -p flight-bindgen --bin flight-bindgen
 scripts/check-haxe-bindings.sh
 ```

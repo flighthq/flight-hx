@@ -7,8 +7,8 @@ and flight-cpp adapters have been removed.
 
 The source is Flight `develop` revision
 `49c510e875461a9235b24ee846015ec1b47acd2a` plus the reviewable
-[native producer patches](patches/flight/README.md). There are 3,403 generated Haxe
-files selected from 5,731 C ABI exports. Generated Haxe is copied unchanged from
+[native producer patches](patches/flight/README.md). There are 4,304 generated Haxe
+files selected from 7,267 C ABI exports. Generated Haxe is copied unchanged from
 that producer; provenance records both the Flight revision and patch hashes.
 
 ## Consume
@@ -55,6 +55,18 @@ Native byte results, including compression output, return `NativeByteBuffer`.
 It exposes `length`, `data`, `getByte()` and `toBytes()`. `toBytes()` makes a
 managed Haxe copy; call `dispose()` when finished with the native buffer. The
 borrowed `data` view remains valid until disposal. JS keeps the SDK byte array.
+
+Public scalar and `String` fields have properties, including `ColorScaleBias`
+channels and `FontResource.family`. Native string properties copy UTF-8 storage;
+their temporary buffers are released by the generated accessor.
+
+Generic signal create/connect/emit functions still require a typed callback
+binding and callback lifetime management. Option-valued and nested fields,
+`FontResource.face`, and the variants of `CreateTextureOptions` remain
+unsupported by the field emitter. Native factories for these option carriers
+and material submodule functions such as `create_color_scale_bias` are also
+absent. These APIs need further producer work; opaque handles do not provide
+construction or configuration by themselves.
 
 ## Native layout
 

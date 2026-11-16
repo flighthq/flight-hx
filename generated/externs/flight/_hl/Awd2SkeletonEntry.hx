@@ -1,0 +1,9 @@
+package flight._hl;
+
+abstract Awd2SkeletonEntry(hl.Bytes) {
+	public var key(get, set):Int;
+
+	inline function get_key():Int return this.getI32(48);
+
+	inline function set_key(value:Int):Int { this.setI32(48, value); return value; }
+}

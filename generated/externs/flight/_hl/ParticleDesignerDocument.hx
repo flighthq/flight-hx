@@ -1,5 +1,12 @@
 package flight._hl;
 
+private extern class ParticleDesignerDocument_Ffi {
+	@:hlNative("flight", "flight_field_get_particle_designer_document_texture_file_name")
+	static function get_textureFileName(ptr:hl.Bytes):flight._hl.NativeByteBuffer;
+	@:hlNative("flight", "flight_field_set_particle_designer_document_texture_file_name")
+	static function set_textureFileName(ptr:hl.Bytes, data:hl.Bytes, length:Int):Void;
+}
+
 abstract ParticleDesignerDocument(hl.Bytes) {
 	public var angle(get, set):Single;
 
@@ -221,4 +228,19 @@ abstract ParticleDesignerDocument(hl.Bytes) {
 	inline function get_startParticleSizeVariance():Single return this.getF32(176);
 
 	inline function set_startParticleSizeVariance(value:Single):Single { this.setF32(176, value); return value; }
+	public var textureFileName(get, set):String;
+	inline function get_textureFileName():String {
+		final bytes = ParticleDesignerDocument_Ffi.get_textureFileName(this);
+		try {
+			final value = bytes.toBytes().toString();
+			bytes.dispose();
+			return value;
+		} catch (error:Dynamic) { bytes.dispose(); throw error; }
+	}
+	inline function set_textureFileName(value:String):String {
+		final bytes = haxe.io.Bytes.ofString(value);
+		ParticleDesignerDocument_Ffi.set_textureFileName(this, bytes.getData().bytes, bytes.length);
+		return value;
+	}
+
 }

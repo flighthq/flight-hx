@@ -1,5 +1,12 @@
 package flight._hl;
 
+private extern class RichTextData_Ffi {
+	@:hlNative("flight", "flight_field_get_rich_text_data_text")
+	static function get_text(ptr:hl.Bytes):flight._hl.NativeByteBuffer;
+	@:hlNative("flight", "flight_field_set_rich_text_data_text")
+	static function set_text(ptr:hl.Bytes, data:hl.Bytes, length:Int):Void;
+}
+
 abstract RichTextData(hl.Bytes) {
 	public var background(get, set):Bool;
 
@@ -61,6 +68,21 @@ abstract RichTextData(hl.Bytes) {
 	inline function get_selectable():Bool return this.getUI8(68) != 0;
 
 	inline function set_selectable(value:Bool):Bool { this.setUI8(68, value ? 1 : 0); return value; }
+	public var text(get, set):String;
+	inline function get_text():String {
+		final bytes = RichTextData_Ffi.get_text(this);
+		try {
+			final value = bytes.toBytes().toString();
+			bytes.dispose();
+			return value;
+		} catch (error:Dynamic) { bytes.dispose(); throw error; }
+	}
+	inline function set_text(value:String):String {
+		final bytes = haxe.io.Bytes.ofString(value);
+		RichTextData_Ffi.set_text(this, bytes.getData().bytes, bytes.length);
+		return value;
+	}
+
 	public var textColor(get, set):Int;
 
 	inline function get_textColor():Int return this.getI32(96);

@@ -1,4 +1,40 @@
 package flight._js;
 
 abstract Physics3DConeTwistJoint(Dynamic) {
+	public var enableSwingLimit(get, set):Bool;
+	inline function get_enableSwingLimit():Bool return untyped this["enableSwingLimit"];
+	inline function set_enableSwingLimit(value:Bool):Bool return untyped this["enableSwingLimit"] = value;
+	public var swingLimitY(get, set):Float;
+	inline function get_swingLimitY():Float return untyped this["swingLimitY"];
+	inline function set_swingLimitY(value:Float):Float return untyped this["swingLimitY"] = value;
+	public var swingLimitZ(get, set):Float;
+	inline function get_swingLimitZ():Float return untyped this["swingLimitZ"];
+	inline function set_swingLimitZ(value:Float):Float return untyped this["swingLimitZ"] = value;
+	public var enableTwistLimit(get, set):Bool;
+	inline function get_enableTwistLimit():Bool return untyped this["enableTwistLimit"];
+	inline function set_enableTwistLimit(value:Bool):Bool return untyped this["enableTwistLimit"] = value;
+	public var lowerTwistAngle(get, set):Float;
+	inline function get_lowerTwistAngle():Float return untyped this["lowerTwistAngle"];
+	inline function set_lowerTwistAngle(value:Float):Float return untyped this["lowerTwistAngle"] = value;
+	public var upperTwistAngle(get, set):Float;
+	inline function get_upperTwistAngle():Float return untyped this["upperTwistAngle"];
+	inline function set_upperTwistAngle(value:Float):Float return untyped this["upperTwistAngle"] = value;
+	public var enableLimitSpring(get, set):Bool;
+	inline function get_enableLimitSpring():Bool return untyped this["enableLimitSpring"];
+	inline function set_enableLimitSpring(value:Bool):Bool return untyped this["enableLimitSpring"] = value;
+	public var limitFrequencyHz(get, set):Float;
+	inline function get_limitFrequencyHz():Float return untyped this["limitFrequencyHz"];
+	inline function set_limitFrequencyHz(value:Float):Float return untyped this["limitFrequencyHz"] = value;
+	public var limitDampingRatio(get, set):Float;
+	inline function get_limitDampingRatio():Float return untyped this["limitDampingRatio"];
+	inline function set_limitDampingRatio(value:Float):Float return untyped this["limitDampingRatio"] = value;
+	public var swingLimitImpulse(get, set):Float;
+	inline function get_swingLimitImpulse():Float return untyped this["swingLimitImpulse"];
+	inline function set_swingLimitImpulse(value:Float):Float return untyped this["swingLimitImpulse"] = value;
+	public var lowerTwistImpulse(get, set):Float;
+	inline function get_lowerTwistImpulse():Float return untyped this["lowerTwistImpulse"];
+	inline function set_lowerTwistImpulse(value:Float):Float return untyped this["lowerTwistImpulse"] = value;
+	public var upperTwistImpulse(get, set):Float;
+	inline function get_upperTwistImpulse():Float return untyped this["upperTwistImpulse"];
+	inline function set_upperTwistImpulse(value:Float):Float return untyped this["upperTwistImpulse"] = value;
 }

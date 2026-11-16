@@ -25,6 +25,10 @@ private extern class RichTextData_Ffi {
 	@:native("flight_set_rich_text_data_scroll_v") static function set_scrollV(ptr:cpp.Star<cpp.Void>, value:Single):Single;
 	@:native("flight_get_rich_text_data_selectable") static function get_selectable(ptr:cpp.Star<cpp.Void>):Bool;
 	@:native("flight_set_rich_text_data_selectable") static function set_selectable(ptr:cpp.Star<cpp.Void>, value:Bool):Bool;
+	@:native("flight_field_get_rich_text_data_text")
+	static function get_text(ptr:cpp.Star<cpp.Void>):flight._cpp.NativeByteBuffer;
+	@:native("flight_field_set_rich_text_data_text")
+	static function set_text(ptr:cpp.Star<cpp.Void>, data:cpp.Star<cpp.Void>, length:Int):Void;
 	@:native("flight_get_rich_text_data_text_color") static function get_textColor(ptr:cpp.Star<cpp.Void>):Int;
 	@:native("flight_set_rich_text_data_text_color") static function set_textColor(ptr:cpp.Star<cpp.Void>, value:Int):Int;
 	@:native("flight_get_rich_text_data_width") static function get_width(ptr:cpp.Star<cpp.Void>):Single;
@@ -94,6 +98,21 @@ abstract RichTextData(cpp.Star<cpp.Void>) {
 	inline function get_selectable():Bool return RichTextData_Ffi.get_selectable(this);
 
 	inline function set_selectable(value:Bool):Bool { RichTextData_Ffi.set_selectable(this, value); return value; }
+	public var text(get, set):String;
+	inline function get_text():String {
+		final bytes = RichTextData_Ffi.get_text(this);
+		try {
+			final value = bytes.toBytes().toString();
+			bytes.dispose();
+			return value;
+		} catch (error:Dynamic) { bytes.dispose(); throw error; }
+	}
+	inline function set_text(value:String):String {
+		final bytes = haxe.io.Bytes.ofString(value);
+		RichTextData_Ffi.set_text(this, cast cpp.Pointer.ofArray(bytes.getData()).raw, bytes.length);
+		return value;
+	}
+
 	public var textColor(get, set):Int;
 
 	inline function get_textColor():Int return RichTextData_Ffi.get_textColor(this);

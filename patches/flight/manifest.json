@@ -7,6 +7,7 @@
     "patches/flight/0004-hl-packed-floats.patch",
     "patches/flight/0005-bitmap-ownership.patch",
     "patches/flight/0006-ref-handles.patch",
-    "patches/flight/0007-byte-buffer-results.patch"
+    "patches/flight/0007-byte-buffer-results.patch",
+    "patches/flight/0008-exported-struct-fields.patch"
   ]
 }

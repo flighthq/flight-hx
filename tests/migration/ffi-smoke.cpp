@@ -1,4 +1,5 @@
 #include <cstdio>
+#include <cstring>
 #include <initializer_list>
 
 #include "flight_ffi.h"
@@ -50,6 +51,17 @@ int main() {
   flight_free_byte_buffer(decoded);
   flight_free_byte_buffer(empty);
   if (flight_decompress_deflate(nullptr, 0, 4, 1)) return 16;
+  void* font = flight_create_font_resource();
+  const unsigned char family[] = {'S', 'a', 'n', 's', ' ', 0xce, 0xa9};
+  flight_field_set_font_resource_family(font, family, sizeof family);
+  void* family_copy = flight_field_get_font_resource_family(font);
+  flight_field_set_font_resource_family(font, nullptr, 0);
+  flight_free_font_resource(font);
+  unsigned char copied_family[sizeof family] = {};
+  if (flight_get_byte_buffer_length(family_copy) != sizeof family ||
+      flight_copy_byte_buffer(family_copy, copied_family, sizeof family) != sizeof family ||
+      std::memcmp(family, copied_family, sizeof family) != 0) return 17;
+  flight_free_byte_buffer(family_copy);
   std::puts("FLIGHT_NATIVE_FFI_OK");
   return 0;
 }

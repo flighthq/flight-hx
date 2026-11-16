@@ -1,5 +1,12 @@
 package flight._hl;
 
+private extern class StarlingPexDocument_Ffi {
+	@:hlNative("flight", "flight_field_get_starling_pex_document_texture_file_name")
+	static function get_textureFileName(ptr:hl.Bytes):flight._hl.NativeByteBuffer;
+	@:hlNative("flight", "flight_field_set_starling_pex_document_texture_file_name")
+	static function set_textureFileName(ptr:hl.Bytes, data:hl.Bytes, length:Int):Void;
+}
+
 abstract StarlingPexDocument(hl.Bytes) {
 	public var angle(get, set):Single;
 
@@ -161,4 +168,19 @@ abstract StarlingPexDocument(hl.Bytes) {
 	inline function get_tangentialAcceleration():Single return this.getF32(192);
 
 	inline function set_tangentialAcceleration(value:Single):Single { this.setF32(192, value); return value; }
+	public var textureFileName(get, set):String;
+	inline function get_textureFileName():String {
+		final bytes = StarlingPexDocument_Ffi.get_textureFileName(this);
+		try {
+			final value = bytes.toBytes().toString();
+			bytes.dispose();
+			return value;
+		} catch (error:Dynamic) { bytes.dispose(); throw error; }
+	}
+	inline function set_textureFileName(value:String):String {
+		final bytes = haxe.io.Bytes.ofString(value);
+		StarlingPexDocument_Ffi.set_textureFileName(this, bytes.getData().bytes, bytes.length);
+		return value;
+	}
+
 }

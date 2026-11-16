@@ -1,0 +1,289 @@
+diff --git a/crates/flight-ffi/build.rs b/crates/flight-ffi/build.rs
+--- a/crates/flight-ffi/build.rs
++++ b/crates/flight-ffi/build.rs
+@@ -416,7 +416,7 @@
+             for field in &s.fields {
+                 writeln!(
+                     offsets_src,
+-                    "    out.push_str(&format!(\", \\\"{field_name}\\\": {{}}\", std::mem::offset_of!({qualified}, {field_name})));",
++                    "    out.push_str(&format!(\", \\\"{field_name}\\\": {{}}\", std::mem::offset_of!({qualified}, r#{field_name})));",
+                     field_name = field.name
+                 )
+                 .unwrap();
+@@ -779,6 +779,13 @@
+         Err(_) => return,
+     };
+     for line in content.lines() {
++        let declaration = line.strip_prefix("pub struct ").or_else(|| line.strip_prefix("pub enum ")).or_else(|| line.strip_prefix("pub type "));
++        if let Some(declaration) = declaration {
++            let name = declaration.split(|c: char| !c.is_alphanumeric() && c != '_').next().unwrap_or("");
++            if !name.is_empty() { names.insert(name.to_string()); }
++        }
++    }
++    for line in content.lines() {
+         let line = line.trim();
+         if line.starts_with("pub use super::") && line.ends_with("::*;") {
+             let inner = line
+@@ -858,9 +865,9 @@
+     }
+     let after_pub = &line[4..];
+     let colon = after_pub.find(':')?;
+-    let name = after_pub[..colon].trim().to_string();
++    let name = after_pub[..colon].trim().trim_start_matches("r#").to_string();
+     let ty = after_pub[colon + 1..].trim().to_string();
+-    if is_scalar(&ty) {
++    if is_scalar(&ty) || ty == "String" {
+         Some(StructField { name, ty })
+     } else {
+         None
+@@ -955,10 +962,22 @@
+         let read_value = if read_guard.is_empty() { "unsafe { &*ptr }" } else { "value_ptr" };
+         let write_value = if write_guard.is_empty() { "unsafe { &mut *ptr }" } else { "value_ptr" };
+ 
++        if field.ty == "String" {
++            let getter = format!("flight_field_get_{snake}_{}", field.name);
++            let setter = format!("flight_field_set_{snake}_{}", field.name);
++            if seen_names.insert(getter.clone()) {
++                writeln!(output, "#[unsafe(no_mangle)]\npub unsafe extern \"C\" fn {getter}(ptr: *const {qualified}) -> *mut std::ffi::c_void {{\n{read_guard}    hx_byte_buffer(({read_value}).r#{}.as_bytes().iter().copied())\n}}", field.name).unwrap();
++            }
++            if seen_names.insert(setter.clone()) {
++                writeln!(output, "#[unsafe(no_mangle)]\npub unsafe extern \"C\" fn {setter}(ptr: *mut {qualified}, data: *const u8, length: usize) {{\n{write_guard}    let bytes = if length == 0 {{ &[] }} else {{ unsafe {{ std::slice::from_raw_parts(data, length) }} }};\n    ({write_value}).r#{} = String::from_utf8_lossy(bytes).into_owned();\n}}", field.name).unwrap();
++            }
++            continue;
++        }
++
+         if seen_names.insert(getter_name.clone()) {
+         writeln!(
+             output,
+-            "#[unsafe(no_mangle)]\npub unsafe extern \"C\" fn {getter_name}(ptr: *const {qualified}) -> {ffi_ty} {{\n{read_guard}    return {read_value}.{};\n}}",
++            "#[unsafe(no_mangle)]\npub unsafe extern \"C\" fn {getter_name}(ptr: *const {qualified}) -> {ffi_ty} {{\n{read_guard}    return ({read_value}).r#{};\n}}",
+             field.name
+         )
+         .unwrap();
+@@ -966,7 +985,7 @@
+         if seen_names.insert(setter_name.clone()) {
+         writeln!(
+             output,
+-            "#[unsafe(no_mangle)]\npub unsafe extern \"C\" fn {setter_name}(ptr: *mut {qualified}, value: {ffi_ty}) -> {ffi_ty} {{\n{write_guard}    {write_value}.{} = value;\n    return value;\n}}",
++            "#[unsafe(no_mangle)]\npub unsafe extern \"C\" fn {setter_name}(ptr: *mut {qualified}, value: {ffi_ty}) -> {ffi_ty} {{\n{write_guard}    ({write_value}).r#{} = value;\n    return value;\n}}",
+             field.name
+         )
+         .unwrap();        }
+diff --git a/crates/flight-ffi/src/lib.rs b/crates/flight-ffi/src/lib.rs
+--- a/crates/flight-ffi/src/lib.rs
++++ b/crates/flight-ffi/src/lib.rs
+@@ -84,3 +84,33 @@
+         }
+     }
+ }
++
++#[cfg(test)]
++mod field_tests {
++    use super::*;
++    #[test]
++    fn strings_copy_utf8_and_glob_exported_scalar_fields_are_accessible() {
++        unsafe {
++            let font = flight_create_font_resource();
++            let input = "Sans Ω\0Face".as_bytes();
++            flight_field_set_font_resource_family(font, input.as_ptr(), input.len());
++            let snapshot = flight_field_get_font_resource_family(font);
++            assert_eq!(flight_get_byte_buffer_length(snapshot), input.len());
++            flight_field_set_font_resource_family(font, std::ptr::null(), 0);
++            let empty = flight_field_get_font_resource_family(font);
++            assert_eq!(flight_get_byte_buffer_length(empty), 0);
++            flight_free_byte_buffer(empty);
++            flight_free_font_resource(font);
++            let mut copied = vec![0; input.len()];
++            assert_eq!(flight_copy_byte_buffer(snapshot, copied.as_mut_ptr(), copied.len()), input.len());
++            assert_eq!(copied, input, "string getter must own a copy independent of its source");
++            flight_free_byte_buffer(snapshot);
++            let mut color = flight_sdk::materials::color_scale_bias::create_color_scale_bias();
++            assert_eq!(flight_get_color_scale_bias_red_scale(&color), 1.0);
++            flight_set_color_scale_bias_red_scale(&mut color, 0.25);
++            flight_set_color_scale_bias_blue_bias(&mut color, 0.75);
++            assert_eq!(color.red_scale, 0.25);
++            assert_eq!(flight_get_color_scale_bias_blue_bias(&color), 0.75);
++        }
++    }
++}
+diff --git a/crates/flight-bindgen/src/parse.rs b/crates/flight-bindgen/src/parse.rs
+--- a/crates/flight-bindgen/src/parse.rs
++++ b/crates/flight-bindgen/src/parse.rs
+@@ -1487,6 +1487,13 @@
+         Err(_) => return,
+     };
+     for line in content.lines() {
++        let declaration = line.strip_prefix("pub struct ").or_else(|| line.strip_prefix("pub enum ")).or_else(|| line.strip_prefix("pub type "));
++        if let Some(declaration) = declaration {
++            let name = declaration.split(|c: char| !c.is_alphanumeric() && c != '_').next().unwrap_or("");
++            if !name.is_empty() { names.insert(name.to_string()); }
++        }
++    }
++    for line in content.lines() {
+         let line = line.trim();
+         let glob_mod = if line.ends_with("::*;") {
+             if let Some(rest) = line.strip_prefix("pub use super::") {
+@@ -1871,12 +1878,12 @@
+     let line = line.trim().trim_end_matches(',');
+     let rest = line.strip_prefix("pub ")?;
+     let colon = rest.find(':')?;
+-    let name = rest[..colon].trim().to_string();
++    let name = rest[..colon].trim().trim_start_matches("r#").to_string();
+     let ty = rest[colon + 1..].trim().to_string();
+     if is_ffi_incompatible(&ty) {
+         return None;
+     }
+-    if !is_scalar(&ty) {
++    if !is_scalar(&ty) && ty != "String" {
+         return None;
+     }
+     Some(StructField { name, ty })
+@@ -2089,3 +2096,24 @@
+     }
+ 
+ }
++
++#[cfg(test)]
++mod field_tests {
++    use super::*;
++    #[test]
++    fn glob_exports_include_direct_structs_and_string_fields() {
++        let dir = std::env::temp_dir().join(format!("flight-bindgen-glob-{}", std::process::id()));
++        fs::create_dir_all(&dir).unwrap();
++        let file = dir.join("types.rs");
++        fs::write(&file, "pub struct Named {\n    pub family: String,\n    pub red_scale: f32,\n}\nmod hidden {\n    pub struct Hidden {}\n}\n").unwrap();
++        let mut names = BTreeSet::new();
++        collect_glob_type_names(&file, &dir, &mut names);
++        assert!(names.contains("Named"));
++        assert!(!names.contains("Hidden"));
++        let mut structs = Vec::new();
++        parse_pub_structs(&fs::read_to_string(file).unwrap(), &mut structs);
++        assert_eq!(structs[0].fields[0].ty, "String");
++        assert_eq!(parse_struct_field("pub r#type: String,").unwrap().name, "type");
++        fs::remove_dir_all(&dir).unwrap();
++    }
++}
+diff --git a/crates/flight-bindgen/src/haxe_common.rs b/crates/flight-bindgen/src/haxe_common.rs
+--- a/crates/flight-bindgen/src/haxe_common.rs
++++ b/crates/flight-bindgen/src/haxe_common.rs
+@@ -177,6 +177,7 @@
+ 
+ pub fn scalar_to_haxe(ty: &str) -> &str {
+     match ty {
++        "String" => "String",
+         "f32" => "Single",
+         "f64" => "Float",
+         "bool" => "Bool",
+@@ -219,7 +220,7 @@
+         Some(names) => {
+             let snake = to_snake_case(type_name);
+             let getter = format!("flight_get_{snake}_{field_name}");
+-            names.contains(&getter)
++            names.contains(&getter) || names.contains(&format!("flight_field_get_{snake}_{field_name}"))
+         }
+     }
+ }
+diff --git a/crates/flight-bindgen/src/haxe_cpp.rs b/crates/flight-bindgen/src/haxe_cpp.rs
+--- a/crates/flight-bindgen/src/haxe_cpp.rs
++++ b/crates/flight-bindgen/src/haxe_cpp.rs
+@@ -122,6 +122,7 @@
+         let ffi_class = format!("{ty}_Ffi");
+ 
+         writeln!(output, "\tpublic var {haxe_name}(get, set):{haxe_ty};").unwrap();
++        if field.ty == "String" { crate::byte_buffer::emit_string_field(&mut output, ty, &haxe_name, false); continue; }
+         writeln!(output).unwrap();
+         writeln!(
+             output,
+@@ -152,6 +153,7 @@
+     let snake = to_snake_case(ty);
+     writeln!(output, "private extern class {ty}_Ffi {{").unwrap();
+     for field in fields {
++        if field.ty == "String" { crate::byte_buffer::emit_string_ffi(output, ty, &field.name, false); continue; }
+         let haxe_ty = scalar_to_haxe(&field.ty);
+         let haxe_name = to_camel_case(&field.name);
+         let getter_ffi = format!("flight_get_{snake}_{}", field.name);
+diff --git a/crates/flight-bindgen/src/haxe_hl.rs b/crates/flight-bindgen/src/haxe_hl.rs
+--- a/crates/flight-bindgen/src/haxe_hl.rs
++++ b/crates/flight-bindgen/src/haxe_hl.rs
+@@ -131,10 +131,11 @@
+         return output;
+     }
+ 
+-    let native_fields: Vec<_> = fields.iter().filter(|field| struct_offsets.and_then(|offsets| offsets.get(&field.name)).is_none()).collect();
++    let native_fields: Vec<_> = fields.iter().filter(|field| field.ty == "String" || struct_offsets.and_then(|offsets| offsets.get(&field.name)).is_none()).collect();
+     if !native_fields.is_empty() {
+         writeln!(output, "private extern class {ty}_Ffi {{").unwrap();
+         for field in native_fields {
++            if field.ty == "String" { crate::byte_buffer::emit_string_ffi(&mut output, ty, &field.name, true); continue; }
+             let haxe_ty = scalar_to_haxe(&field.ty);
+             let field_name = to_camel_case(&field.name);
+             let getter = format!("flight_get_{}_{}", to_snake_case(ty), field.name);
+@@ -152,9 +153,10 @@
+     for field in &fields {
+         let haxe_ty = scalar_to_haxe(&field.ty);
+         let haxe_name = to_camel_case(&field.name);
+-        let offset = struct_offsets.and_then(|m| m.get(&field.name).copied());
++        let offset = if field.ty == "String" { None } else { struct_offsets.and_then(|m| m.get(&field.name).copied()) };
+ 
+         writeln!(output, "\tpublic var {haxe_name}(get, set):{haxe_ty};").unwrap();
++        if field.ty == "String" { crate::byte_buffer::emit_string_field(&mut output, ty, &haxe_name, true); continue; }
+         writeln!(output).unwrap();
+ 
+         if let Some(off) = offset {
+diff --git a/crates/flight-bindgen/src/haxe_js.rs b/crates/flight-bindgen/src/haxe_js.rs
+--- a/crates/flight-bindgen/src/haxe_js.rs
++++ b/crates/flight-bindgen/src/haxe_js.rs
+@@ -16,6 +16,7 @@
+     match ty {
+         "f32" | "f64" | "i64" | "u64" => "Float",
+         "bool" => "Bool",
++        "String" => "String",
+         "i8" | "i16" | "i32" | "isize" | "u8" | "u16" | "u32" | "usize" => "Int",
+         _ => "Dynamic",
+     }
+@@ -112,8 +113,8 @@
+             let js_name = flight_compiler::typescript_item_name(&field.name);
+             let t = scalar_to_haxe(&field.ty);
+             writeln!(out, "\tpublic var {haxe_name}(get, set):{t};").unwrap();
+-            writeln!(out, "\tinline function get_{haxe_name}():{t} return untyped this.{js_name};").unwrap();
+-            writeln!(out, "\tinline function set_{haxe_name}(value:{t}):{t} return untyped this.{js_name} = value;").unwrap();
++            writeln!(out, "\tinline function get_{haxe_name}():{t} return untyped this[\"{js_name}\"];").unwrap();
++            writeln!(out, "\tinline function set_{haxe_name}(value:{t}):{t} return untyped this[\"{js_name}\"] = value;").unwrap();
+         }
+     }
+     let mut seen = BTreeSet::new();
+diff --git a/crates/flight-bindgen/src/byte_buffer.rs b/crates/flight-bindgen/src/byte_buffer.rs
+--- a/crates/flight-bindgen/src/byte_buffer.rs
++++ b/crates/flight-bindgen/src/byte_buffer.rs
+@@ -4,7 +4,7 @@
+ use crate::haxe_common::write_if_changed;
+ 
+ pub fn needed(exports: &[CrateExports]) -> bool {
+-    exports.iter().flat_map(|item| &item.fns).any(|function| {
++    exports.iter().flat_map(|item| &item.structs).any(|item| item.fields.iter().any(|field| field.ty == "String")) || exports.iter().flat_map(|item| &item.fns).any(|function| {
+         function.ret.as_ref().and_then(|ty| classify_return(ty)).is_some_and(|kind| return_type(&kind, "flight").is_some())
+     })
+ }
+@@ -44,3 +44,22 @@
+ pub fn emit_dispatch(out: &Path) {
+     write_if_changed(&out.join("flight/NativeByteBuffer.hx"), "package flight;\n\n#if hl\ntypedef NativeByteBuffer = flight._hl.NativeByteBuffer;\n#elseif cpp\ntypedef NativeByteBuffer = flight._cpp.NativeByteBuffer;\n#elseif (js && flight_esm)\ntypedef NativeByteBuffer = js.lib.Uint8Array;\n#else\n#error \"Flight requires cpp, hl, or JS with flight_esm.\"\n#end\n");
+ }
++
++/// UTF8 string fields always cross the native boundary through owned buffers and borrowed input bytes.
++pub fn emit_string_field(output: &mut String, ty: &str, name: &str, hl: bool) {
++    let pointer = if hl { "bytes.getData().bytes" } else { "cast cpp.Pointer.ofArray(bytes.getData()).raw" };
++    writeln!(output, "\tinline function get_{name}():String {{\n\t\tfinal bytes = {ty}_Ffi.get_{name}(this);\n\t\ttry {{\n\t\t\tfinal value = bytes.toBytes().toString();\n\t\t\tbytes.dispose();\n\t\t\treturn value;\n\t\t}} catch (error:Dynamic) {{ bytes.dispose(); throw error; }}\n\t}}\n\tinline function set_{name}(value:String):String {{\n\t\tfinal bytes = haxe.io.Bytes.ofString(value);\n\t\t{ty}_Ffi.set_{name}(this, {pointer}, bytes.length);\n\t\treturn value;\n\t}}\n").unwrap();
++}
++pub fn emit_string_ffi(output: &mut String, ty: &str, field: &str, hl: bool) {
++    let snake = crate::haxe_common::to_snake_case(ty);
++    let name = crate::parse::to_camel_case(field);
++    let pointer = if hl { "hl.Bytes" } else { "cpp.Star<cpp.Void>" };
++    let package = if hl { "flight._hl" } else { "flight._cpp" };
++    for (method, symbol, parameters, result) in [
++        (format!("get_{name}"), format!("flight_field_get_{snake}_{field}"), format!("ptr:{pointer}"), format!("{package}.NativeByteBuffer")),
++        (format!("set_{name}"), format!("flight_field_set_{snake}_{field}"), format!("ptr:{pointer}, data:{pointer}, length:Int"), "Void".into())
++    ] {
++        let metadata = if hl { format!("@:hlNative(\"flight\", \"{symbol}\")") } else { format!("@:native(\"{symbol}\")") };
++        writeln!(output, "\t{metadata}\n\tstatic function {method}({parameters}):{result};").unwrap();
++    }
++}

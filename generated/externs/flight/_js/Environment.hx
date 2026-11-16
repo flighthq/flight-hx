@@ -2,11 +2,11 @@ package flight._js;
 
 abstract Environment(Dynamic) {
 	public var enabled(get, set):Bool;
-	inline function get_enabled():Bool return untyped this.enabled;
-	inline function set_enabled(value:Bool):Bool return untyped this.enabled = value;
+	inline function get_enabled():Bool return untyped this["enabled"];
+	inline function set_enabled(value:Bool):Bool return untyped this["enabled"] = value;
 	public var intensity(get, set):Float;
-	inline function get_intensity():Float return untyped this.intensity;
-	inline function set_intensity(value:Float):Float return untyped this.intensity = value;
+	inline function get_intensity():Float return untyped this["intensity"];
+	inline function set_intensity(value:Float):Float return untyped this["intensity"] = value;
 	static inline public function create():flight._js.Environment {
 		return flight._js._fn.Lighting.createEnvironment();
 	}

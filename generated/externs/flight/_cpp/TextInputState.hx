@@ -19,6 +19,14 @@ private extern class TextInputState_Ffi {
 	@:native("flight_set_text_input_state_history_index") static function set_historyIndex(ptr:cpp.Star<cpp.Void>, value:Int):Int;
 	@:native("flight_get_text_input_state_history_limit") static function get_historyLimit(ptr:cpp.Star<cpp.Void>):Int;
 	@:native("flight_set_text_input_state_history_limit") static function set_historyLimit(ptr:cpp.Star<cpp.Void>, value:Int):Int;
+	@:native("flight_field_get_text_input_state_password_character")
+	static function get_passwordCharacter(ptr:cpp.Star<cpp.Void>):flight._cpp.NativeByteBuffer;
+	@:native("flight_field_set_text_input_state_password_character")
+	static function set_passwordCharacter(ptr:cpp.Star<cpp.Void>, data:cpp.Star<cpp.Void>, length:Int):Void;
+	@:native("flight_field_get_text_input_state_restrict")
+	static function get_restrict(ptr:cpp.Star<cpp.Void>):flight._cpp.NativeByteBuffer;
+	@:native("flight_field_set_text_input_state_restrict")
+	static function set_restrict(ptr:cpp.Star<cpp.Void>, data:cpp.Star<cpp.Void>, length:Int):Void;
 	@:native("flight_get_text_input_state_selection_alpha") static function get_selectionAlpha(ptr:cpp.Star<cpp.Void>):Single;
 	@:native("flight_set_text_input_state_selection_alpha") static function set_selectionAlpha(ptr:cpp.Star<cpp.Void>, value:Single):Single;
 	@:native("flight_get_text_input_state_selection_color") static function get_selectionColor(ptr:cpp.Star<cpp.Void>):Int;
@@ -73,6 +81,36 @@ abstract TextInputState(cpp.Star<cpp.Void>) {
 	inline function get_historyLimit():Int return TextInputState_Ffi.get_historyLimit(this);
 
 	inline function set_historyLimit(value:Int):Int { TextInputState_Ffi.set_historyLimit(this, value); return value; }
+	public var passwordCharacter(get, set):String;
+	inline function get_passwordCharacter():String {
+		final bytes = TextInputState_Ffi.get_passwordCharacter(this);
+		try {
+			final value = bytes.toBytes().toString();
+			bytes.dispose();
+			return value;
+		} catch (error:Dynamic) { bytes.dispose(); throw error; }
+	}
+	inline function set_passwordCharacter(value:String):String {
+		final bytes = haxe.io.Bytes.ofString(value);
+		TextInputState_Ffi.set_passwordCharacter(this, cast cpp.Pointer.ofArray(bytes.getData()).raw, bytes.length);
+		return value;
+	}
+
+	public var restrict(get, set):String;
+	inline function get_restrict():String {
+		final bytes = TextInputState_Ffi.get_restrict(this);
+		try {
+			final value = bytes.toBytes().toString();
+			bytes.dispose();
+			return value;
+		} catch (error:Dynamic) { bytes.dispose(); throw error; }
+	}
+	inline function set_restrict(value:String):String {
+		final bytes = haxe.io.Bytes.ofString(value);
+		TextInputState_Ffi.set_restrict(this, cast cpp.Pointer.ofArray(bytes.getData()).raw, bytes.length);
+		return value;
+	}
+
 	public var selectionAlpha(get, set):Single;
 
 	inline function get_selectionAlpha():Single return TextInputState_Ffi.get_selectionAlpha(this);

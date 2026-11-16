@@ -2,21 +2,21 @@ package flight._js;
 
 abstract CollisionAabb3D(Dynamic) {
 	public var minX(get, set):Float;
-	inline function get_minX():Float return untyped this.minX;
-	inline function set_minX(value:Float):Float return untyped this.minX = value;
+	inline function get_minX():Float return untyped this["minX"];
+	inline function set_minX(value:Float):Float return untyped this["minX"] = value;
 	public var minY(get, set):Float;
-	inline function get_minY():Float return untyped this.minY;
-	inline function set_minY(value:Float):Float return untyped this.minY = value;
+	inline function get_minY():Float return untyped this["minY"];
+	inline function set_minY(value:Float):Float return untyped this["minY"] = value;
 	public var minZ(get, set):Float;
-	inline function get_minZ():Float return untyped this.minZ;
-	inline function set_minZ(value:Float):Float return untyped this.minZ = value;
+	inline function get_minZ():Float return untyped this["minZ"];
+	inline function set_minZ(value:Float):Float return untyped this["minZ"] = value;
 	public var maxX(get, set):Float;
-	inline function get_maxX():Float return untyped this.maxX;
-	inline function set_maxX(value:Float):Float return untyped this.maxX = value;
+	inline function get_maxX():Float return untyped this["maxX"];
+	inline function set_maxX(value:Float):Float return untyped this["maxX"] = value;
 	public var maxY(get, set):Float;
-	inline function get_maxY():Float return untyped this.maxY;
-	inline function set_maxY(value:Float):Float return untyped this.maxY = value;
+	inline function get_maxY():Float return untyped this["maxY"];
+	inline function set_maxY(value:Float):Float return untyped this["maxY"] = value;
 	public var maxZ(get, set):Float;
-	inline function get_maxZ():Float return untyped this.maxZ;
-	inline function set_maxZ(value:Float):Float return untyped this.maxZ = value;
+	inline function get_maxZ():Float return untyped this["maxZ"];
+	inline function set_maxZ(value:Float):Float return untyped this["maxZ"] = value;
 }

@@ -3,6 +3,10 @@ package flight._cpp;
 private extern class SpritesheetFrameData_Ffi {
 	@:native("flight_get_spritesheet_frame_data_height") static function get_height(ptr:cpp.Star<cpp.Void>):Single;
 	@:native("flight_set_spritesheet_frame_data_height") static function set_height(ptr:cpp.Star<cpp.Void>, value:Single):Single;
+	@:native("flight_field_get_spritesheet_frame_data_name")
+	static function get_name(ptr:cpp.Star<cpp.Void>):flight._cpp.NativeByteBuffer;
+	@:native("flight_field_set_spritesheet_frame_data_name")
+	static function set_name(ptr:cpp.Star<cpp.Void>, data:cpp.Star<cpp.Void>, length:Int):Void;
 	@:native("flight_get_spritesheet_frame_data_offset_x") static function get_offsetX(ptr:cpp.Star<cpp.Void>):Single;
 	@:native("flight_set_spritesheet_frame_data_offset_x") static function set_offsetX(ptr:cpp.Star<cpp.Void>, value:Single):Single;
 	@:native("flight_get_spritesheet_frame_data_offset_y") static function get_offsetY(ptr:cpp.Star<cpp.Void>):Single;
@@ -27,6 +31,21 @@ abstract SpritesheetFrameData(cpp.Star<cpp.Void>) {
 	inline function get_height():Single return SpritesheetFrameData_Ffi.get_height(this);
 
 	inline function set_height(value:Single):Single { SpritesheetFrameData_Ffi.set_height(this, value); return value; }
+	public var name(get, set):String;
+	inline function get_name():String {
+		final bytes = SpritesheetFrameData_Ffi.get_name(this);
+		try {
+			final value = bytes.toBytes().toString();
+			bytes.dispose();
+			return value;
+		} catch (error:Dynamic) { bytes.dispose(); throw error; }
+	}
+	inline function set_name(value:String):String {
+		final bytes = haxe.io.Bytes.ofString(value);
+		SpritesheetFrameData_Ffi.set_name(this, cast cpp.Pointer.ofArray(bytes.getData()).raw, bytes.length);
+		return value;
+	}
+
 	public var offsetX(get, set):Single;
 
 	inline function get_offsetX():Single return SpritesheetFrameData_Ffi.get_offsetX(this);

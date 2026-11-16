@@ -63,6 +63,12 @@ class Smoke {
     freeRef(child);
     freeRef(parent);
     #if (cpp || hl)
+    final font = flight.Font.createFontResource();
+    font.family = 'Sans Ω';
+    if (font.family != 'Sans Ω') throw 'UTF8 string field failed';
+    font.family = '';
+    if (font.family != '') throw 'empty string field failed';
+    flight.Font.freeFontResource(font);
     final input = haxe.io.Bytes.ofHex('0001027f80feff');
     #if cpp
     final inputData = cpp.Pointer.ofArray(input.getData()).raw;

@@ -1,5 +1,16 @@
 package flight._hl;
 
+private extern class TextInputState_Ffi {
+	@:hlNative("flight", "flight_field_get_text_input_state_password_character")
+	static function get_passwordCharacter(ptr:hl.Bytes):flight._hl.NativeByteBuffer;
+	@:hlNative("flight", "flight_field_set_text_input_state_password_character")
+	static function set_passwordCharacter(ptr:hl.Bytes, data:hl.Bytes, length:Int):Void;
+	@:hlNative("flight", "flight_field_get_text_input_state_restrict")
+	static function get_restrict(ptr:hl.Bytes):flight._hl.NativeByteBuffer;
+	@:hlNative("flight", "flight_field_set_text_input_state_restrict")
+	static function set_restrict(ptr:hl.Bytes, data:hl.Bytes, length:Int):Void;
+}
+
 abstract TextInputState(hl.Bytes) {
 	public var alwaysShowSelection(get, set):Bool;
 
@@ -46,6 +57,36 @@ abstract TextInputState(hl.Bytes) {
 	inline function get_historyLimit():Int return this.getI32(64);
 
 	inline function set_historyLimit(value:Int):Int { this.setI32(64, value); return value; }
+	public var passwordCharacter(get, set):String;
+	inline function get_passwordCharacter():String {
+		final bytes = TextInputState_Ffi.get_passwordCharacter(this);
+		try {
+			final value = bytes.toBytes().toString();
+			bytes.dispose();
+			return value;
+		} catch (error:Dynamic) { bytes.dispose(); throw error; }
+	}
+	inline function set_passwordCharacter(value:String):String {
+		final bytes = haxe.io.Bytes.ofString(value);
+		TextInputState_Ffi.set_passwordCharacter(this, bytes.getData().bytes, bytes.length);
+		return value;
+	}
+
+	public var restrict(get, set):String;
+	inline function get_restrict():String {
+		final bytes = TextInputState_Ffi.get_restrict(this);
+		try {
+			final value = bytes.toBytes().toString();
+			bytes.dispose();
+			return value;
+		} catch (error:Dynamic) { bytes.dispose(); throw error; }
+	}
+	inline function set_restrict(value:String):String {
+		final bytes = haxe.io.Bytes.ofString(value);
+		TextInputState_Ffi.set_restrict(this, bytes.getData().bytes, bytes.length);
+		return value;
+	}
+
 	public var selectionAlpha(get, set):Single;
 
 	inline function get_selectionAlpha():Single return this.getF32(120);
