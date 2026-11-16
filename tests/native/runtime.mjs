@@ -41,7 +41,9 @@ mkdirSync(src);
 copyFileSync(path.join(installedFlight, 'examples/ffi-smoke/Smoke.hx'), path.join(src, 'Smoke.hx'));
 process.stdout.write('Installed binary archive and isolated haxelib registration passed.\n');
 const cpp = path.join(work, 'cpp');
-run('haxe', ['-lib', 'flight', '-cp', src, '-main', 'Smoke', '-dce', 'full', '-cpp', cpp], work, consumerEnvironment);
+// This gate packages x64 binaries. In particular, hxcpp can default to x86 on
+// Windows even with x64 Node and MSVC, so select the consumer architecture too.
+run('haxe', ['-lib', 'flight', '-cp', src, '-main', 'Smoke', '-dce', 'full', '-D', 'HXCPP_M64', '-cpp', cpp], work, consumerEnvironment);
 const cleanRuntime = { ...consumerEnvironment };
 delete cleanRuntime.LD_LIBRARY_PATH;
 delete cleanRuntime.DYLD_LIBRARY_PATH;
@@ -66,7 +68,7 @@ writeFileSync(path.join(src, 'Main.hx'), `class Main extends lime.app.Applicatio
 writeFileSync(path.join(work, 'project.xml'), `<project><app main="Main" file="FlightSmoke" path="Export"/><source path="src"/><haxelib name="lime"/><haxelib name="flight"/><window hidden="true"/></project>\n`);
 for (const target of [host.limeTarget, 'hl']) {
   process.stdout.write(`Running Lime ${target} installed consumer...\n`);
-  const output = run(haxelib, ['run', 'lime', 'test', target, '-release'], work, consumerEnvironment);
+  const output = run(haxelib, ['run', 'lime', 'test', target, '-release', '-64'], work, consumerEnvironment);
   assert.match(output, /FLIGHT_FFI_SMOKE_OK/u, `Lime ${target} did not run the installed consumer`);
   const outputDirectory = path.join(work, `Export/${target === 'mac' ? 'macos' : target}`);
   const bin = path.join(outputDirectory, 'bin', ...(process.platform === 'darwin' ? ['FlightSmoke.app/Contents/MacOS'] : []));

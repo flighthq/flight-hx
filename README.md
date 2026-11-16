@@ -24,6 +24,15 @@ platform, then add `-lib flight` or use this in a Lime project:
 libraries. The package macro also supports ordinary hxcpp and HashLink builds
 without Lime. Consumers do not need Rust, Cargo, or Node.
 
+Windows native binaries are x64. For ordinary hxcpp builds, pass `-D HXCPP_M64`
+explicitly; hxcpp can otherwise target x86 even on a 64-bit host:
+
+```sh
+haxe -lib flight -cp examples/ffi-smoke -main Smoke -D HXCPP_M64 -cpp out
+```
+
+For Lime, select x64 with `haxelib run lime test windows -64`.
+
 ```haxe
 import flight.Math;
 import flight.Geometry;
