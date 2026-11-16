@@ -33,6 +33,23 @@ int main() {
   void* removed = flight_remove_node_child(parent_view, added);
   if (flight_get_node_child_count(parent) != 0 || flight_get_node_parent(removed)) return 10;
   for (void* handle : {removed, clone, runtime, parent_view, added, child, parent}) flight_free_ref(handle);
+  unsigned char input[] = {0, 1, 2, 127, 128, 254, 255};
+  void* compressed = flight_compress_deflate(input, sizeof input);
+  const auto compressed_length = flight_get_byte_buffer_length(compressed);
+  if (!compressed_length) return 11;
+  void* decoded = flight_decompress_deflate(flight_get_byte_buffer_data(compressed), compressed_length, sizeof input, 0);
+  if (!decoded || flight_get_byte_buffer_length(decoded) != sizeof input || flight_get_byte_buffer_byte(decoded, 6) != 255) return 12;
+  unsigned char copied[sizeof input] = {};
+  if (flight_copy_byte_buffer(decoded, copied, sizeof copied) != sizeof input) return 13;
+  for (unsigned i = 0; i < sizeof input; ++i) if (copied[i] != input[i]) return 14;
+  flight_free_byte_buffer(decoded);
+  flight_free_byte_buffer(compressed);
+  void* empty = flight_compress_deflate(nullptr, 0);
+  decoded = flight_decompress_deflate(flight_get_byte_buffer_data(empty), flight_get_byte_buffer_length(empty), 0, 0);
+  if (!decoded || flight_get_byte_buffer_length(decoded) != 0) return 15;
+  flight_free_byte_buffer(decoded);
+  flight_free_byte_buffer(empty);
+  if (flight_decompress_deflate(nullptr, 0, 4, 1)) return 16;
   std::puts("FLIGHT_NATIVE_FFI_OK");
   return 0;
 }

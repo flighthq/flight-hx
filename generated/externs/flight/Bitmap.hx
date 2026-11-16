@@ -758,7 +758,7 @@ extern inline function encodeBitmap(hostBitmapEncode:HostBitmapEncodeCapability,
 	return flight._js._fn.Bitmap.encodeBitmap(hostBitmapEncode, source, format, quality);
 }
 #else
-extern inline function encodeBitmap(hostBitmapEncode:HostBitmapEncodeCapability, source:Bitmap, format:Int, quality:Float):Dynamic {
+extern inline function encodeBitmap(hostBitmapEncode:HostBitmapEncodeCapability, source:Bitmap, format:Int, quality:Float):Null<flight.NativeByteBuffer> {
 #if hl
 	return flight._hl._fn.Bitmap.encodeBitmap(hostBitmapEncode, source, format, quality);
 #elseif cpp

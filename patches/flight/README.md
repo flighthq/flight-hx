@@ -66,6 +66,14 @@ GC no-op. Rust tests verify hierarchy results, concrete receiver access and
 weak-reference expiry after destruction. This changes native handle encoding;
 regenerate externs and rebuild native binaries together.
 
+`0007-byte-buffer-results.patch` gives owned `Vec<u8>` and `Box<[u8]>` results
+an explicit data/length/copy/free ABI and emits `NativeByteBuffer` for cpp/HL.
+Compression output can be fed back into decoders or copied to `haxe.io.Bytes`,
+then disposed. Nullable decoder failures remain null. Empty borrowed slices
+accept a null data pointer with length zero. Rust and consumer tests cover
+binary round-trips, empty buffers, failure results and release; JS continues
+to use the SDK's logical byte arrays.
+
 ## Applying upstream
 
 Use Rust 1.96.0 and Haxe 4.3.7 on PATH, and a clean Flight checkout at the
@@ -80,6 +88,7 @@ git apply /path/to/flight-hx/patches/flight/0003-portable-module-names.patch
 git apply /path/to/flight-hx/patches/flight/0004-hl-packed-floats.patch
 git apply /path/to/flight-hx/patches/flight/0005-bitmap-ownership.patch
 git apply /path/to/flight-hx/patches/flight/0006-ref-handles.patch
+git apply /path/to/flight-hx/patches/flight/0007-byte-buffer-results.patch
 cargo test -p flight-bindgen --bin flight-bindgen
 scripts/check-haxe-bindings.sh
 ```

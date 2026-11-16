@@ -4,6 +4,7 @@ import flight.Bitmap;
 import flight.Scene2D;
 import flight.Node;
 import flight.Entity;
+import flight.Compression;
 
 class Smoke {
   public static function main() {
@@ -61,6 +62,29 @@ class Smoke {
     freeRef(added);
     freeRef(child);
     freeRef(parent);
+    #if (cpp || hl)
+    final input = haxe.io.Bytes.ofHex('0001027f80feff');
+    #if cpp
+    final inputData = cpp.Pointer.ofArray(input.getData()).raw;
+    #else
+    final inputData = input.getData();
+    #end
+    final compressed = compressDeflate(inputData, input.length);
+    if (compressed.length <= 0) throw 'compressed buffer length missing';
+    final decoded = decompressDeflate(compressed.data, compressed.length, input.length, flight.CompressionFraming.Raw);
+    if (decoded == null || decoded.length != input.length || decoded.getByte(6) != 255)
+      throw 'decoded buffer metadata invalid';
+    if (decoded.toBytes().toHex() != input.toHex()) throw 'decoded buffer copy failed';
+    decoded.dispose();
+    compressed.dispose();
+    final empty = compressDeflate(null, 0);
+    final emptyDecoded = decompressDeflate(empty.data, empty.length, 0, flight.CompressionFraming.Raw);
+    if (emptyDecoded == null || emptyDecoded.toBytes().length != 0) throw 'empty buffer failed';
+    emptyDecoded.dispose();
+    empty.dispose();
+    if (decompressDeflate(null, 0, 4, flight.CompressionFraming.Rfc1950) != null)
+      throw 'invalid compressed input did not return null';
+    #end
     trace('FLIGHT_FFI_SMOKE_OK');
   }
 }

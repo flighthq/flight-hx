@@ -22,7 +22,7 @@ extern inline function encodeUtf8(text:String):Dynamic {
 	return flight._js._fn.Encoding.encodeUtf8(text);
 }
 #else
-extern inline function encodeUtf8(text:String):Dynamic {
+extern inline function encodeUtf8(text:String):flight.NativeByteBuffer {
 #if hl
 	return flight._hl._fn.Encoding.encodeUtf8(cast text);
 #elseif cpp

@@ -88,7 +88,7 @@ extern class Bitmap {
 	@:hlNative("flight", "flight_dissolve_bitmap_pixels")
 	public static function dissolveBitmapPixels(dest:flight._hl.BitmapRegion, source:flight._hl.BitmapRegion, seed:Int, pixelCount:Int, fillColor:Int):Int;
 	@:hlNative("flight", "flight_encode_bitmap")
-	public static function encodeBitmap(hostBitmapEncode:flight._hl.HostBitmapEncodeCapability, source:flight._hl.Bitmap, format:Int, quality:Single):hl.Bytes;
+	public static function encodeBitmap(hostBitmapEncode:flight._hl.HostBitmapEncodeCapability, source:flight._hl.Bitmap, format:Int, quality:Single):Null<flight._hl.NativeByteBuffer>;
 	@:hlNative("flight", "flight_explain_bitmap_encode_failure")
 	public static function explainBitmapEncodeFailure(hostBitmapEncode:flight._hl.HostBitmapEncodeCapability, format:Int):flight._hl.BitmapEncodeFailureExplanation;
 	@:hlNative("flight", "flight_fill_bitmap_rectangle")

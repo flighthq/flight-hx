@@ -8,6 +8,11 @@
 extern "C" {
 #endif
 void flight_free_ref(void * arg0);
+size_t flight_get_byte_buffer_length(void * arg0);
+void * flight_get_byte_buffer_data(void * arg0);
+int32_t flight_get_byte_buffer_byte(void * arg0, size_t arg1);
+size_t flight_copy_byte_buffer(void * arg0, void * arg1, size_t arg2);
+void flight_free_byte_buffer(void * arg0);
 void * flight_read_abc_file(void * arg0, size_t arg1);
 void * flight_read_abc_instructions(void * arg0, size_t arg1);
 uint16_t flight_get_abc_file_major_version(void * arg0);

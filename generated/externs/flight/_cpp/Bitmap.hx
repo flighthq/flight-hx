@@ -28,7 +28,7 @@ abstract Bitmap(cpp.Star<cpp.Void>) {
 	extern inline public function trim():flight._cpp.Bitmap {
 		return flight._cpp._fn.Bitmap.trimBitmap(cast this);
 	}
-	extern inline public function encode(hostBitmapEncode:flight._cpp.HostBitmapEncodeCapability, format:Int, quality:Single):cpp.Star<cpp.Void> {
+	extern inline public function encode(hostBitmapEncode:flight._cpp.HostBitmapEncodeCapability, format:Int, quality:Single):Null<flight._cpp.NativeByteBuffer> {
 		return flight._cpp._fn.Bitmap.encodeBitmap(hostBitmapEncode, cast this, format, quality);
 	}
 	extern inline public function floodFill(x:Int, y:Int, color:Int):Void {

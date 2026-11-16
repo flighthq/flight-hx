@@ -88,7 +88,7 @@ extern class Bitmap {
 	@:native("flight_dissolve_bitmap_pixels")
 	public static function dissolveBitmapPixels(dest:flight._cpp.BitmapRegion, source:flight._cpp.BitmapRegion, seed:Int, pixelCount:Int, fillColor:Int):Int;
 	@:native("flight_encode_bitmap")
-	public static function encodeBitmap(hostBitmapEncode:flight._cpp.HostBitmapEncodeCapability, source:flight._cpp.Bitmap, format:Int, quality:Single):cpp.Star<cpp.Void>;
+	public static function encodeBitmap(hostBitmapEncode:flight._cpp.HostBitmapEncodeCapability, source:flight._cpp.Bitmap, format:Int, quality:Single):Null<flight._cpp.NativeByteBuffer>;
 	@:native("flight_explain_bitmap_encode_failure")
 	public static function explainBitmapEncodeFailure(hostBitmapEncode:flight._cpp.HostBitmapEncodeCapability, format:Int):flight._cpp.BitmapEncodeFailureExplanation;
 	@:native("flight_fill_bitmap_rectangle")

@@ -28,7 +28,7 @@ abstract Bitmap(hl.Bytes) {
 	inline public function trim():flight._hl.Bitmap {
 		return flight._hl._fn.Bitmap.trimBitmap(cast this);
 	}
-	inline public function encode(hostBitmapEncode:flight._hl.HostBitmapEncodeCapability, format:Int, quality:Single):hl.Bytes {
+	inline public function encode(hostBitmapEncode:flight._hl.HostBitmapEncodeCapability, format:Int, quality:Single):Null<flight._hl.NativeByteBuffer> {
 		return flight._hl._fn.Bitmap.encodeBitmap(hostBitmapEncode, cast this, format, quality);
 	}
 	inline public function floodFill(x:Int, y:Int, color:Int):Void {

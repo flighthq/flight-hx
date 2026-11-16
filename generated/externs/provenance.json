@@ -27,6 +27,10 @@
       {
         "path": "patches/flight/0006-ref-handles.patch",
         "sha256": "86a02ee4bd96bd8f913cee9a41c4b28e92ee2dab1a45bac6480ba56ce88e68d2"
+      },
+      {
+        "path": "patches/flight/0007-byte-buffer-results.patch",
+        "sha256": "9aeeb7b7b53f9cb3f16ce10fb0fef4aae4bc74e68ebf8cd0a411afda60828e2d"
       }
     ]
   },
@@ -37,10 +41,10 @@
     "platform": "linux",
     "architecture": "x64"
   },
-  "nativeHeaderSha256": "1995221d6ac2a3f0b9972a6bd1fb97fd6056c6a6235463ba76510a3a35a92078",
+  "nativeHeaderSha256": "aabb7cf7820490ef08077c7a9a2148a1276ec5463698350fa0acdf10c942b790",
   "offsetsSha256": "b6a208ea570b8ac45d6439ca4a43c98ef66b03f9a10afeec54e81d5502d1d390",
-  "ffiNamesSha256": "c423897c467e821e6655dbcb23ac0e4517e528f620dbf5f38a75d9ffd8d3aa1a",
-  "ffiFunctionCount": 5726,
+  "ffiNamesSha256": "da6403c5b287bd2612c0350b675cc91528199ce957a9a65663f357b80816adbe",
+  "ffiFunctionCount": 5731,
   "files": [
     {
       "path": "flight/Aabb.hx",
@@ -244,7 +248,7 @@
     },
     {
       "path": "flight/Bitmap.hx",
-      "sha256": "c8ce1e4ed73a9ce95653264c79d429ee16e7071a0018329f8d7b16d095f06110"
+      "sha256": "3885dcb357fc14a0597fd0f089055294699bd8f24791d996c496a8ccf92a552f"
     },
     {
       "path": "flight/BitmapBevelOptions.hx",
@@ -788,7 +792,7 @@
     },
     {
       "path": "flight/Compression.hx",
-      "sha256": "9d8d6b21f57fc8901bc4b4ca7aa3bba26d7869bb73feb6970baf09c8917d5f9f"
+      "sha256": "35347b8aa90eae48e043cb9d8b43be7bb68233e798695ffbc253244949ca16db"
     },
     {
       "path": "flight/CompressionFraming.hx",
@@ -956,7 +960,7 @@
     },
     {
       "path": "flight/Encoding.hx",
-      "sha256": "84b566f6bf11960ac9dde83a58fd9ee1ca303e35bb2a3e49e446f75cad27b617"
+      "sha256": "16333975fd7de5ec955e49a3156f6f85c437f2985d15e6e8953d916c12169204"
     },
     {
       "path": "flight/Entity.hx",
@@ -1721,6 +1725,10 @@
     {
       "path": "flight/MovieClipSignals.hx",
       "sha256": "4dec198874b3f66007fa4b60239fb57f7fd4dbe0acc2e7bbe942ce7cfbf2c287"
+    },
+    {
+      "path": "flight/NativeByteBuffer.hx",
+      "sha256": "4a19405f6fcc3ae2a9c9544c099d844222ced2b0e3ef06d6e19379287435242e"
     },
     {
       "path": "flight/NativeText.hx",
@@ -4088,7 +4096,7 @@
     },
     {
       "path": "flight/_cpp/Bitmap.hx",
-      "sha256": "00ad674ee9ece7a678493003f2d28a3b7d205d429330c08450c156819fae26ea"
+      "sha256": "996b9863c97671c984596eec9f769c0acc681524f3c8b1f89f534411940edc27"
     },
     {
       "path": "flight/_cpp/BitmapBevelOptions.hx",
@@ -5209,6 +5217,10 @@
     {
       "path": "flight/_cpp/MovieClipSignals.hx",
       "sha256": "471966aea9a4fe8927f69d318edcb6be0bda9b382de5500c53f9e5f1212b22b6"
+    },
+    {
+      "path": "flight/_cpp/NativeByteBuffer.hx",
+      "sha256": "380acf2d2669f16a9dab475367ecf54e8402d92f7369066d9735d01256d29f2c"
     },
     {
       "path": "flight/_cpp/NativeText.hx",
@@ -6912,7 +6924,7 @@
     },
     {
       "path": "flight/_cpp/_fn/Bitmap.hx",
-      "sha256": "857d2ff6a7ee6685481c7f05703450a4544a8009a980ac0e2427e972f2241438"
+      "sha256": "841dbf2436bd3ac744d87895edc76096ccd7bb827b91eb326e6581700093a26f"
     },
     {
       "path": "flight/_cpp/_fn/Bitmapfont.hx",
@@ -6948,7 +6960,7 @@
     },
     {
       "path": "flight/_cpp/_fn/Compression.hx",
-      "sha256": "55202abc28573edcda9d52309dc8f49c3dabc4df30c7c94af2158ce13d13b00c"
+      "sha256": "25fdd7327e3542892659e6f44b3f52ab42cda6715100d4fafa15ce2ca1d5cc19"
     },
     {
       "path": "flight/_cpp/_fn/Easing.hx",
@@ -6960,7 +6972,7 @@
     },
     {
       "path": "flight/_cpp/_fn/Encoding.hx",
-      "sha256": "34f7dcd6c2e78455ab0203e71de164a0d24505b1c5af5e3c095fa6ec12572a82"
+      "sha256": "a3c836ee52bd13b221b2d4e5f21a368f946c0ff5f9fc8ccd87cf725d0688ab06"
     },
     {
       "path": "flight/_cpp/_fn/Entity.hx",
@@ -7324,7 +7336,7 @@
     },
     {
       "path": "flight/_hl/Bitmap.hx",
-      "sha256": "db2519ad41466b48d135a5a6c4d1b43ce4bf0c2c5bbacb788de1797506f02f24"
+      "sha256": "d5689b877e85ff8a71d1094ee9202763870108030a1afcf6394af1a7be906af2"
     },
     {
       "path": "flight/_hl/BitmapBevelOptions.hx",
@@ -8445,6 +8457,10 @@
     {
       "path": "flight/_hl/MovieClipSignals.hx",
       "sha256": "09ce2e524e5bbf23044a21fa7224221a70136a22142057724d79bdb2d3bb9028"
+    },
+    {
+      "path": "flight/_hl/NativeByteBuffer.hx",
+      "sha256": "31a858a263d31a60ce1cf44ded644b7977a24820ab173f4a1c64fa496cfbecf6"
     },
     {
       "path": "flight/_hl/NativeText.hx",
@@ -10148,7 +10164,7 @@
     },
     {
       "path": "flight/_hl/_fn/Bitmap.hx",
-      "sha256": "4f0902284c050b53e46f57abfe385a722a5b5a81047549454160f43c41ed05d5"
+      "sha256": "91f94e913e41a40d96a464e4046927c5ca909d36e9c005f1974a4894b960f84e"
     },
     {
       "path": "flight/_hl/_fn/Bitmapfont.hx",
@@ -10184,7 +10200,7 @@
     },
     {
       "path": "flight/_hl/_fn/Compression.hx",
-      "sha256": "1ce238f12797a71ff93f5120200c3bee2c9217d3fd2c435feea1e08671f42ec2"
+      "sha256": "64eb68cf9e9d145bc527dd03b1a0f04cf024d32f8fba55fb0677fc16c8bec62b"
     },
     {
       "path": "flight/_hl/_fn/Easing.hx",
@@ -10196,7 +10212,7 @@
     },
     {
       "path": "flight/_hl/_fn/Encoding.hx",
-      "sha256": "9a8935fcb2830ec25fd48ed50f26503fac73c19f0f1239d8500777a5a27d80be"
+      "sha256": "e5862e9cab4354ad6e74e2e87ce28aa3aeb46ac9d778d297630aab5a03e65edf"
     },
     {
       "path": "flight/_hl/_fn/Entity.hx",

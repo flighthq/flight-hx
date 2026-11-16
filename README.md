@@ -7,8 +7,8 @@ and flight-cpp adapters have been removed.
 
 The source is Flight `develop` revision
 `49c510e875461a9235b24ee846015ec1b47acd2a` plus the reviewable
-[native producer patches](patches/flight/README.md). There are 3,400 generated Haxe
-files selected from 5,726 C ABI exports. Generated Haxe is copied unchanged from
+[native producer patches](patches/flight/README.md). There are 3,403 generated Haxe
+files selected from 5,731 C ABI exports. Generated Haxe is copied unchanged from
 that producer; provenance records both the Flight revision and patch hashes.
 
 ## Consume
@@ -50,6 +50,11 @@ at compile time.
 Import `flight.Entity` and call `freeRef(handle)` for each returned native
 `Ref<T>` handle, including references returned by node hierarchy getters.
 Scene references retained by other nodes remain alive after a handle is freed.
+
+Native byte results, including compression output, return `NativeByteBuffer`.
+It exposes `length`, `data`, `getByte()` and `toBytes()`. `toBytes()` makes a
+managed Haxe copy; call `dispose()` when finished with the native buffer. The
+borrowed `data` view remains valid until disposal. JS keeps the SDK byte array.
 
 ## Native layout
 

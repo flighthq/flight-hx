@@ -1,0 +1,341 @@
+diff --git a/crates/flight-ffi/build.rs b/crates/flight-ffi/build.rs
+--- a/crates/flight-ffi/build.rs
++++ b/crates/flight-ffi/build.rs
+@@ -1,5 +1,6 @@
+ mod native_bindings;
+ mod native_handles;
++mod native_buffers;
+ use std::collections::BTreeSet;
+ use std::env;
+ use std::fmt::Write as _;
+@@ -247,6 +248,7 @@
+ 
+     let mut all_output = String::from("use flight_sdk;\n\n");
+     all_output.push_str(native_handles::RUNTIME);
++    all_output.push_str(native_buffers::RUNTIME);
+     let mut boxed_types: BTreeSet<String> = BTreeSet::new();
+     let mut seen_names: BTreeSet<String> = BTreeSet::new();
+     let mut stats_total_fns = 0usize;
+@@ -1157,20 +1159,8 @@
+                      }}"
+             )
+         }
+-        FfiReturn::VecReturn => {
+-            format!(
+-                "{preamble}    let vec = {call};\n    \
+-                     return Box::into_raw(Box::new(vec)) as *mut std::ffi::c_void;"
+-            )
+-        }
+-        FfiReturn::OptionVecReturn => {
+-            format!(
+-                "{preamble}    match {call} {{\n        \
+-                     Some(vec) => Box::into_raw(Box::new(vec)) as *mut std::ffi::c_void,\n        \
+-                     None => std::ptr::null_mut(),\n    \
+-                     }}"
+-            )
+-        }
++        FfiReturn::VecReturn => format!("{preamble}    let vec = {call}; return {};", native_buffers::wrap("vec", func.ret.as_ref().unwrap())),
++        FfiReturn::OptionVecReturn => format!("{preamble}    match {call} {{ Some(vec) => {}, None => std::ptr::null_mut() }}", native_buffers::wrap("vec", func.ret.as_ref().unwrap())),
+     };
+ 
+     Some((
+@@ -1387,16 +1377,8 @@
+                      None => std::ptr::null(),\n    \
+                      }}"
+             ),
+-            FfiReturn::VecReturn => format!(
+-                "    let vec = {call};\n    \
+-                     return Box::into_raw(Box::new(vec)) as *mut std::ffi::c_void;"
+-            ),
+-            FfiReturn::OptionVecReturn => format!(
+-                "    match {call} {{\n        \
+-                     Some(vec) => Box::into_raw(Box::new(vec)) as *mut std::ffi::c_void,\n        \
+-                     None => std::ptr::null_mut(),\n    \
+-                     }}"
+-            ),
++            FfiReturn::VecReturn => format!("    let vec = {call}; return {};", native_buffers::wrap("vec", func.ret.as_ref().unwrap())),
++            FfiReturn::OptionVecReturn => format!("    match {call} {{ Some(vec) => {}, None => std::ptr::null_mut() }}", native_buffers::wrap("vec", func.ret.as_ref().unwrap())),
+         };
+ 
+         wrappers.push((
+@@ -1868,7 +1850,7 @@
+                         (len_name.clone(), "usize".to_string()),
+                     ],
+                     call_expr: format!(
+-                        "if {ptr_name}.is_null() {{ None }} else {{ Some(unsafe {{ std::slice::from_raw_parts({ptr_name}, {len_name}) }}) }}"
++                        "if {ptr_name}.is_null() {{ None }} else {{ Some(if {len_name} == 0 {{ &[] }} else {{ unsafe {{ std::slice::from_raw_parts({ptr_name}, {len_name}) }} }}) }}"
+                     ),
+                 });
+             }
+@@ -1888,7 +1870,7 @@
+                         (len_name.clone(), "usize".to_string()),
+                     ],
+                     call_expr: format!(
+-                        "if {ptr_name}.is_null() {{ None }} else {{ Some(unsafe {{ std::slice::from_raw_parts_mut({ptr_name}, {len_name}) }}) }}"
++                        "if {ptr_name}.is_null() {{ None }} else {{ Some(if {len_name} == 0 {{ &mut [] }} else {{ unsafe {{ std::slice::from_raw_parts_mut({ptr_name}, {len_name}) }} }}) }}"
+                     ),
+                 });
+             }
+@@ -2083,7 +2065,7 @@
+                         (len_name.clone(), "usize".to_string()),
+                     ],
+                     call_expr: format!(
+-                        "unsafe {{ std::slice::from_raw_parts_mut({ptr_name}, {len_name}) }}"
++                        "if {len_name} == 0 {{ &mut [] }} else {{ unsafe {{ std::slice::from_raw_parts_mut({ptr_name}, {len_name}) }} }}"
+                     ),
+                 });
+             }
+@@ -2110,7 +2092,7 @@
+                         (len_name.clone(), "usize".to_string()),
+                     ],
+                     call_expr: format!(
+-                        "unsafe {{ std::slice::from_raw_parts({ptr_name}, {len_name}) }}"
++                        "if {len_name} == 0 {{ &[] }} else {{ unsafe {{ std::slice::from_raw_parts({ptr_name}, {len_name}) }} }}"
+                     ),
+                 });
+             }
+@@ -2301,7 +2283,7 @@
+                         (len_name.clone(), "usize".to_string()),
+                     ],
+                     call_expr: format!(
+-                        "if {ptr_name}.is_null() {{ None }} else {{ Some(unsafe {{ std::slice::from_raw_parts({ptr_name}, {len_name}) }}) }}"
++                        "if {ptr_name}.is_null() {{ None }} else {{ Some(if {len_name} == 0 {{ &[] }} else {{ unsafe {{ std::slice::from_raw_parts({ptr_name}, {len_name}) }} }}) }}"
+                     ),
+                 });
+             }
+@@ -2328,7 +2310,7 @@
+                         (len_name.clone(), "usize".to_string()),
+                     ],
+                     call_expr: format!(
+-                        "if {ptr_name}.is_null() {{ None }} else {{ Some(unsafe {{ std::slice::from_raw_parts_mut({ptr_name}, {len_name}) }}) }}"
++                        "if {ptr_name}.is_null() {{ None }} else {{ Some(if {len_name} == 0 {{ &mut [] }} else {{ unsafe {{ std::slice::from_raw_parts_mut({ptr_name}, {len_name}) }} }}) }}"
+                     ),
+                 });
+             }
+diff --git a/crates/flight-ffi/native_buffers.rs b/crates/flight-ffi/native_buffers.rs
+new file mode 100644
+--- /dev/null
++++ b/crates/flight-ffi/native_buffers.rs
+@@ -0,0 +1,52 @@
++//! Owned u8 results carry explicit data, length and destruction, rather than a boxed fat pointer.
++pub fn is_byte_return(ty: &str) -> bool {
++    let ty = super::strip_crate_paths(&super::resolve_type_alias(ty));
++    let ty = ty.strip_prefix("Option<").and_then(|s| s.strip_suffix('>')).unwrap_or(&ty);
++    matches!(ty, "Vec<u8>" | "Box<[u8]>")
++}
++pub fn wrap(value: &str, ty: &str) -> String {
++    if is_byte_return(ty) { format!("hx_byte_buffer({value})") }
++    else { format!("Box::into_raw(Box::new({value})) as *mut std::ffi::c_void") }
++}
++pub const RUNTIME: &str = r#"
++struct HxByteBuffer { bytes: Vec<u8> }
++static HX_BYTE_BUFFERS: std::sync::OnceLock<std::sync::Mutex<std::collections::HashSet<usize>>> = std::sync::OnceLock::new();
++fn hx_byte_buffers() -> &'static std::sync::Mutex<std::collections::HashSet<usize>> { HX_BYTE_BUFFERS.get_or_init(Default::default) }
++fn hx_byte_buffer(values: impl IntoIterator<Item=u8>) -> *mut std::ffi::c_void {
++    let ptr = Box::into_raw(Box::new(HxByteBuffer { bytes: values.into_iter().collect() })) as *mut std::ffi::c_void;
++    hx_byte_buffers().lock().unwrap().insert(ptr as usize);
++    ptr
++}
++#[unsafe(no_mangle)]
++pub unsafe extern "C" fn flight_get_byte_buffer_length(ptr: *const std::ffi::c_void) -> usize {
++    let buffers = hx_byte_buffers().lock().unwrap();
++    if !buffers.contains(&(ptr as usize)) { return 0; }
++    unsafe { &*(ptr as *const HxByteBuffer) }.bytes.len()
++}
++#[unsafe(no_mangle)]
++pub unsafe extern "C" fn flight_get_byte_buffer_data(ptr: *mut std::ffi::c_void) -> *mut u8 {
++    let buffers = hx_byte_buffers().lock().unwrap();
++    if !buffers.contains(&(ptr as usize)) { return std::ptr::null_mut(); }
++    unsafe { &mut *(ptr as *mut HxByteBuffer) }.bytes.as_mut_ptr()
++}
++#[unsafe(no_mangle)]
++pub unsafe extern "C" fn flight_get_byte_buffer_byte(ptr: *const std::ffi::c_void, index: usize) -> i32 {
++    let buffers = hx_byte_buffers().lock().unwrap();
++    if !buffers.contains(&(ptr as usize)) { return -1; }
++    unsafe { &*(ptr as *const HxByteBuffer) }.bytes.get(index).map(|byte| *byte as i32).unwrap_or(-1)
++}
++#[unsafe(no_mangle)]
++pub unsafe extern "C" fn flight_copy_byte_buffer(ptr: *const std::ffi::c_void, destination: *mut u8, capacity: usize) -> usize {
++    let buffers = hx_byte_buffers().lock().unwrap();
++    if !buffers.contains(&(ptr as usize)) || destination.is_null() { return 0; }
++    let bytes = &unsafe { &*(ptr as *const HxByteBuffer) }.bytes;
++    let length = bytes.len().min(capacity);
++    if length != 0 { unsafe { std::ptr::copy(bytes.as_ptr(), destination, length); } }
++    length
++}
++#[unsafe(no_mangle)]
++pub unsafe extern "C" fn flight_free_byte_buffer(ptr: *mut std::ffi::c_void) {
++    let existed = hx_byte_buffers().lock().unwrap().remove(&(ptr as usize));
++    if existed { unsafe { drop(Box::from_raw(ptr as *mut HxByteBuffer)); } }
++}
++"#;
+diff --git a/crates/flight-ffi/src/lib.rs b/crates/flight-ffi/src/lib.rs
+--- a/crates/flight-ffi/src/lib.rs
++++ b/crates/flight-ffi/src/lib.rs
+@@ -52,3 +52,35 @@
+         }
+     }
+ }
++
++#[cfg(test)]
++mod byte_buffer_tests {
++    use super::*;
++    #[test]
++    fn compression_buffers_report_length_copy_bytes_and_release_storage() {
++        unsafe {
++            let input = [0, 1, 2, 127, 128, 254, 255];
++            let compressed = flight_compress_deflate(input.as_ptr(), input.len());
++            let length = flight_get_byte_buffer_length(compressed);
++            assert!(length > 0);
++            let decoded = flight_decompress_deflate(flight_get_byte_buffer_data(compressed), length, input.len(), 0);
++            assert!(!decoded.is_null());
++            assert_eq!(flight_get_byte_buffer_length(decoded), input.len());
++            let mut copy = vec![0; input.len()];
++            assert_eq!(flight_copy_byte_buffer(decoded, copy.as_mut_ptr(), copy.len()), input.len());
++            assert_eq!(copy, input);
++            assert_eq!(flight_get_byte_buffer_byte(decoded, 6), 255);
++            assert_eq!(flight_get_byte_buffer_byte(decoded, 7), -1);
++            flight_free_byte_buffer(decoded);
++            flight_free_byte_buffer(compressed);
++            let empty = flight_compress_deflate(std::ptr::null(), 0);
++            let decoded = flight_decompress_deflate(flight_get_byte_buffer_data(empty), flight_get_byte_buffer_length(empty), 0, 0);
++            assert!(!decoded.is_null());
++            assert_eq!(flight_get_byte_buffer_length(decoded), 0);
++            flight_free_byte_buffer(decoded);
++            flight_free_byte_buffer(empty);
++            assert!(flight_decompress_deflate(std::ptr::null(), 0, 4, 1).is_null());
++            flight_free_byte_buffer(std::ptr::null_mut());
++        }
++    }
++}
+diff --git a/crates/flight-bindgen/src/main.rs b/crates/flight-bindgen/src/main.rs
+--- a/crates/flight-bindgen/src/main.rs
++++ b/crates/flight-bindgen/src/main.rs
+@@ -1,3 +1,4 @@
++mod byte_buffer;
+ mod dispatch;
+ mod haxe_common;
+ mod haxe_cpp;
+diff --git a/crates/flight-bindgen/src/byte_buffer.rs b/crates/flight-bindgen/src/byte_buffer.rs
+new file mode 100644
+--- /dev/null
++++ b/crates/flight-bindgen/src/byte_buffer.rs
+@@ -0,0 +1,40 @@
++use std::fmt::Write;
++use std::path::Path;
++use crate::parse::ReturnKind;
++use crate::haxe_common::write_if_changed;
++
++pub fn return_type(kind: &ReturnKind, package: &str) -> Option<String> {
++    match kind {
++        ReturnKind::VecReturn(ty) | ReturnKind::BoxSliceReturn(ty) if ty == "u8" => Some(format!("{package}.NativeByteBuffer")),
++        ReturnKind::OptionVecReturn(ty) | ReturnKind::OptionBoxSliceReturn(ty) if ty == "u8" => Some(format!("Null<{package}.NativeByteBuffer>")),
++        _ => None,
++    }
++}
++
++pub fn emit_native(out: &Path, hl: bool) {
++    let package = if hl { "flight._hl" } else { "flight._cpp" };
++    let pointer = if hl { "hl.Bytes" } else { "cpp.Star<cpp.Void>" };
++    let destination = if hl { "result.getData()" } else { "cast cpp.Pointer.ofArray(result.getData()).raw" };
++    let mut source = format!("package {package};\n\n// The result owns its Rust bytes until dispose(); data is a borrowed view.\nprivate extern class NativeByteBuffer_Ffi {{\n");
++    for (method, symbol, parameters, result) in [
++        ("length", "flight_get_byte_buffer_length", format!("ptr:{pointer}"), "Int"),
++        ("data", "flight_get_byte_buffer_data", format!("ptr:{pointer}"), pointer),
++        ("get", "flight_get_byte_buffer_byte", format!("ptr:{pointer}, index:Int"), "Int"),
++        ("copy", "flight_copy_byte_buffer", format!("ptr:{pointer}, destination:{pointer}, capacity:Int"), "Int"),
++        ("free", "flight_free_byte_buffer", format!("ptr:{pointer}"), "Void"),
++    ] {
++        let metadata = if hl { format!("@:hlNative(\"flight\", \"{symbol}\")") } else { format!("@:native(\"{symbol}\")") };
++        writeln!(source, "\t{metadata}\n\tstatic function {method}({parameters}):{result};").unwrap();
++    }
++    writeln!(source, "}}\n\nabstract NativeByteBuffer({pointer}) {{").unwrap();
++    source.push_str("\tpublic var length(get, never):Int;\n\tinline function get_length():Int return NativeByteBuffer_Ffi.length(this);\n");
++    writeln!(source, "\tpublic var data(get, never):{pointer};\n\tinline function get_data():{pointer} return NativeByteBuffer_Ffi.data(this);").unwrap();
++    source.push_str("\tpublic inline function getByte(index:Int):Int {\n\t\tif (index < 0 || index >= length) throw 'Byte buffer index out of bounds';\n\t\treturn NativeByteBuffer_Ffi.get(this, index);\n\t}\n");
++    writeln!(source, "\tpublic inline function toBytes():haxe.io.Bytes {{\n\t\tfinal count = length;\n\t\tfinal result = haxe.io.Bytes.alloc(count);\n\t\tif (count > 0 && NativeByteBuffer_Ffi.copy(this, {destination}, count) != count) throw 'Byte buffer copy failed';\n\t\treturn result;\n\t}}").unwrap();
++    source.push_str("\tpublic inline function dispose():Void { NativeByteBuffer_Ffi.free(this); this = null; }\n}\n");
++    write_if_changed(&out.join(package.replace('.', "/")).join("NativeByteBuffer.hx"), &source);
++}
++
++pub fn emit_dispatch(out: &Path) {
++    write_if_changed(&out.join("flight/NativeByteBuffer.hx"), "package flight;\n\n#if hl\ntypedef NativeByteBuffer = flight._hl.NativeByteBuffer;\n#elseif cpp\ntypedef NativeByteBuffer = flight._cpp.NativeByteBuffer;\n#elseif (js && flight_esm)\ntypedef NativeByteBuffer = js.lib.Uint8Array;\n#else\n#error \"Flight requires cpp, hl, or JS with flight_esm.\"\n#end\n");
++}
+diff --git a/crates/flight-bindgen/src/dispatch.rs b/crates/flight-bindgen/src/dispatch.rs
+--- a/crates/flight-bindgen/src/dispatch.rs
++++ b/crates/flight-bindgen/src/dispatch.rs
+@@ -17,6 +17,7 @@
+     let flight_dir = out_dir.join("flight");
+     fs::create_dir_all(&flight_dir).unwrap();
+ 
++    crate::byte_buffer::emit_dispatch(out_dir);
+     let mut all_opaque_types: BTreeSet<String> = BTreeSet::new();
+     let mut modules: BTreeMap<String, &[ParsedFn]> = BTreeMap::new();
+ 
+@@ -34,7 +35,7 @@
+         modules.insert(module_name, &crate_export.fns);
+     }
+ 
+-    let mut total_files = 0usize;
++    let mut total_files = 1usize;
+ 
+     let types_that_are_modules: BTreeSet<&String> = all_opaque_types
+         .iter()
+@@ -356,6 +357,7 @@
+ }
+ 
+ fn return_kind_to_haxe(kind: &ReturnKind, emitted_enums: &BTreeSet<String>) -> String {
++    if let Some(ty) = crate::byte_buffer::return_type(kind, "flight") { return ty; }
+     match kind {
+         ReturnKind::Void => "Void".to_string(),
+         ReturnKind::Scalar(ty) => scalar_to_haxe(ty).to_string(),
+diff --git a/crates/flight-bindgen/src/haxe_cpp.rs b/crates/flight-bindgen/src/haxe_cpp.rs
+--- a/crates/flight-bindgen/src/haxe_cpp.rs
++++ b/crates/flight-bindgen/src/haxe_cpp.rs
+@@ -35,10 +35,12 @@
+         }
+     }
+ 
++    assert!(!all_opaque_types.contains("NativeByteBuffer"), "SDK type collides with native buffer carrier");
++    crate::byte_buffer::emit_native(out_dir, false);
+     let struct_map = build_struct_map(crate_exports);
+     let type_methods = build_type_methods(crate_exports, &all_opaque_types);
+ 
+-    let mut total_files = 0usize;
++    let mut total_files = 1usize;
+     let mut types_with_fields = 0usize;
+     let mut types_with_methods = 0usize;
+     let mut total_methods = 0usize;
+@@ -365,6 +367,7 @@
+ }
+ 
+ fn return_kind_to_haxe(kind: &ReturnKind) -> String {
++    if let Some(ty) = crate::byte_buffer::return_type(kind, "flight._cpp") { return ty; }
+     match kind {
+         ReturnKind::Void => "Void".to_string(),
+         ReturnKind::Scalar(ty) => scalar_to_haxe(ty).to_string(),
+diff --git a/crates/flight-bindgen/src/haxe_hl.rs b/crates/flight-bindgen/src/haxe_hl.rs
+--- a/crates/flight-bindgen/src/haxe_hl.rs
++++ b/crates/flight-bindgen/src/haxe_hl.rs
+@@ -44,10 +44,12 @@
+         let kind = function.ret.as_ref().and_then(|ty| classify_return(ty)).unwrap_or(ReturnKind::Void);
+         (format!("flight_{}", function.name), return_kind_to_haxe(&kind))
+     }).collect();
++    assert!(!all_opaque_types.contains("NativeByteBuffer"), "SDK type collides with native buffer carrier");
++    crate::byte_buffer::emit_native(out_dir, true);
+     let struct_map = build_struct_map(crate_exports);
+     let type_methods = build_type_methods(crate_exports, &all_opaque_types);
+ 
+-    let mut total_files = 0usize;
++    let mut total_files = 1usize;
+     let mut types_with_fields = 0usize;
+     let mut types_with_methods = 0usize;
+     let mut total_methods = 0usize;
+@@ -443,6 +445,7 @@
+ }
+ 
+ fn return_kind_to_haxe(kind: &ReturnKind) -> String {
++    if let Some(ty) = crate::byte_buffer::return_type(kind, "flight._hl") { return ty; }
+     match kind {
+         ReturnKind::Void => "Void".to_string(),
+         ReturnKind::Scalar(ty) => scalar_to_haxe(ty).to_string(),

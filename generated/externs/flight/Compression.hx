@@ -5,7 +5,7 @@ extern inline function compressDeflate(bytes:Dynamic):Dynamic {
 	return flight._js._fn.Compression.compressDeflate(bytes);
 }
 #else
-extern inline function compressDeflate(bytes:Dynamic, bytesLen:Int):Dynamic {
+extern inline function compressDeflate(bytes:Dynamic, bytesLen:Int):flight.NativeByteBuffer {
 #if hl
 	return flight._hl._fn.Compression.compressDeflate(bytes, bytesLen);
 #elseif cpp
@@ -22,7 +22,7 @@ extern inline function compressDeflateZlib(bytes:Dynamic):Dynamic {
 	return flight._js._fn.Compression.compressDeflateZlib(bytes);
 }
 #else
-extern inline function compressDeflateZlib(bytes:Dynamic, bytesLen:Int):Dynamic {
+extern inline function compressDeflateZlib(bytes:Dynamic, bytesLen:Int):flight.NativeByteBuffer {
 #if hl
 	return flight._hl._fn.Compression.compressDeflateZlib(bytes, bytesLen);
 #elseif cpp
@@ -39,7 +39,7 @@ extern inline function decompressDeflate(compressed:Dynamic, uncompressedLength:
 	return flight._js._fn.Compression.decompressDeflate(compressed, uncompressedLength, framing);
 }
 #else
-extern inline function decompressDeflate(compressed:Dynamic, compressedLen:Int, uncompressedLength:Int, framing:flight.CompressionFraming):Dynamic {
+extern inline function decompressDeflate(compressed:Dynamic, compressedLen:Int, uncompressedLength:Int, framing:flight.CompressionFraming):Null<flight.NativeByteBuffer> {
 #if hl
 	return flight._hl._fn.Compression.decompressDeflate(compressed, compressedLen, uncompressedLength, framing);
 #elseif cpp
@@ -56,7 +56,7 @@ extern inline function decompressLzma(compressed:Dynamic, uncompressedLength:Int
 	return flight._js._fn.Compression.decompressLzma(compressed, uncompressedLength, framing);
 }
 #else
-extern inline function decompressLzma(compressed:Dynamic, compressedLen:Int, uncompressedLength:Int, framing:flight.CompressionFraming):Dynamic {
+extern inline function decompressLzma(compressed:Dynamic, compressedLen:Int, uncompressedLength:Int, framing:flight.CompressionFraming):Null<flight.NativeByteBuffer> {
 #if hl
 	return flight._hl._fn.Compression.decompressLzma(compressed, compressedLen, uncompressedLength, framing);
 #elseif cpp
@@ -73,7 +73,7 @@ extern inline function compressLzma(bytes:Dynamic):Dynamic {
 	return flight._js._fn.Compression.compressLzma(bytes);
 }
 #else
-extern inline function compressLzma(bytes:Dynamic, bytesLen:Int):Dynamic {
+extern inline function compressLzma(bytes:Dynamic, bytesLen:Int):flight.NativeByteBuffer {
 #if hl
 	return flight._hl._fn.Compression.compressLzma(bytes, bytesLen);
 #elseif cpp
