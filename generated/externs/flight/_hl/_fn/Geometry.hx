@@ -56,7 +56,18 @@ extern class Geometry {
 	@:hlNative("flight", "flight_transform_bounding_sphere_by_matrix4")
 	public static function transformBoundingSphereByMatrix4(out:flight._hl.BoundingSphere, sphere:flight._hl.BoundingSphere, m:flight._hl.Matrix4):Void;
 	@:hlNative("flight", "flight_create_capsule")
-	public static function createCapsule(startX:Single, startY:Single, startZ:Single, endX:Single, endY:Single, endZ:Single, radius:Single):flight._hl.Capsule;
+	private static function __flightPacked_createCapsule(__flightValues:hl.NativeArray<Float>):flight._hl.Capsule;
+	public static inline function createCapsule(startX:Single, startY:Single, startZ:Single, endX:Single, endY:Single, endZ:Single, radius:Single):flight._hl.Capsule {
+		var __flightValues = new hl.NativeArray<Float>(7);
+		__flightValues[0] = startX;
+		__flightValues[1] = startY;
+		__flightValues[2] = startZ;
+		__flightValues[3] = endX;
+		__flightValues[4] = endY;
+		__flightValues[5] = endZ;
+		__flightValues[6] = radius;
+		return __flightPacked_createCapsule(__flightValues);
+	}
 	@:hlNative("flight", "flight_get_closest_point_on_capsule")
 	public static function getClosestPointOnCapsule(out:flight._hl.Vector3, capsule:flight._hl.Capsule, point:flight._hl.Vector3):Void;
 	@:hlNative("flight", "flight_intersect_ray3d_capsule")
@@ -68,7 +79,18 @@ extern class Geometry {
 	@:hlNative("flight", "flight_is_capsule_intersecting_sphere")
 	public static function isCapsuleIntersectingSphere(capsule:flight._hl.Capsule, sphere:flight._hl.BoundingSphere):Bool;
 	@:hlNative("flight", "flight_set_capsule")
-	public static function setCapsule(out:flight._hl.Capsule, startX:Single, startY:Single, startZ:Single, endX:Single, endY:Single, endZ:Single, radius:Single):Void;
+	private static function __flightPacked_setCapsule(out:flight._hl.Capsule, __flightValues:hl.NativeArray<Float>):Void;
+	public static inline function setCapsule(out:flight._hl.Capsule, startX:Single, startY:Single, startZ:Single, endX:Single, endY:Single, endZ:Single, radius:Single):Void {
+		var __flightValues = new hl.NativeArray<Float>(7);
+		__flightValues[0] = startX;
+		__flightValues[1] = startY;
+		__flightValues[2] = startZ;
+		__flightValues[3] = endX;
+		__flightValues[4] = endY;
+		__flightValues[5] = endZ;
+		__flightValues[6] = radius;
+		__flightPacked_setCapsule(out, __flightValues);
+	}
 	@:hlNative("flight", "flight_are_geometry_pool_guards_enabled")
 	public static function areGeometryPoolGuardsEnabled():Bool;
 	@:hlNative("flight", "flight_disable_geometry_pool_guards")
@@ -164,7 +186,20 @@ extern class Geometry {
 	@:hlNative("flight", "flight_create_matrix3")
 	public static function createMatrix3():flight._hl.Matrix3;
 	@:hlNative("flight", "flight_create_matrix3_from_values")
-	public static function createMatrix3FromValues(m00:Single, m01:Single, m02:Single, m10:Single, m11:Single, m12:Single, m20:Single, m21:Single, m22:Single):flight._hl.Matrix3;
+	private static function __flightPacked_createMatrix3FromValues(__flightValues:hl.NativeArray<Float>):flight._hl.Matrix3;
+	public static inline function createMatrix3FromValues(m00:Single, m01:Single, m02:Single, m10:Single, m11:Single, m12:Single, m20:Single, m21:Single, m22:Single):flight._hl.Matrix3 {
+		var __flightValues = new hl.NativeArray<Float>(9);
+		__flightValues[0] = m00;
+		__flightValues[1] = m01;
+		__flightValues[2] = m02;
+		__flightValues[3] = m10;
+		__flightValues[4] = m11;
+		__flightValues[5] = m12;
+		__flightValues[6] = m20;
+		__flightValues[7] = m21;
+		__flightValues[8] = m22;
+		return __flightPacked_createMatrix3FromValues(__flightValues);
+	}
 	@:hlNative("flight", "flight_clone_matrix3")
 	public static function cloneMatrix3(source:flight._hl.Matrix3):flight._hl.Matrix3;
 	@:hlNative("flight", "flight_copy_matrix3")
@@ -194,7 +229,20 @@ extern class Geometry {
 	@:hlNative("flight", "flight_scale_matrix3")
 	public static function scaleMatrix3(out:flight._hl.Matrix3, source:flight._hl.Matrix3, sx:Single, sy:Single):Void;
 	@:hlNative("flight", "flight_set_matrix3")
-	public static function setMatrix3(out:flight._hl.Matrix3, m00:Single, m01:Single, m02:Single, m10:Single, m11:Single, m12:Single, m20:Single, m21:Single, m22:Single):Void;
+	private static function __flightPacked_setMatrix3(out:flight._hl.Matrix3, __flightValues:hl.NativeArray<Float>):Void;
+	public static inline function setMatrix3(out:flight._hl.Matrix3, m00:Single, m01:Single, m02:Single, m10:Single, m11:Single, m12:Single, m20:Single, m21:Single, m22:Single):Void {
+		var __flightValues = new hl.NativeArray<Float>(9);
+		__flightValues[0] = m00;
+		__flightValues[1] = m01;
+		__flightValues[2] = m02;
+		__flightValues[3] = m10;
+		__flightValues[4] = m11;
+		__flightValues[5] = m12;
+		__flightValues[6] = m20;
+		__flightValues[7] = m21;
+		__flightValues[8] = m22;
+		__flightPacked_setMatrix3(out, __flightValues);
+	}
 	@:hlNative("flight", "flight_set_matrix3_element")
 	public static function setMatrix3Element(out:flight._hl.Matrix3, row:Int, column:Int, value:Single):Void;
 	@:hlNative("flight", "flight_set_matrix3_from_float32_array")
@@ -226,7 +274,27 @@ extern class Geometry {
 	@:hlNative("flight", "flight_create_matrix4_from_2d")
 	public static function createMatrix4From2d(a:Single, b:Single, c:Single, d:Single, tx:Single, ty:Single):flight._hl.Matrix4;
 	@:hlNative("flight", "flight_create_matrix4_from_values")
-	public static function createMatrix4FromValues(m00:Single, m01:Single, m02:Single, m03:Single, m10:Single, m11:Single, m12:Single, m13:Single, m20:Single, m21:Single, m22:Single, m23:Single, m30:Single, m31:Single, m32:Single, m33:Single):flight._hl.Matrix4;
+	private static function __flightPacked_createMatrix4FromValues(__flightValues:hl.NativeArray<Float>):flight._hl.Matrix4;
+	public static inline function createMatrix4FromValues(m00:Single, m01:Single, m02:Single, m03:Single, m10:Single, m11:Single, m12:Single, m13:Single, m20:Single, m21:Single, m22:Single, m23:Single, m30:Single, m31:Single, m32:Single, m33:Single):flight._hl.Matrix4 {
+		var __flightValues = new hl.NativeArray<Float>(16);
+		__flightValues[0] = m00;
+		__flightValues[1] = m01;
+		__flightValues[2] = m02;
+		__flightValues[3] = m03;
+		__flightValues[4] = m10;
+		__flightValues[5] = m11;
+		__flightValues[6] = m12;
+		__flightValues[7] = m13;
+		__flightValues[8] = m20;
+		__flightValues[9] = m21;
+		__flightValues[10] = m22;
+		__flightValues[11] = m23;
+		__flightValues[12] = m30;
+		__flightValues[13] = m31;
+		__flightValues[14] = m32;
+		__flightValues[15] = m33;
+		return __flightPacked_createMatrix4FromValues(__flightValues);
+	}
 	@:hlNative("flight", "flight_create_orthographic_matrix4")
 	public static function createOrthographicMatrix4(left:Single, right:Single, bottom:Single, top:Single, zNear:Single, zFar:Single):flight._hl.Matrix4;
 	@:hlNative("flight", "flight_create_perspective_matrix4")
@@ -290,7 +358,27 @@ extern class Geometry {
 	@:hlNative("flight", "flight_scale_matrix4")
 	public static function scaleMatrix4(out:flight._hl.Matrix4, source:flight._hl.Matrix4, sx:Single, sy:Single, sz:Single):Void;
 	@:hlNative("flight", "flight_set_matrix4")
-	public static function setMatrix4(out:flight._hl.Matrix4, m00:Single, m01:Single, m02:Single, m03:Single, m10:Single, m11:Single, m12:Single, m13:Single, m20:Single, m21:Single, m22:Single, m23:Single, m30:Single, m31:Single, m32:Single, m33:Single):Void;
+	private static function __flightPacked_setMatrix4(out:flight._hl.Matrix4, __flightValues:hl.NativeArray<Float>):Void;
+	public static inline function setMatrix4(out:flight._hl.Matrix4, m00:Single, m01:Single, m02:Single, m03:Single, m10:Single, m11:Single, m12:Single, m13:Single, m20:Single, m21:Single, m22:Single, m23:Single, m30:Single, m31:Single, m32:Single, m33:Single):Void {
+		var __flightValues = new hl.NativeArray<Float>(16);
+		__flightValues[0] = m00;
+		__flightValues[1] = m01;
+		__flightValues[2] = m02;
+		__flightValues[3] = m03;
+		__flightValues[4] = m10;
+		__flightValues[5] = m11;
+		__flightValues[6] = m12;
+		__flightValues[7] = m13;
+		__flightValues[8] = m20;
+		__flightValues[9] = m21;
+		__flightValues[10] = m22;
+		__flightValues[11] = m23;
+		__flightValues[12] = m30;
+		__flightValues[13] = m31;
+		__flightValues[14] = m32;
+		__flightValues[15] = m33;
+		__flightPacked_setMatrix4(out, __flightValues);
+	}
 	@:hlNative("flight", "flight_set_matrix4_element")
 	public static function setMatrix4Element(out:flight._hl.Matrix4, row:Int, column:Int, value:Single):Void;
 	@:hlNative("flight", "flight_set_matrix4_from_2d")
@@ -336,7 +424,21 @@ extern class Geometry {
 	@:hlNative("flight", "flight_release_matrix")
 	public static function releaseMatrix(m:flight._hl.Matrix):Void;
 	@:hlNative("flight", "flight_create_obb")
-	public static function createObb(centerX:Single, centerY:Single, centerZ:Single, halfExtentX:Single, halfExtentY:Single, halfExtentZ:Single, orientationX:Single, orientationY:Single, orientationZ:Single, orientationW:Single):flight._hl.Obb;
+	private static function __flightPacked_createObb(__flightValues:hl.NativeArray<Float>):flight._hl.Obb;
+	public static inline function createObb(centerX:Single, centerY:Single, centerZ:Single, halfExtentX:Single, halfExtentY:Single, halfExtentZ:Single, orientationX:Single, orientationY:Single, orientationZ:Single, orientationW:Single):flight._hl.Obb {
+		var __flightValues = new hl.NativeArray<Float>(10);
+		__flightValues[0] = centerX;
+		__flightValues[1] = centerY;
+		__flightValues[2] = centerZ;
+		__flightValues[3] = halfExtentX;
+		__flightValues[4] = halfExtentY;
+		__flightValues[5] = halfExtentZ;
+		__flightValues[6] = orientationX;
+		__flightValues[7] = orientationY;
+		__flightValues[8] = orientationZ;
+		__flightValues[9] = orientationW;
+		return __flightPacked_createObb(__flightValues);
+	}
 	@:hlNative("flight", "flight_get_closest_point_on_obb")
 	public static function getClosestPointOnObb(out:flight._hl.Vector3, obb:flight._hl.Obb, point:flight._hl.Vector3):Void;
 	@:hlNative("flight", "flight_intersect_ray3d_obb")
@@ -348,7 +450,21 @@ extern class Geometry {
 	@:hlNative("flight", "flight_is_obb_intersecting_sphere")
 	public static function isObbIntersectingSphere(obb:flight._hl.Obb, sphere:flight._hl.BoundingSphere):Bool;
 	@:hlNative("flight", "flight_set_obb")
-	public static function setObb(out:flight._hl.Obb, centerX:Single, centerY:Single, centerZ:Single, halfExtentX:Single, halfExtentY:Single, halfExtentZ:Single, orientationX:Single, orientationY:Single, orientationZ:Single, orientationW:Single):Void;
+	private static function __flightPacked_setObb(out:flight._hl.Obb, __flightValues:hl.NativeArray<Float>):Void;
+	public static inline function setObb(out:flight._hl.Obb, centerX:Single, centerY:Single, centerZ:Single, halfExtentX:Single, halfExtentY:Single, halfExtentZ:Single, orientationX:Single, orientationY:Single, orientationZ:Single, orientationW:Single):Void {
+		var __flightValues = new hl.NativeArray<Float>(10);
+		__flightValues[0] = centerX;
+		__flightValues[1] = centerY;
+		__flightValues[2] = centerZ;
+		__flightValues[3] = halfExtentX;
+		__flightValues[4] = halfExtentY;
+		__flightValues[5] = halfExtentZ;
+		__flightValues[6] = orientationX;
+		__flightValues[7] = orientationY;
+		__flightValues[8] = orientationZ;
+		__flightValues[9] = orientationW;
+		__flightPacked_setObb(out, __flightValues);
+	}
 	@:hlNative("flight", "flight_transform_obb_by_matrix4")
 	public static function transformObbByMatrix4(out:flight._hl.Obb, obb:flight._hl.Obb, m:flight._hl.Matrix4):Void;
 	@:hlNative("flight", "flight_create_plane")
@@ -532,7 +648,20 @@ extern class Geometry {
 	@:hlNative("flight", "flight_release_rectangle")
 	public static function releaseRectangle(r:flight._hl.Rectangle):Void;
 	@:hlNative("flight", "flight_create_transform2d")
-	public static function createTransform2d(x:Single, y:Single, rotation:Single, scaleX:Single, scaleY:Single, skewX:Single, skewY:Single, pivotX:Single, pivotY:Single):flight._hl.Transform2D;
+	private static function __flightPacked_createTransform2d(__flightValues:hl.NativeArray<Float>):flight._hl.Transform2D;
+	public static inline function createTransform2d(x:Single, y:Single, rotation:Single, scaleX:Single, scaleY:Single, skewX:Single, skewY:Single, pivotX:Single, pivotY:Single):flight._hl.Transform2D {
+		var __flightValues = new hl.NativeArray<Float>(9);
+		__flightValues[0] = x;
+		__flightValues[1] = y;
+		__flightValues[2] = rotation;
+		__flightValues[3] = scaleX;
+		__flightValues[4] = scaleY;
+		__flightValues[5] = skewX;
+		__flightValues[6] = skewY;
+		__flightValues[7] = pivotX;
+		__flightValues[8] = pivotY;
+		return __flightPacked_createTransform2d(__flightValues);
+	}
 	@:hlNative("flight", "flight_decompose_matrix_to_transform2d")
 	public static function decomposeMatrixToTransform2d(out:flight._hl.Transform2D, source:flight._hl.Matrix):Void;
 	@:hlNative("flight", "flight_create_transform3d")

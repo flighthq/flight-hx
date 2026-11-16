@@ -12,7 +12,18 @@ extern class Particles {
 	@:hlNative("flight", "flight_build_particle_curve")
 	public static function buildParticleCurve(out:hl.Bytes, fFn:hl.Bytes, fCtx:hl.Bytes, samples:Int):Void;
 	@:hlNative("flight", "flight_lerp_hsv_direct")
-	public static function lerpHsvDirect(out:hl.Bytes, outLen:Int, offset:Int, r0:Single, g0:Single, b0:Single, r1:Single, g1:Single, b1:Single, t:Single):Void;
+	private static function __flightPacked_lerpHsvDirect(out:hl.Bytes, outLen:Int, offset:Int, __flightValues:hl.NativeArray<Float>):Void;
+	public static inline function lerpHsvDirect(out:hl.Bytes, outLen:Int, offset:Int, r0:Single, g0:Single, b0:Single, r1:Single, g1:Single, b1:Single, t:Single):Void {
+		var __flightValues = new hl.NativeArray<Float>(7);
+		__flightValues[0] = r0;
+		__flightValues[1] = g0;
+		__flightValues[2] = b0;
+		__flightValues[3] = r1;
+		__flightValues[4] = g1;
+		__flightValues[5] = b1;
+		__flightValues[6] = t;
+		__flightPacked_lerpHsvDirect(out, outLen, offset, __flightValues);
+	}
 	@:hlNative("flight", "flight_lerp_hsv_in_place")
 	public static function lerpHsvInPlace(colorsOut:hl.Bytes, colorsOutLen:Int, offset:Int, birth:hl.Bytes, birthLen:Int, death:hl.Bytes, deathLen:Int, t:Single):Void;
 	@:hlNative("flight", "flight_particle_color_curve_from_keyframes")

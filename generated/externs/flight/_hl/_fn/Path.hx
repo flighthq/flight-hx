@@ -34,11 +34,50 @@ extern class Path {
 	@:hlNative("flight", "flight_get_path_tangent_at_distance")
 	public static function getPathTangentAtDistance(path:flight._hl.Path, distance:Float, out:flight._hl.Vector2, tolerance:Float):Bool;
 	@:hlNative("flight", "flight_get_cubic_bezier_curvature")
-	public static function getCubicBezierCurvature(x0:Float, y0:Float, c1x:Float, c1y:Float, c2x:Float, c2y:Float, x1:Float, y1:Float, t:Float):Float;
+	private static function __flightPacked_getCubicBezierCurvature(__flightValues:hl.NativeArray<Float>):Float;
+	public static inline function getCubicBezierCurvature(x0:Float, y0:Float, c1x:Float, c1y:Float, c2x:Float, c2y:Float, x1:Float, y1:Float, t:Float):Float {
+		var __flightValues = new hl.NativeArray<Float>(9);
+		__flightValues[0] = x0;
+		__flightValues[1] = y0;
+		__flightValues[2] = c1x;
+		__flightValues[3] = c1y;
+		__flightValues[4] = c2x;
+		__flightValues[5] = c2y;
+		__flightValues[6] = x1;
+		__flightValues[7] = y1;
+		__flightValues[8] = t;
+		return __flightPacked_getCubicBezierCurvature(__flightValues);
+	}
 	@:hlNative("flight", "flight_get_cubic_bezier_point")
-	public static function getCubicBezierPoint(x0:Float, y0:Float, c1x:Float, c1y:Float, c2x:Float, c2y:Float, x1:Float, y1:Float, t:Float, out:flight._hl.Vector2):Void;
+	private static function __flightPacked_getCubicBezierPoint(__flightValues:hl.NativeArray<Float>, out:flight._hl.Vector2):Void;
+	public static inline function getCubicBezierPoint(x0:Float, y0:Float, c1x:Float, c1y:Float, c2x:Float, c2y:Float, x1:Float, y1:Float, t:Float, out:flight._hl.Vector2):Void {
+		var __flightValues = new hl.NativeArray<Float>(9);
+		__flightValues[0] = x0;
+		__flightValues[1] = y0;
+		__flightValues[2] = c1x;
+		__flightValues[3] = c1y;
+		__flightValues[4] = c2x;
+		__flightValues[5] = c2y;
+		__flightValues[6] = x1;
+		__flightValues[7] = y1;
+		__flightValues[8] = t;
+		__flightPacked_getCubicBezierPoint(__flightValues, out);
+	}
 	@:hlNative("flight", "flight_get_cubic_bezier_tangent")
-	public static function getCubicBezierTangent(x0:Float, y0:Float, c1x:Float, c1y:Float, c2x:Float, c2y:Float, x1:Float, y1:Float, t:Float, out:flight._hl.Vector2):Void;
+	private static function __flightPacked_getCubicBezierTangent(__flightValues:hl.NativeArray<Float>, out:flight._hl.Vector2):Void;
+	public static inline function getCubicBezierTangent(x0:Float, y0:Float, c1x:Float, c1y:Float, c2x:Float, c2y:Float, x1:Float, y1:Float, t:Float, out:flight._hl.Vector2):Void {
+		var __flightValues = new hl.NativeArray<Float>(9);
+		__flightValues[0] = x0;
+		__flightValues[1] = y0;
+		__flightValues[2] = c1x;
+		__flightValues[3] = c1y;
+		__flightValues[4] = c2x;
+		__flightValues[5] = c2y;
+		__flightValues[6] = x1;
+		__flightValues[7] = y1;
+		__flightValues[8] = t;
+		__flightPacked_getCubicBezierTangent(__flightValues, out);
+	}
 	@:hlNative("flight", "flight_get_path_segment_curvature_at_parameter")
 	public static function getPathSegmentCurvatureAtParameter(path:flight._hl.Path, segmentIndex:Int, t:Float):Float;
 	@:hlNative("flight", "flight_get_path_segment_point_at_parameter")
@@ -46,11 +85,44 @@ extern class Path {
 	@:hlNative("flight", "flight_get_path_segment_tangent_at_parameter")
 	public static function getPathSegmentTangentAtParameter(path:flight._hl.Path, segmentIndex:Int, t:Float, out:flight._hl.Vector2):Bool;
 	@:hlNative("flight", "flight_get_quadratic_bezier_curvature")
-	public static function getQuadraticBezierCurvature(x0:Float, y0:Float, cx:Float, cy:Float, x1:Float, y1:Float, t:Float):Float;
+	private static function __flightPacked_getQuadraticBezierCurvature(__flightValues:hl.NativeArray<Float>):Float;
+	public static inline function getQuadraticBezierCurvature(x0:Float, y0:Float, cx:Float, cy:Float, x1:Float, y1:Float, t:Float):Float {
+		var __flightValues = new hl.NativeArray<Float>(7);
+		__flightValues[0] = x0;
+		__flightValues[1] = y0;
+		__flightValues[2] = cx;
+		__flightValues[3] = cy;
+		__flightValues[4] = x1;
+		__flightValues[5] = y1;
+		__flightValues[6] = t;
+		return __flightPacked_getQuadraticBezierCurvature(__flightValues);
+	}
 	@:hlNative("flight", "flight_get_quadratic_bezier_point")
-	public static function getQuadraticBezierPoint(x0:Float, y0:Float, cx:Float, cy:Float, x1:Float, y1:Float, t:Float, out:flight._hl.Vector2):Void;
+	private static function __flightPacked_getQuadraticBezierPoint(__flightValues:hl.NativeArray<Float>, out:flight._hl.Vector2):Void;
+	public static inline function getQuadraticBezierPoint(x0:Float, y0:Float, cx:Float, cy:Float, x1:Float, y1:Float, t:Float, out:flight._hl.Vector2):Void {
+		var __flightValues = new hl.NativeArray<Float>(7);
+		__flightValues[0] = x0;
+		__flightValues[1] = y0;
+		__flightValues[2] = cx;
+		__flightValues[3] = cy;
+		__flightValues[4] = x1;
+		__flightValues[5] = y1;
+		__flightValues[6] = t;
+		__flightPacked_getQuadraticBezierPoint(__flightValues, out);
+	}
 	@:hlNative("flight", "flight_get_quadratic_bezier_tangent")
-	public static function getQuadraticBezierTangent(x0:Float, y0:Float, cx:Float, cy:Float, x1:Float, y1:Float, t:Float, out:flight._hl.Vector2):Void;
+	private static function __flightPacked_getQuadraticBezierTangent(__flightValues:hl.NativeArray<Float>, out:flight._hl.Vector2):Void;
+	public static inline function getQuadraticBezierTangent(x0:Float, y0:Float, cx:Float, cy:Float, x1:Float, y1:Float, t:Float, out:flight._hl.Vector2):Void {
+		var __flightValues = new hl.NativeArray<Float>(7);
+		__flightValues[0] = x0;
+		__flightValues[1] = y0;
+		__flightValues[2] = cx;
+		__flightValues[3] = cy;
+		__flightValues[4] = x1;
+		__flightValues[5] = y1;
+		__flightValues[6] = t;
+		__flightPacked_getQuadraticBezierTangent(__flightValues, out);
+	}
 	@:hlNative("flight", "flight_get_path_contour_orientation")
 	public static function getPathContourOrientation(path:flight._hl.Path, tolerance:Float):Int;
 	@:hlNative("flight", "flight_get_path_signed_area")
@@ -84,7 +156,19 @@ extern class Path {
 	@:hlNative("flight", "flight_append_path_rounded_rectangle")
 	public static function appendPathRoundedRectangle(path:flight._hl.Path, x:Float, y:Float, width:Float, height:Float, radius:Float):Void;
 	@:hlNative("flight", "flight_append_path_rounded_rectangle_with_corner_radii")
-	public static function appendPathRoundedRectangleWithCornerRadii(path:flight._hl.Path, x:Float, y:Float, width:Float, height:Float, topLeft:Float, topRight:Float, bottomRight:Float, bottomLeft:Float):Void;
+	private static function __flightPacked_appendPathRoundedRectangleWithCornerRadii(path:flight._hl.Path, __flightValues:hl.NativeArray<Float>):Void;
+	public static inline function appendPathRoundedRectangleWithCornerRadii(path:flight._hl.Path, x:Float, y:Float, width:Float, height:Float, topLeft:Float, topRight:Float, bottomRight:Float, bottomLeft:Float):Void {
+		var __flightValues = new hl.NativeArray<Float>(8);
+		__flightValues[0] = x;
+		__flightValues[1] = y;
+		__flightValues[2] = width;
+		__flightValues[3] = height;
+		__flightValues[4] = topLeft;
+		__flightValues[5] = topRight;
+		__flightValues[6] = bottomRight;
+		__flightValues[7] = bottomLeft;
+		__flightPacked_appendPathRoundedRectangleWithCornerRadii(path, __flightValues);
+	}
 	@:hlNative("flight", "flight_append_path_tangent_arc_to")
 	public static function appendPathTangentArcTo(path:flight._hl.Path, x1:Float, y1:Float, x2:Float, y2:Float, radius:Float):Void;
 	@:hlNative("flight", "flight_create_path_morph")

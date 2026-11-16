@@ -15,6 +15,10 @@
       {
         "path": "patches/flight/0003-portable-module-names.patch",
         "sha256": "6f6d5b2fafdb3c8bf1905b3b9b4e5782fbf668b49e4c205046c8d7b73b1175c1"
+      },
+      {
+        "path": "patches/flight/0004-hl-packed-floats.patch",
+        "sha256": "d419ccb56a49e8cadd8d8cde1a9e02297e1b9ad40e09667a888310903459c8d5"
       }
     ]
   },
@@ -10164,7 +10168,7 @@
     },
     {
       "path": "flight/_hl/_fn/Collision.hx",
-      "sha256": "994805b73b49aad42332bc6672b6ca214fc250d5b1d0ff965d9f1f6ac02d080e"
+      "sha256": "e9f6d4b2d9afe5f7e53c9953f59bb505b8469ebbf185a18f28f51d82a54558d2"
     },
     {
       "path": "flight/_hl/_fn/Color.hx",
@@ -10200,7 +10204,7 @@
     },
     {
       "path": "flight/_hl/_fn/Geometry.hx",
-      "sha256": "642c17ceaa379aadcb78698954914a46a7e55848510b10254bd7f3abb58e8afb"
+      "sha256": "9be47cf45690a9c3fc739d130d081f41a9e799f741e738af2a332cceaf87684c"
     },
     {
       "path": "flight/_hl/_fn/Image.hx",
@@ -10248,7 +10252,7 @@
     },
     {
       "path": "flight/_hl/_fn/Particles.hx",
-      "sha256": "8462c62fc4d1e14e18db48e910dcd407f6fe39ede2d67328bc9ef5876797d9a4"
+      "sha256": "3a69eecdb6910eed06a5a0b1bbf357eab94528747c916bea139529dbec0fa358"
     },
     {
       "path": "flight/_hl/_fn/ParticlesFormats.hx",
@@ -10256,7 +10260,7 @@
     },
     {
       "path": "flight/_hl/_fn/Path.hx",
-      "sha256": "2ac925c26f8cd4f6ff4d52c836972044018e2c2badb3aef4fdbb0fb7651dec02"
+      "sha256": "2fbb8ddf8371cdd03df26152d16b6116390aa6483202ba33cbf3a8ddb91ace44"
     },
     {
       "path": "flight/_hl/_fn/PathBoolean.hx",
@@ -10276,7 +10280,7 @@
     },
     {
       "path": "flight/_hl/_fn/Physics3DAbi.hx",
-      "sha256": "548db9bfc578d178377783f4dc544b23a2a0e54544b9b9396b778666e17fa778"
+      "sha256": "fb7017133cbeb27ee4ede46e1f68a7fbae819c7ef2cdb0c69c2b57d854fbd677"
     },
     {
       "path": "flight/_hl/_fn/Picking.hx",

@@ -42,6 +42,13 @@ containing its typedef and functions. Public facade imports now use `TextureAtla
 Two Rust regressions cover canonical names and the combined dispatch module;
 intake, surface and ZIP checks also reject case-insensitive path collisions.
 
+`0004-hl-packed-floats.patch` protects calls with more than six floating-point
+arguments from HashLink's native argument spilling corruption. The producer
+keeps the public Haxe API and core C ABI, but passes those values to the HL shim
+in a `hl.NativeArray<Float>`. The shim unpacks them before calling the core FFI.
+Both the matrix constructor and setter are exercised by installed hxcpp, HL and
+Lime consumers; producer tests also cover the six-argument boundary.
+
 ## Applying upstream
 
 Use Rust 1.96.0 and Haxe 4.3.7 on PATH, and a clean Flight checkout at the
@@ -53,6 +60,7 @@ git checkout 49c510e875461a9235b24ee846015ec1b47acd2a
 git apply /path/to/flight-hx/patches/flight/0001-native-artifacts.patch
 git apply /path/to/flight-hx/patches/flight/0002-js-esm.patch
 git apply /path/to/flight-hx/patches/flight/0003-portable-module-names.patch
+git apply /path/to/flight-hx/patches/flight/0004-hl-packed-floats.patch
 cargo test -p flight-bindgen --bin flight-bindgen
 scripts/check-haxe-bindings.sh
 ```
