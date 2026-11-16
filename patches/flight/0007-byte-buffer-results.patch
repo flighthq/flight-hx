@@ -220,11 +220,17 @@ diff --git a/crates/flight-bindgen/src/byte_buffer.rs b/crates/flight-bindgen/sr
 new file mode 100644
 --- /dev/null
 +++ b/crates/flight-bindgen/src/byte_buffer.rs
-@@ -0,0 +1,40 @@
+@@ -0,0 +1,46 @@
 +use std::fmt::Write;
 +use std::path::Path;
-+use crate::parse::ReturnKind;
++use crate::parse::{CrateExports, ReturnKind, classify_return};
 +use crate::haxe_common::write_if_changed;
++
++pub fn needed(exports: &[CrateExports]) -> bool {
++    exports.iter().flat_map(|item| &item.fns).any(|function| {
++        function.ret.as_ref().and_then(|ty| classify_return(ty)).is_some_and(|kind| return_type(&kind, "flight").is_some())
++    })
++}
 +
 +pub fn return_type(kind: &ReturnKind, package: &str) -> Option<String> {
 +    match kind {
@@ -254,7 +260,7 @@ new file mode 100644
 +    writeln!(source, "\tpublic var data(get, never):{pointer};\n\tinline function get_data():{pointer} return NativeByteBuffer_Ffi.data(this);").unwrap();
 +    source.push_str("\tpublic inline function getByte(index:Int):Int {\n\t\tif (index < 0 || index >= length) throw 'Byte buffer index out of bounds';\n\t\treturn NativeByteBuffer_Ffi.get(this, index);\n\t}\n");
 +    writeln!(source, "\tpublic inline function toBytes():haxe.io.Bytes {{\n\t\tfinal count = length;\n\t\tfinal result = haxe.io.Bytes.alloc(count);\n\t\tif (count > 0 && NativeByteBuffer_Ffi.copy(this, {destination}, count) != count) throw 'Byte buffer copy failed';\n\t\treturn result;\n\t}}").unwrap();
-+    source.push_str("\tpublic inline function dispose():Void { NativeByteBuffer_Ffi.free(this); this = null; }\n}\n");
++    source.push_str("\tpublic inline function dispose():Void { NativeByteBuffer_Ffi.free(this); }\n}\n");
 +    write_if_changed(&out.join(package.replace('.', "/")).join("NativeByteBuffer.hx"), &source);
 +}
 +
@@ -264,24 +270,25 @@ new file mode 100644
 diff --git a/crates/flight-bindgen/src/dispatch.rs b/crates/flight-bindgen/src/dispatch.rs
 --- a/crates/flight-bindgen/src/dispatch.rs
 +++ b/crates/flight-bindgen/src/dispatch.rs
-@@ -17,6 +17,7 @@
+@@ -17,6 +17,8 @@
      let flight_dir = out_dir.join("flight");
      fs::create_dir_all(&flight_dir).unwrap();
  
-+    crate::byte_buffer::emit_dispatch(out_dir);
++    let has_byte_buffer = crate::byte_buffer::needed(crate_exports);
++    if has_byte_buffer { crate::byte_buffer::emit_dispatch(out_dir); }
      let mut all_opaque_types: BTreeSet<String> = BTreeSet::new();
      let mut modules: BTreeMap<String, &[ParsedFn]> = BTreeMap::new();
  
-@@ -34,7 +35,7 @@
+@@ -34,7 +36,7 @@
          modules.insert(module_name, &crate_export.fns);
      }
  
 -    let mut total_files = 0usize;
-+    let mut total_files = 1usize;
++    let mut total_files = usize::from(has_byte_buffer);
  
      let types_that_are_modules: BTreeSet<&String> = all_opaque_types
          .iter()
-@@ -356,6 +357,7 @@
+@@ -356,6 +358,7 @@
  }
  
  fn return_kind_to_haxe(kind: &ReturnKind, emitted_enums: &BTreeSet<String>) -> String {
@@ -292,21 +299,24 @@ diff --git a/crates/flight-bindgen/src/dispatch.rs b/crates/flight-bindgen/src/d
 diff --git a/crates/flight-bindgen/src/haxe_cpp.rs b/crates/flight-bindgen/src/haxe_cpp.rs
 --- a/crates/flight-bindgen/src/haxe_cpp.rs
 +++ b/crates/flight-bindgen/src/haxe_cpp.rs
-@@ -35,10 +35,12 @@
+@@ -35,10 +35,15 @@
          }
      }
  
-+    assert!(!all_opaque_types.contains("NativeByteBuffer"), "SDK type collides with native buffer carrier");
-+    crate::byte_buffer::emit_native(out_dir, false);
++    let has_byte_buffer = crate::byte_buffer::needed(crate_exports);
++    if has_byte_buffer {
++        assert!(!all_opaque_types.contains("NativeByteBuffer"), "SDK type collides with native buffer carrier");
++        crate::byte_buffer::emit_native(out_dir, false);
++    }
      let struct_map = build_struct_map(crate_exports);
      let type_methods = build_type_methods(crate_exports, &all_opaque_types);
  
 -    let mut total_files = 0usize;
-+    let mut total_files = 1usize;
++    let mut total_files = usize::from(has_byte_buffer);
      let mut types_with_fields = 0usize;
      let mut types_with_methods = 0usize;
      let mut total_methods = 0usize;
-@@ -365,6 +367,7 @@
+@@ -365,6 +370,7 @@
  }
  
  fn return_kind_to_haxe(kind: &ReturnKind) -> String {
@@ -317,21 +327,24 @@ diff --git a/crates/flight-bindgen/src/haxe_cpp.rs b/crates/flight-bindgen/src/h
 diff --git a/crates/flight-bindgen/src/haxe_hl.rs b/crates/flight-bindgen/src/haxe_hl.rs
 --- a/crates/flight-bindgen/src/haxe_hl.rs
 +++ b/crates/flight-bindgen/src/haxe_hl.rs
-@@ -44,10 +44,12 @@
+@@ -44,10 +44,15 @@
          let kind = function.ret.as_ref().and_then(|ty| classify_return(ty)).unwrap_or(ReturnKind::Void);
          (format!("flight_{}", function.name), return_kind_to_haxe(&kind))
      }).collect();
-+    assert!(!all_opaque_types.contains("NativeByteBuffer"), "SDK type collides with native buffer carrier");
-+    crate::byte_buffer::emit_native(out_dir, true);
++    let has_byte_buffer = crate::byte_buffer::needed(crate_exports);
++    if has_byte_buffer {
++        assert!(!all_opaque_types.contains("NativeByteBuffer"), "SDK type collides with native buffer carrier");
++        crate::byte_buffer::emit_native(out_dir, true);
++    }
      let struct_map = build_struct_map(crate_exports);
      let type_methods = build_type_methods(crate_exports, &all_opaque_types);
  
 -    let mut total_files = 0usize;
-+    let mut total_files = 1usize;
++    let mut total_files = usize::from(has_byte_buffer);
      let mut types_with_fields = 0usize;
      let mut types_with_methods = 0usize;
      let mut total_methods = 0usize;
-@@ -443,6 +445,7 @@
+@@ -443,6 +448,7 @@
  }
  
  fn return_kind_to_haxe(kind: &ReturnKind) -> String {

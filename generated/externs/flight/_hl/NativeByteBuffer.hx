@@ -29,5 +29,5 @@ abstract NativeByteBuffer(hl.Bytes) {
 		if (count > 0 && NativeByteBuffer_Ffi.copy(this, result.getData(), count) != count) throw 'Byte buffer copy failed';
 		return result;
 	}
-	public inline function dispose():Void { NativeByteBuffer_Ffi.free(this); this = null; }
+	public inline function dispose():Void { NativeByteBuffer_Ffi.free(this); }
 }

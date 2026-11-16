@@ -30,7 +30,7 @@
       },
       {
         "path": "patches/flight/0007-byte-buffer-results.patch",
-        "sha256": "9aeeb7b7b53f9cb3f16ce10fb0fef4aae4bc74e68ebf8cd0a411afda60828e2d"
+        "sha256": "72571bfb79a58ac99ad8ed718eb14e75338171b110ffea9a20ade3a31560c0e8"
       }
     ]
   },
@@ -5220,7 +5220,7 @@
     },
     {
       "path": "flight/_cpp/NativeByteBuffer.hx",
-      "sha256": "380acf2d2669f16a9dab475367ecf54e8402d92f7369066d9735d01256d29f2c"
+      "sha256": "dc18f3abc44a89bed2282fc7f4cc795a92644391b0685aa4ab9954ba23f820a3"
     },
     {
       "path": "flight/_cpp/NativeText.hx",
@@ -8460,7 +8460,7 @@
     },
     {
       "path": "flight/_hl/NativeByteBuffer.hx",
-      "sha256": "31a858a263d31a60ce1cf44ded644b7977a24820ab173f4a1c64fa496cfbecf6"
+      "sha256": "1730e119de5dafb414b3e97ebdd2109c03cabb99e2d0dfdf580a642ae6e43055"
     },
     {
       "path": "flight/_hl/NativeText.hx",

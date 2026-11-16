@@ -29,5 +29,5 @@ abstract NativeByteBuffer(cpp.Star<cpp.Void>) {
 		if (count > 0 && NativeByteBuffer_Ffi.copy(this, cast cpp.Pointer.ofArray(result.getData()).raw, count) != count) throw 'Byte buffer copy failed';
 		return result;
 	}
-	public inline function dispose():Void { NativeByteBuffer_Ffi.free(this); this = null; }
+	public inline function dispose():Void { NativeByteBuffer_Ffi.free(this); }
 }
