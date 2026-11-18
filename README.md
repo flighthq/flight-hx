@@ -7,7 +7,7 @@ and flight-cpp adapters have been removed.
 
 The source is Flight `develop` revision
 `5e1121e4cfdfde289b5373693dd285a2035dd285` plus the reviewable
-[native producer patches](patches/flight/README.md). There are 4,420 generated Haxe
+[native producer patches](patches/flight/README.md). There are 4,424 generated Haxe
 files and 9,764 C ABI exports. Generated Haxe is copied unchanged from
 that producer; provenance records both the Flight revision and patch hashes.
 
@@ -158,6 +158,23 @@ HostWeb.inputTarget.prepare(input);
 
 The Canvas surface and input target are separate opaque Flight values. The browser
 provider manages the association with the original DOM element.
+
+### App host seams
+
+`flight.HostApp` exposes opaque app-window and app-loop handles on the ESM
+target. Pass a host's attach and lifecycle capabilities into
+`HostApp.attachWindow` to use an existing window. Use
+`WindowAttachmentOwnership.Host` when the caller retains ownership of it.
+
+- `flight.HostWeb` provides browser window attachment, lifecycle, and frame
+  scheduling. Use `HostApp.startAppLoop` with `HostWeb.frameScheduler` and
+  `HostWeb.lifecycle`, and stop or dispose the loop when finished.
+- `flight.HostElectron.window(api)` and `flight.HostTauri.window(api)` supply
+  Flight's window-attachment and lifecycle capabilities. Supply the respective
+  shell SDK API object.
+- `flight.HostCapacitor.appName(api)` supplies Flight's app-name capability
+  from the injected Capacitor App plugin. Read it with `HostApp.getAppName`
+  after Flight receives the plugin's app info.
 
 ## Develop and package
 

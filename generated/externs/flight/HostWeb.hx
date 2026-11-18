@@ -1,7 +1,30 @@
 package flight;
 
+#if (js && flight_esm)
+import flight.HostApp.AppWindow;
+import flight.HostApp.FrameScheduler;
+import flight.HostApp.LifecycleCapability;
+import flight.HostApp.WindowAttachCapability;
+import flight.HostApp.WindowLifecycleCapability;
+#end
+
 class HostWeb {
   #if (js && flight_esm)
+  public static var frameScheduler(get, never):FrameScheduler;
+  static inline function get_frameScheduler():FrameScheduler return HostWebExports.webHostLoop;
+
+  public static var lifecycle(get, never):LifecycleCapability;
+  static inline function get_lifecycle():LifecycleCapability return HostWebExports.webHostLifecycle;
+
+  public static var windowAttach(get, never):WindowAttachCapability;
+  static inline function get_windowAttach():WindowAttachCapability return HostWebExports.webHostWindowAttach;
+
+  public static var windowLifecycle(get, never):WindowLifecycleCapability;
+  static inline function get_windowLifecycle():WindowLifecycleCapability return HostWebExports.webHostWindowLifecycle;
+
+  public static inline function getWindowHandle(win:AppWindow):Null<js.html.Window>
+    return HostWebExports.getWebWindowHandle(win);
+
   public static var canvas(get, never):WebCanvasCapability;
   static inline function get_canvas():WebCanvasCapability return HostWebExports.webHostCanvas;
 
@@ -40,6 +63,11 @@ extern class WebInputTargetCapability {
 
 @:jsRequire("@flighthq/host-web")
 private extern class HostWebExports {
+  static final webHostLoop:FrameScheduler;
+  static final webHostLifecycle:LifecycleCapability;
+  static final webHostWindowAttach:WindowAttachCapability;
+  static final webHostWindowLifecycle:WindowLifecycleCapability;
+  static function getWebWindowHandle(win:AppWindow):Null<js.html.Window>;
   static final webHostCanvas:WebCanvasCapability;
   static final webHostInputTarget:WebInputTargetCapability;
   static function createWebInputTargetHandle(element:js.html.Element):WebInputTargetHandle;

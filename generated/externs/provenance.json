@@ -39,6 +39,10 @@
       {
         "path": "patches/flight/0013-web-host-seams.patch",
         "sha256": "a55250cfdbf3907c7ba73a75b2108637e1da7c3958c040b36084416cb781d896"
+      },
+      {
+        "path": "patches/flight/0014-app-host-seams.patch",
+        "sha256": "fe11dd7092dcecfd7c14613d168f8f164a60cc635c63d946425bfa54f4f5d1e4"
       }
     ]
   },
@@ -1743,6 +1747,10 @@
       "sha256": "71aa68634c9f5fb53a94e14c5561792e6b196a98f32de390451210a161509237"
     },
     {
+      "path": "flight/HostApp.hx",
+      "sha256": "9a7e13b688e9d5af0a6c0ebaa9d70fb15d38d323e9354883f9fcdcc572d48ada"
+    },
+    {
       "path": "flight/HostAudioCodecCapability.hx",
       "sha256": "8515b575d4f946d38482f17f33c0f546232160099a88b3050cac44ff51e2ad45"
     },
@@ -1757,6 +1765,14 @@
     {
       "path": "flight/HostBitmapReadbackCapability.hx",
       "sha256": "aac0484990732c4e3adc23b1cf396dbe2d7b5884a990a6d79b90bae1c4827508"
+    },
+    {
+      "path": "flight/HostCapacitor.hx",
+      "sha256": "593f285e690e92101d6c6b851425d24ceeae9b0b23a9540dd9b9b38410526a09"
+    },
+    {
+      "path": "flight/HostElectron.hx",
+      "sha256": "41623776e4faa58516890e84198374e7f7d3a084366b98e2973b3ddde7bdcc04"
     },
     {
       "path": "flight/HostFontLoadingCapability.hx",
@@ -1779,6 +1795,10 @@
       "sha256": "f85299af9a2511d711cdf2ad51c1bf6f3716c0d04253e9f7a52cee4a5d004e37"
     },
     {
+      "path": "flight/HostTauri.hx",
+      "sha256": "e785b1007c177876e57ac09de6d05cd9a274ff98bbed075e6c403dade1d77e60"
+    },
+    {
       "path": "flight/HostTextSegmenterCapability.hx",
       "sha256": "b2e25f8f0d38dff9b0ff8200ae2c3fce5a6c4475282c9285b8f0a5431fdc456b"
     },
@@ -1792,7 +1812,7 @@
     },
     {
       "path": "flight/HostWeb.hx",
-      "sha256": "6b2b5e7cfa0f75034ce4a2e52402f2e3a9ac5d363980afce0b948ccaee9b53a5"
+      "sha256": "20a876e8519e4235efb55d8cb57115b228aa8724e2c0cc75384c1c9ac59f381a"
     },
     {
       "path": "flight/HourCycle.hx",

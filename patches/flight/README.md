@@ -15,4 +15,6 @@ The manifest lists the patches applied to Flight `5e1121e4cfdfde289b5373693dd285
 
 - `0013-web-host-seams.patch` adds explicit ESM signatures for Flight’s browser Canvas and input-target capabilities and opaque handles. The bindings import the public `@flighthq/host-web` and `@flighthq/surface` exports.
 
+- `0014-app-host-seams.patch` exposes shared ESM app-window and frame-loop calls and selected browser, Electron, Tauri, and Capacitor provider entry points.
+
 Flight now includes native artifact emission, direct JS/ESM bindings, and case-safe Haxe module names. Apply the current manifest in order on a clean Flight checkout at the pinned revision. Use Rust 1.96.0 and Haxe 4.3.7 to verify the emitted bindings.
