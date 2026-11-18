@@ -199,8 +199,6 @@ extern class Physics2d {
 	public static function queryPhysics2dRegion(out:flight._hl.Physics2DQueryResult, world:flight._hl.Physics2DWorld, region:flight._hl.SpatialAabb2D, filter:flight._hl.Physics2DQueryFilter):Void;
 	@:hlNative("flight", "flight_query_physics2d_shape_cast")
 	public static function queryPhysics2dShapeCast(out:flight._hl.Physics2DShapeCastResult, world:flight._hl.Physics2DWorld, registry:flight._hl.CollisionRegistry2D, shape:flight._hl.CollisionShape2D, dx:Single, dy:Single, maxFraction:Single, filter:flight._hl.Physics2DQueryFilter):Void;
-	@:hlNative("flight", "flight_free_collision_shape2_d")
-	public static function freeCollisionShape2D(ptr:flight._hl.CollisionShape2D):Void;
 	@:hlNative("flight", "flight_free_physics2_ddebug_geometry")
 	public static function freePhysics2DdebugGeometry(ptr:flight._hl.Physics2DDebugGeometry):Void;
 	@:hlNative("flight", "flight_free_physics2_dcollision_explanation")

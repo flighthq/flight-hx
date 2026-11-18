@@ -151,8 +151,4 @@ extern class Text {
 	public static function getTextLayoutMetrics(out:flight._cpp.TextMetrics, source:cpp.Star<cpp.Void>):Void;
 	@:native("flight_free_text_label_content_explanation")
 	public static function freeTextLabelContentExplanation(ptr:flight._cpp.TextLabelContentExplanation):Void;
-	@:native("flight_free_text_layout_params")
-	public static function freeTextLayoutParams(ptr:flight._cpp.TextLayoutParams):Void;
-	@:native("flight_free_text_line_metrics")
-	public static function freeTextLineMetrics(ptr:flight._cpp.TextLineMetrics):Void;
 }

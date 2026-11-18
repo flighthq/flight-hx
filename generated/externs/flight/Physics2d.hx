@@ -1684,23 +1684,6 @@ extern inline function queryPhysics2dShapeCast(out:Physics2DShapeCastResult, wor
 }
 #end
 #if (js && flight_esm)
-extern inline function freeCollisionShape2D(ptr:CollisionShape2D):Void {
-	flight._js._fn.Physics2d.freeCollisionShape2D(ptr);
-}
-#else
-extern inline function freeCollisionShape2D(ptr:CollisionShape2D):Void {
-#if hl
-	flight._hl._fn.Physics2d.freeCollisionShape2D(ptr);
-#elseif cpp
-	flight._cpp._fn.Physics2d.freeCollisionShape2D(ptr);
-#elseif (js && flight_esm)
-	flight._js._fn.Physics2d.freeCollisionShape2D(ptr);
-#else
-	#error "flight.Physics2d: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
 extern inline function freePhysics2DdebugGeometry(ptr:Physics2DDebugGeometry):Void {
 	flight._js._fn.Physics2d.freePhysics2DdebugGeometry(ptr);
 }

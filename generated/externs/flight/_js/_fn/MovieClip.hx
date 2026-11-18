@@ -53,11 +53,5 @@ extern class MovieClip {
 	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeMovieClipSignals(ptr:flight._js.MovieClipSignals):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */
-	public static inline function freeTimelineLabel(ptr:flight._js.TimelineLabel):Void {}
-	/** Native allocation release is unnecessary on JavaScript. */
-	public static inline function freeFrameScript(ptr:flight._js.FrameScript):Void {}
-	/** Native allocation release is unnecessary on JavaScript. */
-	public static inline function freeTimelineSourceRef(ptr:flight._js.TimelineSourceRef):Void {}
-	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeSpritesheetTimelineSourceExplanation(ptr:flight._js.SpritesheetTimelineSourceExplanation):Void {}
 }

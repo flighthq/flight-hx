@@ -1791,23 +1791,6 @@ extern inline function freeBitmapHistogram(ptr:BitmapHistogram):Void {
 }
 #end
 #if (js && flight_esm)
-extern inline function freeRectangle(ptr:Rectangle):Void {
-	flight._js._fn.Bitmap.freeRectangle(ptr);
-}
-#else
-extern inline function freeRectangle(ptr:Rectangle):Void {
-#if hl
-	flight._hl._fn.Bitmap.freeRectangle(ptr);
-#elseif cpp
-	flight._cpp._fn.Bitmap.freeRectangle(ptr);
-#elseif (js && flight_esm)
-	flight._js._fn.Bitmap.freeRectangle(ptr);
-#else
-	#error "flight.Bitmap: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
 extern inline function freeBitmapRegion(ptr:BitmapRegion):Void {
 	flight._js._fn.Bitmap.freeBitmapRegion(ptr);
 }

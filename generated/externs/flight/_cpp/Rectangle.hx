@@ -33,9 +33,6 @@ abstract Rectangle(cpp.Star<cpp.Void>) {
 
 	inline function set_height(value:Single):Single { Rectangle_Ffi.set_height(this, value); return value; }
 
-	extern inline public function free():Void {
-		flight._cpp._fn.Bitmap.freeRectangle(cast this);
-	}
 	extern inline public function createClipRegionFrom():cpp.Star<cpp.Void> {
 		return flight._cpp._fn.Clip.createClipRegionFromRectangle(cast this);
 	}
@@ -176,6 +173,9 @@ abstract Rectangle(cpp.Star<cpp.Void>) {
 	}
 	extern inline public function release():Void {
 		flight._cpp._fn.Geometry.releaseRectangle(cast this);
+	}
+	extern inline public function free():Void {
+		flight._cpp._fn.Geometry.freeRectangle(cast this);
 	}
 	extern inline public function computeNodeBounds(source:cpp.Star<cpp.Void>, targetCoordinateSpace:cpp.Star<cpp.Void>):Void {
 		flight._cpp._fn.Node.computeNodeBoundsRectangle(cast this, source, targetCoordinateSpace);

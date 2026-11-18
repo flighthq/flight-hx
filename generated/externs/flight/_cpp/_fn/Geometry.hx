@@ -797,4 +797,6 @@ extern class Geometry {
 	public static function freeVector3(ptr:flight._cpp.Vector3):Void;
 	@:native("flight_free_vector4")
 	public static function freeVector4(ptr:flight._cpp.Vector4):Void;
+	@:native("flight_free_rectangle")
+	public static function freeRectangle(ptr:flight._cpp.Rectangle):Void;
 }

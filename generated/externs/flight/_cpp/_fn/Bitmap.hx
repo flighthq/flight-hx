@@ -209,8 +209,6 @@ extern class Bitmap {
 	public static function freeBitmapFingerprint(ptr:flight._cpp.BitmapFingerprint):Void;
 	@:native("flight_free_bitmap_histogram")
 	public static function freeBitmapHistogram(ptr:flight._cpp.BitmapHistogram):Void;
-	@:native("flight_free_rectangle")
-	public static function freeRectangle(ptr:flight._cpp.Rectangle):Void;
 	@:native("flight_free_bitmap_region")
 	public static function freeBitmapRegion(ptr:flight._cpp.BitmapRegion):Void;
 }

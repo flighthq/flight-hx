@@ -59,4 +59,8 @@ extern class Textlayout {
 	public static function freeTextLayoutGroup(ptr:flight._cpp.TextLayoutGroup):Void;
 	@:native("flight_free_text_metrics")
 	public static function freeTextMetrics(ptr:flight._cpp.TextMetrics):Void;
+	@:native("flight_free_text_layout_params")
+	public static function freeTextLayoutParams(ptr:flight._cpp.TextLayoutParams):Void;
+	@:native("flight_free_text_line_metrics")
+	public static function freeTextLineMetrics(ptr:flight._cpp.TextLineMetrics):Void;
 }

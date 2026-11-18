@@ -2193,3 +2193,20 @@ extern inline function freeCollisionColliderShape3D(ptr:CollisionColliderShape3D
 #end
 }
 #end
+#if (js && flight_esm)
+extern inline function freeCollisionShape2D(ptr:CollisionShape2D):Void {
+	flight._js._fn.Collision.freeCollisionShape2D(ptr);
+}
+#else
+extern inline function freeCollisionShape2D(ptr:CollisionShape2D):Void {
+#if hl
+	flight._hl._fn.Collision.freeCollisionShape2D(ptr);
+#elseif cpp
+	flight._cpp._fn.Collision.freeCollisionShape2D(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Collision.freeCollisionShape2D(ptr);
+#else
+	#error "flight.Collision: no backend for this target."
+#end
+}
+#end

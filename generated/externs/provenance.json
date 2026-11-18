@@ -27,6 +27,10 @@
       {
         "path": "patches/flight/0010-haxe-owned-carriers.patch",
         "sha256": "2a87e1bf47cece6cbde406313c2bf8e4756c71b8608b35856f87025251815382"
+      },
+      {
+        "path": "patches/flight/0011-stable-free-function-modules.patch",
+        "sha256": "965e80d293184629f5dc0b69c3ad1d2f13081eb20e3071aa5c614030c0e7dbe6"
       }
     ]
   },
@@ -420,7 +424,7 @@
     },
     {
       "path": "flight/Bitmap.hx",
-      "sha256": "806bd094ca46093bce884689e67f3355ffc7a62aad04d0f75e441fce69eaf53f"
+      "sha256": "1eea2cda21b980b17732b485d4e07c8d6ac0900e9eb21792fa8b8aac004b6e0d"
     },
     {
       "path": "flight/BitmapBevelOptions.hx",
@@ -876,7 +880,7 @@
     },
     {
       "path": "flight/Collision.hx",
-      "sha256": "23cecdc39f48b1632d9b6e5b7e409e05ca28e4da8490e0d3f539caeba2874d57"
+      "sha256": "1c1f644cc9af85feb8a1076a9b02d7ffd1a7960a718dd902736f2ff1daf9a622"
     },
     {
       "path": "flight/CollisionAabb2D.hx",
@@ -1496,7 +1500,7 @@
     },
     {
       "path": "flight/Geometry.hx",
-      "sha256": "579ce7f1cdceafb760440bd2b13a85c384c9abbbe6ce0bbd24abbbf3ced6a3c6"
+      "sha256": "ff9a0a799d3c6f59f1d330f2047cf46d7aedb1e554d3890d51a7e7b6e4c92c26"
     },
     {
       "path": "flight/GlitchEffect.hx",
@@ -2296,7 +2300,7 @@
     },
     {
       "path": "flight/MovieClip.hx",
-      "sha256": "2cf95adcbaeb350cd788b4c0274f83504db8fb6ee4b88da4e9aa97a6f8233d92"
+      "sha256": "e5309a0fcb08e0c78c60b56d428d2c4f578a3c0b1d189f1c254254dcaca542c4"
     },
     {
       "path": "flight/MovieClipData.hx",
@@ -2920,7 +2924,7 @@
     },
     {
       "path": "flight/Physics2d.hx",
-      "sha256": "45bd6d1020eb205ee9277b9976e70780a11b56120c94c84567a799a6bf34fa83"
+      "sha256": "957354f15b836066c53b6a941d92812774026fa7e7232d76952b765471fcbb8e"
     },
     {
       "path": "flight/Physics3DAbi.hx",
@@ -4176,7 +4180,7 @@
     },
     {
       "path": "flight/Text.hx",
-      "sha256": "5911dfe68e7573865c2adbe3a6154d82a023bc4cea9438595d83b18c77133b2b"
+      "sha256": "ca63a48e2ede35e21774dfe38672e7e088c5b57979f9b3ae13f5ff2be3958300"
     },
     {
       "path": "flight/TextAutoSize.hx",
@@ -4288,7 +4292,7 @@
     },
     {
       "path": "flight/Textlayout.hx",
-      "sha256": "b63412e78ac9e0d317337ded00711f585b4ffbb7ef545c1b7ddd03ad61b2997c"
+      "sha256": "a1cd6c4c09cd60e039b0dbb659e6e479861abbd0d0717f8f4666984f8aa10eb8"
     },
     {
       "path": "flight/Texture.hx",
@@ -4680,7 +4684,7 @@
     },
     {
       "path": "flight/Timeline.hx",
-      "sha256": "1e870e18378041e083aaf07b669f13792cfbc6e3c3d19d02c6ec50d5acfd67ad"
+      "sha256": "dcb9c90640c025978010d0447501a48dc5ca964a68a04125e0a290d44e8f7675"
     },
     {
       "path": "flight/TimelineFrameArg.hx",
@@ -7528,7 +7532,7 @@
     },
     {
       "path": "flight/_cpp/Rectangle.hx",
-      "sha256": "54cbde67eee391382fe932ead2b0cefff4217ce2f0f0e264ff64b3865641a073"
+      "sha256": "42fb9334d8f6829ada1a930a8a7cf9372239ac193ec20aefb44aadcfbd8037c3"
     },
     {
       "path": "flight/_cpp/RemoveNodeChildCommand.hx",
@@ -8960,7 +8964,7 @@
     },
     {
       "path": "flight/_cpp/_fn/Bitmap.hx",
-      "sha256": "4705c1aa21d81991d45f81928c398e184af226b5d165a39bea1d5467635b52f7"
+      "sha256": "2c1d820d409fa3613052f3b8b4621e9009341f10a42154741ed3f1bc5a034031"
     },
     {
       "path": "flight/_cpp/_fn/Bitmapfont.hx",
@@ -8992,7 +8996,7 @@
     },
     {
       "path": "flight/_cpp/_fn/Collision.hx",
-      "sha256": "7975c552312c61af516913ce5307b73e322d2561a97808263a44b81965ceca6a"
+      "sha256": "18b51c73bec833f4a49b1b4dd60107e546ab732b7f0f8fc8e44da91066ac8c4d"
     },
     {
       "path": "flight/_cpp/_fn/Color.hx",
@@ -9032,7 +9036,7 @@
     },
     {
       "path": "flight/_cpp/_fn/Geometry.hx",
-      "sha256": "26096a6cda55e8e9d62354096ed09812a57d69fb2659408a1a3029dc7d5f6c3f"
+      "sha256": "cdb9d1b1b3961321283d75e2a878bf6f3a9deaf7c98ecb33932d12a59b314ed5"
     },
     {
       "path": "flight/_cpp/_fn/Image.hx",
@@ -9068,7 +9072,7 @@
     },
     {
       "path": "flight/_cpp/_fn/MovieClip.hx",
-      "sha256": "741876358596f1d7f16b055a6b85a4293dbb71f06fdc5852d554b18b8dcf2620"
+      "sha256": "699df1f497d13f9ba0f7aca52509c3dd40183c62aecea2f78dd165b3fea4a1a4"
     },
     {
       "path": "flight/_cpp/_fn/Node.hx",
@@ -9104,7 +9108,7 @@
     },
     {
       "path": "flight/_cpp/_fn/Physics2d.hx",
-      "sha256": "31cb2ba23e3c5681f16e716dcf1ce183d69331735da0bc5475fbd23f62f6692c"
+      "sha256": "a243367bbe69581cdcf09a88014df05e48ad00e4e049063d1a323d42fe66894f"
     },
     {
       "path": "flight/_cpp/_fn/Physics3DAbi.hx",
@@ -9172,7 +9176,7 @@
     },
     {
       "path": "flight/_cpp/_fn/Text.hx",
-      "sha256": "1e4c8d2ed31268723714ab8d7c4a14126fd34299ac824c3c7b8fd454a9f624ea"
+      "sha256": "01ab378952e11fca4b2a5003bebcb14e0b8fc043cadecddf51b6684b22097e57"
     },
     {
       "path": "flight/_cpp/_fn/TextMarkup.hx",
@@ -9188,7 +9192,7 @@
     },
     {
       "path": "flight/_cpp/_fn/Textlayout.hx",
-      "sha256": "e0f46fa162c8de34d3f7e5421bbd97d2afffe10c297fd5f096a830e5f8c7b6ac"
+      "sha256": "f5cc3bfdb598451b2172ea1003621d2957480bc9a55a3017f577665c085a7de8"
     },
     {
       "path": "flight/_cpp/_fn/Texture.hx",
@@ -9212,7 +9216,7 @@
     },
     {
       "path": "flight/_cpp/_fn/Timeline.hx",
-      "sha256": "426f20069986742dfbe950ca9f98a892946b0c865c44f4438c3f1ba5251c9076"
+      "sha256": "c34578f5c05b2028dc81caa57e1399711d15bd619aec237d242fd59ad4e6ad45"
     },
     {
       "path": "flight/_cpp/_fn/Tween.hx",
@@ -11752,7 +11756,7 @@
     },
     {
       "path": "flight/_hl/Rectangle.hx",
-      "sha256": "63220c25a5aefafd6e0e6ce6931f563c0684d6d93c1b3e9cf302f006bb695078"
+      "sha256": "3d4e51f1e27c3d4d188eeaa1166d172dfd9bacf434bff99d3ba62c8dcf76ffe1"
     },
     {
       "path": "flight/_hl/RemoveNodeChildCommand.hx",
@@ -13184,7 +13188,7 @@
     },
     {
       "path": "flight/_hl/_fn/Bitmap.hx",
-      "sha256": "3cc138cb48a4b486d2e1c888a1a17cc1ef6937d5f56d73b9370e78f998bbcb74"
+      "sha256": "63996d247ed2b4605fe5c2a7e5f4d98255ac9fbce58fef89a6141b86ac50cf87"
     },
     {
       "path": "flight/_hl/_fn/Bitmapfont.hx",
@@ -13216,7 +13220,7 @@
     },
     {
       "path": "flight/_hl/_fn/Collision.hx",
-      "sha256": "e9f6d4b2d9afe5f7e53c9953f59bb505b8469ebbf185a18f28f51d82a54558d2"
+      "sha256": "a1828bf5658fd9e6636883739786a34c385bcc83a6afc15bc9e748be4efae950"
     },
     {
       "path": "flight/_hl/_fn/Color.hx",
@@ -13256,7 +13260,7 @@
     },
     {
       "path": "flight/_hl/_fn/Geometry.hx",
-      "sha256": "93df1210309dd9994428ddeb0550b925f7acc285a532354b3417d3ddc235c1df"
+      "sha256": "da166b61ea5abcaf6ad947560b778453544d32e421999007d68250b8edf87450"
     },
     {
       "path": "flight/_hl/_fn/Image.hx",
@@ -13292,7 +13296,7 @@
     },
     {
       "path": "flight/_hl/_fn/MovieClip.hx",
-      "sha256": "4580d6fa159ecb3acdf706374072564da0eda6d000853468b6287f0cdda43abd"
+      "sha256": "0baff17e4570e5d2af2f458f2697af485b04c025e5deb79c556473142f9c7fbb"
     },
     {
       "path": "flight/_hl/_fn/Node.hx",
@@ -13328,7 +13332,7 @@
     },
     {
       "path": "flight/_hl/_fn/Physics2d.hx",
-      "sha256": "715d93d941eae8535ba17112b6a75a6edddea6e952606b61f78c8cbaa22bbe33"
+      "sha256": "16c055b55bd546aef5bbd1b644ecd55cd23c050f4cecf9452860e3204d56b040"
     },
     {
       "path": "flight/_hl/_fn/Physics3DAbi.hx",
@@ -13396,7 +13400,7 @@
     },
     {
       "path": "flight/_hl/_fn/Text.hx",
-      "sha256": "5da0b0ffd08ab694a514ef1d5af9ea7b15a6fa1fd9498ca12c9c5542566e1025"
+      "sha256": "b092496b6c3c0db7b5df247ba66856a964bc1af9521756b4080a7de206bb580e"
     },
     {
       "path": "flight/_hl/_fn/TextMarkup.hx",
@@ -13412,7 +13416,7 @@
     },
     {
       "path": "flight/_hl/_fn/Textlayout.hx",
-      "sha256": "b83b342f50a7af52355f8a6cfa9253ff6ae9c6282278b28b04d3acc41ccea759"
+      "sha256": "7d84fff0f3ce16d87ed32000ed24b4870b03acdbbb873491a4a6893921e32bb4"
     },
     {
       "path": "flight/_hl/_fn/Texture.hx",
@@ -13436,7 +13440,7 @@
     },
     {
       "path": "flight/_hl/_fn/Timeline.hx",
-      "sha256": "dd7a755648ff5a2cac10094bd5b46f1c5514bd6f9be7209308051be8fa6c7e54"
+      "sha256": "ab7f6adcc99c591801214bc522f4365438af18ddc12f1e6a7103fca859c72fdc"
     },
     {
       "path": "flight/_hl/_fn/Tween.hx",
@@ -15972,7 +15976,7 @@
     },
     {
       "path": "flight/_js/Rectangle.hx",
-      "sha256": "dd02be78e517e512dcf7b7a45223895ea4e622de94975dd44135fa2e6b165639"
+      "sha256": "e7037e4e42213604b255ca383312b11146c0bd6be6b8743bdc27e8cbd76663c8"
     },
     {
       "path": "flight/_js/RemoveNodeChildCommand.hx",
@@ -17404,7 +17408,7 @@
     },
     {
       "path": "flight/_js/_fn/Bitmap.hx",
-      "sha256": "7e7ec7f3eb4abf1fd03b5c6f520e1bba025cb367a2dd6ca08e7c0ee6ac553cfd"
+      "sha256": "47dfbcf2436134b61fa7bab06322dfbbadb3e4482c769c43a0ddb001b29b2393"
     },
     {
       "path": "flight/_js/_fn/Bitmapfont.hx",
@@ -17436,7 +17440,7 @@
     },
     {
       "path": "flight/_js/_fn/Collision.hx",
-      "sha256": "421d8cd2deda3810685a39ac29ff38bbf491d40fe718b7a5b3e523d299b18181"
+      "sha256": "74939ced00833886445f70d3b62fdeb33cff48544e485de10842f601bc01015a"
     },
     {
       "path": "flight/_js/_fn/Color.hx",
@@ -17476,7 +17480,7 @@
     },
     {
       "path": "flight/_js/_fn/Geometry.hx",
-      "sha256": "91181b0355921babe9df06e81a317ddea12b014005c5023c6fba00cd5ed46603"
+      "sha256": "22b99dbd010fd3b8d7793f1371143f0dd7379da794de794a0be27623edb43a89"
     },
     {
       "path": "flight/_js/_fn/Image.hx",
@@ -17512,7 +17516,7 @@
     },
     {
       "path": "flight/_js/_fn/MovieClip.hx",
-      "sha256": "7908bfe4632ba21bbc779a29e6571b940e1e417a40cdc61c7e23a1cef53b9ea9"
+      "sha256": "de53e060c6545e7f1e3bda6e0a701c4f74124623a33aec9b175f5ce2de833728"
     },
     {
       "path": "flight/_js/_fn/Node.hx",
@@ -17548,7 +17552,7 @@
     },
     {
       "path": "flight/_js/_fn/Physics2d.hx",
-      "sha256": "7e4310e85a784f0667e0679b5d3263b53289b491882ac80bb0a065643fad97ea"
+      "sha256": "99464ffeb03eea568505fab369a5fce9ff315f5ff033b613421e135131bc836c"
     },
     {
       "path": "flight/_js/_fn/Physics3DAbi.hx",
@@ -17616,7 +17620,7 @@
     },
     {
       "path": "flight/_js/_fn/Text.hx",
-      "sha256": "de533c9fc696c5654464cfbab8f5eff41228fb69e04d83fae94f57dac0737201"
+      "sha256": "fd484fcef937235e21033927046d3a523533fbb1a40705e19b8ae631cf709eb7"
     },
     {
       "path": "flight/_js/_fn/TextMarkup.hx",
@@ -17632,7 +17636,7 @@
     },
     {
       "path": "flight/_js/_fn/Textlayout.hx",
-      "sha256": "78638fa6763b1b86ef33800534921ccb657b4baeb972eae1fd88b3da5e72d082"
+      "sha256": "31394a84e0dca6b749e87d45eeea910e19d48d3dff242f9f5af78f2c393a12de"
     },
     {
       "path": "flight/_js/_fn/Texture.hx",
@@ -17656,7 +17660,7 @@
     },
     {
       "path": "flight/_js/_fn/Timeline.hx",
-      "sha256": "1b56a6e7c468c7ef46ad5f9bbb22851d7e4cc49be55cd0594a446af40ae33e14"
+      "sha256": "7f7e3bb530a07a573fd9fecb0990e41d38d3085f2731fa3754dd222b01f609ec"
     },
     {
       "path": "flight/_js/_fn/Tween.hx",

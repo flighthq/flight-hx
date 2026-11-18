@@ -328,3 +328,54 @@ extern inline function updateTimeline(timeline:Dynamic, deltaTime:Float):Bool {
 #end
 }
 #end
+#if (js && flight_esm)
+extern inline function freeTimelineLabel(ptr:TimelineLabel):Void {
+	flight._js._fn.Timeline.freeTimelineLabel(ptr);
+}
+#else
+extern inline function freeTimelineLabel(ptr:TimelineLabel):Void {
+#if hl
+	flight._hl._fn.Timeline.freeTimelineLabel(ptr);
+#elseif cpp
+	flight._cpp._fn.Timeline.freeTimelineLabel(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Timeline.freeTimelineLabel(ptr);
+#else
+	#error "flight.Timeline: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeFrameScript(ptr:FrameScript):Void {
+	flight._js._fn.Timeline.freeFrameScript(ptr);
+}
+#else
+extern inline function freeFrameScript(ptr:FrameScript):Void {
+#if hl
+	flight._hl._fn.Timeline.freeFrameScript(ptr);
+#elseif cpp
+	flight._cpp._fn.Timeline.freeFrameScript(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Timeline.freeFrameScript(ptr);
+#else
+	#error "flight.Timeline: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeTimelineSourceRef(ptr:TimelineSourceRef):Void {
+	flight._js._fn.Timeline.freeTimelineSourceRef(ptr);
+}
+#else
+extern inline function freeTimelineSourceRef(ptr:TimelineSourceRef):Void {
+#if hl
+	flight._hl._fn.Timeline.freeTimelineSourceRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Timeline.freeTimelineSourceRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Timeline.freeTimelineSourceRef(ptr);
+#else
+	#error "flight.Timeline: no backend for this target."
+#end
+}
+#end

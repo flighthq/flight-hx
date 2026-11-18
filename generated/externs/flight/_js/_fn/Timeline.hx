@@ -38,4 +38,10 @@ extern class Timeline {
 	public static function stopTimeline(timeline:Dynamic):Void;
 	@:native("updateTimeline")
 	public static function updateTimeline(timeline:Dynamic, deltaTime:Float):Bool;
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeTimelineLabel(ptr:flight._js.TimelineLabel):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeFrameScript(ptr:flight._js.FrameScript):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeTimelineSourceRef(ptr:flight._js.TimelineSourceRef):Void {}
 }

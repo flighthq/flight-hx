@@ -798,4 +798,6 @@ extern class Geometry {
 	public static inline function freeVector3(ptr:flight._js.Vector3):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeVector4(ptr:flight._js.Vector4):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeRectangle(ptr:flight._js.Rectangle):Void {}
 }

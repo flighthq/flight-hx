@@ -6766,3 +6766,20 @@ extern inline function freeVector4(ptr:Vector4):Void {
 #end
 }
 #end
+#if (js && flight_esm)
+extern inline function freeRectangle(ptr:Rectangle):Void {
+	flight._js._fn.Geometry.freeRectangle(ptr);
+}
+#else
+extern inline function freeRectangle(ptr:Rectangle):Void {
+#if hl
+	flight._hl._fn.Geometry.freeRectangle(ptr);
+#elseif cpp
+	flight._cpp._fn.Geometry.freeRectangle(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Geometry.freeRectangle(ptr);
+#else
+	#error "flight.Geometry: no backend for this target."
+#end
+}
+#end

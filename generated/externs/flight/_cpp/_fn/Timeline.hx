@@ -37,4 +37,10 @@ extern class Timeline {
 	public static function stopTimeline(timeline:cpp.Star<cpp.Void>):Void;
 	@:native("flight_update_timeline")
 	public static function updateTimeline(timeline:cpp.Star<cpp.Void>, deltaTime:Float):Bool;
+	@:native("flight_free_timeline_label")
+	public static function freeTimelineLabel(ptr:flight._cpp.TimelineLabel):Void;
+	@:native("flight_free_frame_script")
+	public static function freeFrameScript(ptr:flight._cpp.FrameScript):Void;
+	@:native("flight_free_timeline_source_ref")
+	public static function freeTimelineSourceRef(ptr:flight._cpp.TimelineSourceRef):Void;
 }

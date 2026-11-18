@@ -448,57 +448,6 @@ extern inline function freeMovieClipSignals(ptr:MovieClipSignals):Void {
 }
 #end
 #if (js && flight_esm)
-extern inline function freeTimelineLabel(ptr:TimelineLabel):Void {
-	flight._js._fn.MovieClip.freeTimelineLabel(ptr);
-}
-#else
-extern inline function freeTimelineLabel(ptr:TimelineLabel):Void {
-#if hl
-	flight._hl._fn.MovieClip.freeTimelineLabel(ptr);
-#elseif cpp
-	flight._cpp._fn.MovieClip.freeTimelineLabel(ptr);
-#elseif (js && flight_esm)
-	flight._js._fn.MovieClip.freeTimelineLabel(ptr);
-#else
-	#error "flight.MovieClip: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
-extern inline function freeFrameScript(ptr:FrameScript):Void {
-	flight._js._fn.MovieClip.freeFrameScript(ptr);
-}
-#else
-extern inline function freeFrameScript(ptr:FrameScript):Void {
-#if hl
-	flight._hl._fn.MovieClip.freeFrameScript(ptr);
-#elseif cpp
-	flight._cpp._fn.MovieClip.freeFrameScript(ptr);
-#elseif (js && flight_esm)
-	flight._js._fn.MovieClip.freeFrameScript(ptr);
-#else
-	#error "flight.MovieClip: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
-extern inline function freeTimelineSourceRef(ptr:TimelineSourceRef):Void {
-	flight._js._fn.MovieClip.freeTimelineSourceRef(ptr);
-}
-#else
-extern inline function freeTimelineSourceRef(ptr:TimelineSourceRef):Void {
-#if hl
-	flight._hl._fn.MovieClip.freeTimelineSourceRef(ptr);
-#elseif cpp
-	flight._cpp._fn.MovieClip.freeTimelineSourceRef(ptr);
-#elseif (js && flight_esm)
-	flight._js._fn.MovieClip.freeTimelineSourceRef(ptr);
-#else
-	#error "flight.MovieClip: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
 extern inline function freeSpritesheetTimelineSourceExplanation(ptr:SpritesheetTimelineSourceExplanation):Void {
 	flight._js._fn.MovieClip.freeSpritesheetTimelineSourceExplanation(ptr);
 }

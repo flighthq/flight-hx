@@ -211,7 +211,5 @@ extern class Bitmap {
 	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeBitmapHistogram(ptr:flight._js.BitmapHistogram):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */
-	public static inline function freeRectangle(ptr:flight._js.Rectangle):Void {}
-	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeBitmapRegion(ptr:flight._js.BitmapRegion):Void {}
 }

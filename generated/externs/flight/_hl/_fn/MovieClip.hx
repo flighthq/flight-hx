@@ -51,12 +51,6 @@ extern class MovieClip {
 	public static function explainSpritesheetTimelineSource(animation:hl.Bytes):flight._hl.SpritesheetTimelineSourceExplanation;
 	@:hlNative("flight", "flight_free_movie_clip_signals")
 	public static function freeMovieClipSignals(ptr:flight._hl.MovieClipSignals):Void;
-	@:hlNative("flight", "flight_free_timeline_label")
-	public static function freeTimelineLabel(ptr:flight._hl.TimelineLabel):Void;
-	@:hlNative("flight", "flight_free_frame_script")
-	public static function freeFrameScript(ptr:flight._hl.FrameScript):Void;
-	@:hlNative("flight", "flight_free_timeline_source_ref")
-	public static function freeTimelineSourceRef(ptr:flight._hl.TimelineSourceRef):Void;
 	@:hlNative("flight", "flight_free_spritesheet_timeline_source_explanation")
 	public static function freeSpritesheetTimelineSourceExplanation(ptr:flight._hl.SpritesheetTimelineSourceExplanation):Void;
 }

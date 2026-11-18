@@ -6,6 +6,7 @@
     "patches/flight/0007-byte-buffer-results.patch",
     "patches/flight/0008-exported-struct-fields.patch",
     "patches/flight/0009-develop-compatibility.patch",
-    "patches/flight/0010-haxe-owned-carriers.patch"
+    "patches/flight/0010-haxe-owned-carriers.patch",
+    "patches/flight/0011-stable-free-function-modules.patch"
   ]
 }

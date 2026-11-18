@@ -259,4 +259,6 @@ extern class Collision {
 	public static function freeCollisionTriangleMesh3D(ptr:flight._cpp.CollisionTriangleMesh3D):Void;
 	@:native("flight_free_collision_collider_shape3_d")
 	public static function freeCollisionColliderShape3D(ptr:flight._cpp.CollisionColliderShape3D):Void;
+	@:native("flight_free_collision_shape2_d")
+	public static function freeCollisionShape2D(ptr:flight._cpp.CollisionShape2D):Void;
 }

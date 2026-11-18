@@ -13,9 +13,6 @@ abstract Rectangle(Dynamic) {
 	public var height(get, set):Float;
 	inline function get_height():Float return untyped this["height"];
 	inline function set_height(value:Float):Float return untyped this["height"] = value;
-	inline public function free():Void {
-		flight._js._fn.Bitmap.freeRectangle(cast this);
-	}
 	inline public function createClipRegionFrom():Dynamic {
 		return flight._js._fn.Clip.createClipRegionFromRectangle(cast this);
 	}
@@ -156,6 +153,9 @@ abstract Rectangle(Dynamic) {
 	}
 	inline public function release():Void {
 		flight._js._fn.Geometry.releaseRectangle(cast this);
+	}
+	inline public function free():Void {
+		flight._js._fn.Geometry.freeRectangle(cast this);
 	}
 	inline public function computeNodeBounds(source:Dynamic, targetCoordinateSpace:Null<Dynamic>):Void {
 		flight._js._fn.Node.computeNodeBoundsRectangle(cast this, source, targetCoordinateSpace);

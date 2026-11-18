@@ -493,3 +493,37 @@ extern inline function freeTextMetrics(ptr:TextMetrics):Void {
 #end
 }
 #end
+#if (js && flight_esm)
+extern inline function freeTextLayoutParams(ptr:TextLayoutParams):Void {
+	flight._js._fn.Textlayout.freeTextLayoutParams(ptr);
+}
+#else
+extern inline function freeTextLayoutParams(ptr:TextLayoutParams):Void {
+#if hl
+	flight._hl._fn.Textlayout.freeTextLayoutParams(ptr);
+#elseif cpp
+	flight._cpp._fn.Textlayout.freeTextLayoutParams(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Textlayout.freeTextLayoutParams(ptr);
+#else
+	#error "flight.Textlayout: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeTextLineMetrics(ptr:TextLineMetrics):Void {
+	flight._js._fn.Textlayout.freeTextLineMetrics(ptr);
+}
+#else
+extern inline function freeTextLineMetrics(ptr:TextLineMetrics):Void {
+#if hl
+	flight._hl._fn.Textlayout.freeTextLineMetrics(ptr);
+#elseif cpp
+	flight._cpp._fn.Textlayout.freeTextLineMetrics(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Textlayout.freeTextLineMetrics(ptr);
+#else
+	#error "flight.Textlayout: no backend for this target."
+#end
+}
+#end

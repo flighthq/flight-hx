@@ -60,4 +60,8 @@ extern class Textlayout {
 	public static inline function freeTextLayoutGroup(ptr:flight._js.TextLayoutGroup):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeTextMetrics(ptr:flight._js.TextMetrics):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeTextLayoutParams(ptr:flight._js.TextLayoutParams):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeTextLineMetrics(ptr:flight._js.TextLineMetrics):Void {}
 }

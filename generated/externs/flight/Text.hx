@@ -1275,37 +1275,3 @@ extern inline function freeTextLabelContentExplanation(ptr:TextLabelContentExpla
 #end
 }
 #end
-#if (js && flight_esm)
-extern inline function freeTextLayoutParams(ptr:TextLayoutParams):Void {
-	flight._js._fn.Text.freeTextLayoutParams(ptr);
-}
-#else
-extern inline function freeTextLayoutParams(ptr:TextLayoutParams):Void {
-#if hl
-	flight._hl._fn.Text.freeTextLayoutParams(ptr);
-#elseif cpp
-	flight._cpp._fn.Text.freeTextLayoutParams(ptr);
-#elseif (js && flight_esm)
-	flight._js._fn.Text.freeTextLayoutParams(ptr);
-#else
-	#error "flight.Text: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
-extern inline function freeTextLineMetrics(ptr:TextLineMetrics):Void {
-	flight._js._fn.Text.freeTextLineMetrics(ptr);
-}
-#else
-extern inline function freeTextLineMetrics(ptr:TextLineMetrics):Void {
-#if hl
-	flight._hl._fn.Text.freeTextLineMetrics(ptr);
-#elseif cpp
-	flight._cpp._fn.Text.freeTextLineMetrics(ptr);
-#elseif (js && flight_esm)
-	flight._js._fn.Text.freeTextLineMetrics(ptr);
-#else
-	#error "flight.Text: no backend for this target."
-#end
-}
-#end

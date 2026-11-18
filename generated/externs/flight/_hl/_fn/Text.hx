@@ -151,8 +151,4 @@ extern class Text {
 	public static function getTextLayoutMetrics(out:flight._hl.TextMetrics, source:hl.Bytes):Void;
 	@:hlNative("flight", "flight_free_text_label_content_explanation")
 	public static function freeTextLabelContentExplanation(ptr:flight._hl.TextLabelContentExplanation):Void;
-	@:hlNative("flight", "flight_free_text_layout_params")
-	public static function freeTextLayoutParams(ptr:flight._hl.TextLayoutParams):Void;
-	@:hlNative("flight", "flight_free_text_line_metrics")
-	public static function freeTextLineMetrics(ptr:flight._hl.TextLineMetrics):Void;
 }

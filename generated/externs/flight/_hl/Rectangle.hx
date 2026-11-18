@@ -22,9 +22,6 @@ abstract Rectangle(hl.Bytes) {
 
 	inline function set_height(value:Single):Single { this.setF32(28, value); return value; }
 
-	inline public function free():Void {
-		flight._hl._fn.Bitmap.freeRectangle(cast this);
-	}
 	inline public function createClipRegionFrom():hl.Bytes {
 		return flight._hl._fn.Clip.createClipRegionFromRectangle(cast this);
 	}
@@ -165,6 +162,9 @@ abstract Rectangle(hl.Bytes) {
 	}
 	inline public function release():Void {
 		flight._hl._fn.Geometry.releaseRectangle(cast this);
+	}
+	inline public function free():Void {
+		flight._hl._fn.Geometry.freeRectangle(cast this);
 	}
 	inline public function computeNodeBounds(source:hl.Bytes, targetCoordinateSpace:hl.Bytes):Void {
 		flight._hl._fn.Node.computeNodeBoundsRectangle(cast this, source, targetCoordinateSpace);

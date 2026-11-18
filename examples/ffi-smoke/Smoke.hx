@@ -14,6 +14,9 @@ class Smoke {
     v.x = 6;
     if (v.x != 6) throw 'vector field access failed';
     freeVector2(v);
+    final rectangle = flight.Geometry.createRectangle(1, 2, 3, 4);
+    if (rectangle.width != 3) throw 'rectangle allocation failed';
+    flight.Geometry.freeRectangle(rectangle);
     final m = createMatrix4FromValues(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
     for (row in 0...4) for (column in 0...4) {
       if (getMatrix4Element(m, row, column) != column * 4 + row + 1)

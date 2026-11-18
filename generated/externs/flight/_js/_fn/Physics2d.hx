@@ -201,8 +201,6 @@ extern class Physics2d {
 	@:native("queryPhysics2DShapeCast")
 	public static function queryPhysics2dShapeCast(out:flight._js.Physics2DShapeCastResult, world:flight._js.Physics2DWorld, registry:flight._js.CollisionRegistry2D, shape:flight._js.CollisionShape2D, dx:Float, dy:Float, maxFraction:Null<Float>, filter:Null<flight._js.Physics2DQueryFilter>):Void;
 	/** Native allocation release is unnecessary on JavaScript. */
-	public static inline function freeCollisionShape2D(ptr:flight._js.CollisionShape2D):Void {}
-	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freePhysics2DdebugGeometry(ptr:flight._js.Physics2DDebugGeometry):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freePhysics2DcollisionExplanation(ptr:flight._js.Physics2DCollisionExplanation):Void {}

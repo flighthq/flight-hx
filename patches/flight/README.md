@@ -10,4 +10,6 @@ The manifest lists the patches applied to Flight `5e1121e4cfdfde289b5373693dd285
 - `0009-develop-compatibility.patch` preserves caller ownership of bitmap inputs when building regions.
 - `0010-haxe-owned-carriers.patch` connects Flight's owned byte readers and command-history unit signals to Haxe. It also supplies string-field ownership metadata, handles empty Rust structs in field discovery, and reads the text-layout enum definitions used by the native ABI.
 
+- `0011-stable-free-function-modules.patch` places generated free functions in the defining crate’s Haxe facade whenever the type has a unique owner. For example, `freeRectangle` stays in `flight.Geometry` when other crates start returning rectangles.
+
 Flight now includes native artifact emission, direct JS/ESM bindings, and case-safe Haxe module names. Apply the current manifest in order on a clean Flight checkout at the pinned revision. Use Rust 1.96.0 and Haxe 4.3.7 to verify the emitted bindings.
