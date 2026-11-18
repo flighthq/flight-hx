@@ -11,8 +11,8 @@ class HostWeb {
   public static inline function createInputTargetHandle(element:js.html.Element):WebInputTargetHandle
     return HostWebExports.createWebInputTargetHandle(element);
 
-  public static inline function createCanvasSurface(capability:WebCanvasCapability, canvas:js.html.CanvasElement,
-      ?options:js.html.CanvasRenderingContext2DSettings):Null<WebCanvasSurface>
+  public static inline function createCanvasSurfaceFromNativeHandle(capability:WebCanvasCapability, canvas:js.html.CanvasElement,
+      ?options:WebCanvasOptions):Null<WebCanvasSurface>
     return WebSurfaceExports.createCanvasSurfaceFromNativeHandle(capability, canvas, options);
 
   public static inline function destroyCanvasSurface(capability:WebCanvasCapability, surface:WebCanvasSurface):Void
@@ -27,6 +27,12 @@ class HostWeb {
 abstract WebCanvasCapability(Dynamic) {}
 abstract WebCanvasSurface(Dynamic) {}
 abstract WebInputTargetHandle(Dynamic) {}
+typedef WebCanvasOptions = {
+  ?alpha:Bool,
+  ?colorSpace:String,
+  ?desynchronized:Bool,
+  ?willReadFrequently:Bool,
+};
 
 extern class WebInputTargetCapability {
   function prepare(target:WebInputTargetHandle):Void;
@@ -43,7 +49,7 @@ private extern class HostWebExports {
 @:jsRequire("@flighthq/surface")
 private extern class WebSurfaceExports {
   static function createCanvasSurfaceFromNativeHandle(capability:WebCanvasCapability, canvas:js.html.CanvasElement,
-    ?options:js.html.CanvasRenderingContext2DSettings):Null<WebCanvasSurface>;
+    ?options:WebCanvasOptions):Null<WebCanvasSurface>;
   static function destroyCanvasSurface(capability:WebCanvasCapability, surface:WebCanvasSurface):Void;
 }
 #end
