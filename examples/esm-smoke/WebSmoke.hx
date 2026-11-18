@@ -18,6 +18,22 @@ class WebSmoke {
     releaseVector2(v);
     final freeOnly = createVector2(1, 2);
     freeVector2(freeOnly); // Native frees have no allocation to release on the GC target.
+    final sprite:flight.Sprite = cast flight.Scene2D.createSprite();
+    final revision = flight.Node.getNodeAppearanceRevision(cast sprite);
+    sprite.alpha = 0.25;
+    sprite.visible = false;
+    sprite.blendMode = 'multiply';
+    sprite.name = 'Sprite Ω';
+    if (sprite.alpha != 0.25 || sprite.visible || sprite.blendMode != 'multiply' || sprite.name != 'Sprite Ω')
+      throw 'Sprite inherited properties failed';
+    if (flight.Node.getNodeAppearanceRevision(cast sprite) != revision + 3)
+      throw 'Sprite appearance revision failed';
+    sprite.name = null;
+    sprite.blendMode = null;
+    if (sprite.name != null || sprite.blendMode != null) throw 'nullable node properties failed';
+    final display:flight.DisplayObject = cast flight.Scene2D.createDisplayObject();
+    display.alpha = 0.5;
+    if (display.alpha != 0.5) throw 'DisplayObject inherited alpha failed';
     trace('FLIGHT_ESM_SMOKE_OK');
   }
 }

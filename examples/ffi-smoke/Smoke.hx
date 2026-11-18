@@ -38,23 +38,48 @@ class Smoke {
     if (getBitmapPixel(bitmap, 0, 0) != 0x55667711)
       throw 'caller bitmap is no longer writable';
     freeBitmap(bitmap);
-    final parent = createDisplayObject();
-    final child = createSprite();
-    final added = addNodeChild(parent, child);
-    if (getNodeChildCount(parent) != 1) throw 'concrete handle upcast failed';
+    final parent:flight.DisplayObject = cast createDisplayObject();
+    final child:flight.Sprite = cast createSprite();
+    final appearance = getNodeAppearanceRevision(cast child);
+    child.alpha = 0.25;
+    child.visible = false;
+    child.blendMode = 'multiply';
+    child.name = 'Sprite Ω';
+    if (child.alpha != 0.25 || child.visible || child.blendMode != 'multiply' || child.name != 'Sprite Ω')
+      throw 'Sprite inherited properties failed';
+    if (getNodeAppearanceRevision(cast child) != appearance + 3)
+      throw 'Sprite appearance revision failed';
+    child.blendMode = null;
+    child.name = '';
+    if (child.name != '' || child.blendMode != null) throw 'empty and null node properties differ';
+    child.name = null;
+    if (child.name != null) throw 'clearing a Sprite name failed';
+    parent.alpha = 0.5;
+    parent.visible = false;
+    parent.name = 'parent';
+    parent.blendMode = 'screen';
+    if (parent.alpha != 0.5 || parent.visible || parent.name != 'parent' || parent.blendMode != 'screen')
+      throw 'DisplayObject inherited properties failed';
+    final shape:flight.Shape = cast flight.Shape.createShape();
+    shape.alpha = 0.75;
+    shape.name = 'shape';
+    if (shape.alpha != 0.75 || shape.name != 'shape') throw 'Shape inherited properties failed';
+    freeRef(cast shape);
+    final added = addNodeChild(cast parent, cast child);
+    if (getNodeChildCount(cast parent) != 1) throw 'concrete handle upcast failed';
     final parentView = getNodeParent(added);
     if (getNodeChildCount(parentView) != 1) throw 'returned node handle failed';
     final cloned = cloneSprite(cast added);
     if (getNodeChildCount(cloned) != 0) throw 'concrete Ref receiver failed';
     final removed = removeNodeChild(parentView, added);
-    if (getNodeChildCount(parent) != 0) throw 'node removal failed';
+    if (getNodeChildCount(cast parent) != 0) throw 'node removal failed';
     if (getNodeParent(removed) != null) throw 'absent parent did not return null';
     freeRef(removed);
     freeRef(cloned);
     freeRef(parentView);
     freeRef(added);
-    freeRef(child);
-    freeRef(parent);
+    freeRef(cast child);
+    freeRef(cast parent);
     #if (cpp || hl)
     final font = flight.Font.createFontResource();
     font.family = 'Sans Ω';

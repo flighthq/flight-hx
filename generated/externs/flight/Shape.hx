@@ -1,5 +1,27 @@
 package flight;
 
+#if hl
+
+typedef Shape = flight._hl.Shape;
+
+#elseif cpp
+
+typedef Shape = flight._cpp.Shape;
+
+#elseif (js && flight_esm)
+
+typedef Shape = flight._js.Shape;
+
+#elseif js
+
+#error "flight.Shape on js requires flight_esm."
+
+#else
+
+#error "flight.Shape: no backend for this target."
+
+#end
+
 #if (js && flight_esm)
 extern inline function compactStrokePath(out:Path, path:Path, style:StrokeStyle, tolerance:Null<Float>):Void {
 	flight._js._fn.Shape.compactStrokePath(out, path, style, tolerance);

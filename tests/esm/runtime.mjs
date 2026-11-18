@@ -41,7 +41,7 @@ assert.ok(!Object.keys(empty.metafile.inputs).some((name) => name.includes('/pac
 const missing = path.join(work, 'missing-export.mjs');
 writeFileSync(missing, 'import * as math from "@flighthq/math"; console.log(math.__missing_flight_export);\n');
 await assert.rejects(bundleFlightJs({ entry: missing, outfile: path.join(work, 'missing-bundle.mjs') }), /matching export|always be undefined/u);
-process.stdout.write(`ESM installed archive: real Flight math/geometry, arrays, callbacks/options, fields, lifecycle and tree-shaking passed. Artifacts: ${work}\n`);
+process.stdout.write(`ESM installed archive: real Flight math/geometry, arrays, callbacks/options, fields, inherited node properties, lifecycle and tree-shaking passed. Artifacts: ${work}\n`);
 
 function run(command, args) {
   const result = spawnSync(command, args, { cwd: root, encoding: 'utf8', maxBuffer: 16 * 1024 * 1024 });

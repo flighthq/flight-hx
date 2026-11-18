@@ -11078,6 +11078,174 @@ void flight_free_video_resource(void * arg0);
 void flight_free_viewport(void * arg0);
 void flight_free_writable_stream(void * arg0);
 void flight_free_xml_element(void * arg0);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_node_property_get_billboard_name(void * arg0);
+void flight_node_property_set_billboard_name(void * arg0, void * arg1, size_t arg2, bool arg3);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_node_property_get_bitmap_text_name(void * arg0);
+void flight_node_property_set_bitmap_text_name(void * arg0, void * arg1, size_t arg2, bool arg3);
+float flight_node_property_get_bitmap_text_alpha(void * arg0);
+void flight_node_property_set_bitmap_text_alpha(void * arg0, float arg1);
+bool flight_node_property_get_bitmap_text_visible(void * arg0);
+void flight_node_property_set_bitmap_text_visible(void * arg0, bool arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_node_property_get_bitmap_text_blend_mode(void * arg0);
+void flight_node_property_set_bitmap_text_blend_mode(void * arg0, void * arg1, size_t arg2, bool arg3);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_node_property_get_display_object_name(void * arg0);
+void flight_node_property_set_display_object_name(void * arg0, void * arg1, size_t arg2, bool arg3);
+float flight_node_property_get_display_object_alpha(void * arg0);
+void flight_node_property_set_display_object_alpha(void * arg0, float arg1);
+bool flight_node_property_get_display_object_visible(void * arg0);
+void flight_node_property_set_display_object_visible(void * arg0, bool arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_node_property_get_display_object_blend_mode(void * arg0);
+void flight_node_property_set_display_object_blend_mode(void * arg0, void * arg1, size_t arg2, bool arg3);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_node_property_get_html_view_name(void * arg0);
+void flight_node_property_set_html_view_name(void * arg0, void * arg1, size_t arg2, bool arg3);
+float flight_node_property_get_html_view_alpha(void * arg0);
+void flight_node_property_set_html_view_alpha(void * arg0, float arg1);
+bool flight_node_property_get_html_view_visible(void * arg0);
+void flight_node_property_set_html_view_visible(void * arg0, bool arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_node_property_get_html_view_blend_mode(void * arg0);
+void flight_node_property_set_html_view_blend_mode(void * arg0, void * arg1, size_t arg2, bool arg3);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_node_property_get_instanced_mesh_name(void * arg0);
+void flight_node_property_set_instanced_mesh_name(void * arg0, void * arg1, size_t arg2, bool arg3);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_node_property_get_mesh_name(void * arg0);
+void flight_node_property_set_mesh_name(void * arg0, void * arg1, size_t arg2, bool arg3);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_node_property_get_morph_shape_name(void * arg0);
+void flight_node_property_set_morph_shape_name(void * arg0, void * arg1, size_t arg2, bool arg3);
+float flight_node_property_get_morph_shape_alpha(void * arg0);
+void flight_node_property_set_morph_shape_alpha(void * arg0, float arg1);
+bool flight_node_property_get_morph_shape_visible(void * arg0);
+void flight_node_property_set_morph_shape_visible(void * arg0, bool arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_node_property_get_morph_shape_blend_mode(void * arg0);
+void flight_node_property_set_morph_shape_blend_mode(void * arg0, void * arg1, size_t arg2, bool arg3);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_node_property_get_movie_clip_name(void * arg0);
+void flight_node_property_set_movie_clip_name(void * arg0, void * arg1, size_t arg2, bool arg3);
+float flight_node_property_get_movie_clip_alpha(void * arg0);
+void flight_node_property_set_movie_clip_alpha(void * arg0, float arg1);
+bool flight_node_property_get_movie_clip_visible(void * arg0);
+void flight_node_property_set_movie_clip_visible(void * arg0, bool arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_node_property_get_movie_clip_blend_mode(void * arg0);
+void flight_node_property_set_movie_clip_blend_mode(void * arg0, void * arg1, size_t arg2, bool arg3);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_node_property_get_native_text_name(void * arg0);
+void flight_node_property_set_native_text_name(void * arg0, void * arg1, size_t arg2, bool arg3);
+float flight_node_property_get_native_text_alpha(void * arg0);
+void flight_node_property_set_native_text_alpha(void * arg0, float arg1);
+bool flight_node_property_get_native_text_visible(void * arg0);
+void flight_node_property_set_native_text_visible(void * arg0, bool arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_node_property_get_native_text_blend_mode(void * arg0);
+void flight_node_property_set_native_text_blend_mode(void * arg0, void * arg1, size_t arg2, bool arg3);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_node_property_get_node3_dfields_name(void * arg0);
+void flight_node_property_set_node3_dfields_name(void * arg0, void * arg1, size_t arg2, bool arg3);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_node_property_get_particle_emitter2_d_name(void * arg0);
+void flight_node_property_set_particle_emitter2_d_name(void * arg0, void * arg1, size_t arg2, bool arg3);
+float flight_node_property_get_particle_emitter2_d_alpha(void * arg0);
+void flight_node_property_set_particle_emitter2_d_alpha(void * arg0, float arg1);
+bool flight_node_property_get_particle_emitter2_d_visible(void * arg0);
+void flight_node_property_set_particle_emitter2_d_visible(void * arg0, bool arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_node_property_get_particle_emitter2_d_blend_mode(void * arg0);
+void flight_node_property_set_particle_emitter2_d_blend_mode(void * arg0, void * arg1, size_t arg2, bool arg3);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_node_property_get_particle_emitter3_d_name(void * arg0);
+void flight_node_property_set_particle_emitter3_d_name(void * arg0, void * arg1, size_t arg2, bool arg3);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_node_property_get_quad_batch_name(void * arg0);
+void flight_node_property_set_quad_batch_name(void * arg0, void * arg1, size_t arg2, bool arg3);
+float flight_node_property_get_quad_batch_alpha(void * arg0);
+void flight_node_property_set_quad_batch_alpha(void * arg0, float arg1);
+bool flight_node_property_get_quad_batch_visible(void * arg0);
+void flight_node_property_set_quad_batch_visible(void * arg0, bool arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_node_property_get_quad_batch_blend_mode(void * arg0);
+void flight_node_property_set_quad_batch_blend_mode(void * arg0, void * arg1, size_t arg2, bool arg3);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_node_property_get_rich_text_name(void * arg0);
+void flight_node_property_set_rich_text_name(void * arg0, void * arg1, size_t arg2, bool arg3);
+float flight_node_property_get_rich_text_alpha(void * arg0);
+void flight_node_property_set_rich_text_alpha(void * arg0, float arg1);
+bool flight_node_property_get_rich_text_visible(void * arg0);
+void flight_node_property_set_rich_text_visible(void * arg0, bool arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_node_property_get_rich_text_blend_mode(void * arg0);
+void flight_node_property_set_rich_text_blend_mode(void * arg0, void * arg1, size_t arg2, bool arg3);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_node_property_get_scale9_shape_name(void * arg0);
+void flight_node_property_set_scale9_shape_name(void * arg0, void * arg1, size_t arg2, bool arg3);
+float flight_node_property_get_scale9_shape_alpha(void * arg0);
+void flight_node_property_set_scale9_shape_alpha(void * arg0, float arg1);
+bool flight_node_property_get_scale9_shape_visible(void * arg0);
+void flight_node_property_set_scale9_shape_visible(void * arg0, bool arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_node_property_get_scale9_shape_blend_mode(void * arg0);
+void flight_node_property_set_scale9_shape_blend_mode(void * arg0, void * arg1, size_t arg2, bool arg3);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_node_property_get_scale9_sprite_name(void * arg0);
+void flight_node_property_set_scale9_sprite_name(void * arg0, void * arg1, size_t arg2, bool arg3);
+float flight_node_property_get_scale9_sprite_alpha(void * arg0);
+void flight_node_property_set_scale9_sprite_alpha(void * arg0, float arg1);
+bool flight_node_property_get_scale9_sprite_visible(void * arg0);
+void flight_node_property_set_scale9_sprite_visible(void * arg0, bool arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_node_property_get_scale9_sprite_blend_mode(void * arg0);
+void flight_node_property_set_scale9_sprite_blend_mode(void * arg0, void * arg1, size_t arg2, bool arg3);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_node_property_get_shape_name(void * arg0);
+void flight_node_property_set_shape_name(void * arg0, void * arg1, size_t arg2, bool arg3);
+float flight_node_property_get_shape_alpha(void * arg0);
+void flight_node_property_set_shape_alpha(void * arg0, float arg1);
+bool flight_node_property_get_shape_visible(void * arg0);
+void flight_node_property_set_shape_visible(void * arg0, bool arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_node_property_get_shape_blend_mode(void * arg0);
+void flight_node_property_set_shape_blend_mode(void * arg0, void * arg1, size_t arg2, bool arg3);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_node_property_get_sprite_name(void * arg0);
+void flight_node_property_set_sprite_name(void * arg0, void * arg1, size_t arg2, bool arg3);
+float flight_node_property_get_sprite_alpha(void * arg0);
+void flight_node_property_set_sprite_alpha(void * arg0, float arg1);
+bool flight_node_property_get_sprite_visible(void * arg0);
+void flight_node_property_set_sprite_visible(void * arg0, bool arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_node_property_get_sprite_blend_mode(void * arg0);
+void flight_node_property_set_sprite_blend_mode(void * arg0, void * arg1, size_t arg2, bool arg3);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_node_property_get_text_label_name(void * arg0);
+void flight_node_property_set_text_label_name(void * arg0, void * arg1, size_t arg2, bool arg3);
+float flight_node_property_get_text_label_alpha(void * arg0);
+void flight_node_property_set_text_label_alpha(void * arg0, float arg1);
+bool flight_node_property_get_text_label_visible(void * arg0);
+void flight_node_property_set_text_label_visible(void * arg0, bool arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_node_property_get_text_label_blend_mode(void * arg0);
+void flight_node_property_set_text_label_blend_mode(void * arg0, void * arg1, size_t arg2, bool arg3);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_node_property_get_tilemap_name(void * arg0);
+void flight_node_property_set_tilemap_name(void * arg0, void * arg1, size_t arg2, bool arg3);
+float flight_node_property_get_tilemap_alpha(void * arg0);
+void flight_node_property_set_tilemap_alpha(void * arg0, float arg1);
+bool flight_node_property_get_tilemap_visible(void * arg0);
+void flight_node_property_set_tilemap_visible(void * arg0, bool arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_node_property_get_tilemap_blend_mode(void * arg0);
+void flight_node_property_set_tilemap_blend_mode(void * arg0, void * arg1, size_t arg2, bool arg3);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_node_property_get_unbound_target_name(void * arg0);
+void flight_node_property_set_unbound_target_name(void * arg0, void * arg1, size_t arg2, bool arg3);
 #ifdef __cplusplus
 }
 #endif

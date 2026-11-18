@@ -7,8 +7,8 @@ and flight-cpp adapters have been removed.
 
 The source is Flight `develop` revision
 `5e1121e4cfdfde289b5373693dd285a2035dd285` plus the reviewable
-[native producer patches](patches/flight/README.md). There are 4,408 generated Haxe
-files and 9,632 C ABI exports. Generated Haxe is copied unchanged from
+[native producer patches](patches/flight/README.md). There are 4,419 generated Haxe
+files and 9,764 C ABI exports. Generated Haxe is copied unchanged from
 that producer; provenance records both the Flight revision and patch hashes.
 
 ## Consume
@@ -60,6 +60,12 @@ borrowed `data` view remains valid until disposal. JS keeps the SDK byte array.
 Public scalar and `String` fields have properties, including `ColorScaleBias`
 channels and `FontResource.family`. Native string properties copy UTF-8 storage;
 their temporary buffers are released by the generated accessor.
+
+Generated node types expose inherited `name` where the Rust producer recognizes
+the `Node` implementation. Recognized `Node2D` types, including `Sprite`,
+`DisplayObject`, and `Shape`, also expose `alpha`, `visible`, and `blendMode`.
+`name` and `blendMode` are nullable strings. Changes to appearance properties
+advance the node's appearance revision.
 
 Native bindings include scalar and optional tuple returns, owned byte readers
 in `flight.Buffer`, and command-history unit signal handles in `flight.Command`.

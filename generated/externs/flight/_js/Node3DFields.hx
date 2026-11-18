@@ -1,6 +1,10 @@
 package flight._js;
 
 abstract Node3DFields(Dynamic) {
+	public var name(get, set):Null<String>;
+	inline function get_name():Null<String> return untyped this.name;
+	inline function set_name(value:Null<String>):Null<String> { untyped this.name = value; return value; }
+
 	public var alpha(get, set):Float;
 	inline function get_alpha():Float return untyped this["alpha"];
 	inline function set_alpha(value:Float):Float return untyped this["alpha"] = value;
