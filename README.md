@@ -7,7 +7,7 @@ and flight-cpp adapters have been removed.
 
 The source is Flight `develop` revision
 `5e1121e4cfdfde289b5373693dd285a2035dd285` plus the reviewable
-[native producer patches](patches/flight/README.md). There are 4,419 generated Haxe
+[native producer patches](patches/flight/README.md). There are 4,420 generated Haxe
 files and 9,764 C ABI exports. Generated Haxe is copied unchanged from
 that producer; provenance records both the Flight revision and patch hashes.
 
@@ -134,6 +134,30 @@ tooling. Apps can use their own bundler with matching published packages instead
 field mutation, typed arrays, callbacks/options and release, and verifies unused
 exports disappear. Full SDK behavior, rendering and browser host integration are
 not established by this core smoke. See [ESM pipeline](tools/esm/README.md).
+
+### Browser host handles
+
+`flight.HostWeb` exposes Flight's existing browser Canvas and input-target
+capabilities on the ESM target. Wrap an existing DOM canvas to acquire its 2D
+surface, and release the Flight surface when finished. The DOM element remains
+owned by the caller.
+
+```haxe
+import flight.HostWeb;
+
+final capability = HostWeb.canvas;
+final surface = HostWeb.createCanvasSurfaceFromNativeHandle(capability, canvas);
+if (surface != null) {
+    // Use the acquired surface.
+    HostWeb.destroyCanvasSurface(capability, surface);
+}
+
+final input = HostWeb.createInputTargetHandle(canvas);
+HostWeb.inputTarget.prepare(input);
+```
+
+The Canvas surface and input target are separate opaque Flight values. The browser
+provider manages the association with the original DOM element.
 
 ## Develop and package
 

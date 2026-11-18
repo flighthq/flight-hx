@@ -38,6 +38,15 @@ writeFileSync(path.join(work, 'Empty.hx'), 'class Empty { static function main()
 const empty = await buildWebBundle({ main: 'Empty', classpaths: [path.join(installed, 'lib'), work], outDir: path.join(work, 'empty') });
 assert.match(run(process.execPath, [empty.bundle]), /FLIGHT_ESM_EMPTY_OK/u);
 assert.ok(!Object.keys(empty.metafile.inputs).some((name) => name.includes('/packages/')), 'An unused Flight package was imported');
+const host = await buildWebBundle({
+  main: 'WebHostSmoke',
+  classpaths: [path.join(installed, 'lib'), path.join(root, 'tests/esm')],
+  outDir: path.join(work, 'host'),
+});
+assert.match(run(process.execPath, [host.bundle]), /FLIGHT_WEB_HOST_OK/u);
+const hostEntry = readFileSync(host.entry, 'utf8');
+assert.match(hostEntry, /from "@flighthq\/host-web"/u);
+assert.match(hostEntry, /from "@flighthq\/surface"/u);
 const missing = path.join(work, 'missing-export.mjs');
 writeFileSync(missing, 'import * as math from "@flighthq/math"; console.log(math.__missing_flight_export);\n');
 await assert.rejects(bundleFlightJs({ entry: missing, outfile: path.join(work, 'missing-bundle.mjs') }), /matching export|always be undefined/u);

@@ -35,6 +35,10 @@
       {
         "path": "patches/flight/0012-inherited-node-properties.patch",
         "sha256": "e0e692905094467dd2603faecd7a9d595793659cc42a8ee959de9b5cc207e77b"
+      },
+      {
+        "path": "patches/flight/0013-web-host-seams.patch",
+        "sha256": "a55250cfdbf3907c7ba73a75b2108637e1da7c3958c040b36084416cb781d896"
       }
     ]
   },
@@ -1785,6 +1789,10 @@
     {
       "path": "flight/HostVideoCapability.hx",
       "sha256": "690c78e8178dd03ff1ede2dd1cc62bccd675542d6e51acfc319746f5a762f1e5"
+    },
+    {
+      "path": "flight/HostWeb.hx",
+      "sha256": "6575fe7043a4dfeb0a4eccd5154660499f2a98d587c5bf3a1a7b0aff57cf5d61"
     },
     {
       "path": "flight/HourCycle.hx",

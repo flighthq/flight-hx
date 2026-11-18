@@ -8,6 +8,7 @@
     "patches/flight/0009-develop-compatibility.patch",
     "patches/flight/0010-haxe-owned-carriers.patch",
     "patches/flight/0011-stable-free-function-modules.patch",
-    "patches/flight/0012-inherited-node-properties.patch"
+    "patches/flight/0012-inherited-node-properties.patch",
+    "patches/flight/0013-web-host-seams.patch"
   ]
 }

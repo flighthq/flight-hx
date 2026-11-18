@@ -1,0 +1,79 @@
+diff --git a/crates/flight-bindgen/src/haxe_js.rs b/crates/flight-bindgen/src/haxe_js.rs
+index ac58f6c675780d8f49160887ab7f68c386c8dd5c..99b48ff78358484934dd10ad3eb44b7b28a6fc19 100644
+--- a/crates/flight-bindgen/src/haxe_js.rs
++++ b/crates/flight-bindgen/src/haxe_js.rs
+@@ -107,8 +107,13 @@ pub fn signature(func: &ParsedFn, prefix: &str) -> Option<(Vec<String>, String)>
+ 
+ pub fn generate(exports: &[CrateExports], out_dir: &Path, ffi_names: Option<&BTreeSet<String>>) {
+     let js_dir = out_dir.join("flight").join("_js");
++    // These public browser APIs have DOM carriers and no corresponding Rust C ABI.
++    // Keep their signatures explicit and use the same pinned JS SDK as the other externs.
++
+     let fn_dir = js_dir.join("_fn");
+     fs::create_dir_all(&fn_dir).unwrap();
++    write_if_changed(&out_dir.join("flight/HostWeb.hx"), include_str!("host_web.hx.in"));
++
+     let mut types = BTreeSet::new();
+     for package in exports {
+         for func in &package.fns {
+diff --git a/crates/flight-bindgen/src/host_web.hx.in b/crates/flight-bindgen/src/host_web.hx.in
+new file mode 100644
+index 0000000000000000000000000000000000000000..5ccc2dd45cd462c20fdf81b972a96b5dc4b14738
+--- /dev/null
++++ b/crates/flight-bindgen/src/host_web.hx.in
+@@ -0,0 +1,55 @@
++package flight;
++
++class HostWeb {
++  #if (js && flight_esm)
++  public static var canvas(get, never):WebCanvasCapability;
++  static inline function get_canvas():WebCanvasCapability return HostWebExports.webHostCanvas;
++
++  public static var inputTarget(get, never):WebInputTargetCapability;
++  static inline function get_inputTarget():WebInputTargetCapability return HostWebExports.webHostInputTarget;
++
++  public static inline function createInputTargetHandle(element:js.html.Element):WebInputTargetHandle
++    return HostWebExports.createWebInputTargetHandle(element);
++
++  public static inline function createCanvasSurfaceFromNativeHandle(capability:WebCanvasCapability, canvas:js.html.CanvasElement,
++      ?options:WebCanvasOptions):Null<WebCanvasSurface>
++    return WebSurfaceExports.createCanvasSurfaceFromNativeHandle(capability, canvas, options);
++
++  public static inline function destroyCanvasSurface(capability:WebCanvasCapability, surface:WebCanvasSurface):Void
++    WebSurfaceExports.destroyCanvasSurface(capability, surface);
++
++  public static inline function getCanvasHandle(surface:WebCanvasSurface):Null<js.html.CanvasElement>
++    return HostWebExports.getWebSurfaceCanvasHandle(surface);
++  #end
++}
++
++#if (js && flight_esm)
++abstract WebCanvasCapability(Dynamic) {}
++abstract WebCanvasSurface(Dynamic) {}
++abstract WebInputTargetHandle(Dynamic) {}
++typedef WebCanvasOptions = {
++  ?alpha:Bool,
++  ?colorSpace:String,
++  ?desynchronized:Bool,
++  ?willReadFrequently:Bool,
++};
++
++extern class WebInputTargetCapability {
++  function prepare(target:WebInputTargetHandle):Void;
++}
++
++@:jsRequire("@flighthq/host-web")
++private extern class HostWebExports {
++  static final webHostCanvas:WebCanvasCapability;
++  static final webHostInputTarget:WebInputTargetCapability;
++  static function createWebInputTargetHandle(element:js.html.Element):WebInputTargetHandle;
++  static function getWebSurfaceCanvasHandle(surface:WebCanvasSurface):Null<js.html.CanvasElement>;
++}
++
++@:jsRequire("@flighthq/surface")
++private extern class WebSurfaceExports {
++  static function createCanvasSurfaceFromNativeHandle(capability:WebCanvasCapability, canvas:js.html.CanvasElement,
++    ?options:WebCanvasOptions):Null<WebCanvasSurface>;
++  static function destroyCanvasSurface(capability:WebCanvasCapability, surface:WebCanvasSurface):Void;
++}
++#end
