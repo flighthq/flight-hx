@@ -205,6 +205,23 @@ extern inline function appendMorphShapeBeginFill(shape:Dynamic, start:MorphShape
 }
 #end
 #if (js && flight_esm)
+extern inline function appendMorphShapeBeginGradientFill(shape:Dynamic, gradientType:Dynamic, start:MorphShapeGradientEndpoint, end:MorphShapeGradientEndpoint, spreadMethod:Null<Dynamic>, interpolationMethod:Null<Dynamic>):Bool {
+	return flight._js._fn.Shape.appendMorphShapeBeginGradientFill(shape, gradientType, start, end, spreadMethod, interpolationMethod);
+}
+#else
+extern inline function appendMorphShapeBeginGradientFill(shape:Dynamic, gradientType:flight.GradientType, start:MorphShapeGradientEndpoint, end:MorphShapeGradientEndpoint, spreadMethod:Int, interpolationMethod:Int):Bool {
+#if hl
+	return flight._hl._fn.Shape.appendMorphShapeBeginGradientFill(shape, gradientType, start, end, spreadMethod, interpolationMethod);
+#elseif cpp
+	return flight._cpp._fn.Shape.appendMorphShapeBeginGradientFill(shape, gradientType, start, end, spreadMethod, interpolationMethod);
+#elseif (js && flight_esm)
+	return flight._js._fn.Shape.appendMorphShapeBeginGradientFill(shape, gradientType, start, end, spreadMethod, interpolationMethod);
+#else
+	#error "flight.Shape: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
 extern inline function appendMorphShapeBeginTextureFill(shape:Dynamic, texture:Dynamic, startMatrix:Null<Matrix>, endMatrix:Null<Matrix>):Void {
 	flight._js._fn.Shape.appendMorphShapeBeginTextureFill(shape, texture, startMatrix, endMatrix);
 }
@@ -216,6 +233,23 @@ extern inline function appendMorphShapeBeginTextureFill(shape:Dynamic, texture:D
 	flight._cpp._fn.Shape.appendMorphShapeBeginTextureFill(shape, texture, startMatrix, endMatrix);
 #elseif (js && flight_esm)
 	flight._js._fn.Shape.appendMorphShapeBeginTextureFill(shape, texture, startMatrix, endMatrix);
+#else
+	#error "flight.Shape: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function appendMorphShapeLineGradientStyle(shape:Dynamic, gradientType:Dynamic, start:MorphShapeGradientEndpoint, end:MorphShapeGradientEndpoint, spreadMethod:Null<Dynamic>, interpolationMethod:Null<Dynamic>):Bool {
+	return flight._js._fn.Shape.appendMorphShapeLineGradientStyle(shape, gradientType, start, end, spreadMethod, interpolationMethod);
+}
+#else
+extern inline function appendMorphShapeLineGradientStyle(shape:Dynamic, gradientType:flight.GradientType, start:MorphShapeGradientEndpoint, end:MorphShapeGradientEndpoint, spreadMethod:Int, interpolationMethod:Int):Bool {
+#if hl
+	return flight._hl._fn.Shape.appendMorphShapeLineGradientStyle(shape, gradientType, start, end, spreadMethod, interpolationMethod);
+#elseif cpp
+	return flight._cpp._fn.Shape.appendMorphShapeLineGradientStyle(shape, gradientType, start, end, spreadMethod, interpolationMethod);
+#elseif (js && flight_esm)
+	return flight._js._fn.Shape.appendMorphShapeLineGradientStyle(shape, gradientType, start, end, spreadMethod, interpolationMethod);
 #else
 	#error "flight.Shape: no backend for this target."
 #end

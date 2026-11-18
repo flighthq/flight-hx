@@ -137,8 +137,6 @@ extern class Physics2d {
 	public static function isPhysics2dSolverConfigValid(config:flight._cpp.Physics2DSolverConfig):Bool;
 	@:native("flight_is_physics2d_timestep_valid")
 	public static function isPhysics2dTimestepValid(dt:Float):Bool;
-	@:native("flight_visit_physics2d_joint_base_number_fields")
-	public static function visitPhysics2dJointBaseNumberFields(fields:flight._cpp.Physics2DJointFields, visitFn:cpp.Star<cpp.Void>, visitCtx:cpp.Star<cpp.Void>):Void;
 	@:native("flight_create_physics2d_collider")
 	public static function createPhysics2dCollider(local:flight._cpp.CollisionShape2D):cpp.Star<cpp.Void>;
 	@:native("flight_create_physics2d_solver_config")

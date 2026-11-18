@@ -45,18 +45,6 @@ extern class Audio {
 	public static function findAudioResourceReferenceByName(references:hl.Bytes, referencesLen:Int, name:hl.Bytes):flight._hl.AudioResourceReference;
 	@:hlNative("flight", "flight_reset_failed_audio_resource_reference")
 	public static function resetFailedAudioResourceReference(reference:flight._hl.AudioResourceReference):Bool;
-	@:hlNative("flight", "flight_get_audio_channel_state_string")
-	public static function getAudioChannelStateString(value:Int):hl.Bytes;
-	@:hlNative("flight", "flight_get_audio_resource_failure_kind_string")
-	public static function getAudioResourceFailureKindString(value:Int):hl.Bytes;
-	@:hlNative("flight", "flight_get_audio_resource_reference_kind_string")
-	public static function getAudioResourceReferenceKindString(value:Int):hl.Bytes;
-	@:hlNative("flight", "flight_parse_audio_channel_state")
-	public static function parseAudioChannelState(value:hl.Bytes):Int;
-	@:hlNative("flight", "flight_parse_audio_resource_failure_kind")
-	public static function parseAudioResourceFailureKind(value:hl.Bytes):Int;
-	@:hlNative("flight", "flight_parse_audio_resource_reference_kind")
-	public static function parseAudioResourceReferenceKind(value:hl.Bytes):Int;
 	@:hlNative("flight", "flight_free_audio_resource_reference_resolution_explanation")
 	public static function freeAudioResourceReferenceResolutionExplanation(ptr:flight._hl.AudioResourceReferenceResolutionExplanation):Void;
 	@:hlNative("flight", "flight_free_audio_resource_reference")

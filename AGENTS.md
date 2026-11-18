@@ -39,7 +39,7 @@ implementation backend or local C++ SDK adapters.
 ## Source and toolchains
 
 Flight is pinned to `develop` revision
-`49c510e875461a9235b24ee846015ec1b47acd2a`. The inspected `main` revision lacks
+`5e1121e4cfdfde289b5373693dd285a2035dd285`. The inspected `main` revision lacks
 `flight-ffi`, `flight-bindgen`, and `scripts/check-haxe-bindings.sh`.
 `npm run rehydrate` materializes only Flight into ignored `.dependencies/flight`.
 Consumers use checked-in externs and need no Cargo or Node generation dependency.
@@ -62,20 +62,19 @@ It stages dev binaries. Set up native test dependencies with
 `npm run package:haxelib` packages staged platforms into the consumer ZIP.
 
 The upstream command is `npm run check:externs:upstream`; the supplied script
-passes HL/cpp/JS with Rust 1.96.0. Cargo 1.100 changes the build output layout and
-breaks that script's old glob, so retain the toolchain pin. Our intake uses Cargo
-messages rather than globbing build directories. Provenance records toolchain
+checks HL/cpp/JS with Rust 1.96.0. Both the upstream script and the local intake
+read the active build's Cargo messages to locate generated artifacts. Provenance records toolchain
 identity and host architecture as well as offsets, because native layouts must
 match the binary they describe.
 
 ## Runtime scope
 
-The tracked Rust producer patch supplies the C header and HL shim missing from
-the pinned Flight revision. It is local reviewable upstream work, not a claim
-that these changes have landed in Flight. Linux64 smoke execution and full HL
+Flight generates the C header, HL shim, and Haxe declarations. The local patch
+stack preserves downstream ownership and runtime behavior, and connects selected
+new native APIs to Haxe. Linux64 smoke execution and full HL
 declaration loading do not certify every API or other platforms. macOS, Windows,
 ARM and iOS configuration requires validation on the relevant hosts/SDKs.
-The second Rust producer patch binds JS directly to `@flighthq/*` using compiler
+The Rust producer binds JS directly to `@flighthq/*` using compiler
 naming. Real math/geometry execution and tree-shaking pass; this does not certify
 every SDK API or browser rendering. Never replace SDK execution with fixtures.
 CI runs installed-package cpp/HL/Lime on Linux, Intel macOS and Windows; Apple SDK

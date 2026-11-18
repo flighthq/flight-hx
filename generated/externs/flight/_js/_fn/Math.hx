@@ -80,6 +80,8 @@ extern class Math {
 	public static function randomExponential(random:Dynamic, rate:Null<Float>):Float;
 	@:native("randomGaussian")
 	public static function randomGaussian(random:Dynamic, mean:Null<Float>, standardDeviation:Null<Float>):Float;
+	@:native("randomGaussianPair")
+	public static function randomGaussianPair(random:Dynamic, mean:Null<Float>, standardDeviation:Null<Float>):Array<Float>;
 	@:native("randomInsideUnitDisc")
 	public static function randomInsideUnitDisc(out:Dynamic, random:Dynamic):Void;
 	@:native("randomInsideUnitSphere")

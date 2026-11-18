@@ -363,40 +363,6 @@ extern inline function validateSkeleton2d(skeleton:Skeleton2D):String {
 }
 #end
 #if (js && flight_esm)
-extern inline function createSkeleton2dAnimationTargetHandle(kind:String, target:Unknown):Skeleton2DAnimationTargetHandle {
-	return flight._js._fn.Skeleton2D.createSkeleton2dAnimationTargetHandle(kind, target);
-}
-#else
-extern inline function createSkeleton2dAnimationTargetHandle(kind:String, target:Unknown):Skeleton2DAnimationTargetHandle {
-#if hl
-	return flight._hl._fn.Skeleton2D.createSkeleton2dAnimationTargetHandle(cast kind, target);
-#elseif cpp
-	return flight._cpp._fn.Skeleton2D.createSkeleton2dAnimationTargetHandle(cast kind, target);
-#elseif (js && flight_esm)
-	return flight._js._fn.Skeleton2D.createSkeleton2dAnimationTargetHandle(kind, target);
-#else
-	#error "flight.Skeleton2D: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
-extern inline function createSkeleton2dAnimationTargetRegistry():Skeleton2DAnimationTargetBinderRegistry {
-	return flight._js._fn.Skeleton2D.createSkeleton2dAnimationTargetRegistry();
-}
-#else
-extern inline function createSkeleton2dAnimationTargetRegistry():Skeleton2DAnimationTargetBinderRegistry {
-#if hl
-	return flight._hl._fn.Skeleton2D.createSkeleton2dAnimationTargetRegistry();
-#elseif cpp
-	return flight._cpp._fn.Skeleton2D.createSkeleton2dAnimationTargetRegistry();
-#elseif (js && flight_esm)
-	return flight._js._fn.Skeleton2D.createSkeleton2dAnimationTargetRegistry();
-#else
-	#error "flight.Skeleton2D: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
 extern inline function createSkeleton2dBoneAnimationTarget(boneIndex:Int, path:String):Skeleton2DAnimationTarget {
 	return flight._js._fn.Skeleton2D.createSkeleton2dBoneAnimationTarget(boneIndex, path);
 }
@@ -680,40 +646,6 @@ extern inline function freeSkeleton2DdeformLengthExplanation(ptr:Skeleton2DDefor
 	flight._cpp._fn.Skeleton2D.freeSkeleton2DdeformLengthExplanation(ptr);
 #elseif (js && flight_esm)
 	flight._js._fn.Skeleton2D.freeSkeleton2DdeformLengthExplanation(ptr);
-#else
-	#error "flight.Skeleton2D: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
-extern inline function freeSkeleton2DanimationTargetHandle(ptr:Skeleton2DAnimationTargetHandle):Void {
-	flight._js._fn.Skeleton2D.freeSkeleton2DanimationTargetHandle(ptr);
-}
-#else
-extern inline function freeSkeleton2DanimationTargetHandle(ptr:Skeleton2DAnimationTargetHandle):Void {
-#if hl
-	flight._hl._fn.Skeleton2D.freeSkeleton2DanimationTargetHandle(ptr);
-#elseif cpp
-	flight._cpp._fn.Skeleton2D.freeSkeleton2DanimationTargetHandle(ptr);
-#elseif (js && flight_esm)
-	flight._js._fn.Skeleton2D.freeSkeleton2DanimationTargetHandle(ptr);
-#else
-	#error "flight.Skeleton2D: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
-extern inline function freeSkeleton2DanimationTargetBinderRegistry(ptr:Skeleton2DAnimationTargetBinderRegistry):Void {
-	flight._js._fn.Skeleton2D.freeSkeleton2DanimationTargetBinderRegistry(ptr);
-}
-#else
-extern inline function freeSkeleton2DanimationTargetBinderRegistry(ptr:Skeleton2DAnimationTargetBinderRegistry):Void {
-#if hl
-	flight._hl._fn.Skeleton2D.freeSkeleton2DanimationTargetBinderRegistry(ptr);
-#elseif cpp
-	flight._cpp._fn.Skeleton2D.freeSkeleton2DanimationTargetBinderRegistry(ptr);
-#elseif (js && flight_esm)
-	flight._js._fn.Skeleton2D.freeSkeleton2DanimationTargetBinderRegistry(ptr);
 #else
 	#error "flight.Skeleton2D: no backend for this target."
 #end

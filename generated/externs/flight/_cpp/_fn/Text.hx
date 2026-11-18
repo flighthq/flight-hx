@@ -18,7 +18,7 @@ extern class Text {
 	@:native("flight_patch_native_text_style")
 	public static function patchNativeTextStyle(source:cpp.Star<cpp.Void>, patch:flight._cpp.NativeTextStyle):Void;
 	@:native("flight_set_native_text_auto_size")
-	public static function setNativeTextAutoSize(source:cpp.Star<cpp.Void>, value:flight._cpp.TextAutoSize):Void;
+	public static function setNativeTextAutoSize(source:cpp.Star<cpp.Void>, value:Int):Void;
 	@:native("flight_set_native_text_height")
 	public static function setNativeTextHeight(source:cpp.Star<cpp.Void>, value:Single):Void;
 	@:native("flight_set_native_text_string")
@@ -26,7 +26,7 @@ extern class Text {
 	@:native("flight_set_native_text_style")
 	public static function setNativeTextStyle(source:cpp.Star<cpp.Void>, value:cpp.Star<cpp.Void>):Void;
 	@:native("flight_set_native_text_vertical_align")
-	public static function setNativeTextVerticalAlign(source:cpp.Star<cpp.Void>, value:flight._cpp.TextVerticalAlign):Void;
+	public static function setNativeTextVerticalAlign(source:cpp.Star<cpp.Void>, value:Int):Void;
 	@:native("flight_set_native_text_width")
 	public static function setNativeTextWidth(source:cpp.Star<cpp.Void>, value:Single):Void;
 	@:native("flight_append_rich_text_string")
@@ -118,7 +118,7 @@ extern class Text {
 	@:native("flight_set_rich_text_text_color")
 	public static function setRichTextTextColor(source:cpp.Star<cpp.Void>, value:Int):Void;
 	@:native("flight_set_rich_text_vertical_align")
-	public static function setRichTextVerticalAlign(source:cpp.Star<cpp.Void>, value:flight._cpp.TextVerticalAlign):Void;
+	public static function setRichTextVerticalAlign(source:cpp.Star<cpp.Void>, value:Int):Void;
 	@:native("flight_set_rich_text_width")
 	public static function setRichTextWidth(source:cpp.Star<cpp.Void>, value:Single):Void;
 	@:native("flight_set_rich_text_word_wrap")
@@ -134,7 +134,7 @@ extern class Text {
 	@:native("flight_get_text_label_string")
 	public static function getTextLabelString(source:flight._cpp.TextLabel):cpp.ConstCharStar;
 	@:native("flight_set_text_label_auto_size")
-	public static function setTextLabelAutoSize(source:cpp.Star<cpp.Void>, value:flight._cpp.TextAutoSize):Void;
+	public static function setTextLabelAutoSize(source:cpp.Star<cpp.Void>, value:Int):Void;
 	@:native("flight_set_text_label_format")
 	public static function setTextLabelFormat(source:cpp.Star<cpp.Void>, value:cpp.Star<cpp.Void>):Void;
 	@:native("flight_set_text_label_height")
@@ -142,7 +142,7 @@ extern class Text {
 	@:native("flight_set_text_label_string")
 	public static function setTextLabelString(source:cpp.Star<cpp.Void>, value:cpp.ConstCharStar):Void;
 	@:native("flight_set_text_label_vertical_align")
-	public static function setTextLabelVerticalAlign(source:cpp.Star<cpp.Void>, value:flight._cpp.TextVerticalAlign):Void;
+	public static function setTextLabelVerticalAlign(source:cpp.Star<cpp.Void>, value:Int):Void;
 	@:native("flight_set_text_label_width")
 	public static function setTextLabelWidth(source:cpp.Star<cpp.Void>, value:Single):Void;
 	@:native("flight_get_text_layout")

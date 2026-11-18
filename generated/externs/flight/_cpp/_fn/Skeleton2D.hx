@@ -41,10 +41,6 @@ extern class Skeleton2D {
 	public static function setSkeleton2dBindPose(skeleton:flight._cpp.Skeleton2D):Void;
 	@:native("flight_validate_skeleton_2d")
 	public static function validateSkeleton2d(skeleton:flight._cpp.Skeleton2D):cpp.ConstCharStar;
-	@:native("flight_create_skeleton_2d_animation_target_handle")
-	public static function createSkeleton2dAnimationTargetHandle(kind:cpp.ConstCharStar, target:flight._cpp.Unknown):flight._cpp.Skeleton2DAnimationTargetHandle;
-	@:native("flight_create_skeleton_2d_animation_target_registry")
-	public static function createSkeleton2dAnimationTargetRegistry():flight._cpp.Skeleton2DAnimationTargetBinderRegistry;
 	@:native("flight_create_skeleton_2d_bone_animation_target")
 	public static function createSkeleton2dBoneAnimationTarget(boneIndex:Int, path:cpp.ConstCharStar):flight._cpp.Skeleton2DAnimationTarget;
 	@:native("flight_create_skeleton_2d_slot_animation_target")
@@ -79,10 +75,6 @@ extern class Skeleton2D {
 	public static function solveSkeleton2dTransformConstraintSkeleton2DtransformConstraint(skeleton:flight._cpp.Skeleton2D, constraint:flight._cpp.Skeleton2DTransformConstraint):Void;
 	@:native("flight_free_skeleton2_ddeform_length_explanation")
 	public static function freeSkeleton2DdeformLengthExplanation(ptr:flight._cpp.Skeleton2DDeformLengthExplanation):Void;
-	@:native("flight_free_skeleton2_danimation_target_handle")
-	public static function freeSkeleton2DanimationTargetHandle(ptr:flight._cpp.Skeleton2DAnimationTargetHandle):Void;
-	@:native("flight_free_skeleton2_danimation_target_binder_registry")
-	public static function freeSkeleton2DanimationTargetBinderRegistry(ptr:flight._cpp.Skeleton2DAnimationTargetBinderRegistry):Void;
 	@:native("flight_free_skeleton2_danimation_target")
 	public static function freeSkeleton2DanimationTarget(ptr:flight._cpp.Skeleton2DAnimationTarget):Void;
 	@:native("flight_free_skeleton2_dslot_animation_target")

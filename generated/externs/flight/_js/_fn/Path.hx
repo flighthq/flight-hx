@@ -20,6 +20,8 @@ extern class Path {
 	public static function explainStrokePathTessellation(path:flight._js.Path, style:flight._js.StrokeStyle, tolerance:Null<Float>):flight._js.StrokePathTessellationExplanation;
 	@:native("fitPathCurves")
 	public static function fitPathCurves(source:flight._js.Path, tolerance:Float, out:flight._js.Path, flattenTolerance:Null<Float>):Void;
+	@:native("getPathBounds")
+	public static function getPathBounds(path:flight._js.Path, out:flight._js.Rectangle):Bool;
 	@:native("getPathContourLengths")
 	public static function getPathContourLengths(path:flight._js.Path, tolerance:Null<Float>):Dynamic;
 	@:native("getPathCurvatureAtDistance")
@@ -88,6 +90,8 @@ extern class Path {
 	public static function appendPathRoundedRectangleWithCornerRadii(path:flight._js.Path, x:Float, y:Float, width:Float, height:Float, topLeft:Float, topRight:Float, bottomRight:Float, bottomLeft:Float):Void;
 	@:native("appendPathTangentArcTo")
 	public static function appendPathTangentArcTo(path:flight._js.Path, x1:Float, y1:Float, x2:Float, y2:Float, radius:Float):Void;
+	@:native("getPathLastPoint")
+	public static function getPathLastPoint(path:flight._js.Path):Null<Array<Float>>;
 	@:native("createPathMorph")
 	public static function createPathMorph(start:flight._js.Path, end:flight._js.Path):Null<flight._js.PathMorph>;
 	@:native("samplePathMorph")

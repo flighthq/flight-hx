@@ -18,6 +18,23 @@ extern inline function parseXmlDocument(xml:String):XmlElement {
 }
 #end
 #if (js && flight_esm)
+extern inline function getXmlElementAttribute(element:XmlElement, name:String):Null<String> {
+	return flight._js._fn.Xml.getXmlElementAttribute(element, name);
+}
+#else
+extern inline function getXmlElementAttribute(element:XmlElement, name:String):String {
+#if hl
+	return cast flight._hl._fn.Xml.getXmlElementAttribute(element, cast name);
+#elseif cpp
+	return cast flight._cpp._fn.Xml.getXmlElementAttribute(element, cast name);
+#elseif (js && flight_esm)
+	return cast flight._js._fn.Xml.getXmlElementAttribute(element, name);
+#else
+	#error "flight.Xml: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
 extern inline function getXmlElementAttributeNumber(element:XmlElement, name:String):Null<Float> {
 	return flight._js._fn.Xml.getXmlElementAttributeNumber(element, name);
 }

@@ -26,8 +26,6 @@ extern class Animation {
 	public static function sampleAnimationBlendTreeChannel(out:Dynamic, tree:flight._js.AnimationBlendTree, channelIndex:Int):Bool;
 	@:native("setAnimationBlendTreeInputWeight")
 	public static function setAnimationBlendTreeInputWeight(tree:flight._js.AnimationBlendTree, inputIndex:Int, weight:Float):Bool;
-	@:native("createAnimationChannel")
-	public static function createAnimationChannel(track:Dynamic, targetRef:flight._js.TargetRef):flight._js.AnimationChannel;
 	@:native("createAnimationClip")
 	public static function createAnimationClip(channels:Dynamic, duration:Null<Float>, events:Dynamic):flight._js.AnimationClip;
 	@:native("createAnimationClipEvent")
@@ -92,8 +90,6 @@ extern class Animation {
 	public static function sampleAnimationStateMachine(out:Dynamic, machine:flight._js.AnimationStateMachine, visit:Dynamic):Void;
 	@:native("sampleAnimationStateMachineChannel")
 	public static function sampleAnimationStateMachineChannel(out:Dynamic, machine:flight._js.AnimationStateMachine, channelIndex:Int):Bool;
-	@:native("transitionAnimationStateMachine")
-	public static function transitionAnimationStateMachine(machine:flight._js.AnimationStateMachine, toState:flight._js.StateRef, duration:Float, curve:Null<Dynamic>):Bool;
 	@:native("createAnimationTrack")
 	public static function createAnimationTrack():flight._js.AnimationTrack;
 	@:native("cloneAnimationTrack")
@@ -104,18 +100,12 @@ extern class Animation {
 	public static function trimAnimationTrack(track:flight._js.AnimationTrack, startTime:Float, endTime:Float):flight._js.AnimationTrack;
 	@:native("validateAnimationTrack")
 	public static function validateAnimationTrack(out:Dynamic, track:flight._js.AnimationTrack):Bool;
-	@:native("createStateRefFromIndex")
-	public static function createStateRefFromIndex(index:Int):flight._js.StateRef;
-	@:native("createStateRefFromName")
-	public static function createStateRefFromName(name:String):flight._js.StateRef;
 	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeAnimationSampleAccumulator(ptr:flight._js.AnimationSampleAccumulator):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeAnimationBlendTree(ptr:flight._js.AnimationBlendTree):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeAnimationBlendTreeInput(ptr:flight._js.AnimationBlendTreeInput):Void {}
-	/** Native allocation release is unnecessary on JavaScript. */
-	public static inline function freeAnimationChannel(ptr:flight._js.AnimationChannel):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeAnimationClip(ptr:flight._js.AnimationClip):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */
@@ -134,6 +124,4 @@ extern class Animation {
 	public static inline function freeAnimationStateMachineState(ptr:flight._js.AnimationStateMachineState):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeAnimationTrack(ptr:flight._js.AnimationTrack):Void {}
-	/** Native allocation release is unnecessary on JavaScript. */
-	public static inline function freeStateRef(ptr:flight._js.StateRef):Void {}
 }

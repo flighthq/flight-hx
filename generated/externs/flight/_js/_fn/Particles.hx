@@ -30,8 +30,6 @@ extern class Particles {
 	public static function sampleParticleCurve(lut:Dynamic, t:Float):Float;
 	@:native("createParticleEmitterConfig")
 	public static function createParticleEmitterConfig(config:Null<flight._js.ParticleEmitterConfigOptions>):flight._js.ParticleEmitterConfig;
-	@:native("createParticleEmitterConfigOptions")
-	public static function createParticleEmitterConfigOptions():flight._js.ParticleEmitterConfigOptions;
 	@:native("enableParticleEmitterSignals")
 	public static function enableParticleEmitterSignals(state:flight._js.ParticleEmitterState):flight._js.ParticleEmitterSignals;
 	@:native("getParticleEmitterSignals")
@@ -42,8 +40,6 @@ extern class Particles {
 	public static function createParticleObjectsState():flight._js.ParticleObjectsState;
 	@:native("stepParticleObjects")
 	public static function stepParticleObjects(objects:Dynamic, state:flight._js.ParticleObjectsState, config:flight._js.ParticleEmitterConfig, deltaTime:Float, forces:Null<Dynamic>, colliders:Null<Dynamic>, updateOptions:Null<flight._js.ParticleObjectsUpdateOptions>):Void;
-	@:native("particleBlendModeAsStr")
-	public static function particleBlendModeAsStr(mode:Dynamic):String;
 	@:native("isParticleObjectsComplete")
 	public static function isParticleObjectsComplete(objects:Dynamic, state:flight._js.ParticleObjectsState, config:flight._js.ParticleEmitterConfig):Bool;
 	@:native("updateParticleObjects")
@@ -54,8 +50,6 @@ extern class Particles {
 	public static function validateParticleEmitterConfig(out:Dynamic, config:flight._js.ParticleEmitterConfig):Void;
 	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeParticleEmitterConfig(ptr:flight._js.ParticleEmitterConfig):Void {}
-	/** Native allocation release is unnecessary on JavaScript. */
-	public static inline function freeParticleEmitterConfigOptions(ptr:flight._js.ParticleEmitterConfigOptions):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeParticleEmitterSignals(ptr:flight._js.ParticleEmitterSignals):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */

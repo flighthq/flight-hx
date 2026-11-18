@@ -4,16 +4,12 @@ package flight._js._fn;
 extern class ParticlesFormats {
 	@:native("detectParticleFormat")
 	public static function detectParticleFormat(registry:flight._js.ParticleFormatRegistry, text:String):Null<flight._js.ParticleFormatKind>;
-	@:native("createParticleFormatRegistry")
-	public static function createParticleFormatRegistry():flight._js.ParticleFormatRegistry;
 	@:native("detectRegisteredParticleFormat")
 	public static function detectRegisteredParticleFormat(registry:flight._js.ParticleFormatRegistry, text:String):Null<flight._js.ParticleFormatKind>;
 	@:native("getRegisteredParticleFormats")
 	public static function getRegisteredParticleFormats(out:Dynamic, registry:flight._js.ParticleFormatRegistry):Void;
 	@:native("parseRegisteredParticleFormat")
 	public static function parseRegisteredParticleFormat(registry:flight._js.ParticleFormatRegistry, text:String, kind:String, options:Null<flight._js.ParseParticleConfigOptions>):flight._js.ParticleConfigParseResult;
-	@:native("registerParticleFormat")
-	public static function registerParticleFormat(registry:flight._js.ParticleFormatRegistry, kind:String, codec:flight._js.ParticleFormatCodec):Void;
 	@:native("unregisterParticleFormat")
 	public static function unregisterParticleFormat(registry:flight._js.ParticleFormatRegistry, kind:String):Bool;
 	@:native("parseLibgdxParticle")
@@ -40,22 +36,8 @@ extern class ParticlesFormats {
 	public static function parsePixiParticle(json:String):flight._js.ParticleEmitterConfig;
 	@:native("parsePixiParticleDocument")
 	public static function parsePixiParticleDocument(json:String):flight._js.PixiParseResult;
-	@:native("createParticleAllFormats")
-	public static function createParticleAllFormats():Dynamic;
 	@:native("applyParticleImportOptions")
 	public static function applyParticleImportOptions(registry:flight._js.ParticleFormatRegistry, options:flight._js.ParticleImportOptions):Void;
-	@:native("getLibgdxParticleFormat")
-	public static function getLibgdxParticleFormat():flight._js.ParticleFormatDescriptor;
-	@:native("getParticleDesignerParticleFormat")
-	public static function getParticleDesignerParticleFormat():flight._js.ParticleFormatDescriptor;
-	@:native("getPixiParticleFormat")
-	public static function getPixiParticleFormat():flight._js.ParticleFormatDescriptor;
-	@:native("getSpineParticleFormat")
-	public static function getSpineParticleFormat():flight._js.ParticleFormatDescriptor;
-	@:native("getStarlingPexParticleFormat")
-	public static function getStarlingPexParticleFormat():flight._js.ParticleFormatDescriptor;
-	@:native("getUnityParticleFormat")
-	public static function getUnityParticleFormat():flight._js.ParticleFormatDescriptor;
 	@:native("registerBuiltInParticleFormats")
 	public static function registerBuiltInParticleFormats(registry:flight._js.ParticleFormatRegistry):Void;
 	@:native("parseSpineParticle")
@@ -85,8 +67,6 @@ extern class ParticlesFormats {
 	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeParticleFormatKind(ptr:flight._js.ParticleFormatKind):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */
-	public static inline function freeParticleFormatRegistry(ptr:flight._js.ParticleFormatRegistry):Void {}
-	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeParticleConfigParseResult(ptr:flight._js.ParticleConfigParseResult):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeLibgdxParseResult(ptr:flight._js.LibgdxParseResult):Void {}
@@ -96,8 +76,6 @@ extern class ParticlesFormats {
 	public static inline function freeParticleDesignerParseResult(ptr:flight._js.ParticleDesignerParseResult):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freePixiParseResult(ptr:flight._js.PixiParseResult):Void {}
-	/** Native allocation release is unnecessary on JavaScript. */
-	public static inline function freeParticleFormatDescriptor(ptr:flight._js.ParticleFormatDescriptor):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeSpineParseResult(ptr:flight._js.SpineParseResult):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */

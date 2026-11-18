@@ -96,8 +96,6 @@ extern class Node {
 	public static function swapNodeChildren(target:Dynamic, child1:Dynamic, child2:Dynamic):Void;
 	@:native("swapNodeChildrenAt")
 	public static function swapNodeChildrenAt(target:Dynamic, index1:Int, index2:Int):Void;
-	@:native("createNodeRuntime")
-	public static function createNodeRuntime(methods:Null<flight._js.NodeRuntimeMethods>):flight._js.NodeRuntime;
 	@:native("createNodeSignals")
 	public static function createNodeSignals():Dynamic;
 	@:native("defaultNodeRuntimeCanAddChild")
@@ -106,8 +104,6 @@ extern class Node {
 	public static function disposeNode(target:Dynamic):Void;
 	@:native("enableNodeSignals")
 	public static function enableNodeSignals(source:Dynamic):Dynamic;
-	@:native("getNodeRuntime")
-	public static function getNodeRuntime(source:Dynamic):flight._js.NodeRuntime;
 	@:native("getNodeSignals")
 	public static function getNodeSignals(source:Dynamic):Null<Dynamic>;
 	@:native("setNodeEnabled")
@@ -218,8 +214,6 @@ extern class Node {
 	public static function createViewport():flight._js.Viewport;
 	@:native("getViewportAspect")
 	public static function getViewportAspect(viewport:flight._js.Viewport):Float;
-	/** Native allocation release is unnecessary on JavaScript. */
-	public static inline function freeNodeRuntime(ptr:flight._js.NodeRuntime):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeNodeOrderList(ptr:flight._js.NodeOrderList):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */

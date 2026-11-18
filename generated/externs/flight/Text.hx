@@ -137,11 +137,11 @@ extern inline function patchNativeTextStyle(source:Dynamic, patch:NativeTextStyl
 }
 #end
 #if (js && flight_esm)
-extern inline function setNativeTextAutoSize(source:Dynamic, value:TextAutoSize):Void {
+extern inline function setNativeTextAutoSize(source:Dynamic, value:Dynamic):Void {
 	flight._js._fn.Text.setNativeTextAutoSize(source, value);
 }
 #else
-extern inline function setNativeTextAutoSize(source:Dynamic, value:TextAutoSize):Void {
+extern inline function setNativeTextAutoSize(source:Dynamic, value:flight.TextAutoSize):Void {
 #if hl
 	flight._hl._fn.Text.setNativeTextAutoSize(source, value);
 #elseif cpp
@@ -205,11 +205,11 @@ extern inline function setNativeTextStyle(source:Dynamic, value:Dynamic):Void {
 }
 #end
 #if (js && flight_esm)
-extern inline function setNativeTextVerticalAlign(source:Dynamic, value:TextVerticalAlign):Void {
+extern inline function setNativeTextVerticalAlign(source:Dynamic, value:Dynamic):Void {
 	flight._js._fn.Text.setNativeTextVerticalAlign(source, value);
 }
 #else
-extern inline function setNativeTextVerticalAlign(source:Dynamic, value:TextVerticalAlign):Void {
+extern inline function setNativeTextVerticalAlign(source:Dynamic, value:flight.TextVerticalAlign):Void {
 #if hl
 	flight._hl._fn.Text.setNativeTextVerticalAlign(source, value);
 #elseif cpp
@@ -987,11 +987,11 @@ extern inline function setRichTextTextColor(source:Dynamic, value:Int):Void {
 }
 #end
 #if (js && flight_esm)
-extern inline function setRichTextVerticalAlign(source:Dynamic, value:TextVerticalAlign):Void {
+extern inline function setRichTextVerticalAlign(source:Dynamic, value:Dynamic):Void {
 	flight._js._fn.Text.setRichTextVerticalAlign(source, value);
 }
 #else
-extern inline function setRichTextVerticalAlign(source:Dynamic, value:TextVerticalAlign):Void {
+extern inline function setRichTextVerticalAlign(source:Dynamic, value:flight.TextVerticalAlign):Void {
 #if hl
 	flight._hl._fn.Text.setRichTextVerticalAlign(source, value);
 #elseif cpp
@@ -1123,11 +1123,11 @@ extern inline function getTextLabelString(source:TextLabel):String {
 }
 #end
 #if (js && flight_esm)
-extern inline function setTextLabelAutoSize(source:Dynamic, value:TextAutoSize):Void {
+extern inline function setTextLabelAutoSize(source:Dynamic, value:Dynamic):Void {
 	flight._js._fn.Text.setTextLabelAutoSize(source, value);
 }
 #else
-extern inline function setTextLabelAutoSize(source:Dynamic, value:TextAutoSize):Void {
+extern inline function setTextLabelAutoSize(source:Dynamic, value:flight.TextAutoSize):Void {
 #if hl
 	flight._hl._fn.Text.setTextLabelAutoSize(source, value);
 #elseif cpp
@@ -1191,11 +1191,11 @@ extern inline function setTextLabelString(source:Dynamic, value:String):Void {
 }
 #end
 #if (js && flight_esm)
-extern inline function setTextLabelVerticalAlign(source:Dynamic, value:TextVerticalAlign):Void {
+extern inline function setTextLabelVerticalAlign(source:Dynamic, value:Dynamic):Void {
 	flight._js._fn.Text.setTextLabelVerticalAlign(source, value);
 }
 #else
-extern inline function setTextLabelVerticalAlign(source:Dynamic, value:TextVerticalAlign):Void {
+extern inline function setTextLabelVerticalAlign(source:Dynamic, value:flight.TextVerticalAlign):Void {
 #if hl
 	flight._hl._fn.Text.setTextLabelVerticalAlign(source, value);
 #elseif cpp

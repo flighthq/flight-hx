@@ -4,12 +4,6 @@ package flight._js._fn;
 extern class Tilemap {
 	@:native("createTilemap")
 	public static function createTilemap():Dynamic;
-	@:native("createTilemapData")
-	public static function createTilemapData():flight._js.TilemapData;
-	@:native("createTilemapRuntime")
-	public static function createTilemapRuntime():flight._js.TilemapRuntime;
-	@:native("createTilemapSignals")
-	public static function createTilemapSignals():flight._js.TilemapSignals;
 	@:native("clearTilemap")
 	public static function clearTilemap(tilemap:flight._js.Tilemap):Void;
 	@:native("cloneTilemap")
@@ -26,8 +20,6 @@ extern class Tilemap {
 	public static function getTilemapColumnRowAtPoint(out:flight._js.Vector2, source:flight._js.Tilemap, x:Float, y:Float):Bool;
 	@:native("getTilemapRowAtY")
 	public static function getTilemapRowAtY(source:flight._js.Tilemap, y:Float):Int;
-	@:native("getTilemapRuntime")
-	public static function getTilemapRuntime(source:flight._js.Tilemap):flight._js.TilemapRuntime;
 	@:native("getTilemapTile")
 	public static function getTilemapTile(tilemap:flight._js.Tilemap, column:Int, row:Int):Int;
 	@:native("getTilemapTileAtPoint")
@@ -44,10 +36,4 @@ extern class Tilemap {
 	public static function setTilemapTileTint(tilemap:flight._js.Tilemap, column:Int, row:Int, rgba:Int):Void;
 	@:native("setTilemapTiles")
 	public static function setTilemapTiles(tilemap:flight._js.Tilemap, ids:Dynamic, offsetColumn:Int, offsetRow:Int, width:Int, height:Int):Void;
-	/** Native allocation release is unnecessary on JavaScript. */
-	public static inline function freeTilemapData(ptr:flight._js.TilemapData):Void {}
-	/** Native allocation release is unnecessary on JavaScript. */
-	public static inline function freeTilemapRuntime(ptr:flight._js.TilemapRuntime):Void {}
-	/** Native allocation release is unnecessary on JavaScript. */
-	public static inline function freeTilemapSignals(ptr:flight._js.TilemapSignals):Void {}
 }

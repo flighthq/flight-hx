@@ -25,8 +25,12 @@ extern class Shape {
 	public static function applyMorphShapeAnimationSample(sampled:cpp.Star<cpp.Void>, sampledLen:Int, channel:flight._cpp.AnimationChannel):Bool;
 	@:native("flight_append_morph_shape_begin_fill")
 	public static function appendMorphShapeBeginFill(shape:cpp.Star<cpp.Void>, start:flight._cpp.MorphShapeColorEndpoint, end:flight._cpp.MorphShapeColorEndpoint):Void;
+	@:native("flight_append_morph_shape_begin_gradient_fill")
+	public static function appendMorphShapeBeginGradientFill(shape:cpp.Star<cpp.Void>, gradientType:Int, start:flight._cpp.MorphShapeGradientEndpoint, end:flight._cpp.MorphShapeGradientEndpoint, spreadMethod:Int, interpolationMethod:Int):Bool;
 	@:native("flight_append_morph_shape_begin_texture_fill")
 	public static function appendMorphShapeBeginTextureFill(shape:cpp.Star<cpp.Void>, texture:cpp.Star<cpp.Void>, startMatrix:flight._cpp.Matrix, endMatrix:flight._cpp.Matrix):Void;
+	@:native("flight_append_morph_shape_line_gradient_style")
+	public static function appendMorphShapeLineGradientStyle(shape:cpp.Star<cpp.Void>, gradientType:Int, start:flight._cpp.MorphShapeGradientEndpoint, end:flight._cpp.MorphShapeGradientEndpoint, spreadMethod:Int, interpolationMethod:Int):Bool;
 	@:native("flight_append_morph_shape_line_style")
 	public static function appendMorphShapeLineStyle(shape:cpp.Star<cpp.Void>, start:flight._cpp.MorphShapeLineEndpoint, end:flight._cpp.MorphShapeLineEndpoint, pixelHinting:Int, scaleMode:Int, caps:Int, joints:Int, miterLimit:Float):Void;
 	@:native("flight_append_morph_shape_line_texture_style")

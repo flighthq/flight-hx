@@ -205,23 +205,6 @@ extern inline function setAnimationBlendTreeInputWeight(tree:AnimationBlendTree,
 }
 #end
 #if (js && flight_esm)
-extern inline function createAnimationChannel(track:Dynamic, targetRef:TargetRef):AnimationChannel {
-	return flight._js._fn.Animation.createAnimationChannel(track, targetRef);
-}
-#else
-extern inline function createAnimationChannel(track:Dynamic, targetRef:TargetRef):AnimationChannel {
-#if hl
-	return flight._hl._fn.Animation.createAnimationChannel(track, targetRef);
-#elseif cpp
-	return flight._cpp._fn.Animation.createAnimationChannel(track, targetRef);
-#elseif (js && flight_esm)
-	return flight._js._fn.Animation.createAnimationChannel(track, targetRef);
-#else
-	#error "flight.Animation: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
 extern inline function createAnimationClip(channels:Dynamic, duration:Null<Float>, events:Dynamic):AnimationClip {
 	return flight._js._fn.Animation.createAnimationClip(channels, duration, events);
 }
@@ -766,23 +749,6 @@ extern inline function sampleAnimationStateMachineChannel(out:Dynamic, outLen:In
 }
 #end
 #if (js && flight_esm)
-extern inline function transitionAnimationStateMachine(machine:AnimationStateMachine, toState:StateRef, duration:Float, curve:Null<Dynamic>):Bool {
-	return flight._js._fn.Animation.transitionAnimationStateMachine(machine, toState, duration, curve);
-}
-#else
-extern inline function transitionAnimationStateMachine(machine:AnimationStateMachine, toState:StateRef, duration:Float, curveFn:Dynamic, curveCtx:Dynamic):Bool {
-#if hl
-	return flight._hl._fn.Animation.transitionAnimationStateMachine(machine, toState, duration, curveFn, curveCtx);
-#elseif cpp
-	return flight._cpp._fn.Animation.transitionAnimationStateMachine(machine, toState, duration, curveFn, curveCtx);
-#elseif (js && flight_esm)
-	return flight._js._fn.Animation.transitionAnimationStateMachine(machine, toState, duration, curveFn, curveCtx);
-#else
-	#error "flight.Animation: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
 extern inline function createAnimationTrack():AnimationTrack {
 	return flight._js._fn.Animation.createAnimationTrack();
 }
@@ -868,40 +834,6 @@ extern inline function validateAnimationTrack(out:Dynamic, track:AnimationTrack)
 }
 #end
 #if (js && flight_esm)
-extern inline function createStateRefFromIndex(index:Int):StateRef {
-	return flight._js._fn.Animation.createStateRefFromIndex(index);
-}
-#else
-extern inline function createStateRefFromIndex(index:Int):StateRef {
-#if hl
-	return flight._hl._fn.Animation.createStateRefFromIndex(index);
-#elseif cpp
-	return flight._cpp._fn.Animation.createStateRefFromIndex(index);
-#elseif (js && flight_esm)
-	return flight._js._fn.Animation.createStateRefFromIndex(index);
-#else
-	#error "flight.Animation: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
-extern inline function createStateRefFromName(name:String):StateRef {
-	return flight._js._fn.Animation.createStateRefFromName(name);
-}
-#else
-extern inline function createStateRefFromName(name:String):StateRef {
-#if hl
-	return flight._hl._fn.Animation.createStateRefFromName(cast name);
-#elseif cpp
-	return flight._cpp._fn.Animation.createStateRefFromName(cast name);
-#elseif (js && flight_esm)
-	return flight._js._fn.Animation.createStateRefFromName(name);
-#else
-	#error "flight.Animation: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
 extern inline function freeAnimationSampleAccumulator(ptr:AnimationSampleAccumulator):Void {
 	flight._js._fn.Animation.freeAnimationSampleAccumulator(ptr);
 }
@@ -947,23 +879,6 @@ extern inline function freeAnimationBlendTreeInput(ptr:AnimationBlendTreeInput):
 	flight._cpp._fn.Animation.freeAnimationBlendTreeInput(ptr);
 #elseif (js && flight_esm)
 	flight._js._fn.Animation.freeAnimationBlendTreeInput(ptr);
-#else
-	#error "flight.Animation: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
-extern inline function freeAnimationChannel(ptr:AnimationChannel):Void {
-	flight._js._fn.Animation.freeAnimationChannel(ptr);
-}
-#else
-extern inline function freeAnimationChannel(ptr:AnimationChannel):Void {
-#if hl
-	flight._hl._fn.Animation.freeAnimationChannel(ptr);
-#elseif cpp
-	flight._cpp._fn.Animation.freeAnimationChannel(ptr);
-#elseif (js && flight_esm)
-	flight._js._fn.Animation.freeAnimationChannel(ptr);
 #else
 	#error "flight.Animation: no backend for this target."
 #end
@@ -1117,23 +1032,6 @@ extern inline function freeAnimationTrack(ptr:AnimationTrack):Void {
 	flight._cpp._fn.Animation.freeAnimationTrack(ptr);
 #elseif (js && flight_esm)
 	flight._js._fn.Animation.freeAnimationTrack(ptr);
-#else
-	#error "flight.Animation: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
-extern inline function freeStateRef(ptr:StateRef):Void {
-	flight._js._fn.Animation.freeStateRef(ptr);
-}
-#else
-extern inline function freeStateRef(ptr:StateRef):Void {
-#if hl
-	flight._hl._fn.Animation.freeStateRef(ptr);
-#elseif cpp
-	flight._cpp._fn.Animation.freeStateRef(ptr);
-#elseif (js && flight_esm)
-	flight._js._fn.Animation.freeStateRef(ptr);
 #else
 	#error "flight.Animation: no backend for this target."
 #end

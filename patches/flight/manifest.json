@@ -1,13 +1,11 @@
 {
-  "sourceCommit": "49c510e875461a9235b24ee846015ec1b47acd2a",
+  "sourceCommit": "5e1121e4cfdfde289b5373693dd285a2035dd285",
   "patches": [
-    "patches/flight/0001-native-artifacts.patch",
-    "patches/flight/0002-js-esm.patch",
-    "patches/flight/0003-portable-module-names.patch",
     "patches/flight/0004-hl-packed-floats.patch",
-    "patches/flight/0005-bitmap-ownership.patch",
     "patches/flight/0006-ref-handles.patch",
     "patches/flight/0007-byte-buffer-results.patch",
-    "patches/flight/0008-exported-struct-fields.patch"
+    "patches/flight/0008-exported-struct-fields.patch",
+    "patches/flight/0009-develop-compatibility.patch",
+    "patches/flight/0010-haxe-owned-carriers.patch"
   ]
 }

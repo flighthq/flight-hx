@@ -375,6 +375,23 @@ extern inline function simplifyPath(out:Path, pathBooleanKernel:PathBooleanKerne
 }
 #end
 #if (js && flight_esm)
+extern inline function unionAllPaths(out:Path, pathBooleanKernel:PathBooleanKernel, paths:Dynamic, options:Null<PathBooleanOptions>):Void {
+	flight._js._fn.PathBoolean.unionAllPaths(out, pathBooleanKernel, paths, options);
+}
+#else
+extern inline function unionAllPaths(out:Path, pathBooleanKernel:PathBooleanKernel, paths:Dynamic, pathsLen:Int, options:PathBooleanOptions):Void {
+#if hl
+	flight._hl._fn.PathBoolean.unionAllPaths(out, pathBooleanKernel, paths, pathsLen, options);
+#elseif cpp
+	flight._cpp._fn.PathBoolean.unionAllPaths(out, pathBooleanKernel, paths, pathsLen, options);
+#elseif (js && flight_esm)
+	flight._js._fn.PathBoolean.unionAllPaths(out, pathBooleanKernel, paths, pathsLen, options);
+#else
+	#error "flight.PathBoolean: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
 extern inline function freePathBooleanExplanation(ptr:PathBooleanExplanation):Void {
 	flight._js._fn.PathBoolean.freePathBooleanExplanation(ptr);
 }

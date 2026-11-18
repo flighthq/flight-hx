@@ -22,6 +22,9 @@ abstract Bitmap(cpp.Star<cpp.Void>) {
 	extern inline public function getCoverage(backgroundColor:Int, channelTolerance:Int):Float {
 		return flight._cpp._fn.Bitmap.getBitmapCoverage(cast this, backgroundColor, channelTolerance);
 	}
+	extern inline public function crop(rect:flight._cpp.Rectangle):flight._cpp.Bitmap {
+		return flight._cpp._fn.Bitmap.cropBitmap(cast this, rect);
+	}
 	extern inline public function extend(left:Int, top:Int, right:Int, bottom:Int, edgeMode:Int, fillColor:Int):flight._cpp.Bitmap {
 		return flight._cpp._fn.Bitmap.extendBitmap(cast this, left, top, right, bottom, edgeMode, fillColor);
 	}

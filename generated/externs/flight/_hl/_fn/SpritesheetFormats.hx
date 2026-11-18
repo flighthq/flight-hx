@@ -7,8 +7,6 @@ extern class SpritesheetFormats {
 	public static function serializeCocosPlistSpritesheet(data:flight._hl.SpritesheetData, existing:flight._hl.CocosPlistDocument):hl.Bytes;
 	@:hlNative("flight", "flight_format_libgdx_atlas")
 	public static function formatLibgdxAtlas(data:flight._hl.SpritesheetData):hl.Bytes;
-	@:hlNative("flight", "flight_create_spritesheet_format_registry")
-	public static function createSpritesheetFormatRegistry():flight._hl.SpritesheetFormatRegistry;
 	@:hlNative("flight", "flight_apply_spritesheet_import_options")
 	public static function applySpritesheetImportOptions(registry:flight._hl.SpritesheetFormatRegistry, options:flight._hl.SpritesheetImportOptions):Void;
 	@:hlNative("flight", "flight_aseprite_spritesheet_format")
@@ -33,8 +31,6 @@ extern class SpritesheetFormats {
 	public static function serializeStarlingSpritesheet(data:flight._hl.SpritesheetData, existing:flight._hl.StarlingDocument):hl.Bytes;
 	@:hlNative("flight", "flight_serialize_texture_packer_spritesheet")
 	public static function serializeTexturePackerSpritesheet(data:flight._hl.SpritesheetData, existing:flight._hl.TexturePackerDocument, options:flight._hl.TexturePackerSerializeOptions):hl.Bytes;
-	@:hlNative("flight", "flight_free_spritesheet_format_registry")
-	public static function freeSpritesheetFormatRegistry(ptr:flight._hl.SpritesheetFormatRegistry):Void;
 	@:hlNative("flight", "flight_free_spritesheet_format_kind")
 	public static function freeSpritesheetFormatKind(ptr:flight._hl.SpritesheetFormatKind):Void;
 }

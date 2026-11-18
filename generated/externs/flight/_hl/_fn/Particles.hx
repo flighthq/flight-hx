@@ -40,8 +40,6 @@ extern class Particles {
 	public static function sampleParticleCurve(lut:hl.Bytes, lutLen:Int, t:Single):Single;
 	@:hlNative("flight", "flight_create_particle_emitter_config")
 	public static function createParticleEmitterConfig(config:flight._hl.ParticleEmitterConfigOptions):flight._hl.ParticleEmitterConfig;
-	@:hlNative("flight", "flight_create_particle_emitter_config_options")
-	public static function createParticleEmitterConfigOptions():flight._hl.ParticleEmitterConfigOptions;
 	@:hlNative("flight", "flight_enable_particle_emitter_signals")
 	public static function enableParticleEmitterSignals(state:flight._hl.ParticleEmitterState):flight._hl.ParticleEmitterSignals;
 	@:hlNative("flight", "flight_get_particle_emitter_signals")
@@ -52,8 +50,6 @@ extern class Particles {
 	public static function createParticleObjectsState():flight._hl.ParticleObjectsState;
 	@:hlNative("flight", "flight_step_particle_objects")
 	public static function stepParticleObjects(objects:hl.Bytes, objectsLen:Int, state:flight._hl.ParticleObjectsState, config:flight._hl.ParticleEmitterConfig, deltaTime:Single, forces:hl.Bytes, forcesLen:Int, colliders:hl.Bytes, collidersLen:Int, updateOptions:flight._hl.ParticleObjectsUpdateOptions):Void;
-	@:hlNative("flight", "flight_particle_blend_mode_as_str")
-	public static function particleBlendModeAsStr(mode:Int):hl.Bytes;
 	@:hlNative("flight", "flight_is_particle_objects_complete")
 	public static function isParticleObjectsComplete(objects:hl.Bytes, objectsLen:Int, state:flight._hl.ParticleObjectsState, config:flight._hl.ParticleEmitterConfig):Bool;
 	@:hlNative("flight", "flight_update_particle_objects")
@@ -64,8 +60,6 @@ extern class Particles {
 	public static function validateParticleEmitterConfig(out:hl.Bytes, config:flight._hl.ParticleEmitterConfig):Void;
 	@:hlNative("flight", "flight_free_particle_emitter_config")
 	public static function freeParticleEmitterConfig(ptr:flight._hl.ParticleEmitterConfig):Void;
-	@:hlNative("flight", "flight_free_particle_emitter_config_options")
-	public static function freeParticleEmitterConfigOptions(ptr:flight._hl.ParticleEmitterConfigOptions):Void;
 	@:hlNative("flight", "flight_free_particle_emitter_signals")
 	public static function freeParticleEmitterSignals(ptr:flight._hl.ParticleEmitterSignals):Void;
 	@:hlNative("flight", "flight_free_particle_emitter_state")

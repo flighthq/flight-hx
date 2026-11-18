@@ -52,23 +52,6 @@ extern inline function formatLibgdxAtlas(data:SpritesheetData):String {
 }
 #end
 #if (js && flight_esm)
-extern inline function createSpritesheetFormatRegistry():SpritesheetFormatRegistry {
-	return flight._js._fn.SpritesheetFormats.createSpritesheetFormatRegistry();
-}
-#else
-extern inline function createSpritesheetFormatRegistry():SpritesheetFormatRegistry {
-#if hl
-	return flight._hl._fn.SpritesheetFormats.createSpritesheetFormatRegistry();
-#elseif cpp
-	return flight._cpp._fn.SpritesheetFormats.createSpritesheetFormatRegistry();
-#elseif (js && flight_esm)
-	return flight._js._fn.SpritesheetFormats.createSpritesheetFormatRegistry();
-#else
-	#error "flight.SpritesheetFormats: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
 extern inline function applySpritesheetImportOptions(registry:SpritesheetFormatRegistry, options:SpritesheetImportOptions):Void {
 	flight._js._fn.SpritesheetFormats.applySpritesheetImportOptions(registry, options);
 }
@@ -267,23 +250,6 @@ extern inline function serializeTexturePackerSpritesheet(data:SpritesheetData, e
 	return cast flight._cpp._fn.SpritesheetFormats.serializeTexturePackerSpritesheet(data, existing, options);
 #elseif (js && flight_esm)
 	return cast flight._js._fn.SpritesheetFormats.serializeTexturePackerSpritesheet(data, existing, options);
-#else
-	#error "flight.SpritesheetFormats: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
-extern inline function freeSpritesheetFormatRegistry(ptr:SpritesheetFormatRegistry):Void {
-	flight._js._fn.SpritesheetFormats.freeSpritesheetFormatRegistry(ptr);
-}
-#else
-extern inline function freeSpritesheetFormatRegistry(ptr:SpritesheetFormatRegistry):Void {
-#if hl
-	flight._hl._fn.SpritesheetFormats.freeSpritesheetFormatRegistry(ptr);
-#elseif cpp
-	flight._cpp._fn.SpritesheetFormats.freeSpritesheetFormatRegistry(ptr);
-#elseif (js && flight_esm)
-	flight._js._fn.SpritesheetFormats.freeSpritesheetFormatRegistry(ptr);
 #else
 	#error "flight.SpritesheetFormats: no backend for this target."
 #end

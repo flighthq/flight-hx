@@ -35,23 +35,6 @@ extern inline function parseTextureAtlasAsepriteJson(atlas:TextureAtlas, json:St
 }
 #end
 #if (js && flight_esm)
-extern inline function createTextureAtlasFormatRegistry():TextureAtlasFormatRegistry {
-	return flight._js._fn.TextureatlasFormats.createTextureAtlasFormatRegistry();
-}
-#else
-extern inline function createTextureAtlasFormatRegistry():TextureAtlasFormatRegistry {
-#if hl
-	return flight._hl._fn.TextureatlasFormats.createTextureAtlasFormatRegistry();
-#elseif cpp
-	return flight._cpp._fn.TextureatlasFormats.createTextureAtlasFormatRegistry();
-#elseif (js && flight_esm)
-	return flight._js._fn.TextureatlasFormats.createTextureAtlasFormatRegistry();
-#else
-	#error "flight.TextureatlasFormats: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
 extern inline function applyTextureAtlasImportOptions(registry:TextureAtlasFormatRegistry, options:TextureAtlasImportOptions):Void {
 	flight._js._fn.TextureatlasFormats.applyTextureAtlasImportOptions(registry, options);
 }
@@ -301,57 +284,6 @@ extern inline function parseTexturePackerAtlasJson(atlas:TextureAtlas, json:Stri
 	flight._cpp._fn.TextureatlasFormats.parseTexturePackerAtlasJson(atlas, cast json, options);
 #elseif (js && flight_esm)
 	flight._js._fn.TextureatlasFormats.parseTexturePackerAtlasJson(atlas, json, options);
-#else
-	#error "flight.TextureatlasFormats: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
-extern inline function getTextureAtlasFrameTagDirectionString(value:Dynamic):String {
-	return flight._js._fn.TextureatlasFormats.getTextureAtlasFrameTagDirectionString(value);
-}
-#else
-extern inline function getTextureAtlasFrameTagDirectionString(value:flight.TextureAtlasFrameTagDirection):String {
-#if hl
-	return cast flight._hl._fn.TextureatlasFormats.getTextureAtlasFrameTagDirectionString(value);
-#elseif cpp
-	return cast flight._cpp._fn.TextureatlasFormats.getTextureAtlasFrameTagDirectionString(value);
-#elseif (js && flight_esm)
-	return cast flight._js._fn.TextureatlasFormats.getTextureAtlasFrameTagDirectionString(value);
-#else
-	#error "flight.TextureatlasFormats: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
-extern inline function parseTextureAtlasFrameTagDirection(value:String):Null<Dynamic> {
-	return flight._js._fn.TextureatlasFormats.parseTextureAtlasFrameTagDirection(value);
-}
-#else
-extern inline function parseTextureAtlasFrameTagDirection(value:String):Int {
-#if hl
-	return flight._hl._fn.TextureatlasFormats.parseTextureAtlasFrameTagDirection(cast value);
-#elseif cpp
-	return flight._cpp._fn.TextureatlasFormats.parseTextureAtlasFrameTagDirection(cast value);
-#elseif (js && flight_esm)
-	return flight._js._fn.TextureatlasFormats.parseTextureAtlasFrameTagDirection(value);
-#else
-	#error "flight.TextureatlasFormats: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
-extern inline function freeTextureAtlasFormatRegistry(ptr:TextureAtlasFormatRegistry):Void {
-	flight._js._fn.TextureatlasFormats.freeTextureAtlasFormatRegistry(ptr);
-}
-#else
-extern inline function freeTextureAtlasFormatRegistry(ptr:TextureAtlasFormatRegistry):Void {
-#if hl
-	flight._hl._fn.TextureatlasFormats.freeTextureAtlasFormatRegistry(ptr);
-#elseif cpp
-	flight._cpp._fn.TextureatlasFormats.freeTextureAtlasFormatRegistry(ptr);
-#elseif (js && flight_esm)
-	flight._js._fn.TextureatlasFormats.freeTextureAtlasFormatRegistry(ptr);
 #else
 	#error "flight.TextureatlasFormats: no backend for this target."
 #end

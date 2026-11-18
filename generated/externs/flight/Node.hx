@@ -800,23 +800,6 @@ extern inline function swapNodeChildrenAt(target:Dynamic, index1:Int, index2:Int
 }
 #end
 #if (js && flight_esm)
-extern inline function createNodeRuntime(methods:Null<NodeRuntimeMethods>):NodeRuntime {
-	return flight._js._fn.Node.createNodeRuntime(methods);
-}
-#else
-extern inline function createNodeRuntime(methods:NodeRuntimeMethods):NodeRuntime {
-#if hl
-	return flight._hl._fn.Node.createNodeRuntime(methods);
-#elseif cpp
-	return flight._cpp._fn.Node.createNodeRuntime(methods);
-#elseif (js && flight_esm)
-	return flight._js._fn.Node.createNodeRuntime(methods);
-#else
-	#error "flight.Node: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
 extern inline function createNodeSignals():Dynamic {
 	return flight._js._fn.Node.createNodeSignals();
 }
@@ -879,23 +862,6 @@ extern inline function enableNodeSignals(source:Dynamic):Dynamic {
 	return flight._cpp._fn.Node.enableNodeSignals(source);
 #elseif (js && flight_esm)
 	return flight._js._fn.Node.enableNodeSignals(source);
-#else
-	#error "flight.Node: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
-extern inline function getNodeRuntime(source:Dynamic):NodeRuntime {
-	return flight._js._fn.Node.getNodeRuntime(source);
-}
-#else
-extern inline function getNodeRuntime(source:Dynamic):NodeRuntime {
-#if hl
-	return flight._hl._fn.Node.getNodeRuntime(source);
-#elseif cpp
-	return flight._cpp._fn.Node.getNodeRuntime(source);
-#elseif (js && flight_esm)
-	return flight._js._fn.Node.getNodeRuntime(source);
 #else
 	#error "flight.Node: no backend for this target."
 #end
@@ -1831,23 +1797,6 @@ extern inline function getViewportAspect(viewport:Viewport):Float {
 	return flight._cpp._fn.Node.getViewportAspect(viewport);
 #elseif (js && flight_esm)
 	return flight._js._fn.Node.getViewportAspect(viewport);
-#else
-	#error "flight.Node: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
-extern inline function freeNodeRuntime(ptr:NodeRuntime):Void {
-	flight._js._fn.Node.freeNodeRuntime(ptr);
-}
-#else
-extern inline function freeNodeRuntime(ptr:NodeRuntime):Void {
-#if hl
-	flight._hl._fn.Node.freeNodeRuntime(ptr);
-#elseif cpp
-	flight._cpp._fn.Node.freeNodeRuntime(ptr);
-#elseif (js && flight_esm)
-	flight._js._fn.Node.freeNodeRuntime(ptr);
 #else
 	#error "flight.Node: no backend for this target."
 #end

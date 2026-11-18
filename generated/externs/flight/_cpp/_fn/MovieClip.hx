@@ -9,10 +9,6 @@ extern class MovieClip {
 	public static function enableMovieClipGuards(guards:flight._cpp.MovieClipGuardState, logState:cpp.Star<cpp.Void>, clockFn:cpp.Star<cpp.Void>, clockCtx:cpp.Star<cpp.Void>):Void;
 	@:native("flight_create_movie_clip")
 	public static function createMovieClip():cpp.Star<cpp.Void>;
-	@:native("flight_create_movie_clip_data")
-	public static function createMovieClipData():flight._cpp.MovieClipData;
-	@:native("flight_create_movie_clip_runtime")
-	public static function createMovieClipRuntime():flight._cpp.MovieClipRuntime;
 	@:native("flight_add_movie_clip_frame_script")
 	public static function addMovieClipFrameScript(clip:cpp.Star<cpp.Void>, frame:flight._cpp.TimelineFrameArg, script:flight._cpp.FrameScript):Void;
 	@:native("flight_dispose_movie_clip_signals")
@@ -25,8 +21,6 @@ extern class MovieClip {
 	public static function getMovieClipCurrentLabel(clip:cpp.Star<cpp.Void>):flight._cpp.TimelineLabel;
 	@:native("flight_get_movie_clip_frame_script")
 	public static function getMovieClipFrameScript(clip:cpp.Star<cpp.Void>, frame:flight._cpp.TimelineFrameArg):flight._cpp.FrameScript;
-	@:native("flight_get_movie_clip_runtime")
-	public static function getMovieClipRuntime(source:flight._cpp.MovieClip):flight._cpp.MovieClipRuntime;
 	@:native("flight_get_movie_clip_signals")
 	public static function getMovieClipSignals(clip:cpp.Star<cpp.Void>):flight._cpp.MovieClipSignals;
 	@:native("flight_get_movie_clip_total_frames")
@@ -55,14 +49,6 @@ extern class MovieClip {
 	public static function createSpritesheetTimelineSource(guards:flight._cpp.MovieClipGuardState, spritesheet:cpp.Star<cpp.Void>, animation:cpp.Star<cpp.Void>):flight._cpp.TimelineSourceRef;
 	@:native("flight_explain_spritesheet_timeline_source")
 	public static function explainSpritesheetTimelineSource(animation:cpp.Star<cpp.Void>):flight._cpp.SpritesheetTimelineSourceExplanation;
-	@:native("flight_get_spritesheet_timeline_source_unsupported_field_string")
-	public static function getSpritesheetTimelineSourceUnsupportedFieldString(value:Int):cpp.ConstCharStar;
-	@:native("flight_parse_spritesheet_timeline_source_unsupported_field")
-	public static function parseSpritesheetTimelineSourceUnsupportedField(value:cpp.ConstCharStar):Int;
-	@:native("flight_free_movie_clip_data")
-	public static function freeMovieClipData(ptr:flight._cpp.MovieClipData):Void;
-	@:native("flight_free_movie_clip_runtime")
-	public static function freeMovieClipRuntime(ptr:flight._cpp.MovieClipRuntime):Void;
 	@:native("flight_free_movie_clip_signals")
 	public static function freeMovieClipSignals(ptr:flight._cpp.MovieClipSignals):Void;
 	@:native("flight_free_timeline_label")

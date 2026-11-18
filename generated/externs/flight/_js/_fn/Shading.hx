@@ -8,18 +8,6 @@ extern class Shading {
 	public static function createDissolveModifier():flight._js.DissolveModifier;
 	@:native("createEmissiveModifier")
 	public static function createEmissiveModifier():flight._js.EmissiveModifier;
-	@:native("getEmissiveModifierFacingString")
-	public static function getEmissiveModifierFacingString(value:Dynamic):String;
-	@:native("getFogModifierModeString")
-	public static function getFogModifierModeString(value:Dynamic):String;
-	@:native("getVertexDisplaceModifierSourceString")
-	public static function getVertexDisplaceModifierSourceString(value:Dynamic):String;
-	@:native("parseEmissiveModifierFacing")
-	public static function parseEmissiveModifierFacing(value:String):Null<Dynamic>;
-	@:native("parseFogModifierMode")
-	public static function parseFogModifierMode(value:String):Null<Dynamic>;
-	@:native("parseVertexDisplaceModifierSource")
-	public static function parseVertexDisplaceModifierSource(value:String):Null<Dynamic>;
 	@:native("createEnvReflectModifier")
 	public static function createEnvReflectModifier():flight._js.EnvReflectModifier;
 	@:native("createFogModifier")

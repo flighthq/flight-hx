@@ -4,17 +4,39 @@
 #include <stdbool.h>
 #include <stdint.h>
 #include <stddef.h>
+typedef struct FlightShapeBoundsContextVTable {
+bool (*close_path)(void *context);
+bool (*cubic_curve_to)(void *context, double control_x1, double control_y1, double control_x2, double control_y2, double x, double y);
+bool (*draw_circle)(void *context, double center_x, double center_y, double radius);
+bool (*draw_ellipse)(void *context, double center_x, double center_y, double radius_x, double radius_y);
+bool (*draw_rectangle)(void *context, double x, double y, double width, double height);
+bool (*draw_rounded_rectangle)(void *context, double x, double y, double width, double height, double radius);
+bool (*expand_point)(void *context, double x, double y);
+bool (*flush_path)(void *context);
+bool (*line_to)(void *context, double x, double y);
+bool (*move_to)(void *context, double x, double y);
+bool (*quadratic_curve_to)(void *context, double control_x, double control_y, double x, double y);
+bool (*set_stroke_style)(void *context, double width, uint32_t caps, uint32_t joints, double miter_limit);
+} FlightShapeBoundsContextVTable;
 #ifdef __cplusplus
 extern "C" {
 #endif
+void flight_free_owned_byte_reader(void * arg0);
 void flight_free_ref(void * arg0);
 size_t flight_get_byte_buffer_length(void * arg0);
+/* Borrowed return; do not free; valid while the byte buffer handle remains alive. */
 void * flight_get_byte_buffer_data(void * arg0);
 int32_t flight_get_byte_buffer_byte(void * arg0, size_t arg1);
 size_t flight_copy_byte_buffer(void * arg0, void * arg1, size_t arg2);
 void flight_free_byte_buffer(void * arg0);
+/* Caller owns the return value; call flight_free_abc_file when done. */
 void * flight_read_abc_file(void * arg0, size_t arg1);
+/* Caller owns the return value; call flight_read_abc_instructions_result_free when done. */
 void * flight_read_abc_instructions(void * arg0, size_t arg1);
+size_t flight_read_abc_instructions_result_len(void * arg0);
+/* Borrowed return; do not free; valid while the flight_read_abc_instructions result handle remains alive. */
+void * flight_read_abc_instructions_result_get(void * arg0, size_t arg1);
+void flight_read_abc_instructions_result_free(void * arg0);
 uint16_t flight_get_abc_file_major_version(void * arg0);
 uint16_t flight_set_abc_file_major_version(void * arg0, uint16_t arg1);
 uint16_t flight_get_abc_file_minor_version(void * arg0);
@@ -23,26 +45,57 @@ size_t flight_get_abc_instruction_offset(void * arg0);
 size_t flight_set_abc_instruction_offset(void * arg0, size_t arg1);
 uint8_t flight_get_abc_instruction_opcode(void * arg0);
 uint8_t flight_set_abc_instruction_opcode(void * arg0, uint8_t arg1);
+bool flight_announce_accessibility(void * arg0, const char * arg1, int32_t arg2, uint32_t * arg3);
+bool flight_clear_accessibility_tree(void * arg0, uint32_t * arg1);
+void flight_destroy_accessibility(void * arg0);
+bool flight_remove_accessibility_node(void * arg0, const char * arg1, uint32_t * arg2);
+bool flight_set_accessibility_focus(void * arg0, const char * arg1, uint32_t * arg2);
+bool flight_set_accessibility_node(void * arg0, void * arg1, uint32_t * arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_accessibility_node_id(void * arg0);
+void flight_field_set_accessibility_node_id(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_brightness_contrast_adjustment when done. */
 void * flight_create_brightness_contrast_adjustment(void * arg0);
+/* Caller owns the return value; call flight_free_channel_mixer_adjustment when done. */
 void * flight_create_channel_mixer_adjustment(void * arg0);
 bool flight_is_affine_color_matrix(void * arg0);
+/* Caller owns the return value; call flight_free_f32_array_20 when done. */
+void * flight_resolve_color_adjustments_color_matrix(const void * const * arg0, size_t arg1);
+uint32_t flight_resolve_color_adjustments_color_scale_bias(const void * const * arg0, size_t arg1, void * arg2);
+/* Caller owns the return value; call flight_free_color_blind_simulation_adjustment when done. */
 void * flight_create_color_blind_simulation_adjustment(void * arg0);
+/* Caller owns the return value; call flight_free_color_grade_adjustment when done. */
 void * flight_create_color_grade_adjustment(void * arg0);
+/* Caller owns the return value; call flight_free_color_lut when done. */
 void * flight_bake_color_lut(void * arg0, size_t arg1, int64_t arg2);
 void flight_sample_color_lut(void * arg0, void * arg1, float arg2, float arg3, float arg4);
+/* Caller owns the return value; call flight_free_color_transform_function when done. */
 void * flight_get_adjustment_color_transform__brightness_contrast_adjustment(void * arg0);
+/* Caller owns the return value; call flight_free_color_transform_function when done. */
 void * flight_get_adjustment_color_transform__channel_mixer_adjustment(void * arg0);
+/* Caller owns the return value; call flight_free_color_transform_function when done. */
 void * flight_get_adjustment_color_transform__color_blind_simulation_adjustment(void * arg0);
+/* Caller owns the return value; call flight_free_color_transform_function when done. */
 void * flight_get_adjustment_color_transform__color_grade_adjustment(void * arg0);
+/* Caller owns the return value; call flight_free_color_transform_function when done. */
 void * flight_get_adjustment_color_transform__color_matrix_adjustment(void * arg0);
+/* Caller owns the return value; call flight_free_color_transform_function when done. */
 void * flight_get_adjustment_color_transform__color_scale_bias_adjustment(void * arg0);
+/* Caller owns the return value; call flight_free_color_transform_function when done. */
 void * flight_get_adjustment_color_transform__exposure_adjustment(void * arg0);
+/* Caller owns the return value; call flight_free_color_transform_function when done. */
 void * flight_get_adjustment_color_transform__grayscale_adjustment(void * arg0);
+/* Caller owns the return value; call flight_free_color_transform_function when done. */
 void * flight_get_adjustment_color_transform__hue_saturation_adjustment(void * arg0);
+/* Caller owns the return value; call flight_free_color_transform_function when done. */
 void * flight_get_adjustment_color_transform__invert_adjustment(void * arg0);
+/* Caller owns the return value; call flight_free_color_transform_function when done. */
 void * flight_get_adjustment_color_transform__lift_gamma_gain_adjustment(void * arg0);
+/* Caller owns the return value; call flight_free_color_transform_function when done. */
 void * flight_get_adjustment_color_transform__lookup_table_grade_adjustment(void * arg0);
+/* Caller owns the return value; call flight_free_color_transform_function when done. */
 void * flight_get_adjustment_color_transform__sepia_adjustment(void * arg0);
+/* Caller owns the return value; call flight_free_color_transform_function when done. */
 void * flight_get_adjustment_color_transform__tint_adjustment(void * arg0);
 bool flight_is_color_lut_adjustment__brightness_contrast_adjustment(void * arg0);
 bool flight_is_color_lut_adjustment__channel_mixer_adjustment(void * arg0);
@@ -58,21 +111,39 @@ bool flight_is_color_lut_adjustment__lift_gamma_gain_adjustment(void * arg0);
 bool flight_is_color_lut_adjustment__lookup_table_grade_adjustment(void * arg0);
 bool flight_is_color_lut_adjustment__sepia_adjustment(void * arg0);
 bool flight_is_color_lut_adjustment__tint_adjustment(void * arg0);
+/* Caller owns the return value; call flight_free_color_lut_cache when done. */
 void * flight_create_color_lut_cache(void);
+/* Caller owns the return value; call flight_free_color_lut when done. */
+void * flight_bake_color_lut_for_run(void * arg0, const void * const * arg1, size_t arg2, int64_t arg3);
+/* Caller owns the return value; call flight_free_color_matrix_adjustment when done. */
 void * flight_create_color_matrix_adjustment(void * arg0);
+/* Borrowed return; do not free; valid while the operation input handle remains alive. */
 void * flight_get_adjustment_color_matrix__brightness_contrast_adjustment(void * arg0);
+/* Borrowed return; do not free; valid while the operation input handle remains alive. */
 void * flight_get_adjustment_color_matrix__channel_mixer_adjustment(void * arg0);
+/* Borrowed return; do not free; valid while the operation input handle remains alive. */
 void * flight_get_adjustment_color_matrix__color_blind_simulation_adjustment(void * arg0);
+/* Borrowed return; do not free; valid while the operation input handle remains alive. */
 void * flight_get_adjustment_color_matrix__color_grade_adjustment(void * arg0);
+/* Borrowed return; do not free; valid while the operation input handle remains alive. */
 void * flight_get_adjustment_color_matrix__color_matrix_adjustment(void * arg0);
+/* Borrowed return; do not free; valid while the operation input handle remains alive. */
 void * flight_get_adjustment_color_matrix__color_scale_bias_adjustment(void * arg0);
+/* Borrowed return; do not free; valid while the operation input handle remains alive. */
 void * flight_get_adjustment_color_matrix__exposure_adjustment(void * arg0);
+/* Borrowed return; do not free; valid while the operation input handle remains alive. */
 void * flight_get_adjustment_color_matrix__grayscale_adjustment(void * arg0);
+/* Borrowed return; do not free; valid while the operation input handle remains alive. */
 void * flight_get_adjustment_color_matrix__hue_saturation_adjustment(void * arg0);
+/* Borrowed return; do not free; valid while the operation input handle remains alive. */
 void * flight_get_adjustment_color_matrix__invert_adjustment(void * arg0);
+/* Borrowed return; do not free; valid while the operation input handle remains alive. */
 void * flight_get_adjustment_color_matrix__lift_gamma_gain_adjustment(void * arg0);
+/* Borrowed return; do not free; valid while the operation input handle remains alive. */
 void * flight_get_adjustment_color_matrix__lookup_table_grade_adjustment(void * arg0);
+/* Borrowed return; do not free; valid while the operation input handle remains alive. */
 void * flight_get_adjustment_color_matrix__sepia_adjustment(void * arg0);
+/* Borrowed return; do not free; valid while the operation input handle remains alive. */
 void * flight_get_adjustment_color_matrix__tint_adjustment(void * arg0);
 bool flight_is_color_matrix_adjustment__brightness_contrast_adjustment(void * arg0);
 bool flight_is_color_matrix_adjustment__channel_mixer_adjustment(void * arg0);
@@ -88,35 +159,64 @@ bool flight_is_color_matrix_adjustment__lift_gamma_gain_adjustment(void * arg0);
 bool flight_is_color_matrix_adjustment__lookup_table_grade_adjustment(void * arg0);
 bool flight_is_color_matrix_adjustment__sepia_adjustment(void * arg0);
 bool flight_is_color_matrix_adjustment__tint_adjustment(void * arg0);
+/* Caller owns the return value; call flight_free_f32_array_20 when done. */
 void * flight_create_brightness_color_matrix(float arg0);
+/* Caller owns the return value; call flight_free_f32_array_20 when done. */
 void * flight_create_channel_mixer_color_matrix(void * arg0, void * arg1, void * arg2);
+/* Caller owns the return value; call flight_free_f32_array_20 when done. */
 void * flight_create_color_balance_color_matrix(void * arg0, void * arg1, void * arg2);
+/* Caller owns the return value; call flight_free_f32_array_20 when done. */
 void * flight_create_color_matrix_from_tint(uint32_t arg0, float arg1);
+/* Caller owns the return value; call flight_free_f32_array_20 when done. */
 void * flight_create_contrast_color_matrix(float arg0);
+/* Caller owns the return value; call flight_free_f32_array_20 when done. */
 void * flight_create_desaturate_color_matrix(float arg0);
+/* Caller owns the return value; call flight_free_f32_array_20 when done. */
 void * flight_create_grayscale_color_matrix(void);
+/* Caller owns the return value; call flight_free_f32_array_20 when done. */
 void * flight_create_hue_rotate_color_matrix(float arg0);
+/* Caller owns the return value; call flight_free_f32_array_20 when done. */
 void * flight_create_identity_color_matrix(void);
+/* Caller owns the return value; call flight_free_f32_array_20 when done. */
 void * flight_create_invert_color_matrix(void);
+/* Caller owns the return value; call flight_free_f32_array_20 when done. */
 void * flight_create_levels_color_matrix(float arg0, float arg1, float arg2, float arg3, float arg4);
+/* Caller owns the return value; call flight_free_f32_array_20 when done. */
 void * flight_create_opacity_color_matrix(float arg0);
+/* Caller owns the return value; call flight_free_f32_array_20 when done. */
 void * flight_create_polaroid_color_matrix(void);
+/* Caller owns the return value; call flight_free_f32_array_20 when done. */
 void * flight_create_saturation_color_matrix(float arg0);
+/* Caller owns the return value; call flight_free_f32_array_20 when done. */
 void * flight_create_sepia_color_matrix(void);
+/* Caller owns the return value; call flight_free_f32_array_20 when done. */
 void * flight_create_technicolor_color_matrix(void);
+/* Caller owns the return value; call flight_free_f32_array_20 when done. */
 void * flight_create_vintage_color_matrix(void);
+/* Caller owns the return value; call flight_free_f32_array_20 when done. */
 void * flight_create_white_balance_color_matrix(float arg0, float arg1);
 uint32_t flight_apply_color_matrix_to_color(void * arg0, uint32_t arg1);
 void flight_concat_color_matrix(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_f32_array_20 when done. */
+void * flight_fuse_color_matrices(const void * const * arg0, size_t arg1);
 void flight_multiply_color_matrix(void * arg0, void * arg1, void * arg2);
+/* Caller owns the return value; call flight_free_color_scale_bias_adjustment when done. */
 void * flight_create_color_scale_bias_adjustment(void * arg0);
+/* Caller owns the return value; call flight_free_exposure_adjustment when done. */
 void * flight_create_exposure_adjustment(void * arg0);
+/* Caller owns the return value; call flight_free_grayscale_adjustment when done. */
 void * flight_create_grayscale_adjustment(void * arg0);
+/* Caller owns the return value; call flight_free_hue_saturation_adjustment when done. */
 void * flight_create_hue_saturation_adjustment(void * arg0);
+/* Caller owns the return value; call flight_free_invert_adjustment when done. */
 void * flight_create_invert_adjustment(void * arg0);
+/* Caller owns the return value; call flight_free_lift_gamma_gain_adjustment when done. */
 void * flight_create_lift_gamma_gain_adjustment(void * arg0);
+/* Caller owns the return value; call flight_free_lookup_table_grade_adjustment when done. */
 void * flight_create_lookup_table_grade_adjustment(void * arg0);
+/* Caller owns the return value; call flight_free_sepia_adjustment when done. */
 void * flight_create_sepia_adjustment(void * arg0);
+/* Caller owns the return value; call flight_free_tint_adjustment when done. */
 void * flight_create_tint_adjustment(uint32_t arg0);
 float flight_get_brightness_contrast_adjustment_brightness(void * arg0);
 float flight_set_brightness_contrast_adjustment_brightness(void * arg0, float arg1);
@@ -164,59 +264,73 @@ float flight_get_lookup_table_grade_adjustment_strength(void * arg0);
 float flight_set_lookup_table_grade_adjustment_strength(void * arg0, float arg1);
 float flight_get_sepia_adjustment_intensity(void * arg0);
 float flight_set_sepia_adjustment_intensity(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_animation_sample_accumulator when done. */
 void * flight_create_animation_sample_accumulator(size_t arg0, bool arg1);
 void flight_accumulate_animation_sample(void * arg0, void * arg1, size_t arg2, float arg3);
 void flight_add_animation_sample(void * arg0, size_t arg1, void * arg2, size_t arg3, void * arg4, size_t arg5, float arg6, bool arg7);
 void flight_blend_animation_samples(void * arg0, size_t arg1, void * arg2, size_t arg3, void * arg4, size_t arg5, float arg6, bool arg7);
 bool flight_finish_animation_sample(void * arg0, size_t arg1, void * arg2);
 void flight_reset_animation_sample_accumulator(void * arg0);
+/* Caller owns the return value; call flight_free_animation_blend_tree when done. */
 void * flight_create_animation_blend_tree(void * arg0, size_t arg1);
-void * flight_create_animation_blend_tree_input(void * arg0);
+/* Caller owns the return value; call flight_free_animation_blend_tree_input when done. */
+void * flight_create_animation_blend_tree_input(void * arg0 /* cloned; caller retains its handle */);
 void flight_advance_animation_blend_tree(void * arg0, float arg1);
-void flight_sample_animation_blend_tree(void * arg0, size_t arg1, void * arg2, void * arg3, void * arg4);
+void flight_sample_animation_blend_tree(void * arg0, size_t arg1, void * arg2, void (*arg3)(void *, void *, size_t, void *, size_t), void * arg4);
 bool flight_sample_animation_blend_tree_channel(void * arg0, size_t arg1, void * arg2, size_t arg3);
 bool flight_set_animation_blend_tree_input_weight(void * arg0, size_t arg1, float arg2);
-void * flight_create_animation_channel(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_animation_clip when done. */
 void * flight_create_animation_clip(void * arg0, float arg1, void * arg2, size_t arg3);
+/* Caller owns the return value; call flight_free_animation_clip_event when done. */
 void * flight_create_animation_clip_event(void);
+/* Caller owns the return value; call flight_free_animation_clip when done. */
 void * flight_clone_animation_clip(void * arg0);
 float flight_get_animation_clip_duration(void * arg0);
-void flight_sample_animation_clip(void * arg0, size_t arg1, void * arg2, float arg3, void * arg4, void * arg5);
-void * flight_create_animation_crossfade(void * arg0, void * arg1, float arg2, void * arg3);
+void flight_sample_animation_clip(void * arg0, size_t arg1, void * arg2, float arg3, void (*arg4)(void *, void *, size_t, void *, size_t), void * arg5);
+/* Caller owns the return value; call flight_free_animation_crossfade when done. */
+void * flight_create_animation_crossfade(void * arg0 /* cloned; caller retains its handle */, void * arg1 /* cloned; caller retains its handle */, float arg2, void * arg3);
 void flight_advance_animation_crossfade(void * arg0, float arg1);
 bool flight_is_animation_crossfade_complete(void * arg0);
-void flight_sample_animation_crossfade(void * arg0, size_t arg1, void * arg2, void * arg3, void * arg4);
-void * flight_create_animation_blend_tree_layer(void * arg0, void * arg1);
+void flight_sample_animation_crossfade(void * arg0, size_t arg1, void * arg2, void (*arg3)(void *, void *, size_t, void *, size_t), void * arg4);
+/* Caller owns the return value; call flight_free_animation_layer when done. */
+void * flight_create_animation_blend_tree_layer(void * arg0 /* cloned; caller retains its handle */, void * arg1);
+/* Caller owns the return value; call flight_free_animation_layer_stack when done. */
 void * flight_create_animation_layer_stack(void * arg0, size_t arg1);
-void * flight_create_animation_state_machine_layer(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_animation_layer when done. */
+void * flight_create_animation_state_machine_layer(void * arg0 /* cloned; caller retains its handle */, void * arg1);
 void flight_advance_animation_layer_stack(void * arg0, float arg1);
-void flight_sample_animation_layer_stack(void * arg0, size_t arg1, void * arg2, void * arg3, void * arg4);
+void flight_sample_animation_layer_stack(void * arg0, size_t arg1, void * arg2, void (*arg3)(void *, void *, size_t, void *, size_t), void * arg4);
 bool flight_sample_animation_layer_stack_channel(void * arg0, size_t arg1, void * arg2, size_t arg3);
 bool flight_set_animation_layer_weight(void * arg0, size_t arg1, float arg2);
-void * flight_create_animation_player(void * arg0);
+/* Caller owns the return value; call flight_free_animation_player when done. */
+void * flight_create_animation_player(void * arg0 /* ownership transferred; do not use or free after call */);
 void flight_advance_animation_player(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_animation_player when done. */
 void * flight_clone_animation_player(void * arg0);
 void flight_enable_animation_player_signals(void * arg0);
 float flight_get_animation_player_normalized_time(void * arg0);
 void flight_play_animation_player(void * arg0);
 void flight_seek_animation_player(void * arg0, float arg1);
 void flight_stop_animation_player(void * arg0);
+/* Caller owns the return value; call flight_free_animation_root_motion_extractor when done. */
 void * flight_create_animation_root_motion_extractor(void * arg0, size_t arg1);
 bool flight_extract_animation_root_motion(void * arg0, size_t arg1, void * arg2, float arg3, float arg4);
-void * flight_create_animation_state_machine_state(void * arg0);
+/* Caller owns the return value; call flight_free_animation_state_machine_state when done. */
+void * flight_create_animation_state_machine_state(void * arg0 /* cloned; caller retains its handle */);
 void flight_advance_animation_state_machine(void * arg0, float arg1);
+/* Borrowed return; do not free; valid while the machine input handle remains alive. */
 void * flight_get_animation_state_machine_current_state(void * arg0);
 bool flight_is_animation_state_machine_transitioning(void * arg0);
-void flight_sample_animation_state_machine(void * arg0, size_t arg1, void * arg2, void * arg3, void * arg4);
+void flight_sample_animation_state_machine(void * arg0, size_t arg1, void * arg2, void (*arg3)(void *, void *, size_t, void *, size_t), void * arg4);
 bool flight_sample_animation_state_machine_channel(void * arg0, size_t arg1, void * arg2, size_t arg3);
-bool flight_transition_animation_state_machine(void * arg0, void * arg1, float arg2, void * arg3, void * arg4);
+/* Caller owns the return value; call flight_free_animation_track when done. */
 void * flight_create_animation_track(void);
+/* Caller owns the return value; call flight_free_animation_track when done. */
 void * flight_clone_animation_track(void * arg0);
 void flight_sample_animation_track(void * arg0, size_t arg1, void * arg2, float arg3);
+/* Caller owns the return value; call flight_free_animation_track when done. */
 void * flight_trim_animation_track(void * arg0, float arg1, float arg2);
 bool flight_validate_animation_track(void * arg0, void * arg1);
-void * flight_create_state_ref_from_index(size_t arg0);
-void * flight_create_state_ref_from_name(const char * arg0);
 size_t flight_get_animation_blend_tree_channel_source_channel_index(void * arg0);
 size_t flight_set_animation_blend_tree_channel_source_channel_index(void * arg0, size_t arg1);
 size_t flight_get_animation_blend_tree_channel_source_input_index(void * arg0);
@@ -225,6 +339,7 @@ bool flight_get_animation_blend_tree_input_additive(void * arg0);
 bool flight_set_animation_blend_tree_input_additive(void * arg0, bool arg1);
 float flight_get_animation_blend_tree_input_weight(void * arg0);
 float flight_set_animation_clip_duration(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_animation_clip_event_name(void * arg0);
 void flight_field_set_animation_clip_event_name(void * arg0, void * arg1, size_t arg2);
 float flight_get_animation_clip_event_time(void * arg0);
@@ -268,58 +383,292 @@ float flight_get_animation_state_machine_transition_elapsed(void * arg0);
 float flight_set_animation_state_machine_transition_elapsed(void * arg0, float arg1);
 float flight_get_animation_state_machine_transition_weight(void * arg0);
 float flight_set_animation_state_machine_transition_weight(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_animation_state_machine_state_name(void * arg0);
 void flight_field_set_animation_state_machine_state_name(void * arg0, void * arg1, size_t arg2);
 size_t flight_get_animation_track_components(void * arg0);
 size_t flight_set_animation_track_components(void * arg0, size_t arg1);
 bool flight_get_animation_track_quaternion(void * arg0);
 bool flight_set_animation_track_quaternion(void * arg0, bool arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_animation_track_validation_diagnostic_code(void * arg0);
 void flight_field_set_animation_track_validation_diagnostic_code(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_animation_track_validation_diagnostic_message(void * arg0);
 void flight_field_set_animation_track_validation_diagnostic_message(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_app_events when done. */
+void * flight_create_app_events(void);
+void flight_add_app_recent_document(void * arg0, const char * arg1);
+void flight_attach_app_activate(void * arg0, void * arg1);
+void flight_attach_app_all_windows_closed(void * arg0, void * arg1);
+void flight_attach_app_events(void * arg0, void * arg1, void * arg2, void * arg3, void * arg4, void * arg5, void * arg6);
+void flight_attach_app_open_file(void * arg0, void * arg1);
+void flight_attach_app_quit_request(void * arg0, void * arg1);
+void flight_attach_app_ready(void * arg0, void * arg1);
+void flight_attach_app_second_instance(void * arg0, void * arg1);
+int32_t flight_bounce_app_dock(void * arg0);
+void flight_cancel_app_attention(void * arg0, int32_t arg1);
+void flight_cancel_app_dock_bounce(void * arg0, int32_t arg1);
+void flight_clear_app_recent_documents(void * arg0);
+void flight_detach_app_events(void * arg0);
+void flight_dispose_app_events(void * arg0);
+void flight_focus_app(void * arg0);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_get_app_directory_path(void * arg0, uint32_t arg1);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_get_app_executable_path(void * arg0);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_get_app_locale(void * arg0);
+/* Caller owns the return value; call flight_free_app_login_item when done. */
+void * flight_get_app_login_item(void * arg0);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_get_app_name(void * arg0);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_get_app_path(void * arg0);
+void flight_get_app_preferred_system_languages(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_get_app_system_locale(void * arg0);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_get_app_version(void * arg0);
+bool flight_has_app_single_instance_lock(void * arg0);
+void flight_hide_app(void * arg0);
+bool flight_is_app_hidden(void * arg0);
+void flight_quit_app(void * arg0);
+void flight_relaunch_app(void * arg0);
+void flight_release_app_single_instance_lock(void * arg0);
+int32_t flight_request_app_attention(void * arg0, bool arg1);
+bool flight_request_app_single_instance_lock(void * arg0);
+void flight_set_app_activation_policy(void * arg0, uint32_t arg1);
+void flight_set_app_badge_count(void * arg0, int32_t arg1, void (*arg2)(void *, bool, char *), void * arg3);
+void flight_set_app_dock_badge(void * arg0, const char * arg1);
+void flight_set_app_dock_menu(void * arg0, const void * const * arg1, size_t arg2);
+void flight_set_app_login_item(void * arg0, void * arg1);
+void flight_set_app_name(void * arg0, const char * arg1);
+void flight_set_app_user_model_id(void * arg0, const char * arg1);
+void flight_show_app(void * arg0);
+/* Caller owns the return value; call flight_free_app_loop_ref when done. */
+void * flight_create_app_loop(void);
+void flight_attach_app_loop_exit(void * arg0, void * arg1);
+void flight_attach_app_loop_lifecycle(void * arg0, void * arg1);
+void flight_detach_app_loop_exit(void * arg0);
+void flight_dispose_app_loop(void * arg0);
+void flight_enable_app_loop_lifecycle_signals(void * arg0);
+void flight_for_each_app_loop_window(void * arg0, void (*arg1)(void *, void *), void * arg2);
+double flight_get_app_loop_frame_rate(void * arg0);
+/* Caller owns the return value; call flight_free_app_window_ref when done. */
+void * flight_get_app_loop_main_window(void * arg0);
+void flight_get_app_loop_windows(void * arg0, void * arg1);
+bool flight_is_app_loop_running(void * arg0);
+void flight_pause_app_loop(void * arg0);
+void flight_register_app_loop_window(void * arg0, void * arg1);
+void flight_resume_app_loop(void * arg0);
+void flight_set_app_loop_main_window(void * arg0, void * arg1);
+void flight_start_app_loop(void * arg0, void * arg1, void * arg2, void * arg3);
+void flight_step_app_loop(void * arg0, double arg1, void * arg2);
+void flight_stop_app_loop(void * arg0);
+void flight_unregister_app_loop_window(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_app_window_ref when done. */
+void * flight_create_app_window(void);
+bool flight_attach_window(void * arg0, void * arg1, void * arg2, void * arg3, uint32_t arg4);
+void flight_attach_window_close(void * arg0, void * arg1);
+void flight_attach_window_drop_file(void * arg0, void * arg1, void * arg2);
+void flight_attach_window_focus(void * arg0, void * arg1, void * arg2);
+void flight_attach_window_fullscreen(void * arg0, void * arg1);
+void flight_attach_window_move(void * arg0, void * arg1);
+void flight_attach_window_orientation(void * arg0, void * arg1);
+void flight_attach_window_resize(void * arg0, void * arg1, void * arg2);
+void flight_attach_window_visibility(void * arg0, void * arg1);
+void flight_center_window(void * arg0, void * arg1);
+bool flight_close_window(void * arg0, void * arg1);
+void flight_compute_window_device_transform(void * arg0, void * arg1);
+void flight_detach_window_close(void * arg0);
+void flight_detach_window_drop_file(void * arg0);
+void flight_detach_window_focus(void * arg0);
+void flight_detach_window_fullscreen(void * arg0);
+void flight_detach_window_move(void * arg0);
+void flight_detach_window_orientation(void * arg0);
+void flight_detach_window_resize(void * arg0);
+void flight_detach_window_visibility(void * arg0);
+void flight_dispose_app_window(void * arg0);
+/* Caller owns the return value; call flight_free_input_pointer_lock_exit_future when done. */
+void * flight_exit_app_input_pointer_lock(void * arg0, void * arg1);
+void flight_exit_app_window_fullscreen(void * arg0, void (*arg1)(void *, bool, char *), void * arg2);
+void flight_flash_window_frame(void * arg0, void * arg1);
+void flight_focus_window(void * arg0, void * arg1);
+void flight_get_window_bounds(void * arg0, void * arg1, void * arg2);
+void flight_hide_window(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_input_pointer_lock_request_future when done. */
+void * flight_lock_app_input_pointer(void * arg0, void * arg1, void * arg2);
+void flight_maximize_window(void * arg0, void * arg1);
+void flight_minimize_window(void * arg0, void * arg1);
+bool flight_open_window(void * arg0, void * arg1, void * arg2, void * arg3);
+void flight_prepare_element_for_input(void * arg0, void * arg1);
+void flight_request_app_window_fullscreen(void * arg0, void * arg1, void (*arg2)(void *, bool, char *), void * arg3);
+void flight_request_window_attention(void * arg0, void * arg1, bool arg2);
+bool flight_request_window_close(void * arg0);
+void flight_restore_window(void * arg0, void * arg1);
+void flight_set_window_always_on_top(void * arg0, void * arg1, bool arg2);
+void flight_set_window_content_protection(void * arg0, void * arg1, bool arg2);
+void flight_set_window_fullscreen(void * arg0, void * arg1, bool arg2);
+void flight_set_window_has_shadow(void * arg0, void * arg1, bool arg2);
+void flight_set_window_icon(void * arg0, void * arg1, const char * arg2);
+void flight_set_window_maximum_size(void * arg0, void * arg1, float arg2, float arg3);
+void flight_set_window_menu_bar_visible(void * arg0, void * arg1, bool arg2);
+void flight_set_window_minimum_size(void * arg0, void * arg1, float arg2, float arg3);
+void flight_set_window_opacity(void * arg0, void * arg1, float arg2);
+void flight_set_window_parent(void * arg0, void * arg1, void * arg2);
+void flight_set_window_position(void * arg0, void * arg1, float arg2, float arg3);
+void flight_set_window_progress(void * arg0, void * arg1, float arg2);
+void flight_set_window_resizable(void * arg0, void * arg1, bool arg2);
+void flight_set_window_size(void * arg0, void * arg1, float arg2, float arg3);
+void flight_set_window_skip_taskbar(void * arg0, void * arg1, bool arg2);
+void flight_set_window_title(void * arg0, void * arg1, const char * arg2);
+void flight_show_window(void * arg0, void * arg1);
+double flight_get_app_loop_delta_time(void * arg0);
+double flight_set_app_loop_delta_time(void * arg0, double arg1);
+double flight_get_app_loop_elapsed_time(void * arg0);
+double flight_set_app_loop_elapsed_time(void * arg0, double arg1);
+uint32_t flight_get_app_loop_frame_count(void * arg0);
+uint32_t flight_set_app_loop_frame_count(void * arg0, uint32_t arg1);
+double flight_get_app_loop_interpolation_alpha(void * arg0);
+double flight_set_app_loop_interpolation_alpha(void * arg0, double arg1);
+bool flight_get_app_loop_is_running(void * arg0);
+bool flight_set_app_loop_is_running(void * arg0, bool arg1);
+bool flight_get_app_login_item_open_at_login(void * arg0);
+bool flight_set_app_login_item_open_at_login(void * arg0, bool arg1);
+bool flight_get_app_login_item_open_as_hidden(void * arg0);
+bool flight_set_app_login_item_open_as_hidden(void * arg0, bool arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_app_login_item_path(void * arg0);
+void flight_field_set_app_login_item_path(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_app_window_title(void * arg0);
+void flight_field_set_app_window_title(void * arg0, void * arg1, size_t arg2);
+float flight_get_app_window_x(void * arg0);
+float flight_set_app_window_x(void * arg0, float arg1);
+float flight_get_app_window_y(void * arg0);
+float flight_set_app_window_y(void * arg0, float arg1);
+float flight_get_app_window_width(void * arg0);
+float flight_set_app_window_width(void * arg0, float arg1);
+float flight_get_app_window_height(void * arg0);
+float flight_set_app_window_height(void * arg0, float arg1);
+float flight_get_app_window_device_pixel_ratio(void * arg0);
+float flight_set_app_window_device_pixel_ratio(void * arg0, float arg1);
+bool flight_get_app_window_minimized(void * arg0);
+bool flight_set_app_window_minimized(void * arg0, bool arg1);
+bool flight_get_app_window_maximized(void * arg0);
+bool flight_set_app_window_maximized(void * arg0, bool arg1);
+bool flight_get_app_window_fullscreen(void * arg0);
+bool flight_set_app_window_fullscreen(void * arg0, bool arg1);
+bool flight_get_app_window_focused(void * arg0);
+bool flight_set_app_window_focused(void * arg0, bool arg1);
+bool flight_get_app_window_visible(void * arg0);
+bool flight_set_app_window_visible(void * arg0, bool arg1);
+bool flight_get_app_window_resizable(void * arg0);
+bool flight_set_app_window_resizable(void * arg0, bool arg1);
+bool flight_get_app_window_always_on_top(void * arg0);
+bool flight_set_app_window_always_on_top(void * arg0, bool arg1);
+bool flight_get_app_window_skip_taskbar(void * arg0);
+bool flight_set_app_window_skip_taskbar(void * arg0, bool arg1);
+float flight_get_app_window_opacity(void * arg0);
+float flight_set_app_window_opacity(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_app_window_icon(void * arg0);
+void flight_field_set_app_window_icon(void * arg0, void * arg1, size_t arg2);
+float flight_get_app_window_min_width(void * arg0);
+float flight_set_app_window_min_width(void * arg0, float arg1);
+float flight_get_app_window_min_height(void * arg0);
+float flight_set_app_window_min_height(void * arg0, float arg1);
+float flight_get_app_window_max_width(void * arg0);
+float flight_set_app_window_max_width(void * arg0, float arg1);
+float flight_get_app_window_max_height(void * arg0);
+float flight_set_app_window_max_height(void * arg0, float arg1);
+float flight_get_window_bounds_x(void * arg0);
+float flight_set_window_bounds_x(void * arg0, float arg1);
+float flight_get_window_bounds_y(void * arg0);
+float flight_set_window_bounds_y(void * arg0, float arg1);
+float flight_get_window_bounds_width(void * arg0);
+float flight_set_window_bounds_width(void * arg0, float arg1);
+float flight_get_window_bounds_height(void * arg0);
+float flight_set_window_bounds_height(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_asset_load_explanation when done. */
+void * flight_explain_asset_load(void * arg0, const char * arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_asset_descriptor_id(void * arg0);
+void flight_field_set_asset_descriptor_id(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_asset_descriptor_url(void * arg0);
+void flight_field_set_asset_descriptor_url(void * arg0, void * arg1, size_t arg2);
+size_t flight_get_asset_entry_refcount(void * arg0);
+size_t flight_set_asset_entry_refcount(void * arg0, size_t arg1);
+bool flight_get_asset_entry_resident(void * arg0);
+bool flight_set_asset_entry_resident(void * arg0, bool arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_asset_load_explanation_id(void * arg0);
+void flight_field_set_asset_load_explanation_id(void * arg0, void * arg1, size_t arg2);
+size_t flight_get_asset_load_explanation_ref_count(void * arg0);
+size_t flight_set_asset_load_explanation_ref_count(void * arg0, size_t arg1);
+size_t flight_get_asset_load_progress_loaded(void * arg0);
+size_t flight_set_asset_load_progress_loaded(void * arg0, size_t arg1);
+size_t flight_get_asset_load_progress_total(void * arg0);
+size_t flight_set_asset_load_progress_total(void * arg0, size_t arg1);
+/* Caller owns the return value; call flight_free_audio_buffer_ref when done. */
 void * flight_create_audio_buffer(size_t arg0, size_t arg1, float arg2);
 void flight_copy_to_audio_buffer_channel(void * arg0, void * arg1, size_t arg2, size_t arg3);
 bool flight_has_audio_decode_slot(void * arg0, const char * arg1);
 bool flight_can_play_audio_type(void * arg0, const char * arg1);
+/* Caller owns the return value; call flight_free_string when done. */
 char * flight_get_audio_mime_type_essence(const char * arg0);
+/* Caller owns the return value; call flight_free_string when done. */
 char * flight_get_audio_mime_type_parameter(const char * arg0, const char * arg1);
+/* Caller owns the return value; call flight_free_string when done. */
 char * flight_infer_audio_mime_type(const char * arg0);
-void * flight_create_audio_resource(void * arg0);
+/* Caller owns the return value; call flight_free_audio_resource_ref when done. */
+void * flight_create_audio_resource(void * arg0 /* cloned; caller retains its handle */);
+/* Caller owns the return value; call flight_free_audio_resource_ref when done. */
 void * flight_clone_audio_resource(void * arg0);
 void flight_dispose_audio_resource(void * arg0);
 size_t flight_get_audio_resource_byte_size(void * arg0);
 size_t flight_get_audio_resource_channel_count(void * arg0);
+/* Caller owns the return value; call flight_free_float32_array_ref when done. */
+void * flight_get_audio_resource_channel_data(void * arg0, int32_t arg1);
 double flight_get_audio_resource_duration(void * arg0);
 float flight_get_audio_resource_sample_rate(void * arg0);
 bool flight_has_audio_resource_buffer(void * arg0);
 bool flight_is_audio_resource_empty(void * arg0);
+/* Caller owns the return value; call flight_free_audio_resource_ref when done. */
+void * flight_create_audio_resource_from_samples(const void * const * arg0, size_t arg1, float arg2);
+/* Caller owns the return value; call flight_free_string when done. */
 char * flight_select_audio_resource_url(void * arg0, void * arg1, size_t arg2, void * arg3);
+/* Caller owns the return value; call flight_free_audio_resource_failure_ref when done. */
 void * flight_create_audio_resource_failure(void * arg0);
+/* Caller owns the return value; call flight_free_embedded_audio_resource_reference_ref when done. */
+void * flight_create_embedded_audio_resource_reference(void * arg0 /* cloned; caller retains its handle */);
+/* Caller owns the return value; call flight_free_external_audio_resource_reference_ref when done. */
 void * flight_create_external_audio_resource_reference(const char * arg0);
+/* Caller owns the return value; call flight_free_audio_resource_reference_resolution_explanation when done. */
 void * flight_explain_audio_resource_reference_resolution(void * arg0);
+/* Caller owns the return value; call flight_free_audio_resource_reference when done. */
 void * flight_find_audio_resource_reference_by_name(void * arg0, size_t arg1, const char * arg2);
 bool flight_reset_failed_audio_resource_reference(void * arg0);
-char * flight_get_audio_channel_state_string(uint32_t arg0);
-char * flight_get_audio_resource_failure_kind_string(uint32_t arg0);
-char * flight_get_audio_resource_reference_kind_string(uint32_t arg0);
-int32_t flight_parse_audio_channel_state(const char * arg0);
-int32_t flight_parse_audio_resource_failure_kind(const char * arg0);
-int32_t flight_parse_audio_resource_reference_kind(const char * arg0);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_audio_resource_url_url(void * arg0);
 void flight_field_set_audio_resource_url_url(void * arg0, void * arg1, size_t arg2);
 float flight_get_audio_buffer_sample_rate(void * arg0);
 float flight_set_audio_buffer_sample_rate(void * arg0, float arg1);
 size_t flight_get_audio_buffer_length(void * arg0);
 size_t flight_set_audio_buffer_length(void * arg0, size_t arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_audio_resource_failure_message(void * arg0);
 void flight_field_set_audio_resource_failure_message(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_external_audio_resource_reference_uri(void * arg0);
 void flight_field_set_external_audio_resource_reference_uri(void * arg0, void * arg1, size_t arg2);
 bool flight_get_audio_resource_reference_resolution_explanation_retryable(void * arg0);
 bool flight_set_audio_resource_reference_resolution_explanation_retryable(void * arg0, bool arg1);
 void flight_explain_unpacked_rectangles(void * arg0, void * arg1, size_t arg2, void * arg3);
 float flight_get_pack_result_occupancy(void * arg0);
+/* Caller owns the return value; call flight_free_pack_result when done. */
 void * flight_pack_rectangles(void * arg0, size_t arg1, void * arg2);
 float flight_get_unpacked_rectangle_explanation_usable_width(void * arg0);
 float flight_set_unpacked_rectangle_explanation_usable_width(void * arg0, float arg1);
@@ -343,7 +692,9 @@ float flight_get_packed_rectangle_height(void * arg0);
 float flight_set_packed_rectangle_height(void * arg0, float arg1);
 bool flight_get_packed_rectangle_rotated(void * arg0);
 bool flight_set_packed_rectangle_rotated(void * arg0, bool arg1);
+/* Caller owns the return value; call flight_free_bitmap when done. */
 void * flight_create_bitmap(uint32_t arg0, uint32_t arg1, int64_t arg2);
+/* Caller owns the return value; call flight_free_bitmap when done. */
 void * flight_clone_bitmap(void * arg0);
 void flight_convert_bitmap_alpha_type(void * arg0, uint32_t arg1);
 void flight_invalidate_bitmap(void * arg0);
@@ -360,6 +711,8 @@ void flight_box_blur_bitmap(void * arg0, size_t arg1, void * arg2, size_t arg3, 
 void flight_compute_gaussian_kernel(void * arg0, size_t arg1, size_t arg2, float arg3);
 void flight_gaussian_blur_bitmap(void * arg0, size_t arg1, void * arg2, size_t arg3, void * arg4, float arg5, float arg6, int32_t arg7);
 void flight_merge_bitmap_channels(void * arg0, void * arg1, void * arg2, void * arg3, void * arg4);
+/* Caller owns each handle written to the output; call flight_free_bitmap for each when done. */
+void flight_split_bitmap_channels(void * arg0, void * * arg1);
 void flight_build_bitmap_brightness_color_matrix(void * arg0, float arg1);
 void flight_build_bitmap_contrast_color_matrix(void * arg0, float arg1);
 void flight_build_bitmap_grayscale_color_matrix(void * arg0);
@@ -370,7 +723,9 @@ void flight_build_bitmap_sepia_color_matrix(void * arg0);
 void flight_color_matrix_bitmap(void * arg0, size_t arg1, void * arg2, void * arg3, size_t arg4);
 void flight_concat_bitmap_color_matrix(void * arg0, void * arg1, void * arg2);
 void flight_set_bitmap_color_matrix_identity(void * arg0);
+/* Caller owns the return value; call flight_free_bitmap when done. */
 void * flight_compare_bitmap(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_bitmap_mismatch when done. */
 void * flight_get_bitmap_mismatch(void * arg0, void * arg1, uint32_t arg2);
 void flight_composite_bitmap_pixels(void * arg0, void * arg1, size_t arg2, void * arg3);
 void flight_composite_bitmap_region(void * arg0, void * arg1, void * arg2);
@@ -382,17 +737,30 @@ void flight_convolve_bitmap(void * arg0, size_t arg1, void * arg2, void * arg3);
 void flight_copy_bitmap_channel(void * arg0, void * arg1, void * arg2, void * arg3);
 void flight_copy_bitmap_pixels(void * arg0, void * arg1, bool arg2);
 double flight_get_bitmap_coverage(void * arg0, uint32_t arg1, uint32_t arg2);
+/* Caller owns the return value; call flight_free_bitmap when done. */
+void * flight_crop_bitmap(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_bitmap when done. */
 void * flight_extend_bitmap(void * arg0, int32_t arg1, int32_t arg2, int32_t arg3, int32_t arg4, uint32_t arg5, uint32_t arg6);
+/* Caller owns the return value; call flight_free_bitmap when done. */
 void * flight_trim_bitmap(void * arg0);
 void flight_displace_bitmap(void * arg0, size_t arg1, void * arg2, void * arg3);
 uint32_t flight_dissolve_bitmap_pixels(void * arg0, void * arg1, uint32_t arg2, uint32_t arg3, uint32_t arg4);
+/* Caller owns the return value; call flight_encode_bitmap_result_free when done. */
 void * flight_encode_bitmap(void * arg0, void * arg1, int32_t arg2, float arg3);
+size_t flight_encode_bitmap_result_len(void * arg0);
+/* Borrowed return; do not free; valid while the flight_encode_bitmap result handle remains alive. */
+void * flight_encode_bitmap_result_get(void * arg0, size_t arg1);
+void flight_encode_bitmap_result_free(void * arg0);
+/* Caller owns the return value; call flight_free_bitmap_encode_failure_explanation when done. */
 void * flight_explain_bitmap_encode_failure(void * arg0, uint32_t arg1);
 void flight_fill_bitmap_rectangle(void * arg0, uint32_t arg1);
 void flight_flood_fill_bitmap(void * arg0, int32_t arg1, int32_t arg2, uint32_t arg3);
+/* Caller owns the return value; call flight_free_bitmap_fingerprint when done. */
 void * flight_create_bitmap_fingerprint(void * arg0, uint32_t arg1);
 double flight_compare_bitmap_fingerprints(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_string when done. */
 char * flight_format_bitmap_fingerprint(void * arg0);
+/* Caller owns the return value; call flight_free_bitmap_fingerprint when done. */
 void * flight_parse_bitmap_fingerprint(const char * arg0);
 void flight_flip_bitmap_horizontal(void * arg0, void * arg1);
 void flight_flip_bitmap_vertical(void * arg0, void * arg1);
@@ -405,6 +773,7 @@ void flight_gradient_glow_bitmap(void * arg0, size_t arg1, void * arg2, size_t a
 void flight_fill_bitmap_linear_gradient(void * arg0, void * arg1, size_t arg2, float arg3, float arg4, float arg5, float arg6, uint32_t arg7);
 void flight_fill_bitmap_radial_gradient(void * arg0, void * arg1, size_t arg2, float arg3, float arg4, float arg5, float arg6, float arg7, uint32_t arg8);
 void flight_equalize_bitmap_histogram(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_bitmap_histogram when done. */
 void * flight_get_bitmap_histogram(void * arg0);
 void flight_median_bitmap(void * arg0, size_t arg1, void * arg2, int32_t arg3);
 void flight_dilate_bitmap(void * arg0, size_t arg1, void * arg2, int32_t arg3);
@@ -419,10 +788,12 @@ uint8_t flight_get_bitmap_pixel_luminance(void * arg0, uint32_t arg1, uint32_t a
 uint32_t flight_get_bitmap_pixel_rgb(void * arg0, uint32_t arg1, uint32_t arg2);
 void flight_set_bitmap_pixel(void * arg0, uint32_t arg1, uint32_t arg2, uint32_t arg3);
 void flight_set_bitmap_pixel_rgb(void * arg0, uint32_t arg1, uint32_t arg2, uint32_t arg3);
-uint8_t flight_to_clamped_u8(float arg0);
 void flight_pixelate_bitmap(void * arg0, size_t arg1, void * arg2, int32_t arg3);
-void * flight_create_bitmap_region(void * arg0, int32_t arg1, int32_t arg2, int32_t arg3, int32_t arg4);
-void flight_set_bitmap_region(void * arg0, void * arg1, int32_t arg2, int32_t arg3, int32_t arg4, int32_t arg5);
+/* Caller owns the return value; call flight_free_rectangle when done. */
+void * flight_get_bitmap_color_bounds_rectangle(void * arg0, uint32_t arg1, uint32_t arg2, bool arg3);
+/* Caller owns the return value; call flight_free_bitmap_region when done. */
+void * flight_create_bitmap_region(void * arg0 /* cloned; caller retains its handle */, int32_t arg1, int32_t arg2, int32_t arg3, int32_t arg4);
+void flight_set_bitmap_region(void * arg0, void * arg1 /* cloned; caller retains its handle */, int32_t arg2, int32_t arg3, int32_t arg4, int32_t arg5);
 void flight_resize_bitmap(void * arg0, void * arg1, uint32_t arg2, uint32_t arg3, bool arg4);
 void flight_rotate_bitmap(void * arg0, void * arg1, double arg2, double arg3, double arg4, uint32_t arg5, uint32_t arg6);
 void flight_rotate_bitmap_180(void * arg0, void * arg1);
@@ -463,31 +834,33 @@ int32_t flight_get_bitmap_convolution_options_matrix_x(void * arg0);
 int32_t flight_set_bitmap_convolution_options_matrix_x(void * arg0, int32_t arg1);
 int32_t flight_get_bitmap_convolution_options_matrix_y(void * arg0);
 int32_t flight_set_bitmap_convolution_options_matrix_y(void * arg0, int32_t arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_bitmap_encode_failure_explanation_reason(void * arg0);
 void flight_field_set_bitmap_encode_failure_explanation_reason(void * arg0, void * arg1, size_t arg2);
 bool flight_get_bitmap_readback_explanation_readable(void * arg0);
 bool flight_set_bitmap_readback_explanation_readable(void * arg0, bool arg1);
+/* Caller owns the return value; call flight_free_bitmap_font_ref when done. */
 void * flight_create_bitmap_font(void * arg0, void * arg1);
-void * flight_create_bitmap_font_guard_state(void);
+/* Caller owns the return value; call flight_free_glyph_entry_ref when done. */
 void * flight_get_bitmap_font_glyph(void * arg0, uint32_t arg1);
 float flight_get_bitmap_font_kerning(void * arg0, uint32_t arg1, uint32_t arg2);
+/* Caller owns the return value; call flight_free_glyph_metrics when done. */
+void * flight_get_bitmap_font_metrics(void * arg0);
+/* Caller owns the return value; call flight_free_texture_atlas_ref when done. */
 void * flight_get_bitmap_font_page(void * arg0, int32_t arg1);
+void flight_get_bitmap_font_pages(void * arg0, void * arg1);
 bool flight_has_bitmap_font_glyph(void * arg0, uint32_t arg1);
 uint64_t flight_pack_bitmap_font_kerning_key(uint32_t arg0, uint32_t arg1);
 void flight_unpack_bitmap_font_kerning_key(void * arg0, uint64_t arg1);
+/* Caller owns the return value; call flight_free_bitmap_font_ref when done. */
 void * flight_create_bitmap_font_from_glyph_atlas(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_glyph_source_ref when done. */
 void * flight_create_glyph_source_from_bitmap_font(void * arg0);
-char * flight_get_bitmap_font_encoding_string(uint32_t arg0);
-char * flight_get_bitmap_font_glyph_explanation_reason_string(uint32_t arg0);
-char * flight_get_bitmap_font_guard_log_key_string(void * arg0);
-char * flight_get_bitmap_font_guard_reason_string(void * arg0);
-int32_t flight_parse_bitmap_font_encoding(const char * arg0);
-int32_t flight_parse_bitmap_font_glyph_explanation_reason(const char * arg0);
-void * flight_parse_bitmap_font_guard_log_key(const char * arg0);
-void * flight_parse_bitmap_font_guard_reason(const char * arg0);
 void flight_disable_bitmap_font_guards(void * arg0);
-void flight_enable_bitmap_font_guards(void * arg0, void * arg1, void * arg2);
+void flight_enable_bitmap_font_guards(void * arg0, void * arg1, void * arg2 /* cloned; caller retains its handle */);
+/* Caller owns the return value; call flight_free_bitmap_font_glyph_explanation when done. */
 void * flight_explain_bitmap_font_glyph(void * arg0, uint32_t arg1);
+/* Caller owns the return value; call flight_free_bitmap_font_summary when done. */
 void * flight_summarize_bitmap_font(void * arg0);
 float flight_get_bitmap_font_glyph_data_advance(void * arg0);
 float flight_set_bitmap_font_glyph_data_advance(void * arg0, float arg1);
@@ -537,7 +910,15 @@ int32_t flight_get_bitmap_font_summary_min_codepoint(void * arg0);
 int32_t flight_set_bitmap_font_summary_min_codepoint(void * arg0, int32_t arg1);
 size_t flight_get_bitmap_font_summary_page_count(void * arg0);
 size_t flight_set_bitmap_font_summary_page_count(void * arg0, size_t arg1);
+/* Caller owns the return value; call flight_free_bitmap_font_ref when done. */
+void * flight_parse_bitmap_font_binary(void * arg0, void * arg1, size_t arg2, void * arg3, void * arg4);
+/* Caller owns the return value; call flight_free_bitmap_font_format_kind when done. */
 void * flight_read_bitmap_font_format_kind(void * arg0, size_t arg1);
+/* Caller owns the return value; call flight_free_bitmap_font_ref when done. */
+void * flight_parse_bitmap_font_json(void * arg0, const char * arg1, void * arg2, void * arg3);
+/* Caller owns the return value; call flight_free_bitmap_font_ref when done. */
+void * flight_parse_bitmap_font_xml(void * arg0, const char * arg1, void * arg2, void * arg3);
+/* Caller owns the return value; call flight_free_bitmap_font_parse_explanation when done. */
 void * flight_explain_bitmap_font_parse(const char * arg0, void * arg1);
 uint32_t flight_get_bitmap_font_char_record_height(void * arg0);
 uint32_t flight_set_bitmap_font_char_record_height(void * arg0, uint32_t arg1);
@@ -563,6 +944,7 @@ uint32_t flight_get_bitmap_font_kerning_record_first(void * arg0);
 uint32_t flight_set_bitmap_font_kerning_record_first(void * arg0, uint32_t arg1);
 uint32_t flight_get_bitmap_font_kerning_record_second(void * arg0);
 uint32_t flight_set_bitmap_font_kerning_record_second(void * arg0, uint32_t arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_bitmap_font_page_record_file(void * arg0);
 void flight_field_set_bitmap_font_page_record_file(void * arg0, void * arg1, size_t arg2);
 int32_t flight_get_bitmap_font_page_record_id(void * arg0);
@@ -579,10 +961,74 @@ size_t flight_get_bitmap_font_parse_explanation_page_count(void * arg0);
 size_t flight_set_bitmap_font_parse_explanation_page_count(void * arg0, size_t arg1);
 bool flight_get_bitmap_font_parse_explanation_success(void * arg0);
 bool flight_set_bitmap_font_parse_explanation_success(void * arg0, bool arg1);
+/* Caller owns the return value; call flight_free_bitmap_text_ref when done. */
+void * flight_create_bitmap_text(void * arg0 /* cloned; caller retains its handle */);
+void flight_compute_bitmap_text_local_bounds_rectangle(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_rectangle when done. */
+void * flight_get_bitmap_text_bounds(void * arg0);
+size_t flight_get_bitmap_text_line_count(void * arg0);
+bool flight_is_bitmap_text_glyph_layout_stale(void * arg0);
+bool flight_is_bitmap_text_truncated(void * arg0);
+void flight_reserve_bitmap_text(void * arg0, size_t arg1);
+void flight_set_bitmap_text_align(void * arg0, uint32_t arg1);
+void flight_set_bitmap_text_ellipsis(void * arg0, const char * arg1);
+void flight_set_bitmap_text_glyph_source(void * arg0, void * arg1 /* cloned; caller retains its handle */);
+void flight_set_bitmap_text_letter_spacing(void * arg0, float arg1);
+void flight_set_bitmap_text_line_height(void * arg0, float arg1);
+void flight_set_bitmap_text_max_lines(void * arg0, int64_t arg1);
+void flight_set_bitmap_text_text(void * arg0, const char * arg1);
+void flight_set_bitmap_text_wrap_width(void * arg0, float arg1);
+void flight_disable_bitmap_text_guards(void * arg0);
+void flight_enable_bitmap_text_guards(void * arg0, void * arg1, double (*arg2)(void *), void * arg3);
+/* Caller owns the return value; call flight_free_bitmap_text_missing_glyphs when done. */
+void * flight_explain_bitmap_text_missing_glyphs(void * arg0, const char * arg1);
+bool flight_refresh_bitmap_text_glyph_layout(void * arg0, void * arg1);
+void flight_update_bitmap_text(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_bitmap_text_data_ellipsis(void * arg0);
+void flight_field_set_bitmap_text_data_ellipsis(void * arg0, void * arg1, size_t arg2);
+float flight_get_bitmap_text_data_letter_spacing(void * arg0);
+float flight_set_bitmap_text_data_letter_spacing(void * arg0, float arg1);
+float flight_get_bitmap_text_data_line_height(void * arg0);
+float flight_set_bitmap_text_data_line_height(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_bitmap_text_data_text(void * arg0);
+void flight_field_set_bitmap_text_data_text(void * arg0, void * arg1, size_t arg2);
+size_t flight_get_bitmap_text_page_instance_count(void * arg0);
+size_t flight_set_bitmap_text_page_instance_count(void * arg0, size_t arg1);
+int64_t flight_get_bitmap_text_runtime_glyph_layout_version(void * arg0);
+int64_t flight_set_bitmap_text_runtime_glyph_layout_version(void * arg0, int64_t arg1);
+size_t flight_get_bitmap_text_runtime_line_count(void * arg0);
+size_t flight_set_bitmap_text_runtime_line_count(void * arg0, size_t arg1);
+bool flight_get_bitmap_text_runtime_truncated(void * arg0);
+bool flight_set_bitmap_text_runtime_truncated(void * arg0, bool arg1);
+size_t flight_get_bitmap_text_missing_glyphs_total_codepoints(void * arg0);
+size_t flight_set_bitmap_text_missing_glyphs_total_codepoints(void * arg0, size_t arg1);
+/* Caller owns the return value; call flight_free_owned_byte_reader when done. */
+void * flight_create_byte_reader(void * arg0, size_t arg1, int64_t arg2);
+bool flight_has_byte_reader_bytes(void * arg0, size_t arg1);
+uint16_t flight_read_byte_reader_u16(void * arg0);
+uint32_t flight_read_byte_reader_u24(void * arg0);
+uint32_t flight_read_byte_reader_u24_big_endian(void * arg0);
+uint32_t flight_read_byte_reader_u32(void * arg0);
+uint32_t flight_read_byte_reader_u32_big_endian(void * arg0);
+uint64_t flight_read_byte_reader_u64(void * arg0);
+uint8_t flight_read_byte_reader_u8(void * arg0);
+void flight_skip_byte_reader(void * arg0, size_t arg1);
+size_t flight_get_array_buffer_view_byte_offset(void * arg0);
+size_t flight_set_array_buffer_view_byte_offset(void * arg0, size_t arg1);
+size_t flight_get_array_buffer_view_byte_length(void * arg0);
+size_t flight_set_array_buffer_view_byte_length(void * arg0, size_t arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_blob_mime_type(void * arg0);
+void flight_field_set_blob_mime_type(void * arg0, void * arg1, size_t arg2);
+size_t flight_get_blob_size(void * arg0);
+size_t flight_set_blob_size(void * arg0, size_t arg1);
 void flight_get_camera_3d_forward(void * arg0, void * arg1);
 void flight_get_camera_3d_position(void * arg0, void * arg1);
 void flight_get_camera_3d_right(void * arg0, void * arg1);
 void flight_get_camera_3d_up(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_camera3_d when done. */
 void * flight_create_camera_3d(void);
 bool flight_get_camera_3d_inverse_view_projection_matrix4(void * arg0, void * arg1, float arg2);
 void flight_get_camera_3d_view_projection_matrix4(void * arg0, void * arg1, float arg2);
@@ -591,6 +1037,7 @@ void flight_set_camera_3d_jitter(void * arg0, float arg1, float arg2);
 void flight_set_camera_3d_view_matrix4_from_look_at(void * arg0, void * arg1, void * arg2, void * arg3);
 void flight_set_camera_3d_view_matrix4_from_matrix4(void * arg0, void * arg1, void * arg2);
 bool flight_update_camera_3d_inverse_view_projection(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_camera2_d when done. */
 void * flight_create_camera_2d(void);
 void flight_set_camera_2d_look_at(void * arg0, float arg1, float arg2);
 void flight_get_cube_capture_face_camera_3d(void * arg0, void * arg1, int32_t arg2);
@@ -602,7 +1049,8 @@ float flight_get_camera_3d_linear_depth(void * arg0, float arg1);
 float flight_get_camera_3d_view_space_z(void * arg0, float arg1);
 bool flight_are_camera_guards_enabled(void * arg0);
 void flight_disable_camera_guards(void * arg0);
-void flight_enable_camera_guards(void * arg0, void * arg1, void * arg2, void * arg3);
+void flight_enable_camera_guards(void * arg0, void * arg1, double (*arg2)(void *), void * arg3);
+/* Caller owns the return value; call flight_free_camera3_dview_explanation when done. */
 void * flight_explain_camera_3d_view(void * arg0);
 bool flight_get_camera_3d_frustum_corners(void * arg0, void * arg1, float arg2);
 bool flight_get_camera_3d_ray_through_bounding_sphere(void * arg0, void * arg1, void * arg2, float arg3);
@@ -610,8 +1058,11 @@ bool flight_intersect_camera_3d_ray_with_plane(void * arg0, void * arg1, void * 
 void flight_get_camera_2d_parallax_point(void * arg0, float arg1, float arg2, float arg3, void * arg4);
 bool flight_get_camera_3d_screen_to_world_ray(void * arg0, void * arg1, float arg2, float arg3, float arg4);
 bool flight_get_camera_3d_world_to_screen(void * arg0, void * arg1, void * arg2, float arg3);
+/* Caller owns the return value; call flight_free_orthographic_projection_ref when done. */
 void * flight_create_orthographic_projection(void);
+/* Caller owns the return value; call flight_free_perspective_projection_ref when done. */
 void * flight_create_perspective_projection(void);
+/* Caller owns the return value; call flight_free_raw_projection_ref when done. */
 void * flight_create_raw_projection(void);
 float flight_get_orthographic_projection_texel_size(void * arg0, float arg1, float arg2);
 bool flight_is_orthographic_projection(void * arg0);
@@ -669,12 +1120,16 @@ float flight_get_camera3_dview_explanation_shear_deviation(void * arg0);
 float flight_set_camera3_dview_explanation_shear_deviation(void * arg0, float arg1);
 bool flight_get_camera_guard_state_enabled(void * arg0);
 bool flight_set_camera_guard_state_enabled(void * arg0, bool arg1);
+/* Caller owns the return value; call flight_free_camera_shake when done. */
 void * flight_create_camera_shake(void);
+/* Caller owns the return value; call flight_free_camera_shake_offset when done. */
 void * flight_create_camera_shake_offset(void);
 void flight_add_camera_shake_trauma(void * arg0, float arg1);
 void flight_reset_camera_shake(void * arg0);
 void flight_update_camera_shake(void * arg0, float arg1, void * arg2);
+/* Caller owns the return value; call flight_free_fly_camera_controller when done. */
 void * flight_create_fly_camera_controller(void * arg0);
+/* Caller owns the return value; call flight_free_fly_camera_controller when done. */
 void * flight_clone_fly_camera_controller(void * arg0);
 void flight_copy_fly_camera_controller(void * arg0, void * arg1);
 void flight_look_fly_camera_controller(void * arg0, float arg1, float arg2);
@@ -686,7 +1141,9 @@ void flight_update_camera_2d_follow(void * arg0, void * arg1, float arg2, float 
 bool flight_frame_orbit_camera_controller_to_sphere(void * arg0, void * arg1, void * arg2, float arg3, float arg4);
 float flight_get_perspective_projection_frame_distance_to_sphere(void * arg0, float arg1, float arg2, float arg3);
 void flight_set_orthographic_projection_frame_to_sphere(void * arg0, float arg1, float arg2, float arg3);
+/* Caller owns the return value; call flight_free_orbit_camera_controller when done. */
 void * flight_create_orbit_camera_controller(void * arg0);
+/* Caller owns the return value; call flight_free_orbit_camera_controller when done. */
 void * flight_clone_orbit_camera_controller(void * arg0);
 void flight_copy_orbit_camera_controller(void * arg0, void * arg1);
 void flight_dolly_orbit_camera_controller(void * arg0, float arg1);
@@ -756,28 +1213,73 @@ float flight_get_orbit_camera_controller_polar(void * arg0);
 float flight_set_orbit_camera_controller_polar(void * arg0, float arg1);
 float flight_get_orbit_camera_controller_smooth_time(void * arg0);
 float flight_set_orbit_camera_controller_smooth_time(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_capture_baseline when done. */
+void * flight_create_capture_baseline(void);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_format_capture_baseline(void * arg0);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_get_capture_baseline_field(void * arg0, const char * arg1, uint32_t arg2);
+/* Caller owns the return value; call flight_free_capture_baseline_provenance when done. */
+void * flight_get_capture_baseline_provenance(void * arg0, const char * arg1, uint32_t arg2);
+/* Caller owns the return value; call flight_free_capture_baseline when done. */
+void * flight_parse_capture_baseline(const char * arg0);
+void flight_set_capture_baseline_field(void * arg0, const char * arg1, uint32_t arg2, const char * arg3);
+void flight_set_capture_baseline_provenance(void * arg0, const char * arg1, uint32_t arg2, void * arg3);
+double flight_compare_capture_fingerprints(const char * arg0, const char * arg1);
+/* Caller owns the return value; call flight_free_capture_check_result when done. */
+void * flight_evaluate_capture_parity(const char * arg0, const char * arg1, double arg2);
+/* Caller owns the return value; call flight_free_capture_check_result when done. */
+void * flight_evaluate_capture_regression(const char * arg0, const char * arg1, double arg2);
+bool flight_get_capture_check_result_pass(void * arg0);
+bool flight_set_capture_check_result_pass(void * arg0, bool arg1);
+double flight_get_capture_check_result_difference(void * arg0);
+double flight_set_capture_check_result_difference(void * arg0, double arg1);
+double flight_get_capture_check_result_tolerance(void * arg0);
+double flight_set_capture_check_result_tolerance(void * arg0, double arg1);
+uint32_t flight_get_capture_baseline_provenance_frames(void * arg0);
+uint32_t flight_set_capture_baseline_provenance_frames(void * arg0, uint32_t arg1);
+bool flight_get_capture_baseline_provenance_verify_published(void * arg0);
+bool flight_set_capture_baseline_provenance_verify_published(void * arg0, bool arg1);
+uint32_t flight_get_capture_baseline_provenance_warmup_frames(void * arg0);
+uint32_t flight_set_capture_baseline_provenance_warmup_frames(void * arg0, uint32_t arg1);
+/* Caller owns the return value; call flight_free_clip_region_ref when done. */
+void * flight_create_clip_region_from_contours(const void * const * arg0, void * arg1, size_t arg2, uint32_t arg3);
+/* Caller owns the return value; call flight_free_clip_region_ref when done. */
+void * flight_create_clip_region_from_rectangle(void * arg0);
+/* Caller owns the return value; call flight_free_clip_region_ref when done. */
 void * flight_acquire_clip_region(void);
 bool flight_clip_region_contains_clip_region(void * arg0, void * arg1);
 bool flight_clip_region_contains_point(void * arg0, double arg1, double arg2);
+bool flight_clip_region_contains_rectangle(void * arg0, void * arg1);
 bool flight_clip_region_intersects_clip_region(void * arg0, void * arg1);
+bool flight_clip_region_intersects_rectangle(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_clip_region_ref when done. */
 void * flight_clone_clip_region(void * arg0);
 void flight_copy_clip_region(void * arg0, void * arg1);
 bool flight_equals_clip_region(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_clip_region_explanation when done. */
 void * flight_explain_clip_region(void * arg0);
+/* Caller owns the return value; call flight_free_clip_region_contours_explanation when done. */
+void * flight_explain_clip_region_contours(const void * const * arg0, void * arg1, size_t arg2);
+void flight_get_clip_region_bounds(void * arg0, void * arg1);
 void flight_intersect_clip_regions(void * arg0, void * arg1, void * arg2);
 void flight_invalidate_clip_region(void * arg0);
 bool flight_is_clip_region_empty(void * arg0);
 bool flight_is_clip_region_rectangular(void * arg0);
 void flight_normalize_clip_region(void * arg0, void * arg1);
 void flight_release_clip_region(void * arg0);
+void flight_set_clip_region_to_contours(void * arg0, const void * const * arg1, void * arg2, size_t arg3, uint32_t arg4);
+void flight_set_clip_region_to_rectangle(void * arg0, void * arg1);
 void flight_transform_clip_region(void * arg0, void * arg1, void * arg2);
 void flight_union_clip_regions(void * arg0, void * arg1, void * arg2);
+/* Caller owns the return value; call flight_free_clip_region_ref when done. */
 void * flight_create_clip_region_from_circle(double arg0, double arg1, double arg2, double arg3);
+/* Caller owns the return value; call flight_free_clip_region_ref when done. */
+void * flight_create_clip_region_from_ellipse(void * arg0, double arg1);
+/* Caller owns the return value; call flight_free_clip_region_ref when done. */
 void * flight_create_clip_region_from_path(void * arg0, double arg1);
-char * flight_get_clip_region_contours_reason_string(uint32_t arg0);
-char * flight_get_clip_region_status_string(uint32_t arg0);
-int32_t flight_parse_clip_region_contours_reason(const char * arg0);
-int32_t flight_parse_clip_region_status(const char * arg0);
+/* Caller owns the return value; call flight_free_clip_region_ref when done. */
+void * flight_create_clip_region_from_rounded_rectangle(void * arg0, double arg1, double arg2);
 void flight_disable_clip_guards(void);
 uint32_t flight_get_clip_region_version(void * arg0);
 uint32_t flight_set_clip_region_version(void * arg0, uint32_t arg1);
@@ -787,12 +1289,32 @@ size_t flight_get_clip_region_contours_explanation_contour_index(void * arg0);
 size_t flight_set_clip_region_contours_explanation_contour_index(void * arg0, size_t arg1);
 size_t flight_get_clip_region_contours_explanation_coordinate_count(void * arg0);
 size_t flight_set_clip_region_contours_explanation_coordinate_count(void * arg0, size_t arg1);
+/* Caller owns the return value; call flight_free_clipboard_watch when done. */
+void * flight_create_clipboard_watch(void);
+void flight_attach_clipboard_watch(void * arg0, void * arg1);
+void flight_detach_clipboard_watch(void * arg0);
+void flight_dispose_clipboard_watch(void * arg0);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_clipboard_bookmark_title(void * arg0);
+void flight_field_set_clipboard_bookmark_title(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_clipboard_bookmark_url(void * arg0);
+void flight_field_set_clipboard_bookmark_url(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_clipboard_write_item_format(void * arg0);
+void flight_field_set_clipboard_write_item_format(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_clipboard_write_item_data(void * arg0);
+void flight_field_set_clipboard_write_item_data(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_clock_ref when done. */
 void * flight_create_child_clock(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_clock_ref when done. */
 void * flight_create_clock(void);
 void flight_add_clock_child(void * arg0, void * arg1);
 void flight_advance_clock(void * arg0, double arg1);
 void flight_dispose_clock(void * arg0);
 double flight_get_clock_effective_scale(void * arg0);
+/* Caller owns the return value; call flight_free_clock_ref when done. */
 void * flight_get_clock_parent(void * arg0);
 bool flight_is_clock_effectively_paused(void * arg0);
 void flight_pause_clock(void * arg0);
@@ -819,14 +1341,14 @@ size_t flight_query_collision_box_face3d(void * arg0, float arg1, float arg2, fl
 size_t flight_query_collision_capsule_face3d(void * arg0, float arg1, float arg2, float arg3, void * arg4);
 size_t flight_query_collision_convex_face3d(void * arg0, float arg1, float arg2, float arg3, void * arg4);
 void flight_register_built_in_collision_face_queries3d(void * arg0);
-void flight_register_collision_face_query3d(void * arg0, const char * arg1, void * arg2);
+void flight_register_collision_face_query3d(void * arg0, const char * arg1, void * arg2 /* cloned; caller retains its handle */);
 int32_t flight_get_collision_polygon_validation_status2d(void * arg0);
 int32_t flight_get_collision_shape_validation_status2d(void * arg0);
 int32_t flight_get_collision_convex_validation_status3d(void * arg0);
 int32_t flight_get_collision_shape_validation_status3d(void * arg0);
 void flight_register_built_in_collision_supports2d(void * arg0);
-void flight_register_collision_pair_test2d(void * arg0, const char * arg1, const char * arg2, void * arg3);
-void flight_register_collision_support2d(void * arg0, const char * arg1, void * arg2);
+void flight_register_collision_pair_test2d(void * arg0, const char * arg1, const char * arg2, void * arg3 /* cloned; caller retains its handle */);
+void flight_register_collision_support2d(void * arg0, const char * arg1, void * arg2 /* cloned; caller retains its handle */);
 void flight_support_collision_aabb2d(void * arg0, float arg1, float arg2, void * arg3);
 void flight_support_collision_circle2d(void * arg0, float arg1, float arg2, void * arg3);
 void flight_support_collision_obb2d(void * arg0, float arg1, float arg2, void * arg3);
@@ -835,8 +1357,8 @@ void flight_write_vertex_list_support2d(void * arg0, size_t arg1, size_t arg2, f
 void flight_clear_collision_pair_tests3d(void * arg0);
 void flight_clear_collision_supports3d(void * arg0);
 void flight_register_built_in_collision_supports3d(void * arg0);
-void flight_register_collision_pair_test3d(void * arg0, const char * arg1, const char * arg2, void * arg3);
-void flight_register_collision_support3d(void * arg0, const char * arg1, void * arg2);
+void flight_register_collision_pair_test3d(void * arg0, const char * arg1, const char * arg2, void * arg3 /* cloned; caller retains its handle */);
+void flight_register_collision_support3d(void * arg0, const char * arg1, void * arg2 /* cloned; caller retains its handle */);
 void flight_support_collision_aabb3d(void * arg0, float arg1, float arg2, float arg3, void * arg4);
 void flight_support_collision_box3d(void * arg0, float arg1, float arg2, float arg3, void * arg4);
 void flight_support_collision_capsule3d(void * arg0, float arg1, float arg2, float arg3, void * arg4);
@@ -846,8 +1368,10 @@ void flight_support_collision_cylinder3d(void * arg0, float arg1, float arg2, fl
 void flight_support_collision_sphere3d(void * arg0, float arg1, float arg2, float arg3, void * arg4);
 void flight_write_vertex_list_support3d(void * arg0, size_t arg1, size_t arg2, float arg3, float arg4, float arg5, void * arg6);
 int64_t flight_pack_contact_feature_id(bool arg0, int64_t arg1, int64_t arg2, bool arg3);
+/* Caller owns the return value; call flight_free_collision_contact_manifold2_d when done. */
 void * flight_create_collision_contact_manifold2d(void);
 void flight_clear_collision_contact_manifold2d(void * arg0);
+/* Caller owns the return value; call flight_free_collision_contact_manifold3_d when done. */
 void * flight_create_collision_contact_manifold3d(void);
 void flight_clear_collision_contact_manifold3d(void * arg0);
 size_t flight_write_collision_convex_hull_faces3d(void * arg0, void * arg1);
@@ -855,21 +1379,26 @@ void flight_write_aabb_vertices(void * arg0, void * arg1);
 void flight_write_obb_vertices(void * arg0, void * arg1);
 bool flight_are_collision_guards_enabled(void * arg0, void * arg1);
 void flight_disable_collision_guards(void * arg0, void * arg1);
-void flight_enable_collision_guards(void * arg0, void * arg1, void * arg2, void * arg3, void * arg4);
+void flight_enable_collision_guards(void * arg0, void * arg1, void * arg2, double (*arg3)(void *), void * arg4);
 bool flight_test_collision_support2d(void * arg0, void * arg1, void * arg2, void * arg3);
 bool flight_test_collision_support_overlap2d(void * arg0, void * arg1, void * arg2);
 bool flight_test_collision_support3d(void * arg0, void * arg1, void * arg2, void * arg3);
 bool flight_test_collision_support_overlap3d(void * arg0, void * arg1, void * arg2);
+/* Caller owns the return value; call flight_free_collision_distance3_d when done. */
 void * flight_create_collision_distance3d(void);
 bool flight_write_collision_distance3d(void * arg0, void * arg1, void * arg2, void * arg3, float arg4, float arg5, float arg6);
+/* Caller owns the return value; call flight_free_collision_manifold2_d when done. */
 void * flight_create_collision_manifold2d(void);
 void flight_clear_collision_manifold2d(void * arg0);
+/* Caller owns the return value; call flight_free_collision_manifold3_d when done. */
 void * flight_create_collision_manifold3d(void);
 void flight_clear_collision_manifold3d(void * arg0);
 bool flight_get_collision_shape_contains_point2d(void * arg0, float arg1, float arg2);
 bool flight_get_collision_shape_contains_point3d(void * arg0, float arg1, float arg2, float arg3);
+/* Caller owns the return value; call flight_free_collision_raycast_hit2_d when done. */
 void * flight_create_collision_raycast_hit2d(void);
 bool flight_raycast_collision_shape2d(void * arg0, void * arg1, double arg2, double arg3, double arg4, double arg5, double arg6);
+/* Caller owns the return value; call flight_free_collision_raycast_hit3_d when done. */
 void * flight_create_collision_raycast_hit3d(void);
 bool flight_raycast_collision_shape3d(void * arg0, void * arg1, float arg2, float arg3, float arg4, float arg5, float arg6, float arg7, float arg8);
 bool flight_test_segment_aabb_collision2d(void * arg0, void * arg1);
@@ -905,12 +1434,17 @@ bool flight_collide_circle_polygon_contact_manifold2d(void * arg0, void * arg1, 
 bool flight_collide_obb_obb_contact_manifold2d(void * arg0, void * arg1, void * arg2);
 bool flight_collide_obb_polygon_contact_manifold2d(void * arg0, void * arg1, void * arg2);
 bool flight_collide_polygon_polygon_contact_manifold2d(void * arg0, void * arg1, void * arg2);
+/* Caller owns the return value; call flight_free_collision_time_of_impact2_d when done. */
 void * flight_create_collision_time_of_impact2d(void);
 bool flight_sweep_collision_shape2d(void * arg0, void * arg1, void * arg2, float arg3, float arg4, void * arg5, float arg6, float arg7, float arg8);
+/* Caller owns the return value; call flight_free_collision_time_of_impact3_d when done. */
 void * flight_create_collision_time_of_impact3d(void);
 bool flight_sweep_collision_shape3d(void * arg0, void * arg1, void * arg2, float arg3, float arg4, float arg5, void * arg6, float arg7, float arg8, float arg9, float arg10);
+/* Caller owns the return value; call flight_free_collision_heightfield3_d when done. */
 void * flight_create_collision_heightfield3d(void);
+/* Caller owns the return value; call flight_free_collision_triangle_mesh3_d when done. */
 void * flight_create_collision_triangle_mesh3d(void);
+/* Caller owns the return value; call flight_free_collision_collider_shape3_d when done. */
 void * flight_clone_collision_collider_shape3d(void * arg0);
 bool flight_collide_collision_heightfield3d(void * arg0, void * arg1, void * arg2, void * arg3);
 bool flight_collide_collision_triangle_mesh3d(void * arg0, void * arg1, void * arg2, void * arg3);
@@ -1223,9 +1757,11 @@ float flight_set_collision_heightfield3_d_rotation_z(void * arg0, float arg1);
 float flight_get_collision_heightfield3_d_rotation_w(void * arg0);
 float flight_set_collision_heightfield3_d_rotation_w(void * arg0, float arg1);
 uint32_t flight_color_from_kelvin(float arg0);
+/* Caller owns the return value; call flight_free_hsl_color when done. */
 void * flight_allocate_hsl_color(void);
 void flight_hsl_to_rgb(void * arg0, float arg1, float arg2, float arg3);
 void flight_rgb_to_hsl(void * arg0, uint32_t arg1);
+/* Caller owns the return value; call flight_free_hsv_color when done. */
 void * flight_allocate_hsv_color(void);
 void flight_hsv_to_rgb(void * arg0, float arg1, float arg2, float arg3);
 void flight_rgb_to_hsv(void * arg0, uint32_t arg1);
@@ -1238,8 +1774,11 @@ void flight_get_rec709_luminance_weights(void * arg0);
 void flight_clamp_linear_rgb(void * arg0, float arg1, float arg2, float arg3);
 void flight_linear_rgb_to_oklab(void * arg0, float arg1, float arg2, float arg3);
 void flight_oklab_to_linear_rgb(void * arg0, float arg1, float arg2, float arg3);
+/* Caller owns the return value; call flight_free_linear_color when done. */
 void * flight_allocate_linear_color(void);
+/* Caller owns the return value; call flight_free_string when done. */
 char * flight_compute_rgb_hex_string(uint32_t arg0);
+/* Caller owns the return value; call flight_free_string when done. */
 char * flight_compute_rgba_css_string(uint32_t arg0);
 float flight_get_color_alpha(uint32_t arg0);
 uint32_t flight_get_color_rgb(uint32_t arg0);
@@ -1274,13 +1813,311 @@ float flight_get_linear_color_b(void * arg0);
 float flight_set_linear_color_b(void * arg0, float arg1);
 float flight_get_linear_color_a(void * arg0);
 float flight_set_linear_color_a(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_add_node_child_command_ref when done. */
+void * flight_create_add_node_child_command(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_composite_command_ref when done. */
+void * flight_create_composite_command(void * arg0, size_t arg1);
+/* Caller owns the return value; call flight_free_remove_node_child_command_ref when done. */
+void * flight_create_remove_node_child_command(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_reorder_node_child_command_ref when done. */
+void * flight_create_reorder_node_child_command(void * arg0, void * arg1, int32_t arg2);
+/* Caller owns the return value; call flight_free_command_binding_table when done. */
+void * flight_create_command_binding_table(void);
+/* Caller owns the return value; call flight_free_command_binding_ref when done. */
+void * flight_get_command_binding(void * arg0, const char * arg1);
+bool flight_has_command_binding(void * arg0, const char * arg1);
+void flight_register_command_binding(void * arg0, const char * arg1, void * arg2 /* cloned; caller retains its handle */);
+void flight_register_default_command_bindings(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_command_history_ref when done. */
+void * flight_create_command_history(void);
+bool flight_can_redo_command(void * arg0);
+bool flight_can_undo_command(void * arg0);
+void flight_clear_command_history(void * arg0);
+bool flight_execute_command(void * arg0, void * arg1);
+void flight_get_command_history_entries(void * arg0, void * arg1);
+size_t flight_get_command_history_index(void * arg0);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_get_command_history_redo_label(void * arg0);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_get_command_history_undo_label(void * arg0);
+bool flight_redo_command(void * arg0);
+bool flight_undo_command(void * arg0);
+/* Caller owns the return value; call flight_free_unit_signal when done. */
+void * flight_enable_command_history_signals(void * arg0);
+/* Caller owns the return value; call flight_free_unit_signal when done. */
+void * flight_get_command_history_signals(void * arg0);
+bool flight_abort_command_transaction(void * arg0);
+void flight_begin_command_transaction(void * arg0, const char * arg1);
+bool flight_end_command_transaction(void * arg0);
+bool flight_is_command_transaction_open(void * arg0);
+/* Caller owns the return value; call flight_free_command_dispatch_explanation when done. */
+void * flight_explain_command_dispatch(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_command_fields_label(void * arg0);
+void flight_field_set_command_fields_label(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_command_property_entry_property(void * arg0);
+void flight_field_set_command_property_entry_property(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_command_property_assignment_property(void * arg0);
+void flight_field_set_command_property_assignment_property(void * arg0, void * arg1, size_t arg2);
+int32_t flight_get_add_node_child_command_index(void * arg0);
+int32_t flight_set_add_node_child_command_index(void * arg0, int32_t arg1);
+int32_t flight_get_remove_node_child_command_index(void * arg0);
+int32_t flight_set_remove_node_child_command_index(void * arg0, int32_t arg1);
+int32_t flight_get_reorder_node_child_command_from_index(void * arg0);
+int32_t flight_set_reorder_node_child_command_from_index(void * arg0, int32_t arg1);
+int32_t flight_get_reorder_node_child_command_to_index(void * arg0);
+int32_t flight_set_reorder_node_child_command_to_index(void * arg0, int32_t arg1);
+double flight_get_set_node_property_command_merge_window(void * arg0);
+double flight_set_set_node_property_command_merge_window(void * arg0, double arg1);
+double flight_get_set_node_property_command_time(void * arg0);
+double flight_set_set_node_property_command_time(void * arg0, double arg1);
+size_t flight_set_command_history_index(void * arg0, size_t arg1);
+int32_t flight_get_command_history_max_size(void * arg0);
+int32_t flight_set_command_history_max_size(void * arg0, int32_t arg1);
+uint32_t flight_get_command_history_transaction_depth(void * arg0);
+uint32_t flight_set_command_history_transaction_depth(void * arg0, uint32_t arg1);
+size_t flight_get_command_history_transaction_index(void * arg0);
+size_t flight_set_command_history_transaction_index(void * arg0, size_t arg1);
+bool flight_get_command_dispatch_explanation_resolved(void * arg0);
+bool flight_set_command_dispatch_explanation_resolved(void * arg0, bool arg1);
+/* Caller owns the return value; call flight_compress_deflate_result_free when done. */
 void * flight_compress_deflate(void * arg0, size_t arg1);
+size_t flight_compress_deflate_result_len(void * arg0);
+/* Borrowed return; do not free; valid while the flight_compress_deflate result handle remains alive. */
+void * flight_compress_deflate_result_get(void * arg0, size_t arg1);
+void flight_compress_deflate_result_free(void * arg0);
+/* Caller owns the return value; call flight_compress_deflate_zlib_result_free when done. */
 void * flight_compress_deflate_zlib(void * arg0, size_t arg1);
+size_t flight_compress_deflate_zlib_result_len(void * arg0);
+/* Borrowed return; do not free; valid while the flight_compress_deflate_zlib result handle remains alive. */
+void * flight_compress_deflate_zlib_result_get(void * arg0, size_t arg1);
+void flight_compress_deflate_zlib_result_free(void * arg0);
+/* Caller owns the return value; call flight_decompress_deflate_result_free when done. */
 void * flight_decompress_deflate(void * arg0, size_t arg1, size_t arg2, uint32_t arg3);
+size_t flight_decompress_deflate_result_len(void * arg0);
+/* Borrowed return; do not free; valid while the flight_decompress_deflate result handle remains alive. */
+void * flight_decompress_deflate_result_get(void * arg0, size_t arg1);
+void flight_decompress_deflate_result_free(void * arg0);
+/* Caller owns the return value; call flight_decompress_lzma_result_free when done. */
 void * flight_decompress_lzma(void * arg0, size_t arg1, size_t arg2, uint32_t arg3);
+size_t flight_decompress_lzma_result_len(void * arg0);
+/* Borrowed return; do not free; valid while the flight_decompress_lzma result handle remains alive. */
+void * flight_decompress_lzma_result_get(void * arg0, size_t arg1);
+void flight_decompress_lzma_result_free(void * arg0);
+/* Caller owns the return value; call flight_compress_lzma_result_free when done. */
 void * flight_compress_lzma(void * arg0, size_t arg1);
-char * flight_get_compression_string(uint32_t arg0);
-int32_t flight_parse_compression(const char * arg0);
+size_t flight_compress_lzma_result_len(void * arg0);
+/* Borrowed return; do not free; valid while the flight_compress_lzma result handle remains alive. */
+void * flight_compress_lzma_result_get(void * arg0, size_t arg1);
+void flight_compress_lzma_result_free(void * arg0);
+/* Caller owns the return value; call flight_free_connectivity when done. */
+void * flight_create_connectivity(void);
+bool flight_attach_connectivity(void * arg0, void * arg1, void * arg2);
+void flight_destroy_connectivity(void * arg0);
+void flight_detach_connectivity(void * arg0);
+void flight_dispose_connectivity(void * arg0);
+void flight_get_connectivity_status(void * arg0, void * arg1);
+bool flight_has_connectivity_status_changed(void * arg0, void * arg1);
+bool flight_is_connectivity_metered(void * arg0);
+bool flight_is_connectivity_save_data_enabled(void * arg0);
+float flight_get_connectivity_status_downlink(void * arg0);
+float flight_set_connectivity_status_downlink(void * arg0, float arg1);
+float flight_get_connectivity_status_downlink_max(void * arg0);
+float flight_set_connectivity_status_downlink_max(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_connectivity_status_effective_type(void * arg0);
+void flight_field_set_connectivity_status_effective_type(void * arg0, void * arg1, size_t arg2);
+float flight_get_connectivity_status_rtt(void * arg0);
+float flight_set_connectivity_status_rtt(void * arg0, float arg1);
+bool flight_get_connectivity_status_save_data(void * arg0);
+bool flight_set_connectivity_status_save_data(void * arg0, bool arg1);
+bool flight_get_connectivity_status_metered(void * arg0);
+bool flight_set_connectivity_status_metered(void * arg0, bool arg1);
+bool flight_get_connectivity_reachability_reachable(void * arg0);
+bool flight_set_connectivity_reachability_reachable(void * arg0, bool arg1);
+float flight_get_connectivity_reachability_latency(void * arg0);
+float flight_set_connectivity_reachability_latency(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_connectivity_reachability_options_url(void * arg0);
+void flight_field_set_connectivity_reachability_options_url(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_debug_state when done. */
+void * flight_create_debug_state(void);
+void flight_disable_debug(void * arg0, void * arg1);
+void flight_enable_debug(void * arg0, void * arg1, void * arg2);
+bool flight_is_debug_enabled(void * arg0);
+void flight_register_debug_subsystem(void * arg0, const char * arg1, void * arg2);
+bool flight_unregister_debug_subsystem(void * arg0, const char * arg1);
+/* Caller owns the return value; call flight_free_log_timer when done. */
+void * flight_begin_debug_span(void * arg0, double arg1, const char * arg2, const char * arg3);
+double flight_end_debug_span(void * arg0, double arg1, void * arg2);
+/* Caller owns the return value; call flight_free_device_capabilities when done. */
+void * flight_create_device_capabilities(void);
+/* Caller owns the return value; call flight_free_device_display_metrics when done. */
+void * flight_create_device_display_metrics(void);
+/* Caller owns the return value; call flight_free_device_info when done. */
+void * flight_create_device_info(void);
+/* Caller owns the return value; call flight_free_safe_area_insets when done. */
+void * flight_create_safe_area_insets(void);
+void flight_get_device_capabilities(void * arg0, void * arg1);
+void flight_get_device_display_metrics(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_get_device_id(void * arg0);
+void flight_get_device_info(void * arg0, void * arg1);
+void flight_get_safe_area_insets(void * arg0, void * arg1);
+void flight_refresh_device_info(void * arg0);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_device_info_arch(void * arg0);
+void flight_field_set_device_info_arch(void * arg0, void * arg1, size_t arg2);
+double flight_get_device_info_available_memory(void * arg0);
+double flight_set_device_info_available_memory(void * arg0, double arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_device_info_board_name(void * arg0);
+void flight_field_set_device_info_board_name(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_device_info_color_gamut(void * arg0);
+void flight_field_set_device_info_color_gamut(void * arg0, void * arg1, size_t arg2);
+int32_t flight_get_device_info_cpu_cores(void * arg0);
+int32_t flight_set_device_info_cpu_cores(void * arg0, int32_t arg1);
+float flight_get_device_info_font_scale(void * arg0);
+float flight_set_device_info_font_scale(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_device_info_gpu_renderer(void * arg0);
+void flight_field_set_device_info_gpu_renderer(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_device_info_gpu_vendor(void * arg0);
+void flight_field_set_device_info_gpu_vendor(void * arg0, void * arg1, size_t arg2);
+bool flight_get_device_info_is_hdr(void * arg0);
+bool flight_set_device_info_is_hdr(void * arg0, bool arg1);
+bool flight_get_device_info_is_jailbroken(void * arg0);
+bool flight_set_device_info_is_jailbroken(void * arg0, bool arg1);
+bool flight_get_device_info_is_low_end_device(void * arg0);
+bool flight_set_device_info_is_low_end_device(void * arg0, bool arg1);
+bool flight_get_device_info_is_rooted(void * arg0);
+bool flight_set_device_info_is_rooted(void * arg0, bool arg1);
+bool flight_get_device_info_is_virtual(void * arg0);
+bool flight_set_device_info_is_virtual(void * arg0, bool arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_device_info_manufacturer(void * arg0);
+void flight_field_set_device_info_manufacturer(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_device_info_marketing_name(void * arg0);
+void flight_field_set_device_info_marketing_name(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_device_info_model(void * arg0);
+void flight_field_set_device_info_model(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_device_info_os_build(void * arg0);
+void flight_field_set_device_info_os_build(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_device_info_os_name(void * arg0);
+void flight_field_set_device_info_os_name(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_device_info_os_version(void * arg0);
+void flight_field_set_device_info_os_version(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_device_info_platform_string(void * arg0);
+void flight_field_set_device_info_platform_string(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_device_info_product_name(void * arg0);
+void flight_field_set_device_info_product_name(void * arg0, void * arg1, size_t arg2);
+double flight_get_device_info_total_memory(void * arg0);
+double flight_set_device_info_total_memory(void * arg0, double arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_device_info_web_view_version(void * arg0);
+void flight_field_set_device_info_web_view_version(void * arg0, void * arg1, size_t arg2);
+float flight_get_safe_area_insets_top(void * arg0);
+float flight_set_safe_area_insets_top(void * arg0, float arg1);
+float flight_get_safe_area_insets_right(void * arg0);
+float flight_set_safe_area_insets_right(void * arg0, float arg1);
+float flight_get_safe_area_insets_bottom(void * arg0);
+float flight_set_safe_area_insets_bottom(void * arg0, float arg1);
+float flight_get_safe_area_insets_left(void * arg0);
+float flight_set_safe_area_insets_left(void * arg0, float arg1);
+bool flight_get_device_capabilities_has_keyboard(void * arg0);
+bool flight_set_device_capabilities_has_keyboard(void * arg0, bool arg1);
+bool flight_get_device_capabilities_has_mouse(void * arg0);
+bool flight_set_device_capabilities_has_mouse(void * arg0, bool arg1);
+bool flight_get_device_capabilities_has_stylus(void * arg0);
+bool flight_set_device_capabilities_has_stylus(void * arg0, bool arg1);
+int32_t flight_get_device_display_metrics_color_depth(void * arg0);
+int32_t flight_set_device_display_metrics_color_depth(void * arg0, int32_t arg1);
+float flight_get_device_display_metrics_density_dpi(void * arg0);
+float flight_set_device_display_metrics_density_dpi(void * arg0, float arg1);
+float flight_get_device_display_metrics_logical_height(void * arg0);
+float flight_set_device_display_metrics_logical_height(void * arg0, float arg1);
+float flight_get_device_display_metrics_logical_width(void * arg0);
+float flight_set_device_display_metrics_logical_width(void * arg0, float arg1);
+float flight_get_device_display_metrics_physical_height(void * arg0);
+float flight_set_device_display_metrics_physical_height(void * arg0, float arg1);
+float flight_get_device_display_metrics_physical_width(void * arg0);
+float flight_set_device_display_metrics_physical_width(void * arg0, float arg1);
+float flight_get_device_display_metrics_pixel_ratio(void * arg0);
+float flight_set_device_display_metrics_pixel_ratio(void * arg0, float arg1);
+void flight_show_confirm_dialog(void * arg0, void * arg1, void (*arg2)(void *, bool, char *), void * arg3);
+/* On successful completion, caller owns the callback value; call flight_free_message_dialog_result when done. */
+void flight_show_error_box(void * arg0, const char * arg1, const char * arg2, void * arg3, void (*arg4)(void *, void *, char *), void * arg5);
+/* On successful completion, caller owns the callback value; call flight_free_message_dialog_result when done. */
+void flight_show_error_dialog(void * arg0, void * arg1, void (*arg2)(void *, void *, char *), void * arg3);
+/* On successful completion, caller owns the callback value; call flight_free_message_dialog_result when done. */
+void flight_show_info_dialog(void * arg0, void * arg1, void (*arg2)(void *, void *, char *), void * arg3);
+/* On successful completion, caller owns the callback value; call flight_free_message_dialog_result when done. */
+void flight_show_message_dialog(void * arg0, void * arg1, void (*arg2)(void *, void *, char *), void * arg3);
+/* On successful completion, caller owns the callback value; call flight_free_string when done. */
+void flight_show_prompt_dialog(void * arg0, void * arg1, void (*arg2)(void *, char *, char *), void * arg3);
+/* On successful completion, caller owns the callback value; call flight_free_message_dialog_result when done. */
+void flight_show_warning_dialog(void * arg0, void * arg1, void (*arg2)(void *, void *, char *), void * arg3);
+/* Caller owns the return value; call flight_free_file_dialog_handle_operations when done. */
+void * flight_get_file_dialog_handle_operations(void * arg0);
+/* On successful completion, caller owns the callback value; call flight_free_directory_open_dialog_result when done. */
+void flight_show_open_directory_dialog(void * arg0, void * arg1, void (*arg2)(void *, void *, char *), void * arg3);
+/* On successful completion, caller owns the callback value; call flight_free_file_open_dialog_result when done. */
+void flight_show_open_file_dialog(void * arg0, void * arg1, void (*arg2)(void *, void *, char *), void * arg3);
+/* On successful completion, caller owns the callback value; call flight_free_file_save_dialog_result when done. */
+void flight_show_save_file_dialog(void * arg0, void * arg1, void (*arg2)(void *, void *, char *), void * arg3);
+/* On successful completion, caller owns the callback value; call flight_free_photo_capture_dialog_result when done. */
+void flight_show_capture_photo_dialog(void * arg0, void * arg1, void (*arg2)(void *, void *, char *), void * arg3);
+/* On successful completion, caller owns the callback value; call flight_free_video_capture_dialog_result when done. */
+void flight_show_capture_video_dialog(void * arg0, void * arg1, void (*arg2)(void *, void *, char *), void * arg3);
+/* On successful completion, caller owns the callback value; call flight_free_image_open_dialog_result when done. */
+void flight_show_open_image_dialog(void * arg0, void * arg1, void (*arg2)(void *, void *, char *), void * arg3);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_file_dialog_filter_name(void * arg0);
+void flight_field_set_file_dialog_filter_name(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_file_dialog_handle_name(void * arg0);
+void flight_field_set_file_dialog_handle_name(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_dialog_image_data_url(void * arg0);
+void flight_field_set_dialog_image_data_url(void * arg0, void * arg1, size_t arg2);
+float flight_get_dialog_image_height(void * arg0);
+float flight_set_dialog_image_height(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_dialog_image_mime_type(void * arg0);
+void flight_field_set_dialog_image_mime_type(void * arg0, void * arg1, size_t arg2);
+float flight_get_dialog_image_width(void * arg0);
+float flight_set_dialog_image_width(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_dialog_video_data_url(void * arg0);
+void flight_field_set_dialog_video_data_url(void * arg0, void * arg1, size_t arg2);
+float flight_get_dialog_video_duration(void * arg0);
+float flight_set_dialog_video_duration(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_dialog_video_mime_type(void * arg0);
+void flight_field_set_dialog_video_mime_type(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_prompt_dialog_options_message(void * arg0);
+void flight_field_set_prompt_dialog_options_message(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_message_dialog_options_message(void * arg0);
+void flight_field_set_message_dialog_options_message(void * arg0, void * arg1, size_t arg2);
+int32_t flight_get_message_dialog_result_button_index(void * arg0);
+int32_t flight_set_message_dialog_result_button_index(void * arg0, int32_t arg1);
+bool flight_get_message_dialog_result_cancelled(void * arg0);
+bool flight_set_message_dialog_result_cancelled(void * arg0, bool arg1);
+bool flight_get_message_dialog_result_checkbox_checked(void * arg0);
+bool flight_set_message_dialog_result_checkbox_checked(void * arg0, bool arg1);
 float flight_ease_in_back(float arg0);
 float flight_ease_in_out_back(float arg0);
 float flight_ease_out_back(float arg0);
@@ -1290,18 +2127,28 @@ float flight_ease_out_bounce(float arg0);
 float flight_ease_in_circular(float arg0);
 float flight_ease_in_out_circular(float arg0);
 float flight_ease_out_circular(float arg0);
-void * flight_ease_clamp(void * arg0);
-void * flight_ease_clamp_output(void * arg0, float arg1, float arg2);
-void * flight_ease_invert(void * arg0);
-void * flight_ease_mirror(void * arg0);
-void * flight_ease_reverse(void * arg0);
-void * flight_ease_scale_output(void * arg0, float arg1, float arg2);
+/* Caller owns the return value; call flight_free_easing_function when done. */
+void * flight_ease_clamp(void * arg0 /* cloned; caller retains its handle */);
+/* Caller owns the return value; call flight_free_easing_function when done. */
+void * flight_ease_clamp_output(void * arg0 /* cloned; caller retains its handle */, float arg1, float arg2);
+/* Caller owns the return value; call flight_free_easing_function when done. */
+void * flight_ease_invert(void * arg0 /* cloned; caller retains its handle */);
+/* Caller owns the return value; call flight_free_easing_function when done. */
+void * flight_ease_mirror(void * arg0 /* cloned; caller retains its handle */);
+/* Caller owns the return value; call flight_free_easing_function when done. */
+void * flight_ease_reverse(void * arg0 /* cloned; caller retains its handle */);
+/* Caller owns the return value; call flight_free_easing_function when done. */
+void * flight_ease_scale_output(void * arg0 /* cloned; caller retains its handle */, float arg1, float arg2);
 float flight_ease_in_cubic(float arg0);
 float flight_ease_in_out_cubic(float arg0);
 float flight_ease_out_cubic(float arg0);
+/* Caller owns the return value; call flight_free_easing_function when done. */
 void * flight_ease_cubic_bezier(float arg0, float arg1, float arg2, float arg3);
+/* Caller owns the return value; call flight_free_easing_function when done. */
 void * flight_ease_in_damped_sine(float arg0, float arg1);
+/* Caller owns the return value; call flight_free_easing_function when done. */
 void * flight_ease_in_out_damped_sine(float arg0, float arg1);
+/* Caller owns the return value; call flight_free_easing_function when done. */
 void * flight_ease_out_damped_sine(float arg0, float arg1);
 float flight_ease_in_elastic(float arg0);
 float flight_ease_in_out_elastic(float arg0);
@@ -1310,9 +2157,13 @@ float flight_ease_in_exponential(float arg0);
 float flight_ease_in_out_exponential(float arg0);
 float flight_ease_out_exponential(float arg0);
 float flight_ease_linear(float arg0);
+/* Caller owns the return value; call flight_free_easing_function when done. */
 void * flight_ease_piecewise(void * arg0, size_t arg1);
+/* Caller owns the return value; call flight_free_easing_function when done. */
 void * flight_ease_in_out_power(float arg0);
+/* Caller owns the return value; call flight_free_easing_function when done. */
 void * flight_ease_in_power(float arg0);
+/* Caller owns the return value; call flight_free_easing_function when done. */
 void * flight_ease_out_power(float arg0);
 float flight_ease_in_out_quadratic(float arg0);
 float flight_ease_in_quadratic(float arg0);
@@ -1328,23 +2179,31 @@ float flight_ease_in_sine(float arg0);
 float flight_ease_out_sine(float arg0);
 float flight_ease_smootherstep(float arg0);
 float flight_ease_smoothstep(float arg0);
+/* Caller owns the return value; call flight_free_scalar_remap when done. */
 void * flight_ease_smoothstep_range(float arg0, float arg1);
+/* Caller owns the return value; call flight_free_easing_function when done. */
 void * flight_ease_steps(int32_t arg0, int32_t arg1);
 void flight_disable_easing_guards(void);
-void flight_enable_easing_guards(void * arg0, void * arg1, void * arg2);
-float flight_get_easing_derivative(void * arg0, void * arg1, float arg2, float arg3);
-void flight_write_easing_samples(void * arg0, size_t arg1, void * arg2, void * arg3);
+void flight_enable_easing_guards(void * arg0, double (*arg1)(void *), void * arg2);
+float flight_get_easing_derivative(float (*arg0)(void *, float), void * arg1, float arg2, float arg3);
+void flight_write_easing_samples(void * arg0, size_t arg1, float (*arg2)(void *, float), void * arg3);
+/* Caller owns the return value; call flight_free_auto_exposure_effect_ref when done. */
 void * flight_create_auto_exposure_effect(void);
+/* Caller owns the return value; call flight_free_barrel_distortion_effect_ref when done. */
 void * flight_create_barrel_distortion_effect(void);
+/* Caller owns the return value; call flight_free_bevel_effect_ref when done. */
 void * flight_create_bevel_effect(void);
 void flight_get_bevel_effect_padding(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_bitmap_displacement_effect_ref when done. */
 void * flight_create_bitmap_displacement_effect(void);
 void flight_get_bitmap_displacement_effect_padding(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_blend_effect_ref when done. */
 void * flight_create_blend_effect(void);
 void flight_blend_non_separable_rgb(void * arg0, size_t arg1, const char * arg2, float arg3, float arg4, float arg5, float arg6, float arg7, float arg8);
 void flight_get_advanced_blend_rgb(void * arg0, size_t arg1, const char * arg2, float arg3, float arg4, float arg5, float arg6, float arg7, float arg8);
 float flight_get_separable_blend_channel(const char * arg0, float arg1, float arg2);
 bool flight_is_non_separable_blend_mode(const char * arg0);
+/* Caller owns the return value; call flight_free_bloom_effect_ref when done. */
 void * flight_create_bloom_effect(void);
 float flight_compute_bloom_blur_radius(void * arg0);
 float flight_compute_bloom_intensity(void * arg0);
@@ -1352,33 +2211,46 @@ float flight_compute_bloom_threshold(void * arg0);
 void flight_get_bloom_effect_padding(void * arg0, void * arg1);
 uint32_t flight_get_blur_downsample_level(float arg0);
 float flight_get_blur_residual_sigma(float arg0, uint32_t arg1);
+/* Caller owns the return value; call flight_free_blur_effect_ref when done. */
 void * flight_create_blur_effect(void);
 void flight_get_blur_effect_padding(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_bokeh_depth_of_field_effect_ref when done. */
 void * flight_create_bokeh_depth_of_field_effect(void);
 void flight_get_bokeh_depth_of_field_effect_padding(void * arg0, void * arg1);
 float flight_compute_box_blur_pass_radius(float arg0, float arg1, float arg2);
 float flight_compute_box_blur_radius(float arg0, float arg1);
 float flight_compute_gaussian_sigma_for_blur_radius(float arg0, float arg1);
+/* Caller owns the return value; call flight_free_camera_motion_blur_effect_ref when done. */
 void * flight_create_camera_motion_blur_effect(void);
+/* Caller owns the return value; call flight_free_chromatic_aberration_effect_ref when done. */
 void * flight_create_chromatic_aberration_effect(void);
 void flight_compute_color_temperature_rgb(void * arg0, float arg1);
 void flight_compute_white_balance_multipliers(void * arg0, float arg1, float arg2);
+/* Caller owns the return value; call flight_free_composite_effect_ref when done. */
 void * flight_create_composite_effect(void);
 void flight_get_composite_operator_factors(void * arg0, size_t arg1, const char * arg2, float arg3, float arg4);
+/* Caller owns the return value; call flight_free_contact_shadows_effect_ref when done. */
 void * flight_create_contact_shadows_effect(void);
 void flight_get_contact_shadows_effect_padding(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_convolution_effect_ref when done. */
 void * flight_create_convolution_effect(void);
 void flight_get_convolution_effect_padding(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_crt_effect_ref when done. */
 void * flight_create_crt_effect(void);
+/* Caller owns the return value; call flight_free_custom_shader_effect_ref when done. */
 void * flight_create_custom_shader_effect(void);
 float flight_compute_depth_of_field_coc(float arg0, float arg1, float arg2, float arg3);
 float flight_compute_linear_depth_from_nonlinear(float arg0, float arg1, float arg2);
 size_t flight_compute_ssao_sample_kernel(void * arg0, size_t arg1, float arg2);
+/* Caller owns the return value; call flight_free_directional_blur_effect_ref when done. */
 void * flight_create_directional_blur_effect(void);
 void flight_get_directional_blur_effect_padding(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_displacement_effect_ref when done. */
 void * flight_create_displacement_effect(void);
 void flight_get_displacement_effect_padding(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_dither_effect_ref when done. */
 void * flight_create_dither_effect(void);
+/* Caller owns the return value; call flight_free_drop_shadow_effect_ref when done. */
 void * flight_create_drop_shadow_effect(void);
 void flight_get_drop_shadow_effect_padding(void * arg0, void * arg1);
 void flight_compute_outline_edge_params(void * arg0, void * arg1);
@@ -1387,12 +2259,26 @@ void flight_compute_sketch_edge_params(void * arg0, void * arg1);
 void flight_get_sobel_kernel_coefficients(void * arg0, size_t arg1);
 void flight_get_effect_defaults(void * arg0, const char * arg1);
 bool flight_normalize_effect(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_get_effect_inputs_result_free when done. */
+void * flight_get_effect_inputs(void * arg0);
+size_t flight_get_effect_inputs_result_len(void * arg0);
+int32_t flight_get_effect_inputs_result_get(void * arg0, size_t arg1);
+void flight_get_effect_inputs_result_free(void * arg0);
+/* Caller owns the return value; call flight_get_effect_kinds_result_free when done. */
+void * flight_get_effect_kinds(void);
+size_t flight_get_effect_kinds_result_len(void * arg0);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_get_effect_kinds_result_get(void * arg0, size_t arg1);
+void flight_get_effect_kinds_result_free(void * arg0);
 bool flight_can_lerp_effects(void * arg0, void * arg1);
 void flight_get_directional_effect_padding(void * arg0, float arg1, float arg2, float arg3, float arg4);
 void flight_get_gaussian_effect_padding(void * arg0, float arg1, float arg2);
 int32_t flight_validate_effect_list(void * arg0, size_t arg1, void * arg2, size_t arg3);
+/* Caller owns the return value; call flight_free_film_emulation_effect_ref when done. */
 void * flight_create_film_emulation_effect(void);
+/* Caller owns the return value; call flight_free_film_grain_effect_ref when done. */
 void * flight_create_film_grain_effect(void);
+/* Caller owns the return value; call flight_free_fxaa_effect_ref when done. */
 void * flight_create_fxaa_effect(void);
 void flight_compute_gaussian_kernel_weights(void * arg0, float arg1);
 size_t flight_get_gaussian_kernel_size(float arg0);
@@ -1400,57 +2286,86 @@ size_t flight_create_gaussian_kernel_weights(void * arg0, size_t arg1, float arg
 float flight_compute_gaussian_radius_from_sigma(float arg0);
 float flight_compute_gaussian_sigma_from_radius(float arg0);
 float flight_compute_separable_blur_pass_count(float arg0);
+/* Caller owns the return value; call flight_free_glitch_effect_ref when done. */
 void * flight_create_glitch_effect(void);
 void flight_get_glitch_effect_padding(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_god_rays_effect_ref when done. */
 void * flight_create_god_rays_effect(void);
 float flight_compute_god_rays_accumulation_scale(void * arg0);
 void flight_compute_god_rays_light_center(void * arg0, void * arg1);
 float flight_compute_god_rays_sample_weight(void * arg0, float arg1);
 void flight_compute_god_rays_step_size(void * arg0, void * arg1, float arg2, float arg3);
+/* Caller owns the return value; call flight_free_gradient_bevel_effect_ref when done. */
 void * flight_create_gradient_bevel_effect(void);
 void flight_get_gradient_bevel_effect_padding(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_gradient_glow_effect_ref when done. */
 void * flight_create_gradient_glow_effect(void);
 void flight_get_gradient_glow_effect_padding(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_halftone_effect_ref when done. */
 void * flight_create_halftone_effect(void);
+/* Caller owns the return value; call flight_free_inner_glow_effect_ref when done. */
 void * flight_create_inner_glow_effect(void);
 void flight_get_inner_glow_effect_padding(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_inner_shadow_effect_ref when done. */
 void * flight_create_inner_shadow_effect(void);
 void flight_get_inner_shadow_effect_padding(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_kuwahara_effect_ref when done. */
 void * flight_create_kuwahara_effect(void);
 size_t flight_compute_kuwahara_gaussian_weights(void * arg0, size_t arg1, float arg2);
 void flight_compute_kuwahara_sector_offsets(void * arg0, float arg1);
 size_t flight_compute_kuwahara_sector_pixel_count(void * arg0);
 size_t flight_compute_kuwahara_sector_size(void * arg0);
+/* Caller owns the return value; call flight_free_lens_dirt_effect_ref when done. */
 void * flight_create_lens_dirt_effect(void);
+/* Caller owns the return value; call flight_free_lens_distortion_effect_ref when done. */
 void * flight_create_lens_distortion_effect(void);
+/* Caller owns the return value; call flight_free_lens_flare_effect_ref when done. */
 void * flight_create_lens_flare_effect(void);
 void flight_compute_linear_sampled_gaussian(void * arg0, void * arg1, float arg2);
 size_t flight_get_linear_sampled_gaussian_tap_count(float arg0);
+/* Caller owns the return value; call flight_free_median_effect_ref when done. */
 void * flight_create_median_effect(void);
 void flight_get_median_effect_padding(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_motion_blur_effect_ref when done. */
 void * flight_create_motion_blur_effect(void);
+/* Caller owns the return value; call flight_free_outer_glow_effect_ref when done. */
 void * flight_create_outer_glow_effect(void);
 void flight_get_outer_glow_effect_padding(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_outline_effect_ref when done. */
 void * flight_create_outline_effect(void);
 void flight_get_outline_effect_padding(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_pannini_projection_effect_ref when done. */
 void * flight_create_pannini_projection_effect(void);
+/* Caller owns the return value; call flight_free_pixelate_effect_ref when done. */
 void * flight_create_pixelate_effect(void);
+/* Caller owns the return value; call flight_free_posterize_effect_ref when done. */
 void * flight_create_posterize_effect(void);
+/* Caller owns the return value; call flight_free_radial_blur_effect_ref when done. */
 void * flight_create_radial_blur_effect(void);
+/* Caller owns the return value; call flight_free_scanlines_effect_ref when done. */
 void * flight_create_scanlines_effect(void);
+/* Caller owns the return value; call flight_free_screen_space_fog_effect_ref when done. */
 void * flight_create_screen_space_fog_effect(void);
+/* Caller owns the return value; call flight_free_sharpen_effect_ref when done. */
 void * flight_create_sharpen_effect(void);
+/* Caller owns the return value; call flight_free_sketch_effect_ref when done. */
 void * flight_create_sketch_effect(void);
+/* Caller owns the return value; call flight_free_smaa_effect_ref when done. */
 void * flight_create_smaa_effect(void);
+/* Caller owns the return value; call flight_free_ssao_effect_ref when done. */
 void * flight_create_ssao_effect(void);
+/* Caller owns the return value; call flight_free_ssr_effect_ref when done. */
 void * flight_create_ssr_effect(void);
 size_t flight_create_bayer_matrix(void * arg0, size_t arg1, float arg2);
 void flight_compute_crt_mask_params(void * arg0, float arg1, float arg2);
 void flight_compute_halftone_cell_params(void * arg0, float arg1, float arg2);
 void flight_compute_scanline_params(void * arg0, float arg1, float arg2);
+/* Caller owns the return value; call flight_free_taa_effect_ref when done. */
 void * flight_create_taa_effect(void);
+/* Caller owns the return value; call flight_free_tilt_shift_effect_ref when done. */
 void * flight_create_tilt_shift_effect(void);
 void flight_get_tilt_shift_effect_padding(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_tone_map_effect_ref when done. */
 void * flight_create_tone_map_effect(void);
 float flight_compute_aces_tone_map(float arg0);
 float flight_compute_agx_tone_map(float arg0, void * arg1);
@@ -1461,58 +2376,197 @@ float flight_compute_reinhard_tone_map(float arg0);
 float flight_compute_uncharted_2_tone_map(float arg0);
 void flight_get_aces_input_matrix(void * arg0, size_t arg1);
 void flight_get_aces_output_matrix(void * arg0, size_t arg1);
+/* Caller owns the return value; call flight_free_vignette_effect_ref when done. */
 void * flight_create_vignette_effect(void);
+/* Caller owns the return value; call flight_free_volumetric_light_effect_ref when done. */
 void * flight_create_volumetric_light_effect(void);
+/* Caller owns the return value; call flight_free_white_balance_effect_ref when done. */
 void * flight_create_white_balance_effect(void);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_blend_effect_mode(void * arg0);
 void flight_field_set_blend_effect_mode(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_composite_effect_operator(void * arg0);
 void flight_field_set_composite_effect_operator(void * arg0, void * arg1, size_t arg2);
 float flight_get_convolution_effect_matrix_x(void * arg0);
 float flight_set_convolution_effect_matrix_x(void * arg0, float arg1);
 float flight_get_convolution_effect_matrix_y(void * arg0);
 float flight_set_convolution_effect_matrix_y(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_custom_shader_effect_shader_key(void * arg0);
 void flight_field_set_custom_shader_effect_shader_key(void * arg0, void * arg1, size_t arg2);
 float flight_get_effect_capture_geometry_target_height(void * arg0);
 float flight_set_effect_capture_geometry_target_height(void * arg0, float arg1);
 float flight_get_effect_capture_geometry_target_width(void * arg0);
 float flight_set_effect_capture_geometry_target_width(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_string when done. */
 char * flight_decode_utf8(void * arg0, size_t arg1, int64_t arg2, int64_t arg3);
+/* Caller owns the return value; call flight_encode_utf8_result_free when done. */
 void * flight_encode_utf8(const char * arg0);
+size_t flight_encode_utf8_result_len(void * arg0);
+/* Borrowed return; do not free; valid while the flight_encode_utf8 result handle remains alive. */
+void * flight_encode_utf8_result_get(void * arg0, size_t arg1);
+void flight_encode_utf8_result_free(void * arg0);
 void flight_disable_entity_runtime_guards(void);
 void flight_enable_entity_runtime_guards(void * arg0);
+/* Caller owns the return value; call flight_free_entity_runtime_write_explanation when done. */
 void * flight_explain_entity_runtime_write(uint32_t arg0);
 bool flight_are_entity_runtime_guards_enabled(void);
 void flight_set_entity_runtime_guard_mode(bool arg0);
+void flight_create_file_symlink(const char * arg0, const char * arg1, void (*arg2)(void *, bool, char *), void * arg3);
+void flight_append_text_file(void * arg0, const char * arg1, const char * arg2, void * arg3, void (*arg4)(void *, bool, char *), void * arg5);
+void flight_can_access_file(void * arg0, const char * arg1, uint32_t arg2, void (*arg3)(void *, bool, char *), void * arg4);
+void flight_copy_file(void * arg0, const char * arg1, const char * arg2, void (*arg3)(void *, bool, char *), void * arg4);
+void flight_directory_exists(void * arg0, const char * arg1, void (*arg2)(void *, bool, char *), void * arg3);
+void flight_file_exists(void * arg0, const char * arg1, void (*arg2)(void *, bool, char *), void * arg3);
+/* On successful completion, caller owns the callback value; call flight_find_files_result_free when done. */
+void flight_find_files(void * arg0, const char * arg1, const char * arg2, void * arg3, void (*arg4)(void *, void *, char *), void * arg5);
+size_t flight_find_files_result_len(void * arg0);
+/* Borrowed return; do not free; valid while the flight_find_files result handle remains alive. */
+void * flight_find_files_result_get(void * arg0, size_t arg1);
+void flight_find_files_result_free(void * arg0);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_get_file_base_name(const char * arg0);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_get_file_directory_name(const char * arg0);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_get_file_extension_name(const char * arg0);
+/* On successful completion, caller owns the callback value; call flight_free_file_permissions when done. */
+void flight_get_file_permissions(const char * arg0, void (*arg1)(void *, void *, char *), void * arg2);
+/* On successful completion, caller owns the callback value; call flight_free_string when done. */
+void flight_get_file_real_path(const char * arg0, void (*arg1)(void *, char *, char *), void * arg2);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_get_file_system_path(uint32_t arg0);
+/* On successful completion, caller owns the callback value; call flight_free_file_system_usage when done. */
+void flight_get_file_system_usage(void * arg0, void (*arg1)(void *, void *, char *), void * arg2);
+bool flight_is_absolute_file_path(const char * arg0);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_join_file_path(const char * const * arg0, size_t arg1);
+void flight_make_directory(void * arg0, const char * arg1, void (*arg2)(void *, bool, char *), void * arg3);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_normalize_file_path(const char * arg0);
+/* On successful completion, caller owns the callback value; call flight_free_readable_stream when done. */
+void flight_open_file_read_stream(void * arg0, const char * arg1, void * arg2, void (*arg3)(void *, void *, char *), void * arg4);
+/* On successful completion, caller owns the callback value; call flight_free_writable_stream when done. */
+void flight_open_file_write_stream(void * arg0, const char * arg1, void * arg2, void (*arg3)(void *, void *, char *), void * arg4);
+/* On successful completion, caller owns the callback value; call flight_read_binary_file_result_free when done. */
+void flight_read_binary_file(void * arg0, const char * arg1, void * arg2, void (*arg3)(void *, void *, char *), void * arg4);
+size_t flight_read_binary_file_result_len(void * arg0);
+/* Borrowed return; do not free; valid while the flight_read_binary_file result handle remains alive. */
+void * flight_read_binary_file_result_get(void * arg0, size_t arg1);
+void flight_read_binary_file_result_free(void * arg0);
+/* On successful completion, caller owns the callback value; call flight_read_binary_file_range_result_free when done. */
+void flight_read_binary_file_range(void * arg0, const char * arg1, size_t arg2, size_t arg3, void * arg4, void (*arg5)(void *, void *, char *), void * arg6);
+size_t flight_read_binary_file_range_result_len(void * arg0);
+/* Borrowed return; do not free; valid while the flight_read_binary_file_range result handle remains alive. */
+void * flight_read_binary_file_range_result_get(void * arg0, size_t arg1);
+void flight_read_binary_file_range_result_free(void * arg0);
+/* On successful completion, caller owns the callback value; call flight_read_dialog_handle_binary_file_result_free when done. */
+void flight_read_dialog_handle_binary_file(void * arg0, void * arg1, void * arg2, void (*arg3)(void *, void *, char *), void * arg4);
+size_t flight_read_dialog_handle_binary_file_result_len(void * arg0);
+/* Borrowed return; do not free; valid while the flight_read_dialog_handle_binary_file result handle remains alive. */
+void * flight_read_dialog_handle_binary_file_result_get(void * arg0, size_t arg1);
+void flight_read_dialog_handle_binary_file_result_free(void * arg0);
+/* On successful completion, caller owns the callback value; call flight_free_string when done. */
+void flight_read_dialog_handle_text_file(void * arg0, void * arg1, void * arg2, void (*arg3)(void *, char *, char *), void * arg4);
+/* On successful completion, caller owns the callback value; call flight_read_directory_result_free when done. */
+void flight_read_directory(void * arg0, const char * arg1, void * arg2, void (*arg3)(void *, void *, char *), void * arg4);
+size_t flight_read_directory_result_len(void * arg0);
+/* Borrowed return; do not free; valid while the flight_read_directory result handle remains alive. */
+void * flight_read_directory_result_get(void * arg0, size_t arg1);
+void flight_read_directory_result_free(void * arg0);
+/* On successful completion, caller owns the callback value; call flight_read_directory_recursive_result_free when done. */
+void flight_read_directory_recursive(void * arg0, const char * arg1, void * arg2, void (*arg3)(void *, void *, char *), void * arg4);
+size_t flight_read_directory_recursive_result_len(void * arg0);
+/* Borrowed return; do not free; valid while the flight_read_directory_recursive result handle remains alive. */
+void * flight_read_directory_recursive_result_get(void * arg0, size_t arg1);
+void flight_read_directory_recursive_result_free(void * arg0);
+/* On successful completion, caller owns the callback value; call flight_free_string when done. */
+void flight_read_file_symlink(const char * arg0, void (*arg1)(void *, char *, char *), void * arg2);
+/* On successful completion, caller owns the callback value; call flight_free_string when done. */
+void flight_read_text_file(void * arg0, const char * arg1, void * arg2, void (*arg3)(void *, char *, char *), void * arg4);
+void flight_remove_directory(void * arg0, const char * arg1, int32_t arg2, void (*arg3)(void *, bool, char *), void * arg4);
+void flight_remove_file(void * arg0, const char * arg1, void (*arg2)(void *, bool, char *), void * arg3);
+void flight_rename_file(void * arg0, const char * arg1, const char * arg2, void (*arg3)(void *, bool, char *), void * arg4);
+void flight_set_file_permissions(const char * arg0, void * arg1, void (*arg2)(void *, bool, char *), void * arg3);
+/* On successful completion, caller owns the callback value; call flight_free_file_stat when done. */
+void flight_stat_file(void * arg0, const char * arg1, void (*arg2)(void *, void *, char *), void * arg3);
+/* Caller owns the return value; call flight_free_file_watch_unsubscribe when done. */
+void * flight_watch_path(const char * arg0, void * arg1 /* cloned; caller retains its handle */);
+void flight_write_binary_file(void * arg0, const char * arg1, void * arg2, size_t arg3, void * arg4, void (*arg5)(void *, bool, char *), void * arg6);
+void flight_write_dialog_handle_binary_file(void * arg0, void * arg1, void * arg2, size_t arg3, void * arg4, void (*arg5)(void *, bool, char *), void * arg6);
+void flight_write_dialog_handle_text_file(void * arg0, void * arg1, const char * arg2, void * arg3, void (*arg4)(void *, bool, char *), void * arg5);
+void flight_write_text_file(void * arg0, const char * arg1, const char * arg2, void * arg3, void (*arg4)(void *, bool, char *), void * arg5);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_file_entry_name(void * arg0);
+void flight_field_set_file_entry_name(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_file_entry_path(void * arg0);
+void flight_field_set_file_entry_path(void * arg0, void * arg1, size_t arg2);
+bool flight_get_file_entry_is_directory(void * arg0);
+bool flight_set_file_entry_is_directory(void * arg0, bool arg1);
+bool flight_get_file_permissions_readable(void * arg0);
+bool flight_set_file_permissions_readable(void * arg0, bool arg1);
+bool flight_get_file_permissions_writable(void * arg0);
+bool flight_set_file_permissions_writable(void * arg0, bool arg1);
+bool flight_get_file_permissions_executable(void * arg0);
+bool flight_set_file_permissions_executable(void * arg0, bool arg1);
+size_t flight_get_file_stat_size(void * arg0);
+size_t flight_set_file_stat_size(void * arg0, size_t arg1);
+bool flight_get_file_stat_is_directory(void * arg0);
+bool flight_set_file_stat_is_directory(void * arg0, bool arg1);
+double flight_get_file_stat_modified_time(void * arg0);
+double flight_set_file_stat_modified_time(void * arg0, double arg1);
+double flight_get_file_stat_created_time(void * arg0);
+double flight_set_file_stat_created_time(void * arg0, double arg1);
+bool flight_get_file_stat_is_symlink(void * arg0);
+bool flight_set_file_stat_is_symlink(void * arg0, bool arg1);
+size_t flight_get_file_system_usage_used_bytes(void * arg0);
+size_t flight_set_file_system_usage_used_bytes(void * arg0, size_t arg1);
+size_t flight_get_file_system_usage_quota_bytes(void * arg0);
+size_t flight_set_file_system_usage_quota_bytes(void * arg0, size_t arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_file_watch_event_path(void * arg0);
+void flight_field_set_file_watch_event_path(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_flow_stack_ref when done. */
 void * flight_create_flow_stack(void);
 void flight_clear_flow_stack(void * arg0);
+/* Caller owns the return value; call flight_free_flow_state_ref when done. */
 void * flight_get_active_flow_state(void * arg0);
 size_t flight_get_flow_stack_depth(void * arg0);
+void flight_get_flow_stack_visible_states(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_flow_state_ref when done. */
 void * flight_pop_flow_state(void * arg0);
-void flight_push_flow_state(void * arg0, void * arg1, void * arg2);
-void flight_replace_flow_state(void * arg0, void * arg1, void * arg2);
+void flight_push_flow_state(void * arg0, void * arg1 /* cloned; caller retains its handle */, void * arg2);
+void flight_replace_flow_state(void * arg0, void * arg1 /* cloned; caller retains its handle */, void * arg2);
 void flight_update_flow_stack(void * arg0, float arg1);
-void flight_disable_flow_guards(void * arg0);
-void flight_enable_flow_guards(void * arg0, void * arg1, void * arg2, void * arg3);
+void flight_disable_flow_guards(void * arg0 /* cloned; caller retains its handle */);
+void flight_enable_flow_guards(void * arg0 /* cloned; caller retains its handle */, void * arg1 /* cloned; caller retains its handle */, double (*arg2)(void *), void * arg3);
+/* Caller owns the return value; call flight_free_string when done. */
 char * flight_get_flow_guard_kind_string(uint32_t arg0);
 int32_t flight_parse_flow_guard_kind(const char * arg0);
 bool flight_get_flow_guard_state_enabled(void * arg0);
 bool flight_set_flow_guard_state_enabled(void * arg0, bool arg1);
 uint32_t flight_get_flow_guard_state_transition_depth(void * arg0);
 uint32_t flight_set_flow_guard_state_transition_depth(void * arg0, uint32_t arg1);
+/* Caller owns the return value; call flight_free_string when done. */
 char * flight_infer_font_format_from_url(const char * arg0);
+/* Caller owns the return value; call flight_free_font_resource when done. */
 void * flight_create_font_resource(void);
+void flight_initialize_font_resource(void * arg0);
+/* Caller owns the return value; call flight_free_string when done. */
 char * flight_get_font_shorthand(const char * arg0, const char * arg1);
 bool flight_is_font_loaded(void * arg0, const char * arg1, const char * arg2);
-char * flight_get_glyph_rasterizer_operation_string(uint32_t arg0);
-int32_t flight_parse_glyph_rasterizer_operation(const char * arg0);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_font_face_family(void * arg0);
 void flight_field_set_font_face_family(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_font_face_source_url_value(void * arg0);
 void flight_field_set_font_face_source_url_value(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_font_resource_family(void * arg0);
 void flight_field_set_font_resource_family(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_font_url_url(void * arg0);
 void flight_field_set_font_url_url(void * arg0, void * arg1, size_t arg2);
 float flight_get_font_variation_axis_default_value(void * arg0);
@@ -1521,8 +2575,10 @@ float flight_get_font_variation_axis_max(void * arg0);
 float flight_set_font_variation_axis_max(void * arg0, float arg1);
 float flight_get_font_variation_axis_min(void * arg0);
 float flight_set_font_variation_axis_min(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_font_variation_axis_name(void * arg0);
 void flight_field_set_font_variation_axis_name(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_font_variation_axis_tag(void * arg0);
 void flight_field_set_font_variation_axis_tag(void * arg0, void * arg1, size_t arg2);
 float flight_get_glyph_metrics_ascent(void * arg0);
@@ -1541,8 +2597,10 @@ float flight_get_glyph_outline_metrics_units_per_em(void * arg0);
 float flight_set_glyph_outline_metrics_units_per_em(void * arg0, float arg1);
 float flight_get_glyph_rasterize_font_weight_number_value(void * arg0);
 float flight_set_glyph_rasterize_font_weight_number_value(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_glyph_rasterize_font_weight_string_value(void * arg0);
 void flight_field_set_glyph_rasterize_font_weight_string_value(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_glyph_rasterize_options_font_family(void * arg0);
 void flight_field_set_glyph_rasterize_options_font_family(void * arg0, void * arg1, size_t arg2);
 float flight_get_glyph_rasterize_options_font_size(void * arg0);
@@ -1587,6 +2645,7 @@ size_t flight_get_woff2_table_directory_total_uncompressed_length(void * arg0);
 size_t flight_set_woff2_table_directory_total_uncompressed_length(void * arg0, size_t arg1);
 size_t flight_get_woff2_table_entry_original_length(void * arg0);
 size_t flight_set_woff2_table_entry_original_length(void * arg0, size_t arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_woff2_table_entry_tag(void * arg0);
 void flight_field_set_woff2_table_entry_tag(void * arg0, void * arg1, size_t arg2);
 size_t flight_get_woff2_table_entry_transform_length(void * arg0);
@@ -1599,6 +2658,7 @@ uint32_t flight_get_woff_checksum_mismatch_stored(void * arg0);
 uint32_t flight_set_woff_checksum_mismatch_stored(void * arg0, uint32_t arg1);
 uint32_t flight_get_woff_checksum_mismatch_computed(void * arg0);
 uint32_t flight_set_woff_checksum_mismatch_computed(void * arg0, uint32_t arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_woff_checksum_mismatch_tag(void * arg0);
 void flight_field_set_woff_checksum_mismatch_tag(void * arg0, void * arg1, size_t arg2);
 size_t flight_get_woff2_glyf_streams_glyph_count(void * arg0);
@@ -1617,7 +2677,31 @@ bool flight_get_woff2_composite_glyph_measure_has_instructions(void * arg0);
 bool flight_set_woff2_composite_glyph_measure_has_instructions(void * arg0, bool arg1);
 size_t flight_get_woff2_cursor_at(void * arg0);
 size_t flight_set_woff2_cursor_at(void * arg0, size_t arg1);
+/* Caller owns the return value; call flight_free_geolocation_position when done. */
+void * flight_create_geolocation_position(void);
+void flight_clear_geolocation_watch(void * arg0, int32_t arg1);
+bool flight_is_geolocation_available(void * arg0);
+float flight_get_geolocation_position_latitude(void * arg0);
+float flight_set_geolocation_position_latitude(void * arg0, float arg1);
+float flight_get_geolocation_position_longitude(void * arg0);
+float flight_set_geolocation_position_longitude(void * arg0, float arg1);
+float flight_get_geolocation_position_accuracy(void * arg0);
+float flight_set_geolocation_position_accuracy(void * arg0, float arg1);
+float flight_get_geolocation_position_altitude(void * arg0);
+float flight_set_geolocation_position_altitude(void * arg0, float arg1);
+float flight_get_geolocation_position_altitude_accuracy(void * arg0);
+float flight_set_geolocation_position_altitude_accuracy(void * arg0, float arg1);
+float flight_get_geolocation_position_floor_level(void * arg0);
+float flight_set_geolocation_position_floor_level(void * arg0, float arg1);
+float flight_get_geolocation_position_heading(void * arg0);
+float flight_set_geolocation_position_heading(void * arg0, float arg1);
+float flight_get_geolocation_position_speed(void * arg0);
+float flight_set_geolocation_position_speed(void * arg0, float arg1);
+double flight_get_geolocation_position_timestamp(void * arg0);
+double flight_set_geolocation_position_timestamp(void * arg0, double arg1);
+/* Caller owns the return value; call flight_free_aabb when done. */
 void * flight_create_aabb(float arg0, float arg1, float arg2, float arg3, float arg4, float arg5);
+/* Caller owns the return value; call flight_free_aabb when done. */
 void * flight_clone_aabb(void * arg0);
 bool flight_contains_aabb_point(void * arg0, void * arg1);
 void flight_copy_aabb(void * arg0, void * arg1);
@@ -1634,7 +2718,9 @@ void flight_set_aabb(void * arg0, float arg1, float arg2, float arg3, float arg4
 void flight_set_aabb_from_points(void * arg0, void * arg1, size_t arg2);
 void flight_transform_aabb_by_matrix4(void * arg0, void * arg1, void * arg2);
 void flight_union_aabb(void * arg0, void * arg1, void * arg2);
+/* Caller owns the return value; call flight_free_bounding_sphere when done. */
 void * flight_create_bounding_sphere(float arg0, float arg1, float arg2, float arg3);
+/* Caller owns the return value; call flight_free_bounding_sphere when done. */
 void * flight_clone_bounding_sphere(void * arg0);
 bool flight_contains_bounding_sphere_point(void * arg0, void * arg1);
 void flight_copy_bounding_sphere(void * arg0, void * arg1);
@@ -1644,6 +2730,7 @@ void flight_merge_bounding_sphere(void * arg0, void * arg1, void * arg2);
 void flight_set_bounding_sphere(void * arg0, float arg1, float arg2, float arg3, float arg4);
 void flight_set_bounding_sphere_from_aabb(void * arg0, void * arg1);
 void flight_transform_bounding_sphere_by_matrix4(void * arg0, void * arg1, void * arg2);
+/* Caller owns the return value; call flight_free_capsule when done. */
 void * flight_create_capsule(float arg0, float arg1, float arg2, float arg3, float arg4, float arg5, float arg6);
 void flight_get_closest_point_on_capsule(void * arg0, void * arg1, void * arg2);
 float flight_intersect_ray3d_capsule(void * arg0, void * arg1);
@@ -1653,7 +2740,8 @@ bool flight_is_capsule_intersecting_sphere(void * arg0, void * arg1);
 void flight_set_capsule(void * arg0, float arg1, float arg2, float arg3, float arg4, float arg5, float arg6, float arg7);
 bool flight_are_geometry_pool_guards_enabled(void);
 void flight_disable_geometry_pool_guards(void);
-void flight_enable_geometry_pool_guards(void * arg0, void * arg1, void * arg2);
+void flight_enable_geometry_pool_guards(void * arg0, double (*arg1)(void *), void * arg2);
+/* Caller owns the return value; call flight_free_frustum when done. */
 void * flight_create_frustum(void);
 void flight_get_frustum_corners(void * arg0, size_t arg1, void * arg2);
 bool flight_is_frustum_containing_point(void * arg0, void * arg1);
@@ -1661,9 +2749,13 @@ bool flight_is_frustum_intersecting_aabb(void * arg0, void * arg1);
 bool flight_is_frustum_intersecting_obb(void * arg0, void * arg1);
 bool flight_is_frustum_intersecting_sphere(void * arg0, void * arg1);
 void flight_set_frustum_from_matrix4(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_matrix when done. */
 void * flight_create_gradient_transform_matrix(float arg0, float arg1, float arg2, float arg3, float arg4);
+/* Caller owns the return value; call flight_free_matrix when done. */
 void * flight_create_matrix(float arg0, float arg1, float arg2, float arg3, float arg4, float arg5);
+/* Caller owns the return value; call flight_free_matrix when done. */
 void * flight_create_transform_matrix(float arg0, float arg1, float arg2, float arg3, float arg4);
+/* Caller owns the return value; call flight_free_matrix when done. */
 void * flight_clone_matrix(void * arg0);
 void flight_copy_matrix(void * arg0, void * arg1);
 void flight_copy_matrix_column_from_vector3(void * arg0, int32_t arg1, void * arg2);
@@ -1697,8 +2789,11 @@ void flight_translate_matrix(void * arg0, void * arg1, float arg2, float arg3);
 void flight_translate_matrix_by_vector(void * arg0, void * arg1, void * arg2);
 void flight_translate_matrix_by_vector_xy(void * arg0, void * arg1, float arg2, float arg3);
 void flight_write_matrix_to_float32_array(void * arg0, size_t arg1, size_t arg2, void * arg3);
+/* Caller owns the return value; call flight_free_matrix3 when done. */
 void * flight_create_matrix3(void);
+/* Caller owns the return value; call flight_free_matrix3 when done. */
 void * flight_create_matrix3_from_values(float arg0, float arg1, float arg2, float arg3, float arg4, float arg5, float arg6, float arg7, float arg8);
+/* Caller owns the return value; call flight_free_matrix3 when done. */
 void * flight_clone_matrix3(void * arg0);
 void flight_copy_matrix3(void * arg0, void * arg1);
 void flight_copy_matrix3_column_from_vector3(void * arg0, size_t arg1, void * arg2);
@@ -1723,19 +2818,27 @@ void flight_set_matrix3_normal_from_matrix4(void * arg0, void * arg1);
 void flight_translate_matrix3(void * arg0, void * arg1, float arg2, float arg3);
 void flight_transpose_matrix3(void * arg0, void * arg1);
 void flight_write_matrix3_to_float32_array(void * arg0, size_t arg1, size_t arg2, void * arg3);
+/* Caller owns the return value; call flight_free_matrix3 when done. */
 void * flight_acquire_identity_matrix3(void);
+/* Caller owns the return value; call flight_free_matrix3 when done. */
 void * flight_acquire_matrix3(void);
 void flight_clear_matrix3_pool(void);
-void flight_release_matrix3(void * arg0);
+void flight_release_matrix3(void * arg0 /* ownership transferred; do not use or free after call */);
+/* Caller owns the return value; call flight_free_matrix4 when done. */
 void * flight_create_matrix4(void);
+/* Caller owns the return value; call flight_free_matrix4 when done. */
 void * flight_create_matrix4_from_2d(float arg0, float arg1, float arg2, float arg3, float arg4, float arg5);
+/* Caller owns the return value; call flight_free_matrix4 when done. */
 void * flight_create_matrix4_from_values(float arg0, float arg1, float arg2, float arg3, float arg4, float arg5, float arg6, float arg7, float arg8, float arg9, float arg10, float arg11, float arg12, float arg13, float arg14, float arg15);
+/* Caller owns the return value; call flight_free_matrix4 when done. */
 void * flight_create_orthographic_matrix4(float arg0, float arg1, float arg2, float arg3, float arg4, float arg5);
+/* Caller owns the return value; call flight_free_matrix4 when done. */
 void * flight_create_perspective_matrix4(float arg0, float arg1, float arg2, float arg3);
 void flight_append_matrix4(void * arg0, void * arg1, void * arg2);
 void flight_append_rotation_matrix4(void * arg0, void * arg1, float arg2, void * arg3, void * arg4);
 void flight_append_scale_matrix4(void * arg0, void * arg1, float arg2, float arg3, float arg4);
 void flight_append_translation_matrix4(void * arg0, void * arg1, float arg2, float arg3, float arg4);
+/* Caller owns the return value; call flight_free_matrix4 when done. */
 void * flight_clone_matrix4(void * arg0);
 void flight_compose_matrix4(void * arg0, void * arg1, void * arg2, void * arg3);
 void flight_copy_matrix4(void * arg0, void * arg1);
@@ -1776,14 +2879,19 @@ void flight_set_perspective_matrix4(void * arg0, float arg1, float arg2, float a
 void flight_translate_matrix4(void * arg0, void * arg1, float arg2, float arg3, float arg4);
 void flight_transpose_matrix4(void * arg0, void * arg1);
 void flight_write_matrix4_to_float32_array(void * arg0, size_t arg1, size_t arg2, void * arg3);
+/* Caller owns the return value; call flight_free_matrix4 when done. */
 void * flight_acquire_identity_matrix4(void);
+/* Caller owns the return value; call flight_free_matrix4 when done. */
 void * flight_acquire_matrix4(void);
 void flight_clear_matrix4_pool(void);
-void flight_release_matrix4(void * arg0);
+void flight_release_matrix4(void * arg0 /* ownership transferred; do not use or free after call */);
+/* Caller owns the return value; call flight_free_matrix when done. */
 void * flight_acquire_identity_matrix(void);
+/* Caller owns the return value; call flight_free_matrix when done. */
 void * flight_acquire_matrix(void);
 void flight_clear_matrix_pool(void);
-void flight_release_matrix(void * arg0);
+void flight_release_matrix(void * arg0 /* ownership transferred; do not use or free after call */);
+/* Caller owns the return value; call flight_free_obb when done. */
 void * flight_create_obb(float arg0, float arg1, float arg2, float arg3, float arg4, float arg5, float arg6, float arg7, float arg8, float arg9);
 void flight_get_closest_point_on_obb(void * arg0, void * arg1, void * arg2);
 float flight_intersect_ray3d_obb(void * arg0, void * arg1);
@@ -1792,7 +2900,9 @@ bool flight_is_obb_intersecting_obb(void * arg0, void * arg1);
 bool flight_is_obb_intersecting_sphere(void * arg0, void * arg1);
 void flight_set_obb(void * arg0, float arg1, float arg2, float arg3, float arg4, float arg5, float arg6, float arg7, float arg8, float arg9, float arg10);
 void flight_transform_obb_by_matrix4(void * arg0, void * arg1, void * arg2);
+/* Caller owns the return value; call flight_free_plane when done. */
 void * flight_create_plane(float arg0, float arg1, float arg2, float arg3);
+/* Caller owns the return value; call flight_free_plane when done. */
 void * flight_clone_plane(void * arg0);
 void flight_copy_plane(void * arg0, void * arg1);
 void flight_get_closest_point_on_plane(void * arg0, void * arg1, void * arg2);
@@ -1803,7 +2913,9 @@ void flight_project_vector3_onto_plane(void * arg0, void * arg1, void * arg2);
 void flight_set_plane(void * arg0, float arg1, float arg2, float arg3, float arg4);
 void flight_set_plane_from_normal_and_point(void * arg0, void * arg1, void * arg2);
 void flight_set_plane_from_points(void * arg0, void * arg1, void * arg2, void * arg3);
+/* Caller owns the return value; call flight_free_quaternion when done. */
 void * flight_create_quaternion(float arg0, float arg1, float arg2, float arg3);
+/* Caller owns the return value; call flight_free_quaternion when done. */
 void * flight_clone_quaternion(void * arg0);
 void flight_conjugate_quaternion(void * arg0, void * arg1);
 void flight_copy_quaternion(void * arg0, void * arg1);
@@ -1824,10 +2936,13 @@ void flight_set_quaternion_from_unit_vectors(void * arg0, void * arg1, void * ar
 void flight_set_quaternion_identity(void * arg0);
 void flight_set_quaternion_look_rotation(void * arg0, void * arg1, void * arg2);
 void flight_slerp_quaternion(void * arg0, void * arg1, void * arg2, float arg3);
+/* Caller owns the return value; call flight_free_quaternion when done. */
 void * flight_acquire_identity_quaternion(void);
+/* Caller owns the return value; call flight_free_quaternion when done. */
 void * flight_acquire_quaternion(void);
 void flight_clear_quaternion_pool(void);
-void flight_release_quaternion(void * arg0);
+void flight_release_quaternion(void * arg0 /* ownership transferred; do not use or free after call */);
+/* Caller owns the return value; call flight_free_ray3_d when done. */
 void * flight_create_ray3d(float arg0, float arg1, float arg2, float arg3, float arg4, float arg5);
 void flight_get_closest_point_between_ray3ds(void * arg0, void * arg1, void * arg2, void * arg3);
 void flight_get_closest_point_on_ray3d(void * arg0, void * arg1, void * arg2);
@@ -1838,7 +2953,9 @@ float flight_intersect_ray3d_sphere(void * arg0, void * arg1);
 float flight_intersect_ray3d_triangle(void * arg0, void * arg1, void * arg2, void * arg3);
 void flight_set_ray3d(void * arg0, void * arg1, void * arg2);
 void flight_transform_ray3d_by_matrix4(void * arg0, void * arg1, void * arg2);
+/* Caller owns the return value; call flight_free_rectangle when done. */
 void * flight_create_rectangle(float arg0, float arg1, float arg2, float arg3);
+/* Caller owns the return value; call flight_free_rectangle when done. */
 void * flight_clone_rectangle(void * arg0);
 void flight_compute_rectangle_intersection(void * arg0, void * arg1, void * arg2);
 bool flight_contains_rectangle_point(void * arg0, void * arg1);
@@ -1878,22 +2995,44 @@ void flight_set_rectangle_right(void * arg0, float arg1);
 void flight_set_rectangle_size(void * arg0, void * arg1);
 void flight_set_rectangle_top(void * arg0, float arg1);
 void flight_set_rectangle_top_left(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_rectangle when done. */
 void * flight_acquire_empty_rectangle(void);
+/* Caller owns the return value; call flight_free_rectangle when done. */
 void * flight_acquire_rectangle(void);
 void flight_clear_rectangle_pool(void);
-void flight_release_rectangle(void * arg0);
+void flight_release_rectangle(void * arg0 /* ownership transferred; do not use or free after call */);
+/* Caller owns the return value; call flight_free_transform2_d when done. */
 void * flight_create_transform2d(float arg0, float arg1, float arg2, float arg3, float arg4, float arg5, float arg6, float arg7, float arg8);
 void flight_decompose_matrix_to_transform2d(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_transform3_d when done. */
 void * flight_create_transform3d(void);
 void flight_compose_matrix4_from_transform3d(void * arg0, void * arg1);
 void flight_decompose_matrix4_to_transform3d(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_reserve_float32_array_result_free when done. */
 void * flight_reserve_float32_array(void * arg0, size_t arg1, size_t arg2);
+size_t flight_reserve_float32_array_result_len(void * arg0);
+/* Borrowed return; do not free; valid while the flight_reserve_float32_array result handle remains alive. */
+void * flight_reserve_float32_array_result_get(void * arg0, size_t arg1);
+void flight_reserve_float32_array_result_free(void * arg0);
+/* Caller owns the return value; call flight_reserve_int16_array_result_free when done. */
 void * flight_reserve_int16_array(void * arg0, size_t arg1, size_t arg2);
+size_t flight_reserve_int16_array_result_len(void * arg0);
+/* Borrowed return; do not free; valid while the flight_reserve_int16_array result handle remains alive. */
+void * flight_reserve_int16_array_result_get(void * arg0, size_t arg1);
+void flight_reserve_int16_array_result_free(void * arg0);
+/* Caller owns the return value; call flight_reserve_uint16_array_result_free when done. */
 void * flight_reserve_uint16_array(void * arg0, size_t arg1, size_t arg2);
+size_t flight_reserve_uint16_array_result_len(void * arg0);
+/* Borrowed return; do not free; valid while the flight_reserve_uint16_array result handle remains alive. */
+void * flight_reserve_uint16_array_result_get(void * arg0, size_t arg1);
+void flight_reserve_uint16_array_result_free(void * arg0);
+/* Caller owns the return value; call flight_free_vector2 when done. */
 void * flight_create_vector2(float arg0, float arg1);
+/* Caller owns the return value; call flight_free_vector2 when done. */
 void * flight_create_vector2_from_polar(float arg0, float arg1);
 void flight_add_vector2(void * arg0, void * arg1, void * arg2);
 void flight_clamp_vector2(void * arg0, void * arg1, void * arg2, void * arg3);
+/* Caller owns the return value; call flight_free_vector2 when done. */
 void * flight_clone_vector2(void * arg0);
 void flight_copy_vector2(void * arg0, void * arg1);
 float flight_cross_vector2(void * arg0, void * arg1);
@@ -1924,14 +3063,19 @@ void flight_set_vector2_from_polar(void * arg0, float arg1, float arg2);
 void flight_set_vector2_from_vector3(void * arg0, void * arg1);
 void flight_subtract_vector2(void * arg0, void * arg1, void * arg2);
 void flight_write_vector2_to_float32_array(void * arg0, size_t arg1, size_t arg2, void * arg3);
+/* Caller owns the return value; call flight_free_vector2 when done. */
 void * flight_acquire_empty_vector2(void);
+/* Caller owns the return value; call flight_free_vector2 when done. */
 void * flight_acquire_vector2(void);
 void flight_clear_vector2_pool(void);
-void flight_release_vector2(void * arg0);
+void flight_release_vector2(void * arg0 /* ownership transferred; do not use or free after call */);
+/* Caller owns the return value; call flight_free_vector3 when done. */
 void * flight_create_vector3(float arg0, float arg1, float arg2);
+/* Caller owns the return value; call flight_free_vector3 when done. */
 void * flight_create_vector3_from_spherical(float arg0, float arg1, float arg2);
 void flight_add_vector3(void * arg0, void * arg1, void * arg2);
 void flight_clamp_vector3(void * arg0, void * arg1, void * arg2, void * arg3);
+/* Caller owns the return value; call flight_free_vector3 when done. */
 void * flight_clone_vector3(void * arg0);
 void flight_copy_vector3(void * arg0, void * arg1);
 void flight_cross_vector3(void * arg0, void * arg1, void * arg2);
@@ -1962,13 +3106,17 @@ void flight_set_vector3_from_vector4(void * arg0, void * arg1);
 void flight_subtract_vector3(void * arg0, void * arg1, void * arg2);
 void flight_transform_vector3_by_matrix3(void * arg0, void * arg1, void * arg2);
 void flight_write_vector3_to_float32_array(void * arg0, size_t arg1, size_t arg2, void * arg3);
+/* Caller owns the return value; call flight_free_vector3 when done. */
 void * flight_acquire_empty_vector3(void);
+/* Caller owns the return value; call flight_free_vector3 when done. */
 void * flight_acquire_vector3(void);
 void flight_clear_vector3_pool(void);
-void flight_release_vector3(void * arg0);
+void flight_release_vector3(void * arg0 /* ownership transferred; do not use or free after call */);
+/* Caller owns the return value; call flight_free_vector4 when done. */
 void * flight_create_vector4(float arg0, float arg1, float arg2, float arg3);
 void flight_add_vector4(void * arg0, void * arg1, void * arg2);
 void flight_clamp_vector4(void * arg0, void * arg1, void * arg2, void * arg3);
+/* Caller owns the return value; call flight_free_vector4 when done. */
 void * flight_clone_vector4(void * arg0);
 void flight_copy_vector4(void * arg0, void * arg1);
 void flight_divide_vector4(void * arg0, void * arg1, void * arg2);
@@ -1995,10 +3143,12 @@ void flight_set_vector4_from_float32_array(void * arg0, size_t arg1, void * arg2
 void flight_set_vector4_from_vector3(void * arg0, void * arg1, float arg2);
 void flight_subtract_vector4(void * arg0, void * arg1, void * arg2);
 void flight_write_vector4_to_float32_array(void * arg0, size_t arg1, size_t arg2, void * arg3);
+/* Caller owns the return value; call flight_free_vector4 when done. */
 void * flight_acquire_empty_vector4(void);
+/* Caller owns the return value; call flight_free_vector4 when done. */
 void * flight_acquire_vector4(void);
 void flight_clear_vector4_pool(void);
-void flight_release_vector4(void * arg0);
+void flight_release_vector4(void * arg0 /* ownership transferred; do not use or free after call */);
 float flight_get_bounding_sphere_radius(void * arg0);
 float flight_set_bounding_sphere_radius(void * arg0, float arg1);
 float flight_get_capsule_start_x(void * arg0);
@@ -2107,41 +3257,258 @@ float flight_get_vector4_z(void * arg0);
 float flight_set_vector4_z(void * arg0, float arg1);
 float flight_get_vector4_w(void * arg0);
 float flight_set_vector4_w(void * arg0, float arg1);
-void * flight_as_image_resource_ref(void * arg0);
+void flight_compute_gizmo_alignment_deltas(void * arg0, void * arg1, size_t arg2, uint32_t arg3);
+bool flight_find_gizmo_smart_guides(void * arg0, void * arg1, void * arg2, size_t arg3, float arg4);
+/* Caller owns the return value; call flight_free_gizmo_state when done. */
+void * flight_create_gizmo_state(void * arg0);
+void flight_dispose_gizmo_state(void * arg0);
+uint32_t flight_get_gizmo_mode(void * arg0);
+/* Caller owns the return value; call flight_free_gizmo_signals when done. */
+void * flight_get_gizmo_signals(void * arg0);
+uint32_t flight_get_gizmo_space(void * arg0);
+void flight_set_gizmo_custom_pivot(void * arg0, float arg1, float arg2);
+void flight_set_gizmo_mode(void * arg0, uint32_t arg1);
+void flight_set_gizmo_pivot(void * arg0, uint32_t arg1);
+void flight_set_gizmo_selection_outline_color(void * arg0, uint32_t arg1);
+void flight_set_gizmo_selection_outline_enabled(void * arg0, bool arg1);
+void flight_set_gizmo_snap_rotation(void * arg0, float arg1);
+void flight_set_gizmo_snap_scale(void * arg0, float arg1);
+void flight_set_gizmo_snap_translate(void * arg0, float arg1);
+void flight_set_gizmo_space(void * arg0, uint32_t arg1);
+void flight_update_gizmo(void * arg0);
+/* Caller owns the return value; call flight_free_gizmo_node2_dfeatures when done. */
+void * flight_create_node2d_gizmo_features(void);
+float flight_get_gizmo_smart_guide_result_delta_x(void * arg0);
+float flight_set_gizmo_smart_guide_result_delta_x(void * arg0, float arg1);
+float flight_get_gizmo_smart_guide_result_delta_y(void * arg0);
+float flight_set_gizmo_smart_guide_result_delta_y(void * arg0, float arg1);
+float flight_get_gizmo_create_options_viewport_height(void * arg0);
+float flight_set_gizmo_create_options_viewport_height(void * arg0, float arg1);
+float flight_get_gizmo_create_options_viewport_width(void * arg0);
+float flight_set_gizmo_create_options_viewport_width(void * arg0, float arg1);
+void flight_disable_glyph_atlas_guards(void * arg0);
+void flight_enable_glyph_atlas_guards(void * arg0, void * arg1, void * arg2 /* cloned; caller retains its handle */);
+/* Caller owns the return value; call flight_free_glyph_atlas_entry_explanation when done. */
+void * flight_explain_glyph_atlas_entry(void * arg0, uint32_t arg1);
+/* Caller owns the return value; call flight_free_glyph_atlas_ref when done. */
+void * flight_create_glyph_atlas(void * arg0);
+/* Caller owns the return value; call flight_free_glyph_metrics when done. */
+void * flight_derive_glyph_metrics_from_font_size(float arg0);
+void flight_dispose_glyph_atlas(void * arg0);
+/* Caller owns the return value; call flight_free_bitmap_ref when done. */
+void * flight_get_glyph_atlas_bitmap(void * arg0);
+uint32_t flight_get_glyph_atlas_layout_version(void * arg0);
+void flight_clear_glyph_atlas_dirty(void * arg0);
+/* Caller owns the return value; call flight_free_rectangle when done. */
+void * flight_get_glyph_atlas_dirty_region(void * arg0);
+/* Caller owns the return value; call flight_free_glyph_entry_ref when done. */
+void * flight_get_glyph_atlas_entry(void * arg0, uint32_t arg1);
+float flight_get_glyph_atlas_kerning(void * arg0, uint32_t arg1, uint32_t arg2);
+/* Caller owns the return value; call flight_free_glyph_metrics when done. */
+void * flight_get_glyph_atlas_metrics(void * arg0);
+/* Caller owns the return value; call flight_free_host_glyph_rasterizer_capability when done. */
+void * flight_allocate_stub_glyph_rasterizer_backend(void);
+/* Caller owns the return value; call flight_free_glyph_source_ref when done. */
+void * flight_create_glyph_source_from_glyph_atlas(void * arg0);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_glyph_atlas_options_font_family(void * arg0);
+void flight_field_set_glyph_atlas_options_font_family(void * arg0, void * arg1, size_t arg2);
+float flight_get_glyph_atlas_options_font_size(void * arg0);
+float flight_set_glyph_atlas_options_font_size(void * arg0, float arg1);
+uint32_t flight_get_glyph_atlas_options_height(void * arg0);
+uint32_t flight_set_glyph_atlas_options_height(void * arg0, uint32_t arg1);
+uint32_t flight_get_glyph_atlas_options_width(void * arg0);
+uint32_t flight_set_glyph_atlas_options_width(void * arg0, uint32_t arg1);
+uint32_t flight_get_glyph_atlas_shelf_cursor_x(void * arg0);
+uint32_t flight_set_glyph_atlas_shelf_cursor_x(void * arg0, uint32_t arg1);
+uint32_t flight_get_glyph_atlas_shelf_height(void * arg0);
+uint32_t flight_set_glyph_atlas_shelf_height(void * arg0, uint32_t arg1);
+uint32_t flight_get_glyph_atlas_shelf_y(void * arg0);
+uint32_t flight_set_glyph_atlas_shelf_y(void * arg0, uint32_t arg1);
+float flight_get_glyph_entry_advance(void * arg0);
+float flight_set_glyph_entry_advance(void * arg0, float arg1);
+int32_t flight_get_glyph_entry_bearing_x(void * arg0);
+int32_t flight_set_glyph_entry_bearing_x(void * arg0, int32_t arg1);
+int32_t flight_get_glyph_entry_bearing_y(void * arg0);
+int32_t flight_set_glyph_entry_bearing_y(void * arg0, int32_t arg1);
+uint32_t flight_get_glyph_entry_height(void * arg0);
+uint32_t flight_set_glyph_entry_height(void * arg0, uint32_t arg1);
+uint32_t flight_get_glyph_entry_page(void * arg0);
+uint32_t flight_set_glyph_entry_page(void * arg0, uint32_t arg1);
+uint32_t flight_get_glyph_entry_width(void * arg0);
+uint32_t flight_set_glyph_entry_width(void * arg0, uint32_t arg1);
+uint32_t flight_get_glyph_entry_x(void * arg0);
+uint32_t flight_set_glyph_entry_x(void * arg0, uint32_t arg1);
+uint32_t flight_get_glyph_entry_y(void * arg0);
+uint32_t flight_set_glyph_entry_y(void * arg0, uint32_t arg1);
+bool flight_get_glyph_atlas_entry_explanation_renderable(void * arg0);
+bool flight_set_glyph_atlas_entry_explanation_renderable(void * arg0, bool arg1);
+uint32_t flight_get_glyph_atlas_entry_explanation_glyph_width(void * arg0);
+uint32_t flight_set_glyph_atlas_entry_explanation_glyph_width(void * arg0, uint32_t arg1);
+uint32_t flight_get_glyph_atlas_entry_explanation_glyph_height(void * arg0);
+uint32_t flight_set_glyph_atlas_entry_explanation_glyph_height(void * arg0, uint32_t arg1);
+int32_t flight_get_glyph_atlas_entry_explanation_usable_width(void * arg0);
+int32_t flight_set_glyph_atlas_entry_explanation_usable_width(void * arg0, int32_t arg1);
+int32_t flight_get_glyph_atlas_entry_explanation_usable_height(void * arg0);
+int32_t flight_set_glyph_atlas_entry_explanation_usable_height(void * arg0, int32_t arg1);
+uint32_t flight_get_glyph_atlas_entry_guard_notice_subject(void * arg0);
+uint32_t flight_set_glyph_atlas_entry_guard_notice_subject(void * arg0, uint32_t arg1);
+uint32_t flight_get_glyph_atlas_entry_guard_notice_repack_count(void * arg0);
+uint32_t flight_set_glyph_atlas_entry_guard_notice_repack_count(void * arg0, uint32_t arg1);
+bool flight_get_glyph_atlas_runtime_dirty(void * arg0);
+bool flight_set_glyph_atlas_runtime_dirty(void * arg0, bool arg1);
+uint32_t flight_get_glyph_atlas_runtime_dirty_max_x(void * arg0);
+uint32_t flight_set_glyph_atlas_runtime_dirty_max_x(void * arg0, uint32_t arg1);
+uint32_t flight_get_glyph_atlas_runtime_dirty_max_y(void * arg0);
+uint32_t flight_set_glyph_atlas_runtime_dirty_max_y(void * arg0, uint32_t arg1);
+uint32_t flight_get_glyph_atlas_runtime_dirty_min_x(void * arg0);
+uint32_t flight_set_glyph_atlas_runtime_dirty_min_x(void * arg0, uint32_t arg1);
+uint32_t flight_get_glyph_atlas_runtime_dirty_min_y(void * arg0);
+uint32_t flight_set_glyph_atlas_runtime_dirty_min_y(void * arg0, uint32_t arg1);
+uint32_t flight_get_glyph_atlas_runtime_layout_version(void * arg0);
+uint32_t flight_set_glyph_atlas_runtime_layout_version(void * arg0, uint32_t arg1);
+size_t flight_get_glyph_atlas_runtime_max_area(void * arg0);
+size_t flight_set_glyph_atlas_runtime_max_area(void * arg0, size_t arg1);
+size_t flight_get_glyph_atlas_runtime_max_bytes(void * arg0);
+size_t flight_set_glyph_atlas_runtime_max_bytes(void * arg0, size_t arg1);
+size_t flight_get_glyph_atlas_runtime_max_glyphs(void * arg0);
+size_t flight_set_glyph_atlas_runtime_max_glyphs(void * arg0, size_t arg1);
+size_t flight_get_glyph_atlas_runtime_occupied_area(void * arg0);
+size_t flight_set_glyph_atlas_runtime_occupied_area(void * arg0, size_t arg1);
+uint32_t flight_get_glyph_atlas_runtime_pack_bottom(void * arg0);
+uint32_t flight_set_glyph_atlas_runtime_pack_bottom(void * arg0, uint32_t arg1);
+uint32_t flight_get_glyph_atlas_runtime_padding(void * arg0);
+uint32_t flight_set_glyph_atlas_runtime_padding(void * arg0, uint32_t arg1);
+size_t flight_get_glyph_atlas_runtime_retained_bytes(void * arg0);
+size_t flight_set_glyph_atlas_runtime_retained_bytes(void * arg0, size_t arg1);
+bool flight_cancel_device_vibration(void * arg0);
+void flight_get_haptics_capabilities(void * arg0, void * arg1);
+bool flight_is_haptics_supported(void * arg0);
+void flight_prepare_haptics(void * arg0);
+bool flight_trigger_haptic_impact(void * arg0, uint32_t arg1, float arg2);
+bool flight_trigger_haptic_notification(void * arg0, uint32_t arg1);
+bool flight_trigger_haptic_selection(void * arg0);
+bool flight_vibrate_device(void * arg0, float arg1);
+bool flight_vibrate_device_pattern(void * arg0, void * arg1);
+bool flight_vibrate_device_waveform(void * arg0, void * arg1, void * arg2, int32_t arg3);
+bool flight_get_haptics_capabilities_amplitude_control(void * arg0);
+bool flight_set_haptics_capabilities_amplitude_control(void * arg0, bool arg1);
+bool flight_get_haptics_capabilities_custom_events(void * arg0);
+bool flight_set_haptics_capabilities_custom_events(void * arg0, bool arg1);
+bool flight_get_haptics_capabilities_intensity(void * arg0);
+bool flight_set_haptics_capabilities_intensity(void * arg0, bool arg1);
+bool flight_get_haptics_capabilities_patterns(void * arg0);
+bool flight_set_haptics_capabilities_patterns(void * arg0, bool arg1);
+bool flight_get_haptics_capabilities_supported(void * arg0);
+bool flight_set_haptics_capabilities_supported(void * arg0, bool arg1);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_get_backend_explanation_layer_string(uint32_t arg0);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_get_backend_explanation_viability_string(uint32_t arg0);
+int32_t flight_parse_backend_explanation_layer(const char * arg0);
+int32_t flight_parse_backend_explanation_viability(const char * arg0);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_get_backend_operation_explanation_layer_string(uint32_t arg0);
+int32_t flight_parse_backend_operation_explanation_layer(const char * arg0);
+/* Caller owns the return value; call flight_free_host_capability_explanation when done. */
+void * flight_explain_host_capability_slot(const char * arg0, const char * arg1, const char * arg2, bool arg3, const char * arg4, const char * arg5, void * arg6);
+bool flight_get_backend_explanation_conflict(void * arg0);
+bool flight_set_backend_explanation_conflict(void * arg0, bool arg1);
+bool flight_get_backend_operation_explanation_implemented(void * arg0);
+bool flight_set_backend_operation_explanation_implemented(void * arg0, bool arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_backend_operation_explanation_operation(void * arg0);
+void flight_field_set_backend_operation_explanation_operation(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_host_capability_backend_entry_point(void * arg0);
+void flight_field_set_host_capability_backend_entry_point(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_host_capability_backend_package_name(void * arg0);
+void flight_field_set_host_capability_backend_package_name(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_host_capability_backend_platform(void * arg0);
+void flight_field_set_host_capability_backend_platform(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_host_capability_coverage_capability(void * arg0);
+void flight_field_set_host_capability_coverage_capability(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_host_capability_coverage_group(void * arg0);
+void flight_field_set_host_capability_coverage_group(void * arg0, void * arg1, size_t arg2);
+bool flight_get_host_capability_coverage_is_present(void * arg0);
+bool flight_set_host_capability_coverage_is_present(void * arg0, bool arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_host_capability_coverage_slot(void * arg0);
+void flight_field_set_host_capability_coverage_slot(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_host_capability_explanation_capability(void * arg0);
+void flight_field_set_host_capability_explanation_capability(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_host_capability_explanation_group(void * arg0);
+void flight_field_set_host_capability_explanation_group(void * arg0, void * arg1, size_t arg2);
+bool flight_get_host_capability_explanation_is_present(void * arg0);
+bool flight_set_host_capability_explanation_is_present(void * arg0, bool arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_host_capability_explanation_message(void * arg0);
+void flight_field_set_host_capability_explanation_message(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_host_capability_explanation_slot(void * arg0);
+void flight_field_set_host_capability_explanation_slot(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_host_capability_group_explanation_group(void * arg0);
+void flight_field_set_host_capability_group_explanation_group(void * arg0, void * arg1, size_t arg2);
+float flight_get_canvas_text_metrics_width(void * arg0);
+float flight_set_canvas_text_metrics_width(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_image_resource_ref when done. */
 void * flight_clone_image_resource(void * arg0);
 void flight_invalidate_image_resource(void * arg0, void * arg1);
 bool flight_is_image_resource_empty(void * arg0);
+/* Caller owns the return value; call flight_free_image_resource_ref when done. */
 void * flight_create_image_resource_from_bitmap(void * arg0, void * arg1);
-void * flight_create_image_resource_from_surface(void * arg0, void * arg1);
-void * flight_capture_bitmap_from_image_resource(void * arg0, void * arg1);
 bool flight_is_image_url_same_origin(const char * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_embedded_image_resource_reference_ref when done. */
+void * flight_create_embedded_image_resource_reference(void * arg0 /* cloned; caller retains its handle */);
+/* Caller owns the return value; call flight_free_external_image_resource_reference_ref when done. */
 void * flight_create_external_image_resource_reference(const char * arg0);
+/* Caller owns the return value; call flight_free_image_resource_failure_ref when done. */
 void * flight_create_image_resource_failure(void * arg0);
+/* Caller owns the return value; call flight_free_image_resource_reference_resolution_explanation when done. */
 void * flight_explain_image_resource_reference_resolution(void * arg0);
 bool flight_reset_failed_image_resource_reference(void * arg0);
-void * flight_create_image_resolver_state(void);
-void * flight_create_texture_from_image_resource(void * arg0, void * arg1);
 uint32_t flight_get_host_image_dimensions_height(void * arg0);
 uint32_t flight_set_host_image_dimensions_height(void * arg0, uint32_t arg1);
 uint32_t flight_get_host_image_dimensions_width(void * arg0);
 uint32_t flight_set_host_image_dimensions_width(void * arg0, uint32_t arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_image_resource_failure_message(void * arg0);
 void flight_field_set_image_resource_failure_message(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_image_bitmap_composition_kind(void * arg0);
 void flight_field_set_image_bitmap_composition_kind(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_external_image_resource_reference_uri(void * arg0);
 void flight_field_set_external_image_resource_reference_uri(void * arg0, void * arg1, size_t arg2);
 bool flight_get_image_resource_reference_resolution_explanation_retryable(void * arg0);
 bool flight_set_image_resource_reference_resolution_explanation_retryable(void * arg0, bool arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_image_url_origin_context_href(void * arg0);
 void flight_field_set_image_url_origin_context_href(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_image_url_origin_context_origin(void * arg0);
 void flight_field_set_image_url_origin_context_origin(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_string when done. */
 char * flight_detect_image_mime_type(void * arg0, size_t arg1);
 size_t flight_get_decoded_image_height(void * arg0);
 size_t flight_set_decoded_image_height(void * arg0, size_t arg1);
 size_t flight_get_decoded_image_width(void * arg0);
 size_t flight_set_decoded_image_width(void * arg0, size_t arg1);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_format_import_diagnostic(void * arg0);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_import_diagnostic_kind(void * arg0);
+void flight_field_set_import_diagnostic_kind(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_import_diagnostic_origin(void * arg0);
+void flight_field_set_import_diagnostic_origin(void * arg0, void * arg1, size_t arg2);
 void flight_attach_gamepad_input(void * arg0, void * arg1, void * arg2, void * arg3);
 void flight_attach_keyboard_input(void * arg0, void * arg1, void * arg2, void * arg3);
 void flight_attach_pointer_input(void * arg0, void * arg1, void * arg2, void * arg3);
@@ -2158,8 +3525,11 @@ float flight_apply_gamepad_axis_dead_zone(float arg0, float arg1);
 void flight_apply_gamepad_stick_dead_zone(void * arg0, float arg1, float arg2, float arg3);
 int32_t flight_get_gamepad_axis_name(uint32_t arg0, int32_t arg1);
 int32_t flight_get_gamepad_button_name(uint32_t arg0, int32_t arg1);
+/* Caller owns the return value; call flight_free_input_manager_ref when done. */
 void * flight_create_input_manager(void);
+/* Caller owns the return value; call flight_free_input_state_ref when done. */
 void * flight_create_input_state(void);
+/* Caller owns the return value; call flight_free_input_disposer when done. */
 void * flight_connect_input_state_to_input_manager(void * arg0, void * arg1);
 void flight_end_input_state_frame(void * arg0);
 float flight_get_input_gamepad_axis(void * arg0, int32_t arg1, int32_t arg2);
@@ -2170,10 +3540,12 @@ bool flight_was_input_gamepad_button_pressed(void * arg0, int32_t arg1, int32_t 
 bool flight_was_input_gamepad_button_released(void * arg0, int32_t arg1, int32_t arg2);
 bool flight_was_input_key_pressed(void * arg0, int32_t arg1);
 bool flight_was_input_key_released(void * arg0, int32_t arg1);
+/* Caller owns the return value; call flight_free_input_target_handle_ref when done. */
 void * flight_create_input_target_handle(void);
+/* Caller owns the return value; call flight_free_input_key_repeat_timer_ref when done. */
 void * flight_create_input_key_repeat_timer(void * arg0);
 void flight_advance_input_key_repeat_timer(void * arg0, double arg1);
-void flight_start_input_key_repeat_timer(void * arg0, void * arg1, double arg2);
+void flight_start_input_key_repeat_timer(void * arg0, void * arg1 /* cloned; caller retains its handle */, double arg2);
 void flight_stop_input_key_repeat_timer(void * arg0);
 int32_t flight_get_input_gamepad_axis_data_axis(void * arg0);
 int32_t flight_set_input_gamepad_axis_data_axis(void * arg0, int32_t arg1);
@@ -2193,16 +3565,19 @@ float flight_get_input_gamepad_button_data_value(void * arg0);
 float flight_set_input_gamepad_button_data_value(void * arg0, float arg1);
 int32_t flight_get_input_gamepad_connect_data_gamepad(void * arg0);
 int32_t flight_set_input_gamepad_connect_data_gamepad(void * arg0, int32_t arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_input_gamepad_connect_data_id(void * arg0);
 void flight_field_set_input_gamepad_connect_data_id(void * arg0, void * arg1, size_t arg2);
 bool flight_get_input_keyboard_data_alt_key(void * arg0);
 bool flight_set_input_keyboard_data_alt_key(void * arg0, bool arg1);
 bool flight_get_input_keyboard_data_caps_lock(void * arg0);
 bool flight_set_input_keyboard_data_caps_lock(void * arg0, bool arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_input_keyboard_data_code(void * arg0);
 void flight_field_set_input_keyboard_data_code(void * arg0, void * arg1, size_t arg2);
 bool flight_get_input_keyboard_data_ctrl_key(void * arg0);
 bool flight_set_input_keyboard_data_ctrl_key(void * arg0, bool arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_input_keyboard_data_key(void * arg0);
 void flight_field_set_input_keyboard_data_key(void * arg0, void * arg1, size_t arg2);
 int32_t flight_get_input_keyboard_data_key_code(void * arg0);
@@ -2261,6 +3636,7 @@ float flight_get_input_pointer_data_y(void * arg0);
 float flight_set_input_pointer_data_y(void * arg0, float arg1);
 bool flight_get_input_text_data_is_composing(void * arg0);
 bool flight_set_input_text_data_is_composing(void * arg0, bool arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_input_text_data_text(void * arg0);
 void flight_field_set_input_text_data_text(void * arg0, void * arg1, size_t arg2);
 double flight_get_input_key_repeat_options_delay(void * arg0);
@@ -2274,15 +3650,62 @@ float flight_set_gamepad_stick_output_y(void * arg0, float arg1);
 bool flight_get_input_manager_enabled(void * arg0);
 bool flight_set_input_manager_enabled(void * arg0, bool arg1);
 double flight_compare_strings(void * arg0, void * arg1, const char * arg2, const char * arg3, void * arg4, void * arg5);
-void flight_sort_strings(void * arg0, void * arg1, void * arg2, void * arg3, size_t arg4, void * arg5, void * arg6);
-char * flight_format_list(void * arg0, void * arg1, void * arg2, size_t arg3, void * arg4, void * arg5);
+void flight_sort_strings(void * arg0, void * arg1, void * arg2, const char * const * arg3, size_t arg4, void * arg5, void * arg6);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_format_date(void * arg0, void * arg1, double arg2, void * arg3, void * arg4);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_format_date_time(void * arg0, void * arg1, double arg2, void * arg3, void * arg4);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_format_time(void * arg0, void * arg1, double arg2, void * arg3, void * arg4);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_format_list(void * arg0, void * arg1, const char * const * arg2, size_t arg3, void * arg4, void * arg5);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_format_compact_number(void * arg0, void * arg1, double arg2, void * arg3, void * arg4);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_format_currency(void * arg0, void * arg1, double arg2, const char * arg3, void * arg4, void * arg5);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_format_number(void * arg0, void * arg1, double arg2, void * arg3, void * arg4);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_format_percent(void * arg0, void * arg1, double arg2, void * arg3, void * arg4);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_format_unit(void * arg0, void * arg1, double arg2, const char * arg3, void * arg4, void * arg5);
+uint32_t flight_select_ordinal_category(void * arg0, void * arg1, double arg2, void * arg3, void * arg4);
+uint32_t flight_select_plural_category(void * arg0, void * arg1, double arg2, void * arg3, void * arg4);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_format_relative_time(void * arg0, void * arg1, double arg2, uint32_t arg3, void * arg4, void * arg5);
+/* Caller owns the return value; call flight_free_ipc_unsubscribe when done. */
+void * flight_on_ipc_invoke(void * arg0, const char * arg1, void * arg2 /* cloned; caller retains its handle */);
+/* Caller owns the return value; call flight_free_ipc_unsubscribe when done. */
+void * flight_on_ipc_message(void * arg0, const char * arg1, void * arg2 /* cloned; caller retains its handle */);
+/* Caller owns the return value; call flight_free_ipc_unsubscribe when done. */
+void * flight_once_ipc_message(void * arg0, const char * arg1, void * arg2 /* cloned; caller retains its handle */);
+/* Caller owns the return value; call flight_free_soft_keyboard when done. */
+void * flight_create_soft_keyboard(void);
+void flight_detach_soft_keyboard(void * arg0);
+void flight_dispose_soft_keyboard(void * arg0);
+float flight_get_soft_keyboard_height(void * arg0);
+void flight_get_soft_keyboard_info(void * arg0, void * arg1);
+bool flight_is_soft_keyboard_visible(void * arg0);
+bool flight_get_soft_keyboard_info_visible(void * arg0);
+bool flight_set_soft_keyboard_info_visible(void * arg0, bool arg1);
+float flight_get_soft_keyboard_info_height(void * arg0);
+float flight_set_soft_keyboard_info_height(void * arg0, float arg1);
+float flight_get_soft_keyboard_info_x(void * arg0);
+float flight_set_soft_keyboard_info_x(void * arg0, float arg1);
+float flight_get_soft_keyboard_info_y(void * arg0);
+float flight_set_soft_keyboard_info_y(void * arg0, float arg1);
+float flight_get_soft_keyboard_info_width(void * arg0);
+float flight_set_soft_keyboard_info_width(void * arg0, float arg1);
 void flight_register_anchor_layout_resolver(void * arg0);
 void flight_enable_layout_guards(void * arg0, void * arg1);
 void flight_register_flex_layout_resolver(void * arg0);
 void flight_register_grid_layout_resolver(void * arg0);
+/* Caller owns the return value; call flight_free_layout_state when done. */
 void * flight_create_layout_state(void);
+/* Caller owns the return value; call flight_free_layout_resolution_explanation when done. */
 void * flight_explain_layout_resolution(void * arg0, void * arg1, int32_t arg2);
 bool flight_resolve_layout_tree(void * arg0, size_t arg1, void * arg2, void * arg3, void * arg4, size_t arg5, float arg6, float arg7);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_layout_node_kind(void * arg0);
 void flight_field_set_layout_node_kind(void * arg0, void * arg1, size_t arg2);
 int32_t flight_get_layout_node_parent_index(void * arg0);
@@ -2303,18 +3726,42 @@ int32_t flight_get_layout_state_last_failure_parent_index(void * arg0);
 int32_t flight_set_layout_state_last_failure_parent_index(void * arg0, int32_t arg1);
 int32_t flight_get_layout_state_last_failure_required_length(void * arg0);
 int32_t flight_set_layout_state_last_failure_required_length(void * arg0, int32_t arg1);
+/* Caller owns the return value; call flight_free_app_lifecycle when done. */
+void * flight_create_app_lifecycle(void);
+void flight_attach_app_lifecycle(void * arg0, void * arg1);
+void flight_detach_app_lifecycle(void * arg0);
+void flight_dispose_app_lifecycle(void * arg0);
+/* Caller owns the return value; call flight_free_backend_operation_explanation when done. */
+void * flight_explain_lifecycle_operation(void * arg0, uint32_t arg1);
+uint32_t flight_get_app_launch_kind(void * arg0);
+uint32_t flight_get_app_lifecycle_state(void * arg0);
+bool flight_has_lifecycle_operation(void * arg0, uint32_t arg1);
+bool flight_is_app_active(void * arg0);
+bool flight_is_app_background(void * arg0);
+bool flight_is_app_inactive(void * arg0);
+bool flight_request_app_back(void * arg0);
+/* Caller owns the return value; call flight_free_ambient_light when done. */
 void * flight_create_ambient_light(void);
+/* Caller owns the return value; call flight_free_ambient_light when done. */
 void * flight_clone_ambient_light(void * arg0);
+/* Caller owns the return value; call flight_free_area_light when done. */
 void * flight_create_area_light(void);
+/* Caller owns the return value; call flight_free_area_light when done. */
 void * flight_clone_area_light(void * arg0);
 void flight_set_area_light_orientation(void * arg0, void * arg1, void * arg2, void * arg3);
+/* Caller owns the return value; call flight_free_directional_light when done. */
 void * flight_create_directional_light(void * arg0);
+/* Caller owns the return value; call flight_free_directional_light when done. */
 void * flight_clone_directional_light(void * arg0);
 void flight_set_directional_light_direction(void * arg0, float arg1, float arg2, float arg3);
 void flight_set_directional_light_target(void * arg0, float arg1, float arg2, float arg3, float arg4, float arg5, float arg6);
+/* Caller owns the return value; call flight_free_environment when done. */
 void * flight_create_environment(void);
+/* Caller owns the return value; call flight_free_environment when done. */
 void * flight_clone_environment(void * arg0);
+/* Caller owns the return value; call flight_free_hemisphere_light when done. */
 void * flight_create_hemisphere_light(void);
+/* Caller owns the return value; call flight_free_hemisphere_light when done. */
 void * flight_clone_hemisphere_light(void * arg0);
 float flight_get_light_contribution_at_bounding_sphere__point_light(void * arg0, void * arg1);
 float flight_get_light_contribution_at_bounding_sphere__spot_light(void * arg0, void * arg1);
@@ -2343,15 +3790,23 @@ float flight_get_light_photometric_intensity__hemisphere_light(void * arg0);
 void flight_set_light_photometric_intensity__ambient_light(void * arg0, float arg1);
 void flight_set_light_photometric_intensity__directional_light(void * arg0, float arg1);
 void flight_set_light_photometric_intensity__hemisphere_light(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_light_probe when done. */
 void * flight_create_light_probe(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_light_probe_grid when done. */
+void * flight_create_light_probe_grid(const void * const * arg0, size_t arg1, void * arg2, void * arg3);
 void flight_evaluate_light_probe_sh(void * arg0, size_t arg1, void * arg2, void * arg3, size_t arg4);
 bool flight_sample_light_probe_grid(void * arg0, size_t arg1, void * arg2, void * arg3);
 void flight_set_light_probe_sh_from_colors(void * arg0, void * arg1, size_t arg2, void * arg3, size_t arg4);
+/* Caller owns the return value; call flight_free_point_light when done. */
 void * flight_create_point_light(void);
+/* Caller owns the return value; call flight_free_point_light when done. */
 void * flight_clone_point_light(void * arg0);
 void flight_select_scene_3d_forward_lights(void * arg0, void * arg1, void * arg2, int32_t arg3);
+/* Caller owns the return value; call flight_free_scene3_dlights when done. */
 void * flight_create_scene_3d_lights(void);
+/* Caller owns the return value; call flight_free_spot_light when done. */
 void * flight_create_spot_light(void * arg0);
+/* Caller owns the return value; call flight_free_spot_light when done. */
 void * flight_clone_spot_light(void * arg0);
 void flight_get_spot_light_cone_degrees(void * arg0, void * arg1);
 void flight_set_spot_light_blend(void * arg0, float arg1);
@@ -2518,6 +3973,90 @@ size_t flight_get_scene3_dlight_block_spot_count(void * arg0);
 size_t flight_set_scene3_dlight_block_spot_count(void * arg0, size_t arg1);
 uint32_t flight_get_scene3_dlight_block_version(void * arg0);
 uint32_t flight_set_scene3_dlight_block_version(void * arg0, uint32_t arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_load_progress_url(void * arg0);
+void flight_field_set_load_progress_url(void * arg0, void * arg1, size_t arg2);
+size_t flight_get_load_progress_loaded(void * arg0);
+size_t flight_set_load_progress_loaded(void * arg0, size_t arg1);
+size_t flight_get_load_progress_total(void * arg0);
+size_t flight_set_load_progress_total(void * arg0, size_t arg1);
+float flight_get_resource_load_bytes_bytes_loaded(void * arg0);
+float flight_set_resource_load_bytes_bytes_loaded(void * arg0, float arg1);
+float flight_get_resource_load_bytes_bytes_total_known(void * arg0);
+float flight_set_resource_load_bytes_bytes_total_known(void * arg0, float arg1);
+size_t flight_get_resource_load_bytes_items_with_known_bytes(void * arg0);
+size_t flight_set_resource_load_bytes_items_with_known_bytes(void * arg0, size_t arg1);
+size_t flight_get_resource_load_counts_settled_items(void * arg0);
+size_t flight_set_resource_load_counts_settled_items(void * arg0, size_t arg1);
+size_t flight_get_resource_load_counts_in_flight_items(void * arg0);
+size_t flight_set_resource_load_counts_in_flight_items(void * arg0, size_t arg1);
+size_t flight_get_resource_load_counts_queued_items(void * arg0);
+size_t flight_set_resource_load_counts_queued_items(void * arg0, size_t arg1);
+size_t flight_get_resource_load_counts_total_items(void * arg0);
+size_t flight_set_resource_load_counts_total_items(void * arg0, size_t arg1);
+size_t flight_get_resource_load_report_attempts(void * arg0);
+size_t flight_set_resource_load_report_attempts(void * arg0, size_t arg1);
+float flight_get_resource_load_report_bytes(void * arg0);
+float flight_set_resource_load_report_bytes(void * arg0, float arg1);
+double flight_get_resource_load_report_elapsed_ms(void * arg0);
+double flight_set_resource_load_report_elapsed_ms(void * arg0, double arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_resource_load_report_key(void * arg0);
+void flight_field_set_resource_load_report_key(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_log_sink when done. */
+void * flight_create_console_log_sink(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_buffered_log_sink when done. */
+void * flight_create_buffered_log_sink(void * arg0 /* cloned; caller retains its handle */, void * arg1);
+/* Caller owns the return value; call flight_free_log_formatter when done. */
+void * flight_create_json_log_formatter(void * arg0);
+/* Caller owns the return value; call flight_free_log_context when done. */
+void * flight_create_log_context(void);
+/* Caller owns the return value; call flight_free_log_span when done. */
+void * flight_create_log_span(void * arg0);
+/* Caller owns the return value; call flight_free_log_state when done. */
+void * flight_create_log_state(void);
+/* Caller owns the return value; call flight_free_memory_log_sink when done. */
+void * flight_create_memory_log_sink(size_t arg0);
+/* Caller owns the return value; call flight_free_rate_limited_log_sink when done. */
+void * flight_create_rate_limited_log_sink(void * arg0 /* cloned; caller retains its handle */, void * arg1);
+/* Caller owns the return value; call flight_free_log_sink when done. */
+void * flight_create_sampled_log_sink(void * arg0 /* cloned; caller retains its handle */, size_t arg1);
+/* Caller owns the return value; call flight_free_log_formatter when done. */
+void * flight_create_text_log_formatter(void * arg0, void * arg1);
+void flight_add_log_sink(void * arg0, void * arg1 /* cloned; caller retains its handle */);
+void flight_advance_log_sink(void * arg0, double arg1);
+void flight_begin_log_group(void * arg0, double arg1, const char * arg2, const char * arg3);
+void flight_clear_log_channel_level(void * arg0, const char * arg1);
+void flight_clear_log_channel_levels(void * arg0);
+void flight_clear_log_groups(void * arg0);
+void flight_clear_log_once_keys(void * arg0);
+void flight_clear_log_redaction_paths(void * arg0);
+void flight_clear_log_serializers(void * arg0);
+void flight_clear_log_sinks(void * arg0);
+void flight_clear_memory_log_sink(void * arg0);
+void flight_dispose_log_sink(void * arg0);
+void flight_end_log_group(void * arg0, double arg1, const char * arg2);
+double flight_end_log_timer(void * arg0, double arg1, void * arg2);
+void flight_enter_log_span(void * arg0, void * arg1);
+void flight_exit_log_span(void * arg0, void * arg1);
+void flight_flush_log_sink(void * arg0);
+/* Caller owns the return value; call flight_free_log_level when done. */
+void * flight_get_log_channel_level(void * arg0, const char * arg1);
+/* Caller owns the return value; call flight_free_log_level when done. */
+void * flight_get_log_console_level(void * arg0);
+/* Caller owns the return value; call flight_free_log_level when done. */
+void * flight_get_log_level(void * arg0);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_get_log_level_name(void * arg0);
+/* Caller owns the return value; call flight_free_log_level when done. */
+void * flight_parse_log_level(const char * arg0);
+bool flight_remove_log_sink(void * arg0, void * arg1);
+void flight_set_log_channel_level(void * arg0, const char * arg1, void * arg2);
+void flight_set_log_console_level(void * arg0, void * arg1);
+void flight_set_log_level(void * arg0, void * arg1);
+void flight_set_log_redaction_paths(void * arg0, const char * const * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_log_timer when done. */
+void * flight_start_log_timer(const char * arg0, const char * arg1, double arg2);
 uint32_t flight_get_tint_material_data_tint(void * arg0);
 uint32_t flight_set_tint_material_data_tint(void * arg0, uint32_t arg1);
 float flight_get_material3_dfields_alpha_cutoff(void * arg0);
@@ -2610,6 +4149,7 @@ float flight_get_specular_glossiness_pbr_material_occlusion_strength(void * arg0
 float flight_set_specular_glossiness_pbr_material_occlusion_strength(void * arg0, float arg1);
 uint32_t flight_get_specular_glossiness_pbr_material_specular(void * arg0);
 uint32_t flight_set_specular_glossiness_pbr_material_specular(void * arg0, uint32_t arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_custom_shader_material_shader_key(void * arg0);
 void flight_field_set_custom_shader_material_shader_key(void * arg0, void * arg1, size_t arg2);
 float flight_get_anisotropy_pbr_extension_anisotropy_rotation(void * arg0);
@@ -2680,6 +4220,7 @@ float flight_saturate(float arg0);
 bool flight_approx_equal(float arg0, float arg1, float arg2);
 bool flight_approx_equal_relative(float arg0, float arg1, float arg2);
 bool flight_approx_zero(float arg0, float arg1);
+/* Caller owns the return value; call flight_free_random_source when done. */
 void * flight_create_random_source_from_hash(int32_t arg0, int32_t arg1);
 uint32_t flight_hash_2d(int32_t arg0, int32_t arg1);
 uint32_t flight_hash_3d(int32_t arg0, int32_t arg1, int32_t arg2);
@@ -2706,19 +4247,21 @@ float flight_hypot2(float arg0, float arg1);
 bool flight_is_even(int32_t arg0);
 bool flight_is_odd(int32_t arg0);
 int32_t flight_lcm(int32_t arg0, int32_t arg1);
+/* Caller owns the return value; call flight_free_random_source when done. */
 void * flight_create_random_source(uint32_t arg0);
-float flight_random_exponential(void * arg0, void * arg1, float arg2);
-float flight_random_gaussian(void * arg0, void * arg1, float arg2, float arg3);
-void flight_random_inside_unit_disc(void * arg0, void * arg1, void * arg2);
-void flight_random_inside_unit_sphere(void * arg0, void * arg1, void * arg2);
-void flight_random_on_unit_circle(void * arg0, void * arg1, void * arg2);
-void flight_random_on_unit_sphere(void * arg0, void * arg1, void * arg2);
-int32_t flight_random_poisson(void * arg0, void * arg1, float arg2);
-int32_t flight_random_weighted(void * arg0, void * arg1, void * arg2, size_t arg3);
-bool flight_random_bool(void * arg0, void * arg1, float arg2);
-int32_t flight_random_int(void * arg0, void * arg1, int32_t arg2, int32_t arg3);
-float flight_random_range(void * arg0, void * arg1, float arg2, float arg3);
-float flight_random_sign(void * arg0, void * arg1);
+float flight_random_exponential(float (*arg0)(void *), void * arg1, float arg2);
+float flight_random_gaussian(float (*arg0)(void *), void * arg1, float arg2, float arg3);
+void flight_random_gaussian_pair(float (*arg0)(void *), void * arg1, float arg2, float arg3, float * arg4, float * arg5);
+void flight_random_inside_unit_disc(void * arg0, float (*arg1)(void *), void * arg2);
+void flight_random_inside_unit_sphere(void * arg0, float (*arg1)(void *), void * arg2);
+void flight_random_on_unit_circle(void * arg0, float (*arg1)(void *), void * arg2);
+void flight_random_on_unit_sphere(void * arg0, float (*arg1)(void *), void * arg2);
+int32_t flight_random_poisson(float (*arg0)(void *), void * arg1, float arg2);
+int32_t flight_random_weighted(float (*arg0)(void *), void * arg1, void * arg2, size_t arg3);
+bool flight_random_bool(float (*arg0)(void *), void * arg1, float arg2);
+int32_t flight_random_int(float (*arg0)(void *), void * arg1, int32_t arg2, int32_t arg3);
+float flight_random_range(float (*arg0)(void *), void * arg1, float arg2, float arg3);
+float flight_random_sign(float (*arg0)(void *), void * arg1);
 float flight_ceil_to(float arg0, float arg1);
 float flight_euclidean_mod(float arg0, float arg1);
 float flight_floor_to(float arg0, float arg1);
@@ -2733,7 +4276,204 @@ double flight_median(void * arg0, size_t arg1);
 double flight_standard_deviation(void * arg0, size_t arg1);
 double flight_variance(void * arg0, size_t arg1);
 double flight_weighted_average(void * arg0, size_t arg1, void * arg2, size_t arg3);
-void * flight_create_motion_path(void * arg0, double arg1, int32_t arg2, double arg3);
+void flight_clear_audio_channel_loop_region(void * arg0);
+void flight_destroy_audio_channel(void * arg0);
+void flight_fade_audio_channel_gain(void * arg0, void * arg1, float arg2, float arg3);
+float flight_get_audio_channel_current_time(void * arg0);
+float flight_get_audio_channel_duration(void * arg0);
+/* Caller owns the return value; call flight_free_audio_source_handle when done. */
+void * flight_get_audio_channel_source_handle(void * arg0);
+bool flight_has_audio_channel_fade(void * arg0);
+bool flight_is_audio_channel_muted(void * arg0);
+bool flight_is_audio_channel_playing(void * arg0);
+void flight_pause_audio_channel(void * arg0);
+/* Caller owns the return value; call flight_free_audio_channel_ref when done. */
+void * flight_play_audio_resource(void * arg0, void * arg1, void * arg2, void * arg3);
+void flight_resume_audio_channel(void * arg0);
+float flight_set_audio_channel_current_time(void * arg0, float arg1);
+float flight_set_audio_channel_gain(void * arg0, float arg1);
+bool flight_set_audio_channel_loop_region(void * arg0, float arg1, float arg2);
+bool flight_set_audio_channel_muted(void * arg0, bool arg1);
+float flight_set_audio_channel_pan(void * arg0, float arg1);
+float flight_set_audio_channel_playback_rate(void * arg0, float arg1);
+void flight_stop_audio_channel(void * arg0);
+/* Caller owns the return value; call flight_free_audio_bus_ref when done. */
+void * flight_create_audio_bus(void);
+/* Caller owns the return value; call flight_free_audio_mixer_ref when done. */
+void * flight_create_audio_mixer(void * arg0, void * arg1, void * arg2);
+void flight_add_audio_bus_to_mixer(void * arg0, void * arg1, void * arg2);
+void flight_destroy_audio_mixer(void * arg0, void * arg1);
+void flight_fade_audio_bus_gain(void * arg0, void * arg1, void * arg2, float arg3, float arg4);
+void flight_get_audio_mixer_active_channels(void * arg0, void * arg1);
+void flight_pause_all_audio_mixer_channels(void * arg0);
+void flight_resume_all_audio_mixer_channels(void * arg0);
+void flight_route_audio_channel_to_mixer_bus(void * arg0, void * arg1, void * arg2, void * arg3);
+float flight_set_audio_bus_gain(void * arg0, void * arg1, void * arg2, float arg3);
+bool flight_set_audio_bus_muted(void * arg0, void * arg1, void * arg2, bool arg3);
+float flight_set_audio_bus_pan(void * arg0, void * arg1, void * arg2, float arg3);
+float flight_set_audio_mixer_master_gain(void * arg0, void * arg1, float arg2);
+bool flight_set_audio_mixer_master_muted(void * arg0, void * arg1, bool arg2);
+void flight_stop_all_audio_mixer_channels(void * arg0);
+void flight_unroute_audio_channel_from_mixer_bus(void * arg0, void * arg1, void * arg2);
+void flight_disable_audio_mixer_guards(void * arg0);
+void flight_enable_audio_mixer_guards(void * arg0, void * arg1, double (*arg2)(void *), void * arg3);
+/* Caller owns the return value; call flight_free_media_channel_signals_ref when done. */
+void * flight_enable_audio_channel_signals(void * arg0);
+/* Caller owns the return value; call flight_free_media_channel_signals_ref when done. */
+void * flight_enable_video_channel_signals(void * arg0);
+/* Caller owns the return value; call flight_free_media_channel_signals_ref when done. */
+void * flight_get_audio_channel_signals(void * arg0);
+/* Caller owns the return value; call flight_free_media_channel_signals_ref when done. */
+void * flight_get_video_channel_signals(void * arg0);
+void flight_destroy_video_channel(void * arg0, void * arg1);
+float flight_get_video_channel_current_time(void * arg0, void * arg1);
+float flight_get_video_channel_duration(void * arg0);
+float flight_get_video_channel_height(void * arg0, void * arg1);
+float flight_get_video_channel_width(void * arg0, void * arg1);
+bool flight_is_video_channel_muted(void * arg0);
+bool flight_is_video_channel_playing(void * arg0);
+void flight_pause_video_channel(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_video_channel_ref when done. */
+void * flight_play_video_resource(void * arg0, void * arg1, void * arg2, void * arg3, void * arg4);
+void flight_resume_video_channel(void * arg0, void * arg1, void * arg2);
+float flight_set_video_channel_current_time(void * arg0, void * arg1, float arg2);
+float flight_set_video_channel_gain(void * arg0, void * arg1, float arg2);
+bool flight_set_video_channel_muted(void * arg0, void * arg1, bool arg2);
+float flight_set_video_channel_playback_rate(void * arg0, void * arg1, float arg2);
+void flight_stop_video_channel(void * arg0, void * arg1);
+float flight_get_audio_channel_gain(void * arg0);
+float flight_get_audio_channel_length(void * arg0);
+float flight_set_audio_channel_length(void * arg0, float arg1);
+float flight_get_audio_channel_loop_end(void * arg0);
+float flight_set_audio_channel_loop_end(void * arg0, float arg1);
+int32_t flight_get_audio_channel_loops(void * arg0);
+int32_t flight_set_audio_channel_loops(void * arg0, int32_t arg1);
+float flight_get_audio_channel_loop_start(void * arg0);
+float flight_set_audio_channel_loop_start(void * arg0, float arg1);
+bool flight_get_audio_channel_muted(void * arg0);
+float flight_get_audio_channel_pan(void * arg0);
+float flight_get_audio_channel_playback_rate(void * arg0);
+float flight_get_video_channel_gain(void * arg0);
+float flight_get_video_channel_length(void * arg0);
+float flight_set_video_channel_length(void * arg0, float arg1);
+int32_t flight_get_video_channel_loops(void * arg0);
+int32_t flight_set_video_channel_loops(void * arg0, int32_t arg1);
+bool flight_get_video_channel_muted(void * arg0);
+float flight_get_video_channel_playback_rate(void * arg0);
+float flight_get_audio_bus_gain(void * arg0);
+bool flight_get_audio_bus_muted(void * arg0);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_audio_bus_name(void * arg0);
+void flight_field_set_audio_bus_name(void * arg0, void * arg1, size_t arg2);
+float flight_get_audio_bus_pan(void * arg0);
+float flight_get_audio_mixer_master_gain(void * arg0);
+bool flight_get_audio_mixer_master_muted(void * arg0);
+/* Caller owns the return value; call flight_free_media_session_action_signal when done. */
+void * flight_create_media_session_action_signal(void);
+bool flight_attach_media_session_action(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_media_session_clear_metadata_outcome when done. */
+void * flight_clear_media_session_metadata(void * arg0);
+/* Caller owns the return value; call flight_free_media_session_clear_position_state_outcome when done. */
+void * flight_clear_media_session_position_state(void * arg0);
+void flight_destroy_media_session(void * arg0, void * arg1);
+void flight_detach_media_session_action(void * arg0);
+void flight_dispose_media_session_action_signal(void * arg0);
+/* Caller owns the return value; call flight_free_media_session_set_metadata_outcome when done. */
+void * flight_set_media_session_metadata(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_media_session_set_playback_state_outcome when done. */
+void * flight_set_media_session_playback_state(void * arg0, uint32_t arg1);
+/* Caller owns the return value; call flight_free_media_session_set_position_state_outcome when done. */
+void * flight_set_media_session_position_state(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_media_session_artwork_src(void * arg0);
+void flight_field_set_media_session_artwork_src(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_media_session_metadata_title(void * arg0);
+void flight_field_set_media_session_metadata_title(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_media_session_metadata_artist(void * arg0);
+void flight_field_set_media_session_metadata_artist(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_media_session_metadata_album(void * arg0);
+void flight_field_set_media_session_metadata_album(void * arg0, void * arg1, size_t arg2);
+float flight_get_media_session_position_state_duration(void * arg0);
+float flight_set_media_session_position_state_duration(void * arg0, float arg1);
+float flight_get_media_session_position_state_playback_rate(void * arg0);
+float flight_set_media_session_position_state_playback_rate(void * arg0, float arg1);
+float flight_get_media_session_position_state_position(void * arg0);
+float flight_set_media_session_position_state_position(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_menu_item_template_ref when done. */
+void * flight_create_menu_item_template(void * arg0);
+/* Caller owns the return value; call flight_free_menu_item_template_ref when done. */
+void * flight_clone_menu_template(void * arg0);
+void flight_destroy_app_menu(void * arg0, const void * const * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_menu_signals_ref when done. */
+void * flight_enable_menu_signals(void * arg0);
+/* Caller owns the return value; call flight_free_menu_signals_ref when done. */
+void * flight_get_menu_signals(void * arg0);
+bool flight_set_app_menu(void * arg0, const void * const * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_validate_menu_item_template(void * arg0);
+/* Caller owns the return value; call flight_free_menu_item_template_ref when done. */
+void * flight_create_default_app_menu_template(const char * arg0);
+/* Caller owns the return value; call flight_free_menu_item_template_ref when done. */
+void * flight_create_default_edit_menu_template(void);
+/* Caller owns the return value; call flight_free_menu_item_template_ref when done. */
+void * flight_create_default_file_menu_template(void);
+/* Caller owns the return value; call flight_free_menu_item_template_ref when done. */
+void * flight_create_default_help_menu_template(void);
+/* Caller owns the return value; call flight_free_menu_item_template_ref when done. */
+void * flight_create_default_view_menu_template(void);
+/* Caller owns the return value; call flight_free_menu_item_template_ref when done. */
+void * flight_create_default_window_menu_template(void);
+/* Caller owns the return value; call flight_free_menu_highlight when done. */
+void * flight_create_menu_highlight(void);
+/* Caller owns the return value; call flight_free_menu_select when done. */
+void * flight_create_menu_select(void);
+void flight_attach_menu_highlight(void * arg0, void * arg1);
+void flight_attach_menu_select(void * arg0, void * arg1);
+void flight_detach_menu_highlight(void * arg0);
+void flight_detach_menu_select(void * arg0);
+void flight_dispose_menu_highlight(void * arg0);
+void flight_dispose_menu_select(void * arg0);
+/* Caller owns the return value; call flight_get_midi_access_input_ports_result_free when done. */
+void * flight_get_midi_access_input_ports(void * arg0);
+int32_t flight_get_midi_access_input_ports_result_reason(void * arg0);
+bool flight_get_midi_access_input_ports_result_has_ports(void * arg0);
+size_t flight_get_midi_access_input_ports_result_len(void * arg0);
+/* Caller owns the return value; call flight_free_midi_input_port_ref when done. */
+void * flight_get_midi_access_input_ports_result_get(void * arg0, size_t arg1);
+void flight_get_midi_access_input_ports_result_free(void * arg0);
+/* Caller owns the return value; call flight_get_midi_access_output_ports_result_free when done. */
+void * flight_get_midi_access_output_ports(void * arg0);
+int32_t flight_get_midi_access_output_ports_result_reason(void * arg0);
+bool flight_get_midi_access_output_ports_result_has_ports(void * arg0);
+size_t flight_get_midi_access_output_ports_result_len(void * arg0);
+/* Caller owns the return value; call flight_free_midi_output_port_ref when done. */
+void * flight_get_midi_access_output_ports_result_get(void * arg0, size_t arg1);
+void flight_get_midi_access_output_ports_result_free(void * arg0);
+/* Caller owns the return value; call flight_free_midi_port_connection_outcome when done. */
+void * flight_get_midi_port_connection(void * arg0);
+/* Caller owns the return value; call flight_free_midi_port_state_outcome when done. */
+void * flight_get_midi_port_state(void * arg0);
+/* Caller owns the return value; call flight_free_midi_message_send_outcome when done. */
+void * flight_send_midi_message(void * arg0, void * arg1, size_t arg2, double arg3);
+/* Caller owns the return value; call flight_free_midi_access_state_subscription_ref when done. */
+void * flight_create_midi_access_state_subscription(void);
+/* Caller owns the return value; call flight_free_midi_input_message_subscription_ref when done. */
+void * flight_create_midi_input_message_subscription(void);
+/* Caller owns the return value; call flight_free_midi_port_state_subscription_ref when done. */
+void * flight_create_midi_port_state_subscription(void);
+double flight_get_midi_input_message_timestamp(void * arg0);
+double flight_set_midi_input_message_timestamp(void * arg0, double arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_midi_input_port_id(void * arg0);
+void flight_field_set_midi_input_port_id(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_midi_output_port_id(void * arg0);
+void flight_field_set_midi_output_port_id(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_motion_path when done. */
+void * flight_create_motion_path(void * arg0 /* cloned; caller retains its handle */, double arg1, int32_t arg2, double arg3);
 double flight_get_motion_path_heading(void * arg0);
 bool flight_get_motion_path_position(void * arg0, void * arg1, void * arg2);
 double flight_get_motion_path_progress(void * arg0);
@@ -2749,17 +4489,19 @@ double flight_get_motion_path_speed(void * arg0);
 double flight_set_motion_path_speed(void * arg0, double arg1);
 bool flight_are_movie_clip_guards_enabled(void * arg0);
 void flight_disable_movie_clip_guards(void * arg0);
-void flight_enable_movie_clip_guards(void * arg0, void * arg1, void * arg2, void * arg3);
+void flight_enable_movie_clip_guards(void * arg0, void * arg1, double (*arg2)(void *), void * arg3);
+/* Caller owns the return value; call flight_free_movie_clip_ref when done. */
 void * flight_create_movie_clip(void);
-void * flight_create_movie_clip_data(void);
-void * flight_create_movie_clip_runtime(void);
-void flight_add_movie_clip_frame_script(void * arg0, void * arg1, void * arg2);
+void flight_add_movie_clip_frame_script(void * arg0, void * arg1, void * arg2 /* cloned; caller retains its handle */);
 void flight_dispose_movie_clip_signals(void * arg0);
+/* Caller owns the return value; call flight_free_movie_clip_signals when done. */
 void * flight_enable_movie_clip_signals(void * arg0);
 int32_t flight_get_movie_clip_current_frame(void * arg0);
+/* Caller owns the return value; call flight_free_timeline_label when done. */
 void * flight_get_movie_clip_current_label(void * arg0);
+/* Caller owns the return value; call flight_free_frame_script when done. */
 void * flight_get_movie_clip_frame_script(void * arg0, void * arg1);
-void * flight_get_movie_clip_runtime(void * arg0);
+/* Caller owns the return value; call flight_free_movie_clip_signals when done. */
 void * flight_get_movie_clip_signals(void * arg0);
 int32_t flight_get_movie_clip_total_frames(void * arg0);
 void flight_goto_and_play_movie_clip(void * arg0, void * arg1);
@@ -2772,29 +4514,57 @@ void flight_remove_movie_clip_frame_script(void * arg0, void * arg1);
 void flight_set_movie_clip_source(void * arg0, void * arg1);
 void flight_stop_movie_clip(void * arg0);
 void flight_update_movie_clip(void * arg0, double arg1);
+/* Caller owns the return value; call flight_free_timeline_source_ref when done. */
 void * flight_create_spritesheet_timeline_source(void * arg0, void * arg1, void * arg2);
+/* Caller owns the return value; call flight_free_spritesheet_timeline_source_explanation when done. */
 void * flight_explain_spritesheet_timeline_source(void * arg0);
-char * flight_get_spritesheet_timeline_source_unsupported_field_string(uint32_t arg0);
-int32_t flight_parse_spritesheet_timeline_source_unsupported_field(const char * arg0);
 bool flight_get_movie_clip_guard_state_movie_clip_guards_enabled(void * arg0);
 bool flight_set_movie_clip_guard_state_movie_clip_guards_enabled(void * arg0, bool arg1);
 bool flight_get_spritesheet_timeline_source_explanation_direction_materialized(void * arg0);
 bool flight_set_spritesheet_timeline_source_explanation_direction_materialized(void * arg0, bool arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_net_request_url(void * arg0);
+void flight_field_set_net_request_url(void * arg0, void * arg1, size_t arg2);
+uint32_t flight_get_net_response_status(void * arg0);
+uint32_t flight_set_net_response_status(void * arg0, uint32_t arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_net_response_status_text(void * arg0);
+void flight_field_set_net_response_status_text(void * arg0, void * arg1, size_t arg2);
+bool flight_get_net_response_ok(void * arg0);
+bool flight_set_net_response_ok(void * arg0, bool arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_net_response_url(void * arg0);
+void flight_field_set_net_response_url(void * arg0, void * arg1, size_t arg2);
+uint32_t flight_get_net_response_explanation_status(void * arg0);
+uint32_t flight_set_net_response_explanation_status(void * arg0, uint32_t arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_net_response_explanation_status_text(void * arg0);
+void flight_field_set_net_response_explanation_status_text(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_net_response_explanation_url(void * arg0);
+void flight_field_set_net_response_explanation_url(void * arg0, void * arg1, size_t arg2);
+size_t flight_get_net_progress_loaded(void * arg0);
+size_t flight_set_net_progress_loaded(void * arg0, size_t arg1);
+size_t flight_get_net_progress_total(void * arg0);
+size_t flight_set_net_progress_total(void * arg0, size_t arg1);
 void flight_compute_node_bounds_rectangle(void * arg0, void * arg1, void * arg2);
 void flight_compute_node_root_local_bounds_rectangle(void * arg0, void * arg1);
 void flight_ensure_node_local_bounds_rectangle(void * arg0);
 void flight_ensure_node_parent_bounds_rectangle(void * arg0);
 void flight_ensure_node_world_bounds_rectangle(void * arg0);
 float flight_get_node_height(void * arg0);
+/* Caller owns the return value; call flight_free_rectangle when done. */
 void * flight_get_node_local_bounds_rectangle(void * arg0);
+/* Caller owns the return value; call flight_free_rectangle when done. */
 void * flight_get_node_parent_bounds_rectangle(void * arg0);
 float flight_get_node_width(void * arg0);
+/* Caller owns the return value; call flight_free_rectangle when done. */
 void * flight_get_node_world_bounds_rectangle(void * arg0);
 void flight_set_node_height(void * arg0, float arg1);
 void flight_set_node_width(void * arg0, float arg1);
 bool flight_are_node_guards_enabled(void * arg0);
 void flight_disable_node_guards(void * arg0);
-void flight_enable_node_guards(void * arg0, void * arg1, void * arg2, void * arg3);
+void flight_enable_node_guards(void * arg0, void * arg1, double (*arg2)(void *), void * arg3);
 void flight_init_appearance_runtime_trait(void * arg0);
 void flight_init_appearance_trait(void * arg0, void * arg1);
 void flight_init_blend_mode_trait(void * arg0, void * arg1);
@@ -2805,21 +4575,30 @@ void flight_init_material_trait(void * arg0, void * arg1);
 void flight_init_transform2d_trait(void * arg0, void * arg1);
 void flight_init_transform3d_runtime_trait(void * arg0);
 void flight_init_transform3d_trait(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_node_ref when done. */
 void * flight_add_node_child(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_node_ref when done. */
 void * flight_add_node_child_at(void * arg0, void * arg1, int32_t arg2);
 void flight_add_node_children(void * arg0, void * arg1, size_t arg2);
 bool flight_contains_node_child(void * arg0, void * arg1);
-void flight_for_each_node_child(void * arg0, void * arg1, void * arg2);
+void flight_for_each_node_child(void * arg0, bool (*arg1)(void *, void *, size_t), void * arg2);
 void flight_get_node_ancestors(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_node_ref when done. */
 void * flight_get_node_child_at(void * arg0, int32_t arg1);
+/* Caller owns the return value; call flight_free_node_ref when done. */
 void * flight_get_node_child_by_name(void * arg0, const char * arg1);
 size_t flight_get_node_child_count(void * arg0);
 int32_t flight_get_node_child_index(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_node_ref when done. */
 void * flight_get_node_common_ancestor(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_node_ref when done. */
 void * flight_get_node_parent(void * arg0);
+/* Caller owns the return value; call flight_free_node_ref when done. */
 void * flight_get_node_root(void * arg0);
 bool flight_is_node_ancestor_of(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_node_ref when done. */
 void * flight_remove_node_child(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_node_ref when done. */
 void * flight_remove_node_child_at(void * arg0, int32_t arg1);
 void flight_remove_node_children(void * arg0, int32_t arg1, int32_t arg2);
 bool flight_reparent_node(void * arg0, void * arg1, void * arg2);
@@ -2827,21 +4606,23 @@ void flight_replace_node_child(void * arg0, void * arg1, void * arg2);
 void flight_set_node_child_index(void * arg0, void * arg1, int32_t arg2);
 void flight_swap_node_children(void * arg0, void * arg1, void * arg2);
 void flight_swap_node_children_at(void * arg0, int32_t arg1, int32_t arg2);
-void * flight_create_node_runtime(void * arg0);
+/* Caller owns the return value; call flight_free_node_signals_ref when done. */
 void * flight_create_node_signals(void);
 bool flight_default_node_runtime_can_add_child(void * arg0, void * arg1);
 void flight_dispose_node(void * arg0);
+/* Caller owns the return value; call flight_free_node_signals_ref when done. */
 void * flight_enable_node_signals(void * arg0);
-void * flight_get_node_runtime(void * arg0);
+/* Caller owns the return value; call flight_free_node_signals_ref when done. */
 void * flight_get_node_signals(void * arg0);
 void flight_set_node_enabled(void * arg0, bool arg1);
 void flight_set_node_color_adjustments_tint(void * arg0, uint32_t arg1);
+/* Caller owns the return value; call flight_free_node_order_list when done. */
 void * flight_create_node_order_list(void);
 void flight_add_node_order_list_entry(void * arg0, void * arg1, double arg2);
 void flight_apply_node_order_list(void * arg0, void * arg1);
 void flight_clear_node_order_list(void * arg0);
 void flight_dispose_node_order_list(void * arg0);
-void flight_for_each_node_order_list_entry(void * arg0, void * arg1, void * arg2);
+void flight_for_each_node_order_list_entry(void * arg0, bool (*arg1)(void *, void *, double, size_t), void * arg2);
 double flight_get_node_order_list_entry_sort_key(void * arg0, void * arg1);
 bool flight_has_node_order_list_entry(void * arg0, void * arg1);
 bool flight_remove_node_order_list_entry(void * arg0, void * arg1);
@@ -2850,8 +4631,10 @@ void flight_set_node_order_list_entry_above(void * arg0, void * arg1, void * arg
 void flight_set_node_order_list_entry_below(void * arg0, void * arg1, void * arg2);
 void flight_set_node_order_list_from_node_children(void * arg0, void * arg1);
 void flight_swap_node_order_list_entries(void * arg0, void * arg1, void * arg2);
+/* Caller owns the return value; call flight_free_matrix when done. */
 void * flight_get_node_local_matrix(void * arg0);
 void flight_get_node_transform2d(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_matrix when done. */
 void * flight_get_node_world_matrix(void * arg0);
 void flight_set_node_local_matrix(void * arg0, void * arg1);
 void flight_set_node_transform2d(void * arg0, void * arg1);
@@ -2877,15 +4660,20 @@ float flight_compute_scene2d_fit_align_y(float arg0, float arg1, void * arg2);
 float flight_compute_scene2d_fit_fill_scale(float arg0, float arg1, float arg2, float arg3);
 float flight_compute_scene2d_fit_scale(float arg0, float arg1, float arg2, float arg3);
 void flight_compute_scene2d_fit_transform(void * arg0, void * arg1, float arg2, float arg3);
-void * flight_find_node(void * arg0, void * arg1, void * arg2);
+/* Caller owns the return value; call flight_free_node_ref when done. */
+void * flight_find_node(void * arg0, bool (*arg1)(void *, void *), void * arg2);
+/* Caller owns the return value; call flight_free_node_ref when done. */
 void * flight_find_node_by_name(void * arg0, const char * arg1);
-void flight_for_each_node_ancestor(void * arg0, void * arg1, void * arg2);
-void flight_for_each_node_descendant(void * arg0, void * arg1, void * arg2);
+void flight_for_each_node_ancestor(void * arg0, bool (*arg1)(void *, void *), void * arg2);
+void flight_for_each_node_descendant(void * arg0, void (*arg1)(void *, void *), void * arg2);
 void flight_get_node_children(void * arg0, void * arg1);
 size_t flight_get_node_depth(void * arg0);
+/* Caller owns the return value; call flight_free_node_ref when done. */
 void * flight_get_node_next_sibling(void * arg0);
+/* Caller owns the return value; call flight_free_node_ref when done. */
 void * flight_get_node_previous_sibling(void * arg0);
-bool flight_walk_node_descendants(void * arg0, void * arg1, void * arg2);
+bool flight_walk_node_descendants(void * arg0, bool (*arg1)(void *, void *), void * arg2);
+/* Caller owns the return value; call flight_free_viewport when done. */
 void * flight_create_viewport(void);
 float flight_get_viewport_aspect(void * arg0);
 bool flight_get_node_guard_state_enabled(void * arg0);
@@ -2974,11 +4762,100 @@ float flight_get_viewport_x(void * arg0);
 float flight_set_viewport_x(void * arg0, float arg1);
 float flight_get_viewport_y(void * arg0);
 float flight_set_viewport_y(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_notification_action_subscription when done. */
+void * flight_create_notification_action_subscription(void);
+/* Caller owns the return value; call flight_free_notification_click_subscription when done. */
+void * flight_create_notification_click_subscription(void);
+/* Caller owns the return value; call flight_free_notification_dismiss_subscription when done. */
+void * flight_create_notification_dismiss_subscription(void);
+/* Caller owns the return value; call flight_free_notification_received_subscription when done. */
+void * flight_create_notification_received_subscription(void);
+/* Caller owns the return value; call flight_free_notification_reply_subscription when done. */
+void * flight_create_notification_reply_subscription(void);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_notification_id(void * arg0);
+void flight_field_set_notification_id(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_notification_tag(void * arg0);
+void flight_field_set_notification_tag(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_notification_title(void * arg0);
+void flight_field_set_notification_title(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_notification_action_id(void * arg0);
+void flight_field_set_notification_action_id(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_notification_action_title(void * arg0);
+void flight_field_set_notification_action_title(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_notification_lifecycle_failure_id(void * arg0);
+void flight_field_set_notification_lifecycle_failure_id(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_notification_request_title(void * arg0);
+void flight_field_set_notification_request_title(void * arg0, void * arg1, size_t arg2);
+float flight_get_notification_schedule_at(void * arg0);
+float flight_set_notification_schedule_at(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_scheduled_notification_id(void * arg0);
+void flight_field_set_scheduled_notification_id(void * arg0, void * arg1, size_t arg2);
+void flight_compute_particle_emitter_2d_local_bounds_rectangle(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_particle_emitter2_d_ref when done. */
+void * flight_create_particle_emitter_2d(void);
+/* Caller owns the return value; call flight_free_particle_emitter3_d_ref when done. */
+void * flight_create_particle_emitter_3d(void);
+size_t flight_append_particle_emitter_2d_particle(void * arg0, uint16_t arg1, float arg2, float arg3, float arg4, float arg5);
+void flight_clear_particle_emitter_2d(void * arg0);
+/* Caller owns the return value; call flight_free_particle_emitter2_d_ref when done. */
+void * flight_clone_particle_emitter_2d(void * arg0);
+/* Caller owns the return value; call flight_free_particle_emitter3_d_ref when done. */
+void * flight_clone_particle_emitter_3d(void * arg0);
+void flight_compact_particle_emitter_2d(void * arg0);
+size_t flight_emit_particle_burst_2d(void * arg0, void * arg1, void * arg2, float arg3, float arg4, float arg5, int64_t arg6);
+size_t flight_get_particle_emitter_2d_capacity(void * arg0);
+float flight_get_particle_emitter_2d_particle_alpha(void * arg0, size_t arg1);
+int32_t flight_get_particle_emitter_2d_particle_id(void * arg0, size_t arg1);
+bool flight_get_particle_emitter_2d_particle_velocity(void * arg0, void * arg1, size_t arg2);
+bool flight_is_particle_emitter_3d(void * arg0);
+void flight_remove_particle_emitter_2d_particle(void * arg0, size_t arg1);
+void flight_reserve_particle_emitter_2d(void * arg0, size_t arg1);
+void flight_set_particle_emitter_2d_local_bounds_rectangle(void * arg0, void * arg1);
+void flight_set_particle_emitter_2d_particle(void * arg0, size_t arg1, uint16_t arg2, float arg3, float arg4, float arg5, float arg6);
+void flight_set_particle_emitter_2d_particle_alpha(void * arg0, size_t arg1, float arg2);
+void flight_set_particle_emitter_2d_particle_color(void * arg0, size_t arg1, float arg2, float arg3, float arg4);
+void flight_set_particle_emitter_2d_particle_velocity(void * arg0, size_t arg1, float arg2, float arg3);
+size_t flight_append_particle_emitter_3d_particle(void * arg0, uint16_t arg1, float arg2, float arg3, float arg4, float arg5, float arg6);
+void flight_clear_particle_emitter_3d(void * arg0);
+void flight_compact_particle_emitter_3d(void * arg0);
+void flight_compute_particle_emitter_3d_local_bounds_aabb(void * arg0, void * arg1);
+size_t flight_emit_particle_burst_3d(void * arg0, void * arg1, void * arg2, float arg3, float arg4, float arg5, float arg6, int64_t arg7);
+size_t flight_get_particle_emitter_3d_capacity(void * arg0);
+float flight_get_particle_emitter_3d_particle_alpha(void * arg0, size_t arg1);
+int32_t flight_get_particle_emitter_3d_particle_id(void * arg0, size_t arg1);
+bool flight_get_particle_emitter_3d_particle_velocity(void * arg0, void * arg1, size_t arg2);
+void flight_remove_particle_emitter_3d_particle(void * arg0, size_t arg1);
+void flight_reserve_particle_emitter_3d(void * arg0, size_t arg1);
+void flight_set_particle_emitter_3d_particle(void * arg0, size_t arg1, uint16_t arg2, float arg3, float arg4, float arg5, float arg6, float arg7);
+void flight_set_particle_emitter_3d_particle_alpha(void * arg0, size_t arg1, float arg2);
+void flight_set_particle_emitter_3d_particle_color(void * arg0, size_t arg1, float arg2, float arg3, float arg4);
+void flight_set_particle_emitter_3d_particle_velocity(void * arg0, size_t arg1, float arg2, float arg3, float arg4);
+bool flight_sort_particle_emitter_3d_indices_by_view_depth(void * arg0, size_t arg1, void * arg2, size_t arg3, void * arg4, void * arg5);
+void flight_prewarm_particle_emitter_2d(void * arg0, void * arg1, void * arg2, float arg3, float arg4, void * arg5);
+void flight_prewarm_particle_emitter_3d(void * arg0, void * arg1, void * arg2, float arg3, float arg4, void * arg5);
+void flight_step_particle_emitter_2d(void * arg0, void * arg1, void * arg2, float arg3, void * arg4, size_t arg5, void * arg6, size_t arg7, void * arg8);
+void flight_step_particle_emitter_3d(void * arg0, void * arg1, void * arg2, float arg3, void * arg4, size_t arg5, void * arg6, size_t arg7, void * arg8);
+bool flight_is_particle_emitter_2d_complete(void * arg0, void * arg1, void * arg2);
+void flight_update_particle_emitter_2d(void * arg0, void * arg1, void * arg2, float arg3, void * arg4);
+bool flight_is_particle_emitter_3d_complete(void * arg0, void * arg1, void * arg2);
+void flight_update_particle_emitter_3d(void * arg0, void * arg1, void * arg2, float arg3, void * arg4);
+size_t flight_get_particle_emitter_data_particle_count(void * arg0);
+size_t flight_set_particle_emitter_data_particle_count(void * arg0, size_t arg1);
+bool flight_get_particle_emitter_data_world_space(void * arg0);
+bool flight_set_particle_emitter_data_world_space(void * arg0, bool arg1);
 void flight_apply_particle_collisions(void * arg0, size_t arg1, void * arg2, size_t arg3, size_t arg4, void * arg5, void * arg6, size_t arg7);
 void flight_apply_particle_object_collisions(void * arg0, size_t arg1, void * arg2, void * arg3, size_t arg4);
 void flight_apply_particle_forces(void * arg0, size_t arg1, void * arg2, size_t arg3, size_t arg4, void * arg5, void * arg6, size_t arg7, float arg8);
 void flight_apply_particle_object_forces(void * arg0, size_t arg1, void * arg2, void * arg3, size_t arg4, float arg5);
-void flight_build_particle_curve(void * arg0, void * arg1, void * arg2, int32_t arg3);
+void flight_build_particle_curve(void * arg0, float (*arg1)(void *, float), void * arg2, int32_t arg3);
 void flight_lerp_hsv_direct(void * arg0, size_t arg1, size_t arg2, float arg3, float arg4, float arg5, float arg6, float arg7, float arg8, float arg9);
 void flight_lerp_hsv_in_place(void * arg0, size_t arg1, size_t arg2, void * arg3, size_t arg4, void * arg5, size_t arg6, float arg7);
 void flight_particle_color_curve_from_keyframes(void * arg0, void * arg1, size_t arg2, int32_t arg3);
@@ -2987,16 +4864,20 @@ void flight_particle_curve_from_keyframes(void * arg0, void * arg1, size_t arg2,
 void flight_particle_curve_to_keyframes(void * arg0, void * arg1, size_t arg2);
 void flight_sample_particle_color_curve(void * arg0, size_t arg1, size_t arg2, void * arg3, size_t arg4, float arg5);
 float flight_sample_particle_curve(void * arg0, size_t arg1, float arg2);
+/* Caller owns the return value; call flight_free_particle_emitter_config when done. */
 void * flight_create_particle_emitter_config(void * arg0);
-void * flight_create_particle_emitter_config_options(void);
+/* Caller owns the return value; call flight_free_particle_emitter_signals when done. */
 void * flight_enable_particle_emitter_signals(void * arg0);
+/* Caller owns the return value; call flight_free_particle_emitter_signals when done. */
 void * flight_get_particle_emitter_signals(void * arg0);
+/* Caller owns the return value; call flight_free_particle_emitter_state when done. */
 void * flight_create_particle_emitter_state(void);
+/* Caller owns the return value; call flight_free_particle_objects_state when done. */
 void * flight_create_particle_objects_state(void);
 void flight_step_particle_objects(void * arg0, size_t arg1, void * arg2, void * arg3, float arg4, void * arg5, size_t arg6, void * arg7, size_t arg8, void * arg9);
-char * flight_particle_blend_mode_as_str(uint32_t arg0);
 bool flight_is_particle_objects_complete(void * arg0, size_t arg1, void * arg2, void * arg3);
 void flight_update_particle_objects(void * arg0, size_t arg1, void * arg2, void * arg3, float arg4, void * arg5);
+/* Caller owns the return value; call flight_free_particle_emitter_config when done. */
 void * flight_normalize_particle_emitter_config(void * arg0);
 void flight_validate_particle_emitter_config(void * arg0, void * arg1);
 float flight_get_curve_keyframe_time(void * arg0);
@@ -3159,55 +5040,76 @@ float flight_get_particle_object_x(void * arg0);
 float flight_set_particle_object_x(void * arg0, float arg1);
 float flight_get_particle_object_y(void * arg0);
 float flight_set_particle_object_y(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_particle_config_issue_field(void * arg0);
 void flight_field_set_particle_config_issue_field(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_particle_config_issue_message(void * arg0);
 void flight_field_set_particle_config_issue_message(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_particle_config_issue_severity(void * arg0);
 void flight_field_set_particle_config_issue_severity(void * arg0, void * arg1, size_t arg2);
 float flight_get_particle_objects_update_options_emitter_x(void * arg0);
 float flight_set_particle_objects_update_options_emitter_x(void * arg0, float arg1);
 float flight_get_particle_objects_update_options_emitter_y(void * arg0);
 float flight_set_particle_objects_update_options_emitter_y(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_particle_format_kind when done. */
 void * flight_detect_particle_format(void * arg0, const char * arg1);
-void * flight_create_particle_format_registry(void);
+/* Caller owns the return value; call flight_free_particle_format_kind when done. */
 void * flight_detect_registered_particle_format(void * arg0, const char * arg1);
 void flight_get_registered_particle_formats(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_particle_config_parse_result when done. */
 void * flight_parse_registered_particle_format(void * arg0, const char * arg1, const char * arg2, void * arg3);
-void flight_register_particle_format(void * arg0, const char * arg1, void * arg2);
 bool flight_unregister_particle_format(void * arg0, const char * arg1);
+/* Caller owns the return value; call flight_free_particle_emitter_config when done. */
 void * flight_parse_libgdx_particle(const char * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_libgdx_parse_result when done. */
 void * flight_parse_libgdx_particle_document(const char * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_string when done. */
 char * flight_serialize_libgdx_particle(void * arg0, void * arg1, void * arg2);
+/* Caller owns the return value; call flight_free_particle_serialize_result when done. */
 void * flight_serialize_libgdx_particle_document(void * arg0, void * arg1, void * arg2);
+/* Caller owns the return value; call flight_free_particle_emitter_config when done. */
 void * flight_parse_particle_config(void * arg0, const char * arg1, void * arg2);
+/* Caller owns the return value; call flight_free_particle_config_parse_result when done. */
 void * flight_parse_particle_config_document(void * arg0, const char * arg1, void * arg2);
+/* Caller owns the return value; call flight_free_particle_emitter_config when done. */
 void * flight_parse_particle_designer_plist(const char * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_particle_designer_parse_result when done. */
 void * flight_parse_particle_designer_plist_document(const char * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_string when done. */
 char * flight_serialize_particle_designer_plist(void * arg0, void * arg1, void * arg2);
+/* Caller owns the return value; call flight_free_particle_serialize_result when done. */
 void * flight_serialize_particle_designer_plist_document(void * arg0, void * arg1, void * arg2);
+/* Caller owns the return value; call flight_free_particle_emitter_config when done. */
 void * flight_parse_pixi_particle(const char * arg0);
+/* Caller owns the return value; call flight_free_pixi_parse_result when done. */
 void * flight_parse_pixi_particle_document(const char * arg0);
-void * flight_create_particle_all_formats(void);
 void flight_apply_particle_import_options(void * arg0, void * arg1);
-void * flight_get_libgdx_particle_format(void);
-void * flight_get_particle_designer_particle_format(void);
-void * flight_get_pixi_particle_format(void);
-void * flight_get_spine_particle_format(void);
-void * flight_get_starling_pex_particle_format(void);
-void * flight_get_unity_particle_format(void);
 void flight_register_built_in_particle_formats(void * arg0);
+/* Caller owns the return value; call flight_free_particle_emitter_config when done. */
 void * flight_parse_spine_particle(const char * arg0);
+/* Caller owns the return value; call flight_free_spine_parse_result when done. */
 void * flight_parse_spine_particle_document(const char * arg0);
+/* Caller owns the return value; call flight_free_string when done. */
 char * flight_serialize_spine_particle(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_particle_serialize_result when done. */
 void * flight_serialize_spine_particle_document(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_particle_emitter_config when done. */
 void * flight_parse_starling_pex(const char * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_starling_pex_parse_result when done. */
 void * flight_parse_starling_pex_document(const char * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_string when done. */
 char * flight_serialize_starling_pex(void * arg0, void * arg1, void * arg2);
+/* Caller owns the return value; call flight_free_particle_serialize_result when done. */
 void * flight_serialize_starling_pex_document(void * arg0, void * arg1, void * arg2);
+/* Caller owns the return value; call flight_free_particle_emitter_config when done. */
 void * flight_parse_unity_particle(const char * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_unity_parse_result when done. */
 void * flight_parse_unity_particle_document(const char * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_string when done. */
 char * flight_serialize_unity_particle(void * arg0, void * arg1, void * arg2);
+/* Caller owns the return value; call flight_free_particle_serialize_result when done. */
 void * flight_serialize_unity_particle_document(void * arg0, void * arg1, void * arg2);
 float flight_get_libgdx_range_value_low_min(void * arg0);
 float flight_set_libgdx_range_value_low_min(void * arg0, float arg1);
@@ -3237,12 +5139,14 @@ bool flight_get_libgdx_particle_document_additive(void * arg0);
 bool flight_set_libgdx_particle_document_additive(void * arg0, bool arg1);
 float flight_get_libgdx_particle_document_image_count(void * arg0);
 float flight_set_libgdx_particle_document_image_count(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_libgdx_particle_document_image_path(void * arg0);
 void flight_field_set_libgdx_particle_document_image_path(void * arg0, void * arg1, size_t arg2);
 float flight_get_libgdx_particle_document_max_particle_count(void * arg0);
 float flight_set_libgdx_particle_document_max_particle_count(void * arg0, float arg1);
 float flight_get_libgdx_particle_document_min_particle_count(void * arg0);
 float flight_set_libgdx_particle_document_min_particle_count(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_libgdx_particle_document_name(void * arg0);
 void flight_field_set_libgdx_particle_document_name(void * arg0, void * arg1, size_t arg2);
 bool flight_get_libgdx_particle_document_premultiplied_alpha(void * arg0);
@@ -3335,6 +5239,7 @@ float flight_get_particle_designer_document_start_particle_size(void * arg0);
 float flight_set_particle_designer_document_start_particle_size(void * arg0, float arg1);
 float flight_get_particle_designer_document_start_particle_size_variance(void * arg0);
 float flight_set_particle_designer_document_start_particle_size_variance(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_particle_designer_document_texture_file_name(void * arg0);
 void flight_field_set_particle_designer_document_texture_file_name(void * arg0, void * arg1, size_t arg2);
 float flight_get_spine_range_value_high(void * arg0);
@@ -3345,6 +5250,7 @@ float flight_get_spine_alpha_keyframe_alpha(void * arg0);
 float flight_set_spine_alpha_keyframe_alpha(void * arg0, float arg1);
 float flight_get_spine_alpha_keyframe_time(void * arg0);
 float flight_set_spine_alpha_keyframe_time(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_spine_tint_keyframe_color(void * arg0);
 void flight_field_set_spine_tint_keyframe_color(void * arg0, void * arg1, size_t arg2);
 float flight_get_spine_tint_keyframe_time(void * arg0);
@@ -3355,6 +5261,7 @@ float flight_get_spine_particle_document_duration(void * arg0);
 float flight_set_spine_particle_document_duration(void * arg0, float arg1);
 float flight_get_spine_particle_document_max_particles(void * arg0);
 float flight_set_spine_particle_document_max_particles(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_spine_particle_document_name(void * arg0);
 void flight_field_set_spine_particle_document_name(void * arg0, void * arg1, size_t arg2);
 bool flight_get_spine_particle_document_premultiplied(void * arg0);
@@ -3431,12 +5338,16 @@ float flight_get_starling_pex_document_tangential_accel_variance(void * arg0);
 float flight_set_starling_pex_document_tangential_accel_variance(void * arg0, float arg1);
 float flight_get_starling_pex_document_tangential_acceleration(void * arg0);
 float flight_set_starling_pex_document_tangential_acceleration(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_starling_pex_document_texture_file_name(void * arg0);
 void flight_field_set_starling_pex_document_texture_file_name(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_particle_serialize_result_text(void * arg0);
 void flight_field_set_particle_serialize_result_text(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_particle_format_warning_code(void * arg0);
 void flight_field_set_particle_format_warning_code(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_particle_format_warning_message(void * arg0);
 void flight_field_set_particle_format_warning_message(void * arg0, void * arg1, size_t arg2);
 float flight_get_unity_color_a(void * arg0);
@@ -3501,76 +5412,39 @@ bool flight_get_unity_particle_document_looping(void * arg0);
 bool flight_set_unity_particle_document_looping(void * arg0, bool arg1);
 float flight_get_unity_particle_document_max_particles(void * arg0);
 float flight_set_unity_particle_document_max_particles(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_unity_particle_document_name(void * arg0);
 void flight_field_set_unity_particle_document_name(void * arg0, void * arg1, size_t arg2);
 float flight_get_unity_particle_document_physics_gravity(void * arg0);
 float flight_set_unity_particle_document_physics_gravity(void * arg0, float arg1);
 bool flight_get_unity_particle_document_prewarm(void * arg0);
 bool flight_set_unity_particle_document_prewarm(void * arg0, bool arg1);
-void * flight_create_particle_emitter_data(void);
-void flight_compute_particle_emitter_2d_local_bounds_rectangle(void * arg0, void * arg1);
-void * flight_create_particle_emitter_2d(void);
-void * flight_create_particle_emitter_2d_runtime(void);
-void * flight_create_particle_emitter_3d(void);
-size_t flight_append_particle_emitter_2d_particle(void * arg0, uint16_t arg1, float arg2, float arg3, float arg4, float arg5);
-void flight_clear_particle_emitter_2d(void * arg0);
-void * flight_clone_particle_emitter_2d(void * arg0);
-void * flight_clone_particle_emitter_3d(void * arg0);
-void flight_compact_particle_emitter_2d(void * arg0);
-size_t flight_emit_particle_burst_2d(void * arg0, void * arg1, void * arg2, float arg3, float arg4, float arg5, int64_t arg6);
-size_t flight_get_particle_emitter_2d_capacity(void * arg0);
-float flight_get_particle_emitter_2d_particle_alpha(void * arg0, size_t arg1);
-int32_t flight_get_particle_emitter_2d_particle_id(void * arg0, size_t arg1);
-bool flight_get_particle_emitter_2d_particle_velocity(void * arg0, void * arg1, size_t arg2);
-void * flight_get_particle_emitter_2d_runtime(void * arg0);
-void * flight_get_particle_emitter_3d_runtime(void * arg0);
-bool flight_is_particle_emitter_3d(void * arg0);
-void flight_remove_particle_emitter_2d_particle(void * arg0, size_t arg1);
-void flight_reserve_particle_emitter_2d(void * arg0, size_t arg1);
-void flight_set_particle_emitter_2d_local_bounds_rectangle(void * arg0, void * arg1);
-void flight_set_particle_emitter_2d_particle(void * arg0, size_t arg1, uint16_t arg2, float arg3, float arg4, float arg5, float arg6);
-void flight_set_particle_emitter_2d_particle_alpha(void * arg0, size_t arg1, float arg2);
-void flight_set_particle_emitter_2d_particle_color(void * arg0, size_t arg1, float arg2, float arg3, float arg4);
-void flight_set_particle_emitter_2d_particle_velocity(void * arg0, size_t arg1, float arg2, float arg3);
-size_t flight_append_particle_emitter_3d_particle(void * arg0, uint16_t arg1, float arg2, float arg3, float arg4, float arg5, float arg6);
-void flight_clear_particle_emitter_3d(void * arg0);
-void flight_compact_particle_emitter_3d(void * arg0);
-void flight_compute_particle_emitter_3d_local_bounds_aabb(void * arg0, void * arg1);
-size_t flight_emit_particle_burst_3d(void * arg0, void * arg1, void * arg2, float arg3, float arg4, float arg5, float arg6, int64_t arg7);
-size_t flight_get_particle_emitter_3d_capacity(void * arg0);
-float flight_get_particle_emitter_3d_particle_alpha(void * arg0, size_t arg1);
-int32_t flight_get_particle_emitter_3d_particle_id(void * arg0, size_t arg1);
-bool flight_get_particle_emitter_3d_particle_velocity(void * arg0, void * arg1, size_t arg2);
-void flight_remove_particle_emitter_3d_particle(void * arg0, size_t arg1);
-void flight_reserve_particle_emitter_3d(void * arg0, size_t arg1);
-void flight_set_particle_emitter_3d_particle(void * arg0, size_t arg1, uint16_t arg2, float arg3, float arg4, float arg5, float arg6, float arg7);
-void flight_set_particle_emitter_3d_particle_alpha(void * arg0, size_t arg1, float arg2);
-void flight_set_particle_emitter_3d_particle_color(void * arg0, size_t arg1, float arg2, float arg3, float arg4);
-void flight_set_particle_emitter_3d_particle_velocity(void * arg0, size_t arg1, float arg2, float arg3, float arg4);
-void flight_sort_particle_emitter_3d_by_view_depth(void * arg0, void * arg1);
-bool flight_sort_particle_emitter_3d_indices_by_view_depth(void * arg0, size_t arg1, void * arg2, size_t arg3, void * arg4, void * arg5);
-void flight_prewarm_particle_emitter_2d(void * arg0, void * arg1, void * arg2, float arg3, float arg4, void * arg5);
-void flight_prewarm_particle_emitter_3d(void * arg0, void * arg1, void * arg2, float arg3, float arg4, void * arg5);
-void flight_step_particle_emitter_2d(void * arg0, void * arg1, void * arg2, float arg3, void * arg4, size_t arg5, void * arg6, size_t arg7, void * arg8);
-void flight_step_particle_emitter_3d(void * arg0, void * arg1, void * arg2, float arg3, void * arg4, size_t arg5, void * arg6, size_t arg7, void * arg8);
-bool flight_is_particle_emitter_2d_complete(void * arg0, void * arg1, void * arg2);
-void flight_update_particle_emitter_2d(void * arg0, void * arg1, void * arg2, float arg3, void * arg4);
-bool flight_is_particle_emitter_3d_complete(void * arg0, void * arg1, void * arg2);
-void flight_update_particle_emitter_3d(void * arg0, void * arg1, void * arg2, float arg3, void * arg4);
-size_t flight_get_particle_emitter_data_particle_count(void * arg0);
-size_t flight_set_particle_emitter_data_particle_count(void * arg0, size_t arg1);
-bool flight_get_particle_emitter_data_world_space(void * arg0);
-bool flight_set_particle_emitter_data_world_space(void * arg0, bool arg1);
 void flight_clean_path(void * arg0, double arg1, void * arg2, double arg3);
 bool flight_contains_path_point(void * arg0, double arg1, double arg2, double arg3);
+/* Caller owns the return value; call flight_free_path when done. */
 void * flight_clone_path(void * arg0);
 void flight_copy_path(void * arg0, void * arg1);
 void flight_dash_path(void * arg0, void * arg1, size_t arg2, double arg3, void * arg4, double arg5);
 void flight_decimate_path(void * arg0, double arg1, void * arg2, double arg3);
+/* Caller owns the return value; call flight_free_path_morph_creation_explanation when done. */
 void * flight_explain_path_morph_creation(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_stroke_path_tessellation_explanation when done. */
 void * flight_explain_stroke_path_tessellation(void * arg0, void * arg1, double arg2);
 void flight_fit_path_curves(void * arg0, double arg1, void * arg2, double arg3);
+/* Caller owns the return value; call flight_flatten_path_result_free when done. */
+void * flight_flatten_path(void * arg0, double arg1);
+size_t flight_flatten_path_result_len(void * arg0);
+/* Borrowed return; do not free; valid while the flight_flatten_path result handle remains alive. */
+void * flight_flatten_path_result_get(void * arg0, size_t arg1);
+size_t flight_flatten_path_result_get_len(void * arg0, size_t arg1);
+void flight_flatten_path_result_free(void * arg0);
+bool flight_get_path_bounds(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_get_path_contour_lengths_result_free when done. */
 void * flight_get_path_contour_lengths(void * arg0, double arg1);
+size_t flight_get_path_contour_lengths_result_len(void * arg0);
+/* Borrowed return; do not free; valid while the flight_get_path_contour_lengths result handle remains alive. */
+void * flight_get_path_contour_lengths_result_get(void * arg0, size_t arg1);
+void flight_get_path_contour_lengths_result_free(void * arg0);
 double flight_get_path_curvature_at_distance(void * arg0, double arg1, double arg2);
 double flight_get_path_length(void * arg0, double arg1);
 double flight_get_path_nearest_point(void * arg0, double arg1, double arg2, void * arg3, double arg4);
@@ -3588,6 +5462,7 @@ void flight_get_quadratic_bezier_point(double arg0, double arg1, double arg2, do
 void flight_get_quadratic_bezier_tangent(double arg0, double arg1, double arg2, double arg3, double arg4, double arg5, double arg6, void * arg7);
 uint32_t flight_get_path_contour_orientation(void * arg0, double arg1);
 double flight_get_path_signed_area(void * arg0, double arg1);
+/* Caller owns the return value; call flight_free_path when done. */
 void * flight_create_path(int32_t arg0);
 void flight_append_path_arc(void * arg0, double arg1, double arg2, double arg3, double arg4, double arg5, int32_t arg6, int32_t arg7);
 void flight_append_path_circle(void * arg0, double arg1, double arg2, double arg3);
@@ -3604,14 +5479,20 @@ void flight_append_path_rectangle(void * arg0, double arg1, double arg2, double 
 void flight_append_path_rounded_rectangle(void * arg0, double arg1, double arg2, double arg3, double arg4, double arg5);
 void flight_append_path_rounded_rectangle_with_corner_radii(void * arg0, double arg1, double arg2, double arg3, double arg4, double arg5, double arg6, double arg7, double arg8);
 void flight_append_path_tangent_arc_to(void * arg0, double arg1, double arg2, double arg3, double arg4, double arg5);
+bool flight_get_path_last_point(void * arg0, double * arg1, double * arg2);
+/* Caller owns the return value; call flight_free_path_morph when done. */
 void * flight_create_path_morph(void * arg0, void * arg1);
 void flight_sample_path_morph(void * arg0, void * arg1, double arg2);
 void flight_reverse_path(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_path when done. */
 void * flight_stroke_path(void * arg0, void * arg1, double arg2);
+/* Caller owns the return value; call flight_free_path_mesh when done. */
 void * flight_tessellate_path(void * arg0, double arg1);
 void flight_tessellate_path_into(void * arg0, void * arg1, double arg2);
+/* Caller owns the return value; call flight_free_path_mesh_typed when done. */
 void * flight_tessellate_path_typed(void * arg0, double arg1);
 void flight_tessellate_path_typed_into(void * arg0, void * arg1, double arg2);
+/* Caller owns the return value; call flight_free_path_mesh when done. */
 void * flight_tessellate_stroke_path(void * arg0, void * arg1, double arg2);
 void flight_transform_path(void * arg0, void * arg1, void * arg2);
 void flight_translate_path(void * arg0, double arg1, double arg2, void * arg3);
@@ -3624,43 +5505,64 @@ void flight_difference_paths(void * arg0, void * arg1, void * arg2, void * arg3,
 void flight_intersect_paths(void * arg0, void * arg1, void * arg2, void * arg3, void * arg4);
 void flight_union_paths(void * arg0, void * arg1, void * arg2, void * arg3, void * arg4);
 void flight_xor_paths(void * arg0, void * arg1, void * arg2, void * arg3, void * arg4);
+/* Caller owns the return value; call flight_free_path_boolean_explanation when done. */
 void * flight_explain_offset_path(void * arg0, void * arg1, double arg2, void * arg3);
+/* Caller owns the return value; call flight_free_path_boolean_explanation when done. */
 void * flight_explain_simplify_path(void * arg0, void * arg1, void * arg2);
+/* Caller owns the return value; call flight_free_path_boolean_kernel when done. */
 void * flight_create_martinez_path_boolean_kernel(void);
+/* Caller owns the return value; call flight_free_string when done. */
 char * flight_get_path_boolean_fill_rule_string(uint32_t arg0);
+/* Caller owns the return value; call flight_free_string when done. */
 char * flight_get_path_boolean_operation_string(uint32_t arg0);
 int32_t flight_parse_path_boolean_fill_rule(const char * arg0);
 int32_t flight_parse_path_boolean_operation(const char * arg0);
 void flight_offset_path(void * arg0, void * arg1, void * arg2, double arg3, void * arg4);
+/* Caller owns the return value; call flight_free_string when done. */
 char * flight_get_path_boolean_explanation_operation_string(uint32_t arg0);
+/* Caller owns the return value; call flight_free_string when done. */
 char * flight_get_path_boolean_explanation_reason_string(uint32_t arg0);
+/* Caller owns the return value; call flight_free_string when done. */
 char * flight_get_path_offset_end_string(uint32_t arg0);
+/* Caller owns the return value; call flight_free_string when done. */
 char * flight_get_path_offset_join_string(uint32_t arg0);
 int32_t flight_parse_path_boolean_explanation_operation(const char * arg0);
 int32_t flight_parse_path_boolean_explanation_reason(const char * arg0);
 int32_t flight_parse_path_offset_end(const char * arg0);
 int32_t flight_parse_path_offset_join(const char * arg0);
+void flight_resolve_path_regions(void * arg0, void * arg1, const void * const * arg2, void * arg3, size_t arg4, uint32_t arg5);
 void flight_simplify_path(void * arg0, void * arg1, void * arg2, void * arg3);
+void flight_union_all_paths(void * arg0, void * arg1, const void * const * arg2, size_t arg3, void * arg4);
+void flight_write_path_boolean_contours(void * arg0, const void * const * arg1, void * arg2, size_t arg3);
 bool flight_append_svg_path_data(void * arg0, const char * arg1);
+/* Caller owns the return value; call flight_free_svg_path_data_explanation when done. */
 void * flight_explain_svg_path_data(const char * arg0);
+/* Caller owns the return value; call flight_free_string when done. */
 char * flight_format_svg_path_data(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_path when done. */
 void * flight_parse_svg_path_data(const char * arg0);
 size_t flight_get_svg_path_data_explanation_position(void * arg0);
 size_t flight_set_svg_path_data_explanation_position(void * arg0, size_t arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_svg_path_data_explanation_reason(void * arg0);
 void flight_field_set_svg_path_data_explanation_reason(void * arg0, void * arg1, size_t arg2);
 void flight_synchronize_physics2d_broadphase(void * arg0);
 void flight_synchronize_physics2d_swept_broadphase(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_collision_shape2_d when done. */
 void * flight_create_physics2d_collider_world_shape(void * arg0);
 void flight_update_physics2d_collider_world_shape(void * arg0, void * arg1);
 void flight_write_physics2d_collider_bounds(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_physics2_ddebug_geometry when done. */
 void * flight_create_physics2d_debug_geometry(void);
 void flight_write_physics2d_debug_geometry(void * arg0, void * arg1, void * arg2);
 bool flight_are_physics2d_guards_enabled(void * arg0);
 void flight_disable_physics2d_guards(void * arg0);
-void flight_enable_physics2d_guards(void * arg0, void * arg1, void * arg2, void * arg3);
+void flight_enable_physics2d_guards(void * arg0, void * arg1 /* cloned; caller retains its handle */, double (*arg2)(void *), void * arg3);
+/* Caller owns the return value; call flight_free_physics2_dcollision_explanation when done. */
 void * flight_explain_physics2d_collision(void * arg0);
+/* Caller owns the return value; call flight_free_physics2_djoint_resolution_explanation when done. */
 void * flight_explain_physics2d_joints(void * arg0);
+/* Caller owns the return value; call flight_free_physics2_dstep_explanation when done. */
 void * flight_explain_physics2d_step(void * arg0, double arg1);
 void flight_build_physics2d_solve_islands(void * arg0);
 bool flight_is_rigid_body2d_pair_awake(void * arg0, void * arg1);
@@ -3668,15 +5570,25 @@ void flight_update_physics2d_sleep(void * arg0, double arg1);
 void flight_wake_physics2d_body(void * arg0);
 bool flight_is_physics2d_pair_joint_suppressed(void * arg0, int32_t arg1, int32_t arg2);
 void flight_rebuild_physics2d_joint_collision_suppressions(void * arg0);
+/* Caller owns the return value; call flight_free_physics2_ddistance_joint_ref when done. */
 void * flight_create_physics2d_distance_joint(void);
+/* Caller owns the return value; call flight_free_physics2_dgear_joint_ref when done. */
 void * flight_create_physics2d_gear_joint(void);
+/* Caller owns the return value; call flight_free_physics2_dmouse_joint_ref when done. */
 void * flight_create_physics2d_mouse_joint(void);
+/* Caller owns the return value; call flight_free_physics2_dprismatic_joint_ref when done. */
 void * flight_create_physics2d_prismatic_joint(void);
+/* Caller owns the return value; call flight_free_physics2_dpulley_joint_ref when done. */
 void * flight_create_physics2d_pulley_joint(void);
+/* Caller owns the return value; call flight_free_physics2_drevolute_joint_ref when done. */
 void * flight_create_physics2d_revolute_joint(void);
+/* Caller owns the return value; call flight_free_physics2_drope_joint_ref when done. */
 void * flight_create_physics2d_rope_joint(void);
+/* Caller owns the return value; call flight_free_physics2_dweld_joint_ref when done. */
 void * flight_create_physics2d_weld_joint(void);
+/* Caller owns the return value; call flight_free_physics2_dwheel_joint_ref when done. */
 void * flight_create_physics2d_wheel_joint(void);
+/* Caller owns the return value; call flight_free_physics2_djoint_reaction when done. */
 void * flight_create_physics2d_joint_reaction(void);
 bool flight_write_physics2d_joint_reaction__physics2_ddistance_joint(void * arg0, void * arg1, void * arg2, float arg3);
 bool flight_write_physics2d_joint_reaction__physics2_dgear_joint(void * arg0, void * arg1, void * arg2, float arg3);
@@ -3688,9 +5600,10 @@ bool flight_write_physics2d_joint_reaction__physics2_drope_joint(void * arg0, vo
 bool flight_write_physics2d_joint_reaction__physics2_dweld_joint(void * arg0, void * arg1, void * arg2, float arg3);
 bool flight_write_physics2d_joint_reaction__physics2_dwheel_joint(void * arg0, void * arg1, void * arg2, float arg3);
 void flight_add_physics2d_joint(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_physics2_djoint_solver_ref when done. */
 void * flight_get_physics2d_joint_solver(void * arg0, const char * arg1);
 bool flight_invalidate_physics2d_joint(void * arg0, void * arg1);
-void flight_register_physics2d_joint_solver(void * arg0, const char * arg1, void * arg2);
+void flight_register_physics2d_joint_solver(void * arg0, const char * arg1, void * arg2 /* cloned; caller retains its handle */);
 bool flight_remove_physics2d_joint(void * arg0, void * arg1);
 void flight_write_physics2d_soft_row_parameters(void * arg0, size_t arg1, float arg2, float arg3, float arg4, float arg5, float arg6);
 void flight_compute_physics2d_collider_mass_data(void * arg0, void * arg1);
@@ -3717,10 +5630,13 @@ bool flight_is_physics2d_joint_state_valid(void * arg0);
 bool flight_is_physics2d_previous_timestep_valid(void * arg0);
 bool flight_is_physics2d_solver_config_valid(void * arg0);
 bool flight_is_physics2d_timestep_valid(double arg0);
-void flight_visit_physics2d_joint_base_number_fields(void * arg0, void * arg1, void * arg2);
+/* Caller owns the return value; call flight_free_physics2_dcollider_ref when done. */
 void * flight_create_physics2d_collider(void * arg0);
+/* Caller owns the return value; call flight_free_physics2_dsolver_config when done. */
 void * flight_create_physics2d_solver_config(void * arg0);
+/* Caller owns the return value; call flight_free_physics2_dworld when done. */
 void * flight_create_physics2d_world(void);
+/* Caller owns the return value; call flight_free_rigid_body2_d_ref when done. */
 void * flight_create_rigid_body2d(void);
 void flight_add_physics2d_body(void * arg0, void * arg1);
 void flight_add_physics2d_collider(void * arg0, void * arg1, void * arg2);
@@ -3729,6 +5645,7 @@ bool flight_apply_physics2d_force_at_point(void * arg0, float arg1, float arg2, 
 bool flight_apply_physics2d_linear_impulse(void * arg0, float arg1, float arg2);
 bool flight_apply_physics2d_linear_impulse_at_point(void * arg0, float arg1, float arg2, float arg3, float arg4);
 bool flight_apply_physics2d_torque(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_rigid_body2_d_ref when done. */
 void * flight_find_physics2d_body(void * arg0, int32_t arg1);
 bool flight_hydrate_physics2d_world(void * arg0);
 bool flight_invalidate_physics2d_collider(void * arg0, void * arg1, void * arg2);
@@ -3740,9 +5657,13 @@ bool flight_set_physics2d_body_fixed_rotation(void * arg0, void * arg1, bool arg
 bool flight_set_physics2d_body_sleep_enabled(void * arg0, void * arg1, bool arg2);
 bool flight_set_physics2d_body_transform(void * arg0, void * arg1, float arg2, float arg3, float arg4);
 bool flight_set_physics2d_body_type(void * arg0, void * arg1, uint32_t arg2);
+/* Caller owns the return value; call flight_free_physics2_dquery_filter when done. */
 void * flight_create_physics2d_query_filter(void);
+/* Caller owns the return value; call flight_free_physics2_dquery_result when done. */
 void * flight_create_physics2d_query_result(void);
+/* Caller owns the return value; call flight_free_physics2_dray_result when done. */
 void * flight_create_physics2d_ray_result(void);
+/* Caller owns the return value; call flight_free_physics2_dshape_cast_result when done. */
 void * flight_create_physics2d_shape_cast_result(void);
 void flight_query_physics2d_point(void * arg0, void * arg1, float arg2, float arg3, void * arg4);
 void flight_query_physics2d_ray(void * arg0, void * arg1, float arg2, float arg3, float arg4, float arg5, float arg6, void * arg7);
@@ -4193,6 +6114,7 @@ size_t flight_get_physics2_ddebug_geometry_circle_count(void * arg0);
 size_t flight_set_physics2_ddebug_geometry_circle_count(void * arg0, size_t arg1);
 size_t flight_get_physics2_ddebug_geometry_line_count(void * arg0);
 size_t flight_set_physics2_ddebug_geometry_line_count(void * arg0, size_t arg1);
+/* Caller owns the return value; call flight_free_physics2_dabi when done. */
 void * flight_create_physics2d_abi(void);
 uint32_t flight_create_physics2d_abi_world(void * arg0);
 bool flight_destroy_physics2d_abi_world(void * arg0, uint32_t arg1);
@@ -4202,11 +6124,17 @@ bool flight_read_physics2d_abi_bodies(void * arg0, void * arg1, uint32_t arg2, v
 bool flight_read_physics2d_abi_contacts(void * arg0, void * arg1, uint32_t arg2, uint32_t arg3);
 bool flight_read_physics2d_abi_joints(void * arg0, void * arg1, uint32_t arg2);
 uint32_t flight_step_physics2d_abi_world(void * arg0, uint32_t arg1, double arg2, void * arg3);
+/* Caller owns the return value; call flight_free_physics2_dabi_body_buffer when done. */
 void * flight_create_physics2d_abi_body_buffer(size_t arg0);
+/* Caller owns the return value; call flight_free_physics2_dabi_command_buffer when done. */
 void * flight_create_physics2d_abi_command_buffer(int64_t arg0);
+/* Caller owns the return value; call flight_free_physics2_dabi_contact_buffer when done. */
 void * flight_create_physics2d_abi_contact_buffer(size_t arg0, size_t arg1);
+/* Caller owns the return value; call flight_free_physics2_dabi_execution_result when done. */
 void * flight_create_physics2d_abi_execution_result(void);
+/* Caller owns the return value; call flight_free_physics2_dabi_joint_buffer when done. */
 void * flight_create_physics2d_abi_joint_buffer(size_t arg0);
+/* Caller owns the return value; call flight_free_physics2_dabi_query_buffer when done. */
 void * flight_create_physics2d_abi_query_buffer(size_t arg0);
 void flight_clear_physics2d_abi_command_buffer(void * arg0);
 size_t flight_get_physics2d_abi_command_buffer_remaining_byte_length(void * arg0);
@@ -4238,6 +6166,7 @@ bool flight_query_physics2d_abi_ray(void * arg0, void * arg1, uint32_t arg2, flo
 bool flight_query_physics2d_abi_ray_closest(void * arg0, void * arg1, uint32_t arg2, float arg3, float arg4, float arg5, float arg6, float arg7, void * arg8);
 bool flight_query_physics2d_abi_region(void * arg0, void * arg1, uint32_t arg2, void * arg3, void * arg4);
 bool flight_query_physics2d_abi_shape_cast(void * arg0, void * arg1, uint32_t arg2, void * arg3, float arg4, float arg5, float arg6, void * arg7);
+/* Caller owns the return value; call flight_free_physics2_dabi when done. */
 void * flight_create_reference_physics2d_abi(void);
 size_t flight_get_physics2_dabi_execution_result_byte_offset(void * arg0);
 size_t flight_set_physics2_dabi_execution_result_byte_offset(void * arg0, size_t arg1);
@@ -4549,6 +6478,7 @@ bool flight_get_physics3_dstep_explanation_velocity_iterations_valid(void * arg0
 bool flight_set_physics3_dstep_explanation_velocity_iterations_valid(void * arg0, bool arg1);
 bool flight_get_physics3_dstep_explanation_position_iterations_valid(void * arg0);
 bool flight_set_physics3_dstep_explanation_position_iterations_valid(void * arg0, bool arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_physics3_djoint_explanation_kind(void * arg0);
 void flight_field_set_physics3_djoint_explanation_kind(void * arg0, void * arg1, size_t arg2);
 size_t flight_get_physics3_djoint_explanation_index(void * arg0);
@@ -4557,6 +6487,7 @@ bool flight_get_physics3_djoint_explanation_has_solver(void * arg0);
 bool flight_set_physics3_djoint_explanation_has_solver(void * arg0, bool arg1);
 bool flight_get_physics3_djoint_explanation_bodies_resolvable(void * arg0);
 bool flight_set_physics3_djoint_explanation_bodies_resolvable(void * arg0, bool arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_physics3_djoint_fields_kind(void * arg0);
 void flight_field_set_physics3_djoint_fields_kind(void * arg0, void * arg1, size_t arg2);
 int32_t flight_get_physics3_djoint_fields_body_a(void * arg0);
@@ -4867,6 +6798,7 @@ float flight_get_physics3_ddebug_geometry_options_center_of_mass_radius(void * a
 float flight_set_physics3_ddebug_geometry_options_center_of_mass_radius(void * arg0, float arg1);
 float flight_get_physics3_ddebug_geometry_options_contact_normal_length(void * arg0);
 float flight_set_physics3_ddebug_geometry_options_contact_normal_length(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_physics3_dabi when done. */
 void * flight_create_physics3d_abi(void);
 uint32_t flight_create_physics3d_abi_world(void * arg0);
 bool flight_destroy_physics3d_abi_world(void * arg0, uint32_t arg1);
@@ -4876,11 +6808,17 @@ bool flight_read_physics3d_abi_bodies(void * arg0, void * arg1, uint32_t arg2, v
 bool flight_read_physics3d_abi_contacts(void * arg0, void * arg1, uint32_t arg2, uint32_t arg3);
 bool flight_read_physics3d_abi_joints(void * arg0, void * arg1, uint32_t arg2);
 uint32_t flight_step_physics3d_abi_world(void * arg0, uint32_t arg1, float arg2, void * arg3);
+/* Caller owns the return value; call flight_free_physics3_dabi_body_buffer when done. */
 void * flight_create_physics3d_abi_body_buffer(size_t arg0);
+/* Caller owns the return value; call flight_free_physics3_dabi_command_buffer when done. */
 void * flight_create_physics3d_abi_command_buffer(int64_t arg0);
+/* Caller owns the return value; call flight_free_physics3_dabi_contact_buffer when done. */
 void * flight_create_physics3d_abi_contact_buffer(size_t arg0, size_t arg1);
+/* Caller owns the return value; call flight_free_physics3_dabi_execution_result when done. */
 void * flight_create_physics3d_abi_execution_result(void);
+/* Caller owns the return value; call flight_free_physics3_dabi_joint_buffer when done. */
 void * flight_create_physics3d_abi_joint_buffer(size_t arg0);
+/* Caller owns the return value; call flight_free_physics3_dabi_query_buffer when done. */
 void * flight_create_physics3d_abi_query_buffer(size_t arg0);
 void flight_clear_physics3d_abi_command_buffer(void * arg0);
 size_t flight_get_physics3d_abi_command_buffer_remaining_byte_length(void * arg0);
@@ -4910,6 +6848,7 @@ bool flight_query_physics3d_abi_ray(void * arg0, void * arg1, uint32_t arg2, flo
 bool flight_query_physics3d_abi_ray_closest(void * arg0, void * arg1, uint32_t arg2, float arg3, float arg4, float arg5, float arg6, float arg7, float arg8, float arg9, void * arg10);
 bool flight_query_physics3d_abi_region(void * arg0, void * arg1, uint32_t arg2, void * arg3, void * arg4);
 bool flight_query_physics3d_abi_shape_cast(void * arg0, void * arg1, uint32_t arg2, void * arg3, float arg4, float arg5, float arg6, float arg7, void * arg8);
+/* Caller owns the return value; call flight_free_physics3_dabi when done. */
 void * flight_create_reference_physics3d_abi(void);
 size_t flight_get_physics3_dabi_execution_result_byte_offset(void * arg0);
 size_t flight_set_physics3_dabi_execution_result_byte_offset(void * arg0, size_t arg1);
@@ -4945,11 +6884,13 @@ uint32_t flight_get_physics3_dabi_capabilities(void * arg0);
 uint32_t flight_set_physics3_dabi_capabilities(void * arg0, uint32_t arg1);
 uint32_t flight_get_physics3_dabi_version(void * arg0);
 uint32_t flight_set_physics3_dabi_version(void * arg0, uint32_t arg1);
+/* Caller owns the return value; call flight_free_scene3_dhit when done. */
 void * flight_create_scene3d_hit(void);
 bool flight_pick_scene3d(void * arg0, void * arg1, void * arg2, float arg3, float arg4, void * arg5);
 void flight_pick_scene3d_all(void * arg0, void * arg1, void * arg2, float arg3, float arg4, void * arg5);
 void flight_pick_scene3d_all_with_ray3d(void * arg0, void * arg1, void * arg2, void * arg3);
 bool flight_pick_scene3d_with_ray3d(void * arg0, void * arg1, void * arg2, void * arg3);
+/* Caller owns the return value; call flight_free_material3_d_ref when done. */
 void * flight_get_scene3d_hit_material(void * arg0);
 int32_t flight_get_scene3d_hit_subset_index(void * arg0);
 bool flight_get_scene3d_hit_uv0(void * arg0, void * arg1);
@@ -4978,27 +6919,216 @@ float flight_get_scene3_dhit_normal_y(void * arg0);
 float flight_set_scene3_dhit_normal_y(void * arg0, float arg1);
 float flight_get_scene3_dhit_normal_z(void * arg0);
 float flight_set_scene3_dhit_normal_z(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_platform_info when done. */
+void * flight_create_platform_info(void);
+int32_t flight_compare_platform_versions(const char * arg0, const char * arg1);
+uint32_t flight_get_platform_engine(void * arg0);
+void flight_get_platform_info(void * arg0, void * arg1);
+uint32_t flight_get_platform_kind(void * arg0);
+uint32_t flight_get_platform_name(void * arg0);
+uint32_t flight_get_platform_runtime(void * arg0);
+bool flight_is_platform_desktop(void * arg0);
+bool flight_is_platform_mobile(void * arg0);
+bool flight_is_platform_native(void * arg0);
+bool flight_is_platform_touch(void * arg0);
+bool flight_is_platform_version_at_least(void * arg0, const char * arg1);
+bool flight_is_platform_web(void * arg0);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_platform_info_version(void * arg0);
+void flight_field_set_platform_info_version(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_platform_info_arch(void * arg0);
+void flight_field_set_platform_info_arch(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_platform_info_locale(void * arg0);
+void flight_field_set_platform_info_locale(void * arg0, void * arg1, size_t arg2);
+bool flight_get_platform_info_is_touch(void * arg0);
+bool flight_set_platform_info_is_touch(void * arg0, bool arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_platform_info_engine_version(void * arg0);
+void flight_field_set_platform_info_engine_version(void * arg0, void * arg1, size_t arg2);
+int32_t flight_get_platform_info_pointer_width(void * arg0);
+int32_t flight_set_platform_info_pointer_width(void * arg0, int32_t arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_platform_info_os_build(void * arg0);
+void flight_field_set_platform_info_os_build(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_platform_info_distro(void * arg0);
+void flight_field_set_platform_info_distro(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_platform_info_distro_version(void * arg0);
+void flight_field_set_platform_info_distro_version(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_power when done. */
+void * flight_create_power(void);
+/* Caller owns the return value; call flight_free_power_keep_awake_acquire_future when done. */
+void * flight_acquire_power_keep_awake(void * arg0, int32_t arg1);
+void flight_attach_power(void * arg0, void * arg1, void * arg2, void * arg3, void * arg4, void * arg5, void * arg6, float arg7);
+void flight_destroy_power_keep_awake(const void * const * arg0, size_t arg1, void * arg2);
+void flight_detach_power(void * arg0);
+void flight_dispose_power(void * arg0);
+void flight_enable_power_signals(void * arg0);
+/* Caller owns the return value; call flight_free_power_battery_health when done. */
+void * flight_get_power_battery_health(void * arg0, void * arg1);
+float flight_get_power_idle_polling_interval_ms(void * arg0);
+/* Caller owns the return value; call flight_free_power_status when done. */
+void * flight_get_power_status(void * arg0, void * arg1);
+uint32_t flight_get_power_system_idle_state(void * arg0, float arg1);
+float flight_get_power_system_idle_time(void * arg0);
+uint32_t flight_get_power_thermal_state(void * arg0);
+bool flight_is_power_keep_awake_active(void * arg0);
+/* Caller owns the return value; call flight_free_power_battery_health when done. */
+void * flight_make_power_battery_health(void);
+/* Caller owns the return value; call flight_free_power_status when done. */
+void * flight_make_power_status(void);
+/* Caller owns the return value; call flight_free_power_keep_awake_release_future when done. */
+void * flight_release_power_keep_awake(void * arg0);
+void flight_set_power_idle_polling_interval_ms(void * arg0, float arg1);
+float flight_get_power_battery_health_capacity_wear_level(void * arg0);
+float flight_set_power_battery_health_capacity_wear_level(void * arg0, float arg1);
+int32_t flight_get_power_battery_health_cycle_count(void * arg0);
+int32_t flight_set_power_battery_health_cycle_count(void * arg0, int32_t arg1);
+float flight_get_power_battery_health_temperature_celsius(void * arg0);
+float flight_set_power_battery_health_temperature_celsius(void * arg0, float arg1);
+float flight_get_power_battery_health_voltage(void * arg0);
+float flight_set_power_battery_health_voltage(void * arg0, float arg1);
+float flight_get_power_status_battery_level(void * arg0);
+float flight_set_power_status_battery_level(void * arg0, float arg1);
+float flight_get_power_status_charging_time(void * arg0);
+float flight_set_power_status_charging_time(void * arg0, float arg1);
+float flight_get_power_status_discharging_time(void * arg0);
+float flight_set_power_status_discharging_time(void * arg0, float arg1);
+bool flight_get_power_status_is_battery_low(void * arg0);
+bool flight_set_power_status_is_battery_low(void * arg0, bool arg1);
+bool flight_get_power_status_is_charging(void * arg0);
+bool flight_set_power_status_is_charging(void * arg0, bool arg1);
+bool flight_get_power_status_is_low_power(void * arg0);
+bool flight_set_power_status_is_low_power(void * arg0, bool arg1);
+bool flight_get_power_status_is_on_battery(void * arg0);
+bool flight_set_power_status_is_on_battery(void * arg0, bool arg1);
+/* Caller owns the return value; call flight_free_storage_signals when done. */
+void * flight_create_storage_signals(void);
+bool flight_attach_storage(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_storage_clear_result when done. */
+void * flight_clear_storage(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_storage_clear_namespace_result when done. */
+void * flight_clear_storage_namespace(void * arg0, void * arg1, void * arg2);
+void flight_destroy_storage(void * arg0);
+void flight_detach_storage(void * arg0);
+void flight_dispose_storage(void * arg0);
+/* Caller owns the return value; call flight_free_storage_byte_size_result when done. */
+void * flight_get_namespaced_storage_byte_size(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_storage_entries_result when done. */
+void * flight_get_namespaced_storage_entries(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_storage_get_item_result when done. */
+void * flight_get_namespaced_storage_item(void * arg0, void * arg1, const char * arg2);
+/* Caller owns the return value; call flight_free_storage_presence_result when done. */
+void * flight_get_namespaced_storage_item_presence(void * arg0, void * arg1, const char * arg2);
+/* Caller owns the return value; call flight_free_storage_keys_result when done. */
+void * flight_get_namespaced_storage_keys(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_storage_boolean_result when done. */
+void * flight_get_storage_boolean(void * arg0, const char * arg1);
+/* Caller owns the return value; call flight_free_storage_boolean_or_result when done. */
+void * flight_get_storage_boolean_or(void * arg0, const char * arg1, bool arg2);
+/* Caller owns the return value; call flight_free_storage_byte_size_result when done. */
+void * flight_get_storage_byte_size(void * arg0);
+/* Caller owns the return value; call flight_free_storage_entries_result when done. */
+void * flight_get_storage_entries(void * arg0);
+/* Caller owns the return value; call flight_free_storage_get_item_result when done. */
+void * flight_get_storage_item(void * arg0, const char * arg1);
+/* Caller owns the return value; call flight_free_storage_item_count_result when done. */
+void * flight_get_storage_item_count(void * arg0);
+/* Caller owns the return value; call flight_free_storage_item_or_result when done. */
+void * flight_get_storage_item_or(void * arg0, const char * arg1, const char * arg2);
+/* Caller owns the return value; call flight_free_storage_presence_result when done. */
+void * flight_get_storage_item_presence(void * arg0, const char * arg1);
+/* Caller owns the return value; call flight_free_storage_items_result when done. */
+void * flight_get_storage_items(void * arg0, const char * const * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_storage_keys_result when done. */
+void * flight_get_storage_keys(void * arg0);
+/* Caller owns the return value; call flight_free_storage_number_result when done. */
+void * flight_get_storage_number(void * arg0, const char * arg1);
+/* Caller owns the return value; call flight_free_storage_number_or_result when done. */
+void * flight_get_storage_number_or(void * arg0, const char * arg1, double arg2);
+/* Caller owns the return value; call flight_free_storage_remove_item_result when done. */
+void * flight_remove_namespaced_storage_item(void * arg0, void * arg1, const char * arg2, void * arg3);
+/* Caller owns the return value; call flight_free_storage_remove_item_result when done. */
+void * flight_remove_storage_item(void * arg0, const char * arg1, void * arg2);
+/* Caller owns the return value; call flight_free_storage_remove_items_result when done. */
+void * flight_remove_storage_items(void * arg0, const char * const * arg1, size_t arg2, void * arg3);
+/* Caller owns the return value; call flight_free_storage_set_item_result when done. */
+void * flight_set_namespaced_storage_item(void * arg0, void * arg1, const char * arg2, const char * arg3, void * arg4);
+/* Caller owns the return value; call flight_free_storage_set_item_result when done. */
+void * flight_set_storage_boolean(void * arg0, const char * arg1, bool arg2, void * arg3);
+/* Caller owns the return value; call flight_free_storage_set_item_result when done. */
+void * flight_set_storage_item(void * arg0, const char * arg1, const char * arg2, void * arg3);
+/* Caller owns the return value; call flight_free_storage_set_items_result when done. */
+void * flight_set_storage_items(void * arg0, const char * const * arg1, const char * const * arg2, size_t arg3, void * arg4);
+/* Caller owns the return value; call flight_free_storage_set_item_result when done. */
+void * flight_set_storage_number(void * arg0, const char * arg1, double arg2, void * arg3);
+size_t flight_get_storage_batch_mutation_ok_completed(void * arg0);
+size_t flight_set_storage_batch_mutation_ok_completed(void * arg0, size_t arg1);
+uint32_t flight_get_storage_migration_version(void * arg0);
+uint32_t flight_set_storage_migration_version(void * arg0, uint32_t arg1);
+uint32_t flight_get_storage_migration_checkpoint_failed_failed_version(void * arg0);
+uint32_t flight_set_storage_migration_checkpoint_failed_failed_version(void * arg0, uint32_t arg1);
+uint32_t flight_get_storage_migration_checkpoint_failed_version(void * arg0);
+uint32_t flight_set_storage_migration_checkpoint_failed_version(void * arg0, uint32_t arg1);
+uint32_t flight_get_storage_migration_ok_version(void * arg0);
+uint32_t flight_set_storage_migration_ok_version(void * arg0, uint32_t arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_storage_namespace_prefix(void * arg0);
+void flight_field_set_storage_namespace_prefix(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_protocol_handler when done. */
+void * flight_create_protocol_handler(void);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_create_protocol_url(void * arg0);
+void flight_attach_protocol_handler(void * arg0, void * arg1);
+void flight_detach_protocol_handler(void * arg0);
+void flight_dispose_protocol_handler(void * arg0);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_get_protocol_launch_url(void * arg0);
+void flight_get_registered_protocol_schemes(void * arg0, void * arg1);
+bool flight_is_protocol_scheme_default(void * arg0, const char * arg1);
+bool flight_is_protocol_scheme_registered(void * arg0, const char * arg1);
+bool flight_is_valid_protocol_scheme(const char * arg0);
+/* Caller owns the return value; call flight_free_parsed_protocol_url when done. */
+void * flight_parse_protocol_url(const char * arg0);
+bool flight_register_protocol_scheme(void * arg0, const char * arg1);
+bool flight_register_protocol_schemes(void * arg0, const char * const * arg1, size_t arg2);
+bool flight_remove_protocol_scheme_as_default(void * arg0, const char * arg1);
+bool flight_set_protocol_scheme_as_default(void * arg0, const char * arg1);
+bool flight_unregister_protocol_scheme(void * arg0, const char * arg1);
+bool flight_unregister_protocol_schemes(void * arg0, const char * const * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_parsed_protocol_url_scheme(void * arg0);
+void flight_field_set_parsed_protocol_url_scheme(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_parsed_protocol_url_host(void * arg0);
+void flight_field_set_parsed_protocol_url_host(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_parsed_protocol_url_path(void * arg0);
+void flight_field_set_parsed_protocol_url_path(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_quad_batch_ref when done. */
 void * flight_create_quad_batch(void);
-void * flight_create_quad_batch_data(void);
-void * flight_create_quad_batch_runtime(void);
-void * flight_create_quad_batch_signals(void);
 size_t flight_append_quad_batch_instance(void * arg0, uint16_t arg1, float arg2, float arg3);
 void flight_clear_quad_batch(void * arg0);
+/* Caller owns the return value; call flight_free_quad_batch_ref when done. */
 void * flight_clone_quad_batch(void * arg0);
 void flight_compact_quad_batch(void * arg0);
 void flight_compute_quad_batch_local_bounds_rectangle(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_quad_batch_signals_ref when done. */
 void * flight_enable_quad_batch_signals(void * arg0);
 size_t flight_get_quad_batch_capacity(void * arg0);
 int32_t flight_get_quad_batch_instance_id(void * arg0, int32_t arg1);
 bool flight_get_quad_batch_instance_transform(void * arg0, void * arg1, int32_t arg2);
-void * flight_get_quad_batch_runtime(void * arg0);
+/* Caller owns the return value; call flight_free_quad_batch_signals_ref when done. */
 void * flight_get_quad_batch_signals(void * arg0);
 size_t flight_get_quad_batch_transform_stride(uint32_t arg0);
 int32_t flight_hit_test_quad_batch_point(void * arg0, void * arg1);
 int32_t flight_hit_test_quad_batch_point_exact(void * arg0, void * arg1);
 int32_t flight_hit_test_quad_batch_point_exact_xy(void * arg0, float arg1, float arg2);
 int32_t flight_hit_test_quad_batch_point_xy(void * arg0, float arg1, float arg2);
-void flight_iterate_quad_batch_instances(void * arg0, void * arg1, void * arg2);
+void flight_iterate_quad_batch_instances(void * arg0, void (*arg1)(void *, size_t, uint16_t, void *, size_t), void * arg2);
 void flight_remove_quad_batch_instance(void * arg0, int32_t arg1);
 void flight_reserve_quad_batch(void * arg0, size_t arg1);
 void flight_resize_quad_batch(void * arg0, size_t arg1);
@@ -5010,52 +7140,104 @@ void flight_set_quad_batch_local_bounds_rectangle(void * arg0, void * arg1);
 void flight_set_quad_batch_transform_type(void * arg0, uint32_t arg1);
 size_t flight_get_quad_batch_data_instance_count(void * arg0);
 size_t flight_set_quad_batch_data_instance_count(void * arg0, size_t arg1);
+size_t flight_get_reg_exp_match_range_end(void * arg0);
+size_t flight_set_reg_exp_match_range_end(void * arg0, size_t arg1);
+size_t flight_get_reg_exp_match_range_start(void * arg0);
+size_t flight_set_reg_exp_match_range_start(void * arg0, size_t arg1);
+size_t flight_get_reg_exp_exec_result_index(void * arg0);
+size_t flight_set_reg_exp_exec_result_index(void * arg0, size_t arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_reg_exp_exec_result_input(void * arg0);
+void flight_field_set_reg_exp_exec_result_input(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_reg_exp_flags(void * arg0);
+void flight_field_set_reg_exp_flags(void * arg0, void * arg1, size_t arg2);
+size_t flight_get_reg_exp_last_index(void * arg0);
+size_t flight_set_reg_exp_last_index(void * arg0, size_t arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_reg_exp_source(void * arg0);
+void flight_field_set_reg_exp_source(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_canvas_surface_ref when done. */
+void * flight_create_canvas_host_surface(void * arg0, void * arg1, float arg2, float arg3);
+void flight_destroy_canvas_host_surface(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_host_canvas_capability when done. */
+void * flight_get_canvas_host_surface(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_render_cache when done. */
+void * flight_create_render_cache(void);
+/* Caller owns the return value; call flight_free_requirement_set when done. */
+void * flight_create_requirement_set(void * arg0, size_t arg1, void * arg2, size_t arg3);
+/* Caller owns the return value; call flight_free_requirement_set when done. */
+void * flight_diff_requirement_sets(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_requirement_set when done. */
+void * flight_merge_requirement_sets(const void * const * arg0, size_t arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_requirement_key(void * arg0);
+void flight_field_set_requirement_key(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_requirement_catalog when done. */
+void * flight_create_requirement_catalog(void * arg0, size_t arg1, void * arg2, size_t arg3, void * arg4, size_t arg5);
+void flight_get_requirement_catalog_entries(void * arg0, void * arg1);
+void flight_register_requirement_catalog_entry(void * arg0, void * arg1);
+bool flight_unregister_requirement_catalog_entry(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_requirement_catalog_entry_backend(void * arg0);
+void flight_field_set_requirement_catalog_entry_backend(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_requirement_catalog_entry_implementation_import(void * arg0);
+void flight_field_set_requirement_catalog_entry_implementation_import(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_requirement_catalog_entry_implementation_symbol(void * arg0);
+void flight_field_set_requirement_catalog_entry_implementation_symbol(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_requirement_backend_infrastructure_import(void * arg0);
+void flight_field_set_requirement_backend_infrastructure_import(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_requirement_backend_infrastructure_symbol(void * arg0);
+void flight_field_set_requirement_backend_infrastructure_symbol(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_requirement_backend_name(void * arg0);
+void flight_field_set_requirement_backend_name(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_requirement_disposition_backend(void * arg0);
+void flight_field_set_requirement_disposition_backend(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_requirement_disposition_reason(void * arg0);
+void flight_field_set_requirement_disposition_reason(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_requirement_codegen_plan when done. */
+void * flight_create_requirement_codegen_plan(void * arg0, void * arg1, const char * arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_requirement_codegen_plan_backend(void * arg0);
+void flight_field_set_requirement_codegen_plan_backend(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_requirement_declination_reason(void * arg0);
+void flight_field_set_requirement_declination_reason(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_display_object_ref when done. */
 void * flight_create_display_object(void);
-void * flight_create_display_object_runtime(void);
-void * flight_create_node2d_runtime(void * arg0);
-void * flight_as_node2d_ref(void * arg0);
-void * flight_get_display_object_runtime(void * arg0);
-void * flight_get_node2d_runtime(void * arg0);
 bool flight_is_node2d(void * arg0);
-void flight_set_node2d_clip(void * arg0, void * arg1);
+void flight_set_node2d_clip(void * arg0, void * arg1 /* cloned; caller retains its handle */);
 void flight_apply_animation_clip_to_node2d(void * arg0, float arg1);
-char * flight_get_node2d_animation_path_string(uint32_t arg0);
-int32_t flight_parse_node2d_animation_path(const char * arg0);
+/* Caller owns the return value; call flight_free_html_view_ref when done. */
 void * flight_create_html_view(void);
-void * flight_create_html_view_data(void);
-void * flight_create_html_view_runtime(void);
 void flight_compute_html_view_local_bounds_rectangle(void * arg0, void * arg1);
-void * flight_get_html_view_runtime(void * arg0);
 void flight_set_html_view_size(void * arg0, double arg1, double arg2);
+/* Caller owns the return value; call flight_free_scale9_sprite_ref when done. */
 void * flight_create_scale9_sprite(void * arg0);
-void * flight_create_scale9_sprite_data(void * arg0);
-void * flight_create_scale9_sprite_runtime(void);
-void * flight_get_scale9_sprite_runtime(void * arg0);
+/* Caller owns the return value; call flight_free_scene2_d_ref when done. */
 void * flight_create_scene2d(void);
-void * flight_create_scene2d_runtime(void);
-void * flight_create_scene2d_signals(void);
+/* Caller owns the return value; call flight_free_scene2_dsignals_ref when done. */
 void * flight_enable_scene2d_signals(void * arg0);
-char * flight_get_scene2d_align_string(uint32_t arg0);
-char * flight_get_scene2d_display_state_string(uint32_t arg0);
-char * flight_get_scene2d_quality_string(uint32_t arg0);
+/* Caller owns the return value; call flight_free_scene2_d_ref when done. */
 void * flight_get_scene2d_root(void * arg0);
-void * flight_get_scene2d_runtime(void * arg0);
-char * flight_get_scene2d_scale_mode_string(uint32_t arg0);
+/* Caller owns the return value; call flight_free_scene2_dsignals_ref when done. */
 void * flight_get_scene2d_signals(void * arg0);
-int32_t flight_parse_scene2d_align(const char * arg0);
-int32_t flight_parse_scene2d_display_state(const char * arg0);
-int32_t flight_parse_scene2d_quality(const char * arg0);
-int32_t flight_parse_scene2d_scale_mode(const char * arg0);
 void flight_set_scene2d_size(void * arg0, double arg1, double arg2);
+/* Caller owns the return value; call flight_free_scene2_dkind_usage when done. */
 void * flight_create_scene2d_kind_usage(void);
 void flight_get_scene2d_kind_usage(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_sprite_ref when done. */
 void * flight_create_sprite(void);
-void * flight_create_sprite_data(void);
-void * flight_create_sprite_renderer_data(void * arg0);
-void * flight_create_sprite_runtime(void);
+/* Caller owns the return value; call flight_free_sprite_ref when done. */
 void * flight_clone_sprite(void * arg0);
 void flight_compute_sprite_local_bounds_rectangle(void * arg0, void * arg1);
-void * flight_get_sprite_runtime(void * arg0);
 float flight_get_node2_dfields_alpha(void * arg0);
 float flight_set_node2_dfields_alpha(void * arg0, float arg1);
 float flight_get_node2_dfields_pivot_x(void * arg0);
@@ -5090,109 +7272,113 @@ double flight_get_scene2_d_scene2d_width(void * arg0);
 double flight_set_scene2_d_scene2d_width(void * arg0, double arg1);
 int64_t flight_get_sprite_identity_renderer_data_texture_version(void * arg0);
 int64_t flight_set_sprite_identity_renderer_data_texture_version(void * arg0, int64_t arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_scene2_dslot_reference_name(void * arg0);
 void flight_field_set_scene2_dslot_reference_name(void * arg0, void * arg1, size_t arg2);
 bool flight_get_scene2_dslot_reference_required(void * arg0);
 bool flight_set_scene2_dslot_reference_required(void * arg0, bool arg1);
-void * flight_create_lottie_bezier_path(void * arg0);
-void flight_flatten_lottie_shape_path(void * arg0, void * arg1);
-void * flight_unflatten_lottie_shape_path(void * arg0, void * arg1, size_t arg2);
+bool flight_collect_lottie_counts(void * arg0, const char * arg1);
 void flight_get_lottie_feature_names(void * arg0);
 void flight_apply_animation_clip_to_lottie_document(void * arg0, float arg1);
-float flight_lottie_clamp(float arg0, float arg1, float arg2);
-float flight_lottie_degrees_to_radians(float arg0);
-void flight_lottie_numeric_value(void * arg0, void * arg1, size_t arg2);
-uint32_t flight_lottie_rgba(void * arg0, size_t arg1);
-void * flight_create_lottie_gradient_matrix(void * arg0, size_t arg1, void * arg2, size_t arg3);
-float flight_interpolate_lottie_gradient_opacity(void * arg0, size_t arg1, float arg2);
-void * flight_parse_lottie_gradient(void * arg0, size_t arg1, size_t arg2, float arg3);
 void flight_register_all_lottie_handlers(void * arg0);
 void flight_register_lottie_layer_handlers(void * arg0);
 void flight_register_lottie_mask_handlers(void * arg0);
+/* Caller owns the return value; call flight_free_lottie_registry when done. */
 void * flight_create_lottie_registry(void);
+/* Caller owns the return value; call flight_free_lottie_layer_handler when done. */
 void * flight_get_lottie_layer_handler(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_lottie_mask_handler when done. */
 void * flight_get_lottie_mask_handler(void * arg0, const char * arg1);
+/* Caller owns the return value; call flight_free_lottie_shape_item_handler when done. */
 void * flight_get_lottie_shape_item_handler(void * arg0, const char * arg1);
-void flight_register_lottie_layer_handler(void * arg0, void * arg1, void * arg2);
-void flight_register_lottie_mask_handler(void * arg0, const char * arg1, void * arg2);
-void flight_register_lottie_shape_item_handler(void * arg0, const char * arg1, void * arg2);
+void flight_register_lottie_layer_handler(void * arg0, void * arg1, void * arg2 /* cloned; caller retains its handle */);
+void flight_register_lottie_mask_handler(void * arg0, const char * arg1, void * arg2 /* cloned; caller retains its handle */);
+void flight_register_lottie_shape_item_handler(void * arg0, const char * arg1, void * arg2 /* cloned; caller retains its handle */);
 bool flight_unregister_lottie_layer_handler(void * arg0, void * arg1);
 bool flight_unregister_lottie_mask_handler(void * arg0, const char * arg1);
 bool flight_unregister_lottie_shape_item_handler(void * arg0, const char * arg1);
 bool flight_is_readable_lottie(const char * arg0);
+/* Caller owns the return value; call flight_free_requirement_set when done. */
 void * flight_parse_lottie_requirements(const char * arg0);
-void * flight_apply_lottie_shape_direction(void * arg0, int32_t arg1);
 void flight_register_lottie_shape_item_handlers(void * arg0);
-uint32_t flight_map_lottie_line_cap(int32_t arg0);
-uint32_t flight_map_lottie_line_join(int32_t arg0);
 void flight_apply_animation_clip_to_rive_document(void * arg0, float arg1);
 void flight_register_rive_animation_handlers(void * arg0);
+/* Caller owns the return value; call flight_free_node2_d_ref when done. */
 void * flight_create_rive_image_sprite(const char * arg0, int32_t arg1);
 int32_t flight_get_rive_image_asset_index(void * arg0);
+/* Caller owns the return value; call flight_free_texture_ref when done. */
 void * flight_get_rive_image_texture(void * arg0);
 int32_t flight_get_rive_nested_artboard_index(void * arg0);
 void flight_mark_rive_nested_artboard(void * arg0, int32_t arg1);
 void flight_register_rive_asset_handlers(void * arg0);
 void flight_register_rive_clipping_handlers(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_rive_field_type when done. */
 void * flight_get_rive_core_property_field_type(uint32_t arg0);
 bool flight_is_rive_core_bytes_property(uint32_t arg0);
+bool flight_collect_rive_core_type_counts(void * arg0, void * arg1, size_t arg2, void * arg3);
 bool flight_is_readable_rive(void * arg0, size_t arg1);
+/* Caller owns the return value; call flight_free_string when done. */
 char * flight_get_rive_core_type_name(int32_t arg0);
 int64_t flight_get_rive_core_type_parent(int32_t arg0);
 bool flight_is_rive_core_type_derived_from(int32_t arg0, int32_t arg1);
+/* Caller owns the return value; call flight_free_rive_document when done. */
+void * flight_parse_rive_document(void * arg0, size_t arg1, void * arg2);
 void flight_register_rive_draw_order_handlers(void * arg0);
 void flight_register_all_rive_handlers(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_rive_document_import_result when done. */
+void * flight_create_scene2d_from_rive_document(void * arg0, void * arg1, size_t arg2, void * arg3);
+/* Caller owns the return value; call flight_free_rive_import_registry when done. */
 void * flight_create_rive_import_registry(void);
-void * flight_import_rive_core_object_as_data(void);
 void flight_register_rive_layout_handlers(void * arg0);
+/* Caller owns the return value; call flight_free_rive_object_graph when done. */
+void * flight_create_rive_object_graph(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_rive_import_registry when done. */
 void * flight_create_rive_import_registry_from_options(void * arg0, void * arg1);
 void flight_apply_rive_import_options(void * arg0, void * arg1, void * arg2);
+/* Caller owns the return value; call flight_free_requirement_set when done. */
+void * flight_parse_rive_requirements(void * arg0, size_t arg1, void * arg2);
+/* Caller owns the return value; call flight_free_rive_document_import_result when done. */
+void * flight_create_rive_document_import_result(void * arg0, void * arg1, size_t arg2, void * arg3);
+/* Caller owns the return value; call flight_free_rive_scene2_ddocument_result when done. */
+void * flight_create_scene2d_document_from_rive_document(void * arg0, void * arg1, size_t arg2, void * arg3);
 void flight_register_rive_shape_handlers(void * arg0);
 void flight_append_rive_shape_geometry(void * arg0, void * arg1, size_t arg2);
+void flight_append_rive_shape_paint(void * arg0, void * arg1, size_t arg2, void * arg3, size_t arg4, void * arg5);
 void flight_register_rive_paint_handlers(void * arg0);
+/* Caller owns the return value; call flight_free_path when done. */
+void * flight_create_rive_path(void * arg0, void * arg1, size_t arg2, void * arg3);
+/* Caller owns the return value; call flight_free_rive_path_record when done. */
+void * flight_create_rive_path_record(void * arg0, size_t arg1, void * arg2);
 void flight_register_rive_path_handlers(void * arg0);
-void * flight_create_rive_skeleton_2d(void * arg0);
 void flight_register_rive_skeleton_handlers(void * arg0);
+/* Caller owns the return value; call flight_free_skin2_d when done. */
+void * flight_create_rive_skin_2d(void * arg0, size_t arg1, void * arg2, size_t arg3, void * arg4, size_t arg5, void * arg6);
 void flight_register_rive_solo_handlers(void * arg0);
 void flight_register_rive_state_machine_handlers(void * arg0);
+/* Caller owns the return value; call flight_free_rich_text_ref when done. */
+void * flight_create_rive_rich_text(void * arg0, size_t arg1, const char * const * arg2, size_t arg3, void * arg4);
 void flight_register_rive_text_handlers(void * arg0);
-bool flight_has_unmeasurable_svg_text(void * arg0);
-bool flight_uses_svg_object_bounding_box_units(void * arg0);
 void flight_register_svg_clip_handlers(void * arg0);
-void * flight_parse_svg_color(const char * arg0);
-void * flight_resolve_svg_color(const char * arg0, const char * arg1);
+bool flight_collect_svg_counts(void * arg0, const char * arg1);
+/* Caller owns the return value; call flight_free_display_object_ref when done. */
+void * flight_create_scene2d_from_svg_document_with_registry(const char * arg0, void * arg1, void * arg2, void * arg3);
 void flight_register_svg_element_handlers(void * arg0);
-void * flight_create_svg_geometry_path(void * arg0, uint32_t arg1);
-void * flight_create_svg_gradient_matrix(void * arg0, void * arg1);
-bool flight_has_zero_area_svg_gradient_box(void * arg0, void * arg1);
 void flight_register_all_svg_handlers(void * arg0);
+/* Caller owns the return value; call flight_free_display_object_ref when done. */
+void * flight_create_scene2d_from_svg_document(const char * arg0, void * arg1, void * arg2);
+/* Caller owns the return value; call flight_free_svg_registry when done. */
 void * flight_create_svg_registry(void);
+/* Caller owns the return value; call flight_free_svg_clip_handler when done. */
 void * flight_get_svg_clip_handler(void * arg0, const char * arg1);
+/* Caller owns the return value; call flight_free_svg_element_handler when done. */
 void * flight_get_svg_element_handler(void * arg0, const char * arg1);
-void flight_register_svg_clip_handler(void * arg0, const char * arg1, void * arg2);
-void flight_register_svg_element_handler(void * arg0, const char * arg1, void * arg2);
+void flight_register_svg_clip_handler(void * arg0, const char * arg1, void * arg2 /* cloned; caller retains its handle */);
+void flight_register_svg_element_handler(void * arg0, const char * arg1, void * arg2 /* cloned; caller retains its handle */);
 bool flight_unregister_svg_clip_handler(void * arg0, const char * arg1);
 bool flight_unregister_svg_element_handler(void * arg0, const char * arg1);
 bool flight_is_readable_svg(const char * arg0);
+/* Caller owns the return value; call flight_free_requirement_set when done. */
 void * flight_parse_svg_requirements(const char * arg0);
-void flight_collect_css_rules(void * arg0, void * arg1);
-uint32_t flight_resolve_svg_winding(const char * arg0, uint32_t arg1);
-void * flight_create_svg_view_box_matrix(void * arg0, size_t arg1, void * arg2, const char * arg3);
-void * flight_create_svg_viewport_matrix(void * arg0, void * arg1);
-void flight_apply_svg_transform(void * arg0, void * arg1);
-void flight_assign_svg_transform(void * arg0, void * arg1);
-void flight_multiply_svg_matrices(void * arg0, void * arg1, void * arg2);
-void * flight_parse_svg_transform(const char * arg0);
-float flight_parse_svg_coordinate(const char * arg0, float arg1);
-float flight_parse_svg_css_number(const char * arg0, float arg1);
-float flight_parse_svg_length(const char * arg0, float arg1);
-void * flight_parse_svg_number_list(const char * arg0);
-char * flight_parse_url_reference(const char * arg0);
-float flight_svg_first_number(const char * arg0, float arg1);
-char * flight_svg_local_name(const char * arg0);
-float flight_svg_number_attribute(void * arg0, const char * arg1, float arg2);
-float flight_svg_optional_number_attribute(void * arg0, const char * arg1);
-void flight_visit_svg_elements(void * arg0, void * arg1, void * arg2);
 uint64_t flight_get_rive_property_key(void * arg0);
 uint64_t flight_set_rive_property_key(void * arg0, uint64_t arg1);
 uint64_t flight_get_rive_core_object_type_key(void * arg0);
@@ -5219,24 +7405,30 @@ float flight_get_rive_weighted_point_x(void * arg0);
 float flight_set_rive_weighted_point_x(void * arg0, float arg1);
 float flight_get_rive_weighted_point_y(void * arg0);
 float flight_set_rive_weighted_point_y(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_rive_advanced_blend_mode(void * arg0);
 void flight_field_set_rive_advanced_blend_mode(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_rive_animation_clip_name(void * arg0);
 void flight_field_set_rive_animation_clip_name(void * arg0, void * arg1, size_t arg2);
 float flight_get_rive_animation_clip_speed(void * arg0);
 float flight_set_rive_animation_clip_speed(void * arg0, float arg1);
 float flight_get_rive_artboard_import_height(void * arg0);
 float flight_set_rive_artboard_import_height(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_rive_artboard_import_name(void * arg0);
 void flight_field_set_rive_artboard_import_name(void * arg0, void * arg1, size_t arg2);
 float flight_get_rive_artboard_import_width(void * arg0);
 float flight_set_rive_artboard_import_width(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_rive_file_asset_cdn_base_url(void * arg0);
 void flight_field_set_rive_file_asset_cdn_base_url(void * arg0, void * arg1, size_t arg2);
 float flight_get_rive_file_asset_height(void * arg0);
 float flight_set_rive_file_asset_height(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_rive_file_asset_kind(void * arg0);
 void flight_field_set_rive_file_asset_kind(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_rive_file_asset_name(void * arg0);
 void flight_field_set_rive_file_asset_name(void * arg0, void * arg1, size_t arg2);
 float flight_get_rive_file_asset_width(void * arg0);
@@ -5253,20 +7445,26 @@ float flight_get_rive_state_machine_transition_to_state_id(void * arg0);
 float flight_set_rive_state_machine_transition_to_state_id(void * arg0, float arg1);
 float flight_get_rive_state_machine_state_animation_id(void * arg0);
 float flight_set_rive_state_machine_state_animation_id(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_rive_state_machine_state_kind(void * arg0);
 void flight_field_set_rive_state_machine_state_kind(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_rive_state_machine_layer_name(void * arg0);
 void flight_field_set_rive_state_machine_layer_name(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_rive_state_machine_input_kind(void * arg0);
 void flight_field_set_rive_state_machine_input_kind(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_rive_state_machine_input_name(void * arg0);
 void flight_field_set_rive_state_machine_input_name(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_rive_state_machine_descriptor_name(void * arg0);
 void flight_field_set_rive_state_machine_descriptor_name(void * arg0, void * arg1, size_t arg2);
 int32_t flight_get_rive_core_object_handler_entry_type_key(void * arg0);
 int32_t flight_set_rive_core_object_handler_entry_type_key(void * arg0, int32_t arg1);
 bool flight_get_lottie_shape_path_c(void * arg0);
 bool flight_set_lottie_shape_path_c(void * arg0, bool arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_lottie_advanced_blend_mode(void * arg0);
 void flight_field_set_lottie_advanced_blend_mode(void * arg0, void * arg1, size_t arg2);
 float flight_get_lottie_document_import_result_duration(void * arg0);
@@ -5283,6 +7481,7 @@ uint32_t flight_get_svg_color_rgb(void * arg0);
 uint32_t flight_set_svg_color_rgb(void * arg0, uint32_t arg1);
 size_t flight_get_svg_css_rule_order(void * arg0);
 size_t flight_set_svg_css_rule_order(void * arg0, size_t arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_svg_css_rule_selector(void * arg0);
 void flight_field_set_svg_css_rule_selector(void * arg0, void * arg1, size_t arg2);
 size_t flight_get_svg_css_rule_specificity(void * arg0);
@@ -5307,34 +7506,45 @@ float flight_get_svg_gradient_y2(void * arg0);
 float flight_set_svg_gradient_y2(void * arg0, float arg1);
 float flight_get_svg_gradient_stop_offset(void * arg0);
 float flight_set_svg_gradient_stop_offset(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_svg_style_color(void * arg0);
 void flight_field_set_svg_style_color(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_svg_style_display(void * arg0);
 void flight_field_set_svg_style_display(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_svg_style_fill(void * arg0);
 void flight_field_set_svg_style_fill(void * arg0, void * arg1, size_t arg2);
 float flight_get_svg_style_fill_opacity(void * arg0);
 float flight_set_svg_style_fill_opacity(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_svg_style_filter(void * arg0);
 void flight_field_set_svg_style_filter(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_svg_style_font_family(void * arg0);
 void flight_field_set_svg_style_font_family(void * arg0, void * arg1, size_t arg2);
 float flight_get_svg_style_font_size(void * arg0);
 float flight_set_svg_style_font_size(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_svg_style_font_style(void * arg0);
 void flight_field_set_svg_style_font_style(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_svg_style_font_weight(void * arg0);
 void flight_field_set_svg_style_font_weight(void * arg0, void * arg1, size_t arg2);
 float flight_get_svg_style_opacity(void * arg0);
 float flight_set_svg_style_opacity(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_svg_style_stroke(void * arg0);
 void flight_field_set_svg_style_stroke(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_svg_style_stroke_dasharray(void * arg0);
 void flight_field_set_svg_style_stroke_dasharray(void * arg0, void * arg1, size_t arg2);
 float flight_get_svg_style_stroke_dashoffset(void * arg0);
 float flight_set_svg_style_stroke_dashoffset(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_svg_style_stroke_linecap(void * arg0);
 void flight_field_set_svg_style_stroke_linecap(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_svg_style_stroke_linejoin(void * arg0);
 void flight_field_set_svg_style_stroke_linejoin(void * arg0, void * arg1, size_t arg2);
 float flight_get_svg_style_stroke_miterlimit(void * arg0);
@@ -5343,8 +7553,10 @@ float flight_get_svg_style_stroke_opacity(void * arg0);
 float flight_set_svg_style_stroke_opacity(void * arg0, float arg1);
 float flight_get_svg_style_stroke_width(void * arg0);
 float flight_set_svg_style_stroke_width(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_svg_style_text_anchor(void * arg0);
 void flight_field_set_svg_style_text_anchor(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_svg_style_visibility(void * arg0);
 void flight_field_set_svg_style_visibility(void * arg0, void * arg1, size_t arg2);
 float flight_get_svg_viewport_height(void * arg0);
@@ -5355,6 +7567,52 @@ float flight_get_svg_viewport_x(void * arg0);
 float flight_set_svg_viewport_x(void * arg0, float arg1);
 float flight_get_svg_viewport_y(void * arg0);
 float flight_set_svg_viewport_y(void * arg0, float arg1);
+bool flight_are_scene2d_resource_failure_guards_enabled(void * arg0);
+void flight_disable_scene2d_resource_failure_guards(void * arg0);
+void flight_enable_scene2d_resource_failure_guards(void * arg0, void * arg1, double (*arg2)(void *), void * arg3);
+void flight_resolve_scene2d_resources(void * arg0, void * arg1, void * arg2, void * arg3);
+/* Caller owns the return value; call flight_free_scene2_ddocument_ref when done. */
+void * flight_create_scene2d_document(void);
+/* Caller owns the return value; call flight_free_scene2_dslot_reference_ref when done. */
+void * flight_create_scene2d_slot_reference(void);
+/* Caller owns the return value; call flight_free_scene2_ddocument_ref when done. */
+void * flight_create_scene2d_document_from_bytes(void * arg0, size_t arg1, void * arg2, void * arg3, void * arg4);
+/* Caller owns the return value; call flight_free_scene2_ddocument_importer_registry when done. */
+void * flight_create_scene2d_document_importer_registry(void);
+void flight_register_scene2d_document_importer(void * arg0, const char * arg1, void * arg2 /* cloned; caller retains its handle */, void * arg3 /* cloned; caller retains its handle */);
+bool flight_unregister_scene2d_document_importer(void * arg0, const char * arg1);
+void flight_explain_scene2d_resource_coverage(void * arg0, void * arg1);
+void flight_set_scene2d_slot_reference_content(void * arg0, void * arg1 /* cloned; caller retains its handle */);
+size_t flight_get_scene2_ddocument_fetch_progress_loaded(void * arg0);
+size_t flight_set_scene2_ddocument_fetch_progress_loaded(void * arg0, size_t arg1);
+size_t flight_get_scene2_ddocument_fetch_progress_total(void * arg0);
+size_t flight_set_scene2_ddocument_fetch_progress_total(void * arg0, size_t arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_scene2_ddocument_fetch_progress_url(void * arg0);
+void flight_field_set_scene2_ddocument_fetch_progress_url(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_scene2_ddocument_importer_entry_kind(void * arg0);
+void flight_field_set_scene2_ddocument_importer_entry_kind(void * arg0, void * arg1, size_t arg2);
+size_t flight_get_scene2_dimage_resource_load_progress_loaded(void * arg0);
+size_t flight_set_scene2_dimage_resource_load_progress_loaded(void * arg0, size_t arg1);
+size_t flight_get_scene2_dimage_resource_load_progress_total(void * arg0);
+size_t flight_set_scene2_dimage_resource_load_progress_total(void * arg0, size_t arg1);
+size_t flight_get_scene2_daudio_resource_load_progress_loaded(void * arg0);
+size_t flight_set_scene2_daudio_resource_load_progress_loaded(void * arg0, size_t arg1);
+size_t flight_get_scene2_daudio_resource_load_progress_total(void * arg0);
+size_t flight_set_scene2_daudio_resource_load_progress_total(void * arg0, size_t arg1);
+size_t flight_get_scene2_dresource_coverage_count_resolved(void * arg0);
+size_t flight_set_scene2_dresource_coverage_count_resolved(void * arg0, size_t arg1);
+size_t flight_get_scene2_dresource_coverage_count_total(void * arg0);
+size_t flight_set_scene2_dresource_coverage_count_total(void * arg0, size_t arg1);
+bool flight_get_scene2_dresource_coverage_explanation_complete(void * arg0);
+bool flight_set_scene2_dresource_coverage_explanation_complete(void * arg0, bool arg1);
+size_t flight_get_scene2_dresource_failure_notice_total(void * arg0);
+size_t flight_set_scene2_dresource_failure_notice_total(void * arg0, size_t arg1);
+size_t flight_get_scene2_dresource_failure_notice_unresolved(void * arg0);
+size_t flight_set_scene2_dresource_failure_notice_unresolved(void * arg0, size_t arg1);
+bool flight_get_scene2_dresource_failure_guard_state_enabled(void * arg0);
+bool flight_set_scene2_dresource_failure_guard_state_enabled(void * arg0, bool arg1);
 float flight_get_scene3_ddocument_animation_duration(void * arg0);
 float flight_set_scene3_ddocument_animation_duration(void * arg0, float arg1);
 int32_t flight_get_scene3_ddocument_animation_channel_node(void * arg0);
@@ -5369,7 +7627,10 @@ float flight_get_node3_dfields_alpha(void * arg0);
 float flight_set_node3_dfields_alpha(void * arg0, float arg1);
 bool flight_get_node3_dfields_visible(void * arg0);
 bool flight_set_node3_dfields_visible(void * arg0, bool arg1);
+/* Caller owns the return value; call flight_free_awd2_parse_state when done. */
 void * flight_create_awd2_parse_state(void);
+/* Caller owns the return value; call flight_free_scene3_ddocument when done. */
+void * flight_parse_obj_with_material_handlers(const char * arg0, void * arg1, void * arg2, const void * const * arg3, size_t arg4);
 uint16_t flight_get_awd2_property_entry_key(void * arg0);
 uint16_t flight_set_awd2_property_entry_key(void * arg0, uint16_t arg1);
 size_t flight_get_awd2_property_span_length(void * arg0);
@@ -5380,6 +7641,7 @@ size_t flight_get_awd2_properties_read_end(void * arg0);
 size_t flight_set_awd2_properties_read_end(void * arg0, size_t arg1);
 size_t flight_get_awd2_string_read_end(void * arg0);
 size_t flight_set_awd2_string_read_end(void * arg0, size_t arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_awd2_string_read_value(void * arg0);
 void flight_field_set_awd2_string_read_value(void * arg0, void * arg1, size_t arg2);
 size_t flight_get_awd2_transform_read_end(void * arg0);
@@ -5414,6 +7676,7 @@ float flight_get_awd2_parsed_camera_fov(void * arg0);
 float flight_set_awd2_parsed_camera_fov(void * arg0, float arg1);
 float flight_get_awd2_parsed_camera_left(void * arg0);
 float flight_set_awd2_parsed_camera_left(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_awd2_parsed_camera_name(void * arg0);
 void flight_field_set_awd2_parsed_camera_name(void * arg0, void * arg1, size_t arg2);
 uint32_t flight_get_awd2_parsed_camera_parent_id(void * arg0);
@@ -5424,12 +7687,14 @@ float flight_get_awd2_parsed_camera_right(void * arg0);
 float flight_set_awd2_parsed_camera_right(void * arg0, float arg1);
 float flight_get_awd2_parsed_camera_top(void * arg0);
 float flight_set_awd2_parsed_camera_top(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_awd2_parsed_container_name(void * arg0);
 void flight_field_set_awd2_parsed_container_name(void * arg0, void * arg1, size_t arg2);
 uint32_t flight_get_awd2_parsed_container_parent_id(void * arg0);
 uint32_t flight_set_awd2_parsed_container_parent_id(void * arg0, uint32_t arg1);
 bool flight_get_awd2_parsed_geometry_skinned(void * arg0);
 bool flight_set_awd2_parsed_geometry_skinned(void * arg0, bool arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_awd2_parsed_joint_name(void * arg0);
 void flight_field_set_awd2_parsed_joint_name(void * arg0, void * arg1, size_t arg2);
 uint16_t flight_get_awd2_parsed_joint_parent_index(void * arg0);
@@ -5454,6 +7719,7 @@ bool flight_get_awd2_parsed_light_has_radius(void * arg0);
 bool flight_set_awd2_parsed_light_has_radius(void * arg0, bool arg1);
 uint8_t flight_get_awd2_parsed_light_light_type(void * arg0);
 uint8_t flight_set_awd2_parsed_light_light_type(void * arg0, uint8_t arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_awd2_parsed_light_name(void * arg0);
 void flight_field_set_awd2_parsed_light_name(void * arg0, void * arg1, size_t arg2);
 uint32_t flight_get_awd2_parsed_light_parent_id(void * arg0);
@@ -5464,10 +7730,12 @@ uint32_t flight_get_awd2_parsed_light_rgb(void * arg0);
 uint32_t flight_set_awd2_parsed_light_rgb(void * arg0, uint32_t arg1);
 float flight_get_awd2_parsed_light_specular(void * arg0);
 float flight_set_awd2_parsed_light_specular(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_awd2_parsed_light_picker_name(void * arg0);
 void flight_field_set_awd2_parsed_light_picker_name(void * arg0, void * arg1, size_t arg2);
 uint32_t flight_get_awd2_parsed_material_diffuse_texture_id(void * arg0);
 uint32_t flight_set_awd2_parsed_material_diffuse_texture_id(void * arg0, uint32_t arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_awd2_parsed_material_name(void * arg0);
 void flight_field_set_awd2_parsed_material_name(void * arg0, void * arg1, size_t arg2);
 uint32_t flight_get_awd2_parsed_material_normal_texture_id(void * arg0);
@@ -5478,20 +7746,25 @@ uint32_t flight_get_awd2_parsed_material_specular_texture_id(void * arg0);
 uint32_t flight_set_awd2_parsed_material_specular_texture_id(void * arg0, uint32_t arg1);
 uint32_t flight_get_awd2_parsed_mesh_instance_geometry_id(void * arg0);
 uint32_t flight_set_awd2_parsed_mesh_instance_geometry_id(void * arg0, uint32_t arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_awd2_parsed_mesh_instance_name(void * arg0);
 void flight_field_set_awd2_parsed_mesh_instance_name(void * arg0, void * arg1, size_t arg2);
 uint32_t flight_get_awd2_parsed_mesh_instance_parent_id(void * arg0);
 uint32_t flight_set_awd2_parsed_mesh_instance_parent_id(void * arg0, uint32_t arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_awd2_parsed_skeleton_name(void * arg0);
 void flight_field_set_awd2_parsed_skeleton_name(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_awd2_parsed_skeleton_animation_name(void * arg0);
 void flight_field_set_awd2_parsed_skeleton_animation_name(void * arg0, void * arg1, size_t arg2);
 float flight_get_awd2_skeleton_animation_pose_duration(void * arg0);
 float flight_set_awd2_skeleton_animation_pose_duration(void * arg0, float arg1);
 uint32_t flight_get_awd2_skeleton_animation_pose_pose_block_id(void * arg0);
 uint32_t flight_set_awd2_skeleton_animation_pose_pose_block_id(void * arg0, uint32_t arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_awd2_parsed_skeleton_pose_name(void * arg0);
 void flight_field_set_awd2_parsed_skeleton_pose_name(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_awd2_parsed_texture_name(void * arg0);
 void flight_field_set_awd2_parsed_texture_name(void * arg0, void * arg1, size_t arg2);
 uint32_t flight_get_awd2_camera_entry_key(void * arg0);
@@ -5520,36 +7793,48 @@ uint32_t flight_get_awd2_skeleton_pose_entry_key(void * arg0);
 uint32_t flight_set_awd2_skeleton_pose_entry_key(void * arg0, uint32_t arg1);
 uint32_t flight_get_awd2_texture_entry_key(void * arg0);
 uint32_t flight_set_awd2_texture_entry_key(void * arg0, uint32_t arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_collada_element_count_feature(void * arg0);
 void flight_field_set_collada_element_count_feature(void * arg0, void * arg1, size_t arg2);
 size_t flight_get_collada_element_count_count(void * arg0);
 size_t flight_set_collada_element_count_count(void * arg0, size_t arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_collada_feature_elements_feature(void * arg0);
 void flight_field_set_collada_feature_elements_feature(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_collada_camera_entry_key(void * arg0);
 void flight_field_set_collada_camera_entry_key(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_collada_decoded_animation_channel_target(void * arg0);
 void flight_field_set_collada_decoded_animation_channel_target(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_collada_decoded_morph_controller_id(void * arg0);
 void flight_field_set_collada_decoded_morph_controller_id(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_collada_decoded_morph_base_geometry(void * arg0);
 void flight_field_set_collada_decoded_morph_base_geometry(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_collada_decoded_skin_controller_id(void * arg0);
 void flight_field_set_collada_decoded_skin_controller_id(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_collada_decoded_skin_geometry_ref(void * arg0);
 void flight_field_set_collada_decoded_skin_geometry_ref(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_collada_deferred_camera_binding_camera_id(void * arg0);
 void flight_field_set_collada_deferred_camera_binding_camera_id(void * arg0, void * arg1, size_t arg2);
 int32_t flight_get_collada_deferred_camera_binding_node_index(void * arg0);
 int32_t flight_set_collada_deferred_camera_binding_node_index(void * arg0, int32_t arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_collada_deferred_controller_binding_controller_id(void * arg0);
 void flight_field_set_collada_deferred_controller_binding_controller_id(void * arg0, void * arg1, size_t arg2);
 int32_t flight_get_collada_deferred_controller_binding_node_index(void * arg0);
 int32_t flight_set_collada_deferred_controller_binding_node_index(void * arg0, int32_t arg1);
 int32_t flight_get_collada_deferred_light_binding_node_index(void * arg0);
 int32_t flight_set_collada_deferred_light_binding_node_index(void * arg0, int32_t arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_collada_deferred_light_binding_url(void * arg0);
 void flight_field_set_collada_deferred_light_binding_url(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_collada_float_array_entry_key(void * arg0);
 void flight_field_set_collada_float_array_entry_key(void * arg0, void * arg1, size_t arg2);
 uint32_t flight_get_collada_light_definition_color(void * arg0);
@@ -5564,8 +7849,10 @@ float flight_get_collada_light_definition_outer_cone_degrees(void * arg0);
 float flight_set_collada_light_definition_outer_cone_degrees(void * arg0, float arg1);
 float flight_get_collada_light_definition_spot_blend(void * arg0);
 float flight_set_collada_light_definition_spot_blend(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_collada_light_entry_key(void * arg0);
 void flight_field_set_collada_light_entry_key(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_collada_morph_entry_key(void * arg0);
 void flight_field_set_collada_morph_entry_key(void * arg0, void * arg1, size_t arg2);
 float flight_get_collada_orthographic_camera_definition_far(void * arg0);
@@ -5584,18 +7871,23 @@ float flight_get_collada_perspective_camera_definition_fov_y(void * arg0);
 float flight_set_collada_perspective_camera_definition_fov_y(void * arg0, float arg1);
 float flight_get_collada_perspective_camera_definition_near(void * arg0);
 float flight_set_collada_perspective_camera_definition_near(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_collada_skin_entry_key(void * arg0);
 void flight_field_set_collada_skin_entry_key(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_collada_skin_influence_joint(void * arg0);
 void flight_field_set_collada_skin_influence_joint(void * arg0, void * arg1, size_t arg2);
 float flight_get_collada_skin_influence_weight(void * arg0);
 float flight_set_collada_skin_influence_weight(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_collada_string_array_entry_key(void * arg0);
 void flight_field_set_collada_string_array_entry_key(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_scene3_dformat_feature_requirements_feature(void * arg0);
 void flight_field_set_scene3_dformat_feature_requirements_feature(void * arg0, void * arg1, size_t arg2);
 float flight_get_gltf_accessor_count(void * arg0);
 float flight_set_gltf_accessor_count(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_gltf_accessor_type(void * arg0);
 void flight_field_set_gltf_accessor_type(void * arg0, void * arg1, size_t arg2);
 float flight_get_gltf_accessor_sparse_count(void * arg0);
@@ -5610,8 +7902,10 @@ float flight_get_gltf_animation_sampler_input(void * arg0);
 float flight_set_gltf_animation_sampler_input(void * arg0, float arg1);
 float flight_get_gltf_animation_sampler_output(void * arg0);
 float flight_set_gltf_animation_sampler_output(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_gltf_animation_target_path(void * arg0);
 void flight_field_set_gltf_animation_target_path(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_gltf_asset_version(void * arg0);
 void flight_field_set_gltf_asset_version(void * arg0, void * arg1, size_t arg2);
 float flight_get_gltf_buffer_byte_length(void * arg0);
@@ -5620,6 +7914,7 @@ float flight_get_gltf_buffer_view_buffer(void * arg0);
 float flight_set_gltf_buffer_view_buffer(void * arg0, float arg1);
 float flight_get_gltf_buffer_view_byte_length(void * arg0);
 float flight_set_gltf_buffer_view_byte_length(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_gltf_camera_type(void * arg0);
 void flight_field_set_gltf_camera_type(void * arg0, void * arg1, size_t arg2);
 float flight_get_gltf_draco_mesh_compression_buffer_view(void * arg0);
@@ -5638,6 +7933,7 @@ float flight_get_gltf_perspective_camera_yfov(void * arg0);
 float flight_set_gltf_perspective_camera_yfov(void * arg0, float arg1);
 float flight_get_gltf_perspective_camera_znear(void * arg0);
 float flight_set_gltf_perspective_camera_znear(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_gltf_punctual_light_type(void * arg0);
 void flight_field_set_gltf_punctual_light_type(void * arg0, void * arg1, size_t arg2);
 float flight_get_gltf_texture_basisu_source(void * arg0);
@@ -5646,24 +7942,32 @@ float flight_get_gltf_texture_info_index(void * arg0);
 float flight_set_gltf_texture_info_index(void * arg0, float arg1);
 size_t flight_get_gltf_accessor_data_count(void * arg0);
 size_t flight_set_gltf_accessor_data_count(void * arg0, size_t arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_gltf_accessor_fault_kind(void * arg0);
 void flight_field_set_gltf_accessor_fault_kind(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_gltf_core_feature_handler_kind(void * arg0);
 void flight_field_set_gltf_core_feature_handler_kind(void * arg0, void * arg1, size_t arg2);
 size_t flight_get_gltf_draco_mesh_vertex_count(void * arg0);
 size_t flight_set_gltf_draco_mesh_vertex_count(void * arg0, size_t arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_gltf_extension_handler_kind(void * arg0);
 void flight_field_set_gltf_extension_handler_kind(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_md2_frame_name(void * arg0);
 void flight_field_set_md2_frame_name(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_md2_section_handler_feature(void * arg0);
 void flight_field_set_md2_section_handler_feature(void * arg0, void * arg1, size_t arg2);
 size_t flight_get_md5_drop_tally_count(void * arg0);
 size_t flight_set_md5_drop_tally_count(void * arg0, size_t arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_md5_drop_tally_kind(void * arg0);
 void flight_field_set_md5_drop_tally_kind(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_md5_drop_tally_entry_key(void * arg0);
 void flight_field_set_md5_drop_tally_entry_key(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_md5_joint_name(void * arg0);
 void flight_field_set_md5_joint_name(void * arg0, void * arg1, size_t arg2);
 float flight_get_md5_joint_orientation_w(void * arg0);
@@ -5682,8 +7986,10 @@ float flight_get_md5_joint_position_y(void * arg0);
 float flight_set_md5_joint_position_y(void * arg0, float arg1);
 float flight_get_md5_joint_position_z(void * arg0);
 float flight_set_md5_joint_position_z(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_md5_mesh_shader(void * arg0);
 void flight_field_set_md5_mesh_shader(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_md5_section_handler_feature(void * arg0);
 void flight_field_set_md5_section_handler_feature(void * arg0, void * arg1, size_t arg2);
 int32_t flight_get_md5_vertex_count_weights(void * arg0);
@@ -5704,18 +8010,22 @@ float flight_get_md5_weight_position_y(void * arg0);
 float flight_set_md5_weight_position_y(void * arg0, float arg1);
 float flight_get_md5_weight_position_z(void * arg0);
 float flight_set_md5_weight_position_z(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_obj_feature_directives_feature(void * arg0);
 void flight_field_set_obj_feature_directives_feature(void * arg0, void * arg1, size_t arg2);
 float flight_get_obj_material_dissolve(void * arg0);
 float flight_set_obj_material_dissolve(void * arg0, float arg1);
 float flight_get_obj_material_illumination(void * arg0);
 float flight_set_obj_material_illumination(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_obj_material_name(void * arg0);
 void flight_field_set_obj_material_name(void * arg0, void * arg1, size_t arg2);
 float flight_get_obj_material_specular_exponent(void * arg0);
 float flight_set_obj_material_specular_exponent(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_obj_material_entry_key(void * arg0);
 void flight_field_set_obj_material_entry_key(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_obj_material_handler_feature(void * arg0);
 void flight_field_set_obj_material_handler_feature(void * arg0, void * arg1, size_t arg2);
 float flight_get_skin_influence_joint_index(void * arg0);
@@ -5730,12 +8040,14 @@ size_t flight_get_three_ds_chunk_count_count(void * arg0);
 size_t flight_set_three_ds_chunk_count_count(void * arg0, size_t arg1);
 float flight_get_three_ds_camera_focal_length(void * arg0);
 float flight_set_three_ds_camera_focal_length(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_three_ds_camera_name(void * arg0);
 void flight_field_set_three_ds_camera_name(void * arg0, void * arg1, size_t arg2);
 float flight_get_three_ds_camera_roll(void * arg0);
 float flight_set_three_ds_camera_roll(void * arg0, float arg1);
 size_t flight_get_three_ds_drop_tally_count(void * arg0);
 size_t flight_set_three_ds_drop_tally_count(void * arg0, size_t arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_three_ds_drop_tally_kind(void * arg0);
 void flight_field_set_three_ds_drop_tally_kind(void * arg0, void * arg1, size_t arg2);
 bool flight_get_three_ds_light_enabled(void * arg0);
@@ -5746,42 +8058,317 @@ float flight_get_three_ds_light_hotspot(void * arg0);
 float flight_set_three_ds_light_hotspot(void * arg0, float arg1);
 float flight_get_three_ds_light_multiplier(void * arg0);
 float flight_set_three_ds_light_multiplier(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_three_ds_light_name(void * arg0);
 void flight_field_set_three_ds_light_name(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_three_ds_material_name(void * arg0);
 void flight_field_set_three_ds_material_name(void * arg0, void * arg1, size_t arg2);
 float flight_get_three_ds_material_opacity(void * arg0);
 float flight_set_three_ds_material_opacity(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_three_ds_material_group_name(void * arg0);
 void flight_field_set_three_ds_material_group_name(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_three_ds_mesh_name(void * arg0);
 void flight_field_set_three_ds_mesh_name(void * arg0, void * arg1, size_t arg2);
 uint16_t flight_get_three_ds_chunk_dispatch_entry_chunk_id(void * arg0);
 uint16_t flight_set_three_ds_chunk_dispatch_entry_chunk_id(void * arg0, uint16_t arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_three_ds_drop_tally_entry_key(void * arg0);
 void flight_field_set_three_ds_drop_tally_entry_key(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_three_ds_material_entry_key(void * arg0);
 void flight_field_set_three_ds_material_entry_key(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_three_ds_pivot_entry_key(void * arg0);
 void flight_field_set_three_ds_pivot_entry_key(void * arg0, void * arg1, size_t arg2);
+bool flight_are_scene3d_resource_failure_guards_enabled(void * arg0);
+void flight_disable_scene3d_resource_failure_guards(void * arg0);
+void flight_explain_scene3d_resource_coverage(void * arg0, void * arg1, void * arg2, void * arg3);
+void flight_get_scene3d_resource_textures(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_image_resource_fetch when done. */
+void * flight_create_web_image_resource_fetch(void * arg0);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_resolve_image_resource_uri(const char * arg0, const char * arg1);
+/* Caller owns the return value; call flight_free_scene3_dresources when done. */
+void * flight_resolve_scene3d_resources(void * arg0, void * arg1, void * arg2);
+/* Caller owns the return value; call flight_free_scene3_dresources when done. */
+void * flight_update_scene3d_resource_streaming(void * arg0, void * arg1, void * arg2);
+/* Caller owns the return value; call flight_free_disposer when done. */
+void * flight_reveal_scene3d_resources_on_resolve(void * arg0, void * arg1, void * arg2, void * arg3);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_get_scene3d_document_base_path_from_url(const char * arg0);
+void flight_set_scene3d_document_resource_base_path_from_url(void * arg0, const char * arg1);
+size_t flight_retry_failed_scene3d_resources(void * arg0, void * arg1, void * arg2);
+/* Caller owns the return value; call flight_free_scene3_dresource_resolver_ref when done. */
+void * flight_create_built_in_scene3d_resource_resolver(void * arg0, void * arg1, void * arg2);
+/* Caller owns the return value; call flight_free_scene3_dresource_resolver_ref when done. */
+void * flight_create_scene3d_resource_resolver(void * arg0, void * arg1, void * arg2);
+void flight_dispose_scene3d_resource_resolver(void * arg0);
+/* Caller owns the return value; call flight_free_scene3_dresource_signals_ref when done. */
+void * flight_enable_scene3d_resource_signals(void * arg0);
+/* Caller owns the return value; call flight_free_scene3_dresource_signals_ref when done. */
+void * flight_get_scene3d_resource_signals(void * arg0);
+size_t flight_get_scene3_dresource_load_progress_loaded(void * arg0);
+size_t flight_set_scene3_dresource_load_progress_loaded(void * arg0, size_t arg1);
+size_t flight_get_scene3_dresource_load_progress_total(void * arg0);
+size_t flight_set_scene3_dresource_load_progress_total(void * arg0, size_t arg1);
+/* Caller owns the return value; call flight_free_screen_info when done. */
+void * flight_create_screen_info(void);
+/* Caller owns the return value; call flight_free_screen_mode when done. */
+void * flight_create_screen_mode(void);
+/* Caller owns the return value; call flight_free_screen_permission_change when done. */
+void * flight_create_screen_permission_change(void);
+/* Caller owns the return value; call flight_free_screen_signals when done. */
+void * flight_create_screen_signals(void);
+void flight_attach_screen_permission_change(void * arg0, void * arg1);
+void flight_attach_screen_signals(void * arg0, void * arg1);
+void flight_detach_screen_permission_change(void * arg0);
+void flight_detach_screen_signals(void * arg0);
+void flight_dip_to_screen_point(void * arg0, void * arg1, void * arg2);
+void flight_dip_to_screen_rect(void * arg0, void * arg1, void * arg2);
+void flight_dispose_screen_permission_change(void * arg0);
+void flight_dispose_screen_signals(void * arg0);
+void flight_get_primary_screen(void * arg0, void * arg1);
+void flight_get_screen_bounds(void * arg0, void * arg1);
+bool flight_get_screen_by_id(void * arg0, void * arg1, void * arg2, double arg3);
+void flight_get_screen_containing_rect(void * arg0, void * arg1, void * arg2, void * arg3);
+void flight_get_screen_current_mode(void * arg0, void * arg1);
+void flight_get_screen_cursor_position(void * arg0, void * arg1);
+void flight_get_screen_cursor_screen(void * arg0, void * arg1, void * arg2);
+void flight_get_screen_nearest_point(void * arg0, void * arg1, void * arg2, void * arg3);
+void flight_get_screen_nearest_rect(void * arg0, void * arg1, void * arg2, void * arg3);
+void flight_get_screen_work_area(void * arg0, void * arg1);
+void flight_get_screens(void * arg0, void * arg1);
+void flight_screen_to_dip_point(void * arg0, void * arg1, void * arg2);
+void flight_screen_to_dip_rect(void * arg0, void * arg1, void * arg2);
+double flight_get_screen_info_id(void * arg0);
+double flight_set_screen_info_id(void * arg0, double arg1);
+float flight_get_screen_info_x(void * arg0);
+float flight_set_screen_info_x(void * arg0, float arg1);
+float flight_get_screen_info_y(void * arg0);
+float flight_set_screen_info_y(void * arg0, float arg1);
+float flight_get_screen_info_width(void * arg0);
+float flight_set_screen_info_width(void * arg0, float arg1);
+float flight_get_screen_info_height(void * arg0);
+float flight_set_screen_info_height(void * arg0, float arg1);
+float flight_get_screen_info_work_width(void * arg0);
+float flight_set_screen_info_work_width(void * arg0, float arg1);
+float flight_get_screen_info_work_height(void * arg0);
+float flight_set_screen_info_work_height(void * arg0, float arg1);
+float flight_get_screen_info_scale_factor(void * arg0);
+float flight_set_screen_info_scale_factor(void * arg0, float arg1);
+bool flight_get_screen_info_is_primary(void * arg0);
+bool flight_set_screen_info_is_primary(void * arg0, bool arg1);
+float flight_get_screen_info_rotation(void * arg0);
+float flight_set_screen_info_rotation(void * arg0, float arg1);
+float flight_get_screen_info_refresh_rate(void * arg0);
+float flight_set_screen_info_refresh_rate(void * arg0, float arg1);
+float flight_get_screen_info_color_depth(void * arg0);
+float flight_set_screen_info_color_depth(void * arg0, float arg1);
+float flight_get_screen_info_pixel_depth(void * arg0);
+float flight_set_screen_info_pixel_depth(void * arg0, float arg1);
+float flight_get_screen_info_physical_width(void * arg0);
+float flight_set_screen_info_physical_width(void * arg0, float arg1);
+float flight_get_screen_info_physical_height(void * arg0);
+float flight_set_screen_info_physical_height(void * arg0, float arg1);
+bool flight_get_screen_info_is_hdr(void * arg0);
+bool flight_set_screen_info_is_hdr(void * arg0, bool arg1);
+float flight_get_screen_info_max_luminance(void * arg0);
+float flight_set_screen_info_max_luminance(void * arg0, float arg1);
+float flight_get_screen_info_depth_per_component(void * arg0);
+float flight_set_screen_info_depth_per_component(void * arg0, float arg1);
+float flight_get_screen_info_dpi(void * arg0);
+float flight_set_screen_info_dpi(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_screen_info_label(void * arg0);
+void flight_field_set_screen_info_label(void * arg0, void * arg1, size_t arg2);
+bool flight_get_screen_info_internal(void * arg0);
+bool flight_set_screen_info_internal(void * arg0, bool arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_screen_info_touch_support(void * arg0);
+void flight_field_set_screen_info_touch_support(void * arg0, void * arg1, size_t arg2);
+bool flight_get_screen_info_monochrome(void * arg0);
+bool flight_set_screen_info_monochrome(void * arg0, bool arg1);
+float flight_get_screen_mode_width(void * arg0);
+float flight_set_screen_mode_width(void * arg0, float arg1);
+float flight_get_screen_mode_height(void * arg0);
+float flight_set_screen_mode_height(void * arg0, float arg1);
+float flight_get_screen_mode_refresh_rate(void * arg0);
+float flight_set_screen_mode_refresh_rate(void * arg0, float arg1);
+float flight_get_screen_mode_color_depth(void * arg0);
+float flight_set_screen_mode_color_depth(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_screen_mode_pixel_format(void * arg0);
+void flight_field_set_screen_mode_pixel_format(void * arg0, void * arg1, size_t arg2);
+bool flight_get_screen_changed_metrics_bounds(void * arg0);
+bool flight_set_screen_changed_metrics_bounds(void * arg0, bool arg1);
+bool flight_get_screen_changed_metrics_work_area(void * arg0);
+bool flight_set_screen_changed_metrics_work_area(void * arg0, bool arg1);
+bool flight_get_screen_changed_metrics_scale_factor(void * arg0);
+bool flight_set_screen_changed_metrics_scale_factor(void * arg0, bool arg1);
+bool flight_get_screen_changed_metrics_orientation(void * arg0);
+bool flight_set_screen_changed_metrics_orientation(void * arg0, bool arg1);
+/* Caller owns the return value; call flight_free_lasso_selection when done. */
+void * flight_create_lasso_selection(void);
+void flight_add_lasso_selection_point(void * arg0, double arg1, double arg2);
+void flight_begin_lasso_selection(void * arg0, double arg1, double arg2);
+/* Borrowed return; do not free; valid while the selection input handle remains alive. */
+void * flight_end_lasso_selection(void * arg0);
+/* Borrowed return; do not free; valid while the selection input handle remains alive. */
+void * flight_get_lasso_selection_path(void * arg0);
+void flight_find_nodes_in_lasso_selection(void * arg0, void * arg1, void * arg2, size_t arg3);
+/* Caller owns the return value; call flight_free_marquee_selection when done. */
+void * flight_create_marquee_selection(void);
+void flight_begin_marquee_selection(void * arg0, float arg1, float arg2);
+/* Borrowed return; do not free; valid while the selection input handle remains alive. */
+void * flight_end_marquee_selection(void * arg0);
+/* Borrowed return; do not free; valid while the selection input handle remains alive. */
+void * flight_get_marquee_rectangle(void * arg0);
+void flight_update_marquee_selection(void * arg0, float arg1, float arg2);
+/* Caller owns the return value; call flight_free_selection_state when done. */
+void * flight_create_selection_state(void);
+void flight_add_node_to_selection(void * arg0, void * arg1);
+void flight_clear_selection(void * arg0);
+/* Caller owns the return value; call flight_free_node_ref when done. */
+void * flight_get_active_node(void * arg0);
+void flight_get_selected_nodes(void * arg0, void * arg1);
+size_t flight_get_selection_count(void * arg0);
+/* Caller owns the return value; call flight_free_selection_signals when done. */
+void * flight_get_selection_signals(void * arg0);
+bool flight_has_selection(void * arg0);
+bool flight_is_node_selected(void * arg0, void * arg1);
+void flight_remove_node_from_selection(void * arg0, void * arg1);
+void flight_select_all_nodes(void * arg0, void * arg1, size_t arg2);
+void flight_select_node(void * arg0, void * arg1);
+void flight_toggle_node_selection(void * arg0, void * arg1);
+void flight_apply_pointer_selection_policy(void * arg0, void * arg1, void * arg2);
+void flight_apply_pointer_up_selection_policy(void * arg0, void * arg1, void * arg2, bool arg3);
+/* Caller owns the return value; call flight_free_sensors when done. */
+void * flight_create_sensors(void);
+void flight_attach_sensors(void * arg0, void * arg1);
+void flight_compute_euler_from_quaternion(void * arg0, void * arg1);
+void flight_compute_gravity_from_orientation(void * arg0, void * arg1);
+void flight_compute_quaternion_from_orientation_reading(void * arg0, void * arg1);
+void flight_compute_rotation_matrix_from_quaternion(void * arg0, void * arg1);
+void flight_compute_screen_relative_orientation(void * arg0, void * arg1, float arg2);
+void flight_compute_world_acceleration_from_device_acceleration(void * arg0, void * arg1, void * arg2);
+void flight_detach_sensors(void * arg0);
+void flight_dispose_sensors(void * arg0);
+bool flight_has_accelerometer(void * arg0);
+bool flight_has_ambient_light_sensor(void * arg0);
+bool flight_has_barometer(void * arg0);
+bool flight_has_gravity_sensor(void * arg0);
+bool flight_has_gyroscope(void * arg0);
+bool flight_has_linear_acceleration_sensor(void * arg0);
+bool flight_has_magnetometer(void * arg0);
+bool flight_has_orientation_sensor(void * arg0);
+bool flight_has_proximity_sensor(void * arg0);
+bool flight_is_sensors_supported(void * arg0);
+float flight_get_sensor_reading_interval(void * arg0);
+float flight_set_sensor_reading_interval(void * arg0, float arg1);
+float flight_get_sensor_reading_timestamp(void * arg0);
+float flight_set_sensor_reading_timestamp(void * arg0, float arg1);
+float flight_get_ambient_light_reading_illuminance(void * arg0);
+float flight_set_ambient_light_reading_illuminance(void * arg0, float arg1);
+float flight_get_ambient_light_reading_interval(void * arg0);
+float flight_set_ambient_light_reading_interval(void * arg0, float arg1);
+float flight_get_ambient_light_reading_timestamp(void * arg0);
+float flight_set_ambient_light_reading_timestamp(void * arg0, float arg1);
+float flight_get_motion_reading_interval(void * arg0);
+float flight_set_motion_reading_interval(void * arg0, float arg1);
+float flight_get_motion_reading_timestamp(void * arg0);
+float flight_set_motion_reading_timestamp(void * arg0, float arg1);
+float flight_get_motion_reading_x(void * arg0);
+float flight_set_motion_reading_x(void * arg0, float arg1);
+float flight_get_motion_reading_y(void * arg0);
+float flight_set_motion_reading_y(void * arg0, float arg1);
+float flight_get_motion_reading_z(void * arg0);
+float flight_set_motion_reading_z(void * arg0, float arg1);
+bool flight_get_orientation_reading_absolute(void * arg0);
+bool flight_set_orientation_reading_absolute(void * arg0, bool arg1);
+float flight_get_orientation_reading_alpha(void * arg0);
+float flight_set_orientation_reading_alpha(void * arg0, float arg1);
+float flight_get_orientation_reading_beta(void * arg0);
+float flight_set_orientation_reading_beta(void * arg0, float arg1);
+float flight_get_orientation_reading_gamma(void * arg0);
+float flight_set_orientation_reading_gamma(void * arg0, float arg1);
+float flight_get_orientation_reading_heading(void * arg0);
+float flight_set_orientation_reading_heading(void * arg0, float arg1);
+float flight_get_orientation_reading_interval(void * arg0);
+float flight_set_orientation_reading_interval(void * arg0, float arg1);
+float flight_get_orientation_reading_timestamp(void * arg0);
+float flight_set_orientation_reading_timestamp(void * arg0, float arg1);
+float flight_get_pressure_reading_altitude(void * arg0);
+float flight_set_pressure_reading_altitude(void * arg0, float arg1);
+float flight_get_pressure_reading_interval(void * arg0);
+float flight_set_pressure_reading_interval(void * arg0, float arg1);
+float flight_get_pressure_reading_pressure(void * arg0);
+float flight_set_pressure_reading_pressure(void * arg0, float arg1);
+float flight_get_pressure_reading_timestamp(void * arg0);
+float flight_set_pressure_reading_timestamp(void * arg0, float arg1);
+float flight_get_proximity_reading_distance(void * arg0);
+float flight_set_proximity_reading_distance(void * arg0, float arg1);
+float flight_get_proximity_reading_interval(void * arg0);
+float flight_set_proximity_reading_interval(void * arg0, float arg1);
+float flight_get_proximity_reading_max(void * arg0);
+float flight_set_proximity_reading_max(void * arg0, float arg1);
+bool flight_get_proximity_reading_near(void * arg0);
+bool flight_set_proximity_reading_near(void * arg0, bool arg1);
+float flight_get_proximity_reading_timestamp(void * arg0);
+float flight_set_proximity_reading_timestamp(void * arg0, float arg1);
+float flight_get_quaternion_reading_interval(void * arg0);
+float flight_set_quaternion_reading_interval(void * arg0, float arg1);
+float flight_get_quaternion_reading_timestamp(void * arg0);
+float flight_set_quaternion_reading_timestamp(void * arg0, float arg1);
+float flight_get_quaternion_reading_w(void * arg0);
+float flight_set_quaternion_reading_w(void * arg0, float arg1);
+float flight_get_quaternion_reading_x(void * arg0);
+float flight_set_quaternion_reading_x(void * arg0, float arg1);
+float flight_get_quaternion_reading_y(void * arg0);
+float flight_set_quaternion_reading_y(void * arg0, float arg1);
+float flight_get_quaternion_reading_z(void * arg0);
+float flight_set_quaternion_reading_z(void * arg0, float arg1);
+float flight_get_rotation_rate_reading_alpha(void * arg0);
+float flight_set_rotation_rate_reading_alpha(void * arg0, float arg1);
+float flight_get_rotation_rate_reading_beta(void * arg0);
+float flight_set_rotation_rate_reading_beta(void * arg0, float arg1);
+float flight_get_rotation_rate_reading_gamma(void * arg0);
+float flight_set_rotation_rate_reading_gamma(void * arg0, float arg1);
+float flight_get_rotation_rate_reading_interval(void * arg0);
+float flight_set_rotation_rate_reading_interval(void * arg0, float arg1);
+float flight_get_rotation_rate_reading_timestamp(void * arg0);
+float flight_set_rotation_rate_reading_timestamp(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_animated_normal_modifier when done. */
 void * flight_create_animated_normal_modifier(void);
+/* Caller owns the return value; call flight_free_dissolve_modifier when done. */
 void * flight_create_dissolve_modifier(void);
+/* Caller owns the return value; call flight_free_emissive_modifier when done. */
 void * flight_create_emissive_modifier(void);
-char * flight_get_emissive_modifier_facing_string(uint32_t arg0);
-char * flight_get_fog_modifier_mode_string(uint32_t arg0);
-char * flight_get_vertex_displace_modifier_source_string(uint32_t arg0);
-int32_t flight_parse_emissive_modifier_facing(const char * arg0);
-int32_t flight_parse_fog_modifier_mode(const char * arg0);
-int32_t flight_parse_vertex_displace_modifier_source(const char * arg0);
+/* Caller owns the return value; call flight_free_env_reflect_modifier when done. */
 void * flight_create_env_reflect_modifier(void);
+/* Caller owns the return value; call flight_free_fog_modifier when done. */
 void * flight_create_fog_modifier(void);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_get_modifier_define_key(const void * const * arg0, size_t arg1, void * arg2);
+void flight_get_unregistered_modifier_kinds(void * arg0, void * arg1, const void * const * arg2, size_t arg3);
 bool flight_is_built_in_modifier_slot(const char * arg0);
-void flight_register_modifier(void * arg0, void * arg1);
+bool flight_is_modifier_stack_valid(void * arg0, const void * const * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_modifier_registry when done. */
+void * flight_create_modifier_registry(void);
+void flight_register_modifier(void * arg0, void * arg1 /* cloned; caller retains its handle */);
+/* Caller owns the return value; call flight_free_modifier_definition_ref when done. */
 void * flight_resolve_modifier(void * arg0, const char * arg1);
+void flight_order_modifier_stack(void * arg0, const void * const * arg1, size_t arg2);
 void flight_register_built_in_modifiers(void * arg0);
+/* Caller owns the return value; call flight_free_rim_modifier when done. */
 void * flight_create_rim_modifier(void);
+/* Caller owns the return value; call flight_free_shaded_material when done. */
 void * flight_create_shaded_material(void);
+/* Caller owns the return value; call flight_free_toon_modifier when done. */
 void * flight_create_toon_modifier(void);
+/* Caller owns the return value; call flight_free_vertex_displace_modifier when done. */
 void * flight_create_vertex_displace_modifier(void);
 float flight_get_animated_normal_modifier_strength(void * arg0);
 float flight_set_animated_normal_modifier_strength(void * arg0, float arg1);
@@ -5855,39 +8442,68 @@ float flight_get_vertex_displace_modifier_options_amplitude(void * arg0);
 float flight_set_vertex_displace_modifier_options_amplitude(void * arg0, float arg1);
 void flight_compact_stroke_path(void * arg0, void * arg1, void * arg2, double arg3);
 void flight_enable_shape_bounds_guards(void * arg0, void * arg1, double arg2);
+/* Caller owns the return value; call flight_free_morph_shape_gradient_endpoint_explanation when done. */
 void * flight_explain_morph_shape_gradient_endpoints(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_shape_tessellation_explanation when done. */
 void * flight_explain_shape_tessellation(void * arg0, size_t arg1, int32_t arg2);
+/* Caller owns the return value; call flight_free_morph_shape_ref when done. */
 void * flight_create_morph_shape(void * arg0);
+/* Caller owns the return value; call flight_free_morph_shape_data when done. */
 void * flight_create_morph_shape_data(void * arg0);
+/* Caller owns the return value; call flight_free_path_ref when done. */
 void * flight_append_morph_shape_path(void * arg0, void * arg1);
 void flight_set_morph_shape_progress(void * arg0, double arg1);
+/* Caller owns the return value; call flight_free_morph_shape_animation_target_ref when done. */
 void * flight_create_morph_shape_animation_target(void * arg0);
 void flight_apply_animation_clip_to_morph_shape(void * arg0, float arg1);
 bool flight_apply_morph_shape_animation_sample(void * arg0, size_t arg1, void * arg2);
 void flight_append_morph_shape_begin_fill(void * arg0, void * arg1, void * arg2);
+bool flight_append_morph_shape_begin_gradient_fill(void * arg0, uint32_t arg1, void * arg2, void * arg3, int32_t arg4, int32_t arg5);
 void flight_append_morph_shape_begin_texture_fill(void * arg0, void * arg1, void * arg2, void * arg3);
+bool flight_append_morph_shape_line_gradient_style(void * arg0, uint32_t arg1, void * arg2, void * arg3, int32_t arg4, int32_t arg5);
 void flight_append_morph_shape_line_style(void * arg0, void * arg1, void * arg2, int32_t arg3, int32_t arg4, int32_t arg5, int32_t arg6, double arg7);
 void flight_append_morph_shape_line_texture_style(void * arg0, void * arg1, void * arg2, void * arg3);
 void flight_register_default_shape_bounds_commands(void * arg0);
+/* Caller owns the return value; call flight_free_scale9_shape_ref when done. */
 void * flight_create_scale9_shape(void * arg0);
+/* Caller owns the return value; call flight_free_scale9_shape_data when done. */
 void * flight_create_scale9_shape_data(void * arg0);
 void flight_map_scale9_shape_commands(void * arg0, void * arg1, size_t arg2, void * arg3);
+/* Caller owns the return value; call flight_free_shape_ref when done. */
 void * flight_create_shape(void);
+/* Caller owns the return value; call flight_free_shape_data when done. */
 void * flight_create_shape_data(void);
 void flight_compute_shape_local_bounds_rectangle(void * arg0, void * arg1);
 bool flight_get_shape_bounds(void * arg0, void * arg1, int32_t arg2);
 size_t flight_get_shape_command_count(void * arg0);
 bool flight_is_shape_empty(void * arg0);
 bool flight_compute_shape_bounds_rectangle(void * arg0, void * arg1, int32_t arg2);
+bool flight_default_shape_bounds_flush(void * arg0, const FlightShapeBoundsContextVTable * arg1);
+/* Caller owns the return value; call flight_free_shape_bounds_explanation when done. */
 void * flight_explain_shape_bounds(void * arg0, int32_t arg1);
 double flight_normalize_shape_stroke_miter_limit(double arg0);
 double flight_normalize_shape_stroke_width(double arg0);
+/* Caller owns the return value; call flight_get_shape_fill_regions_result_free when done. */
 void * flight_get_shape_fill_regions(void * arg0, size_t arg1);
+size_t flight_get_shape_fill_regions_result_len(void * arg0);
+/* Borrowed return; do not free; valid while the flight_get_shape_fill_regions result handle remains alive. */
+void * flight_get_shape_fill_regions_result_get(void * arg0, size_t arg1);
+void flight_get_shape_fill_regions_result_free(void * arg0);
 bool flight_has_non_solid_shape_fill(void * arg0, size_t arg1);
 bool flight_has_shape_fill(void * arg0, size_t arg1);
+/* Caller owns the return value; call flight_get_shape_stroke_regions_result_free when done. */
 void * flight_get_shape_stroke_regions(void * arg0, size_t arg1);
+size_t flight_get_shape_stroke_regions_result_len(void * arg0);
+/* Borrowed return; do not free; valid while the flight_get_shape_stroke_regions result handle remains alive. */
+void * flight_get_shape_stroke_regions_result_get(void * arg0, size_t arg1);
+void flight_get_shape_stroke_regions_result_free(void * arg0);
 bool flight_has_non_solid_shape_stroke(void * arg0, size_t arg1);
+/* Caller owns the return value; call flight_get_shape_stroke_outline_regions_result_free when done. */
 void * flight_get_shape_stroke_outline_regions(void * arg0, size_t arg1);
+size_t flight_get_shape_stroke_outline_regions_result_len(void * arg0);
+/* Borrowed return; do not free; valid while the flight_get_shape_stroke_outline_regions result handle remains alive. */
+void * flight_get_shape_stroke_outline_regions_result_get(void * arg0, size_t arg1);
+void flight_get_shape_stroke_outline_regions_result_free(void * arg0);
 double flight_get_morph_shape_data_progress(void * arg0);
 double flight_set_morph_shape_data_progress(void * arg0, double arg1);
 size_t flight_get_morph_shape_path_binding_command_index(void * arg0);
@@ -5910,6 +8526,7 @@ uint32_t flight_get_morph_shape_color_paint_binding_start_color(void * arg0);
 uint32_t flight_set_morph_shape_color_paint_binding_start_color(void * arg0, uint32_t arg1);
 size_t flight_get_morph_shape_gradient_paint_binding_command_index(void * arg0);
 size_t flight_set_morph_shape_gradient_paint_binding_command_index(void * arg0, size_t arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_morph_shape_gradient_paint_binding_command_key(void * arg0);
 void flight_field_set_morph_shape_gradient_paint_binding_command_key(void * arg0, void * arg1, size_t arg2);
 double flight_get_morph_shape_gradient_paint_binding_end_focal_point_ratio(void * arg0);
@@ -5932,6 +8549,7 @@ double flight_get_morph_shape_line_paint_binding_start_thickness(void * arg0);
 double flight_set_morph_shape_line_paint_binding_start_thickness(void * arg0, double arg1);
 size_t flight_get_morph_shape_texture_paint_binding_command_index(void * arg0);
 size_t flight_set_morph_shape_texture_paint_binding_command_index(void * arg0, size_t arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_morph_shape_texture_paint_binding_command_key(void * arg0);
 void flight_field_set_morph_shape_texture_paint_binding_command_key(void * arg0, void * arg1, size_t arg2);
 float flight_get_shape_scale9_grid_x(void * arg0);
@@ -5942,6 +8560,7 @@ float flight_get_shape_scale9_grid_width(void * arg0);
 float flight_set_shape_scale9_grid_width(void * arg0, float arg1);
 float flight_get_shape_scale9_grid_height(void * arg0);
 float flight_set_shape_scale9_grid_height(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_shape_bounds_command_key(void * arg0);
 void flight_field_set_shape_bounds_command_key(void * arg0, void * arg1, size_t arg2);
 bool flight_get_shape_bounds_explanation_complete(void * arg0);
@@ -5960,17 +8579,81 @@ size_t flight_get_morph_shape_gradient_endpoint_explanation_start_stop_count(voi
 size_t flight_set_morph_shape_gradient_endpoint_explanation_start_stop_count(void * arg0, size_t arg1);
 bool flight_get_morph_shape_gradient_endpoint_explanation_supported(void * arg0);
 bool flight_set_morph_shape_gradient_endpoint_explanation_supported(void * arg0, bool arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_share_title_content_title(void * arg0);
+void flight_field_set_share_title_content_title(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_share_text_content_text(void * arg0);
+void flight_field_set_share_text_content_text(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_share_url_content_url(void * arg0);
+void flight_field_set_share_url_content_url(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_share_file_name(void * arg0);
+void flight_field_set_share_file_name(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_share_file_mime_type(void * arg0);
+void flight_field_set_share_file_mime_type(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_share_file_data_url(void * arg0);
+void flight_field_set_share_file_data_url(void * arg0, void * arg1, size_t arg2);
+bool flight_get_share_result_completed(void * arg0);
+bool flight_set_share_result_completed(void * arg0, bool arg1);
+bool flight_get_share_result_dismissed(void * arg0);
+bool flight_set_share_result_dismissed(void * arg0, bool arg1);
+bool flight_is_shell_url_allowed(const char * arg0, void * arg1);
+void flight_shell_beep(void * arg0);
+/* Caller owns the return value; call flight_free_shell_process when done. */
+void * flight_spawn_shell_process(void * arg0, const char * arg1, const char * const * arg2, size_t arg3, void * arg4);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_shell_path_open_outcome_operation_failed_message(void * arg0);
+void flight_field_set_shell_path_open_outcome_operation_failed_message(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_shell_shortcut_link_target(void * arg0);
+void flight_field_set_shell_shortcut_link_target(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_shell_shortcut_link_read_outcome_operation_failed_message(void * arg0);
+void flight_field_set_shell_shortcut_link_read_outcome_operation_failed_message(void * arg0, void * arg1, size_t arg2);
+bool flight_equals_accelerator(const char * arg0, const char * arg1);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_find_accelerator_conflict(const char * arg0, const char * const * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_format_accelerator_for_display(const char * arg0, uint32_t arg1);
+int32_t flight_get_accelerator_key(const char * arg0);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_get_accelerator_key_label(uint32_t arg0);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_get_accelerator_modifier_label(uint32_t arg0, uint32_t arg1);
+bool flight_get_accelerator_modifiers(void * arg0, const char * arg1);
+bool flight_is_accelerator_valid(const char * arg0);
+/* Caller owns the return value; call flight_free_parsed_accelerator when done. */
+void * flight_make_parsed_accelerator(void);
+/* Caller owns the return value; call flight_free_accelerator when done. */
+void * flight_normalize_accelerator(const char * arg0);
+bool flight_parse_accelerator(void * arg0, const char * arg1);
+/* Caller owns the return value; call flight_free_accelerator_parse_error when done. */
+void * flight_parse_accelerator_detailed(void * arg0, const char * arg1);
+uint32_t flight_resolve_command_or_control_modifier(uint32_t arg0);
+/* Caller owns the return value; call flight_free_create_global_shortcut_outcome when done. */
+void * flight_create_global_shortcut(const char * arg0);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_accelerator_parse_error_token(void * arg0);
+void flight_field_set_accelerator_parse_error_token(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_parsed_accelerator_key(void * arg0);
+void flight_field_set_parsed_accelerator_key(void * arg0, void * arg1, size_t arg2);
 void flight_disconnect_signal_connection(void * arg0);
-bool flight_is_signal_connection_connected(void * arg0);
-bool flight_is_signal_connection_paused(void * arg0);
 void flight_pause_signal_connection(void * arg0);
 void flight_resume_signal_connection(void * arg0);
+/* Caller owns the return value; call flight_free_signal_scope when done. */
 void * flight_create_signal_scope(void);
 void flight_disconnect_signal_scope(void * arg0);
+/* Caller owns the return value; call flight_free_signal_timer_state when done. */
 void * flight_create_signal_timer_state(void);
 void flight_advance_signal_timers(void * arg0, double arg1);
 void flight_clear_signal_timeout(void * arg0, void * arg1);
-void * flight_set_signal_timeout(void * arg0, double arg1, void * arg2, void * arg3);
+/* Caller owns the return value; call flight_free_timer_id when done. */
+void * flight_set_signal_timeout(void * arg0, double arg1, void (*arg2)(void *), void * arg3);
 uint32_t flight_get_slot_id_value(void * arg0);
 uint32_t flight_set_slot_id_value(void * arg0, uint32_t arg1);
 uint64_t flight_get_timer_id_value(void * arg0);
@@ -5983,6 +8666,7 @@ uint64_t flight_get_signal_timer_state_next_id(void * arg0);
 uint64_t flight_set_signal_timer_state_next_id(void * arg0, uint64_t arg1);
 void flight_register_skeleton_2d_deform_animation_target(void * arg0);
 bool flight_is_skeleton_2d_stepped_channel_subject(const char * arg0);
+/* Caller owns the return value; call flight_free_skeleton2_ddeform_length_explanation when done. */
 void * flight_explain_skeleton_2d_deform_length(void * arg0, void * arg1, size_t arg2, void * arg3, size_t arg4);
 void flight_register_skeleton_2d_ik_constraint_solver(void * arg0);
 void flight_solve_skeleton_2d_ik_constraint__skeleton2_dik_constraint(void * arg0, void * arg1);
@@ -6000,20 +8684,23 @@ bool flight_equals_skeleton_2d(void * arg0, void * arg1);
 int32_t flight_get_skeleton_2d_bone_index_by_name(void * arg0, const char * arg1);
 bool flight_get_skeleton_2d_bone_world_matrix(void * arg0, void * arg1, int32_t arg2);
 void flight_set_skeleton_2d_bind_pose(void * arg0);
+/* Caller owns the return value; call flight_free_string when done. */
 char * flight_validate_skeleton_2d(void * arg0);
-void * flight_create_skeleton_2d_animation_target_handle(const char * arg0, void * arg1);
-void * flight_create_skeleton_2d_animation_target_registry(void);
+/* Caller owns the return value; call flight_free_skeleton2_danimation_target when done. */
 void * flight_create_skeleton_2d_bone_animation_target(int32_t arg0, const char * arg1);
+/* Caller owns the return value; call flight_free_skeleton2_dslot_animation_target when done. */
 void * flight_create_skeleton_2d_slot_animation_target(void);
 int32_t flight_find_skeleton_2d_step_keyframe(void * arg0, size_t arg1, float arg2);
+/* Caller owns the return value; call flight_free_skeleton2_danimation_target_binder when done. */
 void * flight_get_skeleton_2d_animation_target_binder(void * arg0, const char * arg1);
 void flight_get_skeleton_2d_animation_target_binder_kinds(void * arg0, void * arg1);
-void flight_register_skeleton_2d_animation_target_binder(void * arg0, const char * arg1, void * arg2);
+void flight_register_skeleton_2d_animation_target_binder(void * arg0, const char * arg1, void * arg2 /* cloned; caller retains its handle */);
 void flight_unregister_skeleton_2d_animation_target_binder(void * arg0, const char * arg1);
 void flight_solve_skeleton_2d_constraints(void * arg0, void * arg1, void * arg2, size_t arg3);
 void flight_unregister_skeleton_2d_constraint_solver(void * arg0, const char * arg1);
 void flight_register_skeleton_2d_draw_order_animation_binder(void * arg0);
 void flight_unregister_skeleton_2d_draw_order_animation_binder(void * arg0);
+/* Caller owns the return value; call flight_free_skin2_d when done. */
 void * flight_create_skin_2d(void * arg0, void * arg1);
 void flight_register_skeleton_2d_transform_constraint_solver(void * arg0);
 void flight_solve_skeleton_2d_transform_constraint__skeleton2_dik_constraint(void * arg0, void * arg1);
@@ -6039,12 +8726,15 @@ float flight_get_skeleton2_dpath_constraint_mix_y(void * arg0);
 float flight_set_skeleton2_dpath_constraint_mix_y(void * arg0, float arg1);
 float flight_get_skeleton2_dpath_constraint_position(void * arg0);
 float flight_set_skeleton2_dpath_constraint_position(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_skeleton2_dpath_constraint_position_mode(void * arg0);
 void flight_field_set_skeleton2_dpath_constraint_position_mode(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_skeleton2_dpath_constraint_rotate_mode(void * arg0);
 void flight_field_set_skeleton2_dpath_constraint_rotate_mode(void * arg0, void * arg1, size_t arg2);
 float flight_get_skeleton2_dpath_constraint_spacing(void * arg0);
 float flight_set_skeleton2_dpath_constraint_spacing(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_skeleton2_dpath_constraint_spacing_mode(void * arg0);
 void flight_field_set_skeleton2_dpath_constraint_spacing_mode(void * arg0, void * arg1, size_t arg2);
 int32_t flight_get_skeleton2_dpath_constraint_target_slot_index(void * arg0);
@@ -6081,61 +8771,187 @@ size_t flight_get_skeleton2_ddeform_length_mismatch_addressed(void * arg0);
 size_t flight_set_skeleton2_ddeform_length_mismatch_addressed(void * arg0, size_t arg1);
 size_t flight_get_skeleton2_ddeform_length_mismatch_offsets(void * arg0);
 size_t flight_set_skeleton2_ddeform_length_mismatch_offsets(void * arg0, size_t arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_skeleton2_ddeform_length_mismatch_subject(void * arg0);
 void flight_field_set_skeleton2_ddeform_length_mismatch_subject(void * arg0, void * arg1, size_t arg2);
 bool flight_get_skeleton2_ddeform_length_explanation_accepted(void * arg0);
 bool flight_set_skeleton2_ddeform_length_explanation_accepted(void * arg0, bool arg1);
 size_t flight_get_skeleton2_ddeform_length_explanation_addressed(void * arg0);
 size_t flight_set_skeleton2_ddeform_length_explanation_addressed(void * arg0, size_t arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_skeleton2_ddeform_length_explanation_addressing(void * arg0);
 void flight_field_set_skeleton2_ddeform_length_explanation_addressing(void * arg0, void * arg1, size_t arg2);
 size_t flight_get_skeleton2_ddeform_length_explanation_offsets(void * arg0);
 size_t flight_set_skeleton2_ddeform_length_explanation_offsets(void * arg0, size_t arg1);
 int32_t flight_get_skeleton2_danimation_target_bone_index(void * arg0);
 int32_t flight_set_skeleton2_danimation_target_bone_index(void * arg0, int32_t arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_skeleton2_danimation_target_path(void * arg0);
 void flight_field_set_skeleton2_danimation_target_path(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_skeleton2_dslot_animation_target_path(void * arg0);
 void flight_field_set_skeleton2_dslot_animation_target_path(void * arg0, void * arg1, size_t arg2);
 int32_t flight_get_skeleton2_dslot_animation_target_slot_index(void * arg0);
 int32_t flight_set_skeleton2_dslot_animation_target_slot_index(void * arg0, int32_t arg1);
 int32_t flight_get_skeleton2_ddeform_animation_target_slot_index(void * arg0);
 int32_t flight_set_skeleton2_ddeform_animation_target_slot_index(void * arg0, int32_t arg1);
+/* Caller owns the return value; call flight_free_skeleton2_dimport when done. */
+void * flight_parse_dragon_bones_skeleton(const char * arg0, void * arg1);
+void flight_register_all_dragon_bones_handlers(void * arg0);
+/* Caller owns the return value; call flight_free_skeleton2_dimport when done. */
+void * flight_parse_dragon_bones_skeleton_with_registry(const char * arg0, void * arg1, void * arg2);
+/* Caller owns the return value; call flight_free_dragon_bones_registry when done. */
+void * flight_create_dragon_bones_registry(void);
+bool flight_is_readable_dragon_bones(const char * arg0);
+/* Caller owns the return value; call flight_free_requirement_set when done. */
+void * flight_parse_dragon_bones_requirements(const char * arg0);
+void flight_register_dragon_bones_section_handlers(void * arg0);
+void flight_register_dragon_bones_timeline_handlers(void * arg0);
+/* Caller owns the return value; call flight_free_skeleton2_djson_analysis when done. */
+void * flight_analyze_skeleton_2d_json(const char * arg0);
+bool flight_unregister_skeleton_2d_json_analyzer(const char * arg0);
+/* Caller owns the return value; call flight_free_skeleton2_dimport when done. */
+void * flight_parse_spine_skeleton_binary(void * arg0, size_t arg1, void * arg2);
+void flight_register_all_spine_binary_handlers(void * arg0);
+/* Caller owns the return value; call flight_free_skeleton2_dimport when done. */
+void * flight_parse_spine_skeleton_binary_with_registry(void * arg0, size_t arg1, void * arg2, void * arg3);
+float flight_clamp_spine_binary_unit(float arg0);
+void flight_skip_spine_binary_curve_frames(void * arg0, size_t arg1, size_t arg2, size_t arg3);
+void flight_skip_spine_binary_curve_tag(void * arg0, size_t arg1);
+void flight_tally(void * arg0, const char * arg1);
+/* Caller owns the return value; call flight_free_owned_byte_reader when done. */
+void * flight_create_spine_binary_reader(void * arg0, size_t arg1);
+bool flight_has_spine_binary_bytes(void * arg0, size_t arg1);
+bool flight_is_spine_binary_reader_overrun(void * arg0);
+bool flight_read_spine_binary_boolean(void * arg0);
+uint8_t flight_read_spine_binary_byte(void * arg0);
+float flight_read_spine_binary_float(void * arg0);
+int32_t flight_read_spine_binary_int(void * arg0);
+int32_t flight_read_spine_binary_signed_varint(void * arg0);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_read_spine_binary_string(void * arg0);
+uint16_t flight_read_spine_binary_unsigned_short(void * arg0);
+uint32_t flight_read_spine_binary_varint(void * arg0);
+void flight_skip_spine_binary_bytes(void * arg0, size_t arg1);
+/* Caller owns the return value; call flight_free_spine_binary_registry when done. */
+void * flight_create_spine_binary_registry(void);
+bool flight_is_readable_spine_binary(void * arg0, size_t arg1);
+/* Caller owns the return value; call flight_free_requirement_set when done. */
+void * flight_parse_spine_binary_requirements(void * arg0, size_t arg1);
+void flight_register_spine_binary_section_handlers(void * arg0);
+void flight_register_spine_binary_timeline_handlers(void * arg0);
+/* Caller owns the return value; call flight_free_spine_binary_version_failure when done. */
+void * flight_explain_spine_binary_version_failure(void * arg0, size_t arg1);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_get_spine_binary_version(void * arg0, size_t arg1);
+/* Caller owns the return value; call flight_free_skeleton2_dimport when done. */
+void * flight_parse_spine_skeleton_binary_versioned(void * arg0, size_t arg1, void * arg2);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_to_spine_binary_layout_key(const char * arg0);
+bool flight_resolve_spine_draw_ordering(void * arg0, void * arg1, size_t arg2, int32_t arg3);
+/* Caller owns the return value; call flight_free_skeleton2_dimport when done. */
+void * flight_parse_spine_skeleton(const char * arg0, void * arg1);
+void flight_register_all_spine_json_handlers(void * arg0);
+/* Caller owns the return value; call flight_free_spine_json_registry when done. */
+void * flight_create_spine_json_registry(void);
+bool flight_is_readable_spine_json(const char * arg0);
+/* Caller owns the return value; call flight_free_requirement_set when done. */
+void * flight_parse_spine_json_requirements(const char * arg0);
+void flight_register_spine_json_section_handlers(void * arg0);
+void flight_register_spine_json_timeline_handlers(void * arg0);
+/* Caller owns the return value; call flight_free_skeleton2_dimport when done. */
+void * flight_parse_spine_skeleton_with_registry(const char * arg0, void * arg1, void * arg2);
+float flight_clamp_unit(float arg0);
 size_t flight_get_skeleton3_dvalidation_diagnostic_joint_count(void * arg0);
 size_t flight_set_skeleton3_dvalidation_diagnostic_joint_count(void * arg0, size_t arg1);
 size_t flight_get_skeleton3_dvalidation_diagnostic_inverse_bind_matrices_length(void * arg0);
 size_t flight_set_skeleton3_dvalidation_diagnostic_inverse_bind_matrices_length(void * arg0, size_t arg1);
 size_t flight_get_skeleton3_dvalidation_diagnostic_expected_inverse_bind_matrices_length(void * arg0);
 size_t flight_set_skeleton3_dvalidation_diagnostic_expected_inverse_bind_matrices_length(void * arg0, size_t arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_skeleton3_dvalidation_diagnostic_message(void * arg0);
 void flight_field_set_skeleton3_dvalidation_diagnostic_message(void * arg0, void * arg1, size_t arg2);
 bool flight_get_skeleton3_dguard_state_enabled(void * arg0);
 bool flight_set_skeleton3_dguard_state_enabled(void * arg0, bool arg1);
-void * flight_create_snapshot_guard_state(void);
 void flight_disable_snapshot_guards(void * arg0);
-void flight_enable_snapshot_guards(void * arg0, void * arg1, void * arg2, void * arg3);
+void flight_enable_snapshot_guards(void * arg0, void * arg1, double (*arg2)(void *), void * arg3);
 bool flight_equals_snapshot(void * arg0, void * arg1);
+bool flight_are_socket_guards_enabled(void * arg0);
+void flight_disable_socket_guards(void * arg0);
+void flight_enable_socket_guards(void * arg0, void * arg1, double (*arg2)(void *), void * arg3);
+/* Caller owns the return value; call flight_free_socket_send_failure_explanation when done. */
+void * flight_explain_socket_send_failure(void * arg0);
+/* Caller owns the return value; call flight_free_socket_ref when done. */
+void * flight_create_socket(void * arg0, void * arg1, void * arg2);
+void flight_attach_socket(void * arg0);
+void flight_close_socket(void * arg0, void * arg1, int32_t arg2, const char * arg3);
+void flight_detach_socket(void * arg0);
+void flight_dispose_socket(void * arg0);
+/* Caller owns the return value; call flight_free_socket_signals_ref when done. */
+void * flight_enable_socket_signals(void * arg0, void * arg1);
+uint32_t flight_get_socket_ready_state(void * arg0);
+/* Caller owns the return value; call flight_free_tcp_socket_connection when done. */
+void * flight_open_tcp_socket(void * arg0, void * arg1);
+bool flight_send_socket_message(void * arg0, void * arg1, void * arg2);
+bool flight_get_socket_message_binary(void * arg0);
+bool flight_set_socket_message_binary(void * arg0, bool arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_socket_options_url(void * arg0);
+void flight_field_set_socket_options_url(void * arg0, void * arg1, size_t arg2);
+int32_t flight_get_socket_close_info_code(void * arg0);
+int32_t flight_set_socket_close_info_code(void * arg0, int32_t arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_socket_close_info_reason(void * arg0);
+void flight_field_set_socket_close_info_reason(void * arg0, void * arg1, size_t arg2);
+bool flight_get_socket_close_info_was_clean(void * arg0);
+bool flight_set_socket_close_info_was_clean(void * arg0, bool arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_tcp_socket_options_host(void * arg0);
+void flight_field_set_tcp_socket_options_host(void * arg0, void * arg1, size_t arg2);
+int32_t flight_get_tcp_socket_options_port(void * arg0);
+int32_t flight_set_tcp_socket_options_port(void * arg0, int32_t arg1);
+bool flight_get_socket_runtime_delivering(void * arg0);
+bool flight_set_socket_runtime_delivering(void * arg0, bool arg1);
+bool flight_get_socket_runtime_disposed(void * arg0);
+bool flight_set_socket_runtime_disposed(void * arg0, bool arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_socket_url(void * arg0);
+void flight_field_set_socket_url(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_socket_send_failure_explanation_url(void * arg0);
+void flight_field_set_socket_send_failure_explanation_url(void * arg0, void * arg1, size_t arg2);
+bool flight_get_socket_guard_state_enabled(void * arg0);
+bool flight_set_socket_guard_state_enabled(void * arg0, bool arg1);
+/* Caller owns the return value; call flight_free_spatial_index_backend3_d when done. */
 void * flight_create_bvh_spatial_backend_3d(float arg0);
+/* Caller owns the return value; call flight_free_spatial_indexing_explanation when done. */
 void * flight_explain_spatial_indexing_2d(void * arg0, int32_t arg1);
+/* Caller owns the return value; call flight_free_spatial_indexing_explanation when done. */
 void * flight_explain_spatial_indexing_3d(void * arg0, int32_t arg1);
+/* Caller owns the return value; call flight_free_string when done. */
 char * flight_format_spatial_indexing_notice(void * arg0);
+/* Caller owns the return value; call flight_free_spring when done. */
 void * flight_create_spring(float arg0, float arg1);
 void flight_add_spring_impulse(void * arg0, float arg1);
 bool flight_is_spring_settled(void * arg0, float arg1, float arg2, float arg3);
 void flight_reset_spring(void * arg0, float arg1, float arg2);
 void flight_update_spring(void * arg0, float arg1, void * arg2, float arg3);
 void flight_update_spring_angle(void * arg0, float arg1, float arg2, void * arg3, float arg4);
+/* Caller owns the return value; call flight_free_spring2_d when done. */
 void * flight_create_spring2d(float arg0, float arg1, float arg2, float arg3);
 void flight_add_spring_impulse_2d(void * arg0, float arg1, float arg2);
 bool flight_is_spring2d_settled(void * arg0, float arg1, float arg2, float arg3, float arg4);
 void flight_reset_spring2d(void * arg0, float arg1, float arg2, float arg3, float arg4);
 void flight_update_spring2d(void * arg0, float arg1, float arg2, void * arg3, float arg4);
+/* Caller owns the return value; call flight_free_spring3_d when done. */
 void * flight_create_spring3d(float arg0, float arg1, float arg2, float arg3, float arg4, float arg5);
 void flight_add_spring_impulse_3d(void * arg0, float arg1, float arg2, float arg3);
 bool flight_is_spring3d_settled(void * arg0, float arg1, float arg2, float arg3, float arg4, float arg5);
 void flight_reset_spring3d(void * arg0, float arg1, float arg2, float arg3, float arg4, float arg5, float arg6);
 void flight_update_spring3d(void * arg0, float arg1, float arg2, float arg3, void * arg4, float arg5);
+/* Caller owns the return value; call flight_free_spring_config when done. */
 void * flight_create_spring_config(float arg0, float arg1);
+/* Caller owns the return value; call flight_free_spring_config when done. */
 void * flight_create_spring_config_from_physical(float arg0, float arg1, float arg2);
 float flight_get_spring_value(void * arg0);
 float flight_set_spring_value(void * arg0, float arg1);
@@ -6145,24 +8961,38 @@ float flight_get_spring_config_damping_ratio(void * arg0);
 float flight_set_spring_config_damping_ratio(void * arg0, float arg1);
 float flight_get_spring_config_frequency(void * arg0);
 float flight_set_spring_config_frequency(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_spritesheet when done. */
 void * flight_create_spritesheet(void);
+/* Caller owns the return value; call flight_free_spritesheet when done. */
 void * flight_clone_spritesheet(void * arg0);
+/* Caller owns the return value; call flight_free_spritesheet_animation_ref when done. */
 void * flight_get_spritesheet_animation(void * arg0, const char * arg1);
+/* Caller owns the return value; call flight_free_spritesheet_animation_ref when done. */
 void * flight_create_spritesheet_animation(void);
+/* Caller owns the return value; call flight_free_spritesheet_animation_ref when done. */
 void * flight_create_spritesheet_animation_from_frame_names(void * arg0, void * arg1, void * arg2);
-char * flight_get_spritesheet_animation_direction_string(uint32_t arg0);
-int32_t flight_parse_spritesheet_animation_direction(const char * arg0);
+/* Caller owns the return value; call flight_free_spritesheet_animation_data when done. */
 void * flight_create_spritesheet_animation_data(void);
+/* Caller owns the return value; call flight_free_spritesheet_data when done. */
 void * flight_create_spritesheet_data(void);
+/* Caller owns the return value; call flight_free_spritesheet_frame_data when done. */
 void * flight_create_spritesheet_frame_data(void);
+/* Caller owns the return value; call flight_free_spritesheet_frame_ref when done. */
 void * flight_create_spritesheet_frame(void);
+/* Caller owns the return value; call flight_free_spritesheet when done. */
 void * flight_create_spritesheet_from_data(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_spritesheet when done. */
 void * flight_create_spritesheet_from_grid(void * arg0);
+/* Caller owns the return value; call flight_free_spritesheet_player_ref when done. */
 void * flight_create_spritesheet_player(void);
+/* Caller owns the return value; call flight_free_spritesheet_player_ref when done. */
 void * flight_acquire_spritesheet_player(void * arg0);
+/* Caller owns the return value; call flight_free_spritesheet_player_ref when done. */
 void * flight_clone_spritesheet_player(void * arg0);
 void flight_dispose_spritesheet_player(void * arg0);
+/* Caller owns the return value; call flight_free_spritesheet_frame_ref when done. */
 void * flight_get_spritesheet_player_frame(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_spritesheet_frame_ref when done. */
 void * flight_get_spritesheet_player_frame_at(void * arg0, void * arg1, double arg2);
 void flight_pause_spritesheet_player(void * arg0);
 void flight_play_spritesheet_animation(void * arg0, void * arg1, int32_t arg2);
@@ -6173,13 +9003,12 @@ void flight_seek_spritesheet_player_to_frame(void * arg0, double arg1);
 void flight_seek_spritesheet_player_to_time(void * arg0, double arg1);
 void flight_stop_spritesheet_player(void * arg0);
 bool flight_update_spritesheet_player(void * arg0, double arg1);
-char * flight_get_spritesheet_validation_severity_string(uint32_t arg0);
-int32_t flight_parse_spritesheet_parse_diagnostic_severity(const char * arg0);
-int32_t flight_parse_spritesheet_validation_severity(const char * arg0);
 bool flight_validate_spritesheet(void * arg0, void * arg1);
 bool flight_validate_spritesheet_data(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_spritesheet_frame_pattern_name_value(void * arg0);
 void flight_field_set_spritesheet_frame_pattern_name_value(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_spritesheet_validation_diagnostic_message(void * arg0);
 void flight_field_set_spritesheet_validation_diagnostic_message(void * arg0, void * arg1, size_t arg2);
 int32_t flight_get_spritesheet_frame_id(void * arg0);
@@ -6200,6 +9029,7 @@ float flight_get_spritesheet_animation_origin_y(void * arg0);
 float flight_set_spritesheet_animation_origin_y(void * arg0, float arg1);
 float flight_get_spritesheet_frame_data_height(void * arg0);
 float flight_set_spritesheet_frame_data_height(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_spritesheet_frame_data_name(void * arg0);
 void flight_field_set_spritesheet_frame_data_name(void * arg0, void * arg1, size_t arg2);
 float flight_get_spritesheet_frame_data_offset_x(void * arg0);
@@ -6222,12 +9052,14 @@ double flight_get_spritesheet_animation_data_frame_duration(void * arg0);
 double flight_set_spritesheet_animation_data_frame_duration(void * arg0, double arg1);
 int32_t flight_get_spritesheet_animation_data_repeat_count(void * arg0);
 int32_t flight_set_spritesheet_animation_data_repeat_count(void * arg0, int32_t arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_spritesheet_animation_data_name(void * arg0);
 void flight_field_set_spritesheet_animation_data_name(void * arg0, void * arg1, size_t arg2);
 float flight_get_spritesheet_animation_data_origin_x(void * arg0);
 float flight_set_spritesheet_animation_data_origin_x(void * arg0, float arg1);
 float flight_get_spritesheet_animation_data_origin_y(void * arg0);
 float flight_set_spritesheet_animation_data_origin_y(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_spritesheet_data_image_file(void * arg0);
 void flight_field_set_spritesheet_data_image_file(void * arg0, void * arg1, size_t arg2);
 float flight_get_spritesheet_data_image_height(void * arg0);
@@ -6246,52 +9078,89 @@ double flight_get_spritesheet_player_speed(void * arg0);
 double flight_set_spritesheet_player_speed(void * arg0, double arg1);
 double flight_get_spritesheet_player_frame_index(void * arg0);
 double flight_set_spritesheet_player_frame_index(void * arg0, double arg1);
+/* Caller owns the return value; call flight_free_spritesheet_data when done. */
+void * flight_parse_aseprite_spritesheet(const char * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_aseprite_parsed when done. */
+void * flight_parse_aseprite_spritesheet_document(const char * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_string when done. */
 char * flight_serialize_aseprite_spritesheet(void * arg0, void * arg1, void * arg2);
+/* Caller owns the return value; call flight_free_spritesheet_data when done. */
+void * flight_parse_cocos_plist_spritesheet(const char * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_cocos_plist_parsed when done. */
+void * flight_parse_cocos_plist_spritesheet_document(const char * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_string when done. */
 char * flight_serialize_cocos_plist_spritesheet(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_string when done. */
 char * flight_format_libgdx_atlas(void * arg0);
-void * flight_create_spritesheet_format_registry(void);
+/* Caller owns the return value; call flight_free_spritesheet_data when done. */
+void * flight_parse_libgdx_atlas_spritesheet(const char * arg0, void * arg1, void * arg2);
 void flight_apply_spritesheet_import_options(void * arg0, void * arg1);
+/* Borrowed return; do not free; valid while the registry input handle remains alive. */
 void * flight_aseprite_spritesheet_format(void * arg0);
+/* Borrowed return; do not free; valid while the registry input handle remains alive. */
 void * flight_cocos_plist_spritesheet_format(void * arg0);
+/* Caller owns the return value; call flight_free_spritesheet_format_kind when done. */
 void * flight_detect_spritesheet_format(void * arg0, const char * arg1);
 void flight_get_spritesheet_format_kinds(void * arg0, void * arg1);
+/* Borrowed return; do not free; valid while the registry input handle remains alive. */
 void * flight_libgdx_atlas_spritesheet_format(void * arg0);
+/* Caller owns the return value; call flight_free_spritesheet_data when done. */
 void * flight_parse_spritesheet(void * arg0, const char * arg1, void * arg2, void * arg3);
+/* Borrowed return; do not free; valid while the registry input handle remains alive. */
 void * flight_starling_spritesheet_format(void * arg0);
+/* Borrowed return; do not free; valid while the registry input handle remains alive. */
 void * flight_texture_packer_spritesheet_format(void * arg0);
 void flight_unregister_spritesheet_format(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_string when done. */
 char * flight_serialize_starling_spritesheet(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_spritesheet_data when done. */
+void * flight_parse_texture_packer_spritesheet(const char * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_texture_packer_parsed when done. */
+void * flight_parse_texture_packer_spritesheet_document(const char * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_string when done. */
 char * flight_serialize_texture_packer_spritesheet(void * arg0, void * arg1, void * arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_aseprite_layer_blend_mode(void * arg0);
 void flight_field_set_aseprite_layer_blend_mode(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_aseprite_layer_name(void * arg0);
 void flight_field_set_aseprite_layer_name(void * arg0, void * arg1, size_t arg2);
 float flight_get_aseprite_layer_opacity(void * arg0);
 float flight_set_aseprite_layer_opacity(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_aseprite_meta_app(void * arg0);
 void flight_field_set_aseprite_meta_app(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_aseprite_meta_format(void * arg0);
 void flight_field_set_aseprite_meta_format(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_aseprite_meta_image(void * arg0);
 void flight_field_set_aseprite_meta_image(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_aseprite_meta_version(void * arg0);
 void flight_field_set_aseprite_meta_version(void * arg0, void * arg1, size_t arg2);
 float flight_get_aseprite_array_frame_duration(void * arg0);
 float flight_set_aseprite_array_frame_duration(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_aseprite_array_frame_filename(void * arg0);
 void flight_field_set_aseprite_array_frame_filename(void * arg0, void * arg1, size_t arg2);
 bool flight_get_aseprite_array_frame_rotated(void * arg0);
 bool flight_set_aseprite_array_frame_rotated(void * arg0, bool arg1);
 bool flight_get_aseprite_array_frame_trimmed(void * arg0);
 bool flight_set_aseprite_array_frame_trimmed(void * arg0, bool arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_aseprite_named_frame_name(void * arg0);
 void flight_field_set_aseprite_named_frame_name(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_cocos_plist_frame_frame(void * arg0);
 void flight_field_set_cocos_plist_frame_frame(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_cocos_plist_frame_sprite_offset(void * arg0);
 void flight_field_set_cocos_plist_frame_sprite_offset(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_cocos_plist_frame_sprite_size(void * arg0);
 void flight_field_set_cocos_plist_frame_sprite_size(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_cocos_plist_frame_sprite_source_size(void * arg0);
 void flight_field_set_cocos_plist_frame_sprite_source_size(void * arg0, void * arg1, size_t arg2);
 bool flight_get_cocos_plist_frame_sprite_trimmed(void * arg0);
@@ -6300,12 +9169,15 @@ bool flight_get_cocos_plist_frame_texture_rotated(void * arg0);
 bool flight_set_cocos_plist_frame_texture_rotated(void * arg0, bool arg1);
 int32_t flight_get_cocos_plist_metadata_format(void * arg0);
 int32_t flight_set_cocos_plist_metadata_format(void * arg0, int32_t arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_cocos_plist_metadata_size(void * arg0);
 void flight_field_set_cocos_plist_metadata_size(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_cocos_plist_metadata_texture_file_name(void * arg0);
 void flight_field_set_cocos_plist_metadata_texture_file_name(void * arg0, void * arg1, size_t arg2);
 float flight_get_starling_sub_texture_height(void * arg0);
 float flight_set_starling_sub_texture_height(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_starling_sub_texture_name(void * arg0);
 void flight_field_set_starling_sub_texture_name(void * arg0, void * arg1, size_t arg2);
 float flight_get_starling_sub_texture_width(void * arg0);
@@ -6314,12 +9186,15 @@ float flight_get_starling_sub_texture_x(void * arg0);
 float flight_set_starling_sub_texture_x(void * arg0, float arg1);
 float flight_get_starling_sub_texture_y(void * arg0);
 float flight_set_starling_sub_texture_y(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_starling_document_image_path(void * arg0);
 void flight_field_set_starling_document_image_path(void * arg0, void * arg1, size_t arg2);
 bool flight_are_statechart_guards_enabled(void * arg0);
 void flight_disable_statechart_guards(void * arg0);
+/* Caller owns the return value; call flight_free_statechart_instance_raw_ref when done. */
 void * flight_create_statechart_instance(void * arg0);
 int32_t flight_advance_statechart_instance(void * arg0, double arg1);
+/* Caller owns the return value; call flight_free_statechart_transition_explanation when done. */
 void * flight_explain_statechart_transition(void * arg0, int32_t arg1);
 void flight_fire_statechart_trigger(void * arg0, int32_t arg1);
 int32_t flight_get_statechart_input_index(void * arg0, const char * arg1);
@@ -6328,7 +9203,9 @@ int32_t flight_get_statechart_region_state(void * arg0, int32_t arg1);
 void flight_set_statechart_boolean_input(void * arg0, int32_t arg1, bool arg2);
 void flight_set_statechart_number_input(void * arg0, int32_t arg1, double arg2);
 void flight_set_statechart_region_duration(void * arg0, int32_t arg1, double arg2);
+/* Caller owns the return value; call flight_free_statechart_signals when done. */
 void * flight_enable_statechart_signals(void * arg0);
+/* Caller owns the return value; call flight_free_statechart_signals when done. */
 void * flight_get_statechart_signals(void * arg0);
 int32_t flight_get_statechart_condition_input_index(void * arg0);
 int32_t flight_set_statechart_condition_input_index(void * arg0, int32_t arg1);
@@ -6342,6 +9219,7 @@ int32_t flight_get_statechart_transition_target_state_index(void * arg0);
 int32_t flight_set_statechart_transition_target_state_index(void * arg0, int32_t arg1);
 double flight_get_statechart_input_initial_value(void * arg0);
 double flight_set_statechart_input_initial_value(void * arg0, double arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_statechart_state_kind(void * arg0);
 void flight_field_set_statechart_state_kind(void * arg0, void * arg1, size_t arg2);
 int32_t flight_get_statechart_region_initial_state_index(void * arg0);
@@ -6358,29 +9236,74 @@ int32_t flight_get_statechart_transition_explanation_target_state_index(void * a
 int32_t flight_set_statechart_transition_explanation_target_state_index(void * arg0, int32_t arg1);
 int32_t flight_get_statechart_transition_explanation_transition_index(void * arg0);
 int32_t flight_set_statechart_transition_explanation_transition_index(void * arg0, int32_t arg1);
+/* Caller owns the return value; call flight_free_status_bar when done. */
+void * flight_create_status_bar(void);
+void flight_attach_status_bar(void * arg0, void * arg1, void * arg2);
+void flight_clear_status_bar_style_stack(void * arg0, void * arg1);
+void flight_detach_status_bar(void * arg0);
+void flight_dispose_status_bar(void * arg0);
+float flight_get_status_bar_height(void * arg0);
+void flight_get_status_bar_info(void * arg0, void * arg1);
+bool flight_has_status_bar_style_entry(void * arg0, void * arg1, void * arg2);
+void flight_pop_status_bar_style_entry(void * arg0, void * arg1, void * arg2);
+/* Caller owns the return value; call flight_free_status_bar_style_entry_handle when done. */
+void * flight_push_status_bar_style_entry(void * arg0, void * arg1, void * arg2, void * arg3, void * arg4, void * arg5, void * arg6);
+void flight_set_status_bar_color(void * arg0, uint32_t arg1, int32_t arg2);
+void flight_set_status_bar_overlays_content(void * arg0, bool arg1);
+void flight_set_status_bar_style(void * arg0, uint32_t arg1);
+void flight_set_status_bar_visible(void * arg0, bool arg1, int32_t arg2);
+uint32_t flight_get_status_bar_info_color(void * arg0);
+uint32_t flight_set_status_bar_info_color(void * arg0, uint32_t arg1);
+float flight_get_status_bar_info_height(void * arg0);
+float flight_set_status_bar_info_height(void * arg0, float arg1);
+bool flight_get_status_bar_info_overlays_content(void * arg0);
+bool flight_set_status_bar_info_overlays_content(void * arg0, bool arg1);
+bool flight_get_status_bar_info_visible(void * arg0);
+bool flight_set_status_bar_info_visible(void * arg0, bool arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_abort_error_name(void * arg0);
+void flight_field_set_abort_error_name(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_abort_error_message(void * arg0);
+void flight_field_set_abort_error_message(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_canvas_surface_ref when done. */
+void * flight_create_canvas_surface(void * arg0, void * arg1, float arg2, float arg3, void * arg4);
+void flight_destroy_canvas_surface(void * arg0, void * arg1);
+void flight_resize_surface(void * arg0, void * arg1, float arg2, float arg3);
+void flight_set_surface_display_size(void * arg0, void * arg1, float arg2, float arg3);
+void flight_attach_window_render_state(void * arg0, void * arg1, void * arg2);
+void flight_detach_window_render_state(void * arg0);
+/* Caller owns the return value; call flight_free_text_label_content_explanation when done. */
 void * flight_explain_text_label_content(void * arg0);
+/* Caller owns the return value; call flight_free_native_text_ref when done. */
 void * flight_create_native_text(void);
 void flight_compute_native_text_local_bounds_rectangle(void * arg0, void * arg1);
 float flight_get_native_text_measured_height(void * arg0);
 float flight_get_native_text_measured_width(void * arg0);
+/* Caller owns the return value; call flight_free_string when done. */
 char * flight_get_native_text_string(void * arg0);
+/* Caller owns the return value; call flight_free_native_text_style_ref when done. */
 void * flight_get_native_text_style(void * arg0);
 void flight_patch_native_text_style(void * arg0, void * arg1);
-void flight_set_native_text_auto_size(void * arg0, void * arg1);
+void flight_set_native_text_auto_size(void * arg0, uint32_t arg1);
 void flight_set_native_text_height(void * arg0, float arg1);
 void flight_set_native_text_string(void * arg0, const char * arg1);
-void flight_set_native_text_style(void * arg0, void * arg1);
-void flight_set_native_text_vertical_align(void * arg0, void * arg1);
+void flight_set_native_text_style(void * arg0, void * arg1 /* cloned; caller retains its handle */);
+void flight_set_native_text_vertical_align(void * arg0, uint32_t arg1);
 void flight_set_native_text_width(void * arg0, float arg1);
 void flight_append_rich_text_string(void * arg0, const char * arg1);
-void * flight_build_rich_text_layout_params(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_text_layout_params when done. */
+void * flight_build_rich_text_layout_params(void * arg0, void * arg1 /* cloned; caller retains its handle */);
 void flight_clear_rich_text_format_ranges(void * arg0);
 void flight_compute_rich_text_local_bounds_rectangle(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_string when done. */
 char * flight_dispatch_rich_text_link_at_point(void * arg0, float arg1, float arg2);
 void flight_dispatch_rich_text_wheel(void * arg0, float arg1, void * arg2);
+/* Caller owns the return value; call flight_free_text_field_signals_ref when done. */
 void * flight_enable_text_field_signals(void * arg0);
 float flight_get_rich_text_bottom_scroll_v(void * arg0);
 int32_t flight_get_rich_text_char_index_at_point(void * arg0, float arg1, float arg2);
+/* Caller owns the return value; call flight_free_text_format_ref when done. */
 void * flight_get_rich_text_default_text_format(void * arg0);
 void flight_get_rich_text_format_range_at(void * arg0, void * arg1, size_t arg2);
 bool flight_get_rich_text_format_range_by_index(void * arg0, void * arg1, size_t arg2);
@@ -6388,13 +9311,17 @@ size_t flight_get_rich_text_format_range_count(void * arg0);
 void flight_get_rich_text_format_ranges_in(void * arg0, void * arg1, size_t arg2, size_t arg3);
 size_t flight_get_rich_text_length(void * arg0);
 size_t flight_get_rich_text_line_count(void * arg0);
+/* Caller owns the return value; call flight_free_text_line_metrics when done. */
 void * flight_get_rich_text_line_metrics(void * arg0, size_t arg1);
 float flight_get_rich_text_max_scroll_h(void * arg0);
 float flight_get_rich_text_max_scroll_v(void * arg0);
+/* Caller owns the return value; call flight_free_string when done. */
 char * flight_get_rich_text_password_character(void * arg0);
+/* Caller owns the return value; call flight_free_string when done. */
 char * flight_get_rich_text_string(void * arg0);
 float flight_get_rich_text_text_height(void * arg0);
 float flight_get_rich_text_text_width(void * arg0);
+/* Caller owns the return value; call flight_free_text_field_signals_ref when done. */
 void * flight_get_text_field_signals(void * arg0);
 void flight_insert_rich_text_string(void * arg0, int32_t arg1, const char * arg2);
 void flight_remove_rich_text_format_ranges_in(void * arg0, size_t arg1, size_t arg2);
@@ -6405,8 +9332,8 @@ void flight_set_rich_text_border(void * arg0, bool arg1);
 void flight_set_rich_text_border_color(void * arg0, uint32_t arg1);
 void flight_set_rich_text_condense_white(void * arg0, bool arg1);
 void flight_set_rich_text_content(void * arg0, void * arg1);
-void flight_set_rich_text_default_text_format(void * arg0, void * arg1);
-void flight_set_rich_text_format_range(void * arg0, void * arg1, int64_t arg2, int64_t arg3);
+void flight_set_rich_text_default_text_format(void * arg0, void * arg1 /* cloned; caller retains its handle */);
+void flight_set_rich_text_format_range(void * arg0, void * arg1 /* cloned; caller retains its handle */, int64_t arg2, int64_t arg3);
 void flight_set_rich_text_height(void * arg0, float arg1);
 void flight_set_rich_text_max_chars(void * arg0, int32_t arg1);
 void flight_set_rich_text_mouse_wheel_enabled(void * arg0, bool arg1);
@@ -6416,30 +9343,36 @@ void flight_set_rich_text_scroll_v(void * arg0, float arg1, void * arg2);
 void flight_set_rich_text_selectable(void * arg0, bool arg1);
 void flight_set_rich_text_string(void * arg0, const char * arg1);
 void flight_set_rich_text_text_color(void * arg0, uint32_t arg1);
-void flight_set_rich_text_vertical_align(void * arg0, void * arg1);
+void flight_set_rich_text_vertical_align(void * arg0, uint32_t arg1);
 void flight_set_rich_text_width(void * arg0, float arg1);
 void flight_set_rich_text_word_wrap(void * arg0, bool arg1);
+/* Caller owns the return value; call flight_free_string when done. */
 char * flight_compute_text_format_font_string(void * arg0);
 void flight_append_text_label_string(void * arg0, const char * arg1);
 void flight_compute_text_label_local_bounds_rectangle(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_text_format_ref when done. */
 void * flight_get_text_label_format(void * arg0);
+/* Caller owns the return value; call flight_free_string when done. */
 char * flight_get_text_label_string(void * arg0);
-void flight_set_text_label_auto_size(void * arg0, void * arg1);
-void flight_set_text_label_format(void * arg0, void * arg1);
+void flight_set_text_label_auto_size(void * arg0, uint32_t arg1);
+void flight_set_text_label_format(void * arg0, void * arg1 /* cloned; caller retains its handle */);
 void flight_set_text_label_height(void * arg0, float arg1);
 void flight_set_text_label_string(void * arg0, const char * arg1);
-void flight_set_text_label_vertical_align(void * arg0, void * arg1);
+void flight_set_text_label_vertical_align(void * arg0, uint32_t arg1);
 void flight_set_text_label_width(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_text_layout_result_ref when done. */
 void * flight_get_text_layout(void * arg0);
 void flight_get_text_layout_metrics(void * arg0, void * arg1);
 float flight_get_text_label_data_height(void * arg0);
 float flight_set_text_label_data_height(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_text_label_data_text(void * arg0);
 void flight_field_set_text_label_data_text(void * arg0, void * arg1, size_t arg2);
 float flight_get_text_label_data_width(void * arg0);
 float flight_set_text_label_data_width(void * arg0, float arg1);
 float flight_get_native_text_data_height(void * arg0);
 float flight_set_native_text_data_height(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_native_text_data_text(void * arg0);
 void flight_field_set_native_text_data_text(void * arg0, void * arg1, size_t arg2);
 float flight_get_native_text_data_width(void * arg0);
@@ -6468,6 +9401,7 @@ float flight_get_rich_text_data_scroll_v(void * arg0);
 float flight_set_rich_text_data_scroll_v(void * arg0, float arg1);
 bool flight_get_rich_text_data_selectable(void * arg0);
 bool flight_set_rich_text_data_selectable(void * arg0, bool arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_rich_text_data_text(void * arg0);
 void flight_field_set_rich_text_data_text(void * arg0, void * arg1, size_t arg2);
 uint32_t flight_get_rich_text_data_text_color(void * arg0);
@@ -6484,8 +9418,10 @@ size_t flight_get_text_input_history_entry_selection_index_after(void * arg0);
 size_t flight_set_text_input_history_entry_selection_index_after(void * arg0, size_t arg1);
 size_t flight_get_text_input_history_entry_selection_index_before(void * arg0);
 size_t flight_set_text_input_history_entry_selection_index_before(void * arg0, size_t arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_text_input_history_entry_text_after(void * arg0);
 void flight_field_set_text_input_history_entry_text_after(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_text_input_history_entry_text_before(void * arg0);
 void flight_field_set_text_input_history_entry_text_before(void * arg0, void * arg1, size_t arg2);
 bool flight_get_text_input_state_always_show_selection(void * arg0);
@@ -6506,8 +9442,10 @@ int32_t flight_get_text_input_state_history_index(void * arg0);
 int32_t flight_set_text_input_state_history_index(void * arg0, int32_t arg1);
 size_t flight_get_text_input_state_history_limit(void * arg0);
 size_t flight_set_text_input_state_history_limit(void * arg0, size_t arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_text_input_state_password_character(void * arg0);
 void flight_field_set_text_input_state_password_character(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_text_input_state_restrict(void * arg0);
 void flight_field_set_text_input_state_restrict(void * arg0, void * arg1, size_t arg2);
 float flight_get_text_input_state_selection_alpha(void * arg0);
@@ -6516,10 +9454,13 @@ uint32_t flight_get_text_input_state_selection_color(void * arg0);
 uint32_t flight_set_text_input_state_selection_color(void * arg0, uint32_t arg1);
 size_t flight_get_text_input_state_selection_index(void * arg0);
 size_t flight_set_text_input_state_selection_index(void * arg0, size_t arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_text_field_change_event_previous_text(void * arg0);
 void flight_field_set_text_field_change_event_previous_text(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_text_field_change_event_text(void * arg0);
 void flight_field_set_text_field_change_event_text(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_text_field_link_event_url(void * arg0);
 void flight_field_set_text_field_link_event_url(void * arg0, void * arg1, size_t arg2);
 float flight_get_text_field_link_event_x(void * arg0);
@@ -6536,17 +9477,197 @@ float flight_get_text_field_scroll_event_scroll_v(void * arg0);
 float flight_set_text_field_scroll_event_scroll_v(void * arg0, float arg1);
 bool flight_get_text_label_content_explanation_agreement(void * arg0);
 bool flight_set_text_label_content_explanation_agreement(void * arg0, bool arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_text_label_content_explanation_live_string(void * arg0);
 void flight_field_set_text_label_content_explanation_live_string(void * arg0, void * arg1, size_t arg2);
 uint32_t flight_get_text_label_content_explanation_revision(void * arg0);
 uint32_t flight_set_text_label_content_explanation_revision(void * arg0, uint32_t arg1);
 int64_t flight_resolve_markup_hex_color(const char * arg0);
+/* Caller owns the return value; call flight_free_string when done. */
 char * flight_format_text_markup(void * arg0);
 void flight_disable_text_bidi_guards(void);
-void flight_enable_text_bidi_guards(void * arg0, void * arg1, void * arg2);
+void flight_enable_text_bidi_guards(void * arg0, double (*arg1)(void *), void * arg2);
 void flight_reorder_bidi_line(void * arg0, size_t arg1, size_t arg2, size_t arg3, void * arg4);
+/* Caller owns the return value; call flight_free_selectable_rich_text_manager_ref when done. */
+void * flight_create_selectable_rich_text_manager(void);
+void flight_blur_selectable_rich_text(void * arg0);
+void flight_dispatch_selectable_rich_text_pointer_down(void * arg0, void * arg1, float arg2, float arg3, bool arg4);
+void flight_dispatch_selectable_rich_text_pointer_move(void * arg0, float arg1, float arg2);
+void flight_dispatch_selectable_rich_text_wheel(void * arg0, float arg1);
+void flight_focus_selectable_rich_text(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_get_selectable_rich_text_selection_text(void * arg0);
+void flight_disable_text_input(void * arg0);
+/* Caller owns the return value; call flight_free_text_input_state_ref when done. */
+void * flight_enable_text_input(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_text_input_state_ref when done. */
+void * flight_get_text_input_state(void * arg0);
+bool flight_has_text_input(void * arg0);
+void flight_append_text_input(void * arg0, const char * arg1);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_apply_text_input_restriction(void * arg0, const char * arg1, size_t arg2);
+bool flight_can_redo_text_input(void * arg0);
+bool flight_can_undo_text_input(void * arg0);
+void flight_clear_text_input_history(void * arg0);
+void flight_delete_text_input_backward(void * arg0);
+void flight_delete_text_input_forward(void * arg0);
+void flight_delete_text_input_word_backward(void * arg0);
+void flight_delete_text_input_word_forward(void * arg0);
+size_t flight_get_text_input_caret_index(void * arg0);
+void flight_get_text_input_caret_rectangle(void * arg0, void * arg1, void * arg2);
+size_t flight_get_text_input_character_index_at_point(void * arg0, void * arg1, float arg2, float arg3);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_get_text_input_display_text(void * arg0);
+size_t flight_get_text_input_selection_begin_index(void * arg0);
+size_t flight_get_text_input_selection_end_index(void * arg0);
+void flight_get_text_input_selection_rectangles(void * arg0, void * arg1, void * arg2);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_get_text_input_selection_text(void * arg0);
+bool flight_handle_text_input_keyboard(void * arg0, void * arg1, void * arg2);
+void flight_insert_text_input(void * arg0, const char * arg1);
+void flight_move_text_input_caret(void * arg0, int32_t arg1, bool arg2);
+void flight_move_text_input_caret_by_word(void * arg0, int32_t arg1, bool arg2);
+void flight_move_text_input_caret_down(void * arg0, void * arg1, bool arg2);
+void flight_move_text_input_caret_to_line_end(void * arg0, void * arg1, bool arg2);
+void flight_move_text_input_caret_to_line_start(void * arg0, void * arg1, bool arg2);
+void flight_move_text_input_caret_up(void * arg0, void * arg1, bool arg2);
+void flight_redo_text_input(void * arg0);
+void flight_replace_selected_text_input(void * arg0, const char * arg1, void * arg2);
+void flight_replace_text_input(void * arg0, int32_t arg1, int32_t arg2, const char * arg3, void * arg4);
+void flight_scroll_text_input_caret_into_view(void * arg0, void * arg1, float arg2, float arg3);
+void flight_select_all_text_input(void * arg0);
+void flight_select_line_at_text_input_index(void * arg0, int32_t arg1);
+void flight_select_word_at_text_input_index(void * arg0, int32_t arg1);
+void flight_set_text_input_selection(void * arg0, int32_t arg1, int32_t arg2);
+void flight_undo_text_input(void * arg0);
+/* Caller owns the return value; call flight_free_text_input_manager_ref when done. */
+void * flight_create_text_input_manager(void);
+void flight_blur_text_input(void * arg0);
+/* Caller owns the return value; call flight_free_text_input_disposer when done. */
+void * flight_connect_input_to_text_input(void * arg0, void * arg1);
+bool flight_dispatch_text_input(void * arg0, const char * arg1);
+void flight_dispatch_text_input_pointer_down(void * arg0, void * arg1, float arg2, float arg3, bool arg4, int32_t arg5);
+void flight_dispatch_text_input_pointer_move(void * arg0, float arg1, float arg2);
+void flight_dispatch_text_input_wheel(void * arg0, float arg1);
+void flight_focus_text_input(void * arg0, void * arg1);
+size_t flight_get_text_input_edit_record_caret_index_after(void * arg0);
+size_t flight_set_text_input_edit_record_caret_index_after(void * arg0, size_t arg1);
+size_t flight_get_text_input_edit_record_caret_index_before(void * arg0);
+size_t flight_set_text_input_edit_record_caret_index_before(void * arg0, size_t arg1);
+size_t flight_get_text_input_edit_record_selection_index_after(void * arg0);
+size_t flight_set_text_input_edit_record_selection_index_after(void * arg0, size_t arg1);
+size_t flight_get_text_input_edit_record_selection_index_before(void * arg0);
+size_t flight_set_text_input_edit_record_selection_index_before(void * arg0, size_t arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_text_input_edit_record_text_after(void * arg0);
+void flight_field_set_text_input_edit_record_text_after(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_text_input_edit_record_text_before(void * arg0);
+void flight_field_set_text_input_edit_record_text_before(void * arg0, void * arg1, size_t arg2);
+bool flight_get_text_input_manager_enabled(void * arg0);
+bool flight_set_text_input_manager_enabled(void * arg0, bool arg1);
+/* Caller owns the return value; call flight_free_rich_text_content when done. */
+void * flight_create_rich_text_content(void);
+size_t flight_compute_rich_text_char_index_at_point(void * arg0, float arg1, float arg2);
+/* Caller owns the return value; call flight_free_text_line_metrics when done. */
+void * flight_compute_rich_text_line_metrics(void * arg0, size_t arg1);
+bool flight_get_rich_text_char_boundaries(void * arg0, void * arg1, size_t arg2);
+size_t flight_get_rich_text_first_char_in_paragraph(const char * arg0, size_t arg1);
+size_t flight_get_rich_text_line_index_at_point(void * arg0, float arg1);
+size_t flight_get_rich_text_line_index_of_char(void * arg0, size_t arg1);
+size_t flight_get_rich_text_line_length(void * arg0, size_t arg1);
+size_t flight_get_rich_text_line_offset(void * arg0, size_t arg1);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_get_rich_text_line_text(const char * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_get_rich_text_link_at_point(void * arg0, float arg1, float arg2);
+size_t flight_get_rich_text_paragraph_length(const char * arg0, size_t arg1);
+void flight_get_rich_text_selection_rectangles(void * arg0, size_t arg1, size_t arg2, void * arg3);
+float flight_compute_text_bounds_height(void * arg0, void * arg1);
+float flight_compute_text_bounds_offset_x(void * arg0, void * arg1);
+void flight_compute_text_bounds_rectangle(void * arg0, void * arg1, void * arg2);
+float flight_compute_text_bounds_width(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_text_layout_result when done. */
+void * flight_create_text_layout_result(void);
+void flight_compute_text_layout(void * arg0, void * arg1);
+bool flight_is_text_layout_truncated(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_text_layout_group when done. */
+void * flight_create_text_layout_group(void * arg0 /* cloned; caller retains its handle */);
+int32_t flight_get_text_line_break_index(void * arg0, size_t arg1, int64_t arg2);
+void flight_get_text_line_breaks(void * arg0, const char * arg1);
+/* Caller owns the return value; call flight_free_text_metrics when done. */
+void * flight_create_text_metrics(void);
+void flight_get_text_metrics(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_rich_text_content_text(void * arg0);
+void flight_field_set_rich_text_content_text(void * arg0, void * arg1, size_t arg2);
+float flight_get_text_bounds_spec_height(void * arg0);
+float flight_set_text_bounds_spec_height(void * arg0, float arg1);
+float flight_get_text_bounds_spec_width(void * arg0);
+float flight_set_text_bounds_spec_width(void * arg0, float arg1);
+float flight_get_text_layout_group_ascent(void * arg0);
+float flight_set_text_layout_group_ascent(void * arg0, float arg1);
+float flight_get_text_layout_group_descent(void * arg0);
+float flight_set_text_layout_group_descent(void * arg0, float arg1);
+size_t flight_get_text_layout_group_end_index(void * arg0);
+size_t flight_set_text_layout_group_end_index(void * arg0, size_t arg1);
+float flight_get_text_layout_group_height(void * arg0);
+float flight_set_text_layout_group_height(void * arg0, float arg1);
+float flight_get_text_layout_group_leading(void * arg0);
+float flight_set_text_layout_group_leading(void * arg0, float arg1);
+size_t flight_get_text_layout_group_line_index(void * arg0);
+size_t flight_set_text_layout_group_line_index(void * arg0, size_t arg1);
+float flight_get_text_layout_group_offset_x(void * arg0);
+float flight_set_text_layout_group_offset_x(void * arg0, float arg1);
+float flight_get_text_layout_group_offset_y(void * arg0);
+float flight_set_text_layout_group_offset_y(void * arg0, float arg1);
+size_t flight_get_text_layout_group_start_index(void * arg0);
+size_t flight_set_text_layout_group_start_index(void * arg0, size_t arg1);
+float flight_get_text_layout_group_width(void * arg0);
+float flight_set_text_layout_group_width(void * arg0, float arg1);
+float flight_get_text_layout_params_height(void * arg0);
+float flight_set_text_layout_params_height(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_text_layout_params_text(void * arg0);
+void flight_field_set_text_layout_params_text(void * arg0, void * arg1, size_t arg2);
+float flight_get_text_layout_params_width(void * arg0);
+float flight_set_text_layout_params_width(void * arg0, float arg1);
+size_t flight_get_text_layout_result_num_lines(void * arg0);
+size_t flight_set_text_layout_result_num_lines(void * arg0, size_t arg1);
+float flight_get_text_layout_result_text_height(void * arg0);
+float flight_set_text_layout_result_text_height(void * arg0, float arg1);
+float flight_get_text_layout_result_text_width(void * arg0);
+float flight_set_text_layout_result_text_width(void * arg0, float arg1);
+float flight_get_text_line_metrics_ascent(void * arg0);
+float flight_set_text_line_metrics_ascent(void * arg0, float arg1);
+float flight_get_text_line_metrics_descent(void * arg0);
+float flight_set_text_line_metrics_descent(void * arg0, float arg1);
+float flight_get_text_line_metrics_height(void * arg0);
+float flight_set_text_line_metrics_height(void * arg0, float arg1);
+float flight_get_text_line_metrics_leading(void * arg0);
+float flight_set_text_line_metrics_leading(void * arg0, float arg1);
+float flight_get_text_line_metrics_width(void * arg0);
+float flight_set_text_line_metrics_width(void * arg0, float arg1);
+float flight_get_text_line_metrics_x(void * arg0);
+float flight_set_text_line_metrics_x(void * arg0, float arg1);
+float flight_get_text_metrics_height(void * arg0);
+float flight_set_text_metrics_height(void * arg0, float arg1);
+size_t flight_get_text_metrics_num_lines(void * arg0);
+size_t flight_set_text_metrics_num_lines(void * arg0, size_t arg1);
+float flight_get_text_metrics_width(void * arg0);
+float flight_set_text_metrics_width(void * arg0, float arg1);
+float flight_get_text_selection_rectangle_height(void * arg0);
+float flight_set_text_selection_rectangle_height(void * arg0, float arg1);
+size_t flight_get_text_selection_rectangle_line_index(void * arg0);
+size_t flight_set_text_selection_rectangle_line_index(void * arg0, size_t arg1);
+float flight_get_text_selection_rectangle_width(void * arg0);
+float flight_set_text_selection_rectangle_width(void * arg0, float arg1);
+float flight_get_text_selection_rectangle_x(void * arg0);
+float flight_set_text_selection_rectangle_x(void * arg0, float arg1);
+float flight_get_text_selection_rectangle_y(void * arg0);
+float flight_set_text_selection_rectangle_y(void * arg0, float arg1);
 void flight_disable_text_segment_guards(void);
-void flight_enable_text_segment_guards(void * arg0, void * arg1, void * arg2);
+void flight_enable_text_segment_guards(void * arg0, double (*arg1)(void *), void * arg2);
 void flight_segment_graphemes(void * arg0, void * arg1, const char * arg2, const char * arg3);
 void flight_segment_sentences(void * arg0, void * arg1, const char * arg2, const char * arg3);
 void flight_segment_words(void * arg0, void * arg1, const char * arg2, const char * arg3);
@@ -6556,12 +9677,15 @@ size_t flight_get_next_word_boundary(void * arg0, const char * arg1, int32_t arg
 size_t flight_get_previous_grapheme_boundary(void * arg0, const char * arg1, int32_t arg2, const char * arg3);
 size_t flight_get_previous_sentence_boundary(void * arg0, const char * arg1, int32_t arg2, const char * arg3);
 size_t flight_get_previous_word_boundary(void * arg0, const char * arg1, int32_t arg2, const char * arg3);
+/* Caller owns the return value; call flight_free_text_segment_range when done. */
 void * flight_get_word_range_at(void * arg0, const char * arg1, int32_t arg2, const char * arg3);
+/* Caller owns the return value; call flight_free_text_segmenter_explanation when done. */
 void * flight_explain_text_segmenter_backend(void * arg0);
 size_t flight_get_text_segment_start(void * arg0);
 size_t flight_set_text_segment_start(void * arg0, size_t arg1);
 size_t flight_get_text_segment_end(void * arg0);
 size_t flight_set_text_segment_end(void * arg0, size_t arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_text_segment_text(void * arg0);
 void flight_field_set_text_segment_text(void * arg0, void * arg1, size_t arg2);
 size_t flight_get_text_segment_range_start(void * arg0);
@@ -6572,27 +9696,137 @@ bool flight_get_text_segmenter_explanation_available(void * arg0);
 bool flight_set_text_segmenter_explanation_available(void * arg0, bool arg1);
 bool flight_get_text_segmenter_explanation_intl_segmenter_available(void * arg0);
 bool flight_set_text_segmenter_explanation_intl_segmenter_available(void * arg0, bool arg1);
+void flight_disable_text_shaper_guards(void * arg0);
+void flight_enable_text_shaper_guards(void * arg0, void * arg1, double (*arg2)(void *), void * arg3);
+/* Caller owns the return value; call flight_free_backend_operation_explanation when done. */
+void * flight_explain_text_shaper_operation(void * arg0, uint32_t arg1);
+bool flight_has_text_shaper_operation(void * arg0, uint32_t arg1);
+float flight_measure_text(void * arg0, const char * arg1, void * arg2);
+/* Caller owns the return value; call flight_free_text_shaper_cache when done. */
+void * flight_create_text_shaper_cache(void);
+void flight_clear_text_shaper_cache(void * arg0);
+void flight_dispose_text_shaper_cache(void * arg0);
+/* Caller owns the return value; call flight_free_shaped_run_ref when done. */
+void * flight_shape_text_run_cached(void * arg0, void * arg1, const char * arg2, void * arg3, void * arg4);
+void flight_get_caret_positions_for_run(void * arg0, void * arg1);
+int32_t flight_get_cluster_for_index(void * arg0, int32_t arg1);
+bool flight_get_index_range_for_cluster(void * arg0, int32_t arg1, int32_t arg2, int32_t * arg3, int32_t * arg4);
+void flight_itemize_text(void * arg0, const char * arg1, void * arg2, void * arg3);
+/* Caller owns the return value; call flight_shape_text_runs_result_free when done. */
+void * flight_shape_text_runs(void * arg0, const char * arg1, void * arg2, void * arg3);
+size_t flight_shape_text_runs_result_len(void * arg0);
+/* Borrowed return; do not free; valid while the flight_shape_text_runs result handle remains alive. */
+void * flight_shape_text_runs_result_get(void * arg0, size_t arg1);
+void flight_shape_text_runs_result_free(void * arg0);
+/* Caller owns the return value; call flight_free_shaped_run_ref when done. */
+void * flight_create_shaped_run(void);
+void flight_clear_shaped_run(void * arg0);
+int32_t flight_get_code_point_for_glyph(void * arg0, int32_t arg1, void * arg2);
+/* Caller owns the return value; call flight_free_font_metrics when done. */
+void * flight_get_font_metrics(void * arg0, void * arg1);
+bool flight_get_font_metrics_into(void * arg0, void * arg1, void * arg2);
+float flight_get_font_unit_scale(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_glyph_extents when done. */
+void * flight_get_glyph_extents(void * arg0, int32_t arg1, void * arg2);
+size_t flight_get_glyph_extents_batch(void * arg0, void * arg1, void * arg2, size_t arg3, void * arg4);
+bool flight_get_glyph_extents_into(void * arg0, void * arg1, int32_t arg2, void * arg3);
+int32_t flight_get_glyph_index_for_code_point(void * arg0, int32_t arg1, void * arg2);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_get_glyph_name(void * arg0, int32_t arg1, void * arg2);
+/* Caller owns the return value; call flight_free_shaped_run_ref when done. */
+void * flight_shape_text_run(void * arg0, const char * arg1, void * arg2, void * arg3);
+bool flight_shape_text_run_into(void * arg0, void * arg1, const char * arg2, void * arg3, void * arg4);
+float flight_get_font_metrics_ascent(void * arg0);
+float flight_set_font_metrics_ascent(void * arg0, float arg1);
+float flight_get_font_metrics_cap_height(void * arg0);
+float flight_set_font_metrics_cap_height(void * arg0, float arg1);
+float flight_get_font_metrics_descent(void * arg0);
+float flight_set_font_metrics_descent(void * arg0, float arg1);
+float flight_get_font_metrics_line_gap(void * arg0);
+float flight_set_font_metrics_line_gap(void * arg0, float arg1);
+float flight_get_font_metrics_underline_position(void * arg0);
+float flight_set_font_metrics_underline_position(void * arg0, float arg1);
+float flight_get_font_metrics_underline_thickness(void * arg0);
+float flight_set_font_metrics_underline_thickness(void * arg0, float arg1);
+float flight_get_font_metrics_units_per_em(void * arg0);
+float flight_set_font_metrics_units_per_em(void * arg0, float arg1);
+float flight_get_font_metrics_x_height(void * arg0);
+float flight_set_font_metrics_x_height(void * arg0, float arg1);
+float flight_get_glyph_extents_height(void * arg0);
+float flight_set_glyph_extents_height(void * arg0, float arg1);
+float flight_get_glyph_extents_width(void * arg0);
+float flight_set_glyph_extents_width(void * arg0, float arg1);
+float flight_get_glyph_extents_x_bearing(void * arg0);
+float flight_set_glyph_extents_x_bearing(void * arg0, float arg1);
+float flight_get_glyph_extents_y_bearing(void * arg0);
+float flight_set_glyph_extents_y_bearing(void * arg0, float arg1);
+int32_t flight_get_shaped_glyph_cluster(void * arg0);
+int32_t flight_set_shaped_glyph_cluster(void * arg0, int32_t arg1);
+int32_t flight_get_shaped_glyph_glyph_id(void * arg0);
+int32_t flight_set_shaped_glyph_glyph_id(void * arg0, int32_t arg1);
+float flight_get_shaped_glyph_x_advance(void * arg0);
+float flight_set_shaped_glyph_x_advance(void * arg0, float arg1);
+float flight_get_shaped_glyph_x_offset(void * arg0);
+float flight_set_shaped_glyph_x_offset(void * arg0, float arg1);
+float flight_get_shaped_glyph_y_advance(void * arg0);
+float flight_set_shaped_glyph_y_advance(void * arg0, float arg1);
+float flight_get_shaped_glyph_y_offset(void * arg0);
+float flight_set_shaped_glyph_y_offset(void * arg0, float arg1);
+float flight_get_shaped_run_advance_width(void * arg0);
+float flight_set_shaped_run_advance_width(void * arg0, float arg1);
+size_t flight_get_shaped_run_glyph_count(void * arg0);
+size_t flight_set_shaped_run_glyph_count(void * arg0, size_t arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_shaped_run_script(void * arg0);
+void flight_field_set_shaped_run_script(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_text_feature_tag(void * arg0);
+void flight_field_set_text_feature_tag(void * arg0, void * arg1, size_t arg2);
+int32_t flight_get_text_feature_value(void * arg0);
+int32_t flight_set_text_feature_value(void * arg0, int32_t arg1);
+size_t flight_get_text_item_end(void * arg0);
+size_t flight_set_text_item_end(void * arg0, size_t arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_text_item_script(void * arg0);
+void flight_field_set_text_item_script(void * arg0, void * arg1, size_t arg2);
+size_t flight_get_text_item_start(void * arg0);
+size_t flight_set_text_item_start(void * arg0, size_t arg1);
+/* Caller owns the return value; call flight_free_cube_texture when done. */
 void * flight_create_cube_texture(void);
+/* Caller owns the return value; call flight_free_cube_texture when done. */
 void * flight_clone_cube_texture(void * arg0);
 void flight_copy_cube_texture(void * arg0, void * arg1);
 bool flight_equals_cube_texture(void * arg0, void * arg1);
 int32_t flight_get_cube_texture_face_size(void * arg0);
 bool flight_is_cube_texture_complete(void * arg0);
+void flight_set_cube_texture_face(void * arg0, size_t arg1, void * arg2 /* cloned; caller retains its handle */);
+/* Caller owns the return value; call flight_free_sampler when done. */
 void * flight_create_anisotropic_sampler(float arg0);
+/* Caller owns the return value; call flight_free_sampler when done. */
 void * flight_create_clamp_linear_sampler(void);
+/* Caller owns the return value; call flight_free_sampler when done. */
 void * flight_create_pixel_art_sampler(void);
+/* Caller owns the return value; call flight_free_sampler when done. */
 void * flight_create_sampler(void);
+/* Caller owns the return value; call flight_free_sampler when done. */
 void * flight_create_tiling_sampler(void);
+/* Caller owns the return value; call flight_free_sampler when done. */
 void * flight_clone_sampler(void * arg0);
 void flight_copy_sampler(void * arg0, void * arg1);
 bool flight_equals_sampler(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_texture when done. */
 void * flight_create_texture(void * arg0);
+/* Caller owns the return value; call flight_free_texture2_d when done. */
 void * flight_create_texture_2d(void);
+/* Caller owns the return value; call flight_free_texture when done. */
 void * flight_clone_texture__texture(void * arg0);
 void flight_copy_texture__texture__texture(void * arg0, void * arg1);
+bool flight_equals_texture__texture__texture(void * arg0, void * arg1);
 int32_t flight_get_texture_height__texture(void * arg0);
 void flight_get_texture_inverse_uv_matrix__texture(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_texture_source_ref when done. */
 void * flight_get_texture_source__texture(void * arg0);
+/* Caller owns the return value; call flight_free_texture_source_kind when done. */
 void * flight_get_texture_source_kind__texture(void * arg0);
 void flight_get_texture_uv_matrix__texture(void * arg0, void * arg1);
 void flight_get_texture_view_size__texture(void * arg0, void * arg1);
@@ -6602,6 +9836,7 @@ bool flight_has_texture_uv_transform__texture(void * arg0);
 bool flight_is_texture_ready__texture(void * arg0);
 void flight_reset_texture_uv_transform__texture(void * arg0);
 void flight_set_texture_flip__texture(void * arg0, bool arg1, bool arg2);
+void flight_set_texture_source__texture(void * arg0, void * arg1);
 void flight_set_texture_uv_from_pixel_rect__texture(void * arg0, float arg1, float arg2, float arg3, float arg4);
 void flight_set_texture_uv_offset__texture(void * arg0, float arg1, float arg2);
 void flight_set_texture_uv_rotation__texture(void * arg0, float arg1);
@@ -6624,15 +9859,25 @@ uint32_t flight_set_texture_source_fields_width(void * arg0, uint32_t arg1);
 uint32_t flight_get_voxel_grid_depth(void * arg0);
 uint32_t flight_set_voxel_grid_depth(void * arg0, uint32_t arg1);
 int32_t flight_detect_texture_container(void * arg0, size_t arg1);
+/* Caller owns the return value; call flight_free_texture_container_parse_explanation when done. */
 void * flight_explain_texture_container_parse(void * arg0, size_t arg1);
 int32_t flight_get_atf_parse_failure_reason(void * arg0, size_t arg1);
+/* Caller owns the return value; call flight_parse_atf_result_free when done. */
 void * flight_parse_atf(void * arg0, size_t arg1);
+size_t flight_parse_atf_result_len(void * arg0);
+/* Borrowed return; do not free; valid while the flight_parse_atf result handle remains alive. */
+void * flight_parse_atf_result_get(void * arg0, size_t arg1);
+void flight_parse_atf_result_free(void * arg0);
 int32_t flight_get_basis_parse_failure_reason(void * arg0, size_t arg1);
+/* Caller owns the return value; call flight_free_texture_container when done. */
 void * flight_parse_basis(void * arg0, size_t arg1);
 int32_t flight_get_dds_parse_failure_reason(void * arg0, size_t arg1);
+/* Caller owns the return value; call flight_free_texture_container when done. */
 void * flight_parse_dds(void * arg0, size_t arg1);
 int32_t flight_get_ktx2_parse_failure_reason(void * arg0, size_t arg1);
+/* Caller owns the return value; call flight_free_texture_container when done. */
 void * flight_parse_ktx2(void * arg0, size_t arg1);
+/* Caller owns the return value; call flight_free_texture_container_levels when done. */
 void * flight_compute_texture_container_levels(uint32_t arg0, size_t arg1, size_t arg2, size_t arg3, size_t arg4, size_t arg5, size_t arg6);
 int64_t flight_get_texture_container_level_byte_length(uint32_t arg0, size_t arg1, size_t arg2);
 size_t flight_get_texture_container_width(void * arg0);
@@ -6658,31 +9903,40 @@ size_t flight_get_texture_container_levels_end_offset(void * arg0);
 size_t flight_set_texture_container_levels_end_offset(void * arg0, size_t arg1);
 bool flight_are_texture_atlas_guards_enabled(void * arg0);
 void flight_disable_texture_atlas_guards(void * arg0);
-void flight_enable_texture_atlas_guards(void * arg0, void * arg1, void * arg2, void * arg3);
+void flight_enable_texture_atlas_guards(void * arg0, void * arg1, double (*arg2)(void *), void * arg3);
+/* Caller owns the return value; call flight_free_texture_atlas_ref when done. */
 void * flight_create_texture_atlas(void);
 void flight_dispose_texture_atlas(void * arg0);
 size_t flight_get_texture_atlas_byte_size(void * arg0);
+/* Caller owns the return value; call flight_free_texture_atlas_ref when done. */
 void * flight_create_texture_atlas_from_image_resource(void * arg0);
-void * flight_create_texture_atlas_from_grid(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_texture_atlas_ref when done. */
+void * flight_create_texture_atlas_from_grid(void * arg0, void * arg1 /* cloned; caller retains its handle */);
+/* Caller owns the return value; call flight_free_texture_atlas_region_ref when done. */
 void * flight_create_texture_atlas_region(void);
 void flight_add_texture_atlas_region(void * arg0, float arg1, float arg2, float arg3, float arg4, float arg5, float arg6, const char * arg7);
 void flight_add_texture_atlas_region_corners(void * arg0, float arg1, float arg2, float arg3, float arg4, float arg5, float arg6, const char * arg7);
 void flight_add_texture_atlas_region_rectangle(void * arg0, void * arg1, void * arg2, const char * arg3);
 void flight_add_texture_atlas_region_vector2(void * arg0, void * arg1, void * arg2, void * arg3, const char * arg4);
+void flight_build_texture_atlas_region_index(void * arg0, void * arg1);
 void flight_clear_texture_atlas_regions(void * arg0);
+/* Caller owns the return value; call flight_free_texture_atlas_region_texture_explanation when done. */
 void * flight_explain_texture_atlas_region_texture(void * arg0, int32_t arg1);
+/* Caller owns the return value; call flight_free_texture_atlas_region_ref when done. */
 void * flight_get_texture_atlas_region_by_id(void * arg0, int32_t arg1);
+/* Caller owns the return value; call flight_free_texture_atlas_region_ref when done. */
 void * flight_get_texture_atlas_region_by_name(void * arg0, const char * arg1);
+/* Caller owns the return value; call flight_free_texture_atlas_region_ref when done. */
 void * flight_get_texture_atlas_region_by_ordinal(void * arg0, const char * arg1, double arg2);
 size_t flight_get_texture_atlas_region_count(void * arg0);
 void flight_get_texture_atlas_region_frame(void * arg0, void * arg1);
 double flight_get_texture_atlas_region_ordinal(void * arg0);
+void flight_get_texture_atlas_region_sequence(void * arg0, void * arg1, const char * arg2);
+/* Caller owns the return value; call flight_free_texture2_d_ref when done. */
 void * flight_get_texture_atlas_region_texture(void * arg0, int32_t arg1, void * arg2);
-char * flight_get_texture_atlas_region_texture_status_string(uint32_t arg0);
 void flight_get_texture_atlas_region_uv(void * arg0, void * arg1, float arg2, float arg3);
 void flight_get_texture_atlas_region_uv_quad(void * arg0, void * arg1, float arg2, float arg3);
 bool flight_has_texture_atlas_region(void * arg0, const char * arg1);
-int32_t flight_parse_texture_atlas_region_texture_status(const char * arg0);
 bool flight_remove_texture_atlas_region(void * arg0, int32_t arg1);
 void flight_set_texture_atlas_region(void * arg0, void * arg1);
 float flight_get_texture_atlas_image_height(void * arg0);
@@ -6727,6 +9981,7 @@ bool flight_get_texture_atlas_guard_state_enabled(void * arg0);
 bool flight_set_texture_atlas_guard_state_enabled(void * arg0, bool arg1);
 int32_t flight_get_grid_slice_options_columns(void * arg0);
 int32_t flight_set_grid_slice_options_columns(void * arg0, int32_t arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_grid_slice_options_image_file(void * arg0);
 void flight_field_set_grid_slice_options_image_file(void * arg0, void * arg1, size_t arg2);
 float flight_get_grid_slice_options_image_height(void * arg0);
@@ -6737,14 +9992,18 @@ int32_t flight_get_grid_slice_options_rows(void * arg0);
 int32_t flight_set_grid_slice_options_rows(void * arg0, int32_t arg1);
 void flight_parse_texture_atlas_aseprite_document(void * arg0, void * arg1);
 void flight_parse_texture_atlas_aseprite_json(void * arg0, const char * arg1);
-void * flight_create_texture_atlas_format_registry(void);
 void flight_apply_texture_atlas_import_options(void * arg0, void * arg1);
+/* Borrowed return; do not free; valid while the registry input handle remains alive. */
 void * flight_aseprite_texture_atlas_format(void * arg0);
+/* Caller owns the return value; call flight_free_texture_atlas_format_kind when done. */
 void * flight_detect_texture_atlas_format(void * arg0, const char * arg1);
 void flight_get_texture_atlas_format_kinds(void * arg0, void * arg1);
+/* Borrowed return; do not free; valid while the registry input handle remains alive. */
 void * flight_libgdx_atlas_texture_atlas_format(void * arg0);
 bool flight_parse_texture_atlas(void * arg0, void * arg1, const char * arg2, void * arg3, void * arg4);
+/* Borrowed return; do not free; valid while the registry input handle remains alive. */
 void * flight_starling_texture_atlas_format(void * arg0);
+/* Borrowed return; do not free; valid while the registry input handle remains alive. */
 void * flight_texture_packer_texture_atlas_format(void * arg0);
 void flight_unregister_texture_atlas_format(void * arg0, void * arg1);
 void flight_parse_texture_atlas_libgdx_atlas(void * arg0, const char * arg1);
@@ -6753,10 +10012,9 @@ void flight_reset_texture_atlas_page_meta(void * arg0);
 void flight_parse_texture_atlas_starling_xml(void * arg0, const char * arg1);
 void flight_parse_texture_packer_atlas_document(void * arg0, void * arg1, void * arg2);
 void flight_parse_texture_packer_atlas_json(void * arg0, const char * arg1, void * arg2);
-char * flight_get_texture_atlas_frame_tag_direction_string(uint32_t arg0);
-int32_t flight_parse_texture_atlas_frame_tag_direction(const char * arg0);
 float flight_get_texture_atlas_scale_number_value(void * arg0);
 float flight_set_texture_atlas_scale_number_value(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_texture_atlas_scale_string_value(void * arg0);
 void flight_field_set_texture_atlas_scale_string_value(void * arg0, void * arg1, size_t arg2);
 float flight_get_texture_atlas_aseprite_rect_h(void * arg0);
@@ -6773,6 +10031,7 @@ float flight_get_texture_atlas_aseprite_size_w(void * arg0);
 float flight_set_texture_atlas_aseprite_size_w(void * arg0, float arg1);
 int32_t flight_get_texture_atlas_aseprite_frame_tag_from(void * arg0);
 int32_t flight_set_texture_atlas_aseprite_frame_tag_from(void * arg0, int32_t arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_texture_atlas_aseprite_frame_tag_name(void * arg0);
 void flight_field_set_texture_atlas_aseprite_frame_tag_name(void * arg0, void * arg1, size_t arg2);
 int32_t flight_get_texture_atlas_aseprite_frame_tag_to(void * arg0);
@@ -6785,20 +10044,26 @@ bool flight_get_texture_atlas_aseprite_base_frame_trimmed(void * arg0);
 bool flight_set_texture_atlas_aseprite_base_frame_trimmed(void * arg0, bool arg1);
 float flight_get_texture_atlas_aseprite_array_frame_duration(void * arg0);
 float flight_set_texture_atlas_aseprite_array_frame_duration(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_texture_atlas_aseprite_array_frame_filename(void * arg0);
 void flight_field_set_texture_atlas_aseprite_array_frame_filename(void * arg0, void * arg1, size_t arg2);
 bool flight_get_texture_atlas_aseprite_array_frame_rotated(void * arg0);
 bool flight_set_texture_atlas_aseprite_array_frame_rotated(void * arg0, bool arg1);
 bool flight_get_texture_atlas_aseprite_array_frame_trimmed(void * arg0);
 bool flight_set_texture_atlas_aseprite_array_frame_trimmed(void * arg0, bool arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_texture_atlas_aseprite_meta_app(void * arg0);
 void flight_field_set_texture_atlas_aseprite_meta_app(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_texture_atlas_aseprite_meta_format(void * arg0);
 void flight_field_set_texture_atlas_aseprite_meta_format(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_texture_atlas_aseprite_meta_image(void * arg0);
 void flight_field_set_texture_atlas_aseprite_meta_image(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_texture_atlas_aseprite_meta_version(void * arg0);
 void flight_field_set_texture_atlas_aseprite_meta_version(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_texture_atlas_aseprite_named_frame_name(void * arg0);
 void flight_field_set_texture_atlas_aseprite_named_frame_name(void * arg0, void * arg1, size_t arg2);
 float flight_get_texture_packer_atlas_rect_h(void * arg0);
@@ -6819,6 +10084,7 @@ float flight_get_texture_packer_atlas_pivot_y(void * arg0);
 float flight_set_texture_packer_atlas_pivot_y(void * arg0, float arg1);
 int32_t flight_get_texture_packer_atlas_frame_tag_from(void * arg0);
 int32_t flight_set_texture_packer_atlas_frame_tag_from(void * arg0, int32_t arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_texture_packer_atlas_frame_tag_name(void * arg0);
 void flight_field_set_texture_packer_atlas_frame_tag_name(void * arg0, void * arg1, size_t arg2);
 int32_t flight_get_texture_packer_atlas_frame_tag_to(void * arg0);
@@ -6827,35 +10093,40 @@ bool flight_get_texture_packer_atlas_hash_frame_rotated(void * arg0);
 bool flight_set_texture_packer_atlas_hash_frame_rotated(void * arg0, bool arg1);
 bool flight_get_texture_packer_atlas_hash_frame_trimmed(void * arg0);
 bool flight_set_texture_packer_atlas_hash_frame_trimmed(void * arg0, bool arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_texture_packer_atlas_array_frame_filename(void * arg0);
 void flight_field_set_texture_packer_atlas_array_frame_filename(void * arg0, void * arg1, size_t arg2);
 bool flight_get_texture_packer_atlas_array_frame_rotated(void * arg0);
 bool flight_set_texture_packer_atlas_array_frame_rotated(void * arg0, bool arg1);
 bool flight_get_texture_packer_atlas_array_frame_trimmed(void * arg0);
 bool flight_set_texture_packer_atlas_array_frame_trimmed(void * arg0, bool arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_texture_packer_atlas_meta_app(void * arg0);
 void flight_field_set_texture_packer_atlas_meta_app(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_texture_packer_atlas_meta_format(void * arg0);
 void flight_field_set_texture_packer_atlas_meta_format(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_texture_packer_atlas_meta_image(void * arg0);
 void flight_field_set_texture_packer_atlas_meta_image(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_texture_packer_atlas_meta_version(void * arg0);
 void flight_field_set_texture_packer_atlas_meta_version(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_texture_packer_atlas_named_frame_name(void * arg0);
 void flight_field_set_texture_packer_atlas_named_frame_name(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_tilemap_ref when done. */
 void * flight_create_tilemap(void);
-void * flight_create_tilemap_data(void);
-void * flight_create_tilemap_runtime(void);
-void * flight_create_tilemap_signals(void);
 void flight_clear_tilemap(void * arg0);
+/* Caller owns the return value; call flight_free_tilemap_ref when done. */
 void * flight_clone_tilemap(void * arg0);
 void flight_compute_tilemap_local_bounds_rectangle(void * arg0, void * arg1);
+/* Borrowed return; do not free; valid while the target input handle remains alive. */
 void * flight_enable_tilemap_signals(void * arg0);
 void flight_fill_tilemap_tiles(void * arg0, int16_t arg1);
 int32_t flight_get_tilemap_column_at_x(void * arg0, float arg1);
 bool flight_get_tilemap_column_row_at_point(void * arg0, void * arg1, float arg2, float arg3);
 int32_t flight_get_tilemap_row_at_y(void * arg0, float arg1);
-void * flight_get_tilemap_runtime(void * arg0);
 int16_t flight_get_tilemap_tile(void * arg0, int32_t arg1, int32_t arg2);
 int16_t flight_get_tilemap_tile_at_point(void * arg0, void * arg1);
 int16_t flight_get_tilemap_tile_at_point_xy(void * arg0, float arg1, float arg2);
@@ -6872,16 +10143,28 @@ float flight_get_tilemap_data_tile_height(void * arg0);
 float flight_set_tilemap_data_tile_height(void * arg0, float arg1);
 float flight_get_tilemap_data_tile_width(void * arg0);
 float flight_set_tilemap_data_tile_width(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_timeline_ref when done. */
 void * flight_create_timeline(void * arg0);
+/* Caller owns the return value; call flight_free_timeline_source_ref when done. */
 void * flight_create_timeline_source(void * arg0);
-void flight_add_timeline_frame_script(void * arg0, void * arg1, void * arg2);
+void flight_add_timeline_frame_script(void * arg0, void * arg1, void * arg2 /* cloned; caller retains its handle */);
 void flight_clear_timeline_frame_scripts(void * arg0);
 void flight_dispose_timeline_signals(void * arg0);
+/* Caller owns the return value; call flight_free_timeline_signals_ref when done. */
 void * flight_enable_timeline_signals(void * arg0);
+/* Caller owns the return value; call flight_free_timeline_label when done. */
 void * flight_find_timeline_label(void * arg0, const char * arg1);
+/* Caller owns the return value; call flight_free_timeline_label when done. */
 void * flight_get_timeline_current_label(void * arg0);
+/* Caller owns the return value; call flight_free_frame_script when done. */
 void * flight_get_timeline_frame_script(void * arg0, void * arg1);
 void flight_get_timeline_frame_script_frames(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_get_timeline_labels_result_free when done. */
+void * flight_get_timeline_labels(void * arg0);
+size_t flight_get_timeline_labels_result_len(void * arg0);
+/* Borrowed return; do not free; valid while the flight_get_timeline_labels result handle remains alive. */
+void * flight_get_timeline_labels_result_get(void * arg0, size_t arg1);
+void flight_get_timeline_labels_result_free(void * arg0);
 void flight_goto_and_play_timeline(void * arg0, void * arg1);
 void flight_goto_and_stop_timeline(void * arg0, void * arg1);
 void flight_next_frame_timeline(void * arg0);
@@ -6892,6 +10175,7 @@ void flight_stop_timeline(void * arg0);
 bool flight_update_timeline(void * arg0, double arg1);
 int32_t flight_get_timeline_label_frame(void * arg0);
 int32_t flight_set_timeline_label_frame(void * arg0, int32_t arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_timeline_label_name(void * arg0);
 void flight_field_set_timeline_label_name(void * arg0, void * arg1, size_t arg2);
 int32_t flight_get_timeline_frame_event_frame(void * arg0);
@@ -6908,22 +10192,97 @@ double flight_get_timeline_time_elapsed(void * arg0);
 double flight_set_timeline_time_elapsed(void * arg0, double arg1);
 int32_t flight_get_timeline_last_frame_update(void * arg0);
 int32_t flight_set_timeline_last_frame_update(void * arg0, int32_t arg1);
+/* Caller owns the return value; call flight_free_flight_document_token_resolver_registry when done. */
+void * flight_create_flight_document_token_resolver_registry(void);
+/* Caller owns the return value; call flight_free_flight_document_refusal_explanation when done. */
+void * flight_explain_flight_document_scene_token_resolution(void * arg0, const char * arg1, void * arg2);
+/* Caller owns the return value; call flight_free_flight_document_token_resolution when done. */
+void * flight_resolve_flight_document_scene_tokens(void * arg0, const char * arg1, void * arg2);
+/* Caller owns the return value; call flight_free_flight_document_refusal_explanation when done. */
+void * flight_explain_flight_document_scene_token_substitution(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_flight_document_scene when done. */
+void * flight_substitute_flight_document_scene_tokens(void * arg0, void * arg1);
+void flight_disable_tray_guards(void * arg0);
+void flight_enable_tray_guards(void * arg0, void * arg1, double (*arg2)(void *), void * arg3);
+/* On successful completion, caller owns the callback value; call flight_free_tray_create_result when done. */
+void flight_create_tray_icon(void * arg0, void * arg1, void (*arg2)(void *, void *, char *), void * arg3);
+/* On successful completion, caller owns the callback value; call flight_free_tray_destroy_result when done. */
+void flight_destroy_tray_icon(void * arg0, void (*arg1)(void *, void *, char *), void * arg2);
+/* On successful completion, caller owns the callback value; call flight_free_tray_balloon_display_result when done. */
+void flight_display_tray_balloon(void * arg0, void * arg1, void * arg2, void (*arg3)(void *, void *, char *), void * arg4);
+/* On successful completion, caller owns the callback value; call flight_free_tray_bounds_result when done. */
+void flight_get_tray_icon_bounds(void * arg0, void * arg1, void (*arg2)(void *, void *, char *), void * arg3);
+/* On successful completion, caller owns the callback value; call flight_free_tray_title_read_result when done. */
+void flight_get_tray_icon_title(void * arg0, void * arg1, void (*arg2)(void *, void *, char *), void * arg3);
+/* On successful completion, caller owns the callback value; call flight_free_tray_tooltip_read_result when done. */
+void flight_get_tray_icon_tooltip(void * arg0, void * arg1, void (*arg2)(void *, void *, char *), void * arg3);
+void flight_get_tray_icons(void * arg0, void * arg1);
+bool flight_is_tray_destroyed(void * arg0);
+bool flight_is_tray_icon_animating(void * arg0);
+/* On successful completion, caller owns the callback value; call flight_free_tray_popup_menu_result when done. */
+void flight_popup_tray_context_menu(void * arg0, void * arg1, void * arg2, void (*arg3)(void *, void *, char *), void * arg4);
+/* On successful completion, caller owns the callback value; call flight_free_tray_balloon_remove_result when done. */
+void flight_remove_tray_balloon(void * arg0, void * arg1, void (*arg2)(void *, void *, char *), void * arg3);
+/* On successful completion, caller owns the callback value; call flight_free_tray_image_update_result when done. */
+void flight_set_tray_icon(void * arg0, void * arg1, const char * arg2, void (*arg3)(void *, void *, char *), void * arg4);
+/* On successful completion, caller owns the callback value; call flight_free_tray_menu_update_result when done. */
+void flight_set_tray_icon_context_menu(void * arg0, void * arg1, const void * const * arg2, size_t arg3, void (*arg4)(void *, void *, char *), void * arg5);
+/* On successful completion, caller owns the callback value; call flight_free_tray_template_image_update_result when done. */
+void flight_set_tray_icon_template(void * arg0, void * arg1, bool arg2, void (*arg3)(void *, void *, char *), void * arg4);
+/* On successful completion, caller owns the callback value; call flight_free_tray_title_update_result when done. */
+void flight_set_tray_icon_title(void * arg0, void * arg1, const char * arg2, void (*arg3)(void *, void *, char *), void * arg4);
+/* On successful completion, caller owns the callback value; call flight_free_tray_tooltip_update_result when done. */
+void flight_set_tray_icon_tooltip(void * arg0, void * arg1, const char * arg2, void (*arg3)(void *, void *, char *), void * arg4);
+/* On successful completion, caller owns the callback value; call flight_free_tray_double_click_policy_update_result when done. */
+void flight_set_tray_ignore_double_click_events(void * arg0, void * arg1, bool arg2, void (*arg3)(void *, void *, char *), void * arg4);
+/* On successful completion, caller owns the callback value; call flight_free_tray_pressed_image_update_result when done. */
+void flight_set_tray_pressed_icon(void * arg0, void * arg1, const char * arg2, void (*arg3)(void *, void *, char *), void * arg4);
+/* On successful completion, caller owns the callback value; call flight_free_tray_animation_start_result when done. */
+void flight_start_tray_icon_animation(void * arg0, void * arg1, void * arg2, void * arg3, size_t arg4, double arg5, void (*arg6)(void *, void *, char *), void * arg7);
+uint32_t flight_stop_tray_icon_animation(void * arg0);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_tray_balloon_options_text(void * arg0);
+void flight_field_set_tray_balloon_options_text(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_tray_balloon_options_title(void * arg0);
+void flight_field_set_tray_balloon_options_title(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_tray_title_reading_title(void * arg0);
+void flight_field_set_tray_title_reading_title(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_tray_tooltip_reading_tooltip(void * arg0);
+void flight_field_set_tray_tooltip_reading_tooltip(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_tray_drop_text_text(void * arg0);
+void flight_field_set_tray_drop_text_text(void * arg0, void * arg1, size_t arg2);
+bool flight_get_tray_interaction_event_alt_key(void * arg0);
+bool flight_set_tray_interaction_event_alt_key(void * arg0, bool arg1);
+bool flight_get_tray_interaction_event_ctrl_key(void * arg0);
+bool flight_set_tray_interaction_event_ctrl_key(void * arg0, bool arg1);
+bool flight_get_tray_interaction_event_meta_key(void * arg0);
+bool flight_set_tray_interaction_event_meta_key(void * arg0, bool arg1);
+bool flight_get_tray_interaction_event_shift_key(void * arg0);
+bool flight_set_tray_interaction_event_shift_key(void * arg0, bool arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
+void * flight_field_get_tray_menu_selection_event_id(void * arg0);
+void flight_field_set_tray_menu_selection_event_id(void * arg0, void * arg1, size_t arg2);
 size_t flight_get_active_tween_count(void * arg0);
 void flight_kill_tweens_of_property(void * arg0, const char * arg1);
 void flight_pause_all_tweens(void * arg0);
 void flight_reset_all_tweens(void * arg0);
 void flight_resume_all_tweens(void * arg0);
 void flight_stop_all_tweens(void * arg0, void * arg1);
+/* Caller owns the return value; call flight_free_tween_manager when done. */
 void * flight_create_tween_manager(void * arg0);
-void * flight_default_manager(void * arg0);
-void * flight_create_tween_context(void);
 void flight_update_tweens(void * arg0, float arg1);
 float flight_get_tween_property_detail_change(void * arg0);
 float flight_set_tween_property_detail_change(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_tween_property_detail_key(void * arg0);
 void flight_field_set_tween_property_detail_key(void * arg0, void * arg1, size_t arg2);
 float flight_get_tween_property_detail_start(void * arg0);
 float flight_set_tween_property_detail_start(void * arg0, float arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_tween_manager_data___brand(void * arg0);
 void flight_field_set_tween_manager_data___brand(void * arg0, void * arg1, size_t arg2);
 float flight_get_color_components_r(void * arg0);
@@ -6932,6 +10291,25 @@ float flight_get_color_components_g(void * arg0);
 float flight_set_color_components_g(void * arg0, float arg1);
 float flight_get_color_components_b(void * arg0);
 float flight_set_color_components_b(void * arg0, float arg1);
+void flight_destroy_updater(void * arg0);
+uint32_t flight_detect_endianness(void);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_parse_user_agent_arch(const char * arg0, const char * arg1);
+uint32_t flight_parse_user_agent_engine(const char * arg0);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_parse_user_agent_engine_version(const char * arg0, uint32_t arg1);
+uint32_t flight_parse_user_agent_kind(uint32_t arg0);
+uint32_t flight_parse_user_agent_name(const char * arg0);
+/* Caller owns the return value; call flight_free_user_agent_pointer_width when done. */
+void * flight_parse_user_agent_pointer_width(const char * arg0);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_parse_user_agent_version(const char * arg0, uint32_t arg1);
+/* Caller owns the return value; call flight_free_device_form_factor when done. */
+void * flight_parse_user_agent_form_factor(const char * arg0, int32_t arg1);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_parse_user_agent_os_name(const char * arg0);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_parse_user_agent_os_version(const char * arg0);
 void flight_contribute_transform_velocity(void * arg0, void * arg1);
 void flight_add_velocity(void * arg0, void * arg1, void * arg2);
 void flight_clamp_velocity(void * arg0, void * arg1, float arg2);
@@ -6945,9 +10323,11 @@ void flight_scale_velocity(void * arg0, void * arg1, float arg2);
 void flight_subtract_velocity(void * arg0, void * arg1, void * arg2);
 void flight_zero_velocity(void * arg0);
 void flight_get_velocity_sample_at(void * arg0, void * arg1, float arg2, float arg3, void * arg4);
+/* Caller owns the return value; call flight_free_velocity_field when done. */
 void * flight_create_velocity_field(void);
 void flight_begin_velocity_frame(void * arg0);
 void flight_contribute_velocity(void * arg0, uint64_t arg1, float arg2, float arg3);
+/* Caller owns the return value; call flight_free_velocity_explanation when done. */
 void * flight_explain_velocity(void * arg0, uint64_t arg1);
 void flight_get_velocity(void * arg0, uint64_t arg1, void * arg2);
 bool flight_has_velocity(void * arg0, uint64_t arg1);
@@ -6973,51 +10353,178 @@ int32_t flight_set_velocity_sample_explicit_frame_id(void * arg0, int32_t arg1);
 int32_t flight_get_velocity_field_frame_id(void * arg0);
 int32_t flight_set_velocity_field_frame_id(void * arg0, int32_t arg1);
 bool flight_can_play_video_type(void * arg0, const char * arg1);
+/* Caller owns the return value; call flight_free_string when done. */
 char * flight_infer_video_mime_type(const char * arg0);
+/* Caller owns the return value; call flight_free_video_resource when done. */
 void * flight_create_video_resource(void);
 void flight_destroy_video_resource(void * arg0, void * arg1);
 void flight_dispose_video_resource(void * arg0, void * arg1);
-char * flight_get_video_channel_state_string(uint32_t arg0);
 double flight_get_video_resource_duration(void * arg0, void * arg1);
 float flight_get_video_resource_height(void * arg0, void * arg1);
-char * flight_get_video_resource_load_readiness_string(uint32_t arg0);
 float flight_get_video_resource_width(void * arg0, void * arg1);
 bool flight_has_video_resource_element(void * arg0);
 bool flight_is_video_resource_empty(void * arg0, void * arg1);
 bool flight_is_video_resource_ready(void * arg0, void * arg1);
-int32_t flight_parse_video_channel_state(const char * arg0);
-int32_t flight_parse_video_resource_load_readiness(const char * arg0);
-void * flight_create_video_texture(void * arg0, void * arg1, void * arg2);
-uint32_t flight_advance_video_texture__texture(void * arg0, void * arg1);
-void * flight_clone_video_texture__texture(void * arg0);
-void flight_copy_video_texture__texture__texture(void * arg0, void * arg1);
-void flight_destroy_video_texture(void * arg0);
-float flight_get_video_texture_height__texture(void * arg0, void * arg1);
-void flight_get_video_texture_inverse_uv_matrix__texture(void * arg0, void * arg1);
-void flight_get_video_texture_uv_matrix__texture(void * arg0, void * arg1);
-float flight_get_video_texture_width__texture(void * arg0, void * arg1);
-bool flight_is_video_texture_frame_ready__texture(void * arg0, void * arg1);
-void flight_reset_video_texture_frame__texture(void * arg0);
-void flight_set_video_texture_source__texture(void * arg0, void * arg1, void * arg2);
+/* On successful completion, caller owns the callback value; call flight_free_video_resource when done. */
+void flight_load_video_resource_from_url(void * arg0, const char * arg1, void * arg2, void * arg3, void (*arg4)(void *, void *, char *), void * arg5);
+/* On successful completion, caller owns the callback value; call flight_free_video_resource when done. */
+void flight_load_video_resource_from_urls(void * arg0, void * arg1, size_t arg2, void * arg3, void * arg4, void (*arg5)(void *, void *, char *), void * arg6);
 bool flight_get_video_resource_owns_element(void * arg0);
 bool flight_set_video_resource_owns_element(void * arg0, bool arg1);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_video_resource_url_url(void * arg0);
 void flight_field_set_video_resource_url_url(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_parse_xml_attributes_result_free when done. */
+void * flight_parse_xml_attributes(const char * arg0);
+size_t flight_parse_xml_attributes_result_len(void * arg0);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_parse_xml_attributes_result_get(void * arg0, const char * arg1);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_parse_xml_attributes_result_get_key(void * arg0, size_t arg1);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_parse_xml_attributes_result_get_value(void * arg0, size_t arg1);
+void flight_parse_xml_attributes_result_free(void * arg0);
+/* Caller owns the return value; call flight_free_xml_element when done. */
 void * flight_parse_xml_document(const char * arg0);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_get_xml_element_attribute(void * arg0, const char * arg1);
 double flight_get_xml_element_attribute_number(void * arg0, const char * arg1);
+/* Caller owns the return value; call flight_free_xml_element_ref when done. */
 void * flight_get_xml_element_child_by_name(void * arg0, const char * arg1);
+/* Caller owns the return value; call flight_get_xml_element_children_by_name_result_free when done. */
+void * flight_get_xml_element_children_by_name(void * arg0, const char * arg1);
+size_t flight_get_xml_element_children_by_name_result_len(void * arg0);
+/* Borrowed return; do not free; valid while the flight_get_xml_element_children_by_name result handle remains alive. */
+void * flight_get_xml_element_children_by_name_result_get(void * arg0, size_t arg1);
+void flight_get_xml_element_children_by_name_result_free(void * arg0);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_xml_element_name(void * arg0);
 void flight_field_set_xml_element_name(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_byte_buffer when done. */
 void * flight_field_get_xml_element_text(void * arg0);
 void flight_field_set_xml_element_text(void * arg0, void * arg1, size_t arg2);
+/* Caller owns the return value; call flight_vec_ref_app_window_free when done. */
+void * flight_vec_ref_app_window_create(void);
+size_t flight_vec_ref_app_window_len(void * arg0);
+/* Borrowed return; do not free; valid while the flight_vec_ref_app_window handle remains alive. */
+void * flight_vec_ref_app_window_get(void * arg0, size_t arg1);
+void flight_vec_ref_app_window_free(void * arg0);
+/* Caller owns the return value; call flight_vec_ref_audio_channel_free when done. */
+void * flight_vec_ref_audio_channel_create(void);
+size_t flight_vec_ref_audio_channel_len(void * arg0);
+/* Borrowed return; do not free; valid while the flight_vec_ref_audio_channel handle remains alive. */
+void * flight_vec_ref_audio_channel_get(void * arg0, size_t arg1);
+void flight_vec_ref_audio_channel_free(void * arg0);
+/* Caller owns the return value; call flight_vec_ref_dyn_modifier_free when done. */
+void * flight_vec_ref_dyn_modifier_create(void);
+size_t flight_vec_ref_dyn_modifier_len(void * arg0);
+/* Borrowed return; do not free; valid while the flight_vec_ref_dyn_modifier handle remains alive. */
+void * flight_vec_ref_dyn_modifier_get(void * arg0, size_t arg1);
+void flight_vec_ref_dyn_modifier_free(void * arg0);
+/* Caller owns the return value; call flight_vec_ref_flow_state_free when done. */
+void * flight_vec_ref_flow_state_create(void);
+size_t flight_vec_ref_flow_state_len(void * arg0);
+/* Borrowed return; do not free; valid while the flight_vec_ref_flow_state handle remains alive. */
+void * flight_vec_ref_flow_state_get(void * arg0, size_t arg1);
+void flight_vec_ref_flow_state_free(void * arg0);
+/* Caller owns the return value; call flight_vec_ref_texture_free when done. */
+void * flight_vec_ref_texture_create(void);
+size_t flight_vec_ref_texture_len(void * arg0);
+/* Borrowed return; do not free; valid while the flight_vec_ref_texture handle remains alive. */
+void * flight_vec_ref_texture_get(void * arg0, size_t arg1);
+void flight_vec_ref_texture_free(void * arg0);
+/* Caller owns the return value; call flight_vec_ref_texture_atlas_region_free when done. */
+void * flight_vec_ref_texture_atlas_region_create(void);
+size_t flight_vec_ref_texture_atlas_region_len(void * arg0);
+/* Borrowed return; do not free; valid while the flight_vec_ref_texture_atlas_region handle remains alive. */
+void * flight_vec_ref_texture_atlas_region_get(void * arg0, size_t arg1);
+void flight_vec_ref_texture_atlas_region_free(void * arg0);
+/* Caller owns the return value; call flight_vec_ref_tray_icon_free when done. */
+void * flight_vec_ref_tray_icon_create(void);
+size_t flight_vec_ref_tray_icon_len(void * arg0);
+/* Borrowed return; do not free; valid while the flight_vec_ref_tray_icon handle remains alive. */
+void * flight_vec_ref_tray_icon_get(void * arg0, size_t arg1);
+void flight_vec_ref_tray_icon_free(void * arg0);
+void flight_clear_import_diagnostic_list(void * arg0);
+/* Caller owns the return value; call flight_destroy_import_diagnostic_list when done. */
+void * flight_create_import_diagnostic_list(void);
+void flight_destroy_import_diagnostic_list(void * arg0);
+bool flight_get_import_diagnostic_list_detail_bool(void * arg0, size_t arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_get_import_diagnostic_list_detail_key(void * arg0, size_t arg1, size_t arg2);
+int32_t flight_get_import_diagnostic_list_detail_kind(void * arg0, size_t arg1, size_t arg2);
+size_t flight_get_import_diagnostic_list_detail_length(void * arg0, size_t arg1);
+float flight_get_import_diagnostic_list_detail_number(void * arg0, size_t arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_get_import_diagnostic_list_detail_string(void * arg0, size_t arg1, size_t arg2);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_get_import_diagnostic_list_kind(void * arg0, size_t arg1);
+size_t flight_get_import_diagnostic_list_length(void * arg0);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_get_import_diagnostic_list_message(void * arg0, size_t arg1);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_get_import_diagnostic_list_origin(void * arg0, size_t arg1);
+int32_t flight_get_import_diagnostic_list_severity(void * arg0, size_t arg1);
+/* Caller owns the return value; call flight_free_float32_array_ref when done. */
+void * flight_create_float32_array_ref(void * arg0, size_t arg1);
+void flight_free_float32_array_ref(void * arg0);
+size_t flight_get_float32_array_ref_length(void * arg0);
+size_t flight_read_float32_array_ref(void * arg0, size_t arg1, void * arg2, size_t arg3);
+size_t flight_write_float32_array_ref(void * arg0, size_t arg1, void * arg2, size_t arg3);
+/* Caller owns the return value; call flight_free_uint8_array_ref when done. */
+void * flight_create_uint8_array_ref(void * arg0, size_t arg1);
+void flight_free_uint8_array_ref(void * arg0);
+size_t flight_get_uint8_array_ref_length(void * arg0);
+size_t flight_read_uint8_array_ref(void * arg0, size_t arg1, void * arg2, size_t arg3);
+size_t flight_write_uint8_array_ref(void * arg0, size_t arg1, void * arg2, size_t arg3);
+void flight_clear_texture_atlas_region_map(void * arg0);
+/* Caller owns the return value; call flight_destroy_texture_atlas_region_map when done. */
+void * flight_create_texture_atlas_region_map(void);
+void flight_destroy_texture_atlas_region_map(void * arg0);
+size_t flight_get_texture_atlas_region_map_length(void * arg0);
+void flight_clear_string_count_map(void * arg0);
+/* Caller owns the return value; call flight_destroy_string_count_map when done. */
+void * flight_create_string_count_map(void);
+void flight_destroy_string_count_map(void * arg0);
+size_t flight_get_string_count_map_length(void * arg0);
+void flight_clear_u64_count_map(void * arg0);
+/* Caller owns the return value; call flight_destroy_u64_count_map when done. */
+void * flight_create_u64_count_map(void);
+void flight_destroy_u64_count_map(void * arg0);
+size_t flight_get_u64_count_map_length(void * arg0);
+void flight_clear_optional_texture_atlas_list(void * arg0);
+/* Caller owns the return value; call flight_destroy_optional_texture_atlas_list when done. */
+void * flight_create_optional_texture_atlas_list(void);
+void flight_destroy_optional_texture_atlas_list(void * arg0);
+size_t flight_get_optional_texture_atlas_list_length(void * arg0);
+/* Caller owns the return value; call flight_free_texture_atlas_ref when done. */
+void * flight_get_optional_texture_atlas_list_item(void * arg0, size_t arg1);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_get_string_count_map_key(void * arg0, size_t arg1);
+int64_t flight_get_string_count_map_value(void * arg0, const char * arg1);
+bool flight_get_u64_count_map_key(void * arg0, size_t arg1, void * arg2);
+int64_t flight_get_u64_count_map_value(void * arg0, uint64_t arg1);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_get_texture_atlas_region_map_key(void * arg0, size_t arg1);
+/* Caller owns the return value; call flight_free_texture_atlas_region_ref when done. */
+void * flight_get_texture_atlas_region_map_value(void * arg0, const char * arg1);
+bool flight_call_disposer(void * arg0);
+void flight_free_disposer(void * arg0);
+size_t flight_get_storage_set_items_result_completed(void * arg0);
+/* Caller owns the return value; call flight_free_string when done. */
+char * flight_get_storage_set_items_result_failed_key(void * arg0);
+int32_t flight_get_storage_set_items_result_reason(void * arg0);
+bool flight_is_storage_set_items_result_ok(void * arg0);
 void flight_free_string(char * arg0);
+void flight_free_f32_array_20(void * arg0);
 void flight_free_aabb(void * arg0);
 void flight_free_abc_file(void * arg0);
+void flight_free_accelerator(void * arg0);
+void flight_free_accelerator_parse_error(void * arg0);
 void flight_free_ambient_light(void * arg0);
 void flight_free_animated_normal_modifier(void * arg0);
 void flight_free_animation_blend_tree(void * arg0);
 void flight_free_animation_blend_tree_input(void * arg0);
-void flight_free_animation_channel(void * arg0);
 void flight_free_animation_clip(void * arg0);
 void flight_free_animation_clip_event(void * arg0);
 void flight_free_animation_crossfade(void * arg0);
@@ -7028,33 +10535,45 @@ void flight_free_animation_root_motion_extractor(void * arg0);
 void flight_free_animation_sample_accumulator(void * arg0);
 void flight_free_animation_state_machine_state(void * arg0);
 void flight_free_animation_track(void * arg0);
+void flight_free_app_events(void * arg0);
+void flight_free_app_lifecycle(void * arg0);
+void flight_free_app_login_item(void * arg0);
 void flight_free_area_light(void * arg0);
+void flight_free_aseprite_parsed(void * arg0);
+void flight_free_asset_load_explanation(void * arg0);
 void flight_free_audio_resource_reference(void * arg0);
 void flight_free_audio_resource_reference_resolution_explanation(void * arg0);
+void flight_free_audio_source_handle(void * arg0);
 void flight_free_awd2_parse_state(void * arg0);
+void flight_free_backend_operation_explanation(void * arg0);
 void flight_free_bitmap(void * arg0);
 void flight_free_bitmap_encode_failure_explanation(void * arg0);
 void flight_free_bitmap_fingerprint(void * arg0);
 void flight_free_bitmap_font_format_kind(void * arg0);
 void flight_free_bitmap_font_glyph_explanation(void * arg0);
-void flight_free_bitmap_font_guard_log_key(void * arg0);
-void flight_free_bitmap_font_guard_reason(void * arg0);
-void flight_free_bitmap_font_guard_state_ref(void * arg0);
 void flight_free_bitmap_font_parse_explanation(void * arg0);
 void flight_free_bitmap_font_summary(void * arg0);
 void flight_free_bitmap_histogram(void * arg0);
 void flight_free_bitmap_mismatch(void * arg0);
 void flight_free_bitmap_region(void * arg0);
+void flight_free_bitmap_text_missing_glyphs(void * arg0);
 void flight_free_bounding_sphere(void * arg0);
 void flight_free_brightness_contrast_adjustment(void * arg0);
+void flight_free_buffered_log_sink(void * arg0);
 void flight_free_camera2_d(void * arg0);
 void flight_free_camera3_d(void * arg0);
 void flight_free_camera3_dview_explanation(void * arg0);
 void flight_free_camera_shake(void * arg0);
 void flight_free_camera_shake_offset(void * arg0);
 void flight_free_capsule(void * arg0);
+void flight_free_capture_baseline(void * arg0);
+void flight_free_capture_baseline_provenance(void * arg0);
+void flight_free_capture_check_result(void * arg0);
 void flight_free_channel_mixer_adjustment(void * arg0);
+void flight_free_clip_region_contours_explanation(void * arg0);
 void flight_free_clip_region_explanation(void * arg0);
+void flight_free_clipboard_watch(void * arg0);
+void flight_free_cocos_plist_parsed(void * arg0);
 void flight_free_collision_collider_shape3_d(void * arg0);
 void flight_free_collision_contact_manifold2_d(void * arg0);
 void flight_free_collision_contact_manifold3_d(void * arg0);
@@ -7075,70 +10594,126 @@ void flight_free_color_lut_cache(void * arg0);
 void flight_free_color_matrix_adjustment(void * arg0);
 void flight_free_color_scale_bias_adjustment(void * arg0);
 void flight_free_color_transform_function(void * arg0);
+void flight_free_command_binding_ref(void * arg0);
+void flight_free_command_binding_table(void * arg0);
+void flight_free_command_dispatch_explanation(void * arg0);
+void flight_free_connectivity(void * arg0);
+void flight_free_create_global_shortcut_outcome(void * arg0);
 void flight_free_cube_texture(void * arg0);
+void flight_free_debug_state(void * arg0);
+void flight_free_device_capabilities(void * arg0);
+void flight_free_device_display_metrics(void * arg0);
+void flight_free_device_form_factor(void * arg0);
+void flight_free_device_info(void * arg0);
 void flight_free_directional_light(void * arg0);
-void flight_free_display_object_runtime(void * arg0);
+void flight_free_directory_open_dialog_result(void * arg0);
 void flight_free_dissolve_modifier(void * arg0);
+void flight_free_dragon_bones_registry(void * arg0);
 void flight_free_easing_function(void * arg0);
 void flight_free_emissive_modifier(void * arg0);
 void flight_free_entity_runtime_write_explanation(void * arg0);
 void flight_free_env_reflect_modifier(void * arg0);
 void flight_free_environment(void * arg0);
 void flight_free_exposure_adjustment(void * arg0);
+void flight_free_file_dialog_handle_operations(void * arg0);
+void flight_free_file_open_dialog_result(void * arg0);
+void flight_free_file_permissions(void * arg0);
+void flight_free_file_save_dialog_result(void * arg0);
+void flight_free_file_stat(void * arg0);
+void flight_free_file_system_usage(void * arg0);
+void flight_free_file_watch_unsubscribe(void * arg0);
+void flight_free_flight_document_refusal_explanation(void * arg0);
+void flight_free_flight_document_scene(void * arg0);
+void flight_free_flight_document_token_resolution(void * arg0);
+void flight_free_flight_document_token_resolver_registry(void * arg0);
 void flight_free_fly_camera_controller(void * arg0);
 void flight_free_fog_modifier(void * arg0);
+void flight_free_font_metrics(void * arg0);
 void flight_free_font_resource(void * arg0);
 void flight_free_frame_script(void * arg0);
 void flight_free_frustum(void * arg0);
+void flight_free_geolocation_position(void * arg0);
+void flight_free_gizmo_node2_dfeatures(void * arg0);
+void flight_free_gizmo_signals(void * arg0);
+void flight_free_gizmo_state(void * arg0);
+void flight_free_glyph_atlas_entry_explanation(void * arg0);
+void flight_free_glyph_extents(void * arg0);
+void flight_free_glyph_metrics(void * arg0);
 void flight_free_grayscale_adjustment(void * arg0);
 void flight_free_hemisphere_light(void * arg0);
+void flight_free_host_canvas_capability(void * arg0);
+void flight_free_host_capability_explanation(void * arg0);
+void flight_free_host_glyph_rasterizer_capability(void * arg0);
 void flight_free_hsl_color(void * arg0);
 void flight_free_hsv_color(void * arg0);
-void flight_free_html_view_data(void * arg0);
-void flight_free_html_view_runtime(void * arg0);
 void flight_free_hue_saturation_adjustment(void * arg0);
-void flight_free_image_resolver_state(void * arg0);
+void flight_free_image_open_dialog_result(void * arg0);
+void flight_free_image_resource_fetch(void * arg0);
 void flight_free_image_resource_reference_resolution_explanation(void * arg0);
 void flight_free_input_disposer(void * arg0);
+void flight_free_input_pointer_lock_exit_future(void * arg0);
+void flight_free_input_pointer_lock_request_future(void * arg0);
 void flight_free_invert_adjustment(void * arg0);
+void flight_free_ipc_unsubscribe(void * arg0);
+void flight_free_lasso_selection(void * arg0);
 void flight_free_layout_resolution_explanation(void * arg0);
 void flight_free_layout_state(void * arg0);
 void flight_free_libgdx_parse_result(void * arg0);
 void flight_free_lift_gamma_gain_adjustment(void * arg0);
 void flight_free_light_probe(void * arg0);
+void flight_free_light_probe_grid(void * arg0);
 void flight_free_linear_color(void * arg0);
+void flight_free_log_context(void * arg0);
+void flight_free_log_formatter(void * arg0);
+void flight_free_log_level(void * arg0);
+void flight_free_log_sink(void * arg0);
+void flight_free_log_span(void * arg0);
+void flight_free_log_state(void * arg0);
+void flight_free_log_timer(void * arg0);
 void flight_free_lookup_table_grade_adjustment(void * arg0);
-void flight_free_lottie_gradient_paint(void * arg0);
 void flight_free_lottie_layer_handler(void * arg0);
 void flight_free_lottie_mask_handler(void * arg0);
 void flight_free_lottie_registry(void * arg0);
 void flight_free_lottie_shape_item_handler(void * arg0);
-void flight_free_lottie_shape_path(void * arg0);
+void flight_free_marquee_selection(void * arg0);
 void flight_free_matrix(void * arg0);
 void flight_free_matrix3(void * arg0);
 void flight_free_matrix4(void * arg0);
+void flight_free_media_session_action_signal(void * arg0);
+void flight_free_media_session_clear_metadata_outcome(void * arg0);
+void flight_free_media_session_clear_position_state_outcome(void * arg0);
+void flight_free_media_session_set_metadata_outcome(void * arg0);
+void flight_free_media_session_set_playback_state_outcome(void * arg0);
+void flight_free_media_session_set_position_state_outcome(void * arg0);
+void flight_free_memory_log_sink(void * arg0);
+void flight_free_menu_highlight(void * arg0);
+void flight_free_menu_select(void * arg0);
+void flight_free_message_dialog_result(void * arg0);
+void flight_free_midi_message_send_outcome(void * arg0);
+void flight_free_midi_port_connection_outcome(void * arg0);
+void flight_free_midi_port_state_outcome(void * arg0);
+void flight_free_modifier_registry(void * arg0);
 void flight_free_morph_shape_data(void * arg0);
 void flight_free_morph_shape_gradient_endpoint_explanation(void * arg0);
 void flight_free_motion_path(void * arg0);
-void flight_free_movie_clip_data(void * arg0);
-void flight_free_movie_clip_runtime(void * arg0);
 void flight_free_movie_clip_signals(void * arg0);
-void flight_free_node2_druntime(void * arg0);
 void flight_free_node_order_list(void * arg0);
-void flight_free_node_runtime(void * arg0);
+void flight_free_notification_action_subscription(void * arg0);
+void flight_free_notification_click_subscription(void * arg0);
+void flight_free_notification_dismiss_subscription(void * arg0);
+void flight_free_notification_received_subscription(void * arg0);
+void flight_free_notification_reply_subscription(void * arg0);
 void flight_free_obb(void * arg0);
 void flight_free_orbit_camera_controller(void * arg0);
 void flight_free_pack_result(void * arg0);
+void flight_free_parsed_accelerator(void * arg0);
+void flight_free_parsed_protocol_url(void * arg0);
 void flight_free_particle_config_parse_result(void * arg0);
 void flight_free_particle_designer_parse_result(void * arg0);
 void flight_free_particle_emitter_config(void * arg0);
-void flight_free_particle_emitter_config_options(void * arg0);
-void flight_free_particle_emitter_data(void * arg0);
 void flight_free_particle_emitter_signals(void * arg0);
 void flight_free_particle_emitter_state(void * arg0);
-void flight_free_particle_format_descriptor(void * arg0);
 void flight_free_particle_format_kind(void * arg0);
-void flight_free_particle_format_registry(void * arg0);
 void flight_free_particle_objects_state(void * arg0);
 void flight_free_particle_serialize_result(void * arg0);
 void flight_free_path(void * arg0);
@@ -7148,6 +10723,7 @@ void flight_free_path_mesh(void * arg0);
 void flight_free_path_mesh_typed(void * arg0);
 void flight_free_path_morph(void * arg0);
 void flight_free_path_morph_creation_explanation(void * arg0);
+void flight_free_photo_capture_dialog_result(void * arg0);
 void flight_free_physics2_dabi(void * arg0);
 void flight_free_physics2_dabi_body_buffer(void * arg0);
 void flight_free_physics2_dabi_command_buffer(void * arg0);
@@ -7176,85 +10752,295 @@ void flight_free_physics3_dabi_joint_buffer(void * arg0);
 void flight_free_physics3_dabi_query_buffer(void * arg0);
 void flight_free_pixi_parse_result(void * arg0);
 void flight_free_plane(void * arg0);
+void flight_free_platform_info(void * arg0);
 void flight_free_point_light(void * arg0);
-void flight_free_quad_batch_data(void * arg0);
+void flight_free_power(void * arg0);
+void flight_free_power_battery_health(void * arg0);
+void flight_free_power_keep_awake_acquire_future(void * arg0);
+void flight_free_power_keep_awake_release_future(void * arg0);
+void flight_free_power_status(void * arg0);
+void flight_free_protocol_handler(void * arg0);
 void flight_free_quaternion(void * arg0);
 void flight_free_random_source(void * arg0);
+void flight_free_rate_limited_log_sink(void * arg0);
 void flight_free_ray3_d(void * arg0);
+void flight_free_readable_stream(void * arg0);
 void flight_free_rectangle(void * arg0);
+void flight_free_material3_d_ref(void * arg0);
+void flight_free_node2_d_ref(void * arg0);
+void flight_free_node_ref(void * arg0);
+void flight_free_add_node_child_command_ref(void * arg0);
+void flight_free_app_loop_ref(void * arg0);
+void flight_free_app_window_ref(void * arg0);
+void flight_free_audio_buffer_ref(void * arg0);
+void flight_free_audio_bus_ref(void * arg0);
+void flight_free_audio_channel_ref(void * arg0);
+void flight_free_audio_mixer_ref(void * arg0);
+void flight_free_audio_resource_ref(void * arg0);
+void flight_free_audio_resource_failure_ref(void * arg0);
+void flight_free_auto_exposure_effect_ref(void * arg0);
+void flight_free_barrel_distortion_effect_ref(void * arg0);
+void flight_free_bevel_effect_ref(void * arg0);
+void flight_free_bitmap_ref(void * arg0);
+void flight_free_bitmap_displacement_effect_ref(void * arg0);
+void flight_free_bitmap_font_ref(void * arg0);
+void flight_free_bitmap_text_ref(void * arg0);
+void flight_free_blend_effect_ref(void * arg0);
+void flight_free_bloom_effect_ref(void * arg0);
+void flight_free_blur_effect_ref(void * arg0);
+void flight_free_bokeh_depth_of_field_effect_ref(void * arg0);
+void flight_free_camera_motion_blur_effect_ref(void * arg0);
+void flight_free_canvas_surface_ref(void * arg0);
+void flight_free_chromatic_aberration_effect_ref(void * arg0);
+void flight_free_clip_region_ref(void * arg0);
+void flight_free_clock_ref(void * arg0);
+void flight_free_command_history_ref(void * arg0);
+void flight_free_composite_command_ref(void * arg0);
+void flight_free_composite_effect_ref(void * arg0);
+void flight_free_contact_shadows_effect_ref(void * arg0);
+void flight_free_convolution_effect_ref(void * arg0);
+void flight_free_crt_effect_ref(void * arg0);
+void flight_free_custom_shader_effect_ref(void * arg0);
+void flight_free_directional_blur_effect_ref(void * arg0);
+void flight_free_displacement_effect_ref(void * arg0);
+void flight_free_display_object_ref(void * arg0);
+void flight_free_dither_effect_ref(void * arg0);
+void flight_free_drop_shadow_effect_ref(void * arg0);
+void flight_free_embedded_audio_resource_reference_ref(void * arg0);
+void flight_free_embedded_image_resource_reference_ref(void * arg0);
+void flight_free_external_audio_resource_reference_ref(void * arg0);
+void flight_free_external_image_resource_reference_ref(void * arg0);
+void flight_free_film_emulation_effect_ref(void * arg0);
+void flight_free_film_grain_effect_ref(void * arg0);
+void flight_free_flow_stack_ref(void * arg0);
+void flight_free_flow_state_ref(void * arg0);
+void flight_free_fxaa_effect_ref(void * arg0);
+void flight_free_glitch_effect_ref(void * arg0);
+void flight_free_glyph_atlas_ref(void * arg0);
+void flight_free_glyph_entry_ref(void * arg0);
+void flight_free_glyph_source_ref(void * arg0);
+void flight_free_god_rays_effect_ref(void * arg0);
+void flight_free_gradient_bevel_effect_ref(void * arg0);
+void flight_free_gradient_glow_effect_ref(void * arg0);
+void flight_free_halftone_effect_ref(void * arg0);
+void flight_free_html_view_ref(void * arg0);
+void flight_free_image_resource_ref(void * arg0);
+void flight_free_image_resource_failure_ref(void * arg0);
+void flight_free_inner_glow_effect_ref(void * arg0);
+void flight_free_inner_shadow_effect_ref(void * arg0);
+void flight_free_input_key_repeat_timer_ref(void * arg0);
+void flight_free_input_manager_ref(void * arg0);
+void flight_free_input_state_ref(void * arg0);
+void flight_free_input_target_handle_ref(void * arg0);
+void flight_free_kuwahara_effect_ref(void * arg0);
+void flight_free_lens_dirt_effect_ref(void * arg0);
+void flight_free_lens_distortion_effect_ref(void * arg0);
+void flight_free_lens_flare_effect_ref(void * arg0);
+void flight_free_media_channel_signals_ref(void * arg0);
+void flight_free_median_effect_ref(void * arg0);
+void flight_free_menu_item_template_ref(void * arg0);
+void flight_free_menu_signals_ref(void * arg0);
+void flight_free_midi_access_state_subscription_ref(void * arg0);
+void flight_free_midi_input_message_subscription_ref(void * arg0);
+void flight_free_midi_input_port_ref(void * arg0);
+void flight_free_midi_output_port_ref(void * arg0);
+void flight_free_midi_port_state_subscription_ref(void * arg0);
+void flight_free_modifier_definition_ref(void * arg0);
+void flight_free_morph_shape_ref(void * arg0);
+void flight_free_morph_shape_animation_target_ref(void * arg0);
+void flight_free_motion_blur_effect_ref(void * arg0);
+void flight_free_movie_clip_ref(void * arg0);
+void flight_free_native_text_ref(void * arg0);
+void flight_free_native_text_style_ref(void * arg0);
+void flight_free_node_signals_ref(void * arg0);
+void flight_free_orthographic_projection_ref(void * arg0);
+void flight_free_outer_glow_effect_ref(void * arg0);
+void flight_free_outline_effect_ref(void * arg0);
+void flight_free_pannini_projection_effect_ref(void * arg0);
+void flight_free_particle_emitter2_d_ref(void * arg0);
+void flight_free_particle_emitter3_d_ref(void * arg0);
+void flight_free_path_ref(void * arg0);
+void flight_free_perspective_projection_ref(void * arg0);
+void flight_free_physics2_dcollider_ref(void * arg0);
+void flight_free_physics2_ddistance_joint_ref(void * arg0);
+void flight_free_physics2_dgear_joint_ref(void * arg0);
+void flight_free_physics2_dmouse_joint_ref(void * arg0);
+void flight_free_physics2_dprismatic_joint_ref(void * arg0);
+void flight_free_physics2_dpulley_joint_ref(void * arg0);
+void flight_free_physics2_drevolute_joint_ref(void * arg0);
+void flight_free_physics2_drope_joint_ref(void * arg0);
+void flight_free_physics2_dweld_joint_ref(void * arg0);
+void flight_free_physics2_dwheel_joint_ref(void * arg0);
+void flight_free_pixelate_effect_ref(void * arg0);
+void flight_free_posterize_effect_ref(void * arg0);
+void flight_free_quad_batch_ref(void * arg0);
+void flight_free_quad_batch_signals_ref(void * arg0);
+void flight_free_radial_blur_effect_ref(void * arg0);
+void flight_free_raw_projection_ref(void * arg0);
+void flight_free_remove_node_child_command_ref(void * arg0);
+void flight_free_reorder_node_child_command_ref(void * arg0);
+void flight_free_rich_text_ref(void * arg0);
+void flight_free_rigid_body2_d_ref(void * arg0);
+void flight_free_scale9_shape_ref(void * arg0);
+void flight_free_scale9_sprite_ref(void * arg0);
+void flight_free_scanlines_effect_ref(void * arg0);
+void flight_free_scene2_d_ref(void * arg0);
+void flight_free_scene2_ddocument_ref(void * arg0);
+void flight_free_scene2_dsignals_ref(void * arg0);
+void flight_free_scene2_dslot_reference_ref(void * arg0);
+void flight_free_scene3_dresource_resolver_ref(void * arg0);
+void flight_free_scene3_dresource_signals_ref(void * arg0);
+void flight_free_screen_space_fog_effect_ref(void * arg0);
+void flight_free_selectable_rich_text_manager_ref(void * arg0);
+void flight_free_shape_ref(void * arg0);
+void flight_free_shaped_run_ref(void * arg0);
+void flight_free_sharpen_effect_ref(void * arg0);
+void flight_free_sketch_effect_ref(void * arg0);
+void flight_free_smaa_effect_ref(void * arg0);
+void flight_free_socket_ref(void * arg0);
+void flight_free_socket_signals_ref(void * arg0);
+void flight_free_sprite_ref(void * arg0);
+void flight_free_spritesheet_animation_ref(void * arg0);
+void flight_free_spritesheet_frame_ref(void * arg0);
+void flight_free_spritesheet_player_ref(void * arg0);
+void flight_free_ssao_effect_ref(void * arg0);
+void flight_free_ssr_effect_ref(void * arg0);
+void flight_free_statechart_instance_raw_ref(void * arg0);
+void flight_free_taa_effect_ref(void * arg0);
+void flight_free_text_field_signals_ref(void * arg0);
+void flight_free_text_format_ref(void * arg0);
+void flight_free_text_input_manager_ref(void * arg0);
+void flight_free_text_input_state_ref(void * arg0);
+void flight_free_text_layout_result_ref(void * arg0);
+void flight_free_texture2_d_ref(void * arg0);
+void flight_free_texture_ref(void * arg0);
+void flight_free_texture_atlas_ref(void * arg0);
+void flight_free_texture_atlas_region_ref(void * arg0);
+void flight_free_tilemap_ref(void * arg0);
+void flight_free_tilt_shift_effect_ref(void * arg0);
+void flight_free_timeline_ref(void * arg0);
+void flight_free_timeline_signals_ref(void * arg0);
+void flight_free_tone_map_effect_ref(void * arg0);
+void flight_free_video_channel_ref(void * arg0);
+void flight_free_vignette_effect_ref(void * arg0);
+void flight_free_volumetric_light_effect_ref(void * arg0);
+void flight_free_white_balance_effect_ref(void * arg0);
+void flight_free_xml_element_ref(void * arg0);
+void flight_free_render_cache(void * arg0);
+void flight_free_requirement_catalog(void * arg0);
+void flight_free_requirement_codegen_plan(void * arg0);
 void flight_free_requirement_set(void * arg0);
+void flight_free_rich_text_content(void * arg0);
 void flight_free_rim_modifier(void * arg0);
+void flight_free_rive_document(void * arg0);
+void flight_free_rive_document_import_result(void * arg0);
 void flight_free_rive_field_type(void * arg0);
 void flight_free_rive_import_registry(void * arg0);
-void flight_free_rive_skeleton2_dimport(void * arg0);
+void flight_free_rive_object_graph(void * arg0);
+void flight_free_rive_path_record(void * arg0);
+void flight_free_rive_scene2_ddocument_result(void * arg0);
+void flight_free_safe_area_insets(void * arg0);
 void flight_free_sampler(void * arg0);
 void flight_free_scalar_remap(void * arg0);
 void flight_free_scale9_shape_data(void * arg0);
-void flight_free_scale9_sprite_data(void * arg0);
+void flight_free_scene2_ddocument_importer_registry(void * arg0);
 void flight_free_scene2_dkind_usage(void * arg0);
-void flight_free_scene2_druntime(void * arg0);
+void flight_free_scene3_ddocument(void * arg0);
 void flight_free_scene3_dhit(void * arg0);
 void flight_free_scene3_dlights(void * arg0);
+void flight_free_scene3_dresources(void * arg0);
+void flight_free_screen_info(void * arg0);
+void flight_free_screen_mode(void * arg0);
+void flight_free_screen_permission_change(void * arg0);
+void flight_free_screen_signals(void * arg0);
+void flight_free_selection_signals(void * arg0);
+void flight_free_selection_state(void * arg0);
+void flight_free_sensors(void * arg0);
 void flight_free_sepia_adjustment(void * arg0);
 void flight_free_shaded_material(void * arg0);
 void flight_free_shape_bounds_explanation(void * arg0);
 void flight_free_shape_data(void * arg0);
 void flight_free_shape_tessellation_explanation(void * arg0);
+void flight_free_shell_process(void * arg0);
+void flight_free_unit_signal(void * arg0);
 void flight_free_signal_scope(void * arg0);
 void flight_free_signal_timer_state(void * arg0);
 void flight_free_skeleton2_danimation_target(void * arg0);
 void flight_free_skeleton2_danimation_target_binder(void * arg0);
-void flight_free_skeleton2_danimation_target_binder_registry(void * arg0);
-void flight_free_skeleton2_danimation_target_handle(void * arg0);
 void flight_free_skeleton2_ddeform_length_explanation(void * arg0);
+void flight_free_skeleton2_dimport(void * arg0);
+void flight_free_skeleton2_djson_analysis(void * arg0);
 void flight_free_skeleton2_dslot_animation_target(void * arg0);
 void flight_free_skin2_d(void * arg0);
-void flight_free_snapshot_guard_state(void * arg0);
+void flight_free_socket_send_failure_explanation(void * arg0);
+void flight_free_soft_keyboard(void * arg0);
 void flight_free_spatial_index_backend3_d(void * arg0);
 void flight_free_spatial_indexing_explanation(void * arg0);
+void flight_free_spine_binary_registry(void * arg0);
+void flight_free_spine_binary_version_failure(void * arg0);
+void flight_free_spine_json_registry(void * arg0);
 void flight_free_spine_parse_result(void * arg0);
 void flight_free_spot_light(void * arg0);
 void flight_free_spring(void * arg0);
 void flight_free_spring2_d(void * arg0);
 void flight_free_spring3_d(void * arg0);
 void flight_free_spring_config(void * arg0);
-void flight_free_sprite_data(void * arg0);
-void flight_free_sprite_identity_renderer_data(void * arg0);
 void flight_free_spritesheet(void * arg0);
 void flight_free_spritesheet_animation_data(void * arg0);
 void flight_free_spritesheet_data(void * arg0);
 void flight_free_spritesheet_format_kind(void * arg0);
-void flight_free_spritesheet_format_registry(void * arg0);
 void flight_free_spritesheet_frame_data(void * arg0);
 void flight_free_spritesheet_timeline_source_explanation(void * arg0);
 void flight_free_starling_pex_parse_result(void * arg0);
-void flight_free_state_ref(void * arg0);
 void flight_free_statechart_signals(void * arg0);
 void flight_free_statechart_transition_explanation(void * arg0);
+void flight_free_status_bar(void * arg0);
+void flight_free_status_bar_style_entry_handle(void * arg0);
+void flight_free_storage_boolean_or_result(void * arg0);
+void flight_free_storage_boolean_result(void * arg0);
+void flight_free_storage_byte_size_result(void * arg0);
+void flight_free_storage_clear_namespace_result(void * arg0);
+void flight_free_storage_clear_result(void * arg0);
+void flight_free_storage_entries_result(void * arg0);
+void flight_free_storage_get_item_result(void * arg0);
+void flight_free_storage_item_count_result(void * arg0);
+void flight_free_storage_item_or_result(void * arg0);
+void flight_free_storage_items_result(void * arg0);
+void flight_free_storage_keys_result(void * arg0);
+void flight_free_storage_number_or_result(void * arg0);
+void flight_free_storage_number_result(void * arg0);
+void flight_free_storage_presence_result(void * arg0);
+void flight_free_storage_remove_item_result(void * arg0);
+void flight_free_storage_remove_items_result(void * arg0);
+void flight_free_storage_set_item_result(void * arg0);
+void flight_free_storage_set_items_result(void * arg0);
+void flight_free_storage_signals(void * arg0);
 void flight_free_stroke_path_tessellation_explanation(void * arg0);
 void flight_free_svg_clip_handler(void * arg0);
-void flight_free_svg_color(void * arg0);
 void flight_free_svg_element_handler(void * arg0);
 void flight_free_svg_path_data_explanation(void * arg0);
 void flight_free_svg_registry(void * arg0);
+void flight_free_tcp_socket_connection(void * arg0);
+void flight_free_text_input_disposer(void * arg0);
 void flight_free_text_label_content_explanation(void * arg0);
+void flight_free_text_layout_group(void * arg0);
 void flight_free_text_layout_params(void * arg0);
+void flight_free_text_layout_result(void * arg0);
 void flight_free_text_line_metrics(void * arg0);
+void flight_free_text_metrics(void * arg0);
 void flight_free_text_segment_range(void * arg0);
 void flight_free_text_segmenter_explanation(void * arg0);
+void flight_free_text_shaper_cache(void * arg0);
 void flight_free_texture(void * arg0);
 void flight_free_texture2_d(void * arg0);
 void flight_free_texture_atlas_format_kind(void * arg0);
-void flight_free_texture_atlas_format_registry(void * arg0);
 void flight_free_texture_atlas_region_texture_explanation(void * arg0);
 void flight_free_texture_container(void * arg0);
 void flight_free_texture_container_levels(void * arg0);
 void flight_free_texture_container_parse_explanation(void * arg0);
+void flight_free_texture_packer_parsed(void * arg0);
 void flight_free_texture_source_kind(void * arg0);
 void flight_free_texture_source_ref(void * arg0);
-void flight_free_tilemap_data(void * arg0);
-void flight_free_tilemap_runtime(void * arg0);
-void flight_free_tilemap_signals(void * arg0);
 void flight_free_timeline_label(void * arg0);
 void flight_free_timeline_source_ref(void * arg0);
 void flight_free_timer_id(void * arg0);
@@ -7262,17 +11048,35 @@ void flight_free_tint_adjustment(void * arg0);
 void flight_free_toon_modifier(void * arg0);
 void flight_free_transform2_d(void * arg0);
 void flight_free_transform3_d(void * arg0);
-void flight_free_tween_context(void * arg0);
+void flight_free_tray_animation_start_result(void * arg0);
+void flight_free_tray_balloon_display_result(void * arg0);
+void flight_free_tray_balloon_remove_result(void * arg0);
+void flight_free_tray_bounds_result(void * arg0);
+void flight_free_tray_create_result(void * arg0);
+void flight_free_tray_destroy_result(void * arg0);
+void flight_free_tray_double_click_policy_update_result(void * arg0);
+void flight_free_tray_image_update_result(void * arg0);
+void flight_free_tray_menu_update_result(void * arg0);
+void flight_free_tray_popup_menu_result(void * arg0);
+void flight_free_tray_pressed_image_update_result(void * arg0);
+void flight_free_tray_template_image_update_result(void * arg0);
+void flight_free_tray_title_read_result(void * arg0);
+void flight_free_tray_title_update_result(void * arg0);
+void flight_free_tray_tooltip_read_result(void * arg0);
+void flight_free_tray_tooltip_update_result(void * arg0);
 void flight_free_tween_manager(void * arg0);
 void flight_free_unity_parse_result(void * arg0);
+void flight_free_user_agent_pointer_width(void * arg0);
 void flight_free_vector2(void * arg0);
 void flight_free_vector3(void * arg0);
 void flight_free_vector4(void * arg0);
 void flight_free_velocity_explanation(void * arg0);
 void flight_free_velocity_field(void * arg0);
 void flight_free_vertex_displace_modifier(void * arg0);
+void flight_free_video_capture_dialog_result(void * arg0);
 void flight_free_video_resource(void * arg0);
 void flight_free_viewport(void * arg0);
+void flight_free_writable_stream(void * arg0);
 void flight_free_xml_element(void * arg0);
 #ifdef __cplusplus
 }

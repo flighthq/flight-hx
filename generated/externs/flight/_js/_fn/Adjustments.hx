@@ -144,6 +144,8 @@ extern class Adjustments {
 	public static function applyColorMatrixToColor(matrix:Dynamic, packedRgba:Int):Int;
 	@:native("concatColorMatrix")
 	public static function concatColorMatrix(target:Dynamic, source:Dynamic):Void;
+	@:native("fuseColorMatrices")
+	public static function fuseColorMatrices(matrices:Dynamic):Dynamic;
 	@:native("multiplyColorMatrix")
 	public static function multiplyColorMatrix(out:Dynamic, a:Dynamic, b:Dynamic):Void;
 	@:native("createColorScaleBiasAdjustment")

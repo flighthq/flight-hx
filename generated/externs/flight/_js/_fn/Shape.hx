@@ -26,8 +26,12 @@ extern class Shape {
 	public static function applyMorphShapeAnimationSample(sampled:Dynamic, channel:flight._js.AnimationChannel):Bool;
 	@:native("appendMorphShapeBeginFill")
 	public static function appendMorphShapeBeginFill(shape:Dynamic, start:flight._js.MorphShapeColorEndpoint, end:flight._js.MorphShapeColorEndpoint):Void;
+	@:native("appendMorphShapeBeginGradientFill")
+	public static function appendMorphShapeBeginGradientFill(shape:Dynamic, gradientType:Dynamic, start:flight._js.MorphShapeGradientEndpoint, end:flight._js.MorphShapeGradientEndpoint, spreadMethod:Null<Dynamic>, interpolationMethod:Null<Dynamic>):Bool;
 	@:native("appendMorphShapeBeginTextureFill")
 	public static function appendMorphShapeBeginTextureFill(shape:Dynamic, texture:Dynamic, startMatrix:Null<flight._js.Matrix>, endMatrix:Null<flight._js.Matrix>):Void;
+	@:native("appendMorphShapeLineGradientStyle")
+	public static function appendMorphShapeLineGradientStyle(shape:Dynamic, gradientType:Dynamic, start:flight._js.MorphShapeGradientEndpoint, end:flight._js.MorphShapeGradientEndpoint, spreadMethod:Null<Dynamic>, interpolationMethod:Null<Dynamic>):Bool;
 	@:native("appendMorphShapeLineStyle")
 	public static function appendMorphShapeLineStyle(shape:Dynamic, start:flight._js.MorphShapeLineEndpoint, end:flight._js.MorphShapeLineEndpoint, pixelHinting:Null<Bool>, scaleMode:Null<Dynamic>, caps:Null<Dynamic>, joints:Null<Dynamic>, miterLimit:Null<Float>):Void;
 	@:native("appendMorphShapeLineTextureStyle")

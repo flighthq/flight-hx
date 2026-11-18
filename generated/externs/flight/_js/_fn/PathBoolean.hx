@@ -46,6 +46,8 @@ extern class PathBoolean {
 	public static function parsePathOffsetJoin(value:String):Null<Dynamic>;
 	@:native("simplifyPath")
 	public static function simplifyPath(out:flight._js.Path, pathBooleanKernel:flight._js.PathBooleanKernel, path:flight._js.Path, options:Null<flight._js.PathBooleanOptions>):Void;
+	@:native("unionAllPaths")
+	public static function unionAllPaths(out:flight._js.Path, pathBooleanKernel:flight._js.PathBooleanKernel, paths:Dynamic, options:Null<flight._js.PathBooleanOptions>):Void;
 	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freePathBooleanExplanation(ptr:flight._js.PathBooleanExplanation):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */

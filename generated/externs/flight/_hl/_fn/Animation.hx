@@ -25,8 +25,6 @@ extern class Animation {
 	public static function sampleAnimationBlendTreeChannel(out:hl.Bytes, outLen:Int, tree:flight._hl.AnimationBlendTree, channelIndex:Int):Bool;
 	@:hlNative("flight", "flight_set_animation_blend_tree_input_weight")
 	public static function setAnimationBlendTreeInputWeight(tree:flight._hl.AnimationBlendTree, inputIndex:Int, weight:Single):Bool;
-	@:hlNative("flight", "flight_create_animation_channel")
-	public static function createAnimationChannel(track:hl.Bytes, targetRef:flight._hl.TargetRef):flight._hl.AnimationChannel;
 	@:hlNative("flight", "flight_create_animation_clip")
 	public static function createAnimationClip(channels:hl.Bytes, duration:Single, events:hl.Bytes, eventsLen:Int):flight._hl.AnimationClip;
 	@:hlNative("flight", "flight_create_animation_clip_event")
@@ -91,8 +89,6 @@ extern class Animation {
 	public static function sampleAnimationStateMachine(out:hl.Bytes, outLen:Int, machine:flight._hl.AnimationStateMachine, visitFn:hl.Bytes, visitCtx:hl.Bytes):Void;
 	@:hlNative("flight", "flight_sample_animation_state_machine_channel")
 	public static function sampleAnimationStateMachineChannel(out:hl.Bytes, outLen:Int, machine:flight._hl.AnimationStateMachine, channelIndex:Int):Bool;
-	@:hlNative("flight", "flight_transition_animation_state_machine")
-	public static function transitionAnimationStateMachine(machine:flight._hl.AnimationStateMachine, toState:flight._hl.StateRef, duration:Single, curveFn:hl.Bytes, curveCtx:hl.Bytes):Bool;
 	@:hlNative("flight", "flight_create_animation_track")
 	public static function createAnimationTrack():flight._hl.AnimationTrack;
 	@:hlNative("flight", "flight_clone_animation_track")
@@ -103,18 +99,12 @@ extern class Animation {
 	public static function trimAnimationTrack(track:flight._hl.AnimationTrack, startTime:Single, endTime:Single):flight._hl.AnimationTrack;
 	@:hlNative("flight", "flight_validate_animation_track")
 	public static function validateAnimationTrack(out:hl.Bytes, track:flight._hl.AnimationTrack):Bool;
-	@:hlNative("flight", "flight_create_state_ref_from_index")
-	public static function createStateRefFromIndex(index:Int):flight._hl.StateRef;
-	@:hlNative("flight", "flight_create_state_ref_from_name")
-	public static function createStateRefFromName(name:hl.Bytes):flight._hl.StateRef;
 	@:hlNative("flight", "flight_free_animation_sample_accumulator")
 	public static function freeAnimationSampleAccumulator(ptr:flight._hl.AnimationSampleAccumulator):Void;
 	@:hlNative("flight", "flight_free_animation_blend_tree")
 	public static function freeAnimationBlendTree(ptr:flight._hl.AnimationBlendTree):Void;
 	@:hlNative("flight", "flight_free_animation_blend_tree_input")
 	public static function freeAnimationBlendTreeInput(ptr:flight._hl.AnimationBlendTreeInput):Void;
-	@:hlNative("flight", "flight_free_animation_channel")
-	public static function freeAnimationChannel(ptr:flight._hl.AnimationChannel):Void;
 	@:hlNative("flight", "flight_free_animation_clip")
 	public static function freeAnimationClip(ptr:flight._hl.AnimationClip):Void;
 	@:hlNative("flight", "flight_free_animation_clip_event")
@@ -133,6 +123,4 @@ extern class Animation {
 	public static function freeAnimationStateMachineState(ptr:flight._hl.AnimationStateMachineState):Void;
 	@:hlNative("flight", "flight_free_animation_track")
 	public static function freeAnimationTrack(ptr:flight._hl.AnimationTrack):Void;
-	@:hlNative("flight", "flight_free_state_ref")
-	public static function freeStateRef(ptr:flight._hl.StateRef):Void;
 }

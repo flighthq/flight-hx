@@ -7,18 +7,6 @@ extern class Shading {
 	public static function createDissolveModifier():flight._cpp.DissolveModifier;
 	@:native("flight_create_emissive_modifier")
 	public static function createEmissiveModifier():flight._cpp.EmissiveModifier;
-	@:native("flight_get_emissive_modifier_facing_string")
-	public static function getEmissiveModifierFacingString(value:Int):cpp.ConstCharStar;
-	@:native("flight_get_fog_modifier_mode_string")
-	public static function getFogModifierModeString(value:Int):cpp.ConstCharStar;
-	@:native("flight_get_vertex_displace_modifier_source_string")
-	public static function getVertexDisplaceModifierSourceString(value:Int):cpp.ConstCharStar;
-	@:native("flight_parse_emissive_modifier_facing")
-	public static function parseEmissiveModifierFacing(value:cpp.ConstCharStar):Int;
-	@:native("flight_parse_fog_modifier_mode")
-	public static function parseFogModifierMode(value:cpp.ConstCharStar):Int;
-	@:native("flight_parse_vertex_displace_modifier_source")
-	public static function parseVertexDisplaceModifierSource(value:cpp.ConstCharStar):Int;
 	@:native("flight_create_env_reflect_modifier")
 	public static function createEnvReflectModifier():flight._cpp.EnvReflectModifier;
 	@:native("flight_create_fog_modifier")

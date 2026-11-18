@@ -1208,6 +1208,23 @@ extern inline function concatColorMatrix(target:Dynamic, source:Dynamic):Void {
 }
 #end
 #if (js && flight_esm)
+extern inline function fuseColorMatrices(matrices:Dynamic):Dynamic {
+	return flight._js._fn.Adjustments.fuseColorMatrices(matrices);
+}
+#else
+extern inline function fuseColorMatrices(matrices:Dynamic, matricesLen:Int):Dynamic {
+#if hl
+	return flight._hl._fn.Adjustments.fuseColorMatrices(matrices, matricesLen);
+#elseif cpp
+	return flight._cpp._fn.Adjustments.fuseColorMatrices(matrices, matricesLen);
+#elseif (js && flight_esm)
+	return flight._js._fn.Adjustments.fuseColorMatrices(matrices, matricesLen);
+#else
+	#error "flight.Adjustments: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
 extern inline function multiplyColorMatrix(out:Dynamic, a:Dynamic, b:Dynamic):Void {
 	flight._js._fn.Adjustments.multiplyColorMatrix(out, a, b);
 }

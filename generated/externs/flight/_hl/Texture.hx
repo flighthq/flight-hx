@@ -64,34 +64,4 @@ abstract Texture(hl.Bytes) {
 	inline public function free():Void {
 		flight._hl._fn.Texture.freeTexture(cast this);
 	}
-	inline public function advanceVideoTexture(hostVideo:flight._hl.HostVideoCapability):Int {
-		return flight._hl._fn.Video.advanceVideoTextureTexture(hostVideo, cast this);
-	}
-	inline public function cloneVideoTexture():flight._hl.Texture {
-		return flight._hl._fn.Video.cloneVideoTextureTexture(cast this);
-	}
-	inline public function copyVideoTextureTexture(source:flight._hl.Texture):Void {
-		flight._hl._fn.Video.copyVideoTextureTextureTexture(cast this, source);
-	}
-	inline public function getVideoTextureHeight(hostVideo:flight._hl.HostVideoCapability):Single {
-		return flight._hl._fn.Video.getVideoTextureHeightTexture(hostVideo, cast this);
-	}
-	inline public function getVideoTextureInverseUvMatrix(out:flight._hl.Matrix3):Void {
-		flight._hl._fn.Video.getVideoTextureInverseUvMatrixTexture(out, cast this);
-	}
-	inline public function getVideoTextureUvMatrix(out:flight._hl.Matrix3):Void {
-		flight._hl._fn.Video.getVideoTextureUvMatrixTexture(out, cast this);
-	}
-	inline public function getVideoTextureWidth(hostVideo:flight._hl.HostVideoCapability):Single {
-		return flight._hl._fn.Video.getVideoTextureWidthTexture(hostVideo, cast this);
-	}
-	inline public function isVideoTextureFrameReady(hostVideo:flight._hl.HostVideoCapability):Bool {
-		return flight._hl._fn.Video.isVideoTextureFrameReadyTexture(hostVideo, cast this);
-	}
-	inline public function resetVideoTextureFrame():Void {
-		flight._hl._fn.Video.resetVideoTextureFrameTexture(cast this);
-	}
-	inline public function setVideoTextureSource(hostVideo:flight._hl.HostVideoCapability, source:flight._hl.VideoResource):Void {
-		flight._hl._fn.Video.setVideoTextureSourceTexture(hostVideo, cast this, source);
-	}
 }

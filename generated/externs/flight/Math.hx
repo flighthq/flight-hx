@@ -664,6 +664,31 @@ extern inline function randomGaussian(randomFn:Dynamic, randomCtx:Dynamic, mean:
 }
 #end
 #if (js && flight_esm)
+extern inline function randomGaussianPair(random:Dynamic, mean:Null<Float>, standardDeviation:Null<Float>):{ _0:Float, _1:Float } {
+	var result = flight._js._fn.Math.randomGaussianPair(random, mean, standardDeviation);
+	return { _0: result[0], _1: result[1] };
+}
+#else
+extern inline function randomGaussianPair(randomFn:Dynamic, randomCtx:Dynamic, mean:Float, standardDeviation:Float):{ _0:Float, _1:Float } {
+#if hl
+	var out0:Single = 0;
+	var out1:Single = 0;
+	flight._hl._fn.Math.randomGaussianPair(randomFn, randomCtx, mean, standardDeviation, hl.Ref.make(out0), hl.Ref.make(out1));
+	return { _0: out0, _1: out1 };
+#elseif cpp
+	var out0:cpp.Float32 = 0;
+	var out1:cpp.Float32 = 0;
+	flight._cpp._fn.Math.randomGaussianPair(randomFn, randomCtx, mean, standardDeviation, cpp.RawPointer.addressOf(out0), cpp.RawPointer.addressOf(out1));
+	return { _0: out0, _1: out1 };
+#elseif (js && flight_esm)
+	var result = flight._js._fn.Math.randomGaussianPair(randomFn, randomCtx, mean, standardDeviation);
+	return { _0: result[0], _1: result[1] };
+#else
+	#error "flight.Math: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
 extern inline function randomInsideUnitDisc(out:Dynamic, random:Dynamic):Void {
 	flight._js._fn.Math.randomInsideUnitDisc(out, random);
 }

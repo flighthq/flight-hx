@@ -1,40 +1,9 @@
-diff --git a/crates/flight-ffi/native_bindings.rs b/crates/flight-ffi/native_bindings.rs
---- a/crates/flight-ffi/native_bindings.rs
-+++ b/crates/flight-ffi/native_bindings.rs
-@@ -59,11 +59,28 @@
-         let mut hl_params = Vec::new();
-         let mut call_args = Vec::new();
-         let mut signatures = Vec::new();
-+        // HashLink's native call bridge corrupts spilled floating-point args.
-+        // Keep the C ABI intact and carry large floating argument lists in one
-+        // GC-rooted NativeArray<Float>, unpacked only inside this HL adapter.
-+        let packed = function.sig.inputs.iter().filter(|argument| {
-+            let FnArg::Typed(parameter) = argument else { return false; };
-+            matches!(carrier(&parameter.ty).signature, "_F32" | "_F64")
-+        }).count() > 6;
-+        let mut float_index = 0;
-         for (index, argument) in function.sig.inputs.iter().enumerate() {
-             let FnArg::Typed(parameter) = argument else { panic!("C ABI receiver"); };
-             let ty = carrier(&parameter.ty);
-             let arg = format!("arg{index}");
-             c_params.push(format!("{} {arg}", ty.c));
-+            if packed && matches!(ty.signature, "_F32" | "_F64") {
-+                if float_index == 0 {
-+                    hl_params.push("varray *flight_values".into());
-+                    signatures.push("_ARR");
-+                }
-+                call_args.push(format!("({})hl_aptr(flight_values, double)[{float_index}]", ty.c));
-+                float_index += 1;
-+                continue;
-+            }
-             hl_params.push(format!("{} {arg}", ty.hl));
-             call_args.push(format!("({}){arg}", ty.c));
-             signatures.push(ty.signature);
 diff --git a/crates/flight-bindgen/src/haxe_hl.rs b/crates/flight-bindgen/src/haxe_hl.rs
+index d498e71790a222289cc10a6b8c4bf1441c09bfb0..34ae81700d055c9ad416b802d342d9cd4e3d9803 100644
 --- a/crates/flight-bindgen/src/haxe_hl.rs
 +++ b/crates/flight-bindgen/src/haxe_hl.rs
-@@ -363,6 +363,34 @@
-     let haxe_ret = return_kind_to_haxe(&ret_kind);
+@@ -373,6 +373,34 @@ fn emit_function(func: &ParsedFn) -> Option<String> {
+     }
  
      let params_str = haxe_params.join(", ");
 +    let floating = |p: &&String| p.ends_with(":Single") || p.ends_with(":Float");
@@ -68,8 +37,8 @@ diff --git a/crates/flight-bindgen/src/haxe_hl.rs b/crates/flight-bindgen/src/ha
      Some(format!(
          "\t@:hlNative(\"{LIB_NAME}\", \"{ffi_name}\")\n\tpublic static function {haxe_name}({params_str}):{haxe_ret};"
      ))
-@@ -414,3 +442,32 @@
-         ReturnKind::OptionStruct(ty) => format!("{PKG}.{ty}"),
+@@ -455,3 +483,32 @@ mod hl_tuple_tests {
+         assert!(emit_function(&function).is_none());
      }
  }
 +
@@ -101,3 +70,55 @@ diff --git a/crates/flight-bindgen/src/haxe_hl.rs b/crates/flight-bindgen/src/ha
 +        assert!(output.contains("v5:Single"));
 +    }
 +}
+diff --git a/crates/flight-ffi/native_bindings.rs b/crates/flight-ffi/native_bindings.rs
+index 244d20f398e3d252eeba8f6b30fc436a073aa114..e8764bbf659d2046a0602fb1c8f750fc18077bd9 100644
+--- a/crates/flight-ffi/native_bindings.rs
++++ b/crates/flight-ffi/native_bindings.rs
+@@ -902,6 +902,14 @@ typedef struct FlightShapeBoundsContextVTable {\n\
+         let mut hl_params = Vec::new();
+         let mut call_args = Vec::new();
+         let mut signatures = Vec::new();
++        // HashLink's native call bridge corrupts spilled floating-point args.
++        // Keep the C ABI intact and carry large floating argument lists in one
++        // GC-rooted NativeArray<Float>, unpacked only inside this HL adapter.
++        let packed = function.sig.inputs.iter().filter(|argument| {
++            let FnArg::Typed(parameter) = argument else { return false; };
++            matches!(carrier(&parameter.ty).signature, "_F32" | "_F64")
++        }).count() > 6;
++        let mut float_index = 0;
+         for (index, argument) in function.sig.inputs.iter().enumerate() {
+             let FnArg::Typed(parameter) = argument else {
+                 panic!("C ABI receiver");
+@@ -913,17 +921,29 @@ typedef struct FlightShapeBoundsContextVTable {\n\
+             let ty = tuple_out_carrier(&parameter_name, &parameter.ty)
+                 .unwrap_or_else(|| carrier(&parameter.ty));
+             let arg = format!("arg{index}");
+-            if let Some(function) = callback_parameter(&parameter.ty) {
++            let callback = callback_parameter(&parameter.ty);
++            if let Some(function) = callback {
+                 c_params.push(bare_fn_c_type(function, &arg));
+-                call_args.push(format!("({}){arg}", bare_fn_c_type(function, "")));
+             } else {
+                 let note = notes
+                     .get(&parameter_name)
+                     .map(|note| format!(" /* {note} */"))
+                     .unwrap_or_default();
+                 c_params.push(format!("{} {arg}{note}", ty.c));
+-                call_args.push(format!("({}){arg}", ty.c));
+             }
++            if packed && matches!(ty.signature, "_F32" | "_F64") {
++                if float_index == 0 {
++                    hl_params.push("varray *flight_values".into());
++                    signatures.push("_ARR");
++                }
++                call_args.push(format!(
++                    "({})hl_aptr(flight_values, double)[{float_index}]", ty.c
++                ));
++                float_index += 1;
++                continue;
++            }
++            let cast = callback.map_or_else(|| ty.c.clone(), |function| bare_fn_c_type(function, ""));
++            call_args.push(format!("({cast}){arg}"));
+             hl_params.push(format!("{} {arg}", ty.hl));
+             signatures.push(ty.signature);
+         }

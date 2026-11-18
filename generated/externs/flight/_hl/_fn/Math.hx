@@ -79,6 +79,8 @@ extern class Math {
 	public static function randomExponential(randomFn:hl.Bytes, randomCtx:hl.Bytes, rate:Single):Single;
 	@:hlNative("flight", "flight_random_gaussian")
 	public static function randomGaussian(randomFn:hl.Bytes, randomCtx:hl.Bytes, mean:Single, standardDeviation:Single):Single;
+	@:hlNative("flight", "flight_random_gaussian_pair")
+	public static function randomGaussianPair(randomFn:hl.Bytes, randomCtx:hl.Bytes, mean:Single, standardDeviation:Single, out0:hl.Ref<Single>, out1:hl.Ref<Single>):Void;
 	@:hlNative("flight", "flight_random_inside_unit_disc")
 	public static function randomInsideUnitDisc(out:hl.Bytes, randomFn:hl.Bytes, randomCtx:hl.Bytes):Void;
 	@:hlNative("flight", "flight_random_inside_unit_sphere")

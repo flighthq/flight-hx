@@ -18,23 +18,6 @@ extern inline function detectParticleFormat(registry:ParticleFormatRegistry, tex
 }
 #end
 #if (js && flight_esm)
-extern inline function createParticleFormatRegistry():ParticleFormatRegistry {
-	return flight._js._fn.ParticlesFormats.createParticleFormatRegistry();
-}
-#else
-extern inline function createParticleFormatRegistry():ParticleFormatRegistry {
-#if hl
-	return flight._hl._fn.ParticlesFormats.createParticleFormatRegistry();
-#elseif cpp
-	return flight._cpp._fn.ParticlesFormats.createParticleFormatRegistry();
-#elseif (js && flight_esm)
-	return flight._js._fn.ParticlesFormats.createParticleFormatRegistry();
-#else
-	#error "flight.ParticlesFormats: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
 extern inline function detectRegisteredParticleFormat(registry:ParticleFormatRegistry, text:String):Null<ParticleFormatKind> {
 	return flight._js._fn.ParticlesFormats.detectRegisteredParticleFormat(registry, text);
 }
@@ -80,23 +63,6 @@ extern inline function parseRegisteredParticleFormat(registry:ParticleFormatRegi
 	return flight._cpp._fn.ParticlesFormats.parseRegisteredParticleFormat(registry, cast text, cast kind, options);
 #elseif (js && flight_esm)
 	return flight._js._fn.ParticlesFormats.parseRegisteredParticleFormat(registry, text, kind, options);
-#else
-	#error "flight.ParticlesFormats: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
-extern inline function registerParticleFormat(registry:ParticleFormatRegistry, kind:String, codec:ParticleFormatCodec):Void {
-	flight._js._fn.ParticlesFormats.registerParticleFormat(registry, kind, codec);
-}
-#else
-extern inline function registerParticleFormat(registry:ParticleFormatRegistry, kind:String, codec:ParticleFormatCodec):Void {
-#if hl
-	flight._hl._fn.ParticlesFormats.registerParticleFormat(registry, cast kind, codec);
-#elseif cpp
-	flight._cpp._fn.ParticlesFormats.registerParticleFormat(registry, cast kind, codec);
-#elseif (js && flight_esm)
-	flight._js._fn.ParticlesFormats.registerParticleFormat(registry, kind, codec);
 #else
 	#error "flight.ParticlesFormats: no backend for this target."
 #end
@@ -324,23 +290,6 @@ extern inline function parsePixiParticleDocument(json:String):PixiParseResult {
 }
 #end
 #if (js && flight_esm)
-extern inline function createParticleAllFormats():Dynamic {
-	return flight._js._fn.ParticlesFormats.createParticleAllFormats();
-}
-#else
-extern inline function createParticleAllFormats():Dynamic {
-#if hl
-	return flight._hl._fn.ParticlesFormats.createParticleAllFormats();
-#elseif cpp
-	return flight._cpp._fn.ParticlesFormats.createParticleAllFormats();
-#elseif (js && flight_esm)
-	return flight._js._fn.ParticlesFormats.createParticleAllFormats();
-#else
-	#error "flight.ParticlesFormats: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
 extern inline function applyParticleImportOptions(registry:ParticleFormatRegistry, options:ParticleImportOptions):Void {
 	flight._js._fn.ParticlesFormats.applyParticleImportOptions(registry, options);
 }
@@ -352,108 +301,6 @@ extern inline function applyParticleImportOptions(registry:ParticleFormatRegistr
 	flight._cpp._fn.ParticlesFormats.applyParticleImportOptions(registry, options);
 #elseif (js && flight_esm)
 	flight._js._fn.ParticlesFormats.applyParticleImportOptions(registry, options);
-#else
-	#error "flight.ParticlesFormats: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
-extern inline function getLibgdxParticleFormat():ParticleFormatDescriptor {
-	return flight._js._fn.ParticlesFormats.getLibgdxParticleFormat();
-}
-#else
-extern inline function getLibgdxParticleFormat():ParticleFormatDescriptor {
-#if hl
-	return flight._hl._fn.ParticlesFormats.getLibgdxParticleFormat();
-#elseif cpp
-	return flight._cpp._fn.ParticlesFormats.getLibgdxParticleFormat();
-#elseif (js && flight_esm)
-	return flight._js._fn.ParticlesFormats.getLibgdxParticleFormat();
-#else
-	#error "flight.ParticlesFormats: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
-extern inline function getParticleDesignerParticleFormat():ParticleFormatDescriptor {
-	return flight._js._fn.ParticlesFormats.getParticleDesignerParticleFormat();
-}
-#else
-extern inline function getParticleDesignerParticleFormat():ParticleFormatDescriptor {
-#if hl
-	return flight._hl._fn.ParticlesFormats.getParticleDesignerParticleFormat();
-#elseif cpp
-	return flight._cpp._fn.ParticlesFormats.getParticleDesignerParticleFormat();
-#elseif (js && flight_esm)
-	return flight._js._fn.ParticlesFormats.getParticleDesignerParticleFormat();
-#else
-	#error "flight.ParticlesFormats: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
-extern inline function getPixiParticleFormat():ParticleFormatDescriptor {
-	return flight._js._fn.ParticlesFormats.getPixiParticleFormat();
-}
-#else
-extern inline function getPixiParticleFormat():ParticleFormatDescriptor {
-#if hl
-	return flight._hl._fn.ParticlesFormats.getPixiParticleFormat();
-#elseif cpp
-	return flight._cpp._fn.ParticlesFormats.getPixiParticleFormat();
-#elseif (js && flight_esm)
-	return flight._js._fn.ParticlesFormats.getPixiParticleFormat();
-#else
-	#error "flight.ParticlesFormats: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
-extern inline function getSpineParticleFormat():ParticleFormatDescriptor {
-	return flight._js._fn.ParticlesFormats.getSpineParticleFormat();
-}
-#else
-extern inline function getSpineParticleFormat():ParticleFormatDescriptor {
-#if hl
-	return flight._hl._fn.ParticlesFormats.getSpineParticleFormat();
-#elseif cpp
-	return flight._cpp._fn.ParticlesFormats.getSpineParticleFormat();
-#elseif (js && flight_esm)
-	return flight._js._fn.ParticlesFormats.getSpineParticleFormat();
-#else
-	#error "flight.ParticlesFormats: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
-extern inline function getStarlingPexParticleFormat():ParticleFormatDescriptor {
-	return flight._js._fn.ParticlesFormats.getStarlingPexParticleFormat();
-}
-#else
-extern inline function getStarlingPexParticleFormat():ParticleFormatDescriptor {
-#if hl
-	return flight._hl._fn.ParticlesFormats.getStarlingPexParticleFormat();
-#elseif cpp
-	return flight._cpp._fn.ParticlesFormats.getStarlingPexParticleFormat();
-#elseif (js && flight_esm)
-	return flight._js._fn.ParticlesFormats.getStarlingPexParticleFormat();
-#else
-	#error "flight.ParticlesFormats: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
-extern inline function getUnityParticleFormat():ParticleFormatDescriptor {
-	return flight._js._fn.ParticlesFormats.getUnityParticleFormat();
-}
-#else
-extern inline function getUnityParticleFormat():ParticleFormatDescriptor {
-#if hl
-	return flight._hl._fn.ParticlesFormats.getUnityParticleFormat();
-#elseif cpp
-	return flight._cpp._fn.ParticlesFormats.getUnityParticleFormat();
-#elseif (js && flight_esm)
-	return flight._js._fn.ParticlesFormats.getUnityParticleFormat();
 #else
 	#error "flight.ParticlesFormats: no backend for this target."
 #end
@@ -698,23 +545,6 @@ extern inline function freeParticleFormatKind(ptr:ParticleFormatKind):Void {
 }
 #end
 #if (js && flight_esm)
-extern inline function freeParticleFormatRegistry(ptr:ParticleFormatRegistry):Void {
-	flight._js._fn.ParticlesFormats.freeParticleFormatRegistry(ptr);
-}
-#else
-extern inline function freeParticleFormatRegistry(ptr:ParticleFormatRegistry):Void {
-#if hl
-	flight._hl._fn.ParticlesFormats.freeParticleFormatRegistry(ptr);
-#elseif cpp
-	flight._cpp._fn.ParticlesFormats.freeParticleFormatRegistry(ptr);
-#elseif (js && flight_esm)
-	flight._js._fn.ParticlesFormats.freeParticleFormatRegistry(ptr);
-#else
-	#error "flight.ParticlesFormats: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
 extern inline function freeParticleConfigParseResult(ptr:ParticleConfigParseResult):Void {
 	flight._js._fn.ParticlesFormats.freeParticleConfigParseResult(ptr);
 }
@@ -794,23 +624,6 @@ extern inline function freePixiParseResult(ptr:PixiParseResult):Void {
 	flight._cpp._fn.ParticlesFormats.freePixiParseResult(ptr);
 #elseif (js && flight_esm)
 	flight._js._fn.ParticlesFormats.freePixiParseResult(ptr);
-#else
-	#error "flight.ParticlesFormats: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
-extern inline function freeParticleFormatDescriptor(ptr:ParticleFormatDescriptor):Void {
-	flight._js._fn.ParticlesFormats.freeParticleFormatDescriptor(ptr);
-}
-#else
-extern inline function freeParticleFormatDescriptor(ptr:ParticleFormatDescriptor):Void {
-#if hl
-	flight._hl._fn.ParticlesFormats.freeParticleFormatDescriptor(ptr);
-#elseif cpp
-	flight._cpp._fn.ParticlesFormats.freeParticleFormatDescriptor(ptr);
-#elseif (js && flight_esm)
-	flight._js._fn.ParticlesFormats.freeParticleFormatDescriptor(ptr);
 #else
 	#error "flight.ParticlesFormats: no backend for this target."
 #end

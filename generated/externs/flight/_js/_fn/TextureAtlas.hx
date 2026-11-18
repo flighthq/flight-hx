@@ -46,16 +46,12 @@ extern class TextureAtlas {
 	public static function getTextureAtlasRegionOrdinal(region:flight._js.TextureAtlasRegion):Float;
 	@:native("getTextureAtlasRegionTexture")
 	public static function getTextureAtlasRegionTexture(atlas:Dynamic, regionId:Int, guards:Null<flight._js.TextureAtlasGuardState>):Null<Dynamic>;
-	@:native("getTextureAtlasRegionTextureStatusString")
-	public static function getTextureAtlasRegionTextureStatusString(value:Dynamic):String;
 	@:native("getTextureAtlasRegionUv")
 	public static function getTextureAtlasRegionUv(out:flight._js.Rectangle, region:flight._js.TextureAtlasRegion, imageWidth:Float, imageHeight:Float):Void;
 	@:native("getTextureAtlasRegionUvQuad")
 	public static function getTextureAtlasRegionUvQuad(out:Dynamic, region:flight._js.TextureAtlasRegion, imageWidth:Float, imageHeight:Float):Void;
 	@:native("hasTextureAtlasRegion")
 	public static function hasTextureAtlasRegion(atlas:flight._js.TextureAtlas, name:String):Bool;
-	@:native("parseTextureAtlasRegionTextureStatus")
-	public static function parseTextureAtlasRegionTextureStatus(value:String):Null<Dynamic>;
 	@:native("removeTextureAtlasRegion")
 	public static function removeTextureAtlasRegion(target:flight._js.TextureAtlas, id:Int):Bool;
 	@:native("setTextureAtlasRegion")

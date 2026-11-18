@@ -6,8 +6,6 @@ extern class TextureatlasFormats {
 	public static function parseTextureAtlasAsepriteDocument(atlas:flight._js.TextureAtlas, doc:flight._js.TextureAtlasAsepriteDocument):Void;
 	@:native("parseTextureAtlasAsepriteJson")
 	public static function parseTextureAtlasAsepriteJson(atlas:flight._js.TextureAtlas, json:String):Void;
-	@:native("createTextureAtlasFormatRegistry")
-	public static function createTextureAtlasFormatRegistry():flight._js.TextureAtlasFormatRegistry;
 	@:native("applyTextureAtlasImportOptions")
 	public static function applyTextureAtlasImportOptions(registry:flight._js.TextureAtlasFormatRegistry, options:flight._js.TextureAtlasImportOptions):Void;
 	@:native("asepriteTextureAtlasFormat")
@@ -38,12 +36,6 @@ extern class TextureatlasFormats {
 	public static function parseTexturePackerAtlasDocument(atlas:flight._js.TextureAtlas, doc:flight._js.TexturePackerAtlasDocument, options:Null<flight._js.TexturePackerAtlasParseOptions>):Void;
 	@:native("parseTexturePackerAtlasJson")
 	public static function parseTexturePackerAtlasJson(atlas:flight._js.TextureAtlas, json:String, options:Null<flight._js.TexturePackerAtlasParseOptions>):Void;
-	@:native("getTextureAtlasFrameTagDirectionString")
-	public static function getTextureAtlasFrameTagDirectionString(value:Dynamic):String;
-	@:native("parseTextureAtlasFrameTagDirection")
-	public static function parseTextureAtlasFrameTagDirection(value:String):Null<Dynamic>;
-	/** Native allocation release is unnecessary on JavaScript. */
-	public static inline function freeTextureAtlasFormatRegistry(ptr:flight._js.TextureAtlasFormatRegistry):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeTextureAtlasFormatKind(ptr:flight._js.TextureAtlasFormatKind):Void {}
 }

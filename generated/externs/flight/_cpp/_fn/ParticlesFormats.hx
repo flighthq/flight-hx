@@ -3,16 +3,12 @@ package flight._cpp._fn;
 extern class ParticlesFormats {
 	@:native("flight_detect_particle_format")
 	public static function detectParticleFormat(registry:flight._cpp.ParticleFormatRegistry, text:cpp.ConstCharStar):flight._cpp.ParticleFormatKind;
-	@:native("flight_create_particle_format_registry")
-	public static function createParticleFormatRegistry():flight._cpp.ParticleFormatRegistry;
 	@:native("flight_detect_registered_particle_format")
 	public static function detectRegisteredParticleFormat(registry:flight._cpp.ParticleFormatRegistry, text:cpp.ConstCharStar):flight._cpp.ParticleFormatKind;
 	@:native("flight_get_registered_particle_formats")
 	public static function getRegisteredParticleFormats(out:cpp.Star<cpp.Void>, registry:flight._cpp.ParticleFormatRegistry):Void;
 	@:native("flight_parse_registered_particle_format")
 	public static function parseRegisteredParticleFormat(registry:flight._cpp.ParticleFormatRegistry, text:cpp.ConstCharStar, kind:cpp.ConstCharStar, options:flight._cpp.ParseParticleConfigOptions):flight._cpp.ParticleConfigParseResult;
-	@:native("flight_register_particle_format")
-	public static function registerParticleFormat(registry:flight._cpp.ParticleFormatRegistry, kind:cpp.ConstCharStar, codec:flight._cpp.ParticleFormatCodec):Void;
 	@:native("flight_unregister_particle_format")
 	public static function unregisterParticleFormat(registry:flight._cpp.ParticleFormatRegistry, kind:cpp.ConstCharStar):Bool;
 	@:native("flight_parse_libgdx_particle")
@@ -39,22 +35,8 @@ extern class ParticlesFormats {
 	public static function parsePixiParticle(json:cpp.ConstCharStar):flight._cpp.ParticleEmitterConfig;
 	@:native("flight_parse_pixi_particle_document")
 	public static function parsePixiParticleDocument(json:cpp.ConstCharStar):flight._cpp.PixiParseResult;
-	@:native("flight_create_particle_all_formats")
-	public static function createParticleAllFormats():cpp.Star<cpp.Void>;
 	@:native("flight_apply_particle_import_options")
 	public static function applyParticleImportOptions(registry:flight._cpp.ParticleFormatRegistry, options:flight._cpp.ParticleImportOptions):Void;
-	@:native("flight_get_libgdx_particle_format")
-	public static function getLibgdxParticleFormat():flight._cpp.ParticleFormatDescriptor;
-	@:native("flight_get_particle_designer_particle_format")
-	public static function getParticleDesignerParticleFormat():flight._cpp.ParticleFormatDescriptor;
-	@:native("flight_get_pixi_particle_format")
-	public static function getPixiParticleFormat():flight._cpp.ParticleFormatDescriptor;
-	@:native("flight_get_spine_particle_format")
-	public static function getSpineParticleFormat():flight._cpp.ParticleFormatDescriptor;
-	@:native("flight_get_starling_pex_particle_format")
-	public static function getStarlingPexParticleFormat():flight._cpp.ParticleFormatDescriptor;
-	@:native("flight_get_unity_particle_format")
-	public static function getUnityParticleFormat():flight._cpp.ParticleFormatDescriptor;
 	@:native("flight_register_built_in_particle_formats")
 	public static function registerBuiltInParticleFormats(registry:flight._cpp.ParticleFormatRegistry):Void;
 	@:native("flight_parse_spine_particle")
@@ -83,8 +65,6 @@ extern class ParticlesFormats {
 	public static function serializeUnityParticleDocument(config:flight._cpp.ParticleEmitterConfig, existing:flight._cpp.UnityParticleDocument, options:flight._cpp.UnitySerializeOptions):flight._cpp.ParticleSerializeResult;
 	@:native("flight_free_particle_format_kind")
 	public static function freeParticleFormatKind(ptr:flight._cpp.ParticleFormatKind):Void;
-	@:native("flight_free_particle_format_registry")
-	public static function freeParticleFormatRegistry(ptr:flight._cpp.ParticleFormatRegistry):Void;
 	@:native("flight_free_particle_config_parse_result")
 	public static function freeParticleConfigParseResult(ptr:flight._cpp.ParticleConfigParseResult):Void;
 	@:native("flight_free_libgdx_parse_result")
@@ -95,8 +75,6 @@ extern class ParticlesFormats {
 	public static function freeParticleDesignerParseResult(ptr:flight._cpp.ParticleDesignerParseResult):Void;
 	@:native("flight_free_pixi_parse_result")
 	public static function freePixiParseResult(ptr:flight._cpp.PixiParseResult):Void;
-	@:native("flight_free_particle_format_descriptor")
-	public static function freeParticleFormatDescriptor(ptr:flight._cpp.ParticleFormatDescriptor):Void;
 	@:native("flight_free_spine_parse_result")
 	public static function freeSpineParseResult(ptr:flight._cpp.SpineParseResult):Void;
 	@:native("flight_free_starling_pex_parse_result")

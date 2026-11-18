@@ -1,23 +1,6 @@
 package flight;
 
 #if (js && flight_esm)
-extern inline function createParticleEmitterData():ParticleEmitterData {
-	return flight._js._fn.Particleemitter.createParticleEmitterData();
-}
-#else
-extern inline function createParticleEmitterData():ParticleEmitterData {
-#if hl
-	return flight._hl._fn.Particleemitter.createParticleEmitterData();
-#elseif cpp
-	return flight._cpp._fn.Particleemitter.createParticleEmitterData();
-#elseif (js && flight_esm)
-	return flight._js._fn.Particleemitter.createParticleEmitterData();
-#else
-	#error "flight.Particleemitter: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
 extern inline function computeParticleEmitter2dLocalBoundsRectangle(out:Rectangle, source:ParticleEmitter2D):Void {
 	flight._js._fn.Particleemitter.computeParticleEmitter2dLocalBoundsRectangle(out, source);
 }
@@ -46,23 +29,6 @@ extern inline function createParticleEmitter2d():Dynamic {
 	return flight._cpp._fn.Particleemitter.createParticleEmitter2d();
 #elseif (js && flight_esm)
 	return flight._js._fn.Particleemitter.createParticleEmitter2d();
-#else
-	#error "flight.Particleemitter: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
-extern inline function createParticleEmitter2dRuntime():Node2DRuntime {
-	return flight._js._fn.Particleemitter.createParticleEmitter2dRuntime();
-}
-#else
-extern inline function createParticleEmitter2dRuntime():Node2DRuntime {
-#if hl
-	return flight._hl._fn.Particleemitter.createParticleEmitter2dRuntime();
-#elseif cpp
-	return flight._cpp._fn.Particleemitter.createParticleEmitter2dRuntime();
-#elseif (js && flight_esm)
-	return flight._js._fn.Particleemitter.createParticleEmitter2dRuntime();
 #else
 	#error "flight.Particleemitter: no backend for this target."
 #end
@@ -250,40 +216,6 @@ extern inline function getParticleEmitter2dParticleVelocity(out:Vector2, source:
 	return flight._cpp._fn.Particleemitter.getParticleEmitter2dParticleVelocity(out, source, index);
 #elseif (js && flight_esm)
 	return flight._js._fn.Particleemitter.getParticleEmitter2dParticleVelocity(out, source, index);
-#else
-	#error "flight.Particleemitter: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
-extern inline function getParticleEmitter2dRuntime(source:ParticleEmitter2D):ParticleEmitter2DRuntime {
-	return flight._js._fn.Particleemitter.getParticleEmitter2dRuntime(source);
-}
-#else
-extern inline function getParticleEmitter2dRuntime(source:ParticleEmitter2D):ParticleEmitter2DRuntime {
-#if hl
-	return flight._hl._fn.Particleemitter.getParticleEmitter2dRuntime(source);
-#elseif cpp
-	return flight._cpp._fn.Particleemitter.getParticleEmitter2dRuntime(source);
-#elseif (js && flight_esm)
-	return flight._js._fn.Particleemitter.getParticleEmitter2dRuntime(source);
-#else
-	#error "flight.Particleemitter: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
-extern inline function getParticleEmitter3dRuntime(source:Dynamic):Node3DRuntime {
-	return flight._js._fn.Particleemitter.getParticleEmitter3dRuntime(source);
-}
-#else
-extern inline function getParticleEmitter3dRuntime(source:Dynamic):Node3DRuntime {
-#if hl
-	return flight._hl._fn.Particleemitter.getParticleEmitter3dRuntime(source);
-#elseif cpp
-	return flight._cpp._fn.Particleemitter.getParticleEmitter3dRuntime(source);
-#elseif (js && flight_esm)
-	return flight._js._fn.Particleemitter.getParticleEmitter3dRuntime(source);
 #else
 	#error "flight.Particleemitter: no backend for this target."
 #end
@@ -681,23 +613,6 @@ extern inline function setParticleEmitter3dParticleVelocity(target:Dynamic, inde
 }
 #end
 #if (js && flight_esm)
-extern inline function sortParticleEmitter3dByViewDepth(emitter:Dynamic, viewMatrix:Dynamic):Void {
-	flight._js._fn.Particleemitter.sortParticleEmitter3dByViewDepth(emitter, viewMatrix);
-}
-#else
-extern inline function sortParticleEmitter3dByViewDepth(emitter:Dynamic, viewMatrix:Dynamic):Void {
-#if hl
-	flight._hl._fn.Particleemitter.sortParticleEmitter3dByViewDepth(emitter, viewMatrix);
-#elseif cpp
-	flight._cpp._fn.Particleemitter.sortParticleEmitter3dByViewDepth(emitter, viewMatrix);
-#elseif (js && flight_esm)
-	flight._js._fn.Particleemitter.sortParticleEmitter3dByViewDepth(emitter, viewMatrix);
-#else
-	#error "flight.Particleemitter: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
 extern inline function sortParticleEmitter3dIndicesByViewDepth(outIndices:Dynamic, outViewDepths:Dynamic, source:Dynamic, positionToView:Dynamic):Bool {
 	return flight._js._fn.Particleemitter.sortParticleEmitter3dIndicesByViewDepth(outIndices, outViewDepths, source, positionToView);
 }
@@ -845,40 +760,6 @@ extern inline function updateParticleEmitter3d(emitter:Dynamic, state:ParticleEm
 	flight._cpp._fn.Particleemitter.updateParticleEmitter3d(emitter, state, config, deltaTime, callbacks);
 #elseif (js && flight_esm)
 	flight._js._fn.Particleemitter.updateParticleEmitter3d(emitter, state, config, deltaTime, callbacks);
-#else
-	#error "flight.Particleemitter: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
-extern inline function freeParticleEmitterData(ptr:ParticleEmitterData):Void {
-	flight._js._fn.Particleemitter.freeParticleEmitterData(ptr);
-}
-#else
-extern inline function freeParticleEmitterData(ptr:ParticleEmitterData):Void {
-#if hl
-	flight._hl._fn.Particleemitter.freeParticleEmitterData(ptr);
-#elseif cpp
-	flight._cpp._fn.Particleemitter.freeParticleEmitterData(ptr);
-#elseif (js && flight_esm)
-	flight._js._fn.Particleemitter.freeParticleEmitterData(ptr);
-#else
-	#error "flight.Particleemitter: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
-extern inline function freeNode2Druntime(ptr:Node2DRuntime):Void {
-	flight._js._fn.Particleemitter.freeNode2Druntime(ptr);
-}
-#else
-extern inline function freeNode2Druntime(ptr:Node2DRuntime):Void {
-#if hl
-	flight._hl._fn.Particleemitter.freeNode2Druntime(ptr);
-#elseif cpp
-	flight._cpp._fn.Particleemitter.freeNode2Druntime(ptr);
-#elseif (js && flight_esm)
-	flight._js._fn.Particleemitter.freeNode2Druntime(ptr);
 #else
 	#error "flight.Particleemitter: no backend for this target."
 #end

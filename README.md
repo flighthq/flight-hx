@@ -6,9 +6,9 @@ The transpiled Haxe implementation, separate TypeScript compiler dependency,
 and flight-cpp adapters have been removed.
 
 The source is Flight `develop` revision
-`49c510e875461a9235b24ee846015ec1b47acd2a` plus the reviewable
-[native producer patches](patches/flight/README.md). There are 4,304 generated Haxe
-files selected from 7,267 C ABI exports. Generated Haxe is copied unchanged from
+`5e1121e4cfdfde289b5373693dd285a2035dd285` plus the reviewable
+[native producer patches](patches/flight/README.md). There are 4,408 generated Haxe
+files and 9,632 C ABI exports. Generated Haxe is copied unchanged from
 that producer; provenance records both the Flight revision and patch hashes.
 
 ## Consume
@@ -47,8 +47,9 @@ Native handles require the matching release function; allocation does not imply
 automatic disposal. Unsupported targets and the removed `flight_hx` backend fail
 at compile time.
 
-Import `flight.Entity` and call `freeRef(handle)` for each returned native
-`Ref<T>` handle, including references returned by node hierarchy getters.
+Call `flight.Entity.freeRef(handle)` for registered native `Ref<T>` handles,
+including references returned by node hierarchy getters. The C header documents
+the matching release function for each owned result.
 Scene references retained by other nodes remain alive after a handle is freed.
 
 Native byte results, including compression output, return `NativeByteBuffer`.
@@ -60,13 +61,14 @@ Public scalar and `String` fields have properties, including `ColorScaleBias`
 channels and `FontResource.family`. Native string properties copy UTF-8 storage;
 their temporary buffers are released by the generated accessor.
 
-Generic signal create/connect/emit functions still require a typed callback
-binding and callback lifetime management. Option-valued and nested fields,
-`FontResource.face`, and the variants of `CreateTextureOptions` remain
-unsupported by the field emitter. Native factories for these option carriers
-and material submodule functions such as `create_color_scale_bias` are also
-absent. These APIs need further producer work; opaque handles do not provide
-construction or configuration by themselves.
+Native bindings include scalar and optional tuple returns, owned byte readers
+in `flight.Buffer`, and command-history unit signal handles in `flight.Command`.
+Release reader handles with `freeOwnedByteReader` and signal handles with
+`freeUnitSignal`. The C header also documents collection and async result carriers. Flight’s
+public SDK export policy governs the refreshed function inventory.
+
+Generic signal callbacks, optional and nested struct fields, and constructors
+for the `CreateTextureOptions` variants still need Haxe binding support.
 
 ## Native layout
 

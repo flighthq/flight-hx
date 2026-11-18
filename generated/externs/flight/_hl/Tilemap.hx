@@ -22,9 +22,6 @@ abstract Tilemap(hl.Bytes) {
 	inline public function getRowAtY(y:Single):Int {
 		return flight._hl._fn.Tilemap.getTilemapRowAtY(cast this, y);
 	}
-	inline public function getRuntime():flight._hl.TilemapRuntime {
-		return flight._hl._fn.Tilemap.getTilemapRuntime(cast this);
-	}
 	inline public function getTile(column:Int, row:Int):Int {
 		return flight._hl._fn.Tilemap.getTilemapTile(cast this, column, row);
 	}

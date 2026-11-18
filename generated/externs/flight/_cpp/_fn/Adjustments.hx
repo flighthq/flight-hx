@@ -143,6 +143,8 @@ extern class Adjustments {
 	public static function applyColorMatrixToColor(matrix:cpp.Star<cpp.Void>, packedRgba:Int):Int;
 	@:native("flight_concat_color_matrix")
 	public static function concatColorMatrix(target:cpp.Star<cpp.Void>, source:cpp.Star<cpp.Void>):Void;
+	@:native("flight_fuse_color_matrices")
+	public static function fuseColorMatrices(matrices:cpp.Star<cpp.Void>, matricesLen:Int):cpp.Star<cpp.Void>;
 	@:native("flight_multiply_color_matrix")
 	public static function multiplyColorMatrix(out:cpp.Star<cpp.Void>, a:cpp.Star<cpp.Void>, b:cpp.Star<cpp.Void>):Void;
 	@:native("flight_create_color_scale_bias_adjustment")

@@ -6682,23 +6682,6 @@ extern inline function freeRay3D(ptr:Ray3D):Void {
 }
 #end
 #if (js && flight_esm)
-extern inline function freeRectangle(ptr:Rectangle):Void {
-	flight._js._fn.Geometry.freeRectangle(ptr);
-}
-#else
-extern inline function freeRectangle(ptr:Rectangle):Void {
-#if hl
-	flight._hl._fn.Geometry.freeRectangle(ptr);
-#elseif cpp
-	flight._cpp._fn.Geometry.freeRectangle(ptr);
-#elseif (js && flight_esm)
-	flight._js._fn.Geometry.freeRectangle(ptr);
-#else
-	#error "flight.Geometry: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
 extern inline function freeTransform2D(ptr:Transform2D):Void {
 	flight._js._fn.Geometry.freeTransform2D(ptr);
 }

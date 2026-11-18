@@ -1,38 +1,155 @@
+diff --git a/crates/flight-bindgen/src/haxe_hl.rs b/crates/flight-bindgen/src/haxe_hl.rs
+index 34ae81700d055c9ad416b802d342d9cd4e3d9803..57f064cc0c34c5cc18e208f2a5e6410f4c32df40 100644
+--- a/crates/flight-bindgen/src/haxe_hl.rs
++++ b/crates/flight-bindgen/src/haxe_hl.rs
+@@ -38,6 +38,12 @@ pub fn generate(
+         }
+     }
+ 
++    let ref_types: BTreeSet<_> = crate_exports.iter().flat_map(|item| &item.fns)
++        .filter_map(|function| function.ret.as_ref().and_then(|ty| crate::parse::ref_return_type(ty))).collect();
++    let native_returns: std::collections::BTreeMap<_, _> = crate_exports.iter().flat_map(|item| &item.fns).map(|function| {
++        let kind = function.ret.as_ref().and_then(|ty| classify_return(ty)).unwrap_or(ReturnKind::Void);
++        (format!("flight_{}", function.name), return_kind_to_haxe(&kind))
++    }).collect();
+     let struct_map = build_struct_map(crate_exports);
+     let type_methods = build_type_methods(crate_exports, &all_opaque_types);
+ 
+@@ -48,13 +54,15 @@ pub fn generate(
+     for ty in &all_opaque_types {
+         let parsed_struct = struct_map.get(ty.as_str()).copied();
+         let methods = type_methods.get(ty.as_str());
+-        let struct_offsets = field_offsets.get(ty.as_str());
++        // Ref<T> fields live behind an owning handle and RwLock, rather than at the handle's offsets.
++        let struct_offsets = if ref_types.contains(ty) { None } else { field_offsets.get(ty.as_str()) };
+         let type_output = emit_type_file(
+             ty,
+             parsed_struct,
+             methods.map(|v| v.as_slice()),
+             struct_offsets,
+             ffi_names,
++            &native_returns,
+         );
+         let type_path = hl_dir.join(format!("{ty}.hx"));
+         write_if_changed(&type_path, &type_output);
+@@ -95,6 +103,7 @@ fn emit_type_file(
+     methods: Option<&[TypeMethod<'_>]>,
+     struct_offsets: Option<&std::collections::BTreeMap<String, usize>>,
+     ffi_names: Option<&BTreeSet<String>>,
++    native_returns: &std::collections::BTreeMap<String, String>,
+ ) -> String {
+     let mut output = String::new();
+     writeln!(output, "package {PKG};").unwrap();
+@@ -117,6 +126,22 @@ fn emit_type_file(
+         return output;
+     }
+ 
++    let native_fields: Vec<_> = fields.iter().filter(|field| struct_offsets.and_then(|offsets| offsets.get(&field.name)).is_none()).collect();
++    if !native_fields.is_empty() {
++        writeln!(output, "private extern class {ty}_Ffi {{").unwrap();
++        for field in native_fields {
++            let haxe_ty = scalar_to_haxe(&field.ty);
++            let field_name = to_camel_case(&field.name);
++            let getter = format!("flight_get_{}_{}", to_snake_case(ty), field.name);
++            let setter = format!("flight_set_{}_{}", to_snake_case(ty), field.name);
++            let getter_return = native_returns.get(&getter).map(String::as_str).unwrap_or(haxe_ty);
++            let setter_return = native_returns.get(&setter).map(String::as_str).unwrap_or(haxe_ty);
++            writeln!(output, "\t@:hlNative(\"{LIB_NAME}\", \"{getter}\")\n\tstatic function get_{field_name}(ptr:hl.Bytes):{getter_return};").unwrap();
++            writeln!(output, "\t@:hlNative(\"{LIB_NAME}\", \"{setter}\")\n\tstatic function set_{field_name}(ptr:hl.Bytes, value:{haxe_ty}):{setter_return};").unwrap();
++        }
++        writeln!(output, "}}\n").unwrap();
++    }
++
+     writeln!(output, "abstract {ty}(hl.Bytes) {{").unwrap();
+ 
+     for field in &fields {
+@@ -142,17 +167,8 @@ fn emit_type_file(
+             )
+             .unwrap();
+         } else {
+-            let getter_ffi = format!("flight_get_{}_{}", to_snake_case(ty), field.name);
+-            let setter_ffi = format!("flight_set_{}_{}", to_snake_case(ty), field.name);
+-            writeln!(output, "\t@:hlNative(\"{LIB_NAME}\", \"{getter_ffi}\")").unwrap();
+-            writeln!(output, "\tfunction get_{haxe_name}():{haxe_ty};").unwrap();
+-            writeln!(output).unwrap();
+-            writeln!(output, "\t@:hlNative(\"{LIB_NAME}\", \"{setter_ffi}\")").unwrap();
+-            writeln!(
+-                output,
+-                "\tfunction set_{haxe_name}(value:{haxe_ty}):{haxe_ty};"
+-            )
+-            .unwrap();
++            writeln!(output, "\tinline function get_{haxe_name}():{haxe_ty} return {ty}_Ffi.get_{haxe_name}(this);").unwrap();
++            writeln!(output, "\tinline function set_{haxe_name}(value:{haxe_ty}):{haxe_ty} {{ {ty}_Ffi.set_{haxe_name}(this, value); return value; }}").unwrap();
+         }
+     }
+ 
+diff --git a/crates/flight-bindgen/src/parse.rs b/crates/flight-bindgen/src/parse.rs
+index bd1447651663188b6def96258bcb1d7911d50f91..0d8db006ab56f4d24c17c094e8fa032ffa7016f8 100644
+--- a/crates/flight-bindgen/src/parse.rs
++++ b/crates/flight-bindgen/src/parse.rs
+@@ -460,6 +460,12 @@ pub fn scan_all_crates(crates_dir: &Path) -> Vec<CrateExports> {
+             });
+         }
+     }
++    if let Some(entity) = results.iter_mut().find(|item| item.dir_name == "flight-entity") {
++        entity.fns.push(ParsedFn {
++            name: "free_ref".into(), source_name: None,
++            params: vec![Param { name: "ptr".into(), ty: "Ref<OpaqueHandle>".into() }], ret: None,
++        });
++    }
+     results
+ }
+ 
+@@ -606,6 +612,12 @@ pub enum ReturnKind {
+     OptionTuple(Vec<String>),
+ }
+ 
++pub fn ref_return_type(ty: &str) -> Option<String> {
++    let ty = resolve_type_alias(ty);
++    let ty = ty.strip_prefix("Option<").and_then(|s| s.strip_suffix('>')).unwrap_or(&ty);
++    Some(ty.strip_prefix("Ref<")?.strip_suffix('>')?.trim().to_string())
++}
++
+ fn strip_lifetimes(ty: &str) -> String {
+     let mut result = ty.to_string();
+     while let Some(start) = result.find('\'') {
 diff --git a/crates/flight-ffi/build.rs b/crates/flight-ffi/build.rs
+index f7cf41d5868421200a62f320b7b3291eea9b844f..0c0048413c2269a0379e234c1fefd4cbe846e985 100644
 --- a/crates/flight-ffi/build.rs
 +++ b/crates/flight-ffi/build.rs
 @@ -1,4 +1,5 @@
  mod native_bindings;
 +mod native_handles;
- use std::collections::BTreeSet;
+ mod public_perimeter;
+ use std::collections::{BTreeMap, BTreeSet};
  use std::env;
- use std::fmt::Write as _;
-@@ -245,6 +246,7 @@
-     let out_dir = PathBuf::from(env::var("OUT_DIR").unwrap());
- 
-     let mut all_output = String::from("use flight_sdk;\n\n");
+@@ -460,6 +461,7 @@ fn main() {
+     all_output.push_str(generate_checked_slice_support());
+     all_output.push_str(generate_shape_bounds_context_support());
+     all_output.push_str(generate_owned_byte_reader_support());
 +    all_output.push_str(native_handles::RUNTIME);
      let mut boxed_types: BTreeSet<String> = BTreeSet::new();
+     let mut vec_ref_handle_specs: BTreeSet<VecRefHandleSpec> = BTreeSet::new();
      let mut seen_names: BTreeSet<String> = BTreeSet::new();
-     let mut stats_total_fns = 0usize;
-@@ -277,6 +279,7 @@
-         }
-     }
-     let _ = KNOWN_ENUMS.set(enum_names);
-+    native_handles::initialize(&crates_dir, SCAN_CRATES);
+@@ -521,6 +523,8 @@ fn main() {
+     let _ = KNOWN_ENUMS.set(known_enums);
+     let _ = TYPE_DEFINITIONS.set(type_definitions);
  
-     for dir_name in SCAN_CRATES {
-         let src_dir = crates_dir.join(dir_name).join("src");
-@@ -367,7 +370,7 @@
-         let snake = to_snake_case(type_name);
++    native_handles::initialize(crates_dir, SCAN_CRATES);
++
+     // A by-value transfer consumes an FFI-owned box, so it maps only for types some generated
+     // function hands C as an owned box. The pre-pass finds those producers; the main pass then
+     // records every transferred type, and the free list must cover each one.
+@@ -730,7 +734,7 @@ fn main() {
+         };
          writeln!(
              all_output,
--            "#[unsafe(no_mangle)]\npub unsafe extern \"C\" fn flight_free_{snake}(ptr: *mut {qualified_ty}) {{\n    if !ptr.is_null() {{\n        unsafe {{ drop(Box::from_raw(ptr)); }}\n    }}\n}}"
-+            "#[unsafe(no_mangle)]\npub unsafe extern \"C\" fn flight_free_{snake}(ptr: *mut {qualified_ty}) {{\n    if !ptr.is_null() {{\n        if hx_is_ref(ptr as *const std::ffi::c_void) {{ unsafe {{ flight_free_ref(ptr as *mut std::ffi::c_void); }} }} else {{ unsafe {{ drop(Box::from_raw(ptr)); }} }}\n    }}\n}}"
+-            "#[unsafe(no_mangle)]\npub unsafe extern \"C\" fn flight_free_{snake}(ptr: *mut {boxed_ty}) {{\n    if !ptr.is_null() {{\n        unsafe {{ drop(Box::from_raw(ptr)); }}\n    }}\n}}"
++            "#[unsafe(no_mangle)]\npub unsafe extern \"C\" fn flight_free_{snake}(ptr: *mut {boxed_ty}) {{\n    if !ptr.is_null() {{\n        if hx_is_ref(ptr as *const std::ffi::c_void) {{ unsafe {{ flight_free_ref(ptr as *mut std::ffi::c_void); }} }} else {{ unsafe {{ drop(Box::from_raw(ptr)); }} }}\n    }}\n}}"
          )
          .unwrap();
      }
-@@ -945,11 +948,15 @@
+@@ -1635,11 +1639,15 @@ fn generate_field_accessors(
          let setter_name = format!("flight_set_{snake}_{}", field.name);
  
          let ffi_ty = &field.ty;
@@ -42,31 +159,35 @@ diff --git a/crates/flight-ffi/build.rs b/crates/flight-ffi/build.rs
 +        let write_value = if write_guard.is_empty() { "unsafe { &mut *ptr }" } else { "value_ptr" };
  
          if seen_names.insert(getter_name.clone()) {
-         writeln!(
+             writeln!(
              output,
 -            "#[unsafe(no_mangle)]\npub unsafe extern \"C\" fn {getter_name}(ptr: *const {qualified}) -> {ffi_ty} {{\n    return unsafe {{ &*ptr }}.{};\n}}",
 +            "#[unsafe(no_mangle)]\npub unsafe extern \"C\" fn {getter_name}(ptr: *const {qualified}) -> {ffi_ty} {{\n{read_guard}    return {read_value}.{};\n}}",
              field.name
          )
          .unwrap();
-@@ -957,7 +964,7 @@
+@@ -1647,7 +1655,7 @@ fn generate_field_accessors(
          if seen_names.insert(setter_name.clone()) {
-         writeln!(
+             writeln!(
              output,
 -            "#[unsafe(no_mangle)]\npub unsafe extern \"C\" fn {setter_name}(ptr: *mut {qualified}, value: {ffi_ty}) -> {ffi_ty} {{\n    unsafe {{ &mut *ptr }}.{} = value;\n    return value;\n}}",
 +            "#[unsafe(no_mangle)]\npub unsafe extern \"C\" fn {setter_name}(ptr: *mut {qualified}, value: {ffi_ty}) -> {ffi_ty} {{\n{write_guard}    {write_value}.{} = value;\n    return value;\n}}",
              field.name
          )
-         .unwrap();        }
-@@ -1022,29 +1029,9 @@
-         for (pname, pty) in &mapped.ffi_params {
-             ffi_params.push(format!("{pname}: {pty}"));
+         .unwrap();
+@@ -1741,6 +1749,7 @@ fn generate_ffi_wrapper(func: &ParsedFn) -> Option<(String, Option<String>)> {
          }
-+        let ty = strip_crate_paths(&strip_lifetimes(&resolve_type_alias(param.ty.trim())));
-+        guard_bindings.push(native_handles::bindings_for(&param.name, &ty, &mapped.call_expr));
+         guard_bindings.extend(mapped.bindings);
          call_args.push(mapped.call_expr);
--
--        let ty = strip_crate_paths(&strip_lifetimes(&resolve_type_alias(param.ty.trim())));
++        guard_bindings.extend(native_handles::dyn_binding(&param.name, &resolved_ty));
+         if resolved_ty == "&mut ByteReader<>" || resolved_ty == "&mut ByteReader" {
+             let clean = param.name.trim_start_matches('_');
+             reader_writebacks.push(format!(
+@@ -1748,27 +1757,6 @@ fn generate_ffi_wrapper(func: &ParsedFn) -> Option<(String, Option<String>)> {
+             ));
+         }
+ 
+-        let ty = resolved_ty;
 -        if let Some(trait_name) = extract_dyn_trait(&ty) {
 -            if let Some((_, ref_alias)) = DYN_OPAQUE_TRAITS.iter().find(|(n, _)| *n == trait_name) {
 -                let qualified_ref = qualify_type(ref_alias);
@@ -89,96 +210,90 @@ diff --git a/crates/flight-ffi/build.rs b/crates/flight-ffi/build.rs
 -        }
      }
  
-     let (ret_decl, call_wrap) = match &func.ret {
-@@ -1100,20 +1087,8 @@
-                      }}"
-             )
-         }
--        FfiReturn::ArcRefReturn => {
--            format!(
--                "{preamble}    let arc = {call};\n    \
--                     return Box::into_raw(Box::new(arc)) as *mut std::ffi::c_void;"
--            )
--        }
--        FfiReturn::OptionArcRefReturn => {
--            format!(
--                "{preamble}    match {call} {{\n        \
--                     Some(arc) => Box::into_raw(Box::new(arc)) as *mut std::ffi::c_void,\n        \
--                     None => std::ptr::null_mut(),\n    \
--                     }}"
--            )
--        }
-+        FfiReturn::ArcRefReturn => format!("{preamble}    return {};", native_handles::box_ref(&call, func.ret.as_ref().unwrap())),
-+        FfiReturn::OptionArcRefReturn => format!("{preamble}    match {call} {{ Some(arc) => {}, None => std::ptr::null_mut() }}", native_handles::box_ref("arc", func.ret.as_ref().unwrap())),
-         FfiReturn::EnumReturn => {
-             format!("{preamble}    return {call} as u32;")
-         }
-@@ -1304,14 +1279,12 @@
-                 if ty.starts_with("&mut ") {
+     let (ret_decl, call_wrap) = match (&shape_bounds_context, &func.ret) {
+@@ -1845,7 +1833,7 @@ fn generate_ffi_wrapper(func: &ParsedFn) -> Option<(String, Option<String>)> {
+             "{preamble}    let call_succeeded = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {{\n        {call};\n    }})).is_ok();\n    return call_succeeded && !ffi_{context}.failed;"
+         )
+     } else {
+-        generate_return_body(&call_wrap, &call, &preamble)
++        generate_wrapper_return_body(func, &call_wrap, &call, &preamble)
+     };
+     let helpers = generate_vec_result_helpers(&ffi_name, value_wrap);
+     let ownership = wrapper_ownership_doc(
+@@ -2016,16 +2004,16 @@ fn generate_mono_wrappers(func: &ParsedFn) -> Vec<(String, String, Option<String
+                     ));
+                 } else if ty.starts_with("&mut ") {
                      ffi_params.push(format!("{}: *mut {qualified}", param.name));
-                     call_args.push(format!(
+-                    call_args.push(format!(
 -                        "unsafe {{ &mut *{name} }} as &mut dyn {QUALIFIER}::{trait_name}",
 -                        name = param.name
-+                        "{} as &mut dyn {QUALIFIER}::{trait_name}", native_handles::borrowed_or_raw_expr(&param.name, &format!("&mut {concrete_ty}")),
-                     ));
+-                    ));
++                    let concrete_ref = format!("&mut {concrete_ty}");
++                    bindings.extend(native_handles::borrow_binding(&param.name, &concrete_ref));
++                    let expression = native_handles::borrowed_or_raw_expr(&param.name, &concrete_ref);
++                    call_args.push(format!("{expression} as &mut dyn {QUALIFIER}::{trait_name}"));
                  } else {
                      ffi_params.push(format!("{}: *const {qualified}", param.name));
-                     call_args.push(format!(
+-                    call_args.push(format!(
 -                        "unsafe {{ &*{name} }} as &dyn {QUALIFIER}::{trait_name}",
 -                        name = param.name
-+                        "{} as &dyn {QUALIFIER}::{trait_name}", native_handles::borrowed_or_raw_expr(&param.name, &format!("&{concrete_ty}")),
-                     ));
+-                    ));
++                    let concrete_ref = format!("&{concrete_ty}");
++                    bindings.extend(native_handles::borrow_binding(&param.name, &concrete_ref));
++                    let expression = native_handles::borrowed_or_raw_expr(&param.name, &concrete_ref);
++                    call_args.push(format!("{expression} as &dyn {QUALIFIER}::{trait_name}"));
                  }
              } else {
-@@ -1340,6 +1313,15 @@
-             args = call_args.join(", ")
-         );
+                 match map_param_to_ffi(&param.name, &param.ty) {
+@@ -2060,7 +2048,7 @@ fn generate_mono_wrappers(func: &ParsedFn) -> Vec<(String, String, Option<String
+         } else {
+             format!("{}\n", bindings.join("\n"))
+         };
+-        let body = generate_return_body(&call_wrap, &call, &preamble);
++        let body = generate_wrapper_return_body(func, &call_wrap, &call, &preamble);
+         let helpers = generate_vec_result_helpers(&ffi_name, value_wrap);
+         let ownership = wrapper_ownership_doc(
+             func,
+@@ -2263,6 +2251,27 @@ fn generate_async_callback_body(spec: &AsyncCallbackSpec, call: &str, preamble:
+     )
+ }
  
-+        let mut preamble = String::new();
-+        for (index, param) in func.params.iter().enumerate() {
-+            let original = strip_crate_paths(&strip_lifetimes(&resolve_type_alias(param.ty.trim())));
-+            let ty = if let Some((_, concrete)) = combo.iter().find(|(i, _)| *i == index) {
-+                format!("{}{}", if original.starts_with("&mut ") { "&mut " } else { "&" }, concrete)
-+            } else { original };
-+            let expression = if combo.iter().any(|(i, _)| *i == index) { native_handles::borrowed_or_raw_expr(&param.name, &ty) } else { map_param_to_ffi(&param.name, &ty).unwrap().call_expr };
-+            preamble.push_str(&native_handles::bindings_for(&param.name, &ty, &expression));
++fn generate_wrapper_return_body(
++    func: &ParsedFn,
++    call_wrap: &FfiReturn,
++    call: &str,
++    preamble: &str,
++) -> String {
++    if let Some(ret) = func.ret.as_deref() {
++        if let Some(owned) = native_handles::box_ref(call, ret) {
++            match call_wrap {
++                FfiReturn::ArcRefReturn => return format!("{preamble}    return {owned};"),
++                FfiReturn::OptionArcRefReturn => {
++                    let owned = native_handles::box_ref("arc", ret).unwrap();
++                    return format!("{preamble}    match {call} {{ Some(arc) => {owned}, None => std::ptr::null_mut() }}");
++                }
++                _ => {}
++            }
 +        }
-         let body = match call_wrap {
-             FfiReturn::Void => format!("    {call};"),
-             FfiReturn::Direct => format!("    return {call};"),
-@@ -1355,17 +1337,9 @@
-                      None => std::ptr::null_mut(),\n    \
-                      }}"
-             ),
--            FfiReturn::ArcRefReturn => format!(
--                "    let arc = {call};\n    \
--                     return Box::into_raw(Box::new(arc)) as *mut std::ffi::c_void;"
--            ),
--            FfiReturn::OptionArcRefReturn => format!(
--                "    match {call} {{\n        \
--                     Some(arc) => Box::into_raw(Box::new(arc)) as *mut std::ffi::c_void,\n        \
--                     None => std::ptr::null_mut(),\n    \
--                     }}"
--            ),
--            FfiReturn::EnumReturn => format!("    return {call} as u32;"),
-+            FfiReturn::ArcRefReturn => format!("    return {};", native_handles::box_ref(&call, func.ret.as_ref().unwrap())),
-+        FfiReturn::OptionArcRefReturn => format!("    match {call} {{ Some(arc) => {}, None => std::ptr::null_mut() }}", native_handles::box_ref("arc", func.ret.as_ref().unwrap())),
-+        FfiReturn::EnumReturn => format!("    return {call} as u32;"),
-             FfiReturn::OptionEnumReturn => format!(
-                 "    match {call} {{\n        \
-                      Some(v) => v as i32,\n        \
-@@ -1428,7 +1402,7 @@
-         wrappers.push((
-             ffi_name.clone(),
-             format!(
--                "#[unsafe(no_mangle)]\npub unsafe extern \"C\" fn {ffi_name}({params}){ret_decl} {{\n{body}\n}}",
-+                "#[unsafe(no_mangle)]\npub unsafe extern \"C\" fn {ffi_name}({params}){ret_decl} {{\n{preamble}{body}\n}}",
-                 params = ffi_params.join(", "),
-             ),
-             boxed_ty.clone(),
-@@ -1816,6 +1790,12 @@
- fn map_param_to_ffi(name: &str, ty: &str) -> Option<MappedParam> {
-     let ty = strip_crate_paths(&strip_lifetimes(&resolve_type_alias(ty.trim())));
++    }
++    generate_return_body(call_wrap, call, preamble)
++}
++
+ fn generate_return_body(call_wrap: &FfiReturn, call: &str, preamble: &str) -> String {
+     match call_wrap {
+         FfiReturn::AsyncCallback(spec) => generate_async_callback_body(spec, call, preamble),
+@@ -3547,7 +3556,7 @@ fn map_generic_carrier_param(name: &str, ty: &str) -> Option<Option<MappedParam>
+                     "    let {binding}_handles: &[*const std::ffi::c_void] = unsafe {{ ffi_slice_from_raw_parts({ptr_name}, {len_name}) }};"
+                 ),
+                 format!(
+-                    "    let {binding}: Vec<{element_ty}> = {binding}_handles.iter().map(|handle| {{ assert!(!(*handle).is_null(), \"Ref slice contains a null handle\"); unsafe {{ &*(*handle as *const {element_ty}) }}.clone() }}).collect();"
++                    "    let {binding}: Vec<{element_ty}> = {binding}_handles.iter().map(|handle| {{ assert!(!(*handle).is_null(), \"Ref slice contains a null handle\"); unsafe {{ hx_ref::<{element_ty}>(*handle) }} }}).collect();"
+                 ),
+             ],
+             call_expr: format!("&{binding}"),
+@@ -4123,6 +4132,12 @@ fn map_param_to_ffi(name: &str, ty: &str) -> Option<MappedParam> {
+     // resolver once more after removing lifetimes (`&'a Uint8Array` -> `&[u8]`).
+     let ty = resolve_type_alias(&ty);
      let ty = ty.as_str();
 +    if ty.starts_with("&mut Ref<") || ty.starts_with("Option<&mut Ref<") {
 +        // Replacing an Arc would invalidate the handle's other trait views.
@@ -187,31 +302,75 @@ diff --git a/crates/flight-ffi/build.rs b/crates/flight-ffi/build.rs
 +    if let Some(mapped) = native_handles::map_ref_param(name, ty) { return Some(mapped); }
 +
  
-     // &str / &'static str -> *const c_char
-     if ty == "&str" || ty == "&'static str" {
-@@ -2515,7 +2495,7 @@
-         return mapped_single(
-             name,
-             &format!("*mut {qualified}"),
+     // The handle owns bytes and cursor, but never an SDK ByteReader. Borrow its bytes into a
+     // transient view for exactly one call; mutable wrappers write the resulting cursor back.
+@@ -4287,7 +4302,7 @@ fn map_param_to_ffi(name: &str, ty: &str) -> Option<MappedParam> {
+                             "    assert!(!{ptr_name}.is_null() || {len_name} == 0, \"null Ref slice must have length zero\");"
+                         ),
+                         format!(
+-                            "    let {binding_name}: Option<Vec<{element_ty}>> = if {ptr_name}.is_null() {{ None }} else {{ Some(unsafe {{ ffi_slice_from_raw_parts({ptr_name}, {len_name}) }}.iter().map(|handle| {{ assert!(!(*handle).is_null(), \"Ref slice contains a null handle\"); unsafe {{ &*(*handle as *const {element_ty}) }}.clone() }}).collect()) }};"
++                            "    let {binding_name}: Option<Vec<{element_ty}>> = if {ptr_name}.is_null() {{ None }} else {{ Some(unsafe {{ ffi_slice_from_raw_parts({ptr_name}, {len_name}) }}.iter().map(|handle| {{ assert!(!(*handle).is_null(), \"Ref slice contains a null handle\"); unsafe {{ hx_ref::<{element_ty}>(*handle) }} }}).collect()) }};"
+                         ),
+                     ],
+                     call_expr: format!("{binding_name}.as_deref()"),
+@@ -4502,7 +4517,7 @@ fn map_param_to_ffi(name: &str, ty: &str) -> Option<MappedParam> {
+                 name,
+                 "*const std::ffi::c_void",
+                 format!(
+-                    "if {name}.is_null() {{ None }} else {{ Some(unsafe {{ (*({name} as *const {qualified})).clone() }}) }}"
++                    "if {name}.is_null() {{ None }} else {{ Some(unsafe {{ hx_ref::<{qualified}>({name} as *const std::ffi::c_void) }}) }}"
+                 ),
+             );
+         }
+@@ -4580,7 +4595,7 @@ fn map_param_to_ffi(name: &str, ty: &str) -> Option<MappedParam> {
+                             "    let {binding_name}_handles: &[*const std::ffi::c_void] = unsafe {{ ffi_slice_from_raw_parts({ptr_name}, {len_name}) }};"
+                         ),
+                         format!(
+-                            "    let {binding_name}: Vec<{element_ty}> = {binding_name}_handles.iter().map(|handle| {{ assert!(!(*handle).is_null(), \"Ref slice contains a null handle\"); unsafe {{ &*(*handle as *const {element_ty}) }}.clone() }}).collect();"
++                            "    let {binding_name}: Vec<{element_ty}> = {binding_name}_handles.iter().map(|handle| {{ assert!(!(*handle).is_null(), \"Ref slice contains a null handle\"); unsafe {{ hx_ref::<{element_ty}>(*handle) }} }}).collect();"
+                         ),
+                     ],
+                     call_expr: format!("&{binding_name}"),
+@@ -5041,11 +5056,11 @@ fn map_param_to_ffi(name: &str, ty: &str) -> Option<MappedParam> {
+             return None;
+         }
+         let qualified = qualify_type(inner);
+-        return mapped_single(
+-            name,
+-            &format!("*mut {qualified}"),
 -            format!("unsafe {{ &mut *{name} }}"),
-+            native_handles::borrowed_expr(name, ty).unwrap_or_else(|| format!("unsafe {{ &mut *{name} }}")),
-         );
+-        );
++        return Some(MappedParam {
++            ffi_params: vec![(name.to_string(), format!("*mut {qualified}"))],
++            bindings: native_handles::borrow_binding(name, ty).into_iter().collect(),
++            call_expr: native_handles::borrowed_or_raw_expr(name, ty),
++        });
      }
  
-@@ -2529,7 +2509,7 @@
-         return mapped_single(
-             name,
-             &format!("*const {qualified}"),
+     // &T -> *const T
+@@ -5055,11 +5070,11 @@ fn map_param_to_ffi(name: &str, ty: &str) -> Option<MappedParam> {
+             return None;
+         }
+         let qualified = qualify_type(inner);
+-        return mapped_single(
+-            name,
+-            &format!("*const {qualified}"),
 -            format!("unsafe {{ &*{name} }}"),
-+            native_handles::borrowed_expr(name, ty).unwrap_or_else(|| format!("unsafe {{ &*{name} }}")),
-         );
+-        );
++        return Some(MappedParam {
++            ffi_params: vec![(name.to_string(), format!("*const {qualified}"))],
++            bindings: native_handles::borrow_binding(name, ty).into_iter().collect(),
++            call_expr: native_handles::borrowed_or_raw_expr(name, ty),
++        });
      }
  
+     // String param -> *const c_char
 diff --git a/crates/flight-ffi/native_handles.rs b/crates/flight-ffi/native_handles.rs
 new file mode 100644
+index 0000000000000000000000000000000000000000..5ec8fd3be37bab8127a1f04209794f26eb462e82
 --- /dev/null
 +++ b/crates/flight-ffi/native_handles.rs
-@@ -0,0 +1,192 @@
+@@ -0,0 +1,205 @@
 +//! One owning handle representation for every Ref<T>, including trait-object views.
 +use std::collections::{BTreeMap, BTreeSet};
 +use std::path::Path;
@@ -266,10 +425,11 @@ new file mode 100644
 +
 +pub fn is_node(ty: &str) -> bool { NODES.get().is_some_and(|nodes| nodes.contains_key(ty)) }
 +
-+pub fn box_ref(value: &str, ret: &str) -> String {
++pub fn box_ref(value: &str, ret: &str) -> Option<String> {
 +    let ret = super::resolve_type_alias(ret);
 +    let ret = ret.strip_prefix("Option<").and_then(|s| s.strip_suffix('>')).unwrap_or(&ret);
-+    let inner = ret.strip_prefix("Ref<").and_then(|s| s.strip_suffix('>')).expect("Ref return").trim();
++    let inner = ret.strip_prefix("Ref<")?.strip_suffix('>')?.trim();
++    if inner.contains('<') { return None; }
 +    let family = match inner {
 +        "dyn Node" => 1, "dyn Node2D" => 2, "dyn Node3D" => 3,
 +        _ => NODES.get().and_then(|nodes| nodes.get(inner)).copied().unwrap_or(0),
@@ -285,7 +445,7 @@ new file mode 100644
 +        if family == 3 { out.push_str("let view: flight_sdk::Node3DRef = arc.clone(); handle.insert(view);"); }
 +    }
 +    out.push_str("handle.into_raw() }");
-+    out
++    Some(out)
 +}
 +
 +pub const RUNTIME: &str = r#"
@@ -321,7 +481,12 @@ new file mode 100644
 +    handle.views.get(&std::any::TypeId::of::<R>()).and_then(|value| value.downcast_ref::<R>()).cloned()
 +}
 +unsafe fn hx_ref<R: Clone + 'static>(ptr: *const std::ffi::c_void) -> R {
-+    unsafe { hx_try_ref(ptr) }.expect("incompatible or released Flight Ref handle")
++    if hx_is_ref(ptr) {
++        unsafe { hx_try_ref(ptr) }.expect("incompatible Flight Ref handle")
++    } else {
++        // The upstream collection ABI also lends exact, typed references to Arc storage.
++        unsafe { (&*ptr.cast::<R>()).clone() }
++    }
 +}
 +#[unsafe(no_mangle)]
 +pub unsafe extern "C" fn flight_free_ref(ptr: *mut std::ffi::c_void) {
@@ -342,7 +507,7 @@ new file mode 100644
 +}
 +
 +pub fn map_ref_param(name: &str, ty: &str) -> Option<super::MappedParam> {
-+    let (_, optional, borrowed) = ref_info(ty)?;
++    let (reference, optional, borrowed) = ref_info(ty)?;
 +    let clean = name.trim_start_matches('_');
 +    let value = format!("ref_{clean}");
 +    let expr = match (optional, borrowed) {
@@ -350,7 +515,17 @@ new file mode 100644
 +        (false, true) => format!("&{value}"),
 +        _ => value,
 +    };
-+    Some(super::MappedParam { ffi_params: vec![(name.to_string(), "*const std::ffi::c_void".into())], call_expr: expr })
++    let clone = format!("unsafe {{ hx_ref::<{reference}>({name}) }}");
++    let initializer = if optional {
++        format!("if {name}.is_null() {{ None }} else {{ Some({clone}) }}")
++    } else {
++        clone
++    };
++    Some(super::MappedParam {
++        ffi_params: vec![(name.to_string(), "*const std::ffi::c_void".into())],
++        bindings: vec![format!("    let {value} = {initializer};")],
++        call_expr: expr,
++    })
 +}
 +
 +fn borrowed_type(ty: &str) -> Option<(&str, bool)> {
@@ -368,19 +543,6 @@ new file mode 100644
 +pub fn bindings(name: &str, ty: &str) -> String {
 +    let clean = name.trim_start_matches('_');
 +    let ptr = format!("{name} as *const std::ffi::c_void");
-+    if let Some((reference, optional, _)) = ref_info(ty) {
-+        let value = format!("unsafe {{ hx_ref::<{reference}>({ptr}) }}");
-+        return if optional {
-+            format!("let ref_{clean} = if {name}.is_null() {{ None }} else {{ Some({value}) }};\n")
-+        } else { format!("let ref_{clean} = {value};\n") };
-+    }
-+    if let Some(trait_name) = super::extract_dyn_trait(ty) {
-+        if let Some((_, alias)) = super::DYN_OPAQUE_TRAITS.iter().find(|(n, _)| *n == trait_name) {
-+            let mutable = ty.starts_with("&mut ");
-+            let (mut_kw, lock) = if mutable { ("mut ", "write") } else { ("", "read") };
-+            return format!("let arc_{clean} = unsafe {{ hx_ref::<flight_sdk::{alias}>({ptr}) }};\nlet {mut_kw}guard_{clean} = arc_{clean}.{lock}().unwrap();\nlet dyn_{clean}: &{mut_kw}dyn flight_sdk::{trait_name} = &{mut_kw}*guard_{clean};\n");
-+        }
-+    }
 +    let Some((inner, mutable)) = borrowed_type(ty) else { return String::new(); };
 +    let qualified = super::qualify_type(inner);
 +    let (mut_kw, lock, guard_access, raw) = if mutable { ("mut ", "write", "as_mut", "*mut") } else { ("", "read", "as_ref", "*const") };
@@ -392,11 +554,21 @@ new file mode 100644
 +    }
 +}
 +
-+pub fn bindings_for(name: &str, ty: &str, expr: &str) -> String {
-+    let selected = map_ref_param(name, ty).is_some_and(|mapped| mapped.call_expr == expr)
-+        || borrowed_expr(name, ty).is_some_and(|value| value == expr)
-+        || expr == format!("dyn_{}", name.trim_start_matches('_'));
-+    if selected { bindings(name, ty) } else { String::new() }
++pub fn dyn_binding(name: &str, ty: &str) -> Option<String> {
++    let clean = name.trim_start_matches('_');
++    let ptr = format!("{name} as *const std::ffi::c_void");
++    if let Some(trait_name) = super::extract_dyn_trait(ty) {
++        if let Some((_, alias)) = super::DYN_OPAQUE_TRAITS.iter().find(|(n, _)| *n == trait_name) {
++            let mutable = ty.starts_with("&mut ");
++            let (mut_kw, lock) = if mutable { ("mut ", "write") } else { ("", "read") };
++            return Some(format!("let arc_{clean} = unsafe {{ hx_ref::<flight_sdk::{alias}>({ptr}) }};\nlet {mut_kw}guard_{clean} = arc_{clean}.{lock}().unwrap();\nlet dyn_{clean}: &{mut_kw}dyn flight_sdk::{trait_name} = &{mut_kw}*guard_{clean};\n");
++        }
++    }
++    None
++}
++
++pub fn borrow_binding(name: &str, ty: &str) -> Option<String> {
++    borrowed_type(ty).map(|_| bindings(name, ty))
 +}
 +
 +pub fn borrowed_or_raw_expr(name: &str, ty: &str) -> String {
@@ -405,10 +577,11 @@ new file mode 100644
 +    })
 +}
 diff --git a/crates/flight-ffi/src/lib.rs b/crates/flight-ffi/src/lib.rs
+index cf219d04b88a6adbad5b78ccf6cf1e94db154d7f..6a5e95e6b65354e57d4fc25dd3f843cba9599c9b 100644
 --- a/crates/flight-ffi/src/lib.rs
 +++ b/crates/flight-ffi/src/lib.rs
-@@ -1,3 +1,54 @@
- #![allow(clippy::missing_safety_doc)]
+@@ -17,3 +17,54 @@ mod generic_carrier_test;
+ mod shape_bounds_context_test;
  
  include!(concat!(env!("OUT_DIR"), "/ffi_generated.rs"));
 +
@@ -462,116 +635,3 @@ diff --git a/crates/flight-ffi/src/lib.rs b/crates/flight-ffi/src/lib.rs
 +        }
 +    }
 +}
-diff --git a/crates/flight-bindgen/src/parse.rs b/crates/flight-bindgen/src/parse.rs
---- a/crates/flight-bindgen/src/parse.rs
-+++ b/crates/flight-bindgen/src/parse.rs
-@@ -460,6 +460,12 @@
-             });
-         }
-     }
-+    if let Some(entity) = results.iter_mut().find(|item| item.dir_name == "flight-entity") {
-+        entity.fns.push(ParsedFn {
-+            name: "free_ref".into(), source_name: None,
-+            params: vec![Param { name: "ptr".into(), ty: "Ref<OpaqueHandle>".into() }], ret: None,
-+        });
-+    }
-     results
- }
- 
-@@ -598,6 +604,12 @@
-     OptionBoxSliceReturn(String),
-     FixedArrayReturn(String, usize),
-     OptionStruct(String),
-+}
-+
-+pub fn ref_return_type(ty: &str) -> Option<String> {
-+    let ty = resolve_type_alias(ty);
-+    let ty = ty.strip_prefix("Option<").and_then(|s| s.strip_suffix('>')).unwrap_or(&ty);
-+    Some(ty.strip_prefix("Ref<")?.strip_suffix('>')?.trim().to_string())
- }
- 
- fn strip_lifetimes(ty: &str) -> String {
-diff --git a/crates/flight-bindgen/src/haxe_hl.rs b/crates/flight-bindgen/src/haxe_hl.rs
---- a/crates/flight-bindgen/src/haxe_hl.rs
-+++ b/crates/flight-bindgen/src/haxe_hl.rs
-@@ -38,6 +38,12 @@
-         }
-     }
- 
-+    let ref_types: BTreeSet<_> = crate_exports.iter().flat_map(|item| &item.fns)
-+        .filter_map(|function| function.ret.as_ref().and_then(|ty| crate::parse::ref_return_type(ty))).collect();
-+    let native_returns: std::collections::BTreeMap<_, _> = crate_exports.iter().flat_map(|item| &item.fns).map(|function| {
-+        let kind = function.ret.as_ref().and_then(|ty| classify_return(ty)).unwrap_or(ReturnKind::Void);
-+        (format!("flight_{}", function.name), return_kind_to_haxe(&kind))
-+    }).collect();
-     let struct_map = build_struct_map(crate_exports);
-     let type_methods = build_type_methods(crate_exports, &all_opaque_types);
- 
-@@ -48,13 +54,15 @@
-     for ty in &all_opaque_types {
-         let parsed_struct = struct_map.get(ty.as_str()).copied();
-         let methods = type_methods.get(ty.as_str());
--        let struct_offsets = field_offsets.get(ty.as_str());
-+        // Ref<T> fields live behind an owning handle and RwLock, rather than at the handle's offsets.
-+        let struct_offsets = if ref_types.contains(ty) { None } else { field_offsets.get(ty.as_str()) };
-         let type_output = emit_type_file(
-             ty,
-             parsed_struct,
-             methods.map(|v| v.as_slice()),
-             struct_offsets,
-             ffi_names,
-+            &native_returns,
-         );
-         let type_path = hl_dir.join(format!("{ty}.hx"));
-         write_if_changed(&type_path, &type_output);
-@@ -95,6 +103,7 @@
-     methods: Option<&[TypeMethod<'_>]>,
-     struct_offsets: Option<&std::collections::BTreeMap<String, usize>>,
-     ffi_names: Option<&BTreeSet<String>>,
-+    native_returns: &std::collections::BTreeMap<String, String>,
- ) -> String {
-     let mut output = String::new();
-     writeln!(output, "package {PKG};").unwrap();
-@@ -115,6 +124,22 @@
-     if fields.is_empty() && method_strs.is_empty() {
-         writeln!(output, "abstract {ty}(hl.Bytes) {{}}").unwrap();
-         return output;
-+    }
-+
-+    let native_fields: Vec<_> = fields.iter().filter(|field| struct_offsets.and_then(|offsets| offsets.get(&field.name)).is_none()).collect();
-+    if !native_fields.is_empty() {
-+        writeln!(output, "private extern class {ty}_Ffi {{").unwrap();
-+        for field in native_fields {
-+            let haxe_ty = scalar_to_haxe(&field.ty);
-+            let field_name = to_camel_case(&field.name);
-+            let getter = format!("flight_get_{}_{}", to_snake_case(ty), field.name);
-+            let setter = format!("flight_set_{}_{}", to_snake_case(ty), field.name);
-+            let getter_return = native_returns.get(&getter).map(String::as_str).unwrap_or(haxe_ty);
-+            let setter_return = native_returns.get(&setter).map(String::as_str).unwrap_or(haxe_ty);
-+            writeln!(output, "\t@:hlNative(\"{LIB_NAME}\", \"{getter}\")\n\tstatic function get_{field_name}(ptr:hl.Bytes):{getter_return};").unwrap();
-+            writeln!(output, "\t@:hlNative(\"{LIB_NAME}\", \"{setter}\")\n\tstatic function set_{field_name}(ptr:hl.Bytes, value:{haxe_ty}):{setter_return};").unwrap();
-+        }
-+        writeln!(output, "}}\n").unwrap();
-     }
- 
-     writeln!(output, "abstract {ty}(hl.Bytes) {{").unwrap();
-@@ -142,17 +167,8 @@
-             )
-             .unwrap();
-         } else {
--            let getter_ffi = format!("flight_get_{}_{}", to_snake_case(ty), field.name);
--            let setter_ffi = format!("flight_set_{}_{}", to_snake_case(ty), field.name);
--            writeln!(output, "\t@:hlNative(\"{LIB_NAME}\", \"{getter_ffi}\")").unwrap();
--            writeln!(output, "\tfunction get_{haxe_name}():{haxe_ty};").unwrap();
--            writeln!(output).unwrap();
--            writeln!(output, "\t@:hlNative(\"{LIB_NAME}\", \"{setter_ffi}\")").unwrap();
--            writeln!(
--                output,
--                "\tfunction set_{haxe_name}(value:{haxe_ty}):{haxe_ty};"
--            )
--            .unwrap();
-+            writeln!(output, "\tinline function get_{haxe_name}():{haxe_ty} return {ty}_Ffi.get_{haxe_name}(this);").unwrap();
-+            writeln!(output, "\tinline function set_{haxe_name}(value:{haxe_ty}):{haxe_ty} {{ {ty}_Ffi.set_{haxe_name}(this, value); return value; }}").unwrap();
-         }
-     }
- 

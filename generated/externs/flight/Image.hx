@@ -1,23 +1,6 @@
 package flight;
 
 #if (js && flight_esm)
-extern inline function asImageResourceRef(source:TextureSourceRef):Null<Dynamic> {
-	return flight._js._fn.Image.asImageResourceRef(source);
-}
-#else
-extern inline function asImageResourceRef(source:TextureSourceRef):Dynamic {
-#if hl
-	return flight._hl._fn.Image.asImageResourceRef(source);
-#elseif cpp
-	return flight._cpp._fn.Image.asImageResourceRef(source);
-#elseif (js && flight_esm)
-	return flight._js._fn.Image.asImageResourceRef(source);
-#else
-	#error "flight.Image: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
 extern inline function cloneImageResource(resource:Dynamic):Dynamic {
 	return flight._js._fn.Image.cloneImageResource(resource);
 }
@@ -80,40 +63,6 @@ extern inline function createImageResourceFromBitmap(hostImage:HostImageCapabili
 	return flight._cpp._fn.Image.createImageResourceFromBitmap(hostImage, bitmap);
 #elseif (js && flight_esm)
 	return flight._js._fn.Image.createImageResourceFromBitmap(hostImage, bitmap);
-#else
-	#error "flight.Image: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
-extern inline function createImageResourceFromSurface(hostImage:HostImageCapability, surface:SurfaceRef):Null<Dynamic> {
-	return flight._js._fn.Image.createImageResourceFromSurface(hostImage, surface);
-}
-#else
-extern inline function createImageResourceFromSurface(hostImage:HostImageCapability, surface:SurfaceRef):Dynamic {
-#if hl
-	return flight._hl._fn.Image.createImageResourceFromSurface(hostImage, surface);
-#elseif cpp
-	return flight._cpp._fn.Image.createImageResourceFromSurface(hostImage, surface);
-#elseif (js && flight_esm)
-	return flight._js._fn.Image.createImageResourceFromSurface(hostImage, surface);
-#else
-	#error "flight.Image: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
-extern inline function captureBitmapFromImageResource(hostBitmapReadback:HostBitmapReadbackCapability, resource:Dynamic):Null<Bitmap> {
-	return flight._js._fn.Image.captureBitmapFromImageResource(hostBitmapReadback, resource);
-}
-#else
-extern inline function captureBitmapFromImageResource(hostBitmapReadback:HostBitmapReadbackCapability, resource:Dynamic):Bitmap {
-#if hl
-	return flight._hl._fn.Image.captureBitmapFromImageResource(hostBitmapReadback, resource);
-#elseif cpp
-	return flight._cpp._fn.Image.captureBitmapFromImageResource(hostBitmapReadback, resource);
-#elseif (js && flight_esm)
-	return flight._js._fn.Image.captureBitmapFromImageResource(hostBitmapReadback, resource);
 #else
 	#error "flight.Image: no backend for this target."
 #end
@@ -205,40 +154,6 @@ extern inline function resetFailedImageResourceReference(reference:ImageResource
 }
 #end
 #if (js && flight_esm)
-extern inline function createImageResolverState():ImageResolverState {
-	return flight._js._fn.Image.createImageResolverState();
-}
-#else
-extern inline function createImageResolverState():ImageResolverState {
-#if hl
-	return flight._hl._fn.Image.createImageResolverState();
-#elseif cpp
-	return flight._cpp._fn.Image.createImageResolverState();
-#elseif (js && flight_esm)
-	return flight._js._fn.Image.createImageResolverState();
-#else
-	#error "flight.Image: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
-extern inline function createTextureFromImageResource(reference:ImageResourceReference, opts:Null<CreateTexture2DOptions>):Dynamic {
-	return flight._js._fn.Image.createTextureFromImageResource(reference, opts);
-}
-#else
-extern inline function createTextureFromImageResource(reference:ImageResourceReference, opts:CreateTexture2DOptions):Dynamic {
-#if hl
-	return flight._hl._fn.Image.createTextureFromImageResource(reference, opts);
-#elseif cpp
-	return flight._cpp._fn.Image.createTextureFromImageResource(reference, opts);
-#elseif (js && flight_esm)
-	return flight._js._fn.Image.createTextureFromImageResource(reference, opts);
-#else
-	#error "flight.Image: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
 extern inline function freeImageResourceReferenceResolutionExplanation(ptr:ImageResourceReferenceResolutionExplanation):Void {
 	flight._js._fn.Image.freeImageResourceReferenceResolutionExplanation(ptr);
 }
@@ -250,23 +165,6 @@ extern inline function freeImageResourceReferenceResolutionExplanation(ptr:Image
 	flight._cpp._fn.Image.freeImageResourceReferenceResolutionExplanation(ptr);
 #elseif (js && flight_esm)
 	flight._js._fn.Image.freeImageResourceReferenceResolutionExplanation(ptr);
-#else
-	#error "flight.Image: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
-extern inline function freeImageResolverState(ptr:ImageResolverState):Void {
-	flight._js._fn.Image.freeImageResolverState(ptr);
-}
-#else
-extern inline function freeImageResolverState(ptr:ImageResolverState):Void {
-#if hl
-	flight._hl._fn.Image.freeImageResolverState(ptr);
-#elseif cpp
-	flight._cpp._fn.Image.freeImageResolverState(ptr);
-#elseif (js && flight_esm)
-	flight._js._fn.Image.freeImageResolverState(ptr);
 #else
 	#error "flight.Image: no backend for this target."
 #end

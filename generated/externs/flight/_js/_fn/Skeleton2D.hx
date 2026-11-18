@@ -42,10 +42,6 @@ extern class Skeleton2D {
 	public static function setSkeleton2dBindPose(skeleton:flight._js.Skeleton2D):Void;
 	@:native("validateSkeleton2D")
 	public static function validateSkeleton2d(skeleton:flight._js.Skeleton2D):Null<String>;
-	@:native("createSkeleton2DAnimationTargetHandle")
-	public static function createSkeleton2dAnimationTargetHandle(kind:String, target:flight._js.Unknown):flight._js.Skeleton2DAnimationTargetHandle;
-	@:native("createSkeleton2DAnimationTargetRegistry")
-	public static function createSkeleton2dAnimationTargetRegistry():flight._js.Skeleton2DAnimationTargetBinderRegistry;
 	@:native("createSkeleton2DBoneAnimationTarget")
 	public static function createSkeleton2dBoneAnimationTarget(boneIndex:Int, path:String):flight._js.Skeleton2DAnimationTarget;
 	@:native("createSkeleton2DSlotAnimationTarget")
@@ -80,10 +76,6 @@ extern class Skeleton2D {
 	public static function solveSkeleton2dTransformConstraintSkeleton2DtransformConstraint(skeleton:flight._js.Skeleton2D, constraint:flight._js.Skeleton2DTransformConstraint):Void;
 	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeSkeleton2DdeformLengthExplanation(ptr:flight._js.Skeleton2DDeformLengthExplanation):Void {}
-	/** Native allocation release is unnecessary on JavaScript. */
-	public static inline function freeSkeleton2DanimationTargetHandle(ptr:flight._js.Skeleton2DAnimationTargetHandle):Void {}
-	/** Native allocation release is unnecessary on JavaScript. */
-	public static inline function freeSkeleton2DanimationTargetBinderRegistry(ptr:flight._js.Skeleton2DAnimationTargetBinderRegistry):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeSkeleton2DanimationTarget(ptr:flight._js.Skeleton2DAnimationTarget):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */

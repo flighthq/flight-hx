@@ -64,34 +64,4 @@ abstract Texture(Dynamic) {
 	inline public function free():Void {
 		flight._js._fn.Texture.freeTexture(cast this);
 	}
-	inline public function advanceVideoTexture(hostVideo:flight._js.HostVideoCapability):Int {
-		return flight._js._fn.Video.advanceVideoTextureTexture(hostVideo, cast this);
-	}
-	inline public function cloneVideoTexture():flight._js.Texture {
-		return flight._js._fn.Video.cloneVideoTextureTexture(cast this);
-	}
-	inline public function copyVideoTextureTexture(source:flight._js.Texture):Void {
-		flight._js._fn.Video.copyVideoTextureTextureTexture(cast this, source);
-	}
-	inline public function getVideoTextureHeight(hostVideo:flight._js.HostVideoCapability):Float {
-		return flight._js._fn.Video.getVideoTextureHeightTexture(hostVideo, cast this);
-	}
-	inline public function getVideoTextureInverseUvMatrix(out:flight._js.Matrix3):Void {
-		flight._js._fn.Video.getVideoTextureInverseUvMatrixTexture(out, cast this);
-	}
-	inline public function getVideoTextureUvMatrix(out:flight._js.Matrix3):Void {
-		flight._js._fn.Video.getVideoTextureUvMatrixTexture(out, cast this);
-	}
-	inline public function getVideoTextureWidth(hostVideo:flight._js.HostVideoCapability):Float {
-		return flight._js._fn.Video.getVideoTextureWidthTexture(hostVideo, cast this);
-	}
-	inline public function isVideoTextureFrameReady(hostVideo:flight._js.HostVideoCapability):Bool {
-		return flight._js._fn.Video.isVideoTextureFrameReadyTexture(hostVideo, cast this);
-	}
-	inline public function resetVideoTextureFrame():Void {
-		flight._js._fn.Video.resetVideoTextureFrameTexture(cast this);
-	}
-	inline public function setVideoTextureSource(hostVideo:flight._js.HostVideoCapability, source:flight._js.VideoResource):Void {
-		flight._js._fn.Video.setVideoTextureSourceTexture(hostVideo, cast this, source);
-	}
 }

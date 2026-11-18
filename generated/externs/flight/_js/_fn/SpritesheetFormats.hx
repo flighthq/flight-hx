@@ -8,8 +8,6 @@ extern class SpritesheetFormats {
 	public static function serializeCocosPlistSpritesheet(data:flight._js.SpritesheetData, existing:Null<flight._js.CocosPlistDocument>):String;
 	@:native("formatLibgdxAtlas")
 	public static function formatLibgdxAtlas(data:flight._js.SpritesheetData):String;
-	@:native("createSpritesheetFormatRegistry")
-	public static function createSpritesheetFormatRegistry():flight._js.SpritesheetFormatRegistry;
 	@:native("applySpritesheetImportOptions")
 	public static function applySpritesheetImportOptions(registry:flight._js.SpritesheetFormatRegistry, options:flight._js.SpritesheetImportOptions):Void;
 	@:native("asepriteSpritesheetFormat")
@@ -34,8 +32,6 @@ extern class SpritesheetFormats {
 	public static function serializeStarlingSpritesheet(data:flight._js.SpritesheetData, existing:Null<flight._js.StarlingDocument>):String;
 	@:native("serializeTexturePackerSpritesheet")
 	public static function serializeTexturePackerSpritesheet(data:flight._js.SpritesheetData, existing:Null<flight._js.TexturePackerDocument>, options:Null<flight._js.TexturePackerSerializeOptions>):String;
-	/** Native allocation release is unnecessary on JavaScript. */
-	public static inline function freeSpritesheetFormatRegistry(ptr:flight._js.SpritesheetFormatRegistry):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeSpritesheetFormatKind(ptr:flight._js.SpritesheetFormatKind):Void {}
 }

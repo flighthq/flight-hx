@@ -3,10 +3,6 @@ package flight._hl._fn;
 extern class Signals {
 	@:hlNative("flight", "flight_disconnect_signal_connection")
 	public static function disconnectSignalConnection(connection:flight._hl.SignalConnection):Void;
-	@:hlNative("flight", "flight_is_signal_connection_connected")
-	public static function isSignalConnectionConnected(connection:flight._hl.SignalConnection):Bool;
-	@:hlNative("flight", "flight_is_signal_connection_paused")
-	public static function isSignalConnectionPaused(connection:flight._hl.SignalConnection):Bool;
 	@:hlNative("flight", "flight_pause_signal_connection")
 	public static function pauseSignalConnection(connection:flight._hl.SignalConnection):Void;
 	@:hlNative("flight", "flight_resume_signal_connection")

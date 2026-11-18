@@ -4,12 +4,6 @@ package flight._js._fn;
 extern class QuadBatch {
 	@:native("createQuadBatch")
 	public static function createQuadBatch():Dynamic;
-	@:native("createQuadBatchData")
-	public static function createQuadBatchData():flight._js.QuadBatchData;
-	@:native("createQuadBatchRuntime")
-	public static function createQuadBatchRuntime():flight._js.Node2DRuntime;
-	@:native("createQuadBatchSignals")
-	public static function createQuadBatchSignals():Dynamic;
 	@:native("appendQuadBatchInstance")
 	public static function appendQuadBatchInstance(target:flight._js.QuadBatch, id:Int, x:Float, y:Float):Int;
 	@:native("clearQuadBatch")
@@ -28,8 +22,6 @@ extern class QuadBatch {
 	public static function getQuadBatchInstanceId(source:flight._js.QuadBatch, index:Int):Int;
 	@:native("getQuadBatchInstanceTransform")
 	public static function getQuadBatchInstanceTransform(out:flight._js.Vector2, source:flight._js.QuadBatch, index:Int):Bool;
-	@:native("getQuadBatchRuntime")
-	public static function getQuadBatchRuntime(source:flight._js.QuadBatch):Dynamic;
 	@:native("getQuadBatchSignals")
 	public static function getQuadBatchSignals(source:flight._js.QuadBatch):Null<Dynamic>;
 	@:native("getQuadBatchTransformStride")
@@ -62,6 +54,4 @@ extern class QuadBatch {
 	public static function setQuadBatchLocalBoundsRectangle(target:Dynamic, rect:flight._js.Rectangle):Void;
 	@:native("setQuadBatchTransformType")
 	public static function setQuadBatchTransformType(target:flight._js.QuadBatch, newType:Dynamic):Void;
-	/** Native allocation release is unnecessary on JavaScript. */
-	public static inline function freeQuadBatchData(ptr:flight._js.QuadBatchData):Void {}
 }

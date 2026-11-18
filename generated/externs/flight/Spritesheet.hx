@@ -108,40 +108,6 @@ extern inline function createSpritesheetAnimationFromFrameNames(spritesheet:Spri
 }
 #end
 #if (js && flight_esm)
-extern inline function getSpritesheetAnimationDirectionString(value:Dynamic):String {
-	return flight._js._fn.Spritesheet.getSpritesheetAnimationDirectionString(value);
-}
-#else
-extern inline function getSpritesheetAnimationDirectionString(value:flight.SpritesheetAnimationDirection):String {
-#if hl
-	return cast flight._hl._fn.Spritesheet.getSpritesheetAnimationDirectionString(value);
-#elseif cpp
-	return cast flight._cpp._fn.Spritesheet.getSpritesheetAnimationDirectionString(value);
-#elseif (js && flight_esm)
-	return cast flight._js._fn.Spritesheet.getSpritesheetAnimationDirectionString(value);
-#else
-	#error "flight.Spritesheet: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
-extern inline function parseSpritesheetAnimationDirection(value:String):Null<Dynamic> {
-	return flight._js._fn.Spritesheet.parseSpritesheetAnimationDirection(value);
-}
-#else
-extern inline function parseSpritesheetAnimationDirection(value:String):Int {
-#if hl
-	return flight._hl._fn.Spritesheet.parseSpritesheetAnimationDirection(cast value);
-#elseif cpp
-	return flight._cpp._fn.Spritesheet.parseSpritesheetAnimationDirection(cast value);
-#elseif (js && flight_esm)
-	return flight._js._fn.Spritesheet.parseSpritesheetAnimationDirection(value);
-#else
-	#error "flight.Spritesheet: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
 extern inline function createSpritesheetAnimationData():SpritesheetAnimationData {
 	return flight._js._fn.Spritesheet.createSpritesheetAnimationData();
 }
@@ -493,40 +459,6 @@ extern inline function updateSpritesheetPlayer(player:SpritesheetPlayer, deltaTi
 	return flight._cpp._fn.Spritesheet.updateSpritesheetPlayer(player, deltaTime);
 #elseif (js && flight_esm)
 	return flight._js._fn.Spritesheet.updateSpritesheetPlayer(player, deltaTime);
-#else
-	#error "flight.Spritesheet: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
-extern inline function getSpritesheetValidationSeverityString(value:Dynamic):String {
-	return flight._js._fn.Spritesheet.getSpritesheetValidationSeverityString(value);
-}
-#else
-extern inline function getSpritesheetValidationSeverityString(value:flight.SpritesheetValidationSeverity):String {
-#if hl
-	return cast flight._hl._fn.Spritesheet.getSpritesheetValidationSeverityString(value);
-#elseif cpp
-	return cast flight._cpp._fn.Spritesheet.getSpritesheetValidationSeverityString(value);
-#elseif (js && flight_esm)
-	return cast flight._js._fn.Spritesheet.getSpritesheetValidationSeverityString(value);
-#else
-	#error "flight.Spritesheet: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
-extern inline function parseSpritesheetValidationSeverity(value:String):Null<Dynamic> {
-	return flight._js._fn.Spritesheet.parseSpritesheetValidationSeverity(value);
-}
-#else
-extern inline function parseSpritesheetValidationSeverity(value:String):Int {
-#if hl
-	return flight._hl._fn.Spritesheet.parseSpritesheetValidationSeverity(cast value);
-#elseif cpp
-	return flight._cpp._fn.Spritesheet.parseSpritesheetValidationSeverity(cast value);
-#elseif (js && flight_esm)
-	return flight._js._fn.Spritesheet.parseSpritesheetValidationSeverity(value);
 #else
 	#error "flight.Spritesheet: no backend for this target."
 #end

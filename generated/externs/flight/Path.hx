@@ -176,6 +176,23 @@ extern inline function fitPathCurves(source:Path, tolerance:Float, out:Path, fla
 }
 #end
 #if (js && flight_esm)
+extern inline function getPathBounds(path:Path, out:Rectangle):Bool {
+	return flight._js._fn.Path.getPathBounds(path, out);
+}
+#else
+extern inline function getPathBounds(path:Path, out:Rectangle):Bool {
+#if hl
+	return flight._hl._fn.Path.getPathBounds(path, out);
+#elseif cpp
+	return flight._cpp._fn.Path.getPathBounds(path, out);
+#elseif (js && flight_esm)
+	return flight._js._fn.Path.getPathBounds(path, out);
+#else
+	#error "flight.Path: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
 extern inline function getPathContourLengths(path:Path, tolerance:Null<Float>):Dynamic {
 	return flight._js._fn.Path.getPathContourLengths(path, tolerance);
 }
@@ -748,6 +765,33 @@ extern inline function appendPathTangentArcTo(path:Path, x1:Float, y1:Float, x2:
 	flight._cpp._fn.Path.appendPathTangentArcTo(path, x1, y1, x2, y2, radius);
 #elseif (js && flight_esm)
 	flight._js._fn.Path.appendPathTangentArcTo(path, x1, y1, x2, y2, radius);
+#else
+	#error "flight.Path: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function getPathLastPoint(path:Path):Null<{ _0:Float, _1:Float }> {
+	var result = flight._js._fn.Path.getPathLastPoint(path);
+	if (result == null) return null;
+	return { _0: result[0], _1: result[1] };
+}
+#else
+extern inline function getPathLastPoint(path:Path):Null<{ _0:Float, _1:Float }> {
+#if hl
+	var out0:Float = 0;
+	var out1:Float = 0;
+	if (!flight._hl._fn.Path.getPathLastPoint(path, hl.Ref.make(out0), hl.Ref.make(out1))) return null;
+	return { _0: out0, _1: out1 };
+#elseif cpp
+	var out0:cpp.Float64 = 0;
+	var out1:cpp.Float64 = 0;
+	if (!flight._cpp._fn.Path.getPathLastPoint(path, cpp.RawPointer.addressOf(out0), cpp.RawPointer.addressOf(out1))) return null;
+	return { _0: out0, _1: out1 };
+#elseif (js && flight_esm)
+	var result = flight._js._fn.Path.getPathLastPoint(path);
+	if (result == null) return null;
+	return { _0: result[0], _1: result[1] };
 #else
 	#error "flight.Path: no backend for this target."
 #end

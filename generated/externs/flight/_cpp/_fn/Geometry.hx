@@ -787,8 +787,6 @@ extern class Geometry {
 	public static function freeQuaternion(ptr:flight._cpp.Quaternion):Void;
 	@:native("flight_free_ray3_d")
 	public static function freeRay3D(ptr:flight._cpp.Ray3D):Void;
-	@:native("flight_free_rectangle")
-	public static function freeRectangle(ptr:flight._cpp.Rectangle):Void;
 	@:native("flight_free_transform2_d")
 	public static function freeTransform2D(ptr:flight._cpp.Transform2D):Void;
 	@:native("flight_free_transform3_d")

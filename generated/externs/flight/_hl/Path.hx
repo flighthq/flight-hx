@@ -31,6 +31,9 @@ abstract Path(hl.Bytes) {
 	inline public function fitCurves(tolerance:Float, out:flight._hl.Path, flattenTolerance:Float):Void {
 		flight._hl._fn.Path.fitPathCurves(cast this, tolerance, out, flattenTolerance);
 	}
+	inline public function getBounds(out:flight._hl.Rectangle):Bool {
+		return flight._hl._fn.Path.getPathBounds(cast this, out);
+	}
 	inline public function getContourLengths(tolerance:Float):hl.Bytes {
 		return flight._hl._fn.Path.getPathContourLengths(cast this, tolerance);
 	}
@@ -168,9 +171,6 @@ abstract Path(hl.Bytes) {
 	}
 	inline public function formatSvgData(options:flight._hl.SvgPathDataFormatOptions):hl.Bytes {
 		return flight._hl._fn.PathFormats.formatSvgPathData(cast this, options);
-	}
-	static inline public function createLottieBezier(value:flight._hl.LottieShapePath):flight._hl.Path {
-		return flight._hl._fn.Scene2dFormats.createLottieBezierPath(value);
 	}
 	inline public function compactStroke(path:flight._hl.Path, style:flight._hl.StrokeStyle, tolerance:Float):Void {
 		flight._hl._fn.Shape.compactStrokePath(cast this, path, style, tolerance);

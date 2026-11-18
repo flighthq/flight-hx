@@ -10,10 +10,6 @@ extern class MovieClip {
 	public static function enableMovieClipGuards(guards:flight._js.MovieClipGuardState, logState:Dynamic, clock:Dynamic):Void;
 	@:native("createMovieClip")
 	public static function createMovieClip():Dynamic;
-	@:native("createMovieClipData")
-	public static function createMovieClipData():flight._js.MovieClipData;
-	@:native("createMovieClipRuntime")
-	public static function createMovieClipRuntime():flight._js.MovieClipRuntime;
 	@:native("addMovieClipFrameScript")
 	public static function addMovieClipFrameScript(clip:Dynamic, frame:flight._js.TimelineFrameArg, script:flight._js.FrameScript):Void;
 	@:native("disposeMovieClipSignals")
@@ -26,8 +22,6 @@ extern class MovieClip {
 	public static function getMovieClipCurrentLabel(clip:Dynamic):Null<flight._js.TimelineLabel>;
 	@:native("getMovieClipFrameScript")
 	public static function getMovieClipFrameScript(clip:Dynamic, frame:flight._js.TimelineFrameArg):Null<flight._js.FrameScript>;
-	@:native("getMovieClipRuntime")
-	public static function getMovieClipRuntime(source:flight._js.MovieClip):flight._js.MovieClipRuntime;
 	@:native("getMovieClipSignals")
 	public static function getMovieClipSignals(clip:Dynamic):Null<flight._js.MovieClipSignals>;
 	@:native("getMovieClipTotalFrames")
@@ -56,14 +50,6 @@ extern class MovieClip {
 	public static function createSpritesheetTimelineSource(guards:flight._js.MovieClipGuardState, spritesheet:Dynamic, animation:Dynamic):flight._js.TimelineSourceRef;
 	@:native("explainSpritesheetTimelineSource")
 	public static function explainSpritesheetTimelineSource(animation:Dynamic):flight._js.SpritesheetTimelineSourceExplanation;
-	@:native("getSpritesheetTimelineSourceUnsupportedFieldString")
-	public static function getSpritesheetTimelineSourceUnsupportedFieldString(value:Dynamic):String;
-	@:native("parseSpritesheetTimelineSourceUnsupportedField")
-	public static function parseSpritesheetTimelineSourceUnsupportedField(value:String):Null<Dynamic>;
-	/** Native allocation release is unnecessary on JavaScript. */
-	public static inline function freeMovieClipData(ptr:flight._js.MovieClipData):Void {}
-	/** Native allocation release is unnecessary on JavaScript. */
-	public static inline function freeMovieClipRuntime(ptr:flight._js.MovieClipRuntime):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeMovieClipSignals(ptr:flight._js.MovieClipSignals):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */

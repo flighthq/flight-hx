@@ -22,6 +22,9 @@ abstract Bitmap(Dynamic) {
 	inline public function getCoverage(backgroundColor:Int, channelTolerance:Int):Float {
 		return flight._js._fn.Bitmap.getBitmapCoverage(cast this, backgroundColor, channelTolerance);
 	}
+	inline public function crop(rect:flight._js.Rectangle):flight._js.Bitmap {
+		return flight._js._fn.Bitmap.cropBitmap(cast this, rect);
+	}
 	inline public function extend(left:Int, top:Int, right:Int, bottom:Int, edgeMode:Dynamic, fillColor:Int):flight._js.Bitmap {
 		return flight._js._fn.Bitmap.extendBitmap(cast this, left, top, right, bottom, edgeMode, fillColor);
 	}

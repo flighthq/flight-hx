@@ -85,37 +85,3 @@ extern inline function compressLzma(bytes:Dynamic, bytesLen:Int):flight.NativeBy
 #end
 }
 #end
-#if (js && flight_esm)
-extern inline function getCompressionString(value:Dynamic):String {
-	return flight._js._fn.Compression.getCompressionString(value);
-}
-#else
-extern inline function getCompressionString(value:Int):String {
-#if hl
-	return cast flight._hl._fn.Compression.getCompressionString(value);
-#elseif cpp
-	return cast flight._cpp._fn.Compression.getCompressionString(value);
-#elseif (js && flight_esm)
-	return cast flight._js._fn.Compression.getCompressionString(value);
-#else
-	#error "flight.Compression: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
-extern inline function parseCompression(value:String):Null<Dynamic> {
-	return flight._js._fn.Compression.parseCompression(value);
-}
-#else
-extern inline function parseCompression(value:String):Int {
-#if hl
-	return flight._hl._fn.Compression.parseCompression(cast value);
-#elseif cpp
-	return flight._cpp._fn.Compression.parseCompression(cast value);
-#elseif (js && flight_esm)
-	return flight._js._fn.Compression.parseCompression(value);
-#else
-	#error "flight.Compression: no backend for this target."
-#end
-}
-#end

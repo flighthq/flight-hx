@@ -789,8 +789,6 @@ extern class Geometry {
 	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeRay3D(ptr:flight._js.Ray3D):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */
-	public static inline function freeRectangle(ptr:flight._js.Rectangle):Void {}
-	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeTransform2D(ptr:flight._js.Transform2D):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeTransform3D(ptr:flight._js.Transform3D):Void {}

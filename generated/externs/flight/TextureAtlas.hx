@@ -397,23 +397,6 @@ extern inline function getTextureAtlasRegionTexture(atlas:Dynamic, regionId:Int,
 }
 #end
 #if (js && flight_esm)
-extern inline function getTextureAtlasRegionTextureStatusString(value:Dynamic):String {
-	return flight._js._fn.TextureAtlas.getTextureAtlasRegionTextureStatusString(value);
-}
-#else
-extern inline function getTextureAtlasRegionTextureStatusString(value:flight.TextureAtlasRegionTextureStatus):String {
-#if hl
-	return cast flight._hl._fn.TextureAtlas.getTextureAtlasRegionTextureStatusString(value);
-#elseif cpp
-	return cast flight._cpp._fn.TextureAtlas.getTextureAtlasRegionTextureStatusString(value);
-#elseif (js && flight_esm)
-	return cast flight._js._fn.TextureAtlas.getTextureAtlasRegionTextureStatusString(value);
-#else
-	#error "flight.TextureAtlas: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
 extern inline function getTextureAtlasRegionUv(out:Rectangle, region:TextureAtlasRegion, imageWidth:Float, imageHeight:Float):Void {
 	flight._js._fn.TextureAtlas.getTextureAtlasRegionUv(out, region, imageWidth, imageHeight);
 }
@@ -459,23 +442,6 @@ extern inline function hasTextureAtlasRegion(atlas:TextureAtlas, name:String):Bo
 	return flight._cpp._fn.TextureAtlas.hasTextureAtlasRegion(atlas, cast name);
 #elseif (js && flight_esm)
 	return flight._js._fn.TextureAtlas.hasTextureAtlasRegion(atlas, name);
-#else
-	#error "flight.TextureAtlas: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
-extern inline function parseTextureAtlasRegionTextureStatus(value:String):Null<Dynamic> {
-	return flight._js._fn.TextureAtlas.parseTextureAtlasRegionTextureStatus(value);
-}
-#else
-extern inline function parseTextureAtlasRegionTextureStatus(value:String):Int {
-#if hl
-	return flight._hl._fn.TextureAtlas.parseTextureAtlasRegionTextureStatus(cast value);
-#elseif cpp
-	return flight._cpp._fn.TextureAtlas.parseTextureAtlasRegionTextureStatus(cast value);
-#elseif (js && flight_esm)
-	return flight._js._fn.TextureAtlas.parseTextureAtlasRegionTextureStatus(value);
 #else
 	#error "flight.TextureAtlas: no backend for this target."
 #end

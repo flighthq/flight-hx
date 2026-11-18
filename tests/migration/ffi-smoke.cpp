@@ -26,14 +26,11 @@ int main() {
   if (flight_get_node_child_count(parent) != 1) return 6;
   void* parent_view = flight_get_node_parent(added);
   if (!parent_view || flight_get_node_child_count(parent_view) != 1) return 7;
-  void* runtime = flight_get_sprite_runtime(added);
-  flight_set_sprite_runtime_local_bounds_texture_version(runtime, 91);
-  if (flight_get_sprite_runtime_local_bounds_texture_version(runtime) != 91) return 8;
   void* clone = flight_clone_sprite(added);
   if (flight_get_node_child_count(clone) != 0) return 9;
   void* removed = flight_remove_node_child(parent_view, added);
   if (flight_get_node_child_count(parent) != 0 || flight_get_node_parent(removed)) return 10;
-  for (void* handle : {removed, clone, runtime, parent_view, added, child, parent}) flight_free_ref(handle);
+  for (void* handle : {removed, clone, parent_view, added, child, parent}) flight_free_ref(handle);
   unsigned char input[] = {0, 1, 2, 127, 128, 254, 255};
   void* compressed = flight_compress_deflate(input, sizeof input);
   const auto compressed_length = flight_get_byte_buffer_length(compressed);
@@ -62,6 +59,23 @@ int main() {
       flight_copy_byte_buffer(family_copy, copied_family, sizeof family) != sizeof family ||
       std::memcmp(family, copied_family, sizeof family) != 0) return 17;
   flight_free_byte_buffer(family_copy);
+  unsigned char reader_input[] = {0x7f, 0x34, 0x12};
+  void* reader = flight_create_byte_reader(reader_input, sizeof reader_input, 1);
+  reader_input[1] = 0;
+  if (!reader || !flight_has_byte_reader_bytes(reader, 2) ||
+      flight_read_byte_reader_u16(reader) != 0x1234 || flight_has_byte_reader_bytes(reader, 1)) return 18;
+  flight_free_owned_byte_reader(reader);
+
+  void* history = flight_create_command_history();
+  if (!history || flight_get_command_history_signals(history)) return 19;
+  flight_set_command_history_max_size(history, 91);
+  if (flight_get_command_history_max_size(history) != 91) return 8;
+  void* enabled = flight_enable_command_history_signals(history);
+  void* signal = flight_get_command_history_signals(history);
+  if (!enabled || !signal || enabled == signal) return 20;
+  flight_free_unit_signal(signal);
+  flight_free_unit_signal(enabled);
+  flight_free_command_history_ref(history);
   std::puts("FLIGHT_NATIVE_FFI_OK");
   return 0;
 }

@@ -3,12 +3,6 @@ package flight._cpp._fn;
 extern class Tilemap {
 	@:native("flight_create_tilemap")
 	public static function createTilemap():cpp.Star<cpp.Void>;
-	@:native("flight_create_tilemap_data")
-	public static function createTilemapData():flight._cpp.TilemapData;
-	@:native("flight_create_tilemap_runtime")
-	public static function createTilemapRuntime():flight._cpp.TilemapRuntime;
-	@:native("flight_create_tilemap_signals")
-	public static function createTilemapSignals():flight._cpp.TilemapSignals;
 	@:native("flight_clear_tilemap")
 	public static function clearTilemap(tilemap:flight._cpp.Tilemap):Void;
 	@:native("flight_clone_tilemap")
@@ -25,8 +19,6 @@ extern class Tilemap {
 	public static function getTilemapColumnRowAtPoint(out:flight._cpp.Vector2, source:flight._cpp.Tilemap, x:Single, y:Single):Bool;
 	@:native("flight_get_tilemap_row_at_y")
 	public static function getTilemapRowAtY(source:flight._cpp.Tilemap, y:Single):Int;
-	@:native("flight_get_tilemap_runtime")
-	public static function getTilemapRuntime(source:flight._cpp.Tilemap):flight._cpp.TilemapRuntime;
 	@:native("flight_get_tilemap_tile")
 	public static function getTilemapTile(tilemap:flight._cpp.Tilemap, column:Int, row:Int):Int;
 	@:native("flight_get_tilemap_tile_at_point")
@@ -43,10 +35,4 @@ extern class Tilemap {
 	public static function setTilemapTileTint(tilemap:flight._cpp.Tilemap, column:Int, row:Int, rgba:Int):Void;
 	@:native("flight_set_tilemap_tiles")
 	public static function setTilemapTiles(tilemap:flight._cpp.Tilemap, ids:cpp.Star<cpp.Void>, idsLen:Int, offsetColumn:Int, offsetRow:Int, width:Int, height:Int):Void;
-	@:native("flight_free_tilemap_data")
-	public static function freeTilemapData(ptr:flight._cpp.TilemapData):Void;
-	@:native("flight_free_tilemap_runtime")
-	public static function freeTilemapRuntime(ptr:flight._cpp.TilemapRuntime):Void;
-	@:native("flight_free_tilemap_signals")
-	public static function freeTilemapSignals(ptr:flight._cpp.TilemapSignals):Void;
 }

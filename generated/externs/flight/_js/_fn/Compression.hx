@@ -12,8 +12,4 @@ extern class Compression {
 	public static function decompressLzma(compressed:Dynamic, uncompressedLength:Int, framing:Dynamic):Null<Dynamic>;
 	@:native("compressLzma")
 	public static function compressLzma(bytes:Dynamic):Dynamic;
-	@:native("getCompressionString")
-	public static function getCompressionString(value:Dynamic):String;
-	@:native("parseCompression")
-	public static function parseCompression(value:String):Null<Dynamic>;
 }

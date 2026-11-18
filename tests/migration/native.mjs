@@ -22,4 +22,4 @@ assert.equal(build.status, 0, `${build.error ?? ''}${build.stdout}${build.stderr
 const result = spawnSync(executable, [], { cwd: root, encoding: 'utf8' });
 assert.equal(result.status, 0, `${result.error ?? ''}${result.stdout}${result.stderr}`);
 assert.match(result.stdout, /FLIGHT_NATIVE_FFI_OK/u);
-process.stdout.write('Native C ABI probe: scalar call, opaque allocation, field access/mutation, and release passed. Haxe consumers are checked by gate:native-runtime.\n');
+process.stdout.write('Native C ABI probe passed for scalar calls, owned handles, fields, byte buffers, byte readers, and unit signals.\n');

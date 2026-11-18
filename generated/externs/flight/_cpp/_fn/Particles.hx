@@ -29,8 +29,6 @@ extern class Particles {
 	public static function sampleParticleCurve(lut:cpp.Star<cpp.Void>, lutLen:Int, t:Single):Single;
 	@:native("flight_create_particle_emitter_config")
 	public static function createParticleEmitterConfig(config:flight._cpp.ParticleEmitterConfigOptions):flight._cpp.ParticleEmitterConfig;
-	@:native("flight_create_particle_emitter_config_options")
-	public static function createParticleEmitterConfigOptions():flight._cpp.ParticleEmitterConfigOptions;
 	@:native("flight_enable_particle_emitter_signals")
 	public static function enableParticleEmitterSignals(state:flight._cpp.ParticleEmitterState):flight._cpp.ParticleEmitterSignals;
 	@:native("flight_get_particle_emitter_signals")
@@ -41,8 +39,6 @@ extern class Particles {
 	public static function createParticleObjectsState():flight._cpp.ParticleObjectsState;
 	@:native("flight_step_particle_objects")
 	public static function stepParticleObjects(objects:cpp.Star<cpp.Void>, objectsLen:Int, state:flight._cpp.ParticleObjectsState, config:flight._cpp.ParticleEmitterConfig, deltaTime:Single, forces:cpp.Star<cpp.Void>, forcesLen:Int, colliders:cpp.Star<cpp.Void>, collidersLen:Int, updateOptions:flight._cpp.ParticleObjectsUpdateOptions):Void;
-	@:native("flight_particle_blend_mode_as_str")
-	public static function particleBlendModeAsStr(mode:Int):cpp.ConstCharStar;
 	@:native("flight_is_particle_objects_complete")
 	public static function isParticleObjectsComplete(objects:cpp.Star<cpp.Void>, objectsLen:Int, state:flight._cpp.ParticleObjectsState, config:flight._cpp.ParticleEmitterConfig):Bool;
 	@:native("flight_update_particle_objects")
@@ -53,8 +49,6 @@ extern class Particles {
 	public static function validateParticleEmitterConfig(out:cpp.Star<cpp.Void>, config:flight._cpp.ParticleEmitterConfig):Void;
 	@:native("flight_free_particle_emitter_config")
 	public static function freeParticleEmitterConfig(ptr:flight._cpp.ParticleEmitterConfig):Void;
-	@:native("flight_free_particle_emitter_config_options")
-	public static function freeParticleEmitterConfigOptions(ptr:flight._cpp.ParticleEmitterConfigOptions):Void;
 	@:native("flight_free_particle_emitter_signals")
 	public static function freeParticleEmitterSignals(ptr:flight._cpp.ParticleEmitterSignals):Void;
 	@:native("flight_free_particle_emitter_state")

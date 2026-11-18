@@ -40,57 +40,6 @@ extern inline function createQuadBatch():Dynamic {
 }
 #end
 #if (js && flight_esm)
-extern inline function createQuadBatchData():QuadBatchData {
-	return flight._js._fn.QuadBatch.createQuadBatchData();
-}
-#else
-extern inline function createQuadBatchData():QuadBatchData {
-#if hl
-	return flight._hl._fn.QuadBatch.createQuadBatchData();
-#elseif cpp
-	return flight._cpp._fn.QuadBatch.createQuadBatchData();
-#elseif (js && flight_esm)
-	return flight._js._fn.QuadBatch.createQuadBatchData();
-#else
-	#error "flight.QuadBatch: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
-extern inline function createQuadBatchRuntime():Node2DRuntime {
-	return flight._js._fn.QuadBatch.createQuadBatchRuntime();
-}
-#else
-extern inline function createQuadBatchRuntime():Node2DRuntime {
-#if hl
-	return flight._hl._fn.QuadBatch.createQuadBatchRuntime();
-#elseif cpp
-	return flight._cpp._fn.QuadBatch.createQuadBatchRuntime();
-#elseif (js && flight_esm)
-	return flight._js._fn.QuadBatch.createQuadBatchRuntime();
-#else
-	#error "flight.QuadBatch: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
-extern inline function createQuadBatchSignals():Dynamic {
-	return flight._js._fn.QuadBatch.createQuadBatchSignals();
-}
-#else
-extern inline function createQuadBatchSignals():Dynamic {
-#if hl
-	return flight._hl._fn.QuadBatch.createQuadBatchSignals();
-#elseif cpp
-	return flight._cpp._fn.QuadBatch.createQuadBatchSignals();
-#elseif (js && flight_esm)
-	return flight._js._fn.QuadBatch.createQuadBatchSignals();
-#else
-	#error "flight.QuadBatch: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
 extern inline function appendQuadBatchInstance(target:QuadBatch, id:Int, x:Float, y:Float):Int {
 	return flight._js._fn.QuadBatch.appendQuadBatchInstance(target, id, x, y);
 }
@@ -238,23 +187,6 @@ extern inline function getQuadBatchInstanceTransform(out:Vector2, source:QuadBat
 	return flight._cpp._fn.QuadBatch.getQuadBatchInstanceTransform(out, source, index);
 #elseif (js && flight_esm)
 	return flight._js._fn.QuadBatch.getQuadBatchInstanceTransform(out, source, index);
-#else
-	#error "flight.QuadBatch: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
-extern inline function getQuadBatchRuntime(source:QuadBatch):Dynamic {
-	return flight._js._fn.QuadBatch.getQuadBatchRuntime(source);
-}
-#else
-extern inline function getQuadBatchRuntime(source:QuadBatch):Dynamic {
-#if hl
-	return flight._hl._fn.QuadBatch.getQuadBatchRuntime(source);
-#elseif cpp
-	return flight._cpp._fn.QuadBatch.getQuadBatchRuntime(source);
-#elseif (js && flight_esm)
-	return flight._js._fn.QuadBatch.getQuadBatchRuntime(source);
 #else
 	#error "flight.QuadBatch: no backend for this target."
 #end
@@ -527,23 +459,6 @@ extern inline function setQuadBatchTransformType(target:QuadBatch, newType:fligh
 	flight._cpp._fn.QuadBatch.setQuadBatchTransformType(target, newType);
 #elseif (js && flight_esm)
 	flight._js._fn.QuadBatch.setQuadBatchTransformType(target, newType);
-#else
-	#error "flight.QuadBatch: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
-extern inline function freeQuadBatchData(ptr:QuadBatchData):Void {
-	flight._js._fn.QuadBatch.freeQuadBatchData(ptr);
-}
-#else
-extern inline function freeQuadBatchData(ptr:QuadBatchData):Void {
-#if hl
-	flight._hl._fn.QuadBatch.freeQuadBatchData(ptr);
-#elseif cpp
-	flight._cpp._fn.QuadBatch.freeQuadBatchData(ptr);
-#elseif (js && flight_esm)
-	flight._js._fn.QuadBatch.freeQuadBatchData(ptr);
 #else
 	#error "flight.QuadBatch: no backend for this target."
 #end

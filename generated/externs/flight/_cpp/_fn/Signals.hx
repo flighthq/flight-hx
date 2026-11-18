@@ -3,10 +3,6 @@ package flight._cpp._fn;
 extern class Signals {
 	@:native("flight_disconnect_signal_connection")
 	public static function disconnectSignalConnection(connection:flight._cpp.SignalConnection):Void;
-	@:native("flight_is_signal_connection_connected")
-	public static function isSignalConnectionConnected(connection:flight._cpp.SignalConnection):Bool;
-	@:native("flight_is_signal_connection_paused")
-	public static function isSignalConnectionPaused(connection:flight._cpp.SignalConnection):Bool;
 	@:native("flight_pause_signal_connection")
 	public static function pauseSignalConnection(connection:flight._cpp.SignalConnection):Void;
 	@:native("flight_resume_signal_connection")

@@ -18,7 +18,7 @@ extern class Text {
 	@:hlNative("flight", "flight_patch_native_text_style")
 	public static function patchNativeTextStyle(source:hl.Bytes, patch:flight._hl.NativeTextStyle):Void;
 	@:hlNative("flight", "flight_set_native_text_auto_size")
-	public static function setNativeTextAutoSize(source:hl.Bytes, value:flight._hl.TextAutoSize):Void;
+	public static function setNativeTextAutoSize(source:hl.Bytes, value:Int):Void;
 	@:hlNative("flight", "flight_set_native_text_height")
 	public static function setNativeTextHeight(source:hl.Bytes, value:Single):Void;
 	@:hlNative("flight", "flight_set_native_text_string")
@@ -26,7 +26,7 @@ extern class Text {
 	@:hlNative("flight", "flight_set_native_text_style")
 	public static function setNativeTextStyle(source:hl.Bytes, value:hl.Bytes):Void;
 	@:hlNative("flight", "flight_set_native_text_vertical_align")
-	public static function setNativeTextVerticalAlign(source:hl.Bytes, value:flight._hl.TextVerticalAlign):Void;
+	public static function setNativeTextVerticalAlign(source:hl.Bytes, value:Int):Void;
 	@:hlNative("flight", "flight_set_native_text_width")
 	public static function setNativeTextWidth(source:hl.Bytes, value:Single):Void;
 	@:hlNative("flight", "flight_append_rich_text_string")
@@ -118,7 +118,7 @@ extern class Text {
 	@:hlNative("flight", "flight_set_rich_text_text_color")
 	public static function setRichTextTextColor(source:hl.Bytes, value:Int):Void;
 	@:hlNative("flight", "flight_set_rich_text_vertical_align")
-	public static function setRichTextVerticalAlign(source:hl.Bytes, value:flight._hl.TextVerticalAlign):Void;
+	public static function setRichTextVerticalAlign(source:hl.Bytes, value:Int):Void;
 	@:hlNative("flight", "flight_set_rich_text_width")
 	public static function setRichTextWidth(source:hl.Bytes, value:Single):Void;
 	@:hlNative("flight", "flight_set_rich_text_word_wrap")
@@ -134,7 +134,7 @@ extern class Text {
 	@:hlNative("flight", "flight_get_text_label_string")
 	public static function getTextLabelString(source:flight._hl.TextLabel):hl.Bytes;
 	@:hlNative("flight", "flight_set_text_label_auto_size")
-	public static function setTextLabelAutoSize(source:hl.Bytes, value:flight._hl.TextAutoSize):Void;
+	public static function setTextLabelAutoSize(source:hl.Bytes, value:Int):Void;
 	@:hlNative("flight", "flight_set_text_label_format")
 	public static function setTextLabelFormat(source:hl.Bytes, value:hl.Bytes):Void;
 	@:hlNative("flight", "flight_set_text_label_height")
@@ -142,7 +142,7 @@ extern class Text {
 	@:hlNative("flight", "flight_set_text_label_string")
 	public static function setTextLabelString(source:hl.Bytes, value:hl.Bytes):Void;
 	@:hlNative("flight", "flight_set_text_label_vertical_align")
-	public static function setTextLabelVerticalAlign(source:hl.Bytes, value:flight._hl.TextVerticalAlign):Void;
+	public static function setTextLabelVerticalAlign(source:hl.Bytes, value:Int):Void;
 	@:hlNative("flight", "flight_set_text_label_width")
 	public static function setTextLabelWidth(source:hl.Bytes, value:Single):Void;
 	@:hlNative("flight", "flight_get_text_layout")

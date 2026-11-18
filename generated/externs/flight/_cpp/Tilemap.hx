@@ -22,9 +22,6 @@ abstract Tilemap(cpp.Star<cpp.Void>) {
 	extern inline public function getRowAtY(y:Single):Int {
 		return flight._cpp._fn.Tilemap.getTilemapRowAtY(cast this, y);
 	}
-	extern inline public function getRuntime():flight._cpp.TilemapRuntime {
-		return flight._cpp._fn.Tilemap.getTilemapRuntime(cast this);
-	}
 	extern inline public function getTile(column:Int, row:Int):Int {
 		return flight._cpp._fn.Tilemap.getTilemapTile(cast this, column, row);
 	}

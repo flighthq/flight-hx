@@ -19,6 +19,8 @@ extern class Path {
 	public static function explainStrokePathTessellation(path:flight._cpp.Path, style:flight._cpp.StrokeStyle, tolerance:Float):flight._cpp.StrokePathTessellationExplanation;
 	@:native("flight_fit_path_curves")
 	public static function fitPathCurves(source:flight._cpp.Path, tolerance:Float, out:flight._cpp.Path, flattenTolerance:Float):Void;
+	@:native("flight_get_path_bounds")
+	public static function getPathBounds(path:flight._cpp.Path, out:flight._cpp.Rectangle):Bool;
 	@:native("flight_get_path_contour_lengths")
 	public static function getPathContourLengths(path:flight._cpp.Path, tolerance:Float):cpp.Star<cpp.Void>;
 	@:native("flight_get_path_curvature_at_distance")
@@ -87,6 +89,8 @@ extern class Path {
 	public static function appendPathRoundedRectangleWithCornerRadii(path:flight._cpp.Path, x:Float, y:Float, width:Float, height:Float, topLeft:Float, topRight:Float, bottomRight:Float, bottomLeft:Float):Void;
 	@:native("flight_append_path_tangent_arc_to")
 	public static function appendPathTangentArcTo(path:flight._cpp.Path, x1:Float, y1:Float, x2:Float, y2:Float, radius:Float):Void;
+	@:native("flight_get_path_last_point")
+	public static function getPathLastPoint(path:flight._cpp.Path, out0:cpp.RawPointer<cpp.Float64>, out1:cpp.RawPointer<cpp.Float64>):Bool;
 	@:native("flight_create_path_morph")
 	public static function createPathMorph(start:flight._cpp.Path, end:flight._cpp.Path):flight._cpp.PathMorph;
 	@:native("flight_sample_path_morph")

@@ -79,6 +79,8 @@ extern class Bitmap {
 	public static function copyBitmapPixels(dest:flight._cpp.BitmapRegion, source:flight._cpp.BitmapRegion, composite:Bool):Void;
 	@:native("flight_get_bitmap_coverage")
 	public static function getBitmapCoverage(source:flight._cpp.Bitmap, backgroundColor:Int, channelTolerance:Int):Float;
+	@:native("flight_crop_bitmap")
+	public static function cropBitmap(source:flight._cpp.Bitmap, rect:flight._cpp.Rectangle):flight._cpp.Bitmap;
 	@:native("flight_extend_bitmap")
 	public static function extendBitmap(source:flight._cpp.Bitmap, left:Int, top:Int, right:Int, bottom:Int, edgeMode:Int, fillColor:Int):flight._cpp.Bitmap;
 	@:native("flight_trim_bitmap")
@@ -153,10 +155,10 @@ extern class Bitmap {
 	public static function setBitmapPixel(out:flight._cpp.Bitmap, x:Int, y:Int, color:Int):Void;
 	@:native("flight_set_bitmap_pixel_rgb")
 	public static function setBitmapPixelRgb(out:flight._cpp.Bitmap, x:Int, y:Int, color:Int):Void;
-	@:native("flight_to_clamped_u8")
-	public static function toClampedU8(value:Single):Int;
 	@:native("flight_pixelate_bitmap")
 	public static function pixelateBitmap(out:cpp.Star<cpp.Void>, outLen:Int, source:flight._cpp.BitmapRegion, blockSize:Int):Void;
+	@:native("flight_get_bitmap_color_bounds_rectangle")
+	public static function getBitmapColorBoundsRectangle(source:flight._cpp.BitmapRegion, mask:Int, color:Int, findColor:Bool):flight._cpp.Rectangle;
 	@:native("flight_create_bitmap_region")
 	public static function createBitmapRegion(bitmap:flight._cpp.Bitmap, x:Int, y:Int, width:Int, height:Int):flight._cpp.BitmapRegion;
 	@:native("flight_set_bitmap_region")
@@ -207,6 +209,8 @@ extern class Bitmap {
 	public static function freeBitmapFingerprint(ptr:flight._cpp.BitmapFingerprint):Void;
 	@:native("flight_free_bitmap_histogram")
 	public static function freeBitmapHistogram(ptr:flight._cpp.BitmapHistogram):Void;
+	@:native("flight_free_rectangle")
+	public static function freeRectangle(ptr:flight._cpp.Rectangle):Void;
 	@:native("flight_free_bitmap_region")
 	public static function freeBitmapRegion(ptr:flight._cpp.BitmapRegion):Void;
 }

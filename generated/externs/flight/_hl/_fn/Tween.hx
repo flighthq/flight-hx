@@ -15,14 +15,8 @@ extern class Tween {
 	public static function stopAllTweens(manager:flight._hl.TweenManager, options:flight._hl.StopTweenOptions):Void;
 	@:hlNative("flight", "flight_create_tween_manager")
 	public static function createTweenManager(options:flight._hl.TweenManagerOptions):flight._hl.TweenManager;
-	@:hlNative("flight", "flight_default_manager")
-	public static function defaultManager(context:flight._hl.TweenContext):flight._hl.TweenManager;
-	@:hlNative("flight", "flight_create_tween_context")
-	public static function createTweenContext():flight._hl.TweenContext;
 	@:hlNative("flight", "flight_update_tweens")
 	public static function updateTweens(manager:flight._hl.TweenManager, deltaTime:Single):Void;
 	@:hlNative("flight", "flight_free_tween_manager")
 	public static function freeTweenManager(ptr:flight._hl.TweenManager):Void;
-	@:hlNative("flight", "flight_free_tween_context")
-	public static function freeTweenContext(ptr:flight._hl.TweenContext):Void;
 }

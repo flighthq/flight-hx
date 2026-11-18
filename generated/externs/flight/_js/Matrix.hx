@@ -112,15 +112,6 @@ abstract Matrix(Dynamic) {
 	inline public function setNodeLocal(target:Dynamic):Void {
 		flight._js._fn.Node.setNodeLocalMatrix(target, cast this);
 	}
-	static inline public function createLottieGradient(start:Dynamic, end:Dynamic):flight._js.Matrix {
-		return flight._js._fn.Scene2dFormats.createLottieGradientMatrix(start, end);
-	}
-	static inline public function createSvgGradient(gradient:flight._js.SvgGradient, path:flight._js.Path):flight._js.Matrix {
-		return flight._js._fn.Scene2dFormats.createSvgGradientMatrix(gradient, path);
-	}
-	static inline public function createSvgViewBox(viewBox:Dynamic, viewport:flight._js.SvgViewport, preserveAspectRatioValue:String):flight._js.Matrix {
-		return flight._js._fn.Scene2dFormats.createSvgViewBoxMatrix(viewBox, viewport, preserveAspectRatioValue);
-	}
 	inline public function getSkeleton2dBoneWorld(skeleton:flight._js.Skeleton2D, boneIndex:Int):Bool {
 		return flight._js._fn.Skeleton2D.getSkeleton2dBoneWorldMatrix(cast this, skeleton, boneIndex);
 	}

@@ -143,6 +143,8 @@ extern class Adjustments {
 	public static function applyColorMatrixToColor(matrix:hl.Bytes, packedRgba:Int):Int;
 	@:hlNative("flight", "flight_concat_color_matrix")
 	public static function concatColorMatrix(target:hl.Bytes, source:hl.Bytes):Void;
+	@:hlNative("flight", "flight_fuse_color_matrices")
+	public static function fuseColorMatrices(matrices:hl.Bytes, matricesLen:Int):hl.Bytes;
 	@:hlNative("flight", "flight_multiply_color_matrix")
 	public static function multiplyColorMatrix(out:hl.Bytes, a:hl.Bytes, b:hl.Bytes):Void;
 	@:hlNative("flight", "flight_create_color_scale_bias_adjustment")

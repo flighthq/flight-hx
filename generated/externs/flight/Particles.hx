@@ -239,23 +239,6 @@ extern inline function createParticleEmitterConfig(config:ParticleEmitterConfigO
 }
 #end
 #if (js && flight_esm)
-extern inline function createParticleEmitterConfigOptions():ParticleEmitterConfigOptions {
-	return flight._js._fn.Particles.createParticleEmitterConfigOptions();
-}
-#else
-extern inline function createParticleEmitterConfigOptions():ParticleEmitterConfigOptions {
-#if hl
-	return flight._hl._fn.Particles.createParticleEmitterConfigOptions();
-#elseif cpp
-	return flight._cpp._fn.Particles.createParticleEmitterConfigOptions();
-#elseif (js && flight_esm)
-	return flight._js._fn.Particles.createParticleEmitterConfigOptions();
-#else
-	#error "flight.Particles: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
 extern inline function enableParticleEmitterSignals(state:ParticleEmitterState):ParticleEmitterSignals {
 	return flight._js._fn.Particles.enableParticleEmitterSignals(state);
 }
@@ -341,23 +324,6 @@ extern inline function stepParticleObjects(objects:Dynamic, objectsLen:Int, stat
 }
 #end
 #if (js && flight_esm)
-extern inline function particleBlendModeAsStr(mode:Dynamic):String {
-	return flight._js._fn.Particles.particleBlendModeAsStr(mode);
-}
-#else
-extern inline function particleBlendModeAsStr(mode:flight.ParticleBlendMode):String {
-#if hl
-	return cast flight._hl._fn.Particles.particleBlendModeAsStr(mode);
-#elseif cpp
-	return cast flight._cpp._fn.Particles.particleBlendModeAsStr(mode);
-#elseif (js && flight_esm)
-	return cast flight._js._fn.Particles.particleBlendModeAsStr(mode);
-#else
-	#error "flight.Particles: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
 extern inline function isParticleObjectsComplete(objects:Dynamic, state:ParticleObjectsState, config:ParticleEmitterConfig):Bool {
 	return flight._js._fn.Particles.isParticleObjectsComplete(objects, state, config);
 }
@@ -437,23 +403,6 @@ extern inline function freeParticleEmitterConfig(ptr:ParticleEmitterConfig):Void
 	flight._cpp._fn.Particles.freeParticleEmitterConfig(ptr);
 #elseif (js && flight_esm)
 	flight._js._fn.Particles.freeParticleEmitterConfig(ptr);
-#else
-	#error "flight.Particles: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
-extern inline function freeParticleEmitterConfigOptions(ptr:ParticleEmitterConfigOptions):Void {
-	flight._js._fn.Particles.freeParticleEmitterConfigOptions(ptr);
-}
-#else
-extern inline function freeParticleEmitterConfigOptions(ptr:ParticleEmitterConfigOptions):Void {
-#if hl
-	flight._hl._fn.Particles.freeParticleEmitterConfigOptions(ptr);
-#elseif cpp
-	flight._cpp._fn.Particles.freeParticleEmitterConfigOptions(ptr);
-#elseif (js && flight_esm)
-	flight._js._fn.Particles.freeParticleEmitterConfigOptions(ptr);
 #else
 	#error "flight.Particles: no backend for this target."
 #end

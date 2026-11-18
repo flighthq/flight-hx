@@ -4,6 +4,8 @@ package flight._js._fn;
 extern class Xml {
 	@:native("parseXmlDocument")
 	public static function parseXmlDocument(xml:String):Null<flight._js.XmlElement>;
+	@:native("getXmlElementAttribute")
+	public static function getXmlElementAttribute(element:flight._js.XmlElement, name:String):Null<String>;
 	@:native("getXmlElementAttributeNumber")
 	public static function getXmlElementAttributeNumber(element:flight._js.XmlElement, name:String):Null<Float>;
 	@:native("getXmlElementChildByName")

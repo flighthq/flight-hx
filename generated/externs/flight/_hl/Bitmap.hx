@@ -22,6 +22,9 @@ abstract Bitmap(hl.Bytes) {
 	inline public function getCoverage(backgroundColor:Int, channelTolerance:Int):Float {
 		return flight._hl._fn.Bitmap.getBitmapCoverage(cast this, backgroundColor, channelTolerance);
 	}
+	inline public function crop(rect:flight._hl.Rectangle):flight._hl.Bitmap {
+		return flight._hl._fn.Bitmap.cropBitmap(cast this, rect);
+	}
 	inline public function extend(left:Int, top:Int, right:Int, bottom:Int, edgeMode:Int, fillColor:Int):flight._hl.Bitmap {
 		return flight._hl._fn.Bitmap.extendBitmap(cast this, left, top, right, bottom, edgeMode, fillColor);
 	}

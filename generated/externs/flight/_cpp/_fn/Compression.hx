@@ -11,8 +11,4 @@ extern class Compression {
 	public static function decompressLzma(compressed:cpp.Star<cpp.Void>, compressedLen:Int, uncompressedLength:Int, framing:Int):Null<flight._cpp.NativeByteBuffer>;
 	@:native("flight_compress_lzma")
 	public static function compressLzma(bytes:cpp.Star<cpp.Void>, bytesLen:Int):flight._cpp.NativeByteBuffer;
-	@:native("flight_get_compression_string")
-	public static function getCompressionString(value:Int):cpp.ConstCharStar;
-	@:native("flight_parse_compression")
-	public static function parseCompression(value:cpp.ConstCharStar):Int;
 }

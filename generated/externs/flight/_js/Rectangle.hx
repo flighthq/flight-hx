@@ -13,6 +13,24 @@ abstract Rectangle(Dynamic) {
 	public var height(get, set):Float;
 	inline function get_height():Float return untyped this["height"];
 	inline function set_height(value:Float):Float return untyped this["height"] = value;
+	inline public function free():Void {
+		flight._js._fn.Bitmap.freeRectangle(cast this);
+	}
+	inline public function createClipRegionFrom():Dynamic {
+		return flight._js._fn.Clip.createClipRegionFromRectangle(cast this);
+	}
+	inline public function clipRegionContains(clip:Dynamic):Bool {
+		return flight._js._fn.Clip.clipRegionContainsRectangle(clip, cast this);
+	}
+	inline public function clipRegionIntersects(clip:Dynamic):Bool {
+		return flight._js._fn.Clip.clipRegionIntersectsRectangle(clip, cast this);
+	}
+	inline public function setClipRegionTo(out:Dynamic):Void {
+		flight._js._fn.Clip.setClipRegionToRectangle(out, cast this);
+	}
+	inline public function createClipRegionFromRounded(radius:Float, tolerance:Null<Float>):Dynamic {
+		return flight._js._fn.Clip.createClipRegionFromRoundedRectangle(cast this, radius, tolerance);
+	}
 	inline public function matrixTransform(matrix:flight._js.Matrix, source:flight._js.Rectangle):Void {
 		flight._js._fn.Geometry.matrixTransformRectangle(cast this, matrix, source);
 	}
@@ -139,9 +157,6 @@ abstract Rectangle(Dynamic) {
 	inline public function release():Void {
 		flight._js._fn.Geometry.releaseRectangle(cast this);
 	}
-	inline public function free():Void {
-		flight._js._fn.Geometry.freeRectangle(cast this);
-	}
 	inline public function computeNodeBounds(source:Dynamic, targetCoordinateSpace:Null<Dynamic>):Void {
 		flight._js._fn.Node.computeNodeBoundsRectangle(cast this, source, targetCoordinateSpace);
 	}
@@ -183,6 +198,9 @@ abstract Rectangle(Dynamic) {
 	}
 	inline public function computeTextLabelLocalBounds(source:Dynamic):Void {
 		flight._js._fn.Text.computeTextLabelLocalBoundsRectangle(cast this, source);
+	}
+	inline public function computeTextBounds(spec:flight._js.TextBoundsSpec, layout:flight._js.TextLayoutResult):Void {
+		flight._js._fn.Textlayout.computeTextBoundsRectangle(cast this, spec, layout);
 	}
 	inline public function addTextureAtlasRegion(target:flight._js.TextureAtlas, pivot:Null<flight._js.Vector2>, name:Null<String>):Void {
 		flight._js._fn.TextureAtlas.addTextureAtlasRegionRectangle(target, cast this, pivot, name);

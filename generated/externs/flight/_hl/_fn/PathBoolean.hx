@@ -45,6 +45,8 @@ extern class PathBoolean {
 	public static function parsePathOffsetJoin(value:hl.Bytes):Int;
 	@:hlNative("flight", "flight_simplify_path")
 	public static function simplifyPath(out:flight._hl.Path, pathBooleanKernel:flight._hl.PathBooleanKernel, path:flight._hl.Path, options:flight._hl.PathBooleanOptions):Void;
+	@:hlNative("flight", "flight_union_all_paths")
+	public static function unionAllPaths(out:flight._hl.Path, pathBooleanKernel:flight._hl.PathBooleanKernel, paths:hl.Bytes, pathsLen:Int, options:flight._hl.PathBooleanOptions):Void;
 	@:hlNative("flight", "flight_free_path_boolean_explanation")
 	public static function freePathBooleanExplanation(ptr:flight._hl.PathBooleanExplanation):Void;
 	@:hlNative("flight", "flight_free_path_boolean_kernel")

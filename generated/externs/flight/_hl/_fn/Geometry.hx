@@ -916,8 +916,6 @@ extern class Geometry {
 	public static function freeQuaternion(ptr:flight._hl.Quaternion):Void;
 	@:hlNative("flight", "flight_free_ray3_d")
 	public static function freeRay3D(ptr:flight._hl.Ray3D):Void;
-	@:hlNative("flight", "flight_free_rectangle")
-	public static function freeRectangle(ptr:flight._hl.Rectangle):Void;
 	@:hlNative("flight", "flight_free_transform2_d")
 	public static function freeTransform2D(ptr:flight._hl.Transform2D):Void;
 	@:hlNative("flight", "flight_free_transform3_d")

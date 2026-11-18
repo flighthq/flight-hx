@@ -41,15 +41,6 @@ class Smoke {
     if (getNodeChildCount(parent) != 1) throw 'concrete handle upcast failed';
     final parentView = getNodeParent(added);
     if (getNodeChildCount(parentView) != 1) throw 'returned node handle failed';
-    final runtime:flight.SpriteRuntime = cast getSpriteRuntime(cast added);
-    #if js
-    runtime.localBoundsTextureVersion = 91;
-    if (runtime.localBoundsTextureVersion != 91) throw 'runtime field access failed';
-    #else
-    runtime.localBoundsTextureVersion = haxe.Int64.ofInt(91);
-    if (haxe.Int64.compare(runtime.localBoundsTextureVersion, haxe.Int64.ofInt(91)) != 0)
-      throw 'Ref runtime field access failed';
-    #end
     final cloned = cloneSprite(cast added);
     if (getNodeChildCount(cloned) != 0) throw 'concrete Ref receiver failed';
     final removed = removeNodeChild(parentView, added);
@@ -57,7 +48,6 @@ class Smoke {
     if (getNodeParent(removed) != null) throw 'absent parent did not return null';
     freeRef(removed);
     freeRef(cloned);
-    freeRef(cast runtime);
     freeRef(parentView);
     freeRef(added);
     freeRef(child);
@@ -75,6 +65,27 @@ class Smoke {
     #else
     final inputData = input.getData().bytes;
     #end
+    final reader = flight.Buffer.createByteReader(inputData, input.length, haxe.Int64.ofInt(1));
+    if (!flight.Buffer.hasByteReaderBytes(reader, 6) || flight.Buffer.readByteReaderU16(reader) != 0x0201)
+      throw 'owned byte reader failed';
+    flight.Buffer.freeOwnedByteReader(reader);
+    final history:flight.CommandHistory = cast flight.Command.createCommandHistory();
+    history.maxSize = 91;
+    if (history.maxSize != 91) throw 'Ref-backed history field failed';
+    if (flight.Command.getCommandHistorySignals(cast history) != null) throw 'history already has a signal';
+    final enabled = flight.Command.enableCommandHistorySignals(cast history);
+    final signal = flight.Command.getCommandHistorySignals(cast history);
+    if (enabled == null || signal == null) throw 'history signal handles missing';
+    flight.Command.freeUnitSignal(signal);
+    flight.Command.freeUnitSignal(enabled);
+    freeRef(cast history);
+    final path = flight.Path.createPath(-1);
+    if (flight.Path.getPathLastPoint(path) != null) throw 'empty path returned a point';
+    flight.Path.appendPathMoveTo(path, 1.5, 2.5);
+    final lastPoint = flight.Path.getPathLastPoint(path);
+    if (lastPoint == null || lastPoint._0 != 1.5 || lastPoint._1 != 2.5)
+      throw 'native optional tuple failed';
+    flight.Path.freePath(path);
     final compressed = compressDeflate(inputData, input.length);
     if (compressed.length <= 0) throw 'compressed buffer length missing';
     final decoded = decompressDeflate(compressed.data, compressed.length, input.length, flight.CompressionFraming.Raw);

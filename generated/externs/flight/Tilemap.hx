@@ -40,57 +40,6 @@ extern inline function createTilemap():Dynamic {
 }
 #end
 #if (js && flight_esm)
-extern inline function createTilemapData():TilemapData {
-	return flight._js._fn.Tilemap.createTilemapData();
-}
-#else
-extern inline function createTilemapData():TilemapData {
-#if hl
-	return flight._hl._fn.Tilemap.createTilemapData();
-#elseif cpp
-	return flight._cpp._fn.Tilemap.createTilemapData();
-#elseif (js && flight_esm)
-	return flight._js._fn.Tilemap.createTilemapData();
-#else
-	#error "flight.Tilemap: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
-extern inline function createTilemapRuntime():TilemapRuntime {
-	return flight._js._fn.Tilemap.createTilemapRuntime();
-}
-#else
-extern inline function createTilemapRuntime():TilemapRuntime {
-#if hl
-	return flight._hl._fn.Tilemap.createTilemapRuntime();
-#elseif cpp
-	return flight._cpp._fn.Tilemap.createTilemapRuntime();
-#elseif (js && flight_esm)
-	return flight._js._fn.Tilemap.createTilemapRuntime();
-#else
-	#error "flight.Tilemap: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
-extern inline function createTilemapSignals():TilemapSignals {
-	return flight._js._fn.Tilemap.createTilemapSignals();
-}
-#else
-extern inline function createTilemapSignals():TilemapSignals {
-#if hl
-	return flight._hl._fn.Tilemap.createTilemapSignals();
-#elseif cpp
-	return flight._cpp._fn.Tilemap.createTilemapSignals();
-#elseif (js && flight_esm)
-	return flight._js._fn.Tilemap.createTilemapSignals();
-#else
-	#error "flight.Tilemap: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
 extern inline function clearTilemap(tilemap:Tilemap):Void {
 	flight._js._fn.Tilemap.clearTilemap(tilemap);
 }
@@ -227,23 +176,6 @@ extern inline function getTilemapRowAtY(source:Tilemap, y:Float):Int {
 }
 #end
 #if (js && flight_esm)
-extern inline function getTilemapRuntime(source:Tilemap):TilemapRuntime {
-	return flight._js._fn.Tilemap.getTilemapRuntime(source);
-}
-#else
-extern inline function getTilemapRuntime(source:Tilemap):TilemapRuntime {
-#if hl
-	return flight._hl._fn.Tilemap.getTilemapRuntime(source);
-#elseif cpp
-	return flight._cpp._fn.Tilemap.getTilemapRuntime(source);
-#elseif (js && flight_esm)
-	return flight._js._fn.Tilemap.getTilemapRuntime(source);
-#else
-	#error "flight.Tilemap: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
 extern inline function getTilemapTile(tilemap:Tilemap, column:Int, row:Int):Int {
 	return flight._js._fn.Tilemap.getTilemapTile(tilemap, column, row);
 }
@@ -374,57 +306,6 @@ extern inline function setTilemapTiles(tilemap:Tilemap, ids:Dynamic, idsLen:Int,
 	flight._cpp._fn.Tilemap.setTilemapTiles(tilemap, ids, idsLen, offsetColumn, offsetRow, width, height);
 #elseif (js && flight_esm)
 	flight._js._fn.Tilemap.setTilemapTiles(tilemap, ids, idsLen, offsetColumn, offsetRow, width, height);
-#else
-	#error "flight.Tilemap: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
-extern inline function freeTilemapData(ptr:TilemapData):Void {
-	flight._js._fn.Tilemap.freeTilemapData(ptr);
-}
-#else
-extern inline function freeTilemapData(ptr:TilemapData):Void {
-#if hl
-	flight._hl._fn.Tilemap.freeTilemapData(ptr);
-#elseif cpp
-	flight._cpp._fn.Tilemap.freeTilemapData(ptr);
-#elseif (js && flight_esm)
-	flight._js._fn.Tilemap.freeTilemapData(ptr);
-#else
-	#error "flight.Tilemap: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
-extern inline function freeTilemapRuntime(ptr:TilemapRuntime):Void {
-	flight._js._fn.Tilemap.freeTilemapRuntime(ptr);
-}
-#else
-extern inline function freeTilemapRuntime(ptr:TilemapRuntime):Void {
-#if hl
-	flight._hl._fn.Tilemap.freeTilemapRuntime(ptr);
-#elseif cpp
-	flight._cpp._fn.Tilemap.freeTilemapRuntime(ptr);
-#elseif (js && flight_esm)
-	flight._js._fn.Tilemap.freeTilemapRuntime(ptr);
-#else
-	#error "flight.Tilemap: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
-extern inline function freeTilemapSignals(ptr:TilemapSignals):Void {
-	flight._js._fn.Tilemap.freeTilemapSignals(ptr);
-}
-#else
-extern inline function freeTilemapSignals(ptr:TilemapSignals):Void {
-#if hl
-	flight._hl._fn.Tilemap.freeTilemapSignals(ptr);
-#elseif cpp
-	flight._cpp._fn.Tilemap.freeTilemapSignals(ptr);
-#elseif (js && flight_esm)
-	flight._js._fn.Tilemap.freeTilemapSignals(ptr);
 #else
 	#error "flight.Tilemap: no backend for this target."
 #end

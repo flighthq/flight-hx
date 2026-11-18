@@ -95,8 +95,6 @@ extern class Node {
 	public static function swapNodeChildren(target:hl.Bytes, child1:hl.Bytes, child2:hl.Bytes):Void;
 	@:hlNative("flight", "flight_swap_node_children_at")
 	public static function swapNodeChildrenAt(target:hl.Bytes, index1:Int, index2:Int):Void;
-	@:hlNative("flight", "flight_create_node_runtime")
-	public static function createNodeRuntime(methods:flight._hl.NodeRuntimeMethods):flight._hl.NodeRuntime;
 	@:hlNative("flight", "flight_create_node_signals")
 	public static function createNodeSignals():hl.Bytes;
 	@:hlNative("flight", "flight_default_node_runtime_can_add_child")
@@ -105,8 +103,6 @@ extern class Node {
 	public static function disposeNode(target:hl.Bytes):Void;
 	@:hlNative("flight", "flight_enable_node_signals")
 	public static function enableNodeSignals(source:hl.Bytes):hl.Bytes;
-	@:hlNative("flight", "flight_get_node_runtime")
-	public static function getNodeRuntime(source:hl.Bytes):flight._hl.NodeRuntime;
 	@:hlNative("flight", "flight_get_node_signals")
 	public static function getNodeSignals(source:hl.Bytes):hl.Bytes;
 	@:hlNative("flight", "flight_set_node_enabled")
@@ -217,8 +213,6 @@ extern class Node {
 	public static function createViewport():flight._hl.Viewport;
 	@:hlNative("flight", "flight_get_viewport_aspect")
 	public static function getViewportAspect(viewport:flight._hl.Viewport):Single;
-	@:hlNative("flight", "flight_free_node_runtime")
-	public static function freeNodeRuntime(ptr:flight._hl.NodeRuntime):Void;
 	@:hlNative("flight", "flight_free_node_order_list")
 	public static function freeNodeOrderList(ptr:flight._hl.NodeOrderList):Void;
 	@:hlNative("flight", "flight_free_viewport")

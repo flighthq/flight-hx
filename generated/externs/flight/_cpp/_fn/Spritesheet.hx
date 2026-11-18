@@ -11,10 +11,6 @@ extern class Spritesheet {
 	public static function createSpritesheetAnimation():cpp.Star<cpp.Void>;
 	@:native("flight_create_spritesheet_animation_from_frame_names")
 	public static function createSpritesheetAnimationFromFrameNames(spritesheet:flight._cpp.Spritesheet, pattern:flight._cpp.SpritesheetFramePattern, options:flight._cpp.SpritesheetAnimationFrameNameOptions):cpp.Star<cpp.Void>;
-	@:native("flight_get_spritesheet_animation_direction_string")
-	public static function getSpritesheetAnimationDirectionString(value:Int):cpp.ConstCharStar;
-	@:native("flight_parse_spritesheet_animation_direction")
-	public static function parseSpritesheetAnimationDirection(value:cpp.ConstCharStar):Int;
 	@:native("flight_create_spritesheet_animation_data")
 	public static function createSpritesheetAnimationData():flight._cpp.SpritesheetAnimationData;
 	@:native("flight_create_spritesheet_data")
@@ -57,12 +53,6 @@ extern class Spritesheet {
 	public static function stopSpritesheetPlayer(player:flight._cpp.SpritesheetPlayer):Void;
 	@:native("flight_update_spritesheet_player")
 	public static function updateSpritesheetPlayer(player:flight._cpp.SpritesheetPlayer, deltaTime:Float):Bool;
-	@:native("flight_get_spritesheet_validation_severity_string")
-	public static function getSpritesheetValidationSeverityString(value:Int):cpp.ConstCharStar;
-	@:native("flight_parse_spritesheet_parse_diagnostic_severity")
-	public static function parseSpritesheetParseDiagnosticSeverity(value:cpp.ConstCharStar):Int;
-	@:native("flight_parse_spritesheet_validation_severity")
-	public static function parseSpritesheetValidationSeverity(value:cpp.ConstCharStar):Int;
 	@:native("flight_validate_spritesheet")
 	public static function validateSpritesheet(out:cpp.Star<cpp.Void>, spritesheet:flight._cpp.Spritesheet):Bool;
 	@:native("flight_validate_spritesheet_data")

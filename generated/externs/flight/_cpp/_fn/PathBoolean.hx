@@ -45,6 +45,8 @@ extern class PathBoolean {
 	public static function parsePathOffsetJoin(value:cpp.ConstCharStar):Int;
 	@:native("flight_simplify_path")
 	public static function simplifyPath(out:flight._cpp.Path, pathBooleanKernel:flight._cpp.PathBooleanKernel, path:flight._cpp.Path, options:flight._cpp.PathBooleanOptions):Void;
+	@:native("flight_union_all_paths")
+	public static function unionAllPaths(out:flight._cpp.Path, pathBooleanKernel:flight._cpp.PathBooleanKernel, paths:cpp.Star<cpp.Void>, pathsLen:Int, options:flight._cpp.PathBooleanOptions):Void;
 	@:native("flight_free_path_boolean_explanation")
 	public static function freePathBooleanExplanation(ptr:flight._cpp.PathBooleanExplanation):Void;
 	@:native("flight_free_path_boolean_kernel")

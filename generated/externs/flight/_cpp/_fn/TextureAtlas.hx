@@ -45,16 +45,12 @@ extern class TextureAtlas {
 	public static function getTextureAtlasRegionOrdinal(region:flight._cpp.TextureAtlasRegion):Float;
 	@:native("flight_get_texture_atlas_region_texture")
 	public static function getTextureAtlasRegionTexture(atlas:cpp.Star<cpp.Void>, regionId:Int, guards:flight._cpp.TextureAtlasGuardState):cpp.Star<cpp.Void>;
-	@:native("flight_get_texture_atlas_region_texture_status_string")
-	public static function getTextureAtlasRegionTextureStatusString(value:Int):cpp.ConstCharStar;
 	@:native("flight_get_texture_atlas_region_uv")
 	public static function getTextureAtlasRegionUv(out:flight._cpp.Rectangle, region:flight._cpp.TextureAtlasRegion, imageWidth:Single, imageHeight:Single):Void;
 	@:native("flight_get_texture_atlas_region_uv_quad")
 	public static function getTextureAtlasRegionUvQuad(out:cpp.Star<cpp.Void>, region:flight._cpp.TextureAtlasRegion, imageWidth:Single, imageHeight:Single):Void;
 	@:native("flight_has_texture_atlas_region")
 	public static function hasTextureAtlasRegion(atlas:flight._cpp.TextureAtlas, name:cpp.ConstCharStar):Bool;
-	@:native("flight_parse_texture_atlas_region_texture_status")
-	public static function parseTextureAtlasRegionTextureStatus(value:cpp.ConstCharStar):Int;
 	@:native("flight_remove_texture_atlas_region")
 	public static function removeTextureAtlasRegion(target:flight._cpp.TextureAtlas, id:Int):Bool;
 	@:native("flight_set_texture_atlas_region")

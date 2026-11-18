@@ -19,7 +19,7 @@ extern class Text {
 	@:native("patchNativeTextStyle")
 	public static function patchNativeTextStyle(source:Dynamic, patch:flight._js.NativeTextStyle):Void;
 	@:native("setNativeTextAutoSize")
-	public static function setNativeTextAutoSize(source:Dynamic, value:flight._js.TextAutoSize):Void;
+	public static function setNativeTextAutoSize(source:Dynamic, value:Dynamic):Void;
 	@:native("setNativeTextHeight")
 	public static function setNativeTextHeight(source:Dynamic, value:Float):Void;
 	@:native("setNativeTextString")
@@ -27,7 +27,7 @@ extern class Text {
 	@:native("setNativeTextStyle")
 	public static function setNativeTextStyle(source:Dynamic, value:Dynamic):Void;
 	@:native("setNativeTextVerticalAlign")
-	public static function setNativeTextVerticalAlign(source:Dynamic, value:flight._js.TextVerticalAlign):Void;
+	public static function setNativeTextVerticalAlign(source:Dynamic, value:Dynamic):Void;
 	@:native("setNativeTextWidth")
 	public static function setNativeTextWidth(source:Dynamic, value:Float):Void;
 	@:native("appendRichTextString")
@@ -119,7 +119,7 @@ extern class Text {
 	@:native("setRichTextTextColor")
 	public static function setRichTextTextColor(source:Dynamic, value:Int):Void;
 	@:native("setRichTextVerticalAlign")
-	public static function setRichTextVerticalAlign(source:Dynamic, value:flight._js.TextVerticalAlign):Void;
+	public static function setRichTextVerticalAlign(source:Dynamic, value:Dynamic):Void;
 	@:native("setRichTextWidth")
 	public static function setRichTextWidth(source:Dynamic, value:Float):Void;
 	@:native("setRichTextWordWrap")
@@ -135,7 +135,7 @@ extern class Text {
 	@:native("getTextLabelString")
 	public static function getTextLabelString(source:flight._js.TextLabel):String;
 	@:native("setTextLabelAutoSize")
-	public static function setTextLabelAutoSize(source:Dynamic, value:flight._js.TextAutoSize):Void;
+	public static function setTextLabelAutoSize(source:Dynamic, value:Dynamic):Void;
 	@:native("setTextLabelFormat")
 	public static function setTextLabelFormat(source:Dynamic, value:Dynamic):Void;
 	@:native("setTextLabelHeight")
@@ -143,7 +143,7 @@ extern class Text {
 	@:native("setTextLabelString")
 	public static function setTextLabelString(source:Dynamic, value:String):Void;
 	@:native("setTextLabelVerticalAlign")
-	public static function setTextLabelVerticalAlign(source:Dynamic, value:flight._js.TextVerticalAlign):Void;
+	public static function setTextLabelVerticalAlign(source:Dynamic, value:Dynamic):Void;
 	@:native("setTextLabelWidth")
 	public static function setTextLabelWidth(source:Dynamic, value:Float):Void;
 	@:native("getTextLayout")

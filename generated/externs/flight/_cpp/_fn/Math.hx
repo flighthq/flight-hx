@@ -79,6 +79,8 @@ extern class Math {
 	public static function randomExponential(randomFn:cpp.Star<cpp.Void>, randomCtx:cpp.Star<cpp.Void>, rate:Single):Single;
 	@:native("flight_random_gaussian")
 	public static function randomGaussian(randomFn:cpp.Star<cpp.Void>, randomCtx:cpp.Star<cpp.Void>, mean:Single, standardDeviation:Single):Single;
+	@:native("flight_random_gaussian_pair")
+	public static function randomGaussianPair(randomFn:cpp.Star<cpp.Void>, randomCtx:cpp.Star<cpp.Void>, mean:Single, standardDeviation:Single, out0:cpp.RawPointer<cpp.Float32>, out1:cpp.RawPointer<cpp.Float32>):Void;
 	@:native("flight_random_inside_unit_disc")
 	public static function randomInsideUnitDisc(out:cpp.Star<cpp.Void>, randomFn:cpp.Star<cpp.Void>, randomCtx:cpp.Star<cpp.Void>):Void;
 	@:native("flight_random_inside_unit_sphere")

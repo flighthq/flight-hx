@@ -138,8 +138,6 @@ extern class Physics2d {
 	public static function isPhysics2dSolverConfigValid(config:flight._js.Physics2DSolverConfig):Bool;
 	@:native("isPhysics2DTimestepValid")
 	public static function isPhysics2dTimestepValid(dt:Float):Bool;
-	@:native("visitPhysics2DJointBaseNumberFields")
-	public static function visitPhysics2dJointBaseNumberFields(fields:flight._js.Physics2DJointFields, visit:Dynamic):Void;
 	@:native("createPhysics2DCollider")
 	public static function createPhysics2dCollider(local:flight._js.CollisionShape2D):Dynamic;
 	@:native("createPhysics2DSolverConfig")

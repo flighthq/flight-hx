@@ -64,34 +64,4 @@ abstract Texture(cpp.Star<cpp.Void>) {
 	extern inline public function free():Void {
 		flight._cpp._fn.Texture.freeTexture(cast this);
 	}
-	extern inline public function advanceVideoTexture(hostVideo:flight._cpp.HostVideoCapability):Int {
-		return flight._cpp._fn.Video.advanceVideoTextureTexture(hostVideo, cast this);
-	}
-	extern inline public function cloneVideoTexture():flight._cpp.Texture {
-		return flight._cpp._fn.Video.cloneVideoTextureTexture(cast this);
-	}
-	extern inline public function copyVideoTextureTexture(source:flight._cpp.Texture):Void {
-		flight._cpp._fn.Video.copyVideoTextureTextureTexture(cast this, source);
-	}
-	extern inline public function getVideoTextureHeight(hostVideo:flight._cpp.HostVideoCapability):Single {
-		return flight._cpp._fn.Video.getVideoTextureHeightTexture(hostVideo, cast this);
-	}
-	extern inline public function getVideoTextureInverseUvMatrix(out:flight._cpp.Matrix3):Void {
-		flight._cpp._fn.Video.getVideoTextureInverseUvMatrixTexture(out, cast this);
-	}
-	extern inline public function getVideoTextureUvMatrix(out:flight._cpp.Matrix3):Void {
-		flight._cpp._fn.Video.getVideoTextureUvMatrixTexture(out, cast this);
-	}
-	extern inline public function getVideoTextureWidth(hostVideo:flight._cpp.HostVideoCapability):Single {
-		return flight._cpp._fn.Video.getVideoTextureWidthTexture(hostVideo, cast this);
-	}
-	extern inline public function isVideoTextureFrameReady(hostVideo:flight._cpp.HostVideoCapability):Bool {
-		return flight._cpp._fn.Video.isVideoTextureFrameReadyTexture(hostVideo, cast this);
-	}
-	extern inline public function resetVideoTextureFrame():Void {
-		flight._cpp._fn.Video.resetVideoTextureFrameTexture(cast this);
-	}
-	extern inline public function setVideoTextureSource(hostVideo:flight._cpp.HostVideoCapability, source:flight._cpp.VideoResource):Void {
-		flight._cpp._fn.Video.setVideoTextureSourceTexture(hostVideo, cast this, source);
-	}
 }

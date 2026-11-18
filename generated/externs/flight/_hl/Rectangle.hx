@@ -22,6 +22,24 @@ abstract Rectangle(hl.Bytes) {
 
 	inline function set_height(value:Single):Single { this.setF32(28, value); return value; }
 
+	inline public function free():Void {
+		flight._hl._fn.Bitmap.freeRectangle(cast this);
+	}
+	inline public function createClipRegionFrom():hl.Bytes {
+		return flight._hl._fn.Clip.createClipRegionFromRectangle(cast this);
+	}
+	inline public function clipRegionContains(clip:hl.Bytes):Bool {
+		return flight._hl._fn.Clip.clipRegionContainsRectangle(clip, cast this);
+	}
+	inline public function clipRegionIntersects(clip:hl.Bytes):Bool {
+		return flight._hl._fn.Clip.clipRegionIntersectsRectangle(clip, cast this);
+	}
+	inline public function setClipRegionTo(out:hl.Bytes):Void {
+		flight._hl._fn.Clip.setClipRegionToRectangle(out, cast this);
+	}
+	inline public function createClipRegionFromRounded(radius:Float, tolerance:Float):hl.Bytes {
+		return flight._hl._fn.Clip.createClipRegionFromRoundedRectangle(cast this, radius, tolerance);
+	}
 	inline public function matrixTransform(matrix:flight._hl.Matrix, source:flight._hl.Rectangle):Void {
 		flight._hl._fn.Geometry.matrixTransformRectangle(cast this, matrix, source);
 	}
@@ -148,9 +166,6 @@ abstract Rectangle(hl.Bytes) {
 	inline public function release():Void {
 		flight._hl._fn.Geometry.releaseRectangle(cast this);
 	}
-	inline public function free():Void {
-		flight._hl._fn.Geometry.freeRectangle(cast this);
-	}
 	inline public function computeNodeBounds(source:hl.Bytes, targetCoordinateSpace:hl.Bytes):Void {
 		flight._hl._fn.Node.computeNodeBoundsRectangle(cast this, source, targetCoordinateSpace);
 	}
@@ -192,6 +207,9 @@ abstract Rectangle(hl.Bytes) {
 	}
 	inline public function computeTextLabelLocalBounds(source:hl.Bytes):Void {
 		flight._hl._fn.Text.computeTextLabelLocalBoundsRectangle(cast this, source);
+	}
+	inline public function computeTextBounds(spec:flight._hl.TextBoundsSpec, layout:flight._hl.TextLayoutResult):Void {
+		flight._hl._fn.Textlayout.computeTextBoundsRectangle(cast this, spec, layout);
 	}
 	inline public function addTextureAtlasRegion(target:flight._hl.TextureAtlas, pivot:flight._hl.Vector2, name:hl.Bytes):Void {
 		flight._hl._fn.TextureAtlas.addTextureAtlasRegionRectangle(target, cast this, pivot, name);

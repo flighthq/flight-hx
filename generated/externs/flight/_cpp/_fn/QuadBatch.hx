@@ -3,12 +3,6 @@ package flight._cpp._fn;
 extern class QuadBatch {
 	@:native("flight_create_quad_batch")
 	public static function createQuadBatch():cpp.Star<cpp.Void>;
-	@:native("flight_create_quad_batch_data")
-	public static function createQuadBatchData():flight._cpp.QuadBatchData;
-	@:native("flight_create_quad_batch_runtime")
-	public static function createQuadBatchRuntime():flight._cpp.Node2DRuntime;
-	@:native("flight_create_quad_batch_signals")
-	public static function createQuadBatchSignals():cpp.Star<cpp.Void>;
 	@:native("flight_append_quad_batch_instance")
 	public static function appendQuadBatchInstance(target:flight._cpp.QuadBatch, id:Int, x:Single, y:Single):Int;
 	@:native("flight_clear_quad_batch")
@@ -27,8 +21,6 @@ extern class QuadBatch {
 	public static function getQuadBatchInstanceId(source:flight._cpp.QuadBatch, index:Int):Int;
 	@:native("flight_get_quad_batch_instance_transform")
 	public static function getQuadBatchInstanceTransform(out:flight._cpp.Vector2, source:flight._cpp.QuadBatch, index:Int):Bool;
-	@:native("flight_get_quad_batch_runtime")
-	public static function getQuadBatchRuntime(source:flight._cpp.QuadBatch):cpp.Star<cpp.Void>;
 	@:native("flight_get_quad_batch_signals")
 	public static function getQuadBatchSignals(source:flight._cpp.QuadBatch):cpp.Star<cpp.Void>;
 	@:native("flight_get_quad_batch_transform_stride")
@@ -61,6 +53,4 @@ extern class QuadBatch {
 	public static function setQuadBatchLocalBoundsRectangle(target:cpp.Star<cpp.Void>, rect:flight._cpp.Rectangle):Void;
 	@:native("flight_set_quad_batch_transform_type")
 	public static function setQuadBatchTransformType(target:flight._cpp.QuadBatch, newType:Int):Void;
-	@:native("flight_free_quad_batch_data")
-	public static function freeQuadBatchData(ptr:flight._cpp.QuadBatchData):Void;
 }

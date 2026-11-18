@@ -79,6 +79,8 @@ extern class Bitmap {
 	public static function copyBitmapPixels(dest:flight._hl.BitmapRegion, source:flight._hl.BitmapRegion, composite:Bool):Void;
 	@:hlNative("flight", "flight_get_bitmap_coverage")
 	public static function getBitmapCoverage(source:flight._hl.Bitmap, backgroundColor:Int, channelTolerance:Int):Float;
+	@:hlNative("flight", "flight_crop_bitmap")
+	public static function cropBitmap(source:flight._hl.Bitmap, rect:flight._hl.Rectangle):flight._hl.Bitmap;
 	@:hlNative("flight", "flight_extend_bitmap")
 	public static function extendBitmap(source:flight._hl.Bitmap, left:Int, top:Int, right:Int, bottom:Int, edgeMode:Int, fillColor:Int):flight._hl.Bitmap;
 	@:hlNative("flight", "flight_trim_bitmap")
@@ -153,10 +155,10 @@ extern class Bitmap {
 	public static function setBitmapPixel(out:flight._hl.Bitmap, x:Int, y:Int, color:Int):Void;
 	@:hlNative("flight", "flight_set_bitmap_pixel_rgb")
 	public static function setBitmapPixelRgb(out:flight._hl.Bitmap, x:Int, y:Int, color:Int):Void;
-	@:hlNative("flight", "flight_to_clamped_u8")
-	public static function toClampedU8(value:Single):Int;
 	@:hlNative("flight", "flight_pixelate_bitmap")
 	public static function pixelateBitmap(out:hl.Bytes, outLen:Int, source:flight._hl.BitmapRegion, blockSize:Int):Void;
+	@:hlNative("flight", "flight_get_bitmap_color_bounds_rectangle")
+	public static function getBitmapColorBoundsRectangle(source:flight._hl.BitmapRegion, mask:Int, color:Int, findColor:Bool):flight._hl.Rectangle;
 	@:hlNative("flight", "flight_create_bitmap_region")
 	public static function createBitmapRegion(bitmap:flight._hl.Bitmap, x:Int, y:Int, width:Int, height:Int):flight._hl.BitmapRegion;
 	@:hlNative("flight", "flight_set_bitmap_region")
@@ -207,6 +209,8 @@ extern class Bitmap {
 	public static function freeBitmapFingerprint(ptr:flight._hl.BitmapFingerprint):Void;
 	@:hlNative("flight", "flight_free_bitmap_histogram")
 	public static function freeBitmapHistogram(ptr:flight._hl.BitmapHistogram):Void;
+	@:hlNative("flight", "flight_free_rectangle")
+	public static function freeRectangle(ptr:flight._hl.Rectangle):Void;
 	@:hlNative("flight", "flight_free_bitmap_region")
 	public static function freeBitmapRegion(ptr:flight._hl.BitmapRegion):Void;
 }

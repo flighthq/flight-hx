@@ -24,9 +24,6 @@ abstract Scene2D(hl.Bytes) {
 	inline public function enableSignals():hl.Bytes {
 		return flight._hl._fn.Scene2D.enableScene2dSignals(cast this);
 	}
-	inline public function getRuntime():flight._hl.Scene2DRuntime {
-		return flight._hl._fn.Scene2D.getScene2dRuntime(cast this);
-	}
 	inline public function getSignals():hl.Bytes {
 		return flight._hl._fn.Scene2D.getScene2dSignals(cast this);
 	}

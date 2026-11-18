@@ -25,8 +25,6 @@ extern class Animation {
 	public static function sampleAnimationBlendTreeChannel(out:cpp.Star<cpp.Void>, outLen:Int, tree:flight._cpp.AnimationBlendTree, channelIndex:Int):Bool;
 	@:native("flight_set_animation_blend_tree_input_weight")
 	public static function setAnimationBlendTreeInputWeight(tree:flight._cpp.AnimationBlendTree, inputIndex:Int, weight:Single):Bool;
-	@:native("flight_create_animation_channel")
-	public static function createAnimationChannel(track:cpp.Star<cpp.Void>, targetRef:flight._cpp.TargetRef):flight._cpp.AnimationChannel;
 	@:native("flight_create_animation_clip")
 	public static function createAnimationClip(channels:cpp.Star<cpp.Void>, duration:Single, events:cpp.Star<cpp.Void>, eventsLen:Int):flight._cpp.AnimationClip;
 	@:native("flight_create_animation_clip_event")
@@ -91,8 +89,6 @@ extern class Animation {
 	public static function sampleAnimationStateMachine(out:cpp.Star<cpp.Void>, outLen:Int, machine:flight._cpp.AnimationStateMachine, visitFn:cpp.Star<cpp.Void>, visitCtx:cpp.Star<cpp.Void>):Void;
 	@:native("flight_sample_animation_state_machine_channel")
 	public static function sampleAnimationStateMachineChannel(out:cpp.Star<cpp.Void>, outLen:Int, machine:flight._cpp.AnimationStateMachine, channelIndex:Int):Bool;
-	@:native("flight_transition_animation_state_machine")
-	public static function transitionAnimationStateMachine(machine:flight._cpp.AnimationStateMachine, toState:flight._cpp.StateRef, duration:Single, curveFn:cpp.Star<cpp.Void>, curveCtx:cpp.Star<cpp.Void>):Bool;
 	@:native("flight_create_animation_track")
 	public static function createAnimationTrack():flight._cpp.AnimationTrack;
 	@:native("flight_clone_animation_track")
@@ -103,18 +99,12 @@ extern class Animation {
 	public static function trimAnimationTrack(track:flight._cpp.AnimationTrack, startTime:Single, endTime:Single):flight._cpp.AnimationTrack;
 	@:native("flight_validate_animation_track")
 	public static function validateAnimationTrack(out:cpp.Star<cpp.Void>, track:flight._cpp.AnimationTrack):Bool;
-	@:native("flight_create_state_ref_from_index")
-	public static function createStateRefFromIndex(index:Int):flight._cpp.StateRef;
-	@:native("flight_create_state_ref_from_name")
-	public static function createStateRefFromName(name:cpp.ConstCharStar):flight._cpp.StateRef;
 	@:native("flight_free_animation_sample_accumulator")
 	public static function freeAnimationSampleAccumulator(ptr:flight._cpp.AnimationSampleAccumulator):Void;
 	@:native("flight_free_animation_blend_tree")
 	public static function freeAnimationBlendTree(ptr:flight._cpp.AnimationBlendTree):Void;
 	@:native("flight_free_animation_blend_tree_input")
 	public static function freeAnimationBlendTreeInput(ptr:flight._cpp.AnimationBlendTreeInput):Void;
-	@:native("flight_free_animation_channel")
-	public static function freeAnimationChannel(ptr:flight._cpp.AnimationChannel):Void;
 	@:native("flight_free_animation_clip")
 	public static function freeAnimationClip(ptr:flight._cpp.AnimationClip):Void;
 	@:native("flight_free_animation_clip_event")
@@ -133,6 +123,4 @@ extern class Animation {
 	public static function freeAnimationStateMachineState(ptr:flight._cpp.AnimationStateMachineState):Void;
 	@:native("flight_free_animation_track")
 	public static function freeAnimationTrack(ptr:flight._cpp.AnimationTrack):Void;
-	@:native("flight_free_state_ref")
-	public static function freeStateRef(ptr:flight._cpp.StateRef):Void;
 }

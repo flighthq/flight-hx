@@ -1,30 +1,10 @@
 package flight._hl._fn;
 
 extern class Scene2dFormats {
-	@:hlNative("flight", "flight_create_lottie_bezier_path")
-	public static function createLottieBezierPath(value:flight._hl.LottieShapePath):flight._hl.Path;
-	@:hlNative("flight", "flight_flatten_lottie_shape_path")
-	public static function flattenLottieShapePath(out:hl.Bytes, path:flight._hl.LottieShapePath):Void;
-	@:hlNative("flight", "flight_unflatten_lottie_shape_path")
-	public static function unflattenLottieShapePath(template:flight._hl.LottieShapePath, values:hl.Bytes, valuesLen:Int):flight._hl.LottieShapePath;
 	@:hlNative("flight", "flight_get_lottie_feature_names")
 	public static function getLottieFeatureNames(out:hl.Bytes):Void;
 	@:hlNative("flight", "flight_apply_animation_clip_to_lottie_document")
 	public static function applyAnimationClipToLottieDocument(clip:flight._hl.AnimationClip, time:Single):Void;
-	@:hlNative("flight", "flight_lottie_clamp")
-	public static function lottieClamp(value:Single, minimum:Single, maximum:Single):Single;
-	@:hlNative("flight", "flight_lottie_degrees_to_radians")
-	public static function lottieDegreesToRadians(value:Single):Single;
-	@:hlNative("flight", "flight_lottie_numeric_value")
-	public static function lottieNumericValue(out:hl.Bytes, value:flight._hl.Unknown, components:Int):Void;
-	@:hlNative("flight", "flight_lottie_rgba")
-	public static function lottieRgba(color:hl.Bytes, colorLen:Int):Int;
-	@:hlNative("flight", "flight_create_lottie_gradient_matrix")
-	public static function createLottieGradientMatrix(start:hl.Bytes, startLen:Int, end:hl.Bytes, endLen:Int):flight._hl.Matrix;
-	@:hlNative("flight", "flight_interpolate_lottie_gradient_opacity")
-	public static function interpolateLottieGradientOpacity(stops:hl.Bytes, stopsLen:Int, offset:Single):Single;
-	@:hlNative("flight", "flight_parse_lottie_gradient")
-	public static function parseLottieGradient(values:hl.Bytes, valuesLen:Int, count:Int, opacity:Single):flight._hl.LottieGradientPaint;
 	@:hlNative("flight", "flight_register_all_lottie_handlers")
 	public static function registerAllLottieHandlers(registry:flight._hl.LottieRegistry):Void;
 	@:hlNative("flight", "flight_register_lottie_layer_handlers")
@@ -55,14 +35,8 @@ extern class Scene2dFormats {
 	public static function isReadableLottie(json:hl.Bytes):Bool;
 	@:hlNative("flight", "flight_parse_lottie_requirements")
 	public static function parseLottieRequirements(json:hl.Bytes):flight._hl.RequirementSet;
-	@:hlNative("flight", "flight_apply_lottie_shape_direction")
-	public static function applyLottieShapeDirection(path:hl.Bytes, direction:Int):hl.Bytes;
 	@:hlNative("flight", "flight_register_lottie_shape_item_handlers")
 	public static function registerLottieShapeItemHandlers(registry:flight._hl.LottieRegistry):Void;
-	@:hlNative("flight", "flight_map_lottie_line_cap")
-	public static function mapLottieLineCap(value:Int):Int;
-	@:hlNative("flight", "flight_map_lottie_line_join")
-	public static function mapLottieLineJoin(value:Int):Int;
 	@:hlNative("flight", "flight_apply_animation_clip_to_rive_document")
 	public static function applyAnimationClipToRiveDocument(clip:flight._hl.AnimationClip, time:Single):Void;
 	@:hlNative("flight", "flight_register_rive_animation_handlers")
@@ -99,8 +73,6 @@ extern class Scene2dFormats {
 	public static function registerAllRiveHandlers(pathBooleanKernel:flight._hl.PathBooleanKernel, registry:flight._hl.RiveImportRegistry):Void;
 	@:hlNative("flight", "flight_create_rive_import_registry")
 	public static function createRiveImportRegistry():flight._hl.RiveImportRegistry;
-	@:hlNative("flight", "flight_import_rive_core_object_as_data")
-	public static function importRiveCoreObjectAsData():hl.Bytes;
 	@:hlNative("flight", "flight_register_rive_layout_handlers")
 	public static function registerRiveLayoutHandlers(registry:flight._hl.RiveImportRegistry):Void;
 	@:hlNative("flight", "flight_create_rive_import_registry_from_options")
@@ -115,8 +87,6 @@ extern class Scene2dFormats {
 	public static function registerRivePaintHandlers(registry:flight._hl.RiveImportRegistry):Void;
 	@:hlNative("flight", "flight_register_rive_path_handlers")
 	public static function registerRivePathHandlers(registry:flight._hl.RiveImportRegistry):Void;
-	@:hlNative("flight", "flight_create_rive_skeleton_2d")
-	public static function createRiveSkeleton2d(artboard:flight._hl.RiveArtboardGraph):flight._hl.RiveSkeleton2DImport;
 	@:hlNative("flight", "flight_register_rive_skeleton_handlers")
 	public static function registerRiveSkeletonHandlers(registry:flight._hl.RiveImportRegistry):Void;
 	@:hlNative("flight", "flight_register_rive_solo_handlers")
@@ -125,24 +95,10 @@ extern class Scene2dFormats {
 	public static function registerRiveStateMachineHandlers(registry:flight._hl.RiveImportRegistry):Void;
 	@:hlNative("flight", "flight_register_rive_text_handlers")
 	public static function registerRiveTextHandlers(registry:flight._hl.RiveImportRegistry):Void;
-	@:hlNative("flight", "flight_has_unmeasurable_svg_text")
-	public static function hasUnmeasurableSvgText(target:hl.Bytes):Bool;
-	@:hlNative("flight", "flight_uses_svg_object_bounding_box_units")
-	public static function usesSvgObjectBoundingBoxUnits(element:hl.Bytes):Bool;
 	@:hlNative("flight", "flight_register_svg_clip_handlers")
 	public static function registerSvgClipHandlers(registry:flight._hl.SvgRegistry):Void;
-	@:hlNative("flight", "flight_parse_svg_color")
-	public static function parseSvgColor(value:hl.Bytes):flight._hl.SvgColor;
-	@:hlNative("flight", "flight_resolve_svg_color")
-	public static function resolveSvgColor(value:hl.Bytes, currentColor:hl.Bytes):flight._hl.SvgColor;
 	@:hlNative("flight", "flight_register_svg_element_handlers")
 	public static function registerSvgElementHandlers(registry:flight._hl.SvgRegistry):Void;
-	@:hlNative("flight", "flight_create_svg_geometry_path")
-	public static function createSvgGeometryPath(element:flight._hl.XmlElement, winding:Int):flight._hl.Path;
-	@:hlNative("flight", "flight_create_svg_gradient_matrix")
-	public static function createSvgGradientMatrix(gradient:flight._hl.SvgGradient, path:flight._hl.Path):flight._hl.Matrix;
-	@:hlNative("flight", "flight_has_zero_area_svg_gradient_box")
-	public static function hasZeroAreaSvgGradientBox(gradient:flight._hl.SvgGradient, path:flight._hl.Path):Bool;
 	@:hlNative("flight", "flight_register_all_svg_handlers")
 	public static function registerAllSvgHandlers(registry:flight._hl.SvgRegistry):Void;
 	@:hlNative("flight", "flight_create_svg_registry")
@@ -163,46 +119,6 @@ extern class Scene2dFormats {
 	public static function isReadableSvg(source:hl.Bytes):Bool;
 	@:hlNative("flight", "flight_parse_svg_requirements")
 	public static function parseSvgRequirements(source:hl.Bytes):flight._hl.RequirementSet;
-	@:hlNative("flight", "flight_collect_css_rules")
-	public static function collectCssRules(out:hl.Bytes, root:flight._hl.XmlElement):Void;
-	@:hlNative("flight", "flight_resolve_svg_winding")
-	public static function resolveSvgWinding(value:hl.Bytes, fallback:Int):Int;
-	@:hlNative("flight", "flight_create_svg_view_box_matrix")
-	public static function createSvgViewBoxMatrix(viewBox:hl.Bytes, viewBoxLen:Int, viewport:flight._hl.SvgViewport, preserveAspectRatioValue:hl.Bytes):flight._hl.Matrix;
-	@:hlNative("flight", "flight_create_svg_viewport_matrix")
-	public static function createSvgViewportMatrix(element:flight._hl.XmlElement, viewport:flight._hl.SvgViewportOptions):flight._hl.Matrix;
-	@:hlNative("flight", "flight_apply_svg_transform")
-	public static function applySvgTransform(target:hl.Bytes, matrix:flight._hl.Matrix):Void;
-	@:hlNative("flight", "flight_assign_svg_transform")
-	public static function assignSvgTransform(target:hl.Bytes, transform:flight._hl.Transform2D):Void;
-	@:hlNative("flight", "flight_multiply_svg_matrices")
-	public static function multiplySvgMatrices(out:flight._hl.Matrix, a:flight._hl.Matrix, b:flight._hl.Matrix):Void;
-	@:hlNative("flight", "flight_parse_svg_transform")
-	public static function parseSvgTransform(value:hl.Bytes):flight._hl.Matrix;
-	@:hlNative("flight", "flight_parse_svg_coordinate")
-	public static function parseSvgCoordinate(value:hl.Bytes, fallback:Single):Single;
-	@:hlNative("flight", "flight_parse_svg_css_number")
-	public static function parseSvgCssNumber(value:hl.Bytes, fallback:Single):Single;
-	@:hlNative("flight", "flight_parse_svg_length")
-	public static function parseSvgLength(value:hl.Bytes, fallback:Single):Single;
-	@:hlNative("flight", "flight_parse_svg_number_list")
-	public static function parseSvgNumberList(value:hl.Bytes):hl.Bytes;
-	@:hlNative("flight", "flight_parse_url_reference")
-	public static function parseUrlReference(value:hl.Bytes):hl.Bytes;
-	@:hlNative("flight", "flight_svg_first_number")
-	public static function svgFirstNumber(value:hl.Bytes, fallback:Single):Single;
-	@:hlNative("flight", "flight_svg_local_name")
-	public static function svgLocalName(name:hl.Bytes):hl.Bytes;
-	@:hlNative("flight", "flight_svg_number_attribute")
-	public static function svgNumberAttribute(element:flight._hl.XmlElement, name:hl.Bytes, fallback:Single):Single;
-	@:hlNative("flight", "flight_svg_optional_number_attribute")
-	public static function svgOptionalNumberAttribute(element:flight._hl.XmlElement, name:hl.Bytes):Single;
-	@:hlNative("flight", "flight_visit_svg_elements")
-	public static function visitSvgElements(element:flight._hl.XmlElement, visitorFn:hl.Bytes, visitorCtx:hl.Bytes):Void;
-	@:hlNative("flight", "flight_free_lottie_shape_path")
-	public static function freeLottieShapePath(ptr:flight._hl.LottieShapePath):Void;
-	@:hlNative("flight", "flight_free_lottie_gradient_paint")
-	public static function freeLottieGradientPaint(ptr:flight._hl.LottieGradientPaint):Void;
 	@:hlNative("flight", "flight_free_lottie_registry")
 	public static function freeLottieRegistry(ptr:flight._hl.LottieRegistry):Void;
 	@:hlNative("flight", "flight_free_lottie_layer_handler")
@@ -217,10 +133,6 @@ extern class Scene2dFormats {
 	public static function freeRiveFieldType(ptr:flight._hl.RiveFieldType):Void;
 	@:hlNative("flight", "flight_free_rive_import_registry")
 	public static function freeRiveImportRegistry(ptr:flight._hl.RiveImportRegistry):Void;
-	@:hlNative("flight", "flight_free_rive_skeleton2_dimport")
-	public static function freeRiveSkeleton2Dimport(ptr:flight._hl.RiveSkeleton2DImport):Void;
-	@:hlNative("flight", "flight_free_svg_color")
-	public static function freeSvgColor(ptr:flight._hl.SvgColor):Void;
 	@:hlNative("flight", "flight_free_svg_registry")
 	public static function freeSvgRegistry(ptr:flight._hl.SvgRegistry):Void;
 	@:hlNative("flight", "flight_free_svg_clip_handler")

@@ -140,15 +140,6 @@ abstract Matrix(cpp.Star<cpp.Void>) {
 	extern inline public function setNodeLocal(target:cpp.Star<cpp.Void>):Void {
 		flight._cpp._fn.Node.setNodeLocalMatrix(target, cast this);
 	}
-	static extern inline public function createLottieGradient(start:cpp.Star<cpp.Void>, startLen:Int, end:cpp.Star<cpp.Void>, endLen:Int):flight._cpp.Matrix {
-		return flight._cpp._fn.Scene2dFormats.createLottieGradientMatrix(start, startLen, end, endLen);
-	}
-	static extern inline public function createSvgGradient(gradient:flight._cpp.SvgGradient, path:flight._cpp.Path):flight._cpp.Matrix {
-		return flight._cpp._fn.Scene2dFormats.createSvgGradientMatrix(gradient, path);
-	}
-	static extern inline public function createSvgViewBox(viewBox:cpp.Star<cpp.Void>, viewBoxLen:Int, viewport:flight._cpp.SvgViewport, preserveAspectRatioValue:cpp.ConstCharStar):flight._cpp.Matrix {
-		return flight._cpp._fn.Scene2dFormats.createSvgViewBoxMatrix(viewBox, viewBoxLen, viewport, preserveAspectRatioValue);
-	}
 	extern inline public function getSkeleton2dBoneWorld(skeleton:flight._cpp.Skeleton2D, boneIndex:Int):Bool {
 		return flight._cpp._fn.Skeleton2D.getSkeleton2dBoneWorldMatrix(cast this, skeleton, boneIndex);
 	}

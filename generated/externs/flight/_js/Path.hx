@@ -31,6 +31,9 @@ abstract Path(Dynamic) {
 	inline public function fitCurves(tolerance:Float, out:flight._js.Path, flattenTolerance:Null<Float>):Void {
 		flight._js._fn.Path.fitPathCurves(cast this, tolerance, out, flattenTolerance);
 	}
+	inline public function getBounds(out:flight._js.Rectangle):Bool {
+		return flight._js._fn.Path.getPathBounds(cast this, out);
+	}
 	inline public function getContourLengths(tolerance:Null<Float>):Dynamic {
 		return flight._js._fn.Path.getPathContourLengths(cast this, tolerance);
 	}
@@ -168,9 +171,6 @@ abstract Path(Dynamic) {
 	}
 	inline public function formatSvgData(options:Null<flight._js.SvgPathDataFormatOptions>):String {
 		return flight._js._fn.PathFormats.formatSvgPathData(cast this, options);
-	}
-	static inline public function createLottieBezier(value:flight._js.LottieShapePath):flight._js.Path {
-		return flight._js._fn.Scene2dFormats.createLottieBezierPath(value);
 	}
 	inline public function compactStroke(path:flight._js.Path, style:flight._js.StrokeStyle, tolerance:Null<Float>):Void {
 		flight._js._fn.Shape.compactStrokePath(cast this, path, style, tolerance);

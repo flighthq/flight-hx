@@ -3,6 +3,8 @@ package flight._cpp._fn;
 extern class Xml {
 	@:native("flight_parse_xml_document")
 	public static function parseXmlDocument(xml:cpp.ConstCharStar):flight._cpp.XmlElement;
+	@:native("flight_get_xml_element_attribute")
+	public static function getXmlElementAttribute(element:flight._cpp.XmlElement, name:cpp.ConstCharStar):cpp.ConstCharStar;
 	@:native("flight_get_xml_element_attribute_number")
 	public static function getXmlElementAttributeNumber(element:flight._cpp.XmlElement, name:cpp.ConstCharStar):Float;
 	@:native("flight_get_xml_element_child_by_name")

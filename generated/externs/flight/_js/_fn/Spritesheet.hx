@@ -12,10 +12,6 @@ extern class Spritesheet {
 	public static function createSpritesheetAnimation():Dynamic;
 	@:native("createSpritesheetAnimationFromFrameNames")
 	public static function createSpritesheetAnimationFromFrameNames(spritesheet:flight._js.Spritesheet, pattern:flight._js.SpritesheetFramePattern, options:Null<flight._js.SpritesheetAnimationFrameNameOptions>):Null<Dynamic>;
-	@:native("getSpritesheetAnimationDirectionString")
-	public static function getSpritesheetAnimationDirectionString(value:Dynamic):String;
-	@:native("parseSpritesheetAnimationDirection")
-	public static function parseSpritesheetAnimationDirection(value:String):Null<Dynamic>;
 	@:native("createSpritesheetAnimationData")
 	public static function createSpritesheetAnimationData():flight._js.SpritesheetAnimationData;
 	@:native("createSpritesheetData")
@@ -58,10 +54,6 @@ extern class Spritesheet {
 	public static function stopSpritesheetPlayer(player:flight._js.SpritesheetPlayer):Void;
 	@:native("updateSpritesheetPlayer")
 	public static function updateSpritesheetPlayer(player:flight._js.SpritesheetPlayer, deltaTime:Float):Bool;
-	@:native("getSpritesheetValidationSeverityString")
-	public static function getSpritesheetValidationSeverityString(value:Dynamic):String;
-	@:native("parseSpritesheetValidationSeverity")
-	public static function parseSpritesheetValidationSeverity(value:String):Null<Dynamic>;
 	@:native("validateSpritesheet")
 	public static function validateSpritesheet(out:Dynamic, spritesheet:flight._js.Spritesheet):Bool;
 	@:native("validateSpritesheetData")

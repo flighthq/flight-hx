@@ -33,6 +33,24 @@ abstract Rectangle(cpp.Star<cpp.Void>) {
 
 	inline function set_height(value:Single):Single { Rectangle_Ffi.set_height(this, value); return value; }
 
+	extern inline public function free():Void {
+		flight._cpp._fn.Bitmap.freeRectangle(cast this);
+	}
+	extern inline public function createClipRegionFrom():cpp.Star<cpp.Void> {
+		return flight._cpp._fn.Clip.createClipRegionFromRectangle(cast this);
+	}
+	extern inline public function clipRegionContains(clip:cpp.Star<cpp.Void>):Bool {
+		return flight._cpp._fn.Clip.clipRegionContainsRectangle(clip, cast this);
+	}
+	extern inline public function clipRegionIntersects(clip:cpp.Star<cpp.Void>):Bool {
+		return flight._cpp._fn.Clip.clipRegionIntersectsRectangle(clip, cast this);
+	}
+	extern inline public function setClipRegionTo(out:cpp.Star<cpp.Void>):Void {
+		flight._cpp._fn.Clip.setClipRegionToRectangle(out, cast this);
+	}
+	extern inline public function createClipRegionFromRounded(radius:Float, tolerance:Float):cpp.Star<cpp.Void> {
+		return flight._cpp._fn.Clip.createClipRegionFromRoundedRectangle(cast this, radius, tolerance);
+	}
 	extern inline public function matrixTransform(matrix:flight._cpp.Matrix, source:flight._cpp.Rectangle):Void {
 		flight._cpp._fn.Geometry.matrixTransformRectangle(cast this, matrix, source);
 	}
@@ -159,9 +177,6 @@ abstract Rectangle(cpp.Star<cpp.Void>) {
 	extern inline public function release():Void {
 		flight._cpp._fn.Geometry.releaseRectangle(cast this);
 	}
-	extern inline public function free():Void {
-		flight._cpp._fn.Geometry.freeRectangle(cast this);
-	}
 	extern inline public function computeNodeBounds(source:cpp.Star<cpp.Void>, targetCoordinateSpace:cpp.Star<cpp.Void>):Void {
 		flight._cpp._fn.Node.computeNodeBoundsRectangle(cast this, source, targetCoordinateSpace);
 	}
@@ -203,6 +218,9 @@ abstract Rectangle(cpp.Star<cpp.Void>) {
 	}
 	extern inline public function computeTextLabelLocalBounds(source:cpp.Star<cpp.Void>):Void {
 		flight._cpp._fn.Text.computeTextLabelLocalBoundsRectangle(cast this, source);
+	}
+	extern inline public function computeTextBounds(spec:flight._cpp.TextBoundsSpec, layout:flight._cpp.TextLayoutResult):Void {
+		flight._cpp._fn.Textlayout.computeTextBoundsRectangle(cast this, spec, layout);
 	}
 	extern inline public function addTextureAtlasRegion(target:flight._cpp.TextureAtlas, pivot:flight._cpp.Vector2, name:cpp.ConstCharStar):Void {
 		flight._cpp._fn.TextureAtlas.addTextureAtlasRegionRectangle(target, cast this, pivot, name);

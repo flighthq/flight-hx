@@ -10,9 +10,6 @@ abstract Scene2D(Dynamic) {
 	inline public function enableSignals():Dynamic {
 		return flight._js._fn.Scene2D.enableScene2dSignals(cast this);
 	}
-	inline public function getRuntime():flight._js.Scene2DRuntime {
-		return flight._js._fn.Scene2D.getScene2dRuntime(cast this);
-	}
 	inline public function getSignals():Null<Dynamic> {
 		return flight._js._fn.Scene2D.getScene2dSignals(cast this);
 	}

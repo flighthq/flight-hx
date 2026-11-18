@@ -7,18 +7,6 @@ extern class Shading {
 	public static function createDissolveModifier():flight._hl.DissolveModifier;
 	@:hlNative("flight", "flight_create_emissive_modifier")
 	public static function createEmissiveModifier():flight._hl.EmissiveModifier;
-	@:hlNative("flight", "flight_get_emissive_modifier_facing_string")
-	public static function getEmissiveModifierFacingString(value:Int):hl.Bytes;
-	@:hlNative("flight", "flight_get_fog_modifier_mode_string")
-	public static function getFogModifierModeString(value:Int):hl.Bytes;
-	@:hlNative("flight", "flight_get_vertex_displace_modifier_source_string")
-	public static function getVertexDisplaceModifierSourceString(value:Int):hl.Bytes;
-	@:hlNative("flight", "flight_parse_emissive_modifier_facing")
-	public static function parseEmissiveModifierFacing(value:hl.Bytes):Int;
-	@:hlNative("flight", "flight_parse_fog_modifier_mode")
-	public static function parseFogModifierMode(value:hl.Bytes):Int;
-	@:hlNative("flight", "flight_parse_vertex_displace_modifier_source")
-	public static function parseVertexDisplaceModifierSource(value:hl.Bytes):Int;
 	@:hlNative("flight", "flight_create_env_reflect_modifier")
 	public static function createEnvReflectModifier():flight._hl.EnvReflectModifier;
 	@:hlNative("flight", "flight_create_fog_modifier")

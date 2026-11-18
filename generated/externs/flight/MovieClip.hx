@@ -91,40 +91,6 @@ extern inline function createMovieClip():Dynamic {
 }
 #end
 #if (js && flight_esm)
-extern inline function createMovieClipData():MovieClipData {
-	return flight._js._fn.MovieClip.createMovieClipData();
-}
-#else
-extern inline function createMovieClipData():MovieClipData {
-#if hl
-	return flight._hl._fn.MovieClip.createMovieClipData();
-#elseif cpp
-	return flight._cpp._fn.MovieClip.createMovieClipData();
-#elseif (js && flight_esm)
-	return flight._js._fn.MovieClip.createMovieClipData();
-#else
-	#error "flight.MovieClip: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
-extern inline function createMovieClipRuntime():MovieClipRuntime {
-	return flight._js._fn.MovieClip.createMovieClipRuntime();
-}
-#else
-extern inline function createMovieClipRuntime():MovieClipRuntime {
-#if hl
-	return flight._hl._fn.MovieClip.createMovieClipRuntime();
-#elseif cpp
-	return flight._cpp._fn.MovieClip.createMovieClipRuntime();
-#elseif (js && flight_esm)
-	return flight._js._fn.MovieClip.createMovieClipRuntime();
-#else
-	#error "flight.MovieClip: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
 extern inline function addMovieClipFrameScript(clip:Dynamic, frame:TimelineFrameArg, script:FrameScript):Void {
 	flight._js._fn.MovieClip.addMovieClipFrameScript(clip, frame, script);
 }
@@ -221,23 +187,6 @@ extern inline function getMovieClipFrameScript(clip:Dynamic, frame:TimelineFrame
 	return flight._cpp._fn.MovieClip.getMovieClipFrameScript(clip, frame);
 #elseif (js && flight_esm)
 	return flight._js._fn.MovieClip.getMovieClipFrameScript(clip, frame);
-#else
-	#error "flight.MovieClip: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
-extern inline function getMovieClipRuntime(source:MovieClip):MovieClipRuntime {
-	return flight._js._fn.MovieClip.getMovieClipRuntime(source);
-}
-#else
-extern inline function getMovieClipRuntime(source:MovieClip):MovieClipRuntime {
-#if hl
-	return flight._hl._fn.MovieClip.getMovieClipRuntime(source);
-#elseif cpp
-	return flight._cpp._fn.MovieClip.getMovieClipRuntime(source);
-#elseif (js && flight_esm)
-	return flight._js._fn.MovieClip.getMovieClipRuntime(source);
 #else
 	#error "flight.MovieClip: no backend for this target."
 #end
@@ -476,74 +425,6 @@ extern inline function explainSpritesheetTimelineSource(animation:Dynamic):Sprit
 	return flight._cpp._fn.MovieClip.explainSpritesheetTimelineSource(animation);
 #elseif (js && flight_esm)
 	return flight._js._fn.MovieClip.explainSpritesheetTimelineSource(animation);
-#else
-	#error "flight.MovieClip: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
-extern inline function getSpritesheetTimelineSourceUnsupportedFieldString(value:Dynamic):String {
-	return flight._js._fn.MovieClip.getSpritesheetTimelineSourceUnsupportedFieldString(value);
-}
-#else
-extern inline function getSpritesheetTimelineSourceUnsupportedFieldString(value:flight.SpritesheetTimelineSourceUnsupportedField):String {
-#if hl
-	return cast flight._hl._fn.MovieClip.getSpritesheetTimelineSourceUnsupportedFieldString(value);
-#elseif cpp
-	return cast flight._cpp._fn.MovieClip.getSpritesheetTimelineSourceUnsupportedFieldString(value);
-#elseif (js && flight_esm)
-	return cast flight._js._fn.MovieClip.getSpritesheetTimelineSourceUnsupportedFieldString(value);
-#else
-	#error "flight.MovieClip: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
-extern inline function parseSpritesheetTimelineSourceUnsupportedField(value:String):Null<Dynamic> {
-	return flight._js._fn.MovieClip.parseSpritesheetTimelineSourceUnsupportedField(value);
-}
-#else
-extern inline function parseSpritesheetTimelineSourceUnsupportedField(value:String):Int {
-#if hl
-	return flight._hl._fn.MovieClip.parseSpritesheetTimelineSourceUnsupportedField(cast value);
-#elseif cpp
-	return flight._cpp._fn.MovieClip.parseSpritesheetTimelineSourceUnsupportedField(cast value);
-#elseif (js && flight_esm)
-	return flight._js._fn.MovieClip.parseSpritesheetTimelineSourceUnsupportedField(value);
-#else
-	#error "flight.MovieClip: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
-extern inline function freeMovieClipData(ptr:MovieClipData):Void {
-	flight._js._fn.MovieClip.freeMovieClipData(ptr);
-}
-#else
-extern inline function freeMovieClipData(ptr:MovieClipData):Void {
-#if hl
-	flight._hl._fn.MovieClip.freeMovieClipData(ptr);
-#elseif cpp
-	flight._cpp._fn.MovieClip.freeMovieClipData(ptr);
-#elseif (js && flight_esm)
-	flight._js._fn.MovieClip.freeMovieClipData(ptr);
-#else
-	#error "flight.MovieClip: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
-extern inline function freeMovieClipRuntime(ptr:MovieClipRuntime):Void {
-	flight._js._fn.MovieClip.freeMovieClipRuntime(ptr);
-}
-#else
-extern inline function freeMovieClipRuntime(ptr:MovieClipRuntime):Void {
-#if hl
-	flight._hl._fn.MovieClip.freeMovieClipRuntime(ptr);
-#elseif cpp
-	flight._cpp._fn.MovieClip.freeMovieClipRuntime(ptr);
-#elseif (js && flight_esm)
-	flight._js._fn.MovieClip.freeMovieClipRuntime(ptr);
 #else
 	#error "flight.MovieClip: no backend for this target."
 #end

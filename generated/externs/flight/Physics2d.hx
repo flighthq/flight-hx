@@ -1157,23 +1157,6 @@ extern inline function isPhysics2dTimestepValid(dt:Float):Bool {
 }
 #end
 #if (js && flight_esm)
-extern inline function visitPhysics2dJointBaseNumberFields(fields:Physics2DJointFields, visit:Dynamic):Void {
-	flight._js._fn.Physics2d.visitPhysics2dJointBaseNumberFields(fields, visit);
-}
-#else
-extern inline function visitPhysics2dJointBaseNumberFields(fields:Physics2DJointFields, visitFn:Dynamic, visitCtx:Dynamic):Void {
-#if hl
-	flight._hl._fn.Physics2d.visitPhysics2dJointBaseNumberFields(fields, visitFn, visitCtx);
-#elseif cpp
-	flight._cpp._fn.Physics2d.visitPhysics2dJointBaseNumberFields(fields, visitFn, visitCtx);
-#elseif (js && flight_esm)
-	flight._js._fn.Physics2d.visitPhysics2dJointBaseNumberFields(fields, visitFn, visitCtx);
-#else
-	#error "flight.Physics2d: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
 extern inline function createPhysics2dCollider(local:CollisionShape2D):Dynamic {
 	return flight._js._fn.Physics2d.createPhysics2dCollider(local);
 }

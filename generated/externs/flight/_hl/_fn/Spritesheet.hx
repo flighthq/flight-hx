@@ -11,10 +11,6 @@ extern class Spritesheet {
 	public static function createSpritesheetAnimation():hl.Bytes;
 	@:hlNative("flight", "flight_create_spritesheet_animation_from_frame_names")
 	public static function createSpritesheetAnimationFromFrameNames(spritesheet:flight._hl.Spritesheet, pattern:flight._hl.SpritesheetFramePattern, options:flight._hl.SpritesheetAnimationFrameNameOptions):hl.Bytes;
-	@:hlNative("flight", "flight_get_spritesheet_animation_direction_string")
-	public static function getSpritesheetAnimationDirectionString(value:Int):hl.Bytes;
-	@:hlNative("flight", "flight_parse_spritesheet_animation_direction")
-	public static function parseSpritesheetAnimationDirection(value:hl.Bytes):Int;
 	@:hlNative("flight", "flight_create_spritesheet_animation_data")
 	public static function createSpritesheetAnimationData():flight._hl.SpritesheetAnimationData;
 	@:hlNative("flight", "flight_create_spritesheet_data")
@@ -57,12 +53,6 @@ extern class Spritesheet {
 	public static function stopSpritesheetPlayer(player:flight._hl.SpritesheetPlayer):Void;
 	@:hlNative("flight", "flight_update_spritesheet_player")
 	public static function updateSpritesheetPlayer(player:flight._hl.SpritesheetPlayer, deltaTime:Float):Bool;
-	@:hlNative("flight", "flight_get_spritesheet_validation_severity_string")
-	public static function getSpritesheetValidationSeverityString(value:Int):hl.Bytes;
-	@:hlNative("flight", "flight_parse_spritesheet_parse_diagnostic_severity")
-	public static function parseSpritesheetParseDiagnosticSeverity(value:hl.Bytes):Int;
-	@:hlNative("flight", "flight_parse_spritesheet_validation_severity")
-	public static function parseSpritesheetValidationSeverity(value:hl.Bytes):Int;
 	@:hlNative("flight", "flight_validate_spritesheet")
 	public static function validateSpritesheet(out:hl.Bytes, spritesheet:flight._hl.Spritesheet):Bool;
 	@:hlNative("flight", "flight_validate_spritesheet_data")

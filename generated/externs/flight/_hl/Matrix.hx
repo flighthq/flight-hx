@@ -125,15 +125,6 @@ abstract Matrix(hl.Bytes) {
 	inline public function setNodeLocal(target:hl.Bytes):Void {
 		flight._hl._fn.Node.setNodeLocalMatrix(target, cast this);
 	}
-	static inline public function createLottieGradient(start:hl.Bytes, startLen:Int, end:hl.Bytes, endLen:Int):flight._hl.Matrix {
-		return flight._hl._fn.Scene2dFormats.createLottieGradientMatrix(start, startLen, end, endLen);
-	}
-	static inline public function createSvgGradient(gradient:flight._hl.SvgGradient, path:flight._hl.Path):flight._hl.Matrix {
-		return flight._hl._fn.Scene2dFormats.createSvgGradientMatrix(gradient, path);
-	}
-	static inline public function createSvgViewBox(viewBox:hl.Bytes, viewBoxLen:Int, viewport:flight._hl.SvgViewport, preserveAspectRatioValue:hl.Bytes):flight._hl.Matrix {
-		return flight._hl._fn.Scene2dFormats.createSvgViewBoxMatrix(viewBox, viewBoxLen, viewport, preserveAspectRatioValue);
-	}
 	inline public function getSkeleton2dBoneWorld(skeleton:flight._hl.Skeleton2D, boneIndex:Int):Bool {
 		return flight._hl._fn.Skeleton2D.getSkeleton2dBoneWorldMatrix(cast this, skeleton, boneIndex);
 	}

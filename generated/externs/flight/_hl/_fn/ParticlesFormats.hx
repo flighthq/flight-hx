@@ -3,16 +3,12 @@ package flight._hl._fn;
 extern class ParticlesFormats {
 	@:hlNative("flight", "flight_detect_particle_format")
 	public static function detectParticleFormat(registry:flight._hl.ParticleFormatRegistry, text:hl.Bytes):flight._hl.ParticleFormatKind;
-	@:hlNative("flight", "flight_create_particle_format_registry")
-	public static function createParticleFormatRegistry():flight._hl.ParticleFormatRegistry;
 	@:hlNative("flight", "flight_detect_registered_particle_format")
 	public static function detectRegisteredParticleFormat(registry:flight._hl.ParticleFormatRegistry, text:hl.Bytes):flight._hl.ParticleFormatKind;
 	@:hlNative("flight", "flight_get_registered_particle_formats")
 	public static function getRegisteredParticleFormats(out:hl.Bytes, registry:flight._hl.ParticleFormatRegistry):Void;
 	@:hlNative("flight", "flight_parse_registered_particle_format")
 	public static function parseRegisteredParticleFormat(registry:flight._hl.ParticleFormatRegistry, text:hl.Bytes, kind:hl.Bytes, options:flight._hl.ParseParticleConfigOptions):flight._hl.ParticleConfigParseResult;
-	@:hlNative("flight", "flight_register_particle_format")
-	public static function registerParticleFormat(registry:flight._hl.ParticleFormatRegistry, kind:hl.Bytes, codec:flight._hl.ParticleFormatCodec):Void;
 	@:hlNative("flight", "flight_unregister_particle_format")
 	public static function unregisterParticleFormat(registry:flight._hl.ParticleFormatRegistry, kind:hl.Bytes):Bool;
 	@:hlNative("flight", "flight_parse_libgdx_particle")
@@ -39,22 +35,8 @@ extern class ParticlesFormats {
 	public static function parsePixiParticle(json:hl.Bytes):flight._hl.ParticleEmitterConfig;
 	@:hlNative("flight", "flight_parse_pixi_particle_document")
 	public static function parsePixiParticleDocument(json:hl.Bytes):flight._hl.PixiParseResult;
-	@:hlNative("flight", "flight_create_particle_all_formats")
-	public static function createParticleAllFormats():hl.Bytes;
 	@:hlNative("flight", "flight_apply_particle_import_options")
 	public static function applyParticleImportOptions(registry:flight._hl.ParticleFormatRegistry, options:flight._hl.ParticleImportOptions):Void;
-	@:hlNative("flight", "flight_get_libgdx_particle_format")
-	public static function getLibgdxParticleFormat():flight._hl.ParticleFormatDescriptor;
-	@:hlNative("flight", "flight_get_particle_designer_particle_format")
-	public static function getParticleDesignerParticleFormat():flight._hl.ParticleFormatDescriptor;
-	@:hlNative("flight", "flight_get_pixi_particle_format")
-	public static function getPixiParticleFormat():flight._hl.ParticleFormatDescriptor;
-	@:hlNative("flight", "flight_get_spine_particle_format")
-	public static function getSpineParticleFormat():flight._hl.ParticleFormatDescriptor;
-	@:hlNative("flight", "flight_get_starling_pex_particle_format")
-	public static function getStarlingPexParticleFormat():flight._hl.ParticleFormatDescriptor;
-	@:hlNative("flight", "flight_get_unity_particle_format")
-	public static function getUnityParticleFormat():flight._hl.ParticleFormatDescriptor;
 	@:hlNative("flight", "flight_register_built_in_particle_formats")
 	public static function registerBuiltInParticleFormats(registry:flight._hl.ParticleFormatRegistry):Void;
 	@:hlNative("flight", "flight_parse_spine_particle")
@@ -83,8 +65,6 @@ extern class ParticlesFormats {
 	public static function serializeUnityParticleDocument(config:flight._hl.ParticleEmitterConfig, existing:flight._hl.UnityParticleDocument, options:flight._hl.UnitySerializeOptions):flight._hl.ParticleSerializeResult;
 	@:hlNative("flight", "flight_free_particle_format_kind")
 	public static function freeParticleFormatKind(ptr:flight._hl.ParticleFormatKind):Void;
-	@:hlNative("flight", "flight_free_particle_format_registry")
-	public static function freeParticleFormatRegistry(ptr:flight._hl.ParticleFormatRegistry):Void;
 	@:hlNative("flight", "flight_free_particle_config_parse_result")
 	public static function freeParticleConfigParseResult(ptr:flight._hl.ParticleConfigParseResult):Void;
 	@:hlNative("flight", "flight_free_libgdx_parse_result")
@@ -95,8 +75,6 @@ extern class ParticlesFormats {
 	public static function freeParticleDesignerParseResult(ptr:flight._hl.ParticleDesignerParseResult):Void;
 	@:hlNative("flight", "flight_free_pixi_parse_result")
 	public static function freePixiParseResult(ptr:flight._hl.PixiParseResult):Void;
-	@:hlNative("flight", "flight_free_particle_format_descriptor")
-	public static function freeParticleFormatDescriptor(ptr:flight._hl.ParticleFormatDescriptor):Void;
 	@:hlNative("flight", "flight_free_spine_parse_result")
 	public static function freeSpineParseResult(ptr:flight._hl.SpineParseResult):Void;
 	@:hlNative("flight", "flight_free_starling_pex_parse_result")

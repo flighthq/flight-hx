@@ -120,40 +120,6 @@ extern inline function createTweenManager(options:TweenManagerOptions):TweenMana
 }
 #end
 #if (js && flight_esm)
-extern inline function defaultManager(context:TweenContext):TweenManager {
-	return flight._js._fn.Tween.defaultManager(context);
-}
-#else
-extern inline function defaultManager(context:TweenContext):TweenManager {
-#if hl
-	return flight._hl._fn.Tween.defaultManager(context);
-#elseif cpp
-	return flight._cpp._fn.Tween.defaultManager(context);
-#elseif (js && flight_esm)
-	return flight._js._fn.Tween.defaultManager(context);
-#else
-	#error "flight.Tween: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
-extern inline function createTweenContext():TweenContext {
-	return flight._js._fn.Tween.createTweenContext();
-}
-#else
-extern inline function createTweenContext():TweenContext {
-#if hl
-	return flight._hl._fn.Tween.createTweenContext();
-#elseif cpp
-	return flight._cpp._fn.Tween.createTweenContext();
-#elseif (js && flight_esm)
-	return flight._js._fn.Tween.createTweenContext();
-#else
-	#error "flight.Tween: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
 extern inline function updateTweens(manager:TweenManager, deltaTime:Float):Void {
 	flight._js._fn.Tween.updateTweens(manager, deltaTime);
 }
@@ -182,23 +148,6 @@ extern inline function freeTweenManager(ptr:TweenManager):Void {
 	flight._cpp._fn.Tween.freeTweenManager(ptr);
 #elseif (js && flight_esm)
 	flight._js._fn.Tween.freeTweenManager(ptr);
-#else
-	#error "flight.Tween: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
-extern inline function freeTweenContext(ptr:TweenContext):Void {
-	flight._js._fn.Tween.freeTweenContext(ptr);
-}
-#else
-extern inline function freeTweenContext(ptr:TweenContext):Void {
-#if hl
-	flight._hl._fn.Tween.freeTweenContext(ptr);
-#elseif cpp
-	flight._cpp._fn.Tween.freeTweenContext(ptr);
-#elseif (js && flight_esm)
-	flight._js._fn.Tween.freeTweenContext(ptr);
 #else
 	#error "flight.Tween: no backend for this target."
 #end

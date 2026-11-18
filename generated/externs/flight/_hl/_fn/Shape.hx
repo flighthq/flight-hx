@@ -25,8 +25,12 @@ extern class Shape {
 	public static function applyMorphShapeAnimationSample(sampled:hl.Bytes, sampledLen:Int, channel:flight._hl.AnimationChannel):Bool;
 	@:hlNative("flight", "flight_append_morph_shape_begin_fill")
 	public static function appendMorphShapeBeginFill(shape:hl.Bytes, start:flight._hl.MorphShapeColorEndpoint, end:flight._hl.MorphShapeColorEndpoint):Void;
+	@:hlNative("flight", "flight_append_morph_shape_begin_gradient_fill")
+	public static function appendMorphShapeBeginGradientFill(shape:hl.Bytes, gradientType:Int, start:flight._hl.MorphShapeGradientEndpoint, end:flight._hl.MorphShapeGradientEndpoint, spreadMethod:Int, interpolationMethod:Int):Bool;
 	@:hlNative("flight", "flight_append_morph_shape_begin_texture_fill")
 	public static function appendMorphShapeBeginTextureFill(shape:hl.Bytes, texture:hl.Bytes, startMatrix:flight._hl.Matrix, endMatrix:flight._hl.Matrix):Void;
+	@:hlNative("flight", "flight_append_morph_shape_line_gradient_style")
+	public static function appendMorphShapeLineGradientStyle(shape:hl.Bytes, gradientType:Int, start:flight._hl.MorphShapeGradientEndpoint, end:flight._hl.MorphShapeGradientEndpoint, spreadMethod:Int, interpolationMethod:Int):Bool;
 	@:hlNative("flight", "flight_append_morph_shape_line_style")
 	public static function appendMorphShapeLineStyle(shape:hl.Bytes, start:flight._hl.MorphShapeLineEndpoint, end:flight._hl.MorphShapeLineEndpoint, pixelHinting:Int, scaleMode:Int, caps:Int, joints:Int, miterLimit:Float):Void;
 	@:hlNative("flight", "flight_append_morph_shape_line_texture_style")

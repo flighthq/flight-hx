@@ -22,9 +22,6 @@ abstract Tilemap(Dynamic) {
 	inline public function getRowAtY(y:Float):Int {
 		return flight._js._fn.Tilemap.getTilemapRowAtY(cast this, y);
 	}
-	inline public function getRuntime():flight._js.TilemapRuntime {
-		return flight._js._fn.Tilemap.getTilemapRuntime(cast this);
-	}
 	inline public function getTile(column:Int, row:Int):Int {
 		return flight._js._fn.Tilemap.getTilemapTile(cast this, column, row);
 	}

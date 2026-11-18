@@ -2,14 +2,10 @@ package flight._js._fn;
 
 @:jsRequire("@flighthq/particleemitter")
 extern class Particleemitter {
-	@:native("createParticleEmitterData")
-	public static function createParticleEmitterData():flight._js.ParticleEmitterData;
 	@:native("computeParticleEmitter2DLocalBoundsRectangle")
 	public static function computeParticleEmitter2dLocalBoundsRectangle(out:flight._js.Rectangle, source:flight._js.ParticleEmitter2D):Void;
 	@:native("createParticleEmitter2D")
 	public static function createParticleEmitter2d():Dynamic;
-	@:native("createParticleEmitter2DRuntime")
-	public static function createParticleEmitter2dRuntime():flight._js.Node2DRuntime;
 	@:native("createParticleEmitter3D")
 	public static function createParticleEmitter3d():Dynamic;
 	@:native("appendParticleEmitter2DParticle")
@@ -32,10 +28,6 @@ extern class Particleemitter {
 	public static function getParticleEmitter2dParticleId(source:Dynamic, index:Int):Int;
 	@:native("getParticleEmitter2DParticleVelocity")
 	public static function getParticleEmitter2dParticleVelocity(out:flight._js.Vector2, source:Dynamic, index:Int):Bool;
-	@:native("getParticleEmitter2DRuntime")
-	public static function getParticleEmitter2dRuntime(source:flight._js.ParticleEmitter2D):flight._js.ParticleEmitter2DRuntime;
-	@:native("getParticleEmitter3DRuntime")
-	public static function getParticleEmitter3dRuntime(source:Dynamic):flight._js.Node3DRuntime;
 	@:native("isParticleEmitter3D")
 	public static function isParticleEmitter3d(node:Dynamic):Bool;
 	@:native("removeParticleEmitter2DParticle")
@@ -82,8 +74,6 @@ extern class Particleemitter {
 	public static function setParticleEmitter3dParticleColor(target:Dynamic, index:Int, r:Float, g:Float, b:Float):Void;
 	@:native("setParticleEmitter3DParticleVelocity")
 	public static function setParticleEmitter3dParticleVelocity(target:Dynamic, index:Int, vx:Float, vy:Float, vz:Float):Void;
-	@:native("sortParticleEmitter3DByViewDepth")
-	public static function sortParticleEmitter3dByViewDepth(emitter:Dynamic, viewMatrix:Dynamic):Void;
 	@:native("sortParticleEmitter3DIndicesByViewDepth")
 	public static function sortParticleEmitter3dIndicesByViewDepth(outIndices:Dynamic, outViewDepths:Dynamic, source:Dynamic, positionToView:Dynamic):Bool;
 	@:native("prewarmParticleEmitter2D")
@@ -102,8 +92,4 @@ extern class Particleemitter {
 	public static function isParticleEmitter3dComplete(emitter:flight._js.ParticleEmitter3D, state:flight._js.ParticleEmitterState, config:flight._js.ParticleEmitterConfig):Bool;
 	@:native("updateParticleEmitter3D")
 	public static function updateParticleEmitter3d(emitter:Dynamic, state:flight._js.ParticleEmitterState, config:flight._js.ParticleEmitterConfig, deltaTime:Float, callbacks:Null<flight._js.ParticleEmitterCallbacks>):Void;
-	/** Native allocation release is unnecessary on JavaScript. */
-	public static inline function freeParticleEmitterData(ptr:flight._js.ParticleEmitterData):Void {}
-	/** Native allocation release is unnecessary on JavaScript. */
-	public static inline function freeNode2Druntime(ptr:flight._js.Node2DRuntime):Void {}
 }

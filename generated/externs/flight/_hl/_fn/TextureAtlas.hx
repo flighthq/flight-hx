@@ -45,16 +45,12 @@ extern class TextureAtlas {
 	public static function getTextureAtlasRegionOrdinal(region:flight._hl.TextureAtlasRegion):Float;
 	@:hlNative("flight", "flight_get_texture_atlas_region_texture")
 	public static function getTextureAtlasRegionTexture(atlas:hl.Bytes, regionId:Int, guards:flight._hl.TextureAtlasGuardState):hl.Bytes;
-	@:hlNative("flight", "flight_get_texture_atlas_region_texture_status_string")
-	public static function getTextureAtlasRegionTextureStatusString(value:Int):hl.Bytes;
 	@:hlNative("flight", "flight_get_texture_atlas_region_uv")
 	public static function getTextureAtlasRegionUv(out:flight._hl.Rectangle, region:flight._hl.TextureAtlasRegion, imageWidth:Single, imageHeight:Single):Void;
 	@:hlNative("flight", "flight_get_texture_atlas_region_uv_quad")
 	public static function getTextureAtlasRegionUvQuad(out:hl.Bytes, region:flight._hl.TextureAtlasRegion, imageWidth:Single, imageHeight:Single):Void;
 	@:hlNative("flight", "flight_has_texture_atlas_region")
 	public static function hasTextureAtlasRegion(atlas:flight._hl.TextureAtlas, name:hl.Bytes):Bool;
-	@:hlNative("flight", "flight_parse_texture_atlas_region_texture_status")
-	public static function parseTextureAtlasRegionTextureStatus(value:hl.Bytes):Int;
 	@:hlNative("flight", "flight_remove_texture_atlas_region")
 	public static function removeTextureAtlasRegion(target:flight._hl.TextureAtlas, id:Int):Bool;
 	@:hlNative("flight", "flight_set_texture_atlas_region")

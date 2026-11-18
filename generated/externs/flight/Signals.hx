@@ -18,40 +18,6 @@ extern inline function disconnectSignalConnection(connection:SignalConnection):V
 }
 #end
 #if (js && flight_esm)
-extern inline function isSignalConnectionConnected(connection:SignalConnection):Bool {
-	return flight._js._fn.Signals.isSignalConnectionConnected(connection);
-}
-#else
-extern inline function isSignalConnectionConnected(connection:SignalConnection):Bool {
-#if hl
-	return flight._hl._fn.Signals.isSignalConnectionConnected(connection);
-#elseif cpp
-	return flight._cpp._fn.Signals.isSignalConnectionConnected(connection);
-#elseif (js && flight_esm)
-	return flight._js._fn.Signals.isSignalConnectionConnected(connection);
-#else
-	#error "flight.Signals: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
-extern inline function isSignalConnectionPaused(connection:SignalConnection):Bool {
-	return flight._js._fn.Signals.isSignalConnectionPaused(connection);
-}
-#else
-extern inline function isSignalConnectionPaused(connection:SignalConnection):Bool {
-#if hl
-	return flight._hl._fn.Signals.isSignalConnectionPaused(connection);
-#elseif cpp
-	return flight._cpp._fn.Signals.isSignalConnectionPaused(connection);
-#elseif (js && flight_esm)
-	return flight._js._fn.Signals.isSignalConnectionPaused(connection);
-#else
-	#error "flight.Signals: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
 extern inline function pauseSignalConnection(connection:SignalConnection):Void {
 	flight._js._fn.Signals.pauseSignalConnection(connection);
 }

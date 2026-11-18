@@ -22,9 +22,6 @@ abstract Scene2D(cpp.Star<cpp.Void>) {
 	extern inline public function enableSignals():cpp.Star<cpp.Void> {
 		return flight._cpp._fn.Scene2D.enableScene2dSignals(cast this);
 	}
-	extern inline public function getRuntime():flight._cpp.Scene2DRuntime {
-		return flight._cpp._fn.Scene2D.getScene2dRuntime(cast this);
-	}
 	extern inline public function getSignals():cpp.Star<cpp.Void> {
 		return flight._cpp._fn.Scene2D.getScene2dSignals(cast this);
 	}

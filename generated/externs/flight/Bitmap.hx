@@ -686,6 +686,23 @@ extern inline function getBitmapCoverage(source:Bitmap, backgroundColor:Int, cha
 }
 #end
 #if (js && flight_esm)
+extern inline function cropBitmap(source:Bitmap, rect:Rectangle):Bitmap {
+	return flight._js._fn.Bitmap.cropBitmap(source, rect);
+}
+#else
+extern inline function cropBitmap(source:Bitmap, rect:Rectangle):Bitmap {
+#if hl
+	return flight._hl._fn.Bitmap.cropBitmap(source, rect);
+#elseif cpp
+	return flight._cpp._fn.Bitmap.cropBitmap(source, rect);
+#elseif (js && flight_esm)
+	return flight._js._fn.Bitmap.cropBitmap(source, rect);
+#else
+	#error "flight.Bitmap: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
 extern inline function extendBitmap(source:Bitmap, left:Int, top:Int, right:Int, bottom:Int, edgeMode:Dynamic, fillColor:Int):Bitmap {
 	return flight._js._fn.Bitmap.extendBitmap(source, left, top, right, bottom, edgeMode, fillColor);
 }
@@ -1315,23 +1332,6 @@ extern inline function setBitmapPixelRgb(out:Bitmap, x:Int, y:Int, color:Int):Vo
 }
 #end
 #if (js && flight_esm)
-extern inline function toClampedU8(value:Float):Int {
-	return flight._js._fn.Bitmap.toClampedU8(value);
-}
-#else
-extern inline function toClampedU8(value:Float):Int {
-#if hl
-	return flight._hl._fn.Bitmap.toClampedU8(value);
-#elseif cpp
-	return flight._cpp._fn.Bitmap.toClampedU8(value);
-#elseif (js && flight_esm)
-	return flight._js._fn.Bitmap.toClampedU8(value);
-#else
-	#error "flight.Bitmap: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
 extern inline function pixelateBitmap(out:Dynamic, source:BitmapRegion, blockSize:Int):Void {
 	flight._js._fn.Bitmap.pixelateBitmap(out, source, blockSize);
 }
@@ -1343,6 +1343,23 @@ extern inline function pixelateBitmap(out:Dynamic, outLen:Int, source:BitmapRegi
 	flight._cpp._fn.Bitmap.pixelateBitmap(out, outLen, source, blockSize);
 #elseif (js && flight_esm)
 	flight._js._fn.Bitmap.pixelateBitmap(out, outLen, source, blockSize);
+#else
+	#error "flight.Bitmap: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function getBitmapColorBoundsRectangle(source:BitmapRegion, mask:Int, color:Int, findColor:Bool):Null<Rectangle> {
+	return flight._js._fn.Bitmap.getBitmapColorBoundsRectangle(source, mask, color, findColor);
+}
+#else
+extern inline function getBitmapColorBoundsRectangle(source:BitmapRegion, mask:Int, color:Int, findColor:Bool):Rectangle {
+#if hl
+	return flight._hl._fn.Bitmap.getBitmapColorBoundsRectangle(source, mask, color, findColor);
+#elseif cpp
+	return flight._cpp._fn.Bitmap.getBitmapColorBoundsRectangle(source, mask, color, findColor);
+#elseif (js && flight_esm)
+	return flight._js._fn.Bitmap.getBitmapColorBoundsRectangle(source, mask, color, findColor);
 #else
 	#error "flight.Bitmap: no backend for this target."
 #end
@@ -1768,6 +1785,23 @@ extern inline function freeBitmapHistogram(ptr:BitmapHistogram):Void {
 	flight._cpp._fn.Bitmap.freeBitmapHistogram(ptr);
 #elseif (js && flight_esm)
 	flight._js._fn.Bitmap.freeBitmapHistogram(ptr);
+#else
+	#error "flight.Bitmap: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeRectangle(ptr:Rectangle):Void {
+	flight._js._fn.Bitmap.freeRectangle(ptr);
+}
+#else
+extern inline function freeRectangle(ptr:Rectangle):Void {
+#if hl
+	flight._hl._fn.Bitmap.freeRectangle(ptr);
+#elseif cpp
+	flight._cpp._fn.Bitmap.freeRectangle(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Bitmap.freeRectangle(ptr);
 #else
 	#error "flight.Bitmap: no backend for this target."
 #end

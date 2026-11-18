@@ -5,8 +5,6 @@ extern class TextureatlasFormats {
 	public static function parseTextureAtlasAsepriteDocument(atlas:flight._hl.TextureAtlas, doc:flight._hl.TextureAtlasAsepriteDocument):Void;
 	@:hlNative("flight", "flight_parse_texture_atlas_aseprite_json")
 	public static function parseTextureAtlasAsepriteJson(atlas:flight._hl.TextureAtlas, json:hl.Bytes):Void;
-	@:hlNative("flight", "flight_create_texture_atlas_format_registry")
-	public static function createTextureAtlasFormatRegistry():flight._hl.TextureAtlasFormatRegistry;
 	@:hlNative("flight", "flight_apply_texture_atlas_import_options")
 	public static function applyTextureAtlasImportOptions(registry:flight._hl.TextureAtlasFormatRegistry, options:flight._hl.TextureAtlasImportOptions):Void;
 	@:hlNative("flight", "flight_aseprite_texture_atlas_format")
@@ -37,12 +35,6 @@ extern class TextureatlasFormats {
 	public static function parseTexturePackerAtlasDocument(atlas:flight._hl.TextureAtlas, doc:flight._hl.TexturePackerAtlasDocument, options:flight._hl.TexturePackerAtlasParseOptions):Void;
 	@:hlNative("flight", "flight_parse_texture_packer_atlas_json")
 	public static function parseTexturePackerAtlasJson(atlas:flight._hl.TextureAtlas, json:hl.Bytes, options:flight._hl.TexturePackerAtlasParseOptions):Void;
-	@:hlNative("flight", "flight_get_texture_atlas_frame_tag_direction_string")
-	public static function getTextureAtlasFrameTagDirectionString(value:Int):hl.Bytes;
-	@:hlNative("flight", "flight_parse_texture_atlas_frame_tag_direction")
-	public static function parseTextureAtlasFrameTagDirection(value:hl.Bytes):Int;
-	@:hlNative("flight", "flight_free_texture_atlas_format_registry")
-	public static function freeTextureAtlasFormatRegistry(ptr:flight._hl.TextureAtlasFormatRegistry):Void;
 	@:hlNative("flight", "flight_free_texture_atlas_format_kind")
 	public static function freeTextureAtlasFormatKind(ptr:flight._hl.TextureAtlasFormatKind):Void;
 }

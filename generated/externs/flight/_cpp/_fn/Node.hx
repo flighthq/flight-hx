@@ -95,8 +95,6 @@ extern class Node {
 	public static function swapNodeChildren(target:cpp.Star<cpp.Void>, child1:cpp.Star<cpp.Void>, child2:cpp.Star<cpp.Void>):Void;
 	@:native("flight_swap_node_children_at")
 	public static function swapNodeChildrenAt(target:cpp.Star<cpp.Void>, index1:Int, index2:Int):Void;
-	@:native("flight_create_node_runtime")
-	public static function createNodeRuntime(methods:flight._cpp.NodeRuntimeMethods):flight._cpp.NodeRuntime;
 	@:native("flight_create_node_signals")
 	public static function createNodeSignals():cpp.Star<cpp.Void>;
 	@:native("flight_default_node_runtime_can_add_child")
@@ -105,8 +103,6 @@ extern class Node {
 	public static function disposeNode(target:cpp.Star<cpp.Void>):Void;
 	@:native("flight_enable_node_signals")
 	public static function enableNodeSignals(source:cpp.Star<cpp.Void>):cpp.Star<cpp.Void>;
-	@:native("flight_get_node_runtime")
-	public static function getNodeRuntime(source:cpp.Star<cpp.Void>):flight._cpp.NodeRuntime;
 	@:native("flight_get_node_signals")
 	public static function getNodeSignals(source:cpp.Star<cpp.Void>):cpp.Star<cpp.Void>;
 	@:native("flight_set_node_enabled")
@@ -217,8 +213,6 @@ extern class Node {
 	public static function createViewport():flight._cpp.Viewport;
 	@:native("flight_get_viewport_aspect")
 	public static function getViewportAspect(viewport:flight._cpp.Viewport):Single;
-	@:native("flight_free_node_runtime")
-	public static function freeNodeRuntime(ptr:flight._cpp.NodeRuntime):Void;
 	@:native("flight_free_node_order_list")
 	public static function freeNodeOrderList(ptr:flight._cpp.NodeOrderList):Void;
 	@:native("flight_free_viewport")

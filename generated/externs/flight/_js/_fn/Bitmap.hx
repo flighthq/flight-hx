@@ -80,6 +80,8 @@ extern class Bitmap {
 	public static function copyBitmapPixels(dest:flight._js.BitmapRegion, source:flight._js.BitmapRegion, composite:Bool):Void;
 	@:native("getBitmapCoverage")
 	public static function getBitmapCoverage(source:flight._js.Bitmap, backgroundColor:Int, channelTolerance:Int):Float;
+	@:native("cropBitmap")
+	public static function cropBitmap(source:flight._js.Bitmap, rect:flight._js.Rectangle):flight._js.Bitmap;
 	@:native("extendBitmap")
 	public static function extendBitmap(source:flight._js.Bitmap, left:Int, top:Int, right:Int, bottom:Int, edgeMode:Dynamic, fillColor:Int):flight._js.Bitmap;
 	@:native("trimBitmap")
@@ -154,10 +156,10 @@ extern class Bitmap {
 	public static function setBitmapPixel(out:flight._js.Bitmap, x:Int, y:Int, color:Int):Void;
 	@:native("setBitmapPixelRgb")
 	public static function setBitmapPixelRgb(out:flight._js.Bitmap, x:Int, y:Int, color:Int):Void;
-	@:native("toClampedU8")
-	public static function toClampedU8(value:Float):Int;
 	@:native("pixelateBitmap")
 	public static function pixelateBitmap(out:Dynamic, source:flight._js.BitmapRegion, blockSize:Int):Void;
+	@:native("getBitmapColorBoundsRectangle")
+	public static function getBitmapColorBoundsRectangle(source:flight._js.BitmapRegion, mask:Int, color:Int, findColor:Bool):Null<flight._js.Rectangle>;
 	@:native("createBitmapRegion")
 	public static function createBitmapRegion(bitmap:flight._js.Bitmap, x:Int, y:Int, width:Int, height:Int):flight._js.BitmapRegion;
 	@:native("setBitmapRegion")
@@ -208,6 +210,8 @@ extern class Bitmap {
 	public static inline function freeBitmapFingerprint(ptr:flight._js.BitmapFingerprint):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeBitmapHistogram(ptr:flight._js.BitmapHistogram):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeRectangle(ptr:flight._js.Rectangle):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeBitmapRegion(ptr:flight._js.BitmapRegion):Void {}
 }

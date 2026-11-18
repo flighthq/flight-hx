@@ -31,6 +31,9 @@ abstract Path(cpp.Star<cpp.Void>) {
 	extern inline public function fitCurves(tolerance:Float, out:flight._cpp.Path, flattenTolerance:Float):Void {
 		flight._cpp._fn.Path.fitPathCurves(cast this, tolerance, out, flattenTolerance);
 	}
+	extern inline public function getBounds(out:flight._cpp.Rectangle):Bool {
+		return flight._cpp._fn.Path.getPathBounds(cast this, out);
+	}
 	extern inline public function getContourLengths(tolerance:Float):cpp.Star<cpp.Void> {
 		return flight._cpp._fn.Path.getPathContourLengths(cast this, tolerance);
 	}
@@ -168,9 +171,6 @@ abstract Path(cpp.Star<cpp.Void>) {
 	}
 	extern inline public function formatSvgData(options:flight._cpp.SvgPathDataFormatOptions):cpp.ConstCharStar {
 		return flight._cpp._fn.PathFormats.formatSvgPathData(cast this, options);
-	}
-	static extern inline public function createLottieBezier(value:flight._cpp.LottieShapePath):flight._cpp.Path {
-		return flight._cpp._fn.Scene2dFormats.createLottieBezierPath(value);
 	}
 	extern inline public function compactStroke(path:flight._cpp.Path, style:flight._cpp.StrokeStyle, tolerance:Float):Void {
 		flight._cpp._fn.Shape.compactStrokePath(cast this, path, style, tolerance);

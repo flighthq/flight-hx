@@ -9,10 +9,6 @@ extern class MovieClip {
 	public static function enableMovieClipGuards(guards:flight._hl.MovieClipGuardState, logState:hl.Bytes, clockFn:hl.Bytes, clockCtx:hl.Bytes):Void;
 	@:hlNative("flight", "flight_create_movie_clip")
 	public static function createMovieClip():hl.Bytes;
-	@:hlNative("flight", "flight_create_movie_clip_data")
-	public static function createMovieClipData():flight._hl.MovieClipData;
-	@:hlNative("flight", "flight_create_movie_clip_runtime")
-	public static function createMovieClipRuntime():flight._hl.MovieClipRuntime;
 	@:hlNative("flight", "flight_add_movie_clip_frame_script")
 	public static function addMovieClipFrameScript(clip:hl.Bytes, frame:flight._hl.TimelineFrameArg, script:flight._hl.FrameScript):Void;
 	@:hlNative("flight", "flight_dispose_movie_clip_signals")
@@ -25,8 +21,6 @@ extern class MovieClip {
 	public static function getMovieClipCurrentLabel(clip:hl.Bytes):flight._hl.TimelineLabel;
 	@:hlNative("flight", "flight_get_movie_clip_frame_script")
 	public static function getMovieClipFrameScript(clip:hl.Bytes, frame:flight._hl.TimelineFrameArg):flight._hl.FrameScript;
-	@:hlNative("flight", "flight_get_movie_clip_runtime")
-	public static function getMovieClipRuntime(source:flight._hl.MovieClip):flight._hl.MovieClipRuntime;
 	@:hlNative("flight", "flight_get_movie_clip_signals")
 	public static function getMovieClipSignals(clip:hl.Bytes):flight._hl.MovieClipSignals;
 	@:hlNative("flight", "flight_get_movie_clip_total_frames")
@@ -55,14 +49,6 @@ extern class MovieClip {
 	public static function createSpritesheetTimelineSource(guards:flight._hl.MovieClipGuardState, spritesheet:hl.Bytes, animation:hl.Bytes):flight._hl.TimelineSourceRef;
 	@:hlNative("flight", "flight_explain_spritesheet_timeline_source")
 	public static function explainSpritesheetTimelineSource(animation:hl.Bytes):flight._hl.SpritesheetTimelineSourceExplanation;
-	@:hlNative("flight", "flight_get_spritesheet_timeline_source_unsupported_field_string")
-	public static function getSpritesheetTimelineSourceUnsupportedFieldString(value:Int):hl.Bytes;
-	@:hlNative("flight", "flight_parse_spritesheet_timeline_source_unsupported_field")
-	public static function parseSpritesheetTimelineSourceUnsupportedField(value:hl.Bytes):Int;
-	@:hlNative("flight", "flight_free_movie_clip_data")
-	public static function freeMovieClipData(ptr:flight._hl.MovieClipData):Void;
-	@:hlNative("flight", "flight_free_movie_clip_runtime")
-	public static function freeMovieClipRuntime(ptr:flight._hl.MovieClipRuntime):Void;
 	@:hlNative("flight", "flight_free_movie_clip_signals")
 	public static function freeMovieClipSignals(ptr:flight._hl.MovieClipSignals):Void;
 	@:hlNative("flight", "flight_free_timeline_label")

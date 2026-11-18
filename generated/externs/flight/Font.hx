@@ -69,40 +69,6 @@ extern inline function isFontLoaded(backend:HostFontLoadingCapability, family:St
 }
 #end
 #if (js && flight_esm)
-extern inline function getGlyphRasterizerOperationString(value:Dynamic):String {
-	return flight._js._fn.Font.getGlyphRasterizerOperationString(value);
-}
-#else
-extern inline function getGlyphRasterizerOperationString(value:flight.GlyphRasterizerOperation):String {
-#if hl
-	return cast flight._hl._fn.Font.getGlyphRasterizerOperationString(value);
-#elseif cpp
-	return cast flight._cpp._fn.Font.getGlyphRasterizerOperationString(value);
-#elseif (js && flight_esm)
-	return cast flight._js._fn.Font.getGlyphRasterizerOperationString(value);
-#else
-	#error "flight.Font: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
-extern inline function parseGlyphRasterizerOperation(value:String):Null<Dynamic> {
-	return flight._js._fn.Font.parseGlyphRasterizerOperation(value);
-}
-#else
-extern inline function parseGlyphRasterizerOperation(value:String):Int {
-#if hl
-	return flight._hl._fn.Font.parseGlyphRasterizerOperation(cast value);
-#elseif cpp
-	return flight._cpp._fn.Font.parseGlyphRasterizerOperation(cast value);
-#elseif (js && flight_esm)
-	return flight._js._fn.Font.parseGlyphRasterizerOperation(value);
-#else
-	#error "flight.Font: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
 extern inline function freeFontResource(ptr:FontResource):Void {
 	flight._js._fn.Font.freeFontResource(ptr);
 }
