@@ -134,6 +134,27 @@ index 821c83e722eca8e6bef1bb05aa2af7fa629da900..e94ce137a3252147f7e515f3d2c1a95f
              }
              continue;
          }
+diff --git a/crates/flight-ffi/src/generic_carrier_test.rs b/crates/flight-ffi/src/generic_carrier_test.rs
+index d65159ec7341ae52ce1f2243655a6e5f32d585f5..ecd07735fd6503963b927d3b2de084b6576d676b 100644
+--- a/crates/flight-ffi/src/generic_carrier_test.rs
++++ b/crates/flight-ffi/src/generic_carrier_test.rs
+@@ -806,14 +806,8 @@ mod owned_ref_return_lifecycle {
+     fn paired_free_releases_exactly_the_returned_arc_owner() {
+         let handle = unsafe { flight_create_command_history() };
+         assert!(!handle.is_null());
+-        let history = unsafe {
+-            &*handle
+-                .cast::<flight_sdk::Ref<flight_sdk::CommandHistory>>()
+-                .cast_const()
+-        };
+-        assert_eq!(Arc::strong_count(history), 1);
+-
+-        let observer = Arc::clone(history);
++        let observer = unsafe { hx_ref::<flight_sdk::Ref<flight_sdk::CommandHistory>>(handle) };
++        // One owner is in the opaque handle and one is this observer.
+         assert_eq!(Arc::strong_count(&observer), 2);
+         unsafe { flight_free_command_history_ref(handle.cast()) };
+         assert_eq!(Arc::strong_count(&observer), 1);
 diff --git a/crates/flight-ffi/src/lib.rs b/crates/flight-ffi/src/lib.rs
 index 1c8643fbf0932e49761bd0be7f753eafe12192e5..e9bba9e457c9336de3dac2037c1c3ceab58a4e9c 100644
 --- a/crates/flight-ffi/src/lib.rs

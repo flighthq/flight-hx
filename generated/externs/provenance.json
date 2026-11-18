@@ -26,7 +26,7 @@
       },
       {
         "path": "patches/flight/0010-haxe-owned-carriers.patch",
-        "sha256": "23b26756a29adc0639e658554af20edabbe29ef0aa429e00b8dd7f06036c4257"
+        "sha256": "2a87e1bf47cece6cbde406313c2bf8e4756c71b8608b35856f87025251815382"
       }
     ]
   },
