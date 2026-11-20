@@ -63,10 +63,16 @@ extern class Input {
 	public static function createInputKeyRepeatTimer(options:flight._hl.InputKeyRepeatOptions):hl.Bytes;
 	@:hlNative("flight", "flight_advance_input_key_repeat_timer")
 	public static function advanceInputKeyRepeatTimer(timer:hl.Bytes, nowMs:Float):Void;
-	@:hlNative("flight", "flight_start_input_key_repeat_timer")
-	public static function startInputKeyRepeatTimer(timer:hl.Bytes, callback_:flight._hl.InputRepeatCallback, nowMs:Float):Void;
 	@:hlNative("flight", "flight_stop_input_key_repeat_timer")
 	public static function stopInputKeyRepeatTimer(timer:hl.Bytes):Void;
+	@:hlNative("flight", "flight_free_input_manager_ref")
+	public static function freeInputManagerRef(ptr:flight._hl.InputManager):Void;
+	@:hlNative("flight", "flight_free_input_state_ref")
+	public static function freeInputStateRef(ptr:flight._hl.InputState):Void;
 	@:hlNative("flight", "flight_free_input_disposer")
 	public static function freeInputDisposer(ptr:flight._hl.InputDisposer):Void;
+	@:hlNative("flight", "flight_free_input_target_handle_ref")
+	public static function freeInputTargetHandleRef(ptr:flight._hl.InputTargetHandle):Void;
+	@:hlNative("flight", "flight_free_input_key_repeat_timer_ref")
+	public static function freeInputKeyRepeatTimerRef(ptr:flight._hl.InputKeyRepeatTimer):Void;
 }

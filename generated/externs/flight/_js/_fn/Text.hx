@@ -152,4 +152,12 @@ extern class Text {
 	public static function getTextLayoutMetrics(out:flight._js.TextMetrics, source:Dynamic):Void;
 	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeTextLabelContentExplanation(ptr:flight._js.TextLabelContentExplanation):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeNativeTextStyleRef(ptr:flight._js.NativeTextStyle):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeTextFieldSignalsRef(ptr:flight._js.TextFieldSignals):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeTextFormatRef(ptr:flight._js.TextFormat):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeTextInputStateRef(ptr:flight._js.TextInputState):Void {}
 }

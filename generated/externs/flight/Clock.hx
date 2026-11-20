@@ -243,3 +243,20 @@ extern inline function setClockScale(clock:Clock, scale:Float):Void {
 #end
 }
 #end
+#if (js && flight_esm)
+extern inline function freeClockRef(ptr:Clock):Void {
+	flight._js._fn.Clock.freeClockRef(ptr);
+}
+#else
+extern inline function freeClockRef(ptr:Clock):Void {
+#if hl
+	flight._hl._fn.Clock.freeClockRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Clock.freeClockRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Clock.freeClockRef(ptr);
+#else
+	#error "flight.Clock: no backend for this target."
+#end
+}
+#end

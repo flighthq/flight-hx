@@ -39,6 +39,8 @@ extern class Shading {
 	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeFogModifier(ptr:flight._js.FogModifier):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeModifierDefinitionRef(ptr:flight._js.ModifierDefinition):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeRimModifier(ptr:flight._js.RimModifier):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeShadedMaterial(ptr:flight._js.ShadedMaterial):Void {}

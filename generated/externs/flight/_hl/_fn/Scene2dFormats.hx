@@ -4,7 +4,7 @@ extern class Scene2dFormats {
 	@:hlNative("flight", "flight_get_lottie_feature_names")
 	public static function getLottieFeatureNames(out:hl.Bytes):Void;
 	@:hlNative("flight", "flight_apply_animation_clip_to_lottie_document")
-	public static function applyAnimationClipToLottieDocument(clip:flight._hl.AnimationClip, time:Single):Void;
+	public static function applyAnimationClipToLottieDocument(clip:flight._hl.AnimationClip, time:Float):Void;
 	@:hlNative("flight", "flight_register_all_lottie_handlers")
 	public static function registerAllLottieHandlers(registry:flight._hl.LottieRegistry):Void;
 	@:hlNative("flight", "flight_register_lottie_layer_handlers")
@@ -38,19 +38,19 @@ extern class Scene2dFormats {
 	@:hlNative("flight", "flight_register_lottie_shape_item_handlers")
 	public static function registerLottieShapeItemHandlers(registry:flight._hl.LottieRegistry):Void;
 	@:hlNative("flight", "flight_apply_animation_clip_to_rive_document")
-	public static function applyAnimationClipToRiveDocument(clip:flight._hl.AnimationClip, time:Single):Void;
+	public static function applyAnimationClipToRiveDocument(clip:flight._hl.AnimationClip, time:Float):Void;
 	@:hlNative("flight", "flight_register_rive_animation_handlers")
 	public static function registerRiveAnimationHandlers(registry:flight._hl.RiveImportRegistry):Void;
 	@:hlNative("flight", "flight_create_rive_image_sprite")
-	public static function createRiveImageSprite(name:hl.Bytes, assetIndex:Int):hl.Bytes;
+	public static function createRiveImageSprite(name:hl.Bytes, assetIndex:Int):flight._hl.FlightNode;
 	@:hlNative("flight", "flight_get_rive_image_asset_index")
-	public static function getRiveImageAssetIndex(node:hl.Bytes):Int;
+	public static function getRiveImageAssetIndex(node:flight._hl.FlightNode):Int;
 	@:hlNative("flight", "flight_get_rive_image_texture")
-	public static function getRiveImageTexture(node:hl.Bytes):hl.Bytes;
+	public static function getRiveImageTexture(node:flight._hl.FlightNode):hl.Bytes;
 	@:hlNative("flight", "flight_get_rive_nested_artboard_index")
-	public static function getRiveNestedArtboardIndex(node:hl.Bytes):Int;
+	public static function getRiveNestedArtboardIndex(node:flight._hl.FlightNode):Int;
 	@:hlNative("flight", "flight_mark_rive_nested_artboard")
-	public static function markRiveNestedArtboard(node:hl.Bytes, artboardIndex:Int):Void;
+	public static function markRiveNestedArtboard(node:flight._hl.FlightNode, artboardIndex:Int):Void;
 	@:hlNative("flight", "flight_register_rive_asset_handlers")
 	public static function registerRiveAssetHandlers(registry:flight._hl.RiveImportRegistry):Void;
 	@:hlNative("flight", "flight_register_rive_clipping_handlers")
@@ -82,7 +82,7 @@ extern class Scene2dFormats {
 	@:hlNative("flight", "flight_register_rive_shape_handlers")
 	public static function registerRiveShapeHandlers(registry:flight._hl.RiveImportRegistry):Void;
 	@:hlNative("flight", "flight_append_rive_shape_geometry")
-	public static function appendRiveShapeGeometry(shape:hl.Bytes, paths:hl.Bytes, pathsLen:Int):Void;
+	public static function appendRiveShapeGeometry(shape:flight._hl.FlightNode, paths:hl.Bytes, pathsLen:Int):Void;
 	@:hlNative("flight", "flight_register_rive_paint_handlers")
 	public static function registerRivePaintHandlers(registry:flight._hl.RiveImportRegistry):Void;
 	@:hlNative("flight", "flight_register_rive_path_handlers")
@@ -127,8 +127,8 @@ extern class Scene2dFormats {
 	public static function freeLottieMaskHandler(ptr:flight._hl.LottieMaskHandler):Void;
 	@:hlNative("flight", "flight_free_lottie_shape_item_handler")
 	public static function freeLottieShapeItemHandler(ptr:flight._hl.LottieShapeItemHandler):Void;
-	@:hlNative("flight", "flight_free_requirement_set")
-	public static function freeRequirementSet(ptr:flight._hl.RequirementSet):Void;
+	@:hlNative("flight", "flight_free_path_ref")
+	public static function freePathRef(ptr:flight._hl.Path):Void;
 	@:hlNative("flight", "flight_free_rive_field_type")
 	public static function freeRiveFieldType(ptr:flight._hl.RiveFieldType):Void;
 	@:hlNative("flight", "flight_free_rive_import_registry")

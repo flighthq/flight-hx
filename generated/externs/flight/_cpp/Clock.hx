@@ -2,7 +2,6 @@ package flight._cpp;
 
 private extern class Clock_Ffi {
 	@:native("flight_get_clock_scale") static function get_scale(ptr:cpp.Star<cpp.Void>):Float;
-	@:native("flight_set_clock_scale") static function set_scale(ptr:cpp.Star<cpp.Void>, value:Float):Float;
 	@:native("flight_get_clock_paused") static function get_paused(ptr:cpp.Star<cpp.Void>):Bool;
 	@:native("flight_set_clock_paused") static function set_paused(ptr:cpp.Star<cpp.Void>, value:Bool):Bool;
 	@:native("flight_get_clock_delta_time") static function get_deltaTime(ptr:cpp.Star<cpp.Void>):Float;
@@ -12,11 +11,9 @@ private extern class Clock_Ffi {
 }
 
 abstract Clock(cpp.Star<cpp.Void>) {
-	public var scale(get, set):Float;
+	public var scale(get, never):Float;
 
 	inline function get_scale():Float return Clock_Ffi.get_scale(this);
-
-	inline function set_scale(value:Float):Float { Clock_Ffi.set_scale(this, value); return value; }
 	public var paused(get, set):Bool;
 
 	inline function get_paused():Bool return Clock_Ffi.get_paused(this);
@@ -53,5 +50,8 @@ abstract Clock(cpp.Star<cpp.Void>) {
 	}
 	extern inline public function setScale(scale:Float):Void {
 		flight._cpp._fn.Clock.setClockScale(cast this, scale);
+	}
+	extern inline public function freeRef():Void {
+		flight._cpp._fn.Clock.freeClockRef(cast this);
 	}
 }

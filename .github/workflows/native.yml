@@ -30,7 +30,7 @@ jobs:
       - run: npm ci
       - run: npm run setup:native-tests
       - run: npm run rehydrate
-      - run: cargo fetch --locked --manifest-path .dependencies/flight/Cargo.toml
+      - run: node tools/externs/generate.mjs --fetch-dependencies
       # HashLink layouts belong to this ABI, not the checked-in Linux host.
       - run: npm run generate
       - run: npm run gate:surface
@@ -63,7 +63,7 @@ jobs:
           targets: ${{ matrix.triple }}
       - run: npm ci
       - run: npm run rehydrate
-      - run: cargo fetch --locked --manifest-path .dependencies/flight/Cargo.toml
+      - run: node tools/externs/generate.mjs --fetch-dependencies
       - run: npm run native:build:test -- --platform ${{ matrix.platform }}
       - run: node tests/native/ios-link.mjs --platform ${{ matrix.platform }}
       - run: npm run package:haxelib

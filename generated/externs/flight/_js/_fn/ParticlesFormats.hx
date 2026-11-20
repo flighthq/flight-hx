@@ -10,6 +10,8 @@ extern class ParticlesFormats {
 	public static function getRegisteredParticleFormats(out:Dynamic, registry:flight._js.ParticleFormatRegistry):Void;
 	@:native("parseRegisteredParticleFormat")
 	public static function parseRegisteredParticleFormat(registry:flight._js.ParticleFormatRegistry, text:String, kind:String, options:Null<flight._js.ParseParticleConfigOptions>):flight._js.ParticleConfigParseResult;
+	@:native("registerParticleFormat")
+	public static function registerParticleFormat(registry:flight._js.ParticleFormatRegistry, kind:String, codec:flight._js.ParticleFormatCodec):Void;
 	@:native("unregisterParticleFormat")
 	public static function unregisterParticleFormat(registry:flight._js.ParticleFormatRegistry, kind:String):Bool;
 	@:native("parseLibgdxParticle")

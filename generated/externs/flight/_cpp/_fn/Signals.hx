@@ -17,12 +17,12 @@ extern class Signals {
 	public static function advanceSignalTimers(state:cpp.Star<cpp.Void>, nowMs:Float):Void;
 	@:native("flight_clear_signal_timeout")
 	public static function clearSignalTimeout(state:cpp.Star<cpp.Void>, id:flight._cpp.TimerId):Void;
-	@:native("flight_set_signal_timeout")
-	public static function setSignalTimeout(state:cpp.Star<cpp.Void>, delayMs:Float, callback_Fn:cpp.Star<cpp.Void>, callback_Ctx:cpp.Star<cpp.Void>):flight._cpp.TimerId;
 	@:native("flight_free_signal_scope")
 	public static function freeSignalScope(ptr:flight._cpp.SignalScope):Void;
 	@:native("flight_free_signal_timer_state")
 	public static function freeSignalTimerState(ptr:flight._cpp.SignalTimerState):Void;
 	@:native("flight_free_timer_id")
 	public static function freeTimerId(ptr:flight._cpp.TimerId):Void;
+	@:native("flight_free_slot_id")
+	public static function freeSlotId(ptr:flight._cpp.SlotId):Void;
 }

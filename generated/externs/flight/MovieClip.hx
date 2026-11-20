@@ -60,25 +60,13 @@ extern inline function disableMovieClipGuards(guards:MovieClipGuardState):Void {
 extern inline function enableMovieClipGuards(guards:MovieClipGuardState, logState:Dynamic, clock:Dynamic):Void {
 	flight._js._fn.MovieClip.enableMovieClipGuards(guards, logState, clock);
 }
-#else
-extern inline function enableMovieClipGuards(guards:MovieClipGuardState, logState:Dynamic, clockFn:Dynamic, clockCtx:Dynamic):Void {
-#if hl
-	flight._hl._fn.MovieClip.enableMovieClipGuards(guards, logState, clockFn, clockCtx);
-#elseif cpp
-	flight._cpp._fn.MovieClip.enableMovieClipGuards(guards, logState, clockFn, clockCtx);
-#elseif (js && flight_esm)
-	flight._js._fn.MovieClip.enableMovieClipGuards(guards, logState, clockFn, clockCtx);
-#else
-	#error "flight.MovieClip: no backend for this target."
-#end
-}
 #end
 #if (js && flight_esm)
 extern inline function createMovieClip():Dynamic {
 	return flight._js._fn.MovieClip.createMovieClip();
 }
 #else
-extern inline function createMovieClip():Dynamic {
+extern inline function createMovieClip():flight.FlightNode {
 #if hl
 	return flight._hl._fn.MovieClip.createMovieClip();
 #elseif cpp
@@ -95,7 +83,7 @@ extern inline function addMovieClipFrameScript(clip:Dynamic, frame:TimelineFrame
 	flight._js._fn.MovieClip.addMovieClipFrameScript(clip, frame, script);
 }
 #else
-extern inline function addMovieClipFrameScript(clip:Dynamic, frame:TimelineFrameArg, script:FrameScript):Void {
+extern inline function addMovieClipFrameScript(clip:flight.FlightNode, frame:TimelineFrameArg, script:FrameScript):Void {
 #if hl
 	flight._hl._fn.MovieClip.addMovieClipFrameScript(clip, frame, script);
 #elseif cpp
@@ -112,7 +100,7 @@ extern inline function disposeMovieClipSignals(clip:Dynamic):Void {
 	flight._js._fn.MovieClip.disposeMovieClipSignals(clip);
 }
 #else
-extern inline function disposeMovieClipSignals(clip:Dynamic):Void {
+extern inline function disposeMovieClipSignals(clip:flight.FlightNode):Void {
 #if hl
 	flight._hl._fn.MovieClip.disposeMovieClipSignals(clip);
 #elseif cpp
@@ -129,7 +117,7 @@ extern inline function enableMovieClipSignals(clip:Dynamic):MovieClipSignals {
 	return flight._js._fn.MovieClip.enableMovieClipSignals(clip);
 }
 #else
-extern inline function enableMovieClipSignals(clip:Dynamic):MovieClipSignals {
+extern inline function enableMovieClipSignals(clip:flight.FlightNode):MovieClipSignals {
 #if hl
 	return flight._hl._fn.MovieClip.enableMovieClipSignals(clip);
 #elseif cpp
@@ -146,7 +134,7 @@ extern inline function getMovieClipCurrentFrame(clip:Dynamic):Int {
 	return flight._js._fn.MovieClip.getMovieClipCurrentFrame(clip);
 }
 #else
-extern inline function getMovieClipCurrentFrame(clip:Dynamic):Int {
+extern inline function getMovieClipCurrentFrame(clip:flight.FlightNode):Int {
 #if hl
 	return flight._hl._fn.MovieClip.getMovieClipCurrentFrame(clip);
 #elseif cpp
@@ -163,7 +151,7 @@ extern inline function getMovieClipCurrentLabel(clip:Dynamic):Null<TimelineLabel
 	return flight._js._fn.MovieClip.getMovieClipCurrentLabel(clip);
 }
 #else
-extern inline function getMovieClipCurrentLabel(clip:Dynamic):TimelineLabel {
+extern inline function getMovieClipCurrentLabel(clip:flight.FlightNode):TimelineLabel {
 #if hl
 	return flight._hl._fn.MovieClip.getMovieClipCurrentLabel(clip);
 #elseif cpp
@@ -180,7 +168,7 @@ extern inline function getMovieClipFrameScript(clip:Dynamic, frame:TimelineFrame
 	return flight._js._fn.MovieClip.getMovieClipFrameScript(clip, frame);
 }
 #else
-extern inline function getMovieClipFrameScript(clip:Dynamic, frame:TimelineFrameArg):FrameScript {
+extern inline function getMovieClipFrameScript(clip:flight.FlightNode, frame:TimelineFrameArg):FrameScript {
 #if hl
 	return flight._hl._fn.MovieClip.getMovieClipFrameScript(clip, frame);
 #elseif cpp
@@ -197,7 +185,7 @@ extern inline function getMovieClipSignals(clip:Dynamic):Null<MovieClipSignals> 
 	return flight._js._fn.MovieClip.getMovieClipSignals(clip);
 }
 #else
-extern inline function getMovieClipSignals(clip:Dynamic):MovieClipSignals {
+extern inline function getMovieClipSignals(clip:flight.FlightNode):MovieClipSignals {
 #if hl
 	return flight._hl._fn.MovieClip.getMovieClipSignals(clip);
 #elseif cpp
@@ -214,7 +202,7 @@ extern inline function getMovieClipTotalFrames(clip:Dynamic):Int {
 	return flight._js._fn.MovieClip.getMovieClipTotalFrames(clip);
 }
 #else
-extern inline function getMovieClipTotalFrames(clip:Dynamic):Int {
+extern inline function getMovieClipTotalFrames(clip:flight.FlightNode):Int {
 #if hl
 	return flight._hl._fn.MovieClip.getMovieClipTotalFrames(clip);
 #elseif cpp
@@ -231,7 +219,7 @@ extern inline function gotoAndPlayMovieClip(clip:Dynamic, frame:TimelineFrameArg
 	flight._js._fn.MovieClip.gotoAndPlayMovieClip(clip, frame);
 }
 #else
-extern inline function gotoAndPlayMovieClip(clip:Dynamic, frame:TimelineFrameArg):Void {
+extern inline function gotoAndPlayMovieClip(clip:flight.FlightNode, frame:TimelineFrameArg):Void {
 #if hl
 	flight._hl._fn.MovieClip.gotoAndPlayMovieClip(clip, frame);
 #elseif cpp
@@ -248,7 +236,7 @@ extern inline function gotoAndStopMovieClip(clip:Dynamic, frame:TimelineFrameArg
 	flight._js._fn.MovieClip.gotoAndStopMovieClip(clip, frame);
 }
 #else
-extern inline function gotoAndStopMovieClip(clip:Dynamic, frame:TimelineFrameArg):Void {
+extern inline function gotoAndStopMovieClip(clip:flight.FlightNode, frame:TimelineFrameArg):Void {
 #if hl
 	flight._hl._fn.MovieClip.gotoAndStopMovieClip(clip, frame);
 #elseif cpp
@@ -265,7 +253,7 @@ extern inline function isMovieClipPlaying(clip:Dynamic):Bool {
 	return flight._js._fn.MovieClip.isMovieClipPlaying(clip);
 }
 #else
-extern inline function isMovieClipPlaying(clip:Dynamic):Bool {
+extern inline function isMovieClipPlaying(clip:flight.FlightNode):Bool {
 #if hl
 	return flight._hl._fn.MovieClip.isMovieClipPlaying(clip);
 #elseif cpp
@@ -282,7 +270,7 @@ extern inline function nextFrameMovieClip(clip:Dynamic):Void {
 	flight._js._fn.MovieClip.nextFrameMovieClip(clip);
 }
 #else
-extern inline function nextFrameMovieClip(clip:Dynamic):Void {
+extern inline function nextFrameMovieClip(clip:flight.FlightNode):Void {
 #if hl
 	flight._hl._fn.MovieClip.nextFrameMovieClip(clip);
 #elseif cpp
@@ -299,7 +287,7 @@ extern inline function playMovieClip(clip:Dynamic):Void {
 	flight._js._fn.MovieClip.playMovieClip(clip);
 }
 #else
-extern inline function playMovieClip(clip:Dynamic):Void {
+extern inline function playMovieClip(clip:flight.FlightNode):Void {
 #if hl
 	flight._hl._fn.MovieClip.playMovieClip(clip);
 #elseif cpp
@@ -316,7 +304,7 @@ extern inline function prevFrameMovieClip(clip:Dynamic):Void {
 	flight._js._fn.MovieClip.prevFrameMovieClip(clip);
 }
 #else
-extern inline function prevFrameMovieClip(clip:Dynamic):Void {
+extern inline function prevFrameMovieClip(clip:flight.FlightNode):Void {
 #if hl
 	flight._hl._fn.MovieClip.prevFrameMovieClip(clip);
 #elseif cpp
@@ -333,7 +321,7 @@ extern inline function removeMovieClipFrameScript(clip:Dynamic, frame:TimelineFr
 	flight._js._fn.MovieClip.removeMovieClipFrameScript(clip, frame);
 }
 #else
-extern inline function removeMovieClipFrameScript(clip:Dynamic, frame:TimelineFrameArg):Void {
+extern inline function removeMovieClipFrameScript(clip:flight.FlightNode, frame:TimelineFrameArg):Void {
 #if hl
 	flight._hl._fn.MovieClip.removeMovieClipFrameScript(clip, frame);
 #elseif cpp
@@ -350,7 +338,7 @@ extern inline function setMovieClipSource(clip:Dynamic, source:TimelineSourceRef
 	flight._js._fn.MovieClip.setMovieClipSource(clip, source);
 }
 #else
-extern inline function setMovieClipSource(clip:Dynamic, source:TimelineSourceRef):Void {
+extern inline function setMovieClipSource(clip:flight.FlightNode, source:TimelineSourceRef):Void {
 #if hl
 	flight._hl._fn.MovieClip.setMovieClipSource(clip, source);
 #elseif cpp
@@ -367,7 +355,7 @@ extern inline function stopMovieClip(clip:Dynamic):Void {
 	flight._js._fn.MovieClip.stopMovieClip(clip);
 }
 #else
-extern inline function stopMovieClip(clip:Dynamic):Void {
+extern inline function stopMovieClip(clip:flight.FlightNode):Void {
 #if hl
 	flight._hl._fn.MovieClip.stopMovieClip(clip);
 #elseif cpp
@@ -384,7 +372,7 @@ extern inline function updateMovieClip(clip:Dynamic, deltaTime:Float):Void {
 	flight._js._fn.MovieClip.updateMovieClip(clip, deltaTime);
 }
 #else
-extern inline function updateMovieClip(clip:Dynamic, deltaTime:Float):Void {
+extern inline function updateMovieClip(clip:flight.FlightNode, deltaTime:Float):Void {
 #if hl
 	flight._hl._fn.MovieClip.updateMovieClip(clip, deltaTime);
 #elseif cpp
@@ -442,6 +430,23 @@ extern inline function freeMovieClipSignals(ptr:MovieClipSignals):Void {
 	flight._cpp._fn.MovieClip.freeMovieClipSignals(ptr);
 #elseif (js && flight_esm)
 	flight._js._fn.MovieClip.freeMovieClipSignals(ptr);
+#else
+	#error "flight.MovieClip: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeFrameScript(ptr:FrameScript):Void {
+	flight._js._fn.MovieClip.freeFrameScript(ptr);
+}
+#else
+extern inline function freeFrameScript(ptr:FrameScript):Void {
+#if hl
+	flight._hl._fn.MovieClip.freeFrameScript(ptr);
+#elseif cpp
+	flight._cpp._fn.MovieClip.freeFrameScript(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.MovieClip.freeFrameScript(ptr);
 #else
 	#error "flight.MovieClip: no backend for this target."
 #end

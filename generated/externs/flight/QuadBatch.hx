@@ -27,7 +27,7 @@ extern inline function createQuadBatch():Dynamic {
 	return flight._js._fn.QuadBatch.createQuadBatch();
 }
 #else
-extern inline function createQuadBatch():Dynamic {
+extern inline function createQuadBatch():flight.FlightNode {
 #if hl
 	return flight._hl._fn.QuadBatch.createQuadBatch();
 #elseif cpp
@@ -44,7 +44,7 @@ extern inline function appendQuadBatchInstance(target:QuadBatch, id:Int, x:Float
 	return flight._js._fn.QuadBatch.appendQuadBatchInstance(target, id, x, y);
 }
 #else
-extern inline function appendQuadBatchInstance(target:QuadBatch, id:Int, x:Float, y:Float):Int {
+extern inline function appendQuadBatchInstance(target:flight.FlightNode, id:Int, x:Float, y:Float):Int {
 #if hl
 	return flight._hl._fn.QuadBatch.appendQuadBatchInstance(target, id, x, y);
 #elseif cpp
@@ -61,7 +61,7 @@ extern inline function clearQuadBatch(target:QuadBatch):Void {
 	flight._js._fn.QuadBatch.clearQuadBatch(target);
 }
 #else
-extern inline function clearQuadBatch(target:QuadBatch):Void {
+extern inline function clearQuadBatch(target:flight.FlightNode):Void {
 #if hl
 	flight._hl._fn.QuadBatch.clearQuadBatch(target);
 #elseif cpp
@@ -78,7 +78,7 @@ extern inline function cloneQuadBatch(source:QuadBatch):Dynamic {
 	return flight._js._fn.QuadBatch.cloneQuadBatch(source);
 }
 #else
-extern inline function cloneQuadBatch(source:QuadBatch):Dynamic {
+extern inline function cloneQuadBatch(source:flight.FlightNode):flight.FlightNode {
 #if hl
 	return flight._hl._fn.QuadBatch.cloneQuadBatch(source);
 #elseif cpp
@@ -95,7 +95,7 @@ extern inline function compactQuadBatch(target:QuadBatch):Void {
 	flight._js._fn.QuadBatch.compactQuadBatch(target);
 }
 #else
-extern inline function compactQuadBatch(target:QuadBatch):Void {
+extern inline function compactQuadBatch(target:flight.FlightNode):Void {
 #if hl
 	flight._hl._fn.QuadBatch.compactQuadBatch(target);
 #elseif cpp
@@ -112,7 +112,7 @@ extern inline function computeQuadBatchLocalBoundsRectangle(out:Rectangle, sourc
 	flight._js._fn.QuadBatch.computeQuadBatchLocalBoundsRectangle(out, source);
 }
 #else
-extern inline function computeQuadBatchLocalBoundsRectangle(out:Rectangle, source:QuadBatch):Void {
+extern inline function computeQuadBatchLocalBoundsRectangle(out:Rectangle, source:flight.FlightNode):Void {
 #if hl
 	flight._hl._fn.QuadBatch.computeQuadBatchLocalBoundsRectangle(out, source);
 #elseif cpp
@@ -129,7 +129,7 @@ extern inline function enableQuadBatchSignals(target:QuadBatch):Dynamic {
 	return flight._js._fn.QuadBatch.enableQuadBatchSignals(target);
 }
 #else
-extern inline function enableQuadBatchSignals(target:QuadBatch):Dynamic {
+extern inline function enableQuadBatchSignals(target:flight.FlightNode):Dynamic {
 #if hl
 	return flight._hl._fn.QuadBatch.enableQuadBatchSignals(target);
 #elseif cpp
@@ -146,7 +146,7 @@ extern inline function getQuadBatchCapacity(source:QuadBatch):Int {
 	return flight._js._fn.QuadBatch.getQuadBatchCapacity(source);
 }
 #else
-extern inline function getQuadBatchCapacity(source:QuadBatch):Int {
+extern inline function getQuadBatchCapacity(source:flight.FlightNode):Int {
 #if hl
 	return flight._hl._fn.QuadBatch.getQuadBatchCapacity(source);
 #elseif cpp
@@ -163,7 +163,7 @@ extern inline function getQuadBatchInstanceId(source:QuadBatch, index:Int):Int {
 	return flight._js._fn.QuadBatch.getQuadBatchInstanceId(source, index);
 }
 #else
-extern inline function getQuadBatchInstanceId(source:QuadBatch, index:Int):Int {
+extern inline function getQuadBatchInstanceId(source:flight.FlightNode, index:Int):Int {
 #if hl
 	return flight._hl._fn.QuadBatch.getQuadBatchInstanceId(source, index);
 #elseif cpp
@@ -180,7 +180,7 @@ extern inline function getQuadBatchInstanceTransform(out:Vector2, source:QuadBat
 	return flight._js._fn.QuadBatch.getQuadBatchInstanceTransform(out, source, index);
 }
 #else
-extern inline function getQuadBatchInstanceTransform(out:Vector2, source:QuadBatch, index:Int):Bool {
+extern inline function getQuadBatchInstanceTransform(out:Vector2, source:flight.FlightNode, index:Int):Bool {
 #if hl
 	return flight._hl._fn.QuadBatch.getQuadBatchInstanceTransform(out, source, index);
 #elseif cpp
@@ -197,7 +197,7 @@ extern inline function getQuadBatchSignals(source:QuadBatch):Null<Dynamic> {
 	return flight._js._fn.QuadBatch.getQuadBatchSignals(source);
 }
 #else
-extern inline function getQuadBatchSignals(source:QuadBatch):Dynamic {
+extern inline function getQuadBatchSignals(source:flight.FlightNode):Dynamic {
 #if hl
 	return flight._hl._fn.QuadBatch.getQuadBatchSignals(source);
 #elseif cpp
@@ -231,7 +231,7 @@ extern inline function hitTestQuadBatchPoint(source:QuadBatch, point:Vector2):In
 	return flight._js._fn.QuadBatch.hitTestQuadBatchPoint(source, point);
 }
 #else
-extern inline function hitTestQuadBatchPoint(source:QuadBatch, point:Vector2):Int {
+extern inline function hitTestQuadBatchPoint(source:flight.FlightNode, point:Vector2):Int {
 #if hl
 	return flight._hl._fn.QuadBatch.hitTestQuadBatchPoint(source, point);
 #elseif cpp
@@ -248,7 +248,7 @@ extern inline function hitTestQuadBatchPointExact(source:QuadBatch, point:Vector
 	return flight._js._fn.QuadBatch.hitTestQuadBatchPointExact(source, point);
 }
 #else
-extern inline function hitTestQuadBatchPointExact(source:QuadBatch, point:Vector2):Int {
+extern inline function hitTestQuadBatchPointExact(source:flight.FlightNode, point:Vector2):Int {
 #if hl
 	return flight._hl._fn.QuadBatch.hitTestQuadBatchPointExact(source, point);
 #elseif cpp
@@ -265,7 +265,7 @@ extern inline function hitTestQuadBatchPointExactXy(source:QuadBatch, x:Float, y
 	return flight._js._fn.QuadBatch.hitTestQuadBatchPointExactXy(source, x, y);
 }
 #else
-extern inline function hitTestQuadBatchPointExactXy(source:QuadBatch, x:Float, y:Float):Int {
+extern inline function hitTestQuadBatchPointExactXy(source:flight.FlightNode, x:Float, y:Float):Int {
 #if hl
 	return flight._hl._fn.QuadBatch.hitTestQuadBatchPointExactXy(source, x, y);
 #elseif cpp
@@ -282,7 +282,7 @@ extern inline function hitTestQuadBatchPointXy(source:QuadBatch, x:Float, y:Floa
 	return flight._js._fn.QuadBatch.hitTestQuadBatchPointXy(source, x, y);
 }
 #else
-extern inline function hitTestQuadBatchPointXy(source:QuadBatch, x:Float, y:Float):Int {
+extern inline function hitTestQuadBatchPointXy(source:flight.FlightNode, x:Float, y:Float):Int {
 #if hl
 	return flight._hl._fn.QuadBatch.hitTestQuadBatchPointXy(source, x, y);
 #elseif cpp
@@ -299,7 +299,7 @@ extern inline function iterateQuadBatchInstances(source:QuadBatch, visitor:Dynam
 	flight._js._fn.QuadBatch.iterateQuadBatchInstances(source, visitor);
 }
 #else
-extern inline function iterateQuadBatchInstances(source:QuadBatch, visitorFn:Dynamic, visitorCtx:Dynamic):Void {
+extern inline function iterateQuadBatchInstances(source:flight.FlightNode, visitorFn:Dynamic, visitorCtx:Dynamic):Void {
 #if hl
 	flight._hl._fn.QuadBatch.iterateQuadBatchInstances(source, visitorFn, visitorCtx);
 #elseif cpp
@@ -316,7 +316,7 @@ extern inline function removeQuadBatchInstance(target:QuadBatch, index:Int):Void
 	flight._js._fn.QuadBatch.removeQuadBatchInstance(target, index);
 }
 #else
-extern inline function removeQuadBatchInstance(target:QuadBatch, index:Int):Void {
+extern inline function removeQuadBatchInstance(target:flight.FlightNode, index:Int):Void {
 #if hl
 	flight._hl._fn.QuadBatch.removeQuadBatchInstance(target, index);
 #elseif cpp
@@ -333,7 +333,7 @@ extern inline function reserveQuadBatch(target:QuadBatch, capacity:Int):Void {
 	flight._js._fn.QuadBatch.reserveQuadBatch(target, capacity);
 }
 #else
-extern inline function reserveQuadBatch(target:QuadBatch, capacity:Int):Void {
+extern inline function reserveQuadBatch(target:flight.FlightNode, capacity:Int):Void {
 #if hl
 	flight._hl._fn.QuadBatch.reserveQuadBatch(target, capacity);
 #elseif cpp
@@ -350,7 +350,7 @@ extern inline function resizeQuadBatch(target:QuadBatch, instanceCount:Int):Void
 	flight._js._fn.QuadBatch.resizeQuadBatch(target, instanceCount);
 }
 #else
-extern inline function resizeQuadBatch(target:QuadBatch, instanceCount:Int):Void {
+extern inline function resizeQuadBatch(target:flight.FlightNode, instanceCount:Int):Void {
 #if hl
 	flight._hl._fn.QuadBatch.resizeQuadBatch(target, instanceCount);
 #elseif cpp
@@ -367,7 +367,7 @@ extern inline function setQuadBatchInstance(target:QuadBatch, index:Int, id:Int,
 	flight._js._fn.QuadBatch.setQuadBatchInstance(target, index, id, x, y);
 }
 #else
-extern inline function setQuadBatchInstance(target:QuadBatch, index:Int, id:Int, x:Float, y:Float):Void {
+extern inline function setQuadBatchInstance(target:flight.FlightNode, index:Int, id:Int, x:Float, y:Float):Void {
 #if hl
 	flight._hl._fn.QuadBatch.setQuadBatchInstance(target, index, id, x, y);
 #elseif cpp
@@ -384,7 +384,7 @@ extern inline function setQuadBatchInstanceMatrix(target:QuadBatch, index:Int, i
 	flight._js._fn.QuadBatch.setQuadBatchInstanceMatrix(target, index, id, a, b, c, d, tx, ty);
 }
 #else
-extern inline function setQuadBatchInstanceMatrix(target:QuadBatch, index:Int, id:Int, a:Float, b:Float, c:Float, d:Float, tx:Float, ty:Float):Void {
+extern inline function setQuadBatchInstanceMatrix(target:flight.FlightNode, index:Int, id:Int, a:Float, b:Float, c:Float, d:Float, tx:Float, ty:Float):Void {
 #if hl
 	flight._hl._fn.QuadBatch.setQuadBatchInstanceMatrix(target, index, id, a, b, c, d, tx, ty);
 #elseif cpp
@@ -401,7 +401,7 @@ extern inline function setQuadBatchInstanceRange(target:QuadBatch, startIndex:In
 	flight._js._fn.QuadBatch.setQuadBatchInstanceRange(target, startIndex, count, source);
 }
 #else
-extern inline function setQuadBatchInstanceRange(target:QuadBatch, startIndex:Int, count:Int, source:Dynamic, sourceLen:Int):Void {
+extern inline function setQuadBatchInstanceRange(target:flight.FlightNode, startIndex:Int, count:Int, source:Dynamic, sourceLen:Int):Void {
 #if hl
 	flight._hl._fn.QuadBatch.setQuadBatchInstanceRange(target, startIndex, count, source, sourceLen);
 #elseif cpp
@@ -418,7 +418,7 @@ extern inline function setQuadBatchInstanceTint(target:QuadBatch, index:Int, rgb
 	flight._js._fn.QuadBatch.setQuadBatchInstanceTint(target, index, rgba);
 }
 #else
-extern inline function setQuadBatchInstanceTint(target:QuadBatch, index:Int, rgba:Int):Void {
+extern inline function setQuadBatchInstanceTint(target:flight.FlightNode, index:Int, rgba:Int):Void {
 #if hl
 	flight._hl._fn.QuadBatch.setQuadBatchInstanceTint(target, index, rgba);
 #elseif cpp
@@ -435,7 +435,7 @@ extern inline function setQuadBatchLocalBoundsRectangle(target:Dynamic, rect:Rec
 	flight._js._fn.QuadBatch.setQuadBatchLocalBoundsRectangle(target, rect);
 }
 #else
-extern inline function setQuadBatchLocalBoundsRectangle(target:Dynamic, rect:Rectangle):Void {
+extern inline function setQuadBatchLocalBoundsRectangle(target:flight.FlightNode, rect:Rectangle):Void {
 #if hl
 	flight._hl._fn.QuadBatch.setQuadBatchLocalBoundsRectangle(target, rect);
 #elseif cpp
@@ -452,13 +452,30 @@ extern inline function setQuadBatchTransformType(target:QuadBatch, newType:Dynam
 	flight._js._fn.QuadBatch.setQuadBatchTransformType(target, newType);
 }
 #else
-extern inline function setQuadBatchTransformType(target:QuadBatch, newType:flight.QuadTransformType):Void {
+extern inline function setQuadBatchTransformType(target:flight.FlightNode, newType:flight.QuadTransformType):Void {
 #if hl
 	flight._hl._fn.QuadBatch.setQuadBatchTransformType(target, newType);
 #elseif cpp
 	flight._cpp._fn.QuadBatch.setQuadBatchTransformType(target, newType);
 #elseif (js && flight_esm)
 	flight._js._fn.QuadBatch.setQuadBatchTransformType(target, newType);
+#else
+	#error "flight.QuadBatch: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeQuadBatchSignalsRef(ptr:QuadBatchSignals):Void {
+	flight._js._fn.QuadBatch.freeQuadBatchSignalsRef(ptr);
+}
+#else
+extern inline function freeQuadBatchSignalsRef(ptr:QuadBatchSignals):Void {
+#if hl
+	flight._hl._fn.QuadBatch.freeQuadBatchSignalsRef(ptr);
+#elseif cpp
+	flight._cpp._fn.QuadBatch.freeQuadBatchSignalsRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.QuadBatch.freeQuadBatchSignalsRef(ptr);
 #else
 	#error "flight.QuadBatch: no backend for this target."
 #end

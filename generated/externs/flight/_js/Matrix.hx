@@ -2,23 +2,23 @@ package flight._js;
 
 abstract Matrix(Dynamic) {
 	public var a(get, set):Float;
-	inline function get_a():Float return untyped this["a"];
-	inline function set_a(value:Float):Float return untyped this["a"] = value;
+	inline function get_a():Float return untyped this.a;
+	inline function set_a(value:Float):Float return untyped this.a = value;
 	public var b(get, set):Float;
-	inline function get_b():Float return untyped this["b"];
-	inline function set_b(value:Float):Float return untyped this["b"] = value;
+	inline function get_b():Float return untyped this.b;
+	inline function set_b(value:Float):Float return untyped this.b = value;
 	public var c(get, set):Float;
-	inline function get_c():Float return untyped this["c"];
-	inline function set_c(value:Float):Float return untyped this["c"] = value;
+	inline function get_c():Float return untyped this.c;
+	inline function set_c(value:Float):Float return untyped this.c = value;
 	public var d(get, set):Float;
-	inline function get_d():Float return untyped this["d"];
-	inline function set_d(value:Float):Float return untyped this["d"] = value;
+	inline function get_d():Float return untyped this.d;
+	inline function set_d(value:Float):Float return untyped this.d = value;
 	public var tx(get, set):Float;
-	inline function get_tx():Float return untyped this["tx"];
-	inline function set_tx(value:Float):Float return untyped this["tx"] = value;
+	inline function get_tx():Float return untyped this.tx;
+	inline function set_tx(value:Float):Float return untyped this.tx = value;
 	public var ty(get, set):Float;
-	inline function get_ty():Float return untyped this["ty"];
-	inline function set_ty(value:Float):Float return untyped this["ty"] = value;
+	inline function get_ty():Float return untyped this.ty;
+	inline function set_ty(value:Float):Float return untyped this.ty = value;
 	inline public function getCamera2dView(camera:flight._js.Camera2D, viewportWidth:Float, viewportHeight:Float):Void {
 		flight._js._fn.Camera.getCamera2dViewMatrix(camera, viewportWidth, viewportHeight, cast this);
 	}

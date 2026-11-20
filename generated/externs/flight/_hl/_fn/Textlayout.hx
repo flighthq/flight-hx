@@ -43,6 +43,8 @@ extern class Textlayout {
 	public static function isTextLayoutTruncated(layout:flight._hl.TextLayoutResult, params:flight._hl.TextLayoutParams):Bool;
 	@:hlNative("flight", "flight_create_text_layout_group")
 	public static function createTextLayoutGroup(format:hl.Bytes):flight._hl.TextLayoutGroup;
+	@:hlNative("flight", "flight_get_text_layout_measure_provider")
+	public static function getTextLayoutMeasureProvider(state:flight._hl.TextLayoutMeasureState, hostTextShaper:flight._hl.HostTextShaperCapability):flight._hl.TextMeasureFunction;
 	@:hlNative("flight", "flight_get_text_line_break_index")
 	public static function getTextLineBreakIndex(lineBreaks:hl.Bytes, lineBreaksLen:Int, startIndex:haxe.Int64):Int;
 	@:hlNative("flight", "flight_get_text_line_breaks")
@@ -57,10 +59,14 @@ extern class Textlayout {
 	public static function freeTextLayoutResult(ptr:flight._hl.TextLayoutResult):Void;
 	@:hlNative("flight", "flight_free_text_layout_group")
 	public static function freeTextLayoutGroup(ptr:flight._hl.TextLayoutGroup):Void;
+	@:hlNative("flight", "flight_free_text_measure_function")
+	public static function freeTextMeasureFunction(ptr:flight._hl.TextMeasureFunction):Void;
 	@:hlNative("flight", "flight_free_text_metrics")
 	public static function freeTextMetrics(ptr:flight._hl.TextMetrics):Void;
 	@:hlNative("flight", "flight_free_text_layout_params")
 	public static function freeTextLayoutParams(ptr:flight._hl.TextLayoutParams):Void;
+	@:hlNative("flight", "flight_free_text_layout_result_ref")
+	public static function freeTextLayoutResultRef(ptr:flight._hl.TextLayoutResult):Void;
 	@:hlNative("flight", "flight_free_text_line_metrics")
 	public static function freeTextLineMetrics(ptr:flight._hl.TextLineMetrics):Void;
 }

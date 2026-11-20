@@ -6,10 +6,9 @@ The transpiled Haxe implementation, separate TypeScript compiler dependency,
 and flight-cpp adapters have been removed.
 
 The source is Flight `develop` revision
-`5e1121e4cfdfde289b5373693dd285a2035dd285` plus the reviewable
-[native producer patches](patches/flight/README.md). There are 4,424 generated Haxe
-files and 9,764 C ABI exports. Generated Haxe is copied unchanged from
-that producer; provenance records both the Flight revision and patch hashes.
+`c52653a12e10251ab93970f71a6bc0c4dcbe21fa` plus the [producer patches](patches/flight/README.md).
+Generated Haxe is copied unchanged from Flight. Provenance records the revision
+and patch hashes.
 
 ## Consume
 
@@ -47,34 +46,34 @@ Native handles require the matching release function; allocation does not imply
 automatic disposal. Unsupported targets and the removed `flight_hx` backend fail
 at compile time.
 
-Call `flight.Entity.freeRef(handle)` for registered native `Ref<T>` handles,
-including references returned by node hierarchy getters. The C header documents
-the matching release function for each owned result.
-Scene references retained by other nodes remain alive after a handle is freed.
+Native node constructors and hierarchy queries return `FlightNode` handles.
+Release each returned handle with `node.free()`, or use
+`FlightNode.freeNullable(node)` when it may be null. The scene retains its own
+references to attached nodes. The C header documents the release function for
+other owned results.
 
-Native byte results, including compression output, return `NativeByteBuffer`.
-It exposes `length`, `data`, `getByte()` and `toBytes()`. `toBytes()` makes a
-managed Haxe copy; call `dispose()` when finished with the native buffer. The
-borrowed `data` view remains valid until disposal. JS keeps the SDK byte array.
+Use `name`, `node2dAlpha`, and `node2dVisible` on native node handles. Read the
+native blend mode through `node2dBlendMode` and write it with
+`setNode2dBlendMode(value, present)`. Raw field writes do not invalidate
+appearance. Call `flight.Node.invalidateNodeAppearance(node)` when needed.
+ESM node types expose `name`, `alpha`, `visible`, and `blendMode` through the SDK's
+object fields. The ESM appearance setters advance the node's appearance revision.
 
-Public scalar and `String` fields have properties, including `ColorScaleBias`
-channels and `FontResource.family`. Native string properties copy UTF-8 storage;
-their temporary buffers are released by the generated accessor.
+Native compression functions return `ByteResult`, with `length`, `get(index)`,
+`toBytes()`, and `free()`. `toBytes()` creates a managed Haxe copy.
+To build a native bitmap region, pass the handle returned by `shareBitmap`,
+which takes ownership of the original bitmap. The region retains a reference
+after the caller releases the shared handle with `freeBitmapRef`.
 
-Generated node types expose inherited `name` where the Rust producer recognizes
-the `Node` implementation. Recognized `Node2D` types, including `Sprite`,
-`DisplayObject`, and `Shape`, also expose `alpha`, `visible`, and `blendMode`.
-`name` and `blendMode` are nullable strings. Changes to appearance properties
-advance the node's appearance revision.
+Use `freeOwnedByteReader` for owned byte readers in `flight.Buffer`,
+`freeUnitSignal` for command-history signals, and `freeCommandHistoryRef` for
+the history handle. Scalar and optional scalar tuple returns are also supported.
+Native public string properties use UTF-8 C strings.
 
-Native bindings include scalar and optional tuple returns, owned byte readers
-in `flight.Buffer`, and command-history unit signal handles in `flight.Command`.
-Release reader handles with `freeOwnedByteReader` and signal handles with
-`freeUnitSignal`. The C header also documents collection and async result carriers. Flight’s
-public SDK export policy governs the refreshed function inventory.
-
-Generic signal callbacks, optional and nested struct fields, and constructors
-for the `CreateTextureOptions` variants still need Haxe binding support.
+Flight verifies native Haxe extern signatures against the generated C header
+and HashLink shim. The upstream policy still lists retained callbacks and
+selected native carriers that require dedicated Haxe support. Native host-provider
+FFI for Flight's Rust desktop and headless hosts is TODO.
 
 ## Native layout
 
@@ -130,10 +129,11 @@ have pointer/length carriers, while their JS form takes a single array.
 `tools/esm/buildWeb.mjs` compiles a Haxe consumer and bundles it against the pinned
 Flight TypeScript sources with esbuild, without installing Flight's workspace
 tooling. Apps can use their own bundler with matching published packages instead.
-`npm run gate:web` executes math/geometry from an extracted consumer ZIP, including
-field mutation, typed arrays, callbacks/options and release, and verifies unused
-exports disappear. Full SDK behavior, rendering and browser host integration are
-not established by this core smoke. See [ESM pipeline](tools/esm/README.md).
+`npm run gate:web` resolves every generated SDK import from the consumer ZIP.
+It runs math, geometry, typed arrays, callbacks, options, lifecycle, inherited
+fields, and host operations against the pinned SDK, and checks that unused
+exports disappear. Browser graphics tests use DOM and GPU test doubles.
+See the [ESM pipeline](tools/esm/README.md).
 
 ### Browser host handles
 
@@ -157,7 +157,11 @@ HostWeb.inputTarget.prepare(input);
 ```
 
 The Canvas surface and input target are separate opaque Flight values. The browser
-provider manages the association with the original DOM element.
+provider manages the association with the original DOM element. Use
+`HostWeb.gl` with `createGlSurfaceFromNativeHandle` for WebGL2 or `HostWeb.wgpu`
+with `createWgpuSurfaceFromNativeHandle` for WebGPU. WebGPU acquisition returns
+a promise. Both return null when the browser cannot supply a context. Release
+them with `destroyGlSurface` and `destroyWgpuSurface` respectively.
 
 ### App host seams
 

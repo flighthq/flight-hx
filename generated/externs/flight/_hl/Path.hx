@@ -172,6 +172,9 @@ abstract Path(hl.Bytes) {
 	inline public function formatSvgData(options:flight._hl.SvgPathDataFormatOptions):hl.Bytes {
 		return flight._hl._fn.PathFormats.formatSvgPathData(cast this, options);
 	}
+	inline public function freeRef():Void {
+		flight._hl._fn.Scene2dFormats.freePathRef(cast this);
+	}
 	inline public function compactStroke(path:flight._hl.Path, style:flight._hl.StrokeStyle, tolerance:Float):Void {
 		flight._hl._fn.Shape.compactStrokePath(cast this, path, style, tolerance);
 	}

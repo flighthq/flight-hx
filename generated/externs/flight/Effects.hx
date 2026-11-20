@@ -2210,3 +2210,921 @@ extern inline function createWhiteBalanceEffect():Dynamic {
 #end
 }
 #end
+#if (js && flight_esm)
+extern inline function freeAutoExposureEffectRef(ptr:AutoExposureEffect):Void {
+	flight._js._fn.Effects.freeAutoExposureEffectRef(ptr);
+}
+#else
+extern inline function freeAutoExposureEffectRef(ptr:AutoExposureEffect):Void {
+#if hl
+	flight._hl._fn.Effects.freeAutoExposureEffectRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Effects.freeAutoExposureEffectRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Effects.freeAutoExposureEffectRef(ptr);
+#else
+	#error "flight.Effects: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeBarrelDistortionEffectRef(ptr:BarrelDistortionEffect):Void {
+	flight._js._fn.Effects.freeBarrelDistortionEffectRef(ptr);
+}
+#else
+extern inline function freeBarrelDistortionEffectRef(ptr:BarrelDistortionEffect):Void {
+#if hl
+	flight._hl._fn.Effects.freeBarrelDistortionEffectRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Effects.freeBarrelDistortionEffectRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Effects.freeBarrelDistortionEffectRef(ptr);
+#else
+	#error "flight.Effects: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeBevelEffectRef(ptr:BevelEffect):Void {
+	flight._js._fn.Effects.freeBevelEffectRef(ptr);
+}
+#else
+extern inline function freeBevelEffectRef(ptr:BevelEffect):Void {
+#if hl
+	flight._hl._fn.Effects.freeBevelEffectRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Effects.freeBevelEffectRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Effects.freeBevelEffectRef(ptr);
+#else
+	#error "flight.Effects: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeBitmapDisplacementEffectRef(ptr:BitmapDisplacementEffect):Void {
+	flight._js._fn.Effects.freeBitmapDisplacementEffectRef(ptr);
+}
+#else
+extern inline function freeBitmapDisplacementEffectRef(ptr:BitmapDisplacementEffect):Void {
+#if hl
+	flight._hl._fn.Effects.freeBitmapDisplacementEffectRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Effects.freeBitmapDisplacementEffectRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Effects.freeBitmapDisplacementEffectRef(ptr);
+#else
+	#error "flight.Effects: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeBlendEffectRef(ptr:BlendEffect):Void {
+	flight._js._fn.Effects.freeBlendEffectRef(ptr);
+}
+#else
+extern inline function freeBlendEffectRef(ptr:BlendEffect):Void {
+#if hl
+	flight._hl._fn.Effects.freeBlendEffectRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Effects.freeBlendEffectRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Effects.freeBlendEffectRef(ptr);
+#else
+	#error "flight.Effects: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeBloomEffectRef(ptr:BloomEffect):Void {
+	flight._js._fn.Effects.freeBloomEffectRef(ptr);
+}
+#else
+extern inline function freeBloomEffectRef(ptr:BloomEffect):Void {
+#if hl
+	flight._hl._fn.Effects.freeBloomEffectRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Effects.freeBloomEffectRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Effects.freeBloomEffectRef(ptr);
+#else
+	#error "flight.Effects: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeBlurEffectRef(ptr:BlurEffect):Void {
+	flight._js._fn.Effects.freeBlurEffectRef(ptr);
+}
+#else
+extern inline function freeBlurEffectRef(ptr:BlurEffect):Void {
+#if hl
+	flight._hl._fn.Effects.freeBlurEffectRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Effects.freeBlurEffectRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Effects.freeBlurEffectRef(ptr);
+#else
+	#error "flight.Effects: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeBokehDepthOfFieldEffectRef(ptr:BokehDepthOfFieldEffect):Void {
+	flight._js._fn.Effects.freeBokehDepthOfFieldEffectRef(ptr);
+}
+#else
+extern inline function freeBokehDepthOfFieldEffectRef(ptr:BokehDepthOfFieldEffect):Void {
+#if hl
+	flight._hl._fn.Effects.freeBokehDepthOfFieldEffectRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Effects.freeBokehDepthOfFieldEffectRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Effects.freeBokehDepthOfFieldEffectRef(ptr);
+#else
+	#error "flight.Effects: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeCameraMotionBlurEffectRef(ptr:CameraMotionBlurEffect):Void {
+	flight._js._fn.Effects.freeCameraMotionBlurEffectRef(ptr);
+}
+#else
+extern inline function freeCameraMotionBlurEffectRef(ptr:CameraMotionBlurEffect):Void {
+#if hl
+	flight._hl._fn.Effects.freeCameraMotionBlurEffectRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Effects.freeCameraMotionBlurEffectRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Effects.freeCameraMotionBlurEffectRef(ptr);
+#else
+	#error "flight.Effects: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeChromaticAberrationEffectRef(ptr:ChromaticAberrationEffect):Void {
+	flight._js._fn.Effects.freeChromaticAberrationEffectRef(ptr);
+}
+#else
+extern inline function freeChromaticAberrationEffectRef(ptr:ChromaticAberrationEffect):Void {
+#if hl
+	flight._hl._fn.Effects.freeChromaticAberrationEffectRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Effects.freeChromaticAberrationEffectRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Effects.freeChromaticAberrationEffectRef(ptr);
+#else
+	#error "flight.Effects: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeCompositeEffectRef(ptr:CompositeEffect):Void {
+	flight._js._fn.Effects.freeCompositeEffectRef(ptr);
+}
+#else
+extern inline function freeCompositeEffectRef(ptr:CompositeEffect):Void {
+#if hl
+	flight._hl._fn.Effects.freeCompositeEffectRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Effects.freeCompositeEffectRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Effects.freeCompositeEffectRef(ptr);
+#else
+	#error "flight.Effects: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeContactShadowsEffectRef(ptr:ContactShadowsEffect):Void {
+	flight._js._fn.Effects.freeContactShadowsEffectRef(ptr);
+}
+#else
+extern inline function freeContactShadowsEffectRef(ptr:ContactShadowsEffect):Void {
+#if hl
+	flight._hl._fn.Effects.freeContactShadowsEffectRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Effects.freeContactShadowsEffectRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Effects.freeContactShadowsEffectRef(ptr);
+#else
+	#error "flight.Effects: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeConvolutionEffectRef(ptr:ConvolutionEffect):Void {
+	flight._js._fn.Effects.freeConvolutionEffectRef(ptr);
+}
+#else
+extern inline function freeConvolutionEffectRef(ptr:ConvolutionEffect):Void {
+#if hl
+	flight._hl._fn.Effects.freeConvolutionEffectRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Effects.freeConvolutionEffectRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Effects.freeConvolutionEffectRef(ptr);
+#else
+	#error "flight.Effects: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeCrtEffectRef(ptr:CrtEffect):Void {
+	flight._js._fn.Effects.freeCrtEffectRef(ptr);
+}
+#else
+extern inline function freeCrtEffectRef(ptr:CrtEffect):Void {
+#if hl
+	flight._hl._fn.Effects.freeCrtEffectRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Effects.freeCrtEffectRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Effects.freeCrtEffectRef(ptr);
+#else
+	#error "flight.Effects: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeCustomShaderEffectRef(ptr:CustomShaderEffect):Void {
+	flight._js._fn.Effects.freeCustomShaderEffectRef(ptr);
+}
+#else
+extern inline function freeCustomShaderEffectRef(ptr:CustomShaderEffect):Void {
+#if hl
+	flight._hl._fn.Effects.freeCustomShaderEffectRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Effects.freeCustomShaderEffectRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Effects.freeCustomShaderEffectRef(ptr);
+#else
+	#error "flight.Effects: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeDirectionalBlurEffectRef(ptr:DirectionalBlurEffect):Void {
+	flight._js._fn.Effects.freeDirectionalBlurEffectRef(ptr);
+}
+#else
+extern inline function freeDirectionalBlurEffectRef(ptr:DirectionalBlurEffect):Void {
+#if hl
+	flight._hl._fn.Effects.freeDirectionalBlurEffectRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Effects.freeDirectionalBlurEffectRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Effects.freeDirectionalBlurEffectRef(ptr);
+#else
+	#error "flight.Effects: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeDisplacementEffectRef(ptr:DisplacementEffect):Void {
+	flight._js._fn.Effects.freeDisplacementEffectRef(ptr);
+}
+#else
+extern inline function freeDisplacementEffectRef(ptr:DisplacementEffect):Void {
+#if hl
+	flight._hl._fn.Effects.freeDisplacementEffectRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Effects.freeDisplacementEffectRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Effects.freeDisplacementEffectRef(ptr);
+#else
+	#error "flight.Effects: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeDitherEffectRef(ptr:DitherEffect):Void {
+	flight._js._fn.Effects.freeDitherEffectRef(ptr);
+}
+#else
+extern inline function freeDitherEffectRef(ptr:DitherEffect):Void {
+#if hl
+	flight._hl._fn.Effects.freeDitherEffectRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Effects.freeDitherEffectRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Effects.freeDitherEffectRef(ptr);
+#else
+	#error "flight.Effects: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeDropShadowEffectRef(ptr:DropShadowEffect):Void {
+	flight._js._fn.Effects.freeDropShadowEffectRef(ptr);
+}
+#else
+extern inline function freeDropShadowEffectRef(ptr:DropShadowEffect):Void {
+#if hl
+	flight._hl._fn.Effects.freeDropShadowEffectRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Effects.freeDropShadowEffectRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Effects.freeDropShadowEffectRef(ptr);
+#else
+	#error "flight.Effects: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeFilmEmulationEffectRef(ptr:FilmEmulationEffect):Void {
+	flight._js._fn.Effects.freeFilmEmulationEffectRef(ptr);
+}
+#else
+extern inline function freeFilmEmulationEffectRef(ptr:FilmEmulationEffect):Void {
+#if hl
+	flight._hl._fn.Effects.freeFilmEmulationEffectRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Effects.freeFilmEmulationEffectRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Effects.freeFilmEmulationEffectRef(ptr);
+#else
+	#error "flight.Effects: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeFilmGrainEffectRef(ptr:FilmGrainEffect):Void {
+	flight._js._fn.Effects.freeFilmGrainEffectRef(ptr);
+}
+#else
+extern inline function freeFilmGrainEffectRef(ptr:FilmGrainEffect):Void {
+#if hl
+	flight._hl._fn.Effects.freeFilmGrainEffectRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Effects.freeFilmGrainEffectRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Effects.freeFilmGrainEffectRef(ptr);
+#else
+	#error "flight.Effects: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeFxaaEffectRef(ptr:FxaaEffect):Void {
+	flight._js._fn.Effects.freeFxaaEffectRef(ptr);
+}
+#else
+extern inline function freeFxaaEffectRef(ptr:FxaaEffect):Void {
+#if hl
+	flight._hl._fn.Effects.freeFxaaEffectRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Effects.freeFxaaEffectRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Effects.freeFxaaEffectRef(ptr);
+#else
+	#error "flight.Effects: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeGlitchEffectRef(ptr:GlitchEffect):Void {
+	flight._js._fn.Effects.freeGlitchEffectRef(ptr);
+}
+#else
+extern inline function freeGlitchEffectRef(ptr:GlitchEffect):Void {
+#if hl
+	flight._hl._fn.Effects.freeGlitchEffectRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Effects.freeGlitchEffectRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Effects.freeGlitchEffectRef(ptr);
+#else
+	#error "flight.Effects: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeGodRaysEffectRef(ptr:GodRaysEffect):Void {
+	flight._js._fn.Effects.freeGodRaysEffectRef(ptr);
+}
+#else
+extern inline function freeGodRaysEffectRef(ptr:GodRaysEffect):Void {
+#if hl
+	flight._hl._fn.Effects.freeGodRaysEffectRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Effects.freeGodRaysEffectRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Effects.freeGodRaysEffectRef(ptr);
+#else
+	#error "flight.Effects: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeGradientBevelEffectRef(ptr:GradientBevelEffect):Void {
+	flight._js._fn.Effects.freeGradientBevelEffectRef(ptr);
+}
+#else
+extern inline function freeGradientBevelEffectRef(ptr:GradientBevelEffect):Void {
+#if hl
+	flight._hl._fn.Effects.freeGradientBevelEffectRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Effects.freeGradientBevelEffectRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Effects.freeGradientBevelEffectRef(ptr);
+#else
+	#error "flight.Effects: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeGradientGlowEffectRef(ptr:GradientGlowEffect):Void {
+	flight._js._fn.Effects.freeGradientGlowEffectRef(ptr);
+}
+#else
+extern inline function freeGradientGlowEffectRef(ptr:GradientGlowEffect):Void {
+#if hl
+	flight._hl._fn.Effects.freeGradientGlowEffectRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Effects.freeGradientGlowEffectRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Effects.freeGradientGlowEffectRef(ptr);
+#else
+	#error "flight.Effects: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeHalftoneEffectRef(ptr:HalftoneEffect):Void {
+	flight._js._fn.Effects.freeHalftoneEffectRef(ptr);
+}
+#else
+extern inline function freeHalftoneEffectRef(ptr:HalftoneEffect):Void {
+#if hl
+	flight._hl._fn.Effects.freeHalftoneEffectRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Effects.freeHalftoneEffectRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Effects.freeHalftoneEffectRef(ptr);
+#else
+	#error "flight.Effects: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeInnerGlowEffectRef(ptr:InnerGlowEffect):Void {
+	flight._js._fn.Effects.freeInnerGlowEffectRef(ptr);
+}
+#else
+extern inline function freeInnerGlowEffectRef(ptr:InnerGlowEffect):Void {
+#if hl
+	flight._hl._fn.Effects.freeInnerGlowEffectRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Effects.freeInnerGlowEffectRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Effects.freeInnerGlowEffectRef(ptr);
+#else
+	#error "flight.Effects: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeInnerShadowEffectRef(ptr:InnerShadowEffect):Void {
+	flight._js._fn.Effects.freeInnerShadowEffectRef(ptr);
+}
+#else
+extern inline function freeInnerShadowEffectRef(ptr:InnerShadowEffect):Void {
+#if hl
+	flight._hl._fn.Effects.freeInnerShadowEffectRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Effects.freeInnerShadowEffectRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Effects.freeInnerShadowEffectRef(ptr);
+#else
+	#error "flight.Effects: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeKuwaharaEffectRef(ptr:KuwaharaEffect):Void {
+	flight._js._fn.Effects.freeKuwaharaEffectRef(ptr);
+}
+#else
+extern inline function freeKuwaharaEffectRef(ptr:KuwaharaEffect):Void {
+#if hl
+	flight._hl._fn.Effects.freeKuwaharaEffectRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Effects.freeKuwaharaEffectRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Effects.freeKuwaharaEffectRef(ptr);
+#else
+	#error "flight.Effects: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeLensDirtEffectRef(ptr:LensDirtEffect):Void {
+	flight._js._fn.Effects.freeLensDirtEffectRef(ptr);
+}
+#else
+extern inline function freeLensDirtEffectRef(ptr:LensDirtEffect):Void {
+#if hl
+	flight._hl._fn.Effects.freeLensDirtEffectRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Effects.freeLensDirtEffectRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Effects.freeLensDirtEffectRef(ptr);
+#else
+	#error "flight.Effects: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeLensDistortionEffectRef(ptr:LensDistortionEffect):Void {
+	flight._js._fn.Effects.freeLensDistortionEffectRef(ptr);
+}
+#else
+extern inline function freeLensDistortionEffectRef(ptr:LensDistortionEffect):Void {
+#if hl
+	flight._hl._fn.Effects.freeLensDistortionEffectRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Effects.freeLensDistortionEffectRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Effects.freeLensDistortionEffectRef(ptr);
+#else
+	#error "flight.Effects: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeLensFlareEffectRef(ptr:LensFlareEffect):Void {
+	flight._js._fn.Effects.freeLensFlareEffectRef(ptr);
+}
+#else
+extern inline function freeLensFlareEffectRef(ptr:LensFlareEffect):Void {
+#if hl
+	flight._hl._fn.Effects.freeLensFlareEffectRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Effects.freeLensFlareEffectRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Effects.freeLensFlareEffectRef(ptr);
+#else
+	#error "flight.Effects: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeMedianEffectRef(ptr:MedianEffect):Void {
+	flight._js._fn.Effects.freeMedianEffectRef(ptr);
+}
+#else
+extern inline function freeMedianEffectRef(ptr:MedianEffect):Void {
+#if hl
+	flight._hl._fn.Effects.freeMedianEffectRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Effects.freeMedianEffectRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Effects.freeMedianEffectRef(ptr);
+#else
+	#error "flight.Effects: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeMotionBlurEffectRef(ptr:MotionBlurEffect):Void {
+	flight._js._fn.Effects.freeMotionBlurEffectRef(ptr);
+}
+#else
+extern inline function freeMotionBlurEffectRef(ptr:MotionBlurEffect):Void {
+#if hl
+	flight._hl._fn.Effects.freeMotionBlurEffectRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Effects.freeMotionBlurEffectRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Effects.freeMotionBlurEffectRef(ptr);
+#else
+	#error "flight.Effects: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeOuterGlowEffectRef(ptr:OuterGlowEffect):Void {
+	flight._js._fn.Effects.freeOuterGlowEffectRef(ptr);
+}
+#else
+extern inline function freeOuterGlowEffectRef(ptr:OuterGlowEffect):Void {
+#if hl
+	flight._hl._fn.Effects.freeOuterGlowEffectRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Effects.freeOuterGlowEffectRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Effects.freeOuterGlowEffectRef(ptr);
+#else
+	#error "flight.Effects: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeOutlineEffectRef(ptr:OutlineEffect):Void {
+	flight._js._fn.Effects.freeOutlineEffectRef(ptr);
+}
+#else
+extern inline function freeOutlineEffectRef(ptr:OutlineEffect):Void {
+#if hl
+	flight._hl._fn.Effects.freeOutlineEffectRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Effects.freeOutlineEffectRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Effects.freeOutlineEffectRef(ptr);
+#else
+	#error "flight.Effects: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freePanniniProjectionEffectRef(ptr:PanniniProjectionEffect):Void {
+	flight._js._fn.Effects.freePanniniProjectionEffectRef(ptr);
+}
+#else
+extern inline function freePanniniProjectionEffectRef(ptr:PanniniProjectionEffect):Void {
+#if hl
+	flight._hl._fn.Effects.freePanniniProjectionEffectRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Effects.freePanniniProjectionEffectRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Effects.freePanniniProjectionEffectRef(ptr);
+#else
+	#error "flight.Effects: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freePixelateEffectRef(ptr:PixelateEffect):Void {
+	flight._js._fn.Effects.freePixelateEffectRef(ptr);
+}
+#else
+extern inline function freePixelateEffectRef(ptr:PixelateEffect):Void {
+#if hl
+	flight._hl._fn.Effects.freePixelateEffectRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Effects.freePixelateEffectRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Effects.freePixelateEffectRef(ptr);
+#else
+	#error "flight.Effects: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freePosterizeEffectRef(ptr:PosterizeEffect):Void {
+	flight._js._fn.Effects.freePosterizeEffectRef(ptr);
+}
+#else
+extern inline function freePosterizeEffectRef(ptr:PosterizeEffect):Void {
+#if hl
+	flight._hl._fn.Effects.freePosterizeEffectRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Effects.freePosterizeEffectRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Effects.freePosterizeEffectRef(ptr);
+#else
+	#error "flight.Effects: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeRadialBlurEffectRef(ptr:RadialBlurEffect):Void {
+	flight._js._fn.Effects.freeRadialBlurEffectRef(ptr);
+}
+#else
+extern inline function freeRadialBlurEffectRef(ptr:RadialBlurEffect):Void {
+#if hl
+	flight._hl._fn.Effects.freeRadialBlurEffectRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Effects.freeRadialBlurEffectRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Effects.freeRadialBlurEffectRef(ptr);
+#else
+	#error "flight.Effects: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeScanlinesEffectRef(ptr:ScanlinesEffect):Void {
+	flight._js._fn.Effects.freeScanlinesEffectRef(ptr);
+}
+#else
+extern inline function freeScanlinesEffectRef(ptr:ScanlinesEffect):Void {
+#if hl
+	flight._hl._fn.Effects.freeScanlinesEffectRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Effects.freeScanlinesEffectRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Effects.freeScanlinesEffectRef(ptr);
+#else
+	#error "flight.Effects: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeScreenSpaceFogEffectRef(ptr:ScreenSpaceFogEffect):Void {
+	flight._js._fn.Effects.freeScreenSpaceFogEffectRef(ptr);
+}
+#else
+extern inline function freeScreenSpaceFogEffectRef(ptr:ScreenSpaceFogEffect):Void {
+#if hl
+	flight._hl._fn.Effects.freeScreenSpaceFogEffectRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Effects.freeScreenSpaceFogEffectRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Effects.freeScreenSpaceFogEffectRef(ptr);
+#else
+	#error "flight.Effects: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeSharpenEffectRef(ptr:SharpenEffect):Void {
+	flight._js._fn.Effects.freeSharpenEffectRef(ptr);
+}
+#else
+extern inline function freeSharpenEffectRef(ptr:SharpenEffect):Void {
+#if hl
+	flight._hl._fn.Effects.freeSharpenEffectRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Effects.freeSharpenEffectRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Effects.freeSharpenEffectRef(ptr);
+#else
+	#error "flight.Effects: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeSketchEffectRef(ptr:SketchEffect):Void {
+	flight._js._fn.Effects.freeSketchEffectRef(ptr);
+}
+#else
+extern inline function freeSketchEffectRef(ptr:SketchEffect):Void {
+#if hl
+	flight._hl._fn.Effects.freeSketchEffectRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Effects.freeSketchEffectRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Effects.freeSketchEffectRef(ptr);
+#else
+	#error "flight.Effects: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeSmaaEffectRef(ptr:SmaaEffect):Void {
+	flight._js._fn.Effects.freeSmaaEffectRef(ptr);
+}
+#else
+extern inline function freeSmaaEffectRef(ptr:SmaaEffect):Void {
+#if hl
+	flight._hl._fn.Effects.freeSmaaEffectRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Effects.freeSmaaEffectRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Effects.freeSmaaEffectRef(ptr);
+#else
+	#error "flight.Effects: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeSsaoEffectRef(ptr:SsaoEffect):Void {
+	flight._js._fn.Effects.freeSsaoEffectRef(ptr);
+}
+#else
+extern inline function freeSsaoEffectRef(ptr:SsaoEffect):Void {
+#if hl
+	flight._hl._fn.Effects.freeSsaoEffectRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Effects.freeSsaoEffectRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Effects.freeSsaoEffectRef(ptr);
+#else
+	#error "flight.Effects: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeSsrEffectRef(ptr:SsrEffect):Void {
+	flight._js._fn.Effects.freeSsrEffectRef(ptr);
+}
+#else
+extern inline function freeSsrEffectRef(ptr:SsrEffect):Void {
+#if hl
+	flight._hl._fn.Effects.freeSsrEffectRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Effects.freeSsrEffectRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Effects.freeSsrEffectRef(ptr);
+#else
+	#error "flight.Effects: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeTaaEffectRef(ptr:TaaEffect):Void {
+	flight._js._fn.Effects.freeTaaEffectRef(ptr);
+}
+#else
+extern inline function freeTaaEffectRef(ptr:TaaEffect):Void {
+#if hl
+	flight._hl._fn.Effects.freeTaaEffectRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Effects.freeTaaEffectRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Effects.freeTaaEffectRef(ptr);
+#else
+	#error "flight.Effects: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeTiltShiftEffectRef(ptr:TiltShiftEffect):Void {
+	flight._js._fn.Effects.freeTiltShiftEffectRef(ptr);
+}
+#else
+extern inline function freeTiltShiftEffectRef(ptr:TiltShiftEffect):Void {
+#if hl
+	flight._hl._fn.Effects.freeTiltShiftEffectRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Effects.freeTiltShiftEffectRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Effects.freeTiltShiftEffectRef(ptr);
+#else
+	#error "flight.Effects: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeToneMapEffectRef(ptr:ToneMapEffect):Void {
+	flight._js._fn.Effects.freeToneMapEffectRef(ptr);
+}
+#else
+extern inline function freeToneMapEffectRef(ptr:ToneMapEffect):Void {
+#if hl
+	flight._hl._fn.Effects.freeToneMapEffectRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Effects.freeToneMapEffectRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Effects.freeToneMapEffectRef(ptr);
+#else
+	#error "flight.Effects: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeVignetteEffectRef(ptr:VignetteEffect):Void {
+	flight._js._fn.Effects.freeVignetteEffectRef(ptr);
+}
+#else
+extern inline function freeVignetteEffectRef(ptr:VignetteEffect):Void {
+#if hl
+	flight._hl._fn.Effects.freeVignetteEffectRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Effects.freeVignetteEffectRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Effects.freeVignetteEffectRef(ptr);
+#else
+	#error "flight.Effects: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeVolumetricLightEffectRef(ptr:VolumetricLightEffect):Void {
+	flight._js._fn.Effects.freeVolumetricLightEffectRef(ptr);
+}
+#else
+extern inline function freeVolumetricLightEffectRef(ptr:VolumetricLightEffect):Void {
+#if hl
+	flight._hl._fn.Effects.freeVolumetricLightEffectRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Effects.freeVolumetricLightEffectRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Effects.freeVolumetricLightEffectRef(ptr);
+#else
+	#error "flight.Effects: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeWhiteBalanceEffectRef(ptr:WhiteBalanceEffect):Void {
+	flight._js._fn.Effects.freeWhiteBalanceEffectRef(ptr);
+}
+#else
+extern inline function freeWhiteBalanceEffectRef(ptr:WhiteBalanceEffect):Void {
+#if hl
+	flight._hl._fn.Effects.freeWhiteBalanceEffectRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Effects.freeWhiteBalanceEffectRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Effects.freeWhiteBalanceEffectRef(ptr);
+#else
+	#error "flight.Effects: no backend for this target."
+#end
+}
+#end

@@ -27,4 +27,6 @@ extern class Clock {
 	public static function resumeClock(clock:flight._cpp.Clock):Void;
 	@:native("flight_set_clock_scale")
 	public static function setClockScale(clock:flight._cpp.Clock, scale:Float):Void;
+	@:native("flight_free_clock_ref")
+	public static function freeClockRef(ptr:flight._cpp.Clock):Void;
 }

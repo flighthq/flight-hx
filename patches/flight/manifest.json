@@ -1,15 +1,8 @@
 {
-  "sourceCommit": "5e1121e4cfdfde289b5373693dd285a2035dd285",
+  "sourceCommit": "c52653a12e10251ab93970f71a6bc0c4dcbe21fa",
   "patches": [
-    "patches/flight/0004-hl-packed-floats.patch",
-    "patches/flight/0006-ref-handles.patch",
-    "patches/flight/0007-byte-buffer-results.patch",
-    "patches/flight/0008-exported-struct-fields.patch",
-    "patches/flight/0009-develop-compatibility.patch",
-    "patches/flight/0010-haxe-owned-carriers.patch",
-    "patches/flight/0011-stable-free-function-modules.patch",
-    "patches/flight/0012-inherited-node-properties.patch",
-    "patches/flight/0013-web-host-seams.patch",
-    "patches/flight/0014-app-host-seams.patch"
+    "patches/flight/0015-workspace-lock.patch",
+    "patches/flight/0016-esm-host-seams.patch",
+    "patches/flight/0017-binding-carriers-and-fields.patch"
   ]
 }

@@ -4,7 +4,7 @@ abstract Matrix3(hl.Bytes) {
 	static inline public function create():flight._hl.Matrix3 {
 		return flight._hl._fn.Geometry.createMatrix3();
 	}
-	static inline public function createFromValues(m00:Single, m01:Single, m02:Single, m10:Single, m11:Single, m12:Single, m20:Single, m21:Single, m22:Single):flight._hl.Matrix3 {
+	static inline public function createFromValues(m00:Float, m01:Float, m02:Float, m10:Float, m11:Float, m12:Float, m20:Float, m21:Float, m22:Float):flight._hl.Matrix3 {
 		return flight._hl._fn.Geometry.createMatrix3FromValues(m00, m01, m02, m10, m11, m12, m20, m21, m22);
 	}
 	inline public function clone():flight._hl.Matrix3 {
@@ -22,10 +22,10 @@ abstract Matrix3(hl.Bytes) {
 	inline public function equals(b:flight._hl.Matrix3):Bool {
 		return flight._hl._fn.Geometry.equalsMatrix3(cast this, b);
 	}
-	inline public function getDeterminant():Single {
+	inline public function getDeterminant():Float {
 		return flight._hl._fn.Geometry.getMatrix3Determinant(cast this);
 	}
-	inline public function getElement(row:Int, column:Int):Single {
+	inline public function getElement(row:Int, column:Int):Float {
 		return flight._hl._fn.Geometry.getMatrix3Element(cast this, row, column);
 	}
 	inline public function inverse(source:flight._hl.Matrix3):Bool {
@@ -37,16 +37,16 @@ abstract Matrix3(hl.Bytes) {
 	inline public function multiply(a:flight._hl.Matrix3, b:flight._hl.Matrix3):Void {
 		flight._hl._fn.Geometry.multiplyMatrix3(cast this, a, b);
 	}
-	inline public function rotate(source:flight._hl.Matrix3, theta:Single):Void {
+	inline public function rotate(source:flight._hl.Matrix3, theta:Float):Void {
 		flight._hl._fn.Geometry.rotateMatrix3(cast this, source, theta);
 	}
-	inline public function scale(source:flight._hl.Matrix3, sx:Single, sy:Single):Void {
+	inline public function scale(source:flight._hl.Matrix3, sx:Float, sy:Float):Void {
 		flight._hl._fn.Geometry.scaleMatrix3(cast this, source, sx, sy);
 	}
-	inline public function set(m00:Single, m01:Single, m02:Single, m10:Single, m11:Single, m12:Single, m20:Single, m21:Single, m22:Single):Void {
+	inline public function set(m00:Float, m01:Float, m02:Float, m10:Float, m11:Float, m12:Float, m20:Float, m21:Float, m22:Float):Void {
 		flight._hl._fn.Geometry.setMatrix3(cast this, m00, m01, m02, m10, m11, m12, m20, m21, m22);
 	}
-	inline public function setElement(row:Int, column:Int, value:Single):Void {
+	inline public function setElement(row:Int, column:Int, value:Float):Void {
 		flight._hl._fn.Geometry.setMatrix3Element(cast this, row, column, value);
 	}
 	inline public function setFromFloat32Array(offset:Int, source:hl.Bytes, sourceLen:Int):Void {
@@ -64,7 +64,7 @@ abstract Matrix3(hl.Bytes) {
 	inline public function setNormalFromMatrix4(source:flight._hl.Matrix4):Void {
 		flight._hl._fn.Geometry.setMatrix3NormalFromMatrix4(cast this, source);
 	}
-	inline public function translate(source:flight._hl.Matrix3, tx:Single, ty:Single):Void {
+	inline public function translate(source:flight._hl.Matrix3, tx:Float, ty:Float):Void {
 		flight._hl._fn.Geometry.translateMatrix3(cast this, source, tx, ty);
 	}
 	inline public function transpose(source:flight._hl.Matrix3):Void {

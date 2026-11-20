@@ -12,4 +12,6 @@ extern class Xml {
 	public static function getXmlElementChildByName(element:flight._js.XmlElement, name:String):Null<Dynamic>;
 	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeXmlElement(ptr:flight._js.XmlElement):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeXmlElementRef(ptr:flight._js.XmlElement):Void {}
 }

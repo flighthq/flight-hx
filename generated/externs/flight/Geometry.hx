@@ -616,18 +616,6 @@ extern inline function disableGeometryPoolGuards():Void {
 extern inline function enableGeometryPoolGuards(logState:Dynamic, clock:Dynamic):Void {
 	flight._js._fn.Geometry.enableGeometryPoolGuards(logState, clock);
 }
-#else
-extern inline function enableGeometryPoolGuards(logState:Dynamic, clockFn:Dynamic, clockCtx:Dynamic):Void {
-#if hl
-	flight._hl._fn.Geometry.enableGeometryPoolGuards(logState, clockFn, clockCtx);
-#elseif cpp
-	flight._cpp._fn.Geometry.enableGeometryPoolGuards(logState, clockFn, clockCtx);
-#elseif (js && flight_esm)
-	flight._js._fn.Geometry.enableGeometryPoolGuards(logState, clockFn, clockCtx);
-#else
-	#error "flight.Geometry: no backend for this target."
-#end
-}
 #end
 #if (js && flight_esm)
 extern inline function createFrustum():Frustum {

@@ -1,0 +1,43 @@
+package flight._js;
+
+abstract GlyphAtlasRuntime(Dynamic) {
+	public var dirty(get, set):Bool;
+	inline function get_dirty():Bool return untyped this.dirty;
+	inline function set_dirty(value:Bool):Bool return untyped this.dirty = value;
+	public var dirtyMaxX(get, set):Int;
+	inline function get_dirtyMaxX():Int return untyped this.dirtyMaxX;
+	inline function set_dirtyMaxX(value:Int):Int return untyped this.dirtyMaxX = value;
+	public var dirtyMaxY(get, set):Int;
+	inline function get_dirtyMaxY():Int return untyped this.dirtyMaxY;
+	inline function set_dirtyMaxY(value:Int):Int return untyped this.dirtyMaxY = value;
+	public var dirtyMinX(get, set):Int;
+	inline function get_dirtyMinX():Int return untyped this.dirtyMinX;
+	inline function set_dirtyMinX(value:Int):Int return untyped this.dirtyMinX = value;
+	public var dirtyMinY(get, set):Int;
+	inline function get_dirtyMinY():Int return untyped this.dirtyMinY;
+	inline function set_dirtyMinY(value:Int):Int return untyped this.dirtyMinY = value;
+	public var layoutVersion(get, set):Int;
+	inline function get_layoutVersion():Int return untyped this.layoutVersion;
+	inline function set_layoutVersion(value:Int):Int return untyped this.layoutVersion = value;
+	public var maxArea(get, set):Int;
+	inline function get_maxArea():Int return untyped this.maxArea;
+	inline function set_maxArea(value:Int):Int return untyped this.maxArea = value;
+	public var maxBytes(get, set):Int;
+	inline function get_maxBytes():Int return untyped this.maxBytes;
+	inline function set_maxBytes(value:Int):Int return untyped this.maxBytes = value;
+	public var maxGlyphs(get, set):Int;
+	inline function get_maxGlyphs():Int return untyped this.maxGlyphs;
+	inline function set_maxGlyphs(value:Int):Int return untyped this.maxGlyphs = value;
+	public var occupiedArea(get, set):Int;
+	inline function get_occupiedArea():Int return untyped this.occupiedArea;
+	inline function set_occupiedArea(value:Int):Int return untyped this.occupiedArea = value;
+	public var packBottom(get, set):Int;
+	inline function get_packBottom():Int return untyped this.packBottom;
+	inline function set_packBottom(value:Int):Int return untyped this.packBottom = value;
+	public var padding(get, set):Int;
+	inline function get_padding():Int return untyped this.padding;
+	inline function set_padding(value:Int):Int return untyped this.padding = value;
+	public var retainedBytes(get, set):Int;
+	inline function get_retainedBytes():Int return untyped this.retainedBytes;
+	inline function set_retainedBytes(value:Int):Int return untyped this.retainedBytes = value;
+}

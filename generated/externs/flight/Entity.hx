@@ -102,20 +102,3 @@ extern inline function freeEntityRuntimeWriteExplanation(ptr:EntityRuntimeWriteE
 #end
 }
 #end
-#if (js && flight_esm)
-extern inline function freeRef(ptr:Dynamic):Void {
-	flight._js._fn.Entity.freeRef(ptr);
-}
-#else
-extern inline function freeRef(ptr:Dynamic):Void {
-#if hl
-	flight._hl._fn.Entity.freeRef(ptr);
-#elseif cpp
-	flight._cpp._fn.Entity.freeRef(ptr);
-#elseif (js && flight_esm)
-	flight._js._fn.Entity.freeRef(ptr);
-#else
-	#error "flight.Entity: no backend for this target."
-#end
-}
-#end

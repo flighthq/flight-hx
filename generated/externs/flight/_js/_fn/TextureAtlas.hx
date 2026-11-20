@@ -57,5 +57,9 @@ extern class TextureAtlas {
 	@:native("setTextureAtlasRegion")
 	public static function setTextureAtlasRegion(out:flight._js.TextureAtlasRegion, source:flight._js.TextureAtlasRegionOptions):Void;
 	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeTextureAtlasRegionRef(ptr:flight._js.TextureAtlasRegion):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeTextureAtlasRegionTextureExplanation(ptr:flight._js.TextureAtlasRegionTextureExplanation):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeTextureAtlasRef(ptr:flight._js.TextureAtlas):Void {}
 }

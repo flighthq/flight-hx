@@ -108,6 +108,8 @@ extern class Node {
 	public static function getNodeSignals(source:Dynamic):Null<Dynamic>;
 	@:native("setNodeEnabled")
 	public static function setNodeEnabled(target:Dynamic, value:Bool):Void;
+	@:native("addNodeColorAdjustment")
+	public static function addNodeColorAdjustment(source:Dynamic, adjustment:flight._js.AdjustmentRef):Void;
 	@:native("setNodeColorAdjustmentsTint")
 	public static function setNodeColorAdjustmentsTint(source:Dynamic, tint:Int):Void;
 	@:native("createNodeOrderList")
@@ -214,6 +216,8 @@ extern class Node {
 	public static function createViewport():flight._js.Viewport;
 	@:native("getViewportAspect")
 	public static function getViewportAspect(viewport:flight._js.Viewport):Float;
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeNodeSignalsRef(ptr:flight._js.NodeSignals):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeNodeOrderList(ptr:flight._js.NodeOrderList):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */

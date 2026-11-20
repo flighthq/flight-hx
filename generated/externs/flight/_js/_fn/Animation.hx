@@ -26,8 +26,8 @@ extern class Animation {
 	public static function sampleAnimationBlendTreeChannel(out:Dynamic, tree:flight._js.AnimationBlendTree, channelIndex:Int):Bool;
 	@:native("setAnimationBlendTreeInputWeight")
 	public static function setAnimationBlendTreeInputWeight(tree:flight._js.AnimationBlendTree, inputIndex:Int, weight:Float):Bool;
-	@:native("createAnimationClip")
-	public static function createAnimationClip(channels:Dynamic, duration:Null<Float>, events:Dynamic):flight._js.AnimationClip;
+	@:native("createAnimationChannel")
+	public static function createAnimationChannel(track:Dynamic, targetRef:flight._js.TargetRef):flight._js.AnimationChannel;
 	@:native("createAnimationClipEvent")
 	public static function createAnimationClipEvent():flight._js.AnimationClipEvent;
 	@:native("cloneAnimationClip")
@@ -106,6 +106,8 @@ extern class Animation {
 	public static inline function freeAnimationBlendTree(ptr:flight._js.AnimationBlendTree):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeAnimationBlendTreeInput(ptr:flight._js.AnimationBlendTreeInput):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeAnimationChannel(ptr:flight._js.AnimationChannel):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeAnimationClip(ptr:flight._js.AnimationClip):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */

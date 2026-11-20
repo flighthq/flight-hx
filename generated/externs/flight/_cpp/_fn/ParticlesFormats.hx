@@ -9,6 +9,8 @@ extern class ParticlesFormats {
 	public static function getRegisteredParticleFormats(out:cpp.Star<cpp.Void>, registry:flight._cpp.ParticleFormatRegistry):Void;
 	@:native("flight_parse_registered_particle_format")
 	public static function parseRegisteredParticleFormat(registry:flight._cpp.ParticleFormatRegistry, text:cpp.ConstCharStar, kind:cpp.ConstCharStar, options:flight._cpp.ParseParticleConfigOptions):flight._cpp.ParticleConfigParseResult;
+	@:native("flight_register_particle_format")
+	public static function registerParticleFormat(registry:flight._cpp.ParticleFormatRegistry, kind:cpp.ConstCharStar, codec:flight._cpp.ParticleFormatCodec):Void;
 	@:native("flight_unregister_particle_format")
 	public static function unregisterParticleFormat(registry:flight._cpp.ParticleFormatRegistry, kind:cpp.ConstCharStar):Bool;
 	@:native("flight_parse_libgdx_particle")

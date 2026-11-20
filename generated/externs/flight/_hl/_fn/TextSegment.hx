@@ -3,8 +3,6 @@ package flight._hl._fn;
 extern class TextSegment {
 	@:hlNative("flight", "flight_disable_text_segment_guards")
 	public static function disableTextSegmentGuards():Void;
-	@:hlNative("flight", "flight_enable_text_segment_guards")
-	public static function enableTextSegmentGuards(logState:hl.Bytes, clockFn:hl.Bytes, clockCtx:hl.Bytes):Void;
 	@:hlNative("flight", "flight_segment_graphemes")
 	public static function segmentGraphemes(out:hl.Bytes, hostTextSegmenter:flight._hl.HostTextSegmenterCapability, text:hl.Bytes, locale:hl.Bytes):Void;
 	@:hlNative("flight", "flight_segment_sentences")

@@ -59,10 +59,16 @@ extern class Spritesheet {
 	public static function validateSpritesheetData(out:hl.Bytes, data:flight._hl.SpritesheetData):Bool;
 	@:hlNative("flight", "flight_free_spritesheet")
 	public static function freeSpritesheet(ptr:flight._hl.Spritesheet):Void;
+	@:hlNative("flight", "flight_free_spritesheet_animation_ref")
+	public static function freeSpritesheetAnimationRef(ptr:flight._hl.SpritesheetAnimation):Void;
 	@:hlNative("flight", "flight_free_spritesheet_animation_data")
 	public static function freeSpritesheetAnimationData(ptr:flight._hl.SpritesheetAnimationData):Void;
 	@:hlNative("flight", "flight_free_spritesheet_data")
 	public static function freeSpritesheetData(ptr:flight._hl.SpritesheetData):Void;
 	@:hlNative("flight", "flight_free_spritesheet_frame_data")
 	public static function freeSpritesheetFrameData(ptr:flight._hl.SpritesheetFrameData):Void;
+	@:hlNative("flight", "flight_free_spritesheet_frame_ref")
+	public static function freeSpritesheetFrameRef(ptr:flight._hl.SpritesheetFrame):Void;
+	@:hlNative("flight", "flight_free_spritesheet_player_ref")
+	public static function freeSpritesheetPlayerRef(ptr:flight._hl.SpritesheetPlayer):Void;
 }

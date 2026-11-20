@@ -11,16 +11,16 @@ private extern class Physics2DContact_Ffi {
 	@:native("flight_set_physics2_dcontact_collider_b") static function set_colliderB(ptr:cpp.Star<cpp.Void>, value:Int):Int;
 	@:native("flight_get_physics2_dcontact_enabled") static function get_enabled(ptr:cpp.Star<cpp.Void>):Bool;
 	@:native("flight_set_physics2_dcontact_enabled") static function set_enabled(ptr:cpp.Star<cpp.Void>, value:Bool):Bool;
-	@:native("flight_get_physics2_dcontact_friction") static function get_friction(ptr:cpp.Star<cpp.Void>):Single;
-	@:native("flight_set_physics2_dcontact_friction") static function set_friction(ptr:cpp.Star<cpp.Void>, value:Single):Single;
-	@:native("flight_get_physics2_dcontact_normal_x") static function get_normalX(ptr:cpp.Star<cpp.Void>):Single;
-	@:native("flight_set_physics2_dcontact_normal_x") static function set_normalX(ptr:cpp.Star<cpp.Void>, value:Single):Single;
-	@:native("flight_get_physics2_dcontact_normal_y") static function get_normalY(ptr:cpp.Star<cpp.Void>):Single;
-	@:native("flight_set_physics2_dcontact_normal_y") static function set_normalY(ptr:cpp.Star<cpp.Void>, value:Single):Single;
+	@:native("flight_get_physics2_dcontact_friction") static function get_friction(ptr:cpp.Star<cpp.Void>):Float;
+	@:native("flight_set_physics2_dcontact_friction") static function set_friction(ptr:cpp.Star<cpp.Void>, value:Float):Float;
+	@:native("flight_get_physics2_dcontact_normal_x") static function get_normalX(ptr:cpp.Star<cpp.Void>):Float;
+	@:native("flight_set_physics2_dcontact_normal_x") static function set_normalX(ptr:cpp.Star<cpp.Void>, value:Float):Float;
+	@:native("flight_get_physics2_dcontact_normal_y") static function get_normalY(ptr:cpp.Star<cpp.Void>):Float;
+	@:native("flight_set_physics2_dcontact_normal_y") static function set_normalY(ptr:cpp.Star<cpp.Void>, value:Float):Float;
 	@:native("flight_get_physics2_dcontact_point_count") static function get_pointCount(ptr:cpp.Star<cpp.Void>):Int;
 	@:native("flight_set_physics2_dcontact_point_count") static function set_pointCount(ptr:cpp.Star<cpp.Void>, value:Int):Int;
-	@:native("flight_get_physics2_dcontact_restitution") static function get_restitution(ptr:cpp.Star<cpp.Void>):Single;
-	@:native("flight_set_physics2_dcontact_restitution") static function set_restitution(ptr:cpp.Star<cpp.Void>, value:Single):Single;
+	@:native("flight_get_physics2_dcontact_restitution") static function get_restitution(ptr:cpp.Star<cpp.Void>):Float;
+	@:native("flight_set_physics2_dcontact_restitution") static function set_restitution(ptr:cpp.Star<cpp.Void>, value:Float):Float;
 	@:native("flight_get_physics2_dcontact_sensor") static function get_sensor(ptr:cpp.Star<cpp.Void>):Bool;
 	@:native("flight_set_physics2_dcontact_sensor") static function set_sensor(ptr:cpp.Star<cpp.Void>, value:Bool):Bool;
 	@:native("flight_get_physics2_dcontact_touching") static function get_touching(ptr:cpp.Star<cpp.Void>):Bool;
@@ -53,31 +53,31 @@ abstract Physics2DContact(cpp.Star<cpp.Void>) {
 	inline function get_enabled():Bool return Physics2DContact_Ffi.get_enabled(this);
 
 	inline function set_enabled(value:Bool):Bool { Physics2DContact_Ffi.set_enabled(this, value); return value; }
-	public var friction(get, set):Single;
+	public var friction(get, set):Float;
 
-	inline function get_friction():Single return Physics2DContact_Ffi.get_friction(this);
+	inline function get_friction():Float return Physics2DContact_Ffi.get_friction(this);
 
-	inline function set_friction(value:Single):Single { Physics2DContact_Ffi.set_friction(this, value); return value; }
-	public var normalX(get, set):Single;
+	inline function set_friction(value:Float):Float { Physics2DContact_Ffi.set_friction(this, value); return value; }
+	public var normalX(get, set):Float;
 
-	inline function get_normalX():Single return Physics2DContact_Ffi.get_normalX(this);
+	inline function get_normalX():Float return Physics2DContact_Ffi.get_normalX(this);
 
-	inline function set_normalX(value:Single):Single { Physics2DContact_Ffi.set_normalX(this, value); return value; }
-	public var normalY(get, set):Single;
+	inline function set_normalX(value:Float):Float { Physics2DContact_Ffi.set_normalX(this, value); return value; }
+	public var normalY(get, set):Float;
 
-	inline function get_normalY():Single return Physics2DContact_Ffi.get_normalY(this);
+	inline function get_normalY():Float return Physics2DContact_Ffi.get_normalY(this);
 
-	inline function set_normalY(value:Single):Single { Physics2DContact_Ffi.set_normalY(this, value); return value; }
+	inline function set_normalY(value:Float):Float { Physics2DContact_Ffi.set_normalY(this, value); return value; }
 	public var pointCount(get, set):Int;
 
 	inline function get_pointCount():Int return Physics2DContact_Ffi.get_pointCount(this);
 
 	inline function set_pointCount(value:Int):Int { Physics2DContact_Ffi.set_pointCount(this, value); return value; }
-	public var restitution(get, set):Single;
+	public var restitution(get, set):Float;
 
-	inline function get_restitution():Single return Physics2DContact_Ffi.get_restitution(this);
+	inline function get_restitution():Float return Physics2DContact_Ffi.get_restitution(this);
 
-	inline function set_restitution(value:Single):Single { Physics2DContact_Ffi.set_restitution(this, value); return value; }
+	inline function set_restitution(value:Float):Float { Physics2DContact_Ffi.set_restitution(this, value); return value; }
 	public var sensor(get, set):Bool;
 
 	inline function get_sensor():Bool return Physics2DContact_Ffi.get_sensor(this);

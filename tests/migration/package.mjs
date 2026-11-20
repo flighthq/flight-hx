@@ -35,11 +35,12 @@ try {
   assert.equal(readFileSync(path.join(installed, 'extraParams.hxml'), 'utf8').trim(), '--macro flight_hx.Package.configure()');
   // Apply the exact metadata/extraParams contract from the extracted consumer archive. This
   // exercises package-relative resolution without requiring Neko just to launch haxelib.
-  const consumer = ['-cp', path.join(installed, haxelib.classPath), '--macro', 'flight_hx.Package.configure()',
-    '-cp', 'examples/ffi-smoke', '--main', 'Smoke'];
+  const packageArgs = ['-cp', path.join(installed, haxelib.classPath), '--macro', 'flight_hx.Package.configure()'];
+  const consumer = [...packageArgs, '-cp', 'examples/ffi-smoke', '--main', 'Smoke'];
+  const webConsumer = [...packageArgs, '-cp', 'examples/esm-smoke', '--main', 'WebSmoke', '-D', 'flight_esm'];
   for (const target of ['hl', 'cpp', 'js']) {
-    run(process.execPath, ['tools/haxe.mjs', ...consumer, '--no-output', `--${target}`, path.join(work, target),
-      ...(target === 'js' ? ['-D', 'flight_esm'] : [])]);
+    run(process.execPath, ['tools/haxe.mjs', ...(target === 'js' ? webConsumer : consumer),
+      '--no-output', `--${target}`, path.join(work, target)]);
   }
   for (const [args, expected] of [
     [['--interp'], 'no backend'],
@@ -51,7 +52,7 @@ try {
     assert.ok(`${result.stdout}${result.stderr}`.includes(expected), `${result.stdout}${result.stderr}`);
   }
   const esm = path.join(work, 'smoke.mjs');
-  run(process.execPath, ['tools/haxe.mjs', ...consumer, '-D', 'flight_esm', '-dce', 'full', '--macro', 'EsmGenerator.use()', '--js', esm]);
+  run(process.execPath, ['tools/haxe.mjs', ...webConsumer, '-dce', 'full', '--macro', 'EsmGenerator.use()', '--js', esm]);
   const javascript = readFileSync(esm, 'utf8');
   assert.match(javascript, /import \* as \w+ from "@flighthq\/math"/u);
   assert.match(javascript, /import \* as \w+ from "@flighthq\/geometry"/u);

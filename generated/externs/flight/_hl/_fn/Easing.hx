@@ -101,8 +101,6 @@ extern class Easing {
 	public static function easeSteps(count:Int, position:Int):flight._hl.EasingFunction;
 	@:hlNative("flight", "flight_disable_easing_guards")
 	public static function disableEasingGuards():Void;
-	@:hlNative("flight", "flight_enable_easing_guards")
-	public static function enableEasingGuards(logState:hl.Bytes, clockFn:hl.Bytes, clockCtx:hl.Bytes):Void;
 	@:hlNative("flight", "flight_get_easing_derivative")
 	public static function getEasingDerivative(easeFn:hl.Bytes, easeCtx:hl.Bytes, t:Single, epsilon:Single):Single;
 	@:hlNative("flight", "flight_write_easing_samples")

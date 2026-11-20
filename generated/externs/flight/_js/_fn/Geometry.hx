@@ -426,7 +426,7 @@ extern class Geometry {
 	public static function releaseQuaternion(q:flight._js.Quaternion):Void;
 	@:native("createRay3D")
 	public static function createRay3d(originX:Float, originY:Float, originZ:Float, directionX:Float, directionY:Float, directionZ:Float):flight._js.Ray3D;
-	@:native("getClosestPointBetweenRay3ds")
+	@:native("getClosestPointBetweenRay3Ds")
 	public static function getClosestPointBetweenRay3ds(outA:flight._js.Vector3, outB:flight._js.Vector3, a:flight._js.Ray3D, b:flight._js.Ray3D):Void;
 	@:native("getClosestPointOnRay3D")
 	public static function getClosestPointOnRay3d(out:flight._js.Vector3, ray:flight._js.Ray3D, point:flight._js.Vector3):Void;

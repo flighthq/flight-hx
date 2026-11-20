@@ -101,8 +101,6 @@ extern class Easing {
 	public static function easeSteps(count:Int, position:Int):flight._cpp.EasingFunction;
 	@:native("flight_disable_easing_guards")
 	public static function disableEasingGuards():Void;
-	@:native("flight_enable_easing_guards")
-	public static function enableEasingGuards(logState:cpp.Star<cpp.Void>, clockFn:cpp.Star<cpp.Void>, clockCtx:cpp.Star<cpp.Void>):Void;
 	@:native("flight_get_easing_derivative")
 	public static function getEasingDerivative(easeFn:cpp.Star<cpp.Void>, easeCtx:cpp.Star<cpp.Void>, t:Single, epsilon:Single):Single;
 	@:native("flight_write_easing_samples")

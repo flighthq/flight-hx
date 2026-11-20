@@ -1,9 +1,9 @@
 package flight._hl;
 
 abstract PerspectiveProjectionOptions(hl.Bytes) {
-	public var fovY(get, set):Single;
+	public var fovY(get, set):Float;
 
-	inline function get_fovY():Single return this.getF32(8);
+	inline function get_fovY():Float return this.getF64(16);
 
-	inline function set_fovY(value:Single):Single { this.setF32(8, value); return value; }
+	inline function set_fovY(value:Float):Float { this.setF64(16, value); return value; }
 }

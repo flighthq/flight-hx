@@ -754,11 +754,11 @@ extern inline function freeTexture2D(ptr:Texture2D):Void {
 }
 #end
 #if (js && flight_esm)
-extern inline function freeTextureSourceRef(ptr:TextureSourceRef):Void {
+extern inline function freeTextureSourceRef(ptr:TextureSource):Void {
 	flight._js._fn.Texture.freeTextureSourceRef(ptr);
 }
 #else
-extern inline function freeTextureSourceRef(ptr:TextureSourceRef):Void {
+extern inline function freeTextureSourceRef(ptr:TextureSource):Void {
 #if hl
 	flight._hl._fn.Texture.freeTextureSourceRef(ptr);
 #elseif cpp

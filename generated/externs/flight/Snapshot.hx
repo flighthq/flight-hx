@@ -43,18 +43,6 @@ extern inline function disableSnapshotGuards(guards:SnapshotGuardState):Void {
 extern inline function enableSnapshotGuards(guards:SnapshotGuardState, logState:Dynamic, clock:Dynamic):Void {
 	flight._js._fn.Snapshot.enableSnapshotGuards(guards, logState, clock);
 }
-#else
-extern inline function enableSnapshotGuards(guards:SnapshotGuardState, logState:Dynamic, clockFn:Dynamic, clockCtx:Dynamic):Void {
-#if hl
-	flight._hl._fn.Snapshot.enableSnapshotGuards(guards, logState, clockFn, clockCtx);
-#elseif cpp
-	flight._cpp._fn.Snapshot.enableSnapshotGuards(guards, logState, clockFn, clockCtx);
-#elseif (js && flight_esm)
-	flight._js._fn.Snapshot.enableSnapshotGuards(guards, logState, clockFn, clockCtx);
-#else
-	#error "flight.Snapshot: no backend for this target."
-#end
-}
 #end
 #if (js && flight_esm)
 extern inline function equalsSnapshot(a:Snapshot, b:Snapshot):Bool {

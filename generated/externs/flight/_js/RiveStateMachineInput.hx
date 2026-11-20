@@ -2,9 +2,9 @@ package flight._js;
 
 abstract RiveStateMachineInput(Dynamic) {
 	public var kind(get, set):String;
-	inline function get_kind():String return untyped this["kind"];
-	inline function set_kind(value:String):String return untyped this["kind"] = value;
+	inline function get_kind():String return untyped this.kind;
+	inline function set_kind(value:String):String return untyped this.kind = value;
 	public var name(get, set):String;
-	inline function get_name():String return untyped this["name"];
-	inline function set_name(value:String):String return untyped this["name"] = value;
+	inline function get_name():String return untyped this.name;
+	inline function set_name(value:String):String return untyped this.name = value;
 }

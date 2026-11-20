@@ -22,7 +22,7 @@ extern inline function pickScene3d(out:Scene3DHit, scene:Dynamic, camera:Camera3
 	return flight._js._fn.Picking.pickScene3d(out, scene, camera, screenX, screenY, options);
 }
 #else
-extern inline function pickScene3d(out:Scene3DHit, scene:Dynamic, camera:Camera3D, screenX:Float, screenY:Float, options:Scene3DPickOptions):Bool {
+extern inline function pickScene3d(out:Scene3DHit, scene:flight.FlightNode, camera:Camera3D, screenX:Float, screenY:Float, options:Scene3DPickOptions):Bool {
 #if hl
 	return flight._hl._fn.Picking.pickScene3d(out, scene, camera, screenX, screenY, options);
 #elseif cpp
@@ -39,7 +39,7 @@ extern inline function pickScene3dAll(outArray:Dynamic, scene:Dynamic, camera:Ca
 	flight._js._fn.Picking.pickScene3dAll(outArray, scene, camera, screenX, screenY, options);
 }
 #else
-extern inline function pickScene3dAll(outArray:Dynamic, scene:Dynamic, camera:Camera3D, screenX:Float, screenY:Float, options:Scene3DPickOptions):Void {
+extern inline function pickScene3dAll(outArray:Dynamic, scene:flight.FlightNode, camera:Camera3D, screenX:Float, screenY:Float, options:Scene3DPickOptions):Void {
 #if hl
 	flight._hl._fn.Picking.pickScene3dAll(outArray, scene, camera, screenX, screenY, options);
 #elseif cpp
@@ -56,7 +56,7 @@ extern inline function pickScene3dAllWithRay3d(outArray:Dynamic, scene:Dynamic, 
 	flight._js._fn.Picking.pickScene3dAllWithRay3d(outArray, scene, ray, options);
 }
 #else
-extern inline function pickScene3dAllWithRay3d(outArray:Dynamic, scene:Dynamic, ray:Ray3D, options:Scene3DPickOptions):Void {
+extern inline function pickScene3dAllWithRay3d(outArray:Dynamic, scene:flight.FlightNode, ray:Ray3D, options:Scene3DPickOptions):Void {
 #if hl
 	flight._hl._fn.Picking.pickScene3dAllWithRay3d(outArray, scene, ray, options);
 #elseif cpp
@@ -73,7 +73,7 @@ extern inline function pickScene3dWithRay3d(out:Scene3DHit, scene:Dynamic, ray:R
 	return flight._js._fn.Picking.pickScene3dWithRay3d(out, scene, ray, options);
 }
 #else
-extern inline function pickScene3dWithRay3d(out:Scene3DHit, scene:Dynamic, ray:Ray3D, options:Scene3DPickOptions):Bool {
+extern inline function pickScene3dWithRay3d(out:Scene3DHit, scene:flight.FlightNode, ray:Ray3D, options:Scene3DPickOptions):Bool {
 #if hl
 	return flight._hl._fn.Picking.pickScene3dWithRay3d(out, scene, ray, options);
 #elseif cpp

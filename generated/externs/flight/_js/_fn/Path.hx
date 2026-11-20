@@ -20,6 +20,8 @@ extern class Path {
 	public static function explainStrokePathTessellation(path:flight._js.Path, style:flight._js.StrokeStyle, tolerance:Null<Float>):flight._js.StrokePathTessellationExplanation;
 	@:native("fitPathCurves")
 	public static function fitPathCurves(source:flight._js.Path, tolerance:Float, out:flight._js.Path, flattenTolerance:Null<Float>):Void;
+	@:native("forEachPathSegment")
+	public static function forEachPathSegment(path:flight._js.Path, visitor:Dynamic):Void;
 	@:native("getPathBounds")
 	public static function getPathBounds(path:flight._js.Path, out:flight._js.Rectangle):Bool;
 	@:native("getPathContourLengths")

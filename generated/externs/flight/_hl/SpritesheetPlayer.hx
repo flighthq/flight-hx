@@ -27,21 +27,26 @@ abstract SpritesheetPlayer(hl.Bytes) {
 	public var complete(get, set):Bool;
 
 	inline function get_complete():Bool return SpritesheetPlayer_Ffi.get_complete(this);
+
 	inline function set_complete(value:Bool):Bool { SpritesheetPlayer_Ffi.set_complete(this, value); return value; }
 	public var elapsed(get, set):Float;
 
 	inline function get_elapsed():Float return SpritesheetPlayer_Ffi.get_elapsed(this);
+
 	inline function set_elapsed(value:Float):Float { SpritesheetPlayer_Ffi.set_elapsed(this, value); return value; }
 	public var paused(get, set):Bool;
 
 	inline function get_paused():Bool return SpritesheetPlayer_Ffi.get_paused(this);
+
 	inline function set_paused(value:Bool):Bool { SpritesheetPlayer_Ffi.set_paused(this, value); return value; }
 	public var speed(get, set):Float;
 
 	inline function get_speed():Float return SpritesheetPlayer_Ffi.get_speed(this);
+
 	inline function set_speed(value:Float):Float { SpritesheetPlayer_Ffi.set_speed(this, value); return value; }
 	public var frameIndex(get, set):Float;
 
 	inline function get_frameIndex():Float return SpritesheetPlayer_Ffi.get_frameIndex(this);
+
 	inline function set_frameIndex(value:Float):Float { SpritesheetPlayer_Ffi.set_frameIndex(this, value); return value; }
 }

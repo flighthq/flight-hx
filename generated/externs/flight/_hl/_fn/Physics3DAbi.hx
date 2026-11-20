@@ -18,7 +18,7 @@ extern class Physics3DAbi {
 	@:hlNative("flight", "flight_read_physics3d_abi_joints")
 	public static function readPhysics3dAbiJoints(out:flight._hl.Physics3DAbiJointBuffer, abi:flight._hl.Physics3DAbi, world:Int):Bool;
 	@:hlNative("flight", "flight_step_physics3d_abi_world")
-	public static function stepPhysics3dAbiWorld(abi:flight._hl.Physics3DAbi, world:Int, dt:Single, hooks:flight._hl.Physics3DAbiContactHooks):Int;
+	public static function stepPhysics3dAbiWorld(abi:flight._hl.Physics3DAbi, world:Int, dt:Float, hooks:flight._hl.Physics3DAbiContactHooks):Int;
 	@:hlNative("flight", "flight_create_physics3d_abi_body_buffer")
 	public static function createPhysics3dAbiBodyBuffer(capacity:Int):flight._hl.Physics3DAbiBodyBuffer;
 	@:hlNative("flight", "flight_create_physics3d_abi_command_buffer")
@@ -78,10 +78,10 @@ extern class Physics3DAbi {
 	@:hlNative("flight", "flight_write_physics3d_abi_wake_body_command")
 	public static function writePhysics3dAbiWakeBodyCommand(out:flight._hl.Physics3DAbiCommandBuffer, bodyId:Int):Bool;
 	@:hlNative("flight", "flight_query_physics3d_abi_point")
-	public static function queryPhysics3dAbiPoint(out:flight._hl.Physics3DAbiQueryBuffer, abi:flight._hl.Physics3DAbi, world:Int, x:Single, y:Single, z:Single, filter:flight._hl.Physics3DQueryFilter):Bool;
+	public static function queryPhysics3dAbiPoint(out:flight._hl.Physics3DAbiQueryBuffer, abi:flight._hl.Physics3DAbi, world:Int, x:Float, y:Float, z:Float, filter:flight._hl.Physics3DQueryFilter):Bool;
 	@:hlNative("flight", "flight_query_physics3d_abi_ray")
 	private static function __flightPacked_queryPhysics3dAbiRay(out:flight._hl.Physics3DAbiQueryBuffer, abi:flight._hl.Physics3DAbi, world:Int, __flightValues:hl.NativeArray<Float>, filter:flight._hl.Physics3DQueryFilter):Bool;
-	public static inline function queryPhysics3dAbiRay(out:flight._hl.Physics3DAbiQueryBuffer, abi:flight._hl.Physics3DAbi, world:Int, originX:Single, originY:Single, originZ:Single, directionX:Single, directionY:Single, directionZ:Single, maxFraction:Single, filter:flight._hl.Physics3DQueryFilter):Bool {
+	public static inline function queryPhysics3dAbiRay(out:flight._hl.Physics3DAbiQueryBuffer, abi:flight._hl.Physics3DAbi, world:Int, originX:Float, originY:Float, originZ:Float, directionX:Float, directionY:Float, directionZ:Float, maxFraction:Float, filter:flight._hl.Physics3DQueryFilter):Bool {
 		var __flightValues = new hl.NativeArray<Float>(7);
 		__flightValues[0] = originX;
 		__flightValues[1] = originY;
@@ -94,7 +94,7 @@ extern class Physics3DAbi {
 	}
 	@:hlNative("flight", "flight_query_physics3d_abi_ray_closest")
 	private static function __flightPacked_queryPhysics3dAbiRayClosest(out:flight._hl.Physics3DAbiQueryBuffer, abi:flight._hl.Physics3DAbi, world:Int, __flightValues:hl.NativeArray<Float>, filter:flight._hl.Physics3DQueryFilter):Bool;
-	public static inline function queryPhysics3dAbiRayClosest(out:flight._hl.Physics3DAbiQueryBuffer, abi:flight._hl.Physics3DAbi, world:Int, originX:Single, originY:Single, originZ:Single, directionX:Single, directionY:Single, directionZ:Single, maxFraction:Single, filter:flight._hl.Physics3DQueryFilter):Bool {
+	public static inline function queryPhysics3dAbiRayClosest(out:flight._hl.Physics3DAbiQueryBuffer, abi:flight._hl.Physics3DAbi, world:Int, originX:Float, originY:Float, originZ:Float, directionX:Float, directionY:Float, directionZ:Float, maxFraction:Float, filter:flight._hl.Physics3DQueryFilter):Bool {
 		var __flightValues = new hl.NativeArray<Float>(7);
 		__flightValues[0] = originX;
 		__flightValues[1] = originY;
@@ -108,7 +108,7 @@ extern class Physics3DAbi {
 	@:hlNative("flight", "flight_query_physics3d_abi_region")
 	public static function queryPhysics3dAbiRegion(out:flight._hl.Physics3DAbiQueryBuffer, abi:flight._hl.Physics3DAbi, world:Int, region:flight._hl.SpatialAabb3D, filter:flight._hl.Physics3DQueryFilter):Bool;
 	@:hlNative("flight", "flight_query_physics3d_abi_shape_cast")
-	public static function queryPhysics3dAbiShapeCast(out:flight._hl.Physics3DAbiQueryBuffer, abi:flight._hl.Physics3DAbi, world:Int, shape:flight._hl.CollisionShape3D, dx:Single, dy:Single, dz:Single, maxFraction:Single, filter:flight._hl.Physics3DQueryFilter):Bool;
+	public static function queryPhysics3dAbiShapeCast(out:flight._hl.Physics3DAbiQueryBuffer, abi:flight._hl.Physics3DAbi, world:Int, shape:flight._hl.CollisionShape3D, dx:Float, dy:Float, dz:Float, maxFraction:Float, filter:flight._hl.Physics3DQueryFilter):Bool;
 	@:hlNative("flight", "flight_create_reference_physics3d_abi")
 	public static function createReferencePhysics3dAbi():flight._hl.Physics3DAbi;
 	@:hlNative("flight", "flight_free_physics3_dabi")

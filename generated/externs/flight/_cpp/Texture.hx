@@ -1,6 +1,9 @@
 package flight._cpp;
 
 abstract Texture(cpp.Star<cpp.Void>) {
+	extern inline public function freeRef():Void {
+		flight._cpp._fn.Image.freeTextureRef(cast this);
+	}
 	static extern inline public function create(opts:flight._cpp.CreateTextureOptions):flight._cpp.Texture {
 		return flight._cpp._fn.Texture.createTexture(opts);
 	}
@@ -46,13 +49,13 @@ abstract Texture(cpp.Star<cpp.Void>) {
 	extern inline public function setTextureFlip(flipX:Bool, flipY:Bool):Void {
 		flight._cpp._fn.Texture.setTextureFlipTexture(cast this, flipX, flipY);
 	}
-	extern inline public function setTextureUvFromPixelRect(x:Single, y:Single, width:Single, height:Single):Void {
+	extern inline public function setTextureUvFromPixelRect(x:Float, y:Float, width:Float, height:Float):Void {
 		flight._cpp._fn.Texture.setTextureUvFromPixelRectTexture(cast this, x, y, width, height);
 	}
 	extern inline public function setTextureUvOffset(x:Single, y:Single):Void {
 		flight._cpp._fn.Texture.setTextureUvOffsetTexture(cast this, x, y);
 	}
-	extern inline public function setTextureUvRotation(radians:Single):Void {
+	extern inline public function setTextureUvRotation(radians:Float):Void {
 		flight._cpp._fn.Texture.setTextureUvRotationTexture(cast this, radians);
 	}
 	extern inline public function setTextureUvScale(x:Single, y:Single):Void {

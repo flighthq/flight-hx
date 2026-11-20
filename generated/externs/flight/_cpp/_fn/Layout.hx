@@ -14,7 +14,7 @@ extern class Layout {
 	@:native("flight_explain_layout_resolution")
 	public static function explainLayoutResolution(state:flight._cpp.LayoutState, tree:flight._cpp.LayoutTree, nodeIndex:Int):flight._cpp.LayoutResolutionExplanation;
 	@:native("flight_resolve_layout_tree")
-	public static function resolveLayoutTree(out:cpp.Star<cpp.Void>, outLen:Int, state:flight._cpp.LayoutState, tree:flight._cpp.LayoutTree, intrinsicSizes:cpp.Star<cpp.Void>, intrinsicSizesLen:Int, availableWidth:Single, availableHeight:Single):Bool;
+	public static function resolveLayoutTree(out:cpp.Star<cpp.Void>, outLen:Int, state:flight._cpp.LayoutState, tree:flight._cpp.LayoutTree, intrinsicSizes:cpp.Star<cpp.Void>, intrinsicSizesLen:Int, availableWidth:Float, availableHeight:Float):Bool;
 	@:native("flight_free_layout_state")
 	public static function freeLayoutState(ptr:flight._cpp.LayoutState):Void;
 	@:native("flight_free_layout_resolution_explanation")

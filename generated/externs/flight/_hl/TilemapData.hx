@@ -11,14 +11,14 @@ abstract TilemapData(hl.Bytes) {
 	inline function get_rows():Int return this.getI32(56);
 
 	inline function set_rows(value:Int):Int { this.setI32(56, value); return value; }
-	public var tileHeight(get, set):Single;
+	public var tileHeight(get, set):Float;
 
-	inline function get_tileHeight():Single return this.getF32(60);
+	inline function get_tileHeight():Float return this.getF64(64);
 
-	inline function set_tileHeight(value:Single):Single { this.setF32(60, value); return value; }
-	public var tileWidth(get, set):Single;
+	inline function set_tileHeight(value:Float):Float { this.setF64(64, value); return value; }
+	public var tileWidth(get, set):Float;
 
-	inline function get_tileWidth():Single return this.getF32(64);
+	inline function get_tileWidth():Float return this.getF64(72);
 
-	inline function set_tileWidth(value:Single):Single { this.setF32(64, value); return value; }
+	inline function set_tileWidth(value:Float):Float { this.setF64(72, value); return value; }
 }

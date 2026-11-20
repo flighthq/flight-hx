@@ -6,24 +6,24 @@ abstract CollisionManifold3D(hl.Bytes) {
 	inline function get_overlapping():Bool return this.getUI8(0) != 0;
 
 	inline function set_overlapping(value:Bool):Bool { this.setUI8(0, value ? 1 : 0); return value; }
-	public var normalX(get, set):Single;
+	public var normalX(get, set):Float;
 
-	inline function get_normalX():Single return this.getF32(4);
+	inline function get_normalX():Float return this.getF64(8);
 
-	inline function set_normalX(value:Single):Single { this.setF32(4, value); return value; }
-	public var normalY(get, set):Single;
+	inline function set_normalX(value:Float):Float { this.setF64(8, value); return value; }
+	public var normalY(get, set):Float;
 
-	inline function get_normalY():Single return this.getF32(8);
+	inline function get_normalY():Float return this.getF64(16);
 
-	inline function set_normalY(value:Single):Single { this.setF32(8, value); return value; }
-	public var normalZ(get, set):Single;
+	inline function set_normalY(value:Float):Float { this.setF64(16, value); return value; }
+	public var normalZ(get, set):Float;
 
-	inline function get_normalZ():Single return this.getF32(12);
+	inline function get_normalZ():Float return this.getF64(24);
 
-	inline function set_normalZ(value:Single):Single { this.setF32(12, value); return value; }
-	public var depth(get, set):Single;
+	inline function set_normalZ(value:Float):Float { this.setF64(24, value); return value; }
+	public var depth(get, set):Float;
 
-	inline function get_depth():Single return this.getF32(16);
+	inline function get_depth():Float return this.getF64(32);
 
-	inline function set_depth(value:Single):Single { this.setF32(16, value); return value; }
+	inline function set_depth(value:Float):Float { this.setF64(32, value); return value; }
 }

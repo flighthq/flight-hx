@@ -854,18 +854,6 @@ extern inline function disableEasingGuards():Void {
 extern inline function enableEasingGuards(logState:Dynamic, clock:Dynamic):Void {
 	flight._js._fn.Easing.enableEasingGuards(logState, clock);
 }
-#else
-extern inline function enableEasingGuards(logState:Dynamic, clockFn:Dynamic, clockCtx:Dynamic):Void {
-#if hl
-	flight._hl._fn.Easing.enableEasingGuards(logState, clockFn, clockCtx);
-#elseif cpp
-	flight._cpp._fn.Easing.enableEasingGuards(logState, clockFn, clockCtx);
-#elseif (js && flight_esm)
-	flight._js._fn.Easing.enableEasingGuards(logState, clockFn, clockCtx);
-#else
-	#error "flight.Easing: no backend for this target."
-#end
-}
 #end
 #if (js && flight_esm)
 extern inline function getEasingDerivative(ease:Dynamic, t:Float, epsilon:Null<Float>):Float {

@@ -5,7 +5,7 @@ extern inline function contributeTransformVelocity(field:VelocityField, root:Dyn
 	flight._js._fn.Velocity.contributeTransformVelocity(field, root);
 }
 #else
-extern inline function contributeTransformVelocity(field:VelocityField, root:Dynamic):Void {
+extern inline function contributeTransformVelocity(field:VelocityField, root:flight.FlightNode):Void {
 #if hl
 	flight._hl._fn.Velocity.contributeTransformVelocity(field, root);
 #elseif cpp

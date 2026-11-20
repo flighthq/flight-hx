@@ -2,17 +2,17 @@ package flight._js;
 
 abstract Quaternion(Dynamic) {
 	public var x(get, set):Float;
-	inline function get_x():Float return untyped this["x"];
-	inline function set_x(value:Float):Float return untyped this["x"] = value;
+	inline function get_x():Float return untyped this.x;
+	inline function set_x(value:Float):Float return untyped this.x = value;
 	public var y(get, set):Float;
-	inline function get_y():Float return untyped this["y"];
-	inline function set_y(value:Float):Float return untyped this["y"] = value;
+	inline function get_y():Float return untyped this.y;
+	inline function set_y(value:Float):Float return untyped this.y = value;
 	public var z(get, set):Float;
-	inline function get_z():Float return untyped this["z"];
-	inline function set_z(value:Float):Float return untyped this["z"] = value;
+	inline function get_z():Float return untyped this.z;
+	inline function set_z(value:Float):Float return untyped this.z = value;
 	public var w(get, set):Float;
-	inline function get_w():Float return untyped this["w"];
-	inline function set_w(value:Float):Float return untyped this["w"] = value;
+	inline function get_w():Float return untyped this.w;
+	inline function set_w(value:Float):Float return untyped this.w = value;
 	static inline public function create(x:Float, y:Float, z:Float, w:Float):flight._js.Quaternion {
 		return flight._js._fn.Geometry.createQuaternion(x, y, z, w);
 	}

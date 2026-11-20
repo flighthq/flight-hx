@@ -15,9 +15,11 @@ abstract ReorderNodeChildCommand(hl.Bytes) {
 	public var fromIndex(get, set):Int;
 
 	inline function get_fromIndex():Int return ReorderNodeChildCommand_Ffi.get_fromIndex(this);
+
 	inline function set_fromIndex(value:Int):Int { ReorderNodeChildCommand_Ffi.set_fromIndex(this, value); return value; }
 	public var toIndex(get, set):Int;
 
 	inline function get_toIndex():Int return ReorderNodeChildCommand_Ffi.get_toIndex(this);
+
 	inline function set_toIndex(value:Int):Int { ReorderNodeChildCommand_Ffi.set_toIndex(this, value); return value; }
 }

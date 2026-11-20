@@ -11,9 +11,9 @@ abstract AmbientLight(hl.Bytes) {
 	inline function get_enabled():Bool return this.getUI8(20) != 0;
 
 	inline function set_enabled(value:Bool):Bool { this.setUI8(20, value ? 1 : 0); return value; }
-	public var intensity(get, set):Single;
+	public var intensity(get, set):Float;
 
-	inline function get_intensity():Single return this.getF32(24);
+	inline function get_intensity():Float return this.getF64(24);
 
-	inline function set_intensity(value:Single):Single { this.setF32(24, value); return value; }
+	inline function set_intensity(value:Float):Float { this.setF64(24, value); return value; }
 }

@@ -44,6 +44,8 @@ extern class Textlayout {
 	public static function isTextLayoutTruncated(layout:flight._js.TextLayoutResult, params:flight._js.TextLayoutParams):Bool;
 	@:native("createTextLayoutGroup")
 	public static function createTextLayoutGroup(format:Dynamic):flight._js.TextLayoutGroup;
+	@:native("getTextLayoutMeasureProvider")
+	public static function getTextLayoutMeasureProvider(state:flight._js.TextLayoutMeasureState, hostTextShaper:Null<flight._js.HostTextShaperCapability>):Null<flight._js.TextMeasureFunction>;
 	@:native("getTextLineBreakIndex")
 	public static function getTextLineBreakIndex(lineBreaks:Dynamic, startIndex:Null<Int>):Int;
 	@:native("getTextLineBreaks")
@@ -59,9 +61,13 @@ extern class Textlayout {
 	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeTextLayoutGroup(ptr:flight._js.TextLayoutGroup):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeTextMeasureFunction(ptr:flight._js.TextMeasureFunction):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeTextMetrics(ptr:flight._js.TextMetrics):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeTextLayoutParams(ptr:flight._js.TextLayoutParams):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeTextLayoutResultRef(ptr:flight._js.TextLayoutResult):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeTextLineMetrics(ptr:flight._js.TextLineMetrics):Void {}
 }

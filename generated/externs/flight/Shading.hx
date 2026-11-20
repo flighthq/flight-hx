@@ -307,6 +307,23 @@ extern inline function freeFogModifier(ptr:FogModifier):Void {
 }
 #end
 #if (js && flight_esm)
+extern inline function freeModifierDefinitionRef(ptr:ModifierDefinition):Void {
+	flight._js._fn.Shading.freeModifierDefinitionRef(ptr);
+}
+#else
+extern inline function freeModifierDefinitionRef(ptr:ModifierDefinition):Void {
+#if hl
+	flight._hl._fn.Shading.freeModifierDefinitionRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Shading.freeModifierDefinitionRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Shading.freeModifierDefinitionRef(ptr);
+#else
+	#error "flight.Shading: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
 extern inline function freeRimModifier(ptr:RimModifier):Void {
 	flight._js._fn.Shading.freeRimModifier(ptr);
 }

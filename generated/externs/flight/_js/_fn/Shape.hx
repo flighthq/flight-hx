@@ -64,6 +64,8 @@ extern class Shape {
 	public static function normalizeShapeStrokeMiterLimit(miterLimit:Float):Float;
 	@:native("normalizeShapeStrokeWidth")
 	public static function normalizeShapeStrokeWidth(width:Float):Float;
+	@:native("writeShapeGeometryCommandEnd")
+	public static function writeShapeGeometryCommandEnd(out:flight._js.ShapeGeometryEnd, currentX:Float, currentY:Float, name:String, commands:Dynamic, argumentIndex:Int):Bool;
 	@:native("getShapeFillRegions")
 	public static function getShapeFillRegions(commands:Dynamic):Null<Dynamic>;
 	@:native("hasNonSolidShapeFill")
@@ -82,6 +84,8 @@ extern class Shape {
 	public static inline function freeShapeTessellationExplanation(ptr:flight._js.ShapeTessellationExplanation):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeMorphShapeData(ptr:flight._js.MorphShapeData):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeMorphShapeAnimationTargetRef(ptr:flight._js.MorphShapeAnimationTarget):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeScale9ShapeData(ptr:flight._js.Scale9ShapeData):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */

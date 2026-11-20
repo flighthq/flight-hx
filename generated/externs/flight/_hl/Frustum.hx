@@ -1,7 +1,7 @@
 package flight._hl;
 
 abstract Frustum(hl.Bytes) {
-	inline public function getCamera3d(camera:flight._hl.Camera3D, aspect:Single):Void {
+	inline public function getCamera3d(camera:flight._hl.Camera3D, aspect:Float):Void {
 		flight._hl._fn.Camera.getCamera3dFrustum(cast this, camera, aspect);
 	}
 	static inline public function create():flight._hl.Frustum {

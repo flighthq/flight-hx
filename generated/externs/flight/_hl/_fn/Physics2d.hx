@@ -4,7 +4,7 @@ extern class Physics2d {
 	@:hlNative("flight", "flight_synchronize_physics2d_broadphase")
 	public static function synchronizePhysics2dBroadphase(world:flight._hl.Physics2DWorld):Void;
 	@:hlNative("flight", "flight_synchronize_physics2d_swept_broadphase")
-	public static function synchronizePhysics2dSweptBroadphase(world:flight._hl.Physics2DWorld, dt:Single):Void;
+	public static function synchronizePhysics2dSweptBroadphase(world:flight._hl.Physics2DWorld, dt:Float):Void;
 	@:hlNative("flight", "flight_create_physics2d_collider_world_shape")
 	public static function createPhysics2dColliderWorldShape(local:flight._hl.CollisionShape2D):flight._hl.CollisionShape2D;
 	@:hlNative("flight", "flight_update_physics2d_collider_world_shape")
@@ -19,8 +19,6 @@ extern class Physics2d {
 	public static function arePhysics2dGuardsEnabled(guards:flight._hl.Physics2DGuardState):Bool;
 	@:hlNative("flight", "flight_disable_physics2d_guards")
 	public static function disablePhysics2dGuards(guards:flight._hl.Physics2DGuardState):Void;
-	@:hlNative("flight", "flight_enable_physics2d_guards")
-	public static function enablePhysics2dGuards(guards:flight._hl.Physics2DGuardState, logState:hl.Bytes, clockFn:hl.Bytes, clockCtx:hl.Bytes):Void;
 	@:hlNative("flight", "flight_explain_physics2d_collision")
 	public static function explainPhysics2dCollision(world:flight._hl.Physics2DWorld):flight._hl.Physics2DCollisionExplanation;
 	@:hlNative("flight", "flight_explain_physics2d_joints")
@@ -60,23 +58,23 @@ extern class Physics2d {
 	@:hlNative("flight", "flight_create_physics2d_joint_reaction")
 	public static function createPhysics2dJointReaction():flight._hl.Physics2DJointReaction;
 	@:hlNative("flight", "flight_write_physics2d_joint_reaction__physics2_ddistance_joint")
-	public static function writePhysics2dJointReactionPhysics2DdistanceJoint(out:flight._hl.Physics2DJointReaction, world:flight._hl.Physics2DWorld, joint:flight._hl.Physics2DDistanceJoint, dt:Single):Bool;
+	public static function writePhysics2dJointReactionPhysics2DdistanceJoint(out:flight._hl.Physics2DJointReaction, world:flight._hl.Physics2DWorld, joint:flight._hl.Physics2DDistanceJoint, dt:Float):Bool;
 	@:hlNative("flight", "flight_write_physics2d_joint_reaction__physics2_dgear_joint")
-	public static function writePhysics2dJointReactionPhysics2DgearJoint(out:flight._hl.Physics2DJointReaction, world:flight._hl.Physics2DWorld, joint:flight._hl.Physics2DGearJoint, dt:Single):Bool;
+	public static function writePhysics2dJointReactionPhysics2DgearJoint(out:flight._hl.Physics2DJointReaction, world:flight._hl.Physics2DWorld, joint:flight._hl.Physics2DGearJoint, dt:Float):Bool;
 	@:hlNative("flight", "flight_write_physics2d_joint_reaction__physics2_dmouse_joint")
-	public static function writePhysics2dJointReactionPhysics2DmouseJoint(out:flight._hl.Physics2DJointReaction, world:flight._hl.Physics2DWorld, joint:flight._hl.Physics2DMouseJoint, dt:Single):Bool;
+	public static function writePhysics2dJointReactionPhysics2DmouseJoint(out:flight._hl.Physics2DJointReaction, world:flight._hl.Physics2DWorld, joint:flight._hl.Physics2DMouseJoint, dt:Float):Bool;
 	@:hlNative("flight", "flight_write_physics2d_joint_reaction__physics2_dprismatic_joint")
-	public static function writePhysics2dJointReactionPhysics2DprismaticJoint(out:flight._hl.Physics2DJointReaction, world:flight._hl.Physics2DWorld, joint:flight._hl.Physics2DPrismaticJoint, dt:Single):Bool;
+	public static function writePhysics2dJointReactionPhysics2DprismaticJoint(out:flight._hl.Physics2DJointReaction, world:flight._hl.Physics2DWorld, joint:flight._hl.Physics2DPrismaticJoint, dt:Float):Bool;
 	@:hlNative("flight", "flight_write_physics2d_joint_reaction__physics2_dpulley_joint")
-	public static function writePhysics2dJointReactionPhysics2DpulleyJoint(out:flight._hl.Physics2DJointReaction, world:flight._hl.Physics2DWorld, joint:flight._hl.Physics2DPulleyJoint, dt:Single):Bool;
+	public static function writePhysics2dJointReactionPhysics2DpulleyJoint(out:flight._hl.Physics2DJointReaction, world:flight._hl.Physics2DWorld, joint:flight._hl.Physics2DPulleyJoint, dt:Float):Bool;
 	@:hlNative("flight", "flight_write_physics2d_joint_reaction__physics2_drevolute_joint")
-	public static function writePhysics2dJointReactionPhysics2DrevoluteJoint(out:flight._hl.Physics2DJointReaction, world:flight._hl.Physics2DWorld, joint:flight._hl.Physics2DRevoluteJoint, dt:Single):Bool;
+	public static function writePhysics2dJointReactionPhysics2DrevoluteJoint(out:flight._hl.Physics2DJointReaction, world:flight._hl.Physics2DWorld, joint:flight._hl.Physics2DRevoluteJoint, dt:Float):Bool;
 	@:hlNative("flight", "flight_write_physics2d_joint_reaction__physics2_drope_joint")
-	public static function writePhysics2dJointReactionPhysics2DropeJoint(out:flight._hl.Physics2DJointReaction, world:flight._hl.Physics2DWorld, joint:flight._hl.Physics2DRopeJoint, dt:Single):Bool;
+	public static function writePhysics2dJointReactionPhysics2DropeJoint(out:flight._hl.Physics2DJointReaction, world:flight._hl.Physics2DWorld, joint:flight._hl.Physics2DRopeJoint, dt:Float):Bool;
 	@:hlNative("flight", "flight_write_physics2d_joint_reaction__physics2_dweld_joint")
-	public static function writePhysics2dJointReactionPhysics2DweldJoint(out:flight._hl.Physics2DJointReaction, world:flight._hl.Physics2DWorld, joint:flight._hl.Physics2DWeldJoint, dt:Single):Bool;
+	public static function writePhysics2dJointReactionPhysics2DweldJoint(out:flight._hl.Physics2DJointReaction, world:flight._hl.Physics2DWorld, joint:flight._hl.Physics2DWeldJoint, dt:Float):Bool;
 	@:hlNative("flight", "flight_write_physics2d_joint_reaction__physics2_dwheel_joint")
-	public static function writePhysics2dJointReactionPhysics2DwheelJoint(out:flight._hl.Physics2DJointReaction, world:flight._hl.Physics2DWorld, joint:flight._hl.Physics2DWheelJoint, dt:Single):Bool;
+	public static function writePhysics2dJointReactionPhysics2DwheelJoint(out:flight._hl.Physics2DJointReaction, world:flight._hl.Physics2DWorld, joint:flight._hl.Physics2DWheelJoint, dt:Float):Bool;
 	@:hlNative("flight", "flight_add_physics2d_joint")
 	public static function addPhysics2dJoint(world:flight._hl.Physics2DWorld, joint:flight._hl.Physics2DJointRef):Void;
 	@:hlNative("flight", "flight_get_physics2d_joint_solver")
@@ -88,17 +86,17 @@ extern class Physics2d {
 	@:hlNative("flight", "flight_remove_physics2d_joint")
 	public static function removePhysics2dJoint(world:flight._hl.Physics2DWorld, joint:flight._hl.Physics2DJointRef):Bool;
 	@:hlNative("flight", "flight_write_physics2d_soft_row_parameters")
-	public static function writePhysics2dSoftRowParameters(out:hl.Bytes, outLen:Int, mass:Single, frequencyHz:Single, dampingRatio:Single, dt:Single, hardBiasFactor:Single):Void;
+	public static function writePhysics2dSoftRowParameters(out:hl.Bytes, outLen:Int, mass:Float, frequencyHz:Float, dampingRatio:Float, dt:Float, hardBiasFactor:Float):Void;
 	@:hlNative("flight", "flight_compute_physics2d_collider_mass_data")
 	public static function computePhysics2dColliderMassData(out:flight._hl.Physics2DMassData, collider:flight._hl.Physics2DCollider):Void;
 	@:hlNative("flight", "flight_update_rigid_body2d_mass_data")
 	public static function updateRigidBody2dMassData(body:flight._hl.RigidBody2D):Void;
 	@:hlNative("flight", "flight_mix_physics2d_friction")
-	public static function mixPhysics2dFriction(first:Single, second:Single):Single;
+	public static function mixPhysics2dFriction(first:Float, second:Float):Float;
 	@:hlNative("flight", "flight_mix_physics2d_restitution")
-	public static function mixPhysics2dRestitution(first:Single, second:Single):Single;
+	public static function mixPhysics2dRestitution(first:Float, second:Float):Float;
 	@:hlNative("flight", "flight_sync_physics2d_body_to_node2d")
-	public static function syncPhysics2dBodyToNode2d(body:flight._hl.RigidBody2D, node:hl.Bytes):Void;
+	public static function syncPhysics2dBodyToNode2d(body:flight._hl.RigidBody2D, node:flight._hl.FlightNode):Void;
 	@:hlNative("flight", "flight_assert_physics2d_body_not_stepping")
 	public static function assertPhysics2dBodyNotStepping(body:flight._hl.RigidBody2D):Void;
 	@:hlNative("flight", "flight_assert_physics2d_world_not_stepping")
@@ -106,9 +104,9 @@ extern class Physics2d {
 	@:hlNative("flight", "flight_register_built_in_physics2d_joint_solvers")
 	public static function registerBuiltInPhysics2dJointSolvers(world:flight._hl.Physics2DWorld):Void;
 	@:hlNative("flight", "flight_apply_physics2d_impulse")
-	public static function applyPhysics2dImpulse(bodyA:flight._hl.RigidBody2D, bodyB:flight._hl.RigidBody2D, rAx:Single, rAy:Single, rBx:Single, rBy:Single, impulseX:Single, impulseY:Single):Void;
+	public static function applyPhysics2dImpulse(bodyA:flight._hl.RigidBody2D, bodyB:flight._hl.RigidBody2D, rAx:Float, rAy:Float, rBx:Float, rBy:Float, impulseX:Float, impulseY:Float):Void;
 	@:hlNative("flight", "flight_relative_normal_velocity")
-	public static function relativeNormalVelocity(bodyA:flight._hl.RigidBody2D, bodyB:flight._hl.RigidBody2D, point:flight._hl.Physics2DContactPoint, normalX:Single, normalY:Single):Single;
+	public static function relativeNormalVelocity(bodyA:flight._hl.RigidBody2D, bodyB:flight._hl.RigidBody2D, point:flight._hl.Physics2DContactPoint, normalX:Float, normalY:Float):Float;
 	@:hlNative("flight", "flight_solve_physics2d_contact_indices_once")
 	public static function solvePhysics2dContactIndicesOnce(world:flight._hl.Physics2DWorld, indices:hl.Bytes, indicesLen:Int, start:Int, count:Int):Void;
 	@:hlNative("flight", "flight_solve_physics2d_contacts")
@@ -150,15 +148,15 @@ extern class Physics2d {
 	@:hlNative("flight", "flight_add_physics2d_collider")
 	public static function addPhysics2dCollider(world:flight._hl.Physics2DWorld, body:hl.Bytes, collider:hl.Bytes):Void;
 	@:hlNative("flight", "flight_apply_physics2d_force")
-	public static function applyPhysics2dForce(body:flight._hl.RigidBody2D, forceX:Single, forceY:Single):Bool;
+	public static function applyPhysics2dForce(body:flight._hl.RigidBody2D, forceX:Float, forceY:Float):Bool;
 	@:hlNative("flight", "flight_apply_physics2d_force_at_point")
-	public static function applyPhysics2dForceAtPoint(body:flight._hl.RigidBody2D, forceX:Single, forceY:Single, pointX:Single, pointY:Single):Bool;
+	public static function applyPhysics2dForceAtPoint(body:flight._hl.RigidBody2D, forceX:Float, forceY:Float, pointX:Float, pointY:Float):Bool;
 	@:hlNative("flight", "flight_apply_physics2d_linear_impulse")
-	public static function applyPhysics2dLinearImpulse(body:flight._hl.RigidBody2D, impulseX:Single, impulseY:Single):Bool;
+	public static function applyPhysics2dLinearImpulse(body:flight._hl.RigidBody2D, impulseX:Float, impulseY:Float):Bool;
 	@:hlNative("flight", "flight_apply_physics2d_linear_impulse_at_point")
-	public static function applyPhysics2dLinearImpulseAtPoint(body:flight._hl.RigidBody2D, impulseX:Single, impulseY:Single, pointX:Single, pointY:Single):Bool;
+	public static function applyPhysics2dLinearImpulseAtPoint(body:flight._hl.RigidBody2D, impulseX:Float, impulseY:Float, pointX:Float, pointY:Float):Bool;
 	@:hlNative("flight", "flight_apply_physics2d_torque")
-	public static function applyPhysics2dTorque(body:flight._hl.RigidBody2D, torque:Single):Bool;
+	public static function applyPhysics2dTorque(body:flight._hl.RigidBody2D, torque:Float):Bool;
 	@:hlNative("flight", "flight_find_physics2d_body")
 	public static function findPhysics2dBody(world:flight._hl.Physics2DWorld, index:Int):hl.Bytes;
 	@:hlNative("flight", "flight_hydrate_physics2d_world")
@@ -178,7 +176,7 @@ extern class Physics2d {
 	@:hlNative("flight", "flight_set_physics2d_body_sleep_enabled")
 	public static function setPhysics2dBodySleepEnabled(world:flight._hl.Physics2DWorld, body:hl.Bytes, sleepEnabled:Bool):Bool;
 	@:hlNative("flight", "flight_set_physics2d_body_transform")
-	public static function setPhysics2dBodyTransform(world:flight._hl.Physics2DWorld, body:hl.Bytes, x:Single, y:Single, angle:Single):Bool;
+	public static function setPhysics2dBodyTransform(world:flight._hl.Physics2DWorld, body:hl.Bytes, x:Float, y:Float, angle:Float):Bool;
 	@:hlNative("flight", "flight_set_physics2d_body_type")
 	public static function setPhysics2dBodyType(world:flight._hl.Physics2DWorld, body:hl.Bytes, bodyType:Int):Bool;
 	@:hlNative("flight", "flight_create_physics2d_query_filter")
@@ -190,15 +188,17 @@ extern class Physics2d {
 	@:hlNative("flight", "flight_create_physics2d_shape_cast_result")
 	public static function createPhysics2dShapeCastResult():flight._hl.Physics2DShapeCastResult;
 	@:hlNative("flight", "flight_query_physics2d_point")
-	public static function queryPhysics2dPoint(out:flight._hl.Physics2DQueryResult, world:flight._hl.Physics2DWorld, x:Single, y:Single, filter:flight._hl.Physics2DQueryFilter):Void;
+	public static function queryPhysics2dPoint(out:flight._hl.Physics2DQueryResult, world:flight._hl.Physics2DWorld, x:Float, y:Float, filter:flight._hl.Physics2DQueryFilter):Void;
 	@:hlNative("flight", "flight_query_physics2d_ray")
-	public static function queryPhysics2dRay(out:flight._hl.Physics2DRayResult, world:flight._hl.Physics2DWorld, originX:Single, originY:Single, directionX:Single, directionY:Single, maxFraction:Single, filter:flight._hl.Physics2DQueryFilter):Void;
+	public static function queryPhysics2dRay(out:flight._hl.Physics2DRayResult, world:flight._hl.Physics2DWorld, originX:Float, originY:Float, directionX:Float, directionY:Float, maxFraction:Float, filter:flight._hl.Physics2DQueryFilter):Void;
 	@:hlNative("flight", "flight_query_physics2d_ray_closest")
-	public static function queryPhysics2dRayClosest(out:flight._hl.Physics2DRayResult, world:flight._hl.Physics2DWorld, originX:Single, originY:Single, directionX:Single, directionY:Single, maxFraction:Single, filter:flight._hl.Physics2DQueryFilter):Void;
+	public static function queryPhysics2dRayClosest(out:flight._hl.Physics2DRayResult, world:flight._hl.Physics2DWorld, originX:Float, originY:Float, directionX:Float, directionY:Float, maxFraction:Float, filter:flight._hl.Physics2DQueryFilter):Void;
 	@:hlNative("flight", "flight_query_physics2d_region")
 	public static function queryPhysics2dRegion(out:flight._hl.Physics2DQueryResult, world:flight._hl.Physics2DWorld, region:flight._hl.SpatialAabb2D, filter:flight._hl.Physics2DQueryFilter):Void;
 	@:hlNative("flight", "flight_query_physics2d_shape_cast")
-	public static function queryPhysics2dShapeCast(out:flight._hl.Physics2DShapeCastResult, world:flight._hl.Physics2DWorld, registry:flight._hl.CollisionRegistry2D, shape:flight._hl.CollisionShape2D, dx:Single, dy:Single, maxFraction:Single, filter:flight._hl.Physics2DQueryFilter):Void;
+	public static function queryPhysics2dShapeCast(out:flight._hl.Physics2DShapeCastResult, world:flight._hl.Physics2DWorld, registry:flight._hl.CollisionRegistry2D, shape:flight._hl.CollisionShape2D, dx:Float, dy:Float, maxFraction:Float, filter:flight._hl.Physics2DQueryFilter):Void;
+	@:hlNative("flight", "flight_free_collision_shape2_d")
+	public static function freeCollisionShape2D(ptr:flight._hl.CollisionShape2D):Void;
 	@:hlNative("flight", "flight_free_physics2_ddebug_geometry")
 	public static function freePhysics2DdebugGeometry(ptr:flight._hl.Physics2DDebugGeometry):Void;
 	@:hlNative("flight", "flight_free_physics2_dcollision_explanation")
@@ -207,10 +207,30 @@ extern class Physics2d {
 	public static function freePhysics2DjointResolutionExplanation(ptr:flight._hl.Physics2DJointResolutionExplanation):Void;
 	@:hlNative("flight", "flight_free_physics2_dstep_explanation")
 	public static function freePhysics2DstepExplanation(ptr:flight._hl.Physics2DStepExplanation):Void;
+	@:hlNative("flight", "flight_free_physics2_ddistance_joint_ref")
+	public static function freePhysics2DdistanceJointRef(ptr:flight._hl.Physics2DDistanceJoint):Void;
+	@:hlNative("flight", "flight_free_physics2_dgear_joint_ref")
+	public static function freePhysics2DgearJointRef(ptr:flight._hl.Physics2DGearJoint):Void;
+	@:hlNative("flight", "flight_free_physics2_dmouse_joint_ref")
+	public static function freePhysics2DmouseJointRef(ptr:flight._hl.Physics2DMouseJoint):Void;
+	@:hlNative("flight", "flight_free_physics2_dprismatic_joint_ref")
+	public static function freePhysics2DprismaticJointRef(ptr:flight._hl.Physics2DPrismaticJoint):Void;
+	@:hlNative("flight", "flight_free_physics2_dpulley_joint_ref")
+	public static function freePhysics2DpulleyJointRef(ptr:flight._hl.Physics2DPulleyJoint):Void;
+	@:hlNative("flight", "flight_free_physics2_drevolute_joint_ref")
+	public static function freePhysics2DrevoluteJointRef(ptr:flight._hl.Physics2DRevoluteJoint):Void;
+	@:hlNative("flight", "flight_free_physics2_drope_joint_ref")
+	public static function freePhysics2DropeJointRef(ptr:flight._hl.Physics2DRopeJoint):Void;
+	@:hlNative("flight", "flight_free_physics2_dweld_joint_ref")
+	public static function freePhysics2DweldJointRef(ptr:flight._hl.Physics2DWeldJoint):Void;
+	@:hlNative("flight", "flight_free_physics2_dwheel_joint_ref")
+	public static function freePhysics2DwheelJointRef(ptr:flight._hl.Physics2DWheelJoint):Void;
 	@:hlNative("flight", "flight_free_physics2_djoint_reaction")
 	public static function freePhysics2DjointReaction(ptr:flight._hl.Physics2DJointReaction):Void;
 	@:hlNative("flight", "flight_free_physics2_djoint_solver_ref")
-	public static function freePhysics2DjointSolverRef(ptr:flight._hl.Physics2DJointSolverRef):Void;
+	public static function freePhysics2DjointSolverRef(ptr:flight._hl.Physics2DJointSolver):Void;
+	@:hlNative("flight", "flight_free_physics2_dcollider_ref")
+	public static function freePhysics2DcolliderRef(ptr:flight._hl.Physics2DCollider):Void;
 	@:hlNative("flight", "flight_free_physics2_dsolver_config")
 	public static function freePhysics2DsolverConfig(ptr:flight._hl.Physics2DSolverConfig):Void;
 	@:hlNative("flight", "flight_free_physics2_dworld")

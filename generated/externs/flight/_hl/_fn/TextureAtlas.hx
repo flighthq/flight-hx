@@ -5,8 +5,6 @@ extern class TextureAtlas {
 	public static function areTextureAtlasGuardsEnabled(state:flight._hl.TextureAtlasGuardState):Bool;
 	@:hlNative("flight", "flight_disable_texture_atlas_guards")
 	public static function disableTextureAtlasGuards(state:flight._hl.TextureAtlasGuardState):Void;
-	@:hlNative("flight", "flight_enable_texture_atlas_guards")
-	public static function enableTextureAtlasGuards(state:flight._hl.TextureAtlasGuardState, logState:hl.Bytes, clockFn:hl.Bytes, clockCtx:hl.Bytes):Void;
 	@:hlNative("flight", "flight_create_texture_atlas")
 	public static function createTextureAtlas():hl.Bytes;
 	@:hlNative("flight", "flight_dispose_texture_atlas")
@@ -55,6 +53,10 @@ extern class TextureAtlas {
 	public static function removeTextureAtlasRegion(target:flight._hl.TextureAtlas, id:Int):Bool;
 	@:hlNative("flight", "flight_set_texture_atlas_region")
 	public static function setTextureAtlasRegion(out:flight._hl.TextureAtlasRegion, source:flight._hl.TextureAtlasRegionOptions):Void;
+	@:hlNative("flight", "flight_free_texture_atlas_region_ref")
+	public static function freeTextureAtlasRegionRef(ptr:flight._hl.TextureAtlasRegion):Void;
 	@:hlNative("flight", "flight_free_texture_atlas_region_texture_explanation")
 	public static function freeTextureAtlasRegionTextureExplanation(ptr:flight._hl.TextureAtlasRegionTextureExplanation):Void;
+	@:hlNative("flight", "flight_free_texture_atlas_ref")
+	public static function freeTextureAtlasRef(ptr:flight._hl.TextureAtlas):Void;
 }

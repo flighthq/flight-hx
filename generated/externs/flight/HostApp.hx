@@ -5,7 +5,7 @@ class HostApp {
   public static inline function createAppWindow():AppWindow return AppExports.createAppWindow();
   public static inline function attachWindow(attach:WindowAttachCapability, lifecycle:WindowLifecycleCapability,
       win:AppWindow, handle:Dynamic, ownership:WindowAttachmentOwnership):Bool
-    return AppExports.attachWindow(attach, lifecycle, win, handle, ownership);
+    return AppExports.attachWindow(attach, lifecycle, win, handle, ownership == WindowAttachmentOwnership.Host ? "host" : "flight");
   public static inline function closeWindow(lifecycle:WindowLifecycleCapability, win:AppWindow):Bool
     return AppExports.closeWindow(lifecycle, win);
   public static inline function disposeAppWindow(win:AppWindow):Void AppExports.disposeAppWindow(win);
@@ -14,7 +14,7 @@ class HostApp {
   public static inline function setAppLoopMainWindow(loop:AppLoop, window:AppWindow):Void
     AppExports.setAppLoopMainWindow(loop, window);
   public static inline function startAppLoop(scheduler:FrameScheduler, lifecycle:LifecycleCapability,
-      loop:AppLoop, ?options:AppLoopOptions):Void {
+      loop:AppLoop, ?options:HostAppLoopOptions):Void {
     if (options == null) AppExports.startAppLoop(scheduler, lifecycle, loop);
     else AppExports.startAppLoop(scheduler, lifecycle, loop, options);
   }
@@ -26,8 +26,6 @@ class HostApp {
 }
 
 #if (js && flight_esm)
-abstract AppWindow(Dynamic) {}
-abstract AppLoop(Dynamic) {}
 abstract FrameScheduler(Dynamic) {}
 abstract LifecycleCapability(Dynamic) {}
 abstract WindowAttachCapability(Dynamic) {}
@@ -39,12 +37,7 @@ typedef WindowCapabilities = {
   final lifecycle:WindowLifecycleCapability;
 };
 
-enum abstract WindowAttachmentOwnership(String) {
-  var Host = "host";
-  var Flight = "flight";
-}
-
-typedef AppLoopOptions = {
+typedef HostAppLoopOptions = {
   ?maxDeltaTime:Float,
   ?targetFrameRate:Float,
   ?backgroundFrameRate:Float,
@@ -56,13 +49,13 @@ typedef AppLoopOptions = {
 private extern class AppExports {
   static function createAppWindow():AppWindow;
   static function attachWindow(attach:WindowAttachCapability, lifecycle:WindowLifecycleCapability,
-    win:AppWindow, handle:Dynamic, ownership:WindowAttachmentOwnership):Bool;
+    win:AppWindow, handle:Dynamic, ownership:String):Bool;
   static function closeWindow(lifecycle:WindowLifecycleCapability, win:AppWindow):Bool;
   static function disposeAppWindow(win:AppWindow):Void;
   static function createAppLoop():AppLoop;
   static function setAppLoopMainWindow(loop:AppLoop, window:AppWindow):Void;
   static function startAppLoop(scheduler:FrameScheduler, lifecycle:LifecycleCapability, loop:AppLoop,
-    ?options:AppLoopOptions):Void;
+    ?options:HostAppLoopOptions):Void;
   static function stopAppLoop(loop:AppLoop):Void;
   static function disposeAppLoop(loop:AppLoop):Void;
   static function isAppLoopRunning(loop:AppLoop):Bool;

@@ -262,4 +262,112 @@ extern class Effects {
 	public static function createVolumetricLightEffect():Dynamic;
 	@:native("createWhiteBalanceEffect")
 	public static function createWhiteBalanceEffect():Dynamic;
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeAutoExposureEffectRef(ptr:flight._js.AutoExposureEffect):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeBarrelDistortionEffectRef(ptr:flight._js.BarrelDistortionEffect):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeBevelEffectRef(ptr:flight._js.BevelEffect):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeBitmapDisplacementEffectRef(ptr:flight._js.BitmapDisplacementEffect):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeBlendEffectRef(ptr:flight._js.BlendEffect):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeBloomEffectRef(ptr:flight._js.BloomEffect):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeBlurEffectRef(ptr:flight._js.BlurEffect):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeBokehDepthOfFieldEffectRef(ptr:flight._js.BokehDepthOfFieldEffect):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeCameraMotionBlurEffectRef(ptr:flight._js.CameraMotionBlurEffect):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeChromaticAberrationEffectRef(ptr:flight._js.ChromaticAberrationEffect):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeCompositeEffectRef(ptr:flight._js.CompositeEffect):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeContactShadowsEffectRef(ptr:flight._js.ContactShadowsEffect):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeConvolutionEffectRef(ptr:flight._js.ConvolutionEffect):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeCrtEffectRef(ptr:flight._js.CrtEffect):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeCustomShaderEffectRef(ptr:flight._js.CustomShaderEffect):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeDirectionalBlurEffectRef(ptr:flight._js.DirectionalBlurEffect):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeDisplacementEffectRef(ptr:flight._js.DisplacementEffect):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeDitherEffectRef(ptr:flight._js.DitherEffect):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeDropShadowEffectRef(ptr:flight._js.DropShadowEffect):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeFilmEmulationEffectRef(ptr:flight._js.FilmEmulationEffect):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeFilmGrainEffectRef(ptr:flight._js.FilmGrainEffect):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeFxaaEffectRef(ptr:flight._js.FxaaEffect):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeGlitchEffectRef(ptr:flight._js.GlitchEffect):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeGodRaysEffectRef(ptr:flight._js.GodRaysEffect):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeGradientBevelEffectRef(ptr:flight._js.GradientBevelEffect):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeGradientGlowEffectRef(ptr:flight._js.GradientGlowEffect):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeHalftoneEffectRef(ptr:flight._js.HalftoneEffect):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeInnerGlowEffectRef(ptr:flight._js.InnerGlowEffect):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeInnerShadowEffectRef(ptr:flight._js.InnerShadowEffect):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeKuwaharaEffectRef(ptr:flight._js.KuwaharaEffect):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeLensDirtEffectRef(ptr:flight._js.LensDirtEffect):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeLensDistortionEffectRef(ptr:flight._js.LensDistortionEffect):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeLensFlareEffectRef(ptr:flight._js.LensFlareEffect):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeMedianEffectRef(ptr:flight._js.MedianEffect):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeMotionBlurEffectRef(ptr:flight._js.MotionBlurEffect):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeOuterGlowEffectRef(ptr:flight._js.OuterGlowEffect):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeOutlineEffectRef(ptr:flight._js.OutlineEffect):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freePanniniProjectionEffectRef(ptr:flight._js.PanniniProjectionEffect):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freePixelateEffectRef(ptr:flight._js.PixelateEffect):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freePosterizeEffectRef(ptr:flight._js.PosterizeEffect):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeRadialBlurEffectRef(ptr:flight._js.RadialBlurEffect):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeScanlinesEffectRef(ptr:flight._js.ScanlinesEffect):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeScreenSpaceFogEffectRef(ptr:flight._js.ScreenSpaceFogEffect):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeSharpenEffectRef(ptr:flight._js.SharpenEffect):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeSketchEffectRef(ptr:flight._js.SketchEffect):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeSmaaEffectRef(ptr:flight._js.SmaaEffect):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeSsaoEffectRef(ptr:flight._js.SsaoEffect):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeSsrEffectRef(ptr:flight._js.SsrEffect):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeTaaEffectRef(ptr:flight._js.TaaEffect):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeTiltShiftEffectRef(ptr:flight._js.TiltShiftEffect):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeToneMapEffectRef(ptr:flight._js.ToneMapEffect):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeVignetteEffectRef(ptr:flight._js.VignetteEffect):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeVolumetricLightEffectRef(ptr:flight._js.VolumetricLightEffect):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeWhiteBalanceEffectRef(ptr:flight._js.WhiteBalanceEffect):Void {}
 }

@@ -89,7 +89,7 @@ extern class Texture {
 	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeTexture2D(ptr:flight._js.Texture2D):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */
-	public static inline function freeTextureSourceRef(ptr:flight._js.TextureSourceRef):Void {}
+	public static inline function freeTextureSourceRef(ptr:flight._js.TextureSource):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeTextureSourceKind(ptr:flight._js.TextureSourceKind):Void {}
 }

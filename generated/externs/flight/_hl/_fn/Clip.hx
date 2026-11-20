@@ -53,6 +53,8 @@ extern class Clip {
 	public static function createClipRegionFromRoundedRectangle(rectangle:flight._hl.Rectangle, radius:Float, tolerance:Float):hl.Bytes;
 	@:hlNative("flight", "flight_disable_clip_guards")
 	public static function disableClipGuards():Void;
+	@:hlNative("flight", "flight_free_clip_region_ref")
+	public static function freeClipRegionRef(ptr:flight._hl.ClipRegion):Void;
 	@:hlNative("flight", "flight_free_clip_region_explanation")
 	public static function freeClipRegionExplanation(ptr:flight._hl.ClipRegionExplanation):Void;
 }

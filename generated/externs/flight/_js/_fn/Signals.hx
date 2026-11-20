@@ -26,4 +26,6 @@ extern class Signals {
 	public static inline function freeSignalTimerState(ptr:flight._js.SignalTimerState):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeTimerId(ptr:flight._js.TimerId):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeSlotId(ptr:flight._js.SlotId):Void {}
 }

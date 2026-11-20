@@ -395,18 +395,6 @@ extern inline function disableCameraGuards(guardState:Dynamic):Void {
 extern inline function enableCameraGuards(guardState:Dynamic, logState:Dynamic, clock:Dynamic):Void {
 	flight._js._fn.Camera.enableCameraGuards(guardState, logState, clock);
 }
-#else
-extern inline function enableCameraGuards(guardState:Dynamic, logState:Dynamic, clockFn:Dynamic, clockCtx:Dynamic):Void {
-#if hl
-	flight._hl._fn.Camera.enableCameraGuards(guardState, logState, clockFn, clockCtx);
-#elseif cpp
-	flight._cpp._fn.Camera.enableCameraGuards(guardState, logState, clockFn, clockCtx);
-#elseif (js && flight_esm)
-	flight._js._fn.Camera.enableCameraGuards(guardState, logState, clockFn, clockCtx);
-#else
-	#error "flight.Camera: no backend for this target."
-#end
-}
 #end
 #if (js && flight_esm)
 extern inline function explainCamera3dView(camera:Camera3D):Camera3DViewExplanation {
@@ -862,6 +850,57 @@ extern inline function freeCamera3DviewExplanation(ptr:Camera3DViewExplanation):
 	flight._cpp._fn.Camera.freeCamera3DviewExplanation(ptr);
 #elseif (js && flight_esm)
 	flight._js._fn.Camera.freeCamera3DviewExplanation(ptr);
+#else
+	#error "flight.Camera: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeOrthographicProjectionRef(ptr:OrthographicProjection):Void {
+	flight._js._fn.Camera.freeOrthographicProjectionRef(ptr);
+}
+#else
+extern inline function freeOrthographicProjectionRef(ptr:OrthographicProjection):Void {
+#if hl
+	flight._hl._fn.Camera.freeOrthographicProjectionRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Camera.freeOrthographicProjectionRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Camera.freeOrthographicProjectionRef(ptr);
+#else
+	#error "flight.Camera: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freePerspectiveProjectionRef(ptr:PerspectiveProjection):Void {
+	flight._js._fn.Camera.freePerspectiveProjectionRef(ptr);
+}
+#else
+extern inline function freePerspectiveProjectionRef(ptr:PerspectiveProjection):Void {
+#if hl
+	flight._hl._fn.Camera.freePerspectiveProjectionRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Camera.freePerspectiveProjectionRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Camera.freePerspectiveProjectionRef(ptr);
+#else
+	#error "flight.Camera: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeRawProjectionRef(ptr:RawProjection):Void {
+	flight._js._fn.Camera.freeRawProjectionRef(ptr);
+}
+#else
+extern inline function freeRawProjectionRef(ptr:RawProjection):Void {
+#if hl
+	flight._hl._fn.Camera.freeRawProjectionRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Camera.freeRawProjectionRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Camera.freeRawProjectionRef(ptr);
 #else
 	#error "flight.Camera: no backend for this target."
 #end

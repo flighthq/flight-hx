@@ -1,24 +1,24 @@
 package flight._hl;
 
 abstract Vector2(hl.Bytes) {
-	public var x(get, set):Single;
+	public var x(get, set):Float;
 
-	inline function get_x():Single return this.getF32(16);
+	inline function get_x():Float return this.getF64(16);
 
-	inline function set_x(value:Single):Single { this.setF32(16, value); return value; }
-	public var y(get, set):Single;
+	inline function set_x(value:Float):Float { this.setF64(16, value); return value; }
+	public var y(get, set):Float;
 
-	inline function get_y():Single return this.getF32(20);
+	inline function get_y():Float return this.getF64(24);
 
-	inline function set_y(value:Single):Single { this.setF32(20, value); return value; }
+	inline function set_y(value:Float):Float { this.setF64(24, value); return value; }
 
 	inline public function matrixTransformBounds(out:flight._hl.Rectangle, matrix:flight._hl.Matrix, b:flight._hl.Vector2):Void {
 		flight._hl._fn.Geometry.matrixTransformBoundsVector2(out, matrix, cast this, b);
 	}
-	static inline public function create(x:Single, y:Single):flight._hl.Vector2 {
+	static inline public function create(x:Float, y:Float):flight._hl.Vector2 {
 		return flight._hl._fn.Geometry.createVector2(x, y);
 	}
-	static inline public function createFromPolar(length:Single, angle:Single):flight._hl.Vector2 {
+	static inline public function createFromPolar(length:Float, angle:Float):flight._hl.Vector2 {
 		return flight._hl._fn.Geometry.createVector2FromPolar(length, angle);
 	}
 	inline public function add(a:flight._hl.Vector2, b:flight._hl.Vector2):Void {
@@ -33,7 +33,7 @@ abstract Vector2(hl.Bytes) {
 	inline public function copy(source:flight._hl.Vector2):Void {
 		flight._hl._fn.Geometry.copyVector2(cast this, source);
 	}
-	inline public function cross(b:flight._hl.Vector2):Single {
+	inline public function cross(b:flight._hl.Vector2):Float {
 		return flight._hl._fn.Geometry.crossVector2(cast this, b);
 	}
 	inline public function divide(source:flight._hl.Vector2, divisor:flight._hl.Vector2):Void {
@@ -42,28 +42,28 @@ abstract Vector2(hl.Bytes) {
 	inline public function equals(b:flight._hl.Vector2):Bool {
 		return flight._hl._fn.Geometry.equalsVector2(cast this, b);
 	}
-	inline public function getAngle():Single {
+	inline public function getAngle():Float {
 		return flight._hl._fn.Geometry.getVector2Angle(cast this);
 	}
-	inline public function getAngleBetween(b:flight._hl.Vector2):Single {
+	inline public function getAngleBetween(b:flight._hl.Vector2):Float {
 		return flight._hl._fn.Geometry.getVector2AngleBetween(cast this, b);
 	}
-	inline public function getDistance(b:flight._hl.Vector2):Single {
+	inline public function getDistance(b:flight._hl.Vector2):Float {
 		return flight._hl._fn.Geometry.getVector2Distance(cast this, b);
 	}
-	inline public function getDistanceSquared(b:flight._hl.Vector2):Single {
+	inline public function getDistanceSquared(b:flight._hl.Vector2):Float {
 		return flight._hl._fn.Geometry.getVector2DistanceSquared(cast this, b);
 	}
-	inline public function getDot(b:flight._hl.Vector2):Single {
+	inline public function getDot(b:flight._hl.Vector2):Float {
 		return flight._hl._fn.Geometry.getVector2Dot(cast this, b);
 	}
-	inline public function getLength():Single {
+	inline public function getLength():Float {
 		return flight._hl._fn.Geometry.getVector2Length(cast this);
 	}
-	inline public function getLengthSquared():Single {
+	inline public function getLengthSquared():Float {
 		return flight._hl._fn.Geometry.getVector2LengthSquared(cast this);
 	}
-	inline public function interpolate(a:flight._hl.Vector2, b:flight._hl.Vector2, t:Single):Void {
+	inline public function interpolate(a:flight._hl.Vector2, b:flight._hl.Vector2, t:Float):Void {
 		flight._hl._fn.Geometry.interpolateVector2(cast this, a, b, t);
 	}
 	inline public function max(a:flight._hl.Vector2, b:flight._hl.Vector2):Void {
@@ -75,37 +75,37 @@ abstract Vector2(hl.Bytes) {
 	inline public function multiply(a:flight._hl.Vector2, b:flight._hl.Vector2):Void {
 		flight._hl._fn.Geometry.multiplyVector2(cast this, a, b);
 	}
-	inline public function nearEquals(b:flight._hl.Vector2, tolerance:Single):Bool {
+	inline public function nearEquals(b:flight._hl.Vector2, tolerance:Float):Bool {
 		return flight._hl._fn.Geometry.nearEqualsVector2(cast this, b, tolerance);
 	}
 	inline public function negate(source:flight._hl.Vector2):Void {
 		flight._hl._fn.Geometry.negateVector2(cast this, source);
 	}
-	inline public function normalize(source:flight._hl.Vector2):Single {
+	inline public function normalize(source:flight._hl.Vector2):Float {
 		return flight._hl._fn.Geometry.normalizeVector2(cast this, source);
 	}
-	inline public function offset(source:flight._hl.Vector2, dx:Single, dy:Single):Void {
+	inline public function offset(source:flight._hl.Vector2, dx:Float, dy:Float):Void {
 		flight._hl._fn.Geometry.offsetVector2(cast this, source, dx, dy);
 	}
 	inline public function reflect(incident:flight._hl.Vector2, normal:flight._hl.Vector2):Void {
 		flight._hl._fn.Geometry.reflectVector2(cast this, incident, normal);
 	}
-	inline public function rotate(source:flight._hl.Vector2, angle:Single):Void {
+	inline public function rotate(source:flight._hl.Vector2, angle:Float):Void {
 		flight._hl._fn.Geometry.rotateVector2(cast this, source, angle);
 	}
-	inline public function scale(source:flight._hl.Vector2, scalar:Single):Void {
+	inline public function scale(source:flight._hl.Vector2, scalar:Float):Void {
 		flight._hl._fn.Geometry.scaleVector2(cast this, source, scalar);
 	}
-	inline public function scaleToLength(source:flight._hl.Vector2, length:Single):Void {
+	inline public function scaleToLength(source:flight._hl.Vector2, length:Float):Void {
 		flight._hl._fn.Geometry.scaleVector2ToLength(cast this, source, length);
 	}
-	inline public function set(x:Single, y:Single):Void {
+	inline public function set(x:Float, y:Float):Void {
 		flight._hl._fn.Geometry.setVector2(cast this, x, y);
 	}
 	inline public function setFromFloat32Array(offset:Int, source:hl.Bytes, sourceLen:Int):Void {
 		flight._hl._fn.Geometry.setVector2FromFloat32Array(cast this, offset, source, sourceLen);
 	}
-	inline public function setFromPolar(length:Single, angle:Single):Void {
+	inline public function setFromPolar(length:Float, angle:Float):Void {
 		flight._hl._fn.Geometry.setVector2FromPolar(cast this, length, angle);
 	}
 	inline public function setFromVector3(source:flight._hl.Vector3):Void {

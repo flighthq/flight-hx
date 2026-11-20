@@ -1,7 +1,7 @@
 package flight;
 
 #if (js && flight_esm)
-import flight.HostApp.AppWindow;
+import flight.AppWindow;
 import flight.HostApp.WindowCapabilities;
 #end
 

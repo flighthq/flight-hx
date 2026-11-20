@@ -1,9 +1,7 @@
 # Rust Flight extern intake
 
-Bindings come from the Rust tooling inside Flight. The source pin is Flight
-`develop` revision `49c510e875461a9235b24ee846015ec1b47acd2a`; the inspected `main`
-revision does not have the binding crates. There is one dependency pin, for
-Flight, with `flight-compiler`, `flight-ffi`, and `flight-bindgen` inside it.
+Bindings come from Rust tooling inside Flight. The source is the single
+`develop` pin in `dependencies.lock.json`, currently `c52653a12e10251ab93970f71a6bc0c4dcbe21fa`.
 
 ## Generate and copy
 
@@ -28,17 +26,15 @@ ordinary toolchain on PATH. Haxe validation uses the repository's pinned compile
 The generation steps follow the supplied upstream recipe:
 
 ```sh
-cargo build -p flight-ffi
-cargo run --bin flight-offsets > /tmp/offsets.json
-grep -oP '(?<=fn )(flight_[a-z0-9_]+)' target/debug/build/flight-ffi-*/out/ffi_generated.rs \
-  | sort -u > /tmp/ffi-names.txt
-cargo run -p flight-bindgen -- --target haxe --out <output-dir> \
-  --offsets /tmp/offsets.json --ffi-names /tmp/ffi-names.txt
+cargo build -p flight-ffi --locked
+cargo run -p flight-ffi --bin flight-offsets --locked > /tmp/offsets.json
+cargo run -p flight-bindgen --locked -- --target haxe --out <output-dir> \
+  --offsets /tmp/offsets.json --ffi-dir <current-flight-ffi-build-output>
 scripts/check-haxe-bindings.sh
 ```
 
 The driver uses private temporary files and Cargo's current build-script output
-path instead of shared `/tmp` names and stale glob matches. Output is copied
+path and offsets executable instead of shared `/tmp` names and stale glob matches. Output is copied
 unchanged into `generated/externs/`, adding only `provenance.json` with the Flight
 revision and patch hashes, toolchain/host identity, offsets and FFI-name hashes,
 symbol count, generated native header hash, and per-file hashes. The C header is
@@ -61,14 +57,12 @@ older glob. The intake driver handles either layout using Cargo messages.
 Provenance also records toolchain identity and host architecture; layout offsets
 must match the binary used by consumers.
 
-The producer patch also emits a C header and HashLink adapter source from the
-same generated Rust FFI. `native:build` stages their binaries and ABI manifest;
-`gate:native-runtime` installs the resulting haxelib ZIP and executes real hxcpp,
-HashLink, and Lime consumers on Linux64. The patch includes binding fixes exposed
-by these actual builds; no post-processing edits are applied to generated Haxe.
-See [patch notes](../../patches/flight/README.md).
+Flight emits a C header and HashLink adapter from the same generated Rust
+FFI. Bindgen compares native Haxe declarations against both with `--ffi-dir`.
+`native:build` stages their binaries and ABI manifest. `gate:native-runtime`
+installs the haxelib ZIP and exercises hxcpp, HashLink, and Lime consumers.
+See [producer patch notes](../../patches/flight/README.md).
 
-The second producer patch restores direct `@flighthq/*` ESM bindings using Flight
-compiler naming and logical JS carriers. `gate:web` executes real math/geometry
-from the pinned Flight TypeScript sources and verifies tree-shaking. See the
-root README for tested platforms and the limits of native and web smoke checks.
+`gate:web` executes code from the pinned Flight TypeScript sources, including
+the browser graphics and app host seams, and verifies tree-shaking. See the
+root README for platform coverage.

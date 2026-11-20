@@ -2,7 +2,7 @@ package flight._cpp._fn;
 
 extern class Spatial {
 	@:native("flight_create_bvh_spatial_backend_3d")
-	public static function createBvhSpatialBackend3d(margin:Single):flight._cpp.SpatialIndexBackend3D;
+	public static function createBvhSpatialBackend3d(margin:Float):flight._cpp.SpatialIndexBackend3D;
 	@:native("flight_explain_spatial_indexing_2d")
 	public static function explainSpatialIndexing2d(index:flight._cpp.SpatialIndex2D, id:Int):flight._cpp.SpatialIndexingExplanation;
 	@:native("flight_explain_spatial_indexing_3d")

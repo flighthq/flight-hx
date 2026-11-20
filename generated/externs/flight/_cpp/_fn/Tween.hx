@@ -16,7 +16,7 @@ extern class Tween {
 	@:native("flight_create_tween_manager")
 	public static function createTweenManager(options:flight._cpp.TweenManagerOptions):flight._cpp.TweenManager;
 	@:native("flight_update_tweens")
-	public static function updateTweens(manager:flight._cpp.TweenManager, deltaTime:Single):Void;
+	public static function updateTweens(manager:flight._cpp.TweenManager, deltaTime:Float):Void;
 	@:native("flight_free_tween_manager")
 	public static function freeTweenManager(ptr:flight._cpp.TweenManager):Void;
 }

@@ -358,6 +358,23 @@ extern inline function createTextLayoutGroup(format:Dynamic):TextLayoutGroup {
 }
 #end
 #if (js && flight_esm)
+extern inline function getTextLayoutMeasureProvider(state:TextLayoutMeasureState, hostTextShaper:Null<HostTextShaperCapability>):Null<TextMeasureFunction> {
+	return flight._js._fn.Textlayout.getTextLayoutMeasureProvider(state, hostTextShaper);
+}
+#else
+extern inline function getTextLayoutMeasureProvider(state:TextLayoutMeasureState, hostTextShaper:HostTextShaperCapability):TextMeasureFunction {
+#if hl
+	return flight._hl._fn.Textlayout.getTextLayoutMeasureProvider(state, hostTextShaper);
+#elseif cpp
+	return flight._cpp._fn.Textlayout.getTextLayoutMeasureProvider(state, hostTextShaper);
+#elseif (js && flight_esm)
+	return flight._js._fn.Textlayout.getTextLayoutMeasureProvider(state, hostTextShaper);
+#else
+	#error "flight.Textlayout: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
 extern inline function getTextLineBreakIndex(lineBreaks:Dynamic, startIndex:Null<Int>):Int {
 	return flight._js._fn.Textlayout.getTextLineBreakIndex(lineBreaks, startIndex);
 }
@@ -477,6 +494,23 @@ extern inline function freeTextLayoutGroup(ptr:TextLayoutGroup):Void {
 }
 #end
 #if (js && flight_esm)
+extern inline function freeTextMeasureFunction(ptr:TextMeasureFunction):Void {
+	flight._js._fn.Textlayout.freeTextMeasureFunction(ptr);
+}
+#else
+extern inline function freeTextMeasureFunction(ptr:TextMeasureFunction):Void {
+#if hl
+	flight._hl._fn.Textlayout.freeTextMeasureFunction(ptr);
+#elseif cpp
+	flight._cpp._fn.Textlayout.freeTextMeasureFunction(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Textlayout.freeTextMeasureFunction(ptr);
+#else
+	#error "flight.Textlayout: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
 extern inline function freeTextMetrics(ptr:TextMetrics):Void {
 	flight._js._fn.Textlayout.freeTextMetrics(ptr);
 }
@@ -505,6 +539,23 @@ extern inline function freeTextLayoutParams(ptr:TextLayoutParams):Void {
 	flight._cpp._fn.Textlayout.freeTextLayoutParams(ptr);
 #elseif (js && flight_esm)
 	flight._js._fn.Textlayout.freeTextLayoutParams(ptr);
+#else
+	#error "flight.Textlayout: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeTextLayoutResultRef(ptr:TextLayoutResult):Void {
+	flight._js._fn.Textlayout.freeTextLayoutResultRef(ptr);
+}
+#else
+extern inline function freeTextLayoutResultRef(ptr:TextLayoutResult):Void {
+#if hl
+	flight._hl._fn.Textlayout.freeTextLayoutResultRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Textlayout.freeTextLayoutResultRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Textlayout.freeTextLayoutResultRef(ptr);
 #else
 	#error "flight.Textlayout: no backend for this target."
 #end

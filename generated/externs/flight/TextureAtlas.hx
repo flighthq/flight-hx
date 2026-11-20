@@ -60,18 +60,6 @@ extern inline function disableTextureAtlasGuards(state:TextureAtlasGuardState):V
 extern inline function enableTextureAtlasGuards(state:TextureAtlasGuardState, logState:Dynamic, clock:Dynamic):Void {
 	flight._js._fn.TextureAtlas.enableTextureAtlasGuards(state, logState, clock);
 }
-#else
-extern inline function enableTextureAtlasGuards(state:TextureAtlasGuardState, logState:Dynamic, clockFn:Dynamic, clockCtx:Dynamic):Void {
-#if hl
-	flight._hl._fn.TextureAtlas.enableTextureAtlasGuards(state, logState, clockFn, clockCtx);
-#elseif cpp
-	flight._cpp._fn.TextureAtlas.enableTextureAtlasGuards(state, logState, clockFn, clockCtx);
-#elseif (js && flight_esm)
-	flight._js._fn.TextureAtlas.enableTextureAtlasGuards(state, logState, clockFn, clockCtx);
-#else
-	#error "flight.TextureAtlas: no backend for this target."
-#end
-}
 #end
 #if (js && flight_esm)
 extern inline function createTextureAtlas():Dynamic {
@@ -482,6 +470,23 @@ extern inline function setTextureAtlasRegion(out:TextureAtlasRegion, source:Text
 }
 #end
 #if (js && flight_esm)
+extern inline function freeTextureAtlasRegionRef(ptr:TextureAtlasRegion):Void {
+	flight._js._fn.TextureAtlas.freeTextureAtlasRegionRef(ptr);
+}
+#else
+extern inline function freeTextureAtlasRegionRef(ptr:TextureAtlasRegion):Void {
+#if hl
+	flight._hl._fn.TextureAtlas.freeTextureAtlasRegionRef(ptr);
+#elseif cpp
+	flight._cpp._fn.TextureAtlas.freeTextureAtlasRegionRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.TextureAtlas.freeTextureAtlasRegionRef(ptr);
+#else
+	#error "flight.TextureAtlas: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
 extern inline function freeTextureAtlasRegionTextureExplanation(ptr:TextureAtlasRegionTextureExplanation):Void {
 	flight._js._fn.TextureAtlas.freeTextureAtlasRegionTextureExplanation(ptr);
 }
@@ -493,6 +498,23 @@ extern inline function freeTextureAtlasRegionTextureExplanation(ptr:TextureAtlas
 	flight._cpp._fn.TextureAtlas.freeTextureAtlasRegionTextureExplanation(ptr);
 #elseif (js && flight_esm)
 	flight._js._fn.TextureAtlas.freeTextureAtlasRegionTextureExplanation(ptr);
+#else
+	#error "flight.TextureAtlas: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeTextureAtlasRef(ptr:TextureAtlas):Void {
+	flight._js._fn.TextureAtlas.freeTextureAtlasRef(ptr);
+}
+#else
+extern inline function freeTextureAtlasRef(ptr:TextureAtlas):Void {
+#if hl
+	flight._hl._fn.TextureAtlas.freeTextureAtlasRef(ptr);
+#elseif cpp
+	flight._cpp._fn.TextureAtlas.freeTextureAtlasRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.TextureAtlas.freeTextureAtlasRef(ptr);
 #else
 	#error "flight.TextureAtlas: no backend for this target."
 #end

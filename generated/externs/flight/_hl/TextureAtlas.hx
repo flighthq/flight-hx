@@ -19,13 +19,16 @@ abstract TextureAtlas(hl.Bytes) {
 	public var imageHeight(get, set):Single;
 
 	inline function get_imageHeight():Single return TextureAtlas_Ffi.get_imageHeight(this);
+
 	inline function set_imageHeight(value:Single):Single { TextureAtlas_Ffi.set_imageHeight(this, value); return value; }
 	public var imageWidth(get, set):Single;
 
 	inline function get_imageWidth():Single return TextureAtlas_Ffi.get_imageWidth(this);
+
 	inline function set_imageWidth(value:Single):Single { TextureAtlas_Ffi.set_imageWidth(this, value); return value; }
 	public var scale(get, set):Single;
 
 	inline function get_scale():Single return TextureAtlas_Ffi.get_scale(this);
+
 	inline function set_scale(value:Single):Single { TextureAtlas_Ffi.set_scale(this, value); return value; }
 }

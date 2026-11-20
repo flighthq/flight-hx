@@ -61,9 +61,15 @@ extern class Spritesheet {
 	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeSpritesheet(ptr:flight._js.Spritesheet):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeSpritesheetAnimationRef(ptr:flight._js.SpritesheetAnimation):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeSpritesheetAnimationData(ptr:flight._js.SpritesheetAnimationData):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeSpritesheetData(ptr:flight._js.SpritesheetData):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeSpritesheetFrameData(ptr:flight._js.SpritesheetFrameData):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeSpritesheetFrameRef(ptr:flight._js.SpritesheetFrame):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeSpritesheetPlayerRef(ptr:flight._js.SpritesheetPlayer):Void {}
 }

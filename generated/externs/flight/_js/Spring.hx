@@ -2,11 +2,11 @@ package flight._js;
 
 abstract Spring(Dynamic) {
 	public var value(get, set):Float;
-	inline function get_value():Float return untyped this["value"];
-	inline function set_value(value:Float):Float return untyped this["value"] = value;
+	inline function get_value():Float return untyped this.value;
+	inline function set_value(value:Float):Float return untyped this.value = value;
 	public var velocity(get, set):Float;
-	inline function get_velocity():Float return untyped this["velocity"];
-	inline function set_velocity(value:Float):Float return untyped this["velocity"] = value;
+	inline function get_velocity():Float return untyped this.velocity;
+	inline function set_velocity(value:Float):Float return untyped this.velocity = value;
 	static inline public function create(value:Float, velocity:Float):flight._js.Spring {
 		return flight._js._fn.Spring.createSpring(value, velocity);
 	}

@@ -820,18 +820,6 @@ extern inline function disableCollisionGuards(registry2d:CollisionRegistry2D, re
 extern inline function enableCollisionGuards(registry2d:CollisionRegistry2D, registry3d:CollisionRegistry3D, logState:Dynamic, clock:Dynamic):Void {
 	flight._js._fn.Collision.enableCollisionGuards(registry2d, registry3d, logState, clock);
 }
-#else
-extern inline function enableCollisionGuards(registry2d:CollisionRegistry2D, registry3d:CollisionRegistry3D, logState:Dynamic, clockFn:Dynamic, clockCtx:Dynamic):Void {
-#if hl
-	flight._hl._fn.Collision.enableCollisionGuards(registry2d, registry3d, logState, clockFn, clockCtx);
-#elseif cpp
-	flight._cpp._fn.Collision.enableCollisionGuards(registry2d, registry3d, logState, clockFn, clockCtx);
-#elseif (js && flight_esm)
-	flight._js._fn.Collision.enableCollisionGuards(registry2d, registry3d, logState, clockFn, clockCtx);
-#else
-	#error "flight.Collision: no backend for this target."
-#end
-}
 #end
 #if (js && flight_esm)
 extern inline function testCollisionSupport2d(registry:CollisionRegistry2D, a:CollisionShape2D, b:CollisionShape2D, out:CollisionManifold2D):Bool {
@@ -2188,23 +2176,6 @@ extern inline function freeCollisionColliderShape3D(ptr:CollisionColliderShape3D
 	flight._cpp._fn.Collision.freeCollisionColliderShape3D(ptr);
 #elseif (js && flight_esm)
 	flight._js._fn.Collision.freeCollisionColliderShape3D(ptr);
-#else
-	#error "flight.Collision: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
-extern inline function freeCollisionShape2D(ptr:CollisionShape2D):Void {
-	flight._js._fn.Collision.freeCollisionShape2D(ptr);
-}
-#else
-extern inline function freeCollisionShape2D(ptr:CollisionShape2D):Void {
-#if hl
-	flight._hl._fn.Collision.freeCollisionShape2D(ptr);
-#elseif cpp
-	flight._cpp._fn.Collision.freeCollisionShape2D(ptr);
-#elseif (js && flight_esm)
-	flight._js._fn.Collision.freeCollisionShape2D(ptr);
 #else
 	#error "flight.Collision: no backend for this target."
 #end

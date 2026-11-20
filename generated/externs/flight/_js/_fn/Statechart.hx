@@ -31,6 +31,8 @@ extern class Statechart {
 	@:native("getStatechartSignals")
 	public static function getStatechartSignals(instance:Dynamic):Null<flight._js.StatechartSignals>;
 	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeStatechartInstanceRawRef(ptr:flight._js.StatechartInstanceRaw):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeStatechartTransitionExplanation(ptr:flight._js.StatechartTransitionExplanation):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeStatechartSignals(ptr:flight._js.StatechartSignals):Void {}

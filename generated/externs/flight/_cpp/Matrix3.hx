@@ -4,7 +4,7 @@ abstract Matrix3(cpp.Star<cpp.Void>) {
 	static extern inline public function create():flight._cpp.Matrix3 {
 		return flight._cpp._fn.Geometry.createMatrix3();
 	}
-	static extern inline public function createFromValues(m00:Single, m01:Single, m02:Single, m10:Single, m11:Single, m12:Single, m20:Single, m21:Single, m22:Single):flight._cpp.Matrix3 {
+	static extern inline public function createFromValues(m00:Float, m01:Float, m02:Float, m10:Float, m11:Float, m12:Float, m20:Float, m21:Float, m22:Float):flight._cpp.Matrix3 {
 		return flight._cpp._fn.Geometry.createMatrix3FromValues(m00, m01, m02, m10, m11, m12, m20, m21, m22);
 	}
 	extern inline public function clone():flight._cpp.Matrix3 {
@@ -22,10 +22,10 @@ abstract Matrix3(cpp.Star<cpp.Void>) {
 	extern inline public function equals(b:flight._cpp.Matrix3):Bool {
 		return flight._cpp._fn.Geometry.equalsMatrix3(cast this, b);
 	}
-	extern inline public function getDeterminant():Single {
+	extern inline public function getDeterminant():Float {
 		return flight._cpp._fn.Geometry.getMatrix3Determinant(cast this);
 	}
-	extern inline public function getElement(row:Int, column:Int):Single {
+	extern inline public function getElement(row:Int, column:Int):Float {
 		return flight._cpp._fn.Geometry.getMatrix3Element(cast this, row, column);
 	}
 	extern inline public function inverse(source:flight._cpp.Matrix3):Bool {
@@ -37,16 +37,16 @@ abstract Matrix3(cpp.Star<cpp.Void>) {
 	extern inline public function multiply(a:flight._cpp.Matrix3, b:flight._cpp.Matrix3):Void {
 		flight._cpp._fn.Geometry.multiplyMatrix3(cast this, a, b);
 	}
-	extern inline public function rotate(source:flight._cpp.Matrix3, theta:Single):Void {
+	extern inline public function rotate(source:flight._cpp.Matrix3, theta:Float):Void {
 		flight._cpp._fn.Geometry.rotateMatrix3(cast this, source, theta);
 	}
-	extern inline public function scale(source:flight._cpp.Matrix3, sx:Single, sy:Single):Void {
+	extern inline public function scale(source:flight._cpp.Matrix3, sx:Float, sy:Float):Void {
 		flight._cpp._fn.Geometry.scaleMatrix3(cast this, source, sx, sy);
 	}
-	extern inline public function set(m00:Single, m01:Single, m02:Single, m10:Single, m11:Single, m12:Single, m20:Single, m21:Single, m22:Single):Void {
+	extern inline public function set(m00:Float, m01:Float, m02:Float, m10:Float, m11:Float, m12:Float, m20:Float, m21:Float, m22:Float):Void {
 		flight._cpp._fn.Geometry.setMatrix3(cast this, m00, m01, m02, m10, m11, m12, m20, m21, m22);
 	}
-	extern inline public function setElement(row:Int, column:Int, value:Single):Void {
+	extern inline public function setElement(row:Int, column:Int, value:Float):Void {
 		flight._cpp._fn.Geometry.setMatrix3Element(cast this, row, column, value);
 	}
 	extern inline public function setFromFloat32Array(offset:Int, source:cpp.Star<cpp.Void>, sourceLen:Int):Void {
@@ -64,7 +64,7 @@ abstract Matrix3(cpp.Star<cpp.Void>) {
 	extern inline public function setNormalFromMatrix4(source:flight._cpp.Matrix4):Void {
 		flight._cpp._fn.Geometry.setMatrix3NormalFromMatrix4(cast this, source);
 	}
-	extern inline public function translate(source:flight._cpp.Matrix3, tx:Single, ty:Single):Void {
+	extern inline public function translate(source:flight._cpp.Matrix3, tx:Float, ty:Float):Void {
 		flight._cpp._fn.Geometry.translateMatrix3(cast this, source, tx, ty);
 	}
 	extern inline public function transpose(source:flight._cpp.Matrix3):Void {

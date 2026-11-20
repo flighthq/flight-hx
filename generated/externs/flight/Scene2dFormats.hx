@@ -345,7 +345,7 @@ extern inline function createRiveImageSprite(name:String, assetIndex:Int):Dynami
 	return flight._js._fn.Scene2dFormats.createRiveImageSprite(name, assetIndex);
 }
 #else
-extern inline function createRiveImageSprite(name:String, assetIndex:Int):Dynamic {
+extern inline function createRiveImageSprite(name:String, assetIndex:Int):flight.FlightNode {
 #if hl
 	return flight._hl._fn.Scene2dFormats.createRiveImageSprite(cast name, assetIndex);
 #elseif cpp
@@ -362,7 +362,7 @@ extern inline function getRiveImageAssetIndex(node:Dynamic):Int {
 	return flight._js._fn.Scene2dFormats.getRiveImageAssetIndex(node);
 }
 #else
-extern inline function getRiveImageAssetIndex(node:Dynamic):Int {
+extern inline function getRiveImageAssetIndex(node:flight.FlightNode):Int {
 #if hl
 	return flight._hl._fn.Scene2dFormats.getRiveImageAssetIndex(node);
 #elseif cpp
@@ -379,7 +379,7 @@ extern inline function getRiveImageTexture(node:Dynamic):Null<Dynamic> {
 	return flight._js._fn.Scene2dFormats.getRiveImageTexture(node);
 }
 #else
-extern inline function getRiveImageTexture(node:Dynamic):Dynamic {
+extern inline function getRiveImageTexture(node:flight.FlightNode):Dynamic {
 #if hl
 	return flight._hl._fn.Scene2dFormats.getRiveImageTexture(node);
 #elseif cpp
@@ -396,7 +396,7 @@ extern inline function getRiveNestedArtboardIndex(node:Dynamic):Int {
 	return flight._js._fn.Scene2dFormats.getRiveNestedArtboardIndex(node);
 }
 #else
-extern inline function getRiveNestedArtboardIndex(node:Dynamic):Int {
+extern inline function getRiveNestedArtboardIndex(node:flight.FlightNode):Int {
 #if hl
 	return flight._hl._fn.Scene2dFormats.getRiveNestedArtboardIndex(node);
 #elseif cpp
@@ -413,7 +413,7 @@ extern inline function markRiveNestedArtboard(node:Dynamic, artboardIndex:Int):V
 	flight._js._fn.Scene2dFormats.markRiveNestedArtboard(node, artboardIndex);
 }
 #else
-extern inline function markRiveNestedArtboard(node:Dynamic, artboardIndex:Int):Void {
+extern inline function markRiveNestedArtboard(node:flight.FlightNode, artboardIndex:Int):Void {
 #if hl
 	flight._hl._fn.Scene2dFormats.markRiveNestedArtboard(node, artboardIndex);
 #elseif cpp
@@ -685,7 +685,7 @@ extern inline function appendRiveShapeGeometry(shape:Dynamic, paths:Dynamic):Voi
 	flight._js._fn.Scene2dFormats.appendRiveShapeGeometry(shape, paths);
 }
 #else
-extern inline function appendRiveShapeGeometry(shape:Dynamic, paths:Dynamic, pathsLen:Int):Void {
+extern inline function appendRiveShapeGeometry(shape:flight.FlightNode, paths:Dynamic, pathsLen:Int):Void {
 #if hl
 	flight._hl._fn.Scene2dFormats.appendRiveShapeGeometry(shape, paths, pathsLen);
 #elseif cpp
@@ -1072,17 +1072,17 @@ extern inline function freeLottieShapeItemHandler(ptr:LottieShapeItemHandler):Vo
 }
 #end
 #if (js && flight_esm)
-extern inline function freeRequirementSet(ptr:RequirementSet):Void {
-	flight._js._fn.Scene2dFormats.freeRequirementSet(ptr);
+extern inline function freePathRef(ptr:Path):Void {
+	flight._js._fn.Scene2dFormats.freePathRef(ptr);
 }
 #else
-extern inline function freeRequirementSet(ptr:RequirementSet):Void {
+extern inline function freePathRef(ptr:Path):Void {
 #if hl
-	flight._hl._fn.Scene2dFormats.freeRequirementSet(ptr);
+	flight._hl._fn.Scene2dFormats.freePathRef(ptr);
 #elseif cpp
-	flight._cpp._fn.Scene2dFormats.freeRequirementSet(ptr);
+	flight._cpp._fn.Scene2dFormats.freePathRef(ptr);
 #elseif (js && flight_esm)
-	flight._js._fn.Scene2dFormats.freeRequirementSet(ptr);
+	flight._js._fn.Scene2dFormats.freePathRef(ptr);
 #else
 	#error "flight.Scene2dFormats: no backend for this target."
 #end

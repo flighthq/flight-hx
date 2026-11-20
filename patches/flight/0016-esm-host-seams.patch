@@ -1,0 +1,303 @@
+diff --git a/crates/flight-bindgen/src/haxe_js.rs b/crates/flight-bindgen/src/haxe_js.rs
+index 078fc749b5716310891d6ba014e8d332e15ec585..13c5b26354184cdd161793c51a12d91fc3a2fd6c 100644
+--- a/crates/flight-bindgen/src/haxe_js.rs
++++ b/crates/flight-bindgen/src/haxe_js.rs
+@@ -115,6 +115,15 @@ pub fn generate(exports: &[CrateExports], out_dir: &Path, ffi_surface: Option<&F
+     let js_dir = out_dir.join("flight").join("_js");
+     let fn_dir = js_dir.join("_fn");
+     fs::create_dir_all(&fn_dir).unwrap();
++    for (module, source) in [
++        ("HostApp", include_str!("host_app.hx.in")),
++        ("HostWeb", include_str!("host_web.hx.in")),
++        ("HostElectron", include_str!("host_electron.hx.in")),
++        ("HostTauri", include_str!("host_tauri.hx.in")),
++        ("HostCapacitor", include_str!("host_capacitor.hx.in")),
++    ] {
++        write_if_changed(&out_dir.join("flight").join(format!("{module}.hx")), source);
++    }
+     if has_byte_results(exports) {
+         write_if_changed(
+             &js_dir.join(format!("{BYTE_RESULT_TYPE}.hx")),
+diff --git a/crates/flight-bindgen/src/host_app.hx.in b/crates/flight-bindgen/src/host_app.hx.in
+new file mode 100644
+index 0000000000000000000000000000000000000000..42119f72034f1c67f0cd6aa1a9a56331b99c1f04
+--- /dev/null
++++ b/crates/flight-bindgen/src/host_app.hx.in
+@@ -0,0 +1,64 @@
++package flight;
++
++class HostApp {
++  #if (js && flight_esm)
++  public static inline function createAppWindow():AppWindow return AppExports.createAppWindow();
++  public static inline function attachWindow(attach:WindowAttachCapability, lifecycle:WindowLifecycleCapability,
++      win:AppWindow, handle:Dynamic, ownership:WindowAttachmentOwnership):Bool
++    return AppExports.attachWindow(attach, lifecycle, win, handle, ownership == WindowAttachmentOwnership.Host ? "host" : "flight");
++  public static inline function closeWindow(lifecycle:WindowLifecycleCapability, win:AppWindow):Bool
++    return AppExports.closeWindow(lifecycle, win);
++  public static inline function disposeAppWindow(win:AppWindow):Void AppExports.disposeAppWindow(win);
++
++  public static inline function createAppLoop():AppLoop return AppExports.createAppLoop();
++  public static inline function setAppLoopMainWindow(loop:AppLoop, window:AppWindow):Void
++    AppExports.setAppLoopMainWindow(loop, window);
++  public static inline function startAppLoop(scheduler:FrameScheduler, lifecycle:LifecycleCapability,
++      loop:AppLoop, ?options:HostAppLoopOptions):Void {
++    if (options == null) AppExports.startAppLoop(scheduler, lifecycle, loop);
++    else AppExports.startAppLoop(scheduler, lifecycle, loop, options);
++  }
++  public static inline function stopAppLoop(loop:AppLoop):Void AppExports.stopAppLoop(loop);
++  public static inline function disposeAppLoop(loop:AppLoop):Void AppExports.disposeAppLoop(loop);
++  public static inline function isAppLoopRunning(loop:AppLoop):Bool return AppExports.isAppLoopRunning(loop);
++  public static inline function getAppName(capability:AppNameCapability):String return AppExports.getAppName(capability);
++  #end
++}
++
++#if (js && flight_esm)
++abstract FrameScheduler(Dynamic) {}
++abstract LifecycleCapability(Dynamic) {}
++abstract WindowAttachCapability(Dynamic) {}
++abstract WindowLifecycleCapability(Dynamic) {}
++abstract AppNameCapability(Dynamic) {}
++
++typedef WindowCapabilities = {
++  final attach:WindowAttachCapability;
++  final lifecycle:WindowLifecycleCapability;
++};
++
++typedef HostAppLoopOptions = {
++  ?maxDeltaTime:Float,
++  ?targetFrameRate:Float,
++  ?backgroundFrameRate:Float,
++  ?fixedTimeStep:Float,
++  ?maxUpdatesPerFrame:Int,
++};
++
++@:jsRequire("@flighthq/app")
++private extern class AppExports {
++  static function createAppWindow():AppWindow;
++  static function attachWindow(attach:WindowAttachCapability, lifecycle:WindowLifecycleCapability,
++    win:AppWindow, handle:Dynamic, ownership:String):Bool;
++  static function closeWindow(lifecycle:WindowLifecycleCapability, win:AppWindow):Bool;
++  static function disposeAppWindow(win:AppWindow):Void;
++  static function createAppLoop():AppLoop;
++  static function setAppLoopMainWindow(loop:AppLoop, window:AppWindow):Void;
++  static function startAppLoop(scheduler:FrameScheduler, lifecycle:LifecycleCapability, loop:AppLoop,
++    ?options:HostAppLoopOptions):Void;
++  static function stopAppLoop(loop:AppLoop):Void;
++  static function disposeAppLoop(loop:AppLoop):Void;
++  static function isAppLoopRunning(loop:AppLoop):Bool;
++  static function getAppName(capability:AppNameCapability):String;
++}
++#end
+diff --git a/crates/flight-bindgen/src/host_capacitor.hx.in b/crates/flight-bindgen/src/host_capacitor.hx.in
+new file mode 100644
+index 0000000000000000000000000000000000000000..3d6eed6cd2342bd5ca739f3fc811fbc326998b60
+--- /dev/null
++++ b/crates/flight-bindgen/src/host_capacitor.hx.in
+@@ -0,0 +1,19 @@
++package flight;
++
++#if (js && flight_esm)
++import flight.HostApp.AppNameCapability;
++#end
++
++class HostCapacitor {
++  #if (js && flight_esm)
++  public static inline function appName(api:Dynamic):AppNameCapability
++    return CapacitorExports.capacitorHostAppName(api);
++  #end
++}
++
++#if (js && flight_esm)
++@:jsRequire("@flighthq/host-capacitor")
++private extern class CapacitorExports {
++  static function capacitorHostAppName(api:Dynamic):AppNameCapability;
++}
++#end
+diff --git a/crates/flight-bindgen/src/host_electron.hx.in b/crates/flight-bindgen/src/host_electron.hx.in
+new file mode 100644
+index 0000000000000000000000000000000000000000..6bafb2aec160eed9ac989a0c24d95bfb032c883c
+--- /dev/null
++++ b/crates/flight-bindgen/src/host_electron.hx.in
+@@ -0,0 +1,24 @@
++package flight;
++
++#if (js && flight_esm)
++import flight.AppWindow;
++import flight.HostApp.WindowCapabilities;
++#end
++
++class HostElectron {
++  #if (js && flight_esm)
++  public static inline function window(api:Dynamic):WindowCapabilities
++    return ElectronExports.electronHostWindow(api);
++
++  public static inline function getWindowId(window:AppWindow):Int
++    return ElectronExports.getElectronWindowId(window);
++  #end
++}
++
++#if (js && flight_esm)
++@:jsRequire("@flighthq/host-electron")
++private extern class ElectronExports {
++  static function electronHostWindow(api:Dynamic):WindowCapabilities;
++  static function getElectronWindowId(window:AppWindow):Int;
++}
++#end
+diff --git a/crates/flight-bindgen/src/host_tauri.hx.in b/crates/flight-bindgen/src/host_tauri.hx.in
+new file mode 100644
+index 0000000000000000000000000000000000000000..39426e69ba10233ee6ffb0dccee4d0a147b8d8b1
+--- /dev/null
++++ b/crates/flight-bindgen/src/host_tauri.hx.in
+@@ -0,0 +1,19 @@
++package flight;
++
++#if (js && flight_esm)
++import flight.HostApp.WindowCapabilities;
++#end
++
++class HostTauri {
++  #if (js && flight_esm)
++  public static inline function window(api:Dynamic):WindowCapabilities
++    return TauriExports.tauriHostWindow(api);
++  #end
++}
++
++#if (js && flight_esm)
++@:jsRequire("@flighthq/host-tauri")
++private extern class TauriExports {
++  static function tauriHostWindow(api:Dynamic):WindowCapabilities;
++}
++#end
+diff --git a/crates/flight-bindgen/src/host_web.hx.in b/crates/flight-bindgen/src/host_web.hx.in
+new file mode 100644
+index 0000000000000000000000000000000000000000..52686b809587b4ce102b5bdb72bffd669a0ae73b
+--- /dev/null
++++ b/crates/flight-bindgen/src/host_web.hx.in
+@@ -0,0 +1,127 @@
++package flight;
++
++#if (js && flight_esm)
++import flight.AppWindow;
++import flight.HostApp.FrameScheduler;
++import flight.HostApp.LifecycleCapability;
++import flight.HostApp.WindowAttachCapability;
++import flight.HostApp.WindowLifecycleCapability;
++#end
++
++class HostWeb {
++  #if (js && flight_esm)
++  public static var frameScheduler(get, never):FrameScheduler;
++  static inline function get_frameScheduler():FrameScheduler return HostWebExports.webHostLoop;
++
++  public static var lifecycle(get, never):LifecycleCapability;
++  static inline function get_lifecycle():LifecycleCapability return HostWebExports.webHostLifecycle;
++
++  public static var windowAttach(get, never):WindowAttachCapability;
++  static inline function get_windowAttach():WindowAttachCapability return HostWebExports.webHostWindowAttach;
++
++  public static var windowLifecycle(get, never):WindowLifecycleCapability;
++  static inline function get_windowLifecycle():WindowLifecycleCapability return HostWebExports.webHostWindowLifecycle;
++
++  public static inline function getWindowHandle(win:AppWindow):Null<js.html.Window>
++    return HostWebExports.getWebWindowHandle(win);
++
++  public static var canvas(get, never):WebCanvasCapability;
++  static inline function get_canvas():WebCanvasCapability return HostWebExports.webHostCanvas;
++
++  public static var gl(get, never):WebGlCapability;
++  static inline function get_gl():WebGlCapability return HostWebExports.webHostGl;
++
++  public static var wgpu(get, never):WebWgpuCapability;
++  static inline function get_wgpu():WebWgpuCapability return HostWebExports.webHostWgpuContext;
++
++  public static inline function createGlSurfaceFromNativeHandle(capability:WebGlCapability, canvas:js.html.CanvasElement,
++      ?options:WebGlOptions):Null<WebGlSurface>
++    return options == null ? WebSurfaceExports.createGlSurfaceFromNativeHandle(capability, canvas)
++      : WebSurfaceExports.createGlSurfaceFromNativeHandle(capability, canvas, options);
++
++  public static inline function destroyGlSurface(capability:WebGlCapability, surface:WebGlSurface):Void
++    WebSurfaceExports.destroyGlSurface(capability, surface);
++
++  public static inline function createWgpuSurfaceFromNativeHandle(capability:WebWgpuCapability, canvas:js.html.CanvasElement,
++      ?options:WebWgpuOptions):js.lib.Promise<Null<WebWgpuSurface>>
++    return WebSurfaceExports.createWgpuSurfaceFromNativeHandle(capability, canvas, options);
++
++  public static inline function destroyWgpuSurface(capability:WebWgpuCapability, surface:WebWgpuSurface):Void
++    WebSurfaceExports.destroyWgpuSurface(capability, surface);
++
++  public static var inputTarget(get, never):WebInputTargetCapability;
++  static inline function get_inputTarget():WebInputTargetCapability return HostWebExports.webHostInputTarget;
++
++  public static inline function createInputTargetHandle(element:js.html.Element):WebInputTargetHandle
++    return HostWebExports.createWebInputTargetHandle(element);
++
++  public static inline function createCanvasSurfaceFromNativeHandle(capability:WebCanvasCapability, canvas:js.html.CanvasElement,
++      ?options:WebCanvasOptions):Null<WebCanvasSurface>
++    return WebSurfaceExports.createCanvasSurfaceFromNativeHandle(capability, canvas, options);
++
++  public static inline function destroyCanvasSurface(capability:WebCanvasCapability, surface:WebCanvasSurface):Void
++    WebSurfaceExports.destroyCanvasSurface(capability, surface);
++
++  public static inline function getCanvasHandle(surface:WebCanvasSurface):Null<js.html.CanvasElement>
++    return HostWebExports.getWebSurfaceCanvasHandle(surface);
++  #end
++}
++
++#if (js && flight_esm)
++abstract WebCanvasCapability(Dynamic) {}
++abstract WebCanvasSurface(Dynamic) {}
++abstract WebGlCapability(Dynamic) {}
++abstract WebGlSurface(Dynamic) {}
++abstract WebWgpuCapability(Dynamic) {}
++abstract WebWgpuSurface(Dynamic) {}
++abstract WebInputTargetHandle(Dynamic) {}
++
++typedef WebGlOptions = {
++  ?antialias:Bool,
++  ?contextAttributes:js.html.webgl.ContextAttributes,
++  ?powerPreference:String,
++};
++
++typedef WebWgpuOptions = {
++  ?format:String,
++  ?powerPreference:String,
++};
++typedef WebCanvasOptions = {
++  ?alpha:Bool,
++  ?colorSpace:String,
++  ?desynchronized:Bool,
++  ?willReadFrequently:Bool,
++};
++
++extern class WebInputTargetCapability {
++  function prepare(target:WebInputTargetHandle):Void;
++}
++
++@:jsRequire("@flighthq/host-web")
++private extern class HostWebExports {
++  static final webHostLoop:FrameScheduler;
++  static final webHostLifecycle:LifecycleCapability;
++  static final webHostWindowAttach:WindowAttachCapability;
++  static final webHostWindowLifecycle:WindowLifecycleCapability;
++  static function getWebWindowHandle(win:AppWindow):Null<js.html.Window>;
++  static final webHostCanvas:WebCanvasCapability;
++  static final webHostGl:WebGlCapability;
++  static final webHostWgpuContext:WebWgpuCapability;
++  static final webHostInputTarget:WebInputTargetCapability;
++  static function createWebInputTargetHandle(element:js.html.Element):WebInputTargetHandle;
++  static function getWebSurfaceCanvasHandle(surface:WebCanvasSurface):Null<js.html.CanvasElement>;
++}
++
++@:jsRequire("@flighthq/surface")
++private extern class WebSurfaceExports {
++  static function createCanvasSurfaceFromNativeHandle(capability:WebCanvasCapability, canvas:js.html.CanvasElement,
++    ?options:WebCanvasOptions):Null<WebCanvasSurface>;
++  static function destroyCanvasSurface(capability:WebCanvasCapability, surface:WebCanvasSurface):Void;
++  static function createGlSurfaceFromNativeHandle(capability:WebGlCapability, canvas:js.html.CanvasElement,
++    ?options:WebGlOptions):Null<WebGlSurface>;
++  static function destroyGlSurface(capability:WebGlCapability, surface:WebGlSurface):Void;
++  static function createWgpuSurfaceFromNativeHandle(capability:WebWgpuCapability, canvas:js.html.CanvasElement,
++    ?options:WebWgpuOptions):js.lib.Promise<Null<WebWgpuSurface>>;
++  static function destroyWgpuSurface(capability:WebWgpuCapability, surface:WebWgpuSurface):Void;
++}
++#end

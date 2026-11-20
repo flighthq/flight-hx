@@ -32,4 +32,8 @@ abstract Timeline(cpp.Star<cpp.Void>) {
 	inline function get_lastFrameUpdate():Int return Timeline_Ffi.get_lastFrameUpdate(this);
 
 	inline function set_lastFrameUpdate(value:Int):Int { Timeline_Ffi.set_lastFrameUpdate(this, value); return value; }
+
+	extern inline public function freeRef():Void {
+		flight._cpp._fn.Timeline.freeTimelineRef(cast this);
+	}
 }

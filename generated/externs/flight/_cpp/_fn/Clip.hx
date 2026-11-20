@@ -53,6 +53,8 @@ extern class Clip {
 	public static function createClipRegionFromRoundedRectangle(rectangle:flight._cpp.Rectangle, radius:Float, tolerance:Float):cpp.Star<cpp.Void>;
 	@:native("flight_disable_clip_guards")
 	public static function disableClipGuards():Void;
+	@:native("flight_free_clip_region_ref")
+	public static function freeClipRegionRef(ptr:flight._cpp.ClipRegion):Void;
 	@:native("flight_free_clip_region_explanation")
 	public static function freeClipRegionExplanation(ptr:flight._cpp.ClipRegionExplanation):Void;
 }

@@ -129,7 +129,7 @@ extern class Scene2dFormats {
 	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeLottieShapeItemHandler(ptr:flight._js.LottieShapeItemHandler):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */
-	public static inline function freeRequirementSet(ptr:flight._js.RequirementSet):Void {}
+	public static inline function freePathRef(ptr:flight._js.Path):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeRiveFieldType(ptr:flight._js.RiveFieldType):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */

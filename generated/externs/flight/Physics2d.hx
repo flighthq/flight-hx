@@ -157,18 +157,6 @@ extern inline function disablePhysics2dGuards(guards:Physics2DGuardState):Void {
 extern inline function enablePhysics2dGuards(guards:Physics2DGuardState, logState:Dynamic, clock:Dynamic):Void {
 	flight._js._fn.Physics2d.enablePhysics2dGuards(guards, logState, clock);
 }
-#else
-extern inline function enablePhysics2dGuards(guards:Physics2DGuardState, logState:Dynamic, clockFn:Dynamic, clockCtx:Dynamic):Void {
-#if hl
-	flight._hl._fn.Physics2d.enablePhysics2dGuards(guards, logState, clockFn, clockCtx);
-#elseif cpp
-	flight._cpp._fn.Physics2d.enablePhysics2dGuards(guards, logState, clockFn, clockCtx);
-#elseif (js && flight_esm)
-	flight._js._fn.Physics2d.enablePhysics2dGuards(guards, logState, clockFn, clockCtx);
-#else
-	#error "flight.Physics2d: no backend for this target."
-#end
-}
 #end
 #if (js && flight_esm)
 extern inline function explainPhysics2dCollision(world:Physics2DWorld):Physics2DCollisionExplanation {
@@ -821,7 +809,7 @@ extern inline function syncPhysics2dBodyToNode2d(body:RigidBody2D, node:Dynamic)
 	flight._js._fn.Physics2d.syncPhysics2dBodyToNode2d(body, node);
 }
 #else
-extern inline function syncPhysics2dBodyToNode2d(body:RigidBody2D, node:Dynamic):Void {
+extern inline function syncPhysics2dBodyToNode2d(body:RigidBody2D, node:flight.FlightNode):Void {
 #if hl
 	flight._hl._fn.Physics2d.syncPhysics2dBodyToNode2d(body, node);
 #elseif cpp
@@ -1684,6 +1672,23 @@ extern inline function queryPhysics2dShapeCast(out:Physics2DShapeCastResult, wor
 }
 #end
 #if (js && flight_esm)
+extern inline function freeCollisionShape2D(ptr:CollisionShape2D):Void {
+	flight._js._fn.Physics2d.freeCollisionShape2D(ptr);
+}
+#else
+extern inline function freeCollisionShape2D(ptr:CollisionShape2D):Void {
+#if hl
+	flight._hl._fn.Physics2d.freeCollisionShape2D(ptr);
+#elseif cpp
+	flight._cpp._fn.Physics2d.freeCollisionShape2D(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Physics2d.freeCollisionShape2D(ptr);
+#else
+	#error "flight.Physics2d: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
 extern inline function freePhysics2DdebugGeometry(ptr:Physics2DDebugGeometry):Void {
 	flight._js._fn.Physics2d.freePhysics2DdebugGeometry(ptr);
 }
@@ -1752,6 +1757,159 @@ extern inline function freePhysics2DstepExplanation(ptr:Physics2DStepExplanation
 }
 #end
 #if (js && flight_esm)
+extern inline function freePhysics2DdistanceJointRef(ptr:Physics2DDistanceJoint):Void {
+	flight._js._fn.Physics2d.freePhysics2DdistanceJointRef(ptr);
+}
+#else
+extern inline function freePhysics2DdistanceJointRef(ptr:Physics2DDistanceJoint):Void {
+#if hl
+	flight._hl._fn.Physics2d.freePhysics2DdistanceJointRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Physics2d.freePhysics2DdistanceJointRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Physics2d.freePhysics2DdistanceJointRef(ptr);
+#else
+	#error "flight.Physics2d: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freePhysics2DgearJointRef(ptr:Physics2DGearJoint):Void {
+	flight._js._fn.Physics2d.freePhysics2DgearJointRef(ptr);
+}
+#else
+extern inline function freePhysics2DgearJointRef(ptr:Physics2DGearJoint):Void {
+#if hl
+	flight._hl._fn.Physics2d.freePhysics2DgearJointRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Physics2d.freePhysics2DgearJointRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Physics2d.freePhysics2DgearJointRef(ptr);
+#else
+	#error "flight.Physics2d: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freePhysics2DmouseJointRef(ptr:Physics2DMouseJoint):Void {
+	flight._js._fn.Physics2d.freePhysics2DmouseJointRef(ptr);
+}
+#else
+extern inline function freePhysics2DmouseJointRef(ptr:Physics2DMouseJoint):Void {
+#if hl
+	flight._hl._fn.Physics2d.freePhysics2DmouseJointRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Physics2d.freePhysics2DmouseJointRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Physics2d.freePhysics2DmouseJointRef(ptr);
+#else
+	#error "flight.Physics2d: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freePhysics2DprismaticJointRef(ptr:Physics2DPrismaticJoint):Void {
+	flight._js._fn.Physics2d.freePhysics2DprismaticJointRef(ptr);
+}
+#else
+extern inline function freePhysics2DprismaticJointRef(ptr:Physics2DPrismaticJoint):Void {
+#if hl
+	flight._hl._fn.Physics2d.freePhysics2DprismaticJointRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Physics2d.freePhysics2DprismaticJointRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Physics2d.freePhysics2DprismaticJointRef(ptr);
+#else
+	#error "flight.Physics2d: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freePhysics2DpulleyJointRef(ptr:Physics2DPulleyJoint):Void {
+	flight._js._fn.Physics2d.freePhysics2DpulleyJointRef(ptr);
+}
+#else
+extern inline function freePhysics2DpulleyJointRef(ptr:Physics2DPulleyJoint):Void {
+#if hl
+	flight._hl._fn.Physics2d.freePhysics2DpulleyJointRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Physics2d.freePhysics2DpulleyJointRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Physics2d.freePhysics2DpulleyJointRef(ptr);
+#else
+	#error "flight.Physics2d: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freePhysics2DrevoluteJointRef(ptr:Physics2DRevoluteJoint):Void {
+	flight._js._fn.Physics2d.freePhysics2DrevoluteJointRef(ptr);
+}
+#else
+extern inline function freePhysics2DrevoluteJointRef(ptr:Physics2DRevoluteJoint):Void {
+#if hl
+	flight._hl._fn.Physics2d.freePhysics2DrevoluteJointRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Physics2d.freePhysics2DrevoluteJointRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Physics2d.freePhysics2DrevoluteJointRef(ptr);
+#else
+	#error "flight.Physics2d: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freePhysics2DropeJointRef(ptr:Physics2DRopeJoint):Void {
+	flight._js._fn.Physics2d.freePhysics2DropeJointRef(ptr);
+}
+#else
+extern inline function freePhysics2DropeJointRef(ptr:Physics2DRopeJoint):Void {
+#if hl
+	flight._hl._fn.Physics2d.freePhysics2DropeJointRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Physics2d.freePhysics2DropeJointRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Physics2d.freePhysics2DropeJointRef(ptr);
+#else
+	#error "flight.Physics2d: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freePhysics2DweldJointRef(ptr:Physics2DWeldJoint):Void {
+	flight._js._fn.Physics2d.freePhysics2DweldJointRef(ptr);
+}
+#else
+extern inline function freePhysics2DweldJointRef(ptr:Physics2DWeldJoint):Void {
+#if hl
+	flight._hl._fn.Physics2d.freePhysics2DweldJointRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Physics2d.freePhysics2DweldJointRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Physics2d.freePhysics2DweldJointRef(ptr);
+#else
+	#error "flight.Physics2d: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freePhysics2DwheelJointRef(ptr:Physics2DWheelJoint):Void {
+	flight._js._fn.Physics2d.freePhysics2DwheelJointRef(ptr);
+}
+#else
+extern inline function freePhysics2DwheelJointRef(ptr:Physics2DWheelJoint):Void {
+#if hl
+	flight._hl._fn.Physics2d.freePhysics2DwheelJointRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Physics2d.freePhysics2DwheelJointRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Physics2d.freePhysics2DwheelJointRef(ptr);
+#else
+	#error "flight.Physics2d: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
 extern inline function freePhysics2DjointReaction(ptr:Physics2DJointReaction):Void {
 	flight._js._fn.Physics2d.freePhysics2DjointReaction(ptr);
 }
@@ -1769,17 +1927,34 @@ extern inline function freePhysics2DjointReaction(ptr:Physics2DJointReaction):Vo
 }
 #end
 #if (js && flight_esm)
-extern inline function freePhysics2DjointSolverRef(ptr:Physics2DJointSolverRef):Void {
+extern inline function freePhysics2DjointSolverRef(ptr:Physics2DJointSolver):Void {
 	flight._js._fn.Physics2d.freePhysics2DjointSolverRef(ptr);
 }
 #else
-extern inline function freePhysics2DjointSolverRef(ptr:Physics2DJointSolverRef):Void {
+extern inline function freePhysics2DjointSolverRef(ptr:Physics2DJointSolver):Void {
 #if hl
 	flight._hl._fn.Physics2d.freePhysics2DjointSolverRef(ptr);
 #elseif cpp
 	flight._cpp._fn.Physics2d.freePhysics2DjointSolverRef(ptr);
 #elseif (js && flight_esm)
 	flight._js._fn.Physics2d.freePhysics2DjointSolverRef(ptr);
+#else
+	#error "flight.Physics2d: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freePhysics2DcolliderRef(ptr:Physics2DCollider):Void {
+	flight._js._fn.Physics2d.freePhysics2DcolliderRef(ptr);
+}
+#else
+extern inline function freePhysics2DcolliderRef(ptr:Physics2DCollider):Void {
+#if hl
+	flight._hl._fn.Physics2d.freePhysics2DcolliderRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Physics2d.freePhysics2DcolliderRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Physics2d.freePhysics2DcolliderRef(ptr);
 #else
 	#error "flight.Physics2d: no backend for this target."
 #end

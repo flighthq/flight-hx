@@ -91,6 +91,23 @@ extern inline function invalidateBitmap(bitmap:Bitmap):Void {
 }
 #end
 #if (js && flight_esm)
+extern inline function shareBitmap(bitmap:Bitmap):Dynamic {
+	return flight._js._fn.Bitmap.shareBitmap(bitmap);
+}
+#else
+extern inline function shareBitmap(bitmap:Bitmap):Dynamic {
+#if hl
+	return flight._hl._fn.Bitmap.shareBitmap(bitmap);
+#elseif cpp
+	return flight._cpp._fn.Bitmap.shareBitmap(bitmap);
+#elseif (js && flight_esm)
+	return flight._js._fn.Bitmap.shareBitmap(bitmap);
+#else
+	#error "flight.Bitmap: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
 extern inline function transformBitmap(dest:BitmapRegion, source:BitmapRegion, matrix:Dynamic, edgeMode:Dynamic, sampleMode:Dynamic):Void {
 	flight._js._fn.Bitmap.transformBitmap(dest, source, matrix, edgeMode, sampleMode);
 }
@@ -771,15 +788,15 @@ extern inline function dissolveBitmapPixels(dest:BitmapRegion, source:BitmapRegi
 }
 #end
 #if (js && flight_esm)
-extern inline function encodeBitmap(hostBitmapEncode:HostBitmapEncodeCapability, source:Bitmap, format:Null<Dynamic>, quality:Null<Float>):Null<Dynamic> {
+extern inline function encodeBitmap(hostBitmapEncode:HostBitmapEncodeCapability, source:Bitmap, format:Null<Dynamic>, quality:Null<Float>):Null<ByteResult> {
 	return flight._js._fn.Bitmap.encodeBitmap(hostBitmapEncode, source, format, quality);
 }
 #else
-extern inline function encodeBitmap(hostBitmapEncode:HostBitmapEncodeCapability, source:Bitmap, format:Int, quality:Float):Null<flight.NativeByteBuffer> {
+extern inline function encodeBitmap(hostBitmapEncode:HostBitmapEncodeCapability, source:Bitmap, format:Int, quality:Float):Null<ByteResult> {
 #if hl
-	return flight._hl._fn.Bitmap.encodeBitmap(hostBitmapEncode, source, format, quality);
+	return flight._hl._fn.Bitmap.EncodeBitmapByteResult.wrapOptional(flight._hl._fn.Bitmap.encodeBitmap(hostBitmapEncode, source, format, quality));
 #elseif cpp
-	return flight._cpp._fn.Bitmap.encodeBitmap(hostBitmapEncode, source, format, quality);
+	return flight._cpp._fn.Bitmap.EncodeBitmapByteResult.wrapOptional(flight._cpp._fn.Bitmap.encodeBitmap(hostBitmapEncode, source, format, quality));
 #elseif (js && flight_esm)
 	return flight._js._fn.Bitmap.encodeBitmap(hostBitmapEncode, source, format, quality);
 #else
@@ -1366,11 +1383,11 @@ extern inline function getBitmapColorBoundsRectangle(source:BitmapRegion, mask:I
 }
 #end
 #if (js && flight_esm)
-extern inline function createBitmapRegion(bitmap:Bitmap, x:Int, y:Int, width:Int, height:Int):BitmapRegion {
+extern inline function createBitmapRegion(bitmap:Dynamic, x:Int, y:Int, width:Int, height:Int):BitmapRegion {
 	return flight._js._fn.Bitmap.createBitmapRegion(bitmap, x, y, width, height);
 }
 #else
-extern inline function createBitmapRegion(bitmap:Bitmap, x:Int, y:Int, width:Int, height:Int):BitmapRegion {
+extern inline function createBitmapRegion(bitmap:Dynamic, x:Int, y:Int, width:Int, height:Int):BitmapRegion {
 #if hl
 	return flight._hl._fn.Bitmap.createBitmapRegion(bitmap, x, y, width, height);
 #elseif cpp
@@ -1383,11 +1400,11 @@ extern inline function createBitmapRegion(bitmap:Bitmap, x:Int, y:Int, width:Int
 }
 #end
 #if (js && flight_esm)
-extern inline function setBitmapRegion(out:BitmapRegion, bitmap:Bitmap, x:Int, y:Int, width:Int, height:Int):Void {
+extern inline function setBitmapRegion(out:BitmapRegion, bitmap:Dynamic, x:Int, y:Int, width:Int, height:Int):Void {
 	flight._js._fn.Bitmap.setBitmapRegion(out, bitmap, x, y, width, height);
 }
 #else
-extern inline function setBitmapRegion(out:BitmapRegion, bitmap:Bitmap, x:Int, y:Int, width:Int, height:Int):Void {
+extern inline function setBitmapRegion(out:BitmapRegion, bitmap:Dynamic, x:Int, y:Int, width:Int, height:Int):Void {
 #if hl
 	flight._hl._fn.Bitmap.setBitmapRegion(out, bitmap, x, y, width, height);
 #elseif cpp
@@ -1717,6 +1734,23 @@ extern inline function freeBitmap(ptr:Bitmap):Void {
 	flight._cpp._fn.Bitmap.freeBitmap(ptr);
 #elseif (js && flight_esm)
 	flight._js._fn.Bitmap.freeBitmap(ptr);
+#else
+	#error "flight.Bitmap: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeBitmapRef(ptr:Bitmap):Void {
+	flight._js._fn.Bitmap.freeBitmapRef(ptr);
+}
+#else
+extern inline function freeBitmapRef(ptr:Bitmap):Void {
+#if hl
+	flight._hl._fn.Bitmap.freeBitmapRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Bitmap.freeBitmapRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Bitmap.freeBitmapRef(ptr);
 #else
 	#error "flight.Bitmap: no backend for this target."
 #end

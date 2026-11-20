@@ -14,6 +14,4 @@ extern class Entity {
 	public static function setEntityRuntimeGuardMode(enabled:Bool):Void;
 	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeEntityRuntimeWriteExplanation(ptr:flight._js.EntityRuntimeWriteExplanation):Void {}
-	/** Native allocation release is unnecessary on JavaScript. */
-	public static inline function freeRef(ptr:Dynamic):Void {}
 }

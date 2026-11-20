@@ -1,6 +1,9 @@
 package flight._js;
 
 abstract Texture(Dynamic) {
+	inline public function freeRef():Void {
+		flight._js._fn.Image.freeTextureRef(cast this);
+	}
 	static inline public function create(opts:Null<flight._js.CreateTextureOptions>):flight._js.Texture {
 		return flight._js._fn.Texture.createTexture(opts);
 	}

@@ -1,10 +1,12 @@
 package flight._hl;
 
 private extern class Skeleton2DDeformLengthMismatch_Ffi {
+	@:hlNative("flight", "flight_free_string")
+	static function freeString(value:hl.Bytes):Void;
 	@:hlNative("flight", "flight_field_get_skeleton2_ddeform_length_mismatch_subject")
-	static function get_subject(ptr:hl.Bytes):flight._hl.NativeByteBuffer;
+	static function get_subject(ptr:hl.Bytes):hl.Bytes;
 	@:hlNative("flight", "flight_field_set_skeleton2_ddeform_length_mismatch_subject")
-	static function set_subject(ptr:hl.Bytes, data:hl.Bytes, length:Int):Void;
+	static function set_subject(ptr:hl.Bytes, value:hl.Bytes):Void;
 }
 
 abstract Skeleton2DDeformLengthMismatch(hl.Bytes) {
@@ -19,18 +21,6 @@ abstract Skeleton2DDeformLengthMismatch(hl.Bytes) {
 
 	inline function set_offsets(value:Int):Int { this.setI32(8, value); return value; }
 	public var subject(get, set):String;
-	inline function get_subject():String {
-		final bytes = Skeleton2DDeformLengthMismatch_Ffi.get_subject(this);
-		try {
-			final value = bytes.toBytes().toString();
-			bytes.dispose();
-			return value;
-		} catch (error:Dynamic) { bytes.dispose(); throw error; }
-	}
-	inline function set_subject(value:String):String {
-		final bytes = haxe.io.Bytes.ofString(value);
-		Skeleton2DDeformLengthMismatch_Ffi.set_subject(this, bytes.getData().bytes, bytes.length);
-		return value;
-	}
-
+	inline function get_subject():String { var raw = Skeleton2DDeformLengthMismatch_Ffi.get_subject(this); if (raw == null) return null; var value:String = @:privateAccess String.fromUTF8(raw); Skeleton2DDeformLengthMismatch_Ffi.freeString(raw); return value; }
+	inline function set_subject(value:String):String { var raw:hl.Bytes = null; if (value != null) { var bytes = haxe.io.Bytes.ofString(value); raw = new hl.Bytes(bytes.length + 1); raw.blit(0, bytes.getData(), 0, bytes.length); raw.setUI8(bytes.length, 0); } Skeleton2DDeformLengthMismatch_Ffi.set_subject(this, raw); return value; }
 }

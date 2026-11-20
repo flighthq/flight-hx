@@ -1,0 +1,47 @@
+package flight;
+
+abstract WellKnownMenuItemRoleValue(Int) from Int to Int {
+	public static inline var Copy:WellKnownMenuItemRoleValue = 0;
+	public static inline var Cut:WellKnownMenuItemRoleValue = 1;
+	public static inline var Delete:WellKnownMenuItemRoleValue = 2;
+	public static inline var Paste:WellKnownMenuItemRoleValue = 3;
+	public static inline var PasteAndMatchStyle:WellKnownMenuItemRoleValue = 4;
+	public static inline var Redo:WellKnownMenuItemRoleValue = 5;
+	public static inline var SelectAll:WellKnownMenuItemRoleValue = 6;
+	public static inline var ToggleSpellChecker:WellKnownMenuItemRoleValue = 7;
+	public static inline var Undo:WellKnownMenuItemRoleValue = 8;
+	public static inline var About:WellKnownMenuItemRoleValue = 9;
+	public static inline var Close:WellKnownMenuItemRoleValue = 10;
+	public static inline var Front:WellKnownMenuItemRoleValue = 11;
+	public static inline var Hide:WellKnownMenuItemRoleValue = 12;
+	public static inline var HideOthers:WellKnownMenuItemRoleValue = 13;
+	public static inline var MergeAllWindows:WellKnownMenuItemRoleValue = 14;
+	public static inline var Minimize:WellKnownMenuItemRoleValue = 15;
+	public static inline var MoveTabToNewWindow:WellKnownMenuItemRoleValue = 16;
+	public static inline var Quit:WellKnownMenuItemRoleValue = 17;
+	public static inline var SelectNextTab:WellKnownMenuItemRoleValue = 18;
+	public static inline var SelectPreviousTab:WellKnownMenuItemRoleValue = 19;
+	public static inline var ToggleTabBar:WellKnownMenuItemRoleValue = 20;
+	public static inline var Unhide:WellKnownMenuItemRoleValue = 21;
+	public static inline var Zoom:WellKnownMenuItemRoleValue = 22;
+	public static inline var ForceReload:WellKnownMenuItemRoleValue = 23;
+	public static inline var Reload:WellKnownMenuItemRoleValue = 24;
+	public static inline var ResetZoom:WellKnownMenuItemRoleValue = 25;
+	public static inline var ToggleDevTools:WellKnownMenuItemRoleValue = 26;
+	public static inline var ToggleFullscreen:WellKnownMenuItemRoleValue = 27;
+	public static inline var ZoomIn:WellKnownMenuItemRoleValue = 28;
+	public static inline var ZoomOut:WellKnownMenuItemRoleValue = 29;
+	public static inline var Help:WellKnownMenuItemRoleValue = 30;
+	public static inline var Services:WellKnownMenuItemRoleValue = 31;
+	public static inline var StartSpeaking:WellKnownMenuItemRoleValue = 32;
+	public static inline var StopSpeaking:WellKnownMenuItemRoleValue = 33;
+	public static inline var ClearRecentDocuments:WellKnownMenuItemRoleValue = 34;
+	public static inline var RecentDocuments:WellKnownMenuItemRoleValue = 35;
+	public static inline var AppMenu:WellKnownMenuItemRoleValue = 36;
+	public static inline var EditMenu:WellKnownMenuItemRoleValue = 37;
+	public static inline var FileMenu:WellKnownMenuItemRoleValue = 38;
+	public static inline var HelpMenu:WellKnownMenuItemRoleValue = 39;
+	public static inline var ShareMenu:WellKnownMenuItemRoleValue = 40;
+	public static inline var ViewMenu:WellKnownMenuItemRoleValue = 41;
+	public static inline var WindowMenu:WellKnownMenuItemRoleValue = 42;
+}

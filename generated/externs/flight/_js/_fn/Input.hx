@@ -69,5 +69,13 @@ extern class Input {
 	@:native("stopInputKeyRepeatTimer")
 	public static function stopInputKeyRepeatTimer(timer:Dynamic):Void;
 	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeInputManagerRef(ptr:flight._js.InputManager):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeInputStateRef(ptr:flight._js.InputState):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeInputDisposer(ptr:flight._js.InputDisposer):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeInputTargetHandleRef(ptr:flight._js.InputTargetHandle):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeInputKeyRepeatTimerRef(ptr:flight._js.InputKeyRepeatTimer):Void {}
 }

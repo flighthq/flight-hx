@@ -15,10 +15,12 @@ abstract Scene2D(hl.Bytes) {
 	public var scene2dHeight(get, set):Float;
 
 	inline function get_scene2dHeight():Float return Scene2D_Ffi.get_scene2dHeight(this);
+
 	inline function set_scene2dHeight(value:Float):Float { Scene2D_Ffi.set_scene2dHeight(this, value); return value; }
 	public var scene2dWidth(get, set):Float;
 
 	inline function get_scene2dWidth():Float return Scene2D_Ffi.get_scene2dWidth(this);
+
 	inline function set_scene2dWidth(value:Float):Float { Scene2D_Ffi.set_scene2dWidth(this, value); return value; }
 
 	inline public function enableSignals():hl.Bytes {

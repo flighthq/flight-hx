@@ -29,6 +29,8 @@ extern class Statechart {
 	public static function enableStatechartSignals(instance:hl.Bytes):flight._hl.StatechartSignals;
 	@:hlNative("flight", "flight_get_statechart_signals")
 	public static function getStatechartSignals(instance:hl.Bytes):flight._hl.StatechartSignals;
+	@:hlNative("flight", "flight_free_statechart_instance_raw_ref")
+	public static function freeStatechartInstanceRawRef(ptr:flight._hl.StatechartInstanceRaw):Void;
 	@:hlNative("flight", "flight_free_statechart_transition_explanation")
 	public static function freeStatechartTransitionExplanation(ptr:flight._hl.StatechartTransitionExplanation):Void;
 	@:hlNative("flight", "flight_free_statechart_signals")

@@ -443,6 +443,23 @@ extern inline function disableClipGuards():Void {
 }
 #end
 #if (js && flight_esm)
+extern inline function freeClipRegionRef(ptr:ClipRegion):Void {
+	flight._js._fn.Clip.freeClipRegionRef(ptr);
+}
+#else
+extern inline function freeClipRegionRef(ptr:ClipRegion):Void {
+#if hl
+	flight._hl._fn.Clip.freeClipRegionRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Clip.freeClipRegionRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Clip.freeClipRegionRef(ptr);
+#else
+	#error "flight.Clip: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
 extern inline function freeClipRegionExplanation(ptr:ClipRegionExplanation):Void {
 	flight._js._fn.Clip.freeClipRegionExplanation(ptr);
 }

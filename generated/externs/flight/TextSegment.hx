@@ -43,18 +43,6 @@ extern inline function disableTextSegmentGuards():Void {
 extern inline function enableTextSegmentGuards(logState:Dynamic, clock:Dynamic):Void {
 	flight._js._fn.TextSegment.enableTextSegmentGuards(logState, clock);
 }
-#else
-extern inline function enableTextSegmentGuards(logState:Dynamic, clockFn:Dynamic, clockCtx:Dynamic):Void {
-#if hl
-	flight._hl._fn.TextSegment.enableTextSegmentGuards(logState, clockFn, clockCtx);
-#elseif cpp
-	flight._cpp._fn.TextSegment.enableTextSegmentGuards(logState, clockFn, clockCtx);
-#elseif (js && flight_esm)
-	flight._js._fn.TextSegment.enableTextSegmentGuards(logState, clockFn, clockCtx);
-#else
-	#error "flight.TextSegment: no backend for this target."
-#end
-}
 #end
 #if (js && flight_esm)
 extern inline function segmentGraphemes(out:Dynamic, hostTextSegmenter:HostTextSegmenterCapability, text:String, locale:Null<String>):Void {

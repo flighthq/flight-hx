@@ -205,17 +205,17 @@ extern inline function setAnimationBlendTreeInputWeight(tree:AnimationBlendTree,
 }
 #end
 #if (js && flight_esm)
-extern inline function createAnimationClip(channels:Dynamic, duration:Null<Float>, events:Dynamic):AnimationClip {
-	return flight._js._fn.Animation.createAnimationClip(channels, duration, events);
+extern inline function createAnimationChannel(track:Dynamic, targetRef:TargetRef):AnimationChannel {
+	return flight._js._fn.Animation.createAnimationChannel(track, targetRef);
 }
 #else
-extern inline function createAnimationClip(channels:Dynamic, duration:Float, events:Dynamic, eventsLen:Int):AnimationClip {
+extern inline function createAnimationChannel(track:Dynamic, targetRef:TargetRef):AnimationChannel {
 #if hl
-	return flight._hl._fn.Animation.createAnimationClip(channels, duration, events, eventsLen);
+	return flight._hl._fn.Animation.createAnimationChannel(track, targetRef);
 #elseif cpp
-	return flight._cpp._fn.Animation.createAnimationClip(channels, duration, events, eventsLen);
+	return flight._cpp._fn.Animation.createAnimationChannel(track, targetRef);
 #elseif (js && flight_esm)
-	return flight._js._fn.Animation.createAnimationClip(channels, duration, events, eventsLen);
+	return flight._js._fn.Animation.createAnimationChannel(track, targetRef);
 #else
 	#error "flight.Animation: no backend for this target."
 #end
@@ -879,6 +879,23 @@ extern inline function freeAnimationBlendTreeInput(ptr:AnimationBlendTreeInput):
 	flight._cpp._fn.Animation.freeAnimationBlendTreeInput(ptr);
 #elseif (js && flight_esm)
 	flight._js._fn.Animation.freeAnimationBlendTreeInput(ptr);
+#else
+	#error "flight.Animation: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeAnimationChannel(ptr:AnimationChannel):Void {
+	flight._js._fn.Animation.freeAnimationChannel(ptr);
+}
+#else
+extern inline function freeAnimationChannel(ptr:AnimationChannel):Void {
+#if hl
+	flight._hl._fn.Animation.freeAnimationChannel(ptr);
+#elseif cpp
+	flight._cpp._fn.Animation.freeAnimationChannel(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Animation.freeAnimationChannel(ptr);
 #else
 	#error "flight.Animation: no backend for this target."
 #end

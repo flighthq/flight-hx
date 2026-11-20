@@ -4,6 +4,8 @@ package flight._js._fn;
 extern class Skeleton2D {
 	@:native("registerSkeleton2DDeformAnimationTarget")
 	public static function registerSkeleton2dDeformAnimationTarget(registry:flight._js.Skeleton2DAnimationTargetBinderRegistry):Void;
+	@:native("explainSkeleton2DChannelInterpolation")
+	public static function explainSkeleton2dChannelInterpolation(channel:flight._js.AnimationChannel, subject:String):Null<flight._js.Skeleton2DCoercedInterpolation>;
 	@:native("isSkeleton2DSteppedChannelSubject")
 	public static function isSkeleton2dSteppedChannelSubject(subject:String):Bool;
 	@:native("explainSkeleton2DDeformLength")
@@ -56,6 +58,10 @@ extern class Skeleton2D {
 	public static function registerSkeleton2dAnimationTargetBinder(registry:flight._js.Skeleton2DAnimationTargetBinderRegistry, kind:String, bind:flight._js.Skeleton2DAnimationTargetBinder):Void;
 	@:native("unregisterSkeleton2DAnimationTargetBinder")
 	public static function unregisterSkeleton2dAnimationTargetBinder(registry:flight._js.Skeleton2DAnimationTargetBinderRegistry, kind:String):Void;
+	@:native("getSkeleton2DConstraintSolver")
+	public static function getSkeleton2dConstraintSolver(registry:flight._js.Skeleton2DConstraintRegistry, kind:String):Null<flight._js.Skeleton2DConstraintSolver>;
+	@:native("registerSkeleton2DConstraintSolver")
+	public static function registerSkeleton2dConstraintSolver(registry:flight._js.Skeleton2DConstraintRegistry, kind:String, solve:flight._js.Skeleton2DConstraintSolver):Void;
 	@:native("solveSkeleton2DConstraints")
 	public static function solveSkeleton2dConstraints(registry:flight._js.Skeleton2DConstraintRegistry, skeleton:flight._js.Skeleton2D, constraints:Dynamic):Void;
 	@:native("unregisterSkeleton2DConstraintSolver")
@@ -64,8 +70,6 @@ extern class Skeleton2D {
 	public static function registerSkeleton2dDrawOrderAnimationBinder(registry:flight._js.Skeleton2DAnimationTargetBinderRegistry):Void;
 	@:native("unregisterSkeleton2DDrawOrderAnimationBinder")
 	public static function unregisterSkeleton2dDrawOrderAnimationBinder(registry:flight._js.Skeleton2DAnimationTargetBinderRegistry):Void;
-	@:native("createSkin2D")
-	public static function createSkin2d(influenceCounts:Dynamic, influences:Dynamic):flight._js.Skin2D;
 	@:native("registerSkeleton2DTransformConstraintSolver")
 	public static function registerSkeleton2dTransformConstraintSolver(registry:flight._js.Skeleton2DConstraintRegistry):Void;
 	@:native("solveSkeleton2DTransformConstraint")
@@ -75,6 +79,8 @@ extern class Skeleton2D {
 	@:native("solveSkeleton2DTransformConstraint")
 	public static function solveSkeleton2dTransformConstraintSkeleton2DtransformConstraint(skeleton:flight._js.Skeleton2D, constraint:flight._js.Skeleton2DTransformConstraint):Void;
 	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeSkeleton2DcoercedInterpolation(ptr:flight._js.Skeleton2DCoercedInterpolation):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeSkeleton2DdeformLengthExplanation(ptr:flight._js.Skeleton2DDeformLengthExplanation):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeSkeleton2DanimationTarget(ptr:flight._js.Skeleton2DAnimationTarget):Void {}
@@ -82,6 +88,8 @@ extern class Skeleton2D {
 	public static inline function freeSkeleton2DslotAnimationTarget(ptr:flight._js.Skeleton2DSlotAnimationTarget):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeSkeleton2DanimationTargetBinder(ptr:flight._js.Skeleton2DAnimationTargetBinder):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeSkeleton2DconstraintSolver(ptr:flight._js.Skeleton2DConstraintSolver):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeSkin2D(ptr:flight._js.Skin2D):Void {}
 }

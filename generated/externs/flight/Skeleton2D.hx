@@ -40,6 +40,23 @@ extern inline function registerSkeleton2dDeformAnimationTarget(registry:Skeleton
 }
 #end
 #if (js && flight_esm)
+extern inline function explainSkeleton2dChannelInterpolation(channel:AnimationChannel, subject:String):Null<Skeleton2DCoercedInterpolation> {
+	return flight._js._fn.Skeleton2D.explainSkeleton2dChannelInterpolation(channel, subject);
+}
+#else
+extern inline function explainSkeleton2dChannelInterpolation(channel:AnimationChannel, subject:String):Skeleton2DCoercedInterpolation {
+#if hl
+	return flight._hl._fn.Skeleton2D.explainSkeleton2dChannelInterpolation(channel, cast subject);
+#elseif cpp
+	return flight._cpp._fn.Skeleton2D.explainSkeleton2dChannelInterpolation(channel, cast subject);
+#elseif (js && flight_esm)
+	return flight._js._fn.Skeleton2D.explainSkeleton2dChannelInterpolation(channel, subject);
+#else
+	#error "flight.Skeleton2D: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
 extern inline function isSkeleton2dSteppedChannelSubject(subject:String):Bool {
 	return flight._js._fn.Skeleton2D.isSkeleton2dSteppedChannelSubject(subject);
 }
@@ -482,6 +499,40 @@ extern inline function unregisterSkeleton2dAnimationTargetBinder(registry:Skelet
 }
 #end
 #if (js && flight_esm)
+extern inline function getSkeleton2dConstraintSolver(registry:Skeleton2DConstraintRegistry, kind:String):Null<Skeleton2DConstraintSolver> {
+	return flight._js._fn.Skeleton2D.getSkeleton2dConstraintSolver(registry, kind);
+}
+#else
+extern inline function getSkeleton2dConstraintSolver(registry:Skeleton2DConstraintRegistry, kind:String):Skeleton2DConstraintSolver {
+#if hl
+	return flight._hl._fn.Skeleton2D.getSkeleton2dConstraintSolver(registry, cast kind);
+#elseif cpp
+	return flight._cpp._fn.Skeleton2D.getSkeleton2dConstraintSolver(registry, cast kind);
+#elseif (js && flight_esm)
+	return flight._js._fn.Skeleton2D.getSkeleton2dConstraintSolver(registry, kind);
+#else
+	#error "flight.Skeleton2D: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function registerSkeleton2dConstraintSolver(registry:Skeleton2DConstraintRegistry, kind:String, solve:Skeleton2DConstraintSolver):Void {
+	flight._js._fn.Skeleton2D.registerSkeleton2dConstraintSolver(registry, kind, solve);
+}
+#else
+extern inline function registerSkeleton2dConstraintSolver(registry:Skeleton2DConstraintRegistry, kind:String, solve:Skeleton2DConstraintSolver):Void {
+#if hl
+	flight._hl._fn.Skeleton2D.registerSkeleton2dConstraintSolver(registry, cast kind, solve);
+#elseif cpp
+	flight._cpp._fn.Skeleton2D.registerSkeleton2dConstraintSolver(registry, cast kind, solve);
+#elseif (js && flight_esm)
+	flight._js._fn.Skeleton2D.registerSkeleton2dConstraintSolver(registry, kind, solve);
+#else
+	#error "flight.Skeleton2D: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
 extern inline function solveSkeleton2dConstraints(registry:Skeleton2DConstraintRegistry, skeleton:Skeleton2D, constraints:Dynamic):Void {
 	flight._js._fn.Skeleton2D.solveSkeleton2dConstraints(registry, skeleton, constraints);
 }
@@ -544,23 +595,6 @@ extern inline function unregisterSkeleton2dDrawOrderAnimationBinder(registry:Ske
 	flight._cpp._fn.Skeleton2D.unregisterSkeleton2dDrawOrderAnimationBinder(registry);
 #elseif (js && flight_esm)
 	flight._js._fn.Skeleton2D.unregisterSkeleton2dDrawOrderAnimationBinder(registry);
-#else
-	#error "flight.Skeleton2D: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
-extern inline function createSkin2d(influenceCounts:Dynamic, influences:Dynamic):Skin2D {
-	return flight._js._fn.Skeleton2D.createSkin2d(influenceCounts, influences);
-}
-#else
-extern inline function createSkin2d(influenceCounts:Dynamic, influences:Dynamic):Skin2D {
-#if hl
-	return flight._hl._fn.Skeleton2D.createSkin2d(influenceCounts, influences);
-#elseif cpp
-	return flight._cpp._fn.Skeleton2D.createSkin2d(influenceCounts, influences);
-#elseif (js && flight_esm)
-	return flight._js._fn.Skeleton2D.createSkin2d(influenceCounts, influences);
 #else
 	#error "flight.Skeleton2D: no backend for this target."
 #end
@@ -635,6 +669,23 @@ extern inline function solveSkeleton2dTransformConstraintSkeleton2DtransformCons
 }
 #end
 #if (js && flight_esm)
+extern inline function freeSkeleton2DcoercedInterpolation(ptr:Skeleton2DCoercedInterpolation):Void {
+	flight._js._fn.Skeleton2D.freeSkeleton2DcoercedInterpolation(ptr);
+}
+#else
+extern inline function freeSkeleton2DcoercedInterpolation(ptr:Skeleton2DCoercedInterpolation):Void {
+#if hl
+	flight._hl._fn.Skeleton2D.freeSkeleton2DcoercedInterpolation(ptr);
+#elseif cpp
+	flight._cpp._fn.Skeleton2D.freeSkeleton2DcoercedInterpolation(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Skeleton2D.freeSkeleton2DcoercedInterpolation(ptr);
+#else
+	#error "flight.Skeleton2D: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
 extern inline function freeSkeleton2DdeformLengthExplanation(ptr:Skeleton2DDeformLengthExplanation):Void {
 	flight._js._fn.Skeleton2D.freeSkeleton2DdeformLengthExplanation(ptr);
 }
@@ -697,6 +748,23 @@ extern inline function freeSkeleton2DanimationTargetBinder(ptr:Skeleton2DAnimati
 	flight._cpp._fn.Skeleton2D.freeSkeleton2DanimationTargetBinder(ptr);
 #elseif (js && flight_esm)
 	flight._js._fn.Skeleton2D.freeSkeleton2DanimationTargetBinder(ptr);
+#else
+	#error "flight.Skeleton2D: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeSkeleton2DconstraintSolver(ptr:Skeleton2DConstraintSolver):Void {
+	flight._js._fn.Skeleton2D.freeSkeleton2DconstraintSolver(ptr);
+}
+#else
+extern inline function freeSkeleton2DconstraintSolver(ptr:Skeleton2DConstraintSolver):Void {
+#if hl
+	flight._hl._fn.Skeleton2D.freeSkeleton2DconstraintSolver(ptr);
+#elseif cpp
+	flight._cpp._fn.Skeleton2D.freeSkeleton2DconstraintSolver(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Skeleton2D.freeSkeleton2DconstraintSolver(ptr);
 #else
 	#error "flight.Skeleton2D: no backend for this target."
 #end

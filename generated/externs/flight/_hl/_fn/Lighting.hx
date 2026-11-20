@@ -16,9 +16,9 @@ extern class Lighting {
 	@:hlNative("flight", "flight_clone_directional_light")
 	public static function cloneDirectionalLight(source:flight._hl.DirectionalLight):flight._hl.DirectionalLight;
 	@:hlNative("flight", "flight_set_directional_light_direction")
-	public static function setDirectionalLightDirection(out:flight._hl.DirectionalLight, x:Single, y:Single, z:Single):Void;
+	public static function setDirectionalLightDirection(out:flight._hl.DirectionalLight, x:Float, y:Float, z:Float):Void;
 	@:hlNative("flight", "flight_set_directional_light_target")
-	public static function setDirectionalLightTarget(out:flight._hl.DirectionalLight, fromX:Single, fromY:Single, fromZ:Single, toX:Single, toY:Single, toZ:Single):Void;
+	public static function setDirectionalLightTarget(out:flight._hl.DirectionalLight, fromX:Float, fromY:Float, fromZ:Float, toX:Float, toY:Float, toZ:Float):Void;
 	@:hlNative("flight", "flight_create_environment")
 	public static function createEnvironment():flight._hl.Environment;
 	@:hlNative("flight", "flight_clone_environment")
@@ -28,9 +28,9 @@ extern class Lighting {
 	@:hlNative("flight", "flight_clone_hemisphere_light")
 	public static function cloneHemisphereLight(source:flight._hl.HemisphereLight):flight._hl.HemisphereLight;
 	@:hlNative("flight", "flight_get_light_contribution_at_bounding_sphere__point_light")
-	public static function getLightContributionAtBoundingSpherePointLight(light:flight._hl.PointLight, bounds:flight._hl.BoundingSphere):Single;
+	public static function getLightContributionAtBoundingSpherePointLight(light:flight._hl.PointLight, bounds:flight._hl.BoundingSphere):Float;
 	@:hlNative("flight", "flight_get_light_contribution_at_bounding_sphere__spot_light")
-	public static function getLightContributionAtBoundingSphereSpotLight(light:flight._hl.SpotLight, bounds:flight._hl.BoundingSphere):Single;
+	public static function getLightContributionAtBoundingSphereSpotLight(light:flight._hl.SpotLight, bounds:flight._hl.BoundingSphere):Float;
 	@:hlNative("flight", "flight_get_light_influence_bounds__ambient_light")
 	public static function getLightInfluenceBoundsAmbientLight(out:flight._hl.BoundingSphere, light:flight._hl.AmbientLight):Void;
 	@:hlNative("flight", "flight_get_light_influence_bounds__directional_light")
@@ -40,13 +40,13 @@ extern class Lighting {
 	@:hlNative("flight", "flight_get_light_influence_bounds__hemisphere_light")
 	public static function getLightInfluenceBoundsHemisphereLight(out:flight._hl.BoundingSphere, light:flight._hl.HemisphereLight):Void;
 	@:hlNative("flight", "flight_get_light_luminance__ambient_light")
-	public static function getLightLuminanceAmbientLight(light:flight._hl.AmbientLight):Single;
+	public static function getLightLuminanceAmbientLight(light:flight._hl.AmbientLight):Float;
 	@:hlNative("flight", "flight_get_light_luminance__directional_light")
-	public static function getLightLuminanceDirectionalLight(light:flight._hl.DirectionalLight):Single;
+	public static function getLightLuminanceDirectionalLight(light:flight._hl.DirectionalLight):Float;
 	@:hlNative("flight", "flight_get_light_luminance__environment")
-	public static function getLightLuminanceEnvironment(light:flight._hl.Environment):Single;
+	public static function getLightLuminanceEnvironment(light:flight._hl.Environment):Float;
 	@:hlNative("flight", "flight_get_light_luminance__hemisphere_light")
-	public static function getLightLuminanceHemisphereLight(light:flight._hl.HemisphereLight):Single;
+	public static function getLightLuminanceHemisphereLight(light:flight._hl.HemisphereLight):Float;
 	@:hlNative("flight", "flight_has_light_influence_on_bounds__ambient_light")
 	public static function hasLightInfluenceOnBoundsAmbientLight(light:flight._hl.AmbientLight, bounds:flight._hl.BoundingSphere):Bool;
 	@:hlNative("flight", "flight_has_light_influence_on_bounds__directional_light")
@@ -64,23 +64,23 @@ extern class Lighting {
 	@:hlNative("flight", "flight_is_light_casting_shadow__hemisphere_light")
 	public static function isLightCastingShadowHemisphereLight(light:flight._hl.HemisphereLight):Bool;
 	@:hlNative("flight", "flight_apply_light_exposure")
-	public static function applyLightExposure(intensity:Single, ev:Single):Single;
+	public static function applyLightExposure(intensity:Float, ev:Float):Float;
 	@:hlNative("flight", "flight_convert_light_intensity")
-	public static function convertLightIntensity(fromUnit:Int, toUnit:Int, value:Single):Single;
+	public static function convertLightIntensity(fromUnit:Int, toUnit:Int, value:Float):Float;
 	@:hlNative("flight", "flight_get_light_linear_intensity")
-	public static function getLightLinearIntensity(unit:Int, value:Single):Single;
+	public static function getLightLinearIntensity(unit:Int, value:Float):Float;
 	@:hlNative("flight", "flight_get_light_photometric_intensity__ambient_light")
-	public static function getLightPhotometricIntensityAmbientLight(light:flight._hl.AmbientLight):Single;
+	public static function getLightPhotometricIntensityAmbientLight(light:flight._hl.AmbientLight):Float;
 	@:hlNative("flight", "flight_get_light_photometric_intensity__directional_light")
-	public static function getLightPhotometricIntensityDirectionalLight(light:flight._hl.DirectionalLight):Single;
+	public static function getLightPhotometricIntensityDirectionalLight(light:flight._hl.DirectionalLight):Float;
 	@:hlNative("flight", "flight_get_light_photometric_intensity__hemisphere_light")
-	public static function getLightPhotometricIntensityHemisphereLight(light:flight._hl.HemisphereLight):Single;
+	public static function getLightPhotometricIntensityHemisphereLight(light:flight._hl.HemisphereLight):Float;
 	@:hlNative("flight", "flight_set_light_photometric_intensity__ambient_light")
-	public static function setLightPhotometricIntensityAmbientLight(out:flight._hl.AmbientLight, value:Single):Void;
+	public static function setLightPhotometricIntensityAmbientLight(out:flight._hl.AmbientLight, value:Float):Void;
 	@:hlNative("flight", "flight_set_light_photometric_intensity__directional_light")
-	public static function setLightPhotometricIntensityDirectionalLight(out:flight._hl.DirectionalLight, value:Single):Void;
+	public static function setLightPhotometricIntensityDirectionalLight(out:flight._hl.DirectionalLight, value:Float):Void;
 	@:hlNative("flight", "flight_set_light_photometric_intensity__hemisphere_light")
-	public static function setLightPhotometricIntensityHemisphereLight(out:flight._hl.HemisphereLight, value:Single):Void;
+	public static function setLightPhotometricIntensityHemisphereLight(out:flight._hl.HemisphereLight, value:Float):Void;
 	@:hlNative("flight", "flight_create_light_probe")
 	public static function createLightProbe(position:flight._hl.Vector3, shCoefficients:hl.Bytes, shCoefficientsLen:Int):flight._hl.LightProbe;
 	@:hlNative("flight", "flight_evaluate_light_probe_sh")
@@ -104,13 +104,13 @@ extern class Lighting {
 	@:hlNative("flight", "flight_get_spot_light_cone_degrees")
 	public static function getSpotLightConeDegrees(out:flight._hl.SpotLightConeAngles, source:flight._hl.SpotLight):Void;
 	@:hlNative("flight", "flight_set_spot_light_blend")
-	public static function setSpotLightBlend(out:flight._hl.SpotLight, blend:Single):Void;
+	public static function setSpotLightBlend(out:flight._hl.SpotLight, blend:Float):Void;
 	@:hlNative("flight", "flight_set_spot_light_cone")
-	public static function setSpotLightCone(out:flight._hl.SpotLight, innerDegrees:Single, outerDegrees:Single):Void;
+	public static function setSpotLightCone(out:flight._hl.SpotLight, innerDegrees:Float, outerDegrees:Float):Void;
 	@:hlNative("flight", "flight_set_spot_light_direction")
-	public static function setSpotLightDirection(out:flight._hl.SpotLight, x:Single, y:Single, z:Single):Void;
+	public static function setSpotLightDirection(out:flight._hl.SpotLight, x:Float, y:Float, z:Float):Void;
 	@:hlNative("flight", "flight_set_spot_light_target")
-	public static function setSpotLightTarget(out:flight._hl.SpotLight, targetX:Single, targetY:Single, targetZ:Single):Void;
+	public static function setSpotLightTarget(out:flight._hl.SpotLight, targetX:Float, targetY:Float, targetZ:Float):Void;
 	@:hlNative("flight", "flight_free_ambient_light")
 	public static function freeAmbientLight(ptr:flight._hl.AmbientLight):Void;
 	@:hlNative("flight", "flight_free_area_light")

@@ -37,10 +37,12 @@ extern class Timeline {
 	public static function stopTimeline(timeline:hl.Bytes):Void;
 	@:hlNative("flight", "flight_update_timeline")
 	public static function updateTimeline(timeline:hl.Bytes, deltaTime:Float):Bool;
+	@:hlNative("flight", "flight_free_timeline_ref")
+	public static function freeTimelineRef(ptr:flight._hl.Timeline):Void;
+	@:hlNative("flight", "flight_free_timeline_signals_ref")
+	public static function freeTimelineSignalsRef(ptr:flight._hl.TimelineSignals):Void;
 	@:hlNative("flight", "flight_free_timeline_label")
 	public static function freeTimelineLabel(ptr:flight._hl.TimelineLabel):Void;
-	@:hlNative("flight", "flight_free_frame_script")
-	public static function freeFrameScript(ptr:flight._hl.FrameScript):Void;
 	@:hlNative("flight", "flight_free_timeline_source_ref")
-	public static function freeTimelineSourceRef(ptr:flight._hl.TimelineSourceRef):Void;
+	public static function freeTimelineSourceRef(ptr:flight._hl.TimelineSource):Void;
 }

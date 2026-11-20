@@ -63,10 +63,16 @@ extern class Input {
 	public static function createInputKeyRepeatTimer(options:flight._cpp.InputKeyRepeatOptions):cpp.Star<cpp.Void>;
 	@:native("flight_advance_input_key_repeat_timer")
 	public static function advanceInputKeyRepeatTimer(timer:cpp.Star<cpp.Void>, nowMs:Float):Void;
-	@:native("flight_start_input_key_repeat_timer")
-	public static function startInputKeyRepeatTimer(timer:cpp.Star<cpp.Void>, callback_:flight._cpp.InputRepeatCallback, nowMs:Float):Void;
 	@:native("flight_stop_input_key_repeat_timer")
 	public static function stopInputKeyRepeatTimer(timer:cpp.Star<cpp.Void>):Void;
+	@:native("flight_free_input_manager_ref")
+	public static function freeInputManagerRef(ptr:flight._cpp.InputManager):Void;
+	@:native("flight_free_input_state_ref")
+	public static function freeInputStateRef(ptr:flight._cpp.InputState):Void;
 	@:native("flight_free_input_disposer")
 	public static function freeInputDisposer(ptr:flight._cpp.InputDisposer):Void;
+	@:native("flight_free_input_target_handle_ref")
+	public static function freeInputTargetHandleRef(ptr:flight._cpp.InputTargetHandle):Void;
+	@:native("flight_free_input_key_repeat_timer_ref")
+	public static function freeInputKeyRepeatTimerRef(ptr:flight._cpp.InputKeyRepeatTimer):Void;
 }

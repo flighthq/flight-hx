@@ -9,12 +9,12 @@ private extern class InputPointerData_Ffi {
 	@:native("flight_set_input_pointer_data_buttons") static function set_buttons(ptr:cpp.Star<cpp.Void>, value:Int):Int;
 	@:native("flight_get_input_pointer_data_ctrl_key") static function get_ctrlKey(ptr:cpp.Star<cpp.Void>):Bool;
 	@:native("flight_set_input_pointer_data_ctrl_key") static function set_ctrlKey(ptr:cpp.Star<cpp.Void>, value:Bool):Bool;
-	@:native("flight_get_input_pointer_data_delta_x") static function get_deltaX(ptr:cpp.Star<cpp.Void>):Single;
-	@:native("flight_set_input_pointer_data_delta_x") static function set_deltaX(ptr:cpp.Star<cpp.Void>, value:Single):Single;
-	@:native("flight_get_input_pointer_data_delta_y") static function get_deltaY(ptr:cpp.Star<cpp.Void>):Single;
-	@:native("flight_set_input_pointer_data_delta_y") static function set_deltaY(ptr:cpp.Star<cpp.Void>, value:Single):Single;
-	@:native("flight_get_input_pointer_data_height") static function get_height(ptr:cpp.Star<cpp.Void>):Single;
-	@:native("flight_set_input_pointer_data_height") static function set_height(ptr:cpp.Star<cpp.Void>, value:Single):Single;
+	@:native("flight_get_input_pointer_data_delta_x") static function get_deltaX(ptr:cpp.Star<cpp.Void>):Float;
+	@:native("flight_set_input_pointer_data_delta_x") static function set_deltaX(ptr:cpp.Star<cpp.Void>, value:Float):Float;
+	@:native("flight_get_input_pointer_data_delta_y") static function get_deltaY(ptr:cpp.Star<cpp.Void>):Float;
+	@:native("flight_set_input_pointer_data_delta_y") static function set_deltaY(ptr:cpp.Star<cpp.Void>, value:Float):Float;
+	@:native("flight_get_input_pointer_data_height") static function get_height(ptr:cpp.Star<cpp.Void>):Float;
+	@:native("flight_set_input_pointer_data_height") static function set_height(ptr:cpp.Star<cpp.Void>, value:Float):Float;
 	@:native("flight_get_input_pointer_data_is_primary") static function get_isPrimary(ptr:cpp.Star<cpp.Void>):Bool;
 	@:native("flight_set_input_pointer_data_is_primary") static function set_isPrimary(ptr:cpp.Star<cpp.Void>, value:Bool):Bool;
 	@:native("flight_get_input_pointer_data_meta_key") static function get_metaKey(ptr:cpp.Star<cpp.Void>):Bool;
@@ -33,12 +33,12 @@ private extern class InputPointerData_Ffi {
 	@:native("flight_set_input_pointer_data_time_stamp") static function set_timeStamp(ptr:cpp.Star<cpp.Void>, value:Float):Float;
 	@:native("flight_get_input_pointer_data_twist") static function get_twist(ptr:cpp.Star<cpp.Void>):Single;
 	@:native("flight_set_input_pointer_data_twist") static function set_twist(ptr:cpp.Star<cpp.Void>, value:Single):Single;
-	@:native("flight_get_input_pointer_data_width") static function get_width(ptr:cpp.Star<cpp.Void>):Single;
-	@:native("flight_set_input_pointer_data_width") static function set_width(ptr:cpp.Star<cpp.Void>, value:Single):Single;
-	@:native("flight_get_input_pointer_data_x") static function get_x(ptr:cpp.Star<cpp.Void>):Single;
-	@:native("flight_set_input_pointer_data_x") static function set_x(ptr:cpp.Star<cpp.Void>, value:Single):Single;
-	@:native("flight_get_input_pointer_data_y") static function get_y(ptr:cpp.Star<cpp.Void>):Single;
-	@:native("flight_set_input_pointer_data_y") static function set_y(ptr:cpp.Star<cpp.Void>, value:Single):Single;
+	@:native("flight_get_input_pointer_data_width") static function get_width(ptr:cpp.Star<cpp.Void>):Float;
+	@:native("flight_set_input_pointer_data_width") static function set_width(ptr:cpp.Star<cpp.Void>, value:Float):Float;
+	@:native("flight_get_input_pointer_data_x") static function get_x(ptr:cpp.Star<cpp.Void>):Float;
+	@:native("flight_set_input_pointer_data_x") static function set_x(ptr:cpp.Star<cpp.Void>, value:Float):Float;
+	@:native("flight_get_input_pointer_data_y") static function get_y(ptr:cpp.Star<cpp.Void>):Float;
+	@:native("flight_set_input_pointer_data_y") static function set_y(ptr:cpp.Star<cpp.Void>, value:Float):Float;
 }
 
 abstract InputPointerData(cpp.Star<cpp.Void>) {
@@ -62,21 +62,21 @@ abstract InputPointerData(cpp.Star<cpp.Void>) {
 	inline function get_ctrlKey():Bool return InputPointerData_Ffi.get_ctrlKey(this);
 
 	inline function set_ctrlKey(value:Bool):Bool { InputPointerData_Ffi.set_ctrlKey(this, value); return value; }
-	public var deltaX(get, set):Single;
+	public var deltaX(get, set):Float;
 
-	inline function get_deltaX():Single return InputPointerData_Ffi.get_deltaX(this);
+	inline function get_deltaX():Float return InputPointerData_Ffi.get_deltaX(this);
 
-	inline function set_deltaX(value:Single):Single { InputPointerData_Ffi.set_deltaX(this, value); return value; }
-	public var deltaY(get, set):Single;
+	inline function set_deltaX(value:Float):Float { InputPointerData_Ffi.set_deltaX(this, value); return value; }
+	public var deltaY(get, set):Float;
 
-	inline function get_deltaY():Single return InputPointerData_Ffi.get_deltaY(this);
+	inline function get_deltaY():Float return InputPointerData_Ffi.get_deltaY(this);
 
-	inline function set_deltaY(value:Single):Single { InputPointerData_Ffi.set_deltaY(this, value); return value; }
-	public var height(get, set):Single;
+	inline function set_deltaY(value:Float):Float { InputPointerData_Ffi.set_deltaY(this, value); return value; }
+	public var height(get, set):Float;
 
-	inline function get_height():Single return InputPointerData_Ffi.get_height(this);
+	inline function get_height():Float return InputPointerData_Ffi.get_height(this);
 
-	inline function set_height(value:Single):Single { InputPointerData_Ffi.set_height(this, value); return value; }
+	inline function set_height(value:Float):Float { InputPointerData_Ffi.set_height(this, value); return value; }
 	public var isPrimary(get, set):Bool;
 
 	inline function get_isPrimary():Bool return InputPointerData_Ffi.get_isPrimary(this);
@@ -122,19 +122,19 @@ abstract InputPointerData(cpp.Star<cpp.Void>) {
 	inline function get_twist():Single return InputPointerData_Ffi.get_twist(this);
 
 	inline function set_twist(value:Single):Single { InputPointerData_Ffi.set_twist(this, value); return value; }
-	public var width(get, set):Single;
+	public var width(get, set):Float;
 
-	inline function get_width():Single return InputPointerData_Ffi.get_width(this);
+	inline function get_width():Float return InputPointerData_Ffi.get_width(this);
 
-	inline function set_width(value:Single):Single { InputPointerData_Ffi.set_width(this, value); return value; }
-	public var x(get, set):Single;
+	inline function set_width(value:Float):Float { InputPointerData_Ffi.set_width(this, value); return value; }
+	public var x(get, set):Float;
 
-	inline function get_x():Single return InputPointerData_Ffi.get_x(this);
+	inline function get_x():Float return InputPointerData_Ffi.get_x(this);
 
-	inline function set_x(value:Single):Single { InputPointerData_Ffi.set_x(this, value); return value; }
-	public var y(get, set):Single;
+	inline function set_x(value:Float):Float { InputPointerData_Ffi.set_x(this, value); return value; }
+	public var y(get, set):Float;
 
-	inline function get_y():Single return InputPointerData_Ffi.get_y(this);
+	inline function get_y():Float return InputPointerData_Ffi.get_y(this);
 
-	inline function set_y(value:Single):Single { InputPointerData_Ffi.set_y(this, value); return value; }
+	inline function set_y(value:Float):Float { InputPointerData_Ffi.set_y(this, value); return value; }
 }

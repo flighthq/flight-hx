@@ -69,6 +69,23 @@ extern inline function parseRegisteredParticleFormat(registry:ParticleFormatRegi
 }
 #end
 #if (js && flight_esm)
+extern inline function registerParticleFormat(registry:ParticleFormatRegistry, kind:String, codec:ParticleFormatCodec):Void {
+	flight._js._fn.ParticlesFormats.registerParticleFormat(registry, kind, codec);
+}
+#else
+extern inline function registerParticleFormat(registry:ParticleFormatRegistry, kind:String, codec:ParticleFormatCodec):Void {
+#if hl
+	flight._hl._fn.ParticlesFormats.registerParticleFormat(registry, cast kind, codec);
+#elseif cpp
+	flight._cpp._fn.ParticlesFormats.registerParticleFormat(registry, cast kind, codec);
+#elseif (js && flight_esm)
+	flight._js._fn.ParticlesFormats.registerParticleFormat(registry, kind, codec);
+#else
+	#error "flight.ParticlesFormats: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
 extern inline function unregisterParticleFormat(registry:ParticleFormatRegistry, kind:String):Bool {
 	return flight._js._fn.ParticlesFormats.unregisterParticleFormat(registry, kind);
 }

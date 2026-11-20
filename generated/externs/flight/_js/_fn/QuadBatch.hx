@@ -54,4 +54,6 @@ extern class QuadBatch {
 	public static function setQuadBatchLocalBoundsRectangle(target:Dynamic, rect:flight._js.Rectangle):Void;
 	@:native("setQuadBatchTransformType")
 	public static function setQuadBatchTransformType(target:flight._js.QuadBatch, newType:Dynamic):Void;
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeQuadBatchSignalsRef(ptr:flight._js.QuadBatchSignals):Void {}
 }

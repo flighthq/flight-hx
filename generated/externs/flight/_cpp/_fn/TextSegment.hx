@@ -3,8 +3,6 @@ package flight._cpp._fn;
 extern class TextSegment {
 	@:native("flight_disable_text_segment_guards")
 	public static function disableTextSegmentGuards():Void;
-	@:native("flight_enable_text_segment_guards")
-	public static function enableTextSegmentGuards(logState:cpp.Star<cpp.Void>, clockFn:cpp.Star<cpp.Void>, clockCtx:cpp.Star<cpp.Void>):Void;
 	@:native("flight_segment_graphemes")
 	public static function segmentGraphemes(out:cpp.Star<cpp.Void>, hostTextSegmenter:flight._cpp.HostTextSegmenterCapability, text:cpp.ConstCharStar, locale:cpp.ConstCharStar):Void;
 	@:native("flight_segment_sentences")

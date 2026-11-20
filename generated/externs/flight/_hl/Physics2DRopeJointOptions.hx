@@ -1,9 +1,9 @@
 package flight._hl;
 
 abstract Physics2DRopeJointOptions(hl.Bytes) {
-	public var maxLength(get, set):Single;
+	public var maxLength(get, set):Float;
 
-	inline function get_maxLength():Single return this.getF32(60);
+	inline function get_maxLength():Float return this.getF64(112);
 
-	inline function set_maxLength(value:Single):Single { this.setF32(60, value); return value; }
+	inline function set_maxLength(value:Float):Float { this.setF64(112, value); return value; }
 }

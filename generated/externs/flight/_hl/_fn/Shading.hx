@@ -37,6 +37,8 @@ extern class Shading {
 	public static function freeEnvReflectModifier(ptr:flight._hl.EnvReflectModifier):Void;
 	@:hlNative("flight", "flight_free_fog_modifier")
 	public static function freeFogModifier(ptr:flight._hl.FogModifier):Void;
+	@:hlNative("flight", "flight_free_modifier_definition_ref")
+	public static function freeModifierDefinitionRef(ptr:flight._hl.ModifierDefinition):Void;
 	@:hlNative("flight", "flight_free_rim_modifier")
 	public static function freeRimModifier(ptr:flight._hl.RimModifier):Void;
 	@:hlNative("flight", "flight_free_shaded_material")

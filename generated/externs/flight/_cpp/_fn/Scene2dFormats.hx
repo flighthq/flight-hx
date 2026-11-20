@@ -4,7 +4,7 @@ extern class Scene2dFormats {
 	@:native("flight_get_lottie_feature_names")
 	public static function getLottieFeatureNames(out:cpp.Star<cpp.Void>):Void;
 	@:native("flight_apply_animation_clip_to_lottie_document")
-	public static function applyAnimationClipToLottieDocument(clip:flight._cpp.AnimationClip, time:Single):Void;
+	public static function applyAnimationClipToLottieDocument(clip:flight._cpp.AnimationClip, time:Float):Void;
 	@:native("flight_register_all_lottie_handlers")
 	public static function registerAllLottieHandlers(registry:flight._cpp.LottieRegistry):Void;
 	@:native("flight_register_lottie_layer_handlers")
@@ -38,19 +38,19 @@ extern class Scene2dFormats {
 	@:native("flight_register_lottie_shape_item_handlers")
 	public static function registerLottieShapeItemHandlers(registry:flight._cpp.LottieRegistry):Void;
 	@:native("flight_apply_animation_clip_to_rive_document")
-	public static function applyAnimationClipToRiveDocument(clip:flight._cpp.AnimationClip, time:Single):Void;
+	public static function applyAnimationClipToRiveDocument(clip:flight._cpp.AnimationClip, time:Float):Void;
 	@:native("flight_register_rive_animation_handlers")
 	public static function registerRiveAnimationHandlers(registry:flight._cpp.RiveImportRegistry):Void;
 	@:native("flight_create_rive_image_sprite")
-	public static function createRiveImageSprite(name:cpp.ConstCharStar, assetIndex:Int):cpp.Star<cpp.Void>;
+	public static function createRiveImageSprite(name:cpp.ConstCharStar, assetIndex:Int):flight._cpp.FlightNode;
 	@:native("flight_get_rive_image_asset_index")
-	public static function getRiveImageAssetIndex(node:cpp.Star<cpp.Void>):Int;
+	public static function getRiveImageAssetIndex(node:flight._cpp.FlightNode):Int;
 	@:native("flight_get_rive_image_texture")
-	public static function getRiveImageTexture(node:cpp.Star<cpp.Void>):cpp.Star<cpp.Void>;
+	public static function getRiveImageTexture(node:flight._cpp.FlightNode):cpp.Star<cpp.Void>;
 	@:native("flight_get_rive_nested_artboard_index")
-	public static function getRiveNestedArtboardIndex(node:cpp.Star<cpp.Void>):Int;
+	public static function getRiveNestedArtboardIndex(node:flight._cpp.FlightNode):Int;
 	@:native("flight_mark_rive_nested_artboard")
-	public static function markRiveNestedArtboard(node:cpp.Star<cpp.Void>, artboardIndex:Int):Void;
+	public static function markRiveNestedArtboard(node:flight._cpp.FlightNode, artboardIndex:Int):Void;
 	@:native("flight_register_rive_asset_handlers")
 	public static function registerRiveAssetHandlers(registry:flight._cpp.RiveImportRegistry):Void;
 	@:native("flight_register_rive_clipping_handlers")
@@ -82,7 +82,7 @@ extern class Scene2dFormats {
 	@:native("flight_register_rive_shape_handlers")
 	public static function registerRiveShapeHandlers(registry:flight._cpp.RiveImportRegistry):Void;
 	@:native("flight_append_rive_shape_geometry")
-	public static function appendRiveShapeGeometry(shape:cpp.Star<cpp.Void>, paths:cpp.Star<cpp.Void>, pathsLen:Int):Void;
+	public static function appendRiveShapeGeometry(shape:flight._cpp.FlightNode, paths:cpp.Star<cpp.Void>, pathsLen:Int):Void;
 	@:native("flight_register_rive_paint_handlers")
 	public static function registerRivePaintHandlers(registry:flight._cpp.RiveImportRegistry):Void;
 	@:native("flight_register_rive_path_handlers")
@@ -127,8 +127,8 @@ extern class Scene2dFormats {
 	public static function freeLottieMaskHandler(ptr:flight._cpp.LottieMaskHandler):Void;
 	@:native("flight_free_lottie_shape_item_handler")
 	public static function freeLottieShapeItemHandler(ptr:flight._cpp.LottieShapeItemHandler):Void;
-	@:native("flight_free_requirement_set")
-	public static function freeRequirementSet(ptr:flight._cpp.RequirementSet):Void;
+	@:native("flight_free_path_ref")
+	public static function freePathRef(ptr:flight._cpp.Path):Void;
 	@:native("flight_free_rive_field_type")
 	public static function freeRiveFieldType(ptr:flight._cpp.RiveFieldType):Void;
 	@:native("flight_free_rive_import_registry")

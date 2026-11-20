@@ -201,6 +201,8 @@ extern class Physics2d {
 	@:native("queryPhysics2DShapeCast")
 	public static function queryPhysics2dShapeCast(out:flight._js.Physics2DShapeCastResult, world:flight._js.Physics2DWorld, registry:flight._js.CollisionRegistry2D, shape:flight._js.CollisionShape2D, dx:Float, dy:Float, maxFraction:Null<Float>, filter:Null<flight._js.Physics2DQueryFilter>):Void;
 	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeCollisionShape2D(ptr:flight._js.CollisionShape2D):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freePhysics2DdebugGeometry(ptr:flight._js.Physics2DDebugGeometry):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freePhysics2DcollisionExplanation(ptr:flight._js.Physics2DCollisionExplanation):Void {}
@@ -209,9 +211,29 @@ extern class Physics2d {
 	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freePhysics2DstepExplanation(ptr:flight._js.Physics2DStepExplanation):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freePhysics2DdistanceJointRef(ptr:flight._js.Physics2DDistanceJoint):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freePhysics2DgearJointRef(ptr:flight._js.Physics2DGearJoint):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freePhysics2DmouseJointRef(ptr:flight._js.Physics2DMouseJoint):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freePhysics2DprismaticJointRef(ptr:flight._js.Physics2DPrismaticJoint):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freePhysics2DpulleyJointRef(ptr:flight._js.Physics2DPulleyJoint):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freePhysics2DrevoluteJointRef(ptr:flight._js.Physics2DRevoluteJoint):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freePhysics2DropeJointRef(ptr:flight._js.Physics2DRopeJoint):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freePhysics2DweldJointRef(ptr:flight._js.Physics2DWeldJoint):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freePhysics2DwheelJointRef(ptr:flight._js.Physics2DWheelJoint):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freePhysics2DjointReaction(ptr:flight._js.Physics2DJointReaction):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */
-	public static inline function freePhysics2DjointSolverRef(ptr:flight._js.Physics2DJointSolverRef):Void {}
+	public static inline function freePhysics2DjointSolverRef(ptr:flight._js.Physics2DJointSolver):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freePhysics2DcolliderRef(ptr:flight._js.Physics2DCollider):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freePhysics2DsolverConfig(ptr:flight._js.Physics2DSolverConfig):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */

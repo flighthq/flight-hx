@@ -5,7 +5,7 @@ extern inline function computeNodeBoundsRectangle(out:Rectangle, source:Dynamic,
 	flight._js._fn.Node.computeNodeBoundsRectangle(out, source, targetCoordinateSpace);
 }
 #else
-extern inline function computeNodeBoundsRectangle(out:Rectangle, source:Dynamic, targetCoordinateSpace:Dynamic):Void {
+extern inline function computeNodeBoundsRectangle(out:Rectangle, source:flight.FlightNode, targetCoordinateSpace:Null<flight.FlightNode>):Void {
 #if hl
 	flight._hl._fn.Node.computeNodeBoundsRectangle(out, source, targetCoordinateSpace);
 #elseif cpp
@@ -22,7 +22,7 @@ extern inline function computeNodeRootLocalBoundsRectangle(out:Rectangle, root:D
 	flight._js._fn.Node.computeNodeRootLocalBoundsRectangle(out, root);
 }
 #else
-extern inline function computeNodeRootLocalBoundsRectangle(out:Rectangle, root:Dynamic):Void {
+extern inline function computeNodeRootLocalBoundsRectangle(out:Rectangle, root:flight.FlightNode):Void {
 #if hl
 	flight._hl._fn.Node.computeNodeRootLocalBoundsRectangle(out, root);
 #elseif cpp
@@ -39,7 +39,7 @@ extern inline function ensureNodeLocalBoundsRectangle(target:Dynamic):Void {
 	flight._js._fn.Node.ensureNodeLocalBoundsRectangle(target);
 }
 #else
-extern inline function ensureNodeLocalBoundsRectangle(target:Dynamic):Void {
+extern inline function ensureNodeLocalBoundsRectangle(target:flight.FlightNode):Void {
 #if hl
 	flight._hl._fn.Node.ensureNodeLocalBoundsRectangle(target);
 #elseif cpp
@@ -56,7 +56,7 @@ extern inline function ensureNodeParentBoundsRectangle(target:Dynamic):Void {
 	flight._js._fn.Node.ensureNodeParentBoundsRectangle(target);
 }
 #else
-extern inline function ensureNodeParentBoundsRectangle(target:Dynamic):Void {
+extern inline function ensureNodeParentBoundsRectangle(target:flight.FlightNode):Void {
 #if hl
 	flight._hl._fn.Node.ensureNodeParentBoundsRectangle(target);
 #elseif cpp
@@ -73,7 +73,7 @@ extern inline function ensureNodeWorldBoundsRectangle(target:Dynamic):Void {
 	flight._js._fn.Node.ensureNodeWorldBoundsRectangle(target);
 }
 #else
-extern inline function ensureNodeWorldBoundsRectangle(target:Dynamic):Void {
+extern inline function ensureNodeWorldBoundsRectangle(target:flight.FlightNode):Void {
 #if hl
 	flight._hl._fn.Node.ensureNodeWorldBoundsRectangle(target);
 #elseif cpp
@@ -90,7 +90,7 @@ extern inline function getNodeHeight(source:Dynamic):Float {
 	return flight._js._fn.Node.getNodeHeight(source);
 }
 #else
-extern inline function getNodeHeight(source:Dynamic):Float {
+extern inline function getNodeHeight(source:flight.FlightNode):Float {
 #if hl
 	return flight._hl._fn.Node.getNodeHeight(source);
 #elseif cpp
@@ -107,7 +107,7 @@ extern inline function getNodeLocalBoundsRectangle(target:Dynamic):Rectangle {
 	return flight._js._fn.Node.getNodeLocalBoundsRectangle(target);
 }
 #else
-extern inline function getNodeLocalBoundsRectangle(target:Dynamic):Rectangle {
+extern inline function getNodeLocalBoundsRectangle(target:flight.FlightNode):Rectangle {
 #if hl
 	return flight._hl._fn.Node.getNodeLocalBoundsRectangle(target);
 #elseif cpp
@@ -124,7 +124,7 @@ extern inline function getNodeParentBoundsRectangle(target:Dynamic):Rectangle {
 	return flight._js._fn.Node.getNodeParentBoundsRectangle(target);
 }
 #else
-extern inline function getNodeParentBoundsRectangle(target:Dynamic):Rectangle {
+extern inline function getNodeParentBoundsRectangle(target:flight.FlightNode):Rectangle {
 #if hl
 	return flight._hl._fn.Node.getNodeParentBoundsRectangle(target);
 #elseif cpp
@@ -141,7 +141,7 @@ extern inline function getNodeWidth(source:Dynamic):Float {
 	return flight._js._fn.Node.getNodeWidth(source);
 }
 #else
-extern inline function getNodeWidth(source:Dynamic):Float {
+extern inline function getNodeWidth(source:flight.FlightNode):Float {
 #if hl
 	return flight._hl._fn.Node.getNodeWidth(source);
 #elseif cpp
@@ -158,7 +158,7 @@ extern inline function getNodeWorldBoundsRectangle(target:Dynamic):Rectangle {
 	return flight._js._fn.Node.getNodeWorldBoundsRectangle(target);
 }
 #else
-extern inline function getNodeWorldBoundsRectangle(target:Dynamic):Rectangle {
+extern inline function getNodeWorldBoundsRectangle(target:flight.FlightNode):Rectangle {
 #if hl
 	return flight._hl._fn.Node.getNodeWorldBoundsRectangle(target);
 #elseif cpp
@@ -175,7 +175,7 @@ extern inline function setNodeHeight(target:Dynamic, value:Float):Void {
 	flight._js._fn.Node.setNodeHeight(target, value);
 }
 #else
-extern inline function setNodeHeight(target:Dynamic, value:Float):Void {
+extern inline function setNodeHeight(target:flight.FlightNode, value:Float):Void {
 #if hl
 	flight._hl._fn.Node.setNodeHeight(target, value);
 #elseif cpp
@@ -192,7 +192,7 @@ extern inline function setNodeWidth(target:Dynamic, value:Float):Void {
 	flight._js._fn.Node.setNodeWidth(target, value);
 }
 #else
-extern inline function setNodeWidth(target:Dynamic, value:Float):Void {
+extern inline function setNodeWidth(target:flight.FlightNode, value:Float):Void {
 #if hl
 	flight._hl._fn.Node.setNodeWidth(target, value);
 #elseif cpp
@@ -241,18 +241,6 @@ extern inline function disableNodeGuards(guards:NodeGuardState):Void {
 #if (js && flight_esm)
 extern inline function enableNodeGuards(guards:NodeGuardState, logState:Dynamic, clock:Dynamic):Void {
 	flight._js._fn.Node.enableNodeGuards(guards, logState, clock);
-}
-#else
-extern inline function enableNodeGuards(guards:NodeGuardState, logState:Dynamic, clockFn:Dynamic, clockCtx:Dynamic):Void {
-#if hl
-	flight._hl._fn.Node.enableNodeGuards(guards, logState, clockFn, clockCtx);
-#elseif cpp
-	flight._cpp._fn.Node.enableNodeGuards(guards, logState, clockFn, clockCtx);
-#elseif (js && flight_esm)
-	flight._js._fn.Node.enableNodeGuards(guards, logState, clockFn, clockCtx);
-#else
-	#error "flight.Node: no backend for this target."
-#end
 }
 #end
 #if (js && flight_esm)
@@ -311,7 +299,7 @@ extern inline function defaultComputeLocalBoundsRectangle(out:Rectangle, source:
 	flight._js._fn.Node.defaultComputeLocalBoundsRectangle(out, source);
 }
 #else
-extern inline function defaultComputeLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
+extern inline function defaultComputeLocalBoundsRectangle(out:Rectangle, source:flight.FlightNode):Void {
 #if hl
 	flight._hl._fn.Node.defaultComputeLocalBoundsRectangle(out, source);
 #elseif cpp
@@ -430,7 +418,7 @@ extern inline function addNodeChild(target:Dynamic, child:Dynamic):Dynamic {
 	return flight._js._fn.Node.addNodeChild(target, child);
 }
 #else
-extern inline function addNodeChild(target:Dynamic, child:Dynamic):Dynamic {
+extern inline function addNodeChild(target:flight.FlightNode, child:flight.FlightNode):flight.FlightNode {
 #if hl
 	return flight._hl._fn.Node.addNodeChild(target, child);
 #elseif cpp
@@ -447,7 +435,7 @@ extern inline function addNodeChildAt(target:Dynamic, child:Dynamic, index:Int):
 	return flight._js._fn.Node.addNodeChildAt(target, child, index);
 }
 #else
-extern inline function addNodeChildAt(target:Dynamic, child:Dynamic, index:Int):Dynamic {
+extern inline function addNodeChildAt(target:flight.FlightNode, child:flight.FlightNode, index:Int):flight.FlightNode {
 #if hl
 	return flight._hl._fn.Node.addNodeChildAt(target, child, index);
 #elseif cpp
@@ -464,13 +452,13 @@ extern inline function addNodeChildren(target:Dynamic, children:Dynamic):Void {
 	flight._js._fn.Node.addNodeChildren(target, children);
 }
 #else
-extern inline function addNodeChildren(target:Dynamic, children:Dynamic, childrenLen:Int):Void {
+extern inline function addNodeChildren(target:flight.FlightNode, children:flight.FlightNodeArray):Void {
 #if hl
-	flight._hl._fn.Node.addNodeChildren(target, children, childrenLen);
+	flight._hl._fn.Node.addNodeChildren(target, children);
 #elseif cpp
-	flight._cpp._fn.Node.addNodeChildren(target, children, childrenLen);
+	flight._cpp._fn.Node.addNodeChildren(target, children);
 #elseif (js && flight_esm)
-	flight._js._fn.Node.addNodeChildren(target, children, childrenLen);
+	flight._js._fn.Node.addNodeChildren(target, children);
 #else
 	#error "flight.Node: no backend for this target."
 #end
@@ -481,7 +469,7 @@ extern inline function containsNodeChild(source:Dynamic, child:Dynamic):Bool {
 	return flight._js._fn.Node.containsNodeChild(source, child);
 }
 #else
-extern inline function containsNodeChild(source:Dynamic, child:Dynamic):Bool {
+extern inline function containsNodeChild(source:flight.FlightNode, child:flight.FlightNode):Bool {
 #if hl
 	return flight._hl._fn.Node.containsNodeChild(source, child);
 #elseif cpp
@@ -498,7 +486,7 @@ extern inline function forEachNodeChild(source:Dynamic, callback_:Dynamic):Void 
 	flight._js._fn.Node.forEachNodeChild(source, callback_);
 }
 #else
-extern inline function forEachNodeChild(source:Dynamic, callback_Fn:Dynamic, callback_Ctx:Dynamic):Void {
+extern inline function forEachNodeChild(source:flight.FlightNode, callback_Fn:Dynamic, callback_Ctx:Dynamic):Void {
 #if hl
 	flight._hl._fn.Node.forEachNodeChild(source, callback_Fn, callback_Ctx);
 #elseif cpp
@@ -515,7 +503,7 @@ extern inline function getNodeAncestors(out:Dynamic, source:Dynamic):Void {
 	flight._js._fn.Node.getNodeAncestors(out, source);
 }
 #else
-extern inline function getNodeAncestors(out:Dynamic, source:Dynamic):Void {
+extern inline function getNodeAncestors(out:flight.FlightNodeArray, source:flight.FlightNode):Void {
 #if hl
 	flight._hl._fn.Node.getNodeAncestors(out, source);
 #elseif cpp
@@ -532,7 +520,7 @@ extern inline function getNodeChildAt(source:Dynamic, index:Int):Null<Dynamic> {
 	return flight._js._fn.Node.getNodeChildAt(source, index);
 }
 #else
-extern inline function getNodeChildAt(source:Dynamic, index:Int):Dynamic {
+extern inline function getNodeChildAt(source:flight.FlightNode, index:Int):Null<flight.FlightNode> {
 #if hl
 	return flight._hl._fn.Node.getNodeChildAt(source, index);
 #elseif cpp
@@ -549,7 +537,7 @@ extern inline function getNodeChildByName(source:Dynamic, name:String):Null<Dyna
 	return flight._js._fn.Node.getNodeChildByName(source, name);
 }
 #else
-extern inline function getNodeChildByName(source:Dynamic, name:String):Dynamic {
+extern inline function getNodeChildByName(source:flight.FlightNode, name:String):Null<flight.FlightNode> {
 #if hl
 	return flight._hl._fn.Node.getNodeChildByName(source, cast name);
 #elseif cpp
@@ -566,7 +554,7 @@ extern inline function getNodeChildCount(source:Dynamic):Int {
 	return flight._js._fn.Node.getNodeChildCount(source);
 }
 #else
-extern inline function getNodeChildCount(source:Dynamic):Int {
+extern inline function getNodeChildCount(source:flight.FlightNode):Int {
 #if hl
 	return flight._hl._fn.Node.getNodeChildCount(source);
 #elseif cpp
@@ -583,7 +571,7 @@ extern inline function getNodeChildIndex(source:Dynamic, child:Dynamic):Int {
 	return flight._js._fn.Node.getNodeChildIndex(source, child);
 }
 #else
-extern inline function getNodeChildIndex(source:Dynamic, child:Dynamic):Int {
+extern inline function getNodeChildIndex(source:flight.FlightNode, child:flight.FlightNode):Int {
 #if hl
 	return flight._hl._fn.Node.getNodeChildIndex(source, child);
 #elseif cpp
@@ -600,7 +588,7 @@ extern inline function getNodeCommonAncestor(a:Dynamic, b:Dynamic):Null<Dynamic>
 	return flight._js._fn.Node.getNodeCommonAncestor(a, b);
 }
 #else
-extern inline function getNodeCommonAncestor(a:Dynamic, b:Dynamic):Dynamic {
+extern inline function getNodeCommonAncestor(a:flight.FlightNode, b:flight.FlightNode):Null<flight.FlightNode> {
 #if hl
 	return flight._hl._fn.Node.getNodeCommonAncestor(a, b);
 #elseif cpp
@@ -617,7 +605,7 @@ extern inline function getNodeParent(source:Dynamic):Null<Dynamic> {
 	return flight._js._fn.Node.getNodeParent(source);
 }
 #else
-extern inline function getNodeParent(source:Dynamic):Dynamic {
+extern inline function getNodeParent(source:flight.FlightNode):Null<flight.FlightNode> {
 #if hl
 	return flight._hl._fn.Node.getNodeParent(source);
 #elseif cpp
@@ -634,7 +622,7 @@ extern inline function getNodeRoot(source:Dynamic):Dynamic {
 	return flight._js._fn.Node.getNodeRoot(source);
 }
 #else
-extern inline function getNodeRoot(source:Dynamic):Dynamic {
+extern inline function getNodeRoot(source:flight.FlightNode):flight.FlightNode {
 #if hl
 	return flight._hl._fn.Node.getNodeRoot(source);
 #elseif cpp
@@ -651,7 +639,7 @@ extern inline function isNodeAncestorOf(ancestor:Dynamic, descendant:Dynamic):Bo
 	return flight._js._fn.Node.isNodeAncestorOf(ancestor, descendant);
 }
 #else
-extern inline function isNodeAncestorOf(ancestor:Dynamic, descendant:Dynamic):Bool {
+extern inline function isNodeAncestorOf(ancestor:flight.FlightNode, descendant:flight.FlightNode):Bool {
 #if hl
 	return flight._hl._fn.Node.isNodeAncestorOf(ancestor, descendant);
 #elseif cpp
@@ -668,7 +656,7 @@ extern inline function removeNodeChild(target:Dynamic, child:Dynamic):Dynamic {
 	return flight._js._fn.Node.removeNodeChild(target, child);
 }
 #else
-extern inline function removeNodeChild(target:Dynamic, child:Dynamic):Dynamic {
+extern inline function removeNodeChild(target:flight.FlightNode, child:flight.FlightNode):flight.FlightNode {
 #if hl
 	return flight._hl._fn.Node.removeNodeChild(target, child);
 #elseif cpp
@@ -685,7 +673,7 @@ extern inline function removeNodeChildAt(target:Dynamic, index:Int):Null<Dynamic
 	return flight._js._fn.Node.removeNodeChildAt(target, index);
 }
 #else
-extern inline function removeNodeChildAt(target:Dynamic, index:Int):Dynamic {
+extern inline function removeNodeChildAt(target:flight.FlightNode, index:Int):Null<flight.FlightNode> {
 #if hl
 	return flight._hl._fn.Node.removeNodeChildAt(target, index);
 #elseif cpp
@@ -702,7 +690,7 @@ extern inline function removeNodeChildren(target:Dynamic, beginIndex:Null<Int>, 
 	flight._js._fn.Node.removeNodeChildren(target, beginIndex, endIndex);
 }
 #else
-extern inline function removeNodeChildren(target:Dynamic, beginIndex:Int, endIndex:Int):Void {
+extern inline function removeNodeChildren(target:flight.FlightNode, beginIndex:Int, endIndex:Int):Void {
 #if hl
 	flight._hl._fn.Node.removeNodeChildren(target, beginIndex, endIndex);
 #elseif cpp
@@ -719,7 +707,7 @@ extern inline function reparentNode(child:Dynamic, newParent:Dynamic, guards:Nul
 	return flight._js._fn.Node.reparentNode(child, newParent, guards);
 }
 #else
-extern inline function reparentNode(child:Dynamic, newParent:Dynamic, guards:NodeGuardState):Bool {
+extern inline function reparentNode(child:flight.FlightNode, newParent:flight.FlightNode, guards:NodeGuardState):Bool {
 #if hl
 	return flight._hl._fn.Node.reparentNode(child, newParent, guards);
 #elseif cpp
@@ -736,7 +724,7 @@ extern inline function replaceNodeChild(target:Dynamic, oldChild:Dynamic, newChi
 	flight._js._fn.Node.replaceNodeChild(target, oldChild, newChild);
 }
 #else
-extern inline function replaceNodeChild(target:Dynamic, oldChild:Dynamic, newChild:Dynamic):Void {
+extern inline function replaceNodeChild(target:flight.FlightNode, oldChild:flight.FlightNode, newChild:flight.FlightNode):Void {
 #if hl
 	flight._hl._fn.Node.replaceNodeChild(target, oldChild, newChild);
 #elseif cpp
@@ -753,7 +741,7 @@ extern inline function setNodeChildIndex(target:Dynamic, child:Dynamic, index:In
 	flight._js._fn.Node.setNodeChildIndex(target, child, index);
 }
 #else
-extern inline function setNodeChildIndex(target:Dynamic, child:Dynamic, index:Int):Void {
+extern inline function setNodeChildIndex(target:flight.FlightNode, child:flight.FlightNode, index:Int):Void {
 #if hl
 	flight._hl._fn.Node.setNodeChildIndex(target, child, index);
 #elseif cpp
@@ -770,7 +758,7 @@ extern inline function swapNodeChildren(target:Dynamic, child1:Dynamic, child2:D
 	flight._js._fn.Node.swapNodeChildren(target, child1, child2);
 }
 #else
-extern inline function swapNodeChildren(target:Dynamic, child1:Dynamic, child2:Dynamic):Void {
+extern inline function swapNodeChildren(target:flight.FlightNode, child1:flight.FlightNode, child2:flight.FlightNode):Void {
 #if hl
 	flight._hl._fn.Node.swapNodeChildren(target, child1, child2);
 #elseif cpp
@@ -787,7 +775,7 @@ extern inline function swapNodeChildrenAt(target:Dynamic, index1:Int, index2:Int
 	flight._js._fn.Node.swapNodeChildrenAt(target, index1, index2);
 }
 #else
-extern inline function swapNodeChildrenAt(target:Dynamic, index1:Int, index2:Int):Void {
+extern inline function swapNodeChildrenAt(target:flight.FlightNode, index1:Int, index2:Int):Void {
 #if hl
 	flight._hl._fn.Node.swapNodeChildrenAt(target, index1, index2);
 #elseif cpp
@@ -821,7 +809,7 @@ extern inline function defaultNodeRuntimeCanAddChild(target:Dynamic, child:Dynam
 	return flight._js._fn.Node.defaultNodeRuntimeCanAddChild(target, child);
 }
 #else
-extern inline function defaultNodeRuntimeCanAddChild(target:Dynamic, child:Dynamic):Bool {
+extern inline function defaultNodeRuntimeCanAddChild(target:flight.FlightNode, child:flight.FlightNode):Bool {
 #if hl
 	return flight._hl._fn.Node.defaultNodeRuntimeCanAddChild(target, child);
 #elseif cpp
@@ -838,7 +826,7 @@ extern inline function disposeNode(target:Dynamic):Void {
 	flight._js._fn.Node.disposeNode(target);
 }
 #else
-extern inline function disposeNode(target:Dynamic):Void {
+extern inline function disposeNode(target:flight.FlightNode):Void {
 #if hl
 	flight._hl._fn.Node.disposeNode(target);
 #elseif cpp
@@ -855,7 +843,7 @@ extern inline function enableNodeSignals(source:Dynamic):Dynamic {
 	return flight._js._fn.Node.enableNodeSignals(source);
 }
 #else
-extern inline function enableNodeSignals(source:Dynamic):Dynamic {
+extern inline function enableNodeSignals(source:flight.FlightNode):Dynamic {
 #if hl
 	return flight._hl._fn.Node.enableNodeSignals(source);
 #elseif cpp
@@ -872,7 +860,7 @@ extern inline function getNodeSignals(source:Dynamic):Null<Dynamic> {
 	return flight._js._fn.Node.getNodeSignals(source);
 }
 #else
-extern inline function getNodeSignals(source:Dynamic):Dynamic {
+extern inline function getNodeSignals(source:flight.FlightNode):Dynamic {
 #if hl
 	return flight._hl._fn.Node.getNodeSignals(source);
 #elseif cpp
@@ -889,13 +877,30 @@ extern inline function setNodeEnabled(target:Dynamic, value:Bool):Void {
 	flight._js._fn.Node.setNodeEnabled(target, value);
 }
 #else
-extern inline function setNodeEnabled(target:Dynamic, value:Bool):Void {
+extern inline function setNodeEnabled(target:flight.FlightNode, value:Bool):Bool {
 #if hl
-	flight._hl._fn.Node.setNodeEnabled(target, value);
+	return flight._hl._fn.Node.setNodeEnabled(target, value);
 #elseif cpp
-	flight._cpp._fn.Node.setNodeEnabled(target, value);
+	return flight._cpp._fn.Node.setNodeEnabled(target, value);
 #elseif (js && flight_esm)
-	flight._js._fn.Node.setNodeEnabled(target, value);
+	return flight._js._fn.Node.setNodeEnabled(target, value);
+#else
+	#error "flight.Node: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function addNodeColorAdjustment(source:Dynamic, adjustment:AdjustmentRef):Void {
+	flight._js._fn.Node.addNodeColorAdjustment(source, adjustment);
+}
+#else
+extern inline function addNodeColorAdjustment(source:flight.FlightNode, adjustment:AdjustmentRef):Void {
+#if hl
+	flight._hl._fn.Node.addNodeColorAdjustment(source, adjustment);
+#elseif cpp
+	flight._cpp._fn.Node.addNodeColorAdjustment(source, adjustment);
+#elseif (js && flight_esm)
+	flight._js._fn.Node.addNodeColorAdjustment(source, adjustment);
 #else
 	#error "flight.Node: no backend for this target."
 #end
@@ -906,7 +911,7 @@ extern inline function setNodeColorAdjustmentsTint(source:Dynamic, tint:Int):Voi
 	flight._js._fn.Node.setNodeColorAdjustmentsTint(source, tint);
 }
 #else
-extern inline function setNodeColorAdjustmentsTint(source:Dynamic, tint:Int):Void {
+extern inline function setNodeColorAdjustmentsTint(source:flight.FlightNode, tint:Int):Void {
 #if hl
 	flight._hl._fn.Node.setNodeColorAdjustmentsTint(source, tint);
 #elseif cpp
@@ -940,7 +945,7 @@ extern inline function addNodeOrderListEntry(list:NodeOrderList, node:Dynamic, s
 	flight._js._fn.Node.addNodeOrderListEntry(list, node, sortKey);
 }
 #else
-extern inline function addNodeOrderListEntry(list:NodeOrderList, node:Dynamic, sortKey:Float):Void {
+extern inline function addNodeOrderListEntry(list:NodeOrderList, node:flight.FlightNode, sortKey:Float):Void {
 #if hl
 	flight._hl._fn.Node.addNodeOrderListEntry(list, node, sortKey);
 #elseif cpp
@@ -957,7 +962,7 @@ extern inline function applyNodeOrderList(target:Dynamic, list:NodeOrderList):Vo
 	flight._js._fn.Node.applyNodeOrderList(target, list);
 }
 #else
-extern inline function applyNodeOrderList(target:Dynamic, list:NodeOrderList):Void {
+extern inline function applyNodeOrderList(target:flight.FlightNode, list:NodeOrderList):Void {
 #if hl
 	flight._hl._fn.Node.applyNodeOrderList(target, list);
 #elseif cpp
@@ -1025,7 +1030,7 @@ extern inline function getNodeOrderListEntrySortKey(list:NodeOrderList, node:Dyn
 	return flight._js._fn.Node.getNodeOrderListEntrySortKey(list, node);
 }
 #else
-extern inline function getNodeOrderListEntrySortKey(list:NodeOrderList, node:Dynamic):Float {
+extern inline function getNodeOrderListEntrySortKey(list:NodeOrderList, node:flight.FlightNode):Float {
 #if hl
 	return flight._hl._fn.Node.getNodeOrderListEntrySortKey(list, node);
 #elseif cpp
@@ -1042,7 +1047,7 @@ extern inline function hasNodeOrderListEntry(list:NodeOrderList, node:Dynamic):B
 	return flight._js._fn.Node.hasNodeOrderListEntry(list, node);
 }
 #else
-extern inline function hasNodeOrderListEntry(list:NodeOrderList, node:Dynamic):Bool {
+extern inline function hasNodeOrderListEntry(list:NodeOrderList, node:flight.FlightNode):Bool {
 #if hl
 	return flight._hl._fn.Node.hasNodeOrderListEntry(list, node);
 #elseif cpp
@@ -1059,7 +1064,7 @@ extern inline function removeNodeOrderListEntry(list:NodeOrderList, node:Dynamic
 	return flight._js._fn.Node.removeNodeOrderListEntry(list, node);
 }
 #else
-extern inline function removeNodeOrderListEntry(list:NodeOrderList, node:Dynamic):Bool {
+extern inline function removeNodeOrderListEntry(list:NodeOrderList, node:flight.FlightNode):Bool {
 #if hl
 	return flight._hl._fn.Node.removeNodeOrderListEntry(list, node);
 #elseif cpp
@@ -1076,7 +1081,7 @@ extern inline function setNodeOrderListEntry(list:NodeOrderList, node:Dynamic, s
 	flight._js._fn.Node.setNodeOrderListEntry(list, node, sortKey);
 }
 #else
-extern inline function setNodeOrderListEntry(list:NodeOrderList, node:Dynamic, sortKey:Float):Void {
+extern inline function setNodeOrderListEntry(list:NodeOrderList, node:flight.FlightNode, sortKey:Float):Void {
 #if hl
 	flight._hl._fn.Node.setNodeOrderListEntry(list, node, sortKey);
 #elseif cpp
@@ -1093,7 +1098,7 @@ extern inline function setNodeOrderListEntryAbove(list:NodeOrderList, node:Dynam
 	flight._js._fn.Node.setNodeOrderListEntryAbove(list, node, target);
 }
 #else
-extern inline function setNodeOrderListEntryAbove(list:NodeOrderList, node:Dynamic, target:Dynamic):Void {
+extern inline function setNodeOrderListEntryAbove(list:NodeOrderList, node:flight.FlightNode, target:flight.FlightNode):Void {
 #if hl
 	flight._hl._fn.Node.setNodeOrderListEntryAbove(list, node, target);
 #elseif cpp
@@ -1110,7 +1115,7 @@ extern inline function setNodeOrderListEntryBelow(list:NodeOrderList, node:Dynam
 	flight._js._fn.Node.setNodeOrderListEntryBelow(list, node, target);
 }
 #else
-extern inline function setNodeOrderListEntryBelow(list:NodeOrderList, node:Dynamic, target:Dynamic):Void {
+extern inline function setNodeOrderListEntryBelow(list:NodeOrderList, node:flight.FlightNode, target:flight.FlightNode):Void {
 #if hl
 	flight._hl._fn.Node.setNodeOrderListEntryBelow(list, node, target);
 #elseif cpp
@@ -1127,7 +1132,7 @@ extern inline function setNodeOrderListFromNodeChildren(list:NodeOrderList, sour
 	flight._js._fn.Node.setNodeOrderListFromNodeChildren(list, source);
 }
 #else
-extern inline function setNodeOrderListFromNodeChildren(list:NodeOrderList, source:Dynamic):Void {
+extern inline function setNodeOrderListFromNodeChildren(list:NodeOrderList, source:flight.FlightNode):Void {
 #if hl
 	flight._hl._fn.Node.setNodeOrderListFromNodeChildren(list, source);
 #elseif cpp
@@ -1144,7 +1149,7 @@ extern inline function swapNodeOrderListEntries(list:NodeOrderList, nodeA:Dynami
 	flight._js._fn.Node.swapNodeOrderListEntries(list, nodeA, nodeB);
 }
 #else
-extern inline function swapNodeOrderListEntries(list:NodeOrderList, nodeA:Dynamic, nodeB:Dynamic):Void {
+extern inline function swapNodeOrderListEntries(list:NodeOrderList, nodeA:flight.FlightNode, nodeB:flight.FlightNode):Void {
 #if hl
 	flight._hl._fn.Node.swapNodeOrderListEntries(list, nodeA, nodeB);
 #elseif cpp
@@ -1161,7 +1166,7 @@ extern inline function getNodeLocalMatrix(target:Dynamic):Matrix {
 	return flight._js._fn.Node.getNodeLocalMatrix(target);
 }
 #else
-extern inline function getNodeLocalMatrix(target:Dynamic):Matrix {
+extern inline function getNodeLocalMatrix(target:flight.FlightNode):Matrix {
 #if hl
 	return flight._hl._fn.Node.getNodeLocalMatrix(target);
 #elseif cpp
@@ -1178,7 +1183,7 @@ extern inline function getNodeTransform2d(out:Transform2D, source:Dynamic):Void 
 	flight._js._fn.Node.getNodeTransform2d(out, source);
 }
 #else
-extern inline function getNodeTransform2d(out:Transform2D, source:Dynamic):Void {
+extern inline function getNodeTransform2d(out:Transform2D, source:flight.FlightNode):Void {
 #if hl
 	flight._hl._fn.Node.getNodeTransform2d(out, source);
 #elseif cpp
@@ -1195,7 +1200,7 @@ extern inline function getNodeWorldMatrix(target:Dynamic):Matrix {
 	return flight._js._fn.Node.getNodeWorldMatrix(target);
 }
 #else
-extern inline function getNodeWorldMatrix(target:Dynamic):Matrix {
+extern inline function getNodeWorldMatrix(target:flight.FlightNode):Matrix {
 #if hl
 	return flight._hl._fn.Node.getNodeWorldMatrix(target);
 #elseif cpp
@@ -1212,7 +1217,7 @@ extern inline function setNodeLocalMatrix(target:Dynamic, source:Matrix):Void {
 	flight._js._fn.Node.setNodeLocalMatrix(target, source);
 }
 #else
-extern inline function setNodeLocalMatrix(target:Dynamic, source:Matrix):Void {
+extern inline function setNodeLocalMatrix(target:flight.FlightNode, source:Matrix):Void {
 #if hl
 	flight._hl._fn.Node.setNodeLocalMatrix(target, source);
 #elseif cpp
@@ -1229,7 +1234,7 @@ extern inline function setNodeTransform2d(target:Dynamic, source:Transform2D):Vo
 	flight._js._fn.Node.setNodeTransform2d(target, source);
 }
 #else
-extern inline function setNodeTransform2d(target:Dynamic, source:Transform2D):Void {
+extern inline function setNodeTransform2d(target:flight.FlightNode, source:Transform2D):Void {
 #if hl
 	flight._hl._fn.Node.setNodeTransform2d(target, source);
 #elseif cpp
@@ -1246,7 +1251,7 @@ extern inline function computeNodeWorldTransformRevision(target:Dynamic, parentW
 	flight._js._fn.Node.computeNodeWorldTransformRevision(target, parentWorldTransformId, root);
 }
 #else
-extern inline function computeNodeWorldTransformRevision(target:Dynamic, parentWorldTransformId:haxe.Int64, root:NodeRuntime):Void {
+extern inline function computeNodeWorldTransformRevision(target:flight.FlightNode, parentWorldTransformId:haxe.Int64, root:NodeRuntime):Void {
 #if hl
 	flight._hl._fn.Node.computeNodeWorldTransformRevision(target, parentWorldTransformId, root);
 #elseif cpp
@@ -1263,7 +1268,7 @@ extern inline function getNodeAppearanceRevision(source:Dynamic):Int {
 	return flight._js._fn.Node.getNodeAppearanceRevision(source);
 }
 #else
-extern inline function getNodeAppearanceRevision(source:Dynamic):Int {
+extern inline function getNodeAppearanceRevision(source:flight.FlightNode):Int {
 #if hl
 	return flight._hl._fn.Node.getNodeAppearanceRevision(source);
 #elseif cpp
@@ -1280,7 +1285,7 @@ extern inline function getNodeChildrenRevision(source:Dynamic):Int {
 	return flight._js._fn.Node.getNodeChildrenRevision(source);
 }
 #else
-extern inline function getNodeChildrenRevision(source:Dynamic):Int {
+extern inline function getNodeChildrenRevision(source:flight.FlightNode):Int {
 #if hl
 	return flight._hl._fn.Node.getNodeChildrenRevision(source);
 #elseif cpp
@@ -1297,7 +1302,7 @@ extern inline function getNodeLocalBoundsRevision(source:Dynamic):Int {
 	return flight._js._fn.Node.getNodeLocalBoundsRevision(source);
 }
 #else
-extern inline function getNodeLocalBoundsRevision(source:Dynamic):Int {
+extern inline function getNodeLocalBoundsRevision(source:flight.FlightNode):Int {
 #if hl
 	return flight._hl._fn.Node.getNodeLocalBoundsRevision(source);
 #elseif cpp
@@ -1314,7 +1319,7 @@ extern inline function getNodeLocalContentRevision(source:Dynamic):Int {
 	return flight._js._fn.Node.getNodeLocalContentRevision(source);
 }
 #else
-extern inline function getNodeLocalContentRevision(source:Dynamic):Int {
+extern inline function getNodeLocalContentRevision(source:flight.FlightNode):Int {
 #if hl
 	return flight._hl._fn.Node.getNodeLocalContentRevision(source);
 #elseif cpp
@@ -1331,7 +1336,7 @@ extern inline function getNodeLocalTransformRevision(source:Dynamic):Int {
 	return flight._js._fn.Node.getNodeLocalTransformRevision(source);
 }
 #else
-extern inline function getNodeLocalTransformRevision(source:Dynamic):Int {
+extern inline function getNodeLocalTransformRevision(source:flight.FlightNode):Int {
 #if hl
 	return flight._hl._fn.Node.getNodeLocalTransformRevision(source);
 #elseif cpp
@@ -1348,7 +1353,7 @@ extern inline function getNodeParentReferenceRevision(source:Dynamic):Int {
 	return flight._js._fn.Node.getNodeParentReferenceRevision(source);
 }
 #else
-extern inline function getNodeParentReferenceRevision(source:Dynamic):Int {
+extern inline function getNodeParentReferenceRevision(source:flight.FlightNode):Int {
 #if hl
 	return flight._hl._fn.Node.getNodeParentReferenceRevision(source);
 #elseif cpp
@@ -1365,7 +1370,7 @@ extern inline function getNodeWorldTransformRevision(source:Dynamic):Int {
 	return flight._js._fn.Node.getNodeWorldTransformRevision(source);
 }
 #else
-extern inline function getNodeWorldTransformRevision(source:Dynamic):Int {
+extern inline function getNodeWorldTransformRevision(source:flight.FlightNode):Int {
 #if hl
 	return flight._hl._fn.Node.getNodeWorldTransformRevision(source);
 #elseif cpp
@@ -1382,7 +1387,7 @@ extern inline function invalidateContent(target:Dynamic):Void {
 	flight._js._fn.Node.invalidateContent(target);
 }
 #else
-extern inline function invalidateContent(target:Dynamic):Void {
+extern inline function invalidateContent(target:flight.FlightNode):Void {
 #if hl
 	flight._hl._fn.Node.invalidateContent(target);
 #elseif cpp
@@ -1399,7 +1404,7 @@ extern inline function invalidateNode(target:Dynamic):Void {
 	flight._js._fn.Node.invalidateNode(target);
 }
 #else
-extern inline function invalidateNode(target:Dynamic):Void {
+extern inline function invalidateNode(target:flight.FlightNode):Void {
 #if hl
 	flight._hl._fn.Node.invalidateNode(target);
 #elseif cpp
@@ -1416,7 +1421,7 @@ extern inline function invalidateNodeAppearance(target:Dynamic):Void {
 	flight._js._fn.Node.invalidateNodeAppearance(target);
 }
 #else
-extern inline function invalidateNodeAppearance(target:Dynamic):Void {
+extern inline function invalidateNodeAppearance(target:flight.FlightNode):Void {
 #if hl
 	flight._hl._fn.Node.invalidateNodeAppearance(target);
 #elseif cpp
@@ -1433,7 +1438,7 @@ extern inline function invalidateNodeLocalBounds(target:Dynamic):Void {
 	flight._js._fn.Node.invalidateNodeLocalBounds(target);
 }
 #else
-extern inline function invalidateNodeLocalBounds(target:Dynamic):Void {
+extern inline function invalidateNodeLocalBounds(target:flight.FlightNode):Void {
 #if hl
 	flight._hl._fn.Node.invalidateNodeLocalBounds(target);
 #elseif cpp
@@ -1450,7 +1455,7 @@ extern inline function invalidateNodeLocalContent(target:Dynamic):Void {
 	flight._js._fn.Node.invalidateNodeLocalContent(target);
 }
 #else
-extern inline function invalidateNodeLocalContent(target:Dynamic):Void {
+extern inline function invalidateNodeLocalContent(target:flight.FlightNode):Void {
 #if hl
 	flight._hl._fn.Node.invalidateNodeLocalContent(target);
 #elseif cpp
@@ -1467,7 +1472,7 @@ extern inline function invalidateNodeLocalTransform(target:Dynamic):Void {
 	flight._js._fn.Node.invalidateNodeLocalTransform(target);
 }
 #else
-extern inline function invalidateNodeLocalTransform(target:Dynamic):Void {
+extern inline function invalidateNodeLocalTransform(target:flight.FlightNode):Void {
 #if hl
 	flight._hl._fn.Node.invalidateNodeLocalTransform(target);
 #elseif cpp
@@ -1484,7 +1489,7 @@ extern inline function invalidateNodeParentReference(target:Dynamic):Void {
 	flight._js._fn.Node.invalidateNodeParentReference(target);
 }
 #else
-extern inline function invalidateNodeParentReference(target:Dynamic):Void {
+extern inline function invalidateNodeParentReference(target:flight.FlightNode):Void {
 #if hl
 	flight._hl._fn.Node.invalidateNodeParentReference(target);
 #elseif cpp
@@ -1501,7 +1506,7 @@ extern inline function invalidateNodeRender(target:Dynamic):Void {
 	flight._js._fn.Node.invalidateNodeRender(target);
 }
 #else
-extern inline function invalidateNodeRender(target:Dynamic):Void {
+extern inline function invalidateNodeRender(target:flight.FlightNode):Void {
 #if hl
 	flight._hl._fn.Node.invalidateNodeRender(target);
 #elseif cpp
@@ -1518,7 +1523,7 @@ extern inline function invalidateNodeWorldBounds(target:Dynamic):Void {
 	flight._js._fn.Node.invalidateNodeWorldBounds(target);
 }
 #else
-extern inline function invalidateNodeWorldBounds(target:Dynamic):Void {
+extern inline function invalidateNodeWorldBounds(target:flight.FlightNode):Void {
 #if hl
 	flight._hl._fn.Node.invalidateNodeWorldBounds(target);
 #elseif cpp
@@ -1620,7 +1625,7 @@ extern inline function findNode(source:Dynamic, predicate:Dynamic):Null<Dynamic>
 	return flight._js._fn.Node.findNode(source, predicate);
 }
 #else
-extern inline function findNode(source:Dynamic, predicateFn:Dynamic, predicateCtx:Dynamic):Dynamic {
+extern inline function findNode(source:flight.FlightNode, predicateFn:Dynamic, predicateCtx:Dynamic):Null<flight.FlightNode> {
 #if hl
 	return flight._hl._fn.Node.findNode(source, predicateFn, predicateCtx);
 #elseif cpp
@@ -1637,7 +1642,7 @@ extern inline function findNodeByName(source:Dynamic, name:String):Null<Dynamic>
 	return flight._js._fn.Node.findNodeByName(source, name);
 }
 #else
-extern inline function findNodeByName(source:Dynamic, name:String):Dynamic {
+extern inline function findNodeByName(source:flight.FlightNode, name:String):Null<flight.FlightNode> {
 #if hl
 	return flight._hl._fn.Node.findNodeByName(source, cast name);
 #elseif cpp
@@ -1654,7 +1659,7 @@ extern inline function forEachNodeAncestor(source:Dynamic, callback_:Dynamic):Vo
 	flight._js._fn.Node.forEachNodeAncestor(source, callback_);
 }
 #else
-extern inline function forEachNodeAncestor(source:Dynamic, callback_Fn:Dynamic, callback_Ctx:Dynamic):Void {
+extern inline function forEachNodeAncestor(source:flight.FlightNode, callback_Fn:Dynamic, callback_Ctx:Dynamic):Void {
 #if hl
 	flight._hl._fn.Node.forEachNodeAncestor(source, callback_Fn, callback_Ctx);
 #elseif cpp
@@ -1671,7 +1676,7 @@ extern inline function forEachNodeDescendant(source:Dynamic, callback_:Dynamic):
 	flight._js._fn.Node.forEachNodeDescendant(source, callback_);
 }
 #else
-extern inline function forEachNodeDescendant(source:Dynamic, callback_Fn:Dynamic, callback_Ctx:Dynamic):Void {
+extern inline function forEachNodeDescendant(source:flight.FlightNode, callback_Fn:Dynamic, callback_Ctx:Dynamic):Void {
 #if hl
 	flight._hl._fn.Node.forEachNodeDescendant(source, callback_Fn, callback_Ctx);
 #elseif cpp
@@ -1688,7 +1693,7 @@ extern inline function getNodeChildren(out:Dynamic, source:Dynamic):Void {
 	flight._js._fn.Node.getNodeChildren(out, source);
 }
 #else
-extern inline function getNodeChildren(out:Dynamic, source:Dynamic):Void {
+extern inline function getNodeChildren(out:flight.FlightNodeArray, source:flight.FlightNode):Void {
 #if hl
 	flight._hl._fn.Node.getNodeChildren(out, source);
 #elseif cpp
@@ -1705,7 +1710,7 @@ extern inline function getNodeDepth(source:Dynamic):Int {
 	return flight._js._fn.Node.getNodeDepth(source);
 }
 #else
-extern inline function getNodeDepth(source:Dynamic):Int {
+extern inline function getNodeDepth(source:flight.FlightNode):Int {
 #if hl
 	return flight._hl._fn.Node.getNodeDepth(source);
 #elseif cpp
@@ -1722,7 +1727,7 @@ extern inline function getNodeNextSibling(source:Dynamic):Null<Dynamic> {
 	return flight._js._fn.Node.getNodeNextSibling(source);
 }
 #else
-extern inline function getNodeNextSibling(source:Dynamic):Dynamic {
+extern inline function getNodeNextSibling(source:flight.FlightNode):Null<flight.FlightNode> {
 #if hl
 	return flight._hl._fn.Node.getNodeNextSibling(source);
 #elseif cpp
@@ -1739,7 +1744,7 @@ extern inline function getNodePreviousSibling(source:Dynamic):Null<Dynamic> {
 	return flight._js._fn.Node.getNodePreviousSibling(source);
 }
 #else
-extern inline function getNodePreviousSibling(source:Dynamic):Dynamic {
+extern inline function getNodePreviousSibling(source:flight.FlightNode):Null<flight.FlightNode> {
 #if hl
 	return flight._hl._fn.Node.getNodePreviousSibling(source);
 #elseif cpp
@@ -1756,7 +1761,7 @@ extern inline function walkNodeDescendants(source:Dynamic, visit:Dynamic):Bool {
 	return flight._js._fn.Node.walkNodeDescendants(source, visit);
 }
 #else
-extern inline function walkNodeDescendants(source:Dynamic, visitFn:Dynamic, visitCtx:Dynamic):Bool {
+extern inline function walkNodeDescendants(source:flight.FlightNode, visitFn:Dynamic, visitCtx:Dynamic):Bool {
 #if hl
 	return flight._hl._fn.Node.walkNodeDescendants(source, visitFn, visitCtx);
 #elseif cpp
@@ -1797,6 +1802,23 @@ extern inline function getViewportAspect(viewport:Viewport):Float {
 	return flight._cpp._fn.Node.getViewportAspect(viewport);
 #elseif (js && flight_esm)
 	return flight._js._fn.Node.getViewportAspect(viewport);
+#else
+	#error "flight.Node: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeNodeSignalsRef(ptr:NodeSignals):Void {
+	flight._js._fn.Node.freeNodeSignalsRef(ptr);
+}
+#else
+extern inline function freeNodeSignalsRef(ptr:NodeSignals):Void {
+#if hl
+	flight._hl._fn.Node.freeNodeSignalsRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Node.freeNodeSignalsRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Node.freeNodeSignalsRef(ptr);
 #else
 	#error "flight.Node: no backend for this target."
 #end

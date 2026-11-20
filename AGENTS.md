@@ -38,9 +38,7 @@ implementation backend or local C++ SDK adapters.
 
 ## Source and toolchains
 
-Flight is pinned to `develop` revision
-`5e1121e4cfdfde289b5373693dd285a2035dd285`. The inspected `main` revision lacks
-`flight-ffi`, `flight-bindgen`, and `scripts/check-haxe-bindings.sh`.
+Flight is pinned to `develop` revision `c52653a12e10251ab93970f71a6bc0c4dcbe21fa`.
 `npm run rehydrate` materializes only Flight into ignored `.dependencies/flight`.
 Consumers use checked-in externs and need no Cargo or Node generation dependency.
 

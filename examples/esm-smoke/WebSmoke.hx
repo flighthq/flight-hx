@@ -34,6 +34,10 @@ class WebSmoke {
     final display:flight.DisplayObject = cast flight.Scene2D.createDisplayObject();
     display.alpha = 0.5;
     if (display.alpha != 0.5) throw 'DisplayObject inherited alpha failed';
+    final font = flight.Font.createFontResource('Sans Ω');
+    if (font.family != 'Sans Ω') throw 'ESM font construction failed';
+    final encoded = flight.Encoding.encodeUtf8(font.family);
+    if (flight.Encoding.decodeUtf8(encoded, null, null) != font.family) throw 'ESM UTF-8 round trip failed';
     trace('FLIGHT_ESM_SMOKE_OK');
   }
 }

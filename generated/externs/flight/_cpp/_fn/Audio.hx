@@ -45,10 +45,16 @@ extern class Audio {
 	public static function findAudioResourceReferenceByName(references:cpp.Star<cpp.Void>, referencesLen:Int, name:cpp.ConstCharStar):flight._cpp.AudioResourceReference;
 	@:native("flight_reset_failed_audio_resource_reference")
 	public static function resetFailedAudioResourceReference(reference:flight._cpp.AudioResourceReference):Bool;
+	@:native("flight_free_audio_buffer_ref")
+	public static function freeAudioBufferRef(ptr:flight._cpp.AudioBuffer):Void;
+	@:native("flight_free_audio_resource_ref")
+	public static function freeAudioResourceRef(ptr:flight._cpp.AudioResource):Void;
+	@:native("flight_free_audio_resource_failure_ref")
+	public static function freeAudioResourceFailureRef(ptr:flight._cpp.AudioResourceFailure):Void;
+	@:native("flight_free_external_audio_resource_reference_ref")
+	public static function freeExternalAudioResourceReferenceRef(ptr:flight._cpp.ExternalAudioResourceReference):Void;
 	@:native("flight_free_audio_resource_reference_resolution_explanation")
 	public static function freeAudioResourceReferenceResolutionExplanation(ptr:flight._cpp.AudioResourceReferenceResolutionExplanation):Void;
 	@:native("flight_free_audio_resource_reference")
 	public static function freeAudioResourceReference(ptr:flight._cpp.AudioResourceReference):Void;
-	@:native("flight_free_string")
-	public static function freeString(ptr:cpp.Star<cpp.Void>):Void;
 }

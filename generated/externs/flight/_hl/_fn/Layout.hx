@@ -14,7 +14,7 @@ extern class Layout {
 	@:hlNative("flight", "flight_explain_layout_resolution")
 	public static function explainLayoutResolution(state:flight._hl.LayoutState, tree:flight._hl.LayoutTree, nodeIndex:Int):flight._hl.LayoutResolutionExplanation;
 	@:hlNative("flight", "flight_resolve_layout_tree")
-	public static function resolveLayoutTree(out:hl.Bytes, outLen:Int, state:flight._hl.LayoutState, tree:flight._hl.LayoutTree, intrinsicSizes:hl.Bytes, intrinsicSizesLen:Int, availableWidth:Single, availableHeight:Single):Bool;
+	public static function resolveLayoutTree(out:hl.Bytes, outLen:Int, state:flight._hl.LayoutState, tree:flight._hl.LayoutTree, intrinsicSizes:hl.Bytes, intrinsicSizesLen:Int, availableWidth:Float, availableHeight:Float):Bool;
 	@:hlNative("flight", "flight_free_layout_state")
 	public static function freeLayoutState(ptr:flight._hl.LayoutState):Void;
 	@:hlNative("flight", "flight_free_layout_resolution_explanation")

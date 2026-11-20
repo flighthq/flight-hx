@@ -9,6 +9,8 @@ extern class ParticlesFormats {
 	public static function getRegisteredParticleFormats(out:hl.Bytes, registry:flight._hl.ParticleFormatRegistry):Void;
 	@:hlNative("flight", "flight_parse_registered_particle_format")
 	public static function parseRegisteredParticleFormat(registry:flight._hl.ParticleFormatRegistry, text:hl.Bytes, kind:hl.Bytes, options:flight._hl.ParseParticleConfigOptions):flight._hl.ParticleConfigParseResult;
+	@:hlNative("flight", "flight_register_particle_format")
+	public static function registerParticleFormat(registry:flight._hl.ParticleFormatRegistry, kind:hl.Bytes, codec:flight._hl.ParticleFormatCodec):Void;
 	@:hlNative("flight", "flight_unregister_particle_format")
 	public static function unregisterParticleFormat(registry:flight._hl.ParticleFormatRegistry, kind:hl.Bytes):Bool;
 	@:hlNative("flight", "flight_parse_libgdx_particle")

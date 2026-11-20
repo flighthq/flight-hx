@@ -104,4 +104,10 @@ extern class Camera {
 	public static inline function freeCamera2D(ptr:flight._js.Camera2D):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeCamera3DviewExplanation(ptr:flight._js.Camera3DViewExplanation):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeOrthographicProjectionRef(ptr:flight._js.OrthographicProjection):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freePerspectiveProjectionRef(ptr:flight._js.PerspectiveProjection):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeRawProjectionRef(ptr:flight._js.RawProjection):Void {}
 }

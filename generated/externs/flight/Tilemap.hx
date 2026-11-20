@@ -27,7 +27,7 @@ extern inline function createTilemap():Dynamic {
 	return flight._js._fn.Tilemap.createTilemap();
 }
 #else
-extern inline function createTilemap():Dynamic {
+extern inline function createTilemap():flight.FlightNode {
 #if hl
 	return flight._hl._fn.Tilemap.createTilemap();
 #elseif cpp
@@ -44,7 +44,7 @@ extern inline function clearTilemap(tilemap:Tilemap):Void {
 	flight._js._fn.Tilemap.clearTilemap(tilemap);
 }
 #else
-extern inline function clearTilemap(tilemap:Tilemap):Void {
+extern inline function clearTilemap(tilemap:flight.FlightNode):Void {
 #if hl
 	flight._hl._fn.Tilemap.clearTilemap(tilemap);
 #elseif cpp
@@ -61,7 +61,7 @@ extern inline function cloneTilemap(source:Tilemap):Dynamic {
 	return flight._js._fn.Tilemap.cloneTilemap(source);
 }
 #else
-extern inline function cloneTilemap(source:Tilemap):Dynamic {
+extern inline function cloneTilemap(source:flight.FlightNode):flight.FlightNode {
 #if hl
 	return flight._hl._fn.Tilemap.cloneTilemap(source);
 #elseif cpp
@@ -78,7 +78,7 @@ extern inline function computeTilemapLocalBoundsRectangle(out:Rectangle, source:
 	flight._js._fn.Tilemap.computeTilemapLocalBoundsRectangle(out, source);
 }
 #else
-extern inline function computeTilemapLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
+extern inline function computeTilemapLocalBoundsRectangle(out:Rectangle, source:flight.FlightNode):Void {
 #if hl
 	flight._hl._fn.Tilemap.computeTilemapLocalBoundsRectangle(out, source);
 #elseif cpp
@@ -95,7 +95,7 @@ extern inline function enableTilemapSignals(target:Tilemap):TilemapSignals {
 	return flight._js._fn.Tilemap.enableTilemapSignals(target);
 }
 #else
-extern inline function enableTilemapSignals(target:Tilemap):TilemapSignals {
+extern inline function enableTilemapSignals(target:flight.FlightNode):TilemapSignals {
 #if hl
 	return flight._hl._fn.Tilemap.enableTilemapSignals(target);
 #elseif cpp
@@ -112,7 +112,7 @@ extern inline function fillTilemapTiles(tilemap:Tilemap, id:Int):Void {
 	flight._js._fn.Tilemap.fillTilemapTiles(tilemap, id);
 }
 #else
-extern inline function fillTilemapTiles(tilemap:Tilemap, id:Int):Void {
+extern inline function fillTilemapTiles(tilemap:flight.FlightNode, id:Int):Void {
 #if hl
 	flight._hl._fn.Tilemap.fillTilemapTiles(tilemap, id);
 #elseif cpp
@@ -129,7 +129,7 @@ extern inline function getTilemapColumnAtX(source:Tilemap, x:Float):Int {
 	return flight._js._fn.Tilemap.getTilemapColumnAtX(source, x);
 }
 #else
-extern inline function getTilemapColumnAtX(source:Tilemap, x:Float):Int {
+extern inline function getTilemapColumnAtX(source:flight.FlightNode, x:Float):Int {
 #if hl
 	return flight._hl._fn.Tilemap.getTilemapColumnAtX(source, x);
 #elseif cpp
@@ -146,7 +146,7 @@ extern inline function getTilemapColumnRowAtPoint(out:Vector2, source:Tilemap, x
 	return flight._js._fn.Tilemap.getTilemapColumnRowAtPoint(out, source, x, y);
 }
 #else
-extern inline function getTilemapColumnRowAtPoint(out:Vector2, source:Tilemap, x:Float, y:Float):Bool {
+extern inline function getTilemapColumnRowAtPoint(out:Vector2, source:flight.FlightNode, x:Float, y:Float):Bool {
 #if hl
 	return flight._hl._fn.Tilemap.getTilemapColumnRowAtPoint(out, source, x, y);
 #elseif cpp
@@ -163,7 +163,7 @@ extern inline function getTilemapRowAtY(source:Tilemap, y:Float):Int {
 	return flight._js._fn.Tilemap.getTilemapRowAtY(source, y);
 }
 #else
-extern inline function getTilemapRowAtY(source:Tilemap, y:Float):Int {
+extern inline function getTilemapRowAtY(source:flight.FlightNode, y:Float):Int {
 #if hl
 	return flight._hl._fn.Tilemap.getTilemapRowAtY(source, y);
 #elseif cpp
@@ -180,7 +180,7 @@ extern inline function getTilemapTile(tilemap:Tilemap, column:Int, row:Int):Int 
 	return flight._js._fn.Tilemap.getTilemapTile(tilemap, column, row);
 }
 #else
-extern inline function getTilemapTile(tilemap:Tilemap, column:Int, row:Int):Int {
+extern inline function getTilemapTile(tilemap:flight.FlightNode, column:Int, row:Int):Int {
 #if hl
 	return flight._hl._fn.Tilemap.getTilemapTile(tilemap, column, row);
 #elseif cpp
@@ -197,7 +197,7 @@ extern inline function getTilemapTileAtPoint(source:Tilemap, point:Vector2):Int 
 	return flight._js._fn.Tilemap.getTilemapTileAtPoint(source, point);
 }
 #else
-extern inline function getTilemapTileAtPoint(source:Tilemap, point:Vector2):Int {
+extern inline function getTilemapTileAtPoint(source:flight.FlightNode, point:Vector2):Int {
 #if hl
 	return flight._hl._fn.Tilemap.getTilemapTileAtPoint(source, point);
 #elseif cpp
@@ -214,7 +214,7 @@ extern inline function getTilemapTileAtPointXy(source:Tilemap, x:Float, y:Float)
 	return flight._js._fn.Tilemap.getTilemapTileAtPointXy(source, x, y);
 }
 #else
-extern inline function getTilemapTileAtPointXy(source:Tilemap, x:Float, y:Float):Int {
+extern inline function getTilemapTileAtPointXy(source:flight.FlightNode, x:Float, y:Float):Int {
 #if hl
 	return flight._hl._fn.Tilemap.getTilemapTileAtPointXy(source, x, y);
 #elseif cpp
@@ -231,7 +231,7 @@ extern inline function getTilemapTileRect(out:Rectangle, source:Tilemap, column:
 	return flight._js._fn.Tilemap.getTilemapTileRect(out, source, column, row);
 }
 #else
-extern inline function getTilemapTileRect(out:Rectangle, source:Tilemap, column:Int, row:Int):Bool {
+extern inline function getTilemapTileRect(out:Rectangle, source:flight.FlightNode, column:Int, row:Int):Bool {
 #if hl
 	return flight._hl._fn.Tilemap.getTilemapTileRect(out, source, column, row);
 #elseif cpp
@@ -248,7 +248,7 @@ extern inline function resizeTilemap(tilemap:Tilemap, columns:Int, rows:Int):Voi
 	flight._js._fn.Tilemap.resizeTilemap(tilemap, columns, rows);
 }
 #else
-extern inline function resizeTilemap(tilemap:Tilemap, columns:Int, rows:Int):Void {
+extern inline function resizeTilemap(tilemap:flight.FlightNode, columns:Int, rows:Int):Void {
 #if hl
 	flight._hl._fn.Tilemap.resizeTilemap(tilemap, columns, rows);
 #elseif cpp
@@ -265,7 +265,7 @@ extern inline function setTilemapTile(tilemap:Tilemap, column:Int, row:Int, id:I
 	flight._js._fn.Tilemap.setTilemapTile(tilemap, column, row, id);
 }
 #else
-extern inline function setTilemapTile(tilemap:Tilemap, column:Int, row:Int, id:Int):Void {
+extern inline function setTilemapTile(tilemap:flight.FlightNode, column:Int, row:Int, id:Int):Void {
 #if hl
 	flight._hl._fn.Tilemap.setTilemapTile(tilemap, column, row, id);
 #elseif cpp
@@ -282,7 +282,7 @@ extern inline function setTilemapTileTint(tilemap:Tilemap, column:Int, row:Int, 
 	flight._js._fn.Tilemap.setTilemapTileTint(tilemap, column, row, rgba);
 }
 #else
-extern inline function setTilemapTileTint(tilemap:Tilemap, column:Int, row:Int, rgba:Int):Void {
+extern inline function setTilemapTileTint(tilemap:flight.FlightNode, column:Int, row:Int, rgba:Int):Void {
 #if hl
 	flight._hl._fn.Tilemap.setTilemapTileTint(tilemap, column, row, rgba);
 #elseif cpp
@@ -299,7 +299,7 @@ extern inline function setTilemapTiles(tilemap:Tilemap, ids:Dynamic, offsetColum
 	flight._js._fn.Tilemap.setTilemapTiles(tilemap, ids, offsetColumn, offsetRow, width, height);
 }
 #else
-extern inline function setTilemapTiles(tilemap:Tilemap, ids:Dynamic, idsLen:Int, offsetColumn:Int, offsetRow:Int, width:Int, height:Int):Void {
+extern inline function setTilemapTiles(tilemap:flight.FlightNode, ids:Dynamic, idsLen:Int, offsetColumn:Int, offsetRow:Int, width:Int, height:Int):Void {
 #if hl
 	flight._hl._fn.Tilemap.setTilemapTiles(tilemap, ids, idsLen, offsetColumn, offsetRow, width, height);
 #elseif cpp

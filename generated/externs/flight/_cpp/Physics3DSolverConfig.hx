@@ -3,12 +3,12 @@ package flight._cpp;
 private extern class Physics3DSolverConfig_Ffi {
 	@:native("flight_get_physics3_dsolver_config_allow_sleeping") static function get_allowSleeping(ptr:cpp.Star<cpp.Void>):Bool;
 	@:native("flight_set_physics3_dsolver_config_allow_sleeping") static function set_allowSleeping(ptr:cpp.Star<cpp.Void>, value:Bool):Bool;
-	@:native("flight_get_physics3_dsolver_config_sleep_linear_threshold") static function get_sleepLinearThreshold(ptr:cpp.Star<cpp.Void>):Single;
-	@:native("flight_set_physics3_dsolver_config_sleep_linear_threshold") static function set_sleepLinearThreshold(ptr:cpp.Star<cpp.Void>, value:Single):Single;
-	@:native("flight_get_physics3_dsolver_config_sleep_angular_threshold") static function get_sleepAngularThreshold(ptr:cpp.Star<cpp.Void>):Single;
-	@:native("flight_set_physics3_dsolver_config_sleep_angular_threshold") static function set_sleepAngularThreshold(ptr:cpp.Star<cpp.Void>, value:Single):Single;
-	@:native("flight_get_physics3_dsolver_config_time_to_sleep") static function get_timeToSleep(ptr:cpp.Star<cpp.Void>):Single;
-	@:native("flight_set_physics3_dsolver_config_time_to_sleep") static function set_timeToSleep(ptr:cpp.Star<cpp.Void>, value:Single):Single;
+	@:native("flight_get_physics3_dsolver_config_sleep_linear_threshold") static function get_sleepLinearThreshold(ptr:cpp.Star<cpp.Void>):Float;
+	@:native("flight_set_physics3_dsolver_config_sleep_linear_threshold") static function set_sleepLinearThreshold(ptr:cpp.Star<cpp.Void>, value:Float):Float;
+	@:native("flight_get_physics3_dsolver_config_sleep_angular_threshold") static function get_sleepAngularThreshold(ptr:cpp.Star<cpp.Void>):Float;
+	@:native("flight_set_physics3_dsolver_config_sleep_angular_threshold") static function set_sleepAngularThreshold(ptr:cpp.Star<cpp.Void>, value:Float):Float;
+	@:native("flight_get_physics3_dsolver_config_time_to_sleep") static function get_timeToSleep(ptr:cpp.Star<cpp.Void>):Float;
+	@:native("flight_set_physics3_dsolver_config_time_to_sleep") static function set_timeToSleep(ptr:cpp.Star<cpp.Void>, value:Float):Float;
 	@:native("flight_get_physics3_dsolver_config_substeps") static function get_substeps(ptr:cpp.Star<cpp.Void>):Int;
 	@:native("flight_set_physics3_dsolver_config_substeps") static function set_substeps(ptr:cpp.Star<cpp.Void>, value:Int):Int;
 	@:native("flight_get_physics3_dsolver_config_continuous_collision") static function get_continuousCollision(ptr:cpp.Star<cpp.Void>):Bool;
@@ -25,21 +25,21 @@ abstract Physics3DSolverConfig(cpp.Star<cpp.Void>) {
 	inline function get_allowSleeping():Bool return Physics3DSolverConfig_Ffi.get_allowSleeping(this);
 
 	inline function set_allowSleeping(value:Bool):Bool { Physics3DSolverConfig_Ffi.set_allowSleeping(this, value); return value; }
-	public var sleepLinearThreshold(get, set):Single;
+	public var sleepLinearThreshold(get, set):Float;
 
-	inline function get_sleepLinearThreshold():Single return Physics3DSolverConfig_Ffi.get_sleepLinearThreshold(this);
+	inline function get_sleepLinearThreshold():Float return Physics3DSolverConfig_Ffi.get_sleepLinearThreshold(this);
 
-	inline function set_sleepLinearThreshold(value:Single):Single { Physics3DSolverConfig_Ffi.set_sleepLinearThreshold(this, value); return value; }
-	public var sleepAngularThreshold(get, set):Single;
+	inline function set_sleepLinearThreshold(value:Float):Float { Physics3DSolverConfig_Ffi.set_sleepLinearThreshold(this, value); return value; }
+	public var sleepAngularThreshold(get, set):Float;
 
-	inline function get_sleepAngularThreshold():Single return Physics3DSolverConfig_Ffi.get_sleepAngularThreshold(this);
+	inline function get_sleepAngularThreshold():Float return Physics3DSolverConfig_Ffi.get_sleepAngularThreshold(this);
 
-	inline function set_sleepAngularThreshold(value:Single):Single { Physics3DSolverConfig_Ffi.set_sleepAngularThreshold(this, value); return value; }
-	public var timeToSleep(get, set):Single;
+	inline function set_sleepAngularThreshold(value:Float):Float { Physics3DSolverConfig_Ffi.set_sleepAngularThreshold(this, value); return value; }
+	public var timeToSleep(get, set):Float;
 
-	inline function get_timeToSleep():Single return Physics3DSolverConfig_Ffi.get_timeToSleep(this);
+	inline function get_timeToSleep():Float return Physics3DSolverConfig_Ffi.get_timeToSleep(this);
 
-	inline function set_timeToSleep(value:Single):Single { Physics3DSolverConfig_Ffi.set_timeToSleep(this, value); return value; }
+	inline function set_timeToSleep(value:Float):Float { Physics3DSolverConfig_Ffi.set_timeToSleep(this, value); return value; }
 	public var substeps(get, set):Int;
 
 	inline function get_substeps():Int return Physics3DSolverConfig_Ffi.get_substeps(this);

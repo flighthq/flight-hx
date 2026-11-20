@@ -1,21 +1,21 @@
 package flight._hl;
 
 abstract Vector3(hl.Bytes) {
-	public var x(get, set):Single;
+	public var x(get, set):Float;
 
-	inline function get_x():Single return this.getF32(16);
+	inline function get_x():Float return this.getF64(16);
 
-	inline function set_x(value:Single):Single { this.setF32(16, value); return value; }
-	public var y(get, set):Single;
+	inline function set_x(value:Float):Float { this.setF64(16, value); return value; }
+	public var y(get, set):Float;
 
-	inline function get_y():Single return this.getF32(20);
+	inline function get_y():Float return this.getF64(24);
 
-	inline function set_y(value:Single):Single { this.setF32(20, value); return value; }
-	public var z(get, set):Single;
+	inline function set_y(value:Float):Float { this.setF64(24, value); return value; }
+	public var z(get, set):Float;
 
-	inline function get_z():Single return this.getF32(24);
+	inline function get_z():Float return this.getF64(32);
 
-	inline function set_z(value:Single):Single { this.setF32(24, value); return value; }
+	inline function set_z(value:Float):Float { this.setF64(32, value); return value; }
 
 	inline public function copyMatrixColumnTo(column:Int, source:flight._hl.Matrix):Void {
 		flight._hl._fn.Geometry.copyMatrixColumnToVector3(cast this, column, source);
@@ -35,10 +35,10 @@ abstract Vector3(hl.Bytes) {
 	inline public function rotateByQuaternion(vector:flight._hl.Vector3, q:flight._hl.Quaternion):Void {
 		flight._hl._fn.Geometry.rotateVector3ByQuaternion(cast this, vector, q);
 	}
-	static inline public function create(x:Single, y:Single, z:Single):flight._hl.Vector3 {
+	static inline public function create(x:Float, y:Float, z:Float):flight._hl.Vector3 {
 		return flight._hl._fn.Geometry.createVector3(x, y, z);
 	}
-	static inline public function createFromSpherical(radius:Single, theta:Single, phi:Single):flight._hl.Vector3 {
+	static inline public function createFromSpherical(radius:Float, theta:Float, phi:Float):flight._hl.Vector3 {
 		return flight._hl._fn.Geometry.createVector3FromSpherical(radius, theta, phi);
 	}
 	inline public function add(a:flight._hl.Vector3, b:flight._hl.Vector3):Void {
@@ -62,28 +62,28 @@ abstract Vector3(hl.Bytes) {
 	inline public function equals(b:flight._hl.Vector3):Bool {
 		return flight._hl._fn.Geometry.equalsVector3(cast this, b);
 	}
-	inline public function getAngleBetween(b:flight._hl.Vector3):Single {
+	inline public function getAngleBetween(b:flight._hl.Vector3):Float {
 		return flight._hl._fn.Geometry.getVector3AngleBetween(cast this, b);
 	}
-	inline public function getDistance(b:flight._hl.Vector3):Single {
+	inline public function getDistance(b:flight._hl.Vector3):Float {
 		return flight._hl._fn.Geometry.getVector3Distance(cast this, b);
 	}
-	inline public function getDistanceSquared(b:flight._hl.Vector3):Single {
+	inline public function getDistanceSquared(b:flight._hl.Vector3):Float {
 		return flight._hl._fn.Geometry.getVector3DistanceSquared(cast this, b);
 	}
-	inline public function getDot(b:flight._hl.Vector3):Single {
+	inline public function getDot(b:flight._hl.Vector3):Float {
 		return flight._hl._fn.Geometry.getVector3Dot(cast this, b);
 	}
-	inline public function getLength():Single {
+	inline public function getLength():Float {
 		return flight._hl._fn.Geometry.getVector3Length(cast this);
 	}
-	inline public function getLengthSquared():Single {
+	inline public function getLengthSquared():Float {
 		return flight._hl._fn.Geometry.getVector3LengthSquared(cast this);
 	}
 	inline public function getSpherical(source:flight._hl.Vector3):Void {
 		flight._hl._fn.Geometry.getVector3Spherical(cast this, source);
 	}
-	inline public function interpolate(a:flight._hl.Vector3, b:flight._hl.Vector3, t:Single):Void {
+	inline public function interpolate(a:flight._hl.Vector3, b:flight._hl.Vector3, t:Float):Void {
 		flight._hl._fn.Geometry.interpolateVector3(cast this, a, b, t);
 	}
 	inline public function max(a:flight._hl.Vector3, b:flight._hl.Vector3):Void {
@@ -95,16 +95,16 @@ abstract Vector3(hl.Bytes) {
 	inline public function multiply(a:flight._hl.Vector3, b:flight._hl.Vector3):Void {
 		flight._hl._fn.Geometry.multiplyVector3(cast this, a, b);
 	}
-	inline public function nearEquals(b:flight._hl.Vector3, tolerance:Single):Bool {
+	inline public function nearEquals(b:flight._hl.Vector3, tolerance:Float):Bool {
 		return flight._hl._fn.Geometry.nearEqualsVector3(cast this, b, tolerance);
 	}
 	inline public function negate(source:flight._hl.Vector3):Void {
 		flight._hl._fn.Geometry.negateVector3(cast this, source);
 	}
-	inline public function normalize(source:flight._hl.Vector3):Single {
+	inline public function normalize(source:flight._hl.Vector3):Float {
 		return flight._hl._fn.Geometry.normalizeVector3(cast this, source);
 	}
-	inline public function offset(source:flight._hl.Vector3, dx:Single, dy:Single, dz:Single):Void {
+	inline public function offset(source:flight._hl.Vector3, dx:Float, dy:Float, dz:Float):Void {
 		flight._hl._fn.Geometry.offsetVector3(cast this, source, dx, dy, dz);
 	}
 	inline public function project(out:flight._hl.Vector2):Void {
@@ -113,16 +113,16 @@ abstract Vector3(hl.Bytes) {
 	inline public function reflect(incident:flight._hl.Vector3, normal:flight._hl.Vector3):Void {
 		flight._hl._fn.Geometry.reflectVector3(cast this, incident, normal);
 	}
-	inline public function scale(source:flight._hl.Vector3, scalar:Single):Void {
+	inline public function scale(source:flight._hl.Vector3, scalar:Float):Void {
 		flight._hl._fn.Geometry.scaleVector3(cast this, source, scalar);
 	}
-	inline public function set(x:Single, y:Single, z:Single):Void {
+	inline public function set(x:Float, y:Float, z:Float):Void {
 		flight._hl._fn.Geometry.setVector3(cast this, x, y, z);
 	}
 	inline public function setFromFloat32Array(offset:Int, source:hl.Bytes, sourceLen:Int):Void {
 		flight._hl._fn.Geometry.setVector3FromFloat32Array(cast this, offset, source, sourceLen);
 	}
-	inline public function setFromSpherical(radius:Single, theta:Single, phi:Single):Void {
+	inline public function setFromSpherical(radius:Float, theta:Float, phi:Float):Void {
 		flight._hl._fn.Geometry.setVector3FromSpherical(cast this, radius, theta, phi);
 	}
 	inline public function setFromVector4(source:flight._hl.Vector4):Void {

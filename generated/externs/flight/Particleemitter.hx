@@ -5,7 +5,7 @@ extern inline function computeParticleEmitter2dLocalBoundsRectangle(out:Rectangl
 	flight._js._fn.Particleemitter.computeParticleEmitter2dLocalBoundsRectangle(out, source);
 }
 #else
-extern inline function computeParticleEmitter2dLocalBoundsRectangle(out:Rectangle, source:ParticleEmitter2D):Void {
+extern inline function computeParticleEmitter2dLocalBoundsRectangle(out:Rectangle, source:flight.FlightNode):Void {
 #if hl
 	flight._hl._fn.Particleemitter.computeParticleEmitter2dLocalBoundsRectangle(out, source);
 #elseif cpp
@@ -22,7 +22,7 @@ extern inline function createParticleEmitter2d():Dynamic {
 	return flight._js._fn.Particleemitter.createParticleEmitter2d();
 }
 #else
-extern inline function createParticleEmitter2d():Dynamic {
+extern inline function createParticleEmitter2d():flight.FlightNode {
 #if hl
 	return flight._hl._fn.Particleemitter.createParticleEmitter2d();
 #elseif cpp
@@ -39,7 +39,7 @@ extern inline function createParticleEmitter3d():Dynamic {
 	return flight._js._fn.Particleemitter.createParticleEmitter3d();
 }
 #else
-extern inline function createParticleEmitter3d():Dynamic {
+extern inline function createParticleEmitter3d():flight.FlightNode {
 #if hl
 	return flight._hl._fn.Particleemitter.createParticleEmitter3d();
 #elseif cpp
@@ -56,7 +56,7 @@ extern inline function appendParticleEmitter2dParticle(target:Dynamic, id:Int, x
 	return flight._js._fn.Particleemitter.appendParticleEmitter2dParticle(target, id, x, y, rotation, scale);
 }
 #else
-extern inline function appendParticleEmitter2dParticle(target:Dynamic, id:Int, x:Float, y:Float, rotation:Float, scale:Float):Int {
+extern inline function appendParticleEmitter2dParticle(target:flight.FlightNode, id:Int, x:Float, y:Float, rotation:Float, scale:Float):Int {
 #if hl
 	return flight._hl._fn.Particleemitter.appendParticleEmitter2dParticle(target, id, x, y, rotation, scale);
 #elseif cpp
@@ -73,7 +73,7 @@ extern inline function clearParticleEmitter2d(target:Dynamic):Void {
 	flight._js._fn.Particleemitter.clearParticleEmitter2d(target);
 }
 #else
-extern inline function clearParticleEmitter2d(target:Dynamic):Void {
+extern inline function clearParticleEmitter2d(target:flight.FlightNode):Void {
 #if hl
 	flight._hl._fn.Particleemitter.clearParticleEmitter2d(target);
 #elseif cpp
@@ -90,7 +90,7 @@ extern inline function cloneParticleEmitter2d(source:ParticleEmitter2D):Dynamic 
 	return flight._js._fn.Particleemitter.cloneParticleEmitter2d(source);
 }
 #else
-extern inline function cloneParticleEmitter2d(source:ParticleEmitter2D):Dynamic {
+extern inline function cloneParticleEmitter2d(source:flight.FlightNode):flight.FlightNode {
 #if hl
 	return flight._hl._fn.Particleemitter.cloneParticleEmitter2d(source);
 #elseif cpp
@@ -107,7 +107,7 @@ extern inline function cloneParticleEmitter3d(source:ParticleEmitter3D):Dynamic 
 	return flight._js._fn.Particleemitter.cloneParticleEmitter3d(source);
 }
 #else
-extern inline function cloneParticleEmitter3d(source:ParticleEmitter3D):Dynamic {
+extern inline function cloneParticleEmitter3d(source:flight.FlightNode):flight.FlightNode {
 #if hl
 	return flight._hl._fn.Particleemitter.cloneParticleEmitter3d(source);
 #elseif cpp
@@ -124,7 +124,7 @@ extern inline function compactParticleEmitter2d(target:Dynamic):Void {
 	flight._js._fn.Particleemitter.compactParticleEmitter2d(target);
 }
 #else
-extern inline function compactParticleEmitter2d(target:Dynamic):Void {
+extern inline function compactParticleEmitter2d(target:flight.FlightNode):Void {
 #if hl
 	flight._hl._fn.Particleemitter.compactParticleEmitter2d(target);
 #elseif cpp
@@ -141,7 +141,7 @@ extern inline function emitParticleBurst2d(emitter:Dynamic, state:ParticleEmitte
 	return flight._js._fn.Particleemitter.emitParticleBurst2d(emitter, state, config, count, x, y, tint);
 }
 #else
-extern inline function emitParticleBurst2d(emitter:Dynamic, state:ParticleEmitterState, config:ParticleEmitterConfig, count:Float, x:Float, y:Float, tint:haxe.Int64):Int {
+extern inline function emitParticleBurst2d(emitter:flight.FlightNode, state:ParticleEmitterState, config:ParticleEmitterConfig, count:Float, x:Float, y:Float, tint:haxe.Int64):Int {
 #if hl
 	return flight._hl._fn.Particleemitter.emitParticleBurst2d(emitter, state, config, count, x, y, tint);
 #elseif cpp
@@ -158,7 +158,7 @@ extern inline function getParticleEmitter2dCapacity(source:Dynamic):Int {
 	return flight._js._fn.Particleemitter.getParticleEmitter2dCapacity(source);
 }
 #else
-extern inline function getParticleEmitter2dCapacity(source:Dynamic):Int {
+extern inline function getParticleEmitter2dCapacity(source:flight.FlightNode):Int {
 #if hl
 	return flight._hl._fn.Particleemitter.getParticleEmitter2dCapacity(source);
 #elseif cpp
@@ -175,7 +175,7 @@ extern inline function getParticleEmitter2dParticleAlpha(source:Dynamic, index:I
 	return flight._js._fn.Particleemitter.getParticleEmitter2dParticleAlpha(source, index);
 }
 #else
-extern inline function getParticleEmitter2dParticleAlpha(source:Dynamic, index:Int):Float {
+extern inline function getParticleEmitter2dParticleAlpha(source:flight.FlightNode, index:Int):Single {
 #if hl
 	return flight._hl._fn.Particleemitter.getParticleEmitter2dParticleAlpha(source, index);
 #elseif cpp
@@ -192,7 +192,7 @@ extern inline function getParticleEmitter2dParticleId(source:Dynamic, index:Int)
 	return flight._js._fn.Particleemitter.getParticleEmitter2dParticleId(source, index);
 }
 #else
-extern inline function getParticleEmitter2dParticleId(source:Dynamic, index:Int):Int {
+extern inline function getParticleEmitter2dParticleId(source:flight.FlightNode, index:Int):Int {
 #if hl
 	return flight._hl._fn.Particleemitter.getParticleEmitter2dParticleId(source, index);
 #elseif cpp
@@ -209,7 +209,7 @@ extern inline function getParticleEmitter2dParticleVelocity(out:Vector2, source:
 	return flight._js._fn.Particleemitter.getParticleEmitter2dParticleVelocity(out, source, index);
 }
 #else
-extern inline function getParticleEmitter2dParticleVelocity(out:Vector2, source:Dynamic, index:Int):Bool {
+extern inline function getParticleEmitter2dParticleVelocity(out:Vector2, source:flight.FlightNode, index:Int):Bool {
 #if hl
 	return flight._hl._fn.Particleemitter.getParticleEmitter2dParticleVelocity(out, source, index);
 #elseif cpp
@@ -226,7 +226,7 @@ extern inline function isParticleEmitter3d(node:Dynamic):Bool {
 	return flight._js._fn.Particleemitter.isParticleEmitter3d(node);
 }
 #else
-extern inline function isParticleEmitter3d(node:Dynamic):Bool {
+extern inline function isParticleEmitter3d(node:flight.FlightNode):Bool {
 #if hl
 	return flight._hl._fn.Particleemitter.isParticleEmitter3d(node);
 #elseif cpp
@@ -243,7 +243,7 @@ extern inline function removeParticleEmitter2dParticle(target:Dynamic, index:Int
 	flight._js._fn.Particleemitter.removeParticleEmitter2dParticle(target, index);
 }
 #else
-extern inline function removeParticleEmitter2dParticle(target:Dynamic, index:Int):Void {
+extern inline function removeParticleEmitter2dParticle(target:flight.FlightNode, index:Int):Void {
 #if hl
 	flight._hl._fn.Particleemitter.removeParticleEmitter2dParticle(target, index);
 #elseif cpp
@@ -260,7 +260,7 @@ extern inline function reserveParticleEmitter2d(target:Dynamic, capacity:Int):Vo
 	flight._js._fn.Particleemitter.reserveParticleEmitter2d(target, capacity);
 }
 #else
-extern inline function reserveParticleEmitter2d(target:Dynamic, capacity:Int):Void {
+extern inline function reserveParticleEmitter2d(target:flight.FlightNode, capacity:Int):Void {
 #if hl
 	flight._hl._fn.Particleemitter.reserveParticleEmitter2d(target, capacity);
 #elseif cpp
@@ -277,7 +277,7 @@ extern inline function setParticleEmitter2dLocalBoundsRectangle(target:Dynamic, 
 	flight._js._fn.Particleemitter.setParticleEmitter2dLocalBoundsRectangle(target, rect);
 }
 #else
-extern inline function setParticleEmitter2dLocalBoundsRectangle(target:Dynamic, rect:Rectangle):Void {
+extern inline function setParticleEmitter2dLocalBoundsRectangle(target:flight.FlightNode, rect:Rectangle):Void {
 #if hl
 	flight._hl._fn.Particleemitter.setParticleEmitter2dLocalBoundsRectangle(target, rect);
 #elseif cpp
@@ -294,7 +294,7 @@ extern inline function setParticleEmitter2dParticle(target:Dynamic, index:Int, i
 	flight._js._fn.Particleemitter.setParticleEmitter2dParticle(target, index, id, x, y, rotation, scale);
 }
 #else
-extern inline function setParticleEmitter2dParticle(target:Dynamic, index:Int, id:Int, x:Float, y:Float, rotation:Float, scale:Float):Void {
+extern inline function setParticleEmitter2dParticle(target:flight.FlightNode, index:Int, id:Int, x:Float, y:Float, rotation:Float, scale:Float):Void {
 #if hl
 	flight._hl._fn.Particleemitter.setParticleEmitter2dParticle(target, index, id, x, y, rotation, scale);
 #elseif cpp
@@ -311,7 +311,7 @@ extern inline function setParticleEmitter2dParticleAlpha(target:Dynamic, index:I
 	flight._js._fn.Particleemitter.setParticleEmitter2dParticleAlpha(target, index, alpha);
 }
 #else
-extern inline function setParticleEmitter2dParticleAlpha(target:Dynamic, index:Int, alpha:Float):Void {
+extern inline function setParticleEmitter2dParticleAlpha(target:flight.FlightNode, index:Int, alpha:Float):Void {
 #if hl
 	flight._hl._fn.Particleemitter.setParticleEmitter2dParticleAlpha(target, index, alpha);
 #elseif cpp
@@ -328,7 +328,7 @@ extern inline function setParticleEmitter2dParticleColor(target:Dynamic, index:I
 	flight._js._fn.Particleemitter.setParticleEmitter2dParticleColor(target, index, r, g, b);
 }
 #else
-extern inline function setParticleEmitter2dParticleColor(target:Dynamic, index:Int, r:Float, g:Float, b:Float):Void {
+extern inline function setParticleEmitter2dParticleColor(target:flight.FlightNode, index:Int, r:Float, g:Float, b:Float):Void {
 #if hl
 	flight._hl._fn.Particleemitter.setParticleEmitter2dParticleColor(target, index, r, g, b);
 #elseif cpp
@@ -345,7 +345,7 @@ extern inline function setParticleEmitter2dParticleVelocity(target:Dynamic, inde
 	flight._js._fn.Particleemitter.setParticleEmitter2dParticleVelocity(target, index, vx, vy);
 }
 #else
-extern inline function setParticleEmitter2dParticleVelocity(target:Dynamic, index:Int, vx:Float, vy:Float):Void {
+extern inline function setParticleEmitter2dParticleVelocity(target:flight.FlightNode, index:Int, vx:Float, vy:Float):Void {
 #if hl
 	flight._hl._fn.Particleemitter.setParticleEmitter2dParticleVelocity(target, index, vx, vy);
 #elseif cpp
@@ -362,7 +362,7 @@ extern inline function appendParticleEmitter3dParticle(target:Dynamic, id:Int, x
 	return flight._js._fn.Particleemitter.appendParticleEmitter3dParticle(target, id, x, y, z, rotation, scale);
 }
 #else
-extern inline function appendParticleEmitter3dParticle(target:Dynamic, id:Int, x:Float, y:Float, z:Float, rotation:Float, scale:Float):Int {
+extern inline function appendParticleEmitter3dParticle(target:flight.FlightNode, id:Int, x:Float, y:Float, z:Float, rotation:Float, scale:Float):Int {
 #if hl
 	return flight._hl._fn.Particleemitter.appendParticleEmitter3dParticle(target, id, x, y, z, rotation, scale);
 #elseif cpp
@@ -379,7 +379,7 @@ extern inline function clearParticleEmitter3d(target:Dynamic):Void {
 	flight._js._fn.Particleemitter.clearParticleEmitter3d(target);
 }
 #else
-extern inline function clearParticleEmitter3d(target:Dynamic):Void {
+extern inline function clearParticleEmitter3d(target:flight.FlightNode):Void {
 #if hl
 	flight._hl._fn.Particleemitter.clearParticleEmitter3d(target);
 #elseif cpp
@@ -396,7 +396,7 @@ extern inline function compactParticleEmitter3d(target:Dynamic):Void {
 	flight._js._fn.Particleemitter.compactParticleEmitter3d(target);
 }
 #else
-extern inline function compactParticleEmitter3d(target:Dynamic):Void {
+extern inline function compactParticleEmitter3d(target:flight.FlightNode):Void {
 #if hl
 	flight._hl._fn.Particleemitter.compactParticleEmitter3d(target);
 #elseif cpp
@@ -413,7 +413,7 @@ extern inline function computeParticleEmitter3dLocalBoundsAabb(out:Aabb, source:
 	flight._js._fn.Particleemitter.computeParticleEmitter3dLocalBoundsAabb(out, source);
 }
 #else
-extern inline function computeParticleEmitter3dLocalBoundsAabb(out:Aabb, source:Dynamic):Void {
+extern inline function computeParticleEmitter3dLocalBoundsAabb(out:Aabb, source:flight.FlightNode):Void {
 #if hl
 	flight._hl._fn.Particleemitter.computeParticleEmitter3dLocalBoundsAabb(out, source);
 #elseif cpp
@@ -430,7 +430,7 @@ extern inline function emitParticleBurst3d(emitter:Dynamic, state:ParticleEmitte
 	return flight._js._fn.Particleemitter.emitParticleBurst3d(emitter, state, config, count, x, y, z, tint);
 }
 #else
-extern inline function emitParticleBurst3d(emitter:Dynamic, state:ParticleEmitterState, config:ParticleEmitterConfig, count:Float, x:Float, y:Float, z:Float, tint:haxe.Int64):Int {
+extern inline function emitParticleBurst3d(emitter:flight.FlightNode, state:ParticleEmitterState, config:ParticleEmitterConfig, count:Float, x:Float, y:Float, z:Float, tint:haxe.Int64):Int {
 #if hl
 	return flight._hl._fn.Particleemitter.emitParticleBurst3d(emitter, state, config, count, x, y, z, tint);
 #elseif cpp
@@ -447,7 +447,7 @@ extern inline function getParticleEmitter3dCapacity(source:Dynamic):Int {
 	return flight._js._fn.Particleemitter.getParticleEmitter3dCapacity(source);
 }
 #else
-extern inline function getParticleEmitter3dCapacity(source:Dynamic):Int {
+extern inline function getParticleEmitter3dCapacity(source:flight.FlightNode):Int {
 #if hl
 	return flight._hl._fn.Particleemitter.getParticleEmitter3dCapacity(source);
 #elseif cpp
@@ -464,7 +464,7 @@ extern inline function getParticleEmitter3dParticleAlpha(source:Dynamic, index:I
 	return flight._js._fn.Particleemitter.getParticleEmitter3dParticleAlpha(source, index);
 }
 #else
-extern inline function getParticleEmitter3dParticleAlpha(source:Dynamic, index:Int):Float {
+extern inline function getParticleEmitter3dParticleAlpha(source:flight.FlightNode, index:Int):Single {
 #if hl
 	return flight._hl._fn.Particleemitter.getParticleEmitter3dParticleAlpha(source, index);
 #elseif cpp
@@ -481,7 +481,7 @@ extern inline function getParticleEmitter3dParticleId(source:Dynamic, index:Int)
 	return flight._js._fn.Particleemitter.getParticleEmitter3dParticleId(source, index);
 }
 #else
-extern inline function getParticleEmitter3dParticleId(source:Dynamic, index:Int):Int {
+extern inline function getParticleEmitter3dParticleId(source:flight.FlightNode, index:Int):Int {
 #if hl
 	return flight._hl._fn.Particleemitter.getParticleEmitter3dParticleId(source, index);
 #elseif cpp
@@ -498,7 +498,7 @@ extern inline function getParticleEmitter3dParticleVelocity(out:Dynamic, source:
 	return flight._js._fn.Particleemitter.getParticleEmitter3dParticleVelocity(out, source, index);
 }
 #else
-extern inline function getParticleEmitter3dParticleVelocity(out:Dynamic, source:Dynamic, index:Int):Bool {
+extern inline function getParticleEmitter3dParticleVelocity(out:Dynamic, source:flight.FlightNode, index:Int):Bool {
 #if hl
 	return flight._hl._fn.Particleemitter.getParticleEmitter3dParticleVelocity(out, source, index);
 #elseif cpp
@@ -515,7 +515,7 @@ extern inline function removeParticleEmitter3dParticle(target:Dynamic, index:Int
 	flight._js._fn.Particleemitter.removeParticleEmitter3dParticle(target, index);
 }
 #else
-extern inline function removeParticleEmitter3dParticle(target:Dynamic, index:Int):Void {
+extern inline function removeParticleEmitter3dParticle(target:flight.FlightNode, index:Int):Void {
 #if hl
 	flight._hl._fn.Particleemitter.removeParticleEmitter3dParticle(target, index);
 #elseif cpp
@@ -532,7 +532,7 @@ extern inline function reserveParticleEmitter3d(target:Dynamic, capacity:Int):Vo
 	flight._js._fn.Particleemitter.reserveParticleEmitter3d(target, capacity);
 }
 #else
-extern inline function reserveParticleEmitter3d(target:Dynamic, capacity:Int):Void {
+extern inline function reserveParticleEmitter3d(target:flight.FlightNode, capacity:Int):Void {
 #if hl
 	flight._hl._fn.Particleemitter.reserveParticleEmitter3d(target, capacity);
 #elseif cpp
@@ -549,7 +549,7 @@ extern inline function setParticleEmitter3dParticle(target:Dynamic, index:Int, i
 	flight._js._fn.Particleemitter.setParticleEmitter3dParticle(target, index, id, x, y, z, rotation, scale);
 }
 #else
-extern inline function setParticleEmitter3dParticle(target:Dynamic, index:Int, id:Int, x:Float, y:Float, z:Float, rotation:Float, scale:Float):Void {
+extern inline function setParticleEmitter3dParticle(target:flight.FlightNode, index:Int, id:Int, x:Float, y:Float, z:Float, rotation:Float, scale:Float):Void {
 #if hl
 	flight._hl._fn.Particleemitter.setParticleEmitter3dParticle(target, index, id, x, y, z, rotation, scale);
 #elseif cpp
@@ -566,7 +566,7 @@ extern inline function setParticleEmitter3dParticleAlpha(target:Dynamic, index:I
 	flight._js._fn.Particleemitter.setParticleEmitter3dParticleAlpha(target, index, alpha);
 }
 #else
-extern inline function setParticleEmitter3dParticleAlpha(target:Dynamic, index:Int, alpha:Float):Void {
+extern inline function setParticleEmitter3dParticleAlpha(target:flight.FlightNode, index:Int, alpha:Float):Void {
 #if hl
 	flight._hl._fn.Particleemitter.setParticleEmitter3dParticleAlpha(target, index, alpha);
 #elseif cpp
@@ -583,7 +583,7 @@ extern inline function setParticleEmitter3dParticleColor(target:Dynamic, index:I
 	flight._js._fn.Particleemitter.setParticleEmitter3dParticleColor(target, index, r, g, b);
 }
 #else
-extern inline function setParticleEmitter3dParticleColor(target:Dynamic, index:Int, r:Float, g:Float, b:Float):Void {
+extern inline function setParticleEmitter3dParticleColor(target:flight.FlightNode, index:Int, r:Float, g:Float, b:Float):Void {
 #if hl
 	flight._hl._fn.Particleemitter.setParticleEmitter3dParticleColor(target, index, r, g, b);
 #elseif cpp
@@ -600,7 +600,7 @@ extern inline function setParticleEmitter3dParticleVelocity(target:Dynamic, inde
 	flight._js._fn.Particleemitter.setParticleEmitter3dParticleVelocity(target, index, vx, vy, vz);
 }
 #else
-extern inline function setParticleEmitter3dParticleVelocity(target:Dynamic, index:Int, vx:Float, vy:Float, vz:Float):Void {
+extern inline function setParticleEmitter3dParticleVelocity(target:flight.FlightNode, index:Int, vx:Float, vy:Float, vz:Float):Void {
 #if hl
 	flight._hl._fn.Particleemitter.setParticleEmitter3dParticleVelocity(target, index, vx, vy, vz);
 #elseif cpp
@@ -617,7 +617,7 @@ extern inline function sortParticleEmitter3dIndicesByViewDepth(outIndices:Dynami
 	return flight._js._fn.Particleemitter.sortParticleEmitter3dIndicesByViewDepth(outIndices, outViewDepths, source, positionToView);
 }
 #else
-extern inline function sortParticleEmitter3dIndicesByViewDepth(outIndices:Dynamic, outIndicesLen:Int, outViewDepths:Dynamic, outViewDepthsLen:Int, source:Dynamic, positionToView:Dynamic):Bool {
+extern inline function sortParticleEmitter3dIndicesByViewDepth(outIndices:Dynamic, outIndicesLen:Int, outViewDepths:Dynamic, outViewDepthsLen:Int, source:flight.FlightNode, positionToView:Dynamic):Bool {
 #if hl
 	return flight._hl._fn.Particleemitter.sortParticleEmitter3dIndicesByViewDepth(outIndices, outIndicesLen, outViewDepths, outViewDepthsLen, source, positionToView);
 #elseif cpp
@@ -634,7 +634,7 @@ extern inline function prewarmParticleEmitter2d(emitter:Dynamic, state:ParticleE
 	flight._js._fn.Particleemitter.prewarmParticleEmitter2d(emitter, state, config, duration, stepDeltaTime, callbacks);
 }
 #else
-extern inline function prewarmParticleEmitter2d(emitter:Dynamic, state:ParticleEmitterState, config:ParticleEmitterConfig, duration:Float, stepDeltaTime:Float, callbacks:ParticleEmitterCallbacks):Void {
+extern inline function prewarmParticleEmitter2d(emitter:flight.FlightNode, state:ParticleEmitterState, config:ParticleEmitterConfig, duration:Float, stepDeltaTime:Float, callbacks:ParticleEmitterCallbacks):Void {
 #if hl
 	flight._hl._fn.Particleemitter.prewarmParticleEmitter2d(emitter, state, config, duration, stepDeltaTime, callbacks);
 #elseif cpp
@@ -651,7 +651,7 @@ extern inline function prewarmParticleEmitter3d(emitter:Dynamic, state:ParticleE
 	flight._js._fn.Particleemitter.prewarmParticleEmitter3d(emitter, state, config, duration, stepDeltaTime, callbacks);
 }
 #else
-extern inline function prewarmParticleEmitter3d(emitter:Dynamic, state:ParticleEmitterState, config:ParticleEmitterConfig, duration:Float, stepDeltaTime:Float, callbacks:ParticleEmitterCallbacks):Void {
+extern inline function prewarmParticleEmitter3d(emitter:flight.FlightNode, state:ParticleEmitterState, config:ParticleEmitterConfig, duration:Float, stepDeltaTime:Float, callbacks:ParticleEmitterCallbacks):Void {
 #if hl
 	flight._hl._fn.Particleemitter.prewarmParticleEmitter3d(emitter, state, config, duration, stepDeltaTime, callbacks);
 #elseif cpp
@@ -668,7 +668,7 @@ extern inline function stepParticleEmitter2d(emitter:Dynamic, state:ParticleEmit
 	flight._js._fn.Particleemitter.stepParticleEmitter2d(emitter, state, config, deltaTime, forces, colliders, callbacks);
 }
 #else
-extern inline function stepParticleEmitter2d(emitter:Dynamic, state:ParticleEmitterState, config:ParticleEmitterConfig, deltaTime:Float, forces:Dynamic, forcesLen:Int, colliders:Dynamic, collidersLen:Int, callbacks:ParticleEmitterCallbacks):Void {
+extern inline function stepParticleEmitter2d(emitter:flight.FlightNode, state:ParticleEmitterState, config:ParticleEmitterConfig, deltaTime:Float, forces:Dynamic, forcesLen:Int, colliders:Dynamic, collidersLen:Int, callbacks:ParticleEmitterCallbacks):Void {
 #if hl
 	flight._hl._fn.Particleemitter.stepParticleEmitter2d(emitter, state, config, deltaTime, forces, forcesLen, colliders, collidersLen, callbacks);
 #elseif cpp
@@ -685,7 +685,7 @@ extern inline function stepParticleEmitter3d(emitter:Dynamic, state:ParticleEmit
 	flight._js._fn.Particleemitter.stepParticleEmitter3d(emitter, state, config, deltaTime, forces, colliders, callbacks);
 }
 #else
-extern inline function stepParticleEmitter3d(emitter:Dynamic, state:ParticleEmitterState, config:ParticleEmitterConfig, deltaTime:Float, forces:Dynamic, forcesLen:Int, colliders:Dynamic, collidersLen:Int, callbacks:ParticleEmitterCallbacks):Void {
+extern inline function stepParticleEmitter3d(emitter:flight.FlightNode, state:ParticleEmitterState, config:ParticleEmitterConfig, deltaTime:Float, forces:Dynamic, forcesLen:Int, colliders:Dynamic, collidersLen:Int, callbacks:ParticleEmitterCallbacks):Void {
 #if hl
 	flight._hl._fn.Particleemitter.stepParticleEmitter3d(emitter, state, config, deltaTime, forces, forcesLen, colliders, collidersLen, callbacks);
 #elseif cpp
@@ -702,7 +702,7 @@ extern inline function isParticleEmitter2dComplete(emitter:ParticleEmitter2D, st
 	return flight._js._fn.Particleemitter.isParticleEmitter2dComplete(emitter, state, config);
 }
 #else
-extern inline function isParticleEmitter2dComplete(emitter:ParticleEmitter2D, state:ParticleEmitterState, config:ParticleEmitterConfig):Bool {
+extern inline function isParticleEmitter2dComplete(emitter:flight.FlightNode, state:ParticleEmitterState, config:ParticleEmitterConfig):Bool {
 #if hl
 	return flight._hl._fn.Particleemitter.isParticleEmitter2dComplete(emitter, state, config);
 #elseif cpp
@@ -719,7 +719,7 @@ extern inline function updateParticleEmitter2d(emitter:Dynamic, state:ParticleEm
 	flight._js._fn.Particleemitter.updateParticleEmitter2d(emitter, state, config, deltaTime, callbacks);
 }
 #else
-extern inline function updateParticleEmitter2d(emitter:Dynamic, state:ParticleEmitterState, config:ParticleEmitterConfig, deltaTime:Float, callbacks:ParticleEmitterCallbacks):Void {
+extern inline function updateParticleEmitter2d(emitter:flight.FlightNode, state:ParticleEmitterState, config:ParticleEmitterConfig, deltaTime:Float, callbacks:ParticleEmitterCallbacks):Void {
 #if hl
 	flight._hl._fn.Particleemitter.updateParticleEmitter2d(emitter, state, config, deltaTime, callbacks);
 #elseif cpp
@@ -736,7 +736,7 @@ extern inline function isParticleEmitter3dComplete(emitter:ParticleEmitter3D, st
 	return flight._js._fn.Particleemitter.isParticleEmitter3dComplete(emitter, state, config);
 }
 #else
-extern inline function isParticleEmitter3dComplete(emitter:ParticleEmitter3D, state:ParticleEmitterState, config:ParticleEmitterConfig):Bool {
+extern inline function isParticleEmitter3dComplete(emitter:flight.FlightNode, state:ParticleEmitterState, config:ParticleEmitterConfig):Bool {
 #if hl
 	return flight._hl._fn.Particleemitter.isParticleEmitter3dComplete(emitter, state, config);
 #elseif cpp
@@ -753,7 +753,7 @@ extern inline function updateParticleEmitter3d(emitter:Dynamic, state:ParticleEm
 	flight._js._fn.Particleemitter.updateParticleEmitter3d(emitter, state, config, deltaTime, callbacks);
 }
 #else
-extern inline function updateParticleEmitter3d(emitter:Dynamic, state:ParticleEmitterState, config:ParticleEmitterConfig, deltaTime:Float, callbacks:ParticleEmitterCallbacks):Void {
+extern inline function updateParticleEmitter3d(emitter:flight.FlightNode, state:ParticleEmitterState, config:ParticleEmitterConfig, deltaTime:Float, callbacks:ParticleEmitterCallbacks):Void {
 #if hl
 	flight._hl._fn.Particleemitter.updateParticleEmitter3d(emitter, state, config, deltaTime, callbacks);
 #elseif cpp

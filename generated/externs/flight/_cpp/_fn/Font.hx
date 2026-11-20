@@ -11,4 +11,6 @@ extern class Font {
 	public static function isFontLoaded(backend:flight._cpp.HostFontLoadingCapability, family:cpp.ConstCharStar, style:cpp.ConstCharStar):Bool;
 	@:native("flight_free_font_resource")
 	public static function freeFontResource(ptr:flight._cpp.FontResource):Void;
+	@:native("flight_free_glyph_metrics")
+	public static function freeGlyphMetrics(ptr:flight._cpp.GlyphMetrics):Void;
 }

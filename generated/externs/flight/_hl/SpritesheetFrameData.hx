@@ -1,10 +1,12 @@
 package flight._hl;
 
 private extern class SpritesheetFrameData_Ffi {
+	@:hlNative("flight", "flight_free_string")
+	static function freeString(value:hl.Bytes):Void;
 	@:hlNative("flight", "flight_field_get_spritesheet_frame_data_name")
-	static function get_name(ptr:hl.Bytes):flight._hl.NativeByteBuffer;
+	static function get_name(ptr:hl.Bytes):hl.Bytes;
 	@:hlNative("flight", "flight_field_set_spritesheet_frame_data_name")
-	static function set_name(ptr:hl.Bytes, data:hl.Bytes, length:Int):Void;
+	static function set_name(ptr:hl.Bytes, value:hl.Bytes):Void;
 }
 
 abstract SpritesheetFrameData(hl.Bytes) {
@@ -14,20 +16,8 @@ abstract SpritesheetFrameData(hl.Bytes) {
 
 	inline function set_height(value:Single):Single { this.setF32(16, value); return value; }
 	public var name(get, set):String;
-	inline function get_name():String {
-		final bytes = SpritesheetFrameData_Ffi.get_name(this);
-		try {
-			final value = bytes.toBytes().toString();
-			bytes.dispose();
-			return value;
-		} catch (error:Dynamic) { bytes.dispose(); throw error; }
-	}
-	inline function set_name(value:String):String {
-		final bytes = haxe.io.Bytes.ofString(value);
-		SpritesheetFrameData_Ffi.set_name(this, bytes.getData().bytes, bytes.length);
-		return value;
-	}
-
+	inline function get_name():String { var raw = SpritesheetFrameData_Ffi.get_name(this); if (raw == null) return null; var value:String = @:privateAccess String.fromUTF8(raw); SpritesheetFrameData_Ffi.freeString(raw); return value; }
+	inline function set_name(value:String):String { var raw:hl.Bytes = null; if (value != null) { var bytes = haxe.io.Bytes.ofString(value); raw = new hl.Bytes(bytes.length + 1); raw.blit(0, bytes.getData(), 0, bytes.length); raw.setUI8(bytes.length, 0); } SpritesheetFrameData_Ffi.set_name(this, raw); return value; }
 	public var offsetX(get, set):Single;
 
 	inline function get_offsetX():Single return this.getF32(48);

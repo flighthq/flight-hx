@@ -1,9 +1,9 @@
 package flight._hl;
 
 abstract GltfTextureBasisu(hl.Bytes) {
-	public var source(get, set):Single;
+	public var source(get, set):Float;
 
-	inline function get_source():Single return this.getF32(0);
+	inline function get_source():Float return this.getF64(0);
 
-	inline function set_source(value:Single):Single { this.setF32(0, value); return value; }
+	inline function set_source(value:Float):Float { this.setF64(0, value); return value; }
 }

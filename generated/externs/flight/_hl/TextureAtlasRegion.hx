@@ -39,33 +39,41 @@ abstract TextureAtlasRegion(hl.Bytes) {
 	public var height(get, set):Single;
 
 	inline function get_height():Single return TextureAtlasRegion_Ffi.get_height(this);
+
 	inline function set_height(value:Single):Single { TextureAtlasRegion_Ffi.set_height(this, value); return value; }
 	public var id(get, set):Int;
 
 	inline function get_id():Int return TextureAtlasRegion_Ffi.get_id(this);
+
 	inline function set_id(value:Int):Int { TextureAtlasRegion_Ffi.set_id(this, value); return value; }
 	public var sourceX(get, set):Single;
 
 	inline function get_sourceX():Single return TextureAtlasRegion_Ffi.get_sourceX(this);
+
 	inline function set_sourceX(value:Single):Single { TextureAtlasRegion_Ffi.set_sourceX(this, value); return value; }
 	public var sourceY(get, set):Single;
 
 	inline function get_sourceY():Single return TextureAtlasRegion_Ffi.get_sourceY(this);
+
 	inline function set_sourceY(value:Single):Single { TextureAtlasRegion_Ffi.set_sourceY(this, value); return value; }
 	public var trimmed(get, set):Bool;
 
 	inline function get_trimmed():Bool return TextureAtlasRegion_Ffi.get_trimmed(this);
+
 	inline function set_trimmed(value:Bool):Bool { TextureAtlasRegion_Ffi.set_trimmed(this, value); return value; }
 	public var x(get, set):Single;
 
 	inline function get_x():Single return TextureAtlasRegion_Ffi.get_x(this);
+
 	inline function set_x(value:Single):Single { TextureAtlasRegion_Ffi.set_x(this, value); return value; }
 	public var y(get, set):Single;
 
 	inline function get_y():Single return TextureAtlasRegion_Ffi.get_y(this);
+
 	inline function set_y(value:Single):Single { TextureAtlasRegion_Ffi.set_y(this, value); return value; }
 	public var width(get, set):Single;
 
 	inline function get_width():Single return TextureAtlasRegion_Ffi.get_width(this);
+
 	inline function set_width(value:Single):Single { TextureAtlasRegion_Ffi.set_width(this, value); return value; }
 }

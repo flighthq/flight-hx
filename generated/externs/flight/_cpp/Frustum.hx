@@ -1,7 +1,7 @@
 package flight._cpp;
 
 abstract Frustum(cpp.Star<cpp.Void>) {
-	extern inline public function getCamera3d(camera:flight._cpp.Camera3D, aspect:Single):Void {
+	extern inline public function getCamera3d(camera:flight._cpp.Camera3D, aspect:Float):Void {
 		flight._cpp._fn.Camera.getCamera3dFrustum(cast this, camera, aspect);
 	}
 	static extern inline public function create():flight._cpp.Frustum {

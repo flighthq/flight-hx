@@ -671,13 +671,13 @@ extern inline function randomGaussianPair(random:Dynamic, mean:Null<Float>, stan
 #else
 extern inline function randomGaussianPair(randomFn:Dynamic, randomCtx:Dynamic, mean:Float, standardDeviation:Float):{ _0:Float, _1:Float } {
 #if hl
-	var out0:Single = 0;
-	var out1:Single = 0;
+	var out0:Float = 0;
+	var out1:Float = 0;
 	flight._hl._fn.Math.randomGaussianPair(randomFn, randomCtx, mean, standardDeviation, hl.Ref.make(out0), hl.Ref.make(out1));
 	return { _0: out0, _1: out1 };
 #elseif cpp
-	var out0:cpp.Float32 = 0;
-	var out1:cpp.Float32 = 0;
+	var out0:cpp.Float64 = 0;
+	var out1:cpp.Float64 = 0;
 	flight._cpp._fn.Math.randomGaussianPair(randomFn, randomCtx, mean, standardDeviation, cpp.RawPointer.addressOf(out0), cpp.RawPointer.addressOf(out1));
 	return { _0: out0, _1: out1 };
 #elseif (js && flight_esm)

@@ -27,6 +27,9 @@ function fixture(t) {
     writeFileSync(path.join(flightRoot, 'crates', crate, 'Cargo.toml'), `[package]\nname = "${crate}"\n`);
   }
   writeFileSync(path.join(out, 'ffi_generated.rs'), 'pub fn flight_z() {}\npub fn flight_a() {}\nfn flight_z() {}\n');
+  writeFileSync(path.join(out, 'flight_ffi.h'), 'void flight_a(void);\nvoid flight_z(void);\n');
+  writeFileSync(path.join(out, 'flight_hl.c'), '/* fixture shim */\n');
+  const offsetsExecutable = path.join(flightRoot, 'target/debug/flight-offsets');
   const calls = [];
   let fail = false;
   let dirty = false;
@@ -37,15 +40,18 @@ function fixture(t) {
     assert.equal(cwd, flightRoot);
     if (command === 'git') return args[0] === 'rev-parse' ? `${'a'.repeat(40)}\n` : dirty ? ' M Cargo.toml\n' : '';
     if (command === 'rustc') return 'rustc fixture\n';
+    if (command === offsetsExecutable) return invalidOffsets ? 'not JSON' : '{"Vector2":{"x":0,"y":8}}\n';
     assert.equal(command, 'cargo');
     if (args[0] === '--version') return 'cargo fixture\n';
     assert.ok(args.includes('--locked'));
     assert.ok(args.includes('--offline'));
-    if (args[0] === 'build') return noBuildMessage ? '' : `${JSON.stringify({ reason: 'build-script-executed', out_dir: out })}\n`;
-    if (args.includes('flight-offsets')) return invalidOffsets ? 'not JSON' : '{"Vector2":{"x":0,"y":8}}\n';
+    if (args[0] === 'build') return noBuildMessage ? '' : [
+      { reason: 'build-script-executed', out_dir: out },
+      { reason: 'compiler-artifact', target: { name: 'flight-offsets' }, executable: offsetsExecutable },
+    ].map((message) => JSON.stringify(message)).join('\n');
     assert.deepEqual(args.slice(0, 8), ['run', '-p', 'flight-bindgen', '--locked', '--offline', '--', '--target', 'haxe']);
     const readArgument = (flag) => args[args.indexOf(flag) + 1];
-    assert.equal(readFileSync(readArgument('--ffi-names'), 'utf8'), 'flight_a\nflight_z\n');
+    assert.equal(readArgument('--ffi-dir'), out);
     assert.deepEqual(JSON.parse(readFileSync(readArgument('--offsets'), 'utf8')), { Vector2: { x: 0, y: 8 } });
     const target = path.join(readArgument('--out'), 'flight');
     mkdirSync(target, { recursive: true });
@@ -109,6 +115,8 @@ test('rejects empty symbols and invalid offsets before invoking bindgen', (t) =>
 
 test('check fails when no copied tree exists', (t) => {
   const state = fixture(t);
+  generate(state.options);
+  rmSync(state.output, { recursive: true });
   assert.throws(() => generate({ ...state.options, check: true }), /missing: flight\/Vector2.hx/u);
 });
 

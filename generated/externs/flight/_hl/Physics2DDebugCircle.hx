@@ -11,19 +11,19 @@ abstract Physics2DDebugCircle(hl.Bytes) {
 	inline function get_bodyB():Int return this.getI32(4);
 
 	inline function set_bodyB(value:Int):Int { this.setI32(4, value); return value; }
-	public var radius(get, set):Single;
+	public var radius(get, set):Float;
 
-	inline function get_radius():Single return this.getF32(12);
+	inline function get_radius():Float return this.getF64(16);
 
-	inline function set_radius(value:Single):Single { this.setF32(12, value); return value; }
-	public var x(get, set):Single;
+	inline function set_radius(value:Float):Float { this.setF64(16, value); return value; }
+	public var x(get, set):Float;
 
-	inline function get_x():Single return this.getF32(16);
+	inline function get_x():Float return this.getF64(24);
 
-	inline function set_x(value:Single):Single { this.setF32(16, value); return value; }
-	public var y(get, set):Single;
+	inline function set_x(value:Float):Float { this.setF64(24, value); return value; }
+	public var y(get, set):Float;
 
-	inline function get_y():Single return this.getF32(20);
+	inline function get_y():Float return this.getF64(32);
 
-	inline function set_y(value:Single):Single { this.setF32(20, value); return value; }
+	inline function set_y(value:Float):Float { this.setF64(32, value); return value; }
 }

@@ -1,10 +1,9 @@
 package flight._cpp;
 
 private extern class TexturePackerAtlasArrayFrame_Ffi {
-	@:native("flight_field_get_texture_packer_atlas_array_frame_filename")
-	static function get_filename(ptr:cpp.Star<cpp.Void>):flight._cpp.NativeByteBuffer;
-	@:native("flight_field_set_texture_packer_atlas_array_frame_filename")
-	static function set_filename(ptr:cpp.Star<cpp.Void>, data:cpp.Star<cpp.Void>, length:Int):Void;
+	@:native("flight_free_string") static function freeString(value:cpp.RawPointer<cpp.Char>):Void;
+	@:native("flight_field_get_texture_packer_atlas_array_frame_filename") static function get_filename(ptr:cpp.Star<cpp.Void>):cpp.RawPointer<cpp.Char>;
+	@:native("flight_field_set_texture_packer_atlas_array_frame_filename") static function set_filename(ptr:cpp.Star<cpp.Void>, value:cpp.ConstCharStar):Void;
 	@:native("flight_get_texture_packer_atlas_array_frame_rotated") static function get_rotated(ptr:cpp.Star<cpp.Void>):Bool;
 	@:native("flight_set_texture_packer_atlas_array_frame_rotated") static function set_rotated(ptr:cpp.Star<cpp.Void>, value:Bool):Bool;
 	@:native("flight_get_texture_packer_atlas_array_frame_trimmed") static function get_trimmed(ptr:cpp.Star<cpp.Void>):Bool;
@@ -13,20 +12,8 @@ private extern class TexturePackerAtlasArrayFrame_Ffi {
 
 abstract TexturePackerAtlasArrayFrame(cpp.Star<cpp.Void>) {
 	public var filename(get, set):String;
-	inline function get_filename():String {
-		final bytes = TexturePackerAtlasArrayFrame_Ffi.get_filename(this);
-		try {
-			final value = bytes.toBytes().toString();
-			bytes.dispose();
-			return value;
-		} catch (error:Dynamic) { bytes.dispose(); throw error; }
-	}
-	inline function set_filename(value:String):String {
-		final bytes = haxe.io.Bytes.ofString(value);
-		TexturePackerAtlasArrayFrame_Ffi.set_filename(this, cast cpp.Pointer.ofArray(bytes.getData()).raw, bytes.length);
-		return value;
-	}
-
+	inline function get_filename():String { var raw = TexturePackerAtlasArrayFrame_Ffi.get_filename(this); if (raw == null) return null; var value:String = (cast raw : cpp.ConstCharStar); TexturePackerAtlasArrayFrame_Ffi.freeString(raw); return value; }
+	inline function set_filename(value:String):String { var raw:cpp.ConstCharStar = cast value; TexturePackerAtlasArrayFrame_Ffi.set_filename(this, raw); return value; }
 	public var rotated(get, set):Bool;
 
 	inline function get_rotated():Bool return TexturePackerAtlasArrayFrame_Ffi.get_rotated(this);

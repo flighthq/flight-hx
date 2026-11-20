@@ -62,11 +62,11 @@ extern class Texture {
 	@:native("flight_set_texture_flip__texture")
 	public static function setTextureFlipTexture(texture:flight._cpp.Texture, flipX:Bool, flipY:Bool):Void;
 	@:native("flight_set_texture_uv_from_pixel_rect__texture")
-	public static function setTextureUvFromPixelRectTexture(texture:flight._cpp.Texture, x:Single, y:Single, width:Single, height:Single):Void;
+	public static function setTextureUvFromPixelRectTexture(texture:flight._cpp.Texture, x:Float, y:Float, width:Float, height:Float):Void;
 	@:native("flight_set_texture_uv_offset__texture")
 	public static function setTextureUvOffsetTexture(texture:flight._cpp.Texture, x:Single, y:Single):Void;
 	@:native("flight_set_texture_uv_rotation__texture")
-	public static function setTextureUvRotationTexture(texture:flight._cpp.Texture, radians:Single):Void;
+	public static function setTextureUvRotationTexture(texture:flight._cpp.Texture, radians:Float):Void;
 	@:native("flight_set_texture_uv_scale__texture")
 	public static function setTextureUvScaleTexture(texture:flight._cpp.Texture, x:Single, y:Single):Void;
 	@:native("flight_transform_texture_uv__texture")
@@ -88,7 +88,7 @@ extern class Texture {
 	@:native("flight_free_texture2_d")
 	public static function freeTexture2D(ptr:flight._cpp.Texture2D):Void;
 	@:native("flight_free_texture_source_ref")
-	public static function freeTextureSourceRef(ptr:flight._cpp.TextureSourceRef):Void;
+	public static function freeTextureSourceRef(ptr:flight._cpp.TextureSource):Void;
 	@:native("flight_free_texture_source_kind")
 	public static function freeTextureSourceKind(ptr:flight._cpp.TextureSourceKind):Void;
 }

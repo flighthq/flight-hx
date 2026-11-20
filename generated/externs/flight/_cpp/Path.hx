@@ -172,6 +172,9 @@ abstract Path(cpp.Star<cpp.Void>) {
 	extern inline public function formatSvgData(options:flight._cpp.SvgPathDataFormatOptions):cpp.ConstCharStar {
 		return flight._cpp._fn.PathFormats.formatSvgPathData(cast this, options);
 	}
+	extern inline public function freeRef():Void {
+		flight._cpp._fn.Scene2dFormats.freePathRef(cast this);
+	}
 	extern inline public function compactStroke(path:flight._cpp.Path, style:flight._cpp.StrokeStyle, tolerance:Float):Void {
 		flight._cpp._fn.Shape.compactStrokePath(cast this, path, style, tolerance);
 	}

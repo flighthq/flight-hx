@@ -2,11 +2,11 @@ package flight._js;
 
 abstract Vector2(Dynamic) {
 	public var x(get, set):Float;
-	inline function get_x():Float return untyped this["x"];
-	inline function set_x(value:Float):Float return untyped this["x"] = value;
+	inline function get_x():Float return untyped this.x;
+	inline function set_x(value:Float):Float return untyped this.x = value;
 	public var y(get, set):Float;
-	inline function get_y():Float return untyped this["y"];
-	inline function set_y(value:Float):Float return untyped this["y"] = value;
+	inline function get_y():Float return untyped this.y;
+	inline function set_y(value:Float):Float return untyped this.y = value;
 	inline public function matrixTransformBounds(out:flight._js.Rectangle, matrix:flight._js.Matrix, b:flight._js.Vector2):Void {
 		flight._js._fn.Geometry.matrixTransformBoundsVector2(out, matrix, cast this, b);
 	}

@@ -7,10 +7,10 @@ private extern class AnimationPlayer_Ffi {
 	@:native("flight_set_animation_player_playing") static function set_playing(ptr:cpp.Star<cpp.Void>, value:Bool):Bool;
 	@:native("flight_get_animation_player_repeat_count") static function get_repeatCount(ptr:cpp.Star<cpp.Void>):Int;
 	@:native("flight_set_animation_player_repeat_count") static function set_repeatCount(ptr:cpp.Star<cpp.Void>, value:Int):Int;
-	@:native("flight_get_animation_player_speed") static function get_speed(ptr:cpp.Star<cpp.Void>):Single;
-	@:native("flight_set_animation_player_speed") static function set_speed(ptr:cpp.Star<cpp.Void>, value:Single):Single;
-	@:native("flight_get_animation_player_time") static function get_time(ptr:cpp.Star<cpp.Void>):Single;
-	@:native("flight_set_animation_player_time") static function set_time(ptr:cpp.Star<cpp.Void>, value:Single):Single;
+	@:native("flight_get_animation_player_speed") static function get_speed(ptr:cpp.Star<cpp.Void>):Float;
+	@:native("flight_set_animation_player_speed") static function set_speed(ptr:cpp.Star<cpp.Void>, value:Float):Float;
+	@:native("flight_get_animation_player_time") static function get_time(ptr:cpp.Star<cpp.Void>):Float;
+	@:native("flight_set_animation_player_time") static function set_time(ptr:cpp.Star<cpp.Void>, value:Float):Float;
 }
 
 abstract AnimationPlayer(cpp.Star<cpp.Void>) {
@@ -29,14 +29,14 @@ abstract AnimationPlayer(cpp.Star<cpp.Void>) {
 	inline function get_repeatCount():Int return AnimationPlayer_Ffi.get_repeatCount(this);
 
 	inline function set_repeatCount(value:Int):Int { AnimationPlayer_Ffi.set_repeatCount(this, value); return value; }
-	public var speed(get, set):Single;
+	public var speed(get, set):Float;
 
-	inline function get_speed():Single return AnimationPlayer_Ffi.get_speed(this);
+	inline function get_speed():Float return AnimationPlayer_Ffi.get_speed(this);
 
-	inline function set_speed(value:Single):Single { AnimationPlayer_Ffi.set_speed(this, value); return value; }
-	public var time(get, set):Single;
+	inline function set_speed(value:Float):Float { AnimationPlayer_Ffi.set_speed(this, value); return value; }
+	public var time(get, set):Float;
 
-	inline function get_time():Single return AnimationPlayer_Ffi.get_time(this);
+	inline function get_time():Float return AnimationPlayer_Ffi.get_time(this);
 
-	inline function set_time(value:Single):Single { AnimationPlayer_Ffi.set_time(this, value); return value; }
+	inline function set_time(value:Float):Float { AnimationPlayer_Ffi.set_time(this, value); return value; }
 }

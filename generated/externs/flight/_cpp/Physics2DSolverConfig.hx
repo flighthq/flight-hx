@@ -9,20 +9,20 @@ private extern class Physics2DSolverConfig_Ffi {
 	@:native("flight_set_physics2_dsolver_config_max_ccd_rotation_substeps") static function set_maxCcdRotationSubsteps(ptr:cpp.Star<cpp.Void>, value:Int):Int;
 	@:native("flight_get_physics2_dsolver_config_max_ccd_substeps") static function get_maxCcdSubsteps(ptr:cpp.Star<cpp.Void>):Int;
 	@:native("flight_set_physics2_dsolver_config_max_ccd_substeps") static function set_maxCcdSubsteps(ptr:cpp.Star<cpp.Void>, value:Int):Int;
-	@:native("flight_get_physics2_dsolver_config_penetration_slop") static function get_penetrationSlop(ptr:cpp.Star<cpp.Void>):Single;
-	@:native("flight_set_physics2_dsolver_config_penetration_slop") static function set_penetrationSlop(ptr:cpp.Star<cpp.Void>, value:Single):Single;
-	@:native("flight_get_physics2_dsolver_config_position_correction") static function get_positionCorrection(ptr:cpp.Star<cpp.Void>):Single;
-	@:native("flight_set_physics2_dsolver_config_position_correction") static function set_positionCorrection(ptr:cpp.Star<cpp.Void>, value:Single):Single;
+	@:native("flight_get_physics2_dsolver_config_penetration_slop") static function get_penetrationSlop(ptr:cpp.Star<cpp.Void>):Float;
+	@:native("flight_set_physics2_dsolver_config_penetration_slop") static function set_penetrationSlop(ptr:cpp.Star<cpp.Void>, value:Float):Float;
+	@:native("flight_get_physics2_dsolver_config_position_correction") static function get_positionCorrection(ptr:cpp.Star<cpp.Void>):Float;
+	@:native("flight_set_physics2_dsolver_config_position_correction") static function set_positionCorrection(ptr:cpp.Star<cpp.Void>, value:Float):Float;
 	@:native("flight_get_physics2_dsolver_config_position_iterations") static function get_positionIterations(ptr:cpp.Star<cpp.Void>):Int;
 	@:native("flight_set_physics2_dsolver_config_position_iterations") static function set_positionIterations(ptr:cpp.Star<cpp.Void>, value:Int):Int;
-	@:native("flight_get_physics2_dsolver_config_restitution_threshold") static function get_restitutionThreshold(ptr:cpp.Star<cpp.Void>):Single;
-	@:native("flight_set_physics2_dsolver_config_restitution_threshold") static function set_restitutionThreshold(ptr:cpp.Star<cpp.Void>, value:Single):Single;
-	@:native("flight_get_physics2_dsolver_config_sleep_angular_threshold") static function get_sleepAngularThreshold(ptr:cpp.Star<cpp.Void>):Single;
-	@:native("flight_set_physics2_dsolver_config_sleep_angular_threshold") static function set_sleepAngularThreshold(ptr:cpp.Star<cpp.Void>, value:Single):Single;
-	@:native("flight_get_physics2_dsolver_config_sleep_linear_threshold") static function get_sleepLinearThreshold(ptr:cpp.Star<cpp.Void>):Single;
-	@:native("flight_set_physics2_dsolver_config_sleep_linear_threshold") static function set_sleepLinearThreshold(ptr:cpp.Star<cpp.Void>, value:Single):Single;
-	@:native("flight_get_physics2_dsolver_config_time_to_sleep") static function get_timeToSleep(ptr:cpp.Star<cpp.Void>):Single;
-	@:native("flight_set_physics2_dsolver_config_time_to_sleep") static function set_timeToSleep(ptr:cpp.Star<cpp.Void>, value:Single):Single;
+	@:native("flight_get_physics2_dsolver_config_restitution_threshold") static function get_restitutionThreshold(ptr:cpp.Star<cpp.Void>):Float;
+	@:native("flight_set_physics2_dsolver_config_restitution_threshold") static function set_restitutionThreshold(ptr:cpp.Star<cpp.Void>, value:Float):Float;
+	@:native("flight_get_physics2_dsolver_config_sleep_angular_threshold") static function get_sleepAngularThreshold(ptr:cpp.Star<cpp.Void>):Float;
+	@:native("flight_set_physics2_dsolver_config_sleep_angular_threshold") static function set_sleepAngularThreshold(ptr:cpp.Star<cpp.Void>, value:Float):Float;
+	@:native("flight_get_physics2_dsolver_config_sleep_linear_threshold") static function get_sleepLinearThreshold(ptr:cpp.Star<cpp.Void>):Float;
+	@:native("flight_set_physics2_dsolver_config_sleep_linear_threshold") static function set_sleepLinearThreshold(ptr:cpp.Star<cpp.Void>, value:Float):Float;
+	@:native("flight_get_physics2_dsolver_config_time_to_sleep") static function get_timeToSleep(ptr:cpp.Star<cpp.Void>):Float;
+	@:native("flight_set_physics2_dsolver_config_time_to_sleep") static function set_timeToSleep(ptr:cpp.Star<cpp.Void>, value:Float):Float;
 	@:native("flight_get_physics2_dsolver_config_velocity_iterations") static function get_velocityIterations(ptr:cpp.Star<cpp.Void>):Int;
 	@:native("flight_set_physics2_dsolver_config_velocity_iterations") static function set_velocityIterations(ptr:cpp.Star<cpp.Void>, value:Int):Int;
 	@:native("flight_get_physics2_dsolver_config_warm_starting") static function get_warmStarting(ptr:cpp.Star<cpp.Void>):Bool;
@@ -50,41 +50,41 @@ abstract Physics2DSolverConfig(cpp.Star<cpp.Void>) {
 	inline function get_maxCcdSubsteps():Int return Physics2DSolverConfig_Ffi.get_maxCcdSubsteps(this);
 
 	inline function set_maxCcdSubsteps(value:Int):Int { Physics2DSolverConfig_Ffi.set_maxCcdSubsteps(this, value); return value; }
-	public var penetrationSlop(get, set):Single;
+	public var penetrationSlop(get, set):Float;
 
-	inline function get_penetrationSlop():Single return Physics2DSolverConfig_Ffi.get_penetrationSlop(this);
+	inline function get_penetrationSlop():Float return Physics2DSolverConfig_Ffi.get_penetrationSlop(this);
 
-	inline function set_penetrationSlop(value:Single):Single { Physics2DSolverConfig_Ffi.set_penetrationSlop(this, value); return value; }
-	public var positionCorrection(get, set):Single;
+	inline function set_penetrationSlop(value:Float):Float { Physics2DSolverConfig_Ffi.set_penetrationSlop(this, value); return value; }
+	public var positionCorrection(get, set):Float;
 
-	inline function get_positionCorrection():Single return Physics2DSolverConfig_Ffi.get_positionCorrection(this);
+	inline function get_positionCorrection():Float return Physics2DSolverConfig_Ffi.get_positionCorrection(this);
 
-	inline function set_positionCorrection(value:Single):Single { Physics2DSolverConfig_Ffi.set_positionCorrection(this, value); return value; }
+	inline function set_positionCorrection(value:Float):Float { Physics2DSolverConfig_Ffi.set_positionCorrection(this, value); return value; }
 	public var positionIterations(get, set):Int;
 
 	inline function get_positionIterations():Int return Physics2DSolverConfig_Ffi.get_positionIterations(this);
 
 	inline function set_positionIterations(value:Int):Int { Physics2DSolverConfig_Ffi.set_positionIterations(this, value); return value; }
-	public var restitutionThreshold(get, set):Single;
+	public var restitutionThreshold(get, set):Float;
 
-	inline function get_restitutionThreshold():Single return Physics2DSolverConfig_Ffi.get_restitutionThreshold(this);
+	inline function get_restitutionThreshold():Float return Physics2DSolverConfig_Ffi.get_restitutionThreshold(this);
 
-	inline function set_restitutionThreshold(value:Single):Single { Physics2DSolverConfig_Ffi.set_restitutionThreshold(this, value); return value; }
-	public var sleepAngularThreshold(get, set):Single;
+	inline function set_restitutionThreshold(value:Float):Float { Physics2DSolverConfig_Ffi.set_restitutionThreshold(this, value); return value; }
+	public var sleepAngularThreshold(get, set):Float;
 
-	inline function get_sleepAngularThreshold():Single return Physics2DSolverConfig_Ffi.get_sleepAngularThreshold(this);
+	inline function get_sleepAngularThreshold():Float return Physics2DSolverConfig_Ffi.get_sleepAngularThreshold(this);
 
-	inline function set_sleepAngularThreshold(value:Single):Single { Physics2DSolverConfig_Ffi.set_sleepAngularThreshold(this, value); return value; }
-	public var sleepLinearThreshold(get, set):Single;
+	inline function set_sleepAngularThreshold(value:Float):Float { Physics2DSolverConfig_Ffi.set_sleepAngularThreshold(this, value); return value; }
+	public var sleepLinearThreshold(get, set):Float;
 
-	inline function get_sleepLinearThreshold():Single return Physics2DSolverConfig_Ffi.get_sleepLinearThreshold(this);
+	inline function get_sleepLinearThreshold():Float return Physics2DSolverConfig_Ffi.get_sleepLinearThreshold(this);
 
-	inline function set_sleepLinearThreshold(value:Single):Single { Physics2DSolverConfig_Ffi.set_sleepLinearThreshold(this, value); return value; }
-	public var timeToSleep(get, set):Single;
+	inline function set_sleepLinearThreshold(value:Float):Float { Physics2DSolverConfig_Ffi.set_sleepLinearThreshold(this, value); return value; }
+	public var timeToSleep(get, set):Float;
 
-	inline function get_timeToSleep():Single return Physics2DSolverConfig_Ffi.get_timeToSleep(this);
+	inline function get_timeToSleep():Float return Physics2DSolverConfig_Ffi.get_timeToSleep(this);
 
-	inline function set_timeToSleep(value:Single):Single { Physics2DSolverConfig_Ffi.set_timeToSleep(this, value); return value; }
+	inline function set_timeToSleep(value:Float):Float { Physics2DSolverConfig_Ffi.set_timeToSleep(this, value); return value; }
 	public var velocityIterations(get, set):Int;
 
 	inline function get_velocityIterations():Int return Physics2DSolverConfig_Ffi.get_velocityIterations(this);

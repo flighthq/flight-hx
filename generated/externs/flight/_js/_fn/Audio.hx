@@ -47,9 +47,15 @@ extern class Audio {
 	@:native("resetFailedAudioResourceReference")
 	public static function resetFailedAudioResourceReference(reference:flight._js.AudioResourceReference):Bool;
 	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeAudioBufferRef(ptr:flight._js.AudioBuffer):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeAudioResourceRef(ptr:flight._js.AudioResource):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeAudioResourceFailureRef(ptr:flight._js.AudioResourceFailure):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeExternalAudioResourceReferenceRef(ptr:flight._js.ExternalAudioResourceReference):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeAudioResourceReferenceResolutionExplanation(ptr:flight._js.AudioResourceReferenceResolutionExplanation):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeAudioResourceReference(ptr:flight._js.AudioResourceReference):Void {}
-	/** Native allocation release is unnecessary on JavaScript. */
-	public static inline function freeString(ptr:Dynamic):Void {}
 }

@@ -18,8 +18,8 @@ extern inline function inferFontFormatFromUrl(url:String):String {
 }
 #end
 #if (js && flight_esm)
-extern inline function createFontResource():FontResource {
-	return flight._js._fn.Font.createFontResource();
+extern inline function createFontResource(family:String):FontResource {
+	return flight._js._fn.Font.createFontResource(family);
 }
 #else
 extern inline function createFontResource():FontResource {
@@ -80,6 +80,23 @@ extern inline function freeFontResource(ptr:FontResource):Void {
 	flight._cpp._fn.Font.freeFontResource(ptr);
 #elseif (js && flight_esm)
 	flight._js._fn.Font.freeFontResource(ptr);
+#else
+	#error "flight.Font: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeGlyphMetrics(ptr:GlyphMetrics):Void {
+	flight._js._fn.Font.freeGlyphMetrics(ptr);
+}
+#else
+extern inline function freeGlyphMetrics(ptr:GlyphMetrics):Void {
+#if hl
+	flight._hl._fn.Font.freeGlyphMetrics(ptr);
+#elseif cpp
+	flight._cpp._fn.Font.freeGlyphMetrics(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Font.freeGlyphMetrics(ptr);
 #else
 	#error "flight.Font: no backend for this target."
 #end

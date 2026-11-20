@@ -4,13 +4,13 @@ extern class Picking {
 	@:native("flight_create_scene3d_hit")
 	public static function createScene3dHit():flight._cpp.Scene3DHit;
 	@:native("flight_pick_scene3d")
-	public static function pickScene3d(out:flight._cpp.Scene3DHit, scene:cpp.Star<cpp.Void>, camera:flight._cpp.Camera3D, screenX:Single, screenY:Single, options:flight._cpp.Scene3DPickOptions):Bool;
+	public static function pickScene3d(out:flight._cpp.Scene3DHit, scene:flight._cpp.FlightNode, camera:flight._cpp.Camera3D, screenX:Float, screenY:Float, options:flight._cpp.Scene3DPickOptions):Bool;
 	@:native("flight_pick_scene3d_all")
-	public static function pickScene3dAll(outArray:cpp.Star<cpp.Void>, scene:cpp.Star<cpp.Void>, camera:flight._cpp.Camera3D, screenX:Single, screenY:Single, options:flight._cpp.Scene3DPickOptions):Void;
+	public static function pickScene3dAll(outArray:cpp.Star<cpp.Void>, scene:flight._cpp.FlightNode, camera:flight._cpp.Camera3D, screenX:Float, screenY:Float, options:flight._cpp.Scene3DPickOptions):Void;
 	@:native("flight_pick_scene3d_all_with_ray3d")
-	public static function pickScene3dAllWithRay3d(outArray:cpp.Star<cpp.Void>, scene:cpp.Star<cpp.Void>, ray:flight._cpp.Ray3D, options:flight._cpp.Scene3DPickOptions):Void;
+	public static function pickScene3dAllWithRay3d(outArray:cpp.Star<cpp.Void>, scene:flight._cpp.FlightNode, ray:flight._cpp.Ray3D, options:flight._cpp.Scene3DPickOptions):Void;
 	@:native("flight_pick_scene3d_with_ray3d")
-	public static function pickScene3dWithRay3d(out:flight._cpp.Scene3DHit, scene:cpp.Star<cpp.Void>, ray:flight._cpp.Ray3D, options:flight._cpp.Scene3DPickOptions):Bool;
+	public static function pickScene3dWithRay3d(out:flight._cpp.Scene3DHit, scene:flight._cpp.FlightNode, ray:flight._cpp.Ray3D, options:flight._cpp.Scene3DPickOptions):Bool;
 	@:native("flight_get_scene3d_hit_material")
 	public static function getScene3dHitMaterial(hit:flight._cpp.Scene3DHit):cpp.Star<cpp.Void>;
 	@:native("flight_get_scene3d_hit_subset_index")

@@ -2,7 +2,7 @@ package flight._cpp._fn;
 
 extern class Geometry {
 	@:native("flight_create_aabb")
-	public static function createAabb(minX:Single, minY:Single, minZ:Single, maxX:Single, maxY:Single, maxZ:Single):flight._cpp.Aabb;
+	public static function createAabb(minX:Float, minY:Float, minZ:Float, maxX:Float, maxY:Float, maxZ:Float):flight._cpp.Aabb;
 	@:native("flight_clone_aabb")
 	public static function cloneAabb(source:flight._cpp.Aabb):flight._cpp.Aabb;
 	@:native("flight_contains_aabb_point")
@@ -28,7 +28,7 @@ extern class Geometry {
 	@:native("flight_is_aabb_intersecting_sphere")
 	public static function isAabbIntersectingSphere(aabb:flight._cpp.Aabb, sphere:flight._cpp.BoundingSphere):Bool;
 	@:native("flight_set_aabb")
-	public static function setAabb(out:flight._cpp.Aabb, minX:Single, minY:Single, minZ:Single, maxX:Single, maxY:Single, maxZ:Single):Void;
+	public static function setAabb(out:flight._cpp.Aabb, minX:Float, minY:Float, minZ:Float, maxX:Float, maxY:Float, maxZ:Float):Void;
 	@:native("flight_set_aabb_from_points")
 	public static function setAabbFromPoints(out:flight._cpp.Aabb, points:cpp.Star<cpp.Void>, pointsLen:Int):Void;
 	@:native("flight_transform_aabb_by_matrix4")
@@ -36,7 +36,7 @@ extern class Geometry {
 	@:native("flight_union_aabb")
 	public static function unionAabb(out:flight._cpp.Aabb, a:flight._cpp.Aabb, b:flight._cpp.Aabb):Void;
 	@:native("flight_create_bounding_sphere")
-	public static function createBoundingSphere(centerX:Single, centerY:Single, centerZ:Single, radius:Single):flight._cpp.BoundingSphere;
+	public static function createBoundingSphere(centerX:Float, centerY:Float, centerZ:Float, radius:Float):flight._cpp.BoundingSphere;
 	@:native("flight_clone_bounding_sphere")
 	public static function cloneBoundingSphere(source:flight._cpp.BoundingSphere):flight._cpp.BoundingSphere;
 	@:native("flight_contains_bounding_sphere_point")
@@ -50,17 +50,17 @@ extern class Geometry {
 	@:native("flight_merge_bounding_sphere")
 	public static function mergeBoundingSphere(out:flight._cpp.BoundingSphere, a:flight._cpp.BoundingSphere, b:flight._cpp.BoundingSphere):Void;
 	@:native("flight_set_bounding_sphere")
-	public static function setBoundingSphere(out:flight._cpp.BoundingSphere, centerX:Single, centerY:Single, centerZ:Single, radius:Single):Void;
+	public static function setBoundingSphere(out:flight._cpp.BoundingSphere, centerX:Float, centerY:Float, centerZ:Float, radius:Float):Void;
 	@:native("flight_set_bounding_sphere_from_aabb")
 	public static function setBoundingSphereFromAabb(out:flight._cpp.BoundingSphere, aabb:flight._cpp.Aabb):Void;
 	@:native("flight_transform_bounding_sphere_by_matrix4")
 	public static function transformBoundingSphereByMatrix4(out:flight._cpp.BoundingSphere, sphere:flight._cpp.BoundingSphere, m:flight._cpp.Matrix4):Void;
 	@:native("flight_create_capsule")
-	public static function createCapsule(startX:Single, startY:Single, startZ:Single, endX:Single, endY:Single, endZ:Single, radius:Single):flight._cpp.Capsule;
+	public static function createCapsule(startX:Float, startY:Float, startZ:Float, endX:Float, endY:Float, endZ:Float, radius:Float):flight._cpp.Capsule;
 	@:native("flight_get_closest_point_on_capsule")
 	public static function getClosestPointOnCapsule(out:flight._cpp.Vector3, capsule:flight._cpp.Capsule, point:flight._cpp.Vector3):Void;
 	@:native("flight_intersect_ray3d_capsule")
-	public static function intersectRay3dCapsule(ray:flight._cpp.Ray3D, capsule:flight._cpp.Capsule):Single;
+	public static function intersectRay3dCapsule(ray:flight._cpp.Ray3D, capsule:flight._cpp.Capsule):Float;
 	@:native("flight_is_capsule_intersecting_aabb")
 	public static function isCapsuleIntersectingAabb(capsule:flight._cpp.Capsule, aabb:flight._cpp.Aabb):Bool;
 	@:native("flight_is_capsule_intersecting_capsule")
@@ -68,13 +68,11 @@ extern class Geometry {
 	@:native("flight_is_capsule_intersecting_sphere")
 	public static function isCapsuleIntersectingSphere(capsule:flight._cpp.Capsule, sphere:flight._cpp.BoundingSphere):Bool;
 	@:native("flight_set_capsule")
-	public static function setCapsule(out:flight._cpp.Capsule, startX:Single, startY:Single, startZ:Single, endX:Single, endY:Single, endZ:Single, radius:Single):Void;
+	public static function setCapsule(out:flight._cpp.Capsule, startX:Float, startY:Float, startZ:Float, endX:Float, endY:Float, endZ:Float, radius:Float):Void;
 	@:native("flight_are_geometry_pool_guards_enabled")
 	public static function areGeometryPoolGuardsEnabled():Bool;
 	@:native("flight_disable_geometry_pool_guards")
 	public static function disableGeometryPoolGuards():Void;
-	@:native("flight_enable_geometry_pool_guards")
-	public static function enableGeometryPoolGuards(logState:cpp.Star<cpp.Void>, clockFn:cpp.Star<cpp.Void>, clockCtx:cpp.Star<cpp.Void>):Void;
 	@:native("flight_create_frustum")
 	public static function createFrustum():flight._cpp.Frustum;
 	@:native("flight_get_frustum_corners")
@@ -90,11 +88,11 @@ extern class Geometry {
 	@:native("flight_set_frustum_from_matrix4")
 	public static function setFrustumFromMatrix4(out:flight._cpp.Frustum, viewProjection:flight._cpp.Matrix4):Void;
 	@:native("flight_create_gradient_transform_matrix")
-	public static function createGradientTransformMatrix(width:Single, height:Single, rotation:Single, tx:Single, ty:Single):flight._cpp.Matrix;
+	public static function createGradientTransformMatrix(width:Float, height:Float, rotation:Float, tx:Float, ty:Float):flight._cpp.Matrix;
 	@:native("flight_create_matrix")
-	public static function createMatrix(a:Single, b:Single, c:Single, d:Single, tx:Single, ty:Single):flight._cpp.Matrix;
+	public static function createMatrix(a:Float, b:Float, c:Float, d:Float, tx:Float, ty:Float):flight._cpp.Matrix;
 	@:native("flight_create_transform_matrix")
-	public static function createTransformMatrix(scaleX:Single, scaleY:Single, rotation:Single, tx:Single, ty:Single):flight._cpp.Matrix;
+	public static function createTransformMatrix(scaleX:Float, scaleY:Float, rotation:Float, tx:Float, ty:Float):flight._cpp.Matrix;
 	@:native("flight_clone_matrix")
 	public static function cloneMatrix(source:flight._cpp.Matrix):flight._cpp.Matrix;
 	@:native("flight_copy_matrix")
@@ -114,35 +112,35 @@ extern class Geometry {
 	@:native("flight_inverse_matrix_transform_point")
 	public static function inverseMatrixTransformPoint(out:flight._cpp.Vector2, matrix:flight._cpp.Matrix, point:flight._cpp.Vector2):Void;
 	@:native("flight_inverse_matrix_transform_point_xy")
-	public static function inverseMatrixTransformPointXy(out:flight._cpp.Vector2, source:flight._cpp.Matrix, x:Single, y:Single):Void;
+	public static function inverseMatrixTransformPointXy(out:flight._cpp.Vector2, source:flight._cpp.Matrix, x:Float, y:Float):Void;
 	@:native("flight_inverse_matrix_transform_vector")
 	public static function inverseMatrixTransformVector(out:flight._cpp.Vector2, matrix:flight._cpp.Matrix, vector:flight._cpp.Vector2):Void;
 	@:native("flight_inverse_matrix_transform_vector_xy")
-	public static function inverseMatrixTransformVectorXy(out:flight._cpp.Vector2, source:flight._cpp.Matrix, x:Single, y:Single):Void;
+	public static function inverseMatrixTransformVectorXy(out:flight._cpp.Vector2, source:flight._cpp.Matrix, x:Float, y:Float):Void;
 	@:native("flight_matrix_transform_bounds")
-	public static function matrixTransformBounds(out:flight._cpp.Rectangle, source:flight._cpp.Matrix, ax:Single, ay:Single, bx:Single, by:Single):Void;
+	public static function matrixTransformBounds(out:flight._cpp.Rectangle, source:flight._cpp.Matrix, ax:Float, ay:Float, bx:Float, by:Float):Void;
 	@:native("flight_matrix_transform_bounds_vector2")
 	public static function matrixTransformBoundsVector2(out:flight._cpp.Rectangle, matrix:flight._cpp.Matrix, a:flight._cpp.Vector2, b:flight._cpp.Vector2):Void;
 	@:native("flight_matrix_transform_point")
 	public static function matrixTransformPoint(out:flight._cpp.Vector2, matrix:flight._cpp.Matrix, point:flight._cpp.Vector2):Void;
 	@:native("flight_matrix_transform_point_xy")
-	public static function matrixTransformPointXy(out:flight._cpp.Vector2, source:flight._cpp.Matrix, x:Single, y:Single):Void;
+	public static function matrixTransformPointXy(out:flight._cpp.Vector2, source:flight._cpp.Matrix, x:Float, y:Float):Void;
 	@:native("flight_matrix_transform_rectangle")
 	public static function matrixTransformRectangle(out:flight._cpp.Rectangle, matrix:flight._cpp.Matrix, source:flight._cpp.Rectangle):Void;
 	@:native("flight_matrix_transform_vector")
 	public static function matrixTransformVector(out:flight._cpp.Vector2, matrix:flight._cpp.Matrix, vector:flight._cpp.Vector2):Void;
 	@:native("flight_matrix_transform_vector_xy")
-	public static function matrixTransformVectorXy(out:flight._cpp.Vector2, source:flight._cpp.Matrix, x:Single, y:Single):Void;
+	public static function matrixTransformVectorXy(out:flight._cpp.Vector2, source:flight._cpp.Matrix, x:Float, y:Float):Void;
 	@:native("flight_multiply_matrix")
 	public static function multiplyMatrix(out:flight._cpp.Matrix, a:flight._cpp.Matrix, b:flight._cpp.Matrix):Void;
 	@:native("flight_rotate_matrix")
-	public static function rotateMatrix(out:flight._cpp.Matrix, source:flight._cpp.Matrix, theta:Single):Void;
+	public static function rotateMatrix(out:flight._cpp.Matrix, source:flight._cpp.Matrix, theta:Float):Void;
 	@:native("flight_scale_matrix")
-	public static function scaleMatrix(out:flight._cpp.Matrix, source:flight._cpp.Matrix, sx:Single, sy:Single):Void;
+	public static function scaleMatrix(out:flight._cpp.Matrix, source:flight._cpp.Matrix, sx:Float, sy:Float):Void;
 	@:native("flight_set_gradient_transform_matrix")
-	public static function setGradientTransformMatrix(out:flight._cpp.Matrix, width:Single, height:Single, rotation:Single, tx:Single, ty:Single):Void;
+	public static function setGradientTransformMatrix(out:flight._cpp.Matrix, width:Float, height:Float, rotation:Float, tx:Float, ty:Float):Void;
 	@:native("flight_set_matrix")
-	public static function setMatrix(out:flight._cpp.Matrix, a:Single, b:Single, c:Single, d:Single, tx:Single, ty:Single):Void;
+	public static function setMatrix(out:flight._cpp.Matrix, a:Float, b:Float, c:Float, d:Float, tx:Float, ty:Float):Void;
 	@:native("flight_set_matrix_from_float32_array")
 	public static function setMatrixFromFloat32Array(out:flight._cpp.Matrix, offset:Int, source:cpp.Star<cpp.Void>, sourceLen:Int):Void;
 	@:native("flight_set_matrix_from_matrix3")
@@ -152,19 +150,19 @@ extern class Geometry {
 	@:native("flight_set_matrix_identity")
 	public static function setMatrixIdentity(out:flight._cpp.Matrix):Void;
 	@:native("flight_set_transform_matrix")
-	public static function setTransformMatrix(out:flight._cpp.Matrix, scaleX:Single, scaleY:Single, rotation:Single, tx:Single, ty:Single):Void;
+	public static function setTransformMatrix(out:flight._cpp.Matrix, scaleX:Float, scaleY:Float, rotation:Float, tx:Float, ty:Float):Void;
 	@:native("flight_translate_matrix")
-	public static function translateMatrix(out:flight._cpp.Matrix, source:flight._cpp.Matrix, dx:Single, dy:Single):Void;
+	public static function translateMatrix(out:flight._cpp.Matrix, source:flight._cpp.Matrix, dx:Float, dy:Float):Void;
 	@:native("flight_translate_matrix_by_vector")
 	public static function translateMatrixByVector(out:flight._cpp.Matrix, matrix:flight._cpp.Matrix, vector:flight._cpp.Vector2):Void;
 	@:native("flight_translate_matrix_by_vector_xy")
-	public static function translateMatrixByVectorXy(out:flight._cpp.Matrix, source:flight._cpp.Matrix, x:Single, y:Single):Void;
+	public static function translateMatrixByVectorXy(out:flight._cpp.Matrix, source:flight._cpp.Matrix, x:Float, y:Float):Void;
 	@:native("flight_write_matrix_to_float32_array")
 	public static function writeMatrixToFloat32Array(out:cpp.Star<cpp.Void>, outLen:Int, offset:Int, source:flight._cpp.Matrix):Void;
 	@:native("flight_create_matrix3")
 	public static function createMatrix3():flight._cpp.Matrix3;
 	@:native("flight_create_matrix3_from_values")
-	public static function createMatrix3FromValues(m00:Single, m01:Single, m02:Single, m10:Single, m11:Single, m12:Single, m20:Single, m21:Single, m22:Single):flight._cpp.Matrix3;
+	public static function createMatrix3FromValues(m00:Float, m01:Float, m02:Float, m10:Float, m11:Float, m12:Float, m20:Float, m21:Float, m22:Float):flight._cpp.Matrix3;
 	@:native("flight_clone_matrix3")
 	public static function cloneMatrix3(source:flight._cpp.Matrix3):flight._cpp.Matrix3;
 	@:native("flight_copy_matrix3")
@@ -180,9 +178,9 @@ extern class Geometry {
 	@:native("flight_equals_matrix3")
 	public static function equalsMatrix3(a:flight._cpp.Matrix3, b:flight._cpp.Matrix3):Bool;
 	@:native("flight_get_matrix3_determinant")
-	public static function getMatrix3Determinant(source:flight._cpp.Matrix3):Single;
+	public static function getMatrix3Determinant(source:flight._cpp.Matrix3):Float;
 	@:native("flight_get_matrix3_element")
-	public static function getMatrix3Element(source:flight._cpp.Matrix3, row:Int, column:Int):Single;
+	public static function getMatrix3Element(source:flight._cpp.Matrix3, row:Int, column:Int):Float;
 	@:native("flight_inverse_matrix3")
 	public static function inverseMatrix3(out:flight._cpp.Matrix3, source:flight._cpp.Matrix3):Bool;
 	@:native("flight_is_affine_matrix3")
@@ -190,13 +188,13 @@ extern class Geometry {
 	@:native("flight_multiply_matrix3")
 	public static function multiplyMatrix3(out:flight._cpp.Matrix3, a:flight._cpp.Matrix3, b:flight._cpp.Matrix3):Void;
 	@:native("flight_rotate_matrix3")
-	public static function rotateMatrix3(out:flight._cpp.Matrix3, source:flight._cpp.Matrix3, theta:Single):Void;
+	public static function rotateMatrix3(out:flight._cpp.Matrix3, source:flight._cpp.Matrix3, theta:Float):Void;
 	@:native("flight_scale_matrix3")
-	public static function scaleMatrix3(out:flight._cpp.Matrix3, source:flight._cpp.Matrix3, sx:Single, sy:Single):Void;
+	public static function scaleMatrix3(out:flight._cpp.Matrix3, source:flight._cpp.Matrix3, sx:Float, sy:Float):Void;
 	@:native("flight_set_matrix3")
-	public static function setMatrix3(out:flight._cpp.Matrix3, m00:Single, m01:Single, m02:Single, m10:Single, m11:Single, m12:Single, m20:Single, m21:Single, m22:Single):Void;
+	public static function setMatrix3(out:flight._cpp.Matrix3, m00:Float, m01:Float, m02:Float, m10:Float, m11:Float, m12:Float, m20:Float, m21:Float, m22:Float):Void;
 	@:native("flight_set_matrix3_element")
-	public static function setMatrix3Element(out:flight._cpp.Matrix3, row:Int, column:Int, value:Single):Void;
+	public static function setMatrix3Element(out:flight._cpp.Matrix3, row:Int, column:Int, value:Float):Void;
 	@:native("flight_set_matrix3_from_float32_array")
 	public static function setMatrix3FromFloat32Array(out:flight._cpp.Matrix3, offset:Int, source:cpp.Star<cpp.Void>, sourceLen:Int):Void;
 	@:native("flight_set_matrix3_from_matrix")
@@ -208,7 +206,7 @@ extern class Geometry {
 	@:native("flight_set_matrix3_normal_from_matrix4")
 	public static function setMatrix3NormalFromMatrix4(out:flight._cpp.Matrix3, source:flight._cpp.Matrix4):Void;
 	@:native("flight_translate_matrix3")
-	public static function translateMatrix3(out:flight._cpp.Matrix3, source:flight._cpp.Matrix3, tx:Single, ty:Single):Void;
+	public static function translateMatrix3(out:flight._cpp.Matrix3, source:flight._cpp.Matrix3, tx:Float, ty:Float):Void;
 	@:native("flight_transpose_matrix3")
 	public static function transposeMatrix3(out:flight._cpp.Matrix3, source:flight._cpp.Matrix3):Void;
 	@:native("flight_write_matrix3_to_float32_array")
@@ -224,21 +222,21 @@ extern class Geometry {
 	@:native("flight_create_matrix4")
 	public static function createMatrix4():flight._cpp.Matrix4;
 	@:native("flight_create_matrix4_from_2d")
-	public static function createMatrix4From2d(a:Single, b:Single, c:Single, d:Single, tx:Single, ty:Single):flight._cpp.Matrix4;
+	public static function createMatrix4From2d(a:Float, b:Float, c:Float, d:Float, tx:Float, ty:Float):flight._cpp.Matrix4;
 	@:native("flight_create_matrix4_from_values")
-	public static function createMatrix4FromValues(m00:Single, m01:Single, m02:Single, m03:Single, m10:Single, m11:Single, m12:Single, m13:Single, m20:Single, m21:Single, m22:Single, m23:Single, m30:Single, m31:Single, m32:Single, m33:Single):flight._cpp.Matrix4;
+	public static function createMatrix4FromValues(m00:Float, m01:Float, m02:Float, m03:Float, m10:Float, m11:Float, m12:Float, m13:Float, m20:Float, m21:Float, m22:Float, m23:Float, m30:Float, m31:Float, m32:Float, m33:Float):flight._cpp.Matrix4;
 	@:native("flight_create_orthographic_matrix4")
-	public static function createOrthographicMatrix4(left:Single, right:Single, bottom:Single, top:Single, zNear:Single, zFar:Single):flight._cpp.Matrix4;
+	public static function createOrthographicMatrix4(left:Float, right:Float, bottom:Float, top:Float, zNear:Float, zFar:Float):flight._cpp.Matrix4;
 	@:native("flight_create_perspective_matrix4")
-	public static function createPerspectiveMatrix4(tanHalfFovY:Single, aspect:Single, zNear:Single, zFar:Single):flight._cpp.Matrix4;
+	public static function createPerspectiveMatrix4(tanHalfFovY:Float, aspect:Float, zNear:Float, zFar:Float):flight._cpp.Matrix4;
 	@:native("flight_append_matrix4")
 	public static function appendMatrix4(out:flight._cpp.Matrix4, source:flight._cpp.Matrix4, other:flight._cpp.Matrix4):Void;
 	@:native("flight_append_rotation_matrix4")
-	public static function appendRotationMatrix4(out:flight._cpp.Matrix4, source:flight._cpp.Matrix4, radians:Single, axis:flight._cpp.Vector4, pivotPoint:flight._cpp.Vector4):Void;
+	public static function appendRotationMatrix4(out:flight._cpp.Matrix4, source:flight._cpp.Matrix4, radians:Float, axis:flight._cpp.Vector4, pivotPoint:flight._cpp.Vector4):Void;
 	@:native("flight_append_scale_matrix4")
-	public static function appendScaleMatrix4(out:flight._cpp.Matrix4, source:flight._cpp.Matrix4, xScale:Single, yScale:Single, zScale:Single):Void;
+	public static function appendScaleMatrix4(out:flight._cpp.Matrix4, source:flight._cpp.Matrix4, xScale:Float, yScale:Float, zScale:Float):Void;
 	@:native("flight_append_translation_matrix4")
-	public static function appendTranslationMatrix4(out:flight._cpp.Matrix4, source:flight._cpp.Matrix4, x:Single, y:Single, z:Single):Void;
+	public static function appendTranslationMatrix4(out:flight._cpp.Matrix4, source:flight._cpp.Matrix4, x:Float, y:Float, z:Float):Void;
 	@:native("flight_clone_matrix4")
 	public static function cloneMatrix4(source:flight._cpp.Matrix4):flight._cpp.Matrix4;
 	@:native("flight_compose_matrix4")
@@ -258,13 +256,13 @@ extern class Geometry {
 	@:native("flight_equals_matrix4")
 	public static function equalsMatrix4(a:flight._cpp.Matrix4, b:flight._cpp.Matrix4):Bool;
 	@:native("flight_get_matrix4_determinant")
-	public static function getMatrix4Determinant(source:flight._cpp.Matrix4):Single;
+	public static function getMatrix4Determinant(source:flight._cpp.Matrix4):Float;
 	@:native("flight_get_matrix4_element")
-	public static function getMatrix4Element(source:flight._cpp.Matrix4, row:Int, column:Int):Single;
+	public static function getMatrix4Element(source:flight._cpp.Matrix4, row:Int, column:Int):Float;
 	@:native("flight_get_matrix4_position")
 	public static function getMatrix4Position(out:flight._cpp.Vector3, source:flight._cpp.Matrix4):Void;
 	@:native("flight_interpolate_matrix4")
-	public static function interpolateMatrix4(out:flight._cpp.Matrix4, a:flight._cpp.Matrix4, b:flight._cpp.Matrix4, t:Single):Void;
+	public static function interpolateMatrix4(out:flight._cpp.Matrix4, a:flight._cpp.Matrix4, b:flight._cpp.Matrix4, t:Float):Void;
 	@:native("flight_inverse_matrix4")
 	public static function inverseMatrix4(out:flight._cpp.Matrix4, source:flight._cpp.Matrix4):Bool;
 	@:native("flight_is_affine_matrix4")
@@ -280,21 +278,21 @@ extern class Geometry {
 	@:native("flight_prepend_matrix4")
 	public static function prependMatrix4(out:flight._cpp.Matrix4, source:flight._cpp.Matrix4, other:flight._cpp.Matrix4):Void;
 	@:native("flight_prepend_rotation_matrix4")
-	public static function prependRotationMatrix4(out:flight._cpp.Matrix4, source:flight._cpp.Matrix4, radians:Single, axis:flight._cpp.Vector4, pivotPoint:flight._cpp.Vector4):Void;
+	public static function prependRotationMatrix4(out:flight._cpp.Matrix4, source:flight._cpp.Matrix4, radians:Float, axis:flight._cpp.Vector4, pivotPoint:flight._cpp.Vector4):Void;
 	@:native("flight_prepend_scale_matrix4")
-	public static function prependScaleMatrix4(out:flight._cpp.Matrix4, source:flight._cpp.Matrix4, xScale:Single, yScale:Single, zScale:Single):Void;
+	public static function prependScaleMatrix4(out:flight._cpp.Matrix4, source:flight._cpp.Matrix4, xScale:Float, yScale:Float, zScale:Float):Void;
 	@:native("flight_prepend_translation_matrix4")
-	public static function prependTranslationMatrix4(out:flight._cpp.Matrix4, source:flight._cpp.Matrix4, x:Single, y:Single, z:Single):Void;
+	public static function prependTranslationMatrix4(out:flight._cpp.Matrix4, source:flight._cpp.Matrix4, x:Float, y:Float, z:Float):Void;
 	@:native("flight_rotate_matrix4")
-	public static function rotateMatrix4(out:flight._cpp.Matrix4, source:flight._cpp.Matrix4, axis:flight._cpp.Vector3, radians:Single):Void;
+	public static function rotateMatrix4(out:flight._cpp.Matrix4, source:flight._cpp.Matrix4, axis:flight._cpp.Vector3, radians:Float):Void;
 	@:native("flight_scale_matrix4")
-	public static function scaleMatrix4(out:flight._cpp.Matrix4, source:flight._cpp.Matrix4, sx:Single, sy:Single, sz:Single):Void;
+	public static function scaleMatrix4(out:flight._cpp.Matrix4, source:flight._cpp.Matrix4, sx:Float, sy:Float, sz:Float):Void;
 	@:native("flight_set_matrix4")
-	public static function setMatrix4(out:flight._cpp.Matrix4, m00:Single, m01:Single, m02:Single, m03:Single, m10:Single, m11:Single, m12:Single, m13:Single, m20:Single, m21:Single, m22:Single, m23:Single, m30:Single, m31:Single, m32:Single, m33:Single):Void;
+	public static function setMatrix4(out:flight._cpp.Matrix4, m00:Float, m01:Float, m02:Float, m03:Float, m10:Float, m11:Float, m12:Float, m13:Float, m20:Float, m21:Float, m22:Float, m23:Float, m30:Float, m31:Float, m32:Float, m33:Float):Void;
 	@:native("flight_set_matrix4_element")
-	public static function setMatrix4Element(out:flight._cpp.Matrix4, row:Int, column:Int, value:Single):Void;
+	public static function setMatrix4Element(out:flight._cpp.Matrix4, row:Int, column:Int, value:Float):Void;
 	@:native("flight_set_matrix4_from_2d")
-	public static function setMatrix4From2d(out:flight._cpp.Matrix4, a:Single, b:Single, c:Single, d:Single, tx:Single, ty:Single):Void;
+	public static function setMatrix4From2d(out:flight._cpp.Matrix4, a:Float, b:Float, c:Float, d:Float, tx:Float, ty:Float):Void;
 	@:native("flight_set_matrix4_from_float32_array")
 	public static function setMatrix4FromFloat32Array(out:flight._cpp.Matrix4, offset:Int, source:cpp.Star<cpp.Void>, sourceLen:Int):Void;
 	@:native("flight_set_matrix4_from_matrix")
@@ -310,11 +308,11 @@ extern class Geometry {
 	@:native("flight_set_matrix4_position")
 	public static function setMatrix4Position(out:flight._cpp.Matrix4, source:flight._cpp.Vector3):Void;
 	@:native("flight_set_orthographic_matrix4")
-	public static function setOrthographicMatrix4(out:flight._cpp.Matrix4, left:Single, right:Single, bottom:Single, top:Single, zNear:Single, zFar:Single):Void;
+	public static function setOrthographicMatrix4(out:flight._cpp.Matrix4, left:Float, right:Float, bottom:Float, top:Float, zNear:Float, zFar:Float):Void;
 	@:native("flight_set_perspective_matrix4")
-	public static function setPerspectiveMatrix4(out:flight._cpp.Matrix4, tanHalfFovY:Single, aspect:Single, zNear:Single, zFar:Single):Void;
+	public static function setPerspectiveMatrix4(out:flight._cpp.Matrix4, tanHalfFovY:Float, aspect:Float, zNear:Float, zFar:Float):Void;
 	@:native("flight_translate_matrix4")
-	public static function translateMatrix4(out:flight._cpp.Matrix4, source:flight._cpp.Matrix4, tx:Single, ty:Single, tz:Single):Void;
+	public static function translateMatrix4(out:flight._cpp.Matrix4, source:flight._cpp.Matrix4, tx:Float, ty:Float, tz:Float):Void;
 	@:native("flight_transpose_matrix4")
 	public static function transposeMatrix4(out:flight._cpp.Matrix4, source:flight._cpp.Matrix4):Void;
 	@:native("flight_write_matrix4_to_float32_array")
@@ -336,11 +334,11 @@ extern class Geometry {
 	@:native("flight_release_matrix")
 	public static function releaseMatrix(m:flight._cpp.Matrix):Void;
 	@:native("flight_create_obb")
-	public static function createObb(centerX:Single, centerY:Single, centerZ:Single, halfExtentX:Single, halfExtentY:Single, halfExtentZ:Single, orientationX:Single, orientationY:Single, orientationZ:Single, orientationW:Single):flight._cpp.Obb;
+	public static function createObb(centerX:Float, centerY:Float, centerZ:Float, halfExtentX:Float, halfExtentY:Float, halfExtentZ:Float, orientationX:Float, orientationY:Float, orientationZ:Float, orientationW:Float):flight._cpp.Obb;
 	@:native("flight_get_closest_point_on_obb")
 	public static function getClosestPointOnObb(out:flight._cpp.Vector3, obb:flight._cpp.Obb, point:flight._cpp.Vector3):Void;
 	@:native("flight_intersect_ray3d_obb")
-	public static function intersectRay3dObb(ray:flight._cpp.Ray3D, obb:flight._cpp.Obb):Single;
+	public static function intersectRay3dObb(ray:flight._cpp.Ray3D, obb:flight._cpp.Obb):Float;
 	@:native("flight_is_obb_intersecting_aabb")
 	public static function isObbIntersectingAabb(obb:flight._cpp.Obb, aabb:flight._cpp.Aabb):Bool;
 	@:native("flight_is_obb_intersecting_obb")
@@ -348,11 +346,11 @@ extern class Geometry {
 	@:native("flight_is_obb_intersecting_sphere")
 	public static function isObbIntersectingSphere(obb:flight._cpp.Obb, sphere:flight._cpp.BoundingSphere):Bool;
 	@:native("flight_set_obb")
-	public static function setObb(out:flight._cpp.Obb, centerX:Single, centerY:Single, centerZ:Single, halfExtentX:Single, halfExtentY:Single, halfExtentZ:Single, orientationX:Single, orientationY:Single, orientationZ:Single, orientationW:Single):Void;
+	public static function setObb(out:flight._cpp.Obb, centerX:Float, centerY:Float, centerZ:Float, halfExtentX:Float, halfExtentY:Float, halfExtentZ:Float, orientationX:Float, orientationY:Float, orientationZ:Float, orientationW:Float):Void;
 	@:native("flight_transform_obb_by_matrix4")
 	public static function transformObbByMatrix4(out:flight._cpp.Obb, obb:flight._cpp.Obb, m:flight._cpp.Matrix4):Void;
 	@:native("flight_create_plane")
-	public static function createPlane(a:Single, b:Single, c:Single, d:Single):flight._cpp.Plane;
+	public static function createPlane(a:Float, b:Float, c:Float, d:Float):flight._cpp.Plane;
 	@:native("flight_clone_plane")
 	public static function clonePlane(source:flight._cpp.Plane):flight._cpp.Plane;
 	@:native("flight_copy_plane")
@@ -362,19 +360,19 @@ extern class Geometry {
 	@:native("flight_get_plane_coplanar_point")
 	public static function getPlaneCoplanarPoint(out:flight._cpp.Vector3, plane:flight._cpp.Plane):Void;
 	@:native("flight_get_plane_signed_distance_to_point")
-	public static function getPlaneSignedDistanceToPoint(plane:flight._cpp.Plane, point:flight._cpp.Vector3):Single;
+	public static function getPlaneSignedDistanceToPoint(plane:flight._cpp.Plane, point:flight._cpp.Vector3):Float;
 	@:native("flight_normalize_plane")
 	public static function normalizePlane(out:flight._cpp.Plane, source:flight._cpp.Plane):Void;
 	@:native("flight_project_vector3_onto_plane")
 	public static function projectVector3OntoPlane(out:flight._cpp.Vector3, point:flight._cpp.Vector3, plane:flight._cpp.Plane):Void;
 	@:native("flight_set_plane")
-	public static function setPlane(out:flight._cpp.Plane, a:Single, b:Single, c:Single, d:Single):Void;
+	public static function setPlane(out:flight._cpp.Plane, a:Float, b:Float, c:Float, d:Float):Void;
 	@:native("flight_set_plane_from_normal_and_point")
 	public static function setPlaneFromNormalAndPoint(out:flight._cpp.Plane, normal:flight._cpp.Vector3, point:flight._cpp.Vector3):Void;
 	@:native("flight_set_plane_from_points")
 	public static function setPlaneFromPoints(out:flight._cpp.Plane, a:flight._cpp.Vector3, b:flight._cpp.Vector3, c:flight._cpp.Vector3):Void;
 	@:native("flight_create_quaternion")
-	public static function createQuaternion(x:Single, y:Single, z:Single, w:Single):flight._cpp.Quaternion;
+	public static function createQuaternion(x:Float, y:Float, z:Float, w:Float):flight._cpp.Quaternion;
 	@:native("flight_clone_quaternion")
 	public static function cloneQuaternion(source:flight._cpp.Quaternion):flight._cpp.Quaternion;
 	@:native("flight_conjugate_quaternion")
@@ -384,11 +382,11 @@ extern class Geometry {
 	@:native("flight_equals_quaternion")
 	public static function equalsQuaternion(a:flight._cpp.Quaternion, b:flight._cpp.Quaternion):Bool;
 	@:native("flight_get_quaternion_angle_between")
-	public static function getQuaternionAngleBetween(a:flight._cpp.Quaternion, b:flight._cpp.Quaternion):Single;
+	public static function getQuaternionAngleBetween(a:flight._cpp.Quaternion, b:flight._cpp.Quaternion):Float;
 	@:native("flight_get_quaternion_axis_angle")
-	public static function getQuaternionAxisAngle(outAxis:flight._cpp.Vector3, source:flight._cpp.Quaternion):Single;
+	public static function getQuaternionAxisAngle(outAxis:flight._cpp.Vector3, source:flight._cpp.Quaternion):Float;
 	@:native("flight_get_quaternion_dot")
-	public static function getQuaternionDot(a:flight._cpp.Quaternion, b:flight._cpp.Quaternion):Single;
+	public static function getQuaternionDot(a:flight._cpp.Quaternion, b:flight._cpp.Quaternion):Float;
 	@:native("flight_get_quaternion_euler")
 	public static function getQuaternionEuler(out:flight._cpp.Vector3, source:flight._cpp.Quaternion, order:Int):Void;
 	@:native("flight_inverse_quaternion")
@@ -396,15 +394,15 @@ extern class Geometry {
 	@:native("flight_multiply_quaternion")
 	public static function multiplyQuaternion(out:flight._cpp.Quaternion, a:flight._cpp.Quaternion, b:flight._cpp.Quaternion):Void;
 	@:native("flight_normalize_quaternion")
-	public static function normalizeQuaternion(out:flight._cpp.Quaternion, source:flight._cpp.Quaternion):Single;
+	public static function normalizeQuaternion(out:flight._cpp.Quaternion, source:flight._cpp.Quaternion):Float;
 	@:native("flight_rotate_vector3_by_quaternion")
 	public static function rotateVector3ByQuaternion(out:flight._cpp.Vector3, vector:flight._cpp.Vector3, q:flight._cpp.Quaternion):Void;
 	@:native("flight_set_quaternion")
-	public static function setQuaternion(out:flight._cpp.Quaternion, x:Single, y:Single, z:Single, w:Single):Void;
+	public static function setQuaternion(out:flight._cpp.Quaternion, x:Float, y:Float, z:Float, w:Float):Void;
 	@:native("flight_set_quaternion_from_axis_angle")
-	public static function setQuaternionFromAxisAngle(out:flight._cpp.Quaternion, axis:flight._cpp.Vector3, angle:Single):Void;
+	public static function setQuaternionFromAxisAngle(out:flight._cpp.Quaternion, axis:flight._cpp.Vector3, angle:Float):Void;
 	@:native("flight_set_quaternion_from_euler")
-	public static function setQuaternionFromEuler(out:flight._cpp.Quaternion, x:Single, y:Single, z:Single, order:Int):Void;
+	public static function setQuaternionFromEuler(out:flight._cpp.Quaternion, x:Float, y:Float, z:Float, order:Int):Void;
 	@:native("flight_set_quaternion_from_matrix4")
 	public static function setQuaternionFromMatrix4(out:flight._cpp.Quaternion, source:flight._cpp.Matrix4):Void;
 	@:native("flight_set_quaternion_from_unit_vectors")
@@ -414,7 +412,7 @@ extern class Geometry {
 	@:native("flight_set_quaternion_look_rotation")
 	public static function setQuaternionLookRotation(out:flight._cpp.Quaternion, forward:flight._cpp.Vector3, up:flight._cpp.Vector3):Void;
 	@:native("flight_slerp_quaternion")
-	public static function slerpQuaternion(out:flight._cpp.Quaternion, a:flight._cpp.Quaternion, b:flight._cpp.Quaternion, t:Single):Void;
+	public static function slerpQuaternion(out:flight._cpp.Quaternion, a:flight._cpp.Quaternion, b:flight._cpp.Quaternion, t:Float):Void;
 	@:native("flight_acquire_identity_quaternion")
 	public static function acquireIdentityQuaternion():flight._cpp.Quaternion;
 	@:native("flight_acquire_quaternion")
@@ -424,27 +422,27 @@ extern class Geometry {
 	@:native("flight_release_quaternion")
 	public static function releaseQuaternion(q:flight._cpp.Quaternion):Void;
 	@:native("flight_create_ray3d")
-	public static function createRay3d(originX:Single, originY:Single, originZ:Single, directionX:Single, directionY:Single, directionZ:Single):flight._cpp.Ray3D;
+	public static function createRay3d(originX:Float, originY:Float, originZ:Float, directionX:Float, directionY:Float, directionZ:Float):flight._cpp.Ray3D;
 	@:native("flight_get_closest_point_between_ray3ds")
 	public static function getClosestPointBetweenRay3ds(outA:flight._cpp.Vector3, outB:flight._cpp.Vector3, a:flight._cpp.Ray3D, b:flight._cpp.Ray3D):Void;
 	@:native("flight_get_closest_point_on_ray3d")
 	public static function getClosestPointOnRay3d(out:flight._cpp.Vector3, ray:flight._cpp.Ray3D, point:flight._cpp.Vector3):Void;
 	@:native("flight_get_ray3d_point_at")
-	public static function getRay3dPointAt(out:flight._cpp.Vector3, ray:flight._cpp.Ray3D, t:Single):Void;
+	public static function getRay3dPointAt(out:flight._cpp.Vector3, ray:flight._cpp.Ray3D, t:Float):Void;
 	@:native("flight_intersect_ray3d_aabb")
-	public static function intersectRay3dAabb(ray:flight._cpp.Ray3D, aabb:flight._cpp.Aabb):Single;
+	public static function intersectRay3dAabb(ray:flight._cpp.Ray3D, aabb:flight._cpp.Aabb):Float;
 	@:native("flight_intersect_ray3d_plane")
-	public static function intersectRay3dPlane(ray:flight._cpp.Ray3D, plane:flight._cpp.Plane):Single;
+	public static function intersectRay3dPlane(ray:flight._cpp.Ray3D, plane:flight._cpp.Plane):Float;
 	@:native("flight_intersect_ray3d_sphere")
-	public static function intersectRay3dSphere(ray:flight._cpp.Ray3D, sphere:flight._cpp.BoundingSphere):Single;
+	public static function intersectRay3dSphere(ray:flight._cpp.Ray3D, sphere:flight._cpp.BoundingSphere):Float;
 	@:native("flight_intersect_ray3d_triangle")
-	public static function intersectRay3dTriangle(ray:flight._cpp.Ray3D, a:flight._cpp.Vector3, b:flight._cpp.Vector3, c:flight._cpp.Vector3):Single;
+	public static function intersectRay3dTriangle(ray:flight._cpp.Ray3D, a:flight._cpp.Vector3, b:flight._cpp.Vector3, c:flight._cpp.Vector3):Float;
 	@:native("flight_set_ray3d")
 	public static function setRay3d(out:flight._cpp.Ray3D, origin:flight._cpp.Vector3, direction:flight._cpp.Vector3):Void;
 	@:native("flight_transform_ray3d_by_matrix4")
 	public static function transformRay3dByMatrix4(out:flight._cpp.Ray3D, ray:flight._cpp.Ray3D, m:flight._cpp.Matrix4):Void;
 	@:native("flight_create_rectangle")
-	public static function createRectangle(x:Single, y:Single, width:Single, height:Single):flight._cpp.Rectangle;
+	public static function createRectangle(x:Float, y:Float, width:Float, height:Float):flight._cpp.Rectangle;
 	@:native("flight_clone_rectangle")
 	public static function cloneRectangle(source:flight._cpp.Rectangle):flight._cpp.Rectangle;
 	@:native("flight_compute_rectangle_intersection")
@@ -452,7 +450,7 @@ extern class Geometry {
 	@:native("flight_contains_rectangle_point")
 	public static function containsRectanglePoint(source:flight._cpp.Rectangle, vector:flight._cpp.Vector2):Bool;
 	@:native("flight_contains_rectangle_point_xy")
-	public static function containsRectanglePointXy(source:flight._cpp.Rectangle, x:Single, y:Single):Bool;
+	public static function containsRectanglePointXy(source:flight._cpp.Rectangle, x:Float, y:Float):Bool;
 	@:native("flight_copy_rectangle")
 	public static function copyRectangle(out:flight._cpp.Rectangle, source:flight._cpp.Rectangle):Void;
 	@:native("flight_encloses_rectangle")
@@ -462,33 +460,33 @@ extern class Geometry {
 	@:native("flight_expand_rectangle_to_point")
 	public static function expandRectangleToPoint(out:flight._cpp.Rectangle, sourceRect:flight._cpp.Rectangle, sourceVec2:flight._cpp.Vector2):Void;
 	@:native("flight_get_rectangle_bottom")
-	public static function getRectangleBottom(source:flight._cpp.Rectangle):Single;
+	public static function getRectangleBottom(source:flight._cpp.Rectangle):Float;
 	@:native("flight_get_rectangle_bottom_right")
 	public static function getRectangleBottomRight(out:flight._cpp.Vector2, source:flight._cpp.Rectangle):Void;
 	@:native("flight_get_rectangle_left")
-	public static function getRectangleLeft(source:flight._cpp.Rectangle):Single;
+	public static function getRectangleLeft(source:flight._cpp.Rectangle):Float;
 	@:native("flight_get_rectangle_max_x")
-	public static function getRectangleMaxX(source:flight._cpp.Rectangle):Single;
+	public static function getRectangleMaxX(source:flight._cpp.Rectangle):Float;
 	@:native("flight_get_rectangle_max_y")
-	public static function getRectangleMaxY(source:flight._cpp.Rectangle):Single;
+	public static function getRectangleMaxY(source:flight._cpp.Rectangle):Float;
 	@:native("flight_get_rectangle_min_x")
-	public static function getRectangleMinX(source:flight._cpp.Rectangle):Single;
+	public static function getRectangleMinX(source:flight._cpp.Rectangle):Float;
 	@:native("flight_get_rectangle_min_y")
-	public static function getRectangleMinY(source:flight._cpp.Rectangle):Single;
+	public static function getRectangleMinY(source:flight._cpp.Rectangle):Float;
 	@:native("flight_get_rectangle_normalized_bottom_right")
 	public static function getRectangleNormalizedBottomRight(out:flight._cpp.Vector2, source:flight._cpp.Rectangle):Void;
 	@:native("flight_get_rectangle_normalized_top_left")
 	public static function getRectangleNormalizedTopLeft(out:flight._cpp.Vector2, source:flight._cpp.Rectangle):Void;
 	@:native("flight_get_rectangle_right")
-	public static function getRectangleRight(source:flight._cpp.Rectangle):Single;
+	public static function getRectangleRight(source:flight._cpp.Rectangle):Float;
 	@:native("flight_get_rectangle_size")
 	public static function getRectangleSize(out:flight._cpp.Vector2, source:flight._cpp.Rectangle):Void;
 	@:native("flight_get_rectangle_top")
-	public static function getRectangleTop(source:flight._cpp.Rectangle):Single;
+	public static function getRectangleTop(source:flight._cpp.Rectangle):Float;
 	@:native("flight_get_rectangle_top_left")
 	public static function getRectangleTopLeft(out:flight._cpp.Vector2, source:flight._cpp.Rectangle):Void;
 	@:native("flight_inflate_rectangle")
-	public static function inflateRectangle(out:flight._cpp.Rectangle, source:flight._cpp.Rectangle, dx:Single, dy:Single):Void;
+	public static function inflateRectangle(out:flight._cpp.Rectangle, source:flight._cpp.Rectangle, dx:Float, dy:Float):Void;
 	@:native("flight_intersects_rectangle")
 	public static function intersectsRectangle(a:flight._cpp.Rectangle, b:flight._cpp.Rectangle):Bool;
 	@:native("flight_is_empty_rectangle")
@@ -502,25 +500,25 @@ extern class Geometry {
 	@:native("flight_normalize_rectangle")
 	public static function normalizeRectangle(out:flight._cpp.Rectangle, source:flight._cpp.Rectangle):Void;
 	@:native("flight_offset_rectangle")
-	public static function offsetRectangle(out:flight._cpp.Rectangle, source:flight._cpp.Rectangle, dx:Single, dy:Single):Void;
+	public static function offsetRectangle(out:flight._cpp.Rectangle, source:flight._cpp.Rectangle, dx:Float, dy:Float):Void;
 	@:native("flight_offset_rectangle_by_point")
 	public static function offsetRectangleByPoint(out:flight._cpp.Rectangle, source:flight._cpp.Rectangle, point:flight._cpp.Vector2):Void;
 	@:native("flight_set_empty_rectangle")
 	public static function setEmptyRectangle(out:flight._cpp.Rectangle):Void;
 	@:native("flight_set_rectangle")
-	public static function setRectangle(out:flight._cpp.Rectangle, x:Single, y:Single, width:Single, height:Single):Void;
+	public static function setRectangle(out:flight._cpp.Rectangle, x:Float, y:Float, width:Float, height:Float):Void;
 	@:native("flight_set_rectangle_bottom")
-	public static function setRectangleBottom(target:flight._cpp.Rectangle, value:Single):Void;
+	public static function setRectangleBottom(target:flight._cpp.Rectangle, value:Float):Void;
 	@:native("flight_set_rectangle_bottom_right")
 	public static function setRectangleBottomRight(target:flight._cpp.Rectangle, point:flight._cpp.Vector2):Void;
 	@:native("flight_set_rectangle_left")
-	public static function setRectangleLeft(target:flight._cpp.Rectangle, value:Single):Void;
+	public static function setRectangleLeft(target:flight._cpp.Rectangle, value:Float):Void;
 	@:native("flight_set_rectangle_right")
-	public static function setRectangleRight(target:flight._cpp.Rectangle, value:Single):Void;
+	public static function setRectangleRight(target:flight._cpp.Rectangle, value:Float):Void;
 	@:native("flight_set_rectangle_size")
 	public static function setRectangleSize(out:flight._cpp.Rectangle, size:flight._cpp.Vector2):Void;
 	@:native("flight_set_rectangle_top")
-	public static function setRectangleTop(target:flight._cpp.Rectangle, value:Single):Void;
+	public static function setRectangleTop(target:flight._cpp.Rectangle, value:Float):Void;
 	@:native("flight_set_rectangle_top_left")
 	public static function setRectangleTopLeft(out:flight._cpp.Rectangle, point:flight._cpp.Vector2):Void;
 	@:native("flight_acquire_empty_rectangle")
@@ -532,7 +530,7 @@ extern class Geometry {
 	@:native("flight_release_rectangle")
 	public static function releaseRectangle(r:flight._cpp.Rectangle):Void;
 	@:native("flight_create_transform2d")
-	public static function createTransform2d(x:Single, y:Single, rotation:Single, scaleX:Single, scaleY:Single, skewX:Single, skewY:Single, pivotX:Single, pivotY:Single):flight._cpp.Transform2D;
+	public static function createTransform2d(x:Float, y:Float, rotation:Float, scaleX:Float, scaleY:Float, skewX:Float, skewY:Float, pivotX:Float, pivotY:Float):flight._cpp.Transform2D;
 	@:native("flight_decompose_matrix_to_transform2d")
 	public static function decomposeMatrixToTransform2d(out:flight._cpp.Transform2D, source:flight._cpp.Matrix):Void;
 	@:native("flight_create_transform3d")
@@ -548,9 +546,9 @@ extern class Geometry {
 	@:native("flight_reserve_uint16_array")
 	public static function reserveUint16Array(array:cpp.Star<cpp.Void>, arrayLen:Int, capacity:Int):cpp.Star<cpp.Void>;
 	@:native("flight_create_vector2")
-	public static function createVector2(x:Single, y:Single):flight._cpp.Vector2;
+	public static function createVector2(x:Float, y:Float):flight._cpp.Vector2;
 	@:native("flight_create_vector2_from_polar")
-	public static function createVector2FromPolar(length:Single, angle:Single):flight._cpp.Vector2;
+	public static function createVector2FromPolar(length:Float, angle:Float):flight._cpp.Vector2;
 	@:native("flight_add_vector2")
 	public static function addVector2(out:flight._cpp.Vector2, a:flight._cpp.Vector2, b:flight._cpp.Vector2):Void;
 	@:native("flight_clamp_vector2")
@@ -560,27 +558,27 @@ extern class Geometry {
 	@:native("flight_copy_vector2")
 	public static function copyVector2(out:flight._cpp.Vector2, source:flight._cpp.Vector2):Void;
 	@:native("flight_cross_vector2")
-	public static function crossVector2(a:flight._cpp.Vector2, b:flight._cpp.Vector2):Single;
+	public static function crossVector2(a:flight._cpp.Vector2, b:flight._cpp.Vector2):Float;
 	@:native("flight_divide_vector2")
 	public static function divideVector2(out:flight._cpp.Vector2, source:flight._cpp.Vector2, divisor:flight._cpp.Vector2):Void;
 	@:native("flight_equals_vector2")
 	public static function equalsVector2(a:flight._cpp.Vector2, b:flight._cpp.Vector2):Bool;
 	@:native("flight_get_vector2_angle")
-	public static function getVector2Angle(source:flight._cpp.Vector2):Single;
+	public static function getVector2Angle(source:flight._cpp.Vector2):Float;
 	@:native("flight_get_vector2_angle_between")
-	public static function getVector2AngleBetween(a:flight._cpp.Vector2, b:flight._cpp.Vector2):Single;
+	public static function getVector2AngleBetween(a:flight._cpp.Vector2, b:flight._cpp.Vector2):Float;
 	@:native("flight_get_vector2_distance")
-	public static function getVector2Distance(a:flight._cpp.Vector2, b:flight._cpp.Vector2):Single;
+	public static function getVector2Distance(a:flight._cpp.Vector2, b:flight._cpp.Vector2):Float;
 	@:native("flight_get_vector2_distance_squared")
-	public static function getVector2DistanceSquared(a:flight._cpp.Vector2, b:flight._cpp.Vector2):Single;
+	public static function getVector2DistanceSquared(a:flight._cpp.Vector2, b:flight._cpp.Vector2):Float;
 	@:native("flight_get_vector2_dot")
-	public static function getVector2Dot(a:flight._cpp.Vector2, b:flight._cpp.Vector2):Single;
+	public static function getVector2Dot(a:flight._cpp.Vector2, b:flight._cpp.Vector2):Float;
 	@:native("flight_get_vector2_length")
-	public static function getVector2Length(source:flight._cpp.Vector2):Single;
+	public static function getVector2Length(source:flight._cpp.Vector2):Float;
 	@:native("flight_get_vector2_length_squared")
-	public static function getVector2LengthSquared(source:flight._cpp.Vector2):Single;
+	public static function getVector2LengthSquared(source:flight._cpp.Vector2):Float;
 	@:native("flight_interpolate_vector2")
-	public static function interpolateVector2(out:flight._cpp.Vector2, a:flight._cpp.Vector2, b:flight._cpp.Vector2, t:Single):Void;
+	public static function interpolateVector2(out:flight._cpp.Vector2, a:flight._cpp.Vector2, b:flight._cpp.Vector2, t:Float):Void;
 	@:native("flight_max_vector2")
 	public static function maxVector2(out:flight._cpp.Vector2, a:flight._cpp.Vector2, b:flight._cpp.Vector2):Void;
 	@:native("flight_min_vector2")
@@ -588,27 +586,27 @@ extern class Geometry {
 	@:native("flight_multiply_vector2")
 	public static function multiplyVector2(out:flight._cpp.Vector2, a:flight._cpp.Vector2, b:flight._cpp.Vector2):Void;
 	@:native("flight_near_equals_vector2")
-	public static function nearEqualsVector2(a:flight._cpp.Vector2, b:flight._cpp.Vector2, tolerance:Single):Bool;
+	public static function nearEqualsVector2(a:flight._cpp.Vector2, b:flight._cpp.Vector2, tolerance:Float):Bool;
 	@:native("flight_negate_vector2")
 	public static function negateVector2(out:flight._cpp.Vector2, source:flight._cpp.Vector2):Void;
 	@:native("flight_normalize_vector2")
-	public static function normalizeVector2(out:flight._cpp.Vector2, source:flight._cpp.Vector2):Single;
+	public static function normalizeVector2(out:flight._cpp.Vector2, source:flight._cpp.Vector2):Float;
 	@:native("flight_offset_vector2")
-	public static function offsetVector2(out:flight._cpp.Vector2, source:flight._cpp.Vector2, dx:Single, dy:Single):Void;
+	public static function offsetVector2(out:flight._cpp.Vector2, source:flight._cpp.Vector2, dx:Float, dy:Float):Void;
 	@:native("flight_reflect_vector2")
 	public static function reflectVector2(out:flight._cpp.Vector2, incident:flight._cpp.Vector2, normal:flight._cpp.Vector2):Void;
 	@:native("flight_rotate_vector2")
-	public static function rotateVector2(out:flight._cpp.Vector2, source:flight._cpp.Vector2, angle:Single):Void;
+	public static function rotateVector2(out:flight._cpp.Vector2, source:flight._cpp.Vector2, angle:Float):Void;
 	@:native("flight_scale_vector2")
-	public static function scaleVector2(out:flight._cpp.Vector2, source:flight._cpp.Vector2, scalar:Single):Void;
+	public static function scaleVector2(out:flight._cpp.Vector2, source:flight._cpp.Vector2, scalar:Float):Void;
 	@:native("flight_scale_vector2_to_length")
-	public static function scaleVector2ToLength(out:flight._cpp.Vector2, source:flight._cpp.Vector2, length:Single):Void;
+	public static function scaleVector2ToLength(out:flight._cpp.Vector2, source:flight._cpp.Vector2, length:Float):Void;
 	@:native("flight_set_vector2")
-	public static function setVector2(out:flight._cpp.Vector2, x:Single, y:Single):Void;
+	public static function setVector2(out:flight._cpp.Vector2, x:Float, y:Float):Void;
 	@:native("flight_set_vector2_from_float32_array")
 	public static function setVector2FromFloat32Array(out:flight._cpp.Vector2, offset:Int, source:cpp.Star<cpp.Void>, sourceLen:Int):Void;
 	@:native("flight_set_vector2_from_polar")
-	public static function setVector2FromPolar(out:flight._cpp.Vector2, length:Single, angle:Single):Void;
+	public static function setVector2FromPolar(out:flight._cpp.Vector2, length:Float, angle:Float):Void;
 	@:native("flight_set_vector2_from_vector3")
 	public static function setVector2FromVector3(out:flight._cpp.Vector2, source:flight._cpp.Vector3):Void;
 	@:native("flight_subtract_vector2")
@@ -624,9 +622,9 @@ extern class Geometry {
 	@:native("flight_release_vector2")
 	public static function releaseVector2(v:flight._cpp.Vector2):Void;
 	@:native("flight_create_vector3")
-	public static function createVector3(x:Single, y:Single, z:Single):flight._cpp.Vector3;
+	public static function createVector3(x:Float, y:Float, z:Float):flight._cpp.Vector3;
 	@:native("flight_create_vector3_from_spherical")
-	public static function createVector3FromSpherical(radius:Single, theta:Single, phi:Single):flight._cpp.Vector3;
+	public static function createVector3FromSpherical(radius:Float, theta:Float, phi:Float):flight._cpp.Vector3;
 	@:native("flight_add_vector3")
 	public static function addVector3(out:flight._cpp.Vector3, a:flight._cpp.Vector3, b:flight._cpp.Vector3):Void;
 	@:native("flight_clamp_vector3")
@@ -642,21 +640,21 @@ extern class Geometry {
 	@:native("flight_equals_vector3")
 	public static function equalsVector3(a:flight._cpp.Vector3, b:flight._cpp.Vector3):Bool;
 	@:native("flight_get_vector3_angle_between")
-	public static function getVector3AngleBetween(a:flight._cpp.Vector3, b:flight._cpp.Vector3):Single;
+	public static function getVector3AngleBetween(a:flight._cpp.Vector3, b:flight._cpp.Vector3):Float;
 	@:native("flight_get_vector3_distance")
-	public static function getVector3Distance(a:flight._cpp.Vector3, b:flight._cpp.Vector3):Single;
+	public static function getVector3Distance(a:flight._cpp.Vector3, b:flight._cpp.Vector3):Float;
 	@:native("flight_get_vector3_distance_squared")
-	public static function getVector3DistanceSquared(a:flight._cpp.Vector3, b:flight._cpp.Vector3):Single;
+	public static function getVector3DistanceSquared(a:flight._cpp.Vector3, b:flight._cpp.Vector3):Float;
 	@:native("flight_get_vector3_dot")
-	public static function getVector3Dot(a:flight._cpp.Vector3, b:flight._cpp.Vector3):Single;
+	public static function getVector3Dot(a:flight._cpp.Vector3, b:flight._cpp.Vector3):Float;
 	@:native("flight_get_vector3_length")
-	public static function getVector3Length(source:flight._cpp.Vector3):Single;
+	public static function getVector3Length(source:flight._cpp.Vector3):Float;
 	@:native("flight_get_vector3_length_squared")
-	public static function getVector3LengthSquared(source:flight._cpp.Vector3):Single;
+	public static function getVector3LengthSquared(source:flight._cpp.Vector3):Float;
 	@:native("flight_get_vector3_spherical")
 	public static function getVector3Spherical(out:flight._cpp.Vector3, source:flight._cpp.Vector3):Void;
 	@:native("flight_interpolate_vector3")
-	public static function interpolateVector3(out:flight._cpp.Vector3, a:flight._cpp.Vector3, b:flight._cpp.Vector3, t:Single):Void;
+	public static function interpolateVector3(out:flight._cpp.Vector3, a:flight._cpp.Vector3, b:flight._cpp.Vector3, t:Float):Void;
 	@:native("flight_max_vector3")
 	public static function maxVector3(out:flight._cpp.Vector3, a:flight._cpp.Vector3, b:flight._cpp.Vector3):Void;
 	@:native("flight_min_vector3")
@@ -664,25 +662,25 @@ extern class Geometry {
 	@:native("flight_multiply_vector3")
 	public static function multiplyVector3(out:flight._cpp.Vector3, a:flight._cpp.Vector3, b:flight._cpp.Vector3):Void;
 	@:native("flight_near_equals_vector3")
-	public static function nearEqualsVector3(a:flight._cpp.Vector3, b:flight._cpp.Vector3, tolerance:Single):Bool;
+	public static function nearEqualsVector3(a:flight._cpp.Vector3, b:flight._cpp.Vector3, tolerance:Float):Bool;
 	@:native("flight_negate_vector3")
 	public static function negateVector3(out:flight._cpp.Vector3, source:flight._cpp.Vector3):Void;
 	@:native("flight_normalize_vector3")
-	public static function normalizeVector3(out:flight._cpp.Vector3, source:flight._cpp.Vector3):Single;
+	public static function normalizeVector3(out:flight._cpp.Vector3, source:flight._cpp.Vector3):Float;
 	@:native("flight_offset_vector3")
-	public static function offsetVector3(out:flight._cpp.Vector3, source:flight._cpp.Vector3, dx:Single, dy:Single, dz:Single):Void;
+	public static function offsetVector3(out:flight._cpp.Vector3, source:flight._cpp.Vector3, dx:Float, dy:Float, dz:Float):Void;
 	@:native("flight_project_vector3")
 	public static function projectVector3(out:flight._cpp.Vector2, source:flight._cpp.Vector3):Void;
 	@:native("flight_reflect_vector3")
 	public static function reflectVector3(out:flight._cpp.Vector3, incident:flight._cpp.Vector3, normal:flight._cpp.Vector3):Void;
 	@:native("flight_scale_vector3")
-	public static function scaleVector3(out:flight._cpp.Vector3, source:flight._cpp.Vector3, scalar:Single):Void;
+	public static function scaleVector3(out:flight._cpp.Vector3, source:flight._cpp.Vector3, scalar:Float):Void;
 	@:native("flight_set_vector3")
-	public static function setVector3(out:flight._cpp.Vector3, x:Single, y:Single, z:Single):Void;
+	public static function setVector3(out:flight._cpp.Vector3, x:Float, y:Float, z:Float):Void;
 	@:native("flight_set_vector3_from_float32_array")
 	public static function setVector3FromFloat32Array(out:flight._cpp.Vector3, offset:Int, source:cpp.Star<cpp.Void>, sourceLen:Int):Void;
 	@:native("flight_set_vector3_from_spherical")
-	public static function setVector3FromSpherical(out:flight._cpp.Vector3, radius:Single, theta:Single, phi:Single):Void;
+	public static function setVector3FromSpherical(out:flight._cpp.Vector3, radius:Float, theta:Float, phi:Float):Void;
 	@:native("flight_set_vector3_from_vector4")
 	public static function setVector3FromVector4(out:flight._cpp.Vector3, source:flight._cpp.Vector4):Void;
 	@:native("flight_subtract_vector3")
@@ -700,7 +698,7 @@ extern class Geometry {
 	@:native("flight_release_vector3")
 	public static function releaseVector3(v:flight._cpp.Vector3):Void;
 	@:native("flight_create_vector4")
-	public static function createVector4(x:Single, y:Single, z:Single, w:Single):flight._cpp.Vector4;
+	public static function createVector4(x:Float, y:Float, z:Float, w:Float):flight._cpp.Vector4;
 	@:native("flight_add_vector4")
 	public static function addVector4(out:flight._cpp.Vector4, a:flight._cpp.Vector4, b:flight._cpp.Vector4):Void;
 	@:native("flight_clamp_vector4")
@@ -714,19 +712,19 @@ extern class Geometry {
 	@:native("flight_equals_vector4")
 	public static function equalsVector4(a:flight._cpp.Vector4, b:flight._cpp.Vector4):Bool;
 	@:native("flight_get_vector4_angle_between")
-	public static function getVector4AngleBetween(a:flight._cpp.Vector4, b:flight._cpp.Vector4):Single;
+	public static function getVector4AngleBetween(a:flight._cpp.Vector4, b:flight._cpp.Vector4):Float;
 	@:native("flight_get_vector4_distance")
-	public static function getVector4Distance(a:flight._cpp.Vector4, b:flight._cpp.Vector4):Single;
+	public static function getVector4Distance(a:flight._cpp.Vector4, b:flight._cpp.Vector4):Float;
 	@:native("flight_get_vector4_distance_squared")
-	public static function getVector4DistanceSquared(a:flight._cpp.Vector4, b:flight._cpp.Vector4):Single;
+	public static function getVector4DistanceSquared(a:flight._cpp.Vector4, b:flight._cpp.Vector4):Float;
 	@:native("flight_get_vector4_dot")
-	public static function getVector4Dot(a:flight._cpp.Vector4, b:flight._cpp.Vector4):Single;
+	public static function getVector4Dot(a:flight._cpp.Vector4, b:flight._cpp.Vector4):Float;
 	@:native("flight_get_vector4_length")
-	public static function getVector4Length(source:flight._cpp.Vector4):Single;
+	public static function getVector4Length(source:flight._cpp.Vector4):Float;
 	@:native("flight_get_vector4_length_squared")
-	public static function getVector4LengthSquared(source:flight._cpp.Vector4):Single;
+	public static function getVector4LengthSquared(source:flight._cpp.Vector4):Float;
 	@:native("flight_interpolate_vector4")
-	public static function interpolateVector4(out:flight._cpp.Vector4, a:flight._cpp.Vector4, b:flight._cpp.Vector4, t:Single):Void;
+	public static function interpolateVector4(out:flight._cpp.Vector4, a:flight._cpp.Vector4, b:flight._cpp.Vector4, t:Float):Void;
 	@:native("flight_max_vector4")
 	public static function maxVector4(out:flight._cpp.Vector4, a:flight._cpp.Vector4, b:flight._cpp.Vector4):Void;
 	@:native("flight_min_vector4")
@@ -734,25 +732,25 @@ extern class Geometry {
 	@:native("flight_multiply_vector4")
 	public static function multiplyVector4(out:flight._cpp.Vector4, a:flight._cpp.Vector4, b:flight._cpp.Vector4):Void;
 	@:native("flight_near_equals_vector4")
-	public static function nearEqualsVector4(a:flight._cpp.Vector4, b:flight._cpp.Vector4, tolerance:Single):Bool;
+	public static function nearEqualsVector4(a:flight._cpp.Vector4, b:flight._cpp.Vector4, tolerance:Float):Bool;
 	@:native("flight_negate_vector4")
 	public static function negateVector4(out:flight._cpp.Vector4, source:flight._cpp.Vector4):Void;
 	@:native("flight_normalize_vector4")
-	public static function normalizeVector4(out:flight._cpp.Vector4, source:flight._cpp.Vector4):Single;
+	public static function normalizeVector4(out:flight._cpp.Vector4, source:flight._cpp.Vector4):Float;
 	@:native("flight_offset_vector4")
-	public static function offsetVector4(out:flight._cpp.Vector4, source:flight._cpp.Vector4, dx:Single, dy:Single, dz:Single, dw:Single):Void;
+	public static function offsetVector4(out:flight._cpp.Vector4, source:flight._cpp.Vector4, dx:Float, dy:Float, dz:Float, dw:Float):Void;
 	@:native("flight_project_vector4")
 	public static function projectVector4(out:flight._cpp.Vector3, source:flight._cpp.Vector4):Void;
 	@:native("flight_reflect_vector4")
 	public static function reflectVector4(out:flight._cpp.Vector4, incident:flight._cpp.Vector4, normal:flight._cpp.Vector4):Void;
 	@:native("flight_scale_vector4")
-	public static function scaleVector4(out:flight._cpp.Vector4, source:flight._cpp.Vector4, scalar:Single):Void;
+	public static function scaleVector4(out:flight._cpp.Vector4, source:flight._cpp.Vector4, scalar:Float):Void;
 	@:native("flight_set_vector4")
-	public static function setVector4(out:flight._cpp.Vector4, x:Single, y:Single, z:Single, w:Single):Void;
+	public static function setVector4(out:flight._cpp.Vector4, x:Float, y:Float, z:Float, w:Float):Void;
 	@:native("flight_set_vector4_from_float32_array")
 	public static function setVector4FromFloat32Array(out:flight._cpp.Vector4, offset:Int, source:cpp.Star<cpp.Void>, sourceLen:Int):Void;
 	@:native("flight_set_vector4_from_vector3")
-	public static function setVector4FromVector3(out:flight._cpp.Vector4, source:flight._cpp.Vector3, w:Single):Void;
+	public static function setVector4FromVector3(out:flight._cpp.Vector4, source:flight._cpp.Vector3, w:Float):Void;
 	@:native("flight_subtract_vector4")
 	public static function subtractVector4(out:flight._cpp.Vector4, source:flight._cpp.Vector4, other:flight._cpp.Vector4):Void;
 	@:native("flight_write_vector4_to_float32_array")

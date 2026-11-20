@@ -5,7 +5,7 @@ extern inline function createAddNodeChildCommand(parent:Dynamic, child:Dynamic):
 	return flight._js._fn.Command.createAddNodeChildCommand(parent, child);
 }
 #else
-extern inline function createAddNodeChildCommand(parent:Dynamic, child:Dynamic):Dynamic {
+extern inline function createAddNodeChildCommand(parent:flight.FlightNode, child:flight.FlightNode):Dynamic {
 #if hl
 	return flight._hl._fn.Command.createAddNodeChildCommand(parent, child);
 #elseif cpp
@@ -39,7 +39,7 @@ extern inline function createRemoveNodeChildCommand(parent:Dynamic, child:Dynami
 	return flight._js._fn.Command.createRemoveNodeChildCommand(parent, child);
 }
 #else
-extern inline function createRemoveNodeChildCommand(parent:Dynamic, child:Dynamic):Dynamic {
+extern inline function createRemoveNodeChildCommand(parent:flight.FlightNode, child:flight.FlightNode):Dynamic {
 #if hl
 	return flight._hl._fn.Command.createRemoveNodeChildCommand(parent, child);
 #elseif cpp
@@ -56,7 +56,7 @@ extern inline function createReorderNodeChildCommand(parent:Dynamic, child:Dynam
 	return flight._js._fn.Command.createReorderNodeChildCommand(parent, child, toIndex);
 }
 #else
-extern inline function createReorderNodeChildCommand(parent:Dynamic, child:Dynamic, toIndex:Int):Dynamic {
+extern inline function createReorderNodeChildCommand(parent:flight.FlightNode, child:flight.FlightNode, toIndex:Int):Dynamic {
 #if hl
 	return flight._hl._fn.Command.createReorderNodeChildCommand(parent, child, toIndex);
 #elseif cpp
@@ -460,6 +460,74 @@ extern inline function explainCommandDispatch(history:Dynamic, command:CommandRe
 }
 #end
 #if (js && flight_esm)
+extern inline function freeAddNodeChildCommandRef(ptr:AddNodeChildCommand):Void {
+	flight._js._fn.Command.freeAddNodeChildCommandRef(ptr);
+}
+#else
+extern inline function freeAddNodeChildCommandRef(ptr:AddNodeChildCommand):Void {
+#if hl
+	flight._hl._fn.Command.freeAddNodeChildCommandRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Command.freeAddNodeChildCommandRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Command.freeAddNodeChildCommandRef(ptr);
+#else
+	#error "flight.Command: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeCompositeCommandRef(ptr:CompositeCommand):Void {
+	flight._js._fn.Command.freeCompositeCommandRef(ptr);
+}
+#else
+extern inline function freeCompositeCommandRef(ptr:CompositeCommand):Void {
+#if hl
+	flight._hl._fn.Command.freeCompositeCommandRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Command.freeCompositeCommandRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Command.freeCompositeCommandRef(ptr);
+#else
+	#error "flight.Command: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeRemoveNodeChildCommandRef(ptr:RemoveNodeChildCommand):Void {
+	flight._js._fn.Command.freeRemoveNodeChildCommandRef(ptr);
+}
+#else
+extern inline function freeRemoveNodeChildCommandRef(ptr:RemoveNodeChildCommand):Void {
+#if hl
+	flight._hl._fn.Command.freeRemoveNodeChildCommandRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Command.freeRemoveNodeChildCommandRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Command.freeRemoveNodeChildCommandRef(ptr);
+#else
+	#error "flight.Command: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeReorderNodeChildCommandRef(ptr:ReorderNodeChildCommand):Void {
+	flight._js._fn.Command.freeReorderNodeChildCommandRef(ptr);
+}
+#else
+extern inline function freeReorderNodeChildCommandRef(ptr:ReorderNodeChildCommand):Void {
+#if hl
+	flight._hl._fn.Command.freeReorderNodeChildCommandRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Command.freeReorderNodeChildCommandRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Command.freeReorderNodeChildCommandRef(ptr);
+#else
+	#error "flight.Command: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
 extern inline function freeCommandBindingTable(ptr:CommandBindingTable):Void {
 	flight._js._fn.Command.freeCommandBindingTable(ptr);
 }
@@ -477,17 +545,34 @@ extern inline function freeCommandBindingTable(ptr:CommandBindingTable):Void {
 }
 #end
 #if (js && flight_esm)
-extern inline function freeCommandBindingRef(ptr:CommandBindingRef):Void {
+extern inline function freeCommandBindingRef(ptr:CommandBinding):Void {
 	flight._js._fn.Command.freeCommandBindingRef(ptr);
 }
 #else
-extern inline function freeCommandBindingRef(ptr:CommandBindingRef):Void {
+extern inline function freeCommandBindingRef(ptr:CommandBinding):Void {
 #if hl
 	flight._hl._fn.Command.freeCommandBindingRef(ptr);
 #elseif cpp
 	flight._cpp._fn.Command.freeCommandBindingRef(ptr);
 #elseif (js && flight_esm)
 	flight._js._fn.Command.freeCommandBindingRef(ptr);
+#else
+	#error "flight.Command: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeCommandHistoryRef(ptr:CommandHistory):Void {
+	flight._js._fn.Command.freeCommandHistoryRef(ptr);
+}
+#else
+extern inline function freeCommandHistoryRef(ptr:CommandHistory):Void {
+#if hl
+	flight._hl._fn.Command.freeCommandHistoryRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Command.freeCommandHistoryRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Command.freeCommandHistoryRef(ptr);
 #else
 	#error "flight.Command: no backend for this target."
 #end

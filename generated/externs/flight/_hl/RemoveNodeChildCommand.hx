@@ -11,5 +11,6 @@ abstract RemoveNodeChildCommand(hl.Bytes) {
 	public var index(get, set):Int;
 
 	inline function get_index():Int return RemoveNodeChildCommand_Ffi.get_index(this);
+
 	inline function set_index(value:Int):Int { RemoveNodeChildCommand_Ffi.set_index(this, value); return value; }
 }

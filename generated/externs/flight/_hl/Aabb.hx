@@ -1,7 +1,7 @@
 package flight._hl;
 
 abstract Aabb(hl.Bytes) {
-	static inline public function create(minX:Single, minY:Single, minZ:Single, maxX:Single, maxY:Single, maxZ:Single):flight._hl.Aabb {
+	static inline public function create(minX:Float, minY:Float, minZ:Float, maxX:Float, maxY:Float, maxZ:Float):flight._hl.Aabb {
 		return flight._hl._fn.Geometry.createAabb(minX, minY, minZ, maxX, maxY, maxZ);
 	}
 	inline public function clone():flight._hl.Aabb {
@@ -40,7 +40,7 @@ abstract Aabb(hl.Bytes) {
 	inline public function isIntersectingSphere(sphere:flight._hl.BoundingSphere):Bool {
 		return flight._hl._fn.Geometry.isAabbIntersectingSphere(cast this, sphere);
 	}
-	inline public function set(minX:Single, minY:Single, minZ:Single, maxX:Single, maxY:Single, maxZ:Single):Void {
+	inline public function set(minX:Float, minY:Float, minZ:Float, maxX:Float, maxY:Float, maxZ:Float):Void {
 		flight._hl._fn.Geometry.setAabb(cast this, minX, minY, minZ, maxX, maxY, maxZ);
 	}
 	inline public function setFromPoints(points:hl.Bytes, pointsLen:Int):Void {
@@ -57,8 +57,5 @@ abstract Aabb(hl.Bytes) {
 	}
 	inline public function free():Void {
 		flight._hl._fn.Geometry.freeAabb(cast this);
-	}
-	inline public function computeParticleEmitter3dLocalBounds(source:hl.Bytes):Void {
-		flight._hl._fn.Particleemitter.computeParticleEmitter3dLocalBoundsAabb(cast this, source);
 	}
 }

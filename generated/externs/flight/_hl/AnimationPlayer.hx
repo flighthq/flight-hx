@@ -16,14 +16,14 @@ abstract AnimationPlayer(hl.Bytes) {
 	inline function get_repeatCount():Int return this.getI32(116);
 
 	inline function set_repeatCount(value:Int):Int { this.setI32(116, value); return value; }
-	public var speed(get, set):Single;
+	public var speed(get, set):Float;
 
-	inline function get_speed():Single return this.getF32(120);
+	inline function get_speed():Float return this.getF64(120);
 
-	inline function set_speed(value:Single):Single { this.setF32(120, value); return value; }
-	public var time(get, set):Single;
+	inline function set_speed(value:Float):Float { this.setF64(120, value); return value; }
+	public var time(get, set):Float;
 
-	inline function get_time():Single return this.getF32(124);
+	inline function get_time():Float return this.getF64(128);
 
-	inline function set_time(value:Single):Single { this.setF32(124, value); return value; }
+	inline function set_time(value:Float):Float { this.setF64(128, value); return value; }
 }

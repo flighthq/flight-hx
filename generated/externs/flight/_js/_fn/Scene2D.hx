@@ -39,5 +39,9 @@ extern class Scene2D {
 	@:native("computeSpriteLocalBoundsRectangle")
 	public static function computeSpriteLocalBoundsRectangle(out:flight._js.Rectangle, source:Dynamic):Void;
 	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeScene2DsignalsRef(ptr:flight._js.Scene2DSignals):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeScene2DkindUsage(ptr:flight._js.Scene2DKindUsage):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeScene2DslotReferenceRef(ptr:flight._js.Scene2DSlotReference):Void {}
 }

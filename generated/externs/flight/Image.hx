@@ -154,6 +154,57 @@ extern inline function resetFailedImageResourceReference(reference:ImageResource
 }
 #end
 #if (js && flight_esm)
+extern inline function freeImageResourceRef(ptr:ImageResource):Void {
+	flight._js._fn.Image.freeImageResourceRef(ptr);
+}
+#else
+extern inline function freeImageResourceRef(ptr:ImageResource):Void {
+#if hl
+	flight._hl._fn.Image.freeImageResourceRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Image.freeImageResourceRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Image.freeImageResourceRef(ptr);
+#else
+	#error "flight.Image: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeExternalImageResourceReferenceRef(ptr:ExternalImageResourceReference):Void {
+	flight._js._fn.Image.freeExternalImageResourceReferenceRef(ptr);
+}
+#else
+extern inline function freeExternalImageResourceReferenceRef(ptr:ExternalImageResourceReference):Void {
+#if hl
+	flight._hl._fn.Image.freeExternalImageResourceReferenceRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Image.freeExternalImageResourceReferenceRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Image.freeExternalImageResourceReferenceRef(ptr);
+#else
+	#error "flight.Image: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeImageResourceFailureRef(ptr:ImageResourceFailure):Void {
+	flight._js._fn.Image.freeImageResourceFailureRef(ptr);
+}
+#else
+extern inline function freeImageResourceFailureRef(ptr:ImageResourceFailure):Void {
+#if hl
+	flight._hl._fn.Image.freeImageResourceFailureRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Image.freeImageResourceFailureRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Image.freeImageResourceFailureRef(ptr);
+#else
+	#error "flight.Image: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
 extern inline function freeImageResourceReferenceResolutionExplanation(ptr:ImageResourceReferenceResolutionExplanation):Void {
 	flight._js._fn.Image.freeImageResourceReferenceResolutionExplanation(ptr);
 }
@@ -165,6 +216,23 @@ extern inline function freeImageResourceReferenceResolutionExplanation(ptr:Image
 	flight._cpp._fn.Image.freeImageResourceReferenceResolutionExplanation(ptr);
 #elseif (js && flight_esm)
 	flight._js._fn.Image.freeImageResourceReferenceResolutionExplanation(ptr);
+#else
+	#error "flight.Image: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeTextureRef(ptr:Texture):Void {
+	flight._js._fn.Image.freeTextureRef(ptr);
+}
+#else
+extern inline function freeTextureRef(ptr:Texture):Void {
+#if hl
+	flight._hl._fn.Image.freeTextureRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Image.freeTextureRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Image.freeTextureRef(ptr);
 #else
 	#error "flight.Image: no backend for this target."
 #end

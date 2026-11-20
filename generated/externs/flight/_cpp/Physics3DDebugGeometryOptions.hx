@@ -9,10 +9,10 @@ private extern class Physics3DDebugGeometryOptions_Ffi {
 	@:native("flight_set_physics3_ddebug_geometry_options_draw_contacts") static function set_drawContacts(ptr:cpp.Star<cpp.Void>, value:Bool):Bool;
 	@:native("flight_get_physics3_ddebug_geometry_options_draw_joints") static function get_drawJoints(ptr:cpp.Star<cpp.Void>):Bool;
 	@:native("flight_set_physics3_ddebug_geometry_options_draw_joints") static function set_drawJoints(ptr:cpp.Star<cpp.Void>, value:Bool):Bool;
-	@:native("flight_get_physics3_ddebug_geometry_options_center_of_mass_radius") static function get_centerOfMassRadius(ptr:cpp.Star<cpp.Void>):Single;
-	@:native("flight_set_physics3_ddebug_geometry_options_center_of_mass_radius") static function set_centerOfMassRadius(ptr:cpp.Star<cpp.Void>, value:Single):Single;
-	@:native("flight_get_physics3_ddebug_geometry_options_contact_normal_length") static function get_contactNormalLength(ptr:cpp.Star<cpp.Void>):Single;
-	@:native("flight_set_physics3_ddebug_geometry_options_contact_normal_length") static function set_contactNormalLength(ptr:cpp.Star<cpp.Void>, value:Single):Single;
+	@:native("flight_get_physics3_ddebug_geometry_options_center_of_mass_radius") static function get_centerOfMassRadius(ptr:cpp.Star<cpp.Void>):Float;
+	@:native("flight_set_physics3_ddebug_geometry_options_center_of_mass_radius") static function set_centerOfMassRadius(ptr:cpp.Star<cpp.Void>, value:Float):Float;
+	@:native("flight_get_physics3_ddebug_geometry_options_contact_normal_length") static function get_contactNormalLength(ptr:cpp.Star<cpp.Void>):Float;
+	@:native("flight_set_physics3_ddebug_geometry_options_contact_normal_length") static function set_contactNormalLength(ptr:cpp.Star<cpp.Void>, value:Float):Float;
 }
 
 abstract Physics3DDebugGeometryOptions(cpp.Star<cpp.Void>) {
@@ -36,14 +36,14 @@ abstract Physics3DDebugGeometryOptions(cpp.Star<cpp.Void>) {
 	inline function get_drawJoints():Bool return Physics3DDebugGeometryOptions_Ffi.get_drawJoints(this);
 
 	inline function set_drawJoints(value:Bool):Bool { Physics3DDebugGeometryOptions_Ffi.set_drawJoints(this, value); return value; }
-	public var centerOfMassRadius(get, set):Single;
+	public var centerOfMassRadius(get, set):Float;
 
-	inline function get_centerOfMassRadius():Single return Physics3DDebugGeometryOptions_Ffi.get_centerOfMassRadius(this);
+	inline function get_centerOfMassRadius():Float return Physics3DDebugGeometryOptions_Ffi.get_centerOfMassRadius(this);
 
-	inline function set_centerOfMassRadius(value:Single):Single { Physics3DDebugGeometryOptions_Ffi.set_centerOfMassRadius(this, value); return value; }
-	public var contactNormalLength(get, set):Single;
+	inline function set_centerOfMassRadius(value:Float):Float { Physics3DDebugGeometryOptions_Ffi.set_centerOfMassRadius(this, value); return value; }
+	public var contactNormalLength(get, set):Float;
 
-	inline function get_contactNormalLength():Single return Physics3DDebugGeometryOptions_Ffi.get_contactNormalLength(this);
+	inline function get_contactNormalLength():Float return Physics3DDebugGeometryOptions_Ffi.get_contactNormalLength(this);
 
-	inline function set_contactNormalLength(value:Single):Single { Physics3DDebugGeometryOptions_Ffi.set_contactNormalLength(this, value); return value; }
+	inline function set_contactNormalLength(value:Float):Float { Physics3DDebugGeometryOptions_Ffi.set_contactNormalLength(this, value); return value; }
 }

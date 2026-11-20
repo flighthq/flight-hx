@@ -11,4 +11,6 @@ extern class Font {
 	public static function isFontLoaded(backend:flight._hl.HostFontLoadingCapability, family:hl.Bytes, style:hl.Bytes):Bool;
 	@:hlNative("flight", "flight_free_font_resource")
 	public static function freeFontResource(ptr:flight._hl.FontResource):Void;
+	@:hlNative("flight", "flight_free_glyph_metrics")
+	public static function freeGlyphMetrics(ptr:flight._hl.GlyphMetrics):Void;
 }

@@ -1,14 +1,16 @@
 package flight._hl;
 
 private extern class InputKeyboardData_Ffi {
+	@:hlNative("flight", "flight_free_string")
+	static function freeString(value:hl.Bytes):Void;
 	@:hlNative("flight", "flight_field_get_input_keyboard_data_code")
-	static function get_code(ptr:hl.Bytes):flight._hl.NativeByteBuffer;
+	static function get_code(ptr:hl.Bytes):hl.Bytes;
 	@:hlNative("flight", "flight_field_set_input_keyboard_data_code")
-	static function set_code(ptr:hl.Bytes, data:hl.Bytes, length:Int):Void;
+	static function set_code(ptr:hl.Bytes, value:hl.Bytes):Void;
 	@:hlNative("flight", "flight_field_get_input_keyboard_data_key")
-	static function get_key(ptr:hl.Bytes):flight._hl.NativeByteBuffer;
+	static function get_key(ptr:hl.Bytes):hl.Bytes;
 	@:hlNative("flight", "flight_field_set_input_keyboard_data_key")
-	static function set_key(ptr:hl.Bytes, data:hl.Bytes, length:Int):Void;
+	static function set_key(ptr:hl.Bytes, value:hl.Bytes):Void;
 }
 
 abstract InputKeyboardData(hl.Bytes) {
@@ -23,40 +25,16 @@ abstract InputKeyboardData(hl.Bytes) {
 
 	inline function set_capsLock(value:Bool):Bool { this.setUI8(1, value ? 1 : 0); return value; }
 	public var code(get, set):String;
-	inline function get_code():String {
-		final bytes = InputKeyboardData_Ffi.get_code(this);
-		try {
-			final value = bytes.toBytes().toString();
-			bytes.dispose();
-			return value;
-		} catch (error:Dynamic) { bytes.dispose(); throw error; }
-	}
-	inline function set_code(value:String):String {
-		final bytes = haxe.io.Bytes.ofString(value);
-		InputKeyboardData_Ffi.set_code(this, bytes.getData().bytes, bytes.length);
-		return value;
-	}
-
+	inline function get_code():String { var raw = InputKeyboardData_Ffi.get_code(this); if (raw == null) return null; var value:String = @:privateAccess String.fromUTF8(raw); InputKeyboardData_Ffi.freeString(raw); return value; }
+	inline function set_code(value:String):String { var raw:hl.Bytes = null; if (value != null) { var bytes = haxe.io.Bytes.ofString(value); raw = new hl.Bytes(bytes.length + 1); raw.blit(0, bytes.getData(), 0, bytes.length); raw.setUI8(bytes.length, 0); } InputKeyboardData_Ffi.set_code(this, raw); return value; }
 	public var ctrlKey(get, set):Bool;
 
 	inline function get_ctrlKey():Bool return this.getUI8(32) != 0;
 
 	inline function set_ctrlKey(value:Bool):Bool { this.setUI8(32, value ? 1 : 0); return value; }
 	public var key(get, set):String;
-	inline function get_key():String {
-		final bytes = InputKeyboardData_Ffi.get_key(this);
-		try {
-			final value = bytes.toBytes().toString();
-			bytes.dispose();
-			return value;
-		} catch (error:Dynamic) { bytes.dispose(); throw error; }
-	}
-	inline function set_key(value:String):String {
-		final bytes = haxe.io.Bytes.ofString(value);
-		InputKeyboardData_Ffi.set_key(this, bytes.getData().bytes, bytes.length);
-		return value;
-	}
-
+	inline function get_key():String { var raw = InputKeyboardData_Ffi.get_key(this); if (raw == null) return null; var value:String = @:privateAccess String.fromUTF8(raw); InputKeyboardData_Ffi.freeString(raw); return value; }
+	inline function set_key(value:String):String { var raw:hl.Bytes = null; if (value != null) { var bytes = haxe.io.Bytes.ofString(value); raw = new hl.Bytes(bytes.length + 1); raw.blit(0, bytes.getData(), 0, bytes.length); raw.setUI8(bytes.length, 0); } InputKeyboardData_Ffi.set_key(this, raw); return value; }
 	public var keyCode(get, set):Int;
 
 	inline function get_keyCode():Int return this.getI32(64);

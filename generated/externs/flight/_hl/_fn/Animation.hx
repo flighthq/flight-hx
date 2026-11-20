@@ -18,27 +18,27 @@ extern class Animation {
 	@:hlNative("flight", "flight_create_animation_blend_tree_input")
 	public static function createAnimationBlendTreeInput(player:hl.Bytes):flight._hl.AnimationBlendTreeInput;
 	@:hlNative("flight", "flight_advance_animation_blend_tree")
-	public static function advanceAnimationBlendTree(tree:flight._hl.AnimationBlendTree, dt:Single):Void;
+	public static function advanceAnimationBlendTree(tree:flight._hl.AnimationBlendTree, dt:Float):Void;
 	@:hlNative("flight", "flight_sample_animation_blend_tree")
 	public static function sampleAnimationBlendTree(out:hl.Bytes, outLen:Int, tree:flight._hl.AnimationBlendTree, visitFn:hl.Bytes, visitCtx:hl.Bytes):Void;
 	@:hlNative("flight", "flight_sample_animation_blend_tree_channel")
 	public static function sampleAnimationBlendTreeChannel(out:hl.Bytes, outLen:Int, tree:flight._hl.AnimationBlendTree, channelIndex:Int):Bool;
 	@:hlNative("flight", "flight_set_animation_blend_tree_input_weight")
 	public static function setAnimationBlendTreeInputWeight(tree:flight._hl.AnimationBlendTree, inputIndex:Int, weight:Single):Bool;
-	@:hlNative("flight", "flight_create_animation_clip")
-	public static function createAnimationClip(channels:hl.Bytes, duration:Single, events:hl.Bytes, eventsLen:Int):flight._hl.AnimationClip;
+	@:hlNative("flight", "flight_create_animation_channel")
+	public static function createAnimationChannel(track:hl.Bytes, targetRef:flight._hl.TargetRef):flight._hl.AnimationChannel;
 	@:hlNative("flight", "flight_create_animation_clip_event")
 	public static function createAnimationClipEvent():flight._hl.AnimationClipEvent;
 	@:hlNative("flight", "flight_clone_animation_clip")
 	public static function cloneAnimationClip(clip:flight._hl.AnimationClip):flight._hl.AnimationClip;
 	@:hlNative("flight", "flight_get_animation_clip_duration")
-	public static function getAnimationClipDuration(clip:flight._hl.AnimationClip):Single;
+	public static function getAnimationClipDuration(clip:flight._hl.AnimationClip):Float;
 	@:hlNative("flight", "flight_sample_animation_clip")
-	public static function sampleAnimationClip(out:hl.Bytes, outLen:Int, clip:flight._hl.AnimationClip, time:Single, visitFn:hl.Bytes, visitCtx:hl.Bytes):Void;
+	public static function sampleAnimationClip(out:hl.Bytes, outLen:Int, clip:flight._hl.AnimationClip, time:Float, visitFn:hl.Bytes, visitCtx:hl.Bytes):Void;
 	@:hlNative("flight", "flight_create_animation_crossfade")
-	public static function createAnimationCrossfade(from:hl.Bytes, to:hl.Bytes, duration:Single, opts:flight._hl.AnimationCrossfadeOptions):flight._hl.AnimationCrossfade;
+	public static function createAnimationCrossfade(from:hl.Bytes, to:hl.Bytes, duration:Float, opts:flight._hl.AnimationCrossfadeOptions):flight._hl.AnimationCrossfade;
 	@:hlNative("flight", "flight_advance_animation_crossfade")
-	public static function advanceAnimationCrossfade(state:flight._hl.AnimationCrossfade, dt:Single):Void;
+	public static function advanceAnimationCrossfade(state:flight._hl.AnimationCrossfade, dt:Float):Void;
 	@:hlNative("flight", "flight_is_animation_crossfade_complete")
 	public static function isAnimationCrossfadeComplete(state:flight._hl.AnimationCrossfade):Bool;
 	@:hlNative("flight", "flight_sample_animation_crossfade")
@@ -50,7 +50,7 @@ extern class Animation {
 	@:hlNative("flight", "flight_create_animation_state_machine_layer")
 	public static function createAnimationStateMachineLayer(stateMachine:hl.Bytes, options:flight._hl.AnimationLayerOptions):flight._hl.AnimationLayer;
 	@:hlNative("flight", "flight_advance_animation_layer_stack")
-	public static function advanceAnimationLayerStack(stack:flight._hl.AnimationLayerStack, dt:Single):Void;
+	public static function advanceAnimationLayerStack(stack:flight._hl.AnimationLayerStack, dt:Float):Void;
 	@:hlNative("flight", "flight_sample_animation_layer_stack")
 	public static function sampleAnimationLayerStack(out:hl.Bytes, outLen:Int, stack:flight._hl.AnimationLayerStack, visitFn:hl.Bytes, visitCtx:hl.Bytes):Void;
 	@:hlNative("flight", "flight_sample_animation_layer_stack_channel")
@@ -60,7 +60,7 @@ extern class Animation {
 	@:hlNative("flight", "flight_create_animation_player")
 	public static function createAnimationPlayer(clip:flight._hl.AnimationClip):flight._hl.AnimationPlayer;
 	@:hlNative("flight", "flight_advance_animation_player")
-	public static function advanceAnimationPlayer(player:flight._hl.AnimationPlayer, dt:Single):Void;
+	public static function advanceAnimationPlayer(player:flight._hl.AnimationPlayer, dt:Float):Void;
 	@:hlNative("flight", "flight_clone_animation_player")
 	public static function cloneAnimationPlayer(player:flight._hl.AnimationPlayer):flight._hl.AnimationPlayer;
 	@:hlNative("flight", "flight_enable_animation_player_signals")
@@ -70,17 +70,17 @@ extern class Animation {
 	@:hlNative("flight", "flight_play_animation_player")
 	public static function playAnimationPlayer(player:flight._hl.AnimationPlayer):Void;
 	@:hlNative("flight", "flight_seek_animation_player")
-	public static function seekAnimationPlayer(player:flight._hl.AnimationPlayer, time:Single):Void;
+	public static function seekAnimationPlayer(player:flight._hl.AnimationPlayer, time:Float):Void;
 	@:hlNative("flight", "flight_stop_animation_player")
 	public static function stopAnimationPlayer(player:flight._hl.AnimationPlayer):Void;
 	@:hlNative("flight", "flight_create_animation_root_motion_extractor")
 	public static function createAnimationRootMotionExtractor(clip:hl.Bytes, channelIndex:Int):flight._hl.AnimationRootMotionExtractor;
 	@:hlNative("flight", "flight_extract_animation_root_motion")
-	public static function extractAnimationRootMotion(out:hl.Bytes, outLen:Int, extractor:flight._hl.AnimationRootMotionExtractor, startTime:Single, endTime:Single):Bool;
+	public static function extractAnimationRootMotion(out:hl.Bytes, outLen:Int, extractor:flight._hl.AnimationRootMotionExtractor, startTime:Float, endTime:Float):Bool;
 	@:hlNative("flight", "flight_create_animation_state_machine_state")
 	public static function createAnimationStateMachineState(blendTree:hl.Bytes):flight._hl.AnimationStateMachineState;
 	@:hlNative("flight", "flight_advance_animation_state_machine")
-	public static function advanceAnimationStateMachine(machine:flight._hl.AnimationStateMachine, dt:Single):Void;
+	public static function advanceAnimationStateMachine(machine:flight._hl.AnimationStateMachine, dt:Float):Void;
 	@:hlNative("flight", "flight_get_animation_state_machine_current_state")
 	public static function getAnimationStateMachineCurrentState(machine:flight._hl.AnimationStateMachine):flight._hl.AnimationStateMachineState;
 	@:hlNative("flight", "flight_is_animation_state_machine_transitioning")
@@ -94,9 +94,9 @@ extern class Animation {
 	@:hlNative("flight", "flight_clone_animation_track")
 	public static function cloneAnimationTrack(track:flight._hl.AnimationTrack):flight._hl.AnimationTrack;
 	@:hlNative("flight", "flight_sample_animation_track")
-	public static function sampleAnimationTrack(out:hl.Bytes, outLen:Int, track:flight._hl.AnimationTrack, t:Single):Void;
+	public static function sampleAnimationTrack(out:hl.Bytes, outLen:Int, track:flight._hl.AnimationTrack, t:Float):Void;
 	@:hlNative("flight", "flight_trim_animation_track")
-	public static function trimAnimationTrack(track:flight._hl.AnimationTrack, startTime:Single, endTime:Single):flight._hl.AnimationTrack;
+	public static function trimAnimationTrack(track:flight._hl.AnimationTrack, startTime:Float, endTime:Float):flight._hl.AnimationTrack;
 	@:hlNative("flight", "flight_validate_animation_track")
 	public static function validateAnimationTrack(out:hl.Bytes, track:flight._hl.AnimationTrack):Bool;
 	@:hlNative("flight", "flight_free_animation_sample_accumulator")
@@ -105,6 +105,8 @@ extern class Animation {
 	public static function freeAnimationBlendTree(ptr:flight._hl.AnimationBlendTree):Void;
 	@:hlNative("flight", "flight_free_animation_blend_tree_input")
 	public static function freeAnimationBlendTreeInput(ptr:flight._hl.AnimationBlendTreeInput):Void;
+	@:hlNative("flight", "flight_free_animation_channel")
+	public static function freeAnimationChannel(ptr:flight._hl.AnimationChannel):Void;
 	@:hlNative("flight", "flight_free_animation_clip")
 	public static function freeAnimationClip(ptr:flight._hl.AnimationClip):Void;
 	@:hlNative("flight", "flight_free_animation_clip_event")

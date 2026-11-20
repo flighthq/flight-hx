@@ -28,4 +28,6 @@ extern class Clock {
 	public static function resumeClock(clock:flight._js.Clock):Void;
 	@:native("setClockScale")
 	public static function setClockScale(clock:flight._js.Clock, scale:Float):Void;
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeClockRef(ptr:flight._js.Clock):Void {}
 }

@@ -26,39 +26,39 @@ abstract Physics2DContact(hl.Bytes) {
 	inline function get_enabled():Bool return this.getUI8(24) != 0;
 
 	inline function set_enabled(value:Bool):Bool { this.setUI8(24, value ? 1 : 0); return value; }
-	public var friction(get, set):Single;
+	public var friction(get, set):Float;
 
-	inline function get_friction():Single return this.getF32(28);
+	inline function get_friction():Float return this.getF64(32);
 
-	inline function set_friction(value:Single):Single { this.setF32(28, value); return value; }
-	public var normalX(get, set):Single;
+	inline function set_friction(value:Float):Float { this.setF64(32, value); return value; }
+	public var normalX(get, set):Float;
 
-	inline function get_normalX():Single return this.getF32(32);
+	inline function get_normalX():Float return this.getF64(40);
 
-	inline function set_normalX(value:Single):Single { this.setF32(32, value); return value; }
-	public var normalY(get, set):Single;
+	inline function set_normalX(value:Float):Float { this.setF64(40, value); return value; }
+	public var normalY(get, set):Float;
 
-	inline function get_normalY():Single return this.getF32(36);
+	inline function get_normalY():Float return this.getF64(48);
 
-	inline function set_normalY(value:Single):Single { this.setF32(36, value); return value; }
+	inline function set_normalY(value:Float):Float { this.setF64(48, value); return value; }
 	public var pointCount(get, set):Int;
 
-	inline function get_pointCount():Int return this.getI32(40);
+	inline function get_pointCount():Int return this.getI32(56);
 
-	inline function set_pointCount(value:Int):Int { this.setI32(40, value); return value; }
-	public var restitution(get, set):Single;
+	inline function set_pointCount(value:Int):Int { this.setI32(56, value); return value; }
+	public var restitution(get, set):Float;
 
-	inline function get_restitution():Single return this.getF32(72);
+	inline function get_restitution():Float return this.getF64(88);
 
-	inline function set_restitution(value:Single):Single { this.setF32(72, value); return value; }
+	inline function set_restitution(value:Float):Float { this.setF64(88, value); return value; }
 	public var sensor(get, set):Bool;
 
-	inline function get_sensor():Bool return this.getUI8(76) != 0;
+	inline function get_sensor():Bool return this.getUI8(96) != 0;
 
-	inline function set_sensor(value:Bool):Bool { this.setUI8(76, value ? 1 : 0); return value; }
+	inline function set_sensor(value:Bool):Bool { this.setUI8(96, value ? 1 : 0); return value; }
 	public var touching(get, set):Bool;
 
-	inline function get_touching():Bool return this.getUI8(77) != 0;
+	inline function get_touching():Bool return this.getUI8(97) != 0;
 
-	inline function set_touching(value:Bool):Bool { this.setUI8(77, value ? 1 : 0); return value; }
+	inline function set_touching(value:Bool):Bool { this.setUI8(97, value ? 1 : 0); return value; }
 }

@@ -2,9 +2,9 @@ package flight._js;
 
 abstract XmlElement(Dynamic) {
 	public var name(get, set):String;
-	inline function get_name():String return untyped this["name"];
-	inline function set_name(value:String):String return untyped this["name"] = value;
+	inline function get_name():String return untyped this.name;
+	inline function set_name(value:String):String return untyped this.name = value;
 	public var text(get, set):String;
-	inline function get_text():String return untyped this["text"];
-	inline function set_text(value:String):String return untyped this["text"] = value;
+	inline function get_text():String return untyped this.text;
+	inline function set_text(value:String):String return untyped this.text = value;
 }

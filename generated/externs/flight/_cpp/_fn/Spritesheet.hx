@@ -59,10 +59,16 @@ extern class Spritesheet {
 	public static function validateSpritesheetData(out:cpp.Star<cpp.Void>, data:flight._cpp.SpritesheetData):Bool;
 	@:native("flight_free_spritesheet")
 	public static function freeSpritesheet(ptr:flight._cpp.Spritesheet):Void;
+	@:native("flight_free_spritesheet_animation_ref")
+	public static function freeSpritesheetAnimationRef(ptr:flight._cpp.SpritesheetAnimation):Void;
 	@:native("flight_free_spritesheet_animation_data")
 	public static function freeSpritesheetAnimationData(ptr:flight._cpp.SpritesheetAnimationData):Void;
 	@:native("flight_free_spritesheet_data")
 	public static function freeSpritesheetData(ptr:flight._cpp.SpritesheetData):Void;
 	@:native("flight_free_spritesheet_frame_data")
 	public static function freeSpritesheetFrameData(ptr:flight._cpp.SpritesheetFrameData):Void;
+	@:native("flight_free_spritesheet_frame_ref")
+	public static function freeSpritesheetFrameRef(ptr:flight._cpp.SpritesheetFrame):Void;
+	@:native("flight_free_spritesheet_player_ref")
+	public static function freeSpritesheetPlayerRef(ptr:flight._cpp.SpritesheetPlayer):Void;
 }

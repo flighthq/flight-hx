@@ -57,9 +57,19 @@ extern class Command {
 	@:native("explainCommandDispatch")
 	public static function explainCommandDispatch(history:Dynamic, command:flight._js.CommandRef):flight._js.CommandDispatchExplanation;
 	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeAddNodeChildCommandRef(ptr:flight._js.AddNodeChildCommand):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeCompositeCommandRef(ptr:flight._js.CompositeCommand):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeRemoveNodeChildCommandRef(ptr:flight._js.RemoveNodeChildCommand):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeReorderNodeChildCommandRef(ptr:flight._js.ReorderNodeChildCommand):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeCommandBindingTable(ptr:flight._js.CommandBindingTable):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */
-	public static inline function freeCommandBindingRef(ptr:flight._js.CommandBindingRef):Void {}
+	public static inline function freeCommandBindingRef(ptr:flight._js.CommandBinding):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeCommandHistoryRef(ptr:flight._js.CommandHistory):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeUnitSignal(ptr:flight._js.UnitSignal):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */

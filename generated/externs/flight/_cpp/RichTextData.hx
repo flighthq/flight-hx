@@ -1,6 +1,7 @@
 package flight._cpp;
 
 private extern class RichTextData_Ffi {
+	@:native("flight_free_string") static function freeString(value:cpp.RawPointer<cpp.Char>):Void;
 	@:native("flight_get_rich_text_data_background") static function get_background(ptr:cpp.Star<cpp.Void>):Bool;
 	@:native("flight_set_rich_text_data_background") static function set_background(ptr:cpp.Star<cpp.Void>, value:Bool):Bool;
 	@:native("flight_get_rich_text_data_background_color") static function get_backgroundColor(ptr:cpp.Star<cpp.Void>):Int;
@@ -11,28 +12,26 @@ private extern class RichTextData_Ffi {
 	@:native("flight_set_rich_text_data_border_color") static function set_borderColor(ptr:cpp.Star<cpp.Void>, value:Int):Int;
 	@:native("flight_get_rich_text_data_condense_white") static function get_condenseWhite(ptr:cpp.Star<cpp.Void>):Bool;
 	@:native("flight_set_rich_text_data_condense_white") static function set_condenseWhite(ptr:cpp.Star<cpp.Void>, value:Bool):Bool;
-	@:native("flight_get_rich_text_data_height") static function get_height(ptr:cpp.Star<cpp.Void>):Single;
-	@:native("flight_set_rich_text_data_height") static function set_height(ptr:cpp.Star<cpp.Void>, value:Single):Single;
+	@:native("flight_get_rich_text_data_height") static function get_height(ptr:cpp.Star<cpp.Void>):Float;
+	@:native("flight_set_rich_text_data_height") static function set_height(ptr:cpp.Star<cpp.Void>, value:Float):Float;
 	@:native("flight_get_rich_text_data_max_chars") static function get_maxChars(ptr:cpp.Star<cpp.Void>):Int;
 	@:native("flight_set_rich_text_data_max_chars") static function set_maxChars(ptr:cpp.Star<cpp.Void>, value:Int):Int;
 	@:native("flight_get_rich_text_data_mouse_wheel_enabled") static function get_mouseWheelEnabled(ptr:cpp.Star<cpp.Void>):Bool;
 	@:native("flight_set_rich_text_data_mouse_wheel_enabled") static function set_mouseWheelEnabled(ptr:cpp.Star<cpp.Void>, value:Bool):Bool;
 	@:native("flight_get_rich_text_data_multiline") static function get_multiline(ptr:cpp.Star<cpp.Void>):Bool;
 	@:native("flight_set_rich_text_data_multiline") static function set_multiline(ptr:cpp.Star<cpp.Void>, value:Bool):Bool;
-	@:native("flight_get_rich_text_data_scroll_h") static function get_scrollH(ptr:cpp.Star<cpp.Void>):Single;
-	@:native("flight_set_rich_text_data_scroll_h") static function set_scrollH(ptr:cpp.Star<cpp.Void>, value:Single):Single;
-	@:native("flight_get_rich_text_data_scroll_v") static function get_scrollV(ptr:cpp.Star<cpp.Void>):Single;
-	@:native("flight_set_rich_text_data_scroll_v") static function set_scrollV(ptr:cpp.Star<cpp.Void>, value:Single):Single;
+	@:native("flight_get_rich_text_data_scroll_h") static function get_scrollH(ptr:cpp.Star<cpp.Void>):Float;
+	@:native("flight_set_rich_text_data_scroll_h") static function set_scrollH(ptr:cpp.Star<cpp.Void>, value:Float):Float;
+	@:native("flight_get_rich_text_data_scroll_v") static function get_scrollV(ptr:cpp.Star<cpp.Void>):Float;
+	@:native("flight_set_rich_text_data_scroll_v") static function set_scrollV(ptr:cpp.Star<cpp.Void>, value:Float):Float;
 	@:native("flight_get_rich_text_data_selectable") static function get_selectable(ptr:cpp.Star<cpp.Void>):Bool;
 	@:native("flight_set_rich_text_data_selectable") static function set_selectable(ptr:cpp.Star<cpp.Void>, value:Bool):Bool;
-	@:native("flight_field_get_rich_text_data_text")
-	static function get_text(ptr:cpp.Star<cpp.Void>):flight._cpp.NativeByteBuffer;
-	@:native("flight_field_set_rich_text_data_text")
-	static function set_text(ptr:cpp.Star<cpp.Void>, data:cpp.Star<cpp.Void>, length:Int):Void;
+	@:native("flight_field_get_rich_text_data_text") static function get_text(ptr:cpp.Star<cpp.Void>):cpp.RawPointer<cpp.Char>;
+	@:native("flight_field_set_rich_text_data_text") static function set_text(ptr:cpp.Star<cpp.Void>, value:cpp.ConstCharStar):Void;
 	@:native("flight_get_rich_text_data_text_color") static function get_textColor(ptr:cpp.Star<cpp.Void>):Int;
 	@:native("flight_set_rich_text_data_text_color") static function set_textColor(ptr:cpp.Star<cpp.Void>, value:Int):Int;
-	@:native("flight_get_rich_text_data_width") static function get_width(ptr:cpp.Star<cpp.Void>):Single;
-	@:native("flight_set_rich_text_data_width") static function set_width(ptr:cpp.Star<cpp.Void>, value:Single):Single;
+	@:native("flight_get_rich_text_data_width") static function get_width(ptr:cpp.Star<cpp.Void>):Float;
+	@:native("flight_set_rich_text_data_width") static function set_width(ptr:cpp.Star<cpp.Void>, value:Float):Float;
 	@:native("flight_get_rich_text_data_word_wrap") static function get_wordWrap(ptr:cpp.Star<cpp.Void>):Bool;
 	@:native("flight_set_rich_text_data_word_wrap") static function set_wordWrap(ptr:cpp.Star<cpp.Void>, value:Bool):Bool;
 }
@@ -63,11 +62,11 @@ abstract RichTextData(cpp.Star<cpp.Void>) {
 	inline function get_condenseWhite():Bool return RichTextData_Ffi.get_condenseWhite(this);
 
 	inline function set_condenseWhite(value:Bool):Bool { RichTextData_Ffi.set_condenseWhite(this, value); return value; }
-	public var height(get, set):Single;
+	public var height(get, set):Float;
 
-	inline function get_height():Single return RichTextData_Ffi.get_height(this);
+	inline function get_height():Float return RichTextData_Ffi.get_height(this);
 
-	inline function set_height(value:Single):Single { RichTextData_Ffi.set_height(this, value); return value; }
+	inline function set_height(value:Float):Float { RichTextData_Ffi.set_height(this, value); return value; }
 	public var maxChars(get, set):Int;
 
 	inline function get_maxChars():Int return RichTextData_Ffi.get_maxChars(this);
@@ -83,46 +82,34 @@ abstract RichTextData(cpp.Star<cpp.Void>) {
 	inline function get_multiline():Bool return RichTextData_Ffi.get_multiline(this);
 
 	inline function set_multiline(value:Bool):Bool { RichTextData_Ffi.set_multiline(this, value); return value; }
-	public var scrollH(get, set):Single;
+	public var scrollH(get, set):Float;
 
-	inline function get_scrollH():Single return RichTextData_Ffi.get_scrollH(this);
+	inline function get_scrollH():Float return RichTextData_Ffi.get_scrollH(this);
 
-	inline function set_scrollH(value:Single):Single { RichTextData_Ffi.set_scrollH(this, value); return value; }
-	public var scrollV(get, set):Single;
+	inline function set_scrollH(value:Float):Float { RichTextData_Ffi.set_scrollH(this, value); return value; }
+	public var scrollV(get, set):Float;
 
-	inline function get_scrollV():Single return RichTextData_Ffi.get_scrollV(this);
+	inline function get_scrollV():Float return RichTextData_Ffi.get_scrollV(this);
 
-	inline function set_scrollV(value:Single):Single { RichTextData_Ffi.set_scrollV(this, value); return value; }
+	inline function set_scrollV(value:Float):Float { RichTextData_Ffi.set_scrollV(this, value); return value; }
 	public var selectable(get, set):Bool;
 
 	inline function get_selectable():Bool return RichTextData_Ffi.get_selectable(this);
 
 	inline function set_selectable(value:Bool):Bool { RichTextData_Ffi.set_selectable(this, value); return value; }
 	public var text(get, set):String;
-	inline function get_text():String {
-		final bytes = RichTextData_Ffi.get_text(this);
-		try {
-			final value = bytes.toBytes().toString();
-			bytes.dispose();
-			return value;
-		} catch (error:Dynamic) { bytes.dispose(); throw error; }
-	}
-	inline function set_text(value:String):String {
-		final bytes = haxe.io.Bytes.ofString(value);
-		RichTextData_Ffi.set_text(this, cast cpp.Pointer.ofArray(bytes.getData()).raw, bytes.length);
-		return value;
-	}
-
+	inline function get_text():String { var raw = RichTextData_Ffi.get_text(this); if (raw == null) return null; var value:String = (cast raw : cpp.ConstCharStar); RichTextData_Ffi.freeString(raw); return value; }
+	inline function set_text(value:String):String { var raw:cpp.ConstCharStar = cast value; RichTextData_Ffi.set_text(this, raw); return value; }
 	public var textColor(get, set):Int;
 
 	inline function get_textColor():Int return RichTextData_Ffi.get_textColor(this);
 
 	inline function set_textColor(value:Int):Int { RichTextData_Ffi.set_textColor(this, value); return value; }
-	public var width(get, set):Single;
+	public var width(get, set):Float;
 
-	inline function get_width():Single return RichTextData_Ffi.get_width(this);
+	inline function get_width():Float return RichTextData_Ffi.get_width(this);
 
-	inline function set_width(value:Single):Single { RichTextData_Ffi.set_width(this, value); return value; }
+	inline function set_width(value:Float):Float { RichTextData_Ffi.set_width(this, value); return value; }
 	public var wordWrap(get, set):Bool;
 
 	inline function get_wordWrap():Bool return RichTextData_Ffi.get_wordWrap(this);

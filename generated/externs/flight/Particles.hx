@@ -69,6 +69,11 @@ extern inline function applyParticleObjectForces(objects:Dynamic, objectsLen:Int
 }
 #end
 #if (js && flight_esm)
+extern inline function buildParticleColorCurve(out:Dynamic, f:Dynamic, samples:Int):Void {
+	flight._js._fn.Particles.buildParticleColorCurve(out, f, samples);
+}
+#end
+#if (js && flight_esm)
 extern inline function buildParticleCurve(out:Dynamic, f:Dynamic, samples:Int):Void {
 	flight._js._fn.Particles.buildParticleCurve(out, f, samples);
 }

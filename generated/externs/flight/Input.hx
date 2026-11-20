@@ -531,18 +531,6 @@ extern inline function advanceInputKeyRepeatTimer(timer:Dynamic, nowMs:Float):Vo
 extern inline function startInputKeyRepeatTimer(timer:Dynamic, callback_:InputRepeatCallback, nowMs:Float):Void {
 	flight._js._fn.Input.startInputKeyRepeatTimer(timer, callback_, nowMs);
 }
-#else
-extern inline function startInputKeyRepeatTimer(timer:Dynamic, callback_:InputRepeatCallback, nowMs:Float):Void {
-#if hl
-	flight._hl._fn.Input.startInputKeyRepeatTimer(timer, callback_, nowMs);
-#elseif cpp
-	flight._cpp._fn.Input.startInputKeyRepeatTimer(timer, callback_, nowMs);
-#elseif (js && flight_esm)
-	flight._js._fn.Input.startInputKeyRepeatTimer(timer, callback_, nowMs);
-#else
-	#error "flight.Input: no backend for this target."
-#end
-}
 #end
 #if (js && flight_esm)
 extern inline function stopInputKeyRepeatTimer(timer:Dynamic):Void {
@@ -562,6 +550,40 @@ extern inline function stopInputKeyRepeatTimer(timer:Dynamic):Void {
 }
 #end
 #if (js && flight_esm)
+extern inline function freeInputManagerRef(ptr:InputManager):Void {
+	flight._js._fn.Input.freeInputManagerRef(ptr);
+}
+#else
+extern inline function freeInputManagerRef(ptr:InputManager):Void {
+#if hl
+	flight._hl._fn.Input.freeInputManagerRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Input.freeInputManagerRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Input.freeInputManagerRef(ptr);
+#else
+	#error "flight.Input: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeInputStateRef(ptr:InputState):Void {
+	flight._js._fn.Input.freeInputStateRef(ptr);
+}
+#else
+extern inline function freeInputStateRef(ptr:InputState):Void {
+#if hl
+	flight._hl._fn.Input.freeInputStateRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Input.freeInputStateRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Input.freeInputStateRef(ptr);
+#else
+	#error "flight.Input: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
 extern inline function freeInputDisposer(ptr:InputDisposer):Void {
 	flight._js._fn.Input.freeInputDisposer(ptr);
 }
@@ -573,6 +595,40 @@ extern inline function freeInputDisposer(ptr:InputDisposer):Void {
 	flight._cpp._fn.Input.freeInputDisposer(ptr);
 #elseif (js && flight_esm)
 	flight._js._fn.Input.freeInputDisposer(ptr);
+#else
+	#error "flight.Input: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeInputTargetHandleRef(ptr:InputTargetHandle):Void {
+	flight._js._fn.Input.freeInputTargetHandleRef(ptr);
+}
+#else
+extern inline function freeInputTargetHandleRef(ptr:InputTargetHandle):Void {
+#if hl
+	flight._hl._fn.Input.freeInputTargetHandleRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Input.freeInputTargetHandleRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Input.freeInputTargetHandleRef(ptr);
+#else
+	#error "flight.Input: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeInputKeyRepeatTimerRef(ptr:InputKeyRepeatTimer):Void {
+	flight._js._fn.Input.freeInputKeyRepeatTimerRef(ptr);
+}
+#else
+extern inline function freeInputKeyRepeatTimerRef(ptr:InputKeyRepeatTimer):Void {
+#if hl
+	flight._hl._fn.Input.freeInputKeyRepeatTimerRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Input.freeInputKeyRepeatTimerRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Input.freeInputKeyRepeatTimerRef(ptr);
 #else
 	#error "flight.Input: no backend for this target."
 #end

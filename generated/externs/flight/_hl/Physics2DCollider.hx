@@ -11,5 +11,6 @@ abstract Physics2DCollider(hl.Bytes) {
 	public var sensor(get, set):Bool;
 
 	inline function get_sensor():Bool return Physics2DCollider_Ffi.get_sensor(this);
+
 	inline function set_sensor(value:Bool):Bool { Physics2DCollider_Ffi.set_sensor(this, value); return value; }
 }

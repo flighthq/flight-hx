@@ -1,24 +1,24 @@
 package flight._hl;
 
 abstract CollisionAabb2D(hl.Bytes) {
-	public var minX(get, set):Single;
+	public var minX(get, set):Float;
 
-	inline function get_minX():Single return this.getF32(0);
+	inline function get_minX():Float return this.getF64(0);
 
-	inline function set_minX(value:Single):Single { this.setF32(0, value); return value; }
-	public var minY(get, set):Single;
+	inline function set_minX(value:Float):Float { this.setF64(0, value); return value; }
+	public var minY(get, set):Float;
 
-	inline function get_minY():Single return this.getF32(4);
+	inline function get_minY():Float return this.getF64(8);
 
-	inline function set_minY(value:Single):Single { this.setF32(4, value); return value; }
-	public var maxX(get, set):Single;
+	inline function set_minY(value:Float):Float { this.setF64(8, value); return value; }
+	public var maxX(get, set):Float;
 
-	inline function get_maxX():Single return this.getF32(8);
+	inline function get_maxX():Float return this.getF64(16);
 
-	inline function set_maxX(value:Single):Single { this.setF32(8, value); return value; }
-	public var maxY(get, set):Single;
+	inline function set_maxX(value:Float):Float { this.setF64(16, value); return value; }
+	public var maxY(get, set):Float;
 
-	inline function get_maxY():Single return this.getF32(12);
+	inline function get_maxY():Float return this.getF64(24);
 
-	inline function set_maxY(value:Single):Single { this.setF32(12, value); return value; }
+	inline function set_maxY(value:Float):Float { this.setF64(24, value); return value; }
 }

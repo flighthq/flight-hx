@@ -55,5 +55,7 @@ extern class Clip {
 	@:native("disableClipGuards")
 	public static function disableClipGuards():Void;
 	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeClipRegionRef(ptr:flight._js.ClipRegion):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeClipRegionExplanation(ptr:flight._js.ClipRegionExplanation):Void {}
 }

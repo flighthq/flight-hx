@@ -5,7 +5,7 @@ extern inline function explainTextLabelContent(source:Dynamic):TextLabelContentE
 	return flight._js._fn.Text.explainTextLabelContent(source);
 }
 #else
-extern inline function explainTextLabelContent(source:Dynamic):TextLabelContentExplanation {
+extern inline function explainTextLabelContent(source:flight.FlightNode):TextLabelContentExplanation {
 #if hl
 	return flight._hl._fn.Text.explainTextLabelContent(source);
 #elseif cpp
@@ -22,7 +22,7 @@ extern inline function createNativeText():Dynamic {
 	return flight._js._fn.Text.createNativeText();
 }
 #else
-extern inline function createNativeText():Dynamic {
+extern inline function createNativeText():flight.FlightNode {
 #if hl
 	return flight._hl._fn.Text.createNativeText();
 #elseif cpp
@@ -39,7 +39,7 @@ extern inline function computeNativeTextLocalBoundsRectangle(out:Rectangle, sour
 	flight._js._fn.Text.computeNativeTextLocalBoundsRectangle(out, source);
 }
 #else
-extern inline function computeNativeTextLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
+extern inline function computeNativeTextLocalBoundsRectangle(out:Rectangle, source:flight.FlightNode):Void {
 #if hl
 	flight._hl._fn.Text.computeNativeTextLocalBoundsRectangle(out, source);
 #elseif cpp
@@ -56,7 +56,7 @@ extern inline function getNativeTextMeasuredHeight(source:NativeText):Float {
 	return flight._js._fn.Text.getNativeTextMeasuredHeight(source);
 }
 #else
-extern inline function getNativeTextMeasuredHeight(source:NativeText):Float {
+extern inline function getNativeTextMeasuredHeight(source:flight.FlightNode):Float {
 #if hl
 	return flight._hl._fn.Text.getNativeTextMeasuredHeight(source);
 #elseif cpp
@@ -73,7 +73,7 @@ extern inline function getNativeTextMeasuredWidth(source:NativeText):Float {
 	return flight._js._fn.Text.getNativeTextMeasuredWidth(source);
 }
 #else
-extern inline function getNativeTextMeasuredWidth(source:NativeText):Float {
+extern inline function getNativeTextMeasuredWidth(source:flight.FlightNode):Float {
 #if hl
 	return flight._hl._fn.Text.getNativeTextMeasuredWidth(source);
 #elseif cpp
@@ -90,7 +90,7 @@ extern inline function getNativeTextString(source:NativeText):String {
 	return flight._js._fn.Text.getNativeTextString(source);
 }
 #else
-extern inline function getNativeTextString(source:NativeText):String {
+extern inline function getNativeTextString(source:flight.FlightNode):String {
 #if hl
 	return cast flight._hl._fn.Text.getNativeTextString(source);
 #elseif cpp
@@ -107,7 +107,7 @@ extern inline function getNativeTextStyle(source:NativeText):Dynamic {
 	return flight._js._fn.Text.getNativeTextStyle(source);
 }
 #else
-extern inline function getNativeTextStyle(source:NativeText):Dynamic {
+extern inline function getNativeTextStyle(source:flight.FlightNode):Dynamic {
 #if hl
 	return flight._hl._fn.Text.getNativeTextStyle(source);
 #elseif cpp
@@ -124,7 +124,7 @@ extern inline function patchNativeTextStyle(source:Dynamic, patch:NativeTextStyl
 	flight._js._fn.Text.patchNativeTextStyle(source, patch);
 }
 #else
-extern inline function patchNativeTextStyle(source:Dynamic, patch:NativeTextStyle):Void {
+extern inline function patchNativeTextStyle(source:flight.FlightNode, patch:NativeTextStyle):Void {
 #if hl
 	flight._hl._fn.Text.patchNativeTextStyle(source, patch);
 #elseif cpp
@@ -141,7 +141,7 @@ extern inline function setNativeTextAutoSize(source:Dynamic, value:Dynamic):Void
 	flight._js._fn.Text.setNativeTextAutoSize(source, value);
 }
 #else
-extern inline function setNativeTextAutoSize(source:Dynamic, value:flight.TextAutoSize):Void {
+extern inline function setNativeTextAutoSize(source:flight.FlightNode, value:flight.TextAutoSize):Void {
 #if hl
 	flight._hl._fn.Text.setNativeTextAutoSize(source, value);
 #elseif cpp
@@ -158,7 +158,7 @@ extern inline function setNativeTextHeight(source:Dynamic, value:Float):Void {
 	flight._js._fn.Text.setNativeTextHeight(source, value);
 }
 #else
-extern inline function setNativeTextHeight(source:Dynamic, value:Float):Void {
+extern inline function setNativeTextHeight(source:flight.FlightNode, value:Float):Void {
 #if hl
 	flight._hl._fn.Text.setNativeTextHeight(source, value);
 #elseif cpp
@@ -175,7 +175,7 @@ extern inline function setNativeTextString(source:Dynamic, value:String):Void {
 	flight._js._fn.Text.setNativeTextString(source, value);
 }
 #else
-extern inline function setNativeTextString(source:Dynamic, value:String):Void {
+extern inline function setNativeTextString(source:flight.FlightNode, value:String):Void {
 #if hl
 	flight._hl._fn.Text.setNativeTextString(source, cast value);
 #elseif cpp
@@ -192,7 +192,7 @@ extern inline function setNativeTextStyle(source:Dynamic, value:Dynamic):Void {
 	flight._js._fn.Text.setNativeTextStyle(source, value);
 }
 #else
-extern inline function setNativeTextStyle(source:Dynamic, value:Dynamic):Void {
+extern inline function setNativeTextStyle(source:flight.FlightNode, value:Dynamic):Void {
 #if hl
 	flight._hl._fn.Text.setNativeTextStyle(source, value);
 #elseif cpp
@@ -209,7 +209,7 @@ extern inline function setNativeTextVerticalAlign(source:Dynamic, value:Dynamic)
 	flight._js._fn.Text.setNativeTextVerticalAlign(source, value);
 }
 #else
-extern inline function setNativeTextVerticalAlign(source:Dynamic, value:flight.TextVerticalAlign):Void {
+extern inline function setNativeTextVerticalAlign(source:flight.FlightNode, value:flight.TextVerticalAlign):Void {
 #if hl
 	flight._hl._fn.Text.setNativeTextVerticalAlign(source, value);
 #elseif cpp
@@ -226,7 +226,7 @@ extern inline function setNativeTextWidth(source:Dynamic, value:Float):Void {
 	flight._js._fn.Text.setNativeTextWidth(source, value);
 }
 #else
-extern inline function setNativeTextWidth(source:Dynamic, value:Float):Void {
+extern inline function setNativeTextWidth(source:flight.FlightNode, value:Float):Void {
 #if hl
 	flight._hl._fn.Text.setNativeTextWidth(source, value);
 #elseif cpp
@@ -243,7 +243,7 @@ extern inline function appendRichTextString(source:Dynamic, value:String):Void {
 	flight._js._fn.Text.appendRichTextString(source, value);
 }
 #else
-extern inline function appendRichTextString(source:Dynamic, value:String):Void {
+extern inline function appendRichTextString(source:flight.FlightNode, value:String):Void {
 #if hl
 	flight._hl._fn.Text.appendRichTextString(source, cast value);
 #elseif cpp
@@ -260,7 +260,7 @@ extern inline function buildRichTextLayoutParams(source:RichText, measure:TextMe
 	return flight._js._fn.Text.buildRichTextLayoutParams(source, measure);
 }
 #else
-extern inline function buildRichTextLayoutParams(source:RichText, measure:TextMeasureFunction):TextLayoutParams {
+extern inline function buildRichTextLayoutParams(source:flight.FlightNode, measure:TextMeasureFunction):TextLayoutParams {
 #if hl
 	return flight._hl._fn.Text.buildRichTextLayoutParams(source, measure);
 #elseif cpp
@@ -277,7 +277,7 @@ extern inline function clearRichTextFormatRanges(source:Dynamic):Void {
 	flight._js._fn.Text.clearRichTextFormatRanges(source);
 }
 #else
-extern inline function clearRichTextFormatRanges(source:Dynamic):Void {
+extern inline function clearRichTextFormatRanges(source:flight.FlightNode):Void {
 #if hl
 	flight._hl._fn.Text.clearRichTextFormatRanges(source);
 #elseif cpp
@@ -294,7 +294,7 @@ extern inline function computeRichTextLocalBoundsRectangle(out:Rectangle, source
 	flight._js._fn.Text.computeRichTextLocalBoundsRectangle(out, source);
 }
 #else
-extern inline function computeRichTextLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
+extern inline function computeRichTextLocalBoundsRectangle(out:Rectangle, source:flight.FlightNode):Void {
 #if hl
 	flight._hl._fn.Text.computeRichTextLocalBoundsRectangle(out, source);
 #elseif cpp
@@ -311,7 +311,7 @@ extern inline function dispatchRichTextLinkAtPoint(source:Dynamic, x:Float, y:Fl
 	return flight._js._fn.Text.dispatchRichTextLinkAtPoint(source, x, y);
 }
 #else
-extern inline function dispatchRichTextLinkAtPoint(source:Dynamic, x:Float, y:Float):String {
+extern inline function dispatchRichTextLinkAtPoint(source:flight.FlightNode, x:Float, y:Float):String {
 #if hl
 	return cast flight._hl._fn.Text.dispatchRichTextLinkAtPoint(source, x, y);
 #elseif cpp
@@ -328,7 +328,7 @@ extern inline function dispatchRichTextWheel(source:Dynamic, deltaLines:Float, l
 	flight._js._fn.Text.dispatchRichTextWheel(source, deltaLines, layout);
 }
 #else
-extern inline function dispatchRichTextWheel(source:Dynamic, deltaLines:Float, layout:TextLayoutResult):Void {
+extern inline function dispatchRichTextWheel(source:flight.FlightNode, deltaLines:Float, layout:TextLayoutResult):Void {
 #if hl
 	flight._hl._fn.Text.dispatchRichTextWheel(source, deltaLines, layout);
 #elseif cpp
@@ -345,7 +345,7 @@ extern inline function enableTextFieldSignals(source:Dynamic):Dynamic {
 	return flight._js._fn.Text.enableTextFieldSignals(source);
 }
 #else
-extern inline function enableTextFieldSignals(source:Dynamic):Dynamic {
+extern inline function enableTextFieldSignals(source:flight.FlightNode):Dynamic {
 #if hl
 	return flight._hl._fn.Text.enableTextFieldSignals(source);
 #elseif cpp
@@ -362,7 +362,7 @@ extern inline function getRichTextBottomScrollV(source:Dynamic):Float {
 	return flight._js._fn.Text.getRichTextBottomScrollV(source);
 }
 #else
-extern inline function getRichTextBottomScrollV(source:Dynamic):Float {
+extern inline function getRichTextBottomScrollV(source:flight.FlightNode):Float {
 #if hl
 	return flight._hl._fn.Text.getRichTextBottomScrollV(source);
 #elseif cpp
@@ -379,7 +379,7 @@ extern inline function getRichTextCharIndexAtPoint(source:Dynamic, x:Float, y:Fl
 	return flight._js._fn.Text.getRichTextCharIndexAtPoint(source, x, y);
 }
 #else
-extern inline function getRichTextCharIndexAtPoint(source:Dynamic, x:Float, y:Float):Int {
+extern inline function getRichTextCharIndexAtPoint(source:flight.FlightNode, x:Float, y:Float):Int {
 #if hl
 	return flight._hl._fn.Text.getRichTextCharIndexAtPoint(source, x, y);
 #elseif cpp
@@ -396,7 +396,7 @@ extern inline function getRichTextDefaultTextFormat(source:RichText):Dynamic {
 	return flight._js._fn.Text.getRichTextDefaultTextFormat(source);
 }
 #else
-extern inline function getRichTextDefaultTextFormat(source:RichText):Dynamic {
+extern inline function getRichTextDefaultTextFormat(source:flight.FlightNode):Dynamic {
 #if hl
 	return flight._hl._fn.Text.getRichTextDefaultTextFormat(source);
 #elseif cpp
@@ -413,7 +413,7 @@ extern inline function getRichTextFormatRangeAt(out:TextFormat, source:RichText,
 	flight._js._fn.Text.getRichTextFormatRangeAt(out, source, index);
 }
 #else
-extern inline function getRichTextFormatRangeAt(out:TextFormat, source:RichText, index:Int):Void {
+extern inline function getRichTextFormatRangeAt(out:TextFormat, source:flight.FlightNode, index:Int):Void {
 #if hl
 	flight._hl._fn.Text.getRichTextFormatRangeAt(out, source, index);
 #elseif cpp
@@ -430,7 +430,7 @@ extern inline function getRichTextFormatRangeByIndex(out:TextFormatRange, source
 	return flight._js._fn.Text.getRichTextFormatRangeByIndex(out, source, i);
 }
 #else
-extern inline function getRichTextFormatRangeByIndex(out:TextFormatRange, source:RichText, i:Int):Bool {
+extern inline function getRichTextFormatRangeByIndex(out:TextFormatRange, source:flight.FlightNode, i:Int):Bool {
 #if hl
 	return flight._hl._fn.Text.getRichTextFormatRangeByIndex(out, source, i);
 #elseif cpp
@@ -447,7 +447,7 @@ extern inline function getRichTextFormatRangeCount(source:RichText):Int {
 	return flight._js._fn.Text.getRichTextFormatRangeCount(source);
 }
 #else
-extern inline function getRichTextFormatRangeCount(source:RichText):Int {
+extern inline function getRichTextFormatRangeCount(source:flight.FlightNode):Int {
 #if hl
 	return flight._hl._fn.Text.getRichTextFormatRangeCount(source);
 #elseif cpp
@@ -464,7 +464,7 @@ extern inline function getRichTextFormatRangesIn(out:Dynamic, source:RichText, b
 	flight._js._fn.Text.getRichTextFormatRangesIn(out, source, beginIndex, endIndex);
 }
 #else
-extern inline function getRichTextFormatRangesIn(out:Dynamic, source:RichText, beginIndex:Int, endIndex:Int):Void {
+extern inline function getRichTextFormatRangesIn(out:Dynamic, source:flight.FlightNode, beginIndex:Int, endIndex:Int):Void {
 #if hl
 	flight._hl._fn.Text.getRichTextFormatRangesIn(out, source, beginIndex, endIndex);
 #elseif cpp
@@ -481,7 +481,7 @@ extern inline function getRichTextLength(source:RichText):Int {
 	return flight._js._fn.Text.getRichTextLength(source);
 }
 #else
-extern inline function getRichTextLength(source:RichText):Int {
+extern inline function getRichTextLength(source:flight.FlightNode):Int {
 #if hl
 	return flight._hl._fn.Text.getRichTextLength(source);
 #elseif cpp
@@ -498,7 +498,7 @@ extern inline function getRichTextLineCount(source:Dynamic):Int {
 	return flight._js._fn.Text.getRichTextLineCount(source);
 }
 #else
-extern inline function getRichTextLineCount(source:Dynamic):Int {
+extern inline function getRichTextLineCount(source:flight.FlightNode):Int {
 #if hl
 	return flight._hl._fn.Text.getRichTextLineCount(source);
 #elseif cpp
@@ -515,7 +515,7 @@ extern inline function getRichTextLineMetrics(source:Dynamic, lineIndex:Int):Nul
 	return flight._js._fn.Text.getRichTextLineMetrics(source, lineIndex);
 }
 #else
-extern inline function getRichTextLineMetrics(source:Dynamic, lineIndex:Int):TextLineMetrics {
+extern inline function getRichTextLineMetrics(source:flight.FlightNode, lineIndex:Int):TextLineMetrics {
 #if hl
 	return flight._hl._fn.Text.getRichTextLineMetrics(source, lineIndex);
 #elseif cpp
@@ -532,7 +532,7 @@ extern inline function getRichTextMaxScrollH(source:Dynamic):Float {
 	return flight._js._fn.Text.getRichTextMaxScrollH(source);
 }
 #else
-extern inline function getRichTextMaxScrollH(source:Dynamic):Float {
+extern inline function getRichTextMaxScrollH(source:flight.FlightNode):Float {
 #if hl
 	return flight._hl._fn.Text.getRichTextMaxScrollH(source);
 #elseif cpp
@@ -549,7 +549,7 @@ extern inline function getRichTextMaxScrollV(source:Dynamic):Float {
 	return flight._js._fn.Text.getRichTextMaxScrollV(source);
 }
 #else
-extern inline function getRichTextMaxScrollV(source:Dynamic):Float {
+extern inline function getRichTextMaxScrollV(source:flight.FlightNode):Float {
 #if hl
 	return flight._hl._fn.Text.getRichTextMaxScrollV(source);
 #elseif cpp
@@ -566,7 +566,7 @@ extern inline function getRichTextPasswordCharacter(source:RichText):Null<String
 	return flight._js._fn.Text.getRichTextPasswordCharacter(source);
 }
 #else
-extern inline function getRichTextPasswordCharacter(source:RichText):String {
+extern inline function getRichTextPasswordCharacter(source:flight.FlightNode):String {
 #if hl
 	return cast flight._hl._fn.Text.getRichTextPasswordCharacter(source);
 #elseif cpp
@@ -583,7 +583,7 @@ extern inline function getRichTextString(source:RichText):String {
 	return flight._js._fn.Text.getRichTextString(source);
 }
 #else
-extern inline function getRichTextString(source:RichText):String {
+extern inline function getRichTextString(source:flight.FlightNode):String {
 #if hl
 	return cast flight._hl._fn.Text.getRichTextString(source);
 #elseif cpp
@@ -600,7 +600,7 @@ extern inline function getRichTextTextHeight(source:Dynamic):Float {
 	return flight._js._fn.Text.getRichTextTextHeight(source);
 }
 #else
-extern inline function getRichTextTextHeight(source:Dynamic):Float {
+extern inline function getRichTextTextHeight(source:flight.FlightNode):Float {
 #if hl
 	return flight._hl._fn.Text.getRichTextTextHeight(source);
 #elseif cpp
@@ -617,7 +617,7 @@ extern inline function getRichTextTextWidth(source:Dynamic):Float {
 	return flight._js._fn.Text.getRichTextTextWidth(source);
 }
 #else
-extern inline function getRichTextTextWidth(source:Dynamic):Float {
+extern inline function getRichTextTextWidth(source:flight.FlightNode):Float {
 #if hl
 	return flight._hl._fn.Text.getRichTextTextWidth(source);
 #elseif cpp
@@ -634,7 +634,7 @@ extern inline function getTextFieldSignals(source:Dynamic):Null<Dynamic> {
 	return flight._js._fn.Text.getTextFieldSignals(source);
 }
 #else
-extern inline function getTextFieldSignals(source:Dynamic):Dynamic {
+extern inline function getTextFieldSignals(source:flight.FlightNode):Dynamic {
 #if hl
 	return flight._hl._fn.Text.getTextFieldSignals(source);
 #elseif cpp
@@ -651,7 +651,7 @@ extern inline function insertRichTextString(source:Dynamic, index:Int, value:Str
 	flight._js._fn.Text.insertRichTextString(source, index, value);
 }
 #else
-extern inline function insertRichTextString(source:Dynamic, index:Int, value:String):Void {
+extern inline function insertRichTextString(source:flight.FlightNode, index:Int, value:String):Void {
 #if hl
 	flight._hl._fn.Text.insertRichTextString(source, index, cast value);
 #elseif cpp
@@ -668,7 +668,7 @@ extern inline function removeRichTextFormatRangesIn(source:Dynamic, begin:Int, e
 	flight._js._fn.Text.removeRichTextFormatRangesIn(source, begin, end);
 }
 #else
-extern inline function removeRichTextFormatRangesIn(source:Dynamic, begin:Int, end:Int):Void {
+extern inline function removeRichTextFormatRangesIn(source:flight.FlightNode, begin:Int, end:Int):Void {
 #if hl
 	flight._hl._fn.Text.removeRichTextFormatRangesIn(source, begin, end);
 #elseif cpp
@@ -685,7 +685,7 @@ extern inline function replaceRichTextString(source:Dynamic, beginIndex:Int, end
 	flight._js._fn.Text.replaceRichTextString(source, beginIndex, endIndex, value);
 }
 #else
-extern inline function replaceRichTextString(source:Dynamic, beginIndex:Int, endIndex:Int, value:String):Void {
+extern inline function replaceRichTextString(source:flight.FlightNode, beginIndex:Int, endIndex:Int, value:String):Void {
 #if hl
 	flight._hl._fn.Text.replaceRichTextString(source, beginIndex, endIndex, cast value);
 #elseif cpp
@@ -702,7 +702,7 @@ extern inline function setRichTextBackground(source:Dynamic, value:Bool):Void {
 	flight._js._fn.Text.setRichTextBackground(source, value);
 }
 #else
-extern inline function setRichTextBackground(source:Dynamic, value:Bool):Void {
+extern inline function setRichTextBackground(source:flight.FlightNode, value:Bool):Void {
 #if hl
 	flight._hl._fn.Text.setRichTextBackground(source, value);
 #elseif cpp
@@ -719,7 +719,7 @@ extern inline function setRichTextBackgroundColor(source:Dynamic, value:Int):Voi
 	flight._js._fn.Text.setRichTextBackgroundColor(source, value);
 }
 #else
-extern inline function setRichTextBackgroundColor(source:Dynamic, value:Int):Void {
+extern inline function setRichTextBackgroundColor(source:flight.FlightNode, value:Int):Void {
 #if hl
 	flight._hl._fn.Text.setRichTextBackgroundColor(source, value);
 #elseif cpp
@@ -736,7 +736,7 @@ extern inline function setRichTextBorder(source:Dynamic, value:Bool):Void {
 	flight._js._fn.Text.setRichTextBorder(source, value);
 }
 #else
-extern inline function setRichTextBorder(source:Dynamic, value:Bool):Void {
+extern inline function setRichTextBorder(source:flight.FlightNode, value:Bool):Void {
 #if hl
 	flight._hl._fn.Text.setRichTextBorder(source, value);
 #elseif cpp
@@ -753,7 +753,7 @@ extern inline function setRichTextBorderColor(source:Dynamic, value:Int):Void {
 	flight._js._fn.Text.setRichTextBorderColor(source, value);
 }
 #else
-extern inline function setRichTextBorderColor(source:Dynamic, value:Int):Void {
+extern inline function setRichTextBorderColor(source:flight.FlightNode, value:Int):Void {
 #if hl
 	flight._hl._fn.Text.setRichTextBorderColor(source, value);
 #elseif cpp
@@ -770,7 +770,7 @@ extern inline function setRichTextCondenseWhite(source:Dynamic, value:Bool):Void
 	flight._js._fn.Text.setRichTextCondenseWhite(source, value);
 }
 #else
-extern inline function setRichTextCondenseWhite(source:Dynamic, value:Bool):Void {
+extern inline function setRichTextCondenseWhite(source:flight.FlightNode, value:Bool):Void {
 #if hl
 	flight._hl._fn.Text.setRichTextCondenseWhite(source, value);
 #elseif cpp
@@ -787,7 +787,7 @@ extern inline function setRichTextContent(source:Dynamic, content:RichTextConten
 	flight._js._fn.Text.setRichTextContent(source, content);
 }
 #else
-extern inline function setRichTextContent(source:Dynamic, content:RichTextContent):Void {
+extern inline function setRichTextContent(source:flight.FlightNode, content:RichTextContent):Void {
 #if hl
 	flight._hl._fn.Text.setRichTextContent(source, content);
 #elseif cpp
@@ -804,7 +804,7 @@ extern inline function setRichTextDefaultTextFormat(source:Dynamic, value:Dynami
 	flight._js._fn.Text.setRichTextDefaultTextFormat(source, value);
 }
 #else
-extern inline function setRichTextDefaultTextFormat(source:Dynamic, value:Dynamic):Void {
+extern inline function setRichTextDefaultTextFormat(source:flight.FlightNode, value:Dynamic):Void {
 #if hl
 	flight._hl._fn.Text.setRichTextDefaultTextFormat(source, value);
 #elseif cpp
@@ -821,7 +821,7 @@ extern inline function setRichTextFormatRange(source:Dynamic, format:Dynamic, st
 	flight._js._fn.Text.setRichTextFormatRange(source, format, start, end);
 }
 #else
-extern inline function setRichTextFormatRange(source:Dynamic, format:Dynamic, start:haxe.Int64, end:haxe.Int64):Void {
+extern inline function setRichTextFormatRange(source:flight.FlightNode, format:Dynamic, start:haxe.Int64, end:haxe.Int64):Void {
 #if hl
 	flight._hl._fn.Text.setRichTextFormatRange(source, format, start, end);
 #elseif cpp
@@ -838,7 +838,7 @@ extern inline function setRichTextHeight(source:Dynamic, value:Float):Void {
 	flight._js._fn.Text.setRichTextHeight(source, value);
 }
 #else
-extern inline function setRichTextHeight(source:Dynamic, value:Float):Void {
+extern inline function setRichTextHeight(source:flight.FlightNode, value:Float):Void {
 #if hl
 	flight._hl._fn.Text.setRichTextHeight(source, value);
 #elseif cpp
@@ -855,7 +855,7 @@ extern inline function setRichTextMaxChars(source:Dynamic, value:Int):Void {
 	flight._js._fn.Text.setRichTextMaxChars(source, value);
 }
 #else
-extern inline function setRichTextMaxChars(source:Dynamic, value:Int):Void {
+extern inline function setRichTextMaxChars(source:flight.FlightNode, value:Int):Void {
 #if hl
 	flight._hl._fn.Text.setRichTextMaxChars(source, value);
 #elseif cpp
@@ -872,7 +872,7 @@ extern inline function setRichTextMouseWheelEnabled(source:Dynamic, value:Bool):
 	flight._js._fn.Text.setRichTextMouseWheelEnabled(source, value);
 }
 #else
-extern inline function setRichTextMouseWheelEnabled(source:Dynamic, value:Bool):Void {
+extern inline function setRichTextMouseWheelEnabled(source:flight.FlightNode, value:Bool):Void {
 #if hl
 	flight._hl._fn.Text.setRichTextMouseWheelEnabled(source, value);
 #elseif cpp
@@ -889,7 +889,7 @@ extern inline function setRichTextMultiline(source:Dynamic, value:Bool):Void {
 	flight._js._fn.Text.setRichTextMultiline(source, value);
 }
 #else
-extern inline function setRichTextMultiline(source:Dynamic, value:Bool):Void {
+extern inline function setRichTextMultiline(source:flight.FlightNode, value:Bool):Void {
 #if hl
 	flight._hl._fn.Text.setRichTextMultiline(source, value);
 #elseif cpp
@@ -906,7 +906,7 @@ extern inline function setRichTextScrollH(source:Dynamic, value:Float, layout:Nu
 	flight._js._fn.Text.setRichTextScrollH(source, value, layout);
 }
 #else
-extern inline function setRichTextScrollH(source:Dynamic, value:Float, layout:TextLayoutResult):Void {
+extern inline function setRichTextScrollH(source:flight.FlightNode, value:Float, layout:TextLayoutResult):Void {
 #if hl
 	flight._hl._fn.Text.setRichTextScrollH(source, value, layout);
 #elseif cpp
@@ -923,7 +923,7 @@ extern inline function setRichTextScrollV(source:Dynamic, value:Float, layout:Nu
 	flight._js._fn.Text.setRichTextScrollV(source, value, layout);
 }
 #else
-extern inline function setRichTextScrollV(source:Dynamic, value:Float, layout:TextLayoutResult):Void {
+extern inline function setRichTextScrollV(source:flight.FlightNode, value:Float, layout:TextLayoutResult):Void {
 #if hl
 	flight._hl._fn.Text.setRichTextScrollV(source, value, layout);
 #elseif cpp
@@ -940,7 +940,7 @@ extern inline function setRichTextSelectable(source:Dynamic, value:Bool):Void {
 	flight._js._fn.Text.setRichTextSelectable(source, value);
 }
 #else
-extern inline function setRichTextSelectable(source:Dynamic, value:Bool):Void {
+extern inline function setRichTextSelectable(source:flight.FlightNode, value:Bool):Void {
 #if hl
 	flight._hl._fn.Text.setRichTextSelectable(source, value);
 #elseif cpp
@@ -957,7 +957,7 @@ extern inline function setRichTextString(source:Dynamic, value:String):Void {
 	flight._js._fn.Text.setRichTextString(source, value);
 }
 #else
-extern inline function setRichTextString(source:Dynamic, value:String):Void {
+extern inline function setRichTextString(source:flight.FlightNode, value:String):Void {
 #if hl
 	flight._hl._fn.Text.setRichTextString(source, cast value);
 #elseif cpp
@@ -974,7 +974,7 @@ extern inline function setRichTextTextColor(source:Dynamic, value:Int):Void {
 	flight._js._fn.Text.setRichTextTextColor(source, value);
 }
 #else
-extern inline function setRichTextTextColor(source:Dynamic, value:Int):Void {
+extern inline function setRichTextTextColor(source:flight.FlightNode, value:Int):Void {
 #if hl
 	flight._hl._fn.Text.setRichTextTextColor(source, value);
 #elseif cpp
@@ -991,7 +991,7 @@ extern inline function setRichTextVerticalAlign(source:Dynamic, value:Dynamic):V
 	flight._js._fn.Text.setRichTextVerticalAlign(source, value);
 }
 #else
-extern inline function setRichTextVerticalAlign(source:Dynamic, value:flight.TextVerticalAlign):Void {
+extern inline function setRichTextVerticalAlign(source:flight.FlightNode, value:flight.TextVerticalAlign):Void {
 #if hl
 	flight._hl._fn.Text.setRichTextVerticalAlign(source, value);
 #elseif cpp
@@ -1008,7 +1008,7 @@ extern inline function setRichTextWidth(source:Dynamic, value:Float):Void {
 	flight._js._fn.Text.setRichTextWidth(source, value);
 }
 #else
-extern inline function setRichTextWidth(source:Dynamic, value:Float):Void {
+extern inline function setRichTextWidth(source:flight.FlightNode, value:Float):Void {
 #if hl
 	flight._hl._fn.Text.setRichTextWidth(source, value);
 #elseif cpp
@@ -1025,7 +1025,7 @@ extern inline function setRichTextWordWrap(source:Dynamic, value:Bool):Void {
 	flight._js._fn.Text.setRichTextWordWrap(source, value);
 }
 #else
-extern inline function setRichTextWordWrap(source:Dynamic, value:Bool):Void {
+extern inline function setRichTextWordWrap(source:flight.FlightNode, value:Bool):Void {
 #if hl
 	flight._hl._fn.Text.setRichTextWordWrap(source, value);
 #elseif cpp
@@ -1059,7 +1059,7 @@ extern inline function appendTextLabelString(source:Dynamic, value:String):Void 
 	flight._js._fn.Text.appendTextLabelString(source, value);
 }
 #else
-extern inline function appendTextLabelString(source:Dynamic, value:String):Void {
+extern inline function appendTextLabelString(source:flight.FlightNode, value:String):Void {
 #if hl
 	flight._hl._fn.Text.appendTextLabelString(source, cast value);
 #elseif cpp
@@ -1076,7 +1076,7 @@ extern inline function computeTextLabelLocalBoundsRectangle(out:Rectangle, sourc
 	flight._js._fn.Text.computeTextLabelLocalBoundsRectangle(out, source);
 }
 #else
-extern inline function computeTextLabelLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
+extern inline function computeTextLabelLocalBoundsRectangle(out:Rectangle, source:flight.FlightNode):Void {
 #if hl
 	flight._hl._fn.Text.computeTextLabelLocalBoundsRectangle(out, source);
 #elseif cpp
@@ -1093,7 +1093,7 @@ extern inline function getTextLabelFormat(source:TextLabel):Dynamic {
 	return flight._js._fn.Text.getTextLabelFormat(source);
 }
 #else
-extern inline function getTextLabelFormat(source:TextLabel):Dynamic {
+extern inline function getTextLabelFormat(source:flight.FlightNode):Dynamic {
 #if hl
 	return flight._hl._fn.Text.getTextLabelFormat(source);
 #elseif cpp
@@ -1110,7 +1110,7 @@ extern inline function getTextLabelString(source:TextLabel):String {
 	return flight._js._fn.Text.getTextLabelString(source);
 }
 #else
-extern inline function getTextLabelString(source:TextLabel):String {
+extern inline function getTextLabelString(source:flight.FlightNode):String {
 #if hl
 	return cast flight._hl._fn.Text.getTextLabelString(source);
 #elseif cpp
@@ -1127,7 +1127,7 @@ extern inline function setTextLabelAutoSize(source:Dynamic, value:Dynamic):Void 
 	flight._js._fn.Text.setTextLabelAutoSize(source, value);
 }
 #else
-extern inline function setTextLabelAutoSize(source:Dynamic, value:flight.TextAutoSize):Void {
+extern inline function setTextLabelAutoSize(source:flight.FlightNode, value:flight.TextAutoSize):Void {
 #if hl
 	flight._hl._fn.Text.setTextLabelAutoSize(source, value);
 #elseif cpp
@@ -1144,7 +1144,7 @@ extern inline function setTextLabelFormat(source:Dynamic, value:Dynamic):Void {
 	flight._js._fn.Text.setTextLabelFormat(source, value);
 }
 #else
-extern inline function setTextLabelFormat(source:Dynamic, value:Dynamic):Void {
+extern inline function setTextLabelFormat(source:flight.FlightNode, value:Dynamic):Void {
 #if hl
 	flight._hl._fn.Text.setTextLabelFormat(source, value);
 #elseif cpp
@@ -1161,7 +1161,7 @@ extern inline function setTextLabelHeight(source:Dynamic, value:Float):Void {
 	flight._js._fn.Text.setTextLabelHeight(source, value);
 }
 #else
-extern inline function setTextLabelHeight(source:Dynamic, value:Float):Void {
+extern inline function setTextLabelHeight(source:flight.FlightNode, value:Float):Void {
 #if hl
 	flight._hl._fn.Text.setTextLabelHeight(source, value);
 #elseif cpp
@@ -1178,7 +1178,7 @@ extern inline function setTextLabelString(source:Dynamic, value:String):Void {
 	flight._js._fn.Text.setTextLabelString(source, value);
 }
 #else
-extern inline function setTextLabelString(source:Dynamic, value:String):Void {
+extern inline function setTextLabelString(source:flight.FlightNode, value:String):Void {
 #if hl
 	flight._hl._fn.Text.setTextLabelString(source, cast value);
 #elseif cpp
@@ -1195,7 +1195,7 @@ extern inline function setTextLabelVerticalAlign(source:Dynamic, value:Dynamic):
 	flight._js._fn.Text.setTextLabelVerticalAlign(source, value);
 }
 #else
-extern inline function setTextLabelVerticalAlign(source:Dynamic, value:flight.TextVerticalAlign):Void {
+extern inline function setTextLabelVerticalAlign(source:flight.FlightNode, value:flight.TextVerticalAlign):Void {
 #if hl
 	flight._hl._fn.Text.setTextLabelVerticalAlign(source, value);
 #elseif cpp
@@ -1212,7 +1212,7 @@ extern inline function setTextLabelWidth(source:Dynamic, value:Float):Void {
 	flight._js._fn.Text.setTextLabelWidth(source, value);
 }
 #else
-extern inline function setTextLabelWidth(source:Dynamic, value:Float):Void {
+extern inline function setTextLabelWidth(source:flight.FlightNode, value:Float):Void {
 #if hl
 	flight._hl._fn.Text.setTextLabelWidth(source, value);
 #elseif cpp
@@ -1229,7 +1229,7 @@ extern inline function getTextLayout(source:Dynamic):Null<Dynamic> {
 	return flight._js._fn.Text.getTextLayout(source);
 }
 #else
-extern inline function getTextLayout(source:Dynamic):Dynamic {
+extern inline function getTextLayout(source:flight.FlightNode):Dynamic {
 #if hl
 	return flight._hl._fn.Text.getTextLayout(source);
 #elseif cpp
@@ -1246,7 +1246,7 @@ extern inline function getTextLayoutMetrics(out:TextMetrics, source:Dynamic):Voi
 	flight._js._fn.Text.getTextLayoutMetrics(out, source);
 }
 #else
-extern inline function getTextLayoutMetrics(out:TextMetrics, source:Dynamic):Void {
+extern inline function getTextLayoutMetrics(out:TextMetrics, source:flight.FlightNode):Void {
 #if hl
 	flight._hl._fn.Text.getTextLayoutMetrics(out, source);
 #elseif cpp
@@ -1270,6 +1270,74 @@ extern inline function freeTextLabelContentExplanation(ptr:TextLabelContentExpla
 	flight._cpp._fn.Text.freeTextLabelContentExplanation(ptr);
 #elseif (js && flight_esm)
 	flight._js._fn.Text.freeTextLabelContentExplanation(ptr);
+#else
+	#error "flight.Text: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeNativeTextStyleRef(ptr:NativeTextStyle):Void {
+	flight._js._fn.Text.freeNativeTextStyleRef(ptr);
+}
+#else
+extern inline function freeNativeTextStyleRef(ptr:NativeTextStyle):Void {
+#if hl
+	flight._hl._fn.Text.freeNativeTextStyleRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Text.freeNativeTextStyleRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Text.freeNativeTextStyleRef(ptr);
+#else
+	#error "flight.Text: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeTextFieldSignalsRef(ptr:TextFieldSignals):Void {
+	flight._js._fn.Text.freeTextFieldSignalsRef(ptr);
+}
+#else
+extern inline function freeTextFieldSignalsRef(ptr:TextFieldSignals):Void {
+#if hl
+	flight._hl._fn.Text.freeTextFieldSignalsRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Text.freeTextFieldSignalsRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Text.freeTextFieldSignalsRef(ptr);
+#else
+	#error "flight.Text: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeTextFormatRef(ptr:TextFormat):Void {
+	flight._js._fn.Text.freeTextFormatRef(ptr);
+}
+#else
+extern inline function freeTextFormatRef(ptr:TextFormat):Void {
+#if hl
+	flight._hl._fn.Text.freeTextFormatRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Text.freeTextFormatRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Text.freeTextFormatRef(ptr);
+#else
+	#error "flight.Text: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeTextInputStateRef(ptr:TextInputState):Void {
+	flight._js._fn.Text.freeTextInputStateRef(ptr);
+}
+#else
+extern inline function freeTextInputStateRef(ptr:TextInputState):Void {
+#if hl
+	flight._hl._fn.Text.freeTextInputStateRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Text.freeTextInputStateRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Text.freeTextInputStateRef(ptr);
 #else
 	#error "flight.Text: no backend for this target."
 #end

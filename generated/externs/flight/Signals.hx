@@ -140,18 +140,6 @@ extern inline function clearSignalTimeout(state:Dynamic, id:TimerId):Void {
 extern inline function setSignalTimeout(state:Dynamic, delayMs:Float, callback_:Dynamic):TimerId {
 	return flight._js._fn.Signals.setSignalTimeout(state, delayMs, callback_);
 }
-#else
-extern inline function setSignalTimeout(state:Dynamic, delayMs:Float, callback_Fn:Dynamic, callback_Ctx:Dynamic):TimerId {
-#if hl
-	return flight._hl._fn.Signals.setSignalTimeout(state, delayMs, callback_Fn, callback_Ctx);
-#elseif cpp
-	return flight._cpp._fn.Signals.setSignalTimeout(state, delayMs, callback_Fn, callback_Ctx);
-#elseif (js && flight_esm)
-	return flight._js._fn.Signals.setSignalTimeout(state, delayMs, callback_Fn, callback_Ctx);
-#else
-	#error "flight.Signals: no backend for this target."
-#end
-}
 #end
 #if (js && flight_esm)
 extern inline function freeSignalScope(ptr:SignalScope):Void {
@@ -199,6 +187,23 @@ extern inline function freeTimerId(ptr:TimerId):Void {
 	flight._cpp._fn.Signals.freeTimerId(ptr);
 #elseif (js && flight_esm)
 	flight._js._fn.Signals.freeTimerId(ptr);
+#else
+	#error "flight.Signals: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeSlotId(ptr:SlotId):Void {
+	flight._js._fn.Signals.freeSlotId(ptr);
+}
+#else
+extern inline function freeSlotId(ptr:SlotId):Void {
+#if hl
+	flight._hl._fn.Signals.freeSlotId(ptr);
+#elseif cpp
+	flight._cpp._fn.Signals.freeSlotId(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Signals.freeSlotId(ptr);
 #else
 	#error "flight.Signals: no backend for this target."
 #end

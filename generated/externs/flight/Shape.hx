@@ -95,7 +95,7 @@ extern inline function createMorphShape(morph:Dynamic):Dynamic {
 	return flight._js._fn.Shape.createMorphShape(morph);
 }
 #else
-extern inline function createMorphShape(morph:Dynamic):Dynamic {
+extern inline function createMorphShape(morph:Dynamic):flight.FlightNode {
 #if hl
 	return flight._hl._fn.Shape.createMorphShape(morph);
 #elseif cpp
@@ -129,7 +129,7 @@ extern inline function appendMorphShapePath(shape:Dynamic, morph:Dynamic):Dynami
 	return flight._js._fn.Shape.appendMorphShapePath(shape, morph);
 }
 #else
-extern inline function appendMorphShapePath(shape:Dynamic, morph:Dynamic):Dynamic {
+extern inline function appendMorphShapePath(shape:flight.FlightNode, morph:Dynamic):Dynamic {
 #if hl
 	return flight._hl._fn.Shape.appendMorphShapePath(shape, morph);
 #elseif cpp
@@ -146,7 +146,7 @@ extern inline function setMorphShapeProgress(shape:Dynamic, progress:Float):Void
 	flight._js._fn.Shape.setMorphShapeProgress(shape, progress);
 }
 #else
-extern inline function setMorphShapeProgress(shape:Dynamic, progress:Float):Void {
+extern inline function setMorphShapeProgress(shape:flight.FlightNode, progress:Float):Void {
 #if hl
 	flight._hl._fn.Shape.setMorphShapeProgress(shape, progress);
 #elseif cpp
@@ -163,7 +163,7 @@ extern inline function createMorphShapeAnimationTarget(shape:Dynamic):Dynamic {
 	return flight._js._fn.Shape.createMorphShapeAnimationTarget(shape);
 }
 #else
-extern inline function createMorphShapeAnimationTarget(shape:Dynamic):Dynamic {
+extern inline function createMorphShapeAnimationTarget(shape:flight.FlightNode):Dynamic {
 #if hl
 	return flight._hl._fn.Shape.createMorphShapeAnimationTarget(shape);
 #elseif cpp
@@ -214,7 +214,7 @@ extern inline function appendMorphShapeBeginFill(shape:Dynamic, start:MorphShape
 	flight._js._fn.Shape.appendMorphShapeBeginFill(shape, start, end);
 }
 #else
-extern inline function appendMorphShapeBeginFill(shape:Dynamic, start:MorphShapeColorEndpoint, end:MorphShapeColorEndpoint):Void {
+extern inline function appendMorphShapeBeginFill(shape:flight.FlightNode, start:MorphShapeColorEndpoint, end:MorphShapeColorEndpoint):Void {
 #if hl
 	flight._hl._fn.Shape.appendMorphShapeBeginFill(shape, start, end);
 #elseif cpp
@@ -231,7 +231,7 @@ extern inline function appendMorphShapeBeginGradientFill(shape:Dynamic, gradient
 	return flight._js._fn.Shape.appendMorphShapeBeginGradientFill(shape, gradientType, start, end, spreadMethod, interpolationMethod);
 }
 #else
-extern inline function appendMorphShapeBeginGradientFill(shape:Dynamic, gradientType:flight.GradientType, start:MorphShapeGradientEndpoint, end:MorphShapeGradientEndpoint, spreadMethod:Int, interpolationMethod:Int):Bool {
+extern inline function appendMorphShapeBeginGradientFill(shape:flight.FlightNode, gradientType:flight.GradientType, start:MorphShapeGradientEndpoint, end:MorphShapeGradientEndpoint, spreadMethod:Int, interpolationMethod:Int):Bool {
 #if hl
 	return flight._hl._fn.Shape.appendMorphShapeBeginGradientFill(shape, gradientType, start, end, spreadMethod, interpolationMethod);
 #elseif cpp
@@ -248,7 +248,7 @@ extern inline function appendMorphShapeBeginTextureFill(shape:Dynamic, texture:D
 	flight._js._fn.Shape.appendMorphShapeBeginTextureFill(shape, texture, startMatrix, endMatrix);
 }
 #else
-extern inline function appendMorphShapeBeginTextureFill(shape:Dynamic, texture:Dynamic, startMatrix:Matrix, endMatrix:Matrix):Void {
+extern inline function appendMorphShapeBeginTextureFill(shape:flight.FlightNode, texture:Dynamic, startMatrix:Matrix, endMatrix:Matrix):Void {
 #if hl
 	flight._hl._fn.Shape.appendMorphShapeBeginTextureFill(shape, texture, startMatrix, endMatrix);
 #elseif cpp
@@ -265,7 +265,7 @@ extern inline function appendMorphShapeLineGradientStyle(shape:Dynamic, gradient
 	return flight._js._fn.Shape.appendMorphShapeLineGradientStyle(shape, gradientType, start, end, spreadMethod, interpolationMethod);
 }
 #else
-extern inline function appendMorphShapeLineGradientStyle(shape:Dynamic, gradientType:flight.GradientType, start:MorphShapeGradientEndpoint, end:MorphShapeGradientEndpoint, spreadMethod:Int, interpolationMethod:Int):Bool {
+extern inline function appendMorphShapeLineGradientStyle(shape:flight.FlightNode, gradientType:flight.GradientType, start:MorphShapeGradientEndpoint, end:MorphShapeGradientEndpoint, spreadMethod:Int, interpolationMethod:Int):Bool {
 #if hl
 	return flight._hl._fn.Shape.appendMorphShapeLineGradientStyle(shape, gradientType, start, end, spreadMethod, interpolationMethod);
 #elseif cpp
@@ -282,7 +282,7 @@ extern inline function appendMorphShapeLineStyle(shape:Dynamic, start:MorphShape
 	flight._js._fn.Shape.appendMorphShapeLineStyle(shape, start, end, pixelHinting, scaleMode, caps, joints, miterLimit);
 }
 #else
-extern inline function appendMorphShapeLineStyle(shape:Dynamic, start:MorphShapeLineEndpoint, end:MorphShapeLineEndpoint, pixelHinting:Int, scaleMode:Int, caps:Int, joints:Int, miterLimit:Float):Void {
+extern inline function appendMorphShapeLineStyle(shape:flight.FlightNode, start:MorphShapeLineEndpoint, end:MorphShapeLineEndpoint, pixelHinting:Int, scaleMode:Int, caps:Int, joints:Int, miterLimit:Float):Void {
 #if hl
 	flight._hl._fn.Shape.appendMorphShapeLineStyle(shape, start, end, pixelHinting, scaleMode, caps, joints, miterLimit);
 #elseif cpp
@@ -299,7 +299,7 @@ extern inline function appendMorphShapeLineTextureStyle(shape:Dynamic, texture:D
 	flight._js._fn.Shape.appendMorphShapeLineTextureStyle(shape, texture, startMatrix, endMatrix);
 }
 #else
-extern inline function appendMorphShapeLineTextureStyle(shape:Dynamic, texture:Dynamic, startMatrix:Matrix, endMatrix:Matrix):Void {
+extern inline function appendMorphShapeLineTextureStyle(shape:flight.FlightNode, texture:Dynamic, startMatrix:Matrix, endMatrix:Matrix):Void {
 #if hl
 	flight._hl._fn.Shape.appendMorphShapeLineTextureStyle(shape, texture, startMatrix, endMatrix);
 #elseif cpp
@@ -333,7 +333,7 @@ extern inline function createScale9Shape(scale9Grid:ShapeScale9Grid):Dynamic {
 	return flight._js._fn.Shape.createScale9Shape(scale9Grid);
 }
 #else
-extern inline function createScale9Shape(scale9Grid:ShapeScale9Grid):Dynamic {
+extern inline function createScale9Shape(scale9Grid:ShapeScale9Grid):flight.FlightNode {
 #if hl
 	return flight._hl._fn.Shape.createScale9Shape(scale9Grid);
 #elseif cpp
@@ -384,7 +384,7 @@ extern inline function createShape():Dynamic {
 	return flight._js._fn.Shape.createShape();
 }
 #else
-extern inline function createShape():Dynamic {
+extern inline function createShape():flight.FlightNode {
 #if hl
 	return flight._hl._fn.Shape.createShape();
 #elseif cpp
@@ -418,7 +418,7 @@ extern inline function computeShapeLocalBoundsRectangle(out:Rectangle, source:Dy
 	flight._js._fn.Shape.computeShapeLocalBoundsRectangle(out, source);
 }
 #else
-extern inline function computeShapeLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
+extern inline function computeShapeLocalBoundsRectangle(out:Rectangle, source:flight.FlightNode):Void {
 #if hl
 	flight._hl._fn.Shape.computeShapeLocalBoundsRectangle(out, source);
 #elseif cpp
@@ -435,7 +435,7 @@ extern inline function getShapeBounds(out:Rectangle, source:Dynamic, mode:Null<D
 	return flight._js._fn.Shape.getShapeBounds(out, source, mode);
 }
 #else
-extern inline function getShapeBounds(out:Rectangle, source:Dynamic, mode:Int):Bool {
+extern inline function getShapeBounds(out:Rectangle, source:flight.FlightNode, mode:Int):Bool {
 #if hl
 	return flight._hl._fn.Shape.getShapeBounds(out, source, mode);
 #elseif cpp
@@ -452,7 +452,7 @@ extern inline function getShapeCommandCount(source:Dynamic):Int {
 	return flight._js._fn.Shape.getShapeCommandCount(source);
 }
 #else
-extern inline function getShapeCommandCount(source:Dynamic):Int {
+extern inline function getShapeCommandCount(source:flight.FlightNode):Int {
 #if hl
 	return flight._hl._fn.Shape.getShapeCommandCount(source);
 #elseif cpp
@@ -469,7 +469,7 @@ extern inline function isShapeEmpty(source:Dynamic):Bool {
 	return flight._js._fn.Shape.isShapeEmpty(source);
 }
 #else
-extern inline function isShapeEmpty(source:Dynamic):Bool {
+extern inline function isShapeEmpty(source:flight.FlightNode):Bool {
 #if hl
 	return flight._hl._fn.Shape.isShapeEmpty(source);
 #elseif cpp
@@ -486,7 +486,7 @@ extern inline function computeShapeBoundsRectangle(out:Rectangle, source:Dynamic
 	return flight._js._fn.Shape.computeShapeBoundsRectangle(out, source, mode);
 }
 #else
-extern inline function computeShapeBoundsRectangle(out:Rectangle, source:Dynamic, mode:Int):Bool {
+extern inline function computeShapeBoundsRectangle(out:Rectangle, source:flight.FlightNode, mode:Int):Bool {
 #if hl
 	return flight._hl._fn.Shape.computeShapeBoundsRectangle(out, source, mode);
 #elseif cpp
@@ -503,7 +503,7 @@ extern inline function explainShapeBounds(source:Dynamic, mode:Null<Dynamic>):Sh
 	return flight._js._fn.Shape.explainShapeBounds(source, mode);
 }
 #else
-extern inline function explainShapeBounds(source:Dynamic, mode:Int):ShapeBoundsExplanation {
+extern inline function explainShapeBounds(source:flight.FlightNode, mode:Int):ShapeBoundsExplanation {
 #if hl
 	return flight._hl._fn.Shape.explainShapeBounds(source, mode);
 #elseif cpp
@@ -544,6 +544,23 @@ extern inline function normalizeShapeStrokeWidth(width:Float):Float {
 	return flight._cpp._fn.Shape.normalizeShapeStrokeWidth(width);
 #elseif (js && flight_esm)
 	return flight._js._fn.Shape.normalizeShapeStrokeWidth(width);
+#else
+	#error "flight.Shape: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function writeShapeGeometryCommandEnd(out:ShapeGeometryEnd, currentX:Float, currentY:Float, name:String, commands:Dynamic, argumentIndex:Int):Bool {
+	return flight._js._fn.Shape.writeShapeGeometryCommandEnd(out, currentX, currentY, name, commands, argumentIndex);
+}
+#else
+extern inline function writeShapeGeometryCommandEnd(out:ShapeGeometryEnd, currentX:Float, currentY:Float, name:String, commands:Dynamic, commandsLen:Int, argumentIndex:Int):Bool {
+#if hl
+	return flight._hl._fn.Shape.writeShapeGeometryCommandEnd(out, currentX, currentY, cast name, commands, commandsLen, argumentIndex);
+#elseif cpp
+	return flight._cpp._fn.Shape.writeShapeGeometryCommandEnd(out, currentX, currentY, cast name, commands, commandsLen, argumentIndex);
+#elseif (js && flight_esm)
+	return flight._js._fn.Shape.writeShapeGeometryCommandEnd(out, currentX, currentY, name, commands, commandsLen, argumentIndex);
 #else
 	#error "flight.Shape: no backend for this target."
 #end
@@ -697,6 +714,23 @@ extern inline function freeMorphShapeData(ptr:MorphShapeData):Void {
 	flight._cpp._fn.Shape.freeMorphShapeData(ptr);
 #elseif (js && flight_esm)
 	flight._js._fn.Shape.freeMorphShapeData(ptr);
+#else
+	#error "flight.Shape: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeMorphShapeAnimationTargetRef(ptr:MorphShapeAnimationTarget):Void {
+	flight._js._fn.Shape.freeMorphShapeAnimationTargetRef(ptr);
+}
+#else
+extern inline function freeMorphShapeAnimationTargetRef(ptr:MorphShapeAnimationTarget):Void {
+#if hl
+	flight._hl._fn.Shape.freeMorphShapeAnimationTargetRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Shape.freeMorphShapeAnimationTargetRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Shape.freeMorphShapeAnimationTargetRef(ptr);
 #else
 	#error "flight.Shape: no backend for this target."
 #end

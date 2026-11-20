@@ -6,39 +6,39 @@ abstract CollisionTriangleMesh3D(hl.Bytes) {
 	inline function get_version():haxe.Int64 return haxe.Int64.make(this.getI32(52), this.getI32(48));
 
 	inline function set_version(value:haxe.Int64):haxe.Int64 { { this.setI32(48, value.low); this.setI32(52, value.high); }; return value; }
-	public var x(get, set):Single;
+	public var x(get, set):Float;
 
-	inline function get_x():Single return this.getF32(56);
+	inline function get_x():Float return this.getF64(56);
 
-	inline function set_x(value:Single):Single { this.setF32(56, value); return value; }
-	public var y(get, set):Single;
+	inline function set_x(value:Float):Float { this.setF64(56, value); return value; }
+	public var y(get, set):Float;
 
-	inline function get_y():Single return this.getF32(60);
+	inline function get_y():Float return this.getF64(64);
 
-	inline function set_y(value:Single):Single { this.setF32(60, value); return value; }
-	public var z(get, set):Single;
+	inline function set_y(value:Float):Float { this.setF64(64, value); return value; }
+	public var z(get, set):Float;
 
-	inline function get_z():Single return this.getF32(64);
+	inline function get_z():Float return this.getF64(72);
 
-	inline function set_z(value:Single):Single { this.setF32(64, value); return value; }
-	public var rotationX(get, set):Single;
+	inline function set_z(value:Float):Float { this.setF64(72, value); return value; }
+	public var rotationX(get, set):Float;
 
-	inline function get_rotationX():Single return this.getF32(68);
+	inline function get_rotationX():Float return this.getF64(80);
 
-	inline function set_rotationX(value:Single):Single { this.setF32(68, value); return value; }
-	public var rotationY(get, set):Single;
+	inline function set_rotationX(value:Float):Float { this.setF64(80, value); return value; }
+	public var rotationY(get, set):Float;
 
-	inline function get_rotationY():Single return this.getF32(72);
+	inline function get_rotationY():Float return this.getF64(88);
 
-	inline function set_rotationY(value:Single):Single { this.setF32(72, value); return value; }
-	public var rotationZ(get, set):Single;
+	inline function set_rotationY(value:Float):Float { this.setF64(88, value); return value; }
+	public var rotationZ(get, set):Float;
 
-	inline function get_rotationZ():Single return this.getF32(76);
+	inline function get_rotationZ():Float return this.getF64(96);
 
-	inline function set_rotationZ(value:Single):Single { this.setF32(76, value); return value; }
-	public var rotationW(get, set):Single;
+	inline function set_rotationZ(value:Float):Float { this.setF64(96, value); return value; }
+	public var rotationW(get, set):Float;
 
-	inline function get_rotationW():Single return this.getF32(80);
+	inline function get_rotationW():Float return this.getF64(104);
 
-	inline function set_rotationW(value:Single):Single { this.setF32(80, value); return value; }
+	inline function set_rotationW(value:Float):Float { this.setF64(104, value); return value; }
 }

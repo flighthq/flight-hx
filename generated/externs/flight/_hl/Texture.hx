@@ -1,6 +1,9 @@
 package flight._hl;
 
 abstract Texture(hl.Bytes) {
+	inline public function freeRef():Void {
+		flight._hl._fn.Image.freeTextureRef(cast this);
+	}
 	static inline public function create(opts:flight._hl.CreateTextureOptions):flight._hl.Texture {
 		return flight._hl._fn.Texture.createTexture(opts);
 	}
@@ -46,13 +49,13 @@ abstract Texture(hl.Bytes) {
 	inline public function setTextureFlip(flipX:Bool, flipY:Bool):Void {
 		flight._hl._fn.Texture.setTextureFlipTexture(cast this, flipX, flipY);
 	}
-	inline public function setTextureUvFromPixelRect(x:Single, y:Single, width:Single, height:Single):Void {
+	inline public function setTextureUvFromPixelRect(x:Float, y:Float, width:Float, height:Float):Void {
 		flight._hl._fn.Texture.setTextureUvFromPixelRectTexture(cast this, x, y, width, height);
 	}
 	inline public function setTextureUvOffset(x:Single, y:Single):Void {
 		flight._hl._fn.Texture.setTextureUvOffsetTexture(cast this, x, y);
 	}
-	inline public function setTextureUvRotation(radians:Single):Void {
+	inline public function setTextureUvRotation(radians:Float):Void {
 		flight._hl._fn.Texture.setTextureUvRotationTexture(cast this, radians);
 	}
 	inline public function setTextureUvScale(x:Single, y:Single):Void {

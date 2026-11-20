@@ -10,6 +10,8 @@ extern class Particles {
 	public static function applyParticleForces(transforms:Dynamic, positionsZ:Dynamic, particleCount:Int, state:flight._js.ParticleEmitterState, forces:Dynamic, deltaTime:Float):Void;
 	@:native("applyParticleObjectForces")
 	public static function applyParticleObjectForces(objects:Dynamic, state:flight._js.ParticleObjectsState, forces:Dynamic, deltaTime:Float):Void;
+	@:native("buildParticleColorCurve")
+	public static function buildParticleColorCurve(out:Dynamic, f:Dynamic, samples:Int):Void;
 	@:native("buildParticleCurve")
 	public static function buildParticleCurve(out:Dynamic, f:Dynamic, samples:Int):Void;
 	@:native("lerpHsvDirect")

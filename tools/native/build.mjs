@@ -85,7 +85,10 @@ if (hlInclude) {
 const names = [...new Set([...readFileSync(path.join(emitted, 'ffi_generated.rs'), 'utf8').matchAll(/\bfn (flight_[a-z0-9_]+)\b/gu)].map((m) => m[1]))].sort();
 if (digest(`${names.join('\n')}\n`) !== externs.ffiNamesSha256) throw new Error('Native ABI names differ from extern generation');
 if (hlInclude) {
-  const offsets = spawnSync('cargo', ['run', '--bin', 'flight-offsets', '--locked', '--offline', '--profile', profile], { cwd: source, env: environment, encoding: 'utf8', maxBuffer: 16 * 1024 * 1024 });
+  const offsetsProgram = messages.find((m) => m.reason === 'compiler-artifact' &&
+    m.target?.name === 'flight-offsets' && typeof m.executable === 'string')?.executable;
+  if (!offsetsProgram) throw new Error('Native producer did not build the flight-offsets executable');
+  const offsets = spawnSync(offsetsProgram, [], { cwd: source, env: environment, encoding: 'utf8', maxBuffer: 16 * 1024 * 1024 });
   if (offsets.status !== 0 || digest(offsets.stdout) !== externs.offsetsSha256) throw new Error('HashLink native layout differs from the checked-in offsets; regenerate for the matching ABI before staging');
 }
 const manifest = {

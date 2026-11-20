@@ -1,12 +1,11 @@
 package flight._cpp;
 
 private extern class AsepriteArrayFrame_Ffi {
+	@:native("flight_free_string") static function freeString(value:cpp.RawPointer<cpp.Char>):Void;
 	@:native("flight_get_aseprite_array_frame_duration") static function get_duration(ptr:cpp.Star<cpp.Void>):Single;
 	@:native("flight_set_aseprite_array_frame_duration") static function set_duration(ptr:cpp.Star<cpp.Void>, value:Single):Single;
-	@:native("flight_field_get_aseprite_array_frame_filename")
-	static function get_filename(ptr:cpp.Star<cpp.Void>):flight._cpp.NativeByteBuffer;
-	@:native("flight_field_set_aseprite_array_frame_filename")
-	static function set_filename(ptr:cpp.Star<cpp.Void>, data:cpp.Star<cpp.Void>, length:Int):Void;
+	@:native("flight_field_get_aseprite_array_frame_filename") static function get_filename(ptr:cpp.Star<cpp.Void>):cpp.RawPointer<cpp.Char>;
+	@:native("flight_field_set_aseprite_array_frame_filename") static function set_filename(ptr:cpp.Star<cpp.Void>, value:cpp.ConstCharStar):Void;
 	@:native("flight_get_aseprite_array_frame_rotated") static function get_rotated(ptr:cpp.Star<cpp.Void>):Bool;
 	@:native("flight_set_aseprite_array_frame_rotated") static function set_rotated(ptr:cpp.Star<cpp.Void>, value:Bool):Bool;
 	@:native("flight_get_aseprite_array_frame_trimmed") static function get_trimmed(ptr:cpp.Star<cpp.Void>):Bool;
@@ -20,20 +19,8 @@ abstract AsepriteArrayFrame(cpp.Star<cpp.Void>) {
 
 	inline function set_duration(value:Single):Single { AsepriteArrayFrame_Ffi.set_duration(this, value); return value; }
 	public var filename(get, set):String;
-	inline function get_filename():String {
-		final bytes = AsepriteArrayFrame_Ffi.get_filename(this);
-		try {
-			final value = bytes.toBytes().toString();
-			bytes.dispose();
-			return value;
-		} catch (error:Dynamic) { bytes.dispose(); throw error; }
-	}
-	inline function set_filename(value:String):String {
-		final bytes = haxe.io.Bytes.ofString(value);
-		AsepriteArrayFrame_Ffi.set_filename(this, cast cpp.Pointer.ofArray(bytes.getData()).raw, bytes.length);
-		return value;
-	}
-
+	inline function get_filename():String { var raw = AsepriteArrayFrame_Ffi.get_filename(this); if (raw == null) return null; var value:String = (cast raw : cpp.ConstCharStar); AsepriteArrayFrame_Ffi.freeString(raw); return value; }
+	inline function set_filename(value:String):String { var raw:cpp.ConstCharStar = cast value; AsepriteArrayFrame_Ffi.set_filename(this, raw); return value; }
 	public var rotated(get, set):Bool;
 
 	inline function get_rotated():Bool return AsepriteArrayFrame_Ffi.get_rotated(this);

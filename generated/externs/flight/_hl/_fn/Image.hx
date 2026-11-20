@@ -19,6 +19,14 @@ extern class Image {
 	public static function explainImageResourceReferenceResolution(reference:flight._hl.ImageResourceReference):flight._hl.ImageResourceReferenceResolutionExplanation;
 	@:hlNative("flight", "flight_reset_failed_image_resource_reference")
 	public static function resetFailedImageResourceReference(reference:flight._hl.ImageResourceReference):Bool;
+	@:hlNative("flight", "flight_free_image_resource_ref")
+	public static function freeImageResourceRef(ptr:flight._hl.ImageResource):Void;
+	@:hlNative("flight", "flight_free_external_image_resource_reference_ref")
+	public static function freeExternalImageResourceReferenceRef(ptr:flight._hl.ExternalImageResourceReference):Void;
+	@:hlNative("flight", "flight_free_image_resource_failure_ref")
+	public static function freeImageResourceFailureRef(ptr:flight._hl.ImageResourceFailure):Void;
 	@:hlNative("flight", "flight_free_image_resource_reference_resolution_explanation")
 	public static function freeImageResourceReferenceResolutionExplanation(ptr:flight._hl.ImageResourceReferenceResolutionExplanation):Void;
+	@:hlNative("flight", "flight_free_texture_ref")
+	public static function freeTextureRef(ptr:flight._hl.Texture):Void;
 }

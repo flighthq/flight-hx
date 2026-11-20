@@ -11,14 +11,14 @@ abstract HemisphereLight(hl.Bytes) {
 	inline function get_groundColor():Int return this.getI32(20);
 
 	inline function set_groundColor(value:Int):Int { this.setI32(20, value); return value; }
-	public var intensity(get, set):Single;
+	public var intensity(get, set):Float;
 
-	inline function get_intensity():Single return this.getF32(24);
+	inline function get_intensity():Float return this.getF64(24);
 
-	inline function set_intensity(value:Single):Single { this.setF32(24, value); return value; }
+	inline function set_intensity(value:Float):Float { this.setF64(24, value); return value; }
 	public var skyColor(get, set):Int;
 
-	inline function get_skyColor():Int return this.getI32(56);
+	inline function get_skyColor():Int return this.getI32(64);
 
-	inline function set_skyColor(value:Int):Int { this.setI32(56, value); return value; }
+	inline function set_skyColor(value:Int):Int { this.setI32(64, value); return value; }
 }

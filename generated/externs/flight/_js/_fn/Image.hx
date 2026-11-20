@@ -21,5 +21,13 @@ extern class Image {
 	@:native("resetFailedImageResourceReference")
 	public static function resetFailedImageResourceReference(reference:flight._js.ImageResourceReference):Bool;
 	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeImageResourceRef(ptr:flight._js.ImageResource):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeExternalImageResourceReferenceRef(ptr:flight._js.ExternalImageResourceReference):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeImageResourceFailureRef(ptr:flight._js.ImageResourceFailure):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeImageResourceReferenceResolutionExplanation(ptr:flight._js.ImageResourceReferenceResolutionExplanation):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeTextureRef(ptr:flight._js.Texture):Void {}
 }

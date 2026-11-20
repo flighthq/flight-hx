@@ -9,6 +9,8 @@ extern class Bitmap {
 	public static function convertBitmapAlphaType(out:flight._hl.Bitmap, target:Int):Void;
 	@:hlNative("flight", "flight_invalidate_bitmap")
 	public static function invalidateBitmap(bitmap:flight._hl.Bitmap):Void;
+	@:hlNative("flight", "flight_share_bitmap")
+	public static function shareBitmap(bitmap:flight._hl.Bitmap):hl.Bytes;
 	@:hlNative("flight", "flight_transform_bitmap")
 	public static function transformBitmap(dest:flight._hl.BitmapRegion, source:flight._hl.BitmapRegion, matrix:hl.Bytes, edgeMode:Int, sampleMode:Int):Void;
 	@:hlNative("flight", "flight_copy_bitmap_alpha")
@@ -90,7 +92,13 @@ extern class Bitmap {
 	@:hlNative("flight", "flight_dissolve_bitmap_pixels")
 	public static function dissolveBitmapPixels(dest:flight._hl.BitmapRegion, source:flight._hl.BitmapRegion, seed:Int, pixelCount:Int, fillColor:Int):Int;
 	@:hlNative("flight", "flight_encode_bitmap")
-	public static function encodeBitmap(hostBitmapEncode:flight._hl.HostBitmapEncodeCapability, source:flight._hl.Bitmap, format:Int, quality:Single):Null<flight._hl.NativeByteBuffer>;
+	public static function encodeBitmap(hostBitmapEncode:flight._hl.HostBitmapEncodeCapability, source:flight._hl.Bitmap, format:Int, quality:Single):hl.Bytes;
+	@:hlNative("flight", "flight_encode_bitmap_result_len")
+	public static function encodeBitmapResultLen(result:hl.Bytes):Int;
+	@:hlNative("flight", "flight_encode_bitmap_result_get")
+	public static function encodeBitmapResultGet(result:hl.Bytes, index:Int):hl.Bytes;
+	@:hlNative("flight", "flight_encode_bitmap_result_free")
+	public static function encodeBitmapResultFree(result:hl.Bytes):Void;
 	@:hlNative("flight", "flight_explain_bitmap_encode_failure")
 	public static function explainBitmapEncodeFailure(hostBitmapEncode:flight._hl.HostBitmapEncodeCapability, format:Int):flight._hl.BitmapEncodeFailureExplanation;
 	@:hlNative("flight", "flight_fill_bitmap_rectangle")
@@ -160,9 +168,9 @@ extern class Bitmap {
 	@:hlNative("flight", "flight_get_bitmap_color_bounds_rectangle")
 	public static function getBitmapColorBoundsRectangle(source:flight._hl.BitmapRegion, mask:Int, color:Int, findColor:Bool):flight._hl.Rectangle;
 	@:hlNative("flight", "flight_create_bitmap_region")
-	public static function createBitmapRegion(bitmap:flight._hl.Bitmap, x:Int, y:Int, width:Int, height:Int):flight._hl.BitmapRegion;
+	public static function createBitmapRegion(bitmap:hl.Bytes, x:Int, y:Int, width:Int, height:Int):flight._hl.BitmapRegion;
 	@:hlNative("flight", "flight_set_bitmap_region")
-	public static function setBitmapRegion(out:flight._hl.BitmapRegion, bitmap:flight._hl.Bitmap, x:Int, y:Int, width:Int, height:Int):Void;
+	public static function setBitmapRegion(out:flight._hl.BitmapRegion, bitmap:hl.Bytes, x:Int, y:Int, width:Int, height:Int):Void;
 	@:hlNative("flight", "flight_resize_bitmap")
 	public static function resizeBitmap(dest:flight._hl.BitmapRegion, source:flight._hl.BitmapRegion, mode:Int, edgeMode:Int, premultiplied:Bool):Void;
 	@:hlNative("flight", "flight_rotate_bitmap")
@@ -201,6 +209,8 @@ extern class Bitmap {
 	public static function warpBitmapQuad(dest:flight._hl.BitmapRegion, source:flight._hl.BitmapRegion, dstQuad:hl.Bytes, edgeMode:Int, sampleMode:Int):Void;
 	@:hlNative("flight", "flight_free_bitmap")
 	public static function freeBitmap(ptr:flight._hl.Bitmap):Void;
+	@:hlNative("flight", "flight_free_bitmap_ref")
+	public static function freeBitmapRef(ptr:flight._hl.Bitmap):Void;
 	@:hlNative("flight", "flight_free_bitmap_mismatch")
 	public static function freeBitmapMismatch(ptr:flight._hl.BitmapMismatch):Void;
 	@:hlNative("flight", "flight_free_bitmap_encode_failure_explanation")
@@ -211,4 +221,25 @@ extern class Bitmap {
 	public static function freeBitmapHistogram(ptr:flight._hl.BitmapHistogram):Void;
 	@:hlNative("flight", "flight_free_bitmap_region")
 	public static function freeBitmapRegion(ptr:flight._hl.BitmapRegion):Void;
+}
+
+final class EncodeBitmapByteResult extends flight._hl.ByteResult {
+	var handle:hl.Bytes;
+
+	public function new(handle:hl.Bytes) {
+		super(Bitmap.encodeBitmapResultLen(handle));
+		this.handle = handle;
+	}
+
+	public static function wrapOptional(handle:hl.Bytes):Null<flight._hl.ByteResult> {
+		return handle == null ? null : new EncodeBitmapByteResult(handle);
+	}
+
+	override function freeNative():Void {
+		Bitmap.encodeBitmapResultFree(handle);
+	}
+
+	override function readNative(index:Int):Int {
+		return Bitmap.encodeBitmapResultGet(handle, index).getUI8(0);
+	}
 }

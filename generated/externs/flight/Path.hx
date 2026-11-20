@@ -176,6 +176,11 @@ extern inline function fitPathCurves(source:Path, tolerance:Float, out:Path, fla
 }
 #end
 #if (js && flight_esm)
+extern inline function forEachPathSegment(path:Path, visitor:Dynamic):Void {
+	flight._js._fn.Path.forEachPathSegment(path, visitor);
+}
+#end
+#if (js && flight_esm)
 extern inline function getPathBounds(path:Path, out:Rectangle):Bool {
 	return flight._js._fn.Path.getPathBounds(path, out);
 }

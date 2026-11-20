@@ -27,7 +27,7 @@ extern inline function createDisplayObject():Dynamic {
 	return flight._js._fn.Scene2D.createDisplayObject();
 }
 #else
-extern inline function createDisplayObject():Dynamic {
+extern inline function createDisplayObject():flight.FlightNode {
 #if hl
 	return flight._hl._fn.Scene2D.createDisplayObject();
 #elseif cpp
@@ -44,7 +44,7 @@ extern inline function isNode2d(node:Dynamic):Bool {
 	return flight._js._fn.Scene2D.isNode2d(node);
 }
 #else
-extern inline function isNode2d(node:Dynamic):Bool {
+extern inline function isNode2d(node:flight.FlightNode):Bool {
 #if hl
 	return flight._hl._fn.Scene2D.isNode2d(node);
 #elseif cpp
@@ -61,13 +61,13 @@ extern inline function setNode2dClip(source:Dynamic, value:Null<Dynamic>):Void {
 	flight._js._fn.Scene2D.setNode2dClip(source, value);
 }
 #else
-extern inline function setNode2dClip(source:Dynamic, value:Dynamic):Void {
+extern inline function setNode2dClip(source:flight.FlightNode, value:Dynamic):Bool {
 #if hl
-	flight._hl._fn.Scene2D.setNode2dClip(source, value);
+	return flight._hl._fn.Scene2D.setNode2dClip(source, value);
 #elseif cpp
-	flight._cpp._fn.Scene2D.setNode2dClip(source, value);
+	return flight._cpp._fn.Scene2D.setNode2dClip(source, value);
 #elseif (js && flight_esm)
-	flight._js._fn.Scene2D.setNode2dClip(source, value);
+	return flight._js._fn.Scene2D.setNode2dClip(source, value);
 #else
 	#error "flight.Scene2D: no backend for this target."
 #end
@@ -95,7 +95,7 @@ extern inline function createHtmlView():Dynamic {
 	return flight._js._fn.Scene2D.createHtmlView();
 }
 #else
-extern inline function createHtmlView():Dynamic {
+extern inline function createHtmlView():flight.FlightNode {
 #if hl
 	return flight._hl._fn.Scene2D.createHtmlView();
 #elseif cpp
@@ -112,7 +112,7 @@ extern inline function computeHtmlViewLocalBoundsRectangle(out:Rectangle, source
 	flight._js._fn.Scene2D.computeHtmlViewLocalBoundsRectangle(out, source);
 }
 #else
-extern inline function computeHtmlViewLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
+extern inline function computeHtmlViewLocalBoundsRectangle(out:Rectangle, source:flight.FlightNode):Void {
 #if hl
 	flight._hl._fn.Scene2D.computeHtmlViewLocalBoundsRectangle(out, source);
 #elseif cpp
@@ -129,7 +129,7 @@ extern inline function setHtmlViewSize(source:Dynamic, width:Float, height:Float
 	flight._js._fn.Scene2D.setHtmlViewSize(source, width, height);
 }
 #else
-extern inline function setHtmlViewSize(source:Dynamic, width:Float, height:Float):Void {
+extern inline function setHtmlViewSize(source:flight.FlightNode, width:Float, height:Float):Void {
 #if hl
 	flight._hl._fn.Scene2D.setHtmlViewSize(source, width, height);
 #elseif cpp
@@ -146,7 +146,7 @@ extern inline function createScale9Sprite(scale9Grid:Rectangle):Dynamic {
 	return flight._js._fn.Scene2D.createScale9Sprite(scale9Grid);
 }
 #else
-extern inline function createScale9Sprite(scale9Grid:Rectangle):Dynamic {
+extern inline function createScale9Sprite(scale9Grid:Rectangle):flight.FlightNode {
 #if hl
 	return flight._hl._fn.Scene2D.createScale9Sprite(scale9Grid);
 #elseif cpp
@@ -197,7 +197,7 @@ extern inline function getScene2dRoot(source:Dynamic):Null<Dynamic> {
 	return flight._js._fn.Scene2D.getScene2dRoot(source);
 }
 #else
-extern inline function getScene2dRoot(source:Dynamic):Dynamic {
+extern inline function getScene2dRoot(source:flight.FlightNode):Dynamic {
 #if hl
 	return flight._hl._fn.Scene2D.getScene2dRoot(source);
 #elseif cpp
@@ -282,7 +282,7 @@ extern inline function createSprite():Dynamic {
 	return flight._js._fn.Scene2D.createSprite();
 }
 #else
-extern inline function createSprite():Dynamic {
+extern inline function createSprite():flight.FlightNode {
 #if hl
 	return flight._hl._fn.Scene2D.createSprite();
 #elseif cpp
@@ -299,7 +299,7 @@ extern inline function cloneSprite(source:Sprite):Dynamic {
 	return flight._js._fn.Scene2D.cloneSprite(source);
 }
 #else
-extern inline function cloneSprite(source:Sprite):Dynamic {
+extern inline function cloneSprite(source:flight.FlightNode):flight.FlightNode {
 #if hl
 	return flight._hl._fn.Scene2D.cloneSprite(source);
 #elseif cpp
@@ -316,13 +316,30 @@ extern inline function computeSpriteLocalBoundsRectangle(out:Rectangle, source:D
 	flight._js._fn.Scene2D.computeSpriteLocalBoundsRectangle(out, source);
 }
 #else
-extern inline function computeSpriteLocalBoundsRectangle(out:Rectangle, source:Dynamic):Void {
+extern inline function computeSpriteLocalBoundsRectangle(out:Rectangle, source:flight.FlightNode):Void {
 #if hl
 	flight._hl._fn.Scene2D.computeSpriteLocalBoundsRectangle(out, source);
 #elseif cpp
 	flight._cpp._fn.Scene2D.computeSpriteLocalBoundsRectangle(out, source);
 #elseif (js && flight_esm)
 	flight._js._fn.Scene2D.computeSpriteLocalBoundsRectangle(out, source);
+#else
+	#error "flight.Scene2D: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeScene2DsignalsRef(ptr:Scene2DSignals):Void {
+	flight._js._fn.Scene2D.freeScene2DsignalsRef(ptr);
+}
+#else
+extern inline function freeScene2DsignalsRef(ptr:Scene2DSignals):Void {
+#if hl
+	flight._hl._fn.Scene2D.freeScene2DsignalsRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Scene2D.freeScene2DsignalsRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Scene2D.freeScene2DsignalsRef(ptr);
 #else
 	#error "flight.Scene2D: no backend for this target."
 #end
@@ -340,6 +357,23 @@ extern inline function freeScene2DkindUsage(ptr:Scene2DKindUsage):Void {
 	flight._cpp._fn.Scene2D.freeScene2DkindUsage(ptr);
 #elseif (js && flight_esm)
 	flight._js._fn.Scene2D.freeScene2DkindUsage(ptr);
+#else
+	#error "flight.Scene2D: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeScene2DslotReferenceRef(ptr:Scene2DSlotReference):Void {
+	flight._js._fn.Scene2D.freeScene2DslotReferenceRef(ptr);
+}
+#else
+extern inline function freeScene2DslotReferenceRef(ptr:Scene2DSlotReference):Void {
+#if hl
+	flight._hl._fn.Scene2D.freeScene2DslotReferenceRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Scene2D.freeScene2DslotReferenceRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Scene2D.freeScene2DslotReferenceRef(ptr);
 #else
 	#error "flight.Scene2D: no backend for this target."
 #end

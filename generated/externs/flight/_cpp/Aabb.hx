@@ -1,7 +1,7 @@
 package flight._cpp;
 
 abstract Aabb(cpp.Star<cpp.Void>) {
-	static extern inline public function create(minX:Single, minY:Single, minZ:Single, maxX:Single, maxY:Single, maxZ:Single):flight._cpp.Aabb {
+	static extern inline public function create(minX:Float, minY:Float, minZ:Float, maxX:Float, maxY:Float, maxZ:Float):flight._cpp.Aabb {
 		return flight._cpp._fn.Geometry.createAabb(minX, minY, minZ, maxX, maxY, maxZ);
 	}
 	extern inline public function clone():flight._cpp.Aabb {
@@ -40,7 +40,7 @@ abstract Aabb(cpp.Star<cpp.Void>) {
 	extern inline public function isIntersectingSphere(sphere:flight._cpp.BoundingSphere):Bool {
 		return flight._cpp._fn.Geometry.isAabbIntersectingSphere(cast this, sphere);
 	}
-	extern inline public function set(minX:Single, minY:Single, minZ:Single, maxX:Single, maxY:Single, maxZ:Single):Void {
+	extern inline public function set(minX:Float, minY:Float, minZ:Float, maxX:Float, maxY:Float, maxZ:Float):Void {
 		flight._cpp._fn.Geometry.setAabb(cast this, minX, minY, minZ, maxX, maxY, maxZ);
 	}
 	extern inline public function setFromPoints(points:cpp.Star<cpp.Void>, pointsLen:Int):Void {
@@ -57,8 +57,5 @@ abstract Aabb(cpp.Star<cpp.Void>) {
 	}
 	extern inline public function free():Void {
 		flight._cpp._fn.Geometry.freeAabb(cast this);
-	}
-	extern inline public function computeParticleEmitter3dLocalBounds(source:cpp.Star<cpp.Void>):Void {
-		flight._cpp._fn.Particleemitter.computeParticleEmitter3dLocalBoundsAabb(cast this, source);
 	}
 }

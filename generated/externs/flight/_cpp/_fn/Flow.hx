@@ -19,10 +19,12 @@ extern class Flow {
 	public static function updateFlowStack(stack:cpp.Star<cpp.Void>, deltaTime:Single):Void;
 	@:native("flight_disable_flow_guards")
 	public static function disableFlowGuards(state:cpp.Star<cpp.Void>):Void;
-	@:native("flight_enable_flow_guards")
-	public static function enableFlowGuards(state:cpp.Star<cpp.Void>, logState:cpp.Star<cpp.Void>, clockFn:cpp.Star<cpp.Void>, clockCtx:cpp.Star<cpp.Void>):Void;
 	@:native("flight_get_flow_guard_kind_string")
 	public static function getFlowGuardKindString(value:Int):cpp.ConstCharStar;
 	@:native("flight_parse_flow_guard_kind")
 	public static function parseFlowGuardKind(value:cpp.ConstCharStar):Int;
+	@:native("flight_free_flow_stack_ref")
+	public static function freeFlowStackRef(ptr:flight._cpp.FlowStack):Void;
+	@:native("flight_free_flow_state_ref")
+	public static function freeFlowStateRef(ptr:flight._cpp.FlowState):Void;
 }

@@ -19,10 +19,12 @@ extern class Flow {
 	public static function updateFlowStack(stack:hl.Bytes, deltaTime:Single):Void;
 	@:hlNative("flight", "flight_disable_flow_guards")
 	public static function disableFlowGuards(state:hl.Bytes):Void;
-	@:hlNative("flight", "flight_enable_flow_guards")
-	public static function enableFlowGuards(state:hl.Bytes, logState:hl.Bytes, clockFn:hl.Bytes, clockCtx:hl.Bytes):Void;
 	@:hlNative("flight", "flight_get_flow_guard_kind_string")
 	public static function getFlowGuardKindString(value:Int):hl.Bytes;
 	@:hlNative("flight", "flight_parse_flow_guard_kind")
 	public static function parseFlowGuardKind(value:hl.Bytes):Int;
+	@:hlNative("flight", "flight_free_flow_stack_ref")
+	public static function freeFlowStackRef(ptr:flight._hl.FlowStack):Void;
+	@:hlNative("flight", "flight_free_flow_state_ref")
+	public static function freeFlowStateRef(ptr:flight._hl.FlowState):Void;
 }

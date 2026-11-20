@@ -2,13 +2,13 @@ package flight._hl._fn;
 
 extern class Command {
 	@:hlNative("flight", "flight_create_add_node_child_command")
-	public static function createAddNodeChildCommand(parent:hl.Bytes, child:hl.Bytes):hl.Bytes;
+	public static function createAddNodeChildCommand(parent:flight._hl.FlightNode, child:flight._hl.FlightNode):hl.Bytes;
 	@:hlNative("flight", "flight_create_composite_command")
 	public static function createCompositeCommand(children:hl.Bytes, childrenLen:Int):hl.Bytes;
 	@:hlNative("flight", "flight_create_remove_node_child_command")
-	public static function createRemoveNodeChildCommand(parent:hl.Bytes, child:hl.Bytes):hl.Bytes;
+	public static function createRemoveNodeChildCommand(parent:flight._hl.FlightNode, child:flight._hl.FlightNode):hl.Bytes;
 	@:hlNative("flight", "flight_create_reorder_node_child_command")
-	public static function createReorderNodeChildCommand(parent:hl.Bytes, child:hl.Bytes, toIndex:Int):hl.Bytes;
+	public static function createReorderNodeChildCommand(parent:flight._hl.FlightNode, child:flight._hl.FlightNode, toIndex:Int):hl.Bytes;
 	@:hlNative("flight", "flight_create_command_binding_table")
 	public static function createCommandBindingTable():flight._hl.CommandBindingTable;
 	@:hlNative("flight", "flight_get_command_binding")
@@ -55,10 +55,20 @@ extern class Command {
 	public static function isCommandTransactionOpen(history:hl.Bytes):Bool;
 	@:hlNative("flight", "flight_explain_command_dispatch")
 	public static function explainCommandDispatch(history:hl.Bytes, command:flight._hl.CommandRef):flight._hl.CommandDispatchExplanation;
+	@:hlNative("flight", "flight_free_add_node_child_command_ref")
+	public static function freeAddNodeChildCommandRef(ptr:flight._hl.AddNodeChildCommand):Void;
+	@:hlNative("flight", "flight_free_composite_command_ref")
+	public static function freeCompositeCommandRef(ptr:flight._hl.CompositeCommand):Void;
+	@:hlNative("flight", "flight_free_remove_node_child_command_ref")
+	public static function freeRemoveNodeChildCommandRef(ptr:flight._hl.RemoveNodeChildCommand):Void;
+	@:hlNative("flight", "flight_free_reorder_node_child_command_ref")
+	public static function freeReorderNodeChildCommandRef(ptr:flight._hl.ReorderNodeChildCommand):Void;
 	@:hlNative("flight", "flight_free_command_binding_table")
 	public static function freeCommandBindingTable(ptr:flight._hl.CommandBindingTable):Void;
 	@:hlNative("flight", "flight_free_command_binding_ref")
-	public static function freeCommandBindingRef(ptr:flight._hl.CommandBindingRef):Void;
+	public static function freeCommandBindingRef(ptr:flight._hl.CommandBinding):Void;
+	@:hlNative("flight", "flight_free_command_history_ref")
+	public static function freeCommandHistoryRef(ptr:flight._hl.CommandHistory):Void;
 	@:hlNative("flight", "flight_free_unit_signal")
 	public static function freeUnitSignal(ptr:flight._hl.UnitSignal):Void;
 	@:hlNative("flight", "flight_free_command_dispatch_explanation")

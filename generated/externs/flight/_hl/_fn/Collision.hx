@@ -16,13 +16,13 @@ extern class Collision {
 	@:hlNative("flight", "flight_collide_contact_manifold3d")
 	public static function collideContactManifold3d(registry:flight._hl.CollisionRegistry3D, a:flight._hl.CollisionShape3D, b:flight._hl.CollisionShape3D, out:flight._hl.CollisionContactManifold3D):Bool;
 	@:hlNative("flight", "flight_query_collision_aabb_face3d")
-	public static function queryCollisionAabbFace3d(shape:flight._hl.CollisionShape3D, dirX:Single, dirY:Single, dirZ:Single, out:hl.Bytes):Int;
+	public static function queryCollisionAabbFace3d(shape:flight._hl.CollisionShape3D, dirX:Float, dirY:Float, dirZ:Float, out:hl.Bytes):Int;
 	@:hlNative("flight", "flight_query_collision_box_face3d")
-	public static function queryCollisionBoxFace3d(shape:flight._hl.CollisionShape3D, dirX:Single, dirY:Single, dirZ:Single, out:hl.Bytes):Int;
+	public static function queryCollisionBoxFace3d(shape:flight._hl.CollisionShape3D, dirX:Float, dirY:Float, dirZ:Float, out:hl.Bytes):Int;
 	@:hlNative("flight", "flight_query_collision_capsule_face3d")
-	public static function queryCollisionCapsuleFace3d(shape:flight._hl.CollisionShape3D, dirX:Single, dirY:Single, dirZ:Single, out:hl.Bytes):Int;
+	public static function queryCollisionCapsuleFace3d(shape:flight._hl.CollisionShape3D, dirX:Float, dirY:Float, dirZ:Float, out:hl.Bytes):Int;
 	@:hlNative("flight", "flight_query_collision_convex_face3d")
-	public static function queryCollisionConvexFace3d(shape:flight._hl.CollisionShape3D, dirX:Single, dirY:Single, dirZ:Single, out:hl.Bytes):Int;
+	public static function queryCollisionConvexFace3d(shape:flight._hl.CollisionShape3D, dirX:Float, dirY:Float, dirZ:Float, out:hl.Bytes):Int;
 	@:hlNative("flight", "flight_register_built_in_collision_face_queries3d")
 	public static function registerBuiltInCollisionFaceQueries3d(registry:flight._hl.CollisionRegistry3D):Void;
 	@:hlNative("flight", "flight_register_collision_face_query3d")
@@ -42,15 +42,15 @@ extern class Collision {
 	@:hlNative("flight", "flight_register_collision_support2d")
 	public static function registerCollisionSupport2d(registry:flight._hl.CollisionRegistry2D, kind:hl.Bytes, support:flight._hl.CollisionSupport2D):Void;
 	@:hlNative("flight", "flight_support_collision_aabb2d")
-	public static function supportCollisionAabb2d(shape:flight._hl.CollisionAabb2D, dirX:Single, dirY:Single, out:hl.Bytes):Void;
+	public static function supportCollisionAabb2d(shape:flight._hl.CollisionAabb2D, dirX:Float, dirY:Float, out:hl.Bytes):Void;
 	@:hlNative("flight", "flight_support_collision_circle2d")
-	public static function supportCollisionCircle2d(shape:flight._hl.CollisionCircle2D, dirX:Single, dirY:Single, out:hl.Bytes):Void;
+	public static function supportCollisionCircle2d(shape:flight._hl.CollisionCircle2D, dirX:Float, dirY:Float, out:hl.Bytes):Void;
 	@:hlNative("flight", "flight_support_collision_obb2d")
-	public static function supportCollisionObb2d(shape:flight._hl.CollisionObb2D, dirX:Single, dirY:Single, out:hl.Bytes):Void;
+	public static function supportCollisionObb2d(shape:flight._hl.CollisionObb2D, dirX:Float, dirY:Float, out:hl.Bytes):Void;
 	@:hlNative("flight", "flight_support_collision_polygon2d")
-	public static function supportCollisionPolygon2d(shape:flight._hl.CollisionPolygon2D, dirX:Single, dirY:Single, out:hl.Bytes):Void;
+	public static function supportCollisionPolygon2d(shape:flight._hl.CollisionPolygon2D, dirX:Float, dirY:Float, out:hl.Bytes):Void;
 	@:hlNative("flight", "flight_write_vertex_list_support2d")
-	public static function writeVertexListSupport2d(vertices:hl.Bytes, verticesLen:Int, count:Int, dirX:Single, dirY:Single, out:hl.Bytes):Void;
+	public static function writeVertexListSupport2d(vertices:hl.Bytes, verticesLen:Int, count:Int, dirX:Float, dirY:Float, out:hl.Bytes):Void;
 	@:hlNative("flight", "flight_clear_collision_pair_tests3d")
 	public static function clearCollisionPairTests3d(registry:flight._hl.CollisionRegistry3D):Void;
 	@:hlNative("flight", "flight_clear_collision_supports3d")
@@ -62,21 +62,21 @@ extern class Collision {
 	@:hlNative("flight", "flight_register_collision_support3d")
 	public static function registerCollisionSupport3d(registry:flight._hl.CollisionRegistry3D, kind:hl.Bytes, support:flight._hl.CollisionSupport3D):Void;
 	@:hlNative("flight", "flight_support_collision_aabb3d")
-	public static function supportCollisionAabb3d(shape:flight._hl.CollisionAabb3D, dirX:Single, dirY:Single, dirZ:Single, out:hl.Bytes):Void;
+	public static function supportCollisionAabb3d(shape:flight._hl.CollisionAabb3D, dirX:Float, dirY:Float, dirZ:Float, out:hl.Bytes):Void;
 	@:hlNative("flight", "flight_support_collision_box3d")
-	public static function supportCollisionBox3d(shape:flight._hl.CollisionBox3D, dirX:Single, dirY:Single, dirZ:Single, out:hl.Bytes):Void;
+	public static function supportCollisionBox3d(shape:flight._hl.CollisionBox3D, dirX:Float, dirY:Float, dirZ:Float, out:hl.Bytes):Void;
 	@:hlNative("flight", "flight_support_collision_capsule3d")
-	public static function supportCollisionCapsule3d(shape:flight._hl.CollisionCapsule3D, dirX:Single, dirY:Single, dirZ:Single, out:hl.Bytes):Void;
+	public static function supportCollisionCapsule3d(shape:flight._hl.CollisionCapsule3D, dirX:Float, dirY:Float, dirZ:Float, out:hl.Bytes):Void;
 	@:hlNative("flight", "flight_support_collision_cone3d")
-	public static function supportCollisionCone3d(shape:flight._hl.CollisionCone3D, dirX:Single, dirY:Single, dirZ:Single, out:hl.Bytes):Void;
+	public static function supportCollisionCone3d(shape:flight._hl.CollisionCone3D, dirX:Float, dirY:Float, dirZ:Float, out:hl.Bytes):Void;
 	@:hlNative("flight", "flight_support_collision_convex3d")
-	public static function supportCollisionConvex3d(shape:flight._hl.CollisionConvex3D, dirX:Single, dirY:Single, dirZ:Single, out:hl.Bytes):Void;
+	public static function supportCollisionConvex3d(shape:flight._hl.CollisionConvex3D, dirX:Float, dirY:Float, dirZ:Float, out:hl.Bytes):Void;
 	@:hlNative("flight", "flight_support_collision_cylinder3d")
-	public static function supportCollisionCylinder3d(shape:flight._hl.CollisionCylinder3D, dirX:Single, dirY:Single, dirZ:Single, out:hl.Bytes):Void;
+	public static function supportCollisionCylinder3d(shape:flight._hl.CollisionCylinder3D, dirX:Float, dirY:Float, dirZ:Float, out:hl.Bytes):Void;
 	@:hlNative("flight", "flight_support_collision_sphere3d")
-	public static function supportCollisionSphere3d(shape:flight._hl.CollisionSphere3D, dirX:Single, dirY:Single, dirZ:Single, out:hl.Bytes):Void;
+	public static function supportCollisionSphere3d(shape:flight._hl.CollisionSphere3D, dirX:Float, dirY:Float, dirZ:Float, out:hl.Bytes):Void;
 	@:hlNative("flight", "flight_write_vertex_list_support3d")
-	public static function writeVertexListSupport3d(vertices:hl.Bytes, verticesLen:Int, count:Int, dirX:Single, dirY:Single, dirZ:Single, out:hl.Bytes):Void;
+	public static function writeVertexListSupport3d(vertices:hl.Bytes, verticesLen:Int, count:Int, dirX:Float, dirY:Float, dirZ:Float, out:hl.Bytes):Void;
 	@:hlNative("flight", "flight_pack_contact_feature_id")
 	public static function packContactFeatureId(referenceIsA:Bool, referenceEdge:haxe.Int64, incidentEdge:haxe.Int64, secondPoint:Bool):haxe.Int64;
 	@:hlNative("flight", "flight_create_collision_contact_manifold2d")
@@ -97,8 +97,6 @@ extern class Collision {
 	public static function areCollisionGuardsEnabled(registry2d:flight._hl.CollisionRegistry2D, registry3d:flight._hl.CollisionRegistry3D):Bool;
 	@:hlNative("flight", "flight_disable_collision_guards")
 	public static function disableCollisionGuards(registry2d:flight._hl.CollisionRegistry2D, registry3d:flight._hl.CollisionRegistry3D):Void;
-	@:hlNative("flight", "flight_enable_collision_guards")
-	public static function enableCollisionGuards(registry2d:flight._hl.CollisionRegistry2D, registry3d:flight._hl.CollisionRegistry3D, logState:hl.Bytes, clockFn:hl.Bytes, clockCtx:hl.Bytes):Void;
 	@:hlNative("flight", "flight_test_collision_support2d")
 	public static function testCollisionSupport2d(registry:flight._hl.CollisionRegistry2D, a:flight._hl.CollisionShape2D, b:flight._hl.CollisionShape2D, out:flight._hl.CollisionManifold2D):Bool;
 	@:hlNative("flight", "flight_test_collision_support_overlap2d")
@@ -110,7 +108,7 @@ extern class Collision {
 	@:hlNative("flight", "flight_create_collision_distance3d")
 	public static function createCollisionDistance3d():flight._hl.CollisionDistance3D;
 	@:hlNative("flight", "flight_write_collision_distance3d")
-	public static function writeCollisionDistance3d(out:flight._hl.CollisionDistance3D, registry:flight._hl.CollisionRegistry3D, a:flight._hl.CollisionShape3D, b:flight._hl.CollisionShape3D, offsetX:Single, offsetY:Single, offsetZ:Single):Bool;
+	public static function writeCollisionDistance3d(out:flight._hl.CollisionDistance3D, registry:flight._hl.CollisionRegistry3D, a:flight._hl.CollisionShape3D, b:flight._hl.CollisionShape3D, offsetX:Float, offsetY:Float, offsetZ:Float):Bool;
 	@:hlNative("flight", "flight_create_collision_manifold2d")
 	public static function createCollisionManifold2d():flight._hl.CollisionManifold2D;
 	@:hlNative("flight", "flight_clear_collision_manifold2d")
@@ -120,9 +118,9 @@ extern class Collision {
 	@:hlNative("flight", "flight_clear_collision_manifold3d")
 	public static function clearCollisionManifold3d(out:flight._hl.CollisionManifold3D):Void;
 	@:hlNative("flight", "flight_get_collision_shape_contains_point2d")
-	public static function getCollisionShapeContainsPoint2d(shape:flight._hl.CollisionShape2D, x:Single, y:Single):Bool;
+	public static function getCollisionShapeContainsPoint2d(shape:flight._hl.CollisionShape2D, x:Float, y:Float):Bool;
 	@:hlNative("flight", "flight_get_collision_shape_contains_point3d")
-	public static function getCollisionShapeContainsPoint3d(shape:flight._hl.CollisionShape3D, x:Single, y:Single, z:Single):Bool;
+	public static function getCollisionShapeContainsPoint3d(shape:flight._hl.CollisionShape3D, x:Float, y:Float, z:Float):Bool;
 	@:hlNative("flight", "flight_create_collision_raycast_hit2d")
 	public static function createCollisionRaycastHit2d():flight._hl.CollisionRaycastHit2D;
 	@:hlNative("flight", "flight_raycast_collision_shape2d")
@@ -131,7 +129,7 @@ extern class Collision {
 	public static function createCollisionRaycastHit3d():flight._hl.CollisionRaycastHit3D;
 	@:hlNative("flight", "flight_raycast_collision_shape3d")
 	private static function __flightPacked_raycastCollisionShape3d(out:flight._hl.CollisionRaycastHit3D, shape:flight._hl.CollisionShape3D, __flightValues:hl.NativeArray<Float>):Bool;
-	public static inline function raycastCollisionShape3d(out:flight._hl.CollisionRaycastHit3D, shape:flight._hl.CollisionShape3D, originX:Single, originY:Single, originZ:Single, directionX:Single, directionY:Single, directionZ:Single, maxFraction:Single):Bool {
+	public static inline function raycastCollisionShape3d(out:flight._hl.CollisionRaycastHit3D, shape:flight._hl.CollisionShape3D, originX:Float, originY:Float, originZ:Float, directionX:Float, directionY:Float, directionZ:Float, maxFraction:Float):Bool {
 		var __flightValues = new hl.NativeArray<Float>(7);
 		__flightValues[0] = originX;
 		__flightValues[1] = originY;
@@ -211,12 +209,12 @@ extern class Collision {
 	@:hlNative("flight", "flight_create_collision_time_of_impact2d")
 	public static function createCollisionTimeOfImpact2d():flight._hl.CollisionTimeOfImpact2D;
 	@:hlNative("flight", "flight_sweep_collision_shape2d")
-	public static function sweepCollisionShape2d(out:flight._hl.CollisionTimeOfImpact2D, registry:flight._hl.CollisionRegistry2D, shapeA:flight._hl.CollisionShape2D, translationAx:Single, translationAy:Single, shapeB:flight._hl.CollisionShape2D, translationBx:Single, translationBy:Single, maxFraction:Single):Bool;
+	public static function sweepCollisionShape2d(out:flight._hl.CollisionTimeOfImpact2D, registry:flight._hl.CollisionRegistry2D, shapeA:flight._hl.CollisionShape2D, translationAx:Float, translationAy:Float, shapeB:flight._hl.CollisionShape2D, translationBx:Float, translationBy:Float, maxFraction:Float):Bool;
 	@:hlNative("flight", "flight_create_collision_time_of_impact3d")
 	public static function createCollisionTimeOfImpact3d():flight._hl.CollisionTimeOfImpact3D;
 	@:hlNative("flight", "flight_sweep_collision_shape3d")
 	private static function __flightPacked_sweepCollisionShape3d(out:flight._hl.CollisionTimeOfImpact3D, registry:flight._hl.CollisionRegistry3D, shapeA:flight._hl.CollisionShape3D, __flightValues:hl.NativeArray<Float>, shapeB:flight._hl.CollisionShape3D):Bool;
-	public static inline function sweepCollisionShape3d(out:flight._hl.CollisionTimeOfImpact3D, registry:flight._hl.CollisionRegistry3D, shapeA:flight._hl.CollisionShape3D, translationAx:Single, translationAy:Single, translationAz:Single, shapeB:flight._hl.CollisionShape3D, translationBx:Single, translationBy:Single, translationBz:Single, maxFraction:Single):Bool {
+	public static inline function sweepCollisionShape3d(out:flight._hl.CollisionTimeOfImpact3D, registry:flight._hl.CollisionRegistry3D, shapeA:flight._hl.CollisionShape3D, translationAx:Float, translationAy:Float, translationAz:Float, shapeB:flight._hl.CollisionShape3D, translationBx:Float, translationBy:Float, translationBz:Float, maxFraction:Float):Bool {
 		var __flightValues = new hl.NativeArray<Float>(7);
 		__flightValues[0] = translationAx;
 		__flightValues[1] = translationAy;
@@ -247,7 +245,7 @@ extern class Collision {
 	public static function invalidateCollisionTriangleMesh3d(mesh:flight._hl.CollisionTriangleMesh3D):Void;
 	@:hlNative("flight", "flight_raycast_collision_heightfield3d")
 	private static function __flightPacked_raycastCollisionHeightfield3d(out:flight._hl.CollisionRaycastHit3D, heightfield:flight._hl.CollisionHeightfield3D, __flightValues:hl.NativeArray<Float>):Bool;
-	public static inline function raycastCollisionHeightfield3d(out:flight._hl.CollisionRaycastHit3D, heightfield:flight._hl.CollisionHeightfield3D, originX:Single, originY:Single, originZ:Single, directionX:Single, directionY:Single, directionZ:Single, maxFraction:Single):Bool {
+	public static inline function raycastCollisionHeightfield3d(out:flight._hl.CollisionRaycastHit3D, heightfield:flight._hl.CollisionHeightfield3D, originX:Float, originY:Float, originZ:Float, directionX:Float, directionY:Float, directionZ:Float, maxFraction:Float):Bool {
 		var __flightValues = new hl.NativeArray<Float>(7);
 		__flightValues[0] = originX;
 		__flightValues[1] = originY;
@@ -260,7 +258,7 @@ extern class Collision {
 	}
 	@:hlNative("flight", "flight_raycast_collision_triangle_mesh3d")
 	private static function __flightPacked_raycastCollisionTriangleMesh3d(out:flight._hl.CollisionRaycastHit3D, mesh:flight._hl.CollisionTriangleMesh3D, __flightValues:hl.NativeArray<Float>):Bool;
-	public static inline function raycastCollisionTriangleMesh3d(out:flight._hl.CollisionRaycastHit3D, mesh:flight._hl.CollisionTriangleMesh3D, originX:Single, originY:Single, originZ:Single, directionX:Single, directionY:Single, directionZ:Single, maxFraction:Single):Bool {
+	public static inline function raycastCollisionTriangleMesh3d(out:flight._hl.CollisionRaycastHit3D, mesh:flight._hl.CollisionTriangleMesh3D, originX:Float, originY:Float, originZ:Float, directionX:Float, directionY:Float, directionZ:Float, maxFraction:Float):Bool {
 		var __flightValues = new hl.NativeArray<Float>(7);
 		__flightValues[0] = originX;
 		__flightValues[1] = originY;
@@ -272,9 +270,9 @@ extern class Collision {
 		return __flightPacked_raycastCollisionTriangleMesh3d(out, mesh, __flightValues);
 	}
 	@:hlNative("flight", "flight_sweep_collision_heightfield3d")
-	public static function sweepCollisionHeightfield3d(out:flight._hl.CollisionTimeOfImpact3D, registry:flight._hl.CollisionRegistry3D, convex:flight._hl.CollisionShape3D, deltaX:Single, deltaY:Single, deltaZ:Single, heightfield:flight._hl.CollisionHeightfield3D, maxFraction:Single):Bool;
+	public static function sweepCollisionHeightfield3d(out:flight._hl.CollisionTimeOfImpact3D, registry:flight._hl.CollisionRegistry3D, convex:flight._hl.CollisionShape3D, deltaX:Float, deltaY:Float, deltaZ:Float, heightfield:flight._hl.CollisionHeightfield3D, maxFraction:Float):Bool;
 	@:hlNative("flight", "flight_sweep_collision_triangle_mesh3d")
-	public static function sweepCollisionTriangleMesh3d(out:flight._hl.CollisionTimeOfImpact3D, registry:flight._hl.CollisionRegistry3D, convex:flight._hl.CollisionShape3D, deltaX:Single, deltaY:Single, deltaZ:Single, mesh:flight._hl.CollisionTriangleMesh3D, maxFraction:Single):Bool;
+	public static function sweepCollisionTriangleMesh3d(out:flight._hl.CollisionTimeOfImpact3D, registry:flight._hl.CollisionRegistry3D, convex:flight._hl.CollisionShape3D, deltaX:Float, deltaY:Float, deltaZ:Float, mesh:flight._hl.CollisionTriangleMesh3D, maxFraction:Float):Bool;
 	@:hlNative("flight", "flight_write_collision_heightfield_bounds3d")
 	public static function writeCollisionHeightfieldBounds3d(heightfield:flight._hl.CollisionHeightfield3D, out:flight._hl.CollisionAabb3D):Void;
 	@:hlNative("flight", "flight_write_collision_triangle_mesh_bounds3d")
@@ -303,6 +301,4 @@ extern class Collision {
 	public static function freeCollisionTriangleMesh3D(ptr:flight._hl.CollisionTriangleMesh3D):Void;
 	@:hlNative("flight", "flight_free_collision_collider_shape3_d")
 	public static function freeCollisionColliderShape3D(ptr:flight._hl.CollisionColliderShape3D):Void;
-	@:hlNative("flight", "flight_free_collision_shape2_d")
-	public static function freeCollisionShape2D(ptr:flight._hl.CollisionShape2D):Void;
 }

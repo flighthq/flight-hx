@@ -34,7 +34,7 @@ jobs:
             ~/.cargo/git
             .artifacts/flight-source-*/target
           key: rust-${{ runner.os }}-1.96.0-${{ hashFiles('dependencies.lock.json', 'patches/flight/**') }}
-      - run: cargo fetch --locked --manifest-path .dependencies/flight/Cargo.toml
+      - run: node tools/externs/generate.mjs --fetch-dependencies
       - run: npm run check
       - run: npm run package:haxelib
       - uses: actions/upload-artifact@v4

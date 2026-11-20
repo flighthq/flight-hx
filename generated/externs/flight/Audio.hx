@@ -375,6 +375,74 @@ extern inline function resetFailedAudioResourceReference(reference:AudioResource
 }
 #end
 #if (js && flight_esm)
+extern inline function freeAudioBufferRef(ptr:AudioBuffer):Void {
+	flight._js._fn.Audio.freeAudioBufferRef(ptr);
+}
+#else
+extern inline function freeAudioBufferRef(ptr:AudioBuffer):Void {
+#if hl
+	flight._hl._fn.Audio.freeAudioBufferRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Audio.freeAudioBufferRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Audio.freeAudioBufferRef(ptr);
+#else
+	#error "flight.Audio: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeAudioResourceRef(ptr:AudioResource):Void {
+	flight._js._fn.Audio.freeAudioResourceRef(ptr);
+}
+#else
+extern inline function freeAudioResourceRef(ptr:AudioResource):Void {
+#if hl
+	flight._hl._fn.Audio.freeAudioResourceRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Audio.freeAudioResourceRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Audio.freeAudioResourceRef(ptr);
+#else
+	#error "flight.Audio: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeAudioResourceFailureRef(ptr:AudioResourceFailure):Void {
+	flight._js._fn.Audio.freeAudioResourceFailureRef(ptr);
+}
+#else
+extern inline function freeAudioResourceFailureRef(ptr:AudioResourceFailure):Void {
+#if hl
+	flight._hl._fn.Audio.freeAudioResourceFailureRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Audio.freeAudioResourceFailureRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Audio.freeAudioResourceFailureRef(ptr);
+#else
+	#error "flight.Audio: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeExternalAudioResourceReferenceRef(ptr:ExternalAudioResourceReference):Void {
+	flight._js._fn.Audio.freeExternalAudioResourceReferenceRef(ptr);
+}
+#else
+extern inline function freeExternalAudioResourceReferenceRef(ptr:ExternalAudioResourceReference):Void {
+#if hl
+	flight._hl._fn.Audio.freeExternalAudioResourceReferenceRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Audio.freeExternalAudioResourceReferenceRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Audio.freeExternalAudioResourceReferenceRef(ptr);
+#else
+	#error "flight.Audio: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
 extern inline function freeAudioResourceReferenceResolutionExplanation(ptr:AudioResourceReferenceResolutionExplanation):Void {
 	flight._js._fn.Audio.freeAudioResourceReferenceResolutionExplanation(ptr);
 }
@@ -403,23 +471,6 @@ extern inline function freeAudioResourceReference(ptr:AudioResourceReference):Vo
 	flight._cpp._fn.Audio.freeAudioResourceReference(ptr);
 #elseif (js && flight_esm)
 	flight._js._fn.Audio.freeAudioResourceReference(ptr);
-#else
-	#error "flight.Audio: no backend for this target."
-#end
-}
-#end
-#if (js && flight_esm)
-extern inline function freeString(ptr:Dynamic):Void {
-	flight._js._fn.Audio.freeString(ptr);
-}
-#else
-extern inline function freeString(ptr:Dynamic):Void {
-#if hl
-	flight._hl._fn.Audio.freeString(ptr);
-#elseif cpp
-	flight._cpp._fn.Audio.freeString(ptr);
-#elseif (js && flight_esm)
-	flight._js._fn.Audio.freeString(ptr);
 #else
 	#error "flight.Audio: no backend for this target."
 #end

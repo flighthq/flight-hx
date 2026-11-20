@@ -157,18 +157,6 @@ extern inline function disableFlowGuards(state:Dynamic):Void {
 extern inline function enableFlowGuards(state:Dynamic, logState:Dynamic, clock:Dynamic):Void {
 	flight._js._fn.Flow.enableFlowGuards(state, logState, clock);
 }
-#else
-extern inline function enableFlowGuards(state:Dynamic, logState:Dynamic, clockFn:Dynamic, clockCtx:Dynamic):Void {
-#if hl
-	flight._hl._fn.Flow.enableFlowGuards(state, logState, clockFn, clockCtx);
-#elseif cpp
-	flight._cpp._fn.Flow.enableFlowGuards(state, logState, clockFn, clockCtx);
-#elseif (js && flight_esm)
-	flight._js._fn.Flow.enableFlowGuards(state, logState, clockFn, clockCtx);
-#else
-	#error "flight.Flow: no backend for this target."
-#end
-}
 #end
 #if (js && flight_esm)
 extern inline function getFlowGuardKindString(value:Dynamic):String {
@@ -199,6 +187,40 @@ extern inline function parseFlowGuardKind(value:String):Int {
 	return flight._cpp._fn.Flow.parseFlowGuardKind(cast value);
 #elseif (js && flight_esm)
 	return flight._js._fn.Flow.parseFlowGuardKind(value);
+#else
+	#error "flight.Flow: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeFlowStackRef(ptr:FlowStack):Void {
+	flight._js._fn.Flow.freeFlowStackRef(ptr);
+}
+#else
+extern inline function freeFlowStackRef(ptr:FlowStack):Void {
+#if hl
+	flight._hl._fn.Flow.freeFlowStackRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Flow.freeFlowStackRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Flow.freeFlowStackRef(ptr);
+#else
+	#error "flight.Flow: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeFlowStateRef(ptr:FlowState):Void {
+	flight._js._fn.Flow.freeFlowStateRef(ptr);
+}
+#else
+extern inline function freeFlowStateRef(ptr:FlowState):Void {
+#if hl
+	flight._hl._fn.Flow.freeFlowStateRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Flow.freeFlowStateRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Flow.freeFlowStateRef(ptr);
 #else
 	#error "flight.Flow: no backend for this target."
 #end

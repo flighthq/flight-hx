@@ -260,6 +260,4 @@ extern class Collision {
 	public static inline function freeCollisionTriangleMesh3D(ptr:flight._js.CollisionTriangleMesh3D):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeCollisionColliderShape3D(ptr:flight._js.CollisionColliderShape3D):Void {}
-	/** Native allocation release is unnecessary on JavaScript. */
-	public static inline function freeCollisionShape2D(ptr:flight._js.CollisionShape2D):Void {}
 }

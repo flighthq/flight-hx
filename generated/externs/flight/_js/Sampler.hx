@@ -2,11 +2,11 @@ package flight._js;
 
 abstract Sampler(Dynamic) {
 	public var anisotropy(get, set):Float;
-	inline function get_anisotropy():Float return untyped this["anisotropy"];
-	inline function set_anisotropy(value:Float):Float return untyped this["anisotropy"] = value;
+	inline function get_anisotropy():Float return untyped this.anisotropy;
+	inline function set_anisotropy(value:Float):Float return untyped this.anisotropy = value;
 	public var mipmaps(get, set):Bool;
-	inline function get_mipmaps():Bool return untyped this["mipmaps"];
-	inline function set_mipmaps(value:Bool):Bool return untyped this["mipmaps"] = value;
+	inline function get_mipmaps():Bool return untyped this.mipmaps;
+	inline function set_mipmaps(value:Bool):Bool return untyped this.mipmaps = value;
 	static inline public function createAnisotropic(level:Float):flight._js.Sampler {
 		return flight._js._fn.Texture.createAnisotropicSampler(level);
 	}

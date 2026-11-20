@@ -239,6 +239,23 @@ extern inline function getStatechartSignals(instance:Dynamic):StatechartSignals 
 }
 #end
 #if (js && flight_esm)
+extern inline function freeStatechartInstanceRawRef(ptr:StatechartInstanceRaw):Void {
+	flight._js._fn.Statechart.freeStatechartInstanceRawRef(ptr);
+}
+#else
+extern inline function freeStatechartInstanceRawRef(ptr:StatechartInstanceRaw):Void {
+#if hl
+	flight._hl._fn.Statechart.freeStatechartInstanceRawRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Statechart.freeStatechartInstanceRawRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Statechart.freeStatechartInstanceRawRef(ptr);
+#else
+	#error "flight.Statechart: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
 extern inline function freeStatechartTransitionExplanation(ptr:StatechartTransitionExplanation):Void {
 	flight._js._fn.Statechart.freeStatechartTransitionExplanation(ptr);
 }

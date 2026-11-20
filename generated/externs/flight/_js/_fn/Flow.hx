@@ -26,4 +26,8 @@ extern class Flow {
 	public static function getFlowGuardKindString(value:Dynamic):String;
 	@:native("parseFlowGuardKind")
 	public static function parseFlowGuardKind(value:String):Null<Dynamic>;
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeFlowStackRef(ptr:flight._js.FlowStack):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeFlowStateRef(ptr:flight._js.FlowState):Void {}
 }

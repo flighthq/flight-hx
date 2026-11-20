@@ -1,19 +1,19 @@
 package flight._hl;
 
 abstract AnimationCrossfade(hl.Bytes) {
-	public var duration(get, set):Single;
+	public var duration(get, set):Float;
 
-	inline function get_duration():Single return this.getF32(40);
+	inline function get_duration():Float return this.getF64(40);
 
-	inline function set_duration(value:Single):Single { this.setF32(40, value); return value; }
-	public var elapsed(get, set):Single;
+	inline function set_duration(value:Float):Float { this.setF64(40, value); return value; }
+	public var elapsed(get, set):Float;
 
-	inline function get_elapsed():Single return this.getF32(44);
+	inline function get_elapsed():Float return this.getF64(48);
 
-	inline function set_elapsed(value:Single):Single { this.setF32(44, value); return value; }
+	inline function set_elapsed(value:Float):Float { this.setF64(48, value); return value; }
 	public var weight(get, set):Single;
 
-	inline function get_weight():Single return this.getF32(112);
+	inline function get_weight():Single return this.getF32(120);
 
-	inline function set_weight(value:Single):Single { this.setF32(112, value); return value; }
+	inline function set_weight(value:Single):Single { this.setF32(120, value); return value; }
 }

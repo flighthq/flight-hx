@@ -10,6 +10,8 @@ extern class Bitmap {
 	public static function convertBitmapAlphaType(out:flight._js.Bitmap, target:Dynamic):Void;
 	@:native("invalidateBitmap")
 	public static function invalidateBitmap(bitmap:flight._js.Bitmap):Void;
+	@:native("shareBitmap")
+	public static function shareBitmap(bitmap:flight._js.Bitmap):Dynamic;
 	@:native("transformBitmap")
 	public static function transformBitmap(dest:flight._js.BitmapRegion, source:flight._js.BitmapRegion, matrix:Dynamic, edgeMode:Dynamic, sampleMode:Dynamic):Void;
 	@:native("copyBitmapAlpha")
@@ -91,7 +93,7 @@ extern class Bitmap {
 	@:native("dissolveBitmapPixels")
 	public static function dissolveBitmapPixels(dest:flight._js.BitmapRegion, source:flight._js.BitmapRegion, seed:Int, pixelCount:Int, fillColor:Int):Int;
 	@:native("encodeBitmap")
-	public static function encodeBitmap(hostBitmapEncode:flight._js.HostBitmapEncodeCapability, source:flight._js.Bitmap, format:Null<Dynamic>, quality:Null<Float>):Null<Dynamic>;
+	public static function encodeBitmap(hostBitmapEncode:flight._js.HostBitmapEncodeCapability, source:flight._js.Bitmap, format:Null<Dynamic>, quality:Null<Float>):Null<flight._js.ByteResult>;
 	@:native("explainBitmapEncodeFailure")
 	public static function explainBitmapEncodeFailure(hostBitmapEncode:flight._js.HostBitmapEncodeCapability, format:Dynamic):Null<flight._js.BitmapEncodeFailureExplanation>;
 	@:native("fillBitmapRectangle")
@@ -161,9 +163,9 @@ extern class Bitmap {
 	@:native("getBitmapColorBoundsRectangle")
 	public static function getBitmapColorBoundsRectangle(source:flight._js.BitmapRegion, mask:Int, color:Int, findColor:Bool):Null<flight._js.Rectangle>;
 	@:native("createBitmapRegion")
-	public static function createBitmapRegion(bitmap:flight._js.Bitmap, x:Int, y:Int, width:Int, height:Int):flight._js.BitmapRegion;
+	public static function createBitmapRegion(bitmap:Dynamic, x:Int, y:Int, width:Int, height:Int):flight._js.BitmapRegion;
 	@:native("setBitmapRegion")
-	public static function setBitmapRegion(out:flight._js.BitmapRegion, bitmap:flight._js.Bitmap, x:Int, y:Int, width:Int, height:Int):Void;
+	public static function setBitmapRegion(out:flight._js.BitmapRegion, bitmap:Dynamic, x:Int, y:Int, width:Int, height:Int):Void;
 	@:native("resizeBitmap")
 	public static function resizeBitmap(dest:flight._js.BitmapRegion, source:flight._js.BitmapRegion, mode:Dynamic, edgeMode:Dynamic, premultiplied:Bool):Void;
 	@:native("rotateBitmap")
@@ -202,6 +204,8 @@ extern class Bitmap {
 	public static function warpBitmapQuad(dest:flight._js.BitmapRegion, source:flight._js.BitmapRegion, dstQuad:Dynamic, edgeMode:Dynamic, sampleMode:Dynamic):Void;
 	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeBitmap(ptr:flight._js.Bitmap):Void {}
+	/** Native allocation release is unnecessary on JavaScript. */
+	public static inline function freeBitmapRef(ptr:flight._js.Bitmap):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */
 	public static inline function freeBitmapMismatch(ptr:flight._js.BitmapMismatch):Void {}
 	/** Native allocation release is unnecessary on JavaScript. */

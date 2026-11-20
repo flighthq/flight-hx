@@ -1,12 +1,11 @@
 package flight._cpp;
 
 private extern class Woff2TableEntry_Ffi {
+	@:native("flight_free_string") static function freeString(value:cpp.RawPointer<cpp.Char>):Void;
 	@:native("flight_get_woff2_table_entry_original_length") static function get_originalLength(ptr:cpp.Star<cpp.Void>):Int;
 	@:native("flight_set_woff2_table_entry_original_length") static function set_originalLength(ptr:cpp.Star<cpp.Void>, value:Int):Int;
-	@:native("flight_field_get_woff2_table_entry_tag")
-	static function get_tag(ptr:cpp.Star<cpp.Void>):flight._cpp.NativeByteBuffer;
-	@:native("flight_field_set_woff2_table_entry_tag")
-	static function set_tag(ptr:cpp.Star<cpp.Void>, data:cpp.Star<cpp.Void>, length:Int):Void;
+	@:native("flight_field_get_woff2_table_entry_tag") static function get_tag(ptr:cpp.Star<cpp.Void>):cpp.RawPointer<cpp.Char>;
+	@:native("flight_field_set_woff2_table_entry_tag") static function set_tag(ptr:cpp.Star<cpp.Void>, value:cpp.ConstCharStar):Void;
 	@:native("flight_get_woff2_table_entry_transform_length") static function get_transformLength(ptr:cpp.Star<cpp.Void>):Int;
 	@:native("flight_set_woff2_table_entry_transform_length") static function set_transformLength(ptr:cpp.Star<cpp.Void>, value:Int):Int;
 	@:native("flight_get_woff2_table_entry_transform_version") static function get_transformVersion(ptr:cpp.Star<cpp.Void>):Int;
@@ -22,20 +21,8 @@ abstract Woff2TableEntry(cpp.Star<cpp.Void>) {
 
 	inline function set_originalLength(value:Int):Int { Woff2TableEntry_Ffi.set_originalLength(this, value); return value; }
 	public var tag(get, set):String;
-	inline function get_tag():String {
-		final bytes = Woff2TableEntry_Ffi.get_tag(this);
-		try {
-			final value = bytes.toBytes().toString();
-			bytes.dispose();
-			return value;
-		} catch (error:Dynamic) { bytes.dispose(); throw error; }
-	}
-	inline function set_tag(value:String):String {
-		final bytes = haxe.io.Bytes.ofString(value);
-		Woff2TableEntry_Ffi.set_tag(this, cast cpp.Pointer.ofArray(bytes.getData()).raw, bytes.length);
-		return value;
-	}
-
+	inline function get_tag():String { var raw = Woff2TableEntry_Ffi.get_tag(this); if (raw == null) return null; var value:String = (cast raw : cpp.ConstCharStar); Woff2TableEntry_Ffi.freeString(raw); return value; }
+	inline function set_tag(value:String):String { var raw:cpp.ConstCharStar = cast value; Woff2TableEntry_Ffi.set_tag(this, raw); return value; }
 	public var transformLength(get, set):Int;
 
 	inline function get_transformLength():Int return Woff2TableEntry_Ffi.get_transformLength(this);

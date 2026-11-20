@@ -1,10 +1,12 @@
 package flight._hl;
 
 private extern class ParticleDesignerDocument_Ffi {
+	@:hlNative("flight", "flight_free_string")
+	static function freeString(value:hl.Bytes):Void;
 	@:hlNative("flight", "flight_field_get_particle_designer_document_texture_file_name")
-	static function get_textureFileName(ptr:hl.Bytes):flight._hl.NativeByteBuffer;
+	static function get_textureFileName(ptr:hl.Bytes):hl.Bytes;
 	@:hlNative("flight", "flight_field_set_particle_designer_document_texture_file_name")
-	static function set_textureFileName(ptr:hl.Bytes, data:hl.Bytes, length:Int):Void;
+	static function set_textureFileName(ptr:hl.Bytes, value:hl.Bytes):Void;
 }
 
 abstract ParticleDesignerDocument(hl.Bytes) {
@@ -229,18 +231,6 @@ abstract ParticleDesignerDocument(hl.Bytes) {
 
 	inline function set_startParticleSizeVariance(value:Single):Single { this.setF32(176, value); return value; }
 	public var textureFileName(get, set):String;
-	inline function get_textureFileName():String {
-		final bytes = ParticleDesignerDocument_Ffi.get_textureFileName(this);
-		try {
-			final value = bytes.toBytes().toString();
-			bytes.dispose();
-			return value;
-		} catch (error:Dynamic) { bytes.dispose(); throw error; }
-	}
-	inline function set_textureFileName(value:String):String {
-		final bytes = haxe.io.Bytes.ofString(value);
-		ParticleDesignerDocument_Ffi.set_textureFileName(this, bytes.getData().bytes, bytes.length);
-		return value;
-	}
-
+	inline function get_textureFileName():String { var raw = ParticleDesignerDocument_Ffi.get_textureFileName(this); if (raw == null) return null; var value:String = @:privateAccess String.fromUTF8(raw); ParticleDesignerDocument_Ffi.freeString(raw); return value; }
+	inline function set_textureFileName(value:String):String { var raw:hl.Bytes = null; if (value != null) { var bytes = haxe.io.Bytes.ofString(value); raw = new hl.Bytes(bytes.length + 1); raw.blit(0, bytes.getData(), 0, bytes.length); raw.setUI8(bytes.length, 0); } ParticleDesignerDocument_Ffi.set_textureFileName(this, raw); return value; }
 }

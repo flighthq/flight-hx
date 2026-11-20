@@ -1,34 +1,34 @@
 package flight._hl;
 
 abstract Physics3DJointReaction(hl.Bytes) {
-	public var forceX(get, set):Single;
+	public var forceX(get, set):Float;
 
-	inline function get_forceX():Single return this.getF32(16);
+	inline function get_forceX():Float return this.getF64(16);
 
-	inline function set_forceX(value:Single):Single { this.setF32(16, value); return value; }
-	public var forceY(get, set):Single;
+	inline function set_forceX(value:Float):Float { this.setF64(16, value); return value; }
+	public var forceY(get, set):Float;
 
-	inline function get_forceY():Single return this.getF32(20);
+	inline function get_forceY():Float return this.getF64(24);
 
-	inline function set_forceY(value:Single):Single { this.setF32(20, value); return value; }
-	public var forceZ(get, set):Single;
+	inline function set_forceY(value:Float):Float { this.setF64(24, value); return value; }
+	public var forceZ(get, set):Float;
 
-	inline function get_forceZ():Single return this.getF32(24);
+	inline function get_forceZ():Float return this.getF64(32);
 
-	inline function set_forceZ(value:Single):Single { this.setF32(24, value); return value; }
-	public var torqueX(get, set):Single;
+	inline function set_forceZ(value:Float):Float { this.setF64(32, value); return value; }
+	public var torqueX(get, set):Float;
 
-	inline function get_torqueX():Single return this.getF32(28);
+	inline function get_torqueX():Float return this.getF64(40);
 
-	inline function set_torqueX(value:Single):Single { this.setF32(28, value); return value; }
-	public var torqueY(get, set):Single;
+	inline function set_torqueX(value:Float):Float { this.setF64(40, value); return value; }
+	public var torqueY(get, set):Float;
 
-	inline function get_torqueY():Single return this.getF32(32);
+	inline function get_torqueY():Float return this.getF64(48);
 
-	inline function set_torqueY(value:Single):Single { this.setF32(32, value); return value; }
-	public var torqueZ(get, set):Single;
+	inline function set_torqueY(value:Float):Float { this.setF64(48, value); return value; }
+	public var torqueZ(get, set):Float;
 
-	inline function get_torqueZ():Single return this.getF32(36);
+	inline function get_torqueZ():Float return this.getF64(56);
 
-	inline function set_torqueZ(value:Single):Single { this.setF32(36, value); return value; }
+	inline function set_torqueZ(value:Float):Float { this.setF64(56, value); return value; }
 }

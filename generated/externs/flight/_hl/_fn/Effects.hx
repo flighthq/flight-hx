@@ -26,7 +26,7 @@ extern class Effects {
 	@:hlNative("flight", "flight_create_bloom_effect")
 	public static function createBloomEffect():hl.Bytes;
 	@:hlNative("flight", "flight_compute_bloom_blur_radius")
-	public static function computeBloomBlurRadius(effect:flight._hl.BloomEffect):Single;
+	public static function computeBloomBlurRadius(effect:flight._hl.BloomEffect):Float;
 	@:hlNative("flight", "flight_compute_bloom_intensity")
 	public static function computeBloomIntensity(effect:flight._hl.BloomEffect):Single;
 	@:hlNative("flight", "flight_compute_bloom_threshold")
@@ -98,7 +98,7 @@ extern class Effects {
 	@:hlNative("flight", "flight_compute_outline_edge_params")
 	public static function computeOutlineEdgeParams(out:hl.Bytes, effect:flight._hl.OutlineEffect):Void;
 	@:hlNative("flight", "flight_compute_outline_thickness_px")
-	public static function computeOutlineThicknessPx(effect:flight._hl.OutlineEffect):Single;
+	public static function computeOutlineThicknessPx(effect:flight._hl.OutlineEffect):Float;
 	@:hlNative("flight", "flight_compute_sketch_edge_params")
 	public static function computeSketchEdgeParams(out:hl.Bytes, effect:flight._hl.SketchEffect):Void;
 	@:hlNative("flight", "flight_get_sobel_kernel_coefficients")
@@ -110,9 +110,9 @@ extern class Effects {
 	@:hlNative("flight", "flight_can_lerp_effects")
 	public static function canLerpEffects(a:flight._hl.EffectRef, b:flight._hl.EffectRef):Bool;
 	@:hlNative("flight", "flight_get_directional_effect_padding")
-	public static function getDirectionalEffectPadding(out:flight._hl.EffectPadding, blurX:Single, blurY:Single, offsetX:Single, offsetY:Single):Void;
+	public static function getDirectionalEffectPadding(out:flight._hl.EffectPadding, blurX:Float, blurY:Float, offsetX:Float, offsetY:Float):Void;
 	@:hlNative("flight", "flight_get_gaussian_effect_padding")
-	public static function getGaussianEffectPadding(out:flight._hl.EffectPadding, blurX:Single, blurY:Single):Void;
+	public static function getGaussianEffectPadding(out:flight._hl.EffectPadding, blurX:Float, blurY:Float):Void;
 	@:hlNative("flight", "flight_validate_effect_list")
 	public static function validateEffectList(effects:hl.Bytes, effectsLen:Int, available:hl.Bytes, availableLen:Int):Int;
 	@:hlNative("flight", "flight_create_film_emulation_effect")
@@ -261,4 +261,112 @@ extern class Effects {
 	public static function createVolumetricLightEffect():hl.Bytes;
 	@:hlNative("flight", "flight_create_white_balance_effect")
 	public static function createWhiteBalanceEffect():hl.Bytes;
+	@:hlNative("flight", "flight_free_auto_exposure_effect_ref")
+	public static function freeAutoExposureEffectRef(ptr:flight._hl.AutoExposureEffect):Void;
+	@:hlNative("flight", "flight_free_barrel_distortion_effect_ref")
+	public static function freeBarrelDistortionEffectRef(ptr:flight._hl.BarrelDistortionEffect):Void;
+	@:hlNative("flight", "flight_free_bevel_effect_ref")
+	public static function freeBevelEffectRef(ptr:flight._hl.BevelEffect):Void;
+	@:hlNative("flight", "flight_free_bitmap_displacement_effect_ref")
+	public static function freeBitmapDisplacementEffectRef(ptr:flight._hl.BitmapDisplacementEffect):Void;
+	@:hlNative("flight", "flight_free_blend_effect_ref")
+	public static function freeBlendEffectRef(ptr:flight._hl.BlendEffect):Void;
+	@:hlNative("flight", "flight_free_bloom_effect_ref")
+	public static function freeBloomEffectRef(ptr:flight._hl.BloomEffect):Void;
+	@:hlNative("flight", "flight_free_blur_effect_ref")
+	public static function freeBlurEffectRef(ptr:flight._hl.BlurEffect):Void;
+	@:hlNative("flight", "flight_free_bokeh_depth_of_field_effect_ref")
+	public static function freeBokehDepthOfFieldEffectRef(ptr:flight._hl.BokehDepthOfFieldEffect):Void;
+	@:hlNative("flight", "flight_free_camera_motion_blur_effect_ref")
+	public static function freeCameraMotionBlurEffectRef(ptr:flight._hl.CameraMotionBlurEffect):Void;
+	@:hlNative("flight", "flight_free_chromatic_aberration_effect_ref")
+	public static function freeChromaticAberrationEffectRef(ptr:flight._hl.ChromaticAberrationEffect):Void;
+	@:hlNative("flight", "flight_free_composite_effect_ref")
+	public static function freeCompositeEffectRef(ptr:flight._hl.CompositeEffect):Void;
+	@:hlNative("flight", "flight_free_contact_shadows_effect_ref")
+	public static function freeContactShadowsEffectRef(ptr:flight._hl.ContactShadowsEffect):Void;
+	@:hlNative("flight", "flight_free_convolution_effect_ref")
+	public static function freeConvolutionEffectRef(ptr:flight._hl.ConvolutionEffect):Void;
+	@:hlNative("flight", "flight_free_crt_effect_ref")
+	public static function freeCrtEffectRef(ptr:flight._hl.CrtEffect):Void;
+	@:hlNative("flight", "flight_free_custom_shader_effect_ref")
+	public static function freeCustomShaderEffectRef(ptr:flight._hl.CustomShaderEffect):Void;
+	@:hlNative("flight", "flight_free_directional_blur_effect_ref")
+	public static function freeDirectionalBlurEffectRef(ptr:flight._hl.DirectionalBlurEffect):Void;
+	@:hlNative("flight", "flight_free_displacement_effect_ref")
+	public static function freeDisplacementEffectRef(ptr:flight._hl.DisplacementEffect):Void;
+	@:hlNative("flight", "flight_free_dither_effect_ref")
+	public static function freeDitherEffectRef(ptr:flight._hl.DitherEffect):Void;
+	@:hlNative("flight", "flight_free_drop_shadow_effect_ref")
+	public static function freeDropShadowEffectRef(ptr:flight._hl.DropShadowEffect):Void;
+	@:hlNative("flight", "flight_free_film_emulation_effect_ref")
+	public static function freeFilmEmulationEffectRef(ptr:flight._hl.FilmEmulationEffect):Void;
+	@:hlNative("flight", "flight_free_film_grain_effect_ref")
+	public static function freeFilmGrainEffectRef(ptr:flight._hl.FilmGrainEffect):Void;
+	@:hlNative("flight", "flight_free_fxaa_effect_ref")
+	public static function freeFxaaEffectRef(ptr:flight._hl.FxaaEffect):Void;
+	@:hlNative("flight", "flight_free_glitch_effect_ref")
+	public static function freeGlitchEffectRef(ptr:flight._hl.GlitchEffect):Void;
+	@:hlNative("flight", "flight_free_god_rays_effect_ref")
+	public static function freeGodRaysEffectRef(ptr:flight._hl.GodRaysEffect):Void;
+	@:hlNative("flight", "flight_free_gradient_bevel_effect_ref")
+	public static function freeGradientBevelEffectRef(ptr:flight._hl.GradientBevelEffect):Void;
+	@:hlNative("flight", "flight_free_gradient_glow_effect_ref")
+	public static function freeGradientGlowEffectRef(ptr:flight._hl.GradientGlowEffect):Void;
+	@:hlNative("flight", "flight_free_halftone_effect_ref")
+	public static function freeHalftoneEffectRef(ptr:flight._hl.HalftoneEffect):Void;
+	@:hlNative("flight", "flight_free_inner_glow_effect_ref")
+	public static function freeInnerGlowEffectRef(ptr:flight._hl.InnerGlowEffect):Void;
+	@:hlNative("flight", "flight_free_inner_shadow_effect_ref")
+	public static function freeInnerShadowEffectRef(ptr:flight._hl.InnerShadowEffect):Void;
+	@:hlNative("flight", "flight_free_kuwahara_effect_ref")
+	public static function freeKuwaharaEffectRef(ptr:flight._hl.KuwaharaEffect):Void;
+	@:hlNative("flight", "flight_free_lens_dirt_effect_ref")
+	public static function freeLensDirtEffectRef(ptr:flight._hl.LensDirtEffect):Void;
+	@:hlNative("flight", "flight_free_lens_distortion_effect_ref")
+	public static function freeLensDistortionEffectRef(ptr:flight._hl.LensDistortionEffect):Void;
+	@:hlNative("flight", "flight_free_lens_flare_effect_ref")
+	public static function freeLensFlareEffectRef(ptr:flight._hl.LensFlareEffect):Void;
+	@:hlNative("flight", "flight_free_median_effect_ref")
+	public static function freeMedianEffectRef(ptr:flight._hl.MedianEffect):Void;
+	@:hlNative("flight", "flight_free_motion_blur_effect_ref")
+	public static function freeMotionBlurEffectRef(ptr:flight._hl.MotionBlurEffect):Void;
+	@:hlNative("flight", "flight_free_outer_glow_effect_ref")
+	public static function freeOuterGlowEffectRef(ptr:flight._hl.OuterGlowEffect):Void;
+	@:hlNative("flight", "flight_free_outline_effect_ref")
+	public static function freeOutlineEffectRef(ptr:flight._hl.OutlineEffect):Void;
+	@:hlNative("flight", "flight_free_pannini_projection_effect_ref")
+	public static function freePanniniProjectionEffectRef(ptr:flight._hl.PanniniProjectionEffect):Void;
+	@:hlNative("flight", "flight_free_pixelate_effect_ref")
+	public static function freePixelateEffectRef(ptr:flight._hl.PixelateEffect):Void;
+	@:hlNative("flight", "flight_free_posterize_effect_ref")
+	public static function freePosterizeEffectRef(ptr:flight._hl.PosterizeEffect):Void;
+	@:hlNative("flight", "flight_free_radial_blur_effect_ref")
+	public static function freeRadialBlurEffectRef(ptr:flight._hl.RadialBlurEffect):Void;
+	@:hlNative("flight", "flight_free_scanlines_effect_ref")
+	public static function freeScanlinesEffectRef(ptr:flight._hl.ScanlinesEffect):Void;
+	@:hlNative("flight", "flight_free_screen_space_fog_effect_ref")
+	public static function freeScreenSpaceFogEffectRef(ptr:flight._hl.ScreenSpaceFogEffect):Void;
+	@:hlNative("flight", "flight_free_sharpen_effect_ref")
+	public static function freeSharpenEffectRef(ptr:flight._hl.SharpenEffect):Void;
+	@:hlNative("flight", "flight_free_sketch_effect_ref")
+	public static function freeSketchEffectRef(ptr:flight._hl.SketchEffect):Void;
+	@:hlNative("flight", "flight_free_smaa_effect_ref")
+	public static function freeSmaaEffectRef(ptr:flight._hl.SmaaEffect):Void;
+	@:hlNative("flight", "flight_free_ssao_effect_ref")
+	public static function freeSsaoEffectRef(ptr:flight._hl.SsaoEffect):Void;
+	@:hlNative("flight", "flight_free_ssr_effect_ref")
+	public static function freeSsrEffectRef(ptr:flight._hl.SsrEffect):Void;
+	@:hlNative("flight", "flight_free_taa_effect_ref")
+	public static function freeTaaEffectRef(ptr:flight._hl.TaaEffect):Void;
+	@:hlNative("flight", "flight_free_tilt_shift_effect_ref")
+	public static function freeTiltShiftEffectRef(ptr:flight._hl.TiltShiftEffect):Void;
+	@:hlNative("flight", "flight_free_tone_map_effect_ref")
+	public static function freeToneMapEffectRef(ptr:flight._hl.ToneMapEffect):Void;
+	@:hlNative("flight", "flight_free_vignette_effect_ref")
+	public static function freeVignetteEffectRef(ptr:flight._hl.VignetteEffect):Void;
+	@:hlNative("flight", "flight_free_volumetric_light_effect_ref")
+	public static function freeVolumetricLightEffectRef(ptr:flight._hl.VolumetricLightEffect):Void;
+	@:hlNative("flight", "flight_free_white_balance_effect_ref")
+	public static function freeWhiteBalanceEffectRef(ptr:flight._hl.WhiteBalanceEffect):Void;
 }

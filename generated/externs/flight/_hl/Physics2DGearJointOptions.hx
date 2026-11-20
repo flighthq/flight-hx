@@ -1,9 +1,9 @@
 package flight._hl;
 
 abstract Physics2DGearJointOptions(hl.Bytes) {
-	public var constant(get, set):Single;
+	public var constant(get, set):Float;
 
-	inline function get_constant():Single return this.getF32(92);
+	inline function get_constant():Float return this.getF64(176);
 
-	inline function set_constant(value:Single):Single { this.setF32(92, value); return value; }
+	inline function set_constant(value:Float):Float { this.setF64(176, value); return value; }
 }

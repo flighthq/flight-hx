@@ -11,5 +11,6 @@ abstract InputManager(hl.Bytes) {
 	public var enabled(get, set):Bool;
 
 	inline function get_enabled():Bool return InputManager_Ffi.get_enabled(this);
+
 	inline function set_enabled(value:Bool):Bool { InputManager_Ffi.set_enabled(this, value); return value; }
 }

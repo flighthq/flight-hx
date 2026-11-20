@@ -85,3 +85,20 @@ extern inline function freeXmlElement(ptr:XmlElement):Void {
 #end
 }
 #end
+#if (js && flight_esm)
+extern inline function freeXmlElementRef(ptr:XmlElement):Void {
+	flight._js._fn.Xml.freeXmlElementRef(ptr);
+}
+#else
+extern inline function freeXmlElementRef(ptr:XmlElement):Void {
+#if hl
+	flight._hl._fn.Xml.freeXmlElementRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Xml.freeXmlElementRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Xml.freeXmlElementRef(ptr);
+#else
+	#error "flight.Xml: no backend for this target."
+#end
+}
+#end

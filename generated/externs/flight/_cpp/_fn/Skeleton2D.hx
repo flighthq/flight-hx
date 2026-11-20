@@ -3,6 +3,8 @@ package flight._cpp._fn;
 extern class Skeleton2D {
 	@:native("flight_register_skeleton_2d_deform_animation_target")
 	public static function registerSkeleton2dDeformAnimationTarget(registry:flight._cpp.Skeleton2DAnimationTargetBinderRegistry):Void;
+	@:native("flight_explain_skeleton_2d_channel_interpolation")
+	public static function explainSkeleton2dChannelInterpolation(channel:flight._cpp.AnimationChannel, subject:cpp.ConstCharStar):flight._cpp.Skeleton2DCoercedInterpolation;
 	@:native("flight_is_skeleton_2d_stepped_channel_subject")
 	public static function isSkeleton2dSteppedChannelSubject(subject:cpp.ConstCharStar):Bool;
 	@:native("flight_explain_skeleton_2d_deform_length")
@@ -46,7 +48,7 @@ extern class Skeleton2D {
 	@:native("flight_create_skeleton_2d_slot_animation_target")
 	public static function createSkeleton2dSlotAnimationTarget():flight._cpp.Skeleton2DSlotAnimationTarget;
 	@:native("flight_find_skeleton_2d_step_keyframe")
-	public static function findSkeleton2dStepKeyframe(times:cpp.Star<cpp.Void>, timesLen:Int, time:Single):Int;
+	public static function findSkeleton2dStepKeyframe(times:cpp.Star<cpp.Void>, timesLen:Int, time:Float):Int;
 	@:native("flight_get_skeleton_2d_animation_target_binder")
 	public static function getSkeleton2dAnimationTargetBinder(registry:flight._cpp.Skeleton2DAnimationTargetBinderRegistry, kind:cpp.ConstCharStar):flight._cpp.Skeleton2DAnimationTargetBinder;
 	@:native("flight_get_skeleton_2d_animation_target_binder_kinds")
@@ -55,6 +57,10 @@ extern class Skeleton2D {
 	public static function registerSkeleton2dAnimationTargetBinder(registry:flight._cpp.Skeleton2DAnimationTargetBinderRegistry, kind:cpp.ConstCharStar, bind:flight._cpp.Skeleton2DAnimationTargetBinder):Void;
 	@:native("flight_unregister_skeleton_2d_animation_target_binder")
 	public static function unregisterSkeleton2dAnimationTargetBinder(registry:flight._cpp.Skeleton2DAnimationTargetBinderRegistry, kind:cpp.ConstCharStar):Void;
+	@:native("flight_get_skeleton_2d_constraint_solver")
+	public static function getSkeleton2dConstraintSolver(registry:flight._cpp.Skeleton2DConstraintRegistry, kind:cpp.ConstCharStar):flight._cpp.Skeleton2DConstraintSolver;
+	@:native("flight_register_skeleton_2d_constraint_solver")
+	public static function registerSkeleton2dConstraintSolver(registry:flight._cpp.Skeleton2DConstraintRegistry, kind:cpp.ConstCharStar, solve:flight._cpp.Skeleton2DConstraintSolver):Void;
 	@:native("flight_solve_skeleton_2d_constraints")
 	public static function solveSkeleton2dConstraints(registry:flight._cpp.Skeleton2DConstraintRegistry, skeleton:flight._cpp.Skeleton2D, constraints:cpp.Star<cpp.Void>, constraintsLen:Int):Void;
 	@:native("flight_unregister_skeleton_2d_constraint_solver")
@@ -63,8 +69,6 @@ extern class Skeleton2D {
 	public static function registerSkeleton2dDrawOrderAnimationBinder(registry:flight._cpp.Skeleton2DAnimationTargetBinderRegistry):Void;
 	@:native("flight_unregister_skeleton_2d_draw_order_animation_binder")
 	public static function unregisterSkeleton2dDrawOrderAnimationBinder(registry:flight._cpp.Skeleton2DAnimationTargetBinderRegistry):Void;
-	@:native("flight_create_skin_2d")
-	public static function createSkin2d(influenceCounts:cpp.Star<cpp.Void>, influences:cpp.Star<cpp.Void>):flight._cpp.Skin2D;
 	@:native("flight_register_skeleton_2d_transform_constraint_solver")
 	public static function registerSkeleton2dTransformConstraintSolver(registry:flight._cpp.Skeleton2DConstraintRegistry):Void;
 	@:native("flight_solve_skeleton_2d_transform_constraint__skeleton2_dik_constraint")
@@ -73,6 +77,8 @@ extern class Skeleton2D {
 	public static function solveSkeleton2dTransformConstraintSkeleton2DpathConstraint(skeleton:flight._cpp.Skeleton2D, constraint:flight._cpp.Skeleton2DPathConstraint):Void;
 	@:native("flight_solve_skeleton_2d_transform_constraint__skeleton2_dtransform_constraint")
 	public static function solveSkeleton2dTransformConstraintSkeleton2DtransformConstraint(skeleton:flight._cpp.Skeleton2D, constraint:flight._cpp.Skeleton2DTransformConstraint):Void;
+	@:native("flight_free_skeleton2_dcoerced_interpolation")
+	public static function freeSkeleton2DcoercedInterpolation(ptr:flight._cpp.Skeleton2DCoercedInterpolation):Void;
 	@:native("flight_free_skeleton2_ddeform_length_explanation")
 	public static function freeSkeleton2DdeformLengthExplanation(ptr:flight._cpp.Skeleton2DDeformLengthExplanation):Void;
 	@:native("flight_free_skeleton2_danimation_target")
@@ -81,6 +87,8 @@ extern class Skeleton2D {
 	public static function freeSkeleton2DslotAnimationTarget(ptr:flight._cpp.Skeleton2DSlotAnimationTarget):Void;
 	@:native("flight_free_skeleton2_danimation_target_binder")
 	public static function freeSkeleton2DanimationTargetBinder(ptr:flight._cpp.Skeleton2DAnimationTargetBinder):Void;
+	@:native("flight_free_skeleton2_dconstraint_solver")
+	public static function freeSkeleton2DconstraintSolver(ptr:flight._cpp.Skeleton2DConstraintSolver):Void;
 	@:native("flight_free_skin2_d")
 	public static function freeSkin2D(ptr:flight._cpp.Skin2D):Void;
 }

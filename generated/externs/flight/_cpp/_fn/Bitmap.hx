@@ -9,6 +9,8 @@ extern class Bitmap {
 	public static function convertBitmapAlphaType(out:flight._cpp.Bitmap, target:Int):Void;
 	@:native("flight_invalidate_bitmap")
 	public static function invalidateBitmap(bitmap:flight._cpp.Bitmap):Void;
+	@:native("flight_share_bitmap")
+	public static function shareBitmap(bitmap:flight._cpp.Bitmap):cpp.Star<cpp.Void>;
 	@:native("flight_transform_bitmap")
 	public static function transformBitmap(dest:flight._cpp.BitmapRegion, source:flight._cpp.BitmapRegion, matrix:cpp.Star<cpp.Void>, edgeMode:Int, sampleMode:Int):Void;
 	@:native("flight_copy_bitmap_alpha")
@@ -90,7 +92,13 @@ extern class Bitmap {
 	@:native("flight_dissolve_bitmap_pixels")
 	public static function dissolveBitmapPixels(dest:flight._cpp.BitmapRegion, source:flight._cpp.BitmapRegion, seed:Int, pixelCount:Int, fillColor:Int):Int;
 	@:native("flight_encode_bitmap")
-	public static function encodeBitmap(hostBitmapEncode:flight._cpp.HostBitmapEncodeCapability, source:flight._cpp.Bitmap, format:Int, quality:Single):Null<flight._cpp.NativeByteBuffer>;
+	public static function encodeBitmap(hostBitmapEncode:flight._cpp.HostBitmapEncodeCapability, source:flight._cpp.Bitmap, format:Int, quality:Single):cpp.Star<cpp.Void>;
+	@:native("flight_encode_bitmap_result_len")
+	public static function encodeBitmapResultLen(result:cpp.Star<cpp.Void>):Int;
+	@:native("flight_encode_bitmap_result_get")
+	public static function encodeBitmapResultGet(result:cpp.Star<cpp.Void>, index:Int):cpp.Star<cpp.Void>;
+	@:native("flight_encode_bitmap_result_free")
+	public static function encodeBitmapResultFree(result:cpp.Star<cpp.Void>):Void;
 	@:native("flight_explain_bitmap_encode_failure")
 	public static function explainBitmapEncodeFailure(hostBitmapEncode:flight._cpp.HostBitmapEncodeCapability, format:Int):flight._cpp.BitmapEncodeFailureExplanation;
 	@:native("flight_fill_bitmap_rectangle")
@@ -160,9 +168,9 @@ extern class Bitmap {
 	@:native("flight_get_bitmap_color_bounds_rectangle")
 	public static function getBitmapColorBoundsRectangle(source:flight._cpp.BitmapRegion, mask:Int, color:Int, findColor:Bool):flight._cpp.Rectangle;
 	@:native("flight_create_bitmap_region")
-	public static function createBitmapRegion(bitmap:flight._cpp.Bitmap, x:Int, y:Int, width:Int, height:Int):flight._cpp.BitmapRegion;
+	public static function createBitmapRegion(bitmap:cpp.Star<cpp.Void>, x:Int, y:Int, width:Int, height:Int):flight._cpp.BitmapRegion;
 	@:native("flight_set_bitmap_region")
-	public static function setBitmapRegion(out:flight._cpp.BitmapRegion, bitmap:flight._cpp.Bitmap, x:Int, y:Int, width:Int, height:Int):Void;
+	public static function setBitmapRegion(out:flight._cpp.BitmapRegion, bitmap:cpp.Star<cpp.Void>, x:Int, y:Int, width:Int, height:Int):Void;
 	@:native("flight_resize_bitmap")
 	public static function resizeBitmap(dest:flight._cpp.BitmapRegion, source:flight._cpp.BitmapRegion, mode:Int, edgeMode:Int, premultiplied:Bool):Void;
 	@:native("flight_rotate_bitmap")
@@ -201,6 +209,8 @@ extern class Bitmap {
 	public static function warpBitmapQuad(dest:flight._cpp.BitmapRegion, source:flight._cpp.BitmapRegion, dstQuad:cpp.Star<cpp.Void>, edgeMode:Int, sampleMode:Int):Void;
 	@:native("flight_free_bitmap")
 	public static function freeBitmap(ptr:flight._cpp.Bitmap):Void;
+	@:native("flight_free_bitmap_ref")
+	public static function freeBitmapRef(ptr:flight._cpp.Bitmap):Void;
 	@:native("flight_free_bitmap_mismatch")
 	public static function freeBitmapMismatch(ptr:flight._cpp.BitmapMismatch):Void;
 	@:native("flight_free_bitmap_encode_failure_explanation")
@@ -211,4 +221,25 @@ extern class Bitmap {
 	public static function freeBitmapHistogram(ptr:flight._cpp.BitmapHistogram):Void;
 	@:native("flight_free_bitmap_region")
 	public static function freeBitmapRegion(ptr:flight._cpp.BitmapRegion):Void;
+}
+
+final class EncodeBitmapByteResult extends flight._cpp.ByteResult {
+	var handle:cpp.Pointer<cpp.Void>;
+
+	public function new(handle:cpp.Pointer<cpp.Void>) {
+		super(Bitmap.encodeBitmapResultLen(handle.ptr));
+		this.handle = handle;
+	}
+
+	public static function wrapOptional(handle:cpp.Star<cpp.Void>):Null<flight._cpp.ByteResult> {
+		return untyped __cpp__("{0} == NULL", handle) ? null : new EncodeBitmapByteResult(cpp.Pointer.fromStar(handle));
+	}
+
+	override function freeNative():Void {
+		Bitmap.encodeBitmapResultFree(handle.ptr);
+	}
+
+	override function readNative(index:Int):Int {
+		return untyped __cpp__("(int)*(const unsigned char *)({0})", Bitmap.encodeBitmapResultGet(handle.ptr, index));
+	}
 }

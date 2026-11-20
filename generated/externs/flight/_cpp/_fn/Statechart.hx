@@ -29,6 +29,8 @@ extern class Statechart {
 	public static function enableStatechartSignals(instance:cpp.Star<cpp.Void>):flight._cpp.StatechartSignals;
 	@:native("flight_get_statechart_signals")
 	public static function getStatechartSignals(instance:cpp.Star<cpp.Void>):flight._cpp.StatechartSignals;
+	@:native("flight_free_statechart_instance_raw_ref")
+	public static function freeStatechartInstanceRawRef(ptr:flight._cpp.StatechartInstanceRaw):Void;
 	@:native("flight_free_statechart_transition_explanation")
 	public static function freeStatechartTransitionExplanation(ptr:flight._cpp.StatechartTransitionExplanation):Void;
 	@:native("flight_free_statechart_signals")

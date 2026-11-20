@@ -1,20 +1,17 @@
 # Flight producer patches
 
-The manifest lists the patches applied to Flight `5e1121e4cfdfde289b5373693dd285a2035dd285` in order.
-`tools/flight-source.mjs` applies them in an isolated checkout and records their hashes in the extern and native artifact provenance.
+`manifest.json` lists the active patch stack for Flight `c52653a12e10251ab93970f71a6bc0c4dcbe21fa`. The prepare step
+applies the patches in order to an isolated checkout. The extern and native
+artifact manifests record their hashes.
 
-- `0004-hl-packed-floats.patch` packs calls with more than six floating-point arguments into a HashLink array. The C ABI and public Haxe signatures retain their original argument lists.
-- `0006-ref-handles.patch` registers owned Ref handles and supplies typed node views for upcasting. Node receivers acquire the correct Rust lock, and `flight.Entity.freeRef` releases a registered handle and all its views. The exact upstream free functions also accept the registered handles.
-- `0007-byte-buffer-results.patch` preserves the Haxe `NativeByteBuffer` API over owned byte results. Upstream's per-result length, element and free functions use the same storage.
-- `0008-exported-struct-fields.patch` exposes public scalar and UTF-8 string fields of exported structs. Haxe copies string results and releases the temporary native buffers.
-- `0009-develop-compatibility.patch` preserves caller ownership of bitmap inputs when building regions.
-- `0010-haxe-owned-carriers.patch` connects Flight's owned byte readers and command-history unit signals to Haxe. It also supplies string-field ownership metadata, handles empty Rust structs in field discovery, and reads the text-layout enum definitions used by the native ABI.
+- `0015-workspace-lock.patch` updates Flight's Cargo lock for the new workspace
+  host crates so source preparation works with Cargo's locked mode.
+- `0016-esm-host-seams.patch` emits typed app, browser surface, browser input,
+  Electron, Tauri, and Capacitor bindings for existing public TypeScript APIs.
+- `0017-binding-carriers-and-fields.patch` restores owned byte readers,
+  command-history signals, public fields on re-exported types, string fields,
+  and inherited ESM node properties. It uses native accessors for Ref-backed
+  fields on HashLink and corrects ESM export names and font construction.
+  Native node handles and owned byte results use Flight's upstream API.
 
-- `0011-stable-free-function-modules.patch` places generated free functions in the defining crate’s Haxe facade whenever the type has a unique owner. For example, `freeRectangle` stays in `flight.Geometry` when other crates start returning rectangles.
-- `0012-inherited-node-properties.patch` declares shared node properties with their trait, ABI carrier, and invalidation policy. The native producer uses the same Rust node-family discovery as the Ref registry, and bindgen projects properties onto each generated type with the matching native accessors.
-
-- `0013-web-host-seams.patch` adds explicit ESM signatures for Flight’s browser Canvas and input-target capabilities and opaque handles. The bindings import the public `@flighthq/host-web` and `@flighthq/surface` exports.
-
-- `0014-app-host-seams.patch` exposes shared ESM app-window and frame-loop calls and selected browser, Electron, Tauri, and Capacitor provider entry points.
-
-Flight now includes native artifact emission, direct JS/ESM bindings, and case-safe Haxe module names. Apply the current manifest in order on a clean Flight checkout at the pinned revision. Use Rust 1.96.0 and Haxe 4.3.7 to verify the emitted bindings.
+Native desktop and headless host-provider FFI remains TODO.

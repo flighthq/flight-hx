@@ -11,4 +11,6 @@ extern class Xml {
 	public static function getXmlElementChildByName(element:flight._hl.XmlElement, name:hl.Bytes):hl.Bytes;
 	@:hlNative("flight", "flight_free_xml_element")
 	public static function freeXmlElement(ptr:flight._hl.XmlElement):Void;
+	@:hlNative("flight", "flight_free_xml_element_ref")
+	public static function freeXmlElementRef(ptr:flight._hl.XmlElement):Void;
 }

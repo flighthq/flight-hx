@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { mkdirSync, mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
+import { mkdirSync, mkdtempSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { unpack } from '../support/archive.mjs';
 import { buildWebBundle } from '../../tools/esm/buildWeb.mjs';
@@ -18,6 +18,26 @@ const archive = path.join(work, 'flight.zip');
 run(process.execPath, ['tools/package-haxelib.mjs', '--externs-only', '--out', archive]);
 const installed = path.join(work, 'installed');
 unpack(readFileSync(archive), installed);
+// Named imports make an SDK spelling or public export regression fail even for APIs
+// that none of the runtime smoke consumers exercise.
+const declarations = path.join(installed, 'generated/externs/flight/_js/_fn');
+const imports = [];
+const bindings = [];
+for (const filename of readdirSync(declarations).sort()) {
+  const text = readFileSync(path.join(declarations, filename), 'utf8');
+  const [, specifier] = text.match(/@:jsRequire\("(@flighthq\/[^"]+)"\)/u);
+  const names = new Set([...text.matchAll(/@:native\("([^"]+)"\)/gu)].map((match) => match[1]));
+  for (const name of names) {
+    const binding = `binding${bindings.length}`;
+    imports.push(`import { ${name} as ${binding} } from ${JSON.stringify(specifier)};`);
+    bindings.push(binding);
+  }
+}
+assert.ok(bindings.length > 0, 'No Flight SDK imports found in the archive');
+const allExports = path.join(work, 'all-exports.mjs');
+writeFileSync(allExports, [...imports, `export default [${bindings.join(', ')}];`].join('\n'));
+await bundleFlightJs({entry: allExports, outfile: path.join(work, 'all-exports-bundle.mjs')});
+
 const fieldsSmoke = path.join(work, 'fields.mjs');
 run(process.execPath, ['tools/haxe.mjs', '-cp', path.join(installed, 'lib'), '-cp', 'tests/esm',
   '-main', 'FieldSmoke', '-dce', 'full', '-D', 'flight_esm', '--macro', 'flight_hx.Package.configure()', '-js', fieldsSmoke]);
@@ -58,7 +78,7 @@ assert.match(run(process.execPath, [otherHosts.bundle]), /FLIGHT_OTHER_HOSTS_OK/
 const missing = path.join(work, 'missing-export.mjs');
 writeFileSync(missing, 'import * as math from "@flighthq/math"; console.log(math.__missing_flight_export);\n');
 await assert.rejects(bundleFlightJs({ entry: missing, outfile: path.join(work, 'missing-bundle.mjs') }), /matching export|always be undefined/u);
-process.stdout.write(`ESM installed archive: real Flight math/geometry, arrays, callbacks/options, fields, inherited node properties, host seams, lifecycle and tree-shaking passed. Artifacts: ${work}\n`);
+process.stdout.write(`ESM installed archive: ${bindings.length} SDK imports resolved. Real Flight math/geometry, arrays, callbacks/options, fields, inherited node properties, host seams, lifecycle and tree-shaking passed. Artifacts: ${work}\n`);
 
 function run(command, args) {
   const result = spawnSync(command, args, { cwd: root, encoding: 'utf8', maxBuffer: 16 * 1024 * 1024 });

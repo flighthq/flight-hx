@@ -516,6 +516,23 @@ extern inline function freeSpritesheet(ptr:Spritesheet):Void {
 }
 #end
 #if (js && flight_esm)
+extern inline function freeSpritesheetAnimationRef(ptr:SpritesheetAnimation):Void {
+	flight._js._fn.Spritesheet.freeSpritesheetAnimationRef(ptr);
+}
+#else
+extern inline function freeSpritesheetAnimationRef(ptr:SpritesheetAnimation):Void {
+#if hl
+	flight._hl._fn.Spritesheet.freeSpritesheetAnimationRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Spritesheet.freeSpritesheetAnimationRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Spritesheet.freeSpritesheetAnimationRef(ptr);
+#else
+	#error "flight.Spritesheet: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
 extern inline function freeSpritesheetAnimationData(ptr:SpritesheetAnimationData):Void {
 	flight._js._fn.Spritesheet.freeSpritesheetAnimationData(ptr);
 }
@@ -561,6 +578,40 @@ extern inline function freeSpritesheetFrameData(ptr:SpritesheetFrameData):Void {
 	flight._cpp._fn.Spritesheet.freeSpritesheetFrameData(ptr);
 #elseif (js && flight_esm)
 	flight._js._fn.Spritesheet.freeSpritesheetFrameData(ptr);
+#else
+	#error "flight.Spritesheet: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeSpritesheetFrameRef(ptr:SpritesheetFrame):Void {
+	flight._js._fn.Spritesheet.freeSpritesheetFrameRef(ptr);
+}
+#else
+extern inline function freeSpritesheetFrameRef(ptr:SpritesheetFrame):Void {
+#if hl
+	flight._hl._fn.Spritesheet.freeSpritesheetFrameRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Spritesheet.freeSpritesheetFrameRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Spritesheet.freeSpritesheetFrameRef(ptr);
+#else
+	#error "flight.Spritesheet: no backend for this target."
+#end
+}
+#end
+#if (js && flight_esm)
+extern inline function freeSpritesheetPlayerRef(ptr:SpritesheetPlayer):Void {
+	flight._js._fn.Spritesheet.freeSpritesheetPlayerRef(ptr);
+}
+#else
+extern inline function freeSpritesheetPlayerRef(ptr:SpritesheetPlayer):Void {
+#if hl
+	flight._hl._fn.Spritesheet.freeSpritesheetPlayerRef(ptr);
+#elseif cpp
+	flight._cpp._fn.Spritesheet.freeSpritesheetPlayerRef(ptr);
+#elseif (js && flight_esm)
+	flight._js._fn.Spritesheet.freeSpritesheetPlayerRef(ptr);
 #else
 	#error "flight.Spritesheet: no backend for this target."
 #end

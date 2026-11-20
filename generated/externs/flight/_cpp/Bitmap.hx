@@ -13,6 +13,9 @@ abstract Bitmap(cpp.Star<cpp.Void>) {
 	extern inline public function invalidate():Void {
 		flight._cpp._fn.Bitmap.invalidateBitmap(cast this);
 	}
+	extern inline public function share():cpp.Star<cpp.Void> {
+		return flight._cpp._fn.Bitmap.shareBitmap(cast this);
+	}
 	extern inline public function compare(other:flight._cpp.Bitmap):flight._cpp.Bitmap {
 		return flight._cpp._fn.Bitmap.compareBitmap(cast this, other);
 	}
@@ -31,8 +34,8 @@ abstract Bitmap(cpp.Star<cpp.Void>) {
 	extern inline public function trim():flight._cpp.Bitmap {
 		return flight._cpp._fn.Bitmap.trimBitmap(cast this);
 	}
-	extern inline public function encode(hostBitmapEncode:flight._cpp.HostBitmapEncodeCapability, format:Int, quality:Single):Null<flight._cpp.NativeByteBuffer> {
-		return flight._cpp._fn.Bitmap.encodeBitmap(hostBitmapEncode, cast this, format, quality);
+	extern inline public function encode(hostBitmapEncode:flight._cpp.HostBitmapEncodeCapability, format:Int, quality:Single):Null<flight._cpp.ByteResult> {
+		return flight._cpp._fn.Bitmap.EncodeBitmapByteResult.wrapOptional(flight._cpp._fn.Bitmap.encodeBitmap(hostBitmapEncode, cast this, format, quality));
 	}
 	extern inline public function floodFill(x:Int, y:Int, color:Int):Void {
 		flight._cpp._fn.Bitmap.floodFillBitmap(cast this, x, y, color);
@@ -58,17 +61,14 @@ abstract Bitmap(cpp.Star<cpp.Void>) {
 	extern inline public function setPixelRgb(x:Int, y:Int, color:Int):Void {
 		flight._cpp._fn.Bitmap.setBitmapPixelRgb(cast this, x, y, color);
 	}
-	extern inline public function createRegion(x:Int, y:Int, width:Int, height:Int):flight._cpp.BitmapRegion {
-		return flight._cpp._fn.Bitmap.createBitmapRegion(cast this, x, y, width, height);
-	}
-	extern inline public function setRegion(out:flight._cpp.BitmapRegion, x:Int, y:Int, width:Int, height:Int):Void {
-		flight._cpp._fn.Bitmap.setBitmapRegion(out, cast this, x, y, width, height);
-	}
 	extern inline public function scroll(dx:Int, dy:Int):Void {
 		flight._cpp._fn.Bitmap.scrollBitmap(cast this, dx, dy);
 	}
 	extern inline public function free():Void {
 		flight._cpp._fn.Bitmap.freeBitmap(cast this);
+	}
+	extern inline public function freeRef():Void {
+		flight._cpp._fn.Bitmap.freeBitmapRef(cast this);
 	}
 	extern inline public function createImageResourceFrom(hostImage:flight._cpp.HostImageCapability):cpp.Star<cpp.Void> {
 		return flight._cpp._fn.Image.createImageResourceFromBitmap(hostImage, cast this);

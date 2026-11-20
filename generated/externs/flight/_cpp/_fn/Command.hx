@@ -2,13 +2,13 @@ package flight._cpp._fn;
 
 extern class Command {
 	@:native("flight_create_add_node_child_command")
-	public static function createAddNodeChildCommand(parent:cpp.Star<cpp.Void>, child:cpp.Star<cpp.Void>):cpp.Star<cpp.Void>;
+	public static function createAddNodeChildCommand(parent:flight._cpp.FlightNode, child:flight._cpp.FlightNode):cpp.Star<cpp.Void>;
 	@:native("flight_create_composite_command")
 	public static function createCompositeCommand(children:cpp.Star<cpp.Void>, childrenLen:Int):cpp.Star<cpp.Void>;
 	@:native("flight_create_remove_node_child_command")
-	public static function createRemoveNodeChildCommand(parent:cpp.Star<cpp.Void>, child:cpp.Star<cpp.Void>):cpp.Star<cpp.Void>;
+	public static function createRemoveNodeChildCommand(parent:flight._cpp.FlightNode, child:flight._cpp.FlightNode):cpp.Star<cpp.Void>;
 	@:native("flight_create_reorder_node_child_command")
-	public static function createReorderNodeChildCommand(parent:cpp.Star<cpp.Void>, child:cpp.Star<cpp.Void>, toIndex:Int):cpp.Star<cpp.Void>;
+	public static function createReorderNodeChildCommand(parent:flight._cpp.FlightNode, child:flight._cpp.FlightNode, toIndex:Int):cpp.Star<cpp.Void>;
 	@:native("flight_create_command_binding_table")
 	public static function createCommandBindingTable():flight._cpp.CommandBindingTable;
 	@:native("flight_get_command_binding")
@@ -55,10 +55,20 @@ extern class Command {
 	public static function isCommandTransactionOpen(history:cpp.Star<cpp.Void>):Bool;
 	@:native("flight_explain_command_dispatch")
 	public static function explainCommandDispatch(history:cpp.Star<cpp.Void>, command:flight._cpp.CommandRef):flight._cpp.CommandDispatchExplanation;
+	@:native("flight_free_add_node_child_command_ref")
+	public static function freeAddNodeChildCommandRef(ptr:flight._cpp.AddNodeChildCommand):Void;
+	@:native("flight_free_composite_command_ref")
+	public static function freeCompositeCommandRef(ptr:flight._cpp.CompositeCommand):Void;
+	@:native("flight_free_remove_node_child_command_ref")
+	public static function freeRemoveNodeChildCommandRef(ptr:flight._cpp.RemoveNodeChildCommand):Void;
+	@:native("flight_free_reorder_node_child_command_ref")
+	public static function freeReorderNodeChildCommandRef(ptr:flight._cpp.ReorderNodeChildCommand):Void;
 	@:native("flight_free_command_binding_table")
 	public static function freeCommandBindingTable(ptr:flight._cpp.CommandBindingTable):Void;
 	@:native("flight_free_command_binding_ref")
-	public static function freeCommandBindingRef(ptr:flight._cpp.CommandBindingRef):Void;
+	public static function freeCommandBindingRef(ptr:flight._cpp.CommandBinding):Void;
+	@:native("flight_free_command_history_ref")
+	public static function freeCommandHistoryRef(ptr:flight._cpp.CommandHistory):Void;
 	@:native("flight_free_unit_signal")
 	public static function freeUnitSignal(ptr:flight._cpp.UnitSignal):Void;
 	@:native("flight_free_command_dispatch_explanation")

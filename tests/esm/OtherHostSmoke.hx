@@ -1,5 +1,5 @@
 import flight.HostApp;
-import flight.HostApp.WindowAttachmentOwnership;
+import flight.WindowAttachmentOwnership;
 import flight.HostCapacitor;
 import flight.HostElectron;
 import flight.HostTauri;
@@ -16,7 +16,7 @@ class OtherHostSmoke {
       off: (event:String, listener:Dynamic) -> {},
       close: () -> throw 'caller owns the Electron window',
     };
-    if (!HostApp.attachWindow(electron.attach, electron.lifecycle, electronWin, browserWindow, Host))
+    if (!HostApp.attachWindow(electron.attach, electron.lifecycle, electronWin, browserWindow, WindowAttachmentOwnership.Host))
       throw 'Electron window attach failed';
     if (HostElectron.getWindowId(electronWin) != 42) throw 'Electron window did not retain its ID';
     if (!HostApp.closeWindow(electron.lifecycle, electronWin) || HostElectron.getWindowId(electronWin) != -1)
@@ -34,7 +34,7 @@ class OtherHostSmoke {
       onFocusChanged: subscribe,
       onCloseRequested: subscribe,
     };
-    if (!HostApp.attachWindow(tauri.attach, tauri.lifecycle, tauriWin, tauriWindow, Host))
+    if (!HostApp.attachWindow(tauri.attach, tauri.lifecycle, tauriWin, tauriWindow, WindowAttachmentOwnership.Host))
       throw 'Tauri window attach failed';
     if (!HostApp.closeWindow(tauri.lifecycle, tauriWin)) throw 'Tauri window close failed';
     HostApp.disposeAppWindow(tauriWin);

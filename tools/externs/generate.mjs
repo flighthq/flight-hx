@@ -10,13 +10,14 @@ import { prepareFlight, preparedIdentity } from '../flight-source.mjs';
 import { assertPortablePaths } from './portable-paths.mjs';
 
 const root = path.resolve(import.meta.dirname, '../..');
-const usage = `Usage: node tools/externs/generate.mjs [--flight-root <path>] [--check] [--validate-upstream] [--allow-network]
+const usage = `Usage: node tools/externs/generate.mjs [--flight-root <path>] [--check] [--validate-upstream] [--fetch-dependencies] [--allow-network]
 
 Uses the Rust workspace in FLIGHT_ROOT or .dependencies/flight.
 Copies unmodified flight-bindgen output to generated/externs, with provenance.json.
 --check regenerates in a temporary directory and rejects any file/content drift.
 --validate-upstream runs Flight's scripts/check-haxe-bindings.sh instead of copying.
-Cargo runs offline unless --allow-network is explicitly supplied.
+--fetch-dependencies fetches dependencies of the patched workspace without generating.
+Generation runs Cargo offline unless --allow-network is explicitly supplied.
 `;
 
 export function run(command, args, cwd) {
@@ -71,6 +72,7 @@ export function generate({ repoRoot = root, flightRoot, check = false, offline =
   try {
     const messages = cargo(['build', '-p', 'flight-ffi', '--message-format=json']);
     const ffiFiles = new Set();
+    const offsetsBinaries = new Set();
     for (const line of messages.split(/\r?\n/u).filter(Boolean)) {
       let message;
       try { message = JSON.parse(line); } catch { throw new Error(`Invalid Cargo JSON message: ${line}`); }
@@ -78,33 +80,41 @@ export function generate({ repoRoot = root, flightRoot, check = false, offline =
         const filename = path.resolve(flightRoot, message.out_dir, 'ffi_generated.rs');
         if (existsSync(filename)) ffiFiles.add(filename);
       }
+      if (message.reason === 'compiler-artifact' && message.target?.name === 'flight-offsets' &&
+          typeof message.executable === 'string') {
+        offsetsBinaries.add(path.resolve(flightRoot, message.executable));
+      }
     }
     // Never glob target/debug/build: stale builds can silently contribute obsolete FFI symbols.
     if (ffiFiles.size !== 1) {
       throw new Error(`Expected one current Cargo build-script ffi_generated.rs, found ${ffiFiles.size}`);
     }
     const ffiSource = readFileSync([...ffiFiles][0], 'utf8');
-    const nativeHeaderPath = path.join(path.dirname([...ffiFiles][0]), 'flight_ffi.h');
-    const nativeHeader = existsSync(nativeHeaderPath) ? readFileSync(nativeHeaderPath) : undefined;
+    const ffiDirectory = path.dirname([...ffiFiles][0]);
+    const nativeHeaderPath = path.join(ffiDirectory, 'flight_ffi.h');
+    if (!existsSync(nativeHeaderPath) || !existsSync(path.join(ffiDirectory, 'flight_hl.c'))) {
+      throw new Error('Flight did not emit flight_ffi.h and flight_hl.c in its build-script output');
+    }
+    const nativeHeader = readFileSync(nativeHeaderPath);
     const copiedHeader = path.join(repoRoot, 'native/include/flight_ffi.h');
-    if (patches.length && !nativeHeader) throw new Error('Patched native producer did not emit flight_ffi.h');
-    if (check && nativeHeader && (!existsSync(copiedHeader) || !nativeHeader.equals(readFileSync(copiedHeader)))) {
+    if (check && (!existsSync(copiedHeader) || !nativeHeader.equals(readFileSync(copiedHeader)))) {
       throw new Error('Generated native C header drift: native/include/flight_ffi.h');
     }
 
     const names = [...new Set([...ffiSource.matchAll(/\bfn (flight_[a-z0-9_]+)\b/gu)].map((match) => match[1]))].sort();
     if (names.length === 0) throw new Error('Flight generated no flight_* FFI function names');
     const ffiNames = `${names.join('\n')}\n`;
-    const offsets = cargo(['run', '--bin', 'flight-offsets']);
+    if (offsetsBinaries.size !== 1) {
+      throw new Error(`Expected one current flight-offsets executable, found ${offsetsBinaries.size}`);
+    }
+    const offsets = execute([...offsetsBinaries][0], [], flightRoot);
     try { JSON.parse(offsets); } catch { throw new Error('flight-offsets did not emit valid JSON'); }
     const offsetsFile = path.join(temporary, 'offsets.json');
-    const namesFile = path.join(temporary, 'ffi-names.txt');
     writeFileSync(offsetsFile, offsets);
-    writeFileSync(namesFile, ffiNames);
     const staged = path.join(temporary, 'bindings');
     execute('cargo', [
       'run', '-p', 'flight-bindgen', '--locked', ...(offline ? ['--offline'] : []), '--',
-      '--target', 'haxe', '--out', staged, '--offsets', offsetsFile, '--ffi-names', namesFile,
+      '--target', 'haxe', '--out', staged, '--offsets', offsetsFile, '--ffi-dir', ffiDirectory,
     ], flightRoot);
     const files = inventory(staged);
     assertPortablePaths(files.map((file) => file.path));
@@ -119,7 +129,7 @@ export function generate({ repoRoot = root, flightRoot, check = false, offline =
       source: { repository: 'https://github.com/flighthq/flight', commit: revision, ...(patches.length ? { patches } : {}) },
       generator: 'flight-bindgen --target haxe',
       toolchain,
-      ...(nativeHeader ? { nativeHeaderSha256: sha256(nativeHeader) } : {}),
+      nativeHeaderSha256: sha256(nativeHeader),
       offsetsSha256: sha256(offsets), ffiNamesSha256: sha256(ffiNames),
       ffiFunctionCount: names.length, files,
     };
@@ -140,7 +150,7 @@ export function generate({ repoRoot = root, flightRoot, check = false, offline =
         throw error;
       }
     }
-    if (!check && nativeHeader) {
+    if (!check) {
       mkdirSync(path.dirname(copiedHeader), { recursive: true });
       writeFileSync(copiedHeader, nativeHeader);
     }
@@ -196,13 +206,20 @@ export function main(args) {
     if (args[index] === '--flight-root') {
       if (!args[index + 1] || args[index + 1].startsWith('--')) throw new Error('--flight-root requires a path');
       flightRoot = args[++index];
-    } else if (!['--check', '--validate-upstream', '--allow-network'].includes(args[index])) {
+    } else if (!['--check', '--validate-upstream', '--fetch-dependencies', '--allow-network'].includes(args[index])) {
       throw new Error(`Unknown option ${args[index]}\n${usage}`);
     }
   }
   flightRoot = path.resolve(flightRoot);
   requireWorkspace(flightRoot);
   flightRoot = prepareFlight(root, flightRoot, run);
+  if (args.includes('--fetch-dependencies')) {
+    if (args.includes('--check') || args.includes('--validate-upstream')) {
+      throw new Error('--fetch-dependencies is a separate operation');
+    }
+    process.stdout.write(run('cargo', ['fetch', '--locked'], flightRoot));
+    return;
+  }
   if (args.includes('--validate-upstream')) {
     if (args.includes('--check')) throw new Error('--validate-upstream and --check are separate operations');
     const script = path.join(flightRoot, 'scripts/check-haxe-bindings.sh');

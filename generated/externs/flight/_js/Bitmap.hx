@@ -13,6 +13,9 @@ abstract Bitmap(Dynamic) {
 	inline public function invalidate():Void {
 		flight._js._fn.Bitmap.invalidateBitmap(cast this);
 	}
+	inline public function share():Dynamic {
+		return flight._js._fn.Bitmap.shareBitmap(cast this);
+	}
 	inline public function compare(other:flight._js.Bitmap):Null<flight._js.Bitmap> {
 		return flight._js._fn.Bitmap.compareBitmap(cast this, other);
 	}
@@ -31,7 +34,7 @@ abstract Bitmap(Dynamic) {
 	inline public function trim():flight._js.Bitmap {
 		return flight._js._fn.Bitmap.trimBitmap(cast this);
 	}
-	inline public function encode(hostBitmapEncode:flight._js.HostBitmapEncodeCapability, format:Null<Dynamic>, quality:Null<Float>):Null<Dynamic> {
+	inline public function encode(hostBitmapEncode:flight._js.HostBitmapEncodeCapability, format:Null<Dynamic>, quality:Null<Float>):Null<flight._js.ByteResult> {
 		return flight._js._fn.Bitmap.encodeBitmap(hostBitmapEncode, cast this, format, quality);
 	}
 	inline public function floodFill(x:Int, y:Int, color:Int):Void {
@@ -58,17 +61,14 @@ abstract Bitmap(Dynamic) {
 	inline public function setPixelRgb(x:Int, y:Int, color:Int):Void {
 		flight._js._fn.Bitmap.setBitmapPixelRgb(cast this, x, y, color);
 	}
-	inline public function createRegion(x:Int, y:Int, width:Int, height:Int):flight._js.BitmapRegion {
-		return flight._js._fn.Bitmap.createBitmapRegion(cast this, x, y, width, height);
-	}
-	inline public function setRegion(out:flight._js.BitmapRegion, x:Int, y:Int, width:Int, height:Int):Void {
-		flight._js._fn.Bitmap.setBitmapRegion(out, cast this, x, y, width, height);
-	}
 	inline public function scroll(dx:Int, dy:Int):Void {
 		flight._js._fn.Bitmap.scrollBitmap(cast this, dx, dy);
 	}
 	inline public function free():Void {
 		flight._js._fn.Bitmap.freeBitmap(cast this);
+	}
+	inline public function freeRef():Void {
+		flight._js._fn.Bitmap.freeBitmapRef(cast this);
 	}
 	inline public function createImageResourceFrom(hostImage:flight._js.HostImageCapability):Null<Dynamic> {
 		return flight._js._fn.Image.createImageResourceFromBitmap(hostImage, cast this);

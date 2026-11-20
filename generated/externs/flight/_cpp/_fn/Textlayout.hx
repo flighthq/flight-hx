@@ -43,6 +43,8 @@ extern class Textlayout {
 	public static function isTextLayoutTruncated(layout:flight._cpp.TextLayoutResult, params:flight._cpp.TextLayoutParams):Bool;
 	@:native("flight_create_text_layout_group")
 	public static function createTextLayoutGroup(format:cpp.Star<cpp.Void>):flight._cpp.TextLayoutGroup;
+	@:native("flight_get_text_layout_measure_provider")
+	public static function getTextLayoutMeasureProvider(state:flight._cpp.TextLayoutMeasureState, hostTextShaper:flight._cpp.HostTextShaperCapability):flight._cpp.TextMeasureFunction;
 	@:native("flight_get_text_line_break_index")
 	public static function getTextLineBreakIndex(lineBreaks:cpp.Star<cpp.Void>, lineBreaksLen:Int, startIndex:haxe.Int64):Int;
 	@:native("flight_get_text_line_breaks")
@@ -57,10 +59,14 @@ extern class Textlayout {
 	public static function freeTextLayoutResult(ptr:flight._cpp.TextLayoutResult):Void;
 	@:native("flight_free_text_layout_group")
 	public static function freeTextLayoutGroup(ptr:flight._cpp.TextLayoutGroup):Void;
+	@:native("flight_free_text_measure_function")
+	public static function freeTextMeasureFunction(ptr:flight._cpp.TextMeasureFunction):Void;
 	@:native("flight_free_text_metrics")
 	public static function freeTextMetrics(ptr:flight._cpp.TextMetrics):Void;
 	@:native("flight_free_text_layout_params")
 	public static function freeTextLayoutParams(ptr:flight._cpp.TextLayoutParams):Void;
+	@:native("flight_free_text_layout_result_ref")
+	public static function freeTextLayoutResultRef(ptr:flight._cpp.TextLayoutResult):Void;
 	@:native("flight_free_text_line_metrics")
 	public static function freeTextLineMetrics(ptr:flight._cpp.TextLineMetrics):Void;
 }

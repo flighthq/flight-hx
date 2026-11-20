@@ -1,14 +1,14 @@
 package flight._hl;
 
 abstract Camera3D(hl.Bytes) {
-	public var far(get, set):Single;
+	public var far(get, set):Float;
 
-	inline function get_far():Single return this.getF32(16);
+	inline function get_far():Float return this.getF64(16);
 
-	inline function set_far(value:Single):Single { this.setF32(16, value); return value; }
-	public var near(get, set):Single;
+	inline function set_far(value:Float):Float { this.setF64(16, value); return value; }
+	public var near(get, set):Float;
 
-	inline function get_near():Single return this.getF32(40);
+	inline function get_near():Float return this.getF64(40);
 
-	inline function set_near(value:Single):Single { this.setF32(40, value); return value; }
+	inline function set_near(value:Float):Float { this.setF64(40, value); return value; }
 }
