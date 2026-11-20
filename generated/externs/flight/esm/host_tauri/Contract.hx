@@ -1,0 +1,93 @@
+package flight.esm.host_tauri;
+
+#if (js && flight_esm)
+@:jsRequire("@flighthq/host-tauri/contract")
+extern class Contract {
+  public static function tauriHost<Profile>(tauri:Dynamic, profile:Profile):Dynamic;
+  public static function tauriHostAccessibility():flight.esm.types.host_contract.Types.HostAccessibilityCapabilities;
+  public static function tauriHostApp(tauri:Dynamic):Dynamic;
+  public static function tauriHostAppHide(tauri:Dynamic):flight.esm.types.app.Types.HostAppHideCapability;
+  public static function tauriHostAppLocale(tauri:Dynamic):flight.esm.types.app.Types.HostAppLocaleCapability;
+  public static function tauriHostAppMenu(tauri:Dynamic):flight.esm.types.menu.Types.HostAppMenuCapability;
+  public static function tauriHostAppName(tauri:Dynamic):flight.esm.types.app.Types.HostAppNameCapability;
+  public static function tauriHostAppQuit(tauri:Dynamic):flight.esm.types.app.Types.HostAppQuitCapability;
+  public static function tauriHostAppRelaunch(tauri:Dynamic):flight.esm.types.app.Types.HostAppRelaunchCapability;
+  public static function tauriHostAppShow(tauri:Dynamic):flight.esm.types.app.Types.HostAppShowCapability;
+  public static function tauriHostAppVersion(tauri:Dynamic):flight.esm.types.app.Types.HostAppVersionCapability;
+  public static function tauriHostAudio():flight.esm.types.media_contract.Types.HostAudioCapabilities;
+  public static function tauriHostAudioDecode():flight.esm.types.audio.Types.HostAudioDecodeCapabilities;
+  public static function tauriHostBitmap():flight.esm.types.host_contract.Types.HostBitmapCapabilities;
+  public static function tauriHostCanvas():flight.esm.types.surface.Types.HostCanvasCapabilities;
+  public static function tauriHostClipboard(tauri:Dynamic):{ ?bookmark:Null<flight.esm.types.clipboard.Types.HostClipboardBookmarkCapability>, ?change:Null<flight.esm.types.clipboard.Types.HostClipboardChangeCapability>, ?formats:Null<flight.esm.types.clipboard.Types.HostClipboardFormatsCapability>, ?image:Null<flight.esm.types.clipboard.Types.HostClipboardImageCapability>, text:flight.esm.types.clipboard.Types.HostClipboardTextCapability };
+  public static function tauriHostClipboardText(tauri:Dynamic):flight.esm.types.clipboard.Types.HostClipboardTextCapability;
+  public static function tauriHostCompress():flight.esm.types.host_contract.Types.HostCompressCapabilities;
+  public static function tauriHostConnectivity():flight.esm.types.host_contract.Types.HostConnectivityCapabilities;
+  public static function tauriHostDecompress():flight.esm.types.host_contract.Types.HostDecompressCapabilities;
+  public static function tauriHostDevice():flight.esm.types.device.Types.HostDeviceCapabilities;
+  public static function tauriHostDialog(tauri:Dynamic):{ directoryOpen:flight.esm.types.dialog_contract.Types.HostDirectoryOpenDialogCapability, fileOpen:flight.esm.types.dialog_contract.Types.HostFileOpenDialogCapability, fileSave:flight.esm.types.dialog_contract.Types.HostFileSaveDialogCapability, ?imageOpen:Null<flight.esm.types.dialog_contract.Types.HostImageOpenDialogCapability>, message:flight.esm.types.dialog_contract.Types.HostMessageDialogCapability, ?photoCapture:Null<flight.esm.types.dialog_contract.Types.HostPhotoCaptureDialogCapability>, ?prompt:Null<flight.esm.types.dialog_contract.Types.HostPromptDialogCapability>, ?videoCapture:Null<flight.esm.types.dialog_contract.Types.HostVideoCaptureDialogCapability> };
+  public static function tauriHostDirectoryOpenDialog(tauri:Dynamic):flight.esm.types.dialog_contract.Types.HostDirectoryOpenDialogCapability;
+  public static function tauriHostFileOpenDialog(tauri:Dynamic):flight.esm.types.dialog_contract.Types.HostFileOpenDialogCapability;
+  public static function tauriHostFileSaveDialog(tauri:Dynamic):flight.esm.types.dialog_contract.Types.HostFileSaveDialogCapability;
+  public static function tauriHostFileSystem():flight.esm.types.host_contract.Types.HostFileSystemCapabilities;
+  public static function tauriHostFont():flight.esm.types.host_contract.Types.HostFontCapabilities;
+  public static function tauriHostFullscreen():flight.esm.types.app.Types.HostFullscreenCapabilities;
+  public static function tauriHostGeolocation():flight.esm.types.host_contract.Types.HostGeolocationCapabilities;
+  public static function tauriHostGl():flight.esm.types.render_gl.Types.HostGlCapabilities;
+  public static function tauriHostGlyph():flight.esm.types.host_contract.Types.HostGlyphCapabilities;
+  public static function tauriHostHaptics():flight.esm.types.haptics.Types.HostHapticsCapabilities;
+  public static function tauriHostImage():flight.esm.types.host_contract.Types.HostImageCapabilities;
+  public static function tauriHostImageDecode():flight.esm.types.image_codec_contract.Types.HostImageDecodeCapabilities;
+  public static function tauriHostImageEncode():flight.esm.types.image_codec_contract.Types.HostImageEncodeCapabilities;
+  public static function tauriHostInput():flight.esm.types.input.Types.HostInputCapabilities;
+  public static function tauriHostIpc():flight.esm.types.ipc.Types.HostIpcCapabilities;
+  public static function tauriHostLifecycle():flight.esm.types.lifecycle.Types.HostLifecycleCapabilities;
+  public static function tauriHostMediaSession():flight.esm.types.mediasession.Types.HostMediaSessionCapabilities;
+  public static function tauriHostMenu(tauri:Dynamic):Dynamic;
+  public static function tauriHostMenuPopup(tauri:Dynamic):flight.esm.types.menu.Types.HostMenuPopupCapability;
+  public static function tauriHostMenuSelect(tauri:Dynamic):flight.esm.types.menu.Types.HostMenuSelectCapability;
+  public static function tauriHostMessageDialog(tauri:Dynamic):flight.esm.types.dialog_contract.Types.HostMessageDialogCapability;
+  public static function tauriHostMidi():flight.esm.types.host_contract.Types.HostMidiCapabilities;
+  public static function tauriHostNet():flight.esm.types.net.Types.HostNetCapabilities;
+  public static function tauriHostNotification(tauri:Dynamic):Dynamic;
+  public static function tauriHostNotificationDelivery(tauri:Dynamic):flight.esm.types.notification_contract.Types.HostNotificationDeliveryCapability;
+  public static function tauriHostNotificationLifecycle(tauri:Dynamic):flight.esm.types.notification_contract.Types.HostNotificationLifecycleCapability;
+  public static function tauriHostNotificationPermission(tauri:Dynamic):flight.esm.types.notification_contract.Types.HostNotificationPermissionCapability;
+  public static function tauriHostPermissions():flight.esm.types.host_contract.Types.HostPermissionsCapabilities;
+  public static function tauriHostPlatform(tauri:Dynamic):flight.esm.types.platform.Types.HostPlatformCapability;
+  public static function tauriHostPlatformGroup(tauri:Dynamic):Dynamic;
+  public static function tauriHostPower():flight.esm.types.power.Types.HostPowerCapabilities;
+  public static function tauriHostPreferences():flight.esm.types.preferences_contract.Types.HostPreferencesCapabilities;
+  public static function tauriHostProtocol():flight.esm.types.host_contract.Types.HostProtocolCapabilities;
+  public static function tauriHostScreen():flight.esm.types.screen.Types.HostScreenCapabilities;
+  public static function tauriHostSensors():flight.esm.types.sensors.Types.HostSensorsCapabilities;
+  public static function tauriHostShare():flight.esm.types.host_contract.Types.HostShareCapabilities;
+  public static function tauriHostShell(tauri:Dynamic):{ ?beep:Null<flight.esm.types.shell.Types.HostShellBeepCapability>, external:flight.esm.types.shell.Types.HostShellExternalCapability, pathOpen:flight.esm.types.shell.Types.HostShellPathOpenCapability, pathReveal:flight.esm.types.shell.Types.HostShellPathRevealCapability, ?process:Null<flight.esm.types.shell.Types.HostShellProcessCapability>, ?shortcutLink:Null<flight.esm.types.shell.Types.HostShellShortcutLinkCapability>, ?trash:Null<flight.esm.types.shell.Types.HostShellTrashCapability> };
+  public static function tauriHostShellExternal(tauri:Dynamic):flight.esm.types.shell.Types.HostShellExternalCapability;
+  public static function tauriHostShellPathOpen(tauri:Dynamic):flight.esm.types.shell.Types.HostShellPathOpenCapability;
+  public static function tauriHostShellPathReveal(tauri:Dynamic):flight.esm.types.shell.Types.HostShellPathRevealCapability;
+  public static function tauriHostShortcut(tauri:Dynamic):{ query:flight.esm.types.shortcut.Types.HostShortcutQueryCapability, trigger:flight.esm.types.shortcut.Types.HostShortcutTriggerCapability };
+  public static function tauriHostShortcutQuery(tauri:Dynamic):flight.esm.types.shortcut.Types.HostShortcutQueryCapability;
+  public static function tauriHostShortcutTrigger(tauri:Dynamic):flight.esm.types.shortcut.Types.HostShortcutTriggerCapability;
+  public static function tauriHostSocket():flight.esm.types.socket.Types.HostSocketCapabilities;
+  public static function tauriHostSoftKeyboard():flight.esm.types.host_contract.Types.HostSoftKeyboardCapabilities;
+  public static function tauriHostStatusBar():flight.esm.types.statusbar.Types.HostStatusBarCapabilities;
+  public static function tauriHostSurface():flight.esm.types.surface.Types.HostSurfaceCapabilities;
+  public static function tauriHostTextSegment():flight.esm.types.host_contract.Types.HostTextSegmentCapabilities;
+  public static function tauriHostTextShaper():flight.esm.types.textshaper.Types.HostTextShaperCapabilities;
+  public static function tauriHostTray<Profile>(tauri:Dynamic, profile:Profile):Dynamic;
+  public static function tauriHostTrayImage<Profile>(tauri:Dynamic, profile:Profile):flight.esm.types.tray.Types.HostTrayImageCapability;
+  public static function tauriHostTrayInteractionEvents(tauri:Dynamic, profile:String):flight.esm.types.tray.Types.HostTrayInteractionEventsCapability;
+  public static function tauriHostTrayLifecycle<Profile>(tauri:Dynamic, profile:Profile):flight.esm.types.tray.Types.HostTrayLifecycleCapability;
+  public static function tauriHostTrayMenu<Profile>(tauri:Dynamic, profile:Profile):flight.esm.types.tray.Types.HostTrayMenuCapability;
+  public static function tauriHostTrayMenuSelectionEvents<Profile>(tauri:Dynamic, profile:Profile):flight.esm.types.tray.Types.HostTrayMenuSelectionEventsCapability;
+  public static function tauriHostTrayTemplateImage(tauri:Dynamic):flight.esm.types.tray.Types.HostTrayTemplateImageCapability;
+  public static function tauriHostTrayTitle(tauri:Dynamic, profile:String):flight.esm.types.tray.Types.HostTrayTitleCapability;
+  public static function tauriHostTrayTooltip(tauri:Dynamic, profile:String):flight.esm.types.tray.Types.HostTrayTooltipCapability;
+  public static function tauriHostUpdater():flight.esm.types.host_contract.Types.HostUpdaterCapabilities;
+  public static function tauriHostVideo():flight.esm.types.video.Types.HostVideoCapabilities;
+  public static function tauriHostWgpu():flight.esm.types.render_wgpu_contract.Types.HostWgpuCapabilities;
+  public static function tauriHostWindow(tauri:Dynamic):Dynamic;
+}
+#else
+#error "Flight ESM bindings require the JavaScript target and flight_esm."
+#end

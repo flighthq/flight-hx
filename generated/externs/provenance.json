@@ -15,6 +15,10 @@
       {
         "path": "patches/flight/0017-binding-carriers-and-fields.patch",
         "sha256": "fe0c2a9538033c9783af84c7176789a54278a14d96f39290305cddf6d6cde038"
+      },
+      {
+        "path": "patches/flight/0018-typescript-esm-externs.patch",
+        "sha256": "8b5004d77c772756ebdef775906f64b32c26a1c9d1d2d1c98a4d4aac775f27e9"
       }
     ]
   },
@@ -26941,6 +26945,3554 @@
     {
       "path": "flight/_js/_fn/Xml.hx",
       "sha256": "3a933bf90f85c8df49985af91ccda086eae19c34be38f439ce8ff5595a5fd5e5"
+    },
+    {
+      "path": "flight/esm/Abc.hx",
+      "sha256": "9b5ad968831d3614e8d8715362a9c41bd9550e8f38185003df6791155e7ee19e"
+    },
+    {
+      "path": "flight/esm/Accessibility.hx",
+      "sha256": "a34dcc40054cd8ca527f39fdd621368e6f2842a191367320bcdb2510b3a01afc"
+    },
+    {
+      "path": "flight/esm/Adjustments.hx",
+      "sha256": "e0e81a60bce3a7f376d3b3d8a926cc2a26de2128f79bd4300105fa1cb4065d29"
+    },
+    {
+      "path": "flight/esm/Animation.hx",
+      "sha256": "248b38d8726384250480a643d8a34f9ec7320805a21321f709478e2ba06d8f83"
+    },
+    {
+      "path": "flight/esm/App.hx",
+      "sha256": "53de1af29a4ca5fdc79af74fd69f5ed476d756e72ad0dc7e8a87e01b0f47449a"
+    },
+    {
+      "path": "flight/esm/Assets.hx",
+      "sha256": "7de447231db9e17987738b4d219b2aaae836093578e3e84672c4264092f7f4b0"
+    },
+    {
+      "path": "flight/esm/Audio.hx",
+      "sha256": "60254282586898144b2f44bf3cbf0a7da742c894cc8623bd15139a5e6b041694"
+    },
+    {
+      "path": "flight/esm/Binpack.hx",
+      "sha256": "733ad6e3eecc30c7b699cb4f80ee106313205b6142a21cc4e622e15a0058aecf"
+    },
+    {
+      "path": "flight/esm/Bitmap.hx",
+      "sha256": "6070771cb9bb752c3434e166c3bd4d196c3b70d1a169eb06d54f9b170917a956"
+    },
+    {
+      "path": "flight/esm/BitmapWasm.hx",
+      "sha256": "1eb08eb9f9b026045cba459ac3adc185c1b47ae9e2124e64a181180e1c646d07"
+    },
+    {
+      "path": "flight/esm/Bitmapfont.hx",
+      "sha256": "ca744b42cbbf6f66ce3dbf7e30997622e9a0e7670f41c4c478643b00419aacb3"
+    },
+    {
+      "path": "flight/esm/BitmapfontFormats.hx",
+      "sha256": "b56420768f305c182b650154a94f60086029e8962e29f90bac338b3ebc0fba03"
+    },
+    {
+      "path": "flight/esm/Bitmaptext.hx",
+      "sha256": "89650d54c193a647f2d33fce5722105dcd6f41d3c40c747b3caa49fa177b0075"
+    },
+    {
+      "path": "flight/esm/Buffer.hx",
+      "sha256": "a9c1d35c5d616f15d7a9e33bb786d31462dccb419abf41943d85a2a09b433e81"
+    },
+    {
+      "path": "flight/esm/Camera.hx",
+      "sha256": "723ce538b134a191d8f343bef9ea83b8254881ed797bb22d84e4ac2fcf63a7e5"
+    },
+    {
+      "path": "flight/esm/CameraControls.hx",
+      "sha256": "46869b2924911f878ba3353bc24c155ebc3d7c2ae67f2fb9d3472cedccc1a9d5"
+    },
+    {
+      "path": "flight/esm/Capture.hx",
+      "sha256": "2ea6707dbe33843a9ec48838097bbfec8b1f1702bb6029953ee8f0506137bd0a"
+    },
+    {
+      "path": "flight/esm/Clip.hx",
+      "sha256": "ac8e413c64a92130a19e5f4fd76bf27cc595728008d259915b56d6ee5e9c37d8"
+    },
+    {
+      "path": "flight/esm/Clipboard.hx",
+      "sha256": "bdc589fefe140883367a18b4aab2f7fe3d7a149dec0d981ef89778c7c4b52361"
+    },
+    {
+      "path": "flight/esm/Clock.hx",
+      "sha256": "b46b5fea55ad3923c65b5a8975bb11899ef2a62776f6e65e420ad21705d5d7c5"
+    },
+    {
+      "path": "flight/esm/Collision.hx",
+      "sha256": "f22359c8862a69f4ca1fdda276db9f10adfe9b8a9a1fe99e8cbf56cfae497b75"
+    },
+    {
+      "path": "flight/esm/Color.hx",
+      "sha256": "b0335d59a77d611761145c8f6a4046ebdff681ecb8a98fd6416de822c3cb5623"
+    },
+    {
+      "path": "flight/esm/Command.hx",
+      "sha256": "7188f38dfe31f8f59ac4543531e4630218306f9bd9b267944075e7e9c6d11ccf"
+    },
+    {
+      "path": "flight/esm/Compression.hx",
+      "sha256": "e5a21585d32ccb32efe82be4d9670a1f10b0cacf241fb19a50b1d61bb133c5e2"
+    },
+    {
+      "path": "flight/esm/CompressionWasm.hx",
+      "sha256": "22bcb2b0f48173aa52a6d51c28bb0a860c8e2e72c2dfa9d19e8dacc7e1bdb928"
+    },
+    {
+      "path": "flight/esm/Connectivity.hx",
+      "sha256": "769f0aff3bd759722758bb5da02c98c93ecc2120079109f3c08c161e144527db"
+    },
+    {
+      "path": "flight/esm/Debug.hx",
+      "sha256": "7029466390c7675cd8590ba1db79c9ff816baa0d56b8362a89d16f9d9ff241ca"
+    },
+    {
+      "path": "flight/esm/Device.hx",
+      "sha256": "e6c74b2620ef48ac60c5b680a52a9f42dc654058165ee923b035c6f3175221de"
+    },
+    {
+      "path": "flight/esm/Dialog.hx",
+      "sha256": "e9e4c736a61b249f18adcf51b5f47cf77e9fb58be3b98ac5b5f94bf07b5a7d2f"
+    },
+    {
+      "path": "flight/esm/Easing.hx",
+      "sha256": "e6be1d10e2e8a549b00232cb67055aea3cb5d0c0f9c644e27f6ceafaf4f5f2c2"
+    },
+    {
+      "path": "flight/esm/Effects.hx",
+      "sha256": "2faf80d77814a6f57375ede651a43a923d82540bd185e98d8c2f38827050af63"
+    },
+    {
+      "path": "flight/esm/EffectsCanvas.hx",
+      "sha256": "836820fce41d87425a051cbfa5b96c0cebd387e17d587c4a6ef4f6c51d1d25cd"
+    },
+    {
+      "path": "flight/esm/EffectsGl.hx",
+      "sha256": "6bd338197bc42e4d30a8524805ce5b00249b833ab74b545cb2ae550515051986"
+    },
+    {
+      "path": "flight/esm/EffectsWgpu.hx",
+      "sha256": "6d96207681de4ca33ada4c3fc620108b77b2959371d679f859dc80b2d8134884"
+    },
+    {
+      "path": "flight/esm/Encoding.hx",
+      "sha256": "95a4537113b4eb22394a0521b0fa0600d901651ae6749afd5c465b225a8bc8b6"
+    },
+    {
+      "path": "flight/esm/Entity.hx",
+      "sha256": "72c2618132ef205ce306dd8c68b668adb5742785e02e955fccf953a7d23fc85f"
+    },
+    {
+      "path": "flight/esm/Filesystem.hx",
+      "sha256": "ab7c780f03b4aac8b96992dec1cfc09ba40be54b92303aa1c7429ccf57fcb0fb"
+    },
+    {
+      "path": "flight/esm/Flow.hx",
+      "sha256": "4d855e51642d649a3fd1e72b196eb036afc97d7ba3f4034f8bd6f36ea1621ab1"
+    },
+    {
+      "path": "flight/esm/Font.hx",
+      "sha256": "97013570d3b379225560003d153c1638f77d534933a331ff222443b4c0b373b8"
+    },
+    {
+      "path": "flight/esm/FontFormats.hx",
+      "sha256": "00a847196e3bccb9d458fb1f62fd8ed848b0deb28e3d12e956567a3dde6c3a9f"
+    },
+    {
+      "path": "flight/esm/Geolocation.hx",
+      "sha256": "e3d12c9fac2b39c595814f2c2f513d1a9ef5f0e85b76734fa833b9ab07ec4372"
+    },
+    {
+      "path": "flight/esm/Geometry.hx",
+      "sha256": "b92d067ee6a98a28d68dc8a09de08920b0d14978d1d272292de577c631c13aba"
+    },
+    {
+      "path": "flight/esm/Gizmo.hx",
+      "sha256": "838b09667c9eff62cb78dfce44f927037666aac46d4950f03f97caa072b34495"
+    },
+    {
+      "path": "flight/esm/Glyphatlas.hx",
+      "sha256": "023e60a07112dc460efd985b5f884309696b81bee3896a28ff573737326c1e16"
+    },
+    {
+      "path": "flight/esm/Gui.hx",
+      "sha256": "13a65758f796ff65f3e766024b119ff809416a286330217dd6ca583de78afed3"
+    },
+    {
+      "path": "flight/esm/Haptics.hx",
+      "sha256": "006085faed3dafd63050a2c25c44b076b2281dd96539ffd885cb4cd22b44ea12"
+    },
+    {
+      "path": "flight/esm/Host.hx",
+      "sha256": "526f32dd1758232169c566b27ce0c819df7c4d63be85dd9ea83960c44387995f"
+    },
+    {
+      "path": "flight/esm/HostCapacitor.hx",
+      "sha256": "47683e868160394e0aef11e0c807456193a222909a2e454dd5ee1b1e71f73c52"
+    },
+    {
+      "path": "flight/esm/HostElectron.hx",
+      "sha256": "9ca5d20d4c5680777de73d5875e4ebfbec124182b6ee1ff73dc91c6a8ac73bba"
+    },
+    {
+      "path": "flight/esm/HostTauri.hx",
+      "sha256": "9cd888798b95d66f5705690578e2ed819a39d041849f738b2b0fa1a56d0bcee9"
+    },
+    {
+      "path": "flight/esm/HostWeb.hx",
+      "sha256": "b76594dfb66dffe578f98f8d11f56c5b9c38644e70cce592fe21f0f9e5dc1d17"
+    },
+    {
+      "path": "flight/esm/Image.hx",
+      "sha256": "aa0f75a7602f2daa816f107483666cf299cffe19add0af148b820cba4054ee1d"
+    },
+    {
+      "path": "flight/esm/ImageCodec.hx",
+      "sha256": "e042d4c3036d4c085f68211447deba763ee59102ce9b38f1a93e5abec5099d70"
+    },
+    {
+      "path": "flight/esm/Importdiagnostics.hx",
+      "sha256": "634a90d7a51e336b1ca400c992954c87ad60cdaa2c37919d1a250a3501d35f2a"
+    },
+    {
+      "path": "flight/esm/Input.hx",
+      "sha256": "56090d8d4fdd066939d1f89afc7ed6cdb4f4f2b389da62c71b9db9994f02bb72"
+    },
+    {
+      "path": "flight/esm/Interaction.hx",
+      "sha256": "2decd334b8b37738f649fdb729db7be90cdde91e521d601583f853317baf920f"
+    },
+    {
+      "path": "flight/esm/Intl.hx",
+      "sha256": "380b4b74df6602b032240b67c30d3d9a925323e71900f677269360d947db9872"
+    },
+    {
+      "path": "flight/esm/Ipc.hx",
+      "sha256": "44bcca7b0629e355ffc0d35416d5b5b94eff8ee034c151edaaa684be42b292ce"
+    },
+    {
+      "path": "flight/esm/Keyboard.hx",
+      "sha256": "478be1f24ecfab211db98db7a304815d88409c703bdbb4498c1134316eeaf9cb"
+    },
+    {
+      "path": "flight/esm/Layout.hx",
+      "sha256": "7be404f1ab9221361a1a15cb80d8299a65b28007c877244d69674a2c82e7adf0"
+    },
+    {
+      "path": "flight/esm/Lifecycle.hx",
+      "sha256": "fd75321aba03133fdaa885efed4a742c58dfaa329defb65aaadb647f01e30ed7"
+    },
+    {
+      "path": "flight/esm/Lighting.hx",
+      "sha256": "01efeabec21b60156311a1058fea2a11b92830d3a5980056c752281b0102403e"
+    },
+    {
+      "path": "flight/esm/Loader.hx",
+      "sha256": "81f98ab20b60b51190e4564df5fcb56e539a74d05e94590b4fe7bb5daac08a51"
+    },
+    {
+      "path": "flight/esm/Log.hx",
+      "sha256": "96e9ab1e6d7a592faa9a8df3118c64c66e847a5385c1556c3afa798e3b4d8758"
+    },
+    {
+      "path": "flight/esm/Materials.hx",
+      "sha256": "0a718b13cf549ae2a85227b313c79b9644ef41d11066f718a7eb0c44c8d65979"
+    },
+    {
+      "path": "flight/esm/Math.hx",
+      "sha256": "50e7bfa16939a02c2367505261ee8b308f944bea3061ab414f53f24b416cf07b"
+    },
+    {
+      "path": "flight/esm/Media.hx",
+      "sha256": "a1c05f6c069249e529a38111fada3298bf2681a51e08debba15f8fe4780bc195"
+    },
+    {
+      "path": "flight/esm/Mediasession.hx",
+      "sha256": "3cc966a383cc9c49da0e145b31aa1c4af29e7dba227427b1447d708615b153ce"
+    },
+    {
+      "path": "flight/esm/Menu.hx",
+      "sha256": "e95c783fdd8f9f56a68e59bcad34dbedc566281780e7e78fd8604d9b6927bc70"
+    },
+    {
+      "path": "flight/esm/Meshgeometry.hx",
+      "sha256": "8022f3893e747b286751e1efd230356f52389a5306d98e20c290e6dab43966b7"
+    },
+    {
+      "path": "flight/esm/Midi.hx",
+      "sha256": "c6b61be74cb09a705c11b1ff9224d6ca4bb5c2452ff53e764764e645c280395c"
+    },
+    {
+      "path": "flight/esm/Motionpath.hx",
+      "sha256": "e19313c0fbc4ac8caf44c3cabdc8605f46826e36fff7ee60628a3127c6d152c3"
+    },
+    {
+      "path": "flight/esm/Movieclip.hx",
+      "sha256": "a592aaa3cc4b6e6cd39b5c3701e63b6a5e4903c8becfc2970d91f3b2b575a4b5"
+    },
+    {
+      "path": "flight/esm/Net.hx",
+      "sha256": "44207e2137c326c5cab8b346c0b9cd260347b30a163023e95efbc8ada84d983d"
+    },
+    {
+      "path": "flight/esm/Node.hx",
+      "sha256": "8fab200524901ce9ce38a2402ccb9cb44ae19784e9b71c97cb7e2588f5ef1df7"
+    },
+    {
+      "path": "flight/esm/Notification.hx",
+      "sha256": "3147833b18cd40f9582c2f786ecb96ea4bfd14f74164bf0d3f13d8c8fb1166b3"
+    },
+    {
+      "path": "flight/esm/Particleemitter.hx",
+      "sha256": "0db6c805657f9ac39adc6865732a293076c8110b580e7fb4774f6c250e577fa5"
+    },
+    {
+      "path": "flight/esm/Particles.hx",
+      "sha256": "438e2cea341d4d1dff8c7447919a7ab9836e24325db868431ed0728a6a99d32a"
+    },
+    {
+      "path": "flight/esm/ParticlesFormats.hx",
+      "sha256": "a8fd3b8ce3614ab1f9f2d9fc2ea2f93798ed3b56d20cf74c35d0c556d056080e"
+    },
+    {
+      "path": "flight/esm/Path.hx",
+      "sha256": "7040430c34277fe9921d09f8708bfa03ebe9f588b764dd4f0b3a07d905db9986"
+    },
+    {
+      "path": "flight/esm/PathBoolean.hx",
+      "sha256": "3128fbf05d1075b665360146f68cd77f36471dad36904c51a67b4e4d51975a67"
+    },
+    {
+      "path": "flight/esm/PathFormats.hx",
+      "sha256": "c4faef813d488d54645c54058e1b82795bb653f48ab90331d1e6a48a67448527"
+    },
+    {
+      "path": "flight/esm/Permissions.hx",
+      "sha256": "4b56ccdadc700f864d9600983f9f0f3fc2f4be306fac8aff5f5fdbf2e33a9f46"
+    },
+    {
+      "path": "flight/esm/Physics2D.hx",
+      "sha256": "e195623dfcea0083ce15934db8fb004f865a8aeb40f95ca50b592b507662f36f"
+    },
+    {
+      "path": "flight/esm/Physics2DAbi.hx",
+      "sha256": "8a93bc2ccc96eb7ecb04c9d4126ae8ab7904b32b19aacf51e18a632910c11b2a"
+    },
+    {
+      "path": "flight/esm/Physics2DAbiWasm.hx",
+      "sha256": "5ab95dc8ba6d262f579a0a28d6a2ef0977a70b5b186893df898411139687fe80"
+    },
+    {
+      "path": "flight/esm/Physics3D.hx",
+      "sha256": "df70c5cc112346e30b5cdd50ce2ffb23ac0cf19b4876463d6051654584ae443e"
+    },
+    {
+      "path": "flight/esm/Physics3DAbi.hx",
+      "sha256": "50b37cda35de274c4809cb9da1f22d1ac7db1661423e26f356d49307479dd27b"
+    },
+    {
+      "path": "flight/esm/Physics3DAbiWasm.hx",
+      "sha256": "20a18fe2f78966deb9a5a796f3958c5d2dfe1a09649eb90de798377064c638c9"
+    },
+    {
+      "path": "flight/esm/Picking.hx",
+      "sha256": "c83b88a10f23637b19a80deb634296a5970fbb6fbe4fb418bf44311decad2686"
+    },
+    {
+      "path": "flight/esm/Platform.hx",
+      "sha256": "076966cda44398f65d74e8cba16891dd1be527af9d9809217f1b262aac05ac15"
+    },
+    {
+      "path": "flight/esm/Power.hx",
+      "sha256": "b2590b5f506e4fef547cfff53078c149337fd0251ba9b7a254771274ce13072d"
+    },
+    {
+      "path": "flight/esm/Preferences.hx",
+      "sha256": "38a9e4423d2f70d211abc8551330b71c73977a7165ccbf2205c785270dcfa166"
+    },
+    {
+      "path": "flight/esm/Protocol.hx",
+      "sha256": "954340fc193c925512c16efdd03e92cb0a298814a0f3ab611871dbf15db93a11"
+    },
+    {
+      "path": "flight/esm/Quadbatch.hx",
+      "sha256": "e83d74373953534283f79f5f4bbae064064d5e2025a72bcfcfc3c879dac55455"
+    },
+    {
+      "path": "flight/esm/Registry.hx",
+      "sha256": "668894794f072b7ec323ebc442c3dc15db2031a26ab6be155e7765ffb44d2cb7"
+    },
+    {
+      "path": "flight/esm/Render.hx",
+      "sha256": "7d6cf74c5dbb065ebe9c78177e4534b6f27f628008b4adae9880e51aeef9c232"
+    },
+    {
+      "path": "flight/esm/RenderGl.hx",
+      "sha256": "9ab24f2698af0b826751ae53e828c2135fde67f0bf832dfdd94adee463e2332e"
+    },
+    {
+      "path": "flight/esm/RenderWgpu.hx",
+      "sha256": "4793919e90a076554fd674e4429c9c70f3aa46673147b18ef44a7ff82f077a81"
+    },
+    {
+      "path": "flight/esm/Requirement.hx",
+      "sha256": "d1e88496293c4c2a74431d2e042ea3875267232702d9726f1606f34c42f1e7a8"
+    },
+    {
+      "path": "flight/esm/RequirementCatalog.hx",
+      "sha256": "b0bd64899badd0df9223fb6009ae150885621c47fe56dd3124be447bbf409562"
+    },
+    {
+      "path": "flight/esm/RequirementCodegen.hx",
+      "sha256": "6bde6f83d51203f12eb5ed2a0abdaf18cd88aba001677d05e8c46bb0c0ed825c"
+    },
+    {
+      "path": "flight/esm/Resource.hx",
+      "sha256": "4ff08931a188c937fbef7db24e21a85b994c6cb206385ad335db712c70b4cd5b"
+    },
+    {
+      "path": "flight/esm/Scene2D.hx",
+      "sha256": "44fe958359619f18c09ea62045d2554c3e7fdd1fabe1d7d74ed6b487e552fd25"
+    },
+    {
+      "path": "flight/esm/Scene2DCanvas.hx",
+      "sha256": "30c17932e3989d53d6e6c79693c455438e9c857634d911aea4659fe5ca382d2b"
+    },
+    {
+      "path": "flight/esm/Scene2DDom.hx",
+      "sha256": "60f7ea6730d9a26e5462a86465d8e811bb5c26d3c454e134729223eeb7dfad1e"
+    },
+    {
+      "path": "flight/esm/Scene2DFormats.hx",
+      "sha256": "6a43654c23cab7b15be4ab7e899eb5c5412fcef3ca7f9bd8fe1267556e075256"
+    },
+    {
+      "path": "flight/esm/Scene2DGl.hx",
+      "sha256": "d97e5be2c3a264453941bada0350267c5a71898e2ff3910a70097674e8aef086"
+    },
+    {
+      "path": "flight/esm/Scene2DResources.hx",
+      "sha256": "e6772d7e833c84d146048a1a6ea23f116a5d89013996eb43dd0e503786f57071"
+    },
+    {
+      "path": "flight/esm/Scene2DWgpu.hx",
+      "sha256": "48be09a88176d7f7ab1c47ee981f5ce3ce6c1a86e7d279d1a38460734195ac9c"
+    },
+    {
+      "path": "flight/esm/Scene3D.hx",
+      "sha256": "eeefd287f40ffe45bf25a1438a0966692c3e411fa7f9e2cf13deb1c35bec1ff1"
+    },
+    {
+      "path": "flight/esm/Scene3DFormats.hx",
+      "sha256": "e2bf6614bbc488259d6177d766e9f00724b04fa82560c334948a6ad03813c6ac"
+    },
+    {
+      "path": "flight/esm/Scene3DGl.hx",
+      "sha256": "d06805c3323f24efb9cf090edc94330fc6bb500913f2d1fa75df7bfcdac9777f"
+    },
+    {
+      "path": "flight/esm/Scene3DResources.hx",
+      "sha256": "5dbfbb5388c8a31cfd01b857d660dfa4070c6346aaba87c7e64a8ee919c34ec8"
+    },
+    {
+      "path": "flight/esm/Scene3DWgpu.hx",
+      "sha256": "5e1cdb0be1280b34de53dd49f1dd2483f2cc49237cdad3cce58ff751217eaf89"
+    },
+    {
+      "path": "flight/esm/SceneDocument.hx",
+      "sha256": "e593b49e5ab623475bcc117585c469177be43aa2e0e02f7b72208d67dca9ab25"
+    },
+    {
+      "path": "flight/esm/Screen.hx",
+      "sha256": "f5c29322a301a273cac4aea879558baffdf604283bb67f0499d92f197756efb3"
+    },
+    {
+      "path": "flight/esm/Sdk.hx",
+      "sha256": "3d37cb842d788ff49637d8af07520daf1202d782e12f05aea9f03698d270efa6"
+    },
+    {
+      "path": "flight/esm/Selection.hx",
+      "sha256": "8ead323b79a37470559d352004bc869e653310920d86c9b4c5077289a714f266"
+    },
+    {
+      "path": "flight/esm/Sensors.hx",
+      "sha256": "bc2cb36de5f3678ead4ba250b3f499e1bc7c5fae9f38329973f55379c42c7a95"
+    },
+    {
+      "path": "flight/esm/Shading.hx",
+      "sha256": "96fcb5c532ba15085a6b24520e9bb540d134027562898de83ac89ccebcb0f476"
+    },
+    {
+      "path": "flight/esm/Shape.hx",
+      "sha256": "275bff85f58b33968ab769f7ca7856f6ad1d3d3322c01cce3d889c0621bef8ce"
+    },
+    {
+      "path": "flight/esm/ShapeFormats.hx",
+      "sha256": "07eb7f7afd93dce039f7201917b12ea029217d8e861ab09dc42e8cce242dacf9"
+    },
+    {
+      "path": "flight/esm/Share.hx",
+      "sha256": "ee095945c2c6931c10d74914eeb199eeaaf1944d5a2d429cfb60fb3b973fffe2"
+    },
+    {
+      "path": "flight/esm/Shell.hx",
+      "sha256": "1a694f79ec0e3d657ad2390f332eb6194fb268d96690a9141a30da03fa6400eb"
+    },
+    {
+      "path": "flight/esm/Shortcut.hx",
+      "sha256": "a717dcc41a56f23ea467ebbd2afcf22216e32dad61597332129f94b929c88cd3"
+    },
+    {
+      "path": "flight/esm/Signals.hx",
+      "sha256": "4a8b1cbf1f26ce518566483017b9f74c1863f9d91c4d988752a241fd28c36fe4"
+    },
+    {
+      "path": "flight/esm/Skeleton2D.hx",
+      "sha256": "8d3e01d4c7bdc47fa97101242976b4e36adc9a7d40ceca97774e4ebbcde0173e"
+    },
+    {
+      "path": "flight/esm/Skeleton2DFormats.hx",
+      "sha256": "0b1e8a853f755f24c64d0b823001108541e76aad1f2207180e3519f8c6807a28"
+    },
+    {
+      "path": "flight/esm/Skeleton3D.hx",
+      "sha256": "3e01b6c09b9bb3eeed183a5d35eee09ef72123a6af7385c3789094bad6217c3f"
+    },
+    {
+      "path": "flight/esm/Snapshot.hx",
+      "sha256": "e268d7b236150413406f23519c353640c8edca43777f3345066b836043d24af2"
+    },
+    {
+      "path": "flight/esm/Socket.hx",
+      "sha256": "daa18e26227a5d3ffd65dd7f76db7ffa6f430e4e61b0e27ec18874e32c23f21e"
+    },
+    {
+      "path": "flight/esm/Spatial.hx",
+      "sha256": "bdbc1a2a510b7e3c5b22b1780ae55230de0e42abf69fd3872cbf877304f05078"
+    },
+    {
+      "path": "flight/esm/Spring.hx",
+      "sha256": "4ec704e7fa710828b3b19652588944f5691bb341eed2d27c75bef0b7a2b04c64"
+    },
+    {
+      "path": "flight/esm/Spritesheet.hx",
+      "sha256": "117f7887ad22dc78473764db5e76d19fd573e6795690aeb1ca9169e6a00c6502"
+    },
+    {
+      "path": "flight/esm/SpritesheetFormats.hx",
+      "sha256": "ab619d3ea9cd4f839d4cfb3e78e8245cb884a3bc4569d992445e9aeebdc9a95e"
+    },
+    {
+      "path": "flight/esm/Statechart.hx",
+      "sha256": "309371b29d66dd8ef6d1ec06cbe125cfa36f02fce5dcb0b348d2a1a7f3164697"
+    },
+    {
+      "path": "flight/esm/Statusbar.hx",
+      "sha256": "9d7f9f14a7cf3ec9d4c8ad99cd8f8fef973995aa1a5d1f9d599ce74299f46de5"
+    },
+    {
+      "path": "flight/esm/Surface.hx",
+      "sha256": "0d31644582500420448db7f5ce2c7d43a32c028afcaae648306670b721c40158"
+    },
+    {
+      "path": "flight/esm/Swf.hx",
+      "sha256": "fc57907f603dd4544ff9448ae701ad38e596ce98790dfc3106a35dda6a9c20e3"
+    },
+    {
+      "path": "flight/esm/Text.hx",
+      "sha256": "6a8eaf6f5007dbfd95f51cb973db1f380e8bb2c26d2440ebe7023986624800c5"
+    },
+    {
+      "path": "flight/esm/TextMarkup.hx",
+      "sha256": "5ea2dbf7b6a5570b545c74f9b05000a1b85dcb92430e35877597cdc6afcdceaa"
+    },
+    {
+      "path": "flight/esm/Textbidi.hx",
+      "sha256": "9e764ccc012adb686426969d6830f6c664c7b8031f82da6e394ea33772df6c49"
+    },
+    {
+      "path": "flight/esm/Textformat.hx",
+      "sha256": "0df0f9c3139cee8f16ecbf461cea8f0e031b45b7b8e734d91c1c8d8503588983"
+    },
+    {
+      "path": "flight/esm/Textinput.hx",
+      "sha256": "ec9d9f332ed415bb2307854dabb90b90a167e4d53d0277740e01c331accebb5d"
+    },
+    {
+      "path": "flight/esm/Textlayout.hx",
+      "sha256": "36f6a13246fe3a68fdd315565f02ad2fb4f42c3bf523aa00f36fb37acc0283b8"
+    },
+    {
+      "path": "flight/esm/Textsegment.hx",
+      "sha256": "08c6d28e06514b35675352d10f1e34d1c314cb7874c6766436c46cf3b0bf0d3c"
+    },
+    {
+      "path": "flight/esm/Textshaper.hx",
+      "sha256": "0fb71c898cdfa2bbb834d74495132ab80fefd1e1286f78285d09a59f4c5f7a45"
+    },
+    {
+      "path": "flight/esm/Texture.hx",
+      "sha256": "df980d495435a92b326b288c0c3136e4b1604606535b10210762fa871c7105b2"
+    },
+    {
+      "path": "flight/esm/TextureFormats.hx",
+      "sha256": "1be157535cb1f8b1f08c09737e357c9af06a344321e7aa3284d99ee5d16c92f5"
+    },
+    {
+      "path": "flight/esm/Textureatlas.hx",
+      "sha256": "2903ec353cba38ac37097f73e46525969e00c99c71824a3464fd45bdce1dab08"
+    },
+    {
+      "path": "flight/esm/TextureatlasFormats.hx",
+      "sha256": "21b1f250e588921ae75e36d8af17b3ea7b042760b57056c0bebac935384a8728"
+    },
+    {
+      "path": "flight/esm/Tilemap.hx",
+      "sha256": "8a53c93c6669f810030d6feea976af7b08675306592b0af4e9c5333aa086567d"
+    },
+    {
+      "path": "flight/esm/TilemapFormats.hx",
+      "sha256": "d3c499c93872658a86c4e2f33542c1129f568a8167bf280adbea79fda3cd0ef2"
+    },
+    {
+      "path": "flight/esm/Timeline.hx",
+      "sha256": "a7e73552ca0d0bb089ed9bbea0b88c3b2ee0f05a2106d6f784ae39d8731ececb"
+    },
+    {
+      "path": "flight/esm/Tokens.hx",
+      "sha256": "ad72f27c77a8c5ddd3193254d998aec49d289e291d9aac88e1761433e2a64da0"
+    },
+    {
+      "path": "flight/esm/Tray.hx",
+      "sha256": "16f3e2f504d4f8cc5b7b92d0fe8f50c80a8695207360b28531f276fb315b2d55"
+    },
+    {
+      "path": "flight/esm/Tween.hx",
+      "sha256": "437095096e08e54b8548da6123adcdeddd9f9198ae0e533384d61c7e1296b086"
+    },
+    {
+      "path": "flight/esm/Updater.hx",
+      "sha256": "ff747c04e7c16886a465a54ba6a095358fe2275b1d25877f1ce4bcdd3111310f"
+    },
+    {
+      "path": "flight/esm/Useragent.hx",
+      "sha256": "a86fd05a01b36714db1b1369978cec4a40cd2888f24d2f52da018933b739f7c0"
+    },
+    {
+      "path": "flight/esm/Velocity.hx",
+      "sha256": "e4e3136d2144d17605794bc497155d07d4bcdc0525deb59e3e427c13f0dfd48f"
+    },
+    {
+      "path": "flight/esm/Video.hx",
+      "sha256": "5609b6075b0b91db12c8c864b60158c233220968edaf127aabf6f4a49c9b0ad1"
+    },
+    {
+      "path": "flight/esm/Webcam.hx",
+      "sha256": "be109d66f63d5520ea87310b47fe4ed219e83b5ea3cd84069e3161948270d3de"
+    },
+    {
+      "path": "flight/esm/Xml.hx",
+      "sha256": "e647af70c2e83221c1eea6133310733738481a81e4a01c801eddd8dd92b34135"
+    },
+    {
+      "path": "flight/esm/abc/Contract.hx",
+      "sha256": "96dd02784227c65fb06e234b064be86815187e626e3e079375cf75a56585c21c"
+    },
+    {
+      "path": "flight/esm/accessibility/Contract.hx",
+      "sha256": "57250c061d870fe8c8ab4e2db8155ad8776b2140e486af44f7816a941eb43caf"
+    },
+    {
+      "path": "flight/esm/adjustments/Contract.hx",
+      "sha256": "f9e15ea6eeff7cfc54f7eb81948b57413c6b5ec1f05c1a6c4399e4f80cf866ab"
+    },
+    {
+      "path": "flight/esm/animation/Contract.hx",
+      "sha256": "e50c5158f2c3b6b4307d302607eeec21af1988ef479eae3b178e390b255a0cca"
+    },
+    {
+      "path": "flight/esm/app/Contract.hx",
+      "sha256": "a556af5a19a4a1828d80addd5e200a8162d21ed72b594035f4f062ae8ea5d991"
+    },
+    {
+      "path": "flight/esm/assets/Contract.hx",
+      "sha256": "4297e010ee7fe76b4f0ff84aff028a8cd5b3ce82c88cc6c4c364571e6656d75b"
+    },
+    {
+      "path": "flight/esm/audio/Contract.hx",
+      "sha256": "0c6466dbaa1a6ce725290e586fb145730a70d93993b7e5ddf0fe803af015f885"
+    },
+    {
+      "path": "flight/esm/binpack/Contract.hx",
+      "sha256": "cabb128c5df391bac55f92971cfffddd47dddbb088c43f268257bea2356f89b3"
+    },
+    {
+      "path": "flight/esm/bitmap/Contract.hx",
+      "sha256": "1faef88830e46f7e720f1e71c9104609746cd7f909cb4962989a4a8a1f2dc1c6"
+    },
+    {
+      "path": "flight/esm/bitmapfont/Contract.hx",
+      "sha256": "ff4e45f301e5139ccfca6a22c3cfe3ada26d9b58d017500af4dac90abf00e66d"
+    },
+    {
+      "path": "flight/esm/bitmapfont_formats/Contract.hx",
+      "sha256": "9bc04de964e3aa2916cb436d1fa28e0fb77e8bfccbc37736272577fc28299038"
+    },
+    {
+      "path": "flight/esm/bitmaptext/Contract.hx",
+      "sha256": "b6dee40227bcf8dffdbb88cd8abadcb4cc46c1b84b70773b832a5b36bda5d307"
+    },
+    {
+      "path": "flight/esm/buffer/Contract.hx",
+      "sha256": "93a750ebda8341dfcd58b0188a85b05c12eddf171aec2932bac894579be2fb5b"
+    },
+    {
+      "path": "flight/esm/camera/Contract.hx",
+      "sha256": "aecd30a289d9605ca9a6f754bcad3555457c400f1b3c61f50bc210f1c82f2fd9"
+    },
+    {
+      "path": "flight/esm/camera_controls/Contract.hx",
+      "sha256": "52c02055f187b5c5150caf60aa6ab716c643e34535c55b1aff54b6c18b4f7146"
+    },
+    {
+      "path": "flight/esm/capture/Contract.hx",
+      "sha256": "af74b09436f60c82ca932fb2dce3f4dd37de8135224fe7ab1df2059912602880"
+    },
+    {
+      "path": "flight/esm/clip/Contract.hx",
+      "sha256": "43b29102a46744269777ea666edf649914a5ad4dc759eb988c104c2748aecb36"
+    },
+    {
+      "path": "flight/esm/clipboard/Contract.hx",
+      "sha256": "55f40baa9632a9c3ddd7b75362981abf0f813690df24cd062bceffd22b7b5473"
+    },
+    {
+      "path": "flight/esm/clock/Contract.hx",
+      "sha256": "04d006689694aae4846603698597d3abbd326480e3698339f105074c294c6dfd"
+    },
+    {
+      "path": "flight/esm/collision/Contract.hx",
+      "sha256": "89411977098274c35c5ee8e01254b46c082d932a1c5660b9b4998fb88cb5f9ef"
+    },
+    {
+      "path": "flight/esm/color/Contract.hx",
+      "sha256": "73e43c324c9220635f1d25d229596b784d7f4fd436b7aa54a91da9843d28eed4"
+    },
+    {
+      "path": "flight/esm/command/Contract.hx",
+      "sha256": "5fa286de010723603ad0751d9f469bcf9d592be964bdcad377326fd8c5f49724"
+    },
+    {
+      "path": "flight/esm/compression/Contract.hx",
+      "sha256": "991b911a2faeeeb435e212ee0a688a30ee3c5df16c7432c0a16fc04d10e8b17c"
+    },
+    {
+      "path": "flight/esm/connectivity/Contract.hx",
+      "sha256": "c0f1746c8b5c5a4b187cdf92b0889ac53549d46741043b648f9d5d79cf6f3acf"
+    },
+    {
+      "path": "flight/esm/debug/Contract.hx",
+      "sha256": "5f36e89486ca036e39b1e8bbdef36858792fe82beab8abf3825d5ecccd06ca49"
+    },
+    {
+      "path": "flight/esm/device/Contract.hx",
+      "sha256": "8c3620220a20dec1a9dec1c3b0f8b397141fa6527810f4ac76246a706f907b53"
+    },
+    {
+      "path": "flight/esm/dialog/Contract.hx",
+      "sha256": "0b51e15430208e92262933057d319b4712128dc007d4648f905ae95907a0830c"
+    },
+    {
+      "path": "flight/esm/easing/Contract.hx",
+      "sha256": "4bcf24ecaf9f6e8d5c51769bec7f8e52b352a110009688a2b10dc5ba4d9c1ae3"
+    },
+    {
+      "path": "flight/esm/effects/Contract.hx",
+      "sha256": "e12c839db11722e7129432989d8580834b081ff06f185c2ad59ad770c5431963"
+    },
+    {
+      "path": "flight/esm/effects_canvas/Contract.hx",
+      "sha256": "9e8aa50952dd13539309989776910f647c0bd20e3f2af4dd4e4ec8e02f156658"
+    },
+    {
+      "path": "flight/esm/effects_gl/Contract.hx",
+      "sha256": "2101f384863b67190976a4b810304dbacaea6429061d0c4b1ccc14fbfb6f2df1"
+    },
+    {
+      "path": "flight/esm/effects_wgpu/Contract.hx",
+      "sha256": "a37668c7ab8736b47b4e1e69722d26a69d077b73a78c8afafc73495e293e895d"
+    },
+    {
+      "path": "flight/esm/encoding/Contract.hx",
+      "sha256": "9fdfa8f9cdd63afb87de8ba731f301ed32a1273c253cc30ba538e895ca560c49"
+    },
+    {
+      "path": "flight/esm/entity/Contract.hx",
+      "sha256": "408452865918394cce8ac529171ac8dd1a9c55d8a4794a3d34e8bb032c62dba6"
+    },
+    {
+      "path": "flight/esm/exports.json",
+      "sha256": "99db31c868b3c9fd0e3ad2fd8641ff4ee573cd98e5f187676c7d663fe79116b0"
+    },
+    {
+      "path": "flight/esm/filesystem/Contract.hx",
+      "sha256": "b99e9c034f5a7ae88a4d27d017879fed7343bad42a298f219566cf22c683b22a"
+    },
+    {
+      "path": "flight/esm/flow/Contract.hx",
+      "sha256": "e7ef282918576a1e9cc7b15f5226aa08fd5139034ec6a49195c2e8fbbe8f7cde"
+    },
+    {
+      "path": "flight/esm/font/Contract.hx",
+      "sha256": "b69de7afd72dc2d3957ea3c8802c28ea137203738dc634b3a8280e355b8d744a"
+    },
+    {
+      "path": "flight/esm/font_formats/Contract.hx",
+      "sha256": "3aa250ef168aaa41d23fdbe879b7d5796c62e2bd5bb64e2332c0d03ab6c1a835"
+    },
+    {
+      "path": "flight/esm/geolocation/Contract.hx",
+      "sha256": "761c1112d01c73ee1dbfad52a5558140f454183c269bd6bdc7e011e4ffeaff42"
+    },
+    {
+      "path": "flight/esm/geometry/Contract.hx",
+      "sha256": "2badab8ae6e0851e851113a3c7eb65154f296e830e8fd6fc256eb8acca2bd972"
+    },
+    {
+      "path": "flight/esm/gizmo/Contract.hx",
+      "sha256": "c4d96eaada80d629f7a58fdabf5a5233e8bfae21474ae51374640fad0f7c582c"
+    },
+    {
+      "path": "flight/esm/glyphatlas/Contract.hx",
+      "sha256": "0367711e8a7e932d86031d6f115ce609db4d5d63cfc6d7529822a95f228857a4"
+    },
+    {
+      "path": "flight/esm/gui/Contract.hx",
+      "sha256": "94ae572fdf894318303cfc965b19cd6305da9af61a42f388390127ee2c3338e4"
+    },
+    {
+      "path": "flight/esm/haptics/Contract.hx",
+      "sha256": "4c5c2c1a134c17bb96c422e4cd8850447d89bea1e3235993126234bb2665323e"
+    },
+    {
+      "path": "flight/esm/host/Contract.hx",
+      "sha256": "a0f0e17a1cf92fca2dc8be634d1743ccad50625cecfbc47ac93cfd1031f60fc7"
+    },
+    {
+      "path": "flight/esm/host_capacitor/Contract.hx",
+      "sha256": "d70cbf99bf19248abab0d6c5df4c0e607724aa185a9e4d9dd81b53de2156d120"
+    },
+    {
+      "path": "flight/esm/host_electron/Contract.hx",
+      "sha256": "94b0fb7e5a4d2e0730870b215968a0bf532b4d18d208f4229b54a360f6c407d6"
+    },
+    {
+      "path": "flight/esm/host_tauri/Contract.hx",
+      "sha256": "7a99d0496b2bf0515dd8857c42d3a8b43a8160dad1e627d8b3759826cfcb249a"
+    },
+    {
+      "path": "flight/esm/host_web/Contract.hx",
+      "sha256": "cad2152299cd3887513254ed6e3cb301a0441f9eb1506328208304e14ec48c3a"
+    },
+    {
+      "path": "flight/esm/image/Contract.hx",
+      "sha256": "e75640a2a434a3056693aed91a82d1b982f51368e7c405c27db7c03842fbbb90"
+    },
+    {
+      "path": "flight/esm/image_codec/Contract.hx",
+      "sha256": "1847ef6b8b22ccc961d20870372915695fdab0b5124d3fe4f7e3097adf0fe4ec"
+    },
+    {
+      "path": "flight/esm/importdiagnostics/Contract.hx",
+      "sha256": "2690690177ac4544a9745f3dbd5a664e23dc317151278ff5bffad39b5f4a8bb1"
+    },
+    {
+      "path": "flight/esm/input/Contract.hx",
+      "sha256": "c44574e0014df4c6050dfcb1e3cf0983415c575fc5b32257ae8d8441e7bf9ae2"
+    },
+    {
+      "path": "flight/esm/interaction/Contract.hx",
+      "sha256": "af734a819186eb9baa04c59b022f5b9095df9271ce648c1debc70f7c83b0bce6"
+    },
+    {
+      "path": "flight/esm/intl/Contract.hx",
+      "sha256": "a653ecd98f5d4434419364e557adb6649f11b432c14a2542463fdc4f902a2f59"
+    },
+    {
+      "path": "flight/esm/ipc/Contract.hx",
+      "sha256": "c2941b3e7fb7a95b5c83a9e385047d7ef3791def43fb90c6cdeb37fdaefadeaf"
+    },
+    {
+      "path": "flight/esm/keyboard/Contract.hx",
+      "sha256": "895cc9c4b5f7edbe8530aa8754a6f165f971fe80a8ad7867926e07d305c88d47"
+    },
+    {
+      "path": "flight/esm/layout/Contract.hx",
+      "sha256": "c456424031a5bb95f721eb82a5a5fb51b6ff9e9368f6bfa994ba2fe79a293f77"
+    },
+    {
+      "path": "flight/esm/lifecycle/Contract.hx",
+      "sha256": "e6fd98b5be5e948b432eef6ac1526ac7e87aecfff0a3ae37003fbc24453fc582"
+    },
+    {
+      "path": "flight/esm/lighting/Contract.hx",
+      "sha256": "c2f171cf9a558f21e953eb048558dd54ded0d538a88bcffd9f6b9f63aa9694f2"
+    },
+    {
+      "path": "flight/esm/loader/Contract.hx",
+      "sha256": "5858fec4e43455e1d7496bcdb6147bc9ed54c8292bd2a223c226829bb17b18c3"
+    },
+    {
+      "path": "flight/esm/log/Contract.hx",
+      "sha256": "d4de15012837ca5b0595265312e8e2378b1ec4b9eb53f14b8f43ec7b7f38dd17"
+    },
+    {
+      "path": "flight/esm/materials/Contract.hx",
+      "sha256": "0fda44bbe29412928d4b23b921401c23698c2b8f38013f3c8bd9416d472fc2d8"
+    },
+    {
+      "path": "flight/esm/math/Contract.hx",
+      "sha256": "1a0c6ad656c003c03f41d1941a7318d0e823bfa33118a88111cda90f5fee530f"
+    },
+    {
+      "path": "flight/esm/media/Contract.hx",
+      "sha256": "db12f61737c6cf5cf496801fe53717ed9508e4d060bb60e403457531a7c5c7a3"
+    },
+    {
+      "path": "flight/esm/mediasession/Contract.hx",
+      "sha256": "d3bb92d8f5ef10f7f5abc4ab86812d07be54b5a55f259580669b2ef5568b2cf9"
+    },
+    {
+      "path": "flight/esm/menu/Contract.hx",
+      "sha256": "9fc27d2f1960559256e32bf8d4e430abbfcee7d74c55297d2f112f8217e30c46"
+    },
+    {
+      "path": "flight/esm/meshgeometry/Contract.hx",
+      "sha256": "4d1ba6517347de4bc396eadff20168d43e79d2d251c71796d1e60284e5251b90"
+    },
+    {
+      "path": "flight/esm/midi/Contract.hx",
+      "sha256": "f213ac54b617b369798d6077dc981fcb56b2eaae7d559c22dafa8a77033cf85b"
+    },
+    {
+      "path": "flight/esm/motionpath/Contract.hx",
+      "sha256": "5e42881e3c66fe8660be110d4201223639bd237538d8e66805107bfe893f0ec5"
+    },
+    {
+      "path": "flight/esm/movieclip/Contract.hx",
+      "sha256": "589fe1df21bdf47beeec4edb82088fdb627433b9886c0e904ea35c60b8dfff3d"
+    },
+    {
+      "path": "flight/esm/net/Contract.hx",
+      "sha256": "d80f3f3f550a6c7c11ba0b2166acc4249209370dab265d501fb72747d1244f80"
+    },
+    {
+      "path": "flight/esm/node/Contract.hx",
+      "sha256": "a0cdf38da315b1ae0bdab5e0006e71c1404a88cad114897c93c9f1506fec9cd6"
+    },
+    {
+      "path": "flight/esm/notification/Contract.hx",
+      "sha256": "09363278e533bd5c12920f503f3787bdc3262dd51318cfedd901ad2b8a654018"
+    },
+    {
+      "path": "flight/esm/particleemitter/Contract.hx",
+      "sha256": "332b63557b6c85ad814dc94b6f60e903e0f9bbda1d8fc7f4c62b90ddb09e0413"
+    },
+    {
+      "path": "flight/esm/particles/Contract.hx",
+      "sha256": "f3b31e58f084037dce15feb4d3eac123c568d9bcfcc0c25eafce1d4214be26f0"
+    },
+    {
+      "path": "flight/esm/particles_formats/Contract.hx",
+      "sha256": "9ceff399f42fbc6adfb96c87530077aa3394ce26d9e743e332996680b1acfb7d"
+    },
+    {
+      "path": "flight/esm/path/Contract.hx",
+      "sha256": "a6611371117c79241faf8e24a7d76a4d73c3e2214337d2d3f2eb74d13b79ff38"
+    },
+    {
+      "path": "flight/esm/path_boolean/Contract.hx",
+      "sha256": "7b7d4dbce83c4b15cbc66be0140b409bfe9714ae61580eca0c1386cd43831251"
+    },
+    {
+      "path": "flight/esm/path_formats/Contract.hx",
+      "sha256": "82eeea281155b40e4ec35be6f3dd244e2fc2eaca08fb265b41dfb198a9bc592b"
+    },
+    {
+      "path": "flight/esm/permissions/Contract.hx",
+      "sha256": "df58da9ab1732f574f81d351b0a75c7acf95f4ca301789b05ec3e4b3b00a0ef0"
+    },
+    {
+      "path": "flight/esm/physics2d/Contract.hx",
+      "sha256": "7e3663c023dcd414092cf0ac0c62efa5edff2170dfc6876a90c676c607c42171"
+    },
+    {
+      "path": "flight/esm/physics2d_abi/Contract.hx",
+      "sha256": "650efdf6a6043ec4a5415d8bc8abdd9d91d6b3d973fab1b5bcf46da668806b71"
+    },
+    {
+      "path": "flight/esm/physics3d/Contract.hx",
+      "sha256": "05c96c25c08211a0ba3f289b9a2ab39a5832a5cc1a0ecaf13895bf1b1ddf7acc"
+    },
+    {
+      "path": "flight/esm/physics3d_abi/Contract.hx",
+      "sha256": "c2852b0d7b1487603db4239e20e6e675015af7a1463ac5a861ba2f1610abaedf"
+    },
+    {
+      "path": "flight/esm/picking/Contract.hx",
+      "sha256": "8d662bea4f1d3e707c6895599b8b408d2758f24eb2f04fb47b7096a630e8e8d3"
+    },
+    {
+      "path": "flight/esm/platform/Contract.hx",
+      "sha256": "7ef43cc876cb2868826b4e49c9356db680d5e3cc4ad6370a3205f54552dea902"
+    },
+    {
+      "path": "flight/esm/power/Contract.hx",
+      "sha256": "83b509723695aebdd3370dc9b9eb13314c4973964d71cfbff3993095dd4bb0ce"
+    },
+    {
+      "path": "flight/esm/preferences/Contract.hx",
+      "sha256": "1509b62ed9ebb572ca36de2e3801a1b91dca279ef6c8d947feddc481984d2686"
+    },
+    {
+      "path": "flight/esm/protocol/Contract.hx",
+      "sha256": "1d9b47a37af796f1546ed12b12d91aa3742f756acb72730567ff68382563de7b"
+    },
+    {
+      "path": "flight/esm/quadbatch/Contract.hx",
+      "sha256": "b678c8c1c01c2524225d9511bec93f11b428d266afe05d5b20ed07eef87e7b8c"
+    },
+    {
+      "path": "flight/esm/registry/Contract.hx",
+      "sha256": "c5a663100e6602cf73f4222f17ef6a0ff72f948bff02e1832b71800a88a19c9f"
+    },
+    {
+      "path": "flight/esm/render/Contract.hx",
+      "sha256": "c9e317d3e41437eacfa6192467cb26758594f037426573962696be1495a40f9a"
+    },
+    {
+      "path": "flight/esm/render_gl/CompressedTextureDecoderContract.hx",
+      "sha256": "fdf3bf419bde5c5bc5ac770a2b72088e9b10f77bbc4f43d0017236c7db721087"
+    },
+    {
+      "path": "flight/esm/render_gl/Contract.hx",
+      "sha256": "ccb7169126c8583dd6e310eb4776ef402caba78a31b6f3002a53b9a9af60be04"
+    },
+    {
+      "path": "flight/esm/render_wgpu/CompressedTextureDecoderContract.hx",
+      "sha256": "d9c5e5612d1a8424cdfe0d923b0aa7d9c9a0b3df72989f605aca61b9f0a23cb3"
+    },
+    {
+      "path": "flight/esm/render_wgpu/Contract.hx",
+      "sha256": "5af142541386962fa35afdb135c910c464bd7e18f1d2f759b233be294690cdbf"
+    },
+    {
+      "path": "flight/esm/requirement/Contract.hx",
+      "sha256": "21dbde717f07a6876774a1044f8eecc997c0bd9fcd483fb8c7918cd5fa5d25e3"
+    },
+    {
+      "path": "flight/esm/requirement_catalog/Contract.hx",
+      "sha256": "b65b22d5db90ceb54f236220519f2538e2650621ea258704ae2d84a492ebfcbd"
+    },
+    {
+      "path": "flight/esm/requirement_codegen/Contract.hx",
+      "sha256": "0e0067cc517107b46b9255b270d739c5ab0ae1295ed574377c4dcb7a1cb6637b"
+    },
+    {
+      "path": "flight/esm/resource/Contract.hx",
+      "sha256": "464dec11c734b0dbdde552b6fdcd87c6fc1168a5d572768da5fd64203ea07e34"
+    },
+    {
+      "path": "flight/esm/scene2d/Contract.hx",
+      "sha256": "9cdb1db62a2614dee7113a24b9a120a9dc3f1c9ee31070a970a8b1ec9912a3bc"
+    },
+    {
+      "path": "flight/esm/scene2d_canvas/Contract.hx",
+      "sha256": "101da95ad6e0398e88145676cbe0ef324894bf15e87569c567003e06bf85075e"
+    },
+    {
+      "path": "flight/esm/scene2d_dom/Contract.hx",
+      "sha256": "95ec3309661440b788caf72ce88118cf164adba1701705da87940dc42ca6f6ab"
+    },
+    {
+      "path": "flight/esm/scene2d_formats/Contract.hx",
+      "sha256": "9a9d3d007e05033ede5a5ad9f509cdb5c46c576cddc4b590210b5a99f23f6f13"
+    },
+    {
+      "path": "flight/esm/scene2d_gl/Contract.hx",
+      "sha256": "65bcf6852527bd453235bf6f8b8cba39716f184653a2355eba946b78f1ce3c85"
+    },
+    {
+      "path": "flight/esm/scene2d_resources/Contract.hx",
+      "sha256": "e49b36dace9ced6657ee9a53376594b7b9465da1a1a88093693bdb07e6cd532d"
+    },
+    {
+      "path": "flight/esm/scene2d_wgpu/Contract.hx",
+      "sha256": "bd423abb48826bfdaedf1d9c5f321ae95a329570c831235cd464a1a47a21b4c6"
+    },
+    {
+      "path": "flight/esm/scene3d/Contract.hx",
+      "sha256": "bd566cd2489cd14c8460e8f59cc5a6a0da6470ef0592638c46f756bbb4911516"
+    },
+    {
+      "path": "flight/esm/scene3d_formats/Contract.hx",
+      "sha256": "23705c2a0fee83ae220af675f45054971106ecbbda950b6230663b84d6670996"
+    },
+    {
+      "path": "flight/esm/scene3d_gl/Contract.hx",
+      "sha256": "9d08da25bd3538cb6be7c2148606cbdeb9f70e0b6256c95f12e0922c4887b829"
+    },
+    {
+      "path": "flight/esm/scene3d_resources/Contract.hx",
+      "sha256": "b8d2a5364c9425ed1c70c02d2bd79cb9911c11ade3b6b7ceb7471029ef601b8e"
+    },
+    {
+      "path": "flight/esm/scene3d_wgpu/Contract.hx",
+      "sha256": "86cc814eb546d1dbe52d94a0b93bc5a6ac115ba3f0453eacdf4dd82dc0ef4d74"
+    },
+    {
+      "path": "flight/esm/scene_document/Contract.hx",
+      "sha256": "4cc2d972e03dc5319894c5d75552492af5a69305a7f4f8e79cbfe631c13be30c"
+    },
+    {
+      "path": "flight/esm/screen/Contract.hx",
+      "sha256": "b423e0b816644f92428e0eaa59fd3718b1f8025a82ea14085636a0c3901be726"
+    },
+    {
+      "path": "flight/esm/sdk/Abc.hx",
+      "sha256": "7e0ca2540e1d38263e88df543a7fab91b97cefcc34b1eec3ff8b570107535b55"
+    },
+    {
+      "path": "flight/esm/sdk/Accessibility.hx",
+      "sha256": "6f253655e990737196be642d27fcf15ad1fbeb4eb1a8d58fa4311f7d73abd6b0"
+    },
+    {
+      "path": "flight/esm/sdk/Adjustments.hx",
+      "sha256": "f32afbd5034aa1d885f30595926fde3cd57ba0e8b8209087a562f48886b46b9f"
+    },
+    {
+      "path": "flight/esm/sdk/Animation.hx",
+      "sha256": "c7d5f3e7d6ef1037d48f39958242d2b2f092908f43dd6bc9a03f55ed5016b23c"
+    },
+    {
+      "path": "flight/esm/sdk/App.hx",
+      "sha256": "292088f627261af92bcc04bb99114dc83d279f49d75cefd70820c1ce2278e945"
+    },
+    {
+      "path": "flight/esm/sdk/Assets.hx",
+      "sha256": "b1f1362a7e4875b65af174fa99210796f7474110d4b6a77264bd102465c02ef5"
+    },
+    {
+      "path": "flight/esm/sdk/Audio.hx",
+      "sha256": "43172838ab1c7632feb2827a907efdcd607045c7f56a1b6b287820dfdacfe547"
+    },
+    {
+      "path": "flight/esm/sdk/Binpack.hx",
+      "sha256": "40b27d28230704f02bee6b524d782dddcb7f3e25dd6d9ab14d5a1dd12e31573d"
+    },
+    {
+      "path": "flight/esm/sdk/Bitmap.hx",
+      "sha256": "83ae210600764a95618b5c25a9015f81df2b34ccfdaa1cae9b77889de982cc45"
+    },
+    {
+      "path": "flight/esm/sdk/Bitmapfont.hx",
+      "sha256": "68dd7ec1c1e3ac9531ce3cacb32846cf6fc2898d2e423391cf5667a3fb806bf5"
+    },
+    {
+      "path": "flight/esm/sdk/BitmapfontFormats.hx",
+      "sha256": "92c02d0a86c3d548ee6400e883828d74ae5fd236181528c018e9f911cc1bd2cf"
+    },
+    {
+      "path": "flight/esm/sdk/Bitmaptext.hx",
+      "sha256": "bee3380e2b0912f511d4a6e01b69e53ebc99a8e72c34cc043cba76dc09059452"
+    },
+    {
+      "path": "flight/esm/sdk/Buffer.hx",
+      "sha256": "6eb4665b194fa30034c2829a4591d4527c2aa147a71ebcc4275859c1196e5457"
+    },
+    {
+      "path": "flight/esm/sdk/Camera.hx",
+      "sha256": "b788b49564eecbfd222c9b973b7077e914415795a27743a88a67d6375c461a8c"
+    },
+    {
+      "path": "flight/esm/sdk/CameraControls.hx",
+      "sha256": "3969ce04636935e71cc7a8494bed8219ff3a7808e36171298e45418c87e61c20"
+    },
+    {
+      "path": "flight/esm/sdk/Capture.hx",
+      "sha256": "373e2d9b55442309769821d733f0947ae0273e8ca1f5cfcd04a826eef028525b"
+    },
+    {
+      "path": "flight/esm/sdk/Clip.hx",
+      "sha256": "c7bf8d6043e8135855582b27770f73ff8b20ac58bbcb9ef9173b59de2cc465ec"
+    },
+    {
+      "path": "flight/esm/sdk/Clipboard.hx",
+      "sha256": "7c6c0cc56e083a4d148e7d7dff2dc7601400b2886b1cc378165a4feb52842d89"
+    },
+    {
+      "path": "flight/esm/sdk/Clock.hx",
+      "sha256": "980d01fb107e8297532ceeb0202300a3a5d7ab55d7e36c74674d419a71d8108b"
+    },
+    {
+      "path": "flight/esm/sdk/Collision.hx",
+      "sha256": "c52f76e09749b5b5656e1b7a13ddb6f55bec378f1fdc868c378f4ebf9107438a"
+    },
+    {
+      "path": "flight/esm/sdk/Color.hx",
+      "sha256": "e8270048670eddcc042992f297d581cf434f8cda2faf89c9c25adfcb06664d83"
+    },
+    {
+      "path": "flight/esm/sdk/Command.hx",
+      "sha256": "cbb31479f35c15ad5f363f0cda9821ef1c8d73b26121f1e692dc732c7e81c913"
+    },
+    {
+      "path": "flight/esm/sdk/Compression.hx",
+      "sha256": "0b02f63f71ad1d834fa614e2cc9c185a38d8e585a2fa06f5731f6e7a63a7cd3e"
+    },
+    {
+      "path": "flight/esm/sdk/Connectivity.hx",
+      "sha256": "b6068f99eec2c92f9a2434e031a8cc549a95d71b04f0835cc2487916674da57d"
+    },
+    {
+      "path": "flight/esm/sdk/Contract.hx",
+      "sha256": "9b3a0d186b866b9cff441a93c124109b32063467eaf38e9d49ccd82cb4f88f35"
+    },
+    {
+      "path": "flight/esm/sdk/Debug.hx",
+      "sha256": "822e8656e69b22d980481083a17bc35134ed920b2910410c54181eecc1c27a72"
+    },
+    {
+      "path": "flight/esm/sdk/Device.hx",
+      "sha256": "d6c80d518ebd1635dc8acf132db2cb62342c05d9106a192e0b0ab16f741d7a58"
+    },
+    {
+      "path": "flight/esm/sdk/Dialog.hx",
+      "sha256": "bcc87a7705dc5e36e4feec705fa15e7786720114793693cbbcc1c88ac5f42d7c"
+    },
+    {
+      "path": "flight/esm/sdk/Easing.hx",
+      "sha256": "a5cbe5c8d561cd5a7970397bc731d0279651733abf1ff32b52e2e4c7c85f562d"
+    },
+    {
+      "path": "flight/esm/sdk/Effects.hx",
+      "sha256": "dbda6b72f7259e27c1208352819f5fe234050272275abbd6b870fe854981aeb7"
+    },
+    {
+      "path": "flight/esm/sdk/EffectsCanvas.hx",
+      "sha256": "6a51ebc2c7f9e3b54414dc005a0fa352fd7f8e1fca9cee3b36c672137a46e7d7"
+    },
+    {
+      "path": "flight/esm/sdk/EffectsGl.hx",
+      "sha256": "2433319e25c9a1f38b3322d569bfd497dabbb216875fea027fad748b20480dfc"
+    },
+    {
+      "path": "flight/esm/sdk/EffectsWgpu.hx",
+      "sha256": "73bec621b23b84d4eb8fadee527bc7e23ef9e22fb47538585bc3276827e81ff7"
+    },
+    {
+      "path": "flight/esm/sdk/Encoding.hx",
+      "sha256": "3cd3b6d9f2ea0f8ac2f71c9252ec08d4884599c754d5e1ff8dd53030479f9766"
+    },
+    {
+      "path": "flight/esm/sdk/Entity.hx",
+      "sha256": "adb47faa8b3e46f8ae1a114e64bc61f383d16f001a5fdfa9a8d624d1c197e177"
+    },
+    {
+      "path": "flight/esm/sdk/Filesystem.hx",
+      "sha256": "e33ad15583eb399a1a261fee5d0d852f9dc92529b66116e38dbbeda395b524ed"
+    },
+    {
+      "path": "flight/esm/sdk/Flow.hx",
+      "sha256": "7ea903d287813aaaf4c97de158235776b51e6f71616d91d05335a09a3c05082a"
+    },
+    {
+      "path": "flight/esm/sdk/Font.hx",
+      "sha256": "056edc2c704eb0189494557add819d61213e532d841d8276470e2bafbce225e4"
+    },
+    {
+      "path": "flight/esm/sdk/FontFormats.hx",
+      "sha256": "2824b9bf64fcf3f3986dc5bbe8087cb1ad089deea8db7e5d5de9c8f3505f4327"
+    },
+    {
+      "path": "flight/esm/sdk/Geolocation.hx",
+      "sha256": "4a8d5d740d023a862f9224081b9f15f84e8def47dd980c4a76b13a654c7239a4"
+    },
+    {
+      "path": "flight/esm/sdk/Geometry.hx",
+      "sha256": "c638797a59e82362f0f4761ddf4ddc6dbcf9734e849c3bf57f30ff5f8adabf4b"
+    },
+    {
+      "path": "flight/esm/sdk/Gizmo.hx",
+      "sha256": "8b6938f1a72d003d06fd6ca0ed9fe3e793e3e6aec1232a6eb3506b27cf3d7cea"
+    },
+    {
+      "path": "flight/esm/sdk/Glyphatlas.hx",
+      "sha256": "4b1002de0fadf32c94e2495e10040d078e5c31f4fd9b4a8bad80dedc5e2ac173"
+    },
+    {
+      "path": "flight/esm/sdk/Gui.hx",
+      "sha256": "d969017785e2c25f34ba2a3b532ca9dc41f5f371def96988d397022a4134cc4a"
+    },
+    {
+      "path": "flight/esm/sdk/Haptics.hx",
+      "sha256": "7679ccd8e117cd716efcd1d781e78769a665c8911f67a7b32ae8c0aad0bca0c9"
+    },
+    {
+      "path": "flight/esm/sdk/Host.hx",
+      "sha256": "07fb3e02f1cdb3ec85fafa249e52bd90cb707cd2a08fd49f5af27d18582b0ee4"
+    },
+    {
+      "path": "flight/esm/sdk/Image.hx",
+      "sha256": "f8374804494ae3470604a85f674a0f4cf87c9b38f35c5b278d0b9ff713e31f87"
+    },
+    {
+      "path": "flight/esm/sdk/ImageCodec.hx",
+      "sha256": "0584f531353ed9b9a1fb4bf04fc02e4118a946a5b9c1f3e773c4f9d20ec3e6cf"
+    },
+    {
+      "path": "flight/esm/sdk/Importdiagnostics.hx",
+      "sha256": "4d5241524a02fdcb23974fa35a5e8013cb0c1a5ea602f1d943a047f654814eb8"
+    },
+    {
+      "path": "flight/esm/sdk/Input.hx",
+      "sha256": "a99d1ec391703810b97c4a4b56de48025a4d99f92a3f31826d9ac017f4ac3895"
+    },
+    {
+      "path": "flight/esm/sdk/Interaction.hx",
+      "sha256": "df4d735937e98e9d997bc2c93d16635af36adb9493de1888d7c5f3734097a9ac"
+    },
+    {
+      "path": "flight/esm/sdk/Intl.hx",
+      "sha256": "fe4306a0d17668508d1f69ece16b60d6755726b096ec12628b2bc3434044f125"
+    },
+    {
+      "path": "flight/esm/sdk/Ipc.hx",
+      "sha256": "e8e0cead65ca2ec0423397a6a484560645884f7996d5530ab4e28227a8b85737"
+    },
+    {
+      "path": "flight/esm/sdk/Keyboard.hx",
+      "sha256": "6485cf8a725a8b218c3b177e6ed99ee0cda15e06217dc1bbc495b5940803bda3"
+    },
+    {
+      "path": "flight/esm/sdk/Layout.hx",
+      "sha256": "09b7c7fa2c976c56ef7b1d6e3d93c1db89540052dc7649eb00c2d7c7aec427fc"
+    },
+    {
+      "path": "flight/esm/sdk/Lifecycle.hx",
+      "sha256": "916ced4a78b2ab03c1a9223299a8a0b64675741237a700105a596ebba936f2fe"
+    },
+    {
+      "path": "flight/esm/sdk/Lighting.hx",
+      "sha256": "6c6670991126cadd27ca07aa1d2902724e06c173a7ef3914dae545ae9cc41352"
+    },
+    {
+      "path": "flight/esm/sdk/Loader.hx",
+      "sha256": "8e6bad924e4b56cb86d69a7279e459933051718a4100a7db75c121195f8f4e12"
+    },
+    {
+      "path": "flight/esm/sdk/Log.hx",
+      "sha256": "5c96ee403a57f21c9a338097aa6d5c443fa3ba960141a886ff1f48ff8931bbf1"
+    },
+    {
+      "path": "flight/esm/sdk/Materials.hx",
+      "sha256": "f7d91464a521db964b56a417628b9e2141d48fa48c5f0443b1caa84d1455a723"
+    },
+    {
+      "path": "flight/esm/sdk/Math.hx",
+      "sha256": "c5bb4c18fa53efdd3077103ff3831094fafe6db9153bfb5ebc8bb12231b196ec"
+    },
+    {
+      "path": "flight/esm/sdk/Media.hx",
+      "sha256": "af557300b18f30758b7f6df2beb3e9fda809b9ac9b5261bf97cb64df432e527d"
+    },
+    {
+      "path": "flight/esm/sdk/Mediasession.hx",
+      "sha256": "4dd4f64ea193bcfb25ce7537343726839f9be9cc56b131bf1a0bf155674c38cf"
+    },
+    {
+      "path": "flight/esm/sdk/Menu.hx",
+      "sha256": "3872eaa281f0ecd392972a0e263bc6e85d9aea886b41df930653c18d73888d7a"
+    },
+    {
+      "path": "flight/esm/sdk/Meshgeometry.hx",
+      "sha256": "5788802aa4c6ee1e285e5ed5d95bc401aefe223ea24865bbb1174b58f044cd1f"
+    },
+    {
+      "path": "flight/esm/sdk/Midi.hx",
+      "sha256": "bfdad85652bf833cdd520cb61cc1764e5e0e26e6c8a63f62028c410a64f1de3d"
+    },
+    {
+      "path": "flight/esm/sdk/Motionpath.hx",
+      "sha256": "53c2a4e901e6f58f357863ffc12c87e753773f139f2f7fb663c3e18048c6b7da"
+    },
+    {
+      "path": "flight/esm/sdk/Movieclip.hx",
+      "sha256": "d54754dc7637288d1ffc57d91e89f9a393d1d362fb736a909a3b257045d23642"
+    },
+    {
+      "path": "flight/esm/sdk/Net.hx",
+      "sha256": "05feeb3e4685772caf7a987e03d12d831e74d70b65d3d0e22dc27176e8ec2e44"
+    },
+    {
+      "path": "flight/esm/sdk/Node.hx",
+      "sha256": "fc55116dc32efdf3eae0197e80118ee2875fabe067741f7814b277c024e6c225"
+    },
+    {
+      "path": "flight/esm/sdk/Notification.hx",
+      "sha256": "f7fbbf3b03ffb7ca464967ec03273b388ad561a5caec8ca96390dced23cd1dc2"
+    },
+    {
+      "path": "flight/esm/sdk/Particleemitter.hx",
+      "sha256": "0c53b217536fb40f4b6266ad512c3d52f9829211ba1fc40143303e49166639e6"
+    },
+    {
+      "path": "flight/esm/sdk/Particles.hx",
+      "sha256": "eb0165588e296bc87242080458b504a701eb4ef466a18f7be397f9e9bba5b70d"
+    },
+    {
+      "path": "flight/esm/sdk/ParticlesFormats.hx",
+      "sha256": "980b5b3533061ac9a9de3b345a6b70a06c2341c7af5c5667c021fd2cb780917f"
+    },
+    {
+      "path": "flight/esm/sdk/Path.hx",
+      "sha256": "dbff43b4a9ea406023066229b6f46063cdb040825d5ff39823c633359eae2f0d"
+    },
+    {
+      "path": "flight/esm/sdk/PathBoolean.hx",
+      "sha256": "ca4dfea7b7050738428a6840d13863182c027f858808df2b56188cc49fdfb512"
+    },
+    {
+      "path": "flight/esm/sdk/PathFormats.hx",
+      "sha256": "5ff7484a90406117b71b986beb97e9bdb3aae50b14675670c6ed326fe350f45a"
+    },
+    {
+      "path": "flight/esm/sdk/Permissions.hx",
+      "sha256": "79dc10e1e4ea93335ca01d4991239c758601dd85c9143c66ef8dd594a283f0f9"
+    },
+    {
+      "path": "flight/esm/sdk/Physics2D.hx",
+      "sha256": "cf12ca2da8144d53e45c78482207e051ec72a0836f3bc174c81cd5a5a7817b31"
+    },
+    {
+      "path": "flight/esm/sdk/Physics2DAbi.hx",
+      "sha256": "6ff76cb2eddc7f0ca62b7733015666705b71792aa328f483d093fc6eca5a8047"
+    },
+    {
+      "path": "flight/esm/sdk/Physics3D.hx",
+      "sha256": "5d2fd68006002bb6b5ee86e1b0424695a76d12287ccbb3fbbebcc3a66b1e3f45"
+    },
+    {
+      "path": "flight/esm/sdk/Physics3DAbi.hx",
+      "sha256": "772767acede79b56ce3305607b7fa82952dca85fbaaf31da32eb760c16301214"
+    },
+    {
+      "path": "flight/esm/sdk/Picking.hx",
+      "sha256": "f28e486f74c7c284d3ee54c6d2c1ac59a1833a1e2f21a183b3b6886d09ed1f76"
+    },
+    {
+      "path": "flight/esm/sdk/Platform.hx",
+      "sha256": "11af06c2bad3c9eb19200e3f41a155a78089cadfc6a518958254cd3f729dbba0"
+    },
+    {
+      "path": "flight/esm/sdk/Power.hx",
+      "sha256": "f04e493c5a0e262a85dd0404eb55124091b48fe69f8f5cd679d8609bb9cc2141"
+    },
+    {
+      "path": "flight/esm/sdk/Preferences.hx",
+      "sha256": "c5985b407fab2c5b08fd68e2db799b4930f36e37661e6b846b26d1f07fa61a01"
+    },
+    {
+      "path": "flight/esm/sdk/Protocol.hx",
+      "sha256": "0748dc4cccdbc0f7bf3a678efe4ed05a75080079dfb9d38c6fd158d328b73a1c"
+    },
+    {
+      "path": "flight/esm/sdk/Quadbatch.hx",
+      "sha256": "cb91f2c41a9acd3d24d2fe28f1b89df123a934066cb3d8598642bd795dbaed77"
+    },
+    {
+      "path": "flight/esm/sdk/Registry.hx",
+      "sha256": "c8c4284db07fb4b86e8fd92f422eaaa6f64a6c412815b756a2643d2cc50e51cb"
+    },
+    {
+      "path": "flight/esm/sdk/Render.hx",
+      "sha256": "438f74ef706c6d2de1a63d6168cd885c97d6d32ba6e7d0816672b672ae8863e8"
+    },
+    {
+      "path": "flight/esm/sdk/RenderGl.hx",
+      "sha256": "bb8b3d37b5fcfb596850b6f8635e278c94d70c043bea1e61b124667daf9c968f"
+    },
+    {
+      "path": "flight/esm/sdk/RenderWgpu.hx",
+      "sha256": "94526b2915494b896a43c613c9589b6c7d8a117a0e93b58deedba85ebc26f487"
+    },
+    {
+      "path": "flight/esm/sdk/Requirement.hx",
+      "sha256": "8600c7734a312834c9d8ad6228dc98fd6680de597df8722732b4446cb5f53d7a"
+    },
+    {
+      "path": "flight/esm/sdk/RequirementCatalog.hx",
+      "sha256": "efa7fa318783a8a167bf727062a558a3f538eb01f019f7902f27172c94d4441c"
+    },
+    {
+      "path": "flight/esm/sdk/RequirementCodegen.hx",
+      "sha256": "2ae6847ff2beaf43f343da2346db42db8204148d2de81981e84cf8ab1eca8a7f"
+    },
+    {
+      "path": "flight/esm/sdk/Resource.hx",
+      "sha256": "31c4a17fe118a2c0922a8fa61fb26faaa03ab7ba516804866c60fdb11a7d5fe1"
+    },
+    {
+      "path": "flight/esm/sdk/Scene2D.hx",
+      "sha256": "b646a3d88b26dbf0638ff3b824699d1ca668186f54803cc989189c7c4069cfde"
+    },
+    {
+      "path": "flight/esm/sdk/Scene2DCanvas.hx",
+      "sha256": "5e4e8c4c006e2bd1860a82926e0bf198db5ff49155f2d4bb7c3ffbe166e2950e"
+    },
+    {
+      "path": "flight/esm/sdk/Scene2DDom.hx",
+      "sha256": "b117d3f2b16cb2f527c22ab18dcd574c5c6feaf8c049d6583bf7d5d8c6299f90"
+    },
+    {
+      "path": "flight/esm/sdk/Scene2DFormats.hx",
+      "sha256": "29d4a93c32329d8f8c06f877c6130dd950ca8926f8295d198928478b5a82fc97"
+    },
+    {
+      "path": "flight/esm/sdk/Scene2DGl.hx",
+      "sha256": "77ebabd05e80851f0c87e0d800db0b19dc1880af2569cc387f9efa66fa267b12"
+    },
+    {
+      "path": "flight/esm/sdk/Scene2DResources.hx",
+      "sha256": "8eaed918347318ac4193acc1dc47c3a2141bcad3b1ec6f24328b714ec19c5549"
+    },
+    {
+      "path": "flight/esm/sdk/Scene2DWgpu.hx",
+      "sha256": "6dbaf61b6de286d75f9267db1c18d8c147e967660761048cedf488d92714d451"
+    },
+    {
+      "path": "flight/esm/sdk/Scene3D.hx",
+      "sha256": "736ca52e1245099db71d62dd0fdb7d57f2eaabd31918962b0bae4232018ff036"
+    },
+    {
+      "path": "flight/esm/sdk/Scene3DFormats.hx",
+      "sha256": "724d67456a02847ab34d3334a1f159c6e24af986597c625ddde48f93b834df16"
+    },
+    {
+      "path": "flight/esm/sdk/Scene3DGl.hx",
+      "sha256": "157ed20cad9ce4040058c829ebe1bedb45655d1ab368fe920ff326a256502920"
+    },
+    {
+      "path": "flight/esm/sdk/Scene3DResources.hx",
+      "sha256": "cfbf564360837e9a60fc69664cbea999b4f6077d4f80966138357f4a0f68104d"
+    },
+    {
+      "path": "flight/esm/sdk/Scene3DWgpu.hx",
+      "sha256": "ca1c63a152b82b90a69a0217150438e4e1823ceb3f8d6b5a74dad0dd1370ce8f"
+    },
+    {
+      "path": "flight/esm/sdk/SceneDocument.hx",
+      "sha256": "bd7e6862bb4445ca4ea508a3c9d8dfe4a7a327ba8329d6165eea2b6839141b12"
+    },
+    {
+      "path": "flight/esm/sdk/Screen.hx",
+      "sha256": "64189dc151c098529e7a52efefcde74766e9d15861eb143082f4b1dfac1a00d0"
+    },
+    {
+      "path": "flight/esm/sdk/Selection.hx",
+      "sha256": "ad088ed0d74b42d19d7eee0c462b077d698d9c17b8bdb1210d93e9bb3ab2e809"
+    },
+    {
+      "path": "flight/esm/sdk/Sensors.hx",
+      "sha256": "50fee8be685582f0fe00457cd6f085d34532a4bca7cce20a6d04cd871df0f048"
+    },
+    {
+      "path": "flight/esm/sdk/Shading.hx",
+      "sha256": "5833f46616dafefa06a4ef5a49b618f1124418caf09fd251b12ae965d30de3df"
+    },
+    {
+      "path": "flight/esm/sdk/Shape.hx",
+      "sha256": "209beeeec3ded33daa34c7e94d32b689aa69bc693be3282322b8e2bad65b2cf5"
+    },
+    {
+      "path": "flight/esm/sdk/ShapeFormats.hx",
+      "sha256": "1411bc4744de00875d53c8777a5afaeb4f59bd4202cfa4217f19713b2411f245"
+    },
+    {
+      "path": "flight/esm/sdk/Share.hx",
+      "sha256": "53e3ec4231a88c68635de6f863d6b9b69d8b18f31fb4e59db5339e4c21db1007"
+    },
+    {
+      "path": "flight/esm/sdk/Shell.hx",
+      "sha256": "1ae34bff81a038a73b5b3913c101426e6dacf259e082331a40939067b968866a"
+    },
+    {
+      "path": "flight/esm/sdk/Shortcut.hx",
+      "sha256": "70a15283abcdb4b2a71116f6f2648e740f16f245d6eb1a6382c9b7c09e328d0c"
+    },
+    {
+      "path": "flight/esm/sdk/Signals.hx",
+      "sha256": "916a0479722c4766effd8704c0bdff3ef08063c35f5926f8a5f7b93f906835cc"
+    },
+    {
+      "path": "flight/esm/sdk/Skeleton2D.hx",
+      "sha256": "84e94ae82b57dffe9de791f87c88cdc66934e515c5408d6b3aef69a5e8e68ae9"
+    },
+    {
+      "path": "flight/esm/sdk/Skeleton2DFormats.hx",
+      "sha256": "431f94bafb8a5b50032b1be4327b165627d18f8700538f89bd40eb06de301f8d"
+    },
+    {
+      "path": "flight/esm/sdk/Skeleton3D.hx",
+      "sha256": "b740125365e357a1cd8b71d6f936a80be2d2a3ae695b3edf03a10b85ebefdade"
+    },
+    {
+      "path": "flight/esm/sdk/Snapshot.hx",
+      "sha256": "a0c87da8c631ea3ea4e14b580db09723707e2dd64f757bab89e67c51d2afb2f4"
+    },
+    {
+      "path": "flight/esm/sdk/Socket.hx",
+      "sha256": "603b6a2e0d0de970800dd3252c977026ad832412ccc8f24d667ba87cd3dcf9bb"
+    },
+    {
+      "path": "flight/esm/sdk/Spatial.hx",
+      "sha256": "c839c721691e198a3816ec2580b437ca7ae16971b6195955f1c67a1ea6600c6a"
+    },
+    {
+      "path": "flight/esm/sdk/Spring.hx",
+      "sha256": "1c09fee10e049f5edc2f18636ac49f6ee429a477eb160df3b7031ae490e25fe0"
+    },
+    {
+      "path": "flight/esm/sdk/Spritesheet.hx",
+      "sha256": "bc48ffa7cfdce22e18d8707efea36b7b4f526da5e97fc42f5397636aa796bdbd"
+    },
+    {
+      "path": "flight/esm/sdk/SpritesheetFormats.hx",
+      "sha256": "272c047fee97e4482ef2bc6b69c6a28e4f4e6261fb38128704c79f82d7007a17"
+    },
+    {
+      "path": "flight/esm/sdk/Statechart.hx",
+      "sha256": "bc2bf7610524c7b5f81397610509f53ea715b65b457daf9367f264dc70181f86"
+    },
+    {
+      "path": "flight/esm/sdk/Statusbar.hx",
+      "sha256": "8e1a9e2ec40265a0f60446787ff4466a0dc28b2517308b4161356cb966a7ad24"
+    },
+    {
+      "path": "flight/esm/sdk/Surface.hx",
+      "sha256": "fd88a5eda0a2ab26caf65c484a8b0b704d718ad1d0306e1c691d64e6305573dc"
+    },
+    {
+      "path": "flight/esm/sdk/Swf.hx",
+      "sha256": "58721afbd365d1132e0b22f60610e826745d115dca9036e5ed5917e1f9a2f344"
+    },
+    {
+      "path": "flight/esm/sdk/Text.hx",
+      "sha256": "aef426938dd3329ced7a491f268ab1629b18d59d5e76df88ef600720e14b7c6b"
+    },
+    {
+      "path": "flight/esm/sdk/TextMarkup.hx",
+      "sha256": "1b79b7ef2d03e06a8d36aac5b598fcd86477b365b4c64409c65ed7246bb31682"
+    },
+    {
+      "path": "flight/esm/sdk/Textbidi.hx",
+      "sha256": "b8392a1990b1e2bbf2513e2d182268efd86870128962541f8bb538f2b9c1992c"
+    },
+    {
+      "path": "flight/esm/sdk/Textformat.hx",
+      "sha256": "eae69f25cf5b2b6972304546c1479e45604096b4cbbfbb22c22f1ce059652b31"
+    },
+    {
+      "path": "flight/esm/sdk/Textinput.hx",
+      "sha256": "30a8ad233f963f83e85c4bdbb891d35997416b9423b94e5d6df509f20ad906b1"
+    },
+    {
+      "path": "flight/esm/sdk/Textlayout.hx",
+      "sha256": "74421f39a7f09f3ea6515a207199c1fe25fe95fbc0ca0a14c2d00eca9236fdab"
+    },
+    {
+      "path": "flight/esm/sdk/Textsegment.hx",
+      "sha256": "384423d1474a5f4e9f89909211349c73004477a91ff2cd6ee238a39c0f5e55e9"
+    },
+    {
+      "path": "flight/esm/sdk/Textshaper.hx",
+      "sha256": "bfc5cf836a0fb36902d2da62023324e6d26f77ed442ec2722e18be33f5acf5ae"
+    },
+    {
+      "path": "flight/esm/sdk/Texture.hx",
+      "sha256": "752465af264e279db1b93964b65bfbd3c8eeb4eb92e8dff5806a8cef74d8befe"
+    },
+    {
+      "path": "flight/esm/sdk/TextureFormats.hx",
+      "sha256": "67348c1ab23039dadddb90aa80510a12d95c0a900be9b201281b5a2031646835"
+    },
+    {
+      "path": "flight/esm/sdk/Textureatlas.hx",
+      "sha256": "b4c59b2c40721883ed4f07afd8c888b7c84a65f4b3826ff88de7153bdaa25374"
+    },
+    {
+      "path": "flight/esm/sdk/TextureatlasFormats.hx",
+      "sha256": "9f892c1f092df403b6c118cc3e8e0a5b5a92b7498de92ba02139b1ac84179bcd"
+    },
+    {
+      "path": "flight/esm/sdk/Tilemap.hx",
+      "sha256": "c94cf5da781d6f737bcb4c34d1059c43c386f37c58ffb82702f3d6ad9532f6f7"
+    },
+    {
+      "path": "flight/esm/sdk/TilemapFormats.hx",
+      "sha256": "7db97d36efa0cabc57f7c984b47b98469302fe0d042b9c97cc60a0f77ead56f9"
+    },
+    {
+      "path": "flight/esm/sdk/Timeline.hx",
+      "sha256": "0637cf7bbf1edfcf6778b172fdfae7743e795d7485775c72d869982940b3b0a6"
+    },
+    {
+      "path": "flight/esm/sdk/Tokens.hx",
+      "sha256": "e847f9eb1e0604b9d6486660e10ad19d4ab218b19a00b3e4a3d7e22c877df329"
+    },
+    {
+      "path": "flight/esm/sdk/Tray.hx",
+      "sha256": "ecea8dd7467b74efe3183e100e875c8dee1338c3fb15adc21db79e78f1ddef33"
+    },
+    {
+      "path": "flight/esm/sdk/Tween.hx",
+      "sha256": "3189cc7618d2da8521d412d3539d17980a94e992c24cf13c7e7dbf5d8d77ba16"
+    },
+    {
+      "path": "flight/esm/sdk/Updater.hx",
+      "sha256": "ca2e7abf0b72a918d33ff3431a2d1f506ec0d25adea175f88d23ea6b57dfc00c"
+    },
+    {
+      "path": "flight/esm/sdk/Useragent.hx",
+      "sha256": "468cc37824532a2b4b1f1533ed9f2dfaf5b45f044ebc3e9b97f24f9a27f7e5ee"
+    },
+    {
+      "path": "flight/esm/sdk/Velocity.hx",
+      "sha256": "abfb063b7cc513d502e886d7f839146ffed5f29fd20f030fd46913e954d04fa1"
+    },
+    {
+      "path": "flight/esm/sdk/Video.hx",
+      "sha256": "770636875b42b4e5f8d7f852b77b2aee908eecdccebaf2b96c7b61e690e25768"
+    },
+    {
+      "path": "flight/esm/sdk/Webcam.hx",
+      "sha256": "6e18e41516e7fd7d38b3a94f99cd30564c75f61505bd626e79d5fe4bdd53cef8"
+    },
+    {
+      "path": "flight/esm/sdk/Xml.hx",
+      "sha256": "4cb877ce42be3059b01ab4b88c6f56e3bc9017530cb47a9aba728d3647497004"
+    },
+    {
+      "path": "flight/esm/selection/Contract.hx",
+      "sha256": "0044e5b140fb6d22f8de440bf9d4fa4734cd54e6b05eb67359371e2f15d77f78"
+    },
+    {
+      "path": "flight/esm/sensors/Contract.hx",
+      "sha256": "7d6b491e09431ad41e7628e210d54b6e966519caf4bc3ceb88ca517bf4098cf4"
+    },
+    {
+      "path": "flight/esm/shading/Contract.hx",
+      "sha256": "f9063806436876226615af60e0f0287e856ec806b295461cbd406c3196d0f99a"
+    },
+    {
+      "path": "flight/esm/shape/Contract.hx",
+      "sha256": "4e36d10b0804070cf9a9299d95d4b98c42d061d93690b9f3384f6df6797e4dd2"
+    },
+    {
+      "path": "flight/esm/shape_formats/Contract.hx",
+      "sha256": "a030640066b3b07ab61dc59f9d1e4e9703e55b45805be4ca486c3a350f522864"
+    },
+    {
+      "path": "flight/esm/share/Contract.hx",
+      "sha256": "c3cbb95d4bd6172e8d8c4ea551d0ba7ac70c20553b2e413e31881d4e612457d1"
+    },
+    {
+      "path": "flight/esm/shell/Contract.hx",
+      "sha256": "8c0d7b12d4195f50b509a93b54d171f68dd9ac57cd8c1ca6db057a5f8c2cb7de"
+    },
+    {
+      "path": "flight/esm/shortcut/Contract.hx",
+      "sha256": "5103d61b0423a67741fb5a133cd8e78de76be7213fec1b019adfb264c3c5aa63"
+    },
+    {
+      "path": "flight/esm/signals/Contract.hx",
+      "sha256": "c1a7f65e79565321d786b36cade6f5900b72e1dd8f4f7e464b5db374fa513cbb"
+    },
+    {
+      "path": "flight/esm/skeleton2d/Contract.hx",
+      "sha256": "588ef363e96baddb52f9ac04660ee5aa2ceee6642bf9e8a1a9543d7527d0920d"
+    },
+    {
+      "path": "flight/esm/skeleton2d_formats/Contract.hx",
+      "sha256": "080a19bdd07d658c6a5b12e8ef652150a5225adcc19415f737bce9aaa3ec784b"
+    },
+    {
+      "path": "flight/esm/skeleton3d/Contract.hx",
+      "sha256": "99f07167d30e21ba67de7fc1c88c25fd35d1a360c23ad12ee547cdf9847bcc1a"
+    },
+    {
+      "path": "flight/esm/snapshot/Contract.hx",
+      "sha256": "6523389aa13ebd93a4fc83e1e3675449b111c1b6889d93c6d87032ebb076284d"
+    },
+    {
+      "path": "flight/esm/socket/Contract.hx",
+      "sha256": "2279b22d247682533e1798b96595a0fdddb954324f87b1a66bd7f5a17e0878a3"
+    },
+    {
+      "path": "flight/esm/spatial/Contract.hx",
+      "sha256": "2aa233b40b4aee63f7e4ad698d43b8e50e1751ae69011d8e86c60145a9a60c74"
+    },
+    {
+      "path": "flight/esm/spring/Contract.hx",
+      "sha256": "a43ebf201bc6ac50aadcf15f33193f5d12494d2a0df2f00e99886fb7b099983c"
+    },
+    {
+      "path": "flight/esm/spritesheet/Contract.hx",
+      "sha256": "24db2a86f3ad2ec76bba1f2768a453376640316ee20fbba897c2656cd0073ae6"
+    },
+    {
+      "path": "flight/esm/spritesheet_formats/Contract.hx",
+      "sha256": "6b105cecafe98be08678f0334adc36f41b749ee95f09e2932001df162c489632"
+    },
+    {
+      "path": "flight/esm/statechart/Contract.hx",
+      "sha256": "d9b5728205444c98b58e7299afe7afd9c012c7e1445f253e897b60c902c0ce47"
+    },
+    {
+      "path": "flight/esm/statusbar/Contract.hx",
+      "sha256": "97446b9c4d0fedd536a042da72eabf2bfa5c8c7bd77252a0b6e9f4693a518952"
+    },
+    {
+      "path": "flight/esm/surface/Contract.hx",
+      "sha256": "9ed56063283bdff404a4827cb3f59fc207e96baaf93049e6e7fca285819e4b2c"
+    },
+    {
+      "path": "flight/esm/swf/Contract.hx",
+      "sha256": "ec9aba5f7a351827a49bf2115d5b4844ad04ff3a3d946706a773ee3785f60102"
+    },
+    {
+      "path": "flight/esm/text/Contract.hx",
+      "sha256": "61892793b924a193d73d62f217f5dc8f73f1eeced4a49cd308de3c84b04a0188"
+    },
+    {
+      "path": "flight/esm/text_markup/Contract.hx",
+      "sha256": "21ef3db3e41bb070871268e0174ce24115a16b294bd7b2f9216bfc743dd7a0ad"
+    },
+    {
+      "path": "flight/esm/textbidi/Contract.hx",
+      "sha256": "8eeb3272fd1408c5163417b5045686505402b3fcd2e87b9f214be827a8044fbd"
+    },
+    {
+      "path": "flight/esm/textformat/Contract.hx",
+      "sha256": "a8bfd6cd84ca0c79a29b798b2e0316e80df627504959f104ce240ec037753f01"
+    },
+    {
+      "path": "flight/esm/textinput/Contract.hx",
+      "sha256": "e6f2b089da24c1d69489a34f4a22f87cb3638006a8d08b6e4c58a74531fdf0b7"
+    },
+    {
+      "path": "flight/esm/textlayout/Contract.hx",
+      "sha256": "e449fbb647d2f801b44103399decb69bc8d31091602c12d0bfa9d596037a4eb3"
+    },
+    {
+      "path": "flight/esm/textsegment/Contract.hx",
+      "sha256": "0b55e7c696db9856a0306321c4319fe70d31aca64077be66b087f03311ada9da"
+    },
+    {
+      "path": "flight/esm/textshaper/Contract.hx",
+      "sha256": "f75e3ed102198725e25deef67929c7b5c99ecd49291eb2a72e77be83ebea4c76"
+    },
+    {
+      "path": "flight/esm/texture/Contract.hx",
+      "sha256": "d773b4059ed8ae12ad2827b1b8474e2d32f8278ed9ffb2bf50bbce904e101728"
+    },
+    {
+      "path": "flight/esm/texture_formats/Contract.hx",
+      "sha256": "53517b87f64aa96f54c8050e8082cc177881c4c0f3da0747cf6e43b5f089c92a"
+    },
+    {
+      "path": "flight/esm/textureatlas/Contract.hx",
+      "sha256": "40016ba2ea01f8517a74abd0d3afdbd7409e219d69bcf7c324a247f215d4445c"
+    },
+    {
+      "path": "flight/esm/textureatlas_formats/Contract.hx",
+      "sha256": "97b184bba060d519a88d1a0274e00356c891f721d22253422856a8d048dbc613"
+    },
+    {
+      "path": "flight/esm/tilemap/Contract.hx",
+      "sha256": "a9f7e0a1446f1974b953cd3604c314f73c8ec84f5f5dbea99812421e49e04f1e"
+    },
+    {
+      "path": "flight/esm/tilemap_formats/Contract.hx",
+      "sha256": "d176fd9b25ebc53be0e6351a560cc85af967734a15628417b361c96446616dab"
+    },
+    {
+      "path": "flight/esm/timeline/Contract.hx",
+      "sha256": "c76f38846401671317634e56c14e9784f0ee9dc92ccf013e0660f59315136e6a"
+    },
+    {
+      "path": "flight/esm/tokens/Contract.hx",
+      "sha256": "2f2ee08b042078b192db33304176816a1fd6b08de381e05f37c6ee071cb5dd7e"
+    },
+    {
+      "path": "flight/esm/tray/Contract.hx",
+      "sha256": "7be41bacb8f012c558d9d3a4eb01d613a0984b549fb43b666f9683bdda2acf0e"
+    },
+    {
+      "path": "flight/esm/tween/Contract.hx",
+      "sha256": "4956cc4a7ae37586f4c86116294c4c6ecbcbfa91fa74c53844ce84a64cf718eb"
+    },
+    {
+      "path": "flight/esm/types/abc/Types.hx",
+      "sha256": "fc265332bd23aa9d1b9495960ce41b6723b6c8be253b02e6a51931c98d8b605e"
+    },
+    {
+      "path": "flight/esm/types/abc_contract/Types.hx",
+      "sha256": "9ceaa8a73047776c0ccfd4a61b2c923186fc5eef66dcf12d47f52bef80db2825"
+    },
+    {
+      "path": "flight/esm/types/accessibility_contract/Types.hx",
+      "sha256": "20384c3d8c9011f8eab15808964ebfc3d5571472e907dd1901cc489dbc0d60a8"
+    },
+    {
+      "path": "flight/esm/types/adjustments_contract/Types.hx",
+      "sha256": "e0dd8d09649f36a28ad18b04e03371aed74d77488fcec97582c1ff7b61bd7efc"
+    },
+    {
+      "path": "flight/esm/types/animation/Types.hx",
+      "sha256": "35cc48f455d3e4725ee7c428d1f601a8fcb60869ffe74a180f25bbe65f412982"
+    },
+    {
+      "path": "flight/esm/types/animation_contract/Types.hx",
+      "sha256": "c4d05f0b95df8dd9e207835bd8ed58e4082407ca274dde4676bb4a7f5925540d"
+    },
+    {
+      "path": "flight/esm/types/app/Types.hx",
+      "sha256": "7f4e4c61f92866b28c79c7eaa19b040171bc4a7dac1d577c3bbddaa5d9867722"
+    },
+    {
+      "path": "flight/esm/types/app_contract/Types.hx",
+      "sha256": "4bdb16c9301e5f6dae5c2a699e995a95d98fc9daa9e0d895719db553fd813899"
+    },
+    {
+      "path": "flight/esm/types/assets_contract/Types.hx",
+      "sha256": "b1102970e9df2ca362efde583c5ba7fb257c464ee128b5b47c2897c05ba28ee4"
+    },
+    {
+      "path": "flight/esm/types/audio/Types.hx",
+      "sha256": "5177ef6606093679ba7fb18e279295772ad9f4647dfab7ee294143dbb3c3f560"
+    },
+    {
+      "path": "flight/esm/types/audio_contract/Types.hx",
+      "sha256": "1538b589e701ba4456f719f1e004cf54845bf41a643a9b650da28e14805a8937"
+    },
+    {
+      "path": "flight/esm/types/binpack/Types.hx",
+      "sha256": "894215f651c2ed59c647f2481d41bf09c2302700b006b1a813a51be9b2962a76"
+    },
+    {
+      "path": "flight/esm/types/binpack_contract/Types.hx",
+      "sha256": "3c47d07994ef4410d1cba8d00571d62b9cacedc5e88825df225f916ae03ab286"
+    },
+    {
+      "path": "flight/esm/types/bitmap/Types.hx",
+      "sha256": "290f611499b5ec62a588e61600eeb6817dc283c19788fb53129b665577dbc63b"
+    },
+    {
+      "path": "flight/esm/types/bitmap_contract/Types.hx",
+      "sha256": "8e1aa1a3d1f2c4f111f71a1dac3b3b54241b27903d2ab88bd2df5b4575fbdbe3"
+    },
+    {
+      "path": "flight/esm/types/bitmap_wasm/Types.hx",
+      "sha256": "e53ce3880e044e334a5bdd4153e25fa4770afb5eb6d3024f2b707f22d0c3aa32"
+    },
+    {
+      "path": "flight/esm/types/bitmapfont_contract/Types.hx",
+      "sha256": "b723ce618d2dd1ee5acc61c090958f68206937575eb1fafa5aa28966b01a23d5"
+    },
+    {
+      "path": "flight/esm/types/bitmapfont_formats/Types.hx",
+      "sha256": "1fc8be7ce868bc00d491681f3cdb21cb48cd549cc87a399a38e1bed39e67900d"
+    },
+    {
+      "path": "flight/esm/types/bitmapfont_formats_contract/Types.hx",
+      "sha256": "07ba26e7a06ebbaa583b6d374a75669b8f646b5c14b757c64174cce63054a7c8"
+    },
+    {
+      "path": "flight/esm/types/bitmaptext/Types.hx",
+      "sha256": "60716cd403f7c1bf75b50998c03f21959b8495c36b6f210cdf55268ad6641ddd"
+    },
+    {
+      "path": "flight/esm/types/bitmaptext_contract/Types.hx",
+      "sha256": "fa701c5db2cafe1afe26494ae2bb4832fc1644de43feba41c20e97bcb9bbbb9a"
+    },
+    {
+      "path": "flight/esm/types/buffer/Types.hx",
+      "sha256": "5a2dd8557d19414235fb02c31e826bb71e8c6062d59c8fdaa77d1c7bd20f5101"
+    },
+    {
+      "path": "flight/esm/types/buffer_contract/Types.hx",
+      "sha256": "a9d1f8064e12a40dc8a3f69530d4e46f66ac41ffb434ebfa1b9cad852040c89f"
+    },
+    {
+      "path": "flight/esm/types/camera/Types.hx",
+      "sha256": "550fa866a073adc519365b24c2d2153dc4a83dbd7e6fdc552059aa2fb8d13206"
+    },
+    {
+      "path": "flight/esm/types/camera_contract/Types.hx",
+      "sha256": "2e60562b2ac5bf5eb7950674821cb963f6141a209b5ccebe5b01b775348f9723"
+    },
+    {
+      "path": "flight/esm/types/camera_controls/Types.hx",
+      "sha256": "f83cce46c771ca9a0c90a4eb9027a99e20779c84e423a8443f68efddddf82d7b"
+    },
+    {
+      "path": "flight/esm/types/camera_controls_contract/Types.hx",
+      "sha256": "c3dcbc21cec382936575b6e90695164bf66886fc5d5003756ca195eb386af55d"
+    },
+    {
+      "path": "flight/esm/types/capture/Types.hx",
+      "sha256": "b95d334234d530d21a38ea907a278be7f9cb10451e81d4a7ec81cb83f0c64386"
+    },
+    {
+      "path": "flight/esm/types/capture_contract/Types.hx",
+      "sha256": "346bc8054ec3dcd812c46fdd24d653eb8c600f3a7e140a83241491acafe447dc"
+    },
+    {
+      "path": "flight/esm/types/clip/Types.hx",
+      "sha256": "ffa5b081b35a92bc5e29f86fa1037ba75a51ad4d02ab9038f7feaca6ac166153"
+    },
+    {
+      "path": "flight/esm/types/clip_contract/Types.hx",
+      "sha256": "db4d189275be2a660a27a9570d455b032bbaaad75649e6f331063bb3cabf2008"
+    },
+    {
+      "path": "flight/esm/types/clipboard/Types.hx",
+      "sha256": "46165b134590f27607a88cf246db700a76a7b0b2f8cd7ba009c9926fcc551355"
+    },
+    {
+      "path": "flight/esm/types/clipboard_contract/Types.hx",
+      "sha256": "7f915a586827d90143ccb0ac7588c9e3b612bfb1512343cfb1fa86182777d872"
+    },
+    {
+      "path": "flight/esm/types/clock/Types.hx",
+      "sha256": "7f19b9010db1f890b7a5daf3d75e1c7f19be4767b6ff6db77e8cf058998de609"
+    },
+    {
+      "path": "flight/esm/types/clock_contract/Types.hx",
+      "sha256": "63af6a89cf19ce699ac980c72899eaf3279d1d299a41f066adb504478b665cd4"
+    },
+    {
+      "path": "flight/esm/types/collision/Types.hx",
+      "sha256": "6edb2eb8bfcdb93a569a037b72a8022b8151af10ce6bdb0dfa944b34dd970d81"
+    },
+    {
+      "path": "flight/esm/types/collision_contract/Types.hx",
+      "sha256": "a7283b24a503f198233eed8eb57cadb10632f77a2a345ec4671f9156f7079e45"
+    },
+    {
+      "path": "flight/esm/types/color/Types.hx",
+      "sha256": "f2d845f0508cfef1e29740ba0cb18823b9f8288d74a15fd5084c2242a927d0b6"
+    },
+    {
+      "path": "flight/esm/types/color_contract/Types.hx",
+      "sha256": "27e7eddc144aa2a24d8ed89d3cc717428aeb6d55c87e367c7e161143e4e022bd"
+    },
+    {
+      "path": "flight/esm/types/command/Types.hx",
+      "sha256": "a49ddfbf6506f21ac73ead32b671b779fddf8793b8c5b7975d926f69e39af75b"
+    },
+    {
+      "path": "flight/esm/types/command_contract/Types.hx",
+      "sha256": "d927077860a7878f9086a823c14612b4a5403d706d91ad97c040ec6f2d4817f3"
+    },
+    {
+      "path": "flight/esm/types/compression/Types.hx",
+      "sha256": "217a5987ce3fcf0070144867546fa64ac6e60d7837d4f9b24c7e569f56156212"
+    },
+    {
+      "path": "flight/esm/types/compression_contract/Types.hx",
+      "sha256": "b12188f35fc78276840e0d2feb5a738111119c3530fe6e70439b9c96a49ce2d4"
+    },
+    {
+      "path": "flight/esm/types/compression_wasm/Types.hx",
+      "sha256": "24dc287f5e3e52b31041461bbfad62ce1448ba2ea05900addc23ced5c01a0ad9"
+    },
+    {
+      "path": "flight/esm/types/connectivity_contract/Types.hx",
+      "sha256": "6fb0503999e77e5fe663b9a0f09df80027d00dc359a15def3c6582289bf89dc6"
+    },
+    {
+      "path": "flight/esm/types/debug/Types.hx",
+      "sha256": "614dd9862b571029e2b8bd56b327b3a156f788eff9e893b0571ee339478bd033"
+    },
+    {
+      "path": "flight/esm/types/debug_contract/Types.hx",
+      "sha256": "e1dbc0320ed43155be70c919bff392247a5e83934e5a6506dada9a3dc5d1cb29"
+    },
+    {
+      "path": "flight/esm/types/device/Types.hx",
+      "sha256": "59a8896643cf41ee8d53eda81947703a8281c212633a53c3d7cc7d6ddb91e009"
+    },
+    {
+      "path": "flight/esm/types/device_contract/Types.hx",
+      "sha256": "c8f5c287ee0610d1bc3d53af66e0bc5703278d8aace2a8e90d126b4e819ed49c"
+    },
+    {
+      "path": "flight/esm/types/dialog_contract/Types.hx",
+      "sha256": "dd01be13c53c5264cd61bf346e54eb78604659500d6db9063d3adfa86a73db8e"
+    },
+    {
+      "path": "flight/esm/types/easing/Types.hx",
+      "sha256": "dc136d9213792d306912da00626d49fde260eb5208741c789b64543f2749f1ad"
+    },
+    {
+      "path": "flight/esm/types/easing_contract/Types.hx",
+      "sha256": "cef34e9a01a1f907c3ab8fde5d62b2994a4ad331054d4eb459cd5f7883d22847"
+    },
+    {
+      "path": "flight/esm/types/effects/Types.hx",
+      "sha256": "f0e8b333b31cf79c13444cad794e73ef05c5d810802792453ff4ff4c7bea4a4c"
+    },
+    {
+      "path": "flight/esm/types/effects_canvas/Types.hx",
+      "sha256": "199a627c45a53acd824c964e0767cbee92185092fba3b9f05e2e5a369a7a82c2"
+    },
+    {
+      "path": "flight/esm/types/effects_canvas_contract/Types.hx",
+      "sha256": "10dcc3fd45e874e08f66d433056ce2a882db73cb413ac829622550e19dbe5d35"
+    },
+    {
+      "path": "flight/esm/types/effects_contract/Types.hx",
+      "sha256": "d75e3b31c3a34ea7000b31b0f224de0b7d75244ac7880bbaa4c6e0590fd58212"
+    },
+    {
+      "path": "flight/esm/types/effects_gl/Types.hx",
+      "sha256": "ad95f7a152049b5b589531bb402c811766c747da1a279aa323bbefc7d2818082"
+    },
+    {
+      "path": "flight/esm/types/effects_gl_contract/Types.hx",
+      "sha256": "2573737c5e08285ce7d8404a43e4cfceb3c1e2d932fe05ce06fd7aa9a27219c4"
+    },
+    {
+      "path": "flight/esm/types/effects_wgpu/Types.hx",
+      "sha256": "d80689a02170c42a05985d89d8accfef0486cf14fd0cbd94077abe7180772aac"
+    },
+    {
+      "path": "flight/esm/types/effects_wgpu_contract/Types.hx",
+      "sha256": "12772360c345e961e333c31510f7df8da8a33cbdaded2640754079575ce575d9"
+    },
+    {
+      "path": "flight/esm/types/entity/Types.hx",
+      "sha256": "da831ade7f60b1a683f8a323e9f9f8ce69398f5c887ff5ac4196950c504b8d61"
+    },
+    {
+      "path": "flight/esm/types/entity_contract/Types.hx",
+      "sha256": "eba57956a48c739583d91c2e8e383bce63fc63b53798df868c5ab3aba986af8e"
+    },
+    {
+      "path": "flight/esm/types/filesystem_contract/Types.hx",
+      "sha256": "eec9f1eff62dba39639298eb6c4b755f6daaa8c55f2730f956895dc27a6ad20a"
+    },
+    {
+      "path": "flight/esm/types/flow/Types.hx",
+      "sha256": "2bf3dd2298c755e241f5495be6cc142802acfe3e8c5a95a6862d761fde5bc3b4"
+    },
+    {
+      "path": "flight/esm/types/flow_contract/Types.hx",
+      "sha256": "cbda071ae7e999883db0140f7b3590a7f5200493ced5465bfbd5bdc3a924d354"
+    },
+    {
+      "path": "flight/esm/types/font/Types.hx",
+      "sha256": "cb293e62de2fe29070db5a80c889322a3453f4a3724e09bec784587ee91d47f5"
+    },
+    {
+      "path": "flight/esm/types/font_contract/Types.hx",
+      "sha256": "5ff9d2790e45a23dee6d036821c39f1d95d68c367911c55305facb14a2e615f2"
+    },
+    {
+      "path": "flight/esm/types/font_formats/Types.hx",
+      "sha256": "4c537df271e4b27b68d7a8ed9c7111f8dae2dda91fc1fa8c0db030c90dfad890"
+    },
+    {
+      "path": "flight/esm/types/font_formats_contract/Types.hx",
+      "sha256": "45822e72025fbdbadcb2e136495172168819adfbcb01f2f402f22096eaef4512"
+    },
+    {
+      "path": "flight/esm/types/geolocation_contract/Types.hx",
+      "sha256": "21b4f5cbb53e90a12d82a061df8f91256f895eaf8a9f9272f4d92c306ffae04b"
+    },
+    {
+      "path": "flight/esm/types/geometry/Types.hx",
+      "sha256": "90932c6c827f797df7034dcffff34a0ae9a70579a868a63ad1e30efc9a054cc8"
+    },
+    {
+      "path": "flight/esm/types/geometry_contract/Types.hx",
+      "sha256": "63340e8dda3ddf6734e691ddb01fb1ea9fbe146e616c0ac3c361a871abadeb4b"
+    },
+    {
+      "path": "flight/esm/types/gizmo/Types.hx",
+      "sha256": "8b3beb8c11aa43e02dc149d94ce8a84f38191331e52eae41b66d67a23f6ffdd1"
+    },
+    {
+      "path": "flight/esm/types/gizmo_contract/Types.hx",
+      "sha256": "cfaa8010eeef00d1b692413c6233be858f81070cc9128544ea0c271b000914dc"
+    },
+    {
+      "path": "flight/esm/types/glyphatlas_contract/Types.hx",
+      "sha256": "879b38301904f80c1db001af745c77fef21ea1d6d2f797c1bf95ecd141b23eb0"
+    },
+    {
+      "path": "flight/esm/types/gui/Types.hx",
+      "sha256": "c193d93d95b80c08e543036c7a785e3c82760139aac38599453e01acfdc578f3"
+    },
+    {
+      "path": "flight/esm/types/gui_contract/Types.hx",
+      "sha256": "6770e8b889f7f6ff9df61897e492fc601e3841f3b53350e9e188fbe2c83cbc4b"
+    },
+    {
+      "path": "flight/esm/types/haptics/Types.hx",
+      "sha256": "4c1746d6c103e7e36a5fc04573520803b480c72b54a21418e32269d23a4c2ed0"
+    },
+    {
+      "path": "flight/esm/types/haptics_contract/Types.hx",
+      "sha256": "a34f47544ae4dcc4a47f24a8a058bdca39df1747cd866fb72ecc009005505c5f"
+    },
+    {
+      "path": "flight/esm/types/host/Types.hx",
+      "sha256": "e61c1bd4f9bd2afa83c0c9b317895a9bb66678a0045308b41cc2ec44809d973e"
+    },
+    {
+      "path": "flight/esm/types/host_capacitor/Types.hx",
+      "sha256": "be65036724ba7369f2932229594a29375fbf152853aa960a7a1b0b62c123a375"
+    },
+    {
+      "path": "flight/esm/types/host_capacitor_contract/Types.hx",
+      "sha256": "41176d26a12d7417f3dfef8d12fc46b59532a5b12908ee29a7cb97cebc3b1eec"
+    },
+    {
+      "path": "flight/esm/types/host_contract/Types.hx",
+      "sha256": "3358a69b503a24d8201c8bdc7b2a806b10a6e9965a4133ff7d44bcf5e1926b84"
+    },
+    {
+      "path": "flight/esm/types/host_electron/Types.hx",
+      "sha256": "dffc7e58b9acd4fee6bc5ede6b3d513292b9125b354b60ac78dbf36a2292d736"
+    },
+    {
+      "path": "flight/esm/types/host_electron_contract/Types.hx",
+      "sha256": "6bdc23985e02bfa60578ab60267f3db56bc8f40258b19e3fb44f53e189dbf6b8"
+    },
+    {
+      "path": "flight/esm/types/host_web/Types.hx",
+      "sha256": "715eb04d7c3708910f733a6bf11cc06d3815a8c0d72d0b45f8389383bf4cddcf"
+    },
+    {
+      "path": "flight/esm/types/host_web_contract/Types.hx",
+      "sha256": "b84277de49324f7134265ff7558e563027221020ef93371ad97b3bbfa99e7a78"
+    },
+    {
+      "path": "flight/esm/types/image/Types.hx",
+      "sha256": "5132b7fb2b8cb64f44b2c722e8810362764b71cc20123bf0d12219e31e90b80f"
+    },
+    {
+      "path": "flight/esm/types/image_codec_contract/Types.hx",
+      "sha256": "f9fd6c47622cec56af8d0984eb8737d661cc4f1661a185533843d27bc0bb4aeb"
+    },
+    {
+      "path": "flight/esm/types/image_contract/Types.hx",
+      "sha256": "eb6859397b86191fc95c0d7d0ae26b33776295c6a33cd22429e43804ddf722b7"
+    },
+    {
+      "path": "flight/esm/types/importdiagnostics_contract/Types.hx",
+      "sha256": "15805a8f9b7bc4821af71f78863ef9793eecdf18b9c5e6dff1cb60d8bf2ccf5b"
+    },
+    {
+      "path": "flight/esm/types/input/Types.hx",
+      "sha256": "790086e7db297cca09c8c0e5bcf4d4782a40134ca3724f020920ad8cd426237b"
+    },
+    {
+      "path": "flight/esm/types/input_contract/Types.hx",
+      "sha256": "d62a50a1339f00a8ff486f202e96a773c6def6a7053c79480b07c6fdc3bcb3ba"
+    },
+    {
+      "path": "flight/esm/types/interaction/Types.hx",
+      "sha256": "bab5a9c6c8beed91cea37063d629d0f8e359d0a056aa2ee15af19f0ec3a47935"
+    },
+    {
+      "path": "flight/esm/types/interaction_contract/Types.hx",
+      "sha256": "60ad66550d530782312d6e50701737de9031c34195373e9498ebe476171598fc"
+    },
+    {
+      "path": "flight/esm/types/intl/Types.hx",
+      "sha256": "1d362c5ce7714d0dcc02bf9d78b5d87d946ad9398921b1bf26c7a878a7b029d7"
+    },
+    {
+      "path": "flight/esm/types/intl_contract/Types.hx",
+      "sha256": "f0aa4a08ca7e30eac82fe58a09f9303a913651b48865ea1766566c3a752a7e7c"
+    },
+    {
+      "path": "flight/esm/types/ipc/Types.hx",
+      "sha256": "ddee2f859fc1faf89f28dbeb1579cc556841f8bbc6d63c277df8d8cc96dd0d75"
+    },
+    {
+      "path": "flight/esm/types/ipc_contract/Types.hx",
+      "sha256": "91ec69516c2aea3c1f2453c7d7df605c56eca5f393c6cca0ee23916edd0099a5"
+    },
+    {
+      "path": "flight/esm/types/keyboard_contract/Types.hx",
+      "sha256": "72aa4ee2b7b6f97b4da9ce527289c6ac446918178f2de0fec422f382235aab17"
+    },
+    {
+      "path": "flight/esm/types/layout/Types.hx",
+      "sha256": "f7760fdb527a2984fd76e6952e010aa9b622db1240ec1e0ee9e89bc51f11d4f0"
+    },
+    {
+      "path": "flight/esm/types/layout_contract/Types.hx",
+      "sha256": "b44b6f43a9f3d2eb949d023035e283af8c3833d8f9cfe98c0863054c738aa7cc"
+    },
+    {
+      "path": "flight/esm/types/lifecycle/Types.hx",
+      "sha256": "61fa392689bfb00c44dd65daaa49d5330a1e0f00cbec4ee554de2bb74a1209bb"
+    },
+    {
+      "path": "flight/esm/types/lifecycle_contract/Types.hx",
+      "sha256": "1be7039a305875e317029cb0f9ebda354049c38d9e9ab85bbc728f6f94879817"
+    },
+    {
+      "path": "flight/esm/types/lighting_contract/Types.hx",
+      "sha256": "ecffa4f6700714eb45aecd0444af3ab36a5729ec1d4a574931f3d28174d13930"
+    },
+    {
+      "path": "flight/esm/types/loader/Types.hx",
+      "sha256": "9a0882ae07ca6911eff3d2569d8686f685d24e11b65f6f158ab85107e1fc115a"
+    },
+    {
+      "path": "flight/esm/types/loader_contract/Types.hx",
+      "sha256": "9ed457f4c99af2a81797e2f9587b0a950c31bd7dedf3724dab46c654b4a0292e"
+    },
+    {
+      "path": "flight/esm/types/log/Types.hx",
+      "sha256": "ff0ce3c8a18fdb9ab270ab35e861a8550a17ef47eaa77611d795285c863d6ccb"
+    },
+    {
+      "path": "flight/esm/types/log_contract/Types.hx",
+      "sha256": "246930a1dd62ff11b097646460c03de143ce2a91bcc14842e8b3d45dd042e9da"
+    },
+    {
+      "path": "flight/esm/types/materials/Types.hx",
+      "sha256": "36c272889545d7eb7787f951765877aa24fde0230b791a91207d41260f1d6c00"
+    },
+    {
+      "path": "flight/esm/types/materials_contract/Types.hx",
+      "sha256": "dc86d94748eaca0f09628b31726f4c1b869405e62d442126c523763de244cf4f"
+    },
+    {
+      "path": "flight/esm/types/math/Types.hx",
+      "sha256": "ab34c822049e25e29a6a19b30b7e627b4dd8ea052eed513f8adce1f1deae3995"
+    },
+    {
+      "path": "flight/esm/types/math_contract/Types.hx",
+      "sha256": "0509a6355a93cb50175579698465f1249b5dc34a363bc93be990007d24cdaa05"
+    },
+    {
+      "path": "flight/esm/types/media/Types.hx",
+      "sha256": "e01b64346d9ae92c4f78bbd71b496f28499ad9f523d6cc9a6b73a495fdf70ccb"
+    },
+    {
+      "path": "flight/esm/types/media_contract/Types.hx",
+      "sha256": "cc1ec011e9ed3570c69aa449668ae6ab8386c7e4c73ee11af52ffd86d1973dc9"
+    },
+    {
+      "path": "flight/esm/types/mediasession/Types.hx",
+      "sha256": "2da923318f60cd7e4be470e4c42fd3ef92dde99918b24404026708f98ac0ba21"
+    },
+    {
+      "path": "flight/esm/types/mediasession_contract/Types.hx",
+      "sha256": "f5ebcea45b0070b6e67a3366dff9ef77f421b26662589435121be2e57ea7085d"
+    },
+    {
+      "path": "flight/esm/types/menu/Types.hx",
+      "sha256": "fc80463e890b63441ee92b9821733fbf4cd0960c3857b08e0910489333f00c2d"
+    },
+    {
+      "path": "flight/esm/types/menu_contract/Types.hx",
+      "sha256": "76f8f3736e3499cd0f34b38607f5eeee3114da578d4fc140d06bab28cc842703"
+    },
+    {
+      "path": "flight/esm/types/meshgeometry/Types.hx",
+      "sha256": "96c2cf18b713f1383ee4d08b9362a60fbce4e4b89cf8d67fae845c1b6441fd1a"
+    },
+    {
+      "path": "flight/esm/types/meshgeometry_contract/Types.hx",
+      "sha256": "2784150343d9027e4c4f8e7640efb5d8b312a764d48e9f04d2ccf6fb54f38d02"
+    },
+    {
+      "path": "flight/esm/types/midi_contract/Types.hx",
+      "sha256": "7ec9e2809193ee962227d32f7498b26a09ac8e9d7b2abfbeacc08a2260caf2a9"
+    },
+    {
+      "path": "flight/esm/types/motionpath/Types.hx",
+      "sha256": "dde160c4f2282a0d7ed9c5e7376e1cf80175bab99b03ae18a2fbc6ce4b99d306"
+    },
+    {
+      "path": "flight/esm/types/motionpath_contract/Types.hx",
+      "sha256": "b9c32b684193139f92d8c189b24138565c9702ff1f6355f2bfb22fefaff66751"
+    },
+    {
+      "path": "flight/esm/types/movieclip/Types.hx",
+      "sha256": "3998eea45f511376fa7bf64499379ab36bebda8e56603f0b315269a74097dba3"
+    },
+    {
+      "path": "flight/esm/types/movieclip_contract/Types.hx",
+      "sha256": "94321380153a325ef8d03142c488c871f2fbc4cbc7fc24705944791b904b3b5d"
+    },
+    {
+      "path": "flight/esm/types/net/Types.hx",
+      "sha256": "468b676d8a108ae644477416f1704c202bccbc786a8a789f98fcea997724b8fe"
+    },
+    {
+      "path": "flight/esm/types/net_contract/Types.hx",
+      "sha256": "25be04404136aa16adbdfe551c98e419fcc1e1d2a968109015b2eae17ace5276"
+    },
+    {
+      "path": "flight/esm/types/node/Types.hx",
+      "sha256": "6d75361e76db950486652419f416244804a94ded6b95552af90ce0e897e15952"
+    },
+    {
+      "path": "flight/esm/types/node_contract/Types.hx",
+      "sha256": "0ee0997fcbaf4ffbea6b54090a8009b59dad36c8a968f903b19daedb66b79c27"
+    },
+    {
+      "path": "flight/esm/types/notification_contract/Types.hx",
+      "sha256": "9e7854bf359285d93b6120c75518ccad6714705b1ad241fe007f6ee033c6d84a"
+    },
+    {
+      "path": "flight/esm/types/particleemitter/Types.hx",
+      "sha256": "645d11dd0b5c90d750375ef83365f15810856abe688450b7c60e52999b36ee6e"
+    },
+    {
+      "path": "flight/esm/types/particleemitter_contract/Types.hx",
+      "sha256": "222f0c467f1620365c184adccd4b1154ceb45601d49ed2b4a8c158e519ec11ad"
+    },
+    {
+      "path": "flight/esm/types/particles/Types.hx",
+      "sha256": "7d1316cb15c23417190b17dc329afad8a5ee4131adc9e76decace14d604a7219"
+    },
+    {
+      "path": "flight/esm/types/particles_contract/Types.hx",
+      "sha256": "613b8ab80a870a07753411bf706ad8dd08cf73e826040dc4936d8b5c92c96632"
+    },
+    {
+      "path": "flight/esm/types/particles_formats/Types.hx",
+      "sha256": "7fa813ac7c8e950f8e00250d9e7fc698b671810af901587339ef5870d69c1fe6"
+    },
+    {
+      "path": "flight/esm/types/particles_formats_contract/Types.hx",
+      "sha256": "f607bb71e4773e6b6b50f3dbf2af511bf85adce0ed23c6b6c54af39be85e8737"
+    },
+    {
+      "path": "flight/esm/types/path/Types.hx",
+      "sha256": "e27c282e220d16cb6ea56ee0585a680e79fe6d5da4c2d9186f2c725ba72d28ab"
+    },
+    {
+      "path": "flight/esm/types/path_boolean/Types.hx",
+      "sha256": "6b8dba909227839658152122224eb81e8ffb7c111d819fae8051d00b8eac3780"
+    },
+    {
+      "path": "flight/esm/types/path_boolean_contract/Types.hx",
+      "sha256": "c91a51a16d81961ab8dd3f1b83e2435e30dbdd167a3b3f1d74b6c940feae55c1"
+    },
+    {
+      "path": "flight/esm/types/path_contract/Types.hx",
+      "sha256": "664595ee35c9020797e14bcfb2b497704080f72b4896dcce14a1fdeac6c60378"
+    },
+    {
+      "path": "flight/esm/types/path_formats/Types.hx",
+      "sha256": "cee3a3d7aad0d9ede6e921e86528a9f7480c94e744d6e5fc10853a29509de1e2"
+    },
+    {
+      "path": "flight/esm/types/path_formats_contract/Types.hx",
+      "sha256": "8f172597885e84e3cc66171b6738bb6198cd07dac5a9925da0bf75fb67b045a0"
+    },
+    {
+      "path": "flight/esm/types/permissions_contract/Types.hx",
+      "sha256": "80a66d29f98ca7b52be24b31201f8aaec84f7fbfaac789c4c92c4c8338f57a09"
+    },
+    {
+      "path": "flight/esm/types/physics2d/Types.hx",
+      "sha256": "b890ba539035c84a7a31c1fc02cde4d2a9d0d0a32d45633a4da309861305eab8"
+    },
+    {
+      "path": "flight/esm/types/physics2d_abi/Types.hx",
+      "sha256": "dfaded5777026077aa75b8bd2a391e9b0f3eba2482241fc6589ce87cf3e5d4b2"
+    },
+    {
+      "path": "flight/esm/types/physics2d_abi_contract/Types.hx",
+      "sha256": "bd2739f678516405746ad693088d9c4609386d869df75da18f64a401be08fa00"
+    },
+    {
+      "path": "flight/esm/types/physics2d_abi_wasm/Types.hx",
+      "sha256": "ea625fe01b6947c70e863714e27d01e699b0fc33b6f4d55f23554033919449d8"
+    },
+    {
+      "path": "flight/esm/types/physics2d_contract/Types.hx",
+      "sha256": "a7982f4d8744716105d347a14ca9fc1602f47f46cf92116c40a23fd699af9463"
+    },
+    {
+      "path": "flight/esm/types/physics3d/Types.hx",
+      "sha256": "2435b9ea9d06e5a2de69f3401f03d6b9d6e2f53a2a73f03af5ed0aaa698c6a2a"
+    },
+    {
+      "path": "flight/esm/types/physics3d_abi/Types.hx",
+      "sha256": "2af4837c6b1b7f5c22b1ec096086f0defc77528a591ff1850233631ee2d9eeca"
+    },
+    {
+      "path": "flight/esm/types/physics3d_abi_contract/Types.hx",
+      "sha256": "a42abf8eeea1eba1bdfb63dc745214315308d018486989349e92f0297f7a011a"
+    },
+    {
+      "path": "flight/esm/types/physics3d_abi_wasm/Types.hx",
+      "sha256": "8dc3e04d411d9a84cbb102ed35fb8d2e9f3cedf8cb18b043bff570c026a0472f"
+    },
+    {
+      "path": "flight/esm/types/physics3d_contract/Types.hx",
+      "sha256": "949185e9939938d44a63afe1fb9d1a36bf92369c4d88ad8f50b6b96563f89c49"
+    },
+    {
+      "path": "flight/esm/types/picking/Types.hx",
+      "sha256": "fc44df9dd37f8252853c4b7b3809df6207cc57df07f8581eb9a8e0237e7dbbee"
+    },
+    {
+      "path": "flight/esm/types/picking_contract/Types.hx",
+      "sha256": "4a9aeeb7e72c89c2086c9b60a53d4cc753f08da716fde40b9b7dcd9593372cd0"
+    },
+    {
+      "path": "flight/esm/types/platform/Types.hx",
+      "sha256": "88ed19d03ff0d777d4dac76f7654f21a16df269e6ecfadfff7c7ec3a33a7cb33"
+    },
+    {
+      "path": "flight/esm/types/platform_contract/Types.hx",
+      "sha256": "3d85bae50f9d6032d4802e8511e815afcf5b6f37d1e1a4c7769806cc057f8037"
+    },
+    {
+      "path": "flight/esm/types/power/Types.hx",
+      "sha256": "82e11005c542c3ca9aa639d3f6ef34d30854dba8e5435b860af0e69df66a180b"
+    },
+    {
+      "path": "flight/esm/types/power_contract/Types.hx",
+      "sha256": "f28a1012f3c658dfc39f1eb5e8d3821d325daa53802633d8bd0943c59be69e74"
+    },
+    {
+      "path": "flight/esm/types/preferences_contract/Types.hx",
+      "sha256": "421b171c01a2e40e475265e05f4888d384b78ed292488fb9d1d077b621e9d39d"
+    },
+    {
+      "path": "flight/esm/types/protocol_contract/Types.hx",
+      "sha256": "26ec390ec2b5743a8c0d9464eef6409b92e0c9610a5ac05c44985e97ed3f834b"
+    },
+    {
+      "path": "flight/esm/types/quadbatch/Types.hx",
+      "sha256": "814616d478cc076f562f6101a88784cdef88f743cd3710cd55bad076a624a6bb"
+    },
+    {
+      "path": "flight/esm/types/quadbatch_contract/Types.hx",
+      "sha256": "accfe8ed3685d869a739c0086bdca8933dd69bc14a89cd6ec3aba6a460c603e9"
+    },
+    {
+      "path": "flight/esm/types/registry_contract/Types.hx",
+      "sha256": "f26b26e1d01ac6daa8828ad3b725e631a181478b1ff38f8090223a86ee7bee74"
+    },
+    {
+      "path": "flight/esm/types/render/Types.hx",
+      "sha256": "b395df7d3cb13dd7de22eefc3c887f8104e1e2f02762ee0aea15ba11bb11b5ea"
+    },
+    {
+      "path": "flight/esm/types/render_contract/Types.hx",
+      "sha256": "289218fb1b7a0c136f4674fcd6769e18390a46ca7a40d51042b3466433fe2122"
+    },
+    {
+      "path": "flight/esm/types/render_gl/Types.hx",
+      "sha256": "b6995f9db3512f43934c1a22d425e56a48f7faaaeee16d8d8ae91a35f887bbbb"
+    },
+    {
+      "path": "flight/esm/types/render_gl_compressed_texture_decoder_contract/Types.hx",
+      "sha256": "42f2afab20148e2dcfe682c73b580a171ec797bfb9cb8a35c9bf553cb81873b4"
+    },
+    {
+      "path": "flight/esm/types/render_gl_contract/Types.hx",
+      "sha256": "de2b222cc644ca2d2516824099e46647b8e92ab809b1fcd805f7e334b967a905"
+    },
+    {
+      "path": "flight/esm/types/render_wgpu_compressed_texture_decoder_contract/Types.hx",
+      "sha256": "6543c88c3984655e4407a1b7b8ee55bb7a99e7a14e038982b30f44f7c109b3b0"
+    },
+    {
+      "path": "flight/esm/types/render_wgpu_contract/Types.hx",
+      "sha256": "5f96cc6475432f7bd787f737baabaabac59cf5336a1ced9bbfeb73dc57c283f9"
+    },
+    {
+      "path": "flight/esm/types/requirement/Types.hx",
+      "sha256": "0517c10a3163d7438ac384a5862161153fcb862bb78a0204afde9013e41e1552"
+    },
+    {
+      "path": "flight/esm/types/requirement_catalog/Types.hx",
+      "sha256": "b943cfbd452728787aa16ea892734ead22cf03072005dfb072da48487da48a82"
+    },
+    {
+      "path": "flight/esm/types/requirement_catalog_contract/Types.hx",
+      "sha256": "7188109c613a27ad95190aaa868e5e23aa042641f8af72a46a266f36e8ed7342"
+    },
+    {
+      "path": "flight/esm/types/requirement_codegen/Types.hx",
+      "sha256": "622a637589a96d545b682fc21360ce191adba274b857f63204b7dbae7cb2c72e"
+    },
+    {
+      "path": "flight/esm/types/requirement_codegen_contract/Types.hx",
+      "sha256": "dcc4d27692a23a5e37992f183544e4932f98c82e7893d0bd66bceabd0629a590"
+    },
+    {
+      "path": "flight/esm/types/requirement_contract/Types.hx",
+      "sha256": "59ae52cf3e9a0caa42bfac4b44a8a6c7ed869fdc1e048edf771a0f001736dbda"
+    },
+    {
+      "path": "flight/esm/types/resource/Types.hx",
+      "sha256": "b1177778a8652d08391d6db91c0bf61b1ed07aab83d7bab519822aacb4768461"
+    },
+    {
+      "path": "flight/esm/types/resource_contract/Types.hx",
+      "sha256": "3d0581d639f25fdf1bb493e693b775fee6333923d07e8077f987f34b18b97d59"
+    },
+    {
+      "path": "flight/esm/types/scene2d_canvas/Types.hx",
+      "sha256": "3c44951eed8c18d086be4344e305b3e6a03df882353f6f56b3f255bcca5d26df"
+    },
+    {
+      "path": "flight/esm/types/scene2d_canvas_contract/Types.hx",
+      "sha256": "534a3ef932168ceb90bb24d734d379011020f92ab9ddc1fc49631ffb33b077cf"
+    },
+    {
+      "path": "flight/esm/types/scene2d_contract/Types.hx",
+      "sha256": "538151299cd9e4d6f6ed02417dc4a903b84a4e70f407790becc80acf5e923afe"
+    },
+    {
+      "path": "flight/esm/types/scene2d_dom/Types.hx",
+      "sha256": "152e5ddc5b2909d51da5096f54cca308de41c27b97d471188138d094b9446bdf"
+    },
+    {
+      "path": "flight/esm/types/scene2d_dom_contract/Types.hx",
+      "sha256": "84fbda30ceeafc793ef6a00fc486cf384c7a527592e9d664c42ac99b76b75b63"
+    },
+    {
+      "path": "flight/esm/types/scene2d_formats_contract/Types.hx",
+      "sha256": "cc63c77989deeb43d735643bdb1b955de83e590009e8575283e7f6ff81ba0810"
+    },
+    {
+      "path": "flight/esm/types/scene2d_gl/Types.hx",
+      "sha256": "1ec6da72c064573ff012ab34b9e3276ee057a9b8f53cb789bc9a40e4234bb78f"
+    },
+    {
+      "path": "flight/esm/types/scene2d_gl_contract/Types.hx",
+      "sha256": "0e4f06302bc74d7fe5a56d0e1d026cf5f9d90164ffaaed661e46c4bb7e4c8b54"
+    },
+    {
+      "path": "flight/esm/types/scene2d_resources_contract/Types.hx",
+      "sha256": "2428d048ec746c0e65a9e3f434492aadda0974e25bc29cf233da80a4c661c7b4"
+    },
+    {
+      "path": "flight/esm/types/scene2d_wgpu_contract/Types.hx",
+      "sha256": "763d895eef4625bc0e6ab0389a76a9abececb91eaed419b7f28e8db11ba679da"
+    },
+    {
+      "path": "flight/esm/types/scene3d/Types.hx",
+      "sha256": "7dde1f17be6c1b5e09447b3b056d97b3296f87553ee49f93568a0284f2cb86f9"
+    },
+    {
+      "path": "flight/esm/types/scene3d_contract/Types.hx",
+      "sha256": "949cc4c48604093684edb787c04cc2658556a815da6c350bea76403f3800ce04"
+    },
+    {
+      "path": "flight/esm/types/scene3d_formats_contract/Types.hx",
+      "sha256": "78a1f8b964e87e0166179e7bf96b25e9d34a690261e1ab4716a37a0982fda69f"
+    },
+    {
+      "path": "flight/esm/types/scene3d_gl/Types.hx",
+      "sha256": "0321ed0ea32eea449de5127d8087c5a01b11753184836c69ea1c2ef4f150eb6a"
+    },
+    {
+      "path": "flight/esm/types/scene3d_gl_contract/Types.hx",
+      "sha256": "2a2c986890e39c87423193848452cb09b451f56c57a966c06a5a6eeee2ce2ec5"
+    },
+    {
+      "path": "flight/esm/types/scene3d_resources_contract/Types.hx",
+      "sha256": "3a617c35c97d452f37db4315e97971990cfa2557ef2abe7ad9624fa10e3f88e5"
+    },
+    {
+      "path": "flight/esm/types/scene3d_wgpu_contract/Types.hx",
+      "sha256": "012d6bd5854ba5e0217496174944b63066a40f5e713ed408a1522da4ccde1103"
+    },
+    {
+      "path": "flight/esm/types/scene_document/Types.hx",
+      "sha256": "d80910280078aaeff80e87db16cb545dd08a9ffbbd6f76f3ab299680678240c9"
+    },
+    {
+      "path": "flight/esm/types/scene_document_contract/Types.hx",
+      "sha256": "308008e5d385b7b3e02bc118f2a93c6fde340ccec0b5024b3387bcf0b43c58ab"
+    },
+    {
+      "path": "flight/esm/types/screen/Types.hx",
+      "sha256": "6b9d3ae284bbaea6bed546e244bc9cbe9430a29622153e5a396d5a7eaa70f34a"
+    },
+    {
+      "path": "flight/esm/types/screen_contract/Types.hx",
+      "sha256": "53c5c9dbf56cf7ed1d93f7b0a9acad0805b0150736faa1f6dd069d8d6393de09"
+    },
+    {
+      "path": "flight/esm/types/sdk/Types.hx",
+      "sha256": "d897907b97dfe7914af78abefe4b63d12e40e9657d2009f28436dc35d93008c6"
+    },
+    {
+      "path": "flight/esm/types/sdk_abc/Types.hx",
+      "sha256": "175c5da727b6513585f0a0c99a44dba84877cd3a15d12df3a1f04f4b06ec79e9"
+    },
+    {
+      "path": "flight/esm/types/sdk_animation/Types.hx",
+      "sha256": "d6158081dd77d573b83e72e49f25c47e598a66701887507263685d7e23465596"
+    },
+    {
+      "path": "flight/esm/types/sdk_app/Types.hx",
+      "sha256": "d8d82752b8c4d8a38a343697c4deccab165fe6b1bb0eb0ca5ba66f8d473e73b8"
+    },
+    {
+      "path": "flight/esm/types/sdk_audio/Types.hx",
+      "sha256": "56492868c8ff5f35ba0d30c66ca5d4b00bdef986f0a1361c394640f8c23a8aa8"
+    },
+    {
+      "path": "flight/esm/types/sdk_binpack/Types.hx",
+      "sha256": "9c0a7d744e3d3d952e8ad489c93ffc1164f3c8b2a25bec6a73c11ad407b576e8"
+    },
+    {
+      "path": "flight/esm/types/sdk_bitmap/Types.hx",
+      "sha256": "33fc342091af75ad46fd7c22b62ed1fc323117b0eb3f13a210f314fbe875354c"
+    },
+    {
+      "path": "flight/esm/types/sdk_bitmapfont_formats/Types.hx",
+      "sha256": "61de9b0612ac037330c83b02235c13e7f232de974208f3f545554e98100abe66"
+    },
+    {
+      "path": "flight/esm/types/sdk_bitmaptext/Types.hx",
+      "sha256": "e97fb32ec6a869d9b9101b69047b2d309552a0eaac5afe85648a76400fd9a882"
+    },
+    {
+      "path": "flight/esm/types/sdk_buffer/Types.hx",
+      "sha256": "ba86dbe63ca69319b967f6ffd5b99067deef9c127054218902760b57fc029492"
+    },
+    {
+      "path": "flight/esm/types/sdk_camera/Types.hx",
+      "sha256": "de1a29098747238fb76e5966cc88eda0f3b880560a2247cac07257cd00f37394"
+    },
+    {
+      "path": "flight/esm/types/sdk_camera_controls/Types.hx",
+      "sha256": "774257dc4ad9c890d4efc40b4335ea73b34137d9fc352a2b004e24a6d99297f9"
+    },
+    {
+      "path": "flight/esm/types/sdk_capture/Types.hx",
+      "sha256": "213e3fe5bf2eedd8c1dde724c03c62cd1c9efe70abd207613b42deaf0bbb3b83"
+    },
+    {
+      "path": "flight/esm/types/sdk_clip/Types.hx",
+      "sha256": "ad256c7fee73a948393049edd0f6c59e28b3c62999e8240fa489c717c6820f14"
+    },
+    {
+      "path": "flight/esm/types/sdk_clipboard/Types.hx",
+      "sha256": "cb07a7d5dc780f714d548bd6f29d955ddb6b6072f10cae6a8cb5f11d7eea163c"
+    },
+    {
+      "path": "flight/esm/types/sdk_clock/Types.hx",
+      "sha256": "abd9c372476011bdae945a1350de1a4623a7dca9a14f264c6836e41a3f141c06"
+    },
+    {
+      "path": "flight/esm/types/sdk_collision/Types.hx",
+      "sha256": "21a5760e355839d9318aef7e85e1fcdbe9b8e716afea165b30386d3812378fa0"
+    },
+    {
+      "path": "flight/esm/types/sdk_color/Types.hx",
+      "sha256": "cf25fa20c0d29d54b9f9bd3e00143929d6060d77aaca1625a1083e446b46de66"
+    },
+    {
+      "path": "flight/esm/types/sdk_command/Types.hx",
+      "sha256": "50dc8a1ded9bb4df1abc0f3a2f0413fe277779671d9fa50f1412ef676ec3ab1f"
+    },
+    {
+      "path": "flight/esm/types/sdk_compression/Types.hx",
+      "sha256": "be06b00b1b6563f76025b8c2c61c353194b7e8fddcd1fd0947b0c3c7086d03b4"
+    },
+    {
+      "path": "flight/esm/types/sdk_contract/Types.hx",
+      "sha256": "0b0b01b3ae060fa7cd0e547441ba9b77a47423c94533b892da4c7c587a76f552"
+    },
+    {
+      "path": "flight/esm/types/sdk_debug/Types.hx",
+      "sha256": "0193140a14077c1444a94259aa90ceea17dd4a45450fd1569b11137f42e15fef"
+    },
+    {
+      "path": "flight/esm/types/sdk_device/Types.hx",
+      "sha256": "4eeffd32df2eebd0edcc5684bef473ec6f6da0ab1dc50a72c0c138755267bd1e"
+    },
+    {
+      "path": "flight/esm/types/sdk_easing/Types.hx",
+      "sha256": "cfe92f65f84765667b6261ecdf679d0f8e2d42967cd2a5c0374a77e8f0121d89"
+    },
+    {
+      "path": "flight/esm/types/sdk_effects/Types.hx",
+      "sha256": "501509688684ad255a3df1ec64b44b7295797ac82abd563cc65e64c94202bfb1"
+    },
+    {
+      "path": "flight/esm/types/sdk_effects_canvas/Types.hx",
+      "sha256": "2deeb2a7e447b427a0db45a660455af2c76d56d228a17cd3f2029d9ab3525bec"
+    },
+    {
+      "path": "flight/esm/types/sdk_effects_gl/Types.hx",
+      "sha256": "1e0196a8a499ce6b49d531b4c8332c88b0290b44efb0053e3af0ad52d48d3bdc"
+    },
+    {
+      "path": "flight/esm/types/sdk_effects_wgpu/Types.hx",
+      "sha256": "c46ca86fc636eea4adb5348b4567e4a2282180f67d4e128ffc928f4ea4ce139d"
+    },
+    {
+      "path": "flight/esm/types/sdk_entity/Types.hx",
+      "sha256": "01ece1e49dc33d3560bad1e6b0f5975e3417c974eb5417025d2c9b993a867fb6"
+    },
+    {
+      "path": "flight/esm/types/sdk_flow/Types.hx",
+      "sha256": "17f8abd1031a89572df00d2f7fda7805b5b3237e086dfa47d0429cd8a1c2e7ee"
+    },
+    {
+      "path": "flight/esm/types/sdk_font/Types.hx",
+      "sha256": "5b7e1301582929ecc5313d26e239c9866d0f0d4637ea71449913ac9551b6f120"
+    },
+    {
+      "path": "flight/esm/types/sdk_font_formats/Types.hx",
+      "sha256": "d10b70495aaeb2af51be740ea119459206f8eb540617b721489deede25a62d8d"
+    },
+    {
+      "path": "flight/esm/types/sdk_geometry/Types.hx",
+      "sha256": "0ed9c5cf19f1825de9a21226fde73515157c68f002667ed865b8e56f0222c999"
+    },
+    {
+      "path": "flight/esm/types/sdk_gizmo/Types.hx",
+      "sha256": "a0e0387c697f729e2b9c24c7a36a47fc6f7201fc221aa8bf89ce374bc226ef40"
+    },
+    {
+      "path": "flight/esm/types/sdk_gui/Types.hx",
+      "sha256": "fa9bd531b2d0b4a7a0f03ddce551805970d8666da4c20360eae43427c9a39530"
+    },
+    {
+      "path": "flight/esm/types/sdk_haptics/Types.hx",
+      "sha256": "8a12b5d5631025a13aa0611f26eba173ca12faf9a888fafd6f8b387b8f9a8a6a"
+    },
+    {
+      "path": "flight/esm/types/sdk_host/Types.hx",
+      "sha256": "e947f3424b829f897b5140efed76fcb9837cd9fb240fa36e8f615d45b6985af4"
+    },
+    {
+      "path": "flight/esm/types/sdk_image/Types.hx",
+      "sha256": "db0726f86ab9485bbc42d3f5a10b35af24e2c505a8e8f86ba3dfe40137bb4c0c"
+    },
+    {
+      "path": "flight/esm/types/sdk_input/Types.hx",
+      "sha256": "c1536950458e70a9a42a70e5a3f5a38adc97665079dcfd8282df99173d46441a"
+    },
+    {
+      "path": "flight/esm/types/sdk_interaction/Types.hx",
+      "sha256": "b0767c9b0cb52bb817a54272cf73415ffcb22e1ee4f9a851a6fa6a63dd6cef3b"
+    },
+    {
+      "path": "flight/esm/types/sdk_intl/Types.hx",
+      "sha256": "cfeb285f8c765e4c7fab9c80aeaf6403a010e6afa4af76254dbfdb1f82c0e678"
+    },
+    {
+      "path": "flight/esm/types/sdk_ipc/Types.hx",
+      "sha256": "978dd2c00e4426bbf866a7e9fa6fd2994badcf7d9f4a8e8ed4d5d08d60063969"
+    },
+    {
+      "path": "flight/esm/types/sdk_layout/Types.hx",
+      "sha256": "77f407befa474b192346499abea6622790aa5b555d44a9cb07be8c4ddc683436"
+    },
+    {
+      "path": "flight/esm/types/sdk_lifecycle/Types.hx",
+      "sha256": "9ee0e30ef7ed37b1716680dcef412766fb20dba4f2b0a4364ae9b01da40b59ee"
+    },
+    {
+      "path": "flight/esm/types/sdk_loader/Types.hx",
+      "sha256": "f684e6374115c7a087896d226a3604f2b178e3f7556caa4d71d132dc1f7d8e81"
+    },
+    {
+      "path": "flight/esm/types/sdk_log/Types.hx",
+      "sha256": "5226343b550a5e860198c0b224463ee5b63c9cbfe92e17ef5ce9db4ba3d6cad4"
+    },
+    {
+      "path": "flight/esm/types/sdk_materials/Types.hx",
+      "sha256": "58336a17d73b60f37470c766c9154d8257e68a781ecc2bd132e552bfbe239748"
+    },
+    {
+      "path": "flight/esm/types/sdk_math/Types.hx",
+      "sha256": "5e6e5f512189fcbec6d8e738cb1c886cbad379947bbbbb1edd276c40a31bbb75"
+    },
+    {
+      "path": "flight/esm/types/sdk_media/Types.hx",
+      "sha256": "e6f3403faa76f5924a7281aa081ed745b4ba5b5c2bdbd28b2f0ece8fc080a60a"
+    },
+    {
+      "path": "flight/esm/types/sdk_mediasession/Types.hx",
+      "sha256": "52083c0157ca566ebce67e860724ef4d6a38ab4953731907901601ba3cea985b"
+    },
+    {
+      "path": "flight/esm/types/sdk_menu/Types.hx",
+      "sha256": "8d6ca030fdc611bd858fa6c3d1a51efab1803b2ddbe29207f045caab61d14ea4"
+    },
+    {
+      "path": "flight/esm/types/sdk_meshgeometry/Types.hx",
+      "sha256": "6cf5f320259b3ac77a8a28fbfa3bce867ca0a2caf2437f7ae80442affe8d5cb4"
+    },
+    {
+      "path": "flight/esm/types/sdk_motionpath/Types.hx",
+      "sha256": "95f5cb51a6911bcb1908f03f900ca04ae5e7cc531bd19f6913e0eaf0dffb45d0"
+    },
+    {
+      "path": "flight/esm/types/sdk_movieclip/Types.hx",
+      "sha256": "3424ae6bd07451e99e4968c41fce8ba2553d4e4231dbf665f9aca93ee6122505"
+    },
+    {
+      "path": "flight/esm/types/sdk_net/Types.hx",
+      "sha256": "725d9aa8ff5ba8c8fd8189e01ef48202796e8fb0331bcfec2d746b0d3642d1ac"
+    },
+    {
+      "path": "flight/esm/types/sdk_node/Types.hx",
+      "sha256": "ddcdb006e6a670a6c8be0d498bbb2f42c2e764fddc1a78407f4d1713e2368185"
+    },
+    {
+      "path": "flight/esm/types/sdk_particleemitter/Types.hx",
+      "sha256": "09b8ddee07b287c246cb1eaf3315d462798d1aff10bc09832e9067dd412aed3d"
+    },
+    {
+      "path": "flight/esm/types/sdk_particles/Types.hx",
+      "sha256": "a7447899cfc7b3ebe76e85a3f662a222266d1aa583d90b283740f791f7ee9fef"
+    },
+    {
+      "path": "flight/esm/types/sdk_particles_formats/Types.hx",
+      "sha256": "08c058a3ab5f0f7855add3c1ebe299774d85878a4415d1d4cca44c84c5bb6de0"
+    },
+    {
+      "path": "flight/esm/types/sdk_path/Types.hx",
+      "sha256": "2c753d463a26a2bd7d106ab583f151653d3bb259b77c8b50fe6b044e92b9030e"
+    },
+    {
+      "path": "flight/esm/types/sdk_path_boolean/Types.hx",
+      "sha256": "fddca2259465f6c61615ec6f53772933b5db7a7d287033e07580ca7737ceda1d"
+    },
+    {
+      "path": "flight/esm/types/sdk_path_formats/Types.hx",
+      "sha256": "1cdac0fd7229ce8bb9dfe8b23d5558f31e41b2bacf39ac26f6ebd3e323cc61e9"
+    },
+    {
+      "path": "flight/esm/types/sdk_physics2d/Types.hx",
+      "sha256": "090459160121fdaf8dfbfbaaf0de2af5a555857a149ec94a42abd456ddc083af"
+    },
+    {
+      "path": "flight/esm/types/sdk_physics2d_abi/Types.hx",
+      "sha256": "3603a5fa6e206b0e4d1bc7fa168d0e65f8f0bac3e320a9329bb4df94f612c209"
+    },
+    {
+      "path": "flight/esm/types/sdk_physics3d/Types.hx",
+      "sha256": "29fceab6d58d54cb08978fbc830ec62d48985c5997e532c322ba075b7823d355"
+    },
+    {
+      "path": "flight/esm/types/sdk_physics3d_abi/Types.hx",
+      "sha256": "aa8515eac08264d182558ae85d333d02b6add4eea2d3eb4a3d43fbfc0e3151b7"
+    },
+    {
+      "path": "flight/esm/types/sdk_picking/Types.hx",
+      "sha256": "4682ba0878c3402f7b89db7e5face1e8e88e9dbfe93a0778a490ab1b9ccd0d5b"
+    },
+    {
+      "path": "flight/esm/types/sdk_platform/Types.hx",
+      "sha256": "069d2dab33e7c443b3048d27c10224ce7aefa26343ca94309b1eeb0e26687bac"
+    },
+    {
+      "path": "flight/esm/types/sdk_power/Types.hx",
+      "sha256": "1aa9e071f0ea5d77817afe0fa7a62c397a4081889d9b3319c5f90c4b221d7af5"
+    },
+    {
+      "path": "flight/esm/types/sdk_quadbatch/Types.hx",
+      "sha256": "42ce338fc5d7bfbe234681b09b0f47512085b07f99e80781c02377724643ee8b"
+    },
+    {
+      "path": "flight/esm/types/sdk_render/Types.hx",
+      "sha256": "fe31c11c489e872d94264433d5b9900bd6a380cd0f702c2dd21edfcf22c1e366"
+    },
+    {
+      "path": "flight/esm/types/sdk_render_gl/Types.hx",
+      "sha256": "13b02aff1ec2ea0785624be2fb34d0c7367d124688146bfe83114bd5228be712"
+    },
+    {
+      "path": "flight/esm/types/sdk_requirement/Types.hx",
+      "sha256": "20276fa3d3065fd2780c90ddb17c3f9438c90ee3c1ef48780c8cd3f9389f4a90"
+    },
+    {
+      "path": "flight/esm/types/sdk_requirement_catalog/Types.hx",
+      "sha256": "aea3714f6f1a3dd9142cc759d37c7c8efd3c437bdd807c4618ad27132347af9e"
+    },
+    {
+      "path": "flight/esm/types/sdk_requirement_codegen/Types.hx",
+      "sha256": "99806ffb95b0b15e8640518ff58e756768a1cc57598d43791615f3c67adb92eb"
+    },
+    {
+      "path": "flight/esm/types/sdk_resource/Types.hx",
+      "sha256": "355518c4bee5af58fbaedb90f279c11b61fcb2e773676c54ef377bdd24959ad4"
+    },
+    {
+      "path": "flight/esm/types/sdk_scene2d_canvas/Types.hx",
+      "sha256": "bbb0853388b523549bb003027999dc7744fd734a3a84402e128728be89f104a0"
+    },
+    {
+      "path": "flight/esm/types/sdk_scene2d_dom/Types.hx",
+      "sha256": "a2e62eed0c5f01989610c56f71685c821e096f235c627cb69beb2d7c918b2605"
+    },
+    {
+      "path": "flight/esm/types/sdk_scene2d_gl/Types.hx",
+      "sha256": "5de546826b541d5947100740340524bcb2d09f1fc99fd0d6155b3666cfc724a6"
+    },
+    {
+      "path": "flight/esm/types/sdk_scene3d/Types.hx",
+      "sha256": "3b31558d4709bc4f840665e8978fe609212284180c4e0a646ba2ec9115cbd9b3"
+    },
+    {
+      "path": "flight/esm/types/sdk_scene3d_gl/Types.hx",
+      "sha256": "3c510bbca5c5168468f6e444c2cafb54f1caac4f9eed19085917ae6f3f4c55fb"
+    },
+    {
+      "path": "flight/esm/types/sdk_scene_document/Types.hx",
+      "sha256": "866edbf770844b47b05ffd61b7ea6dad96e28304ebfb3f06c58675a654a2af13"
+    },
+    {
+      "path": "flight/esm/types/sdk_screen/Types.hx",
+      "sha256": "ef4250b56948d431af5565e0a560b1f0bb056929ae63c54c75c391ac7a534442"
+    },
+    {
+      "path": "flight/esm/types/sdk_selection/Types.hx",
+      "sha256": "5a3f0548881d33951c77b6c0794eb26e02c74e18f4a5bb1ccd8f6fb5bf3dde16"
+    },
+    {
+      "path": "flight/esm/types/sdk_sensors/Types.hx",
+      "sha256": "a40d2c88925ba30c04bf3ed75402a5290353a483928b03c514410458cdba0fdd"
+    },
+    {
+      "path": "flight/esm/types/sdk_shading/Types.hx",
+      "sha256": "7f8f592309c3794d93e4c7232cf92a28e670fc89b774581d43025f18302ea6aa"
+    },
+    {
+      "path": "flight/esm/types/sdk_shape/Types.hx",
+      "sha256": "2124932c3fa4536b6ef10e363d7631f726622131909281af57c19d42242ed0c0"
+    },
+    {
+      "path": "flight/esm/types/sdk_shell/Types.hx",
+      "sha256": "3b12f98b56cc87f0c3c928dcbf445b580f8966c9cc9a40dde636f32286be1519"
+    },
+    {
+      "path": "flight/esm/types/sdk_shortcut/Types.hx",
+      "sha256": "785f9d32ec6ba6578c4574f9d2ba9b04f29e9e60e00e1866d9eb9206179f3eb0"
+    },
+    {
+      "path": "flight/esm/types/sdk_signals/Types.hx",
+      "sha256": "326236400c1b1f47ef568f4a960c73a47aa65692ed1d45244287b702035515c6"
+    },
+    {
+      "path": "flight/esm/types/sdk_skeleton2d/Types.hx",
+      "sha256": "8097b73f989d548dc294ec5d58a187fcbc3905e3f8a47168dd518c95a6f79db1"
+    },
+    {
+      "path": "flight/esm/types/sdk_skeleton2d_formats/Types.hx",
+      "sha256": "cc78db9e254a4be9ceb34d738f1da57b572e0071e433a79d3168226b1899a4b1"
+    },
+    {
+      "path": "flight/esm/types/sdk_skeleton3d/Types.hx",
+      "sha256": "710762f324388f25aa11bde0ff393d4b14ba0cabc62a9a1dae9f66eaf9a7a5a5"
+    },
+    {
+      "path": "flight/esm/types/sdk_snapshot/Types.hx",
+      "sha256": "628802d06ea1eb7be3aa0c67efbb94ec6edc8b523fef06b484c56e7fb064da9c"
+    },
+    {
+      "path": "flight/esm/types/sdk_socket/Types.hx",
+      "sha256": "847757e1963dcb98d235a790f2feaf114d2df36ba64703f5e31f2251ee9f3384"
+    },
+    {
+      "path": "flight/esm/types/sdk_spatial/Types.hx",
+      "sha256": "1bc1a5d66c933b619884abb0f0104c2895a427498592bc7d9b34463c52e1b033"
+    },
+    {
+      "path": "flight/esm/types/sdk_spring/Types.hx",
+      "sha256": "8b45c456ba42d02b0e71b37358ab79e85214db1e993a93079d7405b824581aed"
+    },
+    {
+      "path": "flight/esm/types/sdk_spritesheet/Types.hx",
+      "sha256": "bd72d1956a6799e0f622dd2da3e3f0125ff2102cd05a72cf2431f5fe6d5d6831"
+    },
+    {
+      "path": "flight/esm/types/sdk_spritesheet_formats/Types.hx",
+      "sha256": "c70f154e01f724ec56dda5f41f3bb00c5bfd3c30a93549182121af6f519a4fff"
+    },
+    {
+      "path": "flight/esm/types/sdk_statechart/Types.hx",
+      "sha256": "a9cd9419f7ca0bc28a5180c8d072b1654ab15724aeae436149743737db8340ff"
+    },
+    {
+      "path": "flight/esm/types/sdk_statusbar/Types.hx",
+      "sha256": "03967d3554a0da49a098d9acc9f54018c75965ad10e1f742d6ce7952e6ae7421"
+    },
+    {
+      "path": "flight/esm/types/sdk_surface/Types.hx",
+      "sha256": "386124157f6bda5a841d2742b9f5e65a4b57c92a10053d2ff7f31c857ec49882"
+    },
+    {
+      "path": "flight/esm/types/sdk_swf/Types.hx",
+      "sha256": "516509d1f795f3e7946b8de44cd76d061224b4454c2375dbc214aa7fe1f38b12"
+    },
+    {
+      "path": "flight/esm/types/sdk_text/Types.hx",
+      "sha256": "f4b91c091d47068aa3112e4c2e11894693b85f685fba1bef99a92ee3c987af37"
+    },
+    {
+      "path": "flight/esm/types/sdk_textbidi/Types.hx",
+      "sha256": "68d815827648422fe1b1dd5fff37d5541abee0635254e31919c904f29fa1b826"
+    },
+    {
+      "path": "flight/esm/types/sdk_textformat/Types.hx",
+      "sha256": "740c1dc9cfc1e7f5b176aa2c8e2d645ba6e0d531e720d96c002e665c75494f7d"
+    },
+    {
+      "path": "flight/esm/types/sdk_textlayout/Types.hx",
+      "sha256": "260ab21da5095c2c62e80b7f52c87c206521824821f464ae9f6beb8c00ebeb9b"
+    },
+    {
+      "path": "flight/esm/types/sdk_textsegment/Types.hx",
+      "sha256": "84ac5721ecde3c59b67ca5f9243dc9a7b960874231f94041788a83e9c79f9e03"
+    },
+    {
+      "path": "flight/esm/types/sdk_textshaper/Types.hx",
+      "sha256": "c7e97590bd453d2b1ec26ba0a4479e86008d89a4fe35af661e9859b8daa7b334"
+    },
+    {
+      "path": "flight/esm/types/sdk_texture_formats/Types.hx",
+      "sha256": "0c9374c91129297238d7a395c1aaa313acef298dc9f9c87c11040e5f185dc24f"
+    },
+    {
+      "path": "flight/esm/types/sdk_textureatlas/Types.hx",
+      "sha256": "e73936320a5b676f11f868984a95863ccdebe475840c971a1ac2626554a94459"
+    },
+    {
+      "path": "flight/esm/types/sdk_textureatlas_formats/Types.hx",
+      "sha256": "c9b342687de17e76b01d965115eb783494e8d374e131d92c2b421f1dd3a65cf4"
+    },
+    {
+      "path": "flight/esm/types/sdk_tilemap/Types.hx",
+      "sha256": "95cc12bea2bbd9c541ecc2bbdcb3341a4bc400f8b8536c74be68000b2eba1fb8"
+    },
+    {
+      "path": "flight/esm/types/sdk_tilemap_formats/Types.hx",
+      "sha256": "ae160c3311e588f2b1e31a94c71f634cd7754675113767068820a6fa4c239092"
+    },
+    {
+      "path": "flight/esm/types/sdk_timeline/Types.hx",
+      "sha256": "2bb9e5fe13030e3d5ffc5fa1e122c094ebfeb3419f40b57527bcced09eccd0b3"
+    },
+    {
+      "path": "flight/esm/types/sdk_tokens/Types.hx",
+      "sha256": "5ff2fe5096dac8c2f1dac3b84eaacf05f02e20f49c5addc4b68d4f89b33e5ebc"
+    },
+    {
+      "path": "flight/esm/types/sdk_tray/Types.hx",
+      "sha256": "b90741f252f0bc0e8bf98c890c18ca47ec24ae75faf49b318c24de01a024af30"
+    },
+    {
+      "path": "flight/esm/types/sdk_useragent/Types.hx",
+      "sha256": "e3239f7f354c08f2130bedd5a52ed67d1652f2f5b79dad33ccd40db02d5cedcc"
+    },
+    {
+      "path": "flight/esm/types/sdk_velocity/Types.hx",
+      "sha256": "b04c2b4872018c97ac85813ce15883b4d2a1314b8395da301925a21c5ef9038b"
+    },
+    {
+      "path": "flight/esm/types/sdk_video/Types.hx",
+      "sha256": "709a572ef32f8cabd002bb126dfa66b611e7b8c5d5d077b002eb4569e75c52c9"
+    },
+    {
+      "path": "flight/esm/types/sdk_xml/Types.hx",
+      "sha256": "5169edd6c9c1cd55763c740be70e5919453c8d3c4442a0998334bc34794e658e"
+    },
+    {
+      "path": "flight/esm/types/selection/Types.hx",
+      "sha256": "7451fc54bcfdf5f9e3f6e4ca84ecc0738f5e1a391929bc7d78a1bb35b884d22a"
+    },
+    {
+      "path": "flight/esm/types/selection_contract/Types.hx",
+      "sha256": "2da498ccea1007805c14aa60fc4aa32b8207039b5da09c344bc92bd1f5f5aac4"
+    },
+    {
+      "path": "flight/esm/types/sensors/Types.hx",
+      "sha256": "48f13cee5c0213e7ef3c3181cea2b87dab726542ce82a58418ce4b5c279f4397"
+    },
+    {
+      "path": "flight/esm/types/sensors_contract/Types.hx",
+      "sha256": "42ad8f62da1ecf9105ee379e78c418dd4f8f01b2d25abb4b457613e2489b2368"
+    },
+    {
+      "path": "flight/esm/types/shading/Types.hx",
+      "sha256": "58755d05c4984ff9ff1d50c1d881d98cb9dc63b70a484addb85b323da3380b24"
+    },
+    {
+      "path": "flight/esm/types/shading_contract/Types.hx",
+      "sha256": "1ce383f97ed0c3be5aecf35554976658cef89007e46babd4063c96c87230b066"
+    },
+    {
+      "path": "flight/esm/types/shape/Types.hx",
+      "sha256": "43b8ed287dfe0557b97f34eb780dd6cc6d18139d781b917d979adad269a1971f"
+    },
+    {
+      "path": "flight/esm/types/shape_contract/Types.hx",
+      "sha256": "feb29f4ea72bf955cc6ffc056d3246bb3e1fe89d413a1aa1164802852eda1474"
+    },
+    {
+      "path": "flight/esm/types/shape_formats_contract/Types.hx",
+      "sha256": "83cee511f385e7d194e8e88dfcb6615d299181a875410095b9bebf3e5549c96d"
+    },
+    {
+      "path": "flight/esm/types/share_contract/Types.hx",
+      "sha256": "daf0c05ec00c501ea7c9dbf2f2314f225ba8f0d97ebcd3fbdc028d749686b897"
+    },
+    {
+      "path": "flight/esm/types/shell/Types.hx",
+      "sha256": "3c4bedbc89b65d476da92f96531d8cea5ba5b2612fb8fb1f65898fd4fcac8c1f"
+    },
+    {
+      "path": "flight/esm/types/shell_contract/Types.hx",
+      "sha256": "14e6305d0dbe28e1191383b31b7c14f6daf8c1afbaaac8ac4b9df596a4ff2f68"
+    },
+    {
+      "path": "flight/esm/types/shortcut/Types.hx",
+      "sha256": "c2fa342cc40673bcf246a9d5e2d9cfefaa2362de987f4374830251994c01e174"
+    },
+    {
+      "path": "flight/esm/types/shortcut_contract/Types.hx",
+      "sha256": "0ab285eece4ee2a04fd154940685fced23eca0d4f457d280b4e5dfd8a4170b6e"
+    },
+    {
+      "path": "flight/esm/types/signals/Types.hx",
+      "sha256": "cebe3c10e9d9c5e3303e16783cd7731bbb38d2968b248f95c1998077de9e8138"
+    },
+    {
+      "path": "flight/esm/types/signals_contract/Types.hx",
+      "sha256": "e4d498966e8340a4fdd77dbcc46174cd3cfe090d37ef7d72e741dea199831655"
+    },
+    {
+      "path": "flight/esm/types/skeleton2d/Types.hx",
+      "sha256": "e26eda7311f73c2db7abe1ffb720f1b37d28347470df10fca5cfac3bef5937d0"
+    },
+    {
+      "path": "flight/esm/types/skeleton2d_contract/Types.hx",
+      "sha256": "dc10d7de92089b20c6ce2ae33b4dcd87d00c7b8af387b05de847d8dcdd7c7621"
+    },
+    {
+      "path": "flight/esm/types/skeleton2d_formats/Types.hx",
+      "sha256": "15553aef4573eb1dffa164458698fd464f1cf373c969e72ef9bdbf599c4e9fc8"
+    },
+    {
+      "path": "flight/esm/types/skeleton2d_formats_contract/Types.hx",
+      "sha256": "748c98aa06704394adda5ee1f45e261cf29afdfb89d41326bedc2f828c238c71"
+    },
+    {
+      "path": "flight/esm/types/skeleton3d/Types.hx",
+      "sha256": "6a3568170371ef68821d9422b3e92c649bdce04f43c683a7ae181463dc87dd51"
+    },
+    {
+      "path": "flight/esm/types/skeleton3d_contract/Types.hx",
+      "sha256": "a9fece5fcd1279c24352c2a76e5999610092acf30318167b13950deb45a31780"
+    },
+    {
+      "path": "flight/esm/types/snapshot/Types.hx",
+      "sha256": "bc1dab9fef035695b2d05d244572a773be9279f00f4c1aa5112c0d81d0eab62d"
+    },
+    {
+      "path": "flight/esm/types/snapshot_contract/Types.hx",
+      "sha256": "66775b820a525d73cc0b5564fec4bd484533aa9f6d8d395d5e165fdabe3437f6"
+    },
+    {
+      "path": "flight/esm/types/socket/Types.hx",
+      "sha256": "5366ceddf1533d495634bb03ad7124f0e167dccac6918cd75eecbf799cee5948"
+    },
+    {
+      "path": "flight/esm/types/socket_contract/Types.hx",
+      "sha256": "fc13cea4e0da829ceb28032ad7ab072683728b65e33d89299fbf9df42a9568cf"
+    },
+    {
+      "path": "flight/esm/types/spatial/Types.hx",
+      "sha256": "fd8f88d70b490a0ace5d0572cfd81bc01599b8f849bb2c6bf451c7c9958c71ef"
+    },
+    {
+      "path": "flight/esm/types/spatial_contract/Types.hx",
+      "sha256": "e258d5a8e6a68f7fb87410fc5a3e930ca43874cdb1e2ac41b9a0f8aef2efa1bc"
+    },
+    {
+      "path": "flight/esm/types/spring/Types.hx",
+      "sha256": "edabc03564a273ca3d0bdb5c0c99ddd5d1ffa0ab5540d531effa9848a5c6bbf5"
+    },
+    {
+      "path": "flight/esm/types/spring_contract/Types.hx",
+      "sha256": "9d47362a4ff45a423d87ca2accb83f8372386fba54cc333a058c7785499b21a7"
+    },
+    {
+      "path": "flight/esm/types/spritesheet/Types.hx",
+      "sha256": "54519ebbf634022f673f7f9464d54eef68260af0921310618c3eefe30219daec"
+    },
+    {
+      "path": "flight/esm/types/spritesheet_contract/Types.hx",
+      "sha256": "ae6100df99085819cbe143b8afbd1c10f4dd15d65cf2f7d6671581c4378baf9c"
+    },
+    {
+      "path": "flight/esm/types/spritesheet_formats/Types.hx",
+      "sha256": "2da3eb2dd5ad6d17ecca78f01ee1c839ee900c7a26fc06fa3bea2e98e6747215"
+    },
+    {
+      "path": "flight/esm/types/spritesheet_formats_contract/Types.hx",
+      "sha256": "118c36113ecfe112348f08b53c8e74abf7b063018149249f9236a2a97af50b89"
+    },
+    {
+      "path": "flight/esm/types/statechart/Types.hx",
+      "sha256": "4e21b588653e60bba0691e35834990714effdc42282bc30b8a0e8f648fcc69e4"
+    },
+    {
+      "path": "flight/esm/types/statechart_contract/Types.hx",
+      "sha256": "64142d26bff5fa1c0cfc50614b6465db12ce7b883a916d76b0d09351cc0ce0b6"
+    },
+    {
+      "path": "flight/esm/types/statusbar/Types.hx",
+      "sha256": "4b27197ea00439e7d0e98330c694bdda79b66c82423b2bb4d2fb987a24d84f06"
+    },
+    {
+      "path": "flight/esm/types/statusbar_contract/Types.hx",
+      "sha256": "7ec16e0d45e0d7879702084d9123eb45d8a613a8ca5868b7de42f3634290a5ae"
+    },
+    {
+      "path": "flight/esm/types/surface/Types.hx",
+      "sha256": "0d5b7eda4850dc25f1694a1a6fa8458af8cd5d9aed530401d294deac1c542b31"
+    },
+    {
+      "path": "flight/esm/types/surface_contract/Types.hx",
+      "sha256": "de177a65ab74f9829b2344071e2f031fff64e600b6026aaf3da8de1d02c17c4e"
+    },
+    {
+      "path": "flight/esm/types/swf/Types.hx",
+      "sha256": "a78dd9d134188d8e30fc7e06cb5fc57b24505159593eeacf4f1c2319001c3e4f"
+    },
+    {
+      "path": "flight/esm/types/swf_contract/Types.hx",
+      "sha256": "f5f807661e5bfa841ddeaba12a5f48b4885872c3678ece8442c6661b591e69a7"
+    },
+    {
+      "path": "flight/esm/types/text/Types.hx",
+      "sha256": "10926e4d1d26d4e72b6683f2e780dcf947362581d3bc66c0ad0fc7330cd2f0e6"
+    },
+    {
+      "path": "flight/esm/types/text_contract/Types.hx",
+      "sha256": "efcabfada17013d42f557d9b289c74092f0b02aa75e3bbc9809fcb632fe34f5c"
+    },
+    {
+      "path": "flight/esm/types/text_markup_contract/Types.hx",
+      "sha256": "8d325b7cc7e73f30f11ebac0e32f7eb276baa13625fa1847b7c36199e2896b7f"
+    },
+    {
+      "path": "flight/esm/types/textbidi/Types.hx",
+      "sha256": "ea79ece48bcc41fbb572ef31b6c4491c1c4a1e601d41bfe060b249f9b8985421"
+    },
+    {
+      "path": "flight/esm/types/textbidi_contract/Types.hx",
+      "sha256": "a11e527ff39f700a3663e22a21729e5695e3ce80bd573df2a06cea7bd493e6b8"
+    },
+    {
+      "path": "flight/esm/types/textformat/Types.hx",
+      "sha256": "bfa3aaa9932c94104f2c529ef60b35a31e622aa0d2240c3ec8453c5d5aaa6d7f"
+    },
+    {
+      "path": "flight/esm/types/textformat_contract/Types.hx",
+      "sha256": "91884e30ae8eb604a553edadfc25dd4d89a807ea31e7bdc2ddc991f9a7099b6b"
+    },
+    {
+      "path": "flight/esm/types/textinput_contract/Types.hx",
+      "sha256": "54a89484c3e0f4c6dfdac17e4e6a4ef3baaca42d346ab0edff2d48180926793f"
+    },
+    {
+      "path": "flight/esm/types/textlayout/Types.hx",
+      "sha256": "ab5a37ca450c6c304e5d53e5c0192e22b584ac4bb463f562a16debc3684e0378"
+    },
+    {
+      "path": "flight/esm/types/textlayout_contract/Types.hx",
+      "sha256": "02c53d660ae73c8094f27053d589b898f54830940f88075a4c7064598f671224"
+    },
+    {
+      "path": "flight/esm/types/textsegment/Types.hx",
+      "sha256": "eeade46c64e938db7d1bc2dcb00a4068b29d9fe2e8f551140493065027b80278"
+    },
+    {
+      "path": "flight/esm/types/textsegment_contract/Types.hx",
+      "sha256": "7aede86ac4b9c7719fdb3dd71dcafd90c807ad1ab0ca5c12db05808d0a73c917"
+    },
+    {
+      "path": "flight/esm/types/textshaper/Types.hx",
+      "sha256": "9ed8fdc5c0f23fbb243b90e709b0ff592a5dbd11bfe21a8617899eb5e03f77a7"
+    },
+    {
+      "path": "flight/esm/types/textshaper_contract/Types.hx",
+      "sha256": "ba76445fc2a07e060a9692ea19ca39a055a1626c285f83d59e5d29af5d61678b"
+    },
+    {
+      "path": "flight/esm/types/texture_contract/Types.hx",
+      "sha256": "6e59aee7dc9dc0c7b91120ee4c03767160131c36d238ff6aa0409dc8a8a98dea"
+    },
+    {
+      "path": "flight/esm/types/texture_formats/Types.hx",
+      "sha256": "a83009013e8de9aba39ead8eb26747d3ac1f5c469572815c268a6a80d3635b15"
+    },
+    {
+      "path": "flight/esm/types/texture_formats_contract/Types.hx",
+      "sha256": "2c9643d5b912ffe6b3616220387cd09e15a920786b183f4b8426801516e922f9"
+    },
+    {
+      "path": "flight/esm/types/textureatlas/Types.hx",
+      "sha256": "d441131648280b533cba35af4c9d50db66a9043d1cec415a72436949ae66ffd8"
+    },
+    {
+      "path": "flight/esm/types/textureatlas_contract/Types.hx",
+      "sha256": "2a372bee28ee7a39ffc3bc0e9793c0b76d26f9785c3709d01c54f38fdef0652a"
+    },
+    {
+      "path": "flight/esm/types/textureatlas_formats/Types.hx",
+      "sha256": "8e6bd855b13000b2e95b1fc70038321a55ae44cb8672be800beb04c48851124d"
+    },
+    {
+      "path": "flight/esm/types/textureatlas_formats_contract/Types.hx",
+      "sha256": "f8c48c39baec23dd419b7e0cf4d5b881d37f017004d8e94b298505471a711dc4"
+    },
+    {
+      "path": "flight/esm/types/tilemap/Types.hx",
+      "sha256": "f030d4ca226024fca852945820654d6d69022f8d2bf20658e4e6e332bd63ebb8"
+    },
+    {
+      "path": "flight/esm/types/tilemap_contract/Types.hx",
+      "sha256": "bcbb92f9eb5853d87869c0b97194fdfc4959b933db3d5471f726062d7a97d64b"
+    },
+    {
+      "path": "flight/esm/types/tilemap_formats/Types.hx",
+      "sha256": "1a873cbdbadafb7af1a69d157a9d209a2bba0df5aec4e690c1e6f28d746ce6bd"
+    },
+    {
+      "path": "flight/esm/types/tilemap_formats_contract/Types.hx",
+      "sha256": "5cc950b0847b9264bd3179a52bf07d1c5fe416c2b30a4cb9cd698a6955012c9f"
+    },
+    {
+      "path": "flight/esm/types/timeline/Types.hx",
+      "sha256": "0e1f8619cf710a9e26c47c2d4c952adfc8da32762521f190c6ffc3445a98f8d8"
+    },
+    {
+      "path": "flight/esm/types/timeline_contract/Types.hx",
+      "sha256": "46979ba59cff71fb6b59867ee42a6b556278b6cbd7c09fe89bc093cdca555b3d"
+    },
+    {
+      "path": "flight/esm/types/tokens/Types.hx",
+      "sha256": "9969e1a604526bf5b946146ca70e35f148885d1ba187f1e1063fb4e4c65fda61"
+    },
+    {
+      "path": "flight/esm/types/tokens_contract/Types.hx",
+      "sha256": "8743ddf980a99e8fafda740db8c24dd0b002603bf22c4092d48ea6fbd30d1b62"
+    },
+    {
+      "path": "flight/esm/types/tray/Types.hx",
+      "sha256": "145216db3fcd5959ab45a1af2fef5f5117e82a11332312561ae2ac3cd37af3bb"
+    },
+    {
+      "path": "flight/esm/types/tray_contract/Types.hx",
+      "sha256": "231a8ad1cbba071dc6199b6e3d1c109f4861dfcfa2e8093033f576d31fbfa572"
+    },
+    {
+      "path": "flight/esm/types/tween_contract/Types.hx",
+      "sha256": "ede5f0992a5073ee014df60b1a919f98626a58fd57e0c310d24f3b52567d70cd"
+    },
+    {
+      "path": "flight/esm/types/updater_contract/Types.hx",
+      "sha256": "60526e3797f4d5a36b8552685780090fb02b018079484b2d3aecb6d6e3c94f81"
+    },
+    {
+      "path": "flight/esm/types/useragent/Types.hx",
+      "sha256": "dad4ce2874353a7dab2016b269429de38d08796b9446387c0178bfeb7a57f8ca"
+    },
+    {
+      "path": "flight/esm/types/useragent_contract/Types.hx",
+      "sha256": "eb55da453450574364ebc378f532ca85c8a56fe67008ee597df85b75fb106f9e"
+    },
+    {
+      "path": "flight/esm/types/velocity/Types.hx",
+      "sha256": "2a6086c1254ac3ce154622302b5ee355732b31e424782595cf7f125f578ac362"
+    },
+    {
+      "path": "flight/esm/types/velocity_contract/Types.hx",
+      "sha256": "2fcf0002c6989e68e1d3e0ea2395163d3ba9eb02a2a5162b9483928053efaff7"
+    },
+    {
+      "path": "flight/esm/types/video/Types.hx",
+      "sha256": "bbe7f9e9de8edb45d56ce13a03c4ea17a5d005274185c7b7701dec9e94a20dbb"
+    },
+    {
+      "path": "flight/esm/types/video_contract/Types.hx",
+      "sha256": "db1b6a20aa6030eb465416c73ee3fa5e457de6779a3ea04a591a45ec005acc80"
+    },
+    {
+      "path": "flight/esm/types/xml/Types.hx",
+      "sha256": "6adf06f2ea34b49a14527fc9cc5a60bbe637315cce468b7a08603161bf11844f"
+    },
+    {
+      "path": "flight/esm/types/xml_contract/Types.hx",
+      "sha256": "98e3e26dd12c5bdb2bf5a4df9fd517d20e9dbc959969a44f37ddb7166f15a46b"
+    },
+    {
+      "path": "flight/esm/updater/Contract.hx",
+      "sha256": "1b9f74d65946753f48ce3fb6febe9aa3e24a250c72c57dac4ce6bb6777e89e91"
+    },
+    {
+      "path": "flight/esm/useragent/Contract.hx",
+      "sha256": "7fec5a528c30fbe7a496a3bca586fdfd938477c357ab8395019b8c9179b0ce94"
+    },
+    {
+      "path": "flight/esm/velocity/Contract.hx",
+      "sha256": "09fe04637a11cd38429395cc1d2ea811971ff0564ca11f4c6a46ae979dbf8f84"
+    },
+    {
+      "path": "flight/esm/video/Contract.hx",
+      "sha256": "75e67f22e9f04bf99060df898f57ed97be787038c42482e9be02696988602623"
+    },
+    {
+      "path": "flight/esm/webcam/Contract.hx",
+      "sha256": "fa72da04ecae2cc1de624dd63d4e5d915c2c15055d3b973e3a9b565aa69e3e4d"
+    },
+    {
+      "path": "flight/esm/xml/Contract.hx",
+      "sha256": "5f8b5c1bdbbfc28e9dcb23c2e0007f7bc3710e5af7bc5238a2109742668bd78a"
     }
   ]
 }

@@ -1,0 +1,486 @@
+diff --git a/crates/flight-bindgen/esm/generate.mjs b/crates/flight-bindgen/esm/generate.mjs
+new file mode 100644
+index 0000000000000000000000000000000000000000..59e0e1c2283d3fdfa477aca9d72554931a639dd7
+--- /dev/null
++++ b/crates/flight-bindgen/esm/generate.mjs
+@@ -0,0 +1,197 @@
++import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
++import { createRequire } from 'node:module';
++import path from 'node:path';
++import { HaxeTypes, identifier, typeName } from './haxe-types.mjs';
++
++const require = createRequire(import.meta.url);
++const ts = loadTypeScript();
++if (ts.version !== '5.9.3') throw new Error(`Flight Haxe ESM generation requires TypeScript 5.9.3, found ${ts.version}`);
++const [rootArgument, outputArgument] = process.argv.slice(2);
++if (!rootArgument || !outputArgument) throw new Error('Usage: node generate.mjs <Flight root> <output directory>');
++const root = path.resolve(rootArgument);
++const output = path.resolve(outputArgument);
++const entries = packageEntries(root);
++
++const tsConfig = ts.readConfigFile(path.join(root, 'tsconfig.base.json'), ts.sys.readFile);
++if (tsConfig.error) throw new Error(ts.flattenDiagnosticMessageText(tsConfig.error.messageText, '\n'));
++const options = ts.convertCompilerOptionsFromJson(tsConfig.config.compilerOptions, root);
++if (options.errors.length) throw new Error(ts.flattenDiagnosticMessageText(options.errors[0].messageText, '\n'));
++const paths = { ...options.options.paths };
++for (const entry of entries) paths[entry.specifier] = [entry.source];
++
++const program = ts.createProgram(entries.map(({ source }) => source), {
++  ...options.options,
++  baseUrl: root,
++  paths,
++  types: [],
++  skipLibCheck: true,
++  noEmit: true,
++});
++const checker = program.getTypeChecker();
++const publicTypes = new Map();
++for (const entry of entries) {
++  const source = program.getSourceFile(entry.source);
++  const module = source && checker.getSymbolAtLocation(source);
++  if (!module) throw new Error(`Cannot resolve public entry ${entry.specifier}`);
++  entry.exports = checker.getExportsOfModule(module).map(exported => {
++    const symbol = unalias(exported);
++    const name = exported.getName();
++    const ambient = isAmbient(symbol);
++    const runtime = runtimeSymbol(source, exported);
++    const isType = Boolean(symbol.flags & ts.SymbolFlags.Type) || !runtime;
++    if (!symbol.declarations?.length) throw new Error(`Unresolved public export ${entry.specifier}#${name}`);
++    return { name, symbol, runtime, isType, isValue: Boolean(runtime), ambient };
++  }).sort((left, right) => compare(left.name, right.name));
++  const usedTypes = new Set();
++  for (const item of entry.exports.filter(item => item.isType)) {
++    item.haxeName = uniqueName(typeName(item.name), usedTypes);
++    item.haxePath = `${entry.typesPackage}.Types.${item.haxeName}`;
++  }
++}
++
++// Prefer the defining package, then its root entry, for cross-package type references.
++for (const entry of entries) {
++  for (const item of entry.exports.filter(item => item.isType)) {
++    const declaration = item.symbol.declarations?.[0];
++    const owner = declaration && path.relative(path.join(root, 'packages'), declaration.getSourceFile().fileName)
++      .split(path.sep)[0];
++    const hasConstructor = item.runtime === item.symbol && (item.symbol.flags & ts.SymbolFlags.Class);
++    const priority = (hasConstructor ? 4 : 0) + (owner === entry.packageName ? 2 : 0) + (entry.subpath === '' ? 1 : 0);
++    if ((publicTypes.get(item.symbol)?.priority ?? -1) < priority) {
++      publicTypes.set(item.symbol, { ...item, priority });
++    }
++  }
++}
++
++const haxe = new HaxeTypes(ts, checker, publicTypes);
++const inventory = [];
++for (const entry of entries) {
++  const values = [];
++  const types = [];
++  const usedMembers = new Set();
++  const valueLines = [];
++  const typeLines = [];
++  for (const item of entry.exports) {
++    if (item.isValue) {
++      const member = uniqueName(identifier(item.name), usedMembers);
++      valueLines.push(...haxe.value({ ...item, symbol: item.runtime }, member));
++      values.push({ name: item.name, member });
++    }
++    if (item.isType) {
++      typeLines.push(haxe.declaration(item, entry.specifier));
++      types.push({ name: item.name, type: item.haxePath, ...(item.ambient ? { ambient: true } : {}) });
++    }
++  }
++  write(entry.haxePackage, entry.moduleName, [
++    `package ${entry.haxePackage};`, '',
++    '#if (js && flight_esm)',
++    `@:jsRequire(${JSON.stringify(entry.specifier)})`,
++    `extern class ${entry.moduleName} {`,
++    ...valueLines.map(line => `  ${line}`),
++    '}', '#else', '#error "Flight ESM bindings require the JavaScript target and flight_esm."', '#end', '',
++  ].join('\n'));
++  if (types.length) {
++    write(entry.typesPackage, 'Types', [
++      `package ${entry.typesPackage};`, '',
++      '#if (js && flight_esm)',
++      ...typeLines,
++      '#else', '#error "Flight ESM bindings require the JavaScript target and flight_esm."', '#end', '',
++    ].join('\n'));
++  }
++  inventory.push({ specifier: entry.specifier, module: `${entry.haxePackage}.${entry.moduleName}`, values, types });
++}
++
++writeFileSync(path.join(output, 'flight/esm/exports.json'), '[\n' + inventory.map(entry => '  ' + JSON.stringify(entry)).join(',\n') + '\n]\n');
++const counts = inventory.reduce((total, entry) => [total[0] + entry.values.length, total[1] + entry.types.length], [0, 0]);
++process.stderr.write(`Generated ${counts[0]} ESM value exports and ${counts[1]} type exports across ${entries.length} public entry points.\n`);
++
++function unalias(symbol) {
++  return symbol.flags & ts.SymbolFlags.Alias ? checker.getAliasedSymbol(symbol) : symbol;
++}
++
++function isAmbient(symbol) {
++  return Boolean(symbol.declarations?.length) && symbol.declarations.every(declaration =>
++    declaration.getSourceFile().isDeclarationFile || (declaration.flags & ts.NodeFlags.Ambient));
++}
++
++function runtimeSymbol(source, exported, seen = new Set()) {
++  const symbol = unalias(exported);
++  const typeOnly = checker.getTypeOnlyAliasDeclaration(exported, ts.SymbolFlags.Value);
++  if ((symbol.flags & ts.SymbolFlags.Value) && !typeOnly && !isAmbient(symbol)) return symbol;
++  if (!typeOnly || seen.has(source)) return undefined;
++  seen.add(source);
++  // An explicit type re-export cannot hide the runtime name supplied by an export-star.
++  for (const declaration of source.statements) {
++    if (!ts.isExportDeclaration(declaration) || declaration.isTypeOnly ||
++        declaration.exportClause || !declaration.moduleSpecifier) continue;
++    const targetModule = checker.getSymbolAtLocation(declaration.moduleSpecifier);
++    const targetSource = targetModule?.declarations?.find(ts.isSourceFile);
++    if (!targetSource) continue;
++    const match = checker.getExportsOfModule(targetModule).find(item => item.getName() === exported.getName());
++    if (match) {
++      const found = runtimeSymbol(targetSource, match, seen);
++      if (found) return found;
++    }
++  }
++  return undefined;
++}
++
++function loadTypeScript() {
++  const configured = process.env.FLIGHT_HAXE_TYPESCRIPT;
++  if (configured) return require(configured);
++  for (const name of ['typescript5', 'typescript']) {
++    try { return require(name); } catch (error) { if (error.code !== 'MODULE_NOT_FOUND') throw error; }
++  }
++  throw new Error('Install TypeScript 5.9.3 or set FLIGHT_HAXE_TYPESCRIPT to its module path.');
++}
++
++function packageEntries(root) {
++  const manifests = readdirSync(path.join(root, 'packages')).sort(compare);
++  const entries = [];
++  const modules = new Set();
++  for (const packageName of manifests) {
++    const folder = path.join(root, 'packages', packageName);
++    const file = path.join(folder, 'package.json');
++    if (!existsSync(file)) continue;
++    const manifest = JSON.parse(readFileSync(file, 'utf8'));
++    if (manifest.private || manifest.flight?.environment === 'node' || !manifest.name?.startsWith('@flighthq/')) continue;
++    for (const [key, conditions] of Object.entries(manifest.exports ?? {}).sort(([left], [right]) => compare(left, right))) {
++      const runtime = typeof conditions === 'string' ? conditions : conditions.import ?? conditions.default;
++      if (!runtime) continue;
++      const subpath = key === '.' ? '' : key.slice(2);
++      const specifier = subpath ? `${manifest.name}/${subpath}` : manifest.name;
++      if (!runtime.startsWith('./dist/') || !runtime.endsWith('.js')) {
++        throw new Error(`Unsupported public ESM declaration ${specifier} → ${runtime}`);
++      }
++      const source = path.join(folder, 'src', runtime.slice('./dist/'.length, -3) + '.ts');
++      if (!existsSync(source)) throw new Error(`Missing TypeScript source for ${specifier}`);
++      const stem = packageName.replaceAll('-', '_');
++      const parts = subpath.split('/').filter(Boolean);
++      const haxePackage = parts.length ? `flight.esm.${stem}` : 'flight.esm';
++      const moduleName = typeName(parts.length ? parts.join('-') : packageName);
++      const typesPackage = `flight.esm.types.${[stem, ...parts].join('_').replaceAll('-', '_')}`;
++      const module = `${haxePackage}.${moduleName}`.toLowerCase();
++      if (modules.has(module)) throw new Error(`Haxe module name collision for ${specifier}: ${module}`);
++      modules.add(module);
++      entries.push({ specifier, source, packageName, subpath, haxePackage, moduleName, typesPackage });
++    }
++  }
++  return entries;
++}
++
++function write(haxePackage, moduleName, text) {
++  const directory = path.join(output, ...haxePackage.split('.'));
++  mkdirSync(directory, { recursive: true });
++  writeFileSync(path.join(directory, moduleName + '.hx'), text);
++}
++
++function compare(left, right) {
++  return left < right ? -1 : left > right ? 1 : 0;
++}
++
++function uniqueName(name, used) {
++  let unique = name;
++  for (let suffix = 2; used.has(unique); suffix++) unique = `${name}_${suffix}`;
++  used.add(unique);
++  return unique;
++}
+diff --git a/crates/flight-bindgen/esm/haxe-types.mjs b/crates/flight-bindgen/esm/haxe-types.mjs
+new file mode 100644
+index 0000000000000000000000000000000000000000..66fd499c1a7f8bedcd6343320a56fe7bdb59fa9b
+--- /dev/null
++++ b/crates/flight-bindgen/esm/haxe-types.mjs
+@@ -0,0 +1,231 @@
++const reserved = new Set(
++  'abstract break callback case cast catch class continue default do dynamic else enum extends extern false final for function if implements import in inline interface macro new null operator overload override package private public return static super switch this throw true try typedef untyped using var while'.split(' '),
++);
++
++export function identifier(name) {
++  const clean = name.replace(/[^A-Za-z0-9_]/g, '_');
++  const valid = /^[A-Za-z_]/.test(clean) ? clean : '_' + clean;
++  return reserved.has(valid) ? valid + '_' : valid;
++}
++
++export function typeName(name) {
++  const title = name.replace(/(^|[-_/])([a-zA-Z0-9])/g, (_, __, start) => start.toUpperCase())
++    .replace(/([23])d(?=[A-Z]|$)/g, '$1D');
++  const clean = identifier(title);
++  return /^[A-Z]/.test(clean) ? clean : 'Type' + clean;
++}
++
++export function nativeName(original, name) {
++  return original === name ? [] : [`@:native(${JSON.stringify(original)})`];
++}
++
++const browserTypes = new Map(Object.entries({
++  AbortController: 'js.html.AbortController', AbortSignal: 'js.html.AbortSignal',
++  CanvasRenderingContext2D: 'js.html.CanvasRenderingContext2D', CanvasGradient: 'js.html.CanvasGradient',
++  CanvasPattern: 'js.html.CanvasPattern', Document: 'js.html.Document', Element: 'js.html.Element',
++  Event: 'js.html.Event', EventTarget: 'js.html.EventTarget', HTMLElement: 'js.html.Element',
++  HTMLCanvasElement: 'js.html.CanvasElement', HTMLImageElement: 'js.html.ImageElement',
++  HTMLVideoElement: 'js.html.VideoElement', HTMLAudioElement: 'js.html.AudioElement',
++  ImageBitmap: 'js.html.ImageBitmap', ImageData: 'js.html.ImageData',
++  File: 'js.html.File', Blob: 'js.html.Blob', Storage: 'js.html.Storage', Window: 'js.html.Window',
++  WebGLRenderingContext: 'js.html.webgl.RenderingContext', WebGL2RenderingContext: 'js.html.webgl.WebGL2RenderingContext',
++}));
++const jsTypes = new Set('ArrayBuffer DataView Date Error Float32Array Float64Array Int8Array Int16Array Int32Array Uint8Array Uint8ClampedArray Uint16Array Uint32Array'.split(' '));
++const iterableTypes = new Set(['Array', 'ReadonlyArray', 'Promise', 'PromiseLike', 'Map', 'ReadonlyMap', 'Set', 'ReadonlySet']);
++
++export class HaxeTypes {
++  constructor(ts, checker, publicTypes) {
++    this.ts = ts;
++    this.checker = checker;
++    this.publicTypes = publicTypes;
++  }
++
++  value(item, name) {
++    const type = this.symbolType(item.symbol);
++    if (item.symbol.flags & this.ts.SymbolFlags.Class) {
++      return [...nativeName(item.name, name), `public static final ${name}:Dynamic;`];
++    }
++    return this.member(item.name, name, type, new Map(), 'static ');
++  }
++
++  member(original, name, type, scope, access = '') {
++    const signatures = type.getCallSignatures();
++    if (signatures.length > 0 && type.getProperties().length === 0) {
++      const [first, ...overloads] = signatures.map(signature => this.signature(signature, scope));
++      return [
++        ...nativeName(original, name),
++        ...overloads.map(overload => this.overload(overload)),
++        `public ${access}function ${name}${first.generics}(${first.params}):${first.result};`,
++      ];
++    }
++    return [...nativeName(original, name), `public ${access}final ${name}:${this.render(type, scope)};`];
++  }
++
++  overload(signature) {
++    return `@:overload(function${signature.generics}(${signature.params}):${signature.result} {})`;
++  }
++
++  declaration(item, specifier) {
++    const canonical = this.publicTypes.get(item.symbol);
++    const parameters = this.typeParameters(item.symbol);
++    const names = this.parameterNames(parameters);
++    const generics = this.generics(names);
++    if (canonical.haxePath !== item.haxePath) {
++      return `typedef ${item.haxeName}${generics} = ${canonical.haxePath}${generics};\n`;
++    }
++    const type = this.checker.getDeclaredTypeOfSymbol(item.symbol);
++    if (item.runtime === item.symbol && item.symbol.flags & this.ts.SymbolFlags.Class) {
++      return this.classDeclaration(item, specifier, type, names);
++    }
++    return `typedef ${item.haxeName}${generics} = ${this.render(type, names, { exclude: item.symbol, record: true })};\n`;
++  }
++
++  classDeclaration(item, specifier, instance, scope) {
++    const declared = this.symbolType(item.symbol);
++    const isAbstract = item.symbol.declarations.some(declaration =>
++      this.ts.getCombinedModifierFlags(declaration) & this.ts.ModifierFlags.Abstract);
++    const constructors = isAbstract ? [] : declared.getConstructSignatures().filter(signature => {
++      const modifiers = signature.declaration ? this.ts.getCombinedModifierFlags(signature.declaration) : 0;
++      return !(modifiers & (this.ts.ModifierFlags.Private | this.ts.ModifierFlags.Protected));
++    });
++    const members = [];
++    if (constructors.length) {
++      const [first, ...overloads] = constructors.map(signature => ({ ...this.signature(signature, scope), result: 'Void' }));
++      members.push(...overloads.map(overload => this.overload(overload)));
++      members.push(`public function new(${first.params});`);
++    }
++    for (const [properties, access] of [[instance.getProperties(), ''], [declared.getProperties(), 'static ']]) {
++      for (const property of properties) {
++        const original = property.getName();
++        const declaration = property.valueDeclaration ?? property.declarations?.[0];
++        const modifiers = declaration ? this.ts.getCombinedModifierFlags(declaration) : 0;
++        if (original === 'prototype' || original.startsWith('__@') ||
++            modifiers & (this.ts.ModifierFlags.Private | this.ts.ModifierFlags.Protected)) continue;
++        const name = identifier(original);
++        members.push(...this.member(original, name, this.symbolType(property), scope, access));
++      }
++    }
++    return [
++      `@:jsRequire(${JSON.stringify(specifier)}, ${JSON.stringify(item.name)})`,
++      `extern class ${item.haxeName}${this.generics(scope)} {`,
++      ...members.map(line => `  ${line}`), '}', '',
++    ].join('\n');
++  }
++
++  symbolType(symbol) {
++    return this.checker.getTypeOfSymbolAtLocation(symbol, symbol.valueDeclaration ?? symbol.declarations?.[0]);
++  }
++
++  typeParameters(symbol) {
++    const declaration = symbol.declarations?.find(item => item.typeParameters?.length);
++    return declaration?.typeParameters.map(parameter => this.checker.getTypeAtLocation(parameter)) ?? [];
++  }
++
++  parameterNames(parameters) {
++    const names = new Map();
++    for (const parameter of parameters) names.set(parameter, typeName(parameter.symbol?.getName() ?? 'T'));
++    return names;
++  }
++
++  generics(names) {
++    return names.size ? `<${[...names.values()].join(', ')}>` : '';
++  }
++
++  signature(signature, scope = new Map(), depth = 0) {
++    const ownNames = this.parameterNames(signature.typeParameters ?? []);
++    const names = new Map([...scope, ...ownNames]);
++    const params = signature.getParameters().map((symbol, index) => {
++      const declaration = symbol.valueDeclaration ?? symbol.declarations?.[0];
++      const type = this.checker.getTypeOfSymbolAtLocation(symbol, declaration ?? signature.declaration);
++      const name = symbol.getName() === '__0' ? `arg${index}` : identifier(symbol.getName());
++      if (declaration?.dotDotDotToken) {
++        const item = this.checker.getIndexTypeOfType(type, this.ts.IndexKind.Number);
++        return `...${name}:${item ? this.render(item, names, {}, depth + 1) : 'Dynamic'}`;
++      }
++      const optional = declaration?.questionToken || declaration?.initializer ||
++        (symbol.flags & this.ts.SymbolFlags.Optional);
++      return `${optional ? '?' : ''}${name}:${this.render(type, names, {}, depth + 1)}`;
++    });
++    return { generics: this.generics(ownNames), params: params.join(', '), result: this.render(signature.getReturnType(), names, {}, depth + 1) };
++  }
++
++  render(type, scope, options = {}, depth = 0) {
++    if (depth > 5) return 'Dynamic';
++    const { ts, checker } = this;
++    const flags = type.flags;
++    const render = child => this.render(child, scope, {}, depth + 1);
++    if (scope.has(type)) return scope.get(type);
++    const symbol = type.aliasSymbol ?? type.symbol;
++    if (symbol && symbol !== options.exclude) {
++      const exported = this.publicTypes.get(symbol);
++      if (exported) {
++        const count = this.typeParameters(symbol).length;
++        const args = this.arguments(type);
++        const types = Array.from({ length: count }, (_, index) => args[index] ? render(args[index]) : 'Dynamic');
++        return exported.haxePath + (types.length ? `<${types.join(', ')}>` : '');
++      }
++      const name = symbol.getName();
++      if (browserTypes.has(name)) return browserTypes.get(name);
++      if (jsTypes.has(name)) return `js.lib.${name}`;
++      if (iterableTypes.has(name)) {
++        const args = this.arguments(type);
++        const element = index => args[index] ? render(args[index]) : 'Dynamic';
++        if (name === 'Array' || name === 'ReadonlyArray') return `Array<${element(0)}>`;
++        if (name === 'Promise' || name === 'PromiseLike') return `js.lib.Promise<${element(0)}>`;
++        if (name === 'Set' || name === 'ReadonlySet') return `js.lib.Set<${element(0)}>`;
++        return `js.lib.Map<${element(0)}, ${element(1)}>`;
++      }
++      if (name === 'Readonly' || name === 'Partial' || name === 'Required') {
++        const [wrapped] = this.arguments(type);
++        if (wrapped && name === 'Readonly') return render(wrapped);
++      }
++    }
++
++    if (flags & ts.TypeFlags.StringLike) return 'String';
++    if (flags & ts.TypeFlags.NumberLike) return 'Float';
++    if (flags & ts.TypeFlags.BooleanLike) return 'Bool';
++    if (flags & ts.TypeFlags.Void) return 'Void';
++    if (flags & ts.TypeFlags.BigIntLike) return 'Dynamic';
++    if (flags & (ts.TypeFlags.Any | ts.TypeFlags.Unknown | ts.TypeFlags.Never | ts.TypeFlags.TypeParameter |
++      ts.TypeFlags.Null | ts.TypeFlags.Undefined)) return 'Dynamic';
++
++    if (type.isUnion()) {
++      const defined = type.types.filter(item => !(item.flags & (ts.TypeFlags.Null | ts.TypeFlags.Undefined)));
++      const projected = [...new Set(defined.map(render))];
++      if (projected.length !== 1 || projected[0] === 'Void') return 'Dynamic';
++      return defined.length < type.types.length && projected[0] !== 'Dynamic' ? `Null<${projected[0]}>` : projected[0];
++    }
++    if (checker.isTupleType(type) || checker.isArrayType(type)) {
++      const projected = [...new Set(this.arguments(type).map(render))];
++      return `Array<${projected.length === 1 ? projected[0] : 'Dynamic'}>`;
++    }
++    const signatures = type.getCallSignatures();
++    if (signatures.length === 1 && !signatures[0].typeParameters?.length && depth < 3) {
++      const signature = this.signature(signatures[0], scope, depth + 1);
++      // A callback can accept additional arguments from JS, so expose its fixed parameter list.
++      if (!signature.params.includes('...')) return `((${signature.params}) -> ${signature.result})`;
++    }
++    if (options.record || (!symbol && depth < 2)) {
++      return this.record(type, scope, depth);
++    }
++    return 'Dynamic';
++  }
++
++  record(type, scope, depth) {
++    const properties = this.checker.getPropertiesOfType(type)
++      .filter(property => identifier(property.getName()) === property.getName() && !property.getName().startsWith('__@'));
++    if (properties.length === 0 || properties.length > 50) return 'Dynamic';
++    const fields = properties.map(property => {
++      const declaration = property.valueDeclaration ?? property.declarations?.[0];
++      const value = this.checker.getTypeOfSymbolAtLocation(property, declaration);
++      const optional = property.flags & this.ts.SymbolFlags.Optional;
++      return `${optional ? '?' : ''}${property.getName()}:${this.render(value, scope, {}, depth + 1)}`;
++    });
++    return `{ ${fields.join(', ')} }`;
++  }
++
++  arguments(type) {
++    if (type.aliasTypeArguments?.length) return type.aliasTypeArguments;
++    return (type.objectFlags & this.ts.ObjectFlags.Reference) ? this.checker.getTypeArguments(type) : [];
++  }
++}
+diff --git a/crates/flight-bindgen/src/main.rs b/crates/flight-bindgen/src/main.rs
+index 11b5f6b1f46ced8f20e52d2b9df4c6e1997413d4..72eddfcc527075cf0b23daf93b160701e1bf90bb 100644
+--- a/crates/flight-bindgen/src/main.rs
++++ b/crates/flight-bindgen/src/main.rs
+@@ -125,6 +125,20 @@ fn main() {
+         other => unreachable!("cli accepted unknown target {other}"),
+     }
+ 
++    if matches!(target, "haxe" | "haxe-js") {
++        let root = crates_dir.parent().expect("Flight workspace root");
++        let generator = crates_dir.join("flight-bindgen/esm/generate.mjs");
++        let status = std::process::Command::new("node")
++            .arg(generator)
++            .arg(root)
++            .arg(&out_dir)
++            .status()
++            .expect("could not run the Flight TypeScript ESM generator");
++        if !status.success() {
++            std::process::exit(status.code().unwrap_or(1));
++        }
++    }
++
+     eprintln!(
+         "{total_fns} functions from {total_crates} crates → {}",
+         out_dir.display()
+diff --git a/scripts/check-haxe-bindings.sh b/scripts/check-haxe-bindings.sh
+index 81e680b003a9df7bd613b0a8571fea989786a449..a46297542af8bea53d0679c9f40845d11b733488 100755
+--- a/scripts/check-haxe-bindings.sh
++++ b/scripts/check-haxe-bindings.sh
+@@ -15,14 +15,14 @@ echo "==> Type-checking HL target..."
+ haxe --no-output \
+     -cp "$WORK_DIR/haxe" \
+     --hl /dev/null \
+-    --macro 'include("flight", true, ["flight._cpp", "flight._js"])' \
++    --macro 'include("flight", true, ["flight._cpp", "flight._js", "flight.esm"])' \
+     2>&1
+ 
+ echo "==> Type-checking cpp target..."
+ haxe --no-output \
+     -cp "$WORK_DIR/haxe" \
+     --cpp /dev/null \
+-    --macro 'include("flight", true, ["flight._hl", "flight._js"])' \
++    --macro 'include("flight", true, ["flight._hl", "flight._js", "flight.esm"])' \
+     2>&1
+ 
+ echo "==> Type-checking JS/ESM target..."

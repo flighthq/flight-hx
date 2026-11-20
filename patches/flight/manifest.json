@@ -3,6 +3,7 @@
   "patches": [
     "patches/flight/0015-workspace-lock.patch",
     "patches/flight/0016-esm-host-seams.patch",
-    "patches/flight/0017-binding-carriers-and-fields.patch"
+    "patches/flight/0017-binding-carriers-and-fields.patch",
+    "patches/flight/0018-typescript-esm-externs.patch"
   ]
 }

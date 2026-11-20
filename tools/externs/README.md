@@ -1,11 +1,12 @@
 # Rust Flight extern intake
 
-Bindings come from Rust tooling inside Flight. The source is the single
+The Flight producer emits Rust-backed native bindings and TypeScript-backed ESM bindings. The source is the single
 `develop` pin in `dependencies.lock.json`, currently `c52653a12e10251ab93970f71a6bc0c4dcbe21fa`.
 
 ## Generate and copy
 
-Use a clean checkout and an installed Rust toolchain. The driver prepares an
+Use a clean checkout, the pinned Rust toolchain, and the TypeScript compiler
+installed by `npm ci`. The driver prepares an
 isolated copy under `.artifacts/flight-source-*` and applies the tracked
 `patches/flight/` producer patch there. The original checkout stays clean.
 Both generated Haxe and native binaries use this exact patched producer.

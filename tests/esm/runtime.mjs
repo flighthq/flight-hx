@@ -4,7 +4,7 @@ import { mkdirSync, mkdtempSync, readdirSync, readFileSync, writeFileSync } from
 import path from 'node:path';
 import { unpack } from '../support/archive.mjs';
 import { buildWebBundle } from '../../tools/esm/buildWeb.mjs';
-import { bundleFlightJs } from '../../tools/esm/bundle.mjs';
+import { bundleFlightJs, inspectFlightExports } from '../../tools/esm/bundle.mjs';
 
 const root = path.resolve(import.meta.dirname, '../..');
 mkdirSync(path.join(root, '.artifacts'), { recursive: true });
@@ -37,6 +37,20 @@ assert.ok(bindings.length > 0, 'No Flight SDK imports found in the archive');
 const allExports = path.join(work, 'all-exports.mjs');
 writeFileSync(allExports, [...imports, `export default [${bindings.join(', ')}];`].join('\n'));
 await bundleFlightJs({entry: allExports, outfile: path.join(work, 'all-exports-bundle.mjs')});
+
+const packageExports = JSON.parse(readFileSync(path.join(installed, 'generated/externs/flight/esm/exports.json'), 'utf8'));
+const linked = await inspectFlightExports();
+assert.deepEqual([...linked.keys()].sort(), packageExports.map(entry => entry.specifier).sort());
+for (const { specifier, module, values, types } of packageExports) {
+  const filename = path.join(installed, 'generated/externs', ...module.split('.')) + '.hx';
+  const facade = readFileSync(filename, 'utf8');
+  const members = [...facade.matchAll(/public static (?:function|final) ([\w]+)/gu)].map(match => match[1]);
+  assert.deepEqual(members.sort(), values.map(value => value.member).sort(), module);
+  // The source bundler can retain phantom `declare const` names from TS re-export barrels.
+  const phantom = new Set(types.filter(type => type.ambient).map(type => type.name));
+  assert.deepEqual(values.map(value => value.name).sort(),
+    linked.get(specifier).filter(name => !phantom.has(name)).sort(), specifier);
+}
 
 const fieldsSmoke = path.join(work, 'fields.mjs');
 run(process.execPath, ['tools/haxe.mjs', '-cp', path.join(installed, 'lib'), '-cp', 'tests/esm',
@@ -75,10 +89,20 @@ const otherHosts = await buildWebBundle({
   platform: 'node',
 });
 assert.match(run(process.execPath, [otherHosts.bundle]), /FLIGHT_OTHER_HOSTS_OK/u);
+const canvas = await buildWebBundle({
+  main: 'GeneratedCanvasSmoke',
+  classpaths: [path.join(installed, 'lib'), path.join(root, 'tests/esm')],
+  outDir: path.join(work, 'generated-canvas'),
+});
+const canvasFixture = path.join(work, 'generated-canvas', 'run.mjs');
+writeFileSync(canvasFixture, readFileSync(path.join(root, 'tests/esm/canvas-platform.mjs'), 'utf8'));
+assert.match(run(process.execPath, [canvasFixture]), /FLIGHT_GENERATED_CANVAS_OK/u);
+assert.match(readFileSync(canvas.entry, 'utf8'), /from "@flighthq\/scene2d-canvas"/u);
+
 const missing = path.join(work, 'missing-export.mjs');
 writeFileSync(missing, 'import * as math from "@flighthq/math"; console.log(math.__missing_flight_export);\n');
 await assert.rejects(bundleFlightJs({ entry: missing, outfile: path.join(work, 'missing-bundle.mjs') }), /matching export|always be undefined/u);
-process.stdout.write(`ESM installed archive: ${bindings.length} SDK imports resolved. Real Flight math/geometry, arrays, callbacks/options, fields, inherited node properties, host seams, lifecycle and tree-shaking passed. Artifacts: ${work}\n`);
+process.stdout.write(`ESM installed archive: ${bindings.length} compatible SDK imports resolved and ${linked.size} public entry points checked. Real Flight math/geometry, arrays, callbacks/options, fields, inherited node properties, host seams, lifecycle and tree-shaking passed. Artifacts: ${work}\n`);
 
 function run(command, args) {
   const result = spawnSync(command, args, { cwd: root, encoding: 'utf8', maxBuffer: 16 * 1024 * 1024 });

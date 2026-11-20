@@ -1,0 +1,90 @@
+package flight.esm;
+
+#if (js && flight_esm)
+@:jsRequire("@flighthq/text")
+extern class Text {
+  public static final NativeTextKind:String;
+  public static final RichTextKind:String;
+  public static final TextLabelKind:String;
+  public static function appendRichTextString(source:flight.esm.types.text.Types.RichText, value:String):Void;
+  public static function appendTextLabelString(source:flight.esm.types.text.Types.TextLabel, value:String):Void;
+  public static function buildRichTextLayoutParams(source:flight.esm.types.text.Types.TextLabel, measure:flight.esm.types.textshaper.Types.TextMeasureFunction):flight.esm.types.textlayout.Types.TextLayoutParams;
+  public static function clearRichTextFormatRanges(source:flight.esm.types.text.Types.RichText):Void;
+  public static function computeNativeTextLocalBoundsRectangle(out:flight.esm.types.geometry.Types.Rectangle, source:flight.esm.types.node.Types.BoundsNode<flight.esm.types.scene2d_contract.Types.Node2DFields>):Void;
+  public static function computeRichTextLocalBoundsRectangle(out:flight.esm.types.geometry.Types.Rectangle, source:flight.esm.types.node.Types.BoundsNode<flight.esm.types.scene2d_contract.Types.Node2DFields>):Void;
+  public static function computeTextFormatFontString(format:flight.esm.types.textformat.Types.TextFormat):String;
+  public static function computeTextLabelLocalBoundsRectangle(out:flight.esm.types.geometry.Types.Rectangle, source:flight.esm.types.node.Types.BoundsNode<flight.esm.types.scene2d_contract.Types.Node2DFields>):Void;
+  public static function createNativeText():flight.esm.types.text.Types.NativeText;
+  public static function createRichText():flight.esm.types.text.Types.RichText;
+  public static function createTextLabel():flight.esm.types.text.Types.TextLabel;
+  public static function disableTextLabelGuards():Void;
+  public static function dispatchRichTextLinkAtPoint(source:flight.esm.types.text.Types.RichText, x:Float, y:Float):Null<String>;
+  public static function dispatchRichTextWheel(source:flight.esm.types.text.Types.RichText, deltaLines:Float, ?layout:Null<flight.esm.types.textlayout.Types.TextLayoutResult>):Void;
+  public static function enableTextFieldSignals(source:flight.esm.types.text.Types.RichText):flight.esm.types.text.Types.TextFieldSignals;
+  public static function enableTextLabelGuards(logState:flight.esm.types.log.Types.LogState, clock:(() -> Float)):Void;
+  public static function explainTextLabelContent(source:flight.esm.types.text.Types.TextLabel):flight.esm.types.text.Types.TextLabelContentExplanation;
+  public static function getNativeTextMeasuredHeight(source:flight.esm.types.text.Types.NativeText):Float;
+  public static function getNativeTextMeasuredWidth(source:flight.esm.types.text.Types.NativeText):Float;
+  public static function getNativeTextString(source:flight.esm.types.text.Types.NativeText):String;
+  public static function getNativeTextStyle(source:flight.esm.types.text.Types.NativeText):flight.esm.types.text.Types.NativeTextStyle;
+  public static function getRichTextBottomScrollV(source:flight.esm.types.text.Types.RichText):Float;
+  public static function getRichTextCharIndexAtPoint(source:flight.esm.types.text.Types.RichText, x:Float, y:Float):Float;
+  public static function getRichTextDefaultTextFormat(source:flight.esm.types.text.Types.RichText):flight.esm.types.textformat.Types.TextFormat;
+  public static function getRichTextFormatRangeAt(out:flight.esm.types.textformat.Types.TextFormat, source:flight.esm.types.text.Types.RichText, index:Float):Void;
+  public static function getRichTextFormatRangeByIndex(out:flight.esm.types.textformat.Types.TextFormatRangeRaw, source:flight.esm.types.text.Types.RichText, i:Float):Bool;
+  public static function getRichTextFormatRangeCount(source:flight.esm.types.text.Types.RichText):Float;
+  public static function getRichTextFormatRangesIn(out:Array<flight.esm.types.textformat.Types.TextFormatRangeRaw>, source:flight.esm.types.text.Types.RichText, beginIndex:Float, endIndex:Float):Void;
+  public static function getRichTextLength(source:flight.esm.types.text.Types.RichText):Float;
+  public static function getRichTextLineCount(source:flight.esm.types.text.Types.RichText):Float;
+  public static function getRichTextLineMetrics(source:flight.esm.types.text.Types.RichText, lineIndex:Float):Null<flight.esm.types.textlayout.Types.TextLineMetrics>;
+  public static function getRichTextMaxScrollH(source:flight.esm.types.text.Types.RichText):Float;
+  public static function getRichTextMaxScrollV(source:flight.esm.types.text.Types.RichText):Float;
+  public static function getRichTextPasswordCharacter(source:flight.esm.types.text.Types.RichText):Null<String>;
+  public static function getRichTextString(source:flight.esm.types.text.Types.RichText):String;
+  public static function getRichTextTextHeight(source:flight.esm.types.text.Types.RichText):Float;
+  public static function getRichTextTextWidth(source:flight.esm.types.text.Types.RichText):Float;
+  public static function getTextFieldSignals(source:flight.esm.types.text.Types.RichText):Null<flight.esm.types.text.Types.TextFieldSignals>;
+  public static function getTextLabelFormat(source:flight.esm.types.text.Types.TextLabel):flight.esm.types.textformat.Types.TextFormat;
+  public static function getTextLabelString(source:flight.esm.types.text.Types.TextLabel):String;
+  public static function getTextLayout(source:flight.esm.types.node.Types.NodeAny):Null<flight.esm.types.textlayout.Types.TextLayoutResult>;
+  public static function getTextLayoutMetrics(out:flight.esm.types.textlayout.Types.TextMetrics, source:flight.esm.types.node.Types.NodeAny):Void;
+  public static function insertRichTextString(source:flight.esm.types.text.Types.RichText, index:Float, value:String):Void;
+  public static function patchNativeTextStyle(source:flight.esm.types.text.Types.NativeText, patch:Dynamic):Void;
+  public static function removeRichTextFormatRangesIn(source:flight.esm.types.text.Types.RichText, begin:Float, end:Float):Void;
+  public static function replaceRichTextString(source:flight.esm.types.text.Types.RichText, beginIndex:Float, endIndex:Float, value:String):Void;
+  public static function setNativeTextAutoSize(source:flight.esm.types.text.Types.NativeText, value:flight.esm.types.textlayout.Types.TextAutoSize):Void;
+  public static function setNativeTextHeight(source:flight.esm.types.text.Types.NativeText, value:Float):Void;
+  public static function setNativeTextString(source:flight.esm.types.text.Types.NativeText, value:String):Void;
+  public static function setNativeTextStyle(source:flight.esm.types.text.Types.NativeText, value:flight.esm.types.text.Types.NativeTextStyle):Void;
+  public static function setNativeTextVerticalAlign(source:flight.esm.types.text.Types.NativeText, value:flight.esm.types.textlayout.Types.TextVerticalAlign):Void;
+  public static function setNativeTextWidth(source:flight.esm.types.text.Types.NativeText, value:Float):Void;
+  public static function setRichTextBackground(source:flight.esm.types.text.Types.RichText, value:Bool):Void;
+  public static function setRichTextBackgroundColor(source:flight.esm.types.text.Types.RichText, value:Float):Void;
+  public static function setRichTextBorder(source:flight.esm.types.text.Types.RichText, value:Bool):Void;
+  public static function setRichTextBorderColor(source:flight.esm.types.text.Types.RichText, value:Float):Void;
+  public static function setRichTextCondenseWhite(source:flight.esm.types.text.Types.RichText, value:Bool):Void;
+  public static function setRichTextContent(source:flight.esm.types.text.Types.RichText, content:flight.esm.types.textlayout.Types.RichTextContent):Void;
+  public static function setRichTextDefaultTextFormat(source:flight.esm.types.text.Types.RichText, value:flight.esm.types.textformat.Types.TextFormat):Void;
+  public static function setRichTextFormatRange(source:flight.esm.types.text.Types.RichText, format:flight.esm.types.textformat.Types.TextFormat, ?start:Float, ?end:Float):Void;
+  public static function setRichTextHeight(source:flight.esm.types.text.Types.RichText, value:Float):Void;
+  public static function setRichTextMaxChars(source:flight.esm.types.text.Types.RichText, value:Float):Void;
+  public static function setRichTextMouseWheelEnabled(source:flight.esm.types.text.Types.RichText, value:Bool):Void;
+  public static function setRichTextMultiline(source:flight.esm.types.text.Types.RichText, value:Bool):Void;
+  public static function setRichTextScrollH(source:flight.esm.types.text.Types.RichText, value:Float, ?layout:Null<flight.esm.types.textlayout.Types.TextLayoutResult>):Void;
+  public static function setRichTextScrollV(source:flight.esm.types.text.Types.RichText, value:Float, ?layout:Null<flight.esm.types.textlayout.Types.TextLayoutResult>):Void;
+  public static function setRichTextSelectable(source:flight.esm.types.text.Types.RichText, value:Bool):Void;
+  public static function setRichTextString(source:flight.esm.types.text.Types.RichText, value:String):Void;
+  public static function setRichTextTextColor(source:flight.esm.types.text.Types.RichText, value:Float):Void;
+  public static function setRichTextVerticalAlign(source:flight.esm.types.text.Types.RichText, value:flight.esm.types.textlayout.Types.TextVerticalAlign):Void;
+  public static function setRichTextWidth(source:flight.esm.types.text.Types.RichText, value:Float):Void;
+  public static function setRichTextWordWrap(source:flight.esm.types.text.Types.RichText, value:Bool):Void;
+  public static function setTextLabelAutoSize(source:flight.esm.types.text.Types.TextLabel, value:flight.esm.types.textlayout.Types.TextAutoSize):Void;
+  public static function setTextLabelFormat(source:flight.esm.types.text.Types.TextLabel, value:flight.esm.types.textformat.Types.TextFormat):Void;
+  public static function setTextLabelHeight(source:flight.esm.types.text.Types.TextLabel, value:Float):Void;
+  public static function setTextLabelString(source:flight.esm.types.text.Types.TextLabel, value:String):Void;
+  public static function setTextLabelVerticalAlign(source:flight.esm.types.text.Types.TextLabel, value:flight.esm.types.textlayout.Types.TextVerticalAlign):Void;
+  public static function setTextLabelWidth(source:flight.esm.types.text.Types.TextLabel, value:Float):Void;
+}
+#else
+#error "Flight ESM bindings require the JavaScript target and flight_esm."
+#end

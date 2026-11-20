@@ -1,0 +1,74 @@
+package flight.esm.types.scene3d_gl;
+
+#if (js && flight_esm)
+typedef GlClassicDefineKey = { alphaMaskEnabled:Bool, ?hasColorAdjustment:Null<Bool>, ?hasColorMatrix:Null<Bool>, hasAlphaMap:Bool, hasDiffuseMap:Bool, ?hasInstances:Null<Bool>, hasNormalMap:Bool, ?hasSkin:Null<Bool>, hasSpecularMap:Bool, hasUvTransform:Bool, lightingModel:flight.esm.types.scene3d_gl.Types.GlClassicLightingModel };
+
+typedef GlClassicLightingModel = String;
+
+typedef GlClassicProgram = Dynamic;
+
+typedef GlDebugDefineKey = { ?hasInstances:Null<Bool>, hasNormalMap:Bool, ?hasSkin:Null<Bool>, mode:String };
+
+typedef GlDebugProgram = { locFar:Dynamic, locNear:Dynamic, locNormalMap:Dynamic, locNormalScale:Dynamic, locView:Dynamic, ?locColorScale:Dynamic, ?locColorBias:Dynamic, ?locColorMatrix0:Dynamic, ?locColorMatrix1:Dynamic, ?locColorMatrix2:Dynamic, ?locColorMatrix3:Dynamic, ?locColorMatrixOffset:Dynamic, ?locObjectAlpha:Dynamic, ?locAlphaIsCoverage:Dynamic, ?locJointTexture:Dynamic, ?locInstancePalette:Dynamic, ?locInstanceColorPalette:Dynamic, ?locJointNormalTexture:Dynamic, locModel:Dynamic, locNormalMatrix:Dynamic, ?locUvTransform:Dynamic, locViewProjection:Dynamic, program:Dynamic };
+
+typedef GlEnvironmentCaptureOptions = { ?environment:Null<flight.esm.types.lighting_contract.Types.Environment>, ?excludeNode:Null<flight.esm.types.scene3d.Types.Node3D>, ?far:Null<Float>, ?near:Null<Float> };
+
+typedef GlLitProgram = { locAmbientCount:Dynamic, locAmbientRadiance:Dynamic, locCameraPosition:Dynamic, locDirectional:Dynamic, locDirectionalCount:Dynamic, locDirectionalRadiance:Dynamic, locHemisphereCount:Dynamic, locHemisphereLights:Dynamic, locIblBrdf:Dynamic, locIblEnabled:Dynamic, locIblIntensity:Dynamic, locIblIrradiance:Dynamic, locIblMaxMip:Dynamic, locIblPrefiltered:Dynamic, locPointCount:Dynamic, locPointLights:Dynamic, locShadowBias:Dynamic, locShadowEnabled:Dynamic, locShadowMap:Dynamic, locShadowMatrix:Dynamic, locShadowNormalBiasWorld:Dynamic, locShadowPcfRadius:Dynamic, locSpotCount:Dynamic, locSpotLights:Dynamic, ?locColorScale:Dynamic, ?locColorBias:Dynamic, ?locColorMatrix0:Dynamic, ?locColorMatrix1:Dynamic, ?locColorMatrix2:Dynamic, ?locColorMatrix3:Dynamic, ?locColorMatrixOffset:Dynamic, ?locObjectAlpha:Dynamic, ?locAlphaIsCoverage:Dynamic, ?locJointTexture:Dynamic, ?locInstancePalette:Dynamic, ?locInstanceColorPalette:Dynamic, ?locJointNormalTexture:Dynamic, locModel:Dynamic, locNormalMatrix:Dynamic, ?locUvTransform:Dynamic, locViewProjection:Dynamic, program:Dynamic };
+
+typedef GlMatcapDefineKey = { alphaMaskEnabled:Bool, ?hasInstances:Null<Bool>, hasMatcap:Bool, ?hasSkin:Null<Bool> };
+
+typedef GlMatcapProgram = { locAlphaCutoff:Dynamic, locMatcap:Dynamic, locTint:Dynamic, locView:Dynamic, ?locColorScale:Dynamic, ?locColorBias:Dynamic, ?locColorMatrix0:Dynamic, ?locColorMatrix1:Dynamic, ?locColorMatrix2:Dynamic, ?locColorMatrix3:Dynamic, ?locColorMatrixOffset:Dynamic, ?locObjectAlpha:Dynamic, ?locAlphaIsCoverage:Dynamic, ?locJointTexture:Dynamic, ?locInstancePalette:Dynamic, ?locInstanceColorPalette:Dynamic, ?locJointNormalTexture:Dynamic, locModel:Dynamic, locNormalMatrix:Dynamic, ?locUvTransform:Dynamic, locViewProjection:Dynamic, program:Dynamic };
+
+typedef GlMeshProgram = { ?locColorScale:Dynamic, ?locColorBias:Dynamic, ?locColorMatrix0:Dynamic, ?locColorMatrix1:Dynamic, ?locColorMatrix2:Dynamic, ?locColorMatrix3:Dynamic, ?locColorMatrixOffset:Dynamic, ?locObjectAlpha:Dynamic, ?locAlphaIsCoverage:Dynamic, ?locJointTexture:Dynamic, ?locInstancePalette:Dynamic, ?locInstanceColorPalette:Dynamic, ?locJointNormalTexture:Dynamic, locModel:Dynamic, locNormalMatrix:Dynamic, ?locUvTransform:Dynamic, locViewProjection:Dynamic, program:Dynamic };
+
+typedef GlMeshSkinFeature = { bindMeshSkinPalette:((state:flight.esm.types.render_gl.Types.GlRenderState, program:flight.esm.types.scene3d_gl.Types.GlMeshProgram, proxy:flight.esm.types.render_contract.Types.Scene3DRenderProxy) -> Bool), bindShadowSkinPalette:((state:flight.esm.types.render_gl.Types.GlRenderState, jointMatrices:js.lib.Float32Array) -> Void), vertexDeclarationsGlsl:String };
+
+typedef GlMeshUpload = { indexBuffer:Dynamic, indexCount:Float, indexType:Float, primitiveMode:Float, ?skinBindUploaded:Null<Bool>, vao:Dynamic, version:Float, vertexBuffer:Dynamic };
+
+typedef GlPbrDefineKey = { alphaMaskEnabled:Bool, hasAlphaMap:Bool, hasBaseColorMap:Bool, ?hasColorAdjustment:Null<Bool>, ?hasColorMatrix:Null<Bool>, hasEmissiveMap:Bool, ?hasInstances:Null<Bool>, hasMetallicRoughnessMap:Bool, hasNormalMap:Bool, hasOcclusionMap:Bool, ?hasSkin:Null<Bool>, hasUvTransform:Bool };
+
+typedef GlPbrExtensionBindContext = flight.esm.types.render_gl.Types.GlPbrExtensionBindContext;
+
+typedef GlPbrExtensionIssue = { code:flight.esm.types.scene3d_gl.Types.GlPbrExtensionIssueCode, kind:String };
+
+typedef GlPbrExtensionIssueCode = String;
+
+typedef GlPbrExtensionShaderContext = flight.esm.types.render_gl.Types.GlPbrExtensionShaderContext;
+
+typedef GlPbrExtensionShaderContribution = flight.esm.types.render_gl.Types.GlPbrExtensionShaderContribution;
+
+typedef GlPbrProgram = Dynamic;
+
+typedef GlPbrTransmissionSceneColor = { height:Float, mipLevelCount:Float, texture:Dynamic, width:Float };
+
+typedef GlScene3DDrawEntry = { alpha:Float, colorMatrix:Dynamic, colorScaleBias:Dynamic, depth:Float, lightBlock:flight.esm.types.lighting_contract.Types.Scene3DLightBlock, material:Dynamic, mesh:Dynamic, renderer:Dynamic, sortKey:Float, subset:Dynamic, worldMatrix:Dynamic };
+
+typedef GlScene3DForwardLightList = { meshCount:Float, meshLightBlocks:Array<flight.esm.types.lighting_contract.Types.Scene3DLightBlock> };
+
+typedef GlScene3DIbl = { brdfLut:Dynamic, environmentSourceRevision:Float, intensity:Float, irradianceCube:Dynamic, prefilteredCube:Dynamic, prefilteredMipCount:Float };
+
+typedef GlScene3DPass = flight.esm.types.render_gl.Types.GlScene3DPass;
+
+typedef GlScene3DRuntime = { activeBlendedRun:Bool, activeColorAdjustmentRun:Bool, activeColorMatrixRun:Bool, activeInstancedRun:Bool, activeMeshProgram:Null<flight.esm.types.scene3d_gl.Types.GlMeshProgram>, activeSkinnedRun:Bool, blendedDrawList:Array<flight.esm.types.scene3d_gl.Types.GlScene3DDrawEntry>, blendedPool:Array<flight.esm.types.scene3d_gl.Types.GlScene3DDrawEntry>, ?colorSpaceGuard:Null<(() -> Void)>, ?customShaderGuard:Null<((state:flight.esm.types.render_gl.Types.GlRenderState, program:Dynamic, shaderKey:String) -> Void)>, ?deformGuard:Null<((mesh:flight.esm.types.meshgeometry.Types.Mesh) -> Void)>, environmentSourceCube:Dynamic, environmentSourceCubeColorSpace:flight.esm.types.texture_contract.Types.TextureColorSpace, environmentSourceCubeFaceVersions:Array<Float>, environmentSourceRevision:Float, environmentSourceTexture:Dynamic, environmentSourceTextureVersion:Float, ibl:Null<flight.esm.types.scene3d_gl.Types.GlScene3DIbl>, iblBakeFramebuffer:Dynamic, ?meshSkinFeature:Null<flight.esm.types.scene3d_gl.Types.GlMeshSkinFeature>, ?forwardLightSelectionGuard:Null<((lights:flight.esm.types.lighting_contract.Types.Scene3DLightsLike) -> Void)>, opaqueDrawList:Array<flight.esm.types.scene3d_gl.Types.GlScene3DDrawEntry>, opaquePool:Array<flight.esm.types.scene3d_gl.Types.GlScene3DDrawEntry>, ?pbrExtensionGuard:Null<((extensions:Array<flight.esm.types.materials_contract.Types.PbrExtension>) -> Void)>, pbrTransmissionSceneColor:Null<flight.esm.types.scene3d_gl.Types.GlPbrTransmissionSceneColor>, programCache:js.lib.Map<String, flight.esm.types.scene3d_gl.Types.GlMeshProgram>, ?resourceCleanups:Null<Array<Dynamic>>, shadow:Null<flight.esm.types.scene3d_gl.Types.GlScene3DShadow>, shadowTarget:Null<flight.esm.types.render_gl.Types.GlTextureRenderTarget>, instancePalette:Null<flight.esm.types.render_gl.Types.GlSkinPaletteTexture>, instanceColorPalette:Null<flight.esm.types.render_gl.Types.GlSkinPaletteTexture>, skinPalette:Null<flight.esm.types.render_gl.Types.GlSkinPaletteTexture>, skinNormalPalette:Null<flight.esm.types.render_gl.Types.GlSkinPaletteTexture>, time:Float, uploadCache:Dynamic };
+
+typedef GlScene3DShadow = { enabled:Bool, matrix:flight.esm.types.geometry.Types.Matrix4, normalBiasWorld:Float, pcfRadius:Float, shadowBias:Float, texture:Dynamic };
+
+typedef GlShadedDefineKey = { alphaMaskEnabled:Bool, ?hasColorAdjustment:Null<Bool>, ?hasColorMatrix:Null<Bool>, hasDiffuseMap:Bool, ?hasInstances:Null<Bool>, hasNormalMap:Bool, ?hasSkin:Null<Bool>, hasSpecularMap:Bool, hasUvTransform:Bool };
+
+typedef GlShadedProgram = Dynamic;
+
+typedef GlToonDefineKey = { alphaMaskEnabled:Bool, hasBaseColorMap:Bool, ?hasInstances:Null<Bool>, hasRamp:Bool, ?hasSkin:Null<Bool>, hasUvTransform:Bool };
+
+typedef GlToonProgram = { locAlphaCutoff:Dynamic, locBaseColor:Dynamic, locBaseColorMap:Dynamic, locRamp:Dynamic, locSteps:Dynamic, locAmbientCount:Dynamic, locAmbientRadiance:Dynamic, locCameraPosition:Dynamic, locDirectional:Dynamic, locDirectionalCount:Dynamic, locDirectionalRadiance:Dynamic, locHemisphereCount:Dynamic, locHemisphereLights:Dynamic, locIblBrdf:Dynamic, locIblEnabled:Dynamic, locIblIntensity:Dynamic, locIblIrradiance:Dynamic, locIblMaxMip:Dynamic, locIblPrefiltered:Dynamic, locPointCount:Dynamic, locPointLights:Dynamic, locShadowBias:Dynamic, locShadowEnabled:Dynamic, locShadowMap:Dynamic, locShadowMatrix:Dynamic, locShadowNormalBiasWorld:Dynamic, locShadowPcfRadius:Dynamic, locSpotCount:Dynamic, locSpotLights:Dynamic, ?locColorScale:Dynamic, ?locColorBias:Dynamic, ?locColorMatrix0:Dynamic, ?locColorMatrix1:Dynamic, ?locColorMatrix2:Dynamic, ?locColorMatrix3:Dynamic, ?locColorMatrixOffset:Dynamic, ?locObjectAlpha:Dynamic, ?locAlphaIsCoverage:Dynamic, ?locJointTexture:Dynamic, ?locInstancePalette:Dynamic, ?locInstanceColorPalette:Dynamic, ?locJointNormalTexture:Dynamic, locModel:Dynamic, locNormalMatrix:Dynamic, ?locUvTransform:Dynamic, locViewProjection:Dynamic, program:Dynamic };
+
+typedef GlUnlitDefineKey = { alphaMaskEnabled:Bool, hasColorMap:Bool, ?hasInstances:Null<Bool>, ?hasSkin:Null<Bool>, hasUvTransform:Bool, vertexColor:Bool };
+
+typedef GlUnlitProgram = { locAlphaCutoff:Dynamic, locColor:Dynamic, locColorMap:Dynamic, locIntensity:Dynamic, ?locColorScale:Dynamic, ?locColorBias:Dynamic, ?locColorMatrix0:Dynamic, ?locColorMatrix1:Dynamic, ?locColorMatrix2:Dynamic, ?locColorMatrix3:Dynamic, ?locColorMatrixOffset:Dynamic, ?locObjectAlpha:Dynamic, ?locAlphaIsCoverage:Dynamic, ?locJointTexture:Dynamic, ?locInstancePalette:Dynamic, ?locInstanceColorPalette:Dynamic, ?locJointNormalTexture:Dynamic, locModel:Dynamic, locNormalMatrix:Dynamic, ?locUvTransform:Dynamic, locViewProjection:Dynamic, program:Dynamic };
+
+typedef GlWireframeProgram = { locAlphaCutoff:Dynamic, locColor:Dynamic, ?locColorScale:Dynamic, ?locColorBias:Dynamic, ?locColorMatrix0:Dynamic, ?locColorMatrix1:Dynamic, ?locColorMatrix2:Dynamic, ?locColorMatrix3:Dynamic, ?locColorMatrixOffset:Dynamic, ?locObjectAlpha:Dynamic, ?locAlphaIsCoverage:Dynamic, ?locJointTexture:Dynamic, ?locInstancePalette:Dynamic, ?locInstanceColorPalette:Dynamic, ?locJointNormalTexture:Dynamic, locModel:Dynamic, locNormalMatrix:Dynamic, ?locUvTransform:Dynamic, locViewProjection:Dynamic, program:Dynamic };
+
+typedef GlWireframeUpload = { indexType:Float, lineIndexBuffer:Dynamic, vao:Dynamic, version:Float };
+
+#else
+#error "Flight ESM bindings require the JavaScript target and flight_esm."
+#end

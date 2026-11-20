@@ -20,7 +20,7 @@ class EsmGenerator {
   final api:haxe.macro.JSGenApi;
   final buf = new StringBuf();
   final imports = new Map<String, String>(); // module specifier -> import alias
-  final externModule = new Map<String, String>(); // type path -> module specifier
+  final externModule = new Map<String, {specifier:String, member:Null<String>}>();
   final inits:Array<TypedExpr> = [];
   final staticInits:Array<{c:ClassType, f:ClassField}> = [];
 
@@ -40,12 +40,14 @@ class EsmGenerator {
   function registerImport(c:ClassType) {
     final metadataName = c.meta.has(':jsImport') ? ':jsImport' : ':jsRequire';
     final meta = c.meta.extract(metadataName)[0];
-    final specifier = switch (meta.params) {
-      case [expr]: switch (expr.expr) { case EConst(CString(s)): s; default: fail(c, '$metadataName needs a string module'); };
-      default: fail(c, '$metadataName with a member name is not supported by this scoped generator; bind the whole module');
+    final binding = switch (meta.params) {
+      case [{expr: EConst(CString(specifier))}]: {specifier: specifier, member: null};
+      case [{expr: EConst(CString(specifier))}, {expr: EConst(CString(member))}]:
+        {specifier: specifier, member: member};
+      default: fail(c, '$metadataName needs a string module and an optional string export name');
     };
-    if (!imports.exists(specifier)) imports.set(specifier, 'flight_esm_' + imports.count());
-    externModule.set(getPath(c), specifier);
+    if (!imports.exists(binding.specifier)) imports.set(binding.specifier, 'flight_esm_' + imports.count());
+    externModule.set(getPath(c), binding);
   }
 
   // A type reference resolves to its import alias (extern @:jsImport/@:jsRequire) or a flat `var`
@@ -62,7 +64,11 @@ class EsmGenerator {
 
   function classAccessor(c:ClassType):String {
     final path = getPath(c);
-    if (externModule.exists(path)) return imports.get(externModule.get(path)); // extern metadata -> import alias
+    final binding = externModule.get(path);
+    if (binding != null) {
+      final alias = imports.get(binding.specifier);
+      return binding.member == null ? alias : '$alias[${api.quoteString(binding.member)}]';
+    }
     if (c.isExtern) return nativeName(c); // native global (Error, Math, ...) — never flattened, never a var
     return flatName(path); // our own class -> flat top-level binding (bundler can DCE it)
   }
@@ -160,6 +166,13 @@ class EsmGenerator {
     }
   }
 
+  function isArrayIterator(type:Type):Bool {
+    return switch type {
+      case TInst(reference, _): getPath(reference.get()) == 'haxe.iterators.ArrayIterator';
+      default: false;
+    };
+  }
+
   public function generate() {
     // Hoisted static ESM imports — the tree-shakeable replacement for require().
     for (specifier => alias in imports) print('import * as $alias from "$specifier";\n');
@@ -169,6 +182,11 @@ class EsmGenerator {
       if (api.hasFeature('$$global.$$haxeUID')) {
         print('$$global.$$haxeUID |= 0'); newline();
       }
+    }
+    if (api.types.exists(isArrayIterator)) {
+      final arrayIterator = flatName('haxe.iterators.ArrayIterator');
+      print('function $$getIterator(value) { return value instanceof Array ? new $arrayIterator(value) : value.iterator(); }');
+      newline();
     }
     print('var $$hxClasses = {}');newline();
     print('var $$estr = function() { return ${flatName("js.Boot")}.__string_rec(this,""); }'); newline();

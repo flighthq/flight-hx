@@ -13,5 +13,7 @@ artifact manifests record their hashes.
   and inherited ESM node properties. It uses native accessors for Ref-backed
   fields on HashLink and corrects ESM export names and font construction.
   Native node handles and owned byte results use Flight's upstream API.
+- `0018-typescript-esm-externs.patch` generates `flight.esm` facades and types
+  from the SDK's TypeScript package export maps with TypeScript 5.9.3.
 
 Native desktop and headless host-provider FFI remains TODO.

@@ -54,7 +54,7 @@ assert.ok(existsSync(path.join(cpp, host.core)), 'Plain hxcpp did not deploy its
 process.stdout.write('Installed hxcpp shared-library consumer passed.\n');
 const hl = path.join(work, 'hl');
 mkdirSync(hl);
-run('haxe', ['-lib', 'flight', '-cp', src, '-main', 'Smoke', '-dce', 'no', '--macro', 'include("flight", true, ["flight._cpp", "flight._js"])', '-hl', path.join(hl, 'smoke.hl')], work, consumerEnvironment);
+run('haxe', ['-lib', 'flight', '-cp', src, '-main', 'Smoke', '-dce', 'no', '--macro', 'include("flight", true, ["flight._cpp", "flight._js", "flight.esm"])', '-hl', path.join(hl, 'smoke.hl')], work, consumerEnvironment);
 for (const filename of readdirSync(hlRuntime).filter((name) => name === host.hl || /\.(dll|dylib|so|hdll)$/u.test(name)))
   copyFileSync(path.join(hlRuntime, filename), path.join(hl, filename));
 if (process.platform !== 'win32') chmodSync(path.join(hl, host.hl), 0o755);

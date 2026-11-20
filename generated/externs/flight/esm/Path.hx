@@ -1,0 +1,85 @@
+package flight.esm;
+
+#if (js && flight_esm)
+@:jsRequire("@flighthq/path")
+extern class Path {
+  public static final PathCommand:flight.esm.types.path.Types.PathCommand;
+  public static final PathMorphIssueContourClosednessMismatch:Float;
+  public static final PathMorphIssueContourCountMismatch:Float;
+  public static final PathMorphIssueContourOrientationMismatch:Float;
+  public static final PathMorphIssueNone:Float;
+  public static final PathMorphIssueWindingMismatch:Float;
+  public static final StrokePathTessellationIssueInvalidPath:Float;
+  public static final StrokePathTessellationIssueInvalidStyle:Float;
+  public static final StrokePathTessellationIssueNone:Float;
+  public static final StrokePathTessellationIssueReversingJoin:Float;
+  public static final StrokePathTessellationIssueSelfIntersectingCenterline:Float;
+  public static final StrokePathTessellationIssueSelfIntersectingOutline:Float;
+  public static function acquirePathMesh(path:flight.esm.types.path_contract.Types.PathRaw, ?tolerance:Float):flight.esm.types.path.Types.PathMesh;
+  public static function acquirePathMeshTyped(path:flight.esm.types.path_contract.Types.PathRaw, ?tolerance:Float):flight.esm.types.path.Types.PathMeshTyped;
+  public static function appendPathArc(path:flight.esm.types.path_contract.Types.PathRaw, centerX:Float, centerY:Float, radius:Float, startAngle:Float, endAngle:Float, ?anticlockwise:Null<Bool>, ?connectToCurrent:Null<Bool>):Void;
+  public static function appendPathCircle(path:flight.esm.types.path_contract.Types.PathRaw, centerX:Float, centerY:Float, radius:Float):Void;
+  public static function appendPathClose(path:flight.esm.types.path_contract.Types.PathRaw):Void;
+  public static function appendPathCubicCurveTo(path:flight.esm.types.path_contract.Types.PathRaw, controlX1:Float, controlY1:Float, controlX2:Float, controlY2:Float, x:Float, y:Float):Void;
+  public static function appendPathEllipse(path:flight.esm.types.path_contract.Types.PathRaw, centerX:Float, centerY:Float, radiusX:Float, radiusY:Float):Void;
+  public static function appendPathEllipticalArcTo(path:flight.esm.types.path_contract.Types.PathRaw, radiusX:Float, radiusY:Float, xAxisRotation:Float, largeArc:Bool, sweep:Bool, endX:Float, endY:Float):Void;
+  public static function appendPathLineTo(path:flight.esm.types.path_contract.Types.PathRaw, x:Float, y:Float):Void;
+  public static function appendPathMoveTo(path:flight.esm.types.path_contract.Types.PathRaw, x:Float, y:Float):Void;
+  public static function appendPathPolygon(path:flight.esm.types.path_contract.Types.PathRaw, points:Dynamic):Void;
+  public static function appendPathPolyline(path:flight.esm.types.path_contract.Types.PathRaw, points:Dynamic):Void;
+  public static function appendPathQuadraticCurveTo(path:flight.esm.types.path_contract.Types.PathRaw, controlX:Float, controlY:Float, x:Float, y:Float):Void;
+  public static function appendPathRectangle(path:flight.esm.types.path_contract.Types.PathRaw, x:Float, y:Float, width:Float, height:Float):Void;
+  public static function appendPathRoundedRectangle(path:flight.esm.types.path_contract.Types.PathRaw, x:Float, y:Float, width:Float, height:Float, radius:Float):Void;
+  public static function appendPathRoundedRectangleWithCornerRadii(path:flight.esm.types.path_contract.Types.PathRaw, x:Float, y:Float, width:Float, height:Float, topLeft:Float, topRight:Float, bottomRight:Float, bottomLeft:Float):Void;
+  public static function appendPathTangentArcTo(path:flight.esm.types.path_contract.Types.PathRaw, x1:Float, y1:Float, x2:Float, y2:Float, radius:Float):Void;
+  public static function buildPathMorph(start:flight.esm.types.path_contract.Types.PathRaw, end:flight.esm.types.path_contract.Types.PathRaw):flight.esm.types.path_contract.Types.PathMorphBuildResult;
+  public static function buildStrokePathGeometry(path:flight.esm.types.path_contract.Types.PathRaw, style:flight.esm.types.path.Types.StrokeStyle, tolerance:Float):flight.esm.types.path_contract.Types.StrokePathGeometry;
+  public static function cleanPath(source:flight.esm.types.path_contract.Types.PathRaw, tolerance:Float, out:flight.esm.types.path_contract.Types.PathRaw, ?flattenTolerance:Null<Float>):Void;
+  public static function clonePath(source:flight.esm.types.path_contract.Types.PathRaw):flight.esm.types.path_contract.Types.PathRaw;
+  public static function containsPathPoint(path:flight.esm.types.path_contract.Types.PathRaw, px:Float, py:Float, ?tolerance:Null<Float>):Bool;
+  public static function copyPath(out:flight.esm.types.path_contract.Types.PathRaw, source:flight.esm.types.path_contract.Types.PathRaw):Void;
+  public static function createPath(?winding:Null<String>):flight.esm.types.path_contract.Types.PathRaw;
+  public static function createPathMorph(start:flight.esm.types.path_contract.Types.PathRaw, end:flight.esm.types.path_contract.Types.PathRaw):Null<flight.esm.types.path_contract.Types.PathMorphRaw>;
+  public static function dashPath(source:flight.esm.types.path_contract.Types.PathRaw, dash:Dynamic, dashOffset:Float, out:flight.esm.types.path_contract.Types.PathRaw, ?tolerance:Null<Float>):Void;
+  public static function decimatePath(source:flight.esm.types.path_contract.Types.PathRaw, tolerance:Float, out:flight.esm.types.path_contract.Types.PathRaw, ?flattenTolerance:Null<Float>):Void;
+  public static function explainPathMorphCreation(start:flight.esm.types.path_contract.Types.PathRaw, end:flight.esm.types.path_contract.Types.PathRaw):flight.esm.types.path.Types.PathMorphCreationExplanation;
+  public static function explainStrokePathTessellation(path:flight.esm.types.path_contract.Types.PathRaw, style:flight.esm.types.path.Types.StrokeStyle, ?tolerance:Null<Float>):flight.esm.types.path.Types.StrokePathTessellationExplanation;
+  public static function fitPathCurves(source:flight.esm.types.path_contract.Types.PathRaw, tolerance:Float, out:flight.esm.types.path_contract.Types.PathRaw, ?flattenTolerance:Null<Float>):Void;
+  public static function flattenPath(path:flight.esm.types.path_contract.Types.PathRaw, ?tolerance:Null<Float>):Array<Array<Float>>;
+  public static function forEachPathSegment(path:flight.esm.types.path_contract.Types.PathRaw, visitor:((arg0:flight.esm.types.path.Types.PathSegment) -> Void)):Void;
+  public static function getCubicBezierCurvature(x0:Float, y0:Float, c1x:Float, c1y:Float, c2x:Float, c2y:Float, x1:Float, y1:Float, t:Float):Float;
+  public static function getCubicBezierPoint(x0:Float, y0:Float, c1x:Float, c1y:Float, c2x:Float, c2y:Float, x1:Float, y1:Float, t:Float, out:flight.esm.types.geometry.Types.Vector2Like):Void;
+  public static function getCubicBezierTangent(x0:Float, y0:Float, c1x:Float, c1y:Float, c2x:Float, c2y:Float, x1:Float, y1:Float, t:Float, out:flight.esm.types.geometry.Types.Vector2Like):Void;
+  public static function getPathBounds(path:flight.esm.types.path_contract.Types.PathRaw, out:flight.esm.types.geometry.Types.RectangleLike):Bool;
+  public static function getPathContourLengths(path:flight.esm.types.path_contract.Types.PathRaw, ?tolerance:Null<Float>):Array<Float>;
+  public static function getPathContourOrientation(path:flight.esm.types.path_contract.Types.PathRaw, ?tolerance:Null<Float>):flight.esm.types.path.Types.ContourOrientation;
+  public static function getPathCurvatureAtDistance(path:flight.esm.types.path_contract.Types.PathRaw, distance:Float, ?tolerance:Null<Float>):Float;
+  public static function getPathLastPoint(path:flight.esm.types.path_contract.Types.PathRaw):Null<Array<Float>>;
+  public static function getPathLength(path:flight.esm.types.path_contract.Types.PathRaw, ?tolerance:Null<Float>):Float;
+  public static function getPathNearestPoint(path:flight.esm.types.path_contract.Types.PathRaw, px:Float, py:Float, out:flight.esm.types.geometry.Types.Vector2Like, ?tolerance:Null<Float>):Float;
+  public static function getPathPointAtDistance(path:flight.esm.types.path_contract.Types.PathRaw, distance:Float, out:flight.esm.types.geometry.Types.Vector2Like, ?tolerance:Null<Float>):Bool;
+  public static function getPathPositionAtDistance(path:flight.esm.types.path_contract.Types.PathRaw, distance:Float, pointOut:flight.esm.types.geometry.Types.Vector2Like, tangentOut:flight.esm.types.geometry.Types.Vector2Like, ?tolerance:Null<Float>):Bool;
+  public static function getPathSegmentCurvatureAtParameter(path:flight.esm.types.path_contract.Types.PathRaw, segmentIndex:Float, t:Float):Null<Float>;
+  public static function getPathSegmentPointAtParameter(path:flight.esm.types.path_contract.Types.PathRaw, segmentIndex:Float, t:Float, out:flight.esm.types.geometry.Types.Vector2Like):Bool;
+  public static function getPathSegmentTangentAtParameter(path:flight.esm.types.path_contract.Types.PathRaw, segmentIndex:Float, t:Float, out:flight.esm.types.geometry.Types.Vector2Like):Bool;
+  public static function getPathSignedArea(path:flight.esm.types.path_contract.Types.PathRaw, ?tolerance:Null<Float>):Float;
+  public static function getPathTangentAtDistance(path:flight.esm.types.path_contract.Types.PathRaw, distance:Float, out:flight.esm.types.geometry.Types.Vector2Like, ?tolerance:Null<Float>):Bool;
+  public static function getQuadraticBezierCurvature(x0:Float, y0:Float, cx:Float, cy:Float, x1:Float, y1:Float, t:Float):Float;
+  public static function getQuadraticBezierPoint(x0:Float, y0:Float, cx:Float, cy:Float, x1:Float, y1:Float, t:Float, out:flight.esm.types.geometry.Types.Vector2Like):Void;
+  public static function getQuadraticBezierTangent(x0:Float, y0:Float, cx:Float, cy:Float, x1:Float, y1:Float, t:Float, out:flight.esm.types.geometry.Types.Vector2Like):Void;
+  public static function releasePathMesh(mesh:flight.esm.types.path.Types.PathMesh):Void;
+  public static function releasePathMeshTyped(mesh:flight.esm.types.path.Types.PathMeshTyped):Void;
+  public static function reversePath(source:flight.esm.types.path_contract.Types.PathRaw, out:flight.esm.types.path_contract.Types.PathRaw):Void;
+  public static function samplePathMorph(out:flight.esm.types.path_contract.Types.PathRaw, morph:flight.esm.types.path_contract.Types.PathMorphRaw, progress:Float):Void;
+  public static function strokePath(path:flight.esm.types.path_contract.Types.PathRaw, style:flight.esm.types.path.Types.StrokeStyle, ?tolerance:Null<Float>):flight.esm.types.path_contract.Types.PathRaw;
+  public static function tessellatePath(path:flight.esm.types.path_contract.Types.PathRaw, ?tolerance:Null<Float>):flight.esm.types.path.Types.PathMesh;
+  public static function tessellatePathInto(path:flight.esm.types.path_contract.Types.PathRaw, out:flight.esm.types.path.Types.PathMesh, ?tolerance:Null<Float>):Void;
+  public static function tessellatePathTyped(path:flight.esm.types.path_contract.Types.PathRaw, ?tolerance:Float):flight.esm.types.path.Types.PathMeshTyped;
+  public static function tessellatePathTypedInto(path:flight.esm.types.path_contract.Types.PathRaw, out:flight.esm.types.path.Types.PathMeshTyped, ?tolerance:Float):Void;
+  public static function tessellateStrokePath(path:flight.esm.types.path_contract.Types.PathRaw, style:flight.esm.types.path.Types.StrokeStyle, ?tolerance:Null<Float>):Null<flight.esm.types.path.Types.PathMesh>;
+  public static function transformPath(source:flight.esm.types.path_contract.Types.PathRaw, matrix:flight.esm.types.geometry.Types.MatrixLike, out:flight.esm.types.path_contract.Types.PathRaw):Void;
+  public static function translatePath(source:flight.esm.types.path_contract.Types.PathRaw, dx:Float, dy:Float, out:flight.esm.types.path_contract.Types.PathRaw):Void;
+}
+#else
+#error "Flight ESM bindings require the JavaScript target and flight_esm."
+#end

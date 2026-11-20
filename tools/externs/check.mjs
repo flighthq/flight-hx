@@ -25,8 +25,8 @@ for (const filename of actual) {
 
 // Match the upstream target exclusions while loading this repository's checked-in copy.
 for (const [target, exclude, defines] of [
-  ['hl', ['flight._cpp', 'flight._js'], []],
-  ['cpp', ['flight._hl', 'flight._js'], []],
+  ['hl', ['flight._cpp', 'flight._js', 'flight.esm'], []],
+  ['cpp', ['flight._hl', 'flight._js', 'flight.esm'], []],
   ['js', ['flight._hl', 'flight._cpp'], ['-D', 'flight_esm']],
 ]) {
   const result = haxe([

@@ -37,6 +37,7 @@ export function toolEnvironment() {
   const localCargo = path.join(localRust, 'cargo');
   const localHaxe = path.join(root, '.haxe/4.3.7');
   const environment = { ...process.env };
+  environment.FLIGHT_HAXE_TYPESCRIPT ??= fileURLToPath(import.meta.resolve('typescript'));
   const paths = [];
   if (existsSync(path.join(localCargo, 'bin/cargo'))) {
     environment.CARGO_HOME ??= localCargo;
@@ -51,7 +52,7 @@ export function toolEnvironment() {
   return environment;
 }
 
-// This driver owns transport/provenance only. All Haxe emission belongs to Flight's Rust tooling.
+// This driver owns transport and provenance. The prepared Flight producer emits the bindings.
 export function generate({ repoRoot = root, flightRoot, check = false, offline = true, execute = run }) {
   requireWorkspace(flightRoot);
   const revision = execute('git', ['rev-parse', 'HEAD'], flightRoot).trim();

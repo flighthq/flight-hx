@@ -28,7 +28,8 @@ implementation backend or local C++ SDK adapters.
 - `tools/native/` builds/stages binaries and validates source identity/checksums.
   Never commit binaries or artifact manifests; package the ignored staged files.
 - `tools/esm/EsmGenerator.hx` turns upstream `@:jsRequire` metadata into static
-  ESM imports. `buildWeb.mjs`/`bundle.mjs` restore bundling against real pinned
+  ESM imports. The prepared Flight producer generates `flight.esm` from the
+  pinned TypeScript SDK's public package entries. `buildWeb.mjs`/`bundle.mjs` restore bundling against real pinned
   `@flighthq/*` TypeScript sources. JS signatures use logical objects/arrays/
   callbacks/options; keep C ABI lowering out of that target.
 - `tools/package-haxelib.mjs` makes a deterministic consumer archive from an

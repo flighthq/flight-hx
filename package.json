@@ -31,7 +31,8 @@
   },
   "devDependencies": {
     "esbuild": "0.28.1",
-    "lix": "17.0.4-alpha.0"
+    "lix": "17.0.4-alpha.0",
+    "typescript": "5.9.3"
   },
   "license": "MIT"
 }

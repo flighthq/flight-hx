@@ -1,0 +1,96 @@
+package flight.esm.scene2d_dom;
+
+#if (js && flight_esm)
+@:jsRequire("@flighthq/scene2d-dom/contract")
+extern class Contract {
+  public static function applyDomBlendMode(element:js.html.Element, value:Null<String>):Void;
+  public static function applyDomClipRectangles(state:flight.esm.types.scene2d_dom.Types.DomRenderState, data:flight.esm.types.render_contract.Types.RenderProxy2D, entries:Array<flight.esm.types.scene2d_dom.Types.DomClipEntry>):Void;
+  public static function applyDomStyle(state:flight.esm.types.scene2d_dom.Types.DomRenderState, element:js.html.Element, node:flight.esm.types.render_contract.Types.RenderProxy2D):Void;
+  public static function applyDomSvgFilterToNode(state:flight.esm.types.scene2d_dom.Types.DomRenderState, node:flight.esm.types.scene2d_contract.Types.Node2D, effect:Dynamic):Void;
+  public static function areDomTextureResolverGuardsEnabled(state:flight.esm.types.scene2d_dom.Types.DomRenderState):Bool;
+  public static function buildDomContourClipPath(entry:flight.esm.types.scene2d_dom.Types.DomClipContourEntry, mapPointToElement:((x:Float, y:Float) -> Array<Float>)):String;
+  public static function buildDomScale9Mapper(bounds:flight.esm.types.geometry.Types.RectangleLike, scale9Grid:flight.esm.types.geometry.Types.RectangleLike, scaleX:Float, scaleY:Float):Null<flight.esm.types.shape.Types.Scale9Mapper>;
+  public static function createDomRenderState(element:js.html.Element, ?options:Dynamic):flight.esm.types.scene2d_dom.Types.DomRenderState;
+  public static function createDomRenderStateRuntime(?options:Dynamic):flight.esm.types.scene2d_dom.Types.DomRenderStateRuntime;
+  public static function createDomScale9ShapeData(_state:flight.esm.types.render_contract.Types.RenderState, _source:flight.esm.types.node.Types.NodeAny):Dynamic;
+  public static function createDomScale9SpriteData(_state:flight.esm.types.render_contract.Types.RenderState, _source:flight.esm.types.node.Types.NodeAny):Dynamic;
+  public static function createDomScene2DRectangle(rect:flight.esm.types.geometry.Types.RectangleLike, transform:flight.esm.types.geometry.Types.MatrixLike):{ bottom:Float, left:Float, right:Float, top:Float };
+  public static function createDomSvgConvolutionFilter(effect:flight.esm.types.effects_contract.Types.ConvolutionEffect):String;
+  public static function createDomSvgDisplacementMapFilter(effect:flight.esm.types.effects_contract.Types.DisplacementEffect):String;
+  public static final domHtmlViewRenderer:flight.esm.types.render_contract.Types.Scene2DRenderer;
+  public static final domMorphShapeRenderer:flight.esm.types.render_contract.Types.Scene2DRenderer;
+  public static final domNativeTextRenderer:flight.esm.types.render_contract.Types.Scene2DRenderer;
+  public static final domRenderCacheRenderer:flight.esm.types.render_contract.Types.Scene2DRenderer;
+  public static final domRenderInfrastructure:Dynamic;
+  public static final domRichTextRenderer:flight.esm.types.render_contract.Types.Scene2DRenderer;
+  public static final domScale9ShapeRenderer:flight.esm.types.render_contract.Types.Scene2DRenderer;
+  public static final domScale9SpriteRenderer:flight.esm.types.render_contract.Types.Scene2DRenderer;
+  public static final domScene2DRenderPreset:Dynamic;
+  public static final domScene2DRenderer:flight.esm.types.render_contract.Types.Scene2DRenderer;
+  public static final domShapeRenderer:flight.esm.types.render_contract.Types.Scene2DRenderer;
+  public static final domSpriteRenderer:flight.esm.types.render_contract.Types.Scene2DRenderer;
+  public static final domTextLabelRenderer:flight.esm.types.render_contract.Types.Scene2DRenderer;
+  public static function drawDomHtmlView(state:flight.esm.types.scene2d_dom.Types.DomRenderState, renderProxy:flight.esm.types.render_contract.Types.RenderProxy2D):Void;
+  public static function drawDomNativeText(state:flight.esm.types.scene2d_dom.Types.DomRenderState, renderProxy:flight.esm.types.render_contract.Types.RenderProxy2D):Void;
+  public static function drawDomNativeTextMask(state:flight.esm.types.scene2d_dom.Types.DomRenderState, renderProxy:flight.esm.types.render_contract.Types.RenderProxy2D):Void;
+  public static function drawDomRichText(state:flight.esm.types.scene2d_dom.Types.DomRenderState, renderProxy:flight.esm.types.render_contract.Types.RenderProxy2D):Void;
+  public static function drawDomRichTextMask(state:flight.esm.types.scene2d_dom.Types.DomRenderState, renderProxy:flight.esm.types.render_contract.Types.RenderProxy2D):Void;
+  public static function drawDomScale9Shape(state:flight.esm.types.scene2d_dom.Types.DomRenderState, renderProxy:flight.esm.types.render_contract.Types.RenderProxy2D):Void;
+  public static function drawDomScale9Sprite(state:flight.esm.types.scene2d_dom.Types.DomRenderState, renderProxy:flight.esm.types.render_contract.Types.RenderProxy2D):Void;
+  public static function drawDomScene2D(_state:flight.esm.types.scene2d_dom.Types.DomRenderState, _renderProxy:flight.esm.types.render_contract.Types.RenderProxy2D):Void;
+  public static function drawDomShape(state:flight.esm.types.scene2d_dom.Types.DomRenderState, renderProxy:flight.esm.types.render_contract.Types.RenderProxy2D):Void;
+  public static function drawDomSprite(state:flight.esm.types.scene2d_dom.Types.DomRenderState, renderProxy:flight.esm.types.render_contract.Types.RenderProxy2D):Void;
+  public static function drawDomTextInputOverlay(_state:flight.esm.types.scene2d_dom.Types.DomRenderState, renderProxy:flight.esm.types.render_contract.Types.RenderProxy2D):Void;
+  public static function drawDomTextLabel(state:flight.esm.types.scene2d_dom.Types.DomRenderState, renderProxy:flight.esm.types.render_contract.Types.RenderProxy2D):Void;
+  public static function enableDomBlendModeSupport(state:flight.esm.types.scene2d_dom.Types.DomRenderState):Void;
+  public static function enableDomClipSupport(state:flight.esm.types.scene2d_dom.Types.DomRenderState):Void;
+  public static function enableDomCssFilterSupport(state:flight.esm.types.scene2d_dom.Types.DomRenderState):Void;
+  public static function enableDomRasterFilterSupport(state:flight.esm.types.scene2d_dom.Types.DomRenderState):Void;
+  public static function enableDomRenderCache(state:flight.esm.types.render_contract.Types.RenderState):Void;
+  public static function enableDomTextInput():Void;
+  public static function enableDomTextureResolverGuards(state:flight.esm.types.scene2d_dom.Types.DomRenderState, logState:Null<flight.esm.types.log.Types.LogState>):Void;
+  public static function ensureDomRenderCacheTarget(canvasHost:flight.esm.types.surface.Types.HostCanvasCapability, state:flight.esm.types.scene2d_dom.Types.DomRenderState, cache:flight.esm.types.render_contract.Types.RenderCache, width:Float, height:Float):flight.esm.types.scene2d_canvas.Types.CanvasTextureRenderTarget;
+  public static function escapeDomHtmlString(str:String):String;
+  public static function explainDomImageSource(image:Dynamic):flight.esm.types.scene2d_dom.Types.DomImageSourceKind;
+  public static function explainDomTextureResolution(state:flight.esm.types.scene2d_dom.Types.DomRenderState, texture:flight.esm.types.texture_contract.Types.Texture):flight.esm.types.texture_contract.Types.TextureResolutionExplanation;
+  public static function getDomBlendModeFidelity(blendMode:String):flight.esm.types.scene2d_dom.Types.DomBlendModeFidelity;
+  public static function getDomCssFilter(renderProxy:flight.esm.types.render_contract.Types.RenderProxy2D):Null<String>;
+  public static function getDomFontAscentCached(font:String):Null<Float>;
+  public static function getDomRenderCacheTarget(state:flight.esm.types.scene2d_dom.Types.DomRenderState, cache:flight.esm.types.render_contract.Types.RenderCache):Null<flight.esm.types.scene2d_canvas.Types.CanvasTextureRenderTarget>;
+  public static function getDomRenderStateRuntime(state:flight.esm.types.scene2d_dom.Types.DomRenderState):flight.esm.types.scene2d_dom.Types.DomRenderStateRuntime;
+  public static function getDomShapeRasterizer(state:flight.esm.types.scene2d_dom.Types.DomRenderState):Null<flight.esm.types.render_contract.Types.ShapeRasterizer>;
+  public static function getDomSvgFilter(state:flight.esm.types.scene2d_dom.Types.DomRenderState, effect:Dynamic):Null<String>;
+  public static function hasDomStructureChanged(runtime:flight.esm.types.scene2d_dom.Types.DomRenderStateRuntime, newLength:Float, needsReconcile:Bool):Bool;
+  public static function initializeDomRichTextData(out:flight.esm.types.entity_contract.Types.EntityConstruction<Dynamic>):Void;
+  public static function initializeDomScale9ShapeData(out:flight.esm.types.entity_contract.Types.EntityConstruction<Dynamic>, _state:flight.esm.types.render_contract.Types.RenderState, _source:flight.esm.types.node.Types.NodeAny):Void;
+  public static function initializeDomScale9SpriteData(out:flight.esm.types.entity_contract.Types.EntityConstruction<Dynamic>, _state:flight.esm.types.render_contract.Types.RenderState, _source:flight.esm.types.node.Types.NodeAny):Void;
+  public static function initializeDomScene2DRectangle(out:flight.esm.types.entity_contract.Types.EntityConstruction<Dynamic>, rect:flight.esm.types.geometry.Types.RectangleLike, transform:flight.esm.types.geometry.Types.MatrixLike):Void;
+  public static function initializeDomShapeData(out:flight.esm.types.entity_contract.Types.EntityConstruction<Dynamic>):Void;
+  public static function initializeDomTextData(out:flight.esm.types.entity_contract.Types.EntityConstruction<Dynamic>):Void;
+  public static function invalidateDomFontResource(source:flight.esm.types.font.Types.FontResource):Void;
+  public static function mergeDomRenderOptions(...options:Dynamic):Dynamic;
+  public static function prepareDomElement(element:js.html.Element):Void;
+  public static function processDomNode(runtime:flight.esm.types.scene2d_dom.Types.DomRenderStateRuntime, data:flight.esm.types.render_contract.Types.RenderProxy2D, currentFrameId:Float, drawFn:(() -> Void), newLength:Float, ?forceDraw:Bool):Dynamic;
+  public static function pushDomClipContours(stack:Dynamic, contours:Array<Array<Float>>, winding:flight.esm.types.path.Types.PathWinding, transform:flight.esm.types.geometry.Types.Matrix):Void;
+  public static function pushDomClipRectangle(stack:Array<flight.esm.types.scene2d_dom.Types.DomClipEntry>, rect:flight.esm.types.geometry.Types.RectangleLike, transform:flight.esm.types.geometry.Types.MatrixLike):Void;
+  public static function reconcileDomContainer(container:js.html.Element, runtime:flight.esm.types.scene2d_dom.Types.DomRenderStateRuntime, newLength:Float):Void;
+  public static function registerDomBitmapTextureResolver(hostImage:flight.esm.types.image_contract.Types.HostImageCapability, state:flight.esm.types.scene2d_dom.Types.DomRenderState):Void;
+  public static function registerDomImageTextureResolver(state:flight.esm.types.scene2d_dom.Types.DomRenderState):Void;
+  public static function registerDomShapeRasterizer(state:flight.esm.types.scene2d_dom.Types.DomRenderState, rasterizer:Null<flight.esm.types.render_contract.Types.ShapeRasterizer>):Void;
+  public static function registerDomTextInputOverlay(overlay:flight.esm.types.scene2d_dom.Types.DomTextInputOverlay):Void;
+  public static function registerDomTextureResolver(state:flight.esm.types.scene2d_dom.Types.DomRenderState, sourceKind:String, resolver:Null<flight.esm.types.scene2d_dom.Types.DomTextureResolver>):Void;
+  public static function releaseDomRenderCache(state:flight.esm.types.scene2d_dom.Types.DomRenderState, cache:flight.esm.types.render_contract.Types.RenderCache):Void;
+  public static function removeDomSvgFilterFromNode(state:flight.esm.types.scene2d_dom.Types.DomRenderState, node:flight.esm.types.scene2d_contract.Types.Node2D):Void;
+  public static function renderDomScene2D(state:flight.esm.types.scene2d_dom.Types.DomRenderState, source:flight.esm.types.scene2d_contract.Types.Node2D, ?renderTransform:Null<flight.esm.types.geometry.Types.Matrix>):Void;
+  public static function resolveDomTexture(state:flight.esm.types.scene2d_dom.Types.DomRenderState, texture:flight.esm.types.texture_contract.Types.Texture):Dynamic;
+  public static function setDomClipHooks(state:flight.esm.types.scene2d_dom.Types.DomRenderState):Void;
+  public static function setDomCssFilter(state:flight.esm.types.scene2d_dom.Types.DomRenderState, node:flight.esm.types.scene2d_contract.Types.Node2D, filter:Null<String>):Void;
+  public static function setDomFontAscentCached(font:String, ascent:Float):Void;
+  public static function setDomRendererElement(state:flight.esm.types.scene2d_dom.Types.DomRenderState, element:js.html.Element):Void;
+  public static function setDomTransform(element:js.html.Element, transform:flight.esm.types.geometry.Types.Matrix, roundPixels:Bool):Void;
+  public static function setDomTransformWithOffset(element:js.html.Element, transform:flight.esm.types.geometry.Types.Matrix, offsetX:Float, offsetY:Float, roundPixels:Bool):Void;
+  public static function swapDomOrderLists(runtime:flight.esm.types.scene2d_dom.Types.DomRenderStateRuntime, newLength:Float):Void;
+}
+#else
+#error "Flight ESM bindings require the JavaScript target and flight_esm."
+#end

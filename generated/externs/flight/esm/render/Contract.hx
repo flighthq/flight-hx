@@ -1,0 +1,98 @@
+package flight.esm.render;
+
+#if (js && flight_esm)
+@:jsRequire("@flighthq/render/contract")
+extern class Contract {
+  public static final BatchFormat:flight.esm.types.render_contract.Types.BatchFormat;
+  public static final RenderCacheKind:String;
+  public static final RenderRegistryTable:flight.esm.types.render_contract.Types.RenderRegistryTable;
+  public static final SCENE2D_WORKING_COLOR_SPACE:flight.esm.types.render_contract.Types.RenderTargetColorSpace;
+  public static final SceneCoverage:Dynamic;
+  public static function applyRenderProxyAdapter(state:flight.esm.types.render_contract.Types.RenderState, source:flight.esm.types.node.Types.NodeAny, data:flight.esm.types.render_contract.Types.RenderProxy2D):Void;
+  public static function areColorAdjustmentGuardsEnabled(state:flight.esm.types.render_contract.Types.RenderState):Bool;
+  public static function areColorAdjustmentsEnabled(state:flight.esm.types.render_contract.Types.RenderState):Bool;
+  public static function areRenderRegistriesGuardsEnabled(state:flight.esm.types.render_contract.Types.RenderState):Bool;
+  public static function buildRenderQueue(state:flight.esm.types.render_contract.Types.RenderState, source:flight.esm.types.node.Types.NodeAny, out:flight.esm.types.render_contract.Types.RenderQueue):Void;
+  public static function clearRenderQueue(queue:flight.esm.types.render_contract.Types.RenderQueue):Void;
+  public static function compareRenderQueueEntries(a:flight.esm.types.render_contract.Types.RenderQueueEntry, b:flight.esm.types.render_contract.Types.RenderQueueEntry):Float;
+  public static function computeRenderCacheTransform(outCacheTransform:flight.esm.types.geometry.Types.MatrixLike, bounds:flight.esm.types.geometry.Types.RectangleLike, ?contentX:Float, ?contentY:Float):Void;
+  public static function computeRenderProxyWorldBounds(out:Dynamic, source:flight.esm.types.scene2d_contract.Types.Node2D):Void;
+  public static function computeRenderTargetSize(out:Dynamic, bounds:flight.esm.types.geometry.Types.RectangleLike, ?padding:Dynamic, ?minWidth:Float, ?minHeight:Float):Dynamic;
+  public static function computeScene2DRenderTargetTransform(outRenderTransform:flight.esm.types.geometry.Types.MatrixLike, source:flight.esm.types.scene2d_contract.Types.Node2D, bounds:flight.esm.types.geometry.Types.RectangleLike, ?contentX:Float, ?contentY:Float):Void;
+  public static function copyAllRenderersFromRenderState(target:flight.esm.types.render_contract.Types.RenderState, source:flight.esm.types.render_contract.Types.RenderState):Void;
+  public static function copyRenderStateRegistrations(target:flight.esm.types.render_contract.Types.RenderState, source:flight.esm.types.render_contract.Types.RenderState):Void;
+  public static function copyRenderersFromRenderState(target:flight.esm.types.render_contract.Types.RenderState, source:flight.esm.types.render_contract.Types.RenderState):Void;
+  public static function createCanvasHostSurface(host:flight.esm.types.surface.Types.HostCanvasCapability, width:Float, height:Float):Null<flight.esm.types.surface.Types.CanvasSurface>;
+  public static function createRenderCache():flight.esm.types.render_contract.Types.RenderCache;
+  public static function createRenderCacheAdapter(?cache:Null<flight.esm.types.render_contract.Types.RenderCache>):flight.esm.types.render_contract.Types.RenderCacheAdapter;
+  public static function createRenderProxy(state:flight.esm.types.render_contract.Types.RenderState, source:flight.esm.types.node.Types.NodeAny):flight.esm.types.render_contract.Types.RenderProxy;
+  public static function createRenderProxy2D(state:flight.esm.types.render_contract.Types.RenderState, source:flight.esm.types.scene2d_contract.Types.Node2D):flight.esm.types.render_contract.Types.RenderProxy2D;
+  public static function createRenderQueue():flight.esm.types.render_contract.Types.RenderQueue;
+  public static function createRenderState(?obj:Dynamic):flight.esm.types.render_contract.Types.RenderState;
+  public static function createRenderStateRuntime():flight.esm.types.render_contract.Types.RenderStateRuntime;
+  public static function createRenderView<State, Target>(renderState:State, renderTarget:Target, viewport:flight.esm.types.node.Types.Viewport):flight.esm.types.render.Types.RenderView<State, Target>;
+  public static function destroyCanvasHostSurface(surface:flight.esm.types.surface.Types.CanvasSurface):Void;
+  public static function destroyRenderState(state:flight.esm.types.render_contract.Types.RenderState):Void;
+  public static function disableSceneRenderGuards():Void;
+  public static function disposeRenderProxy(state:flight.esm.types.render_contract.Types.RenderState, source:flight.esm.types.node.Types.NodeAny):Void;
+  public static function disposeScene2DRender(state:flight.esm.types.render_contract.Types.RenderState, root:flight.esm.types.node.Types.NodeAny):Void;
+  public static function enableColorAdjustmentGuards(state:flight.esm.types.render_contract.Types.RenderState, logState:Null<flight.esm.types.log.Types.LogState>):Void;
+  public static function enableColorAdjustments(state:flight.esm.types.render_contract.Types.RenderState):Void;
+  public static function enableRenderCacheAdapterSignals(adapter:flight.esm.types.render_contract.Types.RenderCacheAdapter):Void;
+  public static function enableRenderRegistriesGuards(state:flight.esm.types.render_contract.Types.RenderState, logState:Null<flight.esm.types.log.Types.LogState>):Void;
+  public static function enableRenderRegistrySignals(state:flight.esm.types.render_contract.Types.RenderState):flight.esm.types.render_contract.Types.RenderRegistrySignals;
+  public static function enableSceneRenderGuards(logState:Null<flight.esm.types.log.Types.LogState>):Void;
+  public static function explainRenderRegistriesMisses(state:flight.esm.types.render_contract.Types.RenderState):flight.esm.types.render_contract.Types.RenderRegistriesMissExplanation;
+  public static function explainRenderTargetAxes(requested:flight.esm.types.render_contract.Types.RenderTargetAxes, effective:flight.esm.types.render_contract.Types.RenderTargetAxes):Array<flight.esm.types.render_contract.Types.RenderTargetAxisDifference>;
+  public static function explainScene2DCoverage(out:Array<flight.esm.types.render_contract.Types.SceneCoverageEntry>, state:flight.esm.types.render_contract.Types.RenderState, usage:flight.esm.types.scene2d_contract.Types.Scene2DKindUsage, catalog:flight.esm.types.render_contract.Types.SceneCoverageCatalog):Void;
+  public static function explainScene2DPipelineCoverage(state:flight.esm.types.render_contract.Types.RenderState, scene:flight.esm.types.node.Types.NodeAny):flight.esm.types.render_contract.Types.Scene2DPipelineCoverageExplanation;
+  public static function explainScene2DRender(state:flight.esm.types.render_contract.Types.RenderState, source:flight.esm.types.node.Types.NodeAny):flight.esm.types.render_contract.Types.Scene2DRenderExplanation;
+  public static function explainScene3DPipelineCoverage(state:flight.esm.types.render_contract.Types.RenderState, scene:flight.esm.types.node.Types.NodeAny, materialRenderers:Null<js.lib.Map<String, Dynamic>>):flight.esm.types.render_contract.Types.Scene3DPipelineCoverageExplanation;
+  public static function getCanvasHostSurface(surface:flight.esm.types.surface.Types.CanvasSurface):Null<flight.esm.types.surface.Types.HostCanvasCapability>;
+  public static function getColorAdjustmentUnsupportedGuard(state:flight.esm.types.render_contract.Types.RenderState):Null<flight.esm.types.render_contract.Types.ColorAdjustmentUnsupportedGuard>;
+  public static function getOrCreateRenderProxy2D(state:flight.esm.types.render_contract.Types.RenderState, source:flight.esm.types.scene2d_contract.Types.Node2D):flight.esm.types.render_contract.Types.RenderProxy2D;
+  public static function getRenderProxy2D(state:flight.esm.types.render_contract.Types.RenderState, source:flight.esm.types.node.Types.NodeAny):Null<flight.esm.types.render_contract.Types.RenderProxy2D>;
+  public static function getRenderProxyAdapter(state:flight.esm.types.render_contract.Types.RenderState, source:flight.esm.types.node.Types.NodeAny):Null<flight.esm.types.render_contract.Types.RenderProxyAdapter>;
+  public static function getRenderProxyCache(state:flight.esm.types.render_contract.Types.RenderState, source:flight.esm.types.node.Types.NodeAny):Null<flight.esm.types.render_contract.Types.RenderCache>;
+  public static function getRenderStateRuntime(state:flight.esm.types.render_contract.Types.RenderState):flight.esm.types.render_contract.Types.RenderStateRuntime;
+  public static function hasScene2DCoverage(state:flight.esm.types.render_contract.Types.RenderState, usage:flight.esm.types.scene2d_contract.Types.Scene2DKindUsage):Bool;
+  public static function initializeRenderCache(out:flight.esm.types.entity_contract.Types.EntityConstruction<flight.esm.types.render_contract.Types.RenderCache>):Void;
+  public static function initializeRenderCacheAdapter(adapter:flight.esm.types.entity_contract.Types.EntityConstruction<flight.esm.types.render_contract.Types.RenderCacheAdapter>, ?cache:Null<flight.esm.types.render_contract.Types.RenderCache>):Void;
+  public static function initializeRenderProxy(out:flight.esm.types.entity_contract.Types.EntityConstruction<flight.esm.types.render_contract.Types.RenderProxy>, state:flight.esm.types.render_contract.Types.RenderState, source:flight.esm.types.node.Types.NodeAny):Void;
+  public static function initializeRenderQueue(out:flight.esm.types.entity_contract.Types.EntityConstruction<flight.esm.types.render_contract.Types.RenderQueue>):Void;
+  public static function initializeRenderState(state:flight.esm.types.entity_contract.Types.EntityConstruction<flight.esm.types.render_contract.Types.RenderState>, ?obj:Dynamic):Void;
+  public static function initializeRenderView<State, Target>(view:flight.esm.types.entity_contract.Types.EntityConstruction<flight.esm.types.render.Types.RenderView<State, Target>>, renderState:State, renderTarget:Target, viewport:flight.esm.types.node.Types.Viewport):Void;
+  public static function installRenderAdaptHook(state:flight.esm.types.render_contract.Types.RenderState, fn:((state:flight.esm.types.render_contract.Types.RenderState, source:flight.esm.types.node.Types.NodeAny, data:flight.esm.types.render_contract.Types.RenderProxy2D) -> Void)):Void;
+  public static function isRenderCache(source:Dynamic):Bool;
+  public static function isRenderCacheAdapter(value:Dynamic):Bool;
+  public static function isRenderProxyDirty(state:flight.esm.types.render_contract.Types.RenderState, source:flight.esm.types.node.Types.NodeAny, data:flight.esm.types.render_contract.Types.RenderProxy, ?parentData:Null<flight.esm.types.render_contract.Types.RenderProxy>):Bool;
+  public static function isRenderProxyInViewport(proxy:flight.esm.types.render_contract.Types.RenderProxy2D, viewport:flight.esm.types.node.Types.Viewport, ?renderTransform2D:Null<flight.esm.types.geometry.Types.Matrix>):Bool;
+  public static function isRenderProxyVisible(data:flight.esm.types.render_contract.Types.RenderProxy2D):Bool;
+  public static function isRenderableInViewport(source:flight.esm.types.scene2d_contract.Types.Node2D, viewport:flight.esm.types.node.Types.Viewport, ?renderTransform2D:Null<flight.esm.types.geometry.Types.Matrix>):Bool;
+  public static function mergeRenderOptions(...options:flight.esm.types.render_contract.Types.RenderStateOptions):flight.esm.types.render_contract.Types.RenderStateOptions;
+  public static function noopRendererData(_state:flight.esm.types.render_contract.Types.RenderState, _source:flight.esm.types.node.Types.NodeAny):Null<flight.esm.types.node.Types.RendererData>;
+  public static function packRenderSortKey(layer:Float, depth:Float, isTransparent:Bool):Float;
+  public static function packScene3DLightBlock(out:flight.esm.types.lighting_contract.Types.Scene3DLightBlock, lights:flight.esm.types.lighting_contract.Types.Scene3DLightsLike):Void;
+  public static function prepareScene2DRender(state:flight.esm.types.render_contract.Types.RenderState, source:flight.esm.types.scene2d_contract.Types.Node2D):Bool;
+  public static function prepareScene3DRender(state:flight.esm.types.render_contract.Types.RenderState, scene:flight.esm.types.scene3d.Types.Node3D, camera:flight.esm.types.camera.Types.Camera3D, lights:flight.esm.types.lighting_contract.Types.Scene3DLightsLike, ?viewportAspect:Null<Float>):flight.esm.types.render_contract.Types.Scene3DRenderList;
+  public static function pushRenderQueueEntry(queue:flight.esm.types.render_contract.Types.RenderQueue, proxy:flight.esm.types.render_contract.Types.RenderProxy, sortKey:Float):Void;
+  public static function registerNodeRenderer(state:flight.esm.types.render_contract.Types.RenderState, kind:String, renderer:flight.esm.types.render_contract.Types.NodeRenderer):Void;
+  public static function registerNodeRenderers(state:flight.esm.types.render_contract.Types.RenderState, entries:Array<Array<Dynamic>>):Void;
+  public static function registerRenderCacheNodeRenderer(state:flight.esm.types.render_contract.Types.RenderState, renderer:flight.esm.types.render_contract.Types.NodeRenderer):Void;
+  public static function resizeRenderView<State, Target>(view:flight.esm.types.render.Types.RenderView<State, Target>, logicalWidth:Float, logicalHeight:Float, devicePixelRatio:Float, resize:flight.esm.types.render.Types.RenderViewResize<State, Target>):Void;
+  public static function resolveRenderTargetDescriptor(descriptor:flight.esm.types.render_contract.Types.RenderTargetDescriptor):flight.esm.types.render_contract.Types.ResolvedRenderTargetDescriptor;
+  public static function setRenderProxyAdapter(state:flight.esm.types.render_contract.Types.RenderState, source:flight.esm.types.node.Types.NodeAny, adapter:Null<flight.esm.types.render_contract.Types.RenderProxyAdapter>):Void;
+  public static function setSkinnedMeshBoundsGuard(guard:Null<((mesh:flight.esm.types.meshgeometry.Types.Mesh) -> Void)>):Void;
+  public static function sortRenderQueue(queue:flight.esm.types.render_contract.Types.RenderQueue, ?compare:Null<((a:flight.esm.types.render_contract.Types.RenderQueueEntry, b:flight.esm.types.render_contract.Types.RenderQueueEntry) -> Float)>):Void;
+  public static function updateNodeClip(_state:flight.esm.types.render_contract.Types.RenderState, source:flight.esm.types.node.Types.NodeAny, data:flight.esm.types.render_contract.Types.RenderProxy2D, parentData:Null<flight.esm.types.render_contract.Types.RenderProxy2D>):Void;
+  public static function updateRenderProxy2D(state:flight.esm.types.render_contract.Types.RenderState, source:flight.esm.types.node.Types.NodeAny, data:flight.esm.types.render_contract.Types.RenderProxy2D, parentData:Null<flight.esm.types.render_contract.Types.RenderProxy2D>):Void;
+  public static function updateRenderProxy2DTransform(state:flight.esm.types.render_contract.Types.RenderState, data:flight.esm.types.render_contract.Types.RenderProxy2D, ?parentData:Null<flight.esm.types.render_contract.Types.RenderProxy2D>):Bool;
+  public static function updateRenderProxyAppearance(state:flight.esm.types.render_contract.Types.RenderState, data:flight.esm.types.render_contract.Types.RenderProxy, ?parentData:Null<flight.esm.types.render_contract.Types.RenderProxy>):Bool;
+  public static function updateRenderProxyMaterial(state:flight.esm.types.render_contract.Types.RenderState, data:flight.esm.types.render_contract.Types.RenderProxy, ?_parentData:Null<flight.esm.types.render_contract.Types.RenderProxy>):Void;
+  public static function updateRenderProxyRenderer(state:flight.esm.types.render_contract.Types.RenderState, node:flight.esm.types.render_contract.Types.RenderProxy):Void;
+  public static function useRenderCache(state:flight.esm.types.render_contract.Types.RenderState, source:flight.esm.types.node.Types.NodeAny, cache:flight.esm.types.render_contract.Types.RenderCache):flight.esm.types.render_contract.Types.RenderCacheAdapter;
+  public static function walkNode(state:flight.esm.types.render_contract.Types.RenderState, root:flight.esm.types.scene2d_contract.Types.Node2D, visit:flight.esm.types.render_contract.Types.RenderProxyVisitor):Bool;
+}
+#else
+#error "Flight ESM bindings require the JavaScript target and flight_esm."
+#end

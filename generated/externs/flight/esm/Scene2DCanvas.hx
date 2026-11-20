@@ -1,0 +1,94 @@
+package flight.esm;
+
+#if (js && flight_esm)
+@:jsRequire("@flighthq/scene2d-canvas")
+extern class Scene2DCanvas {
+  public static function acquireCanvasRenderTexture(state:flight.esm.types.scene2d_canvas.Types.CanvasRenderState, pool:flight.esm.types.scene2d_canvas.Types.CanvasRenderTexturePool, descriptor:flight.esm.types.render_contract.Types.RenderTargetDescriptor):flight.esm.types.render_contract.Types.RenderTexture;
+  public static function acquireCanvasSurface(canvasHost:flight.esm.types.surface.Types.HostCanvasCapability, width:Float, height:Float):Null<flight.esm.types.surface.Types.CanvasSurface>;
+  public static function allocateEmptyCanvasRenderRegistries():flight.esm.types.scene2d_canvas.Types.CanvasRenderRegistries;
+  public static function applyCanvasBlendMode(state:flight.esm.types.scene2d_canvas.Types.CanvasRenderState, value:Null<String>):Void;
+  public static function areCanvasTextureResolverGuardsEnabled(state:flight.esm.types.scene2d_canvas.Types.CanvasRenderState):Bool;
+  public static function beginCanvasRenderPass(state:flight.esm.types.scene2d_canvas.Types.CanvasRenderState, target:flight.esm.types.scene2d_canvas.Types.CanvasRenderTarget, ?clear:Null<flight.esm.types.render_contract.Types.RenderTargetClear>):flight.esm.types.scene2d_canvas.Types.CanvasRenderPass;
+  public static final canvasBeginFill:flight.esm.types.scene2d_canvas_contract.Types.CanvasShapeCommand<String>;
+  public static final canvasBeginGradientFill:flight.esm.types.scene2d_canvas_contract.Types.CanvasShapeCommand<String>;
+  public static final canvasBitmapTextRenderer:flight.esm.types.render.Types.SpriteRenderer;
+  public static final canvasCubicCurveTo:flight.esm.types.scene2d_canvas_contract.Types.CanvasShapeCommand<String>;
+  public static final canvasDrawCircle:flight.esm.types.scene2d_canvas_contract.Types.CanvasShapeCommand<String>;
+  public static final canvasDrawEllipse:flight.esm.types.scene2d_canvas_contract.Types.CanvasShapeCommand<String>;
+  public static final canvasDrawPath:flight.esm.types.scene2d_canvas_contract.Types.CanvasShapeCommand<String>;
+  public static final canvasDrawRectangle:flight.esm.types.scene2d_canvas_contract.Types.CanvasShapeCommand<String>;
+  public static final canvasDrawRoundedRectangle:flight.esm.types.scene2d_canvas_contract.Types.CanvasShapeCommand<String>;
+  public static final canvasEndFill:flight.esm.types.scene2d_canvas_contract.Types.CanvasShapeCommand<String>;
+  public static final canvasLineGradientStyle:flight.esm.types.scene2d_canvas_contract.Types.CanvasShapeCommand<String>;
+  public static final canvasLineStyle:flight.esm.types.scene2d_canvas_contract.Types.CanvasShapeCommand<String>;
+  public static final canvasLineTo:flight.esm.types.scene2d_canvas_contract.Types.CanvasShapeCommand<String>;
+  public static final canvasMorphShapeRenderer:flight.esm.types.render_contract.Types.Scene2DRenderer;
+  public static final canvasMoveTo:flight.esm.types.scene2d_canvas_contract.Types.CanvasShapeCommand<String>;
+  public static final canvasParticleEmitter2DRenderer:flight.esm.types.render.Types.SpriteRenderer;
+  public static final canvasQuadBatchRenderer:flight.esm.types.render.Types.SpriteRenderer;
+  public static final canvasQuadraticCurveTo:flight.esm.types.scene2d_canvas_contract.Types.CanvasShapeCommand<String>;
+  public static final canvasRenderCacheRenderer:flight.esm.types.render_contract.Types.Scene2DRenderer;
+  public static final canvasRenderInfrastructure:Dynamic;
+  public static final canvasRichTextRenderer:flight.esm.types.render_contract.Types.Scene2DRenderer;
+  public static final canvasScale9ShapeRenderer:flight.esm.types.render_contract.Types.Scene2DRenderer;
+  public static final canvasScale9SpriteRenderer:flight.esm.types.render_contract.Types.Scene2DRenderer;
+  public static final canvasScene2DRenderPreset:flight.esm.types.scene2d_canvas.Types.CanvasRenderRegistries;
+  public static final canvasScene2DRenderer:flight.esm.types.render_contract.Types.Scene2DRenderer;
+  public static function canvasShapeCommandTable():js.lib.Map<String, flight.esm.types.scene2d_canvas_contract.Types.CanvasShapeCommand<String>>;
+  public static final canvasShapeCommands:Array<flight.esm.types.scene2d_canvas_contract.Types.CanvasShapeCommand<Dynamic>>;
+  public static final canvasShapeRenderer:flight.esm.types.render_contract.Types.Scene2DRenderer;
+  public static final canvasSpriteRenderer:flight.esm.types.render_contract.Types.Scene2DRenderer;
+  public static final canvasTextLabelRenderer:flight.esm.types.render_contract.Types.Scene2DRenderer;
+  public static final canvasTextureShapeCommands:Array<flight.esm.types.scene2d_canvas_contract.Types.CanvasShapeCommand<Dynamic>>;
+  public static final canvasTilemapRenderer:flight.esm.types.render.Types.SpriteRenderer;
+  public static function connectCanvasTextureResolverMisses(resolvers:flight.esm.types.scene2d_canvas.Types.CanvasTextureResolvers, state:flight.esm.types.render_contract.Types.RenderState):Void;
+  public static function createCanvasCacheState(ownerState:flight.esm.types.scene2d_canvas.Types.CanvasRenderState, registry:flight.esm.types.scene2d_canvas.Types.CanvasRenderRegistries, canvasTextureResolvers:flight.esm.types.scene2d_canvas.Types.CanvasTextureResolvers, ?options:Dynamic):flight.esm.types.scene2d_canvas.Types.CanvasRenderState;
+  public static function createCanvasElement(canvasHost:flight.esm.types.surface.Types.HostCanvasCapability, width:Float, height:Float, ?pixelRatio:Float):flight.esm.types.surface.Types.CanvasSurface;
+  public static function createCanvasOffscreenRenderState(registry:flight.esm.types.scene2d_canvas.Types.CanvasRenderRegistries, canvasTextureResolvers:flight.esm.types.scene2d_canvas.Types.CanvasTextureResolvers, ?options:Dynamic):flight.esm.types.scene2d_canvas.Types.CanvasRenderState;
+  public static function createCanvasRenderState(?options:flight.esm.types.scene2d_canvas.Types.CanvasRenderStateOptions):flight.esm.types.scene2d_canvas.Types.CanvasRenderState;
+  public static function createCanvasRenderTexturePool(canvasHost:flight.esm.types.surface.Types.HostCanvasCapability):flight.esm.types.scene2d_canvas.Types.CanvasRenderTexturePool;
+  public static function createCanvasScreenRenderTarget(surface:flight.esm.types.surface.Types.CanvasSurface):flight.esm.types.scene2d_canvas.Types.CanvasScreenRenderTarget;
+  public static function createCanvasShapeRasterizer(resolvers:flight.esm.types.scene2d_canvas.Types.CanvasTextureResolvers):flight.esm.types.render_contract.Types.ShapeRasterizer;
+  public static function createCanvasTextureRenderTarget(canvasHost:flight.esm.types.surface.Types.HostCanvasCapability, width:Float, height:Float):flight.esm.types.scene2d_canvas.Types.CanvasTextureRenderTarget;
+  public static function createCanvasTextureResolvers(canvasHost:flight.esm.types.surface.Types.HostCanvasCapability):flight.esm.types.scene2d_canvas.Types.CanvasTextureResolvers;
+  public static function destroyCanvasRenderState(state:flight.esm.types.scene2d_canvas.Types.CanvasRenderState):Void;
+  public static function destroyCanvasRenderTexture(state:flight.esm.types.scene2d_canvas.Types.CanvasRenderState, renderTexture:flight.esm.types.render_contract.Types.RenderTexture):Void;
+  public static function destroyCanvasRenderTexturePool(state:flight.esm.types.scene2d_canvas.Types.CanvasRenderState, pool:flight.esm.types.scene2d_canvas.Types.CanvasRenderTexturePool):Void;
+  public static function destroyCanvasSurfaceOwned(surface:flight.esm.types.surface.Types.CanvasSurface):Void;
+  public static function destroyCanvasTextureRenderTarget(target:flight.esm.types.scene2d_canvas.Types.CanvasTextureRenderTarget):Void;
+  public static function destroyCanvasTextureResolvers(resolvers:flight.esm.types.scene2d_canvas.Types.CanvasTextureResolvers):Void;
+  public static function disposeCanvasScreenRenderTarget(target:flight.esm.types.scene2d_canvas.Types.CanvasScreenRenderTarget):Void;
+  public static function enableCanvasBlendMode(state:flight.esm.types.scene2d_canvas.Types.CanvasRenderState):Void;
+  public static function enableCanvasClip(state:flight.esm.types.scene2d_canvas.Types.CanvasRenderState):Void;
+  public static function enableCanvasRenderCache(state:flight.esm.types.render_contract.Types.RenderState):Void;
+  public static function enableCanvasTextInput():Void;
+  public static function enableCanvasTextureResolverGuards(state:flight.esm.types.scene2d_canvas.Types.CanvasRenderState, logState:Null<flight.esm.types.log.Types.LogState>):Void;
+  public static function endCanvasRenderPass(pass:flight.esm.types.scene2d_canvas.Types.CanvasRenderPass):Void;
+  public static function explainCanvasImageSource(image:Dynamic):flight.esm.types.scene2d_canvas.Types.CanvasImageSourceKind;
+  public static function explainCanvasRenderTexture(state:flight.esm.types.scene2d_canvas.Types.CanvasRenderState, renderTexture:flight.esm.types.render_contract.Types.RenderTexture):flight.esm.types.scene2d_canvas.Types.CanvasRenderTextureExplanation;
+  public static function explainCanvasScene2DCoverage(out:Array<flight.esm.types.render_contract.Types.SceneCoverageEntry>, state:flight.esm.types.scene2d_canvas.Types.CanvasRenderState, usage:flight.esm.types.scene2d_contract.Types.Scene2DKindUsage, catalog:flight.esm.types.render_contract.Types.SceneCoverageCatalog):Void;
+  public static function explainCanvasTextureResolution(resolvers:flight.esm.types.scene2d_canvas.Types.CanvasTextureResolvers, texture:flight.esm.types.texture_contract.Types.Texture):flight.esm.types.texture_contract.Types.TextureResolutionExplanation;
+  public static function getCanvasActiveRenderPass(state:flight.esm.types.scene2d_canvas.Types.CanvasRenderState):Null<flight.esm.types.scene2d_canvas.Types.CanvasRenderPass>;
+  public static function getCanvasHost(state:flight.esm.types.scene2d_canvas.Types.CanvasRenderState):flight.esm.types.surface.Types.HostCanvasCapability;
+  public static function getCanvasQuadMaterialRenderer(state:flight.esm.types.scene2d_canvas.Types.CanvasRenderState, kind:String):Null<flight.esm.types.scene2d_canvas.Types.CanvasQuadMaterialRenderer>;
+  public static function getCanvasRenderStateTextureResolvers(state:flight.esm.types.scene2d_canvas.Types.CanvasRenderState):flight.esm.types.scene2d_canvas.Types.CanvasTextureResolvers;
+  public static function hasCanvasScene2DCoverage(state:flight.esm.types.scene2d_canvas.Types.CanvasRenderState, usage:flight.esm.types.scene2d_contract.Types.Scene2DKindUsage):Bool;
+  public static function isCanvasScreenRenderTarget(target:flight.esm.types.scene2d_canvas.Types.CanvasRenderTarget):Bool;
+  public static function refreshCanvasRenderCache(ownerState:flight.esm.types.scene2d_canvas.Types.CanvasRenderState, cacheState:flight.esm.types.scene2d_canvas.Types.CanvasRenderState, cache:flight.esm.types.render_contract.Types.RenderCache, source:flight.esm.types.scene2d_contract.Types.Node2D, ?options:Null<flight.esm.types.render_contract.Types.RenderCacheRefreshOptions>):Bool;
+  public static function registerCanvasBitmapTextureResolver(hostImage:flight.esm.types.image_contract.Types.HostImageCapability, resolvers:flight.esm.types.scene2d_canvas.Types.CanvasTextureResolvers):Void;
+  public static function registerCanvasHost(state:flight.esm.types.scene2d_canvas.Types.CanvasRenderState, canvasHost:flight.esm.types.surface.Types.HostCanvasCapability):Void;
+  public static function registerCanvasImageTextureResolver(resolvers:flight.esm.types.scene2d_canvas.Types.CanvasTextureResolvers):Void;
+  public static function registerCanvasQuadMaterialRenderer(state:flight.esm.types.scene2d_canvas.Types.CanvasRenderState, kind:String, renderer:flight.esm.types.scene2d_canvas.Types.CanvasQuadMaterialRenderer):Void;
+  public static function registerCanvasRenderTextureResolver(resolvers:flight.esm.types.scene2d_canvas.Types.CanvasTextureResolvers, state:flight.esm.types.scene2d_canvas.Types.CanvasRenderState):Void;
+  public static function registerCanvasShapeCommands(state:flight.esm.types.render_contract.Types.RenderState, commands:Array<flight.esm.types.scene2d_canvas_contract.Types.CanvasShapeCommand<String>>):Void;
+  public static function registerCanvasTextureResolver(resolvers:flight.esm.types.scene2d_canvas.Types.CanvasTextureResolvers, sourceKind:String, resolver:Null<flight.esm.types.scene2d_canvas.Types.CanvasTextureResolver>):Void;
+  public static function releaseCanvasRenderTexture(state:flight.esm.types.scene2d_canvas.Types.CanvasRenderState, pool:flight.esm.types.scene2d_canvas.Types.CanvasRenderTexturePool, renderTexture:flight.esm.types.render_contract.Types.RenderTexture):Void;
+  public static function renderCanvasScene2D(pass:flight.esm.types.scene2d_canvas.Types.CanvasRenderPass, source:flight.esm.types.scene2d_contract.Types.Node2D, ?renderTransform:Null<flight.esm.types.geometry.Types.Matrix>):Void;
+  public static function renderIntoCanvasRenderTexture(ownerState:flight.esm.types.scene2d_canvas.Types.CanvasRenderState, renderState:flight.esm.types.scene2d_canvas.Types.CanvasRenderState, renderTexture:flight.esm.types.render_contract.Types.RenderTexture, callback_:((pass:flight.esm.types.scene2d_canvas.Types.CanvasRenderPass) -> Void)):Void;
+  public static function resizeCanvasTextureRenderTarget(target:flight.esm.types.scene2d_canvas.Types.CanvasTextureRenderTarget, width:Float, height:Float):Void;
+  public static function resolveCanvasQuadMaterialRenderer(state:flight.esm.types.scene2d_canvas.Types.CanvasRenderState, material:Null<flight.esm.types.materials_contract.Types.Material>):Null<flight.esm.types.scene2d_canvas.Types.CanvasQuadMaterialRenderer>;
+  public static function withCanvasRenderTextures<T>(state:flight.esm.types.scene2d_canvas.Types.CanvasRenderState, pool:flight.esm.types.scene2d_canvas.Types.CanvasRenderTexturePool, descriptors:Array<flight.esm.types.render_contract.Types.RenderTargetDescriptor>, callback_:((textures:Array<flight.esm.types.render_contract.Types.RenderTexture>) -> T)):T;
+}
+#else
+#error "Flight ESM bindings require the JavaScript target and flight_esm."
+#end

@@ -1,0 +1,28 @@
+package flight.esm;
+
+#if (js && flight_esm)
+@:jsRequire("@flighthq/image")
+extern class Image {
+  public static final ImageResourceFailureKind:Dynamic;
+  public static final ImageResourceReferenceKind:Dynamic;
+  public static function cloneImageResource(resource:flight.esm.types.image_contract.Types.ImageResource):flight.esm.types.image_contract.Types.ImageResource;
+  public static function createCompressedImageResource(compressed:flight.esm.types.image_contract.Types.CompressedImageData):flight.esm.types.image_contract.Types.CompressedImageResource;
+  public static function createEmbeddedImageResourceReference(bytes:js.lib.Uint8Array, ?mimeType:Null<String>, ?alphaType:flight.esm.types.texture_contract.Types.AlphaType):flight.esm.types.image.Types.EmbeddedImageResourceReference;
+  public static function createExternalImageResourceReference(uri:String, ?basePath:Null<String>):flight.esm.types.image.Types.ExternalImageResourceReference;
+  public static function createImageResource(image:Dynamic):flight.esm.types.image_contract.Types.ImageResource;
+  public static function createImageResourceFailure(cause:Dynamic):flight.esm.types.image.Types.ImageResourceFailure;
+  public static function createImageResourceFromBitmap(hostImage:flight.esm.types.image_contract.Types.HostImageCapability, bitmap:flight.esm.types.bitmap.Types.Bitmap):Null<flight.esm.types.image_contract.Types.ImageResource>;
+  public static function explainImageResourceReferenceResolution(ref:flight.esm.types.image.Types.ImageResourceReference):flight.esm.types.image.Types.ImageResourceReferenceResolutionExplanation;
+  public static function invalidateImageResource(resource:flight.esm.types.image_contract.Types.ImageResource):Void;
+  public static function isImageResourceEmpty(resource:flight.esm.types.image_contract.Types.ImageResource):Bool;
+  public static function isImageUrlSameOrigin(url:String):Bool;
+  public static function loadImageResourceFromBase64(hostImage:flight.esm.types.image_contract.Types.HostImageCapability, base64:String, mimeType:String, ?signal:Null<js.html.AbortSignal>):js.lib.Promise<flight.esm.types.image_contract.Types.ImageResource>;
+  public static function loadImageResourceFromBlob(hostImage:flight.esm.types.image_contract.Types.HostImageCapability, blob:js.html.Blob, ?signal:Null<js.html.AbortSignal>):js.lib.Promise<flight.esm.types.image_contract.Types.ImageResource>;
+  public static function loadImageResourceFromBytes(hostImage:flight.esm.types.image_contract.Types.HostImageCapability, bytes:js.lib.Uint8Array, ?mimeType:Null<String>, ?signal:Null<js.html.AbortSignal>):js.lib.Promise<flight.esm.types.image_contract.Types.ImageResource>;
+  public static function loadImageResourceFromUrl(hostImage:flight.esm.types.image_contract.Types.HostImageCapability, url:String, ?crossOrigin:Null<String>, ?signal:Null<js.html.AbortSignal>):js.lib.Promise<flight.esm.types.image_contract.Types.ImageResource>;
+  public static function resetFailedImageResourceReference(ref:flight.esm.types.image.Types.ImageResourceReference):Bool;
+  public static function resolveImageResourceReference(imageDecode:flight.esm.types.image_codec_contract.Types.HostImageDecodeCapabilities, ref:flight.esm.types.image.Types.ImageResourceReference, fetch:flight.esm.types.image.Types.ImageResourceFetch, signal:js.html.AbortSignal, ?fallbackDecode:Null<flight.esm.types.image_codec_contract.Types.ImageDecodeFallback>):js.lib.Promise<Null<flight.esm.types.texture_contract.Types.TextureSource>>;
+}
+#else
+#error "Flight ESM bindings require the JavaScript target and flight_esm."
+#end
