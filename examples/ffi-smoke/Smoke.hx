@@ -6,12 +6,14 @@ import flight.Node;
 import flight.Compression;
 
 class Smoke {
-  static inline function bytePointer(bytes:haxe.io.Bytes)
+  static inline function bytePointer(bytes:haxe.io.Bytes) {
     #if cpp
-    return cpp.Pointer.ofArray(bytes.getData()).raw;
+    final pointer:cpp.Pointer<cpp.Void> = cpp.Pointer.ofArray(bytes.getData()).reinterpret();
+    return pointer.ptr;
     #else
     return bytes.getData().bytes;
     #end
+  }
 
   public static function main() {
     if (lerp(0, 10, 0.25) != 2.5) throw 'lerp failed';

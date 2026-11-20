@@ -439,7 +439,7 @@ index 633e9312bf48232fd965e98a4990eaf1299d8a57..11b5f6b1f46ced8f20e52d2b9df4c6e1
          }
          other => unreachable!("cli accepted unknown target {other}"),
 diff --git a/crates/flight-bindgen/src/parse.rs b/crates/flight-bindgen/src/parse.rs
-index fb088f2fe76a8cac0456bc38caab2dbbe8c8fefe..ecc7793e846f25fc90b77e4225cfc30c7081413b 100644
+index fb088f2fe76a8cac0456bc38caab2dbbe8c8fefe..07ebd5f79b63d2ddbb2442fa5790b39711ea6e53 100644
 --- a/crates/flight-bindgen/src/parse.rs
 +++ b/crates/flight-bindgen/src/parse.rs
 @@ -521,6 +521,12 @@ pub fn scan_all_crates(crates_dir: &Path) -> Vec<CrateExports> {
@@ -577,6 +577,28 @@ index fb088f2fe76a8cac0456bc38caab2dbbe8c8fefe..ecc7793e846f25fc90b77e4225cfc30c
      let params_end = find_matching_paren(after_pub_fn, params_start)?;
      let params_str = &after_pub_fn[params_start + 1..params_end];
  
+@@ -2332,14 +2374,17 @@ mod native_abi_tests {
+                 }
+             }
+         }
+-        assert_eq!(synthesized_count, 413);
+-        assert_eq!(unique_owner_count, 180);
+-        assert_eq!(zero_owner_count, 233);
+-        assert_eq!(multiple_owner_count, 0);
++        assert_eq!(
++            (synthesized_count, unique_owner_count, zero_owner_count, multiple_owner_count),
++            (573, 251, 322, 0)
++        );
+         assert_eq!(mismatches, Vec::new());
+ 
+         for (function_name, type_name, owner) in [
+             ("free_rectangle", "Rectangle", "flight-geometry"),
++            ("free_bitmap_ref", "Bitmap", "flight-bitmap"),
++            ("free_command_history_ref", "CommandHistory", "flight-command"),
++            ("free_owned_byte_reader", "ByteReader", "flight-buffer"),
+             ("free_log_timer", "LogTimer", "flight-log"),
+             ("free_glyph_metrics", "GlyphMetrics", "flight-font"),
+             ("free_slot_id", "SlotId", "flight-signals"),
 diff --git a/crates/flight-ffi/build.rs b/crates/flight-ffi/build.rs
 index 71445c3e98432e294588f70d7d3dfd2118cd8c9c..e92b4ba37afb43af1f7749cc7bd6ebf3a5518483 100644
 --- a/crates/flight-ffi/build.rs
