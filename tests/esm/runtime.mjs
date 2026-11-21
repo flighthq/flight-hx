@@ -14,6 +14,12 @@ run(process.execPath, ['tools/haxe.mjs', '-cp', 'tests/esm', '-cp', 'tools/esm',
   '-main', 'GeneratorSmoke', '-dce', 'full', '--macro', 'EsmGenerator.use()', '-js', generatorSmoke]);
 assert.match(run(process.execPath, [generatorSmoke]), /FLIGHT_ESM_GENERATOR_OK/u);
 assert.doesNotMatch(readFileSync(generatorSmoke, 'utf8'), /@flighthq\//u);
+for (const [target, flags] of [['default', []], ['es6', ['-D', 'js-es=6']]]) {
+  const statics = path.join(work, `statics-${target}.mjs`);
+  run(process.execPath, ['tools/haxe.mjs', '-cp', 'tests/esm', '-cp', 'tools/esm', ...flags,
+    '-main', 'GeneratorStaticSmoke', '-dce', 'full', '--macro', 'EsmGenerator.use()', '-js', statics]);
+  assert.match(run(process.execPath, [statics]), /FLIGHT_ESM_STATICS_OK/u);
+}
 const archive = path.join(work, 'flight.zip');
 run(process.execPath, ['tools/package-haxelib.mjs', '--externs-only', '--out', archive]);
 const installed = path.join(work, 'installed');

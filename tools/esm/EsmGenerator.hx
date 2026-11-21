@@ -18,6 +18,7 @@ using Lambda;
 // silent miscompile.
 class EsmGenerator {
   final api:haxe.macro.JSGenApi;
+  final es6:Bool;
   final buf = new StringBuf();
   final imports = new Map<String, String>(); // module specifier -> import alias
   final externModule = new Map<String, {specifier:String, member:Null<String>}>();
@@ -26,6 +27,7 @@ class EsmGenerator {
 
   public function new(api) {
     this.api = api;
+    es6 = Std.parseInt(Context.definedValue('js-es') ?? '5') >= 6;
     // Pre-pass: map every compiler @:jsImport extern (plus legacy @:jsRequire output) to an import
     // alias so the type accessor can resolve it.
     for (t in api.types) switch (t) {
@@ -88,14 +90,30 @@ class EsmGenerator {
   function flatName(path:String):String return '$$' + ~/[^A-Za-z0-9_]/g.replace(path, '_');
   function fail(c:ClassType, why:String):Dynamic { Context.error('EsmGenerator: $why', c.pos); return null; }
 
-  function genStaticField(c:ClassType, p:String, f:ClassField) {
-    final fn = field(f.name);
-    final e = f.expr();
-    if (e == null) { print('$p$fn = null'); newline(); return; }
-    switch (f.kind) {
-      case FMethod(_): print('$p$fn = '); genExpr(e); newline();
-      default: staticInits.push({c: c, f: f});
+  function isMethod(f:ClassField):Bool {
+    return switch (f.kind) { case FMethod(_): true; default: false; };
+  }
+
+  function writeStaticField(p:String, f:ClassField) {
+    // Haxe prefixes these constructor properties except when using ES6 methods.
+    // Our constructors are functions, so those methods need their own descriptors.
+    final reserved = f.name == 'length' || f.name == 'name';
+    final defineProperty = reserved && es6 && isMethod(f);
+    if (defineProperty) {
+      print('Object.defineProperty($p, ${api.quoteString(f.name)}, {configurable: true, writable: true, value: ');
+    } else {
+      final name = reserved ? '$$' + f.name : f.name;
+      print('$p${field(name)} = ');
     }
+    final e = f.expr();
+    if (e == null) print('null'); else genExpr(e);
+    if (defineProperty) print('})');
+    newline();
+  }
+
+  function genStaticField(c:ClassType, p:String, f:ClassField) {
+    if (f.expr() == null || isMethod(f)) writeStaticField(p, f);
+    else staticInits.push({c: c, f: f});
   }
 
   function genClassField(c:ClassType, p:String, f:ClassField) {
@@ -192,7 +210,7 @@ class EsmGenerator {
     print('var $$estr = function() { return ${flatName("js.Boot")}.__string_rec(this,""); }'); newline();
     for (t in api.types) genType(t);
     for (e in inits) { print(api.generateStatement(e)); newline(); }
-    for (s in staticInits) { final p = flatName(getPath(s.c)); print('$p${field(s.f.name)} = '); genExpr(s.f.expr()); newline(); }
+    for (s in staticInits) writeStaticField(flatName(getPath(s.c)), s.f);
     if (api.main != null) { genExpr(api.main); newline(); }
     sys.io.File.saveContent(api.outputFile, buf.toString());
   }
