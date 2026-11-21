@@ -4,7 +4,7 @@ package flight.esm.materials;
 @:jsRequire("@flighthq/materials/contract")
 extern class Contract {
   public static final AnisotropyPbrExtensionKind:String;
-  public static final BlendMode:Dynamic;
+  public static final BlendMode:{ Add:String, Darken:String, Lighten:String, Multiply:String, Normal:String, Screen:String };
   public static final BlinnPhongMaterialKind:String;
   public static final ClearcoatPbrExtensionKind:String;
   public static final CustomShaderMaterialKind:String;

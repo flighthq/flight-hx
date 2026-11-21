@@ -7,7 +7,7 @@ extern class Contract {
   public static final RenderCacheKind:String;
   public static final RenderRegistryTable:flight.esm.types.render_contract.Types.RenderRegistryTable;
   public static final SCENE2D_WORKING_COLOR_SPACE:flight.esm.types.render_contract.Types.RenderTargetColorSpace;
-  public static final SceneCoverage:Dynamic;
+  public static final SceneCoverage:{ FallbackRemediable:String, FallbackUnavailable:String, Satisfied:String, Unavailable:String, Unregistered:String };
   public static function applyRenderProxyAdapter(state:flight.esm.types.render_contract.Types.RenderState, source:flight.esm.types.node.Types.NodeAny, data:flight.esm.types.render_contract.Types.RenderProxy2D):Void;
   public static function areColorAdjustmentGuardsEnabled(state:flight.esm.types.render_contract.Types.RenderState):Bool;
   public static function areColorAdjustmentsEnabled(state:flight.esm.types.render_contract.Types.RenderState):Bool;
@@ -16,7 +16,7 @@ extern class Contract {
   public static function clearRenderQueue(queue:flight.esm.types.render_contract.Types.RenderQueue):Void;
   public static function compareRenderQueueEntries(a:flight.esm.types.render_contract.Types.RenderQueueEntry, b:flight.esm.types.render_contract.Types.RenderQueueEntry):Float;
   public static function computeRenderCacheTransform(outCacheTransform:flight.esm.types.geometry.Types.MatrixLike, bounds:flight.esm.types.geometry.Types.RectangleLike, ?contentX:Float, ?contentY:Float):Void;
-  public static function computeRenderProxyWorldBounds(out:Dynamic, source:flight.esm.types.scene2d_contract.Types.Node2D):Void;
+  public static function computeRenderProxyWorldBounds(out:{ height:Float, width:Float, x:Float, y:Float }, source:flight.esm.types.scene2d_contract.Types.Node2D):Void;
   public static function computeRenderTargetSize(out:Dynamic, bounds:flight.esm.types.geometry.Types.RectangleLike, ?padding:Dynamic, ?minWidth:Float, ?minHeight:Float):Dynamic;
   public static function computeScene2DRenderTargetTransform(outRenderTransform:flight.esm.types.geometry.Types.MatrixLike, source:flight.esm.types.scene2d_contract.Types.Node2D, bounds:flight.esm.types.geometry.Types.RectangleLike, ?contentX:Float, ?contentY:Float):Void;
   public static function copyAllRenderersFromRenderState(target:flight.esm.types.render_contract.Types.RenderState, source:flight.esm.types.render_contract.Types.RenderState):Void;

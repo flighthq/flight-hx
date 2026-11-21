@@ -39,7 +39,7 @@ typedef Awd2ParsedTexture = { bytes:Null<js.lib.Uint8Array>, mimeType:Null<Strin
 
 typedef ColladaBuildContext = { deferredCameras:Array<flight.esm.types.scene3d_formats_contract.Types.ColladaDeferredCameraBinding>, deferredControllers:Array<flight.esm.types.scene3d_formats_contract.Types.ColladaDeferredControllerBinding>, deferredLights:Array<flight.esm.types.scene3d_formats_contract.Types.ColladaDeferredLightBinding>, nodeIdMap:js.lib.Map<String, Float>, parse:flight.esm.types.scene3d_formats_contract.Types.ColladaParseContext, rootNodeIndices:Array<Float> };
 
-typedef ColladaCameraDefinition = Dynamic;
+typedef ColladaCameraDefinition = { far:Float, kind:String, ?name:Null<String>, near:Float };
 
 typedef ColladaDecodedAnimationChannel = { target:String, times:Array<Float>, values:Array<Float>, interpolation:Array<String>, inTangents:Array<Float>, outTangents:Array<Float> };
 

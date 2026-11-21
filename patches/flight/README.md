@@ -15,5 +15,8 @@ artifact manifests record their hashes.
   Native node handles and owned byte results use Flight's upstream API.
 - `0018-typescript-esm-externs.patch` generates `flight.esm` facades and types
   from the SDK's TypeScript package export maps with TypeScript 5.9.3.
+- `0019-typed-esm-records.patch` projects object-literal values, mapped and
+  intersected host capabilities, and shared fields of tagged unions into typed
+  Haxe records.
 
 Native desktop and headless host-provider FFI remains TODO.

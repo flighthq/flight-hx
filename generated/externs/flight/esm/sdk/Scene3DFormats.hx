@@ -293,7 +293,7 @@ extern class Scene3DFormats {
   public static function reverseTriangleWinding(indices:Array<Float>):Void;
   public static function reverseVertexTriangleWinding(vertices:js.lib.Float32Array, floatsPerVertex:Float):Void;
   public static function skipAwdAttrList(view:js.lib.DataView, offset:Float, end:Float):Float;
-  public static final stlFullImportOptions:Dynamic;
+  public static final stlFullImportOptions:{ normals:flight.esm.types.scene3d_formats_contract.Types.StlNormalPolicy };
   public static function tallyMd5Drop(tallies:Null<js.lib.Map<String, flight.esm.types.scene3d_formats_contract.Types.Md5DropTally>>, severity:flight.esm.types.importdiagnostics_contract.Types.ImportDiagnosticSeverity, kind:String, discriminator:String, firstDetail:Dynamic):Void;
   public static function tallyThreeDsDrop(tallies:Null<js.lib.Map<String, flight.esm.types.scene3d_formats_contract.Types.ThreeDsDropTally>>, severity:flight.esm.types.importdiagnostics_contract.Types.ImportDiagnosticSeverity, kind:String, discriminator:String, firstDetail:Dynamic):Void;
   public static final threeDsAllChunkHandlers:Array<flight.esm.types.scene3d_formats_contract.Types.ThreeDsChunkHandler>;

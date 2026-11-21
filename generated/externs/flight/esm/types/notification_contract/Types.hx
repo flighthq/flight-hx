@@ -35,7 +35,7 @@ typedef NotificationAction = { id:String, title:String, ?icon:Null<String> };
 
 typedef NotificationActionSubscription = { onNotificationAction:flight.esm.types.signals.Types.Signal<Array<Dynamic>> };
 
-typedef NotificationActiveListOutcome = Dynamic;
+typedef NotificationActiveListOutcome = { reason:String };
 
 typedef NotificationCancelOutcome = { reason:String };
 
@@ -49,7 +49,7 @@ typedef NotificationDismissSubscription = { onNotificationDismiss:flight.esm.typ
 
 typedef NotificationEventAttachment = { release:(() -> js.lib.Promise<flight.esm.types.notification_contract.Types.NotificationEventReleaseOutcome>) };
 
-typedef NotificationEventBackendAttachOutcome = Dynamic;
+typedef NotificationEventBackendAttachOutcome = { reason:String };
 
 typedef NotificationEventReleaseOutcome = { reason:String };
 
@@ -57,11 +57,11 @@ typedef NotificationLifecycleFailure = { id:String, operation:String };
 
 typedef NotificationLifecycleOutcome = Dynamic;
 
-typedef NotificationPendingListOutcome = Dynamic;
+typedef NotificationPendingListOutcome = { reason:String };
 
 typedef NotificationPermission = String;
 
-typedef NotificationPermissionQueryOutcome = Dynamic;
+typedef NotificationPermissionQueryOutcome = { reason:String };
 
 typedef NotificationPermissionRequestOutcome = { reason:String };
 
@@ -77,7 +77,7 @@ typedef NotificationSchedule = { at:Float, ?repeat:Null<String> };
 
 typedef NotificationScheduleOutcome = Dynamic;
 
-typedef NotificationSubscriptionAttachOutcome = Dynamic;
+typedef NotificationSubscriptionAttachOutcome = { reason:String };
 
 typedef NotificationSubscriptionDetachOutcome = Dynamic;
 

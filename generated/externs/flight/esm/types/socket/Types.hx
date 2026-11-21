@@ -15,7 +15,7 @@ typedef SocketEventSink = { handleSocketOpen:(() -> Void), handleSocketMessage:(
 
 typedef SocketGuard = ((notice:flight.esm.types.socket.Types.SocketGuardNotice) -> Void);
 
-typedef SocketGuardNotice = Dynamic;
+typedef SocketGuardNotice = { operation:String, reason:String, socket:flight.esm.types.socket.Types.Socket };
 
 typedef SocketMessage = { data:Dynamic, binary:Bool };
 
@@ -25,7 +25,7 @@ typedef SocketReadyState = String;
 
 typedef SocketRuntime = { connection:Null<flight.esm.types.socket.Types.SocketConnection>, signals:Null<flight.esm.types.socket.Types.SocketSignals>, readyState:flight.esm.types.socket.Types.SocketReadyState, delivering:Bool, disposed:Bool };
 
-typedef SocketSendFailureExplanation = Dynamic;
+typedef SocketSendFailureExplanation = { reason:String, readyState:flight.esm.types.socket.Types.SocketReadyState, url:String };
 
 typedef SocketSignals = { onSocketOpen:flight.esm.types.signals.Types.Signal<Void>, onSocketMessage:flight.esm.types.signals.Types.Signal<flight.esm.types.socket.Types.SocketMessage>, onSocketClose:flight.esm.types.signals.Types.Signal<flight.esm.types.socket.Types.SocketCloseInfo>, onSocketError:flight.esm.types.signals.Types.Signal<Void> };
 

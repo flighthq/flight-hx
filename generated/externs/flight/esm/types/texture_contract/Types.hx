@@ -17,7 +17,7 @@ typedef Sampler = { anisotropy:Float, magFilter:flight.esm.types.texture_contrac
 
 typedef SamplerLike = { anisotropy:Float, magFilter:flight.esm.types.texture_contract.Types.TextureFilter, minFilter:flight.esm.types.texture_contract.Types.TextureFilter, mipmaps:Bool, wrapU:flight.esm.types.texture_contract.Types.TextureWrap, wrapV:flight.esm.types.texture_contract.Types.TextureWrap };
 
-typedef Texture = Dynamic;
+typedef Texture = { dimension:String, colorSpace:flight.esm.types.texture_contract.Types.TextureColorSpace, sampler:flight.esm.types.texture_contract.Types.Sampler, version:Float, flipX:Bool, flipY:Bool, uvOffset:flight.esm.types.geometry.Types.Vector2, uvRotation:Float, uvScale:flight.esm.types.geometry.Types.Vector2 };
 
 typedef Texture2D = { dimension:String, source:Null<flight.esm.types.texture_contract.Types.TextureSource>, colorSpace:flight.esm.types.texture_contract.Types.TextureColorSpace, sampler:flight.esm.types.texture_contract.Types.Sampler, version:Float, flipX:Bool, flipY:Bool, uvOffset:flight.esm.types.geometry.Types.Vector2, uvRotation:Float, uvScale:flight.esm.types.geometry.Types.Vector2 };
 
@@ -27,7 +27,7 @@ typedef TextureDimension = String;
 
 typedef TextureFilter = String;
 
-typedef TextureLike = Dynamic;
+typedef TextureLike = { version:Float, colorSpace:flight.esm.types.texture_contract.Types.TextureColorSpace, dimension:String, sampler:flight.esm.types.texture_contract.Types.Sampler, flipX:Bool, flipY:Bool, uvOffset:flight.esm.types.geometry.Types.Vector2, uvRotation:Float, uvScale:flight.esm.types.geometry.Types.Vector2 };
 
 typedef TextureResolutionExplanation = { kind:Null<String>, status:flight.esm.types.texture_contract.Types.TextureResolutionStatus };
 

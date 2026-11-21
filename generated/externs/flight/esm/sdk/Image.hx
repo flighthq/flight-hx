@@ -3,8 +3,8 @@ package flight.esm.sdk;
 #if (js && flight_esm)
 @:jsRequire("@flighthq/sdk/image")
 extern class Image {
-  public static final ImageResourceFailureKind:Dynamic;
-  public static final ImageResourceReferenceKind:Dynamic;
+  public static final ImageResourceFailureKind:{ Error:String, Unavailable:String };
+  public static final ImageResourceReferenceKind:{ Embedded:String, External:String };
   public static function cloneImageResource(resource:flight.esm.types.image_contract.Types.ImageResource):flight.esm.types.image_contract.Types.ImageResource;
   public static function createCompressedImageResource(compressed:flight.esm.types.image_contract.Types.CompressedImageData):flight.esm.types.image_contract.Types.CompressedImageResource;
   public static function createEmbeddedImageResourceReference(bytes:js.lib.Uint8Array, ?mimeType:Null<String>, ?alphaType:flight.esm.types.texture_contract.Types.AlphaType):flight.esm.types.image.Types.EmbeddedImageResourceReference;

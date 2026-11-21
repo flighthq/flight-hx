@@ -4,7 +4,7 @@ package flight.esm.sdk;
 @:jsRequire("@flighthq/sdk/timeline")
 extern class Timeline {
   public static final TimelineAudioCueKind:String;
-  public static final TimelineFrameEntryCause:Dynamic;
+  public static final TimelineFrameEntryCause:{ Advance:String, Seek:String };
   public static final TimelineGotoCueKind:String;
   public static final TimelineNextFrameCueKind:String;
   public static final TimelinePlayCueKind:String;

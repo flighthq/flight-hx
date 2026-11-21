@@ -17,7 +17,7 @@ typedef PathMorphCreationExplanation = { supported:Bool, reason:flight.esm.types
 
 typedef PathMorphCreationReason = String;
 
-typedef PathSegment = Dynamic;
+typedef PathSegment = { kind:String };
 
 typedef PathWinding = String;
 

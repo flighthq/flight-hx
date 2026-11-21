@@ -6,7 +6,7 @@ extern class Contract {
   public static function capacitorHost<Profile>(capacitor:flight.esm.types.host_capacitor.Types.CapacitorApi, profile:Profile):flight.esm.types.host_capacitor.Types.CapacitorHost<Profile>;
   public static function capacitorHostAccessibility():flight.esm.types.host_contract.Types.HostAccessibilityCapabilities;
   @:overload(function(capacitor:flight.esm.types.host_capacitor.Types.CapacitorApi, profile:String):flight.esm.types.host_capacitor.Types.CapacitorAndroidAppCapabilities {})
-  @:overload(function(capacitor:flight.esm.types.host_capacitor.Types.CapacitorApi, profile:String):Dynamic {})
+  @:overload(function(capacitor:flight.esm.types.host_capacitor.Types.CapacitorApi, profile:String):{ name:flight.esm.types.app.Types.HostAppNameCapability, activate:flight.esm.types.app.Types.HostAppActivateCapability, version:flight.esm.types.app.Types.HostAppVersionCapability } {})
   @:overload(function(capacitor:flight.esm.types.host_capacitor.Types.CapacitorApi, profile:flight.esm.types.app.Types.MobileOsProfile):Dynamic {})
   public static function capacitorHostApp<Profile>(capacitor:flight.esm.types.host_capacitor.Types.CapacitorApi, profile:Profile):flight.esm.types.host_capacitor.Types.CapacitorAppCapabilitiesFor<Profile>;
   public static function capacitorHostAppActivate(capacitor:flight.esm.types.host_capacitor.Types.CapacitorApi):flight.esm.types.app.Types.HostAppActivateCapability;
@@ -27,18 +27,18 @@ extern class Contract {
   public static function capacitorHostConnectivityStatus(capacitor:flight.esm.types.host_capacitor.Types.CapacitorApi):flight.esm.types.connectivity_contract.Types.HostConnectivityStatusCapability;
   public static function capacitorHostDecompress():flight.esm.types.host_contract.Types.HostDecompressCapabilities;
   public static function capacitorHostDevice(capacitor:flight.esm.types.host_capacitor.Types.CapacitorApi):flight.esm.types.device.Types.HostDeviceCapability;
-  public static function capacitorHostDeviceGroup(capacitor:flight.esm.types.host_capacitor.Types.CapacitorApi):Dynamic;
+  public static function capacitorHostDeviceGroup(capacitor:flight.esm.types.host_capacitor.Types.CapacitorApi):{ info:flight.esm.types.device.Types.HostDeviceCapability };
   public static function capacitorHostDialog(capacitor:flight.esm.types.host_capacitor.Types.CapacitorApi):{ ?directoryOpen:Null<flight.esm.types.dialog_contract.Types.HostDirectoryOpenDialogCapability>, ?fileOpen:Null<flight.esm.types.dialog_contract.Types.HostFileOpenDialogCapability>, ?fileSave:Null<flight.esm.types.dialog_contract.Types.HostFileSaveDialogCapability>, ?imageOpen:Null<flight.esm.types.dialog_contract.Types.HostImageOpenDialogCapability>, message:flight.esm.types.dialog_contract.Types.HostMessageDialogCapability, ?photoCapture:Null<flight.esm.types.dialog_contract.Types.HostPhotoCaptureDialogCapability>, prompt:flight.esm.types.dialog_contract.Types.HostPromptDialogCapability, ?videoCapture:Null<flight.esm.types.dialog_contract.Types.HostVideoCaptureDialogCapability> };
   public static function capacitorHostFileSystem(capacitor:flight.esm.types.host_capacitor.Types.CapacitorApi):flight.esm.types.filesystem_contract.Types.HostFileSystemCapability;
-  public static function capacitorHostFileSystemGroup(capacitor:flight.esm.types.host_capacitor.Types.CapacitorApi):Dynamic;
+  public static function capacitorHostFileSystemGroup(capacitor:flight.esm.types.host_capacitor.Types.CapacitorApi):{ access:flight.esm.types.filesystem_contract.Types.HostFileSystemCapability };
   public static function capacitorHostFont():flight.esm.types.host_contract.Types.HostFontCapabilities;
   public static function capacitorHostFullscreen():flight.esm.types.app.Types.HostFullscreenCapabilities;
   public static function capacitorHostGeolocation(capacitor:flight.esm.types.host_capacitor.Types.CapacitorApi):flight.esm.types.geolocation_contract.Types.HostGeolocationCapability;
-  public static function capacitorHostGeolocationGroup(capacitor:flight.esm.types.host_capacitor.Types.CapacitorApi):Dynamic;
+  public static function capacitorHostGeolocationGroup(capacitor:flight.esm.types.host_capacitor.Types.CapacitorApi):{ position:flight.esm.types.geolocation_contract.Types.HostGeolocationCapability };
   public static function capacitorHostGl():flight.esm.types.render_gl.Types.HostGlCapabilities;
   public static function capacitorHostGlyph():flight.esm.types.host_contract.Types.HostGlyphCapabilities;
   public static function capacitorHostHaptics(capacitor:flight.esm.types.host_capacitor.Types.CapacitorApi):flight.esm.types.haptics.Types.HostHapticsCapability;
-  public static function capacitorHostHapticsGroup(capacitor:flight.esm.types.host_capacitor.Types.CapacitorApi):Dynamic;
+  public static function capacitorHostHapticsGroup(capacitor:flight.esm.types.host_capacitor.Types.CapacitorApi):{ engine:flight.esm.types.haptics.Types.HostHapticsCapability };
   public static function capacitorHostImage():flight.esm.types.host_contract.Types.HostImageCapabilities;
   public static function capacitorHostImageDecode():flight.esm.types.image_codec_contract.Types.HostImageDecodeCapabilities;
   public static function capacitorHostImageEncode():flight.esm.types.image_codec_contract.Types.HostImageEncodeCapabilities;
@@ -62,7 +62,7 @@ extern class Contract {
   public static function capacitorHostPower():flight.esm.types.power.Types.HostPowerCapabilities;
   public static function capacitorHostPreferences():flight.esm.types.preferences_contract.Types.HostPreferencesCapabilities;
   public static function capacitorHostPromptDialog(capacitor:flight.esm.types.host_capacitor.Types.CapacitorApi):flight.esm.types.dialog_contract.Types.HostPromptDialogCapability;
-  public static function capacitorHostProtocol(capacitor:flight.esm.types.host_capacitor.Types.CapacitorApi):Dynamic;
+  public static function capacitorHostProtocol(capacitor:flight.esm.types.host_capacitor.Types.CapacitorApi):{ open:flight.esm.types.protocol_contract.Types.HostProtocolOpenCapability };
   public static function capacitorHostProtocolOpen(capacitor:flight.esm.types.host_capacitor.Types.CapacitorApi):flight.esm.types.protocol_contract.Types.HostProtocolOpenCapability;
   public static function capacitorHostScreen():flight.esm.types.screen.Types.HostScreenCapabilities;
   public static function capacitorHostSensors():flight.esm.types.sensors.Types.HostSensorsCapabilities;
@@ -73,14 +73,14 @@ extern class Contract {
   public static function capacitorHostSocket():flight.esm.types.socket.Types.HostSocketCapabilities;
   public static function capacitorHostSoftKeyboardAccessoryBar(capacitor:flight.esm.types.host_capacitor.Types.CapacitorApi):flight.esm.types.keyboard_contract.Types.HostSoftKeyboardAccessoryBarCapability;
   public static function capacitorHostSoftKeyboardChange(capacitor:flight.esm.types.host_capacitor.Types.CapacitorApi):flight.esm.types.keyboard_contract.Types.HostSoftKeyboardChangeCapability;
-  public static function capacitorHostSoftKeyboardGroup(capacitor:flight.esm.types.host_capacitor.Types.CapacitorApi):Dynamic;
+  public static function capacitorHostSoftKeyboardGroup(capacitor:flight.esm.types.host_capacitor.Types.CapacitorApi):{ info:flight.esm.types.keyboard_contract.Types.HostSoftKeyboardInfoCapability, style:flight.esm.types.keyboard_contract.Types.HostSoftKeyboardStyleCapability, change:flight.esm.types.keyboard_contract.Types.HostSoftKeyboardChangeCapability, accessoryBar:flight.esm.types.keyboard_contract.Types.HostSoftKeyboardAccessoryBarCapability, resizeModeWrite:flight.esm.types.keyboard_contract.Types.HostSoftKeyboardResizeModeWriteCapability, scrollAssist:flight.esm.types.keyboard_contract.Types.HostSoftKeyboardScrollAssistCapability, visibility:flight.esm.types.keyboard_contract.Types.HostSoftKeyboardVisibilityCapability };
   public static function capacitorHostSoftKeyboardInfo(capacitor:flight.esm.types.host_capacitor.Types.CapacitorApi):flight.esm.types.keyboard_contract.Types.HostSoftKeyboardInfoCapability;
   public static function capacitorHostSoftKeyboardResizeModeWrite(capacitor:flight.esm.types.host_capacitor.Types.CapacitorApi):flight.esm.types.keyboard_contract.Types.HostSoftKeyboardResizeModeWriteCapability;
   public static function capacitorHostSoftKeyboardScrollAssist(capacitor:flight.esm.types.host_capacitor.Types.CapacitorApi):flight.esm.types.keyboard_contract.Types.HostSoftKeyboardScrollAssistCapability;
   public static function capacitorHostSoftKeyboardStyle(capacitor:flight.esm.types.host_capacitor.Types.CapacitorApi):flight.esm.types.keyboard_contract.Types.HostSoftKeyboardStyleCapability;
   public static function capacitorHostSoftKeyboardVisibility(capacitor:flight.esm.types.host_capacitor.Types.CapacitorApi):flight.esm.types.keyboard_contract.Types.HostSoftKeyboardVisibilityCapability;
   public static function capacitorHostStatusBarColor(capacitor:flight.esm.types.host_capacitor.Types.CapacitorApi):flight.esm.types.statusbar.Types.HostStatusBarColorCapability;
-  public static function capacitorHostStatusBarGroup(capacitor:flight.esm.types.host_capacitor.Types.CapacitorApi):Dynamic;
+  public static function capacitorHostStatusBarGroup(capacitor:flight.esm.types.host_capacitor.Types.CapacitorApi):{ color:flight.esm.types.statusbar.Types.HostStatusBarColorCapability, info:flight.esm.types.statusbar.Types.HostStatusBarInfoCapability, style:flight.esm.types.statusbar.Types.HostStatusBarStyleCapability, visibility:flight.esm.types.statusbar.Types.HostStatusBarVisibilityCapability, overlays:flight.esm.types.statusbar.Types.HostStatusBarOverlaysCapability };
   public static function capacitorHostStatusBarInfo(capacitor:flight.esm.types.host_capacitor.Types.CapacitorApi):flight.esm.types.statusbar.Types.HostStatusBarInfoCapability;
   public static function capacitorHostStatusBarOverlays(capacitor:flight.esm.types.host_capacitor.Types.CapacitorApi):flight.esm.types.statusbar.Types.HostStatusBarOverlaysCapability;
   public static function capacitorHostStatusBarStyle(capacitor:flight.esm.types.host_capacitor.Types.CapacitorApi):flight.esm.types.statusbar.Types.HostStatusBarStyleCapability;

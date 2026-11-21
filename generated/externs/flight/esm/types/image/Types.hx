@@ -11,7 +11,7 @@ typedef ImageResourceFailureKind = String;
 
 typedef ImageResourceFetch = ((ref:flight.esm.types.image.Types.ExternalImageResourceReference, signal:js.html.AbortSignal) -> js.lib.Promise<Null<flight.esm.types.image_contract.Types.ImageResource>>);
 
-typedef ImageResourceReference = Dynamic;
+typedef ImageResourceReference = { kind:String, failure:Null<flight.esm.types.image.Types.ImageResourceFailure>, mimeType:Null<String>, state:flight.esm.types.resource.Types.ResourceResolutionState, ?textures:Null<Array<flight.esm.types.texture_contract.Types.Texture>> };
 
 typedef ImageResourceReferenceKind = String;
 

@@ -3,8 +3,8 @@ package flight.esm.sdk;
 #if (js && flight_esm)
 @:jsRequire("@flighthq/sdk/compression")
 extern class Compression {
-  public static final Compression:Dynamic;
-  public static final CompressionFraming:Dynamic;
+  public static final Compression:{ Brotli:String, Deflate:String, Lzma:String };
+  public static final CompressionFraming:{ Raw:String, Rfc1950:String };
   public static function compressDeflate(bytes:js.lib.Uint8Array):js.lib.Uint8Array;
   public static function compressDeflateZlib(bytes:js.lib.Uint8Array):js.lib.Uint8Array;
   public static function compressLzma(bytes:js.lib.Uint8Array):js.lib.Uint8Array;

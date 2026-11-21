@@ -3,8 +3,8 @@ package flight.esm.effects;
 #if (js && flight_esm)
 @:jsRequire("@flighthq/effects/contract")
 extern class Contract {
-  public static final AdvancedBlendMode:Dynamic;
-  public static final CompositeOperator:Dynamic;
+  public static final AdvancedBlendMode:{ Color:String, ColorBurn:String, ColorDodge:String, Darken:String, Difference:String, Exclusion:String, HardLight:String, Hue:String, Lighten:String, Luminosity:String, Overlay:String, Saturation:String, SoftLight:String };
+  public static final CompositeOperator:{ Clear:String, Copy:String, DestinationAtop:String, DestinationIn:String, DestinationOut:String, DestinationOver:String, SourceAtop:String, SourceIn:String, SourceOut:String, SourceOver:String, Xor:String };
   public static final EFFECT_FIELD_ROLES:Dynamic;
   public static final EFFECT_KINDS:Array<String>;
   public static function blendNonSeparableRgb(mode:String, cbR:Float, cbG:Float, cbB:Float, csR:Float, csG:Float, csB:Float, out:Dynamic):Void;

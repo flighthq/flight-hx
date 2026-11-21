@@ -3,11 +3,11 @@ package flight.esm.sdk;
 #if (js && flight_esm)
 @:jsRequire("@flighthq/sdk/render-wgpu")
 extern class RenderWgpu {
-  public static final WgpuBufferUsage:Dynamic;
-  public static final WgpuColorWrite:Dynamic;
-  public static final WgpuMapMode:Dynamic;
-  public static final WgpuShaderStage:Dynamic;
-  public static final WgpuTextureUsage:Dynamic;
+  public static final WgpuBufferUsage:{ COPY_DST:Float, COPY_SRC:Float, INDEX:Float, INDIRECT:Float, MAP_READ:Float, MAP_WRITE:Float, QUERY_RESOLVE:Float, STORAGE:Float, UNIFORM:Float, VERTEX:Float };
+  public static final WgpuColorWrite:{ ALL:Float, ALPHA:Float, BLUE:Float, GREEN:Float, RED:Float };
+  public static final WgpuMapMode:{ READ:Float, WRITE:Float };
+  public static final WgpuShaderStage:{ COMPUTE:Float, FRAGMENT:Float, VERTEX:Float };
+  public static final WgpuTextureUsage:{ COPY_DST:Float, COPY_SRC:Float, RENDER_ATTACHMENT:Float, STORAGE_BINDING:Float, TEXTURE_BINDING:Float };
   public static function acquireWgpuRenderTexture(state:flight.esm.types.render_wgpu_contract.Types.WgpuRenderState, pool:flight.esm.types.render_wgpu_contract.Types.WgpuRenderTexturePool, descriptor:flight.esm.types.render_contract.Types.RenderTargetDescriptor):flight.esm.types.render_contract.Types.RenderTexture;
   public static function beginWgpuFrame(state:flight.esm.types.render_wgpu_contract.Types.WgpuRenderState):Void;
   public static function beginWgpuRenderPass(state:flight.esm.types.render_wgpu_contract.Types.WgpuRenderState, target:flight.esm.types.render_wgpu_contract.Types.WgpuRenderTarget, ?clear:Null<flight.esm.types.render_contract.Types.RenderTargetClear>):flight.esm.types.render_wgpu_contract.Types.WgpuRenderPass;

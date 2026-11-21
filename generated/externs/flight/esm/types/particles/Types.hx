@@ -23,7 +23,7 @@ typedef ParticleBurstEntry = { count:Float, cycles:Float, interval:Float, time:F
 
 typedef ParticleBurstSchedule = Array<flight.esm.types.particles.Types.ParticleBurstEntry>;
 
-typedef ParticleCollider = Dynamic;
+typedef ParticleCollider = { kind:String, ?friction:Null<Float>, ?restitution:Null<Float> };
 
 typedef ParticleConfigIssue = { field:String, message:String, severity:String };
 
@@ -31,7 +31,7 @@ typedef ParticleCurve = Array<Float>;
 
 typedef ParticleDeathEvent = { x:Float, y:Float, z:Float };
 
-typedef ParticleEmitterConfig = Dynamic;
+typedef ParticleEmitterConfig = { alphaEnd:Float, alphaStart:Float, blendMode:Null<String>, colorEndB:Float, colorEndG:Float, colorEndR:Float, colorEndVarianceB:Float, colorEndVarianceG:Float, colorEndVarianceR:Float, colorStartB:Float, colorStartG:Float, colorStartR:Float, colorStartVarianceB:Float, colorStartVarianceG:Float, colorStartVarianceR:Float, directionX:Float, directionY:Float, directionZ:Float, gravityX:Float, gravityY:Float, gravityZ:Float, emitterConeAngle:Float, emitterDepth:Float, emitterHeight:Float, emitterRadius:Float, emitterShape:flight.esm.types.particles.Types.ParticleEmitterShape, emitterWidth:Float, burstCount:Float, burstInterval:Float, duration:Float, loop:Bool, frameCount:Float, frameRate:Float, lifetimeMax:Float, lifetimeMin:Float, maxParticles:Float, regionIdMax:Float, regionIdMin:Float, scaleEnd:Float, scaleMax:Float, scaleMin:Float, speedMax:Float, speedMin:Float, spawnRate:Float, spread:Float, rotationSpeedMax:Float, rotationSpeedMin:Float, velocityInheritance:Float, alphaCurve:Null<flight.esm.types.particles.Types.ParticleCurve>, colorCurve:Null<flight.esm.types.particles.Types.ParticleCurve>, scaleCurve:Null<flight.esm.types.particles.Types.ParticleCurve>, worldSpace:Bool };
 
 typedef ParticleEmitterShape = String;
 
@@ -39,7 +39,7 @@ typedef ParticleEmitterSignals = { onEmitterComplete:flight.esm.types.signals.Ty
 
 typedef ParticleEmitterState = { burstTimer:Float, colorBirth:js.lib.Float32Array, colorDeath:js.lib.Float32Array, emitterAge:Float, lifetimes:js.lib.Float32Array, prevX:Float, prevY:Float, prevZ:Float, random:flight.esm.types.math.Types.RandomSource, rotationSpeeds:js.lib.Float32Array, scales:js.lib.Float32Array, spawnAccumulator:Float, velocities:js.lib.Float32Array };
 
-typedef ParticleForce = Dynamic;
+typedef ParticleForce = { kind:String };
 
 typedef ParticleObject = { pivotX:Float, pivotY:Float, rotation:Float, scaleX:Float, scaleY:Float, skewX:Float, skewY:Float, x:Float, y:Float, alpha:Float, visible:Bool, colorScaleBias:Null<flight.esm.types.adjustments_contract.Types.ColorScaleBias> };
 

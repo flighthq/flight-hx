@@ -56,6 +56,21 @@ const fieldsSmoke = path.join(work, 'fields.mjs');
 run(process.execPath, ['tools/haxe.mjs', '-cp', path.join(installed, 'lib'), '-cp', 'tests/esm',
   '-main', 'FieldSmoke', '-dce', 'full', '-D', 'flight_esm', '--macro', 'flight_hx.Package.configure()', '-js', fieldsSmoke]);
 assert.match(run(process.execPath, [fieldsSmoke]), /FLIGHT_ESM_FIELDS_OK/u);
+const generatedTypes = await buildWebBundle({
+  main: 'GeneratedTypesSmoke',
+  classpaths: [path.join(installed, 'lib'), path.join(root, 'tests/esm')],
+  outDir: path.join(work, 'generated-types'),
+});
+assert.match(run(process.execPath, [generatedTypes.bundle]), /FLIGHT_GENERATED_TYPES_OK/u);
+const invalidFields = spawnSync(process.execPath, ['tools/haxe.mjs', '-cp', path.join(installed, 'lib'),
+  '-cp', 'tests/esm', '--macro', 'flight_hx.Package.configure()', '-D', 'flight_esm',
+  '-D', 'flight_invalid_esm_fields', '-main', 'GeneratedTypesSmoke', '--no-output', '-js', generatedTypes.entry,
+], { cwd: root, encoding: 'utf8' });
+assert.equal(invalidFields.status, 1, invalidFields.error?.message);
+assert.match(invalidFields.stderr, /has no field missingChannel/u);
+assert.match(invalidFields.stderr, /has no field missingTextureField/u);
+assert.match(invalidFields.stderr, /has no field missingHostField/u);
+assert.match(invalidFields.stderr, /has no field missingWindowMethod/u);
 const classpaths = [path.join(installed, 'lib'), path.join(installed, 'examples/esm-smoke')];
 const built = await buildWebBundle({ main: 'WebSmoke', classpaths, outDir: path.join(work, 'used') });
 assert.match(run(process.execPath, [built.bundle]), /FLIGHT_ESM_SMOKE_OK/u);
@@ -102,7 +117,7 @@ assert.match(readFileSync(canvas.entry, 'utf8'), /from "@flighthq\/scene2d-canva
 const missing = path.join(work, 'missing-export.mjs');
 writeFileSync(missing, 'import * as math from "@flighthq/math"; console.log(math.__missing_flight_export);\n');
 await assert.rejects(bundleFlightJs({ entry: missing, outfile: path.join(work, 'missing-bundle.mjs') }), /matching export|always be undefined/u);
-process.stdout.write(`ESM installed archive: ${bindings.length} compatible SDK imports resolved and ${linked.size} public entry points checked. Real Flight math/geometry, arrays, callbacks/options, fields, inherited node properties, host seams, lifecycle and tree-shaking passed. Artifacts: ${work}\n`);
+process.stdout.write(`ESM installed archive: ${bindings.length} compatible SDK imports resolved and ${linked.size} public entry points checked. Real Flight math/geometry, arrays, callbacks/options, typed records, inherited node properties, host seams, lifecycle and tree-shaking passed. Artifacts: ${work}\n`);
 
 function run(command, args) {
   const result = spawnSync(command, args, { cwd: root, encoding: 'utf8', maxBuffer: 16 * 1024 * 1024 });

@@ -4,11 +4,11 @@ package flight.esm.render_wgpu;
 @:jsRequire("@flighthq/render-wgpu/contract")
 extern class Contract {
   public static final UNIFORM_BYTE_SIZE:Float;
-  public static final WgpuBufferUsage:Dynamic;
-  public static final WgpuColorWrite:Dynamic;
-  public static final WgpuMapMode:Dynamic;
-  public static final WgpuShaderStage:Dynamic;
-  public static final WgpuTextureUsage:Dynamic;
+  public static final WgpuBufferUsage:{ COPY_DST:Float, COPY_SRC:Float, INDEX:Float, INDIRECT:Float, MAP_READ:Float, MAP_WRITE:Float, QUERY_RESOLVE:Float, STORAGE:Float, UNIFORM:Float, VERTEX:Float };
+  public static final WgpuColorWrite:{ ALL:Float, ALPHA:Float, BLUE:Float, GREEN:Float, RED:Float };
+  public static final WgpuMapMode:{ READ:Float, WRITE:Float };
+  public static final WgpuShaderStage:{ COMPUTE:Float, FRAGMENT:Float, VERTEX:Float };
+  public static final WgpuTextureUsage:{ COPY_DST:Float, COPY_SRC:Float, RENDER_ATTACHMENT:Float, STORAGE_BINDING:Float, TEXTURE_BINDING:Float };
   public static function acquireWgpuRenderTexture(state:flight.esm.types.render_wgpu_contract.Types.WgpuRenderState, pool:flight.esm.types.render_wgpu_contract.Types.WgpuRenderTexturePool, descriptor:flight.esm.types.render_contract.Types.RenderTargetDescriptor):flight.esm.types.render_contract.Types.RenderTexture;
   public static function acquireWgpuTextureRenderTarget(state:flight.esm.types.render_wgpu_contract.Types.WgpuRenderState, pool:flight.esm.types.render_wgpu_contract.Types.WgpuRenderTargetPool, descriptor:Dynamic):flight.esm.types.render_wgpu_contract.Types.WgpuTextureRenderTarget;
   public static function applyWgpuBlendMode(state:flight.esm.types.render_wgpu_contract.Types.WgpuRenderState, blendMode:Null<String>):Void;
@@ -99,7 +99,7 @@ extern class Contract {
   public static function initializeWgpuBindGroupLayouts(out:flight.esm.types.entity_contract.Types.EntityConstruction<flight.esm.types.render_wgpu_contract.Types.WgpuBindGroupLayouts>, device:flight.esm.types.render_wgpu_contract.Types.WgpuDevice):Void;
   public static function initializeWgpuDeviceState(out:flight.esm.types.entity_contract.Types.EntityConstruction<flight.esm.types.render_wgpu_contract.Types.WgpuDeviceState>, device:flight.esm.types.render_wgpu_contract.Types.WgpuDevice):Void;
   public static function initializeWgpuFullscreenPipeline(out:flight.esm.types.entity_contract.Types.EntityConstruction<flight.esm.types.render_wgpu_contract.Types.WgpuFullscreenPipeline>, state:flight.esm.types.render_wgpu_contract.Types.WgpuRenderState, fragmentWgsl:String, ?textureInputCount:Float, ?format:flight.esm.types.render_wgpu_contract.Types.WgpuTextureFormat):Void;
-  public static function initializeWgpuHostAcquisition(out:flight.esm.types.entity_contract.Types.EntityConstruction<flight.esm.types.render_wgpu_contract.Types.WgpuHostAcquisition>, acquired:Dynamic, ownership:String):Void;
+  public static function initializeWgpuHostAcquisition(out:flight.esm.types.entity_contract.Types.EntityConstruction<flight.esm.types.render_wgpu_contract.Types.WgpuHostAcquisition>, acquired:{ ?context:Null<flight.esm.types.render_wgpu_contract.Types.WgpuCanvasContext>, ?device:Null<flight.esm.types.render_wgpu_contract.Types.WgpuDevice>, ?format:Null<String>, ?ownership:Null<String>, ?surface:Null<flight.esm.types.surface.Types.WgpuPresentationSurface> }, ownership:String):Void;
   public static function initializeWgpuOffscreenRenderStateDeviceLostResult(out:flight.esm.types.entity_contract.Types.EntityConstruction<Dynamic>, info:flight.esm.types.render_wgpu_contract.Types.WgpuDeviceLostInfo):Void;
   public static function initializeWgpuOffscreenRenderStateOkResult(out:flight.esm.types.entity_contract.Types.EntityConstruction<Dynamic>, state:flight.esm.types.render_wgpu_contract.Types.WgpuRenderState):Void;
   public static function initializeWgpuRenderTargetPool(out:flight.esm.types.entity_contract.Types.EntityConstruction<flight.esm.types.render_wgpu_contract.Types.WgpuRenderTargetPool>):Void;

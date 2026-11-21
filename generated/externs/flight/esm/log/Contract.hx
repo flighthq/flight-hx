@@ -3,7 +3,7 @@ package flight.esm.log;
 #if (js && flight_esm)
 @:jsRequire("@flighthq/log/contract")
 extern class Contract {
-  public static final LogLevel:Dynamic;
+  public static final LogLevel:{ None:Float, Error:Float, Warn:Float, Info:Float, Debug:Float, Verbose:Float };
   public static function addLogSink(state:flight.esm.types.log.Types.LogState, sink:flight.esm.types.log.Types.LogSink):Void;
   public static function advanceLogSink(handle:flight.esm.types.log.Types.BufferedLogSink, nowMs:Float):Void;
   public static function beginLogGroup(state:flight.esm.types.log.Types.LogState, nowMs:Float, label:String, ?channel:Null<String>):Void;

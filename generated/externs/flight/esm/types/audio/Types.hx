@@ -19,7 +19,7 @@ typedef AudioResourceFailureKind = String;
 
 typedef AudioResourceFetch = ((ref:flight.esm.types.audio.Types.ExternalAudioResourceReference, signal:js.html.AbortSignal) -> js.lib.Promise<Null<flight.esm.types.audio.Types.AudioResource>>);
 
-typedef AudioResourceReference = Dynamic;
+typedef AudioResourceReference = { kind:String, failure:Null<flight.esm.types.audio.Types.AudioResourceFailure>, mimeType:Null<String>, name:Null<String>, resource:flight.esm.types.audio.Types.AudioResource, state:flight.esm.types.resource.Types.ResourceResolutionState };
 
 typedef AudioResourceReferenceKind = String;
 

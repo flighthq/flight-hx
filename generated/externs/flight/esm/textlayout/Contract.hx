@@ -5,9 +5,9 @@ package flight.esm.textlayout;
 extern class Contract {
   public static final TEXT_BOUNDS_GUTTER:Float;
   public static final TEXT_LAYOUT_GUTTER:Float;
-  public static final TextAutoSize:Dynamic;
-  public static final TextJustification:Dynamic;
-  public static final TextVerticalAlign:Dynamic;
+  public static final TextAutoSize:{ Center:String, Left:String, None:String, Right:String };
+  public static final TextJustification:{ InterCharacter:String, InterWord:String, None:String };
+  public static final TextVerticalAlign:{ Bottom:String, Middle:String, Top:String };
   public static function computeRichTextCharIndexAtPoint(layout:flight.esm.types.textlayout.Types.TextLayoutResult, x:Float, y:Float):Float;
   public static function computeRichTextLineMetrics(layout:flight.esm.types.textlayout.Types.TextLayoutResult, lineIndex:Float):Null<flight.esm.types.textlayout.Types.TextLineMetrics>;
   public static function computeTextBoundsHeight(spec:Dynamic, layout:flight.esm.types.textlayout.Types.TextLayoutResult):Float;

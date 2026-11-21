@@ -10,8 +10,8 @@ extern class Contract {
   public static function areDomTextureResolverGuardsEnabled(state:flight.esm.types.scene2d_dom.Types.DomRenderState):Bool;
   public static function buildDomContourClipPath(entry:flight.esm.types.scene2d_dom.Types.DomClipContourEntry, mapPointToElement:((x:Float, y:Float) -> Array<Float>)):String;
   public static function buildDomScale9Mapper(bounds:flight.esm.types.geometry.Types.RectangleLike, scale9Grid:flight.esm.types.geometry.Types.RectangleLike, scaleX:Float, scaleY:Float):Null<flight.esm.types.shape.Types.Scale9Mapper>;
-  public static function createDomRenderState(element:js.html.Element, ?options:Dynamic):flight.esm.types.scene2d_dom.Types.DomRenderState;
-  public static function createDomRenderStateRuntime(?options:Dynamic):flight.esm.types.scene2d_dom.Types.DomRenderStateRuntime;
+  public static function createDomRenderState(element:js.html.Element, ?options:{ ?canvasShapeCommands:Null<js.lib.Map<String, Dynamic>>, ?effectPaddingResolvers:Null<js.lib.Map<String, flight.esm.types.render.Types.EffectPaddingResolver>>, ?nodeRenderers:Null<js.lib.Map<String, flight.esm.types.render_contract.Types.NodeRenderer>>, ?shapeRasterizer:Null<flight.esm.types.render_contract.Types.ShapeRasterizer>, ?strokeTessellator:Null<flight.esm.types.render_contract.Types.StrokeTessellator>, ?textureResolvers:Null<js.lib.Map<String, flight.esm.types.scene2d_dom.Types.DomTextureResolver>>, ?imageSmoothingEnabled:Null<Bool>, ?pixelRatio:Null<Float>, ?roundPixels:Null<Bool>, ?sceneGraphSyncPolicy:Null<String> }):flight.esm.types.scene2d_dom.Types.DomRenderState;
+  public static function createDomRenderStateRuntime(?options:{ ?canvasShapeCommands:Null<js.lib.Map<String, Dynamic>>, ?effectPaddingResolvers:Null<js.lib.Map<String, flight.esm.types.render.Types.EffectPaddingResolver>>, ?nodeRenderers:Null<js.lib.Map<String, flight.esm.types.render_contract.Types.NodeRenderer>>, ?shapeRasterizer:Null<flight.esm.types.render_contract.Types.ShapeRasterizer>, ?strokeTessellator:Null<flight.esm.types.render_contract.Types.StrokeTessellator>, ?textureResolvers:Null<js.lib.Map<String, flight.esm.types.scene2d_dom.Types.DomTextureResolver>>, ?imageSmoothingEnabled:Null<Bool>, ?pixelRatio:Null<Float>, ?roundPixels:Null<Bool>, ?sceneGraphSyncPolicy:Null<String> }):flight.esm.types.scene2d_dom.Types.DomRenderStateRuntime;
   public static function createDomScale9ShapeData(_state:flight.esm.types.render_contract.Types.RenderState, _source:flight.esm.types.node.Types.NodeAny):Dynamic;
   public static function createDomScale9SpriteData(_state:flight.esm.types.render_contract.Types.RenderState, _source:flight.esm.types.node.Types.NodeAny):Dynamic;
   public static function createDomScene2DRectangle(rect:flight.esm.types.geometry.Types.RectangleLike, transform:flight.esm.types.geometry.Types.MatrixLike):{ bottom:Float, left:Float, right:Float, top:Float };
@@ -21,11 +21,11 @@ extern class Contract {
   public static final domMorphShapeRenderer:flight.esm.types.render_contract.Types.Scene2DRenderer;
   public static final domNativeTextRenderer:flight.esm.types.render_contract.Types.Scene2DRenderer;
   public static final domRenderCacheRenderer:flight.esm.types.render_contract.Types.Scene2DRenderer;
-  public static final domRenderInfrastructure:Dynamic;
+  public static final domRenderInfrastructure:{ ?pixelRatio:Null<Float>, ?sceneGraphSyncPolicy:Null<String>, ?roundPixels:Null<Bool>, ?canvasShapeCommands:Null<js.lib.Map<String, Dynamic>>, ?effectPaddingResolvers:Null<js.lib.Map<String, flight.esm.types.render.Types.EffectPaddingResolver>>, ?strokeTessellator:Null<flight.esm.types.render_contract.Types.StrokeTessellator>, ?imageSmoothingEnabled:Null<Bool>, ?shapeRasterizer:Null<flight.esm.types.render_contract.Types.ShapeRasterizer>, ?textureResolvers:Null<js.lib.Map<String, flight.esm.types.scene2d_dom.Types.DomTextureResolver>> };
   public static final domRichTextRenderer:flight.esm.types.render_contract.Types.Scene2DRenderer;
   public static final domScale9ShapeRenderer:flight.esm.types.render_contract.Types.Scene2DRenderer;
   public static final domScale9SpriteRenderer:flight.esm.types.render_contract.Types.Scene2DRenderer;
-  public static final domScene2DRenderPreset:Dynamic;
+  public static final domScene2DRenderPreset:{ ?nodeRenderers:Null<js.lib.Map<String, flight.esm.types.render_contract.Types.NodeRenderer>> };
   public static final domScene2DRenderer:flight.esm.types.render_contract.Types.Scene2DRenderer;
   public static final domShapeRenderer:flight.esm.types.render_contract.Types.Scene2DRenderer;
   public static final domSpriteRenderer:flight.esm.types.render_contract.Types.Scene2DRenderer;
@@ -68,7 +68,7 @@ extern class Contract {
   public static function initializeDomShapeData(out:flight.esm.types.entity_contract.Types.EntityConstruction<Dynamic>):Void;
   public static function initializeDomTextData(out:flight.esm.types.entity_contract.Types.EntityConstruction<Dynamic>):Void;
   public static function invalidateDomFontResource(source:flight.esm.types.font.Types.FontResource):Void;
-  public static function mergeDomRenderOptions(...options:Dynamic):Dynamic;
+  public static function mergeDomRenderOptions(...options:Dynamic):{ ?canvasShapeCommands:Null<js.lib.Map<String, Dynamic>>, ?effectPaddingResolvers:Null<js.lib.Map<String, flight.esm.types.render.Types.EffectPaddingResolver>>, ?nodeRenderers:Null<js.lib.Map<String, flight.esm.types.render_contract.Types.NodeRenderer>>, ?shapeRasterizer:Null<flight.esm.types.render_contract.Types.ShapeRasterizer>, ?strokeTessellator:Null<flight.esm.types.render_contract.Types.StrokeTessellator>, ?textureResolvers:Null<js.lib.Map<String, flight.esm.types.scene2d_dom.Types.DomTextureResolver>>, ?imageSmoothingEnabled:Null<Bool>, ?pixelRatio:Null<Float>, ?roundPixels:Null<Bool>, ?sceneGraphSyncPolicy:Null<String> };
   public static function prepareDomElement(element:js.html.Element):Void;
   public static function processDomNode(runtime:flight.esm.types.scene2d_dom.Types.DomRenderStateRuntime, data:flight.esm.types.render_contract.Types.RenderProxy2D, currentFrameId:Float, drawFn:(() -> Void), newLength:Float, ?forceDraw:Bool):Dynamic;
   public static function pushDomClipContours(stack:Dynamic, contours:Array<Array<Float>>, winding:flight.esm.types.path.Types.PathWinding, transform:flight.esm.types.geometry.Types.Matrix):Void;

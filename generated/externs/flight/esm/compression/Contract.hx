@@ -3,8 +3,8 @@ package flight.esm.compression;
 #if (js && flight_esm)
 @:jsRequire("@flighthq/compression/contract")
 extern class Contract {
-  public static final Compression:Dynamic;
-  public static final CompressionFraming:Dynamic;
+  public static final Compression:{ Brotli:String, Deflate:String, Lzma:String };
+  public static final CompressionFraming:{ Raw:String, Rfc1950:String };
   public static final DISTANCE_BASE:Array<Float>;
   public static final DISTANCE_EXTRA:Array<Float>;
   public static final LENGTH_BASE:Array<Float>;

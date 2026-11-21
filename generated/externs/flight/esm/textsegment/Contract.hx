@@ -3,8 +3,8 @@ package flight.esm.textsegment;
 #if (js && flight_esm)
 @:jsRequire("@flighthq/textsegment/contract")
 extern class Contract {
-  public static final TextSegmentGranularity:Dynamic;
-  public static final TextSegmenterKind:Dynamic;
+  public static final TextSegmentGranularity:{ Grapheme:String, Word:String, Sentence:String };
+  public static final TextSegmenterKind:{ Custom:String, WebIntl:String };
   public static function disableTextSegmentGuards():Void;
   public static function enableTextSegmentGuards(logState:flight.esm.types.log.Types.LogState, clock:(() -> Float)):Void;
   public static function explainTextSegmenterBackend(textSegmenter:flight.esm.types.textsegment.Types.HostTextSegmenterCapability):flight.esm.types.textsegment.Types.TextSegmenterExplanation;

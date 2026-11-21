@@ -33,7 +33,7 @@ typedef MorphShapeLineEndpoint = { thickness:Float, ?alpha:Null<Float>, color:Fl
 
 typedef MorphShapeLinePaintBinding = { commandIndex:Float, endAlpha:Float, endColor:Float, endThickness:Float, kind:String, startAlpha:Float, startColor:Float, startThickness:Float };
 
-typedef MorphShapePaintBinding = Dynamic;
+typedef MorphShapePaintBinding = { commandIndex:Float, kind:String };
 
 typedef MorphShapePathBinding = { morph:flight.esm.types.path_contract.Types.PathMorphRaw, path:flight.esm.types.path_contract.Types.PathRaw };
 

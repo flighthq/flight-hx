@@ -11,7 +11,7 @@ typedef TiledImageLayer = { type:String, image:String, repeatX:Bool, repeatY:Boo
 
 typedef TiledInflate = ((bytes:js.lib.Uint8Array, compression:flight.esm.types.tilemap_formats.Types.TiledCompression) -> Null<js.lib.Uint8Array>);
 
-typedef TiledLayer = Dynamic;
+typedef TiledLayer = { type:String, id:Float, name:String, opacity:Float, visible:Bool, offsetX:Float, offsetY:Float, tintColor:Null<Float>, parallaxX:Float, parallaxY:Float, properties:Array<flight.esm.types.tilemap_formats.Types.TiledProperty> };
 
 typedef TiledLayerBase = { id:Float, name:String, opacity:Float, visible:Bool, offsetX:Float, offsetY:Float, tintColor:Null<Float>, parallaxX:Float, parallaxY:Float, properties:Array<flight.esm.types.tilemap_formats.Types.TiledProperty> };
 

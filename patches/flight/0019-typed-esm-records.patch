@@ -1,0 +1,59 @@
+diff --git a/crates/flight-bindgen/esm/haxe-types.mjs b/crates/flight-bindgen/esm/haxe-types.mjs
+index 66fd499c1a7f8bedcd6343320a56fe7bdb59fa9b..8e909cfb63a7c2e8b9046264dc3039ce2258bc55 100644
+--- a/crates/flight-bindgen/esm/haxe-types.mjs
++++ b/crates/flight-bindgen/esm/haxe-types.mjs
+@@ -77,7 +77,12 @@ export class HaxeTypes {
+     if (item.runtime === item.symbol && item.symbol.flags & this.ts.SymbolFlags.Class) {
+       return this.classDeclaration(item, specifier, type, names);
+     }
+-    return `typedef ${item.haxeName}${generics} = ${this.render(type, names, { exclude: item.symbol, record: true })};\n`;
++    const projected = this.render(type, names, { exclude: item.symbol, record: true });
++    // Before narrowing a tagged union, TypeScript exposes only its shared
++    // properties. Keep that structural view so each case remains assignable.
++    const shape = projected === 'Dynamic' && this.isTaggedRecord(type)
++      ? this.record(type, names, 0) : projected;
++    return `typedef ${item.haxeName}${generics} = ${shape};\n`;
+   }
+ 
+   classDeclaration(item, specifier, instance, scope) {
+@@ -205,7 +210,10 @@ export class HaxeTypes {
+       // A callback can accept additional arguments from JS, so expose its fixed parameter list.
+       if (!signature.params.includes('...')) return `((${signature.params}) -> ${signature.result})`;
+     }
+-    if (options.record || (!symbol && depth < 2)) {
++    const anonymous = !symbol || (symbol.flags & ts.SymbolFlags.ObjectLiteral);
++    const mapped = flags & ts.TypeFlags.Object && type.objectFlags & ts.ObjectFlags.Mapped;
++    const intersection = type.isIntersection() && type.types.every(branch => branch.flags & ts.TypeFlags.Object);
++    if (options.record || ((anonymous || mapped || intersection) && depth < 2)) {
+       return this.record(type, scope, depth);
+     }
+     return 'Dynamic';
+@@ -214,7 +222,7 @@ export class HaxeTypes {
+   record(type, scope, depth) {
+     const properties = this.checker.getPropertiesOfType(type)
+       .filter(property => identifier(property.getName()) === property.getName() && !property.getName().startsWith('__@'));
+-    if (properties.length === 0 || properties.length > 50) return 'Dynamic';
++    if (properties.length === 0 || (depth > 0 && properties.length > 50)) return 'Dynamic';
+     const fields = properties.map(property => {
+       const declaration = property.valueDeclaration ?? property.declarations?.[0];
+       const value = this.checker.getTypeOfSymbolAtLocation(property, declaration);
+@@ -224,6 +232,19 @@ export class HaxeTypes {
+     return `{ ${fields.join(', ')} }`;
+   }
+ 
++  isTaggedRecord(type) {
++    const { ts, checker } = this;
++    if (!type.isUnion() ||
++        !type.types.every(branch => branch.flags & (ts.TypeFlags.Object | ts.TypeFlags.Intersection))) return false;
++
++    return checker.getPropertiesOfType(type).some(property => {
++      if (property.flags & ts.SymbolFlags.Optional) return false;
++      const tags = type.types.map(branch => checker.getTypeOfPropertyOfType(branch, property.getName()));
++      return tags.every(tag => tag?.flags & (ts.TypeFlags.StringLiteral | ts.TypeFlags.NumberLiteral)) &&
++        new Set(tags.map(tag => tag.value)).size === type.types.length;
++    });
++  }
++
+   arguments(type) {
+     if (type.aliasTypeArguments?.length) return type.aliasTypeArguments;
+     return (type.objectFlags & this.ts.ObjectFlags.Reference) ? this.checker.getTypeArguments(type) : [];

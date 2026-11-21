@@ -4,7 +4,7 @@ package flight.esm.text_markup;
 @:jsRequire("@flighthq/text-markup/contract")
 extern class Contract {
   public static function MARKUP_HEX_COLOR_RESOLVER(value:String):Null<Float>;
-  public static final TextMarkupIssueKind:Dynamic;
+  public static final TextMarkupIssueKind:{ UnknownTag:String, UnresolvedFontColor:String, UnsafeHref:String };
   public static function createMarkupTagRegistry():flight.esm.types.text_markup_contract.Types.MarkupTagRegistry;
   public static function createTextMarkupGuardState():flight.esm.types.text_markup_contract.Types.TextMarkupGuardState;
   public static function disableTextMarkupGuards():Void;

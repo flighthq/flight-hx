@@ -43,11 +43,11 @@ typedef LogTransport = { write:((line:String) -> flight.esm.types.log.Types.LogT
 
 typedef LogTransportDeliveryBoundary = String;
 
-typedef LogTransportDestroyOutcome = Dynamic;
+typedef LogTransportDestroyOutcome = { reason:String };
 
-typedef LogTransportFlushOutcome = Dynamic;
+typedef LogTransportFlushOutcome = { reason:String };
 
-typedef LogTransportWriteOutcome = Dynamic;
+typedef LogTransportWriteOutcome = { reason:String };
 
 typedef MemoryLogSink = { sink:flight.esm.types.log.Types.LogSink };
 

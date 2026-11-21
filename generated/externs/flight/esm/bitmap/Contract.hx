@@ -8,8 +8,8 @@ extern class Contract {
   public static final BITMAP_NOISE_CHANNEL_B:Float;
   public static final BITMAP_NOISE_CHANNEL_G:Float;
   public static final BITMAP_NOISE_CHANNEL_R:Float;
-  public static final BitmapCompositeMode:Dynamic;
-  public static final ImageChannel:Dynamic;
+  public static final BitmapCompositeMode:{ Add:String, Clear:String, ColorBurn:String, ColorDodge:String, Copy:String, Darken:String, DestinationAtop:String, DestinationIn:String, DestinationOut:String, DestinationOver:String, Difference:String, Exclusion:String, HardLight:String, Invert:String, Lighten:String, Multiply:String, Normal:String, Overlay:String, Screen:String, SoftLight:String, SourceAtop:String, SourceIn:String, SourceOut:String, SourceOver:String, Subtract:String, Xor:String };
+  public static final ImageChannel:{ Red:Float, Green:Float, Blue:Float, Alpha:Float };
   public static function applyBitmapColorScaleBias(dest:flight.esm.types.bitmap.Types.BitmapRegion, source:flight.esm.types.bitmap.Types.BitmapRegion, ct:flight.esm.types.adjustments_contract.Types.ColorScaleBiasLike):Void;
   public static function applyBitmapCurve(out:flight.esm.types.bitmap.Types.BitmapRegion, source:flight.esm.types.bitmap.Types.BitmapRegion, redLut:Dynamic, greenLut:Dynamic, blueLut:Dynamic, ?alphaLut:Dynamic):Void;
   public static function applyBitmapLevels(out:flight.esm.types.bitmap.Types.BitmapRegion, source:flight.esm.types.bitmap.Types.BitmapRegion, ?blackPoint:Float, ?whitePoint:Float, ?gamma:Float):Void;

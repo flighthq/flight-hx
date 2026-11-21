@@ -35,35 +35,35 @@ typedef HostTrayTitleCapability = { get:((tray:flight.esm.types.tray.Types.TrayI
 
 typedef HostTrayTooltipCapability = { get:((tray:flight.esm.types.tray.Types.TrayIcon) -> js.lib.Promise<flight.esm.types.tray.Types.TrayTooltipReadResult>), set:((tray:flight.esm.types.tray.Types.TrayIcon, tooltip:String) -> js.lib.Promise<flight.esm.types.tray.Types.TrayTooltipUpdateResult>) };
 
-typedef TrayAnimationStartResult = Dynamic;
+typedef TrayAnimationStartResult = { outcome:String };
 
-typedef TrayAnimationStopResult = Dynamic;
+typedef TrayAnimationStopResult = { outcome:String };
 
-typedef TrayBalloonDisplayResult = Dynamic;
+typedef TrayBalloonDisplayResult = { outcome:String };
 
 typedef TrayBalloonEvent = { type:String };
 
 typedef TrayBalloonOptions = { ?icon:Null<String>, ?iconType:Null<String>, ?largeIcon:Null<Bool>, ?noSound:Null<Bool>, ?respectQuietTime:Null<Bool>, text:String, title:String };
 
-typedef TrayBalloonRemoveResult = Dynamic;
+typedef TrayBalloonRemoveResult = { outcome:String };
 
-typedef TrayBoundsResult = Dynamic;
+typedef TrayBoundsResult = { outcome:String };
 
-typedef TrayCreateCapabilityResult = Dynamic;
+typedef TrayCreateCapabilityResult = { outcome:String };
 
-typedef TrayCreateResult<Tray> = Dynamic;
+typedef TrayCreateResult<Tray> = { outcome:String };
 
-typedef TrayDestroyCapabilityResult = Dynamic;
+typedef TrayDestroyCapabilityResult = { outcome:String };
 
 typedef TrayDestroyFailure = { ?error:Dynamic, step:String };
 
-typedef TrayDestroyResult = Dynamic;
+typedef TrayDestroyResult = { outcome:String };
 
-typedef TrayDoubleClickPolicyUpdateResult = Dynamic;
+typedef TrayDoubleClickPolicyUpdateResult = { outcome:String };
 
-typedef TrayDropEvent = Dynamic;
+typedef TrayDropEvent = { type:String };
 
-typedef TrayEventAttachResult = Dynamic;
+typedef TrayEventAttachResult = { outcome:String };
 
 typedef TrayEventRelease = { release:(() -> js.lib.Promise<flight.esm.types.tray.Types.TrayReleaseResult>) };
 
@@ -73,29 +73,29 @@ typedef TrayIconOptions = { ?icon:Null<String>, ?iconTemplate:Null<Bool>, ?signa
 
 typedef TrayIconSource = String;
 
-typedef TrayImageUpdateResult = Dynamic;
+typedef TrayImageUpdateResult = { outcome:String };
 
 typedef TrayInteractionEvent = { altKey:Bool, bounds:Null<flight.esm.types.geometry.Types.RectangleLike>, ctrlKey:Bool, metaKey:Bool, position:Null<flight.esm.types.geometry.Types.Vector2Like>, shiftKey:Bool, type:String };
 
 typedef TrayMenuSelectionEvent = { id:String };
 
-typedef TrayMenuUpdateResult = Dynamic;
+typedef TrayMenuUpdateResult = { outcome:String };
 
-typedef TrayPopupMenuResult = Dynamic;
+typedef TrayPopupMenuResult = { outcome:String };
 
-typedef TrayPressedImageUpdateResult = Dynamic;
+typedef TrayPressedImageUpdateResult = { outcome:String };
 
-typedef TrayReleaseResult = Dynamic;
+typedef TrayReleaseResult = { outcome:String };
 
-typedef TrayTemplateImageUpdateResult = Dynamic;
+typedef TrayTemplateImageUpdateResult = { outcome:String };
 
-typedef TrayTitleReadResult = Dynamic;
+typedef TrayTitleReadResult = { outcome:String };
 
-typedef TrayTitleUpdateResult = Dynamic;
+typedef TrayTitleUpdateResult = { outcome:String };
 
-typedef TrayTooltipReadResult = Dynamic;
+typedef TrayTooltipReadResult = { outcome:String };
 
-typedef TrayTooltipUpdateResult = Dynamic;
+typedef TrayTooltipUpdateResult = { outcome:String };
 
 #else
 #error "Flight ESM bindings require the JavaScript target and flight_esm."

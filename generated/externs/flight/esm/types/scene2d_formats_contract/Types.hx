@@ -67,7 +67,7 @@ typedef LottieMergePathShapeItem = { mm:Float, ty:String, ?hd:Null<Bool>, ?ix:Nu
 
 typedef LottieMutableAnimationTarget = { lottieApply:((sample:Dynamic, time:Float) -> Void) };
 
-typedef LottiePaint = Dynamic;
+typedef LottiePaint = { kind:String, opacity:Float };
 
 typedef LottiePolystarShapeItem = { ?d:Null<Float>, ?ir:Dynamic, ?is:Dynamic, or:flight.esm.types.scene2d_formats_contract.Types.LottieAnimatable<Float>, os:flight.esm.types.scene2d_formats_contract.Types.LottieAnimatable<Float>, p:flight.esm.types.scene2d_formats_contract.Types.LottieAnimatable<Array<Float>>, pt:flight.esm.types.scene2d_formats_contract.Types.LottieAnimatable<Float>, r:flight.esm.types.scene2d_formats_contract.Types.LottieAnimatable<Float>, sy:Float, ty:String, ?hd:Null<Bool>, ?ix:Null<Float>, ?nm:Null<String> };
 

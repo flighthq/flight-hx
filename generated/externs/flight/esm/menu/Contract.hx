@@ -3,7 +3,7 @@ package flight.esm.menu;
 #if (js && flight_esm)
 @:jsRequire("@flighthq/menu/contract")
 extern class Contract {
-  public static final WellKnownMenuItemRole:Dynamic;
+  public static final WellKnownMenuItemRole:{ copy:String, cut:String, delete:String, paste:String, pasteAndMatchStyle:String, redo:String, selectAll:String, toggleSpellChecker:String, undo:String, about:String, close:String, front:String, hide:String, hideOthers:String, mergeAllWindows:String, minimize:String, moveTabToNewWindow:String, quit:String, selectNextTab:String, selectPreviousTab:String, toggleTabBar:String, unhide:String, zoom:String, forceReload:String, reload:String, resetZoom:String, toggleDevTools:String, toggleFullscreen:String, zoomIn:String, zoomOut:String, help:String, services:String, startSpeaking:String, stopSpeaking:String, clearRecentDocuments:String, recentDocuments:String, appMenu:String, editMenu:String, fileMenu:String, helpMenu:String, shareMenu:String, viewMenu:String, windowMenu:String };
   public static function attachMenuHighlight(hostMenuHighlight:flight.esm.types.menu.Types.HostMenuHighlightCapability, highlight:flight.esm.types.menu.Types.MenuHighlight):Void;
   public static function attachMenuSelect(hostMenuSelect:flight.esm.types.menu.Types.HostMenuSelectCapability, select:flight.esm.types.menu.Types.MenuSelect):Void;
   public static function cloneMenuTemplate(template:flight.esm.types.menu.Types.MenuItemTemplate):flight.esm.types.menu.Types.MenuItemTemplate;

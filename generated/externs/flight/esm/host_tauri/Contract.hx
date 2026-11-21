@@ -5,7 +5,7 @@ package flight.esm.host_tauri;
 extern class Contract {
   public static function tauriHost<Profile>(tauri:Dynamic, profile:Profile):Dynamic;
   public static function tauriHostAccessibility():flight.esm.types.host_contract.Types.HostAccessibilityCapabilities;
-  public static function tauriHostApp(tauri:Dynamic):Dynamic;
+  public static function tauriHostApp(tauri:Dynamic):{ hide:flight.esm.types.app.Types.HostAppHideCapability, name:flight.esm.types.app.Types.HostAppNameCapability, version:flight.esm.types.app.Types.HostAppVersionCapability, quit:flight.esm.types.app.Types.HostAppQuitCapability, locale:flight.esm.types.app.Types.HostAppLocaleCapability, relaunch:flight.esm.types.app.Types.HostAppRelaunchCapability, show:flight.esm.types.app.Types.HostAppShowCapability };
   public static function tauriHostAppHide(tauri:Dynamic):flight.esm.types.app.Types.HostAppHideCapability;
   public static function tauriHostAppLocale(tauri:Dynamic):flight.esm.types.app.Types.HostAppLocaleCapability;
   public static function tauriHostAppMenu(tauri:Dynamic):flight.esm.types.menu.Types.HostAppMenuCapability;
@@ -42,7 +42,7 @@ extern class Contract {
   public static function tauriHostIpc():flight.esm.types.ipc.Types.HostIpcCapabilities;
   public static function tauriHostLifecycle():flight.esm.types.lifecycle.Types.HostLifecycleCapabilities;
   public static function tauriHostMediaSession():flight.esm.types.mediasession.Types.HostMediaSessionCapabilities;
-  public static function tauriHostMenu(tauri:Dynamic):Dynamic;
+  public static function tauriHostMenu(tauri:Dynamic):{ app:flight.esm.types.menu.Types.HostAppMenuCapability, popup:flight.esm.types.menu.Types.HostMenuPopupCapability, select:flight.esm.types.menu.Types.HostMenuSelectCapability };
   public static function tauriHostMenuPopup(tauri:Dynamic):flight.esm.types.menu.Types.HostMenuPopupCapability;
   public static function tauriHostMenuSelect(tauri:Dynamic):flight.esm.types.menu.Types.HostMenuSelectCapability;
   public static function tauriHostMessageDialog(tauri:Dynamic):flight.esm.types.dialog_contract.Types.HostMessageDialogCapability;
@@ -54,7 +54,7 @@ extern class Contract {
   public static function tauriHostNotificationPermission(tauri:Dynamic):flight.esm.types.notification_contract.Types.HostNotificationPermissionCapability;
   public static function tauriHostPermissions():flight.esm.types.host_contract.Types.HostPermissionsCapabilities;
   public static function tauriHostPlatform(tauri:Dynamic):flight.esm.types.platform.Types.HostPlatformCapability;
-  public static function tauriHostPlatformGroup(tauri:Dynamic):Dynamic;
+  public static function tauriHostPlatformGroup(tauri:Dynamic):{ info:flight.esm.types.platform.Types.HostPlatformCapability };
   public static function tauriHostPower():flight.esm.types.power.Types.HostPowerCapabilities;
   public static function tauriHostPreferences():flight.esm.types.preferences_contract.Types.HostPreferencesCapabilities;
   public static function tauriHostProtocol():flight.esm.types.host_contract.Types.HostProtocolCapabilities;
@@ -86,7 +86,7 @@ extern class Contract {
   public static function tauriHostUpdater():flight.esm.types.host_contract.Types.HostUpdaterCapabilities;
   public static function tauriHostVideo():flight.esm.types.video.Types.HostVideoCapabilities;
   public static function tauriHostWgpu():flight.esm.types.render_wgpu_contract.Types.HostWgpuCapabilities;
-  public static function tauriHostWindow(tauri:Dynamic):Dynamic;
+  public static function tauriHostWindow(tauri:Dynamic):{ appearance:flight.esm.types.app.Types.HostWindowAppearanceCapability, attach:flight.esm.types.app.Types.HostWindowAttachCapability, attention:flight.esm.types.app.Types.HostWindowAttentionCapability, contentProtection:flight.esm.types.app.Types.HostWindowContentProtectionCapability, focus:flight.esm.types.app.Types.HostWindowFocusCapability, fullscreen:flight.esm.types.app.Types.HostWindowFullscreenCapability, geometry:flight.esm.types.app.Types.HostWindowGeometryCapability, ?hierarchy:Null<flight.esm.types.app.Types.HostWindowHierarchyCapability>, lifecycle:flight.esm.types.app.Types.HostWindowLifecycleCapability, ?progress:Null<flight.esm.types.app.Types.HostWindowProgressCapability>, shadow:flight.esm.types.app.Types.HostWindowShadowCapability, shell:flight.esm.types.app.Types.HostWindowShellCapability, sizeConstraints:flight.esm.types.app.Types.HostWindowSizeConstraintsCapability, state:flight.esm.types.app.Types.HostWindowStateCapability, visibility:flight.esm.types.app.Types.HostWindowVisibilityCapability, zOrder:flight.esm.types.app.Types.HostWindowZOrderCapability };
 }
 #else
 #error "Flight ESM bindings require the JavaScript target and flight_esm."

@@ -21,7 +21,7 @@ typedef MidiAccessStateSubscription = { onMidiAccessStateChange:flight.esm.types
 
 typedef MidiEventAttachment = { release:(() -> js.lib.Promise<flight.esm.types.midi_contract.Types.MidiEventReleaseOutcome>) };
 
-typedef MidiEventBackendAttachOutcome = Dynamic;
+typedef MidiEventBackendAttachOutcome = { reason:String };
 
 typedef MidiEventReleaseOutcome = { reason:String };
 
@@ -39,7 +39,7 @@ typedef MidiOutputPort = { id:String, manufacturer:Null<String>, name:Null<Strin
 
 typedef MidiOutputPortResourceOperations = { send:((data:Array<Float>, ?timestamp:Null<Float>) -> Void), attachStateChange:((listener:Dynamic) -> js.lib.Promise<flight.esm.types.midi_contract.Types.MidiEventBackendAttachOutcome>), close:(() -> js.lib.Promise<Void>), getConnection:(() -> flight.esm.types.midi_contract.Types.MidiPortConnection), getState:(() -> flight.esm.types.midi_contract.Types.MidiPortState), open:(() -> js.lib.Promise<Void>) };
 
-typedef MidiPort = Dynamic;
+typedef MidiPort = { id:String, manufacturer:Null<String>, name:Null<String>, type:String, version:Null<String> };
 
 typedef MidiPortCloseOutcome = { reason:String };
 
@@ -61,7 +61,7 @@ typedef MidiPortStateOutcome = Dynamic;
 
 typedef MidiPortStateSubscription = { onMidiPortStateChange:flight.esm.types.signals.Types.Signal<flight.esm.types.midi_contract.Types.MidiPort> };
 
-typedef MidiSubscriptionAttachOutcome = Dynamic;
+typedef MidiSubscriptionAttachOutcome = { reason:String };
 
 typedef MidiSubscriptionDetachOutcome = Dynamic;
 

@@ -5,7 +5,7 @@ typedef GlClassicDefineKey = { alphaMaskEnabled:Bool, ?hasColorAdjustment:Null<B
 
 typedef GlClassicLightingModel = String;
 
-typedef GlClassicProgram = Dynamic;
+typedef GlClassicProgram = { locAlphaCutoff:Dynamic, locAlphaMap:Dynamic, locDiffuse:Dynamic, locDiffuseMap:Dynamic, locNormalMap:Dynamic, locNormalScale:Dynamic, locShininess:Dynamic, locSpecular:Dynamic, locSpecularMap:Dynamic, locAmbientCount:Dynamic, locAmbientRadiance:Dynamic, locCameraPosition:Dynamic, locDirectional:Dynamic, locDirectionalCount:Dynamic, locDirectionalRadiance:Dynamic, locHemisphereCount:Dynamic, locHemisphereLights:Dynamic, locIblBrdf:Dynamic, locIblEnabled:Dynamic, locIblIntensity:Dynamic, locIblIrradiance:Dynamic, locIblMaxMip:Dynamic, locIblPrefiltered:Dynamic, locPointCount:Dynamic, locPointLights:Dynamic, locShadowBias:Dynamic, locShadowEnabled:Dynamic, locShadowMap:Dynamic, locShadowMatrix:Dynamic, locShadowNormalBiasWorld:Dynamic, locShadowPcfRadius:Dynamic, locSpotCount:Dynamic, locSpotLights:Dynamic, ?locColorScale:Dynamic, ?locColorBias:Dynamic, ?locColorMatrix0:Dynamic, ?locColorMatrix1:Dynamic, ?locColorMatrix2:Dynamic, ?locColorMatrix3:Dynamic, ?locColorMatrixOffset:Dynamic, ?locObjectAlpha:Dynamic, ?locAlphaIsCoverage:Dynamic, ?locJointTexture:Dynamic, ?locInstancePalette:Dynamic, ?locInstanceColorPalette:Dynamic, ?locJointNormalTexture:Dynamic, locModel:Dynamic, locNormalMatrix:Dynamic, ?locUvTransform:Dynamic, locViewProjection:Dynamic, program:Dynamic };
 
 typedef GlDebugDefineKey = { ?hasInstances:Null<Bool>, hasNormalMap:Bool, ?hasSkin:Null<Bool>, mode:String };
 
@@ -37,7 +37,7 @@ typedef GlPbrExtensionShaderContext = flight.esm.types.render_gl.Types.GlPbrExte
 
 typedef GlPbrExtensionShaderContribution = flight.esm.types.render_gl.Types.GlPbrExtensionShaderContribution;
 
-typedef GlPbrProgram = Dynamic;
+typedef GlPbrProgram = { locAlphaCutoff:Dynamic, locAlphaMap:Dynamic, locBaseColor:Dynamic, locBaseColorMap:Dynamic, locEmissive:Dynamic, locEmissiveMap:Dynamic, locEmissiveStrength:Dynamic, locMetallic:Dynamic, locMetallicRoughnessMap:Dynamic, locNormalMap:Dynamic, locNormalScale:Dynamic, locOcclusionMap:Dynamic, locOcclusionStrength:Dynamic, locRoughness:Dynamic, locAmbientCount:Dynamic, locAmbientRadiance:Dynamic, locCameraPosition:Dynamic, locDirectional:Dynamic, locDirectionalCount:Dynamic, locDirectionalRadiance:Dynamic, locHemisphereCount:Dynamic, locHemisphereLights:Dynamic, locIblBrdf:Dynamic, locIblEnabled:Dynamic, locIblIntensity:Dynamic, locIblIrradiance:Dynamic, locIblMaxMip:Dynamic, locIblPrefiltered:Dynamic, locPointCount:Dynamic, locPointLights:Dynamic, locShadowBias:Dynamic, locShadowEnabled:Dynamic, locShadowMap:Dynamic, locShadowMatrix:Dynamic, locShadowNormalBiasWorld:Dynamic, locShadowPcfRadius:Dynamic, locSpotCount:Dynamic, locSpotLights:Dynamic, ?locColorScale:Dynamic, ?locColorBias:Dynamic, ?locColorMatrix0:Dynamic, ?locColorMatrix1:Dynamic, ?locColorMatrix2:Dynamic, ?locColorMatrix3:Dynamic, ?locColorMatrixOffset:Dynamic, ?locObjectAlpha:Dynamic, ?locAlphaIsCoverage:Dynamic, ?locJointTexture:Dynamic, ?locInstancePalette:Dynamic, ?locInstanceColorPalette:Dynamic, ?locJointNormalTexture:Dynamic, locModel:Dynamic, locNormalMatrix:Dynamic, ?locUvTransform:Dynamic, locViewProjection:Dynamic, program:Dynamic };
 
 typedef GlPbrTransmissionSceneColor = { height:Float, mipLevelCount:Float, texture:Dynamic, width:Float };
 
@@ -55,7 +55,7 @@ typedef GlScene3DShadow = { enabled:Bool, matrix:flight.esm.types.geometry.Types
 
 typedef GlShadedDefineKey = { alphaMaskEnabled:Bool, ?hasColorAdjustment:Null<Bool>, ?hasColorMatrix:Null<Bool>, hasDiffuseMap:Bool, ?hasInstances:Null<Bool>, hasNormalMap:Bool, ?hasSkin:Null<Bool>, hasSpecularMap:Bool, hasUvTransform:Bool };
 
-typedef GlShadedProgram = Dynamic;
+typedef GlShadedProgram = { locAlphaCutoff:Dynamic, locDiffuse:Dynamic, locDiffuseMap:Dynamic, locNormalMap:Dynamic, locNormalScale:Dynamic, locShininess:Dynamic, locSpecular:Dynamic, locSpecularMap:Dynamic, locTime:Dynamic, locAmbientCount:Dynamic, locAmbientRadiance:Dynamic, locCameraPosition:Dynamic, locDirectional:Dynamic, locDirectionalCount:Dynamic, locDirectionalRadiance:Dynamic, locHemisphereCount:Dynamic, locHemisphereLights:Dynamic, locIblBrdf:Dynamic, locIblEnabled:Dynamic, locIblIntensity:Dynamic, locIblIrradiance:Dynamic, locIblMaxMip:Dynamic, locIblPrefiltered:Dynamic, locPointCount:Dynamic, locPointLights:Dynamic, locShadowBias:Dynamic, locShadowEnabled:Dynamic, locShadowMap:Dynamic, locShadowMatrix:Dynamic, locShadowNormalBiasWorld:Dynamic, locShadowPcfRadius:Dynamic, locSpotCount:Dynamic, locSpotLights:Dynamic, ?locColorScale:Dynamic, ?locColorBias:Dynamic, ?locColorMatrix0:Dynamic, ?locColorMatrix1:Dynamic, ?locColorMatrix2:Dynamic, ?locColorMatrix3:Dynamic, ?locColorMatrixOffset:Dynamic, ?locObjectAlpha:Dynamic, ?locAlphaIsCoverage:Dynamic, ?locJointTexture:Dynamic, ?locInstancePalette:Dynamic, ?locInstanceColorPalette:Dynamic, ?locJointNormalTexture:Dynamic, locModel:Dynamic, locNormalMatrix:Dynamic, ?locUvTransform:Dynamic, locViewProjection:Dynamic, program:Dynamic };
 
 typedef GlToonDefineKey = { alphaMaskEnabled:Bool, hasBaseColorMap:Bool, ?hasInstances:Null<Bool>, hasRamp:Bool, ?hasSkin:Null<Bool>, hasUvTransform:Bool };
 

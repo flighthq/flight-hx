@@ -4,18 +4,18 @@ package flight.esm.scene2d_formats;
 @:jsRequire("@flighthq/scene2d-formats/contract")
 extern class Contract {
   public static final LOTTIE_REQUIREMENT_KEY_NAMESPACE:String;
-  public static final LottieLayerKind:Dynamic;
-  public static final LottieMaskKind:Dynamic;
-  public static final LottieShapeItemKind:Dynamic;
+  public static final LottieLayerKind:{ Image:Float, Null:Float, Precomposition:Float, Shape:Float, Solid:Float, Text:Float };
+  public static final LottieMaskKind:{ Additive:String, Darken:String, Difference:String, Intersect:String, Lighten:String, None:String, Subtract:String };
+  public static final LottieShapeItemKind:{ Ellipse:String, Fill:String, GradientFill:String, GradientStroke:String, Path:String, Polystar:String, Rectangle:String, Stroke:String, TrimPath:String };
   public static final RIVE_REQUIREMENT_KEY_NAMESPACE:String;
-  public static final RiveAnimationLoop:Dynamic;
-  public static final RiveFieldType:Dynamic;
-  public static final RiveWeightedPointKind:Dynamic;
+  public static final RiveAnimationLoop:{ OneShot:String, Loop:String, PingPong:String };
+  public static final RiveFieldType:{ Uint:Float, String:Float, Double:Float, Color:Float };
+  public static final RiveWeightedPointKind:{ Point:String, In:String, Out:String };
   public static final SVG_REQUIREMENT_KEY_NAMESPACE:String;
-  public static final SvgClipKind:Dynamic;
-  public static final SvgElementKind:Dynamic;
-  public static function animatedLottieTestScalar(start:Float, end:Float):Dynamic;
-  public static function animatedLottieTestVector(start:Array<Float>, end:Array<Float>, ?ox:Array<Float>, ?oy:Array<Float>, ?ix:Array<Float>, ?iy:Array<Float>):Dynamic;
+  public static final SvgClipKind:{ Path:String };
+  public static final SvgElementKind:{ Container:String, Geometry:String, Image:String, Text:String, Use:String };
+  public static function animatedLottieTestScalar(start:Float, end:Float):{ a:Float, k:Array<Dynamic> };
+  public static function animatedLottieTestVector(start:Array<Float>, end:Array<Float>, ?ox:Array<Float>, ?oy:Array<Float>, ?ix:Array<Float>, ?iy:Array<Float>):{ a:Float, k:Array<Dynamic> };
   public static function appendLottieDashedShapePaths(paths:Array<flight.esm.types.path_contract.Types.PathRaw>, shape:flight.esm.types.shape.Types.Shape, winding:Null<String>, dash:Array<Float>, dashOffset:Float):Void;
   public static function appendLottieLayers(root:flight.esm.types.scene2d_contract.Types.DisplayObject, layers:Array<flight.esm.types.scene2d_formats_contract.Types.LottieLayer>, context:flight.esm.types.scene2d_formats_contract.Types.LottieImportContext):Void;
   public static function appendLottieShapePathChannels(keyframes:Array<flight.esm.types.scene2d_formats_contract.Types.LottieKeyframe<flight.esm.types.scene2d_formats_contract.Types.LottieShapePath>>, current:Array<Float>, apply:(() -> Void), context:flight.esm.types.scene2d_formats_contract.Types.LottieImportContext):Void;
@@ -151,7 +151,7 @@ extern class Contract {
   public static function mapLottieLineJoin(value:Null<Float>):String;
   public static function markRiveNestedArtboard(node:flight.esm.types.scene2d_contract.Types.Node2D, artboardIndex:Float):Void;
   public static function multiplySvgMatrices(a:flight.esm.types.geometry.Types.Matrix, b:flight.esm.types.geometry.Types.Matrix):flight.esm.types.geometry.Types.Matrix;
-  public static function parseLottieGradient(values:Array<Float>, count:Float, opacity:Float):Dynamic;
+  public static function parseLottieGradient(values:Array<Float>, count:Float, opacity:Float):{ alphas:Array<Float>, colors:Array<Float>, ratios:Array<Float> };
   public static function parseLottieRequirements(json:String):flight.esm.types.requirement.Types.RequirementSetRaw;
   public static function parseRiveDocument(source:js.lib.Uint8Array, ?diagnostics:Null<Array<flight.esm.types.importdiagnostics_contract.Types.ImportDiagnostic>>):Null<flight.esm.types.scene2d_formats_contract.Types.RiveDocument>;
   public static function parseRiveRequirements(source:js.lib.Uint8Array, ?diagnostics:Null<Array<flight.esm.types.importdiagnostics_contract.Types.ImportDiagnostic>>):flight.esm.types.requirement.Types.RequirementSetRaw;

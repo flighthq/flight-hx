@@ -5,11 +5,11 @@ package flight.esm.statechart;
 extern class Contract {
   public static final Statechart:Dynamic;
   public static final StatechartAtomicStateKind:String;
-  public static final StatechartComparison:Dynamic;
-  public static final StatechartInputKind:Dynamic;
+  public static final StatechartComparison:{ Equal:String, GreaterThan:String, GreaterThanOrEqual:String, LessThan:String, LessThanOrEqual:String, NotEqual:String };
+  public static final StatechartInputKind:{ Boolean:String, Number:String, Trigger:String };
   public static final StatechartInstance:Dynamic;
   public static final StatechartNestedStateKind:String;
-  public static final StatechartTransitionStatus:Dynamic;
+  public static final StatechartTransitionStatus:{ ConditionsUnmet:String, ExitTimePending:String, InvalidRegion:String, MissingRegionDuration:String, NoTransitions:String, Ready:String, Transitioning:String };
   public static function advanceStatechartInstance(instance:flight.esm.types.statechart.Types.StatechartInstanceRaw, deltaTime:Float):Float;
   public static function areStatechartGuardsEnabled(instance:flight.esm.types.statechart.Types.StatechartInstanceRaw):Bool;
   public static function createStatechartInstance(chart:flight.esm.types.statechart.Types.StatechartRaw):flight.esm.types.statechart.Types.StatechartInstanceRaw;

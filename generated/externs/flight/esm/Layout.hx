@@ -6,7 +6,7 @@ extern class Layout {
   public static final AnchorLayoutKind:String;
   public static final FlexLayoutKind:String;
   public static final GridLayoutKind:String;
-  public static final LayoutResolutionFailureKind:Dynamic;
+  public static final LayoutResolutionFailureKind:{ IntrinsicSizesTooSmall:String, InvalidContainerStyle:String, InvalidHierarchy:String, InvalidItemStyle:String, OutputTooSmall:String, UnregisteredKind:String };
   public static function createLayoutState():flight.esm.types.layout.Types.LayoutState;
   public static function enableLayoutGuards(state:flight.esm.types.layout.Types.LayoutState, warningSink:flight.esm.types.layout.Types.LayoutResolutionGuard):Void;
   public static function explainLayoutResolution(state:flight.esm.types.layout.Types.LayoutState, tree:flight.esm.types.layout.Types.LayoutTree, nodeIndex:Float):Null<flight.esm.types.layout.Types.LayoutResolutionExplanation>;

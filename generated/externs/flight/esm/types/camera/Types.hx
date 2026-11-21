@@ -23,7 +23,7 @@ typedef PerspectiveProjection = { aspect:Float, fovY:Float, kind:String };
 
 typedef PerspectiveProjectionOptions = { ?aspect:Null<Float>, fovY:Float };
 
-typedef Projection = Dynamic;
+typedef Projection = { kind:String };
 
 typedef RawProjection = { kind:String, matrix:flight.esm.types.geometry.Types.Matrix4 };
 

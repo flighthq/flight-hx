@@ -133,7 +133,7 @@ typedef SceneCoverage = String;
 
 typedef SceneCoverageCatalog = Array<flight.esm.types.render_contract.Types.CatalogEntry>;
 
-typedef SceneCoverageEntry = Dynamic;
+typedef SceneCoverageEntry = { coverage:String, facet:flight.esm.types.requirement.Types.RequirementFacet, kind:String, registry:flight.esm.types.render_contract.Types.RenderRegistryTable };
 
 typedef ShapeRasterizer = ((context:js.html.CanvasRenderingContext2D, commands:Array<flight.esm.types.shape.Types.ShapeCommandToken>, state:flight.esm.types.render_contract.Types.RenderState) -> Void);
 

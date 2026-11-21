@@ -3,7 +3,7 @@ package flight.esm.interaction;
 #if (js && flight_esm)
 @:jsRequire("@flighthq/interaction/contract")
 extern class Contract {
-  public static final NodeInteractiveStateRefusalReason:Dynamic;
+  public static final NodeInteractiveStateRefusalReason:{ ExtensionCreationFailed:String, ExtensionKindUnregistered:String, ExtensionTargetUnsupported:String, PropertyTargetUnsupported:String, TransitionCreationFailed:String, TransitionKindUnregistered:String };
   public static function applyNodeInteractiveStates(binding:flight.esm.types.interaction_contract.Types.NodeInteractiveStateBinding, flags:flight.esm.types.interaction_contract.Types.NodeInteractiveStateFlags):Bool;
   public static function areNodeChildrenHitTestEnabled(source:flight.esm.types.node.Types.NodeAny):Bool;
   public static function captureInteractionPointer<N>(manager:flight.esm.types.interaction.Types.InteractionManager<N>, pointerId:Float, target:N):Void;

@@ -3,8 +3,8 @@ package flight.esm.sdk;
 #if (js && flight_esm)
 @:jsRequire("@flighthq/sdk/skeleton2d-formats")
 extern class Skeleton2DFormats {
-  public static final DragonBonesSectionKind:Dynamic;
-  public static final DragonBonesTimelineKind:Dynamic;
+  public static final DragonBonesSectionKind:{ Animations:String, Bones:String, IkConstraints:String, Skins:String, Slots:String };
+  public static final DragonBonesTimelineKind:{ Bone:String, Deform:String, Ik:String, Slot:String, ZOrder:String };
   public static final SPINE_BINARY_ATTACHMENT_SEQUENCE:Float;
   public static final SPINE_BINARY_ATTACHMENT_TYPES:Array<String>;
   public static final SPINE_BINARY_BOUNDS_BYTES:Float;
@@ -24,10 +24,10 @@ extern class Skeleton2DFormats {
   public static final SPINE_BINARY_TRIANGLE_INDEX_BYTES:Float;
   public static final SPINE_DEFAULT_SKIN_NAME:String;
   public static final SPINE_NO_ATTACHMENT_INDEX:Float;
-  public static final SpineBinarySectionKind:Dynamic;
-  public static final SpineBinaryTimelineKind:Dynamic;
-  public static final SpineJsonSectionKind:Dynamic;
-  public static final SpineJsonTimelineKind:Dynamic;
+  public static final SpineBinarySectionKind:{ Animations:String, Bones:String, Events:String, IkConstraints:String, PathConstraints:String, Skins:String, Slots:String, TransformConstraints:String };
+  public static final SpineBinaryTimelineKind:{ Bone:String, Deform:String, DrawOrder:String, Event:String, Ik:String, Path:String, Slot:String, Transform:String };
+  public static final SpineJsonSectionKind:{ Animations:String, Bones:String, Events:String, IkConstraints:String, PathConstraints:String, Skins:String, Slots:String, TransformConstraints:String };
+  public static final SpineJsonTimelineKind:{ Bone:String, Deform:String, DrawOrder:String, Event:String, Ik:String, Path:String, Slot:String, Transform:String };
   public static function analyzeSkeleton2DJson(json:String):Null<flight.esm.types.skeleton2d_formats.Types.Skeleton2DJsonAnalysis>;
   public static function buildDragonBonesSegmentEasings(frames:Array<Dynamic>):Null<Array<Null<flight.esm.types.easing.Types.EasingFunction>>>;
   public static function buildSpineBinarySegmentEasings(timeline:Dynamic, values:Float, ?diagnostics:Null<Array<flight.esm.types.importdiagnostics_contract.Types.ImportDiagnostic>>):Null<Array<Null<flight.esm.types.easing.Types.EasingFunction>>>;

@@ -7,7 +7,7 @@ typedef AcceleratorParseError = { token:String, reason:flight.esm.types.shortcut
 
 typedef AcceleratorParseErrorReason = String;
 
-typedef CreateGlobalShortcutOutcome = Dynamic;
+typedef CreateGlobalShortcutOutcome = { reason:String };
 
 typedef GlobalShortcut = { accelerator:String, onTrigger:flight.esm.types.signals.Types.Signal<Void> };
 
@@ -47,7 +47,7 @@ typedef ShortcutNumpadKeyName = String;
 
 typedef ShortcutPunctuationKeyName = String;
 
-typedef ShortcutTriggerSubscribeOutcome = Dynamic;
+typedef ShortcutTriggerSubscribeOutcome = { reason:String };
 
 typedef ShortcutTriggerSubscription = Dynamic;
 

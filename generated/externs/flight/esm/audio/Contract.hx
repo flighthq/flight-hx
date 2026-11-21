@@ -3,8 +3,8 @@ package flight.esm.audio;
 #if (js && flight_esm)
 @:jsRequire("@flighthq/audio/contract")
 extern class Contract {
-  public static final AudioResourceFailureKind:Dynamic;
-  public static final AudioResourceReferenceKind:Dynamic;
+  public static final AudioResourceFailureKind:{ Error:String, Unavailable:String };
+  public static final AudioResourceReferenceKind:{ Embedded:String, External:String };
   public static function canPlayAudioType(hostAudioCodec:flight.esm.types.audio.Types.HostAudioCodecCapability, mimeType:String):Bool;
   public static function cloneAudioResource(resource:flight.esm.types.audio.Types.AudioResource):flight.esm.types.audio.Types.AudioResource;
   public static function copyToAudioBufferChannel(buffer:flight.esm.types.audio.Types.AudioBuffer, source:js.lib.Float32Array, channel:Float):Void;

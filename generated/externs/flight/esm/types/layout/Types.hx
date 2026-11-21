@@ -19,7 +19,7 @@ typedef GridLayoutContainerStyle = { ?columnGap:Null<Float>, columns:Array<fligh
 
 typedef GridLayoutItemStyle = { ?column:Null<Float>, ?columnSpan:Null<Float>, ?row:Null<Float>, ?rowSpan:Null<Float> };
 
-typedef GridLayoutTrack = Dynamic;
+typedef GridLayoutTrack = { kind:String };
 
 typedef LayoutNode<ContainerStyle, ItemStyle> = { containerStyle:Null<ContainerStyle>, itemStyle:Null<ItemStyle>, kind:String, parentIndex:Float };
 

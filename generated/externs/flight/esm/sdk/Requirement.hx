@@ -3,7 +3,7 @@ package flight.esm.sdk;
 #if (js && flight_esm)
 @:jsRequire("@flighthq/sdk/requirement")
 extern class Requirement {
-  public static final RequirementFacet:Dynamic;
+  public static final RequirementFacet:{ CompressionKind:String, DocumentFormat:String, Physics2DJointKind:String, SceneBlendMode:String, SceneMaterialKind:String, SceneModifierKind:String, SceneNodeKind:String, SceneResourceMimeType:String, SceneShapeCommand:String, SceneTextureSourceKind:String };
   public static final RequirementSet:Dynamic;
   public static function collectScene2DRequirements(run:((arg0:Array<flight.esm.types.requirement.Types.Requirement>) -> Void)):flight.esm.types.requirement.Types.RequirementSetRaw;
   public static function createRequirementSet(covers:Array<flight.esm.types.requirement.Types.RequirementFacet>, requirements:Array<flight.esm.types.requirement.Types.Requirement>):flight.esm.types.requirement.Types.RequirementSetRaw;

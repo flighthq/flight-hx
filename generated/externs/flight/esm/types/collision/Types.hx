@@ -7,9 +7,9 @@ typedef CollisionAabb3D = { minX:Float, minY:Float, minZ:Float, maxX:Float, maxY
 
 typedef CollisionBox3D = { x:Float, y:Float, z:Float, halfX:Float, halfY:Float, halfZ:Float, rotationX:Float, rotationY:Float, rotationZ:Float, rotationW:Float };
 
-typedef CollisionBuiltInShape2D = Dynamic;
+typedef CollisionBuiltInShape2D = { kind:String };
 
-typedef CollisionBuiltInShape3D = Dynamic;
+typedef CollisionBuiltInShape3D = { kind:String };
 
 typedef CollisionCapsule2D = { x0:Float, y0:Float, x1:Float, y1:Float, radius:Float };
 
@@ -17,7 +17,7 @@ typedef CollisionCapsule3D = { x0:Float, y0:Float, z0:Float, x1:Float, y1:Float,
 
 typedef CollisionCircle2D = { x:Float, y:Float, radius:Float };
 
-typedef CollisionColliderShape3D = Dynamic;
+typedef CollisionColliderShape3D = { kind:String };
 
 typedef CollisionCone3D = { apexX:Float, apexY:Float, apexZ:Float, baseX:Float, baseY:Float, baseZ:Float, radius:Float };
 
@@ -69,7 +69,7 @@ typedef CollisionShapeKind3D = Dynamic;
 
 typedef CollisionSphere3D = { x:Float, y:Float, z:Float, radius:Float };
 
-typedef CollisionStaticShape3D = Dynamic;
+typedef CollisionStaticShape3D = { kind:String, version:Float, x:Float, y:Float, z:Float, rotationX:Float, rotationY:Float, rotationZ:Float, rotationW:Float, raw:Dynamic };
 
 typedef CollisionSupport2D = ((shape:flight.esm.types.collision.Types.CollisionShape2D, dirX:Float, dirY:Float, out:Array<Float>) -> Void);
 

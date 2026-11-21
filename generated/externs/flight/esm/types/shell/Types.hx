@@ -23,7 +23,7 @@ typedef ShellExternalReason = String;
 
 typedef ShellExternalUrlPolicy = { allowedSchemes:Array<String> };
 
-typedef ShellPathOpenOutcome = Dynamic;
+typedef ShellPathOpenOutcome = { reason:String };
 
 typedef ShellPathRevealOutcome = { reason:String };
 
@@ -35,7 +35,7 @@ typedef ShellProcessOptions = { ?cwd:Null<String>, ?environment:Dynamic };
 
 typedef ShellShortcutLink = { target:String, ?appUserModelId:Null<String>, ?args:Null<String>, ?description:Null<String>, ?icon:Null<String>, ?iconIndex:Null<Float>, ?workingDirectory:Null<String> };
 
-typedef ShellShortcutLinkReadOutcome = Dynamic;
+typedef ShellShortcutLinkReadOutcome = { reason:String };
 
 typedef ShellShortcutLinkWriteOutcome = { reason:String };
 

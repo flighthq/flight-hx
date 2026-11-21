@@ -5,7 +5,7 @@ package flight.esm.entity;
 extern class Contract {
   public static final Entity:Dynamic;
   public static final EntityRuntimeKey:Dynamic;
-  public static final EntityRuntimeWriteSlot:Dynamic;
+  public static final EntityRuntimeWriteSlot:{ BindingSlot:String, RuntimeSlot:String };
   public static function allocateEntity<Type>():flight.esm.types.entity_contract.Types.EntityConstruction<Type>;
   public static function areEntityRuntimeGuardsEnabled():Bool;
   public static function attachEntityBinding(entity:Dynamic, binding:Dynamic):Void;

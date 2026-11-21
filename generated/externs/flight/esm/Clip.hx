@@ -3,8 +3,8 @@ package flight.esm;
 #if (js && flight_esm)
 @:jsRequire("@flighthq/clip")
 extern class Clip {
-  public static final ClipRegionContoursReason:Dynamic;
-  public static final ClipRegionStatus:Dynamic;
+  public static final ClipRegionContoursReason:{ OddCoordinateCount:String, TooFewPoints:String };
+  public static final ClipRegionStatus:{ Active:String, Released:String };
   public static function acquireClipRegion():flight.esm.types.clip.Types.ClipRegion;
   public static function clipRegionContainsClipRegion(a:flight.esm.types.clip.Types.ClipRegion, b:flight.esm.types.clip.Types.ClipRegion):Bool;
   public static function clipRegionContainsPoint(clip:flight.esm.types.clip.Types.ClipRegion, x:Float, y:Float):Bool;

@@ -19,6 +19,10 @@
       {
         "path": "patches/flight/0018-typescript-esm-externs.patch",
         "sha256": "8b5004d77c772756ebdef775906f64b32c26a1c9d1d2d1c98a4d4aac775f27e9"
+      },
+      {
+        "path": "patches/flight/0019-typed-esm-records.patch",
+        "sha256": "2d617bcf1d2f49e33d599bc4032ab6a88979b6392f0ec795bf0787e69e4b55e8"
       }
     ]
   },
@@ -26948,7 +26952,7 @@
     },
     {
       "path": "flight/esm/Abc.hx",
-      "sha256": "9b5ad968831d3614e8d8715362a9c41bd9550e8f38185003df6791155e7ee19e"
+      "sha256": "f352762749ddddfc2dffea639c0547be4127dacd838ff07c41d7262af175096a"
     },
     {
       "path": "flight/esm/Accessibility.hx",
@@ -26972,7 +26976,7 @@
     },
     {
       "path": "flight/esm/Audio.hx",
-      "sha256": "60254282586898144b2f44bf3cbf0a7da742c894cc8623bd15139a5e6b041694"
+      "sha256": "564a9d4652228df1f0f29b3b2cc1b291f24572a62e9c3fff656107c4f0d5508a"
     },
     {
       "path": "flight/esm/Binpack.hx",
@@ -26980,11 +26984,11 @@
     },
     {
       "path": "flight/esm/Bitmap.hx",
-      "sha256": "6070771cb9bb752c3434e166c3bd4d196c3b70d1a169eb06d54f9b170917a956"
+      "sha256": "03c297dff85f4ca3cd9a538878a3d8e4fe8a6f33cb2942eb7bd8554d47ecb370"
     },
     {
       "path": "flight/esm/BitmapWasm.hx",
-      "sha256": "1eb08eb9f9b026045cba459ac3adc185c1b47ae9e2124e64a181180e1c646d07"
+      "sha256": "f1f023d99d13f374fc5acbd11fac8f1708c2a5ec08089786cd02d3ed8e297b16"
     },
     {
       "path": "flight/esm/Bitmapfont.hx",
@@ -27016,7 +27020,7 @@
     },
     {
       "path": "flight/esm/Clip.hx",
-      "sha256": "ac8e413c64a92130a19e5f4fd76bf27cc595728008d259915b56d6ee5e9c37d8"
+      "sha256": "52d57f1258632b01822cab265d90bdee58a2da9cf0b93df1fc301879b6fb9254"
     },
     {
       "path": "flight/esm/Clipboard.hx",
@@ -27040,11 +27044,11 @@
     },
     {
       "path": "flight/esm/Compression.hx",
-      "sha256": "e5a21585d32ccb32efe82be4d9670a1f10b0cacf241fb19a50b1d61bb133c5e2"
+      "sha256": "7a79c53a692b4146575aac3cbd8f063f0e7b9346bb921f78310ad9417ee86e90"
     },
     {
       "path": "flight/esm/CompressionWasm.hx",
-      "sha256": "22bcb2b0f48173aa52a6d51c28bb0a860c8e2e72c2dfa9d19e8dacc7e1bdb928"
+      "sha256": "1cb231a80fb991027d1266e3629e2e9cbe6bb2eca415abaa86b4d037763a06ae"
     },
     {
       "path": "flight/esm/Connectivity.hx",
@@ -27068,7 +27072,7 @@
     },
     {
       "path": "flight/esm/Effects.hx",
-      "sha256": "2faf80d77814a6f57375ede651a43a923d82540bd185e98d8c2f38827050af63"
+      "sha256": "461a73a785bcdf4c24aa8cf1a9f17fcde378304bdc6df09805f16ef85b7d62bf"
     },
     {
       "path": "flight/esm/EffectsCanvas.hx",
@@ -27136,23 +27140,23 @@
     },
     {
       "path": "flight/esm/HostCapacitor.hx",
-      "sha256": "47683e868160394e0aef11e0c807456193a222909a2e454dd5ee1b1e71f73c52"
+      "sha256": "405b2b342618dccd533a440cc4c86973b44bcfdc0aba0d5032079b77602269a4"
     },
     {
       "path": "flight/esm/HostElectron.hx",
-      "sha256": "9ca5d20d4c5680777de73d5875e4ebfbec124182b6ee1ff73dc91c6a8ac73bba"
+      "sha256": "ea802f56690cefae967bfc63c42b5239a7bdf640f318e39ca066df81956eea32"
     },
     {
       "path": "flight/esm/HostTauri.hx",
-      "sha256": "9cd888798b95d66f5705690578e2ed819a39d041849f738b2b0fa1a56d0bcee9"
+      "sha256": "778c2e939fa5672a40357e6dc8583b9ac75b557ddc60c18b3db063b081762556"
     },
     {
       "path": "flight/esm/HostWeb.hx",
-      "sha256": "b76594dfb66dffe578f98f8d11f56c5b9c38644e70cce592fe21f0f9e5dc1d17"
+      "sha256": "b7339a66395c5e6f174a3ce4ef2c1a50036f0b5462e8e8d575649cd39ef60441"
     },
     {
       "path": "flight/esm/Image.hx",
-      "sha256": "aa0f75a7602f2daa816f107483666cf299cffe19add0af148b820cba4054ee1d"
+      "sha256": "136fa0db7ac83975889018268ec14f0d591b8e8e7e9775e314af2a8b6686346f"
     },
     {
       "path": "flight/esm/ImageCodec.hx",
@@ -27164,7 +27168,7 @@
     },
     {
       "path": "flight/esm/Input.hx",
-      "sha256": "56090d8d4fdd066939d1f89afc7ed6cdb4f4f2b389da62c71b9db9994f02bb72"
+      "sha256": "764523d391eeebfb967517e4db9331d814cac23f1c56177d5ba837540aab03bc"
     },
     {
       "path": "flight/esm/Interaction.hx",
@@ -27184,7 +27188,7 @@
     },
     {
       "path": "flight/esm/Layout.hx",
-      "sha256": "7be404f1ab9221361a1a15cb80d8299a65b28007c877244d69674a2c82e7adf0"
+      "sha256": "b22a8f1aec0462d6899a5e40da2bdebd0f0f14d30d653f6b02fe3263c526c33a"
     },
     {
       "path": "flight/esm/Lifecycle.hx",
@@ -27220,7 +27224,7 @@
     },
     {
       "path": "flight/esm/Menu.hx",
-      "sha256": "e95c783fdd8f9f56a68e59bcad34dbedc566281780e7e78fd8604d9b6927bc70"
+      "sha256": "cf32fba3b88102d86541129dc544325e491b946d68e4baca2829ee120c0a1014"
     },
     {
       "path": "flight/esm/Meshgeometry.hx",
@@ -27280,15 +27284,15 @@
     },
     {
       "path": "flight/esm/Physics2D.hx",
-      "sha256": "e195623dfcea0083ce15934db8fb004f865a8aeb40f95ca50b592b507662f36f"
+      "sha256": "00e4c7e97a9063f0e85e274e9d258b339eb399967145bd44dca7def12cdd481e"
     },
     {
       "path": "flight/esm/Physics2DAbi.hx",
-      "sha256": "8a93bc2ccc96eb7ecb04c9d4126ae8ab7904b32b19aacf51e18a632910c11b2a"
+      "sha256": "00e3d66371c75bd42dcae5fb44740ed861609a8ad70c423603ff12e57dd68e6d"
     },
     {
       "path": "flight/esm/Physics2DAbiWasm.hx",
-      "sha256": "5ab95dc8ba6d262f579a0a28d6a2ef0977a70b5b186893df898411139687fe80"
+      "sha256": "bb54f64d34bff8e6e4d6d39463d0f977d2a6d7a1e76a4f266c9f29354a7d5888"
     },
     {
       "path": "flight/esm/Physics3D.hx",
@@ -27296,11 +27300,11 @@
     },
     {
       "path": "flight/esm/Physics3DAbi.hx",
-      "sha256": "50b37cda35de274c4809cb9da1f22d1ac7db1661423e26f356d49307479dd27b"
+      "sha256": "eea9d125981a3672067a8dc22c79a53837ab1935d775ee5eaecd21b413c132dc"
     },
     {
       "path": "flight/esm/Physics3DAbiWasm.hx",
-      "sha256": "20a18fe2f78966deb9a5a796f3958c5d2dfe1a09649eb90de798377064c638c9"
+      "sha256": "babe418a81c71ace7494a3578ba38de345f9cfc8cdd1ef7211289c295144e5e6"
     },
     {
       "path": "flight/esm/Picking.hx",
@@ -27340,11 +27344,11 @@
     },
     {
       "path": "flight/esm/RenderWgpu.hx",
-      "sha256": "4793919e90a076554fd674e4429c9c70f3aa46673147b18ef44a7ff82f077a81"
+      "sha256": "6c5068c0c999ab84b74d8076f621fbb3935e591b9e893419363202f9f11722e1"
     },
     {
       "path": "flight/esm/Requirement.hx",
-      "sha256": "d1e88496293c4c2a74431d2e042ea3875267232702d9726f1606f34c42f1e7a8"
+      "sha256": "cab6165f680c3a313370c0d45cd95730b1c88cd4b56661bf600a3732327c96a5"
     },
     {
       "path": "flight/esm/RequirementCatalog.hx",
@@ -27356,7 +27360,7 @@
     },
     {
       "path": "flight/esm/Resource.hx",
-      "sha256": "4ff08931a188c937fbef7db24e21a85b994c6cb206385ad335db712c70b4cd5b"
+      "sha256": "048aa1f498d1407c54dd78c2d8447da9b7ecd719abbe54ea88ef7fb99f28b33f"
     },
     {
       "path": "flight/esm/Scene2D.hx",
@@ -27364,11 +27368,11 @@
     },
     {
       "path": "flight/esm/Scene2DCanvas.hx",
-      "sha256": "30c17932e3989d53d6e6c79693c455438e9c857634d911aea4659fe5ca382d2b"
+      "sha256": "bfc09a021c69adb795688fb19e949910666f61c689a7e366a39142d709a6c1bc"
     },
     {
       "path": "flight/esm/Scene2DDom.hx",
-      "sha256": "60f7ea6730d9a26e5462a86465d8e811bb5c26d3c454e134729223eeb7dfad1e"
+      "sha256": "47877473a74332c83f76be0f79eb165427792c72473e3df9d6ae88e9fc4b477c"
     },
     {
       "path": "flight/esm/Scene2DFormats.hx",
@@ -27376,7 +27380,7 @@
     },
     {
       "path": "flight/esm/Scene2DGl.hx",
-      "sha256": "d97e5be2c3a264453941bada0350267c5a71898e2ff3910a70097674e8aef086"
+      "sha256": "03ceff52febe0eaab7febe2719611c487040e1d7a47b6ba6a29cc93debeff03b"
     },
     {
       "path": "flight/esm/Scene2DResources.hx",
@@ -27384,7 +27388,7 @@
     },
     {
       "path": "flight/esm/Scene2DWgpu.hx",
-      "sha256": "48be09a88176d7f7ab1c47ee981f5ce3ce6c1a86e7d279d1a38460734195ac9c"
+      "sha256": "13620836b97869e7c49c938bb7e643bba2e90eb44522d8514ba069a6caaf8fb9"
     },
     {
       "path": "flight/esm/Scene3D.hx",
@@ -27392,7 +27396,7 @@
     },
     {
       "path": "flight/esm/Scene3DFormats.hx",
-      "sha256": "e2bf6614bbc488259d6177d766e9f00724b04fa82560c334948a6ad03813c6ac"
+      "sha256": "e52ce2015b2fa7b13e8c0805559e326c625a44be4473395c6d35b4cfb1e9beb9"
     },
     {
       "path": "flight/esm/Scene3DGl.hx",
@@ -27408,7 +27412,7 @@
     },
     {
       "path": "flight/esm/SceneDocument.hx",
-      "sha256": "e593b49e5ab623475bcc117585c469177be43aa2e0e02f7b72208d67dca9ab25"
+      "sha256": "4dc67c7567dcc7a2859ebb912b6f5df310eec93b435932edc68f97922b9346ac"
     },
     {
       "path": "flight/esm/Screen.hx",
@@ -27416,7 +27420,7 @@
     },
     {
       "path": "flight/esm/Sdk.hx",
-      "sha256": "3d37cb842d788ff49637d8af07520daf1202d782e12f05aea9f03698d270efa6"
+      "sha256": "cc89881dd550a5542a0e6c178256852e423162906cadba925e401c08e2ef94d1"
     },
     {
       "path": "flight/esm/Selection.hx",
@@ -27428,7 +27432,7 @@
     },
     {
       "path": "flight/esm/Shading.hx",
-      "sha256": "96fcb5c532ba15085a6b24520e9bb540d134027562898de83ac89ccebcb0f476"
+      "sha256": "bfa7c2638195e4b188a9dbc55a0b75c9e261076128471a693f78b181006f83fd"
     },
     {
       "path": "flight/esm/Shape.hx",
@@ -27456,11 +27460,11 @@
     },
     {
       "path": "flight/esm/Skeleton2D.hx",
-      "sha256": "8d3e01d4c7bdc47fa97101242976b4e36adc9a7d40ceca97774e4ebbcde0173e"
+      "sha256": "40fd45862c68e2809d277deee505cab4a70a6a08f1ef10b418040ca47493da15"
     },
     {
       "path": "flight/esm/Skeleton2DFormats.hx",
-      "sha256": "0b1e8a853f755f24c64d0b823001108541e76aad1f2207180e3519f8c6807a28"
+      "sha256": "2e5b12d75f3f7907e4281be069fb41ca90f6950d6ed98a257df48aae39f3d684"
     },
     {
       "path": "flight/esm/Skeleton3D.hx",
@@ -27492,7 +27496,7 @@
     },
     {
       "path": "flight/esm/Statechart.hx",
-      "sha256": "309371b29d66dd8ef6d1ec06cbe125cfa36f02fce5dcb0b348d2a1a7f3164697"
+      "sha256": "868c91376061366ed762532f58c8da2b0941b736acede981204ed4624cc979bb"
     },
     {
       "path": "flight/esm/Statusbar.hx",
@@ -27532,7 +27536,7 @@
     },
     {
       "path": "flight/esm/Textsegment.hx",
-      "sha256": "08c6d28e06514b35675352d10f1e34d1c314cb7874c6766436c46cf3b0bf0d3c"
+      "sha256": "5fcc3be80ce503aaf8ae3cf640d9b05f83b4a208918e806742a14d7711e16a73"
     },
     {
       "path": "flight/esm/Textshaper.hx",
@@ -27564,7 +27568,7 @@
     },
     {
       "path": "flight/esm/Timeline.hx",
-      "sha256": "a7e73552ca0d0bb089ed9bbea0b88c3b2ee0f05a2106d6f784ae39d8731ececb"
+      "sha256": "ef8fac9937df0b887668338ecb1202d51f0aa66b5344a77a0c5c2fbbd4c55954"
     },
     {
       "path": "flight/esm/Tokens.hx",
@@ -27604,7 +27608,7 @@
     },
     {
       "path": "flight/esm/abc/Contract.hx",
-      "sha256": "96dd02784227c65fb06e234b064be86815187e626e3e079375cf75a56585c21c"
+      "sha256": "008935b95959b984a56e4e2e35f6dc2fe10ba5f37e1b86e9d30bb441c3231acd"
     },
     {
       "path": "flight/esm/accessibility/Contract.hx",
@@ -27628,7 +27632,7 @@
     },
     {
       "path": "flight/esm/audio/Contract.hx",
-      "sha256": "0c6466dbaa1a6ce725290e586fb145730a70d93993b7e5ddf0fe803af015f885"
+      "sha256": "fa262a5aceb6989d34ddcf73d9458cbd21dfd7a4aa936f3b25e5f4f04e4be39e"
     },
     {
       "path": "flight/esm/binpack/Contract.hx",
@@ -27636,7 +27640,7 @@
     },
     {
       "path": "flight/esm/bitmap/Contract.hx",
-      "sha256": "1faef88830e46f7e720f1e71c9104609746cd7f909cb4962989a4a8a1f2dc1c6"
+      "sha256": "0811284b3574c000a3e65646ccdfac0ab7dcc8d668f229afdc330ad7d71b09d5"
     },
     {
       "path": "flight/esm/bitmapfont/Contract.hx",
@@ -27668,7 +27672,7 @@
     },
     {
       "path": "flight/esm/clip/Contract.hx",
-      "sha256": "43b29102a46744269777ea666edf649914a5ad4dc759eb988c104c2748aecb36"
+      "sha256": "8a02323e9dd97352da5dcd1d91a373e48070a9628d79c13deb34f2b3ac0a2483"
     },
     {
       "path": "flight/esm/clipboard/Contract.hx",
@@ -27692,7 +27696,7 @@
     },
     {
       "path": "flight/esm/compression/Contract.hx",
-      "sha256": "991b911a2faeeeb435e212ee0a688a30ee3c5df16c7432c0a16fc04d10e8b17c"
+      "sha256": "3e06e7cfebb9a24022b75198db893262aa7d821d47ca708fbe79d43121055c50"
     },
     {
       "path": "flight/esm/connectivity/Contract.hx",
@@ -27716,7 +27720,7 @@
     },
     {
       "path": "flight/esm/effects/Contract.hx",
-      "sha256": "e12c839db11722e7129432989d8580834b081ff06f185c2ad59ad770c5431963"
+      "sha256": "5edd7bb8f9c68aec5a77dce9edc510e72a27997eeadc5c0805adfa33ef8d73ef"
     },
     {
       "path": "flight/esm/effects_canvas/Contract.hx",
@@ -27736,7 +27740,7 @@
     },
     {
       "path": "flight/esm/entity/Contract.hx",
-      "sha256": "408452865918394cce8ac529171ac8dd1a9c55d8a4794a3d34e8bb032c62dba6"
+      "sha256": "6e6a32ed97d923345eab04eca2966f7c6c207ddfca8baaea816b9708ef9bc254"
     },
     {
       "path": "flight/esm/exports.json",
@@ -27788,23 +27792,23 @@
     },
     {
       "path": "flight/esm/host_capacitor/Contract.hx",
-      "sha256": "d70cbf99bf19248abab0d6c5df4c0e607724aa185a9e4d9dd81b53de2156d120"
+      "sha256": "f496c2a546e140ec0ba9d14d74da7ed71d78a35e053f20bafda7dcf8a96723da"
     },
     {
       "path": "flight/esm/host_electron/Contract.hx",
-      "sha256": "94b0fb7e5a4d2e0730870b215968a0bf532b4d18d208f4229b54a360f6c407d6"
+      "sha256": "31c65d6b76adfed6fca4b0afe428a49d52e9055fe968fe8bcfc7fa8067f2eee0"
     },
     {
       "path": "flight/esm/host_tauri/Contract.hx",
-      "sha256": "7a99d0496b2bf0515dd8857c42d3a8b43a8160dad1e627d8b3759826cfcb249a"
+      "sha256": "3a5550f23cdc765b48181ee707ef98b20b69d0fc0e6db96104ca47937d37293e"
     },
     {
       "path": "flight/esm/host_web/Contract.hx",
-      "sha256": "cad2152299cd3887513254ed6e3cb301a0441f9eb1506328208304e14ec48c3a"
+      "sha256": "35fcd9e5cb74b82ed82f4440ca1eeb2bd42af8184c6d27d998385d6066ab698a"
     },
     {
       "path": "flight/esm/image/Contract.hx",
-      "sha256": "e75640a2a434a3056693aed91a82d1b982f51368e7c405c27db7c03842fbbb90"
+      "sha256": "97c3c1c8ddf7cf1dc7268e49f5753b4b50f30f9fa0d80edc45ccdc1d99f4d859"
     },
     {
       "path": "flight/esm/image_codec/Contract.hx",
@@ -27812,15 +27816,15 @@
     },
     {
       "path": "flight/esm/importdiagnostics/Contract.hx",
-      "sha256": "2690690177ac4544a9745f3dbd5a664e23dc317151278ff5bffad39b5f4a8bb1"
+      "sha256": "163c035cc5fb1df152415121a16165d441052fd1b71a94876f420ab16e51b5eb"
     },
     {
       "path": "flight/esm/input/Contract.hx",
-      "sha256": "c44574e0014df4c6050dfcb1e3cf0983415c575fc5b32257ae8d8441e7bf9ae2"
+      "sha256": "c6de15b79a815db611ea6cca201b5b6be5b3684098b37622e7c167603f087431"
     },
     {
       "path": "flight/esm/interaction/Contract.hx",
-      "sha256": "af734a819186eb9baa04c59b022f5b9095df9271ce648c1debc70f7c83b0bce6"
+      "sha256": "de575da311e9b4942a89e73ef9b59b83f3e42ca26314bfc4a835d93382714198"
     },
     {
       "path": "flight/esm/intl/Contract.hx",
@@ -27836,7 +27840,7 @@
     },
     {
       "path": "flight/esm/layout/Contract.hx",
-      "sha256": "c456424031a5bb95f721eb82a5a5fb51b6ff9e9368f6bfa994ba2fe79a293f77"
+      "sha256": "c698b4244cf1871bc9a3d462a5d77a6cc47d4a3611b0a28e498385bd1b453828"
     },
     {
       "path": "flight/esm/lifecycle/Contract.hx",
@@ -27852,11 +27856,11 @@
     },
     {
       "path": "flight/esm/log/Contract.hx",
-      "sha256": "d4de15012837ca5b0595265312e8e2378b1ec4b9eb53f14b8f43ec7b7f38dd17"
+      "sha256": "dc3fde00e97c8cb7067644e86ee324ec6b16a2e4c0353804346d52f0716b1fa7"
     },
     {
       "path": "flight/esm/materials/Contract.hx",
-      "sha256": "0fda44bbe29412928d4b23b921401c23698c2b8f38013f3c8bd9416d472fc2d8"
+      "sha256": "082558496737a9de1d93420ba07edbc55d712cf767a2553f69979b292a55d2ad"
     },
     {
       "path": "flight/esm/math/Contract.hx",
@@ -27872,7 +27876,7 @@
     },
     {
       "path": "flight/esm/menu/Contract.hx",
-      "sha256": "9fc27d2f1960559256e32bf8d4e430abbfcee7d74c55297d2f112f8217e30c46"
+      "sha256": "162c3d6928bfe9e61139d8d7db647a185c769c68b861c299fe93c8678029356d"
     },
     {
       "path": "flight/esm/meshgeometry/Contract.hx",
@@ -27932,11 +27936,11 @@
     },
     {
       "path": "flight/esm/physics2d/Contract.hx",
-      "sha256": "7e3663c023dcd414092cf0ac0c62efa5edff2170dfc6876a90c676c607c42171"
+      "sha256": "3fc8c2559368985016af618640cce65704f84259a51cabde7f1143e575d56c59"
     },
     {
       "path": "flight/esm/physics2d_abi/Contract.hx",
-      "sha256": "650efdf6a6043ec4a5415d8bc8abdd9d91d6b3d973fab1b5bcf46da668806b71"
+      "sha256": "52035bf7099eaca96f836af5edf7c2db7b10e4010aed02a5f4ce1cb6bf736b7a"
     },
     {
       "path": "flight/esm/physics3d/Contract.hx",
@@ -27944,7 +27948,7 @@
     },
     {
       "path": "flight/esm/physics3d_abi/Contract.hx",
-      "sha256": "c2852b0d7b1487603db4239e20e6e675015af7a1463ac5a861ba2f1610abaedf"
+      "sha256": "498103fecf65f052d9850020b3a80399b05aa13839d7f85595502be427e2e4ce"
     },
     {
       "path": "flight/esm/picking/Contract.hx",
@@ -27976,7 +27980,7 @@
     },
     {
       "path": "flight/esm/render/Contract.hx",
-      "sha256": "c9e317d3e41437eacfa6192467cb26758594f037426573962696be1495a40f9a"
+      "sha256": "49466d184514513d5d826e6f39e3895d2b13b4c0b0b01d18f604eaf3f6c822ab"
     },
     {
       "path": "flight/esm/render_gl/CompressedTextureDecoderContract.hx",
@@ -27992,11 +27996,11 @@
     },
     {
       "path": "flight/esm/render_wgpu/Contract.hx",
-      "sha256": "5af142541386962fa35afdb135c910c464bd7e18f1d2f759b233be294690cdbf"
+      "sha256": "2c14436b4a7019cf66f4785a6ceefb15d0a9e5dc7a06a00a0bf867bcb15c30fc"
     },
     {
       "path": "flight/esm/requirement/Contract.hx",
-      "sha256": "21dbde717f07a6876774a1044f8eecc997c0bd9fcd483fb8c7918cd5fa5d25e3"
+      "sha256": "53797b4c26aad189993ce04d7a1b07511fe271af1ec354d608a7ebf21952232e"
     },
     {
       "path": "flight/esm/requirement_catalog/Contract.hx",
@@ -28008,7 +28012,7 @@
     },
     {
       "path": "flight/esm/resource/Contract.hx",
-      "sha256": "464dec11c734b0dbdde552b6fdcd87c6fc1168a5d572768da5fd64203ea07e34"
+      "sha256": "ac1bf3a40bb2d4cea7457aaa33d70cc30ec37f822914f6d88a55dbb43e5e1eaf"
     },
     {
       "path": "flight/esm/scene2d/Contract.hx",
@@ -28016,19 +28020,19 @@
     },
     {
       "path": "flight/esm/scene2d_canvas/Contract.hx",
-      "sha256": "101da95ad6e0398e88145676cbe0ef324894bf15e87569c567003e06bf85075e"
+      "sha256": "829863f6b8d191ea94a14c37ce8be9df7f5f9d562e492f429b5a67eb480076a3"
     },
     {
       "path": "flight/esm/scene2d_dom/Contract.hx",
-      "sha256": "95ec3309661440b788caf72ce88118cf164adba1701705da87940dc42ca6f6ab"
+      "sha256": "81d649271bfd2050bf36de1b06852fd15ce6346eee896cf02364981467207874"
     },
     {
       "path": "flight/esm/scene2d_formats/Contract.hx",
-      "sha256": "9a9d3d007e05033ede5a5ad9f509cdb5c46c576cddc4b590210b5a99f23f6f13"
+      "sha256": "4ed83bbe10f7ffeec55a7efc5b64009e8602e828000160fbd5fbe01e03134ed9"
     },
     {
       "path": "flight/esm/scene2d_gl/Contract.hx",
-      "sha256": "65bcf6852527bd453235bf6f8b8cba39716f184653a2355eba946b78f1ce3c85"
+      "sha256": "336905a1e24bca55de7ad4f205f7af35a97976169b5e66cfcff6b8719425531a"
     },
     {
       "path": "flight/esm/scene2d_resources/Contract.hx",
@@ -28036,7 +28040,7 @@
     },
     {
       "path": "flight/esm/scene2d_wgpu/Contract.hx",
-      "sha256": "bd423abb48826bfdaedf1d9c5f321ae95a329570c831235cd464a1a47a21b4c6"
+      "sha256": "aa5c1247b582d919dc9b4af357a0f46b44e524291bf446b7e5376f5729fef338"
     },
     {
       "path": "flight/esm/scene3d/Contract.hx",
@@ -28044,11 +28048,11 @@
     },
     {
       "path": "flight/esm/scene3d_formats/Contract.hx",
-      "sha256": "23705c2a0fee83ae220af675f45054971106ecbbda950b6230663b84d6670996"
+      "sha256": "a4e70a79b37911071a7b974fc38f1ff8649b83809dfbb0f227dbccfed6c5397f"
     },
     {
       "path": "flight/esm/scene3d_gl/Contract.hx",
-      "sha256": "9d08da25bd3538cb6be7c2148606cbdeb9f70e0b6256c95f12e0922c4887b829"
+      "sha256": "d5712c21a6ce9f770badbea7517d7fc6cd86204a4edc69d8b8001500dce6e698"
     },
     {
       "path": "flight/esm/scene3d_resources/Contract.hx",
@@ -28060,7 +28064,7 @@
     },
     {
       "path": "flight/esm/scene_document/Contract.hx",
-      "sha256": "4cc2d972e03dc5319894c5d75552492af5a69305a7f4f8e79cbfe631c13be30c"
+      "sha256": "3848b8e1a84a9f22e591fe13a2795e1ee0c001c61e31bda5b2c43e374c677c02"
     },
     {
       "path": "flight/esm/screen/Contract.hx",
@@ -28068,7 +28072,7 @@
     },
     {
       "path": "flight/esm/sdk/Abc.hx",
-      "sha256": "7e0ca2540e1d38263e88df543a7fab91b97cefcc34b1eec3ff8b570107535b55"
+      "sha256": "d7781a1dab6a2f2164835567ce71f8489fcf44f76c7b96f8287096d1946868ad"
     },
     {
       "path": "flight/esm/sdk/Accessibility.hx",
@@ -28092,7 +28096,7 @@
     },
     {
       "path": "flight/esm/sdk/Audio.hx",
-      "sha256": "43172838ab1c7632feb2827a907efdcd607045c7f56a1b6b287820dfdacfe547"
+      "sha256": "7bbecff43aef5bbe1dd2f8786cceb579392f4e2aa7bdbcd75d28f3b6221c8d21"
     },
     {
       "path": "flight/esm/sdk/Binpack.hx",
@@ -28100,7 +28104,7 @@
     },
     {
       "path": "flight/esm/sdk/Bitmap.hx",
-      "sha256": "83ae210600764a95618b5c25a9015f81df2b34ccfdaa1cae9b77889de982cc45"
+      "sha256": "d7ea8175569be2eb540053610489eaabd1fa58d12267c55ce90778f44cc76913"
     },
     {
       "path": "flight/esm/sdk/Bitmapfont.hx",
@@ -28132,7 +28136,7 @@
     },
     {
       "path": "flight/esm/sdk/Clip.hx",
-      "sha256": "c7bf8d6043e8135855582b27770f73ff8b20ac58bbcb9ef9173b59de2cc465ec"
+      "sha256": "54d9d16f83d96a1908afe63eaf7b5fc6d4fcb8a6d167cc0a2ef8c15a6e0c691a"
     },
     {
       "path": "flight/esm/sdk/Clipboard.hx",
@@ -28156,7 +28160,7 @@
     },
     {
       "path": "flight/esm/sdk/Compression.hx",
-      "sha256": "0b02f63f71ad1d834fa614e2cc9c185a38d8e585a2fa06f5731f6e7a63a7cd3e"
+      "sha256": "bd583c8bdbd2ce400737021bfe1e7ae23116ee693c2277f793b170a2cdfcc627"
     },
     {
       "path": "flight/esm/sdk/Connectivity.hx",
@@ -28164,7 +28168,7 @@
     },
     {
       "path": "flight/esm/sdk/Contract.hx",
-      "sha256": "9b3a0d186b866b9cff441a93c124109b32063467eaf38e9d49ccd82cb4f88f35"
+      "sha256": "51afdd7ba526093584823c55527f926d29d6cc2c9dee61cc29791a4635108b99"
     },
     {
       "path": "flight/esm/sdk/Debug.hx",
@@ -28184,7 +28188,7 @@
     },
     {
       "path": "flight/esm/sdk/Effects.hx",
-      "sha256": "dbda6b72f7259e27c1208352819f5fe234050272275abbd6b870fe854981aeb7"
+      "sha256": "42297fa487620a1d94bc954b89a5492eef0f2479d6ef88cc3656be9e700e48a6"
     },
     {
       "path": "flight/esm/sdk/EffectsCanvas.hx",
@@ -28252,7 +28256,7 @@
     },
     {
       "path": "flight/esm/sdk/Image.hx",
-      "sha256": "f8374804494ae3470604a85f674a0f4cf87c9b38f35c5b278d0b9ff713e31f87"
+      "sha256": "279151d1622d3388b6852d37df2afcd1bf5cb47ec86a4c73985e458cab5b03a7"
     },
     {
       "path": "flight/esm/sdk/ImageCodec.hx",
@@ -28264,7 +28268,7 @@
     },
     {
       "path": "flight/esm/sdk/Input.hx",
-      "sha256": "a99d1ec391703810b97c4a4b56de48025a4d99f92a3f31826d9ac017f4ac3895"
+      "sha256": "880438295e5680b9b5e0a3a3e8b70f51ebdfd985f4666b5723ba9bddbfc7cf5a"
     },
     {
       "path": "flight/esm/sdk/Interaction.hx",
@@ -28284,7 +28288,7 @@
     },
     {
       "path": "flight/esm/sdk/Layout.hx",
-      "sha256": "09b7c7fa2c976c56ef7b1d6e3d93c1db89540052dc7649eb00c2d7c7aec427fc"
+      "sha256": "54f06b2ff182daee340d6286b223840dec3216a4597e1fa402de55e1ccd07633"
     },
     {
       "path": "flight/esm/sdk/Lifecycle.hx",
@@ -28320,7 +28324,7 @@
     },
     {
       "path": "flight/esm/sdk/Menu.hx",
-      "sha256": "3872eaa281f0ecd392972a0e263bc6e85d9aea886b41df930653c18d73888d7a"
+      "sha256": "d0cdfe8178a71b650faeeb1a07970d66d051dad89e9e7033130f531ab9864039"
     },
     {
       "path": "flight/esm/sdk/Meshgeometry.hx",
@@ -28380,11 +28384,11 @@
     },
     {
       "path": "flight/esm/sdk/Physics2D.hx",
-      "sha256": "cf12ca2da8144d53e45c78482207e051ec72a0836f3bc174c81cd5a5a7817b31"
+      "sha256": "89e14d9c4a6ccb68bc15015b04a2b44a826dfb26b3807c851f68e4fd660c1d73"
     },
     {
       "path": "flight/esm/sdk/Physics2DAbi.hx",
-      "sha256": "6ff76cb2eddc7f0ca62b7733015666705b71792aa328f483d093fc6eca5a8047"
+      "sha256": "5dd520b891829280b4c60cac76ec4262d0421a25014a117ff94fff2d55fd7cd5"
     },
     {
       "path": "flight/esm/sdk/Physics3D.hx",
@@ -28392,7 +28396,7 @@
     },
     {
       "path": "flight/esm/sdk/Physics3DAbi.hx",
-      "sha256": "772767acede79b56ce3305607b7fa82952dca85fbaaf31da32eb760c16301214"
+      "sha256": "79b9e0588950b605496b8add35bd65dcbadf541c706c6adece4824b71096351c"
     },
     {
       "path": "flight/esm/sdk/Picking.hx",
@@ -28432,11 +28436,11 @@
     },
     {
       "path": "flight/esm/sdk/RenderWgpu.hx",
-      "sha256": "94526b2915494b896a43c613c9589b6c7d8a117a0e93b58deedba85ebc26f487"
+      "sha256": "249b2051fe2a6a8bf51b7bdd9dbb682e2225acb8d59352eb24a054876a7e4731"
     },
     {
       "path": "flight/esm/sdk/Requirement.hx",
-      "sha256": "8600c7734a312834c9d8ad6228dc98fd6680de597df8722732b4446cb5f53d7a"
+      "sha256": "fa5bffd9ccb4a2785da870ad983c603366d9dc87f88f8fcee272efb999c8c0cd"
     },
     {
       "path": "flight/esm/sdk/RequirementCatalog.hx",
@@ -28448,7 +28452,7 @@
     },
     {
       "path": "flight/esm/sdk/Resource.hx",
-      "sha256": "31c4a17fe118a2c0922a8fa61fb26faaa03ab7ba516804866c60fdb11a7d5fe1"
+      "sha256": "67ff3b016ff84018d704212a80b16fef28ab2cc5bf7e8d8c4b1c40b4f3839940"
     },
     {
       "path": "flight/esm/sdk/Scene2D.hx",
@@ -28456,11 +28460,11 @@
     },
     {
       "path": "flight/esm/sdk/Scene2DCanvas.hx",
-      "sha256": "5e4e8c4c006e2bd1860a82926e0bf198db5ff49155f2d4bb7c3ffbe166e2950e"
+      "sha256": "2696b51f4228420e104fb05b0ef3d9effdb23fe25ca9ff0da7c8b6aba0e4f610"
     },
     {
       "path": "flight/esm/sdk/Scene2DDom.hx",
-      "sha256": "b117d3f2b16cb2f527c22ab18dcd574c5c6feaf8c049d6583bf7d5d8c6299f90"
+      "sha256": "fd8271a491bcc3699822f9b89836227e63f13d086e6b11ad86f1b98810e89e89"
     },
     {
       "path": "flight/esm/sdk/Scene2DFormats.hx",
@@ -28468,7 +28472,7 @@
     },
     {
       "path": "flight/esm/sdk/Scene2DGl.hx",
-      "sha256": "77ebabd05e80851f0c87e0d800db0b19dc1880af2569cc387f9efa66fa267b12"
+      "sha256": "510b7c2e0aeba854c1851f9ad4307a5b504a43ba6cb9276237bac61f6d06264e"
     },
     {
       "path": "flight/esm/sdk/Scene2DResources.hx",
@@ -28476,7 +28480,7 @@
     },
     {
       "path": "flight/esm/sdk/Scene2DWgpu.hx",
-      "sha256": "6dbaf61b6de286d75f9267db1c18d8c147e967660761048cedf488d92714d451"
+      "sha256": "2d9f20c570401ec59f1a8663252c6e25f9253505bd2beafa9f33f1b46c4feeb7"
     },
     {
       "path": "flight/esm/sdk/Scene3D.hx",
@@ -28484,7 +28488,7 @@
     },
     {
       "path": "flight/esm/sdk/Scene3DFormats.hx",
-      "sha256": "724d67456a02847ab34d3334a1f159c6e24af986597c625ddde48f93b834df16"
+      "sha256": "df65ee98a14edfde6ba615e897564a779c37379264058070c782d902ccab5563"
     },
     {
       "path": "flight/esm/sdk/Scene3DGl.hx",
@@ -28500,7 +28504,7 @@
     },
     {
       "path": "flight/esm/sdk/SceneDocument.hx",
-      "sha256": "bd7e6862bb4445ca4ea508a3c9d8dfe4a7a327ba8329d6165eea2b6839141b12"
+      "sha256": "4c330de61e73f34345304a9131628cb30c61233d5a3996aea0f2bface1c0245c"
     },
     {
       "path": "flight/esm/sdk/Screen.hx",
@@ -28516,7 +28520,7 @@
     },
     {
       "path": "flight/esm/sdk/Shading.hx",
-      "sha256": "5833f46616dafefa06a4ef5a49b618f1124418caf09fd251b12ae965d30de3df"
+      "sha256": "a4eb398190020b5ec41b0772518987cf6eb796ec1d71b737907cc447a28d8c82"
     },
     {
       "path": "flight/esm/sdk/Shape.hx",
@@ -28544,11 +28548,11 @@
     },
     {
       "path": "flight/esm/sdk/Skeleton2D.hx",
-      "sha256": "84e94ae82b57dffe9de791f87c88cdc66934e515c5408d6b3aef69a5e8e68ae9"
+      "sha256": "70446ee6603745ad70d7c5bd380af1655c0e25614e7c805ad0c8894c3197757a"
     },
     {
       "path": "flight/esm/sdk/Skeleton2DFormats.hx",
-      "sha256": "431f94bafb8a5b50032b1be4327b165627d18f8700538f89bd40eb06de301f8d"
+      "sha256": "86e7e5a1f2e1624e2b1770d2938d5b433b27032e68359413e2780b286404c009"
     },
     {
       "path": "flight/esm/sdk/Skeleton3D.hx",
@@ -28580,7 +28584,7 @@
     },
     {
       "path": "flight/esm/sdk/Statechart.hx",
-      "sha256": "bc2bf7610524c7b5f81397610509f53ea715b65b457daf9367f264dc70181f86"
+      "sha256": "4da4aefdac74a4e371aa921f04eedc81b359fdf04eba9476c9315d550a18b092"
     },
     {
       "path": "flight/esm/sdk/Statusbar.hx",
@@ -28620,7 +28624,7 @@
     },
     {
       "path": "flight/esm/sdk/Textsegment.hx",
-      "sha256": "384423d1474a5f4e9f89909211349c73004477a91ff2cd6ee238a39c0f5e55e9"
+      "sha256": "f3f9ecf6722d793e890ffcf82936c454521797dd1b3a462b2ce53da22c93f99b"
     },
     {
       "path": "flight/esm/sdk/Textshaper.hx",
@@ -28652,7 +28656,7 @@
     },
     {
       "path": "flight/esm/sdk/Timeline.hx",
-      "sha256": "0637cf7bbf1edfcf6778b172fdfae7743e795d7485775c72d869982940b3b0a6"
+      "sha256": "c37bf63e4cab2712361c0a441309ca0860071837dd7496692e19a1b89a411b48"
     },
     {
       "path": "flight/esm/sdk/Tokens.hx",
@@ -28700,7 +28704,7 @@
     },
     {
       "path": "flight/esm/shading/Contract.hx",
-      "sha256": "f9063806436876226615af60e0f0287e856ec806b295461cbd406c3196d0f99a"
+      "sha256": "84f5d8361353317f242188ce9c2b58c5a284a5f8532c61ea9c863384cf7e5e55"
     },
     {
       "path": "flight/esm/shape/Contract.hx",
@@ -28728,11 +28732,11 @@
     },
     {
       "path": "flight/esm/skeleton2d/Contract.hx",
-      "sha256": "588ef363e96baddb52f9ac04660ee5aa2ceee6642bf9e8a1a9543d7527d0920d"
+      "sha256": "6e2bc89768811ee17e20bc3429969205af7853ebb235a6e45706aaf799b968a8"
     },
     {
       "path": "flight/esm/skeleton2d_formats/Contract.hx",
-      "sha256": "080a19bdd07d658c6a5b12e8ef652150a5225adcc19415f737bce9aaa3ec784b"
+      "sha256": "ba05b6b4d38fef6645a45c35edc2318f53729a406962c61cff7164c999244c6a"
     },
     {
       "path": "flight/esm/skeleton3d/Contract.hx",
@@ -28764,7 +28768,7 @@
     },
     {
       "path": "flight/esm/statechart/Contract.hx",
-      "sha256": "d9b5728205444c98b58e7299afe7afd9c012c7e1445f253e897b60c902c0ce47"
+      "sha256": "fec0487c2674e8e6bc741d16d9ac8eb295f20e4b940dc88fa2716a05811f38a7"
     },
     {
       "path": "flight/esm/statusbar/Contract.hx",
@@ -28784,7 +28788,7 @@
     },
     {
       "path": "flight/esm/text_markup/Contract.hx",
-      "sha256": "21ef3db3e41bb070871268e0174ce24115a16b294bd7b2f9216bfc743dd7a0ad"
+      "sha256": "1e7001de20930564ea8383d61f28547d5311909061350382245a8003abc0ce37"
     },
     {
       "path": "flight/esm/textbidi/Contract.hx",
@@ -28800,11 +28804,11 @@
     },
     {
       "path": "flight/esm/textlayout/Contract.hx",
-      "sha256": "e449fbb647d2f801b44103399decb69bc8d31091602c12d0bfa9d596037a4eb3"
+      "sha256": "b58d929e6909e5b6d35bf5fe31eafda43b3f518bc183d14ec11a096b0e36fc38"
     },
     {
       "path": "flight/esm/textsegment/Contract.hx",
-      "sha256": "0b55e7c696db9856a0306321c4319fe70d31aca64077be66b087f03311ada9da"
+      "sha256": "97bde7853e9956fef613ff059c11a272c165e96e401f4c7a87b1f72c84bdf76f"
     },
     {
       "path": "flight/esm/textshaper/Contract.hx",
@@ -28836,7 +28840,7 @@
     },
     {
       "path": "flight/esm/timeline/Contract.hx",
-      "sha256": "c76f38846401671317634e56c14e9784f0ee9dc92ccf013e0660f59315136e6a"
+      "sha256": "63d7599a9a91b61c719b718ac252bc584dc4f3337821c014b6a9bd90a1cf5105"
     },
     {
       "path": "flight/esm/tokens/Contract.hx",
@@ -28888,7 +28892,7 @@
     },
     {
       "path": "flight/esm/types/audio/Types.hx",
-      "sha256": "5177ef6606093679ba7fb18e279295772ad9f4647dfab7ee294143dbb3c3f560"
+      "sha256": "3e77497a6f6bb8e5f55a1199e9e4d74adc005cffb6fc1d5ee6c2e2439316af93"
     },
     {
       "path": "flight/esm/types/audio_contract/Types.hx",
@@ -28944,7 +28948,7 @@
     },
     {
       "path": "flight/esm/types/camera/Types.hx",
-      "sha256": "550fa866a073adc519365b24c2d2153dc4a83dbd7e6fdc552059aa2fb8d13206"
+      "sha256": "89e959a285481623b746862c2b499592e9531a61cf3c5a2b580bbd837275f2ac"
     },
     {
       "path": "flight/esm/types/camera_contract/Types.hx",
@@ -28992,7 +28996,7 @@
     },
     {
       "path": "flight/esm/types/collision/Types.hx",
-      "sha256": "6edb2eb8bfcdb93a569a037b72a8022b8151af10ce6bdb0dfa944b34dd970d81"
+      "sha256": "a972a650055c9d69b199404805e8b37d8468488e3ab57e7b690cacf95d86d92c"
     },
     {
       "path": "flight/esm/types/collision_contract/Types.hx",
@@ -29172,7 +29176,7 @@
     },
     {
       "path": "flight/esm/types/host_capacitor/Types.hx",
-      "sha256": "be65036724ba7369f2932229594a29375fbf152853aa960a7a1b0b62c123a375"
+      "sha256": "92bc8d22c029234979af3ec1c8fd3ca30e88dd40db34928e80a71e56e23f9fcf"
     },
     {
       "path": "flight/esm/types/host_capacitor_contract/Types.hx",
@@ -29184,7 +29188,7 @@
     },
     {
       "path": "flight/esm/types/host_electron/Types.hx",
-      "sha256": "dffc7e58b9acd4fee6bc5ede6b3d513292b9125b354b60ac78dbf36a2292d736"
+      "sha256": "36ee480e4b3c1490ad2db7998dfb287fd68faa8c83704c8aeeded857cace5528"
     },
     {
       "path": "flight/esm/types/host_electron_contract/Types.hx",
@@ -29192,7 +29196,7 @@
     },
     {
       "path": "flight/esm/types/host_web/Types.hx",
-      "sha256": "715eb04d7c3708910f733a6bf11cc06d3815a8c0d72d0b45f8389383bf4cddcf"
+      "sha256": "e0159b93ee5514f977a365801c99122abd0b205ed96162c45cfa44dffe974dde"
     },
     {
       "path": "flight/esm/types/host_web_contract/Types.hx",
@@ -29200,7 +29204,7 @@
     },
     {
       "path": "flight/esm/types/image/Types.hx",
-      "sha256": "5132b7fb2b8cb64f44b2c722e8810362764b71cc20123bf0d12219e31e90b80f"
+      "sha256": "8332ed396ef34a1b2423d0b07be0fabd0172b4012038f1159826f575177ae69c"
     },
     {
       "path": "flight/esm/types/image_codec_contract/Types.hx",
@@ -29252,7 +29256,7 @@
     },
     {
       "path": "flight/esm/types/layout/Types.hx",
-      "sha256": "f7760fdb527a2984fd76e6952e010aa9b622db1240ec1e0ee9e89bc51f11d4f0"
+      "sha256": "eeaf580c105717f43f775bb9f095f91cdbd988a613560c5d958fa6f3834c2ed8"
     },
     {
       "path": "flight/esm/types/layout_contract/Types.hx",
@@ -29280,7 +29284,7 @@
     },
     {
       "path": "flight/esm/types/log/Types.hx",
-      "sha256": "ff0ce3c8a18fdb9ab270ab35e861a8550a17ef47eaa77611d795285c863d6ccb"
+      "sha256": "323c9121cf666691fd8c2221ccd344676b9015adeeeb59b42ef1e5a8f0a1b1c8"
     },
     {
       "path": "flight/esm/types/log_contract/Types.hx",
@@ -29336,7 +29340,7 @@
     },
     {
       "path": "flight/esm/types/midi_contract/Types.hx",
-      "sha256": "7ec9e2809193ee962227d32f7498b26a09ac8e9d7b2abfbeacc08a2260caf2a9"
+      "sha256": "04a63839cd4b34d59d2006d8c6326a9b57c12598ac129c10c39cf4c77a9804d4"
     },
     {
       "path": "flight/esm/types/motionpath/Types.hx",
@@ -29372,7 +29376,7 @@
     },
     {
       "path": "flight/esm/types/notification_contract/Types.hx",
-      "sha256": "9e7854bf359285d93b6120c75518ccad6714705b1ad241fe007f6ee033c6d84a"
+      "sha256": "fa371463179422f05d127092b4bd0c214c93ecde4e8ad30251496707fecf9703"
     },
     {
       "path": "flight/esm/types/particleemitter/Types.hx",
@@ -29384,7 +29388,7 @@
     },
     {
       "path": "flight/esm/types/particles/Types.hx",
-      "sha256": "7d1316cb15c23417190b17dc329afad8a5ee4131adc9e76decace14d604a7219"
+      "sha256": "0ac167ca6eccafea6a8d214af916fe55dbb0e5405ed463462704d3239f6901ed"
     },
     {
       "path": "flight/esm/types/particles_contract/Types.hx",
@@ -29400,7 +29404,7 @@
     },
     {
       "path": "flight/esm/types/path/Types.hx",
-      "sha256": "e27c282e220d16cb6ea56ee0585a680e79fe6d5da4c2d9186f2c725ba72d28ab"
+      "sha256": "0deb1dc89a8f1a541c1e45783e0c4984f39e58aae852a6fc3e97bc872e9e83f9"
     },
     {
       "path": "flight/esm/types/path_boolean/Types.hx",
@@ -29448,7 +29452,7 @@
     },
     {
       "path": "flight/esm/types/physics3d/Types.hx",
-      "sha256": "2435b9ea9d06e5a2de69f3401f03d6b9d6e2f53a2a73f03af5ed0aaa698c6a2a"
+      "sha256": "ceaa6046df5b2d671d25135a15b949fcebc251502d5e9c36b04f247706c52273"
     },
     {
       "path": "flight/esm/types/physics3d_abi/Types.hx",
@@ -29484,7 +29488,7 @@
     },
     {
       "path": "flight/esm/types/power/Types.hx",
-      "sha256": "82e11005c542c3ca9aa639d3f6ef34d30854dba8e5435b860af0e69df66a180b"
+      "sha256": "6b6c2ea578238372b3c611b1c08aaa42d91a5f8a555be12d6740099bfc902861"
     },
     {
       "path": "flight/esm/types/power_contract/Types.hx",
@@ -29516,11 +29520,11 @@
     },
     {
       "path": "flight/esm/types/render_contract/Types.hx",
-      "sha256": "289218fb1b7a0c136f4674fcd6769e18390a46ca7a40d51042b3466433fe2122"
+      "sha256": "d2af071b243f013c7f56cb7d83975e240bc84b90c63c89e0de3c008fd8cac544"
     },
     {
       "path": "flight/esm/types/render_gl/Types.hx",
-      "sha256": "b6995f9db3512f43934c1a22d425e56a48f7faaaeee16d8d8ae91a35f887bbbb"
+      "sha256": "35346d3a562471da06e27687351d98ea6074c7fa11bdc9d5f4ab3ac5c270b41c"
     },
     {
       "path": "flight/esm/types/render_gl_compressed_texture_decoder_contract/Types.hx",
@@ -29536,7 +29540,7 @@
     },
     {
       "path": "flight/esm/types/render_wgpu_contract/Types.hx",
-      "sha256": "5f96cc6475432f7bd787f737baabaabac59cf5336a1ced9bbfeb73dc57c283f9"
+      "sha256": "c6dbd1e0419d729839303e5ae38a2581b9a7c3d6bf0f2ec90cec51b463adb6f3"
     },
     {
       "path": "flight/esm/types/requirement/Types.hx",
@@ -29592,7 +29596,7 @@
     },
     {
       "path": "flight/esm/types/scene2d_formats_contract/Types.hx",
-      "sha256": "cc63c77989deeb43d735643bdb1b955de83e590009e8575283e7f6ff81ba0810"
+      "sha256": "b90530ffbd16ed1f034c9d3b3c859b45c19bc1970bd5a6494ff8543fbfcec53c"
     },
     {
       "path": "flight/esm/types/scene2d_gl/Types.hx",
@@ -29620,15 +29624,15 @@
     },
     {
       "path": "flight/esm/types/scene3d_formats_contract/Types.hx",
-      "sha256": "78a1f8b964e87e0166179e7bf96b25e9d34a690261e1ab4716a37a0982fda69f"
+      "sha256": "a5c723eebba26f9eca6c09b78350f49af730b984f80a4360e1ab491dc6c73aad"
     },
     {
       "path": "flight/esm/types/scene3d_gl/Types.hx",
-      "sha256": "0321ed0ea32eea449de5127d8087c5a01b11753184836c69ea1c2ef4f150eb6a"
+      "sha256": "bc357627dc268831b83e693d675b1f951e30f84c53f728f4503277025d8321c6"
     },
     {
       "path": "flight/esm/types/scene3d_gl_contract/Types.hx",
-      "sha256": "2a2c986890e39c87423193848452cb09b451f56c57a966c06a5a6eeee2ce2ec5"
+      "sha256": "6a25a0458817129d740f866a1943be96139dbab5c349ccb459731702177ef56a"
     },
     {
       "path": "flight/esm/types/scene3d_resources_contract/Types.hx",
@@ -29636,11 +29640,11 @@
     },
     {
       "path": "flight/esm/types/scene3d_wgpu_contract/Types.hx",
-      "sha256": "012d6bd5854ba5e0217496174944b63066a40f5e713ed408a1522da4ccde1103"
+      "sha256": "db26a742bc40b8bcefc87e77bb96918a79bd47fbe28f46b8bbef88ab8bca5425"
     },
     {
       "path": "flight/esm/types/scene_document/Types.hx",
-      "sha256": "d80910280078aaeff80e87db16cb545dd08a9ffbbd6f76f3ab299680678240c9"
+      "sha256": "cf106e46ab70f76463b842c66da864d08204e5f2a3b5e7cc425a9571a71cda2d"
     },
     {
       "path": "flight/esm/types/scene_document_contract/Types.hx",
@@ -30164,7 +30168,7 @@
     },
     {
       "path": "flight/esm/types/shape/Types.hx",
-      "sha256": "43b8ed287dfe0557b97f34eb780dd6cc6d18139d781b917d979adad269a1971f"
+      "sha256": "6d5d96bc6aa9d0c0b6fc3c8fc97ae99f44022f6e1c3928aeea7b3abdb4085c49"
     },
     {
       "path": "flight/esm/types/shape_contract/Types.hx",
@@ -30180,7 +30184,7 @@
     },
     {
       "path": "flight/esm/types/shell/Types.hx",
-      "sha256": "3c4bedbc89b65d476da92f96531d8cea5ba5b2612fb8fb1f65898fd4fcac8c1f"
+      "sha256": "77795d109f72eafae6b1fc03beb6c1cda5affefe074ddc07b5175c67365b6a1e"
     },
     {
       "path": "flight/esm/types/shell_contract/Types.hx",
@@ -30188,7 +30192,7 @@
     },
     {
       "path": "flight/esm/types/shortcut/Types.hx",
-      "sha256": "c2fa342cc40673bcf246a9d5e2d9cfefaa2362de987f4374830251994c01e174"
+      "sha256": "cda102cc1f71dd8f515fcbd5843a8e235dea04edc58468853ecb3243e31fd05c"
     },
     {
       "path": "flight/esm/types/shortcut_contract/Types.hx",
@@ -30236,7 +30240,7 @@
     },
     {
       "path": "flight/esm/types/socket/Types.hx",
-      "sha256": "5366ceddf1533d495634bb03ad7124f0e167dccac6918cd75eecbf799cee5948"
+      "sha256": "2d8607e4c729500bd5e641ebe46ec0c417352b0496f1bd6cd82743f71acecb46"
     },
     {
       "path": "flight/esm/types/socket_contract/Types.hx",
@@ -30364,7 +30368,7 @@
     },
     {
       "path": "flight/esm/types/texture_contract/Types.hx",
-      "sha256": "6e59aee7dc9dc0c7b91120ee4c03767160131c36d238ff6aa0409dc8a8a98dea"
+      "sha256": "a528f5c15259b390aceeffff4b9a66034c5115235cbbd291dce07bf888df1d37"
     },
     {
       "path": "flight/esm/types/texture_formats/Types.hx",
@@ -30400,7 +30404,7 @@
     },
     {
       "path": "flight/esm/types/tilemap_formats/Types.hx",
-      "sha256": "1a873cbdbadafb7af1a69d157a9d209a2bba0df5aec4e690c1e6f28d746ce6bd"
+      "sha256": "3bb06153018082d546dade05516a07748b21a468b8dfb31abc1fedfa40e3fef0"
     },
     {
       "path": "flight/esm/types/tilemap_formats_contract/Types.hx",
@@ -30424,7 +30428,7 @@
     },
     {
       "path": "flight/esm/types/tray/Types.hx",
-      "sha256": "145216db3fcd5959ab45a1af2fef5f5117e82a11332312561ae2ac3cd37af3bb"
+      "sha256": "ef806f1dbfb8f0efe3ce5f7308ffbcd69a1afedefe65db28377180e54eb733f7"
     },
     {
       "path": "flight/esm/types/tray_contract/Types.hx",

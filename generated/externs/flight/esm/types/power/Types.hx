@@ -1,7 +1,7 @@
 package flight.esm.types.power;
 
 #if (js && flight_esm)
-typedef ElectronPowerCapabilities = { change:flight.esm.types.power.Types.HostPowerChangeCapability, status:flight.esm.types.power.Types.HostPowerStatusCapability, idle:flight.esm.types.power.Types.HostPowerIdleCapability, batteryHealth:flight.esm.types.power.Types.HostPowerBatteryHealthCapability, keepAwake:flight.esm.types.power.Types.HostPowerKeepAwakeCapability, sessionLock:flight.esm.types.power.Types.HostPowerSessionLockCapability, suspension:flight.esm.types.power.Types.HostPowerSuspensionCapability, ?thermal:Null<flight.esm.types.power.Types.HostPowerThermalCapability> };
+typedef ElectronPowerCapabilities = { change:flight.esm.types.power.Types.HostPowerChangeCapability, status:flight.esm.types.power.Types.HostPowerStatusCapability, batteryHealth:flight.esm.types.power.Types.HostPowerBatteryHealthCapability, idle:flight.esm.types.power.Types.HostPowerIdleCapability, keepAwake:flight.esm.types.power.Types.HostPowerKeepAwakeCapability, sessionLock:flight.esm.types.power.Types.HostPowerSessionLockCapability, suspension:flight.esm.types.power.Types.HostPowerSuspensionCapability, ?thermal:Null<flight.esm.types.power.Types.HostPowerThermalCapability> };
 
 typedef HostPowerBatteryHealthCapability = { getBatteryHealth:((out:flight.esm.types.power.Types.PowerBatteryHealth) -> flight.esm.types.power.Types.PowerBatteryHealth) };
 

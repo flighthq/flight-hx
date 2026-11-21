@@ -59,7 +59,7 @@ typedef FlightDocumentResourceSchema = { fields:Array<flight.esm.types.scene_doc
 
 typedef FlightDocumentScalar = Dynamic;
 
-typedef FlightDocumentScene = Dynamic;
+typedef FlightDocumentScene = { kind:String, layouts:Array<flight.esm.types.scene_document.Types.FlightDocumentLayoutDescriptor>, scene:flight.esm.types.scene_document.Types.FlightDocumentNode, tokens:Array<flight.esm.types.scene_document.Types.FlightDocumentToken> };
 
 typedef FlightDocumentScene2D = { backgroundColor:Null<Float>, kind:String, layouts:Array<flight.esm.types.scene_document.Types.FlightDocumentLayoutDescriptor>, scene:flight.esm.types.scene_document.Types.FlightDocumentNode, tokens:Array<flight.esm.types.scene_document.Types.FlightDocumentToken> };
 
